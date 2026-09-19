@@ -188,7 +188,7 @@ function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget
     navigation: {
       focus, centerTarget, systemTarget, overviewTarget, savedTarget,
       supports: (from: string, to: string) => from !== 'earth' && to !== 'earth',
-      prepare(options: MockRequest) { preparations.push(options); return prepare(options); },
+      prepare(options: MockRequest) { preparations.push(options); return Promise.resolve(prepare(options)).then(handoff => Object.assign({ transferTo() {} }, handoff)); },
     } as unknown as RouterOptions['navigation'],
     persistentWorldContext: persistentWorldContext as unknown as RouterOptions['persistentWorldContext'],
   });

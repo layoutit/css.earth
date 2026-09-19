@@ -86,8 +86,13 @@ jobs:
           # no inputs at all and shares the `production-deploy` concurrency group with cancel-in-progress:
           # a green main would cancel a hand-dispatched R2 deploy and publish the bundled build instead.
           # `bundle_textures` is the rollback: dispatch with it set to fall back to same-origin /scenes/.
-          ASSET_ORIGIN: ${{ inputs.bundle_textures && '' || 'https://earth-assets.lowpoly.cc' }}
-        run: pnpm build
+          BUNDLE_TEXTURES: ${{ inputs.bundle_textures }}
+        run: |
+          if [ "$BUNDLE_TEXTURES" = "true" ]; then
+            pnpm build
+          else
+            ASSET_ORIGIN=https://earth-assets.lowpoly.cc pnpm build
+          fi
       - name: Check the build output
         run: |
           set -euo pipefail

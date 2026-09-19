@@ -20,7 +20,7 @@ test('page metadata stays hash-bound to its scene without needing scene bytes du
  const descriptor={schema:'cssearth-object@1',id:'body',type:'layered-body',properties:{page:{metadata:page.reference}},prepared:{format:'cssearth-css-object@5',url:'prepared/object.json',sha256:createHash('sha256').update(payload).digest('hex')}};
  await writeFile(resolve(directory,'object.json'),JSON.stringify(descriptor));
  await writeFile(resolve(directory,'prepared/page.json'),page.text);
- assert.deepEqual(await loadObjectPageData('body',root),{assets:data.assets,controls:data.controls});
+ assert.deepEqual(await loadObjectPageData('body',root),{descriptor,assets:data.assets,controls:data.controls});
  assert.equal('tree' in JSON.parse(page.text),false);
  await writeFile(resolve(directory,'prepared/object.json'),payload);
  await readPreparedObjectBytes('body',root);
@@ -43,7 +43,7 @@ test('all registry objects own ordered CSS and scene-bound page metadata',async(
   for(const path of styles) await access(new URL(`../../${path}`,import.meta.url));
   const transport=await readPreparedObjectBytes(id);
   const data=JSON.parse(transport.bytes.toString('utf8')).data;
-  assert.deepEqual(page,{assets:data.assets,controls:data.controls},id);
+  assert.deepEqual(page,{descriptor:transport.descriptor,assets:data.assets,controls:data.controls},id);
  }
 });
 

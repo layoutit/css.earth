@@ -53,7 +53,7 @@ export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => P
       // Resolve a new authored projection while the outgoing scene is intact.
       // Attachment only consumes this application-owned snapshot.
       if (definition.camera.projection) cameraViewport?.read(definition.camera.projection.cssPerspective);
-      const resources = prepareObjectResources(definition.assets, { signal });
+      const resources = prepareObjectResources(definition.assets, { signal, assetOrigin: definition.assetOrigin });
       let tree: PreparedTreeLease | undefined;
       const construction = ownerDocument ? preparePresentationTree(definition.tree, ownerDocument, signal, undefined, definition.assetOrigin).then(value => { tree = value; }) : Promise.resolve();
       const destroy = () => { resources.destroy(); tree?.destroy(); };

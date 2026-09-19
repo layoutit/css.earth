@@ -17,14 +17,16 @@ import "../minimap/minimap.css";
 import type { PreparedSceneMarkup } from '../../tools/serialize-prepared-scene.mts';
 import type { loadPreparedSceneMarkup } from '../../tools/load-prepared-scene.mts';
 import { FOCUS_CATALOG_DATA } from '../focus-catalog-data.mts';
+import type { ObjectDescriptor } from '@cssearth/objects';
 
 interface Props {
   objectId: string;
   navigation?: boolean;
   scene?: PreparedSceneMarkup & Pick<Awaited<ReturnType<typeof loadPreparedSceneMarkup>>, 'descriptor'>;
+  descriptor?: ObjectDescriptor;
 }
 
-const { objectId, navigation = false, scene } = Astro.props;
+const { objectId, navigation = false, scene, descriptor } = Astro.props;
 const objectRecord = requireSceneObject(objectId);
 const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID });
 ---
@@ -68,7 +70,7 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     </div>
     <!--search-shell:end-->
     <!--prepared-descriptor:start-->
-    {scene && <script is:inline type="application/json" data-prepared-descriptor set:html={JSON.stringify(scene.descriptor).replace(/</g, '\\u003c')}></script>}
+    {descriptor && <script is:inline type="application/json" data-prepared-descriptor set:html={JSON.stringify(descriptor).replace(/</g, '\\u003c')}></script>}
     <!--prepared-descriptor:end-->
     <div class="planet-viewport">
       <div class="planet-world-stage">

@@ -1,9 +1,9 @@
 import type { SceneState } from './shell-contract-types.mts';
-import type { SceneLifetime } from '@cssearth/engine';
 import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/deferred-object-mount.js';
 import type { BrowserWindow, SceneFactory } from './browser-types.mts';
 import { errorMessage, record } from './browser-types.mts';
 import type { ObjectEntry } from './object-schema.mts';
+import type { ObjectDescriptor } from '@cssearth/objects';
 import type { NavigationOptions } from './navigation-history.mts';
 import type { NavigationContent } from './planet-shell-client.mts';
 import type { WorldHandoff } from './prepared-world-navigation.mts';
@@ -11,15 +11,12 @@ type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Shell = ReturnType<typeof mountPlanetShell>;
 export type WorldContextOwner = ReturnType<typeof applicationWorldContext.createApplicationWorldContext>;
 export type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
-interface Session { framePresenter?: ReturnType<NonNullable<WorldContextMount['createFramePresenter']>>; lifetime: SceneLifetime; mount: ObjectSceneLifecycle | null; shell: Shell | null; lastCommand: boolean | null; viewUrl: ReturnType<typeof bindViewUrl> | null; request?: NavigationRequest; url?: string; }
-export interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountPlanetShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
+export interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string, descriptor?: ObjectDescriptor): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountPlanetShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
 import { readObjectDiagnostics } from '../src/renderers/css/dist/index.js';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
-import { requireSceneLifecycle } from "./scene-contract.mts";
 import { objectAdapter } from "./object-adapter.mts";
 import { mountPlanetShell } from "./planet-shell-client.mts";
 import { automaticPlaybackPolicy } from "./runtime-policy.mts";
-import { createSceneLifetime } from "@cssearth/engine";
 import { bindViewUrl } from "./view-url-runtime.mts";
 import { SCENE_OBJECTS } from './objects.mts';
 import { createNavigationContent } from './navigation-content.mts';
@@ -36,6 +33,8 @@ import { isFocusDatasetUrl, readDatasetUrl, withDataset } from './dataset-url.mt
 import { retainInitialScene } from './initial-scene.mts';
 import { createNavigationLifecycle, type NavigationRequest } from './navigation-lifecycle.mts';
 import { createWorldPreferences } from './world-preferences.mts';
+import { createSceneSessions, type SceneSession as Session } from './scene-session.mts';
+import { readPreparedDescriptor } from './prepared-descriptor.mts';
 
 
 export function createSceneRouter({
@@ -51,13 +50,10 @@ export function createSceneRouter({
   loadContent = null,
   persistentWorldContext = null,
 }: RouterOptions) {
-  let active: Session | null = null;
+  const scenes = createSceneSessions();
   let mountTask: Promise<boolean | undefined> | null = null;
   let motionEnabled = false;
   const preferences = createWorldPreferences(documentTarget);
-  let scenePaused = true;
-  let sceneError: unknown = null;
-  let sceneState: SceneState = "loading";
   let hasPresented = false;
   const initialScene = retainInitialScene(stage);
   let destroyed = false;
@@ -73,7 +69,7 @@ export function createSceneRouter({
   const reducedMotion = windowTarget.matchMedia?.("(prefers-reduced-motion: reduce)");
   let reducedMotionActive = false;
   const requests = createNavigationLifecycle({ onError: report, onCancel(request) {
-    if (active?.request === request && sceneState !== 'ready') retire(active, null, { preserveShell: true, flush: false });
+    if (scenes.current?.request === request && scenes.state.kind !== 'ready') retire(scenes.current, null, { preserveShell: true, flush: false });
   } });
 
   // These survive scene teardown so a persisted document can restore itself.
@@ -107,27 +103,20 @@ export function createSceneRouter({
   });
 
   async function mountApplication({ factory, content, handoff, request }: { factory?: SceneFactory; content?: NavigationContent; handoff?: WorldHandoff; request?: NavigationRequest } = {}): Promise<boolean | undefined> {
-    if (destroyed || active) return;
-    const session: Session = {
-      lifetime: createSceneLifetime(),
-      mount: null, shell: null, lastCommand: null, viewUrl: null, request,
-      url: request?.url ?? windowTarget.location?.href,
-    };
-    active = session;
-    sceneError = null;
-    sceneState = "loading";
-    scenePaused = true;
+    if (destroyed || scenes.current) return;
+    const session = scenes.start({ objectId, request, url: request?.url ?? windowTarget.location?.href,
+      onFailure: fail, onCleanupError: report });
     try {
       documentTarget.addEventListener("visibilitychange", syncPlayback);
-      session.lifetime.onDispose(() =>
+      session.own(() =>
         documentTarget.removeEventListener("visibilitychange", syncPlayback));
       reducedMotionActive = reducedMotion?.matches === true;
       reducedMotion?.addEventListener("change", syncReducedMotion);
-      session.lifetime.onDispose(() =>
+      session.own(() =>
         reducedMotion?.removeEventListener("change", syncReducedMotion));
       publishSceneState();
       const requestMotion = (next: boolean) => {
-        if (active !== session || session.lifetime.disposed) return;
+        if (!scenes.isCurrent(session)) return;
         motionEnabled = next === true;
         syncPlayback();
         session.viewUrl?.schedule();
@@ -136,9 +125,9 @@ export function createSceneRouter({
         const owner: { shell: Shell | null } = { shell: null };
         shellOwner = owner;
         owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled,
-          ...preferences.bind(() => shellOwner === owner && active !== null, () => worldContextMount),
-          onMotionChange(next) { if (shellOwner === owner && active) {
-            motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
+          ...preferences.bind(() => shellOwner === owner && scenes.current !== null, () => worldContextMount),
+          onMotionChange(next) { if (shellOwner === owner && scenes.current) {
+            motionEnabled = next === true; syncPlayback(); scenes.current?.viewUrl?.schedule();
           } },
         });
       }
@@ -146,70 +135,51 @@ export function createSceneRouter({
       session.shell = shell;
       if (content) shell.setObject(content);
       shell.setOverview?.(request ? Boolean(overviewScopeFromUrl(request.url)) : overview);
-      if (active !== session) return;
+      if (!scenes.isCurrent(session)) return;
       if (content && request) {
         // The prepared sidebar swap and the detail mount each restyle and lay out
         // hundreds of nodes. Let the swap render in its own frame first, so an
         // arriving flight does not drop a frame for both at once.
-        const rendered = await session.lifetime.wait(new Promise<void>(resolve =>
+        const rendered = await session.wait(new Promise<void>(resolve =>
           windowTarget.requestAnimationFrame(() => windowTarget.setTimeout(resolve, 0))));
-        if (rendered.cancelled || active !== session) return;
+        if (rendered.cancelled || !scenes.isCurrent(session)) return;
       }
       publishSceneState();
       if (worldContextOwner) {
-        const contextual = await session.lifetime.wait(ensureWorldContext());
-        if (contextual.cancelled || active !== session) return;
+        const contextual = await session.wait(ensureWorldContext());
+        if (contextual.cancelled || !scenes.isCurrent(session)) return;
       }
-      const loaded = await session.lifetime.wait(factory ?? loadObject(objectId));
-      if (loaded.cancelled || active !== session) return;
-      // Keep the raw handle even if validation fails.
-      let mount: ObjectSceneLifecycle;
       const framePresenter = worldContextMount?.createFramePresenter?.();
       session.framePresenter = framePresenter;
-      if (framePresenter) session.lifetime.onDispose(() => framePresenter.destroy());
-      mount = loaded.value(stage, {
-        ...handoff?.mountOptions,
+      if (framePresenter) session.own(() => framePresenter.destroy());
+      if (!await session.activate(factory ?? loadObject(objectId, readPreparedDescriptor(documentTarget, objectId)), stage, {
         deferTextureRefinement: true,
         ...(worldContextMount ? { viewport: worldContextMount.viewport } : {}),
         ...(framePresenter ? { framePresenter } : {}),
         onMotionRequest: requestMotion,
-        onError(error) {
-          if (active === session && session.mount === mount) fail(session, error);
-        },
-      });
-      session.mount = mount;
-      for (const error of session.lifetime.onDispose(() => mount?.destroy?.())) report(error);
-      // Observe even a malformed handle's ready promise before validation or
-      // an initial pause can fail. Cleanup must not leave its rejection unowned.
-      const ready = Promise.resolve(mount?.ready);
-      ready.catch(() => {});
-      requireSceneLifecycle(mount, objectId);
-      if (active !== session) return;
-      syncPlayback();
-      const result = await session.lifetime.wait(ready);
-      if (result.cancelled || active !== session) return;
+      }, handoff)) return false;
+      const mount = session.mount;
+      if (!mount) return false;
       connectWorldContext(session, mount, objectId);
       const initialScope = !request && session.url && overviewScopeFromUrl(session.url);
       if (initialScope && session.url && !new URL(session.url).searchParams.has('v')) {
         const target = navigation?.overviewTarget?.({ scope: initialScope, objectId, fromId: objectId, mount });
         if (target) {
-          const controller = new AbortController();
-          session.lifetime.onDispose(() => controller.abort());
-          const framed = await session.lifetime.wait(navigation!.focus({ objectId, mount,
-            signal: controller.signal, reducedMotion: true,
+          const framed = await session.wait(navigation!.focus({ objectId, mount,
+            signal: session.signal, reducedMotion: true,
             targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM }));
-          if (framed.cancelled || active !== session) return;
+          if (framed.cancelled || !scenes.isCurrent(session)) return;
         }
       }
       let interrupted = false;
       if (handoff?.afterMount) {
         if (!request) throw new Error('A world handoff requires its navigation request.');
         try {
-          const completed = await session.lifetime.wait(handoff.afterMount(mount, { signal: request.signal }));
-          if (completed.cancelled || active !== session || request.signal.aborted) return;
+          const completed = await session.wait(handoff.afterMount(mount, { signal: session.signal }));
+          if (completed.cancelled || !scenes.isCurrent(session) || request.signal.aborted) return;
         } catch (error) {
-          if ((!record(error) && !(error instanceof Error)) || error.name !== 'AbortError' || !('preserveView' in error) || error.preserveView !== true || active !== session ||
-              session.lifetime.disposed || request.signal.aborted) throw error;
+          if ((!record(error) && !(error instanceof Error)) || error.name !== 'AbortError' || !('preserveView' in error) || error.preserveView !== true || !scenes.isCurrent(session) ||
+              request.signal.aborted) throw error;
           // The detailed destination already owns the camera. Real input ends
           // its flight without retiring that scene or restoring the endpoint.
           interrupted = true;
@@ -217,15 +187,13 @@ export function createSceneRouter({
           if (drawnUrl) request.url = session.url = new URL(drawnUrl, windowTarget.location.href).href;
         }
       }
-      const datasetController = new AbortController();
-      const datasetSignal = request ? AbortSignal.any([request.signal, datasetController.signal]) : datasetController.signal;
-      session.lifetime.onDispose(() => datasetController.abort());
+      const datasetSignal = request ? AbortSignal.any([request.signal, session.signal]) : session.signal;
       try {
         const selected = session.url ? await selectDataset(session, session.url, datasetSignal, { initial: true }) : true;
-        if (active !== session || datasetSignal.aborted) return false;
+        if (!scenes.isCurrent(session) || datasetSignal.aborted) return false;
         if (!selected) throw new Error('Dataset selection was superseded.');
       } catch (error) {
-        if (active !== session || datasetSignal.aborted) return false;
+        if (!scenes.isCurrent(session) || datasetSignal.aborted) return false;
         shell.setDatasetNotice?.(`${errorMessage(error)} Showing the default dataset.`);
         // A direct invalid link stays visible for diagnosis. A completed body
         // navigation publishes the destination's actual default selection.
@@ -238,16 +206,14 @@ export function createSceneRouter({
         if (!requests.advance(request, 'committing') || !commitNavigation(request, session)) return false;
       }
       if (mount.sharedView && windowTarget.location?.href) {
-        session.viewUrl = bindViewUrl({ windowTarget, view: mount.sharedView,
+        session.setViewUrl(bindViewUrl({ windowTarget, view: mount.sharedView,
           getMotion: () => motionEnabled,
           setMotion(next) { shell.setMotionEnabled?.(next); requestMotion(next); },
           onError(error) { console.warn(errorMessage(error)); },
           listenToPopState: !navigation,
-        });
-        const viewOwner = session.viewUrl;
-        session.lifetime.onDispose(() => viewOwner.destroy());
-        if (!interrupted) await session.lifetime.wait(session.viewUrl.restore());
-        if (active !== session || session.lifetime.disposed) return;
+        }));
+        if (!interrupted) await session.wait(session.viewUrl!.restore());
+        if (!scenes.isCurrent(session)) return;
       }
       worldContextMount?.restoreFocus?.(session.url ?? windowTarget.location.href);
       // Restore the incoming camera before admitting optional texture detail.
@@ -262,20 +228,20 @@ export function createSceneRouter({
       });
       shell.setFeatures?.(mount.features ?? null);
       shell.setCamera?.(mount);
-      session.lifetime.onDispose(() => { shell.setCamera?.(null); shell.setFeatures?.(null); });
+      session.own(() => { shell.setCamera?.(null); shell.setFeatures?.(null); });
       // A feature named in the URL is a one-time selection: fly there, then let the view URL take over.
       const featureUrl = new URL(session.url ?? windowTarget.location?.href ?? 'https://example.test');
       const featureId = featureUrl.searchParams.get('feature');
       if (featureId !== null) {
         featureUrl.searchParams.delete('feature');
         session.url = featureUrl.href;
-        if (mount.features && /^[0-9]+$/u.test(featureId)) { shell.setMotionEnabled?.(false); session.lifetime.wait(mount.features.select(featureId)).catch(error => { if (active === session) report(error); }); }
+        if (mount.features && /^[0-9]+$/u.test(featureId)) { shell.setMotionEnabled?.(false); session.wait(mount.features.select(featureId)).catch(error => { if (scenes.isCurrent(session)) report(error); }); }
       }
-      sceneState = "ready";
+      if (!session.commit()) return false;
       if (mount.datasets) {
         syncCompanionClouds(mount.datasets);
-        session.lifetime.onDispose(mount.datasets.subscribe(() => {
-          if (active !== session || requests.current || sceneState !== 'ready') return;
+        session.own(mount.datasets.subscribe(() => {
+          if (!scenes.isCurrent(session) || requests.current || scenes.state.kind !== 'ready') return;
           syncCompanionClouds(mount.datasets!);
           syncDatasetUrl(session);
         }));
@@ -289,14 +255,14 @@ export function createSceneRouter({
       if (request && (request.options.history !== 'pop' || interrupted)) session.viewUrl?.flush();
       return !interrupted;
     } catch (error) {
-      if (active === session) fail(session, error);
+      if (scenes.isCurrent(session)) fail(session, error);
     }
   }
 
   function captureUrl() {
     if (!windowTarget.location?.href) return null;
-    const url = new URL(active?.url ?? windowTarget.location.href);
-    const saved = active?.mount?.sharedView?.capture(motionEnabled);
+    const url = new URL(scenes.current?.url ?? windowTarget.location.href);
+    const saved = scenes.current?.mount?.sharedView?.capture(motionEnabled);
     if (saved) url.searchParams.set('v', new URLSearchParams(formatSharedView(saved)).get('v')!);
     return url.pathname + url.search + url.hash;
   }
@@ -316,7 +282,7 @@ export function createSceneRouter({
 
   function syncDatasetUrl(session: Session) {
     const datasets = session.mount?.datasets;
-    if (!datasets || !session.url || active !== session) return;
+    if (!datasets || !session.url || !scenes.isCurrent(session)) return;
     const id = datasets.current();
     if (id === null) return;
     const url = withDataset(new URL(captureUrl() ?? session.url, windowTarget.location.href), id === datasets.defaultId ? null : id);
@@ -349,15 +315,15 @@ export function createSceneRouter({
     // A system overview is already the system-level selection for its star.
     // Clicking that star drills in instead of fitting it again.
     const opensOverviewFocus = overview && id === objectId && systemById(objects, id) !== null
-      && overviewScopeFromUrl(active?.url ?? windowTarget.location.href) === 'system';
+      && overviewScopeFromUrl(scenes.current?.url ?? windowTarget.location.href) === 'system';
     const overviewTarget = options.overviewScope
-      ? navigation.overviewTarget?.({ scope: options.overviewScope, objectId: id, fromId: objectId, mount: active?.mount })
+      ? navigation.overviewTarget?.({ scope: options.overviewScope, objectId: id, fromId: objectId, mount: scenes.current?.mount })
       : null;
     const centerTarget = overviewTarget?.world ?? (options.recenter
-      ? navigation.centerTarget?.({ objectId: id, fromId: objectId, mount: active?.mount, force: true })
+      ? navigation.centerTarget?.({ objectId: id, fromId: objectId, mount: scenes.current?.mount, force: true })
       : options.sceneSelection && !opensOverviewFocus && id !== centeredObjectId && hasPresented
-        ? (navigation.systemTarget?.({ objectId: id, fromId: objectId, mount: active?.mount })
-          ?? navigation.centerTarget?.({ objectId: id, fromId: objectId, mount: active?.mount })) : null);
+        ? (navigation.systemTarget?.({ objectId: id, fromId: objectId, mount: scenes.current?.mount })
+          ?? navigation.centerTarget?.({ objectId: id, fromId: objectId, mount: scenes.current?.mount })) : null);
     // First selection frames the object's system; a repeat opens its close-up.
     centeredObjectId = centerTarget && !options.overview ? id : null;
     if (centerTarget) options = { ...options, targetWorldCamera: centerTarget,
@@ -372,8 +338,7 @@ export function createSceneRouter({
     else historyOwner?.checkpoint();
     requests.cancel();
     worldContextMount?.suspendFocus?.();
-    active?.viewUrl?.destroy();
-    if (active) active.viewUrl = null;
+    scenes.current?.setViewUrl(null);
     let url = new URL(options.url ?? windowTarget.location?.href ?? object.route, windowTarget.location?.href);
     if (!options.url) {
       url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('overview'); url.searchParams.delete('focus'); url.searchParams.delete('focusLens');
@@ -403,9 +368,9 @@ export function createSceneRouter({
 
   async function transition(request: NavigationRequest, object: ObjectEntry): Promise<boolean | undefined> {
     if (!navigation) return false;
-    const source = active;
+    const source = scenes.current;
     try {
-      if (source && objectId === object.id && sceneState === 'ready') {
+      if (source && objectId === object.id && scenes.state.kind === 'ready') {
         const destination = new URL(request.url);
         const datasetLink = Boolean(request.options.url) &&
           (readDatasetUrl(destination).requested || isFocusDatasetUrl(destination));
@@ -462,7 +427,9 @@ export function createSceneRouter({
           request.own(() => content.dispose?.());
           request.timing.mark('content-ready'); return content;
         });
-      const factoryTask = loadObject(object.id).then(factory => { request.timing.mark('factory-ready'); return factory; });
+      const descriptorTask = contentTransport?.descriptor(object, { signal: request.signal });
+      const factoryTask = (descriptorTask ? descriptorTask.then(descriptor => loadObject(object.id, descriptor)) : loadObject(object.id))
+        .then(factory => { request.timing.mark('factory-ready'); return factory; });
       // The registry already owns the physical frames. Start the camera while
       // the destination factory, content and texture bank load independently.
       requests.advance(request, 'flying');
@@ -482,18 +449,17 @@ export function createSceneRouter({
       if (loaded.cancelled || !requests.owns(request)) return false;
       const [factory, content, handoff] = loaded.value;
       request.timing.mark('handoff');
-      if (active) retire(active, null, { preserveShell: true, flush: false });
+      if (scenes.current) retire(scenes.current, null, { preserveShell: true, flush: false });
       objectId = object.id;
       if (stage.dataset) stage.dataset.objectId = object.id;
       const result = await mountApplication({ factory, content, handoff, request });
-      requests.finish(request, sceneState === 'error' ? 'failed' : 'cancelled');
+      requests.finish(request, scenes.state.kind === 'failed' ? 'failed' : 'cancelled');
       return result === true;
     } catch (error) {
       if (!requests.finish(request, error instanceof Error && error.name === 'AbortError' ? 'cancelled' : 'failed')) return false;
       centeredObjectId = null;
-      worldContextMount?.setNavigationInFlight?.(false);
-      shellOwner?.shell?.setNavigationInFlight?.(false);
-      if (active === source && source) {
+      publishSceneState();
+      if (scenes.current === source && source) {
         source.shell?.setDatasetNotice?.(errorMessage(error));
         // The source still owns the last drawn camera when destination loading
         // fails. Rebinding its URL writer must not replay the departure pose.
@@ -503,7 +469,7 @@ export function createSceneRouter({
         source.viewUrl?.flush(); syncPlayback();
         if (!record(error) || error.preserveView !== true) report(error);
       }
-      else if (active) fail(active, error);
+      else if (scenes.current) fail(scenes.current, error);
       else report(error);
       return false;
     }
@@ -517,7 +483,7 @@ export function createSceneRouter({
   }
 
   async function bindSessionView(session: Session, { restore = true, request }: { restore?: boolean; request?: NavigationRequest } = {}) {
-    if ((request && !requests.owns(request)) || active !== session || !session.mount?.sharedView || !windowTarget.location?.href || !session.url) return;
+    if ((request && !requests.owns(request)) || !scenes.isCurrent(session) || !session.mount?.sharedView || !windowTarget.location?.href || !session.url) return;
     // A failed history restoration keeps its incoming URL for diagnosis, like
     // Galaxio's invalid-route state. The old scene must not write into it.
     if (new URL(session.url).pathname !== windowTarget.location.pathname) return;
@@ -527,35 +493,33 @@ export function createSceneRouter({
       setMotion(next) { session.shell?.setMotionEnabled?.(next); motionEnabled = next === true; syncPlayback(); },
       onError: report,
     });
-    session.viewUrl = owner;
-    session.lifetime.onDispose(() => owner.destroy());
-    if (restore) await (request?.lifetime ?? session.lifetime).wait(owner.restore());
-    if ((!request || requests.owns(request)) && active === session && !session.lifetime.disposed) worldContextMount?.restoreFocus?.(session.url);
+    session.setViewUrl(owner);
+    if (restore) await (request?.lifetime.wait ?? session.wait)(owner.restore());
+    if ((!request || requests.owns(request)) && scenes.isCurrent(session)) worldContextMount?.restoreFocus?.(session.url);
   }
 
-  function readPlayback() {
-    return Object.freeze({
-      motionRequested: motionEnabled,
-      ...automaticPlaybackPolicy({
-        sceneState: requests.current ? 'loading' : sceneState, motionRequested: motionEnabled,
-        documentHidden: documentTarget.hidden,
-        reducedMotion: reducedMotionActive,
-      }),
-    });
-  }
-
-  function readSceneState() {
-    const selected = requests.current ? !overviewScopeFromUrl(requests.current.url) : !overview;
-    return Object.freeze({
+  function readPublication() {
+    const state = scenes.state, session = scenes.current;
+    const sceneState: SceneState = state.kind === 'failed' ? 'error' : state.kind === 'disposed' ? 'destroyed' : state.kind;
+    const pending = requests.current;
+    const selected = pending ? !overviewScopeFromUrl(pending.url) : !overview;
+    const playback = Object.freeze({ motionRequested: motionEnabled, ...automaticPlaybackPolicy({
+      sceneState: pending ? 'loading' : sceneState, motionRequested: motionEnabled,
+      documentHidden: documentTarget.hidden, reducedMotion: reducedMotionActive,
+    }) });
+    const playing = session?.playing ?? false;
+    return { sceneState, playing, playback, scene: Object.freeze({
       activeObjectId: objectId,
-      selectedObjectId: selected ? requests.current?.id ?? objectId : null,
+      selectedObjectId: selected ? pending?.id ?? objectId : null,
       overview: !selected,
-      error: sceneError instanceof Error ? sceneError.message : null,
-      lifecycle: sceneState === "ready" ? (scenePaused ? "paused" : "mounted") : sceneState,
-      mountedObjectCount: active?.mount ? 1 : 0,
-      ready: sceneState === "ready" && requests.current === null,
-    });
+      error: state.kind === 'failed' ? state.error.message : null,
+      lifecycle: sceneState === 'ready' ? (playing ? 'mounted' : 'paused') : sceneState,
+      mountedObjectCount: session?.mount ? 1 : 0,
+      ready: sceneState === 'ready' && pending === null,
+    }) };
   }
+  function readPlayback() { return readPublication().playback; }
+  function readSceneState() { return readPublication().scene; }
 
   function syncReducedMotion() {
     // Reading MediaQueryList.matches can update Chrome's change baseline.
@@ -565,17 +529,11 @@ export function createSceneRouter({
   }
 
   function syncPlayback() {
-    const session = active;
-    if (!session || session.lifetime.disposed) return;
+    const session = scenes.current;
+    if (!session) return;
     try {
       const { allowed } = readPlayback();
-      if (session.mount && session.lastCommand !== allowed) {
-        if (allowed) session.mount.resume();
-        else session.mount.pause();
-        if (active !== session) return;
-        session.lastCommand = allowed;
-      }
-      scenePaused = !allowed;
+      if (!session.play(allowed)) return;
       publishSceneState();
     } catch (error) { fail(session, error); }
   }
@@ -589,7 +547,7 @@ export function createSceneRouter({
     const inFlight = Boolean(requests.current && requests.current.options.preserveView !== true);
     worldContextMount?.setNavigationInFlight?.(inFlight);
     shellOwner?.shell?.setNavigationInFlight?.(inFlight);
-    const state = readSceneState();
+    const { scene: state, sceneState, playing, playback } = readPublication();
     const root = documentTarget.documentElement;
     const body = documentTarget.body;
     // Scene state is republished at every navigation step. Only changes are written: removing
@@ -597,18 +555,18 @@ export function createSceneRouter({
     setData(root, "scenePresented", String(hasPresented || initialScene?.available === true));
     setData(root, "ready", sceneState === "loading" ? "loading" : sceneState === "ready" ? "true" : sceneState === "error" ? "error" : null);
     if (sceneState === 'ready' || sceneState === 'error') delete root.dataset.shellContext;
-    const bodyState = `${sceneState}:${scenePaused}`;
+    const bodyState = `${sceneState}:${!playing}`;
     if (bodyState !== publishedBodyState) {
       body.classList.remove("loading", "ready", "paused", "error");
       if (sceneState === "loading") body.classList.add("loading");
-      else if (sceneState === "ready") { body.classList.add("ready"); if (scenePaused) body.classList.add("paused"); }
+      else if (sceneState === "ready") { body.classList.add("ready"); if (!playing) body.classList.add("paused"); }
       else if (sceneState === "error") body.classList.add("error");
       publishedBodyState = bodyState;
     }
     const busy = sceneState === "loading" ? "true" : "false";
     if (stage.ariaBusy !== busy) stage.ariaBusy = busy;
-    setData(root, "playing", sceneState === "loading" || sceneState === "ready" ? String(sceneState === "ready" && !scenePaused) : null);
-    shellOwner?.shell?.setPlaybackState?.(readPlayback());
+    setData(root, "playing", sceneState === "loading" || sceneState === "ready" ? String(playing) : null);
+    shellOwner?.shell?.setPlaybackState?.(playback);
     if (DIAGNOSTICS_ENABLED) {
       Reflect.set(windowTarget, '__cssEarth', createSceneDiagnostics(windowTarget, objectId, readSceneState, readPlayback));
     }
@@ -616,14 +574,9 @@ export function createSceneRouter({
   }
 
   function retire(session: Session, error: unknown = null, { preserveShell = false, flush = true } = {}) {
-    if (active !== session) return;
-    if (flush) session.viewUrl?.flush();
+    if (!scenes.isCurrent(session)) return;
     // Detach and invalidate before any user cleanup or native wait can finish.
-    active = null;
-    scenePaused = true;
-    sceneError = error;
-    sceneState = error ? "error" : "destroyed";
-    const cleanupErrors = session.lifetime.destroy();
+    const cleanupErrors = session.dispose(error === null ? undefined : error, { flush });
     if (!preserveShell) {
       hasPresented = false;
       const owner = shellOwner; shellOwner = null;
@@ -654,7 +607,7 @@ export function createSceneRouter({
         }
         worldContextMount = value;
         // The world mounts after the scene is ready, so a dataset that asks for a companion cloud asks again here.
-        if (active?.mount?.datasets) syncCompanionClouds(active.mount.datasets);
+        if (scenes.current?.mount?.datasets) syncCompanionClouds(scenes.current.mount.datasets);
         preferences.apply(value);
         return value;
       }).catch(error => {
@@ -674,24 +627,24 @@ export function createSceneRouter({
     owner.selectObject?.(mountedObjectId, navigation.frame);
     owner.setOverview?.(overview);
     const disconnectFocus = owner.connectNavigation?.(navigation, {
-      onFocusChange(url) { if (active === session) session.url = url; },
-      onFocusContentChange(record, sources, presentation) { if (active === session) shellOwner?.shell?.setPreparedFocus?.(record, sources, presentation); },
+      onFocusChange(url) { if (scenes.isCurrent(session)) session.url = url; },
+      onFocusContentChange(record, sources, presentation) { if (scenes.isCurrent(session)) shellOwner?.shell?.setPreparedFocus?.(record, sources, presentation); },
       onFlightStart() {
-        if (active !== session) return;
+        if (!scenes.isCurrent(session)) return;
         motionEnabled = false; shellOwner?.shell?.setMotionEnabled?.(false); syncPlayback();
       },
     });
-    if (disconnectFocus) session.lifetime.onDispose(disconnectFocus);
+    if (disconnectFocus) session.own(disconnectFocus);
     const unsubscribe = navigation.subscribe((world, viewport) => {
-      if (active === session && worldContextMount === owner) owner.publish(world, viewport);
+      if (scenes.isCurrent(session) && worldContextMount === owner) owner.publish(world, viewport);
     });
-    session.lifetime.onDispose(unsubscribe);
+    session.own(unsubscribe);
     session.framePresenter?.enable();
   }
   function setOverview(enabled: boolean) {
     const entered = enabled && !overview;
     overview = enabled;
-    active?.mount?.navigation?.setZoomOutCentering?.(enabled);
+    scenes.current?.mount?.navigation?.setZoomOutCentering?.(enabled);
     shellOwner?.shell?.setOverview?.(enabled);
     worldContextMount?.setOverview?.(enabled);
     if (stage.dataset) stage.dataset.selection = enabled ? 'system' : objectId;
@@ -700,24 +653,22 @@ export function createSceneRouter({
   /** A binary's overview is centred on the pair's centre of mass, not on the star the scene mounts. Entering the overview
    * turns the camera onto that centre at the same distance; zooming out then keeps the pair centred. */
   function aimAtSystemCenter() {
-    const session = active, mount = session?.mount;
+    const session = scenes.current, mount = session?.mount;
     if (!session || !mount || !navigation || !SYSTEM_CENTERS.has(objectId)) return;
     const target = navigation.systemCenterTarget?.({ objectId, fromId: objectId, mount });
     if (!target) return;
-    const controller = new AbortController();
-    session.lifetime.onDispose(() => controller.abort());
-    void navigation.focus({ objectId, mount, signal: controller.signal, reducedMotion: reducedMotionActive,
+    void navigation.focus({ objectId, mount, signal: session.signal, reducedMotion: reducedMotionActive,
       targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM, centerSelection: true })
-      .catch((error: unknown) => { if (!controller.signal.aborted) reportError(error); });
+      .catch((error: unknown) => { if (!session.signal.aborted) reportError(error); });
   }
   function connectOverviewSelection(session: Session) {
     const owner = session.mount?.navigation;
     if (!owner || !navigation) return;
-    session.lifetime.onDispose(watchOverviewSelection({ navigation: owner, objects, objectId,
+    session.own(watchOverviewSelection({ navigation: owner, objects, objectId,
       getOverview: () => overview,
       // The pending flight owns the camera; repeat-click bookkeeping must not
       // suppress zoom-out deselection after that flight has finished.
-      isAvailable: () => active === session && sceneState === 'ready' && !requests.current && !owner.preparedFocus?.(),
+      isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current && !owner.preparedFocus?.(),
       windowTarget,
       onChange(next) {
         if (!next.overview || next.objectId === objectId) {
@@ -747,7 +698,7 @@ export function createSceneRouter({
     }
   }
   function fail(session: Session, error: unknown) {
-    if (active !== session) return;
+    if (!scenes.isCurrent(session)) return;
     if (session.request) requests.finish(session.request, 'failed');
     try { retire(session, error instanceof Error ? error : new Error(String(error))); }
     catch (failure) { report(failure); }
@@ -762,16 +713,16 @@ export function createSceneRouter({
     destroyWorldContext();
     hasPresented = false;
     requests.cancel();
-    if (active) {
-      try { retire(active); } catch (error) { report(error); }
+    if (scenes.current) {
+      try { retire(scenes.current); } catch (error) { report(error); }
     } else if (shellOwner) {
       const owner = shellOwner; shellOwner = null;
       try { owner.shell?.destroy(); } catch (error) { report(error); }
-      sceneState = 'destroyed'; publishSceneState();
+      publishSceneState();
     }
   }
   function restoreCachedScene(event: PageTransitionEvent) {
-    if (event.persisted && !active && !destroyed) mountTask = mountApplication();
+    if (event.persisted && !scenes.current && !destroyed) mountTask = mountApplication();
   }
 }
 

@@ -182,6 +182,23 @@ test("malformed mounts still observe their rejected readiness promise", async ()
   h.router.destroy();
 });
 
+test('a synchronous factory failure keeps its original error and releases the late returned handle', async () => {
+  const failure = new Error('factory startup failed');
+  const h = harness(context => {
+    context.onError(failure);
+    return { ready: Promise.reject(new Error('late readiness rejection')) };
+  });
+  await h.router.settled;
+  await flush();
+  assert.equal(h.router.state().error, failure.message);
+  assert.equal(h.router.state().ready, false);
+  assert.equal(h.router.state().mountedObjectCount, 0);
+  assert.deepEqual(h.errors, [failure]);
+  assert.equal(h.mounts[0].calls.filter(call => call === 'destroy').length, 1);
+  assert.equal(h.shells[0].destroyed, 1);
+  h.router.destroy();
+});
+
 for (const failure of ["pause", "resume", "report"]) test(`fatal ${failure} failure cleans once and never publishes success`, async () => {
   const h = harness(() => failure === "pause"
     ? { pause() { throw new Error("pause failed"); } }

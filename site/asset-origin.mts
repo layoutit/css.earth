@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireRuntimeAssetManifest } from '../src/platform/runtime-asset-closure.mts';
 import { resolvePreparedAssetUrl, type PreparedAssetOrigin } from '../src/renderers/css/dist/index.js';
+import type { ObjectDescriptor } from '@cssearth/objects';
 export type { PreparedAssetOrigin };
 
 /** Build-time-only asset origin: unset in local dev and CI, so `pnpm build` reproduces
@@ -47,6 +48,17 @@ export async function preparedAssetOriginFor(id: string, root = process.cwd()): 
   const origin = assetOrigin();
   if (!origin) return undefined;
   return { origin, assets: await assetShaMap(id, root) };
+}
+
+/** Attach the build-time asset origin to the descriptor consumed by the browser loader. */
+export async function withPreparedAssetOrigin(descriptor: ObjectDescriptor, root = process.cwd()): Promise<ObjectDescriptor> {
+  const preparedAssetOrigin = await preparedAssetOriginFor(descriptor.id, root);
+  return preparedAssetOrigin
+    ? { ...descriptor, properties: { ...descriptor.properties, assetOrigin: {
+      origin: preparedAssetOrigin.origin,
+      ...(preparedAssetOrigin.assets ? { assets: preparedAssetOrigin.assets } : {}),
+    } } }
+    : descriptor;
 }
 
 /** Node-side counterpart of `resolvePreparedAssetUrl`, for build-time (Astro) rewrites:
