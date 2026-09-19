@@ -130,7 +130,7 @@ test('a picture reports its scale, its body and what its data quality flags', ()
   const measured = summariseImage({ values, samples: width, groups: height }, quality, header, 8);
   assert.ok(Math.abs(measured.arcsecPerPixel! - 0.036) < 1e-9);
   assert.equal(measured.quality!.saturated, 2, 'only the flags carrying the saturation bit count');
-  assert.deepEqual(measured.quality!.flags, { '2': 1, '8': 2, '258': 1 });
+  assert.deepEqual(qualitySummary(quality), { samples: 1600, flagged: 4, flaggedShare: 4 / 1600, flags: { '2': 1, '8': 2, '258': 1 } });
   assert.equal(measured.quality!.flagged, 4);
   assert.equal(summariseImage({ values, samples: width, groups: height }, null, {}, 8).arcsecPerPixel, null, 'a header with no transform states no scale');
 });

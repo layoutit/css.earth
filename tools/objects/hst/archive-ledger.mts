@@ -30,49 +30,68 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { mastRequest } from '../jwst/mast.mts';
+import { evidenceFor, parseProductRecord, type ProductRecord } from '../product-record.mts';
 import { parseHstProgram, PROGRAMS } from './archive.mts';
+import { ARCHIVE_FINAL_STAGE, parseArchiveFinalProgram, type ArchiveFinalProgram } from './archive-final.mts';
 import { PIPELINES } from './calibrate.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
 export const LEDGER = resolve(REPOSITORY, 'data/hst/ledger.json');
 export const GUIDE = resolve(REPOSITORY, 'docs/hubble-ledger.md');
 
-/** MAST's HST configurations (CAOM's instrument_name), what each records, and the tool that re-calibrates it here. */
-export const HST_CONFIGURATIONS: readonly { readonly configuration: string; readonly records: string; readonly draws: string; readonly tool: string | null; readonly note?: string }[] = [
-  { configuration: 'ACS/WFC', records: 'wide-field pictures, 0.35–1.1 µm', draws: 'pictures of galaxies, nebulae and Solar System bodies', tool: 'tools/objects/hst/calibrate.mts' },
-  { configuration: 'ACS/HRC', records: 'high-resolution pictures and slitless spectra', draws: 'pictures of small bodies', tool: 'tools/objects/hst/calibrate.mts', note: 'Not run here; the detector stopped working in 2007.' },
-  { configuration: 'ACS/SBC', records: 'far-ultraviolet pictures and prism spectra', draws: 'aurorae and gas around a body', tool: 'tools/objects/hst/calibrate.mts' },
-  { configuration: 'WFC3/UVIS', records: 'pictures, 0.2–1 µm', draws: 'pictures of planets, moons and nebulae', tool: 'tools/objects/hst/calibrate.mts' },
-  { configuration: 'WFC3/IR', records: 'pictures and slitless spectra, 0.8–1.7 µm', draws: 'pictures; exoplanet transit spectra', tool: null, note: 'calwf3 handles it; no IR exposure has been re-calibrated here.' },
-  { configuration: 'STIS/CCD', records: 'spectra and pictures, 0.2–1 µm', draws: 'surface and atmosphere spectra', tool: 'tools/objects/hst/calibrate.mts' },
-  { configuration: 'STIS/NUV-MAMA', records: 'near-ultraviolet spectra and pictures', draws: 'ultraviolet spectra of a body', tool: 'tools/objects/hst/calibrate.mts', note: 'calstis handles it; no NUV exposure has been re-calibrated here.' },
-  { configuration: 'STIS/FUV-MAMA', records: 'far-ultraviolet spectra and pictures', draws: 'aurorae and escaping gas', tool: 'tools/objects/hst/calibrate.mts' },
-  { configuration: 'STIS', records: 'co-added spectra the archive builds from several visits (HASP)', draws: 'nothing on its own', tool: null, note: 'A product of products; there is no raw exposure to re-calibrate.' },
-  { configuration: 'COS/FUV', records: 'far-ultraviolet point-source spectra', draws: 'nothing yet', tool: null, note: 'calcos is not installed.' },
-  { configuration: 'COS/NUV', records: 'near-ultraviolet point-source spectra', draws: 'nothing yet', tool: null, note: 'calcos is not installed.' },
-  { configuration: 'WFPC2/PC', records: 'pictures on the planetary camera, 1994–2009', draws: 'pictures of Solar System bodies', tool: null, note: 'calwp2 is retired and not in hstcal.' },
-  { configuration: 'WFPC2/WFC', records: 'pictures on the three wide-field chips', draws: 'pictures of extended objects', tool: null, note: 'calwp2 is retired and not in hstcal.' },
-  { configuration: 'WFPC2', records: 'WFPC2 products the catalogue does not assign to a chip', draws: 'nothing on its own', tool: null },
-  { configuration: 'NICMOS/NIC1', records: 'near-infrared pictures at the finest sampling', draws: 'nothing yet', tool: null, note: 'calnica is retired and not in hstcal.' },
-  { configuration: 'NICMOS/NIC2', records: 'near-infrared pictures and coronagraphy', draws: 'nothing yet', tool: null, note: 'calnica is retired and not in hstcal.' },
-  { configuration: 'NICMOS/NIC3', records: 'near-infrared pictures and grism spectra', draws: 'nothing yet', tool: null, note: 'calnica is retired and not in hstcal.' },
-  { configuration: 'FOC/96', records: 'faint-object camera pictures, 1990–2002', draws: 'nothing yet', tool: null, note: 'Its pipeline is retired.' },
-  { configuration: 'FOC/48', records: 'faint-object camera pictures in its other format', draws: 'nothing yet', tool: null, note: 'Its pipeline is retired.' },
-  { configuration: 'FOS/BL', records: 'faint-object spectrograph, blue detector, 1990–1997', draws: 'nothing yet', tool: null, note: 'Its pipeline is retired.' },
-  { configuration: 'FOS/RD', records: 'faint-object spectrograph, red detector, 1990–1997', draws: 'nothing yet', tool: null, note: 'Its pipeline is retired.' },
-  { configuration: 'WFPC/PC', records: 'the first wide-field camera, 1990–1993', draws: 'nothing yet', tool: null, note: 'Its pipeline is retired.' },
-  { configuration: 'ACS', records: 'ACS products the catalogue does not assign to a detector', draws: 'nothing on its own', tool: null },
-  { configuration: 'COS-STIS', records: 'co-added spectra the archive builds from COS and STIS visits together (HASP)', draws: 'nothing on its own', tool: null, note: 'A product of products.' },
-  { configuration: 'COS', records: 'COS products the catalogue does not assign to a detector', draws: 'nothing on its own', tool: null },
-  { configuration: 'HRS', records: 'the Goddard high resolution spectrograph, 1990–1997', draws: 'nothing yet', tool: null, note: 'Its pipeline is retired.' },
-  { configuration: 'HRS/1', records: 'the same spectrograph on its first detector', draws: 'nothing yet', tool: null, note: 'Its pipeline is retired.' },
-  { configuration: 'HRS/2', records: 'the same spectrograph on its second detector', draws: 'nothing yet', tool: null, note: 'Its pipeline is retired.' },
-  { configuration: 'HSP/UNK/POL', records: 'the high speed photometer, polarimetry, 1990–1993', draws: 'nothing: brightness in time, not pictures', tool: null },
-  { configuration: 'HSP/UNK/UV1', records: 'the high speed photometer, first ultraviolet channel', draws: 'nothing: brightness in time', tool: null },
-  { configuration: 'HSP/UNK/UV2', records: 'the high speed photometer, second ultraviolet channel', draws: 'nothing: brightness in time', tool: null },
-  { configuration: 'HSP/UNK/VIS', records: 'the high speed photometer, visible channel', draws: 'nothing: brightness in time', tool: null },
-  { configuration: 'WFPC/WFC', records: 'the first wide-field camera, wide-field chips', draws: 'nothing yet', tool: null, note: 'Its pipeline is retired.' },
-  { configuration: 'FGS', records: 'fine guidance sensor astrometry and interferometry', draws: 'nothing: positions, not pictures', tool: null },
+/** The two capabilities a configuration has, which are never one capability.
+ *
+ * **Re-calibration here** asks whether a pipeline for the configuration is in the pinned toolchain, and whether a program of it
+ * has been re-run and checked against the archive's own product. **Archive-final products** asks whether the archive still
+ * distributes a complete calibrated product for it and whether one has been pinned, downloaded and read here.
+ *
+ * Retiring an instrument takes the first away and leaves the second. Merging them would make every observation WFPC2, the FOS
+ * and the GHRS ever took vanish from this ledger, which is not what happened to them.
+ *
+ * Which pipeline re-calibrates a configuration is derived from the toolchain rather than declared: calibrate.mts names the
+ * instruments whose pipelines are installed, and a configuration the catalogue does not assign to a detector is a product of
+ * products with no raw exposure behind it. */
+export const recalibrationTool = (configuration: string): string | null => {
+  const [instrument, detector] = configuration.split('/');
+  return instrument !== undefined && detector !== undefined && PIPELINES[instrument] ? 'tools/objects/hst/calibrate.mts' : null;
+};
+
+/** MAST's HST configurations (CAOM's instrument_name) and what each records. What can be done with them is derived. */
+export const HST_CONFIGURATIONS: readonly { readonly configuration: string; readonly records: string; readonly draws: string; readonly note?: string }[] = [
+  { configuration: 'ACS/WFC', records: 'wide-field pictures, 0.35–1.1 µm', draws: 'pictures of galaxies, nebulae and Solar System bodies' },
+  { configuration: 'ACS/HRC', records: 'high-resolution pictures and slitless spectra', draws: 'pictures of small bodies', note: 'The detector stopped working in 2007.' },
+  { configuration: 'ACS/SBC', records: 'far-ultraviolet pictures and prism spectra', draws: 'aurorae and gas around a body' },
+  { configuration: 'WFC3/UVIS', records: 'pictures, 0.2–1 µm', draws: 'pictures of planets, moons and nebulae' },
+  { configuration: 'WFC3/IR', records: 'pictures and slitless spectra, 0.8–1.7 µm', draws: 'pictures; exoplanet transit spectra' },
+  { configuration: 'STIS/CCD', records: 'spectra and pictures, 0.2–1 µm', draws: 'surface and atmosphere spectra' },
+  { configuration: 'STIS/NUV-MAMA', records: 'near-ultraviolet spectra and pictures', draws: 'ultraviolet spectra of a body' },
+  { configuration: 'STIS/FUV-MAMA', records: 'far-ultraviolet spectra and pictures', draws: 'aurorae and escaping gas' },
+  { configuration: 'STIS', records: 'co-added spectra the archive builds from several visits (HASP)', draws: 'nothing on its own', note: 'A product of products; there is no raw exposure to re-calibrate.' },
+  { configuration: 'COS/FUV', records: 'far-ultraviolet point-source spectra', draws: 'nothing yet', note: 'calcos is not installed.' },
+  { configuration: 'COS/NUV', records: 'near-ultraviolet point-source spectra', draws: 'nothing yet', note: 'calcos is not installed.' },
+  { configuration: 'WFPC2/PC', records: 'pictures on the planetary camera, 1994–2009', draws: 'pictures of Solar System bodies', note: 'calwp2 is retired and not in hstcal.' },
+  { configuration: 'WFPC2/WFC', records: 'pictures on the three wide-field chips', draws: 'pictures of extended objects', note: 'calwp2 is retired and not in hstcal.' },
+  { configuration: 'WFPC2', records: 'WFPC2 products the catalogue does not assign to a chip', draws: 'nothing on its own' },
+  { configuration: 'NICMOS/NIC1', records: 'near-infrared pictures at the finest sampling', draws: 'nothing yet', note: 'calnica is retired and not in hstcal.' },
+  { configuration: 'NICMOS/NIC2', records: 'near-infrared pictures and coronagraphy', draws: 'nothing yet', note: 'calnica is retired and not in hstcal.' },
+  { configuration: 'NICMOS/NIC3', records: 'near-infrared pictures and grism spectra', draws: 'nothing yet', note: 'calnica is retired and not in hstcal.' },
+  { configuration: 'FOC/96', records: 'faint-object camera pictures, 1990–2002', draws: 'nothing yet', note: 'Its pipeline is retired.' },
+  { configuration: 'FOC/48', records: 'faint-object camera pictures in its other format', draws: 'nothing yet', note: 'Its pipeline is retired.' },
+  { configuration: 'FOS/BL', records: 'faint-object spectrograph, blue detector, 1990–1997', draws: 'nothing yet', note: 'Its pipeline is retired.' },
+  { configuration: 'FOS/RD', records: 'faint-object spectrograph, red detector, 1990–1997', draws: 'nothing yet', note: 'Its pipeline is retired.' },
+  { configuration: 'WFPC/PC', records: 'the first wide-field camera, 1990–1993', draws: 'nothing yet', note: 'Its pipeline is retired.' },
+  { configuration: 'ACS', records: 'ACS products the catalogue does not assign to a detector', draws: 'nothing on its own' },
+  { configuration: 'COS-STIS', records: 'co-added spectra the archive builds from COS and STIS visits together (HASP)', draws: 'nothing on its own', note: 'A product of products.' },
+  { configuration: 'COS', records: 'COS products the catalogue does not assign to a detector', draws: 'nothing on its own' },
+  { configuration: 'HRS', records: 'the Goddard high resolution spectrograph, 1990–1997', draws: 'nothing yet', note: 'Its pipeline is retired.' },
+  { configuration: 'HRS/1', records: 'the same spectrograph on its first detector', draws: 'nothing yet', note: 'Its pipeline is retired.' },
+  { configuration: 'HRS/2', records: 'the same spectrograph on its second detector', draws: 'nothing yet', note: 'Its pipeline is retired.' },
+  { configuration: 'HSP/UNK/POL', records: 'the high speed photometer, polarimetry, 1990–1993', draws: 'nothing: brightness in time, not pictures' },
+  { configuration: 'HSP/UNK/UV1', records: 'the high speed photometer, first ultraviolet channel', draws: 'nothing: brightness in time' },
+  { configuration: 'HSP/UNK/UV2', records: 'the high speed photometer, second ultraviolet channel', draws: 'nothing: brightness in time' },
+  { configuration: 'HSP/UNK/VIS', records: 'the high speed photometer, visible channel', draws: 'nothing: brightness in time' },
+  { configuration: 'WFPC/WFC', records: 'the first wide-field camera, wide-field chips', draws: 'nothing yet', note: 'Its pipeline is retired.' },
+  { configuration: 'FGS', records: 'fine guidance sensor astrometry and interferometry', draws: 'nothing: positions, not pictures' },
 ];
 
 export interface ShippedObject { readonly id: string; readonly names: readonly string[]; readonly position?: { readonly raDeg: number; readonly decDeg: number; readonly radiusDeg: number } }
@@ -217,6 +236,53 @@ export function parseReproductionReceipt(value: unknown, label: string): Reprodu
     mast: { name: requireString(mast.name, `${label}: MAST name`), bytes: requireFiniteNumber(mast.bytes, `${label}: MAST bytes`), sha256 } };
 }
 
+/** What an archive-final program has to have for its configuration to count as qualified: the program parses, the record beside
+ * it parses as a product record of the `archive-final` stage, names that exact program, observation and configuration, states
+ * that no software of ours ran, pins every file the program pins at the same byte count and digest, and carries exactly one
+ * `archive-origin` entry for the science product and no `archive-agreement` at all. Anything else is a problem and qualifies
+ * nothing: a record that cannot be read proves less than no record, because it looks like proof. */
+export function archiveFinalQualification(program: ArchiveFinalProgram, record: ProductRecord, label: string): void {
+  if (record.stage !== ARCHIVE_FINAL_STAGE) throw new TypeError(`${label}: its stage is ${record.stage}, not ${ARCHIVE_FINAL_STAGE}.`);
+  const parameters = record.parameters;
+  if (parameters.program !== program.id || parameters.observation !== program.observation || parameters.configuration !== program.configuration)
+    throw new TypeError(`${label}: it records ${String(parameters.program)} ${String(parameters.observation)} in ${String(parameters.configuration)}, not ${program.id} ${program.observation} in ${program.configuration}.`);
+  if (record.software.length) throw new TypeError(`${label}: it names software that ran, and nothing of ours makes an archive-final product.`);
+  const outputs = new Map(record.outputs.map(output => [output.path, output]));
+  if (outputs.size !== program.files.length) throw new TypeError(`${label}: it pins ${outputs.size} files against the program's ${program.files.length}.`);
+  for (const file of program.files) {
+    const output = outputs.get(file.name);
+    if (!output) throw new TypeError(`${label}: it does not pin ${file.name}.`);
+    if (file.sha256 === undefined) throw new TypeError(`${program.id}.archive-final.json: ${file.name} has no digest, so nothing says which bytes were read.`);
+    if (output.bytes !== file.bytes || output.sha256 !== file.sha256) throw new TypeError(`${label}: its ${file.name} is ${output.bytes} bytes, sha256 ${output.sha256}, not the pinned ${file.bytes} and ${file.sha256}.`);
+  }
+  const science = program.components.find(component => component.role === 'science')!.file!;
+  if (evidenceFor(record, science, 'archive-origin').length !== 1) throw new TypeError(`${label}: it states no single archive-origin entry for ${science}.`);
+  for (const output of record.outputs) if (evidenceFor(record, output.path, 'archive-agreement').length)
+    throw new TypeError(`${label}: it records archive agreement for ${output.path}, which retrieving a file never establishes.`);
+}
+
+/** Every archive-final program in this repository, by the configuration it pins, with the ones a record qualifies. */
+export async function repositoryArchiveFinal(repository = REPOSITORY) {
+  const directory = resolve(repository, 'tools/objects/hst/programs'), files = (await readdir(directory).catch(() => [])).sort();
+  const state = new Map<string, { programs: Set<string>; qualified: Set<string> }>(), problems: string[] = [];
+  for (const file of files.filter(name => name.endsWith('.archive-final.json'))) {
+    const id = file.slice(0, -'.archive-final.json'.length);
+    let program: ArchiveFinalProgram;
+    try { program = parseArchiveFinalProgram(await readJson(resolve(directory, file)), file); }
+    catch (error) { problems.push(receiptProblem(file, error)); continue; }
+    if (program.id !== id) { problems.push(`${file}: it is the program of ${program.id}.`); continue; }
+    const held = state.get(program.configuration) ?? { programs: new Set<string>(), qualified: new Set<string>() };
+    state.set(program.configuration, held);
+    held.programs.add(program.id);
+    const recordFile = `${id}.archive-final.product.json`;
+    try {
+      archiveFinalQualification(program, parseProductRecord(await readJson(resolve(directory, recordFile))), recordFile);
+      held.qualified.add(program.id);
+    } catch (error) { problems.push(receiptProblem(recordFile, error)); }
+  }
+  return { configurations: state, problems };
+}
+
 /** What this repository holds for each configuration (the programs pinned and those a receipt proved), and every receipt that
  * could not be accepted. A program counts as re-calibrated in a configuration only when a receipt names one of its observations
  * in that configuration and the MAST product the program pins for it, with the digest of what it compared. */
@@ -253,7 +319,9 @@ export async function repositoryReceipts(repository = REPOSITORY) {
     held.programs.add(program.id);
     if (proved.has(`${program.id}|${configuration}`)) held.checked.add(program.id);
   }
-  return { configurations: state, problems: problems.sort((a, b) => a.localeCompare(b, 'en')) };
+  const archive = await repositoryArchiveFinal(repository);
+  return { configurations: state, archiveFinal: archive.configurations,
+    problems: [...problems, ...archive.problems].sort((a, b) => a.localeCompare(b, 'en')) };
 }
 
 /** The configurations alone, for everything that asks what is pinned and what is proved rather than what went wrong. */
@@ -261,12 +329,20 @@ export async function repositoryState(repository = REPOSITORY) {
   return (await repositoryReceipts(repository)).configurations;
 }
 
+/** One configuration's row: what the archive holds in it, and its two capabilities kept apart. `tool` and `checked` are the
+ * re-calibration one; `archiveFinal` is the other, and an instrument whose pipeline is retired can still be qualified there. */
+export interface LedgerConfiguration {
+  readonly configuration: string; readonly records: string; readonly draws: string; readonly tool: string | null; readonly note?: string;
+  readonly observations: number; readonly movingObservations: number; readonly shippedObjects: number;
+  readonly programs: readonly string[]; readonly checked: readonly string[];
+  readonly archiveFinal: { readonly programs: readonly string[]; readonly qualified: readonly string[] };
+}
+
 export interface Ledger {
   readonly schema: 'cssearth-hst-ledger@1';
   readonly archiveDate: string;
   readonly observations: { readonly collection: number; readonly counted: number; readonly other: number; readonly moving: number };
-  readonly configurations: readonly { readonly configuration: string; readonly records: string; readonly draws: string; readonly tool: string | null; readonly note?: string;
-    readonly observations: number; readonly movingObservations: number; readonly shippedObjects: number; readonly programs: readonly string[]; readonly checked: readonly string[] }[];
+  readonly configurations: readonly LedgerConfiguration[];
   readonly movingTargets: readonly { readonly object: string; readonly observations: number; readonly configurations: readonly string[] }[];
   readonly fixedTargets: readonly { readonly object: string; readonly radiusDeg: number; readonly observations: number; readonly configurations: readonly string[] }[];
   /** Positioned objects MAST would not answer a cone search for in this pass. */
@@ -275,18 +351,22 @@ export interface Ledger {
   readonly receiptProblems: readonly string[];
 }
 
+/** One configuration's two capabilities, both read from this repository and neither declared. */
+export const capabilities = (configuration: string, receipts: Awaited<ReturnType<typeof repositoryReceipts>>) => {
+  const held = receipts.configurations.get(configuration), archive = receipts.archiveFinal.get(configuration);
+  return { tool: recalibrationTool(configuration), programs: [...held?.programs ?? []].sort(), checked: [...held?.checked ?? []].sort(),
+    archiveFinal: { programs: [...archive?.programs ?? []].sort(), qualified: [...archive?.qualified ?? []].sort() } };
+};
+
 export function buildLedger(counts: ReadonlyMap<string, number>, collection: number, moving: readonly ArchiveRow[],
   fixed: ReadonlyMap<string, readonly ArchiveRow[] | null>, objects: readonly ShippedObject[], receipts: Awaited<ReturnType<typeof repositoryReceipts>>, archiveDate: string): Ledger {
-  const held = receipts.configurations;
   const matched = moving.map(row => ({ row, object: matchTarget(row.target, objects) }));
   const perObject = new Map<string, ArchiveRow[]>();
   for (const { row, object } of matched) if (object) (perObject.get(object) ?? perObject.set(object, []).get(object)!).push(row);
   const configurations = HST_CONFIGURATIONS.map(entry => {
     const rows = matched.filter(({ row }) => row.configuration === entry.configuration);
-    const state = held.get(entry.configuration);
-    return { ...entry, observations: counts.get(entry.configuration) ?? 0, movingObservations: rows.length,
-      shippedObjects: new Set(rows.map(({ object }) => object).filter((id): id is string => id !== null)).size,
-      programs: [...state?.programs ?? []].sort(), checked: [...state?.checked ?? []].sort() };
+    return { ...entry, ...capabilities(entry.configuration, receipts), observations: counts.get(entry.configuration) ?? 0, movingObservations: rows.length,
+      shippedObjects: new Set(rows.map(({ object }) => object).filter((id): id is string => id !== null)).size };
   });
   const counted = [...counts.values()].reduce((sum, value) => sum + value, 0);
   const listOf = (rows: readonly ArchiveRow[]) => [...new Set(rows.map(row => row.configuration))].sort();
@@ -317,7 +397,10 @@ export function parseLedger(value: unknown): Ledger {
       draws: requireString(entry.draws, 'Draws'), tool: entry.tool === null ? null : requireString(entry.tool, 'Tool'),
       observations: requireFiniteNumber(entry.observations, 'Observations'), movingObservations: requireFiniteNumber(entry.movingObservations, 'Moving observations'),
       shippedObjects: requireFiniteNumber(entry.shippedObjects, 'Shipped objects'),
-      programs: names(entry.programs, 'Programs'), checked: names(entry.checked, 'Checked') };
+      programs: names(entry.programs, 'Programs'), checked: names(entry.checked, 'Checked'),
+      // A ledger written before the two capabilities were kept apart states no archive-final state; the next run gives it one.
+      archiveFinal: entry.archiveFinal === undefined ? { programs: [], qualified: [] }
+        : { programs: names(requireRecord(entry.archiveFinal, 'Archive-final').programs, 'Archive-final programs'), qualified: names(requireRecord(entry.archiveFinal, 'Archive-final').qualified, 'Archive-final qualified') } };
   }) as Ledger['configurations'];
   const targets = (list: unknown, label: string, radius: boolean) => requireArray(list, label).map(raw => {
     const entry = requireRecord(raw, label);
@@ -336,23 +419,33 @@ const thousands = (value: number) => value.toLocaleString('en-US');
 
 export function ledgerGuide(ledger: Ledger): string {
   const reduced = ledger.configurations.filter(entry => entry.checked.length);
+  const qualified = ledger.configurations.filter(entry => entry.archiveFinal.qualified.length);
   const lines = [
     '# Hubble ledger',
     '',
-    `What Hubble's public archive holds, what this repository can re-calibrate from raw, and which of the objects it ships Hubble has observed. Written by [\`archive-ledger.mts\`](../tools/objects/hst/archive-ledger.mts) from MAST on ${ledger.archiveDate}; the route it checks is [Hubble](hubble.md).`,
+    `What Hubble's public archive holds, what this repository can re-calibrate from raw, whose archive-final products it has pinned and read, and which of the objects it ships Hubble has observed. Written by [\`archive-ledger.mts\`](../tools/objects/hst/archive-ledger.mts) from MAST on ${ledger.archiveDate}; the routes it checks are in [Hubble](hubble.md).`,
     '',
     `The collection holds ${thousands(ledger.observations.collection)} public observations. The configurations below account for ${thousands(ledger.observations.counted)}; ${thousands(ledger.observations.other)} are in configurations this file does not name. ${thousands(ledger.observations.moving)} observations are of moving targets, which is the Solar System.`,
     '',
     '## Configurations',
     '',
-    '| Configuration | Observations | Of moving targets | Records | Re-calibrated here |',
-    '| --- | ---: | ---: | --- | --- |',
+    "Two capabilities, kept apart. **Re-calibrated here** is whether a pipeline for the configuration is in the pinned toolchain and whether a program of it has been re-run and checked against the archive's own product. **Archive-final products** is whether the archive's own final product for an observation has been pinned, downloaded and read here. Retiring an instrument takes the first away and leaves the second: the archive still distributes a complete calibrated product for every WFPC2, FOS and GHRS observation, and this ledger says so rather than reporting those configurations as empty.",
+    '',
+    '| Configuration | Observations | Of moving targets | Records | Re-calibrated here | Archive-final products |',
+    '| --- | ---: | ---: | --- | --- | --- |',
     ...ledger.configurations.map(entry => `| ${entry.configuration} | ${thousands(entry.observations)} | ${thousands(entry.movingObservations)} | ${entry.records} | ${
-      entry.checked.length ? entry.checked.join(', ') : entry.programs.length ? `pinned: ${entry.programs.join(', ')}` : entry.note ?? 'no'} |`),
+      entry.checked.length ? entry.checked.join(', ') : entry.programs.length ? `pinned: ${entry.programs.join(', ')}`
+        : entry.tool ? `a pipeline is installed, none run${entry.note ? `. ${entry.note}` : ''}` : entry.note ?? 'no pipeline here'} | ${
+      entry.archiveFinal.qualified.length ? `qualified: ${entry.archiveFinal.qualified.join(', ')}`
+        : entry.archiveFinal.programs.length ? `listed, not qualified: ${entry.archiveFinal.programs.join(', ')}` : 'not pinned'} |`),
     '',
     reduced.length
-      ? `Re-calibrated and checked against the archive's own product: ${reduced.map(entry => `${entry.configuration} (${entry.checked.join(', ')})`).join('; ')}. Every other configuration is counted here and nothing more.`
+      ? `Re-calibrated and checked against the archive's own product: ${reduced.map(entry => `${entry.configuration} (${entry.checked.join(', ')})`).join('; ')}.`
       : 'Nothing has been re-calibrated yet.',
+    qualified.length
+      ? `Archive-final products pinned, downloaded and read whole: ${qualified.map(entry => `${entry.configuration} (${entry.archiveFinal.qualified.join(', ')})`).join('; ')}. None of those is a re-calibration, and none of them is counted as one: what the route establishes is in [Hubble](hubble.md#archive-final-products-of-retired-instruments).`
+      : 'No archive-final product has been pinned yet.',
+    'Every other configuration is counted here and nothing more.',
     '',
     '## Moving targets',
     '',
@@ -374,6 +467,8 @@ export function ledgerGuide(ledger: Ledger): string {
     '',
     `A program counts as re-calibrated in a configuration only when a receipt beside it parses, states the \`${HST_REPRODUCTION_SCHEMA}\` schema, and names one of its observations in that configuration together with the MAST product the program pins for it, with the digest of what it compared. A receipt that says anything else is reported here and proves nothing.`,
     '',
+    `An archive-final program counts as qualified only when the \`<id>.archive-final.product.json\` beside it parses as a \`${ARCHIVE_FINAL_STAGE}\` product record, names that program, observation and configuration, states that no software of ours ran, pins every file the program pins at the same byte count and digest, and carries one \`archive-origin\` entry for the science product and no \`archive-agreement\` at all. A record that cannot be read proves less than no record, so it is reported here too.`,
+    '',
     ledger.receiptProblems.length
       ? `${ledger.receiptProblems.length} receipt${ledger.receiptProblems.length === 1 ? '' : 's'} could not be accepted:\n\n${ledger.receiptProblems.map(problem => `- ${problem}`).join('\n')}`
       : 'None: every receipt beside a pinned program was accepted.',
@@ -392,12 +487,15 @@ export function ledgerGuide(ledger: Ledger): string {
   return `${lines.join('\n')}`;
 }
 
-/** The ledger on disk with each configuration's pinned and checked programs, and the receipt problems, taken again from here. */
+/** The ledger on disk with everything this repository decides taken again from here: both capabilities of each configuration,
+ * what each one records, and the receipt problems. Only the archive's own counts are kept, because only MAST knows those. */
 export function withRepositoryState(ledger: Ledger, receipts: Awaited<ReturnType<typeof repositoryReceipts>>): Ledger {
-  const held = receipts.configurations;
-  return { ...ledger, configurations: ledger.configurations.map(entry => ({ ...entry,
-    programs: [...held.get(entry.configuration)?.programs ?? []].sort(), checked: [...held.get(entry.configuration)?.checked ?? []].sort() })),
-  receiptProblems: receipts.problems };
+  const described = new Map(HST_CONFIGURATIONS.map(entry => [entry.configuration, entry]));
+  return { ...ledger, configurations: ledger.configurations.map(entry => {
+    const { note: _dropped, ...rest } = entry, description = described.get(entry.configuration) ?? entry;
+    return { ...rest, records: description.records, draws: description.draws,
+      ...(description.note === undefined ? {} : { note: description.note }), ...capabilities(entry.configuration, receipts) };
+  }), receiptProblems: receipts.problems };
 }
 
 /** Every receipt problem, said once and counted against the run: a ledger that reports one has not proved what it lists. */

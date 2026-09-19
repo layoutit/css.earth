@@ -6,7 +6,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { PROGRAMS } from './archive.mts';
-import { parseReproductionReceipt, repositoryReceipts } from './archive-ledger.mts';
+import { parseReproductionReceipt, recalibrationTool, repositoryReceipts } from './archive-ledger.mts';
 
 const read = async (name: string) => JSON.parse(await readFile(resolve(PROGRAMS, name), 'utf8')) as Record<string, unknown>;
 
@@ -66,4 +66,52 @@ test('a receipt is read as the external value it is', () => {
 test('every receipt beside the pinned programs is accepted', async () => {
   const { problems } = await repositoryReceipts();
   assert.deepEqual(problems, [], 'run node tools/objects/hst/archive-ledger.mts --local');
+});
+
+/** A scratch repository holding one archive-final program and whatever record a case writes beside it. */
+async function archiveScratch(record: unknown, program = 'europa-ghrs-5376') {
+  const root = await mkdtemp(resolve(tmpdir(), 'hst-archive-final-')), directory = resolve(root, 'tools/objects/hst/programs');
+  await mkdir(directory, { recursive: true });
+  await writeFile(resolve(directory, `${program}.archive-final.json`), `${JSON.stringify(await read(`${program}.archive-final.json`), null, 2)}\n`);
+  if (record !== undefined) await writeFile(resolve(directory, `${program}.archive-final.product.json`), typeof record === 'string' ? record : `${JSON.stringify(record, null, 2)}\n`);
+  return root;
+}
+
+test('an instrument whose pipeline is retired can still be qualified on the archive’s own product, and is never counted as re-calibrated', async () => {
+  const root = await archiveScratch(await read('europa-ghrs-5376.archive-final.product.json'));
+  try {
+    const { archiveFinal, configurations, problems } = await repositoryReceipts(root);
+    assert.deepEqual([...archiveFinal.get('HRS/1')!.qualified], ['europa-ghrs-5376']);
+    assert.deepEqual(problems, []);
+    // The two capabilities never bleed into one another: nothing was re-calibrated on HRS/1 and no pipeline for it exists here.
+    assert.equal(configurations.get('HRS/1'), undefined, 'an archive-final program is not a pinned re-calibration program');
+    assert.equal(recalibrationTool('HRS/1'), null);
+    assert.equal(recalibrationTool('WFC3/IR'), 'tools/objects/hst/calibrate.mts', 'a pipeline that is installed is named even where nothing has been run on it');
+    assert.equal(recalibrationTool('STIS'), null, 'a configuration with no detector is a product of products, with no raw exposure behind it');
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a record that cannot be read, names something else or claims agreement qualifies nothing and is reported', async () => {
+  const record = await read('europa-ghrs-5376.archive-final.product.json');
+  const parameters = record.parameters as Record<string, unknown>, outputs = record.outputs as Record<string, unknown>[];
+  const evidence = record.evidence as Record<string, unknown>[];
+  for (const [why, value] of [
+    ['no record at all', undefined],
+    ['unreadable', '{ "schema": "cssearth-telescope-'],
+    ['another stage', { ...record, stage: 'calibrate' }],
+    ['another observation', { ...record, parameters: { ...parameters, observation: 'z2cf0208t' } }],
+    ['another configuration', { ...record, parameters: { ...parameters, configuration: 'HRS/2' } }],
+    ['software of ours', { ...record, software: [{ name: 'calhrs', version: '1.0' }] }],
+    ['another digest', { ...record, outputs: outputs.map((output, index) => index ? output : { ...output, sha256: 'b'.repeat(64) }) }],
+    ['one file short', { ...record, outputs: outputs.slice(1), evidence: evidence.filter(entry => outputs.slice(1).some(output => output.path === entry.product)) }],
+    ['agreement claimed', { ...record, evidence: [...evidence, { ...evidence[0]!, kind: 'archive-agreement' }] }],
+  ] as const) {
+    const root = await archiveScratch(value);
+    try {
+      const { archiveFinal, problems } = await repositoryReceipts(root);
+      assert.deepEqual([...archiveFinal.get('HRS/1')!.qualified], [], why);
+      assert.deepEqual([...archiveFinal.get('HRS/1')!.programs], ['europa-ghrs-5376'], `${why}: the program is still listed, so the observations do not disappear`);
+      assert.equal(problems.length, 1, why);
+    } finally { await rm(root, { recursive: true, force: true }); }
+  }
 });

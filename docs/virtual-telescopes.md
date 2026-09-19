@@ -28,13 +28,35 @@ A record carries no clock time, so the same run writes the same bytes. The run t
 what it actually used; nothing later rewrites those facts. Evidence is the one thing added afterwards, by the stage that did
 the checking, through `addProductEvidence`: it refuses unless the files on disk are still the ones the record pins.
 
-## The four kinds of evidence
+## Two capabilities, never one
+
+What a repository can do with an instrument is two questions, and they have different answers:
+
+1. **Can it be re-calibrated here?** Is the observatory's own pipeline in our pinned toolchain, and has an observation been
+   re-run through it and compared with the archive's product?
+2. **Does the archive hold a final calibrated product, and have we read one?** Is there a complete product to pin (science
+   values, wavelengths or a world coordinate system, uncertainty, quality flags), and has one been downloaded, checked against
+   the archive's own catalogue and measured here?
+
+An instrument that is retired loses the first and keeps the second. Its pipeline stops being distributed and its calibration is
+frozen, but every observation it took is still in the archive, still calibrated, still usable. Reporting the two as one
+capability would make thousands of real observations vanish from a ledger because a piece of software is no longer installed,
+which is not what happened to them. So the ledgers carry both, and what is only the second is never reported as the first.
+Hubble's retired instruments under that rule are in
+[Hubble](hubble.md#archive-final-products-of-retired-instruments).
+
+## The five kinds of evidence
 
 A receipt's existence establishes nothing. Each entry names what its check is worth:
 
 - **`archive-agreement`**: our re-run matches the observatory's own published product, sample by sample or event by event.
   It establishes that we ran their software the way they ran it. It does **not** establish that the observatory's product is
   right, nor that anything downstream of it is.
+- **`archive-origin`**: the bytes we hold are the observatory's own final product, retrieved from its archive and pinned by
+  size and sha256, with the archive's catalogue and the file's own headers agreeing on which observation it is. It establishes
+  origin and integrity. It does **not** establish that anything here reproduces that calibration, because nothing was re-run
+  and nothing was compared: it is not `archive-agreement`, and a caller asking whether a route reproduces an observatory's
+  pipeline is never answered with it.
 - **`internal-consistency`**: two of our own reductions of the same data agree (two nod halves, two templates, two subsets).
   It establishes that the result does not depend on that choice. It does **not** establish agreement with anyone else, and a
   shared mistake stays invisible to it.
@@ -65,6 +87,7 @@ problem, never counted as a check.
 | JWST imaging (calwebb_image3, coron3) | [JWST imaging](jwst-imaging.md) | `jwst/imaging/image3.mts`, `jwst/imaging/coron3.mts` | `jwst/imaging/compare.mts` against MAST's level-3 product | `archive-agreement` |
 | JWST cubes (calwebb_spec3) | [JWST imaging](jwst-imaging.md) | `jwst/cubes/spec3.mts` | `compareCubeWithMast` against MAST's cube | `archive-agreement` |
 | Hubble (calacs, calwf3, calstis, AstroDrizzle) | [Hubble](hubble.md) | `hst/calibrate.mts`, `hst/drizzle.mts` | `hst/compare.mts` against MAST's own product | `archive-agreement` |
+| Hubble retired instruments (WFPC2, FOS, GHRS) | [Hubble](hubble.md#archive-final-products-of-retired-instruments) | nothing of ours: `hst/archive-final.mts` pins and reads the archive's own final product | the catalogue against the files' own headers, by digest | `archive-origin` |
 | Hubble STIS line stacks | [Hubble](hubble.md) | `hst/line-stack.mts` | its own subsets, and the paper's published brightness | `internal-consistency`, `published-value` |
 | VLT/NACO (ESO pipeline) | [VLT/NACO](naco.md) | `naco/reduce.mts` | `naco/compare.mts`, two of our own reductions | `internal-consistency` |
 | Chandra (CIAO `chandra_repro`) | [Chandra](chandra.md) | `chandra/reprocess.mts` | `chandra/compare.mts`, event by event against the archive | `archive-agreement` |
