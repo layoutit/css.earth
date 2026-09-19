@@ -23,6 +23,7 @@ import { mastDownloadUrl, mastRequest, type MastFile } from '../mast.mts';
 import { isCubeBand, JWST_BANDS, NIRCAM_OCCULTERS, type JwstBand } from './bands.mts';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');
+export const DEFAULT_CRDS_CONTEXT = 'jwst_1535.pmap';
 const NAME = /^[A-Za-z0-9._-]+$/u;
 
 export interface ImagingBand {
@@ -159,8 +160,7 @@ export async function imagingBand(observation: string): Promise<ImagingBand & { 
     ...(coron ? { references: exposures('psf') } : {}), programme: String(obs.proposal_id), target: requireString(obs.target_name) };
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [id, crdsContext, ...observations] = process.argv.slice(2);
+export async function pinImagingProgram(id: string, crdsContext: string, observations: readonly string[]): Promise<{ readonly path: string; readonly program: ImagingProgram }> {
   if (!id || !NAME.test(id) || !crdsContext || !/^jwst_\d+\.pmap$/u.test(crdsContext) || !observations.length)
     throw new TypeError('Usage: archive <program id> <crds context> <level-3 obs_id> [...]');
   const path = resolve(PROGRAMS, `${id}.json`);
@@ -184,4 +184,10 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   await mkdir(PROGRAMS, { recursive: true });
   await writeFile(path, `${JSON.stringify(program, null, 2)}\n`);
   console.log(`IMAGING_PROGRAM ${path}`);
+  return { path, program };
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const [id, crdsContext, ...observations] = process.argv.slice(2);
+  await pinImagingProgram(id!, crdsContext!, observations);
 }

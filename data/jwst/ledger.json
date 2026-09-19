@@ -1,5 +1,5 @@
 {
- "schema": "cssearth-jwst-ledger@1",
+ "schema": "cssearth-jwst-ledger@2",
  "archiveDate": "2026-09-19",
  "modes": [
   {
@@ -54,6 +54,7 @@
    "bands": 4,
    "programs": [
     "europa-1250",
+    "ngc-6720-1558",
     "trappist-1b-miri-1177-007",
     "trappist-1b-miri-1177-008",
     "trappist-1b-miri-1177-009",
@@ -67,6 +68,7 @@
    ],
    "checked": [
     "europa-1250",
+    "ngc-6720-1558",
     "trappist-1b-miri-3077"
    ],
    "shippedObjects": 23
@@ -313,6 +315,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw03716-o032_t008_nirspec_prism-clear",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-11-22T02:09:15.912Z",
+     "endIso": "2023-11-22T02:57:39.206Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "3716"
    ],
@@ -324,6 +336,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01786-o005_t001_nirspec_g395m-f290lp",
+     "programme": "1786",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-06T19:35:00.420Z",
+     "endIso": "2023-09-06T20:47:27.988Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw01786-o001_t001_nirspec_g395m-f290lp",
+     "programme": "1786",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-07T17:32:06.388Z",
+     "endIso": "2023-09-07T18:43:20.999Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "1786"
    ],
@@ -335,6 +365,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw02418-o013_t012_nirspec_prism-clear",
+     "programme": "2418",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-01-02T05:39:03.810Z",
+     "endIso": "2023-01-02T06:04:50.317Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "2418"
    ],
@@ -346,6 +386,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01191-o007_t006_nirspec_prism-clear",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-09T17:56:10.044Z",
+     "endIso": "2022-09-09T18:07:35.752Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1191"
    ],
@@ -357,6 +407,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw08782-o015_t001_nirspec_g235h-f170lp",
+     "programme": "8782",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-08-14T08:51:50.127Z",
+     "endIso": "2025-08-14T09:05:41.724Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw08782-o015_t001_nirspec_g395m-f290lp",
+     "programme": "8782",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-08-14T09:11:26.254Z",
+     "endIso": "2025-08-14T09:25:17.851Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "8782"
    ],
@@ -370,6 +438,7 @@
     "MIRI/SLIT": 1
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "2820"
    ],
@@ -381,6 +450,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw04645-o005_t005_nirspec_prism-clear",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-08-29T14:11:20.807Z",
+     "endIso": "2024-08-29T17:18:19.794Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "4645"
    ],
@@ -393,6 +472,32 @@
     "NIRSPEC/IFU": 3
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw02060-o003_t001_nirspec_g395h-f290lp",
+     "programme": "2060",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-15T06:02:49.533Z",
+     "endIso": "2022-11-15T06:14:07.182Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw02060-o002_t001_nirspec_g395h-f290lp",
+     "programme": "2060",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-25T08:43:04.608Z",
+     "endIso": "2022-11-25T08:54:23.857Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw02060-o001_t001_nirspec_g395h-f290lp",
+     "programme": "2060",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-20T03:53:01.160Z",
+     "endIso": "2023-09-20T04:03:13.914Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "2060",
     "4687"
@@ -406,6 +511,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01244-o001_t001_nirspec_g235h-f170lp",
+     "programme": "1244",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-01-18T22:27:32.332Z",
+     "endIso": "2023-01-18T22:38:00.663Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01244-o001_t001_nirspec_g395h-f290lp",
+     "programme": "1244",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-01-18T22:43:20.611Z",
+     "endIso": "2023-01-18T22:52:36.056Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1244"
    ],
@@ -420,6 +543,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01272-o006_t003_nirspec_prism-clear",
+     "programme": "1272",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-10-13T12:36:46.778Z",
+     "endIso": "2022-10-13T12:45:17.400Z",
+     "filter": "CLEAR;PRISM"
+    },
+    {
+     "id": "jw01272-o106_t003_nirspec_prism-clear",
+     "programme": "1272",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-10-31T04:07:51.245Z",
+     "endIso": "2022-10-31T04:16:21.866Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1272",
     "2820"
@@ -435,6 +576,128 @@
     "NIRSPEC/IFU": 15
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01191-o003_t001_nirspec_g140h-f100lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-22T14:55:15.387Z",
+     "endIso": "2022-09-22T15:05:42.730Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01191-o003_t001_nirspec_g235h-f170lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-22T15:10:57.929Z",
+     "endIso": "2022-09-22T15:23:51.178Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01191-o003_t001_nirspec_g395h-f290lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-22T15:29:03.298Z",
+     "endIso": "2022-09-22T15:51:10.920Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01191-o004_t001_nirspec_g140h-f100lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-24T17:35:06.552Z",
+     "endIso": "2022-09-24T17:45:33.897Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01191-o004_t001_nirspec_g235h-f170lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-24T17:50:48.901Z",
+     "endIso": "2022-09-24T18:03:42.151Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01191-o004_t001_nirspec_g395h-f290lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-24T18:08:48.431Z",
+     "endIso": "2022-09-24T18:30:56.054Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01191-o005_t001_nirspec_g140h-f100lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-18T01:29:16.432Z",
+     "endIso": "2023-04-18T01:39:43.776Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01191-o005_t001_nirspec_g235h-f170lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-18T01:45:04.734Z",
+     "endIso": "2023-04-18T01:57:58.750Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01191-o005_t001_nirspec_g395h-f290lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-18T02:03:04.343Z",
+     "endIso": "2023-04-18T02:25:12.733Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01191-o106_t001_nirspec_g140h-f100lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-19T04:59:16.506Z",
+     "endIso": "2023-04-19T05:09:43.852Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01191-o106_t001_nirspec_g235h-f170lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-19T05:15:04.809Z",
+     "endIso": "2023-04-19T05:27:58.826Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01191-o106_t001_nirspec_g395h-f290lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-19T05:33:04.418Z",
+     "endIso": "2023-04-19T05:55:12.809Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01191-o103_t001_nirspec_g140h-f100lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-21T07:00:42.847Z",
+     "endIso": "2023-04-21T07:11:10.127Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01191-o103_t001_nirspec_g235h-f170lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-21T07:16:31.148Z",
+     "endIso": "2023-04-21T07:29:24.334Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01191-o103_t001_nirspec_g395h-f290lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-21T07:34:30.759Z",
+     "endIso": "2023-04-21T07:56:38.317Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1191",
     "1658"
@@ -448,6 +711,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw05094-o002_t002_nirspec_prism-clear",
+     "programme": "5094",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-08-06T10:15:57.397Z",
+     "endIso": "2025-08-06T10:34:40.818Z",
+     "filter": "CLEAR;PRISM"
+    },
+    {
+     "id": "jw05094-o001_t002_nirspec_prism-clear",
+     "programme": "5094",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-08-06T11:01:57.266Z",
+     "endIso": "2025-08-06T11:20:40.623Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "5094",
     "9442"
@@ -460,6 +741,7 @@
     "NIRCAM/IMAGE": 2
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "8527"
    ],
@@ -473,6 +755,7 @@
     "NIRSPEC/SLIT": 1
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "1245"
    ],
@@ -484,6 +767,40 @@
     "NIRSPEC/IFU": 4
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw03716-o018_t003_nirspec_g235h-f170lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-11-09T01:32:20.396Z",
+     "endIso": "2023-11-09T01:43:46.147Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw03716-o018_t003_nirspec_g395m-f290lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-11-09T01:49:26.636Z",
+     "endIso": "2023-11-09T02:00:52.386Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw03716-o019_t003_nirspec_g235h-f170lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-07-22T01:31:13.461Z",
+     "endIso": "2024-07-22T01:42:10.795Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw03716-o019_t003_nirspec_g395m-f290lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-07-22T01:48:00.948Z",
+     "endIso": "2024-07-22T01:58:57.514Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "3716"
    ],
@@ -498,6 +815,80 @@
     "NIRSPEC/IFU": 9
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01250-o006_t002_nirspec_g140h-f100lp",
+     "programme": "1250",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-09T22:54:14.714Z",
+     "endIso": "2022-11-09T23:08:02.865Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01250-o006_t002_nirspec_g235h-f170lp",
+     "programme": "1250",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-09T23:13:23.576Z",
+     "endIso": "2022-11-09T23:27:11.728Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01250-o006_t002_nirspec_g395h-f290lp",
+     "programme": "1250",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-09T23:32:21.687Z",
+     "endIso": "2022-11-09T23:46:09.838Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw04320-o001_t001_nirspec_g235h-f170lp",
+     "programme": "4320",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-30T01:28:26.307Z",
+     "endIso": "2024-10-30T01:56:54.081Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw04320-o001_t001_nirspec_g395m-f290lp",
+     "programme": "4320",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-30T02:02:43.448Z",
+     "endIso": "2024-10-30T02:48:40.766Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw04604-o006_t002_nirspec_g235h-f170lp",
+     "programme": "4604",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-31T07:06:21.118Z",
+     "endIso": "2024-10-31T07:26:05.401Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw04604-o004_t002_nirspec_g235h-f170lp",
+     "programme": "4604",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-31T15:22:22.561Z",
+     "endIso": "2024-10-31T15:42:06.844Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw04604-o010_t002_nirspec_g235h-f170lp",
+     "programme": "4604",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-31T23:25:16.342Z",
+     "endIso": "2024-10-31T23:45:00.560Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw04604-o002_t002_nirspec_g235h-f170lp",
+     "programme": "4604",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-11-01T07:42:01.689Z",
+     "endIso": "2024-11-01T08:01:45.906Z",
+     "filter": "F170LP;G235H"
+    }
+   ],
    "programmes": [
     "1250",
     "4320",
@@ -511,6 +902,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw08782-o008_t007_nirspec_g235m-f170lp",
+     "programme": "8782",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-08-27T13:55:20.233Z",
+     "endIso": "2025-08-27T14:09:11.829Z",
+     "filter": "F170LP;G235M"
+    },
+    {
+     "id": "jw08782-o008_t007_nirspec_g395m-f290lp",
+     "programme": "8782",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-08-27T14:14:41.576Z",
+     "endIso": "2025-08-27T14:28:33.172Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "8782"
    ],
@@ -522,6 +931,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01247-o414_t611_nirspec_prism-clear",
+     "programme": "1247",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-08T22:12:02.344Z",
+     "endIso": "2022-11-08T22:18:18.144Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1247"
    ],
@@ -535,6 +954,32 @@
     "NIRSPEC/IFU": 3
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01191-o019_t002_nirspec_g140m-f100lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-08-30T07:30:16.798Z",
+     "endIso": "2022-08-30T07:44:08.413Z",
+     "filter": "F100LP;G140M"
+    },
+    {
+     "id": "jw01191-o019_t002_nirspec_g235m-f170lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-08-30T07:49:58.558Z",
+     "endIso": "2022-08-30T08:03:50.173Z",
+     "filter": "F170LP;G235M"
+    },
+    {
+     "id": "jw01191-o019_t002_nirspec_g395m-f290lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-08-30T08:09:40.315Z",
+     "endIso": "2022-08-30T08:33:15.419Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "1191",
     "6064"
@@ -550,6 +995,112 @@
     "NIRSPEC/IFU": 13
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01250-o002_t001_nirspec_g140h-f100lp",
+     "programme": "1250",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-23T07:39:55.331Z",
+     "endIso": "2022-11-23T07:53:42.713Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01250-o002_t001_nirspec_g235h-f170lp",
+     "programme": "1250",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-23T07:59:04.194Z",
+     "endIso": "2022-11-23T08:12:51.576Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01250-o002_t001_nirspec_g395h-f290lp",
+     "programme": "1250",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-23T08:18:02.305Z",
+     "endIso": "2022-11-23T08:31:49.686Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw04023-o001_t001_nirspec_g235h-f170lp",
+     "programme": "4023",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-10T05:25:43.134Z",
+     "endIso": "2024-01-10T05:44:32.634Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw04023-o001_t001_nirspec_g395h-f290lp",
+     "programme": "4023",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-10T05:49:41.890Z",
+     "endIso": "2024-01-10T06:19:15.640Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw04023-o002_t001_nirspec_g235h-f170lp",
+     "programme": "4023",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-09-23T08:12:39.993Z",
+     "endIso": "2024-09-23T08:31:31.348Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw04023-o002_t001_nirspec_g395h-f290lp",
+     "programme": "4023",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-09-23T08:36:38.747Z",
+     "endIso": "2024-09-23T09:06:14.289Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw04023-o003_t001_nirspec_g235h-f170lp",
+     "programme": "4023",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-09-27T16:23:47.246Z",
+     "endIso": "2024-09-27T16:42:34.761Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw04023-o003_t001_nirspec_g395h-f290lp",
+     "programme": "4023",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-09-27T16:47:46.002Z",
+     "endIso": "2024-09-27T17:17:17.767Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw09230-o004_t001_nirspec_g395h-f290lp",
+     "programme": "9230",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-01-29T05:35:28.399Z",
+     "endIso": "2025-01-29T06:05:10.723Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw09230-o003_t001_nirspec_g395h-f290lp",
+     "programme": "9230",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-02-10T04:28:36.905Z",
+     "endIso": "2025-02-10T04:58:22.816Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw09230-o001_t001_nirspec_g395h-f290lp",
+     "programme": "9230",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-02-10T17:26:26.344Z",
+     "endIso": "2025-02-10T17:56:08.669Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw09230-o002_t001_nirspec_g395h-f290lp",
+     "programme": "9230",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-02-11T08:24:53.684Z",
+     "endIso": "2025-02-11T08:54:25.514Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1250",
     "4023",
@@ -568,6 +1119,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw02574-o002_t002_nirspec_g395m-f290lp",
+     "programme": "2574",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-09T09:00:45.960Z",
+     "endIso": "2022-11-09T09:26:17.785Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw02574-o002_t002_nirspec_g235m-f170lp",
+     "programme": "2574",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-09T09:31:24.132Z",
+     "endIso": "2022-11-09T09:41:07.767Z",
+     "filter": "F170LP;G235M"
+    }
+   ],
    "programmes": [
     "2574"
    ],
@@ -579,6 +1148,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw04645-o006_t006_nirspec_prism-clear",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-12-17T15:33:54.030Z",
+     "endIso": "2024-12-17T16:50:58.767Z",
+     "filter": "CLEAR;PRISM"
+    },
+    {
+     "id": "jw04645-o007_t006_nirspec_prism-clear",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-12-19T08:44:34.710Z",
+     "endIso": "2024-12-19T10:01:53.974Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "4645"
    ],
@@ -591,6 +1178,32 @@
     "NIRSPEC/IFU": 3
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01373-o028_t001_nirspec_g395h-f290lp",
+     "programme": "1373",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-08-03T19:32:16.460Z",
+     "endIso": "2022-08-03T20:12:53.739Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01373-o020_t001_nirspec_prism-clear",
+     "programme": "1373",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-08-05T11:40:53.938Z",
+     "endIso": "2022-08-05T12:21:01.138Z",
+     "filter": "CLEAR;PRISM"
+    },
+    {
+     "id": "jw01373-o019_t001_nirspec_g395h-f290lp",
+     "programme": "1373",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-08-07T01:09:57.659Z",
+     "endIso": "2022-08-07T01:50:34.938Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1373"
    ],
@@ -604,6 +1217,72 @@
     "NIRSPEC/IFU": 8
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01273-o002_t001_nirspec_g140m-f100lp",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-12T07:28:03.732Z",
+     "endIso": "2023-03-12T07:42:09.952Z",
+     "filter": "F100LP;G140M"
+    },
+    {
+     "id": "jw01273-o010_t001_nirspec_g140m-f100lp",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-12T13:16:44.222Z",
+     "endIso": "2023-03-12T13:20:37.644Z",
+     "filter": "F100LP;G140M"
+    },
+    {
+     "id": "jw01273-o102_t001_nirspec_g140m-f100lp",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-07-18T14:17:02.752Z",
+     "endIso": "2023-07-18T14:27:59.277Z",
+     "filter": "F100LP;G140M"
+    },
+    {
+     "id": "jw01273-o102_t001_nirspec_g235m-f170lp",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-07-18T14:33:20.287Z",
+     "endIso": "2023-07-18T14:44:16.748Z",
+     "filter": "F170LP;G235M"
+    },
+    {
+     "id": "jw01273-o102_t001_nirspec_g395m-f290lp",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-07-18T14:49:23.178Z",
+     "endIso": "2023-07-18T15:12:29.099Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw01273-o110_t001_nirspec_g140m-f100lp",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-07-18T15:37:02.619Z",
+     "endIso": "2023-07-18T15:47:59.145Z",
+     "filter": "F100LP;G140M"
+    },
+    {
+     "id": "jw01273-o110_t001_nirspec_g235m-f170lp",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-07-18T15:53:20.090Z",
+     "endIso": "2023-07-18T16:04:16.616Z",
+     "filter": "F170LP;G235M"
+    },
+    {
+     "id": "jw01273-o110_t001_nirspec_g395m-f290lp",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-07-18T16:09:37.575Z",
+     "endIso": "2023-07-18T16:32:43.558Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "1273"
    ],
@@ -617,6 +1296,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01563-o005_t003_nirspec_prism-clear",
+     "programme": "1563",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-05T22:55:09.272Z",
+     "endIso": "2023-09-06T02:20:52.728Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1563",
     "2780",
@@ -635,6 +1324,7 @@
     "NRC_TSGRISM": 4,
     "NRC_TSIMAGE": 4
    },
+   "records": [],
    "programmes": [
     "1185",
     "1274",
@@ -650,6 +1340,7 @@
    "timeSeriesVisits": {
     "MIR_LRS-SLITLESS": 4
    },
+   "records": [],
    "programmes": [
     "2001",
     "2021"
@@ -665,6 +1356,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01244-o010_t006_nirspec_prism-clear",
+     "programme": "1244",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-07T11:12:07.528Z",
+     "endIso": "2022-11-07T11:21:07.355Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1244"
    ],
@@ -677,6 +1378,7 @@
     "NIRCAM/IMAGE": 6
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "1239",
     "6557"
@@ -691,6 +1393,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw03760-o003_t002_nirspec_g235m-f170lp",
+     "programme": "3760",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-12-04T10:58:05.191Z",
+     "endIso": "2023-12-04T11:11:56.853Z",
+     "filter": "F170LP;G235M"
+    },
+    {
+     "id": "jw03760-o003_t002_nirspec_g395m-f290lp",
+     "programme": "3760",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-12-04T11:17:17.831Z",
+     "endIso": "2023-12-04T11:31:09.428Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "3760"
    ],
@@ -703,6 +1423,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw04028-o001_t001_nirspec_g395m-f290lp",
+     "programme": "4028",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-31T15:58:38.656Z",
+     "endIso": "2024-01-31T16:13:43.209Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw04028-o001_t001_nirspec_g235m-f170lp",
+     "programme": "4028",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-31T16:18:49.599Z",
+     "endIso": "2024-01-31T16:33:54.152Z",
+     "filter": "F170LP;G235M"
+    }
+   ],
    "programmes": [
     "4028"
    ],
@@ -714,6 +1452,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw02418-o003_t002_nirspec_prism-clear",
+     "programme": "2418",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-13T12:43:05.358Z",
+     "endIso": "2023-03-13T13:04:58.405Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "2418"
    ],
@@ -726,6 +1474,7 @@
     "MIRI/IMAGE": 3
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "5018"
    ],
@@ -738,6 +1487,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01244-o006_t003_nirspec_g235h-f170lp",
+     "programme": "1244",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-08-01T03:21:31.004Z",
+     "endIso": "2022-08-01T03:31:43.791Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01244-o006_t003_nirspec_g395h-f290lp",
+     "programme": "1244",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-08-01T03:37:33.946Z",
+     "endIso": "2022-08-01T03:47:46.734Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1244"
    ],
@@ -749,6 +1516,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw03716-o022_t005_nirspec_g235h-f170lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-10-29T05:50:12.035Z",
+     "endIso": "2023-10-29T06:05:02.763Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw03716-o022_t005_nirspec_g395m-f290lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-10-29T06:10:52.140Z",
+     "endIso": "2023-10-29T06:39:19.146Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "3716"
    ],
@@ -760,6 +1545,40 @@
     "NIRSPEC/IFU": 4
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw03716-o024_t006_nirspec_g235h-f170lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-10-16T17:23:18.237Z",
+     "endIso": "2023-10-16T17:34:14.933Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw03716-o024_t006_nirspec_g395m-f290lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-10-16T17:40:04.966Z",
+     "endIso": "2023-10-16T17:53:56.563Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw03716-o125_t006_nirspec_g235h-f170lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-07-25T15:50:46.257Z",
+     "endIso": "2024-07-25T16:02:12.008Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw03716-o125_t006_nirspec_g395m-f290lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-07-25T16:07:47.571Z",
+     "endIso": "2024-07-25T16:20:11.623Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "3716"
    ],
@@ -773,6 +1592,56 @@
     "NIRSPEC/IFU": 6
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01373-o016_t007_nirspec_g140h-f100lp",
+     "programme": "1373",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-15T07:20:37.087Z",
+     "endIso": "2022-11-15T08:16:33.735Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01373-o024_t007_nirspec_g395h-f290lp",
+     "programme": "1373",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-15T08:37:01.089Z",
+     "endIso": "2022-11-15T08:50:27.588Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01373-o024_t007_nirspec_g235h-f170lp",
+     "programme": "1373",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-15T08:55:37.723Z",
+     "endIso": "2022-11-15T09:13:21.923Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01373-o035_t007_nirspec_g395h-f290lp",
+     "programme": "1373",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-08-04T06:39:50.653Z",
+     "endIso": "2023-08-04T06:53:19.394Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01373-o035_t007_nirspec_g235h-f170lp",
+     "programme": "1373",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-08-04T06:58:27.351Z",
+     "endIso": "2023-08-04T07:16:13.728Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01373-o036_t007_nirspec_g140h-f100lp",
+     "programme": "1373",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-08-23T17:44:09.840Z",
+     "endIso": "2023-08-23T18:36:11.940Z",
+     "filter": "F100LP;G140H"
+    }
+   ],
    "programmes": [
     "1373",
     "4078",
@@ -790,6 +1659,368 @@
     "NIRSPEC/IFU": 45
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01022-o013_t001_nirspec_g140h-f100lp",
+     "programme": "1022",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-07-03T14:54:27.727Z",
+     "endIso": "2022-07-03T14:59:28.421Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01022-o012_t001_nirspec_g140h-f100lp",
+     "programme": "1022",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-07-03T16:30:11.914Z",
+     "endIso": "2022-07-03T16:35:12.543Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01022-o014_t001_nirspec_g140h-f100lp",
+     "programme": "1022",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-07-04T17:42:38.890Z",
+     "endIso": "2022-07-04T17:47:39.519Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01022-o015_t001_nirspec_g140h-f100lp",
+     "programme": "1022",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-07-04T18:11:38.216Z",
+     "endIso": "2022-07-04T18:16:38.910Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01022-o016_t001_nirspec_g140h-f100lp",
+     "programme": "1022",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-07-04T18:38:18.022Z",
+     "endIso": "2022-07-04T18:43:18.653Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01373-o005_t004_nirspec_g235h-f170lp",
+     "programme": "1373",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-07-27T08:39:09.769Z",
+     "endIso": "2022-07-27T09:02:04.122Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01373-o005_t004_nirspec_g395h-f290lp",
+     "programme": "1373",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-07-27T09:07:15.504Z",
+     "endIso": "2022-07-27T10:00:13.655Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01373-o003_t032_nirspec_g395h-f290lp",
+     "programme": "1373",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-12-24T14:08:31.046Z",
+     "endIso": "2022-12-24T14:52:54.421Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01373-o025_t033_nirspec_g235h-f170lp",
+     "programme": "1373",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-12-24T16:28:49.341Z",
+     "endIso": "2022-12-24T16:49:13.358Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw03665-o002_t001_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-07T12:04:15.179Z",
+     "endIso": "2023-09-07T12:15:53.470Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o003_t036_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-07T12:37:32.232Z",
+     "endIso": "2023-09-07T12:49:10.524Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o004_t035_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-07T13:11:00.038Z",
+     "endIso": "2023-09-07T13:22:38.330Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o005_t034_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-07T13:53:35.428Z",
+     "endIso": "2023-09-07T14:05:13.719Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o006_t033_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-07T14:24:22.210Z",
+     "endIso": "2023-09-07T14:36:00.501Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o007_t032_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-07T14:55:30.432Z",
+     "endIso": "2023-09-07T15:07:08.723Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o008_t031_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-07T15:26:49.406Z",
+     "endIso": "2023-09-07T15:38:27.698Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o009_t030_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-07T15:58:19.133Z",
+     "endIso": "2023-09-07T16:09:57.423Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o015_t024_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-07T23:16:22.179Z",
+     "endIso": "2023-09-07T23:28:00.469Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o016_t023_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T00:01:28.223Z",
+     "endIso": "2023-09-08T00:13:16.884Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o017_t022_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T00:33:08.319Z",
+     "endIso": "2023-09-08T00:44:46.610Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o018_t021_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T01:04:27.293Z",
+     "endIso": "2023-09-08T01:16:05.584Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o019_t020_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T01:38:16.603Z",
+     "endIso": "2023-09-08T01:49:54.893Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o020_t019_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T02:09:24.825Z",
+     "endIso": "2023-09-08T02:21:03.116Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o021_t018_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T02:40:22.295Z",
+     "endIso": "2023-09-08T02:52:00.587Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o022_t017_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T03:11:09.005Z",
+     "endIso": "2023-09-08T03:22:47.297Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o023_t016_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T03:44:26.059Z",
+     "endIso": "2023-09-08T03:56:04.351Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o024_t015_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T04:15:34.346Z",
+     "endIso": "2023-09-08T04:27:12.637Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o025_t014_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T04:46:42.567Z",
+     "endIso": "2023-09-08T04:58:20.859Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o026_t013_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T05:28:13.509Z",
+     "endIso": "2023-09-08T05:39:51.800Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o027_t012_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T06:09:44.515Z",
+     "endIso": "2023-09-08T06:21:22.806Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o028_t011_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T06:51:15.456Z",
+     "endIso": "2023-09-08T07:02:53.748Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o029_t010_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T07:32:46.397Z",
+     "endIso": "2023-09-08T07:44:24.689Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o030_t009_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T08:13:55.900Z",
+     "endIso": "2023-09-08T08:25:34.190Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o031_t008_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T08:54:54.649Z",
+     "endIso": "2023-09-08T09:06:32.941Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o032_t007_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T09:36:04.150Z",
+     "endIso": "2023-09-08T09:47:42.442Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o033_t006_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T10:17:02.900Z",
+     "endIso": "2023-09-08T10:28:41.191Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o034_t005_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T10:58:23.154Z",
+     "endIso": "2023-09-08T11:10:01.444Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o035_t004_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T11:43:18.127Z",
+     "endIso": "2023-09-08T11:54:56.418Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o036_t003_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T12:41:38.348Z",
+     "endIso": "2023-09-08T12:53:16.639Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o037_t002_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T13:40:09.320Z",
+     "endIso": "2023-09-08T13:51:47.612Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o039_t028_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-12-21T00:57:21.537Z",
+     "endIso": "2023-12-21T01:09:02.454Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o038_t029_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-12-21T01:31:53.727Z",
+     "endIso": "2023-12-21T01:43:34.708Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o040_t027_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-14T16:18:29.399Z",
+     "endIso": "2024-01-14T16:30:08.650Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o041_t026_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-31T07:21:41.588Z",
+     "endIso": "2024-01-31T07:33:21.032Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw03665-o042_t025_nirspec_g395h-f290lp",
+     "programme": "3665",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-31T07:52:49.874Z",
+     "endIso": "2024-01-31T08:04:29.317Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1022",
     "1246",
@@ -805,6 +2036,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01444-o001_t001_nirspec_g395m-f290lp",
+     "programme": "1444",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-06-17T22:08:55.020Z",
+     "endIso": "2022-06-17T22:27:38.386Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "1444"
    ],
@@ -816,6 +2057,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw04645-o008_t007_nirspec_prism-clear",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-12-13T16:15:33.776Z",
+     "endIso": "2024-12-13T17:07:50.471Z",
+     "filter": "CLEAR;PRISM"
+    },
+    {
+     "id": "jw04645-o009_t007_nirspec_prism-clear",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-12-20T01:22:16.838Z",
+     "endIso": "2024-12-20T02:14:33.469Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "4645"
    ],
@@ -828,6 +2087,7 @@
     "MIRI/IMAGE": 1
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "11793"
    ],
@@ -840,6 +2100,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw02574-o004_t005_nirspec_g395m-f290lp",
+     "programme": "2574",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-09T10:16:52.329Z",
+     "endIso": "2022-11-09T11:07:56.019Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw02574-o004_t005_nirspec_g235m-f170lp",
+     "programme": "2574",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-09T11:13:16.990Z",
+     "endIso": "2022-11-09T11:27:52.306Z",
+     "filter": "F170LP;G235M"
+    }
+   ],
    "programmes": [
     "2574"
    ],
@@ -852,6 +2130,7 @@
     "MIRI/IMAGE": 1
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "11793"
    ],
@@ -865,6 +2144,7 @@
     "NIRCAM/IMAGE": 2
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "1714"
    ],
@@ -877,6 +2157,7 @@
     "NIRCAM/IMAGE": 8
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "2128",
     "3436"
@@ -892,6 +2173,264 @@
     "NIRSPEC/IFU": 32
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01288-c1005_t014_nirspec_g395h-f290lp",
+     "programme": "1288",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-10T19:54:49.482Z",
+     "endIso": "2022-09-11T06:34:03.397Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01288-o003_t014_nirspec_g395h-f290lp",
+     "programme": "1288",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-10T19:54:49.482Z",
+     "endIso": "2022-09-10T21:30:55.529Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01288-c1005_t014_nirspec_g235h-f170lp",
+     "programme": "1288",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-10T23:15:36.894Z",
+     "endIso": "2022-09-11T06:59:49.571Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01288-o003_t014_nirspec_g235h-f170lp",
+     "programme": "1288",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-10T23:15:36.894Z",
+     "endIso": "2022-09-11T00:52:15.133Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01288-c1005_t014_nirspec_g140h-f100lp",
+     "programme": "1288",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-11T02:38:33.070Z",
+     "endIso": "2022-09-11T07:26:29.442Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01288-o003_t014_nirspec_g140h-f100lp",
+     "programme": "1288",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-11T02:38:33.070Z",
+     "endIso": "2022-09-11T04:15:32.749Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01741-o007_t002_nirspec_g235m-f170lp",
+     "programme": "1741",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-02-05T10:56:45.194Z",
+     "endIso": "2024-02-05T12:02:44.374Z",
+     "filter": "F170LP;G235M"
+    },
+    {
+     "id": "jw01741-o007_t002_nirspec_g395m-f290lp",
+     "programme": "1741",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-02-05T10:56:45.194Z",
+     "endIso": "2024-02-05T13:44:08.080Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw04332-o062_t001_nirspec_g140h-f070lp",
+     "programme": "4332",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-07T21:52:08.395Z",
+     "endIso": "2024-10-08T00:11:59.699Z",
+     "filter": "F070LP;G140H"
+    },
+    {
+     "id": "jw04332-o062_t001_nirspec_g140h-f100lp",
+     "programme": "4332",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-07T21:52:08.395Z",
+     "endIso": "2024-10-08T00:11:59.699Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw04332-o062_t001_nirspec_g235h-f170lp",
+     "programme": "4332",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-07T21:52:08.395Z",
+     "endIso": "2024-10-08T01:42:41.613Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw04332-o062_t001_nirspec_g395h-f290lp",
+     "programme": "4332",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-07T21:52:08.395Z",
+     "endIso": "2024-10-08T03:11:56.041Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw05460-c1006_t001_nirspec_g140h-f100lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T13:27:13.068Z",
+     "endIso": "2024-10-29T02:52:35.802Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw05460-o001_t001_nirspec_g140h-f100lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T13:27:13.068Z",
+     "endIso": "2024-10-28T14:02:02.375Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw05460-c1006_t001_nirspec_g235h-f170lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T14:47:56.712Z",
+     "endIso": "2024-10-29T04:12:50.261Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw05460-o001_t001_nirspec_g235h-f170lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T14:47:56.712Z",
+     "endIso": "2024-10-28T15:22:46.018Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw05460-c1006_t001_nirspec_g395h-f290lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T16:07:27.459Z",
+     "endIso": "2024-10-29T05:32:21.008Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw05460-o001_t001_nirspec_g395h-f290lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T16:07:27.459Z",
+     "endIso": "2024-10-28T16:42:16.765Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw05460-c1007_t002_nirspec_g140h-f100lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T17:43:15.614Z",
+     "endIso": "2024-10-29T02:52:35.802Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw05460-o002_t002_nirspec_g140h-f100lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T17:43:15.614Z",
+     "endIso": "2024-10-28T18:18:04.919Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw05460-c1007_t002_nirspec_g235h-f170lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T19:03:33.145Z",
+     "endIso": "2024-10-29T04:12:50.261Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw05460-o002_t002_nirspec_g235h-f170lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T19:03:33.145Z",
+     "endIso": "2024-10-28T19:38:33.971Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw05460-c1007_t002_nirspec_g395h-f290lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T20:23:15.347Z",
+     "endIso": "2024-10-29T05:32:21.008Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw05460-o002_t002_nirspec_g395h-f290lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T20:23:15.347Z",
+     "endIso": "2024-10-28T20:58:04.654Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw05460-c1005_t003_nirspec_g140h-f100lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T21:54:55.502Z",
+     "endIso": "2024-10-29T02:52:35.802Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw05460-o003_t003_nirspec_g140h-f100lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T21:54:55.502Z",
+     "endIso": "2024-10-28T22:29:59.401Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw05460-c1005_t003_nirspec_g235h-f170lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T23:15:24.554Z",
+     "endIso": "2024-10-29T04:12:50.261Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw05460-o003_t003_nirspec_g235h-f170lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-28T23:15:24.554Z",
+     "endIso": "2024-10-28T23:50:13.861Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw05460-c1005_t003_nirspec_g395h-f290lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-29T00:34:55.237Z",
+     "endIso": "2024-10-29T05:32:21.008Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw05460-o003_t003_nirspec_g395h-f290lp",
+     "programme": "5460",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-29T00:34:55.237Z",
+     "endIso": "2024-10-29T01:09:44.544Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw05804-o009_t023_nirspec_g395m-f290lp",
+     "programme": "5804",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-01-29T13:22:06.356Z",
+     "endIso": "2025-01-29T14:46:14.366Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw05804-o009_t023_nirspec_prism-clear",
+     "programme": "5804",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-01-29T16:20:20.523Z",
+     "endIso": "2025-01-29T17:05:34.357Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1228",
     "1256",
@@ -910,6 +2449,7 @@
     "NIRSPEC/SLIT": 3
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "7929"
    ],
@@ -921,6 +2461,7 @@
     "NIRCAM/IMAGE": 2
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "8527"
    ],
@@ -934,6 +2475,96 @@
     "NIRSPEC/IFU": 11
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01254-o004_t001_nirspec_g140m-f100lp",
+     "programme": "1254",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-01-29T23:34:32.591Z",
+     "endIso": "2023-01-29T23:43:03.212Z",
+     "filter": "F100LP;G140M"
+    },
+    {
+     "id": "jw01254-o004_t001_nirspec_g235m-f170lp",
+     "programme": "1254",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-01-29T23:48:24.207Z",
+     "endIso": "2023-01-30T00:07:07.562Z",
+     "filter": "F170LP;G235M"
+    },
+    {
+     "id": "jw01254-o004_t001_nirspec_g395m-f290lp",
+     "programme": "1254",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-01-30T00:12:13.928Z",
+     "endIso": "2023-01-30T00:45:03.465Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw09453-o002_t001_nirspec_g395h-f290lp",
+     "programme": "9453",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-02-03T16:02:14.364Z",
+     "endIso": "2026-02-03T17:47:02.191Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw09453-o005_t002_nirspec_g395h-f290lp",
+     "programme": "9453",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-02-03T18:17:44.577Z",
+     "endIso": "2026-02-03T18:34:16.622Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw09453-o003_t001_nirspec_g395h-f290lp",
+     "programme": "9453",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-02-03T23:46:23.424Z",
+     "endIso": "2026-02-04T02:06:55.827Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw09453-o006_t002_nirspec_g395h-f290lp",
+     "programme": "9453",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-02-04T02:37:31.875Z",
+     "endIso": "2026-02-04T02:54:03.920Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw09453-o001_t001_nirspec_g395h-f290lp",
+     "programme": "9453",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-02-06T04:57:28.705Z",
+     "endIso": "2026-02-06T07:18:01.172Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw09453-o004_t002_nirspec_g395h-f290lp",
+     "programme": "9453",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-02-06T07:48:16.356Z",
+     "endIso": "2026-02-06T08:04:48.401Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw09453-o013_t001_nirspec_g395h-f290lp",
+     "programme": "9453",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-06-10T11:44:17.707Z",
+     "endIso": "2026-06-10T14:04:50.174Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw09453-o016_t002_nirspec_g395h-f290lp",
+     "programme": "9453",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-06-10T14:34:49.421Z",
+     "endIso": "2026-06-10T14:51:21.466Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1254",
     "9453"
@@ -947,6 +2578,7 @@
     "NIRSPEC/SLIT": 9
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "1415",
     "2787"
@@ -959,6 +2591,40 @@
     "NIRSPEC/IFU": 4
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw03716-o001_t001_nirspec_g235h-f170lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-10-31T05:39:59.828Z",
+     "endIso": "2023-10-31T05:54:06.080Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw03716-o001_t001_nirspec_g395m-f290lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-10-31T05:59:54.946Z",
+     "endIso": "2023-10-31T06:29:20.254Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw03716-o015_t001_nirspec_g235h-f170lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-07-24T10:56:34.209Z",
+     "endIso": "2024-07-24T11:10:54.989Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw03716-o015_t001_nirspec_g395m-f290lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-07-24T11:16:36.625Z",
+     "endIso": "2024-07-24T11:46:16.522Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "3716"
    ],
@@ -970,6 +2636,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw04645-o014_t003_nirspec_g235m-f170lp",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-02-07T17:02:42.644Z",
+     "endIso": "2025-02-07T17:35:03.044Z",
+     "filter": "F170LP;G235M"
+    },
+    {
+     "id": "jw04645-o014_t003_nirspec_g395m-f290lp",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-02-07T17:40:09.413Z",
+     "endIso": "2025-02-07T18:08:36.355Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "4645"
    ],
@@ -984,6 +2668,368 @@
     "NIRSPEC/IFU": 45
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01249-o005_t001_nirspec_g395h-f290lp",
+     "programme": "1249",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-06-22T06:00:35.237Z",
+     "endIso": "2023-06-22T06:41:13.733Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01249-o005_t001_nirspec_g235h-f170lp",
+     "programme": "1249",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-06-22T06:46:23.844Z",
+     "endIso": "2023-06-22T07:27:02.404Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01249-o006_t001_nirspec_g395h-f290lp",
+     "programme": "1249",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-06-22T13:40:53.898Z",
+     "endIso": "2023-06-22T14:21:32.459Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01249-o006_t001_nirspec_g235h-f170lp",
+     "programme": "1249",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-06-22T14:26:42.569Z",
+     "endIso": "2023-06-22T14:56:26.153Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw07570-o049_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-11-24T05:07:53.675Z",
+     "endIso": "2025-11-24T05:55:47.720Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o050_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-11-24T10:41:36.758Z",
+     "endIso": "2025-11-24T11:29:30.869Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o051_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-11-24T15:46:04.454Z",
+     "endIso": "2025-11-24T16:33:58.563Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o052_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-11-27T15:26:33.293Z",
+     "endIso": "2025-11-27T16:14:27.339Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o053_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-11-27T21:02:31.994Z",
+     "endIso": "2025-11-27T21:50:26.040Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o054_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-11-28T02:16:50.855Z",
+     "endIso": "2025-11-28T03:04:44.965Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o055_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-11-29T14:21:46.753Z",
+     "endIso": "2025-11-29T15:09:40.798Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o056_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-11-29T18:10:18.227Z",
+     "endIso": "2025-11-29T18:58:12.337Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o057_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-11-29T23:31:09.472Z",
+     "endIso": "2025-11-30T00:19:03.582Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o058_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-11-30T20:54:02.453Z",
+     "endIso": "2025-11-30T21:41:56.563Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o059_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-01T02:06:28.739Z",
+     "endIso": "2025-12-01T02:54:22.785Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o060_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-01T07:27:03.088Z",
+     "endIso": "2025-12-01T08:14:57.134Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o061_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-02T21:58:15.493Z",
+     "endIso": "2025-12-02T22:08:13.637Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o062_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-03T02:00:39.222Z",
+     "endIso": "2025-12-03T02:48:33.331Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o063_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-03T07:19:52.035Z",
+     "endIso": "2025-12-03T08:07:46.082Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o064_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-04T05:37:41.300Z",
+     "endIso": "2025-12-04T06:25:35.411Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o067_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-06T04:32:48.584Z",
+     "endIso": "2025-12-06T05:20:42.693Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o068_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-06T09:50:51.254Z",
+     "endIso": "2025-12-06T10:13:28.052Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o069_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-06T15:11:03.879Z",
+     "endIso": "2025-12-06T15:58:57.988Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o070_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-08T21:56:12.035Z",
+     "endIso": "2025-12-08T22:44:06.143Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o071_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-09T01:44:18.037Z",
+     "endIso": "2025-12-09T02:32:12.146Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o073_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-10T20:19:18.090Z",
+     "endIso": "2025-12-10T21:07:12.137Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o074_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-11T03:08:26.675Z",
+     "endIso": "2025-12-11T03:56:20.720Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o075_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-11T07:13:36.613Z",
+     "endIso": "2025-12-11T08:01:30.723Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o076_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-12T23:00:00.433Z",
+     "endIso": "2025-12-12T23:47:54.543Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o077_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-13T03:42:25.633Z",
+     "endIso": "2025-12-13T04:30:19.742Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o078_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-13T07:45:48.755Z",
+     "endIso": "2025-12-13T08:33:42.800Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o079_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-14T04:49:17.832Z",
+     "endIso": "2025-12-14T05:37:11.941Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o080_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-15T04:35:42.229Z",
+     "endIso": "2025-12-15T05:23:36.339Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o081_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-15T06:50:42.572Z",
+     "endIso": "2025-12-15T07:38:36.683Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o082_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-16T22:12:49.647Z",
+     "endIso": "2025-12-16T23:00:43.692Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o083_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-17T03:35:33.852Z",
+     "endIso": "2025-12-17T04:23:27.960Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o084_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-17T06:39:07.537Z",
+     "endIso": "2025-12-17T07:27:01.647Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o085_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-18T05:16:50.089Z",
+     "endIso": "2025-12-18T06:04:44.198Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o086_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-18T10:35:04.151Z",
+     "endIso": "2025-12-18T11:22:58.260Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o087_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-18T15:43:46.565Z",
+     "endIso": "2025-12-18T16:31:40.674Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o088_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-20T04:57:55.838Z",
+     "endIso": "2025-12-20T05:45:49.948Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o089_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-21T01:17:36.386Z",
+     "endIso": "2025-12-21T02:05:30.495Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o090_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-21T06:29:20.688Z",
+     "endIso": "2025-12-21T07:17:14.734Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o065_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-23T02:26:37.244Z",
+     "endIso": "2025-12-23T03:14:31.355Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o066_t002_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-12-24T14:56:35.640Z",
+     "endIso": "2025-12-24T15:44:29.751Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1249",
     "1604",
@@ -998,6 +3044,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw04645-o012_t009_nirspec_prism-clear",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-11-23T05:03:09.250Z",
+     "endIso": "2024-11-23T05:21:52.608Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "4645"
    ],
@@ -1009,6 +3065,32 @@
     "NIRSPEC/IFU": 3
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01786-o008_t004_nirspec_g395m-f290lp",
+     "programme": "1786",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-03T08:36:56.718Z",
+     "endIso": "2023-09-03T09:39:40.705Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw01786-o004_t004_nirspec_g395m-f290lp",
+     "programme": "1786",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-11T00:10:33.188Z",
+     "endIso": "2023-09-11T01:12:33.399Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw07813-o004_t004_nirspec_g235h-f170lp",
+     "programme": "7813",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-08-29T14:24:38.244Z",
+     "endIso": "2025-08-29T15:32:57.823Z",
+     "filter": "F170LP;G235H"
+    }
+   ],
    "programmes": [
     "1786",
     "7813"
@@ -1022,6 +3104,32 @@
     "NIRSPEC/IFU": 3
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01231-o001_t001_nirspec_prism-clear",
+     "programme": "1231",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-12-03T15:44:26.767Z",
+     "endIso": "2022-12-03T16:19:13.020Z",
+     "filter": "CLEAR;PRISM"
+    },
+    {
+     "id": "jw01231-o001_t001_nirspec_g235h-f170lp",
+     "programme": "1231",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-12-03T16:25:01.723Z",
+     "endIso": "2022-12-03T17:04:25.208Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01231-o001_t001_nirspec_g395h-f290lp",
+     "programme": "1231",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-12-03T17:09:31.574Z",
+     "endIso": "2022-12-03T18:18:34.869Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1231",
     "6064"
@@ -1035,6 +3143,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw02574-o003_t004_nirspec_g395m-f290lp",
+     "programme": "2574",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-05T07:40:42.570Z",
+     "endIso": "2022-09-05T08:03:48.494Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw02574-o003_t004_nirspec_g235m-f170lp",
+     "programme": "2574",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-05T08:09:38.678Z",
+     "endIso": "2022-09-05T08:19:36.845Z",
+     "filter": "F170LP;G235M"
+    }
+   ],
    "programmes": [
     "2574"
    ],
@@ -1047,6 +3173,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01244-o005_t002_nirspec_g235h-f170lp",
+     "programme": "1244",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-10-01T15:22:06.233Z",
+     "endIso": "2022-10-01T15:32:45.190Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01244-o005_t002_nirspec_g395h-f290lp",
+     "programme": "1244",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-10-01T15:37:51.570Z",
+     "endIso": "2022-10-01T15:46:54.405Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1244"
    ],
@@ -1058,6 +3202,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01247-o318_t633_nirspec_prism-clear",
+     "programme": "1247",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-06-20T01:14:07.441Z",
+     "endIso": "2023-06-20T01:39:10.149Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1247"
    ],
@@ -1069,6 +3223,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01247-o312_t617_nirspec_prism-clear",
+     "programme": "1247",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-08T21:43:13.707Z",
+     "endIso": "2022-11-08T21:49:29.506Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1247"
    ],
@@ -1081,6 +3245,32 @@
     "NIRSPEC/IFU": 3
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw02574-o001_t001_nirspec_g395m-f290lp",
+     "programme": "2574",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-07T20:51:42.617Z",
+     "endIso": "2022-09-07T21:01:11.604Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw02574-o001_t001_nirspec_g235m-f170lp",
+     "programme": "2574",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-07T21:07:01.699Z",
+     "endIso": "2022-09-07T21:13:06.483Z",
+     "filter": "F170LP;G235M"
+    },
+    {
+     "id": "jw01244-o008_t004_nirspec_prism-clear",
+     "programme": "1244",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-07-04T16:08:49.313Z",
+     "endIso": "2023-07-04T16:18:03.732Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1244",
     "2574"
@@ -1094,6 +3284,7 @@
     "MIRI/IMAGE": 1
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "1449"
    ],
@@ -1107,6 +3298,7 @@
     "NIRSPEC/SLIT": 1
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "1245"
    ],
@@ -1118,6 +3310,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw03716-o026_t007_nirspec_g235h-f170lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-11-20T22:37:15.940Z",
+     "endIso": "2023-11-20T23:04:15.399Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw03716-o026_t007_nirspec_g395m-f290lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-11-20T23:10:00.545Z",
+     "endIso": "2023-11-20T23:36:59.942Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "3716"
    ],
@@ -1133,6 +3343,128 @@
     "NIRSPEC/IFU": 15
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01191-o003_t001_nirspec_g140h-f100lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-22T14:55:15.387Z",
+     "endIso": "2022-09-22T15:05:42.730Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01191-o003_t001_nirspec_g235h-f170lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-22T15:10:57.929Z",
+     "endIso": "2022-09-22T15:23:51.178Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01191-o003_t001_nirspec_g395h-f290lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-22T15:29:03.298Z",
+     "endIso": "2022-09-22T15:51:10.920Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01191-o004_t001_nirspec_g140h-f100lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-24T17:35:06.552Z",
+     "endIso": "2022-09-24T17:45:33.897Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01191-o004_t001_nirspec_g235h-f170lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-24T17:50:48.901Z",
+     "endIso": "2022-09-24T18:03:42.151Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01191-o004_t001_nirspec_g395h-f290lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-24T18:08:48.431Z",
+     "endIso": "2022-09-24T18:30:56.054Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01191-o005_t001_nirspec_g140h-f100lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-18T01:29:16.432Z",
+     "endIso": "2023-04-18T01:39:43.776Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01191-o005_t001_nirspec_g235h-f170lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-18T01:45:04.734Z",
+     "endIso": "2023-04-18T01:57:58.750Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01191-o005_t001_nirspec_g395h-f290lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-18T02:03:04.343Z",
+     "endIso": "2023-04-18T02:25:12.733Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01191-o106_t001_nirspec_g140h-f100lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-19T04:59:16.506Z",
+     "endIso": "2023-04-19T05:09:43.852Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01191-o106_t001_nirspec_g235h-f170lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-19T05:15:04.809Z",
+     "endIso": "2023-04-19T05:27:58.826Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01191-o106_t001_nirspec_g395h-f290lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-19T05:33:04.418Z",
+     "endIso": "2023-04-19T05:55:12.809Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01191-o103_t001_nirspec_g140h-f100lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-21T07:00:42.847Z",
+     "endIso": "2023-04-21T07:11:10.127Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01191-o103_t001_nirspec_g235h-f170lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-21T07:16:31.148Z",
+     "endIso": "2023-04-21T07:29:24.334Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01191-o103_t001_nirspec_g395h-f290lp",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-21T07:34:30.759Z",
+     "endIso": "2023-04-21T07:56:38.317Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1191",
     "1658"
@@ -1146,6 +3478,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw02574-o005_t003_nirspec_g395m-f290lp",
+     "programme": "2574",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-21T14:22:11.633Z",
+     "endIso": "2022-11-21T15:20:47.563Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw02574-o005_t003_nirspec_g235m-f170lp",
+     "programme": "2574",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-21T15:25:53.963Z",
+     "endIso": "2022-11-21T16:04:04.424Z",
+     "filter": "F170LP;G235M"
+    }
+   ],
    "programmes": [
     "2574"
    ],
@@ -1157,6 +3507,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw04645-o002_t002_nirspec_prism-clear",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-01-05T10:41:03.545Z",
+     "endIso": "2025-01-05T12:58:11.797Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "4645"
    ],
@@ -1168,6 +3528,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw04645-o011_t008_nirspec_prism-clear",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-12-13T17:39:56.166Z",
+     "endIso": "2024-12-13T18:08:52.356Z",
+     "filter": "CLEAR;PRISM"
+    },
+    {
+     "id": "jw04645-o010_t008_nirspec_prism-clear",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-12-16T13:02:07.684Z",
+     "endIso": "2024-12-16T13:31:03.810Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "4645"
    ],
@@ -1181,6 +3559,104 @@
     "NIRSPEC/IFU": 12
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01731-c1006_t001_nirspec_g140h-f100lp",
+     "programme": "1731",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-05T03:04:33.765Z",
+     "endIso": "2023-03-05T04:28:53.859Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01731-o005_t001_nirspec_g140h-f100lp",
+     "programme": "1731",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-05T03:04:33.765Z",
+     "endIso": "2023-03-05T03:16:36.070Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01731-c1006_t001_nirspec_g235h-f170lp",
+     "programme": "1731",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-05T03:21:55.300Z",
+     "endIso": "2023-03-05T04:46:15.330Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01731-o005_t001_nirspec_g235h-f170lp",
+     "programme": "1731",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-05T03:21:55.300Z",
+     "endIso": "2023-03-05T03:33:57.541Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01731-c1006_t001_nirspec_g395h-f290lp",
+     "programme": "1731",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-05T03:39:06.018Z",
+     "endIso": "2023-03-05T05:03:26.112Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01731-o005_t001_nirspec_g395h-f290lp",
+     "programme": "1731",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-05T03:39:06.018Z",
+     "endIso": "2023-03-05T03:51:08.325Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01731-c1004_t001_nirspec_g140h-f100lp",
+     "programme": "1731",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-05T05:29:01.467Z",
+     "endIso": "2023-03-05T06:57:25.594Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01731-o001_t001_nirspec_g140h-f100lp",
+     "programme": "1731",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-05T05:29:01.467Z",
+     "endIso": "2023-03-05T05:41:11.583Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01731-c1004_t001_nirspec_g235h-f170lp",
+     "programme": "1731",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-05T05:46:30.811Z",
+     "endIso": "2023-03-05T07:14:47.128Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01731-o001_t001_nirspec_g235h-f170lp",
+     "programme": "1731",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-05T05:46:30.811Z",
+     "endIso": "2023-03-05T05:58:33.117Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01731-c1004_t001_nirspec_g395h-f290lp",
+     "programme": "1731",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-05T06:03:41.594Z",
+     "endIso": "2023-03-05T07:31:57.847Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01731-o001_t001_nirspec_g395h-f290lp",
+     "programme": "1731",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-03-05T06:03:41.594Z",
+     "endIso": "2023-03-05T06:15:43.901Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1731"
    ],
@@ -1192,6 +3668,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw04645-o001_t001_nirspec_prism-clear",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-01T13:28:52.769Z",
+     "endIso": "2024-10-01T14:05:21.157Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "4645"
    ],
@@ -1204,6 +3690,32 @@
     "NIRSPEC/IFU": 3
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01273-o004_t002_nirspec_g140m-f100lp",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-01T13:07:12.411Z",
+     "endIso": "2022-09-01T13:21:03.961Z",
+     "filter": "F100LP;G140M"
+    },
+    {
+     "id": "jw01273-o004_t002_nirspec_g235m-f170lp",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-01T13:26:54.101Z",
+     "endIso": "2022-09-01T14:00:12.823Z",
+     "filter": "F170LP;G235M"
+    },
+    {
+     "id": "jw01273-o004_t002_nirspec_prism-clear",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-01T14:06:32.122Z",
+     "endIso": "2022-09-01T14:25:44.661Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1273",
     "6064"
@@ -1216,6 +3728,40 @@
     "NIRSPEC/IFU": 4
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw03716-o020_t004_nirspec_g235h-f170lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-11-27T05:21:33.729Z",
+     "endIso": "2023-11-27T05:32:30.295Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw03716-o020_t004_nirspec_g395m-f290lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-11-27T05:38:20.451Z",
+     "endIso": "2023-11-27T05:50:15.317Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw03716-o021_t004_nirspec_g235h-f170lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-07-12T13:18:46.979Z",
+     "endIso": "2024-07-12T13:29:47.258Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw03716-o021_t004_nirspec_g395m-f290lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-07-12T13:35:33.701Z",
+     "endIso": "2024-07-12T13:47:43.161Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "3716"
    ],
@@ -1227,6 +3773,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01191-o016_t004_nirspec_prism-clear",
+     "programme": "1191",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-12T11:45:34.219Z",
+     "endIso": "2022-11-12T12:01:07.963Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1191"
    ],
@@ -1240,6 +3796,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw05308-o001_t001_nirspec_g395h-f290lp",
+     "programme": "5308",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-11-29T04:00:11.507Z",
+     "endIso": "2024-11-29T13:58:41.750Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1247",
     "5308"
@@ -1252,6 +3818,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01272-o008_t004_nirspec_prism-clear",
+     "programme": "1272",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-09-13T04:53:57.035Z",
+     "endIso": "2022-09-13T05:10:14.489Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1272"
    ],
@@ -1263,6 +3839,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw04645-o004_t004_nirspec_prism-clear",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-08-29T13:24:39.742Z",
+     "endIso": "2024-08-29T13:37:03.774Z",
+     "filter": "CLEAR;PRISM"
+    },
+    {
+     "id": "jw04645-o013_t004_nirspec_prism-clear",
+     "programme": "4645",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-10-02T06:53:06.728Z",
+     "endIso": "2024-10-02T07:50:44.294Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "4645"
    ],
@@ -1275,6 +3869,7 @@
     "MIRI/IMAGE": 1
    },
    "timeSeriesVisits": {},
+   "records": [],
    "programmes": [
     "11793"
    ],
@@ -1286,6 +3881,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01247-o319_t613_nirspec_prism-clear",
+     "programme": "1247",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-10T12:04:58.868Z",
+     "endIso": "2022-11-10T12:15:40.803Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1247"
    ],
@@ -1297,6 +3902,40 @@
     "NIRSPEC/IFU": 4
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw03716-o016_t002_nirspec_g235h-f170lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-10-30T18:33:46.096Z",
+     "endIso": "2023-10-30T18:44:44.454Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw03716-o016_t002_nirspec_g395m-f290lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-10-30T18:50:34.615Z",
+     "endIso": "2023-10-30T19:03:27.846Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw03716-o017_t002_nirspec_g235h-f170lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-07-20T07:57:49.211Z",
+     "endIso": "2024-07-20T08:08:46.481Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw03716-o017_t002_nirspec_g395m-f290lp",
+     "programme": "3716",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-07-20T08:14:22.049Z",
+     "endIso": "2024-07-20T08:27:29.935Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "3716"
    ],
@@ -1310,6 +3949,112 @@
     "NIRSPEC/IFU": 13
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01251-o004_t002_nirspec_g140h-f070lp",
+     "programme": "1251",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-04T21:31:23.939Z",
+     "endIso": "2022-11-04T22:02:33.351Z",
+     "filter": "F070LP;G140H"
+    },
+    {
+     "id": "jw01251-o004_t002_nirspec_g140h-f100lp",
+     "programme": "1251",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-04T21:31:23.939Z",
+     "endIso": "2022-11-04T22:02:33.351Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01251-o004_t002_nirspec_g235h-f170lp",
+     "programme": "1251",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-04T22:07:54.337Z",
+     "endIso": "2022-11-04T22:21:20.773Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01251-o004_t002_nirspec_g395h-f290lp",
+     "programme": "1251",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-04T22:26:30.981Z",
+     "endIso": "2022-11-04T22:50:41.604Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01251-o002_t001_nirspec_g140h-f070lp",
+     "programme": "1251",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-07-11T02:21:59.732Z",
+     "endIso": "2023-07-11T02:31:18.042Z",
+     "filter": "F070LP;G140H"
+    },
+    {
+     "id": "jw02760-o004_t007_nirspec_g140h-f070lp",
+     "programme": "2760",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-07-04T16:03:29.214Z",
+     "endIso": "2025-07-04T16:32:40.224Z",
+     "filter": "F070LP;G140H"
+    },
+    {
+     "id": "jw02760-o004_t007_nirspec_g140h-f100lp",
+     "programme": "2760",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-07-04T16:03:29.214Z",
+     "endIso": "2025-07-04T16:32:40.224Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw02760-o004_t007_nirspec_g235h-f170lp",
+     "programme": "2760",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-07-04T16:38:05.435Z",
+     "endIso": "2025-07-04T16:50:26.336Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw02760-o004_t007_nirspec_g395h-f290lp",
+     "programme": "2760",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-07-04T16:55:42.331Z",
+     "endIso": "2025-07-04T17:08:03.230Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw02760-o005_t007_nirspec_g140h-f070lp",
+     "programme": "2760",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-07-08T18:21:44.012Z",
+     "endIso": "2025-07-08T18:50:53.358Z",
+     "filter": "F070LP;G140H"
+    },
+    {
+     "id": "jw02760-o005_t007_nirspec_g140h-f100lp",
+     "programme": "2760",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-07-08T18:21:44.012Z",
+     "endIso": "2025-07-08T18:50:53.358Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw02760-o005_t007_nirspec_g235h-f170lp",
+     "programme": "2760",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-07-08T18:56:18.506Z",
+     "endIso": "2025-07-08T19:08:39.406Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw02760-o005_t007_nirspec_g395h-f290lp",
+     "programme": "2760",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-07-08T19:13:54.249Z",
+     "endIso": "2025-07-08T19:26:15.085Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1251",
     "2760",
@@ -1323,6 +4068,32 @@
     "NIRSPEC/IFU": 3
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01786-o007_t003_nirspec_g395m-f290lp",
+     "programme": "1786",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-05T15:20:01.323Z",
+     "endIso": "2023-09-05T15:30:57.823Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw01786-o003_t003_nirspec_g395m-f290lp",
+     "programme": "1786",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-10T22:52:15.499Z",
+     "endIso": "2023-09-10T23:44:17.596Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw01786-o017_t003_nirspec_g395m-f290lp",
+     "programme": "1786",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-23T20:13:07.759Z",
+     "endIso": "2023-09-23T21:05:24.385Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "1786"
    ],
@@ -1339,6 +4110,7 @@
     "NIS_SOSS": 9,
     "NRS_BRIGHTOBJ": 29
    },
+   "records": [],
    "programmes": [
     "1201",
     "1331",
@@ -1362,6 +4134,7 @@
    "timeSeriesVisits": {
     "MIR_IMAGE": 10
    },
+   "records": [],
    "programmes": [
     "1177",
     "1279"
@@ -1378,6 +4151,56 @@
     "NIRSPEC/IFU": 6
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01272-o003_t001_nirspec_g140h-f100lp",
+     "programme": "1272",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-12-02T10:00:53.968Z",
+     "endIso": "2022-12-02T10:09:24.589Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01272-o003_t001_nirspec_g235h-f170lp",
+     "programme": "1272",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-12-02T10:14:45.599Z",
+     "endIso": "2022-12-02T10:25:42.060Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01272-o003_t001_nirspec_g395h-f290lp",
+     "programme": "1272",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-12-02T10:30:48.492Z",
+     "endIso": "2022-12-02T10:44:10.860Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01272-o011_t001_nirspec_g140h-f100lp",
+     "programme": "1272",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-12-05T12:09:48.856Z",
+     "endIso": "2022-12-05T12:18:20.948Z",
+     "filter": "F100LP;G140H"
+    },
+    {
+     "id": "jw01272-o011_t001_nirspec_g235h-f170lp",
+     "programme": "1272",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-12-05T12:23:40.487Z",
+     "endIso": "2022-12-05T12:34:36.948Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01272-o011_t001_nirspec_g395h-f290lp",
+     "programme": "1272",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-12-05T12:39:43.380Z",
+     "endIso": "2022-12-05T12:53:07.218Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1272"
    ],
@@ -1389,6 +4212,24 @@
     "NIRSPEC/IFU": 2
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01786-o002_t002_nirspec_g395m-f290lp",
+     "programme": "1786",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-06T21:10:19.318Z",
+     "endIso": "2023-09-06T23:40:35.306Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw01786-o006_t002_nirspec_g395m-f290lp",
+     "programme": "1786",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-09-08T15:15:18.619Z",
+     "endIso": "2023-09-08T17:45:34.606Z",
+     "filter": "F290LP;G395M"
+    }
+   ],
    "programmes": [
     "1786"
    ],
@@ -1403,6 +4244,400 @@
     "NIRSPEC/IFU": 49
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01248-o002_t001_nirspec_g395h-f290lp",
+     "programme": "1248",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-01-08T15:29:23.915Z",
+     "endIso": "2023-01-08T16:10:03.435Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01248-o002_t001_nirspec_g235h-f170lp",
+     "programme": "1248",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-01-08T16:15:12.520Z",
+     "endIso": "2023-01-08T16:55:52.104Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01248-o004_t001_nirspec_g395h-f290lp",
+     "programme": "1248",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-01-08T20:58:09.572Z",
+     "endIso": "2023-01-08T21:38:57.604Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01248-o004_t001_nirspec_g235h-f170lp",
+     "programme": "1248",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-01-08T21:44:06.689Z",
+     "endIso": "2023-01-08T22:24:46.209Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw01248-o006_t001_nirspec_g395h-f290lp",
+     "programme": "1248",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-01-09T02:44:01.551Z",
+     "endIso": "2023-01-09T03:24:41.071Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw01248-o006_t001_nirspec_g235h-f170lp",
+     "programme": "1248",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-01-09T03:29:50.157Z",
+     "endIso": "2023-01-09T04:10:29.677Z",
+     "filter": "F170LP;G235H"
+    },
+    {
+     "id": "jw05073-o001_t001_nirspec_g395h-f290lp",
+     "programme": "5073",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-01-19T09:10:42.078Z",
+     "endIso": "2025-01-20T00:36:53.527Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o001_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-03T22:29:00.191Z",
+     "endIso": "2026-01-03T23:05:14.012Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o002_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-04T03:22:29.942Z",
+     "endIso": "2026-01-04T03:58:43.764Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o003_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-04T08:34:23.333Z",
+     "endIso": "2026-01-04T09:10:37.153Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o004_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-06T02:00:39.238Z",
+     "endIso": "2026-01-06T02:36:53.059Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o005_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-06T07:20:11.060Z",
+     "endIso": "2026-01-06T07:56:24.881Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o006_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-06T12:39:10.370Z",
+     "endIso": "2026-01-06T13:15:24.191Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o007_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-08T21:48:04.029Z",
+     "endIso": "2026-01-08T22:24:17.850Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o008_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-09T03:49:52.871Z",
+     "endIso": "2026-01-09T04:26:06.693Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o009_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-09T09:34:54.547Z",
+     "endIso": "2026-01-09T10:11:08.432Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o010_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-10T08:30:23.287Z",
+     "endIso": "2026-01-10T09:06:37.108Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o011_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-10T14:01:38.531Z",
+     "endIso": "2026-01-10T14:37:52.351Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o012_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-10T19:45:11.119Z",
+     "endIso": "2026-01-10T20:21:24.940Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o013_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-13T06:14:27.478Z",
+     "endIso": "2026-01-13T06:50:41.299Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o014_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-13T10:58:32.836Z",
+     "endIso": "2026-01-13T11:34:46.657Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o015_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-13T18:07:22.092Z",
+     "endIso": "2026-01-13T18:43:35.844Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o016_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-15T09:20:14.622Z",
+     "endIso": "2026-01-15T09:56:28.443Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o017_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-15T16:04:44.402Z",
+     "endIso": "2026-01-15T16:40:58.223Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o018_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-15T21:45:49.918Z",
+     "endIso": "2026-01-15T22:22:03.739Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o019_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-16T04:07:33.384Z",
+     "endIso": "2026-01-16T04:43:47.205Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o020_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-16T07:56:29.178Z",
+     "endIso": "2026-01-16T08:32:43.000Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o021_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-16T16:04:42.842Z",
+     "endIso": "2026-01-16T16:40:56.663Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o022_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-18T05:56:48.149Z",
+     "endIso": "2026-01-18T06:33:01.970Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o023_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-18T11:40:09.985Z",
+     "endIso": "2026-01-18T12:16:23.806Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o024_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-18T17:40:37.283Z",
+     "endIso": "2026-01-18T18:16:51.105Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o025_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-20T10:13:50.288Z",
+     "endIso": "2026-01-20T10:50:04.109Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o026_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-20T17:26:50.232Z",
+     "endIso": "2026-01-20T18:03:04.052Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o028_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-21T22:20:29.950Z",
+     "endIso": "2026-01-21T22:56:43.771Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o027_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-22T09:21:06.967Z",
+     "endIso": "2026-01-22T09:57:20.788Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o029_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-22T19:08:26.676Z",
+     "endIso": "2026-01-22T19:44:40.498Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o030_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-23T00:59:22.716Z",
+     "endIso": "2026-01-23T01:35:36.536Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o031_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-24T00:30:45.770Z",
+     "endIso": "2026-01-24T01:06:59.591Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o032_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-24T07:07:03.218Z",
+     "endIso": "2026-01-24T07:43:17.039Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o033_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-25T22:04:25.777Z",
+     "endIso": "2026-01-25T22:40:39.598Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o034_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-26T06:39:14.770Z",
+     "endIso": "2026-01-26T07:15:28.592Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o035_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-26T10:49:29.477Z",
+     "endIso": "2026-01-26T11:25:43.298Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o036_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-01-26T18:09:49.867Z",
+     "endIso": "2026-01-26T18:46:03.688Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o037_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-02-16T20:29:52.662Z",
+     "endIso": "2026-02-16T21:06:06.484Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o038_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-02-17T01:12:45.701Z",
+     "endIso": "2026-02-17T01:48:59.523Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o039_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-02-17T05:52:37.174Z",
+     "endIso": "2026-02-17T06:28:50.995Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o040_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-02-18T21:35:51.358Z",
+     "endIso": "2026-02-18T22:12:05.179Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o041_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-02-20T12:48:11.104Z",
+     "endIso": "2026-02-20T13:24:24.925Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw07570-o042_t001_nirspec_g395h-f290lp",
+     "programme": "7570",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-02-20T18:31:58.604Z",
+     "endIso": "2026-02-20T19:08:12.425Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
    "programmes": [
     "1248",
     "2739",
@@ -1423,6 +4658,16 @@
     "NIRSPEC/IFU": 1
    },
    "timeSeriesVisits": {},
+   "records": [
+    {
+     "id": "jw01254-o006_t002_nirspec_prism-clear",
+     "programme": "1254",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-19T14:35:54.298Z",
+     "endIso": "2022-11-19T15:18:12.797Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
    "programmes": [
     "1254",
     "4541"
@@ -1439,6 +4684,7 @@
     "MIR_LRS-SLITLESS": 1,
     "NRS_BRIGHTOBJ": 1
    },
+   "records": [],
    "programmes": [
     "1224",
     "1366"

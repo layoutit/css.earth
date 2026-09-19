@@ -296,7 +296,7 @@ const intervalWords = (intervals: readonly (readonly [number, number])[]): strin
 /** JWST: modes carry the tool and its checked programs; each object carries how many observations it has in each mode. */
 function jwstModes(value: unknown, target: string): TargetMode[] {
   const ledger = requireRecord(value, 'JWST ledger');
-  if (ledger.schema !== 'cssearth-jwst-ledger@1') throw new TypeError(`Unsupported JWST ledger schema ${String(ledger.schema)}.`);
+  if (ledger.schema !== 'cssearth-jwst-ledger@1' && ledger.schema !== 'cssearth-jwst-ledger@2') throw new TypeError(`Unsupported JWST ledger schema ${String(ledger.schema)}.`);
   const archiveDate = requireString(ledger.archiveDate, 'archiveDate');
   const modes = new Map(requireArray(ledger.modes, 'modes').map(raw => { const entry = requireRecord(raw, 'mode'); return [requireString(entry.mode, 'mode'), entry] as const; }));
   const object = requireArray(ledger.objects, 'objects').map(raw => requireRecord(raw, 'object')).find(entry => entry.id === target);
@@ -304,8 +304,14 @@ function jwstModes(value: unknown, target: string): TargetMode[] {
   return Object.entries(requireRecord(object.observations, 'observations')).map(([mode, count]) => {
     const declared = modes.get(mode), programs = declared ? stringList(declared.programs, `${mode} programs`) : [], checked = declared ? stringList(declared.checked, `${mode} checked`) : [];
     const tool = declared ? optionalString(declared.tool, `${mode} tool`) : undefined;
-    return { telescope: 'JWST', mode, archiveDate, observations: { count: requireFiniteNumber(count, `${mode} observations`), scope: 'this-mode' as const },
-      programmes: stringList(object.programmes, 'programmes'), dates: [],
+    const total = requireFiniteNumber(count, `${mode} observations`), records = ledger.schema === 'cssearth-jwst-ledger@2'
+      ? requireArray(object.records, 'JWST observation records').map(raw => requireRecord(raw, 'JWST observation record')).filter(record => record.mode === mode).map(record => ({
+        id: requireString(record.id, 'JWST observation id'), programme: requireString(record.programme, 'JWST observation programme'), startIso: requireString(record.startIso, 'JWST observation start'),
+        endIso: requireString(record.endIso, 'JWST observation end'), filter: requireString(record.filter, 'JWST observation filter') })) : [];
+    const recordsComplete = ledger.schema === 'cssearth-jwst-ledger@2' && records.length === total;
+    return { telescope: 'JWST', mode, archiveDate, observations: { count: total, scope: 'this-mode' as const, ...(records.length ? { records } : {}) },
+      programmes: stringList(object.programmes, 'programmes'), dates: records.map(record => ({ id: record.id, startIso: record.startIso, endIso: record.endIso })),
+      ...(recordsComplete ? { datesComplete: true } : {}),
       toolkit: { ...(tool ? { tool } : {}), programs, checked, receipts: [] } };
   });
 }
