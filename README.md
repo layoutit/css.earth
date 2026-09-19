@@ -8,6 +8,12 @@ Join [chat.polycss.com](https://chat.polycss.com) for support and community disc
 
 <img src=".github/assets/planets-contact-sheet.webp" alt="The eight planets, Mercury to Neptune, each rendered as DOM and CSS markup" width="960">
 
+## Motivation
+
+Space agencies and observatories publish decades of public data, but it is buried in archives, formats and papers that are hard to access for the general public. css.earth mounts that data in the 3D DOM, with every pixel traceable to the original source.
+
+Other universe browsers already exist, and many of them inspired this platform: NASA's [Eyes on the Solar System](https://eyes.nasa.gov/apps/solar-system/), [OpenSpace](https://www.openspaceproject.com/), [Celestia](https://celestiaproject.space/), [Stellarium](https://stellarium.org/) and [Google Earth](https://earth.google.com/). The difference is that [css.earth](https://css.earth) does not need WebGL: it runs in any modern browser, which makes it easier to open and share. It even works without JavaScript!
+
 ## What You Can Explore
 
 Every object has its own URL and they all share one camera, so you can fly from Saturn to another galaxy without leaving the page. There are 495 bodies so far, plus the nebulae and galaxies below.
@@ -29,14 +35,6 @@ Stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and pla
 The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus the Pleiades cluster. Beyond them: the Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group and the nearby universe.
 
 <img src=".github/assets/nebulae-galaxies.webp" alt="The Crab Nebula as a 3D volume, and the Milky Way seen at an angle from outside, rendered as DOM and CSS markup" width="960">
-
-## Motivation
-
-Space agencies and observatories publish decades of public data, but it is buried in archives, formats and papers that are hard to access for the general public. css.earth mounts that data in the 3D DOM, with every surface traceable to the original product. Every pixel has a source.
-
-Other universe browsers already exist, and many of them inspired this platform: NASA's [Eyes on the Solar System](https://eyes.nasa.gov/apps/solar-system/), [OpenSpace](https://www.openspaceproject.com/), [Celestia](https://celestiaproject.space/), [Stellarium](https://stellarium.org/) and [Google Earth](https://earth.google.com/). 
-
-The key difference is that css.earth does not need WebGL: it runs in any modern browser, which makes it easier to open and share. It even works without JavaScript!
 
 ## Datasets
 
