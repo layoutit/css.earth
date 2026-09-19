@@ -1,3 +1,7 @@
+import * as applicationPolicy from "../../site/runtime-policy.mts";
+// These timing and anchoring cases isolate the bounded wheel response; renderer
+// wheel tests separately exercise the application policy with release inertia.
+const runtimePolicy = { ...applicationPolicy, WHEEL_ZOOM_INERTIA: null };
 import assert from "node:assert/strict";
 import test from "node:test";
 import type { CameraDelta, CameraUpdate } from '../renderers/css/navigation/types.ts';
@@ -11,7 +15,7 @@ import {
   createPreparedWheelZoomControls,
   PREPARED_WHEEL_ZOOM,
   zoomOutRayRotation,
-} from "./prepared-wheel-zoom.mts";
+} from "../renderers/css/dist/platform/prepared-wheel-zoom.js";
 
 for (const speedMultiplier of [1, WHEEL_ZOOM_SPEED_MULTIPLIER]) test(
 `wheel zoom retains its timing, anchoring and cancellation at speed ${speedMultiplier}`, (t) => {
@@ -34,7 +38,7 @@ for (const speedMultiplier of [1, WHEEL_ZOOM_SPEED_MULTIPLIER]) test(
   const surface = new Surface();
   const camera = cameraFixture();
   const published: CameraDelta[] = [];
-  const controls = createPreparedWheelZoomControls({
+  const controls = createPreparedWheelZoomControls({ runtimePolicy,
     inputSurface:surface as unknown as HTMLElement, camera,
     minimumZoom:.4, maximumZoom:4, speedMultiplier, useScrollDistance: false,
     trackballMetrics:() => ({ centerX:300, centerY:300,
@@ -81,7 +85,7 @@ test("wheel steps use a gentler gain without clipping precision gestures", async
   t.after(() => { globalThis.HTMLElement = prior; });
   function fixture() {
     const surface = new Surface(), camera = cameraFixture();
-    const controls = createPreparedWheelZoomControls({ inputSurface: surface.asElement(), camera,
+    const controls = createPreparedWheelZoomControls({ runtimePolicy, inputSurface: surface.asElement(), camera,
       minimumZoom: .4, maximumZoom: 4,
       trackballMetrics: () => ({ centerX: 0, centerY: 0, radius: 120, viewportWidth: 600, surfaceRadius: 120, focalLength: 600 }),
       rotate(value) { assert.ok(value.zoom !== undefined); camera.state.zoom = value.zoom; },
@@ -165,7 +169,7 @@ test("a wheel publication failure removes its listener and pending camera frame"
   const prior=globalThis.HTMLElement;Reflect.set(globalThis, 'HTMLElement', Surface);
   t.after(()=>{globalThis.HTMLElement=prior});
   const inputSurface=new Surface(), errors: unknown[]=[];
-  const controls=createPreparedWheelZoomControls({inputSurface:inputSurface.asElement(),camera:cameraFixture(),
+  const controls=createPreparedWheelZoomControls({ runtimePolicy,inputSurface:inputSurface.asElement(),camera:cameraFixture(),
     minimumZoom:.5,maximumZoom:4,
     trackballMetrics:()=>({centerX:0,centerY:0,radius:100,viewportWidth:600,surfaceRadius:100,focalLength:600}),
     rotate(){throw Error('failed publication')},onError:error=>errors.push(error)});
@@ -184,7 +188,7 @@ test("a perspective dolly scales the distance by the wheel magnitude and never t
   const surface = new Surface();
   const camera = cameraFixture(1000);
   const published: CameraDelta[] = [];
-  const controls = createPreparedWheelZoomControls({
+  const controls = createPreparedWheelZoomControls({ runtimePolicy,
     inputSurface: surface.asElement(), camera, minimumZoom: 0.001, maximumZoom: 4,
     dolly: { stepPerDelta: 0.006 },
     trackballMetrics: () => ({ centerX: 300, centerY: 300, opticalCenterX: 300,
@@ -237,7 +241,7 @@ test("a perspective dolly scales the distance by the wheel magnitude and never t
   surface.dispatch("wheel", { deltaY: -100, timeStamp: 4000 });
   surface.tick(4200);
   assert.ok(near(camera.state.distance, 100000 * Math.exp(-0.6)), "the next gesture dollies again");
-  assert.throws(() => Reflect.apply(createPreparedWheelZoomControls, undefined, [{
+  assert.throws(() => Reflect.apply(createPreparedWheelZoomControls, undefined, [{ runtimePolicy,
     inputSurface: surface.asElement(), camera, minimumZoom: 0.001, maximumZoom: 4,
     dolly: { stepPerDelta: 0 }, trackballMetrics: () => ({}), rotate() {},
   }]), /invalid/u);

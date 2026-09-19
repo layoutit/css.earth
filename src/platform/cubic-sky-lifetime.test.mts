@@ -1,7 +1,8 @@
+import * as runtimePolicy from "../../site/runtime-policy.mts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { Surface, orbitFixture } from "./test/orbit-fixture.mts";
-import { createUnboundedMatrixDragControls } from "./camera-input.mts";
+import { createUnboundedMatrixDragControls } from "../renderers/css/dist/platform/camera-input.js";
 import { errorMessage, type TrackballMetrics } from "../renderers/css/navigation/types.ts";
 
 const trackball = (): TrackballMetrics => ({ centerX: 0, centerY: 0, radius: 200, surfaceRadius: 200, focalLength: 600, viewportWidth: 400 });
@@ -19,7 +20,7 @@ test("drag constructor removes partially attached listeners if initial style pub
       configurable: true,
       set() { throw new Error("style failure"); },
     });
-    assert.throws(() => createUnboundedMatrixDragControls({
+    assert.throws(() => createUnboundedMatrixDragControls({ runtimePolicy,
       inputSurface: nativeSurface(surface),
       trackballMetrics: trackball,
       rotate() {},
@@ -35,7 +36,7 @@ test("drag destruction releases listeners and capture even if interaction comple
   try {
     const surface = new Surface();
     let updates = 0;
-    const controls = createUnboundedMatrixDragControls({
+    const controls = createUnboundedMatrixDragControls({ runtimePolicy,
       inputSurface: nativeSurface(surface),
       trackballMetrics: trackball,
       rotate() { updates += 1; },
@@ -82,7 +83,7 @@ test("native drag publication failure releases capture/listeners and reports ins
   globalThis.HTMLElement = nativeConstructor;
   try {
   const surface = new Surface(), errors: unknown[] = [];
-  const controls = createUnboundedMatrixDragControls({ inputSurface: nativeSurface(surface),
+  const controls = createUnboundedMatrixDragControls({ runtimePolicy, inputSurface: nativeSurface(surface),
       trackballMetrics: trackball,
       rotate() { throw new Error("drag publication"); }, onError: (error) => errors.push(error) });
     surface.dispatch("pointerdown");
@@ -137,7 +138,7 @@ test("disposing during a release publication cannot restart the coast", t => {
   t.after(() => { globalThis.HTMLElement = previous; });
   const surface = new Surface();
   let disposeOnPublish = false;
-  const controls = createUnboundedMatrixDragControls({
+  const controls = createUnboundedMatrixDragControls({ runtimePolicy,
     inputSurface: nativeSurface(surface),
     trackballMetrics: trackball,
     rotate() { if (disposeOnPublish) controls.destroy(); },
@@ -160,7 +161,7 @@ for (const action of ["complete", "wheel", "destroy", "failure"]) {
     const previous = globalThis.HTMLElement;
     globalThis.HTMLElement = nativeConstructor;
     const surface = new Surface(), samples = [], errors = [];
-    const controls = createUnboundedMatrixDragControls({ inputSurface: nativeSurface(surface),
+    const controls = createUnboundedMatrixDragControls({ runtimePolicy, inputSurface: nativeSurface(surface),
       trackballMetrics: trackball,
       rotate() {}, onError: error => errors.push(error) });
     try {
@@ -170,9 +171,13 @@ for (const action of ["complete", "wheel", "destroy", "failure"]) {
       } });
       surface.tick(0);
       if (action === "complete") surface.tick(100);
-      if (action === "wheel") surface.dispatch("wheel", { deltaY: 100 });
+      if (action === "wheel") {
+        surface.dispatch("wheel", { deltaY: 100 });
+        assert.equal(controls.stats().destinationFlyTo.active, true, "wheel accelerates the active destination flight");
+        surface.tick(100 / runtimePolicy.FLIGHT_WHEEL_SPEEDUP);
+      }
       if (action === "destroy") controls.destroy();
-      assert.deepEqual(await completion, { completed: action === "complete" });
+      assert.deepEqual(await completion, { completed: action === "complete" || action === "wheel" });
       const count = samples.length;
       surface.tick(200);
       assert.equal(samples.length, count);
@@ -191,7 +196,7 @@ test("a fresh accelerating drag after interrupting flight owns its own release",
   globalThis.HTMLElement = nativeConstructor;
   t.after(() => { globalThis.HTMLElement = previous; });
   const surface = new Surface();
-  const controls = createUnboundedMatrixDragControls({ inputSurface:nativeSurface(surface),
+  const controls = createUnboundedMatrixDragControls({ runtimePolicy, inputSurface:nativeSurface(surface),
     trackballMetrics:() => ({ centerX:0, centerY:0, radius:200,
       surfaceRadius:200, focalLength:600, viewportWidth:400,
       sceneMatrix:[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] }),

@@ -17,6 +17,7 @@ type DragControls = {
 };
 type DragModule = {
   createUnboundedMatrixDragControls(options: {
+    runtimePolicy: typeof import("../runtime-policy.mts");
     inputSurface: HTMLElement;
     trackballMetrics(): { centerX: number; centerY: number; radius: number; surfaceRadius: number; focalLength: number; viewportWidth: number };
     rotate(update: { rotation: number[] }): void;
@@ -82,7 +83,7 @@ try {
   assert.deepEqual(report.waits, { completedFrames: 2, requestedFrames: 2, observedFrames: 1, cancelledFrames: 1, disposed: true });
 
   await page.evaluate(async () => {
-    const dragPath = '/src/platform/camera-input.mts', policyPath = '/site/runtime-policy.mts';
+    const dragPath = '/src/renderers/css/navigation/camera-input.ts', policyPath = '/site/runtime-policy.mts';
     const { createUnboundedMatrixDragControls } = await import(dragPath) as DragModule;
     const policy = await import(policyPath) as typeof import('../runtime-policy.mts');
     const input = document.querySelector<HTMLElement>('#input');
@@ -91,6 +92,7 @@ try {
     input.addEventListener('pointerdown', event => { state.pointerId = event.pointerId; });
     const bounds = input.getBoundingClientRect();
     const controls = createUnboundedMatrixDragControls({
+      runtimePolicy: policy,
       inputSurface: input,
       trackballMetrics: () => ({ centerX: bounds.x + bounds.width / 2, centerY: bounds.y + bounds.height / 2,
         radius: 180, surfaceRadius: 180, focalLength: 640, viewportWidth: 640 }),
@@ -152,6 +154,8 @@ try {
   assert.equal(after.stats.activeMotionCount, 0);
   assert.equal(after.stats.pendingPointer, false);
   assert.deepEqual(after.errors, []);
+  assert.ok(moduleRequests.has('/src/renderers/css/navigation/camera-input.ts'), 'Vite must load the renderer input owner directly.');
+  assert.ok(![...moduleRequests].some(path => path.startsWith('/src/platform/camera-')), 'Camera input must not load a platform implementation.');
   assert.ok(moduleRequests.has('/site/runtime-policy.mts'), 'Vite must load the typed shared policy directly.');
   assert.ok(moduleRequests.has('/packages/engine/src/runtime/scene-lifetime.ts'), 'Vite must load the canonical typed lifetime owner.');
   assert.ok(moduleRequests.has('/src/renderers/css/runtime/scene-native-waits.ts'), 'Vite must load the typed native waits owner.');

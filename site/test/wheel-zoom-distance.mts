@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import type { Page } from "playwright";
-import { PREPARED_WHEEL_ZOOM } from "../../src/platform/prepared-wheel-zoom.mts";
+import { PREPARED_WHEEL_ZOOM } from "../../src/renderers/css/dist/platform/prepared-wheel-zoom.js";
 import { WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER } from "../runtime-policy.mts";
 import type { CameraBounds, CameraState, ObjectBrowserProfile } from "./browser-profile-types.mts";
 
