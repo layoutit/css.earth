@@ -19,14 +19,22 @@ export interface VerifyOptions {
   readonly pickSample?: (assets: readonly PublishAsset[], count: number) => readonly PublishAsset[];
 }
 
-function headOk(response: Response | null, expectedBytes: number): boolean {
+function expectedContentType(key: string): string {
+  return key.endsWith('.json') ? 'application/json' : 'application/octet-stream';
+}
+
+function headOk(response: Response | null, asset: PublishAsset): boolean {
   if (!response || !response.ok) return false;
+  // Content-addressed bytes are not sufficient when stale R2 metadata changes
+  // the wire representation. JSON published as octet-stream is not compressed
+  // by the edge and can turn a 1.8 MB response into a 9 MB response.
+  if (response.headers.get('content-type')?.split(';', 1)[0]?.trim().toLowerCase() !== expectedContentType(asset.key)) return false;
   // A compressible content type (e.g. `application/json`) can come back content-encoded (br/gzip) with no
   // `content-length` at all — observed live against the real origin once JSON started publishing with that
   // content type. There is then nothing left to compare at the HEAD level; `response.ok` is the whole signal,
   // and exact bytes are still confirmed by the full-content check below (always for JSON, sampled for the rest).
   const contentLength = response.headers.get('content-length');
-  return contentLength === null || Number(contentLength) === expectedBytes;
+  return contentLength === null || Number(contentLength) === asset.bytes;
 }
 
 function defaultSample(assets: readonly PublishAsset[], count: number): readonly PublishAsset[] {
@@ -44,7 +52,7 @@ export async function verifyPublished(assets: readonly PublishAsset[], options: 
   const misses: PublishAsset[] = [];
   for (const asset of assets) {
     const response = await fetcher(url(asset.key), { method: 'HEAD' }).catch(() => null);
-    if (!headOk(response, asset.bytes)) misses.push(asset);
+    if (!headOk(response, asset)) misses.push(asset);
   }
 
   const retried: string[] = [];
@@ -53,7 +61,7 @@ export async function verifyPublished(assets: readonly PublishAsset[], options: 
   const stillMissing: string[] = [];
   for (const asset of misses) {
     const response = await fetcher(url(asset.key), { method: 'HEAD' }).catch(() => null);
-    if (!headOk(response, asset.bytes)) stillMissing.push(asset.key);
+    if (!headOk(response, asset)) stillMissing.push(asset.key);
   }
 
   const jsonAssets = assets.filter(a => a.key.endsWith('.json'));
