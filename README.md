@@ -24,12 +24,6 @@ Stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and pla
 
 <img src=".github/assets/stars-exoplanets.webp" alt="Betelgeuse's imaged surface, and the TRAPPIST-1 system with its seven planets, rendered as DOM and CSS markup" width="960">
 
-### Interstellar Visitors
-
-'Oumuamua, Borisov and 3I/ATLAS.
-
-<img src=".github/assets/interstellar.webp" alt="'Oumuamua and 3I/ATLAS, shown as shape-only ellipsoids, rendered as DOM and CSS markup" width="960">
-
 ### Nebulae
 
 The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus the Pleiades cluster.
@@ -40,7 +34,7 @@ The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus 
 
 The Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group and the nearby universe.
 
-<img src=".github/assets/milky-way-lmc.webp" alt="The Milky Way beside the Large Magellanic Cloud, rendered as DOM and CSS markup" width="960">
+<img src=".github/assets/milky-way.webp" alt="The Milky Way seen at an angle from outside, with its spiral arms and central bar, rendered as DOM and CSS markup" width="960">
 
 ## Motivation
 
