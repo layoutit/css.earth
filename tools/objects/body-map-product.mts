@@ -20,6 +20,7 @@
  * never averaged as if they were one without the caller saying so. */
 import { sha256 } from '../../src/platform/sha256.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../source-values.mts';
+import { combineBodyMaps, type BodyMap } from './jwst/cubes/body-map.mts';
 
 export const BODY_MAP_SCHEMA = 'cssearth-body-map@1';
 const ARCSEC_PER_RADIAN = 206_264.806_247;
@@ -158,9 +159,39 @@ export function assertCombinable(definitions: readonly MeasurementDefinition[], 
   if (policy.time.rule === 'time-invariant' && first.timeDependence !== 'surface-property') throw new TypeError(`${first.quantity} is an instantaneous state; observations ${spreadDays.toFixed(1)} days apart cannot be combined as if time did not matter. Use mosaic-of-snapshots or same-epoch-only.`);
   if (policy.time.rule === 'same-epoch-only' && spreadDays > policy.time.withinDays) throw new RangeError(`The observations span ${spreadDays.toFixed(2)} days; the policy allows ${policy.time.withinDays}.`);
   if (policy.resolution.rule === 'within-factor') {
-    const sizes = observations.map(observation => surfaceResolutionKm(observation).majorKm), ratio = Math.max(...sizes) / Math.min(...sizes);
-    if (ratio > policy.resolution.factor) throw new RangeError(`Surface resolution ranges over a factor of ${ratio.toFixed(2)} (${Math.min(...sizes).toFixed(0)} to ${Math.max(...sizes).toFixed(0)} km); the policy allows ${policy.resolution.factor}.`);
+    // A beam has two axes and either can differ: a round beam and a needle of the same length are not the same resolution.
+    for (const axis of ['majorKm', 'minorKm'] as const) {
+      const sizes = observations.map(observation => surfaceResolutionKm(observation)[axis]), ratio = Math.max(...sizes) / Math.min(...sizes);
+      if (ratio > policy.resolution.factor) throw new RangeError(`Surface resolution along the ${axis === 'majorKm' ? 'major' : 'minor'} axis ranges over a factor of ${ratio.toFixed(2)} (${Math.min(...sizes).toFixed(0)} to ${Math.max(...sizes).toFixed(0)} km); the policy allows ${policy.resolution.factor}.`);
+    }
   }
+}
+
+/** One placed map with what it means: what `combineUnderPolicy` takes. `map.facing` says how squarely each cell was seen. */
+export interface MeasuredMap { readonly map: BodyMap; readonly definition: MeasurementDefinition; readonly frame: BodyMapFrame; readonly observation: BodyMapObservation }
+
+/** THE way several placed maps become one. It refuses what the maps' meaning does not allow, and then does what the policy
+ * says, so the policy a record states is the operation that ran:
+ *
+ * - `time-invariant` and `same-epoch-only`: the maps measure one thing, so a cell is their mean, each counting by how squarely
+ *   it saw the cell (body-map.mts combineBodyMaps).
+ * - `mosaic-of-snapshots`: the maps are different moments, so nothing is averaged. A cell keeps the value and the error of the
+ *   one snapshot that saw it most squarely, and `chosen` says which. Where snapshots overlap they are still compared, and
+ *   the differences are returned, because two moments disagreeing is a measurement and not an error to smooth away. */
+export function combineUnderPolicy(inputs: readonly MeasuredMap[], policy: CombinationPolicy, maximumEmissionDegrees: number) {
+  if (!inputs.length) throw new RangeError('Nothing to combine.');
+  const grid = (map: BodyMap): BodyMapGrid => ({ width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' });
+  assertCombinable(inputs.map(input => input.definition), inputs.map(input => input.frame), inputs.map(input => grid(input.map)), inputs.map(input => input.observation), policy);
+  const averaged = combineBodyMaps(inputs.map(input => input.map), maximumEmissionDegrees);
+  if (policy.time.rule !== 'mosaic-of-snapshots') return { ...averaged, chosen: null as Int16Array | null };
+  const first = inputs[0]!.map, cells = first.width * first.height, depth = new Float32Array(cells).fill(NaN), error = new Float32Array(cells).fill(NaN), facing = new Float32Array(cells), chosen = new Int16Array(cells).fill(-1);
+  let seen = 0, area = 0, total = 0;
+  for (let cell = 0; cell < cells; cell++) {
+    const share = Math.cos((90 - (Math.floor(cell / first.width) + 0.5) * 180 / first.height) * Math.PI / 180); total += share;
+    inputs.forEach(({ map }, index) => { if (Number.isFinite(map.depth[cell]!) && map.facing![cell]! > facing[cell]!) { facing[cell] = map.facing![cell]!; depth[cell] = map.depth[cell]!; error[cell] = map.error[cell]!; chosen[cell] = index; } });
+    if (chosen[cell]! >= 0) { seen++; area += share; }
+  }
+  return { map: { width: first.width, height: first.height, depth, error, seenCells: seen, areaShare: area / total, facing } as BodyMap, overlaps: averaged.overlaps, chosen };
 }
 
 /** Whether two finished maps may be combined under a policy, by their records alone. */

@@ -27,9 +27,9 @@ import { observerCamera } from '../../terrestrial-layers/observer-camera.mts';
 import { mastFile } from '../mast.mts';
 import { readImagingProgram } from '../imaging/image3.mts';
 import { bandDepth, openSpectralCube, type Window } from './spectral-cube.mts';
-import { formatBodyMapProduct, type BodyMapObservation } from '../../body-map-product.mts';
+import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '../../body-map-product.mts';
 import { sha256 } from '../../../../src/platform/sha256.mts';
-import { bodyMapFits, combineBodyMaps, fitDiscCentre, projectBandMap, topRowFirst, type BodyMap } from './body-map.mts';
+import { bodyMapFits, fitDiscCentre, projectBandMap, topRowFirst, type BodyMap } from './body-map.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../../..');
 export const JWST_HORIZONS_CENTER = '500@-170';
@@ -97,16 +97,20 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
         camera: { observerLatitude: round(camera.observerLatitude), observerWestLongitude: round(camera.observerWestLongitude), sunLatitude: round(camera.sunLatitude), sunWestLongitude: round(camera.sunWestLongitude), northAzimuthDegrees: round(camera.northAzimuthDegrees), rangeKm: round(camera.rangeKm, 0) },
         map: { areaShare: round(map.areaShare), depth: { minimum: round(quantile(seen, 0)), median: round(quantile(seen, 0.5)), maximum: round(quantile(seen, 1)) } } });
     }
-    const { map, overlaps } = combineBodyMaps(placed, limit), output = requireString(entry.output, 'output'), quantity = requireString(entry.quantity, 'quantity'), units = requireString(entry.units, 'units');
+    const output = requireString(entry.output, 'output'), quantity = requireString(entry.quantity, 'quantity'), units = requireString(entry.units, 'units');
+    // A band depth is the ground's own, so cubes from different dates are one measurement and a cell is their weighted mean.
+    const definition: MeasurementDefinition = { quantity, units, timeDependence: 'surface-property', source: requireString(measure.source, 'measure.source'),
+      method: { kind: 'band-depth', bandMicrometres: recipe.band, continuumMicrometres: recipe.continuum, continuum: 'straight line through the two window means, each at the mean wavelength of its retained samples', depth: '1 - band mean / continuum at the band' } };
+    const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(await readFile(resolve(source, requireString(rotation.path)))), bodyCode: requireFiniteNumber(rotation.body) } };
+    const policy: CombinationPolicy = { time: { rule: 'time-invariant' }, resolution: { rule: 'as-observed' } };
+    const { map, overlaps } = combineUnderPolicy(placed.map((placedMap, index) => ({ map: placedMap, definition, frame, observation: observations[index]! })), policy, limit);
     const fits = bodyMapFits(map, { TELESCOP: 'JWST', OBJECT: requireString(entry.target), QUANTITY: quantity, NCUBES: String(placed.length) },
       [{ name: quantity, units, values: map.depth }, { name: `${quantity} ERROR`, units, values: map.error }]);
     // What the map means, beside it: the band and continuum that define the number, the frame, and every cube that went in.
     written.set(resolve(source, `${output}.body-map.json`), Buffer.from(formatBodyMapProduct({ schema: 'cssearth-body-map@1',
-      definition: { quantity, units, timeDependence: 'surface-property', source: requireString(measure.source, 'measure.source'),
-        method: { kind: 'band-depth', bandMicrometres: recipe.band, continuumMicrometres: recipe.continuum, continuum: 'straight line through the two window means, each at the mean wavelength of its retained samples', depth: '1 - band mean / continuum at the band' } },
-      frame: { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(await readFile(resolve(source, requireString(rotation.path)))), bodyCode: requireFiniteNumber(rotation.body) } },
+      definition, frame,
       grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, sha256: sha256(fits), value: quantity, uncertainty: `${quantity} ERROR` },
-      mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: { time: { rule: 'time-invariant' as const }, resolution: { rule: 'as-observed' as const } } } : {}) })));
+      mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: policy } : {}) })));
     written.set(resolve(source, output), fits);
     let peak = { value: -Infinity, cell: 0 }; const seen: number[] = [], errors: number[] = [];
     map.depth.forEach((value, cell) => { if (Number.isFinite(value)) { seen.push(value); errors.push(map.error[cell]!); if (value > peak.value) peak = { value, cell }; } });

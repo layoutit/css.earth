@@ -30,9 +30,9 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { ALMA, horizonsTables } from '../sphere-horizons.mts';
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '../terrestrial-layers/observer-cameras.mts';
 import { observerCamera } from '../terrestrial-layers/observer-camera.mts';
-import { formatBodyMapProduct, type BodyMapObservation } from '../body-map-product.mts';
+import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '../body-map-product.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
-import { bodyMapFits, combineBodyMaps, fitDiscCentre, projectBandMap, topRowFirst, type BodyMap } from '../jwst/cubes/body-map.mts';
+import { bodyMapFits, fitDiscCentre, projectBandMap, topRowFirst, type BodyMap } from '../jwst/cubes/body-map.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
 const ARCSEC_PER_RADIAN = 206_264.806_247, AU_KM = 1.495978707e8, DEGREE = Math.PI / 180, MJD_EPOCH_JD = 2_400_000.5;
@@ -111,18 +111,22 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
         camera: { observerLatitude: round(camera.observerLatitude), observerWestLongitude: round(camera.observerWestLongitude), sunLatitude: round(camera.sunLatitude), sunWestLongitude: round(camera.sunWestLongitude), northAzimuthDegrees: round(camera.northAzimuthDegrees), rangeKm: round(camera.rangeKm, 0) },
         map: { areaShare: round(map.areaShare), kelvin: { minimum: round(quantile(seen, 0), 1), median: round(quantile(seen, 0.5), 1), maximum: round(quantile(seen, 1), 1) } } });
     }
-    const { map, overlaps } = combineBodyMaps(placed, limit), quantity = requireString(entry.quantity, 'quantity'), units = requireString(entry.units, 'units');
+    const quantity = requireString(entry.quantity, 'quantity'), units = requireString(entry.units, 'units');
+    // A temperature is the state of the ground at one moment, so sessions are never averaged: each cell keeps the session that
+    // saw it most squarely, and where sessions overlap their difference is reported. Each session carries its own definition,
+    // so sessions imaged at different frequencies are different measurements and the combination refuses them.
+    const definitionAt = (frequencyHz: number): MeasurementDefinition => ({ quantity, units, timeDependence: 'instantaneous-state', source: requireString(entry.source, 'source'),
+      method: { kind: 'brightness-temperature', frequencyGHz: Math.round(frequencyHz / 1e8) / 10, convention: 'Planck', background: 'none added', from: 'self-calibrated continuum image in Jy per beam over the restoring beam solid angle' } });
+    const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(await readFile(resolve(source, requireString(rotation.path)))), bodyCode: requireFiniteNumber(rotation.body) } };
+    const policy: CombinationPolicy = { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'as-observed' } };
+    const { map, overlaps } = combineUnderPolicy(placed.map((placedMap, index) => ({ map: placedMap, definition: definitionAt(frequencies[index]!), frame, observation: observations[index]! })), policy, limit);
     const output = requireString(entry.output, 'output'), fits = bodyMapFits(map, { TELESCOP: 'ALMA', OBJECT: requireString(entry.target), QUANTITY: quantity, NSESSION: String(placed.length) },
       [{ name: quantity, units, values: map.depth }, { name: `${quantity} ERROR`, units, values: map.error }]);
     written.set(resolve(source, output), fits);
-    // What the map means, beside it. A temperature is the state of the ground at one moment, so several sessions are a mosaic
-    // of snapshots and the record says so; sessions at different frequencies would be different measurements and are refused.
-    if (new Set(frequencies.map(frequency => frequency.toFixed(0))).size > 1) throw new Error(`${id} ${mapId}: the sessions were imaged at different frequencies (${frequencies.join(', ')} Hz); their brightness temperatures are not one measurement.`);
     written.set(resolve(source, `${output}.body-map.json`), Buffer.from(formatBodyMapProduct({ schema: 'cssearth-body-map@1',
-      definition: { quantity, units, timeDependence: 'instantaneous-state', source: requireString(entry.source, 'source'), method: { kind: 'brightness-temperature', frequencyHz: frequencies[0]!, convention: 'Planck', background: 'none added', from: 'self-calibrated continuum image in Jy per beam over the restoring beam solid angle' } },
-      frame: { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(await readFile(resolve(source, requireString(rotation.path)))), bodyCode: requireFiniteNumber(rotation.body) } },
+      definition: definitionAt(frequencies[0]!), frame,
       grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, sha256: sha256(fits), value: quantity, uncertainty: `${quantity} ERROR` },
-      mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: { time: { rule: 'mosaic-of-snapshots' as const }, resolution: { rule: 'as-observed' as const } } } : {}) })));
+      mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: policy } : {}) })));
     const seen = [...map.depth].filter(Number.isFinite);
     evidence.push({ id: mapId, sessions, overlaps: overlaps.filter(pair => pair.cells >= 500).map(pair => ({ first: sessions[pair.first]!.session, second: sessions[pair.second]!.session, cells: pair.cells, rmsDifferenceKelvin: round(pair.rmsDifference, 2), correlation: round(pair.correlation, 3) })),
       map: { cells: map.seenCells, areaShare: round(map.areaShare), kelvin: { minimum: round(quantile(seen, 0), 1), median: round(quantile(seen, 0.5), 1), maximum: round(quantile(seen, 1), 1) } } });

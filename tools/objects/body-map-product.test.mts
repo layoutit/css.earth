@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { assertProductsCombinable, definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation, type BodyMapProduct, type MeasurementDefinition } from './body-map-product.mts';
+import type { BodyMap } from './jwst/cubes/body-map.mts';
+import { combineUnderPolicy, assertProductsCombinable, definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation, type BodyMapProduct, type MeasurementDefinition } from './body-map-product.mts';
 
 const salt: MeasurementDefinition = { quantity: 'equivalent width', units: 'Angstrom', timeDependence: 'surface-property', source: 'Trumbo, Brown & Hand 2019, doi:10.1126/sciadv.aaw7123',
   method: { kind: 'equivalent-width', bandAngstrom: [3500, 5300], continuum: { model: 'polynomial', order: 3, anchorsAngstrom: [[3100, 3500], [5300, 5500]] }, reference: 'mean of spectra without the band' } };
@@ -42,4 +43,41 @@ test('a record without a method, a range or a combination rule is refused', () =
   assert.throws(() => parseBodyMapProduct(map(heat, [{ ...seen('a', 2457352.9, 0.05), rangeKm: 0 }])), /range to the body/u);
   assert.throws(() => parseBodyMapProduct(map(heat, [seen('a', 2457343.9, 0.05), seen('b', 2457352.9, 0.05)])), /states how they were combined/u);
   assert.equal(parseBodyMapProduct(map(heat, [seen('a', 2457343.9, 0.05), seen('b', 2457352.9, 0.05)], { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'as-observed' } })).observations.length, 2);
+});
+
+const frame = { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', sha256: 'a'.repeat(64), bodyCode: 502 } };
+/** A 4 x 2 map whose every cell has one value and was seen at one facing. */
+const placed = (value: number, facing: number): BodyMap => ({ width: 4, height: 2, depth: new Float32Array(8).fill(value), error: new Float32Array(8).fill(1), seenCells: 8, areaShare: 1, facing: new Float32Array(8).fill(facing) });
+
+test('the combination runs the policy it states: snapshots are kept, not averaged', () => {
+  const mosaic = { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'as-observed' } } as const;
+  const inputs = [{ map: placed(100, 0.9), definition: heat, frame, observation: seen('nov-17', 2457343.9, 0.05) }, { map: placed(200, 0.7), definition: heat, frame, observation: seen('nov-26', 2457352.9, 0.05) }];
+  const result = combineUnderPolicy(inputs, mosaic, 60);
+  assert.deepEqual([...result.map.depth], Array(8).fill(100), 'each cell keeps the snapshot that saw it most squarely; 100 K and 200 K never become 139 K');
+  assert.deepEqual([...result.chosen!], Array(8).fill(0));
+  assert.equal(result.overlaps[0]!.rmsDifference, 100, 'and the disagreement between the two moments is still reported');
+  const invariant = combineUnderPolicy(inputs.map(input => ({ ...input, definition: salt })), { time: { rule: 'time-invariant' }, resolution: { rule: 'as-observed' } }, 60);
+  assert.ok(invariant.map.depth[0]! > 100 && invariant.map.depth[0]! < 200 && invariant.chosen === null, 'a surface property is a weighted mean');
+});
+
+test('the combination itself refuses maps that are not one measurement', () => {
+  const policy = { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'as-observed' } } as const;
+  assert.throws(() => combineUnderPolicy([{ map: placed(100, 0.9), definition: heat, frame, observation: seen('a', 2457343.9, 0.05) }, { map: placed(0.1, 0.7), definition: salt, frame, observation: seen('b', 2457352.9, 0.05) }], policy, 60), /not the same measurement/u);
+  assert.throws(() => combineUnderPolicy([{ map: placed(100, 0.9), definition: heat, frame, observation: seen('a', 2457343.9, 0.05) }, { map: placed(200, 0.7), definition: heat, frame, observation: seen('b', 2457352.9, 0.05) }], { time: { rule: 'time-invariant' }, resolution: { rule: 'as-observed' } }, 60), /instantaneous state/u);
+});
+
+test('a resolution limit looks at both axes of the beam', () => {
+  const round = { ...seen('round', 2457352.9, 1), angularResolution: { majorArcsec: 1, minorArcsec: 1, basis: 'beam' } }, needle = { ...seen('needle', 2457352.9, 1), angularResolution: { majorArcsec: 1, minorArcsec: 0.01, basis: 'beam' } };
+  assert.throws(() => assertProductsCombinable([map(heat, [round]), map(heat, [needle])], { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'within-factor', factor: 2 } }), /minor axis ranges over a factor of 100/u);
+});
+
+test('no production code averages placed maps except through the policy', async () => {
+  const { readFile, readdir } = await import('node:fs/promises');
+  const root = new URL('./', import.meta.url), offenders: string[] = [];
+  for (const entry of await readdir(root, { recursive: true })) {
+    if (!entry.endsWith('.mts') || entry.endsWith('.test.mts') || entry === 'body-map-product.mts' || entry === 'jwst/cubes/body-map.mts') continue;
+    if (/\bcombineBodyMaps\(/u.test(await readFile(new URL(entry, root), 'utf8'))) offenders.push(entry);
+  }
+  // The slit-scan stage compares trial placements with the averaging primitive as a diagnostic; its shipped map goes through the policy.
+  assert.deepEqual(offenders.filter(entry => entry !== 'hst/slit-scan-map.mts'), []);
 });
