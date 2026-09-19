@@ -91,7 +91,7 @@ test('a product header names its band, with NIRCam narrow filters behind F444W i
   assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'NIRCAM', FILTER: 'F187N', PUPIL: 'CLEAR' })?.id, 'NIRCAM-F187N');
   assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'MIRI', FILTER: 'F1130W' })?.id, 'MIRI-F1130W');
   assert.equal(bandOfHeader({ TELESCOP: 'HST', INSTRUME: 'NIRCAM', FILTER: 'F187N', PUPIL: 'CLEAR' }), undefined);
-  assert.ok(Object.values(JWST_BANDS).every(entry => entry.instrument === 'MIRI' ? entry.pupil === undefined : entry.pupil !== undefined));
+  assert.ok(Object.values(JWST_BANDS).every(entry => entry.instrument === 'NIRCAM' ? entry.pupil !== undefined : entry.pupil === undefined));
 });
 
 test('the recipe grid becomes the resample step’s 0-based reference pixel, centre and scale', () => {
@@ -146,4 +146,17 @@ test('the diffraction spikes of a bright star are masked, and a nearby filament 
   assert.equal(found.mask[Math.round(cy + 25 * Math.sin(Math.PI / 3)) * width + Math.round(cx + 25 * Math.cos(Math.PI / 3))], 1);
   assert.equal(found.mask[40 * width + 130], 0, 'the filament stays');
   assert.equal(found.mask[(cy + 30) * width + cx + 5], 0, 'sky between spikes stays');
+});
+
+test('an integral-field observation is a cube band, built by spec3 from _cal exposures', () => {
+  assert.equal(bandOfFilters('NIRSPEC', 'F290LP;G395H').id, 'NIRSPEC-G395H-F290LP');
+  assert.throws(() => bandOfFilters('NIRSPEC', 'F290LP;G140H'), /No JWST cube band/u);
+  assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'NIRSPEC', EXP_TYPE: 'NRS_IFU', GRATING: 'G395H', FILTER: 'F290LP' })?.id, 'NIRSPEC-G395H-F290LP');
+  assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'NIRSPEC', EXP_TYPE: 'NRS_FIXEDSLIT', GRATING: 'G395H', FILTER: 'F290LP' }), undefined);
+  const cube = { band: 'NIRSPEC-G395H-F290LP', observation: 'jw01250-o002_t001_nirspec_g395h-f290lp', stage: 'spec3', level3: member('jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits'),
+    association: member('jw01250-o002_20260720t083746_spec3_00001_asn.json'), members: [member('jw01250002001_03105_00001_nrs1_cal.fits')] };
+  const program = (bands: unknown[]) => ({ schema: 'cssearth-jwst-imaging-program@1', id: 'europa-1250', programme: '1250', target: 'EUROPA', crdsContext: 'jwst_1535.pmap', bands });
+  assert.equal(parseImagingProgram(program([cube])).bands[0]!.stage, 'spec3');
+  assert.throws(() => parseImagingProgram(program([{ ...cube, stage: undefined }])), /built by spec3/u);
+  assert.throws(() => parseImagingProgram(program([{ ...cube, level3: member('jw01250-o002_t001_nirspec_g395h-f290lp_i2d.fits') }])), /level-3 cube/u);
 });

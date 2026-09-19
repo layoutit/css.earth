@@ -1,0 +1,1444 @@
+{
+ "schema": "cssearth-jwst-ledger@1",
+ "archiveDate": "2026-09-19",
+ "modes": [
+  {
+   "mode": "NIRCAM/IMAGE",
+   "observations": 19388,
+   "targets": 2040,
+   "movingObservations": 480,
+   "tool": "tools/objects/jwst/imaging/image3.mts",
+   "bands": 7,
+   "programs": [
+    "ngc-3132-2733"
+   ],
+   "checked": [
+    "ngc-3132-2733"
+   ],
+   "shippedObjects": 21
+  },
+  {
+   "mode": "NIRCAM/CORON",
+   "observations": 285,
+   "targets": 79,
+   "movingObservations": 0,
+   "tool": "tools/objects/jwst/imaging/coron3.mts",
+   "bands": 75,
+   "programs": [
+    "hd-181327-2780",
+    "hip-65426-1386"
+   ],
+   "checked": [
+    "hd-181327-2780",
+    "hip-65426-1386"
+   ],
+   "shippedObjects": 1
+  },
+  {
+   "mode": "NIRCAM/GRISM",
+   "observations": 8520,
+   "targets": 177,
+   "movingObservations": 0,
+   "tool": null,
+   "bands": 0,
+   "programs": [],
+   "checked": [],
+   "shippedObjects": 1
+  },
+  {
+   "mode": "MIRI/IMAGE",
+   "observations": 6850,
+   "targets": 2111,
+   "movingObservations": 174,
+   "tool": "tools/objects/jwst/reduce-tso.mts",
+   "bands": 4,
+   "programs": [
+    "trappist-1b-miri-1177-007",
+    "trappist-1b-miri-1177-008",
+    "trappist-1b-miri-1177-009",
+    "trappist-1b-miri-1177-010",
+    "trappist-1b-miri-1177-011",
+    "trappist-1b-miri-3077",
+    "trappist-1c-miri-2304-001",
+    "trappist-1c-miri-2304-002",
+    "trappist-1c-miri-2304-003",
+    "trappist-1c-miri-2304-004"
+   ],
+   "checked": [
+    "trappist-1b-miri-3077"
+   ],
+   "shippedObjects": 23
+  },
+  {
+   "mode": "MIRI/CORON",
+   "observations": 68,
+   "targets": 41,
+   "movingObservations": 0,
+   "tool": null,
+   "bands": 0,
+   "programs": [],
+   "checked": [],
+   "shippedObjects": 1
+  },
+  {
+   "mode": "MIRI/IFU",
+   "observations": 25596,
+   "targets": 1428,
+   "movingObservations": 1936,
+   "tool": null,
+   "bands": 0,
+   "programs": [],
+   "checked": [],
+   "shippedObjects": 36
+  },
+  {
+   "mode": "MIRI/SLIT",
+   "observations": 432,
+   "targets": 358,
+   "movingObservations": 24,
+   "tool": null,
+   "bands": 0,
+   "programs": [],
+   "checked": [],
+   "shippedObjects": 8
+  },
+  {
+   "mode": "MIRI/SLITLESS",
+   "observations": 111,
+   "targets": 74,
+   "movingObservations": 0,
+   "tool": "tools/objects/jwst/reduce-tso.mts",
+   "bands": 0,
+   "programs": [
+    "hd-189733b-miri-2021-002",
+    "hd-189733b-miri-2021-011",
+    "wasp-43b-miri-1366"
+   ],
+   "checked": [
+    "hd-189733b-miri-2021-002",
+    "hd-189733b-miri-2021-011",
+    "wasp-43b-miri-1366"
+   ],
+   "shippedObjects": 2
+  },
+  {
+   "mode": "NIRSPEC/IFU",
+   "observations": 2229,
+   "targets": 1256,
+   "movingObservations": 637,
+   "tool": "tools/objects/jwst/cubes/spec3.mts",
+   "bands": 9,
+   "programs": [
+    "europa-1250",
+    "europa-4023-o001",
+    "europa-4023-o002",
+    "europa-4023-o003",
+    "europa-9230-o001",
+    "europa-9230-o002",
+    "europa-9230-o003",
+    "europa-9230-o004",
+    "sn-1987a-1232",
+    "sn-1987a-3131"
+   ],
+   "checked": [
+    "europa-1250",
+    "sn-1987a-1232",
+    "sn-1987a-3131"
+   ],
+   "shippedObjects": 68
+  },
+  {
+   "mode": "NIRSPEC/SLIT",
+   "observations": 3015,
+   "targets": 535,
+   "movingObservations": 42,
+   "tool": null,
+   "bands": 0,
+   "programs": [],
+   "checked": [],
+   "shippedObjects": 6
+  },
+  {
+   "mode": "NIRSPEC/MSA",
+   "observations": 145378,
+   "targets": null,
+   "movingObservations": null,
+   "tool": null,
+   "bands": 0,
+   "programs": [],
+   "checked": [],
+   "shippedObjects": 0
+  },
+  {
+   "mode": "NIRISS/AMI",
+   "observations": 65,
+   "targets": 14,
+   "movingObservations": 1,
+   "tool": null,
+   "bands": 0,
+   "programs": [],
+   "checked": [],
+   "shippedObjects": 1
+  },
+  {
+   "mode": "NIRISS/SOSS",
+   "observations": 143,
+   "targets": 67,
+   "movingObservations": 0,
+   "tool": null,
+   "bands": 0,
+   "programs": [],
+   "checked": [],
+   "shippedObjects": 1
+  },
+  {
+   "mode": "NIRISS/WFSS",
+   "observations": 592,
+   "targets": 31,
+   "movingObservations": 0,
+   "tool": null,
+   "bands": 0,
+   "programs": [],
+   "checked": [],
+   "shippedObjects": 0
+  },
+  {
+   "mode": "NIRISS/IMAGE",
+   "observations": 1745,
+   "targets": 373,
+   "movingObservations": 17,
+   "tool": null,
+   "bands": 0,
+   "programs": [],
+   "checked": [],
+   "shippedObjects": 1
+  }
+ ],
+ "timeSeries": [
+  {
+   "exposure": "MIR_LRS-SLITLESS",
+   "visits": 149,
+   "targets": 105,
+   "shippedObjects": [
+    "hd-189733b",
+    "wasp-43"
+   ],
+   "programs": [
+    "hd-189733b-miri-2021-002",
+    "hd-189733b-miri-2021-011",
+    "wasp-43b-miri-1366"
+   ],
+   "checked": [
+    "hd-189733b-miri-2021-002",
+    "hd-189733b-miri-2021-011",
+    "wasp-43b-miri-1366"
+   ]
+  },
+  {
+   "exposure": "MIR_IMAGE",
+   "visits": 62,
+   "targets": 17,
+   "shippedObjects": [
+    "trappist-1",
+    "trappist-1b"
+   ],
+   "programs": [
+    "trappist-1b-miri-1177-007",
+    "trappist-1b-miri-1177-008",
+    "trappist-1b-miri-1177-009",
+    "trappist-1b-miri-1177-010",
+    "trappist-1b-miri-1177-011",
+    "trappist-1b-miri-3077",
+    "trappist-1c-miri-2304-001",
+    "trappist-1c-miri-2304-002",
+    "trappist-1c-miri-2304-003",
+    "trappist-1c-miri-2304-004"
+   ],
+   "checked": [
+    "trappist-1b-miri-3077"
+   ]
+  },
+  {
+   "exposure": "NRS_BRIGHTOBJ",
+   "visits": 289,
+   "targets": 129,
+   "shippedObjects": [
+    "trappist-1",
+    "wasp-43"
+   ],
+   "programs": [],
+   "checked": []
+  },
+  {
+   "exposure": "NIS_SOSS",
+   "visits": 145,
+   "targets": 66,
+   "shippedObjects": [
+    "trappist-1"
+   ],
+   "programs": [],
+   "checked": []
+  },
+  {
+   "exposure": "NRC_TSGRISM",
+   "visits": 99,
+   "targets": 45,
+   "shippedObjects": [
+    "hd-189733"
+   ],
+   "programs": [],
+   "checked": []
+  },
+  {
+   "exposure": "NRC_TSIMAGE",
+   "visits": 101,
+   "targets": 47,
+   "shippedObjects": [
+    "hd-189733"
+   ],
+   "programs": [],
+   "checked": []
+  }
+ ],
+ "objects": [
+  {
+   "id": "albiorix",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "3716"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "ariel",
+   "observations": {
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1786"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "asteroid-2002-tc302",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "2418"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "asteroid-2002-tx300",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1191"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "astraea",
+   "observations": {
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "8782"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "bienor",
+   "observations": {
+    "MIRI/IFU": 24,
+    "MIRI/IMAGE": 1,
+    "MIRI/SLIT": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "2820"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "caliban",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4645"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "callisto",
+   "observations": {
+    "MIRI/IFU": 24,
+    "NIRSPEC/IFU": 3
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "2060",
+    "4687"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "ceres",
+   "observations": {
+    "MIRI/IFU": 12,
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1244"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "chariklo",
+   "observations": {
+    "MIRI/IFU": 24,
+    "MIRI/IMAGE": 1,
+    "MIRI/SLIT": 1,
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1272",
+    "2820"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "charon",
+   "observations": {
+    "MIRI/IFU": 12,
+    "MIRI/IMAGE": 1,
+    "MIRI/SLIT": 1,
+    "NIRSPEC/IFU": 15
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1191",
+    "1658"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "comet-3i",
+   "observations": {
+    "MIRI/IFU": 32,
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "5094",
+    "9442"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "daphne",
+   "observations": {
+    "NIRCAM/IMAGE": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "8527"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "didymos",
+   "observations": {
+    "MIRI/IFU": 12,
+    "NIRCAM/IMAGE": 24,
+    "NIRSPEC/SLIT": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1245"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "dione",
+   "observations": {
+    "NIRSPEC/IFU": 4
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "3716"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "enceladus",
+   "observations": {
+    "MIRI/IFU": 12,
+    "MIRI/IMAGE": 1,
+    "NIRCAM/IMAGE": 6,
+    "NIRSPEC/IFU": 9
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1250",
+    "4320",
+    "4604"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "eos",
+   "observations": {
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "8782"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "epimetheus",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1247"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "eris",
+   "observations": {
+    "MIRI/SLIT": 1,
+    "NIRCAM/IMAGE": 6,
+    "NIRSPEC/IFU": 3
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1191",
+    "6064"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "europa",
+   "observations": {
+    "MIRI/IFU": 12,
+    "MIRI/IMAGE": 1,
+    "NIRCAM/IMAGE": 6,
+    "NIRSPEC/IFU": 13
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1250",
+    "4023",
+    "9230"
+   ],
+   "drawn": [
+    "NIRSPEC/IFU"
+   ]
+  },
+  {
+   "id": "eurybates",
+   "observations": {
+    "MIRI/IFU": 12,
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "2574"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "galatea",
+   "observations": {
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4645"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "ganymede",
+   "observations": {
+    "MIRI/IFU": 24,
+    "NIRSPEC/IFU": 3
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1373"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "haumea",
+   "observations": {
+    "MIRI/IMAGE": 2,
+    "MIRI/SLIT": 2,
+    "NIRSPEC/IFU": 8
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1273"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "hd-181327",
+   "observations": {
+    "MIRI/CORON": 1,
+    "NIRCAM/CORON": 12,
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1563",
+    "2780",
+    "3662"
+   ],
+   "drawn": [
+    "NIRCAM/CORON"
+   ]
+  },
+  {
+   "id": "hd-189733",
+   "observations": {
+    "NIRCAM/GRISM": 4
+   },
+   "timeSeriesVisits": {
+    "NRC_TSGRISM": 4,
+    "NRC_TSIMAGE": 4
+   },
+   "programmes": [
+    "1185",
+    "1274",
+    "1633"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "hd-189733b",
+   "observations": {
+    "MIRI/SLITLESS": 4
+   },
+   "timeSeriesVisits": {
+    "MIR_LRS-SLITLESS": 4
+   },
+   "programmes": [
+    "2001",
+    "2021"
+   ],
+   "drawn": [
+    "MIRI/SLITLESS",
+    "MIR_LRS-SLITLESS"
+   ]
+  },
+  {
+   "id": "hektor",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1244"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "helix",
+   "observations": {
+    "MIRI/IFU": 12,
+    "NIRCAM/IMAGE": 6
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1239",
+    "6557"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "henrietta",
+   "observations": {
+    "MIRI/IFU": 36,
+    "MIRI/IMAGE": 2,
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "3760"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "himalia",
+   "observations": {
+    "MIRI/SLIT": 1,
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4028"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "huya",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "2418"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "hydra",
+   "observations": {
+    "MIRI/IFU": 24,
+    "MIRI/IMAGE": 3
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "5018"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "hygiea",
+   "observations": {
+    "MIRI/IFU": 12,
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1244"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "hyperion",
+   "observations": {
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "3716"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "iapetus",
+   "observations": {
+    "NIRSPEC/IFU": 4
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "3716"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "io",
+   "observations": {
+    "MIRI/IFU": 44,
+    "NIRISS/AMI": 1,
+    "NIRSPEC/IFU": 6
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1373",
+    "4078",
+    "4565"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "jupiter",
+   "observations": {
+    "MIRI/IFU": 128,
+    "MIRI/IMAGE": 10,
+    "NIRCAM/IMAGE": 57,
+    "NIRISS/IMAGE": 4,
+    "NIRSPEC/IFU": 45
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1022",
+    "1246",
+    "1373",
+    "3665",
+    "9022"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "kleopatra",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1444"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "larissa",
+   "observations": {
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4645"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "leda-38",
+   "observations": {
+    "MIRI/IFU": 12,
+    "MIRI/IMAGE": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "11793"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "leucus",
+   "observations": {
+    "MIRI/IFU": 12,
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "2574"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "libussa",
+   "observations": {
+    "MIRI/IFU": 12,
+    "MIRI/IMAGE": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "11793"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "m1",
+   "observations": {
+    "MIRI/IFU": 48,
+    "MIRI/IMAGE": 10,
+    "NIRCAM/IMAGE": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1714"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "m33",
+   "observations": {
+    "MIRI/IMAGE": 4,
+    "NIRCAM/IMAGE": 8
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "2128",
+    "3436"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "m42",
+   "observations": {
+    "MIRI/IFU": 84,
+    "MIRI/IMAGE": 10,
+    "NIRCAM/IMAGE": 37,
+    "NIRSPEC/IFU": 32
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1228",
+    "1256",
+    "1288",
+    "1741",
+    "3983",
+    "4332",
+    "5460",
+    "5804"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "m8",
+   "observations": {
+    "NIRSPEC/SLIT": 3
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "7929"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "mab",
+   "observations": {
+    "NIRCAM/IMAGE": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "8527"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "makemake",
+   "observations": {
+    "MIRI/IMAGE": 2,
+    "MIRI/SLIT": 1,
+    "NIRSPEC/IFU": 11
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1254",
+    "9453"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "mars",
+   "observations": {
+    "NIRCAM/IMAGE": 14,
+    "NIRSPEC/SLIT": 9
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1415",
+    "2787"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "mimas",
+   "observations": {
+    "NIRSPEC/IFU": 4
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "3716"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "miranda",
+   "observations": {
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4645"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "neptune",
+   "observations": {
+    "MIRI/IFU": 84,
+    "MIRI/IMAGE": 4,
+    "NIRCAM/IMAGE": 4,
+    "NIRSPEC/IFU": 45
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1249",
+    "1604",
+    "2739",
+    "7570"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "nereid",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4645"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "oberon",
+   "observations": {
+    "NIRSPEC/IFU": 3
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1786",
+    "7813"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "orcus",
+   "observations": {
+    "NIRCAM/IMAGE": 6,
+    "NIRSPEC/IFU": 3
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1231",
+    "6064"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "orus",
+   "observations": {
+    "MIRI/IFU": 12,
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "2574"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "pallas",
+   "observations": {
+    "MIRI/IFU": 12,
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1244"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "pallene",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1247"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "pandora",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1247"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "patroclus",
+   "observations": {
+    "MIRI/IFU": 12,
+    "NIRSPEC/IFU": 3
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1244",
+    "2574"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "peitho",
+   "observations": {
+    "MIRI/IFU": 4,
+    "MIRI/IMAGE": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1449"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "phaethon",
+   "observations": {
+    "MIRI/IFU": 12,
+    "NIRCAM/IMAGE": 2,
+    "NIRSPEC/SLIT": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1245"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "phoebe",
+   "observations": {
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "3716"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "pluto",
+   "observations": {
+    "MIRI/IFU": 24,
+    "MIRI/IMAGE": 26,
+    "MIRI/SLIT": 1,
+    "NIRCAM/IMAGE": 24,
+    "NIRSPEC/IFU": 15
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1191",
+    "1658"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "polymele",
+   "observations": {
+    "MIRI/IFU": 12,
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "2574"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "portia",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4645"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "proteus",
+   "observations": {
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4645"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "psyche",
+   "observations": {
+    "MIRI/IFU": 16,
+    "MIRI/IMAGE": 2,
+    "NIRSPEC/IFU": 12
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1731"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "puck",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4645"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "quaoar",
+   "observations": {
+    "NIRCAM/IMAGE": 6,
+    "NIRSPEC/IFU": 3
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1273",
+    "6064"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "rhea",
+   "observations": {
+    "NIRSPEC/IFU": 4
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "3716"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "salacia",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1191"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "saturn",
+   "observations": {
+    "MIRI/IFU": 48,
+    "NIRCAM/IMAGE": 8,
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1247",
+    "5308"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "sedna",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1272"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "sycorax",
+   "observations": {
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4645"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "taurinensis",
+   "observations": {
+    "MIRI/IFU": 12,
+    "MIRI/IMAGE": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "11793"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "telesto",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1247"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "tethys",
+   "observations": {
+    "NIRSPEC/IFU": 4
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "3716"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "titan",
+   "observations": {
+    "MIRI/IFU": 24,
+    "NIRCAM/IMAGE": 54,
+    "NIRSPEC/IFU": 13
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1251",
+    "2760",
+    "4523"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "titania",
+   "observations": {
+    "NIRSPEC/IFU": 3
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1786"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "trappist-1",
+   "observations": {
+    "NIRISS/SOSS": 9,
+    "NIRSPEC/SLIT": 29
+   },
+   "timeSeriesVisits": {
+    "MIR_IMAGE": 10,
+    "NIS_SOSS": 9,
+    "NRS_BRIGHTOBJ": 29
+   },
+   "programmes": [
+    "1201",
+    "1331",
+    "1981",
+    "2304",
+    "2420",
+    "2589",
+    "3077",
+    "5191",
+    "6456",
+    "9256",
+    "12492"
+   ],
+   "drawn": [
+    "MIR_IMAGE"
+   ]
+  },
+  {
+   "id": "trappist-1b",
+   "observations": {},
+   "timeSeriesVisits": {
+    "MIR_IMAGE": 10
+   },
+   "programmes": [
+    "1177",
+    "1279"
+   ],
+   "drawn": [
+    "MIR_IMAGE"
+   ]
+  },
+  {
+   "id": "triton",
+   "observations": {
+    "MIRI/IFU": 24,
+    "MIRI/IMAGE": 8,
+    "NIRSPEC/IFU": 6
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1272"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "umbriel",
+   "observations": {
+    "NIRSPEC/IFU": 2
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1786"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "uranus",
+   "observations": {
+    "MIRI/IFU": 36,
+    "MIRI/IMAGE": 3,
+    "NIRCAM/IMAGE": 36,
+    "NIRSPEC/IFU": 49
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1248",
+    "2739",
+    "2768",
+    "5073",
+    "6379",
+    "7570",
+    "8975",
+    "9482"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "varuna",
+   "observations": {
+    "MIRI/IMAGE": 2,
+    "NIRCAM/IMAGE": 12,
+    "NIRSPEC/IFU": 1
+   },
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1254",
+    "4541"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "wasp-43",
+   "observations": {
+    "MIRI/SLITLESS": 1,
+    "NIRSPEC/SLIT": 1
+   },
+   "timeSeriesVisits": {
+    "MIR_LRS-SLITLESS": 1,
+    "NRS_BRIGHTOBJ": 1
+   },
+   "programmes": [
+    "1224",
+    "1366"
+   ],
+   "drawn": [
+    "MIRI/SLITLESS",
+    "MIR_LRS-SLITLESS"
+   ]
+  }
+ ]
+}

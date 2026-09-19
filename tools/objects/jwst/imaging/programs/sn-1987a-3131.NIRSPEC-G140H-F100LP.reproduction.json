@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-jwst-spec3-reproduction@1",
+  "program": "sn-1987a-3131",
+  "band": "NIRSPEC-G140H-F100LP",
+  "observation": "jw03131-o001_t001_nirspec_g140h-f100lp",
+  "toolchain": "tools/objects/jwst/toolchain.json",
+  "crdsContext": "jwst_1535.pmap",
+  "mast": {
+    "name": "jw03131-o001_t001_nirspec_g140h-f100lp_s3d.fits",
+    "uri": "mast:JWST/product/jw03131-o001_t001_nirspec_g140h-f100lp_s3d.fits",
+    "bytes": 162924480,
+    "sha256": "1fdc28d326df6f7f3a9c789ce9ef67f5ffe25b34582c2c33bc924ad887038668",
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "local": {
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "grid": {
+    "width": 49,
+    "height": 53,
+    "planes": 3915,
+    "arcsecPerPixel": 0.10000000149011605,
+    "micrometres": [
+      0.9701175286099897,
+      1.88990752673271
+    ]
+  },
+  "samples": {
+    "both": 5385187,
+    "onlyOurs": 0,
+    "onlyMast": 0,
+    "identicalShare": 0.9957247538479165,
+    "correlation": 0.9999999999999944,
+    "largestRelativeDifferenceAboveMedian": 0.0000014682402385002291
+  }
+}

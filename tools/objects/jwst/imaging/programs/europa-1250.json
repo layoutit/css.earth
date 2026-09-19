@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-jwst-imaging-program@1",
+  "id": "europa-1250",
+  "programme": "1250",
+  "target": "EUROPA",
+  "crdsContext": "jwst_1535.pmap",
+  "bands": [
+    {
+      "band": "NIRSPEC-G395H-F290LP",
+      "observation": "jw01250-o002_t001_nirspec_g395h-f290lp",
+      "level3": {
+        "name": "jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits",
+        "uri": "mast:JWST/product/jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits",
+        "bytes": 150240960
+      },
+      "association": {
+        "name": "jw01250-o002_20260720t083746_spec3_00001_asn.json",
+        "uri": "mast:JWST/product/jw01250-o002_20260720t083746_spec3_00001_asn.json",
+        "bytes": 2650
+      },
+      "stage": "spec3",
+      "members": [
+        {
+          "name": "jw01250002001_03105_00001_nrs1_cal.fits",
+          "uri": "mast:JWST/product/jw01250002001_03105_00001_nrs1_cal.fits",
+          "bytes": 203051520,
+          "sha256": "1fbc70427acc4fbf81614085a62e5685e94cd1ae6f41b4cbaf3896ea7d7abe0e"
+        },
+        {
+          "name": "jw01250002001_03105_00001_nrs2_cal.fits",
+          "uri": "mast:JWST/product/jw01250002001_03105_00001_nrs2_cal.fits",
+          "bytes": 203054400,
+          "sha256": "45821d1b7b60eee2110e4da698d69bc37fb9c1a6a6f1fc48c3e18bae2564de4d"
+        },
+        {
+          "name": "jw01250002001_03105_00002_nrs1_cal.fits",
+          "uri": "mast:JWST/product/jw01250002001_03105_00002_nrs1_cal.fits",
+          "bytes": 203051520,
+          "sha256": "48e446b4cae1cfb29723a1f36f7720f53673e37c435a0fa39552eceff1b24fdf"
+        },
+        {
+          "name": "jw01250002001_03105_00002_nrs2_cal.fits",
+          "uri": "mast:JWST/product/jw01250002001_03105_00002_nrs2_cal.fits",
+          "bytes": 203054400,
+          "sha256": "987bd267379c9f11330017596a31cff72f752703e842005ce1f79d3747968ba5"
+        }
+      ]
+    }
+  ]
+}

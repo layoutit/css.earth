@@ -7,6 +7,8 @@
  * mosaic, its image3 association and the level-2 calibrated exposures the association names, each by MAST URI and byte count.
  * A coronagraphic observation (e.g. jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r) has a coron3 association instead:
  * its members are the per-integration _calints exposures of the target at each roll and, as references, of the PSF star.
+ * An integral-field observation (e.g. jw01250-o002_t001_nirspec_g395h-f290lp) has a spec3 association, and its level-3 product
+ * is a spectral cube (_s3d) built from the _cal exposures of both detectors at each dither.
  * The band comes from the product's filter and pupil. The association fixes the membership; the program stores it, so a re-run
  * of the mosaic step uses the same exposures MAST used. Digests are added the first time a file is downloaded (imaging.mts).
  * The program is written to tools/objects/jwst/imaging/programs/<program id>.json. */
@@ -26,7 +28,7 @@ export interface ImagingBand {
   readonly level3: MastFile;
   readonly association: MastFile;
   /** The level-3 stage that builds the mosaic; absent for image3. */
-  readonly stage?: 'coron3';
+  readonly stage?: 'coron3' | 'spec3';
   readonly members: readonly MastFile[];
   /** coron3 only: the PSF reference star's exposures, which the stage subtracts from the members. */
   readonly references?: readonly MastFile[];
@@ -55,18 +57,19 @@ export function parseImagingProgram(value: unknown): ImagingProgram {
   const bands = requireArray(row.bands).map(raw => {
     const entry = requireRecord(raw, 'Imaging band'), band = requireString(entry.band, 'Band');
     if (!Object.hasOwn(JWST_BANDS, band)) throw new TypeError(`Unknown JWST band ${band}.`);
-    if (entry.stage !== undefined && entry.stage !== 'coron3') throw new TypeError(`${band}: unsupported stage ${String(entry.stage)}.`);
-    const coron = entry.stage === 'coron3', members = requireArray(entry.members).map(file);
+    if (entry.stage !== undefined && entry.stage !== 'coron3' && entry.stage !== 'spec3') throw new TypeError(`${band}: unsupported stage ${String(entry.stage)}.`);
+    const coron = entry.stage === 'coron3', cube = entry.stage === 'spec3', stage = coron ? 'coron3' : cube ? 'spec3' : 'image3', members = requireArray(entry.members).map(file);
     const references = coron ? requireArray(entry.references).map(file) : entry.references === undefined ? [] : null;
     if (!references) throw new TypeError(`${band}: only a coron3 band has PSF references.`);
     const level2 = coron ? '_calints.fits' : '_cal.fits';
     if (!members.length || !members.every(member => member.name.endsWith(level2))) throw new TypeError(`${band}: members are level-2 ${level2.slice(0, -5)} exposures.`);
     if (coron && (!references.length || !references.every(member => member.name.endsWith(level2)))) throw new TypeError(`${band}: references are level-2 _calints exposures.`);
     if (coron !== Boolean(JWST_BANDS[band]!.coronagraph)) throw new TypeError(`${band}: a coronagraph band is built by coron3, and only it.`);
+    if (cube !== Boolean(JWST_BANDS[band]!.grating)) throw new TypeError(`${band}: a cube band is built by spec3, and only it.`);
     const level3 = file(entry.level3), association = file(entry.association);
-    if (!level3.name.endsWith('_i2d.fits') || !new RegExp(`_${coron ? 'coron3' : 'image3'}_\\d+_asn\\.json$`, 'u').test(association.name))
-      throw new TypeError(`${band}: not a level-3 mosaic and ${coron ? 'coron3' : 'image3'} association.`);
-    return { band, observation: requireString(entry.observation, 'Observation'), level3, association, ...(coron ? { stage: 'coron3' as const } : {}), members,
+    if (!level3.name.endsWith(cube ? '_s3d.fits' : '_i2d.fits') || !new RegExp(`_${stage}_\\d+_asn\\.json$`, 'u').test(association.name))
+      throw new TypeError(`${band}: not a level-3 ${cube ? 'cube' : 'mosaic'} and ${stage} association.`);
+    return { band, observation: requireString(entry.observation, 'Observation'), level3, association, ...(coron ? { stage: 'coron3' as const } : cube ? { stage: 'spec3' as const } : {}), members,
       ...(coron ? { references } : {}) };
   });
   if (new Set(bands.map(entry => entry.band)).size !== bands.length) throw new TypeError('A band appears twice in the program.');
@@ -89,6 +92,11 @@ export const bandOfFilters = (instrument: string, filters: string, observation =
   // the mask is not listed); MIRI as the filter alone. compare.mts checks the band against the level-3 product's own header,
   // which names the mask.
   const parts = filters.split(';');
+  if (instrument === 'NIRSPEC') {
+    const found = Object.values(JWST_BANDS).find(entry => entry.grating !== undefined && parts.length === 2 && parts.includes(entry.grating) && parts.includes(entry.filter));
+    if (!found) throw new Error(`No JWST cube band for ${instrument} ${filters}.`);
+    return found;
+  }
   // A NIRCam coronagraph's occulter is not in the archive's filter list; the subarray in the observation's name carries it
   // (sub320a335r is module A's MASK335R). A full-frame coronagraph observation names no occulter and cannot be pinned by name.
   const lyot = parts.find(part => part === 'MASKRND' || part === 'MASKBAR');
@@ -116,13 +124,15 @@ export async function imagingBand(observation: string): Promise<ImagingBand & { 
   const pick = (kind: string, level: number, pattern: RegExp) => products.filter(p => p.productSubGroupDescription === kind && p.calib_level === level &&
     pattern.test(requireString(p.productFilename)));
   const mastFileOf = (p: Record<string, unknown>): MastFile => ({ name: requireString(p.productFilename), uri: requireString(p.dataURI), bytes: requireFiniteNumber(p.size) });
-  const coron = Boolean(band.coronagraph), stage = coron ? 'coron3' : 'image3';
-  const level3 = pick('I2D', 3, new RegExp(`^${observation}_i2d\\.fits$`, 'u')), association = pick('ASN', 3, new RegExp(`_${stage}_\\d+_asn\\.json$`, 'u'));
-  if (level3.length !== 1 || association.length !== 1) throw new Error(`${observation}: expected one level-3 mosaic and one ${stage} association.`);
+  if (band.grating && obs.instrument_name !== 'NIRSPEC/IFU') throw new Error(`${observation} is ${String(obs.instrument_name)}, not an integral-field observation.`);
+  const coron = Boolean(band.coronagraph), cube = Boolean(band.grating), stage = coron ? 'coron3' : cube ? 'spec3' : 'image3';
+  const level3 = pick(cube ? 'S3D' : 'I2D', 3, new RegExp(`^${observation}_${cube ? 's3d' : 'i2d'}\\.fits$`, 'u')), association = pick('ASN', 3, new RegExp(`_${stage}_\\d+_asn\\.json$`, 'u'));
+  if (level3.length !== 1 || association.length !== 1) throw new Error(`${observation}: expected one level-3 ${cube ? 'cube' : 'mosaic'} and one ${stage} association.`);
   const asnFile = mastFileOf(association[0]!), response = await fetch(mastDownloadUrl(asnFile.uri), { signal: AbortSignal.timeout(120_000) });
   const asn = requireRecord(await response.json(), 'Association');
   const [product] = requireArray(asn.products).map(value => requireRecord(value));
-  if (!product || requireString(product.name) !== observation) throw new Error(`${asnFile.name} does not build ${observation}.`);
+  // A spec3 association names its product by grating alone (…_nirspec_g395h); the stage appends the filter.
+  if (!product || (cube ? !observation.startsWith(`${requireString(product.name)}-`) : requireString(product.name) !== observation)) throw new Error(`${asnFile.name} does not build ${observation}.`);
   // Target acquisition exposures are association members too; the stage reads only science and PSF reference exposures.
   const exposures = (exptype: string) => {
     const names = new Set(requireArray(product.members).map(value => requireRecord(value)).filter(member => member.exptype === exptype).map(member => requireString(member.expname)));
@@ -131,7 +141,7 @@ export async function imagingBand(observation: string): Promise<ImagingBand & { 
     if (found.length !== names.size) throw new Error(`${observation}: MAST lists ${found.length} of the association's ${names.size} ${exptype} members.`);
     return found;
   };
-  return { band: band.id, observation, level3: mastFileOf(level3[0]!), association: asnFile, ...(coron ? { stage: 'coron3' as const } : {}), members: exposures('science'),
+  return { band: band.id, observation, level3: mastFileOf(level3[0]!), association: asnFile, ...(coron ? { stage: 'coron3' as const } : cube ? { stage: 'spec3' as const } : {}), members: exposures('science'),
     ...(coron ? { references: exposures('psf') } : {}), programme: String(obs.proposal_id), target: requireString(obs.target_name) };
 }
 

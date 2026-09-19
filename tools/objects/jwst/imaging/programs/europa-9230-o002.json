@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-jwst-imaging-program@1",
+  "id": "europa-9230-o002",
+  "programme": "9230",
+  "target": "EUROPA",
+  "crdsContext": "jwst_1535.pmap",
+  "bands": [
+    {
+      "band": "NIRSPEC-G395H-F290LP",
+      "observation": "jw09230-o002_t001_nirspec_g395h-f290lp",
+      "level3": {
+        "name": "jw09230-o002_t001_nirspec_g395h-f290lp_s3d.fits",
+        "uri": "mast:JWST/product/jw09230-o002_t001_nirspec_g395h-f290lp_s3d.fits",
+        "bytes": 168618240
+      },
+      "association": {
+        "name": "jw09230-o002_20260708t192453_spec3_00001_asn.json",
+        "uri": "mast:JWST/product/jw09230-o002_20260708t192453_spec3_00001_asn.json",
+        "bytes": 3682
+      },
+      "stage": "spec3",
+      "members": [
+        {
+          "name": "jw09230002001_03101_00001_nrs1_cal.fits",
+          "uri": "mast:JWST/product/jw09230002001_03101_00001_nrs1_cal.fits",
+          "bytes": 203051520
+        },
+        {
+          "name": "jw09230002001_03101_00001_nrs2_cal.fits",
+          "uri": "mast:JWST/product/jw09230002001_03101_00001_nrs2_cal.fits",
+          "bytes": 203054400
+        },
+        {
+          "name": "jw09230002001_03101_00002_nrs1_cal.fits",
+          "uri": "mast:JWST/product/jw09230002001_03101_00002_nrs1_cal.fits",
+          "bytes": 203051520
+        },
+        {
+          "name": "jw09230002001_03101_00002_nrs2_cal.fits",
+          "uri": "mast:JWST/product/jw09230002001_03101_00002_nrs2_cal.fits",
+          "bytes": 203054400
+        },
+        {
+          "name": "jw09230002001_03101_00003_nrs1_cal.fits",
+          "uri": "mast:JWST/product/jw09230002001_03101_00003_nrs1_cal.fits",
+          "bytes": 203051520
+        },
+        {
+          "name": "jw09230002001_03101_00003_nrs2_cal.fits",
+          "uri": "mast:JWST/product/jw09230002001_03101_00003_nrs2_cal.fits",
+          "bytes": 203054400
+        },
+        {
+          "name": "jw09230002001_03101_00004_nrs1_cal.fits",
+          "uri": "mast:JWST/product/jw09230002001_03101_00004_nrs1_cal.fits",
+          "bytes": 203051520
+        },
+        {
+          "name": "jw09230002001_03101_00004_nrs2_cal.fits",
+          "uri": "mast:JWST/product/jw09230002001_03101_00004_nrs2_cal.fits",
+          "bytes": 203054400
+        }
+      ]
+    }
+  ]
+}

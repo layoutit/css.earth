@@ -2,14 +2,18 @@
  * narrow filters in the pupil wheel behind F444W, so F405N and F470N are FILTER F444W with the narrow filter as PUPIL; MIRI has
  * no pupil wheel. Level-3 and level-2 imaging products are surface brightness in MJy/sr after the pipeline's photom step.
  * A coronagraph band also names its focal-plane mask (CORONMSK): NIRCam's round masks sit behind the MASKRND Lyot stop in the
- * pupil wheel. */
+ * pupil wheel.
+ * A cube band is one setting of an integral-field unit: NIRSpec's grating and the order-blocking filter that goes with it. Its
+ * level-3 product is a spectral cube (_s3d), not a mosaic, and the spec3 stage builds it. */
 export interface JwstBand {
   readonly id: string;
   readonly label: string;
-  readonly instrument: 'NIRCAM' | 'MIRI';
+  readonly instrument: 'NIRCAM' | 'MIRI' | 'NIRSPEC';
   readonly filter: string;
   readonly pupil?: string;
   readonly coronagraph?: string;
+  /** A cube band's disperser (GRATING). */
+  readonly grating?: string;
 }
 export const JWST_UNITS_REFERENCE = 'https://jwst-pipeline.readthedocs.io/en/latest/jwst/photom/main.html';
 
@@ -23,6 +27,12 @@ export const NIRCAM_OCCULTERS: Readonly<Record<string, { readonly pupil: string;
   SWB: { pupil: 'MASKBAR', mask: 'MASKASWB' }, LWB: { pupil: 'MASKBAR', mask: 'MASKALWB' } });
 const coronagraphBands = () => CORONAGRAPH_FILTERS.flatMap(([filter, micrometres]) => Object.entries(NIRCAM_OCCULTERS).map(([occulter, { pupil, mask }]) =>
   band(`NIRCAM-${filter}-MASK${occulter}`, `JWST NIRCam ${filter} ${micrometres} µm behind the MASK${occulter} coronagraph`, 'NIRCAM', filter, pupil, mask)));
+
+/** NIRSpec's integral-field settings: each grating with its filter, and the wavelengths it covers in micrometres. */
+const NIRSPEC_CUBES: readonly (readonly [string, string, string])[] = [['G140M', 'F070LP', '0.90–1.27'], ['G140M', 'F100LP', '0.97–1.89'], ['G235M', 'F170LP', '1.66–3.17'], ['G395M', 'F290LP', '2.87–5.27'],
+  ['G140H', 'F070LP', '0.95–1.27'], ['G140H', 'F100LP', '0.97–1.89'], ['G235H', 'F170LP', '1.66–3.17'], ['G395H', 'F290LP', '2.87–5.27'], ['PRISM', 'CLEAR', '0.60–5.30']];
+const cubeBands = () => NIRSPEC_CUBES.map(([grating, filter, range]) => Object.freeze({ id: `NIRSPEC-${grating}-${filter}`, label: `JWST NIRSpec integral-field cube, ${grating} ${range} µm`,
+  instrument: 'NIRSPEC' as const, filter, grating }));
 
 const band = (id: string, label: string, instrument: JwstBand['instrument'], filter: string, pupil?: string, coronagraph?: string): JwstBand =>
   Object.freeze({ id, label, instrument, filter, ...(pupil ? { pupil } : {}), ...(coronagraph ? { coronagraph } : {}) });
@@ -39,11 +49,13 @@ export const JWST_BANDS: Readonly<Record<string, JwstBand>> = Object.freeze(Obje
   band('MIRI-F1280W', 'JWST MIRI F1280W 12.8 µm', 'MIRI', 'F1280W'),
   band('MIRI-F1800W', 'JWST MIRI F1800W 18 µm', 'MIRI', 'F1800W'),
   ...coronagraphBands(),
+  ...cubeBands(),
 ].map(entry => [entry.id, entry])));
 
 /** The band a product's primary header describes, or undefined. */
 export function bandOfHeader(header: Record<string, unknown>): JwstBand | undefined {
   if (header.TELESCOP !== 'JWST') return undefined;
-  return Object.values(JWST_BANDS).find(entry => entry.instrument === header.INSTRUME && entry.filter === header.FILTER &&
+  if (header.INSTRUME === 'NIRSPEC') return header.EXP_TYPE === 'NRS_IFU' ? Object.values(JWST_BANDS).find(entry => entry.grating === header.GRATING && entry.filter === header.FILTER) : undefined;
+  return Object.values(JWST_BANDS).find(entry => !entry.grating && entry.instrument === header.INSTRUME && entry.filter === header.FILTER &&
     (entry.instrument === 'MIRI' || entry.pupil === header.PUPIL) && (entry.coronagraph === undefined || entry.coronagraph === header.CORONMSK));
 }
