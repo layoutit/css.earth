@@ -2,6 +2,11 @@ name: Deploy
 
 on:
   workflow_dispatch:
+    inputs:
+      serve_textures_from_r2:
+        description: Serve textures and scene JSON from R2 (ASSET_ORIGIN) instead of bundling them
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -67,7 +72,9 @@ jobs:
         env:
           NODE_OPTIONS: --max-old-space-size=6144
           CSSEARTH_ALLOW_MISSING_ASSETS: "1"
-          ASSET_ORIGIN: https://earth-assets.lowpoly.cc
+          # Opt-in until build-generated /scenes/ files (e.g. volume dataset previews) are published
+          # with inventories; unset keeps the bundled same-origin /scenes/ output.
+          ASSET_ORIGIN: ${{ inputs.serve_textures_from_r2 && 'https://earth-assets.lowpoly.cc' || '' }}
         run: pnpm build
       - name: Check the build output
         run: |
