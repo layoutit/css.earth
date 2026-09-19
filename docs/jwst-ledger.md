@@ -11,9 +11,9 @@ An observation here is one public level-3 product set: one target, one instrumen
 | NIRCAM/IMAGE | pictures, 0.6–5 µm | nebulae and shells as volumes; pictures of Solar System bodies | 19,388 | 2,040 | 480 | 21 | 7 | 1 | 1 |
 | NIRCAM/CORON | pictures with the star blocked out | discs and rings attached to their star | 285 | 79 | 0 | 1 | 75 | 2 | 2 |
 | NIRCAM/GRISM | slitless spectra: time series of one star, or every source in a field | exoplanet maps from eclipses and phase curves | 8,520 | 177 | 0 | 1 | 0 | 0 | 0 |
-| MIRI/IMAGE | pictures, 5–26 µm, and time series of one star through a filter | nebulae as volumes; exoplanet maps from eclipse photometry | 6,850 | 2,111 | 174 | 23 | 4 | 10 | 1 |
+| MIRI/IMAGE | pictures, 5–26 µm, and time series of one star through a filter | nebulae as volumes; exoplanet maps from eclipse photometry | 6,850 | 2,111 | 174 | 23 | 4 | 11 | 2 |
 | MIRI/CORON | pictures with the star nulled by a phase mask | discs and rings attached to their star | 68 | 41 | 0 | 1 | 0 | 0 | 0 |
-| MIRI/IFU | cubes: a 5–28 µm spectrum in every pixel | maps of what a surface or a gas is made of; gas velocity as depth | 25,596 | 1,428 | 1,936 | 36 | 0 | 0 | 0 |
+| MIRI/IFU | cubes: a 5–28 µm spectrum in every pixel | maps of what a surface or a gas is made of; gas velocity as depth | 25,596 | 1,428 | 1,936 | 36 | 12 | 1 | 1 |
 | MIRI/SLIT | one 5–14 µm spectrum through a slit | whole-disc composition; nothing resolved | 432 | 358 | 24 | 8 | 0 | 0 | 0 |
 | MIRI/SLITLESS | time series of one star's 5–12 µm spectrum | exoplanet maps from eclipses and phase curves | 111 | 74 | 0 | 2 | 0 | 3 | 3 |
 | NIRSPEC/IFU | cubes: a 0.6–5.3 µm spectrum in every pixel | maps of what a surface or a gas is made of; gas velocity as depth | 2,229 | 1,256 | 637 | 68 | 9 | 10 | 3 |
@@ -24,13 +24,19 @@ An observation here is one public level-3 product set: one target, one instrumen
 | NIRISS/WFSS | slitless spectra of every source in a field | nothing: survey spectra | 592 | 31 | 0 | 0 | 0 | 0 | 0 |
 | NIRISS/IMAGE | pictures, 0.9–4.8 µm | nebulae as volumes | 1,745 | 373 | 17 | 1 | 0 | 0 | 0 |
 
-5 of 15 modes have a checked program: NIRCAM/IMAGE, NIRCAM/CORON, MIRI/IMAGE, MIRI/SLITLESS, NIRSPEC/IFU.
+6 of 15 modes have a checked program: NIRCAM/IMAGE, NIRCAM/CORON, MIRI/IMAGE, MIRI/IFU, MIRI/SLITLESS, NIRSPEC/IFU.
 
 - **NIRCAM/CORON.** Full-frame observations do not name their occulter.
-- **MIRI/IMAGE.** Time series are reduced from raw; pictures have bands but no reproduced program.
+- **NIRCAM/GRISM.** Held, not reducible here: its level-3 product is an extracted spectrum, not a picture or a cube, and no stage reads one.
+- **MIRI/IMAGE.** Time series are reduced from raw by reduce-tso.mts; pictures go through image3.
 - **MIRI/CORON.** Refused: the pipeline's alignment does not converge (docs/jwst-imaging.md).
+- **MIRI/IFU.** One observation is twelve cubes: four channels in three sub-bands, each pinned and rebuilt on its own.
+- **MIRI/SLIT.** Held, not reducible here: its level-3 product is an extracted spectrum, not a picture or a cube, and no stage reads one.
 - **NIRSPEC/IFU.** Only a body several pixels across gets a map: NIRSpec's pixels are 0.1″, and most moons and small bodies fit inside one.
-- **NIRSPEC/SLIT.** WASP-43b's NIRSpec map is fitted from the authors' deposited light curve, not reduced here.
+- **NIRSPEC/SLIT.** WASP-43b's NIRSpec map is fitted from the authors' deposited light curve, not reduced here. Held, not reducible here: its level-3 product is an extracted spectrum, not a picture or a cube, and no stage reads one.
+- **NIRISS/AMI.** Held, not reducible here: no stage reads its level-3 interferometric products.
+- **NIRISS/SOSS.** Held, not reducible here: its level-3 product is an extracted spectrum, not a picture or a cube, and no stage reads one.
+- **NIRISS/IMAGE.** Held, not reducible here: the image3 stage would read it, but no NIRISS filter is defined as a band and no program is pinned.
 
 ## Time series
 
@@ -70,7 +76,7 @@ One star watched for hours, which is what an exoplanet map is fitted from. These
 | eos | NIRSPEC/IFU 2 | none | 8782 | none |
 | epimetheus | NIRSPEC/IFU 1 | none | 1247 | none |
 | eris | MIRI/SLIT 1, NIRCAM/IMAGE 6, NIRSPEC/IFU 3 | none | 1191, 6064 | none |
-| europa | MIRI/IFU 12, MIRI/IMAGE 1, NIRCAM/IMAGE 6, NIRSPEC/IFU 13 | none | 1250, 4023, 9230 | NIRSPEC/IFU |
+| europa | MIRI/IFU 12, MIRI/IMAGE 1, NIRCAM/IMAGE 6, NIRSPEC/IFU 13 | none | 1250, 4023, 9230 | MIRI/IMAGE, MIRI/IFU, NIRSPEC/IFU |
 | eurybates | MIRI/IFU 12, NIRSPEC/IFU 2 | none | 2574 | none |
 | galatea | NIRSPEC/IFU 2 | none | 4645 | none |
 | ganymede | MIRI/IFU 24, NIRSPEC/IFU 3 | none | 1373 | none |

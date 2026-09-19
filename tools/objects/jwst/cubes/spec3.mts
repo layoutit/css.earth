@@ -4,11 +4,17 @@
  *
  *   node tools/objects/jwst/cubes/spec3.mts <program id> <band> <work directory> [--raw <dir>]... [--max-rss-gib <n>] [--arcsec-per-pixel <n>]
  *
- * The members are the level-2 _cal exposures MAST's own spec3 association names (imaging/archive.mts): both detectors at each
- * dither. The stage flags outliers between the dithers and builds the cube (cube_build), on the pinned toolchain
- * (toolchain.json: jwst 2.0.1) with the program's CRDS context. The one-dimensional extraction that follows is skipped: it reads
- * the cube and does not change it. The run is stopped if its resident memory passes the ceiling (default 6 GiB; four NIRSpec
- * G395H exposures peak at 4.1 GiB).
+ * The members are every level-2 _cal exposure MAST's own spec3 association names (imaging/archive.mts): both detectors at each
+ * dither, and for MIRI's medium-resolution spectrometer each of the three grating settings as well. The stage flags outliers
+ * between the exposures and builds the cube (cube_build), on the pinned toolchain (toolchain.json: jwst 2.0.1) with the
+ * program's CRDS context. A MIRI run asks cube_build for the band's channel and sub-band alone, so it builds one cube instead of
+ * the association's twelve; the rest of the association still matters, because a moving target's frame is the mean position of
+ * every exposure in it. The one-dimensional extraction that follows is skipped: it reads the cube and does not change it, and
+ * with it MIRI's spectral-leak correction, which only ever changes an extracted spectrum. The run is stopped if its resident
+ * memory passes the ceiling (default 6 GiB; four NIRSpec G395H exposures peak at 4.1 GiB, 24 MIRI MRS exposures at 3.3 GiB).
+ *
+ * Every member's own header is read before the run: it must be an integral-field exposure of the band's instrument, and the
+ * band's own detector and sub-band must be among them.
  *
  * The run writes a `cssearth-telescope-product@1` record beside the cube (`<cube>.product.json`): the exposures at their pinned
  * digests, the settings and CRDS context, the pinned pipeline, and the cube with the units and conventions its own header
@@ -25,12 +31,13 @@ import { totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../../src/platform/sha256.mts';
+import { readFitsFileHdus } from '../../../fits.mts';
 import { requireRecord } from '../../../source-values.mts';
 import { productRecordPath, readProductRecord, sameRun, writeProductRecord } from '../../product-record.mts';
 import { eurekaToolchain } from '../toolchain.mts';
 import { freeMemoryPercent, mastFile, toolchainPython } from '../mast.mts';
 import { PROGRAMS } from '../imaging/archive.mts';
-import { bandOfHeader } from '../imaging/bands.mts';
+import { bandOfHeader, JWST_BANDS, type JwstBand } from '../imaging/bands.mts';
 import { eurekaPins, imagingMembers, imagingProductRun, level3ProductFacts, readImagingProgram, recordProductEvidence } from '../imaging/image3.mts';
 import { openSpectralCube, type SpectralCube } from './spectral-cube.mts';
 
@@ -38,14 +45,35 @@ const SPEC3 = `
 import json, sys, time
 from jwst.pipeline import Spec3Pipeline
 start = time.time()
-steps = {'extract_1d': {'skip': True}}
-if len(sys.argv) > 3:
-    # A finer sky grid than the pipeline's default. The dithers sample the sky between the default pixels, so the drizzle has
-    # real information to put there; the wavelength axis is left as the pipeline sets it.
-    steps['cube_build'] = {'scalexy': float(sys.argv[3])}
-Spec3Pipeline.call(sys.argv[1], output_dir=sys.argv[2], save_results=True, steps=steps)
+asn, output_dir, steps = sys.argv[1], sys.argv[2], json.loads(sys.argv[3])
+Spec3Pipeline.call(asn, output_dir=output_dir, save_results=True, steps=steps)
 print(json.dumps({'seconds': round(time.time() - start, 1)}))
 `;
+
+/** The steps a cube run sets beyond the CRDS parameter reference MAST used.
+ *
+ * `extract_1d` reads the finished cube and does not change it, and MIRI's `spectral_leak` corrects an extracted spectrum, not a
+ * cube; both are skipped. A MIRI association covers twelve cubes, so `cube_build` is asked for the band's channel and sub-band
+ * alone. `scalexy` is a finer sky grid than the pipeline's default: the dithers sample the sky between the default pixels, so
+ * the drizzle has real information to put there, and the wavelength axis is left as the pipeline sets it. */
+export function spec3Steps(band: JwstBand, arcsecPerPixel?: number): Record<string, Record<string, string | number | boolean>> {
+  const cube = { ...(band.channel ? { channel: band.channel, band: band.subBand!.toLowerCase() } : {}), ...(arcsecPerPixel === undefined ? {} : { scalexy: arcsecPerPixel }) };
+  return { extract_1d: { skip: true }, ...(band.instrument === 'MIRI' ? { spectral_leak: { skip: true } } : {}), ...(Object.keys(cube).length ? { cube_build: cube } : {}) };
+}
+
+/** Every member's own header, checked against the band the program claims before the pipeline reads a single file. A MIRI
+ * association carries all twelve settings, so the check is that the band's own is among them, not that every member is it. */
+export async function assertCubeMembers(band: JwstBand, files: readonly string[]): Promise<void> {
+  const exposure = band.channel ? 'MIR_MRS' : 'NRS_IFU', settings = new Set<string>();
+  for (const file of files) {
+    const header = (await readFitsFileHdus(file))[0]!.header;
+    if (header.TELESCOP !== 'JWST' || header.INSTRUME !== band.instrument || header.EXP_TYPE !== exposure)
+      throw new Error(`${basename(file)} is ${String(header.TELESCOP)} ${String(header.INSTRUME)} ${String(header.EXP_TYPE)}, not a ${band.instrument} ${exposure} exposure.`);
+    settings.add(`${String(header.DETECTOR)} ${String(header.BAND)}`);
+  }
+  if (band.detector && !settings.has(`${band.detector} ${band.subBand}`))
+    throw new Error(`No member of ${band.id} is a ${band.detector} ${band.subBand} exposure; the members are ${[...settings].sort().join(', ')}.`);
+}
 
 export async function runSpec3(id: string, band: string, work: string, options: { sources?: readonly string[]; maxRssBytes?: number; arcsecPerPixel?: number } = {}) {
   const { program, entry, files } = await imagingMembers(id, band, resolve(work, 'members'), options.sources);
@@ -56,8 +84,10 @@ export async function runSpec3(id: string, band: string, work: string, options: 
   if (fine !== undefined && !(fine >= 0.02 && fine <= 0.1)) throw new RangeError('A finer cube grid is between 0.02 and 0.1 arcsecond per pixel.');
   const output = resolve(work, fine === undefined ? 'spec3' : `spec3-${fine}`), asn = resolve(work, `${entry.observation}_asn.json`);
   await mkdir(output, { recursive: true });
-  const run = imagingProductRun(program, entry, 'spec3', { extract1d: 'skipped', ...(fine === undefined ? {} : { arcsecPerPixel: fine }) }, await eurekaPins());
-  // The stage names the cube after the grating and filter itself, so a cube already in the output directory is the one to ask
+  const setting = JWST_BANDS[band]!, steps = spec3Steps(setting, fine);
+  await assertCubeMembers(setting, files);
+  const run = imagingProductRun(program, entry, 'spec3', { steps }, await eurekaPins());
+  // The stage names the cube after the setting itself, so a cube already in the output directory is the one to ask
   // about: it is reused only when the record beside it says these same exposures, settings and pipeline made it.
   const made = (await readdir(output).catch(() => [])).filter(name => name.endsWith('_s3d.fits'));
   if (made.length === 1) {
@@ -65,11 +95,12 @@ export async function runSpec3(id: string, band: string, work: string, options: 
     if (await sameRun(await readProductRecord(productRecordPath(cube)), run, () => cube)) return { cube, reused: true, peakRssBytes: 0, seconds: 0, members: files.length };
     await rm(productRecordPath(cube), { force: true });
   }
-  // The stage names its product after the grating and filter itself, so the association's product stops at the instrument.
-  await writeFile(asn, `${JSON.stringify({ asn_type: 'spec3', asn_rule: 'candidate_Asn_Lv3NRSIFU', program: program.programme.padStart(5, '0'), asn_id: 'o001', target: 't001', asn_pool: 'cssearth',
+  // The stage names its product after the setting itself, so the association's product stops at the instrument.
+  await writeFile(asn, `${JSON.stringify({ asn_type: 'spec3', asn_rule: setting.channel ? 'candidate_Asn_Lv3MIRMRS' : 'candidate_Asn_Lv3NRSIFU',
+    program: program.programme.padStart(5, '0'), asn_id: 'o001', target: 't001', asn_pool: 'cssearth',
     products: [{ name: entry.observation.replace(/_[a-z0-9]+-[a-z0-9]+$/u, ''), members: files.map(expname => ({ expname, exptype: 'science' })) }] }, null, 2)}\n`);
   const toolchain = await eurekaToolchain(program.crdsContext);
-  const result = await toolchainPython(toolchain, work, SPEC3, [asn, output, ...(fine === undefined ? [] : [String(fine)])], resolve(work, `${entry.observation}${fine === undefined ? '' : `-${fine}`}.log`), { maxRssBytes: ceiling });
+  const result = await toolchainPython(toolchain, work, SPEC3, [asn, output, JSON.stringify(steps)], resolve(work, `${entry.observation}${fine === undefined ? '' : `-${fine}`}.log`), { maxRssBytes: ceiling });
   const cubes = (await readdir(output)).filter(name => name.endsWith('_s3d.fits'));
   if (cubes.length !== 1) throw new Error(`${id} ${band}: the stage wrote ${cubes.length} cubes.`);
   const cube = resolve(output, cubes[0]!);

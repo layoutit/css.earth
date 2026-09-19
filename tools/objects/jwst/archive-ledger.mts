@@ -18,7 +18,7 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { mastRequest } from './mast.mts';
-import { JWST_BANDS } from './imaging/bands.mts';
+import { bandMode, JWST_BANDS } from './imaging/bands.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
 
@@ -26,19 +26,19 @@ const REPOSITORY = resolve(import.meta.dirname, '../../..');
 export const JWST_MODES: readonly { readonly mode: string; readonly records: string; readonly draws: string; readonly tool: string | null; readonly note?: string }[] = [
   { mode: 'NIRCAM/IMAGE', records: 'pictures, 0.6–5 µm', draws: 'nebulae and shells as volumes; pictures of Solar System bodies', tool: 'tools/objects/jwst/imaging/image3.mts' },
   { mode: 'NIRCAM/CORON', records: 'pictures with the star blocked out', draws: 'discs and rings attached to their star', tool: 'tools/objects/jwst/imaging/coron3.mts', note: 'Full-frame observations do not name their occulter.' },
-  { mode: 'NIRCAM/GRISM', records: 'slitless spectra: time series of one star, or every source in a field', draws: 'exoplanet maps from eclipses and phase curves', tool: null },
-  { mode: 'MIRI/IMAGE', records: 'pictures, 5–26 µm, and time series of one star through a filter', draws: 'nebulae as volumes; exoplanet maps from eclipse photometry', tool: 'tools/objects/jwst/reduce-tso.mts', note: 'Time series are reduced from raw; pictures have bands but no reproduced program.' },
+  { mode: 'NIRCAM/GRISM', records: 'slitless spectra: time series of one star, or every source in a field', draws: 'exoplanet maps from eclipses and phase curves', tool: null, note: 'Held, not reducible here: its level-3 product is an extracted spectrum, not a picture or a cube, and no stage reads one.' },
+  { mode: 'MIRI/IMAGE', records: 'pictures, 5–26 µm, and time series of one star through a filter', draws: 'nebulae as volumes; exoplanet maps from eclipse photometry', tool: 'tools/objects/jwst/imaging/image3.mts', note: 'Time series are reduced from raw by reduce-tso.mts; pictures go through image3.' },
   { mode: 'MIRI/CORON', records: 'pictures with the star nulled by a phase mask', draws: 'discs and rings attached to their star', tool: null, note: 'Refused: the pipeline\'s alignment does not converge (docs/jwst-imaging.md).' },
-  { mode: 'MIRI/IFU', records: 'cubes: a 5–28 µm spectrum in every pixel', draws: 'maps of what a surface or a gas is made of; gas velocity as depth', tool: null },
-  { mode: 'MIRI/SLIT', records: 'one 5–14 µm spectrum through a slit', draws: 'whole-disc composition; nothing resolved', tool: null },
+  { mode: 'MIRI/IFU', records: 'cubes: a 5–28 µm spectrum in every pixel', draws: 'maps of what a surface or a gas is made of; gas velocity as depth', tool: 'tools/objects/jwst/cubes/spec3.mts', note: 'One observation is twelve cubes: four channels in three sub-bands, each pinned and rebuilt on its own.' },
+  { mode: 'MIRI/SLIT', records: 'one 5–14 µm spectrum through a slit', draws: 'whole-disc composition; nothing resolved', tool: null, note: 'Held, not reducible here: its level-3 product is an extracted spectrum, not a picture or a cube, and no stage reads one.' },
   { mode: 'MIRI/SLITLESS', records: 'time series of one star\'s 5–12 µm spectrum', draws: 'exoplanet maps from eclipses and phase curves', tool: 'tools/objects/jwst/reduce-tso.mts' },
   { mode: 'NIRSPEC/IFU', records: 'cubes: a 0.6–5.3 µm spectrum in every pixel', draws: 'maps of what a surface or a gas is made of; gas velocity as depth', tool: 'tools/objects/jwst/cubes/spec3.mts', note: 'Only a body several pixels across gets a map: NIRSpec\'s pixels are 0.1″, and most moons and small bodies fit inside one.' },
-  { mode: 'NIRSPEC/SLIT', records: 'one spectrum through a slit, and time series of one star', draws: 'exoplanet maps from eclipses and phase curves', tool: null, note: 'WASP-43b\'s NIRSpec map is fitted from the authors\' deposited light curve, not reduced here.' },
+  { mode: 'NIRSPEC/SLIT', records: 'one spectrum through a slit, and time series of one star', draws: 'exoplanet maps from eclipses and phase curves', tool: null, note: 'WASP-43b\'s NIRSpec map is fitted from the authors\' deposited light curve, not reduced here. Held, not reducible here: its level-3 product is an extracted spectrum, not a picture or a cube, and no stage reads one.' },
   { mode: 'NIRSPEC/MSA', records: 'spectra of many faint sources at once', draws: 'nothing: survey spectra of distant galaxies', tool: null },
-  { mode: 'NIRISS/AMI', records: 'interferograms through a seven-hole mask', draws: 'structure closer to a star than a coronagraph reaches', tool: null },
-  { mode: 'NIRISS/SOSS', records: 'time series of one star\'s 0.6–2.8 µm spectrum', draws: 'exoplanet maps from eclipses and phase curves', tool: null },
+  { mode: 'NIRISS/AMI', records: 'interferograms through a seven-hole mask', draws: 'structure closer to a star than a coronagraph reaches', tool: null, note: 'Held, not reducible here: no stage reads its level-3 interferometric products.' },
+  { mode: 'NIRISS/SOSS', records: 'time series of one star\'s 0.6–2.8 µm spectrum', draws: 'exoplanet maps from eclipses and phase curves', tool: null, note: 'Held, not reducible here: its level-3 product is an extracted spectrum, not a picture or a cube, and no stage reads one.' },
   { mode: 'NIRISS/WFSS', records: 'slitless spectra of every source in a field', draws: 'nothing: survey spectra', tool: null },
-  { mode: 'NIRISS/IMAGE', records: 'pictures, 0.9–4.8 µm', draws: 'nebulae as volumes', tool: null },
+  { mode: 'NIRISS/IMAGE', records: 'pictures, 0.9–4.8 µm', draws: 'nebulae as volumes', tool: null, note: 'Held, not reducible here: the image3 stage would read it, but no NIRISS filter is defined as a band and no program is pinned.' },
 ];
 
 export interface ArchiveRow { readonly observation: string; readonly target: string; readonly programme: string; readonly mode: string; readonly moving: boolean; readonly raDeg: number | null; readonly decDeg: number | null }
@@ -83,7 +83,6 @@ export function matchTarget(row: Pick<ArchiveRow, 'target' | 'moving' | 'raDeg' 
   return objects.filter(({ position }) => position && Math.hypot((row.raDeg! - position.raDeg) * Math.cos(position.decDeg * Math.PI / 180), row.decDeg! - position.decDeg) < position.radiusDeg).map(object => object.id);
 }
 
-const modeOfBand = (band: { instrument: string; coronagraph?: string; grating?: string }) => `${band.instrument}/${band.coronagraph ? 'CORON' : band.grating ? 'IFU' : 'IMAGE'}`;
 const readJson = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));
 const firstSkyPosition = (value: unknown): { raDeg: number; decDeg: number } | undefined => {
   if (Array.isArray(value)) { for (const item of value) { const found = firstSkyPosition(item); if (found) return found; } return undefined; }
@@ -176,7 +175,7 @@ export function parseReproductionReceipt(value: unknown, label: string): Reprodu
  * schemas and names that program, that band, that observation and the level-3 product the program pins. */
 export async function repositoryState(repository = REPOSITORY) {
   const state = new Map<string, { bands: number; programs: string[]; checked: string[] }>(JWST_MODES.map(({ mode }) => [mode, { bands: 0, programs: [], checked: [] }]));
-  for (const band of Object.values(JWST_BANDS)) state.get(modeOfBand(band))!.bands++;
+  for (const band of Object.values(JWST_BANDS)) state.get(bandMode(band))!.bands++;
   const imaging = resolve(repository, 'tools/objects/jwst/imaging/programs'), files = await readdir(imaging);
   const receiptProblems: string[] = [], receipts = new Map<string, ReproductionReceipt>();
   for (const file of files.filter(name => name.endsWith('.reproduction.json')).sort()) {
@@ -191,7 +190,7 @@ export async function repositoryState(repository = REPOSITORY) {
     if (!isRecord(program) || !Array.isArray(program.bands)) throw new TypeError(`${file} is not an imaging program.`);
     const id = requireString(program.id), pinned = new Set<string>(), proved = new Set<string>();
     for (const entry of program.bands) {
-      const band = requireRecord(entry, `${file}: band`), name = requireString(band.band, `${file}: band name`), mode = modeOfBand(JWST_BANDS[name]!);
+      const band = requireRecord(entry, `${file}: band`), name = requireString(band.band, `${file}: band name`), mode = bandMode(JWST_BANDS[name]!);
       pinned.add(mode);
       const receipt = receipts.get(`${id}|${name}`);
       if (!receipt) continue;

@@ -50,9 +50,10 @@
    "observations": 6850,
    "targets": 2111,
    "movingObservations": 174,
-   "tool": "tools/objects/jwst/reduce-tso.mts",
+   "tool": "tools/objects/jwst/imaging/image3.mts",
    "bands": 4,
    "programs": [
+    "europa-1250",
     "trappist-1b-miri-1177-007",
     "trappist-1b-miri-1177-008",
     "trappist-1b-miri-1177-009",
@@ -65,6 +66,7 @@
     "trappist-1c-miri-2304-004"
    ],
    "checked": [
+    "europa-1250",
     "trappist-1b-miri-3077"
    ],
    "shippedObjects": 23
@@ -85,10 +87,14 @@
    "observations": 25596,
    "targets": 1428,
    "movingObservations": 1936,
-   "tool": null,
-   "bands": 0,
-   "programs": [],
-   "checked": [],
+   "tool": "tools/objects/jwst/cubes/spec3.mts",
+   "bands": 12,
+   "programs": [
+    "europa-1250"
+   ],
+   "checked": [
+    "europa-1250"
+   ],
    "shippedObjects": 36
   },
   {
@@ -550,6 +556,8 @@
     "9230"
    ],
    "drawn": [
+    "MIRI/IMAGE",
+    "MIRI/IFU",
     "NIRSPEC/IFU"
    ]
   },

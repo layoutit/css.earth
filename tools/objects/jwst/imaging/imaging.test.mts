@@ -4,7 +4,8 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
 import { bandOfFilters, parseImagingProgram, PROGRAMS, type ImagingBand, type ImagingProgram } from './archive.mts';
-import { bandOfHeader, JWST_BANDS } from './bands.mts';
+import { bandMode, bandOfHeader, isCubeBand, JWST_BANDS } from './bands.mts';
+import { assertCubeMembers, spec3Steps } from '../cubes/spec3.mts';
 import { gridResample, imagingProductRun, pipelineSoftware, recordProductEvidence } from './image3.mts';
 import { evidenceFor, productRecordPath, readProductRecord, runDigest, writeProductRecord } from '../../product-record.mts';
 import { toolchainPython } from '../mast.mts';
@@ -227,4 +228,87 @@ test('a coronagraph run pins the PSF references it subtracted with, and is not t
   const other = pinnedProgram({ bands: [{ ...band, references: [digested('jw01386002001_0310a_00001_nrcalong_calints.fits', 'f'.repeat(64))] }] });
   assert.notEqual(runDigest(imagingProductRun(other, other.bands[0]!, 'coron3', { psfReferences: 1 }, toolchain)), runDigest(run));
   assert.notEqual(runDigest(imagingProductRun(pinned, band, 'image3', { psfReferences: 1 }, toolchain)), runDigest(run));
+});
+
+const CARD = 80, BLOCK = 2880;
+const card = (key: string, value: string) => `${key.padEnd(8)}= ${`'${value.padEnd(8)}'`.padEnd(20)}`.padEnd(CARD);
+/** A level-2 exposure's primary header, which is all `assertCubeMembers` reads. */
+const exposure = async (directory: string, name: string, cards: Record<string, string>) => {
+  const path = join(directory, name), text = ['SIMPLE  =                    T'.padEnd(CARD), 'BITPIX  =                    8'.padEnd(CARD), 'NAXIS   =                    0'.padEnd(CARD),
+    ...Object.entries(cards).map(([key, value]) => card(key, value)), 'END'.padEnd(CARD)].join('');
+  await writeFile(path, Buffer.from(text.padEnd(Math.ceil(text.length / BLOCK) * BLOCK, ' '), 'latin1'));
+  return path;
+};
+const MRS_EXPOSURE = { TELESCOP: 'JWST', INSTRUME: 'MIRI', EXP_TYPE: 'MIR_MRS', DETECTOR: 'MIRIFUSHORT', BAND: 'SHORT', CHANNEL: '12' };
+
+test('MIRI\u2019s medium-resolution spectrometer is twelve cube bands, each read on one detector', () => {
+  const mrs = Object.values(JWST_BANDS).filter(entry => entry.subBand !== undefined);
+  assert.equal(mrs.length, 12);
+  assert.ok(mrs.every(entry => entry.instrument === 'MIRI' && entry.filter === undefined && entry.grating === undefined && entry.pupil === undefined && isCubeBand(entry)));
+  assert.deepEqual(mrs.filter(entry => entry.detector === 'MIRIFULONG').map(entry => entry.channel), ['3', '3', '3', '4', '4', '4']);
+  // The archive lists an MRS cube's setting where another instrument's filters go; a channel it does not have is no band.
+  assert.equal(bandOfFilters('MIRI', 'CH1-SHORT').id, 'MIRI-MRS-CH1-SHORT');
+  assert.equal(bandOfFilters('MIRI', 'CH3-MEDIUM').id, 'MIRI-MRS-CH3-MEDIUM');
+  assert.throws(() => bandOfFilters('MIRI', 'CH5-SHORT'), /No JWST band/u);
+  // A level-3 cube names one channel; a level-2 exposure names the two its detector reads at once, and is not a band.
+  assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'MIRI', EXP_TYPE: 'MIR_MRS', CHANNEL: '1', BAND: 'SHORT' })?.id, 'MIRI-MRS-CH1-SHORT');
+  assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'MIRI', EXP_TYPE: 'MIR_MRS', CHANNEL: '12', BAND: 'SHORT' }), undefined);
+  assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'MIRI', FILTER: 'F1280W' })?.id, 'MIRI-F1280W');
+  assert.deepEqual(['MIRI-MRS-CH1-SHORT', 'MIRI-F1280W', 'NIRSPEC-G395H-F290LP', 'NIRCAM-F444W-MASK335R'].map(id => bandMode(JWST_BANDS[id]!)),
+    ['MIRI/IFU', 'MIRI/IMAGE', 'NIRSPEC/IFU', 'NIRCAM/CORON']);
+});
+
+test('a cube run asks the pipeline only for what the band needs', () => {
+  const nirspec = JWST_BANDS['NIRSPEC-G395H-F290LP']!;
+  assert.deepEqual(spec3Steps(nirspec), { extract_1d: { skip: true } });
+  assert.deepEqual(spec3Steps(nirspec, 0.05), { extract_1d: { skip: true }, cube_build: { scalexy: 0.05 } });
+  // A MIRI association covers twelve cubes, so the channel and sub-band are named; the spectral-leak correction only ever
+  // changes an extracted spectrum, which this run does not extract.
+  assert.deepEqual(spec3Steps(JWST_BANDS['MIRI-MRS-CH3-LONG']!), { extract_1d: { skip: true }, spectral_leak: { skip: true }, cube_build: { channel: '3', band: 'long' } });
+  assert.deepEqual(spec3Steps(JWST_BANDS['MIRI-MRS-CH1-SHORT']!, 0.05), { extract_1d: { skip: true }, spectral_leak: { skip: true }, cube_build: { channel: '1', band: 'short', scalexy: 0.05 } });
+});
+
+test('a cube run refuses members whose own headers are not the band\u2019s exposures', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'mrs-'));
+  try {
+    const band = JWST_BANDS['MIRI-MRS-CH1-SHORT']!;
+    const files = await Promise.all([['a', MRS_EXPOSURE], ['b', { ...MRS_EXPOSURE, BAND: 'MEDIUM' }], ['c', { ...MRS_EXPOSURE, BAND: 'LONG' }]]
+      .map(([name, cards]) => exposure(directory, `${name as string}_cal.fits`, cards as Record<string, string>)));
+    await assertCubeMembers(band, files);
+    // The other detector's exposures belong to the association, and to the moving-target frame the whole of it fixes.
+    const other = await exposure(directory, 'd_cal.fits', { ...MRS_EXPOSURE, DETECTOR: 'MIRIFULONG', CHANNEL: '34' });
+    await assertCubeMembers(band, [...files, other]);
+    await assert.rejects(assertCubeMembers(band, [...files.slice(1), other]), /No member of MIRI-MRS-CH1-SHORT is a MIRIFUSHORT SHORT exposure/u);
+    const nirspec = await exposure(directory, 'e_cal.fits', { TELESCOP: 'JWST', INSTRUME: 'NIRSPEC', EXP_TYPE: 'NRS_IFU' });
+    await assert.rejects(assertCubeMembers(band, [nirspec]), /not a MIRI MIR_MRS exposure/u);
+    await assert.rejects(assertCubeMembers(JWST_BANDS['NIRSPEC-G395H-F290LP']!, files), /not a NIRSPEC NRS_IFU exposure/u);
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test('the pinned Europa MIRI bands reproduce MAST\u2019s cube and its picture', async () => {
+  const pinned = parseImagingProgram(JSON.parse(await readFile(join(PROGRAMS, 'europa-1250.json'), 'utf8')));
+  const mrs = pinned.bands.find(entry => entry.band === 'MIRI-MRS-CH1-SHORT')!;
+  assert.equal(mrs.stage, 'spec3');
+  assert.equal(mrs.level3.name, 'jw01250-o003_t001_miri_ch1-short_s3d.fits');
+  // One cube of twelve, and the whole association behind it: three grating settings on two detectors at four dithers.
+  assert.equal(mrs.members.length, 24);
+  assert.equal(mrs.members.filter(entry => entry.name.endsWith('_mirifushort_cal.fits')).length, 12);
+  const cube = JSON.parse(await readFile(join(PROGRAMS, 'europa-1250.MIRI-MRS-CH1-SHORT.reproduction.json'), 'utf8')) as
+    { schema: string; mast: { calVer: string }; local: { calVer: string }; grid: { planes: number; arcsecPerPixel: number; micrometres: number[] };
+      samples: { onlyOurs: number; onlyMast: number; identicalShare: number; correlation: number; largestRelativeDifferenceAboveMedian: number } };
+  assert.equal(cube.schema, 'cssearth-jwst-spec3-reproduction@1');
+  assert.equal(cube.local.calVer, cube.mast.calVer);
+  assert.equal(cube.samples.onlyOurs + cube.samples.onlyMast, 0, 'one coverage');
+  assert.ok(cube.samples.identicalShare > 0.999, `${cube.samples.identicalShare} identical`);
+  assert.ok(cube.samples.largestRelativeDifferenceAboveMedian < 1e-6, `${cube.samples.largestRelativeDifferenceAboveMedian} largest`);
+  // Channel 1 SHORT covers 4.90 to 5.74 µm, as the band's label says, on the plate scale the cube itself states.
+  assert.ok(Math.abs(cube.grid.arcsecPerPixel - 0.13) < 1e-5, `${cube.grid.arcsecPerPixel} arcsec`);
+  assert.deepEqual(cube.grid.micrometres.map(value => Number(value.toFixed(2))), [4.90, 5.74]);
+  const picture = JSON.parse(await readFile(join(PROGRAMS, 'europa-1250.MIRI-F1280W.reproduction.json'), 'utf8')) as
+    { schema: string; differentWcs: string[]; pixels: { onlyOurs: number; onlyMast: number; ratioBins: { medianRatio: number }[]; aboveMedian: { rmsDifferenceOverRms: number } } };
+  assert.equal(picture.schema, 'cssearth-jwst-image3-reproduction@1');
+  assert.deepEqual(picture.differentWcs, [], 'MAST\u2019s grid');
+  assert.equal(picture.pixels.onlyOurs + picture.pixels.onlyMast, 0, 'one coverage');
+  assert.ok(picture.pixels.aboveMedian.rmsDifferenceOverRms < 1e-6, `${picture.pixels.aboveMedian.rmsDifferenceOverRms} RMS`);
+  for (const bin of picture.pixels.ratioBins) assert.equal(bin.medianRatio, 1);
 });
