@@ -3,5 +3,6 @@ import test from 'node:test';
 import { assertRadialPreparationParity } from '../../../../tools/objects/giant-layers/radial-parity.mts';
 
 test('neptune source-owned radial recipes reproduce every accepted ring lens and density', async () => {
-  assert.equal(await assertRadialPreparationParity('neptune'),2);
+  // One wedge atlas at the canonical density.
+  assert.equal(await assertRadialPreparationParity('neptune'),1);
 });

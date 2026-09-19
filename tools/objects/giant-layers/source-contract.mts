@@ -11,7 +11,8 @@ export async function assertAuthoredGiantSourceContract(id: string){
  const directory=resolve('src/objects',id),sourceRoot=resolve(directory,'source'),manifest=validateSourceManifest(id,JSON.parse(await readFile(resolve(sourceRoot,'manifest.json'),'utf8')));
  await verifySourceManifest({manifest,planetName:id,sourceRoot});
  const descriptor=parseAuthoredObjectDescriptor(JSON.parse(await readFile(resolve(directory,'object.json'),'utf8')));
- await readAuthoredSources(directory,descriptor);
+ // The reader parses object.json itself; it takes the file's value, not a parsed descriptor.
+ await readAuthoredSources(directory);
  async function inspect(path: string):Promise<void>{for(const entry of await readdir(path,{withFileTypes:true})){if(entry.isDirectory())await inspect(resolve(path,entry.name));else assert.doesNotMatch(entry.name,/\.(?:[cm]?js|tsx?|astro|css|sh)$/u,`Object owns no executable preparation/runtime/shell: ${path}/${entry.name}`);}}
  await inspect(directory);
  // Only a download names a source path; a verify-request carries a URL and an expected path instead.

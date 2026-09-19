@@ -26,7 +26,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
     url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material"}))),...lightingRows,
     ...planes.map(entry=>({key:entry.id,url:entry.url,pool:"warm"}))];
   const required=(id: string)=>[...layers.map(layer=>`${layer}:${id}`),...(atmospheric?[]:["shadowless",BILLBOARD_LIGHTING_KEY])];
-  const b=createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...plan.body.leaves,...planes.map(entry=>entry.leaf)].map(leaf => leaf.style)) });
+  const b=createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...plan.body.leaves,...planes.flatMap(entry=>entry.leaves)].map(leaf => leaf.style)) });
   const camera=b.element("div","polycss-camera planet-render-root");
   const scene=b.element("div","polycss-scene",`transform:${plan.camera.defaultTransform}`,{"aria-hidden":"true","data-polycss-lighting":"baked"});
   const system=b.mesh(`${ns}-system`,`transform:${plan.systemTransform}`),body=b.mesh(`${ns}-body`,"",{style:""});
@@ -38,9 +38,11 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   for(const entry of planes){
     const mesh=b.mesh(`${entry.className}`,"",{style:""});
     b.append(system,mesh);
-    const node=b.leaf(entry.leaf);
-    node.style.backgroundImage=`url(${entry.url})`;
-    b.append(mesh,node);
+    for(const leaf of entry.leaves){
+      const node=b.leaf(leaf);
+      node.style.backgroundImage=`url(${entry.url})`;
+      b.append(mesh,node);
+    }
   }
   const composite=b.element("div",`${ns}-material-composite planet-render-root`,"",{"aria-hidden":"true"});
   const plane=b.element("s",`${ns}-fixed-material`);

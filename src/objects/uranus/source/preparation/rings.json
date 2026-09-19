@@ -7,7 +7,6 @@
       "kind": "annular-field",
       "size": 1200,
       "densities": [
-        1,
         2
       ],
       "outerRadius": 106200,
@@ -331,32 +330,9 @@
       ],
       "output": "uranus-rings{suffix}.webp",
       "qualification": "PDS center radii and physical widths, with the accepted pixel readability floor for narrow rings.",
-      "overlays": [
-        {
-          "kind": "projected-strip-shadow",
-          "bodyRadius": 25559,
-          "outerRadius": 106200,
-          "centerInset": 1,
-          "marginPixels": 8,
-          "direction": [
-            0.91,
-            0.414
-          ],
-          "startFraction": 0.72,
-          "edgeFraction": 0.012,
-          "maximumAlpha": 178,
-          "color": [
-            1,
-            5,
-            7
-          ],
-          "encoding": {
-            "quality": 92,
-            "alphaQuality": 100
-          },
-          "output": "uranus-ring-shadow-plane{suffix}.webp"
-        }
-      ]
+      "wedges": {
+        "count": 16
+      }
     }
   ]
 }
