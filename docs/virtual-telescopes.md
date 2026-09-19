@@ -188,8 +188,8 @@ candidate answers four separate things:
 Each candidate also carries a `selectionAssessment` derived from these same facts: `selectable`, stable blocker codes, and a
 structured next action for every target-qualified program only when the explicit selection command can run. If qualification
 is the only blocker, `qualificationActions` asks the registered route whether an indexed archive observation can be run.
-Spitzer supplies an AOR and channel, JWST an observation and band, and NACO a programme, archive target spelling and observing
-night. The executable `telescope:qualify` command checks those fields against the index, then hands the work to the
+Spitzer supplies an AOR and channel, JWST an observation and band, NACO a programme, archive target spelling and observing
+night, and PDS supplies an exact target LID and product LIDVID. The executable `telescope:qualify` command checks those fields against the index, then hands the work to the
 telescope-owned reducer and comparison. Route lookup is shared; selection and scientific processing remain telescope-owned.
 An action means the observation can be qualified. It does not turn an observation-level wavelength or achieved-resolution
 unknown into a yes; those facts remain unresolved until the qualified product states them. The top-level `endpoint` is `unknown-target`,
@@ -240,11 +240,24 @@ toolkit, and programs with checked receipts or qualified archive-final products.
 without being presented as something the local route can already run. Where present, complete archive observation records are
 returned under the candidate's observation count; the human output shows the first eight and the JSON answer retains all of them.
 
-Spitzer IRAC Map is the first registered qualification route. For a request contained in one IRAC channel, the query can emit
+Spitzer IRAC Map was the first registered qualification route. For a request contained in one IRAC channel, the query can emit
 one action per time-matching AOR. For example, the Bennu 3.5–3.9 micrometre request selected channel 1 and AOR 21415424. Running
 that action pinned the archive inputs, produced and compared the mosaic, refreshed the ledger's program and receipt identities,
-and changed the same query from `target-program-unqualified` to a selectable `bennu-21415424` program. Other telescopes remain
-unregistered until their own reducers define the observation-level choices they can qualify honestly.
+and changed the same query from `target-program-unqualified` to a selectable `bennu-21415424` program.
+
+PDS discovery is a complete search within an explicit scope, rather than an exact-product lookup disguised as discovery:
+
+```
+pnpm telescope:discover --archive pds --target charon --write
+```
+
+Peppi exhausts the target's derived observational products. cssEarth verifies every returned label against the Registry,
+retains the search scope and total, and indexes only product profiles whose scientific metadata it understands. The Charon
+acceptance route reads all 28 derived products and admits the mapped MVIC color product because its own PDS4 label supplies
+four wavelength bins, cartography and 1 km grid sampling. Its emitted qualification action pins the complete label and image,
+uses pdr to decode all 29,001,728 array elements, applies the label's finite missing-value constant to the recorded statistics,
+and writes an `archive-final` receipt. A fresh 0.5–0.7 micrometre Charon request then selects the qualified product directly;
+angular resolution remains unknown because map sampling is not an achieved optical-resolution measurement.
 
 The instrument author then writes the final map, its `*.body-map.json`, and the shared `*.product.json`. Resolved images from
 JWST, ALMA and NACO meet at `tools/objects/resolved-disc-map.mts`: an adapter supplies a north-up/east-left value plane, its

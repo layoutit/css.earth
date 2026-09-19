@@ -16,6 +16,8 @@ export interface QualificationObservation {
   readonly productLidvid?: string;
   readonly instrument?: string;
   readonly wavelengthIntervalMicrometres?: readonly [number, number];
+  readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
+  readonly observatory?: string; readonly kind?: string; readonly use?: string; readonly units?: string; readonly surfaceResolutionKm?: number;
 }
 
 export type QualificationConfiguration =
@@ -52,6 +54,14 @@ const IRAC_CHANNELS = [
 const overlapsTime = (observation: QualificationObservation, time: { readonly any: true } | { readonly fromIso: string; readonly toIso: string } | undefined): boolean =>
   !time || 'any' in time || observation.startIso <= time.toIso && (observation.endIso ?? observation.startIso) >= time.fromIso;
 const covers = (coverage: readonly [number, number], request: readonly [number, number]) => coverage[0] <= request[0] && coverage[1] >= request[1];
+const productCovers = (observation: QualificationObservation, request: readonly [number, number]) => {
+  const intervals = observation.wavelengthIntervalsMicrometres ?? (observation.wavelengthIntervalMicrometres ? [observation.wavelengthIntervalMicrometres] : []);
+  const merged: [number, number][] = [];
+  for (const [from, to] of [...intervals].sort((a, b) => a[0] - b[0])) {
+    const last = merged.at(-1); if (last && from <= last[1]) last[1] = Math.max(last[1], to); else merged.push([from, to]);
+  }
+  return merged.some(interval => covers(interval, request));
+};
 const required = (args: readonly string[], flag: string) => {
   const value = flagValue(args, flag);
   if (!value) throw new TypeError(`${flag} is required for this qualification route.`);
@@ -124,15 +134,23 @@ const routeFor = (telescope: string, mode: string) => ROUTES.find(route => route
 export function qualificationActionsFor(telescope: string, mode: string, target: string, wavelengthMicrometres: readonly [number, number],
   time: { readonly any: true } | { readonly fromIso: string; readonly toIso: string } | undefined,
   observations: readonly QualificationObservation[]): QualificationAction[] {
-  return routeFor(telescope, mode)?.actions({ target, wavelengthMicrometres, time, observations }) ?? [];
+  const route = routeFor(telescope, mode);
+  if (route) return route.actions({ target, wavelengthMicrometres, time, observations });
+  return observations.filter(observation => overlapsTime(observation, time) && observation.targetLid && observation.archiveTarget && observation.productLidvid
+    && observation.observatory && observation.instrument && productCovers(observation, wavelengthMicrometres)).map(observation => makeAction(target, telescope, mode, observation,
+      { kind: 'pds-product', targetLid: observation.targetLid!, targetName: observation.archiveTarget!, lidvid: observation.productLidvid! },
+      ['--pds-target-lid', observation.targetLid!, '--pds-target-name', observation.archiveTarget!, '--pds-lidvid', observation.productLidvid!]));
 }
 
 export function supportsQualificationRoute(telescope: string, mode: string, configuration: QualificationConfiguration): boolean {
-  return routeFor(telescope, mode)?.accepts(configuration) ?? false;
+  return configuration.kind === 'pds-product'
+    ? configuration.targetLid.startsWith('urn:nasa:pds:context:target:') && configuration.lidvid.startsWith('urn:nasa:pds:')
+    : routeFor(telescope, mode)?.accepts(configuration) ?? false;
 }
 
 /** Parse only the instrument-specific part of a qualification command, through the same route that emitted it. */
 export function qualificationConfigurationFromArguments(telescope: string, mode: string, args: readonly string[]): QualificationConfiguration {
+  if (flagValue(args, '--pds-lidvid')) return { kind: 'pds-product', targetLid: required(args, '--pds-target-lid'), targetName: required(args, '--pds-target-name'), lidvid: required(args, '--pds-lidvid') };
   const route = routeFor(telescope, mode);
   if (!route) throw new TypeError(`No qualification route handles ${telescope} ${mode}.`);
   const configuration = route.configurationFromArguments(args);

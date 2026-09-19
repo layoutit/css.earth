@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-pds-archive-final@1",
+  "id": "charon-pds-nh_charon_color_mosaic",
+  "target": "charon",
+  "targetLid": "urn:nasa:pds:context:target:satellite.134340_pluto.charon",
+  "targetName": "(134340) Pluto I (Charon)",
+  "telescope": "New Horizons",
+  "archiveTelescope": "New Horizons",
+  "mode": "MVIC mapped color",
+  "instrument": "Multispectral Visible Imaging Camera",
+  "kind": "image",
+  "use": "Archive-derived, body-registered multiband map. Suitable as a pinned telescope product; wavelength bands and map sampling come from its PDS4 label.",
+  "lidvid": "urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0",
+  "observation": {
+    "id": "nh_charon_color_mosaic",
+    "startIso": "1965-01-01T00:00:00.000Z",
+    "stopIso": "3000-01-01T00:00:00.000Z",
+    "filter": "CH4, NIR, Red, Blue",
+    "filters": [
+      "CH4",
+      "NIR",
+      "Red",
+      "Blue"
+    ],
+    "wavelengthIntervalsMicrometres": [
+      [
+        0.875,
+        0.915
+      ],
+      [
+        0.78,
+        0.96
+      ],
+      [
+        0.55,
+        0.7
+      ],
+      [
+        0.4,
+        0.55
+      ]
+    ],
+    "units": "dimensionless relative values, no longer strictly I/F",
+    "width": 3808,
+    "height": 1904,
+    "surfaceResolutionKm": 1,
+    "mapProjection": "Equirectangular"
+  },
+  "discovery": {
+    "package": "pds.peppi",
+    "version": "0.5.0",
+    "harvestIso": "2025-07-25T20:28:16.827585836Z"
+  },
+  "decoding": {
+    "package": "pdr",
+    "version": "1.4.4",
+    "standard": "PDS4",
+    "structures": [
+      {
+        "name": "ImageCube",
+        "shape": [
+          4,
+          1904,
+          3808
+        ],
+        "dtype": "float32",
+        "elements": 29001728,
+        "masked": 0,
+        "special": 12578753,
+        "finite": 16422975,
+        "minimum": -0.6026026606559753,
+        "maximum": 9.126089096069336
+      }
+    ]
+  },
+  "files": [
+    {
+      "role": "label",
+      "name": "nh_charon_color_mosaic.lblx",
+      "uri": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/mosaic/nh_charon_color_mosaic.lblx",
+      "bytes": 14320,
+      "md5": "967baeaa6766217d6fdc0324e103aee8",
+      "sha256": "939f23390f8d7f525821b822d06bf15d08ba49ee5bc472af6ed4c41c4f2a2a40"
+    },
+    {
+      "role": "science",
+      "name": "nh_charon_color_mosaic.img",
+      "uri": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/mosaic/nh_charon_color_mosaic.img",
+      "bytes": 116006912,
+      "md5": "5ed1770566ee6697871cae1cc117b9cf",
+      "sha256": "dd23352035996d670b9c278a1466461623556acc88d66aabd3bc2da1dd15fc5a"
+    }
+  ],
+  "components": [
+    {
+      "role": "science",
+      "supplied": true,
+      "file": "nh_charon_color_mosaic.img",
+      "units": "dimensionless relative values, no longer strictly I/F"
+    },
+    {
+      "role": "coordinates",
+      "supplied": true,
+      "file": "nh_charon_color_mosaic.img",
+      "convention": "Equirectangular; Positive East; 1 km/pixel"
+    },
+    {
+      "role": "uncertainty",
+      "supplied": false,
+      "reason": "This PDS product supplies no uncertainty array."
+    },
+    {
+      "role": "quality",
+      "supplied": false,
+      "reason": "This PDS product supplies no per-pixel quality array."
+    }
+  ],
+  "note": "Archive-final image or multiband mapped image. Decoding establishes readable values and label conventions; it does not establish calibration accuracy beyond the archive product."
+}

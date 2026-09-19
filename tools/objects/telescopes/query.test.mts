@@ -488,10 +488,22 @@ test('the committed PDS bridge selects an exact Didymos product without claiming
   const lmi = answer.candidates.find(entry => entry.telescope === 'Lowell/LDT' && entry.mode === 'LMI/VR calibrated image')!;
   assert.equal(lmi.toolkitSupport.level, 'archive-final');
   assert.equal(lmi.toolkitSupport.productionMethod, 'archive-final');
-  assert.match(lmi.toolkitSupport.reason, /retrieves and decodes this mode without recalibrating it/u);
+  assert.match(lmi.toolkitSupport.reason, /retrieves and decodes products for this mode without recalibrating them/u);
   assert.deepEqual(lmi.observations?.records?.[0]?.wavelengthIntervalMicrometres, [0.520975, 0.697365]);
   assert.equal(lmi.selectionAssessment.selectable, true);
   const selected = selectObservation(answer, 'Lowell/LDT', 'LMI/VR calibrated image', 'didymos-pds-lmi-20201217-0048');
+  assert.equal(selected.unresolved.some(entry => entry.constraint === 'observationWavelength'), false);
+  assert.equal(selected.unresolved.some(entry => entry.constraint === 'angularResolution'), true);
+});
+
+test('the committed Charon discovery and qualification produce a selectable multiband archive-final product', async () => {
+  const answer = queryCapabilities({ target: 'charon', wavelengthMicrometres: [0.5, 0.7], time: { any: true }, angularResolutionArcsec: 5,
+    kind: 'image', result: 'telescope-product' }, await loadQueryInputs(ROOT, 'charon'));
+  const mvic = answer.candidates.find(entry => entry.telescope === 'New Horizons' && entry.mode === 'MVIC mapped color')!;
+  assert.equal(mvic.toolkitSupport.level, 'archive-final');
+  assert.equal(mvic.selectionAssessment.selectable, true);
+  assert.deepEqual(mvic.observations?.records?.[0]?.wavelengthIntervalsMicrometres, [[0.875, 0.915], [0.78, 0.96], [0.55, 0.7], [0.4, 0.55]]);
+  const selected = selectObservation(answer, 'New Horizons', 'MVIC mapped color', 'charon-pds-nh_charon_color_mosaic');
   assert.equal(selected.unresolved.some(entry => entry.constraint === 'observationWavelength'), false);
   assert.equal(selected.unresolved.some(entry => entry.constraint === 'angularResolution'), true);
 });

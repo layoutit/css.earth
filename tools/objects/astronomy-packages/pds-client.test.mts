@@ -8,6 +8,12 @@ test('the PDS boundary requires exact package versions and one exact product', (
   assert.throws(() => parsePdsPackageAnswer({ schema: 'cssearth-pds-package-answer@1', operation: 'discover-product', peppi: '0.5.0', pdr: '1.4.4', products: [{}, {}] }, request), /not a unique/u);
 });
 
+test('target discovery keeps every row because Peppi owns complete pagination', () => {
+  const request = { operation: 'discover-target' as const, targetLid: 'urn:nasa:pds:context:target:satellite.x', processingLevel: 'Derived' as const };
+  const answer = parsePdsPackageAnswer({ schema: 'cssearth-pds-package-answer@1', operation: 'discover-target', peppi: '0.5.0', pdr: '1.4.4', products: [{ lidvid: 'one' }, { lidvid: 'two' }] }, request);
+  assert.equal(answer.products?.length, 2);
+});
+
 test('the PDS boundary validates every decoded structure', () => {
   const request = { operation: 'decode-product' as const, labelPath: '/tmp/product.xml' };
   assert.throws(() => parsePdsPackageAnswer({ schema: 'cssearth-pds-package-answer@1', operation: 'decode-product', peppi: '0.5.0', pdr: '1.4.4',

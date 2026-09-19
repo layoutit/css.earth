@@ -15,11 +15,15 @@ boundary is `client.mts`; callers choose a named operation rather than importing
   Horizons calls used by Chandra, Hubble and Juno.
 - **Astropy owns the table, units and coordinates inside that Python boundary.** Its FITS/WCS implementation remains the
   independent oracle for the TypeScript production reader.
+- **Peppi 0.5.0 owns complete, paginated PDS4 Registry discovery.** cssEarth supplies an exact target identity and explicit
+  processing scope, verifies the returned label identities and bytes, and decides which product metadata is scientifically usable.
+- **pdr 1.4.4 owns supported PDS3/PDS4 array and table decoding.** cssEarth pins the complete referenced file set and records
+  label-declared special values, conventions and scientific limitations; a successful decode alone is not qualification.
 
 ## Whole implementations retained here
 
-A candidate package is not adopted per field or per happy path. SPHERE's legacy pinned Horizons tables, PDS product decoding,
-SPICE kernel evaluation, streaming FITS reads and the qualified Spitzer route remain entirely in their current implementations.
+A candidate package is not adopted per field or per happy path. SPHERE's legacy pinned Horizons tables, PDS layouts that pdr
+does not support, SPICE kernel evaluation, streaming FITS reads and the qualified Spitzer route remain entirely in their current implementations.
 The ownership contract records the measured reason for each decision. A later migration must move a complete operation and pass
 the real products that operation serves.
 

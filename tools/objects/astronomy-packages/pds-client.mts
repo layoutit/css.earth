@@ -4,6 +4,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { pdsToolchain } from './pds-toolchain.mts';
 
 export type PdsPackageRequest =
+  | { readonly operation: 'discover-target'; readonly targetLid: string; readonly processingLevel: 'Derived' }
   | { readonly operation: 'discover-product'; readonly targetLid: string; readonly lidvid: string }
   | { readonly operation: 'decode-product'; readonly labelPath: string };
 
@@ -35,18 +36,28 @@ def value(item):
     if isinstance(item, (str, int, float, bool)): return item
     return str(item)
 
-if operation == 'discover-product':
-    target = request['targetLid']; lidvid = request['lidvid']
-    if not target.startswith('urn:nasa:pds:context:target:') or not lidvid.startswith('urn:nasa:pds:') or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:._-' for c in target + lidvid):
+if operation in ('discover-target', 'discover-product'):
+    target = request['targetLid']; lidvid = request.get('lidvid')
+    identifiers = target + (lidvid or '')
+    if not target.startswith('urn:nasa:pds:context:target:') or (lidvid is not None and not lidvid.startswith('urn:nasa:pds:')) or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:._-' for c in identifiers):
         raise ValueError('PDS identifiers contain unsupported characters')
     fields = ['lid','vid','lidvid','ops:Label_File_Info.ops:file_ref','ops:Label_File_Info.ops:file_size','ops:Label_File_Info.ops:md5_checksum',
       'ops:Data_File_Info.ops:file_ref','ops:Data_File_Info.ops:file_size','ops:Data_File_Info.ops:md5_checksum','pds:Target_Identification.pds:name',
       'ref_lid_target','pds:Observing_System_Component.pds:name','pds:Time_Coordinates.pds:start_date_time','pds:Time_Coordinates.pds:stop_date_time',
       'pds:Primary_Result_Summary.pds:processing_level','ops:Harvest_Info.ops:harvest_date_time']
-    table = pep.Products(pep.PDSRegistryClient()).has_target(target).observationals().filter(f'lidvid eq "{lidvid}"').fields(fields).as_dataframe(max_rows=2)
+    query = pep.Products(pep.PDSRegistryClient()).has_target(target).observationals()
+    if operation == 'discover-target':
+        level = request['processingLevel']
+        if level != 'Derived': raise ValueError('Unsupported PDS processing level')
+        query = query.filter(f'pds:Primary_Result_Summary.pds:processing_level eq "{level}"')
+    else: query = query.filter(f'lidvid eq "{lidvid}"')
+    table = query.fields(fields).as_dataframe(max_rows=None if operation == 'discover-target' else 2)
     answer['products'] = [] if table is None else [{str(name):value(row[name]) for name in table.columns} for _,row in table.iterrows()]
 elif operation == 'decode-product':
     label = Path(request['labelPath']).resolve()
+    root = ET.parse(label).getroot()
+    def local(tag): return tag.rsplit('}',1)[-1]
+    special_constants = [(local(child.tag),(child.text or '').strip()) for node in root.iter() if local(node.tag) == 'Special_Constants' for child in node if child.text]
     data = pdr.read(label)
     structures = []
     for key in data.keys():
@@ -56,10 +67,16 @@ elif operation == 'decode-product':
         values = np.asarray(np.ma.filled(array, np.nan))
         numeric = np.issubdtype(values.dtype, np.number)
         finite = np.isfinite(values) if numeric else None
-        structures.append({'name':key,'shape':list(array.shape),'dtype':str(array.dtype),'elements':int(array.size),'masked':int(mask.sum()),
-          **({'finite':int(finite.sum()),'minimum':float(values[finite].min()),'maximum':float(values[finite].max())} if numeric and finite.any() else {})})
-    root = ET.parse(label).getroot()
-    def local(tag): return tag.rsplit('}',1)[-1]
+        special = np.zeros(array.shape, dtype=bool)
+        if numeric:
+            for _, text in special_constants:
+                try:
+                    constant = np.array([int(text,16)], dtype=np.uint32).view(np.float32)[0] if text.lower().startswith('0x') and values.dtype.itemsize == 4 else float(text)
+                    special |= values == constant
+                except (ValueError, OverflowError): pass
+        valid = finite & ~special if numeric else None
+        structures.append({'name':key,'shape':list(array.shape),'dtype':str(array.dtype),'elements':int(array.size),'masked':int(mask.sum()),'special':int(special.sum()),
+          **({'finite':int(valid.sum()),'minimum':float(values[valid].min()),'maximum':float(values[valid].max())} if numeric and valid.any() else {})})
     def first(name):
         node = next((node for node in root.iter() if local(node.tag) == name), None)
         return None if node is None or node.text is None else node.text.strip()
@@ -73,16 +90,34 @@ elif operation == 'decode-product':
     def child_text_from(parent, name):
         node = next((child for child in parent if local(child.tag) == name), None)
         return None if node is None or node.text is None else node.text.strip()
+    def spectral_bins():
+        bins = []
+        for node in root.iter():
+            if local(node.tag) != 'Bin_Wavelength': continue
+            center = next((child for child in node.iter() if local(child.tag) == 'center_wavelength'), None)
+            width = next((child for child in node.iter() if local(child.tag) == 'bin_width_wavelength'), None)
+            filter_ = next((child for child in node.iter() if local(child.tag) == 'filter_name'), None)
+            if center is not None and width is not None and filter_ is not None:
+                bins.append({'filter':(filter_.text or '').strip(),'center':(center.text or '').strip(),'width':(width.text or '').strip(),
+                  'centerUnit':center.attrib.get('unit'),'widthUnit':width.attrib.get('unit')})
+        return bins
+    def field_with_unit(name):
+        node = next((node for node in root.iter() if local(node.tag) == name), None)
+        return None if node is None or node.text is None else {'value':node.text.strip(),'unit':node.attrib.get('unit')}
     refs = []
     for node in root.iter():
         if local(node.tag) != 'Internal_Reference': continue
         values = {local(child.tag):(child.text or '').strip() for child in node}
         if values.get('lid_reference') and values.get('reference_type'): refs.append(values)
-    answer['decoded'] = {'standard':str(data.standard),'metadata':{'logicalIdentifier':first('logical_identifier'),'version':first('version_id'),
-      'productClass':first('product_class'),'startIso':first('start_date_time'),'stopIso':first('stop_date_time'),'targetName':child_text('Target_Identification','name'),
+    answer['decoded'] = {'standard':str(data.standard),'metadata':{'logicalIdentifier':first('logical_identifier'),'version':first('version_id'),'title':first('title'),
+      'productClass':first('product_class'),'processingLevel':first('processing_level'),'description':child_text('Primary_Result_Summary','description'),
+      'startIso':first('start_date_time'),'stopIso':first('stop_date_time'),'targetName':child_text('Target_Identification','name'),
       'observingSystem':component_names(),
       'fileNames':all_('file_name'),'localIdentifiers':all_('local_identifier'),'units':all_('unit'),'filter':first('filter_name'),
-      'centerFilterWavelength':first('center_filter_wavelength'),'bandwidth':first('bandwidth'),'references':refs},'structures':structures}
+      'centerFilterWavelength':first('center_filter_wavelength'),'bandwidth':first('bandwidth'),'spectralBins':spectral_bins(),
+      'mapProjection':first('map_projection_name'),'longitudeDirection':first('longitude_direction'),
+      'pixelResolutionX':field_with_unit('pixel_resolution_x'),'pixelResolutionY':field_with_unit('pixel_resolution_y'),
+      'specialConstants':[{'kind':kind,'value':text} for kind,text in special_constants],'references':refs},'structures':structures}
 else: raise ValueError(f'Unsupported PDS package operation: {operation}')
 
 json.dump(answer, sys.stdout, allow_nan=False, separators=(',',':'))
@@ -104,9 +139,9 @@ export function parsePdsPackageAnswer(value: unknown, request: PdsPackageRequest
   const raw = requireRecord(value, 'PDS package answer');
   if (raw.schema !== 'cssearth-pds-package-answer@1' || raw.operation !== request.operation || raw.peppi !== peppiVersion || raw.pdr !== pdrVersion)
     throw new TypeError('PDS packages answered with the wrong contract, operation or versions.');
-  if (request.operation === 'discover-product') {
+  if (request.operation === 'discover-product' || request.operation === 'discover-target') {
     const products = requireArray(raw.products, 'PDS products').map((entry, index) => requireRecord(entry, `PDS product ${index}`));
-    if (products.length > 1) throw new Error(`${request.lidvid} is not a unique PDS product.`);
+    if (request.operation === 'discover-product' && products.length > 1) throw new Error(`${request.lidvid} is not a unique PDS product.`);
     return { schema: 'cssearth-pds-package-answer@1', peppi: peppiVersion, pdr: pdrVersion, operation: request.operation, products };
   }
   const decoded = requireRecord(raw.decoded, 'decoded PDS product'), metadata = requireRecord(decoded.metadata, 'decoded PDS metadata');
