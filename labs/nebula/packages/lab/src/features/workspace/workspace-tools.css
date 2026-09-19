@@ -1,0 +1,78 @@
+/* Floating canvas tools: a button column on the right sidebar's left edge, above the image credit (bottom 8px, ~14px tall);
+   the open panel stacks above the buttons in the same column. */
+.workspace-tools {
+  --workspace-tools-bottom: 32px;
+  --workspace-tools-size: 36px;
+  --workspace-tools-gap: 10px;
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+}
+.workspace-tool-buttons {
+  position: absolute;
+  right: calc(var(--workspace-right-width) + 12px);
+  bottom: var(--workspace-tools-bottom);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: auto;
+}
+.workspace-tool-buttons > li { position: relative; }
+/* A toggle tool's compact note (a legend) sits to the left of its own button, bottom-aligned with it. */
+.workspace-tool-aside {
+  position: absolute;
+  right: calc(100% + 10px);
+  bottom: 0;
+  width: max-content;
+  max-width: 240px;
+  padding: 8px 10px;
+  border: 1px solid #41454c;
+  border-radius: 8px;
+  background: #1b1d21;
+  box-shadow: 0 8px 24px #0009;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.35;
+}
+.workspace-tool-button {
+  display: grid;
+  place-items: center;
+  width: var(--workspace-tools-size);
+  height: var(--workspace-tools-size);
+  padding: 0;
+  border: 1px solid #393b3f;
+  border-radius: 50%;
+  background: #202124;
+  color: #aeb5bf;
+  box-shadow: 0 5px 18px #0008;
+}
+.workspace-tool-button:not(:disabled):hover { background: #2a2c30; color: #dfdfdf; }
+.workspace-tool-button[aria-pressed="true"] { background: #34383d; border-color: #788792; color: #fff; }
+.workspace-tool-button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.workspace-tool-panel {
+  /* A tall column on the sidebar's left edge: from below the section navigation down to just above the buttons. */
+  --workspace-tool-buttons-height: calc(var(--workspace-tools-count, 1) * var(--workspace-tools-size) + (var(--workspace-tools-count, 1) - 1) * 8px);
+  --workspace-tool-panel-room: calc(100% - var(--workspace-left-width) - var(--workspace-right-width) - 24px);
+  position: absolute;
+  top: calc(var(--workspace-navigation-height, 0px) + 12px);
+  right: calc(var(--workspace-right-width) + 12px);
+  bottom: calc(var(--workspace-tools-bottom) + var(--workspace-tool-buttons-height) + var(--workspace-tools-gap));
+  width: min(360px, max(260px, var(--workspace-tool-panel-room)));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  padding: 12px 14px 14px;
+  border: 1px solid #41454c;
+  border-radius: 9px;
+  background: #1b1d21;
+  box-shadow: 0 12px 36px #0009;
+  pointer-events: auto;
+}
+.workspace-tool-panel-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.workspace-tool-panel-header h2 { margin: 0; color: var(--text-secondary); font-size: 12px; font-weight: 500; }
+.workspace-tool-close { flex: none; width: 24px; height: 24px; padding: 0; border: 0; background: transparent; color: #aeb5bf; font-size: 16px; line-height: 1; }
+.workspace-tool-close:not(:disabled):hover { background: #2a2c30; color: #fff; }

@@ -8,9 +8,13 @@ import type { PreparedReconstruction, ReconstructionCandidate, ReconstructionCat
 import { parseCloudAppearance, sameCloudAppearance, type CloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
 import { readCloudAppearance, saveCloudAppearance } from './cloud-appearance-store.ts';
 import { CloudAppearanceControls } from './cloud-appearance-controls';
+import { LensLevelsPanel, LevelsIcon, LEVELS_TOOLTIP } from './lens-levels-panel';
+import { differenceTool } from './difference-map';
+import type { DifferenceOverlayState } from '../legacy-viewer/difference-plane';
 import { saveLensSettings } from './lens-settings-export.ts';
 import { ImageCredit } from '../workspace/image-credit';
 import { WorkspaceImagePicker } from '../workspace/workspace-image-picker';
+import { WorkspaceTools } from '../workspace/workspace-tools';
 
 interface Job {
   id: string; status: 'queued' | 'running' | 'cancelling' | 'completed' | 'failed' | 'cancelled' | 'interrupted';
@@ -33,15 +37,19 @@ function readSelection(subjectId: string): Selection {
 
 interface Props { context: string | null; viewerBusy: boolean;
   captureSettings?(): unknown;
+  /** The viewer's difference-map plane, and the switch for it; the map needs the Earth-facing camera. */
+  difference?: DifferenceOverlayState; onDifference?(enabled: boolean, opacity: number): void;
   onSelect(prepared: PreparedReconstruction | null, subjectId: string, isCurrent: () => boolean): Promise<boolean>;
 }
 interface View { imageId: string; candidates: ReconstructionCandidate[]; selectDisabled: boolean; processDisabled: boolean;
   appearance: CloudAppearance; appearanceDirty: boolean; processing?: ReconstructionProcessingCapability;
-  running: boolean; cancelling: boolean; job: Job | null; text: string; error: boolean; credit: string; sourcePageUrl?: string; displayedResultId?: string; }
+  running: boolean; cancelling: boolean; job: Job | null; text: string; error: boolean; credit: string; sourcePageUrl?: string; displayedResultId?: string;
+  /** The displayed result when it is a baked image lens, which is what the levels measurement compares. */
+  lensResultId?: string; }
 const initialView: View = { imageId: 'benchmark', candidates: [], selectDisabled: true, processDisabled: true,
   appearance: parseCloudAppearance(), appearanceDirty: false,
   running: false, cancelling: false, job: null, text: '', error: false, credit: 'Historical photo-based LMC experiment.' };
-export function ReconstructionControls({ context, viewerBusy: busy, onSelect, captureSettings }: Props) {
+export function ReconstructionControls({ context, viewerBusy: busy, onSelect, captureSettings, difference, onDifference }: Props) {
   const [view, setView] = useState<View>(initialView);
   const [exportLabel, setExportLabel] = useState('Save lens settings');
   const actions = useRef<{ choose?(value: string): void; appearance?(value: CloudAppearance): void; process?(): void; cancel?(): void; export?(): void; busy?(value: boolean): void }>({});
@@ -66,7 +74,8 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
       appearance: { ...appearance }, appearanceDirty: Boolean(row) && !sameCloudAppearance(appearance, displayedAppearance),
       running, cancelling: job?.status === 'cancelling', job, text: messageText, error: messageError,
       credit: row?.credit ?? 'Historical photo-based LMC experiment.', sourcePageUrl: row?.sourcePageUrl,
-      displayedResultId: selection.displayedResultId });
+      displayedResultId: selection.displayedResultId,
+      lensResultId: row?.prepared?.finiteMaterial && row.prepared.resultId === selection.displayedResultId ? row.prepared.resultId : undefined });
   }
   function stopObserver() { version++; controller?.abort(); controller = null; job = null; }
   async function json(path: string, init: RequestInit = {}, signal = controller?.signal) {
@@ -267,17 +276,26 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
       {view.appearanceDirty && !view.running && !view.error && !view.processDisabled ? 'Changes ready · Preview to apply.' : view.text}</p>
     <progress id="reconstruction-progress" aria-label="Reconstruction progress" hidden={!view.running}
       max={total && Number.isFinite(current) ? total : undefined} value={total && Number.isFinite(current) ? current : undefined} />
+    {/* Levels and the difference map need a source image: no tools for the unpainted density or an unbaked lens. */}
+    <WorkspaceTools tools={view.lensResultId ? [{ id: 'levels', label: 'Levels', tooltip: LEVELS_TOOLTIP, icon: <LevelsIcon />,
+      panel: <LensLevelsPanel key={view.lensResultId} resultId={view.lensResultId} /> },
+      ...differenceTool(view.lensResultId, difference, onDifference)] : []} />
     <button id="save-lens-settings" type="button" className="text-button" disabled={view.selectDisabled || view.running}
       title="Save this browser’s lens, filter, brightness and star settings locally for the app handoff. Includes stored settings for all images; does not bake."
       onClick={() => actions.current.export?.()}>{exportLabel}</button>
   </section>;
 }
 
-export function createReconstructionControls(host: HTMLElement, options: Pick<Props, 'onSelect' | 'captureSettings'> & { controls: ControlPortals }) {
+export function createReconstructionControls(host: HTMLElement, options: Pick<Props, 'onSelect' | 'captureSettings' | 'onDifference'> & { controls: ControlPortals }) {
   const root = options.controls.mount(host); let context: string | null = null, viewerBusy = false, disposed = false;
-  const render = () => { if (!disposed) root.render(<ReconstructionControls context={context} viewerBusy={viewerBusy} onSelect={options.onSelect} captureSettings={options.captureSettings} />); };
+  let difference: DifferenceOverlayState | undefined;
+  const render = () => { if (!disposed) root.render(<ReconstructionControls context={context} viewerBusy={viewerBusy} onSelect={options.onSelect}
+    captureSettings={options.captureSettings} difference={difference} onDifference={options.onDifference} />); };
   render();
   return { setContext(next: string | null) { if (next !== context) { context = next; render(); } },
+    setDifference(next: DifferenceOverlayState | undefined) {
+      if (JSON.stringify(next) !== JSON.stringify(difference)) { difference = next && { ...next }; render(); }
+    },
     setBusy(next: boolean) { if (next !== viewerBusy) { viewerBusy = next; render(); } },
     destroy() { if (!disposed) { disposed = true; root.unmount(); } } };
 }

@@ -9,7 +9,8 @@ import { createToneResourceController, type ToneResource } from '../../adapters/
 import { cloudCompositeOpacity, createCloudInspection, nativeCloudBrightness, parseCloudCatalogue, validateCloudBrightness } from '@cssearth/volume-viewer/scene/cloud-inspection';
 import type { CloudBrightness, CloudStarOptions, CloudStarContext } from '@cssearth/volume-viewer/scene/cloud-types';
 import { mountPreparedLmcStars, parsePreparedLmcStars } from '../../adapters/viewer/catalogue-stars';
-import { mountReconstructionOverlay } from '../../adapters/viewer/reconstruction-overlay';
+import { loadRegisteredOverlay, mountReconstructionOverlay } from '../../adapters/viewer/reconstruction-overlay';
+import { createDifferencePlane, lensResultOf, type DifferenceOverlayState } from './difference-plane';
 import { validateCloudDensityFilter, type CloudDensityFilter } from '@cssearth/volume-core/fields/cloud-density';
 import { loadPreparedCssImageLayers, loadPreparedCssVolume, type PreparedCssImageLayers, type PreparedCssVolume, type VolumeCameraPublication } from '../../adapters/viewer/prepared-loaders';
 
@@ -30,6 +31,7 @@ export interface LabState {
   layerCount: number; status: string; pose: CameraPose; mode: ViewerMode; error?: string; distanceUnits?: number;
   material: { available: boolean; mode: 'neutral' | 'textured'; loading: boolean };
   originalOverlay: { available: boolean; enabled: boolean; opacity: number; loading: boolean };
+  differenceOverlay: DifferenceOverlayState;
 }
 
 /** One inspected object; production input, transforms and retained leaves, without the application shell. */
@@ -50,6 +52,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   let cloudSurface: { setOpacity(value: number): void } | null = null;
   let starLayer: ReturnType<typeof mountPreparedLmcStars> | null = null, starInfo: CloudStarContext | null = null;
   let originalOverlay: ReturnType<typeof mountReconstructionOverlay> | null = null;
+  const difference = createDifferencePlane();
   const slots = createMaterialSlots();
   // Tone bindings stay keyed by the mounted bank; a swapped lens maps its own texture paths onto those keys.
   let bankDirectory = '', boundPaths = new Map<string, string>();
@@ -73,7 +76,9 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     ...(error ? { error } : {}), distanceUnits: view.values.distance,
     material: { available: currentMode === 'photo' && Boolean(subject.reconstructionNeutral), mode: slots.mode, loading: slots.loading },
     originalOverlay: { available: currentMode === 'photo' && Boolean(subject.reconstructionOverlay),
-      enabled: currentMode === 'photo' && originalEnabled && Boolean(subject.reconstructionOverlay), opacity: originalOpacity, loading: Boolean(originalPending) } });
+      enabled: currentMode === 'photo' && originalEnabled && Boolean(subject.reconstructionOverlay), opacity: originalOpacity, loading: Boolean(originalPending) },
+    differenceOverlay: { available: currentMode === 'photo' && Boolean(subject.reconstructionOverlay && lensResultOf(subject.id)),
+      enabled: difference.enabled, earthFacing: view.pose === 'front', opacity: difference.opacity, loading: difference.loading } });
   const view = createInspectionCamera({ host, backend: inspectionCameraRenderer,
     configuration: () => ({ frame: payload?.frame ?? null, projectionScale: subject.referenceProjectionScale ?? 1,
       eastLeft: currentMode === 'density' || Boolean(subject.referenceEastLeft) }),
@@ -90,6 +95,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   function render(publication: VolumeCameraPublication) {
     if (!mounted || !payload || disposed) return;
     mounted.publish(publication); starLayer?.publish(publication); originalOverlay?.publish(publication);
+    difference.publish(publication, currentMode === 'photo' && view.pose === 'front');
     inspectLayers();
     if (currentMode === 'density' && !densityOverlayEnabled)
       for (const bank of banks) for (const leaf of bank.leaves) for (const node of leaf.nodes) node.style.visibility = 'hidden';
@@ -299,18 +305,8 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     if (!originalOverlay && !originalPending) {
       const manifestPath = subject.reconstructionOverlay, expectedFrame = payload.frame, expectedDistance = subject.referenceDistanceUnits;
       const pending = (async () => {
-        const response = await fetch(localFile(manifestPath));
+        const { overlay, textureUrl: url } = await loadRegisteredOverlay(manifestPath, localFile, { frame: expectedFrame, distanceUnits: expectedDistance });
         if (!current()) return;
-        if (!response.ok) throw new Error(`Original image registration is unavailable (HTTP ${response.status}).`);
-        const catalogue = parseOverlayCatalogue(await response.json());
-        if (!sameOverlayFrame(catalogue.frame, expectedFrame) || catalogue.overlays.length !== 1 ||
-            typeof catalogue.referenceDistanceUnits !== 'number' || typeof expectedDistance !== 'number' ||
-            Math.abs(catalogue.referenceDistanceUnits - expectedDistance) > 1e-12 * expectedDistance)
-          throw new TypeError('Original image does not share this reconstruction’s prepared Earth frame.');
-        const overlay = catalogue.overlays[0];
-        if (overlay.initialPlacement && JSON.stringify(overlay.initialPlacement) !== JSON.stringify(defaultOverlayPlacement()))
-          throw new TypeError('Original overlay must include registration in its prepared geometry.');
-        const directory = manifestPath.slice(0, manifestPath.lastIndexOf('/') + 1), url = localFile(`${directory}${overlay.texturePath}`);
         const image = new Image(); image.src = url; await image.decode();
         if (image.naturalWidth !== overlay.widthPx || image.naturalHeight !== overlay.heightPx)
           throw new TypeError('Original image decoded at the wrong prepared size.');
@@ -323,6 +319,20 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     } else if (originalPending) await originalPending;
     if (current()) { originalOverlay?.setVisible(originalEnabled, originalOpacity); publish(); report(); }
   }
+  /** The render-minus-source map for the displayed image lens, on the original image's registered quad. */
+  async function setDifferenceOverlay(enabled: boolean, opacity = difference.opacity) {
+    if (enabled && (currentMode !== 'photo' || !payload)) throw new Error('The difference map is shown on the reconstruction’s Earth view.');
+    const version = loadVersion, expectedSubject = subject.id;
+    const current = () => !disposed && version === loadVersion && expectedSubject === subject.id && currentMode === 'photo';
+    const loading = difference.set(enabled, opacity, payload ? { host, before: starLayer?.root ?? end, resultId: lensResultOf(subject.id),
+      manifestPath: subject.reconstructionOverlay, frame: payload.frame, distanceUnits: subject.referenceDistanceUnits, url: localFile, current } : undefined);
+    report();
+    try { await loading; } finally { if (current()) { publish(); report(); } }
+  }
+  const followDifference = (current: () => boolean) => {
+    // The switch survives a subject without a lens (the unpainted density) and remounts on the next lens.
+    if (difference.enabled && subject.reconstructionOverlay && lensResultOf(subject.id)) void setDifferenceOverlay(true).catch(failure => { if (current()) { status = 'Difference map could not load'; error = String(failure); report(); } });
+  };
   function rememberDensityCamera() {
     if (payload && host.dataset.mode === 'density' && subject.density) {
       densityCameras.set(subject.density.directory, retainCamera());
@@ -394,7 +404,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     subject = next; cloud = nextCloud; cloudBrightness = nativeCloudBrightness(); layer = null;
     cloudFilter = resyncCloudSupport(starLayer, cloud);
     boundPaths = new Map(resources.map(item => [item.replacementPath, item.sourcePath]));
-    originalOverlay?.destroy(); originalOverlay = null; originalPending = null;
+    originalOverlay?.destroy(); originalOverlay = null; originalPending = null; difference.clear();
     host.dataset.material = slots.mode;
     if (cloud) {
       host.dataset.cloudSelection = JSON.stringify(cloud.selection()); host.dataset.cloudBrightness = JSON.stringify(cloudBrightness);
@@ -404,6 +414,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     host.dataset.subject = next.id; host.dataset.ready = 'true'; publish(); report();
     if (originalEnabled && next.reconstructionOverlay)
       void setOriginalOverlay(true).catch(failure => { if (current()) { status = 'Original overlay could not load'; error = String(failure); report(); } });
+    followDifference(current);
   }
   async function setSubject(id: string, cameraOverride: ReturnType<typeof retainCamera> | null = null, requestedMode?: ViewerMode) {
     const next = subjects.find(item => item.id === id);
@@ -437,7 +448,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       mounted?.destroy(); mounted = null; banks = []; payload = null; layerCount = 0; clearOverlays(); toneResources.clear();
       cloudSurface = null;
       starLayer?.destroy(); starLayer = null; starInfo = null;
-      originalOverlay?.destroy(); originalOverlay = null; originalPending = null;
+      originalOverlay?.destroy(); originalOverlay = null; originalPending = null; difference.clear();
       cloud = null; cloudBrightness = nativeCloudBrightness(); host.style.opacity = '1';
       cloudFilter = { cutoff: 0, softness: .25, showRemoved: false };
       delete host.dataset.cloudSelection; delete host.dataset.cloudBrightness; delete host.dataset.cloudOpacity;
@@ -478,7 +489,11 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       if (next.stars && !relativePath(next.stars)) throw new TypeError('Invalid prepared star path.');
       const starResponse = loadedCloud && next.stars ? await fetch(localFile(next.stars)) : null;
       if (starResponse && !starResponse.ok) throw new Error(`Prepared stars failed to load (${starResponse.status}).`);
-      const stars = starResponse ? parsePreparedLmcStars(await starResponse.json(), loaded.frame) : null;
+      // The dev server answers a missing path with its HTML shell, so absence arrives as 200 text/html.
+      // A model without a prepared catalogue layer keeps its material; only the optional overlay is skipped.
+      const starJson = starResponse?.headers.get('content-type')?.includes('json') ? await starResponse.json() : null;
+      if (starResponse && starJson === null) console.warn(`Prepared stars are unavailable for ${next.id}; continuing without the catalogue layer.`);
+      const stars = starJson === null ? null : parsePreparedLmcStars(starJson, loaded.frame);
       if (disposed || version !== loadVersion) return;
       const resourceUrl = (path: string) => localFile(`${directory}/prepared/${path}`);
       // Decode the selected fixed bank before presenting it; no source processing happens in the lab renderer.
@@ -521,6 +536,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       schedule(); report();
       if (originalEnabled && next.reconstructionOverlay && currentMode === 'photo')
         void setOriginalOverlay(true).catch(failure => { if (!disposed && version === loadVersion) { status = 'Original overlay could not load'; error = String(failure); report(); } });
+      if (currentMode === 'photo') followDifference(() => !disposed && version === loadVersion);
     } catch (failure) {
       if (disposed || version !== loadVersion) return;
       if (mounted && payload) { currentMode = host.dataset.mode as ViewerMode; host.dataset.ready = 'true'; }
@@ -530,7 +546,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   }
   await setSubject(subject.id);
   return Object.freeze({ setSubject, reset: () => currentMode === 'density' ? referenceView() : reset(), loadOverlayCatalogue, setOverlay, setOverlayLayer, getOverlayLayer, installRemovalLayers, setOverlayPlacement, getOverlayState,
-    referenceView, fitCloud, setOriginalOverlay, setMaterial, applyToneResources, applyCloudDensityResources,
+    referenceView, fitCloud, setOriginalOverlay, setDifferenceOverlay, setMaterial, applyToneResources, applyCloudDensityResources,
     getDensityOverlay: () => densityOverlayEnabled,
     setDensityOverlay(enabled: boolean) {
       if (currentMode !== 'density') return;
@@ -577,7 +593,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     },
     destroy() {
       if (disposed) return; disposed = true; loadVersion++; view.destroy();
-      mounted?.destroy(); starLayer?.destroy(); originalOverlay?.destroy(); end.remove();
+      mounted?.destroy(); starLayer?.destroy(); originalOverlay?.destroy(); difference.clear(); end.remove();
     },
   });
 }

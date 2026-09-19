@@ -2,6 +2,7 @@
 export const labCommands: Record<string, string> = {
   "export-compact-finite-emission": "labs/nebula/packages/lab/src/cli/commands/export-compact-finite-emission.ts",
   "bake-finite-lenses": "labs/nebula/packages/lab/src/cli/commands/bake-finite-lenses.ts",
+  "lens-tone-fit": "labs/nebula/packages/lab/src/cli/commands/lens-tone-fit.ts",
   "simulation-guided-reconstruction": "labs/nebula/packages/lab/src/cli/commands/simulation-guided-reconstruction.ts",
   "finite-density-material": "labs/nebula/packages/lab/src/cli/commands/finite-density-material.ts",
   "fit-tracer-density": "labs/nebula/packages/lab/src/cli/commands/fit-tracer-density.ts",
@@ -61,6 +62,7 @@ export const labCommands: Record<string, string> = {
   "browser-overlay-variants": "labs/nebula/packages/lab/browser/browser-overlay-variants.ts",
   "prepare-lmc-stars": "labs/nebula/packages/lab/src/cli/commands/prepare-lmc-stars.ts",
   "prepare-smc-stars": "labs/nebula/packages/lab/src/cli/commands/prepare-smc-stars.ts",
+  "prepare-lmc-finite-stars": "labs/nebula/packages/lab/src/cli/commands/prepare-lmc-finite-stars.ts",
   "browser-cloud-density": "labs/nebula/packages/lab/browser/browser-cloud-density.ts",
   "browser-cloud-controls": "labs/nebula/packages/lab/browser/browser-cloud-controls.ts",
   "prepare-parts": "labs/nebula/packages/lab/src/cli/commands/prepare-parts.ts",
@@ -83,5 +85,7 @@ export const labCommands: Record<string, string> = {
   "browser-coherent": "labs/nebula/packages/lab/browser/browser-coherent.ts",
   "browser-reconstruction-stability": "labs/nebula/packages/lab/browser/browser-reconstruction-stability.ts",
   "browser-reconstruction-reference": "labs/nebula/packages/lab/browser/browser-reconstruction-reference.ts",
-  "browser-reconstruction-tabs": "labs/nebula/packages/lab/browser/browser-reconstruction-tabs.ts"
+  "browser-reconstruction-tabs": "labs/nebula/packages/lab/browser/browser-reconstruction-tabs.ts",
+  "browser-lens-levels": "labs/nebula/packages/lab/browser/browser-lens-levels.ts",
+  "browser-difference-map": "labs/nebula/packages/lab/browser/browser-difference-map.ts"
 };

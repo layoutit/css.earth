@@ -1,0 +1,34 @@
+.difference-legend-title,
+.difference-legend-note { margin: 0; }
+.difference-legend-title { color: #dfdfdf; margin-bottom: 6px; }
+.difference-legend-note + .difference-legend-note { margin-top: 3px; }
+.difference-legend-note[data-error="true"] { color: #ff8a80; }
+.difference-legend-scale {
+  display: flex;
+  gap: 2px;
+  margin: 0 0 6px;
+  padding: 0;
+  list-style: none;
+}
+.difference-legend-scale li {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  width: 30px;
+  font-variant-numeric: tabular-nums;
+}
+.difference-legend-swatch {
+  width: 100%;
+  height: 10px;
+  border: 1px solid #41454c;
+  border-radius: 2px;
+}
+.difference-legend-key[data-side="dark"] { color: #8fb0ff; }
+.difference-legend-key[data-side="bright"] { color: #ff9a88; }
+.difference-legend-opacity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.difference-legend-opacity input { flex: 1; min-width: 0; }
