@@ -21,12 +21,14 @@
  * model image on the imaging grid, solves and applies the gains and cleans. The fitted parameters cross the boundary as
  * numbers, and the disc profile is written into the generated script from the one statement of it in this file. */
 import { spawnSync } from 'node:child_process';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { measureSource, readContinuumImage } from './alma-image.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
-import { toolchainPath } from './toolchain.mts';
+import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
+import { sha256 } from '../../../src/platform/sha256.mts';
+import { pinFile, readProductRecord, runDigest, sameRun, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
 
 const RADIANS_PER_MAS = Math.PI / (180 * 3.6e6);
 const ASTRONOMICAL_UNIT_KM = 149_597_870.7;
@@ -527,21 +529,43 @@ export async function ephemerisDistanceAu(visibilities: string, scratch: string,
     rows: requireFiniteNumber(record.rows, 'rows'), mjd: requireFiniteNumber(record.mjd, 'mjd') };
 }
 
+/** What identifies a measurement set as an input. CASA rewrites a set's data columns in place while it calibrates, so the
+ * bytes of the whole directory change under a run that reads it; the tables that say what was observed (which antennas,
+ * fields, windows and execution) do not. Their bytes are the identity: another observation, or another split of this one,
+ * has other tables. */
+export async function measurementSetIdentity(path: string): Promise<ProductInput> {
+  const hashes: string[] = []; let bytes = 0;
+  for (const table of ['OBSERVATION/table.f0', 'FIELD/table.f0', 'SPECTRAL_WINDOW/table.f0', 'ANTENNA/table.f0']) { const pin = await pinFile(resolve(path, table)); hashes.push(`${table}:${pin.sha256}`); bytes += pin.bytes; }
+  return { role: 'visibilities (observation, field, window and antenna tables)', identity: path, bytes, sha256: sha256(hashes.join('\n')) };
+}
+
 export async function discSelfCalibrate(options: DiscSelfCalibrationOptions) {
   await mkdir(options.out, { recursive: true });
   await mkdir(options.scratch, { recursive: true });
   const casa = resolve(await toolchainPath('casa'), 'venv/bin/python');
-  /** Each stage is written where it can be read and rerun, then run. A stage whose last product is already there is not run
-   * again: gridding a hundred thousand cells and cleaning a 2048-pixel image take minutes each, and a rerun after a change
-   * further down should not repeat them. Delete the product to force the stage. */
-  const stage = async (script: string, name: string, product: string) => {
-    const path = resolve(options.out, name);
+  /** Each stage is written where it can be read and rerun, then run. A stage is reused only when the product record beside its
+   * product says this same run made it: the same stage script (which carries every parameter, the paths and the fit handed
+   * down from the stage before), the same visibilities and the same pinned CASA, and the product on disk is still the file
+   * that run wrote. Anything else runs the stage again, so a receipt never describes processing that did not make the file
+   * it sits beside. Gridding a hundred thousand cells and cleaning a 2048-pixel image take minutes each; an unchanged rerun
+   * repeats none of it. */
+  const toolchain = await toolchainDescriptor('casa'), software = requireArray(toolchain.entry.requirements, 'casa requirements').map(requirement => { const [name, version] = requireString(requirement, 'requirement').split('=='); return { name: name!, version: version ?? 'unpinned' }; });
+  const source = await measurementSetIdentity(options.visibilities);
+  const stages: { stage: string; product: string; record: string; reused: boolean; runDigest: string }[] = [];
+  const stage = async (script: string, name: string, products: readonly string[]) => {
+    const product = products[0]!, path = resolve(options.out, name), recordPath = resolve(options.out, `${product}.product.json`);
+    const run: ProductRun = { telescope: 'ALMA', stage: `disc-selfcal/${name.replace(/\.py$/u, '')}`, inputs: [source], parameters: { script: sha256(script) }, software, toolchainDigest: toolchain.digest };
+    const reused = await sameRun(await readProductRecord(recordPath), run, recorded => resolve(options.out, recorded));
     await writeFile(path, script);
-    if (await readFile(resolve(options.out, product)).then(() => true, () => false)) return;
-    // casatools opens a log where the process starts, before any script can redirect it; the stage runs in the output
-    // directory so those land beside the run instead of in the repository.
-    const result = spawnSync(casa, [path], { stdio: 'inherit', cwd: options.out });
-    if (result.status !== 0) throw new Error(`${name} failed (status ${result.status}).`);
+    if (!reused) {
+      await rm(recordPath, { force: true });
+      // casatools opens a log where the process starts, before any script can redirect it; the stage runs in the output
+      // directory so those land beside the run instead of in the repository.
+      const result = spawnSync(casa, [path], { stdio: 'inherit', cwd: options.out });
+      if (result.status !== 0) throw new Error(`${name} failed (status ${result.status}).`);
+      await writeProductRecord(recordPath, run, products.map(made => ({ path: made, file: resolve(options.out, made) })));
+    }
+    stages.push({ stage: run.stage, product, record: `${product}.product.json`, reused, runDigest: runDigest(run) });
   };
 
   const geometry = await ephemerisDistanceAu(options.visibilities, options.scratch, casa);
@@ -552,15 +576,17 @@ export async function discSelfCalibrate(options: DiscSelfCalibrationOptions) {
     imaging: { cell: options.cell, imageSize: options.imageSize, robust: options.robust, referenceAntenna: options.referenceAntenna },
     fluxScale: { factor: options.fluxScale, source: options.fluxScaleSource },
     rounds: [] as unknown[],
+    // Which run made each product this receipt reads: the record beside it, and whether this invocation ran it or found it made.
+    stages,
   };
 
   let visibilities = options.visibilities;
   for (const [index, round] of options.rounds.entries()) {
     const number = index + 1;
-    await stage(discSelfCalibrationScript('grid', options, { round: number, visibilities }), `grid-${number}.py`, `${options.body}.round${number}.uv.json`);
+    await stage(discSelfCalibrationScript('grid', options, { round: number, visibilities }), `grid-${number}.py`, [`${options.body}.round${number}.uv.json`]);
     const grid = await readGrid(resolve(options.out, `${options.body}.round${number}.uv.json`));
     const fit = fitLimbDarkenedDisc(grid.cells, diameterRadians);
-    await stage(discSelfCalibrationScript('round', options, { round: number, visibilities, fit }), `round-${number}.py`, `${options.body}.round${number}.gains.json`);
+    await stage(discSelfCalibrationScript('round', options, { round: number, visibilities, fit }), `round-${number}.py`, [`${options.body}.round${number}.gains.json`, `${options.body}.round${number}.fits`, `${options.body}.round${number}.residual.fits`]);
     const image = readContinuumImage(await readFile(resolve(options.out, `${options.body}.round${number}.fits`)));
     const measurement = measureSource(image, 700, 600);
     // Where the fit puts the disc and where the image puts it must be the same place. A sign taken the wrong way round in the
@@ -588,10 +614,10 @@ export async function discSelfCalibrate(options: DiscSelfCalibrationOptions) {
     visibilities = `${options.scratch}/${options.body}.round${number}.selfcal.ms`;
   }
 
-  await stage(discSelfCalibrationScript('grid', options, { round: 0, visibilities }), 'grid-final.py', `${options.body}.round0.uv.json`);
+  await stage(discSelfCalibrationScript('grid', options, { round: 0, visibilities }), 'grid-final.py', [`${options.body}.round0.uv.json`]);
   const grid = await readGrid(resolve(options.out, `${options.body}.round0.uv.json`));
   const fit = fitLimbDarkenedDisc(grid.cells, diameterRadians);
-  await stage(discSelfCalibrationScript('final', options, { round: 0, visibilities, fit, frequencyHz: grid.frequencyHz }), 'final.py', `${options.body}.final.beam.json`);
+  await stage(discSelfCalibrationScript('final', options, { round: 0, visibilities, fit, frequencyHz: grid.frequencyHz }), 'final.py', [`${options.body}.final.beam.json`, `${options.body}.final.fits`, `${options.body}.final.residual.fits`, `${options.body}.final.brightness-temperature.fits`]);
 
   const image = readContinuumImage(await readFile(resolve(options.out, `${options.body}.final.fits`)));
   const measurement = measureSource(image, 700, 600);

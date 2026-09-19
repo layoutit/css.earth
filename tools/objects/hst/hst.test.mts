@@ -235,9 +235,13 @@ test('an extension MAST does not hold, one of another shape and one of four axes
     const write = async (name: string, bytes: Buffer) => { await writeFile(join(work, name), bytes); return readHstFileHdus(join(work, name)); };
     const theirs = await write('theirs.fits', imageFile('SCI', 1, 16, 8, 1, level));
     assert.deepEqual(pairExtensions(await write('a.fits', imageFile('SCI', 1, 16, 8, 1, level)), theirs).pairs.map(pair => pair.name), ['SCI,1']);
-    assert.deepEqual(pairExtensions(await write('b.fits', imageFile('ERR', 1, 16, 8, 1, level)), theirs).differentGrid, ["ERR,1: MAST's product has no such extension"]);
-    assert.deepEqual(pairExtensions(await write('c.fits', imageFile('SCI', 2, 16, 8, 1, level)), theirs).differentGrid, ["SCI,2: MAST's product has no such extension"]);
+    assert.deepEqual(pairExtensions(await write('b.fits', imageFile('ERR', 1, 16, 8, 1, level)), theirs).differentGrid, ["ERR,1: MAST's product has no such extension", 'SCI,1: the re-run product has no such extension']);
+    assert.deepEqual(pairExtensions(await write('c.fits', imageFile('SCI', 2, 16, 8, 1, level)), theirs).differentGrid, ["SCI,2: MAST's product has no such extension", 'SCI,1: the re-run product has no such extension']);
     assert.deepEqual(pairExtensions(await write('d.fits', imageFile('SCI', 1, 16, 9, 1, level)), theirs).differentGrid, ["SCI,1: 16x9 against MAST's 16x8"]);
+    const errors = await write('f.fits', imageFile('ERR', 1, 16, 8, 1, level)), whole = [...theirs, errors[1]!];
+    const partial = pairExtensions(theirs, whole);
+    assert.deepEqual(partial.pairs.map(pair => pair.name), ['SCI,1']);
+    assert.deepEqual(partial.differentGrid, ['ERR,1: the re-run product has no such extension'], 'an extension only MAST holds is reported, not skipped');
     const cube = await write('e.fits', imageFile('SCI', 1, 16, 8, 3, level));
     assert.deepEqual(pairExtensions(cube, cube).pairs.map(pair => pair.name), ['SCI,1'], 'three axes are read');
     const stack = await write('f.fits', imageFile('SCI', 1, 16, 8, 3, level, 4));

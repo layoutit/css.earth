@@ -20,6 +20,7 @@ import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import { decodeJunocam, refinableStrips, type JunocamGeometry } from '../terrestrial-layers/junocam.mts';
 import { refineStripEpochs, type StripRefinementPolicy } from '../terrestrial-layers/strip-refinement.mts';
 import { PROGRAMS, fetchText, readProgram, writeProgram, type JunocamProgram } from './archive.mts';
+import { flagValue, positionalArguments } from '../../cli-arguments.mts';
 
 export const RECEIPT_SCHEMA = 'cssearth-junocam-registration@1';
 /** The budget every measured program is held to; a lens may state a tighter one. */
@@ -87,8 +88,8 @@ export async function measureProgram(id: string, work: string, { raw, horizons =
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2), horizons = args.includes('--horizons'), rawAt = args.indexOf('--raw'), raw = rawAt < 0 ? undefined : args[rawAt + 1];
-  const [id, work] = args.filter((value, index) => !value.startsWith('--') && index !== rawAt + 1);
+  const args = process.argv.slice(2), horizons = args.includes('--horizons'), raw = flagValue(args, '--raw');
+  const [id, work] = positionalArguments(args, ['--raw']);
   if (!id || !work) throw new TypeError('Usage: measure.mts <program id> <work directory> [--raw <directory>] [--horizons]');
   const receipt = await measureProgram(id, resolve(work), { raw: raw ? resolve(raw) : undefined, horizons });
   for (const image of receipt.images) console.log(`${image.productId}: pointing ${(image.offsets.pointingSeconds * 1000).toFixed(1)} ms, ephemeris ${image.offsets.ephemerisSeconds.toFixed(3)} s, holdout ${image.holdoutResidualPixels.before.toFixed(2)} -> ${image.holdoutResidualPixels.after.toFixed(2)} px over ${image.holdoutResidualPixels.points} points`);

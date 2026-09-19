@@ -38,7 +38,9 @@ const named = (hdus: readonly FitsFileHdu[]) => hdus.map((hdu, index) => ({ hdu,
   extver: typeof hdu.header.EXTVER === 'number' ? hdu.header.EXTVER : 1 }));
 
 /** The extensions of two products that can be compared, and, for each that cannot, why. The first HDU is the primary header,
- * which carries no samples. An extension is comparable only on one grid: the same name, the same version, the same shape. */
+ * which carries no samples. An extension is comparable only on one grid: the same name, the same version, the same shape.
+ * Both products are walked: an extension only MAST holds (a re-run that lost its errors, its data quality or a second
+ * detector) is reported just as one only the re-run holds, so agreement is never reported over part of a product in silence. */
 export function pairExtensions(ours: readonly FitsFileHdu[], theirs: readonly FitsFileHdu[]) {
   const theirNamed = named(theirs), pairs: { name: string; ours: ReturnType<typeof named>[number]; theirs: ReturnType<typeof named>[number] }[] = [], differentGrid: string[] = [];
   for (const entry of named(ours).slice(1)) {
@@ -48,6 +50,8 @@ export function pairExtensions(ours: readonly FitsFileHdu[], theirs: readonly Fi
     else if (entry.hdu.header.XTENSION !== 'BINTABLE' && ![2, 3].includes(entry.hdu.dimensions.length)) differentGrid.push(`${name}: ${entry.hdu.dimensions.length} axes, which this comparison does not read`);
     else pairs.push({ name, ours: entry, theirs: match });
   }
+  const ourNamed = named(ours);
+  for (const entry of theirNamed.slice(1)) if (!ourNamed.some(other => other.extname === entry.extname && other.extver === entry.extver)) differentGrid.push(`${entry.extname},${entry.extver}: the re-run product has no such extension`);
   return { pairs, differentGrid };
 }
 const quantile = (sorted: Float32Array, q: number) => sorted[Math.min(sorted.length - 1, Math.floor(q * (sorted.length - 1)))] ?? Number.NaN;

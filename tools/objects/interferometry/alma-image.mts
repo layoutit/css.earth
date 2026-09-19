@@ -14,6 +14,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHeader, type FitsHeader } from '../../fits.mts';
+import { flagValue, positionalArguments } from '../../cli-arguments.mts';
 
 export interface ContinuumImage {
   readonly width: number; readonly height: number;
@@ -140,10 +141,9 @@ export function compareImages(restored: ContinuumImage, archive: ContinuumImage,
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const given = process.argv.slice(2);
-  const reachIndex = given.indexOf('--reach');
-  const [first, second] = given.filter((value, index) => !value.startsWith('--') && index !== reachIndex + 1);
+  const [first, second] = positionalArguments(given, ['--reach']), reach = flagValue(given, '--reach');
   if (!first) throw new TypeError('Usage: alma-image.mts <image.fits> [<other.fits>] [--reach <mas>]');
-  const reachMas = reachIndex >= 0 ? Number(given[reachIndex + 1]) : 120;
+  const reachMas = given.includes('--reach') ? Number(reach) : 120;
   if (!Number.isFinite(reachMas) || reachMas <= 0) throw new TypeError('--reach takes a distance in milliarcseconds.');
   const image = readContinuumImage(await readFile(first));
   const measurement = measureSource(image, 700, reachMas);
