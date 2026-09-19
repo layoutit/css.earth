@@ -573,6 +573,15 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const catalogueRetry = catalogueError?.querySelector<HTMLButtonElement>('[data-catalogue-retry]') ?? null;
   let searchLabels = items.map(item => ({ ...objectSearchLabels(item), item }));
   let sourceLinks = sourceDocuments(documentTarget);
+  const collapseSolarSystemBranches = () => {
+    const navigation = system?.querySelector<HTMLElement>('[data-object-navigation-tree]');
+    if (!navigation) return;
+    for (const branch of navigation.querySelectorAll<HTMLDetailsElement>('details[data-atlas-depth]:not([data-atlas-depth="0"])')) {
+      branch.open = false;
+    }
+    const solarSystem = navigation.querySelector<HTMLDetailsElement>('details[data-atlas-depth="0"][data-atlas-key="solar-system"]');
+    if (solarSystem) solarSystem.open = true;
+  };
   let chunks = [...browser.querySelectorAll<HTMLElement>('.planet-object-chunk')]
     .map(node => ({ node, items: [...node.querySelectorAll<HTMLElement>('.planet-object-item')] }));
   const refreshChunks = () => {
@@ -1028,6 +1037,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     },
     showSystem(systemId: string) {
       overview = true; overviewScope = 'system'; overviewSystemId = systemId;
+      if (systemId === SOLAR_SYSTEM_ID) collapseSolarSystemBranches();
       markSelection(); render(false);
     },
     setOverview(enabled: boolean, scope: OverviewScope, systemId: string) {
@@ -1035,6 +1045,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       overview = enabled;
       overviewScope = scope;
       if (enabled) overviewSystemId = systemById(SCENE_OBJECTS, systemId)?.id ?? SOLAR_SYSTEM_ID;
+      if (enabled && scope === 'system' && overviewSystemId === SOLAR_SYSTEM_ID) collapseSolarSystemBranches();
       markSelection();
       if (enabled) { destinations?.bind(null); features?.bind(null); }
       render(editing);

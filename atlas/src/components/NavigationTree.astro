@@ -1,0 +1,17 @@
+---
+import '../navigation-tree.css';
+import TreeItem from './TreeItem.astro';
+import { atlasTree, readObjects } from '../objects.mts';
+
+interface Props { current: string }
+
+const { current } = Astro.props;
+// One owner for the Atlas hierarchy. The Atlas site and the application shell
+// render this component directly; neither keeps a parallel navigation tree.
+const tree = atlasTree(readObjects());
+---
+<div class="atlas-tree-card" data-object-navigation-tree>
+  <ul class="atlas-tree top-level">
+    {tree.map(node => <li><TreeItem node={node} current={current} depth={0} /></li>)}
+  </ul>
+</div>

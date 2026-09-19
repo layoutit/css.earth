@@ -1,0 +1,27 @@
+---
+import ObjectMarker from './ObjectMarker.astro';
+import { treeCount, type TreeNode } from '../objects.mts';
+
+interface Props { node: TreeNode; current: string; depth: number }
+
+const { node, current, depth } = Astro.props;
+const holds = (item: TreeNode): boolean => item.object?.id === current || item.children.some(holds);
+// A top-level section counts every page it holds; a group inside it counts only its own members, so Planets
+// says 8, not 8 plus their moons. A body with moons shows only its name.
+const label = node.object ? node.label : `${node.label} (${depth === 0 ? treeCount(node) : node.children.length})`;
+const place = node.object?.group === 'context' || !node.object;
+const nameClass = depth === 0 ? 'atlas-tree-root' : place ? 'atlas-tree-group' : 'atlas-tree-body';
+---
+{node.children.length
+  ? <details open={holds(node)} data-atlas-depth={depth} data-atlas-key={node.key}
+      data-atlas-group={node.object ? undefined : node.label.toLowerCase()}>
+      <summary>{node.object
+        ? <a class="atlas-tree-body" href={`/${node.object.id}/`} aria-current={node.object.id === current ? 'page' : undefined}><ObjectMarker objectId={node.object.id} />{node.label}</a>
+        : <span class={nameClass}>{label}</span>}</summary>
+      <ul>
+        {node.children.map(child => <li><Astro.self node={child} current={current} depth={depth + 1} /></li>)}
+      </ul>
+    </details>
+  : node.object && <a class="atlas-row" href={`/${node.object.id}/`} aria-current={node.object.id === current ? 'page' : undefined}>
+      <ObjectMarker objectId={node.object.id} />{node.label}
+    </a>}
