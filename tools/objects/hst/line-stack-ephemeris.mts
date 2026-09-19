@@ -14,8 +14,8 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { requireRecord, requireString } from '../../source-values.mts';
 import type { StackHorizons } from './line-stack-reduction.mts';
+import { astroqueryText } from '../astronomy-packages/client.mts';
 
-const HORIZONS = 'https://ssd.jpl.nasa.gov/api/horizons.api';
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const DEGREE = Math.PI / 180;
 /** Julian date of the Unix epoch, for turning a calendar date into the same scale the requests are made in. */
@@ -86,12 +86,8 @@ export async function horizonsResponse(responses: HorizonsResponses, observer: s
   const pinned = responses[key];
   if (pinned !== undefined) return pinned;
   if (!mayAsk) throw new Error(`The pinned Horizons responses do not answer ${key}. Re-run with --fetch to ask for it.`);
-  const query = new URLSearchParams({ format: 'text', COMMAND: `'${command}'`, OBJ_DATA: 'NO', MAKE_EPHEM: 'YES', EPHEM_TYPE: 'OBSERVER',
-    CENTER: `'${observer}'`, TLIST: `'${julianDates.map(julianDate => julianDate.toFixed(8)).join(' ')}'`, TLIST_TYPE: 'JD',
-    QUANTITIES: `'${quantities}'`, ANG_FORMAT: 'DEG', CSV_FORMAT: 'YES', EXTRA_PREC: 'YES' });
-  const response = await fetch(`${HORIZONS}?${query}`);
-  if (!response.ok) throw new Error(`Horizons ${response.status} ${await response.text()}`);
-  const text = await response.text();
+  const text = await astroqueryText({ operation: 'horizons-ephemerides', id: command, location: observer,
+    epochs: julianDates, quantities, raw: true });
   parseHorizonsTable(text);
   responses[key] = text;
   return text;

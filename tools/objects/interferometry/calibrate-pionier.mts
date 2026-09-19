@@ -21,7 +21,7 @@ import { spawnSync } from 'node:child_process';
 import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { archiveHeader, column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, rawFrames, runRecipe } from './eso-pipeline.mts';
+import { archiveHeader, column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, rawFrames, runRecipe, type RawRow } from './eso-pipeline.mts';
 import { findLostFringes, pairVisibilities, removeLostFringes } from './lost-fringes.mts';
 import { toolchainPath } from './toolchain.mts';
 
@@ -31,10 +31,12 @@ export interface RawFrame { readonly dpId: string; readonly dpType: string; read
 export interface PionierBlock { readonly object: string; readonly role: 'science' | 'calibrator'; readonly exposures: readonly string[]; readonly dark: string }
 export interface PionierPlan { readonly kappa: { readonly dark: string; readonly frames: readonly string[] }; readonly spectral: string; readonly blocks: readonly PionierBlock[] }
 
+const rawFramesOf = (rows: readonly RawRow[]): RawFrame[] => rows.map(row => ({ dpId: column(row, 'dp_id'), dpType: column(row, 'dp_type'), dpCategory: column(row, 'dp_cat'), object: column(row, 'object'),
+  programme: column(row, 'prog_id'), templateStart: column(row, 'tpl_start') }));
+
 /** The archive's CSV (dp_id, dp_cat, dp_type, object, prog_id and tpl_start columns) as frames in time order. */
 export function parseRawFrames(csv: string): RawFrame[] {
-  return parseRawTable(csv).map(row => ({ dpId: column(row, 'dp_id'), dpType: column(row, 'dp_type'), dpCategory: column(row, 'dp_cat'), object: column(row, 'object'),
-    programme: column(row, 'prog_id'), templateStart: column(row, 'tpl_start') }));
+  return rawFramesOf(parseRawTable(csv));
 }
 
 const time = frameTime;
@@ -181,8 +183,8 @@ export async function calibratePionier(plan: PionierPlan, rawDirectory: string, 
  * header, the plan written beside the products. Returns the calibrated files. */
 export async function calibratePionierWindow(work: string, target: string, from: string, to: string, rawDirectory: string,
   { frames: framesCsv, overrides = {} }: { frames?: string; overrides?: Partial<{ prefix: string; calib: string; yorick: string }> } = {}) {
-  const csv = framesCsv ?? await queryRawTable('PIONIER', ['dp_id', 'dp_cat', 'dp_type', 'object', 'prog_id', 'tpl_start', 'exposure', 'ins_mode', 'release_date', 'access_estsize'], new Date(Date.parse(`${from}Z`) - 36 * 3600e3).toISOString().slice(0, 19), new Date(Date.parse(`${to}Z`) + 24 * 3600e3).toISOString().slice(0, 19));
-  const frames = parseRawFrames(csv), headers = resolve(rawDirectory, 'headers');
+  const rows = framesCsv ? parseRawTable(framesCsv) : await queryRawTable('PIONIER', ['dp_id', 'dp_cat', 'dp_type', 'object', 'prog_id', 'tpl_start', 'exposure', 'ins_mode', 'release_date', 'access_estsize'], new Date(Date.parse(`${from}Z`) - 36 * 3600e3).toISOString().slice(0, 19), new Date(Date.parse(`${to}Z`) + 24 * 3600e3).toISOString().slice(0, 19));
+  const frames = rawFramesOf(rows), headers = resolve(rawDirectory, 'headers');
   // Setups from archive headers: each candidate block's and calibration set's first frame, and the darks just before kappa sets.
   const firstOfTemplate = new Map<string, RawFrame>();
   for (const frame of frames) if (/^(FRINGE,OBJECT|KAPPA,|FRINGE,LAMP)/u.test(frame.dpType) && !firstOfTemplate.has(`${frame.templateStart}/${frame.dpType}`)) firstOfTemplate.set(`${frame.templateStart}/${frame.dpType}`, frame);

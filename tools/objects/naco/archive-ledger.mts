@@ -104,25 +104,12 @@ export function bucketOf(technique: string): string {
   return 'other';
 }
 
-/** The archive's CSV for an aggregate query, as rows keyed by column name. `parseRawTable` cannot be used here: it is for
- * frame tables and requires a `dp_id` column, which a `GROUP BY` result has none of. Quoted fields may hold commas, which is
- * why a NACO technique like `"IMAGE,JITTER"` needs the quoting rule and not a split on commas. */
-export function parseCsv(text: string): Record<string, string>[] {
-  const lines = text.split('\n').filter(line => line.trim());
-  if (!lines.length) return [];
-  const split = (line: string) => [...line.matchAll(/("([^"]*)"|[^,]*)(,|$)/gu)].slice(0, -1).map(match => match[2] ?? match[1] ?? '');
-  const header = split(lines[0]!);
-  return lines.slice(1).map(line => { const cells = split(line); return Object.fromEntries(header.map((name, index) => [name, cells[index] ?? ''])); });
-}
-
-const csv = (text: string) => parseCsv(text);
-
 /** Counts by category and by technique, grouped by the archive and not here. */
 export async function frameCounts(today: string) {
-  const byCategory = csv(await rawQuery(`SELECT dp_cat, count(*) AS n FROM dbo.raw WHERE instrument = '${INSTRUMENT}'`
-    + ` AND release_date < '${today}' GROUP BY dp_cat`));
-  const byTechnique = csv(await rawQuery(`SELECT dp_tech, count(*) AS n FROM dbo.raw WHERE instrument = '${INSTRUMENT}'`
-    + ` AND release_date < '${today}' AND dp_cat = 'SCIENCE' GROUP BY dp_tech`));
+  const byCategory = await rawQuery(`SELECT dp_cat, count(*) AS n FROM dbo.raw WHERE instrument = '${INSTRUMENT}'`
+    + ` AND release_date < '${today}' GROUP BY dp_cat`);
+  const byTechnique = await rawQuery(`SELECT dp_tech, count(*) AS n FROM dbo.raw WHERE instrument = '${INSTRUMENT}'`
+    + ` AND release_date < '${today}' AND dp_cat = 'SCIENCE' GROUP BY dp_tech`);
   const categories: Record<string, number> = {}, modes: Record<string, number> = {};
   for (const row of byCategory) categories[row.dp_cat!] = Number(row.n);
   for (const row of byTechnique) { const bucket = bucketOf(row.dp_tech!); modes[bucket] = (modes[bucket] ?? 0) + Number(row.n); }
@@ -136,7 +123,7 @@ export async function scienceTargets(today: string) {
     + ` AND release_date < '${today}' AND dp_cat = 'SCIENCE'`
     + ` AND dp_type NOT IN (${NON_OBSERVING_TYPES.map(type => `'${type}'`).join(', ')})`
     + ' GROUP BY object, prog_id, dp_tech';
-  return csv(await rawQuery(query));
+  return rawQuery(query);
 }
 
 /** The shipped object ids: the directories of src/objects. */

@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-astronomy-package-ownership@1",
+  "pythonBoundary": "tools/objects/astronomy-packages/client.mts",
+  "owners": [
+    {
+      "mechanic": "IVOA TAP requests and VOTable decoding",
+      "package": "pyvo",
+      "version": "1.9.1",
+      "operation": "tap-query",
+      "consumers": ["ALMA", "ESO", "Chandra", "KOA", "CADC", "SIMBAD", "OiDB", "VizieR"]
+    },
+    {
+      "mechanic": "MAST service queries and downloads",
+      "package": "astroquery",
+      "version": "0.4.11",
+      "operation": "mast-service, mast-download",
+      "consumers": ["Hubble", "JWST"]
+    },
+    {
+      "mechanic": "ALMA product discovery",
+      "package": "astroquery",
+      "version": "0.4.11",
+      "operation": "alma-data-info",
+      "consumers": ["ALMA"]
+    },
+    {
+      "mechanic": "VizieR cone search",
+      "package": "astroquery",
+      "version": "0.4.11",
+      "operation": "vizier-region",
+      "consumers": ["stellar diameter discovery"]
+    },
+    {
+      "mechanic": "JPL Horizons observer ephemerides and vectors",
+      "package": "astroquery",
+      "version": "0.4.11",
+      "operation": "horizons-ephemerides, horizons-vectors",
+      "consumers": ["Chandra", "Hubble", "Juno"]
+    }
+  ],
+  "retained": [
+    {
+      "mechanic": "SPHERE pinned Horizons text tables",
+      "implementation": "tools/objects/sphere-horizons.mts",
+      "reason": "The checked products consume Horizons VEC_TABLE=1 text as a pinned input. Astroquery 0.4.11 exposes parsed vectors or VEC_TABLE=3 text; changing this route requires migrating the pinned artifact and every receipt together. The complete existing route remains in one implementation."
+    },
+    {
+      "mechanic": "PDS3 and PDS4 product decoding",
+      "implementation": "tools/objects/pds3-labels.mts and tools/objects/pds-labels.mts",
+      "reason": "No candidate package has passed the repository's representative Juno, New Horizons, OSIRIS, DART and IHW products as one complete replacement."
+    },
+    {
+      "mechanic": "SPICE kernel evaluation",
+      "implementation": "tools/spice",
+      "reason": "The production TypeScript evaluator is preparation-time infrastructure shared by 22 consumers and is already checked against CSPICE. A partial SpiceyPy path would create two production answers for one operation."
+    },
+    {
+      "mechanic": "streaming FITS and in-process WCS reads",
+      "implementation": "tools/fits.mts and tools/objects/interferometry/fits-table.mts",
+      "reason": "Astropy remains the independent oracle. Moving 127 consumers across a process boundary would remove subregion streaming and does not close an archive or science capability gap."
+    },
+    {
+      "mechanic": "Spitzer archive discovery and byte retrieval",
+      "implementation": "tools/objects/spitzer/archive.mts",
+      "reason": "Astroquery IRSA did not complete the live spitzer_sha SIA query used to qualify this route. The proven implementation remains whole."
+    }
+  ]
+}

@@ -12,7 +12,7 @@ import { CALIBRATION_TAGS, DP_ID, calibrationFor, modeOf, SCHEMA, scienceTag, te
 import { reduceProgram, requireRunnableRecipe, templateFrames, type NacoRecipeRunner } from './reduce.mts';
 import { addComparisonEvidence, overlapOf, repositoryPath, statistics } from './compare.mts';
 import { cksum, nacoToolchainDescriptor, nacoRecipes } from './toolchain.mts';
-import { bucketOf, ledgerGuide, matchShippedObject, observationsOf, parseCsv, parseTargetName, SCHEMA as LEDGER_SCHEMA } from './archive-ledger.mts';
+import { bucketOf, ledgerGuide, matchShippedObject, observationsOf, parseTargetName, SCHEMA as LEDGER_SCHEMA } from './archive-ledger.mts';
 import { midpointUtc, resolutionOf, slitGeometry } from './spectroscopy-receipt.mts';
 import { median, supportOf, traceDirection, widthOf } from './spectrum.mts';
 
@@ -367,12 +367,7 @@ test('a technique falls in exactly one ledger bucket, and the refused ones keep 
   assert.equal(bucketOf('SPECTRUM,JITTER'), 'other');
 });
 
-test('the archive CSV of an aggregate query is read by column name, quoted techniques included', () => {
-  const rows = parseCsv('object,prog_id,dp_tech,n\nEUROPA,088.C-0833(B),"SPECTRUM,NODDING",98\n');
-  assert.equal(rows.length, 1);
-  assert.equal(rows[0]!.dp_tech, 'SPECTRUM,NODDING');
-  assert.equal(rows[0]!.n, '98');
-});
+
 
 test('observations group by shipped object and keep both spellings of a name', () => {
   const rows = [
