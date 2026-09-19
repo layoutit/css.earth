@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readFile, rm, writeFile, type FileHandle } from 'node:f
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import test from 'node:test';
-import { readCatalog, prepareCatalog } from './prepare-catalog.mts';
+import { contextObjectModule, readCatalog, prepareCatalog } from './prepare-catalog.mts';
 import { prepareBodyRecords } from '../packages/astronomy/tools/body-records.mts';
 import { literalRecords } from '../packages/astronomy/tools/lib/write-record-sections.mts';
 import type { PathLike } from 'node:fs';
@@ -13,6 +13,17 @@ const write = async (path: string, value: unknown) => {
   await mkdir(dirname(path), { recursive: true });
   await writeFile(path, typeof value === 'string' ? value : JSON.stringify(value, null, 2) + '\n');
 };
+
+test('context prepared resources stay external until their bank is selected', () => {
+  const source = contextObjectModule([
+    { id: 'nebula', type: 'volume-lens-bank' },
+    { id: 'stars', type: 'point-field' },
+  ]);
+  assert.match(source, /query: '\?url&no-inline'/u);
+  assert.match(source, /\.\.\/src\/objects\/nebula\/prepared\/\*\*\/\*\.\{json,png,webp,bin\}/u);
+  assert.match(source, /!\.\.\/src\/objects\/stars\/prepared\/\*\.bin/u,
+    'The source-only point bank stays excluded while its published resources remain external.');
+});
 
 async function addBody(root: string, id: string, classification: string, parent = 'sun') {
   await write(resolve(root, `src/objects/${id}/object.json`), {
