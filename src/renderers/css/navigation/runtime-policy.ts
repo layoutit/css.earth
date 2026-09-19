@@ -21,6 +21,8 @@ export interface ResponsiveOrbitPolicyOptions {
 export interface RuntimePolicy {
   readonly MOBILE_VIEWPORT_QUERY: string;
   readonly SKYBOX_DRAG_ENABLED: boolean;
+  /** How much faster a flight goes when input asks it to hurry. */
+  readonly FLIGHT_WHEEL_SPEEDUP: number;
   readonly WHEEL_ZOOM_SPEED_MULTIPLIER: number;
   readonly WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER: number;
   readonly WHEEL_ZOOM_USE_SCROLL_DISTANCE: boolean;

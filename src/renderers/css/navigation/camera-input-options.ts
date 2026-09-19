@@ -20,6 +20,8 @@ export function validateDragControlsOptions({ inputSurface, trackballMetrics, fl
 }
 
 export type FlyToMotion = { startedAt: number | null } & (
-  { sample: (progress: number) => void; durationMilliseconds: number; finish(completed: boolean): void } |
+  { sample: (progress: number) => void; durationMilliseconds: number; finish(completed: boolean): void;
+    /** Flight time runs on its own clock, so input can hurry the arrival without a jump. */
+    elapsedMilliseconds: number; previousTimestamp: number | null; speed: number } |
   { sample?: undefined; finish?: undefined; plan: SurfaceFlyToPlan; previousPitchDelta: number; previousYawDelta: number; previousRotation: Quaternion }
 );
