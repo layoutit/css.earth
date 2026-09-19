@@ -29,13 +29,15 @@ import { readFitsHeader, readFitsImage } from '../../fits.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { ALMA, horizonsTables } from '../sphere-horizons.mts';
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '../terrestrial-layers/observer-cameras.mts';
-import { observerCamera } from '../terrestrial-layers/observer-camera.mts';
+import { placeResolvedDisc } from '../resolved-disc-map.mts';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '../body-map-product.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
-import { bodyMapFits, fitDiscCentre, projectBandMap, topRowFirst, type BodyMap } from '../jwst/cubes/body-map.mts';
+import { bodyMapFits, type BodyMap } from '../jwst/cubes/body-map.mts';
+import { bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
+import type { ProductInput, ProductSoftware } from '../product-record.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
-const ARCSEC_PER_RADIAN = 206_264.806_247, AU_KM = 1.495978707e8, DEGREE = Math.PI / 180, MJD_EPOCH_JD = 2_400_000.5;
+const DEGREE = Math.PI / 180, MJD_EPOCH_JD = 2_400_000.5;
 
 export interface ThermalCutout { readonly size: number; readonly arcsecPerPixel: number; readonly midJd: number; readonly rmsKelvin: number; readonly kelvin: Float64Array }
 
@@ -53,16 +55,21 @@ export function cutDisc(image: { values: Float64Array; width: number; height: nu
 const cardNumber = (header: Record<string, unknown>, key: string) => requireFiniteNumber(Number(header[key]), key);
 
 export async function authorThermalMaps(id: string, options: { check?: boolean; sources?: readonly string[] } = {}) {
-  const source = resolve(REPOSITORY, 'src/objects', id, 'source'), record = requireRecord(JSON.parse(await readFile(resolve(source, 'preparation/alma-thermal-maps.json'), 'utf8')), 'thermal maps record');
+  const source = resolve(REPOSITORY, 'src/objects', id, 'source'), recipePath = resolve(source, 'preparation/alma-thermal-maps.json'), recipeBytes = await readFile(recipePath),
+    record = requireRecord(JSON.parse(recipeBytes.toString('utf8')), 'thermal maps record');
   if (record.schema !== 'cssearth-alma-thermal-maps@1') throw new TypeError('Unsupported thermal maps record.');
   const body = requireRecord(JSON.parse(await readFile(resolve(REPOSITORY, 'packages/astronomy/data/bodies', `${id}.json`), 'utf8'))), physical = requireRecord(body.physical);
   const radiusKm = requireFiniteNumber(physical.meanRadiusKm, 'mean radius'), command = requireString(physical.horizonsCode, 'Horizons code');
-  const rotation = requireRecord(record.rotation, 'rotation'), orientation = await loadOrientation(source, { kind: 'iau-pck', path: requireString(rotation.path), body: requireFiniteNumber(rotation.body) } as never, REPOSITORY);
+  const rotation = requireRecord(record.rotation, 'rotation'), rotationPath = resolve(source, requireString(rotation.path)), rotationBytes = await readFile(rotationPath),
+    orientation = await loadOrientation(source, { kind: 'iau-pck', path: requireString(rotation.path), body: requireFiniteNumber(rotation.body) } as never, REPOSITORY);
   const written = new Map<string, Buffer>(), evidence: Record<string, unknown>[] = [];
+  const software: ProductSoftware[] = [{ name: 'cssEarth author-thermal-maps', version: '1' }, { name: 'node', version: process.versions.node }];
   const round = (value: number, digits = 4) => +value.toFixed(digits), quantile = (values: number[], q: number) => [...values].sort((a, b) => a - b)[Math.floor(q * (values.length - 1))]!;
   for (const raw of requireArray(record.maps, 'maps')) {
     const entry = requireRecord(raw, 'map'), mapId = requireString(entry.id, 'map id'), grid = requireRecord(entry.grid, 'grid'), limit = requireFiniteNumber(entry.maximumEmissionDegrees, 'maximumEmissionDegrees');
     const margin = requireFiniteNumber(entry.cutoutRadii, 'cutoutRadii'), placed: BodyMap[] = [], sessions: Record<string, unknown>[] = [], observations: BodyMapObservation[] = [], frequencies: number[] = [];
+    const inputs: ProductInput[] = [{ role: 'body-map recipe', identity: `src/objects/${id}/source/preparation/alma-thermal-maps.json`, bytes: recipeBytes.byteLength, sha256: sha256(recipeBytes) },
+      { role: 'rotation model', identity: requireString(rotation.path), bytes: rotationBytes.byteLength, sha256: sha256(rotationBytes) }];
     for (const rawSession of requireArray(entry.sessions, 'sessions')) {
       const stated = requireRecord(rawSession, 'session'), sessionId = requireString(stated.id, 'session id'), ephemeris = requireRecord(stated.ephemeris, 'ephemeris'), cutoutPath = resolve(source, requireString(stated.image, 'session image'));
       let bytes: Buffer | null = await readFile(cutoutPath).catch(() => null);
@@ -82,6 +89,7 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
         written.set(cutoutPath, bytes);
       }
       if (!bytes) throw new Error(`${id} ${mapId}: no cutout for ${sessionId}.`);
+      inputs.push({ role: 'brightness-temperature cutout', identity: requireString(stated.image, 'session image'), bytes: bytes.byteLength, sha256: sha256(bytes) });
       const primary = readFitsHeader(bytes).header as Record<string, unknown>, plane = readFitsImage(bytes, { start: 2880 });
       const cutout: ThermalCutout = { size: plane.width, arcsecPerPixel: cardNumber(primary, 'PIXSCALE'), midJd: cardNumber(primary, 'MJD-MID') + MJD_EPOCH_JD, rmsKelvin: cardNumber(primary, 'RMSK'), kelvin: plane.values };
       const paths = { observer: requireString(ephemeris.observer), heliocentric: requireString(ephemeris.heliocentric) };
@@ -91,21 +99,23 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
         tables = await horizonsTables(command, [cutout.midJd], undefined, ALMA);
         written.set(resolve(source, paths.observer), Buffer.from(tables.observer)); written.set(resolve(source, paths.heliocentric), Buffer.from(tables.heliocentric));
       }
+      for (const [role, path, text] of [['observer ephemeris', paths.observer, tables.observer], ['heliocentric ephemeris', paths.heliocentric, tables.heliocentric]] as const) {
+        const value = Buffer.from(text); inputs.push({ role, identity: `src/objects/${id}/source/${path}`, bytes: value.byteLength, sha256: sha256(value) });
+      }
       const row = horizonsRows(tables.observer)[0]!;
       if (Math.abs(rowJd(row) - cutout.midJd) >= 2 / 86_400) throw new Error(`${paths.observer} has no row at the session's mid-time.`);
       const { rightAscension, declination, rangeAu } = observerRowValues(row);
       const [sunX, sunY, sunZ] = (horizonsRows(tables.heliocentric).find(line => line.trimStart().startsWith('X ='))?.match(/-?\d+\.\d+(?:E[+-]\d+)?/gu) ?? []).map(Number), sunRange = Math.hypot(sunX!, sunY!, sunZ!);
       if (![rightAscension, declination, rangeAu, sunRange].every(Number.isFinite)) throw new Error(`${id} ${mapId}: unreadable Horizons rows for ${sessionId}.`);
-      const radiusPixels = radiusKm / (rangeAu! * AU_KM) * ARCSEC_PER_RADIAN / cutout.arcsecPerPixel, size = cutout.size;
-      const centre = fitDiscCentre(topRowFirst(cutout.kelvin, size, size), size, size, radiusPixels);
-      const camera = observerCamera({ epochJd: cutout.midJd, targetRightAscensionDegrees: rightAscension!, targetDeclinationDegrees: declination!, rangeAu: rangeAu!,
-        sunRightAscensionDegrees: (Math.atan2(-sunY!, -sunX!) / DEGREE + 360) % 360, sunDeclinationDegrees: Math.asin(-sunZ! / sunRange) / DEGREE,
-        pixelAngleMicroradians: cutout.arcsecPerPixel / ARCSEC_PER_RADIAN * 1e6, center: centre.center }, orientation);
-      const map = projectBandMap({ width: size, height: size, depth: cutout.kelvin, error: new Float64Array(size * size).fill(cutout.rmsKelvin), continuum: cutout.kelvin }, camera, radiusKm, { width: requireFiniteNumber(grid.width), height: requireFiniteNumber(grid.height) }, limit), seen = [...map.depth].filter(Number.isFinite);
-      placed.push(map); frequencies.push(cardNumber(primary, 'FREQHZ'));
-      observations.push({ id: sessionId, telescope: 'ALMA', instrument: requireString(entry.instrument ?? 'band 6 continuum', 'instrument'), midTimeJd: cutout.midJd, rangeKm: camera.rangeKm,
-        subObserver: { latitudeDegrees: camera.observerLatitude, westLongitudeDegrees: ((camera.observerWestLongitude % 360) + 360) % 360 }, subSolar: { latitudeDegrees: camera.sunLatitude, westLongitudeDegrees: ((camera.sunWestLongitude % 360) + 360) % 360 },
+      const mode = requireString(entry.mode ?? entry.instrument ?? 'Band 6 continuum', 'mode'), programme = requireString(stated.programme, 'session programme');
+      const size = cutout.size, result = placeResolvedDisc({ plane: { width: size, height: size, values: cutout.kelvin, uncertainty: new Float64Array(size * size).fill(cutout.rmsKelvin), arcsecPerPixel: cutout.arcsecPerPixel },
+        identity: { id: sessionId, telescope: 'ALMA', instrument: requireString(entry.instrument ?? mode, 'instrument'), mode, programme, midTimeJd: cutout.midJd },
+        geometry: { epochJd: cutout.midJd, targetRightAscensionDegrees: rightAscension!, targetDeclinationDegrees: declination!, rangeAu: rangeAu!,
+          sunRightAscensionDegrees: (Math.atan2(-sunY!, -sunX!) / DEGREE + 360) % 360, sunDeclinationDegrees: Math.asin(-sunZ! / sunRange) / DEGREE },
+        orientation, radiusKm, grid: { width: requireFiniteNumber(grid.width), height: requireFiniteNumber(grid.height) }, maximumEmissionDegrees: limit,
         angularResolution: { majorArcsec: cardNumber(primary, 'BMAJMAS') / 1000, minorArcsec: cardNumber(primary, 'BMINMAS') / 1000, positionAngleDegrees: cardNumber(primary, 'BPADEG'), basis: 'restoring beam of the self-calibrated image' } });
+      const { map, centre, camera, radiusPixels } = result, seen = [...map.depth].filter(Number.isFinite);
+      placed.push(map); frequencies.push(cardNumber(primary, 'FREQHZ')); observations.push(result.observation);
       sessions.push({ session: sessionId, midJd: round(cutout.midJd, 5), rmsKelvin: round(cutout.rmsKelvin, 2),
         disc: { diameterPixels: round(2 * radiusPixels, 2), centrePixels: centre.center.map(value => round(value, 2)), centreFromCutoutMiddlePixels: centre.center.map(value => round(value - (size - 1) / 2, 2)), blurPixels: centre.blurPixels, fitResidualOverPeak: round(centre.residualOverPeak) },
         camera: { observerLatitude: round(camera.observerLatitude), observerWestLongitude: round(camera.observerWestLongitude), sunLatitude: round(camera.sunLatitude), sunWestLongitude: round(camera.sunWestLongitude), northAzimuthDegrees: round(camera.northAzimuthDegrees), rangeKm: round(camera.rangeKm, 0) },
@@ -115,18 +125,22 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
     // A temperature is the state of the ground at one moment, so sessions are never averaged: each cell keeps the session that
     // saw it most squarely, and where sessions overlap their difference is reported. Each session carries its own definition,
     // so sessions imaged at different frequencies are different measurements and the combination refuses them.
-    const definitionAt = (frequencyHz: number): MeasurementDefinition => ({ quantity, units, timeDependence: 'instantaneous-state', source: requireString(entry.source, 'source'),
-      method: { kind: 'brightness-temperature', frequencyGHz: Math.round(frequencyHz / 1e8) / 10, convention: 'Planck', background: 'none added', from: 'self-calibrated continuum image in Jy per beam over the restoring beam solid angle' } });
-    const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(await readFile(resolve(source, requireString(rotation.path)))), bodyCode: requireFiniteNumber(rotation.body) } };
+    const definitionAt = (frequencyHz: number): MeasurementDefinition => { const wavelength = 299_792_458 / frequencyHz * 1e6; return ({ quantity, units, timeDependence: 'instantaneous-state',
+      wavelengthIntervalsMicrometres: [[wavelength, wavelength]], source: requireString(entry.source, 'source'),
+      method: { kind: 'brightness-temperature', frequencyGHz: Math.round(frequencyHz / 1e8) / 10, convention: 'Planck', background: 'none added', from: 'self-calibrated continuum image in Jy per beam over the restoring beam solid angle' } }); };
+    const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(rotationBytes), bodyCode: requireFiniteNumber(rotation.body) } };
     const policy: CombinationPolicy = { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'as-observed' } };
     const { map, overlaps } = combineUnderPolicy(placed.map((placedMap, index) => ({ map: placedMap, definition: definitionAt(frequencies[index]!), frame, observation: observations[index]! })), policy, limit);
     const output = requireString(entry.output, 'output'), fits = bodyMapFits(map, { TELESCOP: 'ALMA', OBJECT: requireString(entry.target), QUANTITY: quantity, NSESSION: String(placed.length) },
       [{ name: quantity, units, values: map.depth }, { name: `${quantity} ERROR`, units, values: map.error }]);
     written.set(resolve(source, output), fits);
-    written.set(resolve(source, `${output}.body-map.json`), Buffer.from(formatBodyMapProduct({ schema: 'cssearth-body-map@1',
+    const mapProduct = { schema: 'cssearth-body-map@1',
       definition: definitionAt(frequencies[0]!), frame,
       grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, sha256: sha256(fits), value: quantity, uncertainty: `${quantity} ERROR` },
-      mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: policy } : {}) })));
+      mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: policy } : {}) } as const;
+    const metadata = Buffer.from(formatBodyMapProduct(mapProduct));
+    written.set(resolve(source, `${output}.body-map.json`), metadata);
+    written.set(resolve(source, `${output}.product.json`), Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software))));
     const seen = [...map.depth].filter(Number.isFinite);
     evidence.push({ id: mapId, sessions, overlaps: overlaps.filter(pair => pair.cells >= 500).map(pair => ({ first: sessions[pair.first]!.session, second: sessions[pair.second]!.session, cells: pair.cells, rmsDifferenceKelvin: round(pair.rmsDifference, 2), correlation: round(pair.correlation, 3) })),
       map: { cells: map.seenCells, areaShare: round(map.areaShare), kelvin: { minimum: round(quantile(seen, 0), 1), median: round(quantile(seen, 0.5), 1), maximum: round(quantile(seen, 1), 1) } } });

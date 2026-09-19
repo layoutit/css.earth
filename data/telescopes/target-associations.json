@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-target-associations@2",
+  "associations": [
+    {
+      "target": "nix",
+      "archive": "mast",
+      "collection": "HST",
+      "observations": [
+        "j96o01010",
+        "j96o02010"
+      ],
+      "evidence": [
+        {
+          "citation": "https://www.lpi.usra.edu/meetings/lpsc2007/pdf/1722.pdf",
+          "locator": "Observation summary and Tables 1-2",
+          "establishes": "Nix was measured in the 15 and 18 May 2005 HST ACS/WFC F606W visits while Hubble tracked Pluto."
+        },
+        {
+          "citation": "https://archive.stsci.edu/prepds/mt/",
+          "locator": "programme 10427, target pluto, instrument ACS",
+          "establishes": "STScI publishes the corresponding moving-target archive programme as 10427 PLUTO ACS."
+        }
+      ]
+    }
+  ]
+}

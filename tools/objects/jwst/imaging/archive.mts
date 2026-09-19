@@ -19,10 +19,11 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
-import { mastDownloadUrl, mastRequest, type MastFile } from '../mast.mts';
+import { MAST_CACHE, mastFile, mastRequest, type MastFile } from '../mast.mts';
 import { isCubeBand, JWST_BANDS, NIRCAM_OCCULTERS, type JwstBand } from './bands.mts';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');
+export const DEFAULT_CRDS_CONTEXT = 'jwst_1535.pmap';
 const NAME = /^[A-Za-z0-9._-]+$/u;
 
 export interface ImagingBand {
@@ -103,7 +104,8 @@ export const bandOfFilters = (instrument: string, filters: string, observation =
     return found;
   }
   if (instrument === 'NIRSPEC') {
-    const found = Object.values(JWST_BANDS).find(entry => entry.grating !== undefined && parts.length === 2 && parts.includes(entry.grating) && parts.includes(entry.filter));
+    const found = Object.values(JWST_BANDS).find(entry => entry.grating !== undefined && entry.filter !== undefined &&
+      parts.length === 2 && parts.includes(entry.grating) && parts.includes(entry.filter));
     if (!found) throw new Error(`No JWST cube band for ${instrument} ${filters}.`);
     return found;
   }
@@ -117,7 +119,7 @@ export const bandOfFilters = (instrument: string, filters: string, observation =
     if (!found) throw new Error(`No JWST band for ${instrument} ${filters} behind MASK${occulter}.`);
     return found;
   }
-  const found = Object.values(JWST_BANDS).filter(entry => !entry.coronagraph && entry.instrument === instrument &&
+  const found = Object.values(JWST_BANDS).filter(entry => !entry.coronagraph && entry.filter !== undefined && entry.instrument === instrument &&
     (entry.instrument === 'MIRI' ? parts.length === 1 && parts[0] === entry.filter
       : parts.includes(entry.filter) && parts.includes(entry.pupil ?? 'CLEAR') || entry.pupil === 'CLEAR' && parts.length === 1 && parts[0] === entry.filter));
   if (found.length !== 1) throw new Error(`${found.length ? 'More than one' : 'No'} JWST band for ${instrument} ${filters}.`);
@@ -139,8 +141,8 @@ export async function imagingBand(observation: string): Promise<ImagingBand & { 
   const coron = Boolean(band.coronagraph), cube = isCubeBand(band), stage = coron ? 'coron3' : cube ? 'spec3' : 'image3';
   const level3 = pick(cube ? 'S3D' : 'I2D', 3, new RegExp(`^${observation}_${cube ? 's3d' : 'i2d'}\\.fits$`, 'u')), association = pick('ASN', 3, new RegExp(`_${stage}_\\d+_asn\\.json$`, 'u'));
   if (level3.length !== 1 || association.length !== 1) throw new Error(`${observation}: expected one level-3 ${cube ? 'cube' : 'mosaic'} and one ${stage} association.`);
-  const asnFile = mastFileOf(association[0]!), response = await fetch(mastDownloadUrl(asnFile.uri), { signal: AbortSignal.timeout(120_000) });
-  const asn = requireRecord(await response.json(), 'Association');
+  const asnFile = mastFileOf(association[0]!);
+  const asn = requireRecord(JSON.parse(await readFile(await mastFile(asnFile, MAST_CACHE), 'utf8')) as unknown, 'Association');
   const [product] = requireArray(asn.products).map(value => requireRecord(value));
   // A spec3 association names its product as far as the setting (…_nirspec_g395h, …_miri); the stage appends the rest, after a
   // dash for NIRSpec's filter and an underscore for MIRI's channel and sub-band.
@@ -159,8 +161,7 @@ export async function imagingBand(observation: string): Promise<ImagingBand & { 
     ...(coron ? { references: exposures('psf') } : {}), programme: String(obs.proposal_id), target: requireString(obs.target_name) };
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [id, crdsContext, ...observations] = process.argv.slice(2);
+export async function pinImagingProgram(id: string, crdsContext: string, observations: readonly string[]): Promise<{ readonly path: string; readonly program: ImagingProgram }> {
   if (!id || !NAME.test(id) || !crdsContext || !/^jwst_\d+\.pmap$/u.test(crdsContext) || !observations.length)
     throw new TypeError('Usage: archive <program id> <crds context> <level-3 obs_id> [...]');
   const path = resolve(PROGRAMS, `${id}.json`);
@@ -184,4 +185,10 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   await mkdir(PROGRAMS, { recursive: true });
   await writeFile(path, `${JSON.stringify(program, null, 2)}\n`);
   console.log(`IMAGING_PROGRAM ${path}`);
+  return { path, program };
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const [id, crdsContext, ...observations] = process.argv.slice(2);
+  await pinImagingProgram(id!, crdsContext!, observations);
 }

@@ -56,10 +56,10 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
   const features = await prepareSurfaceFeatures(context);
   return { definition: { ...definition, features: features.plan },
     features: { searchLabel: 'Named features', description: featureConfig.naturalEarth
-      ? `${features.plan.catalog.count.toLocaleString('en')} names from Natural Earth${features.catalog.landmarks ? ' and Wikidata landmarks' : ''}`
+      ? `${features.catalog.features.length.toLocaleString('en')} names from Natural Earth${features.catalog.landmarks ? ' and Wikidata landmarks' : ''}`
       : features.catalog.landmarks || (features.catalog.sites && !parseSurfaceFeaturesConfig(config.value).archive)
-      ? `${features.plan.catalog.count.toLocaleString('en')} surface places from mission maps and cited studies`
-      : `${features.plan.catalog.count.toLocaleString('en')} IAU names from the Gazetteer of Planetary Nomenclature` } };
+      ? `${features.catalog.features.length.toLocaleString('en')} surface places from mission maps and cited studies`
+      : `${features.catalog.features.length.toLocaleString('en')} IAU names from the Gazetteer of Planetary Nomenclature` } };
 }
 
 /** The paged lane's own geodetic mapping (the one its city destinations use) becomes the feature sampler. The lane

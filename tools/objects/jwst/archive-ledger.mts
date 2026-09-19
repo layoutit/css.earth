@@ -41,7 +41,10 @@ export const JWST_MODES: readonly { readonly mode: string; readonly records: str
   { mode: 'NIRISS/IMAGE', records: 'pictures, 0.9–4.8 µm', draws: 'nebulae as volumes', tool: null, note: 'Held, not reducible here: the image3 stage would read it, but no NIRISS filter is defined as a band and no program is pinned.' },
 ];
 
-export interface ArchiveRow { readonly observation: string; readonly target: string; readonly programme: string; readonly mode: string; readonly moving: boolean; readonly raDeg: number | null; readonly decDeg: number | null }
+export interface ArchiveRow { readonly observation: string; readonly target: string; readonly programme: string; readonly mode: string; readonly moving: boolean;
+  readonly startIso: string; readonly endIso: string; readonly filter: string; readonly raDeg: number | null; readonly decDeg: number | null }
+export interface JwstObservationRecord { readonly id: string; readonly programme: string; readonly mode: string; readonly startIso: string; readonly endIso: string; readonly filter: string }
+const RETAINED_OBSERVATION_MODES = new Set(['NIRSPEC/IFU']);
 export interface ShippedObject { readonly id: string; readonly names: readonly string[]; readonly position?: { readonly raDeg: number; readonly decDeg: number; readonly radiusDeg: number } }
 
 const normalise = (name: string) => name.toUpperCase().replace(/[^A-Z0-9]/gu, '');
@@ -110,9 +113,11 @@ export async function shippedObjects(repository = REPOSITORY): Promise<ShippedOb
 export async function archiveRows(modes: readonly string[]): Promise<ArchiveRow[]> {
   const rows: ArchiveRow[] = [];
   for (const mode of modes) for (let page = 1, pages = 1; page <= pages; page++) {
-    const data = await mastRequest({ service: 'Mast.Caom.Filtered', format: 'json', pagesize: 50_000, page, params: { columns: 'obs_id,target_name,proposal_id,mtFlag,s_ra,s_dec',
+    const data = await mastRequest({ service: 'Mast.Caom.Filtered', format: 'json', pagesize: 50_000, page, params: { columns: 'obs_id,target_name,proposal_id,mtFlag,t_min,t_max,filters,s_ra,s_dec',
       filters: [{ paramName: 'obs_collection', values: ['JWST'] }, { paramName: 'calib_level', values: [3] }, { paramName: 'dataRights', values: ['PUBLIC'] }, { paramName: 'instrument_name', values: [mode] }] } });
     for (const row of data) rows.push({ observation: requireString(row.obs_id), target: String(row.target_name ?? ''), programme: String(row.proposal_id), mode, moving: row.mtFlag === true,
+      startIso: new Date((requireFiniteNumber(row.t_min, 'Observation start') - 40_587) * 86_400_000).toISOString(),
+      endIso: new Date((requireFiniteNumber(row.t_max, 'Observation end') - 40_587) * 86_400_000).toISOString(), filter: requireString(row.filters, 'Observation filter'),
       raDeg: typeof row.s_ra === 'number' ? row.s_ra : null, decDeg: typeof row.s_dec === 'number' ? row.s_dec : null });
     if (data.length === 50_000) pages = page + 1;
   }
@@ -152,7 +157,7 @@ export async function timeSeriesVisits(nowMjd: number): Promise<TimeSeriesVisit[
 const receiptProblem = (file: string, error: unknown) => { const said = error instanceof Error ? error.message : String(error); return said.startsWith(`${file}:`) ? said : `${file}: ${said}`; };
 
 /** The schemas the three imaging stages write their reproduction receipts under. Nothing else is a receipt. */
-export const JWST_REPRODUCTION_SCHEMAS = ['cssearth-jwst-image3-reproduction@1', 'cssearth-jwst-coron3-reproduction@1', 'cssearth-jwst-spec3-reproduction@1'] as const;
+export const JWST_REPRODUCTION_SCHEMAS = ['cssearth-jwst-image3-reproduction@1', 'cssearth-jwst-coron3-reproduction@1', 'cssearth-jwst-spec3-reproduction@1', 'cssearth-jwst-spec3-reproduction@2'] as const;
 /** What a receipt has to say for the band it names to count as checked: which program, band and observation it reduced, and the
  * MAST product it compared the result against, pinned by name, size and digest. */
 export interface ReproductionReceipt { readonly schema: string; readonly program: string; readonly band: string; readonly observation: string;
@@ -223,18 +228,19 @@ export async function repositoryState(repository = REPOSITORY) {
 }
 
 export interface Ledger {
-  readonly schema: 'cssearth-jwst-ledger@1'; readonly archiveDate: string;
+  readonly schema: 'cssearth-jwst-ledger@1' | 'cssearth-jwst-ledger@2'; readonly archiveDate: string;
   readonly modes: readonly { readonly mode: string; readonly observations: number; readonly targets: number | null; readonly movingObservations: number | null; readonly tool: string | null;
     readonly bands: number; readonly programs: readonly string[]; readonly checked: readonly string[]; readonly shippedObjects: number }[];
   readonly timeSeries: readonly { readonly exposure: string; readonly visits: number; readonly targets: number; readonly shippedObjects: readonly string[]; readonly programs: readonly string[]; readonly checked: readonly string[] }[];
-  readonly objects: readonly { readonly id: string; readonly observations: Readonly<Record<string, number>>; readonly timeSeriesVisits: Readonly<Record<string, number>>; readonly programmes: readonly string[]; readonly drawn: readonly string[] }[];
+  readonly objects: readonly { readonly id: string; readonly observations: Readonly<Record<string, number>>; readonly records: readonly JwstObservationRecord[];
+    readonly timeSeriesVisits: Readonly<Record<string, number>>; readonly programmes: readonly string[]; readonly drawn: readonly string[] }[];
   /** Receipts that could not be accepted, and so proved nothing. An empty list is the only passing state. */
   readonly receiptProblems: readonly string[];
 }
 
 export function buildLedger(rows: readonly ArchiveRow[], visits: readonly TimeSeriesVisit[], counts: ReadonlyMap<string, number>, objects: readonly ShippedObject[], held: Awaited<ReturnType<typeof repositoryState>>, archiveDate: string): Ledger {
-  const state = held.modes, seen = new Map<string, { observations: Record<string, number>; visits: Record<string, number>; programmes: Set<string> }>();
-  const entryOf = (id: string) => { const entry = seen.get(id) ?? { observations: {}, visits: {}, programmes: new Set<string>() }; seen.set(id, entry); return entry; };
+  const state = held.modes, seen = new Map<string, { observations: Record<string, number>; records: JwstObservationRecord[]; visits: Record<string, number>; programmes: Set<string> }>();
+  const entryOf = (id: string) => { const entry = seen.get(id) ?? { observations: {}, records: [], visits: {}, programmes: new Set<string>() }; seen.set(id, entry); return entry; };
   const watched = new Map<string, Set<string>>();
   for (const visit of visits) for (const id of matchTarget({ target: visit.target, moving: false, raDeg: visit.raDeg, decDeg: visit.decDeg }, objects)) {
     const entry = entryOf(id); entry.visits[visit.exposure] = (entry.visits[visit.exposure] ?? 0) + 1; entry.programmes.add(visit.programme);
@@ -242,15 +248,17 @@ export function buildLedger(rows: readonly ArchiveRow[], visits: readonly TimeSe
   }
   for (const row of rows) for (const id of matchTarget(row, objects)) {
     const entry = entryOf(id); entry.observations[row.mode] = (entry.observations[row.mode] ?? 0) + 1; entry.programmes.add(row.programme);
+    if (RETAINED_OBSERVATION_MODES.has(row.mode)) entry.records.push({ id: row.observation, programme: row.programme, mode: row.mode, startIso: row.startIso, endIso: row.endIso, filter: row.filter });
   }
   const listed = new Set(rows.map(row => row.mode));
-  return { schema: 'cssearth-jwst-ledger@1', archiveDate,
+  return { schema: 'cssearth-jwst-ledger@2', archiveDate,
     modes: JWST_MODES.map(({ mode, tool }) => { const own = rows.filter(row => row.mode === mode), held = state.get(mode)!; return { mode, observations: counts.get(mode) ?? own.length,
       targets: listed.has(mode) ? new Set(own.map(row => row.target)).size : null, movingObservations: listed.has(mode) ? own.filter(row => row.moving).length : null, tool,
       bands: held.bands, programs: [...held.programs].sort(), checked: [...held.checked].sort(), shippedObjects: [...seen.values()].filter(entry => entry.observations[mode]).length }; }),
     timeSeries: JWST_TIME_SERIES.map(({ exposure, programInstrument }) => { const own = visits.filter(visit => visit.exposure === exposure), pinned = programInstrument ? held.timeSeries.get(programInstrument) : undefined;
       return { exposure, visits: own.length, targets: new Set(own.map(visit => visit.target)).size, shippedObjects: [...watched.get(exposure) ?? []].sort(), programs: [...pinned?.programs ?? []].sort(), checked: [...pinned?.checked ?? []].sort() }; }),
     objects: [...seen].sort(([a], [b]) => a.localeCompare(b, 'en')).map(([id, entry]) => ({ id, observations: Object.fromEntries(Object.entries(entry.observations).sort(([a], [b]) => a.localeCompare(b, 'en'))),
+      records: entry.records.sort((a, b) => a.startIso.localeCompare(b.startIso, 'en') || a.id.localeCompare(b.id, 'en')),
       timeSeriesVisits: Object.fromEntries(Object.entries(entry.visits).sort(([a], [b]) => a.localeCompare(b, 'en'))),
       programmes: [...entry.programmes].sort((a, b) => Number(a) - Number(b)), drawn: [...JWST_MODES.filter(({ mode }) => entry.observations[mode] && state.get(mode)!.programs.some(program => program.startsWith(id))).map(({ mode }) => mode),
         ...JWST_TIME_SERIES.filter(({ exposure, programInstrument }) => entry.visits[exposure] && programInstrument && held.timeSeries.get(programInstrument)?.programs.some(program => program.startsWith(id))).map(({ exposure }) => exposure)] })),
@@ -260,7 +268,7 @@ export function buildLedger(rows: readonly ArchiveRow[], visits: readonly TimeSe
 /** The ledger on disk, read back as the external value it is, so --local rewrites a file it has checked. */
 export function parseLedger(value: unknown): Ledger {
   const row = requireRecord(value, 'JWST ledger');
-  if (row.schema !== 'cssearth-jwst-ledger@1') throw new TypeError('Unsupported JWST ledger.');
+  if (row.schema !== 'cssearth-jwst-ledger@1' && row.schema !== 'cssearth-jwst-ledger@2') throw new TypeError('Unsupported JWST ledger.');
   const names = (list: unknown, label: string) => requireArray(list, label).map(name => requireString(name, label));
   const counts = (value: unknown, label: string) => Object.fromEntries(Object.entries(requireRecord(value, label)).map(([key, count]) => [key, requireFiniteNumber(count, label)]));
   const orNull = (value: unknown, label: string) => value === null ? null : requireFiniteNumber(value, label);
@@ -275,6 +283,9 @@ export function parseLedger(value: unknown): Ledger {
         shippedObjects: names(entry.shippedObjects, 'Shipped objects'), programs: names(entry.programs, 'Programs'), checked: names(entry.checked, 'Checked') }; }),
     objects: requireArray(row.objects, 'Objects').map(raw => { const entry = requireRecord(raw, 'Object');
       return { id: requireString(entry.id, 'Object id'), observations: counts(entry.observations, 'Observations by mode'), timeSeriesVisits: counts(entry.timeSeriesVisits, 'Time-series visits'),
+        records: requireArray(entry.records ?? [], 'Observation records').map(rawRecord => { const record = requireRecord(rawRecord, 'Observation record');
+          return { id: requireString(record.id, 'Observation id'), programme: requireString(record.programme, 'Observation programme'), mode: requireString(record.mode, 'Observation mode'),
+            startIso: requireString(record.startIso, 'Observation start'), endIso: requireString(record.endIso, 'Observation end'), filter: requireString(record.filter, 'Observation filter') }; }),
         programmes: names(entry.programmes, 'Programmes'), drawn: names(entry.drawn, 'Drawn') }; }),
     // A ledger written before receipts were checked states no problems; the next --write or --local gives it the field.
     receiptProblems: names(row.receiptProblems ?? [], 'Receipt problems') };
@@ -341,11 +352,19 @@ ${ledger.receiptProblems.length ? `${ledger.receiptProblems.length} receipt${led
 
 - A target is matched by the name its proposer typed, or by position for what does not move. A moving target is matched by the first word of its name, so TITAN-LEADING is Titan; a pointing named as a background or an offset is left out. A name two objects share (Dione the moon, 106 Dione) goes to the unnumbered one unless the target carries the number. An object observed under a name this does not recognise is missed, and a nebula is matched to anything pointed within a sixth of a degree of its centre.
 - The archive changes daily; this is a dated snapshot, and only public data are counted.
+- NIRSpec integral-field entries retain every observation id, date and grating/filter pair so the capability query can offer an exact qualification command.
 - NIRSpec's multi-object mode is counted but not listed by target.
 `;
 }
 
 const LEDGER = resolve(REPOSITORY, 'data/jwst/ledger.json'), GUIDE = resolve(REPOSITORY, 'docs/jwst-ledger.md');
+/** Refresh only repository-owned program and receipt state after a qualification run. */
+export async function refreshLocalLedger(): Promise<Ledger> {
+  const ledger = withRepositoryState(parseLedger(await readJson(LEDGER)), await repositoryState());
+  await writeFile(LEDGER, `${JSON.stringify(ledger, null, 1)}\n`);
+  await writeFile(GUIDE, ledgerGuide(ledger));
+  return ledger;
+}
 /** Every receipt problem, said once and counted against the run: a ledger that reports one has not proved what it lists. */
 const reportProblems = (problems: readonly string[]) => {
   for (const problem of problems) console.error(`RECEIPT ${problem}`);
@@ -356,8 +375,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const args = process.argv.slice(2), listed = JWST_MODES.map(entry => entry.mode).filter(mode => mode !== 'NIRSPEC/MSA');
   const now = new Date(), nowMjd = now.getTime() / 86_400_000 + 40_587;
   if (args.includes('--local')) {
-    const ledger = withRepositoryState(parseLedger(await readJson(LEDGER)), await repositoryState());
-    await writeFile(LEDGER, `${JSON.stringify(ledger, null, 1)}\n`); await writeFile(GUIDE, ledgerGuide(ledger));
+    const ledger = await refreshLocalLedger();
     console.log(`JWST_LEDGER ${LEDGER} ${GUIDE} (repository state only)`);
     reportProblems(ledger.receiptProblems);
     process.exit(process.exitCode ?? 0);

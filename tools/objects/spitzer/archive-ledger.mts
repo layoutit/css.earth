@@ -33,10 +33,11 @@ import { parseReproduction } from './compare.mts';
 
 export const LEDGER = resolve(REPOSITORY, 'data/spitzer/ledger.json');
 export const GUIDE = resolve(REPOSITORY, 'docs/spitzer-ledger.md');
-const SCHEMA = 'cssearth-spitzer-ledger@1';
+const SCHEMA = 'cssearth-spitzer-ledger@4';
 /** How many objects are asked at once. The archive's backend builds a temporary table for every question, so this stays small. */
 const CONCURRENCY = 4;
 const STAR_RADIUS_DEG = 0.5 / 60, EXTENDED_RADIUS_DEG = 1 / 6;
+const stringList = (value: unknown, label: string): string[] => requireArray(value, label).map((entry, index) => requireString(entry, `${label}[${index}]`));
 
 /** Spitzer's observing modes as the archive names them (`modedisplayname`), what each records, and the tool here that re-makes
  * it. A mode the archive returns that is not in this table is still counted and named in the ledger, so nothing is lost by
@@ -54,6 +55,7 @@ export const SPITZER_MODES: readonly { readonly mode: string; readonly records: 
   { mode: 'MIPS Scan', records: 'large maps made by scanning the telescope', tool: null },
   { mode: 'MIPS SED', records: 'low-resolution spectra around 70 micron', tool: null },
   { mode: 'MIPS TP', records: 'total-power measurements', tool: null },
+  { mode: 'MIPS IER', records: 'MIPS data taken on an engineering request', tool: null },
 ];
 
 export interface ShippedObject {
@@ -118,7 +120,16 @@ export async function shippedObjects(repository = REPOSITORY): Promise<ShippedOb
   }));
 }
 
-export interface ObjectHoldings { readonly object: string; readonly name: string; readonly classification: string; readonly askedAs: string; readonly observations: number; readonly modes: Readonly<Record<string, number>> }
+export interface ArchiveObservation {
+  /** AORKEY: Spitzer's mission-wide identity for one Astronomical Observation Request. */
+  readonly id: string;
+  readonly programme: string;
+  readonly mode: string;
+  readonly title: string;
+  readonly startIso: string;
+  readonly endIso?: string;
+}
+export interface ObjectHoldings { readonly object: string; readonly name: string; readonly classification: string; readonly askedAs: string; readonly observations: number; readonly modes: Readonly<Record<string, number>>; readonly records: readonly ArchiveObservation[] }
 export interface Ledger {
   readonly schema: typeof SCHEMA;
   readonly archiveDate: string;
@@ -127,8 +138,19 @@ export interface Ledger {
   readonly asked: number;
   readonly notAsked: readonly { readonly object: string; readonly reason: string }[];
   readonly unanswered: readonly string[];
+  /** Every target whose archive query completed, including completed searches with no observations. */
+  readonly searched: readonly string[];
   readonly holdings: readonly ObjectHoldings[];
-  readonly modes: readonly { readonly mode: string; readonly records: string | null; readonly tool: string | null; readonly note?: string; readonly observationsForOurObjects: number; readonly pinnedPrograms: number; readonly checkedProducts: number }[];
+  readonly modes: readonly { readonly mode: string; readonly records: string | null; readonly tool: string | null; readonly note?: string; readonly observationsForOurObjects: number;
+    readonly pinnedPrograms: number; readonly checkedProducts: number; readonly programs: readonly string[]; readonly checked: readonly string[]; readonly receipts: readonly string[] }[];
+}
+
+export interface RepositoryState {
+  readonly pinned: ReadonlyMap<string, number>;
+  readonly checked: ReadonlyMap<string, number>;
+  readonly programs?: ReadonlyMap<string, readonly string[]>;
+  readonly checkedPrograms?: ReadonlyMap<string, readonly string[]>;
+  readonly receipts?: ReadonlyMap<string, readonly string[]>;
 }
 
 /** What this repository holds: the programs pinned, and the products a reproduction receipt names and validates. A receipt
@@ -136,11 +158,13 @@ export interface Ledger {
 export async function repositoryState(programs = PROGRAMS) {
   const files = await readdir(programs).catch(() => [] as string[]);
   const pinned = new Map<string, number>(), checked = new Map<string, number>();
+  const programIds = new Map<string, string[]>(), checkedProgramIds = new Map<string, string[]>(), receiptPaths = new Map<string, string[]>();
   const modeOf = new Map<string, string>(), pinnedFiles = new Map<string, Map<string, string>>();
   for (const file of files.filter(name => name.endsWith('.json') && !name.includes('.reproduction.') && !name.endsWith('.product.json'))) {
     const program = parseSpitzerProgram(JSON.parse(await readFile(resolve(programs, file), 'utf8')) as unknown);
     modeOf.set(program.id, program.mode);
     pinned.set(program.mode, (pinned.get(program.mode) ?? 0) + program.channels.length);
+    programIds.set(program.mode, [...(programIds.get(program.mode) ?? []), program.id]);
     pinnedFiles.set(program.id, new Map(program.channels.flatMap(channel => channel.products.map(product => [product.name, product.sha256]))));
   }
   for (const file of files.filter(name => name.endsWith('.reproduction.json'))) {
@@ -152,8 +176,13 @@ export async function repositoryState(programs = PROGRAMS) {
     const against = [receipt.archiveProduct, receipt.archiveUncertainty, receipt.archiveCoverage];
     if (!against.every(entry => known.get(entry.name) === entry.sha256)) continue;
     checked.set(mode, (checked.get(mode) ?? 0) + 1);
+    checkedProgramIds.set(mode, [...new Set([...(checkedProgramIds.get(mode) ?? []), receipt.program])]);
+    receiptPaths.set(mode, [...(receiptPaths.get(mode) ?? []), `tools/objects/spitzer/programs/${file}`]);
   }
-  return { pinned, checked };
+  for (const values of programIds.values()) values.sort();
+  for (const values of checkedProgramIds.values()) values.sort();
+  for (const values of receiptPaths.values()) values.sort();
+  return { pinned, checked, programs: programIds, checkedPrograms: checkedProgramIds, receipts: receiptPaths };
 }
 
 const modeCounts = (rows: readonly ShaRow[]) => {
@@ -162,10 +191,28 @@ const modeCounts = (rows: readonly ShaRow[]) => {
   return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a < b ? -1 : 1));
 };
 
+const archiveIso = (value: string, label: string) => {
+  const normalized = `${value.trim().replace(' ', 'T')}Z`, milliseconds = Date.parse(normalized);
+  if (!Number.isFinite(milliseconds)) throw new TypeError(`${label} is not an archive UTC time (${value}).`);
+  return new Date(milliseconds).toISOString();
+};
+
+/** Preserve the observation identities that the old count-only ledger discarded. */
+export function observationRecords(rows: readonly ShaRow[]): ArchiveObservation[] {
+  const records = rows.map((row, index): ArchiveObservation => ({
+    id: requireString(row.reqkey, `observation ${index} AORKEY`), programme: requireString(row.progid, `observation ${index} programme`),
+    mode: requireString(row.modedisplayname, `observation ${index} mode`), title: requireString(row.reqtitle, `observation ${index} title`),
+    startIso: archiveIso(requireString(row.reqbegintime, `observation ${index} start`), `observation ${index} start`),
+    ...(row.reqendtime?.trim() ? { endIso: archiveIso(row.reqendtime, `observation ${index} end`) } : {}),
+  })).sort((a, b) => a.startIso.localeCompare(b.startIso) || a.id.localeCompare(b.id));
+  if (new Set(records.map(record => record.id)).size !== records.length) throw new Error('The Spitzer archive returned one AORKEY more than once.');
+  return records;
+}
+
 /** Ask the archive about every object it can be asked about. An object the archive will not answer for is recorded as
  * unanswered and the pass goes on: which objects were asked and which were not is itself the honest result. */
 export async function surveyArchive(objects: readonly ShippedObject[]): Promise<ArchiveSurvey> {
-  const holdings: ObjectHoldings[] = [], unanswered: string[] = [];
+  const holdings: ObjectHoldings[] = [], unanswered: string[] = [], searched: string[] = [];
   const queue = objects.filter(object => object.query.kind !== 'none');
   let next = 0;
   const worker = async () => {
@@ -177,33 +224,37 @@ export async function surveyArchive(objects: readonly ShippedObject[]): Promise<
       const askedAs = query.kind === 'naif' ? `NAIF ${query.naifId}` : `${query.raDeg.toFixed(5)}, ${query.decDeg.toFixed(5)} within ${(query.radiusDeg * 60).toFixed(1)} arcmin`;
       const rows = await shaSearch(request).catch(() => null);
       if (!rows) { unanswered.push(object.id); continue; }
-      holdings.push({ object: object.id, name: object.name, classification: object.classification, askedAs, observations: rows.length, modes: modeCounts(rows) });
+      searched.push(object.id);
+      holdings.push({ object: object.id, name: object.name, classification: object.classification, askedAs,
+        observations: rows.length, modes: modeCounts(rows), records: observationRecords(rows) });
     }
   };
   await Promise.all(Array.from({ length: Math.min(CONCURRENCY, queue.length) }, worker));
   holdings.sort((a, b) => b.observations - a.observations || (a.object < b.object ? -1 : 1));
-  unanswered.sort();
-  return { holdings, unanswered };
+  unanswered.sort(); searched.sort();
+  return { holdings, unanswered, searched };
 }
 
-export interface ArchiveSurvey { readonly holdings: readonly ObjectHoldings[]; readonly unanswered: readonly string[] }
+export interface ArchiveSurvey { readonly holdings: readonly ObjectHoldings[]; readonly unanswered: readonly string[]; readonly searched: readonly string[] }
 
-export function buildLedger(objects: readonly ShippedObject[], survey: ArchiveSurvey, state: Awaited<ReturnType<typeof repositoryState>>, archiveDate: string): Ledger {
+export function buildLedger(objects: readonly ShippedObject[], survey: ArchiveSurvey, state: RepositoryState, archiveDate: string): Ledger {
   const seen = new Map<string, number>();
   for (const entry of survey.holdings) for (const [mode, count] of Object.entries(entry.modes)) seen.set(mode, (seen.get(mode) ?? 0) + count);
   const known = new Set(SPITZER_MODES.map(entry => entry.mode));
   const modes = [
     ...SPITZER_MODES.map(entry => ({ mode: entry.mode, records: entry.records, tool: entry.tool, ...(entry.note === undefined ? {} : { note: entry.note }),
-      observationsForOurObjects: seen.get(entry.mode) ?? 0, pinnedPrograms: state.pinned.get(entry.mode) ?? 0, checkedProducts: state.checked.get(entry.mode) ?? 0 })),
+      observationsForOurObjects: seen.get(entry.mode) ?? 0, pinnedPrograms: state.pinned.get(entry.mode) ?? 0, checkedProducts: state.checked.get(entry.mode) ?? 0,
+      programs: [...(state.programs?.get(entry.mode) ?? [])], checked: [...(state.checkedPrograms?.get(entry.mode) ?? [])], receipts: [...(state.receipts?.get(entry.mode) ?? [])] })),
     ...[...seen].filter(([mode]) => !known.has(mode)).map(([mode, count]) => ({ mode, records: null, tool: null,
       note: 'The archive returned this mode; it is not described in this toolkit.', observationsForOurObjects: count,
-      pinnedPrograms: state.pinned.get(mode) ?? 0, checkedProducts: state.checked.get(mode) ?? 0 })),
+      pinnedPrograms: state.pinned.get(mode) ?? 0, checkedProducts: state.checked.get(mode) ?? 0,
+      programs: [...(state.programs?.get(mode) ?? [])], checked: [...(state.checkedPrograms?.get(mode) ?? [])], receipts: [...(state.receipts?.get(mode) ?? [])] })),
   ].sort((a, b) => b.observationsForOurObjects - a.observationsForOurObjects || (a.mode < b.mode ? -1 : 1));
   return parseLedger({
     schema: SCHEMA, archiveDate, search: 'Spitzer Heritage Archive at IRSA', shippedObjects: objects.length,
     asked: objects.filter(object => object.query.kind !== 'none').length,
     notAsked: objects.filter(object => object.query.kind === 'none').map(object => ({ object: object.id, reason: (object.query as { reason: string }).reason })),
-    unanswered: survey.unanswered, holdings: survey.holdings.filter(entry => entry.observations > 0), modes,
+    unanswered: survey.unanswered, searched: survey.searched, holdings: survey.holdings.filter(entry => entry.observations > 0), modes,
   });
 }
 
@@ -216,14 +267,27 @@ export function parseLedger(value: unknown): Ledger {
     shippedObjects: requireFiniteNumber(row.shippedObjects, 'shipped objects'), asked: requireFiniteNumber(row.asked, 'asked'),
     notAsked: requireArray(row.notAsked, 'not asked').map(raw => { const entry = requireRecord(raw, 'not asked'); return { object: requireString(entry.object, 'object'), reason: requireString(entry.reason, 'reason') }; }),
     unanswered: requireArray(row.unanswered, 'unanswered').map(entry => requireString(entry, 'unanswered')),
-    holdings: requireArray(row.holdings, 'holdings').map(raw => { const entry = requireRecord(raw, 'holdings');
+    searched: requireArray(row.searched, 'searched').map(entry => requireString(entry, 'searched')),
+    holdings: requireArray(row.holdings, 'holdings').map(raw => { const entry = requireRecord(raw, 'holdings'), modes = counts(entry.modes);
+      const records = requireArray(entry.records, 'observation records').map((rawRecord, index) => { const record = requireRecord(rawRecord, `observation record ${index}`);
+        const endIso = record.endIso === undefined ? undefined : requireString(record.endIso, 'end'), parsed = { id: requireString(record.id, 'AORKEY'), programme: requireString(record.programme, 'programme'), mode: requireString(record.mode, 'mode'),
+          title: requireString(record.title, 'title'), startIso: requireString(record.startIso, 'start'), ...(endIso === undefined ? {} : { endIso }) };
+        if (!Number.isFinite(Date.parse(parsed.startIso)) || (parsed.endIso !== undefined && (!Number.isFinite(Date.parse(parsed.endIso)) || parsed.endIso < parsed.startIso))) throw new TypeError(`Spitzer AOR ${parsed.id} has an invalid time range.`);
+        return parsed;
+      });
+      const observations = requireFiniteNumber(entry.observations, 'observations'), fromRecords = new Map<string, number>();
+      for (const record of records) fromRecords.set(record.mode, (fromRecords.get(record.mode) ?? 0) + 1);
+      const mismatchedMode = Object.entries(modes).find(([mode, count]) => fromRecords.get(mode) !== count) ?? [...fromRecords].find(([mode]) => modes[mode] === undefined);
+      if (records.length !== observations || mismatchedMode || new Set(records.map(record => record.id)).size !== records.length)
+        throw new Error(`${String(entry.object)} observation records do not reproduce its ${observations} total, mode counts and unique AORKEYs${mismatchedMode ? ` (${mismatchedMode[0]})` : ''}.`);
       return { object: requireString(entry.object, 'object'), name: requireString(entry.name, 'name'), classification: requireString(entry.classification, 'classification'),
-        askedAs: requireString(entry.askedAs, 'asked as'), observations: requireFiniteNumber(entry.observations, 'observations'), modes: counts(entry.modes) }; }),
+        askedAs: requireString(entry.askedAs, 'asked as'), observations, modes, records }; }),
     modes: requireArray(row.modes, 'modes').map(raw => { const entry = requireRecord(raw, 'mode');
       return { mode: requireString(entry.mode, 'mode'), records: entry.records === null ? null : requireString(entry.records, 'records'),
         tool: entry.tool === null ? null : requireString(entry.tool, 'tool'), ...(entry.note === undefined ? {} : { note: requireString(entry.note, 'note') }),
         observationsForOurObjects: requireFiniteNumber(entry.observationsForOurObjects, 'observations'),
-        pinnedPrograms: requireFiniteNumber(entry.pinnedPrograms, 'pinned'), checkedProducts: requireFiniteNumber(entry.checkedProducts, 'checked') }; }),
+        pinnedPrograms: requireFiniteNumber(entry.pinnedPrograms, 'pinned'), checkedProducts: requireFiniteNumber(entry.checkedProducts, 'checked'),
+        programs: stringList(entry.programs, 'programs'), checked: stringList(entry.checked, 'checked programs'), receipts: stringList(entry.receipts, 'receipts') }; }),
   };
 }
 
@@ -268,6 +332,8 @@ export function ledgerGuide(ledger: Ledger): string {
     '## What this ledger does not say',
     '',
     '- It does not say what Spitzer holds in total. The archive\'s search backend answers one target at a time and takes no whole-archive count, so every number here is about this repository\'s objects.',
+    '- The JSON ledger retains the id of every target whose query completed, including empty results. A target absent from that list is not turned into an archive negative when the application catalogue grows.',
+    '- The JSON ledger retains every returned AORKEY, programme, mode, title, start and end time. The table above groups those same records for reading; the capability query exposes the records for one requested target.',
     '- A moving body is found only if its observation was scheduled against that NAIF id. An observation that caught a body inside a fixed-target field is not counted, because the archive does not index it that way.',
     `- ${ledger.notAsked.length} ${ledger.notAsked.length === 1 ? 'object was' : 'objects were'} not asked for at all. Most are comets and interstellar objects, whose packages carry a Horizons designation rather than a NAIF id; the rest have neither a body record nor a sky position. They are gaps, not zeroes.`,
     ...ledger.unanswered.length ? ['', `- The archive would not answer for ${ledger.unanswered.join(', ')} in this pass, after three attempts each. Those objects are missing from the table above, not empty.`] : [],
@@ -275,17 +341,32 @@ export function ledgerGuide(ledger: Ledger): string {
   ].join('\n');
 }
 
+/** Refresh repository-owned toolkit state without querying the archive again. Archive holdings and their measurement date
+ * stay fixed; only pinned programs, checked products and their identities are recomputed from bytes and receipts here. */
+export async function refreshLocalLedger(): Promise<Ledger> {
+  const objects = await shippedObjects(), state = await repositoryState();
+  const previous = parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown);
+  const ledger = buildLedger(objects, { holdings: previous.holdings, unanswered: previous.unanswered, searched: previous.searched }, state, previous.archiveDate);
+  await mkdir(resolve(LEDGER, '..'), { recursive: true });
+  await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
+  await writeFile(GUIDE, ledgerGuide(ledger));
+  return ledger;
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), write = args.includes('--write'), local = args.includes('--local');
   const objects = await shippedObjects(), state = await repositoryState();
-  const previous = local ? parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown) : null;
-  const ledger = previous
-    ? buildLedger(objects, { holdings: previous.holdings, unanswered: previous.unanswered }, state, previous.archiveDate)
+  const ledger = local && write ? await refreshLocalLedger() : local
+    ? buildLedger(objects, { holdings: parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown).holdings,
+      unanswered: parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown).unanswered,
+      searched: parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown).searched }, state, parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown).archiveDate)
     : buildLedger(objects, await surveyArchive(objects), state, new Date().toISOString().slice(0, 10));
   if (write) {
-    await mkdir(resolve(LEDGER, '..'), { recursive: true });
-    await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
-    await writeFile(GUIDE, ledgerGuide(ledger));
+    if (!local) {
+      await mkdir(resolve(LEDGER, '..'), { recursive: true });
+      await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
+      await writeFile(GUIDE, ledgerGuide(ledger));
+    }
     console.log(`Wrote ${LEDGER} and ${GUIDE}.`);
   }
   console.log(`${ledger.shippedObjects} objects shipped, ${ledger.asked} asked, ${ledger.holdings.length} with Spitzer observations, ${ledger.notAsked.length} not asked, ${ledger.unanswered.length} unanswered.`);

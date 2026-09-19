@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { test } from 'node:test';
 import { archiveUrl, DATA, frameSibling, parseSpitzerProgram, type SpitzerProgram } from './archive.mts';
-import { buildLedger, ledgerGuide, naifIdFromHorizonsCode, parseLedger, repositoryState, type ShippedObject } from './archive-ledger.mts';
+import { buildLedger, ledgerGuide, naifIdFromHorizonsCode, observationRecords, parseLedger, repositoryState, type ShippedObject } from './archive-ledger.mts';
 import { archiveAgreement, compareMosaics, LIMITS, parseReproduction } from './compare.mts';
 import { addProductEvidence, evidenceFor, pinFile, readProductRecord, writeProductRecord } from '../product-record.mts';
 import { channelInputs, FATAL_IMASK_BITS, fatalImaskMask, mosaicMembers, parseMosaicSummary } from './mosaic.mts';
@@ -243,7 +243,17 @@ const objects: ShippedObject[] = [
   { id: 'ceres', name: 'Ceres', classification: 'dwarf-planet', query: { kind: 'naif', naifId: 2000001 } },
   { id: 'comet-103p', name: '103P/Hartley 2', classification: 'comet', query: { kind: 'none', reason: 'its Horizons code is the designation DES=103P;CAP;, which is not a NAIF id' } },
 ];
-const survey = { holdings: [{ object: 'ceres', name: 'Ceres', classification: 'dwarf-planet', askedAs: 'NAIF 2000001', observations: 2, modes: { 'MIPS Phot': 2 } }], unanswered: [] };
+const records = [
+  { id: '101', programme: '10', mode: 'MIPS Phot', title: 'Ceres one', startIso: '2005-01-01T00:00:00.000Z', endIso: '2005-01-01T00:10:00.000Z' },
+  { id: '102', programme: '10', mode: 'MIPS Phot', title: 'Ceres two', startIso: '2005-01-02T00:00:00.000Z', endIso: '2005-01-02T00:10:00.000Z' },
+];
+const survey = { holdings: [{ object: 'ceres', name: 'Ceres', classification: 'dwarf-planet', askedAs: 'NAIF 2000001', observations: 2, modes: { 'MIPS Phot': 2 }, records }], unanswered: [], searched: ['ceres'] };
+
+test('archive rows retain the AOR identity, programme, mode and complete time range', () => {
+  assert.deepEqual(observationRecords([{ reqkey: '35303936', progid: '61012', modedisplayname: 'IRAC Map PC', reqtitle: 'Itokawa',
+    reqbegintime: '2010-05-15 14:35:42.395', reqendtime: '2010-05-15 14:49:52.594' }]), [{ id: '35303936', programme: '61012', mode: 'IRAC Map PC',
+    title: 'Itokawa', startIso: '2010-05-15T14:35:42.395Z', endIso: '2010-05-15T14:49:52.594Z' }]);
+});
 
 test('a ledger counts a mode as checked only from a receipt, and says plainly that Spitzer has no Galilean data', () => {
   const unproved = buildLedger(objects, survey, { pinned: new Map([['IRAC Map', 4]]), checked: new Map() }, '2026-09-19');
@@ -254,9 +264,10 @@ test('a ledger counts a mode as checked only from a receipt, and says plainly th
   assert.equal(unproved.notAsked.length, 1);
   assert.equal(unproved.holdings.length, 1, 'only objects with observations are listed');
   // A mode the archive returned that this toolkit does not describe is still counted, so it cannot go unnoticed.
-  const surprising = buildLedger(objects, { holdings: [{ ...survey.holdings[0]!, modes: { 'IRAC Something New': 3 } }], unanswered: [] }, { pinned: new Map(), checked: new Map() }, '2026-09-19');
+  const surprisingRecords = records.map((record, index) => ({ ...record, id: String(200 + index), mode: 'IRAC Something New' }));
+  const surprising = buildLedger(objects, { holdings: [{ ...survey.holdings[0]!, modes: { 'IRAC Something New': 2 }, records: surprisingRecords }], unanswered: [], searched: ['ceres'] }, { pinned: new Map(), checked: new Map() }, '2026-09-19');
   const unknown = surprising.modes.find(entry => entry.mode === 'IRAC Something New')!;
-  assert.equal(unknown.observationsForOurObjects, 3);
+  assert.equal(unknown.observationsForOurObjects, 2);
   assert.equal(unknown.records, null);
 
   const guide = ledgerGuide(unproved);
@@ -264,7 +275,8 @@ test('a ledger counts a mode as checked only from a receipt, and says plainly th
   assert.match(guide, /the same search, in the same pass, returned 2 for Ceres/u);
   assert.match(guide, /not asked for at all/u);
   assert.deepEqual(parseLedger(JSON.parse(JSON.stringify(unproved)) as unknown), unproved);
-  assert.throws(() => parseLedger({ ...unproved, schema: 'cssearth-spitzer-ledger@2' }), /Unsupported/u);
+  assert.throws(() => parseLedger({ ...unproved, schema: 'cssearth-spitzer-ledger@1' }), /Unsupported/u);
+  assert.throws(() => parseLedger({ ...unproved, holdings: [{ ...unproved.holdings[0], records: [] }] }), /do not reproduce/u);
 });
 
 test('a checked mosaic carries its evidence on its own record, and evidence never drifts onto other bytes', async () => {

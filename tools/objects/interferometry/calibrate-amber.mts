@@ -142,8 +142,8 @@ export async function calibrateAmber(plan: AmberPlan, rawDirectory: string, work
 /** Plan and calibrate one AMBER observing window with calibrator diameters stated by name; returns the calibrated files. */
 export async function calibrateAmberWindow(work: string, target: string, from: string, to: string, rawDirectory: string,
   calibrators: ReadonlyMap<string, { diameterMas: number; errorMas: number }>, { frames: framesCsv, selection = 80 }: { frames?: string; selection?: number } = {}) {
-  const csv = framesCsv ?? await queryRawTable('AMBER', AMBER_COLUMNS, new Date(Date.parse(`${from}Z`) - 12 * 3600e3).toISOString().slice(0, 19), to);
-  const plan = planAmberNight(parseRawTable(csv), target, { from, to });
+  const rows = framesCsv ? parseRawTable(framesCsv) : await queryRawTable('AMBER', AMBER_COLUMNS, new Date(Date.parse(`${from}Z`) - 12 * 3600e3).toISOString().slice(0, 19), to);
+  const plan = planAmberNight(rows, target, { from, to });
   const root = await toolchainPath('amber');
   await mkdir(work, { recursive: true });
   await writeFile(resolve(work, 'plan.json'), `${JSON.stringify(plan, null, 2)}\n`);

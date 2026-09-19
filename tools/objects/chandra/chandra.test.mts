@@ -4,7 +4,7 @@ import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { addProductEvidence, evidenceFor, productRecordPath, readProductRecord, runDigest, writeProductRecord } from '../product-record.mts';
-import { observationMode, obsidDirectory, parseChandraProgram, parseCxcRows, PROGRAMS, refuseObservation, REFUSED_MODES } from './archive.mts';
+import { observationMode, obsidDirectory, parseChandraProgram, PROGRAMS, refuseObservation, REFUSED_MODES } from './archive.mts';
 import { isObjectPointing, LEDGER, ledgerGuide, GUIDE, modeKey, objectBox, OBJECT_RADIUS_DEGREES, MOVING_TARGETS, pinnedState } from './archive-ledger.mts';
 import { archiveAgreement, compareBinnedImage, eventKeys, matchEvents, reprocessedWith } from './compare.mts';
 import { column, eventTable, requireEventColumn, scalar } from './events.mts';
@@ -141,13 +141,7 @@ test('a program pins level-1 inputs and the archive’s level-2 products, and re
   assert.throws(() => parseChandraProgram({ ...program(), schema: 'cssearth-chandra-program@2' }), /Unsupported Chandra program/u);
 });
 
-test('the archive’s tab-separated answer reads as rows, and its refusal as an error', () => {
-  const rows = parseCxcRows(['# obsid\t\tChandra observation identifier', '# instrument\t\tInstrument', 'obsid\tinstrument',
-    '2798\tACIS-I', '168\tACIS-S'].join('\n'));
-  assert.deepEqual(rows, [{ obsid: '2798', instrument: 'ACIS-I' }, { obsid: '168', instrument: 'ACIS-S' }]);
-  assert.throws(() => parseCxcRows('<INFO name="QUERY_STATUS" value="ERROR">error parsing ADQL query</INFO>'), /refused the query/u);
-  assert.throws(() => parseCxcRows('# only a comment\n'), /without a header row/u);
-});
+
 
 test('the Crab halo program pins obsid 2798 with every file digested', async () => {
   const pinned = parseChandraProgram(JSON.parse(await readFile(join(PROGRAMS, 'm1-crab-halo.json'), 'utf8')));

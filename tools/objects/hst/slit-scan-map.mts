@@ -33,6 +33,8 @@ import { loadOrientation } from '../terrestrial-layers/observer-cameras.mts';
 import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap } from '../jwst/cubes/body-map.mts';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type BodyMapProduct, type CombinationPolicy, type MeasurementDefinition } from '../body-map-product.mts';
 import { sha256 as digestOf } from '../../../src/platform/sha256.mts';
+import { bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
+import type { ProductInput, ProductSoftware } from '../product-record.mts';
 import {
   ACROSS_SLIT_DIRECTIONS, acrossSlitCentre, addFeatureless, bandFromReflectance, discChord, featurelessMean, newFeatureless,
   parseSlitScan, quantiles, ratioAgainst, reflectance, scanImage,
@@ -412,7 +414,8 @@ export async function runSlitScan(definition: SlitScanDefinition, options: SlitS
   // first-pass and mirrored maps above and below are diagnostics of the placement and use the averaging primitive directly.
   const frame = scanFrame(definition, digestOf(await readFile(resolve(REPOSITORY, definition.orientation.path)))), measurement = scanMeasurement(definition, definition.acrossSlitDirection);
   const { map: combinedMap, overlaps: combinedOverlaps } = combineUnderPolicy(visits.map(entry => ({ map: entry.map, definition: measurement, frame,
-    observation: scanObservation(definition, entry, used.find(frame_ => frame_.visit === entry.registration.visit)!.plateScaleArcsec) })), SCAN_COMBINATION, definition.grid.maximumEmissionDegrees);
+    observation: (() => { const frame_ = used.find(frame__ => frame__.visit === entry.registration.visit)!;
+      return scanObservation(definition, entry, frame_.plateScaleArcsec, frame_.programme); })() })), SCAN_COMBINATION, definition.grid.maximumEmissionDegrees);
   const combined = { map: combinedMap, overlaps: combinedOverlaps };
   const coverage = new Float32Array(definition.grid.width * definition.grid.height);
   for (const entry of visits) for (let cell = 0; cell < coverage.length; cell++) if (Number.isFinite(entry.map.depth[cell]!)) coverage[cell]! += 1;
@@ -580,6 +583,7 @@ export function scanReceipt(run: SlitScanRun) {
 export const SCAN_COMBINATION: CombinationPolicy = { time: { rule: 'time-invariant' }, resolution: { rule: 'as-observed' } };
 
 export const scanMeasurement = (definition: SlitScanDefinition, direction: AcrossSlitDirection): MeasurementDefinition => ({ quantity: definition.band.quantity, units: definition.band.units, timeDependence: 'surface-property',
+  wavelengthIntervalsMicrometres: [[definition.band.bandAngstrom[0] / 10_000, definition.band.bandAngstrom[1] / 10_000]],
   source: definition.published[0]?.source ?? definition.reference.note,
   method: { kind: 'equivalent-width', bandAngstrom: definition.band.bandAngstrom, continuum: { model: 'polynomial', order: definition.band.continuumOrder, windowsAngstrom: definition.band.continuumWindowsAngstrom },
     solarReference: { name: definition.reference.name, sha256: definition.reference.sha256 }, reduction: definition.reduction, acrossSlitDirection: direction } });
@@ -589,10 +593,11 @@ export const scanFrame = (definition: SlitScanDefinition, rotationSha256: string
 
 /** Across the scan one resolution element is the slit's width; along the slit it is two detector pixels. Hubble's own blur is
  * not removed and is not counted here. */
-export function scanObservation(definition: SlitScanDefinition, entry: VisitMap, plateScaleArcsec: number): BodyMapObservation {
+export function scanObservation(definition: SlitScanDefinition, entry: VisitMap, plateScaleArcsec: number, programme: string): BodyMapObservation {
   const slitWidthArcsec = Number(/X([0-9.]+)/u.exec(definition.aperture)?.[1]), alongArcsec = 2 * plateScaleArcsec, west = (degrees: number) => ((degrees % 360) + 360) % 360;
   if (!(slitWidthArcsec > 0)) throw new TypeError(`The aperture ${definition.aperture} does not state a slit width.`);
-  return { id: entry.registration.visit, telescope: 'HST', instrument: `${definition.instrument} ${definition.opticalElement} ${definition.aperture}`, midTimeJd: entry.registration.midJulianDate, rangeKm: entry.camera.rangeKm,
+  return { id: entry.registration.visit, telescope: 'HST', instrument: `${definition.instrument} ${definition.opticalElement} ${definition.aperture}`,
+    mode: definition.instrument, programme: `${definition.target.toLowerCase()}-${programme}`, midTimeJd: entry.registration.midJulianDate, rangeKm: entry.camera.rangeKm,
     subObserver: { latitudeDegrees: entry.camera.observerLatitude, westLongitudeDegrees: west(entry.camera.observerWestLongitude) }, subSolar: { latitudeDegrees: entry.camera.sunLatitude, westLongitudeDegrees: west(entry.camera.sunWestLongitude) },
     angularResolution: { majorArcsec: Math.max(slitWidthArcsec, alongArcsec), minorArcsec: Math.min(slitWidthArcsec, alongArcsec), basis: 'slit width across the scan and two detector pixels along the slit; the telescope blur is not removed' } };
 }
@@ -600,7 +605,8 @@ export function scanObservation(definition: SlitScanDefinition, entry: VisitMap,
 /** What the map means, to be written beside it: the band, the continuum and the reference that define the number, the frame,
  * and every visit that went in. */
 export function scanBodyMapRecord(definition: SlitScanDefinition, run: SlitScanRun, fits: Buffer, fileName: string, rotationSha256: string): BodyMapProduct {
-  const observations = run.visits.map(entry => scanObservation(definition, entry, run.used.find(frame => frame.visit === entry.registration.visit)!.plateScaleArcsec));
+  const observations = run.visits.map(entry => { const frame = run.used.find(frame_ => frame_.visit === entry.registration.visit)!;
+    return scanObservation(definition, entry, frame.plateScaleArcsec, frame.programme); });
   return { schema: 'cssearth-body-map@1', definition: scanMeasurement(definition, run.direction), frame: scanFrame(definition, rotationSha256),
     grid: { width: run.combined.map.width, height: run.combined.map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' },
     planes: { file: fileName, sha256: digestOf(fits), value: definition.band.quantity, uncertainty: `${definition.band.quantity} ERROR` }, mask: { maximumEmissionDegrees: definition.grid.maximumEmissionDegrees, missing: 'NaN' }, observations,
@@ -610,15 +616,26 @@ export function scanBodyMapRecord(definition: SlitScanDefinition, run: SlitScanR
 export async function writeProducts(definition: SlitScanDefinition, run: SlitScanRun, outputDirectory: string) {
   await mkdir(outputDirectory, { recursive: true });
   const name = `${definition.band.id}.fits`;
-  const fits = scanProduct(definition, run);
-  await writeFile(resolve(outputDirectory, name), fits);
-  await writeFile(resolve(outputDirectory, `${name}.body-map.json`), formatBodyMapProduct(scanBodyMapRecord(definition, run, fits, name, digestOf(await readFile(resolve(REPOSITORY, definition.orientation.path))))));
-  await writeFile(resolve(outputDirectory, 'registration.json'), `${JSON.stringify({ scan: definition.id, acrossSlitDirection: run.direction,
+  const fits = scanProduct(definition, run), rotationBytes = await readFile(resolve(REPOSITORY, definition.orientation.path));
+  const product = scanBodyMapRecord(definition, run, fits, name, digestOf(rotationBytes)), metadata = Buffer.from(formatBodyMapProduct(product));
+  const registration = Buffer.from(`${JSON.stringify({ scan: definition.id, acrossSlitDirection: run.direction,
     frames: run.frames.map(frame => ({ name: frame.name, visit: frame.visit, programme: frame.programme, targetName: frame.targetName,
       postArg1Arcsec: frame.postArg1Arcsec, postArg2Arcsec: frame.postArg2Arcsec, orientatDegrees: frame.orientatDegrees,
       angularDiameterArcsec: frame.ephemeris.angularDiameterArcsec, rejected: frame.rejected })),
     visits: run.visits.map(entry => ({ ...entry.registration, camera: entry.camera })) }, null, 1)}\n`);
-  return [name, 'registration.json'];
+  await writeFile(resolve(outputDirectory, name), fits);
+  await writeFile(resolve(outputDirectory, `${name}.body-map.json`), metadata);
+  await writeFile(resolve(outputDirectory, 'registration.json'), registration);
+  const definitionBytes = await readFile(scanPath(definition.id)), responsesBytes = await readFile(resolve(PROGRAMS, definition.horizons.responses));
+  const inputs: ProductInput[] = [{ role: 'slit-scan definition', identity: `tools/objects/hst/programs/${definition.id}.scan.json`, bytes: definitionBytes.byteLength, sha256: digestOf(definitionBytes) },
+    ...definition.frames.map(frame => ({ role: frame.rejected ? 'rejected archive frame' : 'archive rectified frame', identity: frame.uri, bytes: frame.bytes, sha256: frame.sha256 })),
+    { role: 'solar reference', identity: definition.reference.url, bytes: definition.reference.bytes, sha256: definition.reference.sha256 },
+    { role: 'Horizons responses', identity: `tools/objects/hst/programs/${definition.horizons.responses}`, bytes: responsesBytes.byteLength, sha256: digestOf(responsesBytes) },
+    { role: 'rotation model', identity: definition.orientation.path, bytes: rotationBytes.byteLength, sha256: digestOf(rotationBytes) }];
+  const software: ProductSoftware[] = [{ name: 'cssEarth slit-scan-map', version: '1' }, { name: 'node', version: process.versions.node }];
+  const record = bodyMapProductRecord(product, fits, metadata, inputs, software, undefined, [{ path: 'registration.json', bytes: registration }]);
+  await writeFile(resolve(outputDirectory, `${name}.product.json`), formatProductRecord(record));
+  return [name, `${name}.body-map.json`, `${name}.product.json`, 'registration.json'];
 }
 
 // ---- the stage --------------------------------------------------------------------------------------------------------

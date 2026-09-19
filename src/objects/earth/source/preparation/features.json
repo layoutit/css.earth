@@ -6,6 +6,7 @@
   "surfaceMap": "presentation/surface-map.json",
   "output": "earth-features.json",
   "publicBase": "/scenes/earth/",
+  "selectionBankCount": 64,
   "target": {
     "className": "earth-body",
     "withoutClassName": "earth-body-polar"

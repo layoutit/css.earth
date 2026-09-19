@@ -197,15 +197,28 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       // absent from its successor in the same publication, without embedding
       // every inactive dataset's clearing writes in every prepared variant.
       const nextStyles = new Set(writes.filter(binding => binding.kind === "style").map(styleKey));
-      for (const [key, binding] of selectedTextures) if (!nextStyles.has(key)) {
-        writeStyle(target(binding.target), binding.name, "none"); styleWrites++;
-      }
-      for (const binding of writes) {
+      const profileDisplay = (binding: typeof writes[number], value: string) => binding.kind === "style" &&
+        binding.name.startsWith("--") && binding.name.endsWith("-display") && binding.value === value;
+      const hiddenProfiles = writes.filter(binding => profileDisplay(binding, "none"));
+      const shownProfiles = writes.filter(binding => profileDisplay(binding, "block"));
+      const contentWrites = writes.filter(binding => !profileDisplay(binding, "none") && !profileDisplay(binding, "block"));
+      const publish = (binding: typeof writes[number]) => {
         const element = target(binding.target);
         if (binding.kind === "attribute") writeAttribute(element, binding.name, binding.value);
         else if (binding.kind === "class") element.classList.toggle(binding.name, binding.value);
         else { writeStyle(element, binding.name, binding.value); styleWrites++; }
+      };
+      // Alternative radial meshes address different atlas layouts. Hide the
+      // outgoing profile before changing their shared image, then reveal the
+      // incoming profile only after the complete dataset has been published.
+      // If publication is interrupted, the body fails closed instead of
+      // rendering one mesh with another mesh's texel addresses.
+      for (const binding of hiddenProfiles) publish(binding);
+      for (const [key, binding] of selectedTextures) if (!nextStyles.has(key)) {
+        writeStyle(target(binding.target), binding.name, "none"); styleWrites++;
       }
+      for (const binding of contentWrites) publish(binding);
+      for (const binding of shownProfiles) publish(binding);
       selectedTextures = new Map(variant.writes.filter(binding => binding.kind === "texture").map(binding => [styleKey(binding), binding]));
       for (const entry of motion) {
         const duration = entry.plan.timings.find(timing => Object.entries(timing.when).every(([name, value]) => selection[name] === value))?.duration ?? entry.plan.duration;

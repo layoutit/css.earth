@@ -23,7 +23,7 @@ import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits.mts';
 import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from '../interferometry/fits-table.mts';
-import { mastFile } from '../jwst/mast.mts';
+import { mastFile } from '../astronomy-packages/mast.mts';
 import { addProductEvidence, productRecordPath, type ProductRecord } from '../product-record.mts';
 import { PROGRAMS, suffixOf } from './archive.mts';
 import { readHstProgram } from './calibrate.mts';

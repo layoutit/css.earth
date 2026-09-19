@@ -32,6 +32,9 @@ Science frames by mode. A mode counts as reduced only when a program of that mod
 excluded, so these are exposures on the body. A target name carrying a minor-planet number matches only the id that carries
 the same number, which is why 52 Europa and Europa are two rows and not one.
 
+Each object also retains one machine-readable record per programme, archive target spelling, mode and observing night. Those
+records are the identities the telescope query passes back to the NACO qualification route; the table stays an aggregate.
+
 | object | frames | modes | programmes | archive target names |
 | --- | ---: | --- | --- | --- |
 | uranus | 1,746 | imaging | 079.C-0626(A), 079.C-0682(A), 080.C-0357(A) (+2) | URANUS |

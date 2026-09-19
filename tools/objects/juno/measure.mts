@@ -25,7 +25,8 @@ import { utcToEt } from '../../spice/lsk.mts';
 import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import { decodeJunocam, refinableStrips, type JunocamGeometry } from '../terrestrial-layers/junocam.mts';
 import { refineStripEpochs, type StripRefinementPolicy } from '../terrestrial-layers/strip-refinement.mts';
-import { PROGRAMS, fetchText, readProgram, writeProgram, type JunocamProgram } from './archive.mts';
+import { PROGRAMS, readProgram, writeProgram, type JunocamProgram } from './archive.mts';
+import { astroqueryRows } from '../astronomy-packages/client.mts';
 import { flagValue, positionalArguments } from '../../cli-arguments.mts';
 
 export const RECEIPT_SCHEMA = 'cssearth-junocam-registration@1';
@@ -57,17 +58,14 @@ async function pinned(url: string, bytes: number, digest: string | undefined, di
 }
 
 /** Juno's position relative to the target from the bank against JPL Horizons' vectors at each epoch, in metres. */
-export async function horizonsCheck(set: KernelSet, program: JunocamProgram, fetcher: typeof fetch = fetch) {
+export async function horizonsCheck(set: KernelSet, program: JunocamProgram) {
   const epochs = program.images.map(image => utcToEt(set.leapSeconds, image.startTime)), julian = epochs.map(et => (2451545 + et / 86400).toFixed(9));
-  const parameters = { format: 'text', COMMAND: `'${JUNO}'`, OBJ_DATA: `'NO'`, MAKE_EPHEM: `'YES'`, EPHEM_TYPE: `'VECTORS'`, CENTER: `'@${program.target.naifId}'`, REF_PLANE: `'FRAME'`, REF_SYSTEM: `'ICRF'`,
-    OUT_UNITS: `'KM-S'`, VEC_TABLE: `'2'`, VEC_CORR: `'NONE'`, CSV_FORMAT: `'YES'`, TLIST_TYPE: `'JD'`, TIME_TYPE: `'TDB'`, TLIST: julian.map(jd => `'${jd}'`).join('\n') };
-  const url = `https://ssd.jpl.nasa.gov/api/horizons.api?${new URLSearchParams(parameters)}`, text = await fetchText(url, fetcher);
-  const start = text.indexOf('$$SOE'), end = text.indexOf('$$EOE');
-  if (start < 0 || end < 0) throw new Error('Horizons returned no vector table.');
-  const rows = text.slice(start + 5, end).trim().split('\n').map(line => line.split(',').map(cell => Number(cell.trim())));
+  const rows = await astroqueryRows({ operation: 'horizons-vectors', id: String(JUNO), location: `@${program.target.naifId}`,
+    epochs: julian.map(Number), refplane: 'frame', aberrations: 'geometric' });
   if (rows.length !== epochs.length) throw new Error('Horizons returned a different number of epochs.');
-  return { source: /Target body name:.*\{source: ([^}]+)\}/u.exec(text)?.[1] ?? null, query: url,
-    differencesMeters: rows.map((row, i) => { const ours = set.ephemeris.state(JUNO, program.target.naifId, epochs[i]!).position; return 1000 * Math.hypot(ours[0] - row[2]!, ours[1] - row[3]!, ours[2] - row[4]!); }) };
+  return { source: 'JPL Horizons through Astroquery', query: { target: JUNO, center: `@${program.target.naifId}`, epochs: julian, refplane: 'frame', aberrations: 'geometric' },
+    differencesMeters: rows.map((row, i) => { const ours = set.ephemeris.state(JUNO, program.target.naifId, epochs[i]!).position;
+      return 1000 * Math.hypot(ours[0] - Number(row.x), ours[1] - Number(row.y), ours[2] - Number(row.z)); }) };
 }
 
 /** The version of the software that measured a registration: the digest of the modules that decode an image, place it and fit

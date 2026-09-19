@@ -16,7 +16,7 @@
  * their names state. Those come from the level-1 and level-2 event headers, read over a range request rather than downloaded,
  * and are checked against what the archive's own catalogue says about the observation.
  *
- * The catalogue is queried over TAP at https://cda.cfa.harvard.edu/cxctap/sync. ivoa.ObsCore is not served there; cxc.observation
+ * The catalogue is queried through PyVO at https://cda.cfa.harvard.edu/cxctap. ivoa.ObsCore is not served there; cxc.observation
  * is, and is what this route reads.
  *
  * The program is written to tools/objects/chandra/programs/<program id>.json. */
@@ -28,9 +28,10 @@ import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { readFitsHeader, type FitsHeader } from '../../fits.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { tapRows } from '../astronomy-packages/client.mts';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');
-export const TAP = 'https://cda.cfa.harvard.edu/cxctap/sync';
+export const TAP = 'https://cda.cfa.harvard.edu/cxctap';
 export const ARCHIVE = 'https://cxc.cfa.harvard.edu/cdaftp/byobsid';
 const NAME = /^[A-Za-z0-9._-]+$/u;
 /** Where the archive keeps an observation's files. Nothing outside these directories is pinned. */
@@ -169,35 +170,9 @@ export async function chandraFile(file: ChandraFile, directory: string, sources:
   return target;
 }
 
-/** One ADQL query against the Chandra Data Archive's TAP service. The service answers 303 with the result's location, and
- * `text/csv` is tab-separated with `#` comment lines above the header row, so the rows are read as that. */
+/** One ADQL query against the Chandra Data Archive. PyVO owns TAP and VOTable parsing. */
 export async function cxcQuery(query: string): Promise<Record<string, string>[]> {
-  const url = `${TAP}?${new URLSearchParams({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'text/csv', QUERY: query })}`;
-  // The service closes a connection under a burst of queries, so a transport failure is retried with a widening pause. A query
-  // the service answers with an error is not retried: the answer would be the same.
-  let last: unknown;
-  for (let attempt = 1; attempt <= 5; attempt++) {
-    try {
-      const response = await fetch(url, { redirect: 'follow', signal: AbortSignal.timeout(300_000) });
-      if (!response.ok) throw new Error(`The Chandra archive refused the query: ${response.status}`);
-      return parseCxcRows(await response.text());
-    } catch (error) {
-      if (error instanceof Error && /refused the query/u.test(error.message)) throw error;
-      last = error;
-      await new Promise(done => { setTimeout(done, attempt * 2000); });
-    }
-  }
-  throw new Error(`The Chandra archive did not answer after five attempts: ${last instanceof Error ? last.message : String(last)}`);
-}
-
-/** The service's `text/csv` is tab-separated, with a `#` comment for every column above the header row, and it answers an
- * unusable query with a VOTable that carries the message rather than with an HTTP error. Both are read here. */
-export function parseCxcRows(body: string): Record<string, string>[] {
-  if (body.includes('QUERY_STATUS" value="ERROR"')) throw new Error(`The Chandra archive refused the query: ${body.replace(/<[^>]*>/gu, ' ').replace(/\s+/gu, ' ').trim().slice(0, 300)}`);
-  const lines = body.split('\n').filter(line => line.trim() && !line.startsWith('#'));
-  const columns = lines.shift()?.split('\t').map(name => name.trim());
-  if (!columns?.length) throw new Error('The Chandra archive answered without a header row.');
-  return lines.map(line => Object.fromEntries(line.split('\t').map((cell, index) => [columns[index] ?? `column${index}`, cell.trim()])));
+  return tapRows(TAP, query);
 }
 
 /** The files the archive lists under one of an observation's directories, with their sizes. The listing is an Apache-style

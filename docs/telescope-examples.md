@@ -25,7 +25,7 @@ records that directory too. The commands below are written as they are run from 
 
 ## JWST, NIRCam: the Southern Ring Nebula
 
-![A cream and pink oval nebula with a ragged rim and two blue-white spiked stars at its centre](telescopes/jwst-nircam-ngc3132.webp)
+![A cream and pink oval nebula with a ragged rim and two blue-white spiked stars at its centre](images/telescopes/jwst-nircam-ngc3132.webp)
 
 NGC 3132 on 3 June 2022, three NIRCam filters re-run here through the pipeline's level-3 image stage onto one grid.
 Representative colour, not what an eye would see: red is F405N at 4.05 microns from 0 to 45 MJy/sr, green is F187N at
@@ -38,7 +38,7 @@ are the pair at the heart of the nebula; the dying star that made it is the fain
 
 ## JWST, NIRSpec: the ring around SN 1987A
 
-![A bright knotted ring of light on a dark tilted square field, with one bright spot outside it](telescopes/jwst-nirspec-sn1987a.webp)
+![A bright knotted ring of light on a dark tilted square field, with one bright spot outside it](images/telescopes/jwst-nirspec-sn1987a.webp)
 
 One plane of a NIRSpec integral-field cube of SN 1987A, taken on 16 July 2022 with G140M/F100LP and re-run here through
 the pipeline's level-3 spectral stage onto a 0.05 arcsecond grid. The plane is at 1.0842 microns, the helium line that
@@ -50,7 +50,7 @@ the star shed long before it died. Grey is outside the cube's footprint.
 
 ## JWST, MIRI: the Ring Nebula at 7.7 microns
 
-![A thick glowing ring of tangled filaments with a dark middle and faint spikes around the outside](telescopes/jwst-miri-ngc6720.webp)
+![A thick glowing ring of tangled filaments with a dark middle and faint spikes around the outside](images/telescopes/jwst-miri-ngc6720.webp)
 
 NGC 6720 on 20 August 2022 through MIRI's F770W filter: eight dithered exposures, 444 seconds in all, fetched and
 re-run here through the level-3 image stage. Brightness is surface brightness in MJy/sr, from 4.3 to 28, asinh softened
@@ -64,7 +64,7 @@ comparison against the archive's mosaic agrees to about 2 parts in 10 million of
 
 ## Hubble, STIS: the 450 nm sodium chloride band on Europa
 
-![A longitude-latitude map in blue and cream, four overlapping circles on a grey background](telescopes/hubble-stis-europa-salt.webp)
+![A longitude-latitude map in blue and cream, four overlapping circles on a grey background](images/telescopes/hubble-stis-europa-salt.webp)
 
 Four STIS CCD slit scans of Europa, on 23 May, 29 June, 1 August and 6 August 2017, each scan stepped across the disc,
 turned into a longitude-latitude map. Colour is the strength of the 450 nm absorption attributed to sodium chloride, as
@@ -77,7 +77,7 @@ where the surface was seen more than 60 degrees from face on. The strong side is
 
 ## ALMA: Europa's thermal disc
 
-![A mottled orange disc on a black background, warmer across the middle and cooler at the edges](telescopes/alma-europa-brightness-temperature.webp)
+![A mottled orange disc on a black background, warmer across the middle and cooler at the edges](images/telescopes/alma-europa-brightness-temperature.webp)
 
 ALMA Band 6 continuum at 232 GHz, observed on 26 November 2015, calibrated, self-calibrated and imaged here, then
 converted to brightness temperature. Colour is temperature in Kelvin, from 55 K (black) to 102 K (pale yellow), linear,
@@ -90,7 +90,7 @@ they are about 2 K, which is the image noise at the beam scale, not surface feat
 
 ## VLTI, MATISSE: the surface of Betelgeuse
 
-![A blotchy bright disc with two brighter patches, on a black field](telescopes/vlti-matisse-betelgeuse.webp)
+![A blotchy bright disc with two brighter patches, on a black field](images/telescopes/vlti-matisse-betelgeuse.webp)
 
 Betelgeuse in February 2020, during the Great Dimming, reconstructed here from MATISSE interferometry in the L band
 continuum. Brightness is normalised intensity, from 0 to 4.93e-4, linear. North is up and east left, 0.78
@@ -103,7 +103,7 @@ shown; nothing further is smoothed here.
 
 ## VLT, NACO: Ceres from the ground
 
-![A bright round blob with a wide soft halo on a black field](telescopes/vlt-naco-ceres.webp)
+![A bright round blob with a wide soft halo on a black field](images/telescopes/vlt-naco-ceres.webp)
 
 NACO adaptive optics imaging of Ceres on 11 November 2007 in the Ks filter through the S13 camera, re-reduced on ESO's
 own pipeline and combined. Brightness is detector counts, from 0 to 6,300 ADU, linear. The reduced frame carries no
@@ -115,7 +115,7 @@ around it is the adaptive optics halo, which is in the data, and there is no sur
 
 ## Chandra: Cassiopeia A in X-rays
 
-![A grainy round shell of yellow-green and blue filaments filling the frame, on a black background](telescopes/chandra-acis-cassiopeia-a.webp)
+![A grainy round shell of yellow-green and blue filaments filling the frame, on a black background](images/telescopes/chandra-acis-cassiopeia-a.webp)
 
 Cassiopeia A on 27 August 1999, a 3.6 ks ACIS-I observation reprocessed from level 1 on Chandra's own software, with
 the resulting events binned here into squares 2 by 2 sky pixels, 0.98 arcseconds a bin. Representative colour, not what
@@ -131,7 +131,7 @@ reprocessed, and the toolkit's event-by-event comparison against the archive mat
 
 ## Spitzer, IRAC: NGC 3132 in the infrared
 
-![A salmon-pink ring-shaped nebula with a bright pair of stars at its centre, among blue-white field stars](telescopes/spitzer-irac-ngc3132.webp)
+![A salmon-pink ring-shaped nebula with a bright pair of stars at its centre, among blue-white field stars](images/telescopes/spitzer-irac-ngc3132.webp)
 
 Three of the four IRAC channels of NGC 3132, re-made here from the archive's own twelve level-1 frames of AOR 4416768
 and mosaicked onto one grid. Representative colour, not what an eye would see: red is channel 4 at 8.0 microns from 2.6
@@ -146,7 +146,7 @@ are missing from channel 4. This is the same nebula as the NIRCam picture above,
 
 ## Keck II, KCWI: a patch of the Orion Nebula
 
-![A small coarse grey field of blocky light and dark patches with vertical striping](telescopes/keck-kcwi-m42.webp)
+![A small coarse grey field of blocky light and dark patches with vertical striping](images/telescopes/keck-kcwi-m42.webp)
 
 The only M42 science cube this toolkit has reduced so far: a 5 second KCWI exposure from 9 December 2023, run through
 the instrument's own data reduction pipeline here. The picture adds the eleven wavelength planes from 5004 to 5014
@@ -164,7 +164,7 @@ reduced.
 
 ## Gemini South, GMOS: the interstellar comet 3I/ATLAS
 
-![A diffuse elongated smear with several bright knots along it, among sharp stars](telescopes/gemini-gmos-comet-3i.webp)
+![A diffuse elongated smear with several bright knots along it, among sharp stars](images/telescopes/gemini-gmos-comet-3i.webp)
 
 3I/ATLAS on 5 September 2025: four 25 second GMOS-S r band frames stacked by the observatory's own DRAGONS recipe on
 this toolkit's master bias and flat. Brightness is detector electrons, from 3,400 to 20,000, asinh softened at 60. The
@@ -177,7 +177,7 @@ into one smear rather than as a single object. Some of the points near it are or
 
 ## Juno, JunoCam: one strip set of Europa
 
-![The curved limb of an icy moon crossed by long dark ridges, in three horizontal strips](telescopes/juno-junocam-europa.webp)
+![The curved limb of an icy moon crossed by long dark ridges, in three horizontal strips](images/telescopes/juno-junocam-europa.webp)
 
 The JunoCam flyby of Europa on 29 September 2022, from 1,515 km up. This is the archive's calibrated push-frame image as
 the instrument records it, not a cast or projected picture: JunoCam builds colour by sweeping three filter strips across

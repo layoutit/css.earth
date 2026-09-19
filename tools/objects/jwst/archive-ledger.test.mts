@@ -49,7 +49,7 @@ test('each mode\'s state comes from the pinned programs, and every named tool ex
 
 test('the checked-in ledger names only shipped objects, agrees with the pinned programs, and the guide is written from it', async () => {
   const ledger = JSON.parse(await readFile(resolve(repository, 'data/jwst/ledger.json'), 'utf8')) as Ledger;
-  assert.equal(ledger.schema, 'cssearth-jwst-ledger@1');
+  assert.equal(ledger.schema, 'cssearth-jwst-ledger@2');
   const shipped = new Set((await shippedObjects(repository)).map(object => object.id)), state = await repositoryState(repository);
   for (const object of ledger.objects) assert.ok(shipped.has(object.id), `${object.id} is not shipped`);
   for (const mode of ledger.modes) {
@@ -61,10 +61,15 @@ test('the checked-in ledger names only shipped objects, agrees with the pinned p
 
 test('a ledger counts observations by object and mode', () => {
   const held = { modes: new Map(JWST_MODES.map(({ mode }) => [mode, { bands: 0, programs: [] as string[], checked: [] as string[] }])), timeSeries: new Map<string, { programs: string[]; checked: string[] }>(), receiptProblems: [] as string[] };
-  const ledger = buildLedger([{ observation: 'a', target: 'TITAN-LEADING', programme: '1251', mode: 'NIRSPEC/IFU', moving: true, raDeg: null, decDeg: null },
-    { observation: 'b', target: 'TITAN-BACKGROUND', programme: '1251', mode: 'NIRSPEC/IFU', moving: true, raDeg: null, decDeg: null }],
+  const ledger = buildLedger([{ observation: 'a', target: 'TITAN-LEADING', programme: '1251', mode: 'NIRSPEC/IFU', moving: true,
+    startIso: '2022-01-01T00:00:00.000Z', endIso: '2022-01-01T01:00:00.000Z', filter: 'F100LP;G140H', raDeg: null, decDeg: null },
+    { observation: 'b', target: 'TITAN-BACKGROUND', programme: '1251', mode: 'NIRSPEC/IFU', moving: true,
+      startIso: '2022-01-02T00:00:00.000Z', endIso: '2022-01-02T01:00:00.000Z', filter: 'F100LP;G140H', raDeg: null, decDeg: null }],
   [{ exposure: 'MIR_LRS-SLITLESS', programme: '2021', observation: '2', target: 'HD-189733B', raDeg: null, decDeg: null }], new Map(), objects, held, '2026-09-18');
-  assert.deepEqual(ledger.objects.map(object => [object.id, object.observations, object.timeSeriesVisits]), [['hd-189733b', {}, { 'MIR_LRS-SLITLESS': 1 }], ['titan', { 'NIRSPEC/IFU': 1 }, {}]]);
+  assert.deepEqual(ledger.objects.map(object => [object.id, object.observations, object.records, object.timeSeriesVisits]), [
+    ['hd-189733b', {}, [], { 'MIR_LRS-SLITLESS': 1 }],
+    ['titan', { 'NIRSPEC/IFU': 1 }, [{ id: 'a', programme: '1251', mode: 'NIRSPEC/IFU', startIso: '2022-01-01T00:00:00.000Z', endIso: '2022-01-01T01:00:00.000Z', filter: 'F100LP;G140H' }], {}],
+  ]);
   assert.equal(ledger.modes.find(mode => mode.mode === 'NIRSPEC/IFU')!.observations, 2);
 });
 

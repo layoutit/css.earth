@@ -16,7 +16,7 @@
  * filter, integration time, template, programme, release date — comes from the raw table and is checked against the frame's
  * own primary header from the archive's header service: a disagreement stops the pin, as it does for the Hubble route.
  *
- * The archive access is this repository's own: `parseRawTable`, `archiveHeader` and `rawFrame` from the interferometry
+ * The archive access is this repository's own: `PyVO`, `archiveHeader` and `rawFrame` from the interferometry
  * modules, and `associationTree` for the calibration tree. Nothing here repeats them.
  *
  * The program is written to tools/objects/naco/programs/<program id>.json. */
@@ -24,13 +24,14 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
-import { archiveHeader, column, parseRawTable, type RawRow } from '../interferometry/eso-pipeline.mts';
+import { archiveHeader, column, type RawRow } from '../interferometry/eso-pipeline.mts';
 import { associationTree, type Association } from '../interferometry/eso-associations.mts';
+import { tapRows } from '../astronomy-packages/client.mts';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');
 export const SCHEMA = 'cssearth-naco-program@1';
 export const INSTRUMENT = 'NAOS+CONICA';
-export const TAP = 'https://archive.eso.org/tap_obs/sync';
+export const TAP = 'https://archive.eso.org/tap_obs';
 export const PORTAL = 'https://dataportal.eso.org/dataPortal/file';
 
 const ID = /^[A-Za-z0-9._-]+$/u;
@@ -40,14 +41,9 @@ export const DP_ID = /^NACO\.\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}$/u;
 export const COLUMNS = ['dp_id', 'dp_cat', 'dp_tech', 'dp_type', 'object', 'filter_path', 'det_dit', 'det_ndit', 'exposure',
   'exp_start', 'tpl_start', 'tpl_id', 'prog_id', 'release_date', 'instrument'] as const;
 
-/** An ADQL query against the raw table, as CSV. Values are quoted by the caller's own vocabulary, never by interpolation of
- * anything an archive answered. */
+/** An ADQL query against the raw table. PyVO owns TAP and VOTable parsing. */
 export async function rawQuery(query: string) {
-  const response = await fetch(`${TAP}?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=${encodeURIComponent(query)}`);
-  if (!response.ok) throw new Error(`The ESO archive answered ${response.status}.`);
-  const text = await response.text();
-  if (text.includes('QUERY_STATUS') && text.includes('ERROR')) throw new Error(`The ESO archive refused the query: ${text.slice(0, 400)}`);
-  return text;
+  return tapRows(TAP, query);
 }
 
 const literal = (value: string) => {
@@ -59,7 +55,7 @@ const literal = (value: string) => {
 export async function programmeFrames(progId: string, object: string) {
   const query = `SELECT ${COLUMNS.join(', ')} FROM dbo.raw WHERE instrument = ${literal(INSTRUMENT)}`
     + ` AND prog_id = ${literal(progId)} AND object = ${literal(object)} ORDER BY dp_id`;
-  const rows = parseRawTable(await rawQuery(query));
+  const rows = await rawQuery(query);
   if (!rows.length) throw new Error(`No NACO frames for ${progId} on ${object}.`);
   return rows;
 }
@@ -329,7 +325,7 @@ export async function pinProgram(program: string, progId: string, object: string
 /** A calibration frame's own raw-table row, which its science programme's query does not hold. */
 async function calibrationRow(dpId: string) {
   if (!DP_ID.test(dpId)) throw new TypeError(`${dpId} is not a NACO frame id.`);
-  const rows = parseRawTable(await rawQuery(`SELECT ${COLUMNS.join(', ')} FROM dbo.raw WHERE dp_id = ${literal(dpId)}`));
+  const rows = await rawQuery(`SELECT ${COLUMNS.join(', ')} FROM dbo.raw WHERE dp_id = ${literal(dpId)}`);
   if (rows.length !== 1) throw new Error(`${rows.length} raw-table rows for ${dpId}.`);
   return rows[0]!;
 }
