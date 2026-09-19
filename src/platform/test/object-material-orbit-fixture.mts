@@ -8,7 +8,7 @@ import { Surface, orbitFixture, type OrbitCallbacks } from './orbit-fixture.mts'
 import { requireObjectRuntimeDefinition } from '../object-runtime-contract.mts';
 import { parsePreparedObjectRuntime } from '../../renderers/css/dist/index.js';
 import type { ObjectRuntimeDefinition, ObjectRuntimeServices } from '../object-runtime.mts';
-import type { RetainedCubicSkyOrbit, OrbitServices } from '../object-orbit.mts';
+import type { RetainedCubicSkyOrbit, OrbitServices } from '../../renderers/css/dist/platform/object-orbit.js';
 import type { PreparedImage } from '../prepared-image-store.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 
@@ -54,7 +54,7 @@ export function materialOrbitFixture(id: string) {
       skybox: () => ({ matrix: identity, sunViewDirection: [0, 0, 1] }),
       counterRotation: () => identity,
       reset() {}, rotate() {}, snapshot: () => ({}) }) };
-  const shared = orbitFixture(null, false, sharedDependencies as unknown as Partial<import('../object-orbit.mts').OrbitServices>);
+  const shared = orbitFixture(null, false, sharedDependencies as unknown as Partial<import('../../renderers/css/dist/platform/object-orbit.js').OrbitServices>);
   const f = { ...shared, stage: nativeStage, errors: [], writes: 0, fail: false, create: async () => undefined, event: () => undefined, restore() {} } as unknown as MaterialFixture;
   const publish = () => { f.writes++; if (f.fail) throw new Error('material publication failed'); };
   const services = {
@@ -89,7 +89,7 @@ export function materialOrbitFixture(id: string) {
         destroy() { shared.owners.delete('heliocentric'); } };
     },
     mountSun: () => ({ root: { isConnected: true }, state: () => ({ visible: true }), setViewDirection: () => ({ visible: true }), destroy() {} }),
-    createOrbit(options: unknown) { f.orbit = shared.create(options as import('../object-orbit.mts').RetainedOrbitOptions); return f.orbit; },
+    createOrbit(options: unknown) { f.orbit = shared.create(options as import('../../renderers/css/dist/platform/object-orbit.js').RetainedOrbitOptions); return f.orbit; },
   };
   const mount = createObjectRuntime(definition, services as unknown as Partial<ObjectRuntimeServices>);
   f.create = async () => { f.runtime = mount(nativeStage, { onError: error => f.errors.push(error) }); await f.runtime.ready; return f.orbit; };

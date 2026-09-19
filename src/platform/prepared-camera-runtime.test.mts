@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { orbitFixture } from "./test/orbit-fixture.mts";
 import { createPreparedCameraPublisher } from "./prepared-camera-runtime.mts";
-import { selectPreparedResponsiveZoom } from "./camera-layout.mts";
+import { selectPreparedResponsiveZoom } from "../renderers/css/dist/platform/camera-layout.js";
 
 // Native adapters expose only the style and measurement seams exercised below.
 test("zoom preserves the mounted perspective and prepared layer depths", () => {
@@ -44,6 +45,8 @@ test("responsive fit does not treat user zoom as a viewport size change", () => 
     getBoundingClientRect: () => ({ width: 1440 * 0.7 * zoom / 1.1 }),
   };
   const plan = {
+    ...orbitFixture(null).arguments.cameraPlan,
+    defaultZoom: 1.1,
     logicalBodyDiameter: 460,
     responsiveFit: {
       model: "continuous-aspect-smoothstep",

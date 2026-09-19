@@ -2,6 +2,10 @@ import { fileURLToPath } from 'node:url';
 
 export default {
   entry: {
+    'platform/object-orbit': fileURLToPath(new URL('./navigation/object-orbit.ts', import.meta.url)),
+    'platform/camera-input': fileURLToPath(new URL('./navigation/camera-input.ts', import.meta.url)),
+    'platform/camera-layout': fileURLToPath(new URL('./navigation/camera-layout.ts', import.meta.url)),
+    'platform/prepared-wheel-zoom': fileURLToPath(new URL('./navigation/prepared-wheel-zoom.ts', import.meta.url)),
     "platform/prepared-residency": fileURLToPath(new URL("./rendering/prepared-residency.ts", import.meta.url)),
     'platform/object-contract': fileURLToPath(new URL('./runtime/object-contract.ts', import.meta.url)),
     'platform/prepared-playback': fileURLToPath(new URL('./rendering/prepared-playback.ts', import.meta.url)),

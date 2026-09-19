@@ -10,13 +10,14 @@ export interface ObjectRuntimeView extends OrbitPublication { readonly reference
 type PageLayerRuntime = ReturnType<typeof mountPreparedMapPages>;
 import type { ObjectRuntimeDefinition as RendererObjectRuntimeDefinition, ObjectMountOptions } from "../renderers/css/runtime/object-runtime-types.ts";
 import type { ObjectSelectionState } from "../renderers/css/rendering/object-selection-runtime.ts";
-import type { OrbitPublication, RetainedCubicSkyOrbit } from "./object-orbit.mts";
+import type { OrbitPublication, RetainedCubicSkyOrbit } from "../renderers/css/dist/platform/object-orbit.js";
 import type { SharedView } from "./view-url.mts";
 import type { ObjectWorldNavigation, ObjectWorldNavigationListener } from "../renderers/css/runtime/world-navigation-types.ts";
 import type { WorldCameraPose, WorldCameraViewport } from "../renderers/css/navigation/world-camera.ts";
 export type ObjectRuntimeServices = typeof nativeServices;
 import { mountPreparedMapPages } from "./prepared-map/city-pages.mts";
 import { createPreparedDestinations } from "./prepared-destinations.mts";
+import * as runtimePolicy from "../../site/runtime-policy.mts";
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../site/runtime-policy.mts";
 import { createSceneLifetime } from "@cssearth/engine";
 import { waitForSceneDocument, waitForScenePaint } from "../renderers/css/dist/scene-native-waits.js";
@@ -24,7 +25,7 @@ import { createPreparedResidency } from "./prepared-residency.mts";
 import { createObjectSelectionRuntime } from "./object-selection-runtime.mts";
 import { createObjectControlBinding } from "./object-control-binding.mts";
 import { createPreparedPlayback } from "./prepared-playback.mts";
-import { createRetainedCubicSkyOrbit } from "./object-orbit.mts";
+import { createRetainedCubicSkyOrbit } from "../renderers/css/dist/platform/object-orbit.js";
 import { mountRetainedCubicSky } from "./cubic-sky-runtime.mts";
 import { mountPreparedPresentation } from "./prepared-presentation.mts";
 import { initialObjectSelection, requireObjectRuntimeDefinition } from "./object-runtime-contract.mts";
@@ -228,7 +229,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         onChange: state => publishSelection(state),
         onMaterialError: error => console.error(error) });
       context.own(() => selection!.destroy());
-      orbit = environment.createOrbit({ stage, inputSurface, cameraElement: mounted!.cameraElement, sceneElement: mounted!.sceneElement,
+      orbit = environment.createOrbit({ runtimePolicy, stage, inputSurface, cameraElement: mounted!.cameraElement, sceneElement: mounted!.sceneElement,
         cubicSky, skyPlan: definition.sky, directionalSunPlan: definition.sun ?? null,
         cameraPlan, objectId: definition.id, requireSun: false,
         mobilePreviewElement: stage.ownerDocument.querySelector<HTMLElement>(".planet-sidebar"), onPublish: publication => guarded(() => publish(publication)), onError: fatal });

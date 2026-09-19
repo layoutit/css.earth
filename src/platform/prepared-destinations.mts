@@ -1,5 +1,5 @@
 import type { SceneLifetime } from "@cssearth/engine";
-import type { RetainedCubicSkyOrbit } from "./object-orbit.mts";
+import type { RetainedCubicSkyOrbit } from "../renderers/css/dist/platform/object-orbit.js";
 import { isArray } from "./is-array.mts";
 type DestinationCamera = Parameters<RetainedCubicSkyOrbit["flyToState"]>[0];
 export interface PreparedDestination { coverage: string; camera: DestinationCamera; }
