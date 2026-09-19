@@ -1,5 +1,5 @@
 import { sceneEye } from './prepared-facing.js';
-import type { PhysicalProjection } from './physical-projection.js';
+import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 
 export type PreparedDepthOrder = { readonly group: number } | { readonly sequence: readonly PreparedDepthOrder[] } | {
   readonly plane: readonly [number, number, number, number];

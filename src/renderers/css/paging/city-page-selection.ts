@@ -1,4 +1,4 @@
-import { preparedReferenceKey } from "./prepared-block-transport.js";
+import { preparedReferenceKey } from "../prepared-data/prepared-block-transport.js";
 import type { PreparedPage, PreparedPagePlan, PreparedReference, PageViewport, PageProjection, ProjectedPage, PageSelection } from "./types.js";
 import { projectCityPage } from "./city-page-projection.js";
 export { projectCityPage } from "./city-page-projection.js";

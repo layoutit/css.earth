@@ -5,7 +5,7 @@ import type { SharedView } from '../navigation/view-url.js';
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
 import { presentWorldCamera } from '../navigation/world-camera.js';
 import { preparedCameraBasis } from '../navigation/prepared-camera-basis.js';
-import { physicalProjectionFromCamera } from './physical-projection.js';
+import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 import { createPreparedFramePublisher } from './prepared-presentation.js';
 
 /** A native response publishes into the retained prepared tree with the live
@@ -32,9 +32,9 @@ export function publishPreparedNativeView(definition: ObjectRuntimeDefinition, s
   scene.hidden = z >= 0 || frame.bodyRadiusM / presentation.distanceM < 1e-10;
   const basis = preparedCameraBasis(definition.camera, presentation.sceneMatrix, definition.sun?.localDirection);
   const view = { ...basis, projection: physicalProjectionFromCamera(presentation.rotation, presentation.bodyCenterUnits, scale, viewport),
-    controlPitch: 'controlPitch' in saved.camera ? saved.camera.controlPitch : definition.camera.defaultControlPitchDegrees,
-    controlYaw: 'controlYaw' in saved.camera ? saved.camera.controlYaw : definition.camera.defaultControlYawDegrees,
-    zoom: 'zoom' in saved.camera ? saved.camera.zoom : definition.camera.defaultZoom,
+    controlPitch: definition.camera.defaultControlPitchDegrees,
+    controlYaw: definition.camera.defaultControlYawDegrees,
+    zoom: definition.camera.defaultZoom,
     body: { visible: !scene.hidden, silhouette: presentation.silhouette },
   };
   const assets = new Map(definition.assets.entries.map(entry => [entry.key, entry.url]));

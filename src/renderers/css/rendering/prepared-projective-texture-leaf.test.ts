@@ -1,5 +1,6 @@
 import { afterEach, expect, test, vi } from 'vitest';
-import { composePreparedProjectiveTransform, createPreparedProjectiveTextureLeaf } from './prepared-projective-texture-leaf.js';
+import { createPreparedProjectiveTextureLeaf } from './prepared-projective-texture-leaf.js';
+import { composePreparedProjectiveTransform } from '../prepared-data/projective-layout.js';
 import { publishPreparedPageTexture } from '../paging/page-texture.js';
 import type { PreparedPage } from '../paging/types.js';
 

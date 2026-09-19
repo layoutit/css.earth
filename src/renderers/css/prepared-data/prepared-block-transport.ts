@@ -1,4 +1,4 @@
-import type { PreparedReference, PreparedDirectory } from "./types.js";
+import type { PreparedReference, PreparedDirectory } from "../paging/types.js";
 import { PREPARED_BLOCK_LIMITS, decodePreparedBlockAsync, restoreWmtsRecords } from "./prepared-block.js";
 import { isPreparedAssetPath } from "./city-asset-url.js";
 

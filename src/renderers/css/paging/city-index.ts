@@ -1,5 +1,5 @@
-import { isPreparedCityAssetUrl } from "./city-asset-url.js";
-import { isPreparedBlockReference, readPreparedWmtsBlock, preparedReferenceKey } from "./prepared-block-transport.js";
+import { isPreparedCityAssetUrl } from "../prepared-data/city-asset-url.js";
+import { isPreparedBlockReference, readPreparedWmtsBlock, preparedReferenceKey } from "../prepared-data/prepared-block-transport.js";
 
 // Only metadata residency and prepared-tree transport. No geographic geometry,
 // source pixels or image processing is derived in the browser.

@@ -1,19 +1,15 @@
-import type { LegacyCameraPose, PhysicalCameraPose } from './types.js';
+import type { PhysicalCameraPose } from './types.js';
 export interface SharedPlayback { times: readonly number[]; speed: number; motionRequested: boolean; }
-export interface LegacySharedCamera { controlPitch: number; controlYaw: number; zoom: number; distanceKilometers?: number; pose: LegacyCameraPose; }
 export interface PhysicalSharedCamera { distanceKilometers: number; pose: PhysicalCameraPose; bodyCenterKilometers?: readonly [number, number, number]; }
-export interface SharedView { camera: LegacySharedCamera | PhysicalSharedCamera; playback: SharedPlayback; preparedEpochJdTt?: number | null; }
-function isPhysicalCamera(camera: SharedView['camera']): camera is PhysicalSharedCamera { return camera.pose.schema === 'cssearth-camera-pose@2'; }
+export interface SharedView { camera: PhysicalSharedCamera; playback: SharedPlayback; preparedEpochJdTt: number | null; }
 function invalid(key = "v"): never { throw new Error(`Invalid “${key}” in this view link.`); }
 function base64url(bytes: Uint8Array) {
   return btoa(String.fromCharCode(...bytes)).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/u, "");
 }
 
-const SHARED_VERSION = 2;
+const SHARED_VERSION = 5;
 const MAX_SHARED_BYTES = 4096;
-const SHARED_POSE_SCHEMA = "cssearth-camera-pose@1";
 const MINIMAL_POSE_SCHEMA = "cssearth-camera-pose@2";
-const POSE_FIELDS = ["scene", "skybox", "sunView"] as const;
 const MATRIX_INDICES = [0, 1, 2, 4, 5, 6, 8, 9, 10];
 
 function record(value: unknown, keys: readonly string[], label: string): asserts value is Record<string, unknown> {
@@ -45,69 +41,22 @@ function poseMatrix(value: unknown) {
 function validateShared(view: unknown): asserts view is SharedView {
   record(view, ["camera", "preparedEpochJdTt", "playback"], "view");
   const camera = view.camera, playback = view.playback;
-  record(camera, ["controlPitch", "controlYaw", "zoom", "distanceKilometers", "pose", "bodyCenterKilometers"], "camera");
-  const pose = camera.pose;
-  record(pose, ["schema", "scene", "skybox", "sunView"], "pose");
-  const minimal = pose.schema === MINIMAL_POSE_SCHEMA;
-  if (minimal) {
-    record(camera, ["distanceKilometers", "pose", "bodyCenterKilometers"], "camera");
-    if (typeof camera.distanceKilometers !== "number" || !Number.isFinite(camera.distanceKilometers) || camera.distanceKilometers <= 0) invalid("camera");
-    if (camera.bodyCenterKilometers !== undefined) {
-      const centre = camera.bodyCenterKilometers;
-      if (!Array.isArray(centre) || centre.length !== 3 || ![0, 1, 2].every(index => typeof centre[index] === 'number' && Number.isFinite(centre[index])) ||
-          Math.abs(Math.hypot(...centre) - camera.distanceKilometers) > camera.distanceKilometers * 1e-12) invalid('camera');
-    }
-    record(pose, ["schema", "scene"], "pose");
-  } else {
-    if (camera.bodyCenterKilometers !== undefined) invalid('camera');
-    if (typeof camera.controlPitch !== "number" || typeof camera.controlYaw !== "number" || typeof camera.zoom !== "number" ||
-      ![camera.controlPitch, camera.controlYaw, camera.zoom].every(Number.isFinite) || camera.zoom <= 0 ||
-      (camera.distanceKilometers !== undefined && (typeof camera.distanceKilometers !== "number" || !Number.isFinite(camera.distanceKilometers) || camera.distanceKilometers <= 0))) invalid("camera");
+  record(camera, ["distanceKilometers", "pose", "bodyCenterKilometers"], "camera");
+  if (typeof camera.distanceKilometers !== "number" || !Number.isFinite(camera.distanceKilometers) || camera.distanceKilometers <= 0) invalid("camera");
+  if (camera.bodyCenterKilometers !== undefined) {
+    const centre = camera.bodyCenterKilometers;
+    if (!Array.isArray(centre) || centre.length !== 3 || ![0, 1, 2].every(index => typeof centre[index] === 'number' && Number.isFinite(centre[index])) ||
+        Math.abs(Math.hypot(...centre) - camera.distanceKilometers) > camera.distanceKilometers * 1e-12) invalid('camera');
   }
-  if (pose.schema !== (minimal ? MINIMAL_POSE_SCHEMA : SHARED_POSE_SCHEMA)) invalid("pose");
-  for (const field of minimal ? ["scene"] : POSE_FIELDS) poseMatrix(pose[field]);
-  if (view.preparedEpochJdTt !== undefined && view.preparedEpochJdTt !== null &&
+  const pose = camera.pose;
+  record(pose, ["schema", "scene"], "pose");
+  if (pose.schema !== MINIMAL_POSE_SCHEMA) invalid("pose");
+  poseMatrix(pose.scene);
+  if (view.preparedEpochJdTt !== null &&
     (typeof view.preparedEpochJdTt !== "number" || !Number.isFinite(view.preparedEpochJdTt))) invalid("preparedEpochJdTt");
   record(playback, ["times", "speed", "motionRequested"], "playback");
   if (!Array.isArray(playback.times) || typeof playback.speed !== "number" || !Number.isFinite(playback.speed) || playback.speed < 0 || typeof playback.motionRequested !== "boolean") invalid("playback");
   for (const time of playback.times) if (typeof time !== "number" || !Number.isFinite(time) || time < 0) invalid("playback");
-}
-
-export function formatSharedView(view: SharedView) {
-  validateShared(view);
-  const camera = view.camera;
-  if (isPhysicalCamera(camera)) return formatMinimalShared(view, camera);
-  const pose = camera.pose, playback = view.playback;
-  // Pick the pose explicitly: camera.state() deliberately makes it
-  // nonenumerable. Astronomical TT metadata stays separate from WAAPI time.
-  let flags = SHARED_VERSION << 12;
-  const values = [camera.controlPitch, camera.controlYaw, camera.zoom];
-  if (camera.distanceKilometers !== undefined) { flags |= 1; values.push(camera.distanceKilometers); }
-  if (view.preparedEpochJdTt !== undefined) {
-    flags |= 2;
-    if (view.preparedEpochJdTt !== null) { flags |= 4; values.push(view.preparedEpochJdTt); }
-  }
-  if (playback.speed !== 1) { flags |= 8; values.push(playback.speed); }
-  if (playback.motionRequested) flags |= 16;
-  for (const [index, field] of POSE_FIELDS.entries()) {
-    const matrix = poseMatrix(pose[field]), quaternion = matrixQuaternion(matrix);
-    const reconstructed = quaternionMatrix(quaternion);
-    // Prepared registrations can contain rounded, slightly nonorthogonal
-    // values. Keep those nine components exactly instead of normalizing them.
-    if (MATRIX_INDICES.some(i => Math.abs(matrix[i] - reconstructed[i]) > 1e-12)) {
-      flags |= 1 << (5 + index);
-      values.push(...MATRIX_INDICES.map(i => matrix[i]));
-    } else values.push(...quaternion);
-  }
-  const length = 4 + 8 * (values.length + playback.times.length);
-  if (length > MAX_SHARED_BYTES) invalid();
-  const bytes = new Uint8Array(length), data = new DataView(bytes.buffer);
-  data.setUint16(0, flags);
-  let offset = 2;
-  for (const value of values) { data.setFloat64(offset, value); offset += 8; }
-  data.setUint16(offset, playback.times.length); offset += 2;
-  for (const time of playback.times) { data.setFloat64(offset, time); offset += 8; }
-  return `v=${base64url(bytes)}`;
 }
 
 export function parseSharedView(search: string): SharedView | null {
@@ -122,55 +71,20 @@ export function parseSharedView(search: string): SharedView | null {
     bytes = Uint8Array.from(atob(token.replaceAll("-", "+").replaceAll("_", "/")), char => char.charCodeAt(0));
     if (bytes.length > MAX_SHARED_BYTES || base64url(bytes) !== token) invalid();
   } catch { invalid(); }
-  return parseBinaryShared(bytes);
-}
-
-function parseBinaryShared(bytes: Uint8Array): SharedView {
   if (bytes.length < 2) invalid();
-  const data = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength), flags = data.getUint16(0);
-  if (flags >>> 12 === 3 || flags >>> 12 === 4) return parseMinimalShared(bytes);
-  if (flags >>> 12 !== SHARED_VERSION) throw new Error("This shared view link uses an unsupported version.");
-  if (flags & 0x0f00 || (flags & 6) === 4) invalid();
-  let offset = 2;
-  const read = () => {
-    if (offset + 8 > bytes.length) invalid();
-    const value = data.getFloat64(offset); offset += 8;
-    if (!Number.isFinite(value)) invalid();
-    return value;
-  };
-  const camera: Partial<LegacySharedCamera> = { controlPitch: read(), controlYaw: read(), zoom: read() };
-  if (flags & 1) camera.distanceKilometers = read();
-  const view: { camera: Partial<LegacySharedCamera>; preparedEpochJdTt?: number | null; playback?: SharedPlayback } = { camera };
-  if (flags & 2) view.preparedEpochJdTt = flags & 4 ? read() : null;
-  const speed = flags & 8 ? read() : 1;
-  camera.pose = { schema: SHARED_POSE_SCHEMA, scene: "", skybox: "", sunView: "" };
-  for (const [index, field] of POSE_FIELDS.entries()) {
-    let matrix;
-    if (flags & (1 << (5 + index))) {
-      matrix = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
-      for (const component of MATRIX_INDICES) matrix[component] = read();
-    } else {
-      const quaternion = [read(), read(), read(), read()];
-      if (quaternion.some(value => Math.abs(value) > 1) || Math.abs(Math.hypot(...quaternion) - 1) > 1e-12) invalid("pose");
-      matrix = quaternionMatrix(quaternion);
-    }
-    camera.pose[field] = serializeMatrix(matrix);
+  if (new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength).getUint16(0) >>> 12 !== SHARED_VERSION) {
+    throw new Error("This shared view link uses an unsupported version.");
   }
-  if (offset + 2 > bytes.length) invalid();
-  const count = data.getUint16(offset); offset += 2;
-  if (offset + count * 8 !== bytes.length) invalid();
-  view.playback = { times: Array.from({ length: count }, read), speed, motionRequested: Boolean(flags & 16) };
-  validateShared(view);
-  return view;
+  return parseCurrentShared(bytes);
 }
 
-function formatMinimalShared(view: SharedView, camera: PhysicalSharedCamera) {
-  let flags = (camera.bodyCenterKilometers ? 4 : 3) << 12;
+export function formatSharedView(view: SharedView) {
+  validateShared(view);
+  const camera = view.camera;
+  let flags = SHARED_VERSION << 12;
+  if (camera.bodyCenterKilometers) flags |= 1;
   const values = camera.bodyCenterKilometers ? [...camera.bodyCenterKilometers] : [camera.distanceKilometers], playback = view.playback;
-  if (view.preparedEpochJdTt !== undefined) {
-    flags |= 2;
-    if (view.preparedEpochJdTt !== null) { flags |= 4; values.push(view.preparedEpochJdTt); }
-  }
+  if (view.preparedEpochJdTt !== null) { flags |= 2; values.push(view.preparedEpochJdTt); }
   if (playback.speed !== 1) { flags |= 8; values.push(playback.speed); }
   if (playback.motionRequested) flags |= 16;
   const matrix = poseMatrix(view.camera.pose.scene), quaternion = matrixQuaternion(matrix);
@@ -194,9 +108,9 @@ function formatMinimalShared(view: SharedView, camera: PhysicalSharedCamera) {
   return `v=${base64url(bytes)}`;
 }
 
-function parseMinimalShared(bytes: Uint8Array): SharedView {
+function parseCurrentShared(bytes: Uint8Array): SharedView {
   const data = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength), flags = data.getUint16(0);
-  if (flags & 0x0f01 || (flags & 6) === 4 || (flags & 32 && flags & 0xc0)) invalid();
+  if (flags & 0x0f04 || (flags & 32 && flags & 0xc0)) invalid();
   let offset = 2;
   const read = () => {
     if (offset + 8 > bytes.length) invalid();
@@ -204,11 +118,12 @@ function parseMinimalShared(bytes: Uint8Array): SharedView {
     if (!Number.isFinite(value)) invalid();
     return value;
   };
-  const bodyCenterKilometers: readonly [number, number, number] | undefined = flags >>> 12 === 4 ? [read(), read(), read()] : undefined;
-  const view: { camera: Partial<PhysicalSharedCamera>; preparedEpochJdTt?: number | null; playback?: SharedPlayback } = {
+  const bodyCenterKilometers: readonly [number, number, number] | undefined = flags & 1 ? [read(), read(), read()] : undefined;
+  const view: { camera: Partial<PhysicalSharedCamera>; preparedEpochJdTt: number | null; playback?: SharedPlayback } = {
+    preparedEpochJdTt: null,
     camera: bodyCenterKilometers ? { distanceKilometers: Math.hypot(...bodyCenterKilometers), bodyCenterKilometers } : { distanceKilometers: read() },
   };
-  if (flags & 2) view.preparedEpochJdTt = flags & 4 ? read() : null;
+  if (flags & 2) view.preparedEpochJdTt = read();
   const speed = flags & 8 ? read() : 1;
   let matrix;
   if (flags & 32) {

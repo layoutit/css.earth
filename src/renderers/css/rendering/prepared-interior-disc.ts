@@ -1,6 +1,6 @@
-import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, serializePreparedMatrix4 } from '../solar-system/prepared-ellipsoid-projection.js';
+import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, serializePreparedMatrix4 } from '../prepared-data/prepared-ellipsoid-projection.js';
 import type { Matrix4 } from '../solar-system/types.js';
-import type { PhysicalProjection } from './physical-projection.js';
+import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 
 export const PREPARED_INTERIOR_DISC_SIZE = 512;
 

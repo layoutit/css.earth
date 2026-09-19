@@ -1,4 +1,4 @@
-import { physicalProjectionFromCamera } from '../rendering/physical-projection.js';
+import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 import type { ObjectRuntimeDefinition } from './object-runtime-types.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { presentWorldCamera, worldCameraSilhouetteDiameter } from '../navigation/world-camera.js';

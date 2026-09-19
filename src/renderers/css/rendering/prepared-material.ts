@@ -28,7 +28,7 @@ export interface PreparedMaterialObservation {
 }
 
 import { createPreparedPlanarRotationPublisher } from "./prepared-planar-rotation.js";
-import { createPreparedEllipsoidProjection } from "../solar-system/prepared-ellipsoid-projection.js";
+import { createPreparedEllipsoidProjection } from "../prepared-data/prepared-ellipsoid-projection.js";
 
 const degrees = (angle: number) => (angle % 360 + 540) % 360 - 180;
 export function preparedMaterialFrame(mapping: PreparedMaterialFrameMapping, view: Pick<PreparedView, "sunViewDirection">) {

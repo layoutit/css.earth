@@ -1,6 +1,6 @@
-import type { Matrix4 } from './types.js';
-import { projectEyeEllipsoid, requirePhysicalProjection } from '../rendering/physical-projection.js';
-import type { PhysicalProjection } from '../rendering/physical-projection.js';
+import type { Matrix4 } from '../solar-system/types.js';
+import { projectEyeEllipsoid, requirePhysicalProjection } from './physical-projection.js';
+import type { PhysicalProjection } from './physical-projection.js';
 export interface CounterTransport { counterPrecision?:number;counterFractionDigits?:number;counterFractionScale?:number; }
 export interface EllipsoidProjectionPlan extends CounterTransport {equatorialRadius:number;polarRadius:number;coverageScale:number;bodySystemMatrix:Matrix4;bodyMeshMatrix:Matrix4;materialSystemMatrix:Matrix4;materialMeshMatrix:Matrix4;baseProjection:Matrix4;centerTranslation:Matrix4;inverseCenterTranslation:Matrix4;textureEllipse?:{center:readonly[number,number];covariance:readonly[number,number,number]};}
 export interface EllipsoidView {degrees:number;sceneMatrix?:Matrix4|string;counterMatrix?:Matrix4|string;preserveDefault?:boolean;projection?:PhysicalProjection;}

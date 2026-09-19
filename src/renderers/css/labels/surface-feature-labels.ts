@@ -1,5 +1,5 @@
 import type { SceneLifetime } from '@cssearth/engine';
-import { requirePhysicalProjection } from '../rendering/physical-projection.js';
+import { requirePhysicalProjection } from '../prepared-data/physical-projection.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';
 import { orbitSegmentTransform } from '../solar-system/orbit-segment-presentation.js';

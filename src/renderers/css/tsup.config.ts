@@ -21,7 +21,7 @@ export default {
     'platform/prepared-material-demand': fileURLToPath(new URL('./rendering/prepared-material-demand.ts', import.meta.url)),
     'platform/wmts-image': fileURLToPath(new URL('./paging/wmts-image.ts', import.meta.url)),
     'platform/wms-image': fileURLToPath(new URL('./paging/wms-image.ts', import.meta.url)),
-    'platform/prepared-block': fileURLToPath(new URL('./paging/prepared-block.ts', import.meta.url)),
+    'platform/prepared-block': fileURLToPath(new URL('./prepared-data/prepared-block.ts', import.meta.url)),
     'platform/prepared-camera-runtime': fileURLToPath(new URL('./rendering/prepared-camera-runtime.ts', import.meta.url)),
     'platform/planet-feature-controls': fileURLToPath(new URL('./rendering/planet-feature-controls.ts', import.meta.url)),
     'platform/surface-fly-to': fileURLToPath(new URL('./navigation/surface-fly-to.ts', import.meta.url)),

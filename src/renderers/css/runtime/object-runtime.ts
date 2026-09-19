@@ -124,11 +124,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     const sharedView = Object.freeze({
       capture(motionRequested = false): SharedView | null {
         if (!readyPublished) return null;
-        const owner = getOrbit(), state = owner.state();
-        const camera = owner.sharedState?.() ?? (state.pose.schema === "cssearth-camera-pose@2"
-          ? physicalFallback(state.pose, state.distanceKilometers)
-          : { controlPitch: state.controlPitch, controlYaw: state.controlYaw, zoom: state.zoom, pose: state.pose,
-            ...(state.distanceKilometers === undefined ? {} : { distanceKilometers: state.distanceKilometers }) });
+        const camera = getOrbit().sharedState();
         return { camera, preparedEpochJdTt,
           playback: { times: playback.captureMotion(), speed: playback.stats().speed, motionRequested } };
       },
@@ -138,10 +134,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         if (!view) throw new TypeError("A saved object view is required.");
         const version = ++restoreVersion;
         if (!readyPublished || lifetime.disposed) return false;
-        // Older local views did not carry an epoch. New captures use the shared
-        // prepared world frame.
-        const legacyLocalView = view.preparedEpochJdTt == null;
-        if (!legacyLocalView && (view.preparedEpochJdTt ?? null) !== preparedEpochJdTt) {
+        if (view.preparedEpochJdTt !== preparedEpochJdTt) {
           throw new TypeError("This view uses a different prepared astronomical date.");
         }
         playback.validateMotion(view.playback.times);
@@ -419,11 +412,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (definition.textureLevels && currentView) selection.setView(currentView);
     }
   };
-}
-
-function physicalFallback(pose: import("../navigation/types.js").PhysicalCameraPose, distanceKilometers: number | undefined): import("../navigation/view-url.js").PhysicalSharedCamera {
-  if (distanceKilometers === undefined) throw new TypeError("A physical camera requires its published distance.");
-  return { pose, distanceKilometers };
 }
 
 export function stageWorldViewport(stage: HTMLElement, camera: HTMLElement | null, focalPixels: number,

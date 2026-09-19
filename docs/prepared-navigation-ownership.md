@@ -20,11 +20,15 @@ This guide covers prepared nodes, resource leases, motion and leaf visibility.
 The CSS renderer owns object mounting, camera navigation, saved-view encoding,
 material publication and map paging. Preparation tools use the renderer's
 `dist/preparation.js` entry for the same pure matrix, asset-address and prepared
-transport helpers used by the browser. Platform tests exercise those renderer
+transport helpers used by the browser. These helpers live in `prepared-data/`;
+a build-closure test prevents this entry from importing DOM construction or
+runtime modules. CSS-specific layout stays with the renderer. Platform tests exercise those renderer
 implementations; there is no separate platform mount or codec.
 
-Saved views use the renderer's current binary camera formats. The former JSON
-saved-view format and unused Galaxio codec are no longer supported. Dataset links
+Saved views use one binary format (version 5), with a physical rotation, either
+a distance or translated body centre, an explicit epoch and playback state.
+Capture has no angular-camera fallback, and restoration requires the same epoch.
+Versions 1–4, the former JSON format and the unused Galaxio codec are unsupported. Dataset links
 use `?dataset=<id>`; `#dataset=...` is an ordinary fragment and does not select a
 dataset. Restoring a valid saved view preserves its token without upgrading it.
 

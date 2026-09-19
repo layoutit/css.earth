@@ -14,8 +14,8 @@ interface FakeHistoryWindow extends EventTarget {
   performance: { now(): number };
 }
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
-const saved = () => ({ camera: { controlPitch: 37, controlYaw: 92, zoom: 0.8, distanceKilometers: 12345,
-  pose: { schema: "cssearth-camera-pose@1" as const, scene: matrix, skybox: matrix, sunView: matrix } },
+const saved = () => ({ camera: { distanceKilometers: 12345,
+  pose: { schema: "cssearth-camera-pose@2" as const, scene: matrix } },
   preparedEpochJdTt: 2461286.5, playback: { times: [1234.5], speed: 1, motionRequested: false } });
 
 function fixture(href = "http://localhost:4210/mercury?keep=value#details", captured: () => SharedView = saved) {

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import { createPreparedDepthPartitions } from './prepared-depth-partitions.js';
-import { physicalProjectionFromCamera } from './physical-projection.js';
+import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 
 test('camera publication preserves carriers and changes prepared ordering only across a separating plane', () => {
   const writes: string[] = [];

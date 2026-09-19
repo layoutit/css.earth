@@ -8,7 +8,7 @@ import type { RuntimePolicy } from './runtime-policy.js';
 import type { NavigationCamera, TrackballMetrics, CameraDelta, ControlsUpdate, DestinationMotion, CameraPlan, CameraUpdate, CameraAngles, CameraPose, Vector3 } from './types.js';
 import type { CameraSkyPlan } from './camera-orientation.js';
 import type { PerspectiveDolly, PerspectiveWorldContext } from './perspective-dolly.js';
-import type { LegacySharedCamera, PhysicalSharedCamera } from './view-url.js';
+import type { PhysicalSharedCamera } from './view-url.js';
 import type { RetainedCubicSky } from '../solar-system/cubic-sky-runtime.js';
 import type { DirectionalSunPlan } from '../solar-system/directional-sun-coordinate.js';
 import { rotationFromMatrix3d } from '../solar-system/heliocentric-geometry.js';
@@ -19,7 +19,7 @@ import { bindWorldCameraPicking } from './world-camera-picking.js';
 import { hitsProjectedBody } from './world-camera-hit.js';
 import { prepareSurfaceTargetRotation } from './surface-target.js';
 import { worldRotationCss } from './world-camera-math.js';
-import type { PhysicalProjection } from '../rendering/physical-projection.js';
+import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 import { createPreparedFocusNavigation } from './prepared-focus.js';
 import type { PreparedNavigationFocus, PreparedFocusFlightOptions } from './prepared-focus.js';
 export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; }
@@ -564,7 +564,7 @@ export function createRetainedCubicSkyOrbit({
       if (!skyTracksScene) Object.defineProperty(state, "pose", { enumerable: false, value: pose });
       return Object.freeze(state);
     },
-    sharedState(): LegacySharedCamera | PhysicalSharedCamera {
+    sharedState(): PhysicalSharedCamera {
       const state = this.state();
       if (perspectiveCamera && skyTracksScene) {
         // One physical rotation owns the body, registered sky and Sun.
@@ -575,9 +575,7 @@ export function createRetainedCubicSkyOrbit({
         return { distanceKilometers: state.distanceKilometers, pose,
           ...(bodyCenterKilometers === undefined ? {} : { bodyCenterKilometers }) };
       }
-      const pose = state.pose;
-      if (pose.schema !== "cssearth-camera-pose@1") throw new Error("Legacy camera snapshot is unavailable.");
-      return { controlPitch: state.controlPitch, controlYaw: state.controlYaw, zoom: state.zoom, pose };
+      throw new Error("Shared views require the physical world camera.");
     },
     skyState() {
       return Object.freeze({

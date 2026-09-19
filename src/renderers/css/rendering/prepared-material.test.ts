@@ -2,7 +2,7 @@ import { expect, test } from "vitest";
 import { preparedMaterialFrame, preparedMaterialState, preparedMaterialAddress, type PreparedMaterialTrack, type PreparedMaterialSelection } from "./prepared-material.js";
 import { resolvePreparedMaterialDemand } from "./prepared-material-demand.js";
 import { mercuryPhaseMapping, venusPhaseMapping } from "./prepared-material-fixtures.js";
-import { scalePreparedPixelLengths } from "./prepared-projective-texture-leaf.js";
+import { scalePreparedPixelLengths } from "../prepared-data/projective-layout.js";
 
 const view = (z: number) => ({ sunViewDirection: [Math.sqrt(1 - z * z), 0, z], sceneMatrix: "moved",
   reference: { sceneMatrix: "initial", sunViewDirection: [0, 0, 1] } });

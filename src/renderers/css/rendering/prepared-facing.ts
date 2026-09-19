@@ -1,4 +1,4 @@
-import type { PhysicalProjection } from './physical-projection.js';
+import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 
 export interface PreparedFacingPlane { readonly target: number; readonly plane: readonly [number, number, number, number]; readonly tolerance: number; }
 

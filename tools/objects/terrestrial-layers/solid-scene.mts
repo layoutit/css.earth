@@ -1,6 +1,6 @@
 import type {PreparedCubicSkyPlan} from '../../../src/platform/cubic-sky-contract.mts';
 import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
-import type {PreparedProjectiveTextureLeaf} from '../../../src/renderers/css/rendering/prepared-projective-texture-leaf.ts';
+import type {PreparedProjectiveTextureLeaf} from '../../../src/renderers/css/prepared-data/projective-layout.ts';
 import type {preparePlanetDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
 import type {prepareSolidMaterial,SolidRasterGrid} from './solid-raster.mts';
 import type {combineRadialModels} from './radial-models.mts';
