@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-pds-ledger@1",
+  "archiveDate": "2022-06-28",
+  "modes": [
+    {
+      "telescope": "Lowell/LDT",
+      "mode": "LMI/VR calibrated image",
+      "programs": [
+        "didymos-pds-lmi-20201217-0048"
+      ],
+      "qualified": [
+        "didymos-pds-lmi-20201217-0048"
+      ],
+      "receipts": [
+        "tools/objects/pds/programs/didymos-pds-lmi-20201217-0048.archive-final.product.json"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "didymos",
+      "observations": [
+        {
+          "id": "lmi_20201217_0048_cal_v1",
+          "lidvid": "urn:nasa:pds:dart_teleobs:data_ldtcal:lmi_20201217_0048_cal_v1::1.0",
+          "targetLid": "urn:nasa:pds:context:target:asteroid.65803_didymos",
+          "targetName": "65803 Didymos",
+          "telescope": "Lowell/LDT",
+          "mode": "LMI/VR calibrated image",
+          "instrument": "Large Monolithic Imager",
+          "startIso": "2020-12-17T08:44:50.100Z",
+          "endIso": "2020-12-17T08:47:32.340Z",
+          "filter": "VR",
+          "wavelengthIntervalMicrometres": [
+            0.520975,
+            0.697365
+          ],
+          "program": "didymos-pds-lmi-20201217-0048"
+        }
+      ]
+    }
+  ]
+}
