@@ -14,6 +14,7 @@ export async function buildPdsLedger() {
   const names = (await readdir(PDS_PROGRAMS).catch(() => [])).filter(name => name.endsWith('.archive-final.json')).sort();
   const modes = new Map<string, { telescope: string; mode: string; programs: string[]; qualified: string[]; receipts: string[] }>();
   const objects = new Map<string, { id: string; observations: Record<string, unknown>[] }>();
+  const searched = new Set<string>();
   const harvestDates: string[] = [];
   const discoveryPath = resolve(ROOT, 'data/pds/discovery.json');
   const discovery = await readFile(discoveryPath, 'utf8').then(text => requireRecord(JSON.parse(text) as unknown, 'PDS discovery')).catch((error: unknown) => {
@@ -21,15 +22,21 @@ export async function buildPdsLedger() {
     throw error;
   });
   if (discovery) {
-    if (discovery.schema !== 'cssearth-pds-discovery@1') throw new TypeError('Unsupported PDS discovery schema.');
-    const target = requireRecord(discovery.target, 'PDS discovery target'), targetId = requireString(target.id, 'PDS target id');
-    harvestDates.push(requireString(discovery.searchedAt, 'PDS search date').slice(0, 10));
-    for (const raw of requireArray(discovery.observations, 'PDS discovered observations')) {
-      const observation = requireRecord(raw, 'PDS discovered observation'), telescope = requireString(observation.telescope, 'PDS telescope'), mode = requireString(observation.mode, 'PDS mode');
-      const key = `${telescope} :: ${mode}`;
-      if (!modes.has(key)) modes.set(key, { telescope, mode, programs: [], qualified: [], receipts: [] });
-      const object = objects.get(targetId) ?? { id: targetId, observations: [] };
-      object.observations.push({ ...observation }); objects.set(targetId, object);
+    const searches = discovery.schema === 'cssearth-pds-discovery@2' ? requireArray(discovery.searches, 'PDS discovery searches')
+      : discovery.schema === 'cssearth-pds-discovery@1' ? [discovery]
+      : (() => { throw new TypeError('Unsupported PDS discovery schema.'); })();
+    for (const rawSearch of searches) {
+      const search = requireRecord(rawSearch, 'PDS discovery search');
+      const target = requireRecord(search.target, 'PDS discovery target'), targetId = requireString(target.id, 'PDS target id');
+      searched.add(targetId);
+      harvestDates.push(requireString(search.searchedAt, 'PDS search date').slice(0, 10));
+      for (const raw of requireArray(search.observations, 'PDS discovered observations')) {
+        const observation = requireRecord(raw, 'PDS discovered observation'), telescope = requireString(observation.telescope, 'PDS telescope'), mode = requireString(observation.mode, 'PDS mode');
+        const key = `${telescope} :: ${mode}`;
+        if (!modes.has(key)) modes.set(key, { telescope, mode, programs: [], qualified: [], receipts: [] });
+        const object = objects.get(targetId) ?? { id: targetId, observations: [] };
+        object.observations.push({ ...observation }); objects.set(targetId, object);
+      }
     }
   }
   for (const name of names) {
@@ -63,7 +70,7 @@ export async function buildPdsLedger() {
       units: observation.units, program: id });
     objects.set(target, object);
   }
-  return { schema: PDS_LEDGER_SCHEMA, archiveDate: harvestDates.sort().at(-1) ?? 'unknown', modes: [...modes.values()], objects: [...objects.values()] } as const;
+  return { schema: PDS_LEDGER_SCHEMA, archiveDate: harvestDates.sort().at(-1) ?? 'unknown', searched: [...searched].sort(), modes: [...modes.values()], objects: [...objects.values()] } as const;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

@@ -514,12 +514,13 @@ function pdsModes(value: unknown, target: string): TargetMode[] {
       wavelengthIntervalsMicrometres: ranges, ...(ranges.length === 1 ? { wavelengthIntervalMicrometres: ranges[0] } : {}),
       ...(row.surfaceResolutionKm === undefined ? {} : { surfaceResolutionKm: requireFiniteNumber(row.surfaceResolutionKm, 'PDS surface resolution') }),
       kind: requireString(row.kind ?? 'image', 'PDS kind') as ProductKind, use: requireString(row.use ?? 'Archive-final PDS product.', 'PDS use'), units: requireString(row.units ?? 'not stated', 'PDS units') }; });
-  return requireArray(ledger.modes, 'PDS modes').map(raw => { const declared = requireRecord(raw, 'PDS mode'), telescope = requireString(declared.telescope, 'PDS telescope'), mode = requireString(declared.mode, 'PDS mode');
+  return requireArray(ledger.modes, 'PDS modes').flatMap(raw => { const declared = requireRecord(raw, 'PDS mode'), telescope = requireString(declared.telescope, 'PDS telescope'), mode = requireString(declared.mode, 'PDS mode');
     const records = all.filter(record => record.telescope === telescope && record.mode === mode), programs = stringList(declared.programs, 'PDS programs'), qualified = stringList(declared.qualified, 'PDS qualified');
-    return { telescope, mode, archiveDate, observations: { count: records.length, scope: 'this-mode' as const, records }, programmes: records.map(record => record.productLidvid),
+    if (!records.length) return [];
+    return [{ telescope, mode, archiveDate, observations: { count: records.length, scope: 'this-mode' as const, records }, programmes: records.map(record => record.productLidvid),
       dates: records.filter(record => !record.startIso.startsWith('1965-') && !record.endIso?.startsWith('3000-')).map(record => ({ id: record.id, startIso: record.startIso, endIso: record.endIso })),
       datesComplete: records.every(record => !record.startIso.startsWith('1965-') && !record.endIso?.startsWith('3000-')),
-      toolkit: { tool: 'pds.peppi + pdr', programs, checked: [], receipts: stringList(declared.receipts, 'PDS receipts'), archiveFinal: { programs, qualified } } }; });
+      toolkit: { tool: 'pds.peppi + pdr', programs, checked: [], receipts: stringList(declared.receipts, 'PDS receipts'), archiveFinal: { programs, qualified } } }]; });
 }
 
 const ADAPTERS: Readonly<Record<string, (value: unknown, target: string) => TargetMode[]>> = Object.freeze({ jwst: jwstModes, hst: hstModes, naco: nacoModes, chandra: chandraModes, juno: junoModes,
@@ -539,7 +540,9 @@ function targetCoverage(telescope: string, ledgerPath: string, value: unknown, t
   if (telescope === 'hst' && (ledger.unansweredTargets === undefined ? [] : stringList(ledger.unansweredTargets, 'unansweredTargets')).includes(target))
     return { telescope, ledger: ledgerPath, state: 'unanswered', reason: 'The MAST target query was attempted but returned no usable answer.' };
   if (telescope === 'ihw') return { telescope, ledger: ledgerPath, state: 'not-searched', reason: 'This IHW dataset is a target-specific Halley collection; it is not a search of other targets.' };
-  if (telescope === 'pds') return { telescope, ledger: ledgerPath, state: 'not-searched', reason: 'This ledger retains exact Peppi selections, not a complete registry search for every catalogue target.' };
+  if (telescope === 'pds') return (ledger.searched === undefined ? [] : stringList(ledger.searched, 'searched')).includes(target)
+    ? { telescope, ledger: ledgerPath, state: 'searched-empty', reason: `The complete scoped Peppi search includes ${target} and returned no supported observation.` }
+    : { telescope, ledger: ledgerPath, state: 'not-searched', reason: `This PDS snapshot carries no completed Peppi search for ${target}.` };
   return { telescope, ledger: ledgerPath, state: 'not-searched', reason: `This ledger does not preserve an explicit searched-empty result for ${target}, so absence cannot support a scientific no.` };
 }
 

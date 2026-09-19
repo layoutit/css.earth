@@ -1,6 +1,10 @@
 {
   "schema": "cssearth-pds-ledger@1",
   "archiveDate": "2026-09-19",
+  "searched": [
+    "charon",
+    "hydra"
+  ],
   "modes": [
     {
       "telescope": "New Horizons",
@@ -13,6 +17,19 @@
       ],
       "receipts": [
         "tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json"
+      ]
+    },
+    {
+      "telescope": "New Horizons",
+      "mode": "MVIC color images",
+      "programs": [
+        "hydra-pds-cube_h_color_best"
+      ],
+      "qualified": [
+        "hydra-pds-cube_h_color_best"
+      ],
+      "receipts": [
+        "tools/objects/pds/programs/hydra-pds-cube_h_color_best.archive-final.product.json"
       ]
     },
     {
@@ -74,6 +91,52 @@
           "use": "Archive-derived, body-registered multiband map. Suitable as a pinned telescope product; wavelength bands and map sampling come from its PDS4 label.",
           "units": "dimensionless relative values, no longer strictly I/F",
           "program": "charon-pds-nh_charon_color_mosaic"
+        }
+      ]
+    },
+    {
+      "id": "hydra",
+      "observations": [
+        {
+          "id": "cube_h_color_best",
+          "lidvid": "urn:nasa:pds:nh_derived:plutosystem_composition:cube_h_color_best::1.0",
+          "targetLid": "urn:nasa:pds:context:target:satellite.134340_pluto.hydra",
+          "targetName": "(134340) Pluto III (Hydra)",
+          "telescope": "New Horizons",
+          "mode": "MVIC color images",
+          "observatory": "New Horizons",
+          "instrument": "Multispectral Visible Imaging Camera",
+          "startIso": "2015-07-14T07:36:50.008Z",
+          "endIso": "2015-07-14T07:37:10.876Z",
+          "filter": "Blue, Red, NIR, CH4",
+          "filters": [
+            "Blue",
+            "Red",
+            "NIR",
+            "CH4"
+          ],
+          "wavelengthIntervalsMicrometres": [
+            [
+              0.4,
+              0.55
+            ],
+            [
+              0.54,
+              0.7
+            ],
+            [
+              0.78,
+              0.975
+            ],
+            [
+              0.86,
+              0.91
+            ]
+          ],
+          "kind": "image",
+          "use": "Archive-derived four-filter detector images. Suitable as a pinned telescope product; the PDS4 label establishes each filter band but supplies no body-surface registration.",
+          "units": "not stated by PDS label",
+          "program": "hydra-pds-cube_h_color_best"
         }
       ]
     },
