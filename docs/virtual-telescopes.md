@@ -108,10 +108,11 @@ The ledgers say how much of each archive these routes have been proved on:
 The ledgers say what each archive holds per object and per mode. They say nothing about a single exposure. The capability
 query ([`tools/objects/telescopes/query.mts`](../tools/objects/telescopes/query.mts)) turns that into an answer to one
 question: *which observing modes have ever pointed at this body, and could any of them, in principle, measure the thing I
-care about?* These `.mts` commands require the Node version declared by the package: Node 22.18.x or Node 24+.
+care about?* These commands require the Node version declared by the package: Node 22.18.x or Node 24+. The package command
+checks that requirement before it loads TypeScript and reports the current version when it cannot run.
 
 ```
-node tools/objects/telescopes/query.mts --target europa --wavelength 3.4,3.6 --kind cube \
+pnpm telescope:query --target europa --wavelength 3.4,3.6 --kind cube \
   --range-km 630000000 --radius-km 1560.8 --min-elements 8
 ```
 
@@ -173,7 +174,12 @@ angular or surface resolution, product kind and whether it needs a telescope pro
 any requested constraint is `no`, the mode has no usable toolkit, or a body map was requested but no body-map author is
 registered. The full mode-level constraint table is retained, and every `partial` and `unknown` answer is copied into the
 selection. Observation wavelength remains explicitly unknown until the selected program's filter, grating or channel is
-qualified. The selected program must belong to this target in this mode.
+qualified. The selected program must belong to this target in this mode. `assessObservationSelection` returns every blocker
+as typed data; `selectObservation` reports them together rather than making a caller repair them one at a time.
+
+Candidate output keeps three program facts separate: programmes the archive records for this target, programs pinned to the
+toolkit, and programs with checked receipts or qualified archive-final products. An archive programme is therefore visible
+without being presented as something the local route can already run.
 
 The instrument author then writes the final map, its `*.body-map.json`, and the shared `*.product.json`. JWST band maps,
 Hubble slit-scan maps and ALMA thermal maps use this boundary. The product record pins the recipe, observation products,
