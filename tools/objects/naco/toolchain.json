@@ -1,0 +1,24 @@
+{
+  "schema": "cssearth-naco-toolchain@1",
+  "purpose": "ESO VLT/NACO (NAOS+CONICA) reduction from raw frames: darks, flats and the jitter recipe that combines a dithered imaging sequence, through esorex.",
+  "license": "NACO pipeline GNU GPL-2.0 (naco-4.4.13/COPYING). The kit also carries erfa, fftw, cpl, cfitsio, wcslib, gsl and esorex under their own licences. Nothing is redistributed here; the kit is downloaded from ESO and verified against this pin.",
+  "instrument": "NAOS+CONICA",
+  "version": "4.4.13",
+  "kit": "naco-kit-4.4.13-15.tar.gz",
+  "downloads": [
+    {
+      "path": "naco-kit-4.4.13-15.tar.gz",
+      "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/naco/naco-kit-4.4.13-15.tar.gz",
+      "bytes": 37596448,
+      "sha256": "5d708e5368021246a6367419a8bc246f1dc15631fe64cb6850bf066c250fac3e",
+      "cksum": "1928251875 37596448 naco-kit-4.4.13-15.tar.gz"
+    }
+  ],
+  "recipes": [
+    "naco_img_dark",
+    "naco_img_lampflat",
+    "naco_img_twflat",
+    "naco_img_jitter"
+  ],
+  "note": "The kit's install_pipeline builds cpl, esorex and the naco recipes into output/toolchains/naco/pipeline, and unpacks the static calibration into output/toolchains/naco/calib. The cksum value is ESO's own, published beside the kit at naco-kit-4.4.13-15.tar.gz.cksum, and is checked as well as the sha256 because it is the only digest ESO states."
+}

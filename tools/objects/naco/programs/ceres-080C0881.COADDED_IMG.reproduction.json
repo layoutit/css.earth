@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-naco-reproduction@1",
+  "program": "ceres-080C0881",
+  "product": "COADDED_IMG",
+  "kind": "two-templates",
+  "note": "Internal check. The ESO archive publishes no Phase 3 product and no master calibration for NACO, so this is not a comparison against an archive or published product: it is two object templates of one night, each commanded separately by the telescope and reduced on its own through the same recipes and the same master dark and flat. The two share no exposure. It measures repeatability, not accuracy.",
+  "sequences": [
+    {
+      "template": "2007-11-11T02:38:47",
+      "path": ".local/naco/ceres-080C0881/jitter-2007-11-11T023847/naco_img_jitter.fits",
+      "sha256": "39edc841ad732ca92657569317fdf107df2a4ab3e77335b62999e2e2180cb2b7",
+      "bytes": 14500800,
+      "objectFrames": 20,
+      "skyFrames": 9,
+      "pipeline": "naco/4.4.13"
+    },
+    {
+      "template": "2007-11-11T02:45:32",
+      "path": ".local/naco/ceres-080C0881/jitter-2007-11-11T024532/naco_img_jitter.fits",
+      "sha256": "00780bd0978b1ce58129aec36ea63f733d2f421a82ff737c56544e155e2edab7",
+      "bytes": 14146560,
+      "objectFrames": 20,
+      "skyFrames": 9,
+      "pipeline": "naco/4.4.13"
+    }
+  ],
+  "shapes": [
+    [
+      1553,
+      1550
+    ],
+    [
+      1515,
+      1550
+    ]
+  ],
+  "overlap": {
+    "width": 1515,
+    "height": 1550
+  },
+  "registration": {
+    "x": 769,
+    "y": 803,
+    "levels": [
+      6279.00244140625,
+      6664.17431640625
+    ]
+  },
+  "statistics": {
+    "samples": 2348250,
+    "both": 2348250,
+    "identical": 10163,
+    "onlyFirst": 0,
+    "onlySecond": 0,
+    "identicalShare": 0.0043279037581177475,
+    "medianLevel": 0.8216641545295715,
+    "medianAbsoluteDifferenceOverMedian": 1.0055904008034102,
+    "aboveMedian": {
+      "samples": 1174125,
+      "correlation": 0.9988867880692155,
+      "relativeDifference": {
+        "median": 0.45715830954946673,
+        "p99": 3.0759101998116316,
+        "largest": 411.47905531339217
+      }
+    }
+  },
+  "differingCards": [
+    "DATE-OBS: 2007-11-11T02:39:14.5916 against 2007-11-11T02:46:07.8983",
+    "DATE: 2026-09-19T10:51:41 against 2026-09-19T10:51:46"
+  ]
+}
