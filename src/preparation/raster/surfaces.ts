@@ -145,7 +145,9 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
         if (config.resample === 'density-before-pack') {
             const cropSize = Math.round(height / 2), top = Math.round((height - cropSize) / 2);
             // The crop is centred on the declared longitude (column x is longitude x / width * 360) and wraps across the map edge.
-            const centre = config.thumbnail.centerLongitudeDegrees === undefined ? width / 2 : ((config.thumbnail.centerLongitudeDegrees / 360) * width % width + width) % width;
+            // A lens that observed one hemisphere names its own centre, so its picker tile is not a crop of the data gap.
+            const centerLongitude = surface.thumbnailCenterLongitudeDegrees ?? config.thumbnail.centerLongitudeDegrees;
+            const centre = centerLongitude === undefined ? width / 2 : ((centerLongitude / 360) * width % width + width) % width;
             const left = Math.round(centre - cropSize / 2), crop = new Uint8Array(cropSize * cropSize * 4);
             for (let y = 0; y < cropSize; y++) for (let x = 0; x < cropSize; x++) {
                 const sourceX = ((left + x) % width + width) % width, offset = ((top + y) * width + sourceX) * 4;

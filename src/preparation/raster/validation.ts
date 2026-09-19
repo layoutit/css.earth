@@ -108,6 +108,11 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             if ((science.kind === 'terrestrial-observed-color' || validity?.kind === 'pds4-float-rgb') && !surface.falseColor)
                 throw new TypeError('Measured band composites must declare falseColor; display encoding does not establish natural color.');
         }
+        if (surface.thumbnailCenterLongitudeDegrees !== undefined) {
+            finite(surface.thumbnailCenterLongitudeDegrees, 'surface.thumbnailCenterLongitudeDegrees');
+            if (recipe.resample !== 'density-before-pack')
+                throw new TypeError('A per-lens thumbnail centre needs density-before-pack storage.');
+        }
         if (surface.sharpen !== undefined)
             finite(surface.sharpen, 'surface.sharpen', true);
         if (surface.nativeSourcePoles && surface.sharpen !== undefined)
