@@ -1,0 +1,57 @@
+/* The Atlas accordion is shared verbatim with the application sidebar. */
+.atlas-tree-card {
+  --atlas-navigation-caret: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23858585' stroke-width='1.4'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5'/%3E%3C/svg%3E");
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 0;
+  padding: 12px;
+  overflow-y: auto;
+  border-radius: var(--atlas-radius, 12px);
+  background: var(--shell-surface);
+}
+.atlas-tree, .atlas-tree ul { margin: 0; padding: 0; list-style: none; }
+.atlas-tree details > ul { padding-inline-start: 0.75rem; }
+.atlas-tree .top-level > li + li, .atlas-tree > li + li { margin-top: 0.5rem; }
+.atlas-tree summary {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 1.875rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+.atlas-tree summary::marker, .atlas-tree summary::-webkit-details-marker { content: ''; display: none; }
+.atlas-tree summary::before {
+  content: '';
+  flex: none;
+  width: 0.75rem;
+  height: 0.75rem;
+  background: var(--atlas-navigation-caret) center / contain no-repeat;
+  transition: transform 0.15s ease-in-out;
+}
+.atlas-tree details[open] > summary::before { transform: rotate(90deg); }
+.atlas-tree summary:hover { background: transparent; }
+.atlas-tree-root { color: var(--shell-text-muted); font: 400 14px/18px var(--shell-ui-font); text-transform: uppercase; }
+.atlas-tree-group { color: var(--shell-text-secondary); font: var(--shell-font-content); }
+.atlas-tree-body { display: flex; align-items: center; gap: 0.375rem; color: var(--shell-text-secondary); font: var(--shell-font-content); }
+.atlas-row {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 1.875rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  color: var(--shell-text-secondary);
+  font: var(--shell-font-content);
+  text-decoration: none;
+  opacity: 0.62;
+}
+.atlas-row:hover { background: transparent; color: var(--shell-text-secondary); opacity: 0.88; }
+.atlas-row[aria-current='page'] { background: transparent; color: var(--shell-text); font-weight: 600; opacity: 1; }
+.atlas-tree .planet-navigation-marker { flex: none; width: 1rem; height: 1.25rem; }
+.atlas-tree .catalog-navigation-marker::before { width: 0.75rem; height: 0.75rem; color: var(--shell-text-muted); }
+.atlas-tree summary a.atlas-tree-body { flex: 1; min-width: 0; color: var(--shell-text-secondary); text-decoration: none; opacity: 0.62; }
+.atlas-tree summary a.atlas-tree-body:hover { color: var(--shell-text-secondary); opacity: 0.88; }
+.atlas-tree summary a.atlas-tree-body[aria-current='page'] { color: var(--shell-text); font-weight: 600; opacity: 1; }

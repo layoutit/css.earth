@@ -130,6 +130,9 @@ export const objectColors = (): ReadonlyMap<string, string> => worldContext().co
 
 /** Packages the prepared orbits do not place, but that belong to one body: the Sun's heliopause surface. */
 const HOSTS: Record<string, string> = { heliosphere: 'sun' };
+// Prepared helper surfaces can have their own documentation without becoming
+// destinations in the Atlas/application navigation.
+const NAVIGATION_HIDDEN = new Set(['heliosphere']);
 
 /** One object and the satellites that orbit it. */
 export interface SystemEntry { object: ObjectRecord; satellites: SystemEntry[] }
@@ -199,3 +202,51 @@ export function formatBytes(bytes: number) {
   while (value >= 1024 && unit < units.length - 1) { value /= 1024; unit += 1; }
   return `${value.toFixed(value < 10 ? 1 : 0)} ${units[unit]}`;
 }
+
+/** The places' names as the app's breadcrumb gives them (site/components/PlanetBreadcrumbs.astro). */
+const PLACE_LABELS: Record<string, string> = {
+  'nearby-universe': 'Nearby Universe', 'local-group': 'Local Group', 'milky-way': 'Milky Way',
+  'galaxy-clusters': 'Galaxy clusters', 'stellar-neighbourhood': 'Stellar neighbourhood',
+};
+
+/** One node of the shared Atlas tree: a place or group that contains others, optionally with its own page. */
+export interface TreeNode { key: string; label: string; object: ObjectRecord | null; children: TreeNode[] }
+
+/** Where things are, read from here outward: Solar System, Stars, Milky Way, Local Group, Beyond. */
+export function atlasTree(objects: readonly ObjectRecord[]): TreeNode[] {
+  const visibleObjects = objects.filter(object => !NAVIGATION_HIDDEN.has(object.id));
+  const systems = systemGroups(visibleObjects), byId = new Map(visibleObjects.map(object => [object.id, object]));
+  const placed = new Set<string>();
+  const body = (entry: SystemEntry): TreeNode => {
+    placed.add(entry.object.id);
+    return { key: entry.object.id, label: entry.object.title, object: entry.object, children: entry.satellites.map(body) };
+  };
+  const place = (id: string): TreeNode[] => {
+    const object = byId.get(id);
+    if (!object) return [];
+    placed.add(id);
+    return [{ key: id, label: PLACE_LABELS[id] ?? object.title, object, children: [] }];
+  };
+  const group = (key: string, label: string, children: TreeNode[]): TreeNode[] => children.length ? [{ key, label, object: null, children }] : [];
+  const entriesOf = (groupId: string) => systems.find(system => system.id === groupId)?.groups.flatMap(item => item.entries) ?? [];
+  const loneStars = entriesOf('star').filter(entry => entry.object.id !== 'stellar-neighbourhood');
+  const members = (item: SystemGroup): TreeNode[] => {
+    const companions = loneStars.filter(entry => entry.object.system === item.label);
+    return [...(item.star ? [body(item.star)] : []), ...companions.map(body), ...item.groups.flatMap(member => member.entries.map(body))];
+  };
+  const solar = systems.find(item => item.id === 'sun');
+  const solarSystem = solar ? group('solar-system', solar.label, [
+    ...(solar.star ? [body(solar.star)] : []),
+    ...solar.groups.flatMap(member => group(`sun:${member.label}`, member.label, member.entries.map(body))),
+  ]) : [];
+  const starSystems = systems.filter(item => item.star && item.id !== 'sun').flatMap(item => group(`system:${item.id}`, item.label, members(item)));
+  const stars = group('stars', 'Stars', [...starSystems, ...loneStars.filter(entry => !placed.has(entry.object.id)).map(body)]);
+  const milkyWay = group('milky-way-section', 'Milky Way', [...place('milky-way'), ...place('stellar-neighbourhood'), ...entriesOf('nebula').map(body), ...place('lmc'), ...place('smc')]);
+  const localGroup = group('local-group-section', 'Local Group', [...place('local-group'), ...place('m31'), ...place('m33')]);
+  const beyond = group('beyond', 'Beyond', [...place('nearby-universe'), ...place('galaxy-clusters')]);
+  const rest = visibleObjects.filter(object => !placed.has(object.id)).map(object => ({ key: object.id, label: object.title, object, children: [] }));
+  return [...solarSystem, ...stars, ...milkyWay, ...localGroup, ...beyond, ...group('other', 'Other', rest)];
+}
+
+/** How many object pages a node holds, itself included. */
+export const treeCount = (node: TreeNode): number => (node.object ? 1 : 0) + node.children.reduce((total, child) => total + treeCount(child), 0);

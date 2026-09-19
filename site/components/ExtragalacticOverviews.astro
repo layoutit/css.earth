@@ -10,6 +10,7 @@ import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog } from '@cssear
 import galaxies from '../../src/objects/local-group/prepared/catalogue.json';
 import milkyWay from '../../src/objects/milky-way/object.json';
 import clusters from '../../src/objects/galaxy-clusters/prepared/catalogue.json';
+import NavigationTree from '../../atlas/src/components/NavigationTree.astro';
 const localGalaxies = parsePreparedGalaxyCatalog(galaxies).objects;
 const principal = [
   { id: 'milky-way', focusId: undefined, name: 'Milky Way', href: '/sun/?overview=milky-way', distancePc: null, positionM: milkyWay.properties.volume.originM },
@@ -37,9 +38,10 @@ const groups = [
   <PlanetCardHeader heading={false} title={OVERVIEW_TITLES[group.id]} introduction={group.introduction}>
     <PlanetBreadcrumbs scope={group.id} />
   </PlanetCardHeader>
-  <InformationTabs idPrefix={group.id} group={group.id} label={`${group.name} information`}
+  <NavigationTree current={group.id} />
+  <InformationTabs idPrefix={group.id} group={group.id} label={`${group.name} information`} hidden
     tabs={[{ id: 'objects', label: group.section, count: group.objects.length }]} />
-  <div class="planet-object-results-scroll planet-card-tabpanel" id={`${group.id}-objects-content`}
+  <div class="planet-object-results-scroll planet-card-tabpanel" id={`${group.id}-objects-content`} hidden
     role="region" aria-label={group.section}>
     <ul class="planet-object-list">
       {group.objects.map(object => <li data-neighbor-id={object.id}
