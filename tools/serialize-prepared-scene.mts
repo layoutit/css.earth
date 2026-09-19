@@ -56,7 +56,7 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, lens
   for (const [index, node] of definition.tree.nodes.entries()) {
     for (const id of node.properties) {
       const property = definition.tree.properties[id];
-      write(index, property.name, property.value);
+      write(index, property.name, rewritePreparedStyleUrls(property.value, definition.assetOrigin));
     }
     if (node.parent === -1) roots.push(index); else elements[node.parent].children.push(index);
   }

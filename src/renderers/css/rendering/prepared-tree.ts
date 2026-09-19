@@ -21,8 +21,9 @@ function builder(tree: PreparedTree, document: Document, own: Own, assetOrigin?:
       // Preserve the prepared CSSOM assignment order and numeric precision.
       for (const propertyId of record.properties) {
         const property = tree.properties[propertyId];
-        if (property.custom) node.style.setProperty(property.name, property.value);
-        else writePreparedStyle(node.style, property.name, property.value);
+        const value = rewritePreparedStyleUrls(property.value, assetOrigin);
+        if (property.custom) node.style.setProperty(property.name, value);
+        else writePreparedStyle(node.style, property.name, value);
       }
       for (const [name, value] of Object.entries(record.attributes)) node.setAttribute(name, value);
       if (record.parent !== -1) nodes[record.parent].appendChild(node);
