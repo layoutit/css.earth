@@ -47,12 +47,5 @@
       "units": "dimensionless shares and ratios"
     }
   ],
-  "evidence": [
-    {
-      "kind": "archive-agreement",
-      "receipt": "ngc3132-4416768.ch2.remosaic.reproduction.json",
-      "product": "ngc3132-4416768.ch2.remosaic.reproduction.json",
-      "establishes": "How far an open re-mosaic of AOR 4416768 channel 2 agrees with the Spitzer Science Center's own level-2 mosaic SPITZER_I2_4416768_0000_7_E8349192_maic.fits (pipeline S18.25.0), measured pixel by pixel against the archive's own uncertainty plane. It does not establish that the observatory's pipeline was reproduced: MOPEX did not run here."
-    }
-  ]
+  "evidence": []
 }

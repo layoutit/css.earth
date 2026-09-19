@@ -19,16 +19,19 @@
  * archive's uncertainty plane is what makes the middle of that list meaningful: it is the archive saying how well it claims to
  * know each pixel, so a difference measured against it is a difference measured on the archive's own terms.
  *
- * The receipt is tools/objects/spitzer/programs/<program id>.<product>.reproduction.json, and beside it a
- * `cssearth-telescope-product@1` record whose one piece of evidence is that receipt, of kind `archive-agreement`, naming the
- * exact product. The ledger counts a capability as checked only from a receipt that parses and names its observation. */
+ * The receipt is tools/objects/spitzer/programs/<program id>.<product>.reproduction.json, with its own
+ * `cssearth-telescope-product@1` record beside it. The evidence itself is added to the MOSAIC's record, the one the producing
+ * stage wrote, so that a consumer holding the product finds the check through `evidenceFor(record, mosaic,
+ * 'archive-agreement')` without knowing this toolkit exists. Its `establishes` says in as many words that the re-mosaic is
+ * not the observatory's own. The ledger counts a capability as checked only from a receipt that parses, names its
+ * observation, and names the archive bytes its program pinned. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '../../fits.mts';
 import { flagValue, positionalArguments } from '../../cli-arguments.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
-import { assertInputPins, pinFile, readProductRecord, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
+import { addProductEvidence, assertInputPins, pinFile, readProductRecord, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
 import { defaultDataRoot, PROGRAMS, readSpitzerProgram, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { defaultWorkRoot, mosaicMembers, mosaicName, STAGE, TELESCOPE } from './mosaic.mts';
 
@@ -244,11 +247,22 @@ export async function compareChannel(program: SpitzerProgram, channel: SpitzerCh
     parameters: { comparedOver: 'pixels the archive covers and both products hold', maxSamples: MAX_SAMPLES },
     software: [{ name: 'cssearth-fits', version: 'repository' }], toolchainDigest: record.toolchainDigest ?? undefined };
   await writeProductRecord(`${receiptPath(program.id, channel.channel)}.product.json`, run,
-    [{ path: receiptName(program.id, channel.channel), file: receiptPath(program.id, channel.channel), units: 'dimensionless shares and ratios' }],
-    [{ kind: 'archive-agreement', receipt: receiptName(program.id, channel.channel), product: receiptName(program.id, channel.channel),
-      establishes: `How far an open re-mosaic of AOR ${program.aorKey} channel ${channel.channel} agrees with the Spitzer Science Center's own level-2 mosaic ${archive.name} (pipeline ${channel.mosaic.creator}), measured pixel by pixel against the archive's own uncertainty plane. It does not establish that the observatory's pipeline was reproduced: MOPEX did not run here.` }]);
+    [{ path: receiptName(program.id, channel.channel), file: receiptPath(program.id, channel.channel), units: 'dimensionless shares and ratios' }]);
+
+  // The evidence belongs on the mosaic's own record, not only on the receipt's. A consumer holding the product asks
+  // `evidenceFor(record, mosaic, 'archive-agreement')` through the shared API and must find this check there; evidence filed
+  // only against the receipt is evidence nobody looking at the product can discover. addProductEvidence rewrites that one
+  // list and refuses if the mosaic on disk is no longer the file its record made, so evidence can never drift onto other bytes.
+  await addProductEvidence(resolve(work, `${output}.product.json`), [archiveAgreement(program, channel, archive.name, output)], path => resolve(work, path));
   return reproduction;
 }
+
+/** What a successful comparison establishes about one re-made mosaic, in the words a consumer will read. It says plainly that
+ * the observatory's own mosaicker did not run, because `archive-agreement` on its own would let a reader assume it did. */
+export const archiveAgreement = (program: SpitzerProgram, channel: SpitzerChannel, archiveMosaic: string, product: string) => ({
+  kind: 'archive-agreement' as const, receipt: receiptName(program.id, channel.channel), product,
+  establishes: `How far this NON-official re-mosaic of AOR ${program.aorKey} channel ${channel.channel} agrees with the Spitzer Science Center's own level-2 mosaic ${archiveMosaic} (pipeline ${channel.mosaic.creator}), measured pixel by pixel against the archive's own uncertainty plane over the pixels it covers. The observatory's mosaicker MOPEX did not run here, so this does NOT establish that its pipeline was reproduced; ${receiptName(program.id, channel.channel)} carries the numbers and the limits.`,
+});
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), [id] = positionalArguments(args, ['--channels', '--data', '--work']);

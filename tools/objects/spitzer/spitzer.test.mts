@@ -5,8 +5,8 @@ import { resolve } from 'node:path';
 import { test } from 'node:test';
 import { archiveUrl, DATA, frameSibling, parseSpitzerProgram, type SpitzerProgram } from './archive.mts';
 import { buildLedger, ledgerGuide, naifIdFromHorizonsCode, parseLedger, repositoryState, type ShippedObject } from './archive-ledger.mts';
-import { compareMosaics, LIMITS, parseReproduction } from './compare.mts';
-import { pinFile } from '../product-record.mts';
+import { archiveAgreement, compareMosaics, LIMITS, parseReproduction } from './compare.mts';
+import { addProductEvidence, evidenceFor, pinFile, readProductRecord, writeProductRecord } from '../product-record.mts';
 import { channelInputs, mosaicMembers, parseMosaicSummary } from './mosaic.mts';
 
 const sha = (seed: string) => seed.repeat(64).slice(0, 64);
@@ -250,6 +250,35 @@ test('a ledger counts a mode as checked only from a receipt, and says plainly th
   assert.match(guide, /not asked for at all/u);
   assert.deepEqual(parseLedger(JSON.parse(JSON.stringify(unproved)) as unknown), unproved);
   assert.throws(() => parseLedger({ ...unproved, schema: 'cssearth-spitzer-ledger@2' }), /Unsupported/u);
+});
+
+test('a checked mosaic carries its evidence on its own record, and evidence never drifts onto other bytes', async () => {
+  const work = await mkdtemp(resolve(tmpdir(), 'spitzer-evidence-'));
+  const pinnedProgram = parseSpitzerProgram(program()), channel = pinnedProgram.channels[0]!;
+  const mosaic = 'ngc3132-4416768.ch1.remosaic.fits', mosaicPath = resolve(work, mosaic);
+  await writeFile(mosaicPath, fitsFile([1, 2, 3, 4], 2, 2));
+  const recordPath = resolve(work, `${mosaic}.product.json`);
+  const run = { telescope: 'spitzer', stage: 'open-remosaic', inputs: [{ role: 'frame', identity: 'a_cbcd.fits', bytes: 1, sha256: sha('1') }],
+    parameters: {}, software: [{ name: 'reproject', version: '0.21.0' }] };
+
+  // The producing stage writes the record with nothing proved yet, which is what a consumer should see before any check.
+  await writeProductRecord(recordPath, run, [{ path: mosaic, file: mosaicPath }]);
+  assert.deepEqual(evidenceFor((await readProductRecord(recordPath))!, mosaic, 'archive-agreement'), []);
+
+  const entry = archiveAgreement(pinnedProgram, channel, 'SPITZER_I1_4416768_0000_7_E8348771_maic.fits', mosaic);
+  await addProductEvidence(recordPath, [entry], path => resolve(work, path));
+  const checked = evidenceFor((await readProductRecord(recordPath))!, mosaic, 'archive-agreement');
+  assert.equal(checked.length, 1);
+  assert.equal(checked[0]!.receipt, 'ngc3132-4416768.ch1.remosaic.reproduction.json');
+  assert.match(checked[0]!.establishes, /NON-official/u);
+  assert.match(checked[0]!.establishes, /MOPEX did not run here/u);
+  // Evidence of another kind, or about another product, does not answer for this one.
+  assert.deepEqual(evidenceFor((await readProductRecord(recordPath))!, mosaic, 'internal-consistency'), []);
+  assert.deepEqual(evidenceFor((await readProductRecord(recordPath))!, 'other.fits', 'archive-agreement'), []);
+
+  // Once the mosaic on disk is no longer the file its record made, evidence about it is refused.
+  await writeFile(mosaicPath, fitsFile([9, 9, 9, 9], 2, 2));
+  await assert.rejects(addProductEvidence(recordPath, [entry], path => resolve(work, path)), /not the files on disk/u);
 });
 
 test("the repository's own state is read from its programs, not declared", async () => {

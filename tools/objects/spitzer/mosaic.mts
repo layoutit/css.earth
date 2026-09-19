@@ -143,6 +143,8 @@ export async function remosaicChannel(program: SpitzerProgram, channel: SpitzerC
   await writeFile(jobPath, `${JSON.stringify(job, null, 2)}\n`);
   const summary = parseMosaicSummary(JSON.parse(await runPython(toolchain.python, toolchain.env, [resolve(import.meta.dirname, 'mosaic.py'), jobPath])) as unknown);
   if (summary.frames !== members.length) throw new Error(`The run combined ${summary.frames} frames; the observation names ${members.length}.`);
+  // No evidence here: this stage made the product, it did not check it. compare.mts adds the `archive-agreement` entry to
+  // this same record once it has compared the pinned bytes.
   const record = await writeProductRecord(recordPath, run, [{ path: output, file: resolve(work, output), units: channel.mosaic.units,
     conventions: { grid: "the archive level-2 mosaic's own WCS", projection: 'gnomonic (TAN), no distortion on the output grid', pipeline: 'open re-mosaic, not the Spitzer Science Center pipeline' } }]);
   return { record, summary, reused: false };
