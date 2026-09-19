@@ -88,6 +88,16 @@ export interface UnassignedEvidence {
   readonly couldMean: readonly string[];
 }
 
+export type WorkflowBlockerCode = 'request-incomplete' | 'constraint-refused' | 'toolkit-unavailable' | 'body-map-author-missing' | 'target-program-unqualified';
+export interface WorkflowBlocker { readonly code: WorkflowBlockerCode; readonly reason: string; readonly constraint?: string }
+export interface SelectionAction { readonly kind: 'select-observation'; readonly programme: string; readonly command: 'pnpm'; readonly arguments: readonly string[] }
+export interface CandidateSelectionAssessment {
+  readonly selectable: boolean;
+  readonly blockers: readonly WorkflowBlocker[];
+  /** One executable, structured action per target-qualified program. Empty while any blocker remains. */
+  readonly nextActions: readonly SelectionAction[];
+}
+
 export interface Candidate {
   readonly telescope: string; readonly mode: string;
   readonly observations: { readonly count: number; readonly scope: 'this-mode' | 'object-total';
@@ -99,6 +109,8 @@ export interface Candidate {
   /** Whether this repository has an author that turns this exact mode into the requested shared body-map contract. This is
    * separate from toolkit support: a reducer can be proven while ending at an unregistered detector product. */
   readonly bodyMapSupport: { readonly answer: 'yes' | 'no'; readonly reason: string; readonly author?: string };
+  /** The workflow verdict derived from the same facts the explicit selector enforces. */
+  readonly selectionAssessment: CandidateSelectionAssessment;
   readonly evidence: CandidateEvidence;
   readonly unknown: readonly string[];
 }
@@ -133,6 +145,7 @@ export interface CapabilityAnswer {
   readonly request: CapabilityRequest;
   readonly candidates: readonly Candidate[];
   readonly unassignedEvidence: readonly UnassignedEvidence[];
+  readonly endpoint: { readonly status: 'request-incomplete' | 'no-selectable-candidate' | 'selectable-candidates'; readonly selectableCandidates: number; readonly blockerCodes: readonly WorkflowBlockerCode[] };
   /** Ledgers that hold no record of this target, so they contribute no candidate. */
   readonly withoutTheTarget: readonly { readonly telescope: string; readonly ledger: string; readonly reason: string }[];
 }
@@ -183,6 +196,32 @@ interface TargetMode {
 const stringList = (value: unknown, label: string): string[] => requireArray(value, label).map((entry, index) => requireString(entry, `${label}[${index}]`));
 const optionalString = (value: unknown, label: string): string | undefined => value === undefined || value === null ? undefined : requireString(value, label);
 const forTarget = (programs: readonly string[], target: string): string[] => programs.filter(program => program === target || program.startsWith(`${target}-`));
+
+const missingRequestFields = (request: CapabilityRequest): string[] => [...(request.time ? [] : ['time (--from and --to, or --any-time)']),
+  ...(request.angularResolutionArcsec !== undefined || request.surfaceResolutionKm !== undefined || request.resolutionElements !== undefined ? [] : ['a required resolution (--min-arcsec, --min-km or --min-elements)']),
+  ...(request.kind ? [] : ['product kind (--kind)']), ...(request.result ? [] : ['requested result (--result telescope-product|body-map)'])];
+
+const requestArguments = (request: CapabilityRequest): string[] => ['--target', request.target, '--wavelength', request.wavelengthMicrometres.join(','),
+  ...(!request.time ? [] : 'any' in request.time ? ['--any-time'] : ['--from', request.time.fromIso, '--to', request.time.toIso]),
+  ...(request.angularResolutionArcsec === undefined ? [] : ['--min-arcsec', String(request.angularResolutionArcsec)]),
+  ...(request.surfaceResolutionKm === undefined ? [] : ['--min-km', String(request.surfaceResolutionKm)]),
+  ...(request.resolutionElements === undefined ? [] : ['--min-elements', String(request.resolutionElements)]),
+  ...(request.rangeKm === undefined ? [] : ['--range-km', String(request.rangeKm)]), ...(request.bodyRadiusKm === undefined ? [] : ['--radius-km', String(request.bodyRadiusKm)]),
+  ...(request.kind ? ['--kind', request.kind] : []), ...(request.result ? ['--result', request.result] : [])];
+
+function workflowAssessment(request: CapabilityRequest, target: string, candidate: Omit<Candidate, 'selectionAssessment'>): CandidateSelectionAssessment {
+  const blockers: WorkflowBlocker[] = missingRequestFields(request).map(reason => ({ code: 'request-incomplete', reason: `The request is missing ${reason}.` }));
+  for (const [constraint, verdict_] of Object.entries(candidate.meetsConstraints)) if (verdict_.answer === 'no')
+    blockers.push({ code: 'constraint-refused', constraint, reason: `${constraint}: ${verdict_.reason}` });
+  if (candidate.toolkitSupport.level === 'none') blockers.push({ code: 'toolkit-unavailable', reason: candidate.toolkitSupport.reason });
+  if (request.result === 'body-map' && candidate.bodyMapSupport.answer === 'no') blockers.push({ code: 'body-map-author-missing', reason: candidate.bodyMapSupport.reason });
+  const programmes = [...new Set([...candidate.toolkitSupport.programs, ...candidate.toolkitSupport.archiveFinalQualified])]
+    .filter(value => value === target || value.startsWith(`${target}-`)).sort();
+  if (!programmes.length) blockers.push({ code: 'target-program-unqualified', reason: `No pinned or qualified program of ${target} is available for this mode.` });
+  const nextActions = blockers.length ? [] : programmes.map(programme => ({ kind: 'select-observation' as const, programme, command: 'pnpm' as const,
+    arguments: ['--silent', 'telescope:query', ...requestArguments(request), '--select-telescope', candidate.telescope, '--select-mode', candidate.mode, '--program', programme, '--json'] }));
+  return { selectable: blockers.length === 0, blockers, nextActions };
+}
 
 export function parseModeCapabilities(value: unknown): ModeCapability[] {
   const record = requireRecord(value, 'mode capabilities');
@@ -527,7 +566,8 @@ function toolkitSupport(mode: TargetMode, target: string): ToolkitSupport {
     : tool || (routeState && routeState !== 'refused') ? 'tool-without-checked-program' : 'none';
   const named = tool ? `${tool} reduces this mode` : routeState ? `the route reached the state "${routeState}" on this mode` : 'no tool for this mode is named in the ledger';
   const archiveSaid = `${qualified.length} archive-final program(s) are qualified: ${qualified.join(', ')}. The archive's own final products were pinned, downloaded and read whole, which establishes those bytes and not a re-calibration here. ${held.length ? `${held.join(', ')} is a program of ${target}.` : `None of them is a program of ${target}.`}`;
-  const reason = level === 'none' ? `${refusedBecause ?? `${named}, and no program of it is checked`}.`
+  const sentence = (text: string) => /[.!?]$/u.test(text) ? text : `${text}.`;
+  const reason = level === 'none' ? sentence(refusedBecause ?? `${named}, and no program of it is checked`)
     : level === 'proven' ? `${named}, and ${checked.length} program(s) have a checked receipt: ${checked.join(', ')}. ${passed.length ? `${passed.join(', ')} is a program of ${target}.` : `None of them is a program of ${target}.`}${qualified.length ? ` Separately, ${archiveSaid}` : ''}`
     : level === 'archive-final' ? `Nothing here re-calibrates this mode: ${named}. ${archiveSaid}`
     : `${named}, but no program of it has a checked receipt yet.`;
@@ -609,7 +649,7 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
     for (const mode of modes) found.push({ ledger: ledger.path, mode });
   }
   const { attached, unassigned } = resolveEvidence(inputs, found.map(entry => entry.mode));
-  const candidates: Candidate[] = found.map(({ ledger, mode }) => {
+  const candidates = found.map(({ ledger, mode }): Omit<Candidate, 'selectionAssessment'> => {
     const capability = capabilities.get(`${mode.telescope} :: ${mode.mode}`), evidence = attached.get(mode)!;
     return { telescope: mode.telescope, mode: mode.mode, observations: mode.observations, programmes: mode.programmes,
       meetsConstraints: constraintVerdicts(request, mode, capability), toolkitSupport: toolkitSupport(mode, request.target), bodyMapSupport: bodyMapSupport(mode),
@@ -618,17 +658,19 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
         ...(evidence.bodyMaps.length ? [] : [`Whether anything here has ever measured ${request.target} in this mode: no body map beside the object names it.`])] };
   });
   const rank = (candidate: Candidate) => candidate.meetsConstraints.wavelength?.answer === 'yes' ? 0 : candidate.meetsConstraints.wavelength?.answer === 'partial' ? 1 : 2;
-  return { target: request.target, request, unassignedEvidence: unassigned, withoutTheTarget,
-    candidates: candidates.sort((a, b) => rank(a) - rank(b) || (`${a.telescope}${a.mode}` < `${b.telescope}${b.mode}` ? -1 : 1)) };
+  const assessed: Candidate[] = candidates.map(candidate => ({ ...candidate, selectionAssessment: workflowAssessment(request, request.target, candidate) }));
+  assessed.sort((a, b) => rank(a) - rank(b) || (`${a.telescope}${a.mode}` < `${b.telescope}${b.mode}` ? -1 : 1));
+  const selectableCandidates = assessed.filter(candidate => candidate.selectionAssessment.selectable).length;
+  const status = missingRequestFields(request).length ? 'request-incomplete' : selectableCandidates ? 'selectable-candidates' : 'no-selectable-candidate';
+  return { target: request.target, request, unassignedEvidence: unassigned, withoutTheTarget, candidates: assessed,
+    endpoint: { status, selectableCandidates, blockerCodes: [...new Set(assessed.flatMap(candidate => candidate.selectionAssessment.blockers.map(blocker => blocker.code)))] } };
 }
 
 /** Every reason an explicit selection cannot run, returned together so a caller does not repair one field only to discover
  * the next refusal. */
 export function assessObservationSelection(answer: CapabilityAnswer, telescope: string, mode: string, programme: string): SelectionAssessment {
   const request = answer.request;
-  const missing = [...(request.time ? [] : ['time (--from and --to, or --any-time)']),
-    ...(request.angularResolutionArcsec !== undefined || request.surfaceResolutionKm !== undefined || request.resolutionElements !== undefined ? [] : ['a required resolution (--min-arcsec, --min-km or --min-elements)']),
-    ...(request.kind ? [] : ['product kind (--kind)']), ...(request.result ? [] : ['requested result (--result telescope-product|body-map)'])];
+  const missing = missingRequestFields(request);
   const matches = answer.candidates.filter(candidate => candidate.telescope === telescope && candidate.mode === mode);
   const blockers: SelectionBlocker[] = missing.map(reason => ({ code: 'incomplete-request', reason: `The request is missing ${reason}.` }));
   if (matches.length !== 1) return { blockers: [...blockers, { code: 'candidate', reason: matches.length ? `${telescope} ${mode} is ambiguous.` : `${telescope} ${mode} is not a candidate for ${answer.target}.` }] };
@@ -682,13 +724,18 @@ const LEVEL_WORDS: Readonly<Record<ToolkitLevel, string>> = Object.freeze({ none
   proven: 'recalibrated here and checked' });
 
 export function formatAnswer(answer: CapabilityAnswer): string {
-  const lines = [`${answer.candidates.length} candidate mode(s) observed ${answer.target}, the ones covering ${answer.request.wavelengthMicrometres[0]} to ${answer.request.wavelengthMicrometres[1]} micrometres first.`,
+  const lines = [`workflow: ${answer.endpoint.status}; ${answer.endpoint.selectableCandidates} of ${answer.candidates.length} candidate mode(s) can proceed to explicit selection.`,
+    ...(answer.endpoint.blockerCodes.length ? [`blocker codes: ${answer.endpoint.blockerCodes.join(', ')}`] : []), '',
+    `${answer.candidates.length} candidate mode(s) observed ${answer.target}, the ones covering ${answer.request.wavelengthMicrometres[0]} to ${answer.request.wavelengthMicrometres[1]} micrometres first.`,
     'A mode verdict is a discovery filter. Where a ledger retains observation identities they are listed; their exact channel and achieved resolution remain product facts.', ''];
   for (const candidate of answer.candidates) {
     lines.push(`${candidate.telescope} ${candidate.mode}${candidate.observations ? ` (${candidate.observations.count} ${candidate.observations.scope === 'this-mode' ? 'observations in this mode' : 'observations of the object, across its modes'})` : ''}`);
     for (const [name, { answer: verdictAnswer, reason }] of Object.entries(candidate.meetsConstraints)) lines.push(`  ${name}: ${verdictAnswer}. ${reason}`);
     lines.push(`  toolkit: ${LEVEL_WORDS[candidate.toolkitSupport.level]}. ${candidate.toolkitSupport.reason}`);
     lines.push(`  body map: ${candidate.bodyMapSupport.answer}. ${candidate.bodyMapSupport.reason}`);
+    lines.push(`  selection: ${candidate.selectionAssessment.selectable ? 'selectable' : 'blocked'}`);
+    for (const blocker of candidate.selectionAssessment.blockers) lines.push(`    blocker ${blocker.code}${blocker.constraint ? ` (${blocker.constraint})` : ''}: ${blocker.reason}`);
+    for (const action of candidate.selectionAssessment.nextActions) lines.push(`    next: ${action.command} ${action.arguments.map(shellWord).join(' ')}`);
     lines.push(`  archive programmes recorded for ${answer.target}: ${candidate.programmes.join(', ') || 'none'}`);
     const records = candidate.observations?.records ?? [];
     for (const record of records.slice(0, 8)) lines.push(`    observation ${record.id}${record.programme ? `, programme ${record.programme}` : ''}: ${record.startIso}${record.endIso ? ` to ${record.endIso}` : ''}${record.title ? `, ${record.title}` : ''}`);
@@ -717,9 +764,24 @@ const numberFlag = (args: readonly string[], flag: string): number | undefined =
   return value;
 };
 
+const shellWord = (value: string): string => /^[A-Za-z0-9_./,:@+-]+$/u.test(value) ? value : `'${value.replaceAll("'", "'\\''")}'`;
+
+export const QUERY_HELP = `Usage: pnpm telescope:query --target TARGET --wavelength MIN,MAX [options]
+
+Required for an explicit workflow verdict:
+  --from ISO --to ISO | --any-time
+  --min-arcsec N | --min-km N | --min-elements N
+  --kind ${PRODUCT_KINDS.join('|')}
+  --result ${REQUESTED_RESULTS.join('|')}
+
+Resolution limits are the largest acceptable angular or surface scale: smaller values ask for sharper data.
+Use --range-km with --min-km, and --range-km plus --radius-km with --min-elements.
+Use --select-telescope NAME --select-mode MODE --program ID to emit a typed observation selection.
+Use --json for JSON. With the package script, use pnpm --silent telescope:query ... --json for JSON-only stdout.`;
+
 export function requestFromArguments(args: readonly string[]): CapabilityRequest {
   const target = flagValue(args, '--target'), wavelength = flagValue(args, '--wavelength');
-  if (!target || !wavelength) throw new Error('Usage: query.mts --target europa --wavelength 3.4,3.6 [--range-km N] [--radius-km N] [--min-arcsec N] [--min-km N] [--min-elements N] [--from ISO --to ISO | --any-time] [--kind cube] [--result telescope-product|body-map] [--json]');
+  if (!target || !wavelength) throw new Error(QUERY_HELP);
   const range = wavelength.split(',').map(Number);
   if (range.length !== 2 || !range.every(Number.isFinite)) throw new TypeError('--wavelength takes two micrometre values, shortest first, as 3.4,3.6.');
   const from = flagValue(args, '--from'), to = flagValue(args, '--to'), anyTime = args.includes('--any-time'), kind = flagValue(args, '--kind'), result = flagValue(args, '--result');
@@ -737,10 +799,14 @@ export function requestFromArguments(args: readonly string[]): CapabilityRequest
 }
 
 if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split('/').at(-1) ?? ' :: ')) {
-  const args = process.argv.slice(2), request = requestFromArguments(args);
+  const args = process.argv.slice(2);
+  if (args.includes('--help') || args.includes('-h')) { process.stdout.write(`${QUERY_HELP}\n`); process.exitCode = 0; }
+  else {
+  const request = requestFromArguments(args);
   const answer = queryCapabilities(request, await loadQueryInputs(resolve(import.meta.dirname, '../../..'), request.target));
   const telescope = flagValue(args, '--select-telescope'), mode = flagValue(args, '--select-mode'), programme = flagValue(args, '--program');
   if ([telescope, mode, programme].some(Boolean) && ![telescope, mode, programme].every(Boolean)) throw new TypeError('--select-telescope, --select-mode and --program are given together.');
   process.stdout.write(telescope && mode && programme ? `${JSON.stringify(selectObservation(answer, telescope, mode, programme), null, 2)}\n`
     : args.includes('--json') ? `${JSON.stringify(answer, null, 2)}\n` : formatAnswer(answer));
+  }
 }

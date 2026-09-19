@@ -114,8 +114,12 @@ checks that requirement before it loads TypeScript and reports the current versi
 
 ```
 pnpm telescope:query --target europa --wavelength 3.4,3.6 --kind cube \
-  --range-km 630000000 --radius-km 1560.8 --min-elements 8
+  --any-time --range-km 630000000 --radius-km 1560.8 --min-elements 8 --result body-map
 ```
+
+`pnpm telescope:query --help` prints the complete grammar. A minimum-resolution option is the largest acceptable scale, so a
+smaller `--min-arcsec` or `--min-km` asks for sharper data. For machine input, `pnpm --silent telescope:query ... --json`
+writes JSON alone; ordinary `pnpm` prints its script banner before the program's stdout.
 
 It returns one candidate per mode that observed the target, the ones that cover the requested wavelengths first, and each
 candidate answers four separate things:
@@ -145,6 +149,11 @@ candidate answers four separate things:
    beside the object whose observations carry a measured resolution, investigation entries, and a list of what nobody here
    knows until an observation is pinned and read.
 
+Each candidate also carries a `selectionAssessment` derived from these same facts: `selectable`, stable blocker codes, and a
+structured next action for every target-qualified program only when the explicit selection command can run. The top-level
+`endpoint` is `request-incomplete`, `no-selectable-candidate`, or `selectable-candidates`; it reports the number that can proceed
+and the blocker codes present across the answer. Consumers do not need to reverse-engineer workflow state from prose.
+
 Evidence reaches a candidate only by naming it. A body map's observation states the telescope, the exact ledger mode and the
 pinned program separately from its instrument setting; an investigation entry must contain that mode key in its own words. Anything
 that resolves to several modes, or to none, is listed separately as unassigned evidence with what it could have meant. A
@@ -159,8 +168,10 @@ Fifteen Hubble configurations (aggregates such as `STIS` and `ACS`, which name n
 as the FOC, the WF/PC and the HSP) and nine NACO techniques whose own pages state no wavelength range are in that position
 today. The FOS and GHRS detectors left that list when their handbooks' own ranges were read for the archive-final route; being
 sourced is not being re-calibrated, and the query keeps those two apart. All Spitzer archive modes carry instrument-handbook
-wavelength intervals, product kinds, sampling and a documented point-spread function where one is available. Gemini and Keck
-modes remain visible where those sourced capability facts have not been written yet; every affected constraint stays unknown.
+wavelength intervals, product kinds, sampling and a documented point-spread function where one is available. TEXES, HIRES and
+NACO cube are also sourced: TEXES is 5–25 micrometre spectroscopy, HIRES is 0.2–1.1 micrometre spectroscopy, and NACO cube is
+an infrared imaging-cube storage form whose exact filter and specialized technique remain observation-level facts. Other Gemini
+and Keck modes remain visible where those sourced capability facts have not been written yet; affected constraints stay unknown.
 
 ## From a question to a publishable layer
 
