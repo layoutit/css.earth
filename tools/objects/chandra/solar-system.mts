@@ -18,17 +18,25 @@
  *   - the same is measured on the fixed-sky list, which is the control: there the body is smeared over its own motion, so the
  *     excess inside one disc radius is smaller and the centroid is displaced.
  *
+ * sso_freeze here is a producing stage like any other: beside the object-centred list it writes, it records the archive product
+ * and the three ephemeris files that made it at their pinned digests, and the CIAO and CALDB that ran. The receipt then states
+ * each list's environment from the record beside that list, never from the software installed on the machine writing the
+ * receipt, and refuses when a list has no record. What the Horizons check establishes goes back on both records as geometric
+ * registration.
+ *
  * One receipt: programs/<program id>.<obsid>.solar-system.json. */
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
+import { addProductEvidence, productRecordPath, readProductRecord, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun } from '../product-record.mts';
 import type { FitsHeader } from '../../fits.mts';
 import { requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { toolchainPython } from '../jwst/mast.mts';
-import { PROGRAMS, type ChandraFile } from './archive.mts';
+import { PROGRAMS, type ChandraFile, type ChandraObservation } from './archive.mts';
+import { reprocessedWith } from './compare.mts';
 import { column, eventTable, gunzipFile, type EventTable } from './events.mts';
-import { chandraFiles } from './reprocess.mts';
+import { chandraFiles, chandraToolchainDigest } from './reprocess.mts';
 import { chandraToolchain, chandraVersions, CHANDRA_ROOT } from './toolchain.mts';
 
 export const HORIZONS = 'https://ssd.jpl.nasa.gov/api/horizons.api';
@@ -134,6 +142,37 @@ export async function horizonsAngularDiameter(body: string, startUtc: string, st
 
 const RADII = [1, 1.5, 2] as const;
 
+/** What the object-centred list is, in the terms its own header states. */
+const FROZEN_CONVENTIONS: Readonly<Record<string, string>> = {
+  frame: 'ocx and ocy are sky pixels in the frame that moves with the body; its reference pixel is the body centre',
+  ephemerides: 'the archive\'s own spacecraft orbit and body ephemerides, with the aspect solution, all pinned inputs',
+  rows: 'one row per event of the archive\'s level-2 list, re-projected and not refiltered',
+};
+
+/** The run that re-projects the archive's own level-2 list into the frame that moves with the body: that list and the three
+ * files the frame is built from at their pinned digests, and the CIAO and CALDB that ran sso_freeze. */
+export function freezeRun(entry: ChandraObservation, files: { readonly archive: ChandraFile; readonly orbit: ChandraFile; readonly body: ChandraFile; readonly aspect: ChandraFile },
+  options: { readonly versions: { ciao: string; caldb: string }; readonly toolchainDigest: string }): ProductRun {
+  const pin = (role: string, file: ChandraFile): ProductInput => {
+    if (file.sha256 === undefined) throw new Error(`${file.path} is pinned without a digest; a record states every input by sha256.`);
+    return { role, identity: file.url, bytes: file.bytes, sha256: file.sha256 };
+  };
+  return { telescope: 'Chandra', stage: `sso-freeze/${entry.obsid}-${entry.instrument}`,
+    inputs: [pin('archive level-2 event list', files.archive), pin('spacecraft orbit ephemeris', files.orbit), pin('body ephemeris', files.body), pin('aspect solution', files.aspect)],
+    parameters: { ...FREEZE_PARAMETERS, target: entry.targetName }, software: [{ name: 'ciao', version: options.versions.ciao }, { name: 'caldb', version: options.versions.caldb }],
+    toolchainDigest: options.toolchainDigest };
+}
+
+/** What binning the events about the body's Horizons disc establishes, for the record of the run that made the list measured. */
+export const discRegistration = (product: string, receipt: string, diameterArcseconds: number): ProductEvidence => ({ kind: 'geometric-registration', product, receipt,
+  establishes: `The events of ${product} were binned about the reference pixel of its object-centred grid and compared with the ` +
+    `${diameterArcseconds.toFixed(2)} arcsecond disc JPL Horizons gives the body for an observer at Chandra itself. That establishes where the body ` +
+    'lands in the moving frame and how far the source is spread across it; it establishes nothing about the events being calibrated, and nothing ' +
+    'about any list this run did not make.' });
+
+/** What sso_freeze is told beyond its files. The ephemerides decide the frame and are recorded as inputs, not as parameters. */
+export const FREEZE_PARAMETERS: Readonly<Record<string, string | number>> = { clobber: 'yes', verbose: 1 };
+
 export async function freezeSolarSystem(id: string, obsid: number, work: string, options: { sources?: readonly string[] } = {}) {
   const { program, entry } = await chandraFiles(id, obsid, resolve(work, 'archive'), options.sources, 'inputs');
   const target = entry.targetName.trim().toUpperCase();
@@ -142,11 +181,12 @@ export async function freezeSolarSystem(id: string, obsid: number, work: string,
   const find = (match: (file: ChandraFile) => boolean, what: string) => {
     const found = entry.inputs.filter(match);
     if (found.length !== 1) throw new Error(`${obsid}: the pinned inputs hold ${found.length} ${what}, not one.`);
-    return resolve(work, 'archive', found[0]!.path);
+    return found[0]!;
   };
-  const orbit = find(file => ORBIT.test(file.path), 'spacecraft orbit ephemeris');
-  const sso = find(file => { const match = SSO.exec(file.path); return !!match && !NOT_SSO.has(match[1]!); }, `${target} ephemeris`);
-  const asol = find(file => ASOL.test(file.path), 'aspect solution');
+  const pinnedOrbit = find(file => ORBIT.test(file.path), 'spacecraft orbit ephemeris');
+  const pinnedBody = find(file => { const match = SSO.exec(file.path); return !!match && !NOT_SSO.has(match[1]!); }, `${target} ephemeris`);
+  const pinnedAspect = find(file => ASOL.test(file.path), 'aspect solution');
+  const [orbit, sso, asol] = [pinnedOrbit, pinnedBody, pinnedAspect].map(file => resolve(work, 'archive', file.path));
   // The re-run's own level-2 event list. For a moving target chandra_repro already runs sso_freeze, so this file carries the
   // object-centred columns ocx and ocy beside the fixed-sky x and y; that is the frame this check measures.
   const { readdir } = await import('node:fs/promises');
@@ -182,11 +222,24 @@ export async function freezeSolarSystem(id: string, obsid: number, work: string,
   const result = await toolchainPython(toolchain, work, FREEZE, [archiveExpanded.path, orbit, sso, asol, frozen, frozenAsol], resolve(work, `${obsid}.sso.log`));
   const seconds = requireFiniteNumber(requireRecord(JSON.parse(result.lastLine), 'sso_freeze result').seconds, 'seconds');
   const independent = await read(frozen);
+  // This run made the object-centred list, so it records what made it, with the CIAO and CALDB that ran here and now.
+  const freezeRecord = productRecordPath(frozen);
+  await writeProductRecord(freezeRecord, freezeRun(entry, { archive: archiveLevel2, orbit: pinnedOrbit, body: pinnedBody, aspect: pinnedAspect },
+    { versions, toolchainDigest: await chandraToolchainDigest() }),
+    [{ path: basename(frozen), file: frozen, conventions: FROZEN_CONVENTIONS }, { path: basename(frozenAsol), file: frozenAsol }]);
+  // Each list's environment comes from the record beside that list: the chandra_repro list was made by another run, possibly
+  // years ago on another machine, and a list with no record is not measured rather than being given this machine's versions.
+  const reproRecord = productRecordPath(eventFile);
+  const made = reprocessedWith(await readProductRecord(reproRecord), written[0]!, reproRecord);
+  const froze = reprocessedWith(await readProductRecord(freezeRecord), basename(frozen), freezeRecord);
 
   const receipt = {
-    schema: 'cssearth-chandra-solar-system@1', program: id, obsid, target: entry.targetName,
+    schema: 'cssearth-chandra-solar-system@2', program: id, obsid, target: entry.targetName,
     instrument: `${entry.instrument}/${entry.detector}`, toolchain: 'tools/objects/chandra/toolchain.json',
-    reprocessedWith: { ciao: versions.ciao, caldb: versions.caldb }, ssoFreezeSeconds: seconds,
+    // Two runs, two environments: the one that reprocessed the level-2 list, and the one that froze the archive's list here.
+    reprocessedWith: { ciao: made.ciao, caldb: made.caldb }, frozenWith: { ciao: froze.ciao, caldb: froze.caldb },
+    productRecords: { objectCentred: relative(work, reproRecord), objectCentredFromArchive: relative(work, freezeRecord) },
+    ssoFreezeSeconds: seconds,
     ephemerides: { spacecraft: orbit.slice(orbit.indexOf('archive/') + 8), body: sso.slice(sso.indexOf('archive/') + 8), aspect: asol.slice(asol.indexOf('archive/') + 8) },
     observation: { start, stop, events: ours.table.rows },
     horizons: { ...horizons, angularRadiusSkyPixels: +bodyRadiusPixels.toFixed(3), skyPixelArcseconds: +(objectGrid.degreesPerPixel * 3600).toFixed(4) },
@@ -199,6 +252,10 @@ export async function freezeSolarSystem(id: string, obsid: number, work: string,
   };
   const path = resolve(PROGRAMS, `${id}.${obsid}.solar-system.json`);
   await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
+  // Where the body landed is added to the record of each run whose list was measured, naming that list and this receipt.
+  const receiptPath = relative(resolve(import.meta.dirname, '../../..'), path);
+  await addProductEvidence(reproRecord, [discRegistration(written[0]!, receiptPath, horizons.angularDiameterArcseconds)], recorded => resolve(repro, recorded));
+  await addProductEvidence(freezeRecord, [discRegistration(basename(frozen), receiptPath, horizons.angularDiameterArcseconds)], recorded => resolve(work, recorded));
   return { path, receipt, program };
 }
 

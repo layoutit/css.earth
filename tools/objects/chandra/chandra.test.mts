@@ -3,12 +3,13 @@ import { test } from 'node:test';
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { addProductEvidence, evidenceFor, productRecordPath, readProductRecord } from '../product-record.mts';
-import { obsidDirectory, parseChandraProgram, parseCxcRows, PROGRAMS, refuseObservation, REFUSED_MODES } from './archive.mts';
-import { isObjectPointing, LEDGER, ledgerGuide, GUIDE, objectBox, OBJECT_RADIUS_DEGREES, MOVING_TARGETS } from './archive-ledger.mts';
+import { addProductEvidence, evidenceFor, productRecordPath, readProductRecord, runDigest, writeProductRecord } from '../product-record.mts';
+import { observationMode, obsidDirectory, parseChandraProgram, parseCxcRows, PROGRAMS, refuseObservation, REFUSED_MODES } from './archive.mts';
+import { isObjectPointing, LEDGER, ledgerGuide, GUIDE, modeKey, objectBox, OBJECT_RADIUS_DEGREES, MOVING_TARGETS, pinnedState } from './archive-ledger.mts';
 import { archiveAgreement, compareBinnedImage, eventKeys, matchEvents, reprocessedWith } from './compare.mts';
 import { column, eventTable, requireEventColumn, scalar } from './events.mts';
 import { reprocessParameters, reprocessRun, writeReprocessRecord } from './reprocess.mts';
+import { discRegistration, freezeRun } from './solar-system.mts';
 
 const BLOCK = 2880, CARD = 80;
 const card = (key: string, value: string) => `${key.padEnd(8)}= ${value}`.padEnd(CARD).slice(0, CARD);
@@ -317,4 +318,70 @@ test('Jupiter reproduces event for event on HRC-I, and its disc lands in the obj
   assert.ok(frozen.horizons.motionArcseconds > frozen.horizons.angularDiameterArcseconds, 'the body moves further than its diameter');
   assert.ok(frozen.objectCentred.enclosed.r1!.excess > 4 * frozen.fixedSky.enclosed.r1!.excess,
     `the object-centred frame concentrates the source: ${frozen.objectCentred.enclosed.r1!.excess} against ${frozen.fixedSky.enclosed.r1!.excess}`);
+});
+
+test('a mode with no read mode is the plain mode, and a receipt written before that is still the one it names', async () => {
+  const hrc = { instrument: 'HRC', detector: 'HRC-I', grating: 'NONE', dataMode: 'OBSERVING' };
+  assert.equal(observationMode(hrc), 'OBSERVING', 'a detector that states no read mode names no read mode');
+  assert.equal(observationMode({ ...hrc, readMode: 'TIMED' }), 'TIMED/OBSERVING');
+  assert.equal(modeKey(hrc), 'HRC-I no grating OBSERVING');
+  // The committed HRC receipt says undefined/OBSERVING, from the template this replaced. It is left as it was written, so the
+  // ledger accepts both spellings and Jupiter stays reproduced; any other mode is still refused.
+  const committed = JSON.parse(await readFile(join(PROGRAMS, 'jupiter-hrci.hrcf18676N003_evt2.reproduction.json'), 'utf8')) as { dataMode: string };
+  assert.equal(committed.dataMode, 'undefined/OBSERVING');
+  const state = await pinnedState();
+  assert.deepEqual(state.problems, [], 'every committed receipt is accepted');
+  assert.ok(state.reproduced.has('jupiter-hrci|18676'), 'the HRC observation is proved by its own receipt');
+});
+
+test('the object-centred list records the environment that froze it, and its receipt refuses a list that has none', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'chandra-freeze-')), frozen = '18676_frozen_evt2.fits';
+  const entry = digested(), ran = { ciao: 'CIAO 4.18.0 Monday, December 08, 2025', caldb: '4.12.4' };
+  const files = { archive: entry.products[0]!, orbit: { ...file('primary/orbitf441_eph1.fits'), sha256: 'a'.repeat(64) },
+    body: { ...file('primary/jupiterf441_eph1.fits'), sha256: 'b'.repeat(64) }, aspect: { ...file('primary/pcadf441_asol1.fits'), sha256: 'c'.repeat(64) } };
+  const run = freezeRun(entry, { ...files, archive: { ...files.archive, sha256: 'd'.repeat(64) } }, { versions: ran, toolchainDigest: 'e'.repeat(64) });
+  assert.equal(run.stage, 'sso-freeze/2798-ACIS');
+  assert.deepEqual(run.inputs.map(input => input.role), ['archive level-2 event list', 'spacecraft orbit ephemeris', 'body ephemeris', 'aspect solution']);
+  assert.deepEqual(run.software, [{ name: 'ciao', version: ran.ciao }, { name: 'caldb', version: ran.caldb }]);
+  // An undigested input is not a pin, and another ephemeris is another frame, so it is another run.
+  assert.throws(() => freezeRun(entry, files, { versions: ran, toolchainDigest: 'e'.repeat(64) }), /without a digest/u);
+  assert.notEqual(runDigest(freezeRun(entry, { ...files, archive: { ...files.archive, sha256: 'd'.repeat(64) }, body: { ...files.body, sha256: 'f'.repeat(64) } },
+    { versions: ran, toolchainDigest: 'e'.repeat(64) })), runDigest(run));
+
+  await writeFile(join(directory, frozen), eventFile([event()]));
+  const record = productRecordPath(join(directory, frozen));
+  assert.throws(() => reprocessedWith(null, frozen, record), /has no product record/u, 'a frozen list with no record is not measured');
+  await writeProductRecord(record, run, [{ path: frozen, file: join(directory, frozen) }]);
+  const froze = reprocessedWith(await readProductRecord(record), frozen, record);
+  assert.deepEqual({ ciao: froze.ciao, caldb: froze.caldb }, ran, 'the receipt states the run that froze the list, not this machine');
+  const updated = await addProductEvidence(record, [discRegistration(frozen, 'tools/objects/chandra/programs/jupiter-hrci.18676.solar-system.json', 38.42)], name => join(directory, name));
+  const [landed] = evidenceFor(updated, frozen, 'geometric-registration');
+  assert.match(landed?.establishes ?? '', /38\.42 arcsecond disc JPL Horizons gives/u);
+  assert.match(landed?.establishes ?? '', /nothing about the events being calibrated/u);
+  assert.equal(evidenceFor(updated, frozen, 'archive-agreement').length, 0, 'landing where Horizons says is not agreement with the archive');
+});
+
+test('a frozen-frame receipt proves only the observation it names, and one that cannot be read is reported', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'chandra-frozen-')), receipt = (overrides: Record<string, unknown> = {}) => ({
+    schema: 'cssearth-chandra-solar-system@2', program: 'test', obsid: 2798, target: 'CRAB NEBULA HALO',
+    horizons: { angularDiameterArcseconds: 38.42 }, objectCentred: { file: 'acisf02798_repro_evt2.fits' }, ...overrides });
+  await writeFile(join(directory, 'test.json'), `${JSON.stringify(program())}\n`);
+  const state = async () => pinnedState(directory);
+  await writeFile(join(directory, 'test.2798.solar-system.json'), `${JSON.stringify(receipt())}\n`);
+  assert.deepEqual((await state()).problems, []);
+  assert.ok((await state()).frozen.has('test|2798'));
+  // The receipt committed before the schema gained its second version still proves its own observation.
+  await writeFile(join(directory, 'test.2798.solar-system.json'), `${JSON.stringify(receipt({ schema: 'cssearth-chandra-solar-system@1' }))}\n`);
+  assert.ok((await state()).frozen.has('test|2798'));
+  for (const [what, broken] of [['another target', receipt({ target: 'JUPITER' })], ['another schema', receipt({ schema: 'cssearth-chandra-frozen@1' })],
+    ['no measurement', receipt({ objectCentred: undefined })], ['no disc', receipt({ horizons: { angularDiameterArcseconds: 0 } })]] as const) {
+    await writeFile(join(directory, 'test.2798.solar-system.json'), `${JSON.stringify(broken)}\n`);
+    const held = await state();
+    assert.equal(held.frozen.size, 0, `${what} proves no frozen frame`);
+    assert.equal(held.problems.length, 1, what);
+  }
+  await writeFile(join(directory, 'test.2798.solar-system.json'), 'not json at all\n');
+  const unreadable = await state();
+  assert.equal(unreadable.frozen.size, 0, 'a receipt that does not parse is not a check');
+  assert.match(unreadable.problems[0] ?? '', /test\.2798\.solar-system\.json/u);
 });

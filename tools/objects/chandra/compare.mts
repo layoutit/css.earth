@@ -26,7 +26,7 @@ import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import type { FitsHeader } from '../../fits.mts';
 import { addProductEvidence, productRecordPath, readProductRecord, runDigest, type ProductEvidence, type ProductRecord } from '../product-record.mts';
-import { chandraFile, PROGRAMS, type ChandraFile } from './archive.mts';
+import { chandraFile, observationMode, PROGRAMS, type ChandraFile } from './archive.mts';
 import { column, eventColumn, eventTable, gunzipFile, requireEventColumn, scalar, type EventTable } from './events.mts';
 import { readChandraProgram } from './reprocess.mts';
 
@@ -229,7 +229,7 @@ export async function compareWithArchive(id: string, obsid: number, run: string,
     const theirX = column(theirs.bytes, theirs.table, 'x'), theirY = column(theirs.bytes, theirs.table, 'y');
     const receipt = {
       schema: 'cssearth-chandra-reproduction@2', program: id, obsid, product: name.replace(/\.fits$/u, ''),
-      instrument: `${entry.instrument}/${entry.detector}`, grating: entry.grating, dataMode: `${entry.readMode}/${entry.dataMode}`,
+      instrument: `${entry.instrument}/${entry.detector}`, grating: entry.grating, dataMode: observationMode(entry),
       target: entry.targetName, toolchain: 'tools/objects/chandra/toolchain.json',
       // Where the versions below come from: the record the reprocessing run wrote beside its event list, and the digest of that
       // run. Nothing here is read from the software installed on the machine that ran this comparison.

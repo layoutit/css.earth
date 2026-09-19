@@ -65,6 +65,10 @@ export interface ChandraFile {
   readonly bytes: number;
   readonly sha256?: string;
 }
+/** The mode an observation was taken in, as a receipt and the ledger both name it: the read mode and the data mode, and the
+ * data mode alone for a detector that states no read mode (HRC states none). */
+export const observationMode = (entry: { readonly readMode?: string; readonly dataMode: string }): string => [entry.readMode, entry.dataMode].filter(Boolean).join('/');
+
 export interface ChandraObservation {
   readonly obsid: number;
   readonly instrument: string;

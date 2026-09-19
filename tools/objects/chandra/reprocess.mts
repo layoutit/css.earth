@@ -145,7 +145,7 @@ export async function writeReprocessRecord(directory: string, level2: string, pr
 
 /** The digest of the pins the installed environment was built from. `chandraToolchain` has already refused an environment built
  * from any other, so this is the descriptor and lock the run's software came from. */
-const toolchainDigest = async () => requireString(requireRecord(JSON.parse(await readFile(resolve(CHANDRA_ROOT, 'installed.json'), 'utf8')) as unknown, 'installed.json').pinsSha256, 'pinsSha256');
+export const chandraToolchainDigest = async (): Promise<string> => requireString(requireRecord(JSON.parse(await readFile(resolve(CHANDRA_ROOT, 'installed.json'), 'utf8')) as unknown, 'installed.json').pinsSha256, 'pinsSha256');
 
 export interface ReprocessResult {
   readonly run: string; readonly obsid: number; readonly instrument: string; readonly dataMode: string;
@@ -163,7 +163,7 @@ export async function runReprocess(id: string, obsid: number, work: string, opti
   const ceiling = options.maxRssBytes ?? 2 * 2 ** 30;
   const toolchain = await chandraToolchain(), versions = await chandraVersions();
   const { chandraRepro, parameters } = reprocessParameters(entry.grating, ceiling);
-  const identity = reprocessRun(entry, { parameters, versions, toolchainDigest: await toolchainDigest() });
+  const identity = reprocessRun(entry, { parameters, versions, toolchainDigest: await chandraToolchainDigest() });
   const input = resolve(work, 'run'), run = resolve(work, 'repro');
   // A re-run is skipped only when the record beside the level-2 event list says this same run wrote it and every product it names
   // is still the file it wrote. Other pins, other parameters, another CIAO or CALDB, a changed output: the run happens again.

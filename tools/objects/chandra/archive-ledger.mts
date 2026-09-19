@@ -22,7 +22,7 @@ import { readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
-import { cxcQuery, parseChandraProgram, PROGRAMS, REFUSED_MODES, type ChandraObservation } from './archive.mts';
+import { cxcQuery, observationMode, parseChandraProgram, PROGRAMS, REFUSED_MODES, type ChandraObservation } from './archive.mts';
 
 const repository = resolve(import.meta.dirname, '../../..');
 export const LEDGER = resolve(repository, 'data/chandra/ledger.json');
@@ -153,6 +153,21 @@ export function parseChandraReceipt(value: unknown, label: string): ChandraRecei
     archive: { path: requireString(archive.path, `${label}: archive path`), bytes: requireFiniteNumber(archive.bytes, `${label}: archive bytes`), sha256 } };
 }
 
+/** The schemas a frozen-frame receipt has carried. The receipt committed before the environment had one owner is @1; @2 states
+ * each list's environment from the record of the run that made it. */
+export const CHANDRA_SOLAR_SYSTEM_SCHEMAS = ['cssearth-chandra-solar-system@1', 'cssearth-chandra-solar-system@2'] as const;
+
+/** A frozen-frame receipt as the external value it is: which program, obsid and target it measured, and the Horizons disc it
+ * measured them against. A receipt that cannot be read, or that names another observation, proves no object-centred frame. */
+export function parseSolarSystemReceipt(value: unknown, label: string): { program: string; obsid: number; target: string } {
+  const row = requireRecord(value, label);
+  if (!(CHANDRA_SOLAR_SYSTEM_SCHEMAS as readonly string[]).includes(String(row.schema))) throw new TypeError(`${label}: ${String(row.schema)} is not a frozen-frame receipt.`);
+  const horizons = requireRecord(row.horizons, `${label}: Horizons answer`);
+  if (!(requireFiniteNumber(horizons.angularDiameterArcseconds, `${label}: angular diameter`) > 0)) throw new TypeError(`${label}: the body has no angular diameter to measure against.`);
+  requireRecord(row.objectCentred, `${label}: object-centred measurement`);
+  return { program: requireString(row.program, `${label}: program`), obsid: requireFiniteNumber(row.obsid, `${label}: obsid`), target: requireString(row.target, `${label}: target`) };
+}
+
 /** Every pinned program, every observation a receipt proved, and every receipt that could not be accepted. A receipt proves the
  * one observation it names, and only when the product, mode and archive file it compared are the ones that program pins. */
 export async function pinnedState(directory = PROGRAMS) {
@@ -162,8 +177,18 @@ export async function pinnedState(directory = PROGRAMS) {
     const program = parseChandraProgram(JSON.parse(await readFile(resolve(directory, file), 'utf8')));
     programs.push({ id: program.id, observations: program.observations });
   }
-  const solarSystem = files.filter(name => name.endsWith('.solar-system.json'));
-  const reproduced = new Set<string>(), problems: string[] = [];
+  const frozen = new Set<string>(), problems: string[] = [];
+  for (const file of files.filter(name => name.endsWith('.solar-system.json'))) {
+    try {
+      const receipt = parseSolarSystemReceipt(JSON.parse(await readFile(resolve(directory, file), 'utf8')), file);
+      if (file !== `${receipt.program}.${receipt.obsid}.solar-system.json`) throw new TypeError(`${file}: it is the receipt of ${receipt.program} obsid ${receipt.obsid}.`);
+      const observation = programs.find(program => program.id === receipt.program)?.observations.find(entry => entry.obsid === receipt.obsid);
+      if (!observation) throw new TypeError(`${file}: no pinned program holds obsid ${receipt.obsid}.`);
+      if (observation.targetName.trim().toUpperCase() !== receipt.target.trim().toUpperCase()) throw new TypeError(`${file}: it measured ${receipt.target}, not ${observation.targetName}.`);
+      frozen.add(`${receipt.program}|${receipt.obsid}`);
+    } catch (error) { problems.push(receiptProblem(file, error)); }
+  }
+  const reproduced = new Set<string>();
   for (const file of files.filter(name => name.endsWith('.reproduction.json'))) {
     try {
       const receipt = parseChandraReceipt(JSON.parse(await readFile(resolve(directory, file), 'utf8')), file);
@@ -171,10 +196,11 @@ export async function pinnedState(directory = PROGRAMS) {
       const observation = programs.find(program => program.id === receipt.program)?.observations.find(entry => entry.obsid === receipt.obsid);
       if (!observation) throw new TypeError(`${file}: no pinned program holds obsid ${receipt.obsid}.`);
       const pinned = observation.products.find(product => product.path === receipt.archive.path);
-      // compare.mts writes the mode as `${readMode}/${dataMode}`, which for a detector that states no read mode is the plain mode.
+      // A receipt written before the mode had one owner says `undefined/OBSERVING` for a detector that states no read mode; the
+      // receipt committed then is left as it was written, so both spellings of that observation's mode are accepted.
       const wrong = receipt.instrument !== `${observation.instrument}/${observation.detector}` ? `the instrument ${receipt.instrument}`
         : receipt.grating !== observation.grating ? `the grating ${receipt.grating}`
-        : receipt.dataMode !== `${observation.readMode}/${observation.dataMode}` ? `the mode ${receipt.dataMode}`
+        : ![observationMode(observation), `${observation.readMode}/${observation.dataMode}`].includes(receipt.dataMode) ? `the mode ${receipt.dataMode}`
         : !pinned ? `${receipt.archive.path}, which obsid ${receipt.obsid} does not pin`
         : pinned.bytes !== receipt.archive.bytes ? `${receipt.archive.bytes} bytes of ${receipt.archive.path}, not the ${pinned.bytes} pinned`
         : pinned.sha256 !== undefined && pinned.sha256 !== receipt.archive.sha256 ? `another ${receipt.archive.path}` : null;
@@ -182,19 +208,19 @@ export async function pinnedState(directory = PROGRAMS) {
       reproduced.add(`${receipt.program}|${receipt.obsid}`);
     } catch (error) { problems.push(receiptProblem(file, error)); }
   }
-  return { programs, reproduced, solarSystem, problems: problems.sort((a, b) => a.localeCompare(b, 'en')) };
+  return { programs, reproduced, frozen, problems: problems.sort((a, b) => a.localeCompare(b, 'en')) };
 }
 
 /** The key a mode is reported under: the detector, its grating and its data mode. */
 export const modeKey = (entry: { instrument: string; detector: string; grating: string; readMode?: string; dataMode: string }) =>
-  `${entry.detector} ${entry.grating === 'NONE' ? 'no grating' : entry.grating} ${[entry.readMode, entry.dataMode].filter(Boolean).join('/')}`;
+  `${entry.detector} ${entry.grating === 'NONE' ? 'no grating' : entry.grating} ${observationMode(entry)}`;
 
 /** Every mode a pinned observation is taken in, with the state its own receipts give it, and the modes this route refuses. */
 export function modeStates(state: Awaited<ReturnType<typeof pinnedState>>): Record<string, unknown> {
   const modes: Record<string, unknown> = {};
   for (const program of state.programs) for (const entry of program.observations) {
     const reproduced = state.reproduced.has(`${program.id}|${entry.obsid}`);
-    const frozen = state.solarSystem.some(name => name === `${program.id}.${entry.obsid}.solar-system.json`);
+    const frozen = state.frozen.has(`${program.id}|${entry.obsid}`);
     modes[modeKey(entry)] = { state: reproduced ? 'reproduced' : 'pinned', program: program.id, obsid: entry.obsid, target: entry.targetName,
       livetimeSeconds: +entry.livetimeSeconds.toFixed(1), ...(frozen ? { objectCentredFrame: 'checked against JPL Horizons' } : {}) };
   }
