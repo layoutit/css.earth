@@ -140,7 +140,6 @@
         "thumbnail": "/scenes/uranus/uranus-lens-normal.webp",
         "surface": "/scenes/uranus/uranus-surface-normal.webp",
         "poles": "/scenes/uranus/uranus-poles-normal.webp",
-        "material": "/scenes/uranus/uranus-fixed-material-normal.webp",
         "falseColor": false,
         "source": {
           "id": "normal",
@@ -154,7 +153,6 @@
         "thumbnail": "/scenes/uranus/uranus-lens-methane.webp",
         "surface": "/scenes/uranus/uranus-surface-methane.webp",
         "poles": "/scenes/uranus/uranus-poles-methane.webp",
-        "material": "/scenes/uranus/uranus-fixed-material-methane.webp",
         "falseColor": true,
         "legend": {
           "kind": "scale",
@@ -197,7 +195,6 @@
         "thumbnail": "/scenes/uranus/uranus-lens-near-infrared.webp",
         "surface": "/scenes/uranus/uranus-surface-near-infrared.webp",
         "poles": "/scenes/uranus/uranus-poles-near-infrared.webp",
-        "material": "/scenes/uranus/uranus-fixed-material-near-infrared.webp",
         "falseColor": true,
         "legend": {
           "kind": "scale",

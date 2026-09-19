@@ -45,7 +45,7 @@ export interface Scene {
   interior: {bodyTransform: string; outerBodyLeaves: PreparedLeaf[]; coreLeaves: PreparedLeaf[]; sectionLeaves: PreparedLeaf[];
     presentationOrbit: {durationMilliseconds: number; millisecondsPerControlDegree: number; keyframes: Keyframe[]}};
   /** Flat discs in the body's equatorial plane, such as a ring, drawn under the same system node as the surface. */
-  planes?: {id: string; className: string; url: string; color: string; radius: number; leaf: PreparedLeaf}[];
+  planes?: {id: string; className: string; url: string; color: string; radius: number; leaves: PreparedLeaf[]}[];
   material: CompositeMaterial;
 }
 export interface SolarSource { bodyId: string; }

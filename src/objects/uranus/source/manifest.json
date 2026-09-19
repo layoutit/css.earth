@@ -230,8 +230,8 @@
     {
       "id": "uranus-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 9408,
-      "expectedSha256": "4c25382df279a628ca23b6c16f78ad5410cad74f191fab9098a1b04b17e55145",
+      "expectedBytes": 8825,
+      "expectedSha256": "fdc8f335519035b8f9f8c52d713970063cda6c24cf0709f8d8bce4c50a04a30d",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -266,8 +266,8 @@
     {
       "id": "uranus-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 14186,
-      "expectedSha256": "18674fd58cd534fce93ebdef5dcb366daba2786c7aadec10396ce2f7b95b8b96",
+      "expectedBytes": 13962,
+      "expectedSha256": "5d8c13b4d02025f0ac5466eb3f8faffbb1c42267bd60f9414867c19a9082933c",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -343,28 +343,10 @@
       }
     },
     {
-      "id": "uranus-authored-materials",
-      "path": "preparation/materials.json",
-      "expectedBytes": 7473,
-      "expectedSha256": "7da0fe026b0769397aa3c5c23f170892e29ff544dfcea4966cb966b72b2f6982",
-      "origin": "Checked source-informed oblate lighting and retained material preparation parameters",
-      "credit": "cssEarth and the institutional sources identified by the source manifest",
-      "license": "Project-authored specification",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with referenced observation provenance",
-      "consumers": [
-        "material-composition"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored material and lighting parameters; observations used by the product retain separate source records."
-      }
-    },
-    {
       "id": "uranus-authored-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1839,
-      "expectedSha256": "8ac51ff107b0f06444661f53134c4c001c59b08bb99357100b9ce6d67cd8f759",
+      "expectedBytes": 1526,
+      "expectedSha256": "f08afccb89023e275a701c577a2e993b9ee9a172d1e5fbc5bc83d1e61e5cd96f",
       "origin": "Checked oblate tessellation and retained texture presentation conventions",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -381,8 +363,8 @@
     {
       "id": "uranus-authored-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 3146,
-      "expectedSha256": "ef6c3e19766fc6deafaaa3e379c53a7f55c1eb62521b39fdff1fcf7a5207c960",
+      "expectedBytes": 102,
+      "expectedSha256": "7c0be776127ae6e06cea91841e8c296c0741e9eefee9a8b252083d4f312b3820",
       "origin": "Checked retained scene composition, physical presentation and material residency policy",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -455,6 +437,60 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored source restoration commands and verification settings."
+      }
+    },
+    {
+      "id": "uranus-authored-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2024,
+      "expectedSha256": "3030ec02f87eb10cbe02928a241c7ad3edfe7df1c22b66d63f8c30a97836f4f5",
+      "origin": "Checked lighting bank parameters for the shared sphere lane",
+      "credit": "cssEarth",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "raster"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored lighting bank; the observed surfaces retain their own source records."
+      }
+    },
+    {
+      "id": "uranus-authored-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
+      "origin": "Project-authored sky and Sun composition for the shared lane",
+      "credit": "cssEarth",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "celestial"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition; physical and observed inputs retain separate source records."
+      }
+    },
+    {
+      "id": "uranus-authored-solar-system",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 206,
+      "expectedSha256": "b36e10f85bc78cc1a1458f17fc815e7fbd9125ebfccb02b8388f437bb92af7c0",
+      "origin": "Project-authored physical scene scale",
+      "credit": "cssEarth",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "solar-system"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition; physical and observed inputs retain separate source records."
       }
     }
   ],

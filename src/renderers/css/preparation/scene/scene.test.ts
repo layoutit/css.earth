@@ -14,9 +14,9 @@ import { RASTER_DENSITY } from '../../../../preparation/raster/config.js';
 const fixtureRoot=process.cwd();
 const readJson=async(path:string):Promise<unknown>=>JSON.parse(await readFile(join(fixtureRoot,path),'utf8')) as unknown;
 const hash=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
-async function prepareAuthored(id:string,direction:[number,number,number],edit:(profile:GeometryProfile)=>GeometryProfile=profile=>profile){
+async function prepareAuthored(id:string,direction:[number,number,number],edit:(profile:GeometryProfile)=>GeometryProfile=profile=>profile,extra:Partial<GeometrySceneAssets>={}){
  const root=`src/objects/${id}/source`, profile=edit(parseGeometryProfile(await readJson(`${root}/preparation/geometry.json`))),raster=parseRasterRecipe(await readJson(`${root}/preparation/raster.json`));
- const assets:GeometrySceneAssets={};
+ const assets:GeometrySceneAssets={...extra};
  if(raster.lighting)assets.lighting={frameCount:raster.lighting.frameCount,defaultFrame:raster.lighting.defaultFrame};
  if(raster.interior){
   const source=await readJson(`${root}/${raster.interior.source}`) as {metallicCoreRadiusFraction:number;presentation:{cutaway:{centerLongitudeDegrees:number;widthDegrees:number}}};
@@ -40,8 +40,16 @@ for(const [id,direction,fixedOverlap,bodyHash,interiorHash] of fixtures){
   // The oracle predates the stepped seam outset. Restoring the fixed overlap it was taken
   // with must reproduce it exactly, so the outset changes nothing else about the leaves.
   const result=await prepareAuthored(id,direction,profile=>{const {seamOutset:_stepped,...projection}=profile.projection;return {...profile,projection:{...projection,overlap:fixedOverlap,rasterOverscan:0}};});
-  assert.equal(hash('bodyLeaves' in result?result.bodyLeaves:result.body.leaves),bodyHash);
-  if(interiorHash){assert.ok('interior' in result&&result.interior);const interior=result.interior;assert.equal(hash({outerBodyLeaves:interior.outerBodyLeaves,coreLeaves:interior.coreLeaves,sectionLeaves:interior.sectionLeaves}),interiorHash);}
+  // Two changes since this oracle was taken touched these leaves, each by name: d10c041091 draws every polar cap from
+  // both sides, and 36198077d3 moved raster images to the canonical 2x density. Undoing exactly those two reproduces
+  // the oracle, and every cap must carry the both-sided suffix.
+  const both=';backface-visibility:visible',isCap=(leaf:object)=>Boolean((leaf as {polar?:unknown;polarCap?:unknown}).polar||(leaf as {polarCap?:unknown}).polarCap);
+  const undo=(set:readonly {style:string}[])=>JSON.parse(JSON.stringify(set.map(leaf=>isCap(leaf)?{...leaf,style:leaf.style.replace(both,'')}:leaf)).replaceAll('@2x.webp','.webp')) as unknown;
+  const leaves='bodyLeaves' in result?result.bodyLeaves:result.body.leaves,caps=leaves.filter(isCap);
+  assert.ok(caps.length>=2&&caps.every(leaf=>leaf.style.endsWith(both)),'every polar cap is drawn from both sides');
+  assert.equal(hash(undo(leaves)),bodyHash);
+  if(interiorHash){assert.ok('interior' in result&&result.interior);const interior=result.interior;
+   assert.equal(hash({outerBodyLeaves:undo(interior.outerBodyLeaves),coreLeaves:undo(interior.coreLeaves),sectionLeaves:undo(interior.sectionLeaves)}),interiorHash);}
  });
  test(`authored ${id} geometry overlaps by its raster overscan and gives every surface leaf a seam outset`,async()=>{
   const result=await prepareAuthored(id,direction);
@@ -89,4 +97,25 @@ test('a stepped seam outset requires an overlap matched to its raster overscan',
  assert.doesNotThrow(()=>parseGeometryProfile(profile));
  assert.throws(()=>parseGeometryProfile({...profile,projection:{...profile.projection,overlap:0.008}}),/matched to the raster overscan/);
  assert.doesNotThrow(()=>parseGeometryProfile({...profile,projection:{...profile.projection,overlap:0,rasterOverscan:0}}));
+});
+
+test('a ring drawn as wedges is one leaf per wedge, and every wedge starts outside the body',async()=>{
+ const ringWedges={'uranus-rings-wedges@2x.webp':{count:16,contentPixels:213.4}};
+ const result=await prepareAuthored('uranus',[1,0,0],profile=>profile,{ringWedges});
+ const planes='planes' in result?result.planes??[]:[];
+ const rings=planes.find(plane=>plane.id==='rings');
+ assert.ok(rings);assert.equal(rings.leaves.length,16);
+ const profile=parseGeometryProfile(await readJson('src/objects/uranus/source/preparation/geometry.json'));
+ const bodyRadius=profile.surface.radius*profile.projection.tileSize;
+ for(const leaf of rings.leaves){
+  const values=/matrix3d\(([^)]+)\)/.exec(leaf.style)?.[1]?.split(',').map(Number);
+  assert.ok(values&&values.length===16);
+  const height=Number(/--polycss-atlas-height:([0-9.]+)px/.exec(leaf.style)?.[1]);
+  // The nearest point of a wedge is the middle of its inner edge.
+  const x=values[4]*height/2+values[12],y=values[5]*height/2+values[13];
+  assert.ok(Math.hypot(x,y)>bodyRadius,`a wedge starts ${Math.hypot(x,y)} from the centre, inside the body's ${bodyRadius}`);
+ }
+});
+test('ring wedges that would reach into the body are refused',async()=>{
+ await assert.rejects(prepareAuthored('uranus',[1,0,0],profile=>profile,{ringWedges:{'uranus-rings-wedges@2x.webp':{count:16,contentPixels:120}}}),/reach into the body/);
 });

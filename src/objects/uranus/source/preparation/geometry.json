@@ -1,76 +1,62 @@
 {
-  "schema": "cssearth-banded-ellipsoid@1",
-  "coordinateArithmetic": "step",
-  "leafRecord": "annotated",
-  "verifyWrapSeams": true,
-  "shape": {
-    "equatorialRadius": 230,
-    "polarRadius": 224.72671074768184
-  },
-  "latitudeSegments": 24,
-  "longitudeSegments": 48,
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "uranus",
   "surface": {
-    "url": "/scenes/uranus/uranus-surface-normal.webp",
-    "width": 1920,
-    "height": 960,
-    "gutter": 10,
-    "overscan": 0,
-    "overlap": 0.05,
-    "seamBleed": 0,
-    "leafSize": 64,
-    "rasterScale": 2.5,
+    "radius": 230,
+    "polarRadius": 224.72671074768184,
+    "latitudeSegments": 24,
+    "longitudeSegments": 48,
+    "surface": {
+      "url": "/scenes/uranus/uranus-surface-normal.webp",
+      "width": 1940,
+      "height": 1440
+    },
+    "surfaceLatitudeHeight": 960,
+    "packedBandGutter": 10,
+    "poles": {
+      "url": "/scenes/uranus/uranus-poles-normal.webp",
+      "width": 256,
+      "height": 128
+    },
+    "polarTileSize": 128,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
     "color": "#a7dce2"
   },
-  "polar": {
-    "url": "/scenes/uranus/uranus-poles-normal.webp",
-    "tileSize": 128,
-    "separateInnerTiles": false,
-    "fitToTile": true,
-    "surfaceOverlap": 1.035,
-    "innerOverlap": 1.05,
-    "surfaceOffset": 0.1,
-    "innerInset": 2.4,
-    "innerOffsetBeforeSubtract": false
-  },
-  "classes": {
-    "surface": "uranus-surface-face",
-    "polarInner": "uranus-polar-inner uranus-polar-inner-{pole}",
-    "polarSurface": "uranus-polar-surface uranus-polar-{pole}"
-  },
-  "planOptions": {
+  "projection": {
     "tileSize": 50,
     "layerElevation": 50,
-    "textureLighting": "source",
-    "seamBleed": 0.15
+    "seamBleed": 0.15,
+    "interiorSeamBleed": 8,
+    "overlap": 0.05,
+    "fitToSource": false,
+    "rasterScale": 2.5,
+    "rasterGutter": 10,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 0.7539822368615503
   },
-  "rotationSeconds": 72,
+  "bodyRotationDegrees": 0,
   "planes": [
     {
       "id": "rings",
       "radius": 955.6711921436676,
-      "z": 0,
-      "url": "/scenes/uranus/uranus-rings.webp",
+      "url": "/scenes/uranus/uranus-rings-wedges@2x.webp",
       "size": 1200,
-      "fitToSize": true,
       "color": "#839297"
-    },
-    {
-      "id": "ring-shadow",
-      "radius": 955.6711921436676,
-      "z": 0.12,
-      "url": "/scenes/uranus/uranus-ring-shadow-plane.webp",
-      "size": 1200,
-      "fitToSize": true,
-      "color": "#020608",
-      "className": "uranus-ring-shadow-leaf"
     }
   ],
-  "materialPlane": {
-    "frameSize": 256,
-    "layerElevation": 50,
-    "span": 512,
-    "equatorialRadius": 230,
-    "depthBias": 0.5,
-    "className": "uranus-fixed-material-leaf"
+  "output": {
+    "schema": "cssuranus-prepared-runtime-scene@1",
+    "materialSchema": "cssuranus-prepared-view-material@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 97.77,
+      "rotationDirection": "retrograde",
+      "rotationPeriodEarthDays": 0.7183
+    }
   }
 }

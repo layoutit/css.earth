@@ -226,7 +226,10 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     await prepareSpatialContext({ sourcePath: contextSource.path, outputPath, solarGeometryPath: resolve(process.cwd(), 'src/platform/solar-geometry.mts'), objectsDirectory: resolve(objectDirectory, '..') });
     worldContext = JSON.parse(await readFile(outputPath, 'utf8')) as unknown;
   }
-  const scene = await prepareGeometryScene({ profile: geometryConfig, raster: rasterConfig, assets: raster as unknown as GeometrySceneAssets, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(), outputDirectory });
+  // Rings the radial lane drew as wedges tell the scene where each ring begins, by the atlas the geometry names.
+  const ringWedges = Object.fromEntries((radial?.assets ?? []).flatMap(asset => 'wedges' in asset && asset.wedges ? [[asset.filename, asset.wedges] as const] : []));
+  const scene = await prepareGeometryScene({ profile: geometryConfig, raster: rasterConfig,
+    assets: { ...(raster as unknown as GeometrySceneAssets), ...(Object.keys(ringWedges).length ? { ringWedges } : {}) }, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(), outputDirectory });
   const contentReference = required(sources, 'content');
   const content = await prepareObjectContentAssets({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: relative(sourceDirectory, contentReference.path) } });
   validateCapabilityComposition(descriptor, rasterConfig as unknown as Record<string, unknown>, geometryConfig as unknown as Record<string, unknown>, solarSource, content.lenses);

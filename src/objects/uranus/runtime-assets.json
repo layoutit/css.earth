@@ -7,66 +7,6 @@
       "sha256": "ba54a9ff388ead8fb89d750ec014f996e746f1b00832c1f1caeb7e8af9a0924b"
     },
     {
-      "filename": "uranus-fixed-material-methane-shadowless.webp",
-      "bytes": 43814,
-      "sha256": "39195209577d17a7ea28bf7111fabac62ea53343604fb8d58190d7ed2d1a1faf"
-    },
-    {
-      "filename": "uranus-fixed-material-methane-shadowless@2x.webp",
-      "bytes": 120860,
-      "sha256": "51fcc52ea48b7e7de8a3daba4305b614ac157bf3d71ded95ba15a7d1787dfba3"
-    },
-    {
-      "filename": "uranus-fixed-material-methane.webp",
-      "bytes": 55722,
-      "sha256": "5ad0b5d2ba149c8fbb8e416cad3d99e709aa5729c5b00dcb0000f0d58d0cd223"
-    },
-    {
-      "filename": "uranus-fixed-material-methane@2x.webp",
-      "bytes": 150776,
-      "sha256": "3b2a3421af261fc396c52fd8a642da29836574d2e43761f1eced8e80a602be84"
-    },
-    {
-      "filename": "uranus-fixed-material-near-infrared-shadowless.webp",
-      "bytes": 42776,
-      "sha256": "545049edbaf24e91223cf3626ab4e95edea812efe3173746bbe1e5ff38dc0139"
-    },
-    {
-      "filename": "uranus-fixed-material-near-infrared-shadowless@2x.webp",
-      "bytes": 119412,
-      "sha256": "7ae0e497f3c41ac67f06489fe0392fce8913c75a58ac325946c0be2ca97546b7"
-    },
-    {
-      "filename": "uranus-fixed-material-near-infrared.webp",
-      "bytes": 53934,
-      "sha256": "0371beae42e3ff26f542317857a1e32576c8e0096c88019a2d112eb0d9fed654"
-    },
-    {
-      "filename": "uranus-fixed-material-near-infrared@2x.webp",
-      "bytes": 146006,
-      "sha256": "11acb533dc68f680b2255b203bb22e7cd8cf0e10f9e6a3c651b5c584a7301220"
-    },
-    {
-      "filename": "uranus-fixed-material-normal-shadowless.webp",
-      "bytes": 44512,
-      "sha256": "e9ddedaa45465f761283eb3f9881773d783f009ae7d918fbf7e223e7b0211f34"
-    },
-    {
-      "filename": "uranus-fixed-material-normal-shadowless@2x.webp",
-      "bytes": 121728,
-      "sha256": "7e5c469237216e2dbbaa186d6452814a672dbdc7285a9f13a17026070fb45b57"
-    },
-    {
-      "filename": "uranus-fixed-material-normal.webp",
-      "bytes": 56350,
-      "sha256": "b7fd32fdac4531496c90b9f358a45c70ff8227477b391bef1e40016aec8c71f5"
-    },
-    {
-      "filename": "uranus-fixed-material-normal@2x.webp",
-      "bytes": 151818,
-      "sha256": "82f6080211977703388729d5cf244abee8926e3f705ab380ba5d38023776b27f"
-    },
-    {
       "filename": "uranus-lens-methane.webp",
       "bytes": 326,
       "sha256": "6acff579b51e8374fa45d2236eb5852d20139906730aa03e634c02b8d9ca890f"
@@ -82,244 +22,89 @@
       "sha256": "ea4b60694d819f552c75d7dd5929c4ed523f843eeec56d8ebe766fc93137ee15"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-00.webp",
-      "bytes": 236168,
-      "sha256": "6232d1f4b2ba50eea9b49f492484054335304433c76fd12b15062753464ba628"
+      "filename": "uranus-lighting-2x-billboard.webp",
+      "bytes": 47716,
+      "sha256": "ba40515b65efff3a3ea36cc58959e9317cee4c3eadf83ea02ec70359aeb4c4f7"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-01.webp",
-      "bytes": 238810,
-      "sha256": "3dd9854732dc0d77f54e3a2a706252c11443ffb029c1b50482e7064dedc7f523"
+      "filename": "uranus-lighting-2x-row-00.webp",
+      "bytes": 31778,
+      "sha256": "4c489b10a7a0fa35103068746bfb4c4da72deff15539c998f0a63ff43c090fac"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-02.webp",
-      "bytes": 241788,
-      "sha256": "c4e5cf223a2a9ec6019ee9637d0edde6ee1c3e50e2e04d41173cd58a9feb40da"
+      "filename": "uranus-lighting-2x-row-01.webp",
+      "bytes": 49558,
+      "sha256": "16160660f455777ad68f58f740b04e2c29bb865b29ce50c34e286ac5b0507791"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-03.webp",
-      "bytes": 245010,
-      "sha256": "4cd033f2919edf50e81dbc8b1b8f4aac75dabd9c5f929729542b742ad70d0ffb"
+      "filename": "uranus-lighting-2x-row-02.webp",
+      "bytes": 53954,
+      "sha256": "127b73d25ee6737280b93b61da55c67fe935ccae933e272b140e3417c0cee7f6"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-04.webp",
-      "bytes": 248438,
-      "sha256": "4793f0424bb2bb036b069520de41e6dd6b37d9f8f8cb4599b333c506c13b5e9f"
+      "filename": "uranus-lighting-2x-row-03.webp",
+      "bytes": 58024,
+      "sha256": "1229d23516ad3e019883339ae517d2d679fcae57875c0148ba8e1c019847fc85"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-05.webp",
-      "bytes": 250688,
-      "sha256": "e54dd3a03dc4ff9d65290f108c1ff608a347b35e573080323588f6adea2799d8"
+      "filename": "uranus-lighting-2x-row-04.webp",
+      "bytes": 58004,
+      "sha256": "7030c7628e451c6d1d53c1a1440cdd3e2db75cf97f17d94aa1546687bc4c17af"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-06.webp",
-      "bytes": 252858,
-      "sha256": "be2f743d44090a62b55fbdd7c529b90cd79fb5f8301c7c61e859a0277851d851"
+      "filename": "uranus-lighting-2x-row-05.webp",
+      "bytes": 56354,
+      "sha256": "99555bce1cc8c742cec7db8328cba4c7f468640f326ca495c17012e9c1de7d07"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-07.webp",
-      "bytes": 253572,
-      "sha256": "81cce6e398b2a5b90cf9c11bcd6b205417b8fe65fb5349e638116d1668bd5de1"
+      "filename": "uranus-lighting-2x-row-06.webp",
+      "bytes": 51022,
+      "sha256": "f087aeaa0e22003c20a3f9166cae54a955732b7b78b4b963858e5b00e187eb46"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-08.webp",
-      "bytes": 255136,
-      "sha256": "dcc4ad3a6d2c57886707c7a2075bac43930f377c182fc94fe0844e80088b6c8c"
+      "filename": "uranus-lighting-2x-row-07.webp",
+      "bytes": 33516,
+      "sha256": "58cd6fd2c44de3a3a247d8bc70b59873e81fc9357ccdd002218a37ca1ae626fb"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-09.webp",
-      "bytes": 256370,
-      "sha256": "8148af3c11f4a85ccc9fdb193a623eb2553a7f4fea8a8a431e1178e77d8808d5"
+      "filename": "uranus-lighting-2x-row-08.webp",
+      "bytes": 32518,
+      "sha256": "507c5a828fed2a978d5c80aaa426b36508d2a24cdc0bdd554e22cb4613efaf7f"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-10.webp",
-      "bytes": 257956,
-      "sha256": "3e415af15ec05c19e59db9b8636a6e015bcaf5d3605146b2723628c53ffdb8a4"
+      "filename": "uranus-lighting-2x-row-09.webp",
+      "bytes": 47566,
+      "sha256": "c9e00f78b222f75020288d5b776c39c763132a84ce1b8227c8b34ba6d9fbf33a"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-11.webp",
-      "bytes": 254586,
-      "sha256": "0b050f88e6bfc738772a9a4088eb986dd046b8f23a259818e9459b1c56a936cd"
+      "filename": "uranus-lighting-2x-row-10.webp",
+      "bytes": 55498,
+      "sha256": "a51554275b42e797bd24311634cecc3cfa62f08e2673a6cf9f4b33220fefa967"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-12.webp",
-      "bytes": 252466,
-      "sha256": "962b3faf9a7e4c711c11a413e8c2071d526aded755c6ba51a0b3d3f3a51fde13"
+      "filename": "uranus-lighting-2x-row-11.webp",
+      "bytes": 60624,
+      "sha256": "135627617513b17f781e6afe4323378f530c73bc5380ef6f0414b20b0cb26366"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-13.webp",
-      "bytes": 250874,
-      "sha256": "56f98c0c03259e3eded535be1c32a56c46e6232a71286722cd9283bc29987e9f"
+      "filename": "uranus-lighting-2x-row-12.webp",
+      "bytes": 62450,
+      "sha256": "bf3597c023f2d7e27ad726e433435748254d824c7a587804f5c6eeb9f3313180"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-14.webp",
-      "bytes": 248502,
-      "sha256": "e7bda8df2bcb984758a2fad3ddbfc28b731175b59ef7230414e690db9502fd1c"
+      "filename": "uranus-lighting-2x-row-13.webp",
+      "bytes": 64296,
+      "sha256": "b72e276a6531d412f156b524a143b26ae7adf5ff4f9cfdea66a5c57565ecccb6"
     },
     {
-      "filename": "uranus-orbit-material-methane-row-15.webp",
-      "bytes": 245536,
-      "sha256": "b2c2929d27ac2855e3e3f33c3679e05236fa169f552377f7a2c4446b800d2851"
+      "filename": "uranus-lighting-2x-row-14.webp",
+      "bytes": 65536,
+      "sha256": "3f1eee02ee66f32dfac8beb61f72451e5491b71c1e317d66686dea0f38d3d2ed"
     },
     {
-      "filename": "uranus-orbit-material-near-infrared-row-00.webp",
-      "bytes": 234540,
-      "sha256": "ad811b6a22f60e359d200a47c0d35f8ab6dc5fadc3d6a923d7ba9edf4bdf952a"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-01.webp",
-      "bytes": 238058,
-      "sha256": "ae2dcfc9e4f783f8abb2b44dd0268e8af5862a1231ef6a4ff41c174d41fc7ed1"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-02.webp",
-      "bytes": 241708,
-      "sha256": "d6b427cf96271bf8545c1241df705ecc572c870e0f00f5a2888154d4fe99d069"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-03.webp",
-      "bytes": 245452,
-      "sha256": "6ed899401f84d6ff1f6a505a483619b1104769505df086b59f14f958b7e9cd24"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-04.webp",
-      "bytes": 249290,
-      "sha256": "7b68685ad7a3ff39e8b0f9631e9a33b6264bba0ae3680fd243a9440932792a82"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-05.webp",
-      "bytes": 252486,
-      "sha256": "026a0ac80f6aef0186aa1a4425ae0d65c6f4d41671ae16afb3c2d024e8387c3b"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-06.webp",
-      "bytes": 254392,
-      "sha256": "b7c0af7ecd335e9acc5d84a54c6a747c22ebeeafb1a20aed4a087f951c7c55e1"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-07.webp",
-      "bytes": 254980,
-      "sha256": "8f911f61cc64fc04ca2d0ec471782b7b10383b5b9ba5cf7ff466029b83e3bf67"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-08.webp",
-      "bytes": 256574,
-      "sha256": "d0b0aa9903cfd02f10bdacc22c9d6e638a9f4eb40c809b11a6c01727a24948e2"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-09.webp",
-      "bytes": 256912,
-      "sha256": "1566e9839861426b7ece39ffb8003e937000f76d6ce8005c15d44ae25fd6a687"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-10.webp",
-      "bytes": 258512,
-      "sha256": "890a07c0452e6579725f3146722ff75308c926ef8c25c19f6b903edb93df92ef"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-11.webp",
-      "bytes": 255222,
-      "sha256": "1ed115f20fcd77655f0a34a99d1c85fa15ee0728d4e4f3ac930578309e874290"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-12.webp",
-      "bytes": 254026,
-      "sha256": "ed023bf35b2a0a08ec992cc188428031dc1d4400abec63e8d168084e3778d141"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-13.webp",
-      "bytes": 252338,
-      "sha256": "0b117697e5100c7cdc5234688f49983830d5a668b9610d27af7eecb30a980a0c"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-14.webp",
-      "bytes": 249654,
-      "sha256": "96b6deb792174f6bf07bcc4fb4bef2f6b84c447bbf4d994ad29cf2b50223c74e"
-    },
-    {
-      "filename": "uranus-orbit-material-near-infrared-row-15.webp",
-      "bytes": 246902,
-      "sha256": "0f25cb7dfe73204bf66454dd5cd50951eff75eef158b13eeaf44042c69527624"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-00.webp",
-      "bytes": 244610,
-      "sha256": "9c1e3490a9b6aa94d95d2ffd4eb68a4a17cde881cebe37d5efa9de3f09bef010"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-01.webp",
-      "bytes": 247948,
-      "sha256": "55a869b3b735b6551bcf1a371ae746c9595c4529b7ae222c575867d365ba4882"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-02.webp",
-      "bytes": 250882,
-      "sha256": "0edf2ce0df860be39b93f45104461d8c8d0000e3bea84a36f32a4a109cb3dc91"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-03.webp",
-      "bytes": 254694,
-      "sha256": "6c29f5ea09eb9837545e0dea20a0394f2d6a07ec41f77a9f3f404e4b2dc340ea"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-04.webp",
-      "bytes": 257806,
-      "sha256": "593e4a2722376d08a3885cfec0dc47f3a720f81d48876d0a29bb90d4118fe4c7"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-05.webp",
-      "bytes": 260174,
-      "sha256": "a0d5c7ea1e08a890e888cb4e7bec885121dd2a67c00292c3dbd75943c7e45597"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-06.webp",
-      "bytes": 261760,
-      "sha256": "09e25145e742d8af93cb0e6fabf58b7a364e619bfb9f6239294451cb271f6ac6"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-07.webp",
-      "bytes": 262118,
-      "sha256": "dc16327b4bbd4723c0edda440635f275c91fcad9d832a9591a991efa218fa416"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-08.webp",
-      "bytes": 263638,
-      "sha256": "1f9ff86608d230ae79a979ca183e0edc4744a5d3021b70d8e0bd585fb42b5369"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-09.webp",
-      "bytes": 263524,
-      "sha256": "9347e27dae4ff5fea1cfa3477518f460e4da02f9bc41c650d7a2afca88ca1b8c"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-10.webp",
-      "bytes": 264914,
-      "sha256": "6878f02a9eac89b35da3425f583853d334ee3f8de942987ad7f16874e48eedb4"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-11.webp",
-      "bytes": 261574,
-      "sha256": "cb7ea8985d556aec42ea242edc286581788dcb29bcc7520b8a9d198e41922e7a"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-12.webp",
-      "bytes": 260734,
-      "sha256": "06abb0dadf4df755f50709709d6626b3e4ffa186f79d6aeaf0206841679f7856"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-13.webp",
-      "bytes": 258852,
-      "sha256": "2b23959082cfcde5c20ebfee945ad36005fd8f6232d2f1be6234cd8099a12d17"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-14.webp",
-      "bytes": 256814,
-      "sha256": "b0a53195bd24d69d6ebd38550e08f055b8374f43467b7734a1de3cfcb71b5818"
-    },
-    {
-      "filename": "uranus-orbit-material-normal-row-15.webp",
-      "bytes": 254366,
-      "sha256": "f4650f16b4890ba33ec9ee6cb7b187ee953a4d6c63aade5618ec1eb8c3f267b7"
+      "filename": "uranus-lighting-2x-row-15.webp",
+      "bytes": 91614,
+      "sha256": "784d9ef6abd5cd73def891446dd9a61f8a4f1d622505fd0a3233db810747a745"
     },
     {
       "filename": "uranus-photometric-phase-curve.svg",
@@ -357,24 +142,9 @@
       "sha256": "d840fff007ed6b0b65c029b2004e1bef500e7bc18aa8980a3583d34aceba788b"
     },
     {
-      "filename": "uranus-ring-shadow-plane.webp",
-      "bytes": 10836,
-      "sha256": "683011d03bb64078b921db1acc63e0fd60d0e12a21eed9a7e34571a926bb29b7"
-    },
-    {
-      "filename": "uranus-ring-shadow-plane@2x.webp",
-      "bytes": 29332,
-      "sha256": "c99fd4cbbe3df3e8dc696e9aacbe55d683eafefe3c488fa08f3065c55a3025b4"
-    },
-    {
-      "filename": "uranus-rings.webp",
-      "bytes": 63032,
-      "sha256": "4893f4565035590ee4d30393ea6142b779da148ff455756ffe97e1a26ec95771"
-    },
-    {
-      "filename": "uranus-rings@2x.webp",
-      "bytes": 139146,
-      "sha256": "5afd3b26fc7c3d5d000a804f7e08658074f1b86c1a8ecae46ce09f4d04cb81e0"
+      "filename": "uranus-rings-wedges@2x.webp",
+      "bytes": 114320,
+      "sha256": "2bb8f96a2dc9364c4d36629f7d8559d79b6d006908415bf472bbb555602a9a74"
     },
     {
       "filename": "uranus-surface-methane.webp",

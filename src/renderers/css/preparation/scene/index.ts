@@ -8,6 +8,7 @@ import type { GeometryProfile } from './profile.js';
 import { createLeafProjector, rendererPolygon } from './projector.js';
 import { prepareCutaway } from './cutaway.js';
 import { prepareSeamOutsetSteps } from './seam-outset.js';
+import { ringWedgeLayout, wedgeMatrix } from './ring-wedges.js';
 import type { InteriorAssets } from './cutaway.js';
 import { prepareAtmosphericMaterial } from './atmosphere.js';
 export { parseGeometryProfile } from './profile.js';
@@ -27,6 +28,8 @@ export interface GeometrySceneAssets {
  atmosphere?:{source:AtmosphereSource;model:AtmosphereMaterial};
  /** An unlit body: source-lit leaves, no lighting bank, stationary off-limb context and limb plate. */
  emission?:Record<string,unknown>&{offLimbContext:{logicalSize:number};limbMaterial:{logicalSize:number}};
+ /** Rings the radial lane drew as wedges, by atlas file name: how many, and where the field first draws. */
+ ringWedges?:Readonly<Record<string,{count:number;contentPixels:number}>>;
 }
 export interface GeometrySceneOptions {
  profile:GeometryProfile;raster:RasterRecipe;assets:GeometrySceneAssets;solarSource:SolarSceneSource;
@@ -46,16 +49,26 @@ export async function prepareGeometryScene({profile,raster,assets,solarSource,st
  const leaves=polygons.map((patch,index)=>projector.surface(patch,index,seamEdges.get(index)));
  const innerPolarLeaves=profile.surface.innerPoles?(['north','south'] as Pole[]).map((pole,index)=>projector.surface(createPolarPatch(profile.surface,pole,true),polygons.length+index)):[];
  const bodyLeaves=[...leaves,...innerPolarLeaves];
- // A ring is one leaf: its prepared atlas scaled to the plane's diameter in tile units and centred on the body. It hangs
- // under the same system node as the surface, so it takes the body's orientation and never states one of its own.
+ // A ring is its prepared image scaled to the plane's diameter in tile units and centred on the body. It hangs under the
+ // same system node as the surface, so it takes the body's orientation and never states one of its own. One square leaf
+ // passes through the body's centre and the browser can sort its far side over the body, so a ring the radial lane drew
+ // as wedges is one leaf per wedge, each starting outside the body.
  const planes=(profile.planes??[]).map(plane=>{
   const scale=2*plane.radius*profile.projection.tileSize/plane.size,half=scale*plane.size/2,round=(value:number)=>Number(value.toFixed(6));
-  return {id:plane.id,className:`${profile.namespace}-${plane.id}-plane`,url:plane.url,color:plane.color,radius:plane.radius,
-   leaf:{tag:'s',className:`${profile.namespace}-${plane.id}-leaf`,
+  const className=`${profile.namespace}-${plane.id}-leaf`,wedges=assets.ringWedges?.[plane.url.slice(plane.url.lastIndexOf('/')+1)];
+  const leaves=wedges?wedgeLeaves(plane,wedges,scale,className):[{tag:'s',className,
     style:`transform:matrix3d(0,${round(scale)},0,0,${round(scale)},0,0,0,0,0,1,0,${round(-half)},${round(-half)},0,1);`+
      `--polycss-atlas-width:${plane.size}px;--polycss-atlas-height:${plane.size}px;background-position:0 0;`+
-     `background-size:${plane.size}px ${plane.size}px;backface-visibility:visible`}};
+     `background-size:${plane.size}px ${plane.size}px;backface-visibility:visible`}];
+  return {id:plane.id,className:`${profile.namespace}-${plane.id}-plane`,url:plane.url,color:plane.color,radius:plane.radius,leaves};
  });
+ function wedgeLeaves(plane:{size:number;id:string},wedges:{count:number;contentPixels:number},scale:number,className:string){
+  const layout=ringWedgeLayout({size:plane.size,count:wedges.count,contentPixels:wedges.contentPixels});
+  if(layout.innerPixels*scale<=profile.surface.radius*profile.projection.tileSize)throw new TypeError(`Ring ${plane.id} wedges would reach into the body; they need more wedges or a ring that begins farther out.`);
+  return layout.angles.map((_,k)=>({tag:'s',className,
+   style:`transform:matrix3d(${wedgeMatrix(layout,k,scale)});--polycss-atlas-width:${layout.width}px;--polycss-atlas-height:${layout.height}px;`+
+    `background-position:0 ${-k*layout.height}px;background-size:${layout.width}px ${layout.height*layout.count}px;backface-visibility:visible`}));
+ }
  const interior=profile.cutaway&&assets.interior?prepareCutaway(profile,assets.interior,polygons,leaves,projector):undefined;
  if(Boolean(profile.cutaway)!==Boolean(assets.interior))throw new TypeError('Cutaway geometry and prepared assets must be supplied together.');
  // A stepped outset replaces the stretched compositor overlap. Leaves overlap only by their matched raster overscan,

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "98d4d6eae84ac1b63a15a276d68aedd913c439388af7b1f6ebb4ce6339783d9f"
+    "sha256": "ed55e979b3e83ce39f2176af349ea98d1012617ecda019a93fee90b65824286f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "851499c5f22e295b55f0e7aa93de36dd2d625acfcbd4c910b643952349a064e4"
+    "bindingsSha256": "83939fd0adfa020b87d159a51740857a35a81cda73068a2f73e757cdda682f34"
   },
   "recipes": [
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "18674fd58cd534fce93ebdef5dcb366daba2786c7aadec10396ce2f7b95b8b96",
+      "sha256": "5d8c13b4d02025f0ac5466eb3f8faffbb1c42267bd60f9414867c19a9082933c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -158,7 +158,6 @@
               "thumbnail": "/scenes/uranus/uranus-lens-normal.webp",
               "surface": "/scenes/uranus/uranus-surface-normal.webp",
               "poles": "/scenes/uranus/uranus-poles-normal.webp",
-              "material": "/scenes/uranus/uranus-fixed-material-normal.webp",
               "falseColor": false,
               "source": {
                 "id": "normal",
@@ -172,7 +171,6 @@
               "thumbnail": "/scenes/uranus/uranus-lens-methane.webp",
               "surface": "/scenes/uranus/uranus-surface-methane.webp",
               "poles": "/scenes/uranus/uranus-poles-methane.webp",
-              "material": "/scenes/uranus/uranus-fixed-material-methane.webp",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -215,7 +213,6 @@
               "thumbnail": "/scenes/uranus/uranus-lens-near-infrared.webp",
               "surface": "/scenes/uranus/uranus-surface-near-infrared.webp",
               "poles": "/scenes/uranus/uranus-poles-near-infrared.webp",
-              "material": "/scenes/uranus/uranus-fixed-material-near-infrared.webp",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -878,6 +875,80 @@
       }
     },
     {
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "3030ec02f87eb10cbe02928a241c7ad3edfe7df1c22b66d63f8c30a97836f4f5",
+      "parameters": {
+        "schema": "cssearth-raster-recipe@1",
+        "publicBase": "/scenes/uranus/",
+        "sourceWidth": 721,
+        "sourceHeight": 361,
+        "width": 1920,
+        "height": 960,
+        "latitudeBands": 24,
+        "polarTile": 128,
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "uranus-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "cssuranus-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88
+        },
+        "surfaces": [],
+        "lighting": {
+          "frameSize": 256,
+          "columns": 16,
+          "presentationSize": 256,
+          "defaultFrame": 128,
+          "billboardFrameSize": 24,
+          "billboardColumns": 16,
+          "rowOutput": "uranus-lighting-{density}x-row-{row}.webp",
+          "billboardOutput": "uranus-lighting-{density}x-billboard.webp",
+          "minimumLightViewZ": -1,
+          "maximumLightViewZ": 1,
+          "frameCount": 256,
+          "shadowlessFloodLimbFloor": 0.35,
+          "ambientIntensity": 0.7539822368615503,
+          "radiusScale": 0.505,
+          "terminator": [
+            0.04,
+            0.24
+          ],
+          "maximumAlpha": 0.95,
+          "bankSchema": "cssuranus-prepared-lighting-bank@1",
+          "billboardSchema": "cssuranus-prepared-lighting-billboard@1",
+          "metadata": {
+            "schema": "cssuranus-prepared-material@1",
+            "storageModel": "row-bank",
+            "model": "full-phase Lambert with a cubic sky term",
+            "worldLightDirection": [
+              -0.45,
+              -0.29,
+              0.845
+            ],
+            "ambientIntensity": 0.7539822368615503,
+            "shadowlessFloodLimbFloor": 0.35,
+            "orenNayarRoughness": 0,
+            "terminatorSmoothstep": [
+              0.04,
+              0.24
+            ],
+            "minimumLightViewZ": -1,
+            "maximumLightViewZ": 1,
+            "baseLightAzimuthDegrees": 0,
+            "defaultLightViewZ": 0,
+            "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+            "runtimeRasterization": false,
+            "lightingModel": "full-phase Lambert with a cubic sky term and no atmosphere; the bank is indexed by light view z, so it carries no body orientation"
+          }
+        }
+      }
+    },
+    {
       "id": "charts",
       "path": "source/content/charts.json",
       "sha256": "e601104a469ea0f3e5f36776145bfb303f6a60fc50e268db1215b97b96af71b1",
@@ -1122,8 +1193,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "18674fd58cd534fce93ebdef5dcb366daba2786c7aadec10396ce2f7b95b8b96",
-      "bytes": 14186,
+      "sha256": "5d8c13b4d02025f0ac5466eb3f8faffbb1c42267bd60f9414867c19a9082933c",
+      "bytes": 13962,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1220,6 +1291,129 @@
   ],
   "products": [
     {
+      "id": "lighting",
+      "label": "lighting",
+      "recipe": "raster",
+      "selector": "/lighting",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Evaluate the declared surface-lighting model into phase banks.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "kind": "rendering-model"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-billboard.webp",
+          "bytes": 47716,
+          "sha256": "ba40515b65efff3a3ea36cc58959e9317cee4c3eadf83ea02ec70359aeb4c4f7",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-00.webp",
+          "bytes": 31778,
+          "sha256": "4c489b10a7a0fa35103068746bfb4c4da72deff15539c998f0a63ff43c090fac",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-01.webp",
+          "bytes": 49558,
+          "sha256": "16160660f455777ad68f58f740b04e2c29bb865b29ce50c34e286ac5b0507791",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-02.webp",
+          "bytes": 53954,
+          "sha256": "127b73d25ee6737280b93b61da55c67fe935ccae933e272b140e3417c0cee7f6",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-03.webp",
+          "bytes": 58024,
+          "sha256": "1229d23516ad3e019883339ae517d2d679fcae57875c0148ba8e1c019847fc85",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-04.webp",
+          "bytes": 58004,
+          "sha256": "7030c7628e451c6d1d53c1a1440cdd3e2db75cf97f17d94aa1546687bc4c17af",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-05.webp",
+          "bytes": 56354,
+          "sha256": "99555bce1cc8c742cec7db8328cba4c7f468640f326ca495c17012e9c1de7d07",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-06.webp",
+          "bytes": 51022,
+          "sha256": "f087aeaa0e22003c20a3f9166cae54a955732b7b78b4b963858e5b00e187eb46",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-07.webp",
+          "bytes": 33516,
+          "sha256": "58cd6fd2c44de3a3a247d8bc70b59873e81fc9357ccdd002218a37ca1ae626fb",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-08.webp",
+          "bytes": 32518,
+          "sha256": "507c5a828fed2a978d5c80aaa426b36508d2a24cdc0bdd554e22cb4613efaf7f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-09.webp",
+          "bytes": 47566,
+          "sha256": "c9e00f78b222f75020288d5b776c39c763132a84ce1b8227c8b34ba6d9fbf33a",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-10.webp",
+          "bytes": 55498,
+          "sha256": "a51554275b42e797bd24311634cecc3cfa62f08e2673a6cf9f4b33220fefa967",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-11.webp",
+          "bytes": 60624,
+          "sha256": "135627617513b17f781e6afe4323378f530c73bc5380ef6f0414b20b0cb26366",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-12.webp",
+          "bytes": 62450,
+          "sha256": "bf3597c023f2d7e27ad726e433435748254d824c7a587804f5c6eeb9f3313180",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-13.webp",
+          "bytes": 64296,
+          "sha256": "b72e276a6531d412f156b524a143b26ae7adf5ff4f9cfdea66a5c57565ecccb6",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-14.webp",
+          "bytes": 65536,
+          "sha256": "3f1eee02ee66f32dfac8beb61f72451e5491b71c1e317d66686dea0f38d3d2ed",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/uranus/uranus-lighting-2x-row-15.webp",
+          "bytes": 91614,
+          "sha256": "784d9ef6abd5cd73def891446dd9a61f8a4f1d622505fd0a3233db810747a745",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "authored-recipe"
+    },
+    {
       "id": "normal",
       "label": "Visible color",
       "recipe": "observations",
@@ -1267,18 +1461,6 @@
           "url": "/scenes/uranus/uranus-poles-normal@2x.webp",
           "bytes": 4308,
           "sha256": "d840fff007ed6b0b65c029b2004e1bef500e7bc18aa8980a3583d34aceba788b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/uranus/uranus-fixed-material-normal.webp",
-          "bytes": 56350,
-          "sha256": "b7fd32fdac4531496c90b9f358a45c70ff8227477b391bef1e40016aec8c71f5",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/uranus/uranus-fixed-material-normal@2x.webp",
-          "bytes": 151818,
-          "sha256": "82f6080211977703388729d5cf244abee8926e3f705ab380ba5d38023776b27f",
           "verification": "bytes-verified"
         }
       ],
@@ -1333,18 +1515,6 @@
           "bytes": 6136,
           "sha256": "da085c5f53a5dbe5af82afa82cc383df7c968d7eaa8c89af975ed221bee826e8",
           "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/uranus/uranus-fixed-material-methane.webp",
-          "bytes": 55722,
-          "sha256": "5ad0b5d2ba149c8fbb8e416cad3d99e709aa5729c5b00dcb0000f0d58d0cd223",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/uranus/uranus-fixed-material-methane@2x.webp",
-          "bytes": 150776,
-          "sha256": "3b2a3421af261fc396c52fd8a642da29836574d2e43761f1eced8e80a602be84",
-          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1397,18 +1567,6 @@
           "url": "/scenes/uranus/uranus-poles-near-infrared@2x.webp",
           "bytes": 4472,
           "sha256": "81a5a9a346e2bbc55885819fba94a3c447f81541cb075eb5855589808a9e6294",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/uranus/uranus-fixed-material-near-infrared.webp",
-          "bytes": 53934,
-          "sha256": "0371beae42e3ff26f542317857a1e32576c8e0096c88019a2d112eb0d9fed654",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/uranus/uranus-fixed-material-near-infrared@2x.webp",
-          "bytes": 146006,
-          "sha256": "11acb533dc68f680b2255b203bb22e7cd8cf0e10f9e6a3c651b5c584a7301220",
           "verification": "bytes-verified"
         }
       ],
@@ -1608,11 +1766,11 @@
   },
   "lastPreparation": {
     "objectId": "uranus",
-    "materialSha256": "6b6947ddd5722c2883cec5449821da0e1e94da4b0cf2234a44d7bdf8b552391d",
+    "materialSha256": "948c871a20cd28082c4ffdd8f6ebdb9bdde8326af364e5128ad6c5bc6b0b52e0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "851499c5f22e295b55f0e7aa93de36dd2d625acfcbd4c910b643952349a064e4"
+      "bindingsSha256": "83939fd0adfa020b87d159a51740857a35a81cda73068a2f73e757cdda682f34"
     }
   }
 }
