@@ -54,7 +54,7 @@ test('classifyAffectedPaths: mixing object and renderer paths unions their jobs'
 
 test('classifyAffectedPaths: a tooling-only change needs typecheck and nebula, not universe or preparation', () => {
   const result = classifyAffectedPaths(['tools/fits.mts', 'packages/astronomy/src/a.ts'], CONFIG);
-  assert.deepEqual(result.areaIds.sort(), ['tooling']);
+  assert.deepEqual([...result.areaIds].sort(), ['tooling']);
   assert.deepEqual([...result.jobs].sort(), ['nebula', 'typecheck']);
 });
 
