@@ -42,7 +42,7 @@ export interface ModeCapability {
   readonly telescope: string; readonly mode: string;
   /** One interval per documented window, filter or channel, merged where they touch and sorted. A mode is never given an
    * enclosing minimum and maximum: NIRCam coronagraphy observes 1.8 to 2.2 and 2.8 to 5.0 micrometres and nothing between. */
-  readonly wavelengthIntervals: readonly (readonly [number, number])[];
+  readonly wavelengthIntervals?: readonly (readonly [number, number])[];
   /** Left out where the documentation states no aperture, as for a spacecraft camera given only by its T number. */
   readonly apertureMetres?: number;
   /** How finely the detector samples the image. This is sampling, not resolution. */
@@ -91,6 +91,8 @@ export interface UnassignedEvidence {
 }
 
 export type WorkflowBlockerCode = 'request-incomplete' | 'constraint-refused' | 'toolkit-unavailable' | 'body-map-author-missing' | 'target-program-unqualified';
+export type TargetCoverageState = 'observed' | 'searched-empty' | 'not-searched' | 'unanswered';
+export interface TargetCoverage { readonly telescope: string; readonly ledger: string; readonly state: TargetCoverageState; readonly reason: string }
 export interface WorkflowBlocker { readonly code: WorkflowBlockerCode; readonly reason: string; readonly constraint?: string }
 export interface SelectionAction { readonly kind: 'select-observation'; readonly programme: string; readonly command: 'pnpm'; readonly arguments: readonly string[] }
 export interface CandidateSelectionAssessment {
@@ -106,7 +108,8 @@ export interface Candidate {
   readonly telescope: string; readonly mode: string;
   readonly observations: { readonly count: number; readonly scope: 'this-mode' | 'object-total';
     /** Complete observation identities where the ledger preserves them, rather than only a grouped count. */
-    readonly records?: readonly { readonly id: string; readonly programme?: string; readonly startIso: string; readonly endIso?: string; readonly title?: string }[] } | null;
+    readonly records?: readonly { readonly id: string; readonly programme?: string; readonly startIso: string; readonly endIso?: string; readonly title?: string;
+      readonly filter?: string; readonly pixelScaleArcsec?: number; readonly quality?: string; readonly observatory?: string; readonly instrument?: string }[] } | null;
   readonly programmes: readonly string[];
   readonly meetsConstraints: Readonly<Record<string, ConstraintVerdict>>;
   readonly toolkitSupport: ToolkitSupport;
@@ -151,8 +154,10 @@ export interface CapabilityAnswer {
   readonly targetResolution: TargetResolution;
   readonly candidates: readonly Candidate[];
   readonly unassignedEvidence: readonly UnassignedEvidence[];
-  readonly endpoint: { readonly status: 'unknown-target' | 'request-incomplete' | 'no-selectable-candidate' | 'selectable-candidates'; readonly selectableCandidates: number; readonly blockerCodes: readonly (WorkflowBlockerCode | 'unknown-target')[] };
-  /** Ledgers that hold no record of this target, so they contribute no candidate. */
+  readonly endpoint: { readonly status: 'unknown-target' | 'request-incomplete' | 'index-incomplete' | 'no-selectable-candidate' | 'selectable-candidates'; readonly selectableCandidates: number; readonly blockerCodes: readonly (WorkflowBlockerCode | 'unknown-target' | 'target-index-unavailable' | 'archive-query-unanswered')[] };
+  /** One explicit coverage result per ledger. Absence is never silently treated as an archive negative. */
+  readonly targetCoverage: readonly TargetCoverage[];
+  /** Compatibility view containing only ledgers that explicitly searched for the target and found nothing. */
   readonly withoutTheTarget: readonly { readonly telescope: string; readonly ledger: string; readonly reason: string }[];
 }
 
@@ -240,20 +245,18 @@ export function parseModeCapabilities(value: unknown): ModeCapability[] {
       if (!(PRODUCT_KINDS as readonly string[]).includes(kind)) throw new TypeError(`${mode} names an unknown product kind ${kind}.`);
       return kind as ProductKind;
     });
-    const intervals = entry.wavelengths === 'bands' ? bandIntervals(mode) : mergeIntervals(requireArray(entry.wavelengths, `${mode} wavelengths`).map((raw, position) => {
+    const intervals = entry.wavelengths === undefined ? undefined : entry.wavelengths === 'bands' ? bandIntervals(mode) : mergeIntervals(requireArray(entry.wavelengths, `${mode} wavelengths`).map((raw, position) => {
       const range = requireArray(raw, `${mode} interval ${position}`);
       if (range.length !== 2) throw new TypeError(`${mode} states each interval as two wavelengths in micrometres.`);
       const from = requireFiniteNumber(range[0], `${mode} interval ${position} start`), to = requireFiniteNumber(range[1], `${mode} interval ${position} end`);
       if (!(from > 0 && to > from)) throw new RangeError(`${mode} covers ${from} to ${to} micrometres, which is not a range.`);
       return [from, to] as const;
     }));
-    if (!intervals.length) throw new TypeError(`${mode} names the wavelengths it covers.`);
+    if (intervals !== undefined && !intervals.length) throw new TypeError(`${mode} names the wavelengths it covers.`);
     if (!kinds.length) throw new TypeError(`${mode} names what it produces.`);
-    if (entry.apertureMetres === undefined && entry.pixelScaleArcsec === undefined && entry.instrumentResolutionArcsec === undefined)
-      throw new TypeError(`${mode} states an aperture, a point spread function or a pixel scale; without any of them nothing is known about its sharpness.`);
     if (entry.instrumentResolutionArcsec !== undefined && (entry.instrumentResolutionBasis === undefined || entry.instrumentResolutionCitation === undefined))
       throw new TypeError(`${mode} states what its point spread function figure is and where it was read.`);
-    return Object.freeze({ telescope, mode, wavelengthIntervals: intervals,
+    return Object.freeze({ telescope, mode, ...(intervals === undefined ? {} : { wavelengthIntervals: intervals }),
       ...(entry.apertureMetres === undefined ? {} : { apertureMetres: requireFiniteNumber(entry.apertureMetres, `${mode} apertureMetres`) }),
       ...(entry.pixelScaleArcsec === undefined ? {} : { pixelScaleArcsec: requireFiniteNumber(entry.pixelScaleArcsec, `${mode} pixelScaleArcsec`) }),
       ...(entry.instrumentResolutionArcsec === undefined ? {} : { instrumentResolution: { arcsec: requireFiniteNumber(entry.instrumentResolutionArcsec, `${mode} instrumentResolutionArcsec`),
@@ -449,8 +452,47 @@ function keckModes(value: unknown, target: string): TargetMode[] {
   });
 }
 
+/** IHW/PDS: one target-specific, complete observation index and archive-final products whose bytes were qualified here. */
+function ihwModes(value: unknown, target: string): TargetMode[] {
+  const ledger = requireRecord(value, 'IHW ledger');
+  if (ledger.schema !== 'cssearth-ihw-ledger@1') throw new TypeError(`Unsupported IHW ledger schema ${String(ledger.schema)}.`);
+  const archiveDate = requireString(ledger.archiveDate, 'archiveDate');
+  const object = requireArray(ledger.objects, 'objects').map(raw => requireRecord(raw, 'object')).find(entry => entry.id === target);
+  if (!object) return [];
+  const observations = requireArray(object.observations, 'IHW observations').map((raw, index) => {
+    const row = requireRecord(raw, `IHW observation ${index}`), exposure = requireFiniteNumber(row.exposureSeconds, 'exposure seconds');
+    const midpoint = Date.parse(requireString(row.observationTimeIso, 'observation time'));
+    return { id: requireString(row.id, 'product id'), programme: requireString(row.archiveObservationId, 'archive observation id'), startIso: new Date(midpoint - exposure * 500).toISOString(),
+      endIso: new Date(midpoint + exposure * 500).toISOString(), title: `IHW ${requireString(row.filter, 'filter')}`,
+      filter: requireString(row.filter, 'filter'), pixelScaleArcsec: requireFiniteNumber(row.pixelScaleArcsec, 'pixel scale'), quality: requireString(row.quality, 'quality'),
+      observatory: requireString(row.observatory, 'observatory'), instrument: `${requireString(row.instrument, 'telescope')} / ${requireString(row.detector, 'detector')}` };
+  });
+  return requireArray(ledger.modes, 'modes').map(raw => {
+    const mode = requireRecord(raw, 'IHW mode'), name = requireString(mode.mode, 'mode'), archive = requireRecord(mode.archiveFinal, 'archiveFinal');
+    return { telescope: 'IHW/PDS', mode: name, archiveDate, observations: { count: observations.length, scope: 'this-mode' as const, records: observations },
+      programmes: [requireString(requireRecord(ledger.dataset, 'dataset').id, 'dataset id')], dates: observations.map(row => ({ id: row.id, startIso: row.startIso, endIso: row.endIso })), datesComplete: true,
+      toolkit: { programs: stringList(mode.programs, `${name} programs`), checked: stringList(mode.checked, `${name} checked`), receipts: stringList(mode.receipts, `${name} receipts`),
+        archiveFinal: { programs: stringList(archive.programs, `${name} archive-final programs`), qualified: stringList(archive.qualified, `${name} archive-final qualified`) } } };
+  });
+}
+
 const ADAPTERS: Readonly<Record<string, (value: unknown, target: string) => TargetMode[]>> = Object.freeze({ jwst: jwstModes, hst: hstModes, naco: nacoModes, chandra: chandraModes, juno: junoModes,
-  spitzer: spitzerModes, gemini: geminiModes, keck: keckModes });
+  spitzer: spitzerModes, gemini: geminiModes, keck: keckModes, ihw: ihwModes });
+
+function targetCoverage(telescope: string, ledgerPath: string, value: unknown, target: string, modes: readonly TargetMode[]): TargetCoverage {
+  if (modes.length) return { telescope, ledger: ledgerPath, state: 'observed', reason: `The ledger indexes ${modes.length} mode(s) for ${target}.` };
+  const ledger = requireRecord(value, `${telescope} ledger`);
+  if (telescope === 'spitzer') {
+    const skipped = (ledger.notAsked === undefined ? [] : requireArray(ledger.notAsked, 'notAsked')).map(raw => requireRecord(raw, 'notAsked target')).find(entry => entry.object === target);
+    if (skipped) return { telescope, ledger: ledgerPath, state: 'not-searched', reason: requireString(skipped.reason, 'notAsked reason') };
+    if ((ledger.unanswered === undefined ? [] : stringList(ledger.unanswered, 'unanswered')).includes(target)) return { telescope, ledger: ledgerPath, state: 'unanswered', reason: 'The archive query was attempted but returned no usable answer.' };
+    return { telescope, ledger: ledgerPath, state: 'searched-empty', reason: `The complete Spitzer search set includes ${target} and returned no observation.` };
+  }
+  if (telescope === 'hst' && (ledger.unansweredTargets === undefined ? [] : stringList(ledger.unansweredTargets, 'unansweredTargets')).includes(target))
+    return { telescope, ledger: ledgerPath, state: 'unanswered', reason: 'The MAST target query was attempted but returned no usable answer.' };
+  if (telescope === 'ihw') return { telescope, ledger: ledgerPath, state: 'not-searched', reason: 'This IHW dataset is a target-specific Halley collection; it is not a search of other targets.' };
+  return { telescope, ledger: ledgerPath, state: 'not-searched', reason: `This ledger does not preserve an explicit searched-empty result for ${target}, so absence cannot support a scientific no.` };
+}
 
 /** Every mode key the ledgers use, so `modes.json` can be tied to them and cannot drift. */
 export function ledgerModeKeys(ledgers: QueryInputs['ledgers']): { readonly telescope: string; readonly mode: string }[] {
@@ -466,6 +508,7 @@ export function ledgerModeKeys(ledgers: QueryInputs['ledgers']): { readonly tele
     if (telescope === 'spitzer') for (const raw of requireArray(ledger.modes, 'modes')) add('Spitzer', requireString(requireRecord(raw, 'mode').mode, 'mode'));
     if (telescope === 'gemini') for (const raw of requireArray(ledger.capabilities, 'capabilities')) add('Gemini', requireString(requireRecord(raw, 'capability').instrument, 'instrument'));
     if (telescope === 'keck') for (const raw of requireArray(ledger.modes, 'modes')) add('Keck', requireString(requireRecord(raw, 'mode').instrument, 'instrument'));
+    if (telescope === 'ihw') for (const raw of requireArray(ledger.modes, 'modes')) add('IHW/PDS', requireString(requireRecord(raw, 'mode').mode, 'mode'));
   }
   return [...keys.values()].sort((a, b) => `${a.telescope}${a.mode}` < `${b.telescope}${b.mode}` ? -1 : 1);
 }
@@ -500,9 +543,9 @@ export interface ResolutionFacts {
 }
 
 export function resolutionFacts(request: CapabilityRequest, capability: ModeCapability): ResolutionFacts | null {
-  const parts = intersectIntervals(capability.wavelengthIntervals, request.wavelengthMicrometres);
-  if (!parts.length) return null;
-  const shortest = Math.min(...parts.map(part => part[0]));
+  const parts = capability.wavelengthIntervals === undefined ? [] : intersectIntervals(capability.wavelengthIntervals, request.wavelengthMicrometres);
+  if (capability.wavelengthIntervals !== undefined && !parts.length) return null;
+  const shortest = parts.length ? Math.min(...parts.map(part => part[0])) : request.wavelengthMicrometres[0];
   const diffraction = capability.apertureMetres === undefined ? null
     : { arcsec: 1.22 * shortest * 1e-6 / capability.apertureMetres * ARCSEC_PER_RADIAN, basis: `1.22 lambda / D at ${round(shortest)} micrometres on ${capability.apertureMetres} m` };
   const stated = capability.instrumentResolution;
@@ -529,11 +572,12 @@ function constraintVerdicts(request: CapabilityRequest, mode: TargetMode, capabi
   const [from, to] = request.wavelengthMicrometres;
   const requestedTime = request.time;
   const facts = capability ? resolutionFacts(request, capability) : null;
-  const inside = capability ? intersectIntervals(capability.wavelengthIntervals, request.wavelengthMicrometres) : [];
+  const inside = capability?.wavelengthIntervals ? intersectIntervals(capability.wavelengthIntervals, request.wavelengthMicrometres) : [];
   const width = to - from, covered = inside.reduce((sum, [start, end]) => sum + (end - start), 0);
   const noOverlap = 'The mode covers none of the requested wavelengths, so there is nothing to state about them.';
   const verdicts: Record<string, ConstraintVerdict> = {
     wavelength: !capability ? verdict('unknown', NO_CAPABILITIES)
+      : !capability.wavelengthIntervals ? verdict('unknown', `No sourced wavelength coverage is recorded for ${mode.telescope} ${mode.mode}.`)
       : !inside.length ? verdict('no', `The mode covers ${intervalWords(capability.wavelengthIntervals)} micrometres; ${from} to ${to} falls outside every one of them.`)
       : covered >= width - 1e-9 ? verdict('yes', `The mode covers ${intervalWords(capability.wavelengthIntervals)} micrometres, which contains ${from} to ${to}.`)
       : verdict('partial', `The mode covers ${intervalWords(capability.wavelengthIntervals)} micrometres, so only ${intervalWords(inside.map(([start, end]) => [round(start), round(end)] as const))} of the request is inside it.`),
@@ -544,8 +588,8 @@ function constraintVerdicts(request: CapabilityRequest, mode: TargetMode, capabi
       : !mode.dates.length ? verdict('unknown', 'This ledger carries no dates for this target and mode.')
       : (() => {
           const dated = mode.dates.filter(date => (date.endIso ?? date.startIso) >= requestedTime.fromIso && date.startIso <= requestedTime.toIso);
-          if (dated.length) return verdict('yes', `The ledger names ${dated.length} observation(s) overlapping the range: ${dated.map(date => `${date.id} on ${date.startIso.slice(0, 10)}`).join(', ')}.`);
-          const outside = `${mode.dates.length} observation(s) of this target and mode fall outside the range${mode.dates.length ? ` (${mode.dates.map(date => date.startIso.slice(0, 10)).join(', ')})` : ''}`;
+          if (dated.length) return verdict('yes', `The ledger names ${dated.length} observation(s) overlapping the range: ${dated.slice(0, 8).map(date => `${date.id} on ${date.startIso.slice(0, 10)}`).join(', ')}${dated.length > 8 ? `, and ${dated.length - 8} more` : ''}.`);
+          const outside = `${mode.dates.length} observation(s) of this target and mode fall outside the range${mode.dates.length ? ` (${mode.dates.slice(0, 8).map(date => date.startIso.slice(0, 10)).join(', ')}${mode.dates.length > 8 ? `, and ${mode.dates.length - 8} more` : ''})` : ''}`;
           return mode.datesComplete ? verdict('no', `The ledger retains every observation identity and time; all ${outside}.`)
             : verdict('partial', `The ledger dates ${outside}; it does not date the rest.`);
         })(),
@@ -638,11 +682,12 @@ function resolveEvidence(inputs: QueryInputs, modes: readonly TargetMode[]): { r
   return { attached, unassigned };
 }
 
-const UNKNOWN_UNTIL_READ = (target: string): string[] => [
+const UNKNOWN_UNTIL_READ = (target: string, mode: TargetMode): string[] => [
   `Whether any exposure of ${target} saturates, or is too faint, at the requested wavelengths.`,
   'Which wavelengths of the mode a given exposure actually used, and how much of its coverage is usable in it.',
   'The resolution a given observation reached: the ledger holds none, and the figures above are what the optics and the pixels allow, not what was achieved.',
-  'Which filter, grating or channel a given exposure used: a mode reaches its wavelengths through discrete elements, and a request can fall between them.',
+  ...(mode.observations?.records?.length && mode.observations.records.every(record => record.filter) ? []
+    : ['Which filter, grating or channel a given exposure used: a mode reaches its wavelengths through discrete elements, and a request can fall between them.']),
   `Where ${target} was pointed and lit: the sub-observer and sub-solar points, and the time of day on the ground.`,
   `Whether ${target} was resolved at all in a given exposure, and how much of it the field of view held.`];
 
@@ -651,16 +696,17 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
   if (request.kind && !(PRODUCT_KINDS as readonly string[]).includes(request.kind)) throw new TypeError(`Unknown product kind ${request.kind}.`);
   if (request.result && !(REQUESTED_RESULTS as readonly string[]).includes(request.result)) throw new TypeError(`Unknown requested result ${request.result}.`);
   const targetResolution = resolveTarget(request.target, inputs.targetCatalogue);
-  if (targetResolution.status === 'unknown') return { target: request.target, request, targetResolution, candidates: [], unassignedEvidence: [], withoutTheTarget: [],
+  if (targetResolution.status === 'unknown') return { target: request.target, request, targetResolution, candidates: [], unassignedEvidence: [], targetCoverage: [], withoutTheTarget: [],
     endpoint: { status: 'unknown-target', selectableCandidates: 0, blockerCodes: ['unknown-target'] } };
   const target = targetResolution.canonical.id, canonicalRequest: CapabilityRequest = { ...request, target };
   const capabilities = new Map(inputs.capabilities.map(entry => [`${entry.telescope} :: ${entry.mode}`, entry] as const));
-  const withoutTheTarget: { telescope: string; ledger: string; reason: string }[] = [], found: { ledger: string; mode: TargetMode }[] = [];
+  const targetCoverageResults: TargetCoverage[] = [], found: { ledger: string; mode: TargetMode }[] = [];
   for (const ledger of inputs.ledgers) {
     const adapter = ADAPTERS[ledger.telescope];
     if (!adapter) throw new TypeError(`No adapter reads the ${ledger.telescope} ledger.`);
     const modes = adapter(ledger.value, target);
-    if (!modes.length) { withoutTheTarget.push({ telescope: ledger.telescope, ledger: ledger.path, reason: `This ledger holds no record of ${target}.` }); continue; }
+    targetCoverageResults.push(targetCoverage(ledger.telescope, ledger.path, ledger.value, target, modes));
+    if (!modes.length) continue;
     for (const mode of modes) found.push({ ledger: ledger.path, mode });
   }
   const { attached, unassigned } = resolveEvidence(inputs, found.map(entry => entry.mode));
@@ -669,16 +715,20 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
     return { telescope: mode.telescope, mode: mode.mode, observations: mode.observations, programmes: mode.programmes,
       meetsConstraints: constraintVerdicts(canonicalRequest, mode, capability), toolkitSupport: toolkitSupport(mode, target), bodyMapSupport: bodyMapSupport(mode),
       evidence: { ledger, archiveDate: mode.archiveDate, receipts: mode.toolkit.receipts, bodyMaps: evidence.bodyMaps, investigations: evidence.investigations },
-      unknown: [...(capability ? [] : [`What this mode can do: ${NO_CAPABILITIES}`]), ...UNKNOWN_UNTIL_READ(target),
+      unknown: [...(capability ? [] : [`What this mode can do: ${NO_CAPABILITIES}`]), ...UNKNOWN_UNTIL_READ(target, mode),
         ...(evidence.bodyMaps.length ? [] : [`Whether anything here has ever measured ${target} in this mode: no body map beside the object names it.`])] };
   });
   const rank = (candidate: Candidate) => candidate.meetsConstraints.wavelength?.answer === 'yes' ? 0 : candidate.meetsConstraints.wavelength?.answer === 'partial' ? 1 : 2;
   const assessed: Candidate[] = candidates.map(candidate => ({ ...candidate, selectionAssessment: workflowAssessment(canonicalRequest, target, candidate) }));
   assessed.sort((a, b) => rank(a) - rank(b) || (`${a.telescope}${a.mode}` < `${b.telescope}${b.mode}` ? -1 : 1));
   const selectableCandidates = assessed.filter(candidate => candidate.selectionAssessment.selectable).length;
-  const status = missingRequestFields(canonicalRequest).length ? 'request-incomplete' : selectableCandidates ? 'selectable-candidates' : 'no-selectable-candidate';
-  return { target, request: canonicalRequest, targetResolution, unassignedEvidence: unassigned, withoutTheTarget, candidates: assessed,
-    endpoint: { status, selectableCandidates, blockerCodes: [...new Set(assessed.flatMap(candidate => candidate.selectionAssessment.blockers.map(blocker => blocker.code)))] } };
+  const incompleteIndex = !assessed.length && targetCoverageResults.some(entry => entry.state === 'not-searched' || entry.state === 'unanswered');
+  const status = missingRequestFields(canonicalRequest).length ? 'request-incomplete' : selectableCandidates ? 'selectable-candidates' : incompleteIndex ? 'index-incomplete' : 'no-selectable-candidate';
+  const coverageBlockers = !assessed.length ? targetCoverageResults.flatMap(entry => entry.state === 'not-searched' ? ['target-index-unavailable' as const]
+    : entry.state === 'unanswered' ? ['archive-query-unanswered' as const] : []) : [];
+  const withoutTheTarget = targetCoverageResults.filter(entry => entry.state === 'searched-empty').map(({ telescope, ledger, reason }) => ({ telescope, ledger, reason }));
+  return { target, request: canonicalRequest, targetResolution, unassignedEvidence: unassigned, targetCoverage: targetCoverageResults, withoutTheTarget, candidates: assessed,
+    endpoint: { status, selectableCandidates, blockerCodes: [...new Set([...coverageBlockers, ...assessed.flatMap(candidate => candidate.selectionAssessment.blockers.map(blocker => blocker.code))])] } };
 }
 
 /** Every reason an explicit selection cannot run, returned together so a caller does not repair one field only to discover
@@ -796,7 +846,8 @@ export function formatAnswer(answer: CapabilityAnswer): string {
   }
   for (const entry of answer.unassignedEvidence) lines.push(`unassigned ${entry.kind}: ${entry.source}, ${entry.identity}. ${entry.reason}${entry.couldMean.length ? ` It could be about ${entry.couldMean.join(', ')}.` : ''}`);
   if (answer.unassignedEvidence.length) lines.push('');
-  for (const entry of answer.withoutTheTarget) lines.push(`${entry.ledger}: ${entry.reason}`);
+  if (answer.targetCoverage.some(entry => entry.state !== 'observed')) lines.push('archive target coverage:');
+  for (const entry of answer.targetCoverage.filter(entry => entry.state !== 'observed')) lines.push(`  ${entry.ledger}: ${entry.state}. ${entry.reason}`);
   return `${lines.join('\n')}\n`;
 }
 

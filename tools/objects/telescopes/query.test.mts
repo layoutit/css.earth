@@ -67,7 +67,7 @@ const bodyMap = (telescope: string, instrument: string, id: string) => ({ schema
 
 const inputs = (ledgers: readonly { telescope: string; value: unknown }[], rest: Partial<QueryInputs> = {}): QueryInputs =>
   ({ ledgers: ledgers.map(entry => ({ ...entry, path: `data/${entry.telescope}/ledger.json` })), capabilities: CAPABILITIES,
-    targetCatalogue: ['europa', 'hd-181327', 'ceres', 'vesta', 'jupiter', 'itokawa', 'io', 'flora', 'm42', 'bennu'].map(id => ({ id, name: id === 'bennu' ? 'Bennu' : id, aliases: [] })),
+    targetCatalogue: ['europa', 'hd-181327', 'ceres', 'vesta', 'jupiter', 'itokawa', 'io', 'flora', 'm42', 'bennu', 'comet-1p'].map(id => ({ id, name: id === 'bennu' ? 'Bennu' : id, aliases: [] })),
     bodyMaps: [], ...rest });
 const candidate = (answer: CapabilityAnswer, mode: string): Candidate => {
   const found = answer.candidates.find(entry => entry.mode === mode);
@@ -105,6 +105,19 @@ test('targets resolve through the shipped catalogue, while a near typo is a dist
   assert.deepEqual(typo.targetResolution.status === 'unknown' ? typo.targetResolution.suggestions.map(entry => entry.id) : [], ['bennu']);
   assert.deepEqual(typo.withoutTheTarget, []);
   assert.match(formatAnswer(typo), /Did you mean Bennu \(bennu\)/u);
+});
+
+test('an unsearched target is an incomplete index, while an explicit empty search is a real negative', () => {
+  const base = { schema: 'cssearth-spitzer-ledger@3', archiveDate: '2026-09-19', modes: [], holdings: [], unanswered: [] };
+  const skipped = queryCapabilities({ target: 'comet-1p', wavelengthMicrometres: [0.6, 0.7], time: { any: true }, angularResolutionArcsec: 2,
+    kind: 'image', result: 'telescope-product' }, inputs([{ telescope: 'spitzer', value: { ...base, notAsked: [{ object: 'comet-1p', reason: 'moving-target identifier unavailable' }] } }]));
+  assert.equal(skipped.endpoint.status, 'index-incomplete');
+  assert.deepEqual(skipped.endpoint.blockerCodes, ['target-index-unavailable']);
+  assert.deepEqual(skipped.targetCoverage, [{ telescope: 'spitzer', ledger: 'data/spitzer/ledger.json', state: 'not-searched', reason: 'moving-target identifier unavailable' }]);
+  assert.deepEqual(skipped.withoutTheTarget, []);
+  const empty = queryCapabilities({ ...skipped.request }, inputs([{ telescope: 'spitzer', value: { ...base, notAsked: [] } }]));
+  assert.equal(empty.endpoint.status, 'no-selectable-candidate');
+  assert.deepEqual(empty.withoutTheTarget.map(entry => entry.telescope), ['spitzer']);
 });
 
 test('an indexed observation exposes a telescope-owned qualification action when qualification is the only blocker', () => {
@@ -415,6 +428,22 @@ test('the committed Flora request ends explicitly after sourced candidate refusa
   assert.deepEqual(wfpc2.selectionAssessment.blockers.map(blocker => blocker.code),
     ['body-map-author-missing', 'target-program-unqualified']);
   assert.match(formatAnswer(answer), /workflow: no-selectable-candidate; 0 of 4 candidate mode\(s\) can proceed/u);
+});
+
+test('the committed Halley request exposes a real IHW archive-final image and the Spitzer index gap', async () => {
+  const answer = queryCapabilities({ target: 'halley', wavelengthMicrometres: [0.6, 0.7], time: { fromIso: '1986-02-01', toIso: '1986-04-30' },
+    angularResolutionArcsec: 2, kind: 'image', result: 'telescope-product' }, await loadQueryInputs(ROOT, 'halley'));
+  assert.equal(answer.target, 'comet-1p');
+  assert.equal(answer.endpoint.status, 'selectable-candidates');
+  const ihw = candidate(answer, 'NNSN image');
+  assert.equal(ihw.observations?.count, 3523);
+  assert.deepEqual([ihw.meetsConstraints.time?.answer, ihw.meetsConstraints.kind?.answer, ihw.meetsConstraints.wavelength?.answer], ['yes', 'yes', 'unknown']);
+  assert.equal(ihw.toolkitSupport.level, 'archive-final');
+  assert.equal(ihw.selectionAssessment.selectable, true);
+  assert.deepEqual(ihw.observations?.records?.find(record => record.id === 'NNSN1121'), { id: 'NNSN1121', programme: '401132',
+    startIso: '1986-03-01T09:44:17.000Z', endIso: '1986-03-01T09:44:27.000Z', title: 'IHW GUNN_R', filter: 'GUNN_R', pixelScaleArcsec: 0.36,
+    quality: 'EXCELLENT', observatory: 'EUROPEAN SOUTHERN', instrument: 'DANISH 1.5M REFL. / GEC CCD' });
+  assert.equal(answer.targetCoverage.find(entry => entry.telescope === 'spitzer')?.state, 'not-searched');
 });
 
 test('the committed ledgers: no candidate for any target ever answers yes for sharpness', async () => {

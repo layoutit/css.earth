@@ -92,6 +92,7 @@ problem, never counted as a check.
 | JWST cubes (calwebb_spec3) | [JWST imaging](jwst-imaging.md) | `jwst/cubes/spec3.mts` | `compareCubeWithMast` against MAST's cube | `archive-agreement` |
 | Hubble (calacs, calwf3, calstis, AstroDrizzle) | [Hubble](hubble.md) | `hst/calibrate.mts`, `hst/drizzle.mts` | `hst/compare.mts` against MAST's own product | `archive-agreement` |
 | Hubble retired instruments (WFPC2, FOS, GHRS) | [Hubble](hubble.md#archive-final-products-of-retired-instruments) | nothing of ours: `hst/archive-final.mts` pins and reads the archive's own final product | the catalogue against the files' own headers, by digest | `archive-origin` |
+| IHW/PDS Halley near-nucleus images | [IHW Halley](ihw-halley.md) | nothing of ours: the archive's edited relative-intensity image is pinned and read | the IHW index, PDS label and FITS header, by digest | `archive-origin` |
 | Hubble STIS line stacks | [Hubble](hubble.md) | `hst/line-stack.mts` | its own subsets, and the paper's published brightness | `internal-consistency`, `published-value` |
 | VLT/NACO (ESO pipeline) | [VLT/NACO](naco.md) | `naco/reduce.mts` | `naco/compare.mts`, two of our own reductions | `internal-consistency` |
 | Chandra (CIAO `chandra_repro`) | [Chandra](chandra.md) | `chandra/reprocess.mts` | `chandra/compare.mts`, event by event against the archive | `archive-agreement` |
@@ -101,7 +102,7 @@ problem, never counted as a check.
 
 The ledgers say how much of each archive these routes have been proved on:
 [JWST](jwst-ledger.md), [Hubble](hubble-ledger.md), [NACO](naco-ledger.md), [Chandra](chandra-ledger.md),
-[JunoCam](junocam-ledger.md), [Spitzer](spitzer-ledger.md), [Gemini](gemini-ledger.md) and [Keck](keck-ledger.md).
+[JunoCam](junocam-ledger.md), [Spitzer](spitzer-ledger.md), [Gemini](gemini-ledger.md), [Keck](keck-ledger.md) and [IHW Halley](ihw-halley.md).
 
 ## Asking which observations might measure something
 
@@ -109,8 +110,8 @@ The ledgers say what each archive holds per object and per mode. Where an archiv
 ledger can also retain the complete observation index; Spitzer records every AORKEY, programme and observing interval. The capability
 query ([`tools/objects/telescopes/query.mts`](../tools/objects/telescopes/query.mts)) turns that into an answer to one
 question: *which observing modes have ever pointed at this body, and could any of them, in principle, measure the thing I
-care about?* These commands require the Node version declared by the package: Node 22.18.x or Node 24+. The package command
-checks that requirement before it loads TypeScript and reports the current version when it cannot run.
+care about?* These commands require Node 22.18.x or Node 24+. When the shell's Node is older, the package launcher uses the
+newest compatible Node already installed under NVM, or `CSSEARTH_NODE`; it reports a concrete recovery only when neither exists.
 
 ```
 pnpm telescope:query --target europa --wavelength 3.4,3.6 --kind cube \
@@ -125,6 +126,10 @@ The target is resolved through the source object descriptors that generate the s
 catalogue alias resolves to one canonical id. A near spelling is never silently substituted: it returns the distinct
 `unknown-target` endpoint with ranked suggestions and no archive negatives. This matters because "the target is not shipped"
 and "the archives contain no observation of a shipped target" are different scientific results.
+
+Every ledger also returns a target-coverage state: `observed`, `searched-empty`, `not-searched` or `unanswered`. Only
+`searched-empty` is an archive negative. A query with no candidates and any incomplete coverage ends at `index-incomplete`
+with `target-index-unavailable` or `archive-query-unanswered`; it cannot silently turn an unattempted lookup into “no data.”
 
 It returns one candidate per mode that observed the target, the ones that cover the requested wavelengths first, and each
 candidate answers four separate things:
@@ -172,7 +177,9 @@ carried there.
 The one authored input is [`modes.json`](../tools/objects/telescopes/modes.json): each mode's wavelength intervals, aperture,
 pixel scale, documented point spread function where there is one, and product kind, with the handbook page every number was
 read from. JWST's cube modes take their intervals from `jwst/imaging/bands.mts`, which already states them band by band. A
-mode nobody has sourced is left out, and the query says "capabilities not recorded" for it rather than inventing numbers.
+mode nobody has sourced is left out, and the query says "capabilities not recorded" for it rather than inventing numbers. A
+mode may still have a sourced product kind while wavelength and sharpness remain unknown, as with the heterogeneous IHW image
+collection; useful facts no longer require making up the missing ones.
 Fifteen Hubble configurations (aggregates such as `STIS` and `ACS`, which name no one detector, and retired instruments such
 as the FOC, the WF/PC and the HSP) and nine NACO techniques whose own pages state no wavelength range are in that position
 today. The FOS and GHRS detectors left that list when their handbooks' own ranges were read for the archive-final route; being
