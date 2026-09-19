@@ -1,0 +1,192 @@
+{
+  "schema": "cssearth-jwst-coron3-reproduction@1",
+  "program": "hip-65426-1386",
+  "band": "NIRCAM-F444W-MASK335R",
+  "observation": "jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r",
+  "toolchain": "tools/objects/jwst/toolchain.json",
+  "crdsContext": "jwst_1535.pmap",
+  "mast": {
+    "name": "jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits",
+    "uri": "mast:JWST/product/jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits",
+    "bytes": 4037760,
+    "sha256": "0b708e8ccb5edb573a568be527063bf172c20517c03e0e401a2364ef7e264294",
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "local": {
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "wcs": {
+    "NAXIS1": {
+      "ours": 370,
+      "mast": 370
+    },
+    "NAXIS2": {
+      "ours": 371,
+      "mast": 371
+    },
+    "CTYPE1": {
+      "ours": "RA---TAN",
+      "mast": "RA---TAN"
+    },
+    "CTYPE2": {
+      "ours": "DEC--TAN",
+      "mast": "DEC--TAN"
+    },
+    "CRPIX1": {
+      "ours": 185.52864232547174,
+      "mast": 185.528642314737
+    },
+    "CRPIX2": {
+      "ours": 186.07516086185976,
+      "mast": 186.0751608534422
+    },
+    "CRVAL1": {
+      "ours": 201.14986726585641,
+      "mast": 201.14986726585641
+    },
+    "CRVAL2": {
+      "ours": -51.50430768024532,
+      "mast": -51.50430768024532
+    },
+    "CDELT1": {
+      "ours": 0.0000173384530614637,
+      "mast": 0.0000173384530622911
+    },
+    "CDELT2": {
+      "ours": 0.0000173384530614637,
+      "mast": 0.0000173384530622911
+    },
+    "PC1_1": {
+      "ours": 0.34696724748191304,
+      "mast": 0.34696724748191304
+    },
+    "PC1_2": {
+      "ours": 0.937877246325352,
+      "mast": 0.937877246325352
+    },
+    "PC2_1": {
+      "ours": 0.937877246325352,
+      "mast": 0.937877246325352
+    },
+    "PC2_2": {
+      "ours": -0.34696724748191304,
+      "mast": -0.34696724748191304
+    },
+    "BUNIT": {
+      "ours": "MJy/sr",
+      "mast": "MJy/sr"
+    }
+  },
+  "differentWcs": [],
+  "pixels": {
+    "both": 110776,
+    "onlyOurs": 0,
+    "onlyMast": 0,
+    "identicalShare": 0,
+    "comparedOn": "pixels",
+    "medianAbsoluteDifferenceOverMedian": 0.29912032855072157,
+    "aboveMedian": {
+      "pixels": 55388,
+      "rmsDifferenceOverRms": 0.14636897433336385,
+      "correlation": 0.9892320904523331
+    },
+    "ratioBins": [
+      {
+        "mastMJyPerSr": [
+          -0.008616202510893345,
+          0.050423528999090195
+        ],
+        "pixels": 35033,
+        "medianRatio": 0.9430740199495954
+      },
+      {
+        "mastMJyPerSr": [
+          0.050423528999090195,
+          0.3923523724079132
+        ],
+        "pixels": 9970,
+        "medianRatio": 0.9456932096775785
+      },
+      {
+        "mastMJyPerSr": [
+          0.3923523724079132,
+          1.9379606246948242
+        ],
+        "pixels": 997,
+        "medianRatio": 0.9858063485252412
+      },
+      {
+        "mastMJyPerSr": [
+          1.9379606246948242,
+          7.030267238616943
+        ],
+        "pixels": 99,
+        "medianRatio": 0.9956809081786816
+      },
+      {
+        "mastMJyPerSr": [
+          7.030267238616943,
+          18.82979393005371
+        ],
+        "pixels": 13,
+        "medianRatio": 0.988593151941029
+      }
+    ],
+    "annuli": {
+      "star": [
+        172.4317428174773,
+        197.17879300027758
+      ],
+      "arcsecPerPixel": 0.062418431024247954,
+      "bins": [
+        {
+          "arcsec": [
+            0,
+            0.5
+          ],
+          "pixels": 201,
+          "rmsDifferenceOverRms": 1.1164461392394365,
+          "correlation": 0.6598971502691677
+        },
+        {
+          "arcsec": [
+            0.5,
+            1
+          ],
+          "pixels": 605,
+          "rmsDifferenceOverRms": 0.08169175954464843,
+          "correlation": 0.9965478551916108
+        },
+        {
+          "arcsec": [
+            1,
+            2
+          ],
+          "pixels": 2419,
+          "rmsDifferenceOverRms": 0.17628972735073342,
+          "correlation": 0.9843699704756022
+        },
+        {
+          "arcsec": [
+            2,
+            5
+          ],
+          "pixels": 16936,
+          "rmsDifferenceOverRms": 0.40873109580751915,
+          "correlation": 0.9165799988147001
+        },
+        {
+          "arcsec": [
+            5,
+            20
+          ],
+          "pixels": 90615,
+          "rmsDifferenceOverRms": 0.10078614465731904,
+          "correlation": 0.9948835901166336
+        }
+      ]
+    }
+  }
+}
