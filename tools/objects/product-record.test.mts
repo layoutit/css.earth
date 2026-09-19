@@ -3,7 +3,7 @@ import { mkdtemp, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { assertInputPins, evidenceFor, parseProductRecord, pinFile, readProductRecord, runDigest, sameRun, writeProductRecord, type ProductRun } from './product-record.mts';
+import { addProductEvidence, assertInputPins, evidenceFor, parseProductRecord, pinFile, productRecordPath, readProductRecord, runDigest, sameRun, writeProductRecord, type ProductRun } from './product-record.mts';
 
 const scratch = () => mkdtemp(join(tmpdir(), 'product-record-'));
 const run = (overrides: Partial<ProductRun> = {}): ProductRun => ({ telescope: 'ALMA', stage: 'disc-selfcal/final', inputs: [{ role: 'visibilities', identity: 'uid://A002/X/1', bytes: 3, sha256: 'a'.repeat(64) }],
@@ -48,4 +48,18 @@ test('evidence answers only for the product and the kind it names', async () => 
   assert.equal(evidenceFor(record, 'a_x1d.fits', 'archive-agreement').length, 0);
   assert.throws(() => parseProductRecord({ ...record, evidence: [{ ...record.evidence[0]!, product: 'a_x1d.fits' }] }), /did not produce/u);
   assert.throws(() => parseProductRecord({ ...record, evidence: [{ ...record.evidence[0]!, kind: 'exists' }] }), /no known kind/u);
+});
+
+test('evidence is added to the record of the run that made the product, and only about that product', async () => {
+  const directory = await scratch(), image = join(directory, 'final.fits'), recordPath = join(directory, productRecordPath('final.fits')), locate = (path: string) => join(directory, path);
+  await writeFile(image, 'final image');
+  const agreement = { kind: 'archive-agreement', receipt: 'programs/a.reproduction.json', product: 'final.fits', establishes: 'The re-run matches the archive product.' } as const;
+  await assert.rejects(addProductEvidence(recordPath, [agreement], locate), /no product record/u, 'evidence needs the run that made the product');
+  await writeProductRecord(recordPath, run(), [{ path: 'final.fits', file: image }]);
+  const added = await addProductEvidence(recordPath, [agreement], locate);
+  assert.equal(evidenceFor(added, 'final.fits', 'archive-agreement').length, 1);
+  assert.deepEqual((await addProductEvidence(recordPath, [agreement], locate)).evidence, added.evidence, 'the same check twice leaves one entry');
+  assert.deepEqual((await readProductRecord(recordPath))!.inputs, run().inputs, 'the run facts are not rewritten');
+  await writeFile(image, 'another image');
+  await assert.rejects(addProductEvidence(recordPath, [agreement], locate), /not the files on disk/u);
 });

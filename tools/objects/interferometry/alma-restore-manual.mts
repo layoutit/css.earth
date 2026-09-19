@@ -20,19 +20,29 @@
  *   - the reducer cleaned interactively, drawing the mask as they watched. A headless run cannot, so it is given the mask they
  *     drew, which the delivery ships in `product/`. Nothing here invents a mask or a stopping threshold.
  *
+ * The run writes a `cssearth-telescope-product@1` record beside the restored image (`<image>.fits.product.json`): the delivery
+ * files it replayed at their digests, the generated CASA script, the pinned CASA, and the image with the units and conventions
+ * its own header states. Its evidence list starts empty; with `--archive`, the comparison with the archive's own image of the
+ * same execution is written beside the image and added to that record as `archive-agreement` evidence. An image whose record
+ * says this same restore made it is not restored again.
+ *
  * Europa is an ephemeris field: it moves several arcseconds across one execution, far more than the 0.77 arcsecond disc, so
  * the image must follow the ephemeris importasdm attached. The run checks for that ephemeris and images with
  * `phasecenter='TRACKFIELD'`; a field that turns out not to carry one stops the route rather than being imaged smeared. */
 import { spawnSync } from 'node:child_process';
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
-import { basename, resolve } from 'node:path';
+import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { compareImages, measureSource, readContinuumImage } from './alma-image.mts';
+import { compareImages, measureSource, readContinuumImage, type ImageComparison, type SourceMeasurement } from './alma-image.mts';
 import {
   manualTables, parseManualCalibration, parseScriptAssignments, parseScriptCalls, resolveNamedMaps, resolveValue,
   type ManualApplication, type ManualCalibration, type ManualFlag, type PythonValue,
 } from './alma-manual-calibration.mts';
-import { toolchainPath } from './toolchain.mts';
+import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
+import { requireArray, requireString } from '../../source-values.mts';
+import { sha256 } from '../../../src/platform/sha256.mts';
+import { addProductEvidence, pinFile, productRecordPath, readProductRecord, sameRun, writeProductRecord,
+  type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
 
 /** The imaging a manual delivery performed, read from the two scripts it ships instead of a command log. Both set their
  * parameters as plain variables and hand the names to the task, so the assignments are read alongside the calls. */
@@ -54,8 +64,6 @@ export interface ManualImaging {
   readonly threshold: string;
   /** The multiscale scales the clean was given, empty when it cleaned with delta functions alone. */
   readonly scales: readonly number[];
-  /** The images the reducer made after this one from their own self-calibration, which this route replaces with its own. */
-  readonly supersededImages: readonly string[];
   readonly mode: string;
   readonly pointSpreadMode: string | null;
   /** True when the reducer cleaned by hand; the mask they drew is then the only record of where they stopped. */
@@ -312,6 +320,59 @@ const run = (command: string, args: readonly string[], cwd: string) => {
   if (result.status !== 0) throw new Error(`${command} ${args[0]} failed (status ${result.status}).`);
 };
 
+/** The delivery files one restore replays, at their bytes and digests.
+ *
+ * An ASDM holds tens of gigabytes of binary visibilities whose bytes say nothing another execution's do not, and reading them
+ * all would cost more than the import does; the XML tables that state which execution, which antennas and which scans these
+ * are carry its identity, as the metadata tables do for a measurement set (alma-disc-selfcal.mts). Everything else the replay
+ * reads is a file of its own. */
+export async function manualDeliveryPins(files: { readonly asdm: string; readonly calibrationScript: string; readonly imagingScript: string;
+  readonly preparationScript: string; readonly log: string; readonly tables: string; readonly mask: string | null }): Promise<ProductInput[]> {
+  const hashes: string[] = []; let bytes = 0;
+  for (const table of ['ASDM.xml', 'ExecBlock.xml', 'Main.xml', 'Antenna.xml']) { const pin = await pinFile(resolve(files.asdm, table)); hashes.push(`${table}:${pin.sha256}`); bytes += pin.bytes; }
+  const pin = async (role: string, path: string): Promise<ProductInput> => ({ role, identity: basename(path), ...(await pinFile(path)) });
+  return [
+    { role: 'raw ASDM (ASDM, ExecBlock, Main and Antenna tables)', identity: basename(files.asdm), bytes, sha256: sha256(hashes.join('\n')) },
+    await pin('manual reduction script', files.calibrationScript),
+    await pin('imaging script', files.imagingScript),
+    await pin('imaging preparation script', files.preparationScript),
+    await pin('reduction log, which states the spectral-window map the script computes', files.log),
+    await pin('delivered calibration tables', files.tables),
+    ...(files.mask === null ? [] : [await pin('CLEAN mask the reducer drew', files.mask)]),
+  ];
+}
+
+/** What identifies one manual restore: the delivery files it replays, the CASA script generated from them (which carries every
+ * parameter, path and substitution this route makes), and the pinned CASA that runs it. */
+export const manualRestoreRun = (inputs: readonly ProductInput[], parameters: { readonly target: string; readonly script: string; readonly mask: string | null },
+  software: readonly ProductSoftware[], toolchainDigest: string): ProductRun => ({
+  telescope: 'ALMA', stage: 'restore-manual', inputs,
+  parameters: { target: parameters.target, restoreScript: sha256(parameters.script), mask: parameters.mask === null ? 'none' : basename(parameters.mask) },
+  software, toolchainDigest,
+});
+
+/** The pinned CASA a replay runs on, as the record states it. */
+export async function casaSoftware(): Promise<{ toolchainDigest: string; software: readonly ProductSoftware[] }> {
+  const toolchain = await toolchainDescriptor('casa');
+  return { toolchainDigest: toolchain.digest, software: requireArray(toolchain.entry.requirements, 'casa requirements')
+    .map(requirement => { const [name, version] = requireString(requirement, 'requirement').split('=='); return { name: name!, version: version ?? 'unpinned' }; }) };
+}
+
+export interface ManualRestoreComparison { readonly measurement: SourceMeasurement; readonly archive: SourceMeasurement; readonly difference: ImageComparison }
+
+/** Write the comparison with the archive's own image of this execution, and add what it establishes to the record of the run
+ * that made the restored image. An image with no record beside it is refused: evidence belongs to the run that made the
+ * product, and nothing here states what made an image that has none. */
+export async function recordArchiveComparison(image: string, archive: string, comparison: ManualRestoreComparison) {
+  const receipt = `${image.replace(/\.fits$/u, '')}.archive-comparison.json`;
+  await writeFile(receipt, `${JSON.stringify({ schema: 'cssearth-alma-manual-restore-comparison@1', image: basename(image), archiveImage: basename(archive), ...comparison }, null, 2)}\n`);
+  await addProductEvidence(productRecordPath(image), [{ kind: 'archive-agreement', receipt: basename(receipt), product: basename(image),
+    establishes: 'The image this route made from the raw visibilities, by replaying the delivery’s own reduction, agrees with the image the archive delivered for the ' +
+      'same execution: the receipt holds the peak, the noise, the half-power disc, the beam and the correlation of the two. It establishes that the replay reproduces the ' +
+      'reduction that was delivered, and nothing about the body it shows.' }], recorded => resolve(dirname(image), recorded));
+  return receipt;
+}
+
 export async function restoreManualExecution(directory: string, options: { readonly target: string; readonly scratch?: string; readonly archive?: string; readonly mask?: boolean; readonly dryRun?: boolean } = { target: 'Europa' }) {
   const work = resolve(directory), unpacked = resolve(work, 'unpacked');
   await mkdir(unpacked, { recursive: true });
@@ -322,13 +383,13 @@ export async function restoreManualExecution(directory: string, options: { reado
   const logs = resolve(work, 'logs');
   await mkdir(logs, { recursive: true });
   for (const archive of (await readdir(resolve(aux, 'log'))).filter(real)) run('tar', ['xzf', resolve(aux, 'log', archive), '-C', logs], work);
-  let maps: ReadonlyMap<string, readonly number[]> | null = null;
+  let maps: ReadonlyMap<string, readonly number[]> | null = null, mapLog: string | null = null;
   for (const name of (await readdir(logs)).filter(real)) {
-    try { maps = resolveNamedMaps(calibration, await readFile(resolve(logs, name), 'utf8')); break; } catch { continue; }
+    try { maps = resolveNamedMaps(calibration, await readFile(resolve(logs, name), 'utf8')); mapLog = resolve(logs, name); break; } catch { continue; }
   }
-  if (!maps) throw new Error(`No log in ${logs} records the spectral-window maps the reduction script names.`);
-  const imaging = manualImaging(await readFile(resolve(aux, 'script/scriptForImaging.py'), 'utf8'),
-    await readFile(resolve(aux, 'script/scriptForImagingPrep.py'), 'utf8'));
+  if (!maps || !mapLog) throw new Error(`No log in ${logs} records the spectral-window maps the reduction script names.`);
+  const imagingScript = resolve(aux, 'script/scriptForImaging.py'), preparationScript = resolve(aux, 'script/scriptForImagingPrep.py');
+  const imaging = manualImaging(await readFile(imagingScript, 'utf8'), await readFile(preparationScript, 'utf8'));
 
   const tables = resolve(work, 'calibration');
   await mkdir(tables, { recursive: true });
@@ -339,12 +400,12 @@ export async function restoreManualExecution(directory: string, options: { reado
   const missing = manualTables(calibration).filter(table => !staged.includes(table));
   if (missing.length) throw new Error(`The delivery is missing ${missing.length} table(s) the reduction script applies: ${missing[0]}`);
 
-  let mask: string | null = null;
+  let mask: string | null = null, maskArchive: string | null = null;
   if (options.mask !== false) {
     const products = resolve(work, 'products');
     await mkdir(products, { recursive: true });
-    const drawn = await findOne(resolve(aux, 'product'), name => name.endsWith('.mask.tgz'), 'CLEAN mask archive');
-    if (!(await readdir(products)).filter(real).length) run('tar', ['xzf', drawn, '-C', products], work);
+    maskArchive = await findOne(resolve(aux, 'product'), name => name.endsWith('.mask.tgz'), 'CLEAN mask archive');
+    if (!(await readdir(products)).filter(real).length) run('tar', ['xzf', maskArchive, '-C', products], work);
     mask = resolve(products, (await readdir(products)).filter(real).find(name => name.endsWith('.mask'))!);
   }
 
@@ -360,16 +421,31 @@ export async function restoreManualExecution(directory: string, options: { reado
   const path = resolve(work, 'restore-manual.py');
   await writeFile(path, source);
   const casa = await toolchainPath('casa');
-  if (options.dryRun) return { script: path, image: `${imageBase}.fits`, calibration, imaging, restored: null, comparison: null };
-  run(resolve(casa, 'venv/bin/python'), [path], work);
-
   const image = `${imageBase}.fits`;
+  if (options.dryRun) return { script: path, image, calibration, imaging, restored: null, comparison: null, record: null, receipt: null };
+
+  const casaPins = await casaSoftware();
+  const productRun = manualRestoreRun(await manualDeliveryPins({ asdm, calibrationScript: script, imagingScript, preparationScript, log: mapLog,
+    tables: bundle, mask: maskArchive }), { target: options.target, script: source, mask: maskArchive }, casaPins.software, casaPins.toolchainDigest);
+  // A restore is an import, five calibration stages and a clean; it runs for hours. It is skipped only when the record beside
+  // the image says this same delivery, script and CASA made it and the image is still the file that run wrote.
+  const recordPath = productRecordPath(image);
+  const reused = await sameRun(await readProductRecord(recordPath), productRun, () => image);
+  if (!reused) { await rm(recordPath, { force: true }); run(resolve(casa, 'venv/bin/python'), [path], work); }
+
   const restored = readContinuumImage(await readFile(image));
+  if (typeof restored.header.BUNIT !== 'string') throw new Error(`${image} states no BUNIT, so the record could not say what its numbers are.`);
+  if (!reused) {
+    await writeProductRecord(recordPath, productRun, [{ path: basename(image), file: image, units: restored.header.BUNIT,
+      conventions: { axes: [restored.header.CTYPE1, restored.header.CTYPE2].filter(value => typeof value === 'string').join(', '), phaseCentre: 'TRACKFIELD: the ephemeris the ASDM carries',
+        primaryBeam: 'primary-beam corrected (tclean pbcor)', beam: 'BMAJ, BMIN and BPA in degrees, as the restoring beam' } }]);
+  }
   const comparison = options.archive
     ? { measurement: measureSource(restored, 700, 600), archive: measureSource(readContinuumImage(await readFile(options.archive)), 700, 600),
       difference: compareImages(restored, readContinuumImage(await readFile(options.archive)), 600) }
     : null;
-  return { script: path, image, calibration, imaging, restored, comparison };
+  const receipt = comparison && options.archive ? await recordArchiveComparison(image, options.archive, comparison) : null;
+  return { script: path, image, calibration, imaging, restored, comparison, record: recordPath, receipt };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
@@ -388,6 +464,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   console.log(`Replayed ${result.calibration.steps.size - result.calibration.solvedSteps.length} steps of a CASA ${result.calibration.casaVersion} manual reduction with casatasks 6.7.`);
   console.log(`Imaged ${imaging.imageSize[0]}x${imaging.imageSize[1]} of ${imaging.cell}, ${imaging.weighting} robust ${imaging.robust}, ${imaging.iterations} iterations.`);
   console.log(`  ${result.image}`);
+  console.log(`  record ${result.record}`);
+  if (result.receipt) console.log(`  archive comparison ${result.receipt}`);
   if (result.comparison) {
     const { measurement, archive, difference } = result.comparison;
     const line = (name: string, value: string) => console.log(`  ${name.padEnd(22)}${value}`);

@@ -10,7 +10,9 @@
  * A coronagraph band's mosaic is PSF-subtracted: most pixels are residual noise, and how well KLIP matches changes with distance
  * from the star, so its receipt also gives the RMS difference and correlation in annuli around the target's position.
  * MAST's product must name the program's band in its own header (the mask is not in the archive's filter list).
- * The receipt is written beside the program as <program id>.<band>.reproduction.json, naming the toolchain and digests. */
+ * The receipt is written beside the program as <program id>.<band>.reproduction.json, naming the toolchain and digests, and the
+ * agreement it establishes is added as `archive-agreement` evidence to the product record the stage wrote beside the mosaic. A
+ * mosaic with no record is refused. */
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -20,7 +22,7 @@ import { skyProjection } from '../../../fits-sky.mts';
 import { mastFile } from '../mast.mts';
 import { PROGRAMS } from './archive.mts';
 import { bandOfHeader } from './bands.mts';
-import { readImagingProgram } from './image3.mts';
+import { readImagingProgram, recordProductEvidence } from './image3.mts';
 
 const WCS_CARDS = ['NAXIS1', 'NAXIS2', 'CTYPE1', 'CTYPE2', 'CRPIX1', 'CRPIX2', 'CRVAL1', 'CRVAL2', 'CDELT1', 'CDELT2', 'PC1_1', 'PC1_2', 'PC2_1', 'PC2_2', 'BUNIT'];
 
@@ -115,7 +117,13 @@ export async function compareWithMast(id: string, band: string, local: string, s
   };
   const path = resolve(PROGRAMS, `${id}.${band}.reproduction.json`);
   await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
-  return { path, receipt };
+  // What this comparison establishes, added to the record of the run that made the mosaic. A mosaic with no record beside it is
+  // refused here: nothing states which exposures, settings and pipeline made that file, so agreement with MAST says nothing
+  // about a reproduction.
+  const record = await recordProductEvidence(local, 'archive-agreement', path, `These level-2 exposures, this CRDS context and this pinned pipeline ` +
+    `reproduce MAST's own level-3 ${entry.stage === 'coron3' ? 'PSF-subtracted mosaic' : 'mosaic'} of this observation; the receipt holds the grid cards, the ` +
+    `share of identical pixels and the brightness agreement it was measured on. It establishes that MAST's software was run the way MAST ran it, and nothing about the sky.`);
+  return { path, receipt, record };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

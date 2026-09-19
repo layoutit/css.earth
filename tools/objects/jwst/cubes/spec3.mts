@@ -10,22 +10,28 @@
  * the cube and does not change it. The run is stopped if its resident memory passes the ceiling (default 6 GiB; four NIRSpec
  * G395H exposures peak at 4.1 GiB).
  *
- * The cube is then compared with MAST's level-3 cube sample by sample, and a receipt is written beside the program. The two are
+ * The run writes a `cssearth-telescope-product@1` record beside the cube (`<cube>.product.json`): the exposures at their pinned
+ * digests, the settings and CRDS context, the pinned pipeline, and the cube with the units and conventions its own header
+ * states. A cube whose record says this same run made it is not built again.
+ *
+ * The cube is then compared with MAST's level-3 cube sample by sample, a receipt is written beside the program, and the
+ * agreement it establishes is added to that record as `archive-agreement` evidence. The two are
  * on one grid or the comparison fails: a cube's grid follows from its members alone.
  *
  * --arcsec-per-pixel builds the cube on a finer sky grid than the pipeline's 0.1 arcsecond instead. That cube has no MAST twin, so
  * it is not compared; run the default first, so the receipt shows these exposures and this toolchain reproduce MAST's cube. */
-import { mkdir, readdir, writeFile, open } from 'node:fs/promises';
+import { mkdir, readdir, rm, writeFile, open } from 'node:fs/promises';
 import { totalmem } from 'node:os';
-import { resolve } from 'node:path';
+import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../../src/platform/sha256.mts';
 import { requireRecord } from '../../../source-values.mts';
+import { productRecordPath, readProductRecord, sameRun, writeProductRecord } from '../../product-record.mts';
 import { eurekaToolchain } from '../toolchain.mts';
 import { freeMemoryPercent, mastFile, toolchainPython } from '../mast.mts';
 import { PROGRAMS } from '../imaging/archive.mts';
 import { bandOfHeader } from '../imaging/bands.mts';
-import { imagingMembers, readImagingProgram } from '../imaging/image3.mts';
+import { eurekaPins, imagingMembers, imagingProductRun, level3ProductFacts, readImagingProgram, recordProductEvidence } from '../imaging/image3.mts';
 import { openSpectralCube, type SpectralCube } from './spectral-cube.mts';
 
 const SPEC3 = `
@@ -50,6 +56,15 @@ export async function runSpec3(id: string, band: string, work: string, options: 
   if (fine !== undefined && !(fine >= 0.02 && fine <= 0.1)) throw new RangeError('A finer cube grid is between 0.02 and 0.1 arcsecond per pixel.');
   const output = resolve(work, fine === undefined ? 'spec3' : `spec3-${fine}`), asn = resolve(work, `${entry.observation}_asn.json`);
   await mkdir(output, { recursive: true });
+  const run = imagingProductRun(program, entry, 'spec3', { extract1d: 'skipped', ...(fine === undefined ? {} : { arcsecPerPixel: fine }) }, await eurekaPins());
+  // The stage names the cube after the grating and filter itself, so a cube already in the output directory is the one to ask
+  // about: it is reused only when the record beside it says these same exposures, settings and pipeline made it.
+  const made = (await readdir(output).catch(() => [])).filter(name => name.endsWith('_s3d.fits'));
+  if (made.length === 1) {
+    const cube = resolve(output, made[0]!);
+    if (await sameRun(await readProductRecord(productRecordPath(cube)), run, () => cube)) return { cube, reused: true, peakRssBytes: 0, seconds: 0, members: files.length };
+    await rm(productRecordPath(cube), { force: true });
+  }
   // The stage names its product after the grating and filter itself, so the association's product stops at the instrument.
   await writeFile(asn, `${JSON.stringify({ asn_type: 'spec3', asn_rule: 'candidate_Asn_Lv3NRSIFU', program: program.programme.padStart(5, '0'), asn_id: 'o001', target: 't001', asn_pool: 'cssearth',
     products: [{ name: entry.observation.replace(/_[a-z0-9]+-[a-z0-9]+$/u, ''), members: files.map(expname => ({ expname, exptype: 'science' })) }] }, null, 2)}\n`);
@@ -57,7 +72,9 @@ export async function runSpec3(id: string, band: string, work: string, options: 
   const result = await toolchainPython(toolchain, work, SPEC3, [asn, output, ...(fine === undefined ? [] : [String(fine)])], resolve(work, `${entry.observation}${fine === undefined ? '' : `-${fine}`}.log`), { maxRssBytes: ceiling });
   const cubes = (await readdir(output)).filter(name => name.endsWith('_s3d.fits'));
   if (cubes.length !== 1) throw new Error(`${id} ${band}: the stage wrote ${cubes.length} cubes.`);
-  return { cube: resolve(output, cubes[0]!), peakRssBytes: result.peakRssBytes, seconds: requireRecord(JSON.parse(result.lastLine), 'spec3 result').seconds, members: files.length };
+  const cube = resolve(output, cubes[0]!);
+  await writeProductRecord(productRecordPath(cube), run, [{ path: basename(cube), file: cube, ...(await level3ProductFacts(cube)) }]);
+  return { cube, reused: false, peakRssBytes: result.peakRssBytes, seconds: requireRecord(JSON.parse(result.lastLine), 'spec3 result').seconds, members: files.length };
 }
 
 const GRID = ['CRPIX1', 'CRPIX2', 'CRPIX3', 'CRVAL1', 'CRVAL2', 'CRVAL3', 'CDELT1', 'CDELT2', 'CDELT3'] as const;
@@ -76,7 +93,12 @@ export async function compareCubeWithMast(id: string, band: string, local: strin
     grid: { width: ours.width, height: ours.height, planes: ours.planes, arcsecPerPixel: ours.arcsecPerPixel, micrometres: [ours.wavelength(0), ours.wavelength(ours.planes - 1)] }, samples };
   const path = resolve(PROGRAMS, `${id}.${band}.reproduction.json`);
   await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
-  return { path, receipt };
+  // Added to the record of the run that built this cube; a cube with no record beside it is refused, because nothing states
+  // which exposures and pipeline made the file the samples were taken from.
+  const record = await recordProductEvidence(local, 'archive-agreement', path, `These level-2 exposures, this CRDS context and this pinned pipeline reproduce MAST's own ` +
+    `level-3 cube of this observation, compared sample by sample on one grid; the receipt holds the coverage, the identical share and the correlation. It establishes that ` +
+    `MAST's software was run the way MAST ran it, and nothing about the body the cube shows.`);
+  return { path, receipt, record };
 }
 
 /** Sample by sample over both cubes, a plane at a time: how many samples both cover, how many only one covers, how many are

@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict';
-import { readFile, readdir } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
 import { test } from 'node:test';
 import { kernelBankRoot } from '../../spice/kernel-bank.mts';
-import { FILTER_COMBINATIONS, INDEX_COLUMNS, PROGRAMS, colourImages, indexNumber, parseIndex, parseIndexLine, parseProductId, parseProgram, pinProgram } from './archive.mts';
+import { evidenceFor, productRecordPath, readProductRecord, writeProductRecord } from '../product-record.mts';
+import { FILTER_COMBINATIONS, INDEX_COLUMNS, PROGRAM_SCHEMA, PROGRAMS, colourImages, indexNumber, parseIndex, parseIndexLine, parseProductId, parseProgram, pinProgram } from './archive.mts';
 import { GUIDE, LEDGER, SCHEMA, castingObjects, holdings, ledgerGuide, matchShippedObject, measuredPrograms, objectStates, shippedObjects, type Ledger } from './archive-ledger.mts';
-import { POLICY, RECEIPT_SCHEMA, ellipsoidMesh } from './measure.mts';
+import { POLICY, RECEIPT_SCHEMA, addRegistrationEvidence, ellipsoidMesh, registrationRun, registrationSoftware } from './measure.mts';
 
 // Two lines of JNOJNC_0024/INDEX/INDEX.TAB as the PDS serves them, and a methane image made from the second.
 const EUROPA = '"JNOJNC_0024","JUNOCAM-RDR","JUNO-J-JUNOCAM-3-RDR-L1A-V1.0","JNCR_2022272_45C00001_V01",2022-09-29T09:38:05.691,2022-09-29T09:38:16.079,"3                  ","Europa                                                                                                         ",7.4133e+08 <km> ,1515.1 <km>          ,11.7571                  ,0.3597                    ,"EUROPA     ","DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00001_V01.LBL",2023-02-02T20:23:40,"5a1c0c3d0e0f4a8a9b0c1d2e3f405162"';
@@ -58,6 +60,55 @@ test('the reference ellipsoid has the stated semi-axes at its equator and poles'
   const mesh = ellipsoidMesh([1562.6, 1560.3, 1559.5]), radius = (lon: number, lat: number) => mesh.sample(lon, lat);
   assert.ok(Math.abs(radius(0, 0)! - 1562600) < 1 && Math.abs(radius(90, 0)! - 1560300) < 1 && Math.abs(radius(0, 90)! - 1559500) < 1, `${radius(0, 0)} ${radius(90, 0)} ${radius(0, 90)}`);
   assert.throws(() => ellipsoidMesh([1560]), /no triaxial radii/u);
+});
+
+/** A measured program: every image, label and kernel it read pinned as the run that read them left them. */
+const PRODUCT = 'https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00001_V01';
+const MEASURED = parseProgram({ schema: PROGRAM_SCHEMA, id: 'test-program', volume: 'JNOJNC_0024', target: { name: 'EUROPA', naifId: 502, bodyFrame: 'IAU_EUROPA' },
+  kernelSet: 'juno', kernels: ['lsk/naif0012.tls', 'pck/pck00011.tpc'],
+  images: [{ productId: 'JNCR_2022272_45C00001_V01', startTime: '2022-09-29T09:38:05.691Z', altitudeKm: 1515.1, url: `${PRODUCT}.IMG`, bytes: 35438592,
+    sha256: 'a'.repeat(64), labelUrl: `${PRODUCT}.LBL`, labelBytes: 2500, labelSha256: 'b'.repeat(64) }] });
+const KERNELS = [{ path: 'lsk/naif0012.tls', bytes: 5023, sha256: 'c'.repeat(64) }, { path: 'pck/pck00011.tpc', bytes: 129000, sha256: 'd'.repeat(64) }];
+
+test('a registration record pins every image, label and kernel the run read, and the policy it held them to', async () => {
+  const made = registrationRun(MEASURED, KERNELS, await registrationSoftware());
+  assert.equal(made.telescope, 'Juno');
+  assert.equal(made.stage, 'junocam-registration');
+  assert.deepEqual(made.inputs.map(input => [input.role, input.identity, input.bytes, input.sha256]), [
+    ['image JNCR_2022272_45C00001_V01', `${PRODUCT}.IMG`, 35438592, 'a'.repeat(64)],
+    ['label JNCR_2022272_45C00001_V01', `${PRODUCT}.LBL`, 2500, 'b'.repeat(64)],
+    ['kernel', 'juno/lsk/naif0012.tls', 5023, 'c'.repeat(64)],
+    ['kernel', 'juno/pck/pck00011.tpc', 129000, 'd'.repeat(64)]]);
+  assert.deepEqual(made.parameters.policy, POLICY);
+  assert.deepEqual([made.parameters.observer, made.parameters.aberration], [-61, 'LT+S']);
+  // Nothing external runs, so there is no toolchain to pin: the version is the digest of the modules that did the work.
+  assert.equal(made.toolchainDigest, undefined);
+  assert.match(made.software[0]!.version, /^[0-9a-f]{64}$/u);
+  const image = { ...MEASURED.images[0]! };
+  delete image.sha256;
+  assert.throws(() => registrationRun({ ...MEASURED, images: [image] }, KERNELS, []), /carries no digest/u);
+});
+
+test('the measurement adds geometric registration to its own record, and refuses a receipt that has none', async () => {
+  const work = await mkdtemp(join(tmpdir(), 'juno-record-'));
+  try {
+    const name = 'test-program.registration.json', path = join(work, name);
+    await writeFile(path, `${JSON.stringify({ schema: RECEIPT_SCHEMA, program: 'test-program' }, null, 2)}\n`);
+    await writeProductRecord(productRecordPath(path), registrationRun(MEASURED, KERNELS, await registrationSoftware()),
+      [{ path: name, file: path, units: 'pixels for the residuals, seconds for the offsets' }]);
+    const record = await addRegistrationEvidence(path, work);
+    const registration = evidenceFor(record, name, 'geometric-registration');
+    assert.equal(registration.length, 1);
+    assert.equal(registration[0]!.receipt, name);
+    assert.match(registration[0]!.establishes, /limb was fitted to the target's IAU ellipsoid/u);
+    assert.match(registration[0]!.establishes, /not agreement with any archive product/u);
+    assert.equal(evidenceFor(record, name, 'archive-agreement').length, 0, 'fitting our own geometry is not agreement with an archive');
+    assert.deepEqual((await readProductRecord(productRecordPath(path)))!.evidence, [...record.evidence], 'the record on disk is the one returned');
+    // A receipt no run recorded is refused: nothing says which images and kernels the measurement it claims was made from.
+    const other = join(work, 'other.registration.json');
+    await writeFile(other, '{}\n');
+    await assert.rejects(addRegistrationEvidence(other, work), /no product record/u);
+  } finally { await rm(work, { recursive: true, force: true }); }
 });
 
 test('every pinned program has a receipt for exactly its images, from its kernels, within the budget', async () => {

@@ -7,11 +7,17 @@
  * one the program's text PCK states, and the receipt records the offsets and the limb residual on held-out points before
  * and after. `--horizons` also compares the spacecraft's position from the kernel bank with JPL Horizons at each image's
  * start, which checks the trajectory reader against a source that shares none of its code. Nothing external runs here:
- * the reader, the cameras and the fit are this repository's TypeScript. */
+ * the reader, the cameras and the fit are this repository's TypeScript.
+ *
+ * Beside the receipt the run writes that receipt's own record (`<receipt>.product.json`, tools/objects/product-record.mts):
+ * the images and kernels it read at their pinned sizes and digests, the policy the fit was held to, and the digest of the
+ * modules that did it. The measurement is then added to that record as `geometric-registration` evidence, which is what this
+ * stage establishes and no more. Agreement with an archive product is another kind of evidence, and nothing here gives it. */
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { basename, dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { addProductEvidence, productRecordPath, writeProductRecord, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
 import { loadKernelSet, type KernelSet } from '../../spice/kernel-set.mts';
 import { kernelBankPaths } from '../../spice/kernel-bank.mts';
 import { numbers } from '../../spice/text-kernel.mts';
@@ -64,6 +70,48 @@ export async function horizonsCheck(set: KernelSet, program: JunocamProgram, fet
     differencesMeters: rows.map((row, i) => { const ours = set.ephemeris.state(JUNO, program.target.naifId, epochs[i]!).position; return 1000 * Math.hypot(ours[0] - row[2]!, ours[1] - row[3]!, ours[2] - row[4]!); }) };
 }
 
+/** The version of the software that measured a registration: the digest of the modules that decode an image, place it and fit
+ * its limb. Nothing external runs, so there is no installed toolchain to pin. */
+export async function registrationSoftware(): Promise<ProductSoftware[]> {
+  const sources = await Promise.all(['measure.mts', '../terrestrial-layers/junocam.mts', '../terrestrial-layers/strip-refinement.mts']
+    .map(name => readFile(resolve(import.meta.dirname, name))));
+  return [{ name: 'cssearth tools/objects/juno/measure.mts', version: sha256(Buffer.concat(sources)) }];
+}
+
+/** What identifies one registration: every image and label it measured and every kernel it read, each at its pinned size and
+ * digest, with the policy the fit was held to. */
+export function registrationRun(program: JunocamProgram, kernels: readonly { path: string; bytes: number; sha256: string }[],
+  software: readonly ProductSoftware[]): ProductRun {
+  const pin = (role: string, identity: string, bytes: number, digest: string | undefined): ProductInput => {
+    if (!digest) throw new Error(`${identity} carries no digest; a record pins what the run read.`);
+    return { role, identity, bytes, sha256: digest };
+  };
+  return {
+    telescope: 'Juno', stage: 'junocam-registration',
+    inputs: [
+      ...program.images.flatMap(image => [pin(`image ${image.productId}`, image.url, image.bytes, image.sha256),
+        pin(`label ${image.productId}`, image.labelUrl, image.labelBytes, image.labelSha256)]),
+      ...kernels.map(kernel => pin('kernel', `${program.kernelSet}/${kernel.path}`, kernel.bytes, kernel.sha256)),
+    ],
+    parameters: { volume: program.volume, target: program.target, observer: JUNO, bands: BANDS, aberration: 'LT+S',
+      ellipsoidStepDegrees: STEP_DEGREES, policy: POLICY },
+    software,
+  };
+}
+
+/** What fitting the lit limb establishes, added to the record of the run that measured it. It is registration against the
+ * geometry the kernels state, and nothing else: it is not agreement with an archive product, and an error the kernels and the
+ * fit share would not show in it. A receipt with no record beside it is refused rather than reported as checked. */
+export async function addRegistrationEvidence(receiptPath: string, repository = resolve(import.meta.dirname, '../../..')) {
+  const product = basename(receiptPath);
+  return addProductEvidence(productRecordPath(receiptPath), [{
+    kind: 'geometric-registration', receipt: relative(repository, receiptPath), product,
+    establishes: 'Each image\'s lit limb was fitted to the target\'s IAU ellipsoid at the geometry the kernel bank states, and the receipt gives the pointing and ' +
+      'ephemeris offsets found and the limb residual on control points held out of the fit. It establishes that this repository\'s camera, trajectory and pointing ' +
+      'put the image on the body to within that residual; it is not agreement with any archive product, and an error the kernels and the fit share would not show in it.',
+  }], output => resolve(dirname(receiptPath), output));
+}
+
 export async function measureProgram(id: string, work: string, { raw, horizons = false }: { raw?: string; horizons?: boolean } = {}) {
   const program = await readProgram(id); await mkdir(work, { recursive: true });
   const set = await loadKernelSet(await kernelBankPaths(program.kernelSet, program.kernels)), radiiKm = numbers(set.pool, `BODY${program.target.naifId}_RADII`);
@@ -83,7 +131,14 @@ export async function measureProgram(id: string, work: string, { raw, horizons =
   const receipt = { schema: RECEIPT_SCHEMA, program: program.id, measured: new Date().toISOString().slice(0, 10), target: { ...program.target, radiiKm }, policy: POLICY,
     kernels: set.kernels.map(kernel => ({ path: program.kernels.find(path => kernel.path.endsWith(path)) ?? kernel.path, bytes: kernel.bytes, sha256: kernel.sha256 })), images,
     ...(horizons ? { horizons: await horizonsCheck(set, program) } : {}) };
-  await writeFile(resolve(PROGRAMS, `${program.id}.registration.json`), JSON.stringify(receipt, null, 2) + '\n');
+  const path = resolve(PROGRAMS, `${program.id}.registration.json`);
+  await writeFile(path, JSON.stringify(receipt, null, 2) + '\n');
+  // The record of what this measurement read, then the measurement itself as the one kind of evidence it is.
+  await writeProductRecord(productRecordPath(path), registrationRun(program, receipt.kernels, await registrationSoftware()),
+    [{ path: basename(path), file: path, units: 'pixels for the residuals, seconds for the offsets',
+      conventions: { frame: `${program.target.bodyFrame}, the triaxial IAU ellipsoid the text PCK states`,
+        residual: 'root mean square over control points held out of the fit', offsets: 'added to the label\'s pointing and ephemeris epochs' } }]);
+  await addRegistrationEvidence(path);
   return receipt;
 }
 

@@ -111,6 +111,24 @@ export async function sameRun(record: ProductRecord | null, run: ProductRun, loc
   return true;
 }
 
+/** Where a product's record sits: beside the product, under its own name. Every toolkit writes it there, so a reader holding a
+ * product knows where its record is without knowing which telescope made it. */
+export const productRecordPath = (product: string): string => `${product}.product.json`;
+
+/** Add what a later check established to the record of the run that made the product: the one way evidence reaches a record.
+ * Only the evidence list is written, so the run facts stay the ones that run recorded. The outputs must still be the files the
+ * record pins, or the check was of something else. Re-running a check replaces its own entry rather than adding a second, so a
+ * comparison run twice leaves the same bytes. */
+export async function addProductEvidence(path: string, entries: readonly ProductEvidence[], locate: (output: string) => string): Promise<ProductRecord> {
+  const record = await readProductRecord(path);
+  if (!record) throw new Error(`There is no product record at ${path}: the stage that made this product writes one, and evidence is added to it.`);
+  if (!await sameRun(record, record, locate)) throw new Error(`The products ${path} records are not the files on disk now; evidence about other files is refused.`);
+  const kept = record.evidence.filter(held => !entries.some(added => added.kind === held.kind && added.product === held.product && added.receipt === held.receipt));
+  const updated = parseProductRecord({ ...record, evidence: [...kept, ...entries] });
+  await writeFile(path, `${JSON.stringify(updated, null, 2)}\n`);
+  return updated;
+}
+
 /** The evidence of one kind for one exact product. A caller that needs archive agreement asks for it by name; evidence of
  * another kind, or for another product, does not answer. */
 export const evidenceFor = (record: ProductRecord, product: string, kind: EvidenceKind): readonly ProductEvidence[] =>

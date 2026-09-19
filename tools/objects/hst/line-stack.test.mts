@@ -1,14 +1,17 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { readFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { sha256File } from '../../../src/platform/sha256.mts';
+import { evidenceFor, productRecordPath, readProductRecord, writeProductRecord } from '../product-record.mts';
 import { PROGRAMS } from './archive.mts';
 import {
   accumulatedImage, addSample, discMetrics, gridPoint, limbFallOff, newAccumulator, parseLineStack, quadraticFit, radialProfile, rayleighPerSample,
   rejectionReason, inSubset, sampleFor, clippedMean, median, type StackGrid,
 } from './line-stack-reduction.mts';
 import { frameEphemeris, horizonsRequestKey, horizonsRowJulianDate, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses } from './line-stack-ephemeris.mts';
-import { readLineStack } from './line-stack.mts';
+import { addStackEvidence, lineStackSoftware, readLineStack, stackPath, stackRun } from './line-stack.mts';
 
 const STACK = 'europa-oxygen-aurora';
 /** A Horizons response whose rows are in time order while the epochs were asked for in another. */
@@ -192,6 +195,57 @@ test('the receipt states this run’s numbers beside the published ones', async 
   assert.ok(mirror && mirror.adoptedDuskDawnRatio > 1.3 && mirror.mirroredDuskDawnRatio < 1.2, JSON.stringify(mirror));
   const disc = receipt.published.find(value => value.id === 'disc-1356')!;
   assert.ok(disc.measured !== null && disc.measured > disc.value && disc.measured < disc.valueHigh!);
+});
+
+test('a stacked set’s record pins the frames that went into that set, and what placed them', async () => {
+  const definition = await readLineStack(STACK), line = definition.lines.find(entry => entry.id === 'oi1356')!;
+  const used = definition.frames.filter(frame => !frame.rejected).slice(0, 3).map(frame => frame.name);
+  const made = await stackRun(definition, line, 'all', used, await lineStackSoftware());
+  assert.equal(made.telescope, 'HST');
+  assert.equal(made.stage, 'line-stack');
+  assert.deepEqual(made.inputs.slice(0, 2).map(input => input.role), ['stack definition', 'Horizons responses']);
+  assert.equal(made.inputs[0]!.sha256, (await sha256File(stackPath(STACK))).sha256, 'the definition as it is on disk');
+  // The frames of this set, at the sizes and digests the definition pins, and nothing of the frames another set holds.
+  assert.deepEqual(made.inputs.slice(2).map(input => input.identity), [...used].sort().map(name => definition.frames.find(frame => frame.name === name)!.uri));
+  assert.ok(made.inputs.slice(2).every(input => /^[0-9a-f]{64}$/u.test(input.sha256) && input.bytes > 0));
+  assert.deepEqual([made.parameters.line, made.parameters.subset, made.parameters.handedness, made.parameters.gridPixels],
+    ['oi1356', 'all', definition.handedness, definition.grid.pixels]);
+  // There is no installed toolchain: the version is the digest of the modules that did the arithmetic.
+  assert.equal(made.toolchainDigest, undefined);
+  assert.match(made.software[0]!.version, /^[0-9a-f]{64}$/u);
+  await assert.rejects(stackRun(definition, line, 'all', ['o8k901010_x1d.fits'], await lineStackSoftware()), /not a frame the definition pins/u);
+});
+
+test('the receipt’s two checks reach a stack’s record as the different kinds of evidence they are', async () => {
+  const work = await mkdtemp(join(tmpdir(), 'line-stack-record-'));
+  try {
+    const definition = await readLineStack(STACK), line = definition.lines.find(entry => entry.id === 'oi1356')!;
+    const name = 'oi1356-all.fits', product = join(work, name);
+    await writeFile(product, 'a stacked set');
+    await writeProductRecord(productRecordPath(product), await stackRun(definition, line, 'all', [definition.frames.find(frame => !frame.rejected)!.name], await lineStackSoftware()),
+      [{ path: name, file: product, units: 'R' }]);
+    const receipt = 'tools/objects/hst/programs/europa-oxygen-aurora.stack.reproduction.json';
+    const records = await addStackEvidence(work, receipt, {
+      sets: [{ set: 'oi1356-all' }, { set: 'oi1304-all' }],
+      published: [{ quantity: 'dusk-to-dawn ratio at 1356 A', source: 'Roth et al. 2016, 10.1002/2015JA022073', set: 'oi1356-all', measured: 1.55 },
+        { quantity: 'disc mean at 1304 A', source: 'Roth et al. 2016, 10.1002/2015JA022073', set: 'oi1356-all', measured: null }],
+      mirroredHandedness: [{ set: 'oi1356-all' }],
+    });
+    assert.deepEqual(records, [`${name}.product.json`], 'a set the receipt checked nothing of takes no evidence');
+    const record = (await readProductRecord(productRecordPath(product)))!;
+    const published = evidenceFor(record, name, 'published-value'), consistency = evidenceFor(record, name, 'internal-consistency');
+    assert.equal(published.length, 1);
+    assert.equal(published[0]!.receipt, receipt);
+    assert.match(published[0]!.establishes, /Roth et al\. 2016/u);
+    assert.ok(!published[0]!.establishes.includes('disc mean at 1304 A'), 'a published value this run did not measure is not reported as checked');
+    assert.equal(consistency.length, 1);
+    assert.match(consistency[0]!.establishes, /opposite handedness/u);
+    assert.match(consistency[0]!.establishes, /nothing outside\s+them is checked/u);
+    assert.equal(evidenceFor(record, name, 'archive-agreement').length, 0, 'neither check is agreement with an archive product');
+    // A set whose product no stage recorded is refused rather than reported as checked.
+    await assert.rejects(addStackEvidence(work, receipt, { sets: [{ set: 'oi1304-all' }],
+      published: [{ quantity: 'disc mean', source: 'Roth et al. 2016', set: 'oi1304-all', measured: 120 }], mirroredHandedness: null }), /no product record/u);
+  } finally { await rm(work, { recursive: true, force: true }); }
 });
 
 test('a stack definition refuses what it cannot check', async () => {

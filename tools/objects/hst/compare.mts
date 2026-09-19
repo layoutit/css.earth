@@ -14,17 +14,22 @@
  * Recorded beside them: the calibration software version each run used, and every reference file the two headers name
  * differently, which is where a mismatch is looked for first.
  *
- * One receipt per product, beside the program: <program id>.<product>.reproduction.json. */
+ * One receipt per product, beside the program: <program id>.<product>.reproduction.json. The receipt is also added to the
+ * record the stage that made the product wrote beside it, as `archive-agreement` evidence naming that receipt: a product with
+ * no record is refused rather than reported as checked, because nothing then says which run made the file compared. */
 import { access, readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits.mts';
 import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from '../interferometry/fits-table.mts';
 import { mastFile } from '../jwst/mast.mts';
+import { addProductEvidence, productRecordPath, type ProductRecord } from '../product-record.mts';
 import { PROGRAMS, suffixOf } from './archive.mts';
 import { readHstProgram } from './calibrate.mts';
 import { readHstFileHdus, type HstFileHdu } from './product-file.mts';
+
+const REPOSITORY = resolve(import.meta.dirname, '../../..');
 
 /** A product's own account of how it was made; a reproduction that differs starts here. */
 const RUN_CARDS = ['CAL_VER', 'OPUS_VER', 'PROCTIME', 'FILENAME', 'DATE'];
@@ -139,10 +144,21 @@ function differentSettings(ours: FitsHeader, theirs: FitsHeader) {
     .map(key => [key, { ours: ours[key], mast: theirs[key] }]));
 }
 
+/** What agreement with the archive's own product establishes, added to the record of the run that made the re-run product.
+ * `directory` holds that product; the record sits beside it, written by the stage that made it. */
+export async function addArchiveAgreement(directory: string, product: string, receipt: string) {
+  return addProductEvidence(productRecordPath(resolve(directory, product)), [{
+    kind: 'archive-agreement', receipt, product,
+    establishes: `Every extension this product and the archive's own hold on one grid was compared sample by sample, and ${receipt} states how far apart they are. ` +
+      'It establishes that re-running the pipeline over the pinned inputs reproduces what MAST distributes, as closely as that receipt states; it does not establish ' +
+      'that either product is right, and it says nothing about the extensions the receipt lists as not on one grid.',
+  }], output => resolve(directory, output));
+}
+
 export async function compareWithMast(id: string, observation: string, run: string, sources: readonly string[] = []) {
   const { program } = await readHstProgram(id), entry = program.observations.find(other => other.observation === observation);
   if (!entry) throw new Error(`${id} has no observation ${observation}.`);
-  const receipts: { path: string; receipt: Record<string, unknown> }[] = [];
+  const receipts: { path: string; receipt: Record<string, unknown>; record: ProductRecord }[] = [];
   for (const pinned of entry.products) {
     const local = resolve(run, pinned.name);
     if (!await access(local).then(() => true, () => false)) continue;
@@ -172,7 +188,8 @@ export async function compareWithMast(id: string, observation: string, run: stri
     };
     const path = resolve(PROGRAMS, `${id}.${receipt.product}.reproduction.json`);
     await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
-    receipts.push({ path, receipt });
+    const record = await addArchiveAgreement(run, pinned.name, relative(REPOSITORY, path));
+    receipts.push({ path, receipt, record });
   }
   if (!receipts.length) throw new Error(`${observation}: the run directory holds none of the pinned products.`);
   return receipts;

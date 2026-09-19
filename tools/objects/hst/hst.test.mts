@@ -6,9 +6,10 @@ import { join } from 'node:path';
 import { binaryTable, binaryTableHdu, primaryHdu, readFitsHdus } from '../interferometry/fits-table.mts';
 import { parseHstProgram, PROGRAMS, suffixOf } from './archive.mts';
 import { GUIDE, HST_CONFIGURATIONS, isNotAnObject, LEDGER, ledgerGuide, matchTarget, parseLedger, repositoryState, type ShippedObject } from './archive-ledger.mts';
-import { PIPELINES } from './calibrate.mts';
-import { archiveSky, drizzleSettings } from './drizzle.mts';
-import { compareImage, compareTable, pairExtensions } from './compare.mts';
+import { calibrationRun, PIPELINES, productUnits, type PinnedFile } from './calibrate.mts';
+import { archiveSky, drizzleRun, drizzleSettings } from './drizzle.mts';
+import { addArchiveAgreement, compareImage, compareTable, pairExtensions } from './compare.mts';
+import { evidenceFor, productRecordPath, readProductRecord, writeProductRecord } from '../product-record.mts';
 import { readHstFileHdus } from './product-file.mts';
 
 const REPOSITORY = join(import.meta.dirname, '../../..');
@@ -160,14 +161,14 @@ test('each instrument’s pipeline names its own wrapper and reference-path vari
 });
 
 /** A minimal FITS file: an empty primary and one float32 image extension of the given name, version and shape. */
-function imageFile(extname: string, extver: number, width: number, height: number, planes: number, at: (x: number, y: number, plane: number) => number, axes = planes > 1 ? 3 : 2) {
+function imageFile(extname: string, extver: number, width: number, height: number, planes: number, at: (x: number, y: number, plane: number) => number, axes = planes > 1 ? 3 : 2, bunit?: string) {
   const card = (key: string, value: string | number | boolean) => (`${key.padEnd(8)}= ${typeof value === 'string' ? `'${value}'`.padEnd(20)
     : String(typeof value === 'boolean' ? value ? 'T' : 'F' : value).padStart(20)}`).padEnd(80);
   const block = (cards: readonly string[]) => Buffer.from(`${[...cards, 'END'.padEnd(80)].join('')}`.padEnd(Math.ceil((cards.length + 1) * 80 / 2880) * 2880), 'latin1');
   const lengths = [width, height, planes, 1].slice(0, axes).map((length, index) => card(`NAXIS${index + 1}`, length));
   const primary = block([card('SIMPLE', true), card('BITPIX', 8), card('NAXIS', 0), card('EXTEND', true), card('CAL_VER', '3.5.0')]);
   const header = block([card('XTENSION', 'IMAGE'), card('BITPIX', -32), card('NAXIS', axes), ...lengths, card('PCOUNT', 0), card('GCOUNT', 1),
-    card('EXTNAME', extname), card('EXTVER', extver)]);
+    card('EXTNAME', extname), card('EXTVER', extver), ...(bunit ? [card('BUNIT', bunit)] : [])]);
   const samples = width * height * planes, data = Buffer.alloc(Math.ceil(samples * 4 / 2880) * 2880);
   for (let p = 0; p < planes; p++) for (let y = 0; y < height; y++) for (let x = 0; x < width; x++)
     data.writeFloatBE(Math.fround(at(x, y, p)), ((p * height + y) * width + x) * 4);
@@ -339,6 +340,79 @@ test('a drizzled product states how it was drizzled, and only a single-image dri
   assert.equal(archiveSky({ MDRIZSKY: 0 }), 0);
   assert.throws(() => archiveSky({ MDRIZSKY: -3971.0583 }), /subtracted a sky of -3971.0583/u);
   assert.throws(() => archiveSky({}), /does not record the sky/u);
+});
+
+/** The observation a record is written for, its inputs pinned as a run that read them would have them. */
+const CALIBRATED = parseHstProgram(observation({ inputs: [file('od9l12010_raw.fits', 2000), file('od9l12010_wav.fits', 1000)], products: [file('od9l12010_flt.fits')] }));
+const PINS: PinnedFile[] = [{ ...file('od9l12010_raw.fits', 2000), sha256: 'a'.repeat(64) }, { ...file('od9l12010_wav.fits', 1000), sha256: 'b'.repeat(64) }];
+const calibration = () => calibrationRun(CALIBRATED, CALIBRATED.observations[0]!, PINS,
+  { given: 'od9l12010_raw.fits', wavecal: 'od9l12010_wav.fits', references: { 'od9l12010_raw.fits': { DARKFILE: 'oref$n7p1032ao_drk.fits' } } },
+  [{ name: 'stistools', version: '1.4.5' }, { name: 'crds', version: '14.0.0' }, { name: 'cs0.e', version: '3.2.0' }], 'c'.repeat(64));
+/** A calibrated product on disk with the record of the run that made it beside it. */
+async function calibratedProduct(work: string, name = 'od9l12010_flt.fits', level = (x: number, y: number) => x + y) {
+  const product = join(work, name);
+  await writeFile(product, imageFile('SCI', 1, 4, 3, 1, level, 2, 'COUNTS/S'));
+  await writeProductRecord(productRecordPath(product), calibration(), [{ path: name, file: product, ...await productUnits(product) }]);
+  return product;
+}
+
+test('a calibration record pins the observation’s own files, the context that chose its references and what ran', async () => {
+  const work = await mkdtemp(join(tmpdir(), 'hst-record-'));
+  try {
+    const product = await calibratedProduct(work);
+    const record = (await readProductRecord(productRecordPath(product)))!;
+    assert.equal(record.telescope, 'HST');
+    assert.equal(record.stage, 'calibrate');
+    // Every input the run read, at the size and digest it read, named by the archive product it is.
+    assert.deepEqual(record.inputs.map(input => [input.role, input.identity, input.bytes, input.sha256]),
+      [['raw', 'mast:HST/product/od9l12010_raw.fits', 2000, 'a'.repeat(64)], ['wav', 'mast:HST/product/od9l12010_wav.fits', 1000, 'b'.repeat(64)]]);
+    assert.equal(record.parameters.crdsContext, 'hst_1358.pmap');
+    assert.equal(record.parameters.pipeline, 'calstis');
+    assert.deepEqual(record.parameters.references, { 'od9l12010_raw.fits': { DARKFILE: 'oref$n7p1032ao_drk.fits' } });
+    assert.deepEqual(record.software.map(entry => entry.name), ['stistools', 'crds', 'cs0.e']);
+    assert.equal(record.toolchainDigest, 'c'.repeat(64), 'the pins the software was installed from');
+    // The product is pinned as the run wrote it, and states its own units.
+    assert.equal(record.outputs[0]!.path, 'od9l12010_flt.fits');
+    assert.equal(record.outputs[0]!.units, 'COUNTS/S');
+    assert.equal(record.outputs[0]!.conventions?.extensions, 'SCI,1');
+    assert.deepEqual(record.evidence, [], 'the run that made a product has checked nothing about it');
+  } finally { await rm(work, { recursive: true, force: true }); }
+});
+
+test('the comparison adds its receipt to the record of the exact product it compared, and refuses a product with none', async () => {
+  const work = await mkdtemp(join(tmpdir(), 'hst-evidence-'));
+  try {
+    const product = await calibratedProduct(work), name = 'od9l12010_flt.fits';
+    const receiptPath = 'tools/objects/hst/programs/test.od9l12010_flt.reproduction.json';
+    const record = await addArchiveAgreement(work, name, receiptPath);
+    const agreement = evidenceFor(record, name, 'archive-agreement');
+    assert.equal(agreement.length, 1);
+    assert.equal(agreement[0]!.receipt, receiptPath);
+    assert.match(agreement[0]!.establishes, /reproduces what MAST distributes/u);
+    assert.equal(evidenceFor(record, name, 'internal-consistency').length, 0, 'agreement with the archive is not consistency of our own');
+    // The same comparison run again says the same thing once, rather than twice.
+    assert.equal(evidenceFor(await addArchiveAgreement(work, name, receiptPath), name, 'archive-agreement').length, 1);
+    // A product no stage recorded is refused: nothing says which run made the file that was compared.
+    await writeFile(join(work, 'od9l12010_crj.fits'), 'not a recorded product');
+    await assert.rejects(addArchiveAgreement(work, 'od9l12010_crj.fits', receiptPath), /no product record/u);
+    // A product that is not the one its record pins is refused too.
+    await writeFile(product, imageFile('SCI', 1, 4, 3, 1, (x, y) => x + y + 1, 2, 'COUNTS/S'));
+    await assert.rejects(addArchiveAgreement(work, name, receiptPath), /not the files on disk/u);
+  } finally { await rm(work, { recursive: true, force: true }); }
+});
+
+test('a drizzle record states what went in and the settings the archive’s own product gave', () => {
+  const inputs = [{ role: 'calibrated exposure, this run\'s own product', identity: 'idr203wtq_flt.fits', bytes: 11, sha256: 'a'.repeat(64) },
+    { role: 'archive drizzled product, read for the settings of the run that made it', identity: 'mast:HST/product/idr203wtq_drz.fits', bytes: 22, sha256: 'b'.repeat(64) },
+    { role: 'archive calibrated exposure, read for the sky its drizzle subtracted', identity: 'mast:HST/product/idr203wtq_flt.fits', bytes: 33, sha256: 'c'.repeat(64) }];
+  const settings = drizzleSettings(DRIZZLED, 'idr203wtq_drz');
+  const made = drizzleRun(CALIBRATED, CALIBRATED.observations[0]!, inputs, settings, archiveSky({ MDRIZSKY: 0 }), [{ name: 'drizzlepac', version: '3.11.0' }], 'd'.repeat(64));
+  assert.equal(made.stage, 'drizzle');
+  assert.deepEqual(made.inputs, inputs, 'the exposure drizzled and the archive files the settings and the sky were read from');
+  assert.deepEqual([made.parameters.kernel, made.parameters.pixfrac, made.parameters.scale, made.parameters.fillval, made.parameters.units],
+    ['square', 1, 0.03962000086903572, 'INDEF', 'cps']);
+  assert.deepEqual([made.parameters.skySubtraction, made.parameters.archiveSky, made.parameters.images], ['off', 0, 1]);
+  assert.equal(made.toolchainDigest, 'd'.repeat(64));
 });
 
 test('AstroDrizzle reproduces the archive’s grid exactly; what it does not reproduce is the archive’s unrecorded DQ mask', async () => {

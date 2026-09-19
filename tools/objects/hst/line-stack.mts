@@ -23,13 +23,19 @@
  * What it writes to the output directory: `<line>-<subset>.fits`, whose `SCI` extension is the exposure-weighted mean surface
  * brightness in Rayleigh and whose `ERR` extension is its standard error, with the scale, orientation, handedness, frame
  * count and exposure stated in cards; `registration.json`, which says how every visit was placed; and, with `--receipt`, the
- * reproduction receipt beside the definition. */
+ * reproduction receipt beside the definition.
+ *
+ * Beside every stacked product it also writes that product's own record (`<product>.product.json`,
+ * tools/objects/product-record.mts): the frames that went into that set at their pinned digests, the definition and Horizons
+ * responses that placed them, and the settings of the line and subset. With `--receipt` the receipt's two checks are added to
+ * those records as what they are: agreement with a published value, and the consistency of our own two handednesses. */
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits.mts';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '../../../src/platform/sha256.mts';
+import { addProductEvidence, pinFile, productRecordPath, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
 import { PROGRAMS } from './archive.mts';
 import {
   accumulatedImage, addSample, clippedMean, discMetrics, gridPoint, inSubset, limbFallOff, median, newAccumulator, parseLineStack,
@@ -423,14 +429,53 @@ export function measureSet(definition: LineStackDefinition, set: StackSet): SetM
     exposureHours: set.accumulator.exposureSeconds / 3600, ...metrics, pedestalRayleigh: fall.pedestalRayleigh, limbRayleigh: fall.limbRayleigh, eFoldingKm: fall.eFoldingKm };
 }
 
-/** Everything one run of the stage produced, written where the caller asked for it. */
+/** The version of the software that stacked a set. There is no installed toolchain here: the reduction is this repository's
+ * own TypeScript, so what a record can state is the digest of the modules that do the arithmetic. */
+export async function lineStackSoftware(): Promise<ProductSoftware[]> {
+  const sources = await Promise.all(['line-stack.mts', 'line-stack-reduction.mts', 'line-stack-ephemeris.mts']
+    .map(name => readFile(resolve(import.meta.dirname, name))));
+  return [{ name: 'cssearth tools/objects/hst/line-stack.mts', version: sha256(Buffer.concat(sources)) }];
+}
+
+/** What identifies one stacked set: the frames that went into this one at their pinned sizes and digests, the definition and
+ * the pinned Horizons responses that placed them, and the line, subset and grid it was stacked on. */
+export async function stackRun(definition: LineStackDefinition, line: StackLine, subset: string, frames: readonly string[],
+  software: readonly ProductSoftware[]): Promise<ProductRun> {
+  const pinned = new Map(definition.frames.map(frame => [frame.name, frame]));
+  const inputs: ProductInput[] = [
+    { role: 'stack definition', identity: `tools/objects/hst/programs/${definition.id}.stack.json`, ...await pinFile(stackPath(definition.id)) },
+    { role: 'Horizons responses', identity: `tools/objects/hst/programs/${definition.horizons.responses}`, ...await pinFile(resolve(PROGRAMS, definition.horizons.responses)) },
+    ...[...frames].sort().map(name => {
+      const frame = pinned.get(name);
+      if (!frame) throw new Error(`${name} went into the stack but is not a frame the definition pins.`);
+      return { role: `frame, programme ${frame.programme}`, identity: frame.uri, bytes: frame.bytes, sha256: frame.sha256 };
+    }),
+  ];
+  return {
+    telescope: 'HST', stage: 'line-stack', inputs,
+    parameters: { stack: definition.id, target: definition.target, instrument: definition.instrument, opticalElement: definition.opticalElement,
+      line: line.id, wavelengthAngstrom: line.wavelengthAngstrom, removeReflectedContinuum: line.removeReflectedContinuum, subset,
+      handedness: definition.handedness, gridPixels: definition.grid.pixels, gridHalfWidthRadii: definition.grid.halfWidthRadii,
+      bodyRadiusKm: definition.bodyRadiusKm },
+    software,
+  };
+}
+
+/** Everything one run of the stage produced, written where the caller asked for it, each product beside the record of the run
+ * that made it. A record's evidence list is empty here: what a stack was checked against is added by the stage that checked
+ * it, from the receipt (`addStackEvidence`). */
 export async function writeProducts(definition: LineStackDefinition, run: LineStackRun, outputDirectory: string) {
   await mkdir(outputDirectory, { recursive: true });
-  const written: string[] = [];
+  const written: string[] = [], software = await lineStackSoftware();
   for (const set of run.sets) {
     if (!set.accumulator.frames.length) continue;
     const name = `${set.line.id}-${set.subset}.fits`;
     await writeFile(resolve(outputDirectory, name), stackProduct(definition, set, run.handedness));
+    await writeProductRecord(productRecordPath(resolve(outputDirectory, name)),
+      await stackRun(definition, set.line, set.subset, [...new Set(set.accumulator.frames)], software),
+      [{ path: name, file: resolve(outputDirectory, name), units: 'R',
+        conventions: { grid: 'body radii from the body centre, body north up and celestial east left', handedness: run.handedness,
+          extensions: 'SCI the exposure-weighted mean surface brightness, ERR its standard error' } }]);
     written.push(name);
   }
   const profiles: Record<string, unknown> = {};
@@ -517,6 +562,36 @@ export function stackReceipt(run: LineStackRun & { mirrored?: readonly StackSet[
   };
 }
 
+/** The two checks the receipt makes, as much of it as the evidence needs. */
+export interface StackChecks {
+  readonly sets: readonly { readonly set: string }[];
+  readonly published: readonly { readonly quantity: string; readonly source: string; readonly set?: string; readonly measured: number | null }[];
+  readonly mirroredHandedness: readonly { readonly set: string }[] | null;
+}
+
+/** What the receipt's own checks establish, added to the record of the run that stacked each set. The two are not the same
+ * evidence and are not recorded as one: a published value is a number someone else measured, and the mirrored handedness is
+ * this repository's own second reduction of the same frames. A set with no record is refused rather than reported as
+ * checked. */
+export async function addStackEvidence(outputDirectory: string, receipt: string, checks: StackChecks) {
+  const records: string[] = [];
+  for (const { set } of checks.sets) {
+    const product = `${set}.fits`, compared = checks.published.filter(value => value.set === set && value.measured !== null), entries: ProductEvidence[] = [];
+    if (compared.length) entries.push({ kind: 'published-value', receipt, product,
+      establishes: `${receipt} puts this set's ${compared.map(value => value.quantity).join(', ')} beside the published ${compared.map(value => value.source).join('; ')}. ` +
+        'It establishes that this reduction comes to a number someone else measured from the same telescope\'s exposures, as closely as the receipt states beside the ' +
+        'uncertainty they published; it establishes nothing about the quantities they did not publish.' });
+    if (checks.mirroredHandedness?.some(entry => entry.set === set)) entries.push({ kind: 'internal-consistency', receipt, product,
+      establishes: `The same frames were stacked again at the opposite handedness and ${receipt} states what each stack came to. It establishes that the asymmetry ` +
+        'follows the orientation adopted rather than the grid it is drawn on; both stacks are this repository\'s own reduction of the same frames, so nothing outside ' +
+        'them is checked by it.' });
+    if (!entries.length) continue;
+    await addProductEvidence(productRecordPath(resolve(outputDirectory, product)), entries, output => resolve(outputDirectory, output));
+    records.push(productRecordPath(product));
+  }
+  return records;
+}
+
 /** What each stacked set came to, for a run's own log. */
 function measurementsOf(run: LineStackRun) {
   return run.sets.filter(set => set.accumulator.frames.length).map(set => measureSet(run.definition, set));
@@ -539,8 +614,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     `disc ${entry.discMeanRayleigh.toFixed(1).padStart(6)} R  dusk/dawn ${entry.duskDawnRatio.toFixed(2)}  e-folding ${entry.eFoldingKm.toFixed(0)} km`);
   console.log(`wrote ${written.length} products to ${output}`);
   if (flags.includes('--receipt')) {
-    const path = resolve(PROGRAMS, `${definition.id}.stack.reproduction.json`);
-    await writeFile(path, `${JSON.stringify(stackReceipt(run), null, 1)}\n`);
-    console.log(`wrote ${path}`);
+    const path = resolve(PROGRAMS, `${definition.id}.stack.reproduction.json`), receipt = stackReceipt(run);
+    await writeFile(path, `${JSON.stringify(receipt, null, 1)}\n`);
+    const records = await addStackEvidence(output, relative(resolve(import.meta.dirname, '../../..'), path), receipt);
+    console.log(`wrote ${path}, and its evidence into ${records.length} product records`);
   }
 }

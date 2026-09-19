@@ -15,15 +15,21 @@
  *
  * The sky is the archive's own too. Its calibrated exposure records what its drizzle subtracted, in `MDRIZSKY`; a run left to
  * estimate the sky for itself measures something else and shifts every pixel by it. Only a product whose exposure records no
- * subtracted sky is attempted, and it is drizzled with the sky step off. */
+ * subtracted sky is attempted, and it is drizzled with the sky step off.
+ *
+ * Beside every product it writes, the run writes its own record (`<product>.product.json`, tools/objects/product-record.mts):
+ * what went in (this run's calibrated exposure, and the archive files whose headers stated the settings and the sky), the
+ * settings themselves, the drizzlepac and CRDS versions the run reported, and the digest of the toolchain pins they were
+ * installed from. Its evidence list is empty; compare.mts adds the agreement with the archive's own drizzled product. */
 import { mkdir, readdir } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { freeMemoryPercent, mastFile, toolchainPython } from '../jwst/mast.mts';
-import { suffixOf } from './archive.mts';
-import { MEMORY_GUARD, PIPELINES, readHstProgram, REFERENCE_FILES } from './calibrate.mts';
+import { pinFile, productRecordPath, writeProductRecord, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
+import { suffixOf, type HstObservation, type HstProgram } from './archive.mts';
+import { hstSoftware, hstToolchainDigest, MEMORY_GUARD, PIPELINES, readHstProgram, REFERENCE_FILES } from './calibrate.mts';
 import { hstToolchain } from './toolchain.mts';
 import { readHstFileHdus } from './product-file.mts';
 
@@ -44,8 +50,10 @@ astrodrizzle.AstroDrizzle(image, output=settings['output'], build=True, in_memor
 stop.set()
 if stopped: raise SystemExit('AstroDrizzle passed its memory ceiling at %d bytes and was stopped.' % stopped[0])
 import stwcs, drizzlepac
-print(json.dumps({'seconds': round(time.time() - start, 1), 'peakRssBytes': peak, 'references': references,
-                  'stwcs': stwcs.__version__, 'drizzlepac': drizzlepac.__version__}))
+# What ran, for the product's own record: the packages that put the exposure on the sky and drizzled it, and CRDS.
+software = [{'name': 'stwcs', 'version': stwcs.__version__}, {'name': 'drizzlepac', 'version': drizzlepac.__version__},
+            {'name': 'crds', 'version': crds.__version__}]
+print(json.dumps({'seconds': round(time.time() - start, 1), 'peakRssBytes': peak, 'references': references, 'software': software}))
 `;
 
 export interface DrizzleSettings { readonly output: string; readonly kernel: string; readonly pixfrac: number; readonly scale: number; readonly fillval: string; readonly units: string }
@@ -67,6 +75,19 @@ export function drizzleSettings(header: Readonly<Record<string, unknown>>, outpu
     scale: requireFiniteNumber(header.D001SCAL, 'D001SCAL'), fillval: requireString(header.D001FVAL, 'D001FVAL').trim(), units: requireString(header.D001OUUN, 'D001OUUN').trim() };
 }
 
+/** What identifies one drizzle: what went in (this run's calibrated exposure and the archive files its settings and sky were
+ * read from), the settings themselves, and the software that ran. */
+export function drizzleRun(program: HstProgram, entry: HstObservation, inputs: readonly ProductInput[], settings: DrizzleSettings, sky: number,
+  software: readonly ProductSoftware[], toolchainDigest: string): ProductRun {
+  return {
+    telescope: 'HST', stage: 'drizzle', inputs,
+    parameters: { instrument: entry.instrument, detector: entry.detector, opticalElement: entry.opticalElement, crdsContext: program.crdsContext,
+      kernel: settings.kernel, pixfrac: settings.pixfrac, scale: settings.scale, fillval: settings.fillval, units: settings.units,
+      distortionFromUpdatewcs: true, skySubtraction: 'off', archiveSky: sky, images: 1 },
+    software, toolchainDigest,
+  };
+}
+
 export async function runDrizzle(id: string, observation: string, work: string, options: { maxRssBytes?: number } = {}) {
   const { program } = await readHstProgram(id), entry = program.observations.find(other => other.observation === observation);
   if (!entry) throw new Error(`${id} has no observation ${observation}.`);
@@ -78,7 +99,7 @@ export async function runDrizzle(id: string, observation: string, work: string, 
   if (!(free >= 2 * ceiling)) throw new Error(`Only ${(free / 2 ** 30).toFixed(1)} GiB of memory is free; the drizzle needs twice its ${(ceiling / 2 ** 30).toFixed(1)} GiB ceiling.`);
   const run = resolve(work, 'run'), output = resolve(work, 'drizzle');
   await mkdir(output, { recursive: true });
-  const results: { product: string; local: string; archiveSky: number; seconds: number; peakRssBytes: number; versions: Record<string, string> }[] = [];
+  const results: { product: string; local: string; record: string; archiveSky: number; seconds: number; peakRssBytes: number; versions: Record<string, string> }[] = [];
   for (const product of drizzled) {
     // A `_drc` is drizzled from the CTE-corrected exposure, a `_drz` from the plain one.
     const suffix = suffixOf(product.name) === 'DRC' ? 'flc' : 'flt';
@@ -89,14 +110,27 @@ export async function runDrizzle(id: string, observation: string, work: string, 
     // The archive's own calibrated exposure says what sky its drizzle removed; the run is only attempted where that is none.
     const exposure = entry.products.find(other => other.name === name);
     if (!exposure) throw new Error(`${product.name}: the archive's own ${suffix} exposure is not pinned.`);
-    const sky = archiveSky((await readHstFileHdus(await mastFile(exposure, resolve(work, 'mast')))).find(hdu => hdu.header.EXTNAME === 'SCI')!.header);
+    const theirExposure = await mastFile(exposure, resolve(work, 'mast'));
+    const sky = archiveSky((await readHstFileHdus(theirExposure)).find(hdu => hdu.header.EXTNAME === 'SCI')!.header);
     const toolchain = await hstToolchain(program.crdsContext);
     const result = await toolchainPython(toolchain, output, DRIZZLE, [image, pipeline.referenceVariable, program.crdsContext, String(ceiling), JSON.stringify(settings)],
       resolve(work, `${product.name}.drizzle.log`), { maxRssBytes: ceiling });
     const reported = requireRecord(JSON.parse(result.lastLine), 'drizzle result');
-    results.push({ product: product.name, local: resolve(output, product.name), archiveSky: sky, seconds: requireFiniteNumber(reported.seconds, 'seconds'),
+    const software = hstSoftware(reported.software);
+    // What went in, each at the bytes this run read: our own exposure, and the archive files its settings and sky came from.
+    const inputs: ProductInput[] = [
+      { role: 'calibrated exposure, this run\'s own product', identity: name, ...await pinFile(image) },
+      { role: 'archive drizzled product, read for the settings of the run that made it', identity: product.uri, ...await pinFile(theirs) },
+      { role: 'archive calibrated exposure, read for the sky its drizzle subtracted', identity: exposure.uri, ...await pinFile(theirExposure) },
+    ];
+    const made = drizzleRun(program, entry, inputs, settings, sky, software, await hstToolchainDigest());
+    await writeProductRecord(productRecordPath(resolve(output, product.name)), made, [{ path: product.name, file: resolve(output, product.name), units: settings.units,
+      conventions: { grid: 'the archive product\'s own drizzle grid, from its D001 cards', pixels: `${settings.scale}" a pixel, ${settings.kernel} kernel, pixfrac ${settings.pixfrac}`,
+        sky: 'none subtracted; the archive\'s own exposure records MDRIZSKY 0' } }]);
+    results.push({ product: product.name, local: resolve(output, product.name), record: productRecordPath(product.name), archiveSky: sky,
+      seconds: requireFiniteNumber(reported.seconds, 'seconds'),
       peakRssBytes: Math.max(requireFiniteNumber(reported.peakRssBytes, 'peak RSS'), result.peakRssBytes),
-      versions: { stwcs: requireString(reported.stwcs), drizzlepac: requireString(reported.drizzlepac) } });
+      versions: Object.fromEntries(software.map(entry => [entry.name, entry.version])) });
   }
   return { output, results };
 }
