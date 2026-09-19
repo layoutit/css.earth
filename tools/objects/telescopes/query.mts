@@ -150,6 +150,19 @@ export interface ObservationSelection {
   readonly evidence: CandidateEvidence;
 }
 
+export type SelectionBlockerCode = 'incomplete-request' | 'candidate' | 'constraint' | 'toolkit' | 'body-map' | 'programme';
+export interface SelectionBlocker { readonly code: SelectionBlockerCode; readonly reason: string; readonly constraint?: string }
+export interface SelectionAssessment { readonly candidate?: Candidate; readonly blockers: readonly SelectionBlocker[] }
+
+export class ObservationSelectionError extends Error {
+  readonly blockers: readonly SelectionBlocker[];
+  constructor(telescope: string, mode: string, programme: string, blockers: readonly SelectionBlocker[]) {
+    super(`Cannot select ${telescope} ${mode} program ${programme}:\n${blockers.map(blocker => `- ${blocker.reason}`).join('\n')}`);
+    this.name = 'ObservationSelectionError'; this.blockers = blockers;
+    Object.defineProperty(this, 'blockers', { enumerable: false });
+  }
+}
+
 /** What a ledger says about one target in one mode, in the one shape every adapter produces. */
 interface TargetMode {
   readonly telescope: string; readonly mode: string;
@@ -404,6 +417,7 @@ const BODY_MAP_AUTHORS: Readonly<Record<string, string>> = Object.freeze({
   'JWST :: NIRSPEC/IFU': 'tools/objects/jwst/cubes/author-body-maps.mts',
   'JWST :: MIRI/IFU': 'tools/objects/jwst/cubes/author-body-maps.mts',
   'Hubble :: STIS/CCD': 'tools/objects/hst/slit-scan-map.mts',
+  'VLT/NACO :: imaging': 'tools/objects/naco/author-body-map.mts',
 });
 
 const bodyMapSupport = (mode: TargetMode): Candidate['bodyMapSupport'] => {
@@ -596,24 +610,33 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
     candidates: candidates.sort((a, b) => rank(a) - rank(b) || (`${a.telescope}${a.mode}` < `${b.telescope}${b.mode}` ? -1 : 1)) };
 }
 
-/** Select one runnable, pinned program from a capability answer. A hard `no` cannot be selected. Partial and unknown facts are
- * retained on the selection so the reducer and publisher cannot turn them into claims the query never made. */
-export function selectObservation(answer: CapabilityAnswer, telescope: string, mode: string, programme: string): ObservationSelection {
+/** Every reason an explicit selection cannot run, returned together so a caller does not repair one field only to discover
+ * the next refusal. */
+export function assessObservationSelection(answer: CapabilityAnswer, telescope: string, mode: string, programme: string): SelectionAssessment {
   const request = answer.request;
   const missing = [...(request.time ? [] : ['time (--from and --to, or --any-time)']),
     ...(request.angularResolutionArcsec !== undefined || request.surfaceResolutionKm !== undefined || request.resolutionElements !== undefined ? [] : ['a required resolution (--min-arcsec, --min-km or --min-elements)']),
     ...(request.kind ? [] : ['product kind (--kind)']), ...(request.result ? [] : ['requested result (--result telescope-product|body-map)'])];
-  if (missing.length) throw new Error(`An explicit selection needs ${missing.join(', ')}.`);
   const matches = answer.candidates.filter(candidate => candidate.telescope === telescope && candidate.mode === mode);
-  if (matches.length !== 1) throw new Error(matches.length ? `${telescope} ${mode} is ambiguous.` : `${telescope} ${mode} is not a candidate for ${answer.target}.`);
+  const blockers: SelectionBlocker[] = missing.map(reason => ({ code: 'incomplete-request', reason: `The request is missing ${reason}.` }));
+  if (matches.length !== 1) return { blockers: [...blockers, { code: 'candidate', reason: matches.length ? `${telescope} ${mode} is ambiguous.` : `${telescope} ${mode} is not a candidate for ${answer.target}.` }] };
   const candidate = matches[0]!;
-  const refused = Object.entries(candidate.meetsConstraints).filter(([, verdict_]) => verdict_.answer === 'no');
-  if (refused.length) throw new Error(`${telescope} ${mode} cannot answer this request: ${refused.map(([name, verdict_]) => `${name}: ${verdict_.reason}`).join(' ')}`);
-  if (candidate.toolkitSupport.level === 'none') throw new Error(`${telescope} ${mode} has no usable toolkit: ${candidate.toolkitSupport.reason}`);
-  if (request.result === 'body-map' && candidate.bodyMapSupport.answer === 'no') throw new Error(`${telescope} ${mode} cannot produce the requested body map: ${candidate.bodyMapSupport.reason}`);
+  for (const [constraint, verdict_] of Object.entries(candidate.meetsConstraints)) if (verdict_.answer === 'no')
+    blockers.push({ code: 'constraint', constraint, reason: `${telescope} ${mode} cannot answer this request: ${constraint}: ${verdict_.reason}` });
+  if (candidate.toolkitSupport.level === 'none') blockers.push({ code: 'toolkit', reason: `${telescope} ${mode} has no usable toolkit: ${candidate.toolkitSupport.reason}` });
+  if (request.result === 'body-map' && candidate.bodyMapSupport.answer === 'no') blockers.push({ code: 'body-map', reason: `${telescope} ${mode} cannot produce the requested body map: ${candidate.bodyMapSupport.reason}` });
   const targetPrograms = [...candidate.toolkitSupport.programs, ...candidate.toolkitSupport.archiveFinalQualified]
     .filter(value => value === answer.target || value.startsWith(`${answer.target}-`));
-  if (!targetPrograms.includes(programme)) throw new Error(`${programme} is not a pinned or archive-final program of ${answer.target} in ${telescope} ${mode}; choose one of ${targetPrograms.join(', ') || 'none'}.`);
+  if (!targetPrograms.includes(programme)) blockers.push({ code: 'programme', reason: `${programme} is not a pinned or archive-final program of ${answer.target} in ${telescope} ${mode}; ${targetPrograms.length ? `choose one of ${targetPrograms.join(', ')}` : 'no pinned or archive-final program is available'}.` });
+  return { candidate, blockers };
+}
+
+/** Select one runnable, pinned program from a capability answer. Partial and unknown facts are retained on the selection so
+ * the reducer and publisher cannot turn them into claims the query never made. */
+export function selectObservation(answer: CapabilityAnswer, telescope: string, mode: string, programme: string): ObservationSelection {
+  const assessment = assessObservationSelection(answer, telescope, mode, programme);
+  if (assessment.blockers.length) throw new ObservationSelectionError(telescope, mode, programme, assessment.blockers);
+  const request = answer.request, candidate = assessment.candidate!;
   const unresolved = [...Object.entries(candidate.meetsConstraints).flatMap(([constraint, verdict_]) => verdict_.answer === 'partial' || verdict_.answer === 'unknown'
     ? [{ constraint, answer: verdict_.answer, reason: verdict_.reason } as const] : []),
     { constraint: 'observationWavelength', answer: 'unknown' as const,
@@ -654,8 +677,12 @@ export function formatAnswer(answer: CapabilityAnswer): string {
     for (const [name, { answer: verdictAnswer, reason }] of Object.entries(candidate.meetsConstraints)) lines.push(`  ${name}: ${verdictAnswer}. ${reason}`);
     lines.push(`  toolkit: ${LEVEL_WORDS[candidate.toolkitSupport.level]}. ${candidate.toolkitSupport.reason}`);
     lines.push(`  body map: ${candidate.bodyMapSupport.answer}. ${candidate.bodyMapSupport.reason}`);
-    lines.push(`  a program of ${answer.target}: ${candidate.toolkitSupport.targetProgramChecked ? 'pinned and checked' : candidate.toolkitSupport.targetProgramPinned ? 'pinned, not checked'
-      : candidate.toolkitSupport.targetArchiveFinalQualified ? 'no re-calibration; its archive-final product is qualified' : 'none'}`);
+    lines.push(`  archive programmes recorded for ${answer.target}: ${candidate.programmes.join(', ') || 'none'}`);
+    lines.push(`  pinned toolkit programs: ${candidate.toolkitSupport.programs.join(', ') || 'none'}`);
+    lines.push(`  checked toolkit programs: ${candidate.toolkitSupport.checked.join(', ') || 'none'}`);
+    lines.push(`  qualified archive-final programs: ${candidate.toolkitSupport.archiveFinalQualified.join(', ') || 'none'}`);
+    const usable = [...forTarget(candidate.toolkitSupport.checked, answer.target), ...forTarget(candidate.toolkitSupport.archiveFinalQualified, answer.target)];
+    lines.push(`  usable program of ${answer.target}: ${usable.join(', ') || 'none'}`);
     lines.push(`  evidence: ${candidate.evidence.ledger} (archive read ${candidate.evidence.archiveDate})${candidate.evidence.receipts.length ? `, receipts ${candidate.evidence.receipts.join(', ')}` : ''}`);
     for (const map of candidate.evidence.bodyMaps) lines.push(`    measured: ${map.path}, ${map.quantity}, ${map.angularResolutionArcsec} arcsec, ${map.surfaceResolutionKm} km at the sub-observer point`);
     for (const entry of candidate.evidence.investigations) lines.push(`    investigation ${entry.id} (${entry.status}): ${entry.subject}`);
@@ -672,7 +699,6 @@ const numberFlag = (args: readonly string[], flag: string): number | undefined =
   const raw = flagValue(args, flag);
   if (raw === undefined) return undefined;
   const value = Number(raw);
-  if (!Number.isFinite(value)) throw new TypeError(`${flag} takes a number; it was given ${raw}.`);
   return value;
 };
 

@@ -23,19 +23,19 @@ import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
 import { horizonsTables } from '../../sphere-horizons.mts';
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '../../terrestrial-layers/observer-cameras.mts';
-import { observerCamera } from '../../terrestrial-layers/observer-camera.mts';
+import { placeResolvedDisc } from '../../resolved-disc-map.mts';
 import { mastFile } from '../mast.mts';
 import { readImagingProgram } from '../imaging/image3.mts';
 import { bandDepth, openSpectralCube, type Window } from './spectral-cube.mts';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '../../body-map-product.mts';
 import { sha256, sha256File } from '../../../../src/platform/sha256.mts';
-import { bodyMapFits, fitDiscCentre, projectBandMap, topRowFirst, type BodyMap } from './body-map.mts';
+import { bodyMapFits, type BodyMap } from './body-map.mts';
 import { bodyMapProductRecord, formatProductRecord } from '../../body-map-publication.mts';
 import type { ProductInput, ProductSoftware } from '../../product-record.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../../..');
 export const JWST_HORIZONS_CENTER = '500@-170';
-const ARCSEC_PER_RADIAN = 206_264.806_247, AU_KM = 1.495978707e8, DEGREE = Math.PI / 180;
+const DEGREE = Math.PI / 180;
 
 const window = (value: unknown, label: string): Window => {
   const [from, to] = requireArray(value, label).map(entry => requireFiniteNumber(entry, label));
@@ -91,21 +91,16 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
       const { rightAscension, declination, rangeAu } = observerRowValues(row);
       const [sunX, sunY, sunZ] = (horizonsRows(tables.heliocentric).find(line => line.trimStart().startsWith('X ='))?.match(/-?\d+\.\d+(?:E[+-]\d+)?/gu) ?? []).map(Number), sunRange = Math.hypot(sunX!, sunY!, sunZ!);
       if (![rightAscension, declination, rangeAu, sunRange].every(Number.isFinite)) throw new Error(`${id} ${mapId}: unreadable Horizons rows for ${band.observation}.`);
-      const radiusPixels = radiusKm / (rangeAu! * AU_KM) * ARCSEC_PER_RADIAN / cube.arcsecPerPixel;
-      if (!(2 * radiusPixels >= minimum)) throw new Error(`${id} ${mapId}: the disc of ${band.observation} is ${(2 * radiusPixels).toFixed(1)} pixels across, under the ${minimum} this record asks for.`);
-      const centre = fitDiscCentre(topRowFirst(depth.continuum, depth.width, depth.height), depth.width, depth.height, radiusPixels);
-      const camera = observerCamera({ epochJd: (startJd + endJd) / 2, targetRightAscensionDegrees: rightAscension!, targetDeclinationDegrees: declination!, rangeAu: rangeAu!,
-        sunRightAscensionDegrees: (Math.atan2(-sunY!, -sunX!) / DEGREE + 360) % 360, sunDeclinationDegrees: Math.asin(-sunZ! / sunRange) / DEGREE,
-        pixelAngleMicroradians: cube.arcsecPerPixel / ARCSEC_PER_RADIAN * 1e6, center: centre.center }, orientation);
-      const map = projectBandMap(depth, camera, radiusKm, { width: requireFiniteNumber(grid.width), height: requireFiniteNumber(grid.height) }, limit), seen = [...map.depth].filter(Number.isFinite);
-      placed.push(map);
-      // The blur fitted to the disc's edge is the resolution this cube actually had: a Gaussian sigma in pixels, stated as a full width.
-      const blurArcsec = centre.blurPixels * 2.354_82 * cube.arcsecPerPixel;
       const mode = String(cube.primary.INSTRUME).toUpperCase() === 'NIRSPEC' ? 'NIRSPEC/IFU' : String(cube.primary.INSTRUME).toUpperCase() === 'MIRI' ? 'MIRI/IFU' : '';
       if (!mode) throw new Error(`${band.level3.name} is not a body-map cube mode.`);
-      observations.push({ id: band.observation, telescope: 'JWST', instrument: band.band, mode, programme: requireString(stated.program), midTimeJd: (startJd + endJd) / 2, exposureSeconds: (endJd - startJd) * 86_400, rangeKm: camera.rangeKm,
-        subObserver: { latitudeDegrees: camera.observerLatitude, westLongitudeDegrees: ((camera.observerWestLongitude % 360) + 360) % 360 }, subSolar: { latitudeDegrees: camera.sunLatitude, westLongitudeDegrees: ((camera.sunWestLongitude % 360) + 360) % 360 },
-        angularResolution: { majorArcsec: blurArcsec, minorArcsec: blurArcsec, basis: 'full width at half maximum of the Gaussian blur fitted to the disc edge in the continuum image' } });
+      const result = placeResolvedDisc({ plane: { width: depth.width, height: depth.height, values: depth.depth, registrationValues: depth.continuum, uncertainty: depth.error, arcsecPerPixel: cube.arcsecPerPixel },
+        identity: { id: band.observation, telescope: 'JWST', instrument: band.band, mode, programme: requireString(stated.program), midTimeJd: (startJd + endJd) / 2, exposureSeconds: (endJd - startJd) * 86_400 },
+        geometry: { epochJd: (startJd + endJd) / 2, targetRightAscensionDegrees: rightAscension!, targetDeclinationDegrees: declination!, rangeAu: rangeAu!,
+          sunRightAscensionDegrees: (Math.atan2(-sunY!, -sunX!) / DEGREE + 360) % 360, sunDeclinationDegrees: Math.asin(-sunZ! / sunRange) / DEGREE },
+        orientation, radiusKm, grid: { width: requireFiniteNumber(grid.width), height: requireFiniteNumber(grid.height) }, maximumEmissionDegrees: limit, minimumDiscPixels: minimum,
+        fittedResolutionBasis: 'full width at half maximum of the Gaussian blur fitted to the disc edge in the continuum image' });
+      const { map, centre, camera, radiusPixels } = result, seen = [...map.depth].filter(Number.isFinite);
+      placed.push(map); observations.push(result.observation);
       cubes.push({ observation: band.observation, program: stated.program, cube: band.level3.name, exposure: { start: cube.primary['DATE-BEG'], end: cube.primary['DATE-END'] },
         disc: { diameterPixels: round(2 * radiusPixels, 2), centrePixels: centre.center.map(value => round(value, 2)), blurPixels: centre.blurPixels, fitResidualOverPeak: round(centre.residualOverPeak) },
         camera: { observerLatitude: round(camera.observerLatitude), observerWestLongitude: round(camera.observerWestLongitude), sunLatitude: round(camera.sunLatitude), sunWestLongitude: round(camera.sunWestLongitude), northAzimuthDegrees: round(camera.northAzimuthDegrees), rangeKm: round(camera.rangeKm, 0) },

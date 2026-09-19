@@ -29,15 +29,15 @@ import { readFitsHeader, readFitsImage } from '../../fits.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { ALMA, horizonsTables } from '../sphere-horizons.mts';
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '../terrestrial-layers/observer-cameras.mts';
-import { observerCamera } from '../terrestrial-layers/observer-camera.mts';
+import { placeResolvedDisc } from '../resolved-disc-map.mts';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '../body-map-product.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
-import { bodyMapFits, fitDiscCentre, projectBandMap, topRowFirst, type BodyMap } from '../jwst/cubes/body-map.mts';
+import { bodyMapFits, type BodyMap } from '../jwst/cubes/body-map.mts';
 import { bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
 import type { ProductInput, ProductSoftware } from '../product-record.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
-const ARCSEC_PER_RADIAN = 206_264.806_247, AU_KM = 1.495978707e8, DEGREE = Math.PI / 180, MJD_EPOCH_JD = 2_400_000.5;
+const DEGREE = Math.PI / 180, MJD_EPOCH_JD = 2_400_000.5;
 
 export interface ThermalCutout { readonly size: number; readonly arcsecPerPixel: number; readonly midJd: number; readonly rmsKelvin: number; readonly kelvin: Float64Array }
 
@@ -107,17 +107,15 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
       const { rightAscension, declination, rangeAu } = observerRowValues(row);
       const [sunX, sunY, sunZ] = (horizonsRows(tables.heliocentric).find(line => line.trimStart().startsWith('X ='))?.match(/-?\d+\.\d+(?:E[+-]\d+)?/gu) ?? []).map(Number), sunRange = Math.hypot(sunX!, sunY!, sunZ!);
       if (![rightAscension, declination, rangeAu, sunRange].every(Number.isFinite)) throw new Error(`${id} ${mapId}: unreadable Horizons rows for ${sessionId}.`);
-      const radiusPixels = radiusKm / (rangeAu! * AU_KM) * ARCSEC_PER_RADIAN / cutout.arcsecPerPixel, size = cutout.size;
-      const centre = fitDiscCentre(topRowFirst(cutout.kelvin, size, size), size, size, radiusPixels);
-      const camera = observerCamera({ epochJd: cutout.midJd, targetRightAscensionDegrees: rightAscension!, targetDeclinationDegrees: declination!, rangeAu: rangeAu!,
-        sunRightAscensionDegrees: (Math.atan2(-sunY!, -sunX!) / DEGREE + 360) % 360, sunDeclinationDegrees: Math.asin(-sunZ! / sunRange) / DEGREE,
-        pixelAngleMicroradians: cutout.arcsecPerPixel / ARCSEC_PER_RADIAN * 1e6, center: centre.center }, orientation);
-      const map = projectBandMap({ width: size, height: size, depth: cutout.kelvin, error: new Float64Array(size * size).fill(cutout.rmsKelvin), continuum: cutout.kelvin }, camera, radiusKm, { width: requireFiniteNumber(grid.width), height: requireFiniteNumber(grid.height) }, limit), seen = [...map.depth].filter(Number.isFinite);
-      placed.push(map); frequencies.push(cardNumber(primary, 'FREQHZ'));
       const mode = requireString(entry.mode ?? entry.instrument ?? 'Band 6 continuum', 'mode'), programme = requireString(stated.programme, 'session programme');
-      observations.push({ id: sessionId, telescope: 'ALMA', instrument: requireString(entry.instrument ?? mode, 'instrument'), mode, programme, midTimeJd: cutout.midJd, rangeKm: camera.rangeKm,
-        subObserver: { latitudeDegrees: camera.observerLatitude, westLongitudeDegrees: ((camera.observerWestLongitude % 360) + 360) % 360 }, subSolar: { latitudeDegrees: camera.sunLatitude, westLongitudeDegrees: ((camera.sunWestLongitude % 360) + 360) % 360 },
+      const size = cutout.size, result = placeResolvedDisc({ plane: { width: size, height: size, values: cutout.kelvin, uncertainty: new Float64Array(size * size).fill(cutout.rmsKelvin), arcsecPerPixel: cutout.arcsecPerPixel },
+        identity: { id: sessionId, telescope: 'ALMA', instrument: requireString(entry.instrument ?? mode, 'instrument'), mode, programme, midTimeJd: cutout.midJd },
+        geometry: { epochJd: cutout.midJd, targetRightAscensionDegrees: rightAscension!, targetDeclinationDegrees: declination!, rangeAu: rangeAu!,
+          sunRightAscensionDegrees: (Math.atan2(-sunY!, -sunX!) / DEGREE + 360) % 360, sunDeclinationDegrees: Math.asin(-sunZ! / sunRange) / DEGREE },
+        orientation, radiusKm, grid: { width: requireFiniteNumber(grid.width), height: requireFiniteNumber(grid.height) }, maximumEmissionDegrees: limit,
         angularResolution: { majorArcsec: cardNumber(primary, 'BMAJMAS') / 1000, minorArcsec: cardNumber(primary, 'BMINMAS') / 1000, positionAngleDegrees: cardNumber(primary, 'BPADEG'), basis: 'restoring beam of the self-calibrated image' } });
+      const { map, centre, camera, radiusPixels } = result, seen = [...map.depth].filter(Number.isFinite);
+      placed.push(map); frequencies.push(cardNumber(primary, 'FREQHZ')); observations.push(result.observation);
       sessions.push({ session: sessionId, midJd: round(cutout.midJd, 5), rmsKelvin: round(cutout.rmsKelvin, 2),
         disc: { diameterPixels: round(2 * radiusPixels, 2), centrePixels: centre.center.map(value => round(value, 2)), centreFromCutoutMiddlePixels: centre.center.map(value => round(value - (size - 1) / 2, 2)), blurPixels: centre.blurPixels, fitResidualOverPeak: round(centre.residualOverPeak) },
         camera: { observerLatitude: round(camera.observerLatitude), observerWestLongitude: round(camera.observerWestLongitude), sunLatitude: round(camera.sunLatitude), sunWestLongitude: round(camera.sunWestLongitude), northAzimuthDegrees: round(camera.northAzimuthDegrees), rangeKm: round(camera.rangeKm, 0) },

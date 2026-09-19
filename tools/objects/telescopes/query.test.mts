@@ -5,7 +5,7 @@ import { test } from 'node:test';
 import { resolve } from 'node:path';
 import { BODY_MAP_SCHEMA } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
-import { formatAnswer, ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, queryCapabilities, selectObservation, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
+import { assessObservationSelection, formatAnswer, ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, queryCapabilities, selectObservation, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 const citation = 'https://jwst-docs.stsci.edu/jwst-near-infrared-spectrograph';
@@ -40,7 +40,8 @@ const CHANDRA_LEDGER = { schema: 'cssearth-chandra-ledger@1', measured: '2026-09
 const NACO_LEDGER = { schema: 'cssearth-naco-ledger@1', measured: '2026-09-19',
   modes: [{ mode: 'imaging', frames: 10, programs: ['ceres-080C0881'], receipts: ['ceres-080C0881.COADDED_IMG.reproduction.json'], state: 'reduced' },
     { mode: 'cube', frames: 4, programs: [], receipts: [], state: 'refused', reason: 'This route refuses the mode.' }],
-  objects: [{ id: 'ceres', targets: ['CERES'], frames: 14, programmes: ['080.C-0881(A)'], modes: ['imaging', 'cube'] }] };
+  objects: [{ id: 'ceres', targets: ['CERES'], frames: 14, programmes: ['080.C-0881(A)'], modes: ['imaging', 'cube'] },
+    { id: 'vesta', targets: ['VESTA'], frames: 217, programmes: ['076.C-0580(A)'], modes: ['imaging', 'spectroscopy'] }] };
 const JUNO_LEDGER = { schema: 'cssearth-junocam-ledger@1', measured: '2026-09-19', objects: [
   { id: 'europa', target: 'EUROPA', colourImages: 52, measuredImages: 4, programs: ['europa-pj45'], state: 'measured', why: '4 image(s) registered.' },
   { id: 'io', target: 'IO', colourImages: 247, measuredImages: 0, programs: [], state: 'not measured', why: 'No program of this target is pinned.' }] };
@@ -103,15 +104,33 @@ test('an explicit selection keeps unknowns and refuses a hard no or another targ
   assert.throws(() => selectObservation(impossible, 'JWST', 'NIRSPEC/IFU', 'europa-1250'), /cannot answer this request: wavelength/u);
 });
 
-test('selection requires a complete scientific request and refuses a proven reducer with no body-map author', () => {
+test('selection requires a complete scientific request and exposes the shared NACO body-map author', () => {
   const incomplete = queryCapabilities({ target: 'ceres', wavelengthMicrometres: [2, 2.3], kind: 'image' }, inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
-  assert.throws(() => selectObservation(incomplete, 'VLT/NACO', 'imaging', 'ceres-080C0881'), /needs time.*required resolution.*requested result/u);
+  assert.deepEqual(assessObservationSelection(incomplete, 'VLT/NACO', 'imaging', 'ceres-080C0881').blockers.map(blocker => blocker.code),
+    ['incomplete-request', 'incomplete-request', 'incomplete-request']);
   const complete = queryCapabilities({ target: 'ceres', wavelengthMicrometres: [2, 2.3], kind: 'image', result: 'body-map', time: { any: true }, angularResolutionArcsec: 0.1 },
     inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
   const naco = candidate(complete, 'imaging');
   assert.equal(naco.toolkitSupport.level, 'proven');
-  assert.equal(naco.bodyMapSupport.answer, 'no');
-  assert.throws(() => selectObservation(complete, 'VLT/NACO', 'imaging', 'ceres-080C0881'), /cannot produce the requested body map.*No body-map author/u);
+  assert.equal(naco.bodyMapSupport.answer, 'yes');
+  assert.equal(naco.bodyMapSupport.author, 'tools/objects/naco/author-body-map.mts');
+  assert.equal(selectObservation(complete, 'VLT/NACO', 'imaging', 'ceres-080C0881').programme, 'ceres-080C0881');
+});
+
+test('a Vesta selection reports every blocker and human output separates archive from toolkit programs', () => {
+  const answer = queryCapabilities({ target: 'vesta', wavelengthMicrometres: [1, 2], kind: 'image', result: 'body-map', time: { any: true }, angularResolutionArcsec: 0.1 },
+    inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
+  const assessment = assessObservationSelection(answer, 'VLT/NACO', 'imaging', '076.C-0580(A)');
+  assert.deepEqual(assessment.blockers.map(blocker => blocker.code), ['programme']);
+  assert.throws(() => selectObservation(answer, 'VLT/NACO', 'imaging', '076.C-0580(A)'), error => {
+    assert.match(String(error), /076\.C-0580\(A\) is not a pinned or archive-final program of vesta/u);
+    return true;
+  });
+  const text = formatAnswer(answer);
+  assert.match(text, /archive programmes recorded for vesta: 076\.C-0580\(A\)/u);
+  assert.match(text, /pinned toolkit programs: ceres-080C0881/u);
+  assert.match(text, /checked toolkit programs: ceres-080C0881/u);
+  assert.match(text, /usable program of vesta: none/u);
 });
 
 test('what the optics resolve can say no; what the pixels sample cannot', () => {
