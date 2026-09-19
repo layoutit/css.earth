@@ -24,14 +24,7 @@ export async function runProcessingWorker<Result>(options: WorkerOptions<Result>
   signal.throwIfAborted();
   const outfile = resolve(root, `.local/nebula-lab/compiled/${name}-worker.mjs`);
   await build({ entryPoints: [resolve(root, options.entry)], outfile, bundle: true,
-    platform: 'node', format: 'esm', target: 'node22', packages: 'external',
-    // A command-line module guards its argument parsing with the standard
-    // `import.meta.url === pathToFileURL(process.argv[1]).href` entry-point check. Bundling rewrites
-    // `import.meta.url` to this worker's own URL, and the worker is spawned as `node <outfile>`, so both
-    // sides become the same path and the guard evaluates true: the bundled module parses argv and throws
-    // its usage error before any worker code runs. A worker receives its request over stdio and never
-    // reads argv, so clearing argv[1] makes every such guard false for everything inside this bundle.
-    banner: { js: 'process.argv[1] = "";' } });
+    platform: 'node', format: 'esm', target: 'node22', packages: 'external' });
   signal.throwIfAborted();
   return new Promise<Result>((accept, reject) => {
     const grouped = options.terminateGroup === true && process.platform !== 'win32';
