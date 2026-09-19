@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9f0e5d5dfe2dcb6769c6eb12d42b1d0bfc1167eb0497a09489b4c7f43382565e"
+    "sha256": "3d49549d94978fd155a3c0f573274d3a692c8803aeef2a582f450e5c67fbbadb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "233ac2f84d27708334cea22e6f0abc98f7548049d06b478d7cd2ecbc7cb6215c",
+      "sha256": "79225b6c546273ebde13cccd5f574f05ba5973d4b30ab12a86d39d168f24e797",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,9 +90,9 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "35 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 7 nights in 2 apparitions from 2018-03-15 to 2019-07-08, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.18. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "35 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 7 nights in 2 apparitions from 2018-03-15 to 2019-07-08, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.18. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, averaged where frames overlap with each fading out toward its disc edge, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
-              "selection": "finest-resolution",
+              "selection": "edge-weighted-average",
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
@@ -3024,14 +3024,14 @@
       "outputs": [
         {
           "url": "/scenes/kalliope/kalliope-zimpol-thumbnail.webp",
-          "bytes": 1262,
-          "sha256": "6ea0f24543f0ecff1160d81c38e5a781f1b9c4e6c8d9a2249ee8f370d7397aa9",
+          "bytes": 1136,
+          "sha256": "dc9cd89b4d396d90e381eb4fe550cad225a59b1c131eabf4bab11518323694a0",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalliope/kalliope-zimpol-surface@2x.webp",
-          "bytes": 290316,
-          "sha256": "8c7af7588789de3282839a94350c1af38b45c1b1dfd54ce775df64ab1e15f7bb",
+          "bytes": 257708,
+          "sha256": "84cf6165d50fb09f40c71862e61b638ea4efcf0c047dc7cc301108c46e3fcc0b",
           "verification": "bytes-verified"
         }
       ],
@@ -3114,8 +3114,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 8628,
-          "sha256": "17bf5151a657549ab9c72bdc7d2744749d318b696cdf652fa2629012b1215d8b",
+          "bytes": 5676,
+          "sha256": "1af823d303a3f0a766bcef9d02b3e33a37e5566d2aaa245a8402848f1fbfa346",
           "verification": "bytes-verified"
         }
       ]
@@ -3152,7 +3152,7 @@
   },
   "lastPreparation": {
     "objectId": "kalliope",
-    "materialSha256": "ba0421aaca0416ae5ae171a251fec35672da21712578eccde588627f2d5d7955",
+    "materialSha256": "06d178a144755b8b670c976e9e7bd118c6e0490bc2f18c568ac480ca0c479c19",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -32,7 +32,7 @@ type Band = typeof BANDS[number];
 // are not redundant frames to be thinned: Themis contributes 30 over six nights, and a lens that casts several apparitions more.
 /** The most frames one controlled-camera lens may cast: as many as one level fit compares. */
 export const CONTROLLED_CAMERA_MAXIMUM_FRAMES = MAXIMUM_LEVEL_FRAMES;
-const RULES: Omit<EnvelopeRules, 'displays'> = { selections: ['finest-resolution', 'lowest-emission'], maximumFrames: CONTROLLED_CAMERA_MAXIMUM_FRAMES, maximumLevelGain: 16, samplesPerTriangle: 'optional' };
+const RULES: Omit<EnvelopeRules, 'displays'> = { selections: ['finest-resolution', 'lowest-emission', 'edge-weighted-average'], maximumFrames: CONTROLLED_CAMERA_MAXIMUM_FRAMES, maximumLevelGain: 16, samplesPerTriangle: 'optional' };
 
 /**
  * A deconvolved ZIMPOL frame states no unit, and the survey's deconvolution changes scale between observing seasons:
@@ -228,6 +228,8 @@ function bandSetFrame(id: string, bands: readonly ObservationFrame[]): Observati
       return { radiance: (color[0] + color[1] + color[2]) / 3, color, gain, separationMeters, maximumEmissionDegrees, maximumIncidenceDegrees };
     },
     visible: point => bands.every(frame => frame.visible(point)),
+    // A point is only as deep inside the set's disc as inside its shallowest band's.
+    ...(bands.every(frame => frame.contourDepth) ? { contourDepth: (point: readonly number[]) => Math.min(...bands.map(frame => frame.contourDepth?.(point) ?? 0)) } : {}),
     report: { id, bands: bands.map(frame => frame.report) } };
 }
 
@@ -238,7 +240,7 @@ function lensPolicy(recipe: CameraLens | ColorLens, frames: readonly Observation
   const { report: limits, exceeded } = deriveLimits(recipe.transfer, frames, context.config.geometry.radialTerrain.simplification.maximumErrorMeters);
   const range = recipe.display.displayRange;
   const policy: SurfacePolicy = { format: recipe.format,
-    selection: frames.length === 1 ? 'single' : recipe.selection === 'lowest-emission' ? 'lowest-emission' : 'finest-resolution',
+    selection: frames.length === 1 ? 'single' : recipe.selection === 'lowest-emission' || recipe.selection === 'edge-weighted-average' ? recipe.selection : 'finest-resolution',
     levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
     display: { ...(range ? { range: 'stated-range', low: range[0], high: range[1], units, ...(colorDisplay ? { colorDisplay } : {}) }
       : { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units }), ...(recipe.display.palette ? { palette: recipe.display.palette } : {}), ...displayBasis(recipe.display) },

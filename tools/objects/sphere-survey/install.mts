@@ -281,7 +281,7 @@ function lensRows(lens: LensWords) {
 /** The photograph's limits, as the Known problems section states them. */
 function lensProblem(lens: LensWords) {
   const levels = (lens.apparitions ?? 1) > 1 ? 'with matched relative frame levels, each apparition placed through the surface it shares with another' : 'with matched relative frame levels';
-  return `The SPHERE photograph is photographed illumination from the survey's deconvolved frames, ${levels}. It is not albedo or colour. The frames see ${lens.bodyName} from ${latitudeSpan(lens.latitudes)}, so surface the survey did not see keeps the missing-imagery grid.${lens.leftOut ? ` ${lens.leftOut}` : ''}`;
+  return `The SPHERE photograph is photographed illumination from the survey's deconvolved frames, ${levels}, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see ${lens.bodyName} from ${latitudeSpan(lens.latitudes)}, so surface the survey did not see keeps the missing-imagery grid.${lens.leftOut ? ` ${lens.leftOut}` : ''}`;
 }
 
 /** The README with the lens's source rows, a generated comparison section and the registration markers. */

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a5621768b95220c156510aad2052c3f23933abdd8d303d4891b9c7d381d6763c"
+    "sha256": "baa3b73cef4197d289bb4c264731a6b7cbd60a421e56c0921f4cb5820cd1f483"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "19ca289a1158c9aae04de725346a6e948882065b44eaa97709a612d5892a2c6c",
+      "sha256": "ca15f2241cc6fd55769d084ed82c0d01540090efe1f66461fba0018ec6810ec9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -162,9 +162,9 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "60 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 11 nights in 2 apparitions from 2018-04-24 to 2019-08-06, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.14. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "60 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 11 nights in 2 apparitions from 2018-04-24 to 2019-08-06, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.14. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, averaged where frames overlap with each fading out toward its disc edge, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
-              "selection": "finest-resolution",
+              "selection": "edge-weighted-average",
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
@@ -5267,14 +5267,14 @@
       "outputs": [
         {
           "url": "/scenes/psyche/psyche-zimpol-thumbnail.webp",
-          "bytes": 1622,
-          "sha256": "9727fb34f631a4910a7342949e0e02e131077e8b3f6cbbb7d5363eca2c7e2a1a",
+          "bytes": 1572,
+          "sha256": "5962265f66b6972cc5ed5ff380a169675f719940088338aed9da66412897ac50",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/psyche/psyche-zimpol-surface@2x.webp",
-          "bytes": 294476,
-          "sha256": "5fc4049e02e7fb4105226b6b0e6377af0d9f99e5de48f2c14f396b06584f6bbe",
+          "bytes": 165980,
+          "sha256": "c926674a6d8a4c0065c193ffa287a2ddf9ce67a968e1ab8f361ee91661a1dd9d",
           "verification": "bytes-verified"
         }
       ],
@@ -5357,8 +5357,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 13026,
-          "sha256": "4f60aca3f96d474b17555d518e2a6ca8953d456718c12fbf1046647eaa7877de",
+          "bytes": 5992,
+          "sha256": "a6a120fac9bf0a7e1d66cc34f61de227af8add1aa59a673e4c6fb798f1c6c206",
           "verification": "bytes-verified"
         }
       ]
@@ -5445,7 +5445,7 @@
   },
   "lastPreparation": {
     "objectId": "psyche",
-    "materialSha256": "8730e3c8b1a5407553f6f3126a763d90214f579fba82a490691f6918700dd719",
+    "materialSha256": "01169d23de63edb9da314e9eba94509f02ef3005fa79502d59256082b9e50fc5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -140,13 +140,31 @@ report records them.
   after surface transfer, and the report records the band policy. Encoding does
   not qualify natural color.
 - **Selection.** A mosaic picks the lowest emission, the first frame in recipe
-  order, or the finest resolution. Each displayed point keeps the one photograph
-  it came from. The finest resolution is the frame whose pixel covers the least
+  order or the finest resolution, or it averages its frames. A pick keeps each
+  displayed point in the one photograph it came from. The finest resolution is the frame whose pixel covers the least
   surface at that point: its pixel scale over the cosine of the emission angle
   there, so a nearer frame that sees the point obliquely loses to a farther one
   that sees it face on. Ranking by pixel scale alone left Kleopatra's
   two-apparition lens at 6.69 km per displayed pixel on the surface against
   5.06 km, and Hebe's at 5.31 against 4.42, measured on their meshes.
+- **Edge-weighted average.** Every frame that qualifies at a point contributes
+  its levelled value, weighted by how deep inside its usable disc the point
+  lies over its pixel area at the target. The depth is the distance to the
+  nearest pixel the lens cannot use (off the body, past the emission or
+  incidence limit, or disqualified) as a fraction of the frame's deepest
+  pixel's, so a frame fades out at its limb and terminator instead of stopping
+  there; see [`contour.mts`](contour.mts). The SPHERE team mapped Vesta the same
+  way ([Fétick et al. 2019](https://doi.org/10.1051/0004-6361/201834749),
+  section 4.4): epochs averaged with weights that fall toward the limb, the
+  contour itself left out. The paper states no width for its Gaussian weight;
+  this one falls linearly and needs none. The SPHERE survey lenses use it,
+  since their deconvolved frames ring at the disc edge. On Kleopatra's lens map
+  the step between neighbouring pixels where the finest-resolution pick
+  changed frame fell from a median 2.13% of the display range to 0.10%
+  (worst 1%: 41.7% to 2.7%), and on Kalliope's from 1.35% to 0.12% (47.9% to
+  7.1%). Differences one data pixel apart inside one frame stayed about the
+  same (Kleopatra median 0.34% and 0.43%, Kalliope 0.48% and 0.41%). Coverage
+  did not change. Spacecraft frames keep the pick.
 - **Level matching.** Frames are compared on equal-area samples
   (`samplesPerTriangle`). A pair of frames counts when it shares `minimumPairs`
   samples and its median log ratio is known to 0.07, that is
@@ -239,7 +257,7 @@ the atlas transfer counts.
 | `frames` | Each frame's identity, camera, pixel geometry, quality report, pixel counts, measured footprint and any registration or refinement; a controlled camera adds its lit-shape-on-sky share |
 | `limits` | The authored transfer limits and the derived limits with their rule |
 | `photometry` | The model or disk function, its formula and limits |
-| `selection`, `levelMatching` | How frames were chosen, and for a mosaic the fitted gains, every pair's samples, spread and precision, and any unconnected groups |
+| `selection`, `blending`, `levelMatching` | How frames were chosen or averaged, and for a mosaic the fitted gains, every pair's samples, spread and precision, and any unconnected groups |
 | `registration` | The registration stage for every lens whose frames carry a camera: `silhouette` (limb position-angle residual per frame, the noise floor from exposures minutes apart, the systematic remainder) and `reference` (each frame turned about the pole against the named map observation or the lens's other frames: exact peak, both mirrors, the decisive count and median offset). A controlled colour lens keeps its band check under `bands` |
 | `display` | Where the range came from, the range and its units |
 | `areaCoverage` | The share of the displayed surface each frame covers, from equal-area samples |

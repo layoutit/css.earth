@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ca379c89a4223f9cf97e2655bf499e2205935532287d2c8397156f4171687ba7"
+    "sha256": "cfeab35cc7946a3e381d46bff09ab5953048299000b85294da7b7729fa95ecaa"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "16fe8d2b16b1dec8f85eaee49f2a8d1b01e7635513d38a76f0694acf7a7c8fb5",
+      "sha256": "e527cfb68e319e4e2d7b62afc2e53c4d1cd9ae4989a2cc95b53016d2aa328ba6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,9 +90,9 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "80 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 11 nights in 2 apparitions from 2018-03-22 to 2019-08-07, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.13. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "80 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 11 nights in 2 apparitions from 2018-03-22 to 2019-08-07, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.13. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, averaged where frames overlap with each fading out toward its disc edge, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
-              "selection": "finest-resolution",
+              "selection": "edge-weighted-average",
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
@@ -6129,14 +6129,14 @@
       "outputs": [
         {
           "url": "/scenes/eunomia/eunomia-zimpol-thumbnail.webp",
-          "bytes": 1364,
-          "sha256": "e71d8b3117b7579c43539ea4e02816d6eed76fdeb36865c427e67b4cc1f63422",
+          "bytes": 1368,
+          "sha256": "fc1df4d362c2ab703dbf8ba4e87bbd0f27dda585443c2a0939244ed5e49f9ad4",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eunomia/eunomia-zimpol-surface@2x.webp",
-          "bytes": 384648,
-          "sha256": "c8237d0840b9b3ce9ea6cf862fa9eebcb66db43102a04ccdbed245528d897fd4",
+          "bytes": 205562,
+          "sha256": "08ec8e43ee00acb954f31f861203dffa7cd92a0e6230bc6ad95370f749b9dd10",
           "verification": "bytes-verified"
         }
       ],
@@ -6219,8 +6219,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 20206,
-          "sha256": "543030cedbb2154e7ed4f049c619c5cf8c045f073ca86b40648b78f729bf9c51",
+          "bytes": 10240,
+          "sha256": "d7a5ca604afdb966bc372768417d09920855add52f0fe94b7414aeebffa15cb0",
           "verification": "bytes-verified"
         }
       ]
@@ -6257,7 +6257,7 @@
   },
   "lastPreparation": {
     "objectId": "eunomia",
-    "materialSha256": "d9b960095c8f3cad890b4573c7f11eb5faf0b72690507e17f412f3099f802b5e",
+    "materialSha256": "a89374338904022f188239f1c7670ab5ebc482b533c98b96de94b97136d87fb4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

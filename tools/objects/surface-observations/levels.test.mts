@@ -2,7 +2,7 @@ import { fixtureRecord } from '../../test-values.mts';
 import { required } from '../../test-values.mts';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { finestOnSurface, fitObservationLevels, pixelOnSurface, selectObservation, sampleTrianglePoints } from './levels.mts';
+import { edgeWeights, finestOnSurface, fitObservationLevels, pixelOnSurface, selectObservation, sampleTrianglePoints } from './levels.mts';
 import { validateSurfaceObservation, loadSurfaceObservation } from './index.mts';
 import { namedLevelRefusal } from './surface.mts';
 import { observingSeasons } from './formats/controlled-camera.mts';
@@ -149,6 +149,20 @@ test('the finest resolution is the least surface under one pixel, not the neares
     for (const i of order) { const view = views[i]; if (!view) continue; const candidate = pixelOnSurface(frameScales[i], view.maximumEmissionDegrees); if (candidate < size) { brute = i; size = candidate; } }
     assert.equal(finestOnSurface(order, frameScales, i => views[i]).index, brute, `trial ${trial}`);
   }
+});
+
+test('the edge-weighted average weighs each qualifying frame by its depth inside its disc over its pixel area', () => {
+  const scales = [1, 2, 1], depths = [.5, 1, .2];
+  const mix = required(edgeWeights([true, true, false], frame => depths[frame], scales));
+  assert.deepEqual(mix.weights, [.5, .25, 0], 'a frame that does not qualify carries nothing, however deep the point lies in it');
+  assert.equal(mix.index, 0);
+  assert.equal(mix.total, .75);
+  // A frame fades out as the point nears its edge: its share goes to zero with its depth, so its value never stops abruptly.
+  const shares = [.4, .2, .1, .01, 0].map(depth => { const faded = required(edgeWeights([true, true], frame => frame === 0 ? depth : 1, [1, 1])); return faded.weights[0] / faded.total; });
+  shares.reduce((previous, share) => { assert.ok(share <= previous); return share; });
+  assert.equal(shares.at(-1), 0);
+  assert.equal(edgeWeights([false, false], () => 1, [1, 1]), null);
+  assert.throws(() => edgeWeights([true], () => 0, [1]), /no weight/);
 });
 
 test('source selection preserves valid darkness, rejects missing samples, and resolves ties stably', () => {

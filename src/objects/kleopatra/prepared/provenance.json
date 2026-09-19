@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4987322ea791e7a25c68f02de15ca9cc447bd035b7632077cebd6f79a9bd7a96"
+    "sha256": "e56ed8f2101769b2e5999717d55bba538c0e95745373b98edbdb16f1f6833e9a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "acbd98e1240f2bad674512174e741d1025aafbc676267996c6b8ac9f2b002d75",
+      "sha256": "09ee9f069d3605ff306e36859afd1293201c39d5b2856be040a269f41b8aadc2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -48,9 +48,9 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "55 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 10 nights in 2 apparitions from 2017-07-14 to 2019-01-14, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.37. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "55 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 10 nights in 2 apparitions from 2017-07-14 to 2019-01-14, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.37. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, averaged where frames overlap with each fading out toward its disc edge, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
-              "selection": "finest-resolution",
+              "selection": "edge-weighted-average",
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
@@ -4275,14 +4275,14 @@
       "outputs": [
         {
           "url": "/scenes/kleopatra/kleopatra-zimpol-thumbnail.webp",
-          "bytes": 882,
-          "sha256": "12b8803fda249f8bb7a23cbe9c50578518a495b7e7e2520e90d217f0cd2b36e0",
+          "bytes": 874,
+          "sha256": "10ca59afcfdd11c223d146ddd0c332d8da1812a1cc5e558e0556b2b5e5814e15",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kleopatra/kleopatra-zimpol-surface@2x.webp",
-          "bytes": 326610,
-          "sha256": "fec5c3fe94fe2e63c2d611c0dceaf45613aa106443e745f155be4a26e3f7479e",
+          "bytes": 205338,
+          "sha256": "53e856a37f1e6933882034f4391d95613957743f1c361d504d41901e18808843",
           "verification": "bytes-verified"
         }
       ],
@@ -4365,8 +4365,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 10246,
-          "sha256": "30ecc7f35efdc25289561d589e531ce6513b87783402a4beec48aed3aec0392f",
+          "bytes": 3818,
+          "sha256": "3640243ee5cd356048cfbb8707e3505811c0183cc391c01607f3afb7a51e73cc",
           "verification": "bytes-verified"
         }
       ]
@@ -4378,7 +4378,7 @@
   },
   "lastPreparation": {
     "objectId": "kleopatra",
-    "materialSha256": "4cfe725f7379a993f7db0885ea01e66bbcd31a752fb416fcd851946386fe882f",
+    "materialSha256": "f7709be07319a303a697fa0e14291c7030c5031186e87b1d039613ec107373ca",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

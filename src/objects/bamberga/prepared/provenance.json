@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea57707e215f71751ab48970894ac5364e163fdaed641d022c0ed68a72934f06"
+    "sha256": "c4681706ed07d6b3c2e8ed182c4d1f7add567fbafb08bde8b9b330d1505d42dc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "42f8892534f8afc5f89be2a4bcbf10a1033a473f3220bc893fdcfa8543195a22",
+      "sha256": "59fa5ae0c21555451f3dbef32a97721efb6fbd151090bc38e8e471bfff52a517",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,9 +90,9 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "85 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 15 nights in 2 apparitions from 2017-06-23 to 2019-01-27, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.39. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "85 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 15 nights in 2 apparitions from 2017-06-23 to 2019-01-27, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.39. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, averaged where frames overlap with each fading out toward its disc edge, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
-              "selection": "finest-resolution",
+              "selection": "edge-weighted-average",
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
@@ -6474,14 +6474,14 @@
       "outputs": [
         {
           "url": "/scenes/bamberga/bamberga-zimpol-thumbnail.webp",
-          "bytes": 1800,
-          "sha256": "8a3a72443e228857500664ea9d127832b7e0c824bc97bd1346dfb52422e399d0",
+          "bytes": 1732,
+          "sha256": "2899573210abfd2a8878d1e641121a458f0e063bbbed2cda38957290b64811f3",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bamberga/bamberga-zimpol-surface@2x.webp",
-          "bytes": 490432,
-          "sha256": "efbfea48f96d7a2691fafea93205cd4d1c68c29d310233d933184b0c031ee678",
+          "bytes": 163924,
+          "sha256": "e6579dfc9a7c9317125b4176eaa08ba80a70467295f4e77e324ceeb14469252b",
           "verification": "bytes-verified"
         }
       ],
@@ -6564,8 +6564,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 26792,
-          "sha256": "f4043cc5c20f0db3c403370ebd598bb3ab02eeea311a296537d6b5e85a9f1b3d",
+          "bytes": 7902,
+          "sha256": "a925d8b6ad93626ac5b665ae30a31d55a7f329ee458475d5e791373b56921ac0",
           "verification": "bytes-verified"
         }
       ]
@@ -6602,7 +6602,7 @@
   },
   "lastPreparation": {
     "objectId": "bamberga",
-    "materialSha256": "c918d82949ce289136b11604e825971850996a34928b4dd191703c453f5f8ca5",
+    "materialSha256": "419706aac6fc43ac9042ef4a3abdc14a0f5b5e9a3bb048d5c5dd98205822d802",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

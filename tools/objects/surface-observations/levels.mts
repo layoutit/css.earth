@@ -122,3 +122,16 @@ export function finestOnSurface<T extends Pick<ObservationSample, 'maximumEmissi
   }
   return { index, value };
 }
+
+/**
+ * The edge-weighted average's weights at one point: each qualifying frame's depth inside its usable disc (zero at its edge,
+ * one at its deepest pixel) over its pixel area at the target. Returns the heaviest frame, every weight and their sum, or
+ * null where no frame qualifies. A qualifying sample always lies inside its disc, so weightless qualifying frames are an error.
+ */
+export function edgeWeights(qualifies: readonly boolean[], depth: (frame: number) => number, scales: readonly number[]) {
+  const weights = qualifies.map((ok, frame) => ok ? depth(frame) / scales[frame] ** 2 : 0);
+  let total = 0, index = -1;
+  weights.forEach((weight, frame) => { total += weight; if (weight > 0 && (index < 0 || weight > weights[index])) index = frame; });
+  if (index < 0 && qualifies.some(Boolean)) throw new Error('A qualifying frame carries no weight at its own sample point.');
+  return index < 0 ? null : { index, weights, total };
+}

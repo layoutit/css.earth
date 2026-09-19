@@ -114,7 +114,7 @@ test('the install says why released frames stay out, and writes a rebuilt lens\'
   const rebuilt = withRefreshedLens(first, { ...lens, lensFrames: 55, nights: ['2017-07-14', '2018-12-10', '2019-01-14'], latitudes: [-36.6, 31.7], apparitions: 2 });
   assert.deepEqual(rebuilt.replaced, ['| SPHERE photograph | [', 'The SPHERE photograph is photographed illumination from the survey']);
   assert.ok(rebuilt.readme.includes('[55 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 3 nights from 2017-07-14 to 2019-01-14]'));
-  assert.ok(rebuilt.readme.includes('with matched relative frame levels, each apparition placed through the surface it shares with another. It is not albedo or colour. The frames see Kleopatra from 37° south to 32° north'));
+  assert.ok(rebuilt.readme.includes('with matched relative frame levels, each apparition placed through the surface it shares with another, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Kleopatra from 37° south to 32° north'));
   assert.equal(rebuilt.readme.split('\n').length, first.split('\n').length, 'lines are replaced in place');
   assert.deepEqual(withRefreshedLens(rebuilt.readme, { ...lens, lensFrames: 55, nights: ['2017-07-14', '2018-12-10', '2019-01-14'], latitudes: [-36.6, 31.7], apparitions: 2 }).replaced, [], 'a second run changes nothing');
 });

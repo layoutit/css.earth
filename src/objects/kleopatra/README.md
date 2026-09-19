@@ -69,7 +69,7 @@ Shadows defaults off. Existing preparation bakes diffuse directional lighting, a
 
 No unannotated, registered global optical, geological or compositional map was established in this bounded survey.
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, each apparition placed through the surface it shares with another. It is not albedo or colour. The frames see Kleopatra from 37° south to 32° north, so surface the survey did not see keeps the missing-imagery grid.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, each apparition placed through the surface it shares with another, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Kleopatra from 37° south to 32° north, so surface the survey did not see keeps the missing-imagery grid.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 

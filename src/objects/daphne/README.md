@@ -66,7 +66,7 @@ Source constraints are uneven and ground-based; a 4096 × 2048 display map does 
 
 Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Daphne from 51° north, so surface the survey did not see keeps the missing-imagery grid. Left out by name: the 2017-05-20 apparition (5 frames). The level fit found no accepted overlap between them and the 2018-08-06 frames: the best pair shared 59 display samples within its angle limit, fewer than the 128 it needs, although the lens mesh predicted 193. Without one, their level cannot be placed, so the figure's 2017 column shows no lens frame.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Daphne from 51° north, so surface the survey did not see keeps the missing-imagery grid. Left out by name: the 2017-05-20 apparition (5 frames). The level fit found no accepted overlap between them and the 2018-08-06 frames: the best pair shared 59 display samples within its angle limit, fewer than the 128 it needs, although the lens mesh predicted 193. Without one, their level cannot be placed, so the figure's 2017 column shows no lens frame.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

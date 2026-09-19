@@ -68,7 +68,7 @@ Absolute phase is arbitrary; accelerated display spin is illustrative.
 
 The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 1086, pole ['153', '-56'], [Model 1086](https://damit.cuni.cz/projects/damit/asteroid_models/view/1086)
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Lamberta from 4° south to 3° north, so surface the survey did not see keeps the missing-imagery grid.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Lamberta from 4° south to 3° north, so surface the survey did not see keeps the missing-imagery grid.
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

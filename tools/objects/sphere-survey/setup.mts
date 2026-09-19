@@ -47,7 +47,7 @@ const REFERENCE_FIGURE = { objectId: 'iris', object: 1085 } as const;
 
 /** The settings every shipped survey lens uses; `setup.test.mts` keeps them equal to the lenses in the repository. */
 export const SURVEY_LENS_SETTINGS = {
-  format: 'controlled-shape-camera', consumer: 'sphere-photograph', selection: 'finest-resolution',
+  format: 'controlled-shape-camera', consumer: 'sphere-photograph', selection: 'edge-weighted-average',
   levelMatching: { samplesPerTriangle: 24, minimumPairs: 128, maximumGain: 4, maximumAngleDegrees: 60 },
   transfer: { maximumSeparationFootprints: 2, visibilityToleranceMeters: 0.5, maximumEmissionDegrees: 70,
     interpretation: 'Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel\'s range times its angular size, so a contributor lies within two of those of the closest source-mesh point, and that point must be visible from the stated camera in the full mesh.' },
@@ -359,7 +359,7 @@ function compareEarlierLens(earlier: Record<string, unknown>, rebuilt: { frames:
 
 function lensCoverage(frames: number, nights: readonly string[], figure: string, apparitions: number) {
   const over = nights.length === 1 ? `on ${nights[0]}` : `over ${nights.length} nights${apparitions > 1 ? ` in ${apparitions} apparitions` : ''} from ${nights[0]} to ${nights.at(-1)}`;
-  const levels = apparitions > 1 ? 'matched relative frame brightness, each apparition placed through the surface it shares with another,' : 'matched relative frame brightness,';
+  const levels = `matched relative frame brightness,${apparitions > 1 ? ' each apparition placed through the surface it shares with another,' : ''} averaged where frames overlap with each fading out toward its disc edge,`;
   return `${frames} deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, ${over}, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure ${figure}. Grayscale retains photographed illumination and ${levels} not measured albedo. The grid marks unphotographed, grazing or rejected surface.`;
 }
 

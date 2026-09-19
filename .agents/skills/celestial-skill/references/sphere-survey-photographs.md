@@ -154,6 +154,14 @@ node tools/objects/sphere-survey/install.mts <id> --leave-out=<frame-id>,… --b
 The reason goes into the ledger decision, the `surface-imagery` entry and the
 README's known problems.
 
+Survey lenses average their frames where they overlap (`edge-weighted-average`):
+each frame fades out toward its disc edge, where deconvolution rings, instead
+of one frame per point switching abruptly. The rule, its source and its
+measurements are in the
+[route policy](../../../../tools/objects/surface-observations/README.md#route-policy).
+
+![Kleopatra and Kalliope in the app's default view, one frame per point on the left and the edge-weighted average on the right](sphere-survey-blend.webp)
+
 Commit, then run `pnpm author:sources <id> --evidence <commit>` and commit again.
 Publish with `pnpm publish:runtime-assets --object=<id>` before merging.
 

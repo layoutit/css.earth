@@ -3,11 +3,13 @@ import type { RadialSurface, SurfaceColorSample, SurfaceConfig } from '../terres
 import type { SourceInput } from '../../../src/platform/source-manifest.mts';
 import type { FootprintSample, ObservationFrame, SurfacePolicy } from './contract.mts';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
-import { finestOnSurface, fitObservationLevels, sampleTrianglePoints, selectObservation } from './levels.mts';
+import { edgeWeights, finestOnSurface, fitObservationLevels, sampleTrianglePoints, selectObservation } from './levels.mts';
 import { qualifiedFace } from './geometry.mts';
 import { bandColorByte, bandColorEvidence, interpolatePalette, linearToSrgb } from '../color-transfer.mts';
 
 export const SURFACE_OBSERVATION_REPORT = 'cssearth-surface-observation-report@1';
+const EDGE_WEIGHTED_AVERAGE = { method: 'Every frame that qualifies at a point contributes its levelled value, weighted by how deep inside its usable disc the point lies (zero at the limb, the terminator and the emission limit, one at the deepest pixel) over its pixel area at the target; so a frame fades out at its edge instead of stopping there.',
+  after: 'Fétick et al. 2019, A&A 623, A6, section 4.4, https://doi.org/10.1051/0004-6361/201834749: epochs averaged with weights that fall toward the limb, the contour itself excluded.' };
 const PREVIEW_POLICY = 'The flat preview samples unique radial intersections only; the retained triangle atlas samples the closest full-source surface point in 3D.';
 const sub = (a: readonly number[], b: readonly number[]) => a.map((n, i) => n - b[i]);
 const cross = (a: readonly number[], b: readonly number[]) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
@@ -57,7 +59,7 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
   // mesh simplifies this source mesh, so the closest point lies on the displayed point's own surface; only an exact tie between distinct
   // surface points leaves it undecided.
   const sampleAll = (displayPoint: readonly number[]) => {
-    const point = displayPoint.map(n => n * metersPerUnit), hit = mesh.closestPoint(point);
+    const point = displayPoint.map(n => n * metersPerUnit), hit = mesh.closestPoint(point), source = hit?.point;
     const values = frames.map((frame): Missing | Accepted => {
       if (!hit) return missing(point, 'ambiguous-source-point');
       if (!qualifiedFace(mesh, hit.faceId)) return missing(point, 'unconstrained-source-shape');
@@ -66,11 +68,18 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
       if (!frame.visible(hit.point)) return missing(point, 'occluded');
       return { ...sample, distanceMeters: hit.distanceMeters };
     });
-    return { point, values };
+    return { point, source, values };
   };
   const scale = (i: number) => frames[i].nominalPixelScaleMeters ?? frames[i].footprint.nadirMedianMeters;
   const scales = frames.map((_, i) => scale(i));
-  if (policy.selection === 'finest-resolution' && scales.some(value => !(value > 0))) throw new Error('A finest-resolution observation needs every frame\'s pixel scale.');
+  const blended = policy.selection === 'edge-weighted-average';
+  if ((policy.selection === 'finest-resolution' || blended) && scales.some(value => !(value > 0))) throw new Error(`A ${policy.selection} observation needs every frame's pixel scale.`);
+  if (blended && frames.some(frame => !frame.contourDepth)) throw new Error('An edge-weighted average needs every frame\'s depth inside its disc.');
+  // A qualifying sample always lies at least half a pixel inside its disc: the footprint's contributors are usable pixels.
+  const blend = (values: readonly (Missing | Accepted)[], source: readonly number[] | undefined) =>
+    edgeWeights(values.map(value => value.reason === undefined && source !== undefined), i => source ? frames[i].contourDepth?.(source) ?? 0 : 0, scales);
+  const levelled = (values: readonly (Missing | Accepted)[], { weights, total }: { weights: readonly number[]; total: number }) =>
+    weights.reduce((sum, weight, i) => { const value = values[i]; return weight > 0 && value.reason === undefined ? sum + weight * value.radiance * levels.gains[i] : sum; }, 0) / total;
   // Finest-resolution ties keep the frame with the finer pixel scale, then the earlier one in the recipe.
   const byScale = frames.map((_, i) => i).sort((a, b) => scales[a] - scales[b] || a - b);
   // Frames sharing one viewing direction tie on emission; recipe order then ranks them. Brightness never chooses a frame.
@@ -93,8 +102,9 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
   };
   // Estimated faces complete an open source surface that no photograph observed, so their sample points stay withheld.
   const points = sampleTrianglePoints(radial.faces, policy.samplesPerTriangle);
-  const samples = points.map((point, i) => radial.faces[Math.floor(i / policy.samplesPerTriangle)].estimated
-    ? frames.map((): Missing | Accepted => missing(point.map(n => n * metersPerUnit), 'estimated-geometry')) : sampleAll(point).values);
+  const sampled = points.map((point, i) => radial.faces[Math.floor(i / policy.samplesPerTriangle)].estimated
+    ? { source: undefined, values: frames.map((): Missing | Accepted => missing(point.map(n => n * metersPerUnit), 'estimated-geometry')) } : sampleAll(point));
+  const samples = sampled.map(({ values }) => values);
   if (frames.length > 1 && !policy.levelMatching) throw new Error('A multi-frame observation needs its level-matching budget.');
   const fit = (levelMatching: NonNullable<typeof policy.levelMatching>) => {
     try { return fitObservationLevels(frames.map((_, i) => samples.map(values => values[i])), levelMatching, policy.levelSeasons); }
@@ -105,7 +115,8 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
   if (policy.display.range === 'stated-range') ({ low, high } = policy.display);
   else {
     const values: number[] = [];
-    for (const atPoint of samples) {
+    if (blended) for (const { source, values: atPoint } of sampled) { const mix = blend(atPoint, source); if (mix) values.push(levelled(atPoint, mix)); }
+    else for (const atPoint of samples) {
       const i = choose(atPoint);
       if (i < 0) continue;
       const sample = atPoint[i];
@@ -115,7 +126,27 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     [low, high] = policy.display.percentiles.map(p => values[Math.min(values.length - 1, Math.floor(values.length * p / 100))]);
     if (!(high > low)) throw new Error('Surface observation has no qualified radiance range.');
   }
+  const colorDisplay = policy.display.range === 'stated-range' ? policy.display.colorDisplay : undefined, palette = policy.display.palette;
+  // The stretch is linear in the observed quantity; grey is sRGB-encoded like the colour bands, and a palette indexes the linear fraction.
+  const displayColor = (radiance: number) => {
+    const fraction = Math.max(0, Math.min(1, (radiance - low) / (high - low)));
+    return palette ? interpolatePalette(palette, fraction) : Array(3).fill(Math.round(255 * linearToSrgb(fraction)));
+  };
+  const blendPoint = (displayPoint: readonly number[]): SurfaceColorSample => {
+    const { point, source, values } = sampleAll(displayPoint), mix = blend(values, source);
+    if (!mix) return missing(point, 'no-qualified-observation');
+    const radiance = levelled(values, mix), contributors = values.filter((value, i): value is Accepted => mix.weights[i] > 0 && value.reason === undefined);
+    const color = contributors[0].color && colorDisplay
+      ? contributors[0].color.map((_, channel) => bandColorByte(values.reduce((sum, value, i) => mix.weights[i] > 0 && value.reason === undefined && value.color
+        ? sum + mix.weights[i] * value.color[channel] * levels.gains[i] : sum, 0) / mix.total, colorDisplay))
+      : displayColor(radiance);
+    if (Boolean(contributors[0].color) !== Boolean(colorDisplay)) throw new Error('Floating color samples require their source-bound band display policy.');
+    const most = (key: 'separationMeters' | 'gain' | 'maximumEmissionDegrees' | 'maximumIncidenceDegrees') => Math.max(...contributors.map(value => value[key]));
+    return { color, radiance, distanceMeters: contributors[0].distanceMeters, separationMeters: most('separationMeters'), gain: most('gain'),
+      maximumEmissionDegrees: most('maximumEmissionDegrees'), maximumIncidenceDegrees: most('maximumIncidenceDegrees'), frameId: frames[mix.index].id, frameIndex: mix.index };
+  };
   const samplePoint = (displayPoint: readonly number[]): SurfaceColorSample => {
+    if (blended) return blendPoint(displayPoint);
     let point: readonly number[], index: number, value: Missing | Accepted | undefined;
     if (policy.selection === 'recipe-order' || policy.selection === 'finest-resolution') ({ point, index, value } = sampleOrdered(displayPoint));
     else {
@@ -125,34 +156,34 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     }
     if (index < 0 || value === undefined) return missing(point, 'no-qualified-observation');
     if (value.reason !== undefined) return value;
-    // The stretch is linear in the observed quantity; grey is sRGB-encoded like the colour bands, and a palette indexes the linear fraction.
-    const gain = levels.gains[index], radiance = value.radiance * gain, fraction = Math.max(0, Math.min(1, (radiance - low) / (high - low)));
-    const colorDisplay = policy.display.range === 'stated-range' ? policy.display.colorDisplay : undefined;
+    const gain = levels.gains[index], radiance = value.radiance * gain;
     if (Boolean(value.color) !== Boolean(colorDisplay)) throw new Error('Floating color samples require their source-bound band display policy.');
     // The shared footprint and level matching retain floats; encode the selected bands once here.
-    const palette = policy.display.palette;
     return { ...value, color: value.color && colorDisplay ? value.color.map(channel => bandColorByte(channel * gain,colorDisplay))
-      : palette ? interpolatePalette(palette, fraction) : Array(3).fill(Math.round(255 * linearToSrgb(fraction))), radiance, frameId: frames[index].id, frameIndex: index };
+      : displayColor(radiance), radiance, frameId: frames[index].id, frameIndex: index };
   };
   const sourceSquareMeters: Record<string, number> = {};
   const areaCoverage = { method: 'Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed', samplesPerTriangle: policy.samplesPerTriangle,
-    totalSquareMeters: 0, acceptedSquareMeters: 0, sourceSquareMeters, acceptedFraction: 0 };
+    totalSquareMeters: 0, acceptedSquareMeters: 0, sourceSquareMeters, acceptedFraction: 0,
+    ...(blended ? { sourceSquareMetersMethod: 'Each frame is credited with its share of the averaging weight at every sample.' } : {}) };
   let k = 0;
   for (const face of radial.faces) {
     const [a, b, c] = face.vertices, area = Math.hypot(...cross(sub(b, a), sub(c, a))) / 2 * metersPerUnit ** 2, weight = area / policy.samplesPerTriangle;
     areaCoverage.totalSquareMeters += area;
     for (let j = 0; j < policy.samplesPerTriangle; j++) {
-      const i = choose(samples[k++]);
+      // A blend credits each frame with its share of the weight; a choice credits the chosen frame.
+      const { source, values } = sampled[k++], mix = blended ? blend(values, source) : null, i = blended ? mix?.index ?? -1 : choose(values);
       if (i < 0) continue;
       areaCoverage.acceptedSquareMeters += weight;
-      sourceSquareMeters[frames[i].id] = (sourceSquareMeters[frames[i].id] ?? 0) + weight;
+      if (mix) mix.weights.forEach((share, f) => { if (share > 0) sourceSquareMeters[frames[f].id] = (sourceSquareMeters[frames[f].id] ?? 0) + weight * share / mix.total; });
+      else sourceSquareMeters[frames[i].id] = (sourceSquareMeters[frames[i].id] ?? 0) + weight;
     }
   }
   areaCoverage.acceptedFraction = areaCoverage.acceptedSquareMeters / areaCoverage.totalSquareMeters;
   const { display } = policy;
   const report: SurfaceObservationReport = { schema: SURFACE_OBSERVATION_REPORT, format: policy.format,
     camera: { kind: frames[0].cameraKind, positionKm: frames[0].positionKm },
-    frames: frames.map(frame => frame.report), limits: policy.limits, photometry: policy.photometry, selection: policy.selection,
+    frames: frames.map(frame => frame.report), limits: policy.limits, photometry: policy.photometry, selection: policy.selection, ...(blended ? { blending: EDGE_WEIGHTED_AVERAGE } : {}),
     levelMatching: frames.length > 1 ? { ...policy.levelMatching, ...levels, sampledPoints: points.length } : null,
     display: { range: display.range, ...(display.range === 'stated-range' ? {} : { percentiles: display.percentiles }), low, high, units: display.units, ...(display.palette ? { palette: display.palette } : {}),
       basis: display.basis, ...(display.sourceId === undefined ? {} : { sourceId: display.sourceId }),

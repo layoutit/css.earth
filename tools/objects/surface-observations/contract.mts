@@ -91,6 +91,9 @@ export interface ObservationFrame {
   sample(point: readonly number[]): FootprintSample;
   /** Whether the frame's camera sees a source-surface point without obstruction. */
   visible(point: readonly number[]): boolean;
+  /** How deep inside the frame's usable disc a source-surface point projects: its distance from the nearest pixel the lens cannot use
+   * (off the body, past the emission or incidence limit, or disqualified), as a fraction of the deepest pixel's; zero at the edge. */
+  contourDepth?(point: readonly number[]): number;
   /** Measured footprint: nadir-equivalent ground size of one pixel, from the camera's pixel angle and each pixel's range. */
   footprint: FrameFootprint;
   /** The photograph, its camera and the mesh it was cast on, kept for the registration stage; absent for a frame without a camera. */
@@ -108,7 +111,7 @@ export interface FrameFootprint { pixelAngleMicroradians: number; nadirMedianMet
 /** What a route decides once for all its frames. */
 export interface SurfacePolicy {
   format: string;
-  selection: 'single' | 'lowest-emission' | 'recipe-order' | 'finest-resolution';
+  selection: 'single' | 'lowest-emission' | 'recipe-order' | 'finest-resolution' | 'edge-weighted-average';
   levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumGain: number; samplesPerTriangle?: number };
   /** Each frame's observing season, for frames that carry no calibrated level: the level fit then places every season by overlaps alone. */
   levelSeasons?: readonly number[];

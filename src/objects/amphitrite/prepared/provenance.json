@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "87a3b880d157aff07cad041f9a412c4065c09cc63094d7143cada25a6670b43e"
+    "sha256": "38b87716e9e6d688a58be132800bc3207e6c67711918b2642889b43895283fb9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a9b546883aca1cafc0f1a5bb4f8bcd5d6fcb616a5795b2b04be3e89e91e1da44",
+      "sha256": "bfdc9d7436bbb793e0326fb301f6b4e5b166ce4dcf9a95563554aec9b798eaf8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,9 +90,9 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "55 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 7 nights in 3 apparitions from 2017-05-20 to 2019-08-29, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.20. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "55 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 7 nights in 3 apparitions from 2017-05-20 to 2019-08-29, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.20. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, averaged where frames overlap with each fading out toward its disc edge, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
-              "selection": "finest-resolution",
+              "selection": "edge-weighted-average",
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
@@ -4404,14 +4404,14 @@
       "outputs": [
         {
           "url": "/scenes/amphitrite/amphitrite-zimpol-thumbnail.webp",
-          "bytes": 1992,
-          "sha256": "c556fe71d422b3ce2db7c7af8db5090239920b485cc1939bdb0bd14cc8ecd5a1",
+          "bytes": 1916,
+          "sha256": "0c61da009a2f71199f7f74da24e155cc3af956ef0b5767646cdeb0499993d656",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/amphitrite/amphitrite-zimpol-surface@2x.webp",
-          "bytes": 330946,
-          "sha256": "3db29e284ff534c120c57d32cc374cb22af2df54f4594e8ac7b2064bd07e3cda",
+          "bytes": 185466,
+          "sha256": "d03d87b1fe92bf5a5cba28ba120fad884f02d7816e4ed2d2e37fef079a7bf8c7",
           "verification": "bytes-verified"
         }
       ],
@@ -4494,8 +4494,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 16960,
-          "sha256": "763914c906953156df22d93f0f49649b452ce0300a9b2137a51acd6d93649e12",
+          "bytes": 6688,
+          "sha256": "2ad958f85972be67c23365c35b26a015763659403786da7cf6330f2bf6c0e049",
           "verification": "bytes-verified"
         }
       ]
@@ -4532,7 +4532,7 @@
   },
   "lastPreparation": {
     "objectId": "amphitrite",
-    "materialSha256": "fe637feca57f8e665684885f10c0392ae697a03003965427af97e2d323af7f43",
+    "materialSha256": "0825833a1232db17ed693773554ac662b31e99788d3cf5ee5f75905926649e2a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

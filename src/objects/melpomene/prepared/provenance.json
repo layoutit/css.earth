@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "aca643388a95990ba79cee544cbad7f2bc7041ccb3c5f89d9a2addc5217a69e8"
+    "sha256": "d8b404ee07c596548fc55e000bbc44ae264dc1e204b612c84ebd775824039b5e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b57d49c39aae66886e083878483fa0eacd9a37742e9fb59e221a8e612c7ff476",
+      "sha256": "5082b559d30647b4759039113a8c6595ebd5a13ad8b42f0fac43d979d11206fa",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,9 +90,9 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 5 nights in 2 apparitions from 2018-05-04 to 2019-08-06, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.15. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 5 nights in 2 apparitions from 2018-05-04 to 2019-08-06, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.15. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, averaged where frames overlap with each fading out toward its disc edge, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
-              "selection": "finest-resolution",
+              "selection": "edge-weighted-average",
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
@@ -2679,14 +2679,14 @@
       "outputs": [
         {
           "url": "/scenes/melpomene/melpomene-zimpol-thumbnail.webp",
-          "bytes": 1838,
-          "sha256": "d9bb8cf46fd1832114d73428cb8260c9f2ccd95113c5f01badd25e6595f85df0",
+          "bytes": 1718,
+          "sha256": "ebf245734fc5be6b0e8b04ed6a6534ba2cd4d22cacdd6b98c0b6b38df755a48a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/melpomene/melpomene-zimpol-surface@2x.webp",
-          "bytes": 316732,
-          "sha256": "fc404f911f8e2c814e5bebfc257ba3a84cd8f1e6a9bb3c6a0076b9f302f415c8",
+          "bytes": 183212,
+          "sha256": "e6e45d21551e85c13a3774a01e48bc33aa9ea4cdc82b59791d1329252cd3d836",
           "verification": "bytes-verified"
         }
       ],
@@ -2769,8 +2769,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 16274,
-          "sha256": "bd706a3d574659cfeb6b9900a70606ff7bfd744ba0c46e4b70ab174cca63be06",
+          "bytes": 7008,
+          "sha256": "b543149fbee119397252ce198c8c74a35d47e695381500c213817d8dc4964b89",
           "verification": "bytes-verified"
         }
       ]
@@ -2807,7 +2807,7 @@
   },
   "lastPreparation": {
     "objectId": "melpomene",
-    "materialSha256": "f17dd270c616196253ad8380c18886ad8c3ec16f9707d93380546ef4541d0997",
+    "materialSha256": "8bcb177937af6f6e620efd1b1e0e002c83414401aa1215ac3130ba6d64f76396",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d58890634f3d0a8804afc6424bc3f82c415003fc3c1d776ddfb9fed1cff0cb82"
+    "sha256": "75bc30669c02fdee4fac141288d2d3d358a6f21a4211f0eafb98a03f2b06371b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "452213af1f6760634df1263931f291dffa594dde8ae2193e2dbc5a8153c6df31",
+      "sha256": "b216076f3653c536a7d9cc55de25dec7a8926a869fbc0e20ca1cb25efcf7c001",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,9 +90,9 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "63 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 8 nights in 2 apparitions from 2018-05-04 to 2019-08-07, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.24. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "63 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 8 nights in 2 apparitions from 2018-05-04 to 2019-08-07, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.24. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, averaged where frames overlap with each fading out toward its disc edge, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
-              "selection": "finest-resolution",
+              "selection": "edge-weighted-average",
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
@@ -4956,14 +4956,14 @@
       "outputs": [
         {
           "url": "/scenes/eugenia/eugenia-zimpol-thumbnail.webp",
-          "bytes": 1670,
-          "sha256": "63c45b55ce0513ecdaec2bd68236b185a6fccce32219e6b1bd55345dc91f9f59",
+          "bytes": 1444,
+          "sha256": "bde878123f93281db0edb36d0aa151fa6e963e8bc8be5532f277e8273417953b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eugenia/eugenia-zimpol-surface@2x.webp",
-          "bytes": 365464,
-          "sha256": "6c9a110733e523cd5aa8a3c45bfaa7b34c7e1cc76d4d82dad1fa466c3958f742",
+          "bytes": 181728,
+          "sha256": "e2555c6c4149ece7b46d6d9c75d035bd10da38fe86cc5cda9ae55c186940c6c9",
           "verification": "bytes-verified"
         }
       ],
@@ -5046,8 +5046,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 17438,
-          "sha256": "9875ea4b264c29c48619dd354d9442d8844da8661c8ebf7d8db3d952c14a03da",
+          "bytes": 4658,
+          "sha256": "caae0828af77a8e323867db6488a1e7ef5e7b6cd4c553ddcfa163bac69c7dfef",
           "verification": "bytes-verified"
         }
       ]
@@ -5084,7 +5084,7 @@
   },
   "lastPreparation": {
     "objectId": "eugenia",
-    "materialSha256": "6a46dcb5b56bacb2e5534c4f7fdf5ab4501463779f6d928fe7173b640376b7ff",
+    "materialSha256": "7ad2243e60093bf3fd185601879ed25783715869e623c473ad0ca1cd88c98901",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

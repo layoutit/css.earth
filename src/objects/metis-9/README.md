@@ -71,7 +71,7 @@ Source constraints are uneven and ground-based; a 4096 × 2048 display map does 
 
 Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase. The photograph does not use it: that lens takes the absolute phase from the pinned parameter record, so where its frames land on the body is set by the record and not by the display meridian.
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Metis from 3° to 9° south, so surface the survey did not see keeps the missing-imagery grid. Nothing registers the frames against surface markings, because the two tests that would do so find nothing to lock onto here; the lens ships on the survey's own comparison figure, reproduced above, and the mesh, the rotation record and that figure all come from this same survey's images.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Metis from 3° to 9° south, so surface the survey did not see keeps the missing-imagery grid. Nothing registers the frames against surface markings, because the two tests that would do so find nothing to lock onto here; the lens ships on the survey's own comparison figure, reproduced above, and the mesh, the rotation record and that figure all come from this same survey's images.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 
