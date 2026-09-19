@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { parsePreparedAssetOrigin, resolvePreparedAssetUrl } from './prepared-asset-origin.js';
+import { parsePreparedAssetOrigin, resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-asset-origin.js';
 
 const sha = 'a'.repeat(64), other = 'b'.repeat(64);
 
@@ -41,6 +41,25 @@ test('an inline pin and the asset map must agree', () => {
 test('an address missing from the map throws rather than fabricating a URL', () => {
   const origin = { origin: 'https://earth-assets.lowpoly.cc', assets: {} };
   expect(() => resolvePreparedAssetUrl('/scenes/saturn/saturn-surface@2x.webp', origin)).toThrow(/No published asset hash/);
+});
+
+test('rewritePreparedStyleUrls rewrites a baked node style url() against the asset origin', () => {
+  const origin = { origin: 'https://earth-assets.lowpoly.cc', assets: { 'antares-surface-shape@2x.webp': sha } };
+  const style = '--polycss-atlas-width:64px;--polycss-atlas-height:64px;background-image:url(/scenes/antares/antares-surface-shape@2x.webp);background-position:-16px 0';
+  expect(rewritePreparedStyleUrls(style, origin)).toBe(
+    `--polycss-atlas-width:64px;--polycss-atlas-height:64px;background-image:url(https://earth-assets.lowpoly.cc/runtime-assets/${sha}/antares-surface-shape@2x.webp);background-position:-16px 0`);
+});
+
+test('rewritePreparedStyleUrls leaves the style unchanged when the origin is null or unset', () => {
+  const style = 'background-image:url(/scenes/antares/antares-surface-shape@2x.webp)';
+  expect(rewritePreparedStyleUrls(style, null)).toBe(style);
+  expect(rewritePreparedStyleUrls(style, undefined)).toBe(style);
+});
+
+test('rewritePreparedStyleUrls still throws loudly on a filename missing from the asset map', () => {
+  const origin = { origin: 'https://earth-assets.lowpoly.cc', assets: {} };
+  const style = 'background-image:url(/scenes/antares/antares-surface-shape@2x.webp)';
+  expect(() => rewritePreparedStyleUrls(style, origin)).toThrow(/No published asset hash/);
 });
 
 test('parsePreparedAssetOrigin validates shape and rejects malformed input', () => {
