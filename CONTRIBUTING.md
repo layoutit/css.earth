@@ -46,6 +46,39 @@ Re-preparing a body from its sources needs more: `pnpm prepare:checkout`
 restores pinned source downloads, and some conversions call Python 3 with
 `numpy`. You do not need any of that to work on the shell, renderer or docs.
 
+## Checklist: a change that bakes or rebakes assets
+
+Does your change add a body, rebake one, or alter anything under a `prepared/`
+directory? Then the baked bytes must reach R2 **before the pull request can
+merge**, and the tracked inventory must be part of the diff. Git holds the
+inventory; R2 holds the bytes.
+
+1. Bake the object. `pnpm prepare:planets --object=<id>` for a body,
+   `pnpm prepare:volume src/objects/<id>` for a volume field. From a clean
+   checkout, `pnpm prepare:checkout` restores the pinned source downloads first.
+2. Publish the bytes: `node tools/publish-runtime-assets.mts --object=<id>`.
+   Safe to repeat — keys are content-addressed, so it uploads only what is
+   missing.
+3. Commit the refreshed `runtime-assets.json` and/or `prepared-assets.json`.
+   **Never commit the baked files themselves**; they are gitignored.
+4. Confirm before pushing, if you want the answer early:
+   `node tools/check-assets-published.mts --object=<id>`. CI checks this anyway.
+
+Skipping step 2 or 3 turns the pull request red, and that gate is the only thing
+between a missing key and a body that renders blank in production. Textures are
+served from R2 in production and the deploy ships no `public/scenes` copy, so an
+unpublished key is a 404 for every visitor, not a local inconvenience.
+
+### If you do not have R2 credentials
+
+Publishing needs write access to the bucket, which outside contributors do not
+have. This is expected — open the pull request without it. A maintainer bakes
+your branch, publishes, and pushes the inventory commit to it. Say in the pull
+request that assets need publishing so nobody waits on a gate you cannot clear.
+
+Continuous integration does not run on a pull request from a fork until a
+maintainer approves it, so the asset check will not report at all until then.
+
 ## Publishing prepared assets (maintainers)
 
 Prepared runtime files are served from an R2 bucket, content-addressed as `runtime-assets/<sha256>/<filename>`. Two small inventories are tracked in Git instead of the baked bytes: `runtime-assets.json` for the public browser textures, and `prepared-assets.json` for a body's `prepared/runtime.json` and `prepared/scene.json`, or a context or nebula object's whole `prepared/` output.
