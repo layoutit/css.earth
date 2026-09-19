@@ -1,8 +1,6 @@
 import assert from 'node:assert/strict';
 import { mkdir, readFile, rename, rm } from 'node:fs/promises';
-import { relative, resolve } from 'node:path';
-import { mkdtemp } from 'node:fs/promises';
-import { restoreCompactLmc } from '@cssearth/volume-bake/compact-inputs/density-material';
+import { resolve } from 'node:path';
 import { createStarRemover } from '../../services/star-removal.ts';
 import { createReconstructor } from '../../services/density-reconstruction.ts';
 import { promoteVolumeLenses, type VolumeLensPromotion } from './volume-lens-promotion.ts';
@@ -24,17 +22,10 @@ export async function bakeNebula(root: string, args: string[]) {
       return;
     }
   }
-  if (!options.research && recipe.delivery?.compactInputs && options.stage === 'all' && !options.image) {
-    const cache = resolve(root, '.local/nebula-lab/bakes');
-    await mkdir(cache, { recursive: true });
-    const temporary = await mkdtemp(resolve(cache, 'compact-lmc-'));
-    try {
-      const results = await restoreCompactLmc(root, recipe.delivery.compactInputs, temporary);
-      await restoreDelivery(root, recipe.delivery, results.map(result => ({ ...result, directory: relative(root, result.directory) })));
-      console.log(`BAKE_COMPLETE ${recipe.id}: compact inputs; every delivery hash verified`);
-      return;
-    } finally { await rm(temporary, { recursive: true, force: true }); }
-  }
+  // A full processing run is research. The application delivery replays from its object's own compact inputs
+  // (`pnpm prepare:nebulae`), never from this command.
+  if (!options.research && options.stage === 'all')
+    throw new Error('A full bake reruns the research pipeline; pass --research. Application deliveries are restored by pnpm prepare:nebulae.');
   const selected = recipe.images.filter(image => !options.image || image.imageId === options.image);
   assert.ok(selected.length, `Unknown image: ${options.image}`);
   const catalogue = JSON.parse((await pinned(root, recipe.catalogue)).toString());

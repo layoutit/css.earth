@@ -1,34 +1,13 @@
 {
-  "receiptSha256": "14038af02a7638ae44d047d184b77a55fd98e1db7064b011993932673791342d",
-  "capturedAt": "2026-09-09T23:12:20.083Z",
+  "receiptSha256": "a97bc44b890dfabc37813f51cf0906c9b2c462e1f09f7ebfc395000deb870ba1",
+  "capturedAt": "2026-09-19T12:00:00.000Z",
+  "source": "labs/nebula/models/lmc/envelope/finite-lenses.json",
+  "modelResultId": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
+  "receipt": "SHA-256 of this file's `lenses` array serialized with two-space indentation and a trailing newline.",
   "lenses": [
     {
-      "imageId": "vista-infrared",
-      "resultId": "932a145d2050e9811bc95a0a8a02672f5fc53eccb408ebff9a6ad748b5db7823",
-      "appearance": {
-        "saturation": 1.3,
-        "detailStrength": 1,
-        "detailScale": 24,
-        "brightness": 0.85,
-        "gamma": 0.9
-      },
-      "identityEvidence": "active.displayedResultId"
-    },
-    {
       "imageId": "horalek-widefield",
-      "resultId": "e7a94397c65ac9a9aa2f2d644c0f5e47e8fa91d0b220ee24137b329ff55a47ca",
-      "appearance": {
-        "saturation": 2.5,
-        "detailStrength": 1.95,
-        "detailScale": 96,
-        "brightness": 1.3,
-        "gamma": 1.3
-      },
-      "identityEvidence": "saved completed per-image job"
-    },
-    {
-      "imageId": "wise-wide-infrared",
-      "resultId": "a44d4e247e4ceaf88826b2653b2eca175c5156cfeefeb87a18b41fd823b4a46e",
+      "resultId": "cab541ef8eac8f8ef410c5a93317a37a2a4a67b27a7d5c0a9154d59f71759559",
       "appearance": {
         "saturation": 1,
         "detailStrength": 0,
@@ -36,7 +15,31 @@
         "brightness": 1,
         "gamma": 1
       },
-      "identityEvidence": "saved per-result applied density controls; no newer personal appearance or job stored"
+      "identityEvidence": "Baked finite-lens result appearance; no browser-saved personal appearance exists for this model. The lens tone curve is part of the result identity, not an appearance control."
+    },
+    {
+      "imageId": "vista-infrared",
+      "resultId": "f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f",
+      "appearance": {
+        "saturation": 1,
+        "detailStrength": 0,
+        "detailScale": 24,
+        "brightness": 1,
+        "gamma": 1
+      },
+      "identityEvidence": "Baked finite-lens result appearance; no browser-saved personal appearance exists for this model. The lens tone curve is part of the result identity, not an appearance control."
+    },
+    {
+      "imageId": "wise-wide-infrared",
+      "resultId": "6223c6cd9b389f00a42d52b9016431a4416d1e77f70ebaaa5694f8ce32fbaff6",
+      "appearance": {
+        "saturation": 1,
+        "detailStrength": 0,
+        "detailScale": 24,
+        "brightness": 1,
+        "gamma": 1
+      },
+      "identityEvidence": "Baked finite-lens result appearance; no browser-saved personal appearance exists for this model. The lens tone curve is part of the result identity, not an appearance control."
     }
   ]
 }

@@ -1,43 +1,37 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
-  "resultId": "932a145d2050e9811bc95a0a8a02672f5fc53eccb408ebff9a6ad748b5db7823",
+  "resultId": "f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f",
   "imageId": "vista-infrared",
   "removalResultId": "6695dc1957c9ab6b2831bfe3a859f52bb7ce2b55d837739d8ff917d394071a54.d37da4f14fa3f503f8560067b0fe7b300e6ee2f0a16ba06d07f0f815f2ffc4a1",
   "placement": {
-    "x": -0.9001341686099777,
-    "y": 1.6901640670280988,
+    "x": 0,
+    "y": 0,
     "z": 0,
     "rotationX": 0,
     "rotationY": 0,
-    "rotationZ": 39,
-    "scale": 3
+    "rotationZ": 0,
+    "scale": 1
   },
   "appearance": {
-    "saturation": 1.3,
-    "detailStrength": 1,
+    "saturation": 1,
+    "detailStrength": 0,
     "detailScale": 24,
-    "brightness": 0.85,
-    "gamma": 0.9
+    "brightness": 1,
+    "gamma": 1
   },
   "subject": {
-    "id": "reconstruction-932a145d2050e9811bc95a0a8a02672f5fc53eccb408ebff9a6ad748b5db7823",
-    "name": "ESO VISTA · infrared, star-aligned · reconstruction",
-    "directory": ".local/nebula-lab/reconstructions/932a145d2050e9811bc95a0a8a02672f5fc53eccb408ebff9a6ad748b5db7823",
-    "stars": ".local/nebula-lab/reconstructions/932a145d2050e9811bc95a0a8a02672f5fc53eccb408ebff9a6ad748b5db7823/prepared/stars.json",
-    "cloudParts": {
-      "descriptor": "inspection-object.json",
-      "catalogue": "source/cloud-parts.json"
-    },
-    "imagePath": ".local/nebula-lab/reconstructions/932a145d2050e9811bc95a0a8a02672f5fc53eccb408ebff9a6ad748b5db7823/source/target.png",
+    "id": "reconstruction-f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f",
+    "name": "ESO VISTA · infrared, star-aligned · reconstruction · finite material",
+    "directory": ".local/nebula-lab/reconstructions/f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f",
+    "stars": "labs/nebula/models/lmc/stars/prepared/stars-envelope.json",
     "sourcePageUrl": "https://www.eso.org/public/images/eso1914a/",
     "credit": "ESO/VMC Survey",
-    "modelNote": "Experimental extended-light reconstruction at the calibrated sky scale. Stellar-prior depth is modeled; the photo boundary and flat appearance in oblique views remain unresolved. Not accepted for production.",
+    "modelNote": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry.",
     "framingRadiusUnits": 5,
     "hasDetail": false,
     "comparisonGroup": "lmc-clouds-observation",
     "referenceDistanceUnits": 49.59067275049,
     "referenceEastLeft": true,
-    "comparisonImages": [],
     "density": {
       "directory": "labs/nebula/models/lmc/full-density",
       "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
@@ -45,24 +39,44 @@
       "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
       "overlays": "labs/nebula/models/lmc/candidates/overlays.json",
       "candidateImageIds": [
-        "smash-original",
         "vista-infrared",
-        "wise-wide-infrared",
-        "dss2-wide-optical",
         "horalek-widefield",
-        "smash-dr2-wide-mosaic",
-        "ciel-austral-optical",
-        "naztronomy-optical"
+        "wise-wide-infrared"
       ],
-      "reconstructionReferenceImageId": "smash-original",
-      "referenceFramingRadiusUnits": 5
+      "referenceFramingRadiusUnits": 5,
+      "starAlignmentReference": {
+        "path": "labs/nebula/models/lmc/stars/source/alignment.json",
+        "sha256": "d2213aeb75b7b0a9084a482a6baa361834360599320044c0b18e248043066d12"
+      },
+      "processingPlan": "labs/nebula/models/lmc/star-separation/plan.json"
     },
+    "imagePath": ".local/nebula-lab/reconstructions/f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f/source/target.png",
+    "menuLabel": "LMC",
+    "workflow": "density",
     "sourceSubjectId": "lmc-clouds",
-    "reconstructionOverlay": ".local/nebula-lab/reconstructions/932a145d2050e9811bc95a0a8a02672f5fc53eccb408ebff9a6ad748b5db7823/source/original-overlay.json",
+    "comparisonImages": [],
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f/source/original-overlay.json",
+    "cloudParts": {
+      "descriptor": "inspection-object.json",
+      "catalogue": "source/cloud-parts.json"
+    },
     "reconstructionImage": {
       "group": "lmc-clouds",
-      "label": "ESO VISTA · infrared, star-aligned",
-      "note": "Candidate colors on the unchanged Alignment density cloud; saved placement is preserved."
-    }
+      "label": "ESO VISTA · infrared, star-aligned · finite material",
+      "note": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry."
+    },
+    "reconstructionNeutral": {
+      "descriptor": "neutral-object.json"
+    },
+    "materialGeometry": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d"
+  },
+  "finiteMaterial": {
+    "modelResultId": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
+    "sourceResultId": "ba8f4ad93ea837aa3db9190f0a403e17708533ee5047389dd14a1d6c18560c5f"
+  },
+  "processing": {
+    "densityPreview": false,
+    "modelLabel": "Simulation-guided finite material",
+    "reason": "This saved model cannot be refitted by the density material Preview. Its finite geometry and image colors were prepared together. Refitting requires its recorded offline recipe; shared compiler controls are not connected yet."
   }
 }
