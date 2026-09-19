@@ -8,7 +8,7 @@ import { csvCells, instrumentTable, INSTRUMENT_TABLES, lev0Url, lev1Url } from '
 import { CALIBRATION_TYPES, KOAID, nightsAround, parseKeckProgram, PROGRAMS } from './archive.mts';
 import { matchShippedObject, nameCandidates, normalise, pinnedEvidence, REDUCTION_STATE } from './archive-ledger.mts';
 import { assertNoPlotServer, configureWithoutPlots, pinnedInput, PLOT_SERVER_LINES, PLOTS_OFF, REDUCIBLE, reductionRun, stagedName } from './reduce.mts';
-import { archiveAgreement, pairExtensions, stageOf } from './compare.mts';
+import { archiveAgreement, assertRunIsFor, pairExtensions, productStems, runProduct, selectRunProduct, stageOf } from './compare.mts';
 
 const KOA = 'https://koa.ipac.caltech.edu';
 const path = '/KCWI/2023/20231209/lev0/KB.20231209.37031.94.fits';
@@ -235,4 +235,54 @@ test('what the comparison establishes is tied to the exact product it checked', 
   assert.match(evidence.establishes, /NOT written by the same version of the pipeline \(ours 1\.3\.1, the archive's 1\.0\.2\)/u);
   assert.match(evidence.establishes, /the difference is what this establishes, not agreement/u);
   assert.match(evidence.establishes, /nothing about either run's calibration being right/u);
+});
+
+test('a product is the stage of the requested observation, never the first file that ends the same way', async () => {
+  // The reviewer's case: one run directory holding two nights' cubes. Both end in `_icubed.fits`, so a match on the stage
+  // alone took whichever came first, and the December 9 cube was compared against a December 10 one without a word.
+  const pinned = parseKeckProgram(program()).observations[0]!;
+  const night10 = 'kb231210_00042_icubed.fits', night09 = 'kb231209_00085_icubed.fits';
+  assert.equal(selectRunProduct([night10, night09], 'icubed', pinned), night09);
+  assert.equal(selectRunProduct([night09, night10], 'icubed', pinned), night09, 'order in the listing decides nothing');
+  assert.equal(selectRunProduct([night10], 'icubed', pinned), null, 'another night is not this observation’s product'.replace('’', "'"));
+  assert.equal(selectRunProduct([night09, night10], '', pinned), null);
+  // KOA's own id is accepted too, because which of the two names a pipeline writes under is the pipeline's choice.
+  assert.equal(selectRunProduct(['KB.20231209.37031.94_icubed.fits'], 'icubed', pinned), 'KB.20231209.37031.94_icubed.fits');
+  assert.deepEqual(productStems(pinned), ['kb231209_00085', 'KB.20231209.37031.94']);
+  // Two files claiming to be the same stage of the same frame means the directory holds two runs, and that is refused.
+  assert.throws(() => selectRunProduct([night09, `sub/${night09}`], 'icubed', pinned), /2 files that are its icubed stage/u);
+});
+
+test('a run directory of another program or observation is refused, not compared', async () => {
+  const run = await mkdtemp(join(tmpdir(), 'keck-run-'));
+  const write = async (value: unknown) => writeFile(join(run, 'run.json'), JSON.stringify(value));
+  await assert.rejects(assertRunIsFor(run, 'm42-kcwi-2023b-u124', 'KB.20231209.37031.94.fits'), /holds no run.json/u);
+  await write({ program: 'm42-kcwi-2023b-u124', koaid: 'KB.20231210.04100.00.fits', products: ['kb231210_00042_icubed.fits'] });
+  await assert.rejects(assertRunIsFor(run, 'm42-kcwi-2023b-u124', 'KB.20231209.37031.94.fits'), /is the run of m42-kcwi-2023b-u124 KB\.20231210\.04100\.00\.fits/u);
+  await write({ program: 'another-program', koaid: 'KB.20231209.37031.94.fits', products: [] });
+  await assert.rejects(assertRunIsFor(run, 'm42-kcwi-2023b-u124', 'KB.20231209.37031.94.fits'), /is the run of another-program/u);
+  await write({ program: 'm42-kcwi-2023b-u124', koaid: 'KB.20231209.37031.94.fits', products: ['kb231209_00085_icubed.fits'] });
+  assert.deepEqual(await assertRunIsFor(run, 'm42-kcwi-2023b-u124', 'KB.20231209.37031.94.fits'), ['kb231209_00085_icubed.fits']);
+});
+
+test('a product with no record, or a record of another observation, is refused rather than compared', async () => {
+  const pinned = parseKeckProgram(program()).observations[0]!;
+  const redux = await mkdtemp(join(tmpdir(), 'keck-redux-'));
+  const name = 'kb231209_00085_icubed.fits', cube = join(redux, name);
+  const archiveProduct = { ...pinned.science, name: 'KB.20231209.37031.94_icubed.fits',
+    filehand: '/KCWI/2023/20231209/lev1/redux/KB.20231209.37031.94_icubed.fits', level: 'lev1' } as Parameters<typeof runProduct>[1];
+  await writeFile(cube, 'not really a cube');
+  assert.equal(await runProduct(redux, archiveProduct, ['kb231210_00042_icubed.fits'], pinned), null, 'another night is simply absent');
+  await assert.rejects(runProduct(redux, archiveProduct, [name], pinned), /has no product record beside it/u);
+  const record = (overrides: Record<string, unknown> = {}) => ({ schema: 'cssearth-telescope-product@1', telescope: 'Keck', stage: 'kcwi-drp-group',
+    inputs: [{ role: 'object', identity: pinned.science.name, bytes: pinned.science.bytes, sha256: pinned.science.sha256 }],
+    parameters: { koaid: pinned.koaid }, software: [{ name: 'kcwidrp', version: '1.3.1' }],
+    outputs: [{ path: name, bytes: 17, sha256: 'b'.repeat(64) }], evidence: [], ...overrides });
+  const put = async (value: unknown) => writeFile(`${cube}.product.json`, JSON.stringify(value));
+  await put(record({ parameters: { koaid: 'KB.20231210.04100.00.fits' } }));
+  await assert.rejects(runProduct(redux, archiveProduct, [name], pinned), /was made from KB\.20231210\.04100\.00\.fits, not from KB\.20231209\.37031\.94\.fits/u);
+  await put(record({ inputs: [{ role: 'bias', identity: 'KB.20231209.20185.51.fits', bytes: 10166400, sha256: 'a'.repeat(64) }] }));
+  await assert.rejects(runProduct(redux, archiveProduct, [name], pinned), /was not made from the pinned raw frame/u);
+  await put(record());
+  assert.equal(await runProduct(redux, archiveProduct, [name], pinned), cube);
 });

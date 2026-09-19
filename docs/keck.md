@@ -82,8 +82,17 @@ Downloads are `getKOA/nph-getKOA?filehand=` for a raw frame and `KoaAPI/nph-dnlo
    the software versions and the toolchain digest; a re-run with the same record and the same outputs on disk is reused rather
    than repeated.
 4. **Compare.** `compare.mts <program id> <koaid> <run directory>` matches each pinned archive product to the run's product of
-   the same stage (`_icubed`, `_icubes`, `_intf` and the rest), reads both with this repository's FITS reader, and compares
-   them sample by sample. The two must be on one grid; a difference in shape is reported and refused rather than reconciled. A
+   the same stage (`_icubed`, `_icubes`, `_intf` and the rest) **made from this observation's own raw frame**, reads both with
+   this repository's FITS reader, and compares them sample by sample.
+
+   The stage suffix alone does not identify a product, and treating it as though it did was a real defect: a run directory
+   holds a whole night, every science frame in it ends in `_icubed.fits`, and taking the first match compared the December 9
+   cube against a December 10 one without saying so. Three things now have to agree before a pair is compared. The run
+   directory's own `run.json` must name the program and the observation asked for, or the directory is a different reduction
+   and is refused. The candidate's name must carry this observation's frame name, either the observatory's (`kb231209_00085`)
+   or KOA's id, as well as the stage. And the product's own record must name this observation and pin its raw frame at the
+   pinned digest. There is no fall back to a first match: no candidate is reported as not reproduced, two candidates are
+   refused, and a product with no record or with another observation's record is refused. The two must be on one grid; a difference in shape is reported and refused rather than reconciled. A
    cube is read one plane at a time, so what is held is one plane of each file. For each extension the receipt gives how many
    samples both hold, the share that are bit-identical, the median absolute difference over the median level, and then two
    cuts: over the samples above the median level, and over the samples above the 99th percentile of the archive's own levels,

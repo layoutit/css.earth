@@ -20,9 +20,10 @@ import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { positionalArguments } from '../../cli-arguments.mts';
+import { requireArray, requireRecord, requireString } from '../../source-values.mts';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits.mts';
-import { addProductEvidence, productRecordPath, type ProductEvidence } from '../product-record.mts';
-import { DOWNLOADS, PROGRAMS, readKeckProgram, type KeckFile } from './archive.mts';
+import { addProductEvidence, productRecordPath, readProductRecord, type ProductEvidence } from '../product-record.mts';
+import { DOWNLOADS, PROGRAMS, readKeckProgram, type KeckFile, type KeckObservation } from './archive.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
 
@@ -164,14 +165,59 @@ function differentSettings(ours: FitsHeader, theirs: FitsHeader) {
     .map(key => [key, { ours: ours[key], archive: theirs[key] }]));
 }
 
-/** The run's file for a pinned archive product: the product of the same stage of the same frame. */
-export async function runProduct(redux: string, product: KeckFile, names: readonly string[]) {
-  const stage = stageOf(product.name);
+/** The stem the pipeline writes one observation's products under: it names every product after the file it reduced, so the
+ * stem is that frame's name without its extension. Both names the program holds are accepted, because which one a pipeline
+ * uses is the pipeline's choice: the observatory's own (`kb231209_00085`, what the KCWI DRP uses, since the frames are staged
+ * under it) and KOA's id (`KB.20231209.37031.94`, what the archive's own products use). */
+export const productStems = (observation: KeckObservation): string[] =>
+  [...new Set([observation.science.observatoryName, observation.science.name].filter((name): name is string => Boolean(name))
+    .map(name => name.replace(/\.fits(?:\.gz)?$/u, '')))];
+
+/** The run's product for one stage OF ONE OBSERVATION, by name.
+ *
+ * A stage suffix alone does not identify a product. A run directory holds a whole night, and every science frame in it ends
+ * in `_icubed.fits`; taking the first match compared the December 9 cube against a December 10 one, silently, because both
+ * names end the same way. So a candidate has to carry the requested observation's own frame name as well as the stage, and
+ * there is no fall back to a first match: none is `null` (reported as not reproduced), and more than one is refused, because
+ * two files claiming to be the same stage of the same frame means the directory holds two runs. */
+export function selectRunProduct(names: readonly string[], stage: string, observation: KeckObservation): string | null {
   if (!stage) return null;
-  const match = names.find(name => stageOf(name) === stage);
+  const stems = productStems(observation);
+  const matches = names.filter(name => stageOf(name) === stage
+    && stems.includes(basename(name).replace(/\.fits(?:\.gz)?$/u, '').slice(0, -(stage.length + 1))));
+  if (matches.length > 1) throw new Error(`${observation.koaid}: the run holds ${matches.length} files that are its ${stage} stage (${matches.join(', ')}); which one it is cannot be decided here.`);
+  return matches[0] ?? null;
+}
+
+/** Refuse a run directory that is not the one asked about. `run.json` is written by the run that made the products and names
+ * the program and the observation it reduced, so a directory naming another is a directory of another reduction, and
+ * comparing its products against this observation's archive product would compare two different frames. */
+export async function assertRunIsFor(run: string, id: string, koaid: string) {
+  const text = await readFile(resolve(run, 'run.json'), 'utf8').catch(() => null);
+  if (text === null) throw new Error(`${run} holds no run.json, so what it reduced is not known; re-run tools/objects/keck/reduce.mts ${id} ${koaid}.`);
+  const entry = requireRecord(JSON.parse(text) as unknown, 'run.json');
+  const program = requireString(entry.program, 'run.json program'), made = requireString(entry.koaid, 'run.json koaid');
+  if (program !== id || made !== koaid) throw new Error(`${run} is the run of ${program} ${made}, not of ${id} ${koaid}.`);
+  return requireArray(entry.products ?? [], 'run.json products').map(name => requireString(name, 'product name'));
+}
+
+/** The run's file for a pinned archive product: the product of the same stage made from this observation's own raw frame.
+ * The name has to say so and the product's own record has to say so, because a name is what a pipeline chose and a record is
+ * what the run wrote: the record names the observation and pins the raw frames it read. A product with no record, or with a
+ * record of another observation, is refused rather than compared. */
+export async function runProduct(redux: string, product: KeckFile, names: readonly string[], observation: KeckObservation) {
+  const stage = stageOf(product.name);
+  const match = selectRunProduct(names, stage, observation);
   if (!match) return null;
   const path = resolve(redux, match);
-  return await access(path).then(() => path, () => null);
+  if (!await access(path).then(() => true, () => false)) return null;
+  const record = await readProductRecord(productRecordPath(path));
+  if (!record) throw new Error(`${match} has no product record beside it, so what it was made from is not known; re-run tools/objects/keck/reduce.mts, which writes one with every product.`);
+  const made = (record.parameters as { koaid?: unknown }).koaid;
+  if (made !== observation.koaid) throw new Error(`${match} was made from ${String(made)}, not from ${observation.koaid}.`);
+  if (!record.inputs.some(input => input.identity === observation.science.name && input.sha256 === observation.science.sha256))
+    throw new Error(`${match} was not made from the pinned raw frame ${observation.science.name}; its record names ${record.inputs.length} inputs and none of them is that file at the pinned digest.`);
+  return path;
 }
 
 export async function compareWithArchive(id: string, koaid: string, run: string) {
@@ -180,12 +226,12 @@ export async function compareWithArchive(id: string, koaid: string, run: string)
   if (!observation) throw new Error(`${id} pins no observation ${koaid}.`);
   if (!observation.archiveProducts.length) throw new Error(`${koaid}: KOA published no reduced product for it, so there is nothing to compare against.`);
   const redux = resolve(run, 'redux');
-  const listing = await readFile(resolve(run, 'run.json'), 'utf8').then(text => (JSON.parse(text) as { products?: string[] }).products ?? [], () => [] as string[]);
+  const listing = await assertRunIsFor(run, id, koaid);
   const receipts: { path: string; receipt: Record<string, unknown> }[] = [];
   const missing: string[] = [];
   // The archive keeps one stage under more than one level; each is compared against the run's product for that stage.
   for (const product of observation.archiveProducts) {
-    const local = await runProduct(redux, product, listing);
+    const local = await runProduct(redux, product, listing, observation);
     if (!local) { missing.push(product.name); continue; }
     const archive = resolve(DOWNLOADS, id, 'products', product.level ?? 'lev1', product.name);
     const ourHdus = await readFitsFileHdus(local), theirHdus = await readFitsFileHdus(archive);
