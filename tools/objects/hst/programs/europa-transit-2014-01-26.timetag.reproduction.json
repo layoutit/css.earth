@@ -10,8 +10,8 @@
  "rootname": "oc7u02g2q",
  "exposure": {
   "events": 54043337,
-  "eventsPlaced": 5353528,
-  "eventsOutsideGrid": 48689809,
+  "eventsPlaced": 5351748,
+  "eventsOutsideGrid": 48691589,
   "eventsOutsideGoodTime": 0,
   "goodTimeIntervals": 23,
   "liveSeconds": 2023.24,
@@ -48,7 +48,7 @@
      -40
     ],
     "bins": 15,
-    "darkestZ": 3.53,
+    "darkestZ": 3.1,
     "atLatitudeDegrees": -46.8,
     "atRadii": 1.031
    },
@@ -58,15 +58,15 @@
      60
     ],
     "bins": 15,
-    "darkestZ": 2.96
+    "darkestZ": 2.01
    },
    "controlScatter": 1.27,
-   "controlMean": -0.01,
+   "controlMean": 0,
    "controlBins": 995,
-   "limbAnnulusScatter": 1.92,
+   "limbAnnulusScatter": 1.78,
    "limbAnnulusBins": 137,
-   "darkestOverAnnulusScatter": 1.83,
-   "darkestOverControlScatter": 2.78
+   "darkestOverAnnulusScatter": 1.74,
+   "darkestOverControlScatter": 2.43
   },
   {
    "sector": "sparks-2016-south-polar",
@@ -77,7 +77,7 @@
      -40
     ],
     "bins": 9,
-    "darkestZ": 3.08,
+    "darkestZ": 3.96,
     "atLatitudeDegrees": -52.2,
     "atRadii": 1.007
    },
@@ -87,15 +87,15 @@
      60
     ],
     "bins": 7,
-    "darkestZ": 2.95
+    "darkestZ": 2.64
    },
    "controlScatter": 1.46,
    "controlMean": -0.01,
    "controlBins": 502,
-   "limbAnnulusScatter": 2.58,
+   "limbAnnulusScatter": 2.4,
    "limbAnnulusBins": 66,
-   "darkestOverAnnulusScatter": 1.19,
-   "darkestOverControlScatter": 2.11
+   "darkestOverAnnulusScatter": 1.65,
+   "darkestOverControlScatter": 2.72
   }
  ],
  "published": [

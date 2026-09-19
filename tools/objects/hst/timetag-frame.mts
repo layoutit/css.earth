@@ -218,6 +218,9 @@ export async function runTimeTagFrame(definition: TimeTagDefinition, options: Ti
   const search = { width: coarse, height: coarse, radiusPixels: radiusDetectorPixels / bin,
     innerRadii: definition.tracking.innerRadii, outerRadii: definition.tracking.outerRadii };
   const seed = findDisc(whole, { ...search, brightSurround: brightWhole, guess: { x: coarse / 2, y: coarse / 2 }, searchPixels: coarse });
+  // `findDisc` answers in the binned image's own continuous coordinates, and one binned unit is `bin` detector units,
+  // so multiplying carries the centre straight over. Taking the binned index times `bin` instead would name the corner of
+  // the first detector pixel of that bin, half a bin away from where the body is.
   log(`whole exposure: ${definition.target} at detector (${(seed.x * bin).toFixed(1)}, ${(seed.y * bin).toFixed(1)}), missing light ${seed.significance.toFixed(1)} sigma`);
 
   const track: TrackedSlice[] = [];
@@ -244,7 +247,8 @@ export async function runTimeTagFrame(definition: TimeTagDefinition, options: Ti
   let eventsPlaced = 0, eventsOutsideGrid = 0, eventsOutsideGoodTime = 0;
   await streamEvents(file, (seconds, x, y) => {
     if (!inGoodTime(file.intervals, seconds)) { eventsOutsideGoodTime++; return; }
-    const at = restFramePixel(x - driftX(seconds - middle), y - driftY(seconds - middle), frame);
+    // An event names the detector pixel it fell in, so its continuous place is half a pixel past that index.
+    const at = restFramePixel(x + 0.5 - driftX(seconds - middle), y + 0.5 - driftY(seconds - middle), frame);
     if (!at) { eventsOutsideGrid++; return; }
     counts[at[1] * pixels + at[0]]!++; eventsPlaced++;
   });
@@ -279,6 +283,8 @@ export function timeTagProduct(run: TimeTagRun): Buffer {
     ['MJD-OBS', run.file.startMjd], ['MJD-END', run.file.endMjd],
     ['RADESYS', 'ICRS'],
     ['CTYPE1', 'RA---TAN'], ['CTYPE2', 'DEC--TAN'], ['CUNIT1', 'deg'], ['CUNIT2', 'deg'],
+    // The target stands at continuous `pixels / 2`, the corner between the two middle pixels; FITS counts from one and
+    // puts pixel centres on whole numbers, so the same place is `pixels / 2 + 0.5` there.
     ['CRPIX1', pixels / 2 + 0.5, 'the target at mid-exposure'], ['CRPIX2', pixels / 2 + 0.5],
     ['CRVAL1', run.place.rightAscensionDegrees], ['CRVAL2', run.place.declinationDegrees],
     ['CD1_1', -degreesPerPixel, 'right ascension falls along columns: east is left'], ['CD1_2', 0],
@@ -313,10 +319,13 @@ export function timeTagProduct(run: TimeTagRun): Buffer {
   ]);
 }
 
-/** The middle of a square image, `half` pixels each way about its centre, rows and columns kept in order. */
+/** The middle of a square image, `half` pixels each way about its centre, rows and columns kept in order. The grid holds an
+ * even number of pixels and the target stands at continuous `size / 2`, so the crop starts at `size / 2 - half` and the
+ * target lands at continuous `half` in it, which is the middle of the crop by the same convention. */
 export function centredCrop(values: Float64Array, size: number, half: number): { readonly size: number; readonly values: Float64Array } {
-  const from = Math.round(size / 2) - half;
-  if (!(half > 0) || from < 0 || from + 2 * half > size) throw new RangeError('The crop does not fit inside the image.');
+  if (!Number.isSafeInteger(size) || size % 2 !== 0) throw new RangeError('A centred crop is taken from a grid of an even number of pixels.');
+  const from = size / 2 - half;
+  if (!Number.isSafeInteger(half) || !(half > 0) || from < 0 || from + 2 * half > size) throw new RangeError('The crop does not fit inside the image.');
   const out = new Float64Array(4 * half * half);
   for (let row = 0; row < 2 * half; row++) out.set(values.subarray((from + row) * size + from, (from + row) * size + from + 2 * half), row * 2 * half);
   return { size: 2 * half, values: out };
@@ -329,13 +338,14 @@ export const PICTURE_HALF_WIDTH_RADII = 4;
  * and readable by anything that reads a plain FITS sky image. Same grid, same WCS, reference pixel moved with the crop. */
 export function timeTagPicture(run: TimeTagRun): Buffer {
   const definition = run.definition, pixels = definition.grid.pixels, crop = centredCrop(run.rate, pixels, Math.ceil(PICTURE_HALF_WIDTH_RADII * run.radiusGridPixels));
-  const degreesPerPixel = definition.grid.kmPerPixel / definition.bodyRadiusKm * run.radiusDetectorPixels * definition.plateScaleArcsec / 3600, shift = Math.round(pixels / 2) - crop.size / 2;
+  const degreesPerPixel = definition.grid.kmPerPixel / definition.bodyRadiusKm * run.radiusDetectorPixels * definition.plateScaleArcsec / 3600;
   const data = Buffer.alloc(crop.values.length * 4);
   crop.values.forEach((value, index) => data.writeFloatBE(Number.isFinite(value) ? value : 0, index * 4));
   return Buffer.concat([headerBlock([['SIMPLE', true, 'conforms to FITS standard'], ['BITPIX', -32], ['NAXIS', 2], ['NAXIS1', crop.size], ['NAXIS2', crop.size],
     ['BUNIT', 'count/s/pixel', 'events per second in the target frame'], ['TARGNAME', definition.target], ['INSTRUME', definition.instrument], ['OPT_ELEM', definition.opticalElement], ['ROOTNAME', definition.rootname],
     ['EXPTIME', run.liveSeconds, 'seconds of good time counted'], ['MJD-OBS', run.file.startMjd], ['RADESYS', 'ICRS'], ['CTYPE1', 'RA---TAN'], ['CTYPE2', 'DEC--TAN'], ['CUNIT1', 'deg'], ['CUNIT2', 'deg'],
-    ['CRPIX1', pixels / 2 + 0.5 - shift, 'the target at mid-exposure'], ['CRPIX2', pixels / 2 + 0.5 - shift], ['CRVAL1', run.place.rightAscensionDegrees], ['CRVAL2', run.place.declinationDegrees],
+    // The crop is centred, so the target stands at continuous `crop.size / 2` in it and FITS names that place one further on.
+    ['CRPIX1', crop.size / 2 + 0.5, 'the target at mid-exposure'], ['CRPIX2', crop.size / 2 + 0.5], ['CRVAL1', run.place.rightAscensionDegrees], ['CRVAL2', run.place.declinationDegrees],
     ['CD1_1', -degreesPerPixel, 'east is left'], ['CD1_2', 0], ['CD2_1', 0], ['CD2_2', degreesPerPixel, 'north is up'],
     ['KMPERPIX', definition.grid.kmPerPixel, 'km at the target'], ['BODYRPIX', run.radiusGridPixels, 'pixels, the target radius on this grid'], ['STACKID', definition.id], ['ORIGIN', 'cssEarth tools/objects/hst/timetag-frame.mts']]), padBlock(data)]);
 }

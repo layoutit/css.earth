@@ -7,8 +7,9 @@ import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
-import { skyImageAxes } from '../../fits-sky.mts';
-import { readEventsFile, streamEvents } from './timetag-frame.mts';
+import { readFitsHdus } from '../../fits.mts';
+import { skyImageAxes, skyProjection } from '../../fits-sky.mts';
+import { centredCrop, readEventsFile, streamEvents, timeTagPicture, timeTagProduct, type TimeTagRun } from './timetag-frame.mts';
 import {
   azimuthalRatio, backgroundSurface, boxSums, findDisc, goodTimeIntervals, gridLatitudeDegrees, gridRadii, inGoodTime,
   limbStatistics, liveSeconds, parseTimeTagDefinition, quadraticFit, restFramePixel, significanceBins, sliceLiveSeconds,
@@ -90,8 +91,9 @@ test('the body is found by the light it blocks, not by being the darkest place i
   const image = sceneWithDisc(width, height, [70.5, 44.5], radius, 40, 6);
   const found = findDisc(image, { width, height, radiusPixels: radius, innerRadii: 0.7, outerRadii: 2.2,
     brightSurround: 20, guess: { x: width / 2, y: height / 2 }, searchPixels: width });
-  assert.ok(Math.abs(found.x - 70) < 0.6, `x ${found.x}`);
-  assert.ok(Math.abs(found.y - 44) < 0.6, `y ${found.y}`);
+  // The disc was drawn about the continuous point (70.5, 44.5), and that is what comes back: not the index 70, 44.
+  assert.ok(Math.abs(found.x - 70.5) < 0.1, `x ${found.x}`);
+  assert.ok(Math.abs(found.y - 44.5) < 0.1, `y ${found.y}`);
   assert.ok(found.significance > 10, `significance ${found.significance}`);
   assert.ok(found.surround > 35, `surround ${found.surround}`);
   // The unlit corner is darker than the body and holds no light at all; a search that scored contrast would settle there.
@@ -99,6 +101,17 @@ test('the body is found by the light it blocks, not by being the darkest place i
   // With no bright surround anywhere, nothing is the body and that is said rather than guessed.
   assert.throws(() => findDisc(image, { width, height, radiusPixels: radius, innerRadii: 0.7, outerRadii: 2.2,
     brightSurround: 1e6, guess: { x: width / 2, y: height / 2 }, searchPixels: width }), /bright enough surround/u);
+});
+
+test('an event is counted in the pixel it falls in, so the body\'s own place is the middle corner', () => {
+  const frame = { positionAngleDegrees: 0, scale: 1, pixels: 100 };
+  // The body stands at continuous 50, the corner between pixels 49 and 50, so the two pixels either side of it share it.
+  assert.deepEqual(restFramePixel(0.2, 0.2, frame), [50, 50]);
+  assert.deepEqual(restFramePixel(-0.2, -0.2, frame), [49, 49]);
+  // Rounding instead of flooring would put both of those in pixel 50 and carry every symmetric cloud half a pixel west
+  // and half a pixel north.
+  assert.deepEqual(restFramePixel(0.9, 0.9, frame), [50, 50]);
+  assert.deepEqual(restFramePixel(-0.9, -0.9, frame), [49, 49]);
 });
 
 test('the grid runs north up and east left, and rotates by the aperture angle with no flip', () => {
@@ -311,4 +324,76 @@ test('the picture is the middle of the image, rows and columns in order, and a c
   assert.deepEqual([...crop.values.subarray(0, 4)], [18, 19, 20, 21]);
   assert.deepEqual([...crop.values.subarray(12, 16)], [42, 43, 44, 45]);
   assert.throws(() => centredCrop(values, size, 5), /does not fit/u);
+});
+
+/** A run with nothing in it but the geometry the written headers are made of, so the cards can be tested on their own. */
+function runOf(pixels: number, kmPerPixel: number, positionAngleDegrees: number, rate: Float64Array): TimeTagRun {
+  const patched = parseTimeTagDefinition({ ...JSON.parse(JSON.stringify(definition)) as Record<string, unknown>, grid: { pixels, kmPerPixel } });
+  const place = { julianDate: 2456684.275341585, rightAscensionDegrees: 103.695471778, declinationDegrees: 23.019927083, angularDiameterArcsec: 1.0063 };
+  const radiusDetectorPixels = place.angularDiameterArcsec / 2 / patched.plateScaleArcsec;
+  const empty = new Float64Array(pixels * pixels);
+  return {
+    definition: patched, place, radiusDetectorPixels, radiusGridPixels: patched.bodyRadiusKm / kmPerPixel,
+    file: { path: '', rootname: patched.rootname, aperture: patched.aperture, opticalElement: patched.opticalElement,
+      exposureSeconds: 100, startMjd: 56683.76083348, endMjd: 56683.78984969, positionAngleDegrees,
+      events: 0, rowBytes: 10, dataStart: 0, tickSeconds: patched.tickSeconds, intervals: [[0, 100]] },
+    track: [], trackResidualPixels: [], driftPixels: 0, liveSeconds: 100, spanSeconds: 100,
+    eventsPlaced: 0, eventsOutsideGrid: 0, eventsOutsideGoodTime: 0,
+    rate, background: empty, model: empty, counts: Float64Array.from(rate), statistics: [],
+  };
+}
+
+/** Deterministic offsets in exactly opposed pairs, so the continuous cloud's centroid is zero to the last bit. */
+function symmetricOffsets(count: number, spread: number) {
+  let state = 20140126;
+  const random = () => { state = (state * 1103515245 + 12345) % 2147483648; return state / 2147483648; };
+  const offsets: [number, number][] = [];
+  for (let index = 0; index < count; index++) {
+    const dx = (random() - 0.5) * 2 * spread, dy = (random() - 0.5) * 2 * spread;
+    offsets.push([dx, dy], [-dx, -dy]);
+  }
+  return offsets;
+}
+
+test('a symmetric cloud of events about the target keeps its centroid on the target, in the grid and through the WCS', () => {
+  const pixels = 128, kmPerPixel = 200, positionAngle = 50.9865;
+  const rate = new Float64Array(pixels * pixels);
+  const run = runOf(pixels, kmPerPixel, positionAngle, rate);
+  const frame = { positionAngleDegrees: positionAngle, scale: run.definition.bodyRadiusKm / run.radiusDetectorPixels / kmPerPixel, pixels };
+  let placed = 0, sumColumn = 0, sumRow = 0;
+  for (const [dx, dy] of symmetricOffsets(40000, 120)) {
+    const at = restFramePixel(dx, dy, frame);
+    if (!at) continue;
+    rate[at[1] * pixels + at[0]]!++; placed++; sumColumn += at[0]; sumRow += at[1];
+  }
+  assert.ok(placed > 60000, `${placed} events landed on the grid`);
+  // In the grid's own coordinates: the centroid of the pixel centres, measured from where the target stands.
+  const offColumn = sumColumn / placed + 0.5 - pixels / 2, offRow = sumRow / placed + 0.5 - pixels / 2;
+  assert.ok(Math.abs(offColumn) < 0.01, `column centroid ${offColumn} pixels off the target`);
+  assert.ok(Math.abs(offRow) < 0.01, `row centroid ${offRow} pixels off the target`);
+
+  // And through the WCS the image states: the target's own direction has to land on that same centroid.
+  const science = readFitsHdus(timeTagProduct(run))[1]!.header;
+  const projection = skyProjection(science);
+  const [targetColumn, targetRow] = projection.pixelOf(run.place.rightAscensionDegrees, run.place.declinationDegrees)!;
+  assert.ok(Math.abs(targetColumn - sumColumn / placed) < 0.01, `WCS puts the target ${targetColumn - sumColumn / placed} pixels from the centroid`);
+  assert.ok(Math.abs(targetRow - sumRow / placed) < 0.01, `WCS puts the target ${targetRow - sumRow / placed} pixels from the centroid`);
+  const [ra, dec] = projection.skyOf(sumColumn / placed, sumRow / placed);
+  assert.ok(Math.abs(ra - run.place.rightAscensionDegrees) < 1e-7, `${ra}`);
+  assert.ok(Math.abs(dec - run.place.declinationDegrees) < 1e-7, `${dec}`);
+
+  // The picture is a crop of the same grid, so its own WCS has to put the target on the cropped centroid too.
+  const picture = readFitsHdus(timeTagPicture(run))[0]!.header;
+  const half = Math.ceil(4 * run.radiusGridPixels), from = pixels / 2 - half;
+  const [pictureColumn, pictureRow] = skyProjection(picture).pixelOf(run.place.rightAscensionDegrees, run.place.declinationDegrees)!;
+  assert.equal(picture.NAXIS1, 2 * half);
+  assert.ok(Math.abs(pictureColumn - (sumColumn / placed - from)) < 0.01, `${pictureColumn}`);
+  assert.ok(Math.abs(pictureRow - (sumRow / placed - from)) < 0.01, `${pictureRow}`);
+});
+
+test('a centred crop is refused on an odd grid, and keeps the target in the middle of what it takes', () => {
+  assert.throws(() => centredCrop(new Float64Array(49), 7, 2), /even number of pixels/u);
+  const size = 8, values = Float64Array.from({ length: size * size }, (_, index) => index);
+  // The target stands at continuous 4; the crop starts at 2, so it stands at continuous 2 in a crop 4 across.
+  assert.equal(centredCrop(values, size, 2).values[0], 18);
 });

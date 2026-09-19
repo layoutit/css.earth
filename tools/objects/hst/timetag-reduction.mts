@@ -22,7 +22,16 @@
  * `azimuthalRatio` build the model the counts are compared against, and `limbStatistics` reports how far each bin departs
  * from it in units of Poisson noise, together with the scatter of that departure in a control annulus away from the body.
  * Those two numbers belong together: when the control scatter is not one, the model is missing something and a bin's
- * formal significance is not the significance it looks like. */
+ * formal significance is not the significance it looks like.
+ *
+ * **One coordinate convention, everywhere.** Pixel `i` covers the continuous range `[i, i + 1)`, so its centre sits at
+ * `i + 0.5` and a continuous coordinate is binned with `Math.floor`, never with `Math.round`. A body centred on the grid
+ * stands at continuous `N / 2`, which is the corner between pixels `N / 2 - 1` and `N / 2`, and the FITS reference pixel
+ * for it is `N / 2 + 0.5` because FITS counts pixels from one and puts their centres on whole numbers. Every function
+ * here takes and returns continuous coordinates except where it is naming a stored pixel: `findDisc` answers in
+ * continuous coordinates, `restFramePixel` answers with the index the event is counted in, and `gridRadii` and
+ * `gridLatitudeDegrees` take an index and add the half pixel themselves. Mixing the two puts a symmetric cloud of events
+ * half a pixel off its own centre, which at 35 km to the pixel is 17.5 km on each axis. */
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { quadraticFit } from './line-stack-reduction.mts';
 
@@ -252,6 +261,7 @@ export interface DiscSearch {
   readonly searchPixels: number;
 }
 export interface DiscCentre {
+  /** The body's centre in this image's own continuous coordinates, where the centre of pixel `i` is `i + 0.5`. */
   readonly x: number; readonly y: number;
   /** How many standard deviations of Poisson noise the missing light of the best box is. */
   readonly significance: number;
@@ -279,7 +289,8 @@ export function findDisc(image: ArrayLike<number>, search: DiscSearch): DiscCent
     if (missing > best) { best = missing; bx = x; by = y; bestSurround = surround; }
   }
   if (!Number.isFinite(best)) throw new Error('No candidate for the body stood on a bright enough surround.');
-  // The centroid of the missing light, which places the body between pixels rather than on one.
+  // The centroid of the missing light, which places the body between pixels rather than on one. The box the search tries
+  // at index `bx` covers `bx - inner` to `bx + inner`, so it is symmetric about that pixel's centre, `bx + 0.5`.
   const radius = Math.round(radiusPixels * 1.2);
   let weightedX = 0, weightedY = 0, weight = 0;
   for (let y = Math.max(0, by - radius); y <= Math.min(height - 1, by + radius); y++) for (let x = Math.max(0, bx - radius); x <= Math.min(width - 1, bx + radius); x++) {
@@ -287,7 +298,9 @@ export function findDisc(image: ArrayLike<number>, search: DiscSearch): DiscCent
     const missing = Math.max(0, bestSurround - image[y * width + x]!);
     weightedX += missing * x; weightedY += missing * y; weight += missing;
   }
-  return { x: weight > 0 ? weightedX / weight : bx, y: weight > 0 ? weightedY / weight : by, significance: best, surround: bestSurround };
+  // Both sums are over pixel indices, so half a pixel turns each one into the continuous coordinate of the same place.
+  return { x: (weight > 0 ? weightedX / weight : bx) + 0.5, y: (weight > 0 ? weightedY / weight : by) + 0.5,
+    significance: best, surround: bestSurround };
 }
 
 // ---- the rest frame -------------------------------------------------------------------------------------------------
@@ -300,21 +313,28 @@ export interface RestFrame {
   readonly pixels: number;
 }
 
-/** Where a detector event lands on the body-fixed grid, given where the body was at that event's time.
+/** Which stored pixel a detector event is counted in, given the continuous offset (`dx`, `dy`) from where the body was at
+ * that event's own time.
  *
  * The output runs north up the rows and west along the columns, so east is on the left when the first row is drawn at the
  * bottom, which is how a sky image is displayed. No flip is applied: on the sky the pair (east, north) is already left
  * handed against the detector's (x, y), so the rotation alone puts it right, and applying a flip as well would mirror
- * every image east for west. Returns undefined for an event outside the grid. */
+ * every image east for west.
+ *
+ * The offsets are continuous and the answer is an index, so the continuous coordinate is floored. Rounding it instead
+ * would count an event that landed exactly on the body at the pixel whose centre is half a pixel past the body, and a
+ * cloud of events symmetric about the body would come out half a pixel off in each axis. Returns undefined for an event
+ * outside the grid. */
 export function restFramePixel(dx: number, dy: number, frame: RestFrame): readonly [number, number] | undefined {
   const angle = frame.positionAngleDegrees * DEGREE, cos = Math.cos(angle), sin = Math.sin(angle);
   const west = (cos * dx - sin * dy) * frame.scale, north = (sin * dx + cos * dy) * frame.scale;
-  const half = frame.pixels / 2, column = Math.round(west + half), row = Math.round(north + half);
+  const half = frame.pixels / 2, column = Math.floor(west + half), row = Math.floor(north + half);
   if (column < 0 || row < 0 || column >= frame.pixels || row >= frame.pixels) return undefined;
   return [column, row];
 }
 
-/** Distance from the grid's centre in body radii. Pixel centres sit half a pixel from their index. */
+/** Distance from the grid's centre in body radii, for the stored pixel at (`column`, `row`): its centre sits at
+ * `column + 0.5`, and the body stands at continuous `pixels / 2`. */
 export const gridRadii = (column: number, row: number, pixels: number, bodyRadiusPixels: number) =>
   Math.hypot(column + 0.5 - pixels / 2, row + 0.5 - pixels / 2) / bodyRadiusPixels;
 
