@@ -156,7 +156,7 @@ test('an indexed observation exposes a telescope-owned qualification action when
       '--mode', 'IRAC Map', '--observation', '21415424', '--channel', '1'] }]);
   const qualified = queryCapabilities(request, inputs([{ telescope: 'spitzer', value: { ...ledger, modes: [{ ...ledger.modes[0], programs: ['bennu-21415424'], checked: ['bennu-21415424'] }] } }]));
   assert.equal(candidate(qualified, 'IRAC Map').selectionAssessment.selectable, true);
-  assert.deepEqual(candidate(qualified, 'IRAC Map').selectionAssessment.qualificationActions, []);
+  assert.equal(candidate(qualified, 'IRAC Map').selectionAssessment.qualificationActions.length, 1, 'a ledger claim alone cannot suppress qualification of an exact output');
 });
 
 test('a cited target-in-field association exposes exact observations without changing the archive target', () => {
@@ -419,14 +419,14 @@ test('a capability entry states its intervals, a kind this repository knows and 
   assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, mode: 'NIRCAM/GRISM', wavelengths: 'bands' }] }), /no bands in bands.mts/u);
 });
 
-test('the committed ledgers: Europa at 3.4 to 3.6 micrometres is a proven JWST cube target, and nothing claims a sharpness', async () => {
+test('the committed ledgers: Europa at 3.4 to 3.6 micrometres has historical JWST cube comparisons, and nothing claims a sharpness', async () => {
   const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [3.4, 3.6], kind: 'cube' }, await loadQueryInputs(ROOT, 'europa'));
   const nirspec = candidate(answer, 'NIRSPEC/IFU');
   assert.equal(nirspec.telescope, 'JWST');
   assert.equal(nirspec.meetsConstraints.wavelength?.answer, 'yes');
   assert.equal(nirspec.meetsConstraints.kind?.answer, 'yes');
   assert.equal(nirspec.toolkitSupport.level, 'proven');
-  assert.ok(nirspec.toolkitSupport.targetProgramChecked, 'a checked program of Europa');
+  assert.equal(nirspec.toolkitSupport.targetProgramChecked, false, 'historical comparisons need explicit acceptance before they count as checked');
   assert.equal(nirspec.evidence.archiveDate.length, 10);
   assert.ok(answer.candidates.length > 1, 'other modes observed Europa too');
   for (const entry of answer.candidates) assert.notEqual(entry.meetsConstraints.angularResolution?.answer, 'yes');
@@ -463,7 +463,7 @@ test('the committed ledgers: HD 181327 between 2.4 and 2.6 micrometres falls in 
   const coron = candidate(queryCapabilities({ target: 'hd-181327', wavelengthMicrometres: [2.4, 2.6] }, loaded), 'NIRCAM/CORON');
   assert.equal(coron.meetsConstraints.wavelength?.answer, 'no');
   assert.equal(coron.meetsConstraints.angularResolution?.answer, 'unknown');
-  assert.equal(coron.toolkitSupport.level, 'proven');
+  assert.equal(coron.toolkitSupport.level, 'tool-without-checked-program');
   assert.equal(candidate(queryCapabilities({ target: 'hd-181327', wavelengthMicrometres: [3, 3.2] }, loaded), 'NIRCAM/CORON').meetsConstraints.wavelength?.answer, 'yes');
 });
 
@@ -617,4 +617,31 @@ test('every capability entry names a mode the ledgers use, and the modes without
   const recorded = new Set(loaded.capabilities.map(entry => `${entry.telescope} ${entry.mode}`));
   assert.deepEqual([...keys].filter(key => !recorded.has(key)).sort(), WITHOUT_CAPABILITIES);
   for (const entry of loaded.capabilities) assert.match(entry.citation, /^https:\/\//u, `${entry.mode} cites where its numbers were read`);
+});
+test('a qualified narrow product cannot hide another band or satisfy its request', () => {
+  const ledger = { ...JWST_LEDGER, schema: 'cssearth-jwst-ledger@2', modes: [{ ...JWST_LEDGER.modes[0], programs: ['europa-narrow'], checked: ['europa-narrow'] }],
+    objects: [{ id: 'europa', observations: { 'NIRSPEC/IFU': 1 }, programmes: ['1250'], drawn: [], records: [{ id: 'jw01250-o002_t001_nirspec_g395h-f290lp', mode: 'NIRSPEC/IFU', filter: 'F290LP;G395H', programme: '1250', startIso: '2023-01-01T00:00:00Z', endIso: '2023-01-01T01:00:00Z' }] }] };
+  const qualifiedProducts = [{ target: 'europa', telescope: 'JWST', mode: 'NIRSPEC/IFU', observation: 'narrow', program: 'europa-narrow', product: 'narrow.fits', receipt: 'receipt.json', productRecord: 'narrow.fits.product.json', outputRoot: 'output',
+    facts: { target: 'europa', verified: true, kind: 'cube' as const, result: 'telescope-product' as const, wavelengthIntervalsMicrometres: [[2.2, 2.4] as const] } }];
+  const request = { target: 'europa', wavelengthMicrometres: [4.24, 4.28] as const, time: { any: true as const }, kind: 'cube' as const, result: 'telescope-product' as const, angularResolutionArcsec: 1 };
+  const answer = queryCapabilities(request, inputs([{ telescope: 'jwst', value: ledger }], { qualifiedProducts }));
+  const mode = candidate(answer, 'NIRSPEC/IFU');
+  assert.equal(mode.selectionAssessment.selectable, false);
+  assert.equal(mode.selectionAssessment.qualificationActions.length, 1);
+  const partial = queryCapabilities(request, inputs([{ telescope: 'jwst', value: ledger }], { qualifiedProducts: [{ ...qualifiedProducts[0]!, observation: 'jw01250-o002_t001_nirspec_g395h-f290lp', facts: { ...qualifiedProducts[0]!.facts, wavelengthIntervalsMicrometres: [[4.2, 4.26]] } }] }));
+  assert.equal(candidate(partial, 'NIRSPEC/IFU').selectionAssessment.qualificationActions.length, 1, 'a partial slice still offers the missing reduction');
+  assert.throws(() => selectObservation(answer, 'JWST', 'NIRSPEC/IFU', 'europa-narrow'), /do not cover/);
+  const matched = queryCapabilities({ ...request, wavelengthMicrometres: [2.25, 2.35] }, inputs([{ telescope: 'jwst', value: ledger }], { qualifiedProducts }));
+  const selected = selectObservation(matched, 'JWST', 'NIRSPEC/IFU', 'europa-narrow');
+  assert.equal(selected.product!.product, 'narrow.fits');
+  assert.equal(selected.satisfaction.constraints.artifact!.answer, 'yes');
+  assert.equal(selected.satisfaction.constraints.wavelength!.answer, 'yes');
+  assert.equal(selected.satisfaction.constraints.angularResolution!.answer, 'unknown');
+  assert.ok(!selected.unresolved.some(item => item.constraint === 'observationWavelength'));
+});
+
+test('an HST association transport failure preserves independent archive results', () => {
+  const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [4.24, 4.28] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }, { telescope: 'hst', value: HST_LEDGER }], { associationFailures: [{ collection: 'HST', reason: 'timeout' }] }));
+  assert.ok(answer.candidates.some(candidate => candidate.telescope === 'JWST'));
+  assert.equal(answer.targetCoverage.find(coverage => coverage.telescope === 'hst')!.state, 'unanswered');
 });

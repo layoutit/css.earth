@@ -1,3 +1,4 @@
+import { loadQualifiedObservations, matchingProduct, type QualifiedObservation } from './qualified-observations.mts';
 import { assessRequest, type RequestSatisfaction } from './request-satisfaction.mts';
 /** Which observations in the archives might measure a quantity on a target, and what stays unknown until one is read.
  *
@@ -118,6 +119,7 @@ export interface CandidateSelectionAssessment {
 }
 
 export interface Candidate {
+  readonly qualifiedProducts?: readonly QualifiedObservation[];
   readonly telescope: string; readonly mode: string;
   readonly observations: { readonly count: number; readonly scope: 'this-mode' | 'object-total';
     /** Complete observation identities where the ledger preserves them, rather than only a grouped count. */
@@ -165,6 +167,8 @@ export interface QueryInputs {
   readonly targetAssociations: readonly TargetAssociation[];
   readonly bodyMaps: readonly { readonly path: string; readonly value: unknown }[];
   readonly sourceProducts?: readonly LoadedSourceProduct[];
+  readonly qualifiedProducts?: readonly QualifiedObservation[];
+  readonly associationFailures?: readonly { readonly collection: string; readonly reason: string }[];
   readonly investigations?: { readonly path: string; readonly value: unknown };
 }
 
@@ -183,6 +187,7 @@ export interface CapabilityAnswer {
 
 export const OBSERVATION_SELECTION_SCHEMA = 'cssearth-telescope-observation-selection@1';
 export interface ObservationSelection {
+  readonly product?: QualifiedObservation;
   readonly schema: typeof OBSERVATION_SELECTION_SCHEMA;
   readonly satisfaction: RequestSatisfaction;
   readonly request: CapabilityRequest;
@@ -249,12 +254,12 @@ function workflowAssessment(request: CapabilityRequest, target: string, candidat
     blockers.push({ code: 'constraint-refused', constraint, reason: `${constraint}: ${verdict_.reason}` });
   if (candidate.toolkitSupport.level === 'none') blockers.push({ code: 'toolkit-unavailable', reason: candidate.toolkitSupport.reason });
   if (request.result === 'body-map' && candidate.bodyMapSupport.answer === 'no') blockers.push({ code: 'body-map-author-missing', reason: candidate.bodyMapSupport.reason });
-  const programmes = [...new Set([...candidate.toolkitSupport.targetPrograms, ...candidate.toolkitSupport.targetArchiveFinalQualifiedPrograms])].filter(programme => candidate.observations?.records?.find(record => record.programme === programme)?.requestSatisfaction?.status !== 'refused').sort();
+  const programmes = [...new Set([...candidate.toolkitSupport.targetPrograms, ...candidate.toolkitSupport.targetArchiveFinalQualifiedPrograms])].filter(programme => candidate.observations?.records?.find(record => record.programme === programme)?.requestSatisfaction?.status !== 'refused' && (!(candidate.qualifiedProducts ?? []).some(product => product.program === programme) || matchingProduct(candidate.qualifiedProducts ?? [], request, programme))).sort();
   if (!programmes.length) blockers.push({ code: 'target-program-unqualified', reason: `No pinned or qualified program of ${target} is available for this mode.` });
   const nextActions = blockers.length ? [] : programmes.map(programme => ({ kind: 'select-observation' as const, programme, command: 'pnpm' as const,
     arguments: ['--silent', 'telescope:query', ...requestArguments(request), '--select-telescope', candidate.telescope, '--select-mode', candidate.mode, '--program', programme, '--json'] }));
   const qualificationActions = !blockers.some(blocker => ['request-incomplete', 'constraint-refused', 'toolkit-unavailable'].includes(blocker.code))
-    ? qualificationActionsFor(candidate.telescope, candidate.mode, target, request.wavelengthMicrometres, request.time, (candidate.observations?.records ?? []).filter(record => record.sourceProductId ? !record.qualification?.verified && !Object.entries(record.requestSatisfaction?.constraints ?? {}).some(([key, verdict]) => key !== 'result' && verdict.answer === 'no') : blockers.some(blocker => blocker.code === 'target-program-unqualified'))) : [];
+    ? qualificationActionsFor(candidate.telescope, candidate.mode, target, request.wavelengthMicrometres, request.time, (candidate.observations?.records ?? []).filter(record => record.sourceProductId ? !record.qualification?.verified && !Object.entries(record.requestSatisfaction?.constraints ?? {}).some(([key, verdict]) => key !== 'result' && verdict.answer === 'no') : !(candidate.qualifiedProducts ?? []).some(product => product.observation === record.id && matchingProduct([product], request, product.program) && assessRequest(request, product.facts).constraints.wavelength?.answer === 'yes'))) : [];
   return { selectable: blockers.length === 0, blockers, nextActions, qualificationActions };
 }
 
@@ -580,7 +585,7 @@ function sourceModes(products: readonly LoadedSourceProduct[], request: Capabili
   return [...groups.values()].map(own => {
     const first = own[0]!, qualified = own.filter(product => product.qualified).map(product => product.id);
     return { telescope: first.telescope, mode: first.mode, archiveDate: 'package-owned pins', programmes: own.map(product => product.archiveProductId),
-      observations: { count: own.length, scope: 'this-mode' as const, records: own.map(product => ({ id: product.id, programme: product.id, sourceProductId: product.id, qualification: { verified: product.qualified, receipt: product.receipt, problem: product.receiptProblem, limitations: product.limitations }, requestSatisfaction: assessRequest(request, { ...product, verified: product.qualified, result: 'telescope-product' }),
+      observations: { count: own.length, scope: 'this-mode' as const, records: own.map(product => ({ id: product.id, programme: product.id, sourceProductId: product.id, qualification: { verified: product.qualified, receipt: product.receipt, problem: product.receiptProblem, limitations: product.limitations }, requestSatisfaction: assessRequest(request, product.facts ?? { target: product.target, verified: false }),
         startIso: product.startIso ?? '', ...(product.endIso ? { endIso: product.endIso } : {}), archiveProductId: product.archiveProductId, kind: product.kind,
         ...(product.wavelengthIntervalsMicrometres ? { wavelengthIntervalsMicrometres: product.wavelengthIntervalsMicrometres } : {}),
         ...(product.centralWavelengthMicrometres === undefined ? {} : { centralWavelengthMicrometres: product.centralWavelengthMicrometres }),
@@ -870,7 +875,9 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
     const adapter = ADAPTERS[ledger.telescope];
     if (!adapter) throw new TypeError(`No adapter reads the ${ledger.telescope} ledger.`);
     const modes = adapter.modes(ledger.value, target, inputs.targetAssociations);
-    targetCoverageResults.push(targetCoverage(ledger.telescope, adapter, ledger.path, ledger.value, target, modes));
+    const failure = inputs.associationFailures?.find(entry => entry.collection.toLowerCase() === ledger.telescope || entry.collection === 'HST' && ledger.telescope === 'hst');
+    if (failure) targetCoverageResults.push({ telescope: ledger.telescope, ledger: ledger.path, state: 'unanswered', reason: `Association lookup transport failure: ${failure.reason}` });
+    if (!failure) targetCoverageResults.push(targetCoverage(ledger.telescope, adapter, ledger.path, ledger.value, target, modes));
     if (!modes.length) continue;
     for (const mode of modes) found.push({ ledger: ledger.path, mode });
   }
@@ -894,7 +901,7 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
   const { attached, unassigned } = resolveEvidence(inputs, found.map(entry => entry.mode));
   const candidates = found.map(({ ledger, mode }): Omit<Candidate, 'selectionAssessment'> => {
     const capability = capabilities.get(`${mode.telescope} :: ${mode.mode}`), evidence = attached.get(mode)!;
-    return { telescope: mode.telescope, mode: mode.mode, observations: mode.observations, programmes: mode.programmes,
+    return { telescope: mode.telescope, mode: mode.mode, qualifiedProducts: (inputs.qualifiedProducts ?? []).filter(product => product.telescope === mode.telescope && product.mode === mode.mode), observations: mode.observations, programmes: mode.programmes,
       meetsConstraints: constraintVerdicts(canonicalRequest, mode, capability), toolkitSupport: toolkitSupport(mode, target), bodyMapSupport: bodyMapSupport(mode),
       evidence: { ledger, archiveDate: mode.archiveDate, receipts: mode.toolkit.receipts, targetAssociations: mode.targetAssociations ?? [], bodyMaps: evidence.bodyMaps, investigations: evidence.investigations },
       unknown: [...(capability ? [] : [`What this mode can do: ${NO_CAPABILITIES}`]), ...UNKNOWN_UNTIL_READ(target, mode),
@@ -928,6 +935,8 @@ export function assessObservationSelection(answer: CapabilityAnswer, telescope: 
   if (candidate.toolkitSupport.level === 'none') blockers.push({ code: 'toolkit', reason: `${telescope} ${mode} has no usable toolkit: ${candidate.toolkitSupport.reason}` });
   if (request.result === 'body-map' && candidate.bodyMapSupport.answer === 'no') blockers.push({ code: 'body-map', reason: `${telescope} ${mode} cannot produce the requested body map: ${candidate.bodyMapSupport.reason}` });
   const targetPrograms = [...candidate.toolkitSupport.targetPrograms, ...candidate.toolkitSupport.targetArchiveFinalQualifiedPrograms];
+  const products = (candidate.qualifiedProducts ?? []).filter(product => product.program === programme);
+  if (products.length && !matchingProduct(products, request, programme)) blockers.push({ code: 'constraint', reason: 'The qualified products of this program do not cover this request; qualify a matching observation.' });
   const productSatisfaction = candidate.observations?.records?.find(record => record.programme === programme)?.requestSatisfaction;
   for (const [constraint, verdict] of Object.entries(productSatisfaction?.constraints ?? {})) if (verdict.answer === 'no') blockers.push({ code: 'constraint', constraint, reason: verdict.reason });
   if (!targetPrograms.includes(programme)) blockers.push({ code: 'programme', reason: `${programme} is not a pinned or archive-final program of ${answer.target} in ${telescope} ${mode}; ${targetPrograms.length ? `choose one of ${targetPrograms.join(', ')}` : 'no pinned or archive-final program is available'}.` });
@@ -940,15 +949,17 @@ export function selectObservation(answer: CapabilityAnswer, telescope: string, m
   const assessment = assessObservationSelection(answer, telescope, mode, programme);
   if (assessment.blockers.length) throw new ObservationSelectionError(telescope, mode, programme, assessment.blockers);
   const request = answer.request, candidate = assessment.candidate!;
-  const productWavelengthQualified = candidate.observations?.records?.some(record => record.programme === programme
+  const product = matchingProduct(candidate.qualifiedProducts ?? [], request, programme);
+  const satisfaction = product ? assessRequest(request, { ...product.facts, ...(request.result === 'body-map' ? { result: undefined } : {}) }) : candidate.observations?.records?.find(record => record.programme === programme)?.requestSatisfaction ?? assessRequest(request, { target: answer.target, verified: false });
+  const productWavelengthQualified = satisfaction.constraints.wavelength?.answer === 'yes' || (candidate.observations?.records?.some(record => record.programme === programme
     && mergeIntervals(record.wavelengthIntervalsMicrometres ?? (record.wavelengthIntervalMicrometres ? [record.wavelengthIntervalMicrometres] : []))
-      .some(interval => interval[0] <= request.wavelengthMicrometres[0] && interval[1] >= request.wavelengthMicrometres[1])) ?? false;
+      .some(interval => interval[0] <= request.wavelengthMicrometres[0] && interval[1] >= request.wavelengthMicrometres[1])) ?? false);
   const unresolved = [...Object.entries(candidate.meetsConstraints).flatMap(([constraint, verdict_]) => verdict_.answer === 'partial' || verdict_.answer === 'unknown'
     ? [{ constraint, answer: verdict_.answer, reason: verdict_.reason } as const] : []),
     ...(productWavelengthQualified ? [] : [{ constraint: 'observationWavelength', answer: 'unknown' as const,
       reason: `The wavelength verdict is for ${telescope} ${mode}, not for program ${programme}; its selected filter, grating or channel must be qualified from the observation products.` }])];
-  return { schema: OBSERVATION_SELECTION_SCHEMA, satisfaction: candidate.observations?.records?.find(record => record.programme === programme)?.requestSatisfaction ?? assessRequest(request, { target: answer.target, verified: false }), request, telescope, mode, programme,
-    toolkitLevel: candidate.toolkitSupport.level, constraints: candidate.meetsConstraints, bodyMapSupport: candidate.bodyMapSupport, unresolved, evidence: candidate.evidence };
+  return { schema: OBSERVATION_SELECTION_SCHEMA, satisfaction, ...(product ? { product } : {}), request, telescope, mode, programme,
+    toolkitLevel: candidate.toolkitSupport.level, constraints: candidate.meetsConstraints, bodyMapSupport: candidate.bodyMapSupport, unresolved: unresolved.filter(item => satisfaction.constraints[item.constraint]?.answer !== 'yes'), evidence: candidate.evidence };
 }
 
 export const LEDGER_TELESCOPES: readonly string[] = Object.keys(ADAPTERS);
@@ -991,14 +1002,15 @@ export async function loadQueryInputs(root: string, target: string): Promise<Que
   }
   const capabilities = [...parseModeCapabilities(await readJsonSource(resolve(root, 'tools/objects/telescopes/modes.json'))), ...dynamicCapabilities];
   const associationSources = parseTargetAssociationSources(await readJsonSource(resolve(root, TARGET_ASSOCIATIONS_PATH)));
-  const targetAssociations = await loadTargetAssociations(associationSources.filter(entry => entry.target === canonicalTarget));
+  const associationFailures: { collection: string; reason: string }[] = [];
+  const targetAssociations = await loadTargetAssociations(associationSources.filter(entry => entry.target === canonicalTarget), { failures: associationFailures });
   const source = resolve(root, 'src/objects', canonicalTarget, 'source');
   const names = await readdir(source, { recursive: true }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return [] as string[]; throw error; });
   const bodyMaps: { path: string; value: unknown }[] = [];
   for (const name of names.filter(entry => entry.endsWith('.body-map.json')).sort()) bodyMaps.push({ path: `src/objects/${canonicalTarget}/source/${name}`, value: await readJsonSource(resolve(source, name)) });
   const investigationPath = `src/objects/${canonicalTarget}/investigations.json`;
   const investigations = await readJsonSource(resolve(root, investigationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return undefined; throw error; });
-  return { ledgers, capabilities, targetCatalogue, targetAssociations, bodyMaps, sourceProducts: resolution.status === 'resolved' ? await loadSourceProducts(root, canonicalTarget) : [], ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
+  return { ledgers, capabilities, targetCatalogue, targetAssociations, associationFailures, bodyMaps, qualifiedProducts: resolution.status === 'resolved' ? await loadQualifiedObservations(root, canonicalTarget) : [], sourceProducts: resolution.status === 'resolved' ? await loadSourceProducts(root, canonicalTarget) : [], ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
 }
 
 const LEVEL_WORDS: Readonly<Record<ToolkitLevel, string>> = Object.freeze({ none: 'no toolkit',

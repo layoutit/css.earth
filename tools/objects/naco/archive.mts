@@ -387,7 +387,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const pinned = await pinProgram(program, progId, object, work, nightIndex < 0 ? undefined : rest[nightIndex + 1]);
   const path = await writeProgram(pinned);
   const bytes = [...pinned.science, ...pinned.calibration, ...pinned.standard].reduce((total, frame) => total + frame.bytes, 0);
-  console.log(`${path}: ${pinned.mode}, ${pinned.science.length} science frames in ${pinned.objectTemplates.length} object and`
+  console.error(`${path}: ${pinned.mode}, ${pinned.science.length} science frames in ${pinned.objectTemplates.length} object and`
     + ` ${pinned.skyTemplates.length} sky templates, ${pinned.calibration.length} calibration and ${pinned.standard.length} standard frames,`
     + ` ${(bytes / 1024 ** 2).toFixed(1)} MiB${pinned.arcs ? '' : ', no arcs'}.`);
 }

@@ -1,3 +1,4 @@
+import { bodyMapFits } from './jwst/cubes/body-map.mts';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -8,7 +9,7 @@ import { formatBodyMapProduct, type BodyMapProduct } from './body-map-product.mt
 import { bodyMapProductRecord, formatProductRecord, qualifyBodyMap } from './body-map-publication.mts';
 import type { ObservationSelection } from './telescopes/query.mts';
 
-const plane = Buffer.from('a small deterministic FITS stand-in');
+const plane = bodyMapFits({ width: 4, height: 2 }, {}, [{ name: 'CO2 BAND DEPTH', units: 'band depth', values: new Float32Array(8).fill(1) }, { name: 'CO2 BAND DEPTH ERROR', units: 'band depth', values: new Float32Array(8).fill(.1) }]);
 const product = (): BodyMapProduct => ({ schema: 'cssearth-body-map@1',
   definition: { quantity: 'CO2 band depth', units: 'band depth', timeDependence: 'surface-property', wavelengthIntervalsMicrometres: [[4.24, 4.28]], source: 'a published definition',
     method: { bandMicrometres: [4.24, 4.28], continuumMicrometres: [[4.2, 4.225], [4.3, 4.33]] } },
@@ -88,4 +89,13 @@ test('publication resolves the original wavelength request from the map measurem
 test('publication explains the missing body-map contract instead of leaking a file error', async () => {
   await assert.rejects(qualifyBodyMap(resolve(tmpdir(), 'missing-ceres.fits.body-map.json'), { ...selection, telescope: 'VLT/NACO', mode: 'imaging', programme: 'ceres-080C0881' }),
     /Cannot publish VLT\/NACO imaging program ceres-080C0881: the body-map metadata is missing.*map plane.*body-map\.json.*product\.json/u);
+});
+test('publication validates the actual FITS planes, units, grid and uncertainty mask', async () => {
+  const { assertBodyMapPlanes } = await import('./body-map-publication.mts');
+  assert.throws(() => assertBodyMapPlanes(Buffer.from('not FITS'), product()));
+  assert.throws(() => assertBodyMapPlanes(plane, { ...product(), grid: { ...product().grid, width: 5 } }), /grid/);
+  assert.throws(() => assertBodyMapPlanes(plane, { ...product(), planes: { ...product().planes, uncertainty: 'ABSENT' } }), /ABSENT/);
+  assert.throws(() => assertBodyMapPlanes(plane, { ...product(), definition: { ...product().definition, units: 'K' } }), /units/);
+  const invalid = bodyMapFits({ width: 4, height: 2 }, {}, [{ name: 'CO2 BAND DEPTH', units: 'band depth', values: new Float32Array(8).fill(1) }, { name: 'CO2 BAND DEPTH ERROR', units: 'band depth', values: new Float32Array(8).fill(-1) }]);
+  assert.throws(() => assertBodyMapPlanes(invalid, product()), /uncertainties/);
 });

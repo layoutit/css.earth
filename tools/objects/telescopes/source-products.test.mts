@@ -83,3 +83,18 @@ test('all PDS pointers are pinned, including external format definitions', async
     await assertPdsDependencies(f.root, product);
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
+test('successful decoding never promotes declared wavelength or resolution into verified facts', async () => {
+  const f = await fixture(); try {
+    const declaration = { ...f.declaration, observations: [{ ...f.declaration.observations[0], wavelengthIntervalsMicrometres: [[1, 2]], angularResolutionArcsec: .5, resolutionBasis: 'An unchecked source declaration' }] };
+    await writeFile(resolve(f.source, 'observations.json'), JSON.stringify(declaration));
+    const product = parseSourceProducts(declaration, f.manifest, 'test-body')[0]!;
+    await qualifySourceProduct(f.root, product);
+    const answer = queryCapabilities(request, await queryInputs(f.root));
+    const satisfaction = selectObservation(answer, product.telescope, product.mode, product.id).satisfaction;
+    assert.equal(satisfaction.constraints.artifact!.answer, 'yes');
+    assert.equal(satisfaction.constraints.kind!.answer, 'yes');
+    assert.equal(satisfaction.constraints.wavelength!.answer, 'unknown');
+    assert.equal(satisfaction.constraints.angularResolution!.answer, 'unknown');
+    assert.equal(satisfaction.status, 'unresolved');
+  } finally { await rm(f.root, { recursive: true, force: true }); }
+});

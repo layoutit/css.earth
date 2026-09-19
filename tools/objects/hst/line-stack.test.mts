@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { evidenceFor, productRecordPath, readProductRecord, writeProductRecord } from '../product-record.mts';
 import { PROGRAMS } from './archive.mts';
@@ -224,7 +224,7 @@ test('the receipt’s two checks reach a stack’s record as the different kinds
     await writeFile(product, 'a stacked set');
     await writeProductRecord(productRecordPath(product), await stackRun(definition, line, 'all', [definition.frames.find(frame => !frame.rejected)!.name], await lineStackSoftware()),
       [{ path: name, file: product, units: 'R' }]);
-    const receipt = 'tools/objects/hst/programs/europa-oxygen-aurora.stack.reproduction.json';
+    const receipt = resolve(work, 'comparison.json'); await writeFile(receipt, '{}');
     const records = await addStackEvidence(work, receipt, {
       sets: [{ set: 'oi1356-all' }, { set: 'oi1304-all' }],
       published: [{ quantity: 'dusk-to-dawn ratio at 1356 A', source: 'Roth et al. 2016, 10.1002/2015JA022073', set: 'oi1356-all', measured: 1.55 },
@@ -235,7 +235,7 @@ test('the receipt’s two checks reach a stack’s record as the different kinds
     const record = (await readProductRecord(productRecordPath(product)))!;
     const published = evidenceFor(record, name, 'published-value'), consistency = evidenceFor(record, name, 'internal-consistency');
     assert.equal(published.length, 1);
-    assert.equal(published[0]!.receipt, receipt);
+    assert.ok(published[0]!.receiptPin);
     assert.match(published[0]!.establishes, /Roth et al\. 2016/u);
     assert.ok(!published[0]!.establishes.includes('disc mean at 1304 A'), 'a published value this run did not measure is not reported as checked');
     assert.equal(consistency.length, 1);

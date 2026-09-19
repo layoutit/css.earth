@@ -77,6 +77,7 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
   const report = `${dirname(receipt)}/decoded.json`;
   await mkdir(resolve(root, dirname(receipt)), { recursive: true });
   await writeFile(resolve(root, report), `${JSON.stringify({ schema: 'cssearth-decoded-source@1', observation: product.id, archiveProductId: product.archiveProductId, decoded,
+    facts: { target: product.target, verified: true, kind: product.kind, result: 'telescope-product' },
     meaning: product.meaning, limitations: product.limitations, acceptance: 'Input pins and header identity agree; complete supported arrays decoded. Calibration accuracy and scientific suitability are not established; measurement descriptions are source declarations.' }, null, 2)}\n`);
   const science = product.files.find(file => file.role === 'science')!;
   await writeProductRecord(resolve(root, receipt), run, [...product.files.map(file => ({ path: file.path, file: inside(root, file.path) })), { path: report, file: resolve(root, report) }],

@@ -42,7 +42,7 @@ test('each mode\'s state comes from the pinned programs, and every named tool ex
     if (tool) await access(resolve(repository, tool));
     else assert.deepEqual(state.modes.get(mode)!.programs, [], `${mode} has pinned programs but names no tool`);
   }
-  assert.ok(state.modes.get('NIRCAM/CORON')!.checked.includes('hd-181327-2780'));
+  assert.deepEqual(state.modes.get('NIRCAM/CORON')!.checked, [], 'historical comparisons have no explicit acceptance rule');
   assert.ok(state.modes.get('MIRI/SLITLESS')!.checked.includes('wasp-43b-miri-1366'));
   for (const instrument of state.timeSeries.keys()) assert.ok(JWST_TIME_SERIES.some(entry => entry.programInstrument === instrument), `${instrument} has no time-series exposure type`);
 });
@@ -108,11 +108,11 @@ test('a program of two modes with one unreadable receipt is checked for neither,
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('a valid receipt checks the band it names and no other mode of the same program', async () => {
+test('a historical receipt without a numerical acceptance rule remains a comparison, not checked agreement', async () => {
   const root = await scratch({ 'mixed-9999.NIRCAM-F470N.reproduction.json': nircamReceipt() });
   try {
     const state = await repositoryState(root);
-    assert.deepEqual(state.modes.get('NIRCAM/IMAGE')!.checked, ['mixed-9999']);
+    assert.deepEqual(state.modes.get('NIRCAM/IMAGE')!.checked, []);
     assert.deepEqual(state.modes.get('NIRSPEC/IFU')!.checked, []);
     assert.deepEqual(state.receiptProblems, []);
   } finally { await rm(root, { recursive: true, force: true }); }

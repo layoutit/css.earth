@@ -359,7 +359,7 @@ async function writeReceipt(path: string, body: Record<string, unknown>) {
  * evidence is resolved through the record, by kind and by the exact product it names. */
 async function recordEvidence(directory: string, product: string, kind: EvidenceKind, receipt: string, establishes: string): Promise<ProductRecord> {
   return addProductEvidence(resolve(directory, productRecordPath(product)),
-    [{ kind, receipt: repositoryPath(receipt), product, establishes }], output => resolve(directory, output));
+    [{ kind, receipt: resolve(receipt), product, establishes }], output => resolve(directory, output));
 }
 
 /** One calibration stage's product against the archive's own.

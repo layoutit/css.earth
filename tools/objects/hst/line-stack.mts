@@ -30,7 +30,7 @@
  * responses that placed them, and the settings of the line and subset. With `--receipt` the receipt's two checks are added to
  * those records as what they are: agreement with a published value, and the consistency of our own two handednesses. */
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
-import { relative, resolve } from 'node:path';
+import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits.mts';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
@@ -586,7 +586,7 @@ export async function addStackEvidence(outputDirectory: string, receipt: string,
         'follows the orientation adopted rather than the grid it is drawn on; both stacks are this repository\'s own reduction of the same frames, so nothing outside ' +
         'them is checked by it.' });
     if (!entries.length) continue;
-    await addProductEvidence(productRecordPath(resolve(outputDirectory, product)), entries, output => resolve(outputDirectory, output));
+    await addProductEvidence(productRecordPath(resolve(outputDirectory, product)), entries, output => resolve(outputDirectory, output), name => resolve(name));
     records.push(productRecordPath(product));
   }
   return records;
@@ -616,7 +616,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (flags.includes('--receipt')) {
     const path = resolve(PROGRAMS, `${definition.id}.stack.reproduction.json`), receipt = stackReceipt(run);
     await writeFile(path, `${JSON.stringify(receipt, null, 1)}\n`);
-    const records = await addStackEvidence(output, relative(resolve(import.meta.dirname, '../../..'), path), receipt);
+    const records = await addStackEvidence(output, path, receipt);
     console.log(`wrote ${path}, and its evidence into ${records.length} product records`);
   }
 }

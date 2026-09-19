@@ -3,7 +3,11 @@
 import { loadSourceProducts } from './source-products.mts';
 import { qualifySourceProduct } from './qualify-source.mts';
 import { writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { rememberQualification } from './qualified-observations.mts';
+import { openSpectralCube } from '../jwst/cubes/spectral-cube.mts';
+import { readFitsFileHdus } from '../../fits.mts';
+import type { ProductFacts } from './request-satisfaction.mts';
 import { pathToFileURL } from 'node:url';
 import { flagValue } from '../../cli-arguments.mts';
 import { compareCubeWithMast, runSpec3 } from '../jwst/cubes/spec3.mts';
@@ -17,7 +21,7 @@ import { pinFrames, reduceProgram as reduceNacoProgram } from '../naco/reduce.mt
 import { qualifyPdsArchiveProduct } from '../pds/archive-final.mts';
 import { buildPdsLedger } from '../pds/archive-ledger.mts';
 import { productRecordPath, readProductRecord } from '../product-record.mts';
-import { compareChannel, receiptName } from '../spitzer/compare.mts';
+import { compareChannel, receiptPath } from '../spitzer/compare.mts';
 import { defaultDataRoot, pinProgram, writeSpitzerProgram } from '../spitzer/archive.mts';
 import { refreshLocalLedger as refreshSpitzerLedger } from '../spitzer/archive-ledger.mts';
 import { defaultWorkRoot, remosaicChannel } from '../spitzer/mosaic.mts';
@@ -60,7 +64,7 @@ async function qualifySpitzerIrac(root: string, request: QualificationRequest): 
   await compareChannel(program, channel, defaultDataRoot, defaultWorkRoot);
   await refreshSpitzerLedger();
   return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
-    program: programId, configuration: request.configuration, product: record.outputs[0]!.path, receipt: receiptName(programId, channelNumber),
+    program: programId, configuration: request.configuration, product: resolve(defaultWorkRoot, programId, record.outputs[0]!.path), receipt: receiptPath(programId, channelNumber),
     ...(observation.programme ? { archiveProgramme: observation.programme } : {}) };
 }
 
@@ -140,13 +144,34 @@ export async function qualifyObservation(root: string, request: QualificationReq
     const id = request.configuration.id;
     const source = (await loadSourceProducts(root, answer.target)).find(product => product.id === id && product.id === request.observation && product.telescope === request.telescope && product.mode === request.mode);
     if (!source) throw new TypeError('Source qualification does not match the indexed observation.');
-    const { qualified: _qualified, receipt: _receipt, receiptProblem: _problem, ...product } = source;
+    const { qualified: _qualified, receipt: _receipt, receiptProblem: _problem, facts: _facts, ...product } = source;
     const result = await qualifySourceProduct(root, product);
-    return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: id, program: id, configuration: request.configuration, ...result };
+    return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: id, program: id, configuration: request.configuration, ...result, product: resolve(root, result.product), receipt: resolve(root, result.receipt) };
   }
   const qualifier = request.configuration.kind === 'pds-product' ? qualifyPdsProduct : QUALIFIERS[`${request.telescope} :: ${request.mode}`];
   if (!qualifier) throw new TypeError(`No qualification implementation is registered for ${request.telescope} ${request.mode}.`);
-  return qualifier(root, request);
+  const result = await qualifier(root, request);
+  return recordQualification(root, result);
+}
+
+/** Read back the produced file, not its mode's nominal capabilities. */
+export async function recordQualification(root: string, result: QualificationResult): Promise<QualificationResult> {
+  let facts: ProductFacts = { target: result.target, verified: true, kind: 'image', result: 'telescope-product' };
+  if (result.configuration.kind === 'jwst-band') {
+    const cube = await openSpectralCube(result.product);
+    facts = { ...facts, kind: 'cube', wavelengthIntervalsMicrometres: [[cube.wavelength(0), cube.wavelength(cube.planes - 1)]] };
+  }
+  if (result.configuration.kind !== 'pds-product') {
+    const headers = await readFitsFileHdus(result.product), header = headers[0]!.header;
+    const start = header['DATE-BEG'] ?? header['DATE-OBS'], end = header['DATE-END'];
+    if (typeof start === 'string' && typeof end === 'string' && Number.isFinite(Date.parse(start)) && Number.isFinite(Date.parse(end)))
+      facts = { ...facts, startIso: new Date(start).toISOString(), endIso: new Date(end).toISOString() };
+  }
+  const record = await readProductRecord(productRecordPath(result.product));
+  const evidence = record?.evidence.findLast(entry => entry.receiptPin !== undefined);
+  const qualified = { ...result, receipt: evidence ? resolve(dirname(result.product), evidence.receipt) : result.receipt };
+  await rememberQualification(root, { ...qualified, facts, productRecord: result.configuration.kind === 'pds-product' ? result.receipt : productRecordPath(result.product), outputRoot: dirname(result.product) });
+  return qualified;
 }
 
 export const QUALIFY_HELP = `Usage: pnpm telescope:qualify --target TARGET --telescope NAME --mode MODE --observation ID ROUTE_OPTIONS

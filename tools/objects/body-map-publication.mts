@@ -11,6 +11,7 @@ import { pathToFileURL } from 'node:url';
 import { sha256 } from '../../src/platform/sha256.mts';
 import { flagValue } from '../cli-arguments.mts';
 import { hasErrorCode } from '../source-values.mts';
+import { readFitsHdus, fitsImageAccessor } from '../fits.mts';
 import { definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapProduct } from './body-map-product.mts';
 import { parseProductRecord, productRecordPath, runDigest, sameRun, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from './product-record.mts';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, type ConstraintVerdict, type ObservationSelection } from './telescopes/query.mts';
@@ -45,6 +46,27 @@ export function bodyMapProductRecord(product: BodyMapProduct, plane: Buffer, met
 }
 
 export const formatProductRecord = (record: ProductRecord): string => `${JSON.stringify(parseProductRecord(record), null, 2)}\n`;
+
+export function assertBodyMapPlanes(bytes: Buffer, product: BodyMapProduct): void {
+  const hdus = readFitsHdus(bytes);
+  const plane = (name: string) => {
+    const matches = hdus.filter(hdu => hdu.header.EXTNAME === name);
+    if (matches.length !== 1) throw new Error(`Body map needs exactly one ${name} plane.`);
+    const hdu = matches[0]!;
+    if (hdu.dimensions.length !== 2 || hdu.dimensions[0] !== product.grid.width || hdu.dimensions[1] !== product.grid.height || ![-32, -64].includes(hdu.bitpix)) throw new Error(`${name}: body-map grid or floating missing-value convention mismatch.`);
+    if ((hdu.header.BUNIT ?? hdu.header.UNITS) !== product.definition.units) throw new Error(`${name}: body-map units mismatch.`);
+    return fitsImageAccessor(bytes, hdu);
+  };
+  const value = plane(product.planes.value), error = plane(product.planes.uncertainty);
+  let measured = 0;
+  for (let i = 0; i < product.grid.width * product.grid.height; i++) {
+    const v = value(i), e = error(i);
+    if (Number.isNaN(v) && Number.isNaN(e)) continue;
+    if (!Number.isFinite(v) || !Number.isFinite(e) || e < 0) throw new Error('Body-map values and nonnegative uncertainties must share a finite/NaN mask.');
+    measured++;
+  }
+  if (!measured) throw new Error('Body map has no measured cells.');
+}
 
 export interface TelescopeLayer {
   readonly schema: typeof TELESCOPE_LAYER_SCHEMA;
@@ -104,6 +126,7 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
   if (metadataPath !== expectedMetadata) throw new Error(`The body-map record belongs at ${expectedMetadata}, beside the plane it names.`);
   const plane = await publicationFile(planePath, selection, 'map plane');
   if (sha256(plane) !== product.planes.sha256) throw new Error(`${planePath} is not the plane pinned by ${metadataPath}.`);
+  assertBodyMapPlanes(plane, product);
   const recordPath = productRecordPath(planePath), record = parseProductRecord(JSON.parse((await publicationFile(recordPath, selection, 'product record')).toString('utf8')) as unknown);
   if (!await sameRun(record, record, output => resolve(dirname(planePath), output))) throw new Error(`${recordPath} does not describe the output bytes on disk now.`);
   const expectedRun = bodyMapRun(product, record.inputs, record.software, record.toolchainDigest);
