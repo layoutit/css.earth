@@ -44,8 +44,8 @@ Above, each body's lens map with one apparition (top) and with every linked one
 decides only which apparitions to try. Daphne's 2017 frames were predicted to
 share 193 samples with its 2018 frames, but the fit found at most 59 in the
 pixels, so that apparition is left out by name
-(`--leave-out-apparition=2017-05-20`). Its map changes only through the frame
-choice.
+(`--leave-out-apparition=2017-05-20`). Its map changes only through how its
+frames are combined.
 
 ## Set up and measure
 
