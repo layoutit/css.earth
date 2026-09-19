@@ -54,6 +54,24 @@ observation still offers actions for its other observations.
 
 ### Verified product versus answered question
 
+The public qualifier records a small, immutable result under
+`output/telescopes/<target>/qualifications/`. It links the exact observation and
+program to the produced file, its producing record and its comparison receipt.
+Queries read these results back and check all three file pins. A missing or changed
+artifact invalidates this local qualification; the archive's discovery records remain.
+All public qualification result paths are absolute. Stored local results use
+repository-relative paths so that the checkout can move.
+
+Selection includes the matching `product` and assesses its verified facts. For example,
+a qualified 2.2–2.4 µm cube cannot answer a 4.24–4.28 µm request. Other observations
+still expose qualification actions. Unmeasured resolution remains unknown, even when
+the cube's identity, kind and wavelength coverage are established.
+
+Source-package descriptions remain declarations. Successful decoding establishes
+artifact identity and native product kind; it does not promote declared bandpasses,
+times or achieved resolution into verified facts. A source-qualified product can
+therefore remain an unresolved answer to the scientific question.
+
 Source observations and explicit selections expose `requestSatisfaction` and `satisfaction`,
 respectively. Published body-map descriptors also carry `satisfaction`. Its status is `fulfilled`,
 `unresolved` or `refused`, with a verdict for each requested constraint and the explicit acceptance
@@ -106,6 +124,37 @@ Every producing stage writes one `cssearth-telescope-product@1` record beside it
 | `software`, `toolchainDigest` | The versions that ran, and the digest of the pin they were installed from. |
 | `outputs` | Every file that came out, by path, byte count and sha256, with its units and conventions. |
 | `evidence` | What was checked afterwards, each entry naming its kind, its receipt and the exact product it checked. |
+
+New comparison evidence carries a `receiptPin` (bytes and SHA-256). Adding evidence
+copies the receipt to a content-addressed file beside the exact product. A later run
+may update an archive's latest/index receipt without changing an earlier product's
+evidence. Reuse verifies these receipt pins as well as output pins. Older unpinned
+receipts remain historical records; running a new comparison replaces the corresponding
+legacy entry with pinned evidence.
+
+JWST cube comparisons use `jwst-cube-samples@1`: identical finite/nonzero coverage,
+at least one shared sample, and a maximum absolute difference divided by
+`max(abs(archive sample), median absolute archive brightness)` of at most `1e-5`.
+The tolerance is a numerical reproduction criterion, not an astrophysical accuracy
+claim. Image and coronagraph comparisons apply the same sample criterion as
+`jwst-image-samples@1` and also require an identical pixel grid; a comparison made
+by interpolating sky positions remains a comparison without accepted agreement.
+Every new receipt names its rule and acceptance result and pins the local
+cube. A failed comparison retains its measurements and does not attach agreement.
+Historical JWST receipts without an explicit acceptance rule are retained but no
+longer counted as checked agreement. They need a fresh comparison, not an inferred pass.
+
+Body-map publication reads the actual FITS value and uncertainty planes. Each must
+exist exactly once, match the declared grid and units, and share a finite/NaN mask;
+finite uncertainties must be nonnegative. Hash agreement alone cannot publish a map.
+
+MAST transport failures leave the affected association lookup `unanswered` while
+independent archive results remain available. Wrong collections, missing identities
+and malformed contracts still fail integrity checks. Every successful MAST service
+response is retained with its exact request, timestamp, package version and digest
+under `output/archive-cache/mast/responses/`; association evidence carries its pin.
+`replayMastResponse(pin, request)` permits explicit replay after checking the digest
+and request. A failed live request never silently selects an old response.
 
 A record carries no clock time, so the same run writes the same bytes. The run that made the outputs writes the record, from
 what it actually used; nothing later rewrites those facts. Evidence is the one thing added afterwards, by the stage that did

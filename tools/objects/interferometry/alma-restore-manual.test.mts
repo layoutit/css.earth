@@ -181,7 +181,7 @@ test('the archive comparison is written beside the restored image and added to i
     assert.deepEqual(record.inputs, run.inputs, 'the comparison leaves the run facts the restore recorded');
     const evidence = evidenceFor(record, basename(image), 'archive-agreement');
     assert.equal(evidence.length, 1);
-    assert.equal(evidence[0]!.receipt, 'Europa.restored.archive-comparison.json');
+    assert.ok(evidence[0]!.receiptPin);
     assert.match(evidence[0]!.establishes, /reproduces the reduction that was delivered/u);
     // Agreement with the archive places nothing and publishes nothing.
     assert.equal(evidenceFor(record, basename(image), 'geometric-registration').length, 0);

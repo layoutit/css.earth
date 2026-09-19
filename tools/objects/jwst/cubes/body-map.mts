@@ -122,7 +122,7 @@ const card = (key: string, value: string | number | boolean) => `${key.padEnd(8)
 const headerBlock = (cards: readonly string[]) => { const text = [...cards, 'END'.padEnd(80)].join(''); return Buffer.from(text.padEnd(Math.ceil(text.length / 2880) * 2880), 'ascii'); };
 
 /** The map as FITS: an empty primary HDU that says what it is, then float32 IMAGE extensions named by quantity. */
-export function bodyMapFits(map: BodyMap, identity: Readonly<Record<string, string>>, planes: readonly { name: string; units: string; values: Float32Array }[]): Buffer {
+export function bodyMapFits(map: Pick<BodyMap, 'width' | 'height'>, identity: Readonly<Record<string, string>>, planes: readonly { name: string; units: string; values: Float32Array }[]): Buffer {
   const parts = [headerBlock([card('SIMPLE', true), card('BITPIX', 8), card('NAXIS', 0), card('EXTEND', true), ...Object.entries(identity).map(([key, value]) => card(key, value))])];
   for (const plane of planes) {
     const data = Buffer.alloc(Math.ceil(plane.values.length * 4 / 2880) * 2880);

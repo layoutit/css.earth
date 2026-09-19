@@ -53,7 +53,7 @@ test('the cube comparison adds its agreement to the record beside that cube, and
   try {
     const cube = join(directory, 'jw01250-o002_t001_nirspec_g395h_s3d.fits'), finer = join(directory, 'jw01250-o002_t001_nirspec_g395h-fine_s3d.fits');
     const receipt = join(directory, 'europa-1250.NIRSPEC-G395H-F290LP.reproduction.json'), agreement = 'The re-run reproduces MAST’s own cube sample by sample.';
-    await writeFile(cube, 'cube'); await writeFile(finer, 'finer cube');
+    await writeFile(receipt, '{}'); await writeFile(cube, 'cube'); await writeFile(finer, 'finer cube');
     // The comparison is refused until the stage that built the cube has said what built it.
     await assert.rejects(recordProductEvidence(cube, 'archive-agreement', receipt, agreement), /no product record at/u);
     await writeProductRecord(productRecordPath(cube), cubeRun(), [{ path: basename(cube), file: cube, units: 'MJy/sr',
@@ -64,4 +64,19 @@ test('the cube comparison adds its agreement to the record beside that cube, and
     assert.equal(record.outputs[0]!.units, 'MJy/sr');
     await assert.rejects(recordProductEvidence(finer, 'archive-agreement', receipt, agreement), /no product record at/u);
   } finally { await rm(directory, { recursive: true, force: true }); }
+});
+test('archive agreement requires an explicit numerical acceptance policy and exact coverage', async () => {
+  const { sampleAgreement } = await import('../sample-agreement.mts');
+  const samples = { both: 100, onlyOurs: 0, onlyMast: 0, maximumNormalizedDifference: 1e-6 };
+  assert.equal(sampleAgreement(samples).accepted, true);
+  for (const changed of [{ maximumNormalizedDifference: 1 }, { onlyMast: 1 }, { both: 0 }, { maximumNormalizedDifference: NaN }])
+    assert.equal(sampleAgreement({ ...samples, ...changed }).accepted, false);
+  const { parseReproductionReceipt } = await import('../archive-ledger.mts');
+  const receipt = { schema: 'cssearth-jwst-spec3-reproduction@3', program: 'test', band: 'NIRSPEC-G395H-F290LP', observation: 'obs', mast: { name: 'archive.fits', bytes: 100, sha256: 'a'.repeat(64) }, local: { name: 'local.fits', bytes: 100, sha256: 'b'.repeat(64) }, samples, acceptance: sampleAgreement(samples) };
+  assert.equal(parseReproductionReceipt(receipt, 'test').accepted, true);
+  assert.equal(parseReproductionReceipt({ ...receipt, samples: { ...samples, maximumNormalizedDifference: 1000, correlation: -1, identicalShare: 0 } }, 'test').accepted, false);
+  assert.equal(parseReproductionReceipt({ ...receipt, schema: 'cssearth-jwst-spec3-reproduction@2' }, 'historical').accepted, false);
+  const image = { ...receipt, schema: 'cssearth-jwst-image3-reproduction@2', differentWcs: [], pixels: { comparedOn: 'pixels' }, acceptance: sampleAgreement(samples, 'image') };
+  assert.equal(parseReproductionReceipt(image, 'image').accepted, true);
+  assert.equal(parseReproductionReceipt({ ...image, pixels: { comparedOn: 'sky positions' } }, 'interpolated').accepted, false);
 });

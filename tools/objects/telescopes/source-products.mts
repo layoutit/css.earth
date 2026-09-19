@@ -6,6 +6,8 @@ import { hasErrorCode, requireArray, requireRecord, requireString, requireFinite
 import { pinFile, readProductRecord, sameRun, type ProductRecord, type ProductRun } from '../product-record.mts';
 import { sourcePds3Observations } from '../pds/source-observations.mts';
 import type { ProductKind } from './query.mts';
+import { parseProductFacts } from './qualified-observations.mts';
+import type { ProductFacts } from './request-satisfaction.mts';
 
 export const SOURCE_PRODUCTS_SCHEMA = 'cssearth-source-observations@1';
 export interface SourceFile { readonly role: string; readonly path: string; readonly origin: string; readonly bytes: number; readonly sha256: string }
@@ -21,7 +23,7 @@ export interface SourceProduct {
   readonly units: string; readonly meaning: string; readonly citation: string;
   readonly limitations: readonly string[];
 }
-export interface LoadedSourceProduct extends SourceProduct { readonly qualified: boolean; readonly receipt: string; readonly receiptProblem?: string }
+export interface LoadedSourceProduct extends SourceProduct { readonly qualified: boolean; readonly receipt: string; readonly receiptProblem?: string; readonly facts?: ProductFacts }
 const HEX = /^[a-f0-9]{64}$/u;
 const SAFE = /^[a-zA-Z0-9][a-zA-Z0-9._-]*$/u;
 export function inside(root: string, path: string): string {
@@ -129,7 +131,8 @@ export async function loadSourceProducts(root: string, target: string): Promise<
       }
       if (!qualified) receiptProblem = 'The qualification receipt is stale: inputs, parameters, implementation, runtime or output bytes changed.';
     }
-    loaded.push({ ...product, qualified, receipt, ...(receiptProblem ? { receiptProblem } : {}) });
+    const facts = qualified ? parseProductFacts(requireRecord(JSON.parse(await readFile(resolve(root, `output/telescopes/${target}/${product.id}/decoded.json`), 'utf8')), 'decoded product').facts) : undefined;
+    loaded.push({ ...product, qualified, receipt, ...(facts ? { facts } : {}), ...(receiptProblem ? { receiptProblem } : {}) });
   }
   return loaded;
 }
