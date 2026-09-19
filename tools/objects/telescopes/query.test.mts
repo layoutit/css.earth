@@ -574,10 +574,10 @@ test('one Wild 2 query sees source-pinned Stardust PDS3 observations without a d
   assert.equal(navcam.observations?.records?.[0]?.centralWavelengthMicrometres, 0.6988);
   assert.equal(navcam.observations?.records?.[0]?.sourceFiles?.[1]?.sha256, '6fa36047b1f56f219417cc86fafb39c507c9ee83318b428942228e6f84448f62');
   assert.deepEqual([navcam.meetsConstraints.wavelength?.answer, navcam.meetsConstraints.time?.answer, navcam.meetsConstraints.kind?.answer], ['unknown', 'yes', 'yes']);
-  assert.equal(navcam.toolkitSupport.tool, 'pds.pdr');
-  assert.equal(navcam.toolkitSupport.targetProgramPinned, true);
-  assert.deepEqual(navcam.selectionAssessment.blockers.map(blocker => blocker.code), ['body-map-author-missing']);
-  assert.equal(answer.targetCoverage.find(entry => entry.telescope === 'pds')?.state, 'observed');
+  assert.equal(navcam.toolkitSupport.tool, 'tools/objects/telescopes/qualify-source.mts');
+  assert.ok(navcam.selectionAssessment.blockers.some(blocker => blocker.code === 'body-map-author-missing'));
+  assert.equal(answer.targetCoverage.find(entry => entry.telescope === 'package-sources')?.state, 'observed');
+  assert.equal(navcam.observations?.records?.[0]?.requestSatisfaction?.constraints.wavelength?.answer, 'unknown');
 });
 
 test('the committed ledgers: no candidate for any target ever answers yes for sharpness', async () => {

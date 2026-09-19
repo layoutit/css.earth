@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { assessRequest, type RequestSatisfaction } from './telescopes/request-satisfaction.mts';
 /** Bind one scientific question and selected archive program to the exact body-map bytes published for it.
  *
  * The instrument-specific stages still do the science. This module supplies the missing boundary between them: a body map is
@@ -47,6 +48,7 @@ export const formatProductRecord = (record: ProductRecord): string => `${JSON.st
 
 export interface TelescopeLayer {
   readonly schema: typeof TELESCOPE_LAYER_SCHEMA;
+  readonly satisfaction: RequestSatisfaction;
   readonly target: string;
   readonly request: ObservationSelection['request'];
   readonly selection: Pick<ObservationSelection, 'telescope' | 'mode' | 'programme' | 'toolkitLevel' | 'constraints' | 'bodyMapSupport' | 'unresolved'>;
@@ -116,7 +118,13 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
   const incomplete = product.observations.filter(observation => !observation.mode || !observation.programme);
   if (incomplete.length) throw new Error(`${metadataPath} has ${incomplete.length} observation(s) without an exact ledger mode and program.`);
   const resolvedConstraints = assertMapAnswersRequest(product, selection), resolvedNames = new Set(Object.keys(resolvedConstraints));
-  return { schema: TELESCOPE_LAYER_SCHEMA, target: selection.request.target, request: selection.request,
+  return { schema: TELESCOPE_LAYER_SCHEMA, satisfaction: assessRequest(selection.request, { verified: true, target: product.frame.body, result: 'body-map',
+      wavelengthIntervalsMicrometres: product.definition.wavelengthIntervalsMicrometres,
+      startIso: new Date((Math.min(...product.observations.map(observation => observation.midTimeJd)) - 2440587.5) * 86400000).toISOString(),
+      endIso: new Date((Math.max(...product.observations.map(observation => observation.midTimeJd)) - 2440587.5) * 86400000).toISOString(),
+      angularResolutionArcsec: Math.max(...product.observations.map(observation => observation.angularResolution.majorArcsec)),
+      surfaceResolutionKm: Math.max(...product.observations.map(observation => surfaceResolutionKm(observation).majorKm)),
+      resolutionElements: Math.min(...product.observations.map(observation => resolutionElementsAcrossDisc(observation, product.frame.radiusKm))) }), target: selection.request.target, request: selection.request,
     selection: { telescope: selection.telescope, mode: selection.mode, programme: selection.programme, toolkitLevel: selection.toolkitLevel,
       constraints: { ...selection.constraints, ...resolvedConstraints }, bodyMapSupport: selection.bodyMapSupport,
       unresolved: selection.unresolved.filter(item => !resolvedNames.has(item.constraint)) },

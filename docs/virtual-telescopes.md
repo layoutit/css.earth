@@ -14,6 +14,64 @@ One route does none of that on purpose. Where an observatory has retired a pipel
 to run again, and the archive's own final product is all there is. That product is pinned and read whole rather than re-made,
 and the difference is kept visible everywhere: see [two capabilities, never one](#two-capabilities-never-one).
 
+## Package-owned observations through the same API
+
+`telescope:query` also reads exact observations already pinned in each object's source package.
+These observations do not need a new telescope adapter or a synthetic archive ledger. An optional
+`src/objects/<target>/source/observations.json` uses schema `cssearth-source-observations@1` and
+references input IDs in the existing source manifest. The declaration supplies the instrument,
+mode, native product kind, exact archive identity, decoder, header assertions, measurement meaning,
+units, citation and explicit limitations. Optional wavelength intervals, UTC time bounds and achieved-resolution fields can support request fulfillment. Achieved resolution requires a stated measurement basis; source sampling is never promoted into that field. Hashes and sizes remain in the manifest.
+
+The available decoders are numeric FITS images/cubes (including supported RICE compression) and
+PDS images through pinned `pdr`. Existing detached PDS3 image labels produce this same contract
+automatically. Every referenced input must be pinned, including detached labels, metadata and
+external format definitions. PDS pointers to files outside that set are refused before decoding.
+Adding an unsupported format still requires a decoder; declaring a format does not implement it.
+
+For example:
+
+```sh
+pnpm telescope:query --target sun --wavelength 0.0170,0.0172 \
+  --any-time --min-arcsec 2 --kind image --result telescope-product --json
+```
+
+Execute one of the returned `qualificationActions` exactly as emitted. The action verifies/acquires
+its entire input set, checks declared FITS/PDS identity fields, decodes the native samples, and writes
+`output/telescopes/<target>/<observation>/qualification.product.json` and `decoded.json`. Downloads
+report each 10 MB to stderr. The science product remains the original file, with its original grid
+and missing values. The decoded report contains full-array statistics, metadata and limitations.
+
+Run the same query again: a current receipt exposes a selectable program. `source-qualified` means
+**pinned source bytes and decoding**, with production method `archive-retrieval` and evidence
+`archive-origin`. It does not claim archive-final calibration, a reproduced pipeline, agreement
+with another reduction, or a scientifically qualified surface map. `package-sources` coverage is
+separate from the archive's search coverage and never asserts that the archive was fully searched.
+
+Qualification reuse checks the complete input pins, observation parameters, implementation digest,
+runtime and output bytes. Changed or missing files invalidate the receipt. A mode with one qualified
+observation still offers actions for its other observations.
+
+### Verified product versus answered question
+
+Source observations and explicit selections expose `requestSatisfaction` and `satisfaction`,
+respectively. Published body-map descriptors also carry `satisfaction`. Its status is `fulfilled`,
+`unresolved` or `refused`, with a verdict for each requested constraint and the explicit acceptance
+rule `all-requested-constraints`. Selecting an executable program does not establish fulfillment. A published map whose provenance does not establish the requested native input kind retains that requirement as unknown.
+
+Coverage is evaluated for each product, never by joining spectral intervals from different
+observations. A central wavelength cannot establish a passband; pixel scale cannot establish
+achieved resolution; a readable native image cannot establish body-map registration. Missing
+facts remain unknown. Qualification actions can still be useful when a later mapping stage is
+missing, and that blocker remains visible.
+
+The Sun declarations cover 28 HMI continuum segments, an HMI radial-field synoptic map and AIA
+171/304 synoptic maps. HMI's stripped segment headers retain only structural checks; the continuum
+keyword table is pinned alongside the segments. Observation time/geometry from that table is not
+promoted to qualified metadata. Synoptic maps span multiple epochs. Neither those limitations nor
+missing uncertainty/achieved resolution are repaired by labelling the existing display textures
+as scientific body maps.
+
 ## Archive acquisition
 
 The virtual-telescope routes use one pinned archive client where Astroquery has the required public operation. Install it with

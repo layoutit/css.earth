@@ -1,3 +1,4 @@
+import { assessRequest, type RequestSatisfaction } from './request-satisfaction.mts';
 /** Which observations in the archives might measure a quantity on a target, and what stays unknown until one is read.
  *
  * The ledgers hold what each archive has per object and per mode: how many observations, which programmes, which programs are
@@ -26,7 +27,7 @@ import { flagValue } from '../../cli-arguments.mts';
 import { hasErrorCode, readJsonSource, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
-import { sourcePds3Capabilities, sourcePds3Observations, withSourcePds3Observations } from '../pds/source-observations.mts';
+import { loadSourceProducts, type LoadedSourceProduct } from './source-products.mts';
 import { qualificationActionsFor, type QualificationAction } from './qualification-routes.mts';
 import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociation } from './target-associations.mts';
 import { resolveTarget, type TargetCatalogueEntry, type TargetResolution } from './targets.mts';
@@ -65,11 +66,11 @@ export interface ConstraintVerdict { readonly answer: ConstraintAnswer; readonly
  * `archive-final` is its own level and not a weaker `proven`: the observatory's own final product was pinned, downloaded and
  * read whole, which establishes the bytes and not a re-calibration. A mode whose pipeline is retired can reach it and never
  * reach `proven`, and a caller asking what was re-made here is never answered with it. */
-export type ToolkitLevel = 'none' | 'archive-final' | 'tool-without-checked-program' | 'proven';
+export type ToolkitLevel = 'none' | 'archive-final' | 'source-qualified' | 'tool-without-checked-program' | 'proven';
 
 export interface ToolkitSupport {
   readonly level: ToolkitLevel; readonly reason: string;
-  readonly productionMethod: 'none' | 'tool-available' | 'local-pipeline' | 'archive-final';
+  readonly productionMethod: 'none' | 'tool-available' | 'local-pipeline' | 'archive-final' | 'archive-retrieval';
   readonly evidenceBasis: 'none' | 'accepted-route-receipts' | 'archive-origin';
   readonly acceptanceCriterion: 'none' | 'receipt-valid-for-pinned-program' | 'archive-bytes-qualified';
   readonly tool?: string;
@@ -126,7 +127,7 @@ export interface Candidate {
       readonly centralWavelengthMicrometres?: number;
       readonly wavelengthIntervalMicrometres?: readonly [number, number]; readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
       readonly surfaceResolutionKm?: number; readonly kind?: ProductKind; readonly use?: string; readonly units?: string;
-      readonly sourceFiles?: readonly { readonly role: string; readonly path: string; readonly origin: string; readonly bytes: number; readonly sha256: string }[] }[] } | null;
+      readonly qualification?: { readonly verified: boolean; readonly receipt: string; readonly problem?: string; readonly limitations: readonly string[] }; readonly requestSatisfaction?: RequestSatisfaction; readonly sourceProductId?: string; readonly sourceFiles?: readonly { readonly role: string; readonly path: string; readonly origin: string; readonly bytes: number; readonly sha256: string }[] }[] } | null;
   readonly programmes: readonly string[];
   readonly meetsConstraints: Readonly<Record<string, ConstraintVerdict>>;
   readonly toolkitSupport: ToolkitSupport;
@@ -163,6 +164,7 @@ export interface QueryInputs {
   readonly targetCatalogue: readonly TargetCatalogueEntry[];
   readonly targetAssociations: readonly TargetAssociation[];
   readonly bodyMaps: readonly { readonly path: string; readonly value: unknown }[];
+  readonly sourceProducts?: readonly LoadedSourceProduct[];
   readonly investigations?: { readonly path: string; readonly value: unknown };
 }
 
@@ -182,6 +184,7 @@ export interface CapabilityAnswer {
 export const OBSERVATION_SELECTION_SCHEMA = 'cssearth-telescope-observation-selection@1';
 export interface ObservationSelection {
   readonly schema: typeof OBSERVATION_SELECTION_SCHEMA;
+  readonly satisfaction: RequestSatisfaction;
   readonly request: CapabilityRequest;
   readonly telescope: string;
   readonly mode: string;
@@ -246,12 +249,12 @@ function workflowAssessment(request: CapabilityRequest, target: string, candidat
     blockers.push({ code: 'constraint-refused', constraint, reason: `${constraint}: ${verdict_.reason}` });
   if (candidate.toolkitSupport.level === 'none') blockers.push({ code: 'toolkit-unavailable', reason: candidate.toolkitSupport.reason });
   if (request.result === 'body-map' && candidate.bodyMapSupport.answer === 'no') blockers.push({ code: 'body-map-author-missing', reason: candidate.bodyMapSupport.reason });
-  const programmes = [...new Set([...candidate.toolkitSupport.targetPrograms, ...candidate.toolkitSupport.targetArchiveFinalQualifiedPrograms])].sort();
+  const programmes = [...new Set([...candidate.toolkitSupport.targetPrograms, ...candidate.toolkitSupport.targetArchiveFinalQualifiedPrograms])].filter(programme => candidate.observations?.records?.find(record => record.programme === programme)?.requestSatisfaction?.status !== 'refused').sort();
   if (!programmes.length) blockers.push({ code: 'target-program-unqualified', reason: `No pinned or qualified program of ${target} is available for this mode.` });
   const nextActions = blockers.length ? [] : programmes.map(programme => ({ kind: 'select-observation' as const, programme, command: 'pnpm' as const,
     arguments: ['--silent', 'telescope:query', ...requestArguments(request), '--select-telescope', candidate.telescope, '--select-mode', candidate.mode, '--program', programme, '--json'] }));
-  const qualificationActions = blockers.length === 1 && blockers[0]!.code === 'target-program-unqualified'
-    ? qualificationActionsFor(candidate.telescope, candidate.mode, target, request.wavelengthMicrometres, request.time, candidate.observations?.records ?? []) : [];
+  const qualificationActions = !blockers.some(blocker => ['request-incomplete', 'constraint-refused', 'toolkit-unavailable'].includes(blocker.code))
+    ? qualificationActionsFor(candidate.telescope, candidate.mode, target, request.wavelengthMicrometres, request.time, (candidate.observations?.records ?? []).filter(record => record.sourceProductId ? !record.qualification?.verified && !Object.entries(record.requestSatisfaction?.constraints ?? {}).some(([key, verdict]) => key !== 'result' && verdict.answer === 'no') : blockers.some(blocker => blocker.code === 'target-program-unqualified'))) : [];
   return { selectable: blockers.length === 0, blockers, nextActions, qualificationActions };
 }
 
@@ -571,6 +574,24 @@ function pdsModes(value: unknown, target: string): TargetMode[] {
         receipts: stringList(declared.receipts, 'PDS receipts'), archiveFinal: { programs, qualified } } }]; });
 }
 
+function sourceModes(products: readonly LoadedSourceProduct[], request: CapabilityRequest): TargetMode[] {
+  const groups = new Map<string, LoadedSourceProduct[]>();
+  for (const product of products) { const key = `${product.telescope} :: ${product.mode}`, group = groups.get(key) ?? []; group.push(product); groups.set(key, group); }
+  return [...groups.values()].map(own => {
+    const first = own[0]!, qualified = own.filter(product => product.qualified).map(product => product.id);
+    return { telescope: first.telescope, mode: first.mode, archiveDate: 'package-owned pins', programmes: own.map(product => product.archiveProductId),
+      observations: { count: own.length, scope: 'this-mode' as const, records: own.map(product => ({ id: product.id, programme: product.id, sourceProductId: product.id, qualification: { verified: product.qualified, receipt: product.receipt, problem: product.receiptProblem, limitations: product.limitations }, requestSatisfaction: assessRequest(request, { ...product, verified: product.qualified, result: 'telescope-product' }),
+        startIso: product.startIso ?? '', ...(product.endIso ? { endIso: product.endIso } : {}), archiveProductId: product.archiveProductId, kind: product.kind,
+        ...(product.wavelengthIntervalsMicrometres ? { wavelengthIntervalsMicrometres: product.wavelengthIntervalsMicrometres } : {}),
+        ...(product.centralWavelengthMicrometres === undefined ? {} : { centralWavelengthMicrometres: product.centralWavelengthMicrometres }),
+        units: product.units, use: product.meaning, sourceFiles: product.files })) },
+      dates: own.flatMap(product => product.startIso ? [{ id: product.id, startIso: product.startIso, ...(product.endIso ? { endIso: product.endIso } : {}) }] : []),
+      datesComplete: own.every(product => product.startIso !== undefined),
+      toolkit: { tool: 'tools/objects/telescopes/qualify-source.mts', programs: qualified, checked: [], targetPrograms: qualified, targetChecked: [],
+        receipts: own.filter(product => product.qualified).map(product => product.receipt) } };
+  });
+}
+
 interface ArchiveAdapter {
   readonly modes: (value: unknown, target: string, targetAssociations: readonly TargetAssociation[]) => TargetMode[];
   readonly modeKeys: (value: unknown) => { readonly telescope: string; readonly mode: string }[];
@@ -628,9 +649,7 @@ const ADAPTERS: Readonly<Record<string, ArchiveAdapter>> = Object.freeze({
   keck: { modes: keckModes, modeKeys: value => modeRows(value, 'Keck', 'modes', 'Keck', 'instrument'), missingCoverage: ordinaryMissing('keck'), evidenceNames: { KECK: 'Keck' } },
   ihw: { modes: ihwModes, modeKeys: value => modeRows(value, 'IHW', 'modes', 'IHW/PDS', 'mode'), missingCoverage: (ledger, _value, _target) => ({ telescope: 'ihw', ledger, state: 'not-searched', reason: 'This IHW dataset is a target-specific Halley collection; it is not a search of other targets.' }), evidenceNames: { 'IHW/PDS': 'IHW/PDS' } },
   pds: { modes: pdsModes, modeKeys: value => requireArray(requireRecord(value, 'PDS ledger').modes, 'PDS modes').map(raw => { const entry = requireRecord(raw, 'PDS mode'); return {
-    telescope: requireString(entry.telescope, 'PDS telescope'), mode: requireString(entry.mode, 'PDS mode') }; }), missingCoverage: pdsMissing,
-    prepare: async (root, target, value) => { const observations = await sourcePds3Observations(root, target); return {
-      value: withSourcePds3Observations(value, target, observations), capabilities: sourcePds3Capabilities(observations) }; } },
+    telescope: requireString(entry.telescope, 'PDS telescope'), mode: requireString(entry.mode, 'PDS mode') }; }), missingCoverage: pdsMissing },
 });
 const EVIDENCE_TELESCOPE_NAMES: Readonly<Record<string, string>> = Object.freeze(Object.assign({}, ...Object.values(ADAPTERS).map(adapter => adapter.evidenceNames ?? {})));
 
@@ -758,20 +777,22 @@ function toolkitSupport(mode: TargetMode, target: string): ToolkitSupport {
   const held = mode.toolkit.targetPrograms === undefined ? forTarget(qualified, target) : qualified.filter(program => pinned.includes(program));
   // Re-calibrated and checked outranks archive-final, which outranks a tool nothing has been run through. They are never added
   // together: a mode reaches `archive-final` by having the observatory's own product read here, not by half-reproducing it.
-  const level: ToolkitLevel = checked.length ? 'proven' : qualified.length ? 'archive-final'
+  const sourceQualified = mode.observations?.records?.filter(record => record.qualification?.verified).map(record => record.id) ?? [];
+  const level: ToolkitLevel = checked.length ? 'proven' : qualified.length ? 'archive-final' : sourceQualified.length ? 'source-qualified'
     : tool || (routeState && routeState !== 'refused') ? 'tool-without-checked-program' : 'none';
   const named = tool ? tool.startsWith('pds.') ? `${tool} retrieves and decodes products for this mode without recalibrating them`
-    : level === 'archive-final' ? `${tool} retrieves and decodes this mode without recalibrating it` : `${tool} reduces this mode`
+    : level === 'archive-final' || level === 'source-qualified' ? `${tool} retrieves and decodes this mode without recalibrating it` : `${tool} reduces this mode`
     : routeState ? `the route reached the state "${routeState}" on this mode` : 'no tool for this mode is named in the ledger';
   const archiveSaid = `${qualified.length} archive-final program(s) are qualified: ${qualified.join(', ')}. The archive's own final products were pinned, downloaded and read whole, which establishes those bytes and not a re-calibration here. ${held.length ? `${held.join(', ')} is a program of ${target}.` : `None of them is a program of ${target}.`}`;
   const sentence = (text: string) => /[.!?]$/u.test(text) ? text : `${text}.`;
   const reason = level === 'none' ? sentence(refusedBecause ?? `${named}, and no program of it is checked`)
     : level === 'proven' ? `${named}, and ${checked.length} program(s) have a checked receipt: ${checked.join(', ')}. ${passed.length ? `${passed.join(', ')} is a program of ${target}.` : `None of them is a program of ${target}.`}${qualified.length ? ` Separately, ${archiveSaid}` : ''}`
+    : level === 'source-qualified' ? `${sourceQualified.length} package-owned product(s) have current byte and decoding qualification. Source processing level and scientific suitability remain separate.`
     : level === 'archive-final' ? `Nothing here re-calibrates this mode: ${named}. ${archiveSaid}`
     : `${named}, but no program of it has a checked receipt yet.`;
-  const productionMethod = level === 'proven' ? 'local-pipeline' : level === 'archive-final' ? 'archive-final' : level === 'tool-without-checked-program' ? 'tool-available' : 'none';
-  const evidenceBasis = level === 'proven' ? 'accepted-route-receipts' : level === 'archive-final' ? 'archive-origin' : 'none';
-  const acceptanceCriterion = level === 'proven' ? 'receipt-valid-for-pinned-program' : level === 'archive-final' ? 'archive-bytes-qualified' : 'none';
+  const productionMethod = level === 'source-qualified' ? 'archive-retrieval' : level === 'proven' ? 'local-pipeline' : level === 'archive-final' ? 'archive-final' : level === 'tool-without-checked-program' ? 'tool-available' : 'none';
+  const evidenceBasis = level === 'proven' ? 'accepted-route-receipts' : level === 'archive-final' || level === 'source-qualified' ? 'archive-origin' : 'none';
+  const acceptanceCriterion = level === 'proven' ? 'receipt-valid-for-pinned-program' : level === 'archive-final' || level === 'source-qualified' ? 'archive-bytes-qualified' : 'none';
   return { level, reason, productionMethod, evidenceBasis, acceptanceCriterion, ...(tool ? { tool } : {}), programs, checked, archiveFinalQualified: qualified,
     targetPrograms: pinned, targetChecked: passed, targetArchiveFinalQualifiedPrograms: held,
     targetProgramPinned: pinned.length > 0, targetProgramChecked: passed.length > 0, targetArchiveFinalQualified: held.length > 0 };
@@ -853,6 +874,23 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
     if (!modes.length) continue;
     for (const mode of modes) found.push({ ledger: ledger.path, mode });
   }
+  for (const mode of sourceModes((inputs.sourceProducts ?? []).filter(product => product.target === target), canonicalRequest)) {
+    const key = `${mode.telescope} :: ${mode.mode}` as const;
+    const existing = found.find(entry => entry.mode.telescope === mode.telescope && entry.mode.mode === mode.mode);
+    if (existing) {
+      const a = existing.mode, all = [...a.observations?.records ?? [], ...mode.observations?.records ?? []];
+      const records = [...new Map(all.map(record => [record.archiveProductId ?? record.id, record])).values()];
+      existing.mode = { ...a, observations: { count: Math.max(records.length, a.observations?.count ?? 0), scope: a.observations?.scope ?? 'this-mode', records }, datesComplete: a.datesComplete === true && mode.datesComplete === true, dates: [...a.dates, ...mode.dates],
+        programmes: [...new Set([...a.programmes, ...mode.programmes])], toolkit: { ...a.toolkit,
+          programs: [...new Set([...a.toolkit.programs, ...mode.toolkit.programs])],
+          targetPrograms: [...new Set([...a.toolkit.targetPrograms ?? forTarget(a.toolkit.programs, target), ...mode.toolkit.targetPrograms!])],
+          receipts: [...a.toolkit.receipts, ...mode.toolkit.receipts] } };
+    } else found.push({ ledger: `src/objects/${target}/source/manifest.json`, mode });
+    if (!capabilities.has(key)) capabilities.set(key, { telescope: mode.telescope, mode: mode.mode,
+      kinds: [...new Set((inputs.sourceProducts ?? []).filter(product => product.target === target && product.telescope === mode.telescope && product.mode === mode.mode).map(product => product.kind))],
+      citation: (inputs.sourceProducts ?? []).find(product => product.telescope === mode.telescope && product.mode === mode.mode)!.citation });
+  }
+  if ((inputs.sourceProducts ?? []).some(product => product.target === target)) targetCoverageResults.push({ telescope: 'package-sources', ledger: `src/objects/${target}/source/manifest.json`, state: 'observed', reason: 'Exact package-owned source observations; this is not a complete search of any archive.' });
   const { attached, unassigned } = resolveEvidence(inputs, found.map(entry => entry.mode));
   const candidates = found.map(({ ledger, mode }): Omit<Candidate, 'selectionAssessment'> => {
     const capability = capabilities.get(`${mode.telescope} :: ${mode.mode}`), evidence = attached.get(mode)!;
@@ -890,6 +928,8 @@ export function assessObservationSelection(answer: CapabilityAnswer, telescope: 
   if (candidate.toolkitSupport.level === 'none') blockers.push({ code: 'toolkit', reason: `${telescope} ${mode} has no usable toolkit: ${candidate.toolkitSupport.reason}` });
   if (request.result === 'body-map' && candidate.bodyMapSupport.answer === 'no') blockers.push({ code: 'body-map', reason: `${telescope} ${mode} cannot produce the requested body map: ${candidate.bodyMapSupport.reason}` });
   const targetPrograms = [...candidate.toolkitSupport.targetPrograms, ...candidate.toolkitSupport.targetArchiveFinalQualifiedPrograms];
+  const productSatisfaction = candidate.observations?.records?.find(record => record.programme === programme)?.requestSatisfaction;
+  for (const [constraint, verdict] of Object.entries(productSatisfaction?.constraints ?? {})) if (verdict.answer === 'no') blockers.push({ code: 'constraint', constraint, reason: verdict.reason });
   if (!targetPrograms.includes(programme)) blockers.push({ code: 'programme', reason: `${programme} is not a pinned or archive-final program of ${answer.target} in ${telescope} ${mode}; ${targetPrograms.length ? `choose one of ${targetPrograms.join(', ')}` : 'no pinned or archive-final program is available'}.` });
   return { candidate, blockers };
 }
@@ -907,7 +947,7 @@ export function selectObservation(answer: CapabilityAnswer, telescope: string, m
     ? [{ constraint, answer: verdict_.answer, reason: verdict_.reason } as const] : []),
     ...(productWavelengthQualified ? [] : [{ constraint: 'observationWavelength', answer: 'unknown' as const,
       reason: `The wavelength verdict is for ${telescope} ${mode}, not for program ${programme}; its selected filter, grating or channel must be qualified from the observation products.` }])];
-  return { schema: OBSERVATION_SELECTION_SCHEMA, request, telescope, mode, programme,
+  return { schema: OBSERVATION_SELECTION_SCHEMA, satisfaction: candidate.observations?.records?.find(record => record.programme === programme)?.requestSatisfaction ?? assessRequest(request, { target: answer.target, verified: false }), request, telescope, mode, programme,
     toolkitLevel: candidate.toolkitSupport.level, constraints: candidate.meetsConstraints, bodyMapSupport: candidate.bodyMapSupport, unresolved, evidence: candidate.evidence };
 }
 
@@ -958,10 +998,11 @@ export async function loadQueryInputs(root: string, target: string): Promise<Que
   for (const name of names.filter(entry => entry.endsWith('.body-map.json')).sort()) bodyMaps.push({ path: `src/objects/${canonicalTarget}/source/${name}`, value: await readJsonSource(resolve(source, name)) });
   const investigationPath = `src/objects/${canonicalTarget}/investigations.json`;
   const investigations = await readJsonSource(resolve(root, investigationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return undefined; throw error; });
-  return { ledgers, capabilities, targetCatalogue, targetAssociations, bodyMaps, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
+  return { ledgers, capabilities, targetCatalogue, targetAssociations, bodyMaps, sourceProducts: resolution.status === 'resolved' ? await loadSourceProducts(root, canonicalTarget) : [], ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
 }
 
 const LEVEL_WORDS: Readonly<Record<ToolkitLevel, string>> = Object.freeze({ none: 'no toolkit',
+  'source-qualified': 'package-owned bytes qualified; source processing level retained',
   'archive-final': 'archive-final products qualified, not re-made here', 'tool-without-checked-program': 'a tool, but no checked program',
   proven: 'locally produced with accepted evidence' });
 

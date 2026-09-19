@@ -68,10 +68,24 @@ elif operation in ('discover-target', 'discover-product'):
     answer['products'] = [] if table is None else [{str(name):value(row[name]) for name in table.columns} for _,row in table.iterrows()]
 elif operation == 'decode-product':
     label = Path(request['labelPath']).resolve()
+    data = pdr.read(label)
+    if str(data.standard) == 'PDS3':
+        structures = []
+        for key in data.keys():
+            if key == 'LABEL' or key.lower() == 'label' or 'HEADER' in key: continue
+            array = np.ma.asarray(data.get_scaled(key))
+            if not np.issubdtype(array.dtype, np.number): continue
+            valid = np.asarray(array.compressed())
+            valid = valid[np.isfinite(valid)]
+            if not valid.size: raise ValueError(f'{key} has no finite samples')
+            structures.append({'name':key,'shape':list(array.shape),'dtype':str(array.dtype),'elements':int(array.size),'finite':int(valid.size),'minimum':float(valid.min()),'maximum':float(valid.max())})
+        if not structures: raise ValueError('PDS3 product has no supported numeric structure')
+        answer['decoded'] = {'standard':'PDS3','metadata':{'scaling':'pdr get_scaled with special-value masking'},'structures':structures}
+        json.dump(answer, sys.stdout, allow_nan=False, separators=(',',':'))
+        sys.exit(0)
     root = ET.parse(label).getroot()
     def local(tag): return tag.rsplit('}',1)[-1]
     special_constants = [(local(child.tag),(child.text or '').strip()) for node in root.iter() if local(node.tag) == 'Special_Constants' for child in node if child.text]
-    data = pdr.read(label)
     structures = []
     for key in data.keys():
         if key == 'label' or key.endswith('_HEADER') or key.startswith('HEADER_'): continue

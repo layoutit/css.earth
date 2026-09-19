@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 /** Qualify one indexed archive observation with the telescope-specific reducer that owns its physics. */
+import { loadSourceProducts } from './source-products.mts';
+import { qualifySourceProduct } from './qualify-source.mts';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -133,6 +135,15 @@ const QUALIFIERS: Readonly<Record<string, (root: string, request: QualificationR
 });
 
 export async function qualifyObservation(root: string, request: QualificationRequest): Promise<QualificationResult> {
+  if (request.configuration.kind === 'source-product') {
+    const { answer } = await indexedObservation(root, request, [0.000001, 1_000_000]);
+    const id = request.configuration.id;
+    const source = (await loadSourceProducts(root, answer.target)).find(product => product.id === id && product.id === request.observation && product.telescope === request.telescope && product.mode === request.mode);
+    if (!source) throw new TypeError('Source qualification does not match the indexed observation.');
+    const { qualified: _qualified, receipt: _receipt, receiptProblem: _problem, ...product } = source;
+    const result = await qualifySourceProduct(root, product);
+    return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: id, program: id, configuration: request.configuration, ...result };
+  }
   const qualifier = request.configuration.kind === 'pds-product' ? qualifyPdsProduct : QUALIFIERS[`${request.telescope} :: ${request.mode}`];
   if (!qualifier) throw new TypeError(`No qualification implementation is registered for ${request.telescope} ${request.mode}.`);
   return qualifier(root, request);
@@ -141,7 +152,7 @@ export async function qualifyObservation(root: string, request: QualificationReq
 export const QUALIFY_HELP = `Usage: pnpm telescope:qualify --target TARGET --telescope NAME --mode MODE --observation ID ROUTE_OPTIONS
 
 Route options are emitted by telescope:query. Registered routes currently use --channel N, --band ID --wavelength FROM,TO,
---archive-programme ID --archive-target NAME --night YYYY-MM-DD, or the exact --pds-target-lid/--pds-target-name/--pds-lidvid identity.`;
+--archive-programme ID --archive-target NAME --night YYYY-MM-DD, --source-product ID, or the exact --pds-target-lid/--pds-target-name/--pds-lidvid identity.`;
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2);
