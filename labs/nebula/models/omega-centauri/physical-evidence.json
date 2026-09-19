@@ -1,0 +1,190 @@
+{
+  "schema": "cssearth-nebula-physical-evidence@1",
+  "subjectId": "omega-centauri",
+  "asOf": "2026-09-19",
+  "status": "Evidence ledger and a derived spherical emissivity profile only. No baked reconstruction exists; see README.md for the blocked baking stage.",
+  "parameterClasses": {
+    "observed": "measured observable or metadata",
+    "published-model": "conditional literature inference, including a value we derived from measured inputs via a standard, non-object-specific mathematical relation",
+    "authored": "our transport, display, or approximation choice"
+  },
+  "coordinateRule": "Common tangent frame: x west, y north, z away from Earth; centered on the SIMBAD/publisher-agreed cluster center.",
+  "sources": [
+    {
+      "id": "baumgardt-hilker-2018",
+      "title": "A catalogue of masses, structural parameters, and velocity dispersion profiles of 112 Milky Way globular clusters",
+      "url": "https://doi.org/10.1093/mnras/sty1057",
+      "locator": "NGC 5139 row: core radius, half-mass radius, total mass, M/L, central velocity dispersion",
+      "access": "Cited from the task brief and cross-referenced against the author's public globular-cluster parameter tables (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/); the paper PDF itself was not downloaded in this session, so its exact table values are not independently re-derived here."
+    },
+    {
+      "id": "baumgardt-2021-distances",
+      "title": "Baumgardt et al. (2021) globular cluster distances",
+      "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/",
+      "locator": "NGC 5139 distance entry",
+      "access": "Cited from the task brief; not independently re-fetched in this session."
+    },
+    {
+      "id": "simbad-ngc5139",
+      "title": "SIMBAD astronomical database, NGC 5139",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=NGC+5139",
+      "locator": "J2000 ICRS coordinates, reference 2010AJ....140.1830G",
+      "access": "Fetched live in this session; RA 13:26:47.28, Dec -47:28:46.1."
+    },
+    {
+      "id": "eso1119b-publisher",
+      "title": "ESO/INAF-VST OmegaCAM image eso1119b",
+      "url": "https://www.eso.org/public/images/eso1119b/",
+      "locator": "Field of view, pixel scale, pointing center, orientation",
+      "access": "Fetched live in this session; pointing center RA 13:26:47.27, Dec -47:28:46.34; 50.88 x 50.88 arcmin; north 0.0 degrees left of vertical; already acquired/hash-pinned per labs/nebula/sources/reference-images.json (id eso1119b)."
+    },
+    {
+      "id": "white-shawl-1987",
+      "title": "White & Shawl 1987, ellipticities of Galactic globular clusters",
+      "url": "https://ui.adsabs.harvard.edu/abs/1987ApJ...317..246W",
+      "locator": "Omega Centauri flattening measurement",
+      "access": "Cited from the task brief and corroborated by secondary literature search in this session; the paper PDF was not downloaded, and published ellipticity for Omega Cen varies with radius across the literature (roughly 0.08 in the core to ~0.17-0.19 in the outskirts)."
+    },
+    {
+      "id": "king-1962",
+      "title": "King 1962, The structure of star clusters I: an empirical density law",
+      "url": "https://ui.adsabs.harvard.edu/abs/1962AJ.....67..471K",
+      "locator": "Empirical projected surface-density formula used as the profile family",
+      "access": "Standard, widely reproduced closed-form formula; used from memory, not refetched."
+    },
+    {
+      "id": "wolf-2010",
+      "title": "Wolf et al. 2010, accurate masses for dispersion-supported galaxies",
+      "url": "https://doi.org/10.1111/j.1365-2966.2009.15708.x",
+      "locator": "Approximate relation between projected half-light radius and 3D half-mass radius for a broad family of density profiles",
+      "access": "Cited from general knowledge of the standard result, not refetched; used here only to fix one shape parameter, see evidence id projected-half-light-approx."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "distance",
+      "classification": "observed",
+      "sourceIds": ["baumgardt-2021-distances"],
+      "quantity": "heliocentric distance",
+      "value": { "distancePc": 5430, "uncertaintyPc": 50 },
+      "unit": "pc",
+      "scope": "Whole cluster",
+      "limitations": "Not independently re-verified against the primary table in this session; taken as given and used only for angular-to-physical scale conversion."
+    },
+    {
+      "id": "total-mass",
+      "classification": "published-model",
+      "sourceIds": ["baumgardt-hilker-2018"],
+      "quantity": "total dynamical mass",
+      "value": { "massSolar": 3.94e6 },
+      "unit": "solar masses",
+      "scope": "Whole cluster",
+      "limitations": "N-body/dynamical-model mass, not directly used by the light-emissivity profile in this recipe; recorded for completeness and for the mass-segregation limitation below."
+    },
+    {
+      "id": "half-mass-radius",
+      "classification": "published-model",
+      "sourceIds": ["baumgardt-hilker-2018"],
+      "quantity": "3D half-mass radius",
+      "value": { "radiusPc": 10.42 },
+      "unit": "pc",
+      "scope": "Whole cluster, dynamical model fit",
+      "limitations": "This is a 3D mass radius from a dynamical model, not a directly observed projected quantity. Used here (via an approximate projected/3D scaling, see projected-half-light-approx) to fix the King concentration of a separately assumed *light* profile; mass and light radii can differ under mass segregation."
+    },
+    {
+      "id": "core-radius",
+      "classification": "published-model",
+      "sourceIds": ["baumgardt-hilker-2018"],
+      "quantity": "3D King core radius",
+      "value": { "radiusPc": 4.54 },
+      "unit": "pc",
+      "scope": "Whole cluster, dynamical model fit",
+      "limitations": "Used as an approximation for the projected King core radius (approximation A in king-abel-profile.json); no independent photometric King fit for this specific radius was located in this session."
+    },
+    {
+      "id": "mass-to-light",
+      "classification": "observed",
+      "sourceIds": ["baumgardt-hilker-2018"],
+      "quantity": "V-band mass-to-light ratio",
+      "value": { "mOverLvSolar": 2.8, "uncertainty": 0.1 },
+      "unit": "Msun/Lsun (V)",
+      "scope": "Whole cluster",
+      "limitations": "Recorded for completeness; not used to scale the recipe's relative emissivity, which is unitless display light, not calibrated luminosity."
+    },
+    {
+      "id": "central-velocity-dispersion",
+      "classification": "observed",
+      "sourceIds": ["baumgardt-hilker-2018"],
+      "quantity": "central velocity dispersion",
+      "value": { "sigmaKmS": 18.1 },
+      "unit": "km/s",
+      "scope": "Cluster center",
+      "limitations": "Kinematic evidence, not used in this image/light recipe; recorded because it is part of the measured structural package and could support a future kinematic cross-check."
+    },
+    {
+      "id": "ellipticity",
+      "classification": "observed",
+      "sourceIds": ["white-shawl-1987"],
+      "quantity": "projected flattening 1 - b/a",
+      "value": { "ellipticityApprox": 0.17 },
+      "unit": "dimensionless",
+      "scope": "Whole cluster; varies with radius across the literature (roughly 0.08 core to ~0.19 outskirts)",
+      "limitations": "This is the primary evidence AGAINST the sphericity assumption used everywhere else in this ledger. Omega Centauri is a measurably flattened, rotating cluster; every quantity below that assumes spherical symmetry is only a first-order approximation to its real triaxial/oblate shape."
+    },
+    {
+      "id": "cluster-center-agreement",
+      "classification": "observed",
+      "sourceIds": ["simbad-ngc5139", "eso1119b-publisher"],
+      "quantity": "publisher pointing center vs. independent catalogue position",
+      "value": {
+        "simbadRaDec": ["13:26:47.28", "-47:28:46.1"],
+        "publisherRaDec": ["13:26:47.27", "-47:28:46.34"],
+        "separationArcsec": 0.24,
+        "nativePixelScaleArcsecPerPx": 0.21
+      },
+      "unit": "arcsec",
+      "scope": "Whole-image registration check",
+      "limitations": "This confirms the publisher WCS center matches the independently catalogued cluster center to sub-pixel accuracy (0.24 arcsec vs. 0.21 arcsec/px). It is a whole-field sanity check, not a star-by-star astrometric fit against an external catalogue (e.g. Gaia); no such per-star fit was performed in this session."
+    },
+    {
+      "id": "king-profile-family",
+      "classification": "published-model",
+      "sourceIds": ["king-1962"],
+      "quantity": "single-mass empirical projected surface-density law",
+      "value": { "formula": "Sigma(R) proportional to [ (1+(R/rc)^2)^-1/2 - (1+(rt/rc)^2)^-1/2 ]^2 for R <= rt" },
+      "unit": "n/a",
+      "scope": "Adopted profile family for the projected light distribution",
+      "limitations": "Standard single-mass isotropic empirical law; Omega Centauri has multiple stellar populations and measurable rotation/flattening that a single-mass spherical King law does not capture."
+    },
+    {
+      "id": "projected-half-light-approx",
+      "classification": "published-model",
+      "sourceIds": ["wolf-2010"],
+      "quantity": "projected half-light radius as a fraction of the 3D half-mass radius",
+      "value": { "factor": 0.75 },
+      "unit": "dimensionless",
+      "scope": "Used once, to convert the measured 3D half-mass radius into a target projected half-light radius for solving the King concentration",
+      "limitations": "This factor is an approximate, broadly-applicable result for centrally concentrated dispersion-supported systems, not a value measured for Omega Centauri specifically."
+    },
+    {
+      "id": "abel-inverted-emissivity",
+      "classification": "published-model",
+      "sourceIds": ["king-1962", "wolf-2010"],
+      "quantity": "spherically symmetric 3D relative emissivity vs. radius, derived by Abel-inverting the fitted King projected profile",
+      "value": { "path": "labs/nebula/models/omega-centauri/king-abel-profile.json" },
+      "unit": "relative (peak-normalized)",
+      "scope": "0 to the solved tidal radius (46.4 pc)",
+      "limitations": "Deterministic consequence of assumed spherical symmetry plus the King profile family and its two fixed shape parameters (approximations A and B recorded in king-abel-profile.json). It is not a released, independently measured 3D point table; it is our own Abel-inversion computation from measured/published-model inputs. The single strongest physical limitation is sphericity itself: Omega Centauri's true ellipticity (~0.08-0.19, entry 'ellipticity') means the real 3D structure is oblate/triaxial, not spherical, and this profile cannot represent that flattening."
+    },
+    {
+      "id": "no-3d-baking-baseline",
+      "classification": "authored",
+      "sourceIds": ["king-1962"],
+      "quantity": "status note, not a physical quantity",
+      "value": { "status": "blocked" },
+      "unit": "n/a",
+      "scope": "Lab tooling",
+      "limitations": "The lab's only currently implemented method that treats an external prior as 'broad shape from the prior, detail fitted from the image' (simulation-guided-finite-emission@1 / two-scale) requires a pre-existing fixed-density Alignment reconstruction (a 'baselineId') built from an N-body particle simulation via prepare-full-density. No such simulation or baseline exists for a globular cluster, and building one would mean writing new object-preparation tooling, which this task explicitly excludes. See README.md."
+    }
+  ]
+}

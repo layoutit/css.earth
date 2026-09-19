@@ -1,0 +1,132 @@
+{
+  "schema": "cssearth-image-alignment-report@1",
+  "pass": false,
+  "sources": [
+    {
+      "id": "eso1119b",
+      "pass": false,
+      "sourcePath": ".local/nebula-lab/source-originals/eso1119b.tif",
+      "sourceSha256": "8df2e2ad462b9dc5b7437320fb2c6fd247c11746b4b2ffd3da95846b9083cad6",
+      "downsampledTo": [
+        3053,
+        3053
+      ],
+      "frameWidth": 225,
+      "geometry": {
+        "kind": "matched-star-homography-vs-dss2-fits",
+        "matrix": [
+          0.06270687861416066,
+          -0.00009665152495055059,
+          -0.00013531657182341058,
+          0.062421519784384205,
+          17.055830202431903,
+          17.36069174483188
+        ]
+      },
+      "evidence": {
+        "status": "publisher",
+        "matchedStars": 2588,
+        "trainingStars": 646,
+        "trainingCandidates": 1725,
+        "rejectedTrainingStars": 1079,
+        "heldOutStars": 863,
+        "rmsPixels": 0.9754047610820139,
+        "maxResidualPixels": 2.551939937889531,
+        "spatialQuadrants": 4,
+        "coverageFraction": [
+          0.9897439576980328,
+          0.9942620833466778
+        ],
+        "relativeScale": 1.0010884923866699,
+        "centreShiftPixels": 0.05062707161605429,
+        "coverageDomain": {
+          "kind": "common-observed-footprint",
+          "sourcePixelPolygon": [
+            [
+              3053,
+              -1.4210854715202004e-14
+            ],
+            [
+              3053,
+              3053
+            ],
+            [
+              0,
+              3053
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        },
+        "residualArcseconds": 15.60647617731222,
+        "interpretation": "Relative field-star alignment to the configured reference image; absolute sky scale and orientation remain publisher metadata. No stellar membership or physical depth.",
+        "matchTableNote": "Per-pair table omitted: 2588 pairs, reproducible by re-running labs/nebula/models/omega-centauri/verify-against-dss2-fits.mts against the pinned sources."
+      }
+    },
+    {
+      "id": "eso0844a",
+      "pass": false,
+      "sourcePath": ".local/nebula-lab/source-originals/eso0844a.tif",
+      "sourceSha256": "384d1cfc31e6a2b78e5c7018f9eaecfe49a1014630bcb1bd8dceb563d69e6429",
+      "downsampledTo": [
+        1913,
+        1799
+      ],
+      "frameWidth": 225,
+      "geometry": {
+        "kind": "matched-star-homography-vs-dss2-fits",
+        "matrix": [
+          0.06242175929935033,
+          -0.00004287637872192954,
+          0.00003435046586434953,
+          0.06256983723152591,
+          52.751600247196286,
+          56.334478341107676
+        ]
+      },
+      "evidence": {
+        "status": "publisher",
+        "matchedStars": 1507,
+        "trainingStars": 606,
+        "trainingCandidates": 1004,
+        "rejectedTrainingStars": 398,
+        "heldOutStars": 503,
+        "rmsPixels": 0.6548057862204336,
+        "maxResidualPixels": 1.9186522832899346,
+        "spatialQuadrants": 4,
+        "coverageFraction": [
+          0.9941922186026076,
+          0.9926392826751006
+        ],
+        "relativeScale": 0.9998733807165251,
+        "centreShiftPixels": 0.07457734644866301,
+        "coverageDomain": {
+          "kind": "common-observed-footprint",
+          "sourcePixelPolygon": [
+            [
+              1913,
+              0
+            ],
+            [
+              1913,
+              1799
+            ],
+            [
+              0,
+              1799
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        },
+        "residualArcseconds": 10.476892579526936,
+        "interpretation": "Relative field-star alignment to the configured reference image; absolute sky scale and orientation remain publisher metadata. No stellar membership or physical depth.",
+        "matchTableNote": "Per-pair table omitted: 1507 pairs, reproducible by re-running labs/nebula/models/omega-centauri/verify-against-dss2-fits.mts against the pinned sources."
+      }
+    }
+  ]
+}

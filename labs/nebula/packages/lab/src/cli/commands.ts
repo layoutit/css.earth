@@ -87,5 +87,6 @@ export const labCommands: Record<string, string> = {
   "browser-reconstruction-reference": "labs/nebula/packages/lab/browser/browser-reconstruction-reference.ts",
   "browser-reconstruction-tabs": "labs/nebula/packages/lab/browser/browser-reconstruction-tabs.ts",
   "browser-lens-levels": "labs/nebula/packages/lab/browser/browser-lens-levels.ts",
-  "browser-difference-map": "labs/nebula/packages/lab/browser/browser-difference-map.ts"
+  "browser-difference-map": "labs/nebula/packages/lab/browser/browser-difference-map.ts",
+  "browser-lens-radial": "labs/nebula/packages/lab/browser/browser-lens-radial.ts"
 };

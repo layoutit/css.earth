@@ -211,6 +211,9 @@ src/objects/*/source/**/*.bpc
 # the accepted bytes instead of replaying them (`--verify-replay` still can).
 /labs/nebula/models/*/candidates/prepared/*.webp
 /labs/nebula/models/*/clouds-observation/source/target.png
+# Reference derivatives rebuilt by `acquire-images` from the hash-pinned publisher TIFF in the ignored cache.
+# Their `.webp.json` sidecars stay tracked: the pins and the interpretation are the record, the pixels are not.
+/labs/nebula/sources/*.webp
 # Reacquirable distant-world paper originals; acquisition recipes pin exact bytes.
 /src/objects/oumuamua/source/reference/*.html
 /src/objects/sedna/source/reference/*.html

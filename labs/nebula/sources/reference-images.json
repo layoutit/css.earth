@@ -34,6 +34,41 @@
         "effort": 5,
         "sha256": "3ed2fd1ae7729b860f00d2bd7d0c13b6a05f81c8d66e587e626cc4e2bac92698"
       }
+    },
+    {
+      "id": "eso1119b",
+      "url": "https://cdn.eso.org/images/original/eso1119b.tif",
+      "sha256": "8df2e2ad462b9dc5b7437320fb2c6fd247c11746b4b2ffd3da95846b9083cad6",
+      "bytes": 555370438,
+      "width": 14540,
+      "height": 14540,
+      "publisherUrl": "https://www.eso.org/public/images/eso1119b/",
+      "credit": "ESO/INAF-VST/OmegaCAM. Acknowledgement: A. Grado, L. Limatola/INAF-Capodimonte Observatory",
+      "license": "CC-BY-4.0",
+      "output": {
+        "path": "labs/nebula/sources/omega-centauri-vst.webp",
+        "quality": 92,
+        "effort": 5,
+        "resizeWidth": 8192,
+        "sha256": "6e30ef43b59f2ca3a8ac076bc7f2e9b1da801b9665df027feb5e3018f331a1a8"
+      }
+    },
+    {
+      "id": "eso0844a",
+      "url": "https://cdn.eso.org/images/original/eso0844a.tif",
+      "sha256": "384d1cfc31e6a2b78e5c7018f9eaecfe49a1014630bcb1bd8dceb563d69e6429",
+      "bytes": 147797270,
+      "width": 8040,
+      "height": 7560,
+      "publisherUrl": "https://www.eso.org/public/images/eso0844a/",
+      "credit": "ESO",
+      "license": "CC-BY-4.0",
+      "output": {
+        "path": "labs/nebula/sources/omega-centauri-wfi.webp",
+        "quality": 92,
+        "effort": 5,
+        "sha256": "2a8a8954a58915f1ce58951402d5e71676cc48de23fafe415a9b86b9d8ceeeef"
+      }
     }
   ]
 }

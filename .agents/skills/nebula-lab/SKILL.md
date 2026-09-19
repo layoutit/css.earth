@@ -143,6 +143,17 @@ server route you can call directly, so an agent sees exactly what a person sees.
 | --- | --- | --- |
 | Levels | `GET /__nebula/reconstruction-levels?resultId=<lens>` | per-channel histograms, signed delta, transfer curve, percentile ratios |
 | Difference map | `GET /__nebula/reconstruction-difference?resultId=<lens>` (`&format=png` for the image) | render − image on luminance, over the Earth view: blue too dark, red too bright, clear within tolerance |
+| Radial profile | `GET /__nebula/reconstruction-radial?resultId=<lens>` | azimuthally averaged source/render brightness in radial bins from the footprint centroid, per-bin ratio and delta, half-light radius ratio |
+
+**Radial profile answers what the other two cannot: does brightness fall off with radius like the source?**
+Levels is a histogram and spatially blind — it can match p50/p90/p99 exactly while the structure sits in the
+wrong place (a brightness swap between the centre and an annulus conserves the histogram outright). The
+difference map shows *where* the error is but not its radial shape. The radial profile's own control is that
+swap: a permutation of the same pixel values that moves brightness from the core to the rim reads as p50/p90
+ratio 1.00 in Levels while the radial profile's per-bin ratio runs from ~0 at the centre to tens at the rim
+and its half-light radius is pushed outward. A pure scale error (render radially compressed or expanded) is
+caught by the half-light radius ratio instead. Highest value for a centrally concentrated, near-spherical
+subject.
 
 **Read the difference map for *where*, the levels for *how much*.** On the LMC it showed the bar
 blue (core too dark, the opacity shoulder) and the body a red ring (mid-tones too bright), which
