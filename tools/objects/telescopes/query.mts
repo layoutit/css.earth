@@ -31,6 +31,8 @@ const ARCSEC_PER_RADIAN = 206_264.806_247;
 export const MODES_SCHEMA = 'cssearth-telescope-modes@1';
 export const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'events', 'strips'] as const;
 export type ProductKind = typeof PRODUCT_KINDS[number];
+export const REQUESTED_RESULTS = ['telescope-product', 'body-map'] as const;
+export type RequestedResult = typeof REQUESTED_RESULTS[number];
 
 /** What an instrument mode can do, from its own documentation. `bands` means the coverage is the one `bands.mts` already
  * states for that mode's bands, so it is not retyped here. */
@@ -92,6 +94,9 @@ export interface Candidate {
   readonly programmes: readonly string[];
   readonly meetsConstraints: Readonly<Record<string, ConstraintVerdict>>;
   readonly toolkitSupport: ToolkitSupport;
+  /** Whether this repository has an author that turns this exact mode into the requested shared body-map contract. This is
+   * separate from toolkit support: a reducer can be proven while ending at an unregistered detector product. */
+  readonly bodyMapSupport: { readonly answer: 'yes' | 'no'; readonly reason: string; readonly author?: string };
   readonly evidence: CandidateEvidence;
   readonly unknown: readonly string[];
 }
@@ -99,7 +104,7 @@ export interface Candidate {
 export interface CapabilityRequest {
   readonly target: string;
   readonly wavelengthMicrometres: readonly [number, number];
-  readonly time?: { readonly fromIso: string; readonly toIso: string };
+  readonly time?: { readonly any: true } | { readonly fromIso: string; readonly toIso: string };
   /** The coarsest sharpness that would still answer the question, in arcsec. */
   readonly angularResolutionArcsec?: number;
   /** The coarsest surface resolution that would still answer it, in kilometres. Needs `rangeKm`. */
@@ -109,6 +114,8 @@ export interface CapabilityRequest {
   readonly rangeKm?: number;
   readonly bodyRadiusKm?: number;
   readonly kind?: ProductKind;
+  /** The deliverable the caller needs. Exploratory queries may omit it; explicit selection may not. */
+  readonly result?: RequestedResult;
 }
 
 /** Everything the query reads, already loaded: it does no input or output of its own. */
@@ -136,6 +143,8 @@ export interface ObservationSelection {
   readonly mode: string;
   readonly programme: string;
   readonly toolkitLevel: ToolkitLevel;
+  readonly constraints: Readonly<Record<string, ConstraintVerdict>>;
+  readonly bodyMapSupport: Candidate['bodyMapSupport'];
   /** Constraints that remain partial or unknown after selection. They stay visible rather than becoming an implied yes. */
   readonly unresolved: readonly { readonly constraint: string; readonly answer: 'partial' | 'unknown'; readonly reason: string }[];
   readonly evidence: CandidateEvidence;
@@ -391,6 +400,17 @@ export function ledgerModeKeys(ledgers: QueryInputs['ledgers']): { readonly tele
 const verdict = (answer: ConstraintAnswer, reason: string): ConstraintVerdict => ({ answer, reason });
 const round = (value: number): number => Number(value.toPrecision(3));
 const NO_CAPABILITIES = 'Capabilities not recorded: modes.json has no sourced entry for this mode, so nothing here states what it can do.';
+const BODY_MAP_AUTHORS: Readonly<Record<string, string>> = Object.freeze({
+  'JWST :: NIRSPEC/IFU': 'tools/objects/jwst/cubes/author-body-maps.mts',
+  'JWST :: MIRI/IFU': 'tools/objects/jwst/cubes/author-body-maps.mts',
+  'Hubble :: STIS/CCD': 'tools/objects/hst/slit-scan-map.mts',
+});
+
+const bodyMapSupport = (mode: TargetMode): Candidate['bodyMapSupport'] => {
+  const author = BODY_MAP_AUTHORS[`${mode.telescope} :: ${mode.mode}`];
+  return author ? { answer: 'yes', author, reason: `${author} authors this mode into the shared body-map contract.` }
+    : { answer: 'no', reason: `No body-map author is registered for ${mode.telescope} ${mode.mode}; its toolkit may still produce a valid telescope product.` };
+};
 
 /** Two different facts about one mode at the requested wavelengths, kept apart because they answer different questions.
  *
@@ -433,6 +453,7 @@ function sharpnessVerdict(facts: ResolutionFacts, askArcsec: number | undefined,
 
 function constraintVerdicts(request: CapabilityRequest, mode: TargetMode, capability: ModeCapability | undefined): Record<string, ConstraintVerdict> {
   const [from, to] = request.wavelengthMicrometres;
+  const requestedTime = request.time;
   const facts = capability ? resolutionFacts(request, capability) : null;
   const inside = capability ? intersectIntervals(capability.wavelengthIntervals, request.wavelengthMicrometres) : [];
   const width = to - from, covered = inside.reduce((sum, [start, end]) => sum + (end - start), 0);
@@ -444,10 +465,11 @@ function constraintVerdicts(request: CapabilityRequest, mode: TargetMode, capabi
       : verdict('partial', `The mode covers ${intervalWords(capability.wavelengthIntervals)} micrometres, so only ${intervalWords(inside.map(([start, end]) => [round(start), round(end)] as const))} of the request is inside it.`),
     angularResolution: !capability ? verdict('unknown', NO_CAPABILITIES) : !facts ? verdict('unknown', noOverlap)
       : sharpnessVerdict(facts, request.angularResolutionArcsec, arcsec => `${round(arcsec)} arcsec`, `${request.angularResolutionArcsec} arcsec`, request.target),
-    time: !request.time ? verdict('unknown', 'No time range was asked for.')
+    time: !requestedTime ? verdict('unknown', 'No time requirement was stated.')
+      : 'any' in requestedTime ? verdict('yes', 'The request explicitly accepts observations from any time.')
       : !mode.dates.length ? verdict('unknown', 'This ledger carries no dates for this target and mode.')
       : (() => {
-          const dated = mode.dates.filter(date => date.startIso >= request.time!.fromIso && date.startIso <= request.time!.toIso);
+          const dated = mode.dates.filter(date => date.startIso >= requestedTime.fromIso && date.startIso <= requestedTime.toIso);
           return dated.length ? verdict('yes', `The ledger names ${dated.length} observation(s) that started inside the range: ${dated.map(date => `${date.id} on ${date.startIso.slice(0, 10)}`).join(', ')}.`)
             : verdict('partial', `The ledger dates ${mode.dates.length} observation(s) of this target and mode and all start outside the range (${mode.dates.map(date => date.startIso.slice(0, 10)).join(', ')}); it does not date the rest.`);
         })(),
@@ -550,6 +572,7 @@ const UNKNOWN_UNTIL_READ = (target: string): string[] => [
 export function queryCapabilities(request: CapabilityRequest, inputs: QueryInputs): CapabilityAnswer {
   if (!(request.wavelengthMicrometres[0] > 0 && request.wavelengthMicrometres[1] >= request.wavelengthMicrometres[0])) throw new RangeError('A request states its wavelengths in micrometres, shortest first.');
   if (request.kind && !(PRODUCT_KINDS as readonly string[]).includes(request.kind)) throw new TypeError(`Unknown product kind ${request.kind}.`);
+  if (request.result && !(REQUESTED_RESULTS as readonly string[]).includes(request.result)) throw new TypeError(`Unknown requested result ${request.result}.`);
   const capabilities = new Map(inputs.capabilities.map(entry => [`${entry.telescope} :: ${entry.mode}`, entry] as const));
   const withoutTheTarget: { telescope: string; ledger: string; reason: string }[] = [], found: { ledger: string; mode: TargetMode }[] = [];
   for (const ledger of inputs.ledgers) {
@@ -563,7 +586,7 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
   const candidates: Candidate[] = found.map(({ ledger, mode }) => {
     const capability = capabilities.get(`${mode.telescope} :: ${mode.mode}`), evidence = attached.get(mode)!;
     return { telescope: mode.telescope, mode: mode.mode, observations: mode.observations, programmes: mode.programmes,
-      meetsConstraints: constraintVerdicts(request, mode, capability), toolkitSupport: toolkitSupport(mode, request.target),
+      meetsConstraints: constraintVerdicts(request, mode, capability), toolkitSupport: toolkitSupport(mode, request.target), bodyMapSupport: bodyMapSupport(mode),
       evidence: { ledger, archiveDate: mode.archiveDate, receipts: mode.toolkit.receipts, bodyMaps: evidence.bodyMaps, investigations: evidence.investigations },
       unknown: [...(capability ? [] : [`What this mode can do: ${NO_CAPABILITIES}`]), ...UNKNOWN_UNTIL_READ(request.target),
         ...(evidence.bodyMaps.length ? [] : [`Whether anything here has ever measured ${request.target} in this mode: no body map beside the object names it.`])] };
@@ -576,19 +599,27 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
 /** Select one runnable, pinned program from a capability answer. A hard `no` cannot be selected. Partial and unknown facts are
  * retained on the selection so the reducer and publisher cannot turn them into claims the query never made. */
 export function selectObservation(answer: CapabilityAnswer, telescope: string, mode: string, programme: string): ObservationSelection {
+  const request = answer.request;
+  const missing = [...(request.time ? [] : ['time (--from and --to, or --any-time)']),
+    ...(request.angularResolutionArcsec !== undefined || request.surfaceResolutionKm !== undefined || request.resolutionElements !== undefined ? [] : ['a required resolution (--min-arcsec, --min-km or --min-elements)']),
+    ...(request.kind ? [] : ['product kind (--kind)']), ...(request.result ? [] : ['requested result (--result telescope-product|body-map)'])];
+  if (missing.length) throw new Error(`An explicit selection needs ${missing.join(', ')}.`);
   const matches = answer.candidates.filter(candidate => candidate.telescope === telescope && candidate.mode === mode);
   if (matches.length !== 1) throw new Error(matches.length ? `${telescope} ${mode} is ambiguous.` : `${telescope} ${mode} is not a candidate for ${answer.target}.`);
   const candidate = matches[0]!;
   const refused = Object.entries(candidate.meetsConstraints).filter(([, verdict_]) => verdict_.answer === 'no');
   if (refused.length) throw new Error(`${telescope} ${mode} cannot answer this request: ${refused.map(([name, verdict_]) => `${name}: ${verdict_.reason}`).join(' ')}`);
   if (candidate.toolkitSupport.level === 'none') throw new Error(`${telescope} ${mode} has no usable toolkit: ${candidate.toolkitSupport.reason}`);
+  if (request.result === 'body-map' && candidate.bodyMapSupport.answer === 'no') throw new Error(`${telescope} ${mode} cannot produce the requested body map: ${candidate.bodyMapSupport.reason}`);
   const targetPrograms = [...candidate.toolkitSupport.programs, ...candidate.toolkitSupport.archiveFinalQualified]
     .filter(value => value === answer.target || value.startsWith(`${answer.target}-`));
   if (!targetPrograms.includes(programme)) throw new Error(`${programme} is not a pinned or archive-final program of ${answer.target} in ${telescope} ${mode}; choose one of ${targetPrograms.join(', ') || 'none'}.`);
-  const unresolved = Object.entries(candidate.meetsConstraints).flatMap(([constraint, verdict_]) => verdict_.answer === 'partial' || verdict_.answer === 'unknown'
-    ? [{ constraint, answer: verdict_.answer, reason: verdict_.reason } as const] : []);
-  return { schema: OBSERVATION_SELECTION_SCHEMA, request: answer.request, telescope, mode, programme,
-    toolkitLevel: candidate.toolkitSupport.level, unresolved, evidence: candidate.evidence };
+  const unresolved = [...Object.entries(candidate.meetsConstraints).flatMap(([constraint, verdict_]) => verdict_.answer === 'partial' || verdict_.answer === 'unknown'
+    ? [{ constraint, answer: verdict_.answer, reason: verdict_.reason } as const] : []),
+    { constraint: 'observationWavelength', answer: 'unknown' as const,
+      reason: `The wavelength verdict is for ${telescope} ${mode}, not for program ${programme}; its selected filter, grating or channel must be qualified from the observation products.` }];
+  return { schema: OBSERVATION_SELECTION_SCHEMA, request, telescope, mode, programme,
+    toolkitLevel: candidate.toolkitSupport.level, constraints: candidate.meetsConstraints, bodyMapSupport: candidate.bodyMapSupport, unresolved, evidence: candidate.evidence };
 }
 
 export const LEDGER_TELESCOPES: readonly string[] = Object.keys(ADAPTERS);
@@ -622,6 +653,7 @@ export function formatAnswer(answer: CapabilityAnswer): string {
     lines.push(`${candidate.telescope} ${candidate.mode}${candidate.observations ? ` (${candidate.observations.count} ${candidate.observations.scope === 'this-mode' ? 'observations in this mode' : 'observations of the object, across its modes'})` : ''}`);
     for (const [name, { answer: verdictAnswer, reason }] of Object.entries(candidate.meetsConstraints)) lines.push(`  ${name}: ${verdictAnswer}. ${reason}`);
     lines.push(`  toolkit: ${LEVEL_WORDS[candidate.toolkitSupport.level]}. ${candidate.toolkitSupport.reason}`);
+    lines.push(`  body map: ${candidate.bodyMapSupport.answer}. ${candidate.bodyMapSupport.reason}`);
     lines.push(`  a program of ${answer.target}: ${candidate.toolkitSupport.targetProgramChecked ? 'pinned and checked' : candidate.toolkitSupport.targetProgramPinned ? 'pinned, not checked'
       : candidate.toolkitSupport.targetArchiveFinalQualified ? 'no re-calibration; its archive-final product is qualified' : 'none'}`);
     lines.push(`  evidence: ${candidate.evidence.ledger} (archive read ${candidate.evidence.archiveDate})${candidate.evidence.receipts.length ? `, receipts ${candidate.evidence.receipts.join(', ')}` : ''}`);
@@ -646,19 +678,21 @@ const numberFlag = (args: readonly string[], flag: string): number | undefined =
 
 export function requestFromArguments(args: readonly string[]): CapabilityRequest {
   const target = flagValue(args, '--target'), wavelength = flagValue(args, '--wavelength');
-  if (!target || !wavelength) throw new Error('Usage: query.mts --target europa --wavelength 3.4,3.6 [--range-km N] [--radius-km N] [--min-arcsec N] [--min-km N] [--min-elements N] [--from ISO --to ISO] [--kind cube] [--json]');
+  if (!target || !wavelength) throw new Error('Usage: query.mts --target europa --wavelength 3.4,3.6 [--range-km N] [--radius-km N] [--min-arcsec N] [--min-km N] [--min-elements N] [--from ISO --to ISO | --any-time] [--kind cube] [--result telescope-product|body-map] [--json]');
   const range = wavelength.split(',').map(Number);
   if (range.length !== 2 || !range.every(Number.isFinite)) throw new TypeError('--wavelength takes two micrometre values, shortest first, as 3.4,3.6.');
-  const from = flagValue(args, '--from'), to = flagValue(args, '--to'), kind = flagValue(args, '--kind');
+  const from = flagValue(args, '--from'), to = flagValue(args, '--to'), anyTime = args.includes('--any-time'), kind = flagValue(args, '--kind'), result = flagValue(args, '--result');
   if (kind && !(PRODUCT_KINDS as readonly string[]).includes(kind)) throw new TypeError(`--kind takes one of ${PRODUCT_KINDS.join(', ')}.`);
+  if (result && !(REQUESTED_RESULTS as readonly string[]).includes(result)) throw new TypeError(`--result takes one of ${REQUESTED_RESULTS.join(', ')}.`);
   if (Boolean(from) !== Boolean(to)) throw new TypeError('--from and --to are given together.');
-  return { target, wavelengthMicrometres: [range[0]!, range[1]!], ...(from && to ? { time: { fromIso: from, toIso: to } } : {}),
+  if (anyTime && from) throw new TypeError('--any-time cannot be combined with --from and --to.');
+  return { target, wavelengthMicrometres: [range[0]!, range[1]!], ...(anyTime ? { time: { any: true as const } } : from && to ? { time: { fromIso: from, toIso: to } } : {}),
     ...(numberFlag(args, '--min-arcsec') === undefined ? {} : { angularResolutionArcsec: numberFlag(args, '--min-arcsec')! }),
     ...(numberFlag(args, '--min-km') === undefined ? {} : { surfaceResolutionKm: numberFlag(args, '--min-km')! }),
     ...(numberFlag(args, '--min-elements') === undefined ? {} : { resolutionElements: numberFlag(args, '--min-elements')! }),
     ...(numberFlag(args, '--range-km') === undefined ? {} : { rangeKm: numberFlag(args, '--range-km')! }),
     ...(numberFlag(args, '--radius-km') === undefined ? {} : { bodyRadiusKm: numberFlag(args, '--radius-km')! }),
-    ...(kind ? { kind: kind as ProductKind } : {}) };
+    ...(kind ? { kind: kind as ProductKind } : {}), ...(result ? { result: result as RequestedResult } : {}) };
 }
 
 if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split('/').at(-1) ?? ' :: ')) {

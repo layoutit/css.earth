@@ -18,8 +18,9 @@ const product = (): BodyMapProduct => ({ schema: 'cssearth-body-map@1',
   mask: { maximumEmissionDegrees: 65, missing: 'NaN' }, observations: [{ id: 'jw01250-o002', telescope: 'JWST', instrument: 'NIRSPEC-G395H-F290LP',
     mode: 'NIRSPEC/IFU', programme: 'europa-1250', midTimeJd: 2_459_800.5, rangeKm: 6.3e8,
     subObserver: { latitudeDegrees: 0, westLongitudeDegrees: 180 }, angularResolution: { majorArcsec: 0.1, minorArcsec: 0.1, basis: 'disc-edge fit' } }] });
-const selection: ObservationSelection = { schema: 'cssearth-telescope-observation-selection@1', request: { target: 'europa', wavelengthMicrometres: [4.24, 4.28], kind: 'cube' },
-  telescope: 'JWST', mode: 'NIRSPEC/IFU', programme: 'europa-1250', toolkitLevel: 'proven', unresolved: [],
+const selection: ObservationSelection = { schema: 'cssearth-telescope-observation-selection@1', request: { target: 'europa', wavelengthMicrometres: [4.24, 4.28], kind: 'cube', result: 'body-map', time: { any: true }, angularResolutionArcsec: 0.3 },
+  telescope: 'JWST', mode: 'NIRSPEC/IFU', programme: 'europa-1250', toolkitLevel: 'proven', constraints: {},
+  bodyMapSupport: { answer: 'yes', author: 'tools/objects/jwst/cubes/author-body-maps.mts', reason: 'the body-map author' }, unresolved: [],
   evidence: { ledger: 'data/jwst/ledger.json', archiveDate: '2026-09-19', receipts: [], bodyMaps: [], investigations: [] } };
 
 async function fixture(value = product()) {
@@ -58,4 +59,9 @@ test('publication refuses a map observation that omits its exact mode or program
   delete (observation as { mode?: string }).mode;
   const { mapPath } = await fixture({ ...incomplete, observations: [observation] });
   await assert.rejects(qualifyBodyMap(mapPath, selection), /without an exact ledger mode and program|names no JWST/u);
+});
+
+test('publication explains the missing body-map contract instead of leaking a file error', async () => {
+  await assert.rejects(qualifyBodyMap(resolve(tmpdir(), 'missing-ceres.fits.body-map.json'), { ...selection, telescope: 'VLT/NACO', mode: 'imaging', programme: 'ceres-080C0881' }),
+    /Cannot publish VLT\/NACO imaging program ceres-080C0881: the body-map metadata is missing.*map plane.*body-map\.json.*product\.json/u);
 });

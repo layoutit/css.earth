@@ -9,6 +9,7 @@ import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '../../src/platform/sha256.mts';
 import { flagValue } from '../cli-arguments.mts';
+import { hasErrorCode } from '../source-values.mts';
 import { definitionDigest, parseBodyMapProduct, type BodyMapProduct } from './body-map-product.mts';
 import { parseProductRecord, productRecordPath, runDigest, sameRun, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from './product-record.mts';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, type ObservationSelection } from './telescopes/query.mts';
@@ -48,20 +49,25 @@ export interface TelescopeLayer {
   readonly schema: typeof TELESCOPE_LAYER_SCHEMA;
   readonly target: string;
   readonly request: ObservationSelection['request'];
-  readonly selection: Pick<ObservationSelection, 'telescope' | 'mode' | 'programme' | 'toolkitLevel' | 'unresolved'>;
+  readonly selection: Pick<ObservationSelection, 'telescope' | 'mode' | 'programme' | 'toolkitLevel' | 'constraints' | 'bodyMapSupport' | 'unresolved'>;
   readonly map: { readonly metadata: string; readonly productRecord: string; readonly plane: string; readonly sha256: string;
     readonly quantity: string; readonly units: string; readonly definitionDigest: string };
   readonly observations: BodyMapProduct['observations'];
 }
 
+const publicationFile = async (path: string, selection: ObservationSelection, artifact: string): Promise<Buffer> => readFile(path).catch((error: unknown) => {
+  if (!hasErrorCode(error, 'ENOENT')) throw error;
+  throw new Error(`Cannot publish ${selection.telescope} ${selection.mode} program ${selection.programme}: the ${artifact} is missing at ${path}. A publishable body-map route writes the map plane, its *.body-map.json metadata and the plane's *.product.json record.`);
+});
+
 /** Verify the complete chain at publication time and return the small descriptor the body package can consume. */
 export async function qualifyBodyMap(mapPath: string, selection: ObservationSelection): Promise<TelescopeLayer> {
-  const metadataPath = resolve(mapPath), product = parseBodyMapProduct(JSON.parse(await readFile(metadataPath, 'utf8')) as unknown);
+  const metadataPath = resolve(mapPath), product = parseBodyMapProduct(JSON.parse((await publicationFile(metadataPath, selection, 'body-map metadata')).toString('utf8')) as unknown);
   const planePath = resolve(dirname(metadataPath), product.planes.file), expectedMetadata = `${planePath}.body-map.json`;
   if (metadataPath !== expectedMetadata) throw new Error(`The body-map record belongs at ${expectedMetadata}, beside the plane it names.`);
-  const plane = await readFile(planePath);
+  const plane = await publicationFile(planePath, selection, 'map plane');
   if (sha256(plane) !== product.planes.sha256) throw new Error(`${planePath} is not the plane pinned by ${metadataPath}.`);
-  const recordPath = productRecordPath(planePath), record = parseProductRecord(JSON.parse(await readFile(recordPath, 'utf8')) as unknown);
+  const recordPath = productRecordPath(planePath), record = parseProductRecord(JSON.parse((await publicationFile(recordPath, selection, 'product record')).toString('utf8')) as unknown);
   if (!await sameRun(record, record, output => resolve(dirname(planePath), output))) throw new Error(`${recordPath} does not describe the output bytes on disk now.`);
   const expectedRun = bodyMapRun(product, record.inputs, record.software, record.toolchainDigest);
   if (runDigest(record) !== runDigest(expectedRun)) throw new Error(`${recordPath} does not bind the current map definition, frame, observations and combination policy.`);
@@ -75,14 +81,15 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
   const incomplete = product.observations.filter(observation => !observation.mode || !observation.programme);
   if (incomplete.length) throw new Error(`${metadataPath} has ${incomplete.length} observation(s) without an exact ledger mode and program.`);
   return { schema: TELESCOPE_LAYER_SCHEMA, target: selection.request.target, request: selection.request,
-    selection: { telescope: selection.telescope, mode: selection.mode, programme: selection.programme, toolkitLevel: selection.toolkitLevel, unresolved: selection.unresolved },
+    selection: { telescope: selection.telescope, mode: selection.mode, programme: selection.programme, toolkitLevel: selection.toolkitLevel,
+      constraints: selection.constraints, bodyMapSupport: selection.bodyMapSupport, unresolved: selection.unresolved },
     map: { metadata: basename(metadataPath), productRecord: basename(recordPath), plane: basename(planePath), sha256: product.planes.sha256,
       quantity: product.definition.quantity, units: product.definition.units, definitionDigest: definitionDigest(product.definition) }, observations: product.observations };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), telescope = flagValue(args, '--select-telescope'), mode = flagValue(args, '--select-mode'), programme = flagValue(args, '--program'), map = flagValue(args, '--map');
-  if (!telescope || !mode || !programme || !map) throw new TypeError('Usage: body-map-publication.mts --target <id> --wavelength <from,to> [query constraints] --select-telescope <name> --select-mode <mode> --program <id> --map <map.fits.body-map.json> [--out <layer.json>]');
+  if (!telescope || !mode || !programme || !map) throw new TypeError('Usage: body-map-publication.mts --target <id> --wavelength <from,to> --kind <kind> (--from <ISO> --to <ISO> | --any-time) (--min-arcsec <N> | --min-km <N> | --min-elements <N>) --result body-map --select-telescope <name> --select-mode <mode> --program <id> --map <map.fits.body-map.json> [--out <layer.json>]');
   const request = requestFromArguments(args), answer = queryCapabilities(request, await loadQueryInputs(resolve(import.meta.dirname, '../..'), request.target));
   const layer = await qualifyBodyMap(map, selectObservation(answer, telescope, mode, programme)), text = `${JSON.stringify(layer, null, 2)}\n`, out = flagValue(args, '--out');
   if (out) await writeFile(resolve(out), text); else process.stdout.write(text);

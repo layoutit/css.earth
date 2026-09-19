@@ -90,13 +90,28 @@ test('a mode with no recorded capabilities answers unknown and says so, rather t
 });
 
 test('an explicit selection keeps unknowns and refuses a hard no or another target\'s program', () => {
-  const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [3.4, 3.6], kind: 'cube' }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }]));
+  const complete = { target: 'europa', wavelengthMicrometres: [3.4, 3.6] as const, kind: 'cube' as const, result: 'body-map' as const,
+    time: { any: true as const }, angularResolutionArcsec: 0.3 };
+  const answer = queryCapabilities(complete, inputs([{ telescope: 'jwst', value: JWST_LEDGER }]));
   const selected = selectObservation(answer, 'JWST', 'NIRSPEC/IFU', 'europa-1250');
   assert.equal(selected.toolkitLevel, 'proven');
-  assert.ok(selected.unresolved.some(entry => entry.constraint === 'angularResolution' && entry.answer === 'unknown'));
+  assert.equal(selected.bodyMapSupport.answer, 'yes');
+  assert.equal(selected.constraints.wavelength?.answer, 'yes');
+  assert.ok(selected.unresolved.some(entry => entry.constraint === 'angularResolution' && entry.answer === 'partial'));
   assert.throws(() => selectObservation(answer, 'JWST', 'NIRSPEC/IFU', 'sn-1987a-1232'), /not a pinned or archive-final program of europa/u);
-  const impossible = queryCapabilities({ target: 'europa', wavelengthMicrometres: [8, 9] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }]));
+  const impossible = queryCapabilities({ ...complete, wavelengthMicrometres: [8, 9] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }]));
   assert.throws(() => selectObservation(impossible, 'JWST', 'NIRSPEC/IFU', 'europa-1250'), /cannot answer this request: wavelength/u);
+});
+
+test('selection requires a complete scientific request and refuses a proven reducer with no body-map author', () => {
+  const incomplete = queryCapabilities({ target: 'ceres', wavelengthMicrometres: [2, 2.3], kind: 'image' }, inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
+  assert.throws(() => selectObservation(incomplete, 'VLT/NACO', 'imaging', 'ceres-080C0881'), /needs time.*required resolution.*requested result/u);
+  const complete = queryCapabilities({ target: 'ceres', wavelengthMicrometres: [2, 2.3], kind: 'image', result: 'body-map', time: { any: true }, angularResolutionArcsec: 0.1 },
+    inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
+  const naco = candidate(complete, 'imaging');
+  assert.equal(naco.toolkitSupport.level, 'proven');
+  assert.equal(naco.bodyMapSupport.answer, 'no');
+  assert.throws(() => selectObservation(complete, 'VLT/NACO', 'imaging', 'ceres-080C0881'), /cannot produce the requested body map.*No body-map author/u);
 });
 
 test('what the optics resolve can say no; what the pixels sample cannot', () => {
@@ -287,7 +302,8 @@ test('the committed Spitzer, Gemini and Keck ledgers contribute candidates witho
   assert.equal(niri.telescope, 'Gemini'); assert.equal(niri.meetsConstraints.wavelength?.answer, 'unknown');
   const nirspec = europa.candidates.find(entry => entry.telescope === 'Keck' && entry.mode === 'NIRSPEC')!;
   assert.equal(nirspec.toolkitSupport.level, 'none', 'a pinned program is not a runnable toolkit when its pipeline is absent');
-  assert.throws(() => selectObservation(europa, 'Keck', 'NIRSPEC', 'europa-nirspec-2006a-c213ol'), /has no usable toolkit/u);
+  const selectableEuropa = queryCapabilities({ target: 'europa', wavelengthMicrometres: [0.5, 5], kind: 'spectrum', result: 'telescope-product', time: { any: true }, angularResolutionArcsec: 1 }, await loadQueryInputs(ROOT, 'europa'));
+  assert.throws(() => selectObservation(selectableEuropa, 'Keck', 'NIRSPEC', 'europa-nirspec-2006a-c213ol'), /has no usable toolkit/u);
 });
 
 test('the committed ledgers: no candidate for any target ever answers yes for sharpness', async () => {

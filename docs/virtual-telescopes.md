@@ -108,7 +108,7 @@ The ledgers say how much of each archive these routes have been proved on:
 The ledgers say what each archive holds per object and per mode. They say nothing about a single exposure. The capability
 query ([`tools/objects/telescopes/query.mts`](../tools/objects/telescopes/query.mts)) turns that into an answer to one
 question: *which observing modes have ever pointed at this body, and could any of them, in principle, measure the thing I
-care about?*
+care about?* These `.mts` commands require the Node version declared by the package: Node 22.18.x or Node 24+.
 
 ```
 node tools/objects/telescopes/query.mts --target europa --wavelength 3.4,3.6 --kind cube \
@@ -116,7 +116,7 @@ node tools/objects/telescopes/query.mts --target europa --wavelength 3.4,3.6 --k
 ```
 
 It returns one candidate per mode that observed the target, the ones that cover the requested wavelengths first, and each
-candidate answers three separate things:
+candidate answers four separate things:
 
 1. **What the mode allows.** One answer per constraint (yes, no, partial or unknown) with its reason.
    - *Wavelength* comes from the mode's recorded intervals, one per documented window, filter or channel. A mode is never
@@ -135,7 +135,10 @@ candidate answers three separate things:
    a tool with no checked program; *archive-final products qualified, not re-made here*, which is the archive's own final
    product pinned and read whole for a mode nothing here re-calibrates; or *recalibrated here and checked*. The third is never
    reported as the fourth: a retired instrument can reach it and can never reach re-calibration.
-3. **What supports it, and what is still unknown.** The ledger and the date the archive was read, receipts by name, body maps
+3. **Whether it can end as a body map.** This is separate from reduction: a proven reducer may correctly end at detector
+   pixels. The query names the registered author for modes that reach the shared body-map contract and says no where none is
+   registered.
+4. **What supports it, and what is still unknown.** The ledger and the date the archive was read, receipts by name, body maps
    beside the object whose observations carry a measured resolution, investigation entries, and a list of what nobody here
    knows until an observation is pinned and read.
 
@@ -161,12 +164,16 @@ The query can make an explicit selection instead of silently treating the first 
 
 ```
 pnpm telescope:query --target europa --wavelength 4.24,4.28 --kind cube \
+  --any-time --min-arcsec 0.3 --result body-map \
   --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250
 ```
 
-The selection is refused when any requested constraint is `no` or the mode has no usable toolkit. Every `partial` and
-`unknown` answer is copied into the selection. The selected program must be a pinned program of this target in that mode; a
-similarly named program of another target cannot pass.
+Exploratory queries may omit constraints. An explicit selection must state time (a range or `--any-time`), one required
+angular or surface resolution, product kind and whether it needs a telescope product or body map. Selection is refused when
+any requested constraint is `no`, the mode has no usable toolkit, or a body map was requested but no body-map author is
+registered. The full mode-level constraint table is retained, and every `partial` and `unknown` answer is copied into the
+selection. Observation wavelength remains explicitly unknown until the selected program's filter, grating or channel is
+qualified. The selected program must belong to this target in this mode.
 
 The instrument author then writes the final map, its `*.body-map.json`, and the shared `*.product.json`. JWST band maps,
 Hubble slit-scan maps and ALMA thermal maps use this boundary. The product record pins the recipe, observation products,
@@ -176,12 +183,14 @@ Publication performs the query and verifies the whole chain in one command:
 
 ```
 pnpm telescope:publish-map --target europa --wavelength 4.24,4.28 --kind cube \
+  --any-time --min-arcsec 0.3 --result body-map \
   --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250 \
   --map src/objects/europa/source/jwst/carbon-dioxide.fits.body-map.json \
   --out src/objects/europa/source/jwst/carbon-dioxide.telescope-layer.json
 ```
 
-It refuses a changed plane, stale product record, changed measurement definition, frame, grid or combination policy, a map
+It refuses a missing map contract with the selected telescope, mode and program in the error. It also refuses a changed
+plane, stale product record, changed measurement definition, frame, grid or combination policy, a map
 whose observations omit their exact mode or program, and a map that does not contain the selected program. Its output keeps
 the original scientific request, unresolved constraints, selected toolkit level, exact product record, quantity, units,
 definition digest and observations. A body package can therefore expose the layer without recreating a scientific claim in
