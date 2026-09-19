@@ -5,7 +5,7 @@ import { test } from 'node:test';
 import { resolve } from 'node:path';
 import { BODY_MAP_SCHEMA } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
-import { assessObservationSelection, formatAnswer, ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, queryCapabilities, selectObservation, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
+import { assessObservationSelection, formatAnswer, ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, QUERY_HELP, queryCapabilities, selectObservation, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 const citation = 'https://jwst-docs.stsci.edu/jwst-near-infrared-spectrograph';
@@ -108,6 +108,10 @@ test('an explicit selection keeps unknowns and refuses a hard no or another targ
   assert.equal(selected.bodyMapSupport.answer, 'yes');
   assert.equal(selected.constraints.wavelength?.answer, 'yes');
   assert.ok(selected.unresolved.some(entry => entry.constraint === 'angularResolution' && entry.answer === 'partial'));
+  assert.equal(answer.endpoint.status, 'selectable-candidates');
+  assert.equal(candidate(answer, 'NIRSPEC/IFU').selectionAssessment.selectable, true);
+  assert.deepEqual(candidate(answer, 'NIRSPEC/IFU').selectionAssessment.nextActions[0]?.arguments.slice(-7),
+    ['--select-telescope', 'JWST', '--select-mode', 'NIRSPEC/IFU', '--program', 'europa-1250', '--json']);
   assert.throws(() => selectObservation(answer, 'JWST', 'NIRSPEC/IFU', 'sn-1987a-1232'), /not a pinned or archive-final program of europa/u);
   const impossible = queryCapabilities({ ...complete, wavelengthMicrometres: [8, 9] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }]));
   assert.throws(() => selectObservation(impossible, 'JWST', 'NIRSPEC/IFU', 'europa-1250'), /cannot answer this request: wavelength/u);
@@ -115,6 +119,7 @@ test('an explicit selection keeps unknowns and refuses a hard no or another targ
 
 test('selection requires a complete scientific request and exposes the shared NACO body-map author', () => {
   const incomplete = queryCapabilities({ target: 'ceres', wavelengthMicrometres: [2, 2.3], kind: 'image' }, inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
+  assert.equal(incomplete.endpoint.status, 'request-incomplete');
   assert.deepEqual(assessObservationSelection(incomplete, 'VLT/NACO', 'imaging', 'ceres-080C0881').blockers.map(blocker => blocker.code),
     ['incomplete-request', 'incomplete-request', 'incomplete-request']);
   const complete = queryCapabilities({ target: 'ceres', wavelengthMicrometres: [2, 2.3], kind: 'image', result: 'body-map', time: { any: true }, angularResolutionArcsec: 0.1 },
@@ -124,6 +129,11 @@ test('selection requires a complete scientific request and exposes the shared NA
   assert.equal(naco.bodyMapSupport.answer, 'yes');
   assert.equal(naco.bodyMapSupport.author, 'tools/objects/naco/author-body-map.mts');
   assert.equal(selectObservation(complete, 'VLT/NACO', 'imaging', 'ceres-080C0881').programme, 'ceres-080C0881');
+});
+
+test('help states the complete request and the direction of a resolution limit', () => {
+  assert.match(QUERY_HELP, /largest acceptable angular or surface scale/u);
+  assert.match(QUERY_HELP, /pnpm --silent telescope:query/u);
 });
 
 test('a Vesta selection reports every blocker and human output separates archive from toolkit programs', () => {
@@ -359,6 +369,20 @@ test('the committed Itokawa index rules out the clean-room request and names the
   assert.deepEqual(candidate(answer, 'IRS Stare').programmes, ['292', '30080']);
 });
 
+test('the committed Flora request ends explicitly after sourced candidate refusals', async () => {
+  const answer = queryCapabilities({ target: 'flora', wavelengthMicrometres: [0.55, 0.85], time: { any: true }, angularResolutionArcsec: 0.1,
+    kind: 'image', result: 'body-map' }, await loadQueryInputs(ROOT, 'flora'));
+  assert.equal(answer.endpoint.status, 'no-selectable-candidate');
+  assert.equal(answer.endpoint.selectableCandidates, 0);
+  const texes = candidate(answer, 'TEXES'), hires = candidate(answer, 'HIRES'), cube = candidate(answer, 'cube'), wfpc2 = candidate(answer, 'WFPC2/PC');
+  assert.deepEqual([texes.meetsConstraints.wavelength?.answer, texes.meetsConstraints.kind?.answer], ['no', 'no']);
+  assert.deepEqual([hires.meetsConstraints.wavelength?.answer, hires.meetsConstraints.kind?.answer], ['yes', 'no']);
+  assert.deepEqual([cube.meetsConstraints.wavelength?.answer, cube.meetsConstraints.kind?.answer], ['no', 'no']);
+  assert.deepEqual(wfpc2.selectionAssessment.blockers.map(blocker => blocker.code),
+    ['body-map-author-missing', 'target-program-unqualified']);
+  assert.match(formatAnswer(answer), /workflow: no-selectable-candidate; 0 of 4 candidate mode\(s\) can proceed/u);
+});
+
 test('the committed ledgers: no candidate for any target ever answers yes for sharpness', async () => {
   for (const target of ['europa', 'jupiter', 'betelgeuse', 'ceres']) {
     const loaded = await loadQueryInputs(ROOT, target);
@@ -381,12 +405,12 @@ test('the committed ledgers: no candidate for any target ever answers yes for sh
  * two apart. */
 const WITHOUT_CAPABILITIES: readonly string[] = ['Gemini Alopeke', 'Gemini CIRPASS', 'Gemini F2', 'Gemini FLAMINGOS', 'Gemini GHOST', 'Gemini GMOS', 'Gemini GMOS-N', 'Gemini GMOS-S',
   'Gemini GNIRS', 'Gemini GPI', 'Gemini GRACES', 'Gemini GSAOI', 'Gemini Hokupaa+QUIRC', 'Gemini IGRINS', 'Gemini IGRINS-2', 'Gemini MAROON-X', 'Gemini NICI', 'Gemini NIFS',
-  'Gemini NIRI', 'Gemini OSCIR', 'Gemini PHOENIX', 'Gemini TEXES', 'Gemini TReCS', 'Gemini Zorro', 'Gemini bHROS', 'Gemini hrwfs', 'Gemini michelle',
+  'Gemini NIRI', 'Gemini OSCIR', 'Gemini PHOENIX', 'Gemini TReCS', 'Gemini Zorro', 'Gemini bHROS', 'Gemini hrwfs', 'Gemini michelle',
   'Hubble ACS', 'Hubble COS', 'Hubble COS-STIS', 'Hubble FGS', 'Hubble FOC/48', 'Hubble FOC/96',
   'Hubble HRS', 'Hubble HSP/UNK/POL', 'Hubble HSP/UNK/UV1', 'Hubble HSP/UNK/UV2', 'Hubble HSP/UNK/VIS', 'Hubble STIS', 'Hubble WFPC/PC',
-  'Hubble WFPC/WFC', 'Hubble WFPC2', 'Keck DEIMOS', 'Keck ESI', 'Keck GUIDER', 'Keck HIRES', 'Keck KCWI', 'Keck KPF', 'Keck LRIS', 'Keck LWS', 'Keck MOSFIRE',
+  'Hubble WFPC/WFC', 'Hubble WFPC2', 'Keck DEIMOS', 'Keck ESI', 'Keck GUIDER', 'Keck KCWI', 'Keck KPF', 'Keck LRIS', 'Keck LWS', 'Keck MOSFIRE',
   'Keck NIRC', 'Keck NIRC2', 'Keck NIRES', 'Keck NIRSPEC', 'Keck OSIRIS',
-  'VLT/NACO app', 'VLT/NACO chopping', 'VLT/NACO coronography', 'VLT/NACO cube', 'VLT/NACO differential', 'VLT/NACO fabry-perot',
+  'VLT/NACO app', 'VLT/NACO chopping', 'VLT/NACO coronography', 'VLT/NACO differential', 'VLT/NACO fabry-perot',
   'VLT/NACO other', 'VLT/NACO sam', 'VLT/NACO sampol'];
 
 test('every capability entry names a mode the ledgers use, and the modes without one are the known list', async () => {
