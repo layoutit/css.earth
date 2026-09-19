@@ -145,11 +145,13 @@
     "europa-9230-o002",
     "europa-9230-o003",
     "europa-9230-o004",
+    "io-jw01373-o024_t007_nirspec_g395h-f290lp",
     "sn-1987a-1232",
     "sn-1987a-3131"
    ],
    "checked": [
     "europa-1250",
+    "io-jw01373-o024_t007_nirspec_g395h-f290lp",
     "sn-1987a-1232",
     "sn-1987a-3131"
    ],
@@ -1647,7 +1649,9 @@
     "4078",
     "4565"
    ],
-   "drawn": []
+   "drawn": [
+    "NIRSPEC/IFU"
+   ]
   },
   {
    "id": "jupiter",

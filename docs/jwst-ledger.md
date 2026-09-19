@@ -16,7 +16,7 @@ An observation here is one public level-3 product set: one target, one instrumen
 | MIRI/IFU | cubes: a 5–28 µm spectrum in every pixel | maps of what a surface or a gas is made of; gas velocity as depth | 25,596 | 1,428 | 1,936 | 36 | 12 | 1 | 1 |
 | MIRI/SLIT | one 5–14 µm spectrum through a slit | whole-disc composition; nothing resolved | 432 | 358 | 24 | 8 | 0 | 0 | 0 |
 | MIRI/SLITLESS | time series of one star's 5–12 µm spectrum | exoplanet maps from eclipses and phase curves | 111 | 74 | 0 | 2 | 0 | 3 | 3 |
-| NIRSPEC/IFU | cubes: a 0.6–5.3 µm spectrum in every pixel | maps of what a surface or a gas is made of; gas velocity as depth | 2,229 | 1,256 | 637 | 68 | 9 | 10 | 3 |
+| NIRSPEC/IFU | cubes: a 0.6–5.3 µm spectrum in every pixel | maps of what a surface or a gas is made of; gas velocity as depth | 2,229 | 1,256 | 637 | 68 | 9 | 11 | 4 |
 | NIRSPEC/SLIT | one spectrum through a slit, and time series of one star | exoplanet maps from eclipses and phase curves | 3,015 | 535 | 42 | 6 | 0 | 0 | 0 |
 | NIRSPEC/MSA | spectra of many faint sources at once | nothing: survey spectra of distant galaxies | 145,378 | none | none | 0 | 0 | 0 | 0 |
 | NIRISS/AMI | interferograms through a seven-hole mask | structure closer to a star than a coronagraph reaches | 65 | 14 | 1 | 1 | 0 | 0 | 0 |
@@ -93,7 +93,7 @@ One star watched for hours, which is what an exoplanet map is fitted from. These
 | hygiea | MIRI/IFU 12, NIRSPEC/IFU 2 | none | 1244 | none |
 | hyperion | NIRSPEC/IFU 2 | none | 3716 | none |
 | iapetus | NIRSPEC/IFU 4 | none | 3716 | none |
-| io | MIRI/IFU 44, NIRISS/AMI 1, NIRSPEC/IFU 6 | none | 1373, 4078, 4565 | none |
+| io | MIRI/IFU 44, NIRISS/AMI 1, NIRSPEC/IFU 6 | none | 1373, 4078, 4565 | NIRSPEC/IFU |
 | jupiter | MIRI/IFU 128, MIRI/IMAGE 10, NIRCAM/IMAGE 57, NIRISS/IMAGE 4, NIRSPEC/IFU 45 | none | 1022, 1246, 1373, 3665, 9022 | none |
 | kleopatra | NIRSPEC/IFU 1 | none | 1444 | none |
 | larissa | NIRSPEC/IFU 2 | none | 4645 | none |
