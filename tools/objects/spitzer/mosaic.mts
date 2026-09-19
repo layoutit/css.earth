@@ -123,10 +123,13 @@ export async function remosaicChannel(program: SpitzerProgram, channel: SpitzerC
   const run: ProductRun = { telescope: TELESCOPE, stage: STAGE, inputs, parameters, software, toolchainDigest: toolchain.digest };
   const output = mosaicName(program, channel.channel);
   const recordPath = resolve(work, `${output}.product.json`);
+  // Before anything else, including the decision to reuse: every pinned level-1 frame, its mask and the archive mosaic this
+  // run resamples onto must be the bytes the program pinned. Checking after the reuse shortcut would let a run hand back a
+  // record naming inputs that are no longer on disk.
+  await assertInputPins(inputs, new Map(inputs.map(input => [input.identity, resolve(directory, input.identity)])));
   const existing = await readProductRecord(recordPath);
   if (await sameRun(existing, run, path => resolve(work, path))) return { record: existing!, summary: null, reused: true };
 
-  await assertInputPins(inputs, new Map(inputs.map(input => [input.identity, resolve(directory, input.identity)])));
   const job = {
     reference: resolve(directory, channel.products.find(product => product.role === 'mosaic')!.name),
     frames: members.map(frame => ({

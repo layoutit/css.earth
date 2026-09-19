@@ -26,10 +26,9 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '../../fits.mts';
-import { sha256File } from '../../../src/platform/sha256.mts';
 import { flagValue, positionalArguments } from '../../cli-arguments.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
-import { readProductRecord, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
+import { assertInputPins, pinFile, readProductRecord, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
 import { defaultDataRoot, PROGRAMS, readSpitzerProgram, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { defaultWorkRoot, mosaicMembers, mosaicName, STAGE, TELESCOPE } from './mosaic.mts';
 
@@ -63,51 +62,74 @@ const imageHdu = (hdus: readonly FitsFileHdu[], path: string): FitsFileHdu => {
   return hdu;
 };
 
-/** Compare two mosaics and the archive's uncertainty and coverage planes beside them. Every file must be on one grid: a
- * different shape is refused rather than reconciled, because a mosaic on another grid is another measurement. */
-export async function compareMosaics(ours: string, archive: string, uncertainty: string, coverage: string): Promise<ComparisonStatistics> {
-  const files = [ours, archive, uncertainty, coverage];
+/** One file this comparison reads, with the pin it must satisfy. The pin is what the program recorded when the archive's
+ * bytes were fetched, or what the producing run recorded for our own product. */
+export interface ComparedFile { readonly path: string; readonly pin: ProductInput }
+export interface MosaicComparison {
+  readonly statistics: ComparisonStatistics;
+  /** The identity of every file this comparison actually read, taken from the bytes on disk and not copied from any pin. A
+   * receipt records these, so what it claims to have compared is what it did compare. */
+  readonly compared: readonly ProductInput[];
+}
+
+/** Compare two mosaics and the archive's uncertainty and coverage planes beside them.
+ *
+ * Before a single sample is read, all four files are checked against their pins. That check belongs here rather than in the
+ * caller: the archive's uncertainty plane is the denominator of the headline result, so a comparison that read some other
+ * file would report agreement with something nobody pinned. A file that is not its pinned bytes refuses the comparison.
+ *
+ * Every file must then be on one grid: a different shape is refused rather than reconciled, because a mosaic on another grid
+ * is another measurement. */
+export async function compareMosaics(ours: ComparedFile, archive: ComparedFile, uncertainty: ComparedFile, coverage: ComparedFile): Promise<MosaicComparison> {
+  const entries = [ours, archive, uncertainty, coverage];
+  if (new Set(entries.map(entry => entry.pin.identity)).size !== entries.length)
+    throw new Error('The four compared files must be four different pinned files.');
+  await assertInputPins(entries.map(entry => entry.pin), new Map(entries.map(entry => [entry.pin.identity, entry.path])));
+  const compared: ProductInput[] = [];
+  for (const entry of entries) compared.push({ role: entry.pin.role, identity: entry.pin.identity, ...await pinFile(entry.path) });
+
+  const files = entries.map(entry => entry.path);
   const hdus = await Promise.all(files.map(async path => imageHdu(await readFitsFileHdus(path), path)));
   const [width, height] = hdus[0]!.dimensions as [number, number];
   for (const [index, hdu] of hdus.entries())
     if (hdu.dimensions[0] !== width || hdu.dimensions[1] !== height)
-      throw new Error(`${files[index]} is ${hdu.dimensions.join(' x ')}; ${ours} is ${width} x ${height}. These are not the same grid.`);
+      throw new Error(`${files[index]} is ${hdu.dimensions.join(' x ')}; ${ours.path} is ${width} x ${height}. These are not the same grid.`);
   if (width * height > MAX_SAMPLES) throw new Error(`${width} x ${height} is more samples than this comparison reads.`);
 
   const diffOverSigma: number[] = [], ratios: number[] = [], relative: number[] = [];
-  let compared = 0, archiveCovered = 0, identical = 0, sumA = 0, sumB = 0, sumAA = 0, sumBB = 0, sumAB = 0;
+  let comparedPixels = 0, archiveCovered = 0, identical = 0, sumA = 0, sumB = 0, sumAA = 0, sumBB = 0, sumAB = 0;
   const levels: number[] = [], absoluteDifferences: number[] = [];
   for (let y0 = 0; y0 < height; y0 += ROWS_PER_READ) {
     const rows = Math.min(ROWS_PER_READ, height - y0), region = { x0: 0, y0, width, height: rows };
     const [b, a, u, c] = await Promise.all(files.map((path, index) => readFitsFileRegion(path, hdus[index]!, region)));
     for (let i = 0; i < b!.values.length; i++) {
-      const ours = b!.values[i]!, theirs = a!.values[i]!, sigma = u!.values[i]!, cover = c!.values[i]!;
+      const mine = b!.values[i]!, theirs = a!.values[i]!, sigma = u!.values[i]!, cover = c!.values[i]!;
       if (Number.isFinite(theirs) && cover > 0) archiveCovered++;
-      if (!Number.isFinite(ours) || !Number.isFinite(theirs) || !(cover > 0)) continue;
-      compared++;
-      if (ours === theirs) identical++;
-      const difference = ours - theirs;
+      if (!Number.isFinite(mine) || !Number.isFinite(theirs) || !(cover > 0)) continue;
+      comparedPixels++;
+      if (mine === theirs) identical++;
+      const difference = mine - theirs;
       levels.push(Math.abs(theirs));
       absoluteDifferences.push(Math.abs(difference));
-      if (theirs !== 0) { ratios.push(ours / theirs); relative.push(Math.abs(difference) / Math.abs(theirs)); }
+      if (theirs !== 0) { ratios.push(mine / theirs); relative.push(Math.abs(difference) / Math.abs(theirs)); }
       if (Number.isFinite(sigma) && sigma > 0) diffOverSigma.push(Math.abs(difference) / sigma);
-      sumA += theirs; sumB += ours; sumAA += theirs * theirs; sumBB += ours * ours; sumAB += theirs * ours;
+      sumA += theirs; sumB += mine; sumAA += theirs * theirs; sumBB += mine * mine; sumAB += theirs * mine;
     }
   }
-  if (!compared) throw new Error('The two mosaics share no covered pixel; there is nothing to compare.');
+  if (!comparedPixels) throw new Error('The two mosaics share no covered pixel; there is nothing to compare.');
   const sorted = (values: readonly number[]) => Float64Array.from(values).sort();
   const level = quantile(sorted(levels), 0.5), sigmas = sorted(diffOverSigma), rel = sorted(relative);
-  const n = compared, covariance = sumAB / n - (sumA / n) * (sumB / n);
+  const n = comparedPixels, covariance = sumAB / n - (sumA / n) * (sumB / n);
   const spread = Math.sqrt(Math.max(0, sumAA / n - (sumA / n) ** 2)) * Math.sqrt(Math.max(0, sumBB / n - (sumB / n) ** 2));
   const share = (values: Float64Array, limit: number) => { let count = 0; for (const value of values) if (value <= limit) count++; return count / (values.length || 1); };
-  return {
-    comparedPixels: compared, archiveCoveredPixels: archiveCovered, bitIdenticalShare: identical / n,
+  return { compared, statistics: {
+    comparedPixels: comparedPixels, archiveCoveredPixels: archiveCovered, bitIdenticalShare: identical / n,
     medianRatio: quantile(sorted(ratios), 0.5), medianLevel: level,
     medianAbsoluteDifferenceOverLevel: quantile(sorted(absoluteDifferences), 0.5) / (level || Number.NaN),
     differenceInArchiveSigma: { median: quantile(sigmas, 0.5), p95: quantile(sigmas, 0.95), p99: quantile(sigmas, 0.99), max: sigmas.length ? sigmas[sigmas.length - 1]! : Number.NaN },
     shareWithinArchiveSigma: share(sigmas, 1), shareWithinOnePercent: share(rel, 0.01), shareWithinFivePercent: share(rel, 0.05),
     correlation: spread > 0 ? covariance / spread : Number.NaN,
-  };
+  } };
 }
 
 export interface SpitzerReproduction {
@@ -120,6 +142,10 @@ export interface SpitzerReproduction {
   /** What made the product we compare against, and what made ours. The first is the observatory's; the second is not. */
   readonly archiveProduct: { readonly name: string; readonly bytes: number; readonly sha256: string; readonly pipeline: string };
   readonly ourProduct: { readonly name: string; readonly bytes: number; readonly sha256: string; readonly stage: string; readonly software: readonly { readonly name: string; readonly version: string }[]; readonly toolchainDigest: string };
+  /** The two archive planes the headline numbers are measured against, as they were on disk when they were read. The share
+   * inside "the archive's own uncertainty" means nothing without saying which uncertainty file that was. */
+  readonly archiveUncertainty: { readonly name: string; readonly bytes: number; readonly sha256: string };
+  readonly archiveCoverage: { readonly name: string; readonly bytes: number; readonly sha256: string };
   readonly framesCombined: readonly string[];
   readonly frameTimeSeconds: number;
   readonly statistics: ComparisonStatistics;
@@ -145,6 +171,7 @@ export function parseReproduction(value: unknown): SpitzerReproduction {
   const ourRecord = requireRecord(row.ourProduct, 'our product');
   const ourProduct = { ...product(row.ourProduct, 'our product'), stage: requireString(ourRecord.stage, 'stage'), toolchainDigest: requireString(ourRecord.toolchainDigest, 'toolchain digest'),
     software: requireArray(ourRecord.software, 'software').map(raw => { const entry = requireRecord(raw, 'software'); return { name: requireString(entry.name, 'name'), version: requireString(entry.version, 'version') }; }) };
+  const archiveUncertainty = product(row.archiveUncertainty, 'archive uncertainty'), archiveCoverage = product(row.archiveCoverage, 'archive coverage');
   const statisticsRecord = requireRecord(row.statistics, 'statistics');
   const sigma = requireRecord(statisticsRecord.differenceInArchiveSigma, 'sigma quantiles');
   const statistics: ComparisonStatistics = {
@@ -162,7 +189,7 @@ export function parseReproduction(value: unknown): SpitzerReproduction {
   };
   return { schema: SCHEMA, program: requireString(row.program, 'program'), aorKey: requireFiniteNumber(row.aorKey, 'AORKEY'),
     target: requireString(row.target, 'target'), channel: requireFiniteNumber(row.channel, 'channel'), wavelength: requireString(row.wavelength, 'wavelength'),
-    archiveProduct, ourProduct, framesCombined: requireArray(row.framesCombined, 'frames').map(entry => requireString(entry, 'frame')),
+    archiveProduct, ourProduct, archiveUncertainty, archiveCoverage, framesCombined: requireArray(row.framesCombined, 'frames').map(entry => requireString(entry, 'frame')),
     frameTimeSeconds: requireFiniteNumber(row.frameTimeSeconds, 'frame time'), statistics,
     limits: requireArray(row.limits, 'limits').map(entry => requireString(entry, 'limit')) };
 }
@@ -179,30 +206,40 @@ export async function compareChannel(program: SpitzerProgram, channel: SpitzerCh
     if (!found) throw new Error(`Channel ${channel.channel} pins no ${role}.`);
     return found;
   };
-  const archive = named('mosaic'), output = mosaicName(program, channel.channel), ourPath = resolve(work, output);
+  const archive = named('mosaic'), uncertainty = named('mosaic-uncertainty'), coverage = named('mosaic-coverage');
+  const output = mosaicName(program, channel.channel), ourPath = resolve(work, output);
   const record = await readProductRecord(resolve(work, `${output}.product.json`));
   if (!record) throw new Error(`${output} has no product record; run mosaic.mts first.`);
   if (record.stage !== STAGE || record.telescope !== TELESCOPE) throw new Error(`${output} was made by ${record.telescope}/${record.stage}, not ${TELESCOPE}/${STAGE}.`);
   const ourFile = record.outputs.find(entry => entry.path === output);
   if (!ourFile) throw new Error(`The record beside ${output} does not name it.`);
-  const onDisk = await sha256File(ourPath);
-  if (onDisk.sha256 !== ourFile.sha256 || onDisk.bytes !== ourFile.bytes) throw new Error(`${output} is not the file its record describes; re-run mosaic.mts.`);
 
-  const statistics = await compareMosaics(ourPath, resolve(directory, archive.name), resolve(directory, named('mosaic-uncertainty').name), resolve(directory, named('mosaic-coverage').name));
+  // Our own product is pinned by the record that made it; the archive's three files are pinned by the program that fetched
+  // them. compareMosaics refuses every one of them that is not its pinned bytes before it reads a sample, and gives back the
+  // identity of what it did read. Nothing below copies a digest out of the program or the record.
+  const comparison = await compareMosaics(
+    { path: ourPath, pin: { role: 'our-mosaic', identity: output, bytes: ourFile.bytes, sha256: ourFile.sha256 } },
+    { path: resolve(directory, archive.name), pin: { role: 'archive-mosaic', identity: archive.name, bytes: archive.bytes, sha256: archive.sha256 } },
+    { path: resolve(directory, uncertainty.name), pin: { role: 'archive-uncertainty', identity: uncertainty.name, bytes: uncertainty.bytes, sha256: uncertainty.sha256 } },
+    { path: resolve(directory, coverage.name), pin: { role: 'archive-coverage', identity: coverage.name, bytes: coverage.bytes, sha256: coverage.sha256 } });
+  const inputs = comparison.compared;
+  const read = (role: string) => {
+    const found = inputs.find(entry => entry.role === role);
+    if (!found) throw new Error(`The comparison did not report reading a ${role}.`);
+    return found;
+  };
+  const readArchive = read('archive-mosaic'), readOurs = read('our-mosaic');
   const reproduction = parseReproduction({
     schema: SCHEMA, program: program.id, aorKey: program.aorKey, target: program.target, channel: channel.channel, wavelength: channel.wavelength,
-    archiveProduct: { name: archive.name, bytes: archive.bytes, sha256: archive.sha256, pipeline: channel.mosaic.creator },
-    ourProduct: { name: output, bytes: ourFile.bytes, sha256: ourFile.sha256, stage: record.stage, software: record.software, toolchainDigest: record.toolchainDigest ?? '' },
-    framesCombined: mosaicMembers(channel).map(frame => frame.dce), frameTimeSeconds: channel.mosaicFrameTimeSeconds, statistics, limits: LIMITS,
+    archiveProduct: { name: readArchive.identity, bytes: readArchive.bytes, sha256: readArchive.sha256, pipeline: channel.mosaic.creator },
+    ourProduct: { name: readOurs.identity, bytes: readOurs.bytes, sha256: readOurs.sha256, stage: record.stage, software: record.software, toolchainDigest: record.toolchainDigest ?? '' },
+    archiveUncertainty: { name: read('archive-uncertainty').identity, bytes: read('archive-uncertainty').bytes, sha256: read('archive-uncertainty').sha256 },
+    archiveCoverage: { name: read('archive-coverage').identity, bytes: read('archive-coverage').bytes, sha256: read('archive-coverage').sha256 },
+    framesCombined: mosaicMembers(channel).map(frame => frame.dce), frameTimeSeconds: channel.mosaicFrameTimeSeconds,
+    statistics: comparison.statistics, limits: LIMITS,
   });
   await writeFile(receiptPath(program.id, channel.channel), `${JSON.stringify(reproduction, null, 2)}\n`);
 
-  const inputs: ProductInput[] = [
-    { role: 'archive-mosaic', identity: archive.name, bytes: archive.bytes, sha256: archive.sha256 },
-    { role: 'our-mosaic', identity: output, bytes: ourFile.bytes, sha256: ourFile.sha256 },
-    { role: 'archive-uncertainty', identity: named('mosaic-uncertainty').name, bytes: named('mosaic-uncertainty').bytes, sha256: named('mosaic-uncertainty').sha256 },
-    { role: 'archive-coverage', identity: named('mosaic-coverage').name, bytes: named('mosaic-coverage').bytes, sha256: named('mosaic-coverage').sha256 },
-  ];
   const run: ProductRun = { telescope: TELESCOPE, stage: COMPARE_STAGE, inputs,
     parameters: { comparedOver: 'pixels the archive covers and both products hold', maxSamples: MAX_SAMPLES },
     software: [{ name: 'cssearth-fits', version: 'repository' }], toolchainDigest: record.toolchainDigest ?? undefined };

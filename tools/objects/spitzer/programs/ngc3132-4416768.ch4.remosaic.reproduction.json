@@ -36,6 +36,16 @@
       }
     ]
   },
+  "archiveUncertainty": {
+    "name": "SPITZER_I4_4416768_0000_7_A42446681_munc.fits",
+    "bytes": 9797760,
+    "sha256": "5eb0565540ef7c9aa994eb1f61c8cf5c586c0ea177692401dd81c184d166719d"
+  },
+  "archiveCoverage": {
+    "name": "SPITZER_I4_4416768_0000_7_A42446682_mcov.fits",
+    "bytes": 9797760,
+    "sha256": "c2635259d80e99d1b05c22b7253d72c50d751b14584e17b328cec1ab7d2ab736"
+  },
   "framesCombined": [
     "0001",
     "0003",

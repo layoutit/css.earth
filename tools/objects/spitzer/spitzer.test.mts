@@ -6,6 +6,7 @@ import { test } from 'node:test';
 import { archiveUrl, DATA, frameSibling, parseSpitzerProgram, type SpitzerProgram } from './archive.mts';
 import { buildLedger, ledgerGuide, naifIdFromHorizonsCode, parseLedger, repositoryState, type ShippedObject } from './archive-ledger.mts';
 import { compareMosaics, LIMITS, parseReproduction } from './compare.mts';
+import { pinFile } from '../product-record.mts';
 import { channelInputs, mosaicMembers, parseMosaicSummary } from './mosaic.mts';
 
 const sha = (seed: string) => seed.repeat(64).slice(0, 64);
@@ -96,6 +97,10 @@ function fitsFile(values: readonly number[], width: number, height: number) {
   return bytes;
 }
 
+async function pinned(path: string, role: string) {
+  return { path, pin: { role, identity: path.slice(path.lastIndexOf('/') + 1), ...await pinFile(path) } };
+}
+
 test('two mosaics are compared only on one grid, and agreement is measured against the archive uncertainty', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'spitzer-compare-'));
   const width = 4, height = 2, n = width * height;
@@ -107,7 +112,9 @@ test('two mosaics are compared only on one grid, and agreement is measured again
   };
   const archive = await write('archive.fits', theirs), unc = await write('unc.fits', sigma), cov = await write('cov.fits', cover);
 
-  const same = await compareMosaics(await write('same.fits', theirs), archive, unc, cov);
+  const { statistics: same, compared } = await compareMosaics(await pinned(await write('same.fits', theirs), 'our-mosaic'),
+    await pinned(archive, 'archive-mosaic'), await pinned(unc, 'archive-uncertainty'), await pinned(cov, 'archive-coverage'));
+  assert.deepEqual(compared.map(entry => entry.role).sort(), ['archive-coverage', 'archive-mosaic', 'archive-uncertainty', 'our-mosaic']);
   assert.equal(same.comparedPixels, n);
   assert.equal(same.archiveCoveredPixels, n);
   assert.equal(same.bitIdenticalShare, 1);
@@ -118,19 +125,63 @@ test('two mosaics are compared only on one grid, and agreement is measured again
   assert.ok(same.correlation > 0.999999);
 
   // Every pixel high by 2, which is two of the archive's own sigmas: nothing is inside one sigma any more.
-  const off = await compareMosaics(await write('off.fits', theirs.map(value => value + 2)), archive, unc, cov);
+  const { statistics: off } = await compareMosaics(await pinned(await write('off.fits', theirs.map(value => value + 2)), 'our-mosaic'),
+    await pinned(archive, 'archive-mosaic'), await pinned(unc, 'archive-uncertainty'), await pinned(cov, 'archive-coverage'));
   assert.equal(off.bitIdenticalShare, 0);
   assert.equal(off.shareWithinArchiveSigma, 0);
   assert.equal(off.differenceInArchiveSigma.median, 2);
   assert.ok(off.correlation > 0.999999, 'a constant offset does not change the correlation');
 
   // Pixels the archive does not cover are not compared, and neither are ones our product does not hold.
-  const partial = await compareMosaics(await write('partial.fits', [1, 2, 3, 4, 5, 6, 7, Number.NaN]), archive, unc,
-    await write('cov-partial.fits', [2, 2, 2, 2, 0, 0, 0, 2]));
+  const { statistics: partial } = await compareMosaics(await pinned(await write('partial.fits', [1, 2, 3, 4, 5, 6, 7, Number.NaN]), 'our-mosaic'),
+    await pinned(archive, 'archive-mosaic'), await pinned(unc, 'archive-uncertainty'),
+    await pinned(await write('cov-partial.fits', [2, 2, 2, 2, 0, 0, 0, 2]), 'archive-coverage'));
   assert.equal(partial.comparedPixels, 4);
   assert.equal(partial.archiveCoveredPixels, 5);
 
-  await assert.rejects(compareMosaics(await write('small.fits', [1, 2], 2, 1), archive, unc, cov), /not the same grid/u);
+  await assert.rejects(compareMosaics(await pinned(await write('small.fits', [1, 2], 2, 1), 'our-mosaic'),
+    await pinned(archive, 'archive-mosaic'), await pinned(unc, 'archive-uncertainty'), await pinned(cov, 'archive-coverage')), /not the same grid/u);
+});
+
+test('a comparison refuses an archive file that is not its pinned bytes, before it reads a sample', async () => {
+  const directory = await mkdtemp(resolve(tmpdir(), 'spitzer-pins-'));
+  const width = 4, height = 2, n = width * height;
+  const theirs = [1, 2, 3, 4, 5, 6, 7, 8];
+  const write = async (name: string, values: readonly number[]) => {
+    const path = resolve(directory, name);
+    await writeFile(path, fitsFile(values, width, height));
+    return path;
+  };
+  const ours = await pinned(await write('ours.fits', theirs.map(value => value + 2)), 'our-mosaic');
+  const archive = await pinned(await write('archive.fits', theirs), 'archive-mosaic');
+  const unc = await pinned(await write('unc.fits', Array.from({ length: n }, () => 1)), 'archive-uncertainty');
+  const cov = await pinned(await write('cov.fits', Array.from({ length: n }, () => 2)), 'archive-coverage');
+
+  // As pinned, our product is two of the archive's own sigmas high, so nothing is inside one sigma.
+  const honest = await compareMosaics(ours, archive, unc, cov);
+  assert.equal(honest.statistics.shareWithinArchiveSigma, 0);
+
+  // Now swap in a valid FITS file with a hugely inflated uncertainty, keeping the pin that was recorded for the real one.
+  // Read unchecked, this would report perfect agreement; the comparison must refuse instead.
+  await writeFile(unc.path, fitsFile(Array.from({ length: n }, () => 1000), width, height));
+  await assert.rejects(compareMosaics(ours, archive, unc, cov), /is not the pinned/u);
+
+  // The same for the mosaic we are checked against, and for the coverage plane that decides which pixels count.
+  await writeFile(unc.path, fitsFile(Array.from({ length: n }, () => 1), width, height));
+  await writeFile(archive.path, fitsFile(theirs.map(value => value + 2), width, height));
+  await assert.rejects(compareMosaics(ours, archive, unc, cov), /is not the pinned/u);
+  await writeFile(archive.path, fitsFile(theirs, width, height));
+  await writeFile(cov.path, fitsFile(Array.from({ length: n }, () => 0), width, height));
+  await assert.rejects(compareMosaics(ours, archive, unc, cov), /is not the pinned/u);
+
+  // Restored bytes compare again, and the identities reported are the ones on disk, not the ones passed in.
+  await writeFile(cov.path, fitsFile(Array.from({ length: n }, () => 2), width, height));
+  const again = await compareMosaics(ours, archive, unc, cov);
+  assert.equal(again.statistics.shareWithinArchiveSigma, 0);
+  for (const entry of again.compared) {
+    const source = [ours, archive, unc, cov].find(file => file.pin.identity === entry.identity)!;
+    assert.equal(entry.sha256, source.pin.sha256);
+  }
 });
 
 test('a reproduction receipt parses, keeps its limits, and refuses another schema', () => {
@@ -139,6 +190,8 @@ test('a reproduction receipt parses, keeps its limits, and refuses another schem
     wavelength: 'IRAC 3.6um',
     archiveProduct: { name: 'maic.fits', bytes: 9797760, sha256: sha('a'), pipeline: 'S18.25.0' },
     ourProduct: { name: 'remosaic.fits', bytes: 100, sha256: sha('b'), stage: 'open-remosaic', toolchainDigest: sha('c'), software: [{ name: 'reproject', version: '0.21.0' }] },
+    archiveUncertainty: { name: 'munc.fits', bytes: 9797760, sha256: sha('d') },
+    archiveCoverage: { name: 'mcov.fits', bytes: 9797760, sha256: sha('e') },
     framesCombined: ['0001', '0003'], frameTimeSeconds: 30,
     statistics: { comparedPixels: 10, archiveCoveredPixels: 12, bitIdenticalShare: 0, medianRatio: 1, medianLevel: 0.07,
       medianAbsoluteDifferenceOverLevel: 0.003, differenceInArchiveSigma: { median: 0.02, p95: 0.25, p99: 2.3, max: 40 },
@@ -148,7 +201,9 @@ test('a reproduction receipt parses, keeps its limits, and refuses another schem
   const parsed = parseReproduction(receipt);
   assert.equal(parsed.ourProduct.stage, 'open-remosaic');
   assert.ok(parsed.limits.some(limit => limit.includes('MOPEX')), 'the receipt says the observatory pipeline did not run');
+  assert.equal(parsed.archiveUncertainty.name, 'munc.fits');
   assert.throws(() => parseReproduction({ ...receipt, schema: 'other' }), /Unsupported/u);
+  assert.throws(() => parseReproduction({ ...receipt, archiveUncertainty: undefined }), /archive uncertainty/u);
   assert.throws(() => parseReproduction({ ...receipt, statistics: { ...receipt.statistics, correlation: 'high' } }), /correlation/u);
 });
 
@@ -200,4 +255,36 @@ test('a ledger counts a mode as checked only from a receipt, and says plainly th
 test("the repository's own state is read from its programs, not declared", async () => {
   const state = await repositoryState();
   for (const [mode, count] of state.checked) assert.ok((state.pinned.get(mode) ?? 0) > 0, `${mode} has ${count} checked products but no pinned channels`);
+});
+
+test('a receipt counts only when the archive files it says it read are the ones the program pinned', async () => {
+  // The committed receipts must survive this, or the ledger is counting checks made against bytes nobody pinned.
+  const real = await repositoryState();
+  const scratch = await mkdtemp(resolve(tmpdir(), 'spitzer-state-'));
+  const pinnedProgram = parseSpitzerProgram(program()), channel = pinnedProgram.channels[0]!;
+  const plane = (role: string) => channel.products.find(product => product.role === role)!;
+  const receipt = (uncertaintySha256: string) => ({
+    schema: 'cssearth-spitzer-reproduction@1', program: pinnedProgram.id, aorKey: pinnedProgram.aorKey, target: pinnedProgram.target,
+    channel: channel.channel, wavelength: channel.wavelength,
+    archiveProduct: { name: plane('mosaic').name, bytes: plane('mosaic').bytes, sha256: plane('mosaic').sha256, pipeline: 'S18.25.0' },
+    ourProduct: { name: 'remosaic.fits', bytes: 100, sha256: sha('b'), stage: 'open-remosaic', toolchainDigest: sha('c'), software: [{ name: 'reproject', version: '0.21.0' }] },
+    archiveUncertainty: { name: plane('mosaic-uncertainty').name, bytes: plane('mosaic-uncertainty').bytes, sha256: uncertaintySha256 },
+    archiveCoverage: { name: plane('mosaic-coverage').name, bytes: plane('mosaic-coverage').bytes, sha256: plane('mosaic-coverage').sha256 },
+    framesCombined: ['0001', '0003'], frameTimeSeconds: 30,
+    statistics: { comparedPixels: 10, archiveCoveredPixels: 12, bitIdenticalShare: 0, medianRatio: 1, medianLevel: 0.07,
+      medianAbsoluteDifferenceOverLevel: 0.003, differenceInArchiveSigma: { median: 0.02, p95: 0.25, p99: 2.3, max: 40 },
+      shareWithinArchiveSigma: 1, shareWithinOnePercent: 0.7, shareWithinFivePercent: 0.93, correlation: 0.98 },
+    limits: LIMITS,
+  });
+  await writeFile(resolve(scratch, `${pinnedProgram.id}.json`), JSON.stringify(program()));
+  const receiptFile = resolve(scratch, `${pinnedProgram.id}.ch1.remosaic.reproduction.json`);
+
+  await writeFile(receiptFile, JSON.stringify(receipt(plane('mosaic-uncertainty').sha256)));
+  assert.equal((await repositoryState(scratch)).checked.get('IRAC Map'), 1);
+
+  // The same receipt, claiming perfect agreement, but measured against some other uncertainty plane: it counts for nothing.
+  await writeFile(receiptFile, JSON.stringify(receipt(sha('f'))));
+  assert.equal((await repositoryState(scratch)).checked.get('IRAC Map'), undefined);
+
+  assert.ok((real.checked.get('IRAC Map') ?? 0) > 0, "this repository's own IRAC Map receipts name the bytes their program pinned");
 });

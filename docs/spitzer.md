@@ -42,7 +42,7 @@ node tools/objects/spitzer/archive-ledger.mts --write
 
 **`mosaic.mts`** drives `mosaic.py` in the pinned environment: read each frame with its own SIP distortion, drop what the imask flags, resample onto the archive's grid with `reproject_exact`, drop an output pixel from a frame that covers less than half of it, put the frames on one background level, average with equal weight per contributing frame. It writes a `cssearth-telescope-product@1` record beside the output naming the exact inputs, parameters, versions and toolchain digest. A second run with the same record and the same bytes does no work.
 
-**`compare.mts`** reads both mosaics with this repository's own FITS reader, row block by row block, and writes the receipt plus a product record whose one piece of evidence is `archive-agreement` naming the exact product.
+**`compare.mts`** checks all four files against their pins before it reads a sample: our mosaic against the record that made it, and the archive's mosaic, uncertainty and coverage planes against the program that fetched them. That check is inside the comparison itself, not in its caller, because the uncertainty plane is the denominator of the headline result: swap it for a valid FITS file with inflated errors and an unchecked comparison would report perfect agreement. It then reads both mosaics with this repository's own FITS reader, row block by row block, and writes the receipt plus a product record whose one piece of evidence is `archive-agreement` naming the exact product. The receipt records the digest of every file it actually read, taken from the bytes on disk and never copied out of the program, and the ledger counts a receipt only when those three digests are the ones its program pinned.
 
 **`archive-ledger.mts`** writes [the Spitzer archive ledger](spitzer-ledger.md).
 
@@ -105,4 +105,4 @@ The channel 3 trade is the one unexplained-looking number in the table above and
 | Compare and receipt | [`tools/objects/spitzer/compare.mts`](../tools/objects/spitzer/compare.mts) |
 | Ledger | [`tools/objects/spitzer/archive-ledger.mts`](../tools/objects/spitzer/archive-ledger.mts), [`docs/spitzer-ledger.md`](spitzer-ledger.md) |
 | Pinned observation and receipts | `tools/objects/spitzer/programs/` |
-| Tests | [`tools/objects/spitzer/spitzer.test.mts`](../tools/objects/spitzer/spitzer.test.mts), 9 tests, no network |
+| Tests | [`tools/objects/spitzer/spitzer.test.mts`](../tools/objects/spitzer/spitzer.test.mts), 11 tests, no network |
