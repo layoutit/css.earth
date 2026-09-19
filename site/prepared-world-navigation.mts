@@ -433,12 +433,12 @@ export function animateWorldFlight({ owner, from, flight, anchors, signal, reduc
         elapsedS = reducedMotion ? requestedElapsedS
           : advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample);
         if (!reducedMotion) elapsedS = easeArrivalInto(flight, previousElapsed, elapsedS, clockS - previousClockS, sample);
-        // The curve approaches its terminal pose exponentially. At extreme range ratios it
-        // reaches that pose before its duration cap; otherwise its last second or so moves the
+        // The curve approaches its terminal pose exponentially; its last second or so moves the
         // view by under a pixel. Finish once the rest is invisible instead of publishing that
-        // tail. A detail readiness hold must still be respected.
+        // tail. Rounded progress is no signal: from galactic range it reaches 1 while the camera
+        // is still thousands of kilometres out. A detail readiness hold must still be respected.
         if (endElapsedS === flight.durationS && permittedEndS >= endElapsedS &&
-            (sample.progress === 1 || arrivalIsInvisible(flight, anchors, sample))) elapsedS = endElapsedS;
+            arrivalIsInvisible(flight, anchors, sample)) elapsedS = endElapsedS;
         const world = worldSample(flight, from, elapsedS, sample);
         const advance = (shown = true, continueNow = false) => {
           if (finished) return;

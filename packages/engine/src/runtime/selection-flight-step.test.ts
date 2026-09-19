@@ -13,6 +13,22 @@ const clearance = (position: PositionM) => Math.min(...anchors.map(anchor =>
   Math.max(anchor.radiusM, distance(position, anchor.positionM) - anchor.radiusM)));
 
 describe('selection flight continuity', () => {
+  it('reaches a small body from galactic range instead of freezing a few thousand kilometres out', () => {
+    // Milky Way overview to Bennu: 2.9e21 m departure, 1,469 m arrival around a 245 m body.
+    const body = [1.5e11, 0, 0] as const, bodies = [{ positionM: body, radiusM: 245 }];
+    const far = createSelectionFlight({ from: pose([0, 0, 2.9e21]), to: pose([1.5e11, 0, 1469]), focusPositionM: body });
+    let elapsed = 0, frames = 0;
+    const out = createSelectionFlightSample();
+    while (elapsed < far.durationS && frames++ < 5000) {
+      const next = advanceSelectionFlightInto(far, bodies, elapsed, far.durationS, out);
+      expect(next).toBeGreaterThan(elapsed);
+      elapsed = next;
+    }
+    expect(elapsed).toBe(far.durationS);
+    expect(distance(out.positionM, body)).toBeCloseTo(1469, 3);
+  });
+
+
   it('bounds default departure movement even after a delayed paint, retaining the original curve', () => {
     expect(distance(sampleSelectionFlight(flight, 1 / 60).positionM, flight.from.positionM)).toBeGreaterThan(1e9);
     for (const requested of [1 / 60, 30]) {
