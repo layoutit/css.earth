@@ -10,6 +10,10 @@ A virtual telescope here is not a picture taken from an archive. It is an observ
 
 Nothing here is retouched by eye. When a re-run and the archive disagree, the receipt says so and the number stands.
 
+One route does none of that on purpose. Where an observatory has retired a pipeline and frozen a calibration, there is nothing
+to run again, and the archive's own final product is all there is. That product is pinned and read whole rather than re-made,
+and the difference is kept visible everywhere: see [two capabilities, never one](#two-capabilities-never-one).
+
 ## The product record
 
 Every producing stage writes one `cssearth-telescope-product@1` record beside its output, named `<product>.product.json`
@@ -127,8 +131,10 @@ candidate answers three separate things:
    - *Time* is unknown unless the ledger dates that object in that mode.
    - *Kilometres on the ground* and *elements across the disc* are the same two facts converted, and they need the range to
      the body, which only the caller knows.
-2. **What the toolkit can do.** No toolkit, a tool with no checked program, or proven on checked receipts, and whether one of
-   those programs is a program of this target.
+2. **What the toolkit can do.** One of four answers, and whether one of those programs is a program of this target: no toolkit;
+   a tool with no checked program; *archive-final products qualified, not re-made here*, which is the archive's own final
+   product pinned and read whole for a mode nothing here re-calibrates; or *recalibrated here and checked*. The third is never
+   reported as the fourth: a retired instrument can reach it and can never reach re-calibration.
 3. **What supports it, and what is still unknown.** The ledger and the date the archive was read, receipts by name, body maps
    beside the object whose observations carry a measured resolution, investigation entries, and a list of what nobody here
    knows until an observation is pinned and read.
@@ -143,8 +149,10 @@ The one authored input is [`modes.json`](../tools/objects/telescopes/modes.json)
 pixel scale, documented point spread function where there is one, and product kind, with the handbook page every number was
 read from. JWST's cube modes take their intervals from `jwst/imaging/bands.mts`, which already states them band by band. A
 mode nobody has sourced is left out, and the query says "capabilities not recorded" for it rather than inventing numbers.
-Nineteen Hubble configurations (aggregates such as `STIS` and `ACS`, and retired instruments such as the FOC, the FOS and the
-HSP) and nine NACO techniques whose own pages state no wavelength range are in that position today.
+Fifteen Hubble configurations (aggregates such as `STIS` and `ACS`, which name no one detector, and retired instruments such
+as the FOC, the WF/PC and the HSP) and nine NACO techniques whose own pages state no wavelength range are in that position
+today. The FOS and GHRS detectors left that list when their handbooks' own ranges were read for the archive-final route; being
+sourced is not being re-calibrated, and the query keeps those two apart.
 
 ### Europa between 3.4 and 3.6 micrometres
 

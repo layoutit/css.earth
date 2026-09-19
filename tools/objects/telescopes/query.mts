@@ -53,13 +53,21 @@ export interface ModeCapability {
 
 export type ConstraintAnswer = 'yes' | 'no' | 'partial' | 'unknown';
 export interface ConstraintVerdict { readonly answer: ConstraintAnswer; readonly reason: string }
-export type ToolkitLevel = 'none' | 'tool-without-checked-program' | 'proven';
+/** What this repository can do with a mode, in rising order of what has actually been established here.
+ *
+ * `archive-final` is its own level and not a weaker `proven`: the observatory's own final product was pinned, downloaded and
+ * read whole, which establishes the bytes and not a re-calibration. A mode whose pipeline is retired can reach it and never
+ * reach `proven`, and a caller asking what was re-made here is never answered with it. */
+export type ToolkitLevel = 'none' | 'archive-final' | 'tool-without-checked-program' | 'proven';
 
 export interface ToolkitSupport {
   readonly level: ToolkitLevel; readonly reason: string;
   readonly tool?: string;
   readonly programs: readonly string[]; readonly checked: readonly string[];
+  /** Programs whose pin of the archive's own final product was checked. Never merged with `checked`, which is re-calibration. */
+  readonly archiveFinalQualified: readonly string[];
   readonly targetProgramPinned: boolean; readonly targetProgramChecked: boolean;
+  readonly targetArchiveFinalQualified: boolean;
 }
 
 export interface MeasuredResolution { readonly path: string; readonly quantity: string; readonly observation: string; readonly angularResolutionArcsec: number; readonly surfaceResolutionKm: number }
@@ -126,7 +134,9 @@ interface TargetMode {
   readonly archiveDate: string;
   readonly observations: { readonly count: number; readonly scope: 'this-mode' | 'object-total' } | null;
   readonly programmes: readonly string[];
-  readonly toolkit: { readonly tool?: string; readonly routeState?: string; readonly refusedBecause?: string; readonly programs: readonly string[]; readonly checked: readonly string[]; readonly receipts: readonly string[] };
+  readonly toolkit: { readonly tool?: string; readonly routeState?: string; readonly refusedBecause?: string; readonly programs: readonly string[]; readonly checked: readonly string[]; readonly receipts: readonly string[];
+    /** Archive-final programs of this mode, and the ones a record qualified. A ledger that states none leaves this out. */
+    readonly archiveFinal?: { readonly programs: readonly string[]; readonly qualified: readonly string[] } };
   /** Dated observations of this target in this mode, where the ledger dates any. */
   readonly dates: readonly { readonly id: string; readonly startIso: string }[];
 }
@@ -225,8 +235,12 @@ function hstModes(value: unknown, target: string): TargetMode[] {
   return stringList(object.configurations, 'configurations').map(mode => {
     const declared = configurations.get(mode), programs = declared ? stringList(declared.programs, `${mode} programs`) : [], checked = declared ? stringList(declared.checked, `${mode} checked`) : [];
     const tool = declared ? optionalString(declared.tool, `${mode} tool`) : undefined;
+    // The two capabilities arrive separately and stay separate: re-calibration in `checked`, the archive's own final products in
+    // `archiveFinal`. A configuration whose pipeline is retired can hold the second and never the first.
+    const archive = declared?.archiveFinal === undefined ? undefined : requireRecord(declared.archiveFinal, `${mode} archiveFinal`);
     return { telescope: 'Hubble', mode, archiveDate, observations: { count, scope: 'object-total' as const }, programmes: [], dates: [],
-      toolkit: { ...(tool ? { tool } : {}), programs, checked, receipts: [] } };
+      toolkit: { ...(tool ? { tool } : {}), programs, checked, receipts: [],
+        ...(archive === undefined ? {} : { archiveFinal: { programs: stringList(archive.programs, `${mode} archive-final programs`), qualified: stringList(archive.qualified, `${mode} archive-final qualified`) } }) } };
   });
 }
 
@@ -383,14 +397,21 @@ function constraintVerdicts(request: CapabilityRequest, mode: TargetMode, capabi
 }
 
 function toolkitSupport(mode: TargetMode, target: string): ToolkitSupport {
-  const { tool, routeState, refusedBecause, programs, checked } = mode.toolkit;
-  const pinned = forTarget(programs, target), passed = forTarget(checked, target);
-  const level: ToolkitLevel = checked.length ? 'proven' : tool || (routeState && routeState !== 'refused') ? 'tool-without-checked-program' : 'none';
+  const { tool, routeState, refusedBecause, programs, checked, archiveFinal } = mode.toolkit;
+  const qualified = archiveFinal?.qualified ?? [];
+  const pinned = forTarget(programs, target), passed = forTarget(checked, target), held = forTarget(qualified, target);
+  // Re-calibrated and checked outranks archive-final, which outranks a tool nothing has been run through. They are never added
+  // together: a mode reaches `archive-final` by having the observatory's own product read here, not by half-reproducing it.
+  const level: ToolkitLevel = checked.length ? 'proven' : qualified.length ? 'archive-final'
+    : tool || (routeState && routeState !== 'refused') ? 'tool-without-checked-program' : 'none';
   const named = tool ? `${tool} reduces this mode` : routeState ? `the route reached the state "${routeState}" on this mode` : 'no tool for this mode is named in the ledger';
+  const archiveSaid = `${qualified.length} archive-final program(s) are qualified: ${qualified.join(', ')}. The archive's own final products were pinned, downloaded and read whole, which establishes those bytes and not a re-calibration here. ${held.length ? `${held.join(', ')} is a program of ${target}.` : `None of them is a program of ${target}.`}`;
   const reason = level === 'none' ? `${refusedBecause ?? `${named}, and no program of it is checked`}.`
-    : level === 'proven' ? `${named}, and ${checked.length} program(s) have a checked receipt: ${checked.join(', ')}. ${passed.length ? `${passed.join(', ')} is a program of ${target}.` : `None of them is a program of ${target}.`}`
+    : level === 'proven' ? `${named}, and ${checked.length} program(s) have a checked receipt: ${checked.join(', ')}. ${passed.length ? `${passed.join(', ')} is a program of ${target}.` : `None of them is a program of ${target}.`}${qualified.length ? ` Separately, ${archiveSaid}` : ''}`
+    : level === 'archive-final' ? `Nothing here re-calibrates this mode: ${named}. ${archiveSaid}`
     : `${named}, but no program of it has a checked receipt yet.`;
-  return { level, reason, ...(tool ? { tool } : {}), programs, checked, targetProgramPinned: pinned.length > 0, targetProgramChecked: passed.length > 0 };
+  return { level, reason, ...(tool ? { tool } : {}), programs, checked, archiveFinalQualified: qualified,
+    targetProgramPinned: pinned.length > 0, targetProgramChecked: passed.length > 0, targetArchiveFinalQualified: held.length > 0 };
 }
 
 interface AttachedEvidence { bodyMaps: MeasuredResolution[]; investigations: { id: string; status: string; subject: string }[] }
@@ -496,7 +517,9 @@ export async function loadQueryInputs(root: string, target: string): Promise<Que
   return { ledgers, capabilities, bodyMaps, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
 }
 
-const LEVEL_WORDS: Readonly<Record<ToolkitLevel, string>> = Object.freeze({ none: 'no toolkit', 'tool-without-checked-program': 'a tool, but no checked program', proven: 'proven on checked programs' });
+const LEVEL_WORDS: Readonly<Record<ToolkitLevel, string>> = Object.freeze({ none: 'no toolkit',
+  'archive-final': 'archive-final products qualified, not re-made here', 'tool-without-checked-program': 'a tool, but no checked program',
+  proven: 'recalibrated here and checked' });
 
 export function formatAnswer(answer: CapabilityAnswer): string {
   const lines = [`${answer.candidates.length} candidate mode(s) observed ${answer.target}, the ones covering ${answer.request.wavelengthMicrometres[0]} to ${answer.request.wavelengthMicrometres[1]} micrometres first.`,
@@ -505,7 +528,8 @@ export function formatAnswer(answer: CapabilityAnswer): string {
     lines.push(`${candidate.telescope} ${candidate.mode}${candidate.observations ? ` (${candidate.observations.count} ${candidate.observations.scope === 'this-mode' ? 'observations in this mode' : 'observations of the object, across its modes'})` : ''}`);
     for (const [name, { answer: verdictAnswer, reason }] of Object.entries(candidate.meetsConstraints)) lines.push(`  ${name}: ${verdictAnswer}. ${reason}`);
     lines.push(`  toolkit: ${LEVEL_WORDS[candidate.toolkitSupport.level]}. ${candidate.toolkitSupport.reason}`);
-    lines.push(`  a program of ${answer.target}: ${candidate.toolkitSupport.targetProgramChecked ? 'pinned and checked' : candidate.toolkitSupport.targetProgramPinned ? 'pinned, not checked' : 'none'}`);
+    lines.push(`  a program of ${answer.target}: ${candidate.toolkitSupport.targetProgramChecked ? 'pinned and checked' : candidate.toolkitSupport.targetProgramPinned ? 'pinned, not checked'
+      : candidate.toolkitSupport.targetArchiveFinalQualified ? 'no re-calibration; its archive-final product is qualified' : 'none'}`);
     lines.push(`  evidence: ${candidate.evidence.ledger} (archive read ${candidate.evidence.archiveDate})${candidate.evidence.receipts.length ? `, receipts ${candidate.evidence.receipts.join(', ')}` : ''}`);
     for (const map of candidate.evidence.bodyMaps) lines.push(`    measured: ${map.path}, ${map.quantity}, ${map.angularResolutionArcsec} arcsec, ${map.surfaceResolutionKm} km at the sub-observer point`);
     for (const entry of candidate.evidence.investigations) lines.push(`    investigation ${entry.id} (${entry.status}): ${entry.subject}`);

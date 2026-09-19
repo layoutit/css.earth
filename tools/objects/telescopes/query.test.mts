@@ -5,7 +5,7 @@ import { test } from 'node:test';
 import { resolve } from 'node:path';
 import { BODY_MAP_SCHEMA } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
-import { ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, queryCapabilities, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
+import { formatAnswer, ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, queryCapabilities, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 const citation = 'https://jwst-docs.stsci.edu/jwst-near-infrared-spectrograph';
@@ -170,6 +170,35 @@ test('a mode the route refuses has no toolkit, and says why in the ledger words'
   assert.equal(imaging.observations?.scope, 'object-total');
 });
 
+test('a retired instrument with a qualified archive-final program is usable with limits, and never reads as re-calibrated', () => {
+  // HRS/1 has no pipeline in the toolchain and never will; what it has is the archive's own final product of one Europa
+  // observation, pinned and read here. The two must not collapse into one answer.
+  const ledger = { ...HST_LEDGER, configurations: [...HST_LEDGER.configurations,
+    { configuration: 'HRS/1', tool: null, programs: [], checked: [], archiveFinal: { programs: ['europa-ghrs-5376'], qualified: ['europa-ghrs-5376'] } },
+    { configuration: 'HRS/2', tool: null, programs: [], checked: [], archiveFinal: { programs: ['europa-ghrs-other'], qualified: [] } }],
+    movingTargets: [{ object: 'europa', observations: 895, configurations: ['STIS/CCD', 'HRS/1', 'HRS/2'] }] };
+  const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [0.13, 0.15] }, inputs([{ telescope: 'hst', value: ledger }]));
+  const qualified = candidate(answer, 'HRS/1').toolkitSupport;
+  assert.equal(qualified.level, 'archive-final');
+  assert.deepEqual(qualified.checked, [], 'nothing was re-calibrated on a retired instrument');
+  assert.equal(qualified.tool, undefined);
+  assert.deepEqual(qualified.archiveFinalQualified, ['europa-ghrs-5376']);
+  assert.equal(qualified.targetProgramChecked, false);
+  assert.equal(qualified.targetArchiveFinalQualified, true);
+  assert.match(qualified.reason, /Nothing here re-calibrates this mode/u);
+  assert.match(qualified.reason, /establishes those bytes and not a re-calibration here/u);
+  // A program listed but not qualified establishes nothing, and the mode drops back to having no toolkit.
+  const listed = candidate(answer, 'HRS/2').toolkitSupport;
+  assert.equal(listed.level, 'none');
+  assert.deepEqual(listed.archiveFinalQualified, []);
+  // A re-calibrated mode is unchanged by any of this.
+  const stis = candidate(answer, 'STIS/CCD').toolkitSupport;
+  assert.equal(stis.level, 'proven');
+  assert.deepEqual(stis.archiveFinalQualified, []);
+  assert.match(formatAnswer(answer), /archive-final products qualified, not re-made here/u);
+  assert.doesNotMatch(formatAnswer(answer).split('Hubble HRS/2')[0]!.split('Hubble HRS/1')[1] ?? '', /recalibrated here and checked/u);
+});
+
 test('a body map reaches the one detector it names, and no other', () => {
   const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [0.45, 0.5] },
     inputs([{ telescope: 'hst', value: HST_LEDGER }], { bodyMaps: [{ path: 'src/objects/europa/source/hst/salt.body-map.json', value: bodyMap('HST', 'STIS/CCD', 'oc-salt-1') }] }));
@@ -254,10 +283,12 @@ test('the committed ledgers: no candidate for any target ever answers yes for sh
 
 /** Ledger modes with no sourced entry in `modes.json`: the query reports each as "capabilities not recorded". A mode leaves
  * this list by being sourced, and a new ledger mode joins it deliberately. Hubble's aggregate keys (ACS, COS, STIS, WFPC2 and
- * COS-STIS) name no one detector, and the rest are retired instruments or NACO techniques whose own pages state no wavelength
- * range. */
-const WITHOUT_CAPABILITIES: readonly string[] = ['Hubble ACS', 'Hubble COS', 'Hubble COS-STIS', 'Hubble FGS', 'Hubble FOC/48', 'Hubble FOC/96', 'Hubble FOS/BL', 'Hubble FOS/RD',
-  'Hubble HRS', 'Hubble HRS/1', 'Hubble HRS/2', 'Hubble HSP/UNK/POL', 'Hubble HSP/UNK/UV1', 'Hubble HSP/UNK/UV2', 'Hubble HSP/UNK/VIS', 'Hubble STIS', 'Hubble WFPC/PC',
+ * COS-STIS) name no one detector, `HRS` is the same where the catalogue names no detector, and the rest are retired instruments or
+ * NACO techniques whose own pages state no wavelength range. The FOS and GHRS detectors left this list when their handbooks'
+ * own ranges were read for the archive-final route; being sourced is not being re-calibrated here, and the query keeps those
+ * two apart. */
+const WITHOUT_CAPABILITIES: readonly string[] = ['Hubble ACS', 'Hubble COS', 'Hubble COS-STIS', 'Hubble FGS', 'Hubble FOC/48', 'Hubble FOC/96',
+  'Hubble HRS', 'Hubble HSP/UNK/POL', 'Hubble HSP/UNK/UV1', 'Hubble HSP/UNK/UV2', 'Hubble HSP/UNK/VIS', 'Hubble STIS', 'Hubble WFPC/PC',
   'Hubble WFPC/WFC', 'Hubble WFPC2', 'VLT/NACO app', 'VLT/NACO chopping', 'VLT/NACO coronography', 'VLT/NACO cube', 'VLT/NACO differential', 'VLT/NACO fabry-perot',
   'VLT/NACO other', 'VLT/NACO sam', 'VLT/NACO sampol'];
 
