@@ -15,7 +15,7 @@ const HEX32 = /^[0-9a-f]{32}$/u, SAFE_NAME = /^[A-Za-z0-9._-]+$/u, MAX_FILE_BYTE
 export interface PdsQualificationSpec {
   readonly id: string; readonly target: string; readonly targetLid: string; readonly targetName: string;
   readonly lidvid: string; readonly telescope: string; readonly archiveTelescope: string; readonly mode: string; readonly instrument: string;
-  readonly kind: 'image'; readonly use: string;
+  readonly kind: 'image'; readonly use: string; readonly units?: string;
 }
 export interface PdsArchiveFile { readonly role: 'label' | 'science' | 'supplemental'; readonly name: string; readonly uri: string;
   readonly bytes: number; readonly md5: string; readonly sha256: string }
@@ -71,6 +71,24 @@ async function acquire(entry: { readonly uri: string; readonly bytes: number; re
 
 const textField = (record: Record<string, unknown>, name: string) => requireString(record[name], `decoded ${name}`);
 const textList = (record: Record<string, unknown>, name: string) => requireArray(record[name], `decoded ${name}`).map((entry, index) => requireString(entry, `decoded ${name}[${index}]`));
+const optionalTextField = (record: Record<string, unknown>, name: string) => record[name] === null || record[name] === undefined ? undefined : textField(record, name);
+const wavelengthMicrometres = (value: number, unit: string) => unit === 'nm' ? value / 1000 : unit === 'Angstrom' ? value / 10_000
+  : unit === 'um' || unit === 'micrometer' ? value : (() => { throw new Error(`Unsupported PDS wavelength unit ${unit}.`); })();
+const wavelengthEdge = (value: number) => Number(value.toPrecision(12));
+
+function decodedBands(metadata: Record<string, unknown>) {
+  const bins = requireArray(metadata.spectralBins, 'decoded spectral bins').map((raw, index) => {
+    const bin = requireRecord(raw, `decoded spectral bin ${index}`), center = Number(textField(bin, 'center')), width = Number(textField(bin, 'width')),
+      centerUnit = textField(bin, 'centerUnit'), widthUnit = textField(bin, 'widthUnit');
+    if (!(center > 0 && width > 0) || centerUnit !== widthUnit) throw new Error('The PDS label has an invalid spectral bin.');
+    const centerUm = wavelengthMicrometres(center, centerUnit), widthUm = wavelengthMicrometres(width, widthUnit);
+    return { filter: textField(bin, 'filter'), interval: [wavelengthEdge(centerUm - widthUm / 2), wavelengthEdge(centerUm + widthUm / 2)] as const };
+  });
+  if (bins.length) return bins;
+  const center = Number(textField(metadata, 'centerFilterWavelength')), width = Number(textField(metadata, 'bandwidth'));
+  if (!(center > 0 && width > 0 && width < center * 2)) throw new Error('The decoded label has no usable filter band.');
+  return [{ filter: textField(metadata, 'filter'), interval: [(center - width / 2) / 10_000, (center + width / 2) / 10_000] as const }];
+}
 
 export async function qualifyPdsArchiveProduct(spec: PdsQualificationSpec, work = resolve(ROOT, 'output/pds', spec.id)) {
   if (!SAFE_NAME.test(spec.id) || !spec.use.trim()) throw new TypeError('A PDS qualification needs a safe id and a stated use.');
@@ -87,31 +105,37 @@ export async function qualifyPdsArchiveProduct(spec: PdsQualificationSpec, work 
   const references = requireArray(metadata.references, 'decoded references').map((entry, index) => requireRecord(entry, `decoded reference ${index}`));
   const targetReferences = references.filter(entry => entry.reference_type === 'data_to_target').map(entry => requireString(entry.lid_reference, 'target reference'));
   const fileNames = textList(metadata, 'fileNames'), registryDataNames = acquired.slice(1).map(file => file.name);
+  const labelStart = optionalTextField(metadata, 'startIso'), labelStop = optionalTextField(metadata, 'stopIso');
   if (`${logicalIdentifier}::${version}` !== spec.lidvid || textField(metadata, 'targetName') !== spec.targetName || !targetReferences.includes(spec.targetLid) ||
-      Date.parse(textField(metadata, 'startIso')) !== Date.parse(product.startIso) || Date.parse(textField(metadata, 'stopIso')) !== Date.parse(product.stopIso) ||
+      (labelStart !== undefined && Date.parse(labelStart) !== Date.parse(product.startIso)) || (labelStop !== undefined && Date.parse(labelStop) !== Date.parse(product.stopIso)) ||
       [...fileNames].sort().join('\n') !== [...registryDataNames].sort().join('\n')) throw new Error('The decoded label disagrees with the selected PDS Registry product.');
   const systems = textList(metadata, 'observingSystem');
   if (!systems.includes(spec.archiveTelescope) || !systems.includes(spec.instrument)) throw new Error('The decoded label names another observing system.');
-  const science = acquired.find(file => /\.fits?$/iu.test(file.name));
-  if (!science || decoded.structures.length !== 1) throw new Error('This qualification route requires one FITS science array.');
+  const science = product.data.length === 1 ? acquired.find(file => file.uri === product.data[0]!.uri) : acquired.find(file => /\.fits?$/iu.test(file.name));
+  if (!science || decoded.structures.length !== 1) throw new Error('This qualification route requires one science data file and one decoded array.');
   const structure = decoded.structures[0]!, shape = requireArray(structure.shape, 'science shape').map(value => requireFiniteNumber(value, 'science axis'));
-  if (shape.length !== 2 || shape.some(value => !Number.isSafeInteger(value) || value < 1)) throw new Error('The decoded science product is not one image.');
-  const centerAngstrom = Number(textField(metadata, 'centerFilterWavelength')), bandwidthAngstrom = Number(textField(metadata, 'bandwidth'));
-  if (!(centerAngstrom > 0 && bandwidthAngstrom > 0 && bandwidthAngstrom < centerAngstrom * 2)) throw new Error('The decoded label has no usable filter band.');
-  const filter = textField(metadata, 'filter'), interval = [(centerAngstrom - bandwidthAngstrom / 2) / 10_000, (centerAngstrom + bandwidthAngstrom / 2) / 10_000];
+  if ((shape.length !== 2 && shape.length !== 3) || shape.some(value => !Number.isSafeInteger(value) || value < 1)) throw new Error('The decoded science product is not one image or multiband image.');
+  const bands = decodedBands(metadata), filters = bands.map(band => band.filter), intervals = bands.map(band => band.interval), filter = filters.join(', '),
+    dataUnits = spec.units ?? textList(metadata, 'units')[0] ?? 'not stated', width = shape.at(-1)!, height = shape.at(-2)!;
+  const resolution = metadata.pixelResolutionX === null || metadata.pixelResolutionX === undefined ? undefined : requireRecord(metadata.pixelResolutionX, 'pixel resolution');
+  const surfaceResolutionKm = resolution === undefined ? undefined : textField(resolution, 'unit') === 'm/pixel' ? Number(textField(resolution, 'value')) / 1000
+    : (() => { throw new Error('Unsupported PDS map-resolution unit.'); })();
   const files: PdsArchiveFile[] = acquired.map(file => ({ role: file.name === label.name ? 'label' : file.name === science.name ? 'science' : 'supplemental',
     name: file.name, uri: file.uri, bytes: file.bytes, md5: file.md5, sha256: file.sha256 }));
   const program = { schema: PDS_ARCHIVE_FINAL_SCHEMA, id: spec.id, target: spec.target, targetLid: spec.targetLid, targetName: spec.targetName,
     telescope: spec.telescope, archiveTelescope: spec.archiveTelescope, mode: spec.mode, instrument: spec.instrument, kind: spec.kind, use: spec.use, lidvid: spec.lidvid,
-    observation: { id: logicalIdentifier.split(':').at(-1), startIso: product.startIso, stopIso: product.stopIso, filter,
-      wavelengthIntervalMicrometres: interval, units: textList(metadata, 'units')[0], width: shape[1], height: shape[0] },
+    observation: { id: logicalIdentifier.split(':').at(-1), startIso: product.startIso, stopIso: product.stopIso, filter, filters,
+      wavelengthIntervalsMicrometres: intervals, ...(intervals.length === 1 ? { wavelengthIntervalMicrometres: intervals[0] } : {}), units: dataUnits, width, height,
+      ...(surfaceResolutionKm === undefined ? {} : { surfaceResolutionKm }), ...(optionalTextField(metadata, 'mapProjection') ? { mapProjection: optionalTextField(metadata, 'mapProjection') } : {}) },
     discovery: { package: 'pds.peppi', version: discovered.peppi, harvestIso: product.harvestIso },
     decoding: { package: 'pdr', version: decodedAnswer.pdr, standard: decoded.standard, structures: decoded.structures }, files,
-    components: [{ role: 'science', supplied: true, file: science.name, units: textList(metadata, 'units')[0] },
-      { role: 'coordinates', supplied: false, reason: 'The label supplies a J2000 field centre and display orientation but no per-pixel celestial WCS or body-surface registration.' },
+    components: [{ role: 'science', supplied: true, file: science.name, units: dataUnits },
+      { role: 'coordinates', supplied: surfaceResolutionKm !== undefined, ...(surfaceResolutionKm === undefined
+        ? { reason: 'The label supplies no per-pixel celestial WCS or body-surface registration.' }
+        : { file: science.name, convention: `${optionalTextField(metadata, 'mapProjection')}; ${optionalTextField(metadata, 'longitudeDirection')}; ${surfaceResolutionKm} km/pixel` }) },
       { role: 'uncertainty', supplied: false, reason: 'This PDS product supplies no uncertainty array.' },
       { role: 'quality', supplied: false, reason: 'This PDS product supplies no per-pixel quality array.' }],
-    note: 'Archive-calibrated detector image. Decoding establishes readable values and label conventions; it does not establish photometric accuracy or a body-surface map.' } as const;
+    note: 'Archive-final image or multiband mapped image. Decoding establishes readable values and label conventions; it does not establish calibration accuracy beyond the archive product.' } as const;
   await mkdir(PDS_PROGRAMS, { recursive: true });
   const programPath = resolve(PDS_PROGRAMS, `${spec.id}.archive-final.json`), recordPath = resolve(PDS_PROGRAMS, `${spec.id}.archive-final.product.json`);
   await writeFile(programPath, `${JSON.stringify(program, null, 2)}\n`);
@@ -119,14 +143,15 @@ export async function qualifyPdsArchiveProduct(spec: PdsQualificationSpec, work 
   const toolchain = await pdsToolchain(), run: ProductRun = { telescope: spec.telescope, stage: 'archive-final', inputs, software: [], toolchainDigest: toolchain.digest,
     parameters: { selection: { program: spec.id, target: spec.target, targetLid: spec.targetLid, lidvid: spec.lidvid, kind: spec.kind, use: spec.use },
       identityAgreedWith: { registry: { targetNames: product.targetNames, targetLids: product.targetLids, observingSystem: product.observingSystem, startIso: product.startIso, stopIso: product.stopIso },
-        label: { logicalIdentifier, version, targetName: spec.targetName, targetLid: spec.targetLid, observingSystem: systems, startIso: product.startIso, stopIso: product.stopIso } },
+        label: { logicalIdentifier, version, targetName: spec.targetName, targetLid: spec.targetLid, observingSystem: systems, startIso: labelStart ?? null, stopIso: labelStop ?? null } },
       qualificationPackages: { peppi: discovered.peppi, pdr: decodedAnswer.pdr },
-      measured: { kind: spec.kind, width: shape[1], height: shape[0], units: textList(metadata, 'units')[0], filter, wavelengthIntervalMicrometres: interval,
-        decodedStructure: structure, uncertaintySupplied: false, worldCoordinateSystemSupplied: false, surfaceRegistrationSupplied: false } } };
+      measured: { kind: spec.kind, width, height, units: dataUnits, filters, wavelengthIntervalsMicrometres: intervals,
+        decodedStructure: structure, uncertaintySupplied: false, worldCoordinateSystemSupplied: false, surfaceRegistrationSupplied: surfaceResolutionKm !== undefined,
+        ...(surfaceResolutionKm === undefined ? {} : { surfaceResolutionKm, mapProjection: optionalTextField(metadata, 'mapProjection'), longitudeDirection: optionalTextField(metadata, 'longitudeDirection') }) } } };
   const receipt = `tools/objects/pds/programs/${spec.id}.archive-final.product.json`;
   const record = await writeProductRecord(recordPath, run, files.map(file => ({ path: file.name, file: resolve(work, file.name),
-    ...(file.name === science.name ? { units: textList(metadata, 'units')[0], conventions: { filter: `${filter}; ${interval[0]} to ${interval[1]} micrometres from the PDS label`,
-      registration: 'detector image only; no body-surface registration', qualification: spec.use } } : {}) })),
+    ...(file.name === science.name ? { units: dataUnits, conventions: { filters: bands.map(band => `${band.filter}: ${band.interval[0]} to ${band.interval[1]} micrometres`).join('; '),
+      registration: surfaceResolutionKm === undefined ? 'detector image only; no body-surface registration' : `${optionalTextField(metadata, 'mapProjection')} map at ${surfaceResolutionKm} km/pixel`, qualification: spec.use } } : {}) })),
     [{ kind: 'archive-origin', receipt, product: science.name,
       establishes: `${science.name} and every file referenced by ${spec.lidvid} match the PDS Registry sizes and MD5 values, are pinned here by SHA-256, and pdr ${decodedAnswer.pdr} decoded the complete science array. This establishes origin, integrity and readability only; no local calibration or archive agreement is claimed.` }]);
   return { program, record, programPath, recordPath, productPath: science.path };

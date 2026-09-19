@@ -8,7 +8,7 @@ endorsement by the Astropy Team or Astroquery contributors.
 # PDS packages
 
 cssEarth installs [pds.peppi 0.5.0](https://github.com/NASA-PDS/peppi) and
-[pdr 1.4.4](https://github.com/MillionConcepts/pdr) into an ignored local Conda environment. Peppi owns exact PDS4 Registry
+[pdr 1.4.4](https://github.com/MillionConcepts/pdr) into an ignored local Conda environment. Peppi owns complete paginated target searches and exact PDS4 Registry
 discovery and pdr owns supported PDS3/PDS4 decoding. cssEarth copies or modifies neither package. It retains the complete
 archive file set, byte pins, intended-use checks and scientific qualification. Peppi is copyright California Institute of
 Technology and distributed under Apache-2.0; pdr is copyright 2021 Million Concepts and distributed under BSD-3-Clause.

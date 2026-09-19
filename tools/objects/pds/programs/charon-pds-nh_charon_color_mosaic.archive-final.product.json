@@ -1,0 +1,140 @@
+{
+  "schema": "cssearth-telescope-product@1",
+  "telescope": "New Horizons",
+  "stage": "archive-final",
+  "inputs": [
+    {
+      "role": "label",
+      "identity": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/mosaic/nh_charon_color_mosaic.lblx",
+      "bytes": 14320,
+      "sha256": "939f23390f8d7f525821b822d06bf15d08ba49ee5bc472af6ed4c41c4f2a2a40"
+    },
+    {
+      "role": "science",
+      "identity": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/mosaic/nh_charon_color_mosaic.img",
+      "bytes": 116006912,
+      "sha256": "dd23352035996d670b9c278a1466461623556acc88d66aabd3bc2da1dd15fc5a"
+    }
+  ],
+  "parameters": {
+    "selection": {
+      "program": "charon-pds-nh_charon_color_mosaic",
+      "target": "charon",
+      "targetLid": "urn:nasa:pds:context:target:satellite.134340_pluto.charon",
+      "lidvid": "urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0",
+      "kind": "image",
+      "use": "Archive-derived, body-registered multiband map. Suitable as a pinned telescope product; wavelength bands and map sampling come from its PDS4 label."
+    },
+    "identityAgreedWith": {
+      "registry": {
+        "targetNames": [
+          "(134340) Pluto I (Charon)"
+        ],
+        "targetLids": [
+          "urn:nasa:pds:context:target:satellite.134340_pluto.charon"
+        ],
+        "observingSystem": [
+          "New Horizons",
+          "Multispectral Visible Imaging Camera"
+        ],
+        "startIso": "1965-01-01T00:00:00.000Z",
+        "stopIso": "3000-01-01T00:00:00.000Z"
+      },
+      "label": {
+        "logicalIdentifier": "urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic",
+        "version": "1.0",
+        "targetName": "(134340) Pluto I (Charon)",
+        "targetLid": "urn:nasa:pds:context:target:satellite.134340_pluto.charon",
+        "observingSystem": [
+          "New Horizons",
+          "Multispectral Visible Imaging Camera"
+        ],
+        "startIso": null,
+        "stopIso": null
+      }
+    },
+    "qualificationPackages": {
+      "peppi": "0.5.0",
+      "pdr": "1.4.4"
+    },
+    "measured": {
+      "kind": "image",
+      "width": 3808,
+      "height": 1904,
+      "units": "dimensionless relative values, no longer strictly I/F",
+      "filters": [
+        "CH4",
+        "NIR",
+        "Red",
+        "Blue"
+      ],
+      "wavelengthIntervalsMicrometres": [
+        [
+          0.875,
+          0.915
+        ],
+        [
+          0.78,
+          0.96
+        ],
+        [
+          0.55,
+          0.7
+        ],
+        [
+          0.4,
+          0.55
+        ]
+      ],
+      "decodedStructure": {
+        "name": "ImageCube",
+        "shape": [
+          4,
+          1904,
+          3808
+        ],
+        "dtype": "float32",
+        "elements": 29001728,
+        "masked": 0,
+        "special": 12578753,
+        "finite": 16422975,
+        "minimum": -0.6026026606559753,
+        "maximum": 9.126089096069336
+      },
+      "uncertaintySupplied": false,
+      "worldCoordinateSystemSupplied": false,
+      "surfaceRegistrationSupplied": true,
+      "surfaceResolutionKm": 1,
+      "mapProjection": "Equirectangular",
+      "longitudeDirection": "Positive East"
+    }
+  },
+  "software": [],
+  "toolchainDigest": "13d5f2d75a9fb5d3dc50b9af6fbcf8eff076afc64bda18ebbd09dacafc3803c5",
+  "outputs": [
+    {
+      "path": "nh_charon_color_mosaic.lblx",
+      "bytes": 14320,
+      "sha256": "939f23390f8d7f525821b822d06bf15d08ba49ee5bc472af6ed4c41c4f2a2a40"
+    },
+    {
+      "path": "nh_charon_color_mosaic.img",
+      "bytes": 116006912,
+      "sha256": "dd23352035996d670b9c278a1466461623556acc88d66aabd3bc2da1dd15fc5a",
+      "units": "dimensionless relative values, no longer strictly I/F",
+      "conventions": {
+        "filters": "CH4: 0.875 to 0.915 micrometres; NIR: 0.78 to 0.96 micrometres; Red: 0.55 to 0.7 micrometres; Blue: 0.4 to 0.55 micrometres",
+        "registration": "Equirectangular map at 1 km/pixel",
+        "qualification": "Archive-derived, body-registered multiband map. Suitable as a pinned telescope product; wavelength bands and map sampling come from its PDS4 label."
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "archive-origin",
+      "receipt": "tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+      "product": "nh_charon_color_mosaic.img",
+      "establishes": "nh_charon_color_mosaic.img and every file referenced by urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0 match the PDS Registry sizes and MD5 values, are pinned here by SHA-256, and pdr 1.4.4 decoded the complete science array. This establishes origin, integrity and readability only; no local calibration or archive agreement is claimed."
+    }
+  ]
+}

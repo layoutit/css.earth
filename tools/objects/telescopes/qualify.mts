@@ -109,15 +109,17 @@ async function qualifyNacoImaging(root: string, request: QualificationRequest): 
     receipt: resolve(NACO_PROGRAMS, `${programId}.COADDED_IMG.reproduction.json`), archiveProgramme: configuration.programme };
 }
 
-async function qualifyLowellLmi(root: string, request: QualificationRequest): Promise<QualificationResult> {
-  if (request.configuration.kind !== 'pds-product') throw new TypeError('Lowell LMI qualification requires an exact PDS product.');
-  const { answer, observation } = await indexedObservation(root, request, [0.520975, 0.697365]), configuration = request.configuration;
+async function qualifyPdsProduct(root: string, request: QualificationRequest): Promise<QualificationResult> {
+  if (request.configuration.kind !== 'pds-product') throw new TypeError('PDS qualification requires an exact product.');
+  const { answer, observation } = await indexedObservation(root, request, [0.000001, 1_000_000]), configuration = request.configuration;
   if (observation.productLidvid !== configuration.lidvid || observation.targetLid !== configuration.targetLid || observation.archiveTarget !== configuration.targetName)
     throw new Error(`${request.observation} does not match the indexed PDS identity.`);
+  if (!observation.observatory || !observation.instrument || observation.kind !== 'image' || !observation.use)
+    throw new Error(`${request.observation} does not carry the complete PDS qualification description.`);
   const programId = `${answer.target}-pds-${request.observation}`;
   const result = await qualifyPdsArchiveProduct({ id: programId, target: answer.target, targetLid: configuration.targetLid, targetName: configuration.targetName,
-    lidvid: configuration.lidvid, telescope: 'Lowell/LDT', archiveTelescope: 'Lowell Discovery Telescope (LDT)', mode: 'LMI/VR calibrated image', instrument: 'Large Monolithic Imager', kind: 'image',
-    use: 'Archive-calibrated VR detector image of the unresolved Didymos system; suitable as a pinned telescope product, not as a resolved body-surface map.' }, resolve(root, 'output/pds', programId));
+    lidvid: configuration.lidvid, telescope: request.telescope, archiveTelescope: observation.observatory, mode: request.mode, instrument: observation.instrument, kind: 'image',
+    use: observation.use, ...(observation.units ? { units: observation.units } : {}) }, resolve(root, 'output/pds', programId));
   await writeFile(resolve(root, 'data/pds/ledger.json'), `${JSON.stringify(await buildPdsLedger(), null, 2)}\n`);
   return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
     program: programId, configuration, product: result.productPath, receipt: result.recordPath, archiveProgramme: configuration.lidvid };
@@ -127,11 +129,10 @@ const QUALIFIERS: Readonly<Record<string, (root: string, request: QualificationR
   'Spitzer :: IRAC Map': qualifySpitzerIrac,
   'JWST :: NIRSPEC/IFU': qualifyJwstNirspec,
   'VLT/NACO :: imaging': qualifyNacoImaging,
-  'Lowell/LDT :: LMI/VR calibrated image': qualifyLowellLmi,
 });
 
 export async function qualifyObservation(root: string, request: QualificationRequest): Promise<QualificationResult> {
-  const qualifier = QUALIFIERS[`${request.telescope} :: ${request.mode}`];
+  const qualifier = request.configuration.kind === 'pds-product' ? qualifyPdsProduct : QUALIFIERS[`${request.telescope} :: ${request.mode}`];
   if (!qualifier) throw new TypeError(`No qualification implementation is registered for ${request.telescope} ${request.mode}.`);
   return qualifier(root, request);
 }
