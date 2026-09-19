@@ -618,7 +618,7 @@ export function createUnboundedMatrixDragControls({
         onStart();
         if (lifetime.disposed) return Promise.resolve({ completed: false });
         const completion = new Promise<MotionCompletion>(resolve => {
-          flyToMotion = { sample, durationMilliseconds, startedAt: null, finish: completed => resolve({ completed }) };
+          flyToMotion = { sample, durationMilliseconds, startedAt: null, elapsedMilliseconds: 0, previousTimestamp: null, speed: 1, finish: completed => resolve({ completed }) };
         });
         flyToFrame = requestFrame(animateFlyTo);
         return completion;

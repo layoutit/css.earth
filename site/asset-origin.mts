@@ -25,7 +25,14 @@ export function assetShaMap(id: string, root = process.cwd()): Promise<Readonly<
   let cached = manifestCache.get(id);
   if (!cached) {
     cached = (async () => {
-      const bytes = await readFile(resolve(root, 'src/objects', id, 'runtime-assets.json'), 'utf8');
+      let bytes: string;
+      try { bytes = await readFile(resolve(root, 'src/objects', id, 'runtime-assets.json'), 'utf8'); }
+      catch (error) {
+        // An object with no public scene assets (e.g. a context object that only has
+        // prepared-assets.json) has nothing to resolve against the asset origin.
+        if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return Object.freeze({});
+        throw error;
+      }
       const manifest = requireRuntimeAssetManifest(id, JSON.parse(bytes) as unknown);
       return Object.freeze(Object.fromEntries(manifest.assets.map(asset => [asset.filename, asset.sha256])));
     })();

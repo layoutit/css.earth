@@ -1,6 +1,6 @@
 # css.earth 🌎
 
-A 3D CSS astrovisualization platform. [css.earth](https://css.earth) renders celestial bodies as real HTML and CSS 3D geometry through [PolyCSS](https://github.com/LayoutitStudio/polycss), without a WebGL or canvas scene renderer. css.earth preprocesses open space data into browser-ready textures, meshes, and scene files, then loads them into a single model of the universe.
+A 3D CSS astrovisualization platform. [css.earth](https://css.earth) renders celestial bodies as real HTML and CSS 3D geometry through [PolyCSS](https://github.com/LayoutitStudio/polycss), without WebGL or canvas. It turns open space data into browser-ready textures, meshes and scene files, loaded into one model of the universe.
 
 Explore the live version: [css.earth](https://css.earth) 🔭
 
@@ -8,28 +8,33 @@ Join [chat.polycss.com](https://chat.polycss.com) for support and community disc
 
 <img src=".github/assets/planets-contact-sheet.webp" alt="The eight planets, Mercury to Neptune, each rendered as DOM and CSS markup" width="960">
 
-## How It Works
+## Motivation
 
-css.earth outputs one URL per celestial body with a shared camera, so you can fly from Saturn to another galaxy without leaving the page. So far, it covers 495 objects:
+Space agencies and observatories publish decades of public data, but it is buried in archives, formats and papers that are hard to access for the general public. css.earth mounts that data in the 3D DOM, with every pixel traceable to the original source.
 
-- **The Solar System:** the Sun, the eight planets, 5 dwarf planets, 99 moons, 311 asteroids, 32 comets and 17 other trans-Neptunian objects, all on their orbits. Where a mission photographed a body, its surface comes from that mission's images; the rest are shown as shape models.
+Other universe browsers already exist, and many of them inspired this platform: NASA's [Eyes on the Solar System](https://eyes.nasa.gov/apps/solar-system/), [OpenSpace](https://www.openspaceproject.com/), [Celestia](https://celestiaproject.space/), [Stellarium](https://stellarium.org/) and [Google Earth](https://earth.google.com/). The difference is that [css.earth](https://css.earth) does not need WebGL: it runs in any modern browser, which makes it easier to open and share. It even works without JavaScript!
+
+## What You Can Explore
+
+Every object has its own URL and they all share one camera, so you can fly from Saturn to another galaxy without leaving the page. There are 495 bodies so far, plus the nebulae and galaxies below.
+
+### The Solar System
+
+The Sun, the eight planets, 5 dwarf planets, 99 moons, 311 asteroids, 32 comets and 17 other trans-Neptunian objects, all on their orbits. Where a mission photographed a body, its surface comes from that mission's images; the rest are shown as shape models.
 
 <img src=".github/assets/solar-system.webp" alt="The inner Solar System out to Saturn, with orbits and labels, rendered as DOM and CSS markup" width="960">
 
-- **Stars and exoplanets:** stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and planetary systems beyond the Sun, such as WASP-43, HD 189733 and TRAPPIST-1.
-- **Interstellar visitors:** 'Oumuamua, Borisov and 3I/ATLAS.
-- **Nebulae:** the Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus the Pleiades cluster.
-- **Galaxies:** the Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group and the nearby universe.
+### Stars and Exoplanets
 
-<img src=".github/assets/milky-way-lmc.webp" alt="The Milky Way beside the Large Magellanic Cloud, rendered as DOM and CSS markup" width="960">
+Stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and planetary systems beyond the Sun, such as WASP-43, HD 189733 and TRAPPIST-1.
 
-## Motivation
+<img src=".github/assets/stars-exoplanets.webp" alt="Betelgeuse's imaged surface, and the planet TRAPPIST-1b coloured by its JWST MIRI 15 µm temperature map, hot day side to cold night side, rendered as DOM and CSS markup" width="960">
 
-Space agencies and observatories publish decades of public data, but it is buried in archives, formats and papers that are hard to access for the general public. css.earth mounts that data in the 3D DOM, with every surface traceable to the original product. Every pixel has a source.
+### Nebulae and Galaxies
 
-Other universe browsers already exist, and many of them inspired this platform: NASA's [Eyes on the Solar System](https://eyes.nasa.gov/apps/solar-system/), [OpenSpace](https://www.openspaceproject.com/), [Celestia](https://celestiaproject.space/), [Stellarium](https://stellarium.org/) and [Google Earth](https://earth.google.com/). 
+The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus the Pleiades cluster. Beyond them: the Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group and the nearby universe.
 
-The key difference is that css.earth does not need WebGL: it runs in any modern browser, which makes it easier to open and share. It even works without JavaScript!
+<img src=".github/assets/nebulae-galaxies.webp" alt="The Crab Nebula as a 3D volume, and the Milky Way seen at an angle from outside, rendered as DOM and CSS markup" width="960">
 
 ## Datasets
 
@@ -57,15 +62,11 @@ Preparation reads archive formats directly with in-house TypeScript readers. The
 
 ## Architecture
 
-css.earth is built on the [PolyCSS](https://github.com/LayoutitStudio/polycss) 3D DOM rendering engine. Every body is a mesh of real HTML elements: faces are placed with CSS `matrix3d(...)` transforms and painted from prepared texture atlases. The scene uses no `<canvas>` or WebGL, and no `clip-path`, masks, filters, gradients or blend modes at runtime.
-
-Preparation reads the original products: PDS and FITS images, shape models, SPICE kernels, star catalogues, interferometric and radio data, and published fact sheets. It checks each input against its pinned hash, then writes the textures, geometry, lighting, orbits, labels and page text for each object. The outputs are reproducible from the checked-in inputs, and each one records the sources it came from.
-
-Each object is a package under [`src/objects/<id>/`](src/objects/README.md) with its pinned inputs, preparation recipe and README. One `OBJECTS` registry, one application shell and one shared camera serve every object, and only one object scene is mounted at a time.
-
-Git tracks a small inventory of each object's prepared files; the files themselves are stored in R2 by content hash. `pnpm setup:assets` downloads them into the checkout, Astro builds the site, and Netlify serves it.
-
-The browser does not derive geometry, textures or charts. It loads the prepared state for the selected object, mounts it into a retained DOM, and moves the camera. Earth is the one object that pages its prepared imagery in and out as you zoom towards city level.
+- **Rendering:** every body is a [PolyCSS](https://github.com/LayoutitStudio/polycss) mesh of HTML elements, placed with CSS `matrix3d(...)` and painted from prepared texture atlases. No canvas or WebGL.
+- **Preparation:** Node reads the original products, checks each against its pinned hash, and writes the textures, geometry, orbits and page text, each recording its sources.
+- **Objects:** each one is a package under [`src/objects/<id>/`](src/objects/README.md). One registry, one shell and one camera serve them all.
+- **Delivery:** prepared files are stored in R2; `pnpm setup:assets` fetches them before Astro builds the site for Netlify.
+- **Runtime:** the browser loads prepared state and moves the camera. It never derives geometry or textures.
 
 ## How to Run
 
