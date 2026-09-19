@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { aboutStar, candidateVerdict, fetchRetrying, readmeImageLines, readmeInterferometric, summariseOidb, tapUrl } from './star-candidates.mts';
+import { aboutStar, candidateVerdict, fetchRetrying, readmeImageLines, readmeInterferometric, summariseOidb } from './star-candidates.mts';
 
 // The CE Tauri deposit's ReadMe, abridged to the lines the reader parses (CDS J/A+A/614/A12).
 const CE_TAU_README = `File Summary:
@@ -22,9 +22,7 @@ alfsco1.gif    512      14393   Animated gif movie of reconstructed images
 
 Byte-by-byte Description of file: list.dat`;
 
-test('a query is sent as an encoded ADQL request for JSON', () => {
-  assert.equal(tapUrl('https://example.org/tap/sync', "SELECT * FROM t WHERE id = 'a b'"), 'https://example.org/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=json&QUERY=SELECT%20*%20FROM%20t%20WHERE%20id%20%3D%20\'a%20b\'');
-});
+
 
 test('OiDB granules group by instrument, level, data PI and bibcode, most calibrated first, without single-telescope images', () => {
   const groups = summariseOidb([

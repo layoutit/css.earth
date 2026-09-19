@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
-import { mapBasisCurves } from './phase-curve.mts';
+import { mapBasisCurves, mapPhaseCurve, mirrorGrid } from './phase-curve.mts';
 import { equalAngleGrid } from './eigenmap-fit.mts';
 
 test('light time leaves the transit where it is and delays the eclipse by 2a sin(i)/c', () => {
@@ -22,4 +22,19 @@ test('light time leaves the transit where it is and delays the eclipse by 2a sin
   const transit = Float64Array.from({ length: 60 }, (_, i) => orbit.transitTimeBmjdTdb + 1000 * orbit.periodDays + (i - 30) / 86400);
   const [a] = mapBasisCurves([uniform], grid, orbit, host, rp, transit), [b] = mapBasisCurves([uniform], grid, orbit, host, rp, transit, undefined, { stellarRadiusKm });
   assert.ok(a!.every((value, i) => Math.abs(value - b![i]!) < 1e-9));
+});
+
+test('a uniform sphere stays normalized and longitude mirroring reverses a circular phase curve', () => {
+  const orbit = hostedOrbit('wasp-43b'), host = starAstrometry('wasp-43'), rp = BODIES['wasp-43b'].meanRadiusKm / BODIES['wasp-43'].meanRadiusKm;
+  const grid = equalAngleGrid(45, 90), uniform = new Float64Array(grid.latitudes.length).fill(1 / Math.PI);
+  const phases = [0.1, 0.25, 0.75, 0.9], outsideEclipse = Float64Array.from(phases, phase => orbit.transitTimeBmjdTdb + phase * orbit.periodDays);
+  const normalized = mapPhaseCurve({ ...grid, values: uniform }, orbit, host, rp, outsideEclipse);
+  normalized.forEach(value => assert.ok(Math.abs(value - 1) < 1e-4, `uniform flux ${value}`));
+
+  const values = Float64Array.from(grid.latitudes, (latitude, i) => (1 + 0.5 * Math.cos(latitude * Math.PI / 180) * Math.cos((grid.longitudes[i]! - 37) * Math.PI / 180)) / Math.PI);
+  const eclipse = orbit.transitTimeBmjdTdb + orbit.periodDays / 2, offsets = Float64Array.from({ length: 41 }, (_, i) => (i - 20) * 0.01);
+  const forward = mapPhaseCurve({ ...grid, values }, orbit, host, rp, Float64Array.from(offsets, offset => eclipse + offset));
+  const reversed = mapPhaseCurve(mirrorGrid({ ...grid, values }, 'longitude'), orbit, host, rp, Float64Array.from(offsets, offset => eclipse - offset));
+  forward.forEach((value, i) => assert.ok(Math.abs(value - reversed[i]!) < 2e-8, `mirrored sample ${i}: ${value} vs ${reversed[i]}`));
+  assert.equal(forward[20], 0, 'the planet is hidden at mid-eclipse');
 });

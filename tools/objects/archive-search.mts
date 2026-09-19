@@ -7,7 +7,9 @@
  * - DataCite: datasets (Zenodo, figshare, Dryad and others) whose metadata cites a paper's DOI;
  * - the JMMC Measured Stellar Diameters Catalogue (VizieR II/345), so an archive's resolution can be set against a disc.
  *
- * Each search is split into a query and a pure summary of the rows it returns; the summaries are what the tests pin.
+ * PyVO owns every TAP transaction (ALMA and ESO here); Astroquery owns MAST and the VizieR cone search. DataCite remains direct
+ * because neither package owns its REST API. Each search is split into a query and a pure summary of the rows it returns; the
+ * summaries are what the tests pin.
  * A search finds leads, never a verdict: a frame still needs a camera, registration and reuse terms before it can ship.
  *
  * Not searched: the PDS registry (its target index, checked 2026-09-16, lists only Lucy's SPICE collections for Dinkinesh although
@@ -15,54 +17,21 @@
  * that no DataCite record describes.
  */
 import { requireArray, requireRecord } from '../source-values.mts';
+import { astroqueryRows, tapRows } from './astronomy-packages/client.mts';
+import { mastRequest } from './astronomy-packages/mast.mts';
 
-export const ALMA_TAP = 'https://almascience.eso.org/tap/sync', ESO_TAP = 'https://archive.eso.org/tap_obs/sync';
-export const MAST_API = 'https://mast.stsci.edu/api/v0/invoke', DATACITE_API = 'https://api.datacite.org/dois';
-export const VIZIER_TAP = 'https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync';
+export const ESO_TAP = 'https://archive.eso.org/tap_obs', ALMA_TAP = 'https://almascience.eso.org/tap', DATACITE_API = 'https://api.datacite.org/dois';
 
 export const adqlString = (text: string) => `'${text.replaceAll("'", "''")}'`;
 
 /** Where to look: a sky position (a star) or the names a solar-system body is observed under. */
 export type ArchiveTarget = { readonly position: { readonly ra: number; readonly dec: number; readonly radiusDegrees: number } } | { readonly names: readonly string[] };
 
-/** RFC 4180 CSV, as the ALMA and ESO TAP services return it (neither returns JSON). */
-export function parseCsv(text: string): Record<string, string>[] {
-  const rows: string[][] = [];
-  let row: string[] = [], field = '', quoted = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (quoted) {
-      if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
-      else if (c === '"') quoted = false;
-      else field += c;
-    } else if (c === '"') quoted = true;
-    else if (c === ',') { row.push(field); field = ''; }
-    else if (c === '\n' || c === '\r') {
-      if (c === '\r' && text[i + 1] === '\n') i++;
-      row.push(field); field = '';
-      if (row.some(cell => cell !== '')) rows.push(row);
-      row = [];
-    } else field += c;
-  }
-  if (field !== '' || row.length) { row.push(field); if (row.some(cell => cell !== '')) rows.push(row); }
-  const [header, ...body] = rows;
-  return header ? body.map(cells => Object.fromEntries(header.map((name, i) => [name, cells[i] ?? '']))) : [];
-}
-
 /** A dropped connection is retried; a service error is reported with the reason a TAP VOTable carries. */
 export async function fetchRetrying(url: string, attempts = 3, fetcher: typeof fetch = fetch, init?: RequestInit): Promise<Response> {
   for (let attempt = 1; ; attempt++) {
     try { return await fetcher(url, init); } catch (error) { if (attempt >= attempts) throw error; }
   }
-}
-
-async function csvTap(service: string, query: string) {
-  const url = `${service}?${new URLSearchParams({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', QUERY: query })}`;
-  const response = await fetchRetrying(url), text = await response.text();
-  if (!response.ok || text.includes('QUERY_STATUS" value="ERROR"')) {
-    throw new Error(`${service} answered ${response.status}: ${text.match(/QUERY_STATUS" value="ERROR">([^<]*)/u)?.[1]?.trim() ?? 'no reason given'}.`);
-  }
-  return parseCsv(text);
 }
 
 /** ADQL has no case-insensitive LIKE on every service (the ESO archive lacks UPPER), so each name is tried as written, upper and lower case. */
@@ -106,7 +75,7 @@ export async function almaObservations(target: ArchiveTarget, diameterMas: numbe
   const where = 'position' in target
     ? `INTERSECTS(CIRCLE('ICRS', ${target.position.ra}, ${target.position.dec}, ${target.position.radiusDegrees}), s_region) = 1`
     : nameMatch('target_name', target.names);
-  return summariseAlma(await csvTap(ALMA_TAP, `SELECT proposal_id, band_list, target_name, spatial_resolution, t_min, data_rights, first_author FROM ivoa.obscore WHERE ${where}`), diameterMas);
+  return summariseAlma(await tapRows(ALMA_TAP, `SELECT proposal_id, band_list, target_name, spatial_resolution, t_min, data_rights, first_author FROM ivoa.obscore WHERE ${where}`), diameterMas);
 }
 
 /** Instruments whose frames can resolve a disc: long-baseline interferometers and adaptive-optics imagers on one telescope. */
@@ -140,7 +109,7 @@ export async function esoRawObservations(target: ArchiveTarget) {
     const { ra, dec, radiusDegrees } = target.position, widened = radiusDegrees / Math.max(Math.cos(dec * Math.PI / 180), 1e-6);
     return `ra BETWEEN ${ra - widened} AND ${ra + widened} AND dec BETWEEN ${dec - radiusDegrees} AND ${dec + radiusDegrees}`;
   })() : nameMatch('object', target.names);
-  return summariseEsoRaw(await csvTap(ESO_TAP, `SELECT instrument, COUNT(*) AS frames, MIN(date_obs) AS first_date, MAX(date_obs) AS last_date, MIN(release_date) AS first_release FROM dbo.raw WHERE dp_cat = 'SCIENCE' AND ${where} GROUP BY instrument`));
+  return summariseEsoRaw(await tapRows(ESO_TAP, `SELECT instrument, COUNT(*) AS frames, MIN(date_obs) AS first_date, MAX(date_obs) AS last_date, MIN(release_date) AS first_release FROM dbo.raw WHERE dp_cat = 'SCIENCE' AND ${where} GROUP BY instrument`));
 }
 
 export interface MastGroup { readonly collection: string; readonly instrument: string; readonly productType: string; readonly proposals: readonly string[]; readonly observations: number }
@@ -167,11 +136,7 @@ export async function mastObservations(target: ArchiveTarget) {
     : target.names.filter(name => name.length >= 3).map(name => ({ service: 'Mast.Caom.Filtered', format: 'json', pagesize: 5000,
       params: { columns, filters: [{ paramName: 'target_name', values: [], freeText: `%${name}%` }] } }));
   const rows: unknown[] = [];
-  for (const body of requests) {
-    const response = await fetchRetrying(MAST_API, 3, fetch, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: `request=${encodeURIComponent(JSON.stringify(body))}` });
-    if (!response.ok) throw new Error(`MAST answered ${response.status}.`);
-    rows.push(...requireArray(requireRecord(await response.json()).data ?? []));
-  }
+  for (const body of requests) rows.push(...await mastRequest(body));
   return summariseMast(rows);
 }
 
@@ -222,11 +187,8 @@ export function parseJmdc(rows: readonly (readonly unknown[])[]): { measurements
 }
 
 export async function measuredDiameters(ra: number, dec: number, radiusDegrees = 30 / 3600) {
-  const url = `${VIZIER_TAP}?${new URLSearchParams({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'json',
-    QUERY: `SELECT "UDdiam", "LDdiam", "Band", "BibCode" FROM "II/345/jmdc" WHERE 1 = CONTAINS(POINT('ICRS', "_RA", "_DE"), CIRCLE('ICRS', ${ra}, ${dec}, ${radiusDegrees}))` })}`;
-  const response = await fetchRetrying(url);
-  if (!response.ok) throw new Error(`VizieR answered ${response.status} for JMDC.`);
-  return parseJmdc(requireArray(requireRecord(await response.json()).data ?? []).map(row => requireArray(row)));
+  const rows = await astroqueryRows({ operation: 'vizier-region', catalog: 'II/345/jmdc', ra, dec, radiusDegrees, columns: ['UDdiam', 'LDdiam', 'Band', 'BibCode'] });
+  return parseJmdc(rows.map(row => [row.UDdiam, row.LDdiam, row.Band, row.BibCode]));
 }
 
 export interface ArchiveLeads { readonly alma: readonly AlmaGroup[]; readonly eso: readonly EsoGroup[]; readonly mast: readonly MastGroup[]; readonly deposits: readonly Deposit[] }

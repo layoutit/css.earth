@@ -24,7 +24,7 @@ import { INSTRUMENT, MODES, PROGRAMS, rawQuery, REFUSED_TECHNIQUES, type NacoMod
 const repository = resolve(import.meta.dirname, '../../..');
 export const LEDGER = resolve(repository, 'data/naco/ledger.json');
 export const GUIDE = resolve(repository, 'docs/naco-ledger.md');
-export const SCHEMA = 'cssearth-naco-ledger@1';
+export const SCHEMA = 'cssearth-naco-ledger@2';
 
 /** Frame categories that are never an observation of the object: pointing exposures, background exposures and tests. */
 export const NON_OBSERVING_CATEGORIES = ['ACQUISITION', 'TEST'] as const;
@@ -67,6 +67,19 @@ export interface ObjectObservation {
   readonly frames: number;
   readonly programmes: readonly string[];
   readonly modes: readonly string[];
+  /** Runnable archive identities, one per programme, target spelling, mode and observing night. */
+  readonly records: readonly NacoObservationRecord[];
+}
+
+export interface NacoObservationRecord {
+  readonly id: string;
+  readonly programme: string;
+  readonly archiveTarget: string;
+  readonly mode: string;
+  readonly night: string;
+  readonly startIso: string;
+  readonly endIso: string;
+  readonly frames: number;
 }
 
 /** What a mode can be: reduced by an accepted receipt, pinned and unproved, refused by this route, or untouched. */
@@ -104,25 +117,12 @@ export function bucketOf(technique: string): string {
   return 'other';
 }
 
-/** The archive's CSV for an aggregate query, as rows keyed by column name. `parseRawTable` cannot be used here: it is for
- * frame tables and requires a `dp_id` column, which a `GROUP BY` result has none of. Quoted fields may hold commas, which is
- * why a NACO technique like `"IMAGE,JITTER"` needs the quoting rule and not a split on commas. */
-export function parseCsv(text: string): Record<string, string>[] {
-  const lines = text.split('\n').filter(line => line.trim());
-  if (!lines.length) return [];
-  const split = (line: string) => [...line.matchAll(/("([^"]*)"|[^,]*)(,|$)/gu)].slice(0, -1).map(match => match[2] ?? match[1] ?? '');
-  const header = split(lines[0]!);
-  return lines.slice(1).map(line => { const cells = split(line); return Object.fromEntries(header.map((name, index) => [name, cells[index] ?? ''])); });
-}
-
-const csv = (text: string) => parseCsv(text);
-
 /** Counts by category and by technique, grouped by the archive and not here. */
 export async function frameCounts(today: string) {
-  const byCategory = csv(await rawQuery(`SELECT dp_cat, count(*) AS n FROM dbo.raw WHERE instrument = '${INSTRUMENT}'`
-    + ` AND release_date < '${today}' GROUP BY dp_cat`));
-  const byTechnique = csv(await rawQuery(`SELECT dp_tech, count(*) AS n FROM dbo.raw WHERE instrument = '${INSTRUMENT}'`
-    + ` AND release_date < '${today}' AND dp_cat = 'SCIENCE' GROUP BY dp_tech`));
+  const byCategory = await rawQuery(`SELECT dp_cat, count(*) AS n FROM dbo.raw WHERE instrument = '${INSTRUMENT}'`
+    + ` AND release_date < '${today}' GROUP BY dp_cat`);
+  const byTechnique = await rawQuery(`SELECT dp_tech, count(*) AS n FROM dbo.raw WHERE instrument = '${INSTRUMENT}'`
+    + ` AND release_date < '${today}' AND dp_cat = 'SCIENCE' GROUP BY dp_tech`);
   const categories: Record<string, number> = {}, modes: Record<string, number> = {};
   for (const row of byCategory) categories[row.dp_cat!] = Number(row.n);
   for (const row of byTechnique) { const bucket = bucketOf(row.dp_tech!); modes[bucket] = (modes[bucket] ?? 0) + Number(row.n); }
@@ -136,7 +136,18 @@ export async function scienceTargets(today: string) {
     + ` AND release_date < '${today}' AND dp_cat = 'SCIENCE'`
     + ` AND dp_type NOT IN (${NON_OBSERVING_TYPES.map(type => `'${type}'`).join(', ')})`
     + ' GROUP BY object, prog_id, dp_tech';
-  return csv(await rawQuery(query));
+  return rawQuery(query);
+}
+
+/** The timestamps behind the shipped targets' aggregate counts. Kept separate so the archive still does every global count. */
+export async function scienceObservationRows(today: string, targets: readonly string[]) {
+  if (!targets.length) return [];
+  const literal = (value: string) => `'${value.replaceAll("'", "''")}'`;
+  const query = 'SELECT object, prog_id, dp_tech, exp_start FROM dbo.raw'
+    + ` WHERE instrument = '${INSTRUMENT}' AND release_date < '${today}' AND dp_cat = 'SCIENCE'`
+    + ` AND dp_type NOT IN (${NON_OBSERVING_TYPES.map(type => `'${type}'`).join(', ')})`
+    + ` AND object IN (${targets.map(literal).join(', ')}) ORDER BY object, prog_id, dp_tech, exp_start`;
+  return rawQuery(query);
 }
 
 /** The shipped object ids: the directories of src/objects. */
@@ -146,7 +157,8 @@ export async function shippedObjects() {
 }
 
 /** Group the archive's science rows by the shipped object they name. */
-export function observationsOf(rows: readonly Record<string, string>[], shipped: ReadonlySet<string>): ObjectObservation[] {
+export function observationsOf(rows: readonly Record<string, string>[], shipped: ReadonlySet<string>,
+  observationRows: readonly Record<string, string>[] = []): ObjectObservation[] {
   const byId = new Map<string, { targets: Set<string>; frames: number; programmes: Set<string>; modes: Set<string> }>();
   for (const row of rows) {
     const id = matchShippedObject(row.object ?? '', shipped);
@@ -156,9 +168,24 @@ export function observationsOf(rows: readonly Record<string, string>[], shipped:
     entry.modes.add(bucketOf(row.dp_tech ?? ''));
     byId.set(id, entry);
   }
+  const records = new Map<string, Map<string, { programme: string; archiveTarget: string; mode: string; night: string; starts: string[] }>>();
+  for (const row of observationRows) {
+    const id = matchShippedObject(row.object ?? '', shipped), start = row.exp_start ?? '';
+    if (!id || !/^\d{4}-\d{2}-\d{2}T/u.test(start)) continue;
+    const programme = row.prog_id ?? '', archiveTarget = row.object ?? '', mode = bucketOf(row.dp_tech ?? ''), night = start.slice(0, 10);
+    const key = `${programme}\u0000${archiveTarget}\u0000${mode}\u0000${night}`, objectRecords = records.get(id) ?? new Map();
+    const record = objectRecords.get(key) ?? { programme, archiveTarget, mode, night, starts: [] };
+    record.starts.push(start); objectRecords.set(key, record); records.set(id, objectRecords);
+  }
   return [...byId].map(([id, entry]) => ({
     id, targets: [...entry.targets].sort(), frames: entry.frames,
     programmes: [...entry.programmes].sort(), modes: [...entry.modes].sort(),
+    records: [...records.get(id)?.values() ?? []].map(record => ({
+      id: `${record.programme.replace(/[^A-Za-z0-9._-]+/gu, '-').replace(/^-|-$/gu, '')}`
+        + `-${record.archiveTarget.replace(/[^A-Za-z0-9._-]+/gu, '-').replace(/^-|-$/gu, '')}-${record.night}-${record.mode}`,
+      programme: record.programme, archiveTarget: record.archiveTarget, mode: record.mode, night: record.night,
+      startIso: record.starts[0]!, endIso: record.starts.at(-1)!, frames: record.starts.length,
+    })).sort((a, b) => a.startIso.localeCompare(b.startIso) || a.id.localeCompare(b.id)),
   })).sort((a, b) => b.frames - a.frames || a.id.localeCompare(b.id));
 }
 
@@ -235,8 +262,9 @@ export async function modeStates(byMode: Readonly<Record<string, number>>, direc
 
 export async function buildLedger(today = new Date().toISOString().slice(0, 10)): Promise<Ledger> {
   const frames = await frameCounts(today);
-  const rows = await scienceTargets(today);
-  const objects = observationsOf(rows, await shippedObjects());
+  const rows = await scienceTargets(today), shipped = await shippedObjects();
+  const targets = [...new Set(rows.filter(row => matchShippedObject(row.object ?? '', shipped)).map(row => row.object!))].sort();
+  const objects = observationsOf(rows, shipped, await scienceObservationRows(today, targets));
   const { modes, problems } = await modeStates(frames.byMode);
   return { schema: SCHEMA, instrument: INSTRUMENT, measured: today, frames, objects, modes, receiptProblems: problems };
 }
@@ -253,7 +281,12 @@ export function parseLedger(value: unknown): Ledger {
     frames: { total: requireFiniteNumber(frames.total, 'Total frames'), byCategory: counts(frames.byCategory, 'Frames by category'), byMode: counts(frames.byMode, 'Frames by mode') },
     objects: requireArray(row.objects, 'Objects').map(raw => { const entry = requireRecord(raw, 'Object');
       return { id: requireString(entry.id, 'Object id'), targets: names(entry.targets, 'Archive target names'), frames: requireFiniteNumber(entry.frames, 'Frames'),
-        programmes: names(entry.programmes, 'Programmes'), modes: names(entry.modes, 'Modes') }; }),
+        programmes: names(entry.programmes, 'Programmes'), modes: names(entry.modes, 'Modes'),
+        records: requireArray(entry.records, 'Observation records').map(rawRecord => { const record = requireRecord(rawRecord, 'Observation record');
+          return { id: requireString(record.id, 'Observation id'), programme: requireString(record.programme, 'Observation programme'),
+            archiveTarget: requireString(record.archiveTarget, 'Observation archive target'), mode: requireString(record.mode, 'Observation mode'),
+            night: requireString(record.night, 'Observation night'), startIso: requireString(record.startIso, 'Observation start'),
+            endIso: requireString(record.endIso, 'Observation end'), frames: requireFiniteNumber(record.frames, 'Observation frames') }; }) }; }),
     modes: requireArray(row.modes, 'Modes').map(raw => { const entry = requireRecord(raw, 'Mode'), state = requireString(entry.state, 'State');
       if (!isModeState(state)) throw new TypeError(`${state} is not a mode state.`);
       return { mode: requireString(entry.mode, 'Mode name'), frames: requireFiniteNumber(entry.frames, 'Frames'), programs: names(entry.programs, 'Programs'),
@@ -292,6 +325,9 @@ ${ledger.objects.length} of this project's objects appear as a NACO science targ
 excluded, so these are exposures on the body. A target name carrying a minor-planet number matches only the id that carries
 the same number, which is why 52 Europa and Europa are two rows and not one.
 
+Each object also retains one machine-readable record per programme, archive target spelling, mode and observing night. Those
+records are the identities the telescope query passes back to the NACO qualification route; the table stays an aggregate.
+
 | object | frames | modes | programmes | archive target names |
 | --- | ---: | --- | --- | --- |
 ${objects.join('\n')}
@@ -310,16 +346,25 @@ const reportProblems = (problems: readonly string[]) => {
   if (problems.length) process.exitCode = 1;
 };
 
+/** Refresh only receipt-derived state after a qualification run; archive holdings remain the measured snapshot on disk. */
+export async function refreshLocalLedger() {
+  const held = parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown), { modes, problems } = await modeStates(held.frames.byMode);
+  const ledger = { ...held, modes, receiptProblems: problems };
+  await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
+  await writeFile(GUIDE, ledgerGuide(ledger));
+  return ledger;
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const local = process.argv.includes('--local');
   let ledger: Ledger;
-  if (local) {
-    const held = parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown), { modes, problems } = await modeStates(held.frames.byMode);
-    ledger = { ...held, modes, receiptProblems: problems };
-  } else ledger = await buildLedger();
+  if (local) ledger = await refreshLocalLedger();
+  else ledger = await buildLedger();
   await mkdir(resolve(repository, 'data/naco'), { recursive: true });
-  await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
-  await writeFile(GUIDE, ledgerGuide(ledger));
+  if (!local) {
+    await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
+    await writeFile(GUIDE, ledgerGuide(ledger));
+  }
   console.log(`${LEDGER}: ${thousands(ledger.frames.total)} frames, ${ledger.objects.length} shipped objects, ${ledger.modes.length} modes${local ? ' (pinned state only)' : ''}.`);
   reportProblems(ledger.receiptProblems);
 }

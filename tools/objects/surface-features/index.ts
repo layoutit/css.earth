@@ -1,7 +1,8 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
+import { surfaceFeatureBankIndex } from '../../../src/platform/surface-feature-banks.mts';
 import { execFileSync } from 'node:child_process';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { relative, resolve } from 'node:path';
+import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
+import { extname, relative, resolve } from 'node:path';
 import { parseDbf } from './dbf.js';
 import { parseFeatureNotes, type FeatureNotes } from './notes-schema.js';
 import { loadNaturalEarthRows, parseNaturalEarthConfig, type NaturalEarthConfig } from './natural-earth.js';
@@ -64,6 +65,8 @@ export interface SurfaceFeaturesConfig {
   readonly kinds: Readonly<Record<SurfaceFeatureKind, readonly string[]>>;
   readonly excludedTypeCodes: Readonly<Record<string, string>>;
   readonly labelPolicy: SurfaceFeaturePolicy;
+  /** Optional demand-loaded banks for names that search can select but the default map never labels. */
+  readonly selectionBankCount?: number;
   /** Retained screen-space line pieces that trace the hovered feature's published diameter. */
   readonly outline: { readonly pieces: number };
   /** Optional mapped-structure archive whose traces replace extent boxes for the listed type codes. */
@@ -125,8 +128,9 @@ export interface PreparedSurfaceFeatureCatalog {
   readonly features: readonly PreparedSurfaceFeature[];
 }
 export interface SurfaceFeatureCatalogDescriptor { readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number; }
+export interface SurfaceFeatureSelectionPlan { readonly count: number; readonly banks: readonly SurfaceFeatureCatalogDescriptor[]; }
 export interface PreparedSurfaceFeaturePlan {
-  readonly catalog: SurfaceFeatureCatalogDescriptor; readonly target: number; readonly lensIds: readonly string[];
+  readonly catalog: SurfaceFeatureCatalogDescriptor; readonly selection?: SurfaceFeatureSelectionPlan; readonly target: number; readonly lensIds: readonly string[];
   /** Mesh radius in raw prepared scene coordinates (before the camera's scene scale). */
   readonly meshRadiusUnits: number; readonly policy: SurfaceFeaturePolicy;
   /** Shape-model bodies: the radius band of the picking mesh, inside which every anchor and outline point lies. */
@@ -185,6 +189,8 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
   if (!/^\/scenes\/[a-z][a-z0-9-]*\/$/u.test(publicBase)) throw new TypeError('features recipe publicBase must be a scene directory.');
   const output = text(input.output, 'features recipe output');
   if (!/^[a-z0-9][a-z0-9@._-]*\.json$/u.test(output)) throw new TypeError('features recipe output must be a safe JSON filename.');
+  const selectionBankCount = input.selectionBankCount === undefined ? undefined : integer(input.selectionBankCount, 'selectionBankCount', 2);
+  if (selectionBankCount !== undefined && selectionBankCount > 256) throw new TypeError('selectionBankCount exceeds the prepared bank limit.');
   return Object.freeze({
     schema: SURFACE_FEATURES_CONFIG_SCHEMA,
     directory: relativePath(input.directory, 'features recipe directory'), archive: input.archive === null ? null : relativePath(input.archive, 'features recipe archive'),
@@ -192,6 +198,7 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
     surfaceMap: relativePath(input.surfaceMap, 'features recipe surfaceMap'),
     output, publicBase, target: { className: text(target.className, 'target.className'), withoutClassName: target.withoutClassName === undefined ? null : text(target.withoutClassName, 'target.withoutClassName') },
     lensIds: Object.freeze([...lensIds as string[]]), kinds: Object.freeze(kinds), excludedTypeCodes: Object.freeze({ ...excluded as Record<string, string> }), labelPolicy: Object.freeze(policy),
+    ...(selectionBankCount === undefined ? {} : { selectionBankCount }),
     outline: Object.freeze(outline), ...(traces ? { traces } : {}), ...(input.notes === undefined ? {} : { notes: relativePath(input.notes, 'features recipe notes') }), ...(input.naturalEarth === undefined ? {} : { naturalEarth: parseNaturalEarthConfig(input.naturalEarth) }), ...(input.sites === undefined ? {} : { sites: parseSitesRecipe(input.sites) }), ...(input.landmarks === undefined ? {} : { landmarks: parseLandmarksRecipe(input.landmarks) }),
   });
 }
@@ -672,17 +679,58 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     ...(landmarks ? { landmarks: { source: landmarks.source, frame: landmarks.frame, evidence: landmarks.evidence } } : {}),
     features,
   };
-  const bytes = Buffer.from(`${JSON.stringify(catalog)}\n`);
   await mkdir(context.publicDirectory, { recursive: true });
   await mkdir(context.outputDirectory, { recursive: true });
+  const transported = config.selectionBankCount === undefined ? features : features.map((feature, preparedIndex) => ({ ...feature, preparedIndex }));
+  const searchable = config.selectionBankCount === undefined ? [] : transported.filter(feature => feature.searchOnly);
+  const labels = config.selectionBankCount === undefined ? transported : transported.filter(feature => !feature.searchOnly);
+  if (config.selectionBankCount !== undefined && (!labels.length || !searchable.length)) {
+    throw new TypeError('Prepared feature banks require both default labels and search-only names.');
+  }
+  const publicCatalog = { ...catalog, features: labels };
+  const bytes = Buffer.from(`${JSON.stringify(publicCatalog)}\n`);
   await writeFile(resolve(context.publicDirectory, config.output), bytes);
+  const catalogDescriptor: SurfaceFeatureCatalogDescriptor = {
+    url: `${config.publicBase}${config.output}`, bytes: bytes.length, sha256: sha256(bytes), count: labels.length,
+  };
+  const stem = config.output.slice(0, -extname(config.output).length);
+  let selection: SurfaceFeatureSelectionPlan | undefined;
+  if (config.selectionBankCount !== undefined) {
+    const buckets: PreparedSurfaceFeature[][] = Array.from({ length: config.selectionBankCount }, () => []);
+    for (const feature of searchable) buckets[surfaceFeatureBankIndex(feature.id, buckets.length)]!.push(feature);
+    if (buckets.some(bucket => bucket.length === 0)) throw new TypeError('Prepared feature bank count leaves an empty selection bank.');
+    const width = String(buckets.length - 1).length;
+    const expected = new Set<string>();
+    const banks: SurfaceFeatureCatalogDescriptor[] = [];
+    for (const [index, bankFeatures] of buckets.entries()) {
+      const filename = `${stem}-selection-${String(index).padStart(width, '0')}.json`;
+      expected.add(filename);
+      const bank = { schema: PREPARED_SURFACE_FEATURES_SCHEMA, objectId: context.objectId,
+        source: manifest.source, snapshotDate: manifest.snapshotDate, sourcePage: manifest.sourcePage,
+        license: manifest.license, qualification: manifest.qualification, features: bankFeatures };
+      const bankBytes = Buffer.from(`${JSON.stringify(bank)}\n`);
+      await writeFile(resolve(context.publicDirectory, filename), bankBytes);
+      banks.push({ url: `${config.publicBase}${filename}`, bytes: bankBytes.length, sha256: sha256(bankBytes), count: bankFeatures.length });
+    }
+    for (const filename of await readdir(context.publicDirectory)) {
+      if (filename.startsWith(`${stem}-selection-`) && filename.endsWith('.json') && !expected.has(filename)) {
+        await unlink(resolve(context.publicDirectory, filename));
+      }
+    }
+    selection = Object.freeze({ count: searchable.length, banks: Object.freeze(banks) });
+  } else {
+    for (const filename of await readdir(context.publicDirectory)) {
+      if (filename.startsWith(`${stem}-selection-`) && filename.endsWith('.json')) await unlink(resolve(context.publicDirectory, filename));
+    }
+  }
   const plan: PreparedSurfaceFeaturePlan = {
-    catalog: { url: `${config.publicBase}${config.output}`, bytes: bytes.length, sha256: sha256(bytes), count: features.length },
+    catalog: catalogDescriptor, ...(selection ? { selection } : {}),
     target: hitTarget(context, config.target), lensIds: config.lensIds, meshRadiusUnits: context.meshRadiusUnits, policy: config.labelPolicy,
     ...(context.hitMesh ? { surfaceRadiusUnits: meshRadiusBand(context.hitMesh.triangles) } : {}), ...(context.surface ? { surfaceEllipsoidUnits: context.surface.plan() } : {}),
     outline: config.outline,
   };
-  const descriptor = { schema: 'cssearth-prepared-features@1', objectId: context.objectId, ...plan.catalog, source: manifest.source, sourcePage: manifest.sourcePage,
+  const descriptor = { schema: 'cssearth-prepared-features@1', objectId: context.objectId, ...plan.catalog,
+    ...(selection ? { selection, totalCount: features.length } : {}), source: manifest.source, sourcePage: manifest.sourcePage,
     license: manifest.license, snapshotDate: manifest.snapshotDate, mapLeftEdgeLongitudeDeg: axes.mapLeftEdgeLongitudeDeg, excluded, skipped, assumed: catalog.assumed, duplicates: catalog.duplicates, ...(catalog.traces ? { traces: catalog.traces } : {}) };
   await writeFile(resolve(context.outputDirectory, 'features.json'), `${JSON.stringify(descriptor)}\n`);
   return { plan, descriptor, catalog };

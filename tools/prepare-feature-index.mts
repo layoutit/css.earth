@@ -23,12 +23,35 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
     const descriptor: unknown = await readFile(resolve(root, 'src/objects', object.id, 'prepared/features.json'), 'utf8').then(JSON.parse, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
     if (descriptor === null) continue;
     if (!record(descriptor) || descriptor.schema !== 'cssearth-prepared-features@1') throw new TypeError(`${object.id}: prepared features descriptor is invalid.`);
-    const url = text(descriptor.url, `${object.id} catalogue url`), file = url.split('/').at(-1)!;
-    const bytes = await readFile(resolve(root, 'public/scenes', object.id, file));
-    if (bytes.length !== descriptor.bytes || sha256(bytes) !== descriptor.sha256) throw new Error(`${object.id}: the public feature catalogue does not match its prepared descriptor; run pnpm prepare:planets.`);
-    const catalog: unknown = JSON.parse(bytes.toString('utf8'));
-    if (!record(catalog) || !Array.isArray(catalog.features) || catalog.features.length !== descriptor.count) throw new TypeError(`${object.id}: feature catalogue count differs from its descriptor.`);
-    for (const value of catalog.features as unknown[]) {
+    const pins: Record<string, unknown>[] = [descriptor];
+    if (descriptor.selection !== undefined) {
+      const selection = descriptor.selection;
+      if (!record(selection) || !Array.isArray(selection.banks) || !Number.isSafeInteger(selection.count) || Number(selection.count) < 1) throw new TypeError(`${object.id}: feature selection descriptor is invalid.`);
+      for (const bank of selection.banks) {
+        if (!record(bank)) throw new TypeError(`${object.id}: feature selection bank is invalid.`);
+        pins.push(bank);
+      }
+    }
+    const values: unknown[] = [];
+    let catalog: Record<string, unknown> | null = null;
+    for (const pin of pins) {
+      const url = text(pin.url, `${object.id} catalogue url`), file = url.split('/').at(-1)!;
+      const bytes = await readFile(resolve(root, 'public/scenes', object.id, file));
+      if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`${object.id}: the public feature catalogue does not match its prepared descriptor; run pnpm prepare:planets.`);
+      const part: unknown = JSON.parse(bytes.toString('utf8'));
+      if (!record(part) || !Array.isArray(part.features) || part.features.length !== pin.count) throw new TypeError(`${object.id}: feature catalogue count differs from its descriptor.`);
+      catalog ??= part;
+      values.push(...part.features);
+    }
+    if (!catalog || descriptor.totalCount !== undefined && descriptor.totalCount !== values.length) throw new TypeError(`${object.id}: total feature catalogue count differs from its descriptor.`);
+    if (descriptor.selection !== undefined) values.sort((left, right) => {
+      if (!record(left) || !record(right) || !Number.isSafeInteger(left.preparedIndex) || !Number.isSafeInteger(right.preparedIndex)) throw new TypeError(`${object.id}: banked feature order is invalid.`);
+      return Number(left.preparedIndex) - Number(right.preparedIndex);
+    });
+    if (descriptor.selection !== undefined && values.some((value, index) => !record(value) || value.preparedIndex !== index)) {
+      throw new TypeError(`${object.id}: banked feature order is incomplete or duplicated.`);
+    }
+    for (const value of values) {
       if (!record(value) || !Array.isArray(value.searchNames)) throw new TypeError(`${object.id}: feature record is invalid.`);
       features.push({ objectId: object.id, id: text(value.id, 'feature id'), name: text(value.name, 'feature name'), type: text(value.type, 'feature type'), diameterKm: finite(value.diameterKm, 'feature diameter'),
         searchNames: value.searchNames.map(name => text(name, 'feature search name')), searchContext: text(value.searchContext, 'feature search context') });
@@ -41,7 +64,7 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
       if (!record(runtime) || !record(runtime.features) || !Array.isArray(runtime.features.lensIds) || !runtime.features.lensIds.length) throw new TypeError(`${object.id}: landmark datasets are missing.`);
       lensIds = runtime.features.lensIds.map(id => text(id, 'landmark dataset'));
     }
-    objects.push({ id: object.id, name: object.name, route: object.route, count: catalog.features.length, ...(lensIds ? { lensIds } : {}) });
+    objects.push({ id: object.id, name: object.name, route: object.route, count: values.length, ...(lensIds ? { lensIds } : {}) });
   }
   const index = { schema: FEATURE_INDEX_SCHEMA, objects, features };
   const encoded = Buffer.from(`${JSON.stringify(index)}\n`);

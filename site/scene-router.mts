@@ -216,9 +216,24 @@ export function createSceneRouter({
         if (!scenes.isCurrent(session)) return;
       }
       worldContextMount?.restoreFocus?.(session.url ?? windowTarget.location.href);
-      // Restore the incoming camera before admitting optional texture detail.
-      // This also keeps refinements out of the flight's critical path.
-      mount.refineTextures?.();
+      // Restore the incoming camera before arming optional texture detail. An
+      // untouched page keeps its prepared coarse surface; the first real input
+      // admits the 2048 refinement outside the cold-load critical path.
+      if (mount.refineTextures) {
+        const releaseRefinement = () => {
+          removeRefinementListeners();
+          if (scenes.isCurrent(session)) mount.refineTextures?.();
+        };
+        const removeRefinementListeners = () => {
+          windowTarget.removeEventListener('pointerdown', releaseRefinement);
+          windowTarget.removeEventListener('wheel', releaseRefinement);
+          windowTarget.removeEventListener('keydown', releaseRefinement);
+        };
+        windowTarget.addEventListener('pointerdown', releaseRefinement, { once: true });
+        windowTarget.addEventListener('wheel', releaseRefinement, { once: true, passive: true });
+        windowTarget.addEventListener('keydown', releaseRefinement, { once: true });
+        session.own(removeRefinementListeners);
+      }
       if (mount.destinations) shell.setDestinations?.({
         ...mount.destinations,
         async select(place) {

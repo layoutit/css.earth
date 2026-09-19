@@ -21,7 +21,7 @@ test('preflight owns a bank until exactly one matching scene claims it', async (
 test('preflight resolves its image bank against the published asset origin', async () => {
   const assets: PreparedAssets = {
     entries: [{ key: 'surface', url: '/scenes/venus/surface.webp', pool: 'surface' }],
-    pools: [{ id: 'surface', capacity: 1, concurrency: 1, retention: 'mount' }],
+    pools: [{ id: 'surface', capacity: 1, concurrency: 1, reuse: false, retention: 'mount' }],
     startup: ['surface'],
   };
   const images: { src: string; decoding: 'async'; naturalWidth: number; naturalHeight: number; decode(): Promise<void> }[] = [];

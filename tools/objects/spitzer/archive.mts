@@ -359,6 +359,10 @@ export function parseSpitzerProgram(value: unknown): SpitzerProgram {
 
 export const programPath = (id: string) => resolve(PROGRAMS, `${id}.json`);
 export const readSpitzerProgram = async (id: string): Promise<SpitzerProgram> => parseSpitzerProgram(JSON.parse(await readFile(programPath(id), 'utf8')) as unknown);
+export async function writeSpitzerProgram(program: SpitzerProgram): Promise<void> {
+  await mkdir(PROGRAMS, { recursive: true });
+  await writeFile(programPath(program.id), `${JSON.stringify(program, null, 2)}\n`);
+}
 /** Where a program's pinned bytes live by default: outside the repository, because they are megabytes of archive data. */
 export const defaultDataRoot = resolve(REPOSITORY, 'output/spitzer');
 
@@ -367,8 +371,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (!id || !key) throw new TypeError('Usage: archive <program id> <aorkey> [--channels 1,2,3,4] [--data <dir>]');
   const channels = (flagValue(args, '--channels') ?? '1,2,3,4').split(',').map(entry => Number(entry.trim()));
   const program = await pinProgram(id, Number(key), channels, flagValue(args, '--data') ?? defaultDataRoot);
-  await mkdir(PROGRAMS, { recursive: true });
-  await writeFile(programPath(id), `${JSON.stringify(program, null, 2)}\n`);
+  await writeSpitzerProgram(program);
   const files = program.channels.reduce((total, channel) => total + channel.products.length + channel.frames.reduce((n, frame) => n + frame.files.length, 0), 0);
   console.log(`${program.id}: AOR ${program.aorKey}, ${program.target}, ${program.mode}, programme ${program.programme}; ${program.channels.length} channels, ${files} files pinned.`);
   for (const channel of program.channels)

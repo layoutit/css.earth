@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-jwst-spec3-reproduction@2",
+  "program": "io-jw01373-o024_t007_nirspec_g395h-f290lp",
+  "band": "NIRSPEC-G395H-F290LP",
+  "observation": "jw01373-o024_t007_nirspec_g395h-f290lp",
+  "toolchain": "tools/objects/jwst/toolchain.json",
+  "crdsContext": "jwst_1535.pmap",
+  "mast": {
+    "name": "jw01373-o024_t007_nirspec_g395h-f290lp_s3d.fits",
+    "uri": "mast:JWST/product/jw01373-o024_t007_nirspec_g395h-f290lp_s3d.fits",
+    "bytes": 187683840,
+    "sha256": "b2ea0017f9629f076c1cea3e1ed7b67f31c3ff427e5abe1632e4209c40aa7865",
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "local": {
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "comparison": {
+    "kind": "requested-wavelength-slice",
+    "requestedWavelengthMicrometres": [
+      3.4,
+      3.6
+    ],
+    "archivePlanes": [
+      796,
+      1098
+    ]
+  },
+  "grid": {
+    "width": 59,
+    "height": 55,
+    "planes": 303,
+    "arcsecPerPixel": 0.10000000149011605,
+    "micrometres": [
+      3.3996723852178543,
+      3.600502385088475
+    ]
+  },
+  "samples": {
+    "both": 539579,
+    "onlyOurs": 0,
+    "onlyMast": 0,
+    "identicalShare": 0.9998443230741003,
+    "correlation": 1,
+    "largestRelativeDifferenceAboveMedian": 1.1698094182222007e-7
+  }
+}

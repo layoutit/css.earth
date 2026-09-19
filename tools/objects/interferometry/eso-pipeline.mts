@@ -11,6 +11,7 @@ import { resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { esoHierarchy, fitsCardValue, MAX_HEADER_RECORDS, readFitsHeader, type FitsHeader } from '../../fits.mts';
+import { tapRows } from '../astronomy-packages/client.mts';
 
 export type RawRow = Readonly<Record<string, string>>;
 
@@ -34,12 +35,10 @@ export function column(row: RawRow, name: string) {
 /** The time a frame starts, from its dp_id (INSTRUMENT.YYYY-MM-DDThh:mm:ss.sss). */
 export const frameTime = (dpId: string) => Date.parse(`${dpId.replace(/^[A-Z]+\./u, '')}Z`);
 
-/** The raw frame table for an instrument and interval (ISO times), as CSV. */
+/** The raw frame table for an instrument and interval. PyVO owns TAP and VOTable parsing. */
 export async function queryRawTable(instrument: string, columns: readonly string[], from: string, to: string) {
   const query = `SELECT ${columns.join(', ')} FROM dbo.raw WHERE instrument = '${instrument}' AND exp_start BETWEEN '${from}' AND '${to}' ORDER BY dp_id`;
-  const response = await fetch(`https://archive.eso.org/tap_obs/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=${encodeURIComponent(query)}`);
-  if (!response.ok) throw new Error(`The ESO archive answered ${response.status}.`);
-  return response.text();
+  return tapRows('https://archive.eso.org/tap_obs', query);
 }
 
 const exists = (path: string) => access(path).then(() => true, () => false);

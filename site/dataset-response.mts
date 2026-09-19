@@ -1,6 +1,6 @@
 import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { loadPreparedCssObject, loadPreparedSurfaceFeatureCatalog, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection } from '../src/renderers/css/dist/index.js';
+import { loadPreparedCssObject, loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection } from '../src/renderers/css/dist/index.js';
 import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { renderNativeFocus } from './focus-response.mts';
 import { serializePreparedScene } from '../tools/serialize-prepared-scene.mts';
@@ -45,8 +45,8 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
     read: () => read(`/objects/${objectId}/${descriptor.prepared!.sha256}.json`),
   });
   if (definition.id !== objectId) throw new Error('Prepared dataset object identity drifted.');
-  const feature = featureIds.length && definition.features ? (await loadPreparedSurfaceFeatureCatalog(definition.features, objectId,
-    AbortSignal.timeout(15_000), (path, init) => fetcher(new URL(path, url.origin), { ...init, redirect: 'error' }))).features.find(feature => feature.id === featureIds[0]) : null;
+  const feature = featureIds.length && definition.features ? await loadPreparedSurfaceFeature(definition.features, objectId, featureIds[0]!,
+    AbortSignal.timeout(15_000), (path, init) => fetcher(new URL(path, url.origin), { ...init, redirect: 'error' })) : null;
   if (featureIds.length && !feature) throw new RangeError('Feature unavailable on this object.');
   if (feature && definition.features && !definition.features.lensIds.includes(lensId ?? definition.controls.lenses?.defaultLens ?? '')) {
     lensId = definition.features.lensIds[0];

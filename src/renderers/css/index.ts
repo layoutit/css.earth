@@ -33,7 +33,7 @@ export { preparedObjectCapabilities } from './paging/capabilities.js';
 export { mountSurfaceFeatureLabels } from './labels/surface-feature-labels.js';
 export { labelOcclusionFor } from './labels/label-occlusion.js';
 export { createOpacityFader } from './stars/opacity-fader.js';
-export { parsePreparedSurfaceFeatureCatalog, loadPreparedSurfaceFeatureCatalog } from './labels/surface-feature-catalog.js';
+export { parsePreparedSurfaceFeatureCatalog, loadPreparedSurfaceFeatureCatalog, loadPreparedSurfaceFeatureBank, loadPreparedSurfaceFeature } from './labels/surface-feature-catalog.js';
 export { surfaceFeatureCaption } from './labels/surface-feature-caption.js';
 export { publishPreparedNativeView } from './rendering/prepared-native-view.js';
 export type { PreparedSurfaceFeaturePlan, PreparedSurfaceFeatureCatalog, PreparedSurfaceFeature, SurfaceFeatureLayerRuntime, SurfaceFeatureLayerStats, SurfaceFeatureNavigationRuntime } from './labels/surface-feature-types.js';

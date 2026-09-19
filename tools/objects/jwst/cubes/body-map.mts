@@ -41,11 +41,20 @@ export function fitDiscCentre(image: Float64Array, width: number, height: number
     const gain = (n * smd - sm * sd) / (n * smm - sm * sm), offset = (sd - gain * sm) / n;
     return gain > 0 ? sdd - 2 * gain * smd - 2 * offset * sd + gain * gain * smm + 2 * gain * offset * sm + n * offset * offset : Infinity;
   };
-  let best = { cx: sx / sw, cy: sy / sw, blur: 1, cost: Infinity };
-  for (const [reach, step] of [[2, 0.25], [0.25, 0.05], [0.05, 0.01]] as const) {
+  let best = { cx: sx / sw, cy: sy / sw, blur: 1, cost: cost(sx / sw, sy / sw, 1) };
+  // A three-pixel ceiling silently turns a broader PSF into a false resolution measurement (ground-based AO halos are a
+  // common case). Search up to half a disc radius, bounded so one pathological image cannot make every centre trial huge.
+  const maximumBlur = Math.max(3, Math.min(12, radiusPixels / 2));
+  for (const [reach, centerStep, blurReach, blurStep] of [[2, 0.25, Infinity, 0.1], [0.25, 0.05, 0.5, 0.05], [0.05, 0.01, 0.1, 0.01]] as const) {
     const { cx: x0, cy: y0 } = best;
-    for (let blur = 0.4; blur <= 3; blur += 0.1) for (let cy = y0 - reach; cy <= y0 + reach + 1e-9; cy += step) for (let cx = x0 - reach; cx <= x0 + reach + 1e-9; cx += step) {
-      const value = cost(cx, cy, blur); if (value < best.cost) best = { cx, cy, blur, cost: value };
+    // Centre and blur are smooth, nearly independent dimensions of this circular model. Alternating their searches avoids
+    // evaluating every image pixel for their Cartesian product while the successive passes still converge jointly.
+    for (let cy = y0 - reach; cy <= y0 + reach + 1e-9; cy += centerStep) for (let cx = x0 - reach; cx <= x0 + reach + 1e-9; cx += centerStep) {
+      const value = cost(cx, cy, best.blur); if (value < best.cost) best = { ...best, cx, cy, cost: value };
+    }
+    const blur0 = best.blur, from = blurReach === Infinity ? 0.4 : Math.max(0.4, blur0 - blurReach), to = blurReach === Infinity ? maximumBlur : Math.min(maximumBlur, blur0 + blurReach);
+    for (let blur = from; blur <= to + 1e-9; blur += blurStep) {
+      const value = cost(best.cx, best.cy, blur); if (value < best.cost) best = { ...best, blur, cost: value };
     }
   }
   return { center: [best.cx, best.cy], blurPixels: +best.blur.toFixed(1), residualOverPeak: Math.sqrt(best.cost / pixels.length) / peak };

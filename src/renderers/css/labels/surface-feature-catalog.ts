@@ -1,4 +1,5 @@
-import type { PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, PreparedSurfaceFeaturePlan, SurfaceFeatureKind, SurfaceFeatureOutline } from './surface-feature-types.js';
+import { surfaceFeatureBankIndex } from '../../../platform/surface-feature-banks.mts';
+import type { PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, PreparedSurfaceFeaturePlan, SurfaceFeatureCatalogDescriptor, SurfaceFeatureKind, SurfaceFeatureOutline } from './surface-feature-types.js';
 
 const KINDS: readonly SurfaceFeatureKind[] = ['point', 'linear', 'region'];
 function object(value: unknown, label: string): Record<string, unknown> {
@@ -79,10 +80,11 @@ function parseNote(value: unknown): PreparedSurfaceFeature['note'] {
   return Object.freeze({ text: noteText, title, url, credit });
 }
 
-export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: PreparedSurfaceFeaturePlan, objectId: string): PreparedSurfaceFeatureCatalog {
+export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: PreparedSurfaceFeaturePlan, objectId: string,
+  descriptor: SurfaceFeatureCatalogDescriptor = plan.catalog): PreparedSurfaceFeatureCatalog {
   const catalog = object(value, 'surface feature catalogue');
   if (catalog.schema !== 'cssearth-prepared-surface-features@1' || catalog.objectId !== objectId) throw new TypeError('Surface feature catalogue is incompatible.');
-  if (!Array.isArray(catalog.features) || catalog.features.length !== plan.catalog.count) throw new TypeError('Surface feature catalogue count differs from its plan.');
+  if (!Array.isArray(catalog.features) || catalog.features.length !== descriptor.count) throw new TypeError('Surface feature catalogue count differs from its plan.');
   const ids = new Set<string>();
   const features: PreparedSurfaceFeature[] = catalog.features.map((input, index) => {
     const feature = object(input, `surface feature ${index}`);
@@ -110,14 +112,40 @@ export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: Prepare
     license: text(catalog.license, 'catalogue license'), qualification: text(catalog.qualification, 'catalogue qualification'), features: Object.freeze(features) });
 }
 
-/** Fetch and byte-verify the prepared catalogue; the plan pins its identity. */
-export async function loadPreparedSurfaceFeatureCatalog(plan: PreparedSurfaceFeaturePlan, objectId: string, signal: AbortSignal,
-  transport: (url: string, init: { signal: AbortSignal }) => Promise<Response> = (url, init) => fetch(url, init)): Promise<PreparedSurfaceFeatureCatalog> {
-  const response = await transport(plan.catalog.url, { signal });
+export type SurfaceFeatureTransport = (url: string, init: { signal: AbortSignal }) => Promise<Response>;
+
+async function loadPinnedCatalog(plan: PreparedSurfaceFeaturePlan, objectId: string, descriptor: SurfaceFeatureCatalogDescriptor,
+  signal: AbortSignal, transport: SurfaceFeatureTransport): Promise<PreparedSurfaceFeatureCatalog> {
+  const response = await transport(descriptor.url, { signal });
   if (!response.ok) throw new Error('Surface feature catalogue request failed.');
   const bytes = await response.arrayBuffer();
-  if (bytes.byteLength !== plan.catalog.bytes) throw new Error('Surface feature catalogue size drifted.');
+  if (bytes.byteLength !== descriptor.bytes) throw new Error('Surface feature catalogue size drifted.');
   const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(value => value.toString(16).padStart(2, '0')).join('');
-  if (digest !== plan.catalog.sha256) throw new Error('Surface feature catalogue identity drifted.');
-  return parsePreparedSurfaceFeatureCatalog(JSON.parse(new TextDecoder().decode(bytes)), plan, objectId);
+  if (digest !== descriptor.sha256) throw new Error('Surface feature catalogue identity drifted.');
+  return parsePreparedSurfaceFeatureCatalog(JSON.parse(new TextDecoder().decode(bytes)), plan, objectId, descriptor);
+}
+
+/** Fetch and byte-verify the default label catalogue; the plan pins its identity. */
+export async function loadPreparedSurfaceFeatureCatalog(plan: PreparedSurfaceFeaturePlan, objectId: string, signal: AbortSignal,
+  transport: SurfaceFeatureTransport = (url, init) => fetch(url, init)): Promise<PreparedSurfaceFeatureCatalog> {
+  return loadPinnedCatalog(plan, objectId, plan.catalog, signal, transport);
+}
+
+/** Resolve and load only the bank that can contain a search-only feature. */
+export async function loadPreparedSurfaceFeatureBank(plan: PreparedSurfaceFeaturePlan, objectId: string, id: string, signal: AbortSignal,
+  transport: SurfaceFeatureTransport = (url, init) => fetch(url, init)): Promise<PreparedSurfaceFeatureCatalog | null> {
+  if (!plan.selection) return null;
+  const descriptor = plan.selection.banks[surfaceFeatureBankIndex(id, plan.selection.banks.length)];
+  if (!descriptor) throw new TypeError('Surface feature selection bank is missing.');
+  return loadPinnedCatalog(plan, objectId, descriptor, signal, transport);
+}
+
+/** Resolve one selected feature without admitting every search-only outline into memory. */
+export async function loadPreparedSurfaceFeature(plan: PreparedSurfaceFeaturePlan, objectId: string, id: string, signal: AbortSignal,
+  transport: SurfaceFeatureTransport = (url, init) => fetch(url, init), base?: PreparedSurfaceFeatureCatalog): Promise<PreparedSurfaceFeature | null> {
+  const catalog = base ?? await loadPreparedSurfaceFeatureCatalog(plan, objectId, signal, transport);
+  const resident = catalog.features.find(feature => feature.id === id);
+  if (resident) return resident;
+  const bank = await loadPreparedSurfaceFeatureBank(plan, objectId, id, signal, transport);
+  return bank?.features.find(feature => feature.id === id) ?? null;
 }
