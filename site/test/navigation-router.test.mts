@@ -528,6 +528,30 @@ test('history back restores the departed exact view after target handoff without
   assert.deepEqual(h.errors, []); h.router.destroy();
 });
 
+test('history back during a flight returns to the view it left instead of skipping that entry', async () => {
+  const arrivals: Deferred[] = [];
+  const h = harness({ prepare: async () => ({ afterMount: () => { const arrival = deferred(); arrivals.push(arrival); return arrival.promise; } }) });
+  await h.router.settled;
+  const venus = h.router.navigate('venus'); await flush();
+  required(arrivals.at(-1)).resolve(); assert.equal(await venus, true);
+  required(h.mounts.at(-1)).value = saved(87654);
+  const returning = h.router.navigate('mercury'); await flush();
+  assert.equal(h.router.state().ready, false, 'The flight to Mercury is still arriving');
+  h.windowTarget.history.back(); await flush();
+  // The mock arrivals ignore cancellation; release them so both flights can settle.
+  for (const arrival of arrivals) arrival.resolve();
+  assert.equal(await returning, false, 'Back cancels the unfinished flight');
+  for (let turn = 0; turn < 20 && !h.router.state().ready; turn++) { await flush(); for (const arrival of arrivals) arrival.resolve(); }
+  assert.equal(h.router.state().activeObjectId, 'venus', 'Back returns to the body the flight left, not the one before it');
+  assert.equal(h.windowTarget.location.pathname, '/venus/');
+  assert.equal(required(h.mounts.at(-1)).value.camera.distanceKilometers, 87654, 'The departed view is restored');
+  assert.deepEqual(h.entries.map(entry => new URL(entry.url).pathname), ['/mercury/', '/venus/'], 'History reads Mercury, Venus with no duplicate');
+  const settle = async () => { for (let turn = 0; turn < 20 && !h.router.state().ready; turn++) { await flush(); for (const arrival of arrivals) arrival.resolve(); } };
+  h.windowTarget.history.back(); await flush(); await settle();
+  assert.equal(h.router.state().activeObjectId, 'mercury', 'A settled Back still goes one entry back');
+  assert.deepEqual(h.errors, []); h.router.destroy();
+});
+
 test('history forward during an unfinished back returns to the departed body and its view', async () => {
   const arrivals: Deferred[] = [];
   const h = harness({ prepare: async () => ({ afterMount: () => { const arrival = deferred(); arrivals.push(arrival); return arrival.promise; } }) });

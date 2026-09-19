@@ -18,8 +18,10 @@ const navigationFeature = (event: Event): string | undefined => 'detail' in even
 import { overviewScopeFromUrl } from './navigation-scope.mts';
 
 /** Preserve exact departed views while object selections create history entries. */
-export function createNavigationHistory({ windowTarget, objects, capture, navigate, embedded = false, onError = () => {} }: { windowTarget: Window; objects: readonly ObjectEntry[]; capture(): string | null; navigate: Navigate; embedded?: boolean; onError?(error: unknown): void }) {
+export function createNavigationHistory({ windowTarget, objects, capture, navigate, navigating = () => false, embedded = false, onError = () => {} }: { windowTarget: Window; objects: readonly ObjectEntry[]; capture(): string | null; navigate: Navigate; navigating?(): boolean; embedded?: boolean; onError?(error: unknown): void }) {
   const snapshots = new Map<string, string>();
+  // The entry each pushed entry was pushed from, so Back during a flight can be recognised.
+  const previous = new Map<string, string>();
   const prefix = crypto.randomUUID();
   let serial = 0, entry = `${prefix}-${++serial}`, disposed = false;
   const state = () => ({ ...(windowTarget.history.state ?? {}), cssEarthEntry: entry });
@@ -40,6 +42,15 @@ export function createNavigationHistory({ windowTarget, objects, capture, naviga
     const incoming: unknown = event.state;
     const state = record(incoming) ? incoming : {};
     const targetEntry = typeof state.cssEarthEntry === 'string' ? state.cssEarthEntry : `${prefix}-${++serial}`;
+    // A flight commits its entry only when it lands, so the current entry is still the view it
+    // left. One step Back means "not there after all": fly back to that view as a new entry
+    // instead of skipping it for the one before.
+    const departure = snapshots.get(entry);
+    if (navigating() && departure && previous.get(entry) === targetEntry) {
+      const location = new URL(departure, windowTarget.location.href);
+      const object = objects.find(object => object.route === location.pathname);
+      if (object) { Promise.resolve(navigate(object.id, { history: 'push', url: location.href })).catch(onError); return; }
+    }
     const url = snapshots.get(targetEntry) ?? (typeof state.cssEarthView === 'string' ? state.cssEarthView : undefined) ?? windowTarget.location.href;
     const location = new URL(url, windowTarget.location.href);
     const object = objects.find(object => object.route === location.pathname);
@@ -53,7 +64,9 @@ export function createNavigationHistory({ windowTarget, objects, capture, naviga
     commit(url: string, { history = 'push', entry: targetEntry }: Pick<NavigationOptions, 'history' | 'entry'> = {}) {
       if (disposed) return;
       if (history === 'pop' && !targetEntry) throw new TypeError('History restoration requires an entry.');
+      const from = entry;
       entry = history === 'pop' ? targetEntry! : history === 'push' ? `${prefix}-${++serial}` : entry;
+      if (history === 'push' && !embedded) previous.set(entry, from);
       const value = new URL(url, windowTarget.location.href), path = value.pathname + value.search + value.hash;
       snapshots.set(entry, path);
       // An embedded scene shares the host page's session history, so it never adds entries of its own.
