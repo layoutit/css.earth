@@ -220,6 +220,49 @@ export function discDensity(model: DiscModel): (x: number, y: number, z: number)
   };
 }
 
+/** Density of a disc whose surface density in its own plane follows a measured radial profile: the image's median brightness
+ * in rings of the disc plane, deprojected with the ring's geometry. Every line of sight then crosses the plane where the image
+ * says the light is, halo included. A narrow gaussian ring cannot do that for sight lines through the halo: its density along
+ * them never peaks inside the cube, so their light lands on the cube's faces. A small floor keeps every column on the plane. */
+export function profileDiscDensity(model: DiscModel, profile: readonly { readonly radiusUnits: number; readonly value: number }[]): (x: number, y: number, z: number) => number {
+  if (profile.length < 2) throw new RangeError('A profile disc needs at least two rings.');
+  const phi = model.positionAngleDeg * DEG, i = model.inclinationDeg * DEG;
+  const nodes = [Math.sin(phi), Math.cos(phi), 0], minor = [Math.cos(phi), -Math.sin(phi), 0];
+  const nearAlongMinor = Math.cos((model.nearSidePositionAngleDeg - (model.positionAngleDeg + 90)) * DEG) >= 0 ? 1 : -1;
+  const inPlaneMinor = [minor[0]! * Math.cos(i), minor[1]! * Math.cos(i), nearAlongMinor * Math.sin(i)];
+  const normal = [-nearAlongMinor * minor[0]! * Math.sin(i), -nearAlongMinor * minor[1]! * Math.sin(i), Math.cos(i)];
+  const h = model.gaussianHeightUnits, [cx, cy] = model.centreUnits, peak = Math.max(...profile.map(ring => ring.value));
+  const floor = 1e-6 * peak, radii = profile.map(ring => ring.radiusUnits), values = profile.map(ring => Math.max(floor, ring.value));
+  const surface = (r: number) => {
+    if (r <= radii[0]!) return values[0]!;
+    if (r >= radii.at(-1)!) return floor;
+    let k = 1; while (radii[k]! < r) k++;
+    const t = (r - radii[k - 1]!) / (radii[k]! - radii[k - 1]!);
+    return values[k - 1]! * (1 - t) + values[k]! * t;
+  };
+  return (x, y, z) => {
+    const e = -(x - cx), n = y - cy;
+    const a = e * nodes[0]! + n * nodes[1]!, b = e * inPlaneMinor[0]! + n * inPlaneMinor[1]! + z * inPlaneMinor[2]!;
+    const zd = e * normal[0]! + n * normal[1]! + z * normal[2]!;
+    return surface(Math.hypot(a, b)) * Math.exp(-((zd / h) ** 2) / 2);
+  };
+}
+
+/** Score any envelope against the image at its best gain over the annulus the ring occupies: the projection's residual. */
+export function scoreEnvelope(sky: SkyPlane, density: (x: number, y: number, z: number) => number, options: { innerMaskUnits: number; outerUnits: number; depthSamples?: number }) {
+  const { size, halfUnits, step, plane } = sky, depth = options.depthSamples ?? size;
+  const zs = Array.from({ length: depth }, (_, k) => -halfUnits + (k + 0.5) * 2 * halfUnits / depth), dz = 2 * halfUnits / depth;
+  let num = 0, den = 0; const pairs: [number, number][] = [];
+  for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
+    const x = -halfUnits + (i + 0.5) * step, y = -halfUnits + (j + 0.5) * step, r = Math.hypot(x, y), v = plane[j * size + i]!;
+    if (!Number.isFinite(v) || r < options.innerMaskUnits || r >= options.outerUnits) continue;
+    let column = 0; for (const z of zs) column += density(x, y, z) * dz;
+    pairs.push([v, column]); num += v * column; den += column * column;
+  }
+  const gain = den > 0 ? num / den : 0;
+  return { residualRms: Math.sqrt(pairs.reduce((total, [v, column]) => total + (v - gain * column) ** 2, 0) / pairs.length), gain };
+}
+
 export interface EnvelopeSearch {
   /** Radial gaussian width of the ring as a fraction of its radius: from, to, step. */
   readonly widthOfRadius: readonly [number, number, number];

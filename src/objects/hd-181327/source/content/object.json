@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Gaia's spectrum of the star. The disc itself is unresolved.",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
         "thumbnail": "hd-181327-lens-color.webp",
         "surface": "hd-181327-surface-color@2x.webp",
         "poles": "hd-181327-poles-color@2x.webp",
@@ -51,63 +51,39 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "The colour of Gaia DR3's measured spectrum of the star: a slightly blue-white F-type dwarf. No image of the photosphere exists, and its spin axis is not measured; the display axis is celestial north."
+        "notes": "The colour of Gaia DR3's measured spectrum of the star: a slightly blue-white F-type dwarf. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for a star of its Gaia temperature and gravity (6375 K, log g 4.25): a model, because no transit or image measures this star's limb. The spin axis is not measured; the display axis is celestial north."
       },
       {
         "id": "debris-ring",
-        "label": "Debris ring · JWST 1.8 µm",
+        "label": "Debris ring · JWST reflectance",
         "thumbnail": "hd-181327-lens-color.webp",
         "volume": {
           "objectId": "hd-181327-disc",
-          "lensId": "nircam-f182m",
+          "lensId": "reflectance",
           "surface": "color"
         },
-        "notes": "The star in its Gaia colour, with the ring of debris around it as JWST/NIRCam imaged it at 1.8 micrometres (F182M) behind a coronagraph on 11 October 2023 (programme 2780). It is drawn in the colours and on the logarithmic scale Gáspár et al. (2026) print it in, their Figure 26, and seen from Earth it matches their panel: the ring's long axis within about a degree of theirs, the same axis ratio, and the same fall of brightness from the ring into its halo. The ring is starlight scattered by dust, about 81 au in radius and tilted 29° from face-on. The image has no third axis, so the depth is inferred: a tilted ring of the measured geometry projects to it better than a spherical shell or the constant depth an extrusion assumes, and each line of sight is placed on it. Which side is nearer to us and how thick the ring is are stated conventions. The colours are a legend for brightness, not the colour of the dust, and the ring is drawn darker than the printed figure so that it stays see-through. Nothing is drawn within 1″ of the star, where the starlight left after subtraction outweighs the dust.",
+        "notes": "The star in its Gaia colour, with the ring of debris around it as JWST/NIRCam imaged it behind a coronagraph on 11 October 2023 (programme 2780), in six filters from 1.8 to 4.4 micrometres. It is shown the way Gáspár et al. (2026) show it in their Figure 1: each filter divided by the star's own brightness in it, which leaves how the dust reflects starlight at each wavelength, its albedo, with the filters averaged in pairs into blue, green and red by wavelength. The grains come out nearly white-grey. These are infrared colours, not what an eye would see. Seen from Earth this reproduces their panel. The ring is starlight scattered by dust, about 81 au in radius and tilted 29° from face-on, with a halo of small grains outside it. The images have no third axis, so the depth is inferred: a tilted ring of the measured geometry projects to them better than a spherical shell or the constant depth an extrusion assumes, and each line of sight is placed on it. Which side is nearer to us and how thick the ring is are stated conventions, and the ring is drawn darker than the printed figure so that it stays see-through. Nothing is drawn within 1″ of the star, where the starlight left after subtraction outweighs the dust.",
         "falseColor": true,
         "legend": {
-          "kind": "scale",
-          "title": "Surface brightness, F182M (MJy/sr)",
-          "labels": [
-            "0",
-            "5",
-            "50"
-          ],
-          "recipe": {
-            "palette": [
-              [
-                0,
-                0,
-                0
-              ],
-              [
-                65,
-                55,
-                95
-              ],
-              [
-                115,
-                98,
-                164
-              ],
-              [
-                218,
-                211,
-                242
-              ],
-              [
-                255,
-                255,
-                255
-              ]
-            ],
-            "labels": [
-              "0",
-              "5",
-              "50"
-            ]
-          },
-          "meta": "JWST/NIRCam F182M, 11 October 2023 · logarithmic, Gáspár et al. (2026) Figure 26",
-          "sourceUrl": "https://arxiv.org/abs/2608.27437"
+          "kind": "categories",
+          "title": "Colour of the dust (reflectance)",
+          "items": [
+            {
+              "label": "White",
+              "description": "Reflects all six filters alike",
+              "color": "#e8e8e8"
+            },
+            {
+              "label": "Pink",
+              "description": "Less light at 3 µm, where water ice absorbs; the paper finds ice strongest in the halo",
+              "color": "#e8a0c8"
+            },
+            {
+              "label": "Blue",
+              "description": "Reflects the shorter wavelengths more",
+              "color": "#9fb8ff"
+            }
+          ]
         }
       }
     ]

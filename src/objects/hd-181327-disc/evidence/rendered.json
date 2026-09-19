@@ -1,37 +1,55 @@
 {
-  "check": "The HD 181327 debris ring rendered in the application from Earth's direction, against the published F182M panel",
+  "check": "The HD 181327 debris ring rendered in the application from Earth's direction, against the paper's reflectance-colour panel",
   "date": "2026-09-18",
   "reference": {
-    "figure": "Gáspár et al. (2026), arXiv:2608.27437v1, Figure 26, F182M panel",
-    "url": "https://arxiv.org/html/2608.27437v1/HD181327_allfilts-eps-converted-to.png",
-    "scale": "24 figure pixels per arcsecond, from the panel's 1-arcsecond bar",
+    "figure": "Gáspár et al. (2026), arXiv:2608.27437v1, Figure 1, HD 181327 panel",
+    "url": "https://arxiv.org/html/2608.27437v1/Programims_105-eps-converted-to.png",
+    "scale": "32 figure pixels per arcsecond, from the panel's 1-arcsecond bar",
     "note": "The figure is read, not retained here."
   },
-  "method": "Headless Chromium, 1440 x 900 px at device scale 1, the local dev server, /hd-181327/?dataset=debris-ring: the star's default view, which looks from Earth with celestial north up, zoomed out until the altitude passes 700 au, the shell hidden. Both images are deprojected with the ring geometry measured here (inclination 28.6 degrees, nodes at 101.9 degrees), and their median pixel brightness in 10 au rings of the disc plane is compared from 60 to 180 au, each over its own ring peak; the render's scale is fitted. The long axis and axis ratio come from an ellipse fitted to the ridge, the radius of peak brightness in 72 azimuths, on each image with no rotation or mirror allowed.",
+  "method": "Headless Chromium, 1440 x 900 px at device scale 1, the local dev server, /hd-181327/?dataset=debris-ring: the star's default view, which looks from Earth with celestial north up, zoomed out past 700 au, the shell hidden. The render is registered to the panel with its scale fitted and no rotation or mirror allowed; brightness is compared as median luminance in rings from 1.25 to 4.4 arcsec, each over its own ring peak. The long axis and axis ratio come from an ellipse fitted to the ridge, the radius of peak brightness in 72 azimuths, on each image.",
   "image": "rendered-from-earth.webp",
   "result": {
     "orientation": {
-      "paperLongAxisDegClockwiseFromUp": 80.0,
-      "renderLongAxisDegClockwiseFromUp": 78.9,
-      "predictedFromPublishedPositionAngle": 79.6,
-      "mirroredWouldBe": 100.4,
-      "paperAxisRatio": 0.877,
-      "renderAxisRatio": 0.881
+      "paperLongAxisDegClockwiseFromUp": 78.5,
+      "renderLongAxisDegClockwiseFromUp": 77.9,
+      "mirroredWouldBe": 101.5,
+      "paperAxisRatio": 0.876,
+      "renderAxisRatio": 0.875
     },
-    "brightnessProfileRmsDifference": {
-      "topAlpha0.9": 0.095,
-      "topAlpha0.5": 0.051,
-      "topAlpha0.3": 0.063,
+    "luminanceCorrelation": 0.985,
+    "brightnessProfileRmsDifference": 0.035,
+    "ringChromaticity": {
+      "paper": [
+        0.311,
+        0.337,
+        0.352
+      ],
+      "render": [
+        0.332,
+        0.329,
+        0.339
+      ]
+    },
+    "ringBrightnessRenderOverPaper": 0.48,
+    "topAlpha": {
       "chosen": 0.5,
-      "note": "top alpha is the one setting not read from the source; the value that reproduces the published profile best is used"
+      "0.5": {
+        "profileRms": 0.032,
+        "brightness": 0.48
+      },
+      "0.7": {
+        "profileRms": 0.035,
+        "brightness": 0.72
+      },
+      "note": "the one renderer setting a source cannot give; 0.5 matches the published profile best"
     },
     "skyImageAgainstPanel": {
-      "correlation": 0.95,
-      "mirroredCorrelation": 0.939,
-      "offsetFigurePixels": 1,
-      "medianBarPositionDifference": 0.041,
-      "note": "the authored sky image, before any 3D, converted back to position on the published colour bar"
+      "luminanceCorrelation": 0.9899,
+      "rgbRms": 12.57,
+      "mirroredRgbRms": 14.38,
+      "tool": "tools/objects/circumstellar/fit-figure-stretch.mts"
     }
   },
-  "known": "The render is darker than the printed figure overall: in the renderer's emission model brightness and see-through are one number, and a printed figure is a fully opaque picture."
+  "known": "The render is darker than the printed figure overall (0.48 of its ring brightness): in the renderer's emission model brightness and see-through are one number, and a printed figure is an opaque picture."
 }

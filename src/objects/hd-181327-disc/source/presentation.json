@@ -2,50 +2,50 @@
   "schema": "cssearth-volume-presentation-source@1",
   "objectId": "hd-181327-disc",
   "name": "HD 181327 debris ring",
-  "defaultLens": "nircam-f182m",
+  "defaultLens": "reflectance",
   "bank": {
     "path": "src/objects/hd-181327-disc/prepared/lenses.json",
-    "sha256": "3c62fda1394266545e955711ee4895e6c3bbe5734a1aaf558089e9e1f5450c63",
-    "bytes": 269777
+    "sha256": "a7167ab9c08c5b7ec976d3286ab00e28a6e4eca34a0d2fc79fbc516afd0e5941",
+    "bytes": 310209
   },
   "recipes": [
     {
-      "id": "nircam-f182m",
-      "path": "src/objects/hd-181327-disc/source/volume-nircam-f182m.json",
-      "sha256": "7e55f85f2d95ac3fadb479945edde5851f3757b5211d7eb1b322f0b9eb2111a3",
-      "bytes": 1854
+      "id": "reflectance",
+      "path": "src/objects/hd-181327-disc/source/volume-reflectance.json",
+      "sha256": "2b117c94957b04524be0e49d2a39b43bf287c88e07c6f6ba1c3cd6d115df3c32",
+      "bytes": 1683
     }
   ],
   "sharedInputs": [],
   "inputEvidence": [],
   "lenses": [
     {
-      "id": "nircam-f182m",
-      "label": "JWST/NIRCam F182M · debris ring, 1.8 µm",
-      "title": "The debris ring around HD 181327 at 1.8 micrometres",
-      "description": "JWST/NIRCam imaged this star on 11 October 2023 with the F182M filter, 1.8 micrometres, behind the MASK335R coronagraph, which blocks the star so the faint ring of colliding debris around it shows. This is MAST's own coronagraphy product, which this project also re-ran from the archived exposures and compared. It is drawn in the colours and on the logarithmic scale Gáspár et al. (2026) print it in (their Figure 26), so seen from Earth it should look like their panel. The ring is starlight scattered by dust about 80 au out, tilted about 30° from face-on, with a fainter halo of small grains outside it. The image has no third axis, so its depth is inferred: a tilted ring of the geometry measured on it projects to the image better than a spherical shell or a constant depth, and each line of sight is placed on that ring. Which side is nearer to us, and how thick the ring is, are stated conventions. Nothing is drawn within 1 arcsecond of the star, where the starlight left after subtraction outweighs the dust; the star itself is the sphere at the centre.",
-      "summary": "Starlight scattered by a ring of debris about 80 au from the star, in the paper's own colours and scale; its depth is the tilted ring that fits the image.",
-      "detail": "2023-10-11, 30.7 mas pixels",
+      "id": "reflectance",
+      "label": "JWST/NIRCam · debris ring, reflectance colour",
+      "title": "The debris ring around HD 181327 in the colour of its dust's reflectance",
+      "description": "JWST/NIRCam imaged this star on 11 October 2023 in six filters from 1.8 to 4.4 micrometres, behind the MASK335R coronagraph, which blocks the star so the faint ring of colliding debris around it shows. These are MAST's own coronagraphy products, which this project also re-ran from the archived exposures and compared. They are combined the way Gáspár et al. (2026) combine them in their Figure 1: each filter divided by the star's own brightness in it, so what is left is how the dust reflects light at each wavelength, its albedo, and the filters averaged in pairs into blue, green and red by wavelength. The grains come out nearly white-grey, and water ice absorbs near 3 micrometres, in the green. Seen from Earth this reproduces their panel. The images have no third axis, so the depth is inferred: a tilted ring of the geometry measured on them projects to them better than a spherical shell or a constant depth, and each line of sight is placed on that ring. Which side is nearer to us, and how thick the ring is, are stated conventions. Nothing is drawn within 1 arcsecond of the star, where the starlight left after subtraction outweighs the dust; the star itself is the sphere at the centre.",
+      "summary": "The ring of debris 80 au out in the colour its dust reflects starlight, from six JWST filters, as the paper shows it.",
+      "detail": "2023-10-11, 62.4 mas pixels",
       "facts": [
         {
           "id": "instrument",
           "label": "Instrument",
-          "value": "JWST/NIRCam F182M behind the MASKA335R coronagraph, 2023-10-11"
+          "value": "JWST/NIRCam behind the MASKA335R coronagraph, 2023-10-11: F335M, F444W, F250M, F300M, F182M, F210M"
         },
         {
-          "id": "scale",
-          "label": "Scale",
-          "value": "Surface brightness -0.8 to 50 MJy/sr, logarithmic, in the colours and scale of Gáspár et al. (2026), arXiv:2608.27437v1, Figure 26, F182M colour bar"
+          "id": "colour",
+          "label": "Colour",
+          "value": "Reflectance: each filter over the star's own flux, red F335M + F444W, green F250M + F300M, blue F182M + F210M"
         },
         {
           "id": "ring",
           "label": "Ring measured here",
-          "value": "81 au, tilted 29°, nodes at position angle 102°; published 80 au, 28.54°, 100.39°"
+          "value": "81 au, tilted 29°, nodes at position angle 101°; published 80 au, 28.54°, 100.39°"
         },
         {
           "id": "extent",
           "label": "Drawn extent",
-          "value": "48 to 240 au; the light reaches the noise at 186 au"
+          "value": "48 to 300 au; the light reaches the noise at 237 au"
         },
         {
           "id": "depth",
@@ -53,12 +53,12 @@
           "value": "Not measured; the inclined ring that best projects to the images, with its south side nearer by convention"
         }
       ],
-      "input": "nircam-f182m",
+      "input": "reflectance-f335m",
       "preview": {
-        "path": "src/objects/hd-181327-disc/source/previews/nircam-f182m.png",
-        "sha256": "2c05111644b2638398b5de59c91ad00ebefd86abe1108c9c2bcc2757304433f8",
-        "bytes": 49552,
-        "authoredFrom": "nircam-f182m"
+        "path": "src/objects/hd-181327-disc/source/previews/reflectance.png",
+        "sha256": "983e59b38bdcbee648af1b4abf838bfe07055c5e71cbaa9def8fe4df7323d627",
+        "bytes": 81227,
+        "authoredFrom": "reflectance-f335m"
       }
     }
   ]

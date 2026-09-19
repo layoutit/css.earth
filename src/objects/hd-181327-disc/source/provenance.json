@@ -13,17 +13,57 @@
   },
   "sources": [
     {
-      "id": "nircam-f182m",
+      "id": "reflectance-f335m",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits",
+      "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+      "sha256": "065f01c0c2c04841377f0e67934f76b47b310a509ac5fe6e723f8ac87ec477bf",
+      "bytes": 3084480,
+      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F335M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F335M-MASK335R.reproduction.json"
+    },
+    {
+      "id": "reflectance-f444w",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits",
+      "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+      "sha256": "597a39c0999a4e978be3d83bc044938390bac88b91f81adf3b52df05ac4f2e81",
+      "bytes": 3084480,
+      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F444W band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F444W-MASK335R.reproduction.json"
+    },
+    {
+      "id": "reflectance-f250m",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits",
+      "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+      "sha256": "8f95f361e650d90348870fe46ab4957bac40523107c2a1bedc64ef4eb88e7926",
+      "bytes": 3084480,
+      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F250M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F250M-MASK335R.reproduction.json"
+    },
+    {
+      "id": "reflectance-f300m",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits",
+      "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+      "sha256": "a3b5ad2a08e666b55c2441834b4ee22b977b3107dedfa3030c2efd97e67e55cb",
+      "bytes": 3084480,
+      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F300M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F300M-MASK335R.reproduction.json"
+    },
+    {
+      "id": "reflectance-f182m",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
       "sha256": "1475883875640febac23487f0e171900cb6a5a37352945f74bec6b8e42e728f3",
       "bytes": 3101760,
-      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F182M band of the nircam-f182m leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F182M-MASK335R.reproduction.json"
+      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F182M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F182M-MASK335R.reproduction.json"
+    },
+    {
+      "id": "reflectance-f210m",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
+      "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+      "sha256": "aa0469294b4a6bf2d1910754e87aeb4100d2b53db16803a6051985f56b017b48",
+      "bytes": 3101760,
+      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F210M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F210M-MASK335R.reproduction.json"
     }
   ],
   "paper": [
     {
-      "lens": "nircam-f182m",
+      "lens": "reflectance",
       "citation": "Gáspár et al. (2026), arXiv:2608.27437",
       "url": "https://arxiv.org/abs/2608.27437"
     }
@@ -36,13 +76,89 @@
     "distancePc": 47.776869019736694,
     "arcsecPerUnit": 0.020930630669558914,
     "grid": {
-      "size": 168,
-      "halfUnits": 240,
-      "slabs": 84
+      "size": 210,
+      "halfUnits": 300,
+      "slabs": 105
     },
     "lenses": {
-      "nircam-f182m": {
+      "reflectance": {
         "bands": [
+          {
+            "band": "NIRCAM-F335M-MASK335R",
+            "mosaic": "jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits",
+            "sha256": "065f01c0c2c04841377f0e67934f76b47b310a509ac5fe6e723f8ac87ec477bf",
+            "observed": "2023-10-11",
+            "starRaDecDeg": [
+              290.74587654529444,
+              -54.53859278635284
+            ],
+            "starPixel": [
+              148.7757342894394,
+              175.70953356918773
+            ],
+            "mosaicArcsecPerPixel": 0.06241785718091004,
+            "background": -0.13064010441303253,
+            "noise": 0.09801079774796963,
+            "backgroundPixels": 31441,
+            "unit": "MJy/sr"
+          },
+          {
+            "band": "NIRCAM-F444W-MASK335R",
+            "mosaic": "jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits",
+            "sha256": "597a39c0999a4e978be3d83bc044938390bac88b91f81adf3b52df05ac4f2e81",
+            "observed": "2023-10-11",
+            "starRaDecDeg": [
+              290.74587654733455,
+              -54.53859279033894
+            ],
+            "starPixel": [
+              148.77512047703374,
+              175.71200762513314
+            ],
+            "mosaicArcsecPerPixel": 0.06241785765110028,
+            "background": -0.06094726175069809,
+            "noise": 0.05945903528518975,
+            "backgroundPixels": 31441,
+            "unit": "MJy/sr"
+          },
+          {
+            "band": "NIRCAM-F250M-MASK335R",
+            "mosaic": "jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits",
+            "sha256": "8f95f361e650d90348870fe46ab4957bac40523107c2a1bedc64ef4eb88e7926",
+            "observed": "2023-10-11",
+            "starRaDecDeg": [
+              290.74587654597315,
+              -54.53859278767888
+            ],
+            "starPixel": [
+              148.77560399633478,
+              175.7118489308471
+            ],
+            "mosaicArcsecPerPixel": 0.0624178573515576,
+            "background": -0.21344515681266785,
+            "noise": 0.14250640720725058,
+            "backgroundPixels": 31440,
+            "unit": "MJy/sr"
+          },
+          {
+            "band": "NIRCAM-F300M-MASK335R",
+            "mosaic": "jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits",
+            "sha256": "a3b5ad2a08e666b55c2441834b4ee22b977b3107dedfa3030c2efd97e67e55cb",
+            "observed": "2023-10-11",
+            "starRaDecDeg": [
+              290.74587654665544,
+              -54.53859278901206
+            ],
+            "starPixel": [
+              148.77526355034988,
+              175.71198537662139
+            ],
+            "mosaicArcsecPerPixel": 0.062417857541170685,
+            "background": -0.10738680511713028,
+            "noise": 0.12013943573981523,
+            "backgroundPixels": 31440,
+            "unit": "MJy/sr"
+          },
           {
             "band": "NIRCAM-F182M-MASK335R",
             "mosaic": "jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits",
@@ -61,268 +177,360 @@
             "noise": 0.39287749071121214,
             "backgroundPixels": 19901,
             "unit": "MJy/sr"
+          },
+          {
+            "band": "NIRCAM-F210M-MASK335R",
+            "mosaic": "jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
+            "sha256": "aa0469294b4a6bf2d1910754e87aeb4100d2b53db16803a6051985f56b017b48",
+            "observed": "2023-10-11",
+            "starRaDecDeg": [
+              290.7458765466557,
+              -54.53859278901262
+            ],
+            "starPixel": [
+              158.44773075053914,
+              159.39529614665975
+            ],
+            "mosaicArcsecPerPixel": 0.030678778973881906,
+            "background": -1.4768096208572388,
+            "noise": 0.3213357374668121,
+            "backgroundPixels": 19901,
+            "unit": "MJy/sr"
           }
         ],
-        "colourMap": {
-          "figure": "Gáspár et al. (2026), arXiv:2608.27437v1, Figure 26, F182M colour bar",
-          "url": "https://arxiv.org/html/2608.27437v1/HD181327_allfilts-eps-converted-to.png",
-          "bar": {
-            "vmin": -0.787,
-            "vmax": 50,
-            "a": 50.455
-          },
-          "stops": [
-            [
-              65,
-              55,
-              95
-            ],
-            [
-              115,
-              98,
-              164
-            ],
-            [
-              218,
-              211,
-              242
-            ],
-            [
-              255,
-              255,
-              255
-            ]
+        "channels": {
+          "red": [
+            "NIRCAM-F335M-MASK335R",
+            "NIRCAM-F444W-MASK335R"
           ],
-          "tickErrorPixels": 0.5
+          "green": [
+            "NIRCAM-F250M-MASK335R",
+            "NIRCAM-F300M-MASK335R"
+          ],
+          "blue": [
+            "NIRCAM-F182M-MASK335R",
+            "NIRCAM-F210M-MASK335R"
+          ]
+        },
+        "stellarFluxJy": {
+          "NIRCAM-F182M-MASK335R": 3.63,
+          "NIRCAM-F210M-MASK335R": 2.93,
+          "NIRCAM-F250M-MASK335R": 2.18,
+          "NIRCAM-F300M-MASK335R": 1.61,
+          "NIRCAM-F335M-MASK335R": 1.32,
+          "NIRCAM-F444W-MASK335R": 0.79
+        },
+        "stellarFluxSource": "Gáspár et al. (2026), arXiv:2608.27437, Table 9, stellar photosphere F_nu,* in Jy",
+        "stretch": {
+          "a": 14.125,
+          "top": 7.1516,
+          "source": "Gáspár et al. (2026), Figure 1 (HD 181327 panel), which prints no scale: fitted by tools/objects/circumstellar/fit-figure-stretch.mts",
+          "fit": {
+            "figure": "Gáspár et al. (2026), arXiv:2608.27437v1, Figure 1",
+            "url": "https://arxiv.org/html/2608.27437v1/Programims_105-eps-converted-to.png",
+            "panel": {
+              "x0": 495,
+              "y0": 318,
+              "width": 317,
+              "height": 317
+            },
+            "pixelsPerArcsec": 32,
+            "offsetPixels": [
+              -1,
+              4
+            ],
+            "rgbRms": 12.57,
+            "luminanceCorrelation": 0.9899,
+            "mirroredRgbRms": 14.38,
+            "annulusArcsec": [
+              1,
+              4.4
+            ]
+          }
         },
         "innerMaskUnits": 47.776869019736694,
-        "lightEndsUnits": 185.71428571428572,
+        "lightEndsUnits": 237.14285714285714,
         "radialProfile": [
           {
             "radiusUnits": 2.857142857142857,
-            "median": -2.813534736633301,
-            "samples": 10
+            "median": -3.618924856185913,
+            "samples": 11
           },
           {
             "radiusUnits": 8.571428571428571,
-            "median": -1.8924400806427002,
-            "samples": 34
+            "median": -1.2934950590133667,
+            "samples": 33
           },
           {
             "radiusUnits": 14.285714285714286,
-            "median": -2.457900047302246,
-            "samples": 55
+            "median": -0.3955059349536896,
+            "samples": 57
           },
           {
             "radiusUnits": 20,
-            "median": -0.523306131362915,
-            "samples": 80
+            "median": -0.05654825642704964,
+            "samples": 75
           },
           {
             "radiusUnits": 25.714285714285715,
-            "median": 0.3871617317199707,
-            "samples": 95
+            "median": 0.06113013997673988,
+            "samples": 98
           },
           {
             "radiusUnits": 31.42857142857143,
-            "median": -0.3070751130580902,
-            "samples": 126
+            "median": 0.24817034602165222,
+            "samples": 125
           },
           {
             "radiusUnits": 37.142857142857146,
-            "median": 1.2389652729034424,
-            "samples": 143
+            "median": 0.6082640886306763,
+            "samples": 144
           },
           {
             "radiusUnits": 42.85714285714286,
-            "median": 2.8645238876342773,
-            "samples": 164
+            "median": 0.7858362793922424,
+            "samples": 169
           },
           {
             "radiusUnits": 48.57142857142857,
-            "median": 4.0668864250183105,
-            "samples": 185
+            "median": 1.1227717399597168,
+            "samples": 177
           },
           {
             "radiusUnits": 54.285714285714285,
-            "median": 5.534386157989502,
-            "samples": 214
+            "median": 1.585100531578064,
+            "samples": 216
           },
           {
             "radiusUnits": 60,
-            "median": 7.871499061584473,
-            "samples": 235
+            "median": 2.0157928466796875,
+            "samples": 234
           },
           {
             "radiusUnits": 65.71428571428572,
-            "median": 9.735621452331543,
-            "samples": 251
+            "median": 2.4681293964385986,
+            "samples": 255
           },
           {
             "radiusUnits": 71.42857142857143,
-            "median": 11.924915313720703,
-            "samples": 273
+            "median": 3.0614590644836426,
+            "samples": 269
           },
           {
             "radiusUnits": 77.14285714285714,
-            "median": 15.764755249023438,
+            "median": 4.001762390136719,
             "samples": 298
           },
           {
             "radiusUnits": 82.85714285714286,
-            "median": 17.18757438659668,
-            "samples": 324
+            "median": 4.179621696472168,
+            "samples": 329
           },
           {
             "radiusUnits": 88.57142857142857,
-            "median": 13.923151016235352,
-            "samples": 339
+            "median": 3.3993611335754395,
+            "samples": 340
           },
           {
             "radiusUnits": 94.28571428571429,
-            "median": 11.0821533203125,
-            "samples": 366
+            "median": 2.616413116455078,
+            "samples": 356
           },
           {
             "radiusUnits": 100,
-            "median": 8.525136947631836,
-            "samples": 384
+            "median": 2.1058030128479004,
+            "samples": 388
           },
           {
             "radiusUnits": 105.71428571428572,
-            "median": 6.266146183013916,
-            "samples": 412
+            "median": 1.694488763809204,
+            "samples": 414
           },
           {
             "radiusUnits": 111.42857142857143,
-            "median": 4.559154987335205,
-            "samples": 431
+            "median": 1.3631081581115723,
+            "samples": 429
           },
           {
             "radiusUnits": 117.14285714285714,
-            "median": 3.375983238220215,
-            "samples": 450
+            "median": 1.0335898399353027,
+            "samples": 447
           },
           {
             "radiusUnits": 122.85714285714286,
-            "median": 2.6593005657196045,
-            "samples": 469
+            "median": 0.8110547065734863,
+            "samples": 478
           },
           {
             "radiusUnits": 128.57142857142858,
-            "median": 2.1189463138580322,
-            "samples": 501
+            "median": 0.6208455562591553,
+            "samples": 502
           },
           {
             "radiusUnits": 134.28571428571428,
-            "median": 1.6887824535369873,
-            "samples": 516
+            "median": 0.48928213119506836,
+            "samples": 511
           },
           {
             "radiusUnits": 140,
-            "median": 1.449494481086731,
-            "samples": 544
+            "median": 0.3768335282802582,
+            "samples": 540
           },
           {
             "radiusUnits": 145.71428571428572,
-            "median": 1.1969202756881714,
-            "samples": 552
+            "median": 0.3054623007774353,
+            "samples": 560
           },
           {
             "radiusUnits": 151.42857142857144,
-            "median": 0.9614797234535217,
-            "samples": 590
+            "median": 0.25238358974456787,
+            "samples": 588
           },
           {
             "radiusUnits": 157.14285714285714,
-            "median": 0.8437255620956421,
-            "samples": 608
+            "median": 0.2112143337726593,
+            "samples": 614
           },
           {
             "radiusUnits": 162.85714285714286,
-            "median": 0.7543913125991821,
-            "samples": 634
+            "median": 0.1824752688407898,
+            "samples": 623
           },
           {
             "radiusUnits": 168.57142857142858,
-            "median": 0.6222547292709351,
-            "samples": 644
+            "median": 0.16245347261428833,
+            "samples": 647
           },
           {
             "radiusUnits": 174.28571428571428,
-            "median": 0.5385000109672546,
-            "samples": 674
+            "median": 0.1379425823688507,
+            "samples": 668
           },
           {
             "radiusUnits": 180,
-            "median": 0.43319636583328247,
-            "samples": 699
+            "median": 0.11807845532894135,
+            "samples": 703
           },
           {
             "radiusUnits": 185.71428571428572,
-            "median": 0.3789288401603699,
-            "samples": 724
+            "median": 0.10326101630926132,
+            "samples": 722
           },
           {
             "radiusUnits": 191.42857142857144,
-            "median": 0.3336617946624756,
-            "samples": 737
+            "median": 0.09222576022148132,
+            "samples": 727
           },
           {
             "radiusUnits": 197.14285714285714,
-            "median": 0.30493882298469543,
-            "samples": 748
+            "median": 0.08263922482728958,
+            "samples": 766
           },
           {
             "radiusUnits": 202.85714285714286,
-            "median": 0.2482420802116394,
-            "samples": 794
+            "median": 0.0713384822010994,
+            "samples": 791
           },
           {
             "radiusUnits": 208.57142857142858,
-            "median": 0.24300704896450043,
-            "samples": 812
+            "median": 0.0617857500910759,
+            "samples": 804
           },
           {
             "radiusUnits": 214.28571428571428,
-            "median": 0.2114502191543579,
-            "samples": 828
+            "median": 0.055627115070819855,
+            "samples": 812
           },
           {
             "radiusUnits": 220,
-            "median": 0.17503300309181213,
-            "samples": 836
+            "median": 0.049146540462970734,
+            "samples": 848
           },
           {
             "radiusUnits": 225.71428571428572,
-            "median": 0.1269761621952057,
-            "samples": 878
+            "median": 0.0421646386384964,
+            "samples": 882
           },
           {
             "radiusUnits": 231.42857142857144,
-            "median": 0.09176994115114212,
-            "samples": 902
+            "median": 0.03769650682806969,
+            "samples": 889
           },
           {
             "radiusUnits": 237.14285714285714,
-            "median": 0.07847294211387634,
-            "samples": 870
+            "median": 0.028646618127822876,
+            "samples": 875
+          },
+          {
+            "radiusUnits": 242.85714285714286,
+            "median": 0.02594631165266037,
+            "samples": 834
+          },
+          {
+            "radiusUnits": 248.57142857142858,
+            "median": 0.021307216957211494,
+            "samples": 793
+          },
+          {
+            "radiusUnits": 254.28571428571428,
+            "median": 0.017350194975733757,
+            "samples": 765
+          },
+          {
+            "radiusUnits": 260,
+            "median": 0.01779026910662651,
+            "samples": 725
+          },
+          {
+            "radiusUnits": 265.7142857142857,
+            "median": 0.019608309492468834,
+            "samples": 621
+          },
+          {
+            "radiusUnits": 271.42857142857144,
+            "median": 0.015793440863490105,
+            "samples": 529
+          },
+          {
+            "radiusUnits": 277.14285714285717,
+            "median": 0.010842442512512207,
+            "samples": 469
+          },
+          {
+            "radiusUnits": 282.8571428571429,
+            "median": 0.010970463044941425,
+            "samples": 438
+          },
+          {
+            "radiusUnits": 288.57142857142856,
+            "median": 0.012065848335623741,
+            "samples": 381
+          },
+          {
+            "radiusUnits": 294.2857142857143,
+            "median": 0.008907228708267212,
+            "samples": 341
+          },
+          {
+            "radiusUnits": 300,
+            "median": 0.006919752340763807,
+            "samples": 290
           }
         ],
         "ridgeSamples": 324,
         "ringCentreUnits": [
-          0.7008883094669173,
-          1.3422296452493447
+          0.24501369999869105,
+          1.1980004895343634
         ],
-        "semiMajorUnits": 81.23498523469563,
-        "semiMinorUnits": 71.34735211736033,
-        "inclinationDeg": 28.56400143460945,
-        "positionAngleDeg": 101.85238366775195,
-        "ridgeResidualUnits": 0.9196389751437032,
+        "semiMajorUnits": 80.81060645339899,
+        "semiMinorUnits": 70.92109268486487,
+        "inclinationDeg": 28.643284707854747,
+        "positionAngleDeg": 100.68619306605939,
+        "ridgeResidualUnits": 0.8783077182968142,
         "binningSpread": {
-          "semiMajorUnits": 0.16354540137632945,
-          "inclinationDeg": 0.23215820063888204,
-          "positionAngleDeg": 0.46065083640956267
+          "semiMajorUnits": 0.09636469449388407,
+          "inclinationDeg": 0.1554135452996005,
+          "positionAngleDeg": 0.5520299315587616
         },
         "published": {
           "citation": "Gáspár et al. (2026), arXiv:2608.27437",
@@ -334,41 +542,49 @@
           "radiusTolerance": 0.1
         },
         "differences": {
-          "radius": 0.015437315433695309,
-          "inclinationDeg": 0.024001434609452588,
-          "positionAngleDeg": 1.4623836677519648
+          "radius": 0.010132580667487456,
+          "inclinationDeg": 0.10328470785474764,
+          "positionAngleDeg": 0.2961930660594021
         },
         "envelope": {
-          "shape": "inclined-ring",
-          "gaussianWidthUnits": 19.496396456326952,
-          "gaussianHeightUnits": 4.061749261734781,
-          "residualRms": 2.270368968769698,
-          "signalRms": 10.035727976115682,
+          "shape": "measured-profile-disc",
+          "residualRms": 0.4555887862674023,
+          "cubeFaceShare": {
+            "gaussianRing": 1.4244693081823018e-91,
+            "measuredProfileDisc": 2.1726192659778375e-76
+          },
+          "heightUnits": 8.0810606453399,
+          "fittedRing": {
+            "gaussianWidthUnits": 22.626969806951713,
+            "gaussianHeightUnits": 8.0810606453399,
+            "residualRms": 0.5321481133598618
+          },
+          "signalRms": 2.50090722205881,
           "scoredPixels": 4664,
           "alternatives": {
             "sphericalShell": {
-              "radiusUnits": 91.25550769215552,
-              "gaussianWidthUnits": 13.68832615382333,
-              "residualRms": 2.901454234834622
+              "radiusUnits": 90.73762346689757,
+              "gaussianWidthUnits": 18.147524693379516,
+              "residualRms": 0.6538069930139182
             },
-            "constantDepthResidualRms": 5.0660241246796724
+            "constantDepthResidualRms": 1.1307513723717122
           },
           "heightResiduals": [
             {
               "heightOfRadius": 0.02,
-              "residualRms": 2.270634650617475
+              "residualRms": 0.5322570640111726
             },
             {
               "heightOfRadius": 0.05,
-              "residualRms": 2.270368968769698
+              "residualRms": 0.5321791828886893
             },
             {
               "heightOfRadius": 0.1,
-              "residualRms": 2.2711077277789173
+              "residualRms": 0.5321481133598618
             },
             {
               "heightOfRadius": 0.2,
-              "residualRms": 2.2959576798709276
+              "residualRms": 0.5352060765576822
             }
           ],
           "search": {
@@ -395,26 +611,25 @@
             ]
           }
         },
-        "exposureGain": 0.060123139383260346,
+        "exposureGain": 0.02990733489404311,
         "topAlpha": 0.5,
         "faceOnOpacity": {
-          "drawnColumns": 20625,
-          "median": 0.1895349683365144,
-          "p90": 0.4110316849629423,
-          "max": 0.48603549679074176
+          "drawnColumns": 24157,
+          "median": 0.06284090418972876,
+          "p90": 0.35141529957380435,
+          "max": 0.4781372944405634
         },
         "droppedShare": [
           0,
           0,
-          0,
           0
         ],
-        "filledVoxels": 324407
+        "filledVoxels": 705090
       }
     }
   },
   "models": {
-    "nircam-f182m": "Fitted ring, drawn in the publisher's own colours and scale. The F182M mosaic is read about the star through its own WCS onto a sky plane in astronomical units; the star's position is the observation's target position (TARG_RA, TARG_DEC). Its background, the median in the 5–8″ annulus (-1.820 MJy/sr), is subtracted so that zero is empty sky, as on the published scale. The ring's ridge, the radius of peak brightness in each azimuth under nine binnings, traces an ellipse of semi-major axis 81.2 au, axis ratio 0.878 (inclination 28.6°), line of nodes at position angle 101.9°, centre 1.5 au from the star; the single binnings scatter by 0.2 au, 0.2° and 0.5°. This stands against Gáspár et al. (2026), arXiv:2608.27437's 80 au, 28.54° and 100.39°. Depth is not the image pushed backwards: an inclined ring of that geometry with gaussian radial width 19.5 au projects to the image with a residual of 2.27e+0 against a signal of 1.00e+1, where a spherical shell leaves 2.90e+0 and constant depth, what an extrusion assumes, leaves 5.07e+0. The ring's vertical height is a stated 0.05 of its radius (the projection changes by 1.1% across the heights tried), and which side is nearer is a convention: the south-south-west end of the minor axis is drawn nearer; this image does not say which end is. Colour and scale are the publisher's: Gáspár et al. (2026), arXiv:2608.27437v1, Figure 26, F182M colour bar, whose printed ticks follow log(1 + a u) / log(1 + a) with a = 50.455, from -0.787 to 50 MJy/sr (every tick within 0.5 figure pixel), in the bar's colours at its quarters, carried as four emission channels whose tent weights interpolate the bar. Every channel shares one depth profile, so each column is spread along the ring and emits the bar colour of its own brightness. The top of the bar reaches an alpha of 0.5, the renderer's convention for a volume; the median drawn line of sight reaches 0.19. The image is drawn from 48 au to the grid edge at 240 au, tapering from 186 au, where the median brightness in the disc plane falls to the per-pixel noise (0.39 MJy/sr)."
+    "reflectance": "Fitted ring, in the reflectance colour the publisher shows. Each of the 6 mosaics is read about the star through its own WCS onto a sky plane in astronomical units; the star's position is the observation's target position (TARG_RA, TARG_DEC). Each band's background, the median in the 5–8″ annulus, is subtracted, and the band is divided by the star's own flux in it (Gáspár et al. (2026), arXiv:2608.27437, Table 9, stellar photosphere F_nu,* in Jy), which leaves how the dust reflects starlight at that wavelength. The channels average them in pairs: red F335M + F444W, green F250M + F300M, blue F182M + F210M. The ring is measured on the mean of the channels: its ridge, the radius of peak brightness in each azimuth under nine binnings, traces an ellipse of semi-major axis 80.8 au, axis ratio 0.878 (inclination 28.6°), line of nodes at position angle 100.7°, centre 1.2 au from the star; the single binnings scatter by 0.1 au, 0.2° and 0.6°. This stands against Gáspár et al. (2026), arXiv:2608.27437's 80 au, 28.54° and 100.39°. Depth is not the image pushed backwards: a disc of that geometry whose surface density follows the image's own deprojected radial profile, halo included, projects to the mean image with a residual of 4.56e-1 against a signal of 2.50e+0, where a single gaussian ring of radial width 22.6 au leaves 5.32e-1, a spherical shell 6.54e-1 and constant depth, what an extrusion assumes, 1.13e+0. A narrow ring would also put the light of sight lines through the halo on the cube's faces, where its density along them peaks; the profile disc puts every column where it crosses the disc plane. The ring's vertical height is a stated 0.1 of its radius (the projection changes by 0.6% across the heights tried), and which side is nearer is a convention: the south-south-west end of the minor axis is drawn nearer; this image does not say which end is. Each channel is shown as log(1 + a u) / log(1 + a) with u = reflectance / 7.1516 and a = 14.125; Gáspár et al. (2026), Figure 1 (HD 181327 panel), which prints no scale: fitted by tools/objects/circumstellar/fit-figure-stretch.mts. Every channel shares one depth profile, so each column is spread along the ring and keeps its colour. The top of the stretch reaches an alpha of 0.5, the renderer's convention for a volume; the median drawn line of sight reaches 0.06. The image is drawn from 48 au to the grid edge at 300 au, tapering from 237 au, where the mean reflectance in the disc plane falls to its per-pixel noise."
   },
   "limitations": [
     "One image, one epoch, one filter: no third axis was observed. The depth is the ring that best projects to the image, an inference from that projection, not a measurement.",
@@ -422,7 +637,7 @@
     "The ring’s vertical thickness is a stated convention; at this inclination the projection barely changes with it.",
     "Azimuthal brightness differences in the image, from forward scattering and from real structure, are kept as measured; the ring model supplies only the depth.",
     "Inside the coronagraph mask the star and its immediate surroundings are not data and are not drawn; the star is the host body’s own sphere.",
-    "The colours are the publisher’s legend for surface brightness in this filter, on their logarithmic scale; they are not the colour of the dust. Their scale was printed for their own reduction of the same exposures; this is MAST’s pipeline product drawn on it.",
+    "The colours are the dust’s reflectance across 1.8 to 4.4 micrometres, the publisher’s recipe, mapped to blue, green and red by wavelength: infrared colours, not what an eye would see. The stretch was fitted to the publisher’s panel, which prints no scale; this is MAST’s pipeline product drawn on it.",
     "Opacity is the renderer’s convention, not the dust’s: brightness and blocking are one number in its emission model, and the real ring blocks a small fraction of a percent of what is behind it.",
     "Nothing finer than the mosaic’s pixels or the grid’s cells is in the drawn volume."
   ]

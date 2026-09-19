@@ -49,8 +49,8 @@
     {
       "id": "hd-181327-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2064,
-      "expectedSha256": "70f89b0e502da4d0982456a90b3dc03c15348e1378d2642716036cc941e93cbb",
+      "expectedBytes": 2742,
+      "expectedSha256": "914f871a93a0a4989bd825b763f067125cb7249df0d30b2114c433f259db1a74",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -266,6 +266,34 @@
           }
         ]
       }
+    },
+    {
+      "id": "hd-181327-claret-2017-limb-darkening",
+      "path": "photometry/claret-2017-tess-quadratic.tsv",
+      "expectedBytes": 3615,
+      "expectedSha256": "81e680aef964c5c598ae5bf3f808802f9e42e8f6f7270fa6b6a65fe246bbbd80",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/600/A30/tableab&-out.max=200&Teff=6250..6500&logg=4.0..4.5&Z=0&-out=logg,Teff,Z,L/HP,aLSM,bLSM,aPCM,bPCM,chi2,Type,Mod",
+      "credit": "Claret, A. (2017), A&A 600, A30: limb and gravity-darkening coefficients for the TESS satellite (VizieR J/A+A/600/A30, table ab)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU download in source/preparation/acquisition.json: the quadratic TESS coefficients of the grid nodes at 6250 to 6500 K, log g 4.0 to 4.5, solar metallicity.",
+      "redistribution": "Twelve catalogue rows, retained unchanged with their citation.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-181327-claret-2017-limb-darkening",
+            "role": "material",
+            "evidence": "src/objects/hd-181327/source/manifest.json@0000000000000000000000000000000000000000#/inputs/12"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -296,8 +324,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5252,
-      "expectedSha256": "d432ec95f274ca8e519b1cbba74385a7617478a6db877c82bb4260786c09ddd6",
+      "expectedBytes": 5301,
+      "expectedSha256": "6332d685eb996146fdf0566666524dee07b09d6b58b39036f9c0e6ff898b42dd",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -305,8 +333,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1962,
-      "expectedSha256": "a81b8329dc0bfaa3afc4f632eac77c4f64d9bf54cdc3b1bf063c79e4d5d7ef8c"
+      "expectedBytes": 2320,
+      "expectedSha256": "8e706b5ee653b751076d304409f146aa87a9c9a37ab834f64f0a864fb45a6284"
     },
     {
       "path": "preparation/navigation.json",

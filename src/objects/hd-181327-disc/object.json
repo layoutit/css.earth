@@ -20,25 +20,25 @@
       "metersPerUnit": 149597870700,
       "boundsUnits": {
         "min": [
-          -240,
-          -240,
-          -240
+          -300,
+          -300,
+          -300
         ],
         "max": [
-          240,
-          240,
-          240
+          300,
+          300,
+          300
         ]
       }
     },
     "preparation": {
       "source": "source/delivery.json",
-      "sha256": "cd9b860b95c5ccd76bef7e06112560f77cac257236f10934d8c592e814199ab2"
+      "sha256": "fa724e018510f0bec288c32c79853897879db3acd9fd57aac0b16f3cdc855dba"
     }
   },
   "prepared": {
     "format": "cssearth-volume-lenses@1",
     "url": "prepared/lenses.json",
-    "sha256": "3c62fda1394266545e955711ee4895e6c3bbe5734a1aaf558089e9e1f5450c63"
+    "sha256": "a7167ab9c08c5b7ec976d3286ab00e28a6e4eca34a0d2fc79fbc516afd0e5941"
   }
 }

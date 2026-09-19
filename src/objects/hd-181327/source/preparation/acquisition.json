@@ -50,6 +50,15 @@
       ],
       "path": "photometry/gaia-dr3-xp-sampled.csv",
       "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6643589352010758400&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/claret-2017-tess-quadratic.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/600/A30/tableab&-out.max=200&Teff=6250..6500&logg=4.0..4.5&Z=0&-out=logg,Teff,Z,L/HP,aLSM,bLSM,aPCM,bPCM,chi2,Type,Mod"
     }
   ]
 }
