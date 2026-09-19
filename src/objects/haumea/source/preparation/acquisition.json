@@ -8,6 +8,14 @@
       ],
       "path": "nasa-haumea.glb",
       "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/h/Haumea_1_1000.glb"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "alma/haumea-band7-continuum-cutout.fits",
+      "url": "https://almascience.eso.org/soda/sync?ID=member.uid___A001_X35f5_Xb21.136108_Haumea_2003_EL61_sci.spw5_7_9_11.cont.I.pbcor.fits&CIRCLE=216.6914399162%2015.53032891962%200.00012"
     }
   ]
 }

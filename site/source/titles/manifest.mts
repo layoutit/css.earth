@@ -17,6 +17,7 @@ export const SHELL_TITLE_SOURCES = Object.freeze({
     Object.freeze({ key: "reflectance", label: "Reflectance spectrum", vectorText: "Reflectance spectrum", file: "title-reflectance-spectrum.svg" }),
     Object.freeze({ key: "temperaturePressure", label: "Temperature–pressure profile", vectorText: "Temperature–pressure profile", file: "title-thermal-profile.svg" }),
     Object.freeze({ key: "surfacePhotos", label: "Surface photographs", vectorText: "Surface photos", file: "title-surface-photos.svg" }),
+    Object.freeze({ key: "telescopeImages", label: "Telescope images", vectorText: "Telescope images", file: "title-telescope-images.svg" }),
     Object.freeze({ key: "resources", label: "Sources & Resources", vectorText: "Sources & Resources", file: "title-sources-resources.svg" }),
     Object.freeze({ key: "lenses", label: "Surface lens", vectorText: "Surface lens", file: "title-surface-lens.svg" }),
     Object.freeze({ key: "settings", label: "Settings", vectorText: "Settings", file: "title-settings.svg" }),

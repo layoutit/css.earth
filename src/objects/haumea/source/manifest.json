@@ -141,22 +141,74 @@
           }
         ]
       }
+    },
+    {
+      "id": "alma-image-july-2023",
+      "path": "alma/haumea-band7-continuum-cutout.fits",
+      "origin": "https://almascience.eso.org/soda/sync?ID=member.uid___A001_X35f5_Xb21.136108_Haumea_2003_EL61_sci.spw5_7_9_11.cont.I.pbcor.fits&CIRCLE=216.6914399162%2015.53032891962%200.00012",
+      "credit": "ALMA project 2022.1.01753.S (PI T. Müller); imaged by the ALMA pipeline and served by the ALMA Science Archive",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "alma",
+            "evidence": "Band 7 aggregate continuum image of member OUS uid://A001/X35f5/Xb21, spectral windows 5, 7, 9 and 11 around 343.5 GHz, five executions between 6 and 23 July 2023, public since 27 February 2025."
+          }
+        ]
+      },
+      "license": "Public ALMA archive data under CC BY 4.0; the observatory asks for its standard acknowledgement, which NOTICE.md carries.",
+      "acquisition": "The archive's cutout service (IVOA SODA) cuts a circle of 0.00012 degrees about the image's reference position out of the 299 MB pipeline image, so the whole image is never downloaded. Two requests on 2026-09-19 returned identical bytes. The file is kept in the repository unchanged.",
+      "redistribution": "The cutout is kept unchanged and the sidebar picture is an attributed display derivative; see NOTICE.md.",
+      "consumers": [
+        "content"
+      ],
+      "coverage": "271 x 271 pixels of 3.2 milliarcseconds in Jy/beam, restoring beam 22.6 x 16.3 milliarcseconds at position angle 12.7 degrees. Haumea peaks at 0.248 mJy/beam, 58 milliarcseconds west and 15 south of the reference position; the QA2 report states a noise of 0.013 mJy/beam.",
+      "expectedBytes": 325440,
+      "expectedSha256": "ece91bbbffbb18b7445b7ff0fd68aa90292a9b7195a3d4c2f32adc02dc74da74",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-haumea-alma-image-july-2023",
+            "role": "material",
+            "evidence": "src/objects/haumea/source/manifest.json@12a0eb6e2711580c710f2b39eb977a7bf09ee6cd#/inputs/5"
+          }
+        ]
+      }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5067,
-      "expectedSha256": "dad19322afd0d496139bcb4f54f098407d3a65502a1e201f1186c394c770c8c0",
+      "expectedBytes": 6807,
+      "expectedSha256": "3369f0823fe98f7da7577bd67416a049906b604c775d05709593b3872897d2ba",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
+      "path": "content/charts.json",
+      "expectedBytes": 210,
+      "expectedSha256": "12c2bb55c22d9e02158eb80a710f04966d97bc138633fc1e6260b350c558acdb",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored pointer from the shared content step to the telescope-image gallery."
+      }
+    },
+    {
+      "path": "alma/gallery.json",
+      "expectedBytes": 1878,
+      "expectedSha256": "12d6b337c0bc9348daee1419450c4454e2b9e5b38f8bbbc17de1a12cc40725e8",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored gallery record: the pixel window, grey range, enlargement and reader text of the ALMA picture."
+      }
+    },
+    {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 290,
-      "expectedSha256": "670fb018d42bfb523f2631528c61b31ff92fc1792a93e048349620ac204f1725"
+      "expectedBytes": 623,
+      "expectedSha256": "23c46219264b269d24fbfc9471f7d995822933104b90924cb785e4f3f3aeda31"
     },
     {
       "path": "preparation/rotation.json",
@@ -202,6 +254,15 @@
       },
       "expectedBytes": 95850,
       "expectedSha256": "816be54f9c2fd31c66471ada80dec5922c15c6ea267b14d37c0b72e45fa61b29"
+    },
+    {
+      "path": "reference/rendered-telescope-images.jpg",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /haumea/ with the Telescope images section opened, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide, JPEG quality 90), taken 2026-09-19 after preparation at commit 12a0eb6e27."
+      },
+      "expectedBytes": 150434,
+      "expectedSha256": "c3cda702263bb6d85fa213779294394c4617a31cc6880cebb0293b158d4fd2b9"
     },
     {
       "path": "reference/sbdb.json",

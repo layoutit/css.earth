@@ -57,7 +57,7 @@
       "id": "resolved-surface-imagery",
       "subject": "Disc-resolved images of Haumea",
       "status": "excluded",
-      "finding": "No usable resolved image exists. At about 50 AU the 2,322 km long axis spans about 0.06 arcsec, near the resolution limit of Hubble, JWST and Keck adaptive optics, which record Haumea and its moons as points; at about magnitude 17 it is too faint for VLT/SPHERE's visible-light correction. No spacecraft has visited. The angular size is computed from the Ortiz et al. (2017) axis and the distance, not taken from a paper.",
+      "finding": "No image resolves the surface. At about 50 AU the 2,322 km long axis spans about 0.06 arcsec, near the resolution limit of Hubble, JWST and Keck adaptive optics, which record Haumea and its moons as points; at about magnitude 17 it is too faint for VLT/SPHERE's visible-light correction. ALMA's July 2023 image resolves the outline only, averaged over rotation (entry alma-archive-project), and is kept as a sidebar picture. No spacecraft has visited. The angular size is computed from the Ortiz et al. (2017) axis and the distance, not taken from a paper.",
       "revisitWhen": "A disc-resolved image or a flyby is published.",
       "evidence": [
         "https://doi.org/10.1038/nature24051"
@@ -66,6 +66,10 @@
         {
           "date": "2026-09-16",
           "commit": "92c07424a07153b5dd02aad3e804ce11c580ca05"
+        },
+        {
+          "date": "2026-09-19",
+          "commit": "12a0eb6e2711580c710f2b39eb977a7bf09ee6cd"
         }
       ]
     },
@@ -89,17 +93,39 @@
     {
       "id": "alma-archive-project",
       "subject": "Public ALMA project 2022.1.01753.S on Haumea",
-      "status": "unresolved",
-      "finding": "The ALMA archive holds a public band 7 project on Haumea (target 136108_Haumea_2003_EL61; four observations on 2023-07-06; finest resolution 15.4 mas; principal author Csilla Kalup), missed by the earlier archive search, which did not include ALMA. The 2,322 km long axis spans about 64 mas at 50 AU, so about four beams: a thermal-emission image of that size would show the elongated disc, not a surface map. No resolved analysis of this project was checked, and the pipeline has no route that images ALMA visibilities.",
-      "revisitWhen": "A paper from project 2022.1.01753.S publishes resolved thermal images or maps, or the project's calibrated images are cast through the camera route.",
+      "status": "included",
+      "finding": "Shown as a picture in the sidebar, not as a lens. Project 2022.1.01753.S (PI T. Müller, First direct imaging of a dwarf planet's ring system, band 7, public since 2025-02-27) ran five sessions between 6 and 23 July 2023; its QA2 status is semipass, with noise 15% above tolerance. The pipeline's aggregate continuum image (restoring beam 22.6 x 16.3 mas) shows Haumea at 0.248 mJy/beam, 18 times the noise measured here, about three beams long. Four sessions ran two hours, as long as the outline of the spinning ellipsoid takes to repeat (1.96 hours), so the image averages over rotation, nothing in it belongs to one side of the body, and it cannot be cast onto the surface. The ring is not visible in it and no ring analysis was tried here. An earlier version of this entry named four observations on one date, a 15.4 mas resolution and C. Kalup as principal author: those were the four spectral windows, the archive's nominal figure and the first author of the linked ring-model paper (Kalup, Molnár and Kiss 2024, PASP 136, 124401), which reports no result from these data.",
       "evidence": [
         "https://almascience.eso.org/tap/sync",
-        "https://github.com/layoutit/css.earth/blob/b799d5a56eac68ade89b1501ee8ecb2954ac615e/src/objects/haumea/investigations.json"
+        "https://almascience.eso.org/aq/?projectCode=2022.1.01753.S",
+        "https://almascience.eso.org/dataPortal/member.uid___A001_X35f5_Xb21.qa2_report.pdf",
+        "https://ui.adsabs.harvard.edu/abs/2024PASP..136l4401K"
       ],
       "checked": [
         {
           "date": "2026-09-16",
           "commit": "b799d5a56eac68ade89b1501ee8ecb2954ac615e"
+        },
+        {
+          "date": "2026-09-19",
+          "commit": "12a0eb6e2711580c710f2b39eb977a7bf09ee6cd"
+        }
+      ]
+    },
+    {
+      "id": "alma-rotational-phase-imaging",
+      "subject": "Imaging the ALMA executions by Haumea's rotational phase",
+      "status": "deferred",
+      "finding": "The five raw executions of project 2022.1.01753.S are public (72 GB). The 3.915341-hour period is precise enough to align rotational phase across the 17 days, so the two-hour sessions could be split and imaged at a few phases. Each phase would hold about a quarter of the data, so about half the signal-to-noise ratio, on an outline whose length changes by roughly one beam between broadside and end-on. That is a new analysis with its own risks, not a released dataset to show, and it was not tried.",
+      "revisitWhen": "A paper from project 2022.1.01753.S publishes phase-resolved images or a ring detection, or a deeper ALMA epoch of Haumea is released.",
+      "evidence": [
+        "https://almascience.eso.org/aq/?projectCode=2022.1.01753.S",
+        "https://almascience.eso.org/dataPortal/member.uid___A001_X35f5_Xb21.qa2_report.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-19",
+          "commit": "12a0eb6e2711580c710f2b39eb977a7bf09ee6cd"
         }
       ]
     },
