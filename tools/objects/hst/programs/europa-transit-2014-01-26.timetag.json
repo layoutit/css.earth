@@ -1,0 +1,110 @@
+{
+ "schema": "cssearth-hst-timetag-frame@1",
+ "id": "europa-transit-2014-01-26",
+ "target": "Europa",
+ "horizonsTarget": "502",
+ "bodyRadiusKm": 1560.8,
+ "instrument": "STIS/FUV-MAMA",
+ "opticalElement": "MIRFUV",
+ "aperture": "F25SRF2",
+ "programme": "13438",
+ "rootname": "oc7u02g2q",
+ "tickSeconds": 0.000125,
+ "plateScaleArcsec": 0.0123709925,
+ "detectorPixels": 2048,
+ "files": [
+  {
+   "role": "events",
+   "uri": "mast:HST/product/oc7u02g2q_tag.fits",
+   "name": "oc7u02g2q_tag.fits",
+   "bytes": 540472320,
+   "sha256": "e73abbdf95e27f9b17451d3a4da5b98d04a670f3ee0d425d0ec90e84a720e8cb"
+  },
+  {
+   "role": "engineering telemetry",
+   "uri": "mast:HST/product/oc7u02g2q_spt.fits",
+   "name": "oc7u02g2q_spt.fits",
+   "bytes": 1105920,
+   "sha256": "eea486f4c5aaccf01c1257acbedf8d82feca669631a8eff0de7c3e369ee78a5c"
+  },
+  {
+   "role": "jitter",
+   "uri": "mast:HST/product/oc7u02g2j_jit.fits",
+   "name": "oc7u02g2j_jit.fits",
+   "bytes": 109440,
+   "sha256": "c36b4a4db20c2e21c89ab293bfbb6b8bcde6e940b79d425b95b708831fe2aaae"
+  }
+ ],
+ "horizons": {
+  "observer": "500@-48",
+  "target": "502",
+  "quantities": "1,13",
+  "responses": "europa-transit-2014-01-26.horizons.json"
+ },
+ "grid": {
+  "pixels": 512,
+  "kmPerPixel": 35
+ },
+ "tracking": {
+  "slices": 24,
+  "innerRadii": 0.7,
+  "outerRadii": 2.2,
+  "binPixels": 2,
+  "brightSurroundShare": 0.5,
+  "searchPixels": 30
+ },
+ "sectors": [
+  {
+   "id": "sparks-2016-south-polar",
+   "annulusRadii": [1, 1.25],
+   "latitudeRange": [-60, -40],
+   "controlRadii": [1.5, 2.5],
+   "binPixels": [5, 7],
+   "note": "The region Sparks et al. (2016) measure their January 2014 candidate in: 1.0 to 1.25 Europa radii, planetographic latitude -40 to -60 degrees, on 5x5 and 7x7 pixel bins of the 35 km frame."
+  }
+ ],
+ "published": [
+  {
+   "id": "europa-radius-pixels",
+   "quantity": "Europa's radius in the 35 km frame",
+   "value": 44.6,
+   "unit": "pixels",
+   "source": "Sparks et al. (2016), Probing for evidence of plumes on Europa with HST/STIS, ApJ 829, 121, doi:10.3847/0004-637X/829/2/121, section 3.1"
+  },
+  {
+   "id": "sparks-2016-z-5x5",
+   "quantity": "significance of the January 2014 candidate, 5x5 binning",
+   "value": 3.9,
+   "unit": "sigma",
+   "source": "Sparks et al. (2016), doi:10.3847/0004-637X/829/2/121, section 4"
+  },
+  {
+   "id": "sparks-2016-z-7x7",
+   "quantity": "significance of the January 2014 candidate, 7x7 binning",
+   "value": 4,
+   "unit": "sigma",
+   "source": "Sparks et al. (2016), doi:10.3847/0004-637X/829/2/121, section 4"
+  },
+  {
+   "id": "giono-2020-z",
+   "quantity": "the same candidate after the position and the model scatter are accounted for",
+   "value": 3.3,
+   "uncertainty": 0.5,
+   "unit": "sigma",
+   "source": "Giono et al. (2020), An analysis of the statistics and systematics of limb anomaly detections in HST/STIS transit images of Europa, AJ 159, 155, doi:10.3847/1538-3881/ab7454"
+  }
+ ],
+ "notes": {
+  "measured": [
+   "The exposure is rebuilt in Europa's frame from its own event list: the good time, the drift, the tracking residual, the events placed, Europa's radius on the grid, and the darkest-bin statistics in the claimed sector.",
+   "The statistics are reported in two normalisations, because a control annulus away from Europa does not give a scatter of one: the formal Poisson significance, and the same bin divided by the scatter the limb annulus itself shows.",
+   "The same latitude band on the northern side is measured as well, so a claim that is really about Europa's south pole can be told from one the whole limb shows."
+  ],
+  "notVerified": [
+   "This stage does not build the Jovian background model of Sparks et al. (2016) section 3.1, which is accumulated from one-second slices in Jupiter's own rest frame with Europa's path masked out and divided by a matching exposure-time image. A polynomial surface fitted outside 1.6 Europa radii stands in for it, and Jupiter's belts survive that fit.",
+   "This stage does not build the Europa model of Sparks et al. (2016) section 3.2: the USGS 500 m Galileo mosaic projected onto a sphere, contrast adjusted by a fitted factor, multiplied by an Oren-Nayar illumination function of fitted roughness and convolved with a composite TinyTim point-spread function that mixes a far-ultraviolet model with a 300 nm one for the red leak. The azimuthal average of the data stands in for it, and it does not carry Europa's albedo pattern.",
+   "The detector's geometric distortion is not corrected: the events are counted at the coordinates the file stores. The archive applies that correction only when it rectifies an image.",
+   "Because neither model is reproduced, no number here is a reproduction of the significance Sparks et al. report. What is comparable is the location of the darkest bin and the scatter the statistics actually show."
+  ]
+ }
+}

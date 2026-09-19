@@ -27,7 +27,11 @@ export interface PixelModelKeys {
 export interface SpiceCameraRequest {
   readonly pool: KernelPool; readonly ephemeris: Ephemeris; readonly rotation: (frame: string | number, et: number) => Matrix3;
   readonly observer: number; readonly target: number; readonly bodyFrame: string; readonly instrument: number;
-  readonly et: number; readonly aberration: Aberration; readonly pixels: PixelModelKeys; readonly sun?: number;
+  readonly et: number; readonly aberration: Aberration; readonly sun?: number;
+  /** The kernel variables to read the pixel model from, or a model the caller resolved from an instrument kernel that names its variables another way. */
+  readonly pixels: PixelModelKeys | PixelModel;
+  /** Where along its path the observer is taken, when a fit separates that epoch from the pointing epoch `et`. */
+  readonly ephemerisEt?: number;
 }
 export interface SpiceCamera {
   readonly schema: 'cssearth-archived-camera@1';
@@ -62,6 +66,8 @@ export function aberrationRotation(u: readonly number[], velocity: readonly numb
   return [[t * x * x + c, t * x * y - s * z, t * x * z + s * y], [t * x * y + s * z, t * y * y + c, t * y * z - s * x], [t * x * z - s * y, t * y * z + s * x, t * z * z + c]];
 }
 
+export type PixelModel = ReturnType<typeof pixelModel>;
+
 /** Read the pixel model from the instrument kernel variables the recipe names. */
 export function pixelModel(pool: KernelPool, instrument: number, keys: PixelModelKeys) {
   const key = (suffix: string) => `INS${instrument}_${suffix}`;
@@ -92,11 +98,11 @@ export function pixelModel(pool: KernelPool, instrument: number, keys: PixelMode
  * applied as one rotation at the target direction; across a narrow field it
  * differs from per-pixel aberration by far less than a pixel.
  */
-export function spiceCamera({ pool, ephemeris, rotation, observer, target, bodyFrame, instrument, et, aberration, pixels, sun = 10 }: SpiceCameraRequest): SpiceCamera {
-  const model = pixelModel(pool, instrument, pixels);
+export function spiceCamera({ pool, ephemeris, rotation, observer, target, bodyFrame, instrument, et, aberration, pixels, sun = 10, ephemerisEt = et }: SpiceCameraRequest): SpiceCamera {
+  const model = 'focalLengthPixels' in pixels ? pixels : pixelModel(pool, instrument, pixels);
   const lightTime = aberration !== 'NONE', stellarAberration = aberration.endsWith('+S'), converged = aberration.startsWith('CN');
-  const apparent = ephemeris.apparent(target, observer, et, { lightTime, stellarAberration, converged }), emissionEt = apparent.emissionEt;
-  const observerState = ephemeris.state(observer, 0, et), targetAtEmission = ephemeris.state(target, 0, emissionEt).position;
+  const apparent = ephemeris.apparent(target, observer, ephemerisEt, { lightTime, stellarAberration, converged }), emissionEt = apparent.emissionEt;
+  const observerState = ephemeris.state(observer, 0, ephemerisEt), targetAtEmission = ephemeris.state(target, 0, emissionEt).position;
   const bodyRotation = rotation(bodyFrame, emissionEt); // J2000 -> body
   const positionKm = apply(bodyRotation, [observerState.position[0] - targetAtEmission[0], observerState.position[1] - targetAtEmission[1], observerState.position[2] - targetAtEmission[2]]);
   // Geometric directions from the observer are aberrated before the instrument sees them: instrument <- aberration <- J2000 <- body.

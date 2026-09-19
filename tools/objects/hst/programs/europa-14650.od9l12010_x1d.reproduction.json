@@ -1,0 +1,383 @@
+{
+  "schema": "cssearth-hst-reproduction@1",
+  "program": "europa-14650",
+  "observation": "od9l12010",
+  "product": "od9l12010_x1d",
+  "instrument": "STIS/CCD",
+  "opticalElement": "G430L",
+  "toolchain": "tools/objects/hst/toolchain.json",
+  "crdsContext": "hst_1358.pmap",
+  "mast": {
+    "name": "od9l12010_x1d.fits",
+    "uri": "mast:HST/product/od9l12010_x1d.fits",
+    "bytes": 80640,
+    "sha256": "3943ff8bb3b8d4b79cb67b20d9c14328f27537dac37f2496dd0808b54e15722d",
+    "CAL_VER": "3.4.2 (19-Jan-2018)",
+    "OPUS_VER": "HSTDP 2025_2",
+    "PROCTIME": 60882.42059028,
+    "FILENAME": "od9l12010_x1d.fits",
+    "DATE": "2025-07-26"
+  },
+  "local": {
+    "sha256": "56555d49bfddee191ce0545ab3bd5710c381e3de47a96f5f38e78b297147bb2d",
+    "CAL_VER": "3.5.0 (02-Feb-2026)",
+    "OPUS_VER": "HSTDP 2025_2",
+    "PROCTIME": 60882.42059028,
+    "FILENAME": "od9l12010_x1d.fits",
+    "DATE": "2026-09-19"
+  },
+  "differentSettings": {
+    "IMPHTTAB": {
+      "ours": "oref$97a1641fo_imp.fits",
+      "mast": "oref$77o18274o_imp.fits"
+    }
+  },
+  "differentGrid": [],
+  "repeatedCards": [],
+  "extensions": [
+    {
+      "extname": "SCI",
+      "extver": 1,
+      "kind": "table",
+      "rows": 1,
+      "columns": [
+        {
+          "column": "SPORDER",
+          "samples": 1,
+          "both": 1,
+          "identical": 1,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 1,
+          "medianLevel": 1,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 0,
+            "correlation": null,
+            "relativeDifference": null
+          }
+        },
+        {
+          "column": "NELEM",
+          "samples": 1,
+          "both": 1,
+          "identical": 1,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 1,
+          "medianLevel": 1024,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 0,
+            "correlation": null,
+            "relativeDifference": null
+          }
+        },
+        {
+          "column": "WAVELENGTH",
+          "samples": 1024,
+          "both": 1024,
+          "identical": 14,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 0.013671875,
+          "medianLevel": 4299.98876953125,
+          "medianAbsoluteDifferenceOverMedian": 1.6920875853767851e-15,
+          "aboveMedian": {
+            "samples": 513,
+            "correlation": 0.9999999999999326,
+            "relativeDifference": {
+              "median": 1.8167831808738565e-15,
+              "p99": 2.2587556553887306e-15,
+              "largest": 2.301606840432089e-15
+            }
+          }
+        },
+        {
+          "column": "GROSS",
+          "samples": 1024,
+          "both": 1024,
+          "identical": 1017,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 0.9931640625,
+          "medianLevel": 214.23629760742188,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 512,
+            "correlation": 1,
+            "relativeDifference": {
+              "median": 0,
+              "p99": 0,
+              "largest": 8.713097798818126e-8
+            }
+          }
+        },
+        {
+          "column": "BACKGROUND",
+          "samples": 1024,
+          "both": 1024,
+          "identical": 1024,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 1,
+          "medianLevel": 0,
+          "medianAbsoluteDifferenceOverMedian": null,
+          "aboveMedian": {
+            "samples": 0,
+            "correlation": null,
+            "relativeDifference": null
+          }
+        },
+        {
+          "column": "NET",
+          "samples": 1024,
+          "both": 1024,
+          "identical": 1017,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 0.9931640625,
+          "medianLevel": 214.23629760742188,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 512,
+            "correlation": 1,
+            "relativeDifference": {
+              "median": 0,
+              "p99": 0,
+              "largest": 8.713097798818126e-8
+            }
+          }
+        },
+        {
+          "column": "FLUX",
+          "samples": 1024,
+          "both": 1024,
+          "identical": 1017,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 0.9931640625,
+          "medianLevel": 1.2517993640357578e-13,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 512,
+            "correlation": 1,
+            "relativeDifference": {
+              "median": 0,
+              "p99": 0,
+              "largest": 1.5194451918887353e-7
+            }
+          }
+        },
+        {
+          "column": "ERROR",
+          "samples": 1024,
+          "both": 1024,
+          "identical": 826,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 0.806640625,
+          "medianLevel": 3.014469768841308e-15,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 512,
+            "correlation": 0.9999999999999984,
+            "relativeDifference": {
+              "median": 0,
+              "p99": 1.903341768638711e-7,
+              "largest": 2.264055467549042e-7
+            }
+          }
+        },
+        {
+          "column": "NET_ERROR",
+          "samples": 1024,
+          "both": 1024,
+          "identical": 825,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 0.8056640625,
+          "medianLevel": 4.923362731933594,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 512,
+            "correlation": 0.9999999999999839,
+            "relativeDifference": {
+              "median": 0,
+              "p99": 9.344500995212002e-8,
+              "largest": 1.6331543406522542e-7
+            }
+          }
+        },
+        {
+          "column": "DQ",
+          "samples": 1024,
+          "both": 1024,
+          "identical": 1024,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 1,
+          "medianLevel": 2048,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 364,
+            "correlation": 1,
+            "relativeDifference": {
+              "median": 0,
+              "p99": 0,
+              "largest": 0
+            }
+          }
+        },
+        {
+          "column": "A2CENTER",
+          "samples": 1,
+          "both": 1,
+          "identical": 1,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 1,
+          "medianLevel": 34.75120544433594,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 0,
+            "correlation": null,
+            "relativeDifference": null
+          }
+        },
+        {
+          "column": "EXTRSIZE",
+          "samples": 1,
+          "both": 1,
+          "identical": 1,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 1,
+          "medianLevel": 7,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 0,
+            "correlation": null,
+            "relativeDifference": null
+          }
+        },
+        {
+          "column": "MAXSRCH",
+          "samples": 1,
+          "both": 1,
+          "identical": 1,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 1,
+          "medianLevel": 1024,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 0,
+            "correlation": null,
+            "relativeDifference": null
+          }
+        },
+        {
+          "column": "BK1SIZE",
+          "samples": 1,
+          "both": 1,
+          "identical": 1,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 1,
+          "medianLevel": 5,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 0,
+            "correlation": null,
+            "relativeDifference": null
+          }
+        },
+        {
+          "column": "BK2SIZE",
+          "samples": 1,
+          "both": 1,
+          "identical": 1,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 1,
+          "medianLevel": 5,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 0,
+            "correlation": null,
+            "relativeDifference": null
+          }
+        },
+        {
+          "column": "BK1OFFST",
+          "samples": 1,
+          "both": 1,
+          "identical": 1,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 1,
+          "medianLevel": 300,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 0,
+            "correlation": null,
+            "relativeDifference": null
+          }
+        },
+        {
+          "column": "BK2OFFST",
+          "samples": 1,
+          "both": 1,
+          "identical": 1,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 1,
+          "medianLevel": 300,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 0,
+            "correlation": null,
+            "relativeDifference": null
+          }
+        },
+        {
+          "column": "EXTRLOCY",
+          "samples": 1024,
+          "both": 1024,
+          "identical": 1023,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 0.9990234375,
+          "medianLevel": 34.75117492675781,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 512,
+            "correlation": 0.9999999999860508,
+            "relativeDifference": {
+              "median": 0,
+              "p99": 0,
+              "largest": 1.0893122492916518e-7
+            }
+          }
+        },
+        {
+          "column": "OFFSET",
+          "samples": 1,
+          "both": 1,
+          "identical": 1,
+          "onlyLocal": 0,
+          "onlyMast": 0,
+          "identicalShare": 1,
+          "medianLevel": 505.1168518066406,
+          "medianAbsoluteDifferenceOverMedian": 0,
+          "aboveMedian": {
+            "samples": 0,
+            "correlation": null,
+            "relativeDifference": null
+          }
+        }
+      ]
+    }
+  ]
+}

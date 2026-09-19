@@ -1,0 +1,115 @@
+{
+  "schema": "cssearth-hst-reproduction@1",
+  "program": "europa-15419",
+  "observation": "idr203wtq",
+  "product": "idr203wtq_drz",
+  "instrument": "WFC3/UVIS",
+  "opticalElement": "F631N",
+  "toolchain": "tools/objects/hst/toolchain.json",
+  "crdsContext": "hst_1358.pmap",
+  "mast": {
+    "name": "idr203wtq_drz.fits",
+    "uri": "mast:HST/product/idr203wtq_drz.fits",
+    "bytes": 3496320,
+    "sha256": "9a5b4610fe6917ca244b46893199237acd989ef0e415cdf9c12a0117e5da2915",
+    "CAL_VER": "3.7.3 (Jan-07-2026)",
+    "OPUS_VER": "HSTDP 2026_1",
+    "PROCTIME": 61200.41493056,
+    "FILENAME": "idr203wtq_drz.fits",
+    "DATE": "2026-06-09"
+  },
+  "local": {
+    "sha256": "68cf6b5c9fca5d4efad349864fdde7c2be5270692f14be789e9712b18b597545",
+    "CAL_VER": "3.7.3 (Jan-07-2026)",
+    "OPUS_VER": "HSTDP 2026_1",
+    "PROCTIME": 61200.41493056,
+    "FILENAME": "idr203wtq_drz.fits",
+    "DATE": "2026-09-19"
+  },
+  "differentSettings": {
+    "RULEFILE": {
+      "ours": "/Users/ekrof/fed/css.earth-hubble/output/toolchains/hst/env/lib/python3.12/site-packages/fitsblender/wfc3_header.rules",
+      "mast": "/opt/conda/envs/linux/lib/python3.12/site-packages/fitsblender/wfc3_header.rules"
+    }
+  },
+  "differentGrid": [
+    "HDRTAB,1: 2178x1 against MAST's 2181x1"
+  ],
+  "repeatedCards": [],
+  "extensions": [
+    {
+      "extname": "SCI",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        515,
+        543
+      ],
+      "samples": 279645,
+      "both": 263811,
+      "identical": 134252,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 0.5088946253188836,
+      "medianLevel": 17.339059829711914,
+      "medianAbsoluteDifferenceOverMedian": 0,
+      "aboveMedian": {
+        "samples": 131905,
+        "correlation": 0.9970691842640232,
+        "relativeDifference": {
+          "median": 1.0806565597931694e-7,
+          "p99": 0.04218202084302902,
+          "largest": 9.96030044555664
+        }
+      }
+    },
+    {
+      "extname": "WHT",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        515,
+        543
+      ],
+      "samples": 279645,
+      "both": 279645,
+      "identical": 201961,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 0.722204938404048,
+      "medianLevel": 229.73391723632812,
+      "medianAbsoluteDifferenceOverMedian": 0,
+      "aboveMedian": {
+        "samples": 139818,
+        "correlation": -0.2946732671976672,
+        "relativeDifference": {
+          "median": 0,
+          "p99": 1,
+          "largest": 1
+        }
+      }
+    },
+    {
+      "extname": "CTX",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        515,
+        543
+      ],
+      "samples": 279645,
+      "both": 279645,
+      "identical": 247543,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 0.8852044556491265,
+      "medianLevel": 1,
+      "medianAbsoluteDifferenceOverMedian": 0,
+      "aboveMedian": {
+        "samples": 0,
+        "correlation": null,
+        "relativeDifference": null
+      }
+    }
+  ]
+}

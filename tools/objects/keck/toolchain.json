@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-keck-toolchain@1",
+  "purpose": "The Keck DRP the observatory archive itself runs, to re-reduce a KOA observation from its raw frames: the KCWI Data Reduction Pipeline (kcwi_reduce), whose products KOA publishes as its own level 1 data.",
+  "license": "kcwidrp, keckdrpframework: BSD-3-Clause (Keck-DataReductionPipelines)",
+  "platform": "osx-arm64; kcwidrp 1.3.1 is a pure-Python wheel and every pinned dependency has an osx-arm64 or universal wheel for CPython 3.12, so no x86_64 emulation is needed.",
+  "micromamba": {
+    "channel": "conda-forge",
+    "packages": [
+      "python=3.12",
+      "pip"
+    ]
+  },
+  "requirements": "requirements.lock",
+  "binaries": {
+    "kcwiReduce": "reduce_kcwi"
+  },
+  "archive": "https://koa.ipac.caltech.edu",
+  "memory": "One KCWI blue frame binned 2x2 is 2112 x 2046 (10.2 MB on disk); a stage that holds a night's master bias and master flat beside the science frame stays well under 2 GiB, the ceiling reduce.mts runs with.",
+  "notes": "The OSIRIS DRP is IDL (Keck-DataReductionPipelines/OsirisDRP), so an OSIRIS cube cannot be re-run here; KOA's own OSIRIS level 1 cube states the recipe it was made with in its header, and archive.mts pins and reads that instead. PypeIt covers the Keck slit spectrographs but not the imagers, and is not installed here."
+}

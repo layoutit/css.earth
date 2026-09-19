@@ -1,0 +1,1109 @@
+{
+  "schema": "cssearth-naco-ledger@1",
+  "instrument": "NAOS+CONICA",
+  "measured": "2026-09-19",
+  "frames": {
+    "total": 1171327,
+    "byCategory": {
+      "ACQUISITION": 26130,
+      "CALIB": 594592,
+      "SCIENCE": 550445,
+      "TEST": 160
+    },
+    "byMode": {
+      "coronography": 80281,
+      "differential": 12692,
+      "imaging": 231839,
+      "sampol": 3075,
+      "sdi4": 2351,
+      "app": 6165,
+      "cube": 136973,
+      "other": 40038,
+      "sam": 21243,
+      "fabry-perot": 3441,
+      "chopping": 2909,
+      "spectroscopy": 9438
+    }
+  },
+  "objects": [
+    {
+      "id": "uranus",
+      "targets": [
+        "URANUS"
+      ],
+      "frames": 1746,
+      "programmes": [
+        "079.C-0626(A)",
+        "079.C-0682(A)",
+        "080.C-0357(A)",
+        "2100.C-5006(A)",
+        "2100.C-5006(C)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "neptune",
+      "targets": [
+        "NEPTUNE"
+      ],
+      "frames": 744,
+      "programmes": [
+        "079.C-0626(A)",
+        "079.C-0682(A)",
+        "080.C-0483(A)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "titan",
+      "targets": [
+        "TITAN"
+      ],
+      "frames": 558,
+      "programmes": [
+        "072.C-0593(A)",
+        "074.C-0545(A)",
+        "078.C-0777(A)",
+        "60.A-9026(A)",
+        "70.C-0565(A)"
+      ],
+      "modes": [
+        "differential",
+        "fabry-perot",
+        "other"
+      ]
+    },
+    {
+      "id": "kalliope",
+      "targets": [
+        "KALLIOPE"
+      ],
+      "frames": 548,
+      "programmes": [
+        "085.C-0480(I)",
+        "273.C-5034(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ]
+    },
+    {
+      "id": "jupiter",
+      "targets": [
+        "JUPITER",
+        "JUPITER-3H40",
+        "JUPITER-4H30",
+        "JUPITER-5H40"
+      ],
+      "frames": 491,
+      "programmes": [
+        "072.C-0795(C)",
+        "097.C-0415(A)",
+        "281.C-5045(A)",
+        "281.C-5045(B)",
+        "283.C-5045(A)",
+        "283.C-5045(B)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ]
+    },
+    {
+      "id": "betelgeuse",
+      "targets": [
+        "BETELGEUSE"
+      ],
+      "frames": 375,
+      "programmes": [
+        "082.D-0172(A)",
+        "090.D-0662(A)",
+        "090.D-0662(C)",
+        "094.D-0869(C)",
+        "288.D-5025(A)",
+        "288.D-5025(B)",
+        "386.D-0360(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "patroclus",
+      "targets": [
+        "PATROCLUS"
+      ],
+      "frames": 324,
+      "programmes": [
+        "083.C-0517(H)",
+        "087.C-0014(H)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "pluto",
+      "targets": [
+        "PLUTO"
+      ],
+      "frames": 316,
+      "programmes": [
+        "079.C-0351(A)",
+        "081.C-0462(A)",
+        "081.C-0462(B)",
+        "089.C-0314(C)"
+      ],
+      "modes": [
+        "imaging",
+        "spectroscopy"
+      ]
+    },
+    {
+      "id": "quaoar",
+      "targets": [
+        "QUAOAR"
+      ],
+      "frames": 279,
+      "programmes": [
+        "087.C-0470(C)",
+        "087.C-0470(F)",
+        "178.C-0036(V)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "daphne",
+      "targets": [
+        "DAPHNE"
+      ],
+      "frames": 264,
+      "programmes": [
+        "088.C-0617(A)",
+        "091.C-0526(A)",
+        "281.C-5011(A)",
+        "281.C-5011(E)",
+        "281.C-5011(F)",
+        "281.C-5011(G)",
+        "281.C-5011(H)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ]
+    },
+    {
+      "id": "vesta",
+      "targets": [
+        "VESTA"
+      ],
+      "frames": 217,
+      "programmes": [
+        "076.C-0580(A)"
+      ],
+      "modes": [
+        "imaging",
+        "spectroscopy"
+      ]
+    },
+    {
+      "id": "lutetia",
+      "targets": [
+        "LUTETIA"
+      ],
+      "frames": 186,
+      "programmes": [
+        "079.C-0493(A)",
+        "087.C-0577(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging",
+        "spectroscopy"
+      ]
+    },
+    {
+      "id": "eugenia",
+      "targets": [
+        "EUGENIA"
+      ],
+      "frames": 160,
+      "programmes": [
+        "072.C-0016(A)",
+        "088.C-0528(D)",
+        "088.C-0617(A)",
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging",
+        "other"
+      ]
+    },
+    {
+      "id": "io",
+      "targets": [
+        "IO"
+      ],
+      "frames": 136,
+      "programmes": [
+        "078.C-0472(A)",
+        "078.C-0472(B)",
+        "078.C-0472(C)",
+        "078.C-0472(D)"
+      ],
+      "modes": [
+        "chopping",
+        "imaging"
+      ]
+    },
+    {
+      "id": "europa",
+      "targets": [
+        "EUROPA"
+      ],
+      "frames": 98,
+      "programmes": [
+        "088.C-0833(B)"
+      ],
+      "modes": [
+        "spectroscopy"
+      ]
+    },
+    {
+      "id": "juno",
+      "targets": [
+        "JUNO"
+      ],
+      "frames": 84,
+      "programmes": [
+        "076.C-0678(A)",
+        "086.C-0785(A)",
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ]
+    },
+    {
+      "id": "hd-181327",
+      "targets": [
+        "HD181327"
+      ],
+      "frames": 82,
+      "programmes": [
+        "081.C-0519(A)",
+        "279.C-5052(A)",
+        "383.C-0600(A)"
+      ],
+      "modes": [
+        "coronography",
+        "differential",
+        "imaging"
+      ]
+    },
+    {
+      "id": "pallas",
+      "targets": [
+        "PALLAS"
+      ],
+      "frames": 80,
+      "programmes": [
+        "074.C-0502(A)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "ganymede",
+      "targets": [
+        "GANYMEDE"
+      ],
+      "frames": 77,
+      "programmes": [
+        "079.C-0626(A)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "hermione",
+      "targets": [
+        "HERMIONE",
+        "__HERMIONE"
+      ],
+      "frames": 70,
+      "programmes": [
+        "072.C-0016(A)",
+        "088.C-0528(F)",
+        "089.C-0944(A)",
+        "091.C-0526(A)",
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging",
+        "other"
+      ]
+    },
+    {
+      "id": "minerva",
+      "targets": [
+        "MINERVA"
+      ],
+      "frames": 70,
+      "programmes": [
+        "088.C-0528(B)",
+        "089.C-0565(D)",
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ]
+    },
+    {
+      "id": "elektra",
+      "targets": [
+        "ELEKTRA"
+      ],
+      "frames": 60,
+      "programmes": [
+        "072.C-0016(A)",
+        "089.C-0944(B)",
+        "091.C-0526(A)",
+        "095.C-0618(B)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ]
+    },
+    {
+      "id": "ganymed",
+      "targets": [
+        "GANYMED"
+      ],
+      "frames": 54,
+      "programmes": [
+        "488.L-0182(A)",
+        "488.L-0182(B)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "psyche",
+      "targets": [
+        "PSYCHE"
+      ],
+      "frames": 44,
+      "programmes": [
+        "086.C-0785(A)",
+        "60.A-9026(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "iris",
+      "targets": [
+        "IRIS"
+      ],
+      "frames": 41,
+      "programmes": [
+        "086.C-0785(A)",
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "ceres",
+      "targets": [
+        "CERES"
+      ],
+      "frames": 40,
+      "programmes": [
+        "080.C-0881(C)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "sylvia",
+      "targets": [
+        "SYLVIA"
+      ],
+      "frames": 40,
+      "programmes": [
+        "085.C-0480(H)",
+        "088.C-0528(E)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "cybele",
+      "targets": [
+        "CYBELE"
+      ],
+      "frames": 38,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ]
+    },
+    {
+      "id": "euphrosyne",
+      "targets": [
+        "EUPHROSYNE"
+      ],
+      "frames": 36,
+      "programmes": [
+        "088.C-0617(A)",
+        "488.L-0182(B)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ]
+    },
+    {
+      "id": "eris",
+      "targets": [
+        "ERIS"
+      ],
+      "frames": 35,
+      "programmes": [
+        "085.C-0480(J)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "irene",
+      "targets": [
+        "IRENE"
+      ],
+      "frames": 32,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ]
+    },
+    {
+      "id": "amphitrite",
+      "targets": [
+        "AMPHITRITE"
+      ],
+      "frames": 28,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ]
+    },
+    {
+      "id": "nausikaa",
+      "targets": [
+        "NAUSIKAA"
+      ],
+      "frames": 26,
+      "programmes": [
+        "088.C-0617(A)",
+        "488.L-0182(B)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ]
+    },
+    {
+      "id": "camilla",
+      "targets": [
+        "CAMILLA"
+      ],
+      "frames": 24,
+      "programmes": [
+        "087.C-0014(K)",
+        "088.C-0528(C)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "europa-52",
+      "targets": [
+        "52EUROPA-26T0340",
+        "52_EUROPA"
+      ],
+      "frames": 24,
+      "programmes": [
+        "079.C-0528(A)",
+        "087.C-0257(A)"
+      ],
+      "modes": [
+        "imaging",
+        "spectroscopy"
+      ]
+    },
+    {
+      "id": "victoria",
+      "targets": [
+        "VICTORIA"
+      ],
+      "frames": 24,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "emma",
+      "targets": [
+        "EMMA"
+      ],
+      "frames": 22,
+      "programmes": [
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ]
+    },
+    {
+      "id": "hektor",
+      "targets": [
+        "HEKTOR"
+      ],
+      "frames": 21,
+      "programmes": [
+        "380.C-0490(A)",
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "imaging",
+        "other"
+      ]
+    },
+    {
+      "id": "egeria",
+      "targets": [
+        "EGERIA"
+      ],
+      "frames": 20,
+      "programmes": [
+        "087.C-0577(A)",
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ]
+    },
+    {
+      "id": "hebe",
+      "targets": [
+        "HEBE"
+      ],
+      "frames": 20,
+      "programmes": [
+        "086.C-0785(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "kleopatra",
+      "targets": [
+        "KLEOPATRA"
+      ],
+      "frames": 20,
+      "programmes": [
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "vibilia",
+      "targets": [
+        "VIBILIA"
+      ],
+      "frames": 20,
+      "programmes": [
+        "086.C-0785(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "thisbe",
+      "targets": [
+        "THISBE"
+      ],
+      "frames": 18,
+      "programmes": [
+        "086.C-0785(A)",
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "flora",
+      "targets": [
+        "FLORA"
+      ],
+      "frames": 15,
+      "programmes": [
+        "086.C-0785(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "harmonia",
+      "targets": [
+        "HARMONIA"
+      ],
+      "frames": 12,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "metis",
+      "targets": [
+        "METIS"
+      ],
+      "frames": 12,
+      "programmes": [
+        "087.C-0577(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "eva",
+      "targets": [
+        "EVA"
+      ],
+      "frames": 10,
+      "programmes": [
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "laetitia",
+      "targets": [
+        "LAETITIA"
+      ],
+      "frames": 10,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "artemis",
+      "targets": [
+        "ARTEMIS"
+      ],
+      "frames": 9,
+      "programmes": [
+        "482.L-0802(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "althaea",
+      "targets": [
+        "ALTHAEA"
+      ],
+      "frames": 8,
+      "programmes": [
+        "072.C-0016(A)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "diotima",
+      "targets": [
+        "DIOTIMA"
+      ],
+      "frames": 8,
+      "programmes": [
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "euterpe",
+      "targets": [
+        "EUTERPE"
+      ],
+      "frames": 8,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "lucina",
+      "targets": [
+        "LUCINA"
+      ],
+      "frames": 8,
+      "programmes": [
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "other"
+      ]
+    },
+    {
+      "id": "mentor",
+      "targets": [
+        "MENTOR"
+      ],
+      "frames": 8,
+      "programmes": [
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "other"
+      ]
+    },
+    {
+      "id": "anahita",
+      "targets": [
+        "ANAHITA"
+      ],
+      "frames": 6,
+      "programmes": [
+        "482.L-0802(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "herculina",
+      "targets": [
+        "HERCULINA"
+      ],
+      "frames": 6,
+      "programmes": [
+        "087.C-0577(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "moon",
+      "targets": [
+        "MOON"
+      ],
+      "frames": 6,
+      "programmes": [
+        "283.C-5034(A)",
+        "60.A-9026(A)"
+      ],
+      "modes": [
+        "cube",
+        "other"
+      ]
+    },
+    {
+      "id": "sappho",
+      "targets": [
+        "SAPPHO"
+      ],
+      "frames": 6,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "bamberga",
+      "targets": [
+        "BAMBERGA"
+      ],
+      "frames": 5,
+      "programmes": [
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "hestia",
+      "targets": [
+        "HESTIA"
+      ],
+      "frames": 5,
+      "programmes": [
+        "086.C-0785(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    },
+    {
+      "id": "circe",
+      "targets": [
+        "CIRCE"
+      ],
+      "frames": 4,
+      "programmes": [
+        "072.C-0016(A)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "erigone",
+      "targets": [
+        "ERIGONE"
+      ],
+      "frames": 4,
+      "programmes": [
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "other"
+      ]
+    },
+    {
+      "id": "feronia",
+      "targets": [
+        "FERONIA"
+      ],
+      "frames": 4,
+      "programmes": [
+        "072.C-0016(A)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "meliboea",
+      "targets": [
+        "MELIBOEA"
+      ],
+      "frames": 4,
+      "programmes": [
+        "072.C-0016(A)"
+      ],
+      "modes": [
+        "imaging"
+      ]
+    },
+    {
+      "id": "nemausa",
+      "targets": [
+        "NEMAUSA"
+      ],
+      "frames": 4,
+      "programmes": [
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "other"
+      ]
+    },
+    {
+      "id": "unitas",
+      "targets": [
+        "UNITAS"
+      ],
+      "frames": 4,
+      "programmes": [
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "other"
+      ]
+    },
+    {
+      "id": "doris",
+      "targets": [
+        "DORIS"
+      ],
+      "frames": 3,
+      "programmes": [
+        "087.C-0577(A)"
+      ],
+      "modes": [
+        "cube"
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "mode": "app",
+      "frames": 6165,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "chopping",
+      "frames": 2909,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "coronography",
+      "frames": 80281,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "cube",
+      "frames": 136973,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "differential",
+      "frames": 12692,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "fabry-perot",
+      "frames": 3441,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "imaging",
+      "frames": 231839,
+      "programs": [
+        "ceres-080C0881"
+      ],
+      "receipts": [
+        "ceres-080C0881.COADDED_IMG.reproduction.json"
+      ],
+      "state": "reduced",
+      "reason": "1 receipt(s) beside 1 pinned program(s)."
+    },
+    {
+      "mode": "other",
+      "frames": 40038,
+      "programs": [],
+      "receipts": [],
+      "state": "not reduced",
+      "reason": "No program of this mode is pinned."
+    },
+    {
+      "mode": "sam",
+      "frames": 21243,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "sampol",
+      "frames": 3075,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "sdi4",
+      "frames": 2351,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "spectroscopy",
+      "frames": 9438,
+      "programs": [
+        "europa-088C0833"
+      ],
+      "receipts": [
+        "europa-088C0833.SPC_NOD_COMBINED.reproduction.json",
+        "europa-088C0833.spectrum.reproduction.json"
+      ],
+      "state": "reduced",
+      "reason": "2 receipt(s) beside 1 pinned program(s)."
+    }
+  ],
+  "receiptProblems": []
+}

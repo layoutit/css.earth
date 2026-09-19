@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-jwst-spec3-reproduction@1",
+  "program": "europa-1250",
+  "band": "MIRI-MRS-CH1-SHORT",
+  "observation": "jw01250-o003_t001_miri_ch1-short",
+  "toolchain": "tools/objects/jwst/toolchain.json",
+  "crdsContext": "jwst_1535.pmap",
+  "mast": {
+    "name": "jw01250-o003_t001_miri_ch1-short_s3d.fits",
+    "uri": "mast:JWST/product/jw01250-o003_t001_miri_ch1-short_s3d.fits",
+    "bytes": 31259520,
+    "sha256": "2673bb36d5c27f1c64973bcb8d83a87884348fc553c5352eae2d050045710203",
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "local": {
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "grid": {
+    "width": 45,
+    "height": 41,
+    "planes": 1050,
+    "arcsecPerPixel": 0.12999999523162822,
+    "micrometres": [
+      4.900400095357327,
+      5.739600074157352
+    ]
+  },
+  "samples": {
+    "both": 1166586,
+    "onlyOurs": 0,
+    "onlyMast": 0,
+    "identicalShare": 0.9999537110851665,
+    "correlation": 0.9999999999999996,
+    "largestRelativeDifferenceAboveMedian": 6.859372503331684e-8
+  }
+}

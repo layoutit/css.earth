@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-chandra-toolchain@1",
+  "purpose": "The Chandra X-ray Center's own analysis software, to re-run an archive observation's standard data processing from its level-1 products: chandra_repro (ciao-contrib) driving acis_process_events / hrc_process_events and the CIAO tools, against a pinned CALDB.",
+  "license": "ciao, ciao-contrib, sherpa: GPL-3.0 (Smithsonian Astrophysical Observatory). CALDB: calibration data released by the Chandra X-ray Center for public use.",
+  "platform": "osx-arm64; the CXC conda channel publishes a native osx-arm64 build of ciao 4.18.0 (py312), so no x86_64 emulation is needed. CALDB is architecture-independent (noarch).",
+  "micromamba": {
+    "channels": [
+      "https://cxc.cfa.harvard.edu/conda/ciao",
+      "conda-forge"
+    ],
+    "packages": [
+      "python=3.12",
+      "ciao=4.18.0",
+      "ciao-contrib=4.18.2",
+      "caldb_main=4.12.4",
+      "numpy<2.4"
+    ]
+  },
+  "caldbRelative": "CALDB",
+  "binaries": {
+    "chandra_repro": "chandra_repro",
+    "acis_process_events": "acis_process_events",
+    "hrc_process_events": "hrc_process_events",
+    "dmlist": "dmlist",
+    "dmcopy": "dmcopy",
+    "dmstat": "dmstat"
+  },
+  "backgroundFiles": "The caldb meta-package also pulls acis_bkg_evt (1.26 GB) and hrc_bkg_evt (2.24 GB), the blank-sky background event files. chandra_repro does not read them, so only caldb_main is pinned.",
+  "memory": "chandra_repro on one ACIS-S observation streams the event list through acis_process_events; the level-1 event files this toolkit pins are tens of MB compressed, so the run stays far below the 2 GiB ceiling reprocess.mts enforces.",
+  "numpy": "CIAO 4.18.0's pycrates imports numpy.chararray, which numpy 2.5 removed, so numpy is held below 2.4 although the ciao package accepts any numpy 2. Measured: with numpy 2.5.3 `import pycrates` fails with ImportError: cannot import name 'chararray'; with 2.3.5 it imports.",
+  "versionFiles": {
+    "ciao": "VERSION",
+    "caldb": "CALDB/docs/chandra/caldb_version/caldb_version.fits"
+  },
+  "size": "Installed: 7.1 GB, of which CALDB is 6.1 GB. Download: 2.5 GB over 217 packages; the install took 14.5 minutes on this machine."
+}

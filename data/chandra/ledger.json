@@ -1,0 +1,1174 @@
+{
+  "schema": "cssearth-chandra-ledger@1",
+  "measured": "2026-09-19",
+  "archive": {
+    "archivedObservations": 27147,
+    "byInstrument": {
+      "ACIS-S": 14863,
+      "ACIS-I": 8609,
+      "HRC-I": 2006,
+      "HRC-S": 1669
+    },
+    "byGrating": {
+      "NONE": 23956,
+      "HETG": 2082,
+      "LETG": 1109
+    },
+    "byExposureMode": {
+      "TE": 23013,
+      "(none)": 3675,
+      "CC": 459
+    }
+  },
+  "shippedObjects": {
+    "antares": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 247.3519154198264,
+        "decDeg": -26.432002611950832
+      },
+      "source": "packages/astronomy/data/bodies/antares.json",
+      "observations": 1,
+      "totalExposureKs": 24,
+      "longest": [
+        {
+          "obsid": 15734,
+          "target": "ANTARES",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 23.982,
+          "startDate": "2014-08-30T15:44:38"
+        }
+      ]
+    },
+    "betelgeuse": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 88.79293899077537,
+        "decDeg": 7.407063995272694
+      },
+      "source": "packages/astronomy/data/bodies/betelgeuse.json",
+      "observations": 35,
+      "totalExposureKs": 110.3,
+      "longest": [
+        {
+          "obsid": 30670,
+          "target": "BETELGEUSE",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 8.876,
+          "startDate": "2024-12-11T09:05:51"
+        },
+        {
+          "obsid": 30673,
+          "target": "BETELGEUSE",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 8.729,
+          "startDate": "2024-12-13T18:57:59"
+        },
+        {
+          "obsid": 30671,
+          "target": "BETELGEUSE",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 5.879,
+          "startDate": "2024-12-11T23:57:12"
+        }
+      ]
+    },
+    "comet-103p": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "COMET103P/HARTLEY2"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 14,
+      "totalExposureKs": 73.6,
+      "longest": [
+        {
+          "obsid": 13189,
+          "target": "COMET103P/HARTLEY2",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 9.061,
+          "startDate": "2010-11-16T04:15:43"
+        },
+        {
+          "obsid": 12322,
+          "target": "COMET103P/HARTLEY2",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 8.85,
+          "startDate": "2010-11-16T01:16:52"
+        },
+        {
+          "obsid": 13172,
+          "target": "COMET103P/HARTLEY2",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 6.603,
+          "startDate": "2010-11-04T15:25:13"
+        }
+      ]
+    },
+    "comet-17p": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "COMET17P/HOLMES"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 3,
+      "totalExposureKs": 30.1,
+      "longest": [
+        {
+          "obsid": 9762,
+          "target": "COMET17P/HOLMES",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 10.06,
+          "startDate": "2007-10-31T13:20:13"
+        },
+        {
+          "obsid": 9763,
+          "target": "COMET17P/HOLMES",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 10.05,
+          "startDate": "2007-10-31T16:15:23"
+        },
+        {
+          "obsid": 9755,
+          "target": "COMET17P/HOLMES",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 10.009,
+          "startDate": "2007-10-31T10:06:19"
+        }
+      ]
+    },
+    "comet-2i": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "C/2019Q4BORISOV"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 6,
+      "totalExposureKs": 75,
+      "longest": [
+        {
+          "obsid": 23093,
+          "target": "C/2019Q4BORISOV",
+          "instrument": "HRC-S",
+          "grating": "NONE",
+          "exposureKs": 12.583,
+          "startDate": "2019-12-18T18:43:26"
+        },
+        {
+          "obsid": 23091,
+          "target": "C/2019Q4BORISOV",
+          "instrument": "HRC-S",
+          "grating": "NONE",
+          "exposureKs": 12.58,
+          "startDate": "2019-12-17T01:33:33"
+        },
+        {
+          "obsid": 23089,
+          "target": "C/2019Q4BORISOV",
+          "instrument": "HRC-S",
+          "grating": "NONE",
+          "exposureKs": 12.57,
+          "startDate": "2019-12-16T07:55:52"
+        }
+      ]
+    },
+    "comet-2p": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "COMET2P/ENCKE"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 30,
+      "totalExposureKs": 44.1,
+      "longest": [
+        {
+          "obsid": 5281,
+          "target": "COMET2P/ENCKE",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 1.949,
+          "startDate": "2003-11-24T18:53:43"
+        },
+        {
+          "obsid": 5255,
+          "target": "COMET2P/ENCKE",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 1.46,
+          "startDate": "2003-11-24T05:53:44"
+        },
+        {
+          "obsid": 5256,
+          "target": "COMET2P/ENCKE",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 1.457,
+          "startDate": "2003-11-24T06:23:44"
+        }
+      ]
+    },
+    "comet-46p": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "46P/WIRTANEN"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 18,
+      "totalExposureKs": 82.2,
+      "longest": [
+        {
+          "obsid": 21981,
+          "target": "46P/WIRTANEN",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 11.216,
+          "startDate": "2018-12-04T03:23:25"
+        },
+        {
+          "obsid": 21982,
+          "target": "46P/WIRTANEN",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 9.943,
+          "startDate": "2018-12-13T05:56:31"
+        },
+        {
+          "obsid": 20275,
+          "target": "46P/WIRTANEN",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 9.937,
+          "startDate": "2018-12-03T18:12:10"
+        }
+      ]
+    },
+    "comet-8p": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "COMET8P/TUTTLE"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 15,
+      "totalExposureKs": 46.8,
+      "longest": [
+        {
+          "obsid": 9788,
+          "target": "COMET8P/TUTTLE",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 3.153,
+          "startDate": "2008-01-03T01:07:06"
+        },
+        {
+          "obsid": 9779,
+          "target": "COMET8P/TUTTLE",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 3.15,
+          "startDate": "2008-01-01T08:41:06"
+        },
+        {
+          "obsid": 9786,
+          "target": "COMET8P/TUTTLE",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 3.15,
+          "startDate": "2008-01-02T23:10:06"
+        }
+      ]
+    },
+    "comet-9p": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "COMET9P/TEMPEL1"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 35,
+      "totalExposureKs": 292.6,
+      "longest": [
+        {
+          "obsid": 6325,
+          "target": "COMET9P/TEMPEL1",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 10.67,
+          "startDate": "2005-07-04T04:11:16"
+        },
+        {
+          "obsid": 6316,
+          "target": "COMET9P/TEMPEL1",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 10.06,
+          "startDate": "2005-06-30T16:46:50"
+        },
+        {
+          "obsid": 6318,
+          "target": "COMET9P/TEMPEL1",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 10.057,
+          "startDate": "2005-06-30T22:37:10"
+        }
+      ]
+    },
+    "comet-c2013-a1": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "COMETC/2013A1SIDINGSPRING"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 2,
+      "totalExposureKs": 21.6,
+      "longest": [
+        {
+          "obsid": 17531,
+          "target": "COMETC/2013A1SIDINGSPRING",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 14.383,
+          "startDate": "2014-10-19T16:40:53"
+        },
+        {
+          "obsid": 16646,
+          "target": "COMETC/2013A1SIDINGSPRING",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 7.218,
+          "startDate": "2014-10-19T14:21:44"
+        }
+      ]
+    },
+    "earth": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "EARTH"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 11,
+      "totalExposureKs": 0,
+      "longest": [
+        {
+          "obsid": 4410,
+          "target": "EARTH",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 0,
+          "startDate": "2003-02-07T01:23:15"
+        },
+        {
+          "obsid": 4457,
+          "target": "EARTH",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 0,
+          "startDate": "2004-01-06T07:56:22"
+        },
+        {
+          "obsid": 4458,
+          "target": "EARTH",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 0,
+          "startDate": "2004-02-28T05:00:29"
+        }
+      ]
+    },
+    "hd-181327": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 290.745785785032,
+        "decDeg": -54.538414066989446
+      },
+      "source": "packages/astronomy/data/bodies/hd-181327.json",
+      "observations": 1,
+      "totalExposureKs": 46.4,
+      "longest": [
+        {
+          "obsid": 4472,
+          "target": "HR7329B",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 46.365,
+          "startDate": "2004-08-06T12:43:51"
+        }
+      ]
+    },
+    "hd-189733": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 300.1821218062407,
+        "decDeg": 22.709741105168273
+      },
+      "source": "packages/astronomy/data/bodies/hd-189733.json",
+      "observations": 6,
+      "totalExposureKs": 116.4,
+      "longest": [
+        {
+          "obsid": 12343,
+          "target": "HD189733",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 19.797,
+          "startDate": "2011-07-12T03:26:19"
+        },
+        {
+          "obsid": 12341,
+          "target": "HD189733",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 19.797,
+          "startDate": "2011-07-21T00:23:17"
+        },
+        {
+          "obsid": 12342,
+          "target": "HD189733",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 19.797,
+          "startDate": "2011-07-23T06:18:51"
+        }
+      ]
+    },
+    "hd-189733-companion": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 300.1790158599167,
+        "decDeg": 22.708365170697956
+      },
+      "source": "packages/astronomy/data/bodies/hd-189733-companion.json",
+      "observations": 6,
+      "totalExposureKs": 116.4,
+      "longest": [
+        {
+          "obsid": 12343,
+          "target": "HD189733",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 19.797,
+          "startDate": "2011-07-12T03:26:19"
+        },
+        {
+          "obsid": 12341,
+          "target": "HD189733",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 19.797,
+          "startDate": "2011-07-21T00:23:17"
+        },
+        {
+          "obsid": 12342,
+          "target": "HD189733",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 19.797,
+          "startDate": "2011-07-23T06:18:51"
+        }
+      ]
+    },
+    "helix": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 337.4107083333334,
+        "decDeg": -20.83717222222222
+      },
+      "source": "src/objects/helix/source/nebula.json",
+      "observations": 2,
+      "totalExposureKs": 47.7,
+      "longest": [
+        {
+          "obsid": 631,
+          "target": "NGC7293",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 36.694,
+          "startDate": "1999-11-17T11:48:34"
+        },
+        {
+          "obsid": 1480,
+          "target": "NGC7293",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 11.022,
+          "startDate": "1999-11-18T04:58:37"
+        }
+      ]
+    },
+    "jupiter": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "JUPITER"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 64,
+      "totalExposureKs": 2021.8,
+      "longest": [
+        {
+          "obsid": 23368,
+          "target": "JUPITER",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 142.316,
+          "startDate": "2021-07-22T02:38:26"
+        },
+        {
+          "obsid": 23369,
+          "target": "JUPITER",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 140.195,
+          "startDate": "2021-09-15T12:32:16"
+        },
+        {
+          "obsid": 2519,
+          "target": "JUPITER",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 70.701,
+          "startDate": "2003-02-25T00:21:20"
+        }
+      ]
+    },
+    "lmc": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 78.76,
+        "decDeg": -69.19
+      },
+      "source": "src/objects/local-group/prepared/catalogue.json",
+      "observations": 1,
+      "totalExposureKs": 27.6,
+      "longest": [
+        {
+          "obsid": 14032,
+          "target": "LMCN113",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 27.607,
+          "startDate": "2013-02-13T18:29:34"
+        }
+      ]
+    },
+    "m1": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 83.6334511837,
+        "decDeg": 22.0151236394
+      },
+      "source": "src/objects/m1/source/nebula.json",
+      "observations": 102,
+      "totalExposureKs": 688.8,
+      "longest": [
+        {
+          "obsid": 9765,
+          "target": "CRABPULSAR",
+          "instrument": "HRC-S",
+          "grating": "LETG",
+          "exposureKs": 97.28,
+          "startDate": "2008-01-22T15:57:17"
+        },
+        {
+          "obsid": 758,
+          "target": "CRABPULSAR",
+          "instrument": "HRC-S",
+          "grating": "LETG",
+          "exposureKs": 74.42,
+          "startDate": "2000-01-31T01:14:39"
+        },
+        {
+          "obsid": 4607,
+          "target": "CRABNEBULA",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 37.25,
+          "startDate": "2004-01-27T01:11:43"
+        }
+      ]
+    },
+    "m2-9": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 256.407962101,
+        "decDeg": -10.1425459988
+      },
+      "source": "src/objects/m2-9/source/nebula.json",
+      "observations": 1,
+      "totalExposureKs": 19.6,
+      "longest": [
+        {
+          "obsid": 2578,
+          "target": "M2-9",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 19.632,
+          "startDate": "2003-01-24T04:23:26"
+        }
+      ]
+    },
+    "m31": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 10.683916666666665,
+        "decDeg": 41.26566666666666
+      },
+      "source": "src/objects/local-group/prepared/catalogue.json",
+      "observations": 215,
+      "totalExposureKs": 2910.5,
+      "longest": [
+        {
+          "obsid": 15562,
+          "target": "M31",
+          "instrument": "ACIS-S",
+          "grating": "HETG",
+          "exposureKs": 76.148,
+          "startDate": "2013-03-01T15:01:20"
+        },
+        {
+          "obsid": 15273,
+          "target": "M31NORTH",
+          "instrument": "ACIS-S",
+          "grating": "HETG",
+          "exposureKs": 76.056,
+          "startDate": "2013-10-11T14:29:56"
+        },
+        {
+          "obsid": 15275,
+          "target": "M31",
+          "instrument": "ACIS-S",
+          "grating": "HETG",
+          "exposureKs": 76.056,
+          "startDate": "2013-11-01T21:34:06"
+        }
+      ]
+    },
+    "m33": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 23.462,
+        "decDeg": 30.6603
+      },
+      "source": "src/objects/local-group/prepared/catalogue.json",
+      "observations": 53,
+      "totalExposureKs": 1808,
+      "longest": [
+        {
+          "obsid": 6378,
+          "target": "M33",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 110.234,
+          "startDate": "2005-09-21T00:14:13"
+        },
+        {
+          "obsid": 6381,
+          "target": "M33",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 98.901,
+          "startDate": "2006-09-12T09:17:56"
+        },
+        {
+          "obsid": 6383,
+          "target": "M33",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 97.852,
+          "startDate": "2006-06-15T06:22:31"
+        }
+      ]
+    },
+    "m42": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 83.78715182853901,
+        "decDeg": -5.400382551151912
+      },
+      "source": "src/objects/m42/source/nebula.json",
+      "observations": 111,
+      "totalExposureKs": 3736.5,
+      "longest": [
+        {
+          "obsid": 4373,
+          "target": "ORIONNEBULACLUSTER",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 171.465,
+          "startDate": "2003-01-13T07:33:40"
+        },
+        {
+          "obsid": 4374,
+          "target": "ORIONNEBULACLUSTER",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 168.976,
+          "startDate": "2003-01-15T23:59:34"
+        },
+        {
+          "obsid": 4396,
+          "target": "ORIONNEBULACLUSTER",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 164.549,
+          "startDate": "2003-01-18T14:33:45"
+        }
+      ]
+    },
+    "m45": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 56.75,
+        "decDeg": 24.1167
+      },
+      "source": "src/objects/m45/source/nebula.json",
+      "observations": 6,
+      "totalExposureKs": 254.9,
+      "longest": [
+        {
+          "obsid": 17252,
+          "target": "PLEIADES",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 93.837,
+          "startDate": "2015-04-02T08:51:20"
+        },
+        {
+          "obsid": 17250,
+          "target": "PLEIADES",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 49.453,
+          "startDate": "2015-03-27T05:58:48"
+        },
+        {
+          "obsid": 17251,
+          "target": "PLEIADES",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 49.451,
+          "startDate": "2015-03-30T19:21:26"
+        }
+      ]
+    },
+    "m8": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 270.76531645904527,
+        "decDeg": -24.30622861770443
+      },
+      "source": "src/objects/m8/source/nebula.json",
+      "observations": 5,
+      "totalExposureKs": 318.2,
+      "longest": [
+        {
+          "obsid": 3754,
+          "target": "M8",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 127.961,
+          "startDate": "2003-07-25T17:27:12"
+        },
+        {
+          "obsid": 5398,
+          "target": "9SGR",
+          "instrument": "ACIS-S",
+          "grating": "HETG",
+          "exposureKs": 101.226,
+          "startDate": "2005-05-11T18:41:15"
+        },
+        {
+          "obsid": 6285,
+          "target": "9SGR",
+          "instrument": "ACIS-S",
+          "grating": "HETG",
+          "exposureKs": 44.602,
+          "startDate": "2005-06-09T11:33:40"
+        }
+      ]
+    },
+    "mars": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "MARS"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 3,
+      "totalExposureKs": 102.5,
+      "longest": [
+        {
+          "obsid": 24850,
+          "target": "MARS",
+          "instrument": "HRC-I",
+          "grating": "LETG",
+          "exposureKs": 36.65,
+          "startDate": "2020-10-26T08:49:41"
+        },
+        {
+          "obsid": 22688,
+          "target": "MARS",
+          "instrument": "HRC-I",
+          "grating": "LETG",
+          "exposureKs": 33.095,
+          "startDate": "2020-10-25T15:45:57"
+        },
+        {
+          "obsid": 1861,
+          "target": "MARS",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 32.745,
+          "startDate": "2001-07-04T11:32:29"
+        }
+      ]
+    },
+    "moon": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "MOON"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 6,
+      "totalExposureKs": 0,
+      "longest": [
+        {
+          "obsid": 5311,
+          "target": "MOON",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 0,
+          "startDate": "2004-05-04T04:36:37"
+        },
+        {
+          "obsid": 5324,
+          "target": "MOON",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 0,
+          "startDate": "2004-05-04T06:59:09"
+        },
+        {
+          "obsid": 5327,
+          "target": "MOON",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 0,
+          "startDate": "2004-06-02T10:58:11"
+        }
+      ]
+    },
+    "pluto": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "PLUTO",
+        "PLUTO(134340)"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 4,
+      "totalExposureKs": 171.7,
+      "longest": [
+        {
+          "obsid": 17709,
+          "target": "PLUTO(134340)",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 105.821,
+          "startDate": "2015-08-01T21:10:04"
+        },
+        {
+          "obsid": 15699,
+          "target": "PLUTO",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 34.619,
+          "startDate": "2014-02-24T02:01:44"
+        },
+        {
+          "obsid": 17708,
+          "target": "PLUTO(134340)",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 17.366,
+          "startDate": "2015-07-30T05:10:52"
+        }
+      ]
+    },
+    "polaris": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 37.954560670189856,
+        "decDeg": 89.26410896994187
+      },
+      "source": "packages/astronomy/data/bodies/polaris.json",
+      "observations": 2,
+      "totalExposureKs": 79,
+      "longest": [
+        {
+          "obsid": 18928,
+          "target": "POLARIS",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 69.163,
+          "startDate": "2017-07-07T05:57:09"
+        },
+        {
+          "obsid": 6431,
+          "target": "POLARIS",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 9.828,
+          "startDate": "2006-02-09T01:01:22"
+        }
+      ]
+    },
+    "saturn": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "SATURN"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 9,
+      "totalExposureKs": 328.8,
+      "longest": [
+        {
+          "obsid": 12318,
+          "target": "SATURN",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 78.993,
+          "startDate": "2011-05-02T08:14:06"
+        },
+        {
+          "obsid": 12317,
+          "target": "SATURN",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 78.487,
+          "startDate": "2011-04-30T05:23:07"
+        },
+        {
+          "obsid": 4466,
+          "target": "SATURN",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 37.372,
+          "startDate": "2004-01-20T00:05:02"
+        }
+      ]
+    },
+    "smc": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 16.25,
+        "decDeg": -72.42
+      },
+      "source": "src/objects/local-group/prepared/catalogue.json",
+      "observations": 3,
+      "totalExposureKs": 68.7,
+      "longest": [
+        {
+          "obsid": 2758,
+          "target": "SNR0103-72.6",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 48.83,
+          "startDate": "2002-08-27T04:03:19"
+        },
+        {
+          "obsid": 5485,
+          "target": "[MCS2008]208",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 10.047,
+          "startDate": "2006-02-08T11:53:25"
+        },
+        {
+          "obsid": 5486,
+          "target": "[MCS2008]133",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 9.829,
+          "startDate": "2006-02-10T16:38:28"
+        }
+      ]
+    },
+    "titan": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "TITAN"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 3,
+      "totalExposureKs": 28.4,
+      "longest": [
+        {
+          "obsid": 3727,
+          "target": "TITAN",
+          "instrument": "ACIS-S",
+          "grating": "HETG",
+          "exposureKs": 9.849,
+          "startDate": "2003-01-05T09:03:20"
+        },
+        {
+          "obsid": 4412,
+          "target": "TITAN",
+          "instrument": "ACIS-S",
+          "grating": "HETG",
+          "exposureKs": 9.547,
+          "startDate": "2003-01-05T12:25:00"
+        },
+        {
+          "obsid": 4413,
+          "target": "TITAN",
+          "instrument": "ACIS-S",
+          "grating": "HETG",
+          "exposureKs": 9.022,
+          "startDate": "2003-01-05T15:36:50"
+        }
+      ]
+    },
+    "trappist-1": {
+      "matchedBy": "sky position",
+      "position": {
+        "raDeg": 346.62652162764437,
+        "decDeg": -5.043528319429532
+      },
+      "source": "packages/astronomy/data/bodies/trappist-1.json",
+      "observations": 6,
+      "totalExposureKs": 30.2,
+      "longest": [
+        {
+          "obsid": 26488,
+          "target": "TRAPPIST-1",
+          "instrument": "HRC-S",
+          "grating": "NONE",
+          "exposureKs": 7.969,
+          "startDate": "2024-09-11T18:52:54"
+        },
+        {
+          "obsid": 29522,
+          "target": "TRAPPIST-1",
+          "instrument": "HRC-S",
+          "grating": "NONE",
+          "exposureKs": 5.982,
+          "startDate": "2024-09-12T13:00:53"
+        },
+        {
+          "obsid": 29523,
+          "target": "TRAPPIST-1",
+          "instrument": "HRC-S",
+          "grating": "NONE",
+          "exposureKs": 5.863,
+          "startDate": "2024-09-13T01:14:03"
+        }
+      ]
+    },
+    "uranus": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "URANUS"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 3,
+      "totalExposureKs": 79,
+      "longest": [
+        {
+          "obsid": 2518,
+          "target": "URANUS",
+          "instrument": "ACIS-S",
+          "grating": "NONE",
+          "exposureKs": 29.582,
+          "startDate": "2002-08-07T15:59:01"
+        },
+        {
+          "obsid": 20846,
+          "target": "URANUS",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 24.839,
+          "startDate": "2017-11-11T19:28:10"
+        },
+        {
+          "obsid": 20847,
+          "target": "URANUS",
+          "instrument": "HRC-I",
+          "grating": "NONE",
+          "exposureKs": 24.534,
+          "startDate": "2017-11-12T12:55:49"
+        }
+      ]
+    },
+    "venus": {
+      "matchedBy": "target name",
+      "archiveNames": [
+        "VENUS"
+      ],
+      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "observations": 44,
+      "totalExposureKs": 302.2,
+      "longest": [
+        {
+          "obsid": 583,
+          "target": "VENUS",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 11.709,
+          "startDate": "2001-01-13T12:22:12"
+        },
+        {
+          "obsid": 16503,
+          "target": "VENUS",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 8.859,
+          "startDate": "2013-11-08T16:50:43"
+        },
+        {
+          "obsid": 16499,
+          "target": "VENUS",
+          "instrument": "ACIS-I",
+          "grating": "NONE",
+          "exposureKs": 8.858,
+          "startDate": "2013-11-08T06:23:23"
+        }
+      ]
+    }
+  },
+  "modes": {
+    "HRC-I no grating OBSERVING": {
+      "state": "reproduced",
+      "program": "jupiter-hrci",
+      "obsid": 18676,
+      "target": "Jupiter",
+      "livetimeSeconds": 9304.9,
+      "objectCentredFrame": "checked against JPL Horizons"
+    },
+    "ACIS-0123 no grating TIMED/FAINT": {
+      "state": "reproduced",
+      "program": "m1-crab-halo",
+      "obsid": 2798,
+      "target": "CRAB NEBULA HALO",
+      "livetimeSeconds": 19980.3
+    },
+    "ACIS-012367 no grating TIMED/VFAINT": {
+      "state": "reproduced",
+      "program": "polaris-vfaint",
+      "obsid": 6431,
+      "target": "Polaris",
+      "livetimeSeconds": 9828.4
+    },
+    "any detector, HETG or LETG": {
+      "state": "refused",
+      "why": "chandra_repro needs the grating's zero-order position. Its default takes that position from the archive's own level-2 event list, which would make the re-run depend on the product it is being compared against. The independent option, tg_zo_position=detect, found no source on either grating observation tried here: obsid 169 (ACIS-S/HETG, Crab Pulsar) and obsid 12228 (HRC-S/LETG, Crab Pulsar) both stopped with \"No sources detected\" under CIAO 4.18.0. Measured 2026-09-19."
+    }
+  },
+  "receiptProblems": []
+}

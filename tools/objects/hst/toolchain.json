@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-hst-toolchain@1",
+  "purpose": "STScI's own HST calibration software, to re-run an archive observation's instrument pipeline from its raw exposure: calstis (cs0.e) for STIS, calwf3.e for WFC3, calacs.e for ACS, with CRDS reference files at a pinned context.",
+  "license": "hstcal, stistools, wfc3tools, acstools, drizzlepac, crds: BSD-3-Clause (STScI)",
+  "platform": "osx-arm64; hstcal 3.2.0 has a conda-forge osx-arm64 build and drizzlepac 3.11.0 a cp312 macosx_11_0_arm64 wheel, so no x86_64 emulation is needed.",
+  "micromamba": {
+    "channel": "conda-forge",
+    "packages": [
+      "python=3.12",
+      "pip",
+      "hstcal=3.2.0"
+    ]
+  },
+  "requirements": "requirements.lock",
+  "binaries": {
+    "calstis": "cs0.e",
+    "calwf3": "calwf3.e",
+    "calacs": "calacs.e"
+  },
+  "crdsServer": "https://hst-crds.stsci.edu",
+  "memory": "One STIS/FUV-MAMA G140L ACCUM exposure (2048 x 2048, 16 MB raw) calibrates at under 0.2 GiB; one STIS/CCD 1060 x 80 subarray at under 0.15 GiB. Both are far below the 2 GiB ceiling calibrate.mts uses by default."
+}

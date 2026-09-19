@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { parseTextKernel } from './text-kernel.mts';
 import { Ephemeris } from './geometry.mts';
 import { rotation, pckRotation } from './frames.mts';
-import { spiceCamera, invert, aberrationRotation, type PixelModelKeys } from './camera.mts';
+import { spiceCamera, invert, aberrationRotation, pixelModel, type PixelModelKeys } from './camera.mts';
 import type { SpkSegment } from './spk.mts';
 
 // A body whose fixed frame coincides with J2000 (pole at +Z, prime meridian along +X), a camera frame that is J2000
@@ -81,4 +81,18 @@ test('light time and stellar aberration move the apparent target as SPICE does',
   assert.ok(close(moving.report.aberrationMicroradians, 1e6 * 30 / 299792.458, 1e-3));
   const r = aberrationRotation([0, 0, -1], [30, 0, 0]);
   assert.ok(close(r[0][2], -Math.sin(30 / 299792.458), 1e-12) && close(r[2][2], Math.cos(30 / 299792.458), 1e-12), 'rotation of the boresight toward +X');
+});
+
+test('a resolved pixel model replaces the kernel keys, and a separate ephemeris epoch moves the observer without turning the camera', () => {
+  // The observer drifts +X at 2 km/s. Taken half a second later along its path, it stands 1 km further, so the target falls 1000 px back along the columns.
+  const ephemeris = scene({ observerVelocity: [2, 0, 0] }), model = pixelModel(pool, -900101, pixels);
+  const base = { pool, ephemeris, rotation: rotate, observer: -99, target: 599, bodyFrame: 'ROCK_FIXED', instrument: -900101, et: 0, aberration: 'NONE' as const };
+  const keyed = spiceCamera({ ...base, pixels }), resolved = spiceCamera({ ...base, pixels: model }), later = spiceCamera({ ...base, pixels: model, ephemerisEt: 0.5 });
+  assert.deepEqual(resolved.matrix, keyed.matrix); assert.deepEqual(resolved.rayMatrix, keyed.rayMatrix);
+  assert.deepEqual(later.rayMatrix, keyed.rayMatrix, 'the pointing is read at et, whatever the ephemeris epoch');
+  assert.deepEqual(later.positionKm.map(v => Math.round(v * 1e9) / 1e9), [1, 0, 100]);
+  assert.ok(close(project(later.matrix, [0, 0, 0])[0], 49.5 - 1000, 1e-6), `${project(later.matrix, [0, 0, 0])}`);
+  // A strip's model moves its optical centre; nothing else about the camera changes.
+  const shifted = spiceCamera({ ...base, pixels: { ...model, center: [model.center[0] - 20, model.center[1]] } });
+  assert.ok(close(project(shifted.matrix, [0, 0, 0])[0], 29.5, 1e-9));
 });

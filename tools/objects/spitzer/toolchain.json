@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-spitzer-toolchain@1",
+  "purpose": "A pinned Python environment that re-makes a Spitzer/IRAC level-2 mosaic from the level-1 frames the archive mosaicked, using astropy's WCS (with the frames' own SIP distortion) and reproject's exact flux-conserving resampling. This is NOT the observatory's own post-BCD software; see `official` below for what was tried and measured.",
+  "license": "numpy, scipy: BSD-3-Clause. astropy, reproject, astropy-healpix: BSD-3-Clause. dask, zarr, fsspec: BSD-3-Clause. All public PyPI and conda-forge builds, no account needed.",
+  "platform": "osx-arm64. Every package has a native arm64 wheel or conda-forge build, so nothing is emulated.",
+  "official": {
+    "software": "MOPEX 18.5.0 (mopex18_5_0-mac64.dmg), the Spitzer Science Center's own post-BCD mosaicker and point-source extractor.",
+    "obtained": "Yes, public download from the IRSA Spitzer data analysis tools pages, no login.",
+    "runs": false,
+    "measured": "2026-09-19 on macOS 15 (Darwin 24.6.0), Apple silicon. The distribution's executables are Mach-O 64-bit x86_64 (`file mosaic_int` and its siblings), and `arch -x86_64` is available, so Rosetta 2 is installed. The binaries still did not run: macOS Gatekeeper refused the unsigned, quarantined distribution and raised the system dialog `\"mopex\" is damaged and can't be opened`, which kills the process. Running them would mean removing the quarantine attribute, re-signing the binaries or changing the machine's security assessment policy, and none of that is done here. The disk image was unmounted and the 363 MB download deleted.",
+    "consequence": "No Spitzer-authored software ran. The mosaic stage of this toolkit is an open re-implementation and every receipt it writes says so. IRS spectroscopy (SPICE, CUBISM, IRSCLEAN) was not attempted: those are Java and IDL tools with the same signing problem and a harder pipeline, and this toolkit does not claim them."
+  },
+  "micromamba": {
+    "channel": "conda-forge",
+    "packages": [
+      "python=3.12",
+      "pip"
+    ]
+  },
+  "requirements": "requirements.lock",
+  "archive": {
+    "search": "https://irsa.ipac.caltech.edu/applications/Spitzer/SHA/sticky/CmdSrv",
+    "data": "https://irsa.ipac.caltech.edu/ibe/data/spitzer"
+  },
+  "memory": "One IRAC channel of a 24-frame mapping AOR reprojects 12 frames of 256 x 256 onto a 2361 x 1036 mosaic grid. The stack of reprojected frames is the peak allocation: 12 x 2361 x 1036 x 4 bytes is 117 MB, and the whole run measured under 0.5 GiB. The stage refuses a job whose predicted stack exceeds `maxStackBytes` (1 GiB by default) rather than starting it."
+}
