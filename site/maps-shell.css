@@ -448,14 +448,29 @@
   max-height: calc(var(--object-category-visible-rows) * 28px);
 }
 /* Reserve the loaded list's own height while the shared catalogue fragment is
-   still in flight, so inserting it never shifts the panel around it. */
-#object-category-results:has(> .planet-object-loading:not([hidden])) {
+   still in flight (or failed), so inserting it never shifts the panel around
+   it. The tabbed panel and the search/browse panel target different heights
+   (see the `[data-search-results]` override below), so each reserves its own. */
+#object-category-results:has(> .planet-object-loading:not([hidden]), > .planet-object-error:not([hidden])) {
   min-height: calc(var(--object-category-visible-rows) * 28px);
 }
-.planet-object-loading {
+[data-search-results] #object-category-results:has(> .planet-object-loading:not([hidden]), > .planet-object-error:not([hidden])) {
+  min-height: min(420px, 55dvh);
+}
+.planet-object-loading, .planet-object-error {
   margin: 0;
   color: var(--shell-text-muted);
   font: var(--shell-font-content);
+}
+.planet-object-retry {
+  padding: 0;
+  border: 0;
+  color: var(--shell-text);
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font: inherit;
+  cursor: pointer;
 }
 [data-system-results] > [data-system-header]:not([data-system-current]) { display: none; }
 [data-search-results] [data-system-results] { padding-top: 8px; }

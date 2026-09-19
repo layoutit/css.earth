@@ -50,6 +50,12 @@ test('loadCatalogueFragment rejects a failed request', async () => {
   await assert.rejects(loadCatalogueFragment(pin, { windowTarget }), /request failed: 503/u);
 });
 
+test('loadCatalogueFragment rejects a network failure', async () => {
+  const pin: CatalogueFragmentPin = { url: '/catalogue/x.html', sha256: 'a'.repeat(64), bytes: 1 };
+  const { windowTarget } = fixtureWindow(async () => { throw new TypeError('Failed to fetch'); });
+  await assert.rejects(loadCatalogueFragment(pin, { windowTarget }), /Failed to fetch/u);
+});
+
 test('loadCatalogueFragment rejects a size drift', async () => {
   const pin: CatalogueFragmentPin = { url: '/catalogue/x.html', sha256: await shaOf(rowsHtml), bytes: bytesOf(rowsHtml) + 1 };
   const { windowTarget } = fixtureWindow(async () => new Response(rowsHtml));
