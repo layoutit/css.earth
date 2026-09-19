@@ -54,7 +54,8 @@ function fixtureFactory(arrival?: PreparedArrivalView) {
     mounted(): ObjectSceneLifecycle & { navigation: MockNavigation } { return { ...lifecycle, navigation: { ...navigation, frame: frames[1] } }; },
     tick(value: number) { time = value; const entries = [...callbacks.values()]; callbacks.clear(); for (const fn of entries) fn(time); },
     step(milliseconds = 1000 / 60) { this.tick(time + milliseconds); },
-    input() { const event = new Event('pointerdown'); Object.defineProperty(event, 'target', { value: { closest: () => true } }); documentTarget.dispatchEvent(event); },
+    input() { const event = new Event('pointerdown', { cancelable: true }); Object.defineProperty(event, 'target', { value: { closest: () => true } }); documentTarget.dispatchEvent(event); return event; },
+    escape() { const event = new Event('keydown', { cancelable: true }); Object.defineProperties(event, { target: { value: { closest: () => true } }, key: { value: 'Escape' } }); documentTarget.dispatchEvent(event); return event; },
     wheel() { const event = new Event('wheel', { cancelable: true }); Object.defineProperty(event, 'target', { value: { closest: () => true } }); documentTarget.dispatchEvent(event); return event; },
     get pending() { return callbacks.size; } };
 }
@@ -453,13 +454,17 @@ test('input during a delayed preparation interrupts at the last drawn checkpoint
   assert.equal(f.pending, 0);
 });
 
-test('input after the early handoff preserves the destination owner drawn pose', async () => {
+test('input after the early handoff hurries between bodies, then preserves the drawn approach pose', async () => {
   const f = fixtureFactory(), task = f.start();
   f.tick(0); f.tick(5000); const handoff = await drainFrames(f, { task });
   const continuation = handoff.afterMount(f.mounted(), { signal: f.controller.signal });
   f.step(); f.step(400);
+  assert.equal(f.input().defaultPrevented, true, 'A click between bodies cannot strand the camera there');
+  // The fixture target (1 km radius, 1000 px focal) outgrows its 14 px proxy inside 143 km.
+  for (let frame = 0; frame < 1000 && range(f.navigation.capture().pose, [1e8, 0, 0]) > 1.2e5; frame++) { f.step(); await nextTurn(); }
+  assert.ok(range(f.navigation.capture().pose, [1e8, 0, 0]) <= 1.2e5, 'The hurried flight reaches the drawn approach');
   const drawn = f.navigation.capture();
-  f.input();
+  assert.equal(f.input().defaultPrevented, false, 'Input during the drawn approach reaches the camera');
   await assert.rejects(continuation, error => error instanceof Error && error.name === 'AbortError' && 'preserveView' in error && error.preserveView === true);
   f.tick(12000);
   assert.deepEqual(f.navigation.capture(), drawn);
@@ -662,13 +667,13 @@ test('a wheel during a flight hurries the arrival instead of stopping it', async
   for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(hurried.documentTarget, name).length, 0);
 });
 
-test('a wheel during a prepared navigation hurries it to the destination instead of abandoning it', async () => {
-  const run = async (hurried: boolean) => {
+test('a wheel, click or key between bodies hurries a prepared navigation to the destination instead of abandoning it', async () => {
+  const run = async (hurried: 'wheel' | 'input' | 'escape' | null) => {
     const f = fixtureFactory(), context: WorldCameraPose[] = [];
     f.navigation.apply({ ...f.navigation.capture(), pose: { positionM: [0, 0, 2e8], orientationXyzw: [0, 0, 0, 1] } });
     const task = f.start({ presentWorld: (world, _viewport, options) => { options?.commit?.(); context.push(world); } });
     f.step(); f.step();
-    if (hurried) assert.equal(f.wheel().defaultPrevented, true, 'The navigation keeps the wheel from zooming the camera mid-flight');
+    if (hurried) assert.equal(f[hurried]().defaultPrevented, true, `The navigation keeps the ${hurried} from moving the camera mid-flight`);
     const handoff = await drainFrames(f, { task });
     required(handoff.mountOptions.onNavigationReady)(f.mounted().navigation);
     await drainFrames(f, { task: handoff.afterMount({ ...lifecycle, navigation: f.navigation }, { signal: f.controller.signal }) });
@@ -676,7 +681,10 @@ test('a wheel during a prepared navigation hurries it to the destination instead
     for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
     return { frames: context.length + f.paints.length, pose: f.navigation.capture().pose };
   };
-  const normal = await run(false), hurried = await run(true);
-  assert.ok(hurried.frames < normal.frames / 2, `A hurried navigation arrives in under half the frames (${hurried.frames} of ${normal.frames})`);
-  closePose(hurried.pose, normal.pose);
+  const normal = await run(null);
+  for (const input of ['wheel', 'input', 'escape'] as const) {
+    const hurried = await run(input);
+    assert.ok(hurried.frames < normal.frames / 2, `A navigation hurried by ${input} arrives in under half the frames (${hurried.frames} of ${normal.frames})`);
+    closePose(hurried.pose, normal.pose);
+  }
 });
