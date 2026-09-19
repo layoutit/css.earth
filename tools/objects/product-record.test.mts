@@ -50,6 +50,18 @@ test('evidence answers only for the product and the kind it names', async () => 
   assert.throws(() => parseProductRecord({ ...record, evidence: [{ ...record.evidence[0]!, kind: 'exists' }] }), /no known kind/u);
 });
 
+test("archive origin is a kind of its own: it establishes that the bytes are the archive's, never that we reproduced them", async () => {
+  const directory = await scratch(), product = join(directory, 'y2p60503t_c1f.fits'); await writeFile(product, "the archive's own bytes");
+  const retrieved: ProductRun = { telescope: 'Hubble', stage: 'archive-final', inputs: [], parameters: {}, software: [] };
+  const record = await writeProductRecord(join(directory, productRecordPath('y2p60503t_c1f.fits')), retrieved, [{ path: 'y2p60503t_c1f.fits', file: product }],
+    [{ kind: 'archive-origin', receipt: 'programs/europa-fos-5837.archive-final.product.json', product: 'y2p60503t_c1f.fits',
+      establishes: "These bytes are the archive's own final product, by digest. Nothing here was re-run and nothing was compared." }]);
+  assert.equal(evidenceFor(record, 'y2p60503t_c1f.fits', 'archive-origin').length, 1);
+  assert.deepEqual(evidenceFor(record, 'y2p60503t_c1f.fits', 'archive-agreement'), [],
+    'a caller asking whether our re-run matches the archive is never answered with a file we merely downloaded');
+  assert.deepEqual(record.software, [], 'no software of ours made it');
+});
+
 test('evidence is added to the record of the run that made the product, and only about that product', async () => {
   const directory = await scratch(), image = join(directory, 'final.fits'), recordPath = join(directory, productRecordPath('final.fits')), locate = (path: string) => join(directory, path);
   await writeFile(image, 'final image');

@@ -1,0 +1,186 @@
+{
+  "schema": "cssearth-telescope-product@1",
+  "telescope": "Hubble",
+  "stage": "archive-final",
+  "inputs": [
+    {
+      "role": "science",
+      "identity": "mast:HST/product/u9xe010cm_c0m.fits",
+      "bytes": 10307520,
+      "sha256": "d64a2a8f9f9694f01f0a55800bc3b6c34a0e35d766b88b540cb43d002368abe6"
+    },
+    {
+      "role": "quality",
+      "identity": "mast:HST/product/u9xe010cm_c1m.fits",
+      "bytes": 5178240,
+      "sha256": "7540ed7b956593440313df17cde93a8c4192d7312563cfcd91a0ac18c44b573b"
+    }
+  ],
+  "parameters": {
+    "program": "europa-wfpc2-11085",
+    "observation": "u9xe010cm",
+    "configuration": "WFPC2/PC",
+    "target": "europa",
+    "kind": "image",
+    "handbook": "https://www.stsci.edu/instruments/wfpc2/Wfpc2_dhb/wfpc2_ch22.html",
+    "archiveStatement": "https://hst-docs.stsci.edu/hstdhb/1-obtaining-hst-data/1-1-archive-overview",
+    "identity": {
+      "instrument": "WFPC2",
+      "detector": "1",
+      "opticalElement": "F631N",
+      "aperture": "",
+      "targetName": "EUROPA",
+      "proposal": "11085",
+      "exposureStartMjd": 54179.77310718,
+      "exposureEndMjd": 54179.77316505
+    },
+    "identityAgreedWith": {
+      "catalogue": {
+        "observation": "u9xe010cm",
+        "configuration": "WFPC2/PC",
+        "filters": "F631N",
+        "targetName": "EUROPA",
+        "proposal": "11085",
+        "startMjd": 54179.773107175926,
+        "endMjd": 54179.773165046296
+      },
+      "headers": {
+        "instrument": "WFPC2",
+        "detector": "1",
+        "opticalElement": "F631N",
+        "aperture": "",
+        "targetName": "EUROPA",
+        "proposal": "11085",
+        "exposureStartMjd": 54179.77310718,
+        "exposureEndMjd": 54179.77316505
+      }
+    },
+    "components": [
+      {
+        "role": "science",
+        "supplied": true,
+        "file": "u9xe010cm_c0m.fits",
+        "hdu": 1,
+        "units": "COUNTS",
+        "note": "The planetary camera chip, the first of the four SCI extensions, whose own header states DETECTOR 1. The other three extensions are the wide-field chips of the same exposure and are pinned with it."
+      },
+      {
+        "role": "coordinates",
+        "supplied": true,
+        "carriedBy": "u9xe010cm_c0m.fits",
+        "hdu": 1,
+        "note": "A tangent-plane world coordinate system with SIP distortion, in the chip's own header. A picture carries no wavelength array, and the arcsec a pixel covers is measured from this transform rather than declared."
+      },
+      {
+        "role": "uncertainty",
+        "supplied": false,
+        "reason": "calwp2 writes no error array. Table 2.1 of the WFPC2 data handbook lists the calibrated science data (.c0h, _c0f) and the data quality for it (.c1h, _c1f) as its calibrated science output, with no error plane among them, so nothing of the kind exists in the archive for this observation."
+      },
+      {
+        "role": "quality",
+        "supplied": true,
+        "file": "u9xe010cm_c1m.fits",
+        "hdu": 1,
+        "note": "The calibrated data quality file, flag by flag as table 3.4 of the handbook defines them; value 8 is A/D converter saturation."
+      }
+    ],
+    "archiveCalibration": {
+      "version": {
+        "CAL_VER": "2.5.3 (Sep 4, 2008)",
+        "OPUS_VER": "OPUS 2009_2a"
+      },
+      "dates": {
+        "DATE": "2009-04-30T08:45:23",
+        "PROCTIME": "54951.33478009",
+        "ORIGIN": "NOAO-IRAF FITS Image Kernel July 2003"
+      },
+      "switches": {
+        "MASKCORR": "COMPLETE",
+        "ATODCORR": "COMPLETE",
+        "WF4TCORR": "COMPLETE",
+        "BLEVCORR": "COMPLETE",
+        "BIASCORR": "COMPLETE",
+        "DARKCORR": "OMIT",
+        "FLATCORR": "COMPLETE",
+        "SHADCORR": "COMPLETE",
+        "DRIZCORR": "PERFORM"
+      },
+      "referenceFiles": {
+        "CDBSFILE": "NO",
+        "MASKFILE": "uref$f8213081u.r0h",
+        "ATODFILE": "uref$dbu1405fu.r1h",
+        "WF4TFILE": "uref$t1l1646du.r7h",
+        "BLEVFILE": "ucal$u9xe010cm.x0h",
+        "BLEVDFIL": "ucal$u9xe010cm.q1h",
+        "BIASFILE": "uref$r6s1735mu.r2h",
+        "BIASDFIL": "uref$r6s1735mu.b2h",
+        "DARKFILE": "uref$s7t13047u.r3h",
+        "DARKDFIL": "uref$s7t13047u.b3h",
+        "FLATFILE": "uref$m3c1004mu.r4h",
+        "FLATDFIL": "uref$m3c1004mu.b4h",
+        "SHADFILE": "uref$e371355iu.r5h",
+        "PHOTTAB": "u9xe010cm_c3t.fits",
+        "GRAPHTAB": "mtab$t2605492m_tmg.fits",
+        "COMPTAB": "mtab$t260548pm_tmc.fits",
+        "IDCTAB": "uref$sad1946fu_idc.fits",
+        "OFFTAB": "uref$s9518396u_off.fits",
+        "DGEOFILE": "uref$s8f1222cu_dxy.fits"
+      }
+    },
+    "measured": {
+      "kind": "image",
+      "width": 800,
+      "height": 800,
+      "arcsecPerPixel": 0.045537995504798874,
+      "target": {
+        "pixelX": 160.86192468619248,
+        "pixelY": 185.9121338912134,
+        "pixels": 239,
+        "acrossPixels": 17.44431859350499,
+        "acrossArcsec": 0.7943793016953096,
+        "background": -0.16803589463233948,
+        "level": 1438.996337890625,
+        "threshold": 719.4141509979963,
+        "box": {
+          "x0": 153,
+          "x1": 169,
+          "y0": 178,
+          "y1": 194
+        }
+      },
+      "quality": {
+        "samples": 640000,
+        "flagged": 82308,
+        "flaggedShare": 0.12860625,
+        "flags": {
+          "2": 79367,
+          "258": 2941
+        },
+        "saturationFlag": 8,
+        "saturated": 0
+      }
+    }
+  },
+  "software": [],
+  "outputs": [
+    {
+      "path": "u9xe010cm_c0m.fits",
+      "bytes": 10307520,
+      "sha256": "d64a2a8f9f9694f01f0a55800bc3b6c34a0e35d766b88b540cb43d002368abe6",
+      "units": "COUNTS"
+    },
+    {
+      "path": "u9xe010cm_c1m.fits",
+      "bytes": 5178240,
+      "sha256": "7540ed7b956593440313df17cde93a8c4192d7312563cfcd91a0ac18c44b573b"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "archive-origin",
+      "receipt": "tools/objects/hst/programs/europa-wfpc2-11085.archive-final.product.json",
+      "product": "u9xe010cm_c0m.fits",
+      "establishes": "u9xe010cm_c0m.fits is the archive's own final calibrated product for u9xe010cm, retrieved from MAST and pinned at 10307520 bytes, sha256 d64a2a8f9f9694f01f0a55800bc3b6c34a0e35d766b88b540cb43d002368abe6. It establishes origin and integrity: the file read here is the file the archive distributes, and MAST's catalogue and the file's own headers agree on which observation it is. It does not establish that anything here reproduces that calibration: no pipeline was re-run and nothing was compared, so it is not agreement with the archive."
+    }
+  ]
+}

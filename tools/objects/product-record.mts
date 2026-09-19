@@ -20,8 +20,13 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 
 export const PRODUCT_RECORD_SCHEMA = 'cssearth-telescope-product@1';
 
-/** What a check establishes. */
-export const EVIDENCE_KINDS = ['archive-agreement', 'internal-consistency', 'geometric-registration', 'published-value'] as const;
+/** What a check establishes.
+ *
+ * `archive-origin` is the one kind that is not a comparison. It says that the bytes a stage recorded are the observatory's own
+ * final product, retrieved from the archive and pinned by size and sha256. It establishes origin and integrity, nothing more:
+ * it is not `archive-agreement`, because nothing here was re-run and nothing was compared, and a caller asking whether a route
+ * reproduces an observatory's calibration must never be answered with it. */
+export const EVIDENCE_KINDS = ['archive-agreement', 'archive-origin', 'internal-consistency', 'geometric-registration', 'published-value'] as const;
 export type EvidenceKind = typeof EVIDENCE_KINDS[number];
 
 export interface ProductInput { readonly role: string; readonly identity: string; readonly bytes: number; readonly sha256: string }
