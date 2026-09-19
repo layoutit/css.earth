@@ -64,6 +64,14 @@ const mrsBands = () => MIRI_MRS.map(([channel, subBand, range]) => Object.freeze
   label: `JWST MIRI integral-field cube, channel ${channel} ${subBand.toLowerCase()} ${range} µm`,
   instrument: 'MIRI' as const, channel, subBand, detector: MIRI_MRS_DETECTORS[channel]! }));
 
+/** The wavelengths each cube band covers, in micrometres, taken from the same tables its label is written from. A reader that
+ * needs what a cube mode covers takes it from here instead of restating it. An imaging band names a filter, not a width, so it
+ * has no entry. */
+const coverage = (range: string): readonly [number, number] => { const [from, to] = range.split('–').map(Number); return [from!, to!]; };
+export const JWST_CUBE_COVERAGE: Readonly<Record<string, readonly [number, number]>> = Object.freeze(Object.fromEntries([
+  ...NIRSPEC_CUBES.map(([grating, filter, range]) => [`NIRSPEC-${grating}-${filter}`, coverage(range)] as const),
+  ...MIRI_MRS.map(([channel, subBand, range]) => [`MIRI-MRS-CH${channel}-${subBand}`, coverage(range)] as const)]));
+
 const band = (id: string, label: string, instrument: JwstBand['instrument'], filter: string, pupil?: string, coronagraph?: string): JwstBand =>
   Object.freeze({ id, label, instrument, filter, ...(pupil ? { pupil } : {}), ...(coronagraph ? { coronagraph } : {}) });
 export const JWST_BANDS: Readonly<Record<string, JwstBand>> = Object.freeze(Object.fromEntries([
