@@ -64,6 +64,13 @@ const publicationFile = async (path: string, selection: ObservationSelection, ar
  * measured beam/PSF and exact epoch, so this is where a partial answer becomes a definite yes or no. */
 export function assertMapAnswersRequest(product: BodyMapProduct, selection: ObservationSelection): Record<string, ConstraintVerdict> {
   const { request } = selection, observations = product.observations, resolved: Record<string, ConstraintVerdict> = {};
+  const intervals = product.definition.wavelengthIntervalsMicrometres;
+  if (!intervals?.length) throw new RangeError(`Cannot publish ${selection.telescope} ${selection.mode} program ${selection.programme}: the map does not state the wavelength intervals its measurement used.`);
+  const ordered = [...intervals].sort((a, b) => a[0] - b[0]), [askedFrom, askedTo] = request.wavelengthMicrometres;
+  let coveredTo = askedFrom, started = false;
+  for (const [from, to] of ordered) if (from <= coveredTo && to >= askedFrom) { coveredTo = Math.max(coveredTo, to); started = true; }
+  if (!started || coveredTo < askedTo) throw new RangeError(`Cannot publish ${selection.telescope} ${selection.mode} program ${selection.programme}: the map measurement covers ${ordered.map(([from, to]) => `${from} to ${to}`).join(', ')} micrometres; the question requires ${askedFrom} to ${askedTo}.`);
+  resolved.observationWavelength = { answer: 'yes', reason: `The published map measurement covers the requested ${askedFrom} to ${askedTo} micrometres.` };
   if (request.angularResolutionArcsec !== undefined) {
     const worst = Math.max(...observations.map(observation => observation.angularResolution.majorArcsec));
     if (worst > request.angularResolutionArcsec) throw new RangeError(`Cannot publish ${selection.telescope} ${selection.mode} program ${selection.programme}: the map's measured resolution is ${worst.toPrecision(3)} arcsec; the question requires ${request.angularResolutionArcsec} arcsec or better.`);

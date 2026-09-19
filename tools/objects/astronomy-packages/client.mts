@@ -15,13 +15,14 @@ export type AstroqueryRequest =
   | { readonly operation: 'horizons-vectors'; readonly id: string; readonly location: string; readonly epochs: HorizonsEpochs; readonly refplane?: 'ecliptic' | 'earth' | 'body' | 'frame'; readonly aberrations?: 'geometric' | 'astrometric' | 'apparent'; readonly raw?: boolean };
 
 export interface AstroqueryAnswer {
-  readonly schema: 'cssearth-astroquery-answer@1';
+  readonly schema: 'cssearth-astroquery-answer@2';
   readonly astroquery: string;
   readonly pyvo?: string;
   readonly operation: AstroqueryRequest['operation'];
   readonly rows?: readonly Record<string, unknown>[];
   readonly files?: readonly string[];
   readonly text?: string;
+  readonly tap?: { readonly queryStatus: string; readonly complete: boolean };
 }
 
 const PYTHON = String.raw`
@@ -60,7 +61,7 @@ def rows(table):
     return [{str(name): value(row[name]) for name in table.colnames} for row in table]
 
 operation = request['operation']
-answer = {'schema': 'cssearth-astroquery-answer@1', 'astroquery': astroquery.__version__, 'operation': operation}
+answer = {'schema': 'cssearth-astroquery-answer@2', 'astroquery': astroquery.__version__, 'operation': operation}
 
 if operation == 'mast-service':
     from astroquery.mast import Mast
@@ -74,7 +75,10 @@ elif operation == 'mast-download':
     answer['files'] = [request['destination']]
 elif operation == 'tap-query':
     answer['pyvo'] = pyvo.__version__
-    answer['rows'] = rows(pyvo.dal.TAPService(request['service']).search(request['query'], maxrec=request.get('maxrec')).to_table())
+    result = pyvo.dal.TAPService(request['service']).search(request['query'], maxrec=request.get('maxrec'))
+    status = str(result.query_status)
+    answer['tap'] = {'queryStatus': status, 'complete': status.upper() == 'OK'}
+    answer['rows'] = rows(result.to_table())
 elif operation == 'alma-data-info':
     from astroquery.alma import Alma
     answer['rows'] = rows(Alma.get_data_info(request['ids'], expand_tarfiles=request.get('expandTarfiles', False)))
@@ -119,14 +123,21 @@ export const runAstroqueryProcess: AstroqueryRunner = (python, env, request) => 
 
 export function parseAstroqueryAnswer(value: unknown, request: AstroqueryRequest, version = '0.4.11', pyvoVersion = '1.9.1'): AstroqueryAnswer {
   const raw = requireRecord(value, 'Astroquery answer');
-  if (raw.schema !== 'cssearth-astroquery-answer@1' || raw.astroquery !== version || raw.operation !== request.operation)
+  if (raw.schema !== 'cssearth-astroquery-answer@2' || raw.astroquery !== version || raw.operation !== request.operation)
     throw new TypeError(`Astroquery answered with the wrong contract, version or operation.`);
   if (request.operation === 'tap-query' && raw.pyvo !== pyvoVersion) throw new TypeError('PyVO answered with the wrong version.');
+  const expectsRows = request.operation !== 'mast-download' && !((request.operation === 'horizons-ephemerides' || request.operation === 'horizons-vectors') && request.raw);
+  if (expectsRows && raw.rows === undefined) throw new TypeError(`Astroquery ${request.operation} returned no rows field.`);
   const rows = raw.rows === undefined ? undefined : requireArray(raw.rows, 'Astroquery rows').map((row, index) => requireRecord(row, `Astroquery row ${index}`));
   const files = raw.files === undefined ? undefined : requireArray(raw.files, 'Astroquery files').map((file, index) => requireString(file, `Astroquery file ${index}`));
   const answerText = raw.text === undefined ? undefined : requireString(raw.text, 'Astroquery text');
-  return { schema: 'cssearth-astroquery-answer@1', astroquery: version, operation: request.operation,
-    ...(request.operation === 'tap-query' ? { pyvo: pyvoVersion } : {}), ...(rows ? { rows } : {}), ...(files ? { files } : {}), ...(answerText === undefined ? {} : { text: answerText }) };
+  const tap = request.operation === 'tap-query' ? requireRecord(raw.tap, 'TAP status') : undefined;
+  if (tap && typeof tap.complete !== 'boolean') throw new TypeError('TAP status states no completeness boolean.');
+  const tapStatus = tap ? requireString(tap.queryStatus, 'TAP query status') : undefined;
+  if (tap && tap.complete !== (tapStatus!.toUpperCase() === 'OK')) throw new TypeError(`TAP status ${tapStatus} contradicts its completeness boolean.`);
+  return { schema: 'cssearth-astroquery-answer@2', astroquery: version, operation: request.operation,
+    ...(request.operation === 'tap-query' ? { pyvo: pyvoVersion, tap: { queryStatus: tapStatus!, complete: tap!.complete as boolean } } : {}),
+    ...(rows ? { rows } : {}), ...(files ? { files } : {}), ...(answerText === undefined ? {} : { text: answerText }) };
 }
 
 export async function astroquery(request: AstroqueryRequest, runner: AstroqueryRunner = runAstroqueryProcess): Promise<AstroqueryAnswer> {
@@ -135,7 +146,10 @@ export async function astroquery(request: AstroqueryRequest, runner: AstroqueryR
 }
 
 export async function astroqueryRows(request: Extract<AstroqueryRequest, { readonly operation: 'mast-service' | 'tap-query' | 'alma-data-info' | 'vizier-region' | 'horizons-ephemerides' | 'horizons-vectors' }>) {
-  return (await astroquery(request)).rows ?? [];
+  const answer = await astroquery(request);
+  if (request.operation === 'tap-query' && !answer.tap?.complete)
+    throw new Error(`TAP query was incomplete (${answer.tap?.queryStatus ?? 'status missing'}); its rows cannot build a complete ledger.`);
+  return answer.rows!;
 }
 
 export async function astroqueryText(request: Extract<AstroqueryRequest, { readonly operation: 'horizons-ephemerides' | 'horizons-vectors' }>) {

@@ -108,7 +108,7 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
     }
     const output = requireString(entry.output, 'output'), quantity = requireString(entry.quantity, 'quantity'), units = requireString(entry.units, 'units');
     // A band depth is the ground's own, so cubes from different dates are one measurement and a cell is their weighted mean.
-    const definition: MeasurementDefinition = { quantity, units, timeDependence: 'surface-property', source: requireString(measure.source, 'measure.source'),
+    const definition: MeasurementDefinition = { quantity, units, timeDependence: 'surface-property', wavelengthIntervalsMicrometres: [recipe.band], source: requireString(measure.source, 'measure.source'),
       method: { kind: 'band-depth', bandMicrometres: recipe.band, continuumMicrometres: recipe.continuum, continuum: 'straight line through the two window means, each at the mean wavelength of its retained samples', depth: '1 - band mean / continuum at the band' } };
     const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(rotationBytes), bodyCode: requireFiniteNumber(rotation.body) } };
     const policy: CombinationPolicy = { time: { rule: 'time-invariant' }, resolution: { rule: 'as-observed' } };

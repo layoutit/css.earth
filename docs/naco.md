@@ -78,7 +78,10 @@ Two other things are worth knowing before reading the code.
    resolution, body-map metadata and product record.
 6. **Ledger.** `archive-ledger.mts` writes [data/naco/ledger.json](../data/naco/ledger.json) and
    [docs/naco-ledger.md](naco-ledger.md): frame counts by mode counted server-side by the archive, the shipped objects NACO
-   observed, and each mode's state read from the pinned programs and the receipts beside them rather than declared.
+   observed, one retrievable identity per programme, target spelling, mode and night, and each mode's state read from the
+   pinned programs and the receipts beside them rather than declared. When qualification is the only query blocker, that
+   identity becomes an executable `telescope:qualify` action. The shared dispatcher validates it and this NACO route still
+   owns pinning, the two independent template reductions, their comparison and the receipt.
 
 What is shared rather than repeated: the archive's raw table, the header service, the anonymous data-portal download and the
 esorex runner are `tools/objects/interferometry/eso-pipeline.mts`, the calibration association tree is

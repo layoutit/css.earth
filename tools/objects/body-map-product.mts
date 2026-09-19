@@ -31,6 +31,9 @@ export type TimeDependence = 'surface-property' | 'instantaneous-state';
 
 export interface MeasurementDefinition {
   readonly quantity: string; readonly units: string; readonly timeDependence: TimeDependence;
+  /** Actual wavelength intervals used by this measurement, when the author can establish them from the product. Publication
+   * requires them before claiming that a map answers a wavelength-constrained request. */
+  readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
   /** Everything that fixes the number: windows, continuum model and order, frequency, convention, reference spectrum. Two
    * definitions are the same only when every entry here is equal. */
   readonly method: Readonly<Record<string, unknown>>;
@@ -88,7 +91,8 @@ const canonical = (value: unknown): unknown => Array.isArray(value) ? value.map(
 
 /** The identity of a measurement definition. The citation is left out; everything that fixes the number is in. */
 export const definitionDigest = (definition: MeasurementDefinition): string =>
-  sha256(JSON.stringify(canonical({ quantity: definition.quantity, units: definition.units, timeDependence: definition.timeDependence, method: definition.method })));
+  sha256(JSON.stringify(canonical({ quantity: definition.quantity, units: definition.units, timeDependence: definition.timeDependence,
+    wavelengthIntervalsMicrometres: definition.wavelengthIntervalsMicrometres ?? null, method: definition.method })));
 
 /** Kilometres on the surface that one resolution element spans where the body faces the telescope. It needs the range as
  * well as the angle, and it grows toward the limb as 1 / cos(emission angle); this is its smallest value. */
@@ -111,7 +115,16 @@ export function parseBodyMapProduct(value: unknown): BodyMapProduct {
   if (timeDependence !== 'surface-property' && timeDependence !== 'instantaneous-state') throw new TypeError('A definition says whether it measures a surface property or an instantaneous state.');
   const method = requireRecord(definitionRecord.method, 'definition.method');
   if (!Object.keys(method).length) throw new TypeError('A definition states how the quantity was measured; a quantity and its units are not a definition.');
-  const definition: MeasurementDefinition = { quantity: requireString(definitionRecord.quantity, 'quantity'), units: requireString(definitionRecord.units, 'units'), timeDependence, method, source: requireString(definitionRecord.source, 'definition.source') };
+  const wavelengthIntervalsMicrometres = definitionRecord.wavelengthIntervalsMicrometres === undefined ? undefined
+    : requireArray(definitionRecord.wavelengthIntervalsMicrometres, 'definition wavelength intervals').map((raw, index) => {
+      const interval = requireArray(raw, `definition wavelength interval ${index}`);
+      if (interval.length !== 2) throw new TypeError('A definition wavelength interval has two values.');
+      const from = requireFiniteNumber(interval[0], 'wavelength interval start'), to = requireFiniteNumber(interval[1], 'wavelength interval end');
+      if (!(from > 0 && to >= from)) throw new RangeError(`Invalid definition wavelength interval ${from} to ${to}.`);
+      return [from, to] as const;
+    });
+  const definition: MeasurementDefinition = { quantity: requireString(definitionRecord.quantity, 'quantity'), units: requireString(definitionRecord.units, 'units'), timeDependence,
+    ...(wavelengthIntervalsMicrometres === undefined ? {} : { wavelengthIntervalsMicrometres }), method, source: requireString(definitionRecord.source, 'definition.source') };
   const frameRecord = requireRecord(record.frame, 'frame'), rotation = requireRecord(frameRecord.rotation, 'frame.rotation');
   const frame: BodyMapFrame = { body: requireString(frameRecord.body, 'frame.body'), radiusKm: requireFiniteNumber(frameRecord.radiusKm, 'frame.radiusKm'),
     rotation: { model: requireString(rotation.model, 'rotation.model'), sha256: requireString(rotation.sha256, 'rotation.sha256'), bodyCode: requireFiniteNumber(rotation.bodyCode, 'rotation.bodyCode') } };

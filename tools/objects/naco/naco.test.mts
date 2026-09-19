@@ -376,12 +376,20 @@ test('observations group by shipped object and keep both spellings of a name', (
     { object: '52EUROPA-26T0340', prog_id: '178.C-0867(B)', dp_tech: 'IMAGE,JITTER', n: '4' },
     { object: 'OBJECT NAME NOT SET', prog_id: 'x', dp_tech: 'IMAGE,JITTER', n: '9' },
   ];
-  const observations = observationsOf(rows, SHIPPED);
+  const observations = observationsOf(rows, SHIPPED, [
+    { object: '52_EUROPA', prog_id: '178.C-0867(B)', dp_tech: 'IMAGE,JITTER', exp_start: '2009-01-02T03:00:00.000Z' },
+    { object: '52_EUROPA', prog_id: '178.C-0867(B)', dp_tech: 'IMAGE,JITTER', exp_start: '2009-01-02T03:01:00.000Z' },
+    { object: '52_EUROPA', prog_id: '178.C-0867(B)', dp_tech: 'IMAGE,JITTER', exp_start: '2009-01-03T03:00:00.000Z' },
+  ]);
   assert.deepEqual(observations.map(item => item.id), ['europa', 'europa-52']);
   const asteroid = observations.find(item => item.id === 'europa-52')!;
   assert.equal(asteroid.frames, 24);
   assert.deepEqual(asteroid.targets, ['52EUROPA-26T0340', '52_EUROPA']);
   assert.deepEqual(asteroid.programmes, ['178.C-0867(B)']);
+  assert.deepEqual(asteroid.records.map(record => [record.id, record.frames, record.startIso, record.endIso]), [
+    ['178.C-0867-B-52_EUROPA-2009-01-02-imaging', 2, '2009-01-02T03:00:00.000Z', '2009-01-02T03:01:00.000Z'],
+    ['178.C-0867-B-52_EUROPA-2009-01-03-imaging', 1, '2009-01-03T03:00:00.000Z', '2009-01-03T03:00:00.000Z'],
+  ]);
 });
 
 test('the ledger on disk is the one the guide states, and its states come from the programs beside it', async () => {

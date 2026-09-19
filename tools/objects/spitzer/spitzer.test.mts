@@ -247,7 +247,7 @@ const records = [
   { id: '101', programme: '10', mode: 'MIPS Phot', title: 'Ceres one', startIso: '2005-01-01T00:00:00.000Z', endIso: '2005-01-01T00:10:00.000Z' },
   { id: '102', programme: '10', mode: 'MIPS Phot', title: 'Ceres two', startIso: '2005-01-02T00:00:00.000Z', endIso: '2005-01-02T00:10:00.000Z' },
 ];
-const survey = { holdings: [{ object: 'ceres', name: 'Ceres', classification: 'dwarf-planet', askedAs: 'NAIF 2000001', observations: 2, modes: { 'MIPS Phot': 2 }, records }], unanswered: [] };
+const survey = { holdings: [{ object: 'ceres', name: 'Ceres', classification: 'dwarf-planet', askedAs: 'NAIF 2000001', observations: 2, modes: { 'MIPS Phot': 2 }, records }], unanswered: [], searched: ['ceres'] };
 
 test('archive rows retain the AOR identity, programme, mode and complete time range', () => {
   assert.deepEqual(observationRecords([{ reqkey: '35303936', progid: '61012', modedisplayname: 'IRAC Map PC', reqtitle: 'Itokawa',
@@ -265,7 +265,7 @@ test('a ledger counts a mode as checked only from a receipt, and says plainly th
   assert.equal(unproved.holdings.length, 1, 'only objects with observations are listed');
   // A mode the archive returned that this toolkit does not describe is still counted, so it cannot go unnoticed.
   const surprisingRecords = records.map((record, index) => ({ ...record, id: String(200 + index), mode: 'IRAC Something New' }));
-  const surprising = buildLedger(objects, { holdings: [{ ...survey.holdings[0]!, modes: { 'IRAC Something New': 2 }, records: surprisingRecords }], unanswered: [] }, { pinned: new Map(), checked: new Map() }, '2026-09-19');
+  const surprising = buildLedger(objects, { holdings: [{ ...survey.holdings[0]!, modes: { 'IRAC Something New': 2 }, records: surprisingRecords }], unanswered: [], searched: ['ceres'] }, { pinned: new Map(), checked: new Map() }, '2026-09-19');
   const unknown = surprising.modes.find(entry => entry.mode === 'IRAC Something New')!;
   assert.equal(unknown.observationsForOurObjects, 2);
   assert.equal(unknown.records, null);
