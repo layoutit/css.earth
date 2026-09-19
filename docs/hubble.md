@@ -2,7 +2,7 @@
 
 Hubble images and spectra reach this project as MAST products. This guide describes how one archive observation is pinned, re-calibrated here from its raw exposure on Hubble's own software, and checked against the archive's own product. The route is the one [JWST imaging](jwst-imaging.md) and [interferometric imaging](interferometric-imaging.md) follow: pin, re-run, compare, write a receipt. What the archive holds, and how much of it this route reaches, is the [Hubble ledger](hubble-ledger.md).
 
-Nothing is drawn from Hubble data yet. What exists is the toolkit, its proof on five Europa observations across three instruments, and two measurements made from the archive's own products: [line images of a moving target](#line-images-of-a-moving-target), stacked in the target's frame, and [bands mapped from a slit scanned across a body](#bands-mapped-from-a-slit-scanned-across-a-body).
+Nothing is drawn from Hubble data yet. What exists is the toolkit, its proof on five Europa observations across three instruments, two measurements made from the archive's own products, [line images of a moving target](#line-images-of-a-moving-target), stacked in the target's frame, and [bands mapped from a slit scanned across a body](#bands-mapped-from-a-slit-scanned-across-a-body), and one stage that goes back behind those products to the photons themselves: [an exposure rebuilt in a moving target's frame](#an-exposure-rebuilt-in-a-moving-targets-frame).
 
 ## Stages
 
@@ -159,6 +159,35 @@ Two more rules keep a measurement from appearing where there is none. Every band
 - The paper's "small variations on these parameters ... when necessary" are not reproduced.
 - The G750L half of the programme is not read, so the 720 nm M-centre upper limit the paper places is not reproduced.
 
+## An exposure rebuilt in a moving target's frame
+
+A MAMA detector in TIME-TAG mode records a position and a time for every photon it counts, so an exposure of a body that moves is not one picture but the ingredients of any picture you care to make. [`timetag-frame.mts`](../tools/objects/hst/timetag-frame.mts) makes the one that is usually wanted: the body standing still. It follows the body across the detector through the exposure, then counts every event again on a grid fixed to the body, north up and east left, at a stated number of kilometres to the pixel. Nothing is interpolated and no pixel is resampled, because an event is simply counted where the body was when it arrived.
+
+The image carries a real sky WCS about where the target stood at the middle of the exposure, and the stage reads its own product back with [`fits-sky.mts`](../tools/fits-sky.mts) before it finishes: a grid this stage could not state as a sky image never leaves the run. Beside the counts it writes the exposure-normalised image, the background it fitted, the model it compared against and the per-pixel significance, a [product record](../tools/objects/product-record.mts) pinning what went in and what each check establishes, and a reproduction receipt. The arithmetic is in [`timetag-reduction.mts`](../tools/objects/hst/timetag-reduction.mts), covered by `timetag-frame.test.mts` on synthetic event lists.
+
+Three things are worth knowing before re-using it. The good-time table matters: a buffer dump pauses the counting, so the exposure's wall span is longer than the time it collected, and slicing the span without it puts most of the events in the last slice. The body is found by the light it blocks, scored in standard deviations of Poisson noise against a bright surround, not by contrast: scoring contrast finds the unlit corner of the detector every time. And the detector's geometric distortion is **not** corrected, because the archive applies that only when it rectifies an image.
+
+### Europa's transit of Jupiter, 26 January 2014
+
+`oc7u02g2q`, STIS/FUV-MAMA through the F25SRF2 filter, programme 13438 (PI W. Sparks), pinned in [`europa-transit-2014-01-26.timetag.json`](../tools/objects/hst/programs/europa-transit-2014-01-26.timetag.json) and measured in its [receipt](../tools/objects/hst/programs/europa-transit-2014-01-26.timetag.reproduction.json). This is the image Sparks et al. (2016), doi:10.3847/0004-637X/829/2/121, read a plume candidate off.
+
+| quantity | measured | published |
+|---|---|---|
+| events in the file | 54,043,337 | |
+| good time | 2023.2 s over a 2507.2 s span, 23 intervals | 2023.24 s |
+| Europa's drift across the detector | 21.2 pixels | a commanded Level 3 drift, size not stated |
+| the drift fit against the slice centres | 2.3 pixels at the median, 4.9 at worst | centring good to about one pixel |
+| Europa's radius on the 35 km grid | 44.6 pixels | **44.6 pixels** |
+| darkest bin, 1.0 to 1.25 R, latitude -40 to -60 | 3.53 (5x5), 3.08 (7x7) | 3.9 and 4.0 (Sparks et al.) |
+| the same bin against the limb annulus's own scatter | **1.83** (5x5), 1.19 (7x7) | 3.3 (+0.4, -0.5) (Giono et al. 2020, doi:10.3847/1538-3881/ab7454) |
+| the same latitude band north of the equator | 2.96 (5x5), 2.95 (7x7) | |
+| scatter in a control annulus 1.5 to 2.5 R | 1.27 (5x5), 1.46 (7x7) | one, if the model were complete |
+
+- Europa's radius comes out at **44.6 pixels** on the 35 km grid from its apparent diameter at mid-exposure, which is the figure the paper states for its own frame (**measured**, agreeing with the published value).
+- The darkest bin off the limb does fall inside the region Sparks et al. measure, at latitude **-47 degrees**, one pixel above the limb (**measured**). Its formal Poisson significance is 3.53.
+- That formal figure is **not** the significance it looks like. A control annulus far from Europa, where the model should leave pure counting noise, scatters by **1.27** rather than one, and the limb annulus itself scatters by **1.92**; the darkest bin is **1.83** times that scatter (**measured**). A bin of nearly the same depth, 2.96, sits in the mirrored latitude band north of the equator, where no plume was claimed.
+- **Not verified, and the reason the numbers above are not a reproduction of anyone's.** Neither model the paper builds is built here: not the Jovian background accumulated from one-second slices in Jupiter's own rest frame with Europa's path masked out, and not the Europa model from the USGS Galileo mosaic with an Oren-Nayar illumination function and a composite TinyTim point-spread function. A degree-3 polynomial fitted outside 1.6 Europa radii and the azimuthal average of the data stand in for them, and Jupiter's belts survive that fit. Geometric distortion is not corrected either. What is comparable with the paper is where the darkest bin lies and how much the statistics really scatter, not the significance itself.
+
 ## Limits
 
 - No COS, WFPC2, NICMOS, FOC, FOS, GHRS, WFPC, HSP or FGS observation can be re-calibrated here: `calcos` is not installed, and the rest of those pipelines are retired and not in `hstcal`. The [ledger](hubble-ledger.md) says how much of the archive that is.
@@ -200,5 +229,13 @@ node tools/objects/hst/slit-scan-map.mts europa-salt-map .local/hst/europa-14650
 ```
 
 It reads each frame three times (once to place its visit, once for the first pass that finds the rows with no band, once to measure every row against them) and holds no frame after it has been used. `--mirror` maps the opposite across-slit direction as well, which is the evidence above; `--receipt` writes the reproduction receipt beside the definition; `--fetch` allows a Horizons request the pinned responses do not already answer. A run over the 60 Europa frames takes under three seconds.
+
+The TIME-TAG rebuild is its own command, over a directory that already holds the pinned event list and its support files:
+
+```sh
+node tools/objects/hst/timetag-frame.mts europa-transit-2014-01-26 .local/hst/europa-13438 output/europa-transit-2014 --receipt
+```
+
+It reads the event list twice, once to follow Europa across the detector and once to count the events on Europa's grid, and holds no block of events after it has been counted. Every pinned file is checked by digest before a byte of science is read. `--receipt` writes the reproduction receipt beside the definition; `--fetch` allows the one Horizons request the pinned response does not already answer, and without it a missing one is an error. A run over 54 million events takes about five seconds and writes the product record beside the image.
 
 `.local/hst` is ignored by git; `--raw <dir>` takes the pinned files from a directory that already holds them instead of downloading. The other four observations are the same `archive`, `calibrate` and `compare` commands with `europa-14650 od9l12010`, `europa-13040 obzp01010`, `europa-15419 odr2a1010` and `europa-11085 j9xe05010`.
