@@ -12,12 +12,17 @@ export interface QualificationObservation {
   readonly archiveTarget?: string;
   /** A route may qualify one observing night when the archive programme spans several nights. */
   readonly night?: string;
+  readonly targetLid?: string;
+  readonly productLidvid?: string;
+  readonly instrument?: string;
+  readonly wavelengthIntervalMicrometres?: readonly [number, number];
 }
 
 export type QualificationConfiguration =
   | { readonly kind: 'spitzer-irac-channel'; readonly channel: number }
   | { readonly kind: 'jwst-band'; readonly band: string }
-  | { readonly kind: 'naco-program-night'; readonly programme: string; readonly archiveTarget: string; readonly night: string };
+  | { readonly kind: 'naco-program-night'; readonly programme: string; readonly archiveTarget: string; readonly night: string }
+  | { readonly kind: 'pds-product'; readonly targetLid: string; readonly targetName: string; readonly lidvid: string };
 
 export interface QualificationAction {
   readonly kind: 'qualify-observation';
@@ -99,6 +104,17 @@ const ROUTES: readonly QualificationRoute[] = [
     accepts: configuration => configuration.kind === 'naco-program-night' && Boolean(configuration.programme && configuration.archiveTarget && /^\d{4}-\d{2}-\d{2}$/u.test(configuration.night)),
     configurationFromArguments: args => ({ kind: 'naco-program-night', programme: required(args, '--archive-programme'),
       archiveTarget: required(args, '--archive-target'), night: required(args, '--night') }),
+  },
+  {
+    telescope: 'Lowell/LDT', mode: 'LMI/VR calibrated image',
+    actions: ({ target, wavelengthMicrometres, time, observations }) => observations.filter(observation => overlapsTime(observation, time)
+      && observation.targetLid && observation.archiveTarget && observation.productLidvid && observation.instrument === 'Large Monolithic Imager'
+      && observation.wavelengthIntervalMicrometres && covers(observation.wavelengthIntervalMicrometres, wavelengthMicrometres)).map(observation =>
+        makeAction(target, 'Lowell/LDT', 'LMI/VR calibrated image', observation,
+          { kind: 'pds-product', targetLid: observation.targetLid!, targetName: observation.archiveTarget!, lidvid: observation.productLidvid! },
+          ['--pds-target-lid', observation.targetLid!, '--pds-target-name', observation.archiveTarget!, '--pds-lidvid', observation.productLidvid!])),
+    accepts: configuration => configuration.kind === 'pds-product' && configuration.targetLid.startsWith('urn:nasa:pds:context:target:') && configuration.lidvid.startsWith('urn:nasa:pds:'),
+    configurationFromArguments: args => ({ kind: 'pds-product', targetLid: required(args, '--pds-target-lid'), targetName: required(args, '--pds-target-name'), lidvid: required(args, '--pds-lidvid') }),
   },
 ];
 

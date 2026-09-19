@@ -36,6 +36,20 @@
       "version": "0.4.11",
       "operation": "horizons-ephemerides, horizons-vectors",
       "consumers": ["Chandra", "Hubble", "Juno"]
+    },
+    {
+      "mechanic": "PDS4 Registry product discovery and pagination",
+      "package": "pds.peppi",
+      "version": "0.5.0",
+      "operation": "discover-product",
+      "consumers": ["PDS observation qualification"]
+    },
+    {
+      "mechanic": "Supported PDS3 and PDS4 product decoding",
+      "package": "pdr",
+      "version": "1.4.4",
+      "operation": "decode-product",
+      "consumers": ["PDS observation qualification"]
     }
   ],
   "retained": [
@@ -45,9 +59,9 @@
       "reason": "The checked products consume Horizons VEC_TABLE=1 text as a pinned input. Astroquery 0.4.11 exposes parsed vectors or VEC_TABLE=3 text; changing this route requires migrating the pinned artifact and every receipt together. The complete existing route remains in one implementation."
     },
     {
-      "mechanic": "PDS3 and PDS4 product decoding",
-      "implementation": "tools/objects/pds3-labels.mts and tools/objects/pds-labels.mts",
-      "reason": "No candidate package has passed the repository's representative Juno, New Horizons, OSIRIS, DART and IHW products as one complete replacement."
+      "mechanic": "PDS layouts not supported by pdr",
+      "implementation": "existing format-specific readers, including tools/objects/terrestrial-layers/pds4-geometry-cube.mts",
+      "reason": "The package boundary owns every product it successfully qualifies. Existing readers remain only for families such as the DART FITS-offset geometry cube that pdr 1.4.4 does not decode; no supported family has two production decoders."
     },
     {
       "mechanic": "SPICE kernel evaluation",

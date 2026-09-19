@@ -112,6 +112,7 @@
     "telescope:query": "node tools/run-typed-module.mjs tools/objects/telescopes/query.mts",
     "telescope:qualify": "node tools/run-typed-module.mjs tools/objects/telescopes/qualify.mts",
     "telescope:setup-archives": "node tools/run-typed-module.mjs tools/objects/astronomy-packages/toolchain.mts install",
+    "telescope:setup-pds": "node tools/run-typed-module.mjs tools/objects/astronomy-packages/pds-toolchain.mts install",
     "test": "pnpm test:packages && pnpm test:renderer && pnpm test:platform && pnpm test:shell && pnpm test:preparation --universe && pnpm test:lab:nebula",
     "test:browser": "node site/test/dom-cleanliness-browser.mts",
     "test:browser:all": "node tools/run-browser-suites.mts",

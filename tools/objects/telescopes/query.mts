@@ -113,7 +113,8 @@ export interface Candidate {
     /** Complete observation identities where the ledger preserves them, rather than only a grouped count. */
     readonly records?: readonly { readonly id: string; readonly programme?: string; readonly startIso: string; readonly endIso?: string; readonly title?: string;
       readonly filter?: string; readonly pixelScaleArcsec?: number; readonly quality?: string; readonly observatory?: string; readonly instrument?: string;
-      readonly archiveTarget?: string; readonly night?: string }[] } | null;
+      readonly archiveTarget?: string; readonly night?: string; readonly targetLid?: string; readonly productLidvid?: string;
+      readonly wavelengthIntervalMicrometres?: readonly [number, number] }[] } | null;
   readonly programmes: readonly string[];
   readonly meetsConstraints: Readonly<Record<string, ConstraintVerdict>>;
   readonly toolkitSupport: ToolkitSupport;
@@ -493,8 +494,28 @@ function ihwModes(value: unknown, target: string): TargetMode[] {
   });
 }
 
+/** Peppi discovers exact PDS4 products; pdr qualifies the complete file set. Each program remains archive-final. */
+function pdsModes(value: unknown, target: string): TargetMode[] {
+  const ledger = requireRecord(value, 'PDS ledger');
+  if (ledger.schema !== 'cssearth-pds-ledger@1') throw new TypeError(`Unsupported PDS ledger schema ${String(ledger.schema)}.`);
+  const archiveDate = requireString(ledger.archiveDate, 'archiveDate'), object = requireArray(ledger.objects, 'objects').map(raw => requireRecord(raw, 'PDS object')).find(entry => entry.id === target);
+  if (!object) return [];
+  const all = requireArray(object.observations, 'PDS observations').map(raw => { const row = requireRecord(raw, 'PDS observation'), range = requireArray(row.wavelengthIntervalMicrometres, 'PDS wavelength interval');
+    if (range.length !== 2) throw new TypeError('PDS observation wavelength interval has two bounds.');
+    return { id: requireString(row.id, 'PDS observation id'), programme: requireString(row.program, 'PDS program'), startIso: requireString(row.startIso, 'PDS start'),
+      endIso: requireString(row.endIso, 'PDS end'), filter: requireString(row.filter, 'PDS filter'), archiveTarget: requireString(row.targetName, 'PDS target name'),
+      targetLid: requireString(row.targetLid, 'PDS target lid'), productLidvid: requireString(row.lidvid, 'PDS lidvid'), instrument: requireString(row.instrument, 'PDS instrument'),
+      telescope: requireString(row.telescope, 'PDS telescope'), mode: requireString(row.mode, 'PDS mode'),
+      wavelengthIntervalMicrometres: [requireFiniteNumber(range[0], 'PDS wavelength start'), requireFiniteNumber(range[1], 'PDS wavelength end')] as const }; });
+  return requireArray(ledger.modes, 'PDS modes').map(raw => { const declared = requireRecord(raw, 'PDS mode'), telescope = requireString(declared.telescope, 'PDS telescope'), mode = requireString(declared.mode, 'PDS mode');
+    const records = all.filter(record => record.telescope === telescope && record.mode === mode), programs = stringList(declared.programs, 'PDS programs'), qualified = stringList(declared.qualified, 'PDS qualified');
+    return { telescope, mode, archiveDate, observations: { count: records.length, scope: 'this-mode' as const, records }, programmes: records.map(record => record.productLidvid),
+      dates: records.map(record => ({ id: record.id, startIso: record.startIso, endIso: record.endIso })), datesComplete: true,
+      toolkit: { tool: 'pds.peppi + pdr', programs, checked: [], receipts: stringList(declared.receipts, 'PDS receipts'), archiveFinal: { programs, qualified } } }; });
+}
+
 const ADAPTERS: Readonly<Record<string, (value: unknown, target: string) => TargetMode[]>> = Object.freeze({ jwst: jwstModes, hst: hstModes, naco: nacoModes, chandra: chandraModes, juno: junoModes,
-  spitzer: spitzerModes, gemini: geminiModes, keck: keckModes, ihw: ihwModes });
+  spitzer: spitzerModes, gemini: geminiModes, keck: keckModes, ihw: ihwModes, pds: pdsModes });
 
 function targetCoverage(telescope: string, ledgerPath: string, value: unknown, target: string, modes: readonly TargetMode[]): TargetCoverage {
   if (modes.length) return { telescope, ledger: ledgerPath, state: 'observed', reason: `The ledger indexes ${modes.length} mode(s) for ${target}.` };
@@ -510,6 +531,7 @@ function targetCoverage(telescope: string, ledgerPath: string, value: unknown, t
   if (telescope === 'hst' && (ledger.unansweredTargets === undefined ? [] : stringList(ledger.unansweredTargets, 'unansweredTargets')).includes(target))
     return { telescope, ledger: ledgerPath, state: 'unanswered', reason: 'The MAST target query was attempted but returned no usable answer.' };
   if (telescope === 'ihw') return { telescope, ledger: ledgerPath, state: 'not-searched', reason: 'This IHW dataset is a target-specific Halley collection; it is not a search of other targets.' };
+  if (telescope === 'pds') return { telescope, ledger: ledgerPath, state: 'not-searched', reason: 'This ledger retains exact Peppi selections, not a complete registry search for every catalogue target.' };
   return { telescope, ledger: ledgerPath, state: 'not-searched', reason: `This ledger does not preserve an explicit searched-empty result for ${target}, so absence cannot support a scientific no.` };
 }
 
@@ -528,6 +550,7 @@ export function ledgerModeKeys(ledgers: QueryInputs['ledgers']): { readonly tele
     if (telescope === 'gemini') for (const raw of requireArray(ledger.capabilities, 'capabilities')) add('Gemini', requireString(requireRecord(raw, 'capability').instrument, 'instrument'));
     if (telescope === 'keck') for (const raw of requireArray(ledger.modes, 'modes')) add('Keck', requireString(requireRecord(raw, 'mode').instrument, 'instrument'));
     if (telescope === 'ihw') for (const raw of requireArray(ledger.modes, 'modes')) add('IHW/PDS', requireString(requireRecord(raw, 'mode').mode, 'mode'));
+    if (telescope === 'pds') for (const raw of requireArray(ledger.modes, 'modes')) { const entry = requireRecord(raw, 'PDS mode'); add(requireString(entry.telescope, 'PDS telescope'), requireString(entry.mode, 'PDS mode')); }
   }
   return [...keys.values()].sort((a, b) => `${a.telescope}${a.mode}` < `${b.telescope}${b.mode}` ? -1 : 1);
 }
@@ -638,7 +661,8 @@ function toolkitSupport(mode: TargetMode, target: string): ToolkitSupport {
   // together: a mode reaches `archive-final` by having the observatory's own product read here, not by half-reproducing it.
   const level: ToolkitLevel = checked.length ? 'proven' : qualified.length ? 'archive-final'
     : tool || (routeState && routeState !== 'refused') ? 'tool-without-checked-program' : 'none';
-  const named = tool ? `${tool} reduces this mode` : routeState ? `the route reached the state "${routeState}" on this mode` : 'no tool for this mode is named in the ledger';
+  const named = tool ? level === 'archive-final' ? `${tool} retrieves and decodes this mode without recalibrating it` : `${tool} reduces this mode`
+    : routeState ? `the route reached the state "${routeState}" on this mode` : 'no tool for this mode is named in the ledger';
   const archiveSaid = `${qualified.length} archive-final program(s) are qualified: ${qualified.join(', ')}. The archive's own final products were pinned, downloaded and read whole, which establishes those bytes and not a re-calibration here. ${held.length ? `${held.join(', ')} is a program of ${target}.` : `None of them is a program of ${target}.`}`;
   const sentence = (text: string) => /[.!?]$/u.test(text) ? text : `${text}.`;
   const reason = level === 'none' ? sentence(refusedBecause ?? `${named}, and no program of it is checked`)
@@ -778,10 +802,14 @@ export function selectObservation(answer: CapabilityAnswer, telescope: string, m
   const assessment = assessObservationSelection(answer, telescope, mode, programme);
   if (assessment.blockers.length) throw new ObservationSelectionError(telescope, mode, programme, assessment.blockers);
   const request = answer.request, candidate = assessment.candidate!;
+  const productWavelengthQualified = candidate.observations?.records?.some(record => record.programme === programme
+    && record.wavelengthIntervalMicrometres !== undefined
+    && record.wavelengthIntervalMicrometres[0] <= request.wavelengthMicrometres[0]
+    && record.wavelengthIntervalMicrometres[1] >= request.wavelengthMicrometres[1]) ?? false;
   const unresolved = [...Object.entries(candidate.meetsConstraints).flatMap(([constraint, verdict_]) => verdict_.answer === 'partial' || verdict_.answer === 'unknown'
     ? [{ constraint, answer: verdict_.answer, reason: verdict_.reason } as const] : []),
-    { constraint: 'observationWavelength', answer: 'unknown' as const,
-      reason: `The wavelength verdict is for ${telescope} ${mode}, not for program ${programme}; its selected filter, grating or channel must be qualified from the observation products.` }];
+    ...(productWavelengthQualified ? [] : [{ constraint: 'observationWavelength', answer: 'unknown' as const,
+      reason: `The wavelength verdict is for ${telescope} ${mode}, not for program ${programme}; its selected filter, grating or channel must be qualified from the observation products.` }])];
   return { schema: OBSERVATION_SELECTION_SCHEMA, request, telescope, mode, programme,
     toolkitLevel: candidate.toolkitSupport.level, constraints: candidate.meetsConstraints, bodyMapSupport: candidate.bodyMapSupport, unresolved, evidence: candidate.evidence };
 }

@@ -17,9 +17,11 @@ test('the ownership record matches the pinned packages and retained boundaries',
   const ownership = JSON.parse(await readFile(resolve(import.meta.dirname, 'ownership.json'), 'utf8')) as {
     schema: string; owners: { package: string; version: string }[]; retained: { mechanic: string; implementation: string; reason: string }[] };
   const toolchain = JSON.parse(await readFile(resolve(import.meta.dirname, 'toolchain.json'), 'utf8')) as Record<string, string>;
+  const pdsToolchain = JSON.parse(await readFile(resolve(import.meta.dirname, 'pds-toolchain.json'), 'utf8')) as Record<string, string>;
   assert.equal(ownership.schema, 'cssearth-astronomy-package-ownership@1');
   for (const name of ['astroquery', 'pyvo']) assert.ok(ownership.owners.some(owner => owner.package === name && owner.version === toolchain[name]));
-  for (const mechanic of ['PDS3 and PDS4 product decoding', 'SPICE kernel evaluation', 'streaming FITS and in-process WCS reads'])
+  for (const name of ['pds.peppi', 'pdr']) assert.ok(ownership.owners.some(owner => owner.package === name && owner.version === pdsToolchain[name === 'pds.peppi' ? 'peppi' : name]));
+  for (const mechanic of ['PDS layouts not supported by pdr', 'SPICE kernel evaluation', 'streaming FITS and in-process WCS reads'])
     assert.ok(ownership.retained.some(entry => entry.mechanic === mechanic && entry.implementation && entry.reason));
 });
 
@@ -43,12 +45,12 @@ test('the only retained direct Horizons route is the whole SPHERE pinned-table i
   assert.deepEqual(owners, ['tools/objects/sphere-horizons.mts']);
 });
 
-test('Astroquery and PyVO cross one explicit process boundary', async () => {
+test('archive packages cross only their explicit process boundaries', async () => {
   const imports: string[] = [];
   for (const path of await modules(objects)) {
     if (path.startsWith(import.meta.dirname)) continue;
     const text = await readFile(path, 'utf8');
-    if (/\b(?:import|from) (?:astroquery|pyvo)\b/u.test(text)) imports.push(relative(repository, path));
+    if (/\b(?:import|from) (?:astroquery|pyvo|pdr|pds\.peppi)\b/u.test(text)) imports.push(relative(repository, path));
   }
   assert.deepEqual(imports, []);
 });

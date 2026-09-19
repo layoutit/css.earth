@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 /** Qualify one indexed archive observation with the telescope-specific reducer that owns its physics. */
+import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue } from '../../cli-arguments.mts';
@@ -11,6 +12,8 @@ import { PROGRAMS as NACO_PROGRAMS, pinProgram as pinNacoProgram, writeProgram a
 import { refreshLocalLedger as refreshNacoLedger } from '../naco/archive-ledger.mts';
 import { compareTemplates } from '../naco/compare.mts';
 import { pinFrames, reduceProgram as reduceNacoProgram } from '../naco/reduce.mts';
+import { qualifyPdsArchiveProduct } from '../pds/archive-final.mts';
+import { buildPdsLedger } from '../pds/archive-ledger.mts';
 import { productRecordPath, readProductRecord } from '../product-record.mts';
 import { compareChannel, receiptName } from '../spitzer/compare.mts';
 import { defaultDataRoot, pinProgram, writeSpitzerProgram } from '../spitzer/archive.mts';
@@ -106,10 +109,25 @@ async function qualifyNacoImaging(root: string, request: QualificationRequest): 
     receipt: resolve(NACO_PROGRAMS, `${programId}.COADDED_IMG.reproduction.json`), archiveProgramme: configuration.programme };
 }
 
+async function qualifyLowellLmi(root: string, request: QualificationRequest): Promise<QualificationResult> {
+  if (request.configuration.kind !== 'pds-product') throw new TypeError('Lowell LMI qualification requires an exact PDS product.');
+  const { answer, observation } = await indexedObservation(root, request, [0.520975, 0.697365]), configuration = request.configuration;
+  if (observation.productLidvid !== configuration.lidvid || observation.targetLid !== configuration.targetLid || observation.archiveTarget !== configuration.targetName)
+    throw new Error(`${request.observation} does not match the indexed PDS identity.`);
+  const programId = `${answer.target}-pds-${request.observation}`;
+  const result = await qualifyPdsArchiveProduct({ id: programId, target: answer.target, targetLid: configuration.targetLid, targetName: configuration.targetName,
+    lidvid: configuration.lidvid, telescope: 'Lowell/LDT', archiveTelescope: 'Lowell Discovery Telescope (LDT)', mode: 'LMI/VR calibrated image', instrument: 'Large Monolithic Imager', kind: 'image',
+    use: 'Archive-calibrated VR detector image of the unresolved Didymos system; suitable as a pinned telescope product, not as a resolved body-surface map.' }, resolve(root, 'output/pds', programId));
+  await writeFile(resolve(root, 'data/pds/ledger.json'), `${JSON.stringify(await buildPdsLedger(), null, 2)}\n`);
+  return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
+    program: programId, configuration, product: result.productPath, receipt: result.recordPath, archiveProgramme: configuration.lidvid };
+}
+
 const QUALIFIERS: Readonly<Record<string, (root: string, request: QualificationRequest) => Promise<QualificationResult>>> = Object.freeze({
   'Spitzer :: IRAC Map': qualifySpitzerIrac,
   'JWST :: NIRSPEC/IFU': qualifyJwstNirspec,
   'VLT/NACO :: imaging': qualifyNacoImaging,
+  'Lowell/LDT :: LMI/VR calibrated image': qualifyLowellLmi,
 });
 
 export async function qualifyObservation(root: string, request: QualificationRequest): Promise<QualificationResult> {
@@ -120,8 +138,8 @@ export async function qualifyObservation(root: string, request: QualificationReq
 
 export const QUALIFY_HELP = `Usage: pnpm telescope:qualify --target TARGET --telescope NAME --mode MODE --observation ID ROUTE_OPTIONS
 
-Route options are emitted by telescope:query. Registered routes currently use --channel N, --band ID, or
---archive-programme ID --archive-target NAME --night YYYY-MM-DD.`;
+Route options are emitted by telescope:query. Registered routes currently use --channel N, --band ID,
+--archive-programme ID --archive-target NAME --night YYYY-MM-DD, or the exact --pds-target-lid/--pds-target-name/--pds-lidvid identity.`;
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2);
