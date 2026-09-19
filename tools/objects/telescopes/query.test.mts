@@ -6,6 +6,7 @@ import { resolve } from 'node:path';
 import { BODY_MAP_SCHEMA } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import { assessObservationSelection, formatAnswer, ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, QUERY_HELP, queryCapabilities, selectObservation, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
+import { parseTargetAssociations, TARGET_ASSOCIATIONS_SCHEMA } from './target-associations.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 const citation = 'https://jwst-docs.stsci.edu/jwst-near-infrared-spectrograph';
@@ -71,8 +72,8 @@ const bodyMap = (telescope: string, instrument: string, id: string) => ({ schema
 
 const inputs = (ledgers: readonly { telescope: string; value: unknown }[], rest: Partial<QueryInputs> = {}): QueryInputs =>
   ({ ledgers: ledgers.map(entry => ({ ...entry, path: `data/${entry.telescope}/ledger.json` })), capabilities: CAPABILITIES,
-    targetCatalogue: ['europa', 'hd-181327', 'ceres', 'vesta', 'jupiter', 'itokawa', 'io', 'flora', 'm42', 'bennu', 'comet-1p'].map(id => ({ id, name: id === 'bennu' ? 'Bennu' : id, aliases: [] })),
-    bodyMaps: [], ...rest });
+    targetCatalogue: ['europa', 'hd-181327', 'ceres', 'vesta', 'jupiter', 'itokawa', 'io', 'flora', 'm42', 'bennu', 'comet-1p', 'nix', 'hydra'].map(id => ({ id, name: id === 'bennu' ? 'Bennu' : id, aliases: [] })),
+    targetAssociations: [], bodyMaps: [], ...rest });
 const candidate = (answer: CapabilityAnswer, mode: string): Candidate => {
   const found = answer.candidates.find(entry => entry.mode === mode);
   assert.ok(found, `no candidate for ${mode}`);
@@ -142,6 +143,39 @@ test('an indexed observation exposes a telescope-owned qualification action when
   const qualified = queryCapabilities(request, inputs([{ telescope: 'spitzer', value: { ...ledger, modes: [{ ...ledger.modes[0], programs: ['bennu-21415424'], checked: ['bennu-21415424'] }] } }]));
   assert.equal(candidate(qualified, 'IRAC Map').selectionAssessment.selectable, true);
   assert.deepEqual(candidate(qualified, 'IRAC Map').selectionAssessment.qualificationActions, []);
+});
+
+test('a cited target-in-field association exposes exact observations without changing the archive target', () => {
+  const source = { schema: TARGET_ASSOCIATIONS_SCHEMA, associations: [{ target: 'nix', archive: 'hst', telescope: 'Hubble', mode: 'ACS/WFC',
+    archiveTarget: 'PLUTO', programme: '10427', verified: '2026-09-19', observations: [
+      { id: 'j96o01010', startIso: '2005-05-15T00:21:00.197Z', endIso: '2005-05-15T01:56:09.210Z', filter: 'F606W' },
+      { id: 'j96o02010', startIso: '2005-05-18T03:06:58.213Z', endIso: '2005-05-18T03:46:03.197Z', filter: 'F606W' }],
+    evidence: [{ citation: 'https://example.test/paper', locator: 'table 1', establishes: 'Nix is measured in both Pluto pointings.' }] }] };
+  const associations = parseTargetAssociations(source);
+  const ledger = { ...HST_LEDGER, configurations: [...HST_LEDGER.configurations,
+    { configuration: 'ACS/WFC', tool: 'tools/objects/hst/calibrate.mts', programs: [], checked: [], archiveFinal: { programs: [], qualified: [] } }] };
+  const answer = queryCapabilities({ target: 'nix', wavelengthMicrometres: [0.5, 0.7], time: { any: true }, angularResolutionArcsec: 1,
+    kind: 'image', result: 'telescope-product' }, inputs([{ telescope: 'hst', value: ledger }], { targetAssociations: associations }));
+  const acs = candidate(answer, 'ACS/WFC');
+  assert.deepEqual(acs.observations, { count: 2, scope: 'this-mode', records: [
+    { id: 'j96o01010', startIso: '2005-05-15T00:21:00.197Z', endIso: '2005-05-15T01:56:09.210Z', filter: 'F606W', programme: '10427', archiveTarget: 'PLUTO' },
+    { id: 'j96o02010', startIso: '2005-05-18T03:06:58.213Z', endIso: '2005-05-18T03:46:03.197Z', filter: 'F606W', programme: '10427', archiveTarget: 'PLUTO' }] });
+  assert.deepEqual(acs.programmes, ['10427']);
+  assert.equal(acs.toolkitSupport.level, 'tool-without-checked-program');
+  assert.deepEqual(acs.selectionAssessment.blockers.map(blocker => blocker.code), ['target-program-unqualified']);
+  assert.deepEqual(acs.evidence.targetAssociations, [{ source: 'data/telescopes/target-associations.json', archive: 'hst', archiveTarget: 'PLUTO', programme: '10427', verified: '2026-09-19',
+    citation: 'https://example.test/paper', locator: 'table 1', establishes: 'Nix is measured in both Pluto pointings.' }]);
+  assert.match(formatAnswer(answer), /target in field: data\/telescopes\/target-associations\.json, archive target PLUTO, programme 10427/u);
+  const unrelated = queryCapabilities({ ...answer.request, target: 'hydra' }, inputs([{ telescope: 'hst', value: ledger }], { targetAssociations: associations }));
+  assert.equal(unrelated.candidates.length, 0, 'a field association belongs only to the target its evidence names');
+});
+
+test('a target-in-field association needs exact, unique observations and cited evidence', () => {
+  const base = { target: 'nix', archive: 'hst', telescope: 'Hubble', mode: 'ACS/WFC', archiveTarget: 'PLUTO', programme: '10427', verified: '2026-09-19',
+    observations: [{ id: 'j96o01010', startIso: '2005-05-15T00:21:00.197Z' }], evidence: [{ citation: 'paper', locator: 'table', establishes: 'Nix is in the field.' }] };
+  assert.throws(() => parseTargetAssociations({ schema: TARGET_ASSOCIATIONS_SCHEMA, associations: [{ ...base, observations: [] }] }), /at least one exact observation/u);
+  assert.throws(() => parseTargetAssociations({ schema: TARGET_ASSOCIATIONS_SCHEMA, associations: [{ ...base, evidence: [] }] }), /no cited evidence/u);
+  assert.throws(() => parseTargetAssociations({ schema: TARGET_ASSOCIATIONS_SCHEMA, associations: [base, base] }), /appears twice/u);
 });
 
 test('a mode with no recorded capabilities answers unknown and says so, rather than guessing', () => {

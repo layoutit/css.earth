@@ -148,6 +148,14 @@ catalogue alias resolves to one canonical id. A near spelling is never silently 
 `unknown-target` endpoint with ranked suggestions and no archive negatives. This matters because "the target is not shipped"
 and "the archives contain no observation of a shipped target" are different scientific results.
 
+An archive target is the name of the pointing, not a complete inventory of its field. Source-backed exceptions live in
+[`data/telescopes/target-associations.json`](../data/telescopes/target-associations.json). Each one names a canonical target,
+an exact telescope mode, programme and observation ids, the archive's original target spelling, the date the archive rows
+were verified, and the source that establishes the body was in those fields. The query keeps `archiveTarget` on every returned
+observation. It therefore can find Nix in Hubble programme 10427's two ACS/WFC F606W visits while still reporting that MAST
+calls those pointings `PLUTO`; it does not turn every Pluto exposure into a Nix observation.
+`pnpm telescope:verify-associations` checks those exact HST identities and observing facts against current MAST rows.
+
 Every ledger also returns a target-coverage state: `observed`, `searched-empty`, `not-searched` or `unanswered`. Only
 `searched-empty` is an archive negative. A query with no candidates and any incomplete coverage ends at `index-incomplete`
 with `target-index-unavailable` or `archive-query-unanswered`; it cannot silently turn an unattempted lookup into “no data.”
@@ -202,7 +210,7 @@ that resolves to several modes, or to none, is listed separately as unassigned e
 Hubble STIS/CCD map says nothing about STIS/FUV-MAMA, which sees other wavelengths through another detector, so it is never
 carried there.
 
-The one authored input is [`modes.json`](../tools/objects/telescopes/modes.json): each mode's wavelength intervals, aperture,
+The authored capability input is [`modes.json`](../tools/objects/telescopes/modes.json): each mode's wavelength intervals, aperture,
 pixel scale, documented point spread function where there is one, and product kind, with the handbook page every number was
 read from. JWST's cube modes take their intervals from `jwst/imaging/bands.mts`, which already states them band by band. A
 mode nobody has sourced is left out, and the query says "capabilities not recorded" for it rather than inventing numbers. A
