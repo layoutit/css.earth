@@ -86,6 +86,12 @@ export interface PreparedVolumeRuntime {
 export interface PreparedMaterialVolumeRuntime extends PreparedVolumeRuntime {
   setTextures(urls: readonly string[]): void;
   setTexture(index: number, url: string): void;
+  /** Replace every slice material while retaining the prepared geometry nodes. */
+  setMaterials(materials: readonly {
+    readonly textureUrl: string;
+    readonly backgroundSize: string;
+    readonly backgroundPosition: string;
+  }[]): void;
 }
 
 export interface PreparedVolumeCameraTransform {

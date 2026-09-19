@@ -34,8 +34,10 @@ import { createLabelBudget } from '../labels/universe-label-policy.js';
 // Galaxy files download from this fraction of the volume's fade-start distance:
 // about five doubling wheel steps before the first slice is drawn.
 const GALAXY_PREFETCH_RATIO = 1 / 32;
+/** Hidden, unsubscribed lens banks are retained only within this measured DOM budget. */
+export const WARM_VOLUME_LENS_DOM_NODE_BUDGET = 5_000;
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], volumeLensBanks = [], loadVolumeLens, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, annotationPriorities, annotationOpacities, plannerSource }: {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, annotationPriorities, annotationOpacities, plannerSource }: {
   backgroundPointManifest?: string; backgroundPointCloud?: string; backgroundPointSha256?: string;
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;
   /** The same prepared context as files the planner worker reads itself. */
@@ -52,10 +54,15 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
    * first time a bank is selected or comes into view. Nothing here downloads at construction time. */
   volumeLensBanks?: readonly { id: string; frame: DensityVolumeFrame }[];
   loadVolumeLens?(id: string): Promise<Parameters<typeof createPreparedVolumeLenses>[0]>;
+  /** Testable cap for hidden banks with no active navigation subscriber. */
+  warmVolumeLensDomNodeBudget?: number;
   catalog?: { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
     clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 }) {
   const plan = parsePreparedWorldContext(context), payload = validatePreparedCssVolume(volume);
+  if (!Number.isSafeInteger(warmVolumeLensDomNodeBudget) || warmVolumeLensDomNodeBudget < 0) {
+    throw new TypeError('Warm volume lens DOM node budget must be a non-negative integer.');
+  }
   if (payload.id !== plan.volume.objectId || pointAppearance.id !== plan.stars.objectId ||
       [payload, pointAppearance].some(data => data.frame.referenceFrame !== plan.frame.referenceFrame || data.frame.epochJdTt !== plan.frame.epochJdTt)) {
     throw new TypeError('Context, volume and point appearance must share their prepared identities and epoch.');
@@ -167,41 +174,90 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const lensBanks: (ReturnType<ReturnType<typeof createPreparedVolumeLenses>['mount']> | null)[] = volumeLensBanks.map(() => null);
       const lensPayload: (PreparedVolumeLenses | undefined)[] = volumeLensBanks.map(() => undefined);
       const lensLoading: (Promise<void> | null)[] = volumeLensBanks.map(() => null);
+      const lensGeneration = volumeLensBanks.map(() => 0);
       const lensExplicitEnabled: (boolean | undefined)[] = volumeLensBanks.map(() => undefined);
       const lensPendingSelection: (string | undefined)[] = volumeLensBanks.map(() => undefined);
+      const lensPendingStarsVisible: (boolean | undefined)[] = volumeLensBanks.map(() => undefined);
       const lensFraming: { frame: DensityVolumeFrame; radiusUnits: number; visibility: PreparedPointVisibility }[] =
         volumeLensBanks.map(bank => ({ frame: bank.frame, radiusUnits: volumeFramingRadiusUnits(bank.frame), visibility: DEFAULT_POINT_VISIBILITY }));
       const publishedBankOpacity = imageLayers.map(() => NaN), publishedLensOpacity = volumeLensBanks.map(() => NaN);
+      const lensResidentNodes = volumeLensBanks.map(() => 0), lensVisible = volumeLensBanks.map(() => false);
+      const lensLastUsed = volumeLensBanks.map(() => 0), lensSubscribers = volumeLensBanks.map(() => 0);
+      let lensUseClock = 0;
       // A cloud that accompanies a body waits for one of that body's datasets to ask for it; every other bank is
       // drawn whenever it is in view, as it always was. Unloaded banks default to "drawn when in view";
       // an accompanying cloud corrects this to disabled the moment its payload identifies it as one.
       const lensEnabled = volumeLensBanks.map(() => true);
-      /** Fetch a bank's prepared payload once, mount it in place, and reconcile any call that arrived while it
-       * was still pending. Safe to call repeatedly; concurrent callers share the same in-flight load. */
+      const publishLensResidencyMetadata = () => {
+        const resident = lensBanks.flatMap((bank, index) => bank ? [index] : []);
+        const visible = resident.filter(index => lensVisible[index]);
+        const pinned = resident.filter(index => !lensVisible[index] && lensSubscribers[index]! > 0);
+        const warm = resident.filter(index => !lensVisible[index] && lensSubscribers[index] === 0);
+        root.dataset.volumeLensDeclaredBankCount = String(volumeLensBanks.length);
+        root.dataset.volumeLensResidentBankCount = String(resident.length);
+        root.dataset.volumeLensVisibleBankCount = String(visible.length);
+        root.dataset.volumeLensPinnedBankCount = String(pinned.length);
+        root.dataset.volumeLensWarmBankCount = String(warm.length);
+        root.dataset.volumeLensPinnedDomNodes = String(pinned.reduce((nodes, index) => nodes + lensResidentNodes[index]!, 0));
+        root.dataset.volumeLensWarmDomNodes = String(warm.reduce((nodes, index) => nodes + lensResidentNodes[index]!, 0));
+        root.dataset.volumeLensWarmDomNodeBudget = String(warmVolumeLensDomNodeBudget);
+      };
+      const updateLensWeight = (index: number) => {
+        const bank = lensBanks[index];
+        if (!bank) { lensResidentNodes[index] = 0; return; }
+        lensResidentNodes[index] = Number(bank.root.dataset.volumeResidentDomNodes) || 1;
+      };
+      const evictLens = (index: number) => {
+        const bank = lensBanks[index];
+        if (!bank || lensVisible[index] || lensSubscribers[index]! > 0) return false;
+        bank.destroy();
+        lensBanks[index] = null; lensPayload[index] = undefined; lensResidentNodes[index] = 0;
+        publishedLensOpacity[index] = NaN; lensGeneration[index]++;
+        return true;
+      };
+      const trimWarmLensResidency = () => {
+        const warm = lensBanks.flatMap((bank, index) => bank && !lensVisible[index] && lensSubscribers[index] === 0 ? [index] : []);
+        let nodes = warm.reduce((total, index) => total + lensResidentNodes[index]!, 0);
+        for (const index of warm.sort((left, right) => lensLastUsed[left]! - lensLastUsed[right]!)) {
+          if (nodes <= warmVolumeLensDomNodeBudget) break;
+          const weight = lensResidentNodes[index]!;
+          if (evictLens(index)) nodes -= weight;
+        }
+        publishLensResidencyMetadata();
+      };
+      /** Fetch and mount one bank while resident. Concurrent callers share only this in-flight work;
+       * once an evicted bank is requested again, the application loader provides a fresh decoded payload. */
       const ensureLensLoaded = (index: number): Promise<void> => {
         if (lensBanks[index] || lensLoading[index]) return lensLoading[index] ?? Promise.resolve();
         const descriptor = volumeLensBanks[index]!;
         if (!loadVolumeLens) return Promise.resolve();
+        const generation = lensGeneration[index];
         const loading = loadVolumeLens(descriptor.id).then(options => {
-          if (destroyed || lensBanks[index]) return;
+          if (destroyed || generation !== lensGeneration[index] || lensBanks[index]) return;
           const frame = options.payload.lenses[0]!.volume.frame;
           if (frame.referenceFrame !== plan.frame.referenceFrame || frame.epochJdTt !== plan.frame.epochJdTt) {
             throw new TypeError('Prepared volume lenses must share the universe reference frame and epoch.');
           }
+          const pendingLens = lensPendingSelection[index];
+          if (pendingLens !== undefined && !options.payload.lenses.some(lens => lens.id === pendingLens)) {
+            throw new TypeError(`Unknown prepared volume lens: ${pendingLens}.`);
+          }
           const bank = createPreparedVolumeLenses(options);
           const mounted = bank.mount({ host: root, before: end, frontHost: frontRoot, frontBefore: frontEnd });
-          mounted.root.style.display = 'none';
-          lensBanks[index] = mounted;
-          lensPayload[index] = bank.payload;
+          try {
+            mounted.root.style.display = 'none';
+            if (pendingLens !== undefined) mounted.selectLens(pendingLens);
+            if (lensPendingStarsVisible[index] !== undefined) mounted.setStarsVisible(lensPendingStarsVisible[index]!);
+          } catch (error) { mounted.destroy(); throw error; }
+          if (destroyed || generation !== lensGeneration[index]) { mounted.destroy(); return; }
+          lensBanks[index] = mounted; lensPayload[index] = bank.payload;
           lensFraming[index] = { frame, radiusUnits: bank.payload.framingRadiusUnits, visibility: bank.payload.pointVisibility! };
           lensEnabled[index] = lensExplicitEnabled[index] ?? bank.payload.attachedTo === undefined;
-          const pendingLens = lensPendingSelection[index];
-          if (pendingLens !== undefined) mounted.selectLens(pendingLens);
-          publishedLensOpacity[index] = NaN;
+          lensLastUsed[index] = ++lensUseClock; publishedLensOpacity[index] = NaN;
+          updateLensWeight(index); trimWarmLensResidency();
           requestPublication?.();
-        }).catch(error => {
-          lensLoading[index] = null;
-          throw error;
+        }).finally(() => {
+          if (lensLoading[index] === loading) lensLoading[index] = null;
         });
         lensLoading[index] = loading;
         return loading;
@@ -238,6 +294,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const destroy = () => {
         if (destroyed) return;
         destroyed = true;
+        for (let index = 0; index < lensGeneration.length; index++) lensGeneration[index]++;
         prefetchAbort.abort();
         volumeLayer?.destroy(); skyLayer?.destroy(); spatial?.destroy(); focusPoint?.destroy(); environmentLabels?.destroy();
         for (const shell of shellLayers) shell.destroy();
@@ -276,6 +333,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           renderedObjectIds: new Set([...imageLayers.map(bank => bank.payload.id), ...volumeLensBanks.map(bank => bank.id)]),
           nebulaFrames: new Map(volumeLensBanks.map(bank => [bank.id, bank.frame])),
           onSelect: onSelectGalaxy, pickingHost: stage });
+        publishLensResidencyMetadata();
         return Object.freeze({ root, roots: Object.freeze([root, spatial.root]), destroy, opacityClock,
           /** Mount an optional prepared shell after startup, the first time it is enabled. */
           addShell(shell: { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }) {
@@ -323,23 +381,40 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           selectVolumeLens(id: string, lens: string) {
             const index = volumeLensBanks.findIndex(bank => bank.id === id);
             if (index < 0) throw new TypeError('Unknown prepared volume lens bank.');
-            const bank = lensBanks[index];
-            if (bank) { bank.selectLens(lens); return; }
             lensPendingSelection[index] = lens;
+            lensLastUsed[index] = ++lensUseClock;
+            const bank = lensBanks[index];
+            if (bank) {
+              bank.selectLens(lens); updateLensWeight(index); trimWarmLensResidency(); return;
+            }
             void ensureLensLoaded(index).catch(() => {});
           },
           setVolumeStarsVisible(id: string, enabled: boolean) {
             const index = volumeLensBanks.findIndex(bank => bank.id === id);
             if (index < 0) throw new TypeError('Unknown prepared volume lens bank.');
+            if (typeof enabled !== 'boolean') throw new TypeError('Catalogue point visibility must be a boolean.');
+            lensPendingStarsVisible[index] = enabled;
             const bank = lensBanks[index];
             if (bank) { bank.setStarsVisible(enabled); return; }
-            void ensureLensLoaded(index).then(() => lensBanks[index]?.setStarsVisible(enabled)).catch(() => {});
+            void ensureLensLoaded(index).catch(() => {});
           },
           subscribeVolumeLens(id: string, listener: (state: ReturnType<NonNullable<(typeof lensBanks)[number]>['state']>) => void) {
             const index = volumeLensBanks.findIndex(bank => bank.id === id);
             if (index < 0) return () => {};
+            lensSubscribers[index]++;
+            lensLastUsed[index] = ++lensUseClock;
+            publishLensResidencyMetadata();
+            let released = false;
+            const release = () => {
+              if (released) return;
+              released = true; lensSubscribers[index]--;
+              trimWarmLensResidency();
+            };
             const existing = lensBanks[index];
-            if (existing) return existing.subscribe(listener);
+            if (existing) {
+              const liveUnsubscribe = existing.subscribe(listener);
+              return () => { liveUnsubscribe(); release(); };
+            }
             // Not loaded yet: fetch it, then hand the caller a real subscription and one immediate
             // notification so a listener that only reacts to change events still learns the bank is ready.
             let cancelled = false, liveUnsubscribe: (() => void) | null = null;
@@ -350,7 +425,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               liveUnsubscribe = mounted.subscribe(listener);
               listener(mounted.state());
             }).catch(() => {});
-            return () => { cancelled = true; liveUnsubscribe?.(); };
+            return () => { cancelled = true; liveUnsubscribe?.(); release(); };
           },
           captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport) {
             return spatial!.captureFrame(world, viewport);
@@ -422,6 +497,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               }
               if (opacity > 0) bank.publish({ world, viewport });
             }
+            let lensResidencyChanged = false;
             for (const [index, bank] of lensBanks.entries()) {
               const { frame, radiusUnits, visibility } = lensFraming[index]!;
               if (!bank) {
@@ -433,13 +509,21 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 // proximity at all, only by explicit selection. Fetching a 'galactic' bank a little earlier
                 // than its fade would have shown it is cheap; never fetching an 'independent' one is a blank
                 // nebula.
-                if (lensEnabled[index] && projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) > 0) {
+                const visible = lensEnabled[index] && projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) > 0;
+                if (visible !== lensVisible[index]) {
+                  lensVisible[index] = visible; lensLastUsed[index] = ++lensUseClock; lensResidencyChanged = true;
+                }
+                if (visible) {
                   void ensureLensLoaded(index).catch(() => {});
                 }
                 continue;
               }
               const contextOpacity = lensPayload[index]!.contextVisibility === 'independent' ? 1 : volumeOpacity;
               const opacity = lensEnabled[index] ? contextOpacity * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) : 0;
+              const visible = opacity > 0;
+              if (visible !== lensVisible[index]) {
+                lensVisible[index] = visible; lensLastUsed[index] = ++lensUseClock; lensResidencyChanged = true;
+              }
               if (opacity !== publishedLensOpacity[index]) {
                 // A lens that composites in front of the body sits in the bank's second root, so both carry the
                 // bank's visibility; gating only the first leaves a disabled cloud drawing over the star.
@@ -450,8 +534,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 }
                 publishedLensOpacity[index] = opacity;
               }
-              bank.publish({ world, viewport }, opacity > 0);
+              bank.publish({ world, viewport }, visible);
             }
+            if (lensResidencyChanged) trimWarmLensResidency();
             for (const [index, shell] of shellLayers.entries()) {
               shell.publish(world, viewport, shellVisibility[mountedShells[index]!.payload.id] !== false);
             }

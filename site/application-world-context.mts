@@ -24,6 +24,7 @@ import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepare
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { minorMoonOrbitIds, suppressMinorMoonOrbitPaint } from './moon-orbit-policy.mts';
 import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
+import { createInFlightLoader } from './in-flight-loader.mts';
 
 const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
 const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
@@ -92,19 +93,12 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const volumeLensDescriptors = Object.values(descriptors).map(parseObjectDescriptor)
       .filter(descriptor => descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available);
     const volumeLensBanks = volumeLensDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame) }));
-    const volumeLensLoads = new Map<string, Promise<{ payload: Awaited<ReturnType<typeof loadPreparedVolumeLenses>>; resolveResource(path: string): string }>>();
-    const loadVolumeLens = (id: string) => {
-      let load = volumeLensLoads.get(id);
-      if (!load) {
-        const descriptor = volumeLensDescriptors.find(candidate => candidate.id === id);
-        if (!descriptor) throw new TypeError(`Unknown prepared volume lens bank: ${id}.`);
-        const set = resourceSet(id);
-        load = loadPreparedVolumeLenses(set.descriptor, set.transport)
-          .then(payload => ({ payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`) }));
-        volumeLensLoads.set(id, load);
-      }
-      return load;
-    };
+    const loadVolumeLens = createInFlightLoader(async (id: string) => {
+      const descriptor = volumeLensDescriptors.find(candidate => candidate.id === id);
+      if (!descriptor) throw new TypeError(`Unknown prepared volume lens bank: ${id}.`);
+      const set = resourceSet(id), payload = await loadPreparedVolumeLenses(set.descriptor, set.transport);
+      return { payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
+    });
     // The world worker reads its own prepared context; background stars are already baked.
     const plannerSource = { contextUrl: APPLICATION_WORLD_CONTEXT_URL };
     const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayers, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: new URL('../src/objects/nearby-universe/prepared/points.json', import.meta.url).href, backgroundPointCloud: new URL('../src/objects/nearby-universe/prepared/cloud.webp', import.meta.url).href, annotationPriorities, annotationOpacities, plannerSource,
