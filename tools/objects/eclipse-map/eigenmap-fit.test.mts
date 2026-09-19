@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
 import { mapBasisCurves } from './phase-curve.mts';
 import { realSphericalHarmonics } from './spherical-harmonics.mts';
-import { bandBrightnessTemperature, brightnessTemperature, planckRadiance, continuousHotspot, eigenBasis, equalAngleGrid, fitEigenmap, percentiles, sampleEigenmap, seededRandom, symmetricEigen } from './eigenmap-fit.mts';
+import { bandBrightnessTemperature, brightnessTemperature, planckRadiance, continuousHotspot, eigenBasis, equalAngleGrid, evaluateFit, fitEigenmap, percentiles, sampleEigenmap, seededRandom, symmetricEigen } from './eigenmap-fit.mts';
 
 test('Jacobi eigenvectors diagonalize a symmetric matrix and come strongest first', () => {
   const random = seededRandom(7), n = 6, m = new Float64Array(n * n);
@@ -44,6 +44,49 @@ test('an injected map with a hotspot 20 degrees east and 15 south is recovered f
   const n = fit.ncurves, posterior = sampleEigenmap(basis, fit, { steps: 20000, burn: 2000, keep: 200, seed: 5 });
   const lon = percentiles(posterior.samples.map(x => continuousHotspot(basis, { ...fit, coefficients: x.slice(0, n), uniformAmplitude: x[n]!, stellarCorrection: x[n + 1]! }, 0.25).longitude));
   assert.ok(lon.low <= 20.5 && lon.high >= 19.5 && lon.high - lon.low < 3, `posterior longitude ${lon.low}..${lon.high} covers the injected 20`);
+});
+
+test('fixed stellar correction keeps the full stored dimension for posterior sampling but not BIC', () => {
+  const basis = {
+    curves: [Float64Array.from([-1, 0, 1])], uniform: Float64Array.from([1, 1, 1]),
+    visible: Uint8Array.from([1, 1]), maps: [Float64Array.from([-1 / Math.PI, 1 / Math.PI])],
+  };
+  const fit = fitEigenmap(basis as never, 1, Float64Array.from([1.01, 1.01, 1.01]), new Float64Array(3).fill(0.1), () => true,
+    { positive: false, fixStellarCorrection: true });
+  const posterior = sampleEigenmap(basis as never, fit, { steps: 2000, burn: 200, keep: 50, seed: 1 });
+  assert.equal(fit.parameters, 2);
+  assert.equal(fit.normal.dimension, 3);
+  assert.ok(Math.abs(fit.bic - (fit.chiSquared + 2 * Math.log(3))) < 1e-12);
+  assert.deepEqual([...new Set(posterior.samples.map(sample => sample.length))], [3]);
+  assert.ok(Math.max(...posterior.samples.flatMap(sample => Array.from(sample, Math.abs))) < 10);
+  assert.ok(Math.min(...posterior.chiSquared) > -1e-8);
+});
+
+test('posterior sampling rejects inconsistent dimensions and non-positive-definite systems', () => {
+  const basis = { visible: Uint8Array.from([1]), maps: [Float64Array.from([0])] };
+  const fit = {
+    normal: { dimension: 3, matrix: new Float64Array(9), rhs: new Float64Array(3), dataSquares: 0 }, ncurves: 1, parameters: 3,
+    coefficients: Float64Array.from([0]), uniformAmplitude: 1, stellarCorrection: 0, systematics: new Float64Array(0),
+  };
+  assert.throws(() => sampleEigenmap(basis as never, { ...fit, normal: { ...fit.normal, rhs: new Float64Array(2) } } as never, { steps: 2, burn: 0, keep: 1 }), /dimensions/u);
+  assert.throws(() => sampleEigenmap(basis as never, fit as never, { steps: 2, burn: 0, keep: 1 }), /positive definite/u);
+  const identity = Float64Array.from([1, 0, 0, 0, 1, 0, 0, 0, 1]);
+  assert.throws(() => sampleEigenmap(basis as never, { ...fit, normal: { ...fit.normal, matrix: identity, dataSquares: NaN } } as never,
+    { steps: 2, burn: 0, keep: 1 }), /finite/u);
+});
+
+test('continuous hotspot refinement remains inside the observed grid-cell mask', () => {
+  const grid = equalAngleGrid(90, 180), peak = 92 * Math.PI / 180;
+  const basis = {
+    lmax: 1, grid, visible: Uint8Array.from(grid.longitudes, longitude => Math.abs(longitude) < 90 ? 1 : 0),
+    harmonicCoefficients: [Float64Array.from([Math.sin(peak) / Math.sqrt(3), 0, Math.cos(peak) / Math.sqrt(3)])],
+  };
+  const fit = { ncurves: 1, coefficients: Float64Array.from([0.5]), uniformAmplitude: 1 };
+  const map = evaluateFit(basis as never, fit as never, grid.latitudes, grid.longitudes);
+  const refined = continuousHotspot(basis as never, { ...fit, map } as never);
+  assert.ok(Math.abs(refined.longitude) <= 90, `longitude ${refined.longitude} left the observed region`);
+  const column = Math.floor((refined.longitude + 180) * grid.width / 360), row = Math.floor((refined.latitude + 90) * grid.height / 180);
+  assert.equal(basis.visible[row * grid.width + column], 1);
 });
 
 test('brightness temperature inverts the Planck ratio: a planet as bright per area as the star has its temperature', () => {

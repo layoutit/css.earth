@@ -115,7 +115,7 @@ export function eigenBasis(lmax: number, grid: MapGrid, orbit: HostedOrbit, host
 
 export interface EigenFit {
   /** Weighted normal equations of the linear model (parameters c_1..c_n, C0, s_corr): chi2(x) = x'Ax - 2b'x + dataSquares. */
-  readonly normal: { readonly matrix: Float64Array; readonly rhs: Float64Array; readonly dataSquares: number };
+  readonly normal: { readonly dimension: number; readonly matrix: Float64Array; readonly rhs: Float64Array; readonly dataSquares: number };
   readonly ncurves: number; readonly coefficients: Float64Array; readonly uniformAmplitude: number; readonly stellarCorrection: number;
   /** Coefficients of the systematics columns, in the order given. */
   readonly systematics: Float64Array;
@@ -125,17 +125,36 @@ export interface EigenFit {
 }
 
 function solve(matrix: Float64Array, rhs: Float64Array, n: number) {
-  // Cholesky with a tiny ridge for numerical safety; the matrices here are small and positive definite.
+  if (!Number.isInteger(n) || n < 1 || matrix.length !== n * n || rhs.length !== n) throw new RangeError('Linear-system dimensions do not match.');
+  if (matrix.some(value => !Number.isFinite(value)) || rhs.some(value => !Number.isFinite(value))) throw new RangeError('Linear system must contain only finite values.');
+  for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+    const a = matrix[i * n + j]!, b = matrix[j * n + i]!;
+    const scale = Math.max(1, Math.abs(a), Math.abs(b), Math.sqrt(Math.abs(matrix[i * n + i]!)) * Math.sqrt(Math.abs(matrix[j * n + j]!)));
+    if (Math.abs(a - b) > 1e-12 * scale) throw new RangeError('Linear-system matrix must be symmetric.');
+  }
+  // Cholesky factorization. A nonpositive pivot means the supplied system is not positive definite; silently replacing it with a
+  // tiny number would change the system and can amplify an invalid fit into enormous finite-looking output.
   const l = new Float64Array(n * n);
   for (let i = 0; i < n; i++) for (let j = 0; j <= i; j++) {
     let sum = matrix[i * n + j]!;
     for (let k = 0; k < j; k++) sum -= l[i * n + k]! * l[j * n + k]!;
-    if (i === j) l[i * n + i] = Math.sqrt(Math.max(sum, 1e-300));
-    else l[i * n + j] = sum / l[j * n + j]!;
+    if (i === j) {
+      if (!(sum > 0) || !Number.isFinite(sum)) throw new RangeError(`Linear-system matrix is not positive definite at pivot ${i}.`);
+      l[i * n + i] = Math.sqrt(sum);
+    } else {
+      l[i * n + j] = sum / l[j * n + j]!;
+      if (!Number.isFinite(l[i * n + j]!)) throw new RangeError('Linear-system factorization produced a non-finite value.');
+    }
   }
   const y = new Float64Array(n), x = new Float64Array(n);
   for (let i = 0; i < n; i++) { let sum = rhs[i]!; for (let k = 0; k < i; k++) sum -= l[i * n + k]! * y[k]!; y[i] = sum / l[i * n + i]!; }
   for (let i = n - 1; i >= 0; i--) { let sum = y[i]!; for (let k = i + 1; k < n; k++) sum -= l[k * n + i]! * x[k]!; x[i] = sum / l[i * n + i]!; }
+  if (x.some(value => !Number.isFinite(value))) throw new RangeError('Linear solve produced a non-finite value.');
+  for (let i = 0; i < n; i++) {
+    let product = 0, scale = Math.abs(rhs[i]!);
+    for (let j = 0; j < n; j++) { const term = matrix[i * n + j]! * x[j]!; product += term; scale += Math.abs(term); }
+    if (!Number.isFinite(product) || Math.abs(product - rhs[i]!) > 1e-10 * Math.max(1, scale)) throw new RangeError(`Linear solve residual is too large in row ${i}.`);
+  }
   return x;
 }
 
@@ -145,6 +164,7 @@ function solve(matrix: Float64Array, rhs: Float64Array, n: number) {
 export function fitEigenmap(basis: EigenBasis, ncurves: number, data: ArrayLike<number>, errors: ArrayLike<number>, use: (index: number) => boolean,
   { positive = true, systematics = [] as readonly ArrayLike<number>[], fixStellarCorrection = false } = {}): EigenFit {
   if (!(ncurves >= 1 && ncurves <= basis.curves.length)) throw new RangeError(`ncurves must be 1..${basis.curves.length}.`);
+  if (errors.length !== data.length || basis.uniform.length !== data.length || basis.curves.slice(0, ncurves).some(curve => curve.length !== data.length)) throw new RangeError('Data, errors and model curves must have matching lengths.');
   if (systematics.some(column => column.length !== data.length)) throw new RangeError('Systematics columns must sample every data point.');
   const p = ncurves + 2 + systematics.length, columns = [...basis.curves.slice(0, ncurves), basis.uniform, null, ...systematics];
   // `fixStellarCorrection` holds s_corr at 0, as ThERESA does for an already normalized light curve: a stiff prior row pins it,
@@ -154,11 +174,14 @@ export function fitEigenmap(basis: EigenBasis, ncurves: number, data: ArrayLike<
   const row = new Float64Array(p);
   for (let t = 0; t < data.length; t++) {
     if (!use(t)) continue;
+    if (!Number.isFinite(data[t]!) || !Number.isFinite(errors[t]!) || !(errors[t]! > 0)) throw new RangeError(`Used data and errors must be finite, with a positive error (sample ${t}).`);
     const w = 1 / errors[t]! ** 2, target = data[t]! - 1;
     for (let k = 0; k < p; k++) row[k] = columns[k] ? columns[k]![t]! : 1;
+    if (row.some(value => !Number.isFinite(value))) throw new RangeError(`Model curves must be finite at used sample ${t}.`);
     for (let i = 0; i < p; i++) { rhs[i] += w * row[i]! * target; for (let j = 0; j < p; j++) normal[i * p + j] += w * row[i]! * row[j]!; }
     dataSquares += w * target * target; samples++;
   }
+  if (!Number.isFinite(dataSquares)) throw new RangeError('Normal equations contain non-finite weighted data.');
   if (fixStellarCorrection) normal[(ncurves + 1) * p + ncurves + 1] += 1e30;
   const chi2 = (x: Float64Array) => {
     let value = dataSquares;
@@ -210,7 +233,7 @@ export function fitEigenmap(basis: EigenBasis, ncurves: number, data: ArrayLike<
   const map = new Float64Array(cells);
   for (let c = 0; c < cells; c++) map[c] = constraint(x, c);
   const chiSquared = chi2(x);
-  return { normal: { matrix: normal, rhs, dataSquares }, ncurves, coefficients: x.slice(0, ncurves), uniformAmplitude: x[ncurves]!, stellarCorrection: x[ncurves + 1]!,
+  return { normal: { dimension: p, matrix: normal, rhs, dataSquares }, ncurves, coefficients: x.slice(0, ncurves), uniformAmplitude: x[ncurves]!, stellarCorrection: x[ncurves + 1]!,
     systematics: x.slice(ncurves + 2), chiSquared, samples, parameters: p - (fixStellarCorrection ? 1 : 0),
     bic: chiSquared + (p - (fixStellarCorrection ? 1 : 0)) * Math.log(samples), positive: minimum(x) > 0, map };
 }
@@ -228,9 +251,20 @@ export function evaluateFit(basis: EigenBasis, fit: EigenFit, latitudesDegrees: 
 
 /** The maximum of a fitted map on the dayside it was observed on, located to `resolutionDegrees` by a coarse search refined around the best cell. */
 export function continuousHotspot(basis: EigenBasis, fit: EigenFit, resolutionDegrees = 0.1) {
+  const { width, height } = basis.grid;
+  if (!Number.isFinite(resolutionDegrees) || !(resolutionDegrees > 0)) throw new RangeError('Hotspot resolution must be positive and finite.');
+  if (!(width > 0 && height > 0) || basis.visible.length !== width * height) throw new RangeError('Visibility mask dimensions must match the map grid.');
+  const wrapLongitude = (longitude: number) => ((longitude + 180) % 360 + 360) % 360 - 180;
+  // Extend the grid's observed-cell mask to continuous coordinates by assigning each point to its containing equal-angle cell.
+  const observed = (latitude: number, longitude: number) => {
+    const row = Math.min(height - 1, Math.max(0, Math.floor((latitude + 90) * height / 180)));
+    const column = Math.min(width - 1, Math.floor((wrapLongitude(longitude) + 180) * width / 360));
+    return basis.visible[row * width + column] !== 0;
+  };
   const search = (latitudes: number[], longitudes: number[]) => {
     const lat: number[] = [], lon: number[] = [];
-    for (const a of latitudes) for (const b of longitudes) { lat.push(a); lon.push(b); }
+    for (const a of latitudes) for (const b of longitudes) if (observed(a, b)) { lat.push(a); lon.push(wrapLongitude(b)); }
+    if (lat.length === 0) throw new RangeError('Hotspot refinement has no points in the observed region.');
     const values = evaluateFit(basis, fit, lat, lon);
     let best = 0; for (let i = 1; i < values.length; i++) if (values[i]! > values[best]!) best = i;
     return { latitude: lat[best]!, longitude: lon[best]!, value: values[best]! };
@@ -249,8 +283,11 @@ export function continuousHotspot(basis: EigenBasis, fit: EigenFit, resolutionDe
 
 /** The hottest visible cell of a map, by latitude and longitude of its centre. */
 export function hotspot(map: ArrayLike<number>, grid: MapGrid, visible?: Uint8Array) {
+  const cells = grid.width * grid.height;
+  if (map.length !== cells || grid.latitudes.length !== cells || grid.longitudes.length !== cells || (visible && visible.length !== cells)) throw new RangeError('Map, coordinates and visibility mask must match the grid dimensions.');
   let best = -1;
   for (let c = 0; c < map.length; c++) if ((!visible || visible[c]) && (best < 0 || map[c]! > map[best]!)) best = c;
+  if (best < 0) throw new RangeError('Hotspot search has no visible map cells.');
   return { latitude: grid.latitudes[best]!, longitude: grid.longitudes[best]!, value: map[best]! };
 }
 
@@ -272,7 +309,12 @@ export function seededRandom(seed: number) {
 /** Posterior samples of the linear eigenmap model: Metropolis steps with the Gaussian proposal of the unconstrained covariance,
  * and positive intensity on every visible cell as a hard prior (ThERESA's posflux). Returns `keep` evenly thinned samples. */
 export function sampleEigenmap(basis: EigenBasis, fit: EigenFit, { steps = 200000, burn = 5000, keep = 2000, seed = 1 } = {}) {
-  const p = fit.parameters, n = fit.ncurves, { matrix, rhs, dataSquares } = fit.normal;
+  const n = fit.ncurves, { dimension: p, matrix, rhs, dataSquares } = fit.normal;
+  if (!Number.isInteger(p) || p < 1 || matrix.length !== p * p || rhs.length !== p) throw new RangeError('Stored normal-equation dimensions do not match.');
+  if (!Number.isInteger(fit.parameters) || fit.parameters < 0 || fit.parameters > p) throw new RangeError('Free-parameter count must fit within the stored parameter dimension.');
+  const initial = Float64Array.from([...fit.coefficients, fit.uniformAmplitude, fit.stellarCorrection, ...fit.systematics]);
+  if (initial.length !== p) throw new RangeError('Fitted parameter layout does not match the stored normal-equation dimension.');
+  if (!Number.isFinite(dataSquares) || initial.some(value => !Number.isFinite(value))) throw new RangeError('Posterior inputs must contain only finite values.');
   const chi2 = (x: Float64Array) => { let v = dataSquares; for (let i = 0; i < p; i++) { v -= 2 * x[i]! * rhs[i]!; let row = 0; for (let j = 0; j < p; j++) row += matrix[i * p + j]! * x[j]!; v += x[i]! * row; } return v; };
   // Covariance = (A)^-1 for chi2 = x'Ax - 2b'x (the likelihood exp(-chi2/2)); its Cholesky factor scales the proposal.
   const inverse = new Float64Array(p * p);
@@ -280,12 +322,19 @@ export function sampleEigenmap(basis: EigenBasis, fit: EigenFit, { steps = 20000
   const chol = new Float64Array(p * p);
   for (let i = 0; i < p; i++) for (let j = 0; j <= i; j++) {
     let sum = inverse[i * p + j]!; for (let k = 0; k < j; k++) sum -= chol[i * p + k]! * chol[j * p + k]!;
-    chol[i * p + j] = i === j ? Math.sqrt(Math.max(sum, 1e-300)) : sum / chol[j * p + j]!;
+    if (i === j) {
+      if (!(sum > 0) || !Number.isFinite(sum)) throw new RangeError(`Posterior covariance is not positive definite at pivot ${i}.`);
+      chol[i * p + j] = Math.sqrt(sum);
+    } else {
+      chol[i * p + j] = sum / chol[j * p + j]!;
+      if (!Number.isFinite(chol[i * p + j]!)) throw new RangeError('Posterior covariance factorization produced a non-finite value.');
+    }
   }
   const visible = Array.from(basis.visible.keys()).filter(c => basis.visible[c]);
   const feasible = (x: Float64Array) => { for (const c of visible) { let v = x[n]! / Math.PI; for (let k = 0; k < n; k++) v += x[k]! * basis.maps[k]![c]!; if (!(v > 0)) return false; } return true; };
   const random = seededRandom(seed), scale = 2.38 / Math.sqrt(p);
-  let x = Float64Array.from([...fit.coefficients, fit.uniformAmplitude, fit.stellarCorrection, ...fit.systematics]), current = chi2(x), accepted = 0;
+  let x = initial, current = chi2(x), accepted = 0;
+  if (!Number.isFinite(current)) throw new RangeError('Initial posterior chi-squared is not finite.');
   const samples: Float64Array[] = [], interval = Math.max(1, Math.floor((steps - burn) / keep)), chains: number[] = [];
   const z = new Float64Array(p), proposal = new Float64Array(p);
   for (let step = 0; step < steps; step++) {
