@@ -19,6 +19,11 @@ For a body's sources, processing, evidence and known problems, read its
 | Drawing an opaque body inside a prepared volume: a proposal and its measurements | [A body inside a volume](mesh-in-volume.md) |
 | Exoplanet light curves to maps: eigencurve fitting and its checks | [Eclipse mapping](eclipse-mapping.md) |
 | JWST images to sky band composites: MAST programs, the re-run level-3 stage, its oracle and depth from a model | [JWST imaging](jwst-imaging.md) |
+| What JWST's public archive holds by observing mode, what this project can already reduce, and which shipped objects JWST has observed | [JWST ledger](jwst-ledger.md) |
+| Hubble observations re-calibrated from raw on the instrument's own pipeline, and checked against the archive's own product | [Hubble](hubble.md) |
+| What Hubble's public archive holds by instrument, how much of it this project can re-calibrate, and which shipped objects Hubble has observed | [Hubble ledger](hubble-ledger.md) |
+| VLT/NACO raw frames re-reduced on ESO's own pipeline, and why its check can only be internal | [VLT/NACO](naco.md) |
+| What the NACO archive holds for this project's bodies, and which modes are reduced | [NACO archive ledger](naco-ledger.md) |
 | Connecting prepared outputs to their inputs | [Prepared object provenance](object-provenance.md) |
 | Published source identities, input bindings and usage links | [Sources catalogue](sources-catalogue.md) |
 | Missions, spacecraft and dataset attribution | [Exploration catalogue](architecture/exploration-catalog.md) |
