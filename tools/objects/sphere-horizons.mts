@@ -44,8 +44,12 @@ export function horizonsCommand(record: unknown): string {
 const timeList = (epochs: readonly number[]) => `'${epochs.map(epoch => epoch.toFixed(9)).join(' ')}'`;
 /** Paranal, where the ground-based lenses were exposed. A space telescope is a Horizons centre too: JWST is 500@-170. */
 export const PARANAL = '309';
+/** ALMA's array centre, which Horizons has no site code for: a centre written `coord@<body>:<east longitude°>,<latitude°>,<altitude km>`
+ * is asked as geodetic coordinates. The values are the ones CASA's observatory table gives for ALMA. */
+export const ALMA = 'coord@399:-67.7549,-23.0229,5.06';
 export function observerQuery(command: string, epochs: readonly number[], center: string = PARANAL) {
-  return new URLSearchParams({ format: 'text', COMMAND: `'${command}'`, EPHEM_TYPE: "'OBSERVER'", CENTER: `'${center}'`, TLIST: timeList(epochs),
+  const [site, coordinates] = center.split(':');
+  return new URLSearchParams({ format: 'text', COMMAND: `'${command}'`, EPHEM_TYPE: "'OBSERVER'", CENTER: `'${site}'`, ...(coordinates ? { COORD_TYPE: "'GEODETIC'", SITE_COORD: `'${coordinates}'` } : {}), TLIST: timeList(epochs),
     TLIST_TYPE: "'JD'", TIME_TYPE: "'UT'", QUANTITIES: "'1,13,20,24,43'", ANG_FORMAT: "'DEG'", CSV_FORMAT: "'NO'" });
 }
 export function heliocentricQuery(command: string, epochs: readonly number[]) {

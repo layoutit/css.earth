@@ -1,0 +1,6 @@
+# Excerpt of casapy-20160121-195951.log, the CASA log ALMA delivered in log/Reduce_Xee6.log.tgz with member
+# observing unit set uid://A001/X2d8/X73. These are the lines where applycal recorded the spectral-window map
+# tsysspwmap() returned; every kept line is verbatim.
+2016-01-21 21:01:25	INFO	applycal::Calibrater::setapply(type, applypar)	.   B TSYS: table=uid___A002_Xad2439_Xee6.ms.tsys select= interp=linear,linear spwmap=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 17, 19, 21, 23, 17, 17, 19, 19, 21, 21, 23, 23] calWt=true
+2016-01-21 21:01:26	INFO	applycal::Calibrater::setapply(type, applypar)	.   T Jones: table=uid___A002_Xad2439_Xee6.ms.wvr select= interp=linear spwmap=[] calWt=true
+2016-01-21 21:01:27	INFO	applycal::Calibrater::setapply(type, applypar)	.   KAntPos Jones: table=uid___A002_Xad2439_Xee6.ms.antpos select= interp=linear spwmap=[0] calWt=false

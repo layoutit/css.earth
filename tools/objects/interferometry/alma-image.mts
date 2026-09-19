@@ -30,15 +30,21 @@ const number = (header: FitsHeader, key: string) => {
   return value;
 };
 
-/** One ALMA continuum image: a single plane of 32-bit samples over two sky axes, with its beam. */
-export function readContinuumImage(bytes: Buffer): ContinuumImage {
+/** One ALMA continuum image: a single plane of 32-bit samples over two sky axes, with its beam.
+ *
+ * A restored image states its beam. A CLEAN residual does not — nothing has been convolved into it — so a caller measuring
+ * the residual of an image it also has passes that image's beam, which is the one that applies. */
+export function readContinuumImage(bytes: Buffer, beam?: Pick<ContinuumImage, 'beamMajorMas' | 'beamMinorMas' | 'beamAngleDegrees'>): ContinuumImage {
   const { header, dataOffset } = readFitsHeader(bytes);
   const width = number(header, 'NAXIS1'), height = number(header, 'NAXIS2');
   if (number(header, 'BITPIX') !== -32) throw new TypeError('A continuum image is 32-bit floating point.');
   const scale = Math.abs(number(header, 'CDELT1')) * 3.6e6;
   if (Math.abs(Math.abs(number(header, 'CDELT2')) * 3.6e6 - scale) > 1e-9) throw new TypeError('A continuum image has square pixels.');
+  const stated = header.BMAJ !== undefined || beam === undefined;
   return { width, height, pixelMas: scale,
-    beamMajorMas: number(header, 'BMAJ') * 3.6e6, beamMinorMas: number(header, 'BMIN') * 3.6e6, beamAngleDegrees: number(header, 'BPA'),
+    beamMajorMas: stated ? number(header, 'BMAJ') * 3.6e6 : beam.beamMajorMas,
+    beamMinorMas: stated ? number(header, 'BMIN') * 3.6e6 : beam.beamMinorMas,
+    beamAngleDegrees: stated ? number(header, 'BPA') : beam.beamAngleDegrees,
     header, at: (x, y) => bytes.readFloatBE(dataOffset + 4 * (y * width + x)) };
 }
 
@@ -53,8 +59,12 @@ export interface SourceMeasurement {
 }
 
 /** The brightest source near the middle of the image, and its size. The pointing centre is where ALMA put the target, so the
- * search is bounded to the middle rather than scanning a field that may hold other sources. */
-export function measureSource(image: ContinuumImage, searchMas = 700): SourceMeasurement {
+ * search is bounded to the middle rather than scanning a field that may hold other sources.
+ *
+ * `reachMas` is how far from the peak the centroid and the radial profile are taken. A star is a few beams across and the
+ * default is ample; a resolved body is not — Europa's disc is 770 mas, six times the default — and a reach shorter than the
+ * source stops the profile before it crosses half the peak and reports the box instead of the disc. */
+export function measureSource(image: ContinuumImage, searchMas = 700, reachMas = 120): SourceMeasurement {
   const half = Math.min(Math.floor(Math.min(image.width, image.height) / 2) - 2, Math.ceil(searchMas / image.pixelMas));
   const cx = Math.round(image.width / 2), cy = Math.round(image.height / 2);
   let peak = -Infinity, px = cx, py = cy;
@@ -62,7 +72,7 @@ export function measureSource(image: ContinuumImage, searchMas = 700): SourceMea
     const value = image.at(x, y);
     if (value > peak) { peak = value; px = x; py = y; }
   }
-  const reach = Math.ceil(120 / image.pixelMas);
+  const reach = Math.ceil(reachMas / image.pixelMas);
   let sx = 0, sy = 0, weight = 0;
   for (let y = py - reach; y <= py + reach; y++) for (let x = px - reach; x <= px + reach; x++) {
     const value = image.at(x, y);
@@ -105,8 +115,8 @@ export interface ImageComparison {
 
 /** Compare a restored image with the archive's own. Both are sampled about their measured centres, on the coarser of the two
  * grids, out to the smaller of the two discs, so neither image's pixel scale decides the result. */
-export function compareImages(restored: ContinuumImage, archive: ContinuumImage): ImageComparison {
-  const a = measureSource(restored), b = measureSource(archive);
+export function compareImages(restored: ContinuumImage, archive: ContinuumImage, reachMas = 120): ImageComparison {
+  const a = measureSource(restored, 700, reachMas), b = measureSource(archive, 700, reachMas);
   const step = Math.max(restored.pixelMas, archive.pixelMas);
   const radius = Math.min(a.halfPowerDiameterMas, b.halfPowerDiameterMas) / 2;
   const sample = (image: ContinuumImage, measurement: SourceMeasurement, dx: number, dy: number) => {
@@ -129,10 +139,14 @@ export function compareImages(restored: ContinuumImage, archive: ContinuumImage)
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [first, second] = process.argv.slice(2);
-  if (!first) throw new TypeError('Usage: alma-image.mts <image.fits> [<other.fits>]');
+  const given = process.argv.slice(2);
+  const reachIndex = given.indexOf('--reach');
+  const [first, second] = given.filter((value, index) => !value.startsWith('--') && index !== reachIndex + 1);
+  if (!first) throw new TypeError('Usage: alma-image.mts <image.fits> [<other.fits>] [--reach <mas>]');
+  const reachMas = reachIndex >= 0 ? Number(given[reachIndex + 1]) : 120;
+  if (!Number.isFinite(reachMas) || reachMas <= 0) throw new TypeError('--reach takes a distance in milliarcseconds.');
   const image = readContinuumImage(await readFile(first));
-  const measurement = measureSource(image);
+  const measurement = measureSource(image, 700, reachMas);
   const describe = (name: string, i: ContinuumImage, m: SourceMeasurement) =>
     `${name}\n  ${i.width}x${i.height} of ${i.pixelMas.toFixed(2)} mas, beam ${i.beamMajorMas.toFixed(1)}x${i.beamMinorMas.toFixed(1)} mas at ${i.beamAngleDegrees.toFixed(0)} deg` +
     `\n  peak ${m.peak.toExponential(3)}, noise ${m.noise.toExponential(2)}, signal-to-noise ${m.signalToNoise.toFixed(0)}` +
@@ -140,8 +154,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   console.log(describe(first, image, measurement));
   if (second) {
     const other = readContinuumImage(await readFile(second));
-    console.log(describe(second, other, measureSource(other)));
-    const comparison = compareImages(image, other);
+    console.log(describe(second, other, measureSource(other, 700, reachMas)));
+    const comparison = compareImages(image, other, reachMas);
     console.log(`\ncompared over ${comparison.samples} samples of the smaller disc:` +
       `\n  peak ratio        ${comparison.peakRatio.toFixed(3)}` +
       `\n  diameter          ${comparison.diameterDifferenceMas >= 0 ? '+' : ''}${comparison.diameterDifferenceMas.toFixed(1)} mas` +
