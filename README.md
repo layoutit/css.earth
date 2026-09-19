@@ -17,8 +17,17 @@ css.earth outputs one URL per celestial body with a shared camera, so you can fl
 <img src=".github/assets/solar-system.webp" alt="The inner Solar System out to Saturn, with orbits and labels, rendered as DOM and CSS markup" width="960">
 
 - **Stars and exoplanets:** stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and planetary systems beyond the Sun, such as WASP-43, HD 189733 and TRAPPIST-1.
+
+<img src=".github/assets/stars-exoplanets.webp" alt="Betelgeuse's imaged surface, and the WASP-43 system with its planet WASP-43b, rendered as DOM and CSS markup" width="960">
+
 - **Interstellar visitors:** 'Oumuamua, Borisov and 3I/ATLAS.
+
+<img src=".github/assets/interstellar.webp" alt="'Oumuamua and 3I/ATLAS, shown as shape-only ellipsoids, rendered as DOM and CSS markup" width="960">
+
 - **Nebulae:** the Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus the Pleiades cluster.
+
+<img src=".github/assets/nebulae.webp" alt="The Crab Nebula as a 3D volume, rendered as DOM and CSS markup" width="960">
+
 - **Galaxies:** the Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group and the nearby universe.
 
 <img src=".github/assets/milky-way-lmc.webp" alt="The Milky Way beside the Large Magellanic Cloud, rendered as DOM and CSS markup" width="960">
