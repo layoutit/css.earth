@@ -1,0 +1,37 @@
+{
+  "id": "source-haumea-alma-image-july-2023",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Haumea · alma image july 2023",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://almascience.eso.org/soda/sync?ID=member.uid___A001_X35f5_Xb21.136108_Haumea_2003_EL61_sci.spw5_7_9_11.cont.I.pbcor.fits&CIRCLE=216.6914399162%2015.53032891962%200.00012",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/haumea/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/5"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ALMA project 2022.1.01753.S (PI T. Müller); imaged by the ALMA pipeline and served by the ALMA Science Archive",
+      "scope": "The alma image july 2023 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public ALMA archive data under CC BY 4.0; the observatory asks for its standard acknowledgement, which NOTICE.md carries.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

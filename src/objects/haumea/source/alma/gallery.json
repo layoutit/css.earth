@@ -1,0 +1,27 @@
+{
+  "schema": "cssearth-gallery-source@1",
+  "id": "telescope-images",
+  "label": "Telescope images",
+  "sourcePage": "https://almascience.eso.org/aq/?projectCode=2022.1.01753.S",
+  "credit": "ALMA project 2022.1.01753.S (PI T. Müller); imaged by the ALMA pipeline and served by the ALMA Science Archive",
+  "qualification": "The ALMA archive's own image, cropped around Haumea and drawn in plain greys from just below the background noise (black) to the brightest point (white). Each pixel of the original is a square here; nothing is smoothed or sharpened. Four of the five sessions ran about two hours, as long as Haumea's outline takes to repeat while it spins, so the picture is an average over its rotation and cannot be laid onto the surface.",
+  "items": [
+    {
+      "id": "alma-2023-07",
+      "label": "ALMA · July 2023",
+      "sourcePath": "alma/haumea-band7-continuum-cutout.fits",
+      "publicFilename": "haumea-alma-2023-07.webp",
+      "sourceUrl": "https://almascience.eso.org/soda/sync?ID=member.uid___A001_X35f5_Xb21.136108_Haumea_2003_EL61_sci.spw5_7_9_11.cont.I.pbcor.fits&CIRCLE=216.6914399162%2015.53032891962%200.00012",
+      "width": 768,
+      "height": 768,
+      "fits": {
+        "window": { "x": 105, "y": 84, "width": 96, "height": 96 },
+        "unit": "Jy/beam",
+        "range": [-0.000026, 0.000248],
+        "enlarge": 8
+      },
+      "alt": "Grainy greyscale radio image: one small, bright, slightly stretched smudge in the middle of a dark speckled field.",
+      "caption": "Haumea's own heat at a wavelength of 0.87 mm, from five sessions between 6 and 23 July 2023 added together. North is up and the picture is 0.31 arcseconds across. Hubble, Webb and Keck see Haumea as a point; here it spans about three times the finest detail ALMA could make out. The ring these observations were looking for cannot be made out."
+    }
+  ]
+}

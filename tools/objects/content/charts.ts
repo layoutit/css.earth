@@ -2,6 +2,7 @@ import { readFile,writeFile,mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { readSpectrumData } from './spectrum-data.mts';
+import { parseFitsGalleryImageRecipe,renderFitsGalleryImage } from './fits-gallery-image.mts';
 import { renderLightCurveChart,renderReflectanceChart,renderTemperaturePressureChart,renderPhotometricPhaseChart } from './chart-svg.js';
 import type { ChartIdentity } from './chart-svg.js';
 type JsonMap=Record<string,unknown>;
@@ -62,7 +63,9 @@ export async function prepareChartAssets({sourceDirectory,publicDirectory,config
  }
  let gallery:unknown;
  if(recipe.gallery){const source=record(JSON.parse(await readFile(path(sourceDirectory,recipe.gallery.source),'utf8')) as unknown,'gallery');if(source.schema!==recipe.gallery.schema||!Array.isArray(source.items)||source.items.length!==recipe.gallery.itemCount)throw new TypeError('Gallery source schema or item count drifted.');for(const key of ['id','qualification','credit','sourcePage'])string(source[key],`gallery.${key}`);const ids=new Set<string>(),files=new Set<string>();const items=[];
-  for(const value of source.items){const item=record(value,'gallery item');for(const key of ['id','label','sourcePath','publicFilename','alt','caption','sourceUrl'])string(item[key],key);const filename=String(item.publicFilename),id=String(item.id);if(ids.has(id)||files.has(filename)||filename.includes('/'))throw new TypeError('Duplicate or unsafe gallery address.');ids.add(id);files.add(filename);const bytes=await readFile(path(sourceDirectory,String(item.sourcePath))),metadata=await sharp(bytes).metadata();if(metadata.width!==item.width||metadata.height!==item.height)throw new TypeError('Gallery source dimensions drifted.');await writeFile(path(publicDirectory,filename),bytes);const src=recipe.publicBase+filename;urls.push(src);items.push({id,label:item.label,src,width:item.width,height:item.height,alt:item.alt,caption:item.caption,sourceUrl:item.sourceUrl});}
+  for(const value of source.items){const item=record(value,'gallery item');for(const key of ['id','label','sourcePath','publicFilename','alt','caption','sourceUrl'])string(item[key],key);const filename=String(item.publicFilename),id=String(item.id);if(ids.has(id)||files.has(filename)||filename.includes('/'))throw new TypeError('Duplicate or unsafe gallery address.');ids.add(id);files.add(filename);
+   // An item is the archive's own picture, published as it is, or a stated window of a FITS sky image drawn here.
+   const file=await readFile(path(sourceDirectory,String(item.sourcePath))),bytes=item.fits===undefined?file:(await renderFitsGalleryImage(file,parseFitsGalleryImageRecipe(item.fits))).bytes,metadata=await sharp(bytes).metadata();if(metadata.width!==item.width||metadata.height!==item.height)throw new TypeError('Gallery source dimensions drifted.');await writeFile(path(publicDirectory,filename),bytes);const src=recipe.publicBase+filename;urls.push(src);items.push({id,label:item.label,src,width:item.width,height:item.height,alt:item.alt,caption:item.caption,sourceUrl:item.sourceUrl});}
   gallery={schema:'cssearth-prepared-gallery@1',id:source.id,open:false,qualification:source.qualification,credit:source.credit,sourcePage:source.sourcePage,items};
  }
  return {urls,...(gallery?{gallery}:{})};

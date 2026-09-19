@@ -24,6 +24,7 @@ const titleMap: Record<string, { label: string; src: string; width: number; heig
   reflectance: PREPARED_SHELL_TITLES.reflectance,
   temperaturePressure: PREPARED_SHELL_TITLES.temperaturePressure,
   surfacePhotos: PREPARED_SHELL_TITLES.surfacePhotos,
+  telescopeImages: PREPARED_SHELL_TITLES.telescopeImages,
   resources: PREPARED_SHELL_TITLES.resources,
   lenses: PREPARED_SHELL_TITLES.lenses,
   settings: PREPARED_SHELL_TITLES.settings,

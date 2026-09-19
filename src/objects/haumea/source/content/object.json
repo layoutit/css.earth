@@ -116,6 +116,26 @@
     "controls": []
   },
   "charts": [],
+  "galleries": [
+    {
+      "id": "telescope-images",
+      "titleKey": "telescopeImages",
+      "open": false,
+      "qualification": "The ALMA archive's own image, cropped around Haumea and drawn in plain greys from just below the background noise (black) to the brightest point (white). Each pixel of the original is a square here; nothing is smoothed or sharpened. Four of the five sessions ran about two hours, as long as Haumea's outline takes to repeat while it spins, so the picture is an average over its rotation and cannot be laid onto the surface.",
+      "items": [
+        {
+          "id": "alma-2023-07",
+          "label": "ALMA · July 2023",
+          "src": "/scenes/haumea/haumea-alma-2023-07.webp",
+          "width": 768,
+          "height": 768,
+          "alt": "Grainy greyscale radio image: one small, bright, slightly stretched smudge in the middle of a dark speckled field.",
+          "caption": "Haumea's own heat at a wavelength of 0.87 mm, from five sessions between 6 and 23 July 2023 added together. North is up and the picture is 0.31 arcseconds across. Hubble, Webb and Keck see Haumea as a point; here it spans about three times the finest detail ALMA could make out. The ring these observations were looking for cannot be made out.",
+          "sourceUrl": "https://almascience.eso.org/soda/sync?ID=member.uid___A001_X35f5_Xb21.136108_Haumea_2003_EL61_sci.spw5_7_9_11.cont.I.pbcor.fits&CIRCLE=216.6914399162%2015.53032891962%200.00012"
+        }
+      ]
+    }
+  ],
   "resources": [
     {
       "label": "NASA",
@@ -140,6 +160,12 @@
       "role": "illustration",
       "description": "Haumea 3D model and illustrative surface texture",
       "href": "https://science.nasa.gov/resource/haumea-3d-model/"
+    },
+    {
+      "label": "ALMA Science Archive",
+      "role": "telescope image",
+      "description": "Project 2022.1.01753.S, 0.87 mm image of July 2023",
+      "href": "https://almascience.eso.org/aq/?projectCode=2022.1.01753.S"
     }
   ],
   "provenance": {
