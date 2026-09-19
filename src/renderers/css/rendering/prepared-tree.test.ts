@@ -1,6 +1,39 @@
 import { expect, test, vi } from 'vitest';
-import { adoptPreparedTree, preparePresentationTree } from './prepared-tree.js';
+import { adoptPreparedTree, buildPreparedTree, preparePresentationTree } from './prepared-tree.js';
 import type { PreparedTree } from './prepared-presentation.js';
+
+const sha = 'a'.repeat(64);
+
+function propertyFixture() {
+  const document = { createElement(tag: string) {
+    return { tag, style: { setProperty: vi.fn() } as Record<string, unknown> & { setProperty: (name: string, value: string) => void },
+      setAttribute: vi.fn(), remove: vi.fn(), appendChild: vi.fn() };
+  } } as unknown as Document;
+  const tree: PreparedTree = { camera: 0, scene: 1, stageClasses: [], nodes: [{ tag: 'div', parent: -1, className: null, style: '',
+    properties: [0, 1], attributes: {} }],
+    properties: [
+      { name: '--earth-surface-page-0', value: 'url("/scenes/earth/earth-surface-page-0-level-512.webp")', custom: true },
+      { name: 'backgroundImage', value: 'url(/scenes/neptune/neptune-rings-wedges@2x.webp)', custom: false },
+    ] };
+  return { document, tree };
+}
+
+test('a baked custom or plain property url is rewritten against the asset origin', () => {
+  const f = propertyFixture();
+  const origin = { origin: 'https://earth-assets.lowpoly.cc', assets: { 'earth-surface-page-0-level-512.webp': sha, 'neptune-rings-wedges@2x.webp': sha } };
+  const { nodes } = buildPreparedTree(f.tree, f.document, () => {}, undefined, origin);
+  const style = nodes[0].style as unknown as { setProperty: ReturnType<typeof vi.fn>; backgroundImage: string };
+  expect(style.setProperty).toHaveBeenCalledWith('--earth-surface-page-0', `url("https://earth-assets.lowpoly.cc/runtime-assets/${sha}/earth-surface-page-0-level-512.webp")`);
+  expect(style.backgroundImage).toBe(`url(https://earth-assets.lowpoly.cc/runtime-assets/${sha}/neptune-rings-wedges@2x.webp)`);
+});
+
+test('a baked property url is left unresolved without an asset origin', () => {
+  const f = propertyFixture();
+  const { nodes } = buildPreparedTree(f.tree, f.document, () => {});
+  const style = nodes[0].style as unknown as { setProperty: ReturnType<typeof vi.fn>; backgroundImage: string };
+  expect(style.setProperty).toHaveBeenCalledWith('--earth-surface-page-0', 'url("/scenes/earth/earth-surface-page-0-level-512.webp")');
+  expect(style.backgroundImage).toBe('url(/scenes/neptune/neptune-rings-wedges@2x.webp)');
+});
 
 function fixture() {
   const made: any[] = [];

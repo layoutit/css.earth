@@ -55,7 +55,7 @@ export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => P
       if (definition.camera.projection) cameraViewport?.read(definition.camera.projection.cssPerspective);
       const resources = prepareObjectResources(definition.assets, { signal });
       let tree: PreparedTreeLease | undefined;
-      const construction = ownerDocument ? preparePresentationTree(definition.tree, ownerDocument, signal).then(value => { tree = value; }) : Promise.resolve();
+      const construction = ownerDocument ? preparePresentationTree(definition.tree, ownerDocument, signal, undefined, definition.assetOrigin).then(value => { tree = value; }) : Promise.resolve();
       const destroy = () => { resources.destroy(); tree?.destroy(); };
       let demand: ReturnType<typeof createObjectViewDemand> | null = null;
       const prepareView = (read: () => ObjectPreparationView) => {

@@ -1,4 +1,4 @@
-import { initialObjectSelection, resolvePreparedAssetUrl } from '../src/renderers/css/dist/index.js';
+import { initialObjectSelection, resolvePreparedAssetUrl, rewritePreparedStyleUrls } from '../src/renderers/css/dist/index.js';
 import type { ObjectRuntimeDefinition } from '../src/renderers/css/runtime/object-runtime-types.js';
 
 export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; sha256?: string; }
@@ -35,7 +35,7 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, lens
   if (!variant) throw new TypeError(`${definition.id}: initial presentation is missing.`);
   const elements = definition.tree.nodes.map(node => ({
     tag: node.tag, classes: new Set(node.className?.split(/\s+/).filter(Boolean)),
-    attributes: { ...node.attributes }, style: declarations(node.style), children: [] as number[],
+    attributes: { ...node.attributes }, style: declarations(rewritePreparedStyleUrls(node.style, definition.assetOrigin)), children: [] as number[],
   }));
   const stage = { classes: new Set(definition.tree.stageClasses), attributes: {} as Record<string, string>, style: new Map<string, string>() };
   const roots: number[] = [];
@@ -56,7 +56,7 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, lens
   for (const [index, node] of definition.tree.nodes.entries()) {
     for (const id of node.properties) {
       const property = definition.tree.properties[id];
-      write(index, property.name, property.value);
+      write(index, property.name, rewritePreparedStyleUrls(property.value, definition.assetOrigin));
     }
     if (node.parent === -1) roots.push(index); else elements[node.parent].children.push(index);
   }

@@ -27,6 +27,20 @@ export function resolvePreparedAssetUrl(address: string, assetOrigin: PreparedAs
   return `${assetOrigin.origin}/runtime-assets/${digest}/${filename}`;
 }
 
+// Matches `site/asset-origin.mts`'s `CSS_SCENE_URL`: `url(` and its closing `)` may wrap
+// the quoted address across lines, so whitespace is allowed around it but excluded from it.
+const STYLE_SCENE_URL = /url\(\s*(["']?)(\/scenes\/[a-z][a-z0-9-]*\/[^\s"')]+)\1\s*\)/gu;
+
+/** Rewrites every literal `url(/scenes/<id>/<file>)` reference baked into a prepared node's
+ * CSS declaration-list string (`projector.ts` bakes `background-image` this way) against the
+ * published asset origin. Reuses `resolvePreparedAssetUrl` per address, so a filename missing
+ * from the object's asset map still throws rather than serving a same-origin `/scenes/` URL. */
+export function rewritePreparedStyleUrls(style: string, assetOrigin: PreparedAssetOrigin | null | undefined): string {
+  if (!assetOrigin || !style) return style;
+  return style.replace(STYLE_SCENE_URL, (_match, quote: string, address: string) =>
+    `url(${quote}${resolvePreparedAssetUrl(address, assetOrigin)}${quote})`);
+}
+
 export function parsePreparedAssetOrigin(value: unknown): PreparedAssetOrigin | undefined {
   if (value === undefined) return undefined;
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Prepared asset origin must be an object.');

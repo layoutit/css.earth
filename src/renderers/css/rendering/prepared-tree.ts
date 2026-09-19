@@ -1,12 +1,13 @@
 import type { PreparedTree } from './prepared-presentation.js';
 import { writePreparedStyle } from './style-access.js';
+import { rewritePreparedStyleUrls, type PreparedAssetOrigin } from './prepared-asset-origin.js';
 
 type Own = (cleanup: () => void) => unknown;
 interface BuiltTree { nodes: HTMLElement[]; roots: HTMLElement[]; }
 
 /** A detached transport of prepared DOM records. No scene, layout read,
  * animation, resource bank or camera exists until the mounted owner claims it. */
-function builder(tree: PreparedTree, document: Document, own: Own) {
+function builder(tree: PreparedTree, document: Document, own: Own, assetOrigin?: PreparedAssetOrigin | null) {
   const nodes: HTMLElement[] = [], roots: HTMLElement[] = [];
   return {
     get complete() { return nodes.length === tree.nodes.length; },
@@ -16,12 +17,13 @@ function builder(tree: PreparedTree, document: Document, own: Own) {
       nodes.push(node);
       if (record.parent === -1) { roots.push(node); own(() => node.remove()); }
       if (record.className !== null) node.className = record.className;
-      if (record.style) node.style.cssText = record.style;
+      if (record.style) node.style.cssText = rewritePreparedStyleUrls(record.style, assetOrigin);
       // Preserve the prepared CSSOM assignment order and numeric precision.
       for (const propertyId of record.properties) {
         const property = tree.properties[propertyId];
-        if (property.custom) node.style.setProperty(property.name, property.value);
-        else writePreparedStyle(node.style, property.name, property.value);
+        const value = rewritePreparedStyleUrls(property.value, assetOrigin);
+        if (property.custom) node.style.setProperty(property.name, value);
+        else writePreparedStyle(node.style, property.name, value);
       }
       for (const [name, value] of Object.entries(record.attributes)) node.setAttribute(name, value);
       if (record.parent !== -1) nodes[record.parent].appendChild(node);
@@ -60,10 +62,10 @@ export function adoptPreparedTree(tree: PreparedTree, stage: HTMLElement, own: O
   return { nodes: owned, roots };
 }
 
-export function buildPreparedTree(tree: PreparedTree, document: Document, own: Own, stage?: HTMLElement): BuiltTree {
+export function buildPreparedTree(tree: PreparedTree, document: Document, own: Own, stage?: HTMLElement, assetOrigin?: PreparedAssetOrigin | null): BuiltTree {
   const existing = stage ? adoptPreparedTree(tree, stage, own) : null;
   if (existing) return existing;
-  const build = builder(tree, document, own);
+  const build = builder(tree, document, own, assetOrigin);
   while (!build.complete) build.append();
   return build.result;
 }
@@ -74,9 +76,10 @@ export interface PreparedTreeLease {
 }
 
 export async function preparePresentationTree(tree: PreparedTree, document: Document, signal: AbortSignal,
-  yieldTask: () => Promise<void> = () => new Promise(resolve => setTimeout(resolve, 0))): Promise<PreparedTreeLease> {
+  yieldTask: () => Promise<void> = () => new Promise(resolve => setTimeout(resolve, 0)),
+  assetOrigin?: PreparedAssetOrigin | null): Promise<PreparedTreeLease> {
   const cleanups: (() => void)[] = [];
-  const build = builder(tree, document, cleanup => cleanups.push(cleanup));
+  const build = builder(tree, document, cleanup => cleanups.push(cleanup), assetOrigin);
   let destroyed = false, claimed = false;
   const destroy = () => {
     if (destroyed || claimed) return;

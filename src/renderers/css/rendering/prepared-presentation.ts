@@ -11,6 +11,7 @@ import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
 import { selectPreparedTextureLevel, type PreparedTextureLevels } from './prepared-texture-levels.js';
 import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
 import type { PreparedSurfaceFeaturePlan } from '../labels/surface-feature-types.js';
+import type { PreparedAssetOrigin } from './prepared-asset-origin.js';
 export type PreparedSelection = ObjectSelection;
 export interface PreparedView {
   readonly projection?: import('./physical-projection.js').PhysicalProjection;
@@ -56,6 +57,7 @@ export interface PreparedPresentationDefinition {
   features?: PreparedSurfaceFeaturePlan;
   depthPartitions?: PreparedDepthPartitions;
   surfaceHit?: PreparedSurfaceHit;
+  assetOrigin?: PreparedAssetOrigin;
 }
 export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedLenses: (string | null)[]; navigation?: PreparedSelectionNavigation; textureLevel?: number; textureResources?: Readonly<Record<string, string>>;
   /** The mesh is not drawn at this level of detail: its textures only warm. */
@@ -122,7 +124,7 @@ function writeStyle(element: HTMLElement, name: string, value: string) {
 // callbacks enter this builder. The ordered records are final prepared DOM.
 export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition, preparedTree?: PreparedTreeLease, initialProjection?: import('./physical-projection.js').PhysicalProjection, progressiveActivation = false) {
   const { nodes, roots } = preparedTree ? preparedTree.claim(definition.tree, stage.ownerDocument, context.own)
-    : buildPreparedTree(definition.tree, stage.ownerDocument, context.own, stage);
+    : buildPreparedTree(definition.tree, stage.ownerDocument, context.own, stage, definition.assetOrigin);
   const cameraElement = nodes[definition.tree.camera], sceneElement = nodes[definition.tree.scene];
   const owned = () => roots.some(root => root.parentNode === stage);
   const stageBindings = new Map<string, PreparedWrite>();
