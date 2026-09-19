@@ -157,7 +157,7 @@ export async function timeSeriesVisits(nowMjd: number): Promise<TimeSeriesVisit[
 const receiptProblem = (file: string, error: unknown) => { const said = error instanceof Error ? error.message : String(error); return said.startsWith(`${file}:`) ? said : `${file}: ${said}`; };
 
 /** The schemas the three imaging stages write their reproduction receipts under. Nothing else is a receipt. */
-export const JWST_REPRODUCTION_SCHEMAS = ['cssearth-jwst-image3-reproduction@1', 'cssearth-jwst-coron3-reproduction@1', 'cssearth-jwst-spec3-reproduction@1'] as const;
+export const JWST_REPRODUCTION_SCHEMAS = ['cssearth-jwst-image3-reproduction@1', 'cssearth-jwst-coron3-reproduction@1', 'cssearth-jwst-spec3-reproduction@1', 'cssearth-jwst-spec3-reproduction@2'] as const;
 /** What a receipt has to say for the band it names to count as checked: which program, band and observation it reduced, and the
  * MAST product it compared the result against, pinned by name, size and digest. */
 export interface ReproductionReceipt { readonly schema: string; readonly program: string; readonly band: string; readonly observation: string;

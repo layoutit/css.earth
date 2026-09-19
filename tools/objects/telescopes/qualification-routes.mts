@@ -22,7 +22,7 @@ export interface QualificationObservation {
 
 export type QualificationConfiguration =
   | { readonly kind: 'spitzer-irac-channel'; readonly channel: number }
-  | { readonly kind: 'jwst-band'; readonly band: string }
+  | { readonly kind: 'jwst-band'; readonly band: string; readonly wavelengthMicrometres: readonly [number, number] }
   | { readonly kind: 'naco-program-night'; readonly programme: string; readonly archiveTarget: string; readonly night: string }
   | { readonly kind: 'pds-product'; readonly targetLid: string; readonly targetName: string; readonly lidvid: string };
 
@@ -67,6 +67,12 @@ const required = (args: readonly string[], flag: string) => {
   if (!value) throw new TypeError(`${flag} is required for this qualification route.`);
   return value;
 };
+const wavelength = (args: readonly string[]): readonly [number, number] => {
+  const values = required(args, '--wavelength').split(',').map(Number);
+  if (values.length !== 2 || !values.every(Number.isFinite) || !(values[0]! < values[1]!))
+    throw new TypeError('--wavelength must be an increasing FROM,TO interval in micrometres.');
+  return [values[0]!, values[1]!];
+};
 
 function makeAction(target: string, telescope: string, mode: string, observation: QualificationObservation, configuration: QualificationConfiguration,
   option: readonly string[]): QualificationAction {
@@ -98,10 +104,13 @@ const ROUTES: readonly QualificationRoute[] = [
     actions: ({ target, wavelengthMicrometres, time, observations }) => observations.filter(observation => overlapsTime(observation, time) && observation.filter).flatMap(observation => {
       const band = bandOfFilters('NIRSPEC', observation.filter!, observation.id), coverage = JWST_CUBE_COVERAGE[band.id];
       return coverage && covers(coverage, wavelengthMicrometres)
-        ? [makeAction(target, 'JWST', 'NIRSPEC/IFU', observation, { kind: 'jwst-band', band: band.id }, ['--band', band.id])] : [];
+        ? [makeAction(target, 'JWST', 'NIRSPEC/IFU', observation, { kind: 'jwst-band', band: band.id, wavelengthMicrometres },
+          ['--band', band.id, '--wavelength', wavelengthMicrometres.join(',')])] : [];
     }),
-    accepts: configuration => configuration.kind === 'jwst-band' && configuration.band.startsWith('NIRSPEC-') && JWST_CUBE_COVERAGE[configuration.band] !== undefined,
-    configurationFromArguments: args => ({ kind: 'jwst-band', band: required(args, '--band') }),
+    accepts: configuration => configuration.kind === 'jwst-band' && configuration.band.startsWith('NIRSPEC-')
+      && JWST_CUBE_COVERAGE[configuration.band] !== undefined
+      && covers(JWST_CUBE_COVERAGE[configuration.band]!, configuration.wavelengthMicrometres),
+    configurationFromArguments: args => ({ kind: 'jwst-band', band: required(args, '--band'), wavelengthMicrometres: wavelength(args) }),
   },
   {
     telescope: 'VLT/NACO', mode: 'imaging',

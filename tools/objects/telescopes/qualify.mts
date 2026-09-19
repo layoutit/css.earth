@@ -66,14 +66,15 @@ async function qualifyJwstNirspec(root: string, request: QualificationRequest): 
   if (request.configuration.kind !== 'jwst-band') throw new TypeError('JWST NIRSpec qualification requires a band.');
   const coverage = JWST_CUBE_COVERAGE[request.configuration.band];
   if (!coverage) throw new TypeError(`Unknown JWST cube band ${request.configuration.band}.`);
-  const { answer, observation } = await indexedObservation(root, request, coverage);
+  const wavelength = request.configuration.wavelengthMicrometres;
+  const { answer, observation } = await indexedObservation(root, request, wavelength);
   const programId = `${answer.target}-${request.observation}`;
   const { program } = await pinImagingProgram(programId, DEFAULT_CRDS_CONTEXT, [request.observation]);
   const entry = program.bands.find(band => band.observation === request.observation);
   if (!entry || entry.band !== request.configuration.band) throw new Error(`${request.observation} is ${entry?.band ?? 'not a cube'}, not ${request.configuration.band}.`);
   if (observation.programme && program.programme !== observation.programme) throw new Error(`${request.observation} is programme ${program.programme}, not indexed programme ${observation.programme}.`);
-  const work = resolve(root, 'output/jwst', programId), run = await runSpec3(programId, request.configuration.band, work);
-  const compared = await compareCubeWithMast(programId, request.configuration.band, run.cube, work);
+  const work = resolve(root, 'output/jwst', programId), run = await runSpec3(programId, request.configuration.band, work, { wavelengthMicrometres: wavelength });
+  const compared = await compareCubeWithMast(programId, request.configuration.band, run.cube, work, [], wavelength);
   await refreshJwstLedger();
   return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
     program: programId, configuration: request.configuration, product: run.cube, receipt: compared.path,
@@ -139,7 +140,7 @@ export async function qualifyObservation(root: string, request: QualificationReq
 
 export const QUALIFY_HELP = `Usage: pnpm telescope:qualify --target TARGET --telescope NAME --mode MODE --observation ID ROUTE_OPTIONS
 
-Route options are emitted by telescope:query. Registered routes currently use --channel N, --band ID,
+Route options are emitted by telescope:query. Registered routes currently use --channel N, --band ID --wavelength FROM,TO,
 --archive-programme ID --archive-target NAME --night YYYY-MM-DD, or the exact --pds-target-lid/--pds-target-name/--pds-lidvid identity.`;
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

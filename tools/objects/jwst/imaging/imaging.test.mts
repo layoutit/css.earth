@@ -262,6 +262,7 @@ test('a cube run asks the pipeline only for what the band needs', () => {
   const nirspec = JWST_BANDS['NIRSPEC-G395H-F290LP']!;
   assert.deepEqual(spec3Steps(nirspec), { extract_1d: { skip: true } });
   assert.deepEqual(spec3Steps(nirspec, 0.05), { extract_1d: { skip: true }, cube_build: { scalexy: 0.05 } });
+  assert.deepEqual(spec3Steps(nirspec, undefined, [3.4, 3.6]), { extract_1d: { skip: true }, cube_build: { wavemin: 3.4, wavemax: 3.6 } });
   // A MIRI association covers twelve cubes, so the channel and sub-band are named; the spectral-leak correction only ever
   // changes an extracted spectrum, which this run does not extract.
   assert.deepEqual(spec3Steps(JWST_BANDS['MIRI-MRS-CH3-LONG']!), { extract_1d: { skip: true }, spectral_leak: { skip: true }, cube_build: { channel: '3', band: 'long' } });

@@ -425,9 +425,11 @@ test('the committed ledger turns Triton NIRSpec records into runnable band-speci
   assert.equal(nirspec.meetsConstraints.time?.answer, 'yes');
   assert.deepEqual(nirspec.selectionAssessment.blockers.map(blocker => blocker.code), ['target-program-unqualified']);
   assert.deepEqual(nirspec.selectionAssessment.qualificationActions.map(action => [action.observation, action.configuration]), [
-    ['jw01272-o003_t001_nirspec_g140h-f100lp', { kind: 'jwst-band', band: 'NIRSPEC-G140H-F100LP' }],
-    ['jw01272-o011_t001_nirspec_g140h-f100lp', { kind: 'jwst-band', band: 'NIRSPEC-G140H-F100LP' }],
+    ['jw01272-o003_t001_nirspec_g140h-f100lp', { kind: 'jwst-band', band: 'NIRSPEC-G140H-F100LP', wavelengthMicrometres: [1.55, 1.75] }],
+    ['jw01272-o011_t001_nirspec_g140h-f100lp', { kind: 'jwst-band', band: 'NIRSPEC-G140H-F100LP', wavelengthMicrometres: [1.55, 1.75] }],
   ]);
+  assert.deepEqual(nirspec.selectionAssessment.qualificationActions[0]!.arguments.slice(-4),
+    ['--band', 'NIRSPEC-G140H-F100LP', '--wavelength', '1.55,1.75']);
 });
 
 test('the committed ledger turns each Pallas NACO night into a runnable archive qualification action', async () => {
