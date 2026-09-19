@@ -45,6 +45,10 @@ src/objects/*/source/**/*.zip
 src/objects/*/source/**/*.bsp
 src/objects/*/source/**/*.bc
 src/objects/*/source/**/*.bds
+# Akatsuki UVI Level 3b map exposures: a versioned DARTS volume behind a DOI, restored by the body's
+# acquisition plan from a stable URL. Earth's NOAA CoralTemp grid stays committed, so this is not a
+# rule about NetCDF; it is about which archive can hand the same bytes back.
+src/objects/venus/source/akatsuki/*.nc
 
 # Accepted Saturn source-of-truth inputs without a direct acquisition URL.
 !src/objects/saturn/source/cassini-pia21611.jpg

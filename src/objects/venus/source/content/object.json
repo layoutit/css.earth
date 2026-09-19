@@ -224,6 +224,22 @@
         "qualification": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic",
         "falseColor": true,
         "notes": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic with shaded relief. This archival scientific visualization is not visible surface color."
+      },
+      {
+        "id": "ultraviolet",
+        "label": "Ultraviolet",
+        "thumbnail": "venus-lens-ultraviolet.webp",
+        "surface": "venus-ultraviolet@2x.webp",
+        "source": {
+          "id": "akatsuki-uvi",
+          "url": "https://doi.org/10.17597/isas.darts/vco-00016"
+        },
+        "poles": "venus-poles-ultraviolet@2x.webp",
+        "material": "venus-material@2x.webp",
+        "shortLabel": "UV",
+        "qualification": "JAXA/ISAS Akatsuki UVI Level 3b, 365 nm, 2023-08-30 10:04:46 UTC",
+        "falseColor": false,
+        "notes": "JAXA/ISAS Akatsuki UVI 365 nm ultraviolet image of the cloud tops, mapped by the mission to a 0.125-degree grid. One exposure on 2023-08-30 sees one hemisphere; the grey graticule marks the side the spacecraft could not see. Brightness is the measured radiance as observed."
       }
     ],
     "labels": {

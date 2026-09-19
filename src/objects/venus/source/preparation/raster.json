@@ -57,6 +57,25 @@
         0.9
       ],
       "sharpen": 0.65
+    },
+    {
+      "id": "ultraviolet",
+      "source": "akatsuki/uvi_20230830_100446_365_l3b_v21.nc",
+      "falseColor": false,
+      "output": "venus-{id}{suffix}.webp",
+      "thumbnail": "venus-lens-{id}.webp",
+      "science": {
+        "kind": "akatsuki-uvi-l3b",
+        "productId": "uvi_20230830_100446_365_l3b_v21",
+        "filter": "365 nm",
+        "observationMiddle": "2023-08-30T10:04:46.033",
+        "converterId": "7b81c2b8b5a5",
+        "gain": 5e-09,
+        "gamma": 2.2,
+        "referenceRadiusMeters": 6051800,
+        "outputLongitudeOrigin": 180
+      },
+      "thumbnailCenterLongitudeDegrees": 29.123
     }
   ],
   "atmosphere": {

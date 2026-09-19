@@ -315,6 +315,22 @@
     url("/scenes/venus/venus-poles-elevation@2x.webp") !important;
 }
 
+/* Akatsuki's ultraviolet view is of the cloud tops, so it keeps the cloud deck's
+   36s rotation above rather than the 96s solid-body rate the radar lenses use. */
+.planet-stage[data-object-id="venus"][data-lens="ultraviolet"]
+  .polycss-scene
+  s:not(.venus-polar) {
+  background-image:
+    url("/scenes/venus/venus-ultraviolet@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="venus"][data-lens="ultraviolet"]
+  .polycss-scene
+  s.venus-polar {
+  background-image:
+    url("/scenes/venus/venus-poles-ultraviolet@2x.webp") !important;
+}
+
 .planet-stage[data-object-id="venus"] .venus-fixed-material {
   z-index: 1;
   top: 50%;

@@ -1,0 +1,73 @@
+{
+  "id": "source-venus-jaxa-akatsuki-uvi-l3b-365",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Venus Climate Orbiter Akatsuki UVI Longitude-Latitude Map Data v1.1",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.17597/isas.darts/vco-00016"
+    },
+    {
+      "type": "JAXA volume",
+      "value": "vco_uvi_l3_v1.1 vcouvi_7011"
+    },
+    {
+      "type": "Product",
+      "value": "uvi_20230830_100446_365_l3b_v21"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.17597/isas.darts/vco-00016",
+      "label": "Venus Climate Orbiter Akatsuki UVI Longitude-Latitude Map Data v1.1"
+    },
+    {
+      "role": "archive",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7011/data/l3b/netcdf/r0257/uvi_20230830_100446_365_l3b_v21.nc",
+      "label": "Level 3b exposure, orbit r0257"
+    },
+    {
+      "role": "original",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7011/00readme.txt",
+      "label": "Volume readme: data citation, processing and file format"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.isas.jaxa.jp/en/researchers/data-policy/",
+      "label": "ISAS/JAXA data policy: CC BY 4.0"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/venus/source/manifest.json",
+      "revision": "694a1265852870fed108c79258b324f5e1072ef9",
+      "sha256": "c5fb461f7506e87a9cfc80db314a651db8ebfefd411272f6d70e13ef30c59407",
+      "locator": "/inputs/11"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Murakami, S., K. Ogohara, M. Takagi, H. Kashimura, M. Yamada, T. Kouyama, T. Horinouchi, T. Imamura, Venus Climate Orbiter Akatsuki UVI Longitude-Latitude Map Data v1.1, JAXA Data Archives and Transmission System, https://doi.org/10.17597/isas.darts/vco-00016, 2025.",
+      "scope": "The data citation the archive asks users of this data set to give.",
+      "evidence": "Volume 00readme.txt, \"Data Citation\" section."
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY 4.0",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "https://www.isas.jaxa.jp/en/researchers/data-policy/"
+    },
+    {
+      "kind": "limitation",
+      "text": "One exposure maps the hemisphere the spacecraft saw; the rest of the grid carries the fill value.",
+      "scope": "Level 3b longitude-latitude coverage.",
+      "evidence": "Volume 00readme.txt, \"Definition of Products\"."
+    }
+  ],
+  "publisher": "JAXA DARTS",
+  "version": "v1.1"
+}

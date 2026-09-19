@@ -22,6 +22,10 @@ export interface SurfaceRasterRecipe {
     exposure?: number[];
     /** Opt in to sampling the pinned source image directly for pole sprites. The delivered latitude bands stay unchanged. */
     nativeSourcePoles?: boolean;
+    /** Centre of this lens's picker thumbnail, overriding the recipe's and in the same frame: degrees east of the
+     * map's left edge, not of the prime meridian. A lens that observed one hemisphere would otherwise crop its
+     * thumbnail out of the data gap and offer the reader a blank tile. */
+    thumbnailCenterLongitudeDegrees?: number;
     coverage?: {
         normal: string;
         topography: string;
