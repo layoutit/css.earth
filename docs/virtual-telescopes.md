@@ -181,9 +181,12 @@ Candidate output keeps three program facts separate: programmes the archive reco
 toolkit, and programs with checked receipts or qualified archive-final products. An archive programme is therefore visible
 without being presented as something the local route can already run.
 
-The instrument author then writes the final map, its `*.body-map.json`, and the shared `*.product.json`. JWST band maps,
-Hubble slit-scan maps and ALMA thermal maps use this boundary. The product record pins the recipe, observation products,
-ephemerides and rotation model that the map stage read, along with the output plane and its body-map metadata.
+The instrument author then writes the final map, its `*.body-map.json`, and the shared `*.product.json`. Resolved images from
+JWST, ALMA and NACO meet at `tools/objects/resolved-disc-map.mts`: an adapter supplies a north-up/east-left value plane, its
+one-sigma uncertainty, plate scale and observation identity; the shared stage fits the limb and owns the ephemeris, rotation,
+camera, projection and complete body-map observation. Hubble's slit scan has different image formation and joins at the final
+body-map contract. The product record pins the recipe, observation products, ephemerides and rotation model that the map stage
+read, along with the output plane and its body-map metadata.
 
 Publication performs the query and verifies the whole chain in one command:
 
@@ -197,7 +200,8 @@ pnpm telescope:publish-map --target europa --wavelength 4.24,4.28 --kind cube \
 
 It refuses a missing map contract with the selected telescope, mode and program in the error. It also refuses a changed
 plane, stale product record, changed measurement definition, frame, grid or combination policy, a map
-whose observations omit their exact mode or program, and a map that does not contain the selected program. Its output keeps
+whose observations omit their exact mode or program, a map that does not contain the selected program, or measured resolution
+and observation times that fail the original question. Its output keeps
 the original scientific request, unresolved constraints, selected toolkit level, exact product record, quantity, units,
 definition digest and observations. A body package can therefore expose the layer without recreating a scientific claim in
 presentation code.

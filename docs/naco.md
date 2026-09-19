@@ -5,8 +5,9 @@ this project as raw frames from the ESO archive. This guide describes how one ni
 from those frames on ESO's own pipeline, and checked. The route is the one [interferometric imaging](interferometric-imaging.md)
 and [JWST imaging](jwst-imaging.md) follow: pin, re-run, compare, write a receipt.
 
-Nothing is drawn from NACO data yet. What exists is the toolkit, its proof on one Ceres imaging night and one Europa
-spectroscopy night, and [a ledger](naco-ledger.md) of what the archive holds for this project's bodies.
+The checked Ceres imaging night also proves the resolved-disc route: a NACO adapter restores the sky axes from the pinned raw
+headers and the shared body-map stage places its relative Ks intensity on Ceres. Europa spectroscopy still ends at a detector
+spectrum, and [the ledger](naco-ledger.md) records what the archive holds for this project's bodies.
 
 ## What is different about NACO
 
@@ -68,13 +69,21 @@ Two other things are worth knowing before reading the code.
    `spectroscopy-receipt.mts <program id> <work>` compares the two nod
    halves' extracted one-dimensional spectra, measures the target's width across the slit against the night's telluric
    standard, and records the slit geometry.
-5. **Ledger.** `archive-ledger.mts` writes [data/naco/ledger.json](../data/naco/ledger.json) and
+5. **Place a resolved image.** `author-body-map.mts <target> <program id> <naco_img_jitter.fits> --raw <raw-dir>` is the
+   NACO adapter to [`resolved-disc-map.mts`](../tools/objects/resolved-disc-map.mts), the same placement boundary now used by
+   JWST and ALMA. The adapter checks the current reduction record and every raw pin, requires every object exposure to carry
+   the same north-up/east-left TAN grid and zero requested position angle, and uses the recipe's shift-only coadd with a newly
+   fitted disc centre. It publishes relative filter intensity with an explicit sky-noise uncertainty; no absolute calibration
+   or photometric correction is claimed. The shared stage owns the ephemeris, rotation model, camera, projection, measured
+   resolution, body-map metadata and product record.
+6. **Ledger.** `archive-ledger.mts` writes [data/naco/ledger.json](../data/naco/ledger.json) and
    [docs/naco-ledger.md](naco-ledger.md): frame counts by mode counted server-side by the archive, the shipped objects NACO
    observed, and each mode's state read from the pinned programs and the receipts beside them rather than declared.
 
 What is shared rather than repeated: the archive's raw table, the header service, the anonymous data-portal download and the
-esorex runner are `tools/objects/interferometry/eso-pipeline.mts`, and the calibration association tree is
-`eso-associations.mts`. This route adds the install, the pin, the three-recipe order and the comparison, and nothing else.
+esorex runner are `tools/objects/interferometry/eso-pipeline.mts`, the calibration association tree is
+`eso-associations.mts`, and resolved-image placement is `resolved-disc-map.mts`. NACO supplies only the facts peculiar to its
+product: how the recipe retained the detector axes, how relative intensity and its noise are measured, and which bytes prove it.
 
 ## Measured
 
@@ -201,7 +210,9 @@ program records `arcs: false` and the reduction carries it into the receipt.
   different registration.
 - The Europa spectra are not placed on the moon. The disc is not resolved along the slit on this measurement, so there is
   no spatial strip to place, and the geometry in the receipt is recorded for a stage that has not been written.
-- Nothing here is drawn. No NACO observation has been turned into a lens or an object dataset.
+- The Ceres author produces an auditable relative-Ks body map, not a claim that the frame reveals named terrain. On the
+  retained clean-room reduction the fitted delivered resolution is 0.169 arcseconds and the wide adaptive-optics halo remains
+  in the measurement. The map carries that resolution, the uncertainty and the lack of photometric correction.
 
 ## Re-running
 
@@ -213,6 +224,9 @@ node tools/objects/naco/archive.mts ceres-080C0881 "080.C-0881(C)" CERES
 node tools/objects/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47
 node tools/objects/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:45:32
 node tools/objects/naco/compare.mts ceres-080C0881 .local/naco/ceres-080C0881 2007-11-11T02:38:47 2007-11-11T02:45:32
+node tools/objects/naco/author-body-map.mts ceres ceres-080C0881 \
+  .local/naco/ceres-080C0881/jitter-2007-11-11T023847/naco_img_jitter.fits \
+  --raw .local/naco/ceres-080C0881/raw
 
 node tools/objects/naco/archive.mts europa-088C0833 "088.C-0833(B)" EUROPA --night 2012-01-03
 node tools/objects/naco/reduce.mts europa-088C0833 .local/naco/europa-088C0833

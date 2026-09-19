@@ -10,9 +10,9 @@ import { pathToFileURL } from 'node:url';
 import { sha256 } from '../../src/platform/sha256.mts';
 import { flagValue } from '../cli-arguments.mts';
 import { hasErrorCode } from '../source-values.mts';
-import { definitionDigest, parseBodyMapProduct, type BodyMapProduct } from './body-map-product.mts';
+import { definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapProduct } from './body-map-product.mts';
 import { parseProductRecord, productRecordPath, runDigest, sameRun, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from './product-record.mts';
-import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, type ObservationSelection } from './telescopes/query.mts';
+import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, type ConstraintVerdict, type ObservationSelection } from './telescopes/query.mts';
 
 export const BODY_MAP_PUBLICATION_STAGE = 'body-map';
 export const TELESCOPE_LAYER_SCHEMA = 'cssearth-telescope-layer@1';
@@ -60,6 +60,34 @@ const publicationFile = async (path: string, selection: ObservationSelection, ar
   throw new Error(`Cannot publish ${selection.telescope} ${selection.mode} program ${selection.programme}: the ${artifact} is missing at ${path}. A publishable body-map route writes the map plane, its *.body-map.json metadata and the plane's *.product.json record.`);
 });
 
+/** The mode-level query can only say whether an observation might satisfy a requested resolution. Publication has the
+ * measured beam/PSF and exact epoch, so this is where a partial answer becomes a definite yes or no. */
+export function assertMapAnswersRequest(product: BodyMapProduct, selection: ObservationSelection): Record<string, ConstraintVerdict> {
+  const { request } = selection, observations = product.observations, resolved: Record<string, ConstraintVerdict> = {};
+  if (request.angularResolutionArcsec !== undefined) {
+    const worst = Math.max(...observations.map(observation => observation.angularResolution.majorArcsec));
+    if (worst > request.angularResolutionArcsec) throw new RangeError(`Cannot publish ${selection.telescope} ${selection.mode} program ${selection.programme}: the map's measured resolution is ${worst.toPrecision(3)} arcsec; the question requires ${request.angularResolutionArcsec} arcsec or better.`);
+    resolved.angularResolution = { answer: 'yes', reason: `The published map's measured worst-axis resolution is ${worst.toPrecision(3)} arcsec, within the requested ${request.angularResolutionArcsec} arcsec.` };
+  }
+  if (request.surfaceResolutionKm !== undefined) {
+    const worst = Math.max(...observations.map(observation => surfaceResolutionKm(observation).majorKm));
+    if (worst > request.surfaceResolutionKm) throw new RangeError(`Cannot publish ${selection.telescope} ${selection.mode} program ${selection.programme}: the map's measured surface resolution is ${worst.toPrecision(3)} km at the sub-observer point; the question requires ${request.surfaceResolutionKm} km or better.`);
+    resolved.surfaceResolution = { answer: 'yes', reason: `The published map's measured worst-axis surface resolution is ${worst.toPrecision(3)} km at the sub-observer point, within the requested ${request.surfaceResolutionKm} km.` };
+  }
+  if (request.resolutionElements !== undefined) {
+    const fewest = Math.min(...observations.map(observation => resolutionElementsAcrossDisc(observation, product.frame.radiusKm)));
+    if (fewest < request.resolutionElements) throw new RangeError(`Cannot publish ${selection.telescope} ${selection.mode} program ${selection.programme}: the map has ${fewest.toPrecision(3)} measured resolution elements across the disc; the question requires at least ${request.resolutionElements}.`);
+    resolved.resolutionElements = { answer: 'yes', reason: `The published map has at least ${fewest.toPrecision(3)} measured resolution elements across the disc, meeting the requested ${request.resolutionElements}.` };
+  }
+  if (request.time && !('any' in request.time)) {
+    const from = Date.parse(request.time.fromIso) / 86_400_000 + 2_440_587.5, to = Date.parse(request.time.toIso) / 86_400_000 + 2_440_587.5;
+    const outside = observations.find(observation => observation.midTimeJd < from || observation.midTimeJd > to);
+    if (outside) throw new RangeError(`Cannot publish ${selection.telescope} ${selection.mode} program ${selection.programme}: observation ${outside.id} is outside the requested time range.`);
+    resolved.time = { answer: 'yes', reason: 'Every observation in the published map is inside the requested time range.' };
+  }
+  return resolved;
+}
+
 /** Verify the complete chain at publication time and return the small descriptor the body package can consume. */
 export async function qualifyBodyMap(mapPath: string, selection: ObservationSelection): Promise<TelescopeLayer> {
   const metadataPath = resolve(mapPath), product = parseBodyMapProduct(JSON.parse((await publicationFile(metadataPath, selection, 'body-map metadata')).toString('utf8')) as unknown);
@@ -80,9 +108,11 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
   if (!matched.length) throw new Error(`${metadataPath} names no ${selection.telescope} ${selection.mode} observation from ${selection.programme}.`);
   const incomplete = product.observations.filter(observation => !observation.mode || !observation.programme);
   if (incomplete.length) throw new Error(`${metadataPath} has ${incomplete.length} observation(s) without an exact ledger mode and program.`);
+  const resolvedConstraints = assertMapAnswersRequest(product, selection), resolvedNames = new Set(Object.keys(resolvedConstraints));
   return { schema: TELESCOPE_LAYER_SCHEMA, target: selection.request.target, request: selection.request,
     selection: { telescope: selection.telescope, mode: selection.mode, programme: selection.programme, toolkitLevel: selection.toolkitLevel,
-      constraints: selection.constraints, bodyMapSupport: selection.bodyMapSupport, unresolved: selection.unresolved },
+      constraints: { ...selection.constraints, ...resolvedConstraints }, bodyMapSupport: selection.bodyMapSupport,
+      unresolved: selection.unresolved.filter(item => !resolvedNames.has(item.constraint)) },
     map: { metadata: basename(metadataPath), productRecord: basename(recordPath), plane: basename(planePath), sha256: product.planes.sha256,
       quantity: product.definition.quantity, units: product.definition.units, definitionDigest: definitionDigest(product.definition) }, observations: product.observations };
 }

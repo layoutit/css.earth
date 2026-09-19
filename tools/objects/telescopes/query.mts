@@ -417,6 +417,7 @@ const BODY_MAP_AUTHORS: Readonly<Record<string, string>> = Object.freeze({
   'JWST :: NIRSPEC/IFU': 'tools/objects/jwst/cubes/author-body-maps.mts',
   'JWST :: MIRI/IFU': 'tools/objects/jwst/cubes/author-body-maps.mts',
   'Hubble :: STIS/CCD': 'tools/objects/hst/slit-scan-map.mts',
+  'VLT/NACO :: imaging': 'tools/objects/naco/author-body-map.mts',
 });
 
 const bodyMapSupport = (mode: TargetMode): Candidate['bodyMapSupport'] => {

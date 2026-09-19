@@ -104,7 +104,7 @@ test('an explicit selection keeps unknowns and refuses a hard no or another targ
   assert.throws(() => selectObservation(impossible, 'JWST', 'NIRSPEC/IFU', 'europa-1250'), /cannot answer this request: wavelength/u);
 });
 
-test('selection requires a complete scientific request and refuses a proven reducer with no body-map author', () => {
+test('selection requires a complete scientific request and exposes the shared NACO body-map author', () => {
   const incomplete = queryCapabilities({ target: 'ceres', wavelengthMicrometres: [2, 2.3], kind: 'image' }, inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
   assert.deepEqual(assessObservationSelection(incomplete, 'VLT/NACO', 'imaging', 'ceres-080C0881').blockers.map(blocker => blocker.code),
     ['incomplete-request', 'incomplete-request', 'incomplete-request']);
@@ -112,17 +112,17 @@ test('selection requires a complete scientific request and refuses a proven redu
     inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
   const naco = candidate(complete, 'imaging');
   assert.equal(naco.toolkitSupport.level, 'proven');
-  assert.equal(naco.bodyMapSupport.answer, 'no');
-  assert.throws(() => selectObservation(complete, 'VLT/NACO', 'imaging', 'ceres-080C0881'), /cannot produce the requested body map.*No body-map author/u);
+  assert.equal(naco.bodyMapSupport.answer, 'yes');
+  assert.equal(naco.bodyMapSupport.author, 'tools/objects/naco/author-body-map.mts');
+  assert.equal(selectObservation(complete, 'VLT/NACO', 'imaging', 'ceres-080C0881').programme, 'ceres-080C0881');
 });
 
 test('a Vesta selection reports every blocker and human output separates archive from toolkit programs', () => {
   const answer = queryCapabilities({ target: 'vesta', wavelengthMicrometres: [1, 2], kind: 'image', result: 'body-map', time: { any: true }, angularResolutionArcsec: 0.1 },
     inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
   const assessment = assessObservationSelection(answer, 'VLT/NACO', 'imaging', '076.C-0580(A)');
-  assert.deepEqual(assessment.blockers.map(blocker => blocker.code), ['body-map', 'programme']);
+  assert.deepEqual(assessment.blockers.map(blocker => blocker.code), ['programme']);
   assert.throws(() => selectObservation(answer, 'VLT/NACO', 'imaging', '076.C-0580(A)'), error => {
-    assert.match(String(error), /cannot produce the requested body map/u);
     assert.match(String(error), /076\.C-0580\(A\) is not a pinned or archive-final program of vesta/u);
     return true;
   });

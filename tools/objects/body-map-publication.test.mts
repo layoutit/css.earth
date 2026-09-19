@@ -61,6 +61,18 @@ test('publication refuses a map observation that omits its exact mode or program
   await assert.rejects(qualifyBodyMap(mapPath, selection), /without an exact ledger mode and program|names no JWST/u);
 });
 
+test('publication resolves mode-level uncertainty against the map measured resolution and time', async () => {
+  const resolved = await qualifyBodyMap((await fixture()).mapPath, { ...selection,
+    constraints: { angularResolution: { answer: 'partial', reason: 'the mode might reach it' } },
+    unresolved: [{ constraint: 'angularResolution', answer: 'partial', reason: 'the mode might reach it' }] });
+  assert.equal(resolved.selection.constraints.angularResolution?.answer, 'yes');
+  assert.deepEqual(resolved.selection.unresolved, []);
+  await assert.rejects(qualifyBodyMap((await fixture()).mapPath, { ...selection, request: { ...selection.request, angularResolutionArcsec: 0.05 } }), /measured resolution is 0\.100 arcsec.*requires 0\.05/u);
+  await assert.rejects(qualifyBodyMap((await fixture()).mapPath, { ...selection, request: { ...selection.request, angularResolutionArcsec: undefined, surfaceResolutionKm: 100 } }), /measured surface resolution/u);
+  await assert.rejects(qualifyBodyMap((await fixture()).mapPath, { ...selection, request: { ...selection.request, angularResolutionArcsec: undefined, resolutionElements: 20 } }), /measured resolution elements/u);
+  await assert.rejects(qualifyBodyMap((await fixture()).mapPath, { ...selection, request: { ...selection.request, time: { fromIso: '2000-01-01', toIso: '2001-01-01' } } }), /outside the requested time range/u);
+});
+
 test('publication explains the missing body-map contract instead of leaking a file error', async () => {
   await assert.rejects(qualifyBodyMap(resolve(tmpdir(), 'missing-ceres.fits.body-map.json'), { ...selection, telescope: 'VLT/NACO', mode: 'imaging', programme: 'ceres-080C0881' }),
     /Cannot publish VLT\/NACO imaging program ceres-080C0881: the body-map metadata is missing.*map plane.*body-map\.json.*product\.json/u);
