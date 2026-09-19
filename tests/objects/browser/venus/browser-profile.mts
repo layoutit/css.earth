@@ -19,7 +19,7 @@ export const browserProfile = createObjectBrowserProfile({
       preReadyDisabled: true,
     }),
     retained: Object.freeze({
-      lensIds: Object.freeze(["clouds", "radar", "elevation"]),
+      lensIds: Object.freeze(["clouds", "radar", "elevation", "ultraviolet"]),
       speedClicks: 5,
       allowedMountSelectors: Object.freeze([]),
     }),
