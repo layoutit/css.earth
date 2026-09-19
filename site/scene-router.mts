@@ -90,7 +90,8 @@ export function createSceneRouter({
     // has not committed its own entry, so snapshotting its scene would overwrite the entry it left.
     historyOwner = createNavigationHistory({ windowTarget, objects, capture: () => pending ? null : captureUrl(), navigate, navigating: () => pending !== null, embedded: 'embed' in documentTarget.documentElement.dataset, onError: report });
     unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
-      selectPreparedFocus: id => worldContextMount?.selectPreparedFocus?.(id) ?? null,
+      // During a body flight a focus link is an ordinary navigation, so the last click wins.
+      selectPreparedFocus: id => pending ? null : worldContextMount?.selectPreparedFocus?.(id) ?? null,
       supports: id => navigation.supports(objectId, id), navigate, onError: report });
   }
   mountTask = mountApplication();
