@@ -131,7 +131,7 @@ test('an indexed observation exposes a telescope-owned qualification action when
   const irac = candidate(answer, 'IRAC Map');
   assert.deepEqual(irac.selectionAssessment.blockers.map(blocker => blocker.code), ['target-program-unqualified']);
   assert.deepEqual(irac.selectionAssessment.qualificationActions, [{ kind: 'qualify-observation', observation: '21415424', archiveProgramme: '289',
-    program: 'bennu-21415424', channel: 1, command: 'pnpm', arguments: ['--silent', 'telescope:qualify', '--target', 'bennu', '--telescope', 'Spitzer',
+    program: 'bennu-21415424', configuration: { kind: 'spitzer-irac-channel', channel: 1 }, command: 'pnpm', arguments: ['--silent', 'telescope:qualify', '--target', 'bennu', '--telescope', 'Spitzer',
       '--mode', 'IRAC Map', '--observation', '21415424', '--channel', '1'] }]);
   const qualified = queryCapabilities(request, inputs([{ telescope: 'spitzer', value: { ...ledger, modes: [{ ...ledger.modes[0], programs: ['bennu-21415424'], checked: ['bennu-21415424'] }] } }]));
   assert.equal(candidate(qualified, 'IRAC Map').selectionAssessment.selectable, true);
@@ -377,6 +377,18 @@ test('the committed ledgers: Europa at 3.4 to 3.6 micrometres is a proven JWST c
   assert.equal(nirspec.evidence.archiveDate.length, 10);
   assert.ok(answer.candidates.length > 1, 'other modes observed Europa too');
   for (const entry of answer.candidates) assert.notEqual(entry.meetsConstraints.angularResolution?.answer, 'yes');
+});
+
+test('the committed ledger turns Triton NIRSpec records into runnable band-specific qualification actions', async () => {
+  const answer = queryCapabilities({ target: 'triton', wavelengthMicrometres: [1.55, 1.75], time: { fromIso: '2015-01-01', toIso: '2025-12-31' },
+    rangeKm: 4_500_000_000, surfaceResolutionKm: 1_500, kind: 'cube', result: 'body-map' }, await loadQueryInputs(ROOT, 'triton'));
+  const nirspec = candidate(answer, 'NIRSPEC/IFU');
+  assert.equal(nirspec.meetsConstraints.time?.answer, 'yes');
+  assert.deepEqual(nirspec.selectionAssessment.blockers.map(blocker => blocker.code), ['target-program-unqualified']);
+  assert.deepEqual(nirspec.selectionAssessment.qualificationActions.map(action => [action.observation, action.configuration]), [
+    ['jw01272-o003_t001_nirspec_g140h-f100lp', { kind: 'jwst-band', band: 'NIRSPEC-G140H-F100LP' }],
+    ['jw01272-o011_t001_nirspec_g140h-f100lp', { kind: 'jwst-band', band: 'NIRSPEC-G140H-F100LP' }],
+  ]);
 });
 
 test('the committed ledgers: HD 181327 between 2.4 and 2.6 micrometres falls in the NIRCam coronagraphy gap', async () => {

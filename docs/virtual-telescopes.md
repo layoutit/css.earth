@@ -162,7 +162,7 @@ candidate answers four separate things:
 Each candidate also carries a `selectionAssessment` derived from these same facts: `selectable`, stable blocker codes, and a
 structured next action for every target-qualified program only when the explicit selection command can run. If qualification
 is the only blocker and a registered telescope route can cover the entire requested wavelength window, `qualificationActions`
-instead names the indexed archive observation, detector channel, resulting program id and an executable `telescope:qualify`
+instead names the indexed archive observation, its detector channel or instrument band, the resulting program id and an executable `telescope:qualify`
 command. That command validates the target, mode and observation against the index, then hands the work to the telescope-owned
 reducer; it is a small dispatcher, not a second reduction framework. The top-level `endpoint` is `unknown-target`,
 `request-incomplete`, `no-selectable-candidate`, or `selectable-candidates`; it reports the number that can proceed and the
