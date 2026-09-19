@@ -9,7 +9,8 @@ import { required, unusedSharedView } from './navigation-test-values.mts';
 type Playback = ReturnType<ReturnType<typeof createSceneRouter>['playback']>;
 type MockShell = ShellOptions & { onMotionChange(value: boolean): void; destroyed: number; playback?: Playback; destroy(): void; setPlaybackState(value: Playback): void };
 type MockMount = { ready: Promise<void> | null; calls: string[]; sharedView: ObjectSceneLifecycle['sharedView'];
-  pause(): void; resume: (() => void) | null; destroy(): void; report(error: unknown): void; requestMotion?: (value: boolean) => void };
+  pause(): void; resume: (() => void) | null; destroy(): void; report(error: unknown): void; requestMotion?: (value: boolean) => void;
+  refineTextures?: () => void };
 function deferred() {
   let complete: (() => void) | undefined, fail: ((reason?: unknown) => void) | undefined;
   const promise = new Promise<void>((yes, no) => { complete = yes; fail = no; });
@@ -69,6 +70,24 @@ function show(h: ReturnType<typeof harness>) {
   Object.defineProperty(event, "persisted", { value: true });
   h.windowTarget.dispatchEvent(event);
 }
+
+test("texture refinement waits for the first user input and is released once", async () => {
+  let refinements = 0;
+  const h = harness(() => ({ refineTextures() { refinements += 1; } }));
+  await h.router.settled;
+  assert.equal(refinements, 0);
+  assert.equal(h.windowTarget.count("pointerdown"), 1);
+  assert.equal(h.windowTarget.count("wheel"), 1);
+  assert.equal(h.windowTarget.count("keydown"), 1);
+  h.windowTarget.dispatchEvent(new Event("wheel"));
+  assert.equal(refinements, 1);
+  assert.equal(h.windowTarget.count("pointerdown"), 0);
+  assert.equal(h.windowTarget.count("wheel"), 0);
+  assert.equal(h.windowTarget.count("keydown"), 0);
+  h.windowTarget.dispatchEvent(new Event("pointerdown"));
+  assert.equal(refinements, 1);
+  h.router.destroy();
+});
 
 test("loading remembers latest intent but cannot resume; media events never rewrite intent", async () => {
   const gate = deferred();

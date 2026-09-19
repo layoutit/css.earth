@@ -28,9 +28,13 @@ try {
 
   await page.goto(`${origin}/saturn/`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => document.documentElement.dataset.ready === 'true');
+  await page.waitForTimeout(500);
+  assert.equal(fragmentRequests.length, 0, 'an untouched page does not fetch or insert the object catalogue');
+  const coldResources = await page.evaluate(() => performance.getEntriesByType('resource').map(entry => entry.name));
+  assert.equal(coldResources.some(url => /-features\.json(?:\?|$)/u.test(url)), false, 'an untouched page does not fetch surface features');
+  assert.equal(coldResources.some(url => url.includes('level-2048')), false, 'an untouched page does not fetch fine texture pages');
   const browserPanel = page.locator('.planet-object-browser');
-  // Opening browse/search is the one thing that can race the fragment fetch:
-  // whichever of "first idle" or this click comes first starts it.
+  // Opening browse/search is the explicit demand that starts the shared fetch.
   await page.getByRole('button', { name: 'Search', exact: true }).click();
   await page.waitForFunction(() => document.querySelectorAll('.planet-object-item').length > 400, undefined, { timeout: 20000 });
   assert.ok(fragmentRequests.length <= 1, `the fragment is fetched at most once (saw ${fragmentRequests.length})`);

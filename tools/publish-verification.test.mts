@@ -5,6 +5,10 @@ import { verifyPublished, reportVerification, type PublishAsset } from './publis
 
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const asset = (key: string, bytes: Buffer): PublishAsset => ({ key, file: `/fixtures/${key}`, bytes: bytes.length, sha256: sha256(bytes) });
+const headers = (key: string, bytes?: number) => ({
+  'content-type': key.endsWith('.json') ? 'application/json' : 'application/octet-stream',
+  ...(bytes === undefined ? {} : { 'content-length': String(bytes) }),
+});
 
 test('a fully live batch is verified with no uploads and no sample failures', async () => {
   const bytesFor = new Map([['a.json', Buffer.from('{"ok":1}')], ['b.webp', Buffer.from('image bytes')]]);
@@ -14,8 +18,8 @@ test('a fully live batch is verified with no uploads and no sample failures', as
     const key = url.slice('https://origin.test/'.length);
     const bytes = bytesFor.get(key);
     if (!bytes) return new Response(null, { status: 404 });
-    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: { 'content-length': String(bytes.length) } });
-    return new Response(bytes, { status: 200 });
+    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: headers(key, bytes.length) });
+    return new Response(bytes, { status: 200, headers: headers(key) });
   };
   const result = await verifyPublished(assets, { origin: 'https://origin.test', fetcher: fetcher as typeof fetch, uploadOne: async () => { uploads++; } });
   assert.deepEqual(result, { retried: [], misses: [], sampleFailures: [] });
@@ -31,8 +35,8 @@ test('a bulk-put miss is retried once and then verified live', async () => {
   const fetcher = async (url: string, init?: RequestInit) => {
     const key = url.slice('https://origin.test/'.length);
     if (!live.has(key)) return new Response(null, { status: 404 });
-    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: { 'content-length': String(bytes.length) } });
-    return new Response(bytes, { status: 200 });
+    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: headers(key, bytes.length) });
+    return new Response(bytes, { status: 200, headers: headers(key) });
   };
   const uploadOne = async (asset: PublishAsset) => { uploadCalls++; live.add(asset.key); };
   const result = await verifyPublished(assets, { origin: 'https://origin.test', fetcher: fetcher as typeof fetch, uploadOne });
@@ -49,8 +53,8 @@ test('a key still missing after the retry, and a JSON key with drifted bytes, bo
     const key = url.slice('https://origin.test/'.length);
     if (key === 'missing.json') return new Response(null, { status: 404 });
     // drifted.json: HEAD reports the right length, but the actual bytes hash to something else.
-    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: { 'content-length': String(driftedPin.length) } });
-    return new Response(driftedPin, { status: 200 });
+    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: headers(key, driftedPin.length) });
+    return new Response(driftedPin, { status: 200, headers: headers(key) });
   };
   const result = await verifyPublished(assets, { origin: 'https://origin.test', fetcher: fetcher as typeof fetch, uploadOne: async () => {} });
   assert.deepEqual(result.retried, ['missing.json']);
@@ -69,9 +73,9 @@ test('non-JSON assets beyond the sample size are HEAD-checked only, not byte-ver
   const fetcher = async (url: string, init?: RequestInit) => {
     const key = url.slice('https://origin.test/'.length);
     const bytes = bytesFor.get(key)!;
-    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: { 'content-length': String(bytes.length) } });
+    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: headers(key, bytes.length) });
     getCalls.push(key);
-    return new Response(bytes, { status: 200 });
+    return new Response(bytes, { status: 200, headers: headers(key) });
   };
   const result = await verifyPublished(assets, { origin: 'https://origin.test', fetcher: fetcher as typeof fetch, uploadOne: async () => {}, sampleSize: 2 });
   assert.deepEqual(result, { retried: [], misses: [], sampleFailures: [] });
@@ -81,9 +85,9 @@ test('non-JSON assets beyond the sample size are HEAD-checked only, not byte-ver
 test('a sampled non-JSON asset with the right length but wrong bytes is caught', async () => {
   const bytes = Buffer.from('the real published bytes'), wrong = Buffer.from(bytes); wrong[0] = wrong[0]! ^ 0xff;
   const assets = [asset('asset.webp', bytes)];
-  const fetcher = async (url: string, init?: RequestInit) => {
-    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: { 'content-length': String(bytes.length) } });
-    return new Response(wrong, { status: 200 }); // same length as the pin; only the sha256 comparison can catch this.
+  const fetcher = async (_url: string, init?: RequestInit) => {
+    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: headers('asset.webp', bytes.length) });
+    return new Response(wrong, { status: 200, headers: headers('asset.webp') }); // same length as the pin; only the sha256 comparison can catch this.
   };
   const result = await verifyPublished(assets, { origin: 'https://origin.test', fetcher: fetcher as typeof fetch, uploadOne: async () => {}, sampleSize: 10 });
   assert.deepEqual(result.sampleFailures, ['asset.webp']);
@@ -95,9 +99,9 @@ test('a live HEAD response with no content-length (e.g. a compressed JSON respon
   // (always run for JSON) still confirms the exact content.
   const bytes = Buffer.from('{"ok":1}');
   const assets = [asset('a.json', bytes)];
-  const fetcher = async (url: string, init?: RequestInit) => {
-    if (init?.method === 'HEAD') return new Response(null, { status: 200 }); // no content-length header
-    return new Response(bytes, { status: 200 });
+  const fetcher = async (_url: string, init?: RequestInit) => {
+    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: headers('a.json') }); // no content-length header
+    return new Response(bytes, { status: 200, headers: headers('a.json') });
   };
   const result = await verifyPublished(assets, { origin: 'https://origin.test', fetcher: fetcher as typeof fetch, uploadOne: async () => { throw new Error('must not re-upload a live file'); } });
   assert.deepEqual(result, { retried: [], misses: [], sampleFailures: [] });
@@ -109,9 +113,9 @@ test('a JSON key with no content-length on HEAD but drifted bytes still fails ve
   // run for JSON regardless of what HEAD reported — must still catch drifted content.
   const bytes = Buffer.from('{"ok":1}'), wrong = Buffer.from(bytes); wrong[Math.floor(wrong.length / 2)] = wrong[Math.floor(wrong.length / 2)]! ^ 0xff;
   const assets = [asset('a.json', bytes)];
-  const fetcher = async (url: string, init?: RequestInit) => {
-    if (init?.method === 'HEAD') return new Response(null, { status: 200 }); // no content-length header
-    return new Response(wrong, { status: 200 }); // same length as the pin; only the sha256 comparison can catch this.
+  const fetcher = async (_url: string, init?: RequestInit) => {
+    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: headers('a.json') }); // no content-length header
+    return new Response(wrong, { status: 200, headers: headers('a.json') }); // same length as the pin; only the sha256 comparison can catch this.
   };
   const result = await verifyPublished(assets, { origin: 'https://origin.test', fetcher: fetcher as typeof fetch, uploadOne: async () => { throw new Error('must not re-upload: HEAD reported it live'); } });
   assert.deepEqual(result.retried, [], 'a no-content-length HEAD that is otherwise ok is never treated as a miss');
@@ -123,10 +127,25 @@ test('a JSON key with no content-length on HEAD but drifted bytes still fails ve
 test('a JSON key with drifted bytes is caught even with sampleSize: 0 (JSON is always fully verified, never sampled)', async () => {
   const bytes = Buffer.from('{"ok":1}'), wrong = Buffer.from(bytes); wrong[Math.floor(wrong.length / 2)] = wrong[Math.floor(wrong.length / 2)]! ^ 0xff;
   const assets = [asset('a.json', bytes)];
-  const fetcher = async (url: string, init?: RequestInit) => {
-    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: { 'content-length': String(bytes.length) } });
-    return new Response(wrong, { status: 200 }); // same length as the pin; only the sha256 comparison can catch this.
+  const fetcher = async (_url: string, init?: RequestInit) => {
+    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: headers('a.json', bytes.length) });
+    return new Response(wrong, { status: 200, headers: headers('a.json') }); // same length as the pin; only the sha256 comparison can catch this.
   };
   const result = await verifyPublished(assets, { origin: 'https://origin.test', fetcher: fetcher as typeof fetch, uploadOne: async () => {}, sampleSize: 0 });
   assert.deepEqual(result.sampleFailures, ['a.json'], 'sampleSize must only govern non-JSON assets; every JSON key is always fully byte-verified');
+});
+
+test('a live key with the right bytes but stale content type is republished', async () => {
+  const bytes = Buffer.from('{"large":true}');
+  const assets = [asset('a.json', bytes)];
+  let repaired = false;
+  const fetcher = async (_url: string, init?: RequestInit) => {
+    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: {
+      'content-length': String(bytes.length), 'content-type': repaired ? 'application/json' : 'application/octet-stream',
+    } });
+    return new Response(bytes, { status: 200, headers: headers('a.json') });
+  };
+  const result = await verifyPublished(assets, { origin: 'https://origin.test', fetcher: fetcher as typeof fetch,
+    uploadOne: async () => { repaired = true; } });
+  assert.deepEqual(result, { retried: ['a.json'], misses: [], sampleFailures: [] });
 });
