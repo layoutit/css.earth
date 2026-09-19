@@ -3,8 +3,8 @@ name: Deploy
 on:
   workflow_dispatch:
     inputs:
-      serve_textures_from_r2:
-        description: Serve textures and scene JSON from R2 (ASSET_ORIGIN) instead of bundling them
+      bundle_textures:
+        description: Bundle public/scenes into the deploy instead of serving it from R2 (rollback switch)
         type: boolean
         default: false
   # Every green "Shared universe" run on main deploys itself; a red main never reaches production.
@@ -81,9 +81,12 @@ jobs:
         env:
           NODE_OPTIONS: --max-old-space-size=6144
           CSSEARTH_ALLOW_MISSING_ASSETS: "1"
-          # Opt-in until build-generated /scenes/ files (e.g. volume dataset previews) are published
-          # with inventories; unset keeps the bundled same-origin /scenes/ output.
-          ASSET_ORIGIN: ${{ inputs.serve_textures_from_r2 && 'https://earth-assets.lowpoly.cc' || '' }}
+          # Default: textures and scene JSON resolve to R2, so the deploy ships no public/scenes copy.
+          # This cannot be a dispatch input that defaults on, because the automatic workflow_run path has
+          # no inputs at all and shares the `production-deploy` concurrency group with cancel-in-progress:
+          # a green main would cancel a hand-dispatched R2 deploy and publish the bundled build instead.
+          # `bundle_textures` is the rollback: dispatch with it set to fall back to same-origin /scenes/.
+          ASSET_ORIGIN: ${{ inputs.bundle_textures && '' || 'https://earth-assets.lowpoly.cc' }}
         run: pnpm build
       - name: Check the build output
         run: |
