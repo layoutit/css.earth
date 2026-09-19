@@ -162,6 +162,69 @@
       "headers": {
         "Cookie": "CesAM_LAM_opens_the_door=1"
       }
+    },
+    {
+      "kind": "horizons-time-list",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-observer.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "parameters": {
+        "format": "text",
+        "COMMAND": "'48;'",
+        "EPHEM_TYPE": "'OBSERVER'",
+        "CENTER": "'309'",
+        "TLIST_TYPE": "'JD'",
+        "TIME_TYPE": "'UT'",
+        "QUANTITIES": "'1,13,20,24,43'",
+        "ANG_FORMAT": "'DEG'",
+        "CSV_FORMAT": "'NO'"
+      },
+      "epochs": [
+        2458059.627281551,
+        2458059.6308819214,
+        2458059.6344900695,
+        2458059.638066227,
+        2458059.6416405556,
+        2458086.5132480557,
+        2458086.516851308,
+        2458086.520457211,
+        2458086.5240472686,
+        2458086.5276226155
+      ]
+    },
+    {
+      "kind": "horizons-time-list",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "parameters": {
+        "format": "text",
+        "COMMAND": "'48;'",
+        "EPHEM_TYPE": "'VECTORS'",
+        "CENTER": "'500@10'",
+        "TLIST_TYPE": "'JD'",
+        "REF_PLANE": "'FRAME'",
+        "REF_SYSTEM": "'ICRF'",
+        "VEC_TABLE": "'1'",
+        "OUT_UNITS": "'AU-D'",
+        "CSV_FORMAT": "'NO'"
+      },
+      "epochs": [
+        2458059.616118819,
+        2458059.6197192296,
+        2458059.6233274178,
+        2458059.626903615,
+        2458059.630477983,
+        2458086.5017695767,
+        2458086.5053727124,
+        2458086.508978499,
+        2458086.5125684408,
+        2458086.516143672
+      ]
     }
   ]
 }

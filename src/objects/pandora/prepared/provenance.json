@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fa025f2bbdef91cb30eeae164c055803f4109db30969a8b5886431fda63a1058"
+    "sha256": "4ca89a081a689f08fef124d81ac3a5488f81a3a3036ab698809fd9fa76f05751"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -2124,14 +2124,14 @@
       "outputs": [
         {
           "url": "/scenes/pandora/pandora-normal-thumbnail.webp",
-          "bytes": 1700,
-          "sha256": "6a7d52f49cf8392150417e44eea1cb22e843e18cb170390c91acd6d36c44fa27",
+          "bytes": 1702,
+          "sha256": "cc89f984d4348db0ca71ed2d2626e530c2b73f08ad4c7b5694cac00852312257",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pandora/pandora-normal-surface@2x.webp",
-          "bytes": 316928,
-          "sha256": "e7a885635a2d9c67cb3a64487dbf85f0afe67048a8315bc8c9650e91477157f5",
+          "bytes": 335420,
+          "sha256": "601469f9696a3d40f9bc5a2deed3dd878120eb4ff02cb6f159c0ef23db36dd0d",
           "verification": "bytes-verified"
         }
       ],
@@ -2239,8 +2239,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 14376,
-          "sha256": "4b2590c0733bd63694ae61866853f6e80202dcbee232a47870e63383ff910b98",
+          "bytes": 14962,
+          "sha256": "fa179e4b8706cb799e8ed956448d56e103e74553acf3d1ad127e123343ab4520",
           "verification": "bytes-verified"
         }
       ]
@@ -2302,7 +2302,7 @@
   },
   "lastPreparation": {
     "objectId": "pandora",
-    "materialSha256": "39726bea4087639f8f2b920fa1f170ae3a5b98cccdaff6aa5ff4c4af4d867574",
+    "materialSha256": "8820cf30b26a143486f866bdf3e48944b33c2f2e2dfb2685f6e5a1494b453321",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

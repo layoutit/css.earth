@@ -273,6 +273,157 @@
       "headers": {
         "Cookie": "CesAM_LAM_opens_the_door=1"
       }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d11Parthenope_2018-02-06T02_26_57.151_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/11Parthenope/Deconv/d11Parthenope_2018-02-06T02_26_57.151_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d11Parthenope_2018-02-06T02_31_06.667_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/11Parthenope/Deconv/d11Parthenope_2018-02-06T02_31_06.667_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d11Parthenope_2018-02-06T02_35_17.855_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/11Parthenope/Deconv/d11Parthenope_2018-02-06T02_35_17.855_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d11Parthenope_2018-02-06T02_39_26.938_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/11Parthenope/Deconv/d11Parthenope_2018-02-06T02_39_26.938_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d11Parthenope_2018-02-06T02_43_37.007_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/11Parthenope/Deconv/d11Parthenope_2018-02-06T02_43_37.007_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "horizons-time-list",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-observer.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "parameters": {
+        "format": "text",
+        "COMMAND": "'11;'",
+        "EPHEM_TYPE": "'OBSERVER'",
+        "CENTER": "'309'",
+        "TLIST_TYPE": "'JD'",
+        "TIME_TYPE": "'UT'",
+        "QUANTITIES": "'1,13,20,24,43'",
+        "ANG_FORMAT": "'DEG'",
+        "CSV_FORMAT": "'NO'"
+      },
+      "epochs": [
+        2458155.6020503473,
+        2458155.6049382635,
+        2458155.6078455327,
+        2458155.610728449,
+        2458155.613622766,
+        2458592.668017106,
+        2458592.6708322573,
+        2458592.6736676157,
+        2458592.676488843,
+        2458592.679314329,
+        2458607.8168951045,
+        2458607.81972338,
+        2458607.822549433,
+        2458607.825361042,
+        2458607.828176632,
+        2458639.7240052084,
+        2458639.7296880903,
+        2458639.732485498,
+        2458639.735304722,
+        2458653.646595023,
+        2458653.6494146064,
+        2458653.652255509,
+        2458653.655074803,
+        2458653.657893773
+      ]
+    },
+    {
+      "kind": "horizons-time-list",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "parameters": {
+        "format": "text",
+        "COMMAND": "'11;'",
+        "EPHEM_TYPE": "'VECTORS'",
+        "CENTER": "'500@10'",
+        "TLIST_TYPE": "'JD'",
+        "REF_PLANE": "'FRAME'",
+        "REF_SYSTEM": "'ICRF'",
+        "VEC_TABLE": "'1'",
+        "OUT_UNITS": "'AU-D'",
+        "CSV_FORMAT": "'NO'"
+      },
+      "epochs": [
+        2458155.5921053803,
+        2458155.5949932444,
+        2458155.5979004605,
+        2458155.6007833243,
+        2458155.603677588,
+        2458592.6591840778,
+        2458592.661999354,
+        2458592.6648348384,
+        2458592.6676561907,
+        2458592.670481802,
+        2458607.8085699272,
+        2458607.811398265,
+        2458607.814224381,
+        2458607.817036052,
+        2458607.8198517044,
+        2458639.715655196,
+        2458639.7213379396,
+        2458639.7241352797,
+        2458639.726954435,
+        2458653.63780457,
+        2458653.640624041,
+        2458653.643464831,
+        2458653.646284013,
+        2458653.6491028713
+      ]
     }
   ]
 }

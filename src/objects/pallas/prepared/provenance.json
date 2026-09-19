@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a3068379c633229cbf84753cec50662ab363d5b42a057e320dccc78dbffcc913"
+    "sha256": "6899c19ff46b5465f7484ad34955dd537646975cabf663ac1ca6f925b7bbe91b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2905e76a4d13ff4d19d02e4f5ff4e374c6d7c716a1902137ca97f0e1b36e5b24",
+      "sha256": "0046cddae79dfb598c8028928f39cf4400724213453a790e39a2870c9de366b8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,9 +90,9 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 4 nights from 2017-10-08 to 2017-11-03, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.2. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 4 nights from 2017-10-08 to 2017-11-03, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.2. Grayscale retains photographed illumination and matched relative frame brightness, averaged where frames overlap with each fading out toward its disc edge, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
-              "selection": "finest-resolution",
+              "selection": "edge-weighted-average",
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
@@ -2679,14 +2679,14 @@
       "outputs": [
         {
           "url": "/scenes/pallas/pallas-zimpol-thumbnail.webp",
-          "bytes": 2100,
-          "sha256": "160e254df00e61e735481b0dfc90878a2724f87b1e9daab7f8bf145ec9d5575b",
+          "bytes": 2036,
+          "sha256": "8505c7fd3e574cf6b2e3568c19ed840491bac1a2ba87a5a1fb4c91782a01696a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pallas/pallas-zimpol-surface@2x.webp",
-          "bytes": 224816,
-          "sha256": "b494ea80ded769aebcbbe1610bd16f20ea71ab6fe8e4c2d3c20761af944a1f2d",
+          "bytes": 203106,
+          "sha256": "808389cf8aa34f5e1effde68f9387d0e9b1e83150f766808471f07a27fceb474",
           "verification": "bytes-verified"
         }
       ],
@@ -2769,8 +2769,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 7184,
-          "sha256": "d55ba5ba606aa1f9059c5727ee352ceaa50278e3b21badb6b9a9de505427145e",
+          "bytes": 5428,
+          "sha256": "e499571dd379f10a4d2ceff3d789b84a7d0c0cb8d62c6b0bdc52f768adf64600",
           "verification": "bytes-verified"
         }
       ]
@@ -2807,7 +2807,7 @@
   },
   "lastPreparation": {
     "objectId": "pallas",
-    "materialSha256": "f454a18715809291cdaf18fc9bcc282ea7455d502b0fd80fcd6febef236efd52",
+    "materialSha256": "da313492d7db21f700856027c14bd8048e722206e508d11cbc5df20641e5955b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

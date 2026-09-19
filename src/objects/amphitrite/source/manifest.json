@@ -1409,8 +1409,8 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
-      "expectedBytes": 14005,
-      "expectedSha256": "75660684de70447f79b12e93ec07a998f4de1b09b020057eaf894d37f7688ce1",
+      "expectedBytes": 16949,
+      "expectedSha256": "d4c0af7c3d46f3c1d98eee06e940ee29cbe725ed8982a02855f3f589c8c2ab71",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1434,8 +1434,8 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
-      "expectedBytes": 10687,
-      "expectedSha256": "c19f4c246bde5bf094ca4a3680d22362c7b7827cf6ae61f87917fba0d1a54434",
+      "expectedBytes": 13792,
+      "expectedSha256": "7dc19caba1f232c926c9230cb051ca3218810eced692fefea47863073ab71828",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1443,6 +1443,903 @@
             "catalogueId": "source-amphitrite-amphitrite-horizons-sphere-heliocentric",
             "role": "material",
             "evidence": "src/objects/amphitrite/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/37"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20170520013759",
+      "path": "observations/d29Amphitrite_2017-05-20T01_37_59.406_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_37_59.406_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "ee7fcee540e07de471a93ce8d498fb76ac09d97f2a8381989273c00d607875c5",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520013759",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/38"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20170520014130",
+      "path": "observations/d29Amphitrite_2017-05-20T01_41_30.350_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_41_30.350_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "892a08d93b5042a392f283120d53a2c0f07e4d5128728c0cc547724557a21786",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520014130",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/39"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20170520014501",
+      "path": "observations/d29Amphitrite_2017-05-20T01_45_01.003_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_45_01.003_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "00c006aad15e405c1cec05181d093c42a6532741ddf948f13498f267bd024d52",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520014501",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/40"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20170520014831",
+      "path": "observations/d29Amphitrite_2017-05-20T01_48_31.442_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_48_31.442_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "6c3afbfcb436f9a7b0c7d9a51e824d8bd72975c67fe9bd80a96ae72176348754",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520014831",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/41"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20170520015200",
+      "path": "observations/d29Amphitrite_2017-05-20T01_52_00.588_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_52_00.588_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "32b6d55efa44f1d96b8fe4060234af618c8b28a0b083f7b6ad46ebb3c39e91f4",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520015200",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/42"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20170520021932",
+      "path": "observations/d29Amphitrite_2017-05-20T02_19_32.240_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_19_32.240_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "7b24cf849e82ea9f26106d4b70377fd0d9f7edc49c8a127784ee09a7c65d65ef",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520021932",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/43"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20170520022302",
+      "path": "observations/d29Amphitrite_2017-05-20T02_23_02.321_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_23_02.321_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "7c2bc8e54aede9315a65297ddd9fb80fa36e38e6037c7c3d6ddf1fca3f9d14cf",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520022302",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/44"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20170520022632",
+      "path": "observations/d29Amphitrite_2017-05-20T02_26_32.832_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_26_32.832_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "7a3d4e379bf2ae97df778bdf5d4cc68e8c4ce7665bea5a2cba6306c9970ad90c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520022632",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/45"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20170520022959",
+      "path": "observations/d29Amphitrite_2017-05-20T02_29_59.406_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_29_59.406_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "16ac8c1da826b53432a4a31ebd819a6c8b2c04c86f2a6fb1178241d8ca3f13a9",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520022959",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/46"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20170520023328",
+      "path": "observations/d29Amphitrite_2017-05-20T02_33_28.985_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_33_28.985_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "664d4da1af5dccf407064c81df0f475333f72759883ffe3de5ffe26d1b50c8e1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520023328",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/47"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20180608091421",
+      "path": "observations/d29Amphitrite_2018-06-08T09_14_21.958_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_14_21.958_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "f1a109184ad7bcb2b90a7e1cf4931b82f962c24ef2cbcf4c69abcbfe7dd69d00",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20180608091421",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/48"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20180608091831",
+      "path": "observations/d29Amphitrite_2018-06-08T09_18_31.324_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_18_31.324_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "406fe2b7eaf6ba8fcc8b753b0135946d7d9b2609ca98634cb8ad5cbd28ceb2fd",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20180608091831",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/49"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20180608092240",
+      "path": "observations/d29Amphitrite_2018-06-08T09_22_40.568_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_22_40.568_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "de7b1cec67f76829e7d97219c628af4206fe50b21104233eb0b6cfadc40173dd",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20180608092240",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/50"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20180608092650",
+      "path": "observations/d29Amphitrite_2018-06-08T09_26_50.467_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_26_50.467_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "71261fd930d6c2f8ca0d405c66b381c3d51304fe800fe586c7a5385f38f97f53",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20180608092650",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/51"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20180608093100",
+      "path": "observations/d29Amphitrite_2018-06-08T09_31_00.698_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_31_00.698_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "de80aa0daa721270e58855392373e3d132a4f0c85e359d657eaed81257a75003",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20180608093100",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/52"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20190816065622",
+      "path": "observations/d29Amphitrite_2019-08-16T06_56_22.534_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-16T06_56_22.534_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "e669801d517af26ab9429d15bd7c5f92d34f9d8565e8d69086fa2c816b896d2b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190816065622",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/53"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20190816075205",
+      "path": "observations/d29Amphitrite_2019-08-16T07_52_05.602_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-16T07_52_05.602_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "71d2255a358ffc0d7746461209e095ffd7177b5719e12bac25436041fa966f16",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190816075205",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/54"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20190817060735",
+      "path": "observations/d29Amphitrite_2019-08-17T06_07_35.917_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-17T06_07_35.917_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "829e12bfe061791a4a41378f88e7d68a1a2ade497654814b5869f41c01c66065",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190817060735",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/55"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20190817075711",
+      "path": "observations/d29Amphitrite_2019-08-17T07_57_11.006_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-17T07_57_11.006_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "8199f7da0e724af6ebb0bb35975f2518ef543c8d1044b8d799319373c3314012",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190817075711",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/56"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20190817081055",
+      "path": "observations/d29Amphitrite_2019-08-17T08_10_55.514_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-17T08_10_55.514_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "a2aedad76ec85bad46a769aeb9340330ac0bd2a0955a188e858535b64afbbf95",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190817081055",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/57"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20190822065221",
+      "path": "observations/d29Amphitrite_2019-08-22T06_52_21.441_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-22T06_52_21.441_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "14a90ba2d82fb19e3edbad8260a8bf3962f2df93fa5590bc11271028e7386004",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190822065221",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/58"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20190823080902",
+      "path": "observations/d29Amphitrite_2019-08-23T08_09_02.232_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-23T08_09_02.232_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "6f1bb1e909dff405fc7dcddcbce3fcef856fbe436e45b8823fb39fa58b05eb79",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190823080902",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/59"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amphitrite-sphere-20190829053219",
+      "path": "observations/d29Amphitrite_2019-08-29T05_32_19.310_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-29T05_32_19.310_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "0327b8f92f56dd4630818c35cf12b7a2dcaec95cc20b5332cc35619ab6f3c9cc",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190829053219",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/60"
           }
         ]
       }
@@ -1478,8 +2375,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10128,
-      "expectedSha256": "d7eb6330dd166f84c0822bd669bd86de5701709ae3a3baca4911be0129487135",
+      "expectedBytes": 10195,
+      "expectedSha256": "16c4bc87e907409587a84c6f23c77c436a7a83626053834e034e5f5fe8b25d13",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1487,8 +2384,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 14638,
-      "expectedSha256": "4908b94e0aea2a137c2b697fbe8bac836e742372d1d25ad21efc016783a10a22"
+      "expectedBytes": 28416,
+      "expectedSha256": "a006de7ae7541c2894a705851055fdc53212cdf1557bfb6ce953a96dadde1c57"
     },
     {
       "path": "preparation/navigation.json",
@@ -1502,8 +2399,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 24715,
-      "expectedSha256": "857c8ec18f42a66debae283ff70b1f30618e6be475438e0a54063e483cebcefb"
+      "expectedBytes": 38657,
+      "expectedSha256": "bfdc9d7436bbb793e0326fb301f6b4e5b166ce4dcf9a95563554aec9b798eaf8"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -1562,8 +2459,8 @@
     },
     {
       "path": "preparation/published-comparison.json",
-      "expectedBytes": 1682,
-      "expectedSha256": "2b6a4b7a325213fa7a5a8f138578ffdd732ef31871a99f1c3aa7fd3125bf4458"
+      "expectedBytes": 1742,
+      "expectedSha256": "c7ddf7e956da60bb31e42cb4fff1d84879d732f35a76475cf83d7b4e051b40d3"
     }
   ]
 }

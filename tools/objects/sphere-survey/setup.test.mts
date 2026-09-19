@@ -4,8 +4,8 @@ import { existsSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } fro
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, comparisonBlock, parseComparisonEvidence } from '../surface-observations/published-comparison.mts';
-import { latitudeSpan, nightsText, noticeWithLens, readmeWithLens, withAnchoredLens } from './install.mts';
-import { LENS_ID, SURVEY_LENS_SETTINGS, adamSimplification, leaveOutArgument, surveyFigures } from './setup.mts';
+import { latitudeSpan, nightsText, noticeWithLens, readmeWithLens, unusedWords, withAnchoredLens, withRefreshedLens } from './install.mts';
+import { LENS_ID, SURVEY_LENS_SETTINGS, adamSimplification, leaveOutArguments, surveyFigures } from './setup.mts';
 import { horizonsCommand } from '../sphere-horizons.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..'), OBJECTS = resolve(ROOT, 'src/objects');
@@ -57,12 +57,13 @@ test('the table\'s Table A.1 poles are the ones every survey-sourced package sta
   assert.deepEqual(figures.find(figure => figure.name === 'Thisbe')?.pole, [350, 116], 'a pole printed past the pole is kept as printed; the setup folds it');
 });
 
-test('frames are left out only by a comma-separated list of ids', () => {
-  assert.deepEqual(leaveOutArgument([]), []);
-  assert.deepEqual(leaveOutArgument(['--leave-out=zimpol-20190803-042450']), ['zimpol-20190803-042450']);
-  assert.deepEqual(leaveOutArgument(['--leave-out=a,b']), ['a', 'b']);
-  assert.equal(leaveOutArgument(['--other']), null);
-  assert.equal(leaveOutArgument(['--leave-out=a', '--leave-out=b']), null);
+test('frames and whole apparitions are left out only by comma-separated lists', () => {
+  assert.deepEqual(leaveOutArguments([]), { leaveOut: [], leaveOutApparitions: [] });
+  assert.deepEqual(leaveOutArguments(['--leave-out=zimpol-20190803-042450']), { leaveOut: ['zimpol-20190803-042450'], leaveOutApparitions: [] });
+  assert.deepEqual(leaveOutArguments(['--leave-out=a,b', '--leave-out-apparition=2017-05-20']), { leaveOut: ['a', 'b'], leaveOutApparitions: ['2017-05-20'] });
+  assert.equal(leaveOutArguments(['--other']), null);
+  assert.equal(leaveOutArguments(['--leave-out=a', '--leave-out=b']), null);
+  assert.equal(leaveOutArguments(['--leave-out-apparition=May 2017']), null, 'an apparition is named by the date of its first night');
 });
 
 test('every shipped comparison\'s README section is its evidence, read', () => {
@@ -101,6 +102,21 @@ test('the install adds source rows, both generated blocks and the photograph\'s 
   assert.ok(written.includes(`### SPHERE photograph\n\n${COMPARISON_BLOCK_BEGIN}\nBLOCK\n${COMPARISON_BLOCK_END}\n\n### Registration\n\n<!-- registration-report:begin -->\n<!-- registration-report:end -->\n\n### Shape\n\nMesh checks.`));
   assert.ok(written.includes('The frames see Hebe from 26° to 35° north, so surface the survey did not see keeps the missing-imagery grid.\n\n[Investigation ledger]'));
   assert.throws(() => readmeWithLens(written, { number: 6, name: 'Hebe', figure: 'B.5', lensFrames: 32, nights: ['2018-11-28'], order: 'latitude-first', source: '', spinRecordUrl: '', block: '', bodyName: 'Hebe', latitudes: [0, 0] }), /already carries/);
+});
+
+test('the install says why released frames stay out, and writes a rebuilt lens\'s rows and limits again', () => {
+  assert.equal(unusedWords([{ from: '2017-10-08', to: '2017-11-03', frames: 30, cast: 30, sharedSamples: null }, { from: '2019-03-14', to: '2019-03-28', frames: 25, cast: 0, sharedSamples: 0 }], 128),
+    '25 from the 2019-03-14 to 2019-03-28 apparition, which shares at most 0 display samples with a cast frame within the level fit\'s angle limit, fewer than the 128 it needs to place their level');
+  assert.equal(unusedWords([{ from: '2018-12-22', to: '2019-01-27', frames: 100, cast: 96, sharedSamples: null }], 128), '4 thinned to the controlled-camera bound');
+  const readme = ['# Body', '', '## Sources', '', '| Input | Selected source |', '| --- | --- |', '| Shape | [x](https://a) |', '', '## Evidence', '', '## Known problems', '', '[Investigation ledger](investigations.json)', ''].join('\n');
+  const lens = { number: 216, name: 'Kleopatra', figure: 'B.37', nights: ['2017-07-14', '2017-08-22'], order: 'latitude-first', source: 'https://doi.org/x', spinRecordUrl: 'https://observations.lam.fr/astero/3Dshape/216_Kleopatra_param.txt', bodyName: 'Kleopatra' };
+  const first = readmeWithLens(readme, { ...lens, lensFrames: 30, latitudes: [25.3, 31.7], block: 'BLOCK' });
+  const rebuilt = withRefreshedLens(first, { ...lens, lensFrames: 55, nights: ['2017-07-14', '2018-12-10', '2019-01-14'], latitudes: [-36.6, 31.7], apparitions: 2 });
+  assert.deepEqual(rebuilt.replaced, ['| SPHERE photograph | [', 'The SPHERE photograph is photographed illumination from the survey']);
+  assert.ok(rebuilt.readme.includes('[55 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 3 nights from 2017-07-14 to 2019-01-14]'));
+  assert.ok(rebuilt.readme.includes('with matched relative frame levels, each apparition placed through the surface it shares with another, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Kleopatra from 37° south to 32° north'));
+  assert.equal(rebuilt.readme.split('\n').length, first.split('\n').length, 'lines are replaced in place');
+  assert.deepEqual(withRefreshedLens(rebuilt.readme, { ...lens, lensFrames: 55, nights: ['2017-07-14', '2018-12-10', '2019-01-14'], latitudes: [-36.6, 31.7], apparitions: 2 }).replaced, [], 'a second run changes nothing');
 });
 
 test('the install adds its lens to the anchor row of a body in place, once', () => {

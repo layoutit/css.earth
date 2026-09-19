@@ -1,0 +1,37 @@
+{
+  "id": "source-eunomia-eunomia-sphere-20190804051647",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Eunomia · eunomia sphere 20190804051647",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/15Eunomia/Deconv/d15Eunomia_2019-08-04T05_16_47.479_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/eunomia/source/manifest.json",
+      "revision": "e40a119993c352411670e9be5722e069c2785ba8",
+      "sha256": "33b9857e950cc06e48894cecea539dd673506f35bf06ac2097382710ce2f2d4c",
+      "locator": "/inputs/72"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The eunomia sphere 20190804051647 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

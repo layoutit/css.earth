@@ -1059,7 +1059,7 @@
       ],
       "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
       "expectedBytes": 12887,
-      "expectedSha256": "5dfe6f7b3ffb51e60919aad5b064d239c453ee2a49aaddbe6e2db404a4b299f1",
+      "expectedSha256": "279cc01a20c993b88fa312c7175a32800ed94797ccf830e2594f2ab37aaf82d0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1084,7 +1084,7 @@
       ],
       "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
       "expectedBytes": 9506,
-      "expectedSha256": "76692707d0b66b67e5eef73271de18c2e6075b29d76890d99295696e2aa99b7a",
+      "expectedSha256": "4b08947334a216b0d36217452133a42f7bd308907477cbbea5ccc95b6b45c92d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1136,8 +1136,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 10356,
-      "expectedSha256": "abfa6fce5e9473aa41fd85669c6dd8e06a8a3c1ef81200656b0bf82226d345f5"
+      "expectedBytes": 12727,
+      "expectedSha256": "ff1f02d603136c8290c27949c5bf08ae26ff2aa399dec07e30d56e883aef7c68"
     },
     {
       "path": "preparation/navigation.json",
@@ -1161,8 +1161,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 19075,
-      "expectedSha256": "65cd374ab0f9f8a7851ba49e29bf779c5617010f78e8e2a6f64a91e5941bebba"
+      "expectedBytes": 19152,
+      "expectedSha256": "86243d2fa6ae03cad8fad6da47a8c0557d82f565b56b6760c7c3b3652551fad9"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

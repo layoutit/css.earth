@@ -52,7 +52,7 @@
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
       "status": "included",
-      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 15 camera-1 deconvolved frames, 2018-08-06, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. The other 5 released camera-1 frames are not used: a lens keeps one apparition and at most 32 frames. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/41Daphne/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 15 camera-1 deconvolved frames, 2018-08-06, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. Left out by name: the 2017-05-20 apparition (5 frames). The level fit found no accepted overlap between them and the 2018-08-06 frames: the best pair shared 59 display samples within its angle limit, fewer than the 128 it needs, although the lens mesh predicted 193. Without one, their level cannot be placed, so the figure's 2017 column shows no lens frame. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/41Daphne/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/daphne/README.md",
         "https://observations.lam.fr/astero/Data/41Daphne/",
@@ -72,6 +72,14 @@
         {
           "date": "2026-09-18",
           "commit": "cc7b96d42341dec16efb740be3bb2e893069686b"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "89b58d29529da5464cc7affaa6cb7d62040e92a6"
         }
       ]
     },
@@ -95,6 +103,14 @@
         {
           "date": "2026-09-18",
           "commit": "cc7b96d42341dec16efb740be3bb2e893069686b"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "89b58d29529da5464cc7affaa6cb7d62040e92a6"
         }
       ]
     },
@@ -116,6 +132,14 @@
         {
           "date": "2026-09-18",
           "commit": "cc7b96d42341dec16efb740be3bb2e893069686b"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "89b58d29529da5464cc7affaa6cb7d62040e92a6"
         }
       ]
     },
@@ -140,7 +164,7 @@
       "id": "zimpol-published-comparison",
       "subject": "Vernazza et al. (2021) Figure B.23 as the registration of the SPHERE photograph lens",
       "status": "included",
-      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.23, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.949 to 0.954 at our phase, against 0.963 to 0.969 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 3 of 3 columns. With the paper’s photographs 0.945 to 0.954. Turned in the image, our outline best overlaps the paper’s photographs at -1.5 to 1.5° and its model panels at -2.5 to -1.0°. The spin axis we project lies at 117.4° on the sky against 114.7 to 116.2° for the figure’s arrows. Native outline residual 1.323 px mean over 15 frames at our phase; the sweep’s lowest is 1.320 px at 2°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.39° from the published pole.",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.23, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.949 to 0.954 at our phase, against 0.963 to 0.969 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 3 of 3 columns. With the paper’s photographs 0.945 to 0.954. Turned in the image, our outline best overlaps the paper’s photographs at -1.5 to 1.5° and its model panels at -2.5 to -1.0°. The spin axis we project lies at 117.4° on the sky against 114.7 to 116.2° for the figure’s arrows. Native outline residual 1.323 px mean over 15 frames at our phase; the sweep’s lowest is 1.320 px at 2°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.39° from the published pole. Left out by name: the 2017-05-20 apparition (5 frames). The level fit found no accepted overlap between them and the 2018-08-06 frames: the best pair shared 59 display samples within its angle limit, fewer than the 128 it needs, although the lens mesh predicted 193. Without one, their level cannot be placed, so the figure's 2017 column shows no lens frame.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/Data/41Daphne/Deconv/",
@@ -149,11 +173,7 @@
       "checked": [
         {
           "date": "2026-09-18",
-          "commit": "cc7b96d42341dec16efb740be3bb2e893069686b"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "2391723b720b7f747554e0dfe8605455a7ce8a65"
+          "commit": "89b58d29529da5464cc7affaa6cb7d62040e92a6"
         }
       ]
     }

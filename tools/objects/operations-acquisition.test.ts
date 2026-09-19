@@ -134,6 +134,25 @@ test('HRI-IR acquisition validates its recipe and preserves an existing output w
   assert.deepEqual(await readFile(join(directory,'source.img')),old);
 }));
 
+test('a Horizons time-list step asks again in batches and compares rows, not the dated header',()=>temporary(async directory=>{
+  const epochs=Array.from({length:30},(_,i)=>2458462.7+i/1000);
+  const step={kind:'horizons-time-list',path:'observer.txt',url:'https://ssd.jpl.nasa.gov/api/horizons.api',parameters:{format:'text',COMMAND:"'216;'"},epochs,groups:['refresh']};
+  for(const changed of [{epochs:[]},{epochs:[Number.NaN]},{parameters:{TLIST:"'1'"}},{parameters:{COMMAND:216}},{path:undefined}]) {
+    assert.throws(()=>parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{...step,...changed}]}));
+  }
+  const response=(list:readonly number[],asked:string)=>`JPL/HORIZONS ${asked}\n$$SOE\n${list.map(epoch=>` ${epoch.toFixed(9)} 1.0 2.0`).join('\n')}\n$$EOE\nfooter\n`;
+  const urls:string[]=[];
+  const transport={fetch:async(url:string)=>{urls.push(url);return new Response(response(String(new URL(url).searchParams.get('TLIST')).replace(/'/g,'').split(' ').map(Number),'2026-Sep-18 14:00:00'));}};
+  const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[step]});
+  await writeFile(join(directory,'observer.txt'),response(epochs,'2026-Sep-17 09:00:00'));
+  await executeAcquisition({sourceRoot:directory,manifest:rawManifest(Buffer.from('')),plan,transport});
+  assert.equal(urls.length,2,'thirty epochs are asked in batches of at most 25');
+  assert.equal(new URL(urls[0]).searchParams.get('COMMAND'),"'216;'");
+  assert.equal(await readFile(join(directory,'observer.txt'),'utf8'),response(epochs,'2026-Sep-17 09:00:00'),'the pinned table is left as it was');
+  await writeFile(join(directory,'observer.txt'),response(epochs.map((epoch,i)=>i===3?epoch+1:epoch),'2026-Sep-17 09:00:00'));
+  await assert.rejects(executeAcquisition({sourceRoot:directory,manifest:rawManifest(Buffer.from('')),plan,transport}),/Horizons rows drifted from observer\.txt/);
+}));
+
 for(const [name,received,error] of [
   ['short',Buffer.from('pin'),/size drifted/],
   ['overlong',Buffer.from('pinned data extra'),/size drifted/],

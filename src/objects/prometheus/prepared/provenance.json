@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "490afb7fc626a63042e5eebfeb188c65224573fd13926ed923aec564f6cbe4f0"
+    "sha256": "401b785ec9d8d4289ef2d9d4e4ac7190d9364c6dd5acaaaf2cae2acdc7bd0b55"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -2128,14 +2128,14 @@
       "outputs": [
         {
           "url": "/scenes/prometheus/prometheus-normal-thumbnail.webp",
-          "bytes": 1348,
-          "sha256": "867d301e7d7532d1525d7652ea7b79a94ee050e8621e59325063047773af7612",
+          "bytes": 1346,
+          "sha256": "59a22b0d1e061ae10f95775c4f5c5c08ec24d835981495a45e28e5cb2ecce37d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/prometheus/prometheus-normal-surface@2x.webp",
-          "bytes": 350224,
-          "sha256": "33e1ba5202e19f70a49e37c1fa0c09e4d0b465875b5942940247410d25972b68",
+          "bytes": 379148,
+          "sha256": "4990c389ee24ec552bd9a0e5e88c74099555738fc267bd39987153b40c73432e",
           "verification": "bytes-verified"
         }
       ],
@@ -2184,14 +2184,14 @@
       "outputs": [
         {
           "url": "/scenes/prometheus/prometheus-filter-color-thumbnail.webp",
-          "bytes": 1908,
-          "sha256": "c30b1c9a8426c0487d8c14054bb2d48b03ca5318b48fbce083137035a7182cd2",
+          "bytes": 1910,
+          "sha256": "8f68a9a134d5f58eae532fa30ef91327dfa5820f1a8c2882eccfb968bcba508a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/prometheus/prometheus-filter-color-surface@2x.webp",
-          "bytes": 389316,
-          "sha256": "66e398ca74e0aa4302cbd3ce8e824e391964b2030e14f123aac8e1fcda8ec4de",
+          "bytes": 389488,
+          "sha256": "6a3bb7c754242d1a6d9ffe7805477c15cab3c7582bc3653b4598443c35ddef34",
           "verification": "bytes-verified"
         }
       ],
@@ -2249,8 +2249,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 12556,
-          "sha256": "dc5be5f58fb694d9138fe17d5602136e9c7184fbd7422a37153e8635be748929",
+          "bytes": 12592,
+          "sha256": "f9b98f528bea94c1eed5eee598af0f4b66a8e4a7baac3db4def6c89b6505f0a6",
           "verification": "bytes-verified"
         }
       ]
@@ -2312,7 +2312,7 @@
   },
   "lastPreparation": {
     "objectId": "prometheus",
-    "materialSha256": "2753af961820c7b8547d09a0f3318d8afd12d007227a13848ff0b2fa306e60bd",
+    "materialSha256": "6cd843984392abe13fe4209e82732f0fb1f0245cddab1cc6eb924a60448cae9f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

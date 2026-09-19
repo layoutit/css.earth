@@ -15,6 +15,38 @@ explains. Two commands do the work; Iris and Hebe are the worked examples.
   this route.
 - Work in a dedicated worktree.
 
+## Which apparitions a lens can cast
+
+The deconvolved frames state no unit, and their scale changes between
+apparitions: Kleopatra's 2017 frames total about 3 million, its 2018 frames
+about 60 million, through the same filter at the same detector gain. Within one
+apparition, nights stay within about 3× of each other. So the level fit gives
+each apparition its own level, placed only through surface it shares with
+another, and the 4× budget bounds each frame against its own apparition's first
+frame. An apparition that shares no such surface cannot be matched and stays
+out. Pallas and Iris are seen pole-on from opposite sides in their two
+apparitions, so their second apparitions stay out.
+
+```bash
+node tools/objects/sphere-survey/apparitions.mts [<id> …]
+```
+
+This prints, for every shipped survey lens or the ones named, each apparition's
+frames, sub-observer latitudes and distance, the share of the surface it would
+add, and the display samples it shares with a cast frame. Beside them it prints
+the surface the lens's own frames cover, from geometry, next to the prepared
+lens's measured coverage: that pair shows how far the geometry can be trusted.
+
+![Lens maps of the twelve bodies with a linked apparition, one apparition above, all linked apparitions below](sphere-survey-apparitions.webp)
+
+Above, each body's lens map with one apparition (top) and with every linked one
+(bottom), and the measured share of the surface photographed. The geometry
+decides only which apparitions to try. Daphne's 2017 frames were predicted to
+share 193 samples with its 2018 frames, but the fit found at most 59 in the
+pixels, so that apparition is left out by name
+(`--leave-out-apparition=2017-05-20`). Its map changes only through how its
+frames are combined.
+
 ## Set up and measure
 
 ```bash
@@ -31,9 +63,13 @@ the way it:
   from the figure's pixels;
 - lists the release's frames, and marks a column the release lacks as having no
   lens frame;
-- keeps one apparition's camera-1 frames: the one the figure shows most. An
-  apparition over the 32-frame bound keeps every series, thinned evenly, with
-  the figure's frames always kept;
+- casts every apparition whose level the level fit can place. The apparition
+  the figure shows most anchors the lens. Another joins when one of its frames
+  shares at least the fit's 128 display samples with a frame already cast,
+  within 60° of both the camera and the Sun. The setup decides this from
+  geometry before it fetches a frame, and preparation decides again from the
+  pixels. More than 96 frames keep every series, thinned evenly, with the
+  figure's frames always kept;
 - takes every file from this machine when a copy exists, and downloads the rest
   from LAM with its public cookie;
 - reads the spin record in the column order the survey's Table A.1 pole
@@ -103,12 +139,13 @@ A body whose preparation fails must be reset before the next one runs.
 
 Preparation stops with "Observation level fit exceeds its authored gain
 budget" when a frame needs more than a 4× level adjustment against the first
-frame, which anchors the display. The error names each frame beyond the budget
-against the first frame or the median frame, so it shows whether the first
+frame of its apparition. The error names each frame beyond the budget against
+that frame or the apparition's median frame, so it shows whether the first
 frame is the odd one (Davida's is, and every other frame is named against it)
-or a few others are. Reset the package, then install again leaving out the
-fewest frames that bring the rest within the budget of the first remaining
-frame, never one the figure shows, with the measured reason:
+or a few others are. It stops with "Observation overlaps leave frames
+unreached" when no accepted overlap joins some frames to the rest, and names
+each group. Reset the package, then install again leaving out the fewest frames
+that fix it, never one the figure shows, with the measured reason:
 
 ```bash
 node tools/objects/sphere-survey/install.mts <id> --leave-out=<frame-id>,… --because="<measured reason>"
@@ -116,6 +153,14 @@ node tools/objects/sphere-survey/install.mts <id> --leave-out=<frame-id>,… --b
 
 The reason goes into the ledger decision, the `surface-imagery` entry and the
 README's known problems.
+
+Survey lenses average their frames where they overlap (`edge-weighted-average`):
+each frame fades out toward its disc edge, where deconvolution rings, instead
+of one frame per point switching abruptly. The rule, its source and its
+measurements are in the
+[route policy](../../../../tools/objects/surface-observations/README.md#route-policy).
+
+![Kleopatra and Kalliope in the app's default view, one frame per point on the left and the edge-weighted average on the right](sphere-survey-blend.webp)
 
 Commit, then run `pnpm author:sources <id> --evidence <commit>` and commit again.
 Publish with `pnpm publish:runtime-assets --object=<id>` before merging.

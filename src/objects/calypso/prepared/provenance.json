@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9c1d1033a17c3aa66170ac7db02fed10202d743d6bb108f4cdbdee13753966b5"
+    "sha256": "7e8831363dd480b8a21c31775a3d061bf8b658eb984b8a54e3dda2c1ca99efeb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1625,14 +1625,14 @@
       "outputs": [
         {
           "url": "/scenes/calypso/calypso-normal-thumbnail.webp",
-          "bytes": 1472,
-          "sha256": "06ad126d0a007409860e10e71ea8905596bb6a1e5d20a1ad0acdf07baeca598c",
+          "bytes": 1470,
+          "sha256": "b603c2f963ee6164182829c0cfa1a6fcdcf88a01a102481a59473506c25184ac",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/calypso/calypso-normal-surface@2x.webp",
-          "bytes": 251556,
-          "sha256": "261c0094572059fa9023205583aa3be23877f2e284ad1b21ece0eb58985d6504",
+          "bytes": 256914,
+          "sha256": "d26bd6673dc29c49fa33f489a4a5fbb9bb6fe56f253f9e97012e82b54e0122f6",
           "verification": "bytes-verified"
         }
       ],
@@ -1740,8 +1740,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 10600,
-          "sha256": "d0c20039e69b81554b6ae430f70ae35a9be763197e45d4c6ea8c3b0c88b0b7bc",
+          "bytes": 10790,
+          "sha256": "5b2ccf78a318185ffff5551537e8bdebe1567b39b48d03d2869a0f2d36252b71",
           "verification": "bytes-verified"
         }
       ]
@@ -1803,7 +1803,7 @@
   },
   "lastPreparation": {
     "objectId": "calypso",
-    "materialSha256": "c1fe111a8a333100b8be4217f38de201a52f3706ffc08b42219a46acc106d153",
+    "materialSha256": "4099eeffe3350cd9c2d02fcbe5a6c99e8e5fb99359d3a8c854ed356d7323aba4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

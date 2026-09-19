@@ -52,7 +52,7 @@
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
       "status": "included",
-      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 32 camera-1 deconvolved frames, 8 nights from 2018-12-22 to 2019-01-27, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. The other 53 released camera-1 frames are not used: a lens keeps one apparition and at most 32 frames. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/324Bamberga/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 85 camera-1 deconvolved frames, 15 nights from 2017-06-23 to 2019-01-27, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/324Bamberga/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bamberga/README.md",
         "https://observations.lam.fr/astero/Data/324Bamberga/",
@@ -72,6 +72,10 @@
         {
           "date": "2026-09-18",
           "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
         }
       ]
     },
@@ -95,6 +99,10 @@
         {
           "date": "2026-09-18",
           "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
         }
       ]
     },
@@ -102,7 +110,7 @@
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
       "status": "included",
-      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 32 camera-1 frames on the ADAM mesh with the rotation record read latitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: Measured on all 85 deconvolved frames, the largest set in the release, with its rotation record on the released ADAM mesh: not one frame scores. The projected outline is round at every rotational phase, elongation 1.08 against the rule's 1.20 threshold. Eighty-five frames of a round disc place the body no better than one does. Measured outside preparation by the registration stage's own modules (its limb fit, camera and caliper rule) driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit (15 scored, rms 2.887, floor 1.871, systematic 2.198); on Themis it read 2.92 degrees where the stage itself read 1.65, so treat these as the rule applied to the frames, not as a prepared verdict.",
+      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 85 camera-1 frames on the ADAM mesh with the rotation record read latitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: Measured on all 85 deconvolved frames, the largest set in the release, with its rotation record on the released ADAM mesh: not one frame scores. The projected outline is round at every rotational phase, elongation 1.08 against the rule's 1.20 threshold. Eighty-five frames of a round disc place the body no better than one does. Measured outside preparation by the registration stage's own modules (its limb fit, camera and caliper rule) driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit (15 scored, rms 2.887, floor 1.871, systematic 2.198); on Themis it read 2.92 degrees where the stage itself read 1.65, so treat these as the rule applied to the frames, not as a prepared verdict.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/324Bamberga/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/324_Bamberga_param.txt"
@@ -119,6 +127,10 @@
         {
           "date": "2026-09-18",
           "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
         }
       ]
     },
@@ -126,7 +138,7 @@
       "id": "zimpol-published-comparison",
       "subject": "Vernazza et al. (2021) Figure B.39 as the registration of the SPHERE photograph lens",
       "status": "included",
-      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.39, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.955 to 0.977 at our phase, against 0.973 to 0.977 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 6 of 8 columns, one step from it in 1, and elsewhere in 1: at 30° by 0.005, less than the 0.025 the same shape loses to pixel size. With the paper’s photographs 0.942 to 0.971. Turned in the image, our outline best overlaps the paper’s photographs at -2.5 to 5.0° and its model panels at -3.5 to 3.0°. The spin axis we project lies at 135.0 to 137.7° on the sky against 127.4 to 129.9° for the figure’s arrows. Native outline residual 1.968 px mean over 32 frames at our phase; the sweep’s lowest is 1.864 px at 2°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.75° from the published pole.",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.39, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.929 to 0.978 at our phase, against 0.973 to 0.978 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 8 of 15 columns, one step from it in 5, and elsewhere in 2: at -20° by 0.011, less than the 0.022 the same shape loses to pixel size; at 30° by 0.005, less than the 0.025 the same shape loses to pixel size. With the paper’s photographs 0.926 to 0.971. Turned in the image, our outline best overlaps the paper’s photographs at -2.5 to 7.0° and its model panels at -8.0 to 3.5°. The spin axis we project lies at 57.6 to 137.7° on the sky against 46.3 to 129.9° for the figure’s arrows. Native outline residual 2.606 px mean over 85 frames at our phase; the sweep’s lowest is 2.370 px at -20°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.75° from the published pole.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/Data/324Bamberga/Deconv/",
@@ -135,7 +147,7 @@
       "checked": [
         {
           "date": "2026-09-18",
-          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
         }
       ]
     }

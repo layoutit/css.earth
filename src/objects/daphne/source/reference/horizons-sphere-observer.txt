@@ -2,7 +2,7 @@ API VERSION: 1.2
 API SOURCE: NASA/JPL Horizons API
 
 *******************************************************************************
-JPL/HORIZONS                 41 Daphne (A856 KA)           2026-Sep-18 07:05:13
+JPL/HORIZONS                 41 Daphne (A856 KA)           2026-Sep-18 15:51:01
 Rec #:      41 (+COV) Soln.date: 2026-Jun-05_03:04:51   # obs: 8160 (1866-2026)
  
 IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
@@ -27,7 +27,7 @@ ASTEROID comments:
 
 
 *******************************************************************************
-Ephemeris / API_USER Fri Sep 18 07:05:13 2026 Pasadena, USA      / Horizons    
+Ephemeris / API_USER Fri Sep 18 15:51:01 2026 Pasadena, USA      / Horizons    
 *******************************************************************************
 Target body name: 41 Daphne (A856 KA)             {source: JPL#169}
 Center body name: Earth (399)                     {source: DE441}
@@ -52,8 +52,8 @@ Atmos refraction: NO (AIRLESS)
 RA format       : DEG
 Time format     : CAL 
 Calendar mode   : Mixed Julian/Gregorian
-EOP file        : eop.260917.p261214                                           
-EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-SEP-17. PREDICTS-> 2026-DEC-13
+EOP file        : eop.260918.p261215                                           
+EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-SEP-18. PREDICTS-> 2026-DEC-14
 Units conversion: 1 au= 149597870.700 km, c= 299792.458 km/s, 1 day= 86400.0 s 
 Table cut-offs 1: Elevation (-90.0deg=NO ),Airmass (>38.000=NO), Daylight (NO )
 Table cut-offs 2: Solar elongation (  0.0,180.0=NO ),Local Hour Angle( 0.0=NO )

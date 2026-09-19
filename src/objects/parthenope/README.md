@@ -10,7 +10,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | --- | --- |
 | Shape | [Released reconstruction](https://observations.lam.fr/astero/3Dshape/11_Parthenope_mpcd.obj) |
 | Size and pole | [Vernazza et al. (2021), Tables 1 and A.1](https://doi.org/10.1051/0004-6361/202141781) |
-| SPHERE photograph | [19 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 4 nights from 2019-04-19 to 2019-06-19](https://observations.lam.fr/astero/Data/11Parthenope/Deconv/) on the [ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/11_Parthenope_adam.obj) |
+| SPHERE photograph | [24 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 5 nights from 2018-02-06 to 2019-06-19](https://observations.lam.fr/astero/Data/11Parthenope/Deconv/) on the [ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/11_Parthenope_adam.obj) |
 | Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/11_Parthenope_param.txt), read latitude-first, and JPL Horizons geometry from Paranal |
 | Photograph registration | [Vernazza et al. (2021), Figure B.10](https://doi.org/10.1051/0004-6361/202141781) |
 
@@ -29,12 +29,13 @@ Measured by `tools/objects/published-comparison.mts` against [Figure B.10](https
 
 | Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2018-02-06 02:26:57 | 0.957 | 0.958 | 0.958 | 0° | -4.5°, 0.5° | 77.4° against 74.3° |
 | 2019-04-19 04:01:56 | 0.957 | 0.960 | 0.961 | 0° | -4°, 0° | 177.6° against 175.6° |
 | 2019-05-04 07:44:28 | 0.961 | 0.954 | 0.961 | 0° | 0.5°, 0.5° | 178.5° against 176.5° |
 | 2019-06-05 05:38:50 | 0.958 | 0.943 | 0.964 | 0° | 1.5°, 1.5° | 0.1° against 178.1° |
 | 2019-06-19 03:39:14 | 0.914 | 0.890 | 0.959 | 0° | -0.5°, 5.5° | 0.5° against 178.5° |
 
-Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 19 native frames after the centre fit is 1.308 px at our phase; the lowest of a ±30° sweep is 1.207 px at 6°.
+Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 24 native frames after the centre fit is 1.173 px at our phase; the lowest of a ±30° sweep is 1.111 px at 6°.
 <!-- published-comparison:end -->
 
 ### Registration
@@ -44,7 +45,7 @@ Measured by the registration stage when the body was last prepared; the numbers 
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `zimpol` | 19 | 0 | — | — | — | its other 19 frames | 3 of 19 | -40.00° | 4 of 19, -8.50° | — | ×1.04 | conflict |
+| `zimpol` | 24 | 0 | — | — | — | its other 24 frames | 4 of 24 | -33.00° | 4 of 24, -8.50° | — | ×1.04 | conflict |
 
 `zimpol` ships on its paper’s comparison, [Figure B.10](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
 
@@ -67,7 +68,7 @@ Source constraints are uneven and ground-based; a 4096 × 2048 display map does 
 
 Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Parthenope from 6° to 17° south, so surface the survey did not see keeps the missing-imagery grid. Left out by name: zimpol-20190605-052639. The level fit finds it 4.82× dimmer than the first frame, which anchors the display, and 3.49× dimmer than the median frame; the lens’s level budget is 4×, and the figure does not show it.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, each apparition placed through the surface it shares with another, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Parthenope from 17° south to 71° north, so surface the survey did not see keeps the missing-imagery grid. Left out by name: zimpol-20190605-052639. The level fit finds it 4.79× dimmer than its apparition's first frame, which anchors that apparition's level, and 2.88× dimmer than the apparition's median frame; the lens's level budget is 4×, and the figure does not show it.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 
