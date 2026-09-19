@@ -8,11 +8,10 @@ export function savedWorldCamera(saved: SharedView, frame: PreparedWorldCameraFr
   const view = parseSharedView(formatSharedView(saved))!;
   if (view.preparedEpochJdTt !== frame.epochJdTt) throw new TypeError('Saved camera has a different prepared epoch.');
   const camera = view.camera;
-  if (camera.distanceKilometers === undefined) throw new TypeError('Saved camera needs physical distance.');
   const components = camera.pose.scene.slice(9, -1).split(',').map(Number);
   const rotation = [components[0], components[4], components[8], components[1], components[5],
     components[9], components[2], components[6], components[10]];
-  if ('bodyCenterKilometers' in camera && camera.bodyCenterKilometers) {
+  if (camera.bodyCenterKilometers) {
     const units = camera.bodyCenterKilometers.map(value => value * 1000 / frame.metersPerUnit);
     return worldCameraFromPresentation({ rotation, bodyCenterUnits: [units[0], units[1], units[2]] }, frame);
   }

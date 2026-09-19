@@ -6,7 +6,7 @@ import { gzipSync } from "node:zlib";
 import { coverageLookup,prepareTreeSection,prepareTileNode,childrenOf,tileKey } from "../prepare-wmts-tree.mts";
 import { encodePreparedBlock } from "../encode-prepared-block.mts";
 import { prepareWmtsTile } from "../wmts-page-geometry.mts";
-import { PREPARED_BLOCK_ENCODING } from "../../../../src/platform/prepared-map/prepared-block-transport.mts";
+import { PREPARED_BLOCK_ENCODING } from "../../../../src/renderers/css/dist/preparation.js";
 import {commandContext} from './context.mts';
 
 import type { OperationContext } from './context.mts';

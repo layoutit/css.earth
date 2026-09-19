@@ -14,7 +14,7 @@ import type { PreparedSurfaceFeaturePlan } from '../labels/surface-feature-types
 import type { PreparedAssetOrigin } from './prepared-asset-origin.js';
 export type PreparedSelection = ObjectSelection;
 export interface PreparedView {
-  readonly projection?: import('./physical-projection.js').PhysicalProjection;
+  readonly projection?: import('../prepared-data/physical-projection.js').PhysicalProjection;
   revision?: number; controlPitch: number; controlYaw: number; zoom: number; sceneMatrix: string;
   sunViewDirection: readonly number[] | null; reference?: { sceneMatrix: string; sunViewDirection: readonly number[] | null };
   counterRotation: string; counterRotationFor(systemTransform: string | DOMMatrix | null): string;
@@ -122,7 +122,7 @@ function writeStyle(element: HTMLElement, name: string, value: string) {
 
 // No geometry, atlas addressing, band grouping, source conversion, or package
 // callbacks enter this builder. The ordered records are final prepared DOM.
-export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition, preparedTree?: PreparedTreeLease, initialProjection?: import('./physical-projection.js').PhysicalProjection, progressiveActivation = false) {
+export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition, preparedTree?: PreparedTreeLease, initialProjection?: import('../prepared-data/physical-projection.js').PhysicalProjection, progressiveActivation = false) {
   const { nodes, roots } = preparedTree ? preparedTree.claim(definition.tree, stage.ownerDocument, context.own)
     : buildPreparedTree(definition.tree, stage.ownerDocument, context.own, stage, definition.assetOrigin);
   const cameraElement = nodes[definition.tree.camera], sceneElement = nodes[definition.tree.scene];
@@ -231,7 +231,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
 /** Publish the same prepared camera-dependent styles in a browser or a native response. */
 export function createPreparedFramePublisher(definition: PreparedPresentationDefinition, stage: HTMLElement,
   nodes: readonly HTMLElement[], sceneElement: HTMLElement, seekPose: (controlPitch: number) => void = () => {},
-  initialProjection?: import('./physical-projection.js').PhysicalProjection) {
+  initialProjection?: import('../prepared-data/physical-projection.js').PhysicalProjection) {
   const publishFacing = createPreparedFacing(definition.facing ?? [], nodes);
   const publishDepth = createPreparedDepthPartitions(definition.depthPartitions, nodes, sceneElement);
   if (initialProjection) { publishFacing(initialProjection); publishDepth(initialProjection); }

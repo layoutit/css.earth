@@ -7,7 +7,7 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { createSourceManifest, assertSourceBytes } from "../../../../src/platform/source-manifest.mts";
 import { publishSourceBytes } from "../../../../src/platform/source-acquisition.mts";
-import { preparedCityAssetUrl } from "../../../../src/platform/prepared-map/city-asset-url.mts";
+import { preparedCityAssetUrl } from "../../../../src/renderers/css/dist/preparation.js";
 import { readWorldCoverCatalog } from "../worldcover-catalog.mts";
 import { releaseFiles, verifyLocalPack } from "../wmts-release.mts";
 import {createOperationContext,commandContext,projectDirectory} from './context.mts';

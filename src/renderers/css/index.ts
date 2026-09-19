@@ -9,7 +9,7 @@ export type { ObjectControls, ObjectAction, ObjectSelection, LensControl, Settin
 export type { RuntimePolicy } from './navigation/runtime-policy.js';
 export type { CameraPlan, CameraPose } from './navigation/types.js';
 export type { PerspectiveWorldContext } from './navigation/perspective-dolly.js';
-export { formatSharedView, parseSharedView, formatViewParameters, parseViewParameters } from './navigation/view-url.js';
+export { formatSharedView, parseSharedView } from './navigation/view-url.js';
 export type { SharedView, SharedPlayback } from './navigation/view-url.js';
 export type { PreparedPresentationDefinition, PreparedView, PreparedPresentationPlan } from './rendering/prepared-presentation.js';
 export type { PreparedAssets } from './rendering/prepared-residency.js';

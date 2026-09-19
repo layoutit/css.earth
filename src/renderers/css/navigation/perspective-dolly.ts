@@ -1,10 +1,10 @@
-import { physicalProjectionFromCamera } from '../rendering/physical-projection.js';
+import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
 import type { CameraPlan, PerspectiveCameraPlan, CameraUpdate, LevelOfDetailPlan, OrbitLineFade } from './types.js';
 import type { BodyProjection } from '../solar-system/types.js';
 import type { Matrix3dLike, VisibleRect } from '../solar-system/types.js';
 import type { PositionM } from '@cssearth/engine';
-import type { PhysicalProjection } from '../rendering/physical-projection.js';
+import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 import type { CameraViewport } from './camera-viewport.js';
 import { presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFromPresentation, worldCameraSilhouetteDiameter } from './world-camera.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';

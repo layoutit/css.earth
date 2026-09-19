@@ -1,4 +1,3 @@
-import { loadObjectTestDefinition } from './object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createHash } from "node:crypto";
@@ -6,10 +5,6 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { SCENE_OBJECTS as OBJECTS } from "../site/objects.mts";
 import { auditObjectRuntimeOwnership, inspectObjectRuntimeModule } from "./check-object-runtime-ownership.mts";
-const moonDefinition = requireRecord(await loadObjectTestDefinition('moon'), 'Moon prepared definition');
-const objectControls = requireRecord(moonDefinition.controls, 'Moon prepared definition.controls');
-import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mts";
-import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../src/platform/prepared-presentation-contract.mts";
 import { readPreparedJsonModule } from "./check-prepared-presentation.mts";
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from "./source-values.mts";
 
@@ -22,21 +17,9 @@ const requirePresent = <T,>(value: T | undefined | null, label: string): T => {
   return value;
 };
 
-const root = "/ownership-fixture", prefix = "src/objects/moon/runtime/";
-const client = prefix + "client.mjs", definitionPath = prefix + "definition.mjs";
-const binding = `import { createObjectRuntime as bind } from '../../../platform/object-runtime.mts';
-import { runtimeDefinition as definition } from './definition.mjs';
-export const mountMoonClient = bind(definition);`;
-// Legacy parser fixtures remain adversarial tests, not production dependencies.
-const definition = `import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '../../../platform/prepared-schema.mts';
-import { objectControls } from '../site/control-content.mjs';
-import { PREPARED_PRESENTATION } from './preparedPresentation.mjs';
-export const runtimeDefinition = Object.freeze({ ...PREPARED_PRESENTATION, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id: 'moon', controls: objectControls });`;
-const moonPresentation = { ...moonDefinition };
-delete moonPresentation.id;
-delete moonPresentation.controls;
-moonPresentation.schema = 'cssearth-prepared-presentation@3';
-const prepared = `export const PREPARED_PRESENTATION = Object.freeze(${JSON.stringify(moonPresentation)});`;
+const prefix = 'src/objects/moon/runtime/';
+const sharedFile = 'src/renderers/css/runtime/object-runtime.ts';
+const shared = await readFile(sharedFile, 'utf8');
 const registrySource = `import { defineObject, defineObjects } from './object-schema.mts';
 export const OBJECTS = defineObjects([
   object("moon", "Moon", "satellite", "#aaa7a0", 1, "Moon fixture", async () => {
@@ -52,63 +35,13 @@ function object(id, name, classification, color, distanceAu, description, loadSc
   });
 }
 `;
-const sunContext = await readFile(new URL("../src/objects/sun/prepared/world-context.json", import.meta.url), "utf8");
-const navigationDistance = await readFile(new URL('../site/navigation-distance.mts', import.meta.url), 'utf8');
-const spatialRelations = await readFile(new URL('../packages/catalog/src/spatial-relations.ts', import.meta.url), 'utf8');
-const objectSchema = await readFile(new URL("../site/object-schema.mts", import.meta.url), "utf8");
-const isArray = await readFile(new URL("../src/platform/is-array.mts", import.meta.url), "utf8");
-const browserTypes = await readFile(new URL("../site/browser-types.mts", import.meta.url), "utf8");
-// object-schema.mts validates discovery through these real modules; the overlay follows the same closure.
-const objectDiscovery = await readFile(new URL("../site/object-discovery.mts", import.meta.url), "utf8");
-const objectCategories = await readFile(new URL("../site/object-categories.mts", import.meta.url), "utf8");
-const arrivalView = await readFile(new URL("../site/arrival-view.mts", import.meta.url), "utf8");
-const worldCameraMath = await readFile(new URL("../src/renderers/css/navigation/world-camera-math.ts", import.meta.url), "utf8");
-const shared = `import { createPolyCamera } from '@layoutit/polycss';
-export function createObjectRuntime(definition) { return createPolyCamera(definition); }`;
-function fixture(extra: SourceOverlay = {}, definitionTail = ""): AuditOptions {
-  const files: SourceOverlay = { [client]: binding, [definitionPath]: definition + definitionTail,
-    "site/navigation-distance.mts": navigationDistance, "packages/catalog/src/spatial-relations.ts": spatialRelations,
-    "site/objects.mts": registrySource, "site/object-schema.mts": objectSchema, "site/browser-types.mts": browserTypes, "src/platform/is-array.mts": isArray,
-    "site/object-discovery.mts": objectDiscovery, "site/object-categories.mts": objectCategories, "site/arrival-view.mts": arrivalView,
-    "src/renderers/css/navigation/world-camera-math.ts": worldCameraMath,
-    "site/layouts/PlanetLayout.astro": "<main><slot /></main>",
-    "site/components/PlanetShell.astro": "<aside><slot /></aside>",
-    "src/objects/sun/prepared/world-context.json": sunContext,
-    [prefix + "preparedPresentation.mjs"]: prepared,
-    "src/objects/moon/site/control-content.mjs": `export const objectControls = ${JSON.stringify(objectControls)};`,
-    "src/platform/prepared-schema.mts": `export const PREPARED_OBJECT_RUNTIME_SCHEMA = "cssearth-object-runtime@3";`,
-    "src/platform/object-runtime.mts": shared, ...extra };
-  return { root, objects: [{ id: "moon" }],
-    verifyDefinition(object: { id: string }, plan: unknown) { requireObjectRuntimeDefinition({ ...requireRecord(plan, 'fixture plan'), schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id: object.id, controls: objectControls }); },
-    listRuntimeFiles: async () => Object.keys(files).filter(file => file.startsWith(prefix)).map(file => file.slice(prefix.length)),
-    readText: async (path: string) => { const source = files[path.slice(root.length + 1)]; assert.notEqual(source, undefined, path); return requirePresent(source, path); } };
-}
 
-test("accepts one bound factory and the real existing Moon plan; static proof never claims native observations", async () => {
-  const report = await auditObjectRuntimeOwnership(fixture());
-  assert.equal(report.complete, true); assert.equal(report.entries[0].factoryCalls, 1);
-  assert.equal(report.entries[0].schema, PREPARED_OBJECT_RUNTIME_SCHEMA);
-  assert.equal(report.cameraFactorySites.length, 1);
-  assert.equal(report.nativeOwnership.status, "UNPROVEN");
-  assert.match(report.sourceHashes[prefix + "preparedPresentation.mjs"], /^[a-f0-9]{64}$/);
-  assert.match(report.sourceHashes["site/objects.mts"], /^[a-f0-9]{64}$/);
-  assert.deepEqual(report.entries[0].entry, { file: client, exported: "mountMoonClient", registry: "site/objects.mts" });
-});
-test("follows imported helpers instead of trusting a thin client", async () => {
-  const options = fixture({ [prefix + "hidden.mjs"]: "export function hidden() { return new Image(); }" },
-    "\nimport { hidden } from './hidden.mjs'; hidden();");
-  await assert.rejects(auditObjectRuntimeOwnership(options), /hidden.mjs.*Image/);
-  const report = await auditObjectRuntimeOwnership({ ...options, strict: false });
-  assert.match(JSON.stringify(report.entries[0].closure), /hidden\.mjs/);
-  assert.equal(report.entries[0].migrated, false);
-});
-test("private synchronous material publication is rejected even when its file is unreferenced", async () => {
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [prefix + "presentation.mjs"]:
-    "export function publish(node, value) { node.style.backgroundPosition = value; }" })), /Unreferenced private runtime executor/);
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [prefix + "presentation.mts"]:
-    "export function publish(node: HTMLElement, value: string): void { node.style.backgroundPosition = value; }" })), /Unreferenced private runtime executor/);
-  const facts = inspectObjectRuntimeModule("node.style.backgroundPosition = prepared.position;", prefix + "presentation.mjs");
-  assert.ok(facts.violations.some(item => /native DOM or material/.test(item.reason)));
+function fixture(extra: SourceOverlay = {}): AuditOptions {
+  return { objects: OBJECTS.filter(object => object.id === 'mercury'),
+    readText: path => Object.hasOwn(extra, relativeFile(path)) ? Promise.resolve(requirePresent(extra[relativeFile(path)], relativeFile(path))) : readFile(path, 'utf8') };
+}
+test('retired private-client registries are rejected before loading their modules', async () => {
+  await assert.rejects(auditObjectRuntimeOwnership(fixture({ 'site/objects.mts': registrySource })), /prepared descriptor catalogue/);
 });
 
 for (const source of [
@@ -123,20 +56,13 @@ for (const source of [
   assert.ok(inspectObjectRuntimeModule(source, prefix + "presentation.mjs").violations.length > 0);
 });
 
-test("rejects extra entry code, side-effect imports, and duplicate factories", async () => {
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [client]: binding + " export function legacy() {}" })), /imports and one bound/);
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [client]: binding + " bind(definition);" })), /found 2/);
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [client]: binding + " import './extra.css';" })), /Unclosed object runtime import/);
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [definitionPath]: "export const runtimeDefinition = {};" })), /actual control-content/);
-});
-
 for (const dispatch of [
   "if (definition.id === 'saturn') return;", "const id = 'moon'; if (definition.id === id) return;",
   "const ids=['moon','saturn']; if(ids.includes(definition.id)) return;",
   "const ids=new Set(['moon','saturn']); if(ids.has(definition.id)) return;",
   "switch (definition.id) {case 'moon': return;}", "const table={moon:1,saturn:2}; return table[definition.id];",
 ]) test(`shared owners reject object-ID dispatch: ${dispatch.slice(0, 50)}`, async () => {
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ "src/platform/object-runtime.mts": shared + `\nfunction hidden(definition) { ${dispatch} }` })), /object-ID dispatch/);
+  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [sharedFile]: shared + `\nfunction hidden(definition) { ${dispatch} }` })), /object-ID dispatch/);
 });
 test('nullable physical lighting projection is data while adjacent identity tables remain forbidden', () => {
   const file = 'src/renderers/css/navigation/perspective-dolly.ts';
@@ -149,19 +75,14 @@ test('nullable physical lighting projection is data while adjacent identity tabl
 });
 test("shared owners reject private packages, fixed asset namespaces, v1 hooks and an extra native camera", async () => {
   const cases: readonly [string, RegExp][] = [
-    [shared + "\nimport { runtimeDefinition } from '../objects/moon/runtime/definition.mjs';", /Shared runtime imports an object package/],
+    [shared + "\nimport { runtimeDefinition } from '../../../objects/moon/runtime/definition.mjs';", /Shared runtime imports an object package/],
     [shared + '\nconst url = "/scenes/earth/wmts-data.pack";', /object-specific asset namespace/],
     [shared + '\nconst valid = /^\\/scenes\\/earth\\/wmts/;', /object-specific asset namespace/],
     [shared + '\nfunction hidden(value) { return value.createPresentation(); }', /Legacy object callbacks/],
     [shared + '\ncreatePolyCamera({});', /native camera factory site; found 2/],
     [shared + '\nimport("./hid" + "den.mjs");', /Computed dynamic imports/],
   ];
-  for (const [source, expected] of cases) await assert.rejects(auditObjectRuntimeOwnership(fixture({ "src/platform/object-runtime.mts": source })), expected);
-});
-test("object controls cannot hide an executor behind label projection", async () => {
-  const controlsPath = "src/objects/moon/site/control-content.mjs";
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [controlsPath]:
-    `export const objectControls = ${JSON.stringify(objectControls)};\nconst action = node => node.style.transform = 'none';` })), /static prepared content/);
+  for (const [source, expected] of cases) await assert.rejects(auditObjectRuntimeOwnership(fixture({ [sharedFile]: source })), expected);
 });
 test("common shell ownership follows actual Astro imports, template expressions, and client scripts", async () => {
   const shell = "site/components/PlanetShell.astro", helper = "site/shared-content.mjs";
@@ -220,38 +141,11 @@ test("literal navigation content is allowed only through the shell closure, not 
     "site/components/PlanetShell.astro": "---\nimport { MARKERS } from '../navigation-content.mts';\n---\n<nav>{Object.values(MARKERS).map(marker => marker.label)}</nav>" };
   assert.equal((await auditObjectRuntimeOwnership(fixture(files))).complete, true);
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files,
-    "src/platform/object-runtime.mts": shared + "\nimport { MARKERS } from '../../site/navigation-content.mts';" })), /navigation-content.mts.*object-ID dispatch/);
+    [sharedFile]: shared + "\nimport { MARKERS } from '../../../../site/navigation-content.mts';" })), /navigation-content.mts.*object-ID dispatch/);
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files, [file]: content + "\nexport function dispatch(id) { return MARKERS[id](); }" })), /navigation-content.mts.*object-ID dispatch/);
-});
-test("malicious generated code is rejected without importing it", async () => {
-  const key = "__executedPreparedOwnershipPayload"; Reflect.deleteProperty(globalThis, key);
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [prefix + "preparedPresentation.mjs"]:
-    prepared + `\nglobalThis.${key} = true;` })), /serialized|JSON/);
-  assert.equal(Reflect.get(globalThis, key), undefined);
-});
-test("source overlays validate changed camera and material bindings, not cached imported definitions", async () => {
-  const record = requireRecord(JSON.parse(prepared.slice(prepared.indexOf("Object.freeze(") + 14, prepared.lastIndexOf(");"))), 'prepared Moon record');
-  const tree = requireRecord(record.tree, 'prepared Moon record.tree'), nodes = requireArray(tree.nodes, 'prepared Moon record.tree.nodes');
-  nodes.push({ ...requireRecord(nodes[requireFiniteNumber(tree.camera, 'prepared Moon record.tree.camera')], 'prepared Moon camera'), parent: -1 });
-  const changed = `export const PREPARED_PRESENTATION = Object.freeze(${JSON.stringify(record)});`;
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [prefix + "preparedPresentation.mjs"]: changed })), /exactly one camera/);
 });
 test("a content validation failure cannot be labeled migrated", async () => {
   await assert.rejects(auditObjectRuntimeOwnership({ ...fixture(), verifyDefinition() { throw new Error("actual content mismatch"); } }), /actual content mismatch/);
-});
-
-test("the actual Moon registry import must point to the audited client and return its bound export", async () => {
-  for (const source of [
-    registrySource.replace("../src/objects/moon/runtime/client.mjs", "../src/objects/moon/site/private-loader.mjs"),
-    registrySource.replace("return mountMoonClient;", "return () => mountMoonClient();"),
-    registrySource.replace("return mountMoonClient;", "mountMoonClient(); return mountMoonClient;"),
-    registrySource.replace("    loadScene,", "    loadScene: () => loadScene(),"),
-    registrySource.replace(/\bloadScene,\n/u, "loadScene: () => loadScene(),\n"),
-  ]) {
-    assert.notEqual(source, registrySource, "The mutation must change the actual registry");
-    await assert.rejects(auditObjectRuntimeOwnership(fixture({ "site/objects.mts": source })), /Actual OBJECTS registry|registered runtime loader/);
-  }
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [client]: binding.replace("mountMoonClient", "differentExport") })), /one bound shared factory export/);
 });
 test("the actual OBJECTS registry has only normalized packages and one shared source closure", async () => {
   const report = await auditObjectRuntimeOwnership();
@@ -266,12 +160,6 @@ test("the actual OBJECTS registry has only normalized packages and one shared so
   assert.ok(report.sharedClosure.includes("site/components/PlanetShell.astro"));
   assert.ok(report.sharedClosure.includes("site/prepared-shell-titles.mjs"));
   assert.ok(!report.sharedClosure.includes("src/objects/uranus/site/preparedLensControls.mjs"));
-});
-
-test('literal metadata defaults do not hide loader ownership, executable defaults are rejected', async () => {
-  const changed = registrySource.replace('systemName = "Solar System"', 'systemName = resolveSystem()');
-  assert.notEqual(changed, registrySource);
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ 'site/objects.mts': changed })), /Actual OBJECTS registry/);
 });
 
 const descriptorObjects = OBJECTS.filter(object => ['mercury', 'venus'].includes(object.id));
@@ -308,13 +196,6 @@ test('descriptor loaders prove the actual JSON transport and typed source build 
   for (const file of ['src/renderers/css/tsup.config.ts', 'packages/engine/tsup.config.ts', 'packages/objects/package.json'])
     assert.match(report.sourceHashes[file], /^[a-f0-9]{64}$/, file);
   assert.ok(report.sharedClosure.every(file => !file.includes('/dist/')), 'source build entries, never emitted bundles, own the proof');
-});
-
-test('authored descriptors do not inspect deleted private runtime modules', async () => {
-  const mercury = requirePresent(OBJECTS.find(object => object.id === 'mercury'), 'Mercury object');
-  const report = await auditObjectRuntimeOwnership({ objects: [mercury],
-    listRuntimeFiles: async directory => { if (directory.endsWith('/mercury/runtime')) throw new Error('deleted authored runtime was read'); return []; } });
-  assert.equal(report.complete, true);
 });
 
 test('authored JSON transport rejects mismatched bytes, controls, source pins and physical frames', async () => {

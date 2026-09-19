@@ -1,4 +1,4 @@
-import type { PreparedPage, PreparedDirectory, PreparedReference } from "./types.js";
+import type { PreparedPage, PreparedDirectory, PreparedReference } from "../paging/types.js";
 type Json = string | number | boolean | null | Json[] | { [key: string]: Json };
 interface Template extends Array<unknown> { 0: "field" | "value" | "array" | "object"; }
 interface NumericColumn { type: "number"; order: number; bytes: number; offset: number; end: number; values: Float64Array; previous: bigint; delta: bigint; }

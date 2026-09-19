@@ -7,7 +7,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 import sharp from "sharp";
-import { parseSharedView } from "../../src/platform/view-url.mts";
+import { parseSharedView } from "../../src/renderers/css/dist/navigation.js";
 import { wheelWithReceipt } from "./wheel-zoom-distance.mts";
 
 const baseUrl = process.argv.find(argument => /^https?:/u.test(argument)) ?? "http://127.0.0.1:4210";
@@ -15,6 +15,7 @@ const output = resolve(process.env.VIEW_URL_DUMP ?? ".local/view-url-browser");
 await mkdir(output, { recursive: true });
 type Snapshot = Awaited<ReturnType<typeof read>>;
 type EncodedCamera = { distanceKilometers: number; pose: { scene: string } };
+let expectingBadRequest = false;
 const checks: { id: string; ok: boolean; [key: string]: unknown }[] = [], errors: string[] = [], warnings: string[] = [],
   snapshots: Partial<Record<string, Snapshot>> = {};
 // Shared views restore the physical vault. The shell's open information or
@@ -30,7 +31,7 @@ try {
   const page = await createTestPage(browser, { viewport: { width: 1440, height: 900 }, reducedMotion: "no-preference" });
   page.on("pageerror", error => errors.push(error.message));
   page.on("console", message => {
-    if (message.type() === "error") errors.push(message.text());
+    if (message.type() === "error" && !(expectingBadRequest && message.text().includes("400 (Bad Request)"))) errors.push(message.text());
     if (message.type() === "warning") warnings.push(message.text());
   });
   await page.goto(new URL("/mercury/?campaign=shared-view#camera", baseUrl).href, { waitUntil: "networkidle" });
@@ -66,7 +67,7 @@ try {
   check("url-preserves-object-route-hash-and-other-parameters", urlA.pathname === initialUrl.pathname && urlA.hash === "#camera" && urlA.searchParams.get("campaign") === "shared-view");
   const token = urlA.searchParams.get("v"); assert.ok(token);
   const bytes = Buffer.from(token, "base64url");
-  check("url-has-one-tiny-versioned-payload", urlA.searchParams.getAll("v").length === 1 && bytes.readUInt16BE(0) >>> 12 === 3 && token.length <= 80,
+  check("url-has-one-tiny-versioned-payload", urlA.searchParams.getAll("v").length === 1 && bytes.readUInt16BE(0) >>> 12 === 5 && token.length <= 80,
     { tokenCharacters: token.length, bytes: bytes.length, actualUrlCharacters: savedUrlA.length });
   check("url-stores-one-physical-pose-and-distance", Object.keys(savedA.camera).sort().join() === "distanceKilometers,pose" &&
     savedA.camera.pose.schema === "cssearth-camera-pose@2" && Object.keys(savedA.camera.pose).sort().join() === "scene,schema");
@@ -75,6 +76,7 @@ try {
     JSON.stringify(savedA.playback.times) === JSON.stringify(snapshots.saved.playback.times), { times: savedA.playback.times });
   check("astronomical-epoch-is-fixed-separately-from-visual-time", savedA.preparedEpochJdTt === 2461286.5 && savedA.playback.times.some(time => time !== savedA.preparedEpochJdTt));
   check("interaction-retains-scene-dom", snapshots.saved.stable && snapshots.saved.nodeCount === snapshots.initial.nodeCount);
+  await page.mouse.move(1, 1); await settled(page);
   const savedPixels = await page.screenshot({ path: resolve(output, "saved.png"), clip: vaultClip });
 
   await page.reload({ waitUntil: "networkidle" });
@@ -85,39 +87,39 @@ try {
   verifyPlayback("reload-restores-paused-native-playback", snapshots.reloaded, savedA.playback);
   check("reload-preserves-saved-url", page.url() === savedUrlA);
   check("reload-has-one-retained-object", snapshots.reloaded.stable && snapshots.reloaded.mountedObjectCount === 1 && snapshots.reloaded.nodeCount === snapshots.saved.nodeCount);
+  await page.mouse.move(1, 1); await settled(page);
   const reloadedPixels = await page.screenshot({ path: resolve(output, "reloaded.png"), clip: vaultClip });
   await comparePixels("reload-restores-rendered-pixels", reloadedPixels, savedPixels);
 
-  // The application deliberately uses replaceState. Add one normal history
-  // entry so Back/Forward can exercise its popstate restoration listener.
-  await page.evaluate(() => history.pushState({ viewUrlProbe: true }, "", location.href));
-  await drag(page, [990, 390], [850, 505]);
-  await page.mouse.move(960, 500);
-  await wheelWithReceipt(page, -70);
-  await settled(page);
-  await savedUrl(page, savedUrlA);
-  const savedUrlB = page.url(), savedB = decode(savedUrlB);
-  snapshots.second = await read(page);
-  check("second-real-view-is-distinct", savedB.camera.pose.scene !== savedA.camera.pose.scene && savedB.camera.distanceKilometers !== savedA.camera.distanceKilometers);
+  // Object selections own history entries. Leave the saved Mercury view through
+  // the same event as the scene picker, then restore it through Back/Forward.
+  await page.evaluate(() => document.dispatchEvent(new CustomEvent('objectnavigate', { detail: { objectId: 'venus' } })));
+  await selected(page, 'venus');
   await page.goBack();
-  await restored(page, savedA.camera.distanceKilometers);
+  await ready(page); await restored(page, savedA.camera.distanceKilometers);
   snapshots.back = await read(page);
   compareRenderedView("history-back-restores-camera", snapshots.back, snapshots.saved);
   verifyPlayback("history-back-restores-native-times", snapshots.back, savedA.playback);
   await page.goForward();
-  await restored(page, savedB.camera.distanceKilometers);
-  snapshots.forward = await read(page);
-  compareRenderedView("history-forward-restores-camera", snapshots.forward, snapshots.second);
-  verifyPlayback("history-forward-restores-native-times", snapshots.forward, savedB.playback);
-  check("history-restoration-retains-dom", snapshots.back.stable && snapshots.forward.stable && snapshots.forward.nodeCount === snapshots.saved.nodeCount);
+  await selected(page, 'venus');
+  check("history-forward-restores-selected-object", await page.evaluate(() =>
+    window.__cssearthTest.scene().mountedObjectCount === 1 && document.querySelector('.planet-stage')?.getAttribute('data-object-id') === 'venus'));
+  await page.goBack();
+  await ready(page); await restored(page, savedA.camera.distanceKilometers);
+  const returned = await read(page);
+  check("history-restoration-retains-dom", returned.stable && returned.nodeCount === snapshots.saved.nodeCount);
 
   const malformed = new URL(savedUrlA);
   malformed.searchParams.set("v", "malformed");
+  expectingBadRequest = true;
+  const rejected = await page.goto(malformed.href, { waitUntil: "networkidle" });
+  expectingBadRequest = false;
+  check("malformed-view-is-rejected-before-native-render", rejected?.status() === 400 && page.url() === malformed.href);
+  malformed.searchParams.delete('v');
   await page.goto(malformed.href, { waitUntil: "networkidle" });
   await ready(page);
   snapshots.malformed = await read(page);
-  check("malformed-view-leaves-one-usable-scene", snapshots.malformed.mountedObjectCount === 1 && snapshots.malformed.stable && page.url() === malformed.href);
-  check("malformed-view-reports-a-bounded-validation-warning", warnings.length > 0, { warnings });
+  check("removing-malformed-token-restores-one-usable-scene", snapshots.malformed.mountedObjectCount === 1 && snapshots.malformed.stable);
   await drag(page, [900, 440], [1000, 380]);
   await settled(page);
   await savedUrl(page, malformed.href);
@@ -136,6 +138,10 @@ try {
 assert.ok(checks.length >= 25 && checks.every(item => item.ok) && errors.length === 0, `Shared view browser proof failed; see ${resolve(output, "report.json")}`);
 console.log(`Shared view browser proof passed: ${checks.length}/${checks.length}; real drag, wheel, reload, history and malformed URL.`);
 
+async function selected(page: Page, id: string) {
+  await page.waitForFunction(id => document.querySelector('.planet-stage')?.getAttribute('data-object-id') === id &&
+    document.documentElement.dataset.ready === 'true' && location.pathname === `/${id}/`, id, { timeout: 30000 });
+}
 async function ready(page: Page) {
   await page.waitForFunction(() => window.__cssEarth?.ready === true && window.__mercury?.ready === true && document.documentElement.dataset.ready === "true", null, { timeout: 20000 });
 }
@@ -183,7 +189,7 @@ async function read(page: Page) {
     playback: { times: playback.animations.filter(animation => animation.mode === "motion").map(animation => window.__cssearthTest.number(animation.currentTime, "motion animation time")),
       speed: playback.speed, motionRequested: window.__cssearthTest.scene().playback.motionRequested,
       running: playback.animations.some(animation => animation.mode === "motion" && animation.running) },
-    nodeCount: window.__cssearthTest.element(".planet-stage").querySelectorAll("*").length,
+    nodeCount: window.__cssearthTest.element(".planet-stage").querySelectorAll("*:not(style[data-prepared-view-animations])").length,
     stable: api.assertStableDomIdentity(), mountedObjectCount: window.__cssearthTest.scene().mountedObjectCount };
   });
 }

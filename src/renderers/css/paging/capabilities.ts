@@ -1,7 +1,7 @@
 import type { ObjectRuntimeCapabilities } from '../runtime/object-runtime-types.js';
 import type { PreparedPagePlan } from './types.js';
 import { mountPreparedMapPages } from './city-pages.js';
-import { isPreparedAssetPath, normalizeCityAssetOrigin } from './city-asset-url.js';
+import { isPreparedAssetPath, normalizeCityAssetOrigin } from '../prepared-data/city-asset-url.js';
 import { mountSurfaceFeatureLabels } from '../labels/surface-feature-labels.js';
 import { resolvePreparedAssetUrl } from '../rendering/prepared-asset-origin.js';
 

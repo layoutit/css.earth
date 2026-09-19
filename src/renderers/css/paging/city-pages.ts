@@ -1,9 +1,9 @@
 import { createPreparedProjectiveTextureLeaf } from "../rendering/prepared-projective-texture-leaf.js";
 import { selectCityPages } from "./city-page-selection.js";
 import { createCityIndex } from "./city-index.js";
-import { normalizeCityAssetOrigin, isPreparedCityAssetUrl, isPreparedAssetPath } from "./city-asset-url.js";
+import { normalizeCityAssetOrigin, isPreparedCityAssetUrl, isPreparedAssetPath } from "../prepared-data/city-asset-url.js";
 import { createApiImageTransport } from "./api-image-transport.js";
-import { requirePhysicalProjection } from '../rendering/physical-projection.js';
+import { requirePhysicalProjection } from '../prepared-data/physical-projection.js';
 import { publishPreparedPageTexture } from './page-texture.js';
 
 import type { PreparedPage, PageMountOptions, PageSelection } from "./types.js";

@@ -1,6 +1,6 @@
 // Camera values and navigation math. Importing this entry never mounts a scene.
-export { formatSharedView, parseSharedView, formatViewParameters, parseViewParameters } from './view-url.js';
-export type { SharedView, SharedPlayback, ViewParameters } from './view-url.js';
+export { formatSharedView, parseSharedView } from './view-url.js';
+export type { SharedView, SharedPlayback } from './view-url.js';
 export { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
 export { worldCameraFromCenteredPresentation, worldCameraFromPresentation, presentWorldCamera } from './world-camera.js';
 export { cssCameraAxesFromOrientation, cssViewFromOrientation, validateWorldReflection, worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPosition } from './world-camera-math.js';

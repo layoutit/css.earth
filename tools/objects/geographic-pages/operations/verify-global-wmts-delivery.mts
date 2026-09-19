@@ -8,7 +8,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 
-import { readPreparedWmtsBlock } from "../../../../src/platform/prepared-map/prepared-block-transport.mts";
+import { readPreparedWmtsBlock } from "../../../../src/renderers/css/dist/preparation.js";
 
 const root = context.projectRoot;
 const output = resolve(root, `output/${context.objectId}-city/global-delivery/${Date.now()}`);

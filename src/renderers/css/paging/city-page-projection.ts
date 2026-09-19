@@ -1,5 +1,5 @@
 import type { PreparedBounds, PageViewport, PageProjection } from "./types.js";
-import { invertPreparedAffineMatrix4 } from '../solar-system/prepared-ellipsoid-projection.js';
+import { invertPreparedAffineMatrix4 } from '../prepared-data/prepared-ellipsoid-projection.js';
 export function projectCityPage(page: PreparedBounds, matrix: readonly number[], scale: number, viewport: PageViewport): PageProjection {
   if(page.coverageParts){
     let visible=false,span=0,center=[0,0],distance=Infinity;

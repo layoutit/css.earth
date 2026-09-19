@@ -1,4 +1,4 @@
-import { isPreparedCityAssetUrl } from "../../../../src/platform/prepared-map/city-asset-url.mts";
+import { isPreparedCityAssetUrl } from "../../../../src/renderers/css/dist/preparation.js";
 import { pageKey } from "../page-geometry.mts";
 
 import type { PageAddress, CityCoverageJob } from '../contracts.mts';

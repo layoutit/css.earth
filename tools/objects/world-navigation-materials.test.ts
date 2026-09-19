@@ -9,7 +9,7 @@ import { test } from 'node:test';
 import { preparePhysicalMaterialTracks } from './world-navigation-materials.js';
 import { authoredPresentationBasis } from './world-navigation-sources.js';
 import { requireMaterials } from '../../src/renderers/css/validation/materials.js';
-import { createPreparedEllipsoidProjection, readPreparedMatrix4 } from '../../src/renderers/css/solar-system/prepared-ellipsoid-projection.js';
+import { createPreparedEllipsoidProjection, readPreparedMatrix4 } from '../../src/renderers/css/prepared-data/prepared-ellipsoid-projection.js';
 
 const root=resolve(import.meta.dirname,'../..'),identity=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
 

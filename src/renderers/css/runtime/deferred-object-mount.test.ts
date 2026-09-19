@@ -8,6 +8,7 @@ function pending<T>() {
   return { promise, resolve, reject };
 }
 const view: SharedView = {
+  preparedEpochJdTt: null,
   camera: { distanceKilometers: 100, pose: { schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' } },
   playback: { times: [123], speed: 1, motionRequested: false },
 };
