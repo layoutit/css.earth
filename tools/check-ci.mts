@@ -17,6 +17,10 @@ const LOCAL_EXPRESSION_SUBSTITUTIONS:Record<string,string>={
 /** Step conditions that only mean something inside a GitHub run: skip the step when Contract lint failed, or cancel
  * the rest of the run after a failure. */
 export const CI_ONLY_CONDITIONS=["needs.lint.result != 'success'",'failure()'];
+/** A step guarded by `actions/cache`'s `cache-hit` output skips work CI already has cached from an earlier run. A
+ * local run has no such cache to consult, so — like LOCAL_EXPRESSION_SUBSTITUTIONS below — it substitutes the
+ * always-correct answer (never skip) instead of failing: the condition is stripped and the step always runs. */
+const CACHE_HIT_CONDITION=/^steps\.[\w-]+\.outputs\.cache-hit(?:-\w+)? != 'true'$/u;
 /** Execute the maintained job's commands, so local checks cannot drift from CI. */
 export function readCiSteps(source:string,jobName='universe'):CiStep[] {
  const workflow=requireRecord(parse(source)),jobs=requireRecord(workflow.jobs);
@@ -39,7 +43,8 @@ export function readCiSteps(source:string,jobName='universe'):CiStep[] {
   // CI-only housekeeping: a local run executes Contract lint first and stops at its first failure, so it has no
   // failed prerequisite to report and no parallel job to cancel.
   if(step.if!==undefined&&CI_ONLY_CONDITIONS.includes(String(step.if).trim()))return [];
-  if(step.if!==undefined||step['working-directory']!==undefined||step['continue-on-error']!==undefined||step.shell!==undefined)
+  const cacheGated=step.if!==undefined&&CACHE_HIT_CONDITION.test(String(step.if).trim());
+  if((step.if!==undefined&&!cacheGated)||step['working-directory']!==undefined||step['continue-on-error']!==undefined||step.shell!==undefined)
    throw new Error('Local CI needs explicit support for this step execution policy.');
   const result={name:requireString(step.name),run:requireString(step.run),env:{...inherited,...decodeEnvironment(step.env)}};
   if(JSON.stringify(result).includes('${{'))throw new Error('Local CI cannot evaluate GitHub expressions.');

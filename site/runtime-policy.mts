@@ -10,8 +10,9 @@ export const MOBILE_TOUCH_ACTION = "none";
 export { CANONICAL_PREPARED_IMAGE_DENSITY } from "../src/renderers/css/rendering/prepared-object-assets.ts";
 export const SKYBOX_DRAG_ENABLED = true;
 export const CENTER_SELECTION_DURATION_SECONDS = 0.35;
-// A wheel during a fly-to hurries the arrival by this factor instead of stopping the flight
-// where it is, which stranded distant bodies such as comets millions of kilometres away.
+// A wheel during a fly-to, or a click, drag or key before the destination approach is drawn,
+// hurries the arrival by this factor instead of stopping the flight where it is, which stranded
+// the camera millions of kilometres out with the destination often off screen.
 export const FLIGHT_WHEEL_SPEEDUP = 6;
 // A fly-to finishes once the rest of it is invisible: the camera is within this fraction of its depth
 // to the nearest body surface from its final position, and within this many radians of its final
