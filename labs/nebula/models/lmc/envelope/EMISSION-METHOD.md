@@ -1,9 +1,10 @@
 # Two-scale envelope LMC emission experiment
 
 This is a new inferred-emission model for the LMC. It does not repaint the unchanged stellar-density
-volume: the shipped `alignment-density-material-v1` lenses in [the object's
-README](../../../../../src/objects/lmc/README.md) remain the delivered material and an independent
-reference. Nothing here is promoted to the application.
+volume. Model `a9e2048a…` and its three lenses are promoted to the application by
+[`app-lenses.json`](app-lenses.json); [the object's README](../../../../../src/objects/lmc/README.md)
+is the delivered account, and the `alignment-density-material-v1` lenses it replaced remain a historical
+reference.
 
 The method is the SMC's, unchanged. [The SMC method note](../../smc/constrained/EMISSION-METHOD.md)
 owns the derivation, the roles of the inputs, the bounded acceptance rules and the rejected earlier
