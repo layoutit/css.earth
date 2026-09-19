@@ -2,6 +2,7 @@ import type { BrowserWindow } from './browser-types.mts';
 import { requiredElement } from './browser-types.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import { navigationFragments, type NavigationFragments } from './navigation-fragments.mts';
+import { publishPreparedDescriptor, readPreparedDescriptor } from './prepared-descriptor.mts';
 type StyleNode = HTMLStyleElement | HTMLLinkElement;
 interface IncomingStyle { element: StyleNode; media?: string | null; }
 /** Load the static navigation fragment without a second resident card bank. */
@@ -11,10 +12,18 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
   const key = (element: StyleNode) => element instanceof windowTarget.HTMLLinkElement ? `link:${element.href}` : styleKey(element);
 
   return Object.freeze({
+    async descriptor(object: ObjectEntry, { signal }: { signal: AbortSignal }) {
+      const source = await fragments.get(object.id, signal);
+      const descriptor = readPreparedDescriptor(source, object.id);
+      if (!descriptor) throw new Error(`Object ${object.id} navigation content has no prepared descriptor.`);
+      return descriptor;
+    },
     async load(object: ObjectEntry, { signal }: { signal: AbortSignal }) {
       // Selection intent usually requested this fragment already; reuse it.
       // The cached document is shared, so its nodes are only read or imported.
       const source = await fragments.get(object.id, signal);
+      const descriptor = readPreparedDescriptor(source, object.id);
+      if (!descriptor) throw new Error(`Object ${object.id} navigation content has no prepared descriptor.`);
       const required = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content',
         '.planet-object-browser', '.planet-information-panel', '.planet-settings-panel'];
       for (const selector of required) if (!source.querySelector(selector) || !documentTarget.querySelector(selector)) {
@@ -110,6 +119,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               } else documentTarget.head.append(documentTarget.importNode(incoming, true));
             }
             documentTarget.body.dataset.objectShell = object.id;
+            publishPreparedDescriptor(documentTarget, descriptor);
             const stage = requiredElement(documentTarget, '.planet-stage'), input = documentTarget.querySelector('.planet-input-surface');
             stage.dataset.objectId = object.id;
             stage.setAttribute('aria-label', `Interactive 3D CSS visualization of ${object.name}`);

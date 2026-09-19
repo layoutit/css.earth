@@ -3,6 +3,7 @@ import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/deferred
 import type { BrowserWindow, SceneFactory } from './browser-types.mts';
 import { errorMessage, record } from './browser-types.mts';
 import type { ObjectEntry } from './object-schema.mts';
+import type { ObjectDescriptor } from '@cssearth/objects';
 import type { NavigationOptions } from './navigation-history.mts';
 import type { NavigationContent } from './planet-shell-client.mts';
 import type { WorldHandoff } from './prepared-world-navigation.mts';
@@ -10,7 +11,7 @@ type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Shell = ReturnType<typeof mountPlanetShell>;
 export type WorldContextOwner = ReturnType<typeof applicationWorldContext.createApplicationWorldContext>;
 export type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
-export interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountPlanetShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
+export interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string, descriptor?: ObjectDescriptor): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountPlanetShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
 import { readObjectDiagnostics } from '../src/renderers/css/dist/index.js';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { objectAdapter } from "./object-adapter.mts";
@@ -33,6 +34,7 @@ import { retainInitialScene } from './initial-scene.mts';
 import { createNavigationLifecycle, type NavigationRequest } from './navigation-lifecycle.mts';
 import { createWorldPreferences } from './world-preferences.mts';
 import { createSceneSessions, type SceneSession as Session } from './scene-session.mts';
+import { readPreparedDescriptor } from './prepared-descriptor.mts';
 
 
 export function createSceneRouter({
@@ -150,7 +152,7 @@ export function createSceneRouter({
       const framePresenter = worldContextMount?.createFramePresenter?.();
       session.framePresenter = framePresenter;
       if (framePresenter) session.own(() => framePresenter.destroy());
-      if (!await session.activate(factory ?? loadObject(objectId), stage, {
+      if (!await session.activate(factory ?? loadObject(objectId, readPreparedDescriptor(documentTarget, objectId)), stage, {
         deferTextureRefinement: true,
         ...(worldContextMount ? { viewport: worldContextMount.viewport } : {}),
         ...(framePresenter ? { framePresenter } : {}),
@@ -425,7 +427,9 @@ export function createSceneRouter({
           request.own(() => content.dispose?.());
           request.timing.mark('content-ready'); return content;
         });
-      const factoryTask = loadObject(object.id).then(factory => { request.timing.mark('factory-ready'); return factory; });
+      const descriptorTask = contentTransport?.descriptor(object, { signal: request.signal });
+      const factoryTask = (descriptorTask ? descriptorTask.then(descriptor => loadObject(object.id, descriptor)) : loadObject(object.id))
+        .then(factory => { request.timing.mark('factory-ready'); return factory; });
       // The registry already owns the physical frames. Start the camera while
       // the destination factory, content and texture bank load independently.
       requests.advance(request, 'flying');

@@ -31,7 +31,7 @@ test("loads every object through the single adapter", async () => {
     /Unknown cssEarth object: future/,
   );
   await assert.rejects(
-    Reflect.apply(objectAdapter.load, objectAdapter, ["future", [{ id: "future", loadScene: async () => null }]]),
+    Reflect.apply(objectAdapter.load, objectAdapter, ["future", undefined, [{ id: "future", loadScene: async () => null }]]),
     /must return a mount function/,
   );
 });
