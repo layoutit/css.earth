@@ -278,6 +278,11 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
       ] } }, record.objectId);
     outputs.push({ path: resolve(root, `${base}/prepared/provenance.json`), text: stringify(provenance) },
       { path: resolve(root, `${base}/prepared/presentation.json`), text: stringify({ schema: 'cssearth-volume-presentation@1', objectId: record.objectId, controls, defaultLens: record.defaultLens }) });
+    const publicPrefix = resolve(root, `public/scenes/${record.objectId}`) + '/';
+    const publicAssets = outputs.filter(output => output.path.startsWith(publicPrefix)).map(output => {
+      const bytes = Buffer.from(output.text);
+      return { filename: output.path.slice(publicPrefix.length), location: 'public' as const, bytes: bytes.length, sha256: sha256(bytes) };
+    });
     if (descriptor.type === 'image-layer-bank') {
       const prefix = `${base}/prepared/`;
       const assets = [
@@ -287,12 +292,16 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
           const bytes = Buffer.from(output.text);
           return { filename: output.path.slice(resolve(root, prefix).length + 1), bytes: bytes.length, sha256: sha256(bytes) };
         }),
-        ...outputs.filter(output => output.path.startsWith(resolve(root, `public/scenes/${record.objectId}`) + '/')).map(output => {
-          const bytes = Buffer.from(output.text);
-          return { filename: output.path.slice(resolve(root, `public/scenes/${record.objectId}`).length + 1), location: 'public', bytes: bytes.length, sha256: sha256(bytes) };
-        }),
+        ...publicAssets,
       ];
       const inventory = stringify({ schema: `css${record.objectId}-runtime-assets@1`, resourceRoot: 'prepared', assets });
+      outputs.push({ path: resolve(root, `${base}/runtime-assets.json`), text: inventory });
+    } else if (publicAssets.length) {
+      // A volume-lens-bank object's baked volume field is inventoried separately by prepared-assets.json
+      // (its `prepared/*` closure); it has no image-layer bank of its own here. Its lens dataset previews above
+      // are still public `/scenes/<id>/datasets/*.webp` addresses, so `resolvePreparedAssetUrl` needs a
+      // filename -> sha256 map for them once ASSET_ORIGIN is set — give them their own runtime-assets.json.
+      const inventory = stringify({ schema: `css${record.objectId}-runtime-assets@1`, resourceRoot: 'prepared', assets: publicAssets });
       outputs.push({ path: resolve(root, `${base}/runtime-assets.json`), text: inventory });
     }
     const hostedBy = await hostedDatasets(root, base, record.objectId, record.lenses.map(lens => lens.id), input);

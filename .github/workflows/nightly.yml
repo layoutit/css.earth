@@ -4,6 +4,15 @@ on:
   schedule:
     - cron: '23 4 * * *'
   workflow_dispatch:
+  pull_request:
+    # Only the deploy-build job below runs from this trigger (each other job's `if:` stays schedule/dispatch-only):
+    # a full `pnpm build` is too slow to run on every PR, but a PR touching the code this specific path resolves
+    # through gets it anyway, instead of waiting for the nightly schedule to notice a break.
+    paths:
+      - 'site/**'
+      - 'astro.config.mts'
+      - 'src/renderers/css/rendering/**'
+      - '.github/workflows/deploy.yml'
 
 permissions:
   contents: read
@@ -11,6 +20,7 @@ permissions:
 jobs:
   assets:
     name: Every published asset
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -33,6 +43,7 @@ jobs:
   typecheck-tests:
     # PRs skip typecheck:tests (most of the typecheck time); it runs here and on every push to main.
     name: Typecheck test files
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -68,3 +79,47 @@ jobs:
         env:
           NODE_OPTIONS: --max-old-space-size=4096
         run: pnpm typecheck:tests
+
+  asset-origin-build:
+    # Exercises the one path that has broken two real deploys and that no other CI job builds at all: a full
+    # `pnpm build` with `ASSET_ORIGIN` set, the same as .github/workflows/deploy.yml's "Build the site" step when
+    # `serve_textures_from_r2` is on. tools/check-asset-origin-scenes.mts then fails the job if any emitted page
+    # still references a same-origin `/scenes/` address instead of the resolved R2 URL — the gap that let
+    # betelgeuse-shell's un-inventoried, build-generated dataset preview through.
+    name: Build with ASSET_ORIGIN and check /scenes/ coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # __CSSEARTH_VERSION__ (astro.config.mts) counts commits with `git rev-list --count HEAD`.
+          fetch-depth: 0
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # The same paths and key as universe.yml/deploy.yml. setup:assets sha-verifies every restored file and
+          # downloads only what is missing or changed.
+          path: |
+            public/scenes
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-assets-v1-
+      - name: Restore prepared assets and textures from R2
+        env:
+          CSSEARTH_ALLOW_MISSING_ASSETS: "1"
+        run: pnpm setup:assets
+      - name: Build the site with ASSET_ORIGIN set to a test origin
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+          CSSEARTH_ALLOW_MISSING_ASSETS: "1"
+          ASSET_ORIGIN: https://asset-origin-ci-check.example
+        run: pnpm build
+      - name: Check no page references a same-origin /scenes/ address
+        run: node tools/check-asset-origin-scenes.mts dist
