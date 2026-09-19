@@ -5,7 +5,7 @@ import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { runDigest } from '../product-record.mts';
-import { csvCells, instrumentTable, INSTRUMENT_TABLES, lev0Url, lev1Url } from './koa.mts';
+import { instrumentTable, INSTRUMENT_TABLES, lev0Url, lev1Url } from './koa.mts';
 import { CALIBRATION_TYPES, KOAID, nightsAround, parseKeckProgram, PROGRAMS } from './archive.mts';
 import { assertInputPins } from '../product-record.mts';
 import { checkReceipt, matchShippedObject, nameCandidates, normalise, pinnedEvidence, REDUCTION_STATE } from './archive-ledger.mts';
@@ -136,13 +136,7 @@ test('the shipped M42 program pins the frames the archive associates, and KOA’
   }
 });
 
-test('a KOA row keeps a comma that is inside a quoted cell', () => {
-  // KCWI states its binning as "2,2" and its readout mode in the next column. Splitting on every comma made the binning "2,
-  // the amp mode 2" and shifted every column after them, which is how the shipped program once recorded its configuration.
-  assert.deepEqual(csvCells('"KB.20231209.37031.94.fits","m42","2,2","TUP",5'), ['KB.20231209.37031.94.fits', 'm42', '2,2', 'TUP', '5']);
-  assert.deepEqual(csvCells('a,,b'), ['a', '', 'b']);
-  assert.deepEqual(csvCells('"he said ""hi""",2'), ['he said "hi"', '2']);
-});
+
 
 test('the nights a pin may reach are the frame’s own and the days either side of it', () => {
   assert.deepEqual(nightsAround('KB.20231209.37031.94.fits', 0), ['20231209']);

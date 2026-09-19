@@ -10,14 +10,14 @@ Counts are observations of this repository's objects, not of the archive. "Re-ma
 | --- | --- | --- | --- | --- | --- |
 | IRAC Map PC | pictures held on one pointing, the mode exoplanet transits were watched in | 4372 | none | 0 | 0 |
 | MIPS Phot | photometry at 24, 70 and 160 micron | 318 | none | 0 | 0 |
-| IRAC Map | mapped pictures in the four IRAC channels, 3.6 to 8.0 micron | 317 | `tools/objects/spitzer/mosaic.mts` | 4 | 4 |
+| IRAC Map | mapped pictures in the four IRAC channels, 3.6 to 8.0 micron | 317 | `tools/objects/spitzer/mosaic.mts` | 5 | 5 |
 | IRS Stare | spectra of one point, 5 to 38 micron | 312 | none | 0 | 0 |
 | IRS Map | spectra stepped across a target, which build a spectral cube | 165 | none | 0 | 0 |
 | MIPS SED | low-resolution spectra around 70 micron | 38 | none | 0 | 0 |
 | IRS Peakup Image | a small picture taken to put the target in the slit | 32 | none | 0 | 0 |
 | IRAC IER | pictures taken on an engineering request rather than a normal observation | 31 | none | 0 | 0 |
 | MIPS Scan | large maps made by scanning the telescope | 25 | none | 0 | 0 |
-| MIPS IER | not described here | 9 | none | 0 | 0 |
+| MIPS IER | MIPS data taken on an engineering request | 9 | none | 0 | 0 |
 | MIPS TP | total-power measurements | 7 | none | 0 | 0 |
 | IRS IER | spectra taken on an engineering request | 3 | none | 0 | 0 |
 | IRAC Post-Cryo Map | mapped pictures in the two channels that kept working after the cryogen ran out | 0 | none | 0 | 0 |
@@ -26,7 +26,6 @@ Counts are observations of this repository's objects, not of the archive. "Re-ma
 - **MIPS Phot**: The archive mosaics these; this toolkit has not been run on MIPS and does not claim it.
 - **IRS Stare**: Needs the observatory's SPICE, which was not obtained or run here.
 - **IRS Map**: Needs CUBISM, which was not obtained or run here.
-- **MIPS IER**: The archive returned this mode; it is not described in this toolkit.
 - **IRAC Post-Cryo Map**: The same stage would run; none is pinned here.
 
 ## Which of our objects Spitzer observed
@@ -217,6 +216,8 @@ Spitzer has no observation of Io, Europa, Ganymede or Callisto in this archive. 
 ## What this ledger does not say
 
 - It does not say what Spitzer holds in total. The archive's search backend answers one target at a time and takes no whole-archive count, so every number here is about this repository's objects.
+- The JSON ledger retains the id of every target whose query completed, including empty results. A target absent from that list is not turned into an archive negative when the application catalogue grows.
+- The JSON ledger retains every returned AORKEY, programme, mode, title, start and end time. The table above groups those same records for reading; the capability query exposes the records for one requested target.
 - A moving body is found only if its observation was scheduled against that NAIF id. An observation that caught a body inside a fixed-target field is not counted, because the archive does not index it that way.
 - 59 objects were not asked for at all. Most are comets and interstellar objects, whose packages carry a Horizons designation rather than a NAIF id; the rest have neither a body record nor a sky position. They are gaps, not zeroes.
 

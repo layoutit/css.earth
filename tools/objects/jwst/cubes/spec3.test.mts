@@ -6,6 +6,8 @@ import { basename, join } from 'node:path';
 import { parseImagingProgram } from '../imaging/archive.mts';
 import { imagingProductRun, pipelineSoftware, recordProductEvidence } from '../imaging/image3.mts';
 import { evidenceFor, productRecordPath, runDigest, writeProductRecord } from '../../product-record.mts';
+import { archivePlaneOffset, requestedSpectralGrid } from './spec3.mts';
+import type { SpectralCube } from './spectral-cube.mts';
 
 const file = (name: string, sha256: string) => ({ name, uri: `mast:JWST/product/${name}`, bytes: 4096, sha256 });
 const program = parseImagingProgram({
@@ -18,6 +20,19 @@ const program = parseImagingProgram({
 const toolchain = { toolchainDigest: 'e'.repeat(64), software: pipelineSoftware('jwst==2.0.1\nstcal==1.20.0\n') };
 const cubeRun = (parameters: Record<string, unknown> = {}) =>
   imagingProductRun(program, program.bands[0]!, 'spec3', { extract1d: 'skipped', ...parameters }, toolchain);
+
+const spectralGrid = (planes: number, first: number, step: number): SpectralCube => ({ width: 59, height: 55, planes,
+  wavelength: plane => first + plane * step, science: { CRPIX1: 30, CRPIX2: 28, CRVAL1: 1, CRVAL2: 2, CDELT1: -1, CDELT2: 1, CDELT3: step },
+  primary: {}, sci: {} as SpectralCube['sci'], err: {} as SpectralCube['err'], path: '', arcsecPerPixel: 0.1 });
+
+test('a requested wavelength interval becomes an exact subset of the archive planes', () => {
+  const archive = spectralGrid(3_610, 2.8703325, 0.000665);
+  const slice = requestedSpectralGrid(archive, [3.4, 3.6]);
+  assert.ok(archive.wavelength(slice.firstPlane) <= 3.4 && archive.wavelength(slice.lastPlane) >= 3.6);
+  const local = spectralGrid(slice.planes, archive.wavelength(slice.firstPlane), 0.000665);
+  assert.equal(archivePlaneOffset(local, archive), slice.firstPlane);
+  assert.throws(() => archivePlaneOffset(spectralGrid(slice.planes, archive.wavelength(slice.firstPlane) + 0.0001, 0.000665), archive), /not an aligned subset/u);
+});
 
 test('a spec3 run pins both detectors of every dither, and a finer sky grid is another run', () => {
   const run = cubeRun();

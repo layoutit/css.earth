@@ -19,7 +19,7 @@
  * `*CORR` calibration switches are recorded too. They are how the archive's own run was configured, and a re-run that differs
  * from MAST's product differs first in one of them (compare.mts).
  *
- * MAST access and the download-with-resume are the ones the JWST routes use (../jwst/mast.mts); nothing else is shared.
+ * MAST catalogue access and complete-file downloads use the shared pinned Astroquery boundary (../astronomy-packages/mast.mts).
  * The program is written to tools/objects/hst/programs/<program id>.json. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -28,7 +28,7 @@ import { readFitsHeader, type FitsHeader } from '../../fits.mts';
 import { binaryTable, numbers, tableColumn, text as cell } from '../interferometry/fits-table.mts';
 import { readRepeatingHeader } from './product-file.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
-import { mastDownloadUrl, mastRequest, type MastFile } from '../jwst/mast.mts';
+import { MAST_CACHE, mastDownloadUrl, mastFile, mastRequest, type MastFile } from '../astronomy-packages/mast.mts';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');
 const NAME = /^[A-Za-z0-9._-]+$/u;
@@ -147,19 +147,17 @@ const text = (header: FitsHeader, key: string) => {
   return value.trim();
 };
 
-/** The association table of an observation, read from MAST without keeping the file: which exposures it names, what each one
+/** The association table of an observation, downloaded through Astroquery into the ignored MAST cache: which exposures it names, what each one
  * does, and the rootname of the product it builds. An exposure the table marks absent is not pinned. */
-export async function hstAssociation(uri: string): Promise<HstAssociation> {
-  const response = await fetch(mastDownloadUrl(uri), { signal: AbortSignal.timeout(120_000) });
-  if (!response.ok) throw new Error(`MAST refused ${uri}: ${response.status}`);
-  const bytes = Buffer.from(await response.arrayBuffer());
-  if (bytes.length > 4 * 1024 * 1024) throw new Error(`${uri} is larger than an association table.`);
+export async function hstAssociation(file: MastFile): Promise<HstAssociation> {
+  if (file.bytes > 4 * 1024 * 1024) throw new Error(`${file.uri} is larger than an association table.`);
+  const bytes = await readFile(await mastFile(file, MAST_CACHE));
   // ACS association tables repeat NEXTEND in their primary header (j9xe05010, j9z001010), which the shared reader refuses as a
   // duplicate field (product-file.mts). The primary of an association carries no data, so the table follows its cards.
   const primary = readRepeatingHeader(bytes);
-  if (primary.header.NAXIS !== 0) throw new Error(`${uri} is not an association table: its primary holds data.`);
+  if (primary.header.NAXIS !== 0) throw new Error(`${file.uri} is not an association table: its primary holds data.`);
   const extension = readRepeatingHeader(bytes, primary.dataOffset);
-  if (extension.header.XTENSION !== 'BINTABLE') throw new Error(`${uri} does not begin with a binary table.`);
+  if (extension.header.XTENSION !== 'BINTABLE') throw new Error(`${file.uri} does not begin with a binary table.`);
   const table = binaryTable({ header: extension.header, headerOffset: primary.dataOffset, dataOffset: extension.dataOffset,
     dataBytes: bytes.length - extension.dataOffset, extname: typeof extension.header.EXTNAME === 'string' ? extension.header.EXTNAME : '' });
   const name = tableColumn(table, 'MEMNAME'), kind = tableColumn(table, 'MEMTYPE'), present = tableColumn(table, 'MEMPRSNT');
@@ -168,10 +166,10 @@ export async function hstAssociation(uri: string): Promise<HstAssociation> {
   for (let row = 0; row < table.rows; row++) {
     if (!numbers(bytes, table, row, present)[0]) continue;
     const rootname = cell(bytes, table, row, name).toLowerCase(), type = cell(bytes, table, row, kind).toUpperCase();
-    if (type.startsWith('PROD')) { if (product) throw new Error(`${uri} builds more than one product.`); product = rootname; }
+    if (type.startsWith('PROD')) { if (product) throw new Error(`${file.uri} builds more than one product.`); product = rootname; }
     else members.push({ rootname, type });
   }
-  if (!product) throw new Error(`${uri} names no product.`);
+  if (!product) throw new Error(`${file.uri} names no product.`);
   return { product, members };
 }
 
@@ -202,7 +200,7 @@ export async function hstObservation(observation: string): Promise<HstObservatio
     .sort((a, b) => a.name.localeCompare(b.name, 'en'));
   // The association names the exposures, so it is read before anything else is chosen: their files are this observation's too.
   const [asn] = listed(['ASN'], new Set([observation]));
-  const association = asn ? await hstAssociation(asn.uri) : undefined;
+  const association = asn ? await hstAssociation(asn) : undefined;
   const rootnames = new Set([observation, ...association ? [association.product, ...association.members.map(member => member.rootname)] : []]);
   const inputs = listed(INPUT_KINDS, rootnames), calibrated = listed(PRODUCT_KINDS, rootnames);
   const raws = inputs.filter(input => suffixOf(input.name) === 'RAW');

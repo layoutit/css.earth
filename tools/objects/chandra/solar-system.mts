@@ -30,6 +30,7 @@ import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { addProductEvidence, productRecordPath, readProductRecord, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun } from '../product-record.mts';
+import { astroqueryRows } from '../astronomy-packages/client.mts';
 import type { FitsHeader } from '../../fits.mts';
 import { requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { toolchainPython } from '../jwst/mast.mts';
@@ -39,7 +40,6 @@ import { column, eventTable, gunzipFile, type EventTable } from './events.mts';
 import { chandraFiles, chandraToolchainDigest } from './reprocess.mts';
 import { chandraToolchain, chandraVersions, CHANDRA_ROOT } from './toolchain.mts';
 
-export const HORIZONS = 'https://ssd.jpl.nasa.gov/api/horizons.api';
 /** Horizons' observer code for the Chandra X-ray Observatory: site 500 (body centre) of body -151. Verified live. */
 export const CHANDRA_OBSERVER = '500@-151';
 /** Horizons' body number for each moving target this route knows, by the name the archive puts in OBJECT. */
@@ -105,37 +105,18 @@ export function radialProfile(xs: Float64Array, ys: Float64Array, grid: SkyGrid,
   };
 }
 
-/** The body's apparent angular diameter, in arcseconds, as Horizons gives it for an observer at Chandra. The query is returned
- * with it, so a receipt states exactly what was asked. */
+/** The body's apparent angular diameter, in arcseconds, from Astroquery's typed Horizons table for an observer at Chandra. */
 export async function horizonsAngularDiameter(body: string, startUtc: string, stopUtc: string) {
-  const parameters = new URLSearchParams({ format: 'text', COMMAND: `'${body}'`, OBJ_DATA: 'NO', MAKE_EPHEM: 'YES',
-    EPHEM_TYPE: 'OBSERVER', CENTER: `'${CHANDRA_OBSERVER}'`, START_TIME: `'${startUtc}'`, STOP_TIME: `'${stopUtc}'`,
-    STEP_SIZE: '1', QUANTITIES: "'1,13'" });
-  const url = `${HORIZONS}?${parameters}`;
-  const response = await fetch(url, { signal: AbortSignal.timeout(300_000) });
-  if (!response.ok) throw new Error(`Horizons refused the query: ${response.status}`);
-  const body_ = await response.text();
-  const rows = body_.slice(body_.indexOf('$$SOE') + 5, body_.indexOf('$$EOE')).split('\n').map(line => line.trim()).filter(Boolean);
-  if (!rows.length) throw new Error(`Horizons returned no ephemeris: ${body_.replace(/\s+/gu, ' ').slice(0, 300)}`);
-  // Each row is: date, time, RA (h m s), Dec (d m s), angular diameter.
-  const parsed = rows.map(row => {
-    const parts = row.trim().split(/\s+/u);
-    const diameter = Number(parts.at(-1));
-    const [rh, rm, rs, dd, dm, ds] = parts.slice(-7, -1).map(Number);
-    if (!Number.isFinite(diameter) || diameter <= 0 || [rh, rm, rs, dd, dm, ds].some(value => !Number.isFinite(value)))
-      throw new Error(`Horizons row is not a position and diameter: ${row}`);
-    const raDeg = (rh! + rm! / 60 + rs! / 3600) * 15;
-    const decDeg = Math.sign(dd!) * (Math.abs(dd!) + dm! / 60 + ds! / 3600);
-    return { diameter, raDeg, decDeg };
-  });
+  const rows = await astroqueryRows({ operation: 'horizons-ephemerides', id: body, location: CHANDRA_OBSERVER,
+    epochs: { start: startUtc, stop: stopUtc, step: '1m' }, quantities: '1,13' });
+  const parsed = rows.map(row => ({ diameter: Number(row.ang_width), raDeg: Number(row.RA), decDeg: Number(row.DEC) }));
+  if (!parsed.length || parsed.some(row => !Number.isFinite(row.diameter) || row.diameter <= 0 || !Number.isFinite(row.raDeg) || !Number.isFinite(row.decDeg)))
+    throw new Error('Horizons returned no usable position and angular diameter.');
   const diameters = parsed.map(entry => entry.diameter);
-  // How far the body moves across the fixed sky between the first and last epoch asked for, as seen from Chandra.
   const first = parsed[0]!, last = parsed.at(-1)!;
   const motionArcseconds = Math.hypot((last.raDeg - first.raDeg) * Math.cos(first.decDeg * Math.PI / 180), last.decDeg - first.decDeg) * 3600;
-  const centre = body_.match(/Center body name: ([^\n]*)/u)?.[1]?.trim();
-  if (!centre?.includes('-151')) throw new Error(`Horizons resolved ${CHANDRA_OBSERVER} to ${centre ?? 'nothing'}, not Chandra.`);
-  return { url, observer: CHANDRA_OBSERVER, centreBody: centre, rows: rows.length, motionArcseconds: +motionArcseconds.toFixed(2),
-    startRaDeg: +first.raDeg.toFixed(6), startDecDeg: +first.decDeg.toFixed(6),
+  return { provider: 'JPL Horizons through Astroquery', observer: CHANDRA_OBSERVER, centreBody: 'Chandra (-151)', rows: rows.length,
+    motionArcseconds: +motionArcseconds.toFixed(2), startRaDeg: +first.raDeg.toFixed(6), startDecDeg: +first.decDeg.toFixed(6),
     angularDiameterArcseconds: diameters.reduce((total, value) => total + value, 0) / diameters.length,
     spreadArcseconds: Math.max(...diameters) - Math.min(...diameters) };
 }

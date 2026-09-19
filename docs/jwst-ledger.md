@@ -11,12 +11,12 @@ An observation here is one public level-3 product set: one target, one instrumen
 | NIRCAM/IMAGE | pictures, 0.6–5 µm | nebulae and shells as volumes; pictures of Solar System bodies | 19,388 | 2,040 | 480 | 21 | 7 | 1 | 1 |
 | NIRCAM/CORON | pictures with the star blocked out | discs and rings attached to their star | 285 | 79 | 0 | 1 | 75 | 2 | 2 |
 | NIRCAM/GRISM | slitless spectra: time series of one star, or every source in a field | exoplanet maps from eclipses and phase curves | 8,520 | 177 | 0 | 1 | 0 | 0 | 0 |
-| MIRI/IMAGE | pictures, 5–26 µm, and time series of one star through a filter | nebulae as volumes; exoplanet maps from eclipse photometry | 6,850 | 2,111 | 174 | 23 | 4 | 11 | 2 |
+| MIRI/IMAGE | pictures, 5–26 µm, and time series of one star through a filter | nebulae as volumes; exoplanet maps from eclipse photometry | 6,850 | 2,111 | 174 | 23 | 4 | 12 | 3 |
 | MIRI/CORON | pictures with the star nulled by a phase mask | discs and rings attached to their star | 68 | 41 | 0 | 1 | 0 | 0 | 0 |
 | MIRI/IFU | cubes: a 5–28 µm spectrum in every pixel | maps of what a surface or a gas is made of; gas velocity as depth | 25,596 | 1,428 | 1,936 | 36 | 12 | 1 | 1 |
 | MIRI/SLIT | one 5–14 µm spectrum through a slit | whole-disc composition; nothing resolved | 432 | 358 | 24 | 8 | 0 | 0 | 0 |
 | MIRI/SLITLESS | time series of one star's 5–12 µm spectrum | exoplanet maps from eclipses and phase curves | 111 | 74 | 0 | 2 | 0 | 3 | 3 |
-| NIRSPEC/IFU | cubes: a 0.6–5.3 µm spectrum in every pixel | maps of what a surface or a gas is made of; gas velocity as depth | 2,229 | 1,256 | 637 | 68 | 9 | 10 | 3 |
+| NIRSPEC/IFU | cubes: a 0.6–5.3 µm spectrum in every pixel | maps of what a surface or a gas is made of; gas velocity as depth | 2,229 | 1,256 | 637 | 68 | 9 | 11 | 4 |
 | NIRSPEC/SLIT | one spectrum through a slit, and time series of one star | exoplanet maps from eclipses and phase curves | 3,015 | 535 | 42 | 6 | 0 | 0 | 0 |
 | NIRSPEC/MSA | spectra of many faint sources at once | nothing: survey spectra of distant galaxies | 145,378 | none | none | 0 | 0 | 0 | 0 |
 | NIRISS/AMI | interferograms through a seven-hole mask | structure closer to a star than a coronagraph reaches | 65 | 14 | 1 | 1 | 0 | 0 | 0 |
@@ -93,7 +93,7 @@ One star watched for hours, which is what an exoplanet map is fitted from. These
 | hygiea | MIRI/IFU 12, NIRSPEC/IFU 2 | none | 1244 | none |
 | hyperion | NIRSPEC/IFU 2 | none | 3716 | none |
 | iapetus | NIRSPEC/IFU 4 | none | 3716 | none |
-| io | MIRI/IFU 44, NIRISS/AMI 1, NIRSPEC/IFU 6 | none | 1373, 4078, 4565 | none |
+| io | MIRI/IFU 44, NIRISS/AMI 1, NIRSPEC/IFU 6 | none | 1373, 4078, 4565 | NIRSPEC/IFU |
 | jupiter | MIRI/IFU 128, MIRI/IMAGE 10, NIRCAM/IMAGE 57, NIRISS/IMAGE 4, NIRSPEC/IFU 45 | none | 1022, 1246, 1373, 3665, 9022 | none |
 | kleopatra | NIRSPEC/IFU 1 | none | 1444 | none |
 | larissa | NIRSPEC/IFU 2 | none | 4645 | none |
@@ -156,4 +156,5 @@ None: every receipt beside a pinned program was accepted.
 
 - A target is matched by the name its proposer typed, or by position for what does not move. A moving target is matched by the first word of its name, so TITAN-LEADING is Titan; a pointing named as a background or an offset is left out. A name two objects share (Dione the moon, 106 Dione) goes to the unnumbered one unless the target carries the number. An object observed under a name this does not recognise is missed, and a nebula is matched to anything pointed within a sixth of a degree of its centre.
 - The archive changes daily; this is a dated snapshot, and only public data are counted.
+- NIRSpec integral-field entries retain every observation id, date and grating/filter pair so the capability query can offer an exact qualification command.
 - NIRSpec's multi-object mode is counted but not listed by target.

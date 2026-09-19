@@ -36,7 +36,7 @@ import { createSurfaceMapReader } from "./surface-map-context.mts";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mts';
 import { bindNavigationIntent, navigationFragments } from './navigation-fragments.mts';
-import { loadCatalogueFragment, readCatalogueFragmentPin, scheduleWhenIdle } from './catalogue-fragment-loader.mts';
+import { loadCatalogueFragment, readCatalogueFragmentPin } from './catalogue-fragment-loader.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
 import { objectClassificationLabel } from './planet-search-objects.mts';
@@ -626,8 +626,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     ];
     refreshChunks();
   };
-  // Fetches the shared catalogue fragment at most once, at first idle or as
-  // soon as the browser panel opens, whichever happens first. `filter` and
+  // Fetches the shared catalogue fragment at most once, when the browser panel
+  // first opens. `filter` and
   // `markSelection` are declared further down this closure but only run once
   // this promise settles, well after the whole controller has been built.
   let catalogueLoad: Promise<void> | null = null;
@@ -665,7 +665,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     });
     return catalogueLoad;
   };
-  if (cataloguePin) scheduleWhenIdle(windowTarget, () => { void ensureCatalogueLoaded(); });
   let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
   let showingSearchResults = false;
   let initialCategory: string | null = searchCard.hasAttribute('data-search-submitted') ? activeCategory : null;

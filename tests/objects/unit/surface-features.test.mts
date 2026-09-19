@@ -30,8 +30,22 @@ for (const id of bodies) {
     const bytes = await readFile(new URL(`../../../public/scenes/${id}/${plan.catalog.url.split("/").at(-1)}`, import.meta.url));
     assert.equal(bytes.length, plan.catalog.bytes);
     assert.equal(createHash("sha256").update(bytes).digest("hex"), plan.catalog.sha256);
-    const catalog = parsePreparedSurfaceFeatureCatalog(JSON.parse(bytes.toString("utf8")), plan, id);
-    assert.equal(catalog.features.length, plan.catalog.count);
+    const rawCatalog: unknown = JSON.parse(bytes.toString("utf8"));
+    const baseCatalog = parsePreparedSurfaceFeatureCatalog(rawCatalog, plan, id);
+    assert.equal(baseCatalog.features.length, plan.catalog.count);
+    const catalogs = [baseCatalog];
+    if (plan.selection) {
+      assert.deepEqual(descriptor.selection, plan.selection);
+      for (const bank of plan.selection.banks) {
+        const bankBytes = await readFile(new URL(`../../../public/scenes/${id}/${bank.url.split("/").at(-1)}`, import.meta.url));
+        assert.equal(bankBytes.length, bank.bytes);
+        assert.equal(createHash("sha256").update(bankBytes).digest("hex"), bank.sha256);
+        catalogs.push(parsePreparedSurfaceFeatureCatalog(JSON.parse(bankBytes.toString("utf8")), plan, id, bank));
+      }
+    }
+    const catalog = { ...baseCatalog, features: catalogs.flatMap(part => part.features) };
+    assert.equal(catalog.features.length, plan.catalog.count + (plan.selection?.count ?? 0));
+    if (descriptor.totalCount !== undefined) assert.equal(descriptor.totalCount, catalog.features.length);
     const node = runtime.tree.nodes[plan.target];
     assert.match(node?.className ?? "", new RegExp(`(^|\\s)${id}-body(\\s|$)`, "u"));
     const edge = descriptor.mapLeftEdgeLongitudeDeg;
@@ -88,7 +102,6 @@ for (const id of bodies) {
       // A caption note is a short Wikipedia lead summary pinned with its article; the pinned document is the only source.
       if (feature.note) { assert.ok(feature.note.text.length <= 321 && /^https?:\/\//u.test(feature.note.url), `${id}: ${feature.name} note`); if (feature.note.credit.startsWith("Wikipedia")) noted++; }
     }
-    const rawCatalog: unknown = JSON.parse(bytes.toString("utf8"));
     assert.ok(record(rawCatalog));
     if (rawCatalog.notes !== undefined) {
       assert.ok(record(rawCatalog.notes) && rawCatalog.notes.count === noted && rawCatalog.notes.license === "CC BY-SA 4.0", `${id}: notes provenance`);

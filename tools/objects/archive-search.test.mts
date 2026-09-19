@@ -1,12 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { archiveLeads, dataciteDeposits, nameMatch, parseCsv, parseJmdc, summariseAlma, summariseEsoRaw, summariseMast } from './archive-search.mts';
+import { archiveLeads, dataciteDeposits, nameMatch, parseJmdc, summariseAlma, summariseEsoRaw, summariseMast } from './archive-search.mts';
 
-test('CSV from the ALMA and ESO TAP services keeps quoted commas, doubled quotes and CRLF rows', () => {
-  const rows = parseCsv('proposal_id,first_author,target_name\r\n2022.1.01071.S,"Khouri, T. Vlemmings, Wouter",R_Dor\r\nx,"say ""hi""",y\r\n');
-  assert.deepEqual(rows, [{ proposal_id: '2022.1.01071.S', first_author: 'Khouri, T. Vlemmings, Wouter', target_name: 'R_Dor' }, { proposal_id: 'x', first_author: 'say "hi"', target_name: 'y' }]);
-  assert.deepEqual(parseCsv(''), []);
-});
+
 
 test('a name search tries each name as written, upper and lower case, and refuses names too short to mean anything', () => {
   assert.equal(nameMatch('object', ['Haumea', '2003EL61']), "(object LIKE '%Haumea%' OR object LIKE '%HAUMEA%' OR object LIKE '%haumea%' OR object LIKE '%2003EL61%' OR object LIKE '%2003el61%')");

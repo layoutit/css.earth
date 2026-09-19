@@ -61,6 +61,7 @@ async function uploadOne(asset: PublishAsset): Promise<void> {
 async function isPublished(key: string, expectedBytes: number): Promise<boolean> {
   const response = await fetch(`${RUNTIME_ASSET_ORIGIN}/${key}`, { method: "HEAD" }).catch(() => null);
   if (!response || !response.ok) return false;
+  if (response.headers.get("content-type")?.split(";", 1)[0]?.trim().toLowerCase() !== contentType(key)) return false;
   // See publish-verification.mts's headOk: a compressed (e.g. brotli) response can omit content-length entirely.
   const contentLength = response.headers.get("content-length");
   return contentLength === null || Number(contentLength) === expectedBytes;

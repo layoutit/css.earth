@@ -43,6 +43,7 @@ import { loadAstronomyPackage } from "../src/platform/astronomy-package.mts";
 import { authoredObject } from './authored-object.mts';
 
 const markerTileSize = 16;
+export const BODY_MARKER_ATLAS_PAGE_SIZE = 256;
 const PLANET_MARKER_PLANETS = Object.freeze(
   SCENE_OBJECTS
     .toSorted((left, right) => left.distance.meters - right.distance.meters),
@@ -96,7 +97,10 @@ export async function prepareNavigation({
     const stagedOutput = resolve(staging, "assets");
     await mkdir(stagedOutput);
     const result = catalogOnly ? { planetCount: descriptors.length } : await renderNavigation({ projectRoot, outputRoot: stagedOutput, descriptors: selected });
-    if (!catalogOnly) await prepareContextMarkers({ projectRoot, outputRoot: stagedOutput, descriptors: selected, planets });
+    if (!catalogOnly) {
+      await prepareContextMarkers({ projectRoot, outputRoot: stagedOutput, descriptors: selected, planets });
+      await prepareBodyMarkerAtlases({ outputRoot: stagedOutput, descriptors, directories: [stagedOutput, outputRoot] });
+    }
     const presentations = await markerPresentations(descriptors, planets, [stagedOutput, outputRoot]);
     const stagedPresentation = resolve(staging, "presentation.mjs");
     await writeFile(stagedPresentation, "// Generated from object-owned marker recipes. Do not edit.\nexport const PREPARED_NAVIGATION_MARKERS = Object.freeze(" + JSON.stringify(presentations) + ");\n");
@@ -135,17 +139,57 @@ async function markerPresentations(descriptors: readonly ObjectMarkerDescriptor[
     throw new Error(`Missing prepared navigation image: ${filename}. Run prepare:navigation for its body.`);
   };
   const entries = [];
-  for (const descriptor of descriptors) {
+  for (const [descriptorIndex, descriptor] of descriptors.entries()) {
     const id = descriptor.planetId;
+    const page = Math.floor(descriptorIndex / BODY_MARKER_ATLAS_PAGE_SIZE);
+    const index = descriptorIndex % BODY_MARKER_ATLAS_PAGE_SIZE;
+    const count = Math.min(BODY_MARKER_ATLAS_PAGE_SIZE, descriptors.length - page * BODY_MARKER_ATLAS_PAGE_SIZE);
+    const pageName = `body-markers-${String(page).padStart(2, '0')}`;
     for (const density of [1, 2]) {
-      const image = await metadata(`body-${id}${density === 2 ? '@2x' : ''}.webp`);
-      if (image.width !== markerTileSize * density || image.height !== markerTileSize * density) throw new TypeError(`Invalid marker dimensions: ${id}.`);
+      const image = await metadata(`${pageName}${density === 2 ? '@2x' : ''}.webp`);
+      if (image.width !== markerTileSize * density * count || image.height !== markerTileSize * density) throw new TypeError(`Invalid marker atlas dimensions: ${pageName}.`);
     }
     const context = parents.has(id) || descriptor.context ? await metadata(`${id}-context.webp`) : null;
-    entries.push([id, { url: `/navigation/body-${id}.webp`, url2x: `/navigation/body-${id}@2x.webp`, url2xPixels: markerTileSize * 2, index: 0, count: 1,
+    entries.push([id, { url: `/navigation/${pageName}.webp`, url2x: `/navigation/${pageName}@2x.webp`, url2xPixels: markerTileSize * 2, index, count,
       presentation: descriptor.presentation, ...(context ? { context: { url: `/navigation/${id}-context.webp`, pixels: context.width } } : {}) }]);
   }
   return Object.fromEntries(entries);
+}
+
+/** Pack the object-owned 16 px markers into bounded horizontal pages. The
+ * individual prepared images remain the ownership/oracle artifacts; runtime
+ * presentation references only these pages, collapsing hundreds of requests. */
+export async function prepareBodyMarkerAtlases({ outputRoot, descriptors, directories }: {
+  outputRoot: string; descriptors: readonly ObjectMarkerDescriptor[]; directories: readonly string[];
+}) {
+  if (!descriptors.length) throw new TypeError('Marker atlases require at least one descriptor.');
+  const locate = async (filename: string) => {
+    for (const directory of directories) {
+      const path = resolve(directory, filename);
+      try { if ((await lstat(path)).isFile()) return path; }
+      catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
+    }
+    throw new Error(`Missing prepared navigation image: ${filename}.`);
+  };
+  for (let start = 0, page = 0; start < descriptors.length; start += BODY_MARKER_ATLAS_PAGE_SIZE, page++) {
+    const members = descriptors.slice(start, start + BODY_MARKER_ATLAS_PAGE_SIZE);
+    const pageName = `body-markers-${String(page).padStart(2, '0')}`;
+    for (const density of [1, 2]) {
+      const tile = markerTileSize * density;
+      // Copy decoded straight-alpha pixels, not a composite operation: blending
+      // partially transparent edges changes their RGB by a rounding unit.
+      const tiles = await Promise.all(members.map(async ({ planetId }) => sharp(await locate(`body-${planetId}${density === 2 ? '@2x' : ''}.webp`))
+        .ensureAlpha().raw().toBuffer({ resolveWithObject: true })));
+      if (tiles.some(({ info }) => info.width !== tile || info.height !== tile || info.channels !== 4)) throw new TypeError(`Invalid marker tile dimensions in ${pageName}.`);
+      const width = tile * members.length, pixels = Buffer.alloc(width * tile * 4);
+      for (let row = 0; row < tile; row++) for (const [index, image] of tiles.entries()) {
+        image.data.copy(pixels, (row * width + index * tile) * 4, row * tile * 4, (row + 1) * tile * 4);
+      }
+      await sharp(pixels, { raw: { width, height: tile, channels: 4 } })
+        .webp({ lossless: true, effort: 6 })
+        .toFile(resolve(outputRoot, `${pageName}${density === 2 ? '@2x' : ''}.webp`));
+    }
+  }
 }
 
 // Preparation must finish before touching accepted files. Roll back a failed

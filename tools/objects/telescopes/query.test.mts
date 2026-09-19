@@ -1,11 +1,12 @@
-/** What the capability query may and may not say. The cases run on small ledgers written here, in the shapes the five real
+/** What the capability query may and may not say. The cases run on small ledgers written here, in the shapes the real
  * ledgers use, so nothing asks an archive anything; the last cases run on the committed ledgers themselves. */
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { resolve } from 'node:path';
 import { BODY_MAP_SCHEMA } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
-import { formatAnswer, ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, queryCapabilities, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
+import { assessObservationSelection, formatAnswer, ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, QUERY_HELP, queryCapabilities, selectObservation, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
+import { hydrateTargetAssociation, parseTargetAssociationSources, TARGET_ASSOCIATIONS_SCHEMA } from './target-associations.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 const citation = 'https://jwst-docs.stsci.edu/jwst-near-infrared-spectrograph';
@@ -19,6 +20,11 @@ const CAPABILITIES = parseModeCapabilities({ schema: MODES_SCHEMA, modes: [
     instrumentResolutionArcsec: 0.5, instrumentResolutionBasis: 'the mirror assembly point spread function, under 0.5 arcsec full width at half maximum', instrumentResolutionCitation: psf },
   { telescope: 'Hubble', mode: 'STIS/CCD', wavelengths: [[0.164, 1.03]], apertureMetres: 2.4, pixelScaleArcsec: 0.05, kinds: ['image', 'spectrum'], citation },
   { telescope: 'Hubble', mode: 'STIS/FUV-MAMA', wavelengths: [[0.115, 0.17]], apertureMetres: 2.4, pixelScaleArcsec: 0.025, kinds: ['image', 'spectrum'], citation },
+  { telescope: 'Spitzer', mode: 'IRAC Map PC', wavelengths: [[3.176, 3.926], [3.988, 4.998]], apertureMetres: 0.85, pixelScaleArcsec: 1.213,
+    instrumentResolutionArcsec: 1.66, instrumentResolutionBasis: 'best cryogenic IRAC mean PRF FWHM', instrumentResolutionCitation: citation, kinds: ['image'], citation },
+  { telescope: 'Spitzer', mode: 'IRAC Map', wavelengths: [[3.176, 3.926], [3.988, 4.998], [5.02, 6.44], [6.408, 9.338]], apertureMetres: 0.85, pixelScaleArcsec: 1.213,
+    instrumentResolutionArcsec: 1.66, instrumentResolutionBasis: 'best cryogenic IRAC mean PRF FWHM', instrumentResolutionCitation: citation, kinds: ['image'], citation },
+  { telescope: 'Spitzer', mode: 'IRS Stare', wavelengths: [[5.13, 39.9]], apertureMetres: 0.85, pixelScaleArcsec: 1.8, kinds: ['spectrum'], citation },
   { telescope: 'VLT/NACO', mode: 'imaging', wavelengths: [[1, 5]], apertureMetres: 8.2, pixelScaleArcsec: 0.01326, kinds: ['image'], citation },
   { telescope: 'Juno', mode: 'JUNOCAM', wavelengths: [[0.42, 0.9]], pixelScaleArcsec: 138.7, kinds: ['strips'], citation }] });
 
@@ -37,13 +43,24 @@ const HST_LEDGER = { schema: 'cssearth-hst-ledger@1', archiveDate: '2026-09-19',
 const CHANDRA_LEDGER = { schema: 'cssearth-chandra-ledger@1', measured: '2026-09-19', archive: { byInstrument: { 'HRC-I': 2006, 'ACIS-S': 14_863 } },
   modes: { 'ACIS-S no grating TIMED/FAINT': { state: 'reproduced', program: 'jupiter-acis', obsid: 18_676, target: 'Jupiter' } },
   shippedObjects: { jupiter: { matchedBy: 'target name', observations: 2, longest: [{ obsid: 18_676, target: 'Jupiter', instrument: 'ACIS-S', grating: 'NONE', exposureKs: 9.3, startDate: '2016-05-24T12:00:00' }] } } };
-const NACO_LEDGER = { schema: 'cssearth-naco-ledger@1', measured: '2026-09-19',
+const NACO_LEDGER = { schema: 'cssearth-naco-ledger@2', measured: '2026-09-19',
   modes: [{ mode: 'imaging', frames: 10, programs: ['ceres-080C0881'], receipts: ['ceres-080C0881.COADDED_IMG.reproduction.json'], state: 'reduced' },
     { mode: 'cube', frames: 4, programs: [], receipts: [], state: 'refused', reason: 'This route refuses the mode.' }],
-  objects: [{ id: 'ceres', targets: ['CERES'], frames: 14, programmes: ['080.C-0881(A)'], modes: ['imaging', 'cube'] }] };
+  objects: [{ id: 'ceres', targets: ['CERES'], frames: 14, programmes: ['080.C-0881(A)'], modes: ['imaging', 'cube'], records: [
+    { id: '080.C-0881-A-CERES-2007-11-11-imaging', programme: '080.C-0881(A)', archiveTarget: 'CERES', mode: 'imaging', night: '2007-11-11',
+      startIso: '2007-11-11T02:38:47Z', endIso: '2007-11-11T02:54:00Z', frames: 10 }] },
+    { id: 'vesta', targets: ['VESTA'], frames: 217, programmes: ['076.C-0580(A)'], modes: ['imaging', 'spectroscopy'], records: [
+      { id: '076.C-0580-A-VESTA-2006-01-01-imaging', programme: '076.C-0580(A)', archiveTarget: 'VESTA', mode: 'imaging', night: '2006-01-01',
+        startIso: '2006-01-01T01:00:00Z', endIso: '2006-01-01T02:00:00Z', frames: 100 }] }] };
 const JUNO_LEDGER = { schema: 'cssearth-junocam-ledger@1', measured: '2026-09-19', objects: [
   { id: 'europa', target: 'EUROPA', colourImages: 52, measuredImages: 4, programs: ['europa-pj45'], state: 'measured', why: '4 image(s) registered.' },
   { id: 'io', target: 'IO', colourImages: 247, measuredImages: 0, programs: [], state: 'not measured', why: 'No program of this target is pinned.' }] };
+const SPITZER_LEDGER = { schema: 'cssearth-spitzer-ledger@4', archiveDate: '2026-09-19', searched: ['itokawa'], modes: [
+  { mode: 'IRAC Map PC', tool: null, programs: [], checked: [], receipts: [] }, { mode: 'IRS Stare', tool: null, programs: [], checked: [], receipts: [] }], holdings: [{ object: 'itokawa', modes: { 'IRAC Map PC': 1, 'IRS Stare': 2 }, records: [
+    { id: '1', programme: '292', mode: 'IRS Stare', title: 'epoch one', startIso: '2007-05-03T23:01:47.812Z', endIso: '2007-05-03T23:36:43.455Z' },
+    { id: '2', programme: '292', mode: 'IRS Stare', title: 'epoch two', startIso: '2007-05-04T01:42:54.417Z', endIso: '2007-05-04T02:17:50.064Z' },
+    { id: '3', programme: '61012', mode: 'IRAC Map PC', title: 'warm IRAC', startIso: '2010-05-15T14:35:42.395Z', endIso: '2010-05-15T14:49:52.594Z' },
+  ] }] };
 
 const bodyMap = (telescope: string, instrument: string, id: string) => ({ schema: BODY_MAP_SCHEMA,
   definition: { quantity: 'salt band depth', units: 'dimensionless', timeDependence: 'surface-property', method: { window: [0.45, 0.5] }, source: 'a paper' },
@@ -54,7 +71,9 @@ const bodyMap = (telescope: string, instrument: string, id: string) => ({ schema
     angularResolution: { majorArcsec: 0.05, minorArcsec: 0.05, basis: 'fitted point spread function' } }] });
 
 const inputs = (ledgers: readonly { telescope: string; value: unknown }[], rest: Partial<QueryInputs> = {}): QueryInputs =>
-  ({ ledgers: ledgers.map(entry => ({ ...entry, path: `data/${entry.telescope}/ledger.json` })), capabilities: CAPABILITIES, bodyMaps: [], ...rest });
+  ({ ledgers: ledgers.map(entry => ({ ...entry, path: `data/${entry.telescope}/ledger.json` })), capabilities: CAPABILITIES,
+    targetCatalogue: ['europa', 'hd-181327', 'ceres', 'vesta', 'jupiter', 'itokawa', 'io', 'flora', 'm42', 'bennu', 'comet-1p', 'comet-81p', 'nix', 'hydra'].map(id => ({ id, name: id === 'bennu' ? 'Bennu' : id, aliases: [] })),
+    targetAssociations: [], bodyMaps: [], ...rest });
 const candidate = (answer: CapabilityAnswer, mode: string): Candidate => {
   const found = answer.candidates.find(entry => entry.mode === mode);
   assert.ok(found, `no candidate for ${mode}`);
@@ -81,12 +100,153 @@ test('a gap between the two intervals of a mode is not coverage', () => {
     .meetsConstraints.wavelength?.answer, 'no');
 });
 
+test('targets resolve through the shipped catalogue, while a near typo is a distinct unknown target', () => {
+  const known = queryCapabilities({ target: 'Bennu', wavelengthMicrometres: [3.5, 3.9] }, inputs([]));
+  assert.equal(known.target, 'bennu');
+  assert.deepEqual(known.targetResolution, { status: 'resolved', requested: 'Bennu', canonical: { id: 'bennu', name: 'Bennu' }, matchedBy: 'name' });
+  const typo = queryCapabilities({ target: 'bannu', wavelengthMicrometres: [3.5, 3.9] }, inputs([]));
+  assert.equal(typo.endpoint.status, 'unknown-target');
+  assert.deepEqual(typo.endpoint.blockerCodes, ['unknown-target']);
+  assert.deepEqual(typo.targetResolution.status === 'unknown' ? typo.targetResolution.suggestions.map(entry => entry.id) : [], ['bennu']);
+  assert.deepEqual(typo.withoutTheTarget, []);
+  assert.match(formatAnswer(typo), /Did you mean Bennu \(bennu\)/u);
+});
+
+test('an unsearched target is an incomplete index, while an explicit empty search is a real negative', () => {
+  const base = { schema: 'cssearth-spitzer-ledger@4', archiveDate: '2026-09-19', modes: [], holdings: [], unanswered: [], searched: [] };
+  const skipped = queryCapabilities({ target: 'comet-1p', wavelengthMicrometres: [0.6, 0.7], time: { any: true }, angularResolutionArcsec: 2,
+    kind: 'image', result: 'telescope-product' }, inputs([{ telescope: 'spitzer', value: { ...base, notAsked: [{ object: 'comet-1p', reason: 'moving-target identifier unavailable' }] } }]));
+  assert.equal(skipped.endpoint.status, 'index-incomplete');
+  assert.deepEqual(skipped.endpoint.blockerCodes, ['target-index-unavailable']);
+  assert.deepEqual(skipped.targetCoverage, [{ telescope: 'spitzer', ledger: 'data/spitzer/ledger.json', state: 'not-searched', reason: 'moving-target identifier unavailable' }]);
+  assert.deepEqual(skipped.withoutTheTarget, []);
+  const unsearched = queryCapabilities({ ...skipped.request }, inputs([{ telescope: 'spitzer', value: { ...base, notAsked: [] } }]));
+  assert.equal(unsearched.endpoint.status, 'index-incomplete');
+  const empty = queryCapabilities({ ...skipped.request }, inputs([{ telescope: 'spitzer', value: { ...base, searched: ['comet-1p'], notAsked: [] } }]));
+  assert.equal(empty.endpoint.status, 'no-selectable-candidate');
+  assert.deepEqual(empty.withoutTheTarget.map(entry => entry.telescope), ['spitzer']);
+});
+
+test('PDS products rejected by normalization are not reported as an empty archive', () => {
+  const ledger = { schema: 'cssearth-pds-ledger@1', archiveDate: '2026-09-19', searched: ['comet-81p'], modes: [], objects: [], searches: [
+    { target: 'comet-81p', registryProducts: 2, admittedProducts: 0, scope: { productClass: 'Product_Observational', processingLevels: 'all' },
+      rejected: [{ lidvid: 'urn:nasa:pds:a::1.0', reason: 'ambiguous instrument' }, { lidvid: 'urn:nasa:pds:b::1.0', reason: 'unsupported structure' }] },
+  ] };
+  const answer = queryCapabilities({ target: 'comet-81p', wavelengthMicrometres: [0.5, 0.7], time: { any: true }, kind: 'image', result: 'telescope-product', angularResolutionArcsec: 1 },
+    inputs([{ telescope: 'pds', value: ledger }]));
+  const coverage = answer.targetCoverage[0]!;
+  assert.equal(coverage.state, 'unsupported-products');
+  assert.deepEqual([coverage.registryProducts, coverage.admittedProducts, coverage.rejected?.length], [2, 0, 2]);
+  assert.deepEqual(answer.withoutTheTarget, []);
+  assert.deepEqual(answer.endpoint.blockerCodes, ['archive-products-unsupported']);
+});
+
+test('an indexed observation exposes a telescope-owned qualification action when qualification is the only blocker', () => {
+  const ledger = { schema: 'cssearth-spitzer-ledger@4', archiveDate: '2026-09-19', searched: ['bennu'], modes: [
+    { mode: 'IRAC Map', tool: 'tools/objects/spitzer/mosaic.mts', programs: [], checked: [], receipts: [] }],
+  holdings: [{ object: 'bennu', modes: { 'IRAC Map': 1 }, records: [
+    { id: '21415424', programme: '289', mode: 'IRAC Map', title: 'Bennu', startIso: '2007-05-08T16:23:47.636Z', endIso: '2007-05-08T16:27:43.816Z' }] }] };
+  const request = { target: 'bennu', wavelengthMicrometres: [3.5, 3.9] as const, time: { any: true as const }, angularResolutionArcsec: 2,
+    kind: 'image' as const, result: 'telescope-product' as const };
+  const answer = queryCapabilities(request, inputs([{ telescope: 'spitzer', value: ledger }]));
+  const irac = candidate(answer, 'IRAC Map');
+  assert.deepEqual(irac.selectionAssessment.blockers.map(blocker => blocker.code), ['target-program-unqualified']);
+  assert.deepEqual(irac.selectionAssessment.qualificationActions, [{ kind: 'qualify-observation', observation: '21415424', archiveProgramme: '289',
+    program: 'bennu-21415424', configuration: { kind: 'spitzer-irac-channel', channel: 1 }, command: 'pnpm', arguments: ['--silent', 'telescope:qualify', '--target', 'bennu', '--telescope', 'Spitzer',
+      '--mode', 'IRAC Map', '--observation', '21415424', '--channel', '1'] }]);
+  const qualified = queryCapabilities(request, inputs([{ telescope: 'spitzer', value: { ...ledger, modes: [{ ...ledger.modes[0], programs: ['bennu-21415424'], checked: ['bennu-21415424'] }] } }]));
+  assert.equal(candidate(qualified, 'IRAC Map').selectionAssessment.selectable, true);
+  assert.deepEqual(candidate(qualified, 'IRAC Map').selectionAssessment.qualificationActions, []);
+});
+
+test('a cited target-in-field association exposes exact observations without changing the archive target', () => {
+  const source = { schema: TARGET_ASSOCIATIONS_SCHEMA, associations: [{ target: 'nix', archive: 'mast', collection: 'HST',
+    observations: ['j96o01010', 'j96o02010'],
+    evidence: [{ citation: 'https://example.test/paper', locator: 'table 1', establishes: 'Nix is measured in both Pluto pointings.' }] }] };
+  const associations = hydrateTargetAssociation(parseTargetAssociationSources(source)[0]!, { astroquery: '0.4.11', queriedAt: '2026-09-19T12:00:00.000Z', observations: [
+    { id: 'j96o01010', collection: 'HST', archiveTarget: 'PLUTO', programme: '10427', mode: 'ACS/WFC', startIso: '2005-05-15T00:21:00.197Z', endIso: '2005-05-15T01:56:09.210Z', filter: 'F606W' },
+    { id: 'j96o02010', collection: 'HST', archiveTarget: 'PLUTO', programme: '10427', mode: 'ACS/WFC', startIso: '2005-05-18T03:06:58.213Z', endIso: '2005-05-18T03:46:03.197Z', filter: 'F606W' }] });
+  const ledger = { ...HST_LEDGER, configurations: [...HST_LEDGER.configurations,
+    { configuration: 'ACS/WFC', tool: 'tools/objects/hst/calibrate.mts', programs: [], checked: [], archiveFinal: { programs: [], qualified: [] } }] };
+  const answer = queryCapabilities({ target: 'nix', wavelengthMicrometres: [0.5, 0.7], time: { any: true }, angularResolutionArcsec: 1,
+    kind: 'image', result: 'telescope-product' }, inputs([{ telescope: 'hst', value: ledger }], { targetAssociations: associations }));
+  const acs = candidate(answer, 'ACS/WFC');
+  assert.deepEqual(acs.observations, { count: 2, scope: 'this-mode', records: [
+    { id: 'j96o01010', startIso: '2005-05-15T00:21:00.197Z', endIso: '2005-05-15T01:56:09.210Z', filter: 'F606W', programme: '10427', archiveTarget: 'PLUTO' },
+    { id: 'j96o02010', startIso: '2005-05-18T03:06:58.213Z', endIso: '2005-05-18T03:46:03.197Z', filter: 'F606W', programme: '10427', archiveTarget: 'PLUTO' }] });
+  assert.deepEqual(acs.programmes, ['10427']);
+  assert.equal(acs.toolkitSupport.level, 'tool-without-checked-program');
+  assert.deepEqual(acs.selectionAssessment.blockers.map(blocker => blocker.code), ['target-program-unqualified']);
+  assert.deepEqual(acs.evidence.targetAssociations, [{ source: 'data/telescopes/target-associations.json', archive: 'mast', collection: 'HST', archiveTarget: 'PLUTO', programme: '10427',
+    astroquery: '0.4.11', queriedAt: '2026-09-19T12:00:00.000Z',
+    citation: 'https://example.test/paper', locator: 'table 1', establishes: 'Nix is measured in both Pluto pointings.' }]);
+  assert.match(formatAnswer(answer), /MAST HST via Astroquery 0\.4\.11.*archive target PLUTO, programme 10427/u);
+  const unrelated = queryCapabilities({ ...answer.request, target: 'hydra' }, inputs([{ telescope: 'hst', value: ledger }], { targetAssociations: associations }));
+  assert.equal(unrelated.candidates.length, 0, 'a field association belongs only to the target its evidence names');
+});
+
 test('a mode with no recorded capabilities answers unknown and says so, rather than guessing', () => {
   const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [5, 7], kind: 'cube' }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }]));
   const miri = candidate(answer, 'MIRI/IFU');
   assert.deepEqual(['wavelength', 'angularResolution', 'kind'].map(name => miri.meetsConstraints[name]?.answer), ['unknown', 'unknown', 'unknown']);
   assert.match(miri.meetsConstraints.wavelength!.reason, /Capabilities not recorded/u);
   assert.ok(miri.unknown.some(line => line.includes('Capabilities not recorded')));
+});
+
+test('an explicit selection keeps unknowns and refuses a hard no or another target\'s program', () => {
+  const complete = { target: 'europa', wavelengthMicrometres: [3.4, 3.6] as const, kind: 'cube' as const, result: 'body-map' as const,
+    time: { any: true as const }, angularResolutionArcsec: 0.3 };
+  const answer = queryCapabilities(complete, inputs([{ telescope: 'jwst', value: JWST_LEDGER }]));
+  const selected = selectObservation(answer, 'JWST', 'NIRSPEC/IFU', 'europa-1250');
+  assert.equal(selected.toolkitLevel, 'proven');
+  assert.equal(selected.bodyMapSupport.answer, 'yes');
+  assert.equal(selected.constraints.wavelength?.answer, 'yes');
+  assert.ok(selected.unresolved.some(entry => entry.constraint === 'angularResolution' && entry.answer === 'partial'));
+  assert.equal(answer.endpoint.status, 'selectable-candidates');
+  assert.equal(candidate(answer, 'NIRSPEC/IFU').selectionAssessment.selectable, true);
+  assert.deepEqual(candidate(answer, 'NIRSPEC/IFU').selectionAssessment.nextActions[0]?.arguments.slice(-7),
+    ['--select-telescope', 'JWST', '--select-mode', 'NIRSPEC/IFU', '--program', 'europa-1250', '--json']);
+  assert.throws(() => selectObservation(answer, 'JWST', 'NIRSPEC/IFU', 'sn-1987a-1232'), /not a pinned or archive-final program of europa/u);
+  const impossible = queryCapabilities({ ...complete, wavelengthMicrometres: [8, 9] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }]));
+  assert.throws(() => selectObservation(impossible, 'JWST', 'NIRSPEC/IFU', 'europa-1250'), /cannot answer this request: wavelength/u);
+});
+
+test('selection requires a complete scientific request and exposes the shared NACO body-map author', () => {
+  const incomplete = queryCapabilities({ target: 'ceres', wavelengthMicrometres: [2, 2.3], kind: 'image' }, inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
+  assert.equal(incomplete.endpoint.status, 'request-incomplete');
+  assert.deepEqual(assessObservationSelection(incomplete, 'VLT/NACO', 'imaging', 'ceres-080C0881').blockers.map(blocker => blocker.code),
+    ['incomplete-request', 'incomplete-request', 'incomplete-request']);
+  const complete = queryCapabilities({ target: 'ceres', wavelengthMicrometres: [2, 2.3], kind: 'image', result: 'body-map', time: { any: true }, angularResolutionArcsec: 0.1 },
+    inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
+  const naco = candidate(complete, 'imaging');
+  assert.equal(naco.toolkitSupport.level, 'proven');
+  assert.equal(naco.bodyMapSupport.answer, 'yes');
+  assert.equal(naco.bodyMapSupport.author, 'tools/objects/naco/author-body-map.mts');
+  assert.equal(selectObservation(complete, 'VLT/NACO', 'imaging', 'ceres-080C0881').programme, 'ceres-080C0881');
+});
+
+test('help states the complete request and the direction of a resolution limit', () => {
+  assert.match(QUERY_HELP, /largest acceptable angular or surface scale/u);
+  assert.match(QUERY_HELP, /pnpm --silent telescope:query/u);
+});
+
+test('a Vesta selection reports every blocker and human output separates archive from toolkit programs', () => {
+  const answer = queryCapabilities({ target: 'vesta', wavelengthMicrometres: [1, 2], kind: 'image', result: 'body-map', time: { any: true }, angularResolutionArcsec: 0.1 },
+    inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
+  const assessment = assessObservationSelection(answer, 'VLT/NACO', 'imaging', '076.C-0580(A)');
+  assert.deepEqual(assessment.blockers.map(blocker => blocker.code), ['programme']);
+  assert.throws(() => selectObservation(answer, 'VLT/NACO', 'imaging', '076.C-0580(A)'), error => {
+    assert.match(String(error), /076\.C-0580\(A\) is not a pinned or archive-final program of vesta/u);
+    return true;
+  });
+  const text = formatAnswer(answer);
+  assert.match(text, /archive programmes recorded for vesta: 076\.C-0580\(A\)/u);
+  assert.match(text, /pinned toolkit programs: ceres-080C0881/u);
+  assert.match(text, /checked toolkit programs: ceres-080C0881/u);
+  assert.match(text, /usable program of vesta: none/u);
+  assert.deepEqual(candidate(answer, 'imaging').selectionAssessment.qualificationActions.map(action => action.configuration), [
+    { kind: 'naco-program-night', programme: '076.C-0580(A)', archiveTarget: 'VESTA', night: '2006-01-01' },
+  ]);
 });
 
 test('what the optics resolve can say no; what the pixels sample cannot', () => {
@@ -147,11 +307,24 @@ test('time is unknown unless the ledger dates that object in that mode', () => {
   assert.match(outside.meetsConstraints.time!.reason, /does not date the rest/u);
 });
 
+test('a complete observation index gives identities and a definite time refusal', () => {
+  const answer = queryCapabilities({ target: 'itokawa', wavelengthMicrometres: [2, 2.2], time: { fromIso: '2005-09-01', toIso: '2005-10-31' },
+    surfaceResolutionKm: 0.1, kind: 'image', result: 'body-map' }, inputs([{ telescope: 'spitzer', value: SPITZER_LEDGER }]));
+  const irac = candidate(answer, 'IRAC Map PC');
+  assert.equal(irac.meetsConstraints.wavelength?.answer, 'no');
+  assert.equal(irac.meetsConstraints.time?.answer, 'no');
+  assert.deepEqual(irac.programmes, ['61012']);
+  assert.deepEqual(irac.observations?.records?.map(record => record.id), ['3']);
+  assert.match(formatAnswer(answer), /observation 3, programme 61012: 2010-05-15/u);
+});
+
 test('toolkit support separates a checked program of this target from a tool that has never been proved', () => {
   const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [3.4, 3.6] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }, { telescope: 'juno', value: JUNO_LEDGER }]));
   const nirspec = candidate(answer, 'NIRSPEC/IFU');
   assert.equal(nirspec.toolkitSupport.level, 'proven');
   assert.deepEqual([nirspec.toolkitSupport.targetProgramPinned, nirspec.toolkitSupport.targetProgramChecked], [true, true]);
+  assert.deepEqual([nirspec.toolkitSupport.productionMethod, nirspec.toolkitSupport.evidenceBasis, nirspec.toolkitSupport.acceptanceCriterion],
+    ['local-pipeline', 'accepted-route-receipts', 'receipt-valid-for-pinned-program']);
   assert.equal(nirspec.toolkitSupport.tool, 'tools/objects/jwst/cubes/spec3.mts');
   assert.equal(candidate(answer, 'NIRCAM/IMAGE').toolkitSupport.level, 'tool-without-checked-program');
   assert.equal(candidate(answer, 'MIRI/IFU').toolkitSupport.level, 'none');
@@ -180,6 +353,7 @@ test('a retired instrument with a qualified archive-final program is usable with
   const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [0.13, 0.15] }, inputs([{ telescope: 'hst', value: ledger }]));
   const qualified = candidate(answer, 'HRS/1').toolkitSupport;
   assert.equal(qualified.level, 'archive-final');
+  assert.deepEqual([qualified.productionMethod, qualified.evidenceBasis, qualified.acceptanceCriterion], ['archive-final', 'archive-origin', 'archive-bytes-qualified']);
   assert.deepEqual(qualified.checked, [], 'nothing was re-calibrated on a retired instrument');
   assert.equal(qualified.tool, undefined);
   assert.deepEqual(qualified.archiveFinalQualified, ['europa-ghrs-5376']);
@@ -258,6 +432,32 @@ test('the committed ledgers: Europa at 3.4 to 3.6 micrometres is a proven JWST c
   for (const entry of answer.candidates) assert.notEqual(entry.meetsConstraints.angularResolution?.answer, 'yes');
 });
 
+test('the committed ledger turns Triton NIRSpec records into runnable band-specific qualification actions', async () => {
+  const answer = queryCapabilities({ target: 'triton', wavelengthMicrometres: [1.55, 1.75], time: { fromIso: '2015-01-01', toIso: '2025-12-31' },
+    rangeKm: 4_500_000_000, surfaceResolutionKm: 1_500, kind: 'cube', result: 'body-map' }, await loadQueryInputs(ROOT, 'triton'));
+  const nirspec = candidate(answer, 'NIRSPEC/IFU');
+  assert.equal(nirspec.meetsConstraints.time?.answer, 'yes');
+  assert.deepEqual(nirspec.selectionAssessment.blockers.map(blocker => blocker.code), ['target-program-unqualified']);
+  assert.deepEqual(nirspec.selectionAssessment.qualificationActions.map(action => [action.observation, action.configuration]), [
+    ['jw01272-o003_t001_nirspec_g140h-f100lp', { kind: 'jwst-band', band: 'NIRSPEC-G140H-F100LP', wavelengthMicrometres: [1.55, 1.75] }],
+    ['jw01272-o011_t001_nirspec_g140h-f100lp', { kind: 'jwst-band', band: 'NIRSPEC-G140H-F100LP', wavelengthMicrometres: [1.55, 1.75] }],
+  ]);
+  assert.deepEqual(nirspec.selectionAssessment.qualificationActions[0]!.arguments.slice(-4),
+    ['--band', 'NIRSPEC-G140H-F100LP', '--wavelength', '1.55,1.75']);
+});
+
+test('the committed ledger turns each Pallas NACO night into a runnable archive qualification action', async () => {
+  const answer = queryCapabilities({ target: 'pallas', wavelengthMicrometres: [2.1, 2.3], time: { any: true },
+    angularResolutionArcsec: 0.1, kind: 'image', result: 'body-map' }, await loadQueryInputs(ROOT, 'pallas'));
+  const naco = answer.candidates.find(entry => entry.telescope === 'VLT/NACO' && entry.mode === 'imaging')!;
+  assert.deepEqual(naco.selectionAssessment.blockers.map(blocker => blocker.code), ['target-program-unqualified']);
+  assert.deepEqual(naco.selectionAssessment.qualificationActions.map(action => [action.observation, action.configuration]), [
+    ['074.C-0502-A-PALLAS-2005-02-02-imaging', { kind: 'naco-program-night', programme: '074.C-0502(A)', archiveTarget: 'PALLAS', night: '2005-02-02' }],
+    ['074.C-0502-A-PALLAS-2005-03-12-imaging', { kind: 'naco-program-night', programme: '074.C-0502(A)', archiveTarget: 'PALLAS', night: '2005-03-12' }],
+    ['074.C-0502-A-PALLAS-2005-03-13-imaging', { kind: 'naco-program-night', programme: '074.C-0502(A)', archiveTarget: 'PALLAS', night: '2005-03-13' }],
+  ]);
+});
+
 test('the committed ledgers: HD 181327 between 2.4 and 2.6 micrometres falls in the NIRCam coronagraphy gap', async () => {
   const loaded = await loadQueryInputs(ROOT, 'hd-181327');
   const coron = candidate(queryCapabilities({ target: 'hd-181327', wavelengthMicrometres: [2.4, 2.6] }, loaded), 'NIRCAM/CORON');
@@ -265,6 +465,119 @@ test('the committed ledgers: HD 181327 between 2.4 and 2.6 micrometres falls in 
   assert.equal(coron.meetsConstraints.angularResolution?.answer, 'unknown');
   assert.equal(coron.toolkitSupport.level, 'proven');
   assert.equal(candidate(queryCapabilities({ target: 'hd-181327', wavelengthMicrometres: [3, 3.2] }, loaded), 'NIRCAM/CORON').meetsConstraints.wavelength?.answer, 'yes');
+});
+
+test('the committed archive ledgers expose sourced capabilities without inventing toolkit support', async () => {
+  const m42 = queryCapabilities({ target: 'm42', wavelengthMicrometres: [0.5, 5] }, await loadQueryInputs(ROOT, 'm42'));
+  const irac = candidate(m42, 'IRAC Map');
+  assert.equal(irac.telescope, 'Spitzer'); assert.equal(irac.meetsConstraints.wavelength?.answer, 'partial');
+  const kcwi = candidate(m42, 'KCWI');
+  assert.equal(kcwi.telescope, 'Keck'); assert.equal(kcwi.toolkitSupport.level, 'proven'); assert.ok(kcwi.toolkitSupport.targetProgramChecked);
+  const europa = queryCapabilities({ target: 'europa', wavelengthMicrometres: [0.5, 5] }, await loadQueryInputs(ROOT, 'europa'));
+  const niri = candidate(europa, 'NIRI');
+  assert.equal(niri.telescope, 'Gemini'); assert.equal(niri.meetsConstraints.wavelength?.answer, 'unknown');
+  const nirspec = europa.candidates.find(entry => entry.telescope === 'Keck' && entry.mode === 'NIRSPEC')!;
+  assert.equal(nirspec.toolkitSupport.level, 'none', 'a pinned program is not a runnable toolkit when its pipeline is absent');
+  const selectableEuropa = queryCapabilities({ target: 'europa', wavelengthMicrometres: [0.5, 5], kind: 'spectrum', result: 'telescope-product', time: { any: true }, angularResolutionArcsec: 1 }, await loadQueryInputs(ROOT, 'europa'));
+  assert.throws(() => selectObservation(selectableEuropa, 'Keck', 'NIRSPEC', 'europa-nirspec-2006a-c213ol'), /has no usable toolkit/u);
+});
+
+test('the committed Itokawa index rules out the clean-room request and names the real AORs', async () => {
+  const answer = queryCapabilities({ target: 'itokawa', wavelengthMicrometres: [2, 2.2], time: { fromIso: '2005-09-01', toIso: '2005-10-31' },
+    surfaceResolutionKm: 0.1, kind: 'image', result: 'body-map' }, await loadQueryInputs(ROOT, 'itokawa'));
+  assert.deepEqual(answer.candidates.map(entry => entry.mode), ['IRAC Map PC', 'IRS Peakup Image', 'IRS Stare']);
+  for (const entry of answer.candidates) {
+    assert.equal(entry.meetsConstraints.wavelength?.answer, 'no');
+    assert.equal(entry.meetsConstraints.time?.answer, 'no');
+    assert.equal(entry.toolkitSupport.level, 'none');
+  }
+  assert.deepEqual(candidate(answer, 'IRAC Map PC').observations?.records?.map(record => record.id), ['35303936']);
+  assert.deepEqual(candidate(answer, 'IRS Stare').programmes, ['292', '30080']);
+});
+
+test('the committed Flora request ends explicitly after sourced candidate refusals', async () => {
+  const answer = queryCapabilities({ target: 'flora', wavelengthMicrometres: [0.55, 0.85], time: { any: true }, angularResolutionArcsec: 0.1,
+    kind: 'image', result: 'body-map' }, await loadQueryInputs(ROOT, 'flora'));
+  assert.equal(answer.endpoint.status, 'no-selectable-candidate');
+  assert.equal(answer.endpoint.selectableCandidates, 0);
+  const texes = candidate(answer, 'TEXES'), hires = candidate(answer, 'HIRES'), cube = candidate(answer, 'cube'), wfpc2 = candidate(answer, 'WFPC2/PC');
+  assert.deepEqual([texes.meetsConstraints.wavelength?.answer, texes.meetsConstraints.kind?.answer], ['no', 'no']);
+  assert.deepEqual([hires.meetsConstraints.wavelength?.answer, hires.meetsConstraints.kind?.answer], ['yes', 'no']);
+  assert.deepEqual([cube.meetsConstraints.wavelength?.answer, cube.meetsConstraints.kind?.answer], ['no', 'no']);
+  assert.deepEqual(wfpc2.selectionAssessment.blockers.map(blocker => blocker.code),
+    ['body-map-author-missing', 'target-program-unqualified']);
+  assert.match(formatAnswer(answer), /workflow: no-selectable-candidate; 0 of 4 candidate mode\(s\) can proceed/u);
+});
+
+test('the committed Halley request exposes a real IHW archive-final image and the Spitzer index gap', async () => {
+  const answer = queryCapabilities({ target: 'halley', wavelengthMicrometres: [0.6, 0.7], time: { fromIso: '1986-02-01', toIso: '1986-04-30' },
+    angularResolutionArcsec: 2, kind: 'image', result: 'telescope-product' }, await loadQueryInputs(ROOT, 'halley'));
+  assert.equal(answer.target, 'comet-1p');
+  assert.equal(answer.endpoint.status, 'selectable-candidates');
+  const ihw = candidate(answer, 'NNSN image');
+  assert.equal(ihw.observations?.count, 3523);
+  assert.deepEqual([ihw.meetsConstraints.time?.answer, ihw.meetsConstraints.kind?.answer, ihw.meetsConstraints.wavelength?.answer], ['yes', 'yes', 'unknown']);
+  assert.equal(ihw.toolkitSupport.level, 'archive-final');
+  assert.equal(ihw.selectionAssessment.selectable, true);
+  assert.deepEqual(ihw.observations?.records?.find(record => record.id === 'NNSN1121'), { id: 'NNSN1121', programme: '401132',
+    startIso: '1986-03-01T09:44:17.000Z', endIso: '1986-03-01T09:44:27.000Z', title: 'IHW GUNN_R', filter: 'GUNN_R', pixelScaleArcsec: 0.36,
+    quality: 'EXCELLENT', observatory: 'EUROPEAN SOUTHERN', instrument: 'DANISH 1.5M REFL. / GEC CCD' });
+  assert.equal(answer.targetCoverage.find(entry => entry.telescope === 'spitzer')?.state, 'not-searched');
+});
+
+test('the committed PDS bridge selects an exact Didymos product without claiming unknown wavelength or resolution', async () => {
+  const answer = queryCapabilities({ target: 'didymos', wavelengthMicrometres: [0.55, 0.65], time: { any: true },
+    angularResolutionArcsec: 5, kind: 'image', result: 'telescope-product' }, await loadQueryInputs(ROOT, 'didymos'));
+  const lmi = answer.candidates.find(entry => entry.telescope === 'Lowell/LDT' && entry.mode === 'LMI/VR calibrated image')!;
+  assert.equal(lmi.toolkitSupport.level, 'archive-final');
+  assert.equal(lmi.toolkitSupport.productionMethod, 'archive-final');
+  assert.match(lmi.toolkitSupport.reason, /retrieves and decodes products for this mode without recalibrating them/u);
+  assert.deepEqual(lmi.observations?.records?.[0]?.wavelengthIntervalMicrometres, [0.520975, 0.697365]);
+  assert.equal(lmi.selectionAssessment.selectable, true);
+  const selected = selectObservation(answer, 'Lowell/LDT', 'LMI/VR calibrated image', 'didymos-pds-lmi-20201217-0048');
+  assert.equal(selected.unresolved.some(entry => entry.constraint === 'observationWavelength'), false);
+  assert.equal(selected.unresolved.some(entry => entry.constraint === 'angularResolution'), true);
+});
+
+test('the committed Charon discovery and qualification produce a selectable multiband archive-final product', async () => {
+  const answer = queryCapabilities({ target: 'charon', wavelengthMicrometres: [0.5, 0.7], time: { any: true }, angularResolutionArcsec: 5,
+    kind: 'image', result: 'telescope-product' }, await loadQueryInputs(ROOT, 'charon'));
+  const mvic = answer.candidates.find(entry => entry.telescope === 'New Horizons' && entry.mode === 'MVIC mapped color')!;
+  assert.equal(mvic.toolkitSupport.level, 'archive-final');
+  assert.equal(mvic.selectionAssessment.selectable, true);
+  assert.deepEqual(mvic.observations?.records?.[0]?.wavelengthIntervalsMicrometres, [[0.875, 0.915], [0.78, 0.96], [0.55, 0.7], [0.4, 0.55]]);
+  const selected = selectObservation(answer, 'New Horizons', 'MVIC mapped color', 'charon-pds-nh_charon_color_mosaic');
+  assert.equal(selected.unresolved.some(entry => entry.constraint === 'observationWavelength'), false);
+  assert.equal(selected.unresolved.some(entry => entry.constraint === 'angularResolution'), true);
+});
+
+test('the committed Hydra search qualifies four separate MVIC images without inventing registration', async () => {
+  const answer = queryCapabilities({ target: 'hydra', wavelengthMicrometres: [0.5, 0.54], time: { any: true }, angularResolutionArcsec: 5,
+    kind: 'image', result: 'telescope-product' }, await loadQueryInputs(ROOT, 'hydra'));
+  const mvic = answer.candidates.find(entry => entry.telescope === 'New Horizons' && entry.mode === 'MVIC color images')!;
+  assert.equal(answer.candidates.some(entry => entry.mode === 'MVIC mapped color' || entry.mode === 'LMI/VR calibrated image'), false);
+  assert.equal(mvic.toolkitSupport.level, 'archive-final');
+  assert.equal(mvic.selectionAssessment.selectable, true);
+  assert.deepEqual(mvic.observations?.records?.[0]?.wavelengthIntervalsMicrometres, [[0.4, 0.55], [0.54, 0.7], [0.78, 0.975], [0.86, 0.91]]);
+  const selected = selectObservation(answer, 'New Horizons', 'MVIC color images', 'hydra-pds-cube_h_color_best');
+  assert.equal(selected.unresolved.some(entry => entry.constraint === 'observationWavelength'), false);
+  assert.equal(selected.unresolved.some(entry => entry.constraint === 'angularResolution'), true);
+  assert.equal(selected.bodyMapSupport.answer, 'no');
+});
+
+test('one Wild 2 query sees source-pinned Stardust PDS3 observations without a discovery command', async () => {
+  const answer = queryCapabilities({ target: 'comet-81p', wavelengthMicrometres: [0.5, 0.7], time: { any: true }, rangeKm: 240,
+    surfaceResolutionKm: 0.1, kind: 'image', result: 'body-map' }, await loadQueryInputs(ROOT, 'comet-81p'));
+  const navcam = answer.candidates.find(entry => entry.telescope === 'Stardust' && entry.mode === 'NAVCAM/RDR image')!;
+  assert.equal(navcam.observations?.count, 5);
+  assert.deepEqual(navcam.observations?.records?.map(record => record.id), ['n2069we02_rr', 'n2073we02_rr', 'n2075we02_rr', 'n2077we02_rr', 'n2079we02_rr']);
+  assert.equal(navcam.observations?.records?.[0]?.centralWavelengthMicrometres, 0.6988);
+  assert.equal(navcam.observations?.records?.[0]?.sourceFiles?.[1]?.sha256, '6fa36047b1f56f219417cc86fafb39c507c9ee83318b428942228e6f84448f62');
+  assert.deepEqual([navcam.meetsConstraints.wavelength?.answer, navcam.meetsConstraints.time?.answer, navcam.meetsConstraints.kind?.answer], ['unknown', 'yes', 'yes']);
+  assert.equal(navcam.toolkitSupport.tool, 'pds.pdr');
+  assert.equal(navcam.toolkitSupport.targetProgramPinned, true);
+  assert.deepEqual(navcam.selectionAssessment.blockers.map(blocker => blocker.code), ['body-map-author-missing']);
+  assert.equal(answer.targetCoverage.find(entry => entry.telescope === 'pds')?.state, 'observed');
 });
 
 test('the committed ledgers: no candidate for any target ever answers yes for sharpness', async () => {
@@ -287,9 +600,14 @@ test('the committed ledgers: no candidate for any target ever answers yes for sh
  * NACO techniques whose own pages state no wavelength range. The FOS and GHRS detectors left this list when their handbooks'
  * own ranges were read for the archive-final route; being sourced is not being re-calibrated here, and the query keeps those
  * two apart. */
-const WITHOUT_CAPABILITIES: readonly string[] = ['Hubble ACS', 'Hubble COS', 'Hubble COS-STIS', 'Hubble FGS', 'Hubble FOC/48', 'Hubble FOC/96',
+const WITHOUT_CAPABILITIES: readonly string[] = ['Gemini Alopeke', 'Gemini CIRPASS', 'Gemini F2', 'Gemini FLAMINGOS', 'Gemini GHOST', 'Gemini GMOS', 'Gemini GMOS-N', 'Gemini GMOS-S',
+  'Gemini GNIRS', 'Gemini GPI', 'Gemini GRACES', 'Gemini GSAOI', 'Gemini Hokupaa+QUIRC', 'Gemini IGRINS', 'Gemini IGRINS-2', 'Gemini MAROON-X', 'Gemini NICI', 'Gemini NIFS',
+  'Gemini NIRI', 'Gemini OSCIR', 'Gemini PHOENIX', 'Gemini TReCS', 'Gemini Zorro', 'Gemini bHROS', 'Gemini hrwfs', 'Gemini michelle',
+  'Hubble ACS', 'Hubble COS', 'Hubble COS-STIS', 'Hubble FGS', 'Hubble FOC/48', 'Hubble FOC/96',
   'Hubble HRS', 'Hubble HSP/UNK/POL', 'Hubble HSP/UNK/UV1', 'Hubble HSP/UNK/UV2', 'Hubble HSP/UNK/VIS', 'Hubble STIS', 'Hubble WFPC/PC',
-  'Hubble WFPC/WFC', 'Hubble WFPC2', 'VLT/NACO app', 'VLT/NACO chopping', 'VLT/NACO coronography', 'VLT/NACO cube', 'VLT/NACO differential', 'VLT/NACO fabry-perot',
+  'Hubble WFPC/WFC', 'Hubble WFPC2', 'Keck DEIMOS', 'Keck ESI', 'Keck GUIDER', 'Keck KCWI', 'Keck KPF', 'Keck LRIS', 'Keck LWS', 'Keck MOSFIRE',
+  'Keck NIRC', 'Keck NIRC2', 'Keck NIRES', 'Keck NIRSPEC', 'Keck OSIRIS',
+  'VLT/NACO app', 'VLT/NACO chopping', 'VLT/NACO coronography', 'VLT/NACO differential', 'VLT/NACO fabry-perot',
   'VLT/NACO other', 'VLT/NACO sam', 'VLT/NACO sampol'];
 
 test('every capability entry names a mode the ledgers use, and the modes without one are the known list', async () => {

@@ -38,13 +38,26 @@ node tools/objects/spitzer/compare.mts  ngc3132-4416768
 node tools/objects/spitzer/archive-ledger.mts --write
 ```
 
+For an observation returned by the shared capability query, the same stages are available through the checked dispatcher:
+
+```
+pnpm telescope:qualify --target bennu --telescope Spitzer --mode 'IRAC Map' --observation 21415424 --channel 1
+```
+
+It first requires that the canonical target, mode and AOR occur together in the committed archive index. It then runs the
+Spitzer-owned pin, mosaic and comparison functions and refreshes only repository-owned ledger state; it does not repeat or
+redate the archive survey.
+
 **`archive.mts`** finds the observation in the Spitzer Heritage Archive at IRSA and pins it. Per IRAC channel: the archive's own mosaic (`maic`) with its uncertainty (`munc`) and coverage (`mcov`), and every level-1 frame as its corrected image (`cbcd`), uncertainty (`cbunc`) and imask (`bimsk`). Each file by URL, byte count and sha256, with the archive's own MD5 checked where the catalogue publishes one. What the observation is, is recorded twice, from the catalogue and from the FITS headers, and a disagreement refuses the pin.
 
 **`mosaic.mts`** drives `mosaic.py` in the pinned environment: read each frame with its own SIP distortion, drop what the imask flags, resample onto the archive's grid with `reproject_exact`, drop an output pixel from a frame that covers less than half of it, put the frames on one background level, average with equal weight per contributing frame. It writes a `cssearth-telescope-product@1` record beside the output naming the exact inputs, parameters, versions and toolchain digest. A second run with the same record and the same bytes does no work.
 
 **`compare.mts`** checks all four files against their pins before it reads a sample: our mosaic against the record that made it, and the archive's mosaic, uncertainty and coverage planes against the program that fetched them. That check is inside the comparison itself, not in its caller, because the uncertainty plane is the denominator of the headline result: swap it for a valid FITS file with inflated errors and an unchecked comparison would report perfect agreement. It then reads both mosaics with this repository's own FITS reader, row block by row block, and writes the receipt with a product record beside it. The `archive-agreement` evidence itself goes onto the MOSAIC's record, the one the producing stage wrote, so a consumer holding the product finds the check with `evidenceFor(record, mosaic, 'archive-agreement')` without knowing this toolkit exists; its wording says in as many words that the re-mosaic is not the observatory's own. Adding it is refused if the mosaic on disk is no longer the file its record made. The receipt records the digest of every file it actually read, taken from the bytes on disk and never copied out of the program, and the ledger counts a receipt only when those three digests are the ones its program pinned.
 
-**`archive-ledger.mts`** writes [the Spitzer archive ledger](spitzer-ledger.md).
+**`archive-ledger.mts`** writes [the Spitzer archive ledger](spitzer-ledger.md). Its JSON retains every returned AORKEY,
+programme, mode, title, start time and available end time. The grouped counts are reproduced from those records and refused
+when they disagree. The capability query can therefore expose actual candidate observations and make a definite time refusal
+when a requested interval contains none of them.
 
 ### Access
 
@@ -71,6 +84,12 @@ The archive is public and needs no account. Two IRSA services are used and they 
 "Inside the archive's own 1 sigma" is the column that means most: it is the archive saying how well it claims to know each pixel, and our mosaic falls inside that claim for 98% of them in every channel.
 
 Nothing is bit-identical, and nothing should be: two different pipelines.
+
+**Bennu qualification.** AOR 21415424, archive programme 289, observed 2007-05-08, supplies the checked channel-1 program
+`bennu-21415424`. Ten of its eleven pinned level-1 frames match the archive mosaic's 12 second frame time. The re-mosaic covers
+1,038,727 pixels; 99.49% of the compared pixels fall within the archive uncertainty, the median absolute difference is 1.187%
+of the median level, and the correlation is 0.964104. This qualifies those exact bytes and that reduction route. It does not
+establish that every one of Bennu's eleven indexed IRAC Map AORs, or another IRAC channel, is adequate for a question.
 
 **Geometry.** The run resamples onto the archive's grid, so it does not choose one. It reports the grid the frames imply on their own, from `find_optimal_celestial_wcs`, beside it: 716 x 603 at 1.223 arcsec for channel 1, against the archive's 2361 x 1036 at 0.600 arcsec. The archive oversamples by about two; the frames' native scale is recovered to within 0.1%.
 
@@ -124,7 +143,7 @@ The channel 3 trade is the one unexplained-looking number in the table above and
 | Compare and receipt | [`tools/objects/spitzer/compare.mts`](../tools/objects/spitzer/compare.mts) |
 | Ledger | [`tools/objects/spitzer/archive-ledger.mts`](../tools/objects/spitzer/archive-ledger.mts), [`docs/spitzer-ledger.md`](spitzer-ledger.md) |
 | Pinned observation and receipts | `tools/objects/spitzer/programs/` |
-| Tests | [`tools/objects/spitzer/spitzer.test.mts`](../tools/objects/spitzer/spitzer.test.mts), 13 tests, no network |
+| Tests | [`tools/objects/spitzer/spitzer.test.mts`](../tools/objects/spitzer/spitzer.test.mts), 14 tests, no network |
 
 ### Three gaps in the colour example
 

@@ -6,7 +6,7 @@ import test from "node:test";
 import { OBJECTS, SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
 import { objectNavigation, PLANET_SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../planet-search-objects.mts";
-import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mts";
+import { BODY_MARKER_ATLAS_PAGE_SIZE, loadMarkerDescriptors } from "../../tools/prepare-navigation.mts";
 import { markerStyle, validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
 import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
 
@@ -23,21 +23,20 @@ test("search contains every object, including the Sun; only planets enter the sc
   assert.deepEqual(objectNavigation(unknown).planets.map(({ id }) => id), ["future-planet"]);
 });
 
-test("prepared marker addresses and presentation follow packages", async () => {
-  for (const { id } of SCENE_OBJECTS) {
-    assert.equal(PREPARED_NAVIGATION_MARKERS[id].url, `/navigation/body-${id}.webp`);
-    assert.equal(PREPARED_NAVIGATION_MARKERS[id].index, 0);
-    assert.equal(PREPARED_NAVIGATION_MARKERS[id].count, 1);
-  }
+test("prepared marker atlases and presentation follow packages", async () => {
   const descriptors = await loadMarkerDescriptors();
   assert.deepEqual(Object.keys(PREPARED_NAVIGATION_MARKERS), descriptors.map(({ planetId }) => planetId));
-  for (const descriptor of descriptors) {
+  for (const [descriptorIndex, descriptor] of descriptors.entries()) {
     const marker = PREPARED_NAVIGATION_MARKERS[descriptor.planetId];
+    const page = Math.floor(descriptorIndex / BODY_MARKER_ATLAS_PAGE_SIZE);
+    const index = descriptorIndex % BODY_MARKER_ATLAS_PAGE_SIZE;
+    const count = Math.min(BODY_MARKER_ATLAS_PAGE_SIZE, descriptors.length - page * BODY_MARKER_ATLAS_PAGE_SIZE);
+    const url = `/navigation/body-markers-${String(page).padStart(2, '0')}.webp`;
     const { context: _context, ...atlasMarker } = marker;
-    assert.deepEqual(atlasMarker, { url: `/navigation/body-${descriptor.planetId}.webp`, url2x: `/navigation/body-${descriptor.planetId}@2x.webp`, url2xPixels: marker.url2xPixels, index: 0, count: 1, presentation: descriptor.presentation });
+    assert.deepEqual(atlasMarker, { url, url2x: url.replace('.webp', '@2x.webp'), url2xPixels: marker.url2xPixels, index, count, presentation: descriptor.presentation });
     const result = markerStyle(marker, { color: "#ffffff" });
     assert.ok(result.style.includes("color:#ffffff"));
-    assert.ok(result.innerStyle.includes("background-size:100% 100%"));
+    assert.ok(result.innerStyle.includes(`background-size:${count * 100}% 100%`));
     assert.ok(result.innerStyle.includes(`url("${marker.url2x}")`));
   }
   assert.equal(PREPARED_NAVIGATION_MARKERS.saturn.presentation.scale?.ringExtra, 20);

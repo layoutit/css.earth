@@ -22,9 +22,10 @@ import { dirname, resolve } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { tapRows } from '../astronomy-packages/client.mts';
 
 export const KOA = 'https://koa.ipac.caltech.edu';
-export const TAP_SYNC = `${KOA}/TAP/sync`;
+export const TAP_SYNC = `${KOA}/TAP`;
 /** One table for each instrument KOA serves, as TAP_SCHEMA.tables lists them. */
 export const INSTRUMENT_TABLES = ['koa_deimos', 'koa_esi', 'koa_guider', 'koa_hires', 'koa_kcwi', 'koa_kpf', 'koa_lris',
   'koa_lws', 'koa_mosfire', 'koa_nirc', 'koa_nirc2', 'koa_nires', 'koa_nirspec', 'koa_osiris'] as const;
@@ -80,39 +81,9 @@ async function koaText(url: string, body?: string): Promise<{ status: number; ty
   });
 }
 
-/** One line of KOA's CSV as its cells. A comma inside a quoted cell is part of the value, not a separator: KCWI states its
- * binning as `"2,2"` and its readout mode beside it, and splitting on every comma turned one row into two mangled columns
- * and shifted every column after it. Quotes are doubled inside a quoted cell, as CSV requires. */
-export function csvCells(line: string): string[] {
-  const cells: string[] = [];
-  let cell = '', quoted = false;
-  for (let index = 0; index < line.length; index++) {
-    const character = line[index]!;
-    if (quoted && character === '"' && line[index + 1] === '"') { cell += '"'; index++; }
-    else if (character === '"') quoted = !quoted;
-    else if (character === ',' && !quoted) { cells.push(cell.trim()); cell = ''; }
-    else cell += character;
-  }
-  cells.push(cell.trim());
-  return cells;
-}
-
-/** One ADQL query, returned as rows of strings. CSV is asked for because it is the only format the service returns without a
- * VOTable parser; KOA never embeds a newline in a cell, so the parse stays this short. A KOA error is returned as a 200 with a
- * message instead of a header row, so anything that is not a table is raised. */
+/** One ADQL query. PyVO owns the TAP request and VOTable parsing; KOA's CGI endpoints below remain archive-specific. */
 export async function koaQuery(adql: string): Promise<Record<string, string>[]> {
-  const body = new URLSearchParams({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', QUERY: adql }).toString();
-  const { status, text } = await koaText(TAP_SYNC, body);
-  if (status !== 200) throw new Error(`KOA refused the query: ${status} ${text.slice(0, 400)}`);
-  const lines = text.split('\n').filter(line => line.length);
-  if (!lines.length) throw new Error('KOA returned nothing for the query.');
-  const cells = csvCells;
-  const header = cells(lines[0]!);
-  if (header.some(name => !/^[a-z_][a-z0-9_]*$/u.test(name))) throw new Error(`KOA returned no table: ${lines[0]!.slice(0, 400)}`);
-  return lines.slice(1).map(line => {
-    const row = cells(line);
-    return Object.fromEntries(header.map((name, index) => [name, row[index] ?? '']));
-  });
+  return tapRows(TAP_SYNC, adql);
 }
 
 /** The calibration frames the archive associates with a science frame, as KOA itself groups them. Returned as the archive
