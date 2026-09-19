@@ -1,6 +1,6 @@
 # css.earth 🌎
 
-A 3D CSS astrovisualization platform. [css.earth](https://css.earth) renders celestial bodies as real HTML and CSS 3D geometry through [PolyCSS](https://github.com/LayoutitStudio/polycss), without a WebGL or canvas scene renderer. css.earth preprocesses open space data into browser-ready textures, meshes, and scene files, then loads them into a single model of the universe.
+A 3D CSS astrovisualization platform. [css.earth](https://css.earth) renders celestial bodies as real HTML and CSS 3D geometry through [PolyCSS](https://github.com/LayoutitStudio/polycss), without WebGL or canvas. It turns open space data into browser-ready textures, meshes and scene files, loaded into one model of the universe.
 
 Explore the live version: [css.earth](https://css.earth) 🔭
 
@@ -8,9 +8,9 @@ Join [chat.polycss.com](https://chat.polycss.com) for support and community disc
 
 <img src=".github/assets/planets-contact-sheet.webp" alt="The eight planets, Mercury to Neptune, each rendered as DOM and CSS markup" width="960">
 
-## How It Works
+## What You Can Explore
 
-css.earth outputs one URL per celestial body with a shared camera, so you can fly from Saturn to another galaxy without leaving the page. So far, it covers 495 objects.
+Every object has its own URL and they all share one camera, so you can fly from Saturn to another galaxy without leaving the page. There are 495 bodies so far, plus the nebulae and galaxies below.
 
 ### The Solar System
 
@@ -24,17 +24,11 @@ Stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and pla
 
 <img src=".github/assets/stars-exoplanets.webp" alt="Betelgeuse's imaged surface, and the planet TRAPPIST-1b coloured by its JWST MIRI 15 µm temperature map, hot day side to cold night side, rendered as DOM and CSS markup" width="960">
 
-### Nebulae
+### Nebulae and Galaxies
 
-The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus the Pleiades cluster.
+The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus the Pleiades cluster. Beyond them: the Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group and the nearby universe.
 
-<img src=".github/assets/nebulae.webp" alt="The Crab Nebula as a 3D volume, rendered as DOM and CSS markup" width="960">
-
-### Galaxies
-
-The Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group and the nearby universe.
-
-<img src=".github/assets/milky-way.webp" alt="The Milky Way seen at an angle from outside, with its spiral arms and central bar, rendered as DOM and CSS markup" width="960">
+<img src=".github/assets/nebulae-galaxies.webp" alt="The Crab Nebula as a 3D volume, and the Milky Way seen at an angle from outside, rendered as DOM and CSS markup" width="960">
 
 ## Motivation
 
