@@ -89,6 +89,21 @@ test('continuous hotspot refinement remains inside the observed grid-cell mask',
   assert.equal(basis.visible[row * grid.width + column], 1);
 });
 
+test('continuous hotspot refinement wraps across the antimeridian', () => {
+  const grid = equalAngleGrid(90, 180), targetLatitude = 23.4, targetLongitude = 179.6;
+  const lat = targetLatitude * Math.PI / 180, lon = targetLongitude * Math.PI / 180;
+  const basis = {
+    lmax: 1, grid, visible: new Uint8Array(grid.latitudes.length).fill(1),
+    harmonicCoefficients: [Float64Array.from([Math.cos(lat) * Math.sin(lon) / Math.sqrt(3), Math.sin(lat) / Math.sqrt(3), Math.cos(lat) * Math.cos(lon) / Math.sqrt(3)])],
+  };
+  const fit = { ncurves: 1, coefficients: Float64Array.from([0.5]), uniformAmplitude: 1 };
+  const map = evaluateFit(basis as never, fit as never, grid.latitudes, grid.longitudes);
+  const spot = continuousHotspot(basis as never, { ...fit, map } as never, 0.05);
+  const longitudeError = Math.abs(((spot.longitude - targetLongitude + 540) % 360) - 180);
+  assert.ok(Math.abs(spot.latitude - targetLatitude) < 0.06, `latitude ${spot.latitude}`);
+  assert.ok(longitudeError < 0.06, `longitude ${spot.longitude}`);
+});
+
 test('brightness temperature inverts the Planck ratio: a planet as bright per area as the star has its temperature', () => {
   // Uniform planet of the star's temperature: flux per unit intensity = rp^2 / pi.
   const rp = 0.16, flux = rp ** 2 / Math.PI;
