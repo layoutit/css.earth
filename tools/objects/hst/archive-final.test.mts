@@ -6,10 +6,11 @@ import { test } from 'node:test';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { EVIDENCE_KINDS, evidenceFor, parseProductRecord } from '../product-record.mts';
+import { EVIDENCE_KINDS, evidenceFor, parseProductRecord, runDigest } from '../product-record.mts';
 import {
-  ARCHIVE_FINAL_SCHEMA, ARCHIVE_FINAL_STAGE, archiveCalibration, archiveFinalPath, archiveFinalRecordPath, findDisc,
-  identityDisagreements, parseArchiveFinalProgram, qualitySummary, readUnit, rectangle, summariseImage, summariseSpectrum,
+  ARCHIVE_FINAL_SCHEMA, ARCHIVE_FINAL_STAGE, archiveCalibration, archiveFinalPath, archiveFinalQualificationRun,
+  archiveFinalQualifiedRun, archiveFinalRecordPath, archiveFinalSelection, findDisc, identityDisagreements,
+  parseArchiveFinalProgram, qualitySummary, readUnit, rectangle, summariseImage, summariseSpectrum,
   type ArchiveFinalIdentity, type CatalogueEntry,
 } from './archive-final.mts';
 import { readHstFileHdus } from './product-file.mts';
@@ -185,8 +186,10 @@ test('every qualified program has a record of its own run, over the files it pin
     const record = parseProductRecord(await read(archiveFinalRecordPath(id)));
     assert.equal(record.stage, ARCHIVE_FINAL_STAGE, id);
     assert.deepEqual(record.software, [], `${id}: no software of ours made these files`);
-    assert.equal(record.parameters.observation, program.observation, id);
-    assert.equal(record.parameters.configuration, program.configuration, id);
+    // The record carries the selection it was qualified with, so a later reader can rebuild it from the program and see that
+    // nothing has moved: the digests alone would not notice a component pointed at another chip of the same file.
+    assert.deepEqual(record.parameters.selection, archiveFinalSelection(program), id);
+    assert.equal(runDigest(archiveFinalQualifiedRun(record)), runDigest(archiveFinalQualificationRun(program, new Map(program.files.map(file => [file.name, file.sha256!])))), id);
     const science = program.components.find(component => component.role === 'science')!.file!;
     const origin = evidenceFor(record, science, 'archive-origin');
     assert.equal(origin.length, 1, `${id}: one archive-origin entry, naming the science product`);

@@ -30,9 +30,9 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { mastRequest } from '../jwst/mast.mts';
-import { evidenceFor, parseProductRecord, type ProductRecord } from '../product-record.mts';
+import { evidenceFor, parseProductRecord, runDigest, type ProductRecord } from '../product-record.mts';
 import { parseHstProgram, PROGRAMS } from './archive.mts';
-import { ARCHIVE_FINAL_STAGE, parseArchiveFinalProgram, type ArchiveFinalProgram } from './archive-final.mts';
+import { ARCHIVE_FINAL_STAGE, archiveFinalQualificationRun, archiveFinalQualifiedRun, parseArchiveFinalProgram, type ArchiveFinalProgram } from './archive-final.mts';
 import { PIPELINES } from './calibrate.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
@@ -241,19 +241,36 @@ export function parseReproductionReceipt(value: unknown, label: string): Reprodu
  * that no software of ours ran, pins every file the program pins at the same byte count and digest, and carries exactly one
  * `archive-origin` entry for the science product and no `archive-agreement` at all. Anything else is a problem and qualifies
  * nothing: a record that cannot be read proves less than no record, because it looks like proof. */
+const canonical = (value: unknown): unknown => Array.isArray(value) ? value.map(canonical)
+  : isRecord(value) ? Object.fromEntries(Object.entries(value).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0).map(([key, entry]) => [key, canonical(entry)]))
+    : value;
+const stable = (value: unknown) => JSON.stringify(canonical(value));
+
 export function archiveFinalQualification(program: ArchiveFinalProgram, record: ProductRecord, label: string): void {
   if (record.stage !== ARCHIVE_FINAL_STAGE) throw new TypeError(`${label}: its stage is ${record.stage}, not ${ARCHIVE_FINAL_STAGE}.`);
-  const parameters = record.parameters;
-  if (parameters.program !== program.id || parameters.observation !== program.observation || parameters.configuration !== program.configuration)
-    throw new TypeError(`${label}: it records ${String(parameters.program)} ${String(parameters.observation)} in ${String(parameters.configuration)}, not ${program.id} ${program.observation} in ${program.configuration}.`);
   if (record.software.length) throw new TypeError(`${label}: it names software that ran, and nothing of ours makes an archive-final product.`);
   const outputs = new Map(record.outputs.map(output => [output.path, output]));
   if (outputs.size !== program.files.length) throw new TypeError(`${label}: it pins ${outputs.size} files against the program's ${program.files.length}.`);
+  const digests = new Map<string, string>();
   for (const file of program.files) {
     const output = outputs.get(file.name);
     if (!output) throw new TypeError(`${label}: it does not pin ${file.name}.`);
     if (file.sha256 === undefined) throw new TypeError(`${program.id}.archive-final.json: ${file.name} has no digest, so nothing says which bytes were read.`);
     if (output.bytes !== file.bytes || output.sha256 !== file.sha256) throw new TypeError(`${label}: its ${file.name} is ${output.bytes} bytes, sha256 ${output.sha256}, not the pinned ${file.bytes} and ${file.sha256}.`);
+    digests.set(file.name, file.sha256);
+  }
+  // Matching digests are not enough. One WFPC2 file holds four chips and a waivered spectrum holds every group of its exposure,
+  // so a program that moves a component from one unit to another measures a different detector out of the very same bytes, and
+  // every digest still agrees. The run is therefore rebuilt from the program as it is NOW (its selection, the units each part is
+  // read from, the identity the check ran against) and the record must be the record of that run.
+  const expected = archiveFinalQualificationRun(program, digests), stated = archiveFinalQualifiedRun(record);
+  if (runDigest(expected) !== runDigest(stated)) {
+    const wanted = expected.parameters.selection as Record<string, unknown>, held = stated.parameters.selection;
+    // The verdict is the digest, which ignores key order; the message sorts keys too, so it never blames a field that only moved.
+    const said = !isRecord(held) ? 'it states no selection at all, so nothing says which units it read'
+      : Object.keys(wanted).filter(key => stable(held[key]) !== stable(wanted[key])).map(key => `${key} (${stable(held[key])}, not ${stable(wanted[key])})`).join('; ')
+        || 'its inputs are not the files this program pins, in these roles, at these digests';
+    throw new TypeError(`${label}: it was qualified against another run: ${said}.`);
   }
   const science = program.components.find(component => component.role === 'science')!.file!;
   if (evidenceFor(record, science, 'archive-origin').length !== 1) throw new TypeError(`${label}: it states no single archive-origin entry for ${science}.`);
@@ -467,7 +484,7 @@ export function ledgerGuide(ledger: Ledger): string {
     '',
     `A program counts as re-calibrated in a configuration only when a receipt beside it parses, states the \`${HST_REPRODUCTION_SCHEMA}\` schema, and names one of its observations in that configuration together with the MAST product the program pins for it, with the digest of what it compared. A receipt that says anything else is reported here and proves nothing.`,
     '',
-    `An archive-final program counts as qualified only when the \`<id>.archive-final.product.json\` beside it parses as a \`${ARCHIVE_FINAL_STAGE}\` product record, names that program, observation and configuration, states that no software of ours ran, pins every file the program pins at the same byte count and digest, and carries one \`archive-origin\` entry for the science product and no \`archive-agreement\` at all. A record that cannot be read proves less than no record, so it is reported here too.`,
+    `An archive-final program counts as qualified only when the \`<id>.archive-final.product.json\` beside it parses as a \`${ARCHIVE_FINAL_STAGE}\` product record, matches the current program selection (including component HDUs, units and observation identity), states that no software of ours ran, pins every file the program pins at the same byte count and digest, and carries one \`archive-origin\` entry for the science product and no \`archive-agreement\` at all. A record that cannot be read proves less than no record, so it is reported here too.`,
     '',
     ledger.receiptProblems.length
       ? `${ledger.receiptProblems.length} receipt${ledger.receiptProblems.length === 1 ? '' : 's'} could not be accepted:\n\n${ledger.receiptProblems.map(problem => `- ${problem}`).join('\n')}`

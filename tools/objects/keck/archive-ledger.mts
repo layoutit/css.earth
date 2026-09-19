@@ -20,8 +20,9 @@
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireRecord, requireString } from '../../source-values.mts';
-import { PROGRAMS, parseKeckProgram } from './archive.mts';
+import { isRecord, requireRecord } from '../../source-values.mts';
+import { readProductRecord } from '../product-record.mts';
+import { PROGRAMS, parseKeckProgram, type KeckProgram } from './archive.mts';
 import { INSTRUMENT_TABLES, koaQuery, type InstrumentTable } from './koa.mts';
 import { REDUCIBLE } from './reduce.mts';
 
@@ -113,29 +114,105 @@ export interface ModeState {
 export interface Ledger {
   readonly schema: typeof SCHEMA; readonly archive: string; readonly measured: string;
   readonly shippedObjects: number;
+  /** Receipts that did not stand up, with the reason. A mode is never `reduced` on the strength of one of these. */
+  readonly receiptProblems: readonly ReceiptProblem[];
   readonly modes: readonly ModeState[];
   readonly objects: readonly ObjectObservation[];
 }
 
-/** Every pinned program, and every receipt that parses and names the observation it is about. A receipt that does not parse,
- * or that names an observation no program pins, counts for nothing. */
-export async function pinnedEvidence() {
-  const names = await readdir(PROGRAMS).catch(() => [] as string[]);
-  const programs: { file: string; instrument: string; koaids: string[] }[] = [], receipts: { file: string; instrument: string; koaid: string; product: string }[] = [];
-  for (const name of names.filter(entry => entry.endsWith('.json')).sort()) {
-    const text = await readFile(resolve(PROGRAMS, name), 'utf8');
-    const value = requireRecord(JSON.parse(text) as unknown, name);
-    if (value.schema === 'cssearth-keck-program@1') {
-      const program = parseKeckProgram(value);
-      programs.push({ file: name, instrument: program.instrument, koaids: program.observations.map(entry => entry.koaid) });
-    } else if (value.schema === 'cssearth-keck-reproduction@1') {
-      receipts.push({ file: name, instrument: requireString(value.instrument, 'receipt instrument'),
-        koaid: requireString(value.koaid, 'receipt koaid'), product: requireString(value.product, 'receipt product') });
+export interface ReceiptCheck { readonly file: string; readonly instrument: string; readonly koaid: string; readonly product: string }
+export interface ReceiptProblem { readonly file: string; readonly problem: string }
+
+const HEX64 = /^[0-9a-f]{64}$/u;
+const finite = (value: unknown) => typeof value === 'number' && Number.isFinite(value);
+
+/** What one receipt has to say before it counts as evidence that an instrument was reduced.
+ *
+ * A receipt naming a schema, an instrument, a koaid and a stage says only that a file with those four fields exists. It says
+ * nothing about a comparison having been made, about which bytes were compared, or about that still being true of what the
+ * programs pin now. All three are checked here, against `programs` as they are on disk at this moment:
+ *
+ *   the comparison itself: at least one extension, each with the sample counts and the two cuts a comparison writes;
+ *   the archive side: the exact product the current program pins for this observation, by archive path, byte count and
+ *     sha256, and the bytes the comparison read equal to that pin;
+ *   our side: a product record beside the file it names, written by a run of this observation, pinning that file at the
+ *     digest the receipt states.
+ *
+ * Anything short of that is a problem with a reason, not evidence. A receipt written before a pin changed fails here, which
+ * is the point: it was evidence about other bytes. */
+export async function checkReceipt(file: string, value: Record<string, unknown>, programs: readonly KeckProgram[]): Promise<ReceiptCheck | ReceiptProblem> {
+  const problem = (text: string): ReceiptProblem => ({ file, problem: text });
+  const instrument = typeof value.instrument === 'string' ? value.instrument : '';
+  const koaid = typeof value.koaid === 'string' ? value.koaid : '';
+  const stage = typeof value.product === 'string' ? value.product : '';
+  const id = typeof value.program === 'string' ? value.program : '';
+  if (!instrument || !koaid || !stage || !id) return problem('it does not name a program, an instrument, an observation and a stage.');
+  const program = programs.find(entry => entry.id === id);
+  if (!program) return problem(`no program ${id} is pinned.`);
+  if (program.instrument !== instrument) return problem(`${id} is a ${program.instrument} program and the receipt says ${instrument}.`);
+  const observation = program.observations.find(entry => entry.koaid === koaid);
+  if (!observation) return problem(`${id} pins no observation ${koaid}.`);
+
+  const extensions = Array.isArray(value.extensions) ? value.extensions : null;
+  if (!extensions?.length) return problem('it holds no compared extension, so no comparison is recorded in it.');
+  for (const raw of extensions) {
+    if (!isRecord(raw)) return problem('an extension is not a record.');
+    if (typeof raw.extname !== 'string' || !finite(raw.samples) || !finite(raw.both)) return problem(`extension ${String(raw.extname)} states no sample counts.`);
+    for (const cut of ['aboveMedian', 'aboveBrightestPercent']) {
+      const entry = raw[cut];
+      if (!isRecord(entry) || !finite(entry.samples) || !('correlation' in entry)) return problem(`extension ${String(raw.extname)} states no ${cut} cut.`);
     }
   }
-  // A receipt only counts when a pinned program holds the exact observation it names.
-  const kept = receipts.filter(receipt => programs.some(program => program.instrument === receipt.instrument && program.koaids.includes(receipt.koaid)));
-  return { programs, receipts: kept };
+
+  const archive = isRecord(value.archive) ? value.archive : null;
+  if (!archive) return problem('it states nothing about the archive product it compared against.');
+  const pinned = observation.archiveProducts.find(entry => entry.filehand === archive.filehand);
+  if (!pinned) return problem(`${id} no longer pins an archive product at ${String(archive.filehand)}.`);
+  if (archive.bytes !== pinned.bytes || archive.sha256 !== pinned.sha256)
+    return problem(`the archive product it compared (${String(archive.bytes)} bytes, sha256 ${String(archive.sha256)}) is not the one ${id} pins now (${pinned.bytes} bytes, ${pinned.sha256}).`);
+  const read = isRecord(archive.read) ? archive.read : null;
+  if (!read || read.bytes !== pinned.bytes || read.sha256 !== pinned.sha256)
+    return problem('it does not state that the bytes it read were the pinned bytes.');
+
+  const ours = isRecord(value.local) ? value.local : null;
+  if (!ours || typeof ours.record !== 'string' || typeof ours.name !== 'string' || !HEX64.test(String(ours.sha256)))
+    return problem('it does not name our own product, its digest and the product record beside it.');
+  const record = await readProductRecord(resolve(REPOSITORY, ours.record)).catch(() => null);
+  if (!record) return problem(`the product record it names (${ours.record}) is not on this machine; run outputs are not committed, so re-run reduce.mts and compare.mts to restore the evidence.`);
+  if ((record.parameters as { koaid?: unknown }).koaid !== koaid) return problem(`${ours.record} was written by a run of ${String((record.parameters as { koaid?: unknown }).koaid)}, not of ${koaid}.`);
+  const route = REDUCIBLE[program.instrument];
+  if (!route) return problem(`${program.instrument} has no reduction route here.`);
+  const channel = route.channel(observation.science.name);
+  const expected = [...observation.calibrations.filter(entry => route.channel(entry.name) === channel), observation.science];
+  if (record.inputs.length !== expected.length || expected.some(pin => !record.inputs.some(input =>
+    input.identity === pin.name && input.role === (pin.imageType ?? 'frame') && input.bytes === pin.bytes && input.sha256 === pin.sha256)))
+    return problem(`${ours.record} was not made from the raw science and calibration frames this program pins now.`);
+  const output = record.outputs.find(entry => entry.path === ours.name);
+  if (!output) return problem(`${ours.record} does not name the product ${ours.name}.`);
+  if (output.sha256 !== ours.sha256 || output.bytes !== ours.bytes) return problem(`${ours.record} pins ${ours.name} at ${output.sha256} and the receipt compared ${String(ours.sha256)}.`);
+  return { file, instrument, koaid, product: stage };
+}
+
+/** Every pinned program, every receipt that stands up to `checkReceipt`, and, for each that does not, why. A receipt only
+ * counts when a pinned program holds the exact observation it names AND everything else above still holds. */
+export async function pinnedEvidence() {
+  const names = await readdir(PROGRAMS).catch(() => [] as string[]);
+  const entries = names.filter(entry => entry.endsWith('.json')).sort();
+  const programs: KeckProgram[] = [], candidates: { file: string; value: Record<string, unknown> }[] = [];
+  const problems: ReceiptProblem[] = [];
+  for (const name of entries) {
+    const value = requireRecord(JSON.parse(await readFile(resolve(PROGRAMS, name), 'utf8')) as unknown, name);
+    if (value.schema === 'cssearth-keck-program@1') programs.push(parseKeckProgram(value));
+    else if (value.schema === 'cssearth-keck-reproduction@1') candidates.push({ file: name, value });
+    else problems.push({ file: name, problem: `it is neither a program nor a receipt (${String(value.schema)}).` });
+  }
+  const receipts: ReceiptCheck[] = [];
+  for (const candidate of candidates) {
+    const checked = await checkReceipt(candidate.file, candidate.value, programs);
+    if ('problem' in checked) problems.push(checked); else receipts.push(checked);
+  }
+  return { programs: programs.map(program => ({ file: `${program.id}.json`, instrument: program.instrument, koaids: program.observations.map(entry => entry.koaid) })),
+    receipts, receiptProblems: problems };
 }
 
 /** One instrument's science frames by target name, counted by the archive, and how many rows could not be read.
@@ -152,7 +229,7 @@ export async function targetCounts(table: InstrumentTable) {
 
 export async function buildLedger(measured: string): Promise<Ledger> {
   const shipped = new Set((await readdir(OBJECTS, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name));
-  const { programs, receipts } = await pinnedEvidence();
+  const { programs, receipts, receiptProblems } = await pinnedEvidence();
   const found = new Map<string, { frames: number; targets: Set<string>; instruments: Record<string, number> }>();
   const modes: ModeState[] = [];
   for (const table of INSTRUMENT_TABLES) {
@@ -182,7 +259,7 @@ export async function buildLedger(measured: string): Promise<Ledger> {
   const objects = [...found].map(([id, entry]) => ({ id, frames: entry.frames, targets: [...entry.targets].sort(),
     instruments: Object.fromEntries(Object.entries(entry.instruments).sort(([, a], [, b]) => b - a)) }))
     .sort((a, b) => b.frames - a.frames || (a.id < b.id ? -1 : 1));
-  return { schema: SCHEMA, archive: 'https://koa.ipac.caltech.edu', measured, shippedObjects: shipped.size, modes, objects };
+  return { schema: SCHEMA, archive: 'https://koa.ipac.caltech.edu', measured, shippedObjects: shipped.size, receiptProblems, modes, objects };
 }
 
 const number = (value: number | null) => value === null ? 'not counted' : value.toLocaleString('en-US');
@@ -197,6 +274,13 @@ export function ledgerGuide(ledger: Ledger) {
   for (const mode of ledger.modes) lines.push(`| ${mode.instrument} | ${number(mode.frames)} | ${mode.objectFrames.toLocaleString('en-US')} | ${mode.objects} | ${mode.pipeline} | ${mode.state} |`);
   lines.push('', '## Why each instrument is where it is', '');
   for (const mode of ledger.modes) lines.push(`- **${mode.instrument}**: ${mode.reason}${mode.programs.length ? ` Pinned: ${mode.programs.join(', ')}.` : ''}${mode.receipts.length ? ` Receipts: ${mode.receipts.join(', ')}.` : ''}`);
+  if (ledger.receiptProblems.length) {
+    lines.push('', '## Receipts that do not count', '',
+      'A receipt counts only where it records a whole comparison, against the archive product the program pins now, with a',
+      'product record beside our own product written by a run of that observation. These did not, and no instrument is',
+      '`reduced` on the strength of them.', '');
+    for (const problem of ledger.receiptProblems) lines.push(`- \`${problem.file}\`: ${problem.problem}`);
+  }
   lines.push('', '## Shipped objects Keck observed', '',
     'Science frames only, matched from the observer\'s own target name. A name carrying a minor-planet number matches only an id',
     'carrying the same number, so 52 Europa is not Jupiter\'s moon.', '',

@@ -25,6 +25,10 @@
     "sha256": "71407e7533728903e525aeb1aeb6453f552f6d9125df716f690a41d6b89605f5",
     "level": "lev2",
     "description": "Differential atmospheric refraction corrected data",
+    "read": {
+      "sha256": "71407e7533728903e525aeb1aeb6453f552f6d9125df716f690a41d6b89605f5",
+      "bytes": 150932160
+    },
     "DATE": "2023-12-09T10:18:06",
     "pipeline": {
       "version": "1.0.2",
@@ -53,6 +57,7 @@
     "name": "kb231209_00085_icubed.fits",
     "sha256": "60efbe12fe5c281037fa8a5940123092b2d1af1aeac16fd2a78afae32a0c6dd6",
     "bytes": 117411840,
+    "record": "output/keck/m42-kcwi-2023b-u124/KB.20231209.37031.94/redux/kb231209_00085_icubed.fits.product.json",
     "DATE": "2023-12-09T10:18:06",
     "pipeline": {
       "version": "1.3.1",

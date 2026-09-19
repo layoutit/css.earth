@@ -160,7 +160,7 @@ export const LIMITS: readonly string[] = [
   'The output grid is the archive mosaic\'s own. This run resamples onto it and does not choose a geometry, so the comparison tests resampling and combination, not astrometry. The grid the frames imply on their own is reported by the run beside the archive\'s.',
   'No multi-frame outlier rejection is applied. The archive\'s pipeline rejects radiation hits across overlapping frames and this does not, so a small share of pixels differ by much more than the rest. A sigma clip across the stack was measured and made agreement worse at this depth, so none is used.',
   "Frames are put on one background level by a zero-mean additive offset solved on their overlaps, which is not the observatory's overlap correction and carries no sky model. On the proving observation it moved channel 3 from 71% to 98% of pixels inside the archive's stated uncertainty and shifted that channel's overall level by 0.7%; channels 1 and 4 did not move.",
-  'Pixels are rejected when any imask bit is set, which is stricter than the archive\'s per-bit policy.',
+  'The IRAC handbook\'s fatal mask 32520 rejects imask bits 3 and 8–14. Corrected-artifact flags 4–7 alone remain measurements. The documented stray-light mask can leave gaps where a small dither gives no clean frame.',
 ];
 
 export function parseReproduction(value: unknown): SpitzerReproduction {

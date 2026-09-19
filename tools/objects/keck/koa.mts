@@ -16,7 +16,8 @@
  * Neither needs a cookie of ours; the service issues an anonymous one itself. */
 import { createWriteStream } from 'node:fs';
 import { mkdir, rename, stat } from 'node:fs/promises';
-import { request, type IncomingMessage } from 'node:https';
+import type { IncomingMessage } from 'node:http';
+import { request } from 'node:https';
 import { dirname, resolve } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { sha256File } from '../../../src/platform/sha256.mts';

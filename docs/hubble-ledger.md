@@ -191,7 +191,7 @@ What the archive holds within each positioned object's own radius on the sky.
 
 A program counts as re-calibrated in a configuration only when a receipt beside it parses, states the `cssearth-hst-reproduction@1` schema, and names one of its observations in that configuration together with the MAST product the program pins for it, with the digest of what it compared. A receipt that says anything else is reported here and proves nothing.
 
-An archive-final program counts as qualified only when the `<id>.archive-final.product.json` beside it parses as a `archive-final` product record, names that program, observation and configuration, states that no software of ours ran, pins every file the program pins at the same byte count and digest, and carries one `archive-origin` entry for the science product and no `archive-agreement` at all. A record that cannot be read proves less than no record, so it is reported here too.
+An archive-final program counts as qualified only when the `<id>.archive-final.product.json` beside it parses as a `archive-final` product record, matches the current program selection (including component HDUs, units and observation identity), states that no software of ours ran, pins every file the program pins at the same byte count and digest, and carries one `archive-origin` entry for the science product and no `archive-agreement` at all. A record that cannot be read proves less than no record, so it is reported here too.
 
 None: every receipt beside a pinned program was accepted.
 

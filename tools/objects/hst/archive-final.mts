@@ -49,7 +49,7 @@ import { positionalArguments } from '../../cli-arguments.mts';
 import { readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { mastFile, mastRequest, type MastFile } from '../jwst/mast.mts';
-import { assertInputPins, productRecordPath, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun } from '../product-record.mts';
+import { assertInputPins, productRecordPath, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRecord, type ProductRun } from '../product-record.mts';
 import { PROGRAMS } from './archive.mts';
 import { readHstFileHdus, type HstFileHdu } from './product-file.mts';
 
@@ -57,6 +57,7 @@ const REPOSITORY = resolve(import.meta.dirname, '../../..');
 export const ARCHIVE_FINAL_SCHEMA = 'cssearth-hst-archive-final@1';
 /** The stage a product record carries for a file this repository did not make. */
 export const ARCHIVE_FINAL_STAGE = 'archive-final';
+export const ARCHIVE_FINAL_TELESCOPE = 'Hubble';
 export const ARCHIVE_OVERVIEW = 'https://hst-docs.stsci.edu/hstdhb/1-obtaining-hst-data/1-1-archive-overview';
 /** The four parts of a complete scientific product. `coordinates` is a wavelength array or a world coordinate system. */
 export const ARCHIVE_FINAL_ROLES = ['science', 'coordinates', 'uncertainty', 'quality'] as const;
@@ -469,15 +470,45 @@ export const archiveOriginEvidence = (run: ArchiveFinalRun, receipt: string): Pr
       'It does not establish that anything here reproduces that calibration: no pipeline was re-run and nothing was compared, so it is not agreement with the archive.' };
 };
 
+/** Everything about a program that decides WHICH samples were read, as one block the record carries and a later reader can
+ * rebuild from the program.
+ *
+ * The digests of the pinned files are not enough on their own. One WFPC2 file holds four chips and a waivered spectrum holds
+ * every group of its exposure, so moving a component from unit 1 to unit 2 measures a different detector out of the same bytes,
+ * and every digest still matches. Which unit each part was read from, what role it played, and which observation the identity
+ * check ran against are all part of what was qualified, so they are pinned here and the run digest covers them. */
+export const archiveFinalSelection = (program: ArchiveFinalProgram) => ({
+  program: program.id, observation: program.observation, configuration: program.configuration, target: program.target,
+  kind: program.kind, handbook: program.handbook,
+  identity: { ...program.identity },
+  components: program.components.map(component => ({ ...component })),
+});
+
+/** The part of a run that a later reader can rebuild from the program alone: the pinned files at their digests, and the
+ * selection above. `runDigest` over this is what says a record still describes the program beside it. What the run measured
+ * stays out of it, because nothing can recompute that without the files. */
+export function archiveFinalQualificationRun(program: ArchiveFinalProgram, digests: ReadonlyMap<string, string>): ProductRun {
+  const inputs: ProductInput[] = program.files.map(file => {
+    const sha256 = digests.get(file.name);
+    if (sha256 === undefined) throw new Error(`${program.id}: ${file.name} has no digest, so nothing says which bytes were read.`);
+    return { role: roleOf(program, file.name), identity: file.uri, bytes: file.bytes, sha256 };
+  });
+  return { telescope: ARCHIVE_FINAL_TELESCOPE, stage: ARCHIVE_FINAL_STAGE, inputs, parameters: { selection: archiveFinalSelection(program) }, software: [] };
+}
+
+/** A record projected onto what a program can rebuild. A projection whose digest differs from the program's own was qualified
+ * against another selection, another identity or other bytes. */
+export const archiveFinalQualifiedRun = (record: ProductRecord): ProductRun =>
+  ({ telescope: record.telescope, stage: record.stage, inputs: record.inputs, parameters: { selection: record.parameters.selection }, software: record.software });
+
 export function archiveFinalRun(run: ArchiveFinalRun): ProductRun {
-  const inputs: ProductInput[] = run.files.map(file => ({ role: roleOf(run.program, file.name), identity: file.uri, bytes: file.bytes, sha256: file.sha256 }));
+  const pinned = archiveFinalQualificationRun(run.program, new Map(run.files.map(file => [file.name, file.sha256])));
   return {
-    telescope: 'Hubble', stage: ARCHIVE_FINAL_STAGE, inputs,
+    ...pinned,
     parameters: {
-      program: run.program.id, observation: run.program.observation, configuration: run.program.configuration, target: run.program.target,
-      kind: run.program.kind, handbook: run.program.handbook, archiveStatement: ARCHIVE_OVERVIEW,
-      identity: { ...run.program.identity }, identityAgreedWith: { catalogue: { ...run.catalogue }, headers: { ...run.identity } },
-      components: run.program.components.map(component => ({ ...component })),
+      ...pinned.parameters,
+      archiveStatement: ARCHIVE_OVERVIEW,
+      identityAgreedWith: { catalogue: { ...run.catalogue }, headers: { ...run.identity } },
       // Provenance of the files, not software that ran here: this stage ran none.
       archiveCalibration: run.calibration,
       measured: run.measured,

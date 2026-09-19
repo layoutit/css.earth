@@ -82,6 +82,7 @@ test('the imask rejects contaminated pixels and keeps the ones the corrected fra
   assert.equal(rejects([5, 14]), true);
   assert.deepEqual([...FATAL_IMASK_BITS], [3, 8, 9, 10, 11, 12, 13, 14]);
   assert.equal(fatalImaskMask, 32520);
+  assert.match(LIMITS.join(' '), /fatal mask 32520 rejects imask bits 3 and 8–14/u);
 });
 
 test('archive paths become archive URLs, and nothing else does', () => {

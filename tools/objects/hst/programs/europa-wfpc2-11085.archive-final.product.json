@@ -17,23 +17,54 @@
     }
   ],
   "parameters": {
-    "program": "europa-wfpc2-11085",
-    "observation": "u9xe010cm",
-    "configuration": "WFPC2/PC",
-    "target": "europa",
-    "kind": "image",
-    "handbook": "https://www.stsci.edu/instruments/wfpc2/Wfpc2_dhb/wfpc2_ch22.html",
-    "archiveStatement": "https://hst-docs.stsci.edu/hstdhb/1-obtaining-hst-data/1-1-archive-overview",
-    "identity": {
-      "instrument": "WFPC2",
-      "detector": "1",
-      "opticalElement": "F631N",
-      "aperture": "",
-      "targetName": "EUROPA",
-      "proposal": "11085",
-      "exposureStartMjd": 54179.77310718,
-      "exposureEndMjd": 54179.77316505
+    "selection": {
+      "program": "europa-wfpc2-11085",
+      "observation": "u9xe010cm",
+      "configuration": "WFPC2/PC",
+      "target": "europa",
+      "kind": "image",
+      "handbook": "https://www.stsci.edu/instruments/wfpc2/Wfpc2_dhb/wfpc2_ch22.html",
+      "identity": {
+        "instrument": "WFPC2",
+        "detector": "1",
+        "opticalElement": "F631N",
+        "aperture": "",
+        "targetName": "EUROPA",
+        "proposal": "11085",
+        "exposureStartMjd": 54179.77310718,
+        "exposureEndMjd": 54179.77316505
+      },
+      "components": [
+        {
+          "role": "science",
+          "supplied": true,
+          "file": "u9xe010cm_c0m.fits",
+          "hdu": 1,
+          "units": "COUNTS",
+          "note": "The planetary camera chip, the first of the four SCI extensions, whose own header states DETECTOR 1. The other three extensions are the wide-field chips of the same exposure and are pinned with it."
+        },
+        {
+          "role": "coordinates",
+          "supplied": true,
+          "carriedBy": "u9xe010cm_c0m.fits",
+          "hdu": 1,
+          "note": "A tangent-plane world coordinate system with SIP distortion, in the chip's own header. A picture carries no wavelength array, and the arcsec a pixel covers is measured from this transform rather than declared."
+        },
+        {
+          "role": "uncertainty",
+          "supplied": false,
+          "reason": "calwp2 writes no error array. Table 2.1 of the WFPC2 data handbook lists the calibrated science data (.c0h, _c0f) and the data quality for it (.c1h, _c1f) as its calibrated science output, with no error plane among them, so nothing of the kind exists in the archive for this observation."
+        },
+        {
+          "role": "quality",
+          "supplied": true,
+          "file": "u9xe010cm_c1m.fits",
+          "hdu": 1,
+          "note": "The calibrated data quality file, flag by flag as table 3.4 of the handbook defines them; value 8 is A/D converter saturation."
+        }
+      ]
     },
+    "archiveStatement": "https://hst-docs.stsci.edu/hstdhb/1-obtaining-hst-data/1-1-archive-overview",
     "identityAgreedWith": {
       "catalogue": {
         "observation": "u9xe010cm",
@@ -55,35 +86,6 @@
         "exposureEndMjd": 54179.77316505
       }
     },
-    "components": [
-      {
-        "role": "science",
-        "supplied": true,
-        "file": "u9xe010cm_c0m.fits",
-        "hdu": 1,
-        "units": "COUNTS",
-        "note": "The planetary camera chip, the first of the four SCI extensions, whose own header states DETECTOR 1. The other three extensions are the wide-field chips of the same exposure and are pinned with it."
-      },
-      {
-        "role": "coordinates",
-        "supplied": true,
-        "carriedBy": "u9xe010cm_c0m.fits",
-        "hdu": 1,
-        "note": "A tangent-plane world coordinate system with SIP distortion, in the chip's own header. A picture carries no wavelength array, and the arcsec a pixel covers is measured from this transform rather than declared."
-      },
-      {
-        "role": "uncertainty",
-        "supplied": false,
-        "reason": "calwp2 writes no error array. Table 2.1 of the WFPC2 data handbook lists the calibrated science data (.c0h, _c0f) and the data quality for it (.c1h, _c1f) as its calibrated science output, with no error plane among them, so nothing of the kind exists in the archive for this observation."
-      },
-      {
-        "role": "quality",
-        "supplied": true,
-        "file": "u9xe010cm_c1m.fits",
-        "hdu": 1,
-        "note": "The calibrated data quality file, flag by flag as table 3.4 of the handbook defines them; value 8 is A/D converter saturation."
-      }
-    ],
     "archiveCalibration": {
       "version": {
         "CAL_VER": "2.5.3 (Sep 4, 2008)",

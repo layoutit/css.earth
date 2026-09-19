@@ -29,23 +29,58 @@
     }
   ],
   "parameters": {
-    "program": "europa-ghrs-5376",
-    "observation": "z2cf0206t",
-    "configuration": "HRS/1",
-    "target": "europa",
-    "kind": "spectrum",
-    "handbook": "https://www.stsci.edu/documents/dhb/webvol2/c10_ghrsdata.fm1.html",
-    "archiveStatement": "https://hst-docs.stsci.edu/hstdhb/1-obtaining-hst-data/1-1-archive-overview",
-    "identity": {
-      "instrument": "HRS",
-      "detector": "1",
-      "opticalElement": "G140L",
-      "aperture": "LSA",
-      "targetName": "EUROPA",
-      "proposal": "5376",
-      "exposureStartMjd": 49505.41145748,
-      "exposureEndMjd": 49505.41671356
+    "selection": {
+      "program": "europa-ghrs-5376",
+      "observation": "z2cf0206t",
+      "configuration": "HRS/1",
+      "target": "europa",
+      "kind": "spectrum",
+      "handbook": "https://www.stsci.edu/documents/dhb/webvol2/c10_ghrsdata.fm1.html",
+      "identity": {
+        "instrument": "HRS",
+        "detector": "1",
+        "opticalElement": "G140L",
+        "aperture": "LSA",
+        "targetName": "EUROPA",
+        "proposal": "5376",
+        "exposureStartMjd": 49505.41145748,
+        "exposureEndMjd": 49505.41671356
+      },
+      "components": [
+        {
+          "role": "science",
+          "supplied": true,
+          "file": "z2cf0206t_c1f.fits",
+          "hdu": 0,
+          "units": "ERGS/CM**2/S/A",
+          "note": "The calibrated science data. FLX_CORR is COMPLETE in the header, so these are fluxes rather than count rates."
+        },
+        {
+          "role": "coordinates",
+          "supplied": true,
+          "file": "z2cf0206t_c0f.fits",
+          "hdu": 0,
+          "units": "ANGSTROMS",
+          "note": "The calibrated wavelength solution, in the same shape and groups as the science data (handbook, Calibrated Wavelength Solution)."
+        },
+        {
+          "role": "uncertainty",
+          "supplied": true,
+          "file": "z2cf0206t_c2f.fits",
+          "hdu": 0,
+          "units": "ERGS/CM**2/S/A",
+          "note": "The propagated statistical error of the science data, in its units and its shape (handbook, Propagated Statistical Error)."
+        },
+        {
+          "role": "quality",
+          "supplied": true,
+          "file": "z2cf0206t_cqf.fits",
+          "hdu": 0,
+          "note": "The calibrated science data quality: \"The flags are numbers; the higher the value, the worse the data in the corresponding pixel.\""
+        }
+      ]
     },
+    "archiveStatement": "https://hst-docs.stsci.edu/hstdhb/1-obtaining-hst-data/1-1-archive-overview",
     "identityAgreedWith": {
       "catalogue": {
         "observation": "z2cf0206t",
@@ -67,39 +102,6 @@
         "exposureEndMjd": 49505.41671356
       }
     },
-    "components": [
-      {
-        "role": "science",
-        "supplied": true,
-        "file": "z2cf0206t_c1f.fits",
-        "hdu": 0,
-        "units": "ERGS/CM**2/S/A",
-        "note": "The calibrated science data. FLX_CORR is COMPLETE in the header, so these are fluxes rather than count rates."
-      },
-      {
-        "role": "coordinates",
-        "supplied": true,
-        "file": "z2cf0206t_c0f.fits",
-        "hdu": 0,
-        "units": "ANGSTROMS",
-        "note": "The calibrated wavelength solution, in the same shape and groups as the science data (handbook, Calibrated Wavelength Solution)."
-      },
-      {
-        "role": "uncertainty",
-        "supplied": true,
-        "file": "z2cf0206t_c2f.fits",
-        "hdu": 0,
-        "units": "ERGS/CM**2/S/A",
-        "note": "The propagated statistical error of the science data, in its units and its shape (handbook, Propagated Statistical Error)."
-      },
-      {
-        "role": "quality",
-        "supplied": true,
-        "file": "z2cf0206t_cqf.fits",
-        "hdu": 0,
-        "note": "The calibrated science data quality: \"The flags are numbers; the higher the value, the worse the data in the corresponding pixel.\""
-      }
-    ],
     "archiveCalibration": {
       "version": {},
       "versionStated": false,

@@ -91,16 +91,38 @@ test('an instrument whose pipeline is retired can still be qualified on the arch
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('a program that moves a component to another unit of the same file is not qualified by the record of the old one', async () => {
+  // The reviewer's case. A WFPC2 exposure keeps all four chips in one pair of files, so selecting chip 2 instead of chip 1
+  // changes which detector was measured and leaves every pinned digest untouched. The record of the chip-1 run must not qualify
+  // the chip-2 program, and the configuration falls back to pinned-but-not-qualified with the reason said.
+  const program = await read('europa-wfpc2-11085.archive-final.json') as Record<string, unknown>;
+  const record = await read('europa-wfpc2-11085.archive-final.product.json');
+  const moved = { ...program, components: (program.components as Record<string, unknown>[]).map(entry => entry.role === 'science' ? { ...entry, hdu: 2 } : entry) };
+  const root = await mkdtemp(resolve(tmpdir(), 'hst-archive-final-')), directory = resolve(root, 'tools/objects/hst/programs');
+  await mkdir(directory, { recursive: true });
+  await writeFile(resolve(directory, 'europa-wfpc2-11085.archive-final.json'), `${JSON.stringify(moved, null, 2)}\n`);
+  await writeFile(resolve(directory, 'europa-wfpc2-11085.archive-final.product.json'), `${JSON.stringify(record, null, 2)}\n`);
+  try {
+    const { archiveFinal, problems } = await repositoryReceipts(root);
+    assert.deepEqual([...archiveFinal.get('WFPC2/PC')!.qualified], [], 'the chip-1 record qualifies no chip-2 program');
+    assert.deepEqual([...archiveFinal.get('WFPC2/PC')!.programs], ['europa-wfpc2-11085'], 'the archive products stay listed; only the route is unqualified');
+    assert.equal(problems.length, 1);
+    assert.match(problems[0]!, /qualified against another run: components/u, problems[0]);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('a record that cannot be read, names something else or claims agreement qualifies nothing and is reported', async () => {
   const record = await read('europa-ghrs-5376.archive-final.product.json');
   const parameters = record.parameters as Record<string, unknown>, outputs = record.outputs as Record<string, unknown>[];
-  const evidence = record.evidence as Record<string, unknown>[];
+  const evidence = record.evidence as Record<string, unknown>[], selection = parameters.selection as Record<string, unknown>;
   for (const [why, value] of [
     ['no record at all', undefined],
     ['unreadable', '{ "schema": "cssearth-telescope-'],
     ['another stage', { ...record, stage: 'calibrate' }],
-    ['another observation', { ...record, parameters: { ...parameters, observation: 'z2cf0208t' } }],
-    ['another configuration', { ...record, parameters: { ...parameters, configuration: 'HRS/2' } }],
+    ['no selection at all', { ...record, parameters: Object.fromEntries(Object.entries(parameters).filter(([key]) => key !== 'selection')) }],
+    ['another observation', { ...record, parameters: { ...parameters, selection: { ...selection, observation: 'z2cf0208t' } } }],
+    ['another configuration', { ...record, parameters: { ...parameters, selection: { ...selection, configuration: 'HRS/2' } } }],
+    ['another identity', { ...record, parameters: { ...parameters, selection: { ...selection, identity: { ...(selection.identity as Record<string, unknown>), aperture: 'SSA' } } } }],
     ['software of ours', { ...record, software: [{ name: 'calhrs', version: '1.0' }] }],
     ['another digest', { ...record, outputs: outputs.map((output, index) => index ? output : { ...output, sha256: 'b'.repeat(64) }) }],
     ['one file short', { ...record, outputs: outputs.slice(1), evidence: evidence.filter(entry => outputs.slice(1).some(output => output.path === entry.product)) }],

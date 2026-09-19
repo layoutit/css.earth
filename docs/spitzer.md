@@ -111,7 +111,7 @@ The channel 3 trade is the one unexplained-looking number in the table above and
 - **It is not the observatory's pipeline.** MOPEX did not run. Evidence is `archive-agreement` of an unofficial re-mosaic, and the receipts say so in their `limits`.
 - **It does not choose a geometry.** The output grid is the archive's, which is what makes a pixel-by-pixel comparison possible.
 - **It rejects no outliers across frames.** The archive's pipeline rejects radiation hits where frames overlap; this does not, which is where the p99 tail lives.
-- **It masks harder than the archive.** Any imask bit rejects the pixel, rather than a per-bit policy.
+- **It retains the documented stray-light mask.** Bits 3 and 8–14 reject a pixel; corrected-artifact flags alone do not. Some covered archive pixels remain missing here, as explained below.
 - **It covers IRAC imaging only.** MIPS is not run. IRS needs SPICE or CUBISM and is not claimed.
 
 ## Files
@@ -125,3 +125,9 @@ The channel 3 trade is the one unexplained-looking number in the table above and
 | Ledger | [`tools/objects/spitzer/archive-ledger.mts`](../tools/objects/spitzer/archive-ledger.mts), [`docs/spitzer-ledger.md`](spitzer-ledger.md) |
 | Pinned observation and receipts | `tools/objects/spitzer/programs/` |
 | Tests | [`tools/objects/spitzer/spitzer.test.mts`](../tools/objects/spitzer/spitzer.test.mts), 13 tests, no network |
+
+### Three gaps in the colour example
+
+The three small grey patches to the right of NGC 3132's central star are missing samples in channel 4 (8.0 µm), not dark features of the nebula. They cover 24 output pixels: rows 512–514 and columns 1177–1195 in zero-based mosaic coordinates. Channels 1 and 2 have data there. Each patch is covered by six channel-4 frames, but all six carry mask value 31, including the stray-light flag (bit 3). The archive mosaic retains values there with coverage about 5.8.
+
+The [IRAC handbook, section 7.1.1](https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/iracinstrumenthandbook/34/) specifies fatal mask 32520 (bits 3 and 8–14). [Section 5.2.1](https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/iracinstrumenthandbook/29/) explains that stray-light masking can leave gaps with small dithers. We retain that documented mask. A matched experiment found that dropping bit 3 improved channel-4 correlation from 0.98325 to 0.99840, but reduced agreement within the archive uncertainty in channels 1 and 2. Agreement with one mosaic is insufficient evidence to reinterpret a contamination flag. The colour renderer shows missing samples in grey; no interpolation or archive pixels fill these gaps.

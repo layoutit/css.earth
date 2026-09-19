@@ -29,24 +29,59 @@
     }
   ],
   "parameters": {
-    "program": "europa-fos-5837",
-    "observation": "y2p60503t",
-    "configuration": "FOS/BL",
-    "target": "europa",
-    "kind": "spectrum",
-    "handbook": "https://www.stsci.edu/documents/dhb/webvol2/c05_fosdata.fm1.html",
-    "archiveStatement": "https://hst-docs.stsci.edu/hstdhb/1-obtaining-hst-data/1-1-archive-overview",
-    "identity": {
-      "instrument": "FOS",
-      "detector": "BLUE",
-      "opticalElement": "G270H",
-      "aperture": "B-3",
-      "targetName": "EUROPA-EAST",
-      "proposal": "5837",
-      "exposureStartMjd": 49890.82698155,
-      "exposureEndMjd": 49890.82851627,
-      "headerOpticalElement": "H27"
+    "selection": {
+      "program": "europa-fos-5837",
+      "observation": "y2p60503t",
+      "configuration": "FOS/BL",
+      "target": "europa",
+      "kind": "spectrum",
+      "handbook": "https://www.stsci.edu/documents/dhb/webvol2/c05_fosdata.fm1.html",
+      "identity": {
+        "instrument": "FOS",
+        "detector": "BLUE",
+        "opticalElement": "G270H",
+        "aperture": "B-3",
+        "targetName": "EUROPA-EAST",
+        "proposal": "5837",
+        "exposureStartMjd": 49890.82698155,
+        "exposureEndMjd": 49890.82851627,
+        "headerOpticalElement": "H27"
+      },
+      "components": [
+        {
+          "role": "science",
+          "supplied": true,
+          "file": "y2p60503t_c1f.fits",
+          "hdu": 0,
+          "units": "ERGS/CM**2/S/A",
+          "note": "The calibrated fluxes, one value per pixel of the science data (handbook, Calibrated Flux Files)."
+        },
+        {
+          "role": "coordinates",
+          "supplied": true,
+          "file": "y2p60503t_c0f.fits",
+          "hdu": 0,
+          "units": "ANGSTROMS",
+          "note": "The calibrated vacuum wavelengths at the centre of each pixel (handbook, Calibrated Wavelength Files)."
+        },
+        {
+          "role": "uncertainty",
+          "supplied": true,
+          "file": "y2p60503t_c2f.fits",
+          "hdu": 0,
+          "units": "ERGS/CM**2/S/A",
+          "note": "The propagated statistical error. The handbook states what it leaves out: \"Errors caused by sky and background subtraction, flatfields, and sensitivity are not included in the error estimates.\""
+        },
+        {
+          "role": "quality",
+          "supplied": true,
+          "file": "y2p60503t_cqf.fits",
+          "hdu": 0,
+          "note": "The calibrated science data quality, on the flag scale of table 30.2: 50 is sampling under half of nominal, 170 an intermittent noisy channel, 700 data filled after the geomagnetic image-motion correction."
+        }
+      ]
     },
+    "archiveStatement": "https://hst-docs.stsci.edu/hstdhb/1-obtaining-hst-data/1-1-archive-overview",
     "identityAgreedWith": {
       "catalogue": {
         "observation": "y2p60503t",
@@ -68,39 +103,6 @@
         "exposureEndMjd": 49890.82851627
       }
     },
-    "components": [
-      {
-        "role": "science",
-        "supplied": true,
-        "file": "y2p60503t_c1f.fits",
-        "hdu": 0,
-        "units": "ERGS/CM**2/S/A",
-        "note": "The calibrated fluxes, one value per pixel of the science data (handbook, Calibrated Flux Files)."
-      },
-      {
-        "role": "coordinates",
-        "supplied": true,
-        "file": "y2p60503t_c0f.fits",
-        "hdu": 0,
-        "units": "ANGSTROMS",
-        "note": "The calibrated vacuum wavelengths at the centre of each pixel (handbook, Calibrated Wavelength Files)."
-      },
-      {
-        "role": "uncertainty",
-        "supplied": true,
-        "file": "y2p60503t_c2f.fits",
-        "hdu": 0,
-        "units": "ERGS/CM**2/S/A",
-        "note": "The propagated statistical error. The handbook states what it leaves out: \"Errors caused by sky and background subtraction, flatfields, and sensitivity are not included in the error estimates.\""
-      },
-      {
-        "role": "quality",
-        "supplied": true,
-        "file": "y2p60503t_cqf.fits",
-        "hdu": 0,
-        "note": "The calibrated science data quality, on the flag scale of table 30.2: 50 is sampling under half of nominal, 170 an intermittent noisy channel, 700 data filled after the geomagnetic image-motion correction."
-      }
-    ],
     "archiveCalibration": {
       "version": {},
       "versionStated": false,
