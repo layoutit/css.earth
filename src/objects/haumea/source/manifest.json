@@ -256,6 +256,15 @@
       "expectedSha256": "816be54f9c2fd31c66471ada80dec5922c15c6ea267b14d37c0b72e45fa61b29"
     },
     {
+      "path": "reference/rendered-telescope-images.jpg",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /haumea/ with the Telescope images section opened, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide, JPEG quality 90), taken 2026-09-19 after preparation at commit 12a0eb6e27."
+      },
+      "expectedBytes": 150434,
+      "expectedSha256": "c3cda702263bb6d85fa213779294394c4617a31cc6880cebb0293b158d4fd2b9"
+    },
+    {
       "path": "reference/sbdb.json",
       "expectedBytes": 4594,
       "expectedSha256": "811890fe816dd7f4974caf416e112b764ce27b8b5a0668075b4c85ff2ea58d51",
