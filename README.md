@@ -22,7 +22,7 @@ Every object has its own URL and they all share one camera, so you can fly from 
 
 The Sun, the eight planets, 5 dwarf planets, 99 moons, 311 asteroids, 32 comets and 17 other trans-Neptunian objects, all on their orbits. Where a mission photographed a body, its surface comes from that mission's images; the rest are shown as shape models.
 
-<img src=".github/assets/solar-system.webp" alt="The inner Solar System out to Saturn, with orbits and labels, rendered as DOM and CSS markup" width="960">
+<img src=".github/assets/solar-system.webp" alt="An endless zoom from the whole Solar System in to Earth and back out, rendered as DOM and CSS markup" width="960">
 
 ### Stars and Exoplanets
 
