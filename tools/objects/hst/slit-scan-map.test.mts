@@ -11,14 +11,16 @@ import test from 'node:test';
 import { PROGRAMS } from './archive.mts';
 import { overlapAgreement, readReferenceSpectrum, scanPath, strongest } from './slit-scan-map.mts';
 import {
-  acrossSlitCentre, acrossSlitSign, apertureOffset, bandStrength, discChord, parseSlitScan, polynomialFit, quantiles,
-  referenceFlux, scanImage, skyOffset, type ReferenceSpectrum, type ScanBand, type ScanReduction, type SlitScanDefinition,
+  acrossSlitCentre, acrossSlitSign, addFeatureless, apertureOffset, bandFromReflectance, bandStrength, discChord,
+  featurelessMean, newFeatureless, parseSlitScan, polynomialFit, quantiles, ratioAgainst, referenceFlux, reflectance,
+  scanImage, skyOffset, type ReferenceSpectrum, type ScanBand, type ScanReduction, type SlitScanDefinition,
 } from './slit-scan-reduction.mts';
 
 const REDUCTION: ScanReduction = { skyRowsFromDisc: [40, 110], discProfileWindowAngstrom: [4000, 5500], discEdgeFraction: 0.5,
   rowSearchPixels: 25, minimumHalfChordArcsec: 0.15, acrossSlitSearchArcsec: 0.3, acrossSlitStepArcsec: 0.002, imageHalfWidthRadii: 2.5 };
 const BAND: ScanBand = { id: 'band', quantity: 'BAND STRENGTH', units: 'Angstrom', readWindowAngstrom: [3000, 5700],
-  continuumWindowsAngstrom: [[3100, 3500], [5300, 5500]], continuumOrder: 3, bandAngstrom: [3500, 5300] };
+  continuumWindowsAngstrom: [[3100, 3500], [5300, 5500]], continuumOrder: 3, bandAngstrom: [3500, 5300],
+  featurelessReference: { rule: 'no absorption in the first pass', note: 'test' } };
 /** A reference spectrum with structure in it, so that dividing by it is a real step rather than a no-op. */
 const reference = (): ReferenceSpectrum => {
   const count = 600, wavelengthAngstrom = new Float64Array(count), flux = new Float64Array(count);
@@ -128,7 +130,7 @@ test('a scan resamples to a sky picture, and the opposite across-slit direction 
   const value: (number | null)[][] = [], sigma: number[][] = [];
   for (let step = 0; step < steps; step++) {
     value.push(new Array(rows).fill(1)); sigma.push(new Array(rows).fill(0.1));
-    // One step and one row carry a mark, at a known place in the scan: the tenth step — +0.12 arcseconds — and ten rows above
+    // One step and one row carry a mark, at a known place in the scan: the tenth step (+0.12 arcseconds) and ten rows above
     // the centre.
     if (step === 9) value[step]![40] = 9;
   }
@@ -142,7 +144,7 @@ test('a scan resamples to a sky picture, and the opposite across-slit direction 
   };
   // The slit is due north, the mark sits ten rows above the disc centre, so it is ten pixels north of the middle. The step is
   // commanded +0.12 arcseconds, which carries the body -0.12 arcseconds through the slit: with +POSTARG1 at ORIENTAT-90 that
-  // places the mark 0.12 arcseconds — a little over two pixels — east of the middle, and east is the left of the picture.
+  // places the mark 0.12 arcseconds, a little over two pixels, east of the middle, and east is the left of the picture.
   const adopted = brightest(image.depth);
   assert.equal(adopted.y, 30, 'ten pixels north of the middle row');
   assert.equal(adopted.x, 18, 'a little over two pixels east of the middle column');
@@ -223,4 +225,64 @@ test('a scan definition is refused when it does not describe a scan', async () =
   assert.throws(broken(value => { (value.frames as Record<string, unknown>[])[0]!.name = 'od9l12010_x1d.fits'; }), /not a rectified STIS product/u);
   assert.throws(broken(value => { (value.reference as Record<string, unknown>).url = 'http://example.invalid/x.fits'; }), /pinned by https URL and sha256/u);
   assert.throws(broken(value => { (value.band as Record<string, unknown>).continuumOrder = 0; }), /continuum order is a small whole number/u);
+});
+
+/** A row of a body whose reflectance has a known shape, seen through the reference spectrum. */
+const row = (depth: number, tilt: number, solar: ReferenceSpectrum) => {
+  const wavelengthAngstrom: number[] = [], flux: number[] = [], error: number[] = [];
+  for (let angstrom = 3000; angstrom <= 5700; angstrom += 2.746) {
+    const shape = (1 + tilt * (angstrom - 4400) / 1000) * (1 - depth * Math.exp(-(((angstrom - 4500) / 300) ** 2) / 2));
+    wavelengthAngstrom.push(angstrom); flux.push(0.6 * shape * referenceFlux(solar, angstrom)); error.push(0.0006 * referenceFlux(solar, angstrom));
+  }
+  return { wavelengthAngstrom, flux, error };
+};
+
+test('reflectance is the flux over the reference, on the columns the reference reaches', () => {
+  const solar: ReferenceSpectrum = { wavelengthAngstrom: Float64Array.from([3000, 4000]), flux: Float64Array.from([2, 4]) };
+  const measured = reflectance({ wavelengthAngstrom: [2000, 3000, 3500, 4000, 5000], flux: [9, 2, 6, 8, 9], error: [1, 1, 3, 2, 1] }, solar);
+  assert.deepEqual([...measured.wavelengthAngstrom], [3000, 3500, 4000]);
+  assert.deepEqual([...measured.value], [1, 2, 2]);
+  assert.deepEqual([...measured.error], [0.5, 1, 0.5]);
+});
+
+test('the featureless spectrum is the weighted mean of the rows put into it, on one grid', () => {
+  const empty = newFeatureless();
+  assert.equal(featurelessMean(empty), null, 'nothing averages to nothing');
+  const grid = [100, 200, 300];
+  addFeatureless(empty, { wavelengthAngstrom: grid, value: [1, 2, 3], error: [0, 0, 0] }, 1);
+  addFeatureless(empty, { wavelengthAngstrom: grid, value: [3, 4, 5], error: [0, 0, 0] }, 3);
+  const mean = featurelessMean(empty);
+  assert.deepEqual([...mean!.value], [2.5, 3.5, 4.5]);
+  assert.equal(empty.rows, 2);
+  assert.throws(() => addFeatureless(empty, { wavelengthAngstrom: [100, 200], value: [1, 2], error: [0, 0] }, 1), /one wavelength grid/u);
+});
+
+test('a row against the featureless spectrum measures no band where the two are the same', () => {
+  const solar = reference(), featureless = reflectance(row(0, 0.05, solar), solar);
+  const flat = bandFromReflectance(ratioAgainst(featureless, featureless), BAND)!;
+  assert.ok(Math.abs(flat.equivalentWidthAngstrom) < 1e-6, `a spectrum against itself has no band: ${flat.equivalentWidthAngstrom}`);
+  assert.throws(() => ratioAgainst(featureless, { wavelengthAngstrom: [1, 2], value: [1, 1], error: [0, 0] }), /one wavelength grid/u);
+});
+
+test('the ratio moves zero to where the band is absent without moving the band that is there', () => {
+  const solar = reference();
+  // Two rows with no band but different continuum curvature, and one with a band. The published continuum alone reads a band
+  // strength off the curvature; against the mean of the two featureless rows, they read nothing and the third still reads.
+  const featurelessRows = [reflectance(row(0, 0.02, solar), solar), reflectance(row(0, 0.09, solar), solar)];
+  const banded = reflectance(row(0.05, 0.055, solar), solar);
+  const accumulator = newFeatureless();
+  for (const entry of featurelessRows) addFeatureless(accumulator, entry, 1);
+  const featureless = featurelessMean(accumulator)!;
+  const against = (entry: typeof banded) => bandFromReflectance(ratioAgainst(entry, featureless), BAND)!.equivalentWidthAngstrom;
+  const median = (featurelessRows.map(against)[0]! + featurelessRows.map(against)[1]!) / 2;
+  assert.ok(Math.abs(median) < 1, `the featureless rows average to no band: ${median}`);
+  // The band survives, at close to the area it was given (0.05 * 300 * sqrt(2 pi) = 37.6 A).
+  assert.ok(Math.abs(against(banded) - 37.6) < 5, `${against(banded)}`);
+});
+
+test('a scan definition is refused without a featureless rule or a resolution', async () => {
+  const good = JSON.parse(await readFile(scanPath('europa-salt-map'), 'utf8')) as Record<string, unknown>;
+  const broken = (change: (value: Record<string, unknown>) => void) => { const copy = JSON.parse(JSON.stringify(good)) as Record<string, unknown>; change(copy); return () => parseSlitScan(copy); };
+  assert.throws(broken(value => { ((value.band as Record<string, unknown>).featurelessReference as Record<string, unknown>).rule = 'whatever'; }), /not a featureless-reference rule/u);
+  assert.throws(broken(value => { (value.grid as Record<string, unknown>).resolutionKm = 0; }), /positive size/u);
 });

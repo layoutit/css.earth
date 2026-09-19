@@ -12,7 +12,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 const DEGREE = Math.PI / 180;
 
 // ---- the pinned definition --------------------------------------------------------------------------------------------
-/** Which way the aperture's first axis — the one `POSTARG1` steps along — lies on the sky, relative to the slit's own position
+/** Which way the aperture's first axis (the one `POSTARG1` steps along) lies on the sky, relative to the slit's own position
  * angle. Along the slit the direction is settled (rows grow along `+PA_APER`); across it, it is not, and a scan has to
  * establish it from the data before its map means anything. */
 export const ACROSS_SLIT_DIRECTIONS = ['ORIENTAT-90', 'ORIENTAT+90'] as const;
@@ -46,7 +46,16 @@ export interface ScanBand {
   readonly continuumOrder: number;
   /** The window the continuum-removed residual is integrated over, which is the band. */
   readonly bandAngstrom: readonly [number, number];
+  /** How the spectrum every row is ratioed against, the one that fixes where zero is, is built. */
+  readonly featurelessReference: FeaturelessReference;
 }
+/** The published method fits a polynomial continuum to each spectrum on its own. That sets no common zero: a polynomial
+ * anchored outside the band follows each spectrum's own shape, so a place whose reflectance curves differently between the
+ * anchors reads a band strength it does not have. The remedy is the paper's own, stated for its highest-quality spectrum:
+ * divide by the average of the spectra that show no band, and measure every row against that. */
+export const FEATURELESS_RULES = ['no absorption in the first pass'] as const;
+export type FeaturelessRule = (typeof FEATURELESS_RULES)[number];
+export interface FeaturelessReference { readonly rule: FeaturelessRule; readonly note: string }
 export interface ScanReduction {
   /** Rows this far from the disc, and no further, give the background subtracted from every column. */
   readonly skyRowsFromDisc: readonly [number, number];
@@ -64,7 +73,10 @@ export interface ScanReduction {
   /** Half-width of each visit's sky image, in body radii. */
   readonly imageHalfWidthRadii: number;
 }
-export interface ScanGrid { readonly width: number; readonly height: number; readonly maximumEmissionDegrees: number }
+export interface ScanGrid { readonly width: number; readonly height: number; readonly maximumEmissionDegrees: number;
+  /** The size of one resolution element on the body, km. Map cells are far smaller than it, so they are not independent, and
+   * a median over them is only as well determined as the number of resolution elements it covers. */
+  readonly resolutionKm: number }
 export interface PublishedValue { readonly claim: string; readonly source: string; readonly value?: string }
 export interface SlitScanDefinition {
   readonly schema: 'cssearth-hst-slit-scan-map@1';
@@ -129,8 +141,12 @@ export function parseSlitScan(value: unknown): SlitScanDefinition {
   if (!continuumWindowsAngstrom.length) throw new TypeError('A continuum is fitted over at least one window.');
   inside(readWindowAngstrom, bandAngstrom, 'bandAngstrom');
   for (const entry of continuumWindowsAngstrom) inside(readWindowAngstrom, entry, 'a continuum window');
+  const featurelessRow = requireRecord(bandRow.featurelessReference, 'featurelessReference');
+  const rule = requireString(featurelessRow.rule, 'featureless rule');
+  if (!(FEATURELESS_RULES as readonly string[]).includes(rule)) throw new TypeError(`${rule} is not a featureless-reference rule.`);
   const band: ScanBand = { id: requireString(bandRow.id, 'band id'), quantity: requireString(bandRow.quantity, 'band quantity'),
-    units: requireString(bandRow.units, 'band units'), readWindowAngstrom, continuumWindowsAngstrom, continuumOrder, bandAngstrom };
+    units: requireString(bandRow.units, 'band units'), readWindowAngstrom, continuumWindowsAngstrom, continuumOrder, bandAngstrom,
+    featurelessReference: { rule: rule as FeaturelessRule, note: requireString(featurelessRow.note, 'featureless note') } };
 
   const reductionRow = requireRecord(row.reduction, 'reduction');
   const skyRowsFromDisc = window(reductionRow.skyRowsFromDisc, 'skyRowsFromDisc');
@@ -146,7 +162,9 @@ export function parseSlitScan(value: unknown): SlitScanDefinition {
 
   const gridRow = requireRecord(row.grid, 'grid');
   const grid: ScanGrid = { width: requireFiniteNumber(gridRow.width, 'grid width'), height: requireFiniteNumber(gridRow.height, 'grid height'),
-    maximumEmissionDegrees: requireFiniteNumber(gridRow.maximumEmissionDegrees, 'maximumEmissionDegrees') };
+    maximumEmissionDegrees: requireFiniteNumber(gridRow.maximumEmissionDegrees, 'maximumEmissionDegrees'),
+    resolutionKm: requireFiniteNumber(gridRow.resolutionKm, 'resolutionKm') };
+  if (!(grid.resolutionKm > 0)) throw new TypeError('A resolution element has a positive size.');
   if (!Number.isSafeInteger(grid.width) || !Number.isSafeInteger(grid.height) || grid.width !== 2 * grid.height)
     throw new TypeError('A full-world grid is twice as wide as it is tall.');
   if (!(grid.maximumEmissionDegrees > 0) || !(grid.maximumEmissionDegrees < 90)) throw new TypeError('The emission limit is inside a right angle.');
@@ -223,15 +241,59 @@ export interface BandStrength {
   /** The fitted continuum's mean level across the band, in the reflectance the division produced. */
   readonly continuumLevel: number;
 }
-/** One row's band strength: the spectrum divided by the reference, a polynomial continuum fitted over the windows that skip
- * the band, and the continuum-removed residual integrated across it. */
-export function bandStrength(spectrum: { readonly wavelengthAngstrom: readonly number[]; readonly flux: readonly number[]; readonly error: readonly number[] },
-  reference: ReferenceSpectrum, band: ScanBand): BandStrength | null {
-  const wavelengths: number[] = [], reflectance: number[] = [], errors: number[] = [];
+/** One row turned into reflectance: its flux divided by the reference spectrum, over the columns the reference reaches. */
+export interface Reflectance { readonly wavelengthAngstrom: readonly number[]; readonly value: readonly number[]; readonly error: readonly number[] }
+export function reflectance(spectrum: { readonly wavelengthAngstrom: readonly number[]; readonly flux: readonly number[]; readonly error: readonly number[] },
+  reference: ReferenceSpectrum): Reflectance {
+  const wavelengthAngstrom: number[] = [], value: number[] = [], error: number[] = [];
   for (let index = 0; index < spectrum.wavelengthAngstrom.length; index++) {
     const angstrom = spectrum.wavelengthAngstrom[index]!, solar = referenceFlux(reference, angstrom);
     if (!(solar > 0) || !Number.isFinite(spectrum.flux[index]!)) continue;
-    wavelengths.push(angstrom); reflectance.push(spectrum.flux[index]! / solar); errors.push(Math.abs(spectrum.error[index]!) / solar);
+    wavelengthAngstrom.push(angstrom); value.push(spectrum.flux[index]! / solar); error.push(Math.abs(spectrum.error[index]!) / solar);
+  }
+  return { wavelengthAngstrom, value, error };
+}
+
+/** The mean of the rows that show no band, on the one wavelength grid every frame of a scan shares. A row whose grid differs
+ * is refused rather than interpolated: the whole point of the ratio is that the two spectra carry the same instrument. */
+export interface FeaturelessAccumulator { wavelengthAngstrom: readonly number[] | null; sum: Float64Array | null; weight: number; rows: number }
+export const newFeatureless = (): FeaturelessAccumulator => ({ wavelengthAngstrom: null, sum: null, weight: 0, rows: 0 });
+export function addFeatureless(accumulator: FeaturelessAccumulator, row: Reflectance, weight: number) {
+  if (!accumulator.sum) { accumulator.wavelengthAngstrom = row.wavelengthAngstrom; accumulator.sum = new Float64Array(row.value.length); }
+  if (accumulator.wavelengthAngstrom!.length !== row.wavelengthAngstrom.length || accumulator.wavelengthAngstrom![0] !== row.wavelengthAngstrom[0])
+    throw new RangeError('A featureless reference is built on one wavelength grid.');
+  for (let index = 0; index < row.value.length; index++) accumulator.sum[index]! += weight * row.value[index]!;
+  accumulator.weight += weight; accumulator.rows++;
+}
+/** The accumulated featureless spectrum, or null when no row showed no band. */
+export function featurelessMean(accumulator: FeaturelessAccumulator): Reflectance | null {
+  if (!accumulator.sum || !(accumulator.weight > 0)) return null;
+  const value = Array.from(accumulator.sum, total => total / accumulator.weight);
+  return { wavelengthAngstrom: accumulator.wavelengthAngstrom!, value, error: value.map(() => 0) };
+}
+
+/** One row against the featureless spectrum. Dividing two spectra the same instrument took at the same resolution cancels
+ * whatever the reference spectrum got wrong (the same solar lines sit in both), and it moves zero to where the band is
+ * absent, rather than to wherever a polynomial fitted outside the band happens to land. */
+export function ratioAgainst(row: Reflectance, featureless: Reflectance): Reflectance {
+  if (row.wavelengthAngstrom.length !== featureless.wavelengthAngstrom.length || row.wavelengthAngstrom[0] !== featureless.wavelengthAngstrom[0])
+    throw new RangeError('A row and the featureless spectrum are on one wavelength grid.');
+  const value: number[] = [], error: number[] = [];
+  for (let index = 0; index < row.value.length; index++) {
+    const divisor = featureless.value[index]!;
+    value.push(divisor > 0 ? row.value[index]! / divisor : Number.NaN);
+    error.push(divisor > 0 ? row.error[index]! / divisor : Number.NaN);
+  }
+  return { wavelengthAngstrom: row.wavelengthAngstrom, value, error };
+}
+
+/** One row's band strength: a polynomial continuum fitted over the windows that skip the band, and the continuum-removed
+ * residual integrated across it. */
+export function bandFromReflectance(row: Reflectance, band: ScanBand): BandStrength | null {
+  const wavelengths: number[] = [], reflectance: number[] = [], errors: number[] = [];
+  for (let index = 0; index < row.wavelengthAngstrom.length; index++) {
+    if (!Number.isFinite(row.value[index]!)) continue;
+    wavelengths.push(row.wavelengthAngstrom[index]!); reflectance.push(row.value[index]!); errors.push(row.error[index]!);
   }
   const middle = (band.readWindowAngstrom[0] + band.readWindowAngstrom[1]) / 2, scale = 1000;
   const abscissa = (angstrom: number) => (angstrom - middle) / scale;
@@ -256,6 +318,11 @@ export function bandStrength(spectrum: { readonly wavelengthAngstrom: readonly n
   if (!samples || !Number.isFinite(equivalentWidth)) return null;
   return { equivalentWidthAngstrom: equivalentWidth, sigmaAngstrom: Math.sqrt(variance), continuumLevel: level / samples };
 }
+
+/** The first pass: reflectance straight into the continuum fit, which is what the published method does to each spectrum on
+ * its own. It sets no common zero, and the receipt reports what it gave beside what the ratio gave. */
+export const bandStrength = (spectrum: { readonly wavelengthAngstrom: readonly number[]; readonly flux: readonly number[]; readonly error: readonly number[] },
+  reference: ReferenceSpectrum, band: ScanBand) => bandFromReflectance(reflectance(spectrum, reference), band);
 
 // ---- the disc in the scan ---------------------------------------------------------------------------------------------
 export interface Chord { readonly centreRow: number; readonly halfChordArcsec: number; readonly peak: number }
@@ -296,7 +363,7 @@ export function acrossSlitCentre(steps: readonly { readonly postArg1Arcsec: numb
 /** Where a sample sits on the sky, in arcseconds east and north of the body centre.
  *
  * `alongArcsec` runs along the slit, positive toward higher detector rows, which lie along `+ORIENTAT`. `acrossArcsec` runs
- * along the aperture's first axis, which lies ninety degrees away — on which side is what `direction` states. */
+ * along the aperture's first axis, which lies ninety degrees away. On which side is what `direction` states. */
 export function skyOffset(alongArcsec: number, acrossArcsec: number, orientatDegrees: number, direction: AcrossSlitDirection): { east: number; north: number } {
   const angle = orientatDegrees * DEGREE, sign = acrossSlitSign(direction);
   return { east: alongArcsec * Math.sin(angle) + sign * acrossArcsec * Math.cos(angle),
@@ -320,7 +387,7 @@ export interface ScanSampling {
 }
 export interface ScanImage { readonly pixels: number; readonly arcsecPerPixel: number; readonly depth: Float64Array; readonly error: Float64Array; readonly filled: number }
 
-/** One visit's scan on a square sky grid, north up and east left — the layout `projectBandMap` reads, stored bottom row first.
+/** One visit's scan on a square sky grid, north up and east left, the layout `projectBandMap` reads, stored bottom row first.
  *
  * Each output pixel is carried back to the step and row that sampled it and read there by bilinear interpolation, so the
  * picture is the scan's own sampling resampled once, with nothing invented between steps the scan did not take. */

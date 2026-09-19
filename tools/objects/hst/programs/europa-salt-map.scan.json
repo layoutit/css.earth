@@ -53,7 +53,11 @@
   "bandAngstrom": [
    3500,
    5300
-  ]
+  ],
+  "featurelessReference": {
+   "rule": "no absorption in the first pass",
+   "note": "Trumbo, Brown & Hand (2019): 'To remove these effects and achieve the highest possible quality spectrum, we then divided by the average of all spectra from regions where the 450-nm feature is absent.' The paper applies that to its one high signal-to-noise spectrum; this stage applies it to every row, because the published continuum alone sets no common zero and measurably does not put zero where the paper says there is no band. Which rows show no band is decided by a first pass with the published continuum and nothing else."
+  }
  },
  "reduction": {
   "skyRowsFromDisc": [
@@ -74,7 +78,8 @@
  "grid": {
   "width": 360,
   "height": 180,
-  "maximumEmissionDegrees": 60
+  "maximumEmissionDegrees": 60,
+  "resolutionKm": 150
  },
  "published": [
   {
@@ -110,11 +115,11 @@
  ],
  "notes": {
   "method": [
-   "Which frames: every public STIS/CCD G430L exposure of programme 14650 — 60 of them, fifteen slit positions in each of four visits. Trumbo, Brown & Hand (2019): 'we stepped the 52\" x 0.1\" slit across the full disk of Europa in both the G430L and G750L first-order spectroscopy modes' and 'We acquired spectra at each slit position over 9-s (G750L) or 10-s (G430L) integration times'. The G750L half of the programme carries the 720 nm M-centre, which this stage does not map.",
+   "Which frames: every public STIS/CCD G430L exposure of programme 14650, 60 of them, fifteen slit positions in each of four visits. Trumbo, Brown & Hand (2019): 'we stepped the 52\" x 0.1\" slit across the full disk of Europa in both the G430L and G750L first-order spectroscopy modes' and 'We acquired spectra at each slit position over 9-s (G750L) or 10-s (G430L) integration times'. The G750L half of the programme carries the 720 nm M-centre, which this stage does not map.",
    "Which products: Trumbo, Brown & Hand (2019): 'Flux- and wavelength-calibrated spectral data products were then delivered after standard reduction via the STIS calibration pipeline (calstis)'. The archive's own rectified _x2d products are read here rather than re-calibrated, because this route already reproduces one of these very exposures, od9l12010, to the last bit of single precision.",
    "One spectrum per row: Trumbo, Brown & Hand (2019): 'We obtained individual spectra by extracting single rows of the two-dimensional spectral images, corresponding to the 0.05\" pixel-scale (~150-km diffraction-limited spatial resolution at 450-nm wavelengths)'.",
    "Reflectance: Trumbo, Brown & Hand (2019): 'We then divided the ASTM E-490 solar reference spectrum into the extracted spectra to convert each to reflectance'. ASTM E-490 is not held in this repository; CALSPEC's own solar reference is divided in instead, pinned beside the frames. This repository's choice.",
-   "Continuum and band: Trumbo, Brown & Hand (2019): 'For most spectra, we fit a third-order polynomial between 310 and 550 nm, excluding the region corresponding to the F-center absorption (350 to 530 nm)' and 'We then divided each spectrum by its continuum fit and integrated the residual absorption to calculate the equivalent width (i.e., the width of a 100% absorption with the same integrated area)'. Those are the pinned windows, the pinned order and the pinned quantity. The 'small variations on these parameters ... when necessary' the paper allows are not made: every row here is reduced the same way.",
+   "Continuum and band: Trumbo, Brown & Hand (2019): 'For most spectra, we fit a third-order polynomial between 310 and 550 nm, excluding the region corresponding to the F-center absorption (350 to 530 nm)' and 'We then divided each spectrum by its continuum fit and integrated the residual absorption to calculate the equivalent width (i.e., the width of a 100% absorption with the same integrated area)'. Those are the pinned windows, the pinned order and the pinned quantity. The 'small variations on these parameters ... when necessary' the paper allows are not made: every row here is reduced the same way. The published continuum is fitted to each spectrum on its own, which sets no common zero, so every row is then measured against the mean of the rows that show no band, by the paper's own remedy for its own highest-quality spectrum: 'we then divided by the average of all spectra from regions where the 450-nm feature is absent'. Which rows those are is decided by a first pass with the published continuum and nothing else.",
    "Overlaps: Trumbo, Brown & Hand (2019): 'In mapping the calculated band strengths, we averaged the values in overlapping regions'. Here the average is weighted by how far inside its own edge each visit saw the cell, which is what every body map in this repository does. This repository's choice.",
    "The limb: Trumbo, Brown & Hand (2019): 'We left out data very near the limb of Europa, as the spectra are of poorer quality and make quantifying weak absorptions difficult'. The paper does not say how near; a cell is kept only where the body faced Hubble within 60 degrees, which is 0.87 of the radius. This repository's choice.",
    "Where each row sits on the body: the paper does not say how it placed them. Here it is measured from the scan itself. Along the slit, the body is a top hat as wide as its chord in the sunlight it reflects, and the middle of that chord is its centre. Across the slit, the chords say where the centre is: a step at distance d from it cuts a half-chord of sqrt(R^2 - d^2), and the offset that best explains all fifteen steps against a disc of the ephemeris radius is the answer. This repository's choice.",
@@ -122,21 +127,24 @@
   ],
   "measured": [
    "All 60 frames are used and none rejected: four visits, fifteen slit positions each, 600 seconds in all.",
-   "The scan's own chords fit a disc of the ephemeris radius to between 0.037 and 0.080 arcseconds - under two detector pixels - in all four visits, so the across-slit pointing is measured rather than assumed.",
+   "The scan's own chords fit a disc of the ephemeris radius to between 0.037 and 0.080 arcseconds, under two detector pixels, in all four visits, so the across-slit pointing is measured rather than assumed.",
    "The sub-observer longitudes this run derives are 45.9, 132.6, 223.5 and 313.6 degrees west, against the 47, 133, 224 and 314 degrees west Trumbo, Brown & Hand (2019) states in its Table 1 at each visit's start.",
    "The map keeps 40,150 cells, 82.3 per cent of the surface, 7,611 of them seen by two visits or more.",
-   "The across-slit direction is ORIENTAT-90. With it every one of the four visit pairs that share ground agrees: mean correlation 0.56 over 7,611 shared cells, rms difference 36.6 Angstrom. With ORIENTAT+90 two of the four anti-correlate, at -0.75 and -0.82, the mean falls to -0.09 and the rms difference doubles to 70.9 Angstrom.",
-   "The strongest absorption sits at 69.5 degrees west, 15.5 degrees south, at 102.4 Angstrom of equivalent width - 5.7 per cent of the 1800 Angstrom band averaged across it. That is 16 degrees of longitude east of the about 85 degrees west Trumbo, Brown & Hand (2019) gives for the deepest absorptions, in Tara Regio.",
-   "The band absorbs on the leading hemisphere and not on the trailing one: the median band strength within 45 degrees of the equator is +22.9 Angstrom between 0 and 180 degrees west and -79.8 Angstrom between 180 and 360. Trumbo, Brown & Hand (2019): the feature is located exclusively on the leading hemisphere.",
-   "The median error on a mapped cell is 1.5 Angstrom, so the map is not photon-limited: what limits it is the continuum model."
+   "The across-slit direction is ORIENTAT-90. With it every one of the four visit pairs that share ground agrees: mean correlation 0.60 over 7,611 shared cells. With ORIENTAT+90 two of the four anti-correlate, at -0.75 and -0.82, and the mean falls to -0.09.",
+   "The reference spectrum divides out to 1.2 to 2.5 per cent above 4400 Angstrom and only 5 to 15 per cent below 4000 Angstrom, and that residual is common to all four visits (correlation 0.72 to 0.99 between visits on opposite hemispheres), so it is solar line structure the reference cannot resolve, not noise. Removing it cuts the blue continuum anchor scatter from 7 to 9 per cent down to 2.4 to 4.6 per cent and moves the band strength by under 4 per cent, so it is not what set zero wrong.",
+   "What set zero wrong is the continuum itself. The published windows leave 1800 Angstrom between the anchors unconstrained, and the two hemispheres curve differently across it: with the published continuum alone the trailing hemisphere, where Trumbo, Brown & Hand (2019) finds no feature, reads -79.8 plus or minus 3.3 Angstrom, which is not zero and is larger than the leading signal of +22.9.",
+   "756 of 1248 on-disc rows show no band in the first pass and make the spectrum zero is measured against. Against it the trailing hemisphere reads +2.6 plus or minus 4.8 Angstrom, consistent with nothing, and the strongest absorption sits at 94.5 degrees west, 16.5 degrees north, at 193.6 Angstrom.",
+   "The strongest absorption is 80.2 Angstrom above its own hemisphere median of 113.4, against a leading interquartile spread of 25.9.",
+   "The median photon error on a mapped cell is 1.3 to 1.6 Angstrom, so nothing here is photon limited: what limits it is the continuum model."
   ],
   "notVerified": [
-   "The zero point of the band strength is not established. A mismatch between the solar reference used here and the true solar spectrum is the same in every row, so it moves the whole map by one amount; what this measures is the map's contrast, not an absolute equivalent width.",
-   "The large negative values over the trailing hemisphere are not negative absorption. The continuum is fitted only over 310-350 and 530-550 nm and read across the 180 nm between them, and the trailing hemisphere reflectance falls far more steeply toward the ultraviolet than the leading one, so a cubic anchored that way overshoots there. Trumbo, Brown & Hand (2019) maps no feature on the trailing hemisphere. Nothing here separates how much of the -79.8 Angstrom median is that overshoot and how much is a real difference in spectral shape.",
+   "The leading hemisphere carries a pedestal. Its median band strength is 113.4 Angstrom while its interquartile spread is only 25.9, so most of what the map shows on that side is a step across the whole hemisphere rather than the concentration in chaos terrain Trumbo, Brown & Hand (2019) describes. The featureless rows are mostly trailing ones, so whatever differs broadly between the two hemispheres continua enters the band. This stage does not separate that from the sodium chloride band, and the honest measure of the feature is the 80.2 Angstrom the strongest cell stands above its own hemisphere.",
+   "The trailing hemisphere is not an independent test of zero in the strict sense. The rows that build the featureless spectrum are chosen by their own spectra, not by where they are on the body, but 756 of them are mostly trailing rows, so the set and the test overlap.",
+   "The zero test counts one resolution element as 150 km, which Trumbo, Brown & Hand (2019) gives at the sub-observer point. That is the best the data reach, so it counts the most independent elements and gives the smallest error the median can honestly claim. Away from the sub-observer point the elements are larger and the error is larger.",
    "The across-slit direction is settled by the agreement between visits that saw the same ground, not by instrument documentation, which was not obtained. If it is wrong, every visit is reflected about its own slit and the map is not the body.",
    "Hubble's blur is not removed and no anamorphic correction is applied. A 150 km resolution element is smeared across the neighbours of a 27 km map cell, so the map is smoother than its grid.",
-   "The background is one median per column over the rows 40 to 110 from the body. Scattered light that varies along the slit underneath the body is not modelled, and it would matter most where the body is faintest, which is the near-ultraviolet end of the continuum anchor.",
-   "The paper's 'small variations on these parameters ... when necessary to achieve a satisfactory continuum fit' are not reproduced, and the second-order continuum it reports as giving qualitatively identical results was not run through this stage.",
+   "The rectified products carry no signal off the slit, so the background step subtracts a measured zero and does nothing. Scattered light that varies along the slit underneath the body is neither measured nor modelled here.",
+   "The paper's 'small variations on these parameters ... when necessary to achieve a satisfactory continuum fit' are not reproduced, and the second-order continuum it reports as giving qualitatively identical results gives EW values two to three times different here, which is another sign the continuum is the weak part.",
    "The G750L half of programme 14650 is not read here, so the 720 nm M-centre upper limit Trumbo, Brown & Hand (2019) places is not reproduced.",
    "The x2d products are the archive's own, not re-calibrated for this run. That this route reproduces them is shown for one of these exposures only, od9l12010."
   ]
