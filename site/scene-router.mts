@@ -1,5 +1,4 @@
 import type { SceneState } from './shell-contract-types.mts';
-import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/deferred-object-mount.js';
 import type { BrowserWindow, SceneFactory } from './browser-types.mts';
@@ -12,8 +11,7 @@ type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Shell = ReturnType<typeof mountPlanetShell>;
 export type WorldContextOwner = ReturnType<typeof applicationWorldContext.createApplicationWorldContext>;
 export type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
-interface Request { id: string; cancelledFlight: boolean; controller: AbortController; lifetime: SceneLifetime; url: string; options: NavigationOptions; timing: ReturnType<typeof createNavigationTiming>; }
-interface Session { framePresenter?: ReturnType<NonNullable<WorldContextMount['createFramePresenter']>>; generation: number; lifetime: SceneLifetime; mount: ObjectSceneLifecycle | null; shell: Shell | null; lastCommand: boolean | null; viewUrl: ReturnType<typeof bindViewUrl> | null; request?: Request; url?: string; }
+interface Session { framePresenter?: ReturnType<NonNullable<WorldContextMount['createFramePresenter']>>; lifetime: SceneLifetime; mount: ObjectSceneLifecycle | null; shell: Shell | null; lastCommand: boolean | null; viewUrl: ReturnType<typeof bindViewUrl> | null; request?: NavigationRequest; url?: string; }
 export interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountPlanetShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
 import { readObjectDiagnostics } from '../src/renderers/css/dist/index.js';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
@@ -36,6 +34,8 @@ import { overviewScopeFromUrl } from './navigation-scope.mts';
 import { createNavigationTiming } from './navigation-timing.mts';
 import { isFocusDatasetUrl, readDatasetUrl, withDataset } from './dataset-url.mts';
 import { retainInitialScene } from './initial-scene.mts';
+import { createNavigationLifecycle, type NavigationRequest } from './navigation-lifecycle.mts';
+import { createWorldPreferences } from './world-preferences.mts';
 
 
 export function createSceneRouter({
@@ -54,23 +54,14 @@ export function createSceneRouter({
   let active: Session | null = null;
   let mountTask: Promise<boolean | undefined> | null = null;
   let motionEnabled = false;
-  let heliosphereEnabled = false;
-  let highContrastSky = documentTarget.querySelector<HTMLInputElement>('.planet-sky-contrast-setting')?.checked ?? false;
-  let illustrationModelsEnabled = false;
-  let asteroidBodiesEnabled = false;
-  let asteroidOrbitsEnabled = false;
-  let asteroidLabelsEnabled = false;
-  let minimapEnabled = false;
-  let orbitRenderer: OrbitRenderer = 'strokes';
-  let highlightedClassification: string | null = null;
+  const preferences = createWorldPreferences(documentTarget);
   let scenePaused = true;
   let sceneError: unknown = null;
   let sceneState: SceneState = "loading";
   let hasPresented = false;
   const initialScene = retainInitialScene(stage);
   let destroyed = false;
-  let nextGeneration = 0;
-  let shellOwner: { shell: Shell | null } | null = null, pending: Request | null = null, historyOwner: ReturnType<typeof createNavigationHistory> | null = null, unbindLinks: (() => void) | null = null;
+  let shellOwner: { shell: Shell | null } | null = null, historyOwner: ReturnType<typeof createNavigationHistory> | null = null, unbindLinks: (() => void) | null = null;
   let publishedBodyState = '';
   let centeredObjectId: string | null = null;
   let overview = Boolean(overviewScopeFromUrl(windowTarget.location?.href ?? 'https://example.test'));
@@ -81,6 +72,9 @@ export function createSceneRouter({
   const contentTransport = navigation && !loadContent ? createNavigationContent({ documentTarget, windowTarget }) : null;
   const reducedMotion = windowTarget.matchMedia?.("(prefers-reduced-motion: reduce)");
   let reducedMotionActive = false;
+  const requests = createNavigationLifecycle({ onError: report, onCancel(request) {
+    if (active?.request === request && sceneState !== 'ready') retire(active, null, { preserveShell: true, flush: false });
+  } });
 
   // These survive scene teardown so a persisted document can restore itself.
   windowTarget.addEventListener("pagehide", destroyActiveScene);
@@ -88,10 +82,10 @@ export function createSceneRouter({
   if (navigation && windowTarget.location?.href) {
     // Only a settled scene belongs to the entry that history names. An unfinished navigation
     // has not committed its own entry, so snapshotting its scene would overwrite the entry it left.
-    historyOwner = createNavigationHistory({ windowTarget, objects, capture: () => pending ? null : captureUrl(), navigate, navigating: () => pending !== null, embedded: 'embed' in documentTarget.documentElement.dataset, onError: report });
+    historyOwner = createNavigationHistory({ windowTarget, objects, capture: () => requests.current ? null : captureUrl(), navigate, navigating: () => requests.current !== null, embedded: 'embed' in documentTarget.documentElement.dataset, onError: report });
     unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
       // During a body flight a focus link is an ordinary navigation, so the last click wins.
-      selectPreparedFocus: id => pending ? null : worldContextMount?.selectPreparedFocus?.(id) ?? null,
+      selectPreparedFocus: id => requests.current ? null : worldContextMount?.selectPreparedFocus?.(id) ?? null,
       supports: id => navigation.supports(objectId, id), navigate, onError: report });
   }
   mountTask = mountApplication();
@@ -112,10 +106,10 @@ export function createSceneRouter({
     },
   });
 
-  async function mountApplication({ factory, content, handoff, request }: { factory?: SceneFactory; content?: NavigationContent; handoff?: WorldHandoff; request?: Request } = {}): Promise<boolean | undefined> {
+  async function mountApplication({ factory, content, handoff, request }: { factory?: SceneFactory; content?: NavigationContent; handoff?: WorldHandoff; request?: NavigationRequest } = {}): Promise<boolean | undefined> {
     if (destroyed || active) return;
     const session: Session = {
-      generation: ++nextGeneration, lifetime: createSceneLifetime(),
+      lifetime: createSceneLifetime(),
       mount: null, shell: null, lastCommand: null, viewUrl: null, request,
       url: request?.url ?? windowTarget.location?.href,
     };
@@ -141,45 +135,10 @@ export function createSceneRouter({
       if (!shellOwner) {
         const owner: { shell: Shell | null } = { shell: null };
         shellOwner = owner;
-        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, illustrationModelsEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, minimapEnabled, orbitRenderer,
+        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled,
+          ...preferences.bind(() => shellOwner === owner && active !== null, () => worldContextMount),
           onMotionChange(next) { if (shellOwner === owner && active) {
             motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
-          } },
-          onSkyContrastChange(next) { if (shellOwner === owner && active) {
-            highContrastSky = next === true;
-            worldContextMount?.setHighContrastSky?.(highContrastSky);
-          } },
-          onHeliosphereChange(next) { if (shellOwner === owner && active) {
-            heliosphereEnabled = next === true;
-            worldContextMount?.setHeliosphereEnabled?.(heliosphereEnabled);
-          } },
-          onIllustrationModelsChange(next) { if (shellOwner === owner && active) {
-            illustrationModelsEnabled = next === true;
-            worldContextMount?.setIllustrationModelsEnabled?.(illustrationModelsEnabled);
-          } },
-          onAsteroidBodiesChange(next) { if (shellOwner === owner && active) {
-            asteroidBodiesEnabled = next === true;
-            worldContextMount?.setAsteroidBodiesEnabled?.(asteroidBodiesEnabled);
-          } },
-          onAsteroidOrbitsChange(next) { if (shellOwner === owner && active) {
-            asteroidOrbitsEnabled = next === true;
-            worldContextMount?.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
-          } },
-          onAsteroidLabelsChange(next) { if (shellOwner === owner && active) {
-            asteroidLabelsEnabled = next === true;
-            worldContextMount?.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
-          } },
-          onMinimapChange(next) { if (shellOwner === owner && active) {
-            minimapEnabled = next === true;
-            worldContextMount?.setMinimapEnabled?.(minimapEnabled);
-          } },
-          onOrbitRendererChange(next) { if (shellOwner === owner && active) {
-            orbitRenderer = next;
-            worldContextMount?.setOrbitRenderer?.(orbitRenderer);
-          } },
-          onCategoryChange(next) { if (shellOwner === owner) {
-            highlightedClassification = next;
-            worldContextMount?.setHighlightedClassification?.(highlightedClassification);
           } },
         });
       }
@@ -246,11 +205,11 @@ export function createSceneRouter({
       if (handoff?.afterMount) {
         if (!request) throw new Error('A world handoff requires its navigation request.');
         try {
-          const completed = await session.lifetime.wait(handoff.afterMount(mount, { signal: request.controller.signal }));
-          if (completed.cancelled || active !== session || request.controller.signal.aborted) return;
+          const completed = await session.lifetime.wait(handoff.afterMount(mount, { signal: request.signal }));
+          if (completed.cancelled || active !== session || request.signal.aborted) return;
         } catch (error) {
           if ((!record(error) && !(error instanceof Error)) || error.name !== 'AbortError' || !('preserveView' in error) || error.preserveView !== true || active !== session ||
-              session.lifetime.disposed || request.controller.signal.aborted) throw error;
+              session.lifetime.disposed || request.signal.aborted) throw error;
           // The detailed destination already owns the camera. Real input ends
           // its flight without retiring that scene or restoring the endpoint.
           interrupted = true;
@@ -258,14 +217,15 @@ export function createSceneRouter({
           if (drawnUrl) request.url = session.url = new URL(drawnUrl, windowTarget.location.href).href;
         }
       }
-      const datasetController = request?.controller ?? new AbortController();
+      const datasetController = new AbortController();
+      const datasetSignal = request ? AbortSignal.any([request.signal, datasetController.signal]) : datasetController.signal;
       session.lifetime.onDispose(() => datasetController.abort());
       try {
-        const selected = session.url ? await selectDataset(session, session.url, datasetController.signal, { initial: true }) : true;
-        if (active !== session || datasetController.signal.aborted) return false;
+        const selected = session.url ? await selectDataset(session, session.url, datasetSignal, { initial: true }) : true;
+        if (active !== session || datasetSignal.aborted) return false;
         if (!selected) throw new Error('Dataset selection was superseded.');
       } catch (error) {
-        if (active !== session || datasetController.signal.aborted) return false;
+        if (active !== session || datasetSignal.aborted) return false;
         shell.setDatasetNotice?.(`${errorMessage(error)} Showing the default dataset.`);
         // A direct invalid link stays visible for diagnosis. A completed body
         // navigation publishes the destination's actual default selection.
@@ -274,7 +234,9 @@ export function createSceneRouter({
           request.url = session.url = withDataset(new URL(request.url), current && current !== datasets?.defaultId ? current : null).href;
         }
       }
-      if (request) historyOwner?.commit(request.url, request.options);
+      if (request) {
+        if (!requests.advance(request, 'committing') || !commitNavigation(request, session)) return false;
+      }
       if (mount.sharedView && windowTarget.location?.href) {
         session.viewUrl = bindViewUrl({ windowTarget, view: mount.sharedView,
           getMotion: () => motionEnabled,
@@ -313,14 +275,14 @@ export function createSceneRouter({
       if (mount.datasets) {
         syncCompanionClouds(mount.datasets);
         session.lifetime.onDispose(mount.datasets.subscribe(() => {
-          if (active !== session || pending || sceneState !== 'ready') return;
+          if (active !== session || requests.current || sceneState !== 'ready') return;
           syncCompanionClouds(mount.datasets!);
           syncDatasetUrl(session);
         }));
       }
       hasPresented = true;
       initialScene?.commit();
-      if (pending === request) pending = null;
+      if (request) requests.finish(request, interrupted ? 'interrupted' : 'finished');
       setOverview(Boolean(overviewScopeFromUrl(session.url ?? windowTarget.location?.href ?? 'https://example.test')));
       syncPlayback();
       connectOverviewSelection(session);
@@ -403,16 +365,12 @@ export function createSceneRouter({
     if (centerTarget && options.sceneSelection && systemById(objects, id)) {
       options = { ...options, overview: true };
     }
-    const cancelledFlight = pending !== null && !pending.options.centerSelection && !options.centerSelection;
+    const cancelledFlight = requests.current !== null && !requests.current.options.centerSelection && !options.centerSelection;
     // Snapshot the departed view before cancelling: a superseded navigation records nothing.
     const mode = options.history ?? 'push';
     if (mode === 'pop') historyOwner?.remember();
     else historyOwner?.checkpoint();
-    if (pending) {
-      const previous = pending;
-      pending = null; previous.controller.abort(); previous.lifetime.destroy();
-      if (active?.request === previous && sceneState !== 'ready') retire(active, null, { preserveShell: true, flush: false });
-    }
+    requests.cancel();
     worldContextMount?.suspendFocus?.();
     active?.viewUrl?.destroy();
     if (active) active.viewUrl = null;
@@ -423,29 +381,27 @@ export function createSceneRouter({
       if (options.overview) url.searchParams.set('overview', options.overviewScope ?? 'system');
       if (options.feature) url.searchParams.set('feature', options.feature);
     }
-    const request: Request = { id, cancelledFlight, controller: new AbortController(), lifetime: createSceneLifetime(),
-      url: url.href, options: { ...options, history: mode }, timing: createNavigationTiming(windowTarget, objectId, id) };
-    request.controller.signal.addEventListener('abort', () => request.timing.mark('cancelled'), { once: true });
-    pending = request;
+    const request = requests.begin({ id, cancelledFlight,
+      url: url.href, options: { ...options, history: mode }, timing: createNavigationTiming(windowTarget, objectId, id) });
     worldContextMount?.previewSelection?.(options.overview ? null : id);
-    request.lifetime.onDispose(() => {
-      if (!pending || pending === request) worldContextMount?.previewSelection?.();
+    request.own(() => {
+      if (!requests.current || requests.owns(request)) worldContextMount?.previewSelection?.();
     });
     // Preview the destination card while the camera approaches its overview.
     if ((options.recenter || options.centerSelection) && options.overview) {
       const restoreSelection = shellOwner?.shell?.beginOverviewSelection?.(options.overviewScope ?? 'system', id);
-      if (restoreSelection) request.lifetime.onDispose(restoreSelection);
+      if (restoreSelection) request.own(restoreSelection);
     } else if (!options.overview) {
       const releaseCard = shellOwner?.shell?.beginCardNavigation?.(object, options.targetWorldCamera);
       const restoreSelection = shellOwner?.shell?.beginObjectSelection?.(object);
-      if (restoreSelection) request.lifetime.onDispose(restoreSelection);
-      if (releaseCard) request.lifetime.onDispose(releaseCard);
+      if (restoreSelection) request.own(restoreSelection);
+      if (releaseCard) request.own(releaseCard);
     }
     mountTask = transition(request, object);
     return mountTask;
   }
 
-  async function transition(request: Request, object: ObjectEntry): Promise<boolean | undefined> {
+  async function transition(request: NavigationRequest, object: ObjectEntry): Promise<boolean | undefined> {
     if (!navigation) return false;
     const source = active;
     try {
@@ -453,64 +409,66 @@ export function createSceneRouter({
         const destination = new URL(request.url);
         const datasetLink = Boolean(request.options.url) &&
           (readDatasetUrl(destination).requested || isFocusDatasetUrl(destination));
-        const datasetSelection = selectDataset(source, request.url, request.controller.signal);
+        const datasetSelection = selectDataset(source, request.url, request.signal);
         if (!(typeof datasetSelection === 'boolean' ? datasetSelection : await datasetSelection)) {
-          if (pending !== request) return false;
-          pending = null; request.lifetime.destroy();
+          if (!requests.owns(request)) return false;
+          requests.finish(request, 'cancelled');
           syncDatasetUrl(source);
           await bindSessionView(source, { restore: false }); syncPlayback();
           return false;
         }
-        if (pending !== request) return false;
+        if (!requests.owns(request)) return false;
         const restore = request.options.history === 'pop' ||
           (Boolean(request.options.url) && new URL(request.url).searchParams.has('v'));
         if (restore) {
-          if (request.options.history === 'pop' || request.url !== windowTarget.location.href) historyOwner?.commit(request.url, request.options);
-          source.url = request.url;
+          if (request.options.history === 'pop' || request.url !== windowTarget.location.href) commitNavigation(request, source);
+          else source.url = request.url;
           // History within one object flies to its saved view, as history between objects does;
           // it used to jump there in one frame. The exact saved state is still restored afterwards.
           const savedWorld = request.options.history === 'pop' && !reducedMotionActive
             ? navigation.savedTarget?.({ objectId: object.id, url: request.url, mount: source.mount }) : null;
           if (savedWorld && navigation.focus) {
+            requests.advance(request, 'flying');
             syncPlayback();
             const flown = await request.lifetime.wait(navigation.focus({ objectId: object.id, mount: source.mount!,
-              signal: request.controller.signal, reducedMotion: reducedMotionActive, targetWorldCamera: savedWorld, timing: request.timing }));
-            if (flown.cancelled || pending !== request) return false;
+              signal: request.signal, reducedMotion: reducedMotionActive, targetWorldCamera: savedWorld, timing: request.timing }));
+            if (flown.cancelled || !requests.owns(request)) return false;
           }
         } else if (!datasetLink && !request.cancelledFlight && !request.options.preserveView && navigation.focus) {
+          requests.advance(request, 'flying');
           syncPlayback();
           const focused = await request.lifetime.wait(navigation.focus({ objectId: object.id,
-            mount: source.mount!, signal: request.controller.signal, reducedMotion: reducedMotionActive,
+            mount: source.mount!, signal: request.signal, reducedMotion: reducedMotionActive,
             targetWorldCamera: request.options.targetWorldCamera, targetFocusPositionM: request.options.targetFocusPositionM, centerSelection: request.options.centerSelection, timing: request.timing }));
-          if (focused.cancelled || pending !== request) return false;
+          if (focused.cancelled || !requests.owns(request)) return false;
         }
+        if (!requests.advance(request, 'committing')) return false;
         if (!restore) {
-          source.url = request.url;
           const changesSelection = overview !== Boolean(overviewScopeFromUrl(request.url)) ||
             overviewScopeFromUrl(windowTarget.location.href) !== overviewScopeFromUrl(request.url);
-          historyOwner?.commit(request.url, { ...request.options,
+          commitNavigation(request, source, { ...request.options,
             history: changesSelection || datasetLink ? request.options.history : 'replace' });
         }
         setOverview(Boolean(overviewScopeFromUrl(request.url)));
-        await bindSessionView(source, { restore });
-        if (pending !== request) return false;
-        pending = null; request.lifetime.destroy(); syncPlayback();
+        await bindSessionView(source, { restore, request });
+        if (!requests.owns(request)) return false;
+        requests.finish(request, 'finished'); syncPlayback();
         if (!restore) source.viewUrl?.flush();
-        request.timing.mark('finished');
         return true;
       }
       syncPlayback();
-      const contentTask = (loadContent ?? contentTransport!.load)(object, { signal: request.controller.signal })
+      const contentTask = (loadContent ?? contentTransport!.load)(object, { signal: request.signal })
         .then(content => {
-          request.lifetime.onDispose(() => content.dispose?.());
+          request.own(() => content.dispose?.());
           request.timing.mark('content-ready'); return content;
         });
       const factoryTask = loadObject(object.id).then(factory => { request.timing.mark('factory-ready'); return factory; });
       // The registry already owns the physical frames. Start the camera while
       // the destination factory, content and texture bank load independently.
+      requests.advance(request, 'flying');
       const preparationTask = navigation.prepare({
         fromId: objectId, toId: object.id, fromMount: source?.mount ?? null, toFactory: factoryTask,
-        signal: request.controller.signal, url: request.url,
+        signal: request.signal, url: request.url,
         reducedMotion: reducedMotionActive,
         targetWorldCamera: request.options.targetWorldCamera,
         targetFocusPositionM: request.options.targetFocusPositionM,
@@ -521,21 +479,17 @@ export function createSceneRouter({
         presentWorld: worldContextMount ? (world, viewport, options) => worldContextMount?.present(world, viewport, options) : null,
       });
       const loaded = await request.lifetime.wait(Promise.all([factoryTask, contentTask, preparationTask]));
-      if (loaded.cancelled || pending !== request) return false;
+      if (loaded.cancelled || !requests.owns(request)) return false;
       const [factory, content, handoff] = loaded.value;
       request.timing.mark('handoff');
       if (active) retire(active, null, { preserveShell: true, flush: false });
       objectId = object.id;
       if (stage.dataset) stage.dataset.objectId = object.id;
       const result = await mountApplication({ factory, content, handoff, request });
-      request.timing.mark(result === true ? 'finished' : sceneState === 'error' ? 'failed' : 'cancelled');
-      if (pending === request) pending = null;
-      request.lifetime.destroy();
+      requests.finish(request, sceneState === 'error' ? 'failed' : 'cancelled');
       return result === true;
     } catch (error) {
-      request.timing.mark(error instanceof Error && error.name === 'AbortError' ? 'cancelled' : 'failed');
-      if (pending !== request || request.controller.signal.aborted) return false;
-      pending = null; request.controller.abort(); request.lifetime.destroy();
+      if (!requests.finish(request, error instanceof Error && error.name === 'AbortError' ? 'cancelled' : 'failed')) return false;
       centeredObjectId = null;
       worldContextMount?.setNavigationInFlight?.(false);
       shellOwner?.shell?.setNavigationInFlight?.(false);
@@ -555,8 +509,15 @@ export function createSceneRouter({
     }
   }
 
-  async function bindSessionView(session: Session, { restore = true } = {}) {
-    if (active !== session || !session.mount?.sharedView || !windowTarget.location?.href || !session.url) return;
+  function commitNavigation(request: NavigationRequest, session: Session, options = request.options) {
+    return requests.commit(request, () => {
+      session.url = request.url;
+      historyOwner?.commit(request.url, options);
+    });
+  }
+
+  async function bindSessionView(session: Session, { restore = true, request }: { restore?: boolean; request?: NavigationRequest } = {}) {
+    if ((request && !requests.owns(request)) || active !== session || !session.mount?.sharedView || !windowTarget.location?.href || !session.url) return;
     // A failed history restoration keeps its incoming URL for diagnosis, like
     // Galaxio's invalid-route state. The old scene must not write into it.
     if (new URL(session.url).pathname !== windowTarget.location.pathname) return;
@@ -568,15 +529,15 @@ export function createSceneRouter({
     });
     session.viewUrl = owner;
     session.lifetime.onDispose(() => owner.destroy());
-    if (restore) await session.lifetime.wait(owner.restore());
-    if (active === session && !session.lifetime.disposed) worldContextMount?.restoreFocus?.(session.url);
+    if (restore) await (request?.lifetime ?? session.lifetime).wait(owner.restore());
+    if ((!request || requests.owns(request)) && active === session && !session.lifetime.disposed) worldContextMount?.restoreFocus?.(session.url);
   }
 
   function readPlayback() {
     return Object.freeze({
       motionRequested: motionEnabled,
       ...automaticPlaybackPolicy({
-        sceneState: pending ? 'loading' : sceneState, motionRequested: motionEnabled,
+        sceneState: requests.current ? 'loading' : sceneState, motionRequested: motionEnabled,
         documentHidden: documentTarget.hidden,
         reducedMotion: reducedMotionActive,
       }),
@@ -584,15 +545,15 @@ export function createSceneRouter({
   }
 
   function readSceneState() {
-    const selected = pending ? !overviewScopeFromUrl(pending.url) : !overview;
+    const selected = requests.current ? !overviewScopeFromUrl(requests.current.url) : !overview;
     return Object.freeze({
       activeObjectId: objectId,
-      selectedObjectId: selected ? pending?.id ?? objectId : null,
+      selectedObjectId: selected ? requests.current?.id ?? objectId : null,
       overview: !selected,
       error: sceneError instanceof Error ? sceneError.message : null,
       lifecycle: sceneState === "ready" ? (scenePaused ? "paused" : "mounted") : sceneState,
       mountedObjectCount: active?.mount ? 1 : 0,
-      ready: sceneState === "ready" && pending === null,
+      ready: sceneState === "ready" && requests.current === null,
     });
   }
 
@@ -625,7 +586,7 @@ export function createSceneRouter({
   }
 
   function publishSceneState() {
-    const inFlight = Boolean(pending && pending.options.preserveView !== true);
+    const inFlight = Boolean(requests.current && requests.current.options.preserveView !== true);
     worldContextMount?.setNavigationInFlight?.(inFlight);
     shellOwner?.shell?.setNavigationInFlight?.(inFlight);
     const state = readSceneState();
@@ -694,15 +655,7 @@ export function createSceneRouter({
         worldContextMount = value;
         // The world mounts after the scene is ready, so a dataset that asks for a companion cloud asks again here.
         if (active?.mount?.datasets) syncCompanionClouds(active.mount.datasets);
-        value.setHighContrastSky?.(highContrastSky);
-        value.setHeliosphereEnabled?.(heliosphereEnabled);
-        value.setIllustrationModelsEnabled?.(illustrationModelsEnabled);
-        value.setAsteroidBodiesEnabled?.(asteroidBodiesEnabled);
-        value.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
-        value.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
-        value.setMinimapEnabled?.(minimapEnabled);
-        value.setOrbitRenderer?.(orbitRenderer);
-        value.setHighlightedClassification?.(highlightedClassification);
+        preferences.apply(value);
         return value;
       }).catch(error => {
         if (worldContextAbort === controller) worldContextMountTask = null;
@@ -764,7 +717,7 @@ export function createSceneRouter({
       getOverview: () => overview,
       // The pending flight owns the camera; repeat-click bookkeeping must not
       // suppress zoom-out deselection after that flight has finished.
-      isAvailable: () => active === session && sceneState === 'ready' && !pending && !owner.preparedFocus?.(),
+      isAvailable: () => active === session && sceneState === 'ready' && !requests.current && !owner.preparedFocus?.(),
       windowTarget,
       onChange(next) {
         if (!next.overview || next.objectId === objectId) {
@@ -795,6 +748,7 @@ export function createSceneRouter({
   }
   function fail(session: Session, error: unknown) {
     if (active !== session) return;
+    if (session.request) requests.finish(session.request, 'failed');
     try { retire(session, error instanceof Error ? error : new Error(String(error))); }
     catch (failure) { report(failure); }
     if (initialScene?.available) {
@@ -807,7 +761,7 @@ export function createSceneRouter({
     centeredObjectId = null;
     destroyWorldContext();
     hasPresented = false;
-    if (pending) { const request = pending; pending = null; request.controller.abort(); request.lifetime.destroy(); }
+    requests.cancel();
     if (active) {
       try { retire(active); } catch (error) { report(error); }
     } else if (shellOwner) {

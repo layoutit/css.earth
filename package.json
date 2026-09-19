@@ -143,7 +143,7 @@
     "test:sbmt": "node tools/oracles/test-sbmt.mts",
     "test:seo": "node site/test/seo-browser.mts",
     "test:shell": "pnpm prepare:environment-images && pnpm prepare:nebulae && node --test site/test/*.test.mts",
-    "test:shell:router": "node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts --test site/test/navigation-router.test.mts",
+    "test:shell:router": "node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts --test site/test/navigation-lifecycle.test.mts site/test/navigation-router.test.mts site/test/router-runtime.test.mts",
     "test:sources": "pnpm prepare:catalog && pnpm prepare:sources && node --test src/platform/source-manifest.test.mts src/platform/source-catalog.test.mts src/platform/exploration-catalog.test.mts tools/source-catalogue.test.mts tools/object-provenance.test.mts tools/factsheet-sources.test.mts tools/prepare-factsheets.test.mts site/test/dataset-facilities.test.mts site/test/scene-sources.test.mts tools/objects/surface-observations/recipes.test.mts tools/nebula-provenance-contract.test.mts",
     "test:typescript-ownership": "node --test tools/typescript-ownership.test.mts",
     "trace:saturn": "node tests/objects/browser/saturn/audit/trace.mts",
