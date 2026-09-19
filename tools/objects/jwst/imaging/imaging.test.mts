@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { parseImagingProgram, PROGRAMS } from './archive.mts';
+import { bandOfFilters, parseImagingProgram, PROGRAMS } from './archive.mts';
 import { bandOfHeader, JWST_BANDS } from './bands.mts';
 import { gridResample } from './image3.mts';
 import { toolchainPython } from '../mast.mts';
@@ -28,6 +28,21 @@ test('the pinned NGC 3132 program parses, and its reproduction receipt records a
   for (const bin of receipt.pixels.ratioBins.slice(0, 4)) assert.ok(Math.abs(bin.medianRatio - 1) < 0.002, `ratio ${bin.medianRatio}`);
 });
 
+test('the pinned HIP 65426 coronagraphy reproduces MAST’s PSF subtraction beyond the mask', async () => {
+  const pinned = parseImagingProgram(JSON.parse(await readFile(join(PROGRAMS, 'hip-65426-1386.json'), 'utf8')));
+  assert.deepEqual(pinned.bands.map(entry => [entry.band, entry.stage, entry.members.length, entry.references?.length]), [['NIRCAM-F444W-MASK335R', 'coron3', 2, 9]]);
+  const receipt = JSON.parse(await readFile(join(PROGRAMS, 'hip-65426-1386.NIRCAM-F444W-MASK335R.reproduction.json'), 'utf8')) as
+    { schema: string; differentWcs: string[]; mast: { calVer: string }; local: { calVer: string }; pixels: { annuli: { bins: { arcsec: number[]; correlation: number }[] } } };
+  assert.equal(receipt.schema, 'cssearth-jwst-coron3-reproduction@1');
+  assert.equal(receipt.local.calVer, receipt.mast.calVer);
+  assert.deepEqual(receipt.differentWcs, [], 'MAST’s grid');
+  // Inside 0.5″ the star sits under the mask and the residual is noise; HIP 65426 b is at 0.78″.
+  const [under, ...beyond] = receipt.pixels.annuli.bins;
+  assert.deepEqual(under!.arcsec, [0, 0.5]);
+  for (const bin of beyond) assert.ok(bin.correlation > 0.9, `${bin.arcsec.join('–')}″: ${bin.correlation}`);
+  assert.ok(beyond[0]!.correlation > 0.99, 'the planet’s annulus');
+});
+
 test('programs refuse unknown bands, non-level-2 members, foreign URIs and unsupported stage parameters', () => {
   assert.equal(parseImagingProgram(program()).bands.length, 1);
   assert.throws(() => parseImagingProgram(program({ bands: [{ ...program().bands[0], band: 'NIRCAM-F999W' }] })), /Unknown JWST band/u);
@@ -35,6 +50,39 @@ test('programs refuse unknown bands, non-level-2 members, foreign URIs and unsup
   assert.throws(() => parseImagingProgram(program({ bands: [{ ...program().bands[0], members: [{ ...member('a_cal.fits'), uri: 'mast:HST/product/a_cal.fits' }] }] })), /Invalid MAST file/u);
   assert.throws(() => parseImagingProgram(program({ image3: { source_catalog: { skip: false } } })), /Unsupported image3 step/u);
   assert.equal(parseImagingProgram(program({ image3: { tweakreg: { abs_refcat: 'GAIADR3' } } })).image3?.tweakreg?.abs_refcat, 'GAIADR3');
+});
+
+const coron = (overrides: Record<string, unknown> = {}) => program({ bands: [{ band: 'NIRCAM-F444W-MASK335R', observation: 'jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r',
+  level3: member('jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits'), association: member('jw01386-c1020_20260801t084051_coron3_00001_asn.json'),
+  stage: 'coron3', members: [member('jw01386002001_0310a_00001_nrcalong_calints.fits')], references: [member('jw01386001001_0310e_00001_nrcalong_calints.fits')], ...overrides }] });
+
+test('coronagraph bands are built by coron3 from _calints exposures and PSF references, and only they', () => {
+  const parsed = parseImagingProgram(coron()).bands[0]!;
+  assert.equal(parsed.stage, 'coron3');
+  assert.equal(parsed.references?.length, 1);
+  assert.throws(() => parseImagingProgram(coron({ references: [] })), /references are level-2 _calints/u);
+  assert.throws(() => parseImagingProgram(coron({ members: [member('a_cal.fits')] })), /level-2 _calints/u);
+  assert.throws(() => parseImagingProgram(coron({ association: member('jw01386-c1020_20260801t084051_image3_00001_asn.json') })), /coron3 association/u);
+  assert.throws(() => parseImagingProgram(coron({ stage: undefined, references: undefined, members: [member('a_cal.fits')], association: member('a_image3_00001_asn.json') })), /built by coron3/u);
+  assert.throws(() => parseImagingProgram(program({ bands: [{ ...program().bands[0], references: [member('a_calints.fits')] }] })), /only a coron3 band/u);
+  assert.throws(() => parseImagingProgram(coron({ band: 'NIRCAM-F444W' })), /built by coron3/u);
+});
+
+test('the archive’s filter lists resolve coronagraph bands; the mask comes from the product header', () => {
+  assert.equal(bandOfFilters('NIRCAM', 'F444W;MASKRND', 'jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r').id, 'NIRCAM-F444W-MASK335R');
+  assert.equal(bandOfFilters('NIRCAM', 'F182M;MASKRND', 'jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r').id, 'NIRCAM-F182M-MASK335R');
+  assert.equal(bandOfFilters('NIRCAM', 'F335M;MASKBAR', 'jw04451-c1001_t001_nircam_f335m-maskbar-sub320alwb').id, 'NIRCAM-F335M-MASKLWB');
+  assert.equal(bandOfFilters('NIRCAM', 'F460M;MASKBAR', 'jw01194-c1001_t001_nircam_f460m-maskbar-sub400x256alwb').id, 'NIRCAM-F460M-MASKLWB');
+  // A full-frame coronagraph observation names no occulter, and a bar is not behind the round Lyot stop.
+  assert.throws(() => bandOfFilters('NIRCAM', 'F444W;MASKRND', 'jw01193-c1031_t015_nircam_f444w-maskrnd'), /does not say which occulter/u);
+  assert.throws(() => bandOfFilters('NIRCAM', 'F444W;MASKRND', 'jw01193-c1031_t015_nircam_f444w-maskrnd-sub320alwb'), /does not say which occulter/u);
+  assert.equal(bandOfFilters('NIRCAM', 'F444W;CLEAR').id, 'NIRCAM-F444W');
+  assert.equal(bandOfFilters('MIRI', 'F1130W').id, 'MIRI-F1130W');
+  // MIRI coronagraphy is not a band: its PSF alignment does not converge (coron3.mts).
+  assert.throws(() => bandOfFilters('MIRI', 'F1140C;4QPM_1140'), /No JWST band/u);
+  assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'NIRCAM', FILTER: 'F444W', PUPIL: 'MASKRND', CORONMSK: 'MASKA335R' })?.id, 'NIRCAM-F444W-MASK335R');
+  assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'NIRCAM', FILTER: 'F444W', PUPIL: 'MASKRND', CORONMSK: 'MASKA430R' })?.id, 'NIRCAM-F444W-MASK430R');
+  assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'NIRCAM', FILTER: 'F444W', PUPIL: 'MASKRND', CORONMSK: 'MASKB335R' }), undefined);
 });
 
 test('a product header names its band, with NIRCam narrow filters behind F444W in the pupil wheel', () => {

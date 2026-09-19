@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9b605c08e3b4a637ef5c1d0e283fac8513a2b7e730c055f9e16a0fa28e162411"
+    "sha256": "07c057062a470d7a12d1053be13c554440f306aad4c5a7b233d59a55042f4e47"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1625,14 +1625,14 @@
       "outputs": [
         {
           "url": "/scenes/telesto/telesto-normal-thumbnail.webp",
-          "bytes": 1694,
-          "sha256": "bd5dbe11a254991696370e8cb1878cffdec7cd820f43c4069459e8e1bd2507a3",
+          "bytes": 1690,
+          "sha256": "9107a9107d8ce8fc334e6427925e11faa421571ca5f50676e8567b751b69be9a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/telesto/telesto-normal-surface@2x.webp",
-          "bytes": 262974,
-          "sha256": "45bc940ce3bd7dc9f84904d21d866636b0546af6fa5062bdd57bf92dc2595372",
+          "bytes": 257940,
+          "sha256": "e64b20010ec7b4afb527642efffa2513dd77b9d26b5cac285b44a0f129dd2baa",
           "verification": "bytes-verified"
         }
       ],
@@ -1740,8 +1740,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 10916,
-          "sha256": "e111961b1918af7bc2c2c5e4507a9e65a9b6398596240c9dbe299a54d012a02a",
+          "bytes": 10936,
+          "sha256": "dc99dcf2b1fad50495ce3e85480940ad89b0b3cad65bd8fc7c7800314fb4ccc5",
           "verification": "bytes-verified"
         }
       ]
@@ -1803,7 +1803,7 @@
   },
   "lastPreparation": {
     "objectId": "telesto",
-    "materialSha256": "8be507404aebd9b468b7941b3278c8da762742095685c20cc48c5522beb83f5d",
+    "materialSha256": "1c372787f502544dec521bfd380714ef945dc67bd800ce789c194591cdae68cb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

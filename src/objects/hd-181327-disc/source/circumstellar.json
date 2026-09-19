@@ -1,0 +1,100 @@
+{
+  "schema": "cssearth-circumstellar-volume@1",
+  "id": "hd-181327-disc",
+  "host": "hd-181327",
+  "name": "HD 181327 debris ring",
+  "description": "The debris ring around HD 181327 as JWST/NIRCam imaged it in six filters from 1.8 to 4.4 micrometres behind the MASK335R coronagraph on 11 October 2023 (programme 2780), in the reflectance colour of its dust as Gáspár et al. (2026) show it: each filter divided by the star's own brightness. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to the images, not a measurement.",
+  "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+  "credit": "NASA/ESA/CSA JWST, NIRCam GTO programme 2780 (PI A. Gáspár); MAST (STScI); Gáspár et al. 2026, arXiv:2608.27437",
+  "license": {
+    "spdx": "LicenseRef-STScI-public-data",
+    "url": "https://archive.stsci.edu/publishing/data-use",
+    "note": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited."
+  },
+  "grid": {
+    "size": 210,
+    "halfUnits": 300,
+    "slabs": 105
+  },
+  "defaultLens": "reflectance",
+  "lenses": [
+    {
+      "id": "reflectance",
+      "label": "JWST/NIRCam · debris ring, reflectance colour",
+      "title": "The debris ring around HD 181327 in the colour of its dust's reflectance",
+      "summary": "The ring of debris 80 au out in the colour its dust reflects starlight, from six JWST filters, as the paper shows it.",
+      "description": "JWST/NIRCam imaged this star on 11 October 2023 in six filters from 1.8 to 4.4 micrometres, behind the MASK335R coronagraph, which blocks the star so the faint ring of colliding debris around it shows. These are MAST's own coronagraphy products, which this project also re-ran from the archived exposures and compared. They are combined the way Gáspár et al. (2026) combine them in their Figure 1: each filter divided by the star's own brightness in it, so what is left is how the dust reflects light at each wavelength, its albedo, and the filters averaged in pairs into blue, green and red by wavelength. The grains come out nearly white-grey, and water ice absorbs near 3 micrometres, in the green. Seen from Earth this reproduces their panel. The images have no third axis, so the depth is inferred: a tilted ring of the geometry measured on them projects to them better than a spherical shell or a constant depth, and each line of sight is placed on that ring. Which side is nearer to us, and how thick the ring is, are stated conventions. Nothing is drawn within 1 arcsecond of the star, where the starlight left after subtraction outweighs the dust; the star itself is the sphere at the centre.",
+      "program": "hd-181327-2780",
+      "innerMaskArcsec": 1.0,
+      "innerMaskSource": "Where this project's re-run of the pipeline and MAST's own product agree. Between 0.5 and 1 arcsec the two independent PSF subtractions of the same exposures correlate at only 0.46 to 0.86 across the six bands, so the light there is residual starlight that differs from band to band; from 1 to 2 arcsec they correlate at 0.89 to 0.99 (compare.mts receipts beside programs/hd-181327-2780.json). The MASK335R occulter itself reaches half transmission at 0.63 arcsec (CRDS jwst_nircam_psfmask_0211.fits).",
+      "outerUnits": 120,
+      "backgroundAnnulusArcsec": [
+        5,
+        8
+      ],
+      "nearSidePositionAngleDeg": 190,
+      "nearSideSource": "the south-south-west end of the minor axis is drawn nearer; this image does not say which end is",
+      "heightOfRadius": 0.1,
+      "topAlpha": 0.5,
+      "published": {
+        "citation": "Gáspár et al. (2026), arXiv:2608.27437",
+        "url": "https://arxiv.org/abs/2608.27437",
+        "radiusUnits": 80,
+        "inclinationDeg": 28.54,
+        "positionAngleDeg": 100.39,
+        "toleranceDeg": 5,
+        "radiusTolerance": 0.1
+      },
+      "channels": {
+        "red": [
+          "NIRCAM-F335M-MASK335R",
+          "NIRCAM-F444W-MASK335R"
+        ],
+        "green": [
+          "NIRCAM-F250M-MASK335R",
+          "NIRCAM-F300M-MASK335R"
+        ],
+        "blue": [
+          "NIRCAM-F182M-MASK335R",
+          "NIRCAM-F210M-MASK335R"
+        ]
+      },
+      "stellarFluxJy": {
+        "NIRCAM-F182M-MASK335R": 3.63,
+        "NIRCAM-F210M-MASK335R": 2.93,
+        "NIRCAM-F250M-MASK335R": 2.18,
+        "NIRCAM-F300M-MASK335R": 1.61,
+        "NIRCAM-F335M-MASK335R": 1.32,
+        "NIRCAM-F444W-MASK335R": 0.79
+      },
+      "stellarFluxSource": "Gáspár et al. (2026), arXiv:2608.27437, Table 9, stellar photosphere F_nu,* in Jy",
+      "stretch": {
+        "a": 14.125,
+        "top": 7.1516,
+        "source": "Gáspár et al. (2026), Figure 1 (HD 181327 panel), which prints no scale: fitted by tools/objects/circumstellar/fit-figure-stretch.mts",
+        "fit": {
+          "figure": "Gáspár et al. (2026), arXiv:2608.27437v1, Figure 1",
+          "url": "https://arxiv.org/html/2608.27437v1/Programims_105-eps-converted-to.png",
+          "panel": {
+            "x0": 495,
+            "y0": 318,
+            "width": 317,
+            "height": 317
+          },
+          "pixelsPerArcsec": 32,
+          "offsetPixels": [
+            -1,
+            4
+          ],
+          "rgbRms": 12.57,
+          "luminanceCorrelation": 0.9899,
+          "mirroredRgbRms": 14.38,
+          "annulusArcsec": [
+            1,
+            4.4
+          ]
+        }
+      }
+    }
+  ]
+}

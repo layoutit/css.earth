@@ -1,17 +1,18 @@
 /**
  * Which released frames a survey lens casts.
  *
- * A lens keeps one apparition, as every photographed survey body does: the one whose frames the paper's comparison
- * figure shows most, then the one with more frames, then the earlier. Within it the survey took short series of
- * exposures a minute or a few apart at each epoch; every camera-1 frame is kept while the apparition fits the
- * controlled-camera bound. A larger apparition keeps every series, each thinned to the same number of frames, with
- * the places left over going to the earliest series, so every rotational phase the survey caught stays. The frames
- * the figure shows are always kept, and within a series the frames nearest them come first.
+ * A lens is anchored on one apparition: the one whose frames the paper's comparison figure shows most, then the one with
+ * more frames, then the earlier. It also casts every other apparition its level fit can reach, which `apparitions.mts`
+ * decides from the surface they share. Within those apparitions the survey took short series of exposures a minute or a
+ * few apart at each epoch; every camera-1 frame is kept while they fit the controlled-camera bound. More frames keep every
+ * series, each thinned to the same number of frames, with the places left over going to the earliest series, so every
+ * rotational phase the survey caught stays. The frames the figure shows are always kept, and within a series the frames
+ * nearest them come first.
  */
-import { CONTROLLED_CAMERA_MAXIMUM_FRAMES } from '../surface-observations/formats/controlled-camera.mts';
+import { CONTROLLED_CAMERA_MAXIMUM_FRAMES, DECONVOLVED_SEASON_GAP_DAYS } from '../surface-observations/formats/controlled-camera.mts';
 
-/** Frames further apart than this belong to different apparitions. */
-export const APPARITION_GAP_DAYS = 120;
+/** Frames further apart than this belong to different apparitions: an apparition is one observing season of the level fit. */
+export const APPARITION_GAP_DAYS = DECONVOLVED_SEASON_GAP_DAYS;
 /** Exposures closer than this belong to one series. */
 export const SERIES_GAP_MINUTES = 10;
 
@@ -30,12 +31,19 @@ function groups<T extends TimedFrame>(frames: readonly T[], gapMilliseconds: num
 export const apparitions = <T extends TimedFrame>(frames: readonly T[]) => groups(frames, APPARITION_GAP_DAYS * 86_400_000);
 export const series = <T extends TimedFrame>(frames: readonly T[]) => groups(frames, SERIES_GAP_MINUTES * 60_000);
 
-/** The apparition a lens casts and the frames it keeps from it, in time order. `shown` are the frames the figure prints. */
+/** The apparitions in time order, and the index of the one a lens is anchored on. `shown` are the frames the figure prints. */
+export function anchorApparition<T extends TimedFrame>(frames: readonly T[], shown: readonly T[]) {
+  if (!frames.length) throw new Error('No released frames to select from.');
+  const all = apparitions(frames);
+  const ranked = all.map((members, order) => ({ order, shown: members.filter(frame => shown.includes(frame)).length, size: members.length }))
+    .sort((a, b) => b.shown - a.shown || b.size - a.size || a.order - b.order);
+  return { apparitions: all, anchor: ranked[0].order };
+}
+
+/** The frames a lens keeps from the apparitions it casts, in time order. `shown` are the frames the figure prints. */
 export function selectFrames<T extends TimedFrame>(frames: readonly T[], shown: readonly T[], maximum = CONTROLLED_CAMERA_MAXIMUM_FRAMES): T[] {
   if (!frames.length) throw new Error('No released frames to select from.');
-  const ranked = apparitions(frames).map((members, order) => ({ members, order, shown: members.filter(frame => shown.includes(frame)).length }))
-    .sort((a, b) => b.shown - a.shown || b.members.length - a.members.length || a.order - b.order);
-  const chosen = ranked[0].members;
+  const chosen = [...frames].sort((a, b) => time(a) - time(b));
   if (chosen.length <= maximum) return chosen;
   const groupsOf = series(chosen).map(members => {
     const anchors = members.filter(frame => shown.includes(frame));
@@ -45,7 +53,7 @@ export function selectFrames<T extends TimedFrame>(frames: readonly T[], shown: 
       || time(a) - time(b)) : members;
     return order;
   });
-  if (groupsOf.reduce((sum, members) => sum + Math.min(members.length, 1), 0) > maximum) throw new Error(`The apparition holds more series than the ${maximum}-frame bound.`);
+  if (groupsOf.length > maximum) throw new Error(`The apparitions hold more series than the ${maximum}-frame bound.`);
   let each = 1;
   while (groupsOf.reduce((sum, members) => sum + Math.min(members.length, each + 1), 0) <= maximum && groupsOf.some(members => members.length > each)) each++;
   const kept = groupsOf.map(members => members.slice(0, each));

@@ -1444,8 +1444,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 15528,
-      "expectedSha256": "9a8c6694d2f9c2f97a84842c6963152c046657f633325252613262e5c67b3e9c"
+      "expectedBytes": 16284,
+      "expectedSha256": "0ef91fb7ccf13adfe25fb89578e98300c9fa9c1f63cb564a8fc140dc8a000589"
     },
     {
       "path": "preparation/navigation.json",
@@ -1459,8 +1459,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 23215,
-      "expectedSha256": "f61f21aad31b24cd45367d4f8d69c73321e2eeed103ae8050a8edcb0f021da1f"
+      "expectedBytes": 23292,
+      "expectedSha256": "b84dac6f7a7feac6766c73d973878ad86ef83f6b1c021407ca85f9d0f203ad90"
     },
     {
       "path": "preparation/observer-cameras.json",

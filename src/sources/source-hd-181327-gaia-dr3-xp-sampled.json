@@ -1,0 +1,37 @@
+{
+  "id": "source-hd-181327-gaia-dr3-xp-sampled",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "HD 181327 · hd 181327 gaia dr3 xp sampled",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6643589352010758400&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hd-181327/source/manifest.json",
+      "revision": "6a3bcdec72f24a701b853dc06dd87488b9c662d7",
+      "sha256": "6c0f86ccf31a53751d32b19156fcb9add4e215b5c89755309bd8655231890538",
+      "locator": "/inputs/9"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "scope": "The hd 181327 gaia dr3 xp sampled input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

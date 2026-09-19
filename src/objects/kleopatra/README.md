@@ -7,7 +7,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | Input | Selected source |
 | --- | --- |
 | Shape | [Released reconstruction](https://observations.lam.fr/astero/3Dshape/216_Kleopatra_mpcd.obj), [Marchis et al. (2021)](https://doi.org/10.1051/0004-6361/202140874) |
-| SPHERE photograph | [30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 5 nights from 2017-07-14 to 2017-08-22](https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/) on the [ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/216_Kleopatra_adam.obj) |
+| SPHERE photograph | [55 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 10 nights from 2017-07-14 to 2019-01-14](https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/) on the [ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/216_Kleopatra_adam.obj) |
 | Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/216_Kleopatra_param.txt), read latitude-first, and JPL Horizons geometry from Paranal |
 | Photograph registration | [Vernazza et al. (2021), Figure B.37](https://doi.org/10.1051/0004-6361/202141781) |
 
@@ -30,8 +30,13 @@ Measured by `tools/objects/published-comparison.mts` against [Figure B.37](https
 | 2017-07-27 04:27:42 | 0.878 | 0.848 | 0.932 | -10° | -3°, -0.5° | 130.2° against 126.6° |
 | 2017-08-10 05:21:58 | 0.873 | 0.905 | 0.937 | -10° | -3°, 0° | 129.3° against 125.1° |
 | 2017-08-22 01:42:34 | 0.899 | 0.889 | 0.945 | 0° | -1.5°, -3.5° | 128.8° against 126.1° |
+| 2018-12-10 06:53:28 | 0.920 | 0.878 | 0.953 | 0° | -2°, 4° | 50.7° against 49.0° |
+| 2018-12-19 06:57:24 | 0.900 | 0.895 | 0.945 | 0° | -4°, 4.5° | 51.7° against 51.6° |
+| 2018-12-22 05:58:43 | 0.921 | 0.885 | 0.956 | 0° | -1°, 2° | 52.1° against 52.0° |
+| 2018-12-26 08:08:27 | 0.926 | 0.890 | 0.949 | 0° | -2.5°, 4.5° | 52.6° against 52.7° |
+| 2019-01-14 05:10:04 | 0.914 | 0.854 | 0.954 | 0° | -2.5°, 5.5° | 55.0° against 56.6° |
 
-Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 30 native frames after the centre fit is 2.220 px at our phase; the lowest of a ±30° sweep is 2.184 px at -2°.
+Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 55 native frames after the centre fit is 2.004 px at our phase; the lowest of a ±30° sweep is 1.810 px at -2°.
 <!-- published-comparison:end -->
 
 ### Registration
@@ -41,7 +46,7 @@ Measured by the registration stage when the body was last prepared; the numbers 
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `zimpol` | 30 | 30 | 4.09° | 2.88° | 2.91° | its other 30 frames | 0 of 30 | — | 17 of 30, 0.00° | — | ×1.23 | registered |
+| `zimpol` | 55 | 55 | 5.24° | 2.88° | 4.37° | its other 55 frames | 0 of 55 | — | 21 of 55, 0.00° | — | ×1.76 | conflict |
 
 `zimpol` ships on its paper’s comparison, [Figure B.37](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
 
@@ -62,9 +67,9 @@ Shadows defaults off. Existing preparation bakes diffuse directional lighting, a
 
 **Elevation is deferred.** The full mesh includes nonradial concavity near the neck and lobes. A body-centered radius map gives only the nearest intersection and can assign the wrong radius to farther surfaces along the same ray. In the original 3,168-face source, 31 face centroids lie on a farther surface than the first radial intersection; the largest discrepancy is 27.5 km. Two of 8,192 equal-area test directions also have multiple source intersections. These diagnostics use the original mesh and demonstrate the radial representation's limitation, not simplification error. No radial replacement of geometry or misleading radial-height lens is published.
 
-No unannotated, registered global optical, geological or compositional map was established in this bounded survey. The available SPHERE FITS data remain useful future observation candidates; their availability is not mistaken for a qualified surface texture.
+No unannotated, registered global optical, geological or compositional map was established in this bounded survey.
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Kleopatra from 25° to 32° north, so surface the survey did not see keeps the missing-imagery grid.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, each apparition placed through the surface it shares with another, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Kleopatra from 37° south to 32° north, so surface the survey did not see keeps the missing-imagery grid.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 

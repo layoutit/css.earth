@@ -121,6 +121,7 @@ export async function loadStellarPhotometricColor(read: (path: string) => Promis
   const limbDarkening = science.limbDarkening === undefined ? null : await (async () => {
     const recipe = parseLimbDarkeningRecipe(science.limbDarkening);
     if (recipe.source === 'table') return { recipe, coefficients: readQuadraticLimbDarkening((await read(recipe.path)).toString('utf8'), recipe) };
+    if (recipe.source === 'grid') return { recipe, coefficients: interpolateQuadraticLimbDarkening((await read(recipe.path)).toString('utf8'), recipe) };
     const [{ readTessLightCurve, fitTransitLimbDarkening }, { BODIES, HOSTED_PLANET_IDS, STAR_IDS, hostedOrbit, starAstrometry }] =
       await Promise.all([import('../eclipse-map/transit-limb-darkening.mts'), import('@cssearth/astronomy')]);
     if (!(HOSTED_PLANET_IDS as readonly string[]).includes(recipe.planet)) throw new TypeError(`Limb darkening from transits needs a hosted planet: ${recipe.planet}.`);
@@ -157,6 +158,12 @@ export type LimbDarkeningRecipe = {
 } | {
   /** Fitted here to the planet's transits in pinned TESS light curves (tools/objects/eclipse-map/transit-limb-darkening.mts). */
   readonly law: 'quadratic'; readonly source: 'tess-transits'; readonly planet: string; readonly lightCurves: readonly string[];
+} | {
+  /** A theoretical grid by effective temperature and surface gravity (a VizieR table of model-atmosphere coefficients), for a
+   * star no measurement covers: bilinear between the four grid nodes around the star's own temperature and gravity, among the
+   * rows whose model columns match `models`. */
+  readonly law: 'quadratic'; readonly source: 'grid'; readonly path: string; readonly teffK: number; readonly logg: number;
+  readonly models: Readonly<Record<string, string>>; readonly columns: { readonly teff: string; readonly logg: string; readonly u1: string; readonly u2: string };
 };
 export interface QuadraticLimbDarkening { readonly u1: number; readonly u2: number; readonly u1Bounds: readonly [number, number]; readonly u2Bounds: readonly [number, number] }
 
@@ -173,6 +180,12 @@ export function parseLimbDarkeningRecipe(value: unknown): LimbDarkeningRecipe {
   }
   const columns = requireRecord(input.columns, 'limbDarkening.columns');
   const column = (name: string) => requireString(columns[name], `limbDarkening.columns.${name}`);
+  if (input.grid !== undefined) {
+    const grid = requireRecord(input.grid, 'limbDarkening.grid'), models = requireRecord(grid.models, 'limbDarkening.grid.models');
+    return { law: 'quadratic', source: 'grid', path: requireString(input.path, 'limbDarkening.path'), teffK: requireFiniteNumber(grid.teffK, 'limbDarkening.grid.teffK'),
+      logg: requireFiniteNumber(grid.logg, 'limbDarkening.grid.logg'), models: Object.fromEntries(Object.entries(models).map(([key, value]) => [key, requireString(value)])),
+      columns: { teff: column('teff'), logg: column('logg'), u1: column('u1'), u2: column('u2') } };
+  }
   return { law: 'quadratic', source: 'table', path: requireString(input.path, 'limbDarkening.path'), star: requireString(input.star, 'limbDarkening.star'),
     columns: { u1: column('u1'), u2: column('u2'), u1Upper: column('u1Upper'), u1Lower: column('u1Lower'), u2Upper: column('u2Upper'), u2Lower: column('u2Lower') } };
 }
@@ -193,6 +206,24 @@ export function readQuadraticLimbDarkening(tsv: string, recipe: Extract<LimbDark
   return coefficients;
 }
 
+/** Bilinear between the four grid nodes around the star; the bounds are the spread of the four nodes. */
+export function interpolateQuadraticLimbDarkening(tsv: string, recipe: Extract<LimbDarkeningRecipe, { source: 'grid' }>): QuadraticLimbDarkening {
+  const lines = tsv.split(/\r?\n/u).filter(line => line.trim() && !line.startsWith('#') && !/^-+(\t-+)*$/u.test(line.trim()));
+  const [header, , ...rows] = lines.map(line => line.split('\t').map(cell => cell.trim()));
+  if (!header) throw new TypeError('The limb-darkening grid is empty.');
+  const index = (name: string) => { const i = header.indexOf(name); if (i < 0) throw new TypeError(`The limb-darkening grid lacks ${name}.`); return i; };
+  const nodes = rows.filter(row => Object.entries(recipe.models).every(([key, value]) => row[index(key)] === value))
+    .map(row => ({ teff: Number(row[index(recipe.columns.teff)]), logg: Number(row[index(recipe.columns.logg)]), u1: Number(row[index(recipe.columns.u1)]), u2: Number(row[index(recipe.columns.u2)]) }));
+  const teffs = [...new Set(nodes.map(node => node.teff))].sort((a, b) => a - b), loggs = [...new Set(nodes.map(node => node.logg))].sort((a, b) => a - b);
+  const bracket = (values: number[], value: number) => { const hi = values.findIndex(v => v >= value); if (hi <= 0) throw new RangeError(`${value} is outside the grid ${values.join(', ')}.`); return [values[hi - 1]!, values[hi]!] as const; };
+  const [t0, t1] = bracket(teffs, recipe.teffK), [g0, g1] = bracket(loggs, recipe.logg), ft = (recipe.teffK - t0) / (t1 - t0), fg = (recipe.logg - g0) / (g1 - g0);
+  const node = (t: number, g: number) => { const found = nodes.filter(n => n.teff === t && n.logg === g); if (found.length !== 1) throw new TypeError(`The grid must hold exactly one node at ${t} K, log g ${g}.`); return found[0]!; };
+  const corners = [node(t0, g0), node(t1, g0), node(t0, g1), node(t1, g1)], weights = [(1 - ft) * (1 - fg), ft * (1 - fg), (1 - ft) * fg, ft * fg];
+  const at = (key: 'u1' | 'u2') => corners.reduce((total, corner, k) => total + corner[key] * weights[k]!, 0);
+  const u1 = at('u1'), u2 = at('u2');
+  checkLimb(u1, u2);
+  return { u1, u2, u1Bounds: [Math.min(...corners.map(c => c.u1)), Math.max(...corners.map(c => c.u1))], u2Bounds: [Math.min(...corners.map(c => c.u2)), Math.max(...corners.map(c => c.u2))] };
+}
 function checkLimb(u1: number, u2: number) {
   if (!(quadraticIntensity(0, u1, u2) >= 0 && quadraticIntensity(0, u1, u2) <= 1)) throw new TypeError('The limb-darkening law must keep the limb between dark and the centre brightness.');
 }

@@ -225,6 +225,79 @@
       "headers": {
         "Cookie": "CesAM_LAM_opens_the_door=1"
       }
+    },
+    {
+      "kind": "horizons-time-list",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-observer.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "parameters": {
+        "format": "text",
+        "COMMAND": "'41;'",
+        "EPHEM_TYPE": "'OBSERVER'",
+        "CENTER": "'309'",
+        "TLIST_TYPE": "'JD'",
+        "TIME_TYPE": "'UT'",
+        "QUANTITIES": "'1,13,20,24,43'",
+        "ANG_FORMAT": "'DEG'",
+        "CSV_FORMAT": "'NO'"
+      },
+      "epochs": [
+        2458336.768252118,
+        2458336.771480382,
+        2458336.77471037,
+        2458336.777918739,
+        2458336.781128067,
+        2458336.818465741,
+        2458336.8216582756,
+        2458336.8248576275,
+        2458336.8280607406,
+        2458336.831271782,
+        2458336.8875480443,
+        2458336.890778368,
+        2458336.894011852,
+        2458336.897226875,
+        2458336.900438194
+      ]
+    },
+    {
+      "kind": "horizons-time-list",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "parameters": {
+        "format": "text",
+        "COMMAND": "'41;'",
+        "EPHEM_TYPE": "'VECTORS'",
+        "CENTER": "'500@10'",
+        "TLIST_TYPE": "'JD'",
+        "REF_PLANE": "'FRAME'",
+        "REF_SYSTEM": "'ICRF'",
+        "VEC_TABLE": "'1'",
+        "OUT_UNITS": "'AU-D'",
+        "CSV_FORMAT": "'NO'"
+      },
+      "epochs": [
+        2458336.7572839665,
+        2458336.7605123096,
+        2458336.763742377,
+        2458336.766950824,
+        2458336.7701602303,
+        2458336.8074988076,
+        2458336.8106914186,
+        2458336.8138908474,
+        2458336.8170940373,
+        2458336.820305155,
+        2458336.8765827473,
+        2458336.8798131463,
+        2458336.8830467057,
+        2458336.886261804,
+        2458336.889473198
+      ]
     }
   ]
 }

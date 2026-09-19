@@ -71,7 +71,7 @@ Rotation has an explicitly arbitrary display meridian, not an absolute rotationa
 
 The survey's rotation record lists pole longitude first. An earlier cross-frame test read it latitude-first, 9.4° from the paper's pole, and its failure is preserved in the ledger. Read longitude-first, it matches Hanuš et al. (2019) Table 1 to 0.1°.
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with relative frame levels matched between 0.86 and 1.51. It is not albedo or colour. The frames see Iris from about 64° south, so the northern surface is unphotographed and keeps the grid. The native outlines fix the rotational phase to about a degree; the paper states no phase uncertainty.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with relative frame levels matched between 0.86 and 1.51, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Iris from about 64° south, so the northern surface is unphotographed and keeps the grid. The native outlines fix the rotational phase to about a degree; the paper states no phase uncertainty.
 
 The crater coordinates in Hanuš et al. (2019) Table 2 are not used. Projected as printed, they land a median 139 km from the authors' own contours in their Figure 4, and no rotation or mirror of the table fits all six named craters. Their longitude system is not stated.
 

@@ -213,6 +213,79 @@
       "headers": {
         "Cookie": "CesAM_LAM_opens_the_door=1"
       }
+    },
+    {
+      "kind": "horizons-time-list",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-observer.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "parameters": {
+        "format": "text",
+        "COMMAND": "'145;'",
+        "EPHEM_TYPE": "'OBSERVER'",
+        "CENTER": "'309'",
+        "TLIST_TYPE": "'JD'",
+        "TIME_TYPE": "'UT'",
+        "QUANTITIES": "'1,13,20,24,43'",
+        "ANG_FORMAT": "'DEG'",
+        "CSV_FORMAT": "'NO'"
+      },
+      "epochs": [
+        2458118.781714236,
+        2458118.7853085995,
+        2458118.7888982175,
+        2458118.7924628933,
+        2458118.79603044,
+        2458119.707600069,
+        2458119.7111956826,
+        2458119.7147938306,
+        2458119.7183742826,
+        2458119.721960324,
+        2458125.7471908336,
+        2458125.7507958333,
+        2458125.7543949885,
+        2458125.757985405,
+        2458125.7615696294
+      ]
+    },
+    {
+      "kind": "horizons-time-list",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "parameters": {
+        "format": "text",
+        "COMMAND": "'145;'",
+        "EPHEM_TYPE": "'VECTORS'",
+        "CENTER": "'500@10'",
+        "TLIST_TYPE": "'JD'",
+        "REF_PLANE": "'FRAME'",
+        "REF_SYSTEM": "'ICRF'",
+        "VEC_TABLE": "'1'",
+        "OUT_UNITS": "'AU-D'",
+        "CSV_FORMAT": "'NO'"
+      },
+      "epochs": [
+        2458118.7739680903,
+        2458118.7775625205,
+        2458118.7811522046,
+        2458118.784716946,
+        2458118.7882845583,
+        2458119.699870633,
+        2458119.7034663097,
+        2458119.707064521,
+        2458119.710645036,
+        2458119.71423114,
+        2458125.73953857,
+        2458125.743143598,
+        2458125.746742782,
+        2458125.750333227,
+        2458125.7539174794
+      ]
     }
   ]
 }

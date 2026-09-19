@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hd-181327",
+  "angularDiameterMas": 0.27,
+  "angularDiameterSource": "Computed here from the radius and distance: 2 x 954,529.69 km at 47.777 pc = 0.267 mas. No interferometric diameter of this star is published in the JMMC diameter catalogue.",
+  "distanceParsecs": 47.776868212690886,
+  "distanceSource": "Gaia DR3 parallax 20.931 +/- 0.029 mas (photometry/gaia-dr3-source.csv): 1000/20.930631 = 47.777 pc, no zero-point correction",
+  "radiusKm": 954529.68897,
+  "radiusSource": "1.3720421 solar radii (954,529.69 km at 695,700 km per solar radius): the Gaia DR3 FLAME radius of source 6643589352010758400 (photometry/gaia-dr3-astrophysical-parameters.csv, radius_flame, bounds 1.344 to 1.400), Creevey et al. (2023, A&A 674, A26) and Fouesneau et al. (2023, A&A 674, A28). The GSP-Phot radius in the same row is 1.376.",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the Gaia FLAME radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json). A star's limb is not a sharp surface."
+  }
+}

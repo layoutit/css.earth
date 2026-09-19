@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-nebula-delivery@1",
+  "id": "hd-181327-disc",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/hd-181327-disc/source/volume-reflectance.json",
+    "sha256": "2b117c94957b04524be0e49d2a39b43bf287c88e07c6f6ba1c3cd6d115df3c32"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/hd-181327-disc/source/provenance.json",
+      "sha256": "9e849ced41f18e148638afabf0fd6641e4aa1ffc4b7b40b226d187e6fbfc8e16"
+    },
+    {
+      "path": "src/objects/hd-181327-disc/source/density-reflectance.ktx2",
+      "sha256": "a18bcaff61ab9e7006d569e5452ed6ba47afee610ad42211f6ab40ebfc0ba371"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      290.7459104630982,
+      -54.53865767403109
+    ],
+    "distancePc": 47.776869019736694,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.020930630669558914
+  },
+  "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+  "description": "The debris ring around HD 181327 as JWST/NIRCam imaged it in six filters from 1.8 to 4.4 micrometres behind the MASK335R coronagraph on 11 October 2023 (programme 2780), in the reflectance colour of its dust as Gáspár et al. (2026) show it: each filter divided by the star's own brightness. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to the images, not a measurement.",
+  "defaultLens": "reflectance",
+  "framingRadiusUnits": 300,
+  "attachedTo": "hd-181327",
+  "acceptedLabResult": "hd-181327-disc-density-grids",
+  "compactInputs": {
+    "path": "src/objects/hd-181327-disc/source/volume-reflectance.json",
+    "sha256": "2b117c94957b04524be0e49d2a39b43bf287c88e07c6f6ba1c3cd6d115df3c32"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "reflectance",
+      "label": "JWST/NIRCam · debris ring, reflectance colour",
+      "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+      "recipe": {
+        "path": "src/objects/hd-181327-disc/source/volume-reflectance.json",
+        "sha256": "2b117c94957b04524be0e49d2a39b43bf287c88e07c6f6ba1c3cd6d115df3c32"
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "source-kalliope-kalliope-sphere-20190627035548",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Kalliope · kalliope sphere 20190627035548",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2019-06-27T03_55_48.285_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/kalliope/source/manifest.json",
+      "revision": "e40a119993c352411670e9be5722e069c2785ba8",
+      "sha256": "d8946333e75445f91a1ed3825507d0ecf2312b473bf97b5face322c65dfb5422",
+      "locator": "/inputs/35"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The kalliope sphere 20190627035548 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6cf8e3236c2561523358a7fe8c2bff5d7972d4e888472077bd67a50546e5bf5f"
+    "sha256": "dc7e8e76356f0f6671c042799bc4c7815a6002dbf4cbc41f35e3c65f288b256f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -2137,14 +2137,14 @@
       "outputs": [
         {
           "url": "/scenes/epimetheus/epimetheus-normal-thumbnail.webp",
-          "bytes": 2078,
-          "sha256": "2de969c28bcdce2348e82cf965df5b98b3b5d525363221579aeea38bec2236da",
+          "bytes": 2068,
+          "sha256": "f782aa1d59be48ffd58e74e8687515443d804223f1cff51eb3a5ac013c16ebe0",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/epimetheus/epimetheus-normal-surface@2x.webp",
-          "bytes": 558202,
-          "sha256": "d815d836e93ea69884621acb126aa69927c7cba90a5257479a6c60eae2bf31aa",
+          "bytes": 553252,
+          "sha256": "a3750dd5183001374eee4d2e02c6ea5f4933016b259dc812cf5fe08291569a11",
           "verification": "bytes-verified"
         }
       ],
@@ -2258,8 +2258,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 27148,
-          "sha256": "6af386906b56753244ac29c97e2349a0e676a39b53413350c78e5552e2c5f631",
+          "bytes": 26812,
+          "sha256": "1cdadd8a7c807c7afbb0e1147dde8c6c073042dd3e55c9371f1083693bec2154",
           "verification": "bytes-verified"
         }
       ]
@@ -2321,7 +2321,7 @@
   },
   "lastPreparation": {
     "objectId": "epimetheus",
-    "materialSha256": "757859610550f3df3cb07ee62ff2271b201ed91203cdaf76ee7807786d11298f",
+    "materialSha256": "07faf22c53ddc89db2400e2bea07d21658ebf519ffcc0e10d258b12e91d6ea74",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -246,6 +246,77 @@
       "headers": {
         "Cookie": "CesAM_LAM_opens_the_door=1"
       }
+    },
+    {
+      "kind": "horizons-time-list",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-observer.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "parameters": {
+        "format": "text",
+        "COMMAND": "'230;'",
+        "EPHEM_TYPE": "'OBSERVER'",
+        "CENTER": "'309'",
+        "TLIST_TYPE": "'JD'",
+        "TIME_TYPE": "'UT'",
+        "QUANTITIES": "'1,13,20,24,43'",
+        "ANG_FORMAT": "'DEG'",
+        "CSV_FORMAT": "'NO'"
+      },
+      "epochs": [
+        2458387.5476210765,
+        2458387.5502637033,
+        2458387.552921748,
+        2458387.5581896873,
+        2458388.472298171,
+        2458388.4749504514,
+        2458388.4776044097,
+        2458388.480217986,
+        2458388.482866389,
+        2458389.7095944677,
+        2458389.7122460995,
+        2458389.7149041086,
+        2458389.7175255325,
+        2458389.720160787
+      ]
+    },
+    {
+      "kind": "horizons-time-list",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "parameters": {
+        "format": "text",
+        "COMMAND": "'230;'",
+        "EPHEM_TYPE": "'VECTORS'",
+        "CENTER": "'500@10'",
+        "TLIST_TYPE": "'JD'",
+        "REF_PLANE": "'FRAME'",
+        "REF_SYSTEM": "'ICRF'",
+        "VEC_TABLE": "'1'",
+        "OUT_UNITS": "'AU-D'",
+        "CSV_FORMAT": "'NO'"
+      },
+      "epochs": [
+        2458387.5395884826,
+        2458387.542231011,
+        2458387.544888957,
+        2458387.5501567004,
+        2458388.4642304517,
+        2458388.4668826326,
+        2458388.469536491,
+        2458388.472149969,
+        2458388.474798273,
+        2458389.7014784,
+        2458389.7041299236,
+        2458389.7067878246,
+        2458389.7094091414,
+        2458389.7120442884
+      ]
     }
   ]
 }
