@@ -303,3 +303,12 @@ test('the shared sky reader accepts the grid this stage states, and reads it as 
   assert.equal(axes.unit, 'deg');
   assert.ok(Math.abs(axes.scale[0]! - scale) < 1e-15);
 });
+
+test('the picture is the middle of the image, rows and columns in order, and a crop that does not fit is refused', async () => {
+  const { centredCrop } = await import('./timetag-frame.mts');
+  const size = 8, values = Float64Array.from({ length: size * size }, (_, index) => index), crop = centredCrop(values, size, 2);
+  assert.equal(crop.size, 4);
+  assert.deepEqual([...crop.values.subarray(0, 4)], [18, 19, 20, 21]);
+  assert.deepEqual([...crop.values.subarray(12, 16)], [42, 43, 44, 45]);
+  assert.throws(() => centredCrop(values, size, 5), /does not fit/u);
+});

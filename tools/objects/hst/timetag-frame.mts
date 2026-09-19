@@ -313,11 +313,39 @@ export function timeTagProduct(run: TimeTagRun): Buffer {
   ]);
 }
 
+/** The middle of a square image, `half` pixels each way about its centre, rows and columns kept in order. */
+export function centredCrop(values: Float64Array, size: number, half: number): { readonly size: number; readonly values: Float64Array } {
+  const from = Math.round(size / 2) - half;
+  if (!(half > 0) || from < 0 || from + 2 * half > size) throw new RangeError('The crop does not fit inside the image.');
+  const out = new Float64Array(4 * half * half);
+  for (let row = 0; row < 2 * half; row++) out.set(values.subarray((from + row) * size + from, (from + row) * size + from + 2 * half), row * 2 * half);
+  return { size: 2 * half, values: out };
+}
+
+/** How far the picture reaches from the target's centre, in target radii. */
+export const PICTURE_HALF_WIDTH_RADII = 4;
+
+/** The picture: the rate image about the target as one primary image, small enough to keep beside a body as a source file
+ * and readable by anything that reads a plain FITS sky image. Same grid, same WCS, reference pixel moved with the crop. */
+export function timeTagPicture(run: TimeTagRun): Buffer {
+  const definition = run.definition, pixels = definition.grid.pixels, crop = centredCrop(run.rate, pixels, Math.ceil(PICTURE_HALF_WIDTH_RADII * run.radiusGridPixels));
+  const degreesPerPixel = definition.grid.kmPerPixel / definition.bodyRadiusKm * run.radiusDetectorPixels * definition.plateScaleArcsec / 3600, shift = Math.round(pixels / 2) - crop.size / 2;
+  const data = Buffer.alloc(crop.values.length * 4);
+  crop.values.forEach((value, index) => data.writeFloatBE(Number.isFinite(value) ? value : 0, index * 4));
+  return Buffer.concat([headerBlock([['SIMPLE', true, 'conforms to FITS standard'], ['BITPIX', -32], ['NAXIS', 2], ['NAXIS1', crop.size], ['NAXIS2', crop.size],
+    ['BUNIT', 'count/s/pixel', 'events per second in the target frame'], ['TARGNAME', definition.target], ['INSTRUME', definition.instrument], ['OPT_ELEM', definition.opticalElement], ['ROOTNAME', definition.rootname],
+    ['EXPTIME', run.liveSeconds, 'seconds of good time counted'], ['MJD-OBS', run.file.startMjd], ['RADESYS', 'ICRS'], ['CTYPE1', 'RA---TAN'], ['CTYPE2', 'DEC--TAN'], ['CUNIT1', 'deg'], ['CUNIT2', 'deg'],
+    ['CRPIX1', pixels / 2 + 0.5 - shift, 'the target at mid-exposure'], ['CRPIX2', pixels / 2 + 0.5 - shift], ['CRVAL1', run.place.rightAscensionDegrees], ['CRVAL2', run.place.declinationDegrees],
+    ['CD1_1', -degreesPerPixel, 'east is left'], ['CD1_2', 0], ['CD2_1', 0], ['CD2_2', degreesPerPixel, 'north is up'],
+    ['KMPERPIX', definition.grid.kmPerPixel, 'km at the target'], ['BODYRPIX', run.radiusGridPixels, 'pixels, the target radius on this grid'], ['STACKID', definition.id], ['ORIGIN', 'cssEarth tools/objects/hst/timetag-frame.mts']]), padBlock(data)]);
+}
+
 export async function writeProducts(run: TimeTagRun, outputDirectory: string): Promise<readonly string[]> {
   await mkdir(outputDirectory, { recursive: true });
   const name = `${run.definition.id}.fits`;
   const product = timeTagProduct(run);
   await writeFile(resolve(outputDirectory, name), product);
+  await writeFile(resolve(outputDirectory, `${run.definition.id}.picture.fits`), timeTagPicture(run));
   // The header is read back with the shared sky reader, so a grid this stage could not state as a sky image never ships.
   const header = (await readFitsFileHdus(resolve(outputDirectory, name)))[1]!.header;
   const axes = skyImageAxes(header);
@@ -326,7 +354,7 @@ export async function writeProducts(run: TimeTagRun, outputDirectory: string): P
     liveSeconds: run.liveSeconds, spanSeconds: run.spanSeconds, goodTimeIntervals: run.file.intervals,
     place: run.place, radiusDetectorPixels: run.radiusDetectorPixels, driftPixels: run.driftPixels,
     track: run.track, residualPixels: run.trackResidualPixels }, null, 1)}\n`);
-  return [name, 'tracking.json'];
+  return [name, `${run.definition.id}.picture.fits`, 'tracking.json'];
 }
 
 const round = (value: number, places: number) => Number(value.toFixed(places));
