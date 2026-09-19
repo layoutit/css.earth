@@ -6,8 +6,7 @@
  * mirrors the same raw files as CAOM-2 collection GEMINI and answers anonymously, so this module is the whole archive route.
  *
  * Two services, both public:
- *   - metadata: ADQL over TAP at `argus`. A query is POSTed and the 303's Location is fetched, which is how CADC returns a
- *     synchronous result of any size.
+ *   - metadata: ADQL over TAP at `argus`, with the transaction and VOTable owned by PyVO.
  *   - files: `raven`, CADC's global locator, which resolves an artifact URI and redirects to a signed URL for the bytes.
  *
  * CADC records each artifact's byte count and its own md5 (`contentChecksum`). Both are carried into a pin, and a download is
@@ -16,13 +15,12 @@ import { spawn } from 'node:child_process';
 import { access, mkdir, rm, stat, symlink } from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { request as httpsRequest } from 'node:https';
-import type { IncomingHttpHeaders } from 'node:http';
 import { resolve } from 'node:path';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { requireString } from '../../source-values.mts';
+import { tapRows } from '../astronomy-packages/client.mts';
 
-export const CADC_TAP = 'https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/sync';
+export const CADC_TAP = 'https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus';
 export const CADC_FILES = 'https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/raven/files';
 /** Gemini's own files carry the `gemini:GEMINI/` scheme; `cadc:GEMINI*` is what CADC itself stores (previews, the legacy NIFS
  * reductions), and a pin never names one. A raw frame is `S20250906S0037.fits`; the archive's processed masters carry the
@@ -30,10 +28,6 @@ export const CADC_FILES = 'https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/raven/fil
 export const ARTIFACT_URI = /^gemini:GEMINI\/([a-z]{0,4}[NS]\d{8}S\d{4}(?:_[a-z0-9]+)?\.fits)$/u;
 export const RAW_NAME = /^[NS]\d{8}S\d{4}\.fits$/u;
 export const isRawName = (name: string) => RAW_NAME.test(name);
-/** A TAP answer is a table of text; nothing here needs a larger one, and an unbounded read is how a query mistake exhausts
- * the machine. */
-const MAX_TABLE_BYTES = 64 * 1024 * 1024;
-
 export const artifactName = (uri: string) => {
   const match = ARTIFACT_URI.exec(uri);
   if (!match) throw new TypeError(`${uri} is not a Gemini artifact URI.`);
@@ -44,62 +38,9 @@ const sizeOf = (path: string) => stat(path).then(info => info.size, () => -1);
 export const exists = (path: string) => access(path).then(() => true, () => false);
 const run = (command: string, args: readonly string[]) => new Promise<number>(done => { spawn(command, args, { stdio: 'ignore' }).on('close', code => done(code ?? 1)); });
 
-/** One HTTPS request, through node:https rather than fetch. A CAOM query that joins Artifact runs for minutes before CADC
- * sends a byte, and fetch's own header timeout (undici's, five minutes, not settable without a dispatcher) fires first. */
-function request(url: string, options: { method?: string; body?: string; headers?: Record<string, string> } = {}) {
-  return new Promise<{ status: number; headers: IncomingHttpHeaders; text: string }>((done, fail) => {
-    const target = new URL(url);
-    const call = httpsRequest({ protocol: target.protocol, hostname: target.hostname, port: target.port, method: options.method ?? 'GET',
-      path: `${target.pathname}${target.search}`, headers: options.headers ?? {}, timeout: 1_800_000 }, response => {
-      let text = '', bytes = 0;
-      response.setEncoding('utf8');
-      response.on('data', chunk => {
-        bytes += (chunk as string).length;
-        if (bytes > MAX_TABLE_BYTES) { call.destroy(new Error(`CADC returned more than the ${MAX_TABLE_BYTES} bytes this reader holds.`)); return; }
-        text += chunk as string;
-      });
-      response.on('end', () => done({ status: response.statusCode ?? 0, headers: response.headers, text }));
-    });
-    call.on('timeout', () => call.destroy(new Error(`CADC did not answer ${url} within 30 minutes.`)));
-    call.on('error', fail);
-    call.end(options.body);
-  });
-}
-
-/** One ADQL query, as rows keyed by column name. CADC answers a POSTed sync query with 303 and the result's location; the
- * result is read as CSV, which is the only format every column of caom2 comes back in unambiguously. */
+/** One ADQL query. PyVO owns the TAP transaction, redirect handling and VOTable parsing. */
 export async function query(adql: string): Promise<Record<string, string>[]> {
-  const body = new URLSearchParams({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', QUERY: adql }).toString();
-  const started = await request(CADC_TAP, { method: 'POST', body,
-    headers: { 'content-type': 'application/x-www-form-urlencoded', 'content-length': String(Buffer.byteLength(body)) } });
-  const location = typeof started.headers.location === 'string' ? started.headers.location : undefined;
-  if (!location && started.status >= 300) throw new Error(`CADC refused the query: ${started.status} ${started.text.slice(0, 300)}`);
-  const response = location ? await request(location) : started;
-  if (response.status !== 200) throw new Error(`CADC refused the result: ${response.status} ${response.text.slice(0, 300)}`);
-  return parseCsv(response.text);
-}
-
-/** RFC 4180 enough for CAOM: quoted fields, doubled quotes inside them, commas and newlines inside quotes. */
-export function parseCsv(text: string): Record<string, string>[] {
-  const rows: string[][] = [];
-  let row: string[] = [], field = '', quoted = false, started = false;
-  for (let index = 0; index < text.length; index++) {
-    const character = text[index]!;
-    if (quoted) {
-      if (character !== '"') field += character;
-      else if (text[index + 1] === '"') { field += '"'; index++; }
-      else quoted = false;
-    } else if (character === '"' && !started) { quoted = true; started = true; }
-    else if (character === ',') { row.push(field); field = ''; started = false; }
-    else if (character === '\n' || character === '\r') {
-      if (character === '\r' && text[index + 1] === '\n') index++;
-      row.push(field); rows.push(row); row = []; field = ''; started = false;
-    } else { field += character; started = true; }
-  }
-  if (field !== '' || row.length) { row.push(field); rows.push(row); }
-  const header = rows.shift();
-  if (!header) return [];
-  return rows.filter(entry => entry.length === header.length).map(entry => Object.fromEntries(header.map((name, index) => [name, entry[index] ?? ''])));
+  return tapRows(CADC_TAP, adql);
 }
 
 export interface GeminiFile {

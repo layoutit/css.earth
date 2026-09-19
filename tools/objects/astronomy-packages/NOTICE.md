@@ -10,3 +10,16 @@ Please cite Ginsburg et al., “astroquery: An Astronomical Web-querying Package
 
 The software license does not grant rights in data returned by an observatory. Each cssEarth program and product continues to
 record the archive origin, attribution, access state and reuse terms of its own input data.
+
+# PyVO
+
+cssEarth uses [PyVO 1.9.1](https://pypi.org/project/pyvo/) as the sole implementation of IVOA TAP requests and VOTable
+parsing. PyVO is installed from the same hash-locked environment; no PyVO source is copied or modified. PyVO is distributed
+under the BSD 3-Clause license reproduced in [PYVO-LICENSE.rst](PYVO-LICENSE.rst). Cite Graham et al., “PyVO: Python access
+to the Virtual Observatory”, *Astronomy and Computing* 25 (2018), doi:10.1016/j.ascom.2018.07.003.
+
+# Astropy
+
+Astroquery and PyVO depend on [Astropy 8.0.1](https://pypi.org/project/astropy/). It is installed from the hash-locked
+environment and is not copied or modified. Astropy is distributed under the BSD 3-Clause license reproduced in
+[ASTROPY-LICENSE.rst](ASTROPY-LICENSE.rst).

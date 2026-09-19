@@ -3,8 +3,13 @@ import test from 'node:test';
 import { parseAstroqueryAnswer } from './client.mts';
 
 test('the boundary rejects a response from another operation', async () => {
-  assert.throws(() => parseAstroqueryAnswer({ schema: 'cssearth-astroquery-answer@1', astroquery: '0.4.11', operation: 'alma-tap', rows: [] },
+  assert.throws(() => parseAstroqueryAnswer({ schema: 'cssearth-astroquery-answer@1', astroquery: '0.4.11', pyvo: '1.9.1', operation: 'tap-query', rows: [] },
     { operation: 'mast-service', service: 'Mast.Caom.Cone', parameters: {} }), /wrong contract/u);
+});
+
+test('the boundary rejects a TAP answer from another PyVO version', () => {
+  assert.throws(() => parseAstroqueryAnswer({ schema: 'cssearth-astroquery-answer@1', astroquery: '0.4.11', pyvo: '1.9.0', operation: 'tap-query', rows: [] },
+    { operation: 'tap-query', service: 'https://example.org/tap', query: 'SELECT 1' }), /wrong version/u);
 });
 
 test('the boundary validates rows before returning them', async () => {

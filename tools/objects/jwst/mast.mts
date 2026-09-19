@@ -6,7 +6,7 @@ import { access, mkdir, rm, stat, symlink, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { requireRecord, requireString } from '../../source-values.mts';
-import { astroquery, astroqueryRows } from '../astroquery/client.mts';
+import { astroquery, astroqueryRows } from '../astronomy-packages/client.mts';
 import type { EurekaToolchain } from './toolchain.mts';
 
 export const MAST_CACHE = resolve(import.meta.dirname, '../../../output/archive-cache/mast');

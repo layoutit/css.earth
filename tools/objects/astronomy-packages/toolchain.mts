@@ -36,15 +36,15 @@ export async function installAstroquery() {
   return ASTROQUERY_ROOT;
 }
 
-export interface AstroqueryToolchain { readonly python: string; readonly digest: string; readonly version: string; readonly env: NodeJS.ProcessEnv }
+export interface AstroqueryToolchain { readonly python: string; readonly digest: string; readonly version: string; readonly pyvoVersion: string; readonly env: NodeJS.ProcessEnv }
 
 export async function astroqueryToolchain(): Promise<AstroqueryToolchain> {
   const { entry, digest } = await descriptor(), bin = resolve(ASTROQUERY_ROOT, 'env/bin'), python = resolve(bin, 'python');
   const marker = await readFile(resolve(ASTROQUERY_ROOT, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown), () => null);
-  if (!marker) throw new Error('The Astroquery archive client is not installed: node tools/objects/astroquery/toolchain.mts install');
+  if (!marker) throw new Error('The Astroquery archive client is not installed: node tools/objects/astronomy-packages/toolchain.mts install');
   if (marker.pinsSha256 !== digest) throw new Error('The Astroquery archive client was installed from other pins; reinstall it.');
   if (!await access(python).then(() => true, () => false)) throw new Error(`The Astroquery toolchain has no python at ${python}.`);
-  return { python, digest, version: requireString(entry.astroquery), env: { PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1' } };
+  return { python, digest, version: requireString(entry.astroquery), pyvoVersion: requireString(entry.pyvo), env: { PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1' } };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
@@ -52,8 +52,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (mode === 'install') console.log(`Astroquery is installed at ${await installAstroquery()}`);
   else if (mode === 'verify') {
     const toolchain = await astroqueryToolchain();
-    const found = run(toolchain.python, ['-c', 'import astroquery; from astroquery import alma, mast, vizier; print(astroquery.__version__)'], toolchain.env).trim();
-    if (found !== toolchain.version) throw new Error(`Expected Astroquery ${toolchain.version}, found ${found}.`);
-    console.log(`Astroquery ${found} ready; pins ${toolchain.digest.slice(0, 12)}`);
+    const found = run(toolchain.python, ['-c', 'import astroquery, pyvo; from astroquery import alma, mast, vizier; print(astroquery.__version__, pyvo.__version__)'], toolchain.env).trim();
+    if (found !== `${toolchain.version} ${toolchain.pyvoVersion}`) throw new Error(`Expected Astroquery ${toolchain.version} and PyVO ${toolchain.pyvoVersion}, found ${found}.`);
+    console.log(`Astroquery ${toolchain.version} and PyVO ${toolchain.pyvoVersion} ready; pins ${toolchain.digest.slice(0, 12)}`);
   } else throw new TypeError('Usage: toolchain <install|verify>');
 }
