@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 /** What the NACO archive holds, for this project's bodies, derived rather than declared.
  *
- *   node tools/objects/naco/archive-ledger.mts        writes data/naco/ledger.json and docs/naco-ledger.md
+ *   node tools/objects/naco/archive-ledger.mts            writes data/naco/ledger.json and docs/naco-ledger.md
+ *   node tools/objects/naco/archive-ledger.mts --local    rewrites only the part the pinned programs and receipts own
  *
  * Every count comes from the ESO archive, counted server-side by an ADQL `GROUP BY` rather than by downloading rows and
  * counting them here. Every mode's state comes from the pinned programs and the receipts beside them: a mode is "reduced"
- * because a program of that mode exists and a receipt was written for it, never because a constant says so.
+ * because a program of that mode exists and a receipt beside it parses, names that program and its night, and pins the two
+ * disjoint reductions it compared, never because a file of about the right name sits there. A receipt that cannot be read,
+ * states another schema or names something else is reported as a problem and proves nothing. --local takes the programs and
+ * their receipts again from disk and leaves the dated archive counts alone.
  *
  * The object matcher is the part that has to be careful. NACO's target names are what the observer typed, and they collide:
  * `EUROPA` is Jupiter's moon, `52_EUROPA` is the asteroid this project ships as `europa-52`, and `195EURYKLEIA-26T0400` is a
@@ -14,7 +18,7 @@
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { INSTRUMENT, MODES, PROGRAMS, rawQuery, REFUSED_TECHNIQUES, type NacoMode } from './archive.mts';
 
 const repository = resolve(import.meta.dirname, '../../..');
@@ -65,10 +69,13 @@ export interface ObjectObservation {
   readonly modes: readonly string[];
 }
 
+/** What a mode can be: reduced by an accepted receipt, pinned and unproved, refused by this route, or untouched. */
+const MODE_STATES = ['reduced', 'pinned', 'refused', 'not reduced'] as const;
+const isModeState = (value: string): value is ModeState['state'] => (MODE_STATES as readonly string[]).includes(value);
 export interface ModeState {
   readonly mode: string;
   readonly frames: number;
-  /** The pinned programs of this mode, and the receipts written beside them. */
+  /** The pinned programs of this mode, and the receipts accepted beside them. */
   readonly programs: readonly string[];
   readonly receipts: readonly string[];
   readonly state: 'reduced' | 'pinned' | 'refused' | 'not reduced';
@@ -82,6 +89,8 @@ export interface Ledger {
   readonly frames: { readonly total: number; readonly byCategory: Readonly<Record<string, number>>; readonly byMode: Readonly<Record<string, number>> };
   readonly objects: readonly ObjectObservation[];
   readonly modes: readonly ModeState[];
+  /** Receipts that could not be accepted, and so proved nothing. An empty list is the only passing state. */
+  readonly receiptProblems: readonly string[];
 }
 
 /** Which of this route's buckets a technique falls in, for counting. Unlike `modeOf` this never throws: the ledger has to
@@ -153,23 +162,66 @@ export function observationsOf(rows: readonly Record<string, string>[], shipped:
   })).sort((a, b) => b.frames - a.frames || a.id.localeCompare(b.id));
 }
 
-/** Each mode's state, read from the pinned programs and the receipts beside them. */
-export async function modeStates(byMode: Readonly<Record<string, number>>): Promise<ModeState[]> {
-  const files = await readdir(PROGRAMS).catch(() => [] as string[]);
-  const programs = files.filter(name => name.endsWith('.json') && !name.includes('.reproduction.'));
-  const receipts = files.filter(name => name.includes('.reproduction.'));
-  const pinned = new Map<string, string[]>();
-  for (const name of programs) {
-    const record = requireRecord(JSON.parse(await readFile(resolve(PROGRAMS, name), 'utf8')) as unknown, name);
-    const mode = requireString(record.mode, 'mode');
-    pinned.set(mode, [...pinned.get(mode) ?? [], name.replace(/\.json$/u, '')]);
+/** What went wrong with one receipt, always said of the file it was in: a JSON parser names a position, not a file. */
+const receiptProblem = (file: string, error: unknown) => { const said = error instanceof Error ? error.message : String(error); return said.startsWith(`${file}:`) ? said : `${file}: ${said}`; };
+
+/** The schemas this route's checks write. `reproduction` compares two object templates or two nod halves of one night;
+ * `spectrum` is the extracted spectrum's own check of the same night's two halves. */
+export const NACO_RECEIPT_SCHEMAS = ['cssearth-naco-reproduction@1', 'cssearth-naco-spectrum@1'] as const;
+const DIGEST = /^[0-9a-f]{64}$/u;
+const TEMPLATE = /^\d{4}-\d{2}-\d{2}T/u;
+
+/** One receipt read against the program it claims: another schema, another night, a missing pin or fewer than two disjoint
+ * reductions is an error, never a silent skip. The receipt has no archive product to name (ESO publishes none for NACO), so
+ * what it must pin is the two reductions it compared, each by path, size and digest. */
+export function checkReceipt(value: unknown, file: string, program: Record<string, unknown>): void {
+  const row = requireRecord(value, file), schema = requireString(row.schema, `${file}: schema`);
+  if (!(NACO_RECEIPT_SCHEMAS as readonly string[]).includes(schema)) throw new TypeError(`${file}: ${schema} is not a NACO receipt.`);
+  const id = requireString(program.program, `${file}: pinned program id`);
+  if (requireString(row.program, `${file}: program`) !== id) throw new TypeError(`${file}: it is the receipt of ${String(row.program)}.`);
+  const spectrum = schema === 'cssearth-naco-spectrum@1';
+  const expected = spectrum ? `${id}.spectrum.reproduction.json` : `${id}.${requireString(row.product, `${file}: product`)}.reproduction.json`;
+  if (file !== expected) throw new TypeError(`${file}: it is the receipt named ${expected}.`);
+  if (spectrum) {
+    if (requireString(row.object, `${file}: object`) !== requireString(program.object, `${id}: object`)) throw new TypeError(`${file}: it names the object ${String(row.object)}.`);
+    if (requireString(row.night, `${file}: night`) !== requireString(program.night, `${id}: night`)) throw new TypeError(`${file}: it names the night ${String(row.night)}.`);
   }
-  const states: ModeState[] = [];
+  const sides = requireArray(spectrum ? row.halves : row.sequences, `${file}: the two sides it compared`).map(entry => {
+    const side = requireRecord(entry, `${file}: side`), sha256 = requireString(side.sha256, `${file}: side digest`);
+    if (!DIGEST.test(sha256)) throw new TypeError(`${file}: a side it compared states no sha256.`);
+    requireString(side.path, `${file}: side path`); requireFiniteNumber(side.bytes, `${file}: side bytes`);
+    // An imaging receipt compares two of the night's own object templates; a nodded night's halves carry their own labels.
+    const template = requireString(side[spectrum ? 'half' : 'template'], `${file}: side label`);
+    if (TEMPLATE.test(template) && !requireArray(program.objectTemplates, `${id}: object templates`).includes(template))
+      throw new TypeError(`${file}: it reduced the template ${template}, which ${id} does not pin.`);
+    return sha256;
+  });
+  if (sides.length < 2) throw new TypeError(`${file}: it compares ${sides.length} reduction(s), not two.`);
+  if (new Set(sides).size !== sides.length) throw new TypeError(`${file}: the sides it compared are the same file.`);
+}
+
+/** Each mode's state, read from the pinned programs and the receipts beside them, with every receipt that could not be
+ * accepted reported rather than counted or dropped. */
+export async function modeStates(byMode: Readonly<Record<string, number>>, directory = PROGRAMS): Promise<{ modes: ModeState[]; problems: string[] }> {
+  const files = (await readdir(directory).catch(() => [] as string[])).sort();
+  const pinned = new Map<string, string[]>(), programs = new Map<string, Record<string, unknown>>();
+  for (const name of files.filter(name => name.endsWith('.json') && !name.includes('.reproduction.'))) {
+    const record = requireRecord(JSON.parse(await readFile(resolve(directory, name), 'utf8')) as unknown, name);
+    const mode = requireString(record.mode, 'mode'), id = name.replace(/\.json$/u, '');
+    pinned.set(mode, [...pinned.get(mode) ?? [], id]); programs.set(id, record);
+  }
+  const accepted = new Set<string>(), problems: string[] = [];
+  // A receipt of a pinned program is `<program>.<product>.reproduction.json`; anything else here belongs to no program.
+  for (const name of files.filter(name => name.includes('.reproduction.') && programs.has(name.slice(0, name.indexOf('.'))))) {
+    try { checkReceipt(JSON.parse(await readFile(resolve(directory, name), 'utf8')) as unknown, name, programs.get(name.slice(0, name.indexOf('.')))!); accepted.add(name); }
+    catch (error) { problems.push(receiptProblem(name, error)); }
+  }
+  const modes: ModeState[] = [];
   for (const mode of Object.keys(byMode).sort()) {
     const ours = pinned.get(mode) ?? [];
-    const theirs = receipts.filter(name => ours.some(program => name.startsWith(`${program}.`)));
+    const theirs = [...accepted].filter(name => ours.some(program => name.startsWith(`${program}.`)));
     const refused = (REFUSED_TECHNIQUES as readonly string[]).includes(mode.toUpperCase());
-    states.push({
+    modes.push({
       mode, frames: byMode[mode]!, programs: ours.sort(), receipts: theirs.sort(),
       state: theirs.length ? 'reduced' : ours.length ? 'pinned' : refused ? 'refused' : 'not reduced',
       reason: theirs.length ? `${theirs.length} receipt(s) beside ${ours.length} pinned program(s).`
@@ -178,14 +230,36 @@ export async function modeStates(byMode: Readonly<Record<string, number>>): Prom
         : 'No program of this mode is pinned.',
     });
   }
-  return states;
+  return { modes, problems: problems.sort((a, b) => a.localeCompare(b, 'en')) };
 }
 
 export async function buildLedger(today = new Date().toISOString().slice(0, 10)): Promise<Ledger> {
   const frames = await frameCounts(today);
   const rows = await scienceTargets(today);
   const objects = observationsOf(rows, await shippedObjects());
-  return { schema: SCHEMA, instrument: INSTRUMENT, measured: today, frames, objects, modes: await modeStates(frames.byMode) };
+  const { modes, problems } = await modeStates(frames.byMode);
+  return { schema: SCHEMA, instrument: INSTRUMENT, measured: today, frames, objects, modes, receiptProblems: problems };
+}
+
+/** The ledger on disk, read back as the external value it is, so --local rewrites a file it has checked. */
+export function parseLedger(value: unknown): Ledger {
+  const row = requireRecord(value, 'NACO ledger');
+  if (row.schema !== SCHEMA) throw new TypeError('Unsupported NACO ledger.');
+  if (row.instrument !== INSTRUMENT) throw new TypeError(`The ledger counts ${String(row.instrument)}, not ${INSTRUMENT}.`);
+  const frames = requireRecord(row.frames, 'Frame counts');
+  const counts = (value: unknown, label: string) => Object.fromEntries(Object.entries(requireRecord(value, label)).map(([key, n]) => [key, requireFiniteNumber(n, label)]));
+  const names = (list: unknown, label: string) => requireArray(list, label).map(name => requireString(name, label));
+  return { schema: SCHEMA, instrument: INSTRUMENT, measured: requireString(row.measured, 'Measured date'),
+    frames: { total: requireFiniteNumber(frames.total, 'Total frames'), byCategory: counts(frames.byCategory, 'Frames by category'), byMode: counts(frames.byMode, 'Frames by mode') },
+    objects: requireArray(row.objects, 'Objects').map(raw => { const entry = requireRecord(raw, 'Object');
+      return { id: requireString(entry.id, 'Object id'), targets: names(entry.targets, 'Archive target names'), frames: requireFiniteNumber(entry.frames, 'Frames'),
+        programmes: names(entry.programmes, 'Programmes'), modes: names(entry.modes, 'Modes') }; }),
+    modes: requireArray(row.modes, 'Modes').map(raw => { const entry = requireRecord(raw, 'Mode'), state = requireString(entry.state, 'State');
+      if (!isModeState(state)) throw new TypeError(`${state} is not a mode state.`);
+      return { mode: requireString(entry.mode, 'Mode name'), frames: requireFiniteNumber(entry.frames, 'Frames'), programs: names(entry.programs, 'Programs'),
+        receipts: names(entry.receipts, 'Receipts'), state, reason: requireString(entry.reason, 'Reason') }; }),
+    // A ledger written before receipts were checked states no problems; the next run gives it the field.
+    receiptProblems: names(row.receiptProblems ?? [], 'Receipt problems') };
 }
 
 const thousands = (value: number) => value.toLocaleString('en-GB');
@@ -221,15 +295,33 @@ the same number, which is why 52 Europa and Europa are two rows and not one.
 | object | frames | modes | programmes | archive target names |
 | --- | ---: | --- | --- | --- |
 ${objects.join('\n')}
+
+## Receipts
+
+A receipt counts only when it parses, states one of the schemas this route writes (${NACO_RECEIPT_SCHEMAS.map(schema => `\`${schema}\``).join(', ')}), names the program it sits beside and the night that program pins, and pins both of the disjoint reductions it compared by path, size and digest. A receipt that says anything else is reported here and proves nothing.
+
+${ledger.receiptProblems.length ? `${ledger.receiptProblems.length} receipt${ledger.receiptProblems.length === 1 ? '' : 's'} could not be accepted:\n\n${ledger.receiptProblems.map(problem => `- ${problem}`).join('\n')}` : 'None: every receipt beside a pinned program was accepted.'}
 `;
 }
 
+/** Every receipt problem, said once and counted against the run: a ledger that reports one has not proved what it lists. */
+const reportProblems = (problems: readonly string[]) => {
+  for (const problem of problems) console.error(`RECEIPT ${problem}`);
+  if (problems.length) process.exitCode = 1;
+};
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const ledger = await buildLedger();
+  const local = process.argv.includes('--local');
+  let ledger: Ledger;
+  if (local) {
+    const held = parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown), { modes, problems } = await modeStates(held.frames.byMode);
+    ledger = { ...held, modes, receiptProblems: problems };
+  } else ledger = await buildLedger();
   await mkdir(resolve(repository, 'data/naco'), { recursive: true });
   await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
   await writeFile(GUIDE, ledgerGuide(ledger));
-  console.log(`${LEDGER}: ${thousands(ledger.frames.total)} frames, ${ledger.objects.length} shipped objects, ${ledger.modes.length} modes.`);
+  console.log(`${LEDGER}: ${thousands(ledger.frames.total)} frames, ${ledger.objects.length} shipped objects, ${ledger.modes.length} modes${local ? ' (pinned state only)' : ''}.`);
+  reportProblems(ledger.receiptProblems);
 }
 
 export type { NacoMode };

@@ -14,9 +14,11 @@
  * what lies within a small radius of where the object's own package puts it, which is one query per positioned object.
  *
  * Each configuration's state is read from this repository, not declared: the programs pinned in tools/objects/hst/programs and
- * the ones that carry a reproduction receipt. --write replaces data/hst/ledger.json and docs/hubble-ledger.md. --local rewrites
- * only that state, from the ledger already on disk: when a program is pinned or a receipt written, nothing the archive said has
- * changed, and a pass that takes half an hour should not be repeated to record it.
+ * the ones that carry a reproduction receipt naming an observation of that configuration and the MAST product the program pins
+ * for it. A receipt that cannot be read, states another schema or names something else is reported as a problem and proves
+ * nothing. --write replaces data/hst/ledger.json and docs/hubble-ledger.md. --local rewrites only that state, from the ledger
+ * already on disk: when a program is pinned or a receipt written, nothing the archive said has changed, and a pass that takes
+ * half an hour should not be repeated to record it.
  *
  * Every request is given its own deadline and tried three times. A pass asks MAST about forty times and takes tens of minutes,
  * and the cone searches are where it slows: one around M42 returned 7,526 rows in about a minute, and others stopped answering
@@ -194,26 +196,69 @@ export async function fixedRows(object: ShippedObject): Promise<ArchiveRow[] | n
   return data.map(row => ({ observation: requireString(row.obs_id), target: String(row.target_name ?? ''), programme: String(row.proposal_id), configuration: String(row.instrument_name ?? '') }));
 }
 
-/** What this repository holds for each configuration: the programs pinned, and those a reproduction receipt was written for. */
-export async function repositoryState(repository = REPOSITORY) {
-  const directory = resolve(repository, 'tools/objects/hst/programs'), files = await readdir(directory);
-  const state = new Map<string, { programs: Set<string>; checked: Set<string> }>();
-  // A pinned program is `<id>.json`. Everything else here carries a second name segment — a reproduction receipt, a line
-  // stack, the Horizons responses a line stack pins — and is not a program.
-  for (const file of files.filter(name => /^[a-z0-9-]+\.json$/u.test(name))) {
-    const program = parseHstProgram(await readJson(resolve(directory, file)));
-    for (const observation of program.observations) {
-      const configuration = `${observation.instrument}/${observation.detector}`;
-      const held = state.get(configuration) ?? { programs: new Set(), checked: new Set() };
-      state.set(configuration, held);
-      held.programs.add(program.id);
-      // A receipt is named for the product it checked, and an association's products carry its own rootname or a member's, not
-      // the observation's (europa-11085.j9xe05011_sfl). Any rootname of the observation counts.
-      const rootnames = [observation.observation, ...observation.association ? [observation.association.product, ...observation.association.members.map(member => member.rootname)] : []];
-      if (files.some(name => name.endsWith('.reproduction.json') && rootnames.some(rootname => name.startsWith(`${program.id}.${rootname}_`)))) held.checked.add(program.id);
-    }
+/** What went wrong with one receipt, always said of the file it was in: a JSON parser names a position, not a file. */
+const receiptProblem = (file: string, error: unknown) => { const said = error instanceof Error ? error.message : String(error); return said.startsWith(`${file}:`) ? said : `${file}: ${said}`; };
+
+export const HST_REPRODUCTION_SCHEMA = 'cssearth-hst-reproduction@1';
+/** What a receipt has to say for the observation it names to count as re-calibrated: which program, observation and product it
+ * ran, the configuration that product was taken in, and the MAST product it compared the result against. */
+export interface ReproductionReceipt { readonly program: string; readonly observation: string; readonly product: string; readonly instrument: string;
+  readonly mast: { readonly name: string; readonly bytes: number; readonly sha256: string } }
+const DIGEST = /^[0-9a-f]{64}$/u;
+
+/** One receipt read as the external value it is: another schema, a missing field or a missing pin is an error, never a skip. */
+export function parseReproductionReceipt(value: unknown, label: string): ReproductionReceipt {
+  const row = requireRecord(value, label);
+  if (row.schema !== HST_REPRODUCTION_SCHEMA) throw new TypeError(`${label}: ${String(row.schema)} is not a reproduction receipt.`);
+  const mast = requireRecord(row.mast, `${label}: MAST product`), sha256 = requireString(mast.sha256, `${label}: MAST digest`);
+  if (!DIGEST.test(sha256)) throw new TypeError(`${label}: the MAST digest it compared is not a sha256.`);
+  return { program: requireString(row.program, `${label}: program`), observation: requireString(row.observation, `${label}: observation`),
+    product: requireString(row.product, `${label}: product`), instrument: requireString(row.instrument, `${label}: instrument`),
+    mast: { name: requireString(mast.name, `${label}: MAST name`), bytes: requireFiniteNumber(mast.bytes, `${label}: MAST bytes`), sha256 } };
+}
+
+/** What this repository holds for each configuration (the programs pinned and those a receipt proved), and every receipt that
+ * could not be accepted. A program counts as re-calibrated in a configuration only when a receipt names one of its observations
+ * in that configuration and the MAST product the program pins for it, with the digest of what it compared. */
+export async function repositoryReceipts(repository = REPOSITORY) {
+  const directory = resolve(repository, 'tools/objects/hst/programs'), files = (await readdir(directory)).sort();
+  const state = new Map<string, { programs: Set<string>; checked: Set<string> }>(), problems: string[] = [];
+  // A pinned program is `<id>.json`. Everything else here carries a second name segment (a reproduction receipt, a line
+  // stack, the Horizons responses a line stack pins) and is not a program.
+  const programs = await Promise.all(files.filter(name => /^[a-z0-9-]+\.json$/u.test(name)).map(async file => parseHstProgram(await readJson(resolve(directory, file)))));
+  const pinned = new Map(programs.map(program => [program.id, program]));
+  // A receipt is named `<program>.<product>.reproduction.json`. The line-stack and slit-scan pipelines write their own receipts
+  // beside these, under their own schemas and for ids no program pins; those are not this ledger's to read.
+  const proved = new Set<string>();
+  for (const file of files.filter(name => name.endsWith('.reproduction.json') && pinned.has(name.slice(0, name.indexOf('.'))))) {
+    try {
+      const receipt = parseReproductionReceipt(await readJson(resolve(directory, file)), file);
+      if (file !== `${receipt.program}.${receipt.product}.reproduction.json`) throw new TypeError(`${file}: it is the receipt of ${receipt.program} ${receipt.product}.`);
+      const observation = pinned.get(receipt.program)?.observations.find(entry => entry.observation === receipt.observation);
+      if (!observation) throw new TypeError(`${file}: no pinned program holds the observation ${receipt.observation}.`);
+      const product = observation.products.find(entry => entry.name === receipt.mast.name);
+      const wrong = receipt.instrument !== `${observation.instrument}/${observation.detector}` ? `the configuration ${receipt.instrument}`
+        : receipt.product !== receipt.mast.name.replace(/\.fits$/u, '') ? `the product ${receipt.product} against ${receipt.mast.name}`
+        : !product ? `${receipt.mast.name}, which ${receipt.observation} does not pin`
+        : product.bytes !== receipt.mast.bytes ? `${receipt.mast.bytes} bytes of ${receipt.mast.name}, not the ${product.bytes} pinned`
+        : product.sha256 !== undefined && product.sha256 !== receipt.mast.sha256 ? `another ${receipt.mast.name}` : null;
+      if (wrong) throw new TypeError(`${file}: it compared ${wrong}.`);
+      proved.add(`${receipt.program}|${observation.instrument}/${observation.detector}`);
+    } catch (error) { problems.push(receiptProblem(file, error)); }
   }
-  return state;
+  for (const program of programs) for (const observation of program.observations) {
+    const configuration = `${observation.instrument}/${observation.detector}`;
+    const held = state.get(configuration) ?? { programs: new Set<string>(), checked: new Set<string>() };
+    state.set(configuration, held);
+    held.programs.add(program.id);
+    if (proved.has(`${program.id}|${configuration}`)) held.checked.add(program.id);
+  }
+  return { configurations: state, problems: problems.sort((a, b) => a.localeCompare(b, 'en')) };
+}
+
+/** The configurations alone, for everything that asks what is pinned and what is proved rather than what went wrong. */
+export async function repositoryState(repository = REPOSITORY) {
+  return (await repositoryReceipts(repository)).configurations;
 }
 
 export interface Ledger {
@@ -226,10 +271,13 @@ export interface Ledger {
   readonly fixedTargets: readonly { readonly object: string; readonly radiusDeg: number; readonly observations: number; readonly configurations: readonly string[] }[];
   /** Positioned objects MAST would not answer a cone search for in this pass. */
   readonly unansweredTargets: readonly string[];
+  /** Receipts that could not be accepted, and so proved nothing. An empty list is the only passing state. */
+  readonly receiptProblems: readonly string[];
 }
 
 export function buildLedger(counts: ReadonlyMap<string, number>, collection: number, moving: readonly ArchiveRow[],
-  fixed: ReadonlyMap<string, readonly ArchiveRow[] | null>, objects: readonly ShippedObject[], held: Awaited<ReturnType<typeof repositoryState>>, archiveDate: string): Ledger {
+  fixed: ReadonlyMap<string, readonly ArchiveRow[] | null>, objects: readonly ShippedObject[], receipts: Awaited<ReturnType<typeof repositoryReceipts>>, archiveDate: string): Ledger {
+  const held = receipts.configurations;
   const matched = moving.map(row => ({ row, object: matchTarget(row.target, objects) }));
   const perObject = new Map<string, ArchiveRow[]>();
   for (const { row, object } of matched) if (object) (perObject.get(object) ?? perObject.set(object, []).get(object)!).push(row);
@@ -252,6 +300,7 @@ export function buildLedger(counts: ReadonlyMap<string, number>, collection: num
       [{ object, radiusDeg: objects.find(entry => entry.id === object)!.position!.radiusDeg, observations: rows.length, configurations: listOf(rows) }])
       .filter(entry => entry.observations > 0).sort((a, b) => b.observations - a.observations || a.object.localeCompare(b.object, 'en')),
     unansweredTargets: [...fixed].flatMap(([object, rows]) => rows === null ? [object] : []).sort(),
+    receiptProblems: receipts.problems,
   };
 }
 
@@ -278,7 +327,9 @@ export function parseLedger(value: unknown): Ledger {
   return { schema: row.schema, archiveDate: requireString(row.archiveDate, 'Archive date'), observations, configurations,
     movingTargets: targets(row.movingTargets, 'Moving targets', false) as Ledger['movingTargets'],
     fixedTargets: targets(row.fixedTargets, 'Fixed targets', true) as Ledger['fixedTargets'],
-    unansweredTargets: names(row.unansweredTargets, 'Unanswered targets') };
+    unansweredTargets: names(row.unansweredTargets, 'Unanswered targets'),
+    // A ledger written before receipts were checked states no problems; the next run gives it the field.
+    receiptProblems: names(row.receiptProblems ?? [], 'Receipt problems') };
 }
 
 const thousands = (value: number) => value.toLocaleString('en-US');
@@ -319,6 +370,14 @@ export function ledgerGuide(ledger: Ledger): string {
     '| --- | ---: | ---: | --- |',
     ...ledger.fixedTargets.map(entry => `| ${entry.object} | ${(entry.radiusDeg * 60).toFixed(1)}′ | ${thousands(entry.observations)} | ${entry.configurations.join(', ')} |`),
     '',
+    '## Receipts',
+    '',
+    `A program counts as re-calibrated in a configuration only when a receipt beside it parses, states the \`${HST_REPRODUCTION_SCHEMA}\` schema, and names one of its observations in that configuration together with the MAST product the program pins for it, with the digest of what it compared. A receipt that says anything else is reported here and proves nothing.`,
+    '',
+    ledger.receiptProblems.length
+      ? `${ledger.receiptProblems.length} receipt${ledger.receiptProblems.length === 1 ? '' : 's'} could not be accepted:\n\n${ledger.receiptProblems.map(problem => `- ${problem}`).join('\n')}`
+      : 'None: every receipt beside a pinned program was accepted.',
+    '',
     '## Limits',
     '',
     "- Counts are the archive's own, by configuration. Nothing outside a moving target or a positioned object's radius is listed, because the fixed-target archive is far too large to pull.",
@@ -333,20 +392,29 @@ export function ledgerGuide(ledger: Ledger): string {
   return `${lines.join('\n')}`;
 }
 
-/** The ledger on disk with each configuration's pinned and checked programs taken again from this repository. */
-export async function withRepositoryState(ledger: Ledger, held: Awaited<ReturnType<typeof repositoryState>>): Promise<Ledger> {
+/** The ledger on disk with each configuration's pinned and checked programs, and the receipt problems, taken again from here. */
+export function withRepositoryState(ledger: Ledger, receipts: Awaited<ReturnType<typeof repositoryReceipts>>): Ledger {
+  const held = receipts.configurations;
   return { ...ledger, configurations: ledger.configurations.map(entry => ({ ...entry,
-    programs: [...held.get(entry.configuration)?.programs ?? []].sort(), checked: [...held.get(entry.configuration)?.checked ?? []].sort() })) };
+    programs: [...held.get(entry.configuration)?.programs ?? []].sort(), checked: [...held.get(entry.configuration)?.checked ?? []].sort() })),
+  receiptProblems: receipts.problems };
 }
+
+/** Every receipt problem, said once and counted against the run: a ledger that reports one has not proved what it lists. */
+const reportProblems = (problems: readonly string[]) => {
+  for (const problem of problems) console.error(`RECEIPT ${problem}`);
+  if (problems.length) process.exitCode = 1;
+};
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const write = process.argv.includes('--write');
   if (process.argv.includes('--local')) {
-    const ledger = await withRepositoryState(parseLedger(await readJson(LEDGER)), await repositoryState());
+    const ledger = withRepositoryState(parseLedger(await readJson(LEDGER)), await repositoryReceipts());
     await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
     await writeFile(GUIDE, ledgerGuide(ledger));
     console.log(`HST_LEDGER ${LEDGER} ${GUIDE} (repository state only)`);
-    process.exit(0);
+    reportProblems(ledger.receiptProblems);
+    process.exit(process.exitCode ?? 0);
   }
   const objects = await shippedObjects();
   const collection = await archiveCount();
@@ -363,7 +431,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     fixed.set(object.id, rows);
     console.log(`${object.id}: ${rows === null ? 'unanswered' : `${rows.length} within ${(object.position!.radiusDeg * 60).toFixed(1)} arcmin`}`);
   }
-  const ledger = buildLedger(counts, collection, moving, fixed, objects, await repositoryState(), new Date().toISOString().slice(0, 10));
+  const ledger = buildLedger(counts, collection, moving, fixed, objects, await repositoryReceipts(), new Date().toISOString().slice(0, 10));
   if (!write) console.log(JSON.stringify(ledger.observations));
   else {
     await mkdir(resolve(LEDGER, '..'), { recursive: true });
@@ -371,4 +439,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     await writeFile(GUIDE, ledgerGuide(ledger));
     console.log(`HST_LEDGER ${LEDGER} ${GUIDE}`);
   }
+  reportProblems(ledger.receiptProblems);
 }

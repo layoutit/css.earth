@@ -101,3 +101,9 @@ the same number, which is why 52 Europa and Europa are two rows and not one.
 | nemausa | 4 | other | 70.C-0458(A) | NEMAUSA |
 | unitas | 4 | other | 70.C-0458(A) | UNITAS |
 | doris | 3 | cube | 087.C-0577(A) | DORIS |
+
+## Receipts
+
+A receipt counts only when it parses, states one of the schemas this route writes (`cssearth-naco-reproduction@1`, `cssearth-naco-spectrum@1`), names the program it sits beside and the night that program pins, and pins both of the disjoint reductions it compared by path, size and digest. A receipt that says anything else is reported here and proves nothing.
+
+None: every receipt beside a pinned program was accepted.

@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { readFile } from 'node:fs/promises';
+import { access, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { access } from 'node:fs/promises';
-import { buildLedger, JWST_MODES, JWST_TIME_SERIES, ledgerGuide, matchTarget, repositoryState, shippedObjects, type Ledger, type ShippedObject } from './archive-ledger.mts';
+import { buildLedger, JWST_MODES, JWST_TIME_SERIES, ledgerGuide, matchTarget, parseLedger, repositoryState, shippedObjects, withRepositoryState, type Ledger, type ShippedObject } from './archive-ledger.mts';
 
 const repository = resolve(import.meta.dirname, '../../..');
 const objects: ShippedObject[] = [{ id: 'titan', names: ['titan', 'Titan'] }, { id: 'pluto', names: ['pluto', 'Pluto'] }, { id: 'charon', names: ['charon', 'Charon'] },
@@ -60,10 +60,83 @@ test('the checked-in ledger names only shipped objects, agrees with the pinned p
 });
 
 test('a ledger counts observations by object and mode', () => {
-  const held = { modes: new Map(JWST_MODES.map(({ mode }) => [mode, { bands: 0, programs: [] as string[], checked: [] as string[] }])), timeSeries: new Map<string, { programs: string[]; checked: string[] }>() };
+  const held = { modes: new Map(JWST_MODES.map(({ mode }) => [mode, { bands: 0, programs: [] as string[], checked: [] as string[] }])), timeSeries: new Map<string, { programs: string[]; checked: string[] }>(), receiptProblems: [] as string[] };
   const ledger = buildLedger([{ observation: 'a', target: 'TITAN-LEADING', programme: '1251', mode: 'NIRSPEC/IFU', moving: true, raDeg: null, decDeg: null },
     { observation: 'b', target: 'TITAN-BACKGROUND', programme: '1251', mode: 'NIRSPEC/IFU', moving: true, raDeg: null, decDeg: null }],
   [{ exposure: 'MIR_LRS-SLITLESS', programme: '2021', observation: '2', target: 'HD-189733B', raDeg: null, decDeg: null }], new Map(), objects, held, '2026-09-18');
   assert.deepEqual(ledger.objects.map(object => [object.id, object.observations, object.timeSeriesVisits]), [['hd-189733b', {}, { 'MIR_LRS-SLITLESS': 1 }], ['titan', { 'NIRSPEC/IFU': 1 }, {}]]);
   assert.equal(ledger.modes.find(mode => mode.mode === 'NIRSPEC/IFU')!.observations, 2);
+});
+
+// --- receipts ------------------------------------------------------------------------------------------------------------
+
+/** A scratch repository holding one imaging program of two modes, and whatever receipts a case writes beside it. */
+async function scratch(receipts: Readonly<Record<string, string>>) {
+  const root = await mkdtemp(resolve(tmpdir(), 'jwst-ledger-')), imaging = resolve(root, 'tools/objects/jwst/imaging/programs');
+  await mkdir(imaging, { recursive: true });
+  await mkdir(resolve(root, 'tools/objects/jwst/programs'), { recursive: true });
+  await writeFile(resolve(imaging, 'mixed-9999.json'), `${JSON.stringify({ schema: 'cssearth-jwst-imaging-program@1', id: 'mixed-9999', programme: '9999', target: 'MIXED', crdsContext: 'jwst_1535.pmap',
+    bands: [
+      { band: 'NIRCAM-F470N', observation: 'jw09999-o001_t001_nircam_f444w-f470n', stage: 'image3',
+        level3: { name: 'jw09999-o001_t001_nircam_f444w-f470n_i2d.fits', uri: 'mast:JWST/product/jw09999-o001_t001_nircam_f444w-f470n_i2d.fits', bytes: 1024 } },
+      { band: 'NIRSPEC-G395H-F290LP', observation: 'jw09999-o002_t001_nirspec_g395h-f290lp', stage: 'spec3',
+        level3: { name: 'jw09999-o002_t001_nirspec_g395h-f290lp_s3d.fits', uri: 'mast:JWST/product/jw09999-o002_t001_nirspec_g395h-f290lp_s3d.fits', bytes: 2048 } },
+    ] }, null, 1)}\n`);
+  for (const [name, text] of Object.entries(receipts)) await writeFile(resolve(imaging, name), text);
+  return root;
+}
+
+const DIGEST = 'a'.repeat(64);
+const nircamReceipt = (changes: Record<string, unknown> = {}) => `${JSON.stringify({ schema: 'cssearth-jwst-image3-reproduction@1', program: 'mixed-9999', band: 'NIRCAM-F470N',
+  observation: 'jw09999-o001_t001_nircam_f444w-f470n', mast: { name: 'jw09999-o001_t001_nircam_f444w-f470n_i2d.fits', bytes: 1024, sha256: DIGEST }, ...changes }, null, 1)}\n`;
+
+test('a program of two modes with one unreadable receipt is checked for neither, and the receipt is reported', async () => {
+  const root = await scratch({ 'mixed-9999.NIRCAM-F470N.reproduction.json': '{ "schema": "cssearth-jwst-image3-repro' });
+  try {
+    const state = await repositoryState(root);
+    for (const mode of ['NIRCAM/IMAGE', 'NIRSPEC/IFU']) {
+      assert.deepEqual(state.modes.get(mode)!.programs, ['mixed-9999'], `${mode} pins the program`);
+      assert.deepEqual(state.modes.get(mode)!.checked, [], `${mode} is checked by a receipt that cannot be read`);
+    }
+    assert.equal(state.receiptProblems.length, 1);
+    assert.match(state.receiptProblems[0]!, /mixed-9999\.NIRCAM-F470N\.reproduction\.json/u);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a valid receipt checks the band it names and no other mode of the same program', async () => {
+  const root = await scratch({ 'mixed-9999.NIRCAM-F470N.reproduction.json': nircamReceipt() });
+  try {
+    const state = await repositoryState(root);
+    assert.deepEqual(state.modes.get('NIRCAM/IMAGE')!.checked, ['mixed-9999']);
+    assert.deepEqual(state.modes.get('NIRSPEC/IFU')!.checked, []);
+    assert.deepEqual(state.receiptProblems, []);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a receipt of another schema, another observation, another product or no digest proves nothing and is reported', async () => {
+  for (const [why, receipt] of [['another schema', nircamReceipt({ schema: 'cssearth-jwst-nothing@1' })],
+    ['another observation', nircamReceipt({ observation: 'jw09999-o003_t001_nircam_f444w-f470n' })],
+    ['another product', nircamReceipt({ mast: { name: 'jw09999-o001_t001_nircam_f444w-f470n_i2d.fits', bytes: 4096, sha256: DIGEST } })],
+    ['no digest', nircamReceipt({ mast: { name: 'jw09999-o001_t001_nircam_f444w-f470n_i2d.fits', bytes: 1024, sha256: 'not a digest' } })]] as const) {
+    const root = await scratch({ 'mixed-9999.NIRCAM-F470N.reproduction.json': receipt });
+    try {
+      const state = await repositoryState(root);
+      assert.deepEqual(state.modes.get('NIRCAM/IMAGE')!.checked, [], why);
+      assert.equal(state.receiptProblems.length, 1, why);
+    } finally { await rm(root, { recursive: true, force: true }); }
+  }
+});
+
+test('a receipt no pinned program holds a band for is reported rather than ignored', async () => {
+  const root = await scratch({ 'ghost-1.NIRCAM-F470N.reproduction.json': nircamReceipt({ program: 'ghost-1' }) });
+  try {
+    const state = await repositoryState(root);
+    assert.deepEqual(state.receiptProblems, ['ghost-1.NIRCAM-F470N.reproduction.json: no pinned program holds that band.']);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('the ledger on disk reads back and rewrites to itself when nothing in the repository changed', async () => {
+  const ledger = parseLedger(JSON.parse(await readFile(resolve(repository, 'data/jwst/ledger.json'), 'utf8')));
+  assert.deepEqual(withRepositoryState(ledger, await repositoryState(repository)), ledger, 'run archive-ledger.mts --local');
+  assert.deepEqual(ledger.receiptProblems, [], 'a checked-in ledger reports no receipt it could not accept');
 });

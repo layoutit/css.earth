@@ -24,3 +24,9 @@ The finest pixel is the lowest label altitude times the camera's 675.4 microradi
 ## Other targets
 
 Targets that are not an object here: SPACE (399), J RINGS (52).
+
+## Receipts
+
+An image counts as measured only when the receipt beside its program parses, states the `cssearth-junocam-registration@1` schema, and names that program, that target, the budget above and that image as the program pins it, with the kernels it registered against. A receipt that says anything else is reported here and proves nothing.
+
+None: every receipt beside a pinned program was accepted.

@@ -2,7 +2,7 @@
 /** The JWST ledger: what the public archive holds in each observing mode, which of it this repository can already turn into
  * something drawn, and which of the objects it ships JWST has observed.
  *
- *   node tools/objects/jwst/archive-ledger.mts [--write] [--targets <path>]
+ *   node tools/objects/jwst/archive-ledger.mts [--write] [--local] [--targets <path>]
  *
  * Read only against MAST. Every public level-3 observation is listed by mode (MAST's instrument_name); NIRSpec's multi-object
  * mode is only counted, since each of its 145,000 rows is one galaxy in a survey field. Each mode's state is read from this
@@ -10,11 +10,13 @@
  * reproduction receipt or an author's deposit to compare with. A target is matched to a shipped object by name, or, for a
  * target that does not move, by lying within the object's radius on the sky; a moving target's name is also read by its first
  * word (TITAN-LEADING is Titan), and a background or offset pointing is never an object. --write replaces
- * data/jwst/ledger.json and docs/jwst-ledger.md; --targets writes every target of every mode, which is too long to keep. */
+ * data/jwst/ledger.json and docs/jwst-ledger.md; --local rewrites only the repository-derived part of both, from the ledger
+ * already on disk, because pinning a program or writing a receipt changes nothing the archive said; --targets writes every
+ * target of every mode, which is too long to keep. */
 import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { hasErrorCode, isRecord, requireFiniteNumber, requireString } from '../../source-values.mts';
+import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { mastRequest } from './mast.mts';
 import { JWST_BANDS } from './imaging/bands.mts';
 
@@ -147,17 +149,65 @@ export async function timeSeriesVisits(nowMjd: number): Promise<TimeSeriesVisit[
   return [...visits.values()];
 }
 
-/** What this repository holds for each mode: bands defined, programs pinned, and programs checked against someone else's result. */
+/** What went wrong with one receipt, always said of the file it was in: a JSON parser names a position, not a file. */
+const receiptProblem = (file: string, error: unknown) => { const said = error instanceof Error ? error.message : String(error); return said.startsWith(`${file}:`) ? said : `${file}: ${said}`; };
+
+/** The schemas the three imaging stages write their reproduction receipts under. Nothing else is a receipt. */
+export const JWST_REPRODUCTION_SCHEMAS = ['cssearth-jwst-image3-reproduction@1', 'cssearth-jwst-coron3-reproduction@1', 'cssearth-jwst-spec3-reproduction@1'] as const;
+/** What a receipt has to say for the band it names to count as checked: which program, band and observation it reduced, and the
+ * MAST product it compared the result against, pinned by name, size and digest. */
+export interface ReproductionReceipt { readonly schema: string; readonly program: string; readonly band: string; readonly observation: string;
+  readonly mast: { readonly name: string; readonly bytes: number; readonly sha256: string } }
+const DIGEST = /^[0-9a-f]{64}$/u;
+
+/** One receipt read as the external value it is: another schema, a missing field or a missing pin is an error, never a skip. */
+export function parseReproductionReceipt(value: unknown, label: string): ReproductionReceipt {
+  const record = requireRecord(value, label), schema = requireString(record.schema, `${label}: schema`);
+  if (!(JWST_REPRODUCTION_SCHEMAS as readonly string[]).includes(schema)) throw new TypeError(`${label}: ${schema} is not a reproduction receipt.`);
+  const mast = requireRecord(record.mast, `${label}: MAST product`), sha256 = requireString(mast.sha256, `${label}: MAST digest`);
+  if (!DIGEST.test(sha256)) throw new TypeError(`${label}: the MAST digest it compared is not a sha256.`);
+  return { schema, program: requireString(record.program, `${label}: program`), band: requireString(record.band, `${label}: band`),
+    observation: requireString(record.observation, `${label}: observation`),
+    mast: { name: requireString(mast.name, `${label}: MAST name`), bytes: requireFiniteNumber(mast.bytes, `${label}: MAST bytes`), sha256 } };
+}
+
+/** What this repository holds for each mode: bands defined, programs pinned, programs checked against someone else's result,
+ * and every receipt that could not be accepted. A band counts as checked only when a receipt parses under one of the stages'
+ * schemas and names that program, that band, that observation and the level-3 product the program pins. */
 export async function repositoryState(repository = REPOSITORY) {
   const state = new Map<string, { bands: number; programs: string[]; checked: string[] }>(JWST_MODES.map(({ mode }) => [mode, { bands: 0, programs: [], checked: [] }]));
   for (const band of Object.values(JWST_BANDS)) state.get(modeOfBand(band))!.bands++;
   const imaging = resolve(repository, 'tools/objects/jwst/imaging/programs'), files = await readdir(imaging);
-  for (const file of files.filter(name => name.endsWith('.json') && !name.endsWith('.reproduction.json'))) {
+  const receiptProblems: string[] = [], receipts = new Map<string, ReproductionReceipt>();
+  for (const file of files.filter(name => name.endsWith('.reproduction.json')).sort()) {
+    try {
+      const receipt = parseReproductionReceipt(await readJson(resolve(imaging, file)), file);
+      if (file !== `${receipt.program}.${receipt.band}.reproduction.json`) throw new TypeError(`${file}: it is the receipt of ${receipt.program} ${receipt.band}.`);
+      receipts.set(`${receipt.program}|${receipt.band}`, receipt);
+    } catch (error) { receiptProblems.push(receiptProblem(file, error)); }
+  }
+  for (const file of files.filter(name => name.endsWith('.json') && !name.endsWith('.reproduction.json')).sort()) {
     const program = await readJson(resolve(imaging, file));
     if (!isRecord(program) || !Array.isArray(program.bands)) throw new TypeError(`${file} is not an imaging program.`);
-    const id = requireString(program.id), modes = new Set(program.bands.map(entry => { return modeOfBand(JWST_BANDS[requireString(isRecord(entry) ? entry.band : undefined)]!); }));
-    for (const mode of modes) { state.get(mode)!.programs.push(id); if (files.some(name => name.startsWith(`${id}.`) && name.endsWith('.reproduction.json'))) state.get(mode)!.checked.push(id); }
+    const id = requireString(program.id), pinned = new Set<string>(), proved = new Set<string>();
+    for (const entry of program.bands) {
+      const band = requireRecord(entry, `${file}: band`), name = requireString(band.band, `${file}: band name`), mode = modeOfBand(JWST_BANDS[name]!);
+      pinned.add(mode);
+      const receipt = receipts.get(`${id}|${name}`);
+      if (!receipt) continue;
+      receipts.delete(`${id}|${name}`);
+      const level3 = requireRecord(band.level3, `${file}: ${name} level-3 product`);
+      const wrong = receipt.observation !== requireString(band.observation, `${file}: ${name} observation`) ? `the observation ${receipt.observation}`
+        : receipt.mast.name !== requireString(level3.name, `${file}: ${name} product name`) ? `the product ${receipt.mast.name}`
+        : receipt.mast.bytes !== requireFiniteNumber(level3.bytes, `${file}: ${name} product bytes`) ? `${receipt.mast.bytes} bytes` : null;
+      if (wrong) receiptProblems.push(`${id}.${name}.reproduction.json: it compared ${wrong}, which ${file} does not pin.`);
+      else proved.add(mode);
+    }
+    for (const mode of pinned) state.get(mode)!.programs.push(id);
+    for (const mode of proved) state.get(mode)!.checked.push(id);
   }
+  for (const [key] of [...receipts].sort(([a], [b]) => a.localeCompare(b, 'en')))
+    receiptProblems.push(`${key.replace('|', '.')}.reproduction.json: no pinned program holds that band.`);
   const timeSeries = new Map<string, { programs: string[]; checked: string[] }>();
   const series = resolve(repository, 'tools/objects/jwst/programs');
   for (const entry of (await readdir(series, { withFileTypes: true })).filter(item => item.isDirectory())) {
@@ -170,7 +220,7 @@ export async function repositoryState(repository = REPOSITORY) {
     const own = timeSeries.get(instrument) ?? { programs: [], checked: [] }; timeSeries.set(instrument, own);
     for (const held of [target, own]) { held.programs.push(entry.name); if (isRecord(program.oracle)) held.checked.push(entry.name); }
   }
-  return { modes: state, timeSeries };
+  return { modes: state, timeSeries, receiptProblems };
 }
 
 export interface Ledger {
@@ -179,6 +229,8 @@ export interface Ledger {
     readonly bands: number; readonly programs: readonly string[]; readonly checked: readonly string[]; readonly shippedObjects: number }[];
   readonly timeSeries: readonly { readonly exposure: string; readonly visits: number; readonly targets: number; readonly shippedObjects: readonly string[]; readonly programs: readonly string[]; readonly checked: readonly string[] }[];
   readonly objects: readonly { readonly id: string; readonly observations: Readonly<Record<string, number>>; readonly timeSeriesVisits: Readonly<Record<string, number>>; readonly programmes: readonly string[]; readonly drawn: readonly string[] }[];
+  /** Receipts that could not be accepted, and so proved nothing. An empty list is the only passing state. */
+  readonly receiptProblems: readonly string[];
 }
 
 export function buildLedger(rows: readonly ArchiveRow[], visits: readonly TimeSeriesVisit[], counts: ReadonlyMap<string, number>, objects: readonly ShippedObject[], held: Awaited<ReturnType<typeof repositoryState>>, archiveDate: string): Ledger {
@@ -202,11 +254,50 @@ export function buildLedger(rows: readonly ArchiveRow[], visits: readonly TimeSe
     objects: [...seen].sort(([a], [b]) => a.localeCompare(b, 'en')).map(([id, entry]) => ({ id, observations: Object.fromEntries(Object.entries(entry.observations).sort(([a], [b]) => a.localeCompare(b, 'en'))),
       timeSeriesVisits: Object.fromEntries(Object.entries(entry.visits).sort(([a], [b]) => a.localeCompare(b, 'en'))),
       programmes: [...entry.programmes].sort((a, b) => Number(a) - Number(b)), drawn: [...JWST_MODES.filter(({ mode }) => entry.observations[mode] && state.get(mode)!.programs.some(program => program.startsWith(id))).map(({ mode }) => mode),
-        ...JWST_TIME_SERIES.filter(({ exposure, programInstrument }) => entry.visits[exposure] && programInstrument && held.timeSeries.get(programInstrument)?.programs.some(program => program.startsWith(id))).map(({ exposure }) => exposure)] })) };
+        ...JWST_TIME_SERIES.filter(({ exposure, programInstrument }) => entry.visits[exposure] && programInstrument && held.timeSeries.get(programInstrument)?.programs.some(program => program.startsWith(id))).map(({ exposure }) => exposure)] })),
+    receiptProblems: [...held.receiptProblems].sort((a, b) => a.localeCompare(b, 'en')) };
+}
+
+/** The ledger on disk, read back as the external value it is, so --local rewrites a file it has checked. */
+export function parseLedger(value: unknown): Ledger {
+  const row = requireRecord(value, 'JWST ledger');
+  if (row.schema !== 'cssearth-jwst-ledger@1') throw new TypeError('Unsupported JWST ledger.');
+  const names = (list: unknown, label: string) => requireArray(list, label).map(name => requireString(name, label));
+  const counts = (value: unknown, label: string) => Object.fromEntries(Object.entries(requireRecord(value, label)).map(([key, count]) => [key, requireFiniteNumber(count, label)]));
+  const orNull = (value: unknown, label: string) => value === null ? null : requireFiniteNumber(value, label);
+  return { schema: row.schema, archiveDate: requireString(row.archiveDate, 'Archive date'),
+    modes: requireArray(row.modes, 'Modes').map(raw => { const entry = requireRecord(raw, 'Mode');
+      return { mode: requireString(entry.mode, 'Mode name'), observations: requireFiniteNumber(entry.observations, 'Observations'), targets: orNull(entry.targets, 'Targets'),
+        movingObservations: orNull(entry.movingObservations, 'Moving observations'), tool: entry.tool === null ? null : requireString(entry.tool, 'Tool'),
+        bands: requireFiniteNumber(entry.bands, 'Bands'), programs: names(entry.programs, 'Programs'), checked: names(entry.checked, 'Checked'),
+        shippedObjects: requireFiniteNumber(entry.shippedObjects, 'Shipped objects') }; }),
+    timeSeries: requireArray(row.timeSeries, 'Time series').map(raw => { const entry = requireRecord(raw, 'Time series');
+      return { exposure: requireString(entry.exposure, 'Exposure type'), visits: requireFiniteNumber(entry.visits, 'Visits'), targets: requireFiniteNumber(entry.targets, 'Targets'),
+        shippedObjects: names(entry.shippedObjects, 'Shipped objects'), programs: names(entry.programs, 'Programs'), checked: names(entry.checked, 'Checked') }; }),
+    objects: requireArray(row.objects, 'Objects').map(raw => { const entry = requireRecord(raw, 'Object');
+      return { id: requireString(entry.id, 'Object id'), observations: counts(entry.observations, 'Observations by mode'), timeSeriesVisits: counts(entry.timeSeriesVisits, 'Time-series visits'),
+        programmes: names(entry.programmes, 'Programmes'), drawn: names(entry.drawn, 'Drawn') }; }),
+    // A ledger written before receipts were checked states no problems; the next --write or --local gives it the field.
+    receiptProblems: names(row.receiptProblems ?? [], 'Receipt problems') };
+}
+
+/** The ledger on disk with everything this repository owns taken again from it: what is pinned, what a receipt proved, what a
+ * pinned program already draws, and the receipts that could not be accepted. Nothing the archive said is touched. */
+export function withRepositoryState(ledger: Ledger, held: Awaited<ReturnType<typeof repositoryState>>): Ledger {
+  return { ...ledger,
+    modes: ledger.modes.map(entry => ({ ...entry, programs: [...held.modes.get(entry.mode)?.programs ?? []].sort(), checked: [...held.modes.get(entry.mode)?.checked ?? []].sort() })),
+    timeSeries: ledger.timeSeries.map(entry => { const pinned = JWST_TIME_SERIES.find(series => series.exposure === entry.exposure)?.programInstrument;
+      const own = pinned ? held.timeSeries.get(pinned) : undefined;
+      return { ...entry, programs: [...own?.programs ?? []].sort(), checked: [...own?.checked ?? []].sort() }; }),
+    objects: ledger.objects.map(object => ({ ...object,
+      drawn: [...JWST_MODES.filter(({ mode }) => object.observations[mode] && held.modes.get(mode)!.programs.some(program => program.startsWith(object.id))).map(({ mode }) => mode),
+        ...JWST_TIME_SERIES.filter(({ exposure, programInstrument }) => object.timeSeriesVisits[exposure] && programInstrument
+          && held.timeSeries.get(programInstrument)?.programs.some(program => program.startsWith(object.id))).map(({ exposure }) => exposure)] })),
+    receiptProblems: [...held.receiptProblems].sort((a, b) => a.localeCompare(b, 'en')) };
 }
 
 export function ledgerGuide(ledger: Ledger): string {
-  const number = (value: number | null) => value === null ? '—' : value.toLocaleString('en-US');
+  const number = (value: number | null) => value === null ? 'none' : value.toLocaleString('en-US');
   const readable = ledger.modes.filter(mode => mode.checked.length), unread = ledger.objects.filter(object => !Object.keys(object.observations).some(mode => ledger.modes.find(entry => entry.mode === mode)!.checked.length) &&
     !Object.keys(object.timeSeriesVisits).some(exposure => ledger.timeSeries.find(entry => entry.exposure === exposure)!.checked.length));
   return `# JWST ledger
@@ -231,7 +322,7 @@ One star watched for hours, which is what an exoplanet map is fitted from. These
 
 | Exposure type | What it records | Visits | Targets | Shipped objects | Programs | Checked |
 |---|---|---:|---:|---|---:|---:|
-${ledger.timeSeries.map(series => `| ${series.exposure} | ${JWST_TIME_SERIES.find(entry => entry.exposure === series.exposure)!.records} | ${number(series.visits)} | ${number(series.targets)} | ${series.shippedObjects.join(', ') || '—'} | ${series.programs.length} | ${series.checked.length} |`).join('\n')}
+${ledger.timeSeries.map(series => `| ${series.exposure} | ${JWST_TIME_SERIES.find(entry => entry.exposure === series.exposure)!.records} | ${number(series.visits)} | ${number(series.targets)} | ${series.shippedObjects.join(', ') || 'none'} | ${series.programs.length} | ${series.checked.length} |`).join('\n')}
 
 ## Shipped objects JWST has observed
 
@@ -239,7 +330,13 @@ ${ledger.objects.length} shipped objects appear in the archive. ${unread.length}
 
 | Object | Observations by mode | Time-series visits | Programmes | Drawn |
 |---|---|---|---|---|
-${ledger.objects.map(object => `| ${object.id} | ${Object.entries(object.observations).map(([mode, count]) => `${mode} ${count}`).join(', ') || '—'} | ${Object.entries(object.timeSeriesVisits).map(([exposure, count]) => `${exposure} ${count}`).join(', ') || '—'} | ${object.programmes.join(', ')} | ${object.drawn.join(', ') || '—'} |`).join('\n')}
+${ledger.objects.map(object => `| ${object.id} | ${Object.entries(object.observations).map(([mode, count]) => `${mode} ${count}`).join(', ') || 'none'} | ${Object.entries(object.timeSeriesVisits).map(([exposure, count]) => `${exposure} ${count}`).join(', ') || 'none'} | ${object.programmes.join(', ')} | ${object.drawn.join(', ') || 'none'} |`).join('\n')}
+
+## Receipts
+
+A band counts as checked only when a receipt beside its program parses, states one of the imaging stages' reproduction schemas, and names that program, that band, that observation and the level-3 product the program pins, with the digest of what it compared. A receipt that says anything else is reported here and proves nothing.
+
+${ledger.receiptProblems.length ? `${ledger.receiptProblems.length} receipt${ledger.receiptProblems.length === 1 ? '' : 's'} could not be accepted:\n\n${ledger.receiptProblems.map(problem => `- ${problem}`).join('\n')}` : 'None: every receipt beside a pinned program was accepted.'}
 
 ## Limits
 
@@ -249,18 +346,33 @@ ${ledger.objects.map(object => `| ${object.id} | ${Object.entries(object.observa
 `;
 }
 
+const LEDGER = resolve(REPOSITORY, 'data/jwst/ledger.json'), GUIDE = resolve(REPOSITORY, 'docs/jwst-ledger.md');
+/** Every receipt problem, said once and counted against the run: a ledger that reports one has not proved what it lists. */
+const reportProblems = (problems: readonly string[]) => {
+  for (const problem of problems) console.error(`RECEIPT ${problem}`);
+  if (problems.length) process.exitCode = 1;
+};
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), listed = JWST_MODES.map(entry => entry.mode).filter(mode => mode !== 'NIRSPEC/MSA');
   const now = new Date(), nowMjd = now.getTime() / 86_400_000 + 40_587;
+  if (args.includes('--local')) {
+    const ledger = withRepositoryState(parseLedger(await readJson(LEDGER)), await repositoryState());
+    await writeFile(LEDGER, `${JSON.stringify(ledger, null, 1)}\n`); await writeFile(GUIDE, ledgerGuide(ledger));
+    console.log(`JWST_LEDGER ${LEDGER} ${GUIDE} (repository state only)`);
+    reportProblems(ledger.receiptProblems);
+    process.exit(process.exitCode ?? 0);
+  }
   const [rows, visits, objects, state, msa] = await Promise.all([archiveRows(listed), timeSeriesVisits(nowMjd), shippedObjects(), repositoryState(), archiveCount('NIRSPEC/MSA')]);
   const ledger = buildLedger(rows, visits, new Map([['NIRSPEC/MSA', msa]]), objects, state, now.toISOString().slice(0, 10));
   for (const mode of ledger.modes) console.log(`${mode.mode.padEnd(14)} ${String(mode.observations).padStart(7)} obs ${String(mode.targets ?? '').padStart(5)} targets ${String(mode.shippedObjects).padStart(3)} shipped  bands ${String(mode.bands).padStart(2)}  programs ${mode.programs.length} checked ${mode.checked.length}`);
   for (const series of ledger.timeSeries) console.log(`${series.exposure.padEnd(17)} ${String(series.visits).padStart(4)} visits ${String(series.targets).padStart(4)} targets  shipped ${series.shippedObjects.length}  programs ${series.programs.length} checked ${series.checked.length}`);
   console.log(`JWST_LEDGER ${JSON.stringify({ observations: ledger.modes.reduce((total, mode) => total + mode.observations, 0), shippedObjects: ledger.objects.length })}`);
   if (args.includes('--write')) {
-    const data = resolve(REPOSITORY, 'data/jwst/ledger.json'); await mkdir(dirname(data), { recursive: true });
-    await writeFile(data, `${JSON.stringify(ledger, null, 1)}\n`); await writeFile(resolve(REPOSITORY, 'docs/jwst-ledger.md'), ledgerGuide(ledger));
+    await mkdir(dirname(LEDGER), { recursive: true });
+    await writeFile(LEDGER, `${JSON.stringify(ledger, null, 1)}\n`); await writeFile(GUIDE, ledgerGuide(ledger));
   }
+  reportProblems(ledger.receiptProblems);
   const targets = args.indexOf('--targets');
   if (targets >= 0) {
     const byTarget = new Map<string, { target: string; mode: string; observations: number; programmes: Set<string>; objects: string[] }>();

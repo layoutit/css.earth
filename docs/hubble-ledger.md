@@ -183,6 +183,12 @@ What the archive holds within each positioned object's own radius on the sky.
 | hd-181327 | 0.5′ | 80 | ACS/HRC, NICMOS/NIC2, STIS/CCD |
 | pi1-gruis | 0.5′ | 9 | ACS/HRC, COS, COS/FUV, COS/NUV |
 
+## Receipts
+
+A program counts as re-calibrated in a configuration only when a receipt beside it parses, states the `cssearth-hst-reproduction@1` schema, and names one of its observations in that configuration together with the MAST product the program pins for it, with the digest of what it compared. A receipt that says anything else is reported here and proves nothing.
+
+None: every receipt beside a pinned program was accepted.
+
 ## Limits
 
 - Counts are the archive's own, by configuration. Nothing outside a moving target or a positioned object's radius is listed, because the fixed-target archive is far too large to pull.

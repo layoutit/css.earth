@@ -18,7 +18,7 @@ An observation here is one public level-3 product set: one target, one instrumen
 | MIRI/SLITLESS | time series of one star's 5–12 µm spectrum | exoplanet maps from eclipses and phase curves | 111 | 74 | 0 | 2 | 0 | 3 | 3 |
 | NIRSPEC/IFU | cubes: a 0.6–5.3 µm spectrum in every pixel | maps of what a surface or a gas is made of; gas velocity as depth | 2,229 | 1,256 | 637 | 68 | 9 | 10 | 3 |
 | NIRSPEC/SLIT | one spectrum through a slit, and time series of one star | exoplanet maps from eclipses and phase curves | 3,015 | 535 | 42 | 6 | 0 | 0 | 0 |
-| NIRSPEC/MSA | spectra of many faint sources at once | nothing: survey spectra of distant galaxies | 145,378 | — | — | 0 | 0 | 0 | 0 |
+| NIRSPEC/MSA | spectra of many faint sources at once | nothing: survey spectra of distant galaxies | 145,378 | none | none | 0 | 0 | 0 | 0 |
 | NIRISS/AMI | interferograms through a seven-hole mask | structure closer to a star than a coronagraph reaches | 65 | 14 | 1 | 1 | 0 | 0 | 0 |
 | NIRISS/SOSS | time series of one star's 0.6–2.8 µm spectrum | exoplanet maps from eclipses and phase curves | 143 | 67 | 0 | 1 | 0 | 0 | 0 |
 | NIRISS/WFSS | slitless spectra of every source in a field | nothing: survey spectra | 592 | 31 | 0 | 0 | 0 | 0 | 0 |
@@ -51,94 +51,100 @@ One star watched for hours, which is what an exoplanet map is fitted from. These
 
 | Object | Observations by mode | Time-series visits | Programmes | Drawn |
 |---|---|---|---|---|
-| albiorix | NIRSPEC/IFU 1 | — | 3716 | — |
-| ariel | NIRSPEC/IFU 2 | — | 1786 | — |
-| asteroid-2002-tc302 | NIRSPEC/IFU 1 | — | 2418 | — |
-| asteroid-2002-tx300 | NIRSPEC/IFU 1 | — | 1191 | — |
-| astraea | NIRSPEC/IFU 2 | — | 8782 | — |
-| bienor | MIRI/IFU 24, MIRI/IMAGE 1, MIRI/SLIT 1 | — | 2820 | — |
-| caliban | NIRSPEC/IFU 1 | — | 4645 | — |
-| callisto | MIRI/IFU 24, NIRSPEC/IFU 3 | — | 2060, 4687 | — |
-| ceres | MIRI/IFU 12, NIRSPEC/IFU 2 | — | 1244 | — |
-| chariklo | MIRI/IFU 24, MIRI/IMAGE 1, MIRI/SLIT 1, NIRSPEC/IFU 2 | — | 1272, 2820 | — |
-| charon | MIRI/IFU 12, MIRI/IMAGE 1, MIRI/SLIT 1, NIRSPEC/IFU 15 | — | 1191, 1658 | — |
-| comet-3i | MIRI/IFU 32, NIRSPEC/IFU 2 | — | 5094, 9442 | — |
-| daphne | NIRCAM/IMAGE 2 | — | 8527 | — |
-| didymos | MIRI/IFU 12, NIRCAM/IMAGE 24, NIRSPEC/SLIT 1 | — | 1245 | — |
-| dione | NIRSPEC/IFU 4 | — | 3716 | — |
-| enceladus | MIRI/IFU 12, MIRI/IMAGE 1, NIRCAM/IMAGE 6, NIRSPEC/IFU 9 | — | 1250, 4320, 4604 | — |
-| eos | NIRSPEC/IFU 2 | — | 8782 | — |
-| epimetheus | NIRSPEC/IFU 1 | — | 1247 | — |
-| eris | MIRI/SLIT 1, NIRCAM/IMAGE 6, NIRSPEC/IFU 3 | — | 1191, 6064 | — |
-| europa | MIRI/IFU 12, MIRI/IMAGE 1, NIRCAM/IMAGE 6, NIRSPEC/IFU 13 | — | 1250, 4023, 9230 | NIRSPEC/IFU |
-| eurybates | MIRI/IFU 12, NIRSPEC/IFU 2 | — | 2574 | — |
-| galatea | NIRSPEC/IFU 2 | — | 4645 | — |
-| ganymede | MIRI/IFU 24, NIRSPEC/IFU 3 | — | 1373 | — |
-| haumea | MIRI/IMAGE 2, MIRI/SLIT 2, NIRSPEC/IFU 8 | — | 1273 | — |
-| hd-181327 | MIRI/CORON 1, NIRCAM/CORON 12, NIRSPEC/IFU 1 | — | 1563, 2780, 3662 | NIRCAM/CORON |
-| hd-189733 | NIRCAM/GRISM 4 | NRC_TSGRISM 4, NRC_TSIMAGE 4 | 1185, 1274, 1633 | — |
+| albiorix | NIRSPEC/IFU 1 | none | 3716 | none |
+| ariel | NIRSPEC/IFU 2 | none | 1786 | none |
+| asteroid-2002-tc302 | NIRSPEC/IFU 1 | none | 2418 | none |
+| asteroid-2002-tx300 | NIRSPEC/IFU 1 | none | 1191 | none |
+| astraea | NIRSPEC/IFU 2 | none | 8782 | none |
+| bienor | MIRI/IFU 24, MIRI/IMAGE 1, MIRI/SLIT 1 | none | 2820 | none |
+| caliban | NIRSPEC/IFU 1 | none | 4645 | none |
+| callisto | MIRI/IFU 24, NIRSPEC/IFU 3 | none | 2060, 4687 | none |
+| ceres | MIRI/IFU 12, NIRSPEC/IFU 2 | none | 1244 | none |
+| chariklo | MIRI/IFU 24, MIRI/IMAGE 1, MIRI/SLIT 1, NIRSPEC/IFU 2 | none | 1272, 2820 | none |
+| charon | MIRI/IFU 12, MIRI/IMAGE 1, MIRI/SLIT 1, NIRSPEC/IFU 15 | none | 1191, 1658 | none |
+| comet-3i | MIRI/IFU 32, NIRSPEC/IFU 2 | none | 5094, 9442 | none |
+| daphne | NIRCAM/IMAGE 2 | none | 8527 | none |
+| didymos | MIRI/IFU 12, NIRCAM/IMAGE 24, NIRSPEC/SLIT 1 | none | 1245 | none |
+| dione | NIRSPEC/IFU 4 | none | 3716 | none |
+| enceladus | MIRI/IFU 12, MIRI/IMAGE 1, NIRCAM/IMAGE 6, NIRSPEC/IFU 9 | none | 1250, 4320, 4604 | none |
+| eos | NIRSPEC/IFU 2 | none | 8782 | none |
+| epimetheus | NIRSPEC/IFU 1 | none | 1247 | none |
+| eris | MIRI/SLIT 1, NIRCAM/IMAGE 6, NIRSPEC/IFU 3 | none | 1191, 6064 | none |
+| europa | MIRI/IFU 12, MIRI/IMAGE 1, NIRCAM/IMAGE 6, NIRSPEC/IFU 13 | none | 1250, 4023, 9230 | NIRSPEC/IFU |
+| eurybates | MIRI/IFU 12, NIRSPEC/IFU 2 | none | 2574 | none |
+| galatea | NIRSPEC/IFU 2 | none | 4645 | none |
+| ganymede | MIRI/IFU 24, NIRSPEC/IFU 3 | none | 1373 | none |
+| haumea | MIRI/IMAGE 2, MIRI/SLIT 2, NIRSPEC/IFU 8 | none | 1273 | none |
+| hd-181327 | MIRI/CORON 1, NIRCAM/CORON 12, NIRSPEC/IFU 1 | none | 1563, 2780, 3662 | NIRCAM/CORON |
+| hd-189733 | NIRCAM/GRISM 4 | NRC_TSGRISM 4, NRC_TSIMAGE 4 | 1185, 1274, 1633 | none |
 | hd-189733b | MIRI/SLITLESS 4 | MIR_LRS-SLITLESS 4 | 2001, 2021 | MIRI/SLITLESS, MIR_LRS-SLITLESS |
-| hektor | NIRSPEC/IFU 1 | — | 1244 | — |
-| helix | MIRI/IFU 12, NIRCAM/IMAGE 6 | — | 1239, 6557 | — |
-| henrietta | MIRI/IFU 36, MIRI/IMAGE 2, NIRSPEC/IFU 2 | — | 3760 | — |
-| himalia | MIRI/SLIT 1, NIRSPEC/IFU 2 | — | 4028 | — |
-| huya | NIRSPEC/IFU 1 | — | 2418 | — |
-| hydra | MIRI/IFU 24, MIRI/IMAGE 3 | — | 5018 | — |
-| hygiea | MIRI/IFU 12, NIRSPEC/IFU 2 | — | 1244 | — |
-| hyperion | NIRSPEC/IFU 2 | — | 3716 | — |
-| iapetus | NIRSPEC/IFU 4 | — | 3716 | — |
-| io | MIRI/IFU 44, NIRISS/AMI 1, NIRSPEC/IFU 6 | — | 1373, 4078, 4565 | — |
-| jupiter | MIRI/IFU 128, MIRI/IMAGE 10, NIRCAM/IMAGE 57, NIRISS/IMAGE 4, NIRSPEC/IFU 45 | — | 1022, 1246, 1373, 3665, 9022 | — |
-| kleopatra | NIRSPEC/IFU 1 | — | 1444 | — |
-| larissa | NIRSPEC/IFU 2 | — | 4645 | — |
-| leda-38 | MIRI/IFU 12, MIRI/IMAGE 1 | — | 11793 | — |
-| leucus | MIRI/IFU 12, NIRSPEC/IFU 2 | — | 2574 | — |
-| libussa | MIRI/IFU 12, MIRI/IMAGE 1 | — | 11793 | — |
-| m1 | MIRI/IFU 48, MIRI/IMAGE 10, NIRCAM/IMAGE 2 | — | 1714 | — |
-| m33 | MIRI/IMAGE 4, NIRCAM/IMAGE 8 | — | 2128, 3436 | — |
-| m42 | MIRI/IFU 84, MIRI/IMAGE 10, NIRCAM/IMAGE 37, NIRSPEC/IFU 32 | — | 1228, 1256, 1288, 1741, 3983, 4332, 5460, 5804 | — |
-| m8 | NIRSPEC/SLIT 3 | — | 7929 | — |
-| mab | NIRCAM/IMAGE 2 | — | 8527 | — |
-| makemake | MIRI/IMAGE 2, MIRI/SLIT 1, NIRSPEC/IFU 11 | — | 1254, 9453 | — |
-| mars | NIRCAM/IMAGE 14, NIRSPEC/SLIT 9 | — | 1415, 2787 | — |
-| mimas | NIRSPEC/IFU 4 | — | 3716 | — |
-| miranda | NIRSPEC/IFU 2 | — | 4645 | — |
-| neptune | MIRI/IFU 84, MIRI/IMAGE 4, NIRCAM/IMAGE 4, NIRSPEC/IFU 45 | — | 1249, 1604, 2739, 7570 | — |
-| nereid | NIRSPEC/IFU 1 | — | 4645 | — |
-| oberon | NIRSPEC/IFU 3 | — | 1786, 7813 | — |
-| orcus | NIRCAM/IMAGE 6, NIRSPEC/IFU 3 | — | 1231, 6064 | — |
-| orus | MIRI/IFU 12, NIRSPEC/IFU 2 | — | 2574 | — |
-| pallas | MIRI/IFU 12, NIRSPEC/IFU 2 | — | 1244 | — |
-| pallene | NIRSPEC/IFU 1 | — | 1247 | — |
-| pandora | NIRSPEC/IFU 1 | — | 1247 | — |
-| patroclus | MIRI/IFU 12, NIRSPEC/IFU 3 | — | 1244, 2574 | — |
-| peitho | MIRI/IFU 4, MIRI/IMAGE 1 | — | 1449 | — |
-| phaethon | MIRI/IFU 12, NIRCAM/IMAGE 2, NIRSPEC/SLIT 1 | — | 1245 | — |
-| phoebe | NIRSPEC/IFU 2 | — | 3716 | — |
-| pluto | MIRI/IFU 24, MIRI/IMAGE 26, MIRI/SLIT 1, NIRCAM/IMAGE 24, NIRSPEC/IFU 15 | — | 1191, 1658 | — |
-| polymele | MIRI/IFU 12, NIRSPEC/IFU 2 | — | 2574 | — |
-| portia | NIRSPEC/IFU 1 | — | 4645 | — |
-| proteus | NIRSPEC/IFU 2 | — | 4645 | — |
-| psyche | MIRI/IFU 16, MIRI/IMAGE 2, NIRSPEC/IFU 12 | — | 1731 | — |
-| puck | NIRSPEC/IFU 1 | — | 4645 | — |
-| quaoar | NIRCAM/IMAGE 6, NIRSPEC/IFU 3 | — | 1273, 6064 | — |
-| rhea | NIRSPEC/IFU 4 | — | 3716 | — |
-| salacia | NIRSPEC/IFU 1 | — | 1191 | — |
-| saturn | MIRI/IFU 48, NIRCAM/IMAGE 8, NIRSPEC/IFU 1 | — | 1247, 5308 | — |
-| sedna | NIRSPEC/IFU 1 | — | 1272 | — |
-| sycorax | NIRSPEC/IFU 2 | — | 4645 | — |
-| taurinensis | MIRI/IFU 12, MIRI/IMAGE 1 | — | 11793 | — |
-| telesto | NIRSPEC/IFU 1 | — | 1247 | — |
-| tethys | NIRSPEC/IFU 4 | — | 3716 | — |
-| titan | MIRI/IFU 24, NIRCAM/IMAGE 54, NIRSPEC/IFU 13 | — | 1251, 2760, 4523 | — |
-| titania | NIRSPEC/IFU 3 | — | 1786 | — |
+| hektor | NIRSPEC/IFU 1 | none | 1244 | none |
+| helix | MIRI/IFU 12, NIRCAM/IMAGE 6 | none | 1239, 6557 | none |
+| henrietta | MIRI/IFU 36, MIRI/IMAGE 2, NIRSPEC/IFU 2 | none | 3760 | none |
+| himalia | MIRI/SLIT 1, NIRSPEC/IFU 2 | none | 4028 | none |
+| huya | NIRSPEC/IFU 1 | none | 2418 | none |
+| hydra | MIRI/IFU 24, MIRI/IMAGE 3 | none | 5018 | none |
+| hygiea | MIRI/IFU 12, NIRSPEC/IFU 2 | none | 1244 | none |
+| hyperion | NIRSPEC/IFU 2 | none | 3716 | none |
+| iapetus | NIRSPEC/IFU 4 | none | 3716 | none |
+| io | MIRI/IFU 44, NIRISS/AMI 1, NIRSPEC/IFU 6 | none | 1373, 4078, 4565 | none |
+| jupiter | MIRI/IFU 128, MIRI/IMAGE 10, NIRCAM/IMAGE 57, NIRISS/IMAGE 4, NIRSPEC/IFU 45 | none | 1022, 1246, 1373, 3665, 9022 | none |
+| kleopatra | NIRSPEC/IFU 1 | none | 1444 | none |
+| larissa | NIRSPEC/IFU 2 | none | 4645 | none |
+| leda-38 | MIRI/IFU 12, MIRI/IMAGE 1 | none | 11793 | none |
+| leucus | MIRI/IFU 12, NIRSPEC/IFU 2 | none | 2574 | none |
+| libussa | MIRI/IFU 12, MIRI/IMAGE 1 | none | 11793 | none |
+| m1 | MIRI/IFU 48, MIRI/IMAGE 10, NIRCAM/IMAGE 2 | none | 1714 | none |
+| m33 | MIRI/IMAGE 4, NIRCAM/IMAGE 8 | none | 2128, 3436 | none |
+| m42 | MIRI/IFU 84, MIRI/IMAGE 10, NIRCAM/IMAGE 37, NIRSPEC/IFU 32 | none | 1228, 1256, 1288, 1741, 3983, 4332, 5460, 5804 | none |
+| m8 | NIRSPEC/SLIT 3 | none | 7929 | none |
+| mab | NIRCAM/IMAGE 2 | none | 8527 | none |
+| makemake | MIRI/IMAGE 2, MIRI/SLIT 1, NIRSPEC/IFU 11 | none | 1254, 9453 | none |
+| mars | NIRCAM/IMAGE 14, NIRSPEC/SLIT 9 | none | 1415, 2787 | none |
+| mimas | NIRSPEC/IFU 4 | none | 3716 | none |
+| miranda | NIRSPEC/IFU 2 | none | 4645 | none |
+| neptune | MIRI/IFU 84, MIRI/IMAGE 4, NIRCAM/IMAGE 4, NIRSPEC/IFU 45 | none | 1249, 1604, 2739, 7570 | none |
+| nereid | NIRSPEC/IFU 1 | none | 4645 | none |
+| oberon | NIRSPEC/IFU 3 | none | 1786, 7813 | none |
+| orcus | NIRCAM/IMAGE 6, NIRSPEC/IFU 3 | none | 1231, 6064 | none |
+| orus | MIRI/IFU 12, NIRSPEC/IFU 2 | none | 2574 | none |
+| pallas | MIRI/IFU 12, NIRSPEC/IFU 2 | none | 1244 | none |
+| pallene | NIRSPEC/IFU 1 | none | 1247 | none |
+| pandora | NIRSPEC/IFU 1 | none | 1247 | none |
+| patroclus | MIRI/IFU 12, NIRSPEC/IFU 3 | none | 1244, 2574 | none |
+| peitho | MIRI/IFU 4, MIRI/IMAGE 1 | none | 1449 | none |
+| phaethon | MIRI/IFU 12, NIRCAM/IMAGE 2, NIRSPEC/SLIT 1 | none | 1245 | none |
+| phoebe | NIRSPEC/IFU 2 | none | 3716 | none |
+| pluto | MIRI/IFU 24, MIRI/IMAGE 26, MIRI/SLIT 1, NIRCAM/IMAGE 24, NIRSPEC/IFU 15 | none | 1191, 1658 | none |
+| polymele | MIRI/IFU 12, NIRSPEC/IFU 2 | none | 2574 | none |
+| portia | NIRSPEC/IFU 1 | none | 4645 | none |
+| proteus | NIRSPEC/IFU 2 | none | 4645 | none |
+| psyche | MIRI/IFU 16, MIRI/IMAGE 2, NIRSPEC/IFU 12 | none | 1731 | none |
+| puck | NIRSPEC/IFU 1 | none | 4645 | none |
+| quaoar | NIRCAM/IMAGE 6, NIRSPEC/IFU 3 | none | 1273, 6064 | none |
+| rhea | NIRSPEC/IFU 4 | none | 3716 | none |
+| salacia | NIRSPEC/IFU 1 | none | 1191 | none |
+| saturn | MIRI/IFU 48, NIRCAM/IMAGE 8, NIRSPEC/IFU 1 | none | 1247, 5308 | none |
+| sedna | NIRSPEC/IFU 1 | none | 1272 | none |
+| sycorax | NIRSPEC/IFU 2 | none | 4645 | none |
+| taurinensis | MIRI/IFU 12, MIRI/IMAGE 1 | none | 11793 | none |
+| telesto | NIRSPEC/IFU 1 | none | 1247 | none |
+| tethys | NIRSPEC/IFU 4 | none | 3716 | none |
+| titan | MIRI/IFU 24, NIRCAM/IMAGE 54, NIRSPEC/IFU 13 | none | 1251, 2760, 4523 | none |
+| titania | NIRSPEC/IFU 3 | none | 1786 | none |
 | trappist-1 | NIRISS/SOSS 9, NIRSPEC/SLIT 29 | MIR_IMAGE 10, NIS_SOSS 9, NRS_BRIGHTOBJ 29 | 1201, 1331, 1981, 2304, 2420, 2589, 3077, 5191, 6456, 9256, 12492 | MIR_IMAGE |
-| trappist-1b | — | MIR_IMAGE 10 | 1177, 1279 | MIR_IMAGE |
-| triton | MIRI/IFU 24, MIRI/IMAGE 8, NIRSPEC/IFU 6 | — | 1272 | — |
-| umbriel | NIRSPEC/IFU 2 | — | 1786 | — |
-| uranus | MIRI/IFU 36, MIRI/IMAGE 3, NIRCAM/IMAGE 36, NIRSPEC/IFU 49 | — | 1248, 2739, 2768, 5073, 6379, 7570, 8975, 9482 | — |
-| varuna | MIRI/IMAGE 2, NIRCAM/IMAGE 12, NIRSPEC/IFU 1 | — | 1254, 4541 | — |
+| trappist-1b | none | MIR_IMAGE 10 | 1177, 1279 | MIR_IMAGE |
+| triton | MIRI/IFU 24, MIRI/IMAGE 8, NIRSPEC/IFU 6 | none | 1272 | none |
+| umbriel | NIRSPEC/IFU 2 | none | 1786 | none |
+| uranus | MIRI/IFU 36, MIRI/IMAGE 3, NIRCAM/IMAGE 36, NIRSPEC/IFU 49 | none | 1248, 2739, 2768, 5073, 6379, 7570, 8975, 9482 | none |
+| varuna | MIRI/IMAGE 2, NIRCAM/IMAGE 12, NIRSPEC/IFU 1 | none | 1254, 4541 | none |
 | wasp-43 | MIRI/SLITLESS 1, NIRSPEC/SLIT 1 | MIR_LRS-SLITLESS 1, NRS_BRIGHTOBJ 1 | 1224, 1366 | MIRI/SLITLESS, MIR_LRS-SLITLESS |
+
+## Receipts
+
+A band counts as checked only when a receipt beside its program parses, states one of the imaging stages' reproduction schemas, and names that program, that band, that observation and the level-3 product the program pins, with the digest of what it compared. A receipt that says anything else is reported here and proves nothing.
+
+None: every receipt beside a pinned program was accepted.
 
 ## Limits
 

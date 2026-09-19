@@ -1169,5 +1169,6 @@
       "state": "refused",
       "why": "chandra_repro needs the grating's zero-order position. Its default takes that position from the archive's own level-2 event list, which would make the re-run depend on the product it is being compared against. The independent option, tg_zo_position=detect, found no source on either grating observation tried here: obsid 169 (ACIS-S/HETG, Crab Pulsar) and obsid 12228 (HRC-S/LETG, Crab Pulsar) both stopped with \"No sources detected\" under CIAO 4.18.0. Measured 2026-09-19."
     }
-  }
+  },
+  "receiptProblems": []
 }
