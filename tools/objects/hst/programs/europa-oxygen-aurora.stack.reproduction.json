@@ -1,0 +1,746 @@
+{
+ "schema": "cssearth-hst-line-stack-reproduction@1",
+ "stack": "europa-oxygen-aurora",
+ "definition": "tools/objects/hst/programs/europa-oxygen-aurora.stack.json",
+ "target": "Europa",
+ "instrument": "STIS/FUV-MAMA",
+ "opticalElement": "G140L",
+ "handedness": "ORIENTAT-90",
+ "frames": {
+  "pinned": 140,
+  "used": 112,
+  "visits": 30,
+  "exposureHours": 58.3697817361111,
+  "byProgramme": {
+   "8224": 9,
+   "13040": 19,
+   "13619": 20,
+   "13679": 44,
+   "15419": 20
+  },
+  "rejected": [
+   {
+    "reason": "the primary's limb 7.4\" away",
+    "frames": 2
+   },
+   {
+    "reason": "transit target",
+    "frames": 26
+   }
+  ]
+ },
+ "registration": {
+  "visitsWithMeasuredRow": 18,
+  "visitsWithAssumedRow": 12,
+  "rowOffsetRangePixels": [
+   -1.0479552726649217,
+   8.200012206999986
+  ],
+  "rowOffsetFallbackPixels": 2.700012206999986,
+  "visitsWithFittedAcrossSlit": 23,
+  "visitsWithAssumedAcrossSlit": 7,
+  "acrossSlitOffsetRangePixels": [
+   -9.5,
+   3
+  ],
+  "visits": [
+   {
+    "visit": "o5d601",
+    "frames": 9,
+    "unlit": false,
+    "rowOffsetPixels": 3.200012206999986,
+    "rowDetections": 3,
+    "acrossSlitOffsetPixels": -2.5,
+    "acrossSlitSnr": 11.252028155861925,
+    "acrossSlitFitted": true,
+    "note": "3/9 frames gave a continuum row; across-slit fitted (SNR 11.3, offset -0.06\")"
+   },
+   {
+    "visit": "obzp01",
+    "frames": 9,
+    "unlit": false,
+    "rowOffsetPixels": 0.20001220699998612,
+    "rowDetections": 5,
+    "acrossSlitOffsetPixels": -1.5,
+    "acrossSlitSnr": 5.4287832412385475,
+    "acrossSlitFitted": true,
+    "note": "5/9 frames gave a continuum row; across-slit fitted (SNR 5.4, offset -0.04\")"
+   },
+   {
+    "visit": "obzp02",
+    "frames": 10,
+    "unlit": false,
+    "rowOffsetPixels": 0.20001220699998612,
+    "rowDetections": 6,
+    "acrossSlitOffsetPixels": 0,
+    "acrossSlitSnr": 1.875384589585436,
+    "acrossSlitFitted": false,
+    "note": "6/10 frames gave a continuum row; across-slit set to the slit centre (SNR 1.9, offset 0.06\")"
+   },
+   {
+    "visit": "ocht1b",
+    "frames": 10,
+    "unlit": false,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 4,
+    "acrossSlitOffsetPixels": -2,
+    "acrossSlitSnr": 8.657358821385236,
+    "acrossSlitFitted": true,
+    "note": "4/10 frames gave a continuum row; across-slit fitted (SNR 8.7, offset -0.05\")"
+   },
+   {
+    "visit": "ocht2b",
+    "frames": 10,
+    "unlit": false,
+    "rowOffsetPixels": 8.200012206999986,
+    "rowDetections": 2,
+    "acrossSlitOffsetPixels": -0.5,
+    "acrossSlitSnr": 5.758026406247138,
+    "acrossSlitFitted": true,
+    "note": "2/10 frames gave a continuum row; across-slit fitted (SNR 5.8, offset -0.01\")"
+   },
+   {
+    "visit": "ocjp01",
+    "frames": 3,
+    "unlit": false,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 0,
+    "acrossSlitOffsetPixels": 1,
+    "acrossSlitSnr": 4.3694485968483,
+    "acrossSlitFitted": true,
+    "note": "0/3 frames gave a continuum row; across-slit fitted (SNR 4.4, offset 0.02\"); row offset taken from the 18 visits that gave one (2.7 px)"
+   },
+   {
+    "visit": "ocjp02",
+    "frames": 3,
+    "unlit": false,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 1,
+    "acrossSlitOffsetPixels": 1,
+    "acrossSlitSnr": 5.552573822861831,
+    "acrossSlitFitted": true,
+    "note": "1/3 frames gave a continuum row; across-slit fitted (SNR 5.6, offset 0.02\")"
+   },
+   {
+    "visit": "ocjp03",
+    "frames": 4,
+    "unlit": false,
+    "rowOffsetPixels": 1.2000122069999861,
+    "rowDetections": 1,
+    "acrossSlitOffsetPixels": -2.5,
+    "acrossSlitSnr": 3.256566440768583,
+    "acrossSlitFitted": true,
+    "note": "1/4 frames gave a continuum row; across-slit fitted (SNR 3.3, offset -0.06\")"
+   },
+   {
+    "visit": "ocjp04",
+    "frames": 4,
+    "unlit": false,
+    "rowOffsetPixels": 0.7000122069999861,
+    "rowDetections": 2,
+    "acrossSlitOffsetPixels": -5,
+    "acrossSlitSnr": 4.721203682485827,
+    "acrossSlitFitted": true,
+    "note": "2/4 frames gave a continuum row; across-slit fitted (SNR 4.7, offset -0.12\")"
+   },
+   {
+    "visit": "ocjp06",
+    "frames": 3,
+    "unlit": false,
+    "rowOffsetPixels": 7.200012206999986,
+    "rowDetections": 2,
+    "acrossSlitOffsetPixels": 0.5,
+    "acrossSlitSnr": 3.6066266346949822,
+    "acrossSlitFitted": true,
+    "note": "2/3 frames gave a continuum row; across-slit fitted (SNR 3.6, offset 0.01\")"
+   },
+   {
+    "visit": "ocjp07",
+    "frames": 5,
+    "unlit": false,
+    "rowOffsetPixels": 5.200012206999986,
+    "rowDetections": 2,
+    "acrossSlitOffsetPixels": -2.5,
+    "acrossSlitSnr": 6.825895560963506,
+    "acrossSlitFitted": true,
+    "note": "2/5 frames gave a continuum row; across-slit fitted (SNR 6.8, offset -0.06\")"
+   },
+   {
+    "visit": "ocjp09",
+    "frames": 3,
+    "unlit": false,
+    "rowOffsetPixels": 2.200012206999986,
+    "rowDetections": 1,
+    "acrossSlitOffsetPixels": -4.5,
+    "acrossSlitSnr": 4.726210991558907,
+    "acrossSlitFitted": true,
+    "note": "1/3 frames gave a continuum row; across-slit fitted (SNR 4.7, offset -0.11\")"
+   },
+   {
+    "visit": "ocjp10",
+    "frames": 3,
+    "unlit": false,
+    "rowOffsetPixels": 2.200012206999986,
+    "rowDetections": 1,
+    "acrossSlitOffsetPixels": -0.5,
+    "acrossSlitSnr": 7.913620893644407,
+    "acrossSlitFitted": true,
+    "note": "1/3 frames gave a continuum row; across-slit fitted (SNR 7.9, offset -0.01\")"
+   },
+   {
+    "visit": "ocjp11",
+    "frames": 4,
+    "unlit": false,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 0,
+    "acrossSlitOffsetPixels": -2.5,
+    "acrossSlitSnr": 6.273827766425464,
+    "acrossSlitFitted": true,
+    "note": "0/4 frames gave a continuum row; across-slit fitted (SNR 6.3, offset -0.06\"); row offset taken from the 18 visits that gave one (2.7 px)"
+   },
+   {
+    "visit": "ocjp12",
+    "frames": 5,
+    "unlit": false,
+    "rowOffsetPixels": 0.7000122069999861,
+    "rowDetections": 1,
+    "acrossSlitOffsetPixels": -1,
+    "acrossSlitSnr": 5.5252667441731305,
+    "acrossSlitFitted": true,
+    "note": "1/5 frames gave a continuum row; across-slit fitted (SNR 5.5, offset -0.02\")"
+   },
+   {
+    "visit": "ocjpa3",
+    "frames": 1,
+    "unlit": true,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 0,
+    "acrossSlitOffsetPixels": 0,
+    "acrossSlitSnr": 0.49045137242731934,
+    "acrossSlitFitted": false,
+    "note": "0/1 frames gave a continuum row; across-slit set to the slit centre (SNR 0.5, offset -1.34\"); row offset taken from the 18 visits that gave one (2.7 px)"
+   },
+   {
+    "visit": "ocjpa4",
+    "frames": 2,
+    "unlit": true,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 0,
+    "acrossSlitOffsetPixels": 0,
+    "acrossSlitSnr": 2.231300071274171,
+    "acrossSlitFitted": false,
+    "note": "0/2 frames gave a continuum row; across-slit set to the slit centre (SNR 2.2, offset 0.30\"); row offset taken from the 18 visits that gave one (2.7 px)"
+   },
+   {
+    "visit": "ocjpa5",
+    "frames": 1,
+    "unlit": true,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 0,
+    "acrossSlitOffsetPixels": 0,
+    "acrossSlitSnr": 0.6177057243293398,
+    "acrossSlitFitted": false,
+    "note": "0/1 frames gave a continuum row; across-slit set to the slit centre (SNR 0.6, offset 1.11\"); row offset taken from the 18 visits that gave one (2.7 px)"
+   },
+   {
+    "visit": "ocjpa6",
+    "frames": 2,
+    "unlit": true,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 0,
+    "acrossSlitOffsetPixels": 0,
+    "acrossSlitSnr": 4.142894972474094,
+    "acrossSlitFitted": false,
+    "note": "0/2 frames gave a continuum row; across-slit set to the slit centre (SNR 4.1, offset -0.11\"); row offset taken from the 18 visits that gave one (2.7 px)"
+   },
+   {
+    "visit": "ocjpb4",
+    "frames": 1,
+    "unlit": true,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 0,
+    "acrossSlitOffsetPixels": 0,
+    "acrossSlitSnr": 0.28803479850335534,
+    "acrossSlitFitted": false,
+    "note": "0/1 frames gave a continuum row; across-slit set to the slit centre (SNR 0.3, offset 1.24\"); row offset taken from the 18 visits that gave one (2.7 px)"
+   },
+   {
+    "visit": "odr206",
+    "frames": 2,
+    "unlit": false,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 0,
+    "acrossSlitOffsetPixels": -3.5,
+    "acrossSlitSnr": 3.480766328397935,
+    "acrossSlitFitted": true,
+    "note": "0/2 frames gave a continuum row; across-slit fitted (SNR 3.5, offset -0.09\"); row offset taken from the 18 visits that gave one (2.7 px)"
+   },
+   {
+    "visit": "odr208",
+    "frames": 3,
+    "unlit": false,
+    "rowOffsetPixels": 4.452044727335078,
+    "rowDetections": 2,
+    "acrossSlitOffsetPixels": -1,
+    "acrossSlitSnr": 6.682907204165693,
+    "acrossSlitFitted": true,
+    "note": "2/3 frames gave a continuum row; across-slit fitted (SNR 6.7, offset -0.02\")"
+   },
+   {
+    "visit": "odr210",
+    "frames": 2,
+    "unlit": false,
+    "rowOffsetPixels": -1.0479552726649217,
+    "rowDetections": 1,
+    "acrossSlitOffsetPixels": -1.5,
+    "acrossSlitSnr": 6.141639009043328,
+    "acrossSlitFitted": true,
+    "note": "1/2 frames gave a continuum row; across-slit fitted (SNR 6.1, offset -0.04\")"
+   },
+   {
+    "visit": "odr211",
+    "frames": 2,
+    "unlit": false,
+    "rowOffsetPixels": 3.4520447273350783,
+    "rowDetections": 2,
+    "acrossSlitOffsetPixels": -3.5,
+    "acrossSlitSnr": 4.244728654765852,
+    "acrossSlitFitted": true,
+    "note": "2/2 frames gave a continuum row; across-slit fitted (SNR 4.2, offset -0.09\")"
+   },
+   {
+    "visit": "odr217",
+    "frames": 2,
+    "unlit": false,
+    "rowOffsetPixels": 5.452044727335078,
+    "rowDetections": 2,
+    "acrossSlitOffsetPixels": -1.5,
+    "acrossSlitSnr": 5.367233094870623,
+    "acrossSlitFitted": true,
+    "note": "2/2 frames gave a continuum row; across-slit fitted (SNR 5.4, offset -0.04\")"
+   },
+   {
+    "visit": "odr21a",
+    "frames": 1,
+    "unlit": false,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 0,
+    "acrossSlitOffsetPixels": 3,
+    "acrossSlitSnr": 3.4425519262295907,
+    "acrossSlitFitted": true,
+    "note": "0/1 frames gave a continuum row; across-slit fitted (SNR 3.4, offset 0.07\"); row offset taken from the 18 visits that gave one (2.7 px)"
+   },
+   {
+    "visit": "odr223",
+    "frames": 2,
+    "unlit": false,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 0,
+    "acrossSlitOffsetPixels": -1,
+    "acrossSlitSnr": 4.7338600670651765,
+    "acrossSlitFitted": true,
+    "note": "0/2 frames gave a continuum row; across-slit fitted (SNR 4.7, offset -0.02\"); row offset taken from the 18 visits that gave one (2.7 px)"
+   },
+   {
+    "visit": "odr224",
+    "frames": 2,
+    "unlit": false,
+    "rowOffsetPixels": 4.952044727335078,
+    "rowDetections": 2,
+    "acrossSlitOffsetPixels": -9.5,
+    "acrossSlitSnr": 5.503647576500067,
+    "acrossSlitFitted": true,
+    "note": "2/2 frames gave a continuum row; across-slit fitted (SNR 5.5, offset -0.23\")"
+   },
+   {
+    "visit": "odr225",
+    "frames": 2,
+    "unlit": false,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 0,
+    "acrossSlitOffsetPixels": -8.5,
+    "acrossSlitSnr": 5.53837941270637,
+    "acrossSlitFitted": true,
+    "note": "0/2 frames gave a continuum row; across-slit fitted (SNR 5.5, offset -0.21\"); row offset taken from the 18 visits that gave one (2.7 px)"
+   },
+   {
+    "visit": "odr26a",
+    "frames": 2,
+    "unlit": false,
+    "rowOffsetPixels": 2.700012206999986,
+    "rowDetections": 0,
+    "acrossSlitOffsetPixels": 0,
+    "acrossSlitSnr": 1.6680349711221034,
+    "acrossSlitFitted": false,
+    "note": "0/2 frames gave a continuum row; across-slit set to the slit centre (SNR 1.7, offset -0.58\"); row offset taken from the 18 visits that gave one (2.7 px)"
+   }
+  ]
+ },
+ "sets": [
+  {
+   "set": "oi1356-all",
+   "line": "oi1356",
+   "subset": "all",
+   "frames": 112,
+   "exposureHours": 58.3697817361111,
+   "discMeanRayleigh": 45.38269265383536,
+   "aboveLimbMeanRayleigh": 11.680457870558014,
+   "duskDawnRatio": 1.66462547005392,
+   "duskDawnRatioAboveLimb": 1.5082473932170524,
+   "centroidRadii": [
+    0.14400218431467565,
+    -0.00959981669662278
+   ],
+   "peakRayleigh": 198.77035003633918,
+   "pedestalRayleigh": -1.7455570779836942,
+   "limbRayleigh": 52.746238191306894,
+   "eFoldingKm": 424.50489989393543
+  },
+  {
+   "set": "oi1356-east",
+   "line": "oi1356",
+   "subset": "east",
+   "frames": 64,
+   "exposureHours": 32.83992920138889,
+   "discMeanRayleigh": 43.12253103110863,
+   "aboveLimbMeanRayleigh": 12.397212345594227,
+   "duskDawnRatio": 1.6503102421255915,
+   "duskDawnRatioAboveLimb": 1.1878330003508084,
+   "centroidRadii": [
+    0.1392697158470772,
+    -0.007701420257975016
+   ],
+   "peakRayleigh": 130.8934340768748,
+   "pedestalRayleigh": -1.7664855246155051,
+   "limbRayleigh": 53.91328202486243,
+   "eFoldingKm": 418.0066845887089
+  },
+  {
+   "set": "oi1356-west",
+   "line": "oi1356",
+   "subset": "west",
+   "frames": 48,
+   "exposureHours": 25.529852534722227,
+   "discMeanRayleigh": 48.290016445584236,
+   "aboveLimbMeanRayleigh": 10.758471886386923,
+   "duskDawnRatio": 1.6809662595877488,
+   "duskDawnRatioAboveLimb": 2.200785606090423,
+   "centroidRadii": [
+    0.14585172635735566,
+    -0.012208183576579336
+   ],
+   "peakRayleigh": 321.39290881389263,
+   "pedestalRayleigh": -1.7186360957826121,
+   "limbRayleigh": 51.24502948605659,
+   "eFoldingKm": 430.69371634525044
+  },
+  {
+   "set": "oi1356-eclipse",
+   "line": "oi1356",
+   "subset": "eclipse",
+   "frames": 7,
+   "exposureHours": 4.148439236111112,
+   "discMeanRayleigh": 47.333569696271155,
+   "aboveLimbMeanRayleigh": 13.848063179094293,
+   "duskDawnRatio": 1.1088398997456586,
+   "duskDawnRatioAboveLimb": 1.5025012020238813,
+   "centroidRadii": [
+    0.014457764850187325,
+    0.1170951694769488
+   ],
+   "peakRayleigh": 238.5263068009077,
+   "pedestalRayleigh": -0.7848621928400552,
+   "limbRayleigh": 45.4182707813335,
+   "eFoldingKm": 530.2177152322577
+  },
+  {
+   "set": "oi1304-all",
+   "line": "oi1304",
+   "subset": "all",
+   "frames": 112,
+   "exposureHours": 58.3697817361111,
+   "discMeanRayleigh": 20.43650260491421,
+   "aboveLimbMeanRayleigh": -2.714810118260862,
+   "duskDawnRatio": 1.5226515494980715,
+   "duskDawnRatioAboveLimb": 0.8176386566730303,
+   "centroidRadii": [
+    0.08792062156828453,
+    0.0375288724315263
+   ],
+   "peakRayleigh": 139.55699024713817,
+   "pedestalRayleigh": -0.627515928050607,
+   "limbRayleigh": 17.79181319535466,
+   "eFoldingKm": 353.420705611634
+  },
+  {
+   "set": "oi1304-east",
+   "line": "oi1304",
+   "subset": "east",
+   "frames": 64,
+   "exposureHours": 32.83992920138889,
+   "discMeanRayleigh": 16.883746160021218,
+   "aboveLimbMeanRayleigh": -2.420136292446945,
+   "duskDawnRatio": 2.09096892139703,
+   "duskDawnRatioAboveLimb": 1.039236450282956,
+   "centroidRadii": [
+    0.12461185551074529,
+    0.041806099633031994
+   ],
+   "peakRayleigh": 121.10194156042736,
+   "pedestalRayleigh": -0.27888391519250055,
+   "limbRayleigh": 18.461720268247852,
+   "eFoldingKm": 192.02575191803376
+  },
+  {
+   "set": "oi1304-west",
+   "line": "oi1304",
+   "subset": "west",
+   "frames": 48,
+   "exposureHours": 25.529852534722227,
+   "discMeanRayleigh": 25.00653566567626,
+   "aboveLimbMeanRayleigh": -3.0938592163341867,
+   "duskDawnRatio": 1.1688109552773291,
+   "duskDawnRatioAboveLimb": 0.6380392614709406,
+   "centroidRadii": [
+    0.031179396680669852,
+    0.02657534245026015
+   ],
+   "peakRayleigh": 255.7226016922646,
+   "pedestalRayleigh": -1.075973301786957,
+   "limbRayleigh": 16.93008863915514,
+   "eFoldingKm": 213.57822369868921
+  },
+  {
+   "set": "oi1304-eclipse",
+   "line": "oi1304",
+   "subset": "eclipse",
+   "frames": 7,
+   "exposureHours": 4.148439236111112,
+   "discMeanRayleigh": 22.332304045280924,
+   "aboveLimbMeanRayleigh": -3.8795579230976993,
+   "duskDawnRatio": 1.1159235099428326,
+   "duskDawnRatioAboveLimb": 12.276658162361032,
+   "centroidRadii": [
+    -0.009908793041606623,
+    0.09728475597639978
+   ],
+   "peakRayleigh": 416.0598891166195,
+   "pedestalRayleigh": -6.1465927958264315,
+   "limbRayleigh": 14.959379886067978,
+   "eFoldingKm": 2307.2791354566343
+  },
+  {
+   "set": "refl1216-all",
+   "line": "refl1216",
+   "subset": "all",
+   "frames": 112,
+   "exposureHours": 58.3697817361111,
+   "discMeanRayleigh": 570.2965531355285,
+   "aboveLimbMeanRayleigh": 166.84063474887506,
+   "duskDawnRatio": 0.8389730550652473,
+   "duskDawnRatioAboveLimb": 1.0214295525686976,
+   "centroidRadii": [
+    -0.04430605337278476,
+    0.0049861346216106455
+   ],
+   "peakRayleigh": 1254.9166233205508,
+   "pedestalRayleigh": 34.77319675769914,
+   "limbRayleigh": 391.1219741667526,
+   "eFoldingKm": 742.1311825714671
+  },
+  {
+   "set": "refl1216-east",
+   "line": "refl1216",
+   "subset": "east",
+   "frames": 64,
+   "exposureHours": 32.83992920138889,
+   "discMeanRayleigh": 486.7973755923287,
+   "aboveLimbMeanRayleigh": 153.19583620304695,
+   "duskDawnRatio": 0.9163335789246735,
+   "duskDawnRatioAboveLimb": 1.116365710942823,
+   "centroidRadii": [
+    -0.02488947534186979,
+    -0.025048471488706172
+   ],
+   "peakRayleigh": 1131.9317531949032,
+   "pedestalRayleigh": 30.663919046005045,
+   "limbRayleigh": 384.30250580326134,
+   "eFoldingKm": 729.2808157827741
+  },
+  {
+   "set": "refl1216-west",
+   "line": "refl1216",
+   "subset": "west",
+   "frames": 48,
+   "exposureHours": 25.529852534722227,
+   "discMeanRayleigh": 677.7044230072171,
+   "aboveLimbMeanRayleigh": 184.39240938614654,
+   "duskDawnRatio": 0.7729627897528455,
+   "duskDawnRatioAboveLimb": 0.9288626866920163,
+   "centroidRadii": [
+    -0.06031543116714604,
+    0.032984769027667143
+   ],
+   "peakRayleigh": 1968.774849446967,
+   "pedestalRayleigh": 40.05910230444469,
+   "limbRayleigh": 399.8940913555828,
+   "eFoldingKm": 756.432705861041
+  },
+  {
+   "set": "refl1216-eclipse",
+   "line": "refl1216",
+   "subset": "eclipse",
+   "frames": 7,
+   "exposureHours": 4.148439236111112,
+   "discMeanRayleigh": 107.44598852450561,
+   "aboveLimbMeanRayleigh": 57.519706842581634,
+   "duskDawnRatio": 0.45248321859540624,
+   "duskDawnRatioAboveLimb": 0.6843193324744752,
+   "centroidRadii": [
+    -0.027308899415881046,
+    -0.022382197607474306
+   ],
+   "peakRayleigh": 1926.0753075789255,
+   "pedestalRayleigh": 30.092749528108204,
+   "limbRayleigh": 102.9498264990378,
+   "eFoldingKm": 531.8032177720658
+  }
+ ],
+ "published": [
+  {
+   "id": "dusk-dawn-1356",
+   "quantity": "dusk/dawn brightness ratio inside 1.25 body radii at OI] 1356 A",
+   "value": 1.59,
+   "unit": "ratio",
+   "source": "Roth et al. (2016), Europa's far ultraviolet oxygen aurora from a comprehensive set of HST observations, J. Geophys. Res. Space Physics 121, 2143-2170, doi:10.1002/2015JA022073",
+   "uncertainty": 0.33,
+   "set": "oi1356-all",
+   "metric": "duskDawnRatio",
+   "measured": 1.66462547005392
+  },
+  {
+   "id": "dusk-dawn-1304",
+   "quantity": "dusk/dawn brightness ratio inside 1.25 body radii at OI 1304 A",
+   "value": 1.66,
+   "unit": "ratio",
+   "source": "Roth et al. (2016), Europa's far ultraviolet oxygen aurora from a comprehensive set of HST observations, J. Geophys. Res. Space Physics 121, 2143-2170, doi:10.1002/2015JA022073",
+   "uncertainty": 0.63,
+   "set": "oi1304-all",
+   "metric": "duskDawnRatio",
+   "measured": 1.5226515494980715
+  },
+  {
+   "id": "disc-1356",
+   "quantity": "per-visit disc brightness at OI] 1356 A",
+   "value": 33,
+   "unit": "R",
+   "source": "Roth et al. (2016), Europa's far ultraviolet oxygen aurora from a comprehensive set of HST observations, J. Geophys. Res. Space Physics 121, 2143-2170, doi:10.1002/2015JA022073",
+   "valueHigh": 158,
+   "set": "oi1356-all",
+   "metric": "discMeanRayleigh",
+   "measured": 45.38269265383536
+  },
+  {
+   "id": "disc-1304",
+   "quantity": "per-visit disc brightness at OI 1304 A",
+   "value": 12,
+   "unit": "R",
+   "source": "Roth et al. (2016), Europa's far ultraviolet oxygen aurora from a comprehensive set of HST observations, J. Geophys. Res. Space Physics 121, 2143-2170, doi:10.1002/2015JA022073",
+   "valueHigh": 96,
+   "set": "oi1304-all",
+   "metric": "discMeanRayleigh",
+   "measured": 20.43650260491421
+  },
+  {
+   "id": "above-limb-1356",
+   "quantity": "brightness above 1.25 body radii",
+   "value": 0,
+   "unit": "R",
+   "source": "Roth et al. (2016), Europa's far ultraviolet oxygen aurora from a comprehensive set of HST observations, J. Geophys. Res. Space Physics 121, 2143-2170, doi:10.1002/2015JA022073",
+   "valueHigh": 15,
+   "set": "oi1356-all",
+   "metric": "aboveLimbMeanRayleigh",
+   "measured": 11.680457870558014
+  }
+ ],
+ "mirroredHandedness": [
+  {
+   "set": "oi1356-all",
+   "adoptedDuskDawnRatio": 1.66462547005392,
+   "mirroredDuskDawnRatio": 1.090136876624008
+  },
+  {
+   "set": "oi1356-east",
+   "adoptedDuskDawnRatio": 1.6503102421255915,
+   "mirroredDuskDawnRatio": 1.0848181464436633
+  },
+  {
+   "set": "oi1356-west",
+   "adoptedDuskDawnRatio": 1.6809662595877488,
+   "mirroredDuskDawnRatio": 1.0964755255179643
+  },
+  {
+   "set": "oi1356-eclipse",
+   "adoptedDuskDawnRatio": 1.1088398997456586,
+   "mirroredDuskDawnRatio": 0.613174958273196
+  },
+  {
+   "set": "oi1304-all",
+   "adoptedDuskDawnRatio": 1.5226515494980715,
+   "mirroredDuskDawnRatio": 0.9523678550972129
+  },
+  {
+   "set": "oi1304-east",
+   "adoptedDuskDawnRatio": 2.09096892139703,
+   "mirroredDuskDawnRatio": 0.9193022790954936
+  },
+  {
+   "set": "oi1304-west",
+   "adoptedDuskDawnRatio": 1.1688109552773291,
+   "mirroredDuskDawnRatio": 0.9816338529478374
+  },
+  {
+   "set": "oi1304-eclipse",
+   "adoptedDuskDawnRatio": 1.1159235099428326,
+   "mirroredDuskDawnRatio": 0.26815931831442547
+  },
+  {
+   "set": "refl1216-all",
+   "adoptedDuskDawnRatio": 0.8389730550652473,
+   "mirroredDuskDawnRatio": 0.9968994792519542
+  },
+  {
+   "set": "refl1216-east",
+   "adoptedDuskDawnRatio": 0.9163335789246735,
+   "mirroredDuskDawnRatio": 1.078955823655379
+  },
+  {
+   "set": "refl1216-west",
+   "adoptedDuskDawnRatio": 0.7729627897528455,
+   "mirroredDuskDawnRatio": 0.9236432956404985
+  },
+  {
+   "set": "refl1216-eclipse",
+   "adoptedDuskDawnRatio": 0.45248321859540624,
+   "mirroredDuskDawnRatio": 1.1272068122030514
+  }
+ ],
+ "measured": [
+  "Image +y lies at ORIENTAT, so detector rows grow along the aperture's +AXIS2 and POSTARG2 moves the target by +POSTARG2 along it. The opposite sign would place programme 15419's target about 406 rows away from where it is; the reflected solar continuum is found within 30 rows of the commanded row in every visit that shows it.",
+  "Frames are rejected on the target name and on the sky distance from Europa to Jupiter's limb at each mid-exposure epoch, from JPL Horizons, so that no frame with Jupiter's disc behind the target or its limb in the slit is stacked.",
+  "One position per visit: along the slit from the reflected solar continuum where it is detected, across the slit from reflected solar Lyman-alpha where it is fitted. The receipt says how many visits gave each.",
+  "Surface brightness comes from each frame's own CONT2EML slit conversion and the definition of a Rayleigh, and is checked against the published per-visit brightness range at both lines.",
+  "The dusk/dawn asymmetry survives a stack over roll angles spanning about 300 degrees, and stacking the mirrored handedness washes it out. A registration error fixed in the detector frame could not do that."
+ ],
+ "notVerified": [
+  "Handedness. Image +x is adopted at ORIENTAT-90 because only that choice makes a coherent asymmetry that matches the published one; the two Jupiter-limb tests that would have settled it from the data returned a null, and no instrument documentation was obtained. If the adoption is wrong, every image is mirrored east-west and dusk and dawn swap.",
+  "The far field is not exactly zero. Between 2.5 and 3 body radii this run measures a slightly negative level at both oxygen lines, so the reflected-sunlight model takes a little too much off the frames. The receipt states it per set; nothing here establishes its size beyond that measurement.",
+  "Reflected solar OI 1304 is not removed, so the 1304 disc values are upper limits. Above 1.1 radii there is no surface reflection and the 1304 numbers stand.",
+  "No TIME-TAG airglow cut is possible from _x2d products, so the 1304 images keep more geocoronal airglow than the published ones. That airglow fills the slit and is removed in the mean by the sky step, so it costs signal-to-noise rather than accuracy.",
+  "Eclipse visits and the visits whose across-slit fit is too weak are placed from the commanded pointing rather than from a fit; so are the visits whose reflected continuum is never detected, which take the median offset of the visits that gave one.",
+  "The multiplet companions at 1358.5, 1304.9 and 1306.0 A are not separated; they displace the composite centroid by 0.03-0.05 body radii toward dusk.",
+  "Programme 15419 (2018-20) is stacked here and is outside the published 2016 set, so the totals are not comparable to Table 1 of that paper.",
+  "No anamorphic correction is applied: the dispersion-direction plate scale is taken as equal to the cross-dispersion scale. The stacked disc is round, which supports it, but it is not verified from documentation.",
+  "Hubble's blur is not measured here and no cited STIS FUV-MAMA point spread function was obtained, so the above-limb fall-off is the glow convolved with an unknown instrument response."
+ ]
+}

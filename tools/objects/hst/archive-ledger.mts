@@ -198,7 +198,9 @@ export async function fixedRows(object: ShippedObject): Promise<ArchiveRow[] | n
 export async function repositoryState(repository = REPOSITORY) {
   const directory = resolve(repository, 'tools/objects/hst/programs'), files = await readdir(directory);
   const state = new Map<string, { programs: Set<string>; checked: Set<string> }>();
-  for (const file of files.filter(name => name.endsWith('.json') && !name.endsWith('.reproduction.json'))) {
+  // A pinned program is `<id>.json`. Everything else here carries a second name segment — a reproduction receipt, a line
+  // stack, the Horizons responses a line stack pins — and is not a program.
+  for (const file of files.filter(name => /^[a-z0-9-]+\.json$/u.test(name))) {
     const program = parseHstProgram(await readJson(resolve(directory, file)));
     for (const observation of program.observations) {
       const configuration = `${observation.instrument}/${observation.detector}`;

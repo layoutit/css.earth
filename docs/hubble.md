@@ -2,7 +2,7 @@
 
 Hubble images and spectra reach this project as MAST products. This guide describes how one archive observation is pinned, re-calibrated here from its raw exposure on Hubble's own software, and checked against the archive's own product. The route is the one [JWST imaging](jwst-imaging.md) and [interferometric imaging](interferometric-imaging.md) follow: pin, re-run, compare, write a receipt. What the archive holds, and how much of it this route reaches, is the [Hubble ledger](hubble-ledger.md).
 
-Nothing is drawn from Hubble data yet. What exists is the toolkit and its proof on five Europa observations across three instruments.
+Nothing is drawn from Hubble data yet. What exists is the toolkit, its proof on five Europa observations across three instruments, and one measurement made from the archive's own products: [line images of a moving target](#line-images-of-a-moving-target), stacked in the target's frame.
 
 ## Stages
 
@@ -58,6 +58,52 @@ Programme 15419, `idr203wtq`: WFC3/UVIS, F631N, aperture UVIS2-C512C-SUB, 230 se
 - **Why STIS is not bit-identical everywhere.** For programmes 14650 and 13040 the archive's products were made with calstis 3.4.2 (19-Jan-2018) and the re-run uses 3.5.0 (02-Feb-2026), on a different machine. One reference file differs, `IMPHTTAB`, and it does not enter these arrays: neither product carries the photometry keywords that table sets. Every other reference file and every calibration switch is the same. The remaining differences sit at the last bit of single precision (2⁻²³ is 1.2 × 10⁻⁷). For programme 15419, where the software versions agree, the flat field is bit-identical and only the steps after it differ, still at single precision. Whether version or platform is responsible for the older pair is **not verified**: this route cannot run calstis 3.4.2, and nothing was tuned to close the gap.
 - **Archive header quirks.** Two conventions repeat a keyword that the shared FITS reader refuses: a WFC3 `_flt` or `_flc` science extension carries the distortion records `D2IM1`, `D2IM2`, `DP1` and `DP2` four times each, and an ACS association table repeats `NEXTEND`. A drizzled product also draws rules across HISTORY cards, which puts an equals sign where a value card keeps one. [`product-file.mts`](../tools/objects/hst/product-file.mts) keeps the first card of a repeated keyword, reads commentary as commentary, and every receipt names the keywords that repeated.
 
+## Line images of a moving target
+
+A long-slit spectrum of a body smaller than the slit is already a picture in one direction: along the slit the body is resolved. At an emission line narrow enough it is a picture in both, because the across-slit axis then carries the body's own light at one wavelength. [`line-stack.mts`](../tools/objects/hst/line-stack.mts) takes every such exposure a programme holds, finds the body in each one, removes the sky and the sunlight the body reflects, turns what is left into Rayleigh with the frame's own `CONT2EML` slit conversion, and adds them up on a grid fixed to the body — north up, east left, measured in body radii, weighted by exposure. It writes one FITS file per line and subset, with the mean in `SCI` and its standard error in `ERR`, to a directory the caller names; nothing it produces is committed.
+
+Nothing about one body is written into the tool. Which frames, lines, windows, subsets and rejection rule to use come from a pinned stack definition beside the programs, and so do the JPL Horizons requests that place the body and the raw text those requests returned — a re-run asks the network for nothing. The arithmetic sits in `line-stack-reduction.mts` and the geometry in `line-stack-ephemeris.mts`, both pure and covered by `line-stack.test.mts`.
+
+Two things are worth knowing before re-using it. Horizons returns a `TLIST` sorted by time rather than in the order asked for, so every row is matched back to its epoch by the timestamp it carries; pairing by position mis-assigns the geometry without saying so, and the stacked disc comes out displaced and smeared. And every wavelength window the reduction uses has to fit inside the columns it reads: the tool refuses a window it would have to read short, because a row read past its end runs on into the next row.
+
+### Europa's oxygen aurora
+
+Every public STIS/FUV-MAMA G140L exposure of Europa — 140 frames, pinned in [`europa-oxygen-aurora.stack.json`](../tools/objects/hst/programs/europa-oxygen-aurora.stack.json), measured in its [receipt](../tools/objects/hst/programs/europa-oxygen-aurora.stack.reproduction.json). **112 frames are stacked**, 58.4 hours over 30 visits, from programmes 8224, 13040, 13619, 13679 and 15419. 28 are rejected: 26 transit-class targets, and 2 more because Jupiter's limb falls 7.4″ from Europa at their own epochs (**measured**, from Horizons at each mid-exposure). Published values below are Roth et al. (2016), doi:10.1002/2015JA022073.
+
+| set | frames | disc < 1.25 R | 1.25–1.5 R | dusk/dawn | at the limb | e-folding |
+|---|---|---|---|---|---|---|
+| OI] 1356 Å, all | 112 | 45.4 R | 11.7 R | **1.66** | 52.7 R | **425 km** |
+| OI] 1356 Å, east (leading) | 64 | 43.1 R | 12.4 R | 1.65 | 53.9 R | 418 km |
+| OI] 1356 Å, west (trailing) | 48 | 48.3 R | 10.8 R | 1.68 | 51.2 R | 431 km |
+| OI] 1356 Å, eclipse | 7 | 47.3 R | 13.8 R | 1.11 | 45.4 R | 530 km |
+| OI 1304 Å, all | 112 | 20.4 R | −2.7 R | 1.52 | 17.8 R | 353 km |
+
+- The disc glows at **45 R** inside 1.25 Europa radii at OI] 1356 Å and **20 R** at OI 1304 Å (**measured**; inside the published per-visit ranges of 33–158 R and 12–96 R).
+- The glow is **lopsided**: the dusk half is **1.66×** the dawn half at 1356 Å and 1.52× at 1304 Å (**measured**; published 1.59 ± 0.33 and 1.66 ± 0.63). The brightness centroid moves only 0.14 R, so the disc is centred and it is the brightness that is lopsided.
+- Above the limb the 1356 Å glow falls with an **e-folding length of 425 km** (**measured**; not corrected for Hubble's blur, which is not measured here).
+- The seven eclipse frames carry no reflected sunlight at all and give the same disc brightness, 47 R (**measured**). That is the check that the reflected-sunlight removal is doing its job on the sunlit frames rather than leaving their reflected continuum in.
+- Between 1.25 and 1.5 R the 1356 Å band is 11.7 R, under the published "<15 R above 1.25 R" (**measured**), with no background removed.
+
+**Handedness is adopted, not proven.** Which way image `+x` — increasing wavelength — lies on the sky is settled here by a physical consistency argument, not by instrument documentation, which was not obtained. Stacking the two choices is not a mirror pair, because the roll angle runs over about 300° across these visits, so the wrong one reflects each frame about a different axis and washes any body-fixed asymmetry out. It does (**measured**):
+
+| set | `+x` at `ORIENTAT−90` (adopted) | `+x` at `ORIENTAT+90` |
+|---|---|---|
+| OI] 1356 Å, all | **1.66** | 1.09 |
+| OI] 1356 Å, east | 1.65 | 1.08 |
+| OI] 1356 Å, west | 1.68 | 1.10 |
+| OI 1304 Å, all | 1.52 | 0.95 |
+
+Only `ORIENTAT−90` gives a coherent asymmetry, it appears in both lines and both elongations, and its size and sense match the published ratios. **Not verified from documentation**: if the adoption is wrong, every image is mirrored east–west and dusk and dawn swap.
+
+**Limits.** Every one of these is in the receipt as well.
+
+- Reflected solar OI 1304 is **not removed** — that needs a measured solar spectrum this route does not hold — so the 1304 Å disc values are upper limits. Above 1.1 R there is no surface reflection and the 1304 numbers stand.
+- No TIME-TAG airglow cut is possible from `_x2d` products, which are whole exposures, so the 1304 Å images keep more geocoronal airglow than the published ones. It fills the slit and comes out in the mean at the sky step, so it costs signal-to-noise rather than accuracy.
+- The far field is not exactly zero. Between 2.5 and 3 R this run measures −1.7 R at 1356 Å and −0.6 R at 1304 Å, and the 1304 Å band above the limb comes out at −2.7 R, so the reflected-sunlight model takes a little too much off. **Not verified**: nothing here establishes the size of that beyond the measurement.
+- 12 of 30 visits take the median row offset of the visits whose reflected continuum was detected, and 7 of 30 — the five eclipse visits and two of low signal — sit at the slit centre rather than at a fitted position. **Assumed, not measured**, for those.
+- The multiplet companions at 1358.5, 1304.9 and 1306.0 Å are not separated; they displace the centroid by 0.03–0.05 R toward dusk. No anamorphic correction is applied, and Hubble's blur is not measured. **Not verified.**
+- Programme 15419 (2018–20) is stacked here and is outside the published 2016 set, so the totals are not comparable to Table 1 of that paper.
+
 ## Limits
 
 - No COS, WFPC2, NICMOS, FOC, FOS, GHRS, WFPC, HSP or FGS observation can be re-calibrated here: `calcos` is not installed, and the rest of those pipelines are retired and not in `hstcal`. The [ledger](hubble-ledger.md) says how much of the archive that is.
@@ -83,5 +129,13 @@ node tools/objects/hst/compare.mts   europa-15419 idr203wtq .local/hst/europa-15
 node tools/objects/hst/archive-ledger.mts --write
 node --test tools/objects/hst/*.test.mts
 ```
+
+The line stack is its own command, and takes a directory that already holds the pinned `_x2d` frames:
+
+```sh
+node tools/objects/hst/line-stack.mts europa-oxygen-aurora .local/hst/europa-aurora output/europa-aurora --mirror --receipt
+```
+
+It reads each frame once to place its visit and once to stack it, and holds no frame after it has been used. `--mirror` stacks the opposite handedness as well, which is the evidence above; `--receipt` writes the reproduction receipt beside the definition; `--fetch` allows a Horizons request the pinned responses do not already answer, and without it a missing one is an error. A run over the 112 Europa frames takes about fourteen seconds.
 
 `.local/hst` is ignored by git; `--raw <dir>` takes the pinned files from a directory that already holds them instead of downloading. The other four observations are the same `archive`, `calibrate` and `compare` commands with `europa-14650 od9l12010`, `europa-13040 obzp01010`, `europa-15419 odr2a1010` and `europa-11085 j9xe05010`.
