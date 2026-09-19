@@ -1,0 +1,298 @@
+{
+ "schema": "cssearth-hst-slit-scan-map-reproduction@1",
+ "scan": "europa-salt-map",
+ "definition": "tools/objects/hst/programs/europa-salt-map.scan.json",
+ "target": "Europa",
+ "instrument": "STIS/CCD",
+ "opticalElement": "G430L",
+ "aperture": "52X0.1",
+ "band": {
+  "id": "nacl-450nm",
+  "quantity": "BAND STRENGTH",
+  "units": "Angstrom",
+  "bandAngstrom": [
+   3500,
+   5300
+  ],
+  "continuumWindowsAngstrom": [
+   [
+    3100,
+    3500
+   ],
+   [
+    5300,
+    5500
+   ]
+  ],
+  "continuumOrder": 3,
+  "reference": {
+   "name": "sun_reference_stis_002.fits",
+   "url": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/sun_reference_stis_002.fits",
+   "sha256": "20133cdf2a402655e3726de6b334bf09d05c9429ebd27ebf5492dc37fc89cfd8",
+   "note": "CALSPEC sun_reference_stis_002, Colina, Bohlin & Castelli (1996), AJ 112, 307, with Bohlin, Dickinson & Calzetti (2001), AJ 122, 2118; 4100-8700 A from Neckel & Labs (1984) and 1195-4100 A from Woods et al. (1996). Sampled every 10.0 A through the visible, close to the 9 A this grating resolves. The paper divided by ASTM E-490, which this repository does not hold; this is this repository's choice of solar reference and any mismatch between it and the true solar spectrum is the same in every row, so it moves the whole map by one amount rather than changing its shape."
+  }
+ },
+ "frames": {
+  "pinned": 60,
+  "used": 60,
+  "visits": 4,
+  "exposureSeconds": 600,
+  "rejected": []
+ },
+ "registration": [
+  {
+   "visit": "od9l12",
+   "targetName": "EUROPA-45",
+   "frames": 15,
+   "discRow": 125,
+   "acrossSlitCentreArcsec": 0.03,
+   "chordResidualArcsec": 0.0542,
+   "chordSteps": 15,
+   "radiusArcsec": 0.41,
+   "orientatDegrees": 90.382,
+   "subObserverWestLongitude": 45.91,
+   "subObserverLatitude": -2.9,
+   "northAzimuthDegrees": 335.01,
+   "sampledPixels": 348,
+   "cells": 12002,
+   "areaShare": 0.2501,
+   "bandStrengthMedian": 18.41
+  },
+  {
+   "visit": "od9l13",
+   "targetName": "EUROPA-135",
+   "frames": 15,
+   "discRow": 126.5,
+   "acrossSlitCentreArcsec": 0.056,
+   "chordResidualArcsec": 0.0734,
+   "chordSteps": 15,
+   "radiusArcsec": 0.3749,
+   "orientatDegrees": 67.04,
+   "subObserverWestLongitude": 132.57,
+   "subObserverLatitude": -2.9,
+   "northAzimuthDegrees": 335.43,
+   "sampledPixels": 308,
+   "cells": 11965,
+   "areaShare": 0.2495,
+   "bandStrengthMedian": 21.63
+  },
+  {
+   "visit": "od9l14",
+   "targetName": "EUROPA-225",
+   "frames": 15,
+   "discRow": 125.5,
+   "acrossSlitCentreArcsec": 0.014,
+   "chordResidualArcsec": 0.037,
+   "chordSteps": 15,
+   "radiusArcsec": 0.4558,
+   "orientatDegrees": 65.236,
+   "subObserverWestLongitude": 223.54,
+   "subObserverLatitude": -3.05,
+   "northAzimuthDegrees": 334.99,
+   "sampledPixels": 347,
+   "cells": 11799,
+   "areaShare": 0.2461,
+   "bandStrengthMedian": -56.88
+  },
+  {
+   "visit": "od9l15",
+   "targetName": "EUROPA-315",
+   "frames": 15,
+   "discRow": 126.5,
+   "acrossSlitCentreArcsec": 0.002,
+   "chordResidualArcsec": 0.0799,
+   "chordSteps": 15,
+   "radiusArcsec": 0.3696,
+   "orientatDegrees": 66.858,
+   "subObserverWestLongitude": 313.63,
+   "subObserverLatitude": -2.91,
+   "northAzimuthDegrees": 335.53,
+   "sampledPixels": 290,
+   "cells": 11995,
+   "areaShare": 0.2499,
+   "bandStrengthMedian": -96.94
+  }
+ ],
+ "acrossSlitDirection": {
+  "adopted": "ORIENTAT-90",
+  "adoptedAgreement": {
+   "pairs": 4,
+   "negativePairs": 0,
+   "cells": 7611,
+   "rmsDifference": 36.55,
+   "meanCorrelation": 0.559
+  },
+  "adoptedOverlaps": [
+   {
+    "first": "od9l12",
+    "second": "od9l13",
+    "cells": 2265,
+    "correlation": 0.798,
+    "rmsDifference": 16.28
+   },
+   {
+    "first": "od9l12",
+    "second": "od9l15",
+    "cells": 1752,
+    "correlation": 0.463,
+    "rmsDifference": 22.92
+   },
+   {
+    "first": "od9l13",
+    "second": "od9l14",
+    "cells": 1838,
+    "correlation": 0.504,
+    "rmsDifference": 12.82
+   },
+   {
+    "first": "od9l14",
+    "second": "od9l15",
+    "cells": 1756,
+    "correlation": 0.404,
+    "rmsDifference": 68.94
+   }
+  ],
+  "mirrored": {
+   "direction": "ORIENTAT+90",
+   "agreement": {
+    "pairs": 4,
+    "negativePairs": 2,
+    "cells": 7678,
+    "rmsDifference": 70.94,
+    "meanCorrelation": -0.087
+   },
+   "overlaps": [
+    {
+     "first": "od9l12",
+     "second": "od9l13",
+     "cells": 2247,
+     "correlation": -0.747,
+     "rmsDifference": 46.78
+    },
+    {
+     "first": "od9l12",
+     "second": "od9l15",
+     "cells": 1752,
+     "correlation": 0.766,
+     "rmsDifference": 85.69
+    },
+    {
+     "first": "od9l13",
+     "second": "od9l14",
+     "cells": 1736,
+     "correlation": 0.727,
+     "rmsDifference": 64.2
+    },
+    {
+     "first": "od9l14",
+     "second": "od9l15",
+     "cells": 1943,
+     "correlation": -0.819,
+     "rmsDifference": 83.97
+    }
+   ],
+   "strongest": {
+    "westLongitude": 154.5,
+    "latitude": -40.5,
+    "value": 116.05
+   }
+  }
+ },
+ "map": {
+  "grid": [
+   360,
+   180
+  ],
+  "maximumEmissionDegrees": 60,
+  "cells": 40150,
+  "areaShare": 0.8231,
+  "cellsSeenByOneVisit": 32539,
+  "cellsSeenByTwoOrMore": 7611,
+  "bandStrength": {
+   "minimum": -197.17,
+   "lowQuartile": -75.63,
+   "median": -10.92,
+   "highQuartile": 19.08,
+   "maximum": 102.44
+  },
+  "medianErrorAngstrom": 1.49,
+  "strongest": {
+   "westLongitude": 69.5,
+   "latitude": -15.5,
+   "value": 102.44
+  },
+  "hemispheres": {
+   "leading": {
+    "cells": 16166,
+    "median": 22.87
+   },
+   "trailing": {
+    "cells": 16159,
+    "median": -79.77
+   }
+  }
+ },
+ "published": [
+  {
+   "claim": "Europa was observed across four HST visits; during each, the 52x0.1 arcsecond slit was stepped across the full disk in G430L and G750L, with 10-second G430L integrations.",
+   "source": "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123"
+  },
+  {
+   "claim": "Individual spectra are single rows of the two-dimensional spectral images, at the 0.05 arcsecond pixel scale, about 150 km at the sub-observer point at 450 nm.",
+   "source": "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123"
+  },
+  {
+   "claim": "The ASTM E-490 solar reference spectrum was divided into the extracted spectra to convert each to reflectance.",
+   "source": "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123"
+  },
+  {
+   "claim": "A third-order polynomial was fitted between 310 and 550 nm excluding 350 to 530 nm, each spectrum divided by it, and the residual integrated to an equivalent width; second-order continua gave qualitatively identical maps.",
+   "source": "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123"
+  },
+  {
+   "claim": "The feature is located exclusively on the leading hemisphere and the deepest absorptions fall within the chaos region Tara Regio.",
+   "source": "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123",
+   "value": "about 85 degrees west"
+  },
+  {
+   "claim": "Additional concentration falls in eastern Powys Regio.",
+   "source": "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123",
+   "value": "about 125 degrees west"
+  },
+  {
+   "claim": "Data very near the limb were left out, as those spectra are of poorer quality.",
+   "source": "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123"
+  }
+ ],
+ "method": [
+  "Which frames: every public STIS/CCD G430L exposure of programme 14650 — 60 of them, fifteen slit positions in each of four visits. Trumbo, Brown & Hand (2019): 'we stepped the 52\" x 0.1\" slit across the full disk of Europa in both the G430L and G750L first-order spectroscopy modes' and 'We acquired spectra at each slit position over 9-s (G750L) or 10-s (G430L) integration times'. The G750L half of the programme carries the 720 nm M-centre, which this stage does not map.",
+  "Which products: Trumbo, Brown & Hand (2019): 'Flux- and wavelength-calibrated spectral data products were then delivered after standard reduction via the STIS calibration pipeline (calstis)'. The archive's own rectified _x2d products are read here rather than re-calibrated, because this route already reproduces one of these very exposures, od9l12010, to the last bit of single precision.",
+  "One spectrum per row: Trumbo, Brown & Hand (2019): 'We obtained individual spectra by extracting single rows of the two-dimensional spectral images, corresponding to the 0.05\" pixel-scale (~150-km diffraction-limited spatial resolution at 450-nm wavelengths)'.",
+  "Reflectance: Trumbo, Brown & Hand (2019): 'We then divided the ASTM E-490 solar reference spectrum into the extracted spectra to convert each to reflectance'. ASTM E-490 is not held in this repository; CALSPEC's own solar reference is divided in instead, pinned beside the frames. This repository's choice.",
+  "Continuum and band: Trumbo, Brown & Hand (2019): 'For most spectra, we fit a third-order polynomial between 310 and 550 nm, excluding the region corresponding to the F-center absorption (350 to 530 nm)' and 'We then divided each spectrum by its continuum fit and integrated the residual absorption to calculate the equivalent width (i.e., the width of a 100% absorption with the same integrated area)'. Those are the pinned windows, the pinned order and the pinned quantity. The 'small variations on these parameters ... when necessary' the paper allows are not made: every row here is reduced the same way.",
+  "Overlaps: Trumbo, Brown & Hand (2019): 'In mapping the calculated band strengths, we averaged the values in overlapping regions'. Here the average is weighted by how far inside its own edge each visit saw the cell, which is what every body map in this repository does. This repository's choice.",
+  "The limb: Trumbo, Brown & Hand (2019): 'We left out data very near the limb of Europa, as the spectra are of poorer quality and make quantifying weak absorptions difficult'. The paper does not say how near; a cell is kept only where the body faced Hubble within 60 degrees, which is 0.87 of the radius. This repository's choice.",
+  "Where each row sits on the body: the paper does not say how it placed them. Here it is measured from the scan itself. Along the slit, the body is a top hat as wide as its chord in the sunlight it reflects, and the middle of that chord is its centre. Across the slit, the chords say where the centre is: a step at distance d from it cuts a half-chord of sqrt(R^2 - d^2), and the offset that best explains all fifteen steps against a disc of the ephemeris radius is the answer. This repository's choice.",
+  "Where the body was and how it was turned: JPL Horizons as seen from HST (500@-48) at each exposure's mid-time for the apparent size, the pole angle and the place, the Sun's direction from the body (500@502) for the illumination, and the IAU pole model in pck00011.tpc, body 502, for the rotation - through the same observerCamera every ground-based photograph in this repository uses."
+ ],
+ "measured": [
+  "All 60 frames are used and none rejected: four visits, fifteen slit positions each, 600 seconds in all.",
+  "The scan's own chords fit a disc of the ephemeris radius to between 0.037 and 0.080 arcseconds - under two detector pixels - in all four visits, so the across-slit pointing is measured rather than assumed.",
+  "The sub-observer longitudes this run derives are 45.9, 132.6, 223.5 and 313.6 degrees west, against the 47, 133, 224 and 314 degrees west Trumbo, Brown & Hand (2019) states in its Table 1 at each visit's start.",
+  "The map keeps 40,150 cells, 82.3 per cent of the surface, 7,611 of them seen by two visits or more.",
+  "The across-slit direction is ORIENTAT-90. With it every one of the four visit pairs that share ground agrees: mean correlation 0.56 over 7,611 shared cells, rms difference 36.6 Angstrom. With ORIENTAT+90 two of the four anti-correlate, at -0.75 and -0.82, the mean falls to -0.09 and the rms difference doubles to 70.9 Angstrom.",
+  "The strongest absorption sits at 69.5 degrees west, 15.5 degrees south, at 102.4 Angstrom of equivalent width - 5.7 per cent of the 1800 Angstrom band averaged across it. That is 16 degrees of longitude east of the about 85 degrees west Trumbo, Brown & Hand (2019) gives for the deepest absorptions, in Tara Regio.",
+  "The band absorbs on the leading hemisphere and not on the trailing one: the median band strength within 45 degrees of the equator is +22.9 Angstrom between 0 and 180 degrees west and -79.8 Angstrom between 180 and 360. Trumbo, Brown & Hand (2019): the feature is located exclusively on the leading hemisphere.",
+  "The median error on a mapped cell is 1.5 Angstrom, so the map is not photon-limited: what limits it is the continuum model."
+ ],
+ "notVerified": [
+  "The zero point of the band strength is not established. A mismatch between the solar reference used here and the true solar spectrum is the same in every row, so it moves the whole map by one amount; what this measures is the map's contrast, not an absolute equivalent width.",
+  "The large negative values over the trailing hemisphere are not negative absorption. The continuum is fitted only over 310-350 and 530-550 nm and read across the 180 nm between them, and the trailing hemisphere reflectance falls far more steeply toward the ultraviolet than the leading one, so a cubic anchored that way overshoots there. Trumbo, Brown & Hand (2019) maps no feature on the trailing hemisphere. Nothing here separates how much of the -79.8 Angstrom median is that overshoot and how much is a real difference in spectral shape.",
+  "The across-slit direction is settled by the agreement between visits that saw the same ground, not by instrument documentation, which was not obtained. If it is wrong, every visit is reflected about its own slit and the map is not the body.",
+  "Hubble's blur is not removed and no anamorphic correction is applied. A 150 km resolution element is smeared across the neighbours of a 27 km map cell, so the map is smoother than its grid.",
+  "The background is one median per column over the rows 40 to 110 from the body. Scattered light that varies along the slit underneath the body is not modelled, and it would matter most where the body is faintest, which is the near-ultraviolet end of the continuum anchor.",
+  "The paper's 'small variations on these parameters ... when necessary to achieve a satisfactory continuum fit' are not reproduced, and the second-order continuum it reports as giving qualitatively identical results was not run through this stage.",
+  "The G750L half of programme 14650 is not read here, so the 720 nm M-centre upper limit Trumbo, Brown & Hand (2019) places is not reproduced.",
+  "The x2d products are the archive's own, not re-calibrated for this run. That this route reproduces them is shown for one of these exposures only, od9l12010."
+ ]
+}

@@ -2,7 +2,7 @@
 
 Hubble images and spectra reach this project as MAST products. This guide describes how one archive observation is pinned, re-calibrated here from its raw exposure on Hubble's own software, and checked against the archive's own product. The route is the one [JWST imaging](jwst-imaging.md) and [interferometric imaging](interferometric-imaging.md) follow: pin, re-run, compare, write a receipt. What the archive holds, and how much of it this route reaches, is the [Hubble ledger](hubble-ledger.md).
 
-Nothing is drawn from Hubble data yet. What exists is the toolkit, its proof on five Europa observations across three instruments, and one measurement made from the archive's own products: [line images of a moving target](#line-images-of-a-moving-target), stacked in the target's frame.
+Nothing is drawn from Hubble data yet. What exists is the toolkit, its proof on five Europa observations across three instruments, and two measurements made from the archive's own products: [line images of a moving target](#line-images-of-a-moving-target), stacked in the target's frame, and [bands mapped from a slit scanned across a body](#bands-mapped-from-a-slit-scanned-across-a-body).
 
 ## Stages
 
@@ -104,6 +104,51 @@ Only `ORIENTAT−90` gives a coherent asymmetry, it appears in both lines and bo
 - The multiplet companions at 1358.5, 1304.9 and 1306.0 Å are not separated; they displace the centroid by 0.03–0.05 R toward dusk. No anamorphic correction is applied, and Hubble's blur is not measured. **Not verified.**
 - Programme 15419 (2018–20) is stacked here and is outside the published 2016 set, so the totals are not comparable to Table 1 of that paper.
 
+## Bands mapped from a slit scanned across a body
+
+A slit narrower than the body and stepped across it samples the surface twice over. Along the slit the detector rows are already a picture; the steps are the other direction. Every row is a whole spectrum, so an absorption band can be measured in each of them and the measurements laid back on the body. [`slit-scan-map.mts`](../tools/objects/hst/slit-scan-map.mts) does that and writes a full-world longitude-latitude map of one band's strength.
+
+It works the way the line stack does. Which frames, which reference spectrum, which continuum windows, which band, which grid and which rotation model come from a pinned scan definition beside the programs, together with the raw JPL Horizons responses that place the body, so a re-run asks the network for nothing. The arithmetic sits in [`slit-scan-reduction.mts`](../tools/objects/hst/slit-scan-reduction.mts), pure and covered by `slit-scan-map.test.mts`. Where the body sits in each frame is measured, not assumed: along the slit from the middle of the chord the disc cuts in the sunlight it reflects, and across the slit from the offset that best explains every step's chord against a disc of the ephemeris radius. From there the body geometry is the one every ground-based photograph here uses — an IAU pole model from a text PCK through `observerCamera` — and the projection and the weighted combination of the visits are `projectBandMap` and `combineBodyMaps`, the same parts that place a JWST cube or an ALMA image on a body.
+
+Two things are worth knowing before re-using it. The x2d products read here are the archive's own: this route already proves it reproduces this instrument mode bit for bit, so the 60 frames are not re-calibrated from raw for the map. And **which way the aperture's first axis lies on the sky is not assumed**. `--mirror` runs the opposite choice as well, and the visits that saw the same ground decide between them.
+
+### Europa's sodium chloride
+
+Every public STIS/CCD G430L exposure of programme 14650 (PI M. Brown) — 60 frames, fifteen slit positions in each of four visits of 2017, pinned in [`europa-salt-map.scan.json`](../tools/objects/hst/programs/europa-salt-map.scan.json) and measured in its [receipt](../tools/objects/hst/programs/europa-salt-map.scan.reproduction.json). The published account is Trumbo, Brown & Hand (2019), *Sodium chloride on the surface of Europa*, Science Advances **5**, eaaw7123, [doi:10.1126/sciadv.aaw7123](https://doi.org/10.1126/sciadv.aaw7123), whose method this follows: single rows of the rectified images at the 0.05″ pixel scale, divided by a solar reference spectrum, a third-order polynomial continuum fitted between 310 and 550 nm excluding 350 to 530 nm, and the continuum-removed residual integrated to an equivalent width. Each of those choices is recorded in the definition with the sentence it comes from, and the ones the paper does not settle are marked as this repository's.
+
+**All 60 frames are used**, none rejected; 600 seconds in all. The map covers **82.3% of the surface**, 7,611 of its 40,150 cells seen by two visits or more.
+
+| visit | target | sub-observer longitude | chord residual | cells |
+|---|---|---|---|---|
+| od9l14 | EUROPA-225 | 223.5°W | 0.037″ | 11,799 |
+| od9l12 | EUROPA-45 | 45.9°W | 0.054″ | 12,002 |
+| od9l13 | EUROPA-135 | 132.6°W | 0.073″ | 11,965 |
+| od9l15 | EUROPA-315 | 313.6°W | 0.080″ | 11,995 |
+
+- The **scan's own chords fit a disc of the ephemeris radius to under two detector pixels** in all four visits (**measured**), so the across-slit pointing is measured rather than taken from the commanded offsets.
+- The sub-observer longitudes this run derives are **45.9, 132.6, 223.5 and 313.6°W** (**measured**) against the 47, 133, 224 and 314°W of the paper's Table 1 at each visit's start.
+- The **strongest absorption sits at 69.5°W, 15.5°S**, at 102.4 Å of equivalent width — 5.7% of the 1800 Å band averaged across it (**measured**). The paper puts its deepest absorptions in Tara Regio at about 85°W, 16° of longitude further west.
+- The band **absorbs on the leading hemisphere and not on the trailing one**: the median within 45° of the equator is **+22.9 Å** between 0 and 180°W and **−79.8 Å** between 180 and 360°W (**measured**). The paper: the feature is located exclusively on the leading hemisphere.
+- The median error on a mapped cell is **1.5 Å**, so nothing here is photon-limited. What limits it is the continuum model.
+
+**The across-slit direction is measured, not adopted.** Two visits that saw the same ground from different sub-observer points agree only when that direction is the right one; the wrong one reflects each visit's picture about its own slit and moves the ground under it. It does (**measured**):
+
+| across-slit direction | visit pairs | pairs that anti-correlate | mean correlation | rms difference |
+|---|---|---|---|---|
+| `ORIENTAT-90` (adopted) | 4 | **0** | **0.56** | **36.6 Å** |
+| `ORIENTAT+90` | 4 | 2 (−0.75, −0.82) | −0.09 | 70.9 Å |
+
+So `+POSTARG1` lies ninety degrees round from the slit in the direction `ORIENTAT-90`, which is the same sense the [oxygen aurora](#europas-oxygen-aurora) adopts on the FUV MAMA from a physical argument. That one is still not proven; this one is measured, on a different detector.
+
+**Limits.** Every one of these is in the receipt as well.
+
+- **The zero point is not established.** The paper divided by the ASTM E-490 solar reference, which this repository does not hold; CALSPEC's own `sun_reference_stis_002` is divided in instead, pinned by URL and digest. Any mismatch between it and the true solar spectrum is the same in every row, so it moves the whole map by one amount. What this measures is the map's contrast.
+- **The trailing hemisphere's large negative values are not negative absorption.** The continuum is fitted only over 310–350 and 530–550 nm and read across the 180 nm between them, and the trailing hemisphere's reflectance falls far more steeply toward the ultraviolet, so a cubic anchored that way overshoots there. The paper maps no feature on the trailing hemisphere. **Not verified**: nothing here separates how much of the −79.8 Å median is that overshoot and how much is a real difference in spectral shape.
+- Hubble's blur is not removed and no anamorphic correction is applied, so a 150 km resolution element is smeared across the neighbours of a 27 km map cell. The map is smoother than its grid.
+- The background is one median per column over the rows 40 to 110 from the body. Scattered light varying along the slit underneath the body is not modelled, and it would matter most where the body is faintest — the near-ultraviolet end of the continuum anchor.
+- The paper's "small variations on these parameters … when necessary" are not reproduced, and the second-order continuum it reports as giving qualitatively identical results was not run through this stage.
+- The G750L half of the programme is not read, so the 720 nm M-centre upper limit the paper places is not reproduced.
+
 ## Limits
 
 - No COS, WFPC2, NICMOS, FOC, FOS, GHRS, WFPC, HSP or FGS observation can be re-calibrated here: `calcos` is not installed, and the rest of those pipelines are retired and not in `hstcal`. The [ledger](hubble-ledger.md) says how much of the archive that is.
@@ -137,5 +182,13 @@ node tools/objects/hst/line-stack.mts europa-oxygen-aurora .local/hst/europa-aur
 ```
 
 It reads each frame once to place its visit and once to stack it, and holds no frame after it has been used. `--mirror` stacks the opposite handedness as well, which is the evidence above; `--receipt` writes the reproduction receipt beside the definition; `--fetch` allows a Horizons request the pinned responses do not already answer, and without it a missing one is an error. A run over the 112 Europa frames takes about fourteen seconds.
+
+The slit-scan map is its own command as well, over a directory that already holds the pinned `_x2d` frames and the pinned reference spectrum:
+
+```sh
+node tools/objects/hst/slit-scan-map.mts europa-salt-map .local/hst/europa-14650 output/europa-salt-map --mirror --receipt
+```
+
+It reads each frame twice — once to place its visit, once to measure the band in every row of it — and holds no frame after it has been used. `--mirror` maps the opposite across-slit direction as well, which is the evidence above; `--receipt` writes the reproduction receipt beside the definition; `--fetch` allows a Horizons request the pinned responses do not already answer. A run over the 60 Europa frames takes under three seconds.
 
 `.local/hst` is ignored by git; `--raw <dir>` takes the pinned files from a directory that already holds them instead of downloading. The other four observations are the same `archive`, `calibrate` and `compare` commands with `europa-14650 od9l12010`, `europa-13040 obzp01010`, `europa-15419 odr2a1010` and `europa-11085 j9xe05010`.
