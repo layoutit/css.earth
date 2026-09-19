@@ -18,7 +18,7 @@ const rh3D = 10.42; // pc, measured 3D half-mass radius (same source)
 // Spitzer 1987 discusses the same order-unity ratio).
 const projectedHalfLightTarget = 0.75 * rh3D; // pc
 
-function sigmaShape(Rpc, q) {
+function sigmaShape(Rpc: number, q: number): number {
   // King (1962) empirical surface-density shape (unnormalized): [ (1+x^2)^-1/2 - (1+q^2)^-1/2 ]^2
   const x = Rpc / rc;
   if (x >= q) return 0;
@@ -27,7 +27,7 @@ function sigmaShape(Rpc, q) {
   return f > 0 ? f * f : 0;
 }
 
-function dSigmaShape_dR(Rpc, q) {
+function dSigmaShape_dR(Rpc: number, q: number): number {
   const x = Rpc / rc;
   if (x >= q) return 0;
   const g = 1 / Math.sqrt(1 + q * q);
@@ -39,7 +39,7 @@ function dSigmaShape_dR(Rpc, q) {
   return 2 * f * dfdR;
 }
 
-function projectedHalfLightRadius(q) {
+function projectedHalfLightRadius(q: number): number {
   const rt = q * rc;
   const N = 4000, dR = rt / N;
   let cum = 0;
@@ -76,7 +76,7 @@ const achievedHalf = projectedHalfLightRadius(q);
 console.error(JSON.stringify({ q, concentrationLog10: Math.log10(q), rt_pc: rt, achievedProjectedHalfLight_pc: achievedHalf, targetProjectedHalfLight_pc: projectedHalfLightTarget }));
 
 // Abel inversion via the r^2+u^2 substitution: rho(r) = -(1/pi) * integral_0^sqrt(rt^2-r^2) Sigma'(R(u)) du
-function rho(r) {
+function rho(r: number): number {
   if (r >= rt) return 0;
   const uMax = Math.sqrt(rt * rt - r * r);
   const N = 20000, du = uMax / N;
@@ -89,7 +89,7 @@ function rho(r) {
   return -acc / Math.PI;
 }
 
-function rhoN(r, N) {
+function rhoN(r: number, N: number): number {
   if (r >= rt) return 0;
   const uMax = Math.sqrt(rt * rt - r * r), du = uMax / N; let acc = 0;
   for (let i = 0; i < N; i++) { const u = (i + 0.5) * du; const R = Math.sqrt(r * r + u * u); acc += (dSigmaShape_dR(R, q) / R) * du; }
