@@ -69,7 +69,18 @@ if operation == 'mast-service':
     answer['rows'] = rows(table)
 elif operation == 'mast-download':
     from astroquery.mast import Observations
-    status, message, url = Observations.download_file(request['uri'], local_path=request['destination'], cache=False, verbose=False)
+    class ProgressToStderr:
+        def __init__(self, stream): self.stream = stream
+        def write(self, value): return self.stream.write(value)
+        def flush(self): return self.stream.flush()
+        def isatty(self): return True
+        def __getattr__(self, name): return getattr(self.stream, name)
+    answer_stream = sys.stdout
+    sys.stdout = ProgressToStderr(sys.stderr)
+    try:
+        status, message, url = Observations.download_file(request['uri'], local_path=request['destination'], cache=False, verbose=True)
+    finally:
+        sys.stdout = answer_stream
     if status not in ('COMPLETE', 'SKIPPED'):
         raise RuntimeError(f'MAST download {status}: {message}')
     answer['files'] = [request['destination']]
@@ -108,13 +119,40 @@ json.dump(answer, sys.stdout, allow_nan=False, separators=(',', ':'))
 
 export type AstroqueryRunner = (python: string, env: NodeJS.ProcessEnv, request: AstroqueryRequest) => Promise<unknown>;
 
+const ANSI = /\u001b\[[0-9;]*m/gu;
+function mastProgress(write: (line: string) => void) {
+  let buffered = '', announced = false, lastStep = -1;
+  return (chunk: string, flush = false) => {
+    buffered += chunk;
+    const parts = buffered.split(/[\r\n]+/u);
+    buffered = flush ? '' : parts.pop() ?? '';
+    for (const raw of parts) {
+      const line = raw.replace(ANSI, '').trim();
+      if (!line) continue;
+      if (line.startsWith('Downloading URL ')) {
+        if (!announced) { announced = true; write(line); }
+        continue;
+      }
+      const percent = /\(\s*([0-9]+(?:\.[0-9]+)?)%\)/u.exec(line);
+      if (!percent) continue;
+      const step = Math.min(20, Math.floor(Number(percent[1]) / 5));
+      if (step > lastStep) { lastStep = step; write(line); }
+    }
+  };
+}
+
 export const runAstroqueryProcess: AstroqueryRunner = (python, env, request) => new Promise((done, fail) => {
   const child = spawn(python, ['-c', PYTHON], { env: { ...process.env, ...env }, stdio: ['pipe', 'pipe', 'pipe'] });
   let stdout = '', stderr = '';
+  const forwardProgress = mastProgress(line => process.stderr.write(`${line}\n`));
   child.stdout.setEncoding('utf8').on('data', chunk => { stdout += chunk; });
-  child.stderr.setEncoding('utf8').on('data', chunk => { stderr += chunk; });
+  child.stderr.setEncoding('utf8').on('data', chunk => {
+    stderr += chunk;
+    if (request.operation === 'mast-download') forwardProgress(chunk);
+  });
   child.on('error', fail);
   child.on('close', code => {
+    if (request.operation === 'mast-download') forwardProgress('', true);
     if (code !== 0) fail(new Error(`Astroquery ${request.operation} failed (status ${code}): ${stderr.slice(-4000)}`));
     else { try { done(JSON.parse(stdout)); } catch (error) { fail(new Error(`Astroquery ${request.operation} returned invalid JSON: ${String(error)}`)); } }
   });
