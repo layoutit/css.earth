@@ -24,13 +24,13 @@ page has no entry for them rather than a stand-in.
 
 ## JWST, NIRSpec: carbon dioxide on Europa
 
-![A longitude-latitude map of Europa in shades of brown and cream, four overlapping oval patches on a grey background](telescopes/jwst-nirspec-europa-carbon-dioxide.webp)
+![A longitude-latitude map of Europa in shades of brown and cream, overlapping oval patches on a grey background](telescopes/jwst-nirspec-europa-carbon-dioxide.webp)
 
-Four NIRSpec integral-field cubes of Europa, taken between 24 November 2022 and 17 November 2023 through G395H/F290LP,
-measured band by band and laid onto a longitude-latitude grid of the whole body. Brightness is the depth of the carbon
+Eight NIRSpec integral-field cubes of Europa through G395H/F290LP, from JWST programmes 1250, 4023 and 9230, measured
+band by band and laid onto a longitude-latitude grid of the whole body. Brightness is the depth of the carbon
 dioxide band near 4.25 microns, from 0 (black) to 0.18 (cream), linear. Row 1 is the north pole, column 1 starts at 0
 degrees east longitude, and east runs to the right. Grey is where no cube saw the surface, or saw it too obliquely to
-measure. The four bright patches are the four visits; the brightest is Tara Regio, on the leading hemisphere.
+measure. The bright patches are where the cubes looked; the brightest reaches a band depth of 0.18.
 
 `node tools/objects/jwst/cubes/author-body-maps.mts europa`
 
@@ -59,9 +59,9 @@ Hubble has three finished stages here, so all three are shown, small.
 
 ![A faint round glow in heavy grey noise](telescopes/hubble-stis-europa-aurora.webp)
 
-Every STIS far-ultraviolet visit to Europa from 1999 to 2015, 58.4 hours in all, summed on a grid fixed to the body at
-the oxygen line at 135.6 nm. Brightness is surface brightness in Rayleighs, from -20 R (black) to 200 R (white), linear;
-negative values are possible because the background is subtracted. The grid is 0.0496 Europa radii a pixel, body north
+One hundred and twelve STIS far-ultraviolet frames of Europa, 58.4 hours of exposure in all, summed on a grid fixed to
+the body at the oxygen line at 135.6 nm. Brightness is surface brightness in Rayleighs, from -20 R (black) to 200 R
+(white), linear; negative values are possible because the background is subtracted. The grid is 0.0496 Europa radii a pixel, body north
 up and celestial east left. Be careful with this one: the background scatters about 30 R either side of zero, so most of
 the frame is noise. What is real is the disc-shaped rise in the middle, which is the aurora.
 
@@ -71,11 +71,12 @@ the frame is noise. What is real is the disc-shaped rise in the middle, which is
 
 ![A longitude-latitude map in blue and cream, four overlapping circles on a grey background](telescopes/hubble-stis-europa-salt.webp)
 
-Four STIS CCD slit scans of Europa between 28 June and 29 August 2017, each scan stepped across the disc, turned into a
-longitude-latitude map. Colour is the strength of the 450 nm absorption attributed to sodium chloride, as an equivalent
-width in Angstroms, from -150 (dark blue) to 200 (cream), linear, on the stated blue-to-cream ramp. Row 1 is the north
+Four STIS CCD slit scans of Europa, on 23 May, 29 June, 1 August and 6 August 2017, each scan stepped across the disc,
+turned into a longitude-latitude map. Colour is the strength of the 450 nm absorption attributed to sodium chloride,
+as an equivalent width in Angstroms, from -150 (dark blue) to 200 (cream), linear, on the stated blue-to-cream ramp. Row 1 is the north
 pole, column 1 starts at 0 degrees east longitude, east to the right. Grey is where no scan reached, or where the
-surface was seen more than 60 degrees from face on. The leading hemisphere, on the right, is the strong side.
+surface was seen more than 60 degrees from face on. The strong side is the right-hand half of the map, around 270 degrees east longitude, the hemisphere that
+faces the direction Europa travels.
 
 `node tools/objects/hst/slit-scan-map.mts europa-salt-map .local/hst/europa-14650 output/europa-salt-map --mirror --receipt`
 
@@ -124,11 +125,11 @@ asinh softened at 8. One speck is one detected X-ray photon, so this is counts, 
 left.
 
 There is no nebula in this picture, and that is the observation, not the rendering. The programme is named CRAB NEBULA
-HALO and it points 10.5 arcminutes north of the Crab pulsar, so the nebula falls off the bottom of the array
-altogether. What fills the lower chips is the halo around it, rising steadily toward the nebula's direction. The dark
+HALO, and it is aimed at declination 22.189 degrees, about 10.5 arcminutes north of the Crab pulsar at 22.014 degrees,
+so the nebula falls off the bottom of the array altogether. What fills the lower chips is the halo around it, rising steadily toward the nebula's direction. The dark
 lines are the gaps between the four ACIS-I chips. Chandra's other finished product here, an object-centred Jupiter
-event list from HRC-I, was tried first and is background-dominated: its 990,546 events show no concentration at
-Jupiter's place at all, so it would have made a picture of nothing.
+event list from HRC-I, was tried first and is background-dominated: its 990,546 events show no concentration at the
+object-centred origin, so it would have made a picture of nothing.
 
 `node tools/objects/chandra/reprocess.mts m1-crab-halo 2798 .local/chandra/m1-crab-halo`
 
@@ -136,7 +137,7 @@ Jupiter's place at all, so it would have made a picture of nothing.
 
 ![A ring-shaped nebula among many stars, crossed by two vertical grey lines and a dotted arc](telescopes/spitzer-irac-ngc3132.webp)
 
-The IRAC channel 1 mosaic of NGC 3132 from 17 February 2004, re-made here from the archive's own level-1 frames.
+The IRAC channel 1 mosaic of NGC 3132, re-made here from the archive's own twelve level-1 frames of AOR 4416768.
 Brightness is surface brightness in MJy/sr, from 0.05 to 30, asinh softened at 0.2. The mosaic keeps the observation's
 own rotation: north lies 303.4 degrees and east 213.4 degrees clockwise from up, measured from the mosaic's own world
 coordinates, and the picture is the stored rows with the first at the bottom. The grey lines and the dotted arcs are
@@ -147,11 +148,11 @@ but faint.
 
 ## Juno, JunoCam: one strip set of Europa
 
-![Three horizontal strips of a cratered, criss-crossed icy surface, stacked, with a dark limb on the left](telescopes/juno-junocam-europa.webp)
+![Three horizontal strips of an icy surface criss-crossed by long ridges, stacked one above another](telescopes/juno-junocam-europa.webp)
 
 The JunoCam flyby of Europa on 29 September 2022, from 1,515 km up. This is the archive's calibrated push-frame image as
 the instrument records it, not a cast or projected picture: JunoCam builds colour by sweeping three filter strips across
-the scene as the spacecraft spins, and this is one set of three strips from frame 11, blue at the top, then green, then
+the scene as the spacecraft spins, and this is one set of three strips, from the eleventh frame of the image, blue at the top, then green, then
 red, in the order they were read out. Brightness is reflectance, from 0 to 0.30, linear. Nothing is rotated and the
 strips are not combined, which is why the same terrain repeats three times with a small shift. The window keeps 640 of
 the 1,648 columns, so the strips are cut at both ends. The JunoCam toolkit's cast stage, which would place these strips
