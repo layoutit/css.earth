@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-lab-reference-image@1",
+  "source": {
+    "id": "eso1119b",
+    "url": "https://cdn.eso.org/images/original/eso1119b.tif",
+    "sha256": "8df2e2ad462b9dc5b7437320fb2c6fd247c11746b4b2ffd3da95846b9083cad6",
+    "bytes": 555370438,
+    "width": 14540,
+    "height": 14540,
+    "publisherUrl": "https://www.eso.org/public/images/eso1119b/",
+    "credit": "ESO/INAF-VST/OmegaCAM. Acknowledgement: A. Grado, L. Limatola/INAF-Capodimonte Observatory",
+    "license": "CC-BY-4.0",
+    "output": {
+      "path": "labs/nebula/sources/omega-centauri-vst.webp",
+      "quality": 92,
+      "effort": 5,
+      "resizeWidth": 8192,
+      "sha256": "6e30ef43b59f2ca3a8ac076bc7f2e9b1da801b9665df027feb5e3018f331a1a8"
+    }
+  },
+  "interpretation": "Converted from the publisher's 8-bit TIFF to 8-bit sRGB WebP. Lossy display reference; never cropped. Reduced from 14540px to 8192px wide because libwebp cannot encode this source at native size; measure angular scale from the recorded native dimensions, not from this file. Original TIFF remains in the ignored cache.",
+  "outputBytes": 20914012
+}

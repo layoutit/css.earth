@@ -17,6 +17,6 @@
       "sha256": "3ed2fd1ae7729b860f00d2bd7d0c13b6a05f81c8d66e587e626cc4e2bac92698"
     }
   },
-  "interpretation": "Full spatial resolution, converted from publisher 16-bit TIFF to 8-bit sRGB WebP. Lossy display reference; no crop or resize. Original TIFF remains in the ignored cache.",
+  "interpretation": "Converted from the publisher's 16-bit TIFF to 8-bit sRGB WebP. Lossy display reference; never cropped. Full spatial resolution: not resized. Original TIFF remains in the ignored cache.",
   "outputBytes": 7072836
 }
