@@ -45,9 +45,18 @@ export function symmetricEigen(matrix: Float64Array, n: number) {
   const a = Float64Array.from(matrix), v = new Float64Array(n * n);
   for (let i = 0; i < n; i++) v[i * n + i] = 1;
   for (let sweep = 0; sweep < 100; sweep++) {
-    let off = 0;
-    for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) off += a[p * n + q]! ** 2;
-    if (off < 1e-30 * Math.max(1, a.reduce((sum, value) => sum + value * value, 0))) break;
+    // Measure convergence relative to the matrix itself. An absolute floor would declare a uniformly small, still non-diagonal
+    // matrix converged; scale before squaring so a uniformly large finite matrix cannot overflow the norm either.
+    let scale = 0;
+    for (const value of a) scale = Math.max(scale, Math.abs(value));
+    if (scale === 0) break;
+    let off = 0, norm = 0;
+    for (let p = 0; p < n; p++) for (let q = 0; q < n; q++) {
+      const scaled = a[p * n + q]! / scale;
+      norm += scaled * scaled;
+      if (q > p) off += scaled * scaled;
+    }
+    if (off < 1e-30 * norm) break;
     for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) {
       const apq = a[p * n + q]!;
       if (Math.abs(apq) < 1e-300) continue;
@@ -71,6 +80,39 @@ export function symmetricEigen(matrix: Float64Array, n: number) {
   return { values: order.map(i => a[i * n + i]!), vectors: order.map(i => Float64Array.from({ length: n }, (_, k) => v[k * n + i]!)) };
 }
 
+/** Decompose harmonic light curves with ThERESA's `[+L, -L]` truncated-SVD convention. The Gram eigenvalues are the squared
+ * singular values; coefficient and curve signs are arbitrary but paired. Exported so the numerical basis can be checked directly. */
+export function eigencurveBasis(harmonicCurves: readonly Float64Array[]) {
+  const h = harmonicCurves.length, samples = harmonicCurves[0]?.length ?? 0;
+  if (!h || !samples || harmonicCurves.some(curve => curve.length !== samples)) throw new RangeError('Harmonic curves must be a non-empty rectangular matrix.');
+  if (harmonicCurves.some(curve => curve.some(value => !Number.isFinite(value)))) throw new RangeError('Harmonic curves must contain only finite values.');
+  // ThERESA stacks each curve with its negative (2 per harmonic) and takes the right singular vectors of that matrix. The Gram
+  // matrix of [+L, -L] is [[G, -G], [-G, G]]; its eigenvectors are exactly those singular vectors.
+  const n = 2 * h, gram = new Float64Array(n * n);
+  for (let i = 0; i < h; i++) for (let j = i; j < h; j++) {
+    let dot = 0;
+    const a = harmonicCurves[i]!, b = harmonicCurves[j]!;
+    for (let t = 0; t < samples; t++) dot += a[t]! * b[t]!;
+    for (const [si, sj, sign] of [[0, 0, 1], [0, 1, -1], [1, 0, -1], [1, 1, 1]] as const) {
+      gram[(2 * i + si) * n + 2 * j + sj] = sign * dot; gram[(2 * j + sj) * n + 2 * i + si] = sign * dot;
+    }
+  }
+  if (gram.some(value => !Number.isFinite(value))) throw new RangeError('Harmonic-curve Gram matrix overflowed.');
+  const { values, vectors } = symmetricEigen(gram, n);
+  // Rank is at most the number of harmonics; round-off eigenvalues below this relative floor carry no curve.
+  const floor = Math.max(...values) * 1e-12;
+  const curves: Float64Array[] = [], eigenvalues: number[] = [], harmonicCoefficients: Float64Array[] = [];
+  for (let k = 0; k < n; k++) {
+    // A curve with no weight on the difference of a +/- pair is identically zero (the symmetric half of the spectrum).
+    const coefficients = Float64Array.from({ length: h }, (_, i) => vectors[k]![2 * i]! - vectors[k]![2 * i + 1]!);
+    if (coefficients.every(value => Math.abs(value) < 1e-9) || !(values[k]! > floor)) continue;
+    const curve = new Float64Array(samples);
+    for (let i = 0; i < h; i++) for (let t = 0; t < samples; t++) curve[t] += coefficients[i]! * harmonicCurves[i]![t]!;
+    curves.push(curve); eigenvalues.push(values[k]!); harmonicCoefficients.push(coefficients);
+  }
+  return { curves, eigenvalues, harmonicCoefficients };
+}
+
 /** Harmonic light curves, their eigencurves and eigenmaps for one observation. */
 /** `longitudeSymmetric` keeps only harmonics even in longitude about the substellar meridian (m >= 0): a map whose hot spot
  * sits on the substellar point, for data that measure the dayside and nightside but not an offset. */
@@ -83,33 +125,11 @@ export function eigenBasis(lmax: number, grid: MapGrid, orbit: HostedOrbit, host
   const [uniform, ...harmonicCurves] = mapBasisCurves([uniformMap, ...intensity], grid, orbit, host, planetRadiusStellarRadii, timesBmjd, visible, lightTravel);
   // A harmonic odd in longitude (m < 0, sin m*lon) contributes no curve, so no eigencurve carries it and its coefficient is 0.
   if (longitudeSymmetric) order.forEach(([, m], index) => { if (m < 0) harmonicCurves[index]!.fill(0); });
-  // ThERESA stacks each curve with its negative (2 per harmonic) and takes the right singular vectors of that matrix. The Gram
-  // matrix of [+L, -L] is [[G, -G], [-G, G]]; its eigenvectors are exactly those singular vectors.
-  const h = order.length, n = 2 * h, gram = new Float64Array(n * n);
-  for (let i = 0; i < h; i++) for (let j = i; j < h; j++) {
-    let dot = 0;
-    const a = harmonicCurves[i]!, b = harmonicCurves[j]!;
-    for (let t = 0; t < a.length; t++) dot += a[t]! * b[t]!;
-    for (const [si, sj, sign] of [[0, 0, 1], [0, 1, -1], [1, 0, -1], [1, 1, 1]] as const) {
-      gram[(2 * i + si) * n + 2 * j + sj] = sign * dot; gram[(2 * j + sj) * n + 2 * i + si] = sign * dot;
-    }
-  }
-  const { values, vectors } = symmetricEigen(gram, n);
-  // Rank is at most the number of harmonics; round-off eigenvalues below this relative floor carry no curve.
-  const floor = Math.max(...values) * 1e-12;
-  const curves: Float64Array[] = [], maps: Float64Array[] = [], eigenvalues: number[] = [], harmonicCoefficients: Float64Array[] = [];
-  for (let k = 0; k < n; k++) {
-    // A curve with no weight on the difference of a +/- pair is identically zero (the symmetric half of the spectrum).
-    const coefficients = Float64Array.from({ length: h }, (_, i) => vectors[k]![2 * i]! - vectors[k]![2 * i + 1]!);
-    if (coefficients.every(value => Math.abs(value) < 1e-9) || !(values[k]! > floor)) continue;
-    const curve = new Float64Array(timesBmjd.length), map = new Float64Array(cells);
-    for (let i = 0; i < h; i++) {
-      const weight = vectors[k]![2 * i]!, antiweight = vectors[k]![2 * i + 1]!;
-      for (let t = 0; t < curve.length; t++) curve[t] += (weight - antiweight) * harmonicCurves[i]![t]!;
-      for (let c = 0; c < cells; c++) map[c] += coefficients[i]! * intensity[i]![c]!;
-    }
-    curves.push(curve); maps.push(map); eigenvalues.push(values[k]!); harmonicCoefficients.push(coefficients);
-  }
+  const { curves, eigenvalues, harmonicCoefficients } = eigencurveBasis(harmonicCurves), maps = harmonicCoefficients.map(coefficients => {
+    const map = new Float64Array(cells);
+    for (let i = 0; i < coefficients.length; i++) for (let c = 0; c < cells; c++) map[c] += coefficients[i]! * intensity[i]![c]!;
+    return map;
+  });
   return { lmax, grid, uniform, curves, maps, eigenvalues, harmonicCoefficients, visible };
 }
 

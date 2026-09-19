@@ -8,6 +8,7 @@ are older standalone audits; the groups below are fixture oracles.
 
 | Oracle | Verifies | Script | Comparing test |
 | --- | --- | --- | --- |
+| NumPy SVD, following pinned ThERESA source | `eigenmap-fit.mts`: signed harmonic curves, scale-independent eigencurve ordering, eigenmap coefficients and rejection of the null spectrum; comparisons are invariant to arbitrary eigenvector signs | `eclipse-map/theresa-eigenbasis.py` | `tools/objects/eclipse-map/eigenmap-fit.oracle.test.mts` |
 | [Native SBMT](sbmt/README.md) | SUM/INFO pointing, PDS vertex-facet geometry, visibility, FITS samples and image-to-mesh UV projection; differences remain explicit | `sbmt/projection.mts` | `sbmt/projection.test.mts` |
 | SpiceyPy (CSPICE N0067) | `tools/spice/`: leap seconds, TDB, SCLK, SPK states with `NONE`, `LT`, `LT+S`, `CN`, `CN+S`, every frame class, and where the DRACO camera places archived intercepts (read with pds4_tools) | `spice/dart-draco.py` | `tools/spice/oracle.test.mts` |
 | pds4_tools | `pds4-geometry-cube.mts`: every label-defined plane of the DART DRACO cube, values, flags and unit conversions | `pds/dart-draco-cube.py` | `pds4-geometry-cube.oracle.test.mts` |
