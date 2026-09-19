@@ -1,0 +1,112 @@
+{
+  "schema": "cssearth-chandra-solar-system@1",
+  "program": "jupiter-hrci",
+  "obsid": 18676,
+  "target": "Jupiter",
+  "instrument": "HRC/HRC-I",
+  "toolchain": "tools/objects/chandra/toolchain.json",
+  "reprocessedWith": {
+    "ciao": "CIAO 4.18.0 Monday, December 08, 2025",
+    "caldb": "4.12.4"
+  },
+  "ssoFreezeSeconds": 2.9,
+  "ephemerides": {
+    "spacecraft": "primary/orbitf606917105N001_eph1.fits.gz",
+    "body": "primary/jupiterf606960000N001_eph1.fits.gz",
+    "aspect": "primary/pcadf18676_000N001_asol1.fits.gz"
+  },
+  "observation": {
+    "start": "2017-03-27T08:32:05",
+    "stop": "2017-03-27T11:39:19",
+    "events": 990546
+  },
+  "horizons": {
+    "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27599%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=OBSERVER&CENTER=%27500%40-151%27&START_TIME=%272017-03-27+08%3A32%27&STOP_TIME=%272017-03-27+11%3A39%27&STEP_SIZE=1&QUANTITIES=%271%2C13%27",
+    "observer": "500@-151",
+    "centreBody": "Chandra Observatory (spacecraft) (-151) {source: CHANDRA_MERGED}",
+    "rows": 2,
+    "motionArcseconds": 54.59,
+    "startRaDeg": 198.569625,
+    "startDecDeg": -6.168556,
+    "angularDiameterArcseconds": 44.014939999999996,
+    "spreadArcseconds": 0.005019999999994695,
+    "angularRadiusSkyPixels": 166.976,
+    "skyPixelArcseconds": 0.1318
+  },
+  "objectCentred": {
+    "file": "hrcf18676_repro_evt2.fits",
+    "columns": [
+      "ocx",
+      "ocy"
+    ],
+    "by": "chandra_repro",
+    "sha256": "333150767c8653f98c816dceba06773cd592de53d82ed909331d41df9dee6451",
+    "backgroundPerSquareArcsecond": 0.30199197753481727,
+    "centroidOffsetArcseconds": 1.065398770622483,
+    "enclosed": {
+      "r1": {
+        "counts": 491,
+        "excess": 31.5
+      },
+      "r1.5": {
+        "counts": 1134,
+        "excess": 100.1
+      },
+      "r2": {
+        "counts": 1965,
+        "excess": 127
+      }
+    },
+    "excessShareWithinOneRadius": 0.24803149606299213
+  },
+  "objectCentredFromArchive": {
+    "file": "18676_frozen_evt2.fits",
+    "columns": [
+      "ocx",
+      "ocy"
+    ],
+    "by": "sso_freeze on the archive's level-2 list",
+    "sha256": "14241c4bcce7a4a33e93b5c9c2596ff279436ef90457b346f1059dc1b2e61da6",
+    "backgroundPerSquareArcsecond": 0.30199197753481727,
+    "centroidOffsetArcseconds": 1.065398770622483,
+    "enclosed": {
+      "r1": {
+        "counts": 491,
+        "excess": 31.5
+      },
+      "r1.5": {
+        "counts": 1134,
+        "excess": 100.1
+      },
+      "r2": {
+        "counts": 1965,
+        "excess": 127
+      }
+    },
+    "excessShareWithinOneRadius": 0.24803149606299213
+  },
+  "fixedSky": {
+    "file": "hrcf18676_repro_evt2.fits",
+    "columns": [
+      "x",
+      "y"
+    ],
+    "backgroundPerSquareArcsecond": 0.30255183047346235,
+    "centroidOffsetArcseconds": 0.21308147680967374,
+    "enclosed": {
+      "r1": {
+        "counts": 464,
+        "excess": 3.6
+      },
+      "r1.5": {
+        "counts": 1119,
+        "excess": 83.2
+      },
+      "r2": {
+        "counts": 2008,
+        "excess": 166.6
+      }
+    },
+    "excessShareWithinOneRadius": 0.021898621609604603
+  }
+}

@@ -1,0 +1,299 @@
+{
+  "schema": "cssearth-chandra-reproduction@1",
+  "program": "polaris-vfaint",
+  "obsid": 6431,
+  "product": "acisf06431N003_evt2",
+  "instrument": "ACIS/ACIS-012367",
+  "grating": "NONE",
+  "dataMode": "TIMED/VFAINT",
+  "target": "Polaris",
+  "toolchain": "tools/objects/chandra/toolchain.json",
+  "reprocessedWith": {
+    "ciao": "CIAO 4.18.0 Monday, December 08, 2025",
+    "caldb": "4.12.4"
+  },
+  "archive": {
+    "path": "primary/acisf06431N003_evt2.fits.gz",
+    "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/primary/acisf06431N003_evt2.fits.gz",
+    "bytes": 2486220,
+    "sha256": "14d5d8da4fcf108a7ec6d3d5ee8db31ed7e641ba8f66a52f7671322b928ce0e5",
+    "CREATOR": "cxc - Version DS10.9",
+    "ASCDSVER": "10.9.2",
+    "REVISION": 3,
+    "DATE": "2020-12-08T19:33:28",
+    "CALDBVER": "4.9.3",
+    "RAND_SKY": 0,
+    "RAND_PI": 1,
+    "CTI_CORR": true,
+    "CTI_APP": "PPPPPBPBPP",
+    "TGAINCOR": "T",
+    "TGAINFIL": "acisD2006-02-01t_gainN0008.fits",
+    "GRD_FILE": "acisD1996-11-01gradeN0004.fits",
+    "GAINFILE": "acisD2000-01-29gain_ctiN0008.fits",
+    "CTIFILE": "acisD2005-01-01ctiN0009.fits",
+    "THRFILE": "acisD2005-07-01evtspltN0002.fits",
+    "SUBPIXFL": "acisD1999-07-22subpixN0001.fits",
+    "PIX_ADJ": "EDSER",
+    "DTCOR": 0.98733739787229,
+    "ONTIME": 9954.4189418852,
+    "LIVETIME": 9828.3700954116,
+    "EXPOSURE": 9828.3700954116
+  },
+  "local": {
+    "name": "acisf06431_repro_evt2.fits",
+    "bytes": 7248960,
+    "sha256": "c9c4a87f585f1ae67ca82631677f5ec55ea0f36fe734976fa0d1fc07157552cd",
+    "CREATOR": "acis_process_events - CIAO 4.18.0",
+    "ASCDSVER": "CIAO 4.18.0",
+    "REVISION": 3,
+    "DATE": "2026-09-19T05:47:25",
+    "CALDBVER": "4.9.3",
+    "RAND_SKY": 0,
+    "RAND_PI": 1,
+    "CTI_CORR": true,
+    "CTI_APP": "PPPPPBPBPP",
+    "TGAINCOR": "T",
+    "TGAINFIL": "acisD2006-02-01t_gainN0008.fits",
+    "GRD_FILE": "acisD1996-11-01gradeN0004.fits",
+    "GAINFILE": "acisD2000-01-29gain_ctiN0008.fits",
+    "CTIFILE": "acisD2005-01-01ctiN0012.fits",
+    "THRFILE": "acisD2005-07-01evtspltN0002.fits",
+    "SUBPIXFL": "acisD1999-07-22subpixN0001.fits",
+    "PIX_ADJ": "EDSER",
+    "DTCOR": 0.98733739787229,
+    "ONTIME": 9956.3842176199,
+    "LIVETIME": 9830.3104856416,
+    "EXPOSURE": 9830.3104856416
+  },
+  "differentCards": {
+    "ASCDSVER": {
+      "ours": "CIAO 4.18.0",
+      "archive": "10.9.2"
+    },
+    "CTIFILE": {
+      "ours": "acisD2005-01-01ctiN0012.fits",
+      "archive": "acisD2005-01-01ctiN0009.fits"
+    },
+    "BPIXFILE": {
+      "ours": "acisf06431_repro_bpix1.fits",
+      "archive": "acisf06431_001N003_bpix1.fits"
+    },
+    "FLTFILE": {
+      "ours": "acisf06431_repro_flt2.fits",
+      "archive": "acisf06431_001N003_flt1.fits"
+    }
+  },
+  "events": {
+    "key": [
+      "ccd_id",
+      "expno",
+      "chipx",
+      "chipy"
+    ],
+    "ours": 62499,
+    "archive": 62471,
+    "matched": 62471,
+    "onlyOurs": 28,
+    "onlyArchive": 0
+  },
+  "sky": {
+    "matched": 62471,
+    "identical": 58692,
+    "identicalShare": 0.9395079316802997,
+    "skyPixels": {
+      "median": 0,
+      "p99": 0.0006905339660024879,
+      "largest": 0.4212475101386044
+    },
+    "arcseconds": {
+      "median": 0,
+      "p99": 0.00033974271127322405,
+      "largest": 0.20725377498819336
+    }
+  },
+  "binnedImage": {
+    "blockSkyPixels": 4,
+    "shape": [
+      983,
+      693
+    ],
+    "bins": 681219,
+    "occupiedBins": 53581,
+    "identicalBins": 681189,
+    "identicalShare": 0.9999559612987894,
+    "counts": {
+      "ours": 62499,
+      "archive": 62471
+    },
+    "largestBinDifference": 1,
+    "totalAbsoluteBinDifference": 30
+  },
+  "columns": [
+    {
+      "column": "time",
+      "matched": 62471,
+      "identical": 62471,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "node_id",
+      "matched": 62471,
+      "identical": 62471,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "tdetx",
+      "matched": 62471,
+      "identical": 62471,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "tdety",
+      "matched": 62471,
+      "identical": 62471,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "detx",
+      "matched": 62471,
+      "identical": 60735,
+      "identicalShare": 0.9722111059531623,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0.00048828125,
+        "largest": 0.4208984375
+      }
+    },
+    {
+      "column": "dety",
+      "matched": 62471,
+      "identical": 60862,
+      "identicalShare": 0.9742440492388468,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0.00048828125,
+        "largest": 0.03271484375
+      }
+    },
+    {
+      "column": "x",
+      "matched": 62471,
+      "identical": 59769,
+      "identicalShare": 0.9567479310400026,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0.00048828125,
+        "largest": 0.12158203125
+      }
+    },
+    {
+      "column": "y",
+      "matched": 62471,
+      "identical": 60439,
+      "identicalShare": 0.9674729074290471,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0.00048828125,
+        "largest": 0.4033203125
+      }
+    },
+    {
+      "column": "pha",
+      "matched": 62471,
+      "identical": 40223,
+      "identicalShare": 0.6438667541739367,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 1,
+        "largest": 13
+      }
+    },
+    {
+      "column": "pha_ro",
+      "matched": 62471,
+      "identical": 62471,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "energy",
+      "matched": 62471,
+      "identical": 14,
+      "identicalShare": 0.00022410398424869138,
+      "absoluteDifference": {
+        "median": 1.9833984375,
+        "p99": 8.013671875,
+        "largest": 52.44140625
+      }
+    },
+    {
+      "column": "pi",
+      "matched": 62471,
+      "identical": 52132,
+      "identicalShare": 0.8344992076323414,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 1,
+        "largest": 4
+      }
+    },
+    {
+      "column": "fltgrade",
+      "matched": 62471,
+      "identical": 62470,
+      "identicalShare": 0.9999839925725537,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 64
+      }
+    },
+    {
+      "column": "grade",
+      "matched": 62471,
+      "identical": 62470,
+      "identicalShare": 0.9999839925725537,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 2
+      }
+    },
+    {
+      "column": "status",
+      "matched": 62471,
+      "identical": 62471,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    }
+  ],
+  "columnsOnOneSide": []
+}

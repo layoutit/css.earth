@@ -1,0 +1,295 @@
+{
+  "schema": "cssearth-chandra-reproduction@1",
+  "program": "m1-crab-halo",
+  "obsid": 2798,
+  "product": "acisf02798N004_evt2",
+  "instrument": "ACIS/ACIS-0123",
+  "grating": "NONE",
+  "dataMode": "TIMED/FAINT",
+  "target": "CRAB NEBULA HALO",
+  "toolchain": "tools/objects/chandra/toolchain.json",
+  "reprocessedWith": {
+    "ciao": "CIAO 4.18.0 Monday, December 08, 2025",
+    "caldb": "4.12.4"
+  },
+  "archive": {
+    "path": "primary/acisf02798N004_evt2.fits.gz",
+    "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/8/2798/primary/acisf02798N004_evt2.fits.gz",
+    "bytes": 29335902,
+    "sha256": "8b473d7eca58a6c3c4bf484dddd8ddce7923410b819d44fe14d45462d1d60ef1",
+    "CREATOR": "cxc - Version DS10.9",
+    "ASCDSVER": "10.9.4",
+    "REVISION": 4,
+    "DATE": "2021-03-26T21:28:37",
+    "CALDBVER": "4.9.4",
+    "RAND_SKY": 0,
+    "RAND_PI": 1,
+    "CTI_CORR": true,
+    "CTI_APP": "PPPPPBPBPP",
+    "TGAINCOR": "T",
+    "TGAINFIL": "acisD2002-02-01t_gainN0008.fits",
+    "GRD_FILE": "acisD1996-11-01gradeN0004.fits",
+    "GAINFILE": "acisD2000-01-29gain_ctiN0008.fits",
+    "CTIFILE": "acisD2000-01-29ctiN0009.fits",
+    "THRFILE": "acisD1996-11-01evtspltN0002.fits",
+    "SUBPIXFL": "acisD1999-07-22subpixN0001.fits",
+    "PIX_ADJ": "EDSER",
+    "DTCOR": 0.98693426381071,
+    "ONTIME": 20244.807130635,
+    "LIVETIME": 19980.293821463,
+    "EXPOSURE": 19980.293821463
+  },
+  "local": {
+    "name": "acisf02798_repro_evt2.fits",
+    "bytes": 68607360,
+    "sha256": "e5ca207bbd8fe6a5541a2faf2dbc71a6d343e1bbed3b5567931e48e4d80594a9",
+    "CREATOR": "acis_process_events - CIAO 4.18.0",
+    "ASCDSVER": "CIAO 4.18.0",
+    "REVISION": 4,
+    "DATE": "2026-09-19T04:00:34",
+    "CALDBVER": "4.9.4",
+    "RAND_SKY": 0,
+    "RAND_PI": 1,
+    "CTI_CORR": true,
+    "CTI_APP": "PPPPPBPBPP",
+    "TGAINCOR": "T",
+    "TGAINFIL": "acisD2002-02-01t_gainN0008.fits",
+    "GRD_FILE": "acisD1996-11-01gradeN0004.fits",
+    "GAINFILE": "acisD2000-01-29gain_ctiN0008.fits",
+    "CTIFILE": "acisD2000-01-29ctiN0009.fits",
+    "THRFILE": "acisD1996-11-01evtspltN0002.fits",
+    "SUBPIXFL": "acisD1999-07-22subpixN0001.fits",
+    "PIX_ADJ": "EDSER",
+    "DTCOR": 0.98693426381071,
+    "ONTIME": 20246.884893566,
+    "LIVETIME": 19982.344436892,
+    "EXPOSURE": 19982.344436892
+  },
+  "differentCards": {
+    "ASCDSVER": {
+      "ours": "CIAO 4.18.0",
+      "archive": "10.9.4"
+    },
+    "BPIXFILE": {
+      "ours": "acisf02798_repro_bpix1.fits",
+      "archive": "acisf02798_002N004_bpix1.fits"
+    },
+    "FLTFILE": {
+      "ours": "acisf02798_repro_flt2.fits",
+      "archive": "acisf02798_002N004_flt1.fits"
+    }
+  },
+  "events": {
+    "key": [
+      "ccd_id",
+      "expno",
+      "chipx",
+      "chipy"
+    ],
+    "ours": 835316,
+    "archive": 835193,
+    "matched": 835193,
+    "onlyOurs": 123,
+    "onlyArchive": 0
+  },
+  "sky": {
+    "matched": 835193,
+    "identical": 799793,
+    "identicalShare": 0.9576145872870103,
+    "skyPixels": {
+      "median": 0,
+      "p99": 0.00048828125,
+      "largest": 0.4680944945680083
+    },
+    "arcseconds": {
+      "median": 0,
+      "p99": 0.000240234375,
+      "largest": 0.23030249132746006
+    }
+  },
+  "binnedImage": {
+    "blockSkyPixels": 3,
+    "shape": [
+      722,
+      719
+    ],
+    "bins": 519118,
+    "occupiedBins": 284461,
+    "identicalBins": 518987,
+    "identicalShare": 0.9997476488967826,
+    "counts": {
+      "ours": 835316,
+      "archive": 835193
+    },
+    "largestBinDifference": 1,
+    "totalAbsoluteBinDifference": 131
+  },
+  "columns": [
+    {
+      "column": "time",
+      "matched": 835193,
+      "identical": 835193,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "node_id",
+      "matched": 835193,
+      "identical": 835193,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "tdetx",
+      "matched": 835193,
+      "identical": 835193,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "tdety",
+      "matched": 835193,
+      "identical": 835193,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "detx",
+      "matched": 835193,
+      "identical": 811186,
+      "identicalShare": 0.9712557456779451,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0.000244140625,
+        "largest": 0.468017578125
+      }
+    },
+    {
+      "column": "dety",
+      "matched": 835193,
+      "identical": 819647,
+      "identicalShare": 0.9813863382475667,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0.000244140625,
+        "largest": 0.03515625
+      }
+    },
+    {
+      "column": "x",
+      "matched": 835193,
+      "identical": 820718,
+      "identicalShare": 0.982668676581341,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0.000244140625,
+        "largest": 0.033935546875
+      }
+    },
+    {
+      "column": "y",
+      "matched": 835193,
+      "identical": 810622,
+      "identicalShare": 0.9705804526618398,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0.000244140625,
+        "largest": 0.4677734375
+      }
+    },
+    {
+      "column": "pha",
+      "matched": 835193,
+      "identical": 534068,
+      "identicalShare": 0.6394545931299711,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 1,
+        "largest": 13
+      }
+    },
+    {
+      "column": "pha_ro",
+      "matched": 835193,
+      "identical": 835193,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "energy",
+      "matched": 835193,
+      "identical": 25,
+      "identicalShare": 0.000029933201068495546,
+      "absoluteDifference": {
+        "median": 1.8232421875,
+        "p99": 7.1893310546875,
+        "largest": 50.851318359375
+      }
+    },
+    {
+      "column": "pi",
+      "matched": 835193,
+      "identical": 706441,
+      "identicalShare": 0.8458416198411625,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 1,
+        "largest": 4
+      }
+    },
+    {
+      "column": "fltgrade",
+      "matched": 835193,
+      "identical": 835188,
+      "identicalShare": 0.9999940133597863,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 128
+      }
+    },
+    {
+      "column": "grade",
+      "matched": 835193,
+      "identical": 835189,
+      "identicalShare": 0.999995210687829,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 3
+      }
+    },
+    {
+      "column": "status",
+      "matched": 835193,
+      "identical": 835193,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    }
+  ],
+  "columnsOnOneSide": []
+}

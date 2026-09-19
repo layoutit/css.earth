@@ -1,0 +1,254 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { obsidDirectory, parseChandraProgram, parseCxcRows, PROGRAMS, refuseObservation, REFUSED_MODES } from './archive.mts';
+import { isObjectPointing, LEDGER, ledgerGuide, GUIDE, objectBox, OBJECT_RADIUS_DEGREES, MOVING_TARGETS } from './archive-ledger.mts';
+import { compareBinnedImage, eventKeys, matchEvents } from './compare.mts';
+import { column, eventTable, requireEventColumn, scalar } from './events.mts';
+
+const BLOCK = 2880, CARD = 80;
+const card = (key: string, value: string) => `${key.padEnd(8)}= ${value}`.padEnd(CARD).slice(0, CARD);
+const pad = (bytes: Buffer) => Buffer.concat([bytes, Buffer.alloc((BLOCK - bytes.length % BLOCK) % BLOCK)]);
+const headerBlock = (cards: readonly string[]) => {
+  const text = [...cards, 'END'.padEnd(CARD)].join('');
+  return Buffer.from(text.padEnd(Math.ceil(text.length / BLOCK) * BLOCK, ' '), 'latin1');
+};
+
+/** A small ACIS-shaped event list: the columns a comparison keys on and reads, including the 32-bit status column the shared
+ * table reader does not cover. */
+interface SyntheticEvent { time: number; ccd_id: number; expno: number; chipx: number; chipy: number; x: number; y: number; energy: number; pi: number; status: number }
+function eventFile(rows: readonly SyntheticEvent[], extra: readonly string[] = []) {
+  const columns: [string, string, number][] = [['time', '1D', 8], ['ccd_id', '1I', 2], ['expno', '1J', 4], ['chipx', '1I', 2], ['chipy', '1I', 2],
+    ['x', '1E', 4], ['y', '1E', 4], ['energy', '1E', 4], ['pi', '1J', 4], ['status', '32X', 4]];
+  const rowBytes = columns.reduce((total, [, , bytes]) => total + bytes, 0);
+  const primary = headerBlock([card('SIMPLE', 'T'), card('BITPIX', '8'), card('NAXIS', '0'), card('EXTEND', 'T')]);
+  const cards = [card('XTENSION', "'BINTABLE'"), card('BITPIX', '8'), card('NAXIS', '2'), card('NAXIS1', String(rowBytes)),
+    card('NAXIS2', String(rows.length)), card('PCOUNT', '0'), card('GCOUNT', '1'), card('TFIELDS', String(columns.length)),
+    card('EXTNAME', "'EVENTS  '"), ...extra];
+  columns.forEach(([name, form], index) => { cards.push(card(`TTYPE${index + 1}`, `'${name.padEnd(8)}'`), card(`TFORM${index + 1}`, `'${form.padEnd(8)}'`)); });
+  const data = Buffer.alloc(rows.length * rowBytes);
+  rows.forEach((row, index) => {
+    let at = index * rowBytes;
+    data.writeDoubleBE(row.time, at); at += 8;
+    data.writeInt16BE(row.ccd_id, at); at += 2;
+    data.writeInt32BE(row.expno, at); at += 4;
+    data.writeInt16BE(row.chipx, at); at += 2;
+    data.writeInt16BE(row.chipy, at); at += 2;
+    data.writeFloatBE(row.x, at); at += 4;
+    data.writeFloatBE(row.y, at); at += 4;
+    data.writeFloatBE(row.energy, at); at += 4;
+    data.writeInt32BE(row.pi, at); at += 4;
+    data.writeUInt32BE(row.status, at);
+  });
+  return Buffer.concat([primary, headerBlock(cards), pad(data)]);
+}
+const event = (overrides: Partial<SyntheticEvent> = {}): SyntheticEvent =>
+  ({ time: 135198945.4, ccd_id: 3, expno: 1, chipx: 100, chipy: 200, x: 4000, y: 4100, energy: 1000, pi: 70, status: 0, ...overrides });
+
+test('an event list reads its scalar columns, including the 32-bit status column', () => {
+  const bytes = eventFile([event(), event({ expno: 2, chipx: 101, status: 0x80000001, pi: 71, x: 4001.5 })]);
+  const table = eventTable(bytes);
+  assert.equal(table.rows, 2);
+  assert.equal(table.rowBytes, 38);
+  assert.equal(requireEventColumn(table, 'status').repeat, 32);
+  assert.equal(requireEventColumn(table, 'status').bytes, 4);
+  assert.deepEqual([...column(bytes, table, 'status')], [0, 0x80000001]);
+  assert.deepEqual([...column(bytes, table, 'ccd_id')], [3, 3]);
+  assert.deepEqual([...column(bytes, table, 'pi')], [70, 71]);
+  assert.equal(scalar(bytes, table, 1, requireEventColumn(table, 'x')), 4001.5);
+  assert.throws(() => requireEventColumn(table, 'chip_id'), /no chip_id column/u);
+});
+
+test('an event list that states a TSCAL is refused, because an event list carries none', () => {
+  assert.throws(() => eventTable(eventFile([event()], [card('TSCAL9', '2.0')])), /TSCAL or TZERO/u);
+});
+
+test('the same event keys the same in both lists, whatever range each list happens to span', () => {
+  // The re-run's list holds an event on ccd 1 that the archive's does not, so the two lists span different values. A key packed
+  // from each list's own bounds would then key the shared events differently, and half of them would not match.
+  const shared = [event({ ccd_id: 3, expno: 5, chipx: 100, chipy: 200 }), event({ ccd_id: 3, expno: 9, chipx: 301, chipy: 402 })];
+  const ours = { bytes: eventFile([...shared, event({ ccd_id: 1, expno: 2, chipx: 7, chipy: 9 })]), table: undefined as unknown as ReturnType<typeof eventTable> };
+  const theirs = { bytes: eventFile(shared), table: undefined as unknown as ReturnType<typeof eventTable> };
+  ours.table = eventTable(ours.bytes);
+  theirs.table = eventTable(theirs.bytes);
+  const [ourKeys, theirKeys] = eventKeys([ours, theirs], ['ccd_id', 'expno', 'chipx', 'chipy']) as [Float64Array, Float64Array];
+  assert.equal(ourKeys[0], theirKeys[0]);
+  assert.equal(ourKeys[1], theirKeys[1]);
+  const match = matchEvents(ourKeys, theirKeys, ['ccd_id', 'expno', 'chipx', 'chipy']);
+  assert.equal(match.ourRows.length, 2);
+  assert.equal(match.onlyOurs, 1);
+  assert.equal(match.onlyArchive, 0);
+});
+
+test('events are matched on what the instrument telemetered, and a repeated key is refused', () => {
+  const ours = Float64Array.from([10, 20, 30, 40]), theirs = Float64Array.from([20, 30, 50]);
+  const match = matchEvents(ours, theirs, ['ccd_id', 'expno', 'chipx', 'chipy']);
+  assert.deepEqual(match.ourRows, [1, 2]);
+  assert.deepEqual(match.theirRows, [0, 1]);
+  assert.equal(match.onlyOurs, 2);
+  assert.equal(match.onlyArchive, 1);
+  assert.throws(() => matchEvents(Float64Array.from([10, 10]), Float64Array.from([10]), ['chipx']), /the re-run's list repeats one/u);
+  assert.throws(() => matchEvents(Float64Array.from([10]), Float64Array.from([10, 10]), ['chipx']), /the archive's list repeats one/u);
+});
+
+test('two identical event lists bin to the same counts image', () => {
+  const xs = Float64Array.from([4000, 4000, 4008, 5000]), ys = Float64Array.from([4100, 4100, 4108, 5000]);
+  const same = compareBinnedImage(xs, ys, xs, ys);
+  assert.equal(same.counts.ours, 4);
+  assert.equal(same.counts.archive, 4);
+  assert.equal(same.identicalShare, 1);
+  assert.equal(same.largestBinDifference, 0);
+  assert.equal(same.totalAbsoluteBinDifference, 0);
+  // One event moved a long way lands in another bin: the bin it left and the bin it reached each differ by one count.
+  const moved = compareBinnedImage(Float64Array.from([4000, 4000, 4008, 4000]), Float64Array.from([4100, 4100, 4108, 5000]), xs, ys);
+  assert.equal(moved.counts.ours, 4);
+  assert.equal(moved.largestBinDifference, 1);
+  assert.equal(moved.totalAbsoluteBinDifference, 2);
+});
+
+const file = (path: string, bytes = 1000) => ({ path, url: `${obsidDirectory(2798)}/${path}`, bytes });
+const program = (overrides: Record<string, unknown> = {}) => ({
+  schema: 'cssearth-chandra-program@1', id: 'test', target: 'CRAB NEBULA HALO',
+  observations: [{ obsid: 2798, instrument: 'ACIS', detector: 'ACIS-0123', grating: 'NONE', readMode: 'TIMED', dataMode: 'FAINT',
+    targetName: 'CRAB NEBULA HALO', proposalNumber: '03500419', sequenceNumber: '500248', startDate: '2002-04-14T18:59:35',
+    startMet: 135198038.89914, stopMet: 135220053.33754, livetimeSeconds: 19980.293821463, catalogueExposureSeconds: 19980.293821463, datasetDoi: '10.25574/02798', ascdsVersion: '10.9.4',
+    processing: { CTI_CORR: 'T', RAND_PI: '1.0' },
+    inputs: [file('secondary/acisf02798_002N004_evt1.fits.gz'), file('primary/acisf02798_002N004_bpix1.fits.gz')],
+    products: [file('primary/acisf02798N004_evt2.fits.gz')] }],
+  ...overrides,
+});
+const observation = (overrides: Record<string, unknown> = {}) => program({ observations: [{ ...program().observations[0], ...overrides }] });
+
+test('a program pins level-1 inputs and the archive’s level-2 products, and refuses anything else', () => {
+  const parsed = parseChandraProgram(program());
+  assert.equal(parsed.observations[0]?.obsid, 2798);
+  assert.equal(parsed.observations[0]?.inputs.length, 2);
+  assert.throws(() => parseChandraProgram(observation({ inputs: [file('primary/acisf02798_002N004_bpix1.fits.gz')] })), /pins the level-1 event list/u);
+  assert.throws(() => parseChandraProgram(observation({ products: [] })), /pins the archive's level-2 event list/u);
+  assert.throws(() => parseChandraProgram(observation({ inputs: [...observation().observations[0]!.inputs, file('primary/acisf02798N004_evt2.fits.gz')] })),
+    /level-2 product is pinned as an input/u);
+  assert.throws(() => parseChandraProgram(observation({ products: [file('primary/acisf02798N004_evt2.fits.gz'), file('secondary/acisf02798_002N004_flt1.fits.gz')] })),
+    /products are the archive's level-2 products/u);
+  // A file the archive does not keep under the obsid, and a file pinned twice.
+  assert.throws(() => parseChandraProgram(observation({ inputs: [{ path: 'elsewhere/evt1.fits.gz', url: 'https://example.invalid/evt1.fits.gz', bytes: 1 }] })), /Invalid archive file/u);
+  assert.throws(() => parseChandraProgram(observation({ inputs: [file('secondary/acisf02798_002N004_evt1.fits.gz'), file('secondary/acisf02798_002N004_evt1.fits.gz')] })), /appears twice/u);
+  assert.throws(() => parseChandraProgram(observation({ livetimeSeconds: 1e6 })), /livetime does not fit/u);
+  assert.throws(() => parseChandraProgram({ ...program(), schema: 'cssearth-chandra-program@2' }), /Unsupported Chandra program/u);
+});
+
+test('the archive’s tab-separated answer reads as rows, and its refusal as an error', () => {
+  const rows = parseCxcRows(['# obsid\t\tChandra observation identifier', '# instrument\t\tInstrument', 'obsid\tinstrument',
+    '2798\tACIS-I', '168\tACIS-S'].join('\n'));
+  assert.deepEqual(rows, [{ obsid: '2798', instrument: 'ACIS-I' }, { obsid: '168', instrument: 'ACIS-S' }]);
+  assert.throws(() => parseCxcRows('<INFO name="QUERY_STATUS" value="ERROR">error parsing ADQL query</INFO>'), /refused the query/u);
+  assert.throws(() => parseCxcRows('# only a comment\n'), /without a header row/u);
+});
+
+test('the Crab halo program pins obsid 2798 with every file digested', async () => {
+  const pinned = parseChandraProgram(JSON.parse(await readFile(join(PROGRAMS, 'm1-crab-halo.json'), 'utf8')));
+  const [entry] = pinned.observations;
+  assert.equal(entry?.obsid, 2798);
+  assert.equal(entry?.instrument, 'ACIS');
+  assert.equal(entry?.detector, 'ACIS-0123');
+  assert.equal(entry?.dataMode, 'FAINT');
+  assert.equal(entry?.grating, 'NONE');
+  assert.equal(entry?.datasetDoi, '10.25574/02798');
+  assert.ok(entry!.inputs.some(input => /_evt1\.fits\.gz$/u.test(input.path)), 'the level-1 event list is pinned');
+  assert.ok([...entry!.inputs, ...entry!.products].every(input => /^[0-9a-f]{64}$/u.test(input.sha256 ?? '')), 'every file is pinned by digest');
+});
+
+test('the Crab halo re-run keeps every archive event and places it within half a sky pixel', async () => {
+  const receipt = JSON.parse(await readFile(join(PROGRAMS, 'm1-crab-halo.acisf02798N004_evt2.reproduction.json'), 'utf8')) as {
+    events: { archive: number; matched: number; onlyArchive: number; onlyOurs: number };
+    sky: { identicalShare: number; skyPixels: { p99: number; largest: number } };
+    binnedImage: { identicalShare: number; largestBinDifference: number };
+    columns: { column: string; identicalShare: number; absoluteDifference: { largest: number } }[];
+    columnsOnOneSide: string[]; differentCards: Record<string, unknown>; reprocessedWith: { caldb: string } };
+  assert.equal(receipt.events.matched, receipt.events.archive, 'every archive event is matched');
+  assert.equal(receipt.events.onlyArchive, 0, 'the re-run drops no event the archive kept');
+  assert.ok(receipt.events.onlyOurs < receipt.events.archive / 1000, `the re-run adds ${receipt.events.onlyOurs} events`);
+  assert.deepEqual(receipt.columnsOnOneSide, [], 'both lists hold the same columns');
+  // What the instrument telemetered, and the status bits, come through untouched.
+  for (const name of ['time', 'node_id', 'tdetx', 'tdety', 'pha_ro', 'status'])
+    assert.equal(receipt.columns.find(entry => entry.column === name)?.identicalShare, 1, name);
+  assert.ok(receipt.sky.skyPixels.largest < 0.5, `sky positions move at most ${receipt.sky.skyPixels.largest} pixels`);
+  assert.ok(receipt.binnedImage.largestBinDifference <= 1, 'no binned sky block differs by more than one count');
+  assert.ok(receipt.binnedImage.identicalShare > 0.999, `${receipt.binnedImage.identicalShare} of the binned blocks agree`);
+  // The re-run is on a later CIAO and CALDB than the archive's product, which is what the receipt is for, and it makes its own
+  // bad-pixel list and good-time filter; nothing else in the two headers differs.
+  assert.equal(receipt.reprocessedWith.caldb, '4.12.4');
+  assert.deepEqual(Object.keys(receipt.differentCards).sort(), ['ASCDSVER', 'BPIXFILE', 'FLTFILE']);
+});
+
+test('a grating observation is refused at the pin, and an imaging one is not', () => {
+  assert.match(refuseObservation({ grating: 'HETG' }) ?? '', /zero-order position/u);
+  assert.match(refuseObservation({ grating: 'LETG' }) ?? '', /No sources detected/u);
+  assert.equal(refuseObservation({ grating: 'NONE' }), null);
+  assert.equal(Object.keys(REFUSED_MODES).length, 1);
+});
+
+test('a background, blank-sky or calibration pointing is never an observation of an object', () => {
+  for (const name of ['COLDECSBLANKSKY', 'ACIS BACKGROUND', 'M31 OFFSET', 'HRC-I DARK', 'CALIBRATION FIELD'])
+    assert.equal(isObjectPointing(name), false, name);
+  for (const name of ['CRABNEBULAHALO', 'M31', 'JUPITER', 'Polaris', 'PSRB0531+21'])
+    assert.equal(isObjectPointing(name), true, name);
+});
+
+test('a search box is that many degrees on the sky, not that many degrees of right ascension', () => {
+  const equator = objectBox({ id: 'a', raDeg: 100, decDeg: 0, source: 't' });
+  assert.ok(Math.abs(equator.raHigh - equator.raLow - 2 * OBJECT_RADIUS_DEGREES) < 1e-9);
+  const polar = objectBox({ id: 'b', raDeg: 100, decDeg: 60, source: 't' });
+  assert.ok(polar.raHigh - polar.raLow > 1.9 * (equator.raHigh - equator.raLow), 'the box widens towards the pole');
+  assert.equal(polar.decHigh - polar.decLow, 2 * OBJECT_RADIUS_DEGREES);
+  assert.throws(() => objectBox({ id: 'jupiter', source: 't' }), /right ascension/u);
+});
+
+test('the checked-in ledger agrees with the pinned programs and the receipts beside them', async () => {
+  const ledger = JSON.parse(await readFile(LEDGER, 'utf8')) as { schema: string; archive: { archivedObservations: number; byInstrument: Record<string, number> };
+    shippedObjects: Record<string, { matchedBy: string; observations: number }>; modes: Record<string, { state: string; program?: string; obsid?: number; why?: string }> };
+  assert.equal(ledger.schema, 'cssearth-chandra-ledger@1');
+  assert.equal(ledger.archive.archivedObservations, Object.values(ledger.archive.byInstrument).reduce((total, value) => total + value, 0));
+  const files = new Set(await (await import('node:fs/promises')).readdir(PROGRAMS));
+  for (const [key, entry] of Object.entries(ledger.modes)) {
+    if (entry.state === 'refused') { assert.ok(Object.values(REFUSED_MODES).includes(entry.why ?? ''), `${key} states a reason archive.mts does not`); continue; }
+    assert.ok(files.has(`${entry.program}.json`), `${key} names a program that is not pinned: ${entry.program}`);
+    const program = parseChandraProgram(JSON.parse(await readFile(join(PROGRAMS, `${entry.program}.json`), 'utf8')));
+    assert.ok(program.observations.some(other => other.obsid === entry.obsid), `${key} names an obsid ${entry.program} does not pin`);
+    if (entry.state === 'reproduced') assert.ok([...files].some(name => name.startsWith(`${entry.program}.`) && name.endsWith('.reproduction.json')), `${key} is reproduced with no receipt`);
+  }
+  // Every mode a program pins is in the ledger, so a new program cannot be added without the ledger being rebuilt.
+  for (const file of [...files].filter(name => name.endsWith('.json') && name.split('.').length === 2)) {
+    const program = parseChandraProgram(JSON.parse(await readFile(join(PROGRAMS, file), 'utf8')));
+    for (const entry of program.observations)
+      assert.ok(Object.values(ledger.modes).some(mode => mode.obsid === entry.obsid), `obsid ${entry.obsid} is pinned but absent from the ledger`);
+  }
+  // Moving targets are matched by name, everything else by position.
+  for (const [id, entry] of Object.entries(ledger.shippedObjects))
+    assert.equal(entry.matchedBy, MOVING_TARGETS[id] ? 'target name' : 'sky position', id);
+});
+
+test('the checked-in guide is the one the ledger generates', async () => {
+  const ledger = JSON.parse(await readFile(LEDGER, 'utf8')) as Parameters<typeof ledgerGuide>[0];
+  assert.equal(await readFile(GUIDE, 'utf8'), ledgerGuide(ledger), 'run node tools/objects/chandra/archive-ledger.mts');
+});
+
+test('Jupiter reproduces event for event on HRC-I, and its disc lands in the object-centred frame', async () => {
+  const receipt = JSON.parse(await readFile(join(PROGRAMS, 'jupiter-hrci.hrcf18676N003_evt2.reproduction.json'), 'utf8')) as {
+    events: { ours: number; archive: number; matched: number; onlyOurs: number; onlyArchive: number }; columns: { column: string; identicalShare: number }[] };
+  assert.equal(receipt.events.matched, receipt.events.archive);
+  assert.equal(receipt.events.onlyArchive, 0);
+  assert.equal(receipt.events.onlyOurs, 0, 'the HRC re-run keeps exactly the archive’s events');
+  for (const name of ['chip_id', 'pha', 'pi', 'status', 'x', 'tdetx', 'tdety'])
+    assert.equal(receipt.columns.find(entry => entry.column === name)?.identicalShare, 1, name);
+
+  const frozen = JSON.parse(await readFile(join(PROGRAMS, 'jupiter-hrci.18676.solar-system.json'), 'utf8')) as {
+    horizons: { observer: string; centreBody: string; angularDiameterArcseconds: number; motionArcseconds: number };
+    objectCentred: { enclosed: Record<string, { excess: number }> }; fixedSky: { enclosed: Record<string, { excess: number }> } };
+  assert.equal(frozen.horizons.observer, '500@-151');
+  assert.match(frozen.horizons.centreBody, /Chandra/u);
+  // Jupiter drifts further than its own diameter during the exposure, so the fixed-sky list is smeared and the frozen one is not.
+  assert.ok(frozen.horizons.motionArcseconds > frozen.horizons.angularDiameterArcseconds, 'the body moves further than its diameter');
+  assert.ok(frozen.objectCentred.enclosed.r1!.excess > 4 * frozen.fixedSky.enclosed.r1!.excess,
+    `the object-centred frame concentrates the source: ${frozen.objectCentred.enclosed.r1!.excess} against ${frozen.fixedSky.enclosed.r1!.excess}`);
+});
