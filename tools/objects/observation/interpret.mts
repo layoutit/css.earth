@@ -32,6 +32,7 @@ import { shape, text } from '../terrestrial-layers/source-records.mts';
 import { observationRaster, parseObservationLens, loadNativeObservationPoleSampler } from './raster.mts';
 import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
+import { prepareAkatsukiUviMap } from '../akatsuki/uvi-l3b.mts';
 import { loadDiscIntegratedColor } from './disc-integrated-color.mts';
 import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
 import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar-photometric-color.mts';
@@ -252,6 +253,12 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         await (await manifest).validatePath(surface.source);
         const { rgb, missing } = await preparePdsFloatMap(resolve(sourceDirectory, surface.source), profile, width, height);
         return rgb3(rgb, missing, width, height, false, recipe.missingCoverage);
+      }
+      case 'akatsuki-uvi-l3b': {
+        const { kind: _kind, ...profile } = surface.science;
+        await (await manifest).validatePath(surface.source);
+        const { rgb, missing, report } = await prepareAkatsukiUviMap(resolve(sourceDirectory, surface.source), profile, width, height);
+        return { ...rgb3(rgb, missing, width, height, false, recipe.missingCoverage), report };
       }
       case 'static-observation': {
         // Unchanged: the Moon/Pluto path (coverage grid, signed DEM, tonal presentation, GHRM science).
