@@ -32,9 +32,11 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
       flights.push({id:focus.id,reducedMotion:options.reducedMotion});
       if (options.reducedMotion) return Promise.resolve({completed:true});
       return new Promise<{ completed: boolean }>(resolve => required(signal).addEventListener('abort', () => resolve({ completed: false }), { once: true })); } };
-  const lensCallbacks = new Set<() => void>(), lensWrites: string[] = [];
+  // The real `subscribeVolumeLens` hands the listener the bank state, so a deferred bank can replay a
+  // notification once its payload arrives; a no-argument listener no longer satisfies that signature.
+  const lensCallbacks = new Set<(state: PreparedVolumeLensState) => void>(), lensWrites: string[] = [];
   let bankState = volumeBank;
-  const applyBank = (change: Partial<PreparedVolumeLensState>) => { bankState = { ...required(bankState), ...change }; for (const callback of lensCallbacks) callback(); };
+  const applyBank = (change: Partial<PreparedVolumeLensState>) => { bankState = { ...required(bankState), ...change }; for (const callback of lensCallbacks) callback(required(bankState)); };
   const layer = { imageLayerFrames, volumeLensFrames,
     volumeLensState: (objectId: string) => objectId === bankState?.objectId ? bankState : null,
     selectVolumeLens(objectId: string, id: string) {
@@ -42,7 +44,7 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
       lensWrites.push(id); applyBank({ id, selectedLens: id });
     },
     setVolumeStarsVisible(objectId: string, enabled: boolean) { assert.equal(objectId, required(bankState).objectId); applyBank({ starsVisible: enabled }); },
-    subscribeVolumeLens(objectId: string, callback: () => void) { assert.equal(objectId, required(bankState).objectId); lensCallbacks.add(callback); return () => lensCallbacks.delete(callback); },
+    subscribeVolumeLens(objectId: string, listener: (state: PreparedVolumeLensState) => void) { assert.equal(objectId, required(bankState).objectId); lensCallbacks.add(listener); return () => { lensCallbacks.delete(listener); }; },
     selectGalaxy: (id: string | null) => selections.push(id),
     resolveGalaxy: (id: string): PreparedCatalogObject | null => {
       if (!['catalogue:a','catalogue:b'].includes(id)) return null;
