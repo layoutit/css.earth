@@ -19,7 +19,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
-import { mastDownloadUrl, mastRequest, type MastFile } from '../mast.mts';
+import { MAST_CACHE, mastFile, mastRequest, type MastFile } from '../mast.mts';
 import { isCubeBand, JWST_BANDS, NIRCAM_OCCULTERS, type JwstBand } from './bands.mts';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');
@@ -140,8 +140,8 @@ export async function imagingBand(observation: string): Promise<ImagingBand & { 
   const coron = Boolean(band.coronagraph), cube = isCubeBand(band), stage = coron ? 'coron3' : cube ? 'spec3' : 'image3';
   const level3 = pick(cube ? 'S3D' : 'I2D', 3, new RegExp(`^${observation}_${cube ? 's3d' : 'i2d'}\\.fits$`, 'u')), association = pick('ASN', 3, new RegExp(`_${stage}_\\d+_asn\\.json$`, 'u'));
   if (level3.length !== 1 || association.length !== 1) throw new Error(`${observation}: expected one level-3 ${cube ? 'cube' : 'mosaic'} and one ${stage} association.`);
-  const asnFile = mastFileOf(association[0]!), response = await fetch(mastDownloadUrl(asnFile.uri), { signal: AbortSignal.timeout(120_000) });
-  const asn = requireRecord(await response.json(), 'Association');
+  const asnFile = mastFileOf(association[0]!);
+  const asn = requireRecord(JSON.parse(await readFile(await mastFile(asnFile, MAST_CACHE), 'utf8')) as unknown, 'Association');
   const [product] = requireArray(asn.products).map(value => requireRecord(value));
   // A spec3 association names its product as far as the setting (…_nirspec_g395h, …_miri); the stage appends the rest, after a
   // dash for NIRSpec's filter and an underscore for MIRI's channel and sub-band.

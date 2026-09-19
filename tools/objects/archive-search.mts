@@ -7,7 +7,9 @@
  * - DataCite: datasets (Zenodo, figshare, Dryad and others) whose metadata cites a paper's DOI;
  * - the JMMC Measured Stellar Diameters Catalogue (VizieR II/345), so an archive's resolution can be set against a disc.
  *
- * Each search is split into a query and a pure summary of the rows it returns; the summaries are what the tests pin.
+ * Astroquery owns ALMA, MAST and VizieR transport. ESO's current dbo.raw TAP and DataCite remain direct because Astroquery has
+ * no equivalent client for either service. Each search is split into a query and a pure summary of the rows it returns; the
+ * summaries are what the tests pin.
  * A search finds leads, never a verdict: a frame still needs a camera, registration and reuse terms before it can ship.
  *
  * Not searched: the PDS registry (its target index, checked 2026-09-16, lists only Lucy's SPICE collections for Dinkinesh although
@@ -15,10 +17,10 @@
  * that no DataCite record describes.
  */
 import { requireArray, requireRecord } from '../source-values.mts';
+import { astroqueryRows } from './astroquery/client.mts';
+import { mastRequest } from './jwst/mast.mts';
 
-export const ALMA_TAP = 'https://almascience.eso.org/tap/sync', ESO_TAP = 'https://archive.eso.org/tap_obs/sync';
-export const MAST_API = 'https://mast.stsci.edu/api/v0/invoke', DATACITE_API = 'https://api.datacite.org/dois';
-export const VIZIER_TAP = 'https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync';
+export const ESO_TAP = 'https://archive.eso.org/tap_obs/sync', DATACITE_API = 'https://api.datacite.org/dois';
 
 export const adqlString = (text: string) => `'${text.replaceAll("'", "''")}'`;
 
@@ -106,7 +108,8 @@ export async function almaObservations(target: ArchiveTarget, diameterMas: numbe
   const where = 'position' in target
     ? `INTERSECTS(CIRCLE('ICRS', ${target.position.ra}, ${target.position.dec}, ${target.position.radiusDegrees}), s_region) = 1`
     : nameMatch('target_name', target.names);
-  return summariseAlma(await csvTap(ALMA_TAP, `SELECT proposal_id, band_list, target_name, spatial_resolution, t_min, data_rights, first_author FROM ivoa.obscore WHERE ${where}`), diameterMas);
+  const rows = await astroqueryRows({ operation: 'alma-tap', query: `SELECT proposal_id, band_list, target_name, spatial_resolution, t_min, data_rights, first_author FROM ivoa.obscore WHERE ${where}` });
+  return summariseAlma(rows.map(row => Object.fromEntries(Object.entries(row).map(([name, value]) => [name, value === null ? '' : String(value)]))), diameterMas);
 }
 
 /** Instruments whose frames can resolve a disc: long-baseline interferometers and adaptive-optics imagers on one telescope. */
@@ -167,11 +170,7 @@ export async function mastObservations(target: ArchiveTarget) {
     : target.names.filter(name => name.length >= 3).map(name => ({ service: 'Mast.Caom.Filtered', format: 'json', pagesize: 5000,
       params: { columns, filters: [{ paramName: 'target_name', values: [], freeText: `%${name}%` }] } }));
   const rows: unknown[] = [];
-  for (const body of requests) {
-    const response = await fetchRetrying(MAST_API, 3, fetch, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: `request=${encodeURIComponent(JSON.stringify(body))}` });
-    if (!response.ok) throw new Error(`MAST answered ${response.status}.`);
-    rows.push(...requireArray(requireRecord(await response.json()).data ?? []));
-  }
+  for (const body of requests) rows.push(...await mastRequest(body));
   return summariseMast(rows);
 }
 
@@ -222,11 +221,8 @@ export function parseJmdc(rows: readonly (readonly unknown[])[]): { measurements
 }
 
 export async function measuredDiameters(ra: number, dec: number, radiusDegrees = 30 / 3600) {
-  const url = `${VIZIER_TAP}?${new URLSearchParams({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'json',
-    QUERY: `SELECT "UDdiam", "LDdiam", "Band", "BibCode" FROM "II/345/jmdc" WHERE 1 = CONTAINS(POINT('ICRS', "_RA", "_DE"), CIRCLE('ICRS', ${ra}, ${dec}, ${radiusDegrees}))` })}`;
-  const response = await fetchRetrying(url);
-  if (!response.ok) throw new Error(`VizieR answered ${response.status} for JMDC.`);
-  return parseJmdc(requireArray(requireRecord(await response.json()).data ?? []).map(row => requireArray(row)));
+  const rows = await astroqueryRows({ operation: 'vizier-region', catalog: 'II/345/jmdc', ra, dec, radiusDegrees, columns: ['UDdiam', 'LDdiam', 'Band', 'BibCode'] });
+  return parseJmdc(rows.map(row => [row.UDdiam, row.LDdiam, row.Band, row.BibCode]));
 }
 
 export interface ArchiveLeads { readonly alma: readonly AlmaGroup[]; readonly eso: readonly EsoGroup[]; readonly mast: readonly MastGroup[]; readonly deposits: readonly Deposit[] }

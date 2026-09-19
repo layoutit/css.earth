@@ -1,24 +1,24 @@
 /** MAST access and the pinned-toolchain Python runner shared by the JWST routes: time series (reduce-tso.mts) and imaging
- * (imaging/). A file is taken from a local source when one already holds it at its pinned size, otherwise downloaded with curl,
- * which resumes a partial transfer. Python runs under a resident-memory ceiling: the run is killed, not the machine. */
+ * (imaging/). Astroquery owns MAST queries and complete-file downloads. cssEarth owns byte validation and the reducers.
+ * Python reducers run under a resident-memory ceiling: the run is killed, not the machine. */
 import { spawn, spawnSync } from 'node:child_process';
 import { access, mkdir, rm, stat, symlink, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sha256File } from '../../../src/platform/sha256.mts';
+import { requireRecord, requireString } from '../../source-values.mts';
+import { astroquery, astroqueryRows } from '../astroquery/client.mts';
 import type { EurekaToolchain } from './toolchain.mts';
 
-export const MAST_INVOKE = 'https://mast.stsci.edu/api/v0/invoke';
+export const MAST_CACHE = resolve(import.meta.dirname, '../../../output/archive-cache/mast');
+/** Canonical MAST file URL, retained for provenance and bounded FITS-header range reads only. */
 export const mastDownloadUrl = (uri: string) => `https://mast.stsci.edu/api/v0.1/Download/file?uri=${uri}`;
 
 export interface MastFile { readonly name: string; readonly uri: string; readonly bytes: number; readonly sha256?: string }
 
 const sizeOf = (path: string) => stat(path).then(info => info.size, () => -1);
 export const exists = (path: string) => access(path).then(() => true, () => false);
-const run = (command: string, args: readonly string[]) => new Promise<number>(done => { spawn(command, args, { stdio: 'inherit' }).on('close', code => done(code ?? 1)); });
-
 /** The file at its pinned size (and digest, when pinned) in `directory`: linked from a source directory that already has it,
- * or downloaded. MAST drops slow transfers, and one connection can crawl while others run at full speed: a transfer under
- * 500 kB/s for a minute is abandoned and resumed on a fresh connection from where the partial file ends, twenty times at most. */
+ * or downloaded by Astroquery's MAST client. cssEarth checks the size and optional digest after the client returns. */
 export async function mastFile(file: MastFile, directory: string, sources: readonly string[] = []): Promise<string> {
   if (!/^[A-Za-z0-9._-]+$/u.test(file.name)) throw new TypeError(`Invalid MAST file name: ${file.name}`);
   await mkdir(directory, { recursive: true });
@@ -27,22 +27,22 @@ export async function mastFile(file: MastFile, directory: string, sources: reado
     const candidate = resolve(source, file.name);
     if (await sizeOf(candidate) === file.bytes) { await rm(target, { force: true }); await symlink(candidate, target); break; }
   }
-  for (let attempt = 1; attempt <= 20 && await sizeOf(target) !== file.bytes; attempt++) {
-    if (await sizeOf(target) > file.bytes) await rm(target);
-    await run('curl', ['-s', '-L', '-C', '-', '--speed-limit', '500000', '--speed-time', '60', '-o', target, mastDownloadUrl(file.uri)]);
+  if (await sizeOf(target) !== file.bytes) {
+    await rm(target, { force: true });
+    await astroquery({ operation: 'mast-download', uri: file.uri, destination: target });
   }
   if (await sizeOf(target) !== file.bytes) throw new Error(`${file.name} did not download to its pinned ${file.bytes} bytes.`);
   if (file.sha256 !== undefined && (await sha256File(target)).sha256 !== file.sha256) throw new Error(`${file.name} differs from its pinned sha256.`);
   return target;
 }
 
-/** One MAST API request (https://mast.stsci.edu/api/v0/). */
+/** One MAST request through Astroquery. Existing callers retain the MAST service vocabulary while no longer own its protocol. */
 export async function mastRequest(request: Record<string, unknown>): Promise<Record<string, unknown>[]> {
-  const response = await fetch(MAST_INVOKE, { method: 'POST', body: new URLSearchParams({ request: JSON.stringify(request) }), signal: AbortSignal.timeout(300_000) });
-  if (!response.ok) throw new Error(`MAST request failed: ${response.status}`);
-  const body = await response.json() as { data?: Record<string, unknown>[]; status?: string };
-  if (!Array.isArray(body.data)) throw new Error(`MAST answered without data (${body.status ?? 'no status'}).`);
-  return body.data;
+  const service = requireString(request.service, 'MAST service'), parameters = requireRecord(request.params, 'MAST parameters');
+  const pagesize = request.pagesize === undefined ? undefined : Number(request.pagesize), page = request.page === undefined ? undefined : Number(request.page);
+  if (pagesize !== undefined && (!Number.isSafeInteger(pagesize) || pagesize <= 0)) throw new TypeError('MAST pagesize must be a positive integer.');
+  if (page !== undefined && (!Number.isSafeInteger(page) || page <= 0)) throw new TypeError('MAST page must be a positive integer.');
+  return [...await astroqueryRows({ operation: 'mast-service', service, parameters, ...(pagesize === undefined ? {} : { pagesize }), ...(page === undefined ? {} : { page }) })];
 }
 
 /** The free-memory percentage macOS reports; a heavy stage does not start below half. */
