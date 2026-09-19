@@ -14,7 +14,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | --- | ---: | --- |
 | damit.cuni.cz | 257 | abundantia, adelheid, aegina, aethra, aglaja, alexandra, +168 more |
 | arxiv.org | 72 | adelheid, aegina, aemilia, agenor, aglaja, alkmene, +55 more |
-| doi.org | 41 | bienor, braille, ce-tauri, chariklo, comet-1p, comet-209p, +27 more |
+| doi.org | 42 | bienor, braille, ce-tauri, chariklo, comet-1p, comet-209p, +28 more |
 | sbnarchive.psi.edu | 29 | atlas, comet-109p, comet-153p, comet-167p, comet-17p, comet-21p, +23 more |
 | tilmanndenk.de | 23 | albiorix, bebhionn, bergelmir, bestla, erriapus, fornjot, +16 more |
 | observations.lam.fr | 13 | daphne, elektra, eugenia, iris, kalliope, nemesis, +4 more |
@@ -45,7 +45,6 @@ The source each decision examined. Watching these is how a decision reopens.
 | astrogeology.usgs.gov | 1 | ida |
 | cdsarc.cds.unistra.fr | 1 | smc |
 | comet-toolbox.com | 1 | lutetia |
-| darts.isas.jaxa.jp | 1 | venus |
 | data.caltech.edu | 1 | titan |
 | data.darts.isas.jaxa.jp | 1 | itokawa |
 | elib.dlr.de | 1 | eurybates |
@@ -151,7 +150,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `chatzifrantzis-optical` | 1 | helix | Acquire permission and a suitable native unwatermarked source, then qualify astrometry and full footprint. |
 | `close-zoom-missing-tiles` | 1 | earth | The cause of the missing close-zoom tiles is found, or the behaviour stops reproducing. |
 | `closeup-reproduction-at-current-main` | 1 | comet-9p | The replay discrepancy is traced to its source, camera or software input and both partitions meet the existing budget. |
-| `cloud-imagery` | 1 | venus | An Akatsuki UVI L3b compositing route (NetCDF-4 reader, per-pixel incidence and emission selection across one cloud rotation, stated epoch) or a published global UV cloud mosaic with grid metadata and a permissive licence would reopen the cloud lens. |
+| `cloud-imagery` | 1 | venus | A published global UV cloud mosaic with grid metadata and a permissive licence, or a stated method for compositing Akatsuki L3b exposures that names what it does with cloud motion between them, would let the default cloud lens stop being an illustration. |
 | `contact-binary-alternative` | 1 | kerberos | A numerical Kerberos solution and its uncertainty, pole and coordinate conventions are released. |
 | `controlled-global-monochrome-replacement` | 1 | europa | A released photometrically harmonized global product or a qualified cross-observation model resolves joins, spectral differences and terrain-dependent scattering while preserving source detail. Compare in the running app against the retained global mosaic before replacing it. |
 | `convective-cell-size` | 1 | r-doradus | An ALMA epoch with a beam well under 13 milliarcseconds on this star is released. |

@@ -6,18 +6,41 @@
       "id": "cloud-imagery",
       "subject": "Source-backed global ultraviolet cloud map to replace the illustrative cloud texture",
       "status": "unresolved",
-      "finding": "The default cloud lens is still the OpenSpace project's Venus cloud texture, an illustrative map with unresolved camera, wavelength and colour processing. No archive publishes a source-backed multi-orbit global cylindrical UV cloud map: JAXA DARTS ships Akatsuki UVI Level-3 products (vco_uvi_l3, DOI 10.17597/isas.darts/vco-00016, CC BY 4.0) only as per-image 0.125-degree longitude-latitude grids in NetCDF-4, each covering the sunlit disc of one exposure, and ESA's VMC mosaic is a northern-hemisphere press strip. A replacement therefore needs a preparation step that composites several 365 nm L3b grids across one four-day cloud rotation, normalised for incidence, which this repository does not have.",
-      "revisitWhen": "An Akatsuki UVI L3b compositing route (NetCDF-4 reader, per-pixel incidence and emission selection across one cloud rotation, stated epoch) or a published global UV cloud mosaic with grid metadata and a permissive licence would reopen the cloud lens.",
+      "finding": "Akatsuki UVI Level 3b now backs an Ultraviolet lens, so the route the earlier finding called missing exists: tools/objects/akatsuki/uvi-l3b.mts reads the NetCDF-4 grid and the raster lane draws the unobserved side as a declared data gap. What has not been resolved is the subject of this entry. One exposure covers 48.54 per cent of the globe at best, measured over 34 candidates, so the default lens is still the OpenSpace texture, an illustration whose camera, wavelength and colour processing are unresolved. No archive publishes a source-backed global cylindrical UV cloud mosaic: DARTS ships vco_uvi_l3 only as per-exposure 0.125-degree grids, and ESA's VMC mosaic is a northern-hemisphere press strip. Compositing several exposures across one four-day cloud rotation would mix scenes that have moved, which is why this repository has not built it.",
+      "revisitWhen": "A published global UV cloud mosaic with grid metadata and a permissive licence, or a stated method for compositing Akatsuki L3b exposures that names what it does with cloud motion between them, would let the default cloud lens stop being an illustration.",
       "evidence": [
-        "https://darts.isas.jaxa.jp/planet/project/akatsuki/uvi.html.en",
         "https://doi.org/10.17597/isas.darts/vco-00016",
-        "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7012/data/l3b/netcdf/r0276/uvi_20240324_120445_365_l3b_v21.nc",
-        "https://www.isas.jaxa.jp/en/researchers/data-policy/"
+        "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7011/00readme.txt",
+        "https://www.isas.jaxa.jp/en/researchers/data-policy/",
+        "https://darts.isas.jaxa.jp/planet/project/akatsuki/uvi.html.en"
       ],
       "checked": [
         {
           "date": "2026-09-16",
           "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
+        },
+        {
+          "date": "2026-09-19",
+          "commit": "694a1265852870fed108c79258b324f5e1072ef9"
+        }
+      ]
+    },
+    {
+      "id": "akatsuki-uvi-single-exposure",
+      "subject": "Akatsuki UVI 365 nm Level 3b exposure as the ultraviolet cloud lens",
+      "status": "included",
+      "finding": "The Ultraviolet lens is one 365 nm Level 3b exposure, uvi_20230830_100446_365_l3b_v21 from orbit 257, middle 2023-08-30T10:04:46.033 UTC, chosen from 34 candidates by the largest area-weighted lit coverage: 48.54 per cent of the globe at a 3.65-degree phase angle, against a 49.18 per cent visible cap at its 374,422 km range. Orientation was measured rather than assumed: a least-squares fit of the Sun direction to the file's own incidence grid gives a sub-solar point of 206.1913E 2.4897N, and JPL Horizons gives 206.179102E 2.490460N for the same instant in IAU_VENUS with east longitude positive, 0.012 degrees apart in longitude and 0.001 in latitude. The h5wasm decode was checked bitwise identical against h5py for radiance, incidence and both axes. Brightness is the stated transform (radiance x 5e-9) ^ (1/2.2) with white at 2.0e8 W/m2/sr/m, above the exposure's measured maximum 1.8116e8, so nothing clips; there is no photometric normalisation, contrast enhancement or sharpening. The half Akatsuki could not see carries the shared cartographic gap fill.",
+      "evidence": [
+        "https://doi.org/10.17597/isas.darts/vco-00016",
+        "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7011/data/l3b/netcdf/r0257/uvi_20230830_100446_365_l3b_v21.nc",
+        "https://ssd.jpl.nasa.gov/api/horizons.api",
+        "https://github.com/layoutit/css.earth/blob/694a1265852870fed108c79258b324f5e1072ef9/src/objects/venus/README.md",
+        "https://github.com/layoutit/css.earth/blob/694a1265852870fed108c79258b324f5e1072ef9/tools/objects/akatsuki/uvi-l3b.mts"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-19",
+          "commit": "694a1265852870fed108c79258b324f5e1072ef9"
         }
       ]
     }
