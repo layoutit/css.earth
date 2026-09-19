@@ -1,3 +1,4 @@
+import { createPreparedSceneOwnership } from './prepared-scene-ownership.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { SceneFactory, ShellCamera, MountOptions } from './browser-types.mts';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.ts';
@@ -8,10 +9,9 @@ type Optics = ReturnType<ObjectWorldNavigation['optics']>;
 type Flight = ReturnType<typeof createSelectionFlight>;
 type FlightSample = ReturnType<typeof createSelectionFlightSample>;
 type FlightAnchors = Parameters<typeof advanceSelectionFlightInto>[1];
-type PreparedLease = Awaited<ReturnType<NonNullable<SceneFactory['navigation']>['prepare']>>;
 interface Timing {mark(name: string): void;}
 interface TargetRequest {objectId: string; fromId: string; mount?: ShellCamera | null; force?: boolean;}
-export interface WorldHandoff {mountOptions: Partial<MountOptions>; afterMount(mount: ObjectSceneLifecycle, options: {signal: AbortSignal}): Promise<void>;}
+export interface WorldHandoff {transferTo(signal: AbortSignal): void; mountOptions: Partial<MountOptions>; afterMount(mount: ObjectSceneLifecycle, options: {signal: AbortSignal}): Promise<void>;}
 interface FocusRequest {objectId: string; mount: ShellCamera; signal: AbortSignal; reducedMotion?: boolean; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; timing?: Timing;}
 interface PrepareRequest {fromId: string; toId: string; fromMount: ShellCamera | null; toFactory: SceneFactory | Promise<SceneFactory>; signal: AbortSignal; reducedMotion?: boolean; url?: string | URL | null; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; preserveView?: boolean; presentWorld?: ((world: WorldCamera, optics: Optics, options: { signal: AbortSignal; commit?: () => void }) => Promise<boolean> | void) | null; cameraViewport?: Parameters<NonNullable<SceneFactory['navigation']>['prepare']>[0]['cameraViewport']; timing?: Timing;}
 interface FlightCheckpoint {world: WorldCamera; elapsedS: number; time?: number;}
@@ -150,24 +150,27 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         // drawn camera at handoff, not the camera from the start of preparation.
         const factory = await toFactory;
         if (!factory.navigation) throw new TypeError('Destination has no prepared navigation.');
-        const prepared = await factory.navigation.prepare({ signal, cameraViewport,
-          getView: () => ({ world: source?.capture() ?? lastCamera ?? from, viewport: source?.optics() ?? lastOptics ?? optics }) });
-        timing.mark('assets-ready');
-        const release = () => prepared.destroy();
-        if (signal.aborted) { release(); throw cancellationReason(signal); }
-        signal.addEventListener('abort', release, { once: true });
-        const checkpoint = source?.capture() ?? lastCamera ?? from;
-        return {
-          mountOptions: { preparedResources: prepared.resources, preparedTree: prepared.tree, initialWorldCamera: checkpoint, initialProjection: prepared.projection({ world: checkpoint, viewport: source?.optics() ?? lastOptics ?? optics }) },
-          async afterMount(mount: ObjectSceneLifecycle) {
-            signal.removeEventListener('abort', release);
-            if (signal.aborted) throw cancellationReason(signal);
-            timing.mark('mounted');
-            if (!mount.navigation) throw new Error('The destination camera is unavailable.');
-            lastCamera = mount.navigation.capture(); lastOptics = mount.navigation.optics();
-          },
-        };
+        const ownership = createPreparedSceneOwnership(signal);
+        try {
+          const prepared = await factory.navigation.prepare({ signal: ownership.signal, cameraViewport,
+            getView: () => ({ world: source?.capture() ?? lastCamera ?? from, viewport: source?.optics() ?? lastOptics ?? optics }) });
+          ownership.own(prepared);
+          if (signal.aborted) throw cancellationReason(signal);
+          timing.mark('assets-ready');
+          const checkpoint = source?.capture() ?? lastCamera ?? from;
+          return {
+            transferTo: ownership.transferTo,
+            mountOptions: { preparedResources: prepared.resources, preparedTree: prepared.tree, initialWorldCamera: checkpoint, initialProjection: prepared.projection({ world: checkpoint, viewport: source?.optics() ?? lastOptics ?? optics }) },
+            async afterMount(mount: ObjectSceneLifecycle) {
+              if (signal.aborted) throw cancellationReason(signal);
+              timing.mark('mounted');
+              if (!mount.navigation) throw new Error('The destination camera is unavailable.');
+              lastCamera = mount.navigation.capture(); lastOptics = mount.navigation.optics();
+            },
+          };
+        } catch (error) { ownership.dispose(); throw error; }
       }
+
       const query = url ? new URL(url).searchParams : null;
       if ((query?.getAll('v').length ?? 0) > 1) throw new TypeError('A destination URL may contain only one saved view.');
       const saved = query?.has('v') ? parseSharedView(`v=${query.get('v')}`) : null;
@@ -194,9 +197,8 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       if (signal.aborted) cancel();
       // After handoff the router owns the prepared lease until it mounts; input that ends the
       // flight in that gap must not release what the mount is about to claim.
-      const leaseController = new AbortController(); let handedOff = false;
-      signal.addEventListener('abort', () => leaseController.abort(signal.reason), { once: true });
-      if (signal.aborted) leaseController.abort(signal.reason);
+      const ownership = createPreparedSceneOwnership(signal);
+      let handedOff = false;
       const events = ['pointerdown', 'keydown'];
       // Stopping between bodies strands the camera far from the destination, often facing
       // along its path with the target off screen. Input there hurries the navigation like
@@ -222,12 +224,11 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       };
       for (const event of events) documentTarget.addEventListener(event, interrupt, { capture: true });
       documentTarget.addEventListener('wheel', hurry, { capture: true, passive: false });
-      let prepared: PreparedLease | undefined, released = false;
       let rejectInterruption!: (reason: unknown) => void;
-      const release = () => { if (prepared && !released) { released = true; prepared.destroy(); } };
+      const release = ownership.dispose;
       const interrupted = new Promise<never>((_, reject) => { rejectInterruption = reject; });
       interrupted.catch(() => {});
-      const abort = () => { if (!handedOff) { release(); leaseController.abort(controller.signal.reason); } rejectInterruption(cancellationReason(controller.signal)); cleanup(); };
+      const abort = () => { if (!handedOff) release(); rejectInterruption(cancellationReason(controller.signal)); cleanup(); };
       controller.signal.addEventListener('abort', abort, { once: true });
       if (controller.signal.aborted) abort();
       function cleanup() {
@@ -239,10 +240,10 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       let bankReady = false;
       const preparation = Promise.resolve(toFactory).then(factory => {
         if (!factory.navigation) throw new TypeError('Destination has no prepared navigation.');
-        return factory.navigation.prepare({ signal: leaseController.signal, cameraViewport,
+        return factory.navigation.prepare({ signal: ownership.signal, cameraViewport,
           getView: () => ({ world: reducedMotion ? target : lastCamera ?? from, viewport: optics }) });
       }).then(value => {
-        prepared = value;
+        ownership.own(value);
         if (controller.signal.aborted) { release(); throw cancellationReason(controller.signal); }
         bankReady = true;
         return value;
@@ -291,8 +292,9 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
             limitElapsedS: () => detailReady || incomingOwner?.detailActivated?.() ? flight.durationS : Math.max(checkpoint.elapsedS, approachLimitS),
             windowTarget, documentTarget, onPaint }) : null;
         continuation?.catch(() => {});
-        handedOff = true; signal.addEventListener('abort', release, { once: true });
+        handedOff = true;
         return {
+          transferTo: ownership.transferTo,
           mountOptions: { preparedResources: preparedLease.resources, preparedTree: preparedLease.tree, initialWorldCamera: checkpoint.world, initialProjection: preparedLease.projection({ world: checkpoint.world, viewport: optics }),
             ...(continuation ? { progressiveActivation: approachLimitS > 0, onNavigationReady(owner: ObjectWorldNavigation) {
               // An interrupted flight still mounts its destination; afterMount reports the interruption.
