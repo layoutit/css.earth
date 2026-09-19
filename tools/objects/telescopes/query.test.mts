@@ -72,7 +72,7 @@ const bodyMap = (telescope: string, instrument: string, id: string) => ({ schema
 
 const inputs = (ledgers: readonly { telescope: string; value: unknown }[], rest: Partial<QueryInputs> = {}): QueryInputs =>
   ({ ledgers: ledgers.map(entry => ({ ...entry, path: `data/${entry.telescope}/ledger.json` })), capabilities: CAPABILITIES,
-    targetCatalogue: ['europa', 'hd-181327', 'ceres', 'vesta', 'jupiter', 'itokawa', 'io', 'flora', 'm42', 'bennu', 'comet-1p', 'nix', 'hydra'].map(id => ({ id, name: id === 'bennu' ? 'Bennu' : id, aliases: [] })),
+    targetCatalogue: ['europa', 'hd-181327', 'ceres', 'vesta', 'jupiter', 'itokawa', 'io', 'flora', 'm42', 'bennu', 'comet-1p', 'comet-81p', 'nix', 'hydra'].map(id => ({ id, name: id === 'bennu' ? 'Bennu' : id, aliases: [] })),
     targetAssociations: [], bodyMaps: [], ...rest });
 const candidate = (answer: CapabilityAnswer, mode: string): Candidate => {
   const found = answer.candidates.find(entry => entry.mode === mode);
@@ -125,6 +125,20 @@ test('an unsearched target is an incomplete index, while an explicit empty searc
   const empty = queryCapabilities({ ...skipped.request }, inputs([{ telescope: 'spitzer', value: { ...base, searched: ['comet-1p'], notAsked: [] } }]));
   assert.equal(empty.endpoint.status, 'no-selectable-candidate');
   assert.deepEqual(empty.withoutTheTarget.map(entry => entry.telescope), ['spitzer']);
+});
+
+test('PDS products rejected by normalization are not reported as an empty archive', () => {
+  const ledger = { schema: 'cssearth-pds-ledger@1', archiveDate: '2026-09-19', searched: ['comet-81p'], modes: [], objects: [], searches: [
+    { target: 'comet-81p', registryProducts: 2, admittedProducts: 0, scope: { productClass: 'Product_Observational', processingLevels: 'all' },
+      rejected: [{ lidvid: 'urn:nasa:pds:a::1.0', reason: 'ambiguous instrument' }, { lidvid: 'urn:nasa:pds:b::1.0', reason: 'unsupported structure' }] },
+  ] };
+  const answer = queryCapabilities({ target: 'comet-81p', wavelengthMicrometres: [0.5, 0.7], time: { any: true }, kind: 'image', result: 'telescope-product', angularResolutionArcsec: 1 },
+    inputs([{ telescope: 'pds', value: ledger }]));
+  const coverage = answer.targetCoverage[0]!;
+  assert.equal(coverage.state, 'unsupported-products');
+  assert.deepEqual([coverage.registryProducts, coverage.admittedProducts, coverage.rejected?.length], [2, 0, 2]);
+  assert.deepEqual(answer.withoutTheTarget, []);
+  assert.deepEqual(answer.endpoint.blockerCodes, ['archive-products-unsupported']);
 });
 
 test('an indexed observation exposes a telescope-owned qualification action when qualification is the only blocker', () => {
@@ -549,6 +563,21 @@ test('the committed Hydra search qualifies four separate MVIC images without inv
   assert.equal(selected.unresolved.some(entry => entry.constraint === 'observationWavelength'), false);
   assert.equal(selected.unresolved.some(entry => entry.constraint === 'angularResolution'), true);
   assert.equal(selected.bodyMapSupport.answer, 'no');
+});
+
+test('one Wild 2 query sees source-pinned Stardust PDS3 observations without a discovery command', async () => {
+  const answer = queryCapabilities({ target: 'comet-81p', wavelengthMicrometres: [0.5, 0.7], time: { any: true }, rangeKm: 240,
+    surfaceResolutionKm: 0.1, kind: 'image', result: 'body-map' }, await loadQueryInputs(ROOT, 'comet-81p'));
+  const navcam = answer.candidates.find(entry => entry.telescope === 'Stardust' && entry.mode === 'NAVCAM/RDR image')!;
+  assert.equal(navcam.observations?.count, 5);
+  assert.deepEqual(navcam.observations?.records?.map(record => record.id), ['n2069we02_rr', 'n2073we02_rr', 'n2075we02_rr', 'n2077we02_rr', 'n2079we02_rr']);
+  assert.equal(navcam.observations?.records?.[0]?.centralWavelengthMicrometres, 0.6988);
+  assert.equal(navcam.observations?.records?.[0]?.sourceFiles?.[1]?.sha256, '6fa36047b1f56f219417cc86fafb39c507c9ee83318b428942228e6f84448f62');
+  assert.deepEqual([navcam.meetsConstraints.wavelength?.answer, navcam.meetsConstraints.time?.answer, navcam.meetsConstraints.kind?.answer], ['unknown', 'yes', 'yes']);
+  assert.equal(navcam.toolkitSupport.tool, 'pds.pdr');
+  assert.equal(navcam.toolkitSupport.targetProgramPinned, true);
+  assert.deepEqual(navcam.selectionAssessment.blockers.map(blocker => blocker.code), ['body-map-author-missing']);
+  assert.equal(answer.targetCoverage.find(entry => entry.telescope === 'pds')?.state, 'observed');
 });
 
 test('the committed ledgers: no candidate for any target ever answers yes for sharpness', async () => {

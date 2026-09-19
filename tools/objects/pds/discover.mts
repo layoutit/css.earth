@@ -5,21 +5,22 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue } from '../../cli-arguments.mts';
-import { pds4Blocks, pds4Elements, pds4Field, pds4Number } from '../pds-labels.mts';
+import { pds4Blocks, pds4Elements, pds4Field } from '../pds-labels.mts';
 import { requireArray, requireRecord, requireString } from '../../source-values.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { normalizeDiscoveredPdsProduct, type DiscoveredPdsProduct } from './archive-final.mts';
+import { sourcePds3Observations } from './source-observations.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 export const PDS_DISCOVERY_SCHEMA = 'cssearth-pds-discovery@1';
 export const PDS_DISCOVERY_STORE_SCHEMA = 'cssearth-pds-discovery@2';
 export const PDS_DISCOVERY = resolve(ROOT, 'data/pds/discovery.json');
-const TARGETS = resolve(ROOT, 'data/pds/targets.json');
 
 export interface PdsDiscoveredObservation {
   readonly id: string; readonly lidvid: string; readonly targetLid: string; readonly targetName: string;
   readonly telescope: string; readonly archiveTelescope: string; readonly mode: string; readonly instrument: string;
-  readonly kind: 'image'; readonly title: string; readonly registryStartIso: string; readonly registryStopIso: string;
+  readonly kind: 'image' | 'cube' | 'spectrum' | 'table'; readonly title: string; readonly registryStartIso: string; readonly registryStopIso: string;
+  readonly processingLevel: string;
   readonly filters: readonly string[]; readonly wavelengthIntervalsMicrometres: readonly (readonly [number, number])[];
   readonly surfaceResolutionKm?: number; readonly label: { readonly uri: string; readonly bytes: number; readonly md5: string; readonly sha256: string };
   readonly use: string; readonly units: string;
@@ -38,49 +39,64 @@ const values = (xml: string, name: string) => pds4Elements(xml, name).map(entry 
 const targetReferences = (xml: string) => pds4Blocks(xml, 'Internal_Reference').flatMap(block => {
   try { return pds4Field(block, 'reference_type') === 'data_to_target' ? [pds4Field(block, 'lid_reference')] : []; } catch { return []; }
 });
-const componentNames = (xml: string) => pds4Blocks(xml, 'Observing_System_Component').map(block => pds4Field(block, 'name'));
+interface Component { readonly name: string; readonly type: string }
+const components = (xml: string): Component[] => pds4Blocks(xml, 'Observing_System_Component').map(block => ({ name: pds4Field(block, 'name'), type: pds4Field(block, 'type') }));
+const acronym = (name: string) => /\(([A-Z][A-Z0-9+_-]{1,})\)\s*$/u.exec(name)?.[1]
+  ?? name.split(/[^A-Za-z0-9]+/u).filter(Boolean).map(word => word[0]!.toUpperCase()).join('');
+const numberWithUnit = (xml: string, name: string) => {
+  const element = pds4Elements(xml, name);
+  if (element.length !== 1) return undefined;
+  const value = Number(element[0]!.content.trim()), unit = /\bunit="([^"]+)"/u.exec(element[0]!.tag)?.[1];
+  if (!Number.isFinite(value) || !unit) throw new Error(`Invalid PDS4 number or unit: ${name}`);
+  return { value, unit };
+};
+const micrometres = (measurement: { readonly value: number; readonly unit: string }) => measurement.unit === 'nm' ? measurement.value / 1000
+  : measurement.unit === 'Angstrom' ? measurement.value / 10_000
+  : measurement.unit === 'um' || measurement.unit === 'micrometer' ? measurement.value
+  : (() => { throw new Error(`Unsupported PDS wavelength unit ${measurement.unit}.`); })();
+const kilometresPerPixel = (measurement: { readonly value: number; readonly unit: string }) => measurement.unit === 'm/pixel' ? measurement.value / 1000
+  : measurement.unit === 'km/pixel' ? measurement.value
+  : (() => { throw new Error(`Unsupported PDS map-resolution unit ${measurement.unit}.`); })();
 
-export function inspectMappedPdsProduct(product: DiscoveredPdsProduct, xml: string, labelSha256: string): PdsDiscoveredObservation | undefined {
-  const systems = componentNames(xml), instrument = 'Multispectral Visible Imaging Camera';
-  if (!systems.includes('New Horizons') || !systems.includes(instrument) || !pds4Blocks(xml, 'cart:Cartography').length || !pds4Blocks(xml, 'Array_3D_Spectrum').length) return undefined;
-  const bins = pds4Blocks(xml, 'sp:Bin_Wavelength').map(block => {
-    const center = pds4Number(block, 'sp:center_wavelength', 'nm'), width = pds4Number(block, 'sp:bin_width_wavelength', 'nm');
-    if (!(center > 0 && width > 0 && width < center * 2)) throw new Error(`${product.lidvid} has an invalid spectral bin.`);
-    return { filter: pds4Field(block, 'sp:filter_name'), interval: [Number(((center - width / 2) / 1000).toPrecision(12)), Number(((center + width / 2) / 1000).toPrecision(12))] as const };
+/** Normalize an observational label from its declared structure. Instrument names select no code path. */
+export function inspectPdsProduct(product: DiscoveredPdsProduct, xml: string, labelSha256: string,
+  target: { readonly lid: string; readonly name: string }): PdsDiscoveredObservation {
+  const logicalIdentifier = identity(product, xml), refs = targetReferences(xml);
+  if (!refs.includes(target.lid) || !product.targetLids.includes(target.lid)) throw new Error(`${product.lidvid} does not identify the requested target.`);
+  const system = components(xml), instruments = system.filter(entry => entry.type.toLowerCase() === 'instrument');
+  if (instruments.length !== 1) throw new Error(`${product.lidvid} names ${instruments.length} instruments; one is required for an observation mode.`);
+  const telescopeComponents = system.filter(entry => entry.type.toLowerCase() === 'telescope'), hosts = system.filter(entry => entry.type.toLowerCase() === 'host');
+  if (telescopeComponents.length > 1 || hosts.length > 1 || !telescopeComponents.length && !hosts.length)
+    throw new Error(`${product.lidvid} has no unique telescope or host.`);
+  const archiveTelescope = telescopeComponents[0]?.name ?? hosts[0]!.name;
+  const telescope = telescopeComponents.length && hosts.length ? `${hosts[0]!.name.split(/\s+/u)[0]}/${acronym(telescopeComponents[0]!.name)}` : archiveTelescope;
+  const instrument = instruments[0]!.name, instrumentKey = acronym(instrument), processingLevel = pds4Field(xml, 'processing_level');
+  const mapped = pds4Blocks(xml, 'cart:Cartography').length > 0, image2d = pds4Blocks(xml, 'Array_2D_Image'), image3d = pds4Blocks(xml, 'Array_3D_Image'), spectra3d = pds4Blocks(xml, 'Array_3D_Spectrum');
+  const tables = [...pds4Blocks(xml, 'Table_Character'), ...pds4Blocks(xml, 'Table_Binary'), ...pds4Blocks(xml, 'Table_Delimited')];
+  const kind = mapped && spectra3d.length ? 'image' : image2d.length ? 'image' : image3d.length || spectra3d.length ? 'cube' : tables.length ? 'table'
+    : pds4Blocks(xml, 'Array_1D').length ? 'spectrum' : undefined;
+  if (!kind) throw new Error(`${product.lidvid} has no supported observational array or table structure.`);
+  const spectral = pds4Blocks(xml, 'sp:Bin_Wavelength').map(block => ({ filter: pds4Field(block, 'sp:filter_name'),
+    center: numberWithUnit(block, 'sp:center_wavelength'), width: numberWithUnit(block, 'sp:bin_width_wavelength') }));
+  const optical = pds4Blocks(xml, 'img:Optical_Filter').map(block => ({ filter: pds4Field(block, 'img:filter_name'),
+    center: numberWithUnit(block, 'img:center_filter_wavelength'), width: numberWithUnit(block, 'img:bandwidth') }));
+  const bands = [...spectral, ...optical].map(band => {
+    if (!band.center || !band.width || band.center.unit !== band.width.unit) throw new Error(`${product.lidvid} has an incomplete optical band.`);
+    const center = micrometres(band.center), width = micrometres(band.width);
+    if (!(center > 0 && width > 0 && width < center * 2)) throw new Error(`${product.lidvid} has an invalid optical band.`);
+    return { filter: band.filter, interval: [Number((center - width / 2).toPrecision(12)), Number((center + width / 2).toPrecision(12))] as const };
   });
-  if (!bins.length || !targetReferences(xml).some(lid => product.targetLids.includes(lid))) throw new Error(`${product.lidvid} has no usable target or wavelength bins.`);
-  const resolutionX = pds4Number(xml, 'cart:pixel_resolution_x', 'm/pixel'), resolutionY = pds4Number(xml, 'cart:pixel_resolution_y', 'm/pixel');
-  if (resolutionX !== resolutionY || resolutionX <= 0) throw new Error(`${product.lidvid} has unsupported unequal map sampling.`);
-  const logicalIdentifier = identity(product, xml);
-  return { id: logicalIdentifier.split(':').at(-1)!, lidvid: product.lidvid, targetLid: product.targetLids[0]!, targetName: product.targetNames[0]!,
-    telescope: 'New Horizons', archiveTelescope: 'New Horizons', mode: 'MVIC mapped color', instrument, kind: 'image', title: pds4Field(xml, 'title'),
-    registryStartIso: product.startIso, registryStopIso: product.stopIso, filters: bins.map(bin => bin.filter),
-    wavelengthIntervalsMicrometres: bins.map(bin => bin.interval), surfaceResolutionKm: resolutionX / 1000,
-    label: { ...product.label, sha256: labelSha256 }, units: 'dimensionless relative values, no longer strictly I/F',
-    use: 'Archive-derived, body-registered multiband map. Suitable as a pinned telescope product; wavelength bands and map sampling come from its PDS4 label.' };
-}
-
-
-export function inspectMvicColorProduct(product: DiscoveredPdsProduct, xml: string, labelSha256: string): PdsDiscoveredObservation | undefined {
-  const systems = componentNames(xml), instrument = 'Multispectral Visible Imaging Camera';
-  if (!systems.includes('New Horizons') || !systems.includes(instrument) || pds4Blocks(xml, 'cart:Cartography').length || !pds4Blocks(xml, 'Array_2D_Image').length) return undefined;
-  const bands = pds4Blocks(xml, 'img:Imaging').map(block => {
-    const filters = pds4Blocks(block, 'img:Optical_Filter');
-    if (filters.length !== 1) throw new Error(`${product.lidvid} has an ambiguous optical-filter description.`);
-    const filter = filters[0]!, center = pds4Number(filter, 'img:center_filter_wavelength', 'nm'), width = pds4Number(filter, 'img:bandwidth', 'nm');
-    if (!(center > 0 && width > 0 && width < center * 2)) throw new Error(`${product.lidvid} has an invalid optical filter.`);
-    return { array: pds4Field(block, 'local_identifier_reference'), filter: pds4Field(filter, 'img:filter_name'),
-      interval: [Number(((center - width / 2) / 1000).toPrecision(12)), Number(((center + width / 2) / 1000).toPrecision(12))] as const };
-  });
-  const arrays = pds4Blocks(xml, 'Array_2D_Image').map(block => pds4Field(block, 'local_identifier'));
-  if (!bands.length || bands.map(band => band.array).join('\n') !== arrays.join('\n') || !targetReferences(xml).some(lid => product.targetLids.includes(lid)))
-    throw new Error(`${product.lidvid} has no usable target or one image per optical filter.`);
-  const logicalIdentifier = identity(product, xml);
-  return { id: logicalIdentifier.split(':').at(-1)!, lidvid: product.lidvid, targetLid: product.targetLids[0]!, targetName: product.targetNames[0]!,
-    telescope: 'New Horizons', archiveTelescope: 'New Horizons', mode: 'MVIC color images', instrument, kind: 'image', title: pds4Field(xml, 'title'),
-    registryStartIso: product.startIso, registryStopIso: product.stopIso, filters: bands.map(band => band.filter), wavelengthIntervalsMicrometres: bands.map(band => band.interval),
-    label: { ...product.label, sha256: labelSha256 }, units: 'not stated by PDS label',
-    use: 'Archive-derived four-filter detector images. Suitable as a pinned telescope product; the PDS4 label establishes each filter band but supplies no body-surface registration.' };
+  const resolution = [numberWithUnit(xml, 'cart:pixel_resolution_x'), numberWithUnit(xml, 'cart:pixel_resolution_y')].filter(value => value !== undefined);
+  const surfaceResolutionKm = resolution.length ? Math.max(...resolution.map(value => kilometresPerPixel(value))) : undefined;
+  const mode = mapped && bands.length ? `${instrumentKey} mapped color` : image2d.length > 1 && bands.length > 1 ? `${instrumentKey} color images`
+    : kind === 'image' && bands.length === 1 ? `${instrumentKey}/${bands[0]!.filter} ${processingLevel.toLowerCase()} image`
+    : `${instrumentKey} ${processingLevel.toLowerCase()} ${kind}`;
+  const targetIndex = product.targetLids.indexOf(target.lid), targetName = product.targetNames[targetIndex] ?? target.name;
+  return { id: logicalIdentifier.split(':').at(-1)!, lidvid: product.lidvid, targetLid: target.lid, targetName, telescope, archiveTelescope, mode, instrument, kind,
+    title: pds4Field(xml, 'title'), registryStartIso: product.startIso, registryStopIso: product.stopIso, processingLevel,
+    filters: bands.map(band => band.filter), wavelengthIntervalsMicrometres: bands.map(band => band.interval),
+    ...(surfaceResolutionKm === undefined ? {} : { surfaceResolutionKm }), label: { ...product.label, sha256: labelSha256 }, units: 'not stated at product level',
+    use: `Archive ${processingLevel.toLowerCase()} ${kind}; identity, structure and any wavelength or map-sampling facts come from its PDS4 label.` };
 }
 
 async function verifiedLabel(product: DiscoveredPdsProduct) {
@@ -92,14 +108,21 @@ async function verifiedLabel(product: DiscoveredPdsProduct) {
 }
 
 export async function discoverPdsTarget(target: { readonly id: string; readonly lid: string; readonly name: string }) {
-  const answer = await pdsPackages({ operation: 'discover-target', targetLid: target.lid, processingLevel: 'Derived' });
-  const products = (answer.products ?? []).map(normalizeDiscoveredPdsProduct), observations: PdsDiscoveredObservation[] = [];
-  for (const product of products) {
-    const label = await verifiedLabel(product), inspected = inspectMappedPdsProduct(product, label.xml, label.sha256) ?? inspectMvicColorProduct(product, label.xml, label.sha256);
-    if (inspected && inspected.targetLid === target.lid && inspected.targetName === target.name) observations.push(inspected);
+  const answer = await pdsPackages({ operation: 'discover-target', targetLid: target.lid });
+  const rows = answer.products ?? [], observations: PdsDiscoveredObservation[] = [], rejected: { lidvid: string; reason: string }[] = [];
+  for (const row of rows) {
+    let product: DiscoveredPdsProduct | undefined;
+    try {
+      product = normalizeDiscoveredPdsProduct(row);
+      const label = await verifiedLabel(product);
+      observations.push(inspectPdsProduct(product, label.xml, label.sha256, target));
+    } catch (error) {
+      rejected.push({ lidvid: product?.lidvid ?? String(row.lidvid ?? row.lid ?? 'unknown PDS product'), reason: error instanceof Error ? error.message : String(error) });
+    }
   }
   return { schema: PDS_DISCOVERY_SCHEMA, searchedAt: new Date().toISOString(), package: { name: 'pds.peppi', version: answer.peppi }, target,
-    scope: { productClass: 'Product_Observational', processingLevel: 'Derived', complete: true }, registryProducts: products.length, observations } as const;
+    scope: { productClass: 'Product_Observational', processingLevels: 'all', complete: true }, registryProducts: rows.length,
+    admittedProducts: observations.length, rejectedProducts: rejected.length, rejected, observations } as const;
 }
 
 export function mergePdsDiscovery(existing: unknown, discovery: Awaited<ReturnType<typeof discoverPdsTarget>>) {
@@ -112,12 +135,30 @@ export function mergePdsDiscovery(existing: unknown, discovery: Awaited<ReturnTy
     searches: [...searches.filter(entry => requireString(requireRecord(requireRecord(entry, 'PDS discovery search').target, 'PDS discovery target').id, 'PDS target id') !== discovery.target.id), discovery] };
 }
 
+export function pdsTargetNameCandidates(values: readonly string[]) {
+  const names = new Set<string>();
+  for (const raw of values) {
+    const value = raw.trim();
+    if (!value) continue;
+    names.add(value);
+    const withoutDesignation = value.replace(/\s+\([^()]+\)$/u, '');
+    names.add(withoutDesignation);
+    names.add(withoutDesignation.replace(/[A-Z]{2,}/gu, word => `${word[0]}${word.slice(1).toLowerCase()}`));
+  }
+  return [...names];
+}
+
+/** Resolve a PDS context target through Peppi. Archive identity is package-owned data, not a cssEarth target table. */
 export async function pdsTarget(root: string, id: string) {
-  const raw = requireRecord(JSON.parse(await readFile(resolve(root, 'data/pds/targets.json'), 'utf8')) as unknown, 'PDS targets');
-  if (raw.schema !== 'cssearth-pds-targets@1') throw new TypeError('Unsupported PDS target catalogue.');
-  const found = requireArray(raw.targets, 'PDS targets').map(entry => requireRecord(entry, 'PDS target')).find(entry => entry.id === id);
-  if (!found) throw new TypeError(`No PDS target identity is recorded for ${id}.`);
-  return { id, lid: requireString(found.lid, 'PDS target lid'), name: requireString(found.name, 'PDS target name') };
+  const descriptor = requireRecord(JSON.parse(await readFile(resolve(root, 'src/objects', id, 'object.json'), 'utf8')) as unknown, `${id} object`);
+  const catalog = requireRecord(requireRecord(descriptor.properties, `${id} properties`).catalog, `${id} catalog`);
+  const sourceNames = (await sourcePds3Observations(root, id)).map(observation => observation.targetName);
+  const names = pdsTargetNameCandidates([requireString(catalog.name, `${id} name`), ...sourceNames]);
+  const targets = (await pdsPackages({ operation: 'resolve-target', names })).targets ?? [];
+  if (targets.length !== 1) throw new TypeError(targets.length
+    ? `PDS target names for ${id} are ambiguous: ${targets.map(target => `${target.name} (${target.lid})`).join(', ')}.`
+    : `Peppi found no PDS context target for ${id} from ${names.join(', ')}.`);
+  return { id, lid: targets[0]!.lid, name: targets[0]!.name };
 }
 
 export const DISCOVER_HELP = 'Usage: pnpm telescope:discover --archive pds --target TARGET [--write]';

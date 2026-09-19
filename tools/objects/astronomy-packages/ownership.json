@@ -41,7 +41,7 @@
       "mechanic": "PDS4 Registry product discovery and pagination",
       "package": "pds.peppi",
       "version": "0.5.0",
-      "operation": "discover-product",
+      "operation": "resolve-target, discover-target, discover-product",
       "consumers": ["PDS observation qualification"]
     },
     {

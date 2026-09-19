@@ -25,7 +25,6 @@ export interface TargetAssociation {
   readonly target: string;
   readonly archive: 'mast';
   readonly collection: string;
-  readonly telescope: string;
   readonly mode: string;
   readonly archiveTarget: string;
   readonly programme: string;
@@ -34,8 +33,6 @@ export interface TargetAssociation {
   readonly observations: MastObservationResult['observations'];
   readonly evidence: readonly TargetAssociationEvidence[];
 }
-
-const TELESCOPES: Readonly<Record<string, string>> = Object.freeze({ HST: 'Hubble', JWST: 'JWST' });
 
 export function parseTargetAssociationSources(value: unknown): TargetAssociationSource[] {
   const root = requireRecord(value, 'target associations');
@@ -48,7 +45,6 @@ export function parseTargetAssociationSources(value: unknown): TargetAssociation
     if (copied) throw new TypeError(`${target}: ${copied} is MAST-owned and must not be copied into the association source.`);
     if (row.archive !== 'mast') throw new TypeError(`${target}: target association archive must be mast.`);
     const collection = requireString(row.collection, 'association MAST collection');
-    if (!TELESCOPES[collection]) throw new TypeError(`${target}: unsupported MAST collection ${collection}.`);
     const observations = requireArray(row.observations, 'association observations').map((id, observationIndex) =>
       requireString(id, `association observation ${observationIndex}`));
     if (!observations.length) throw new TypeError(`${target}: a target association names at least one exact observation.`);
@@ -76,8 +72,7 @@ export function hydrateTargetAssociation(source: TargetAssociationSource, result
     const group = groups.get(key) ?? [];
     group.push(observation); groups.set(key, group);
   }
-  const telescope = TELESCOPES[source.collection]!;
-  return [...groups.values()].map(observations => ({ target: source.target, archive: 'mast', collection: source.collection, telescope,
+  return [...groups.values()].map(observations => ({ target: source.target, archive: 'mast', collection: source.collection,
     mode: observations[0]!.mode, archiveTarget: observations[0]!.archiveTarget, programme: observations[0]!.programme,
     astroquery: result.astroquery, queriedAt: result.queriedAt, observations, evidence: source.evidence }));
 }

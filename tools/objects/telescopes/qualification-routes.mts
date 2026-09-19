@@ -124,17 +124,6 @@ const ROUTES: readonly QualificationRoute[] = [
     configurationFromArguments: args => ({ kind: 'naco-program-night', programme: required(args, '--archive-programme'),
       archiveTarget: required(args, '--archive-target'), night: required(args, '--night') }),
   },
-  {
-    telescope: 'Lowell/LDT', mode: 'LMI/VR calibrated image',
-    actions: ({ target, wavelengthMicrometres, time, observations }) => observations.filter(observation => overlapsTime(observation, time)
-      && observation.targetLid && observation.archiveTarget && observation.productLidvid && observation.instrument === 'Large Monolithic Imager'
-      && observation.wavelengthIntervalMicrometres && covers(observation.wavelengthIntervalMicrometres, wavelengthMicrometres)).map(observation =>
-        makeAction(target, 'Lowell/LDT', 'LMI/VR calibrated image', observation,
-          { kind: 'pds-product', targetLid: observation.targetLid!, targetName: observation.archiveTarget!, lidvid: observation.productLidvid! },
-          ['--pds-target-lid', observation.targetLid!, '--pds-target-name', observation.archiveTarget!, '--pds-lidvid', observation.productLidvid!])),
-    accepts: configuration => configuration.kind === 'pds-product' && configuration.targetLid.startsWith('urn:nasa:pds:context:target:') && configuration.lidvid.startsWith('urn:nasa:pds:'),
-    configurationFromArguments: args => ({ kind: 'pds-product', targetLid: required(args, '--pds-target-lid'), targetName: required(args, '--pds-target-name'), lidvid: required(args, '--pds-lidvid') }),
-  },
 ];
 
 const routeFor = (telescope: string, mode: string) => ROUTES.find(route => route.telescope === telescope && route.mode === mode);
@@ -145,7 +134,7 @@ export function qualificationActionsFor(telescope: string, mode: string, target:
   observations: readonly QualificationObservation[]): QualificationAction[] {
   const route = routeFor(telescope, mode);
   if (route) return route.actions({ target, wavelengthMicrometres, time, observations });
-  return observations.filter(observation => overlapsTime(observation, time) && observation.targetLid && observation.archiveTarget && observation.productLidvid
+  return observations.filter(observation => observation.kind === 'image' && overlapsTime(observation, time) && observation.targetLid && observation.archiveTarget && observation.productLidvid
     && observation.observatory && observation.instrument && productCovers(observation, wavelengthMicrometres)).map(observation => makeAction(target, telescope, mode, observation,
       { kind: 'pds-product', targetLid: observation.targetLid!, targetName: observation.archiveTarget!, lidvid: observation.productLidvid! },
       ['--pds-target-lid', observation.targetLid!, '--pds-target-name', observation.archiveTarget!, '--pds-lidvid', observation.productLidvid!]));

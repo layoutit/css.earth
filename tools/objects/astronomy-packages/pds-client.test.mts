@@ -9,9 +9,17 @@ test('the PDS boundary requires exact package versions and one exact product', (
 });
 
 test('target discovery keeps every row because Peppi owns complete pagination', () => {
-  const request = { operation: 'discover-target' as const, targetLid: 'urn:nasa:pds:context:target:satellite.x', processingLevel: 'Derived' as const };
+  const request = { operation: 'discover-target' as const, targetLid: 'urn:nasa:pds:context:target:satellite.x' };
   const answer = parsePdsPackageAnswer({ schema: 'cssearth-pds-package-answer@1', operation: 'discover-target', peppi: '0.5.0', pdr: '1.4.4', products: [{ lidvid: 'one' }, { lidvid: 'two' }] }, request);
   assert.equal(answer.products?.length, 2);
+});
+
+test('target identity resolution requires typed PDS context rows', () => {
+  const request = { operation: 'resolve-target' as const, names: ['Charon'] };
+  const answer = parsePdsPackageAnswer({ schema: 'cssearth-pds-package-answer@1', operation: 'resolve-target', peppi: '0.5.0', pdr: '1.4.4', targets: [
+    { lid: 'urn:nasa:pds:context:target:satellite.134340_pluto.charon', name: 'Charon', aliases: ['Pluto I (Charon)'], type: 'Satellite', harvestIso: '2026-08-29T03:30:29Z' },
+  ] }, request);
+  assert.equal(answer.targets?.[0]?.lid, 'urn:nasa:pds:context:target:satellite.134340_pluto.charon');
 });
 
 test('the PDS boundary validates every decoded structure', () => {
