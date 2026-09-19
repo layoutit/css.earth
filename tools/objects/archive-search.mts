@@ -18,7 +18,7 @@
  */
 import { requireArray, requireRecord } from '../source-values.mts';
 import { astroqueryRows, tapRows } from './astronomy-packages/client.mts';
-import { mastRequest } from './jwst/mast.mts';
+import { mastRequest } from './astronomy-packages/mast.mts';
 
 export const ESO_TAP = 'https://archive.eso.org/tap_obs', ALMA_TAP = 'https://almascience.eso.org/tap', DATACITE_API = 'https://api.datacite.org/dois';
 

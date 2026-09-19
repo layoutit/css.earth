@@ -27,9 +27,11 @@ import { hasErrorCode, readJsonSource, requireArray, requireFiniteNumber, requir
 import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import { qualificationActionsFor, type QualificationAction } from './qualification-routes.mts';
+import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociation } from './target-associations.mts';
 import { resolveTarget, type TargetCatalogueEntry, type TargetResolution } from './targets.mts';
 
 const ARCSEC_PER_RADIAN = 206_264.806_247;
+const TARGET_ASSOCIATIONS_PATH = 'data/telescopes/target-associations.json';
 export const MODES_SCHEMA = 'cssearth-telescope-modes@1';
 export const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'photometry', 'events', 'strips'] as const;
 export type ProductKind = typeof PRODUCT_KINDS[number];
@@ -81,6 +83,9 @@ export interface MeasuredResolution { readonly path: string; readonly quantity: 
 export interface CandidateEvidence {
   readonly ledger: string; readonly archiveDate: string;
   readonly receipts: readonly string[];
+  readonly targetAssociations: readonly { readonly source: string; readonly archive: 'mast'; readonly collection: string; readonly archiveTarget: string; readonly programme: string;
+    readonly astroquery: string; readonly queriedAt: string;
+    readonly citation: string; readonly locator: string; readonly establishes: string }[];
   readonly bodyMaps: readonly MeasuredResolution[];
   readonly investigations: readonly { readonly id: string; readonly status: string; readonly subject: string }[];
 }
@@ -150,6 +155,7 @@ export interface QueryInputs {
   readonly ledgers: readonly { readonly telescope: string; readonly path: string; readonly value: unknown }[];
   readonly capabilities: readonly ModeCapability[];
   readonly targetCatalogue: readonly TargetCatalogueEntry[];
+  readonly targetAssociations: readonly TargetAssociation[];
   readonly bodyMaps: readonly { readonly path: string; readonly value: unknown }[];
   readonly investigations?: { readonly path: string; readonly value: unknown };
 }
@@ -208,6 +214,7 @@ interface TargetMode {
   readonly dates: readonly { readonly id: string; readonly startIso: string; readonly endIso?: string }[];
   /** True only when the ledger retains every observation record counted for this target and mode. */
   readonly datesComplete?: boolean;
+  readonly targetAssociations?: CandidateEvidence['targetAssociations'];
 }
 
 const stringList = (value: unknown, label: string): string[] => requireArray(value, label).map((entry, index) => requireString(entry, `${label}[${index}]`));
@@ -324,25 +331,49 @@ function jwstModes(value: unknown, target: string): TargetMode[] {
 
 /** Hubble: configurations carry the tool and its checked programs; a target carries the configurations it was observed in, and
  * one observation count for the whole object. */
-function hstModes(value: unknown, target: string): TargetMode[] {
+function hstModes(value: unknown, target: string, targetAssociations: readonly TargetAssociation[]): TargetMode[] {
   const ledger = requireRecord(value, 'Hubble ledger');
   if (ledger.schema !== 'cssearth-hst-ledger@1') throw new TypeError(`Unsupported Hubble ledger schema ${String(ledger.schema)}.`);
   const archiveDate = requireString(ledger.archiveDate, 'archiveDate');
   const configurations = new Map(requireArray(ledger.configurations, 'configurations').map(raw => { const entry = requireRecord(raw, 'configuration'); return [requireString(entry.configuration, 'configuration'), entry] as const; }));
   const entries = [...requireArray(ledger.movingTargets, 'movingTargets'), ...requireArray(ledger.fixedTargets, 'fixedTargets')].map(raw => requireRecord(raw, 'target'));
   const object = entries.find(entry => entry.object === target);
-  if (!object) return [];
-  const count = requireFiniteNumber(object.observations, 'observations');
-  return stringList(object.configurations, 'configurations').map(mode => {
+  const toolkitFor = (mode: string) => {
     const declared = configurations.get(mode), programs = declared ? stringList(declared.programs, `${mode} programs`) : [], checked = declared ? stringList(declared.checked, `${mode} checked`) : [];
     const tool = declared ? optionalString(declared.tool, `${mode} tool`) : undefined;
     // The two capabilities arrive separately and stay separate: re-calibration in `checked`, the archive's own final products in
     // `archiveFinal`. A configuration whose pipeline is retired can hold the second and never the first.
     const archive = declared?.archiveFinal === undefined ? undefined : requireRecord(declared.archiveFinal, `${mode} archiveFinal`);
-    return { telescope: 'Hubble', mode, archiveDate, observations: { count, scope: 'object-total' as const }, programmes: [], dates: [],
-      toolkit: { ...(tool ? { tool } : {}), programs, checked, receipts: [],
-        ...(archive === undefined ? {} : { archiveFinal: { programs: stringList(archive.programs, `${mode} archive-final programs`), qualified: stringList(archive.qualified, `${mode} archive-final qualified`) } }) } };
-  });
+    return { ...(tool ? { tool } : {}), programs, checked, receipts: [],
+      ...(archive === undefined ? {} : { archiveFinal: { programs: stringList(archive.programs, `${mode} archive-final programs`), qualified: stringList(archive.qualified, `${mode} archive-final qualified`) } }) };
+  };
+  const count = object ? requireFiniteNumber(object.observations, 'observations') : 0;
+  const modes: TargetMode[] = object ? stringList(object.configurations, 'configurations').map(mode => ({ telescope: 'Hubble', mode, archiveDate,
+    observations: { count, scope: 'object-total' as const }, programmes: [], dates: [], toolkit: toolkitFor(mode) })) : [];
+  for (const association of targetAssociations.filter(entry => entry.archive === 'mast' && entry.collection === 'HST' && entry.telescope === 'Hubble' && entry.target === target)) {
+    if (!configurations.has(association.mode)) throw new TypeError(`${target}: target association names unknown Hubble mode ${association.mode}.`);
+    const records = association.observations.map(observation => ({ id: observation.id, startIso: observation.startIso,
+      ...(observation.endIso ? { endIso: observation.endIso } : {}), ...(observation.filter ? { filter: observation.filter } : {}),
+      programme: association.programme, archiveTarget: association.archiveTarget }));
+    const evidence = association.evidence.map(item => ({ source: TARGET_ASSOCIATIONS_PATH, archive: association.archive, collection: association.collection,
+      archiveTarget: association.archiveTarget, programme: association.programme, astroquery: association.astroquery, queriedAt: association.queriedAt, ...item }));
+    const existing = modes.find(entry => entry.mode === association.mode);
+    if (!existing) {
+      modes.push({ telescope: 'Hubble', mode: association.mode, archiveDate: association.queriedAt.slice(0, 10),
+        observations: { count: records.length, scope: 'this-mode', records }, programmes: [association.programme],
+        dates: records.map(record => ({ id: record.id, startIso: record.startIso, ...(record.endIso ? { endIso: record.endIso } : {}) })),
+        toolkit: toolkitFor(association.mode), targetAssociations: evidence });
+      continue;
+    }
+    const before = existing.observations?.records ?? [], added = records.filter(record => !before.some(other => other.id === record.id));
+    Object.assign(existing, {
+      observations: { count: (existing.observations?.count ?? 0) + added.length, scope: existing.observations?.scope ?? 'this-mode', records: [...before, ...added] },
+      programmes: [...new Set([...existing.programmes, association.programme])],
+      dates: [...existing.dates, ...added.map(record => ({ id: record.id, startIso: record.startIso, ...(record.endIso ? { endIso: record.endIso } : {}) }))],
+      targetAssociations: [...existing.targetAssociations ?? [], ...evidence],
+    });
+  }
+  return modes;
 }
 
 /** NACO: each mode carries the state the route reached on it and the receipts behind it; each object carries the modes its
@@ -523,11 +554,13 @@ function pdsModes(value: unknown, target: string): TargetMode[] {
       toolkit: { tool: 'pds.peppi + pdr', programs, checked: [], receipts: stringList(declared.receipts, 'PDS receipts'), archiveFinal: { programs, qualified } } }]; });
 }
 
-const ADAPTERS: Readonly<Record<string, (value: unknown, target: string) => TargetMode[]>> = Object.freeze({ jwst: jwstModes, hst: hstModes, naco: nacoModes, chandra: chandraModes, juno: junoModes,
+const ADAPTERS: Readonly<Record<string, (value: unknown, target: string, targetAssociations: readonly TargetAssociation[]) => TargetMode[]>> = Object.freeze({ jwst: jwstModes, hst: hstModes, naco: nacoModes, chandra: chandraModes, juno: junoModes,
   spitzer: spitzerModes, gemini: geminiModes, keck: keckModes, ihw: ihwModes, pds: pdsModes });
 
 function targetCoverage(telescope: string, ledgerPath: string, value: unknown, target: string, modes: readonly TargetMode[]): TargetCoverage {
-  if (modes.length) return { telescope, ledger: ledgerPath, state: 'observed', reason: `The ledger indexes ${modes.length} mode(s) for ${target}.` };
+  if (modes.length) return { telescope, ledger: ledgerPath, state: 'observed', reason: modes.some(mode => mode.targetAssociations?.length)
+    ? `The ledger and cited target-in-field associations index ${modes.length} mode(s) for ${target}.`
+    : `The ledger indexes ${modes.length} mode(s) for ${target}.` };
   const ledger = requireRecord(value, `${telescope} ledger`);
   if (telescope === 'spitzer') {
     const skipped = (ledger.notAsked === undefined ? [] : requireArray(ledger.notAsked, 'notAsked')).map(raw => requireRecord(raw, 'notAsked target')).find(entry => entry.object === target);
@@ -762,7 +795,7 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
   for (const ledger of inputs.ledgers) {
     const adapter = ADAPTERS[ledger.telescope];
     if (!adapter) throw new TypeError(`No adapter reads the ${ledger.telescope} ledger.`);
-    const modes = adapter(ledger.value, target);
+    const modes = adapter(ledger.value, target, inputs.targetAssociations);
     targetCoverageResults.push(targetCoverage(ledger.telescope, ledger.path, ledger.value, target, modes));
     if (!modes.length) continue;
     for (const mode of modes) found.push({ ledger: ledger.path, mode });
@@ -772,7 +805,7 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
     const capability = capabilities.get(`${mode.telescope} :: ${mode.mode}`), evidence = attached.get(mode)!;
     return { telescope: mode.telescope, mode: mode.mode, observations: mode.observations, programmes: mode.programmes,
       meetsConstraints: constraintVerdicts(canonicalRequest, mode, capability), toolkitSupport: toolkitSupport(mode, target), bodyMapSupport: bodyMapSupport(mode),
-      evidence: { ledger, archiveDate: mode.archiveDate, receipts: mode.toolkit.receipts, bodyMaps: evidence.bodyMaps, investigations: evidence.investigations },
+      evidence: { ledger, archiveDate: mode.archiveDate, receipts: mode.toolkit.receipts, targetAssociations: mode.targetAssociations ?? [], bodyMaps: evidence.bodyMaps, investigations: evidence.investigations },
       unknown: [...(capability ? [] : [`What this mode can do: ${NO_CAPABILITIES}`]), ...UNKNOWN_UNTIL_READ(target, mode),
         ...(evidence.bodyMaps.length ? [] : [`Whether anything here has ever measured ${target} in this mode: no body map beside the object names it.`])] };
   });
@@ -860,13 +893,15 @@ export async function loadQueryInputs(root: string, target: string): Promise<Que
     if (value !== undefined) ledgers.push({ telescope, path, value });
   }
   const capabilities = parseModeCapabilities(await readJsonSource(resolve(root, 'tools/objects/telescopes/modes.json')));
+  const associationSources = parseTargetAssociationSources(await readJsonSource(resolve(root, TARGET_ASSOCIATIONS_PATH)));
+  const targetAssociations = await loadTargetAssociations(associationSources.filter(entry => entry.target === canonicalTarget));
   const source = resolve(root, 'src/objects', canonicalTarget, 'source');
   const names = await readdir(source, { recursive: true }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return [] as string[]; throw error; });
   const bodyMaps: { path: string; value: unknown }[] = [];
   for (const name of names.filter(entry => entry.endsWith('.body-map.json')).sort()) bodyMaps.push({ path: `src/objects/${canonicalTarget}/source/${name}`, value: await readJsonSource(resolve(source, name)) });
   const investigationPath = `src/objects/${canonicalTarget}/investigations.json`;
   const investigations = await readJsonSource(resolve(root, investigationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return undefined; throw error; });
-  return { ledgers, capabilities, targetCatalogue, bodyMaps, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
+  return { ledgers, capabilities, targetCatalogue, targetAssociations, bodyMaps, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
 }
 
 const LEVEL_WORDS: Readonly<Record<ToolkitLevel, string>> = Object.freeze({ none: 'no toolkit',
@@ -901,6 +936,7 @@ export function formatAnswer(answer: CapabilityAnswer): string {
     const usable = [...forTarget(candidate.toolkitSupport.checked, answer.target), ...forTarget(candidate.toolkitSupport.archiveFinalQualified, answer.target)];
     lines.push(`  usable program of ${answer.target}: ${usable.join(', ') || 'none'}`);
     lines.push(`  evidence: ${candidate.evidence.ledger} (archive read ${candidate.evidence.archiveDate})${candidate.evidence.receipts.length ? `, receipts ${candidate.evidence.receipts.join(', ')}` : ''}`);
+    for (const association of candidate.evidence.targetAssociations) lines.push(`    target in field: ${association.source}; MAST ${association.collection} via Astroquery ${association.astroquery}, queried ${association.queriedAt}; archive target ${association.archiveTarget}, programme ${association.programme}; ${association.establishes} (${association.citation}, ${association.locator})`);
     for (const map of candidate.evidence.bodyMaps) lines.push(`    measured: ${map.path}, ${map.quantity}, ${map.angularResolutionArcsec} arcsec, ${map.surfaceResolutionKm} km at the sub-observer point`);
     for (const entry of candidate.evidence.investigations) lines.push(`    investigation ${entry.id} (${entry.status}): ${entry.subject}`);
     for (const line of candidate.unknown) lines.push(`    unknown: ${line}`);

@@ -28,7 +28,7 @@ import { gainForTopAlpha, spreadColumns } from '../../../src/preparation/volume/
 import { readFitsFileHdus } from '../../fits.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { CHANNELS, reflectanceChannels, stretchOf } from './fit-figure-stretch.mts';
-import { mastDownloadUrl, mastFile } from '../jwst/mast.mts';
+import { mastDownloadUrl, mastFile } from '../astronomy-packages/mast.mts';
 import { readImagingProgram } from '../jwst/imaging/image3.mts';
 import { JWST_BANDS } from '../jwst/imaging/bands.mts';
 import { DEFAULT_SEARCH, discDensity, fitDiscEnvelope, profileDiscDensity, scoreEnvelope, readSkyPlane, ringGeometry, type SkyPlane } from './disc-envelope.mts';
@@ -303,7 +303,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
     return { id: inputId, dependencies: [], sourceBinding: { kind: 'catalogued', references: [{ catalogueId, role: 'material', evidence }] },
       path: `${downloadsBase}/observations/${band.entry.level3.name}`, origin: mastDownloadUrl(band.entry.level3.uri), sourceUrl: recipe.sourceUrl,
       title: `MAST JWST programme ${band.program.programme} · ${band.entry.observation} level-3 coronagraph mosaic`, credit: recipe.credit, displayCredit: 'NASA/ESA/CSA JWST, MAST',
-      acquisition: `Downloaded unchanged from MAST by its URI ${band.entry.level3.uri} (tools/objects/jwst/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/${lens.program}.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).`,
+      acquisition: `Downloaded unchanged from MAST by its URI ${band.entry.level3.uri} (tools/objects/astronomy-packages/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/${lens.program}.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).`,
       license: recipe.license.note, lensId: lens.id, expectedSha256: band.mosaicSha256, expectedBytes: band.entry.level3.bytes };
   });
   const produced = new Map(outputs.map(([name, bytes]) => [name, bytes]));
