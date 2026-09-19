@@ -156,7 +156,7 @@ export function observedLimb(frame: LimbImage, threshold: number, maximumPoints:
   return kept;
 }
 
-interface Residual { residual: number; lit: boolean }
+export interface Residual { residual: number; lit: boolean }
 
 /**
  * Signed distance (pixels, along the outward normal) from an observed edge
@@ -165,7 +165,7 @@ interface Residual { residual: number; lit: boolean }
  * search from a terminator runs across the night side and meets the far limb
  * where the surface faces away from the Sun.
  */
-function limbResidual(point: LimbEdgePoint, camera: LimbCamera, mesh: SourceMesh, eye: readonly number[], sun: readonly number[], search: number, normals: readonly Vec3[], pixelMapping?: LimbPixelMapping): Residual | null {
+export function limbResidual(point: LimbEdgePoint, camera: LimbCamera, mesh: SourceMesh, eye: readonly number[], sun: readonly number[], search: number, normals: readonly Vec3[], pixelMapping?: LimbPixelMapping): Residual | null {
   const ray = (s: number) => {
     const x = point.x + s * point.normal[0], y = point.y + s * point.normal[1];
     const [px, py] = pixelMapping ? pixelMapping.toPinhole(x, y) : [x, y];

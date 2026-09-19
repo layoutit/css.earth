@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-junocam-program@1",
+  "id": "europa-pj45",
+  "volume": "JNOJNC_0024",
+  "target": {
+    "name": "EUROPA",
+    "naifId": 502,
+    "bodyFrame": "IAU_EUROPA"
+  },
+  "kernelSet": "juno",
+  "kernels": [
+    "lsk/naif0012.tls",
+    "pck/pck00011.tpc",
+    "sclk/JNO_SCLKSCET.00211.tsc",
+    "fk/juno_v12.tf",
+    "ik/juno_junocam_v03.ti",
+    "spk/spk_rec_220909_221019_221027.bsp",
+    "ck/juno_sc_rec_220925_221001_v01.bc"
+  ],
+  "images": [
+    {
+      "productId": "JNCR_2022272_45C00001_V01",
+      "startTime": "2022-09-29T09:38:05.691Z",
+      "altitudeKm": 1515.1,
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00001_V01.IMG",
+      "bytes": 35438592,
+      "labelUrl": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00001_V01.LBL",
+      "labelBytes": 2500,
+      "sha256": "2ba58b89307ddf45488c9d0b847e463248fbd89bf8dd009a52c9bc84efc81153",
+      "labelSha256": "78128738c52c1d2771f6f0d1cd9420aed7b368cc61330e361f7bb1f8123aeaae"
+    },
+    {
+      "productId": "JNCR_2022272_45C00002_V01",
+      "startTime": "2022-09-29T09:39:06.757Z",
+      "altitudeKm": 2738,
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00002_V01.IMG",
+      "bytes": 35438592,
+      "labelUrl": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00002_V01.LBL",
+      "labelBytes": 2502,
+      "sha256": "3bf1ec69bd2e7962ed3f580134c636b2f08897c4b4d8d9dff5ddfeb44fa9504d",
+      "labelSha256": "f886ac164073f6ba7d4f6f85959bb02f2e3ee78bb56fc8607f66ba0d75b91af8"
+    },
+    {
+      "productId": "JNCR_2022272_45C00003_V01",
+      "startTime": "2022-09-29T09:40:08.003Z",
+      "altitudeKm": 4069.1,
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00003_V01.IMG",
+      "bytes": 35438592,
+      "labelUrl": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00003_V01.LBL",
+      "labelBytes": 2501,
+      "sha256": "e59803a33baedfba8a94298b543c9929f43a3ffa3fa0550a40d702fbff38802c",
+      "labelSha256": "05d8ee27c8cab53fe922ac30f5132798204e91a9d02d6ee49b41cd6b5c5f15fd"
+    },
+    {
+      "productId": "JNCR_2022272_45C00004_V01",
+      "startTime": "2022-09-29T09:41:09.159Z",
+      "altitudeKm": 5443.4,
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00004_V01.IMG",
+      "bytes": 35438592,
+      "labelUrl": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00004_V01.LBL",
+      "labelBytes": 2501,
+      "sha256": "3819b5005849b216a80667ce787ace3b366c8887f2b9a27304cc108e88a47516",
+      "labelSha256": "7509c74e5f3c93b2096eee664033a49f1a4bc6413c723ee31c23607772e701f3"
+    }
+  ]
+}

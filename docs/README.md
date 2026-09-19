@@ -26,6 +26,8 @@ For a body's sources, processing, evidence and known problems, read its
 | What the NACO archive holds for this project's bodies, and which modes are reduced | [NACO archive ledger](naco-ledger.md) |
 | Chandra observations reprocessed from level 1 on the observatory's own software, and checked event by event against the archive's own product | [Chandra](chandra.md) |
 | What the Chandra archive holds, which of our objects it observed, and how far the toolkit is proved | [Chandra archive ledger](chandra-ledger.md) |
+| JunoCam's push-frame images cast strip by strip from the Juno kernels, the limb fit of their two epochs, and what the four Europa images measured | [JunoCam](junocam.md) |
+| What the JunoCam archive holds, which of our objects it photographed, and which images are measured or cast | [JunoCam archive ledger](junocam-ledger.md) |
 | Connecting prepared outputs to their inputs | [Prepared object provenance](object-provenance.md) |
 | Published source identities, input bindings and usage links | [Sources catalogue](sources-catalogue.md) |
 | Missions, spacecraft and dataset attribution | [Exploration catalogue](architecture/exploration-catalog.md) |

@@ -1,0 +1,169 @@
+{
+  "schema": "cssearth-junocam-registration@1",
+  "program": "europa-pj45",
+  "measured": "2026-09-19",
+  "target": {
+    "name": "EUROPA",
+    "naifId": 502,
+    "bodyFrame": "IAU_EUROPA",
+    "radiiKm": [
+      1562.6,
+      1560.3,
+      1559.5
+    ]
+  },
+  "policy": {
+    "method": "mesh-limb-epochs",
+    "maximumPointingSeconds": 0.05,
+    "maximumEphemerisSeconds": 2,
+    "maximumResidualPixels": 1.5,
+    "minimumControls": 64,
+    "maximumControls": 1500,
+    "searchPixels": 64
+  },
+  "kernels": [
+    {
+      "path": "lsk/naif0012.tls",
+      "bytes": 5257,
+      "sha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+    },
+    {
+      "path": "pck/pck00011.tpc",
+      "bytes": 131226,
+      "sha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+    },
+    {
+      "path": "sclk/JNO_SCLKSCET.00211.tsc",
+      "bytes": 42707,
+      "sha256": "8bbb70ddb8cd9d81d63834cab39f146ad485b048eb0bf454054d72b268b2642f"
+    },
+    {
+      "path": "fk/juno_v12.tf",
+      "bytes": 153074,
+      "sha256": "12a30da08609c1cd1b631b93910b4b6f4114380a761aafabbef077368860ef02"
+    },
+    {
+      "path": "ik/juno_junocam_v03.ti",
+      "bytes": 17535,
+      "sha256": "5dbbcefdf640829ebbb5430f6f9bc0b36481857b473459dc735954279708c7ab"
+    },
+    {
+      "path": "spk/spk_rec_220909_221019_221027.bsp",
+      "bytes": 2899968,
+      "sha256": "a3968a1bef92d61ab5787e1efb3c310591538cb555164c21998a47e68d705767"
+    },
+    {
+      "path": "ck/juno_sc_rec_220925_221001_v01.bc",
+      "bytes": 38770688,
+      "sha256": "5f81d3eb2f19671c86a755609081dc2f585ddc68f06c6a8ca30b7b5f8c67dd81"
+    }
+  ],
+  "images": [
+    {
+      "productId": "JNCR_2022272_45C00001_V01",
+      "startTime": "2022-09-29T09:38:05.691Z",
+      "altitudeKmInLabel": 1515.1,
+      "frames": 28,
+      "strips": 50,
+      "offsets": {
+        "pointingSeconds": 0.017466639119935005,
+        "ephemerisSeconds": 1.1154969129638717
+      },
+      "edgePoints": {
+        "found": 1350,
+        "lit": 1024,
+        "fit": 505,
+        "holdout": 519,
+        "retained": 505
+      },
+      "holdoutResidualPixels": {
+        "before": 13.463426929373849,
+        "after": 0.692411900086935,
+        "points": 519
+      },
+      "seconds": 2.1
+    },
+    {
+      "productId": "JNCR_2022272_45C00002_V01",
+      "startTime": "2022-09-29T09:39:06.757Z",
+      "altitudeKmInLabel": 2738,
+      "frames": 28,
+      "strips": 39,
+      "offsets": {
+        "pointingSeconds": -0.004218616411539844,
+        "ephemerisSeconds": 1.1238952881388558
+      },
+      "edgePoints": {
+        "found": 1326,
+        "lit": 1285,
+        "fit": 641,
+        "holdout": 644,
+        "retained": 641
+      },
+      "holdoutResidualPixels": {
+        "before": 6.236399572599446,
+        "after": 0.6061861209615186,
+        "points": 644
+      },
+      "seconds": 1.8
+    },
+    {
+      "productId": "JNCR_2022272_45C00003_V01",
+      "startTime": "2022-09-29T09:40:08.003Z",
+      "altitudeKmInLabel": 4069.1,
+      "frames": 28,
+      "strips": 33,
+      "offsets": {
+        "pointingSeconds": 0.006068361882454018,
+        "ephemerisSeconds": 1.1587807022896932
+      },
+      "edgePoints": {
+        "found": 1288,
+        "lit": 1252,
+        "fit": 627,
+        "holdout": 625,
+        "retained": 627
+      },
+      "holdoutResidualPixels": {
+        "before": 4.109890901551554,
+        "after": 0.514255045627289,
+        "points": 625
+      },
+      "seconds": 1.7
+    },
+    {
+      "productId": "JNCR_2022272_45C00004_V01",
+      "startTime": "2022-09-29T09:41:09.159Z",
+      "altitudeKmInLabel": 5443.4,
+      "frames": 28,
+      "strips": 28,
+      "offsets": {
+        "pointingSeconds": 0.003565058423316366,
+        "ephemerisSeconds": 1.1534369909502418
+      },
+      "edgePoints": {
+        "found": 1242,
+        "lit": 1230,
+        "fit": 616,
+        "holdout": 614,
+        "retained": 615
+      },
+      "holdoutResidualPixels": {
+        "before": 2.7837223093705914,
+        "after": 0.6629760157415437,
+        "points": 614
+      },
+      "seconds": 1.9
+    }
+  ],
+  "horizons": {
+    "source": "Juno_merged",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27-61%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27%40502%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%272%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&TLIST_TYPE=%27JD%27&TIME_TYPE=%27TDB%27&TLIST=%272459851.902255479%27%0A%272459851.902962261%27%0A%272459851.903671127%27%0A%272459851.904378951%27",
+    "differencesMeters": [
+      1.120840044355396,
+      0.295538669750798,
+      0.0957247809090565,
+      1.1195995412501265
+    ]
+  }
+}

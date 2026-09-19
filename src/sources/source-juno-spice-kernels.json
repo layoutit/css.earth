@@ -1,0 +1,41 @@
+{
+  "id": "source-juno-spice-kernels",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Juno SPICE kernels",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/",
+      "label": "NAIF Juno kernels"
+    },
+    {
+      "role": "archive",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/pds/data/jno-j_e_ss-spice-6-v1.0/jnosp_1000/",
+      "label": "PDS Juno SPICE archive volume"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/spice/juno/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL NAIF; Juno project SPICE kernels",
+      "scope": "Juno kernels in the shared SPICE kernel bank.",
+      "evidence": "Kernel bank manifest credit field."
+    }
+  ]
+}
