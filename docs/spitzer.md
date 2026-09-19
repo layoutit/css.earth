@@ -38,6 +38,16 @@ node tools/objects/spitzer/compare.mts  ngc3132-4416768
 node tools/objects/spitzer/archive-ledger.mts --write
 ```
 
+For an observation returned by the shared capability query, the same stages are available through the checked dispatcher:
+
+```
+pnpm telescope:qualify --target bennu --telescope Spitzer --mode 'IRAC Map' --observation 21415424 --channel 1
+```
+
+It first requires that the canonical target, mode and AOR occur together in the committed archive index. It then runs the
+Spitzer-owned pin, mosaic and comparison functions and refreshes only repository-owned ledger state; it does not repeat or
+redate the archive survey.
+
 **`archive.mts`** finds the observation in the Spitzer Heritage Archive at IRSA and pins it. Per IRAC channel: the archive's own mosaic (`maic`) with its uncertainty (`munc`) and coverage (`mcov`), and every level-1 frame as its corrected image (`cbcd`), uncertainty (`cbunc`) and imask (`bimsk`). Each file by URL, byte count and sha256, with the archive's own MD5 checked where the catalogue publishes one. What the observation is, is recorded twice, from the catalogue and from the FITS headers, and a disagreement refuses the pin.
 
 **`mosaic.mts`** drives `mosaic.py` in the pinned environment: read each frame with its own SIP distortion, drop what the imask flags, resample onto the archive's grid with `reproject_exact`, drop an output pixel from a frame that covers less than half of it, put the frames on one background level, average with equal weight per contributing frame. It writes a `cssearth-telescope-product@1` record beside the output naming the exact inputs, parameters, versions and toolchain digest. A second run with the same record and the same bytes does no work.
@@ -74,6 +84,12 @@ The archive is public and needs no account. Two IRSA services are used and they 
 "Inside the archive's own 1 sigma" is the column that means most: it is the archive saying how well it claims to know each pixel, and our mosaic falls inside that claim for 98% of them in every channel.
 
 Nothing is bit-identical, and nothing should be: two different pipelines.
+
+**Bennu qualification.** AOR 21415424, archive programme 289, observed 2007-05-08, supplies the checked channel-1 program
+`bennu-21415424`. Ten of its eleven pinned level-1 frames match the archive mosaic's 12 second frame time. The re-mosaic covers
+1,038,727 pixels; 99.49% of the compared pixels fall within the archive uncertainty, the median absolute difference is 1.187%
+of the median level, and the correlation is 0.964104. This qualifies those exact bytes and that reduction route. It does not
+establish that every one of Bennu's eleven indexed IRAC Map AORs, or another IRAC channel, is adequate for a question.
 
 **Geometry.** The run resamples onto the archive's grid, so it does not choose one. It reports the grid the frames imply on their own, from `find_optimal_celestial_wcs`, beside it: 716 x 603 at 1.223 arcsec for channel 1, against the archive's 2361 x 1036 at 0.600 arcsec. The archive oversamples by about two; the frames' native scale is recovered to within 0.1%.
 

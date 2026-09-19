@@ -121,6 +121,11 @@ pnpm telescope:query --target europa --wavelength 3.4,3.6 --kind cube \
 smaller `--min-arcsec` or `--min-km` asks for sharper data. For machine input, `pnpm --silent telescope:query ... --json`
 writes JSON alone; ordinary `pnpm` prints its script banner before the program's stdout.
 
+The target is resolved through the source object descriptors that generate the shipped catalogue. An id, display name or
+catalogue alias resolves to one canonical id. A near spelling is never silently substituted: it returns the distinct
+`unknown-target` endpoint with ranked suggestions and no archive negatives. This matters because "the target is not shipped"
+and "the archives contain no observation of a shipped target" are different scientific results.
+
 It returns one candidate per mode that observed the target, the ones that cover the requested wavelengths first, and each
 candidate answers four separate things:
 
@@ -150,9 +155,13 @@ candidate answers four separate things:
    knows until an observation is pinned and read.
 
 Each candidate also carries a `selectionAssessment` derived from these same facts: `selectable`, stable blocker codes, and a
-structured next action for every target-qualified program only when the explicit selection command can run. The top-level
-`endpoint` is `request-incomplete`, `no-selectable-candidate`, or `selectable-candidates`; it reports the number that can proceed
-and the blocker codes present across the answer. Consumers do not need to reverse-engineer workflow state from prose.
+structured next action for every target-qualified program only when the explicit selection command can run. If qualification
+is the only blocker and a registered telescope route can cover the entire requested wavelength window, `qualificationActions`
+instead names the indexed archive observation, detector channel, resulting program id and an executable `telescope:qualify`
+command. That command validates the target, mode and observation against the index, then hands the work to the telescope-owned
+reducer; it is a small dispatcher, not a second reduction framework. The top-level `endpoint` is `unknown-target`,
+`request-incomplete`, `no-selectable-candidate`, or `selectable-candidates`; it reports the number that can proceed and the
+blocker codes present across the answer. Consumers do not need to reverse-engineer workflow state from prose.
 
 Evidence reaches a candidate only by naming it. A body map's observation states the telescope, the exact ledger mode and the
 pinned program separately from its instrument setting; an investigation entry must contain that mode key in its own words. Anything
@@ -195,6 +204,12 @@ Candidate output keeps three program facts separate: programmes the archive reco
 toolkit, and programs with checked receipts or qualified archive-final products. An archive programme is therefore visible
 without being presented as something the local route can already run. Where present, complete archive observation records are
 returned under the candidate's observation count; the human output shows the first eight and the JSON answer retains all of them.
+
+Spitzer IRAC Map is the first registered qualification route. For a request contained in one IRAC channel, the query can emit
+one action per time-matching AOR. For example, the Bennu 3.5–3.9 micrometre request selected channel 1 and AOR 21415424. Running
+that action pinned the archive inputs, produced and compared the mosaic, refreshed the ledger's program and receipt identities,
+and changed the same query from `target-program-unqualified` to a selectable `bennu-21415424` program. Other telescopes remain
+unregistered until their own reducers define the observation-level choices they can qualify honestly.
 
 The instrument author then writes the final map, its `*.body-map.json`, and the shared `*.product.json`. Resolved images from
 JWST, ALMA and NACO meet at `tools/objects/resolved-disc-map.mts`: an adapter supplies a north-up/east-left value plane, its

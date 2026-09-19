@@ -275,7 +275,7 @@ test('a ledger counts a mode as checked only from a receipt, and says plainly th
   assert.match(guide, /the same search, in the same pass, returned 2 for Ceres/u);
   assert.match(guide, /not asked for at all/u);
   assert.deepEqual(parseLedger(JSON.parse(JSON.stringify(unproved)) as unknown), unproved);
-  assert.throws(() => parseLedger({ ...unproved, schema: 'cssearth-spitzer-ledger@3' }), /Unsupported/u);
+  assert.throws(() => parseLedger({ ...unproved, schema: 'cssearth-spitzer-ledger@1' }), /Unsupported/u);
   assert.throws(() => parseLedger({ ...unproved, holdings: [{ ...unproved.holdings[0], records: [] }] }), /do not reproduce/u);
 });
 

@@ -21,6 +21,8 @@ const CAPABILITIES = parseModeCapabilities({ schema: MODES_SCHEMA, modes: [
   { telescope: 'Hubble', mode: 'STIS/FUV-MAMA', wavelengths: [[0.115, 0.17]], apertureMetres: 2.4, pixelScaleArcsec: 0.025, kinds: ['image', 'spectrum'], citation },
   { telescope: 'Spitzer', mode: 'IRAC Map PC', wavelengths: [[3.176, 3.926], [3.988, 4.998]], apertureMetres: 0.85, pixelScaleArcsec: 1.213,
     instrumentResolutionArcsec: 1.66, instrumentResolutionBasis: 'best cryogenic IRAC mean PRF FWHM', instrumentResolutionCitation: citation, kinds: ['image'], citation },
+  { telescope: 'Spitzer', mode: 'IRAC Map', wavelengths: [[3.176, 3.926], [3.988, 4.998], [5.02, 6.44], [6.408, 9.338]], apertureMetres: 0.85, pixelScaleArcsec: 1.213,
+    instrumentResolutionArcsec: 1.66, instrumentResolutionBasis: 'best cryogenic IRAC mean PRF FWHM', instrumentResolutionCitation: citation, kinds: ['image'], citation },
   { telescope: 'Spitzer', mode: 'IRS Stare', wavelengths: [[5.13, 39.9]], apertureMetres: 0.85, pixelScaleArcsec: 1.8, kinds: ['spectrum'], citation },
   { telescope: 'VLT/NACO', mode: 'imaging', wavelengths: [[1, 5]], apertureMetres: 8.2, pixelScaleArcsec: 0.01326, kinds: ['image'], citation },
   { telescope: 'Juno', mode: 'JUNOCAM', wavelengths: [[0.42, 0.9]], pixelScaleArcsec: 138.7, kinds: ['strips'], citation }] });
@@ -48,8 +50,8 @@ const NACO_LEDGER = { schema: 'cssearth-naco-ledger@1', measured: '2026-09-19',
 const JUNO_LEDGER = { schema: 'cssearth-junocam-ledger@1', measured: '2026-09-19', objects: [
   { id: 'europa', target: 'EUROPA', colourImages: 52, measuredImages: 4, programs: ['europa-pj45'], state: 'measured', why: '4 image(s) registered.' },
   { id: 'io', target: 'IO', colourImages: 247, measuredImages: 0, programs: [], state: 'not measured', why: 'No program of this target is pinned.' }] };
-const SPITZER_LEDGER = { schema: 'cssearth-spitzer-ledger@2', archiveDate: '2026-09-19', modes: [
-  { mode: 'IRAC Map PC', tool: null }, { mode: 'IRS Stare', tool: null }], holdings: [{ object: 'itokawa', modes: { 'IRAC Map PC': 1, 'IRS Stare': 2 }, records: [
+const SPITZER_LEDGER = { schema: 'cssearth-spitzer-ledger@3', archiveDate: '2026-09-19', modes: [
+  { mode: 'IRAC Map PC', tool: null, programs: [], checked: [], receipts: [] }, { mode: 'IRS Stare', tool: null, programs: [], checked: [], receipts: [] }], holdings: [{ object: 'itokawa', modes: { 'IRAC Map PC': 1, 'IRS Stare': 2 }, records: [
     { id: '1', programme: '292', mode: 'IRS Stare', title: 'epoch one', startIso: '2007-05-03T23:01:47.812Z', endIso: '2007-05-03T23:36:43.455Z' },
     { id: '2', programme: '292', mode: 'IRS Stare', title: 'epoch two', startIso: '2007-05-04T01:42:54.417Z', endIso: '2007-05-04T02:17:50.064Z' },
     { id: '3', programme: '61012', mode: 'IRAC Map PC', title: 'warm IRAC', startIso: '2010-05-15T14:35:42.395Z', endIso: '2010-05-15T14:49:52.594Z' },
@@ -64,7 +66,9 @@ const bodyMap = (telescope: string, instrument: string, id: string) => ({ schema
     angularResolution: { majorArcsec: 0.05, minorArcsec: 0.05, basis: 'fitted point spread function' } }] });
 
 const inputs = (ledgers: readonly { telescope: string; value: unknown }[], rest: Partial<QueryInputs> = {}): QueryInputs =>
-  ({ ledgers: ledgers.map(entry => ({ ...entry, path: `data/${entry.telescope}/ledger.json` })), capabilities: CAPABILITIES, bodyMaps: [], ...rest });
+  ({ ledgers: ledgers.map(entry => ({ ...entry, path: `data/${entry.telescope}/ledger.json` })), capabilities: CAPABILITIES,
+    targetCatalogue: ['europa', 'hd-181327', 'ceres', 'vesta', 'jupiter', 'itokawa', 'io', 'flora', 'm42', 'bennu'].map(id => ({ id, name: id === 'bennu' ? 'Bennu' : id, aliases: [] })),
+    bodyMaps: [], ...rest });
 const candidate = (answer: CapabilityAnswer, mode: string): Candidate => {
   const found = answer.candidates.find(entry => entry.mode === mode);
   assert.ok(found, `no candidate for ${mode}`);
@@ -89,6 +93,36 @@ test('a gap between the two intervals of a mode is not coverage', () => {
   assert.equal(ask(3, 3.2).answer, 'yes');
   assert.equal(candidate(queryCapabilities({ target: 'europa', wavelengthMicrometres: [2.31, 2.39] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }])), 'NIRCAM/IMAGE')
     .meetsConstraints.wavelength?.answer, 'no');
+});
+
+test('targets resolve through the shipped catalogue, while a near typo is a distinct unknown target', () => {
+  const known = queryCapabilities({ target: 'Bennu', wavelengthMicrometres: [3.5, 3.9] }, inputs([]));
+  assert.equal(known.target, 'bennu');
+  assert.deepEqual(known.targetResolution, { status: 'resolved', requested: 'Bennu', canonical: { id: 'bennu', name: 'Bennu' }, matchedBy: 'name' });
+  const typo = queryCapabilities({ target: 'bannu', wavelengthMicrometres: [3.5, 3.9] }, inputs([]));
+  assert.equal(typo.endpoint.status, 'unknown-target');
+  assert.deepEqual(typo.endpoint.blockerCodes, ['unknown-target']);
+  assert.deepEqual(typo.targetResolution.status === 'unknown' ? typo.targetResolution.suggestions.map(entry => entry.id) : [], ['bennu']);
+  assert.deepEqual(typo.withoutTheTarget, []);
+  assert.match(formatAnswer(typo), /Did you mean Bennu \(bennu\)/u);
+});
+
+test('an indexed observation exposes a telescope-owned qualification action when qualification is the only blocker', () => {
+  const ledger = { schema: 'cssearth-spitzer-ledger@3', archiveDate: '2026-09-19', modes: [
+    { mode: 'IRAC Map', tool: 'tools/objects/spitzer/mosaic.mts', programs: [], checked: [], receipts: [] }],
+  holdings: [{ object: 'bennu', modes: { 'IRAC Map': 1 }, records: [
+    { id: '21415424', programme: '289', mode: 'IRAC Map', title: 'Bennu', startIso: '2007-05-08T16:23:47.636Z', endIso: '2007-05-08T16:27:43.816Z' }] }] };
+  const request = { target: 'bennu', wavelengthMicrometres: [3.5, 3.9] as const, time: { any: true as const }, angularResolutionArcsec: 2,
+    kind: 'image' as const, result: 'telescope-product' as const };
+  const answer = queryCapabilities(request, inputs([{ telescope: 'spitzer', value: ledger }]));
+  const irac = candidate(answer, 'IRAC Map');
+  assert.deepEqual(irac.selectionAssessment.blockers.map(blocker => blocker.code), ['target-program-unqualified']);
+  assert.deepEqual(irac.selectionAssessment.qualificationActions, [{ kind: 'qualify-observation', observation: '21415424', archiveProgramme: '289',
+    program: 'bennu-21415424', channel: 1, command: 'pnpm', arguments: ['--silent', 'telescope:qualify', '--target', 'bennu', '--telescope', 'Spitzer',
+      '--mode', 'IRAC Map', '--observation', '21415424', '--channel', '1'] }]);
+  const qualified = queryCapabilities(request, inputs([{ telescope: 'spitzer', value: { ...ledger, modes: [{ ...ledger.modes[0], programs: ['bennu-21415424'], checked: ['bennu-21415424'] }] } }]));
+  assert.equal(candidate(qualified, 'IRAC Map').selectionAssessment.selectable, true);
+  assert.deepEqual(candidate(qualified, 'IRAC Map').selectionAssessment.qualificationActions, []);
 });
 
 test('a mode with no recorded capabilities answers unknown and says so, rather than guessing', () => {

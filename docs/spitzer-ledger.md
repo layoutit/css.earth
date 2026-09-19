@@ -10,7 +10,7 @@ Counts are observations of this repository's objects, not of the archive. "Re-ma
 | --- | --- | --- | --- | --- | --- |
 | IRAC Map PC | pictures held on one pointing, the mode exoplanet transits were watched in | 4372 | none | 0 | 0 |
 | MIPS Phot | photometry at 24, 70 and 160 micron | 318 | none | 0 | 0 |
-| IRAC Map | mapped pictures in the four IRAC channels, 3.6 to 8.0 micron | 317 | `tools/objects/spitzer/mosaic.mts` | 4 | 4 |
+| IRAC Map | mapped pictures in the four IRAC channels, 3.6 to 8.0 micron | 317 | `tools/objects/spitzer/mosaic.mts` | 5 | 5 |
 | IRS Stare | spectra of one point, 5 to 38 micron | 312 | none | 0 | 0 |
 | IRS Map | spectra stepped across a target, which build a spectral cube | 165 | none | 0 | 0 |
 | MIPS SED | low-resolution spectra around 70 micron | 38 | none | 0 | 0 |

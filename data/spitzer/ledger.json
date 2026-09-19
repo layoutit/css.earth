@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-spitzer-ledger@2",
+  "schema": "cssearth-spitzer-ledger@3",
   "archiveDate": "2026-09-19",
   "search": "Spitzer Heritage Archive at IRSA",
   "shippedObjects": 519,
@@ -47570,7 +47570,10 @@
       "note": "The archive mosaics these too, so the same stage would run; none is pinned here.",
       "observationsForOurObjects": 4372,
       "pinnedPrograms": 0,
-      "checkedProducts": 0
+      "checkedProducts": 0,
+      "programs": [],
+      "checked": [],
+      "receipts": []
     },
     {
       "mode": "MIPS Phot",
@@ -47579,15 +47582,33 @@
       "note": "The archive mosaics these; this toolkit has not been run on MIPS and does not claim it.",
       "observationsForOurObjects": 318,
       "pinnedPrograms": 0,
-      "checkedProducts": 0
+      "checkedProducts": 0,
+      "programs": [],
+      "checked": [],
+      "receipts": []
     },
     {
       "mode": "IRAC Map",
       "records": "mapped pictures in the four IRAC channels, 3.6 to 8.0 micron",
       "tool": "tools/objects/spitzer/mosaic.mts",
       "observationsForOurObjects": 317,
-      "pinnedPrograms": 4,
-      "checkedProducts": 4
+      "pinnedPrograms": 5,
+      "checkedProducts": 5,
+      "programs": [
+        "bennu-21415424",
+        "ngc3132-4416768"
+      ],
+      "checked": [
+        "bennu-21415424",
+        "ngc3132-4416768"
+      ],
+      "receipts": [
+        "tools/objects/spitzer/programs/bennu-21415424.ch1.remosaic.reproduction.json",
+        "tools/objects/spitzer/programs/ngc3132-4416768.ch1.remosaic.reproduction.json",
+        "tools/objects/spitzer/programs/ngc3132-4416768.ch2.remosaic.reproduction.json",
+        "tools/objects/spitzer/programs/ngc3132-4416768.ch3.remosaic.reproduction.json",
+        "tools/objects/spitzer/programs/ngc3132-4416768.ch4.remosaic.reproduction.json"
+      ]
     },
     {
       "mode": "IRS Stare",
@@ -47596,7 +47617,10 @@
       "note": "Needs the observatory's SPICE, which was not obtained or run here.",
       "observationsForOurObjects": 312,
       "pinnedPrograms": 0,
-      "checkedProducts": 0
+      "checkedProducts": 0,
+      "programs": [],
+      "checked": [],
+      "receipts": []
     },
     {
       "mode": "IRS Map",
@@ -47605,7 +47629,10 @@
       "note": "Needs CUBISM, which was not obtained or run here.",
       "observationsForOurObjects": 165,
       "pinnedPrograms": 0,
-      "checkedProducts": 0
+      "checkedProducts": 0,
+      "programs": [],
+      "checked": [],
+      "receipts": []
     },
     {
       "mode": "MIPS SED",
@@ -47613,7 +47640,10 @@
       "tool": null,
       "observationsForOurObjects": 38,
       "pinnedPrograms": 0,
-      "checkedProducts": 0
+      "checkedProducts": 0,
+      "programs": [],
+      "checked": [],
+      "receipts": []
     },
     {
       "mode": "IRS Peakup Image",
@@ -47621,7 +47651,10 @@
       "tool": null,
       "observationsForOurObjects": 32,
       "pinnedPrograms": 0,
-      "checkedProducts": 0
+      "checkedProducts": 0,
+      "programs": [],
+      "checked": [],
+      "receipts": []
     },
     {
       "mode": "IRAC IER",
@@ -47629,7 +47662,10 @@
       "tool": null,
       "observationsForOurObjects": 31,
       "pinnedPrograms": 0,
-      "checkedProducts": 0
+      "checkedProducts": 0,
+      "programs": [],
+      "checked": [],
+      "receipts": []
     },
     {
       "mode": "MIPS Scan",
@@ -47637,7 +47673,10 @@
       "tool": null,
       "observationsForOurObjects": 25,
       "pinnedPrograms": 0,
-      "checkedProducts": 0
+      "checkedProducts": 0,
+      "programs": [],
+      "checked": [],
+      "receipts": []
     },
     {
       "mode": "MIPS IER",
@@ -47645,7 +47684,10 @@
       "tool": null,
       "observationsForOurObjects": 9,
       "pinnedPrograms": 0,
-      "checkedProducts": 0
+      "checkedProducts": 0,
+      "programs": [],
+      "checked": [],
+      "receipts": []
     },
     {
       "mode": "MIPS TP",
@@ -47653,7 +47695,10 @@
       "tool": null,
       "observationsForOurObjects": 7,
       "pinnedPrograms": 0,
-      "checkedProducts": 0
+      "checkedProducts": 0,
+      "programs": [],
+      "checked": [],
+      "receipts": []
     },
     {
       "mode": "IRS IER",
@@ -47661,7 +47706,10 @@
       "tool": null,
       "observationsForOurObjects": 3,
       "pinnedPrograms": 0,
-      "checkedProducts": 0
+      "checkedProducts": 0,
+      "programs": [],
+      "checked": [],
+      "receipts": []
     },
     {
       "mode": "IRAC Post-Cryo Map",
@@ -47670,7 +47718,10 @@
       "note": "The same stage would run; none is pinned here.",
       "observationsForOurObjects": 0,
       "pinnedPrograms": 0,
-      "checkedProducts": 0
+      "checkedProducts": 0,
+      "programs": [],
+      "checked": [],
+      "receipts": []
     }
   ]
 }
