@@ -41,7 +41,8 @@ const htmlNoCatalogue = html
   .replace('<div id="object-category-results">',
     `<div id="object-category-results" data-catalogue-src="${cataloguePin.url}" data-catalogue-sha256="${cataloguePin.sha256}" data-catalogue-bytes="${cataloguePin.bytes}">`)
   .replace(/<ul>.*?<\/ul>(?=<p class="planet-object-empty")/su,
-    '<ul class="planet-object-list" data-catalogue-list></ul><p class="planet-object-loading" data-catalogue-loading>Loading celestial objects…</p>');
+    '<ul class="planet-object-list" data-catalogue-list></ul><p class="planet-object-loading" data-catalogue-loading>Loading celestial objects…</p>' +
+    '<p class="planet-object-error" data-catalogue-error hidden>Couldn\'t load the object list. <button type="button" data-catalogue-retry>Retry</button></p>');
 assert.ok(htmlNoCatalogue.includes('data-catalogue-list'), 'fixture setup must strip the inline rows');
 assert.ok(!htmlNoCatalogue.includes('planet-object-item'), 'fixture setup must strip every inline row');
 const fetchIndex: typeof fetch = async input => {
@@ -68,11 +69,18 @@ test('a page that ships its catalogue empty has it fetched and merged before mat
   assert.deepEqual(visibleNames(parseHTML(again).document), ['Titan']);
 });
 
-test('a merged catalogue fragment is rejected on a byte or hash drift, like every other pinned index', async () => {
+test('a merged catalogue fragment degrades to an empty list plus a message on a byte or hash drift, instead of failing the request', async () => {
   const wrongBytes: typeof fetch = async input => String(input) === `${origin}${cataloguePin.url}` ? new Response(`${catalogueRowsHtml}<!-- extra -->`) : fetchIndex(input);
-  await assert.rejects(renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=saturn', origin), wrongBytes), /size drifted/u);
+  const bytesDoc = parseHTML(await renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=saturn', origin), wrongBytes)).document;
+  assert.equal(bytesDoc.querySelectorAll('.planet-object-item').length, 0);
+  assert.equal(bytesDoc.querySelector<HTMLElement>('[data-catalogue-error]')?.hidden, false);
+  assert.equal(bytesDoc.querySelector<HTMLElement>('[data-catalogue-loading]')?.hidden, true);
+  assert.equal(bytesDoc.querySelector<HTMLElement>('.planet-object-empty')?.hidden, true);
+
   const wrongHash: typeof fetch = async input => String(input) === `${origin}${cataloguePin.url}` ? new Response('x'.repeat(catalogueRowsHtml.length)) : fetchIndex(input);
-  await assert.rejects(renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=saturn', origin), wrongHash), /identity drifted/u);
+  const hashDoc = parseHTML(await renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=saturn', origin), wrongHash)).document;
+  assert.equal(hashDoc.querySelector<HTMLElement>('[data-catalogue-error]')?.hidden, false);
+  assert.equal(hashDoc.querySelector<HTMLElement>('.planet-object-empty')?.hidden, true);
 });
 
 test('a page that already inlines its catalogue never fetches the fragment', async () => {

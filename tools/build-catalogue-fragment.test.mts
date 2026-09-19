@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -68,5 +69,29 @@ test('buildCatalogueFragment fails loudly when the build target or every page re
     await mkdir(join(dist, 'saturn'), { recursive: true });
     await writeFile(join(dist, 'saturn', 'index.html'), '<p>no token here</p>');
     await assert.rejects(buildCatalogueFragment(dist), /No page referenced the catalogue fragment token/u);
+  });
+});
+
+test('the CLI entry point runs even when invoked from a path containing spaces', async () => {
+  await withDist(async dist => {
+    await mkdir(join(dist, 'catalogue-fragment'), { recursive: true });
+    await writeFile(join(dist, 'catalogue-fragment', 'index.html'), FRAGMENT_HTML);
+    await mkdir(join(dist, 'saturn'), { recursive: true });
+    await writeFile(join(dist, 'saturn', 'index.html'), PAGE_HTML('saturn'));
+
+    // A naive `file://${process.argv[1]}` comparison never percent-encodes
+    // the space, so it never equals `import.meta.url` and the script quietly
+    // does nothing. Running the real file from a spaced directory reproduces
+    // that failure mode end to end.
+    const scriptDir = await mkdtemp(join(tmpdir(), 'catalogue fragment tool '));
+    try {
+      const scriptPath = join(scriptDir, 'build-catalogue-fragment.mts');
+      await writeFile(scriptPath, await readFile(new URL('./build-catalogue-fragment.mts', import.meta.url)));
+      const result = spawnSync(process.execPath, [scriptPath, dist], { encoding: 'utf8' });
+      assert.equal(result.status, 0, result.stderr);
+      const expectedSha = createHash('sha256').update(FRAGMENT_HTML).digest('hex');
+      assert.match(result.stdout, new RegExp(`^Catalogue fragment: /catalogue/${expectedSha}\\.html`, 'u'));
+      assert.equal(await readFile(join(dist, 'catalogue', `${expectedSha}.html`), 'utf8'), FRAGMENT_HTML);
+    } finally { await rm(scriptDir, { recursive: true, force: true }); }
   });
 });

@@ -46,6 +46,9 @@ const catalogueBytes = '__CATALOGUE_FRAGMENT_BYTES__';
     ? <PlanetCatalogueRows />
     : <ul class="planet-object-list" data-catalogue-list></ul>}
   <p class="planet-object-loading" role="status" data-catalogue-loading hidden={import.meta.env.DEV}>Loading celestial objects…</p>
+  <p class="planet-object-error" role="alert" data-catalogue-error hidden>
+    Couldn't load the object list. <button type="button" class="planet-object-retry" data-catalogue-retry>Retry</button>
+  </p>
   <p class="planet-object-empty" aria-live="polite" hidden>No matching results</p>
   <slot />
 </div>
