@@ -22,7 +22,7 @@ The Sun, the eight planets, 5 dwarf planets, 99 moons, 311 asteroids, 32 comets 
 
 Stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and planetary systems beyond the Sun, such as WASP-43, HD 189733 and TRAPPIST-1.
 
-<img src=".github/assets/stars-exoplanets.webp" alt="Betelgeuse's imaged surface, and the TRAPPIST-1 system with its seven planets, rendered as DOM and CSS markup" width="960">
+<img src=".github/assets/stars-exoplanets.webp" alt="Betelgeuse's imaged surface, and TRAPPIST-1b's dayside temperature map from JWST MIRI at 15 µm, rendered as DOM and CSS markup" width="960">
 
 ### Nebulae
 
