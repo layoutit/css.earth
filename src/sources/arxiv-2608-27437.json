@@ -1,0 +1,57 @@
+{
+  "id": "arxiv-2608-27437",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gáspár et al. (2026): The JWST/NIRCam Scattered Light Disks GTO 2780 program: panchromatic coronagraphic imaging of the HD 10647, HD 32297, HD 61005, HD 107146, and HD 181327 debris disk systems",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2608.27437"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/ae9d6f"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2608.27437",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/ae9d6f",
+      "label": "The Astrophysical Journal (accepted)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2608.27437",
+      "checkedOn": "2026-09-18",
+      "locator": "Abstract: five disks (HD 10647, HD 32297, HD 61005, HD 107146, HD 181327) imaged in six NIRCam filters with the coronagraphs; HD 181327 section: cold ring 75-85 au with its peak at 80 au, inclination 28.54 +/- 0.31 degrees, position angle 100.39 +/- 0.63 degrees; observed 2023-10-11 after a failed roll on 2023-09-13"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "A. Gáspár",
+    "J. M. Leisenring",
+    "S. G. Wolff",
+    "K. Lawson",
+    "G. H. Rieke",
+    "D. Deng",
+    "M. J. Rieke",
+    "A. A. Sefilian",
+    "C. Beichman",
+    "J. B. Lovell",
+    "J. Krist",
+    "M. Ygouf",
+    "J. Llop-Sayson",
+    "G. Bryden",
+    "C. C. Stark",
+    "C. H. Chen"
+  ],
+  "publicationDate": "2026"
+}

@@ -71,6 +71,7 @@ src/objects/*/source/**/*.bds
 # Previews a package's own author draws from its pinned downloads; no checkout without those downloads can redraw them.
 !src/objects/betelgeuse-shell/source/previews/emission-2020-off-limb.png
 !src/objects/betelgeuse-shell/source/previews/sio-2023-integrated-line.png
+!src/objects/hd-181327-disc/source/previews/reflectance.png
 
 # WASP-43b JWST reductions written by this repository's own pipeline
 # (tools/objects/jwst/reduce-tso.mts); repinned when the reduction reruns.
@@ -275,6 +276,7 @@ src/objects/*/source/**/*.bpc
 
 # Nebula display volumes are restored from their pinned lab delivery recipes.
 /src/objects/betelgeuse-shell/prepared/
+/src/objects/hd-181327-disc/prepared/
 /src/objects/m42/prepared/
 /src/objects/helix/prepared/
 /src/objects/m2-9/prepared/
@@ -283,6 +285,7 @@ src/objects/*/source/**/*.bpc
 /src/objects/m8/prepared/
 /src/objects/smc/prepared/
 /src/objects/betelgeuse-shell/.prepared-*/
+/src/objects/hd-181327-disc/.prepared-*/
 /src/objects/m42/.prepared-*/
 /src/objects/helix/.prepared-*/
 /src/objects/m2-9/.prepared-*/

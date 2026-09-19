@@ -51,25 +51,32 @@ export async function readImagingProgram(id: string) {
   return { path, program: parseImagingProgram(JSON.parse(await readFile(path, 'utf8'))) };
 }
 
-/** Members on disk at their pinned sizes and digests; digests missing from the program are measured and written back. */
+/** Members (and a coron3 band's PSF references) on disk at their pinned sizes and digests; digests missing from the program are
+ * measured and written back. */
 export async function imagingMembers(id: string, band: string, directory: string, sources: readonly string[] = []) {
   const { path, program } = await readImagingProgram(id), entry = program.bands.find(other => other.band === band);
   if (!entry) throw new Error(`${id} has no ${band} band.`);
-  const files: string[] = [], members: MastFile[] = [];
-  for (const member of entry.members) {
-    const local = await mastFile(member, directory, sources);
-    files.push(local);
-    members.push(member.sha256 === undefined ? { ...member, sha256: (await sha256File(local)).sha256 } : member);
-  }
-  if (members.some((member, i) => member.sha256 !== entry.members[i]!.sha256)) {
-    const updated: ImagingProgram = { ...program, bands: program.bands.map(other => other.band === band ? { ...other, members } : other) };
+  const fetchAll = async (pinned: readonly MastFile[]) => {
+    const files: string[] = [], digested: MastFile[] = [];
+    for (const member of pinned) {
+      const local = await mastFile(member, directory, sources);
+      files.push(local);
+      digested.push(member.sha256 === undefined ? { ...member, sha256: (await sha256File(local)).sha256 } : member);
+    }
+    return { files, digested, changed: digested.some((member, i) => member.sha256 !== pinned[i]!.sha256) };
+  };
+  const members = await fetchAll(entry.members), references = await fetchAll(entry.references ?? []);
+  if (members.changed || references.changed) {
+    const updated: ImagingProgram = { ...program, bands: program.bands.map(other => other.band === band
+      ? { ...other, members: members.digested, ...(entry.references ? { references: references.digested } : {}) } : other) };
     await writeFile(path, `${JSON.stringify(updated, null, 2)}\n`);
   }
-  return { program, entry, files };
+  return { program, entry, files: members.files, references: references.files };
 }
 
 export async function runImage3(id: string, band: string, work: string, options: { grid?: SkyGrid; sources?: readonly string[]; maxRssBytes?: number } = {}) {
   const { program, entry, files } = await imagingMembers(id, band, resolve(work, 'members'), options.sources);
+  if (entry.stage) throw new Error(`${id} ${band} is built by ${entry.stage}, not image3.`);
   // The stage runs under its own ceiling, so it needs that ceiling free twice over, not half the machine.
   const ceiling = options.maxRssBytes ?? 3 * 2 ** 30, free = freeMemoryPercent() / 100 * totalmem();
   if (!(free >= 2 * ceiling)) throw new Error(`Only ${(free / 2 ** 30).toFixed(1)} GiB of memory is free; the image3 stage needs twice its ${(ceiling / 2 ** 30).toFixed(1)} GiB ceiling.`);

@@ -1,0 +1,86 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-181327-disc",
+  "entries": [
+    {
+      "id": "lens-reflectance",
+      "subject": "JWST/NIRCam F182M, F210M, F250M, F300M, F335M and F444W behind MASK335R, 11 October 2023 (programme 2780, observation c1014): MAST's level-3 coronagraph mosaics in the reflectance colour of Gáspár et al. (2026) Figure 1",
+      "status": "included",
+      "finding": "Each of the six mosaics was re-run here from the archived exposures on the pinned toolchain and lands on MAST's grid with every PSF alignment fit converged; correlation with MAST above the median brightness is 0.961 to 0.996, at 1 to 2 arcsec 0.887 to 0.987. MAST's products are drawn, combined by the paper's own recipe for its Figure 1: each band divided by the star's flux in it (their Table 9), averaged in pairs into blue (F182M, F210M), green (F250M, F300M) and red (F335M, F444W). Figure 1 prints no scale, so its stretch, log(1 + a u) / log(1 + a) with a = 14.1 and u = reflectance / 7.15, was fitted to the panel by tools/objects/circumstellar/fit-figure-stretch.mts: colour error 12.6 of 255, luminance correlation 0.990, mirrored 14.4. Rendered from Earth in the application, the ring's long axis lies 77.9 degrees clockwise from up with axis ratio 0.875, against 78.5 and 0.876 in the panel (a mirror would give 101.5), luminance correlation 0.985, brightness profile within 0.035 of the ring's peak, and a near-neutral ring colour like the paper's. The render is at 0.48 of the figure's brightness (evidence/rendered.json).",
+      "evidence": [
+        "https://arxiv.org/abs/2608.27437",
+        "https://arxiv.org/html/2608.27437v1/Programims_105-eps-converted-to.png"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
+        }
+      ]
+    },
+    {
+      "id": "ring-geometry-and-depth",
+      "subject": "How the coronagraph images are given depth",
+      "status": "included",
+      "finding": "On the mean of the three reflectance channels the ring's ridge, under nine binnings, traces an ellipse of 80.8 au and axis ratio 0.878: inclination 28.6 degrees, nodes at position angle 100.7 degrees (scatter 0.10 au, 0.16 and 0.55 degrees), against the published 80 au, 28.54 and 100.39 degrees; the author refuses more than five degrees or a tenth of the radius. The drawn envelope is a disc of that geometry whose surface density follows the image's own deprojected radial profile, halo included: it leaves 0.456 against a signal of 2.50, where a single gaussian ring (radial width 22.6 au) leaves 0.532, a spherical shell 0.654 and constant depth 1.131. The light is drawn to 237 au, where the ring's deprojected median reaches the per-pixel noise, in a grid reaching 300 au.",
+      "evidence": [
+        "https://arxiv.org/abs/2608.27437"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
+        }
+      ]
+    },
+    {
+      "id": "near-side-and-thickness",
+      "subject": "Which side of the ring is nearer, and the ring's vertical thickness",
+      "status": "unresolved",
+      "finding": "The image alone cannot say which end of the minor axis tilts toward the observer; the south-south-west side is drawn nearer. It also cannot say how thick the disc is: the projection changes by 0.6 percent across vertical heights from 0.02 to 0.2 of the radius. The height drawn is 0.1 of the radius (8 au): at 0.05 (4 au) the disc was thinner than the renderer's 5.7 au slice spacing, and a tilted view showed it as straight strips ending in a hard edge.",
+      "revisitWhen": "A published near side or vertical scale height for this ring is transcribed, or the phase-function asymmetry is fitted here.",
+      "evidence": [
+        "https://arxiv.org/abs/2608.27437",
+        "https://doi.org/10.1088/0004-637X/789/1/58"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
+        }
+      ]
+    },
+    {
+      "id": "display-choices-that-failed",
+      "subject": "Displays tried and rejected",
+      "status": "excluded",
+      "finding": "Six lenses in the paper's per-filter colour bars (one ring six times); a composite on the sky-band display with M8's asinh settings, which drew the ring at 70 to 100 percent of its peak from 48 to 120 au where the data fall to a fifth; and F182M alone in its Figure 26 scale, which matched that figure but showed one filter's brightness legend rather than the dust. The reflectance colour of the paper's Figure 1 shows the dust itself and is drawn.",
+      "evidence": [
+        "https://arxiv.org/abs/2608.27437"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
+        }
+      ],
+      "revisitWhen": "The paper or a later one prints a calibrated colour scale for its reflectance images, or a composite with a published stretch."
+    },
+    {
+      "id": "miri-coronagraphy",
+      "subject": "MIRI four-quadrant phase-mask coronagraphy of debris discs",
+      "status": "excluded",
+      "finding": "The pipeline's PSF alignment does not converge on MIRI 4QPM data (171 of 180 fits stop at their evaluation limit on HIP 65426 F1140C), so its mosaics depend on the machine that made them and this repository's coron3 runner refuses them (docs/jwst-imaging.md).",
+      "revisitWhen": "A pipeline release changes the align_refs fit, or a published MIRI reduction of this disc is deposited.",
+      "evidence": [
+        "https://jwst-pipeline.readthedocs.io/en/latest/jwst/align_refs/index.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
+        }
+      ]
+    }
+  ]
+}

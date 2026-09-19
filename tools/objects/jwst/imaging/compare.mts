@@ -7,6 +7,9 @@
  * sky positions: every MAST pixel centre is projected into the local mosaic through both WCSs (fits-sky skyProjection) and
  * sampled bilinearly, where both are finite. Identical pixels are counted only when the grids coincide. Reported: the share of identical pixels, the median absolute difference relative to the
  * median brightness, and, over pixels above the median, the RMS difference relative to the RMS brightness and the correlation.
+ * A coronagraph band's mosaic is PSF-subtracted: most pixels are residual noise, and how well KLIP matches changes with distance
+ * from the star, so its receipt also gives the RMS difference and correlation in annuli around the target's position.
+ * MAST's product must name the program's band in its own header (the mask is not in the archive's filter list).
  * The receipt is written beside the program as <program id>.<band>.reproduction.json, naming the toolchain and digests. */
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -16,6 +19,7 @@ import { readFitsFileHdus, readFitsFileRegion } from '../../../fits.mts';
 import { skyProjection } from '../../../fits-sky.mts';
 import { mastFile } from '../mast.mts';
 import { PROGRAMS } from './archive.mts';
+import { bandOfHeader } from './bands.mts';
 import { readImagingProgram } from './image3.mts';
 
 const WCS_CARDS = ['NAXIS1', 'NAXIS2', 'CTYPE1', 'CTYPE2', 'CRPIX1', 'CRPIX2', 'CRVAL1', 'CRVAL2', 'CDELT1', 'CDELT2', 'PC1_1', 'PC1_2', 'PC2_1', 'PC2_2', 'BUNIT'];
@@ -26,6 +30,27 @@ async function science(path: string) {
   const [width, height] = sci.dimensions as [number, number];
   return { primary, header: sci.header, width, height, values: (await readFitsFileRegion(path, sci, { x0: 0, y0: 0, width, height }, 1024 ** 3)).values };
 }
+const ANNULI_ARCSEC = [0, 0.5, 1, 2, 5, 20];
+
+/** RMS difference over RMS brightness, and correlation, in annuli around the target's catalogue position (TARG_RA, TARG_DEC). */
+function starAnnuli(theirs: Awaited<ReturnType<typeof science>>, projection: ReturnType<typeof skyProjection>, oursAt: (i: number) => number) {
+  const star = projection.pixelOf(Number(theirs.primary.TARG_RA), Number(theirs.primary.TARG_DEC));
+  if (!star) throw new Error('The target is off the mosaic.');
+  const arcsecPerPixel = projection.scaleArcsec;
+  const sums = ANNULI_ARCSEC.slice(0, -1).map(() => ({ n: 0, sa: 0, sb: 0, saa: 0, sbb: 0, sab: 0, sdd: 0 }));
+  for (let i = 0; i < theirs.values.length; i++) {
+    const a = oursAt(i), b = theirs.values[i]!;
+    if (!Number.isFinite(a) || !Number.isFinite(b)) continue;
+    const r = Math.hypot(i % theirs.width - star[0], Math.floor(i / theirs.width) - star[1]) * arcsecPerPixel;
+    const k = ANNULI_ARCSEC.findIndex((edge, j) => j + 1 < ANNULI_ARCSEC.length && r >= edge && r < ANNULI_ARCSEC[j + 1]!);
+    if (k < 0) continue;
+    const s = sums[k]!;
+    s.n++; s.sa += a; s.sb += b; s.saa += a * a; s.sbb += b * b; s.sab += a * b; s.sdd += (a - b) ** 2;
+  }
+  return { star: [star[0], star[1]], arcsecPerPixel, bins: sums.map((s, k) => ({ arcsec: [ANNULI_ARCSEC[k]!, ANNULI_ARCSEC[k + 1]!], pixels: s.n,
+    rmsDifferenceOverRms: s.n ? Math.sqrt(s.sdd / s.n) / Math.sqrt(s.sbb / s.n) : null,
+    correlation: s.n > 1 ? (s.n * s.sab - s.sa * s.sb) / Math.sqrt((s.n * s.saa - s.sa * s.sa) * (s.n * s.sbb - s.sb * s.sb)) : null })) };
+}
 const quantile = (sorted: Float32Array, q: number) => sorted[Math.min(sorted.length - 1, Math.floor(q * (sorted.length - 1)))]!;
 
 export async function compareWithMast(id: string, band: string, local: string, sources: readonly string[] = []) {
@@ -33,6 +58,7 @@ export async function compareWithMast(id: string, band: string, local: string, s
   if (!entry) throw new Error(`${id} has no ${band} band.`);
   const mastPath = await mastFile(entry.level3, resolve(local, '..', '..', 'mast'), sources);
   const ours = await science(local), theirs = await science(mastPath);
+  if (bandOfHeader(theirs.primary)?.id !== band) throw new Error(`${entry.level3.name} is not a ${band} product.`);
   const wcs = Object.fromEntries(WCS_CARDS.map(key => [key, { ours: ours.header[key], mast: theirs.header[key] }]));
   const differentWcs = WCS_CARDS.filter(key => ours.header[key] !== theirs.header[key] &&
     !(typeof ours.header[key] === 'number' && typeof theirs.header[key] === 'number' && Math.abs((ours.header[key] as number) - (theirs.header[key] as number)) <= 1e-9 * Math.max(1, Math.abs(theirs.header[key] as number))));
@@ -76,15 +102,16 @@ export async function compareWithMast(id: string, band: string, local: string, s
     if (!Number.isFinite(a) || !Number.isFinite(b) || Math.abs(b) <= median) continue;
     sa += a; sb += b; saa += a * a; sbb += b * b; sab += a * b; sdd += (a - b) ** 2; n++;
   }
+  const annuli = entry.stage === 'coron3' ? starAnnuli(theirs, theirProjection, oursAt) : undefined;
   const receipt = {
-    schema: 'cssearth-jwst-image3-reproduction@1', program: id, band, observation: entry.observation,
+    schema: `cssearth-jwst-${entry.stage ?? 'image3'}-reproduction@1`, program: id, band, observation: entry.observation,
     toolchain: 'tools/objects/jwst/toolchain.json', crdsContext: program.crdsContext,
     mast: { ...entry.level3, sha256: (await sha256File(mastPath)).sha256, calVer: theirs.primary.CAL_VER, crdsContext: theirs.primary.CRDS_CTX },
     local: { calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX },
     wcs, differentWcs,
     pixels: { both, onlyOurs, onlyMast: onlyTheirs, identicalShare: sameGrid ? identical / both : null, comparedOn: sameGrid ? 'pixels' : 'sky positions', medianAbsoluteDifferenceOverMedian: medianDifference / median,
       aboveMedian: { pixels: n, rmsDifferenceOverRms: Math.sqrt(sdd / n) / Math.sqrt(sbb / n),
-        correlation: (n * sab - sa * sb) / Math.sqrt((n * saa - sa * sa) * (n * sbb - sb * sb)) }, ratioBins },
+        correlation: (n * sab - sa * sb) / Math.sqrt((n * saa - sa * sa) * (n * sbb - sb * sb)) }, ratioBins, ...(annuli ? { annuli } : {}) },
   };
   const path = resolve(PROGRAMS, `${id}.${band}.reproduction.json`);
   await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
