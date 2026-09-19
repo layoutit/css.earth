@@ -1,0 +1,29 @@
+{
+  "id": "hd-181327",
+  "classification": "star",
+  "order": 1110,
+  "physical": {
+    "name": "HD 181327",
+    "horizonsCode": null,
+    "meanRadiusKm": 954529.68897,
+    "gravitationalParameterKm3PerS2": 163421899598.9841,
+    "parent": null
+  },
+  "physicalNotes": "Radius: 1.3720421 solar radii at 695700 km per solar radius, Gaia DR3 FLAME radius_flame for source 6643589352010758400 (Gaia Collaboration 2023, A&A 674, A1; Creevey et al. 2023, A&A 674, A26; Fouesneau et al. 2023, A&A 674, A28), from the archived row src/objects/hd-181327/source/photometry/gaia-dr3-astrophysical-parameters.csv. GM from the same row's mass_flame, 1.2313985 solar masses, times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the star's spin axis is not measured; the display axis is celestial north in the plane of the sky.",
+  "star": {
+    "rightAscensionDegrees": 290.745785785032,
+    "declinationDegrees": -54.538414066989446,
+    "positionEpochJulianYear": 2016,
+    "distanceParsecs": 47.776868212690886,
+    "properMotionRaMasPerYear": 24.402797199941578,
+    "properMotionDecMasPerYear": -82.18575722363535,
+    "radialVelocityKmPerS": 0.07390876,
+    "presentationUp": "display-axis",
+    "sources": {
+      "position": "Gaia DR3 source 6643589352010758400 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-181327/source/photometry/gaia-dr3-source.csv",
+      "distance": "Gaia DR3 parallax 20.931 +/- 0.029 mas (same row): 1000/20.930631 = 47.777 pc, no zero-point correction",
+      "properMotion": "Gaia DR3 (same row): 24.403, -82.186 mas/yr",
+      "radialVelocity": "Gaia DR3 (same row): 0.07 +/- 0.13 km/s"
+    }
+  }
+}

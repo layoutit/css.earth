@@ -59,7 +59,8 @@ export const SKY_BANDS: Readonly<Record<string, SkyBand>> = Object.freeze({
   PACS100: herschel('Herschel PACS 100 µm', 'PACS100'),
   PACS160: herschel('Herschel PACS 160 µm', 'PACS160'),
   SPIRE250: herschel('Herschel SPIRE 250 µm', 'SPIRE-250'),
-  ...Object.fromEntries(Object.values(JWST_BANDS).map(entry => [entry.id, jwst(entry)])),
+  // A coronagraph band is a PSF-subtracted image of one star's surroundings, not a band of the sky.
+  ...Object.fromEntries(Object.values(JWST_BANDS).filter(entry => !entry.coronagraph).map(entry => [entry.id, jwst(entry)])),
 });
 /** JWST imaging bands (tools/objects/jwst/imaging/bands.mts): surface brightness in MJy/sr after the pipeline's photom step,
  * either MAST's level-3 mosaic or the pipeline's image3 stage re-run onto the recipe grid. */

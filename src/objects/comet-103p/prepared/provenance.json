@@ -6132,14 +6132,14 @@
       "outputs": [
         {
           "url": "/scenes/comet-103p/comet-103p-mri-thumbnail.webp",
-          "bytes": 1088,
-          "sha256": "baf9a0fe2f3b99a1174c9fe75445d997006c3d3d692bc2138def751c752a3e7c",
+          "bytes": 1074,
+          "sha256": "a00a5663fe4182a3dde072be1e85debf43c82442ebacff0bc0aeefc7ff7e0ae5",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-103p/comet-103p-mri-surface@2x.webp",
-          "bytes": 255882,
-          "sha256": "ca518badd489ad52164fff2f5f9884943ea28f12965e674085d1496570e29f97",
+          "bytes": 266000,
+          "sha256": "58ec401e2e56d372d739fee40237f2b676285c17466716ebf5053c5b3797229a",
           "verification": "bytes-verified"
         }
       ],
@@ -6254,8 +6254,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/mri.webp",
-          "bytes": 2818,
-          "sha256": "190ef1e610a586c19e4ef011e045e1e3c3f829cc1670678acb314354f0dc673d",
+          "bytes": 2768,
+          "sha256": "b5db15a236bef34470b7af433397bc724b39cfae1a71049f4b0bf903f120b9c2",
           "verification": "bytes-verified"
         }
       ]
@@ -6317,7 +6317,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-103p",
-    "materialSha256": "c07b23f477f1e47c99b844f7c6ff1b14a5edebb6d1eee6f7cbf5fe2511a9b5f4",
+    "materialSha256": "49a53af075690433dd240a12d4a8ff68f1ef169972fb94b306d574cf9a48c064",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

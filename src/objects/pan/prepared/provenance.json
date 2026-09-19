@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ca0a400a137882f7b16bd5d60c0be04a217e4135540ee2a4557855c33b1bb46d"
+    "sha256": "e9b68f6fea3aae3ba17d3f802f67e4299eba0399f6f823dda697f53116a1c369"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1826,14 +1826,14 @@
       "outputs": [
         {
           "url": "/scenes/pan/pan-normal-thumbnail.webp",
-          "bytes": 1530,
-          "sha256": "fea3d4603bbc0d1e44a3092cd4155b7413e391064e4cfee58ed7850b35c7bcf1",
+          "bytes": 1550,
+          "sha256": "f0618c16afb8871cf2524eb320d7e8ac9a0c4287010ad5a1d3a7c9cc5cd9c0e7",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pan/pan-normal-surface@2x.webp",
-          "bytes": 313412,
-          "sha256": "e0fde74a2b91f426ef7a46df5bd212cebf1a9a5c560bc5de2300fb85cb5ed745",
+          "bytes": 326020,
+          "sha256": "491f903c1c9684bc58fa11ad5b309de981a9e2df3d5aef1a5f3fcc1782e9528b",
           "verification": "bytes-verified"
         }
       ],
@@ -1941,8 +1941,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 9798,
-          "sha256": "c993750449365d75ac6fa3fd0bc5f1f64405a360580913b114758b4c0fb903e7",
+          "bytes": 10228,
+          "sha256": "beadef90c359c05d21c14e6335d0c57a049fc5da80dabf56d88a1910071c6ab1",
           "verification": "bytes-verified"
         }
       ]
@@ -2004,7 +2004,7 @@
   },
   "lastPreparation": {
     "objectId": "pan",
-    "materialSha256": "6c0b519cbf9e98fcb9c233e20f4f814759c574dcce2e274c5fec1bf7b9c8ba72",
+    "materialSha256": "ce2d6e3f52fb40483edf46ad2bddcf87f64f1de8b13baf90a8d4cd2356b45348",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

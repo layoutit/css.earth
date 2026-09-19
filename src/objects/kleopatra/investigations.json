@@ -170,18 +170,22 @@
     {
       "id": "second-apparition-levels",
       "subject": "2018 apparition frames and the level-matching budget",
-      "status": "unresolved",
-      "finding": "The 2018 apparition views the opposite hemisphere and would roughly double the photographed surface, but its frames cannot be combined with the 2017 set here. A preparation run on 2026-09-15 with all seven frames put the 2017 frames within 0.78 to 1.07 of each other and the two 2018 frames at 0.059 and 0.085, about seventeen times fainter, past this route's budget of sixteen; several cross-apparition pairs also shared no accepted samples, so that ratio is poorly constrained rather than demonstrated. Those two frames are not pinned. They were briefly retained as registration evidence, but no committed check read them, and an input that backs no reproducible claim is worse than a recorded measurement. The acquisition plan and this entry state where they are and what they showed, and the pinned Horizons tables still cover both apparitions.",
-      "revisitWhen": "The frames are placed on a common photometric scale, by the producers or by a documented per-frame normalisation, or enough overlapping coverage is found to constrain the ratio directly. Raising the matching budget alone would not qualify them, and re-pinning them without a committed check that reads them would not either.",
+      "status": "included",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: it casts 55 frames from 2 apparitions, 2017-07-14 to 2017-08-22 and 2018-12-10 to 2019-01-14. The deconvolved frames carry no calibrated level and their scale differs between apparitions, so the level fit places each apparition through the surface it shares with another, from accepted overlaps within its angle limit; the budget still bounds each frame against its own apparition's first frame. The prepared lens report states every pair's samples, level error and residual. Earlier finding, kept: The 2018 apparition views the opposite hemisphere and would roughly double the photographed surface, but its frames cannot be combined with the 2017 set here. A preparation run on 2026-09-15 with all seven frames put the 2017 frames within 0.78 to 1.07 of each other and the two 2018 frames at 0.059 and 0.085, about seventeen times fainter, past this route's budget of sixteen; several cross-apparition pairs also shared no accepted samples, so that ratio is poorly constrained rather than demonstrated. Those two frames are not pinned. They were briefly retained as registration evidence, but no committed check read them, and an input that backs no reproducible claim is worse than a recorded measurement. The acquisition plan and this entry state where they are and what they showed, and the pinned Horizons tables still cover both apparitions.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/",
         "https://github.com/layoutit/css.earth/blob/eb964b61fe518ae973c05d1214894490dc07808b/src/objects/kleopatra/source/manifest.json",
-        "https://github.com/layoutit/css.earth/blob/eb964b61fe518ae973c05d1214894490dc07808b/src/objects/kleopatra/README.md"
+        "https://github.com/layoutit/css.earth/blob/eb964b61fe518ae973c05d1214894490dc07808b/src/objects/kleopatra/README.md",
+        "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/"
       ],
       "checked": [
         {
           "date": "2026-09-15",
           "commit": "eb964b61fe518ae973c05d1214894490dc07808b"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "44916b4b244ec579c3b4dcf5baedf94826302d1e"
         }
       ]
     },
@@ -189,7 +193,7 @@
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
       "status": "included",
-      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 30 camera-1 frames on the ADAM mesh with the rotation record read latitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: The survey holds 55 deconvolved ZIMPOL frames (camera 1) for this body; the cross-frame registration test could not be run on them in this pass. Removed on 2026-09-16: a lens ships only when every registration measurement that reaches a verdict places it within three degrees, and this one measured outline systematic 3.63° against relief 0.00°.",
+      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 55 camera-1 frames on the ADAM mesh with the rotation record read latitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: The survey holds 55 deconvolved ZIMPOL frames (camera 1) for this body; the cross-frame registration test could not be run on them in this pass. Removed on 2026-09-16: a lens ships only when every registration measurement that reaches a verdict places it within three degrees, and this one measured outline systematic 3.63° against relief 0.00°.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -211,6 +215,10 @@
         {
           "date": "2026-09-18",
           "commit": "02e5ba7c2e5069f84e2353d04709ff04fdba8746"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "44916b4b244ec579c3b4dcf5baedf94826302d1e"
         }
       ]
     },
@@ -218,7 +226,7 @@
       "id": "zimpol-published-comparison",
       "subject": "Vernazza et al. (2021) Figure B.37 as the registration of the SPHERE photograph lens",
       "status": "included",
-      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.37, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.873 to 0.909 at our phase, against 0.932 to 0.948 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 4 of 6 columns, one step from it in 2. With the paper’s photographs 0.848 to 0.925. Turned in the image, our outline best overlaps the paper’s photographs at -3.5 to 0.0° and its model panels at -3.5 to -1.5°. The spin axis we project lies at 128.8 to 131.2° on the sky against 125.1 to 128.4° for the figure’s arrows. Native outline residual 2.220 px mean over 30 frames at our phase; the sweep’s lowest is 2.184 px at -2°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 2.01° from the published pole.",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.37, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.873 to 0.926 at our phase, against 0.932 to 0.956 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 9 of 11 columns, one step from it in 2. With the paper’s photographs 0.848 to 0.925. Turned in the image, our outline best overlaps the paper’s photographs at -3.5 to 5.5° and its model panels at -4.0 to -1.0°. The spin axis we project lies at 50.7 to 131.2° on the sky against 49.0 to 128.4° for the figure’s arrows. Native outline residual 2.004 px mean over 55 frames at our phase; the sweep’s lowest is 1.810 px at -2°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 2.01° from the published pole.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/",
@@ -227,7 +235,7 @@
       "checked": [
         {
           "date": "2026-09-18",
-          "commit": "02e5ba7c2e5069f84e2353d04709ff04fdba8746"
+          "commit": "44916b4b244ec579c3b4dcf5baedf94826302d1e"
         }
       ]
     }

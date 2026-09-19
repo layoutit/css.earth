@@ -569,6 +569,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     throw new Error("Planet shell object browser has no objects.");
   }
   const catalogueLoading = cataloguePin ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-loading]') : null;
+  const catalogueError = cataloguePin ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-error]') : null;
+  const catalogueRetry = catalogueError?.querySelector<HTMLButtonElement>('[data-catalogue-retry]') ?? null;
   let searchLabels = items.map(item => ({ ...objectSearchLabels(item), item }));
   let sourceLinks = sourceDocuments(documentTarget);
   let chunks = [...browser.querySelectorAll<HTMLElement>('.planet-object-chunk')]
@@ -629,28 +631,37 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   // `markSelection` are declared further down this closure but only run once
   // this promise settles, well after the whole controller has been built.
   let catalogueLoad: Promise<void> | null = null;
+  // Suppresses "No matching results" until the shared fragment has actually
+  // arrived: an empty, not-yet-loaded catalogue must never be mistaken for a
+  // catalogue that loaded and found nothing.
+  let catalogueLoaded = !cataloguePin;
+  const setEmptyHidden = (hidden: boolean) => { empty.hidden = hidden || !catalogueLoaded; };
+  const showCatalogueError = (show: boolean) => {
+    if (catalogueLoading) catalogueLoading.hidden = show || catalogueLoaded;
+    if (catalogueError) catalogueError.hidden = !show;
+  };
   const ensureCatalogueLoaded = (): Promise<void> => {
     if (!cataloguePin) return Promise.resolve();
     if (catalogueLoad) return catalogueLoad;
+    showCatalogueError(false);
     catalogueLoad = loadCatalogueFragment(cataloguePin, { windowTarget }).then(rows => {
       if (lifetime.disposed) return;
       requiredElement(resultsPanel, '[data-catalogue-list]').replaceWith(rows);
+      catalogueLoaded = true;
       if (catalogueLoading) catalogueLoading.hidden = true;
       attachCatalogueRows();
-      // A page's own row was previously marked by the server, from the id it
-      // was built for. That id never reaches `setObject` (only a later
-      // in-app navigation does), so back-fill it once here, the one time the
-      // catalogue starts empty and the shell is still showing its own object.
-      if (!selectedObjectName && !overview && !preparedFocus) {
-        const current = SCENE_OBJECTS.find(object => object.id === documentTarget.body.dataset.objectShell);
-        if (current) selectedObjectName = current.name;
-      }
+      backfillCurrentSelection();
       markSelection();
       publishSourceContext();
       if (open) { filteredQuery = null; filter(false); }
     }).catch((error: unknown) => {
       catalogueLoad = null;
-      if (!lifetime.disposed) console.error('The object catalogue could not load.', error);
+      if (!lifetime.disposed) {
+        // One warning covers the failure; the browser's own network log
+        // already reports the failed request itself.
+        console.warn('The object catalogue could not load.', error);
+        showCatalogueError(true);
+      }
     });
     return catalogueLoad;
   };
@@ -693,23 +704,36 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       || !matchesObjectCategory(item.dataset.objectClassification, classification);
     refreshChunks();
     visibleObjects = items.filter(item => !item.hidden).length + visibleOverviews;
-    empty.hidden = visibleObjects > 0;
+    setEmptyHidden(visibleObjects > 0);
     presentSearchResults(browser, showingSearchResults, classification);
   };
 
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
+  catalogueRetry?.addEventListener('click', () => { void ensureCatalogueLoaded(); }, { signal: events.signal });
   let selectedObjectName = "";
   let initialObject = true;
   let overview = false;
   let overviewScope: OverviewScope = 'system', overviewSystemId = SOLAR_SYSTEM_ID;
   let preparedFocus: PreparedCatalogObject | null = readInitialFocus(documentTarget);
+  // A page's own row was previously marked by the server, from the id it was
+  // built for. That id never reaches `setObject` (only a later in-app
+  // navigation does), so back-fill it here: once at shell startup if the
+  // rows are already present (inline in dev, or already spliced into a
+  // server-rendered search page), and again once a fetched catalogue
+  // inserts them, whichever finds the shell still showing its own object.
+  const backfillCurrentSelection = () => {
+    if (!selectedObjectName && !overview && !preparedFocus) {
+      const current = SCENE_OBJECTS.find(object => object.id === documentTarget.body.dataset.objectShell);
+      if (current) selectedObjectName = current.name;
+    }
+  };
   const overviewName = () => overviewScope === 'system' ? systemById(SCENE_OBJECTS, overviewSystemId)?.name ?? 'Solar System'
     : ({ 'milky-way': 'Milky Way', 'local-group': 'Local Group', 'nearby-universe': 'Nearby Universe' })[overviewScope];
   let visibleObjects = 0;
   let visibleOverviews = 0;
   let visibleDestinations = 0, visibleFeatures = 0;
-  const updateEmpty = () => { empty.hidden = visibleObjects + visibleDestinations + visibleFeatures > 0; };
+  const updateEmpty = () => { setEmptyHidden(visibleObjects + visibleDestinations + visibleFeatures > 0); };
   const destinations = createDestinationBrowser({
     documentTarget,
     onResults(count) { visibleDestinations = count; updateEmpty(); },
@@ -822,7 +846,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     const nextCategory = searching ? (classification ? result.category : 'all') : initialCategory ?? result.category;
     initialCategory = null;
     selectTab(nextCategory, { resetScroll: false });
-    empty.hidden = visibleObjects !== 0 || Boolean((destinations || features) && !classification && !showAll);
+    setEmptyHidden(visibleObjects !== 0 || Boolean((destinations || features) && !classification && !showAll));
   };
   const render = (next: boolean, { resetQuery = false } = {}) => {
     publishSourceContext();
@@ -968,6 +992,10 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       else anchor.removeAttribute('aria-current');
     }
   };
+  // Rows already present at startup (dev's inline render, or a server-rendered
+  // search page that already spliced the shared fragment in) never reach the
+  // fetch-path back-fill above, since no fetch happens; mark them once here.
+  if (items.length > 0) { backfillCurrentSelection(); markSelection(); }
   return Object.freeze({
     setIllustrationModelsEnabled(enabled: boolean) {
       if (illustrationModelsEnabled === enabled) return;

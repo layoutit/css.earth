@@ -70,7 +70,7 @@ Source constraints are uneven and ground-based; a 4096 × 2048 display map does 
 
 Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Davida from 12° to 13° south, so surface the survey did not see keeps the missing-imagery grid. Left out by name: zimpol-20180831-033920, zimpol-20180831-034324. The level fit finds the first of them, which anchored the display, 7.0× dimmer than the median frame and the second 5.4× dimmer, so against the first every other frame fell outside the lens’s 4× level budget; the figure shows neither.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Davida from 12° to 13° south, so surface the survey did not see keeps the missing-imagery grid. Left out by name: zimpol-20180831-033920, zimpol-20180831-034324. The level fit finds the first of them, which anchored the display, 7.0× dimmer than the median frame and the second 5.4× dimmer, so against the first every other frame fell outside the lens’s 4× level budget; the figure shows neither.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 
