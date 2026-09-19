@@ -508,6 +508,20 @@ test('the committed Charon discovery and qualification produce a selectable mult
   assert.equal(selected.unresolved.some(entry => entry.constraint === 'angularResolution'), true);
 });
 
+test('the committed Hydra search qualifies four separate MVIC images without inventing registration', async () => {
+  const answer = queryCapabilities({ target: 'hydra', wavelengthMicrometres: [0.5, 0.54], time: { any: true }, angularResolutionArcsec: 5,
+    kind: 'image', result: 'telescope-product' }, await loadQueryInputs(ROOT, 'hydra'));
+  const mvic = answer.candidates.find(entry => entry.telescope === 'New Horizons' && entry.mode === 'MVIC color images')!;
+  assert.equal(answer.candidates.some(entry => entry.mode === 'MVIC mapped color' || entry.mode === 'LMI/VR calibrated image'), false);
+  assert.equal(mvic.toolkitSupport.level, 'archive-final');
+  assert.equal(mvic.selectionAssessment.selectable, true);
+  assert.deepEqual(mvic.observations?.records?.[0]?.wavelengthIntervalsMicrometres, [[0.4, 0.55], [0.54, 0.7], [0.78, 0.975], [0.86, 0.91]]);
+  const selected = selectObservation(answer, 'New Horizons', 'MVIC color images', 'hydra-pds-cube_h_color_best');
+  assert.equal(selected.unresolved.some(entry => entry.constraint === 'observationWavelength'), false);
+  assert.equal(selected.unresolved.some(entry => entry.constraint === 'angularResolution'), true);
+  assert.equal(selected.bodyMapSupport.answer, 'no');
+});
+
 test('the committed ledgers: no candidate for any target ever answers yes for sharpness', async () => {
   for (const target of ['europa', 'jupiter', 'betelgeuse', 'ceres']) {
     const loaded = await loadQueryInputs(ROOT, target);

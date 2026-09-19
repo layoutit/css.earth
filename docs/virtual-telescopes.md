@@ -252,12 +252,18 @@ pnpm telescope:discover --archive pds --target charon --write
 ```
 
 Peppi exhausts the target's derived observational products. cssEarth verifies every returned label against the Registry,
-retains the search scope and total, and indexes only product profiles whose scientific metadata it understands. The Charon
+retains each target's search scope and total without replacing earlier searches, and indexes only product profiles whose scientific metadata it understands. The Charon
 acceptance route reads all 28 derived products and admits the mapped MVIC color product because its own PDS4 label supplies
 four wavelength bins, cartography and 1 km grid sampling. Its emitted qualification action pins the complete label and image,
 uses pdr to decode all 29,001,728 array elements, applies the label's finite missing-value constant to the recorded statistics,
 and writes an `archive-final` receipt. A fresh 0.5–0.7 micrometre Charon request then selects the qualified product directly;
 angular resolution remains unknown because map sampling is not an achieved optical-resolution measurement.
+
+Hydra exercises the same route with a different PDS4 layout. Its MVIC product is one FITS file containing four separate
+68 by 68 image extensions rather than one three-dimensional array. The label supplies the Blue, Red, NIR and CH4 intervals,
+so discovery and qualification retain four equal-sized decoded structures and require a one-to-one filter match. The selected
+product remains a detector image: the label supplies no value units, celestial WCS, surface registration, uncertainty or
+quality array, and the query preserves angular resolution as unresolved.
 
 The instrument author then writes the final map, its `*.body-map.json`, and the shared `*.product.json`. Resolved images from
 JWST, ALMA and NACO meet at `tools/objects/resolved-disc-map.mts`: an adapter supplies a north-up/east-left value plane, its

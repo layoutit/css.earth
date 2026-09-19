@@ -61,7 +61,7 @@ elif operation == 'decode-product':
     data = pdr.read(label)
     structures = []
     for key in data.keys():
-        if key == 'label' or key.endswith('_HEADER'): continue
+        if key == 'label' or key.endswith('_HEADER') or key.startswith('HEADER_'): continue
         array = np.asanyarray(data[key])
         mask = np.ma.getmaskarray(array)
         values = np.asarray(np.ma.filled(array, np.nan))
@@ -101,6 +101,19 @@ elif operation == 'decode-product':
                 bins.append({'filter':(filter_.text or '').strip(),'center':(center.text or '').strip(),'width':(width.text or '').strip(),
                   'centerUnit':center.attrib.get('unit'),'widthUnit':width.attrib.get('unit')})
         return bins
+    def optical_filters():
+        filters = []
+        for node in root.iter():
+            if local(node.tag) != 'Imaging': continue
+            reference = next((child for child in node.iter() if local(child.tag) == 'local_identifier_reference'), None)
+            optical = next((child for child in node.iter() if local(child.tag) == 'Optical_Filter'), None)
+            if reference is None or optical is None: continue
+            fields = {local(child.tag):child for child in optical.iter()}
+            name, center, width = fields.get('filter_name'), fields.get('center_filter_wavelength'), fields.get('bandwidth')
+            if name is not None and center is not None and width is not None:
+                filters.append({'array':(reference.text or '').strip(),'filter':(name.text or '').strip(),'center':(center.text or '').strip(),'width':(width.text or '').strip(),
+                  'centerUnit':center.attrib.get('unit'),'widthUnit':width.attrib.get('unit')})
+        return filters
     def field_with_unit(name):
         node = next((node for node in root.iter() if local(node.tag) == name), None)
         return None if node is None or node.text is None else {'value':node.text.strip(),'unit':node.attrib.get('unit')}
@@ -114,7 +127,7 @@ elif operation == 'decode-product':
       'startIso':first('start_date_time'),'stopIso':first('stop_date_time'),'targetName':child_text('Target_Identification','name'),
       'observingSystem':component_names(),
       'fileNames':all_('file_name'),'localIdentifiers':all_('local_identifier'),'units':all_('unit'),'filter':first('filter_name'),
-      'centerFilterWavelength':first('center_filter_wavelength'),'bandwidth':first('bandwidth'),'spectralBins':spectral_bins(),
+      'centerFilterWavelength':first('center_filter_wavelength'),'bandwidth':first('bandwidth'),'spectralBins':spectral_bins(),'opticalFilters':optical_filters(),
       'mapProjection':first('map_projection_name'),'longitudeDirection':first('longitude_direction'),
       'pixelResolutionX':field_with_unit('pixel_resolution_x'),'pixelResolutionY':field_with_unit('pixel_resolution_y'),
       'specialConstants':[{'kind':kind,'value':text} for kind,text in special_constants],'references':refs},'structures':structures}

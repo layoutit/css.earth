@@ -1,0 +1,180 @@
+{
+  "schema": "cssearth-telescope-product@1",
+  "telescope": "New Horizons",
+  "stage": "archive-final",
+  "inputs": [
+    {
+      "role": "label",
+      "identity": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/color/cube_h_color_best.lblx",
+      "bytes": 16471,
+      "sha256": "73012f681bfb066effda3fd10bf111341169f119a80f6e0a61a653105e07e4d9"
+    },
+    {
+      "role": "science",
+      "identity": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/color/cube_h_color_best.fit",
+      "bytes": 233280,
+      "sha256": "2eee194315573d6bd5e1276d9e07d55b285f1e1fcc37e31ca4ebb8ee6f34969b"
+    }
+  ],
+  "parameters": {
+    "selection": {
+      "program": "hydra-pds-cube_h_color_best",
+      "target": "hydra",
+      "targetLid": "urn:nasa:pds:context:target:satellite.134340_pluto.hydra",
+      "lidvid": "urn:nasa:pds:nh_derived:plutosystem_composition:cube_h_color_best::1.0",
+      "kind": "image",
+      "use": "Archive-derived four-filter detector images. Suitable as a pinned telescope product; the PDS4 label establishes each filter band but supplies no body-surface registration."
+    },
+    "identityAgreedWith": {
+      "registry": {
+        "targetNames": [
+          "(134340) Pluto III (Hydra)"
+        ],
+        "targetLids": [
+          "urn:nasa:pds:context:target:satellite.134340_pluto.hydra"
+        ],
+        "observingSystem": [
+          "New Horizons",
+          "Multispectral Visible Imaging Camera"
+        ],
+        "startIso": "2015-07-14T07:36:50.008Z",
+        "stopIso": "2015-07-14T07:37:10.876Z"
+      },
+      "label": {
+        "logicalIdentifier": "urn:nasa:pds:nh_derived:plutosystem_composition:cube_h_color_best",
+        "version": "1.0",
+        "targetName": "(134340) Pluto III (Hydra)",
+        "targetLid": "urn:nasa:pds:context:target:satellite.134340_pluto.hydra",
+        "observingSystem": [
+          "New Horizons",
+          "Multispectral Visible Imaging Camera"
+        ],
+        "startIso": "2015-07-14T07:36:50.008Z",
+        "stopIso": "2015-07-14T07:37:10.876Z"
+      }
+    },
+    "qualificationPackages": {
+      "peppi": "0.5.0",
+      "pdr": "1.4.4"
+    },
+    "measured": {
+      "kind": "image",
+      "width": 68,
+      "height": 68,
+      "units": "not stated by PDS label",
+      "filters": [
+        "Blue",
+        "Red",
+        "NIR",
+        "CH4"
+      ],
+      "wavelengthIntervalsMicrometres": [
+        [
+          0.4,
+          0.55
+        ],
+        [
+          0.54,
+          0.7
+        ],
+        [
+          0.78,
+          0.975
+        ],
+        [
+          0.86,
+          0.91
+        ]
+      ],
+      "decodedStructures": [
+        {
+          "name": "BlueImage",
+          "shape": [
+            68,
+            68
+          ],
+          "dtype": ">f8",
+          "elements": 4624,
+          "masked": 0,
+          "special": 0,
+          "finite": 4624,
+          "minimum": -0.7755872814891577,
+          "maximum": 100.38179109494877
+        },
+        {
+          "name": "RedImage",
+          "shape": [
+            68,
+            68
+          ],
+          "dtype": ">f8",
+          "elements": 4624,
+          "masked": 0,
+          "special": 0,
+          "finite": 4624,
+          "minimum": -1.0234242098753072,
+          "maximum": 336.8903129661406
+        },
+        {
+          "name": "NIRImage",
+          "shape": [
+            68,
+            68
+          ],
+          "dtype": ">f8",
+          "elements": 4624,
+          "masked": 0,
+          "special": 0,
+          "finite": 4624,
+          "minimum": -0.9643067569726698,
+          "maximum": 255.35358725708852
+        },
+        {
+          "name": "CH4Image",
+          "shape": [
+            68,
+            68
+          ],
+          "dtype": ">f8",
+          "elements": 4624,
+          "masked": 0,
+          "special": 0,
+          "finite": 4624,
+          "minimum": -0.9019152669622867,
+          "maximum": 61.96377006128118
+        }
+      ],
+      "uncertaintySupplied": false,
+      "worldCoordinateSystemSupplied": false,
+      "surfaceRegistrationSupplied": false
+    }
+  },
+  "software": [],
+  "toolchainDigest": "13d5f2d75a9fb5d3dc50b9af6fbcf8eff076afc64bda18ebbd09dacafc3803c5",
+  "outputs": [
+    {
+      "path": "cube_h_color_best.lblx",
+      "bytes": 16471,
+      "sha256": "73012f681bfb066effda3fd10bf111341169f119a80f6e0a61a653105e07e4d9"
+    },
+    {
+      "path": "cube_h_color_best.fit",
+      "bytes": 233280,
+      "sha256": "2eee194315573d6bd5e1276d9e07d55b285f1e1fcc37e31ca4ebb8ee6f34969b",
+      "units": "not stated by PDS label",
+      "conventions": {
+        "filters": "Blue: 0.4 to 0.55 micrometres; Red: 0.54 to 0.7 micrometres; NIR: 0.78 to 0.975 micrometres; CH4: 0.86 to 0.91 micrometres",
+        "registration": "detector image only; no body-surface registration",
+        "qualification": "Archive-derived four-filter detector images. Suitable as a pinned telescope product; the PDS4 label establishes each filter band but supplies no body-surface registration."
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "archive-origin",
+      "receipt": "tools/objects/pds/programs/hydra-pds-cube_h_color_best.archive-final.product.json",
+      "product": "cube_h_color_best.fit",
+      "establishes": "cube_h_color_best.fit and every file referenced by urn:nasa:pds:nh_derived:plutosystem_composition:cube_h_color_best::1.0 match the PDS Registry sizes and MD5 values, are pinned here by SHA-256, and pdr 1.4.4 decoded the complete science data structures. This establishes origin, integrity and readability only; no local calibration or archive agreement is claimed."
+    }
+  ]
+}
