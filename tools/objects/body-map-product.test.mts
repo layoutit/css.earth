@@ -81,3 +81,12 @@ test('no production code averages placed maps except through the policy', async 
   // The slit-scan stage compares trial placements with the averaging primitive as a diagnostic; its shipped map goes through the policy.
   assert.deepEqual(offenders.filter(entry => entry !== 'hst/slit-scan-map.mts'), []);
 });
+
+test('a snapshot mosaic keeps the emission limit it was asked for', () => {
+  const mosaic = { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'as-observed' } } as const;
+  // Both snapshots saw every cell at 60 degrees from straight down (facing 0.5). Asked for 30 degrees, nothing qualifies.
+  const inputs = [{ map: placed(100, 0.5), definition: heat, frame, observation: seen('a', 2457343.9, 0.05) }, { map: placed(200, 0.5), definition: heat, frame, observation: seen('b', 2457352.9, 0.05) }];
+  const strict = combineUnderPolicy(inputs, mosaic, 30);
+  assert.ok([...strict.map.depth].every(Number.isNaN)); assert.equal(strict.map.seenCells, 0); assert.equal(strict.map.areaShare, 0);
+  assert.equal(combineUnderPolicy(inputs, mosaic, 70).map.seenCells, 8);
+});

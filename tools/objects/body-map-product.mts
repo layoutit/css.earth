@@ -185,10 +185,12 @@ export function combineUnderPolicy(inputs: readonly MeasuredMap[], policy: Combi
   const averaged = combineBodyMaps(inputs.map(input => input.map), maximumEmissionDegrees);
   if (policy.time.rule !== 'mosaic-of-snapshots') return { ...averaged, chosen: null as Int16Array | null };
   const first = inputs[0]!.map, cells = first.width * first.height, depth = new Float32Array(cells).fill(NaN), error = new Float32Array(cells).fill(NaN), facing = new Float32Array(cells), chosen = new Int16Array(cells).fill(-1);
-  let seen = 0, area = 0, total = 0;
+  let seen = 0, area = 0, total = 0; const edge = Math.cos(maximumEmissionDegrees * Math.PI / 180);
   for (let cell = 0; cell < cells; cell++) {
     const share = Math.cos((90 - (Math.floor(cell / first.width) + 0.5) * 180 / first.height) * Math.PI / 180); total += share;
-    inputs.forEach(({ map }, index) => { if (Number.isFinite(map.depth[cell]!) && map.facing![cell]! > facing[cell]!) { facing[cell] = map.facing![cell]!; depth[cell] = map.depth[cell]!; error[cell] = map.error[cell]!; chosen[cell] = index; } });
+    // The emission limit asked for here governs, whatever limit each map was placed with: a cell seen more obliquely than that by
+    // every snapshot stays unseen and counts toward no coverage.
+    inputs.forEach(({ map }, index) => { if (Number.isFinite(map.depth[cell]!) && map.facing![cell]! >= edge && map.facing![cell]! > facing[cell]!) { facing[cell] = map.facing![cell]!; depth[cell] = map.depth[cell]!; error[cell] = map.error[cell]!; chosen[cell] = index; } });
     if (chosen[cell]! >= 0) { seen++; area += share; }
   }
   return { map: { width: first.width, height: first.height, depth, error, seenCells: seen, areaShare: area / total, facing } as BodyMap, overlaps: averaged.overlaps, chosen };
