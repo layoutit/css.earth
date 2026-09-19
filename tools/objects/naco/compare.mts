@@ -25,12 +25,16 @@
  * level, and, over the samples above that median level, the correlation and the relative difference at its median, 99th
  * percentile and largest. Beside them: the pipeline version each run recorded, and the frames each sequence combined.
  *
- * The receipt is written to tools/objects/naco/programs/<program id>.<product>.reproduction.json. */
+ * The receipt is written to tools/objects/naco/programs/<program id>.<product>.reproduction.json, and what it establishes is
+ * added to the product record each reduction wrote beside its own product, as `internal-consistency` evidence. That is the
+ * only kind this route can add: with no archive product and no ESO master calibration to agree with, nothing here is
+ * archive agreement. A product whose run wrote no record takes no evidence at all, and the comparison says so. */
 import { readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '../../fits.mts';
+import { addProductEvidence, productRecordPath } from '../product-record.mts';
 import { PROGRAMS, readProgram } from './archive.mts';
 
 /** The two halves a nodded-spectroscopy set is split into: one template per night, so halves are what there is. */
@@ -147,6 +151,30 @@ const NOD_NOTE = 'Internal check. The ESO archive publishes no Phase 3 product a
   + ' balanced across both nod positions and sharing no exposure, each reduced on its own through the same recipes and the'
   + ' same master flat. It measures repeatability, not accuracy.';
 
+/** What a comparison established, in the one sentence the product record carries: the measurement, and what the measurement
+ * is worth. There is no ESO Phase 3 product and no master calibration for NACO to agree with, so two of our own reductions
+ * agreeing is internal consistency and never archive agreement, and the sentence says so where a reader will meet it. */
+export function internalConsistencyEstablishes(value: Pick<Reproduction, 'kind' | 'statistics'>) {
+  const stats = value.statistics;
+  const sides = value.kind === 'two-templates' ? 'Two object templates of one night, each commanded separately by the telescope'
+    : 'Two disjoint halves of one night\'s nod pairs';
+  return `${sides} and sharing no exposure, each reduced on its own through the same recipes, agree over ${stats.both} samples:`
+    + ` ${((stats.identicalShare ?? 0) * 100).toFixed(1)}% of them bit-identical, correlation`
+    + ` ${stats.aboveMedian.correlation?.toFixed(6) ?? 'n/a'} over the ${stats.aboveMedian.samples} samples above the median level.`
+    + ' The ESO archive publishes no Phase 3 product and no master calibration for NACO, so there is no archive product for'
+    + ' this re-run to agree with: this measures repeatability, not accuracy, and it is not archive agreement.';
+}
+
+/** Add what this comparison established to the record the run that made each product wrote beside it. A product whose run
+ * wrote no record takes no evidence: the stage that makes a product writes its record, and evidence is added to that. */
+export async function addComparisonEvidence(value: Pick<Reproduction, 'kind' | 'statistics'>, products: readonly string[], receipt: string) {
+  const establishes = internalConsistencyEstablishes(value);
+  for (const product of products) {
+    await addProductEvidence(productRecordPath(product),
+      [{ kind: 'internal-consistency', receipt, product: basename(product), establishes }], output => resolve(dirname(product), output));
+  }
+}
+
 /** Compare two templates' combined images and write the receipt. */
 export async function compareTemplates(programId: string, work: string, templates: readonly [string, string]): Promise<Reproduction> {
   const program = await readProgram(programId);
@@ -212,7 +240,10 @@ export async function compareTemplates(programId: string, work: string, template
     statistics: await compareImage({ path: a.result.combined, hdu: a.hdu }, { path: b.result.combined, hdu: b.hdu }, overlap),
     differingCards,
   };
-  await writeFile(resolve(PROGRAMS, `${program.program}.${value.product}.reproduction.json`), `${JSON.stringify(value, null, 2)}\n`);
+  const receipt = resolve(PROGRAMS, `${program.program}.${value.product}.reproduction.json`);
+  // The evidence goes to the records first, so a product whose run wrote none leaves no receipt claiming it was checked.
+  await addComparisonEvidence(value, [a.result.combined, b.result.combined], repositoryPath(receipt));
+  await writeFile(receipt, `${JSON.stringify(value, null, 2)}\n`);
   return value;
 }
 

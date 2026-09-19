@@ -1,11 +1,14 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { readFile } from 'node:fs/promises';
+import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { addProductEvidence, evidenceFor, productRecordPath, readProductRecord } from '../product-record.mts';
 import { obsidDirectory, parseChandraProgram, parseCxcRows, PROGRAMS, refuseObservation, REFUSED_MODES } from './archive.mts';
 import { isObjectPointing, LEDGER, ledgerGuide, GUIDE, objectBox, OBJECT_RADIUS_DEGREES, MOVING_TARGETS } from './archive-ledger.mts';
-import { compareBinnedImage, eventKeys, matchEvents } from './compare.mts';
+import { archiveAgreement, compareBinnedImage, eventKeys, matchEvents, reprocessedWith } from './compare.mts';
 import { column, eventTable, requireEventColumn, scalar } from './events.mts';
+import { reprocessParameters, reprocessRun, writeReprocessRecord } from './reprocess.mts';
 
 const BLOCK = 2880, CARD = 80;
 const card = (key: string, value: string) => `${key.padEnd(8)}= ${value}`.padEnd(CARD).slice(0, CARD);
@@ -179,6 +182,69 @@ test('the Crab halo re-run keeps every archive event and places it within half a
   // bad-pixel list and good-time filter; nothing else in the two headers differs.
   assert.equal(receipt.reprocessedWith.caldb, '4.12.4');
   assert.deepEqual(Object.keys(receipt.differentCards).sort(), ['ASCDSVER', 'BPIXFILE', 'FLTFILE']);
+});
+
+/** The pinned observation with every input digested, as reprocess.mts has it once the files are on disk. */
+const digested = () => {
+  const entry = parseChandraProgram(program()).observations[0]!;
+  return { ...entry, inputs: entry.inputs.map((input, index) => ({ ...input, sha256: String(index).repeat(64) })) };
+};
+/** A reprocessing run's own account of itself, written as that run writes it: the products it made, and no evidence. Nothing
+ * here runs CIAO; what is under test is which environment the record carries, not what chandra_repro does. */
+const reprocessed = async (versions: { ciao: string; caldb: string }) => {
+  const directory = await mkdtemp(join(tmpdir(), 'chandra-reprocess-')), level2 = 'acisf02798_repro_evt2.fits';
+  await writeFile(join(directory, level2), eventFile([event()]));
+  const { parameters } = reprocessParameters('NONE', 2 * 2 ** 30);
+  const run = reprocessRun(digested(), { parameters, versions, toolchainDigest: 'c'.repeat(64) });
+  return { directory, level2, record: await writeReprocessRecord(directory, level2, [level2], run) };
+};
+
+test('the record beside a re-run event list carries the CIAO and CALDB of the run, not of the machine comparing it', async () => {
+  const ran = { ciao: 'CIAO 4.18.0 Monday, December 08, 2025', caldb: '4.12.4' };
+  const { directory, level2, record } = await reprocessed(ran);
+  assert.equal(record, join(directory, productRecordPath(level2)));
+  const stored = (await readProductRecord(record))!;
+  assert.equal(stored.telescope, 'Chandra');
+  assert.equal(stored.stage, 'reprocess/2798-ACIS');
+  assert.deepEqual(stored.software, [{ name: 'ciao', version: ran.ciao }, { name: 'caldb', version: ran.caldb }]);
+  assert.equal(stored.inputs.find(input => input.role === 'level-1 event list')?.identity, `${obsidDirectory(2798)}/secondary/acisf02798_002N004_evt1.fits.gz`);
+  assert.equal(stored.parameters.check_vf_pha, 'no', 'what chandra_repro was told is what the record states');
+  assert.equal(stored.parameters.tg_zo_position, undefined, 'an imaging observation is given no zero-order option');
+  assert.deepEqual(stored.evidence, [], 'the run that makes a product claims no evidence about it');
+  assert.equal(stored.outputs[0]?.conventions?.time, 'mission elapsed seconds, the scale the header TSTART and TSTOP are on');
+  // The comparison runs years later, on another machine, with another CIAO and CALDB installed. It reports the run's.
+  const installedHere = { ciao: 'CIAO 4.21.0 Tuesday, June 02, 2029', caldb: '4.14.1' };
+  const made = reprocessedWith(stored, level2, record);
+  assert.deepEqual({ ciao: made.ciao, caldb: made.caldb }, ran);
+  assert.notDeepEqual({ ciao: made.ciao, caldb: made.caldb }, installedHere);
+  assert.deepEqual(reprocessParameters('HETG', 1).chandraRepro.tg_zo_position, 'detect', 'a dispersed observation finds its own zero order');
+});
+
+test('a comparison with no product record beside the event list refuses instead of guessing the environment', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'chandra-compare-')), level2 = 'acisf02798_repro_evt2.fits';
+  await writeFile(join(directory, level2), eventFile([event()]));
+  const record = productRecordPath(join(directory, level2));
+  assert.equal(await readProductRecord(record), null, 'an event list from a run that wrote no record');
+  assert.throws(() => reprocessedWith(null, level2, record), /has no product record/u);
+  // A record that states one of the two is refused the same way: half an environment is not the run's environment.
+  const written = await reprocessed({ ciao: 'CIAO 4.18.0', caldb: '4.12.4' });
+  const stored = (await readProductRecord(written.record))!;
+  assert.throws(() => reprocessedWith({ ...stored, software: stored.software.filter(entry => entry.name !== 'caldb') }, level2, record), /states no caldb version/u);
+});
+
+test('the comparison leaves archive-agreement evidence naming the exact product it checked', async () => {
+  const { directory, level2, record } = await reprocessed({ ciao: 'CIAO 4.18.0', caldb: '4.12.4' });
+  const receipt = 'tools/objects/chandra/programs/m1-crab-halo.acisf02798N004_evt2.reproduction.json';
+  const locate = (name: string) => join(directory, name);
+  const updated = await addProductEvidence(record, [archiveAgreement(level2, receipt, 'primary/acisf02798N004_evt2.fits.gz')], locate);
+  const [agreement] = evidenceFor(updated, level2, 'archive-agreement');
+  assert.equal(agreement?.product, level2);
+  assert.equal(agreement?.receipt, receipt);
+  assert.match(agreement?.establishes ?? '', /matched event for event against the archive's own level-2 event list \(primary\/acisf02798N004_evt2\.fits\.gz\)/u);
+  assert.match(agreement?.establishes ?? '', /nothing about either run's calibration being right/u);
+  assert.equal(evidenceFor(updated, level2, 'internal-consistency').length, 0, 'agreement with the archive is not consistency with ourselves');
+  await assert.rejects(addProductEvidence(record, [archiveAgreement('acisf02798_repro_evt1.fits', receipt, 'primary/acisf02798N004_evt2.fits.gz')], locate),
+    /did not produce/u, 'evidence about a file this run did not write is refused');
 });
 
 test('a grating observation is refused at the pin, and an imaging one is not', () => {

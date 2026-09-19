@@ -15,18 +15,20 @@
  * in arcseconds.
  * Beside them a binned counts image on one grid: both lists binned into the same sky blocks, with the bins that differ.
  * Recorded too: the CIAO and CALDB versions each run used, and every processing card the two headers state differently, which is
- * where a difference is looked for first.
+ * where a difference is looked for first. The re-run's versions are read from the product record reprocess.mts wrote beside the
+ * event list, not from the software installed on the machine running the comparison, which is another environment entirely; an
+ * event list with no record beside it is not compared. What the comparison establishes is added to that record as evidence.
  *
  * One receipt per product: programs/<program id>.<product>.reproduction.json. */
 import { access, readdir, readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import type { FitsHeader } from '../../fits.mts';
+import { addProductEvidence, productRecordPath, readProductRecord, runDigest, type ProductEvidence, type ProductRecord } from '../product-record.mts';
 import { chandraFile, PROGRAMS, type ChandraFile } from './archive.mts';
 import { column, eventColumn, eventTable, gunzipFile, requireEventColumn, scalar, type EventTable } from './events.mts';
 import { readChandraProgram } from './reprocess.mts';
-import { chandraVersions } from './toolchain.mts';
 
 /** A run's own account of how it was made; a reproduction that differs starts here. */
 const RUN_CARDS = ['CREATOR', 'ASCDSVER', 'REVISION', 'DATE', 'CALDBVER', 'RAND_SKY', 'RAND_PI', 'RAND_TIM', 'CTI_CORR', 'CTI_APP',
@@ -42,6 +44,27 @@ const KEYS: Readonly<Record<string, readonly string[]>> = {
 const IMAGE_BLOCKS = 1024;
 /** One ACIS or HRC sky pixel, in arcseconds; the level-2 sky grid is stated in them (TCDLT of the sky columns). */
 const SKY_PIXEL_ARCSEC = 0.492;
+const REPOSITORY = resolve(import.meta.dirname, '../../..');
+
+/** The CIAO and CALDB that made this event list, from the record the run wrote beside it. The machine running the comparison has
+ * its own installed CIAO and CALDB, which may be years from the ones that made the event list and are never what a receipt
+ * reports; a product with no record is not compared, because its environment is then not known. */
+export function reprocessedWith(record: ProductRecord | null, product: string, path: string): { record: ProductRecord; ciao: string; caldb: string } {
+  if (!record) throw new Error(`${product} has no product record at ${path}: reprocess.mts writes one beside every level-2 event list it makes, and a receipt states the CIAO and CALDB of that run, not the ones installed here.`);
+  const version = (name: string) => {
+    const found = record.software.find(entry => entry.name === name);
+    if (!found) throw new Error(`The product record at ${path} states no ${name} version, so the environment that made ${product} is not known.`);
+    return found.version;
+  };
+  return { record, ciao: version('ciao'), caldb: version('caldb') };
+}
+
+/** What matching our events against the archive's own product establishes, for the record of the run that made ours. */
+export const archiveAgreement = (product: string, receipt: string, archive: string): ProductEvidence => ({ kind: 'archive-agreement', product, receipt,
+  establishes: `${product} was matched event for event against the archive's own level-2 event list (${archive}) on what the instrument telemetered, ` +
+    'and every column the two lists share was compared over the matched events, with both lists binned into one sky grid. That establishes that this ' +
+    'run of standard data processing reproduces the archive\'s independent run of it from the same pinned level-1 data, as far as the receipt states; ' +
+    'it establishes nothing about either run\'s calibration being right, and nothing about any product this run did not write.' });
 
 const quantile = (sorted: Float64Array, q: number) => sorted[Math.min(sorted.length - 1, Math.floor(q * (sorted.length - 1)))] ?? Number.NaN;
 
@@ -181,15 +204,15 @@ const readEvents = async (path: string) => {
 export async function compareWithArchive(id: string, obsid: number, run: string, sources: readonly string[] = []) {
   const { program } = await readChandraProgram(id), entry = program.observations.find(other => other.obsid === obsid);
   if (!entry) throw new Error(`${id} has no observation ${obsid}.`);
-  const versions = await chandraVersions();
   const receipts: { path: string; receipt: Record<string, unknown> }[] = [];
   // chandra_repro names its own output (acisf<obsid>_repro_evt2.fits), not the archive's, so the re-run's level-2 event list is
   // found in the run directory rather than looked up by the archive's file name.
   const written = (await readdir(run)).filter(name => /_evt2\.fits$/u.test(name)).sort();
   if (written.length !== 1) throw new Error(`${run} holds ${written.length} level-2 event lists; run reprocess.mts first.`);
+  const local = resolve(run, written[0]!), recordPath = productRecordPath(local);
+  const made = reprocessedWith(await readProductRecord(recordPath), written[0]!, recordPath);
   for (const pinned of entry.products.filter((file: ChandraFile) => /_evt2\.fits(?:\.gz)?$/u.test(file.path))) {
     const name = pinned.path.slice(pinned.path.lastIndexOf('/') + 1).replace(/\.gz$/u, '');
-    const local = resolve(run, written[0]!);
     if (!await access(local).then(() => true, () => false)) throw new Error(`${run} holds no ${written[0]!}; run reprocess.mts first.`);
     const archivePath = await chandraFile(pinned, resolve(run, '..', 'archive'), sources);
     const ours = await readEvents(local), theirs = await readEvents(archivePath);
@@ -205,10 +228,13 @@ export async function compareWithArchive(id: string, obsid: number, run: string,
     const ourX = column(ours.bytes, ours.table, 'x'), ourY = column(ours.bytes, ours.table, 'y');
     const theirX = column(theirs.bytes, theirs.table, 'x'), theirY = column(theirs.bytes, theirs.table, 'y');
     const receipt = {
-      schema: 'cssearth-chandra-reproduction@1', program: id, obsid, product: name.replace(/\.fits$/u, ''),
+      schema: 'cssearth-chandra-reproduction@2', program: id, obsid, product: name.replace(/\.fits$/u, ''),
       instrument: `${entry.instrument}/${entry.detector}`, grating: entry.grating, dataMode: `${entry.readMode}/${entry.dataMode}`,
       target: entry.targetName, toolchain: 'tools/objects/chandra/toolchain.json',
-      reprocessedWith: { ciao: versions.ciao, caldb: versions.caldb },
+      // Where the versions below come from: the record the reprocessing run wrote beside its event list, and the digest of that
+      // run. Nothing here is read from the software installed on the machine that ran this comparison.
+      productRecord: { file: recordPath.slice(run.length + 1), runDigest: runDigest(made.record) },
+      reprocessedWith: { ciao: made.ciao, caldb: made.caldb },
       archive: { ...pinned, sha256: pinned.sha256 ?? (await sha256File(archivePath)).sha256, ...cards(theirs.table.hdu.header, RUN_CARDS) },
       local: { name: written[0]!, bytes: ours.bytes.length, sha256: (await sha256File(ours.path)).sha256, ...cards(ours.table.hdu.header, RUN_CARDS) },
       differentCards: differentCards(ours.table.hdu.header, theirs.table.hdu.header),
@@ -219,6 +245,9 @@ export async function compareWithArchive(id: string, obsid: number, run: string,
     };
     const path = resolve(PROGRAMS, `${id}.${receipt.product}.reproduction.json`);
     await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
+    // What this comparison established goes on the record of the run that made the event list, naming the exact product checked
+    // and the receipt holding the numbers. The record refuses it unless the products it pins are still the files on disk.
+    await addProductEvidence(recordPath, [archiveAgreement(written[0]!, relative(REPOSITORY, path), pinned.path)], recorded => resolve(run, recorded));
     receipts.push({ path, receipt });
   }
   if (!receipts.length) throw new Error(`${obsid}: the program pins no level-2 event list to compare.`);

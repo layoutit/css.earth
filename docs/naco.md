@@ -48,12 +48,24 @@ Two other things are worth knowing before reading the code.
    products. A virtual-memory ceiling is asked for so a cube sequence that would take the machine down is killed instead —
    but macOS's shell refuses `ulimit -v`, so on this machine it binds nothing. Every reduction records whether the ceiling
    was actually applied, rather than claiming a protection it does not have.
+
+   Every frame a run consumes is checked against the program's pin (the sha256 of the FITS file the recipes read) inside
+   the reduction itself and before any recipe is asked for, so a file already in the raw directory that is not the pinned
+   frame reaches no pipeline even when it is a perfectly valid FITS. That check has one owner and it sits where the frames
+   are used; a frame the program has not pinned is pinned by the run that first downloads it. Each reduction then writes a
+   **product record** beside the product it yields (`<product>.product.json`): the pinned frames that went in, the recipes
+   and options that decided it, the pipeline versions the product itself states, and the digest of the toolchain pin. Its
+   evidence list is empty, because a run establishes nothing about its own product.
 4. **Compare.** For imaging, `compare.mts <program id> <work> <tpl_start> <tpl_start>` reads the two sequences' combined images with this
    repository's FITS reader and compares them sample by sample. They must be on one grid; a difference in shape is reported
    and refused rather than reconciled, because a NACO product stays on its detector's own pixels. Reported: how many samples
    both hold, the share bit-identical, the median absolute difference over the median level, and, over the samples above that
    median level, the correlation and the relative difference at its median, 99th percentile and largest. One receipt per
-   product, beside the program. For spectroscopy, `spectroscopy-receipt.mts <program id> <work>` compares the two nod
+   product, beside the program, and what it establishes is added to each reduction's product record as
+   **`internal-consistency`** evidence, naming the receipt. That is the only kind of evidence this route can ever add: with
+   no archive product and no ESO master calibration to agree with, nothing here is archive agreement. A product whose run
+   wrote no record takes no evidence, and the comparison stops rather than inventing one. For spectroscopy,
+   `spectroscopy-receipt.mts <program id> <work>` compares the two nod
    halves' extracted one-dimensional spectra, measures the target's width across the slit against the night's telluric
    standard, and records the slit geometry.
 5. **Ledger.** `archive-ledger.mts` writes [data/naco/ledger.json](../data/naco/ledger.json) and

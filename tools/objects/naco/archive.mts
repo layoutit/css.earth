@@ -23,7 +23,6 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '../../../src/platform/sha256.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { archiveHeader, column, parseRawTable, type RawRow } from '../interferometry/eso-pipeline.mts';
 import { associationTree, type Association } from '../interferometry/eso-associations.mts';
@@ -94,6 +93,9 @@ export interface NacoFrame {
    * separate templates, so this is what groups a jitter sequence, not the night. */
   readonly template: string;
   readonly bytes: number;
+  /** The digest of the FITS file on disk, once a run has downloaded it. It is written by the run that consumes the frame
+   * (`pinnedInputs` and `pinFrames` in reduce.mts), which refuses a file that is not this frame before any recipe reads it,
+   * so one owner both checks the fact and records it. Nothing here measures a downloaded frame a second time. */
   readonly sha256?: string;
 }
 
@@ -379,19 +381,6 @@ function requireMode(value: unknown): NacoMode {
   const mode = requireString(value, 'mode');
   if (!(MODES as readonly string[]).includes(mode)) throw new TypeError(`${mode} is not a NACO mode this route reduces.`);
   return mode as NacoMode;
-}
-
-/** Record the digest of every pinned frame a raw directory already holds, and check the ones it has recorded before. */
-export async function digestFrames(program: NacoProgram, rawDirectory: string): Promise<NacoProgram> {
-  const measure = async (frame: NacoFrame): Promise<NacoFrame> => {
-    const path = resolve(rawDirectory, `${frame.dpId}.fits`);
-    const measured = await sha256File(path).catch(() => null);
-    if (!measured) return frame;
-    if (frame.sha256 && frame.sha256 !== measured.sha256) throw new Error(`${frame.dpId}: the file in ${rawDirectory} is not the one pinned.`);
-    return { ...frame, sha256: measured.sha256 };
-  };
-  return { ...program, science: await Promise.all(program.science.map(measure)),
-    calibration: await Promise.all(program.calibration.map(measure)), standard: await Promise.all(program.standard.map(measure)) };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

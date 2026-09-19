@@ -1,13 +1,16 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { readdir, readFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
+import { sha256File } from '../../../src/platform/sha256.mts';
 import { requireArray, requireRecord, requireString } from '../../source-values.mts';
 import { parseAssociationTree } from '../interferometry/eso-associations.mts';
 import { parseRawTable } from '../interferometry/eso-pipeline.mts';
-import { CALIBRATION_TAGS, DP_ID, calibrationFor, modeOf, SCHEMA, scienceTag, templatesOf, treeFiles } from './archive.mts';
-import { requireRunnableRecipe, templateFrames } from './reduce.mts';
-import { overlapOf, repositoryPath, statistics } from './compare.mts';
+import { evidenceFor, productRecordPath, readProductRecord } from '../product-record.mts';
+import { CALIBRATION_TAGS, DP_ID, calibrationFor, modeOf, SCHEMA, scienceTag, templatesOf, treeFiles, type NacoFrame, type NacoProgram } from './archive.mts';
+import { reduceProgram, requireRunnableRecipe, templateFrames, type NacoRecipeRunner } from './reduce.mts';
+import { addComparisonEvidence, overlapOf, repositoryPath, statistics } from './compare.mts';
 import { cksum, nacoToolchainDescriptor, nacoRecipes } from './toolchain.mts';
 import { bucketOf, ledgerGuide, matchShippedObject, observationsOf, parseCsv, parseTargetName, SCHEMA as LEDGER_SCHEMA } from './archive-ledger.mts';
 import { midpointUtc, resolutionOf, slitGeometry } from './spectroscopy-receipt.mts';
@@ -207,6 +210,124 @@ test('a recipe this route has never run is refused by name, with the reason', ()
   // The two that have been run pass through unchanged.
   assert.equal(requireRunnableRecipe('naco_img_twflat'), 'naco_img_twflat');
   assert.equal(requireRunnableRecipe('naco_spc_combine'), 'naco_spc_combine');
+});
+
+// --- what a reduction checks, and what it records ------------------------------------------------------------------------
+
+/** A FITS file that is nothing but a header: valid to every reader here, and the smallest thing a recipe could be handed. */
+const fitsBytes = (cards: readonly string[] = []) => {
+  const header = ['SIMPLE  =                    T', 'BITPIX  =                    8', 'NAXIS   =                    0', ...cards, 'END']
+    .map(card => card.padEnd(80)).join('');
+  return Buffer.from(header.padEnd(Math.ceil(header.length / 2880) * 2880), 'latin1');
+};
+
+/** One imaging night on disk and the program that pins it: two object templates of four frames, three sky frames, two darks
+ * and two twilight flats, each a header-only FITS, each pinned by the digest of the file written here. The byte count the
+ * program states is the data portal's, of the compressed stream it serves, and deliberately not the file's own: that is
+ * what a program records, and it is the digest that pins the file a recipe reads.
+ *
+ * The recipes are a runner of the test's own, which writes a product per category and records what it was asked for. No ESO
+ * pipeline is installed or run: what is under test is what the reduction checks before it asks for one, and what it records
+ * afterwards. */
+async function imagingFixture() {
+  const directory = await mkdtemp(resolve(tmpdir(), 'naco-')), raw = resolve(directory, 'raw');
+  await mkdir(raw, { recursive: true });
+  const frame = async (dpId: string, tag: string, type: string, template: string): Promise<NacoFrame> => {
+    const path = resolve(raw, `${dpId}.fits`);
+    await writeFile(path, fitsBytes(['HIERARCH ESO DET DIT =                  2.0', "HIERARCH ESO INS OPTI6 ID = 'Ks'"]));
+    return { dpId, category: tag.startsWith('CAL') ? 'CALIB' : 'SCIENCE', tag, type, technique: 'IMAGE,JITTER', filter: 'KS',
+      dit: 2, ndit: 5, exposure: 10, start: dpId, template, bytes: 1234, sha256: (await sha256File(path)).sha256 };
+  };
+  const science: NacoFrame[] = [];
+  for (const [index, template] of ['A', 'A', 'A', 'A', 'B', 'B', 'B', 'B'].entries()) science.push(await frame(`NACO.2007-11-11T02:4${index}:00.000`, 'IM_JITTER_OBJ', 'OBJECT', template));
+  for (const index of [0, 1, 2]) science.push(await frame(`NACO.2007-11-11T03:0${index}:00.000`, 'IM_JITTER_SKY', 'SKY', 'C'));
+  const calibration = [await frame('NACO.2007-11-11T10:00:00.000', 'CAL_DARK', 'DARK', 'D'),
+    await frame('NACO.2007-11-11T10:01:00.000', 'CAL_FLAT_TW', 'FLAT,SKY', 'E')];
+  const program: NacoProgram = { schema: SCHEMA, program: 'fixture', instrument: 'NAOS+CONICA', programme: '080.C-0881(C)',
+    object: 'CERES', mode: 'imaging', night: '2007-11-11', templateId: 'NACO_img_obs_GenericOffset', objectTemplates: ['A', 'B'],
+    skyTemplates: ['C'], releaseDate: '2008-11-11', pipeline: { version: '4.4.13', kit: 'naco-kit-4.4.13-15.tar.gz' },
+    science, calibration, standard: [], associations: ['DARK', 'TIMGFLAT'], arcs: false };
+
+  const steps: string[] = [];
+  const runnerFor = (work: string): NacoRecipeRunner => async (step, recipe) => {
+    steps.push(`${step}:${recipe}`);
+    const stepDirectory = resolve(work, step);
+    await mkdir(stepDirectory, { recursive: true });
+    const wrote = async (name: string, category: string) => {
+      const path = resolve(stepDirectory, name);
+      await writeFile(path, fitsBytes([`HIERARCH ESO PRO CATG = '${category}'`,
+        "HIERARCH ESO PRO REC1 PIPE ID = 'naco/4.4.13'", "HIERARCH ESO PRO REC1 DRS ID = 'cpl-7.4'"]));
+      return { category, path };
+    };
+    if (recipe === 'naco_img_dark') return [await wrote('naco_img_dark.fits', 'NACO_IMG_DARK_AVG')];
+    if (recipe === 'naco_img_twflat') return [await wrote('naco_img_twflat.fits', 'MASTER_IMG_FLAT'), await wrote('naco_img_twflat_bpm.fits', 'MASTER_IMG_FLAT_BADPIX')];
+    return [await wrote('naco_img_jitter.fits', 'COADDED_IMG')];
+  };
+  return { directory, raw, program, steps, runnerFor, work: resolve(directory, 'work') };
+}
+
+test('a raw frame that is not the one pinned is refused before any recipe is asked for', async () => {
+  const fixture = await imagingFixture();
+  const altered = fixture.program.science[0]!.dpId;
+  // Altered and still a valid FITS: every reader here accepts the file, and it is not the frame the program pins.
+  await writeFile(resolve(fixture.raw, `${altered}.fits`), fitsBytes(['HIERARCH ESO DET DIT =                  2.0', "HIERARCH ESO INS OPTI6 ID = 'H'"]));
+  await assert.rejects(reduceProgram(fixture.program, fixture.work, fixture.raw, 'A', fixture.runnerFor(fixture.work)),
+    new RegExp(`${altered}.fits is not the pinned ${altered}`, 'u'));
+  assert.deepEqual(fixture.steps, [], 'no recipe was asked for');
+  assert.equal(await readdir(fixture.work).then(() => 'written', () => 'nothing'), 'nothing', 'and nothing was written');
+  await rm(fixture.directory, { recursive: true, force: true });
+});
+
+test('a reduction writes the record of what made its product, with the pins the run used and no evidence', async () => {
+  const fixture = await imagingFixture();
+  const result = await reduceProgram(fixture.program, fixture.work, fixture.raw, 'A', fixture.runnerFor(fixture.work));
+  assert.deepEqual(fixture.steps, ['dark:naco_img_dark', 'flat:naco_img_twflat', 'jitter-A:naco_img_jitter'], 'the unaltered pins reach the recipes');
+
+  const record = await readProductRecord(productRecordPath(result.combined));
+  assert.ok(record, 'the run wrote a record beside its product');
+  assert.equal(record.telescope, 'VLT/NACO');
+  assert.equal(record.stage, 'imaging/naco_img_jitter');
+  assert.equal(record.parameters.template, 'A');
+  assert.deepEqual(record.evidence, [], 'a run establishes nothing about its own product');
+  assert.equal(record.toolchainDigest, (await nacoToolchainDescriptor()).digest);
+  assert.ok(record.software.some(item => item.name === 'naco' && item.version === '4.4.13'), 'the pipeline version the product states');
+
+  // Every frame the run consumed, by its own id and the digest the program pins for it. The other template's frames went
+  // nowhere near this product and are not in the record.
+  const consumed = [...templateFrames(fixture.program.science, 'A'), ...fixture.program.calibration];
+  const pinned = new Map(consumed.map(frame => [frame.dpId, frame.sha256]));
+  assert.deepEqual(record.inputs.map(input => input.identity).sort(), consumed.map(frame => frame.dpId).sort());
+  for (const input of record.inputs) assert.equal(input.sha256, pinned.get(input.identity), input.identity);
+  assert.equal(record.outputs.length, 1);
+  assert.equal(record.outputs[0]!.path, 'naco_img_jitter.fits');
+  await rm(fixture.directory, { recursive: true, force: true });
+});
+
+test('a comparison adds internal-consistency evidence to those records, and refuses a product that has none', async () => {
+  const fixture = await imagingFixture();
+  const first = await reduceProgram(fixture.program, fixture.work, fixture.raw, 'A', fixture.runnerFor(fixture.work));
+  const other = resolve(fixture.directory, 'work-b');
+  const second = await reduceProgram(fixture.program, other, fixture.raw, 'B', fixture.runnerFor(other));
+  const measured = { kind: 'two-templates' as const, statistics: await statistics(visit => { for (let index = 0; index < 8; index++) visit(index + 1, index + 1); }, 8) };
+  const receipt = 'tools/objects/naco/programs/fixture.COADDED_IMG.reproduction.json';
+  await addComparisonEvidence(measured, [first.combined, second.combined], receipt);
+
+  const record = (await readProductRecord(productRecordPath(first.combined)))!;
+  assert.equal(record.evidence.length, 1);
+  const [evidence] = record.evidence;
+  assert.equal(evidence!.kind, 'internal-consistency');
+  assert.equal(evidence!.product, 'naco_img_jitter.fits');
+  assert.equal(evidence!.receipt, receipt);
+  // What the record says it is worth: there is nothing external to agree with, so this is never archive agreement.
+  assert.match(evidence!.establishes, /no archive product for this re-run to agree with/u);
+  assert.match(evidence!.establishes, /repeatability, not accuracy/u);
+  assert.equal(evidenceFor(record, 'naco_img_jitter.fits', 'archive-agreement').length, 0);
+  assert.equal(evidenceFor(record, 'naco_img_jitter.fits', 'internal-consistency').length, 1);
+
+  // A product whose run wrote no record takes no evidence at all.
+  await rm(productRecordPath(second.combined));
+  await assert.rejects(addComparisonEvidence(measured, [second.combined], receipt), /no product record/u);
+  await rm(fixture.directory, { recursive: true, force: true });
 });
 
 // --- the ledger -------------------------------------------------------------------------------------------------------
