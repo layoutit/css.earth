@@ -713,6 +713,15 @@
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
       }
+    },
+    {
+      "path": "reference/rendered-ultraviolet-lens.jpg",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /venus/ in headless Chrome, left to right the default Clouds lens, the Ultraviolet lens facing the observed hemisphere, and the Ultraviolet lens turned to show the coverage edge; taken 2026-09-19 after preparation at commit 694a126585."
+      },
+      "expectedBytes": 27497,
+      "expectedSha256": "462e118d15213707e5c7ff0b60fb028424382bdef4999422d7eb6157625b36b2"
     }
   ]
 }
