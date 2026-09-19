@@ -1,0 +1,60 @@
+.lens-radial-legend {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 10px 0 4px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.lens-radial-key {
+  display: inline-block;
+  width: 14px;
+  height: 2px;
+}
+.lens-radial-legend .lens-radial-key:not(:first-child) {
+  margin-left: 8px;
+}
+.lens-radial-status,
+.lens-radial-note {
+  margin: 6px 0 0;
+  font-size: 10px;
+  line-height: 1.45;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+.lens-radial-status[data-error="true"] {
+  color: #e8998c;
+}
+.lens-radial-plot {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 4px;
+  background: #0b0d11;
+  border-radius: 4px;
+}
+.lens-radial-plot .lens-radial-frame {
+  fill: #0b0d11;
+  stroke: #2a2f3a;
+  stroke-width: 1;
+}
+.lens-radial-plot .lens-radial-grid {
+  stroke: #1d222b;
+  stroke-width: 1;
+}
+.lens-radial-plot .lens-radial-zero {
+  stroke: #5b6472;
+  stroke-width: 1;
+}
+.lens-radial-plot .lens-radial-axis {
+  font-size: 7px;
+  fill: #9aa3b2;
+}
+.lens-radial-numbers {
+  margin: 6px 0 0;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #c8cfdb;
+  overflow-wrap: anywhere;
+}

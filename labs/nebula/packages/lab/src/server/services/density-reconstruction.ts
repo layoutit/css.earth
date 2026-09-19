@@ -19,6 +19,7 @@ import { lensSettingsHandler } from '../routes/lens-settings.ts';
 import { discoverFiniteLensBundle, finiteModelStarsPath } from './finite-lens-bundles.ts';
 import { lensLevels } from './lens-levels.ts';
 import { lensDifferenceHandler } from './lens-difference.ts';
+import { lensRadialHandler } from './lens-radial.ts';
 
 const hash = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const cache = '.local/nebula-lab/reconstructions';
@@ -285,6 +286,8 @@ export function reconstructionPlugin(root: string): Plugin {
     });
     // Read-only difference map for one saved lens: `format=png` is the overlay image, otherwise its legend JSON.
     server.middlewares.use('/__nebula/reconstruction-difference', lensDifferenceHandler(root, id => readPreparedReconstruction(root, id)));
+    // Read-only azimuthal radial profile for one saved lens: does brightness fall off with radius like the source?
+    server.middlewares.use('/__nebula/reconstruction-radial', lensRadialHandler(root, id => readPreparedReconstruction(root, id)));
     server.middlewares.use('/__nebula/reconstruction', async (request, response) => {
       try {
         if (request.method !== 'GET') throw new TypeError('Use Preview to start a reconstruction.');
