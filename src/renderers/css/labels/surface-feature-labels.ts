@@ -1,4 +1,5 @@
 import type { SceneLifetime } from '@cssearth/engine';
+import { surfaceFeatureBankIndex } from '../../../platform/surface-feature-banks.mts';
 import { requirePhysicalProjection } from '../prepared-data/physical-projection.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';
@@ -8,7 +9,7 @@ import type { LabelScreenRect } from './screen-label-layout.js';
 import { labelOcclusionFor } from './label-occlusion.js';
 import { admitSurfaceFeatureLabels, passesZoomGate, projectSurfaceFeature, projectSurfaceOutline, zoomShare, POINT_LABEL_GAP_PX } from './surface-feature-layout.js';
 import type { SurfaceLabelCandidate } from './surface-feature-layout.js';
-import { loadPreparedSurfaceFeatureCatalog } from './surface-feature-catalog.js';
+import { loadPreparedSurfaceFeatureBank, loadPreparedSurfaceFeatureCatalog } from './surface-feature-catalog.js';
 import { flyToSurfaceDirection } from './surface-feature-flight.js';
 import type { SurfaceFlightHandle } from './surface-feature-flight.js';
 import { rotateWorldPosition } from '../navigation/world-camera-math.js';
@@ -46,8 +47,8 @@ interface Entry {
 function format(value: number): string { return Math.abs(value) < 1e-9 ? '0' : Number(value.toFixed(2)).toString(); }
 
 /** Retained nomenclature labels for one prepared body. The outline/caption pool mounts with the
- * scene; the large per-feature label pool and catalogue stay absent until the first interaction
- * (or an explicit feature selection). Hover and activation use the shared screen picker. */
+ * scene; the default-map label pool and catalogue stay absent until the first interaction.
+ * Search-only features load one small bank when selected. Hover and activation use the shared picker. */
 /** Feature framing on arrival: the published diameter spans this share of the shorter viewport side. */
 const ARRIVAL_DIAMETER_SHARE = 0.45;
 const MINIMUM_FRAMED_RADIUS_M = 25_000;
@@ -87,6 +88,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   let resolveLoaded!: (catalog: PreparedSurfaceFeatureCatalog) => void, rejectLoaded!: (error: unknown) => void;
   const loadedCatalog = new Promise<PreparedSurfaceFeatureCatalog>((resolve, reject) => { resolveLoaded = resolve; rejectLoaded = reject; });
   loadedCatalog.catch(() => {});
+  const selectionBanks = new Map<string, Promise<PreparedSurfaceFeatureCatalog>>();
   let pendingFrame: number | null = null, loopFrame: number | null = null, populateFrame: number | null = null;
   let visible = new Set<number>(), rects = new Map<string, LabelScreenRect>(), eligible = 0;
   let hoveredIndex: number | null = null, pinnedIndex: number | null = null, shownIndex: number | null = null;
@@ -105,25 +107,28 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   };
   pickingHost.addEventListener('objecthoverchange', onHover);
   const activations: ((event: Event) => void)[] = [];
+  const createEntry = () => {
+    const index = entries.length;
+    const element = document.createElement('span');
+    element.dataset.featureLabel = '';
+    element.dataset.surfacePick = 'true';
+    element.style.cssText = 'position:absolute;left:50%;top:50%;white-space:nowrap;visibility:hidden;opacity:0;pointer-events:none';
+    element.ariaHidden = 'true';
+    root.appendChild(element);
+    const entry: Entry = { element, feature: null, width: 0, height: 0, targetOpacity: 0, hideTimer: null, x: 0, y: 0 };
+    const activate = (event: Event) => {
+      if (!visible.has(index)) return;
+      event.preventDefault();
+      if (pinnedIndex === index) { clearSelection(); return; }
+      void selectIndex(index);
+    };
+    element.addEventListener('click', activate);
+    entries.push(entry); activations.push(activate);
+    return entry;
+  };
   const createEntries = () => {
     if (entries.length) return;
-    for (let index = 0; index < plan.catalog.count; index++) {
-      const element = document.createElement('span');
-      element.dataset.featureLabel = '';
-      element.dataset.surfacePick = 'true';
-      element.style.cssText = 'position:absolute;left:50%;top:50%;white-space:nowrap;visibility:hidden;opacity:0;pointer-events:none';
-      element.ariaHidden = 'true';
-      root.appendChild(element);
-      const entry: Entry = { element, feature: null, width: 0, height: 0, targetOpacity: 0, hideTimer: null, x: 0, y: 0 };
-      const activate = (event: Event) => {
-        if (!visible.has(index)) return;
-        event.preventDefault();
-        if (pinnedIndex === index) { clearSelection(); return; }
-        void selectIndex(index);
-      };
-      element.addEventListener('click', activate);
-      entries.push(entry); activations.push(activate);
-    }
+    for (let index = 0; index < plan.catalog.count; index++) createEntry();
   };
   // Label picks are consumed by the shared picker before they bubble, so a click that
   // reaches the window from the input surface picked nothing: it clears the selection.
@@ -171,9 +176,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     const end = Math.min(loadedValue.features.length, start + LABELS_PER_FRAME);
     for (let index = start; index < end; index++) {
       const entry = entries[index]!, feature = entry.feature!;
-      entry.element.dataset.featureLabel = feature.id;
-      entry.element.dataset.featureKind = feature.kind;
-      entry.element.textContent = feature.name;
+      populateEntry(entry, feature);
     }
     // Read after this batch's writes, so each forced layout covers the new names, not the whole pool.
     for (let index = start; index < end; index++) {
@@ -187,6 +190,31 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     loaded = true;
     schedule();
     resolveLoaded(loadedValue);
+  }
+  function populateEntry(entry: Entry, feature: PreparedSurfaceFeature) {
+    entry.feature = feature;
+    entry.element.dataset.featureLabel = feature.id;
+    entry.element.dataset.featureKind = feature.kind;
+    entry.element.textContent = feature.name;
+  }
+  async function selectionFeature(id: string): Promise<PreparedSurfaceFeature | null> {
+    const resident = entries.find(entry => entry.feature?.id === id)?.feature;
+    if (resident) return resident;
+    if (!plan.selection) return null;
+    const descriptor = plan.selection.banks[surfaceFeatureBankIndex(id, plan.selection.banks.length)];
+    if (!descriptor) return null;
+    let pending = selectionBanks.get(descriptor.url);
+    if (!pending) {
+      pending = loadPreparedSurfaceFeatureBank(plan, objectId, id, controller.signal, transport).then(value => {
+        if (!value) throw new Error('Prepared feature selection bank is unavailable.');
+        return value;
+      }).catch(failure => {
+        selectionBanks.delete(descriptor.url);
+        throw failure;
+      });
+      selectionBanks.set(descriptor.url, pending);
+    }
+    return (await pending).features.find(feature => feature.id === id) ?? null;
   }
   function loop() {
     loopFrame = null;
@@ -366,7 +394,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
       if (!playing && loopFrame !== null) { windowTarget!.cancelAnimationFrame(loopFrame); loopFrame = null; }
     },
     stats(): SurfaceFeatureLayerStats {
-      return Object.freeze({ loaded, count: plan.catalog.count, visible: visible.size, eligible, enabled, playing, frames, error, zoomGate, outlinePieces, flying: flight !== null,
+      return Object.freeze({ loaded, count: plan.catalog.count + (plan.selection?.count ?? 0), visible: visible.size, eligible, enabled, playing, frames, error, zoomGate, outlinePieces, flying: flight !== null,
         hovered: hoveredIndex === null ? null : entries[hoveredIndex]!.feature?.id ?? null, pinned: pinnedIndex === null ? null : entries[pinnedIndex]!.feature?.id ?? null });
     },
     inspect() {
@@ -374,7 +402,20 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     },
     catalog: () => catalog,
     loaded: () => { startLoading(); return loadedCatalog; },
-    async select(id: string) { startLoading(); await loadedCatalog; if (destroyed) return { completed: false }; const index = entries.findIndex(entry => entry.feature?.id === id); return index < 0 ? { completed: false } : selectIndex(index); },
+    async select(id: string) {
+      startLoading(); await loadedCatalog;
+      if (destroyed) return { completed: false };
+      let index = entries.findIndex(entry => entry.feature?.id === id);
+      if (index < 0) {
+        const feature = await selectionFeature(id);
+        if (!feature || destroyed) return { completed: false };
+        const entry = createEntry();
+        populateEntry(entry, feature);
+        entry.width = entry.element.offsetWidth; entry.height = entry.element.offsetHeight;
+        index = entries.length - 1;
+      }
+      return selectIndex(index);
+    },
     selected: () => pinnedIndex === null ? null : entries[pinnedIndex]!.feature?.id ?? null,
     clear: clearSelection,
     destroy,
