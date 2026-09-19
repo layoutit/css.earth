@@ -391,6 +391,72 @@ test('selecting a nebula loads its bank on demand even while it is out of view',
   } finally { mounted.destroy(); }
 });
 
+test('hidden lens banks are bounded, active subscriptions pin them, and eviction reloads saved presentation', async () => {
+  vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
+  const base = new URL('../../../', import.meta.url), parsecM = 3.085677581491367e16;
+  const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const makeBank = (id: string, distancePc: number): PreparedVolumeLenses => {
+    const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
+      originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distancePc * parsecM],
+      localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: .1 * parsecM,
+      boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };
+    const prepared = (lensId: string): PreparedCssVolume => ({ schema: 'cssearth-css-volume@1', id: `${id}-${lensId}`, frame, anchors: [],
+      stacks: (['x', 'y', 'z'] as const).map(axis => ({ axis, leaves: [{ id: `${axis}-0`, centerUnits: [0, 0, 0],
+        texturePath: `${lensId}/${axis}.webp`, widthPx: 1, heightPx: 1,
+        style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
+          backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
+      resources: ['x', 'y', 'z'].map(axis => ({ path: `${lensId}/${axis}.webp`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })),
+      provenance: {}, approximation: {} });
+    return { schema: 'cssearth-volume-lenses@1', id, defaultLens: 'optical', framingRadiusUnits: 1, contextVisibility: 'independent',
+      lenses: ['optical', 'infrared'].map(lensId => ({ id: lensId, label: lensId, title: `${lensId} emission`,
+        description: `${id} prepared observation`, sourceUrl: 'https://example.org/nebula', volume: prepared(lensId),
+        brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } })) };
+  };
+  const banks = [makeBank('near-bank', 50), makeBank('far-bank', 100)], byId = new Map(banks.map(bank => [bank.id, bank]));
+  const loadVolumeLens = vi.fn(async (id: string) => ({ payload: byId.get(id)!, resolveResource: (path: string) => `/nebula/${id}/${path}` }));
+  const document = new FakeDocument(), stage = document.createElement();
+  const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
+    resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
+    volumeLensBanks: banks.map(bank => ({ id: bank.id, frame: bank.lenses[0]!.volume.frame })), loadVolumeLens,
+    warmVolumeLensDomNodeBudget: 0 });
+  const mounted = universe.mount(stage as unknown as HTMLElement);
+  try {
+    mounted.selectVolumeLens('near-bank', 'infrared');
+    mounted.setVolumeStarsVisible('near-bank', false);
+    const releaseNear = mounted.subscribeVolumeLens('near-bank', () => {});
+    await vi.waitFor(() => expect(mounted.volumeLensState('near-bank')).not.toBeNull());
+    const camera = (distancePc: number): WorldCameraPose => ({ referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
+      pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distancePc * parsecM],
+        orientationXyzw: [0, 0, 0, 1] } });
+    mounted.publish(camera(52), viewport);
+    mounted.publish(camera(102), viewport);
+    await vi.waitFor(() => expect(mounted.volumeLensState('far-bank')).not.toBeNull());
+    mounted.publish(camera(102), viewport);
+    expect(mounted.volumeLensState('near-bank')).not.toBeNull();
+    expect((mounted.root as unknown as FakeElement).dataset).toMatchObject({ volumeLensPinnedBankCount: '1', volumeLensWarmDomNodeBudget: '0' });
+
+    releaseNear();
+    expect(mounted.volumeLensState('near-bank')).toBeNull();
+    expect((mounted.root as unknown as FakeElement).dataset.volumeLensWarmDomNodes).toBe('0');
+
+    const releaseReloaded = mounted.subscribeVolumeLens('near-bank', () => {});
+    await vi.waitFor(() => expect(mounted.volumeLensState('near-bank')).not.toBeNull());
+    expect(mounted.volumeLensState('near-bank')).toMatchObject({ selectedLens: 'infrared', starsVisible: false });
+    expect(loadVolumeLens.mock.calls.filter(([id]) => id === 'near-bank')).toHaveLength(2);
+    releaseReloaded();
+    expect(mounted.volumeLensState('near-bank')).toBeNull();
+
+    // A hidden, unpinned explicit load is trimmed when it settles; eviction does
+    // not need another camera publication to enforce the warm budget.
+    mounted.selectVolumeLens('near-bank', 'optical');
+    await vi.waitFor(() => expect(loadVolumeLens.mock.calls.filter(([id]) => id === 'near-bank')).toHaveLength(3));
+    await loadVolumeLens.mock.results.at(-1)!.value; await Promise.resolve(); await Promise.resolve();
+    expect(mounted.volumeLensState('near-bank')).toBeNull();
+    expect((mounted.root as unknown as FakeElement).dataset.volumeLensWarmDomNodes).toBe('0');
+  } finally { mounted.destroy(); }
+});
+
 /** Ordinary source-over through the actual DOM opacity levels. */
 function completedPixel(host: FakeElement, image: FakeElement, sky: FakeElement | undefined, volumeValue: number, skyValue = volumeValue): number {
   const t = Number(host.style.opacity), g = Number(image.style.opacity || '1');
