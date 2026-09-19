@@ -1,0 +1,1821 @@
+{
+  "schema": "cssearth-hst-ledger@1",
+  "archiveDate": "2026-09-19",
+  "observations": {
+    "collection": 1492979,
+    "counted": 1492029,
+    "other": 950,
+    "moving": 51498
+  },
+  "configurations": [
+    {
+      "configuration": "ACS/WFC",
+      "records": "wide-field pictures, 0.35–1.1 µm",
+      "draws": "pictures of galaxies, nebulae and Solar System bodies",
+      "tool": "tools/objects/hst/calibrate.mts",
+      "observations": 174029,
+      "movingObservations": 482,
+      "shippedObjects": 7,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "ACS/HRC",
+      "records": "high-resolution pictures and slitless spectra",
+      "draws": "pictures of small bodies",
+      "tool": "tools/objects/hst/calibrate.mts",
+      "note": "Not run here; the detector stopped working in 2007.",
+      "observations": 35937,
+      "movingObservations": 2234,
+      "shippedObjects": 18,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "ACS/SBC",
+      "records": "far-ultraviolet pictures and prism spectra",
+      "draws": "aurorae and gas around a body",
+      "tool": "tools/objects/hst/calibrate.mts",
+      "observations": 9540,
+      "movingObservations": 885,
+      "shippedObjects": 10,
+      "programs": [
+        "europa-11085"
+      ],
+      "checked": [
+        "europa-11085"
+      ]
+    },
+    {
+      "configuration": "WFC3/UVIS",
+      "records": "pictures, 0.2–1 µm",
+      "draws": "pictures of planets, moons and nebulae",
+      "tool": "tools/objects/hst/calibrate.mts",
+      "observations": 206612,
+      "movingObservations": 23542,
+      "shippedObjects": 28,
+      "programs": [
+        "europa-15419"
+      ],
+      "checked": [
+        "europa-15419"
+      ]
+    },
+    {
+      "configuration": "WFC3/IR",
+      "records": "pictures and slitless spectra, 0.8–1.7 µm",
+      "draws": "pictures; exoplanet transit spectra",
+      "tool": null,
+      "note": "calwf3 handles it; no IR exposure has been re-calibrated here.",
+      "observations": 256117,
+      "movingObservations": 1046,
+      "shippedObjects": 5,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "STIS/CCD",
+      "records": "spectra and pictures, 0.2–1 µm",
+      "draws": "surface and atmosphere spectra",
+      "tool": "tools/objects/hst/calibrate.mts",
+      "observations": 210165,
+      "movingObservations": 4226,
+      "shippedObjects": 41,
+      "programs": [
+        "europa-14650",
+        "europa-15419"
+      ],
+      "checked": [
+        "europa-14650",
+        "europa-15419"
+      ]
+    },
+    {
+      "configuration": "STIS/NUV-MAMA",
+      "records": "near-ultraviolet spectra and pictures",
+      "draws": "ultraviolet spectra of a body",
+      "tool": "tools/objects/hst/calibrate.mts",
+      "note": "calstis handles it; no NUV exposure has been re-calibrated here.",
+      "observations": 12742,
+      "movingObservations": 483,
+      "shippedObjects": 32,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "STIS/FUV-MAMA",
+      "records": "far-ultraviolet spectra and pictures",
+      "draws": "aurorae and escaping gas",
+      "tool": "tools/objects/hst/calibrate.mts",
+      "observations": 14982,
+      "movingObservations": 1743,
+      "shippedObjects": 13,
+      "programs": [
+        "europa-13040"
+      ],
+      "checked": [
+        "europa-13040"
+      ]
+    },
+    {
+      "configuration": "STIS",
+      "records": "co-added spectra the archive builds from several visits (HASP)",
+      "draws": "nothing on its own",
+      "tool": null,
+      "note": "A product of products; there is no raw exposure to re-calibrate.",
+      "observations": 8164,
+      "movingObservations": 145,
+      "shippedObjects": 34,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "COS/FUV",
+      "records": "far-ultraviolet point-source spectra",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "calcos is not installed.",
+      "observations": 27302,
+      "movingObservations": 193,
+      "shippedObjects": 16,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "COS/NUV",
+      "records": "near-ultraviolet point-source spectra",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "calcos is not installed.",
+      "observations": 13863,
+      "movingObservations": 289,
+      "shippedObjects": 17,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "WFPC2/PC",
+      "records": "pictures on the planetary camera, 1994–2009",
+      "draws": "pictures of Solar System bodies",
+      "tool": null,
+      "note": "calwp2 is retired and not in hstcal.",
+      "observations": 202677,
+      "movingObservations": 8746,
+      "shippedObjects": 51,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "WFPC2/WFC",
+      "records": "pictures on the three wide-field chips",
+      "draws": "pictures of extended objects",
+      "tool": null,
+      "note": "calwp2 is retired and not in hstcal.",
+      "observations": 20292,
+      "movingObservations": 2327,
+      "shippedObjects": 11,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "WFPC2",
+      "records": "WFPC2 products the catalogue does not assign to a chip",
+      "draws": "nothing on its own",
+      "tool": null,
+      "observations": 35523,
+      "movingObservations": 0,
+      "shippedObjects": 0,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "NICMOS/NIC1",
+      "records": "near-infrared pictures at the finest sampling",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "calnica is retired and not in hstcal.",
+      "observations": 26812,
+      "movingObservations": 398,
+      "shippedObjects": 11,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "NICMOS/NIC2",
+      "records": "near-infrared pictures and coronagraphy",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "calnica is retired and not in hstcal.",
+      "observations": 40531,
+      "movingObservations": 903,
+      "shippedObjects": 12,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "NICMOS/NIC3",
+      "records": "near-infrared pictures and grism spectra",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "calnica is retired and not in hstcal.",
+      "observations": 47611,
+      "movingObservations": 120,
+      "shippedObjects": 4,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "FOC/96",
+      "records": "faint-object camera pictures, 1990–2002",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "Its pipeline is retired.",
+      "observations": 5441,
+      "movingObservations": 249,
+      "shippedObjects": 9,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "FOC/48",
+      "records": "faint-object camera pictures in its other format",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "Its pipeline is retired.",
+      "observations": 1254,
+      "movingObservations": 4,
+      "shippedObjects": 0,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "FOS/BL",
+      "records": "faint-object spectrograph, blue detector, 1990–1997",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "Its pipeline is retired.",
+      "observations": 11180,
+      "movingObservations": 579,
+      "shippedObjects": 19,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "FOS/RD",
+      "records": "faint-object spectrograph, red detector, 1990–1997",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "Its pipeline is retired.",
+      "observations": 12200,
+      "movingObservations": 599,
+      "shippedObjects": 27,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "WFPC/PC",
+      "records": "the first wide-field camera, 1990–1993",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "Its pipeline is retired.",
+      "observations": 9520,
+      "movingObservations": 463,
+      "shippedObjects": 12,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "ACS",
+      "records": "ACS products the catalogue does not assign to a detector",
+      "draws": "nothing on its own",
+      "tool": null,
+      "observations": 12218,
+      "movingObservations": 0,
+      "shippedObjects": 0,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "COS-STIS",
+      "records": "co-added spectra the archive builds from COS and STIS visits together (HASP)",
+      "draws": "nothing on its own",
+      "tool": null,
+      "note": "A product of products.",
+      "observations": 875,
+      "movingObservations": 0,
+      "shippedObjects": 0,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "COS",
+      "records": "COS products the catalogue does not assign to a detector",
+      "draws": "nothing on its own",
+      "tool": null,
+      "observations": 8247,
+      "movingObservations": 77,
+      "shippedObjects": 15,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "HRS",
+      "records": "the Goddard high resolution spectrograph, 1990–1997",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "Its pipeline is retired.",
+      "observations": 3703,
+      "movingObservations": 177,
+      "shippedObjects": 10,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "HRS/1",
+      "records": "the same spectrograph on its first detector",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "Its pipeline is retired.",
+      "observations": 6424,
+      "movingObservations": 710,
+      "shippedObjects": 9,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "HRS/2",
+      "records": "the same spectrograph on its second detector",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "Its pipeline is retired.",
+      "observations": 14122,
+      "movingObservations": 610,
+      "shippedObjects": 14,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "HSP/UNK/POL",
+      "records": "the high speed photometer, polarimetry, 1990–1993",
+      "draws": "nothing: brightness in time, not pictures",
+      "tool": null,
+      "observations": 1505,
+      "movingObservations": 12,
+      "shippedObjects": 0,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "HSP/UNK/UV1",
+      "records": "the high speed photometer, first ultraviolet channel",
+      "draws": "nothing: brightness in time",
+      "tool": null,
+      "observations": 1025,
+      "movingObservations": 0,
+      "shippedObjects": 0,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "HSP/UNK/UV2",
+      "records": "the high speed photometer, second ultraviolet channel",
+      "draws": "nothing: brightness in time",
+      "tool": null,
+      "observations": 1064,
+      "movingObservations": 0,
+      "shippedObjects": 0,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "HSP/UNK/VIS",
+      "records": "the high speed photometer, visible channel",
+      "draws": "nothing: brightness in time",
+      "tool": null,
+      "observations": 687,
+      "movingObservations": 52,
+      "shippedObjects": 5,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "WFPC/WFC",
+      "records": "the first wide-field camera, wide-field chips",
+      "draws": "nothing yet",
+      "tool": null,
+      "note": "Its pipeline is retired.",
+      "observations": 6226,
+      "movingObservations": 93,
+      "shippedObjects": 3,
+      "programs": [],
+      "checked": []
+    },
+    {
+      "configuration": "FGS",
+      "records": "fine guidance sensor astrometry and interferometry",
+      "draws": "nothing: positions, not pictures",
+      "tool": null,
+      "observations": 53439,
+      "movingObservations": 0,
+      "shippedObjects": 0,
+      "programs": [],
+      "checked": []
+    }
+  ],
+  "movingTargets": [
+    {
+      "object": "jupiter",
+      "observations": 6338,
+      "configurations": [
+        "ACS/HRC",
+        "ACS/SBC",
+        "ACS/WFC",
+        "FOC/96",
+        "FOS/BL",
+        "FOS/RD",
+        "HRS",
+        "HRS/1",
+        "HRS/2",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "NICMOS/NIC3",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "WFC3/UVIS",
+        "WFPC/PC",
+        "WFPC/WFC",
+        "WFPC2/PC",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "uranus",
+      "observations": 3929,
+      "configurations": [
+        "ACS/HRC",
+        "ACS/SBC",
+        "ACS/WFC",
+        "COS",
+        "COS/FUV",
+        "COS/NUV",
+        "FOC/96",
+        "FOS/BL",
+        "FOS/RD",
+        "HRS/1",
+        "HRS/2",
+        "HSP/UNK/VIS",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "NICMOS/NIC3",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/IR",
+        "WFC3/UVIS",
+        "WFPC2/PC",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "neptune",
+      "observations": 3610,
+      "configurations": [
+        "ACS/HRC",
+        "ACS/WFC",
+        "FOS/BL",
+        "HRS/1",
+        "HSP/UNK/VIS",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/UVIS",
+        "WFPC/PC",
+        "WFPC2/PC",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "pluto",
+      "observations": 3123,
+      "configurations": [
+        "ACS/HRC",
+        "ACS/WFC",
+        "COS",
+        "COS/NUV",
+        "FOC/96",
+        "FOS/BL",
+        "FOS/RD",
+        "HSP/UNK/VIS",
+        "NICMOS/NIC2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA",
+        "WFC3/IR",
+        "WFC3/UVIS",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "mars",
+      "observations": 3072,
+      "configurations": [
+        "ACS/HRC",
+        "ACS/SBC",
+        "FOS/BL",
+        "HRS/1",
+        "HRS/2",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "WFC3/UVIS",
+        "WFPC/PC",
+        "WFPC2/PC",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "saturn",
+      "observations": 2942,
+      "configurations": [
+        "ACS/HRC",
+        "ACS/SBC",
+        "ACS/WFC",
+        "FOC/96",
+        "FOS/BL",
+        "FOS/RD",
+        "HRS",
+        "HRS/1",
+        "HRS/2",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/UVIS",
+        "WFPC/PC",
+        "WFPC/WFC",
+        "WFPC2/PC",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "io",
+      "observations": 1610,
+      "configurations": [
+        "ACS/SBC",
+        "COS",
+        "COS/FUV",
+        "COS/NUV",
+        "FOC/96",
+        "FOS/BL",
+        "FOS/RD",
+        "HRS",
+        "HRS/1",
+        "HRS/2",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/UVIS",
+        "WFPC/PC",
+        "WFPC/WFC",
+        "WFPC2/PC",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "europa",
+      "observations": 895,
+      "configurations": [
+        "ACS/SBC",
+        "ACS/WFC",
+        "COS",
+        "COS/FUV",
+        "COS/NUV",
+        "FOS/BL",
+        "FOS/RD",
+        "HRS",
+        "HRS/1",
+        "HRS/2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/IR",
+        "WFC3/UVIS",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "titan",
+      "observations": 812,
+      "configurations": [
+        "ACS/HRC",
+        "ACS/SBC",
+        "FOC/96",
+        "FOS/BL",
+        "HRS",
+        "HRS/1",
+        "HRS/2",
+        "HSP/UNK/VIS",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "STIS/CCD",
+        "WFPC/PC",
+        "WFPC2/PC",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "didymos",
+      "observations": 682,
+      "configurations": [
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "vesta",
+      "observations": 590,
+      "configurations": [
+        "FOC/96",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "WFC3/UVIS",
+        "WFPC2/PC",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "haumea",
+      "observations": 514,
+      "configurations": [
+        "STIS/CCD",
+        "WFC3/UVIS",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "callisto",
+      "observations": 453,
+      "configurations": [
+        "COS",
+        "COS/FUV",
+        "COS/NUV",
+        "FOS/BL",
+        "FOS/RD",
+        "HRS",
+        "HRS/2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/IR",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "ganymede",
+      "observations": 355,
+      "configurations": [
+        "ACS/HRC",
+        "ACS/SBC",
+        "COS",
+        "COS/FUV",
+        "COS/NUV",
+        "FOS/BL",
+        "FOS/RD",
+        "HRS",
+        "HRS/1",
+        "HRS/2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/IR",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "ceres",
+      "observations": 270,
+      "configurations": [
+        "ACS/HRC",
+        "ACS/SBC",
+        "COS/FUV",
+        "COS/NUV",
+        "FOC/96",
+        "FOS/RD",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/UVIS",
+        "WFPC2/PC",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "makemake",
+      "observations": 248,
+      "configurations": [
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "eurybates",
+      "observations": 160,
+      "configurations": [
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "patroclus",
+      "observations": 121,
+      "configurations": [
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA",
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "quaoar",
+      "observations": 105,
+      "configurations": [
+        "ACS/HRC",
+        "NICMOS/NIC1",
+        "WFC3/UVIS",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "triton",
+      "observations": 102,
+      "configurations": [
+        "FOC/96",
+        "FOS/BL",
+        "FOS/RD",
+        "HSP/UNK/VIS",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "orus",
+      "observations": 94,
+      "configurations": [
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "comet-9p",
+      "observations": 93,
+      "configurations": [
+        "ACS/HRC",
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "pallas",
+      "observations": 80,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "phaethon",
+      "observations": 79,
+      "configurations": [
+        "ACS/WFC",
+        "NICMOS/NIC3",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "charon",
+      "observations": 70,
+      "configurations": [
+        "FOS/BL",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "NICMOS/NIC3",
+        "STIS",
+        "STIS/CCD"
+      ]
+    },
+    {
+      "object": "moon",
+      "observations": 68,
+      "configurations": [
+        "FOS/BL",
+        "HRS/2",
+        "STIS/CCD"
+      ]
+    },
+    {
+      "object": "lutetia",
+      "observations": 64,
+      "configurations": [
+        "ACS/SBC",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "comet-3i",
+      "observations": 55,
+      "configurations": [
+        "COS",
+        "COS/FUV",
+        "COS/NUV",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA",
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "tethys",
+      "observations": 42,
+      "configurations": [
+        "FOS/BL",
+        "FOS/RD",
+        "HRS",
+        "HRS/2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "bennu",
+      "observations": 40,
+      "configurations": [
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "polymele",
+      "observations": 39,
+      "configurations": [
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "enceladus",
+      "observations": 38,
+      "configurations": [
+        "COS",
+        "COS/FUV",
+        "COS/NUV",
+        "NICMOS/NIC2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "comet-46p",
+      "observations": 37,
+      "configurations": [
+        "COS",
+        "COS/FUV",
+        "COS/NUV",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "donaldjohanson",
+      "observations": 36,
+      "configurations": [
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "dione",
+      "observations": 35,
+      "configurations": [
+        "FOS/RD",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "iapetus",
+      "observations": 31,
+      "configurations": [
+        "FOS/RD",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "amalthea",
+      "observations": 30,
+      "configurations": [
+        "FOS/RD",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "rhea",
+      "observations": 29,
+      "configurations": [
+        "FOS/BL",
+        "FOS/RD",
+        "HRS",
+        "HRS/2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "comet-2i",
+      "observations": 28,
+      "configurations": [
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "leucus",
+      "observations": 26,
+      "configurations": [
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "oumuamua",
+      "observations": 25,
+      "configurations": [
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "titania",
+      "observations": 25,
+      "configurations": [
+        "FOS/BL",
+        "FOS/RD",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "ida",
+      "observations": 24,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "eris",
+      "observations": 22,
+      "configurations": [
+        "NICMOS/NIC2",
+        "WFC3/UVIS",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "oberon",
+      "observations": 22,
+      "configurations": [
+        "FOS/RD",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "ariel",
+      "observations": 21,
+      "configurations": [
+        "FOS/RD",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "comet-c1995-o1",
+      "observations": 20,
+      "configurations": [
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "venus",
+      "observations": 20,
+      "configurations": [
+        "HRS/2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "melpomene",
+      "observations": 19,
+      "configurations": [
+        "WFPC/PC",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "comet-17p",
+      "observations": 18,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "cybele",
+      "observations": 16,
+      "configurations": [
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "salacia",
+      "observations": 16,
+      "configurations": [
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "umbriel",
+      "observations": 16,
+      "configurations": [
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "comet-103p",
+      "observations": 15,
+      "configurations": [
+        "COS/FUV",
+        "COS/NUV",
+        "STIS/CCD"
+      ]
+    },
+    {
+      "object": "flora",
+      "observations": 14,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "thebe",
+      "observations": 14,
+      "configurations": [
+        "FOS/RD",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "alexandra",
+      "observations": 13,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "amphitrite",
+      "observations": 13,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "julia",
+      "observations": 13,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "mimas",
+      "observations": 13,
+      "configurations": [
+        "FOS/BL",
+        "HRS",
+        "HRS/2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "parthenope",
+      "observations": 13,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "astraea",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "camilla",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "comet-67p",
+      "observations": 12,
+      "configurations": [
+        "COS",
+        "COS/FUV",
+        "COS/NUV",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "egeria",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "elektra",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "eugenia",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "eunomia",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "gyptis",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "hebe",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "hermione",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "hestia",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "irene",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "iris",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "massalia",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "nemausa",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "nysa",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "orcus",
+      "observations": 12,
+      "configurations": [
+        "ACS/HRC",
+        "NICMOS/NIC1",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "pales",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "psyche",
+      "observations": 12,
+      "configurations": [
+        "COS",
+        "COS/FUV",
+        "COS/NUV",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "vibilia",
+      "observations": 12,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "hygiea",
+      "observations": 11,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "deimos",
+      "observations": 9,
+      "configurations": [
+        "FOS/RD"
+      ]
+    },
+    {
+      "object": "hidalgo",
+      "observations": 9,
+      "configurations": [
+        "FOS/RD"
+      ]
+    },
+    {
+      "object": "ixion",
+      "observations": 8,
+      "configurations": [
+        "ACS/HRC",
+        "STIS/CCD"
+      ]
+    },
+    {
+      "object": "toutatis",
+      "observations": 8,
+      "configurations": [
+        "WFPC/PC"
+      ]
+    },
+    {
+      "object": "herculina",
+      "observations": 7,
+      "configurations": [
+        "WFPC/PC",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "kleopatra",
+      "observations": 7,
+      "configurations": [
+        "COS",
+        "COS/FUV",
+        "COS/NUV",
+        "WFPC/PC"
+      ]
+    },
+    {
+      "object": "palma",
+      "observations": 7,
+      "configurations": [
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "metis",
+      "observations": 6,
+      "configurations": [
+        "FOS/RD"
+      ]
+    },
+    {
+      "object": "minerva",
+      "observations": 6,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "phobos",
+      "observations": 6,
+      "configurations": [
+        "FOS/BL",
+        "FOS/RD"
+      ]
+    },
+    {
+      "object": "sylvia",
+      "observations": 6,
+      "configurations": [
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "miranda",
+      "observations": 5,
+      "configurations": [
+        "FOS/RD"
+      ]
+    },
+    {
+      "object": "hektor",
+      "observations": 4,
+      "configurations": [
+        "WFPC/PC"
+      ]
+    },
+    {
+      "object": "lucina",
+      "observations": 4,
+      "configurations": [
+        "WFPC/PC"
+      ]
+    },
+    {
+      "object": "themis",
+      "observations": 4,
+      "configurations": [
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "thule",
+      "observations": 4,
+      "configurations": [
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "hertha",
+      "observations": 3,
+      "configurations": [
+        "COS",
+        "COS/FUV",
+        "COS/NUV"
+      ]
+    },
+    {
+      "object": "kalliope",
+      "observations": 3,
+      "configurations": [
+        "COS",
+        "COS/FUV",
+        "COS/NUV"
+      ]
+    },
+    {
+      "object": "lydia",
+      "observations": 3,
+      "configurations": [
+        "COS",
+        "COS/FUV",
+        "COS/NUV"
+      ]
+    },
+    {
+      "object": "varuna",
+      "observations": 3,
+      "configurations": [
+        "ACS/HRC"
+      ]
+    },
+    {
+      "object": "asteroid-2002-tc302",
+      "observations": 2,
+      "configurations": [
+        "ACS/HRC"
+      ]
+    },
+    {
+      "object": "asteroid-2002-tx300",
+      "observations": 2,
+      "configurations": [
+        "ACS/HRC"
+      ]
+    },
+    {
+      "object": "asteroid-2003-vs2",
+      "observations": 2,
+      "configurations": [
+        "ACS/HRC"
+      ]
+    },
+    {
+      "object": "sedna",
+      "observations": 2,
+      "configurations": [
+        "ACS/HRC"
+      ]
+    },
+    {
+      "object": "juliet",
+      "observations": 1,
+      "configurations": [
+        "FOS/RD"
+      ]
+    },
+    {
+      "object": "portia",
+      "observations": 1,
+      "configurations": [
+        "FOS/RD"
+      ]
+    },
+    {
+      "object": "puck",
+      "observations": 1,
+      "configurations": [
+        "FOS/RD"
+      ]
+    }
+  ],
+  "fixedTargets": [
+    {
+      "object": "m42",
+      "radiusDeg": 0.16666666666666666,
+      "observations": 7526,
+      "configurations": [
+        "ACS",
+        "ACS/HRC",
+        "ACS/SBC",
+        "ACS/WFC",
+        "COS",
+        "COS/FUV",
+        "COS/NUV",
+        "FGS",
+        "FOC/48",
+        "FOC/96",
+        "FOS/BL",
+        "FOS/RD",
+        "HRS",
+        "HRS/2",
+        "HSP/UNK/POL",
+        "HSP/UNK/VIS",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "NICMOS/NIC3",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/IR",
+        "WFC3/UVIS",
+        "WFPC/PC",
+        "WFPC/WFC",
+        "WFPC2",
+        "WFPC2/PC",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "hd-189733-companion",
+      "radiusDeg": 0.008333333333333333,
+      "observations": 4144,
+      "configurations": [
+        "ACS",
+        "ACS/HRC",
+        "ACS/SBC",
+        "COS",
+        "COS-STIS",
+        "COS/FUV",
+        "COS/NUV",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "NICMOS/NIC3",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/IR",
+        "WFC3/UVIS",
+        "WFPC2",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "hd-189733",
+      "radiusDeg": 0.008333333333333333,
+      "observations": 4143,
+      "configurations": [
+        "ACS",
+        "ACS/HRC",
+        "ACS/SBC",
+        "COS",
+        "COS-STIS",
+        "COS/FUV",
+        "COS/NUV",
+        "NICMOS/NIC1",
+        "NICMOS/NIC3",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/IR",
+        "WFC3/UVIS",
+        "WFPC2",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "wasp-43",
+      "radiusDeg": 0.008333333333333333,
+      "observations": 2675,
+      "configurations": [
+        "COS",
+        "COS-STIS",
+        "COS/FUV",
+        "COS/NUV",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/IR",
+        "WFC3/UVIS"
+      ]
+    },
+    {
+      "object": "m1",
+      "radiusDeg": 0.16666666666666666,
+      "observations": 1708,
+      "configurations": [
+        "ACS/HRC",
+        "ACS/SBC",
+        "ACS/WFC",
+        "COS",
+        "COS-STIS",
+        "COS/FUV",
+        "COS/NUV",
+        "FOC/96",
+        "FOS/BL",
+        "FOS/RD",
+        "HSP/UNK/POL",
+        "HSP/UNK/UV2",
+        "HSP/UNK/VIS",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "NICMOS/NIC3",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/IR",
+        "WFC3/UVIS",
+        "WFPC/PC",
+        "WFPC/WFC",
+        "WFPC2",
+        "WFPC2/PC",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "trappist-1",
+      "radiusDeg": 0.008333333333333333,
+      "observations": 1568,
+      "configurations": [
+        "ACS/SBC",
+        "COS",
+        "COS-STIS",
+        "COS/FUV",
+        "COS/NUV",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/IR",
+        "WFC3/UVIS",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "helix",
+      "radiusDeg": 0.16666666666666666,
+      "observations": 792,
+      "configurations": [
+        "ACS",
+        "ACS/HRC",
+        "ACS/WFC",
+        "FGS",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "NICMOS/NIC3",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "WFPC/PC",
+        "WFPC2",
+        "WFPC2/PC",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "betelgeuse",
+      "radiusDeg": 0.008333333333333333,
+      "observations": 733,
+      "configurations": [
+        "FOC/96",
+        "FOS/BL",
+        "HRS",
+        "HRS/1",
+        "HRS/2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA"
+      ]
+    },
+    {
+      "object": "polaris",
+      "radiusDeg": 0.008333333333333333,
+      "observations": 350,
+      "configurations": [
+        "ACS/HRC",
+        "COS",
+        "COS/FUV",
+        "COS/NUV",
+        "FGS",
+        "STIS/CCD",
+        "WFC3/UVIS",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "m2-9",
+      "radiusDeg": 0.16666666666666666,
+      "observations": 302,
+      "configurations": [
+        "HSP/UNK/UV1",
+        "NICMOS/NIC1",
+        "NICMOS/NIC2",
+        "NICMOS/NIC3",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFC3/UVIS",
+        "WFPC/PC",
+        "WFPC2",
+        "WFPC2/PC",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "m8",
+      "radiusDeg": 0.16666666666666666,
+      "observations": 252,
+      "configurations": [
+        "ACS",
+        "ACS/HRC",
+        "ACS/WFC",
+        "FGS",
+        "FOS/BL",
+        "FOS/RD",
+        "STIS",
+        "STIS/CCD",
+        "STIS/NUV-MAMA",
+        "WFC3/IR",
+        "WFC3/UVIS",
+        "WFPC/PC",
+        "WFPC/WFC",
+        "WFPC2",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "m45",
+      "radiusDeg": 0.16666666666666666,
+      "observations": 144,
+      "configurations": [
+        "ACS/HRC",
+        "ACS/WFC",
+        "FOC/48",
+        "FOC/96",
+        "HRS",
+        "HRS/2",
+        "STIS/CCD",
+        "WFPC/PC",
+        "WFPC/WFC",
+        "WFPC2",
+        "WFPC2/PC"
+      ]
+    },
+    {
+      "object": "antares",
+      "radiusDeg": 0.008333333333333333,
+      "observations": 86,
+      "configurations": [
+        "HRS",
+        "HRS/1",
+        "HRS/2",
+        "STIS",
+        "STIS/CCD",
+        "STIS/FUV-MAMA",
+        "STIS/NUV-MAMA",
+        "WFPC2/WFC"
+      ]
+    },
+    {
+      "object": "hd-181327",
+      "radiusDeg": 0.008333333333333333,
+      "observations": 80,
+      "configurations": [
+        "ACS/HRC",
+        "NICMOS/NIC2",
+        "STIS/CCD"
+      ]
+    },
+    {
+      "object": "pi1-gruis",
+      "radiusDeg": 0.008333333333333333,
+      "observations": 9,
+      "configurations": [
+        "ACS/HRC",
+        "COS",
+        "COS/FUV",
+        "COS/NUV"
+      ]
+    }
+  ],
+  "unansweredTargets": []
+}

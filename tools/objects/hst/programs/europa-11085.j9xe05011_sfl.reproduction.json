@@ -1,0 +1,112 @@
+{
+  "schema": "cssearth-hst-reproduction@1",
+  "program": "europa-11085",
+  "observation": "j9xe05010",
+  "product": "j9xe05011_sfl",
+  "instrument": "ACS/SBC",
+  "opticalElement": "PR130L",
+  "toolchain": "tools/objects/hst/toolchain.json",
+  "crdsContext": "hst_1358.pmap",
+  "mast": {
+    "name": "j9xe05011_sfl.fits",
+    "uri": "mast:HST/product/j9xe05011_sfl.fits",
+    "bytes": 10529280,
+    "sha256": "65381b6680dba3a2e66d15f02c56cb0509cd481ef349a7eb75ad2ab8072e9bea",
+    "CAL_VER": "10.4.1 (08-Aug-2025)",
+    "OPUS_VER": "HSTDP 2026_1",
+    "PROCTIME": 61172.19775463,
+    "FILENAME": "j9xe05011_sfl.fits",
+    "DATE": "2026-05-12"
+  },
+  "local": {
+    "sha256": "b1c18f2e222cea700b49025d36248da1ebea46501d97153bcdc14804d220d684",
+    "CAL_VER": "10.4.1 (08-Aug-2025)",
+    "OPUS_VER": "HSTDP 2026_1",
+    "PROCTIME": 61172.19775463,
+    "FILENAME": "j9xe05011_sfl.fits",
+    "DATE": "2026-09-19"
+  },
+  "differentSettings": {},
+  "differentGrid": [],
+  "repeatedCards": [],
+  "extensions": [
+    {
+      "extname": "SCI",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        1024,
+        1024
+      ],
+      "samples": 1048576,
+      "both": 1048576,
+      "identical": 1048576,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 1,
+      "medianLevel": 0.9719215631484985,
+      "medianAbsoluteDifferenceOverMedian": 0,
+      "aboveMedian": {
+        "samples": 524288,
+        "correlation": 1,
+        "relativeDifference": {
+          "median": 0,
+          "p99": 0,
+          "largest": 0
+        }
+      }
+    },
+    {
+      "extname": "ERR",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        1024,
+        1024
+      ],
+      "samples": 1048576,
+      "both": 1048576,
+      "identical": 1001390,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 0.9549999237060547,
+      "medianLevel": 1.4215399026870728,
+      "medianAbsoluteDifferenceOverMedian": 0,
+      "aboveMedian": {
+        "samples": 524288,
+        "correlation": 0.9999999999999947,
+        "relativeDifference": {
+          "median": 0,
+          "p99": 1.1107491104667133e-7,
+          "largest": 2.0813955359244574e-7
+        }
+      }
+    },
+    {
+      "extname": "DQ",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        1024,
+        1024
+      ],
+      "samples": 1048576,
+      "both": 1048576,
+      "identical": 1048576,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 1,
+      "medianLevel": 0,
+      "medianAbsoluteDifferenceOverMedian": null,
+      "aboveMedian": {
+        "samples": 192517,
+        "correlation": 1,
+        "relativeDifference": {
+          "median": 0,
+          "p99": 0,
+          "largest": 0
+        }
+      }
+    }
+  ]
+}
