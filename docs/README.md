@@ -32,6 +32,8 @@ For a body's sources, processing, evidence and known problems, read its
 | What the Spitzer archive holds for our objects by observing mode, and which of them this toolkit has checked | [Spitzer archive ledger](spitzer-ledger.md) |
 | JunoCam's push-frame images cast strip by strip from the Juno kernels, the limb fit of their two epochs, and what the four Europa images measured | [JunoCam](junocam.md) |
 | What the JunoCam archive holds, which of our objects it photographed, and which images are measured or cast | [JunoCam archive ledger](junocam-ledger.md) |
+| Keck observations pinned from KOA, re-reduced on the archive's own pipeline, and checked against the archive's own cube | [Keck](keck.md) |
+| What the Keck archive holds by instrument for this project's objects, and what can be re-reduced here | [What Keck holds](keck-ledger.md) |
 | Connecting prepared outputs to their inputs | [Prepared object provenance](object-provenance.md) |
 | Published source identities, input bindings and usage links | [Sources catalogue](sources-catalogue.md) |
 | Missions, spacecraft and dataset attribution | [Exploration catalogue](architecture/exploration-catalog.md) |

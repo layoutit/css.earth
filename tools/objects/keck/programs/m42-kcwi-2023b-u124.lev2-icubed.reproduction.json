@@ -1,0 +1,244 @@
+{
+  "schema": "cssearth-keck-reproduction@1",
+  "program": "m42-kcwi-2023b-u124",
+  "koaid": "KB.20231209.37031.94.fits",
+  "product": "icubed",
+  "instrument": "KCWI",
+  "configuration": {
+    "camera": "BLUE",
+    "bgratnam": "BL",
+    "bcwave": "4499.90283",
+    "bfiltnam": "KBlue",
+    "ifunam": "Medium",
+    "binning": "2,2",
+    "ampmode": "TUP",
+    "gainmul": "10"
+  },
+  "target": "m42",
+  "toolchain": "tools/objects/keck/toolchain.json",
+  "archive": {
+    "koaid": "KB.20231209.37031.94.fits",
+    "name": "KB.20231209.37031.94_icubed.fits",
+    "filehand": "/KCWI/2023/20231209/lev2/redux/KB.20231209.37031.94_icubed.fits",
+    "url": "https://koa.ipac.caltech.edu/cgi-bin/KoaAPI/nph-dnloadL1data?instrument=kcwi&koaid=KB.20231209.37031.94.fits&filehand=/KCWI/2023/20231209/lev2/redux/KB.20231209.37031.94_icubed.fits",
+    "bytes": 150932160,
+    "sha256": "71407e7533728903e525aeb1aeb6453f552f6d9125df716f690a41d6b89605f5",
+    "level": "lev2",
+    "description": "Differential atmospheric refraction corrected data",
+    "DATE": "2023-12-09T10:18:06",
+    "pipeline": {
+      "version": "1.0.2",
+      "steps": [
+        "kcwidrp.primitives.SubtractBias",
+        "kcwidrp.primitives.SubtractOverscan",
+        "kcwidrp.primitives.TrimOverscan",
+        "kcwidrp.primitives.CorrectGain",
+        "kcwidrp.primitives.CorrectDefects",
+        "Astroscrappy: exptime < minexptime=60.0",
+        "kcwidrp.primitives.RemoveCosmicRays",
+        "kcwidrp.primitives.CreateUncertaintyImage",
+        "kcwidrp.primitives.RectifyImage",
+        "kcwidrp.primitives.SubtractDark",
+        "kcwidrp.primitives.SubtractScatteredLight",
+        "kcwidrp.primitives.CorrectIllumination",
+        "kcwidrp.primitives.SubtractSky",
+        "kcwidrp.primitives.MakeCube",
+        "kcwidrp.primitives.WavelengthCorrections",
+        "kcwidrp.primitives.CorrectDar"
+      ]
+    },
+    "sampleBits": 64
+  },
+  "local": {
+    "name": "kb231209_00085_icubed.fits",
+    "sha256": "60efbe12fe5c281037fa8a5940123092b2d1af1aeac16fd2a78afae32a0c6dd6",
+    "bytes": 117411840,
+    "DATE": "2023-12-09T10:18:06",
+    "pipeline": {
+      "version": "1.3.1",
+      "steps": [
+        "kcwidrp.primitives.FlagSaturation",
+        "kcwidrp.primitives.SubtractOverscan",
+        "kcwidrp.primitives.TrimOverscan",
+        "kcwidrp.primitives.SubtractBias",
+        "kcwidrp.primitives.CorrectGain",
+        "kcwidrp.primitives.CorrectDefects",
+        "Astroscrappy: exptime < minexptime=60.0",
+        "kcwidrp.primitives.RemoveCosmicRays",
+        "kcwidrp.primitives.CreateUncertaintyImage",
+        "kcwidrp.primitives.RectifyImage",
+        "kcwidrp.primitives.SubtractDark",
+        "kcwidrp.primitives.SubtractScatteredLight",
+        "kcwidrp.primitives.CorrectIllumination",
+        "kcwidrp.primitives.SubtractSky",
+        "kcwidrp.primitives.MakeCube",
+        "kcwidrp.primitives.WavelengthCorrections",
+        "kcwidrp.primitives.CorrectDar"
+      ]
+    },
+    "sampleBits": 32
+  },
+  "samePipelineVersion": false,
+  "stepsOnlyOneRan": [
+    "ours: kcwidrp.primitives.FlagSaturation"
+  ],
+  "differentSettings": {
+    "MFFILE": {
+      "ours": "kb231209_00045_mflat.fits",
+      "archive": "KB.20231209.10064.94_mflat.fits"
+    }
+  },
+  "differentGrid": [
+    "NOSKYSUB: the archive's product has no such extension"
+  ],
+  "extensions": [
+    {
+      "extname": "PRIMARY",
+      "kind": "image",
+      "shape": [
+        34,
+        95,
+        2595
+      ],
+      "samples": 8381850,
+      "both": 8381850,
+      "identical": 343248,
+      "onlyOurs": 0,
+      "onlyTheirs": 0,
+      "identicalShare": 0.04095134129100378,
+      "medianLevel": 0.20262542366981506,
+      "medianAbsoluteDifferenceOverMedian": 0.5727353113650413,
+      "aboveMedian": {
+        "level": 0.20262542366981506,
+        "samples": 4190926,
+        "correlation": 0.9554545225148078,
+        "relativeDifference": {
+          "median": 0.40712305903434753,
+          "p99": 11.142751693725586,
+          "largest": 1972.6160888671875
+        }
+      },
+      "aboveBrightestPercent": {
+        "level": 150.316162109375,
+        "samples": 83820,
+        "correlation": 0.9597012285501391,
+        "relativeDifference": {
+          "median": 0.31342777609825134,
+          "p99": 3.19720458984375,
+          "largest": 9.14656925201416
+        }
+      }
+    },
+    {
+      "extname": "MASK",
+      "kind": "image",
+      "shape": [
+        34,
+        95,
+        2595
+      ],
+      "samples": 8381850,
+      "both": 8381850,
+      "identical": 8381840,
+      "onlyOurs": 0,
+      "onlyTheirs": 0,
+      "identicalShare": 0.9999988069459607,
+      "medianLevel": 0,
+      "medianAbsoluteDifferenceOverMedian": null,
+      "aboveMedian": {
+        "level": 0,
+        "samples": 10,
+        "correlation": null,
+        "relativeDifference": {
+          "median": 1,
+          "p99": 1,
+          "largest": 1
+        }
+      },
+      "aboveBrightestPercent": {
+        "level": 0,
+        "samples": 10,
+        "correlation": null,
+        "relativeDifference": {
+          "median": 1,
+          "p99": 1,
+          "largest": 1
+        }
+      }
+    },
+    {
+      "extname": "UNCERT",
+      "kind": "image",
+      "shape": [
+        34,
+        95,
+        2595
+      ],
+      "samples": 8381850,
+      "both": 8381850,
+      "identical": 343248,
+      "onlyOurs": 0,
+      "onlyTheirs": 0,
+      "identicalShare": 0.04095134129100378,
+      "medianLevel": 0.23070454597473145,
+      "medianAbsoluteDifferenceOverMedian": 0.013088385857222948,
+      "aboveMedian": {
+        "level": 0.23070454597473145,
+        "samples": 4190925,
+        "correlation": 0.999870322855244,
+        "relativeDifference": {
+          "median": 0.008570649661123753,
+          "p99": 0.06578940153121948,
+          "largest": 34.96492004394531
+        }
+      },
+      "aboveBrightestPercent": {
+        "level": 18.90192985534668,
+        "samples": 83819,
+        "correlation": 0.9997519340041812,
+        "relativeDifference": {
+          "median": 0.009200540371239185,
+          "p99": 0.06293808668851852,
+          "largest": 0.4054222106933594
+        }
+      }
+    },
+    {
+      "extname": "FLAGS",
+      "kind": "image",
+      "shape": [
+        34,
+        95,
+        2595
+      ],
+      "samples": 8381850,
+      "both": 8381850,
+      "identical": 8365265,
+      "onlyOurs": 0,
+      "onlyTheirs": 0,
+      "identicalShare": 0.9980213198756838,
+      "medianLevel": 1,
+      "medianAbsoluteDifferenceOverMedian": 0,
+      "aboveMedian": {
+        "level": 1,
+        "samples": 4072631,
+        "correlation": 0.9999931356657431,
+        "relativeDifference": {
+          "median": 0,
+          "p99": 0,
+          "largest": 5
+        }
+      },
+      "aboveBrightestPercent": {
+        "level": 138,
+        "samples": 70260,
+        "correlation": 0.9994626874373997,
+        "relativeDifference": {
+          "median": 0,
+          "p99": 0,
+          "largest": 0.007194244768470526
+        }
+      }
+    }
+  ]
+}
