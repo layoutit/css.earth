@@ -63,16 +63,34 @@ The archive is public and needs no account. Two IRSA services are used and they 
 
 | Channel | Pixels compared | Median ratio | Median difference, as a share of the level | Inside the archive's own 1 sigma | Difference in sigma, median / p95 / p99 | Within 5% | Correlation |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| ch1, 3.6 um | 791,713 | 0.999856 | 0.41% | 98.11% | 0.038 / 0.252 / 2.300 | 93.11% | 0.9842 |
-| ch2, 4.5 um | 789,229 | 1.000047 | 0.50% | 98.54% | 0.031 / 0.410 / 1.995 | 89.99% | 0.9666 |
+| ch1, 3.6 um | 809,858 | 0.999860 | 0.37% | 99.08% | 0.035 / 0.202 / 0.793 | 95.00% | 0.9943 |
+| ch2, 4.5 um | 798,233 | 1.000105 | 0.55% | 99.05% | 0.032 / 0.434 / 0.796 | 90.29% | 0.9999 |
 | ch3, 5.8 um | 808,130 | 1.006903 | 3.38% | 98.35% | 0.368 / 0.661 / 7.261 | 82.01% | 0.8767 |
-| ch4, 8.0 um | 802,563 | 0.999987 | 0.12% | 98.70% | 0.042 / 0.170 / 3.241 | 98.86% | 0.9833 |
+| ch4, 8.0 um | 802,563 | 0.999987 | 0.12% | 98.68% | 0.042 / 0.171 / 3.277 | 98.85% | 0.9833 |
 
 "Inside the archive's own 1 sigma" is the column that means most: it is the archive saying how well it claims to know each pixel, and our mosaic falls inside that claim for 98% of them in every channel.
 
 Nothing is bit-identical, and nothing should be: two different pipelines.
 
 **Geometry.** The run resamples onto the archive's grid, so it does not choose one. It reports the grid the frames imply on their own, from `find_optimal_celestial_wcs`, beside it: 716 x 603 at 1.223 arcsec for channel 1, against the archive's 2361 x 1036 at 0.600 arcsec. The archive oversamples by about two; the frames' native scale is recovered to within 0.1%.
+
+### The mask bug, and what the picture showed
+
+The first version of this route rejected every pixel with any imask bit set. That looked cautious and was wrong. The picture
+showed it: two hard vertical lines and two rows of repeating ticks through the bright stars, which are the shapes of column
+pulldown and muxbleed. They were not artifacts that survived. They were holes, drawn in the renderer's colour for a pixel with
+no data, over 2.57% of the pixels the archive covers; a detector column falls on nearly the same sky in every frame of a small
+dither, so once every frame's copy is thrown away nothing fills it.
+
+The imask file states what its own bits mean, in its own header, for the pipeline version that wrote it. Bits 4, 5, 6 and 7
+are saturation corrected in pipeline, muxbleed, banding and column pulldown: artifacts that were found and removed in the
+corrected frame this stage reads. Rejecting them throws away good pixels. What is rejected now is stray light (3), crosstalk
+(8), radhit (9) and latent image (10), which contaminate and are not corrected, and flat field not applied (11), not linear
+(12), uncorrected saturation (13) and bad or missing (14), where the value is not a measurement.
+
+Measured on channel 1, against rejecting every non-zero bit: holes 2.57% to 0.33%, inside the archive's uncertainty 98.11% to
+99.08%, correlation 0.9842 to 0.9943. Channel 2 went from 0.9666 to 0.9999. Channels 3 and 4 did not move: at 5.8 and 8.0 um
+the pipeline had flagged only bits this policy already rejected. The lines and the tick rows are gone from the picture.
 
 ### Choices settled by measurement
 
@@ -83,6 +101,7 @@ Each of these was run and compared, not argued:
 | Equal weight per frame | Inverse-variance (1/unc squared) weights | Inverse variance was worse: on channel 1, median ratio 1.22 against 1.000 |
 | No sigma clip across the stack | 3 sigma and 2.5 sigma clips | Clipping raised the correlation to 0.9903 but dropped agreement inside the archive's uncertainty from 98.1% to 92.2% and "within 5%" from 93% to 80%, because with 12 frames it rejects real structure |
 | Drop a frame's contribution below half overlap | Keep every partial overlap | Without the threshold, channel 1's correlation was 0.56 instead of 0.98: exact overlap divided by a sliver of area is noise |
+| Reject imask bits 3, 8, 9, 10, 11, 12, 13, 14 | Reject every non-zero bit | Rejecting the corrected artifacts too left holes in 2.57% of the archive's covered pixels instead of 0.33%, and cost 1 point of agreement inside the archive's uncertainty on channel 1 and 3 on channel 2 |
 | Three passes of zero-mean background matching | None | Channels 1, 2 and 4 did not move (their frames' levels differ by 0.001 to 0.007 MJy/sr). Channel 3's frames differ by 0.585 MJy/sr, as large as the signal, and matching moved it from 71.1% to 98.35% inside the archive's uncertainty, at the cost of a 0.7% shift in that channel's overall level and "within 1%" falling from 37% to 5% |
 
 The channel 3 trade is the one unexplained-looking number in the table above and it is not hidden: that channel is 3.4% off in median absolute difference and 0.7% off in level, worse than the others, while being the same 98% inside the archive's stated uncertainty. Its frames have a background that varies by the size of the signal, the archive's pipeline corrects that with an overlap correction and a sky model, and this route has only the additive part of that.
@@ -105,4 +124,4 @@ The channel 3 trade is the one unexplained-looking number in the table above and
 | Compare and receipt | [`tools/objects/spitzer/compare.mts`](../tools/objects/spitzer/compare.mts) |
 | Ledger | [`tools/objects/spitzer/archive-ledger.mts`](../tools/objects/spitzer/archive-ledger.mts), [`docs/spitzer-ledger.md`](spitzer-ledger.md) |
 | Pinned observation and receipts | `tools/objects/spitzer/programs/` |
-| Tests | [`tools/objects/spitzer/spitzer.test.mts`](../tools/objects/spitzer/spitzer.test.mts), 12 tests, no network |
+| Tests | [`tools/objects/spitzer/spitzer.test.mts`](../tools/objects/spitzer/spitzer.test.mts), 13 tests, no network |

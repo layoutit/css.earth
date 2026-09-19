@@ -14,7 +14,7 @@
   "ourProduct": {
     "name": "ngc3132-4416768.ch2.remosaic.fits",
     "bytes": 9792000,
-    "sha256": "05a298205d54297dec29677196ea9b2f9adf2888688822712ec9977faf6b04f3",
+    "sha256": "80a806c5919936b1930a279f8f2a25a265a98f06811ea234f6603719ee1118e0",
     "stage": "open-remosaic",
     "toolchainDigest": "57d10b4f335a2b3f6abbe10732b610db92c3e2089cadcaa0059d4b0a78299cc6",
     "software": [
@@ -62,22 +62,22 @@
   ],
   "frameTimeSeconds": 30,
   "statistics": {
-    "comparedPixels": 789229,
+    "comparedPixels": 798233,
     "archiveCoveredPixels": 800885,
-    "bitIdenticalShare": 0.00002787530615322042,
-    "medianRatio": 1.0000470093529752,
-    "medianLevel": 0.0981704443693161,
-    "medianAbsoluteDifferenceOverLevel": 0.004960909104846051,
+    "bitIdenticalShare": 0.00001378043754141961,
+    "medianRatio": 1.000104688765589,
+    "medianLevel": 0.09822868555784225,
+    "medianAbsoluteDifferenceOverLevel": 0.005446664984328389,
     "differenceInArchiveSigma": {
-      "median": 0.0308683636925056,
-      "p95": 0.40953437584881786,
-      "p99": 1.994630667787807,
-      "max": 1611.130587589809
+      "median": 0.03228584910978395,
+      "p95": 0.43383815047777446,
+      "p99": 0.7960179954742381,
+      "max": 1611.137757407858
     },
-    "shareWithinArchiveSigma": 0.9853591289727063,
-    "shareWithinOnePercent": 0.6144236970511727,
-    "shareWithinFivePercent": 0.8998554285258145,
-    "correlation": 0.966587871974002
+    "shareWithinArchiveSigma": 0.9905328394090447,
+    "shareWithinOnePercent": 0.6280672435241339,
+    "shareWithinFivePercent": 0.9029268396570926,
+    "correlation": 0.9998833437054441
   },
   "limits": [
     "The observatory's own mosaicker, MOPEX, did not run on this machine: its macOS build is x86_64 and Gatekeeper refused the unsigned quarantined distribution. So this is agreement with the archive's product, not a reproduction of the archive's pipeline.",

@@ -7,7 +7,9 @@ This is not the observatory's software. Spitzer's own mosaicker is MOPEX, and th
 macOS build would not run on this machine. What runs instead:
 
   1. each frame is read with its own WCS, including the SIP distortion polynomial the archive fitted to it;
-  2. pixels the frame's imask flags, and pixels that are not finite, are dropped;
+  2. pixels the frame's imask flags as contaminated or bad, and pixels that are not finite, are dropped. Which bits those
+     are is decided by the caller and stated in the product record: the imask flags artifacts the corrected frame has already
+     had removed, and dropping those makes holes where the archive has data;
   3. the frame is resampled onto the output grid with reproject's exact spherical-polygon overlap, which preserves surface
      brightness (the frames and the mosaic are both in MJy/sr, so no area rescaling is wanted);
   4. output pixels an individual frame covers only partly are dropped from that frame's contribution, because an exact overlap
@@ -73,7 +75,7 @@ def main(job_path: str) -> None:
             mask = opened[0].data.astype(np.int32)
         if mask.shape != image.shape:
             raise ValueError(f"{frame['image']}: its mask is {mask.shape}, the image is {image.shape}")
-        rejected = (mask != 0) | ~np.isfinite(image)
+        rejected = ((mask & int(job["fatalImaskBits"])) != 0) | ~np.isfinite(image)
         image = np.where(rejected, np.nan, image)
         wcs_in = WCS(frame_header)
         frame_wcs.append(wcs_in)
@@ -109,6 +111,7 @@ def main(job_path: str) -> None:
     out_header["COMBINE"] = ("mean", "equal weight per contributing frame")
     out_header["FOOTTHRS"] = (threshold, "least fractional overlap a frame may contribute")
     out_header["BGMATCH"] = (passes, "zero-mean additive background matching passes")
+    out_header["IMSKFATL"] = (int(job["fatalImaskBits"]), "imask bits that reject a pixel")
     out_header["ORIGIN"] = "cssEarth tools/objects/spitzer"
     out_header["PIPELINE"] = ("open re-mosaic", "NOT the Spitzer Science Center pipeline")
     fits.PrimaryHDU(combined.astype(np.float32), header=out_header).writeto(job["output"], overwrite=True)

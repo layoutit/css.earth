@@ -7,7 +7,7 @@ import { archiveUrl, DATA, frameSibling, parseSpitzerProgram, type SpitzerProgra
 import { buildLedger, ledgerGuide, naifIdFromHorizonsCode, parseLedger, repositoryState, type ShippedObject } from './archive-ledger.mts';
 import { archiveAgreement, compareMosaics, LIMITS, parseReproduction } from './compare.mts';
 import { addProductEvidence, evidenceFor, pinFile, readProductRecord, writeProductRecord } from '../product-record.mts';
-import { channelInputs, mosaicMembers, parseMosaicSummary } from './mosaic.mts';
+import { channelInputs, FATAL_IMASK_BITS, fatalImaskMask, mosaicMembers, parseMosaicSummary } from './mosaic.mts';
 
 const sha = (seed: string) => seed.repeat(64).slice(0, 64);
 const url = (name: string) => `${DATA}/sha/archive/proc/IRAC003600/r4416768/ch1/${name.includes('maic') || name.includes('munc') || name.includes('mcov') ? 'pbcd' : 'bcd'}/${name}`;
@@ -68,6 +68,20 @@ test('only the frames the archive mosaicked are combined, which in HDR mode is h
   // The uncertainty planes are pinned but the mosaic does not read them, so they are not inputs to this run.
   assert.equal(inputs.filter(input => input.role === 'frame-uncertainty').length, 0);
   assert.equal(inputs.filter(input => input.role === 'frame-mask').length, 2);
+});
+
+test('the imask rejects contaminated pixels and keeps the ones the corrected frame already fixed', () => {
+  // The bits are the imask file's own, from its header: 04 saturation corrected in pipeline, 05 muxbleed, 06 banding,
+  // 07 column pulldown are artifacts the cbcd has had removed, so a pixel carrying only those is still a measurement.
+  // Rejecting them drew the muxbleed rows and pulldown columns of NGC 3132 as holes.
+  const rejects = (bits: readonly number[]) => (bits.reduce((mask, bit) => mask | (1 << bit), 0) & fatalImaskMask) !== 0;
+  for (const bit of [4, 5, 6, 7]) assert.equal(rejects([bit]), false, `imask bit ${bit} is corrected in the cbcd and must not reject`);
+  for (const bit of [3, 8, 9, 10, 11, 12, 13, 14]) assert.equal(rejects([bit]), true, `imask bit ${bit} must reject`);
+  assert.equal(rejects([]), false);
+  // A pixel that is both corrected and bad is still bad.
+  assert.equal(rejects([5, 14]), true);
+  assert.deepEqual([...FATAL_IMASK_BITS], [3, 8, 9, 10, 11, 12, 13, 14]);
+  assert.equal(fatalImaskMask, 32520);
 });
 
 test('archive paths become archive URLs, and nothing else does', () => {

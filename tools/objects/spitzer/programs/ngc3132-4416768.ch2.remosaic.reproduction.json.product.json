@@ -7,7 +7,7 @@
       "role": "our-mosaic",
       "identity": "ngc3132-4416768.ch2.remosaic.fits",
       "bytes": 9792000,
-      "sha256": "05a298205d54297dec29677196ea9b2f9adf2888688822712ec9977faf6b04f3"
+      "sha256": "80a806c5919936b1930a279f8f2a25a265a98f06811ea234f6603719ee1118e0"
     },
     {
       "role": "archive-mosaic",
@@ -42,8 +42,8 @@
   "outputs": [
     {
       "path": "ngc3132-4416768.ch2.remosaic.reproduction.json",
-      "bytes": 3542,
-      "sha256": "3b7b92a8294e819494c432d1d50cddb20f952bef730712652aa72cd14629f717",
+      "bytes": 3545,
+      "sha256": "c0a1682ca8c89ab23274dba5dc24a87f374637625f6d4114c3a953630e22b19f",
       "units": "dimensionless shares and ratios"
     }
   ],

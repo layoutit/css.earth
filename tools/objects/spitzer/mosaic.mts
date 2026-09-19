@@ -39,6 +39,33 @@ export const MAX_STACK_BYTES = 1024 * 1024 * 1024;
  * it, 98%, and channels 1 and 4 did not move because their frames already shared a level. The observatory's own pipeline
  * applies an overlap correction here. */
 export const BACKGROUND_MATCH_PASSES = 3;
+
+/** Which imask bits reject a pixel, and why these.
+ *
+ * The imask file says what its own bits mean, in its own header, for the pipeline version that wrote it (`BIT00` to `BIT14`,
+ * under the comment `mask pixel Bit representation`). That is the source used here, because it is pinned with the data and
+ * cannot fall out of step with it. For AOR 4416768 it reads:
+ *
+ *   00 overall data quality   01 reserved                     02 optical ghost present    03 stray light present
+ *   04 saturation corrected in pipeline                       05 muxbleed/bandwidth effect present
+ *   06 banding present        07 column pulldown present      08 crosstalk present        09 pixel contains radhit
+ *   10 latent image           11 flat field was not applied   12 pixel is not linear      13 uncorrected saturation
+ *   14 data is bad or missing
+ *
+ * The distinction that matters is between a bit that says the pixel is unusable and a bit that says an artifact was found and
+ * dealt with. Bits 4, 5, 6 and 7 are the second kind: saturation corrected, muxbleed, banding and column pulldown are exactly
+ * the artifacts the corrected frame (`cbcd`) has had removed, and this stage reads the corrected frame. Rejecting them throws
+ * away good pixels, and because a detector column falls on nearly the same sky in every frame of a small dither, nothing
+ * fills the gap: it drew the muxbleed rows and pulldown columns of the proving observation as empty, over 2.57% of the
+ * pixels the archive covers.
+ *
+ * So what is rejected is the rest: stray light (3), crosstalk (8), radhit (9) and latent image (10), which contaminate a
+ * pixel and are not corrected, and flat field not applied (11), not linear (12), uncorrected saturation (13) and bad or
+ * missing (14), where the value is not a measurement. Measured on channel 1 against the archive's own mosaic, against
+ * rejecting every non-zero bit: holes 2.57% to 0.33%, pixels inside the archive's stated uncertainty 98.11% to 99.08%,
+ * correlation 0.9842 to 0.9943, median ratio 0.999856 to 0.999860. */
+export const FATAL_IMASK_BITS = [3, 8, 9, 10, 11, 12, 13, 14] as const;
+export const fatalImaskMask = FATAL_IMASK_BITS.reduce((mask, bit) => mask | (1 << bit), 0);
 export const defaultWorkRoot = resolve(REPOSITORY, 'output/spitzer');
 
 export interface MosaicSummary {
@@ -117,7 +144,8 @@ export async function remosaicChannel(program: SpitzerProgram, channel: SpitzerC
   const inputs = channelInputs(program, channel);
   const members = mosaicMembers(channel);
   const parameters = { combine: 'mean', weighting: 'equal per contributing frame', footprintThreshold: FOOTPRINT_THRESHOLD,
-    resampling: 'reproject.reproject_exact', maskRejects: 'every imask bit', grid: "the archive mosaic's own",
+    resampling: 'reproject.reproject_exact', grid: "the archive mosaic's own",
+    maskRejects: `imask bits ${FATAL_IMASK_BITS.join(', ')} (contaminated or not a measurement); the artifacts the corrected frame already had removed are kept`,
     backgroundMatchPasses: BACKGROUND_MATCH_PASSES,
     frameTimeSeconds: channel.mosaicFrameTimeSeconds, frames: members.map(frame => frame.dce) };
   const run: ProductRun = { telescope: TELESCOPE, stage: STAGE, inputs, parameters, software, toolchainDigest: toolchain.digest };
@@ -137,7 +165,7 @@ export async function remosaicChannel(program: SpitzerProgram, channel: SpitzerC
       mask: resolve(directory, frame.files.find(file => file.role === 'frame-mask')!.name),
     })),
     output: resolve(work, output), footprintThreshold: FOOTPRINT_THRESHOLD, maxStackBytes: MAX_STACK_BYTES,
-    backgroundMatchPasses: BACKGROUND_MATCH_PASSES,
+    backgroundMatchPasses: BACKGROUND_MATCH_PASSES, fatalImaskBits: fatalImaskMask,
   };
   const jobPath = resolve(work, `${output}.job.json`);
   await writeFile(jobPath, `${JSON.stringify(job, null, 2)}\n`);
