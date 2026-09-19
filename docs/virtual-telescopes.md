@@ -100,15 +100,15 @@ problem, never counted as a check.
 | VLTI (PIONIER, GRAVITY, MATISSE, AMBER) | [Interferometric imaging](interferometric-imaging.md) | `interferometry/calibrate-*.mts` | the authors' published visibilities and images | `published-value` |
 
 The ledgers say how much of each archive these routes have been proved on:
-[JWST](jwst-ledger.md), [Hubble](hubble-ledger.md), [NACO](naco-ledger.md), [Chandra](chandra-ledger.md) and
-[JunoCam](junocam-ledger.md).
+[JWST](jwst-ledger.md), [Hubble](hubble-ledger.md), [NACO](naco-ledger.md), [Chandra](chandra-ledger.md),
+[JunoCam](junocam-ledger.md), [Spitzer](spitzer-ledger.md), [Gemini](gemini-ledger.md) and [Keck](keck-ledger.md).
 
 ## Asking which observations might measure something
 
 The ledgers say what each archive holds per object and per mode. They say nothing about a single exposure. The capability
 query ([`tools/objects/telescopes/query.mts`](../tools/objects/telescopes/query.mts)) turns that into an answer to one
 question: *which observing modes have ever pointed at this body, and could any of them, in principle, measure the thing I
-care about?*
+care about?* These `.mts` commands require the Node version declared by the package: Node 22.18.x or Node 24+.
 
 ```
 node tools/objects/telescopes/query.mts --target europa --wavelength 3.4,3.6 --kind cube \
@@ -116,7 +116,7 @@ node tools/objects/telescopes/query.mts --target europa --wavelength 3.4,3.6 --k
 ```
 
 It returns one candidate per mode that observed the target, the ones that cover the requested wavelengths first, and each
-candidate answers three separate things:
+candidate answers four separate things:
 
 1. **What the mode allows.** One answer per constraint (yes, no, partial or unknown) with its reason.
    - *Wavelength* comes from the mode's recorded intervals, one per documented window, filter or channel. A mode is never
@@ -135,12 +135,15 @@ candidate answers three separate things:
    a tool with no checked program; *archive-final products qualified, not re-made here*, which is the archive's own final
    product pinned and read whole for a mode nothing here re-calibrates; or *recalibrated here and checked*. The third is never
    reported as the fourth: a retired instrument can reach it and can never reach re-calibration.
-3. **What supports it, and what is still unknown.** The ledger and the date the archive was read, receipts by name, body maps
+3. **Whether it can end as a body map.** This is separate from reduction: a proven reducer may correctly end at detector
+   pixels. The query names the registered author for modes that reach the shared body-map contract and says no where none is
+   registered.
+4. **What supports it, and what is still unknown.** The ledger and the date the archive was read, receipts by name, body maps
    beside the object whose observations carry a measured resolution, investigation entries, and a list of what nobody here
    knows until an observation is pinned and read.
 
-Evidence reaches a candidate only by naming it. A body map's observation must state a telescope this repository knows and an
-instrument that is exactly one ledger mode key; an investigation entry must contain that mode key in its own words. Anything
+Evidence reaches a candidate only by naming it. A body map's observation states the telescope, the exact ledger mode and the
+pinned program separately from its instrument setting; an investigation entry must contain that mode key in its own words. Anything
 that resolves to several modes, or to none, is listed separately as unassigned evidence with what it could have meant. A
 Hubble STIS/CCD map says nothing about STIS/FUV-MAMA, which sees other wavelengths through another detector, so it is never
 carried there.
@@ -152,12 +155,51 @@ mode nobody has sourced is left out, and the query says "capabilities not record
 Fifteen Hubble configurations (aggregates such as `STIS` and `ACS`, which name no one detector, and retired instruments such
 as the FOC, the WF/PC and the HSP) and nine NACO techniques whose own pages state no wavelength range are in that position
 today. The FOS and GHRS detectors left that list when their handbooks' own ranges were read for the archive-final route; being
-sourced is not being re-calibrated, and the query keeps those two apart.
+sourced is not being re-calibrated, and the query keeps those two apart. Spitzer, Gemini and Keck modes are visible in the
+query even where those sourced capability facts have not been written yet; every affected constraint stays unknown.
+
+## From a question to a publishable layer
+
+The query can make an explicit selection instead of silently treating the first candidate as the answer:
+
+```
+pnpm telescope:query --target europa --wavelength 4.24,4.28 --kind cube \
+  --any-time --min-arcsec 0.3 --result body-map \
+  --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250
+```
+
+Exploratory queries may omit constraints. An explicit selection must state time (a range or `--any-time`), one required
+angular or surface resolution, product kind and whether it needs a telescope product or body map. Selection is refused when
+any requested constraint is `no`, the mode has no usable toolkit, or a body map was requested but no body-map author is
+registered. The full mode-level constraint table is retained, and every `partial` and `unknown` answer is copied into the
+selection. Observation wavelength remains explicitly unknown until the selected program's filter, grating or channel is
+qualified. The selected program must belong to this target in this mode.
+
+The instrument author then writes the final map, its `*.body-map.json`, and the shared `*.product.json`. JWST band maps,
+Hubble slit-scan maps and ALMA thermal maps use this boundary. The product record pins the recipe, observation products,
+ephemerides and rotation model that the map stage read, along with the output plane and its body-map metadata.
+
+Publication performs the query and verifies the whole chain in one command:
+
+```
+pnpm telescope:publish-map --target europa --wavelength 4.24,4.28 --kind cube \
+  --any-time --min-arcsec 0.3 --result body-map \
+  --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250 \
+  --map src/objects/europa/source/jwst/carbon-dioxide.fits.body-map.json \
+  --out src/objects/europa/source/jwst/carbon-dioxide.telescope-layer.json
+```
+
+It refuses a missing map contract with the selected telescope, mode and program in the error. It also refuses a changed
+plane, stale product record, changed measurement definition, frame, grid or combination policy, a map
+whose observations omit their exact mode or program, and a map that does not contain the selected program. Its output keeps
+the original scientific request, unresolved constraints, selected toolkit level, exact product record, quantity, units,
+definition digest and observations. A body package can therefore expose the layer without recreating a scientific claim in
+presentation code.
 
 ### Europa between 3.4 and 3.6 micrometres
 
 Asked for a cube, at Europa's typical range of 630 million kilometres, with at least eight resolution elements across the
-disc, the query finds 23 modes that have observed Europa. In plain language:
+disc, the query finds the recorded modes that have observed Europa. In plain language:
 
 - **JWST NIRSPEC/IFU**, 13 observations: covers the wavelengths, produces cubes, and the route is proven on `europa-1250`,
   a program of Europa itself. Its optics hold the disc to at most 7.8 elements and its pixels sample 5.1, so the eight asked
@@ -171,6 +213,8 @@ disc, the query finds 23 modes that have observed Europa. In plain language:
   micrometres, so they sort below the three above.
 - One investigation entry about JWST carbon dioxide is left unassigned: it names the telescope but no single mode, and four
   JWST modes observed Europa.
+- Gemini and Keck modes also appear as candidates, while constraints absent from their ledgers remain *unknown*. Keck's
+  pinned NIRSPEC holdings are kept separate from its one runnable, checked KCWI program.
 
 Chandra holds no record of Europa at all, and the query says so instead of leaving it out.
 

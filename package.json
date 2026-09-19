@@ -108,6 +108,8 @@
     "setup:assets": "pnpm prepare:shell && node tools/setup.mts && node tools/setup-prepared.mts",
     "setup:prepared": "node tools/setup-prepared.mts",
     "status:earth-city-global": "node tools/objects/geographic-pages/operations/status-global-city.mts --object=earth",
+    "telescope:publish-map": "node tools/objects/body-map-publication.mts",
+    "telescope:query": "node tools/objects/telescopes/query.mts",
     "test": "pnpm test:packages && pnpm test:renderer && pnpm test:platform && pnpm test:shell && pnpm test:preparation --universe && pnpm test:lab:nebula",
     "test:browser": "node site/test/dom-cleanliness-browser.mts",
     "test:browser:all": "node tools/run-browser-suites.mts",

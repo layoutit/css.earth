@@ -1,11 +1,11 @@
-/** What the capability query may and may not say. The cases run on small ledgers written here, in the shapes the five real
+/** What the capability query may and may not say. The cases run on small ledgers written here, in the shapes the real
  * ledgers use, so nothing asks an archive anything; the last cases run on the committed ledgers themselves. */
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { resolve } from 'node:path';
 import { BODY_MAP_SCHEMA } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
-import { formatAnswer, ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, queryCapabilities, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
+import { formatAnswer, ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, queryCapabilities, selectObservation, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 const citation = 'https://jwst-docs.stsci.edu/jwst-near-infrared-spectrograph';
@@ -87,6 +87,31 @@ test('a mode with no recorded capabilities answers unknown and says so, rather t
   assert.deepEqual(['wavelength', 'angularResolution', 'kind'].map(name => miri.meetsConstraints[name]?.answer), ['unknown', 'unknown', 'unknown']);
   assert.match(miri.meetsConstraints.wavelength!.reason, /Capabilities not recorded/u);
   assert.ok(miri.unknown.some(line => line.includes('Capabilities not recorded')));
+});
+
+test('an explicit selection keeps unknowns and refuses a hard no or another target\'s program', () => {
+  const complete = { target: 'europa', wavelengthMicrometres: [3.4, 3.6] as const, kind: 'cube' as const, result: 'body-map' as const,
+    time: { any: true as const }, angularResolutionArcsec: 0.3 };
+  const answer = queryCapabilities(complete, inputs([{ telescope: 'jwst', value: JWST_LEDGER }]));
+  const selected = selectObservation(answer, 'JWST', 'NIRSPEC/IFU', 'europa-1250');
+  assert.equal(selected.toolkitLevel, 'proven');
+  assert.equal(selected.bodyMapSupport.answer, 'yes');
+  assert.equal(selected.constraints.wavelength?.answer, 'yes');
+  assert.ok(selected.unresolved.some(entry => entry.constraint === 'angularResolution' && entry.answer === 'partial'));
+  assert.throws(() => selectObservation(answer, 'JWST', 'NIRSPEC/IFU', 'sn-1987a-1232'), /not a pinned or archive-final program of europa/u);
+  const impossible = queryCapabilities({ ...complete, wavelengthMicrometres: [8, 9] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }]));
+  assert.throws(() => selectObservation(impossible, 'JWST', 'NIRSPEC/IFU', 'europa-1250'), /cannot answer this request: wavelength/u);
+});
+
+test('selection requires a complete scientific request and refuses a proven reducer with no body-map author', () => {
+  const incomplete = queryCapabilities({ target: 'ceres', wavelengthMicrometres: [2, 2.3], kind: 'image' }, inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
+  assert.throws(() => selectObservation(incomplete, 'VLT/NACO', 'imaging', 'ceres-080C0881'), /needs time.*required resolution.*requested result/u);
+  const complete = queryCapabilities({ target: 'ceres', wavelengthMicrometres: [2, 2.3], kind: 'image', result: 'body-map', time: { any: true }, angularResolutionArcsec: 0.1 },
+    inputs([{ telescope: 'naco', value: NACO_LEDGER }]));
+  const naco = candidate(complete, 'imaging');
+  assert.equal(naco.toolkitSupport.level, 'proven');
+  assert.equal(naco.bodyMapSupport.answer, 'no');
+  assert.throws(() => selectObservation(complete, 'VLT/NACO', 'imaging', 'ceres-080C0881'), /cannot produce the requested body map.*No body-map author/u);
 });
 
 test('what the optics resolve can say no; what the pixels sample cannot', () => {
@@ -267,6 +292,20 @@ test('the committed ledgers: HD 181327 between 2.4 and 2.6 micrometres falls in 
   assert.equal(candidate(queryCapabilities({ target: 'hd-181327', wavelengthMicrometres: [3, 3.2] }, loaded), 'NIRCAM/CORON').meetsConstraints.wavelength?.answer, 'yes');
 });
 
+test('the committed Spitzer, Gemini and Keck ledgers contribute candidates without upgrading unknown capabilities', async () => {
+  const m42 = queryCapabilities({ target: 'm42', wavelengthMicrometres: [0.5, 5] }, await loadQueryInputs(ROOT, 'm42'));
+  assert.equal(candidate(m42, 'IRAC Map').telescope, 'Spitzer');
+  const kcwi = candidate(m42, 'KCWI');
+  assert.equal(kcwi.telescope, 'Keck'); assert.equal(kcwi.toolkitSupport.level, 'proven'); assert.ok(kcwi.toolkitSupport.targetProgramChecked);
+  const europa = queryCapabilities({ target: 'europa', wavelengthMicrometres: [0.5, 5] }, await loadQueryInputs(ROOT, 'europa'));
+  const niri = candidate(europa, 'NIRI');
+  assert.equal(niri.telescope, 'Gemini'); assert.equal(niri.meetsConstraints.wavelength?.answer, 'unknown');
+  const nirspec = europa.candidates.find(entry => entry.telescope === 'Keck' && entry.mode === 'NIRSPEC')!;
+  assert.equal(nirspec.toolkitSupport.level, 'none', 'a pinned program is not a runnable toolkit when its pipeline is absent');
+  const selectableEuropa = queryCapabilities({ target: 'europa', wavelengthMicrometres: [0.5, 5], kind: 'spectrum', result: 'telescope-product', time: { any: true }, angularResolutionArcsec: 1 }, await loadQueryInputs(ROOT, 'europa'));
+  assert.throws(() => selectObservation(selectableEuropa, 'Keck', 'NIRSPEC', 'europa-nirspec-2006a-c213ol'), /has no usable toolkit/u);
+});
+
 test('the committed ledgers: no candidate for any target ever answers yes for sharpness', async () => {
   for (const target of ['europa', 'jupiter', 'betelgeuse', 'ceres']) {
     const loaded = await loadQueryInputs(ROOT, target);
@@ -287,9 +326,15 @@ test('the committed ledgers: no candidate for any target ever answers yes for sh
  * NACO techniques whose own pages state no wavelength range. The FOS and GHRS detectors left this list when their handbooks'
  * own ranges were read for the archive-final route; being sourced is not being re-calibrated here, and the query keeps those
  * two apart. */
-const WITHOUT_CAPABILITIES: readonly string[] = ['Hubble ACS', 'Hubble COS', 'Hubble COS-STIS', 'Hubble FGS', 'Hubble FOC/48', 'Hubble FOC/96',
+const WITHOUT_CAPABILITIES: readonly string[] = ['Gemini Alopeke', 'Gemini CIRPASS', 'Gemini F2', 'Gemini FLAMINGOS', 'Gemini GHOST', 'Gemini GMOS', 'Gemini GMOS-N', 'Gemini GMOS-S',
+  'Gemini GNIRS', 'Gemini GPI', 'Gemini GRACES', 'Gemini GSAOI', 'Gemini Hokupaa+QUIRC', 'Gemini IGRINS', 'Gemini IGRINS-2', 'Gemini MAROON-X', 'Gemini NICI', 'Gemini NIFS',
+  'Gemini NIRI', 'Gemini OSCIR', 'Gemini PHOENIX', 'Gemini TEXES', 'Gemini TReCS', 'Gemini Zorro', 'Gemini bHROS', 'Gemini hrwfs', 'Gemini michelle',
+  'Hubble ACS', 'Hubble COS', 'Hubble COS-STIS', 'Hubble FGS', 'Hubble FOC/48', 'Hubble FOC/96',
   'Hubble HRS', 'Hubble HSP/UNK/POL', 'Hubble HSP/UNK/UV1', 'Hubble HSP/UNK/UV2', 'Hubble HSP/UNK/VIS', 'Hubble STIS', 'Hubble WFPC/PC',
-  'Hubble WFPC/WFC', 'Hubble WFPC2', 'VLT/NACO app', 'VLT/NACO chopping', 'VLT/NACO coronography', 'VLT/NACO cube', 'VLT/NACO differential', 'VLT/NACO fabry-perot',
+  'Hubble WFPC/WFC', 'Hubble WFPC2', 'Keck DEIMOS', 'Keck ESI', 'Keck GUIDER', 'Keck HIRES', 'Keck KCWI', 'Keck KPF', 'Keck LRIS', 'Keck LWS', 'Keck MOSFIRE',
+  'Keck NIRC', 'Keck NIRC2', 'Keck NIRES', 'Keck NIRSPEC', 'Keck OSIRIS', 'Spitzer IRAC IER', 'Spitzer IRAC Map', 'Spitzer IRAC Map PC', 'Spitzer IRAC Post-Cryo Map',
+  'Spitzer IRS IER', 'Spitzer IRS Map', 'Spitzer IRS Peakup Image', 'Spitzer IRS Stare', 'Spitzer MIPS IER', 'Spitzer MIPS Phot', 'Spitzer MIPS SED', 'Spitzer MIPS Scan', 'Spitzer MIPS TP',
+  'VLT/NACO app', 'VLT/NACO chopping', 'VLT/NACO coronography', 'VLT/NACO cube', 'VLT/NACO differential', 'VLT/NACO fabry-perot',
   'VLT/NACO other', 'VLT/NACO sam', 'VLT/NACO sampol'];
 
 test('every capability entry names a mode the ledgers use, and the modes without one are the known list', async () => {

@@ -28,8 +28,10 @@ import { mastFile } from '../mast.mts';
 import { readImagingProgram } from '../imaging/image3.mts';
 import { bandDepth, openSpectralCube, type Window } from './spectral-cube.mts';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '../../body-map-product.mts';
-import { sha256 } from '../../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '../../../../src/platform/sha256.mts';
 import { bodyMapFits, fitDiscCentre, projectBandMap, topRowFirst, type BodyMap } from './body-map.mts';
+import { bodyMapProductRecord, formatProductRecord } from '../../body-map-publication.mts';
+import type { ProductInput, ProductSoftware } from '../../product-record.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../../..');
 export const JWST_HORIZONS_CENTER = '500@-170';
@@ -47,23 +49,30 @@ const jdOf = (stated: unknown, label: string) => {
 };
 
 export async function authorBodyMaps(id: string, options: { check?: boolean; sources?: readonly string[] } = {}) {
-  const source = resolve(REPOSITORY, 'src/objects', id, 'source'), record = requireRecord(JSON.parse(await readFile(resolve(source, 'preparation/jwst-band-maps.json'), 'utf8')), 'band maps record');
+  const source = resolve(REPOSITORY, 'src/objects', id, 'source'), recipePath = resolve(source, 'preparation/jwst-band-maps.json'), recipeBytes = await readFile(recipePath),
+    record = requireRecord(JSON.parse(recipeBytes.toString('utf8')), 'band maps record');
   if (record.schema !== 'cssearth-jwst-band-maps@1') throw new TypeError('Unsupported band maps record.');
   const body = requireRecord(JSON.parse(await readFile(resolve(REPOSITORY, 'packages/astronomy/data/bodies', `${id}.json`), 'utf8'))), physical = requireRecord(body.physical);
   const radiusKm = requireFiniteNumber(physical.meanRadiusKm, 'mean radius'), command = requireString(physical.horizonsCode, 'Horizons code');
-  const rotation = requireRecord(record.rotation, 'rotation'), orientation = await loadOrientation(source, { kind: 'iau-pck', path: requireString(rotation.path), body: requireFiniteNumber(rotation.body) } as never, REPOSITORY);
+  const rotation = requireRecord(record.rotation, 'rotation'), rotationPath = resolve(source, requireString(rotation.path)), rotationBytes = await readFile(rotationPath),
+    orientation = await loadOrientation(source, { kind: 'iau-pck', path: requireString(rotation.path), body: requireFiniteNumber(rotation.body) } as never, REPOSITORY);
   const written = new Map<string, Buffer>(), evidence: Record<string, unknown>[] = [];
+  const software: ProductSoftware[] = [{ name: 'cssEarth author-body-maps', version: '1' }, { name: 'node', version: process.versions.node }];
   const round = (value: number, digits = 4) => +value.toFixed(digits), quantile = (values: number[], q: number) => [...values].sort((a, b) => a - b)[Math.floor(q * (values.length - 1))]!;
   for (const raw of requireArray(record.maps, 'maps')) {
     const entry = requireRecord(raw, 'map'), mapId = requireString(entry.id, 'map id'), measure = requireRecord(entry.measure, 'measure'), grid = requireRecord(entry.grid, 'grid');
     const recipe = { band: window(measure.band, 'band'), continuum: [window(requireArray(measure.continuum)[0], 'continuum'), window(requireArray(measure.continuum)[1], 'continuum')] as const };
     const limit = requireFiniteNumber(entry.maximumEmissionDegrees, 'maximumEmissionDegrees'), minimum = requireFiniteNumber(entry.minimumDiscPixels, 'minimumDiscPixels');
     const placed: BodyMap[] = [], cubes: Record<string, unknown>[] = [], observations: BodyMapObservation[] = [];
+    const inputs: ProductInput[] = [{ role: 'body-map recipe', identity: `src/objects/${id}/source/preparation/jwst-band-maps.json`, bytes: recipeBytes.byteLength, sha256: sha256(recipeBytes) },
+      { role: 'rotation model', identity: requireString(rotation.path), bytes: rotationBytes.byteLength, sha256: sha256(rotationBytes) }];
     for (const rawCube of requireArray(entry.cubes, 'cubes')) {
       const stated = requireRecord(rawCube, 'cube'), ephemeris = requireRecord(stated.ephemeris, 'ephemeris');
       const { program } = await readImagingProgram(requireString(stated.program)), band = program.bands.find(other => other.band === stated.band);
       if (!band || band.stage !== 'spec3') throw new Error(`${String(stated.program)} has no cube band ${String(stated.band)}.`);
-      const cube = await openSpectralCube(await mastFile(band.level3, resolve(REPOSITORY, '.local', id, 'observations'), options.sources ?? []));
+      const cubePath = await mastFile(band.level3, resolve(REPOSITORY, '.local', id, 'observations'), options.sources ?? []), cubePin = await sha256File(cubePath);
+      inputs.push({ role: 'archive spectral cube', identity: band.level3.uri, ...cubePin });
+      const cube = await openSpectralCube(cubePath);
       if (String(cube.primary.TARGPROP ?? cube.primary.TARGNAME).toUpperCase() !== requireString(entry.target, 'target').toUpperCase()) throw new Error(`${band.level3.name} is a cube of ${String(cube.primary.TARGPROP)}, not ${String(entry.target)}.`);
       const depth = await bandDepth(cube, recipe);
       const startJd = jdOf(cube.primary['DATE-BEG'], 'DATE-BEG'), endJd = jdOf(cube.primary['DATE-END'], 'DATE-END'), paths = { observer: requireString(ephemeris.observer), heliocentric: requireString(ephemeris.heliocentric) };
@@ -72,6 +81,9 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
         if (options.check) throw new Error(`${id} ${mapId}: the Horizons tables of ${band.observation} are not written yet.`);
         tables = await horizonsTables(command, [startJd], undefined, JWST_HORIZONS_CENTER);
         written.set(resolve(source, paths.observer), Buffer.from(tables.observer)); written.set(resolve(source, paths.heliocentric), Buffer.from(tables.heliocentric));
+      }
+      for (const [role, path, text] of [['observer ephemeris', paths.observer, tables.observer], ['heliocentric ephemeris', paths.heliocentric, tables.heliocentric]] as const) {
+        const bytes = Buffer.from(text); inputs.push({ role, identity: `src/objects/${id}/source/${path}`, bytes: bytes.byteLength, sha256: sha256(bytes) });
       }
       if (!/\(-170\)/u.test(tables.observer)) throw new Error(`${paths.observer} was not asked for JWST as the observer.`);
       const row = horizonsRows(tables.observer)[0]!;
@@ -89,7 +101,9 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
       placed.push(map);
       // The blur fitted to the disc's edge is the resolution this cube actually had: a Gaussian sigma in pixels, stated as a full width.
       const blurArcsec = centre.blurPixels * 2.354_82 * cube.arcsecPerPixel;
-      observations.push({ id: band.observation, telescope: 'JWST', instrument: band.band, midTimeJd: (startJd + endJd) / 2, exposureSeconds: (endJd - startJd) * 86_400, rangeKm: camera.rangeKm,
+      const mode = String(cube.primary.INSTRUME).toUpperCase() === 'NIRSPEC' ? 'NIRSPEC/IFU' : String(cube.primary.INSTRUME).toUpperCase() === 'MIRI' ? 'MIRI/IFU' : '';
+      if (!mode) throw new Error(`${band.level3.name} is not a body-map cube mode.`);
+      observations.push({ id: band.observation, telescope: 'JWST', instrument: band.band, mode, programme: requireString(stated.program), midTimeJd: (startJd + endJd) / 2, exposureSeconds: (endJd - startJd) * 86_400, rangeKm: camera.rangeKm,
         subObserver: { latitudeDegrees: camera.observerLatitude, westLongitudeDegrees: ((camera.observerWestLongitude % 360) + 360) % 360 }, subSolar: { latitudeDegrees: camera.sunLatitude, westLongitudeDegrees: ((camera.sunWestLongitude % 360) + 360) % 360 },
         angularResolution: { majorArcsec: blurArcsec, minorArcsec: blurArcsec, basis: 'full width at half maximum of the Gaussian blur fitted to the disc edge in the continuum image' } });
       cubes.push({ observation: band.observation, program: stated.program, cube: band.level3.name, exposure: { start: cube.primary['DATE-BEG'], end: cube.primary['DATE-END'] },
@@ -101,17 +115,20 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
     // A band depth is the ground's own, so cubes from different dates are one measurement and a cell is their weighted mean.
     const definition: MeasurementDefinition = { quantity, units, timeDependence: 'surface-property', source: requireString(measure.source, 'measure.source'),
       method: { kind: 'band-depth', bandMicrometres: recipe.band, continuumMicrometres: recipe.continuum, continuum: 'straight line through the two window means, each at the mean wavelength of its retained samples', depth: '1 - band mean / continuum at the band' } };
-    const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(await readFile(resolve(source, requireString(rotation.path)))), bodyCode: requireFiniteNumber(rotation.body) } };
+    const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(rotationBytes), bodyCode: requireFiniteNumber(rotation.body) } };
     const policy: CombinationPolicy = { time: { rule: 'time-invariant' }, resolution: { rule: 'as-observed' } };
     const { map, overlaps } = combineUnderPolicy(placed.map((placedMap, index) => ({ map: placedMap, definition, frame, observation: observations[index]! })), policy, limit);
     const fits = bodyMapFits(map, { TELESCOP: 'JWST', OBJECT: requireString(entry.target), QUANTITY: quantity, NCUBES: String(placed.length) },
       [{ name: quantity, units, values: map.depth }, { name: `${quantity} ERROR`, units, values: map.error }]);
     // What the map means, beside it: the band and continuum that define the number, the frame, and every cube that went in.
-    written.set(resolve(source, `${output}.body-map.json`), Buffer.from(formatBodyMapProduct({ schema: 'cssearth-body-map@1',
+    const mapProduct = { schema: 'cssearth-body-map@1',
       definition, frame,
       grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, sha256: sha256(fits), value: quantity, uncertainty: `${quantity} ERROR` },
-      mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: policy } : {}) })));
+      mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: policy } : {}) } as const;
+    const metadata = Buffer.from(formatBodyMapProduct(mapProduct));
+    written.set(resolve(source, `${output}.body-map.json`), metadata);
     written.set(resolve(source, output), fits);
+    written.set(resolve(source, `${output}.product.json`), Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software))));
     let peak = { value: -Infinity, cell: 0 }; const seen: number[] = [], errors: number[] = [];
     map.depth.forEach((value, cell) => { if (Number.isFinite(value)) { seen.push(value); errors.push(map.error[cell]!); if (value > peak.value) peak = { value, cell }; } });
     evidence.push({ id: mapId, cubes, overlaps: overlaps.filter(pair => pair.cells >= 500).map(pair => ({ first: cubes[pair.first]!.observation, second: cubes[pair.second]!.observation, cells: pair.cells, rmsDifference: round(pair.rmsDifference), correlation: round(pair.correlation, 3) })),
