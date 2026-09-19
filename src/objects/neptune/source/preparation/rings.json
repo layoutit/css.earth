@@ -7,7 +7,6 @@
       "kind": "annular-field",
       "size": 1024,
       "densities": [
-        1,
         2
       ],
       "outerRadius": 62933,
@@ -166,7 +165,10 @@
         }
       ],
       "output": "neptune-rings{suffix}.webp",
-      "qualification": "PDS radial ring positions with the accepted schematic opacity, width emphasis and fixed arc presentation."
+      "qualification": "PDS radial ring positions with the accepted schematic opacity, width emphasis and fixed arc presentation.",
+      "wedges": {
+        "count": 16
+      }
     }
   ]
 }

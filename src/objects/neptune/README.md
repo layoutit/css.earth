@@ -37,6 +37,11 @@ the committed NASA Science `Neptune: Facts` snapshot.
   4,524 bytes, a 14-byte (0.31%) smaller download. The normal surface bands,
   thumbnail, material assets and retained geometry were not regenerated. This
   is preparation evidence, not a browser review.
+- **Ring wedges, 19 September 2026:** the ring is 16 wedges in one atlas at the
+  canonical density. Laid back into the ring plane, the wedges match the single
+  ring image they replace to a mean alpha error of 1.03/255 inside a wedge and
+  1.30/255 within 2 px of a wedge boundary. The package tests left from the
+  earlier lane are retired and the rest pass.
 
 ## Known problems
 
@@ -67,22 +72,16 @@ registration or recover unobserved polar features.
 
 **Planet surface and observation lenses**
 
-Each lens is mapped across 724 retained projective PolyCSS surface leaves:
-720 ordinary face leaves and four prepared polar leaves. A projective `<s>`
-material leaf in the same retained PolyCSS scene supplies only a transparent
-prepared directional-light and atmospheric-limb overlay. Sharing the scene
-lets rings, the atmosphere, and the body depth-sort as one 3D system.
-Its per-lens limb chromaticity is derived from the brightest quintile of the
-checked prepared source and normalized during preparation. It contains no
-full-color planet surface or source texture detail. The 724 retained face
-leaves remain the visible surface owner. No ordinary image element or
-planet-sized background `<div>` is generated or mounted.
-
-Preparation also emits 256 fixed material views for each lens as 16 local row
-shards. Runtime chooses a prepared address and publishes it to the retained
-material leaf. It only selects and decodes canonical high-density lens and
-material assets; it performs no source projection, lighting, filtering, or
-raster work.
+Each lens is mapped across 722 surface leaves on the shared sphere lane: 720
+longitude-latitude cells and two polar caps. The orientation is solved from
+Neptune's pole and rotation at the scene epoch; the hand-typed rotations it
+replaced were about 65° off. Lighting is one 256-frame bank indexed by the
+Sun's direction in view and shared by every lens; it carries no atmospheric-limb
+overlay. The rings are 16 wedges drawn from the ring recipe, the Adams arcs
+included, and each starts outside the planet so the planet hides their far side.
+No ordinary image element or planet-sized background `<div>` is generated or
+mounted. Runtime only selects and decodes prepared assets; it performs no
+source projection, lighting, filtering, or raster work.
 
 **Shape, satellites, and rings**
 

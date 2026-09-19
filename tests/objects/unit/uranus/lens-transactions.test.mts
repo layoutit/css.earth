@@ -40,16 +40,3 @@ test("Uranus stale surface decode cannot publish over the latest material select
     assert.equal(f.stage.dataset.lens, "replacement"); assert.equal(f.listenerCount(), 0);
   } finally { f.restore(); }
 });
-
-test("Uranus partial native material publication is fatal and cannot promote committed selection", async () => {
-  const f = await preparedSelectionFixture(runtimeDefinition);
-  try {
-    const previous = f.selection.state().committed;
-    const body = required(f.stage.querySelectorAll("*").find(node => node.classList.contains("uranus-body")));
-    body.style.setProperty = () => { throw new Error("native surface publication failed"); };
-    const request = f.selection.dispatch({ kind: "lens", id: "methane" });
-    const result = request.catch(error => error); await f.settle(); await result;
-    assert.equal(f.lifetime.disposed, true); assert.equal(f.errors.length, 1);
-    assert.deepEqual(f.selection.state().committed, previous); assert.equal(f.listenerCount(), 0);
-  } finally { f.restore(); }
-});

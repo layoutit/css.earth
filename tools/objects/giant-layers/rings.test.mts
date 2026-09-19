@@ -69,3 +69,55 @@ test('source pin failure leaves the output directory untouched', async () => {
     assert.equal(result.assets.length,1);assert.deepEqual(await readdir(directory),['source.txt']);
   } finally { await rm(directory,{recursive:true,force:true}); }
 });
+
+test('ring wedges cover every point of their sectors from where the ring begins, and share their boundaries exactly', async () => {
+  const { ringWedgeLayout, wedgePoint, wedgeShare, wedgeMatrix } = await import('../../../src/renderers/css/preparation/scene/ring-wedges.ts');
+  const layout = ringWedgeLayout({ size: 1200, count: 16, contentPixels: 213.4 });
+  let seed = 3;
+  const random = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let trial = 0; trial < 2000; trial++) {
+    const radius = 213.4 + random() * (600 - 213.4), angle = random() * 2 * Math.PI;
+    const shares = layout.angles.map((_, k) => wedgeShare(layout, k, radius * 2, angle));
+    assert.ok(Math.abs(shares.reduce((sum, share) => sum + share, 0) - 1) < 1e-9, `shares at ${radius}, ${angle} sum to ${shares.reduce((a, b) => a + b, 0)}`);
+    // Every wedge with a share holds the point inside its rectangle.
+    for (const [k, share] of shares.entries()) {
+      if (share === 0) continue;
+      const t = layout.angles[k], x = radius * Math.cos(angle), y = radius * Math.sin(angle);
+      const a = Math.cos(t) * x + Math.sin(t) * y - layout.innerPixels, b = -Math.sin(t) * x + Math.cos(t) * y + layout.halfHeight;
+      assert.ok(a >= -1e-9 && a <= layout.width + 1e-9 && b >= -1.5 && b <= layout.height + 1.5, `wedge ${k} misses ${radius}, ${angle}`);
+      const [px, py] = wedgePoint(layout, k, a, b);
+      assert.ok(Math.hypot(px - x, py - y) < 1e-9);
+    }
+  }
+  // At angle zero the wedge lands where the single square leaf put the same image point, whose matrix swaps x and y.
+  const scale = 1.7, half = scale * 1200 / 2, m = wedgeMatrix(layout, 0, scale).split(',').map(Number);
+  for (const [a, b] of [[0, 0], [10.5, 3.25], [layout.width, layout.height]]) {
+    const imageX = 600 + layout.innerPixels + a, imageY = 600 - layout.halfHeight + b;
+    const wedge = [m[0] * a + m[4] * b + m[12], m[1] * a + m[5] * b + m[13]], square = [scale * imageY - half, scale * imageX - half];
+    assert.ok(Math.hypot(wedge[0] - square[0], wedge[1] - square[1]) < 1e-5, `matrix moves ${a}, ${b}`);
+  }
+  assert.throws(() => ringWedgeLayout({ size: 1200, count: 2, contentPixels: 200 }), /three wedges/);
+});
+
+test('ring wedges draw exactly the square ring image inside each wedge, arcs included', async () => {
+  const { rasterAnnularField, rasterAnnularWedges, annularContentPixels } = await import('./rings.mts');
+  const { ringWedgeLayout, wedgePoint, wedgeShare } = await import('../../../src/renderers/css/preparation/scene/ring-wedges.ts');
+  for (const body of ['uranus', 'neptune']) {
+    const recipe = JSON.parse(await readFile(new URL(`../../../src/objects/${body}/source/preparation/rings.json`, import.meta.url), 'utf8'));
+    const layer = { ...recipe.layers[0], overlays: undefined, size: 600 }, density = 2, size = layer.size * density;
+    const layout = ringWedgeLayout({ size: layer.size, count: 16, contentPixels: annularContentPixels(layer) });
+    const square = rasterAnnularField(layer, size), atlas = rasterAnnularWedges(layer, density, layout), width = layout.width * density;
+    let compared = 0, drawn = 0;
+    for (let k = 0; k < layout.count; k++) for (let j = 0; j < layout.height * density; j += 2) for (let i = 0; i < width; i += 2) {
+      const [x, y] = wedgePoint(layout, k, (i + 0.5) / density, (j + 0.5) / density);
+      if (wedgeShare(layout, k, Math.hypot(x, y) * density, Math.atan2(y, x)) < 1) continue;
+      // Compare where the wedge pixel's centre is a square pixel's centre: every wedge at a multiple of 90°.
+      const column = x * density + size / 2 - 0.5, row = y * density + size / 2 - 0.5;
+      if (Math.abs(column - Math.round(column)) > 1e-6 || Math.abs(row - Math.round(row)) > 1e-6) continue;
+      const a = ((k * layout.height * density + j) * width + i) * 4, s = (Math.round(row) * size + Math.round(column)) * 4;
+      assert.deepEqual([...atlas.subarray(a, a + 4)], [...square.subarray(s, s + 4)], `${body} wedge ${k} texel ${i}, ${j}`);
+      compared++; if (square[s + 3]) drawn++;
+    }
+    assert.ok(compared > 20000 && drawn > 500, `${body}: compared ${compared}, ${drawn} drawn`);
+  }
+});

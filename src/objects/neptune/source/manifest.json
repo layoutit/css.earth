@@ -251,8 +251,8 @@
     {
       "id": "neptune-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 3378,
-      "expectedSha256": "177e3fdc36690fe70646f7b68a8375a8a5ac391402b07fbc11f4f4306a72f464",
+      "expectedBytes": 3414,
+      "expectedSha256": "d801e17a7ba1da2bd1b10f04e100c1547000711357bd983e40c92f02b61793de",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -366,8 +366,8 @@
     {
       "id": "neptune-authored-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1518,
-      "expectedSha256": "637a5a9fd4a1c1a1f1dbe413dcc5795c5467639f9b0a96b3bc780a17ac5e728c",
+      "expectedBytes": 1528,
+      "expectedSha256": "50f0085758ba2d9eb3a1668ffcf50758b097b021d9d73a23c7cd51b87aedf3fe",
       "origin": "Checked oblate tessellation and retained texture presentation conventions",
       "credit": "cssEarth",
       "license": "Project-authored specification",

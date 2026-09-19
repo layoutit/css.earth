@@ -1,5 +1,6 @@
 import sharp from 'sharp';
 import type {RadiusMapping, RadialBand, RadialShadow, RadialVariant, RadialOverlay, AnnularLayer, ObservedRadialLayer, RadialProfile} from './radial-contract.mts';
+import { type RingWedgeLayout, wedgePoint, wedgeShare } from '../../../src/renderers/css/preparation/scene/ring-wedges.ts';
 /** Preparation-only radial fields. Body identities and interpretation live in JSON. */
 const clamp = (value: number, minimum: number, maximum: number) => Math.max(minimum, Math.min(maximum, value));
 const smoothstep = (start: number, end: number, value: number) => {
@@ -74,55 +75,101 @@ function bandCoverage(radius: number, angle: number, band: ReturnType<typeof pre
     (1 - smoothstep(band.outer, band.outer + band.outerFade, radius));
 }
 
-/** Supports optical-depth composition, narrow observed bands and angular arcs. */
-export function rasterAnnularField(recipe: AnnularLayer, size: number) {
+function annularSetup(recipe: AnnularLayer, size: number) {
   const { grid, mapping } = recipe;
   const center = (size - grid.centerInset) / 2;
   const maximumRadius = center - grid.marginPixels;
   const pixelScale = recipe.outerRadius / maximumRadius;
   const preparedBands = recipe.bands.map(band => prepareBand(band, mapping,
     mapRadius(recipe.outerRadius, mapping, true) / maximumRadius));
+  return { grid, mapping, center, maximumRadius, pixelScale, preparedBands };
+}
+
+/** The texel the field puts at a sample `dx`, `dy` pixels from the centre, or null where it is empty. */
+function annularTexel(recipe: AnnularLayer, setup: ReturnType<typeof annularSetup>, dx: number, dy: number): readonly [number, number, number, number] | null {
+  const { grid, mapping, maximumRadius, pixelScale, preparedBands } = setup;
+  // Preserve the authored multiplication order at source/pixel boundaries.
+  const radius = grid.scaleOrder === 'divide-multiply'
+    ? Math.hypot(dx, dy) / maximumRadius * recipe.outerRadius
+    : Math.hypot(dx * pixelScale, dy * pixelScale);
+  const angle = grid.scaleOrder === 'divide-multiply' ? Math.atan2(dy, dx) : Math.atan2(dy * pixelScale, dx * pixelScale);
+  let alpha = 0;
+  let color: readonly number[] = recipe.defaultColor ?? [0, 0, 0];
+  const premultiplied = [0, 0, 0];
+  for (const band of preparedBands) {
+    const coverage = bandCoverage(radius, angle, band);
+    if (coverage === 0) continue;
+    const bandAlpha = Math.min(recipe.alphaUnits, band.opacity * coverage);
+    if (recipe.composition === 'front-to-back') {
+      const contribution = bandAlpha * (1 - alpha);
+      for (let channel = 0; channel < 3; channel++) premultiplied[channel] += band.color[channel] * contribution;
+      alpha += contribution;
+    } else {
+      alpha = Math.max(alpha, bandAlpha);
+      color = band.color;
+    }
+  }
+  if (alpha <= 0) return null;
+  if (recipe.composition === 'front-to-back') {
+    if (recipe.shadow) {
+      const sourceRadius = mapRadius(radius, mapping, true);
+      if (ringRayOccluded(sourceRadius * Math.cos(angle), sourceRadius * Math.sin(angle), recipe.shadow)) {
+        for (let channel = 0; channel < 3; channel++) premultiplied[channel] *= recipe.shadow.luminance;
+      }
+    }
+    color = premultiplied.map(channel => Math.round(channel / alpha));
+  }
+  return [color[0], color[1], color[2], recipe.alphaUnits === 1
+    ? Math.round(Math.min(1, alpha) * 255)
+    : clamp(Math.round(alpha), 0, recipe.maximumAlpha)];
+}
+
+/** Supports optical-depth composition, narrow observed bands and angular arcs. */
+export function rasterAnnularField(recipe: AnnularLayer, size: number) {
+  const setup = annularSetup(recipe, size), { grid, center } = setup;
   const data = Buffer.alloc(size * size * 4);
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
-      const dx = x + grid.sampleOffset - center, dy = y + grid.sampleOffset - center;
-      // Preserve the authored multiplication order at source/pixel boundaries.
-      const radius = grid.scaleOrder === 'divide-multiply'
-        ? Math.hypot(dx, dy) / maximumRadius * recipe.outerRadius
-        : Math.hypot(dx * pixelScale, dy * pixelScale);
-      const angle = grid.scaleOrder === 'divide-multiply' ? Math.atan2(dy, dx) : Math.atan2(dy * pixelScale, dx * pixelScale);
-      let alpha = 0;
-      let color: readonly number[] = recipe.defaultColor ?? [0, 0, 0];
-      const premultiplied = [0, 0, 0];
-      for (const band of preparedBands) {
-        const coverage = bandCoverage(radius, angle, band);
-        if (coverage === 0) continue;
-        const bandAlpha = Math.min(recipe.alphaUnits, band.opacity * coverage);
-        if (recipe.composition === 'front-to-back') {
-          const contribution = bandAlpha * (1 - alpha);
-          for (let channel = 0; channel < 3; channel++) premultiplied[channel] += band.color[channel] * contribution;
-          alpha += contribution;
-        } else {
-          alpha = Math.max(alpha, bandAlpha);
-          color = band.color;
-        }
-      }
-      if (alpha <= 0) continue;
-      if (recipe.composition === 'front-to-back') {
-        if (recipe.shadow) {
-          const sourceRadius = mapRadius(radius, mapping, true);
-          if (ringRayOccluded(sourceRadius * Math.cos(angle), sourceRadius * Math.sin(angle), recipe.shadow)) {
-            for (let channel = 0; channel < 3; channel++) premultiplied[channel] *= recipe.shadow.luminance;
-          }
-        }
-        color = premultiplied.map(channel => Math.round(channel / alpha));
-      }
+      const texel = annularTexel(recipe, setup, x + grid.sampleOffset - center, y + grid.sampleOffset - center);
+      if (!texel) continue;
       const offset = (y * size + x) * 4;
-      for (let channel = 0; channel < 3; channel++) data[offset + channel] = color[channel];
-      data[offset + 3] = recipe.alphaUnits === 1
-        ? Math.round(Math.min(1, alpha) * 255)
-        : clamp(Math.round(alpha), 0, recipe.maximumAlpha);
+      for (let channel = 0; channel < 4; channel++) data[offset + channel] = texel[channel];
     }
+  }
+  return data;
+}
+
+/** How far from the centre, in pixels at density 1, the field first puts anything: the square raster's nearest texel. */
+export function annularContentPixels(recipe: AnnularLayer) {
+  const setup = annularSetup(recipe, recipe.size), { grid, center } = setup;
+  let nearest = Infinity;
+  for (let y = 0; y < recipe.size; y++) for (let x = 0; x < recipe.size; x++) {
+    const dx = x + grid.sampleOffset - center, dy = y + grid.sampleOffset - center, distance = Math.hypot(dx, dy);
+    if (distance < nearest && annularTexel(recipe, setup, dx, dy)) nearest = distance;
+  }
+  if (!Number.isFinite(nearest)) throw new TypeError('Radial preparation: a ring with wedges draws nothing.');
+  return nearest;
+}
+
+/**
+ * The same field over ring wedges, stacked in one column in angle order at `density`. Each wedge pixel is placed in the
+ * plane by `wedgePoint` and sampled where the square raster would sample that point. A pixel across a wedge boundary keeps
+ * its share of coverage as alpha 1 - (1 - a)^share, so the two wedges drawn over each other there composite back to a.
+ */
+export function rasterAnnularWedges(recipe: AnnularLayer, density: number, layout: RingWedgeLayout) {
+  const setup = annularSetup(recipe, recipe.size * density);
+  const shift = recipe.grid.sampleOffset + recipe.grid.centerInset / 2 - 0.5;
+  const width = layout.width * density, height = layout.height * density;
+  const data = Buffer.alloc(width * height * layout.count * 4);
+  for (let k = 0; k < layout.count; k++) for (let j = 0; j < height; j++) for (let i = 0; i < width; i++) {
+    const [x, y] = wedgePoint(layout, k, (i + 0.5) / density, (j + 0.5) / density);
+    const share = wedgeShare(layout, k, Math.hypot(x, y) * density, Math.atan2(y, x));
+    if (share <= 0) continue;
+    const texel = annularTexel(recipe, setup, x * density + shift, y * density + shift);
+    if (!texel) continue;
+    const offset = ((k * height + j) * width + i) * 4;
+    for (let channel = 0; channel < 3; channel++) data[offset + channel] = texel[channel];
+    data[offset + 3] = share >= 1 ? texel[3] : Math.round(255 * (1 - (1 - texel[3] / 255) ** share));
   }
   return data;
 }

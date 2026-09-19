@@ -5,7 +5,8 @@ import {radialRecipe, type SourcePin, type ObservedRadialLayer} from './radial-c
 import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';
-import { rasterAnnularField, rasterObservedRadialField, colorizeRadialField, rasterProjectedStripShadow, loadObservedProfile} from './rings.mts';
+import { annularContentPixels, rasterAnnularField, rasterAnnularWedges, rasterObservedRadialField, colorizeRadialField, rasterProjectedStripShadow, loadObservedProfile} from './rings.mts';
+import { ringWedgeLayout } from '../../../src/renderers/css/preparation/scene/ring-wedges.ts';
 export { mapRadius, ringRayOccluded, rasterAnnularField, rasterObservedRadialField, sampleRadialProfile } from './rings.mts';
 
 
@@ -54,6 +55,9 @@ export function parseRadialLayerRecipe(input: unknown) {
             (index > 0 && band.upperBound <= variant.radialGains[index - 1].upperBound))) fail('invalid spectral radial variant.');
       outputs.add(variant.output);
     }
+    // A ring drawn as wedges ships one atlas at the canonical density and nothing else, so nothing else may ask for output.
+    if (layer.kind === 'annular-field' && layer.wedges && (!Number.isInteger(layer.wedges.count) || layer.wedges.count < 3 ||
+        layer.densities.length !== 1 || layer.densities[0] !== 2 || layer.overlays?.length || layer.variants?.length || layer.densityMode)) fail('invalid ring wedges.');
     if (layer.kind === 'annular-field') {
       const { grid, mapping } = layer;
       if (!positive(layer.outerRadius) || !grid || ![0, 1].includes(grid.centerInset) || ![0, 0.5].includes(grid.sampleOffset) ||
@@ -128,6 +132,16 @@ export async function prepareGiantLayers({ sourceDirectory, publicDirectory, con
       }
       return rasterAnnularField(layer, size);
     };
+    if (layer.kind === 'annular-field' && layer.wedges) {
+      // The wedges start where the field first draws; the layout is shared with the scene, which places them.
+      const contentPixels = annularContentPixels(layer), wedges = { count: layer.wedges.count, contentPixels };
+      const layout = ringWedgeLayout({ size: layer.size, count: wedges.count, contentPixels }), density = layer.densities[0]!;
+      const data = rasterAnnularWedges(layer, density, layout);
+      const bytes = await sharp(data, { raw: { width: layout.width * density, height: layout.height * layout.count * density, channels: 4 } }).webp(layer.encoding).toBuffer();
+      const filename = layer.output.replace('{suffix}', '-wedges@2x');
+      assets.push({ filename, width: layout.width * density, height: layout.height * layout.count * density, bytes: bytes.length, sha256: sha256(bytes), data: bytes, wedges });
+      continue;
+    }
     const master = layer.densityMode === 'downsample-highest' ? raster(highestSize, highestDensity) : null;
     for (const density of layer.densities) {
       const size = layer.size * density, data = master ?? raster(size, density), sourceSize = master ? highestSize : size;

@@ -8,11 +8,9 @@ import {spectralRecipe} from '../material-composition/spectral-recipe.mts';
 import {layeredPresentationRecipe as oblatePresentation} from '../material-composition/presentation-recipe.mts';
 import {bandedGeometryRecipe} from './geometry-contract.mts';
 import {photometricRecipe} from './photometric-contract.mts';
-import {layeredPresentationRecipe} from './presentation-contract.mts';
 import {normalizedPresentationRecipe} from './normalized-presentation-contract.mts';
 import {parseRadialLayerRecipe} from './index.mts';
 import {parseObservedSurfaceRecipe} from '../observed-surfaces/index.mts';
-import {parseEllipsoidMaterialRecipe} from './materials.mts';
 const read = async (body: string, file: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../../src/objects/${body}/source/preparation/${file}.json`, import.meta.url), 'utf8'));
 
 test('all existing giant preparation recipes satisfy the operator-owned structural contracts', async () => {
@@ -20,18 +18,15 @@ test('all existing giant preparation recipes satisfy the operator-owned structur
     ['saturn', 'geometry', layeredRecipe], ['saturn', 'radial-motion', radialMotionRecipe],
     ['saturn', 'surface', spectralRecipe], ['saturn', 'presentation', oblatePresentation],
     ['jupiter', 'materials', photometricRecipe], ['jupiter', 'presentation', normalizedPresentationRecipe],
-    ...['jupiter', 'uranus', 'neptune'].map((body): [string, string, Guard<unknown>] => [body, 'geometry', bandedGeometryRecipe]),
-    ...['uranus', 'neptune'].map((body): [string, string, Guard<unknown>] => [body, 'presentation', layeredPresentationRecipe]),
+    ['jupiter', 'geometry', bandedGeometryRecipe],
   ];
   for (const [body, file, guard] of fixtures) {
     const input = await read(body, file);
     assert.equal(parse(input, guard, `${body}/${file}`), input, 'validation preserves source metadata and record identity');
   }
   for (const body of ['saturn', 'jupiter', 'uranus', 'neptune']) parseRadialLayerRecipe(await read(body, 'rings'));
-  for (const body of ['uranus', 'neptune']) {
-    parseObservedSurfaceRecipe(await read(body, 'observations'));
-    parseEllipsoidMaterialRecipe(await read(body, 'materials'));
-  }
+  // Uranus and Neptune left the giant lane for the shared sphere lane; their observed surfaces and rings still come from here.
+  for (const body of ['uranus', 'neptune']) parseObservedSurfaceRecipe(await read(body, 'observations'));
 });
 
 test('nested malformed scalar, buffer-channel and rotation facts cannot cross typed recipe boundaries', async () => {
@@ -42,7 +37,4 @@ test('nested malformed scalar, buffer-channel and rotation facts cannot cross ty
   const observed = parseObservedSurfaceRecipe(await read('neptune', 'observations'));
   Object.assign(observed.lenses[0].decode, {channels: 5});
   assert.throws(() => parseObservedSurfaceRecipe(observed), /structure/);
-  const material = parseEllipsoidMaterialRecipe(await read('uranus', 'materials'));
-  Object.assign(material.raster.view.rotations[0], {axis: 'w'});
-  assert.throws(() => parseEllipsoidMaterialRecipe(material), /structure/);
 });

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "647271d41a6d2e599f278d21c6d1e8d70d010ee9e52737f72ea674255e07431b"
+    "sha256": "c1668cc38257a71eaf4d879bd1e29eadcf8f5004f96062606ef85c81d1bb34f0"
   },
   "id": "uranus",
   "properties": {
@@ -80,8 +80,8 @@
           "path": "source/preparation/observations.json"
         },
         {
-          "id": "materials",
-          "path": "source/preparation/materials.json"
+          "id": "raster",
+          "path": "source/preparation/raster.json"
         },
         {
           "id": "geometry",
@@ -102,6 +102,14 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
         }
       ],
       "shape": {
@@ -118,20 +126,17 @@
             {
               "id": "normal",
               "source": "observations",
-              "material": "lighting",
-              "frameBank": "lighting"
+              "material": "lighting"
             },
             {
               "id": "methane",
               "source": "observations",
-              "material": "lighting",
-              "frameBank": "lighting"
+              "material": "lighting"
             },
             {
               "id": "near-infrared",
               "source": "observations",
-              "material": "lighting",
-              "frameBank": "lighting"
+              "material": "lighting"
             }
           ]
         }
@@ -142,24 +147,10 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "materials",
-          "model": "lit",
-          "frameBank": "lighting"
+          "source": "raster",
+          "model": "lit"
         }
-      ],
-      "frameBanks": [
-        {
-          "id": "lighting",
-          "source": "materials",
-          "frames": 256,
-          "rows": 16,
-          "residentRows": 6
-        }
-      ],
-      "atmosphere": {
-        "source": "materials",
-        "material": "lighting"
-      }
+      ]
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -170,22 +161,22 @@
         1017582363581.5109
       ],
       "presentationToReference": [
-        -0.21165393569659527,
-        0.45293791704797737,
-        -0.8660541869908492,
-        -0.9772468809202611,
-        -0.11061370188647879,
-        0.18097829341274657,
-        0.013825528408075494,
-        -0.8846535210212012,
-        -0.46604399203189906
+        0.46433157727622043,
+        3.469446951953614e-17,
+        0.8856614400233177,
+        0.8125784842877548,
+        0.3977771559319136,
+        -0.4260158930032223,
+        0.3522958887310386,
+        -0.9174820620691815,
+        -0.18470049421831458
       ],
       "orbitUpReference": [
         7.632783294297951e-17,
         -0.39777715593191365,
         0.9174820620691816
       ],
-      "metersPerUnit": 101023.71541501977,
+      "metersPerUnit": 111126.08695652174,
       "bodyRadiusM": 25559000
     },
     "page": {
@@ -194,7 +185,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "dc12e6be501c5568abe12a6e0ad81da6afb21d06370ff1d470467d948c239366"
+        "sha256": "23cbab43cfadd7d2f691c4dfe38671df21db2fbf54e6cd2a87a1e954d10e8a74"
       }
     },
     "catalog": {
