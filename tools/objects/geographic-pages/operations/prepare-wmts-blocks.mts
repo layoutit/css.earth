@@ -1,7 +1,7 @@
 import { sha256 } from '../../../../src/platform/sha256.mts';
 import { gzipSync } from "node:zlib";
 import { encodePreparedBlock, packWmtsRecords } from "../encode-prepared-block.mts";
-import { PREPARED_BLOCK_ENCODING } from "../../../../src/platform/prepared-map/prepared-block-transport.mts";
+import { PREPARED_BLOCK_ENCODING } from "../../../../src/renderers/css/dist/preparation.js";
 
 import type { WmtsPage } from '../contracts.mts';
 // Spatial chunks are independent of destinations. The same block addresses

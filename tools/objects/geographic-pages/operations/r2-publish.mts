@@ -2,7 +2,7 @@ import { sha256 } from '../../../../src/platform/sha256.mts';
 import { spawn } from "node:child_process";
 import { mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
-import { normalizeCityAssetOrigin } from "../../../../src/platform/prepared-map/city-asset-url.mts";
+import { normalizeCityAssetOrigin } from "../../../../src/renderers/css/dist/preparation.js";
 
 import { parseDelivery, shape, array, text } from '../source-records.mts';
 interface CityAsset { url: URL; filename: string; file: string; key: string; bytes: number; type: string }

@@ -1,5 +1,5 @@
 import {loadObjectTestDefinition} from '../../../tools/object-test-data.mts';
-import { createObjectRuntime } from '../object-runtime.mts';
+import { createObjectRuntime } from '../../renderers/css/dist/index.js';
 import { createSceneLifetime } from '@cssearth/engine';
 import { createPreparedResidency } from '../prepared-residency.mts';
 import { createObjectSelectionRuntime } from '../object-selection-runtime.mts';
@@ -7,7 +7,7 @@ import { retainedPresentationFixture } from './object-runtime-package.mts';
 import { Surface, orbitFixture, type OrbitCallbacks } from './orbit-fixture.mts';
 import { requireObjectRuntimeDefinition } from '../object-runtime-contract.mts';
 import { parsePreparedObjectRuntime } from '../../renderers/css/dist/index.js';
-import type { ObjectRuntimeDefinition, ObjectRuntimeServices } from '../object-runtime.mts';
+import type { ObjectRuntimeDefinition, ObjectRuntimeServices } from '../../renderers/css/dist/index.js';
 import type { RetainedCubicSkyOrbit, OrbitServices } from '../../renderers/css/dist/platform/object-orbit.js';
 import type { PreparedImage } from '../prepared-image-store.mts';
 import type { SceneLifetime } from '@cssearth/engine';
@@ -20,7 +20,9 @@ type MaterialFixture = { callbacks: OrbitCallbacks; owners: Set<string>; stage: 
 // Actual common mount, resources, selection, orbit and package presentation.
 // Only native DOM, image decoding and input transports are controlled here.
 export function materialOrbitFixture(id: string) {
-  const definition = definitions.get(id); if (!definition) throw new Error(`Missing object test definition: ${id}`);
+  const prepared = definitions.get(id); if (!prepared) throw new Error(`Missing object test definition: ${id}`);
+  // These failure scenarios isolate material publication; feature labels have their own lifecycle suite.
+  const { features, ...definition } = prepared;
   const native = retainedPresentationFixture(definition);
   const { stage, document } = native;
   const nativeStage = stage as unknown as Surface & HTMLElement & { getAnimations(): Animation[]; getComputedStyle(element: HTMLElement): CSSStyleDeclaration };
@@ -81,18 +83,11 @@ export function materialOrbitFixture(id: string) {
         decode: () => Promise.resolve(), removeAttribute() { this.src = ''; } }) });
       return f.resources;
     },
-    mountSky: () => ({ root: { isConnected: true }, setOrientation() {}, destroy() {} }),
-    mountHeliocentric: () => {
-      shared.owners.add('heliocentric');
-      return { sunRoot: { isConnected: true }, overlay: { isConnected: true },
-        state: () => ({ orbitPieceCount: 0, orbitPoolOverflows: 0 }),
-        destroy() { shared.owners.delete('heliocentric'); } };
-    },
-    mountSun: () => ({ root: { isConnected: true }, state: () => ({ visible: true }), setViewDirection: () => ({ visible: true }), destroy() {} }),
+    mountSky: () => { const root = document.createElement('div'); return { root, setOrientation() {}, destroy() { root.remove(); } }; },
     createOrbit(options: unknown) { f.orbit = shared.create(options as import('../../renderers/css/dist/platform/object-orbit.js').RetainedOrbitOptions); return f.orbit; },
   };
   const mount = createObjectRuntime(definition, services as unknown as Partial<ObjectRuntimeServices>);
-  f.create = async () => { f.runtime = mount(nativeStage, { onError: error => f.errors.push(error) }); await f.runtime.ready; return f.orbit; };
+  f.create = async () => { f.runtime = mount(nativeStage, { inputSurface: nativeStage, runtimePolicy: shared.arguments.runtimePolicy, onError: error => f.errors.push(error) }); await f.runtime.ready; return f.orbit; };
   f.event = (name: string, orbit: RetainedCubicSkyOrbit) => {
     if (name === 'wheel') return () => {
       const wheel = f.callbacks.wheel; if (!wheel) throw new Error('Wheel fixture was not created');

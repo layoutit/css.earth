@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { bindViewUrl } from "../view-url-runtime.mts";
-import { formatSharedView, parseSharedView } from "../../src/platform/view-url.mts";
+import { formatSharedView, parseSharedView } from "../../src/renderers/css/dist/navigation.js";
 
 import type { ObjectSharedView } from '../../src/renderers/css/runtime/deferred-object-mount.ts';
 import type { SharedView } from '../../src/renderers/css/navigation/view-url.ts';
@@ -65,35 +65,13 @@ test("incoming links restore before motion resumes without rewriting their saved
   assert.equal([...h.timers.values()][0].delay, 1000);
   h.owner.destroy(); assert.equal(h.timers.size, 0);
 });
-test("existing JSON links shrink on restore while preserving their exact saved time and route", async () => {
-  const value = saved(), { camera: c, playback: p } = value;
-  const payload = { v: 1, c: [c.controlPitch, c.controlYaw, c.zoom, c.distanceKilometers,
-    c.pose.scene, c.pose.skybox, c.pose.sunView], p: [p.times, p.speed, p.motionRequested], e: value.preparedEpochJdTt };
-  const legacy = Buffer.from(JSON.stringify(payload)).toString("base64url");
-  const h = fixture(`http://localhost:4210/mercury?keep=value&v=${legacy}#details`);
+test("obsolete JSON links report an error without restoring or rewriting the current scene", async () => {
+  const token = Buffer.from(JSON.stringify({ v: 1, c: [], p: [] })).toString("base64url");
+  const h = fixture(`http://localhost:4210/mercury?v=${token}`);
   await h.owner.restore();
-  assert.deepEqual(h.restored, [value]);
-  assert.equal(h.writes.length, 1);
-  const url = h.windowTarget.location;
-  assert.equal(url.pathname, "/mercury"); assert.equal(url.searchParams.get("keep"), "value"); assert.equal(url.hash, "#details");
-  assert.ok(required(url.searchParams.get("v")).length < legacy.length);
-  assert.deepEqual(parseSharedView(`v=${url.searchParams.get("v")}`), value);
-  h.owner.destroy();
-});
-
-test("old physical camera links migrate to one pose without resampling saved motion time", async () => {
-  const value = saved(); value.playback.motionRequested = true;
-  const camera = { distanceKilometers: value.camera.distanceKilometers,
-    pose: { schema: "cssearth-camera-pose@2" as const, scene: value.camera.pose.scene } };
-  const h = fixture(`http://localhost:4210/mercury?${formatSharedView(value)}`, () => ({
-    ...value, camera, playback: { ...value.playback, times: [9876] },
-  }));
-  await h.owner.restore();
-  assert.equal(h.errors.length, 0);
-  assert.equal(h.writes.length, 1);
-  assert.equal(required(h.windowTarget.location.searchParams.get("v")).length, 70);
-  assert.deepEqual(parseSharedView(h.windowTarget.location.search), { ...value, camera });
-  assert.equal(h.motion(), true);
+  assert.equal(h.errors.length, 1);
+  assert.deepEqual(h.restored, []);
+  assert.deepEqual(h.writes, []);
   h.owner.destroy();
 });
 

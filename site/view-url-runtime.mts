@@ -48,11 +48,6 @@ export function bindViewUrl({ windowTarget, view, getMotion, setMotion, onError 
       const saved = query.has("v") ? parseSharedView(`v=${query.get("v")}`) : null;
       if (saved && await view.restore(saved) && !destroyed && current === revision) {
         setMotion(saved.playback.motionRequested);
-        // Upgrade existing long links using their saved time, rather than a
-        // fresh sample of an animation that may already have resumed.
-        const camera = view.capture(saved.playback.motionRequested)?.camera ?? saved.camera;
-        const compact = new URLSearchParams(formatSharedView({ ...saved, camera })).get("v");
-        if (compact !== null && compact.length < (query.get("v")?.length ?? 0)) writeToken(compact);
       }
     } catch (error) { if (!destroyed && current === revision) onError(error); }
     finally {

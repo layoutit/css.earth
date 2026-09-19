@@ -5,7 +5,7 @@ type StyleValues = { [K in keyof CSSStyleDeclaration as CSSStyleDeclaration[K] e
 export type PreparedDeclarations = ReturnType<typeof preparedDeclarations>;
 export interface PreparedNode { tag: string; className: string | null; style: PreparedDeclarations; attributes: Record<string, string>; children: PreparedNode[]; parent: PreparedNode | null; }
 
-import { applyPreparedProjectiveLayout, scalePreparedBackgroundAddresses, scalePreparedPixelLengths } from "../src/platform/prepared-projective-texture-leaf.mts";
+import { applyPreparedProjectiveLayout, scalePreparedBackgroundAddresses, scalePreparedPixelLengths } from "../src/renderers/css/dist/preparation.js";
 
 const cssName = (name: string) => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 // Preparation only: these inputs are the checked-in CSS declaration records,

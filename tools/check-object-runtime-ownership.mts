@@ -1,6 +1,6 @@
 import { sha256 } from '../src/platform/sha256.mts';
 import { isArray } from '../src/platform/is-array.mts';
-import { readFile, readdir } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { createRequire, isBuiltin } from "node:module";
 import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -13,16 +13,14 @@ import { parseNavigationDistance } from '../site/navigation-distance.mts';
 import { definePreparedFocus } from '../site/prepared-focus-object.mts';
 import { parseObjectDiscovery } from '../site/object-discovery.mts';
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mts";
-import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA } from "../src/platform/prepared-presentation-contract.mts";
-import { readPreparedJsonExports, readPreparedPresentationModule, requirePreparedDefinitionSource,
-  requirePreparedControlSource } from "./check-prepared-presentation.mts";
+import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../src/platform/prepared-presentation-contract.mts";
+import { readPreparedJsonExports } from "./check-prepared-presentation.mts";
 import { parseRuntimeSource, resolveRuntimeSource } from './runtime-source-graph.mts';
 import { readDescriptorDefinition, requireAuthoredSourcePins, requireDescriptorAdapterSource } from './prepared-object-source.mts';
 import { requireAuthoredWorldFrameReceipt } from './authored-world-frame.mts';
 import { pinObjectDocuments, type DocumentPinChange } from './pin-object-documents.mts';
 import { readContextObjects } from './prepare-catalog.mts';
 
-const runtimePath = "src/platform/object-runtime.mts";
 const registryPath = "site/objects.mts";
 const approvedSharedData = new Set(["src/objects/sun/prepared/world-context.json"]);
 // Registered objects own packages; context folders beside them (galaxies, nebulae, the heliosphere) are application data.
@@ -314,17 +312,13 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
   return { imports, serverImports: [...serverImports].filter(path => !clientImports.has(path)), violations, factoryCalls, cameraFactories, dataOnly: false, ast };
 }
 
-type RegistryEntry = {kind: 'descriptor'; client: string; descriptor: string; exported: string} | {kind: 'contextual' | 'legacy'; client: string; exported: string; context: string | null};
+type RegistryEntry = {kind: 'descriptor'; client: string; descriptor: string; exported: string};
 async function registryLoaders(source: string, root: string, readSource: (path: string) => Promise<string>) {
-  const ast = parseRuntimeSource(source, registryPath), imports = new Map<string, string>(), entries = new Map<string, RegistryEntry>(), importOffsets = new Set<number>(), descriptors = new Map<string, string>(), descriptorImports = new Set<string>();
-  const preparedJsonImports = new Map<string, string>();
+  const ast = parseRuntimeSource(source, registryPath), imports = new Map<string, string>();
   function fail(message: string): never { throw new TypeError(`Actual OBJECTS registry: ${message}.`); }
   for (const node of ast.body) if (node.type === 'ImportDeclaration') for (const specifier of node.specifiers) {
     if (specifier.type === 'ImportSpecifier' && node.source.value === './object-schema.mts') imports.set(specifier.local.name, nameOf(specifier.imported));
-    if (specifier.type === 'ImportDefaultSpecifier' && typeof node.source.value === 'string' && node.specifiers.length === 1 && node.attributes?.length === 1 && propertyKey(node.attributes[0].key) === 'type' && node.attributes[0].value.value === 'json') {
-      preparedJsonImports.set(specifier.local.name, node.source.value);
-      if (node.source.value.endsWith('/object.json')) descriptors.set(specifier.local.name, node.source.value);
-    }
+
   }
   const definitions = ast.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'VariableDeclaration' ? node.declaration.declarations : []).filter(node => nameOf(node.id) === 'OBJECTS');
   const call = definitions[0]?.init, array = call?.type === 'CallExpression' ? call.arguments[0] : undefined;
@@ -344,75 +338,9 @@ async function registryLoaders(source: string, root: string, readSource: (path: 
     return catalogRegistryLoaders(ast, array, root, readSource);
   }
   if (definitions.length !== 1 || call?.type !== 'CallExpression' || imports.get(nameOf(call.callee)) !== 'defineObjects' || call.arguments.length !== 1 || array?.type !== 'ArrayExpression' || !array.elements.length) fail('requires one concrete registry array');
-  const helpers = new Map(ast.body.filter(node => node.type === 'FunctionDeclaration').map(node => [nameOf(node.id), node]));
-  for (const entry of array.elements) {
-    if (entry?.type !== 'CallExpression' || entry.arguments.length < 7 || entry.arguments.slice(8).some(value => value.type !== 'Literal') || entry.arguments.slice(0, 6).some(value => value.type !== 'Literal')) fail('entries must bind prepared metadata and one loader');
-    const first = entry.arguments[0];
-    if (first.type !== 'Literal' || typeof first.value !== 'string') fail('entries must bind prepared metadata and one loader');
-    const helper = helpers.get(nameOf(entry.callee)), params = helper?.params ?? [], returned = astKind(helper?.body.body[0], 'ReturnStatement')?.argument;
-    if (!helper || helper.async || helper.generator || params.length < 8 || entry.arguments.length > params.length ||
-        params.slice(8).some(param => param.type !== 'AssignmentPattern' || param.left.type !== 'Identifier' || param.right.type !== 'Literal') || params.slice(0, 7).some(param => param.type !== 'Identifier') ||
-        params[7].type !== 'AssignmentPattern' || params[7].left.type !== 'Identifier' || params[7].right.type !== 'Literal' || params[7].right.value !== null || helper.body.body.length !== 1 ||
-        returned?.type !== 'CallExpression' || imports.get(nameOf(returned.callee)) !== 'defineObject' || returned.arguments.length !== 1 || returned.arguments[0].type !== 'ObjectExpression') fail('entry helper must forward its declared loader directly');
-    const properties = returned.arguments[0].properties;
-    const preparedValue = (value: Node): boolean => value.type === 'Literal' || value.type === 'Identifier' && params.some(param => nameOf(param.type === 'AssignmentPattern' ? param.left : param) === value.name) || value.type === 'TemplateLiteral' && value.expressions.every(preparedValue);
-    const field = (name: string) => properties.find((property): property is Property => property.type === 'Property' && nameOf(property.key) === name)?.value;
-    if (properties.some(property => property.type !== 'Property' || property.computed || property.kind !== 'init' || property.method || !preparedValue(property.value)) || nameOf(field('id')) !== nameOf(params[0]) || nameOf(field('loadScene')) !== nameOf(params[6]) || nameOf(field('worldFrame')) !== params[7].left.name) fail('entry helper cannot replace the object id, loader or world frame');
-    const id = first.value;
-    let loader = entry.arguments[6];
-    let boundDescriptor: {parameter: string; argument: Node} | null = null;
-    // A shared loader factory may bind one descriptor, but its body must still
-    // expose the exact import and returned binding checked below.
-    if (loader.type === 'CallExpression') {
-      const factory = helpers.get(nameOf(loader.callee));
-      const factoryReturn = astKind(factory?.body.body[0], 'ReturnStatement')?.argument;
-      if (!factory || factory.async || factory.generator || factory.params.length !== 1 ||
-          factory.params[0].type !== 'Identifier' || factory.body.body.length !== 1 || !factoryReturn ||
-          loader.arguments.length !== 1 || loader.arguments[0].type !== 'Identifier')
-        fail(`${id} loader factory must only bind one descriptor and return its loader`);
-      boundDescriptor = {parameter: factory.params[0].name, argument: loader.arguments[0]};
-      loader = factoryReturn;
-    }
-    if ((loader.type !== 'ArrowFunctionExpression' && loader.type !== 'FunctionExpression') || !loader.async || loader.generator || loader.params.length || loader.body.type !== 'BlockStatement') fail(`${id} loader must import and return one client binding`);
-    const statements = loader.body.body;
-    if (statements.length !== 2 || statements[0].type !== 'VariableDeclaration' || statements[0].kind !== 'const' || statements[0].declarations.length !== 1 || statements[1].type !== 'ReturnStatement') fail(`${id} loader must import and return one client binding`);
-    const declaration = statements[0].declarations[0], imported = declaration.init?.type === 'AwaitExpression' ? declaration.init.argument : null;
-    if (declaration.id.type !== 'ObjectPattern' || declaration.id.properties.length !== 1 || imported?.type !== 'ImportExpression' || imported.source.type !== 'Literal' || typeof imported.source.value !== 'string' || imported.options) fail(`${id} loader must return its actual imported export`);
-    const binding = declaration.id.properties[0];
-    if (binding.type !== 'Property' || binding.computed || binding.key.type !== 'Identifier' || binding.value.type !== 'Identifier') fail(`${id} loader must return its actual imported export`);
-    const returnedBinding = statements[1].argument, client = relative(root, resolve(root, dirname(registryPath), imported.source.value));
-    if (entries.has(id)) fail(`duplicate loader for ${id}`);
-    const suppliedDescriptor = returnedBinding?.type === 'CallExpression' ? returnedBinding.arguments[0] : undefined;
-    const actualDescriptor = boundDescriptor
-      ? nameOf(suppliedDescriptor) === boundDescriptor.parameter ? boundDescriptor.argument : undefined
-      : suppliedDescriptor;
-    if (boundDescriptor && (!actualDescriptor || returnedBinding?.type !== 'CallExpression' ||
-        returnedBinding.arguments.length !== 1 || binding.key.name !== 'loadPackagedObject'))
-      fail(`${id} loader factory must forward its bound descriptor unchanged`);
-    if (returnedBinding?.type === 'CallExpression' && nameOf(returnedBinding.callee) === binding.value.name && returnedBinding.arguments.length === 1 && binding.key.name === 'loadPackagedObject' && descriptors.has(nameOf(actualDescriptor))) {
-      const descriptorImport = descriptors.get(nameOf(actualDescriptor))!;
-      const descriptor = relative(root, resolve(root, dirname(registryPath), descriptorImport));
-      if (descriptor !== `src/objects/${id}/object.json`) fail(`${id} loader must bind its own actual JSON descriptor`);
-      const frame = entry.arguments[7];
-      if (frame?.type !== 'MemberExpression' || frame.computed || nameOf(frame.property) !== 'worldFrame' || frame.object.type !== 'MemberExpression' || frame.object.computed || nameOf(frame.object.property) !== 'properties' || nameOf(frame.object.object) !== nameOf(actualDescriptor)) fail(`${id} world frame must come from its own actual JSON descriptor`);
-      entries.set(id, {kind: 'descriptor', client, descriptor, exported: binding.key.name}); descriptorImports.add(descriptorImport);
-    } else {
-      const frame = entry.arguments[7], frameObject = frame?.type === 'MemberExpression' && !frame.computed && nameOf(frame.property) === 'frame' && frame.object.type === 'Identifier' ? frame.object.name : null;
-      const contextPath = frameObject ? preparedJsonImports.get(frameObject) : null;
-      const resolvedContext = contextPath ? relative(root, resolve(root, dirname(registryPath), contextPath)) : null;
-      const contextual = entry.arguments.length === 8 && resolvedContext === `src/objects/${id}/prepared/world-context.json`;
-      if (!contextual && entry.arguments.length !== 7) fail(`${id} legacy loader cannot declare an unbound world frame`);
-      if (returnedBinding?.type !== 'Identifier' || returnedBinding.name !== binding.value.name) fail(`${id} loader must return its actual imported export`);
-      if (client !== `src/objects/${id}/runtime/client.mjs`) fail(`${id} loader must name its actual runtime client, received ${client}`);
-      entries.set(id, {kind: contextual ? 'contextual' : 'legacy', client, exported: binding.key.name, context: contextual ? resolvedContext : null});
-      if (contextual && contextPath) descriptorImports.add(contextPath);
-    }
-    importOffsets.add(sourceStart(imported));
-  }
-  return {entries, importOffsets, descriptorImports, descriptorFile: registryPath};
+  fail('scene loaders must use the prepared descriptor catalogue');
 }
 
-/** Follow the generated JSON inventory without executing it or its loaders. */
 async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, root: string, readSource: (path: string) => Promise<string>) {
   function fail(message: string): never { throw new TypeError(`Actual OBJECTS registry: ${message}.`); }
   function kind<K extends Node['type']>(node: Node | null | undefined, type: K): Extract<Node, {type: K}> {
@@ -511,31 +439,6 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
     entries.set(value.id, {kind: 'descriptor', client: 'site/packaged-object-runtime.mts', descriptor, exported: 'loadPackagedObject'});
   }
   return {entries, importOffsets: new Set([sourceStart(imported)]), descriptorImports, descriptorFile};
-}
-
-function contextualClient(source: string, file: string, root: string, expectedExport: string) {
-  const ast = parseRuntimeSource(source, "source.mts"), bindings = new Map<string, {name: string; path: string}>(), imports = ast.body.filter(node => node.type === 'ImportDeclaration');
-  if (imports.length !== 3 || ast.body.some(node => !['ImportDeclaration', 'ExportNamedDeclaration'].includes(node.type))) return null;
-  let context = null;
-  for (const node of imports) {
-    if (node.specifiers.length !== 1) return null;
-    const specifier = node.specifiers[0];
-    if (specifier.type === 'ImportSpecifier') bindings.set(specifier.local.name, { name: nameOf(specifier.imported), path: relative(root, resolve(dirname(resolve(root, file)), requireString(node.source.value))) });
-    else if (specifier.type === 'ImportDefaultSpecifier' && node.source.value === '../prepared/world-context.json' &&
-      node.attributes?.length === 1 && propertyKey(node.attributes[0].key) === 'type' && node.attributes[0].value.value === 'json') {
-      context = { local: specifier.local.name, path: relative(root, resolve(dirname(resolve(root, file)), node.source.value)) };
-    } else return null;
-  }
-  const exported = ast.body.filter(node => node.type === 'ExportNamedDeclaration');
-  const variables = astKind(exported[0]?.declaration, 'VariableDeclaration');
-  const declaration = variables?.declarations[0], call = astKind(declaration?.init, 'CallExpression');
-  const factory = bindings.get(nameOf(call?.callee)), definition = bindings.get(nameOf(call?.arguments[0]));
-  if (exported.length !== 1 || variables?.kind !== 'const' || variables.declarations.length !== 1 ||
-    nameOf(declaration?.id) !== expectedExport || !context || !call || call.arguments.length !== 2 ||
-    nameOf(call.arguments[1]) !== context.local || factory?.name !== 'bindContextualObject' ||
-    factory.path !== 'site/packaged-object-runtime.mts' || definition?.name !== 'runtimeDefinition' ||
-    definition.path !== file.replace(/client\.mjs$/, 'definition.mjs')) return null;
-  return context;
 }
 function memberPath(node: Node | null | undefined): string[] | null {
   if (node?.type !== 'MemberExpression' || node.computed) return null;
@@ -717,28 +620,6 @@ async function requireContextPointField(root: string, context: ReturnType<typeof
       data.frame.epochJdTt !== context.frame.epochJdTt || JSON.stringify(data.frame.originM) !== JSON.stringify(context.frame.originM)) fail('prepared payload identity or physical frame drifted');
 }
 
-
-function thinClient(source: string, file: string, root: string, expectedExport: string) {
-  const ast = parseRuntimeSource(source, "source.mts"), bindings = new Map<string, {name: string; path: string}>();
-  const imports = ast.body.filter(node => node.type === "ImportDeclaration");
-  if (imports.length !== 2 || imports.some(node => node.specifiers.length !== 1 || node.specifiers[0].type !== "ImportSpecifier" || node.attributes?.length)) return false;
-  for (const node of ast.body) if (node.type === "ImportDeclaration") {
-    for (const specifier of node.specifiers) if (specifier.type === "ImportSpecifier" && nameOf(specifier.imported)) {
-      bindings.set(specifier.local.name, { name: nameOf(specifier.imported),
-        path: relative(root, resolve(dirname(resolve(root, file)), requireString(node.source.value))) });
-    }
-  }
-  const exports = ast.body.filter(node => node.type === "ExportNamedDeclaration");
-  if (exports.length !== 1 || ast.body.some(node => !["ImportDeclaration", "ExportNamedDeclaration"].includes(node.type))) return false;
-  const variables = astKind(exports[0].declaration, 'VariableDeclaration');
-  if (variables?.kind !== 'const' || variables.declarations.length !== 1 || nameOf(variables.declarations[0].id) !== expectedExport) return false;
-  const call = astKind(variables.declarations[0].init, 'CallExpression');
-  const factory = bindings.get(nameOf(call?.callee));
-  const definition = bindings.get(nameOf(call?.arguments[0]));
-  return call?.arguments.length === 1 && factory?.name === 'createObjectRuntime' && factory.path === runtimePath &&
-    definition?.name === 'runtimeDefinition' && definition.path === file.replace(/client\.mjs$/, 'definition.mjs');
-}
-
 interface AuditObject { readonly id: string; }
 interface AuditOptions {
   root?: string;
@@ -746,25 +627,16 @@ interface AuditOptions {
   readText?: RuntimeSourceReader;
   verifyDefinition?: (object: AuditObject, definition: unknown) => void | Promise<void>;
   strict?: boolean;
-  listRuntimeFiles?: (directory: string) => Promise<string[]>;
 }
 
 export async function auditObjectRuntimeOwnership({ root = process.cwd(), objects = OBJECTS,
-  readText = path => readFile(path, "utf8"), verifyDefinition, strict = true,
-  listRuntimeFiles = async directory => (await readdir(directory, { recursive: true })).filter(file => /\.(?:m?[jt]s|c[jt]s|[jt]sx)$/.test(file)) }: AuditOptions = {}) {
+  readText = path => readFile(path, "utf8"), verifyDefinition, strict = true }: AuditOptions = {}) {
   const entries = [], sharedClosure = new Set<string>(), sharedViolations: Violation[] = [], cameraFactorySites: FactorySite[] = [];
   let registry: Awaited<ReturnType<typeof registryLoaders>> = { entries: new Map(), importOffsets: new Set(), descriptorImports: new Set(), descriptorFile: registryPath };
   const sharedEdges = new Map<string, Set<string>>(), sharedFactoryCalls = new Map<string, number>(), sharedVisits = new Map<string, boolean>();
   const cache = new Map<string, Inspection>();
   const verify = verifyDefinition ?? (async (object: AuditObject, input: unknown) => {
-    const definition = requireRecord(input);
-    if (definition?.schema === PREPARED_OBJECT_RUNTIME_SCHEMA) {
-      requireObjectRuntimeDefinition(definition, { objectId: object.id });
-      return;
-    }
-    const { objectControls } = await import(pathToFileURL(resolve(root, `src/objects/${object.id}/site/control-content.mjs`)).href);
-    requireObjectRuntimeDefinition({ ...definition, schema: PREPARED_OBJECT_RUNTIME_SCHEMA,
-      id: object.id, controls: objectControls }, { objectId: object.id, controls: objectControls });
+    requireObjectRuntimeDefinition(input, { objectId: object.id });
   });
   const sources = new Map<string, string>(), sourceHashes = new Map<string, string>();
   async function source(path: string): Promise<string> {
@@ -859,11 +731,8 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   for (const object of objects) {
     const loader = registry.entries.get(object.id);
     if (!loader) continue;
-    if (loader.kind === 'descriptor') assemblyRoots.add(loader.client);
-    else if (contextualClient(await source(resolve(root, loader.client)), loader.client, root, loader.exported)) assemblyRoots.add('site/packaged-object-runtime.mts');
-    else assemblyRoots.add(runtimePath);
+    assemblyRoots.add(loader.client);
   }
-  if (!assemblyRoots.size) assemblyRoots.add(runtimePath);
   for (const file of assemblyRoots) await sharedVisit(resolve(root, file));
   // Runtime imports are visited first, so a runtime dependency cannot acquire
   // shell-content status by also being imported by a shell component.
@@ -902,7 +771,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       continue;
     }
     const { client } = loader;
-    if (loader.kind === 'descriptor') {
+    {
       const violations: Violation[] = [], owners: string[] = [], orphanExecutors: string[] = [];
       const assemblyClosure = reachable(resolve(root, client));
       const factoryCalls = sharedFactoryCalls.get(resolve(root, client)) ?? 0;
@@ -927,76 +796,8 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       releaseObjectSources(object.id);
       continue;
     }
-    const runtimeDirectory = dirname(resolve(root, client));
-    const clientSource = await source(resolve(root, client));
-    const contextual = contextualClient(clientSource, client, root, loader.exported);
-    const thin = contextual ? true : thinClient(clientSource, client, root, loader.exported);
-    const visited = new Set<string>(), violations: Violation[] = [], owners: string[] = [];
-    if (contextual) try {
-      await sharedVisit(resolve(root, 'site/packaged-object-runtime.mts'));
-      requireContextualBindingSource(await source(resolve(root, 'site/packaged-object-runtime.mts')));
-      const context = requireContextFrame(JSON.parse(await source(resolve(root, contextual.path))), object.id);
-      await requireContextPointField(root, context, source);
-      visited.add(resolve(root, contextual.path));
-    } catch (error) { violations.push({ file: client, line: 1, reason: errorMessage(error) }); }
-    let plan = null;
-    try {
-      const id = requirePreparedDefinitionSource(await source(resolve(runtimeDirectory, "definition.mjs")));
-      if (id !== object.id) throw new TypeError("Prepared definition names another object.");
-      plan = requireRecord(readPreparedPresentationModule(await source(resolve(runtimeDirectory, "preparedPresentation.mjs"))));
-      if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) throw new TypeError("Prepared presentation schema is incompatible.");
-    } catch (error) { violations.push({ file: `${relative(root, runtimeDirectory)}/definition.mjs`, line: 1, reason: errorMessage(error) }); }
-    let factoryCalls = contextual ? 1 : 0;
-    async function visit(path: string): Promise<void> {
-      if (visited.has(path)) return;
-      visited.add(path);
-      const file = relative(root, path), isObject = objectPackage(file);
-      if (!isObject && sharedClosure.has(path)) return;
-      if (isObject && !file.startsWith(`src/objects/${object.id}/`)) {
-        violations.push({ file, line: 1, reason: "Object runtime imports another object package" });
-        return;
-      }
-      const facts = await inspect(path, false);
-      violations.push(...facts.violations);
-      if (![client, client.replace(/client\.mjs$/, "definition.mjs"), `src/objects/${object.id}/site/control-content.mjs`].includes(file) && !facts.dataOnly) {
-        violations.push({ file, line: 1, reason: "Every non-shared reachable module must be serialized data; private executors are forbidden" });
-      }
-      if (file === `src/objects/${object.id}/site/control-content.mjs`) {
-        try { requirePreparedControlSource(await source(path)); }
-        catch (error) { violations.push({ file, line: 1, reason: errorMessage(error) }); }
-      }
-      if (facts.violations.length) owners.push(file);
-      factoryCalls += facts.factoryCalls;
-      for (const imported of facts.imports) {
-        if (contextual && path === resolve(root, client) && imported === '../prepared/world-context.json') continue;
-        if (imported.startsWith(".") && /\.(?:m?[jt]s|c[jt]s|[jt]sx)$/.test(imported)) await visit(resolve(dirname(path), imported));
-        else violations.push({ file, line: 1, reason: `Unclosed object runtime import ${imported}` });
-      }
-    }
-    await visit(resolve(root, client));
-    const orphanExecutors: string[] = [];
-    for (const file of await listRuntimeFiles(runtimeDirectory)) {
-      const path = resolve(runtimeDirectory, file);
-      if (visited.has(path) || ["client.mjs", "definition.mjs"].includes(file)) continue;
-      if (!preparedData(await source(path))) {
-        orphanExecutors.push(relative(root, path));
-        violations.push({ file: relative(root, path), line: 1, reason: "Unreferenced private runtime executor must be removed" });
-      }
-    }
-    if (!thin) violations.unshift({ file: client, line: 1, reason: "Client must contain imports and one bound shared factory export only" });
-    if (factoryCalls !== 1) violations.push({ file: client, line: 1, reason: `Expected one actual shared factory call; found ${factoryCalls}` });
-    if (!visited.has(resolve(root, `src/objects/${object.id}/site/control-content.mjs`))) {
-      violations.push({ file: client, line: 1, reason: "Definition must import the actual control-content export" });
-    }
-    if (thin && !violations.length) {
-      try { await verify(object, plan); }
-      catch (error) { violations.push({ file: client, line: 1, reason: errorMessage(error) }); }
-    }
-    entries.push({ id: object.id, migrated: thin && violations.length === 0, entry: { file: client, exported: loader.exported, registry: registryPath },
-      schema: plan ? PREPARED_OBJECT_RUNTIME_SCHEMA : null,
-      factoryCalls, closure: [...visited].map(path => relative(root, path)).sort(), owners, orphanExecutors, violations });
-    releaseObjectSources(object.id);
   }
+
   const report = { schema: "cssearth-runtime-ownership@1", complete: entries.every(e => e.migrated) && !sharedViolations.length,
     entries, sharedClosure: [...sharedClosure].map(path => relative(root, path)).sort(), sharedViolations, cameraFactorySites,
     sourceHashes: Object.fromEntries([...sourceHashes].sort(([a], [b]) => a.localeCompare(b)).map(([path, sha256]) => [relative(root, path), sha256])),

@@ -1,106 +1,11 @@
-import type {ViewParameters, SharedView, SharedPlayback, LegacySharedCamera, PhysicalSharedCamera} from './view-url.mts';
+import type {SharedView, SharedPlayback} from '../renderers/css/dist/navigation.js';
+import type { LegacySharedCamera, PhysicalSharedCamera } from '../renderers/css/navigation/view-url.ts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { VIEW_LAYERS, formatViewParameters, parseViewParameters, formatSharedView, parseSharedView } from "./view-url.mts";
+import { formatSharedView, parseSharedView } from "../renderers/css/dist/navigation.js";
 
-const token = "ED1EKjVv3t9gpEAk4O9YP9WQv-vR66IJEclAAYBqIc_PCEJ6B0WPzS42";
-// Captured by executing the source-of-truth viewUrl.ts parser itself.
-const oracle = { altitudeM: 241732943586926920000, azimuthRad: 10.439326055328621,
-  polarRad: -0.869375053859181, orbitRollRad: 2.1877024308722675,
-  epochUnixMs: 1788658384082.8882, timeScale: 1, fovDeg: 85 };
 const unpack = (query: string) => { const token = new URLSearchParams(query).get("v"); assert.ok(token); return Buffer.from(token, "base64url"); };
 const queryFor = (bytes: Uint8Array) => `v=${Buffer.from(bytes).toString("base64url")}`;
-const roundTrip = (view: ViewParameters) => parseViewParameters(formatViewParameters(view));
-
-test("the supplied Galaxio link decodes exactly and re-encodes byte for byte", () => {
-  assert.deepEqual(parseViewParameters(`?v=${token}`), oracle);
-  assert.equal(formatViewParameters(oracle), `v=${token}`);
-  assert.deepEqual(parseViewParameters(""), {});
-});
-
-test("version1 header, big-endian doubles and omitted defaults match Galaxio", () => {
-  const bytes = unpack(formatViewParameters({ altitudeM: 123.456, epochUnixMs: 1788652800123.25, timeScale: -86400 }));
-  assert.equal(bytes.readUInt16BE(0), 0x1061);
-  assert.equal(bytes.readDoubleBE(2), 123.456);
-  assert.equal(bytes.readDoubleBE(10), 1788652800123.25);
-  assert.equal(bytes.readDoubleBE(18), -86400);
-  assert.equal(formatViewParameters({ timeScale: 0, azimuthRad: 0, polarRad: Math.PI / 2, orbitRollRad: 0, fovDeg: 85,
-    panM: [0, 0, 0], hiddenLayers: [] }), "v=GAA");
-  assert.deepEqual(parseViewParameters("?v=GAA"), { azimuthRad: 0, polarRad: Math.PI / 2, orbitRollRad: 0, timeScale: 0, fovDeg: 85 });
-  assert.equal(formatViewParameters({}), "v=EAA");
-});
-
-test("raw quaternion, full tumble, submillisecond time and arbitrary numeric values retain all precision", () => {
-  for (let index = 1; index <= 100; index += 1) {
-    const view = { distanceM: 10 ** (-1 + index * 0.27), azimuthRad: index * Math.SQRT2,
-      polarRad: -index * Math.PI / 13, orbitRollRad: index / Math.E,
-      epochUnixMs: Date.UTC(2026, 8, 5) + index * Math.PI,
-      panM: [index * 1.234567891234e20, -index / 3, index * Math.PI],
-      lookQuaternionXyzw: [Math.sin(index), 0, 0, Math.cos(index)],
-      hiddenLayers: VIEW_LAYERS, timeScale: index / 7, fovDeg: 1 + index * Math.SQRT2 };
-    assert.deepEqual(roundTrip(view), view);
-    assert.ok(formatViewParameters(view).slice(2).length <= 154);
-  }
-  for (const altitudeM of [0.1, 20, 6371000, 1.495978707e11, 3.086e19, 10 ** Math.log10(4.4e26)]) {
-    assert.equal(roundTrip({ altitudeM }).altitudeM, altitudeM);
-  }
-  for (const timeScale of [-1e9, -86400, -0.123456789, 0, 1, 60, 86400, 31557600, 1e9]) {
-    assert.equal(roundTrip({ timeScale }).timeScale, timeScale);
-  }
-});
-
-test("free-look distinguishes camera semantics without modifying its saved quaternion", () => {
-  const view = { lookQuaternionXyzw: [0, 0.6, 0, 0.8] };
-  const orbit = formatViewParameters(view), free = formatViewParameters({ ...view, lookMode: "freeLook" });
-  assert.equal(orbit.length, free.length);
-  assert.equal(unpack(orbit).readUInt16BE(0) ^ unpack(free).readUInt16BE(0), 0x8000);
-  assert.equal(parseViewParameters(orbit).lookMode, undefined);
-  assert.equal(parseViewParameters(free).lookMode, "freeLook");
-  assert.deepEqual(parseViewParameters(free).lookQuaternionXyzw, view.lookQuaternionXyzw);
-  assert.throws(() => formatViewParameters({ lookMode: "freeLook" }));
-});
-
-test("malformed, repeated, noncanonical, oversized and unknown-version payloads are rejected", () => {
-  for (const query of ["v=", "v=A", "v=AA", "v=AAAAA", "v=EAB", "v=EAA=", "v=EA+", "v=EA/", "v=EA!",
-    "v=EAA&v=EAA", "v=EAA&rate=0", "v=IA A", "v=IAA", "v=EAAA", `v=${"A".repeat(155)}`, "altitude=20m", "unknown=1"]) {
-    assert.throws(() => parseViewParameters(query), query);
-  }
-  const bytes = unpack(formatViewParameters({ ...oracle, lookQuaternionXyzw: [0, 0.6, 0, 0.8], panM: [1, 2, 3], hiddenLayers: ["rings"] }));
-  for (let length = 0; length < bytes.length; length += 1) assert.throws(() => parseViewParameters(queryFor(bytes.subarray(0, length))));
-  assert.throws(() => parseViewParameters(queryFor(Buffer.concat([bytes, Buffer.from([0])]))));
-});
-
-test("invalid values are rejected before encoding and after decoding", () => {
-  for (const invalid of [{ altitudeM: -1 }, { altitudeM: 0 }, { altitudeM: Infinity }, { distanceM: NaN },
-    { altitudeM: 20, distanceM: 8500000 }, { azimuthRad: Infinity }, { polarRad: 1e8 }, { orbitRollRad: NaN },
-    { epochUnixMs: NaN }, { epochUnixMs: 253402300800000 }, { epochUnixMs: -62167219200001 },
-    { fovDeg: 0 }, { fovDeg: 180 }, { timeScale: NaN }, { timeScale: 1e9 + 1 },
-    { lookQuaternionXyzw: [0, 0, 0, 0] }, { lookQuaternionXyzw: [0, 0, 1] }, { lookQuaternionXyzw: [0, 0, 1, 1] },
-    { panM: [1, 2] }, { panM: [1, 2, Infinity] }, { panM: [1, 2, 1e28] }, { hiddenLayers: ["unknown"] }, { hiddenLayers: ["rings", "rings"] }]) {
-    assert.throws(() => formatViewParameters(invalid));
-  }
-  const scalar = unpack(formatViewParameters({ altitudeM: 20 }));
-  for (const value of [NaN, Infinity, -Infinity, 0, -1, 1e30]) {
-    scalar.writeDoubleBE(value, 2);
-    assert.throws(() => parseViewParameters(queryFor(scalar)));
-  }
-  const distance = unpack(formatViewParameters({ altitudeM: 20, fovDeg: 45 }));
-  distance.writeUInt16BE(0x1003, 0);
-  assert.throws(() => parseViewParameters(queryFor(distance)));
-  const rate = unpack(formatViewParameters({ timeScale: 60 }));
-  rate.writeUInt16BE(rate.readUInt16BE(0) | 0x800, 0);
-  assert.throws(() => parseViewParameters(queryFor(rate)));
-  const quaternion = unpack(formatViewParameters({ lookQuaternionXyzw: [0, 0.6, 0, 0.8] }));
-  quaternion.fill(0, 2);
-  assert.throws(() => parseViewParameters(queryFor(quaternion)));
-  const pan = unpack(formatViewParameters({ panM: [1, 2, 3] }));
-  pan.writeDoubleBE(Infinity, 2);
-  assert.throws(() => parseViewParameters(queryFor(pan)));
-  const layers = unpack(formatViewParameters({ hiddenLayers: ["rings"] }));
-  layers[2] = 64;
-  assert.throws(() => parseViewParameters(queryFor(layers)));
-});
-
 type LegacyView = Omit<SharedView, 'camera'> & {camera: LegacySharedCamera};
 type MutablePlayback = Omit<SharedPlayback, 'times'> & {times: number[]};
 type LegacyFixture = Omit<LegacyView, 'playback'> & {playback: MutablePlayback};
@@ -181,7 +86,7 @@ test("shared payload validates shape, values and pure rotation matrices before e
 
 test("shared links reject malformed base64, noncanonical padding, truncation and payloads over4096bytes", () => {
   const query = formatSharedView(shared());
-  for (const bad of ["v=", "v=A", "v=AA", "v=AAAAA", "v=EAB", `${query}=`, `${query}&v=EAA`, `${query}&extra=1`, "unknown=1", `v=${token}`]) {
+  for (const bad of ["v=", "v=A", "v=AA", "v=AAAAA", "v=EAB", `${query}=`, `${query}&v=EAA`, `${query}&extra=1`, "unknown=1", "v=ED1EKjVv3t9gpEAk4O9YP9WQv-vR66IJEclAAYBqIc_PCEJ6B0WPzS42"]) {
     assert.throws(() => parseSharedView(bad));
   }
   const bytes = unpack(query);
@@ -229,11 +134,11 @@ function assertSharedPrecision(actual: SharedView | null, expected: LegacyView) 
   }
 }
 
-test("actual legacy Mercury link shrinks from835 to251token characters with no drift over100roundtrips", () => {
+test("current Mercury binary link retains precision over100roundtrips and rejects obsolete JSON", () => {
   const original = browserView(), legacy = sharedQuery(legacyPayload(original));
   assert.equal(legacy.slice(2).length, 835);
-  assert.deepEqual(parseSharedView(legacy), original, "previous JSON links must retain their original meaning");
-  const compact = formatSharedView(requiredShared(legacy));
+  assert.throws(() => parseSharedView(legacy), /unsupported version/);
+  const compact = formatSharedView(original);
   assert.equal(compact.slice(2).length, 251);
   assert.ok(compact.length < 350);
   assert.equal(unpack(compact).readUInt16BE(0) & 0xe0, 0x40, "only the rounded sky registration needs the nine-component escape");

@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView, PageLayerRuntime } from "./object-runtime-types.js";
 import type { ObjectSelectionState } from "../rendering/object-selection-runtime.js";
 import type { OrbitPublication, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
@@ -410,7 +411,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed) return;
       controls.setReady();
       readyPublished = true;
-      if (diagnostics) publishObjectDiagnostics({ stage, definition, mounted, orbit, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, pageLayers, surfaceFeatures, getCurrentView: () => currentView });
+      if ((import.meta.env?.PROD !== true || import.meta.env?.MODE === 'performance') && diagnostics) publishObjectDiagnostics({ stage, definition, mounted, orbit, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, pageLayers, surfaceFeatures, getCurrentView: () => currentView });
       settled = true;
       resolveReady();
       // First paint owns the small prepared bank. Refinement uses the same

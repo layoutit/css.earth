@@ -29,7 +29,7 @@ export interface DatasetHost { readonly objectId: string; readonly lensId: strin
 export function parseDatasetDestination(value: unknown, ownerId: string, ownerLensId: string, host?: DatasetHost): string {
   const objectId = host?.objectId ?? ownerId, lensId = host?.lensId ?? ownerLensId;
   const href = sourceText(value);
-  if (href !== datasetDestination(objectId, `/${objectId}/`, lensId) && href !== `/${objectId}/#dataset=${encodeURIComponent(lensId)}` &&
+  if (href !== datasetDestination(objectId, `/${objectId}/`, lensId) &&
       href !== datasetDestination(objectId, `/sun/?focus=${encodeURIComponent(objectId)}`, lensId)) {
     throw new TypeError('Invalid dataset destination URL.');
   }

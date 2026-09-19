@@ -8,8 +8,8 @@ import { build } from 'vite';
 test('production runtime removes development observations from the executable closure', async () => {
   async function bundle(dev: boolean) {
     const result = await build({ configFile: false, logLevel: 'silent',
-      define: { 'import.meta.env.DEV': JSON.stringify(dev) },
-      build: { write: false, minify: 'esbuild', lib: { entry: resolve('src/platform/object-runtime.mts'), formats: ['es'] },
+      define: { 'import.meta.env.PROD': JSON.stringify(!dev), 'import.meta.env.MODE': JSON.stringify(dev ? 'development' : 'production') },
+      build: { write: false, minify: 'esbuild', lib: { entry: resolve('src/renderers/css/runtime/object-runtime.ts'), formats: ['es'] },
         rollupOptions: { external: ['@layoutit/polycss'] } } });
     return (Array.isArray(result) ? result : [result]).flatMap(bundle => {
       assert.ok("output" in bundle, "A one-shot build returns generated chunks");

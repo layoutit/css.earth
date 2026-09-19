@@ -6,9 +6,9 @@ import type { PreparedWrite } from "../renderers/css/rendering/prepared-presenta
 import type { PreparedAssets } from "../renderers/css/rendering/prepared-residency.ts";
 import type { PreparedCubicSkyPlan } from "./cubic-sky-contract.mts";
 import type { PreparedDirectionalSunPlan } from "./directional-sun-contract.mts";
-import type { EllipsoidProjectionPlan } from "./prepared-ellipsoid-projection.mts";
-import type { PreparedMaterialAddress, PreparedMaterialFrameMapping } from "./prepared-material.mts";
-import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialBank } from "./prepared-material.mts";
+import type { EllipsoidProjectionPlan } from "../renderers/css/dist/preparation.js";
+import type { PreparedMaterialAddress, PreparedMaterialFrameMapping } from "../renderers/css/dist/testing.js";
+import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialBank } from "../renderers/css/dist/testing.js";
 import type { PreparedVariant, PreparedPageLayer, PreparedPresentationDefinition, PreparedSelectionNavigation } from "./prepared-presentation.mts";
 import type { PreparedDepthOrder } from "../renderers/css/rendering/prepared-depth-partitions.ts";
 type PreparedContractRotation = {

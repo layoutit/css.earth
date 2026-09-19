@@ -20,7 +20,7 @@ export function scalePreparedPixelLengths(value: string | number, scale: number)
   );
 }
 
-export function scalePreparedBackgroundAddresses(style: PreparedProjectiveStyle, scale: number) {
+export function scalePreparedBackgroundAddresses(style: Pick<PreparedProjectiveStyle, "backgroundPosition" | "backgroundSize" | "getPropertyValue" | "setProperty">, scale: number) {
   const references = new Set<string>();
   for (const value of [style.backgroundPosition, style.backgroundSize]) {
     for (const match of String(value).matchAll(/var\(\s*(--[\w-]+)/g)) {
@@ -40,7 +40,7 @@ export function scalePreparedBackgroundAddresses(style: PreparedProjectiveStyle,
   style.backgroundSize = scalePreparedPixelLengths(style.backgroundSize, scale);
 }
 
-export function applyPreparedProjectiveLayout(style: Pick<PreparedProjectiveStyle, "width" | "height" | "backgroundSize" | "getPropertyValue">, layout: PreparedProjectiveLayout | null, rasterScale: number) {
+export function applyPreparedProjectiveLayout(style: Pick<PreparedProjectiveStyle, "width" | "height" | "backgroundSize"> & Partial<Pick<PreparedProjectiveStyle, "getPropertyValue">>, layout: PreparedProjectiveLayout | null, rasterScale: number) {
   if (!Number.isFinite(rasterScale) || rasterScale < 1) {
     throw new TypeError("Prepared projective texture raster scale is invalid.");
   }

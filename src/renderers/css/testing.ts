@@ -22,3 +22,5 @@ export * from './solar-system/prepared-ellipsoid-projection.js';
 export { publishObjectDiagnostics, readObjectDiagnostics } from './runtime/object-diagnostics.js';
 
 export {parsePreparedPagePlan} from "./paging/capabilities.js";
+
+export { mountPreparedMapPages } from './paging/city-pages.js';

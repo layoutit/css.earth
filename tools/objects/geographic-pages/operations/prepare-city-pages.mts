@@ -13,7 +13,7 @@ import { resampleMappedPageRgba } from "./resample-page.mts";
 import { prepareCityIndex } from "./prepare-index.mts";
 import { prepareCityParentPages, writeCityCore } from "./prepare-parent-pages.mts";
 import { assembleCityCoveragePlan, readPublishedCoverage } from "./published-coverage.mts";
-import { normalizeCityAssetOrigin, preparedCityAssetUrl } from "../../../../src/platform/prepared-map/city-asset-url.mts";
+import { normalizeCityAssetOrigin, preparedCityAssetUrl } from "../../../../src/renderers/css/dist/preparation.js";
 import { childAddresses, createCityGeographicSampler, createCityCoverageSampler, cityPageRasterDensity, pageKey, prepareCityPageGeometry,
   CITY_PAGE_LAST_LEVEL, CITY_POLAR_PAGE_LAST_LEVEL, CITY_PAGE_RASTER_SCALE } from "../page-geometry.mts";
 

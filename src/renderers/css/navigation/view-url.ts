@@ -1,131 +1,15 @@
 import type { LegacyCameraPose, PhysicalCameraPose } from './types.js';
-type ScalarKey = 'altitudeM' | 'distanceM' | 'azimuthRad' | 'polarRad' | 'orbitRollRad' | 'epochUnixMs' | 'timeScale' | 'fovDeg';
-export interface ViewParameters extends Partial<Record<ScalarKey, number>> { lookMode?: 'orbit' | 'freeLook'; lookQuaternionXyzw?: readonly number[]; panM?: readonly number[]; hiddenLayers?: readonly string[]; }
 export interface SharedPlayback { times: readonly number[]; speed: number; motionRequested: boolean; }
 export interface LegacySharedCamera { controlPitch: number; controlYaw: number; zoom: number; distanceKilometers?: number; pose: LegacyCameraPose; }
 export interface PhysicalSharedCamera { distanceKilometers: number; pose: PhysicalCameraPose; bodyCenterKilometers?: readonly [number, number, number]; }
 export interface SharedView { camera: LegacySharedCamera | PhysicalSharedCamera; playback: SharedPlayback; preparedEpochJdTt?: number | null; }
 function isPhysicalCamera(camera: SharedView['camera']): camera is PhysicalSharedCamera { return camera.pose.schema === 'cssearth-camera-pose@2'; }
-// Galaxio view URL version 1: the field order, defaults and big-endian
-// float64 payload are the wire contract, independent of the scene adapter.
-export const VIEW_LAYERS = Object.freeze(["rings", "atmospheres", "bodies", "milky-way", "deep-sky", "galaxies"]);
-const MAX_ANGLE_RAD = 1e6 * Math.PI / 180;
-const SCALARS: readonly [ScalarKey, number, number, number | undefined][] = [
-  ["altitudeM", 10 ** Math.log10(0.1), 10 ** Math.log10(4.4e26), undefined],
-  ["distanceM", 10 ** Math.log10(0.1), 10 ** Math.log10(4.4e26), undefined],
-  ["azimuthRad", -MAX_ANGLE_RAD, MAX_ANGLE_RAD, 0],
-  ["polarRad", Math.PI / 2 - MAX_ANGLE_RAD, Math.PI / 2 + MAX_ANGLE_RAD, Math.PI / 2],
-  ["orbitRollRad", -MAX_ANGLE_RAD, MAX_ANGLE_RAD, 0],
-  ["epochUnixMs", -62167219200000, 253402300799999, undefined],
-  ["timeScale", -1e9, 1e9, 1],
-  ["fovDeg", 1, 170, 85],
-];
-const VERSION = 1, VERSION_MASK = 0x7000;
-const FREE_LOOK = 1 << 15, LOOK = 1 << 8, PAN = 1 << 9, HIDDEN = 1 << 10, PAUSED = 1 << 11;
-const MAX_BYTES = 115;
-function invalid(key = "v"): never { throw new Error(`Invalid “${key}” in this view link.`); };
-
-function bounded(value: unknown, key: string, minimum: number, maximum: number) {
-  if (typeof value !== "number" || !Number.isFinite(value) || value < minimum || value > maximum) invalid(key);
-}
-
-function validate(view: ViewParameters) {
-  if (view.lookMode !== undefined && view.lookMode !== "orbit" && view.lookMode !== "freeLook") invalid("lookMode");
-  if (view.lookMode === "freeLook" && view.lookQuaternionXyzw === undefined) invalid("look");
-  if (view.altitudeM !== undefined && view.distanceM !== undefined) invalid("distanceM");
-  for (const [key, minimum, maximum] of SCALARS) {
-    if (view[key] !== undefined) bounded(view[key], key, minimum, maximum);
-  }
-  if (view.lookQuaternionXyzw !== undefined) {
-    const values = view.lookQuaternionXyzw;
-    if (values.length !== 4) invalid("look");
-    for (const value of values) bounded(value, "look", -1, 1);
-    if (Math.abs(Math.hypot(...values) - 1) > 1e-6) invalid("look");
-  }
-  if (view.panM !== undefined) {
-    if (view.panM.length !== 3) invalid("pan");
-    for (const value of view.panM) bounded(value, "pan", -1e27, 1e27);
-  }
-  if (view.hiddenLayers !== undefined && (new Set(view.hiddenLayers).size !== view.hiddenLayers.length ||
-      view.hiddenLayers.some(layer => !VIEW_LAYERS.includes(layer)))) invalid("hide");
-}
-
+function invalid(key = "v"): never { throw new Error(`Invalid “${key}” in this view link.`); }
 function base64url(bytes: Uint8Array) {
   return btoa(String.fromCharCode(...bytes)).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/u, "");
 }
 
-export function formatViewParameters(view: ViewParameters) {
-  validate(view);
-  const bytes = new Uint8Array(MAX_BYTES), data = new DataView(bytes.buffer);
-  let offset = 2, flags = VERSION << 12;
-  if (view.lookMode === "freeLook") flags |= FREE_LOOK;
-  const write = (value: number) => { data.setFloat64(offset, value); offset += 8; };
-  for (const [index, [key, , , defaultValue]] of SCALARS.entries()) {
-    const value = view[key];
-    if (value === undefined || value === defaultValue) continue;
-    if (key === "timeScale" && value === 0) { flags |= PAUSED; continue; }
-    flags |= 1 << index;
-    write(value);
-  }
-  if (view.lookQuaternionXyzw) {
-    flags |= LOOK;
-    view.lookQuaternionXyzw.forEach(write);
-  }
-  if (view.panM?.some(value => value !== 0)) {
-    flags |= PAN;
-    view.panM.forEach(write);
-  }
-  if (view.hiddenLayers?.length) {
-    flags |= HIDDEN;
-    bytes[offset++] = view.hiddenLayers.reduce((mask, layer) => mask | (1 << VIEW_LAYERS.indexOf(layer)), 0);
-  }
-  data.setUint16(0, flags);
-  return `v=${base64url(bytes.subarray(0, offset))}`;
-}
-
-export function parseViewParameters(search: string): ViewParameters {
-  const query = new URLSearchParams(search);
-  if (query.size === 0) return {};
-  if (query.size !== 1 || !query.has("v")) invalid();
-  const token = query.get("v");
-  if (token === null) invalid();
-  if (!/^[A-Za-z0-9_-]{3,154}$/u.test(token) || token.length % 4 === 1) invalid();
-  const bytes = Uint8Array.from(atob(token.replaceAll("-", "+").replaceAll("_", "/")), char => char.charCodeAt(0));
-  if (bytes.length > MAX_BYTES || base64url(bytes) !== token) invalid();
-  const data = new DataView(bytes.buffer), flags = data.getUint16(0);
-  if ((flags & VERSION_MASK) >>> 12 !== VERSION) throw new Error("This view link uses an unsupported version.");
-  const result: ViewParameters = {};
-  if (flags & FREE_LOOK) result.lookMode = "freeLook";
-  let offset = 2;
-  const read = () => {
-    if (offset + 8 > bytes.length) invalid();
-    const value = data.getFloat64(offset);
-    offset += 8;
-    return value;
-  };
-  for (const [index, [key, , , defaultValue]] of SCALARS.entries()) {
-    if (flags & (1 << index)) result[key] = read();
-    else if (defaultValue !== undefined) result[key] = defaultValue;
-  }
-  if (flags & PAUSED) {
-    if (flags & (1 << 6)) invalid("timeScale");
-    result.timeScale = 0;
-  }
-  if (flags & LOOK) result.lookQuaternionXyzw = [read(), read(), read(), read()];
-  if (flags & PAN) result.panM = [read(), read(), read()];
-  if (flags & HIDDEN) {
-    if (offset >= bytes.length) invalid("hide");
-    const mask = bytes[offset++];
-    if (mask >> VIEW_LAYERS.length) invalid("hide");
-    result.hiddenLayers = VIEW_LAYERS.filter((_, index) => mask & (1 << index));
-  }
-  if (offset !== bytes.length) invalid();
-  validate(result);
-  return result;
-}
-
 const SHARED_VERSION = 2;
-const LEGACY_SHARED_VERSION = 1;
 const MAX_SHARED_BYTES = 4096;
 const SHARED_POSE_SCHEMA = "cssearth-camera-pose@1";
 const MINIMAL_POSE_SCHEMA = "cssearth-camera-pose@2";
@@ -238,24 +122,7 @@ export function parseSharedView(search: string): SharedView | null {
     bytes = Uint8Array.from(atob(token.replaceAll("-", "+").replaceAll("_", "/")), char => char.charCodeAt(0));
     if (bytes.length > MAX_SHARED_BYTES || base64url(bytes) !== token) invalid();
   } catch { invalid(); }
-  return bytes[0] === 0x7b ? parseLegacyShared(bytes) : parseBinaryShared(bytes);
-}
-
-function parseLegacyShared(bytes: Uint8Array): SharedView {
-  let payload: unknown;
-  try { payload = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)); } catch { invalid(); }
-  record(payload, ["v", "c", "p", "e"], "view");
-  if (payload.v !== LEGACY_SHARED_VERSION) throw new Error("This shared view link uses an unsupported version.");
-  if (!Array.isArray(payload.c) || payload.c.length !== 7 || !Array.isArray(payload.p) || payload.p.length !== 3) invalid();
-  const [controlPitch, controlYaw, zoom, distanceKilometers, scene, skybox, sunView] = payload.c;
-  const [times, speed, motionRequested] = payload.p;
-  const view = { camera: { controlPitch, controlYaw, zoom,
-    ...(distanceKilometers === null ? {} : { distanceKilometers }),
-    pose: { schema: SHARED_POSE_SCHEMA, scene, skybox, sunView } },
-    playback: { times, speed, motionRequested },
-    ...(Object.hasOwn(payload, "e") ? { preparedEpochJdTt: payload.e } : {}) };
-  validateShared(view);
-  return view;
+  return parseBinaryShared(bytes);
 }
 
 function parseBinaryShared(bytes: Uint8Array): SharedView {

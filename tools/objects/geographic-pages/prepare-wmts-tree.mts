@@ -2,7 +2,7 @@ import { sha256 } from '../../../src/platform/sha256.mts';
 import { gzipSync } from "node:zlib";
 import { prepareWmtsTile } from "./wmts-page-geometry.mts";
 import { encodePreparedBlock, packWmtsRecords } from "./encode-prepared-block.mts";
-import { PREPARED_BLOCK_ENCODING } from "../../../src/platform/prepared-map/prepared-block-transport.mts";
+import { PREPARED_BLOCK_ENCODING } from "../../../src/renderers/css/dist/preparation.js";
 
 import type { GeographicScene, TileAddress, TileNode, WmtsPage, TileStub, TreeSection, WmtsCoverage } from './contracts.mts';
 export const tileKey = ({zoom,x,y}: TileAddress) => `wmts-tile-${zoom}-${x}-${y}`;
