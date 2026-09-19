@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "43cf4720cbeeedacbe58f7ad83562e438d5b4fa9f6e9503cb8567bba579bf559"
+    "sha256": "c5fb461f7506e87a9cfc80db314a651db8ebfefd411272f6d70e13ef30c59407"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "d79c4eefe77e45ccd5eec4b2e8bce602c448026216c8e892269a6a0e4def2ef4"
+    "bindingsSha256": "f3aa1b6976d617e95929ef84d4276c8c699dff23bf7d9facef125daf3cff9534"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "f3a384e7981694de82b1da69a37fdef62812656ae958bfd87ff2560a57cd4cfc",
+      "sha256": "4ec4acbd7df9f5b922c326d27d65a03c45748c2821fa7ac6ae060ffa3761ead8",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/venus/",
@@ -75,6 +75,25 @@
               0.9
             ],
             "sharpen": 0.65
+          },
+          {
+            "id": "ultraviolet",
+            "source": "akatsuki/uvi_20230830_100446_365_l3b_v21.nc",
+            "falseColor": false,
+            "output": "venus-{id}{suffix}.webp",
+            "thumbnail": "venus-lens-{id}.webp",
+            "science": {
+              "kind": "akatsuki-uvi-l3b",
+              "productId": "uvi_20230830_100446_365_l3b_v21",
+              "filter": "365 nm",
+              "observationMiddle": "2023-08-30T10:04:46.033",
+              "converterId": "7b81c2b8b5a5",
+              "gain": 5e-9,
+              "gamma": 2.2,
+              "referenceRadiusMeters": 6051800,
+              "outputLongitudeOrigin": 180
+            },
+            "thumbnailCenterLongitudeDegrees": 29.123
           }
         ],
         "atmosphere": {
@@ -110,7 +129,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1205f82207e1226efc148a2798f004319a96795d0ef239511e2defa90c979caf",
+      "sha256": "38d5c7e99558f8b8405cde64ad7389b90547f144375d65ecfe6f07b745521044",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -337,6 +356,22 @@
               "qualification": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic",
               "falseColor": true,
               "notes": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic with shaded relief. This archival scientific visualization is not visible surface color."
+            },
+            {
+              "id": "ultraviolet",
+              "label": "Ultraviolet",
+              "thumbnail": "venus-lens-ultraviolet.webp",
+              "surface": "venus-ultraviolet@2x.webp",
+              "source": {
+                "id": "akatsuki-uvi",
+                "url": "https://doi.org/10.17597/isas.darts/vco-00016"
+              },
+              "poles": "venus-poles-ultraviolet@2x.webp",
+              "material": "venus-material@2x.webp",
+              "shortLabel": "UV",
+              "qualification": "JAXA/ISAS Akatsuki UVI Level 3b, 365 nm, 2023-08-30 10:04:46 UTC",
+              "falseColor": false,
+              "notes": "JAXA/ISAS Akatsuki UVI 365 nm ultraviolet image of the cloud tops, mapped by the mission to a 0.125-degree grid. One exposure on 2023-08-30 sees one hemisphere; the grey graticule marks the side the spacecraft could not see. Brightness is the measured radiance as observed."
             }
           ],
           "labels": {
@@ -836,6 +871,43 @@
     },
     {
       "kind": "source-input",
+      "id": "jaxa-akatsuki-uvi-l3b-365",
+      "path": "akatsuki/uvi_20230830_100446_365_l3b_v21.nc",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7011/data/l3b/netcdf/r0257/uvi_20230830_100446_365_l3b_v21.nc",
+      "credit": "ISAS/JAXA DARTS and the Akatsuki UVI team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://www.isas.jaxa.jp/en/researchers/data-policy/",
+        "https://doi.org/10.17597/isas.darts/vco-00016"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh downloads the pinned Level 3b exposure from the vco_uvi_l3 v1.1 volume vcouvi_7011, orbit r0257",
+      "redistribution": "CC BY 4.0 with the data citation recorded in README.md",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-jaxa-akatsuki-uvi-l3b-365",
+            "role": "material",
+            "evidence": "src/objects/venus/source/manifest.json@0000000000000000000000000000000000000000#/inputs/11"
+          }
+        ]
+      },
+      "sha256": "224bc32a4a21a2a020225fcd9bf962d33c2c428e8f9b24cc7ae8ce789262f191",
+      "bytes": 11946389,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "akatsuki/uvi_20230830_100446_365_l3b_v21.nc",
+        "url": "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7011/data/l3b/netcdf/r0257/uvi_20230830_100446_365_l3b_v21.nc"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "venus-atmosphere-model",
       "path": "atmosphere/model.json",
       "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
@@ -867,8 +939,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "1205f82207e1226efc148a2798f004319a96795d0ef239511e2defa90c979caf",
-      "bytes": 15838,
+      "sha256": "38d5c7e99558f8b8405cde64ad7389b90547f144375d65ecfe6f07b745521044",
+      "bytes": 16685,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1251,6 +1323,58 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "ultraviolet",
+      "label": "Ultraviolet",
+      "recipe": "raster",
+      "selector": "/surfaces/3",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "JAXA/ISAS Akatsuki UVI Level 3b, 365 nm, 2023-08-30 10:04:46 UTC"
+      ],
+      "lensIds": [
+        "ultraviolet"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": false
+      },
+      "inputs": [
+        "jaxa-akatsuki-uvi-l3b-365"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/venus/venus-ultraviolet@2x.webp",
+          "bytes": 26896,
+          "sha256": "95f42751958b5a74fc8236715e0c9b2493c4fa6decc355f5bed1dfdc6a49a539",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/venus/venus-lens-ultraviolet.webp",
+          "bytes": 254,
+          "sha256": "28abdbcd1a7db46e9ed800ad871788752ccf1a3d34dc3100d940e43354c0aa10",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/venus/venus-poles-ultraviolet@2x.webp",
+          "bytes": 39368,
+          "sha256": "edf28273da7a2594adcfd36c8955d6a7590af1cdd340e3add8a194f772bfe2c4",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "jaxa-akatsuki-uvi-l3b-365",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/3/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "atmosphere",
       "label": "atmosphere",
       "recipe": "raster",
@@ -1510,6 +1634,31 @@
           "verification": "bytes-verified"
         }
       ]
+    },
+    {
+      "id": "preview:ultraviolet",
+      "label": "Ultraviolet preview",
+      "recipe": "raster",
+      "selector": "/surfaces/3",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "ultraviolet"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/ultraviolet.webp",
+          "bytes": 4924,
+          "sha256": "1f47e85437f4334b513c9c3c5dddf34377e674ff655fc41c7a26ac1610ba99b5",
+          "verification": "bytes-verified"
+        }
+      ]
     }
   ],
   "coverage": {
@@ -1518,11 +1667,11 @@
   },
   "lastPreparation": {
     "objectId": "venus",
-    "materialSha256": "6f3d851924c4e39e834404f59705b6705ba08cffde561fce231620ea7027f910",
+    "materialSha256": "07f4ccc047063e16a66be2abd411996f0ea8ce42fc92ad97a58b9b8b76b9d80a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "d79c4eefe77e45ccd5eec4b2e8bce602c448026216c8e892269a6a0e4def2ef4"
+      "bindingsSha256": "f3aa1b6976d617e95929ef84d4276c8c699dff23bf7d9facef125daf3cff9534"
     }
   }
 }

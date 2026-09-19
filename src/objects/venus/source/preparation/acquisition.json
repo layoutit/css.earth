@@ -104,6 +104,14 @@
       ],
       "path": "features/VENUS_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/VENUS_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "akatsuki/uvi_20230830_100446_365_l3b_v21.nc",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7011/data/l3b/netcdf/r0257/uvi_20230830_100446_365_l3b_v21.nc"
     }
   ]
 }

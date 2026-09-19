@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "c6ef2d675e6ccef459a858390b35d01a5d5929ee674b7979e7bd429f94a64042"
+    "sha256": "e2e80f0f7e7303a7c4ed3ddf6f3b632cd991676556f87c14331e090375a87471"
   },
   "id": "venus",
   "properties": {
@@ -126,6 +126,11 @@
               "id": "elevation",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "ultraviolet",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -152,7 +157,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "151ce710e2460a1616d4981cedfa4a61604a6b6277887d6e2485c73a809242b6"
+        "sha256": "cec1881df14725286c6128e7e3468f4e3107354f15b9b4cc2f56ecc8c226fdfb"
       }
     },
     "catalog": {

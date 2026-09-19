@@ -318,6 +318,35 @@
       }
     },
     {
+      "id": "jaxa-akatsuki-uvi-l3b-365",
+      "path": "akatsuki/uvi_20230830_100446_365_l3b_v21.nc",
+      "expectedSha256": "224bc32a4a21a2a020225fcd9bf962d33c2c428e8f9b24cc7ae8ce789262f191",
+      "expectedBytes": 11946389,
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7011/data/l3b/netcdf/r0257/uvi_20230830_100446_365_l3b_v21.nc",
+      "credit": "ISAS/JAXA DARTS and the Akatsuki UVI team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://www.isas.jaxa.jp/en/researchers/data-policy/",
+        "https://doi.org/10.17597/isas.darts/vco-00016"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh downloads the pinned Level 3b exposure from the vco_uvi_l3 v1.1 volume vcouvi_7011, orbit r0257",
+      "redistribution": "CC BY 4.0 with the data citation recorded in README.md",
+      "consumers": [
+        "scene",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-jaxa-akatsuki-uvi-l3b-365",
+            "role": "material",
+            "evidence": "src/objects/venus/source/manifest.json@0000000000000000000000000000000000000000#/inputs/11"
+          }
+        ]
+      }
+    },
+    {
       "id": "venus-atmosphere-model",
       "path": "atmosphere/model.json",
       "expectedSha256": "7ad11c7d6c8ba5b733373ce061043313434c36541d95f9b7e470c642eac0a30b",
@@ -387,8 +416,8 @@
     {
       "id": "venus-object-content",
       "path": "content/object.json",
-      "expectedSha256": "1205f82207e1226efc148a2798f004319a96795d0ef239511e2defa90c979caf",
-      "expectedBytes": 15838,
+      "expectedSha256": "38d5c7e99558f8b8405cde64ad7389b90547f144375d65ecfe6f07b745521044",
+      "expectedBytes": 16685,
       "origin": "Repository-authored Venus panel, lens, gallery, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -427,8 +456,8 @@
     {
       "id": "venus-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "42dca12421494031e1f2eaf664cde1fe62a7138af6e66b0d2adc618e9548e923",
-      "expectedBytes": 3244,
+      "expectedSha256": "07c7e7a2419ef36c8d51796c603b033f82228fcae6517ec8e486604446f6e114",
+      "expectedBytes": 3537,
       "origin": "Repository-authored Venus acquisition and qualification recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -523,8 +552,8 @@
     {
       "id": "venus-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "f3a384e7981694de82b1da69a37fdef62812656ae958bfd87ff2560a57cd4cfc",
-      "expectedBytes": 2099,
+      "expectedSha256": "4ec4acbd7df9f5b922c326d27d65a03c45748c2821fa7ac6ae060ffa3761ead8",
+      "expectedBytes": 2730,
       "origin": "Repository-authored Venus raster preparation recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
