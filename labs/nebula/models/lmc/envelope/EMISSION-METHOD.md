@@ -100,3 +100,9 @@ layer suppressed on both so only the volume material shows.
 
 The result remains reviewable research, not qualified application material. The full original prior and the
 shipped repaint lenses are preserved separately and unchanged.
+
+## Evidence captures
+
+- [Registration before and after](evidence/registration-before-after.jpg): top, model `13cf532e` on the hand-authored `scale 3` placement; below, model `9dfd48a6` on the measured registration (1.0000× sky scale), with and without the 1,042-star layer.
+- [Difference map, old vs fitted Horálek lens](evidence/difference-map-old-vs-fitted.jpg): render − image on luminance at the Earth view, blue too dark and red too bright. Old lens `95495a7d` (left) shows the red mid-tone ring; the tone-fitted lens `60b47e10` (right) breaks it up (too-bright share 33% → 12%). The bar reads blue on both: the core plateau the exposure solve then lifted.
+- [Levels panel](evidence/levels-panel-horalek.jpg): the Reconstruction tab's per-channel histograms, delta and transfer curves for the Horálek lens.
