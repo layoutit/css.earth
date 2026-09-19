@@ -142,19 +142,25 @@ test('mars atmospheric lighting bank is a single warm-pool sheet, not a row bank
 });
 
 test("Uranus retains only active plus latest pending prepared neighborhoods", async () => {
-  const rows=definitions.uranus.materials[0].banks.slice(0,3).flatMap(bank=>preparedRows(bank).map(row=>assetUrl(definitions.uranus,row.resource)));
+  const rows=definitions.uranus.materials[0].banks.flatMap(bank=>preparedRows(bank).map(row=>assetUrl(definitions.uranus,row.resource)));
+  // Neighborhoods are read from Uranus's actual prepared banks, so the lane it is baked on
+  // (its own, or the shared giant sphere lane) changes how many there are, never the test.
+  assert.ok(rows.length >= 9, "Use the actual prepared Uranus neighborhoods");
+  const band = (start: number) => [String(start), String(start + 1), String(start + 2)];
+  const first = band(0), abandonedBand = band(Math.floor((rows.length - 3) / 2)), lastBand = band(rows.length - 3);
+  assert.equal(new Set([...first, ...abandonedBand, ...lastBand]).size, 9, "Use three disjoint neighborhoods");
   const { manager, jobs, commit, complete } = harness(catalog(rows, { capacity: 6 }));
-  await commit(["3", "4", "5"]);
-  const abandoned = manager.request({ required: ["19", "20", "21"] });
-  const next = manager.request({ required: ["35", "36", "37"] });
+  await commit(first);
+  const abandoned = manager.request({ required: abandonedBand });
+  const next = manager.request({ required: lastBand });
   assert.equal(await abandoned.ready, null);
-  assert.deepEqual(manager.stats().pools[0].keys, ["3", "4", "5", "35", "36", "37"]);
+  assert.deepEqual(manager.stats().pools[0].keys, [...first, ...lastBand]);
   assert.ok(jobs.length >= 9); // Replacement starts before abandoned native jobs settle.
   await complete(); await next.ready; manager.commit(next);
-  assert.deepEqual(manager.stats().pools[0].keys, ["35", "36", "37"]);
+  assert.deepEqual(manager.stats().pools[0].keys, lastBand);
   assert.throws(() => manager.commit(abandoned), /stale/);
   manager.discard(abandoned);
-  assert.equal(manager.resources.has("36"), true);
+  assert.equal(manager.resources.has(lastBand[1]!), true);
   manager.destroy();
 });
 
