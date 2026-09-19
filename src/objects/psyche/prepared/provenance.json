@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "014a4da08fbfcd082c78c06c8d69dddb5d2eb74c109f212380e8a87631679594"
+    "sha256": "baa3b73cef4197d289bb4c264731a6b7cbd60a421e56c0921f4cb5820cd1f483"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "3c9a41c6736baced4786d2ca7a196118ce23cbd788d099bafde1e960ccdfc7ec"
+    "bindingsSha256": "f9815913bc041f018daf1fa162ef01c60cc45aef9da4ea29916c76a8517d1247"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d425b4aa955a93f34f42780bb33596f1c0f4438be2521b2c8f83fb44dceadba7",
+      "sha256": "ca15f2241cc6fd55769d084ed82c0d01540090efe1f66461fba0018ec6810ec9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -162,9 +162,9 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "32 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 5 nights from 2019-07-28 to 2019-08-06, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.14. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "60 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 11 nights in 2 apparitions from 2018-04-24 to 2019-08-06, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.14. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, averaged where frames overlap with each fading out toward its disc edge, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
-              "selection": "finest-resolution",
+              "selection": "edge-weighted-average",
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
@@ -193,6 +193,406 @@
                 ]
               },
               "frames": [
+                {
+                  "id": "zimpol-20180424-084252",
+                  "path": "observations/d16Psyche_2018-04-24T08_42_52.053_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 72.5542,
+                  "observerWestLongitude": 303.7946,
+                  "sunLatitude": 77.1687,
+                  "sunWestLongitude": 290.1913,
+                  "rangeKm": 342666637.9,
+                  "northAzimuthDegrees": 236.874,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    132.238,
+                    132.547
+                  ]
+                },
+                {
+                  "id": "zimpol-20180424-084707",
+                  "path": "observations/d16Psyche_2018-04-24T08_47_07.753_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 72.5548,
+                  "observerWestLongitude": 309.8883,
+                  "sunLatitude": 77.1683,
+                  "sunWestLongitude": 296.2866,
+                  "rangeKm": 342664291.9,
+                  "northAzimuthDegrees": 236.8734,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    131.584,
+                    133.549
+                  ]
+                },
+                {
+                  "id": "zimpol-20180424-085124",
+                  "path": "observations/d16Psyche_2018-04-24T08_51_24.326_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 72.5553,
+                  "observerWestLongitude": 316.0028,
+                  "sunLatitude": 77.168,
+                  "sunWestLongitude": 302.4027,
+                  "rangeKm": 342661939.8,
+                  "northAzimuthDegrees": 236.8729,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    132.401,
+                    133.009
+                  ]
+                },
+                {
+                  "id": "zimpol-20180424-085538",
+                  "path": "observations/d16Psyche_2018-04-24T08_55_38.922_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 72.5558,
+                  "observerWestLongitude": 322.0702,
+                  "sunLatitude": 77.1676,
+                  "sunWestLongitude": 308.4717,
+                  "rangeKm": 342659607.6,
+                  "northAzimuthDegrees": 236.8723,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    131.904,
+                    132.935
+                  ]
+                },
+                {
+                  "id": "zimpol-20180424-085953",
+                  "path": "observations/d16Psyche_2018-04-24T08_59_53.491_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 72.5563,
+                  "observerWestLongitude": 328.137,
+                  "sunLatitude": 77.1672,
+                  "sunWestLongitude": 314.54,
+                  "rangeKm": 342657277.3,
+                  "northAzimuthDegrees": 236.8717,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    131.935,
+                    133.206
+                  ]
+                },
+                {
+                  "id": "zimpol-20180428-074239",
+                  "path": "observations/d16Psyche_2018-04-28T07_42_39.977_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 73.2589,
+                  "observerWestLongitude": 173.7952,
+                  "sunLatitude": 76.6365,
+                  "sunWestLongitude": 162.2927,
+                  "rangeKm": 339755544.6,
+                  "northAzimuthDegrees": 236.0642,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.787,
+                    130.9
+                  ]
+                },
+                {
+                  "id": "zimpol-20180428-074654",
+                  "path": "observations/d16Psyche_2018-04-28T07_46_54.996_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 73.2595,
+                  "observerWestLongitude": 179.8725,
+                  "sunLatitude": 76.6361,
+                  "sunWestLongitude": 168.3717,
+                  "rangeKm": 339753670,
+                  "northAzimuthDegrees": 236.0635,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.133,
+                    130.814
+                  ]
+                },
+                {
+                  "id": "zimpol-20180428-075111",
+                  "path": "observations/d16Psyche_2018-04-28T07_51_11.013_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 73.26,
+                  "observerWestLongitude": 185.9737,
+                  "sunLatitude": 76.6357,
+                  "sunWestLongitude": 174.4743,
+                  "rangeKm": 339751790.1,
+                  "northAzimuthDegrees": 236.0628,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.021,
+                    130.474
+                  ]
+                },
+                {
+                  "id": "zimpol-20180428-075525",
+                  "path": "observations/d16Psyche_2018-04-28T07_55_25.706_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 73.2606,
+                  "observerWestLongitude": 192.0432,
+                  "sunLatitude": 76.6353,
+                  "sunWestLongitude": 180.5455,
+                  "rangeKm": 339749921.9,
+                  "northAzimuthDegrees": 236.0621,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.074,
+                    129.055
+                  ]
+                },
+                {
+                  "id": "zimpol-20180428-075939",
+                  "path": "observations/d16Psyche_2018-04-28T07_59_39.297_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 73.2611,
+                  "observerWestLongitude": 198.0865,
+                  "sunLatitude": 76.6349,
+                  "sunWestLongitude": 186.5904,
+                  "rangeKm": 339748063.7,
+                  "northAzimuthDegrees": 236.0614,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.336,
+                    129.236
+                  ]
+                },
+                {
+                  "id": "zimpol-20180504-054447",
+                  "path": "observations/d16Psyche_2018-05-04T05_44_47.115_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 74.3668,
+                  "observerWestLongitude": 119.0197,
+                  "sunLatitude": 75.8254,
+                  "sunWestLongitude": 110.7069,
+                  "rangeKm": 336623681.9,
+                  "northAzimuthDegrees": 234.6026,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.034,
+                    130.565
+                  ]
+                },
+                {
+                  "id": "zimpol-20180504-054902",
+                  "path": "observations/d16Psyche_2018-05-04T05_49_02.948_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 74.3674,
+                  "observerWestLongitude": 125.1162,
+                  "sunLatitude": 75.825,
+                  "sunWestLongitude": 116.8051,
+                  "rangeKm": 336622504,
+                  "northAzimuthDegrees": 234.6018,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.002,
+                    129.206
+                  ]
+                },
+                {
+                  "id": "zimpol-20180504-055317",
+                  "path": "observations/d16Psyche_2018-05-04T05_53_17.570_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 74.368,
+                  "observerWestLongitude": 131.1838,
+                  "sunLatitude": 75.8246,
+                  "sunWestLongitude": 122.8744,
+                  "rangeKm": 336621333.9,
+                  "northAzimuthDegrees": 234.6009,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.221,
+                    130.029
+                  ]
+                },
+                {
+                  "id": "zimpol-20180504-055731",
+                  "path": "observations/d16Psyche_2018-05-04T05_57_31.602_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 74.3685,
+                  "observerWestLongitude": 137.2374,
+                  "sunLatitude": 75.8242,
+                  "sunWestLongitude": 128.9296,
+                  "rangeKm": 336620168.9,
+                  "northAzimuthDegrees": 234.6001,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.258,
+                    130.214
+                  ]
+                },
+                {
+                  "id": "zimpol-20180504-060145",
+                  "path": "observations/d16Psyche_2018-05-04T06_01_45.485_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 74.3691,
+                  "observerWestLongitude": 143.2875,
+                  "sunLatitude": 75.8238,
+                  "sunWestLongitude": 134.9813,
+                  "rangeKm": 336619006.8,
+                  "northAzimuthDegrees": 234.5993,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.403,
+                    129.554
+                  ]
+                },
+                {
+                  "id": "zimpol-20180505-013427",
+                  "path": "observations/d16Psyche_2018-05-05T01_34_27.816_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 74.5241,
+                  "observerWestLongitude": 20.0311,
+                  "sunLatitude": 75.7108,
+                  "sunWestLongitude": 12.1694,
+                  "rangeKm": 336307360.5,
+                  "northAzimuthDegrees": 234.3758,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.485,
+                    128.602
+                  ]
+                },
+                {
+                  "id": "zimpol-20180505-013843",
+                  "path": "observations/d16Psyche_2018-05-05T01_38_43.490_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 74.5247,
+                  "observerWestLongitude": 26.1238,
+                  "sunLatitude": 75.7104,
+                  "sunWestLongitude": 18.2638,
+                  "rangeKm": 336306188.5,
+                  "northAzimuthDegrees": 234.3749,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.47,
+                    129.601
+                  ]
+                },
+                {
+                  "id": "zimpol-20180505-014257",
+                  "path": "observations/d16Psyche_2018-05-05T01_42_57.246_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 74.5253,
+                  "observerWestLongitude": 32.1708,
+                  "sunLatitude": 75.71,
+                  "sunWestLongitude": 24.3124,
+                  "rangeKm": 336305026.8,
+                  "northAzimuthDegrees": 234.374,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.137,
+                    128.792
+                  ]
+                },
+                {
+                  "id": "zimpol-20180505-014711",
+                  "path": "observations/d16Psyche_2018-05-05T01_47_11.684_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 74.5259,
+                  "observerWestLongitude": 38.234,
+                  "sunLatitude": 75.7096,
+                  "sunWestLongitude": 30.3773,
+                  "rangeKm": 336303863.6,
+                  "northAzimuthDegrees": 234.3732,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.217,
+                    128.358
+                  ]
+                },
+                {
+                  "id": "zimpol-20180505-015126",
+                  "path": "observations/d16Psyche_2018-05-05T01_51_26.395_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 74.5264,
+                  "observerWestLongitude": 44.3038,
+                  "sunLatitude": 75.7092,
+                  "sunWestLongitude": 36.4487,
+                  "rangeKm": 336302700.7,
+                  "northAzimuthDegrees": 234.3723,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.594,
+                    129.367
+                  ]
+                },
+                {
+                  "id": "zimpol-20180603-235813",
+                  "path": "observations/d16Psyche_2018-06-03T23_58_13.377_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 79.6712,
+                  "observerWestLongitude": 84.1286,
+                  "sunLatitude": 71.3891,
+                  "sunWestLongitude": 94.9591,
+                  "rangeKm": 344344772,
+                  "northAzimuthDegrees": 221.8589,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.701,
+                    133.118
+                  ]
+                },
+                {
+                  "id": "zimpol-20180604-000227",
+                  "path": "observations/d16Psyche_2018-06-04T00_02_27.910_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 79.6716,
+                  "observerWestLongitude": 90.193,
+                  "sunLatitude": 71.3887,
+                  "sunWestLongitude": 101.0256,
+                  "rangeKm": 344347255.1,
+                  "northAzimuthDegrees": 221.8573,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.643,
+                    131.904
+                  ]
+                },
+                {
+                  "id": "zimpol-20180604-000643",
+                  "path": "observations/d16Psyche_2018-06-04T00_06_43.574_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 79.672,
+                  "observerWestLongitude": 96.2844,
+                  "sunLatitude": 71.3882,
+                  "sunWestLongitude": 107.1191,
+                  "rangeKm": 344349751,
+                  "northAzimuthDegrees": 221.8557,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.925,
+                    131.295
+                  ]
+                },
+                {
+                  "id": "zimpol-20180604-001058",
+                  "path": "observations/d16Psyche_2018-06-04T00_10_58.115_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 79.6724,
+                  "observerWestLongitude": 102.3491,
+                  "sunLatitude": 71.3878,
+                  "sunWestLongitude": 113.1858,
+                  "rangeKm": 344352237.8,
+                  "northAzimuthDegrees": 221.8541,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.592,
+                    130.963
+                  ]
+                },
+                {
+                  "id": "zimpol-20180604-001511",
+                  "path": "observations/d16Psyche_2018-06-04T00_15_11.193_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 79.6728,
+                  "observerWestLongitude": 108.3788,
+                  "sunLatitude": 71.3874,
+                  "sunWestLongitude": 119.2176,
+                  "rangeKm": 344354712.1,
+                  "northAzimuthDegrees": 221.8525,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.247,
+                    131.698
+                  ]
+                },
                 {
                   "id": "zimpol-20190728-090411",
                   "path": "observations/d16Psyche_2019-07-28T09_04_11.670_zpl_science_imaging_cam1.fits",
@@ -514,6 +914,22 @@
                   ]
                 },
                 {
+                  "id": "zimpol-20190805-074316",
+                  "path": "observations/d16Psyche_2019-08-05T07_43_16.087_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -8.386,
+                  "observerWestLongitude": 197.5654,
+                  "sunLatitude": -7.6881,
+                  "sunWestLongitude": 196.9119,
+                  "rangeKm": 255102813.2,
+                  "northAzimuthDegrees": 276.8656,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.059,
+                    128.853
+                  ]
+                },
+                {
                   "id": "zimpol-20190805-074726",
                   "path": "observations/d16Psyche_2019-08-05T07_47_26.562_zpl_science_imaging_cam1.fits",
                   "encoding": "fits-zimpol-intensity",
@@ -578,6 +994,22 @@
                   ]
                 },
                 {
+                  "id": "zimpol-20190806-023421",
+                  "path": "observations/d16Psyche_2019-08-06T02_34_21.242_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -8.2279,
+                  "observerWestLongitude": 14.9336,
+                  "sunLatitude": -7.8644,
+                  "sunWestLongitude": 14.3445,
+                  "rangeKm": 254929858.3,
+                  "northAzimuthDegrees": 276.8306,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    129.545,
+                    132.392
+                  ]
+                },
+                {
                   "id": "zimpol-20190806-023831",
                   "path": "observations/d16Psyche_2019-08-06T02_38_31.290_zpl_science_imaging_cam1.fits",
                   "encoding": "fits-zimpol-intensity",
@@ -639,6 +1071,22 @@
                   "center": [
                     130.267,
                     129.76
+                  ]
+                },
+                {
+                  "id": "zimpol-20190806-041056",
+                  "path": "observations/d16Psyche_2019-08-06T04_10_56.797_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -8.2137,
+                  "observerWestLongitude": 153.0538,
+                  "sunLatitude": -7.8794,
+                  "sunWestLongitude": 152.4701,
+                  "rangeKm": 254915407.9,
+                  "northAzimuthDegrees": 276.8275,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    128.747,
+                    131.571
                   ]
                 },
                 {
@@ -780,7 +1228,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "951b35b3c379213aef2a54b10b22163a2f600d041b278caacaab4a59ef388262",
+      "sha256": "2b26590f961a62e2c9bfaba7c6d671328ae10e38eda256e9d582a6d428cb5504",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -890,7 +1338,7 @@
               },
               "falseColor": false,
               "noData": true,
-              "notes": "32 deconvolved VLT/SPHERE/ZIMPOL frames, 5 nights from 2019-07-28 to 2019-08-06, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.14. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
+              "notes": "60 deconvolved VLT/SPHERE/ZIMPOL frames, 11 nights from 2018-04-24 to 2019-08-06, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.14. Grayscale is photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             },
             {
               "id": "thermal-inertia",
@@ -1332,6 +1780,1306 @@
         ],
         "path": "thermal/DielectricConstant_BestFitValue.npy",
         "url": "https://zenodo.org/api/records/6321315/files/DielectricConstant_BestFitValue.npy/content"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180424084252",
+      "path": "observations/d16Psyche_2018-04-24T08_42_52.053_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_42_52.053_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180424084252",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/43"
+          }
+        ]
+      },
+      "sha256": "24664a5d6a319c27593594bce297fcb485379d8225ff58ab90e5fd9a5db14179",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-04-24T08_42_52.053_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_42_52.053_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180424084707",
+      "path": "observations/d16Psyche_2018-04-24T08_47_07.753_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_47_07.753_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180424084707",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/44"
+          }
+        ]
+      },
+      "sha256": "37c478722c6b3952c66a42dd9c6db0c370108d678a50d5a18d3afc61071a3d87",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-04-24T08_47_07.753_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_47_07.753_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180424085124",
+      "path": "observations/d16Psyche_2018-04-24T08_51_24.326_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_51_24.326_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180424085124",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/45"
+          }
+        ]
+      },
+      "sha256": "9c93de9e3da97a08a15dd38f5f3ba0678ae76a7e42690ef4c457b2efdb1b4769",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-04-24T08_51_24.326_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_51_24.326_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180424085538",
+      "path": "observations/d16Psyche_2018-04-24T08_55_38.922_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_55_38.922_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180424085538",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/46"
+          }
+        ]
+      },
+      "sha256": "bebce67a18ce66255181988972638c9d1e066420f898dbd331593f40fd9ad916",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-04-24T08_55_38.922_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_55_38.922_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180424085953",
+      "path": "observations/d16Psyche_2018-04-24T08_59_53.491_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_59_53.491_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180424085953",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/47"
+          }
+        ]
+      },
+      "sha256": "8b87aa56865b462212469dd9a77f7b4e8bba09a5ab33bea6b06c5ec375b89329",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-04-24T08_59_53.491_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_59_53.491_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180428074239",
+      "path": "observations/d16Psyche_2018-04-28T07_42_39.977_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_42_39.977_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180428074239",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/48"
+          }
+        ]
+      },
+      "sha256": "a203a165619cf038437f6422c95e07904068155d679f197ba7bb5c247cff260d",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-04-28T07_42_39.977_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_42_39.977_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180428074654",
+      "path": "observations/d16Psyche_2018-04-28T07_46_54.996_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_46_54.996_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180428074654",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/49"
+          }
+        ]
+      },
+      "sha256": "49ed3ed162e19a0f61c4924c180eaf8d3b6eecfb3520e701b6e8f0b52a2b8b53",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-04-28T07_46_54.996_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_46_54.996_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180428075111",
+      "path": "observations/d16Psyche_2018-04-28T07_51_11.013_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_51_11.013_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180428075111",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/50"
+          }
+        ]
+      },
+      "sha256": "5d87c8c87c61898fafa0dd2181f1c8b87ef2228838f5120603c428850263aa06",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-04-28T07_51_11.013_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_51_11.013_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180428075525",
+      "path": "observations/d16Psyche_2018-04-28T07_55_25.706_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_55_25.706_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180428075525",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/51"
+          }
+        ]
+      },
+      "sha256": "c923276df9a207c7ebb65239f66cf95f82b5bb71aec1a4584b2ac2904c48f924",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-04-28T07_55_25.706_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_55_25.706_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180428075939",
+      "path": "observations/d16Psyche_2018-04-28T07_59_39.297_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_59_39.297_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180428075939",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/52"
+          }
+        ]
+      },
+      "sha256": "09cd4507c9f7cee387736d124bad1d5312793ef346b40f42a52e1162220c32eb",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-04-28T07_59_39.297_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_59_39.297_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180504054447",
+      "path": "observations/d16Psyche_2018-05-04T05_44_47.115_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T05_44_47.115_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180504054447",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/53"
+          }
+        ]
+      },
+      "sha256": "1fccacba188db5d618a71c7c318702ecc9be186fd613d15d3499285c5f6a2f29",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-05-04T05_44_47.115_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T05_44_47.115_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180504054902",
+      "path": "observations/d16Psyche_2018-05-04T05_49_02.948_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T05_49_02.948_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180504054902",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/54"
+          }
+        ]
+      },
+      "sha256": "8005e05dea3c9da368abf303cffbefb632d99d7f28ceafaa2187720f23cddbb3",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-05-04T05_49_02.948_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T05_49_02.948_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180504055317",
+      "path": "observations/d16Psyche_2018-05-04T05_53_17.570_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T05_53_17.570_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180504055317",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/55"
+          }
+        ]
+      },
+      "sha256": "136915d9965469337f9c9db4500459c5c7620dc44c2ca2edd82fceb04c864846",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-05-04T05_53_17.570_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T05_53_17.570_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180504055731",
+      "path": "observations/d16Psyche_2018-05-04T05_57_31.602_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T05_57_31.602_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180504055731",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/56"
+          }
+        ]
+      },
+      "sha256": "b03587a35b1d831faeacfbe4684aa8b6ba77783bcc3e452542c41da05e3e9b68",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-05-04T05_57_31.602_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T05_57_31.602_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180504060145",
+      "path": "observations/d16Psyche_2018-05-04T06_01_45.485_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T06_01_45.485_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180504060145",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/57"
+          }
+        ]
+      },
+      "sha256": "3297019f4203132134b074ff4b5de4de8291a87b7af02adaf99a2e5f7aa739c1",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-05-04T06_01_45.485_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T06_01_45.485_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180505013427",
+      "path": "observations/d16Psyche_2018-05-05T01_34_27.816_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-05T01_34_27.816_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180505013427",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/58"
+          }
+        ]
+      },
+      "sha256": "0703082fb4e34260d7169db51b58edbd6dfcec4dea5540533d00d44ba4a4ffb9",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-05-05T01_34_27.816_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-05T01_34_27.816_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180505013843",
+      "path": "observations/d16Psyche_2018-05-05T01_38_43.490_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-05T01_38_43.490_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180505013843",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/59"
+          }
+        ]
+      },
+      "sha256": "70d2c9c5a0964007434c9986cd1f1e54991d6b2c9ea2904b677238b9c3195f05",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-05-05T01_38_43.490_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-05T01_38_43.490_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180505014257",
+      "path": "observations/d16Psyche_2018-05-05T01_42_57.246_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-05T01_42_57.246_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180505014257",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/60"
+          }
+        ]
+      },
+      "sha256": "1c148ce973566e4d8b0e1fc2206f57add4aa6338056ea682a0654174ab96e209",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-05-05T01_42_57.246_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-05T01_42_57.246_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180505014711",
+      "path": "observations/d16Psyche_2018-05-05T01_47_11.684_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-05T01_47_11.684_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180505014711",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/61"
+          }
+        ]
+      },
+      "sha256": "fb8c8eca54cc908a80262c1ca3c3aea7ec5a28ce6459142d37ec7573c261722b",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-05-05T01_47_11.684_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-05T01_47_11.684_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180505015126",
+      "path": "observations/d16Psyche_2018-05-05T01_51_26.395_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-05T01_51_26.395_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180505015126",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/62"
+          }
+        ]
+      },
+      "sha256": "54be18d0a2d0c387e7410c711c8107f3de835bba6a677d5c603c4ce2ba9a5151",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-05-05T01_51_26.395_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-05T01_51_26.395_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180603235813",
+      "path": "observations/d16Psyche_2018-06-03T23_58_13.377_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-06-03T23_58_13.377_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180603235813",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/63"
+          }
+        ]
+      },
+      "sha256": "f8314c144a024f74dbb553cdc2ff89d225baf6a680224e22c001b1c867677e6e",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-06-03T23_58_13.377_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-06-03T23_58_13.377_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180604000227",
+      "path": "observations/d16Psyche_2018-06-04T00_02_27.910_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-06-04T00_02_27.910_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180604000227",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/64"
+          }
+        ]
+      },
+      "sha256": "ef43321dc724832e31688a99813f5ef45271fa64d9bceb77a95fa82b3a73bb8f",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-06-04T00_02_27.910_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-06-04T00_02_27.910_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180604000643",
+      "path": "observations/d16Psyche_2018-06-04T00_06_43.574_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-06-04T00_06_43.574_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180604000643",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/65"
+          }
+        ]
+      },
+      "sha256": "76e8730acb04172bd709a58d6ae9581caf7e9dd357495035e949810fee5f863d",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-06-04T00_06_43.574_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-06-04T00_06_43.574_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180604001058",
+      "path": "observations/d16Psyche_2018-06-04T00_10_58.115_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-06-04T00_10_58.115_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180604001058",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/66"
+          }
+        ]
+      },
+      "sha256": "98d715dd37832b7abd5c2ebc4062b69099d3238dabe8527520e6c84469e2df1b",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-06-04T00_10_58.115_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-06-04T00_10_58.115_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20180604001511",
+      "path": "observations/d16Psyche_2018-06-04T00_15_11.193_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-06-04T00_15_11.193_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20180604001511",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/67"
+          }
+        ]
+      },
+      "sha256": "90e0498fd577d5508cbc8a46e6bb5fd7c0dd16630d669173fbe0e2124ea6980b",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2018-06-04T00_15_11.193_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-06-04T00_15_11.193_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
       },
       "verificationOperations": []
     },
@@ -2377,6 +4125,58 @@
     },
     {
       "kind": "source-input",
+      "id": "psyche-sphere-20190805074316",
+      "path": "observations/d16Psyche_2019-08-05T07_43_16.087_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2019-08-05T07_43_16.087_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20190805074316",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/68"
+          }
+        ]
+      },
+      "sha256": "b15ba23e2b9815ce8f00c2e311f3c7b7a235a90642f8ac7f6b3df79a092014a5",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2019-08-05T07_43_16.087_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2019-08-05T07_43_16.087_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "psyche-sphere-20190805074726",
       "path": "observations/d16Psyche_2019-08-05T07_47_26.562_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2019-08-05T07_47_26.562_zpl_science_imaging_cam1.fits",
@@ -2585,6 +4385,58 @@
     },
     {
       "kind": "source-input",
+      "id": "psyche-sphere-20190806023421",
+      "path": "observations/d16Psyche_2019-08-06T02_34_21.242_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2019-08-06T02_34_21.242_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20190806023421",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/69"
+          }
+        ]
+      },
+      "sha256": "e8b36c86a05b4d4f171d88e31c31256ce7ae4a6c1289757fb9e144fd81a423d1",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2019-08-06T02_34_21.242_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2019-08-06T02_34_21.242_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "psyche-sphere-20190806023831",
       "path": "observations/d16Psyche_2019-08-06T02_38_31.290_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2019-08-06T02_38_31.290_zpl_science_imaging_cam1.fits",
@@ -2785,6 +4637,58 @@
         ],
         "path": "observations/d16Psyche_2019-08-06T02_51_01.591_zpl_science_imaging_cam1.fits",
         "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2019-08-06T02_51_01.591_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-sphere-20190806041056",
+      "path": "observations/d16Psyche_2019-08-06T04_10_56.797_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2019-08-06T04_10_56.797_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-sphere-20190806041056",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/70"
+          }
+        ]
+      },
+      "sha256": "f26093fb8fb019ba500f000df5b5993537daeeb2380758efa4acdc315328c742",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d16Psyche_2019-08-06T04_10_56.797_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2019-08-06T04_10_56.797_zpl_science_imaging_cam1.fits",
         "headers": {
           "Cookie": "CesAM_LAM_opens_the_door=1"
         }
@@ -3066,8 +4970,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "951b35b3c379213aef2a54b10b22163a2f600d041b278caacaab4a59ef388262",
-      "bytes": 12092,
+      "sha256": "2b26590f961a62e2c9bfaba7c6d671328ae10e38eda256e9d582a6d428cb5504",
+      "bytes": 12160,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3298,6 +5202,31 @@
         "kind": "surfaceObservations"
       },
       "inputs": [
+        "psyche-sphere-20180424084252",
+        "psyche-sphere-20180424084707",
+        "psyche-sphere-20180424085124",
+        "psyche-sphere-20180424085538",
+        "psyche-sphere-20180424085953",
+        "psyche-sphere-20180428074239",
+        "psyche-sphere-20180428074654",
+        "psyche-sphere-20180428075111",
+        "psyche-sphere-20180428075525",
+        "psyche-sphere-20180428075939",
+        "psyche-sphere-20180504054447",
+        "psyche-sphere-20180504054902",
+        "psyche-sphere-20180504055317",
+        "psyche-sphere-20180504055731",
+        "psyche-sphere-20180504060145",
+        "psyche-sphere-20180505013427",
+        "psyche-sphere-20180505013843",
+        "psyche-sphere-20180505014257",
+        "psyche-sphere-20180505014711",
+        "psyche-sphere-20180505015126",
+        "psyche-sphere-20180603235813",
+        "psyche-sphere-20180604000227",
+        "psyche-sphere-20180604000643",
+        "psyche-sphere-20180604001058",
+        "psyche-sphere-20180604001511",
         "psyche-sphere-20190728090411",
         "psyche-sphere-20190728090822",
         "psyche-sphere-20190728091234",
@@ -3318,14 +5247,17 @@
         "psyche-sphere-20190803044759",
         "psyche-sphere-20190803045209",
         "psyche-sphere-20190803045619",
+        "psyche-sphere-20190805074316",
         "psyche-sphere-20190805074726",
         "psyche-sphere-20190805075138",
         "psyche-sphere-20190805075548",
         "psyche-sphere-20190805075958",
+        "psyche-sphere-20190806023421",
         "psyche-sphere-20190806023831",
         "psyche-sphere-20190806024242",
         "psyche-sphere-20190806024651",
         "psyche-sphere-20190806025101",
+        "psyche-sphere-20190806041056",
         "psyche-sphere-20190806041507",
         "psyche-sphere-20190806041918",
         "psyche-sphere-20190806042327",
@@ -3335,14 +5267,14 @@
       "outputs": [
         {
           "url": "/scenes/psyche/psyche-zimpol-thumbnail.webp",
-          "bytes": 1536,
-          "sha256": "0d9a7bd4326af5c3361bcfbb33017d01634936f82bc6dc57acd09f569f37ff64",
+          "bytes": 1572,
+          "sha256": "5962265f66b6972cc5ed5ff380a169675f719940088338aed9da66412897ac50",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/psyche/psyche-zimpol-surface@2x.webp",
-          "bytes": 230578,
-          "sha256": "533e5c12c63bf17ecc56d45b630d29eea17e03c49fc56fcece63af7fb2733382",
+          "bytes": 165980,
+          "sha256": "c926674a6d8a4c0065c193ffa287a2ddf9ce67a968e1ab8f361ee91661a1dd9d",
           "verification": "bytes-verified"
         }
       ],
@@ -3425,8 +5357,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 10934,
-          "sha256": "ac23a0fe72ffbd2d0428b48e4d51f7d647fc20b1b55dd76b7ff453eef9c3d03b",
+          "bytes": 5992,
+          "sha256": "a6a120fac9bf0a7e1d66cc34f61de227af8add1aa59a673e4c6fb798f1c6c206",
           "verification": "bytes-verified"
         }
       ]
@@ -3513,11 +5445,11 @@
   },
   "lastPreparation": {
     "objectId": "psyche",
-    "materialSha256": "0f4384d36b5a52a105bd1fadd8540be9518a73419e0ae293db2380f41ebb975a",
+    "materialSha256": "01169d23de63edb9da314e9eba94509f02ef3005fa79502d59256082b9e50fc5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "3c9a41c6736baced4786d2ca7a196118ce23cbd788d099bafde1e960ccdfc7ec"
+      "bindingsSha256": "f9815913bc041f018daf1fa162ef01c60cc45aef9da4ea29916c76a8517d1247"
     }
   }
 }

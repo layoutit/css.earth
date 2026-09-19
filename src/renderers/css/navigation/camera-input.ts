@@ -188,6 +188,13 @@ export function createUnboundedMatrixDragControls({
     }
     return true;
   };
+  // Stopping a destination flight strands the camera between its endpoints, often with the
+  // target off screen. Input hurries the arrival instead, as it does for world navigation.
+  const hurryDestination = () => {
+    if (!flyToMotion?.sample) return false;
+    flyToMotion.speed = runtimePolicy.FLIGHT_WHEEL_SPEEDUP;
+    return true;
+  };
   const replaceCameraMotion = (nextMode: "drag" | "fly-to") => {
     const previousMode = activeMode;
     if (previousMode === "inertia") cancelInertia();
@@ -207,7 +214,9 @@ export function createUnboundedMatrixDragControls({
     if (flyToMotion.startedAt === null) flyToMotion.startedAt = timestamp;
     if (flyToMotion.sample) {
       const motion = flyToMotion;
-      const progress = Math.min(1, Math.max(0, timestamp - motion.startedAt!) / motion.durationMilliseconds);
+      if (motion.previousTimestamp !== null) motion.elapsedMilliseconds += Math.max(0, timestamp - motion.previousTimestamp) * motion.speed;
+      motion.previousTimestamp = timestamp;
+      const progress = Math.min(1, motion.elapsedMilliseconds / motion.durationMilliseconds);
       motion.sample(progress);
       if (lifetime.disposed || flyToMotion !== motion) return;
       destinationFlight.frames++;
@@ -383,6 +392,7 @@ export function createUnboundedMatrixDragControls({
   };
   const onPointerDown = (event: PointerEvent) => {
     if (!drag || pointerId !== null || !runtimePolicy.isOrbitDragStart(event)) return;
+    if (hurryDestination()) { event.preventDefault(); return; }
     const measuredTrackball = trackballMetrics();
     if (!isTrackballMetrics(measuredTrackball)) {
       throw new TypeError("Unbounded matrix drag trackball is invalid.");
@@ -562,6 +572,7 @@ export function createUnboundedMatrixDragControls({
       return;
     }
     if (activeMode !== "inertia" && activeMode !== "fly-to") return;
+    if (hurryDestination()) { event.preventDefault(); return; }
     interruptMotion("wheel");
   };
   lifetime.onDispose(() => { interruptMotion("destroy"); clearCursor(inputSurface); });
@@ -569,7 +580,14 @@ export function createUnboundedMatrixDragControls({
     bindCameraInputListeners({ inputSurface, windowTarget, lifetime, guardNative,
       onPointerDown, onPointerMove, endPointer, onMouseDown, onDoubleClick, onWheel,
       cancelDestination: guardNative((event: Event) => {
-        if (flyToMotion?.sample && (("key" in event && event.key === "Escape") || inputSurface.ownerDocument.hidden)) interruptMotion("programmatic");
+        if (!flyToMotion?.sample) return;
+        if ("key" in event && event.key === "Escape") hurryDestination();
+        // A hidden page paints nothing; finish at the destination instead of where it hid.
+        else if (inputSurface.ownerDocument.hidden) {
+          if (flyToFrame !== null) cancelFrame(flyToFrame);
+          flyToMotion.elapsedMilliseconds = flyToMotion.durationMilliseconds;
+          animateFlyTo(flyToMotion.previousTimestamp ?? 0);
+        }
       }),
     });
     inputSurface.style.userSelect = "none";
@@ -593,7 +611,8 @@ export function createUnboundedMatrixDragControls({
         onStart();
         if (lifetime.disposed) return Promise.resolve({ completed: false });
         const completion = new Promise<MotionCompletion>(resolve => {
-          flyToMotion = { sample, durationMilliseconds, startedAt: null, finish: completed => resolve({ completed }) };
+          flyToMotion = { sample, durationMilliseconds, startedAt: null, elapsedMilliseconds: 0, previousTimestamp: null, speed: 1,
+            finish: completed => resolve({ completed }) };
         });
         flyToFrame = requestFrame(animateFlyTo);
         return completion;

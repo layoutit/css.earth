@@ -190,6 +190,23 @@
           "commit": "72bb4d4db7c61d0b5997025b6bbe73351ada6f11"
         }
       ]
+    },
+    {
+      "id": "second-apparition-levels",
+      "subject": "The other apparition's frames and the level fit",
+      "status": "unresolved",
+      "finding": "Measured on 2026-09-18 with tools/objects/sphere-survey/apparitions.mts. The lens casts 23 frames on 2017-10-10 and 2017-10-11, which see Iris at 64° south. The release also holds 10 frames from 2019-02-25 to 2019-03-15, which see it at 71° to 72° north; they would add about 45 percentage points of photographed surface. No frame of that apparition shares any surface with a cast frame within the level fit's 60° angle limit: 0 display samples, against the 128 the fit needs. The deconvolved frames state no unit and their scale changes between apparitions, so without shared surface the other apparition's level cannot be placed, and the lens keeps the apparition the survey's figure shows most.",
+      "revisitWhen": "The frames are placed on a common photometric scale, by the producers or by a documented per-frame normalisation, or a released frame is found that shares surface with both apparitions within the level fit's angle limit.",
+      "evidence": [
+        "https://observations.lam.fr/astero/Data/7Iris/Deconv/",
+        "https://github.com/layoutit/css.earth/blob/86dba0be4d4a0f103c48ea5f69cb9717e3c08c3f/tools/objects/sphere-survey/apparitions.mts"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "86dba0be4d4a0f103c48ea5f69cb9717e3c08c3f"
+        }
+      ]
     }
   ]
 }

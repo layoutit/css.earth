@@ -1,0 +1,37 @@
+{
+  "id": "source-kleopatra-kleopatra-sphere-20181219064807",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Kleopatra · kleopatra sphere 20181219064807",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2018-12-19T06_48_07.237_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/kleopatra/source/manifest.json",
+      "revision": "66f3b9eba51e31a38d743eaa433c82df03c1cdb2",
+      "sha256": "60ce6820b19934aaa6ee8fddb57c094f4464d757769346b3b075b3d3ec34b4b7",
+      "locator": "/inputs/43"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The kleopatra sphere 20181219064807 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

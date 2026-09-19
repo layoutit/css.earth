@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "70372a0a9414d68ab27a7519797364779d76578fb21211ac6d971f9961cc594a"
+    "sha256": "c4a0b6af96d70e2fd14d26afe91da8ce76439b7dc40a3bbef6fe13533ec3eddf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1257,14 +1257,14 @@
       "outputs": [
         {
           "url": "/scenes/daphnis/daphnis-normal-thumbnail.webp",
-          "bytes": 1534,
-          "sha256": "d6abec5daf5f5d5d33002bd254bb6e1acbe7557480eb65555cb23b841dccdb84",
+          "bytes": 1526,
+          "sha256": "45ad1cdfc82c151bf6c60518ed7f373e23d552e11b02e635aec87a3c7ab2e826",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphnis/daphnis-normal-surface@2x.webp",
-          "bytes": 156144,
-          "sha256": "d9689e297fc2f81b77ce5970cacba356074c5031d41205b70ee43d9e56789895",
+          "bytes": 161756,
+          "sha256": "4412ae7a69cad32091b8b2dc93db613204e58c6aa4a3d4145bc3ab343d9ae418",
           "verification": "bytes-verified"
         }
       ],
@@ -1372,8 +1372,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 6900,
-          "sha256": "a88f19c9e7769a8b7debebfaf552c4e3b52dd0b7b4bf8b6cd4ee1fa26b9dc90f",
+          "bytes": 7120,
+          "sha256": "a43f63ce50e4d5464494f707c870ba051286fbef008f59fb63c5139ebecca198",
           "verification": "bytes-verified"
         }
       ]
@@ -1435,7 +1435,7 @@
   },
   "lastPreparation": {
     "objectId": "daphnis",
-    "materialSha256": "2cd0f171ec51c4a2f84ff697e5628f08ce435327fb1f895439b1c1671d3a0113",
+    "materialSha256": "56b5fd8a6536e3da58cf1d980326c8cdfb2f958888e0db86a9cbd014d6d3747f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

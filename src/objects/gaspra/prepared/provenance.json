@@ -1426,14 +1426,14 @@
       "outputs": [
         {
           "url": "/scenes/gaspra/gaspra-calibrated-thumbnail.webp",
-          "bytes": 1454,
-          "sha256": "be01abecf62de603d83aee0c5c25b9a07ecce3ad6143c01ffa6d7407e6a09d33",
+          "bytes": 1450,
+          "sha256": "0855af79761ab7e00b3cf1f2477be4532a3bf632b8b463d7050e95e4dea192b2",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
-          "bytes": 193506,
-          "sha256": "0a05b2a24308d4f6ad8bafec1c0e8c01038257896ab384e201b62dc6503b83d3",
+          "bytes": 193566,
+          "sha256": "fb6df69b1e13247491b423bc97e9178adeadb93e141c3626c6b4c41bfceb2506",
           "verification": "bytes-verified"
         }
       ],
@@ -1551,8 +1551,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/calibrated.webp",
-          "bytes": 6348,
-          "sha256": "d32a898ed1be83639e82e53c9c6d28337b32bf3db914b434457e4c5737ef4e72",
+          "bytes": 6340,
+          "sha256": "caa820e0361eb8971a6b4e2b236e8fb3a1e9db612a9f1e825f9f9d358d7c3382",
           "verification": "bytes-verified"
         }
       ]
@@ -1589,7 +1589,7 @@
   },
   "lastPreparation": {
     "objectId": "gaspra",
-    "materialSha256": "2e1eec007badfedaa04fbbd440f7e9779b7db12ff4aadb81ed97a90708116422",
+    "materialSha256": "3f183c50338b4ebb71c0d96994ccb2b026f735275740c93596817797dae17992",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

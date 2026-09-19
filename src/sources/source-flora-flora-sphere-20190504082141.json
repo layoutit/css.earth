@@ -1,0 +1,37 @@
+{
+  "id": "source-flora-flora-sphere-20190504082141",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Flora · flora sphere 20190504082141",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_21_41.025_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/flora/source/manifest.json",
+      "revision": "e40a119993c352411670e9be5722e069c2785ba8",
+      "sha256": "ce655dc5076a1245a551123bf0d970ffd542ccced01fd7186e1577754a56e066",
+      "locator": "/inputs/25"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The flora sphere 20190504082141 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

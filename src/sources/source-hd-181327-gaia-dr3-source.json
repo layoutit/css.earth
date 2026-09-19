@@ -1,0 +1,37 @@
+{
+  "id": "source-hd-181327-gaia-dr3-source",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "HD 181327 · hd 181327 gaia dr3 source",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hd-181327/source/manifest.json",
+      "revision": "6a3bcdec72f24a701b853dc06dd87488b9c662d7",
+      "sha256": "6c0f86ccf31a53751d32b19156fcb9add4e215b5c89755309bd8655231890538",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1",
+      "scope": "The hd 181327 gaia dr3 source input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

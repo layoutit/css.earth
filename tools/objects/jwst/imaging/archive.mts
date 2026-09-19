@@ -5,6 +5,8 @@
  *
  * For each level-3 observation (e.g. jw02733-o001_t001_nircam_clear-f187n) the program records the pipeline's own level-3
  * mosaic, its image3 association and the level-2 calibrated exposures the association names, each by MAST URI and byte count.
+ * A coronagraphic observation (e.g. jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r) has a coron3 association instead:
+ * its members are the per-integration _calints exposures of the target at each roll and, as references, of the PSF star.
  * The band comes from the product's filter and pupil. The association fixes the membership; the program stores it, so a re-run
  * of the mosaic step uses the same exposures MAST used. Digests are added the first time a file is downloaded (imaging.mts).
  * The program is written to tools/objects/jwst/imaging/programs/<program id>.json. */
@@ -13,7 +15,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
 import { mastDownloadUrl, mastRequest, type MastFile } from '../mast.mts';
-import { JWST_BANDS, type JwstBand } from './bands.mts';
+import { JWST_BANDS, NIRCAM_OCCULTERS, type JwstBand } from './bands.mts';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');
 const NAME = /^[A-Za-z0-9._-]+$/u;
@@ -23,7 +25,11 @@ export interface ImagingBand {
   readonly observation: string;
   readonly level3: MastFile;
   readonly association: MastFile;
+  /** The level-3 stage that builds the mosaic; absent for image3. */
+  readonly stage?: 'coron3';
   readonly members: readonly MastFile[];
+  /** coron3 only: the PSF reference star's exposures, which the stage subtracts from the members. */
+  readonly references?: readonly MastFile[];
 }
 export interface ImagingProgram {
   readonly schema: 'cssearth-jwst-imaging-program@1';
@@ -49,11 +55,19 @@ export function parseImagingProgram(value: unknown): ImagingProgram {
   const bands = requireArray(row.bands).map(raw => {
     const entry = requireRecord(raw, 'Imaging band'), band = requireString(entry.band, 'Band');
     if (!Object.hasOwn(JWST_BANDS, band)) throw new TypeError(`Unknown JWST band ${band}.`);
-    const members = requireArray(entry.members).map(file);
-    if (!members.length || !members.every(member => member.name.endsWith('_cal.fits'))) throw new TypeError(`${band}: members are level-2 _cal exposures.`);
+    if (entry.stage !== undefined && entry.stage !== 'coron3') throw new TypeError(`${band}: unsupported stage ${String(entry.stage)}.`);
+    const coron = entry.stage === 'coron3', members = requireArray(entry.members).map(file);
+    const references = coron ? requireArray(entry.references).map(file) : entry.references === undefined ? [] : null;
+    if (!references) throw new TypeError(`${band}: only a coron3 band has PSF references.`);
+    const level2 = coron ? '_calints.fits' : '_cal.fits';
+    if (!members.length || !members.every(member => member.name.endsWith(level2))) throw new TypeError(`${band}: members are level-2 ${level2.slice(0, -5)} exposures.`);
+    if (coron && (!references.length || !references.every(member => member.name.endsWith(level2)))) throw new TypeError(`${band}: references are level-2 _calints exposures.`);
+    if (coron !== Boolean(JWST_BANDS[band]!.coronagraph)) throw new TypeError(`${band}: a coronagraph band is built by coron3, and only it.`);
     const level3 = file(entry.level3), association = file(entry.association);
-    if (!level3.name.endsWith('_i2d.fits') || !/_image3_\d+_asn\.json$/u.test(association.name)) throw new TypeError(`${band}: not a level-3 mosaic and image3 association.`);
-    return { band, observation: requireString(entry.observation, 'Observation'), level3, association, members };
+    if (!level3.name.endsWith('_i2d.fits') || !new RegExp(`_${coron ? 'coron3' : 'image3'}_\\d+_asn\\.json$`, 'u').test(association.name))
+      throw new TypeError(`${band}: not a level-3 mosaic and ${coron ? 'coron3' : 'image3'} association.`);
+    return { band, observation: requireString(entry.observation, 'Observation'), level3, association, ...(coron ? { stage: 'coron3' as const } : {}), members,
+      ...(coron ? { references } : {}) };
   });
   if (new Set(bands.map(entry => entry.band)).size !== bands.length) throw new TypeError('A band appears twice in the program.');
   let image3: ImagingProgram['image3'];
@@ -70,14 +84,26 @@ export function parseImagingProgram(value: unknown): ImagingProgram {
     target: requireString(row.target, 'Target'), crdsContext: requireString(row.crdsContext, 'CRDS context'), ...(image3 ? { image3 } : {}), bands };
 }
 
-const bandOfFilters = (instrument: string, filters: string): JwstBand => {
-  // CAOM lists NIRCam optical elements as "FILTER;PUPIL" and "CLEAR;FILTER" forms; MIRI as the filter alone.
+export const bandOfFilters = (instrument: string, filters: string, observation = ''): JwstBand => {
+  // CAOM lists NIRCam optical elements as "FILTER;PUPIL" and "CLEAR;FILTER" forms (a coronagraph's Lyot stop is the pupil, and
+  // the mask is not listed); MIRI as the filter alone. compare.mts checks the band against the level-3 product's own header,
+  // which names the mask.
   const parts = filters.split(';');
-  const found = Object.values(JWST_BANDS).find(entry => entry.instrument === instrument &&
+  // A NIRCam coronagraph's occulter is not in the archive's filter list; the subarray in the observation's name carries it
+  // (sub320a335r is module A's MASK335R). A full-frame coronagraph observation names no occulter and cannot be pinned by name.
+  const lyot = parts.find(part => part === 'MASKRND' || part === 'MASKBAR');
+  if (instrument === 'NIRCAM' && lyot) {
+    const occulter = /-mask(?:rnd|bar)-sub\d+(?:x\d+)?a(210r|335r|430r|swb|lwb)$/u.exec(observation)?.[1]?.toUpperCase();
+    if (!occulter || NIRCAM_OCCULTERS[occulter]!.pupil !== lyot) throw new Error(`${observation || filters}: the observation's name does not say which occulter it is behind.`);
+    const found = JWST_BANDS[`NIRCAM-${parts.find(part => part !== lyot)}-MASK${occulter}`];
+    if (!found) throw new Error(`No JWST band for ${instrument} ${filters} behind MASK${occulter}.`);
+    return found;
+  }
+  const found = Object.values(JWST_BANDS).filter(entry => !entry.coronagraph && entry.instrument === instrument &&
     (entry.instrument === 'MIRI' ? parts.length === 1 && parts[0] === entry.filter
       : parts.includes(entry.filter) && parts.includes(entry.pupil ?? 'CLEAR') || entry.pupil === 'CLEAR' && parts.length === 1 && parts[0] === entry.filter));
-  if (!found) throw new Error(`No JWST band for ${instrument} ${filters}.`);
-  return found;
+  if (found.length !== 1) throw new Error(`${found.length ? 'More than one' : 'No'} JWST band for ${instrument} ${filters}.`);
+  return found[0]!;
 };
 
 /** One level-3 observation's mosaic, association and members, as MAST lists them. */
@@ -85,23 +111,28 @@ export async function imagingBand(observation: string): Promise<ImagingBand & { 
   const [obs] = await mastRequest({ service: 'Mast.Caom.Filtered', format: 'json', params: { columns: 'obsid,obs_id,instrument_name,filters,proposal_id,target_name,calib_level',
     filters: [{ paramName: 'obs_collection', values: ['JWST'] }, { paramName: 'obs_id', values: [observation] }] } });
   if (!obs || obs.calib_level !== 3) throw new Error(`${observation} is not a level-3 JWST observation.`);
-  const instrument = requireString(obs.instrument_name).split('/')[0]!, band = bandOfFilters(instrument, requireString(obs.filters));
+  const instrument = requireString(obs.instrument_name).split('/')[0]!, band = bandOfFilters(instrument, requireString(obs.filters), observation);
   const products = await mastRequest({ service: 'Mast.Caom.Products', format: 'json', params: { obsid: String(obs.obsid) } });
   const pick = (kind: string, level: number, pattern: RegExp) => products.filter(p => p.productSubGroupDescription === kind && p.calib_level === level &&
     pattern.test(requireString(p.productFilename)));
   const mastFileOf = (p: Record<string, unknown>): MastFile => ({ name: requireString(p.productFilename), uri: requireString(p.dataURI), bytes: requireFiniteNumber(p.size) });
-  const level3 = pick('I2D', 3, new RegExp(`^${observation}_i2d\\.fits$`, 'u')), association = pick('ASN', 3, /_image3_\d+_asn\.json$/u);
-  if (level3.length !== 1 || association.length !== 1) throw new Error(`${observation}: expected one level-3 mosaic and one image3 association.`);
+  const coron = Boolean(band.coronagraph), stage = coron ? 'coron3' : 'image3';
+  const level3 = pick('I2D', 3, new RegExp(`^${observation}_i2d\\.fits$`, 'u')), association = pick('ASN', 3, new RegExp(`_${stage}_\\d+_asn\\.json$`, 'u'));
+  if (level3.length !== 1 || association.length !== 1) throw new Error(`${observation}: expected one level-3 mosaic and one ${stage} association.`);
   const asnFile = mastFileOf(association[0]!), response = await fetch(mastDownloadUrl(asnFile.uri), { signal: AbortSignal.timeout(120_000) });
   const asn = requireRecord(await response.json(), 'Association');
   const [product] = requireArray(asn.products).map(value => requireRecord(value));
   if (!product || requireString(product.name) !== observation) throw new Error(`${asnFile.name} does not build ${observation}.`);
-  const names = new Set(requireArray(product.members).map(value => requireRecord(value)).filter(member => member.exptype === 'science').map(member => requireString(member.expname)));
-  const members = products.filter(p => p.productSubGroupDescription === 'CAL' && names.has(requireString(p.productFilename))).map(mastFileOf)
-    .sort((a, b) => a.name.localeCompare(b.name, 'en'));
-  if (members.length !== names.size) throw new Error(`${observation}: MAST lists ${members.length} of the association's ${names.size} members.`);
-  return { band: band.id, observation, level3: mastFileOf(level3[0]!), association: asnFile, members,
-    programme: String(obs.proposal_id), target: requireString(obs.target_name) };
+  // Target acquisition exposures are association members too; the stage reads only science and PSF reference exposures.
+  const exposures = (exptype: string) => {
+    const names = new Set(requireArray(product.members).map(value => requireRecord(value)).filter(member => member.exptype === exptype).map(member => requireString(member.expname)));
+    const found = products.filter(p => p.productSubGroupDescription === (coron ? 'CALINTS' : 'CAL') && names.has(requireString(p.productFilename))).map(mastFileOf)
+      .sort((a, b) => a.name.localeCompare(b.name, 'en'));
+    if (found.length !== names.size) throw new Error(`${observation}: MAST lists ${found.length} of the association's ${names.size} ${exptype} members.`);
+    return found;
+  };
+  return { band: band.id, observation, level3: mastFileOf(level3[0]!), association: asnFile, ...(coron ? { stage: 'coron3' as const } : {}), members: exposures('science'),
+    ...(coron ? { references: exposures('psf') } : {}), programme: String(obs.proposal_id), target: requireString(obs.target_name) };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
@@ -120,9 +151,10 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const index = bands.findIndex(other => other.band === entry.band);
     // Digests recorded by an earlier download stay with their file.
     const withDigests = { ...entry, level3: { ...entry.level3, ...(bands[index]?.level3.name === entry.level3.name && bands[index]?.level3.sha256 ? { sha256: bands[index]!.level3.sha256 } : {}) },
-      members: entry.members.map(member => ({ ...member, ...(bands[index]?.members.find(m => m.name === member.name)?.sha256 ? { sha256: bands[index]!.members.find(m => m.name === member.name)!.sha256 } : {}) })) };
+      members: entry.members.map(member => ({ ...member, ...(bands[index]?.members.find(m => m.name === member.name)?.sha256 ? { sha256: bands[index]!.members.find(m => m.name === member.name)!.sha256 } : {}) })),
+      ...(entry.references ? { references: entry.references.map(member => ({ ...member, ...(bands[index]?.references?.find(m => m.name === member.name)?.sha256 ? { sha256: bands[index]!.references!.find(m => m.name === member.name)!.sha256 } : {}) })) } : {}) };
     if (index >= 0) bands[index] = withDigests; else bands.push(withDigests);
-    console.log(`${observation}: ${entry.band}, ${entry.members.length} members`);
+    console.log(`${observation}: ${entry.band}, ${entry.members.length} members${entry.references ? `, ${entry.references.length} PSF references` : ''}`);
   }
   const program = parseImagingProgram({ schema: 'cssearth-jwst-imaging-program@1', id, programme, target, crdsContext, ...(existing?.image3 ? { image3: existing.image3 } : {}), bands });
   await mkdir(PROGRAMS, { recursive: true });

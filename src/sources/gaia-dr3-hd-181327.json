@@ -1,0 +1,51 @@
+{
+  "id": "gaia-dr3-hd-181327",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gaia DR3 gaia_source and astrophysical_parameters rows and XP sampled spectrum for HD 181327 (source_id 6643589352010758400)",
+  "identifiers": [
+    {
+      "type": "Gaia DR3 source_id",
+      "value": "6643589352010758400"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://gea.esac.esa.int/archive/",
+      "label": "Gaia Archive"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202243940",
+      "label": "Gaia Collaboration (2023), Gaia DR3 summary"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20ref_epoch%2C%20ra%2C%20dec%2C%20parallax%2C%20parallax_error%2C%20pmra%2C%20pmdec%2C%20radial_velocity%2C%20radial_velocity_error%2C%20phot_g_mean_mag%2C%20bp_rp%2C%20teff_gspphot%2C%20has_xp_sampled%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%206643589352010758400",
+      "checkedOn": "2026-09-18",
+      "locator": "gaiadr3.gaia_source at epoch 2016.0: parallax 20.93063 +/- 0.02860 mas, pmra 24.403, pmdec -82.186 mas/yr, radial_velocity 0.07 +/- 0.13 km/s, has_xp_sampled true"
+    },
+    {
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20radius_flame%2C%20mass_flame%2C%20radius_gspphot%2C%20teff_gspphot%20FROM%20gaiadr3.astrophysical_parameters%20WHERE%20source_id%20%3D%206643589352010758400",
+      "checkedOn": "2026-09-18",
+      "locator": "gaiadr3.astrophysical_parameters: radius_flame 1.3720421 (1.3443532 to 1.3996391), mass_flame 1.2313985 (1.1913916 to 1.271405), radius_gspphot 1.3756, teff_gspphot 6375.0 K"
+    },
+    {
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6643589352010758400&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "checkedOn": "2026-09-18",
+      "locator": "XP sampled mean spectrum: 343 fluxes from 336 to 1020 nm in 2 nm steps, W m^-2 nm^-1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Creevey et al. (2023), A&A 674, A26; Fouesneau et al. (2023), A&A 674, A28; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "scope": "citation",
+      "evidence": "https://www.cosmos.esa.int/web/gaia-users/credits"
+    }
+  ],
+  "publisher": "European Space Agency, Gaia Data Processing and Analysis Consortium"
+}

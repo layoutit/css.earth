@@ -52,7 +52,7 @@
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
       "status": "included",
-      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 20 camera-1 deconvolved frames, 4 nights from 2019-06-21 to 2019-08-06, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. The other 10 released camera-1 frames are not used: a lens keeps one apparition and at most 32 frames. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/18Melpomene/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 30 camera-1 deconvolved frames, 5 nights from 2018-05-04 to 2019-08-06, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/18Melpomene/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/melpomene/README.md",
         "https://observations.lam.fr/astero/Data/18Melpomene/",
@@ -72,6 +72,10 @@
         {
           "date": "2026-09-18",
           "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
         }
       ]
     },
@@ -95,6 +99,10 @@
         {
           "date": "2026-09-18",
           "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
         }
       ]
     },
@@ -102,7 +110,7 @@
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
       "status": "included",
-      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 20 camera-1 frames on the ADAM mesh with the rotation record read latitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: Measured with the cross-frame registration test on 30 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read latitude-first. Disc interior 493 pixels (median); peak correlation 0.27 (median) against a mirror margin of 0.55; 0 of 30 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. A photograph lens for this body would rest on the survey's record read by the route proven on Vesta and on five elongated bodies, with no check on this body itself; it is not derived until one exists.",
+      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 30 camera-1 frames on the ADAM mesh with the rotation record read latitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: Measured with the cross-frame registration test on 30 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read latitude-first. Disc interior 493 pixels (median); peak correlation 0.27 (median) against a mirror margin of 0.55; 0 of 30 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. A photograph lens for this body would rest on the survey's record read by the route proven on Vesta and on five elongated bodies, with no check on this body itself; it is not derived until one exists.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -116,6 +124,10 @@
         {
           "date": "2026-09-18",
           "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
         }
       ]
     },
@@ -123,7 +135,7 @@
       "id": "zimpol-published-comparison",
       "subject": "Vernazza et al. (2021) Figure B.15 as the registration of the SPHERE photograph lens",
       "status": "included",
-      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.15, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.918 to 0.963 at our phase, against 0.963 to 0.965 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 2 of 4 columns, one step from it in 2. With the paper’s photographs 0.928 to 0.958. Turned in the image, our outline best overlaps the paper’s photographs at -1.0 to 5.0° and its model panels at -5.0 to 0.0°. The spin axis we project lies at 156.7 to 158.5° on the sky against 154.7 to 156.5° for the figure’s arrows. Native outline residual 1.222 px mean over 20 frames at our phase; the sweep’s lowest is 1.215 px at -2°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.38° from the published pole.",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.15, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.918 to 0.963 at our phase, against 0.948 to 0.965 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 3 of 6 columns, one step from it in 3. With the paper’s photographs 0.928 to 0.958. Turned in the image, our outline best overlaps the paper’s photographs at -1.0 to 6.0° and its model panels at -5.0 to 3.5°. The spin axis we project lies at 79.1 to 158.5° on the sky against 77.0 to 156.5° for the figure’s arrows. Native outline residual 1.211 px mean over 30 frames at our phase; the sweep’s lowest is 1.141 px at 4°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.38° from the published pole.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/",
@@ -132,7 +144,7 @@
       "checked": [
         {
           "date": "2026-09-18",
-          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
         }
       ]
     }

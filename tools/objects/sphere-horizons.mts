@@ -9,7 +9,8 @@
  * and range rate, phase angle and phase-angle bisector. The heliocentric table is sampled when the light left the
  * body: the start less the light time over the observer range. Its epochs are read on Horizons' own time scale for
  * vectors, as the first pinned tables were. Horizons answers a time list longer than 25 epochs with an error, so the
- * epochs go in batches and one table is written with every row in order.
+ * epochs go in batches and one table is written with every row in order. The acquisition plan gets one refresh step per
+ * table holding those exact queries, so the tables can be asked for again and their rows compared.
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -74,18 +75,62 @@ async function batched(make: (epochs: readonly number[]) => URLSearchParams, epo
   return joinResponses(responses);
 }
 
-/** Both tables for exposure starts, one observer row per distinct start in time order and one heliocentric row for each. */
-export async function horizonsTables(command: string, starts: readonly number[], ask: HorizonsRequest = request) {
-  const epochs = [...new Set(starts)].sort((a, b) => a - b);
-  const observer = await batched(list => observerQuery(command, list), epochs, ask), rows = horizonsRows(observer);
+/** The heliocentric epochs: each exposure start less the light time over its observer row's range. */
+function heliocentricEpochs(epochs: readonly number[], observer: string) {
+  const rows = horizonsRows(observer);
   if (rows.length !== epochs.length) throw new Error(`Horizons returned ${rows.length} observer rows for ${epochs.length} exposure starts.`);
   rows.forEach((row, index) => { if (Math.abs(rowJd(row) - epochs[index]) >= MATCH_DAYS) throw new Error(`Observer row ${index + 1} is not at its exposure start: ${row.trim()}`); });
   const ranges = rows.map(row => observerRowValues(row).rangeAu);
   if (!ranges.every(range => range > 0)) throw new Error('An observer row states no range.');
-  const heliocentric = await batched(list => heliocentricQuery(command, list), epochs.map((epoch, index) => epoch - ranges[index] * LIGHT_SECONDS_PER_AU / 86_400), ask);
+  return epochs.map((epoch, index) => epoch - ranges[index] * LIGHT_SECONDS_PER_AU / 86_400);
+}
+
+/** Both tables for exposure starts, one observer row per distinct start in time order and one heliocentric row for each. */
+export async function horizonsTables(command: string, starts: readonly number[], ask: HorizonsRequest = request) {
+  const epochs = [...new Set(starts)].sort((a, b) => a - b);
+  const observer = await batched(list => observerQuery(command, list), epochs, ask);
+  const heliocentric = await batched(list => heliocentricQuery(command, list), heliocentricEpochs(epochs, observer), ask);
   const vectors = horizonsRows(heliocentric).filter(line => line.trimStart().startsWith('X ='));
   if (vectors.length !== epochs.length) throw new Error(`Horizons returned ${vectors.length} heliocentric vectors for ${epochs.length} epochs.`);
   return { observer, heliocentric, epochs };
+}
+
+/** The acquisition step that asks Horizons for a pinned time-list table again. */
+export const HORIZONS_TIME_LIST = 'horizons-time-list';
+
+/**
+ * The refresh steps that ask Horizons again for exactly the queries a lens's two tables answer: the parameters without
+ * the time list, and the epochs the time list held. Horizons prints the date it was asked in each response's header,
+ * so a refresh compares the rows, not the bytes.
+ */
+export function horizonsRefreshOperations(command: string, starts: readonly number[], observer: string, paths: { observer: string; heliocentric: string }) {
+  const epochs = [...new Set(starts)].sort((a, b) => a - b);
+  const parameters = (query: URLSearchParams) => { query.delete('TLIST'); return Object.fromEntries(query); };
+  return [
+    { kind: HORIZONS_TIME_LIST, groups: ['refresh'], path: paths.observer, url: HORIZONS_API, parameters: parameters(observerQuery(command, [])), epochs },
+    { kind: HORIZONS_TIME_LIST, groups: ['refresh'], path: paths.heliocentric, url: HORIZONS_API, parameters: parameters(heliocentricQuery(command, [])), epochs: heliocentricEpochs(epochs, observer) },
+  ];
+}
+
+/** The rows a time-list query answers, asked in batches as Horizons requires, in order. */
+export async function timeListRows(url: string, parameters: Readonly<Record<string, string>>, epochs: readonly number[], ask: HorizonsRequest = request) {
+  const responses: string[] = [];
+  for (let index = 0; index < epochs.length; index += BATCH) responses.push(await ask(`${url}?${new URLSearchParams({ ...parameters, TLIST: timeList(epochs.slice(index, index + BATCH)) })}`));
+  return horizonsRows(joinResponses(responses));
+}
+
+/** A lens's two refresh steps in its acquisition plan, replacing any it had for those paths. */
+export async function writeHorizonsOperations(objectId: string, sourceDirectory: string) {
+  const { record, frames } = await loadObserverCameraInputs(sourceDirectory);
+  const command = horizonsCommand(JSON.parse(await readFile(resolve(ROOT, 'packages/astronomy/data/bodies', `${objectId}.json`), 'utf8')));
+  const starts: number[] = [];
+  for (const frame of frames) starts.push(zimpolExposure(readFitsHdu(await readFile(resolve(sourceDirectory, frame.path))).header).startJd);
+  const operations = horizonsRefreshOperations(command, starts, await readFile(resolve(sourceDirectory, record.ephemeris.observer), 'utf8'), record.ephemeris);
+  const planPath = resolve(sourceDirectory, 'preparation/acquisition.json'), plan = requireRecord(JSON.parse(await readFile(planPath, 'utf8')), 'acquisition plan');
+  const paths = operations.map(operation => operation.path);
+  plan.operations = [...requireArray(plan.operations, 'acquisition operations').filter(value => !paths.includes(String(requireRecord(value, 'acquisition operation').path))), ...operations];
+  await writeFile(planPath, JSON.stringify(plan, null, 2) + '\n');
+  return operations;
 }
 
 const TABLES = {
@@ -128,7 +173,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   console.log(`${objectId}: target '${command}', ${frames.length} frames, ${tables.epochs.length} exposure starts, ${Math.ceil(tables.epochs.length / BATCH)} request(s) per table.`);
   if (flag === '--write') {
     const declared = await writeHorizonsTables(objectId, sourceDirectory, record.ephemeris, tables);
-    console.log(`Wrote ${record.ephemeris.observer} and ${record.ephemeris.heliocentric} and pinned them in the manifest.`);
+    await writeHorizonsOperations(objectId, sourceDirectory);
+    console.log(`Wrote ${record.ephemeris.observer} and ${record.ephemeris.heliocentric}, pinned them in the manifest and wrote their refresh steps; run pnpm pin:documents ${objectId}.`);
     if (declared.length) console.log(`Declared ${declared.join(' and ')} as new inputs; run pnpm author:sources ${objectId} to bind them.`);
   }
 }

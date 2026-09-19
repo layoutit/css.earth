@@ -10,7 +10,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | --- | --- |
 | Shape | [Released reconstruction](https://observations.lam.fr/astero/3Dshape/324_Bamberga_mpcd.obj) |
 | Size and pole | [Vernazza et al. (2021), Tables 1 and A.1](https://doi.org/10.1051/0004-6361/202141781) |
-| SPHERE photograph | [32 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 8 nights from 2018-12-22 to 2019-01-27](https://observations.lam.fr/astero/Data/324Bamberga/Deconv/) on the [ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/324_Bamberga_adam.obj) |
+| SPHERE photograph | [85 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 15 nights from 2017-06-23 to 2019-01-27](https://observations.lam.fr/astero/Data/324Bamberga/Deconv/) on the [ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/324_Bamberga_adam.obj) |
 | Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/324_Bamberga_param.txt), read latitude-first, and JPL Horizons geometry from Paranal |
 | Photograph registration | [Vernazza et al. (2021), Figure B.39](https://doi.org/10.1051/0004-6361/202141781) |
 
@@ -29,6 +29,13 @@ Measured by `tools/objects/published-comparison.mts` against [Figure B.39](https
 
 | Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2017-06-23 05:45:06 | 0.978 | 0.962 | 0.978 | 0° | -2°, 5° | 57.6° against 46.3° |
+| 2017-07-14 04:34:31 | 0.969 | 0.964 | 0.978 | -10° | -3.5°, -2.5° | 61.3° against 46.8° |
+| 2017-07-20 03:37:55 | 0.965 | 0.959 | 0.977 | 10° | -1°, -0.5° | 62.1° against 46.8° |
+| 2017-07-25 04:51:49 | 0.971 | 0.959 | 0.978 | -10° | -5°, 0.5° | 62.7° against 46.9° |
+| 2017-07-29 02:09:03 | 0.959 | 0.937 | 0.976 | 10° | -2°, 6° | 63.1° against 47.0° |
+| 2017-08-19 01:50:03 | 0.940 | 0.926 | 0.973 | 0° | -8°, 3° | 63.5° against 47.1° |
+| 2017-08-22 02:26:44 | 0.929 | 0.930 | 0.978 | -20° | 3.5°, 7° | 63.4° against 47.1° |
 | 2018-12-22 06:15:22 | 0.955 | 0.942 | 0.975 | -10° | 3°, 5° | 137.7° against 127.4° |
 | 2018-12-23 06:33:58 | 0.962 | 0.948 | 0.975 | 30° | -3°, -2° | 137.7° against 127.4° |
 | 2019-01-09 05:54:15 | 0.974 | 0.971 | 0.976 | 0° | -3.5°, 0° | 136.6° against 128.5° |
@@ -38,7 +45,7 @@ Measured by `tools/objects/published-comparison.mts` against [Figure B.39](https
 | 2019-01-17 04:22:01 | 0.976 | 0.966 | 0.977 | 0° | -3.5°, 0.5° | 135.9° against 129.2° |
 | 2019-01-27 02:58:49 | 0.975 | 0.960 | 0.977 | 0° | -2.5°, 0° | 135.0° against 129.9° |
 
-Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 32 native frames after the centre fit is 1.968 px at our phase; the lowest of a ±30° sweep is 1.864 px at 2°.
+Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 85 native frames after the centre fit is 2.606 px at our phase; the lowest of a ±30° sweep is 2.370 px at -20°.
 <!-- published-comparison:end -->
 
 ### Registration
@@ -48,7 +55,7 @@ Measured by the registration stage when the body was last prepared; the numbers 
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `zimpol` | 32 | 0 | — | — | — | its other 32 frames | 0 of 32 | — | 12 of 32, -6.75° | — | ×1.18 | no verdict |
+| `zimpol` | 85 | 0 | — | — | — | its other 85 frames | 2 of 85 | — | 24 of 85, -6.75° | — | ×1.29 | no verdict |
 
 `zimpol` ships on its paper’s comparison, [Figure B.39](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
 
@@ -71,7 +78,7 @@ Source constraints are uneven and ground-based; a 4096 × 2048 display map does 
 
 Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Bamberga from 13° to 19° north, so surface the survey did not see keeps the missing-imagery grid.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, each apparition placed through the surface it shares with another, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Bamberga from 5° south to 19° north, so surface the survey did not see keeps the missing-imagery grid.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

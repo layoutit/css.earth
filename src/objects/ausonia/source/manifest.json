@@ -1195,8 +1195,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 11649,
-      "expectedSha256": "db4dc97ea0b389748b880a6b313749be103b179599ede7aaeb9b3b95e3bd1b31"
+      "expectedBytes": 14129,
+      "expectedSha256": "d97994e71549ffb10d4abd90fdfbbc2fd29b6413e91b418733439d509b2e510d"
     },
     {
       "path": "preparation/navigation.json",
@@ -1210,8 +1210,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 20510,
-      "expectedSha256": "6516d39c5ad7b244d879027410cc471a7eb093433686e75b31beb5f4fbc259e6"
+      "expectedBytes": 20587,
+      "expectedSha256": "dc25c313a576f8ac81280d830bd215f267265d9c95b17d164712f6aa0324abe8"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

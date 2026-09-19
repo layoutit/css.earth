@@ -1,0 +1,31 @@
+{
+  "id": "simbad-hd-181327",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for HD 181327",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD+181327",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD+181327",
+      "checkedOn": "2026-09-18",
+      "locator": "Basic data: object type high proper-motion star, spectral type F6V; identifiers HIP 95270, Gaia DR3 6643589352010758400"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg",
+      "scope": "citation",
+      "evidence": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD+181327"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

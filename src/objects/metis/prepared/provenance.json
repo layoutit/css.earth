@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "738aadf6633e13518c2417db987b92f3ecf32f43f1eded1aac02b9a1a10f0c44"
+    "sha256": "c2b05e9c245bd9e2d10694bf8a12b250dddecb00a6f89fa930f1040e2a7eacb0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -959,14 +959,14 @@
       "outputs": [
         {
           "url": "/scenes/metis/metis-normal-thumbnail.webp",
-          "bytes": 1412,
-          "sha256": "dee7c785db2f9cf99da273ed1ee2c2c572a2103bbd7d6f438cc8cf016f4e8541",
+          "bytes": 1408,
+          "sha256": "9d0fc00f2a23a17efa0e3533d11dea2cabf093754ff8b3aa59543d8afcec6b78",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/metis/metis-normal-surface@2x.webp",
-          "bytes": 38452,
-          "sha256": "ed8afa018d5eb04d76cc422e1442ddd2b9cd4ce2121b9bbaa281a32f7520d021",
+          "bytes": 38908,
+          "sha256": "85626f01efc1caefafd05607c831b77f1e57c2480bf49021d04c61eaf948e25a",
           "verification": "bytes-verified"
         }
       ],
@@ -1024,8 +1024,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 1550,
-          "sha256": "227a9f792a7a99ba95ba156dfd9671e545aebd2e6a4275b049c425ded7962e63",
+          "bytes": 1566,
+          "sha256": "b37576fba25973329e2d2345b4c87c8912fea02387cefcedfa708206f7c9a509",
           "verification": "bytes-verified"
         }
       ]
@@ -1037,7 +1037,7 @@
   },
   "lastPreparation": {
     "objectId": "metis",
-    "materialSha256": "29bbd76af01407172226c575fd142f5c0ed5acba1470e68850f974ebf830e1b9",
+    "materialSha256": "d5836276c9a2127fc80b3e1c46a42ce28e8a1e5229e55253a1f01b9f1210bf7b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

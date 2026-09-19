@@ -3,6 +3,7 @@ import { castSourceRays } from './geometry.mts';
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
 import type { FootprintSample, ObservationCamera, ObservationFrame, ObservationImage, ObservationPhotometry, PixelGeometry, TransferLimits } from './contract.mts';
 import { pixelAngle } from './cameras.mts';
+import { contourDepth, contourDistances, type ContourDistances } from './contour.mts';
 
 export interface FootprintSource { image: ObservationImage; camera: Pick<ObservationCamera, 'project'>; geometry: PixelGeometry; photometry: Pick<ObservationPhotometry, 'gain' | 'retainsIllumination'> }
 
@@ -105,10 +106,20 @@ export function cameraFrame(options: CameraFrameOptions): ObservationFrame {
   const { maximumSeparationMeters, maximumSeparationFootprints } = limits;
   const separation: number | FootprintSeparation = maximumSeparationFootprints === undefined ? maximumSeparationMeters ?? NaN : { footprints: maximumSeparationFootprints, diagonal };
   const eye = camera.positionMeters, tolerance = limits.visibilityToleranceMeters;
+  // The usable disc is what the footprint accepts from a pixel on its own: a surface point, the archive's verdict, the emission limit
+  // and a photometric gain. Measured once, on first use, for a lens that weights its frames by it.
+  let contour: ContourDistances | undefined;
+  const usable = (i: number) => geometry.reject(i) === null && image.reject(i) === null && geometry.emission(i) <= emissionLimit &&
+    photometry.gain(geometry.incidence(i), geometry.emission(i), geometry.phase(i)) !== null;
   return { id, startTime: image.startTime, filter: image.filter, positionKm: camera.positionKm, cameraKind: camera.kind, geometrySource: geometry.source,
     nominalPixelScaleMeters: camera.nominalPixelScaleMeters, footprint, detector: { image, camera, mesh },
     withCamera: turned => cameraFrame({ ...options, camera: turned, geometry: castSourceRays(turned, mesh, image.width, image.height) }),
     sample: point => sampleFootprint({ image, camera, geometry, photometry }, point, { maximumSeparationMeters: separation, maximumEmissionDegrees: limits.maximumEmissionDegrees }),
+    contourDepth: point => {
+      contour ??= contourDistances(image.width, image.height, usable);
+      const projected = camera.project(point);
+      return projected && projected[2] > 0 ? contourDepth(contour, projected[0], projected[1]) : 0;
+    },
     visible: point => {
       const d0 = point[0] - eye[0], d1 = point[1] - eye[1], d2 = point[2] - eye[2], distance = Math.hypot(d0, d1, d2);
       // A double carries 53 bits: at a telescope's distance the metre tolerance sits below the last place of the range itself, so the
