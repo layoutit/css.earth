@@ -270,7 +270,11 @@ export function referenceFlux(reference: ReferenceSpectrum, angstrom: number): n
 export interface BandStrength {
   /** The width of a complete absorption with the same area, in Ångström: positive where the band absorbs. */
   readonly equivalentWidthAngstrom: number;
+  /** Everything this row's answer is uncertain by: its own noise and the shared spectrum's, added in quadrature. */
   readonly sigmaAngstrom: number;
+  /** The part of that which came from the one spectrum every row was divided by. It is the same draw everywhere, so it does
+   * not average down over a map, and a mean of many cells is no better determined than this. */
+  readonly referenceSigmaAngstrom: number;
   /** The fitted continuum's mean level across the band, in the reflectance the division produced. */
   readonly continuumLevel: number;
   /** The share of the band's pixels that were observed, and the longest run of them that was not. */
@@ -282,7 +286,13 @@ export interface BandStrength {
  * **The grid is kept whole.** A column the reference does not reach, or one the frame has no value for, becomes NaN in place
  * rather than disappearing. Dropping it would close the gap it left, and every later step measures wavelength intervals from
  * the neighbours it can see: a band observed at one pixel would then integrate as though that pixel stood for all of it. */
-export interface Reflectance { readonly wavelengthAngstrom: readonly number[]; readonly value: readonly number[]; readonly error: readonly number[] }
+export interface Reflectance {
+  readonly wavelengthAngstrom: readonly number[]; readonly value: readonly number[]; readonly error: readonly number[];
+  /** The part of the error every row carries alike, because it came from one spectrum they were all divided by. It travels
+   * beside the row's own noise instead of inside it: within one row it behaves like any other per-wavelength error, but it is
+   * the same draw in every row, so it does not average down over a map and must never be added in as though it did. */
+  readonly commonError?: readonly number[];
+}
 export function reflectance(spectrum: { readonly wavelengthAngstrom: readonly number[]; readonly flux: readonly number[]; readonly error: readonly number[] },
   reference: ReferenceSpectrum): Reflectance {
   const wavelengthAngstrom = [...spectrum.wavelengthAngstrom], value: number[] = [], error: number[] = [];
@@ -296,24 +306,36 @@ export function reflectance(spectrum: { readonly wavelengthAngstrom: readonly nu
 
 /** The mean of the rows that show no band, on the one wavelength grid every frame of a scan shares. A row whose grid differs
  * is refused rather than interpolated: the whole point of the ratio is that the two spectra carry the same instrument. */
-export interface FeaturelessAccumulator { wavelengthAngstrom: readonly number[] | null; sum: Float64Array | null; weight: Float64Array | null; rows: number }
-export const newFeatureless = (): FeaturelessAccumulator => ({ wavelengthAngstrom: null, sum: null, weight: null, rows: 0 });
+export interface FeaturelessAccumulator { wavelengthAngstrom: readonly number[] | null; sum: Float64Array | null; weight: Float64Array | null;
+  /** Sum of w²σ² per column, which is the numerator of the weighted mean's own variance. */
+  squaredWeight: Float64Array | null; rows: number }
+export const newFeatureless = (): FeaturelessAccumulator => ({ wavelengthAngstrom: null, sum: null, weight: null, squaredWeight: null, rows: 0 });
 export function addFeatureless(accumulator: FeaturelessAccumulator, row: Reflectance, weight: number) {
-  if (!accumulator.sum) { accumulator.wavelengthAngstrom = row.wavelengthAngstrom; accumulator.sum = new Float64Array(row.value.length); accumulator.weight = new Float64Array(row.value.length); }
+  if (!accumulator.sum) { accumulator.wavelengthAngstrom = row.wavelengthAngstrom; accumulator.sum = new Float64Array(row.value.length);
+    accumulator.weight = new Float64Array(row.value.length); accumulator.squaredWeight = new Float64Array(row.value.length); }
   if (accumulator.wavelengthAngstrom!.length !== row.wavelengthAngstrom.length || accumulator.wavelengthAngstrom![0] !== row.wavelengthAngstrom[0])
     throw new RangeError('A featureless reference is built on one wavelength grid.');
   // A column this row has no value for takes no part in that column's mean, and only in that column's.
   for (let index = 0; index < row.value.length; index++) {
     if (!Number.isFinite(row.value[index]!)) continue;
     accumulator.sum[index]! += weight * row.value[index]!; accumulator.weight![index]! += weight;
+    const sigma = row.error[index]!;
+    accumulator.squaredWeight![index]! += (weight * (Number.isFinite(sigma) ? sigma : 0)) ** 2;
   }
   accumulator.rows++;
 }
-/** The accumulated featureless spectrum, NaN in any column no row filled, or null when no row showed no band. */
+/** The accumulated featureless spectrum and its own error, NaN in any column no row filled, or null when no row showed no
+ * band.
+ *
+ * It is a plain weighted mean, the weight being each row's exposure, not an inverse-variance one: the rows differ in where
+ * they are on the body far more than in how noisy they are, and weighting by noise would quietly let the brightest ground
+ * decide what zero is. Its error is the matching one for that mean, `sqrt(sum w² σ²) / sum w`, so two independent samples of
+ * sigma 0.1 average to sigma 0.0707 rather than to nothing. */
 export function featurelessMean(accumulator: FeaturelessAccumulator): Reflectance | null {
   if (!accumulator.sum || !accumulator.rows) return null;
   const value = Array.from(accumulator.sum, (total, index) => accumulator.weight![index]! > 0 ? total / accumulator.weight![index]! : Number.NaN);
-  return { wavelengthAngstrom: accumulator.wavelengthAngstrom!, value, error: value.map(() => 0) };
+  const error = value.map((_, index) => accumulator.weight![index]! > 0 ? Math.sqrt(accumulator.squaredWeight![index]!) / accumulator.weight![index]! : Number.NaN);
+  return { wavelengthAngstrom: accumulator.wavelengthAngstrom!, value, error };
 }
 
 /** One row against the featureless spectrum. Dividing two spectra the same instrument took at the same resolution cancels
@@ -322,13 +344,20 @@ export function featurelessMean(accumulator: FeaturelessAccumulator): Reflectanc
 export function ratioAgainst(row: Reflectance, featureless: Reflectance): Reflectance {
   if (row.wavelengthAngstrom.length !== featureless.wavelengthAngstrom.length || row.wavelengthAngstrom[0] !== featureless.wavelengthAngstrom[0])
     throw new RangeError('A row and the featureless spectrum are on one wavelength grid.');
-  const value: number[] = [], error: number[] = [];
+  const value: number[] = [], error: number[] = [], commonError: number[] = [];
   for (let index = 0; index < row.value.length; index++) {
-    const divisor = featureless.value[index]!;
-    value.push(divisor > 0 ? row.value[index]! / divisor : Number.NaN);
-    error.push(divisor > 0 ? row.error[index]! / divisor : Number.NaN);
+    const divisor = featureless.value[index]!, numerator = row.value[index]!;
+    if (!(divisor > 0)) { value.push(Number.NaN); error.push(Number.NaN); commonError.push(Number.NaN); continue; }
+    // r = y / d, so the row's own noise enters as sigma_y / d and the spectrum's as r * sigma_d / d. The second is the same
+    // draw for every row, so it is kept apart from the first rather than summed into it.
+    const divisorSigma = featureless.error[index], shared = row.commonError?.[index];
+    value.push(numerator / divisor);
+    error.push(row.error[index]! / divisor);
+    const fromDivisor = Number.isFinite(divisorSigma) ? Math.abs(numerator) * divisorSigma! / (divisor * divisor) : 0;
+    const carried = Number.isFinite(shared) ? shared! / divisor : 0;
+    commonError.push(Math.hypot(fromDivisor, carried));
   }
-  return { wavelengthAngstrom: row.wavelengthAngstrom, value, error };
+  return { wavelengthAngstrom: row.wavelengthAngstrom, value, error, commonError };
 }
 
 /** One row's band strength: a polynomial continuum fitted over the windows that skip the band, and the continuum-removed
@@ -398,14 +427,17 @@ export function bandFromReflectance(row: Reflectance, band: ScanBand): BandStren
     for (let power = 0; power <= order; power++) total += basis[power]! * carried[power]!;
     derivative[fitIndex[anchor]!]! += total;
   }
-  let variance = 0;
+  // One derivative vector, two errors carried through it: the row's own noise, independent from cell to cell, and the shared
+  // spectrum's, which is independent from wavelength to wavelength inside this row but identical in every other row.
+  let variance = 0, common = 0;
   for (let index = 0; index < count; index++) {
-    const sigma = row.error[index]!;
-    if (derivative[index] === 0 || !Number.isFinite(sigma)) continue;
-    variance += (derivative[index]! * sigma) ** 2;
+    if (derivative[index] === 0) continue;
+    const sigma = row.error[index]!, shared = row.commonError?.[index];
+    if (Number.isFinite(sigma)) variance += (derivative[index]! * sigma) ** 2;
+    if (Number.isFinite(shared)) common += (derivative[index]! * shared!) ** 2;
   }
-  return { equivalentWidthAngstrom: equivalentWidth, sigmaAngstrom: Math.sqrt(variance), continuumLevel: level / samples,
-    bandCoverage: observed / bandPixels, longestGapPixels: longestGap };
+  return { equivalentWidthAngstrom: equivalentWidth, sigmaAngstrom: Math.sqrt(variance + common), referenceSigmaAngstrom: Math.sqrt(common),
+    continuumLevel: level / samples, bandCoverage: observed / bandPixels, longestGapPixels: longestGap };
 }
 
 /** The first pass: reflectance straight into the continuum fit, which is what the published method does to each spectrum on

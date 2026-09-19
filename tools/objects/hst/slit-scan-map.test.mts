@@ -259,6 +259,8 @@ test('the featureless spectrum is the weighted mean of the rows put into it, on 
   const mean = featurelessMean(empty);
   assert.deepEqual([...mean!.value], [2.5, 3.5, 4.5]);
   assert.equal(empty.rows, 2);
+  // Errorless rows average to an errorless mean, but a mean of noisy ones carries the noise it is left with.
+  assert.deepEqual([...mean!.error], [0, 0, 0]);
   assert.throws(() => addFeatureless(empty, { wavelengthAngstrom: [100, 200], value: [1, 2], error: [0, 0] }, 1), /one wavelength grid/u);
 });
 
@@ -353,4 +355,50 @@ test('a scan that lost an interior step leaves a gap rather than closing up', ()
   assert.equal(kept.depth[5 * 11 + 1], 4, 'the step at 4 is still at 4');
   assert.throws(() => scanImage({ postArg1Arcsec: [0, 2, 1], value: [[1], [1], [1]], sigma: [[1], [1], [1]],
     discRow: 0, acrossSlitCentreArcsec: 0, plateScaleArcsec: 1, orientatDegrees: 0 }, 5, 1, 'ORIENTAT-90'), /steps rise/u);
+});
+
+test('the featureless spectrum carries its own error, and the ratio passes it on', () => {
+  // Two independent samples of sigma 0.1, equally weighted, average to sigma 0.0707, not to nothing.
+  const two = newFeatureless();
+  addFeatureless(two, { wavelengthAngstrom: [100], value: [1], error: [0.1] }, 1);
+  addFeatureless(two, { wavelengthAngstrom: [100], value: [1], error: [0.1] }, 1);
+  const mean = featurelessMean(two)!;
+  assert.ok(Math.abs(mean.error[0]! - 0.1 / Math.SQRT2) < 1e-12, `${mean.error[0]}`);
+  assert.ok(Math.abs(mean.value[0]! - 1) < 1e-12);
+  // Exposure weighting, and its matching error: sqrt(sum w^2 s^2) / sum w.
+  const weighted = newFeatureless();
+  addFeatureless(weighted, { wavelengthAngstrom: [100], value: [1], error: [0.1] }, 3);
+  addFeatureless(weighted, { wavelengthAngstrom: [100], value: [1], error: [0.2] }, 1);
+  assert.ok(Math.abs(featurelessMean(weighted)!.error[0]! - Math.hypot(3 * 0.1, 1 * 0.2) / 4) < 1e-12);
+
+  // The ratio keeps the row's own noise apart from the spectrum's, and the spectrum's grows with it.
+  const row = { wavelengthAngstrom: [100], value: [2], error: [0.02] };
+  const quiet = ratioAgainst(row, { wavelengthAngstrom: [100], value: [1], error: [0] });
+  const noisy = ratioAgainst(row, { wavelengthAngstrom: [100], value: [1], error: [0.05] });
+  assert.ok(Math.abs(quiet.error[0]! - 0.02) < 1e-12 && quiet.commonError![0] === 0);
+  assert.ok(Math.abs(noisy.error[0]! - 0.02) < 1e-12, 'the row\u2019s own error does not change');
+  assert.ok(Math.abs(noisy.commonError![0]! - 2 * 0.05) < 1e-12, `r * sigma_d / d: ${noisy.commonError![0]}`);
+});
+
+test('a noisy shared reference reaches the band\u2019s sigma, and a Monte Carlo agrees with it', () => {
+  const grid = Array.from({ length: 541 }, (_, index) => 3000 + index * 5);
+  const flat = (error: number) => ({ wavelengthAngstrom: grid, value: grid.map(() => 1), error: grid.map(() => error) });
+  const against = (referenceError: number) => bandFromReflectance(ratioAgainst(flat(1e-6), { wavelengthAngstrom: grid, value: grid.map(() => 1), error: grid.map(() => referenceError) }), BAND)!;
+  const small = against(0.001), large = against(0.01);
+  assert.ok(small.referenceSigmaAngstrom > 0, 'the reference reaches the answer at all');
+  assert.ok(Math.abs(large.referenceSigmaAngstrom / small.referenceSigmaAngstrom - 10) < 0.01, `it grows with the reference: ${large.referenceSigmaAngstrom / small.referenceSigmaAngstrom}`);
+  assert.ok(Math.abs(large.sigmaAngstrom - large.referenceSigmaAngstrom) < 1e-6, 'with a silent row the whole sigma is the reference');
+
+  // Draw the shared reference itself and see the answer move by what the sigma says.
+  let seed = 987654321;
+  const random = () => { seed = (Math.imul(1664525, seed) + 1013904223) >>> 0; return (seed + 0.5) / 4294967296; };
+  const normal = () => Math.sqrt(-2 * Math.log(random())) * Math.cos(2 * Math.PI * random());
+  const widths: number[] = [];
+  for (let trial = 0; trial < 400; trial++) {
+    const drawn = { wavelengthAngstrom: grid, value: grid.map(() => 1 + normal() * 0.01), error: grid.map(() => 0.01) };
+    widths.push(bandFromReflectance(ratioAgainst(flat(1e-6), drawn), BAND)!.equivalentWidthAngstrom);
+  }
+  const mean = widths.reduce((total, value) => total + value, 0) / widths.length;
+  const spread = Math.sqrt(widths.reduce((total, value) => total + (value - mean) ** 2, 0) / (widths.length - 1));
+  assert.ok(Math.abs(large.referenceSigmaAngstrom / spread - 1) < 0.1, `the reported reference sigma is the scatter: ${large.referenceSigmaAngstrom} against ${spread}`);
 });

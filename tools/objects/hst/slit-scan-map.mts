@@ -280,6 +280,8 @@ export interface SlitScanRun {
   readonly coverage: Float32Array;
   /** The spectrum zero is measured against, and how many rows built it. */
   readonly featureless: FeaturelessSet;
+  /** The shared part of every measured row's sigma, the one that came from the featureless spectrum. */
+  readonly referenceSigmas: readonly number[];
   /** The same map with the published continuum alone and no common zero, kept so the receipt can state both. */
   readonly firstPass: ReturnType<typeof combineBodyMaps>;
   readonly mirrored?: { readonly direction: AcrossSlitDirection; readonly overlaps: ReturnType<typeof combineBodyMaps>['overlaps']; readonly peak: { latitude: number; westLongitude: number; value: number } };
@@ -288,7 +290,8 @@ export interface SlitScanRun {
 /** Every used frame's band strengths, one sampling per visit. Frames are read one at a time and nothing is held after the
  * band strengths have been taken out of them. With `featureless`, every row is divided by that spectrum first. */
 async function sampleVisits(definition: SlitScanDefinition, directory: string, frames: readonly PreparedFrame[],
-  registration: readonly VisitRegistration[], reference: ReferenceSpectrum, featureless: Reflectance | null): Promise<Map<string, ScanSampling>> {
+  registration: readonly VisitRegistration[], reference: ReferenceSpectrum, featureless: Reflectance | null,
+  referenceSigmas?: number[]): Promise<Map<string, ScanSampling>> {
   const samplings = new Map<string, ScanSampling>();
   for (const visit of registration) {
     const visitFrames = frames.filter(frame => frame.visit === visit.visit).sort((a, b) => a.postArg1Arcsec - b.postArg1Arcsec);
@@ -298,6 +301,7 @@ async function sampleVisits(definition: SlitScanDefinition, directory: string, f
       for await (const row of frameRows(definition, directory, frame, visit, reference)) {
         const strength = row.reflectance && bandFromReflectance(featureless ? ratioAgainst(row.reflectance, featureless) : row.reflectance, definition.band);
         column.push(strength ? strength.equivalentWidthAngstrom : null); errors.push(strength ? strength.sigmaAngstrom : Number.NaN);
+        if (strength && referenceSigmas) referenceSigmas.push(strength.referenceSigmaAngstrom);
       }
       value.push(column); sigma.push(errors);
     }
@@ -394,7 +398,8 @@ export async function runSlitScan(definition: SlitScanDefinition, options: SlitS
   const featureless = await featurelessReference(definition, options.directory, used, registration, reference);
   log(`${featureless.rows} of ${featureless.onDiscRows} on-disc rows show the band absent and make the spectrum zero is measured against`);
   const firstPassSamplings = await sampleVisits(definition, options.directory, used, registration, reference, null);
-  const samplings = await sampleVisits(definition, options.directory, used, registration, reference, featureless.spectrum);
+  const referenceSigmas: number[] = [];
+  const samplings = await sampleVisits(definition, options.directory, used, registration, reference, featureless.spectrum, referenceSigmas);
   const orientation = await loadOrientation(REPOSITORY, definition.orientation as never, REPOSITORY);
 
   const place = (direction: AcrossSlitDirection, from = samplings) => registration.map(visit =>
@@ -413,7 +418,7 @@ export async function runSlitScan(definition: SlitScanDefinition, options: SlitS
     const maps = place(other), result = combineBodyMaps(maps.map(entry => entry.map), definition.grid.maximumEmissionDegrees);
     mirrored = { direction: other, overlaps: result.overlaps, peak: strongest(definition, result.map.depth) };
   }
-  return { definition, frames, used, registration, direction: definition.acrossSlitDirection, visits, combined, coverage, featureless, firstPass,
+  return { definition, frames, used, registration, direction: definition.acrossSlitDirection, visits, combined, coverage, featureless, firstPass, referenceSigmas,
     ...mirrored ? { mirrored } : {} };
 }
 
@@ -428,6 +433,7 @@ export function scanProduct(definition: SlitScanDefinition, run: SlitScanRun): B
     BANDLO: String(definition.band.bandAngstrom[0]), BANDHI: String(definition.band.bandAngstrom[1]),
     CONTORD: String(definition.band.continuumOrder), ACROSSLT: definition.acrossSlitDirection,
     NVISITS: String(run.visits.length), NFRAMES: String(run.used.length), SCANID: definition.id,
+    COMMONER: String(quantiles(run.referenceSigmas, [0.5])[0] ?? 0),
     ORIGIN: 'cssEarth tools/objects/hst/slit-scan-map.mts',
   }, [
     { name: definition.band.quantity, units: definition.band.units, values: map.depth },
@@ -522,6 +528,13 @@ export function scanReceipt(run: SlitScanRun) {
       /** The median of the ERROR plane: each cell's band pixels' own noise and the anchors' noise carried through the one
        * continuum they share. It is a statistical error, and says nothing about the continuum model's own systematic. */
       medianErrorAngstrom: round(quantiles([...map.error].filter(Number.isFinite), [0.5])[0]!, 2),
+      /** How much of that one sigma came from the spectrum every row was divided by. Every cell carries the same draw of it,
+       * so it does not average down: a median over the whole map is no better determined than this. */
+      referenceError: (() => {
+        const [low, median, high] = quantiles(run.referenceSigmas, [0.25, 0.5, 0.75]);
+        return { rows: run.referenceSigmas.length, lowQuartile: round(low!, 2), median: round(median!, 2), highQuartile: round(high!, 2),
+          commonToEveryCell: true, averagesDownOverTheMap: false };
+      })(),
       strongest: { westLongitude: round(peak.westLongitude, 1), latitude: round(peak.latitude, 1), value: round(peak.value, 2) },
       hemispheres: hemispheres(run.combined) },
     /** The test of the zero: where the published account says there is no band, the median should sit within its own error of
