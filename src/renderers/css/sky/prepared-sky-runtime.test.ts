@@ -257,27 +257,31 @@ test('shared universe draws only resolved nebulae and never prefetches their len
     expect(loadVolumeLens).not.toHaveBeenCalled();
     expect(findBank(bank.id)).toBeUndefined();
     expect(findBank('galactic-default')).toBeUndefined();
-    // This bank stands independent of the general galactic fade (contextVisibility), which stays at
-    // zero throughout this near-nebula distance range; that fade is what an unloaded bank's own fetch
-    // trigger rides by default (see prepared-universe-runtime.ts), so proximity alone would never
-    // start it here. Selecting it, exactly as the catalogue does, must still fetch and mount it.
-    mounted.selectVolumeLens(bank.id, 'optical');
-    expect(loadVolumeLens).toHaveBeenCalledExactlyOnceWith(bank.id);
-    await vi.waitFor(() => expect(findBank(bank.id)).toBeDefined());
     // A 0.1 pc radius spans 30 px at 2 pc and 1.25 px at 48 pc, using the default visibility thresholds.
     for (const [distancePc, visible] of [[98, false], [52, true], [98, false], [52, true]] as const) {
       const camera: WorldCameraPose = { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
         pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distancePc * parsecM],
           orientationXyzw: [0, 0, 0, 1] } };
       mounted.publish(camera, viewport);
+      // The first crossing into view is what triggers the fetch for both banks (the fetch gate does not
+      // check contextVisibility); give their promises a turn to resolve and mount before reading the DOM.
+      if (visible && !findBank(bank.id)) {
+        await vi.waitFor(() => { expect(findBank(bank.id)).toBeDefined(); expect(findBank('galactic-default')).toBeDefined(); });
+        mounted.publish(camera, viewport);
+      }
       expect(milkyWay.dataset.volumeOpacity).toBe('0');
       expect(milkyWay.style.display).toBe('none');
-      // The always-galactic bank never comes into view at these distances, so it must never be fetched.
-      expect(findBank('galactic-default')).toBeUndefined();
+      const galactic = findBank('galactic-default');
       const independent = findBank(bank.id);
+      if (!visible && !independent) continue; // not yet fetched: the first (invisible) distance, nothing to check
       expect(independent).toBeDefined();
       expect(independent!.style.opacity).toBe(visible ? '1' : '0');
       expect(independent!.style.display).toBe(visible ? 'block' : 'none');
+      // The always-galactic bank is fetched right alongside it (same silhouette) but stays invisible:
+      // rendering, unlike fetching, still waits on the general galactic fade, which is zero here.
+      expect(galactic).toBeDefined();
+      expect(galactic!.style.opacity).toBe('0');
+      expect(galactic!.style.display).toBe('none');
       if (visible) {
         const cloud = independent!.children.find(node => node.className === 'prepared-volume-lens-cloud')!;
         const axes = cloud.children.filter(node => node.className === 'css-volume-projection');
@@ -285,9 +289,12 @@ test('shared universe draws only resolved nebulae and never prefetches their len
         expect(Number(independent!.dataset.cloudOpacity)).toBeGreaterThan(0);
         expect(axes.some(axis => axis.style.visibility === 'visible' && Number(axis.style.opacity) > 0)).toBe(true);
         expect([...new Set(images(independent!))]).toEqual(['url("/nebula/nearby-nebula/z.webp")']);
+        expect(images(galactic!)).toEqual([]);
       }
     }
-    expect(loadVolumeLens).toHaveBeenCalledExactlyOnceWith(bank.id);
+    expect(loadVolumeLens).toHaveBeenCalledTimes(2);
+    expect(loadVolumeLens).toHaveBeenCalledWith(bank.id);
+    expect(loadVolumeLens).toHaveBeenCalledWith('galactic-default');
     // Trigger the actual universe warm-up: it must finish without any nebula
     // URL, even for legacy banks with no distant-image payload or leaf bounds.
     mounted.publish({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
@@ -297,11 +304,52 @@ test('shared universe draws only resolved nebulae and never prefetches their len
     const expected = volume.resources.filter(resource => !skyPaths.has(resource.path)).map(resource => `/volume/${resource.path}`);
     await vi.waitFor(() => expect(fetchResource).toHaveBeenCalledTimes(expected.length));
     expect(fetchResource.mock.calls.map(([url]) => url)).toEqual(expected);
-    // The galaxy warm-up prefetches the Milky Way's own resources only; it must never load a lens bank.
-    expect(loadVolumeLens).toHaveBeenCalledExactlyOnceWith(bank.id);
+    // The galaxy warm-up prefetches the Milky Way's own resources only; it must never load a lens bank
+    // beyond the two already fetched by proximity above.
+    expect(loadVolumeLens).toHaveBeenCalledTimes(2);
   } finally { mounted.destroy(); }
   expect(stage.children).toEqual([]);
   expect(document.defaultView.pending.size).toBe(0);
+});
+
+test('an unloaded bank is fetched by proximity even while the general galactic fade is still zero', async () => {
+  vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
+  const base = new URL('../../../', import.meta.url), parsecM = 3.085677581491367e16;
+  const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
+    originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 50 * parsecM],
+    localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: .1 * parsecM, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };
+  const nebula: PreparedCssVolume = { schema: 'cssearth-css-volume@1', id: 'proximity-nebula', frame, anchors: [],
+    stacks: (['x', 'y', 'z'] as const).map(axis => ({ axis, leaves: [{ id: `${axis}-0`, centerUnits: [0, 0, 0],
+      texturePath: `${axis}.webp`, widthPx: 1, heightPx: 1,
+      style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
+        backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
+    resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })),
+    provenance: {}, approximation: {} };
+  // Default contextVisibility ('galactic'): this bank's eventual render still waits on the general
+  // fade, but its fetch must not, or a future bank baked this way would never load by proximity at all.
+  const bank: PreparedVolumeLenses = { schema: 'cssearth-volume-lenses@1', id: 'proximity-nebula', defaultLens: 'optical',
+    framingRadiusUnits: 1, lenses: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
+      description: 'Prepared proximity nebula', sourceUrl: 'https://example.org/nebula', volume: nebula,
+      brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } }] };
+  const document = new FakeDocument(), stage = document.createElement();
+  const loadVolumeLens = vi.fn((id: string) => Promise.resolve({ payload: bank, resolveResource: (path: string) => `/nebula/${id}/${path}` }));
+  const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
+    resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
+    volumeLensBanks: [{ id: bank.id, frame }], loadVolumeLens });
+  const mounted = universe.mount(stage as unknown as HTMLElement);
+  try {
+    const root = mounted.root as unknown as FakeElement;
+    const milkyWay = root.children.find(node => node.className === 'prepared-volume-context')!;
+    // 2 pc from the bank, 52 pc from the focus: well within its visibility threshold, but nowhere
+    // near the Milky Way's own fade-in distance, so the general galactic fade reads zero here.
+    const near: WorldCameraPose = { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
+      pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 52 * parsecM], orientationXyzw: [0, 0, 0, 1] } };
+    mounted.publish(near, viewport);
+    expect(milkyWay.dataset.volumeOpacity).toBe('0');
+    expect(loadVolumeLens).toHaveBeenCalledExactlyOnceWith(bank.id);
+  } finally { mounted.destroy(); }
 });
 
 test('selecting a nebula loads its bank on demand even while it is out of view', async () => {

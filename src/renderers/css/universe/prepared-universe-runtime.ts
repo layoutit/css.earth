@@ -425,13 +425,15 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             for (const [index, bank] of lensBanks.entries()) {
               const { frame, radiusUnits, visibility } = lensFraming[index]!;
               if (!bank) {
-                // Not fetched yet, so whether it stands independent of the general galactic fade is
-                // unknown; every declared bank defaults to riding that fade (contextVisibility 'galactic'),
-                // so the same gate that governs the eventual render also governs whether to start the
-                // fetch. A bank that declares itself independent still reaches its payload through
-                // selection (selectVolumeLens/subscribeVolumeLens trigger unconditionally) even before
-                // the general fade brings it into this proximity check.
-                if (lensEnabled[index] && volumeOpacity > 0 && projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) > 0) {
+                // The fetch gate and the render gate are deliberately different. Rendering multiplies by
+                // contextOpacity (the general galactic fade, 'galactic' by default) below, once the payload
+                // is known to declare it; fetching never does. A bank close enough on screen to matter is
+                // reason enough to go get it, even while the galaxy itself is still fully faded out — a
+                // future bank baked with contextVisibility 'independent' otherwise would never be fetched by
+                // proximity at all, only by explicit selection. Fetching a 'galactic' bank a little earlier
+                // than its fade would have shown it is cheap; never fetching an 'independent' one is a blank
+                // nebula.
+                if (lensEnabled[index] && projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) > 0) {
                   void ensureLensLoaded(index).catch(() => {});
                 }
                 continue;
