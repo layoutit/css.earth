@@ -34,6 +34,8 @@ For a body's sources, processing, evidence and known problems, read its
 | What the JunoCam archive holds, which of our objects it photographed, and which images are measured or cast | [JunoCam archive ledger](junocam-ledger.md) |
 | Keck observations pinned from KOA, re-reduced on the archive's own pipeline, and checked against the archive's own cube | [Keck](keck.md) |
 | What the Keck archive holds by instrument for this project's objects, and what can be re-reduced here | [What Keck holds](keck-ledger.md) |
+| Gemini raw frames re-reduced on DRAGONS: the CADC route, the archive's own calibration association, and what agrees | [Gemini Observatory](gemini.md) |
+| What the Gemini archive holds for our bodies, by instrument, and what this toolkit has proven | [Gemini ledger](gemini-ledger.md) |
 | Connecting prepared outputs to their inputs | [Prepared object provenance](object-provenance.md) |
 | Published source identities, input bindings and usage links | [Sources catalogue](sources-catalogue.md) |
 | Missions, spacecraft and dataset attribution | [Exploration catalogue](architecture/exploration-catalog.md) |

@@ -1,0 +1,2450 @@
+{
+  "schema": "cssearth-gemini-ledger@1",
+  "collection": "GEMINI",
+  "archive": "CADC, which mirrors the Gemini raw archive as CAOM-2 collection GEMINI and answers anonymously. archive.gemini.edu refuses anonymous requests from this machine.",
+  "measured": "2026-09-19",
+  "publicOnly": "Every count here is of planes whose dataRelease has passed, so it is a census of what anyone can download without an account.",
+  "instruments": [
+    {
+      "instrument": "GMOS-N",
+      "frames": 1041973,
+      "science": 156129
+    },
+    {
+      "instrument": "GMOS-S",
+      "frames": 964173,
+      "science": 146963
+    },
+    {
+      "instrument": "NIRI",
+      "frames": 937721,
+      "science": 406596
+    },
+    {
+      "instrument": "GNIRS",
+      "frames": 607102,
+      "science": 112642
+    },
+    {
+      "instrument": "F2",
+      "frames": 270242,
+      "science": 130955
+    },
+    {
+      "instrument": "NIFS",
+      "frames": 130945,
+      "science": 29136
+    },
+    {
+      "instrument": "MAROON-X",
+      "frames": 112622,
+      "science": 8880
+    },
+    {
+      "instrument": "PHOENIX",
+      "frames": 112525,
+      "science": 74202
+    },
+    {
+      "instrument": "hrwfs",
+      "frames": 108562,
+      "science": 103893
+    },
+    {
+      "instrument": "GPI",
+      "frames": 94894,
+      "science": 51644
+    },
+    {
+      "instrument": "Alopeke",
+      "frames": 64694,
+      "science": 64656
+    },
+    {
+      "instrument": "Zorro",
+      "frames": 62179,
+      "science": 62173
+    },
+    {
+      "instrument": "NICI",
+      "frames": 60593,
+      "science": 44262
+    },
+    {
+      "instrument": "GSAOI",
+      "frames": 50486,
+      "science": 13761
+    },
+    {
+      "instrument": "IGRINS",
+      "frames": 43058,
+      "science": 21609
+    },
+    {
+      "instrument": "Hokupaa+QUIRC",
+      "frames": 39713,
+      "science": 37611
+    },
+    {
+      "instrument": "GRACES",
+      "frames": 35024,
+      "science": 19177
+    },
+    {
+      "instrument": "IGRINS-2",
+      "frames": 34726,
+      "science": 5915
+    },
+    {
+      "instrument": "TReCS",
+      "frames": 25164,
+      "science": 12959
+    },
+    {
+      "instrument": "michelle",
+      "frames": 23174,
+      "science": 4753
+    },
+    {
+      "instrument": "GHOST",
+      "frames": 19784,
+      "science": 9807
+    },
+    {
+      "instrument": "FLAMINGOS",
+      "frames": 17035,
+      "science": 12090
+    },
+    {
+      "instrument": "TEXES",
+      "frames": 3055,
+      "science": 1739
+    },
+    {
+      "instrument": "CIRPASS",
+      "frames": 2092,
+      "science": 620
+    },
+    {
+      "instrument": "bHROS",
+      "frames": 1571,
+      "science": 401
+    },
+    {
+      "instrument": "OSCIR",
+      "frames": 566,
+      "science": 436
+    },
+    {
+      "instrument": "GMOS",
+      "frames": 89,
+      "science": 89
+    }
+  ],
+  "objects": [
+    {
+      "id": "jupiter",
+      "targets": [
+        "Jupiter",
+        "Jupiter.eph"
+      ],
+      "science": 28630,
+      "acquisition": 227,
+      "instruments": [
+        "F2",
+        "GMOS-S",
+        "GNIRS",
+        "GSAOI",
+        "NIRI",
+        "PHOENIX",
+        "TEXES",
+        "TReCS"
+      ],
+      "programmes": 46
+    },
+    {
+      "id": "io",
+      "targets": [
+        "Io",
+        "Io.eph",
+        "io"
+      ],
+      "science": 6620,
+      "acquisition": 1129,
+      "instruments": [
+        "GMOS-S",
+        "GNIRS",
+        "Hokupaa+QUIRC",
+        "IGRINS",
+        "NIFS",
+        "NIRI"
+      ],
+      "programmes": 35
+    },
+    {
+      "id": "titan",
+      "targets": [
+        "Titan",
+        "Titan.eph",
+        "titan"
+      ],
+      "science": 6422,
+      "acquisition": 1047,
+      "instruments": [
+        "GNIRS",
+        "GPI",
+        "Hokupaa+QUIRC",
+        "NICI",
+        "NIFS",
+        "NIRI"
+      ],
+      "programmes": 43
+    },
+    {
+      "id": "uranus",
+      "targets": [
+        "Uranus",
+        "Uranus.eph"
+      ],
+      "science": 4268,
+      "acquisition": 628,
+      "instruments": [
+        "Alopeke",
+        "F2",
+        "GNIRS",
+        "IGRINS",
+        "NIFS",
+        "NIRI",
+        "PHOENIX",
+        "TEXES",
+        "Zorro"
+      ],
+      "programmes": 26
+    },
+    {
+      "id": "pluto",
+      "targets": [
+        "PLUTO",
+        "Pluto",
+        "pluto"
+      ],
+      "science": 1391,
+      "acquisition": 62,
+      "instruments": [
+        "GMOS-N",
+        "GMOS-S",
+        "GNIRS",
+        "Hokupaa+QUIRC",
+        "NICI",
+        "NIFS",
+        "NIRI",
+        "PHOENIX",
+        "Zorro"
+      ],
+      "programmes": 19
+    },
+    {
+      "id": "saturn",
+      "targets": [
+        "Saturn"
+      ],
+      "science": 1295,
+      "acquisition": 93,
+      "instruments": [
+        "GNIRS",
+        "PHOENIX",
+        "TEXES"
+      ],
+      "programmes": 7
+    },
+    {
+      "id": "didymos",
+      "targets": [
+        "Didymos"
+      ],
+      "science": 1032,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N"
+      ],
+      "programmes": 3
+    },
+    {
+      "id": "quaoar",
+      "targets": [
+        "Quaoar",
+        "quaoar"
+      ],
+      "science": 667,
+      "acquisition": 2,
+      "instruments": [
+        "NIFS",
+        "NIRI"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "sedna",
+      "targets": [
+        "Sedna"
+      ],
+      "science": 626,
+      "acquisition": 79,
+      "instruments": [
+        "GMOS-N",
+        "NIRI"
+      ],
+      "programmes": 4
+    },
+    {
+      "id": "wasp-43b",
+      "targets": [
+        "WASP 43b",
+        "WASP-43b"
+      ],
+      "science": 556,
+      "acquisition": 11,
+      "instruments": [
+        "F2",
+        "IGRINS"
+      ],
+      "programmes": 3
+    },
+    {
+      "id": "m1",
+      "targets": [
+        "M 1-21",
+        "M 1-78",
+        "M1-11",
+        "M1-16",
+        "M1-26",
+        "M1-34",
+        "M1-40",
+        "M1-71",
+        "M1-78",
+        "m1"
+      ],
+      "science": 527,
+      "acquisition": 47,
+      "instruments": [
+        "GHOST",
+        "GMOS-N",
+        "GMOS-S",
+        "GNIRS",
+        "GRACES",
+        "GSAOI",
+        "NIRI",
+        "PHOENIX",
+        "michelle"
+      ],
+      "programmes": 8
+    },
+    {
+      "id": "neptune",
+      "targets": [
+        "Neptune"
+      ],
+      "science": 396,
+      "acquisition": 70,
+      "instruments": [
+        "Alopeke",
+        "GPI",
+        "GSAOI",
+        "NIFS",
+        "NIRI",
+        "TEXES",
+        "TReCS",
+        "michelle"
+      ],
+      "programmes": 10
+    },
+    {
+      "id": "europa",
+      "targets": [
+        "Europa",
+        "Europa.eph"
+      ],
+      "science": 340,
+      "acquisition": 146,
+      "instruments": [
+        "GNIRS",
+        "GPI",
+        "NIFS",
+        "NIRI",
+        "TEXES"
+      ],
+      "programmes": 20
+    },
+    {
+      "id": "gyptis",
+      "targets": [
+        "Gyptis"
+      ],
+      "science": 337,
+      "acquisition": 62,
+      "instruments": [
+        "GNIRS"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "betelgeuse",
+      "targets": [
+        "Betelgeuse"
+      ],
+      "science": 335,
+      "acquisition": 7,
+      "instruments": [
+        "Alopeke",
+        "NICI"
+      ],
+      "programmes": 4
+    },
+    {
+      "id": "hd-189733",
+      "targets": [
+        "HD 189733"
+      ],
+      "science": 325,
+      "acquisition": 0,
+      "instruments": [
+        "IGRINS-2"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "themis",
+      "targets": [
+        "Themis"
+      ],
+      "science": 280,
+      "acquisition": 54,
+      "instruments": [
+        "GMOS-N",
+        "GNIRS"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "iapetus",
+      "targets": [
+        "Iapetus"
+      ],
+      "science": 249,
+      "acquisition": 0,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "triton",
+      "targets": [
+        "Triton"
+      ],
+      "science": 240,
+      "acquisition": 17,
+      "instruments": [
+        "GNIRS",
+        "NIRI",
+        "PHOENIX"
+      ],
+      "programmes": 4
+    },
+    {
+      "id": "psyche",
+      "targets": [
+        "Psyche"
+      ],
+      "science": 236,
+      "acquisition": 101,
+      "instruments": [
+        "NIRI",
+        "michelle"
+      ],
+      "programmes": 5
+    },
+    {
+      "id": "hestia",
+      "targets": [
+        "Hestia"
+      ],
+      "science": 186,
+      "acquisition": 3,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "hyperion",
+      "targets": [
+        "Hyperion"
+      ],
+      "science": 159,
+      "acquisition": 0,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "ymir",
+      "targets": [
+        "Ymir"
+      ],
+      "science": 121,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N",
+        "NIRI"
+      ],
+      "programmes": 3
+    },
+    {
+      "id": "ceres",
+      "targets": [
+        "Ceres",
+        "ceres"
+      ],
+      "science": 116,
+      "acquisition": 3,
+      "instruments": [
+        "GMOS-N",
+        "GMOS-S",
+        "GNIRS",
+        "GPI",
+        "GRACES",
+        "TEXES"
+      ],
+      "programmes": 15
+    },
+    {
+      "id": "mars",
+      "targets": [
+        "Mars",
+        "Mars!",
+        "mars"
+      ],
+      "science": 109,
+      "acquisition": 0,
+      "instruments": [
+        "F2",
+        "GMOS-N",
+        "GMOS-S",
+        "GNIRS",
+        "NIRI",
+        "PHOENIX"
+      ],
+      "programmes": 6
+    },
+    {
+      "id": "callisto",
+      "targets": [
+        "Callisto"
+      ],
+      "science": 108,
+      "acquisition": 12,
+      "instruments": [
+        "NIFS",
+        "NIRI"
+      ],
+      "programmes": 3
+    },
+    {
+      "id": "patroclus",
+      "targets": [
+        "Patroclus"
+      ],
+      "science": 105,
+      "acquisition": 11,
+      "instruments": [
+        "GMOS-S",
+        "NIRI",
+        "Zorro"
+      ],
+      "programmes": 3
+    },
+    {
+      "id": "m8",
+      "targets": [
+        "M8-1",
+        "M8-2",
+        "M8-3"
+      ],
+      "science": 105,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-S"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "eros",
+      "targets": [
+        "Eros"
+      ],
+      "science": 104,
+      "acquisition": 0,
+      "instruments": [
+        "Zorro"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "hermione",
+      "targets": [
+        "Hermione"
+      ],
+      "science": 97,
+      "acquisition": 51,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 3
+    },
+    {
+      "id": "m33",
+      "targets": [
+        "M33",
+        "M33-1",
+        "M33-2"
+      ],
+      "science": 81,
+      "acquisition": 69,
+      "instruments": [
+        "GMOS-N",
+        "NIFS"
+      ],
+      "programmes": 3
+    },
+    {
+      "id": "lmc",
+      "targets": [
+        "LMC",
+        "LMC-1",
+        "LMC-14",
+        "LMC-18",
+        "LMC-21",
+        "LMC-25",
+        "LMC-6",
+        "LMC-8",
+        "lmc",
+        "lmc-835"
+      ],
+      "science": 78,
+      "acquisition": 49,
+      "instruments": [
+        "GHOST",
+        "GMOS-S",
+        "GSAOI"
+      ],
+      "programmes": 6
+    },
+    {
+      "id": "elektra",
+      "targets": [
+        "Elektra"
+      ],
+      "science": 75,
+      "acquisition": 36,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "phocaea",
+      "targets": [
+        "Phocaea"
+      ],
+      "science": 73,
+      "acquisition": 0,
+      "instruments": [
+        "Hokupaa+QUIRC"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "wasp-43",
+      "targets": [
+        "WASP 43"
+      ],
+      "science": 73,
+      "acquisition": 0,
+      "instruments": [
+        "IGRINS"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "sylvia",
+      "targets": [
+        "SYLVIA",
+        "Sylvia"
+      ],
+      "science": 68,
+      "acquisition": 40,
+      "instruments": [
+        "NIRI",
+        "michelle"
+      ],
+      "programmes": 4
+    },
+    {
+      "id": "ganymede",
+      "targets": [
+        "Ganymede"
+      ],
+      "science": 67,
+      "acquisition": 65,
+      "instruments": [
+        "GMOS-S",
+        "GNIRS",
+        "NIRI"
+      ],
+      "programmes": 10
+    },
+    {
+      "id": "charon",
+      "targets": [
+        "Charon"
+      ],
+      "science": 66,
+      "acquisition": 52,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "miranda",
+      "targets": [
+        "Miranda"
+      ],
+      "science": 64,
+      "acquisition": 53,
+      "instruments": [
+        "GNIRS"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "salacia",
+      "targets": [
+        "Salacia"
+      ],
+      "science": 60,
+      "acquisition": 0,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 3
+    },
+    {
+      "id": "emma",
+      "targets": [
+        "Emma"
+      ],
+      "science": 58,
+      "acquisition": 29,
+      "instruments": [
+        "NIRI",
+        "michelle"
+      ],
+      "programmes": 3
+    },
+    {
+      "id": "hd-181327",
+      "targets": [
+        "HD 181327"
+      ],
+      "science": 58,
+      "acquisition": 0,
+      "instruments": [
+        "GPI",
+        "TReCS"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "pallas",
+      "targets": [
+        "Pallas"
+      ],
+      "science": 54,
+      "acquisition": 10,
+      "instruments": [
+        "GMOS-N",
+        "GPI",
+        "GRACES",
+        "TEXES"
+      ],
+      "programmes": 9
+    },
+    {
+      "id": "ixion",
+      "targets": [
+        "Ixion"
+      ],
+      "science": 53,
+      "acquisition": 0,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "vesta",
+      "targets": [
+        "Vesta"
+      ],
+      "science": 52,
+      "acquisition": 17,
+      "instruments": [
+        "GMOS-N",
+        "GRACES",
+        "GSAOI",
+        "MAROON-X",
+        "michelle"
+      ],
+      "programmes": 7
+    },
+    {
+      "id": "apophis",
+      "targets": [
+        "Apophis"
+      ],
+      "science": 50,
+      "acquisition": 19,
+      "instruments": [
+        "GNIRS"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "phoebe",
+      "targets": [
+        "Phoebe"
+      ],
+      "science": 49,
+      "acquisition": 0,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "palma",
+      "targets": [
+        "Palma"
+      ],
+      "science": 48,
+      "acquisition": 11,
+      "instruments": [
+        "GNIRS"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "phaethon",
+      "targets": [
+        "Phaethon"
+      ],
+      "science": 48,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "camilla",
+      "targets": [
+        "Camilla"
+      ],
+      "science": 47,
+      "acquisition": 14,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "paaliaq",
+      "targets": [
+        "Paaliaq"
+      ],
+      "science": 47,
+      "acquisition": 0,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "sycorax",
+      "targets": [
+        "Sycorax"
+      ],
+      "science": 47,
+      "acquisition": 0,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "huya",
+      "targets": [
+        "Huya"
+      ],
+      "science": 42,
+      "acquisition": 0,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "m42",
+      "targets": [
+        "m42"
+      ],
+      "science": 42,
+      "acquisition": 0,
+      "instruments": [
+        "Alopeke"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "m31",
+      "targets": [
+        "M31"
+      ],
+      "science": 38,
+      "acquisition": 24,
+      "instruments": [
+        "GMOS-N",
+        "Hokupaa+QUIRC"
+      ],
+      "programmes": 3
+    },
+    {
+      "id": "himalia",
+      "targets": [
+        "Himalia"
+      ],
+      "science": 34,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N",
+        "NIRI"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "dinkinesh",
+      "targets": [
+        "Dinkinesh"
+      ],
+      "science": 33,
+      "acquisition": 35,
+      "instruments": [
+        "F2"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "daphne",
+      "targets": [
+        "Daphne"
+      ],
+      "science": 31,
+      "acquisition": 10,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "eugenia",
+      "targets": [
+        "Eugenia"
+      ],
+      "science": 31,
+      "acquisition": 8,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "albiorix",
+      "targets": [
+        "Albiorix"
+      ],
+      "science": 31,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N",
+        "NIRI"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "minerva",
+      "targets": [
+        "Minerva"
+      ],
+      "science": 30,
+      "acquisition": 13,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "venus",
+      "targets": [
+        "Venus"
+      ],
+      "science": 29,
+      "acquisition": 0,
+      "instruments": [
+        "F2",
+        "GMOS-N",
+        "GMOS-S"
+      ],
+      "programmes": 6
+    },
+    {
+      "id": "moon",
+      "targets": [
+        "Moon"
+      ],
+      "science": 27,
+      "acquisition": 6,
+      "instruments": [
+        "F2",
+        "GMOS-N",
+        "GRACES"
+      ],
+      "programmes": 4
+    },
+    {
+      "id": "siarnaq",
+      "targets": [
+        "Siarnaq"
+      ],
+      "science": 26,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N",
+        "NIRI"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "hebe",
+      "targets": [
+        "Hebe"
+      ],
+      "science": 25,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N",
+        "GMOS-S",
+        "GNIRS",
+        "NIFS"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "juno",
+      "targets": [
+        "Juno"
+      ],
+      "science": 24,
+      "acquisition": 18,
+      "instruments": [
+        "GMOS-N",
+        "IGRINS-2",
+        "michelle"
+      ],
+      "programmes": 4
+    },
+    {
+      "id": "thrymr",
+      "targets": [
+        "Thrymr"
+      ],
+      "science": 24,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "kleopatra",
+      "targets": [
+        "Kleopatra"
+      ],
+      "science": 23,
+      "acquisition": 17,
+      "instruments": [
+        "NIRI",
+        "TReCS"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "astraea",
+      "targets": [
+        "Astraea"
+      ],
+      "science": 21,
+      "acquisition": 34,
+      "instruments": [
+        "GHOST",
+        "GMOS-N",
+        "GNIRS",
+        "NIFS",
+        "NIRI",
+        "michelle"
+      ],
+      "programmes": 5
+    },
+    {
+      "id": "kalliope",
+      "targets": [
+        "Kalliope"
+      ],
+      "science": 19,
+      "acquisition": 20,
+      "instruments": [
+        "NIRI",
+        "TEXES"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "mercury",
+      "targets": [
+        "Mercury"
+      ],
+      "science": 18,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N",
+        "GNIRS"
+      ],
+      "programmes": 4
+    },
+    {
+      "id": "metis-9",
+      "targets": [
+        "9 Metis"
+      ],
+      "science": 16,
+      "acquisition": 0,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "suttungr",
+      "targets": [
+        "Suttungr"
+      ],
+      "science": 12,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "titania",
+      "targets": [
+        "Titania"
+      ],
+      "science": 12,
+      "acquisition": 0,
+      "instruments": [
+        "TReCS"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "oberon",
+      "targets": [
+        "Oberon"
+      ],
+      "science": 8,
+      "acquisition": 2,
+      "instruments": [
+        "TReCS"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "eris",
+      "targets": [
+        "Eris"
+      ],
+      "science": 7,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "metis",
+      "targets": [
+        "Metis"
+      ],
+      "science": 6,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "niobe",
+      "targets": [
+        "Niobe"
+      ],
+      "science": 6,
+      "acquisition": 0,
+      "instruments": [
+        "TReCS"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "polaris",
+      "targets": [
+        "Polaris"
+      ],
+      "science": 6,
+      "acquisition": 0,
+      "instruments": [
+        "Alopeke"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "tarvos",
+      "targets": [
+        "Tarvos"
+      ],
+      "science": 6,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "flora",
+      "targets": [
+        "Flora"
+      ],
+      "science": 5,
+      "acquisition": 0,
+      "instruments": [
+        "TEXES"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "siwa",
+      "targets": [
+        "Siwa"
+      ],
+      "science": 5,
+      "acquisition": 0,
+      "instruments": [
+        "michelle"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "hektor",
+      "targets": [
+        "Hektor"
+      ],
+      "science": 4,
+      "acquisition": 3,
+      "instruments": [
+        "GMOS-N"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "kiviuq",
+      "targets": [
+        "Kiviuq"
+      ],
+      "science": 4,
+      "acquisition": 0,
+      "instruments": [
+        "GMOS-N"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "orus",
+      "targets": [
+        "Orus"
+      ],
+      "science": 3,
+      "acquisition": 3,
+      "instruments": [
+        "GMOS-N"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "doris",
+      "targets": [
+        "Doris"
+      ],
+      "science": 3,
+      "acquisition": 0,
+      "instruments": [
+        "michelle"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "interamnia",
+      "targets": [
+        "Interamnia"
+      ],
+      "science": 1,
+      "acquisition": 2,
+      "instruments": [
+        "michelle"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "helix",
+      "targets": [
+        "helix"
+      ],
+      "science": 1,
+      "acquisition": 0,
+      "instruments": [
+        "PHOENIX"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "victoria",
+      "targets": [
+        "victoria"
+      ],
+      "science": 1,
+      "acquisition": 0,
+      "instruments": [
+        "NIFS"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "eunomia",
+      "targets": [
+        "Eunomia"
+      ],
+      "science": 0,
+      "acquisition": 14,
+      "instruments": [
+        "michelle"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "iris",
+      "targets": [
+        "Iris"
+      ],
+      "science": 0,
+      "acquisition": 8,
+      "instruments": [
+        "michelle"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "diomedes",
+      "targets": [
+        "Diomedes"
+      ],
+      "science": 0,
+      "acquisition": 6,
+      "instruments": [
+        "GMOS-N"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "leucus",
+      "targets": [
+        "Leucus"
+      ],
+      "science": 0,
+      "acquisition": 6,
+      "instruments": [
+        "GMOS-N"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "euphrosyne",
+      "targets": [
+        "Euphrosyne"
+      ],
+      "science": 0,
+      "acquisition": 5,
+      "instruments": [
+        "michelle"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "ariel",
+      "targets": [
+        "Ariel"
+      ],
+      "science": 0,
+      "acquisition": 3,
+      "instruments": [
+        "NIRI"
+      ],
+      "programmes": 2
+    },
+    {
+      "id": "eurybates",
+      "targets": [
+        "Eurybates"
+      ],
+      "science": 0,
+      "acquisition": 3,
+      "instruments": [
+        "GMOS-N"
+      ],
+      "programmes": 1
+    },
+    {
+      "id": "cybele",
+      "targets": [
+        "Cybele"
+      ],
+      "science": 0,
+      "acquisition": 2,
+      "instruments": [
+        "michelle"
+      ],
+      "programmes": 1
+    }
+  ],
+  "galileanMoons": {
+    "note": "Of the four Galilean moons, all four have public Gemini science frames (io, europa, ganymede, callisto), and 2 (io, ganymede) were taken on an instrument this toolkit has proven. What decides whether anything can be done with a moon is not whether frames exist but whether the instrument that took them is one this toolkit has proven, so each moon is listed with the state of every instrument that observed it. io: NIRI 6541 (unproven), GMOS-S 40 (reduced), NIFS 24 (unsupported), Hokupaa+QUIRC 7 (unsupported), IGRINS 6 (unsupported). Reducible here through GMOS-S. europa: GNIRS 220 (unproven), NIFS 72 (unsupported), TEXES 25 (unsupported), GPI 23 (unsupported). No instrument that observed it has been proven by this toolkit, so nothing here can be reduced for it. ganymede: GMOS-S 49 (reduced), NIRI 18 (unproven). Reducible here through GMOS-S. callisto: NIFS 55 (unsupported), NIRI 53 (unproven). No instrument that observed it has been proven by this toolkit, so nothing here can be reduced for it.",
+    "rows": [
+      {
+        "moon": "callisto",
+        "instrument": "NIFS",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "HK",
+        "frames": 4,
+        "programmes": [
+          "GN-2019A-FT-106"
+        ]
+      },
+      {
+        "moon": "callisto",
+        "instrument": "NIFS",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "HK",
+        "frames": 55,
+        "programmes": [
+          "GN-2019A-FT-106"
+        ]
+      },
+      {
+        "moon": "callisto",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "H",
+        "frames": 8,
+        "programmes": [
+          "GN-2019A-Q-202"
+        ]
+      },
+      {
+        "moon": "callisto",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "CH4(long)",
+        "frames": 12,
+        "programmes": [
+          "GN-2014B-C-1"
+        ]
+      },
+      {
+        "moon": "callisto",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "CH4(short)",
+        "frames": 12,
+        "programmes": [
+          "GN-2014B-C-1"
+        ]
+      },
+      {
+        "moon": "callisto",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "J",
+        "frames": 12,
+        "programmes": [
+          "GN-2014B-C-1"
+        ]
+      },
+      {
+        "moon": "callisto",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "Jcon(112)",
+        "frames": 5,
+        "programmes": [
+          "GN-2014B-C-1"
+        ]
+      },
+      {
+        "moon": "callisto",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "Y",
+        "frames": 12,
+        "programmes": [
+          "GN-2014B-C-1"
+        ]
+      },
+      {
+        "moon": "europa",
+        "instrument": "GNIRS",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "H",
+        "frames": 26,
+        "programmes": [
+          "GN-2017A-Q-63",
+          "GN-2022A-Q-311"
+        ]
+      },
+      {
+        "moon": "europa",
+        "instrument": "GNIRS",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "H2",
+        "frames": 4,
+        "programmes": [
+          "GN-2022A-Q-311"
+        ]
+      },
+      {
+        "moon": "europa",
+        "instrument": "GNIRS",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "L",
+        "frames": 220,
+        "programmes": [
+          "GN-2017A-Q-63"
+        ]
+      },
+      {
+        "moon": "europa",
+        "instrument": "GPI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "H",
+        "frames": 23,
+        "programmes": [
+          "GS-2019A-SV-500"
+        ]
+      },
+      {
+        "moon": "europa",
+        "instrument": "NIFS",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "HK",
+        "frames": 6,
+        "programmes": [
+          "GN-2011B-Q-76"
+        ]
+      },
+      {
+        "moon": "europa",
+        "instrument": "NIFS",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "HK",
+        "frames": 36,
+        "programmes": [
+          "GN-2011B-Q-76"
+        ]
+      },
+      {
+        "moon": "europa",
+        "instrument": "NIFS",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "JH",
+        "frames": 36,
+        "programmes": [
+          "GN-2011B-Q-76"
+        ]
+      },
+      {
+        "moon": "europa",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "CH4(long)",
+        "frames": 16,
+        "programmes": [
+          "GN-2020A-Q-113",
+          "GN-2020B-Q-120",
+          "GN-2023A-Q-126"
+        ]
+      },
+      {
+        "moon": "europa",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "H",
+        "frames": 60,
+        "programmes": [
+          "GN-2017A-Q-60",
+          "GN-2018A-Q-202",
+          "GN-2019A-Q-202",
+          "GN-2019A-Q-304",
+          "GN-2020A-Q-203",
+          "GN-2020B-Q-101",
+          "GN-2022A-Q-111",
+          "GN-2022B-Q-106"
+        ]
+      },
+      {
+        "moon": "europa",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "M(prime)",
+        "frames": 34,
+        "programmes": [
+          "GN-2016B-FT-18",
+          "GN-2016B-FT-29",
+          "GN-2017A-Q-60",
+          "GN-2019A-Q-202"
+        ]
+      },
+      {
+        "moon": "europa",
+        "instrument": "TEXES",
+        "type": "FLAT",
+        "intent": "calibration",
+        "filter": "",
+        "frames": 21,
+        "programmes": [
+          "GN-2006A-DS-1",
+          "GN-2006A-DS-3"
+        ]
+      },
+      {
+        "moon": "europa",
+        "instrument": "TEXES",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "",
+        "frames": 25,
+        "programmes": [
+          "GN-2006A-DS-1",
+          "GN-2006A-DS-3",
+          "GN-2017A-Q-37"
+        ]
+      },
+      {
+        "moon": "ganymede",
+        "instrument": "GMOS-S",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "g",
+        "frames": 8,
+        "programmes": [
+          "GS-2019A-FT-109",
+          "GS-2021B-Q-231"
+        ]
+      },
+      {
+        "moon": "ganymede",
+        "instrument": "GMOS-S",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "OIII",
+        "frames": 26,
+        "programmes": [
+          "GS-2021B-Q-231"
+        ]
+      },
+      {
+        "moon": "ganymede",
+        "instrument": "GMOS-S",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "OIIIC",
+        "frames": 6,
+        "programmes": [
+          "GS-2019A-FT-109"
+        ]
+      },
+      {
+        "moon": "ganymede",
+        "instrument": "GMOS-S",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "open",
+        "frames": 49,
+        "programmes": [
+          "GS-2019A-FT-109",
+          "GS-2021B-Q-231"
+        ]
+      },
+      {
+        "moon": "ganymede",
+        "instrument": "GNIRS",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "H",
+        "frames": 2,
+        "programmes": [
+          "GN-2018A-Q-221"
+        ]
+      },
+      {
+        "moon": "ganymede",
+        "instrument": "GNIRS",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "H2",
+        "frames": 4,
+        "programmes": [
+          "GN-2018A-Q-221"
+        ]
+      },
+      {
+        "moon": "ganymede",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "CH4(long)",
+        "frames": 5,
+        "programmes": [
+          "GN-2020A-Q-113",
+          "GN-2020B-Q-120"
+        ]
+      },
+      {
+        "moon": "ganymede",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "H",
+        "frames": 12,
+        "programmes": [
+          "GN-2017A-Q-60",
+          "GN-2018A-Q-202",
+          "GN-2019A-Q-202",
+          "GN-2020A-Q-203"
+        ]
+      },
+      {
+        "moon": "ganymede",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "M(prime)",
+        "frames": 2,
+        "programmes": [
+          "GN-2017A-Q-60"
+        ]
+      },
+      {
+        "moon": "ganymede",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "J",
+        "frames": 18,
+        "programmes": [
+          "GN-2015B-FT-12"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "GMOS-S",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "g",
+        "frames": 4,
+        "programmes": [
+          "GS-2021B-Q-231"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "GMOS-S",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "OIII",
+        "frames": 8,
+        "programmes": [
+          "GS-2021B-Q-231"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "GMOS-S",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "open",
+        "frames": 40,
+        "programmes": [
+          "GS-2021B-Q-231"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "GNIRS",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "H",
+        "frames": 13,
+        "programmes": [
+          "GN-2018A-Q-221",
+          "GN-2020A-Q-315",
+          "GN-2021A-Q-118",
+          "GN-2022A-Q-311"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "GNIRS",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "H2",
+        "frames": 17,
+        "programmes": [
+          "GN-2018A-Q-221",
+          "GN-2020A-Q-315",
+          "GN-2022A-Q-311"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "Hokupaa+QUIRC",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "Kp",
+        "frames": 7,
+        "programmes": [
+          "GN-2001B-C-3"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "IGRINS",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "",
+        "frames": 6,
+        "programmes": [
+          "GS-2021B-Q-231"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIFS",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "JH",
+        "frames": 9,
+        "programmes": [
+          "GN-2011B-Q-76"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIFS",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "HK",
+        "frames": 12,
+        "programmes": [
+          "GN-2011B-Q-76"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIFS",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "JH",
+        "frames": 12,
+        "programmes": [
+          "GN-2011B-Q-76"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "",
+        "frames": 7,
+        "programmes": [
+          "GN-2021B-Q-110"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "Br(gamma)",
+        "frames": 35,
+        "programmes": [
+          "GN-2007A-Q-16",
+          "GN-2010B-Q-83",
+          "GN-2011B-Q-88"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "CH4(long)",
+        "frames": 37,
+        "programmes": [
+          "GN-2007A-Q-16",
+          "GN-2010B-Q-83",
+          "GN-2020A-Q-113",
+          "GN-2020B-Q-120",
+          "GN-2021A-Q-125"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "H",
+        "frames": 58,
+        "programmes": [
+          "GN-2017A-Q-60",
+          "GN-2018A-Q-202",
+          "GN-2019A-Q-202",
+          "GN-2019A-Q-304",
+          "GN-2020A-Q-203",
+          "GN-2020B-Q-101",
+          "GN-2021B-Q-110",
+          "GN-2022B-Q-106"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "hydrocarb",
+        "frames": 9,
+        "programmes": [
+          "GN-2007A-Q-16"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "Jcon(112)",
+        "frames": 6,
+        "programmes": [
+          "GN-2007A-Q-16"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "Jcon(121)",
+        "frames": 9,
+        "programmes": [
+          "GN-2010B-Q-83"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "L(prime)",
+        "frames": 863,
+        "programmes": [
+          "GN-2010B-Q-83",
+          "GN-2013B-DD-3",
+          "GN-2014A-Q-34",
+          "GN-2016A-Q-34",
+          "GN-2016B-Q-5",
+          "GN-2017A-Q-53",
+          "GN-2018A-Q-124",
+          "GN-2019A-Q-130",
+          "GN-2021A-FT-110",
+          "GN-2021B-FT-209",
+          "GN-2022A-Q-229"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "ACQUISITION",
+        "intent": "calibration",
+        "filter": "M(prime)",
+        "frames": 54,
+        "programmes": [
+          "GN-2010B-Q-83",
+          "GN-2016B-FT-18",
+          "GN-2016B-FT-29",
+          "GN-2018A-Q-202",
+          "GN-2019A-Q-202",
+          "GN-2020B-Q-101"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "Br(gamma)",
+        "frames": 141,
+        "programmes": [
+          "GN-2007A-Q-16",
+          "GN-2010B-Q-83",
+          "GN-2011B-Q-88"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "CH4(long)",
+        "frames": 124,
+        "programmes": [
+          "GN-2007A-Q-16",
+          "GN-2010B-Q-83"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "H2O_ice",
+        "frames": 65,
+        "programmes": [
+          "GN-2016A-Q-33"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "hydrocarb",
+        "frames": 96,
+        "programmes": [
+          "GN-2007A-Q-16",
+          "GN-2016A-Q-33"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "Jcon(112)",
+        "frames": 42,
+        "programmes": [
+          "GN-2007A-Q-16"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "Jcon(121)",
+        "frames": 92,
+        "programmes": [
+          "GN-2010B-Q-83"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "Kcon(227)",
+        "frames": 2735,
+        "programmes": [
+          "GN-2013B-DD-3",
+          "GN-2014A-Q-34",
+          "GN-2016A-Q-34",
+          "GN-2016B-Q-5",
+          "GN-2017A-Q-53",
+          "GN-2018A-Q-124",
+          "GN-2019A-Q-130",
+          "GN-2021A-FT-110",
+          "GN-2021B-FT-209",
+          "GN-2022A-Q-229"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "L(prime)",
+        "frames": 3174,
+        "programmes": [
+          "GN-2010B-Q-83",
+          "GN-2013B-DD-3",
+          "GN-2014A-Q-34",
+          "GN-2016A-Q-33",
+          "GN-2016A-Q-34",
+          "GN-2016B-Q-5",
+          "GN-2017A-Q-53",
+          "GN-2018A-Q-124",
+          "GN-2019A-Q-130",
+          "GN-2021A-FT-110",
+          "GN-2021B-FT-209",
+          "GN-2022A-Q-229"
+        ]
+      },
+      {
+        "moon": "io",
+        "instrument": "NIRI",
+        "type": "OBJECT",
+        "intent": "science",
+        "filter": "M(prime)",
+        "frames": 72,
+        "programmes": [
+          "GN-2010B-Q-83"
+        ]
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "instrument": "GMOS-N",
+      "science": 156129,
+      "support": "supported",
+      "state": "unproven",
+      "programs": [],
+      "evidence": [],
+      "reason": "DRAGONS supports it (imaging and longslit spectroscopy in DRAGONS 4.2) and nothing here has been reduced through it yet."
+    },
+    {
+      "instrument": "GMOS-S",
+      "science": 146963,
+      "support": "supported",
+      "state": "reduced",
+      "programs": [
+        "comet-3i-gs2025bdd102"
+      ],
+      "evidence": [
+        {
+          "receipt": "comet-3i-gs2025bdd102.S20250906S0037_image.halves.reproduction.json",
+          "product": "S20250906S0037_image.fits",
+          "kind": "internal-consistency"
+        },
+        {
+          "receipt": "comet-3i-gs2025bdd102.S20250906S0254_bias.reproduction.json",
+          "product": "S20250906S0254_bias.fits",
+          "kind": "archive-agreement"
+        },
+        {
+          "receipt": "comet-3i-gs2025bdd102.S20250917S0126_flat.reproduction.json",
+          "product": "S20250917S0126_flat.fits",
+          "kind": "archive-agreement"
+        },
+        {
+          "receipt": "comet-3i-gs2025bdd102.S20250917S0156_bias.reproduction.json",
+          "product": "S20250917S0156_bias.fits",
+          "kind": "archive-agreement"
+        }
+      ],
+      "reason": "4 accepted receipt(s) beside 1 pinned program(s)."
+    },
+    {
+      "instrument": "NIRI",
+      "science": 406596,
+      "support": "supported",
+      "state": "unproven",
+      "programs": [],
+      "evidence": [],
+      "reason": "DRAGONS supports it (imaging in DRAGONS 4.2) and nothing here has been reduced through it yet."
+    },
+    {
+      "instrument": "GNIRS",
+      "science": 112642,
+      "support": "supported",
+      "state": "unproven",
+      "programs": [],
+      "evidence": [],
+      "reason": "DRAGONS supports it (longslit and cross-dispersed spectroscopy in DRAGONS 4.2) and nothing here has been reduced through it yet."
+    },
+    {
+      "instrument": "F2",
+      "science": 130955,
+      "support": "supported",
+      "state": "unproven",
+      "programs": [],
+      "evidence": [],
+      "reason": "DRAGONS supports it (imaging and longslit spectroscopy in DRAGONS 4.2) and nothing here has been reduced through it yet."
+    },
+    {
+      "instrument": "NIFS",
+      "science": 29136,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "no DRAGONS support; its reduction path is the legacy Gemini IRAF stack"
+    },
+    {
+      "instrument": "MAROON-X",
+      "science": 8880,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "visiting spectrograph with its own pipeline, not in DRAGONS"
+    },
+    {
+      "instrument": "PHOENIX",
+      "science": 74202,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "visiting high-resolution spectrograph, not in DRAGONS"
+    },
+    {
+      "instrument": "hrwfs",
+      "science": 103893,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "No DRAGONS support is pinned here for this instrument."
+    },
+    {
+      "instrument": "GPI",
+      "science": 51644,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "its pipeline is IDL, which is proprietary and is not installed here"
+    },
+    {
+      "instrument": "Alopeke",
+      "science": 64656,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "speckle imager; its products come from its own speckle pipeline, not DRAGONS"
+    },
+    {
+      "instrument": "Zorro",
+      "science": 62173,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "speckle imager; its products come from its own speckle pipeline, not DRAGONS"
+    },
+    {
+      "instrument": "NICI",
+      "science": 44262,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "retired coronagraphic imager, not in DRAGONS"
+    },
+    {
+      "instrument": "GSAOI",
+      "science": 13761,
+      "support": "supported",
+      "state": "unproven",
+      "programs": [],
+      "evidence": [],
+      "reason": "DRAGONS supports it (imaging in DRAGONS 4.2) and nothing here has been reduced through it yet."
+    },
+    {
+      "instrument": "IGRINS",
+      "science": 21609,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "visiting spectrograph with its own pipeline, not in DRAGONS"
+    },
+    {
+      "instrument": "Hokupaa+QUIRC",
+      "science": 37611,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "No DRAGONS support is pinned here for this instrument."
+    },
+    {
+      "instrument": "GRACES",
+      "science": 19177,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "fibre-fed spectrograph reduced by OPERA, not in DRAGONS"
+    },
+    {
+      "instrument": "IGRINS-2",
+      "science": 5915,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "visiting spectrograph with its own pipeline, not in DRAGONS"
+    },
+    {
+      "instrument": "TReCS",
+      "science": 12959,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "retired mid-infrared imager, not in DRAGONS"
+    },
+    {
+      "instrument": "michelle",
+      "science": 4753,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "retired mid-infrared imager and spectrometer, not in DRAGONS"
+    },
+    {
+      "instrument": "GHOST",
+      "science": 9807,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "reduced by its own GHOSTDR package, not the DRAGONS recipes pinned here"
+    },
+    {
+      "instrument": "FLAMINGOS",
+      "science": 12090,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "No DRAGONS support is pinned here for this instrument."
+    },
+    {
+      "instrument": "TEXES",
+      "science": 1739,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "a visiting instrument with its own reduction, not in DRAGONS"
+    },
+    {
+      "instrument": "CIRPASS",
+      "science": 620,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "No DRAGONS support is pinned here for this instrument."
+    },
+    {
+      "instrument": "bHROS",
+      "science": 401,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "No DRAGONS support is pinned here for this instrument."
+    },
+    {
+      "instrument": "OSCIR",
+      "science": 436,
+      "support": "unsupported",
+      "state": "unsupported",
+      "programs": [],
+      "evidence": [],
+      "reason": "No DRAGONS support is pinned here for this instrument."
+    },
+    {
+      "instrument": "GMOS",
+      "science": 89,
+      "support": "supported",
+      "state": "unproven",
+      "programs": [],
+      "evidence": [],
+      "reason": "DRAGONS supports it (imaging and longslit spectroscopy in DRAGONS 4.2) and nothing here has been reduced through it yet."
+    }
+  ],
+  "receiptProblems": []
+}
