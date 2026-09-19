@@ -19,6 +19,21 @@ Omit Sources and processing when sources, processing and interpretation are unch
 - **Processing:** [What changed between the input and displayed result.]
 - **Meaning and limits:** [Relevant interpretation, coverage or uncertainty; measured versus modeled where it matters.]
 
+## Prepared assets
+
+<!--
+Only for a pull request that bakes or rebakes anything under a `prepared/` directory or
+`public/scenes`. Delete this whole section when no baked bytes change.
+R2 holds the bytes; Git holds the inventory that pins them. Both have to land, or the
+object renders blank in production — the deploy ships no same-origin copy to fall back on.
+Full steps: CONTRIBUTING.md, "Checklist: a change that bakes or rebakes assets".
+-->
+
+- [ ] Baked the object (`pnpm prepare:planets --object=<id>`, or `pnpm prepare:volume src/objects/<id>`).
+- [ ] Published the bytes (`node tools/publish-runtime-assets.mts --object=<id>`).
+- [ ] Committed the refreshed `runtime-assets.json` / `prepared-assets.json`, and no baked files.
+- [ ] No R2 credentials — say so here so a maintainer publishes for you: [ ]
+
 ## Evidence and limits
 
 **Proves the change:** [check — result, and why that result is evidence; link the
