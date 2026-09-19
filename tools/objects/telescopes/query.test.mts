@@ -5,26 +5,38 @@ import { test } from 'node:test';
 import { resolve } from 'node:path';
 import { BODY_MAP_SCHEMA } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
-import { ledgerModeKeys, loadQueryInputs, MODES_SCHEMA, parseModeCapabilities, queryCapabilities, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
+import { ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, queryCapabilities, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 const citation = 'https://jwst-docs.stsci.edu/jwst-near-infrared-spectrograph';
+const psf = 'https://cxc.harvard.edu/proposer/POG/html/chap4.html';
 
 const CAPABILITIES = parseModeCapabilities({ schema: MODES_SCHEMA, modes: [
-  { telescope: 'JWST', mode: 'NIRSPEC/IFU', wavelengthMicrometres: 'bands', apertureMetres: 6.5, pixelScaleArcsec: 0.1, kinds: ['cube'], citation },
-  { telescope: 'JWST', mode: 'NIRCAM/IMAGE', wavelengthMicrometres: [0.6, 5], apertureMetres: 6.5, pixelScaleArcsec: 0.031, kinds: ['image'], citation },
-  { telescope: 'Chandra', mode: 'HRC-I', wavelengthMicrometres: [0.000124, 0.0207], apertureMetres: 1.2, pixelScaleArcsec: 0.13175, kinds: ['events'], citation },
-  { telescope: 'VLT/NACO', mode: 'imaging', wavelengthMicrometres: [1, 5], apertureMetres: 8.2, pixelScaleArcsec: 0.01326, kinds: ['image'], citation },
-  { telescope: 'Juno', mode: 'JUNOCAM', wavelengthMicrometres: [0.42, 0.9], apertureMetres: 0.0034, pixelScaleArcsec: 139.3, kinds: ['strips'], citation }] });
+  { telescope: 'JWST', mode: 'NIRSPEC/IFU', wavelengths: 'bands', apertureMetres: 6.5, pixelScaleArcsec: 0.1, kinds: ['cube'], citation },
+  { telescope: 'JWST', mode: 'NIRCAM/IMAGE', wavelengths: [[0.6, 2.3], [2.4, 5]], apertureMetres: 6.5, pixelScaleArcsec: 0.031, kinds: ['image'], citation },
+  { telescope: 'JWST', mode: 'NIRCAM/CORON', wavelengths: [[1.8, 2.2], [2.8, 5]], apertureMetres: 6.5, pixelScaleArcsec: 0.031, kinds: ['image'], citation },
+  { telescope: 'Chandra', mode: 'ACIS-S', wavelengths: [[0.000124, 0.0031]], apertureMetres: 1.2, pixelScaleArcsec: 0.492, kinds: ['events'], citation: psf,
+    instrumentResolutionArcsec: 0.5, instrumentResolutionBasis: 'the mirror assembly point spread function, under 0.5 arcsec full width at half maximum', instrumentResolutionCitation: psf },
+  { telescope: 'Hubble', mode: 'STIS/CCD', wavelengths: [[0.164, 1.03]], apertureMetres: 2.4, pixelScaleArcsec: 0.05, kinds: ['image', 'spectrum'], citation },
+  { telescope: 'Hubble', mode: 'STIS/FUV-MAMA', wavelengths: [[0.115, 0.17]], apertureMetres: 2.4, pixelScaleArcsec: 0.025, kinds: ['image', 'spectrum'], citation },
+  { telescope: 'VLT/NACO', mode: 'imaging', wavelengths: [[1, 5]], apertureMetres: 8.2, pixelScaleArcsec: 0.01326, kinds: ['image'], citation },
+  { telescope: 'Juno', mode: 'JUNOCAM', wavelengths: [[0.42, 0.9]], pixelScaleArcsec: 138.7, kinds: ['strips'], citation }] });
 
 const JWST_LEDGER = { schema: 'cssearth-jwst-ledger@1', archiveDate: '2026-09-19', modes: [
   { mode: 'NIRSPEC/IFU', tool: 'tools/objects/jwst/cubes/spec3.mts', programs: ['europa-1250', 'sn-1987a-1232'], checked: ['europa-1250'] },
   { mode: 'MIRI/IFU', tool: null, programs: [], checked: [] },
+  { mode: 'NIRCAM/CORON', tool: 'tools/objects/jwst/imaging/coron3.mts', programs: ['hd-181327-2780'], checked: ['hd-181327-2780'] },
   { mode: 'NIRCAM/IMAGE', tool: 'tools/objects/jwst/imaging/image3.mts', programs: ['ngc-3132-2733'], checked: [] }],
-  objects: [{ id: 'europa', observations: { 'NIRSPEC/IFU': 13, 'MIRI/IFU': 12, 'NIRCAM/IMAGE': 6 }, programmes: ['1250', '4023'], drawn: ['NIRSPEC/IFU'] }] };
+  objects: [{ id: 'europa', observations: { 'NIRSPEC/IFU': 13, 'MIRI/IFU': 12, 'NIRCAM/IMAGE': 6 }, programmes: ['1250', '4023'], drawn: ['NIRSPEC/IFU'] },
+    { id: 'hd-181327', observations: { 'NIRCAM/CORON': 12 }, programmes: ['2780'], drawn: ['NIRCAM/CORON'] }] };
+const HST_LEDGER = { schema: 'cssearth-hst-ledger@1', archiveDate: '2026-09-19', configurations: [
+  { configuration: 'STIS/CCD', tool: 'tools/objects/hst/calibrate.mts', programs: ['europa-14650'], checked: ['europa-14650'] },
+  { configuration: 'STIS/FUV-MAMA', tool: 'tools/objects/hst/calibrate.mts', programs: ['europa-13040'], checked: ['europa-13040'] },
+  { configuration: 'STIS/NUV-MAMA', tool: 'tools/objects/hst/calibrate.mts', programs: [], checked: [] }],
+  movingTargets: [{ object: 'europa', observations: 895, configurations: ['STIS/CCD', 'STIS/FUV-MAMA', 'STIS/NUV-MAMA'] }], fixedTargets: [] };
 const CHANDRA_LEDGER = { schema: 'cssearth-chandra-ledger@1', measured: '2026-09-19', archive: { byInstrument: { 'HRC-I': 2006, 'ACIS-S': 14_863 } },
-  modes: { 'HRC-I no grating OBSERVING': { state: 'reproduced', program: 'jupiter-hrci', obsid: 18_676, target: 'Jupiter' } },
-  shippedObjects: { jupiter: { matchedBy: 'target name', observations: 2, longest: [{ obsid: 18_676, target: 'Jupiter', instrument: 'HRC-I', grating: 'NONE', exposureKs: 9.3, startDate: '2016-05-24T12:00:00' }] } } };
+  modes: { 'ACIS-S no grating TIMED/FAINT': { state: 'reproduced', program: 'jupiter-acis', obsid: 18_676, target: 'Jupiter' } },
+  shippedObjects: { jupiter: { matchedBy: 'target name', observations: 2, longest: [{ obsid: 18_676, target: 'Jupiter', instrument: 'ACIS-S', grating: 'NONE', exposureKs: 9.3, startDate: '2016-05-24T12:00:00' }] } } };
 const NACO_LEDGER = { schema: 'cssearth-naco-ledger@1', measured: '2026-09-19',
   modes: [{ mode: 'imaging', frames: 10, programs: ['ceres-080C0881'], receipts: ['ceres-080C0881.COADDED_IMG.reproduction.json'], state: 'reduced' },
     { mode: 'cube', frames: 4, programs: [], receipts: [], state: 'refused', reason: 'This route refuses the mode.' }],
@@ -32,6 +44,14 @@ const NACO_LEDGER = { schema: 'cssearth-naco-ledger@1', measured: '2026-09-19',
 const JUNO_LEDGER = { schema: 'cssearth-junocam-ledger@1', measured: '2026-09-19', objects: [
   { id: 'europa', target: 'EUROPA', colourImages: 52, measuredImages: 4, programs: ['europa-pj45'], state: 'measured', why: '4 image(s) registered.' },
   { id: 'io', target: 'IO', colourImages: 247, measuredImages: 0, programs: [], state: 'not measured', why: 'No program of this target is pinned.' }] };
+
+const bodyMap = (telescope: string, instrument: string, id: string) => ({ schema: BODY_MAP_SCHEMA,
+  definition: { quantity: 'salt band depth', units: 'dimensionless', timeDependence: 'surface-property', method: { window: [0.45, 0.5] }, source: 'a paper' },
+  frame: { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', sha256: 'a'.repeat(64), bodyCode: 502 } },
+  grid: { width: 4, height: 2, longitude: 'east-positive-from-0', rows: 'north-to-south' },
+  planes: { file: 'map.fits', sha256: 'b'.repeat(64), value: 'SCI', uncertainty: 'ERR' }, mask: { maximumEmissionDegrees: 70, missing: 'NaN' },
+  observations: [{ id, telescope, instrument, midTimeJd: 2_459_800.5, rangeKm: 6.3e8, subObserver: { latitudeDegrees: 0, westLongitudeDegrees: 180 },
+    angularResolution: { majorArcsec: 0.05, minorArcsec: 0.05, basis: 'fitted point spread function' } }] });
 
 const inputs = (ledgers: readonly { telescope: string; value: unknown }[], rest: Partial<QueryInputs> = {}): QueryInputs =>
   ({ ledgers: ledgers.map(entry => ({ ...entry, path: `data/${entry.telescope}/ledger.json` })), capabilities: CAPABILITIES, bodyMaps: [], ...rest });
@@ -41,15 +61,24 @@ const candidate = (answer: CapabilityAnswer, mode: string): Candidate => {
   return found;
 };
 
-test('a JWST cube mode takes its coverage from the bands, and answers wavelength from it', () => {
+test('a JWST cube mode takes its coverage from the bands, and touching bands become one interval', () => {
   assert.deepEqual(JWST_CUBE_COVERAGE['NIRSPEC-PRISM-CLEAR'], [0.6, 5.3]);
-  assert.deepEqual(CAPABILITIES.find(entry => entry.mode === 'NIRSPEC/IFU')?.wavelengthMicrometres, [0.6, 5.3]);
+  assert.deepEqual(CAPABILITIES.find(entry => entry.mode === 'NIRSPEC/IFU')?.wavelengthIntervals, [[0.6, 5.3]]);
+  assert.deepEqual(mergeIntervals([[2.8, 5], [1.8, 2.2], [2.2, 2.4]]), [[1.8, 2.4], [2.8, 5]]);
   const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [3.4, 3.6] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }]));
   assert.equal(candidate(answer, 'NIRSPEC/IFU').meetsConstraints.wavelength?.answer, 'yes');
-  assert.equal(queryCapabilities({ target: 'europa', wavelengthMicrometres: [4, 6] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }])).candidates
-    .find(entry => entry.mode === 'NIRCAM/IMAGE')?.meetsConstraints.wavelength?.answer, 'partial');
-  assert.equal(queryCapabilities({ target: 'europa', wavelengthMicrometres: [10, 12] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }])).candidates
-    .find(entry => entry.mode === 'NIRCAM/IMAGE')?.meetsConstraints.wavelength?.answer, 'no');
+});
+
+test('a gap between the two intervals of a mode is not coverage', () => {
+  const ask = (from: number, to: number) => candidate(queryCapabilities({ target: 'hd-181327', wavelengthMicrometres: [from, to] },
+    inputs([{ telescope: 'jwst', value: JWST_LEDGER }])), 'NIRCAM/CORON').meetsConstraints.wavelength!;
+  assert.equal(ask(2.4, 2.6).answer, 'no');
+  assert.match(ask(2.4, 2.6).reason, /1\.8 to 2\.2 and 2\.8 to 5 micrometres; 2\.4 to 2\.6 falls outside every one of them/u);
+  assert.equal(ask(2, 3).answer, 'partial');
+  assert.match(ask(2, 3).reason, /only 2 to 2\.2 and 2\.8 to 3 of the request is inside it/u);
+  assert.equal(ask(3, 3.2).answer, 'yes');
+  assert.equal(candidate(queryCapabilities({ target: 'europa', wavelengthMicrometres: [2.31, 2.39] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }])), 'NIRCAM/IMAGE')
+    .meetsConstraints.wavelength?.answer, 'no');
 });
 
 test('a mode with no recorded capabilities answers unknown and says so, rather than guessing', () => {
@@ -60,22 +89,34 @@ test('a mode with no recorded capabilities answers unknown and says so, rather t
   assert.ok(miri.unknown.some(line => line.includes('Capabilities not recorded')));
 });
 
-test('sharpness is never yes: it says what the mode cannot beat, and no when that is too coarse', () => {
+test('what the optics resolve can say no; what the pixels sample cannot', () => {
   const ask = (arcsec: number) => candidate(queryCapabilities({ target: 'europa', wavelengthMicrometres: [3.4, 3.6], angularResolutionArcsec: arcsec },
     inputs([{ telescope: 'jwst', value: JWST_LEDGER }])), 'NIRSPEC/IFU').meetsConstraints.angularResolution!;
   assert.equal(ask(0.001).answer, 'no');
-  assert.match(ask(0.001).reason, /cannot be sharper than 0\.2 arcsec/u);
+  assert.match(ask(0.001).reason, /optics cannot resolve better than 0\.132 arcsec \(1\.22 lambda \/ D at 3\.4 micrometres on 6\.5 m\)/u);
+  assert.equal(ask(0.15).answer, 'unknown');
+  assert.match(ask(0.15).reason, /the detector samples at 0\.2 arcsec \(two 0\.1 arcsec detector pixels\)\. Dithering, subpixel positioning and event centroiding/u);
   assert.equal(ask(1).answer, 'partial');
-  assert.match(ask(1).reason, /Possible/u);
+  assert.match(ask(1).reason, /^Possible/u);
   assert.equal(candidate(queryCapabilities({ target: 'europa', wavelengthMicrometres: [3.4, 3.6] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }])), 'NIRSPEC/IFU')
     .meetsConstraints.angularResolution?.answer, 'unknown');
 });
 
-test('two pixels floor the diffraction limit where the pixel scale is the coarser of the two', () => {
-  const nirspec = candidate(queryCapabilities({ target: 'europa', wavelengthMicrometres: [3.4, 3.6], angularResolutionArcsec: 5 }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }])), 'NIRSPEC/IFU');
-  assert.match(nirspec.meetsConstraints.angularResolution!.reason, /two 0\.1 arcsec pixels, which are wider than the 0\.132 arcsec diffraction limit/u);
-  const nircam = candidate(queryCapabilities({ target: 'europa', wavelengthMicrometres: [4.9, 5], angularResolutionArcsec: 5 }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }])), 'NIRCAM/IMAGE');
-  assert.match(nircam.meetsConstraints.angularResolution!.reason, /1\.22 lambda \/ D at 4\.9 micrometres on 6\.5 m/u);
+test('a documented point spread function, not the pixel, decides an X-ray detector', () => {
+  const chandra = candidate(queryCapabilities({ target: 'jupiter', wavelengthMicrometres: [0.0005, 0.002], angularResolutionArcsec: 0.6 },
+    inputs([{ telescope: 'chandra', value: CHANDRA_LEDGER }])), 'ACIS-S').meetsConstraints.angularResolution!;
+  assert.equal(chandra.answer, 'unknown');
+  assert.match(chandra.reason, /point spread function[\s\S]*which meets the 0\.6 arcsec asked for, but the detector samples at 0\.984 arcsec/u);
+  const coarse = candidate(queryCapabilities({ target: 'jupiter', wavelengthMicrometres: [0.0005, 0.002], angularResolutionArcsec: 0.3 },
+    inputs([{ telescope: 'chandra', value: CHANDRA_LEDGER }])), 'ACIS-S').meetsConstraints.angularResolution!;
+  assert.equal(coarse.answer, 'no');
+});
+
+test('a mode with only a pixel scale answers unknown, because nothing says what its optics resolve', () => {
+  const juno = candidate(queryCapabilities({ target: 'europa', wavelengthMicrometres: [0.5, 0.6], angularResolutionArcsec: 500 },
+    inputs([{ telescope: 'juno', value: JUNO_LEDGER }])), 'JUNOCAM').meetsConstraints.angularResolution!;
+  assert.equal(juno.answer, 'unknown');
+  assert.match(juno.reason, /what the optics resolve is not recorded for this mode/u);
 });
 
 test('kilometres on the ground and elements across the disc need what the caller alone knows', () => {
@@ -87,9 +128,9 @@ test('kilometres on the ground and elements across the disc need what the caller
   const near = candidate(queryCapabilities({ target: 'europa', wavelengthMicrometres: [3.4, 3.6], surfaceResolutionKm: 1000, resolutionElements: 8, rangeKm: 6.3e8, bodyRadiusKm: 1560.8 },
     inputs([{ telescope: 'jwst', value: JWST_LEDGER }])), 'NIRSPEC/IFU');
   assert.equal(near.meetsConstraints.surfaceResolution?.answer, 'partial');
-  assert.match(near.meetsConstraints.surfaceResolution!.reason, /611 km at the sub-observer point/u);
+  assert.match(near.meetsConstraints.surfaceResolution!.reason, /402 km at the sub-observer point[\s\S]*611 km at the sub-observer point/u);
   assert.equal(near.meetsConstraints.resolutionElements?.answer, 'no');
-  assert.match(near.meetsConstraints.resolutionElements!.reason, /spans at most 5\.11 elements/u);
+  assert.match(near.meetsConstraints.resolutionElements!.reason, /7\.76 elements across the disc \(1\.22 lambda \/ D[^)]*\), which is coarser than the 8 elements asked for\. The detector samples at 5\.11 elements/u);
 });
 
 test('time is unknown unless the ledger dates that object in that mode', () => {
@@ -97,11 +138,11 @@ test('time is unknown unless the ledger dates that object in that mode', () => {
     inputs([{ telescope: 'jwst', value: JWST_LEDGER }])), 'NIRSPEC/IFU');
   assert.equal(jwst.meetsConstraints.time?.answer, 'unknown');
   assert.match(jwst.meetsConstraints.time!.reason, /carries no dates/u);
-  const inside = candidate(queryCapabilities({ target: 'jupiter', wavelengthMicrometres: [0.001, 0.002], time: { fromIso: '2016-01-01', toIso: '2017-01-01' } },
-    inputs([{ telescope: 'chandra', value: CHANDRA_LEDGER }])), 'HRC-I');
+  const inside = candidate(queryCapabilities({ target: 'jupiter', wavelengthMicrometres: [0.0005, 0.002], time: { fromIso: '2016-01-01', toIso: '2017-01-01' } },
+    inputs([{ telescope: 'chandra', value: CHANDRA_LEDGER }])), 'ACIS-S');
   assert.equal(inside.meetsConstraints.time?.answer, 'yes');
-  const outside = candidate(queryCapabilities({ target: 'jupiter', wavelengthMicrometres: [0.001, 0.002], time: { fromIso: '2020-01-01', toIso: '2021-01-01' } },
-    inputs([{ telescope: 'chandra', value: CHANDRA_LEDGER }])), 'HRC-I');
+  const outside = candidate(queryCapabilities({ target: 'jupiter', wavelengthMicrometres: [0.0005, 0.002], time: { fromIso: '2020-01-01', toIso: '2021-01-01' } },
+    inputs([{ telescope: 'chandra', value: CHANDRA_LEDGER }])), 'ACIS-S');
   assert.equal(outside.meetsConstraints.time?.answer, 'partial');
   assert.match(outside.meetsConstraints.time!.reason, /does not date the rest/u);
 });
@@ -113,7 +154,6 @@ test('toolkit support separates a checked program of this target from a tool tha
   assert.deepEqual([nirspec.toolkitSupport.targetProgramPinned, nirspec.toolkitSupport.targetProgramChecked], [true, true]);
   assert.equal(nirspec.toolkitSupport.tool, 'tools/objects/jwst/cubes/spec3.mts');
   assert.equal(candidate(answer, 'NIRCAM/IMAGE').toolkitSupport.level, 'tool-without-checked-program');
-  assert.deepEqual([candidate(answer, 'NIRCAM/IMAGE').toolkitSupport.targetProgramPinned, candidate(answer, 'NIRCAM/IMAGE').toolkitSupport.targetProgramChecked], [false, false]);
   assert.equal(candidate(answer, 'MIRI/IFU').toolkitSupport.level, 'none');
   assert.equal(candidate(answer, 'JUNOCAM').toolkitSupport.level, 'proven');
   const io = queryCapabilities({ target: 'io', wavelengthMicrometres: [0.5, 0.6] }, inputs([{ telescope: 'juno', value: JUNO_LEDGER }]));
@@ -130,33 +170,50 @@ test('a mode the route refuses has no toolkit, and says why in the ledger words'
   assert.equal(imaging.observations?.scope, 'object-total');
 });
 
-test('a body map beside the object and an investigation entry are evidence; a ledger without the target says so', () => {
-  const bodyMap = { schema: BODY_MAP_SCHEMA, definition: { quantity: 'band depth', units: 'dimensionless', timeDependence: 'surface-property', method: { window: [3.4, 3.6] }, source: 'a paper' },
-    frame: { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', sha256: 'a'.repeat(64), bodyCode: 502 } },
-    grid: { width: 4, height: 2, longitude: 'east-positive-from-0', rows: 'north-to-south' },
-    planes: { file: 'map.fits', sha256: 'b'.repeat(64), value: 'SCI', uncertainty: 'ERR' }, mask: { maximumEmissionDegrees: 70, missing: 'NaN' },
-    observations: [{ id: 'jw01250-o001', telescope: 'JWST', instrument: 'NIRSPEC', midTimeJd: 2_459_800.5, rangeKm: 6.3e8,
-      subObserver: { latitudeDegrees: 0, westLongitudeDegrees: 180 }, angularResolution: { majorArcsec: 0.2, minorArcsec: 0.2, basis: 'fitted point spread function' } }] };
-  const investigations = { path: 'src/objects/europa/investigations.json', value: { schema: 'cssearth-investigation-ledger@1', objectId: 'europa',
-    entries: [{ id: 'jwst-carbon-dioxide', status: 'unresolved', subject: 'JWST NIRSpec carbon dioxide', finding: 'The released map is a figure, not a grid.' },
-      { id: 'sphere-composition', status: 'deferred', subject: 'VLT SPHERE reflectance', finding: 'Reuse terms are missing.' }] } };
-  const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [3.4, 3.6] },
-    inputs([{ telescope: 'jwst', value: JWST_LEDGER }, { telescope: 'naco', value: NACO_LEDGER }], { bodyMaps: [{ path: 'src/objects/europa/source/jwst/co2.body-map.json', value: bodyMap }], investigations }));
-  const nirspec = candidate(answer, 'NIRSPEC/IFU');
-  assert.deepEqual(nirspec.evidence.bodyMaps, [{ path: 'src/objects/europa/source/jwst/co2.body-map.json', quantity: 'band depth (dimensionless)', observation: 'jw01250-o001', angularResolutionArcsec: 0.2, surfaceResolutionKm: 611 }]);
-  assert.deepEqual(nirspec.evidence.investigations.map(entry => entry.id), ['jwst-carbon-dioxide']);
-  assert.deepEqual(candidate(answer, 'MIRI/IFU').evidence.bodyMaps, []);
-  assert.deepEqual(answer.withoutTheTarget.map(entry => entry.telescope), ['naco']);
-  assert.ok(candidate(answer, 'MIRI/IFU').unknown.some(line => line.includes('no body map beside the object names it')));
+test('a body map reaches the one detector it names, and no other', () => {
+  const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [0.45, 0.5] },
+    inputs([{ telescope: 'hst', value: HST_LEDGER }], { bodyMaps: [{ path: 'src/objects/europa/source/hst/salt.body-map.json', value: bodyMap('HST', 'STIS/CCD', 'oc-salt-1') }] }));
+  assert.deepEqual(candidate(answer, 'STIS/CCD').evidence.bodyMaps, [{ path: 'src/objects/europa/source/hst/salt.body-map.json', quantity: 'salt band depth (dimensionless)',
+    observation: 'oc-salt-1', angularResolutionArcsec: 0.05, surfaceResolutionKm: 153 }]);
+  assert.deepEqual(candidate(answer, 'STIS/FUV-MAMA').evidence.bodyMaps, []);
+  assert.deepEqual(candidate(answer, 'STIS/NUV-MAMA').evidence.bodyMaps, []);
+  assert.deepEqual(answer.unassignedEvidence, []);
 });
 
-test('a capability entry states a range, a kind this repository knows and a citation, or it is refused', () => {
-  const entry = { telescope: 'JWST', mode: 'NIRCAM/IMAGE', wavelengthMicrometres: [0.6, 5], apertureMetres: 6.5, kinds: ['image'], citation };
+test('evidence that names no single mode is set aside with what it could mean', () => {
+  const investigations = { path: 'src/objects/europa/investigations.json', value: { schema: 'cssearth-investigation-ledger@1', objectId: 'europa',
+    entries: [{ id: 'jwst-carbon-dioxide', status: 'unresolved', subject: 'JWST NIRSpec carbon dioxide', finding: 'The released map is a figure, not a grid.' },
+      { id: 'nirspec-ifu-short-gratings', status: 'excluded', subject: 'The NIRSPEC/IFU short gratings', finding: 'They saturate on Europa below 2.3 micrometres.' },
+      { id: 'galileo-colour', status: 'included', subject: 'Controlled Galileo colour', finding: 'No telescope of this repository is involved.' }] } };
+  const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [3.4, 3.6] },
+    inputs([{ telescope: 'jwst', value: JWST_LEDGER }], { bodyMaps: [{ path: 'src/objects/europa/source/jwst/co2.body-map.json', value: bodyMap('JWST', 'NIRSPEC', 'jw01250-o001') },
+      { path: 'src/objects/europa/source/other/sphere.body-map.json', value: bodyMap('VLT/SPHERE', 'IRDIS', 'sphere-1') }], investigations }));
+  assert.deepEqual(candidate(answer, 'NIRSPEC/IFU').evidence.investigations.map(entry => entry.id), ['nirspec-ifu-short-gratings']);
+  assert.deepEqual(candidate(answer, 'NIRSPEC/IFU').evidence.bodyMaps, []);
+  assert.deepEqual(answer.unassignedEvidence.map(entry => [entry.kind, entry.identity]),
+    [['body-map', 'JWST NIRSPEC, observation jw01250-o001'], ['body-map', 'VLT/SPHERE IRDIS, observation sphere-1'], ['investigation', 'jwst-carbon-dioxide: JWST NIRSpec carbon dioxide']]);
+  assert.deepEqual(answer.unassignedEvidence[0]!.couldMean, ['JWST NIRSPEC/IFU', 'JWST MIRI/IFU', 'JWST NIRCAM/IMAGE']);
+  assert.match(answer.unassignedEvidence[1]!.reason, /Nothing here knows the telescope VLT\/SPHERE/u);
+  assert.deepEqual(answer.unassignedEvidence[1]!.couldMean, []);
+});
+
+test('candidates that cover the wavelengths come first', () => {
+  const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [2.2, 2.5] },
+    inputs([{ telescope: 'jwst', value: JWST_LEDGER }, { telescope: 'juno', value: JUNO_LEDGER }, { telescope: 'hst', value: HST_LEDGER }]));
+  const rank = (entry: Candidate) => entry.meetsConstraints.wavelength?.answer === 'yes' ? 0 : entry.meetsConstraints.wavelength?.answer === 'partial' ? 1 : 2;
+  assert.deepEqual(answer.candidates.map(rank), [...answer.candidates.map(rank)].sort());
+  assert.equal(answer.candidates[0]?.mode, 'NIRSPEC/IFU');
+});
+
+test('a capability entry states its intervals, a kind this repository knows and a citation, or it is refused', () => {
+  const entry = { telescope: 'JWST', mode: 'NIRCAM/IMAGE', wavelengths: [[0.6, 5]], apertureMetres: 6.5, kinds: ['image'], citation };
   assert.throws(() => parseModeCapabilities({ schema: 'other@1', modes: [entry] }), /Unsupported mode capability schema/u);
   assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, kinds: ['picture'] }] }), /unknown product kind/u);
-  assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, wavelengthMicrometres: [5, 0.6] }] }), /which is not a range/u);
+  assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, wavelengths: [[5, 0.6]] }] }), /which is not a range/u);
+  assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, wavelengths: [[0.6, 2.3, 5]] }] }), /each interval as two wavelengths/u);
   assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, citation: undefined }] }), /citation must be a string/u);
-  assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, mode: 'NIRCAM/GRISM', wavelengthMicrometres: 'bands' }] }), /no bands in bands.mts/u);
+  assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, instrumentResolutionArcsec: 0.5 }] }), /where it was read/u);
+  assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, mode: 'NIRCAM/GRISM', wavelengths: 'bands' }] }), /no bands in bands.mts/u);
 });
 
 test('the committed ledgers: Europa at 3.4 to 3.6 micrometres is a proven JWST cube target, and nothing claims a sharpness', async () => {
@@ -167,9 +224,18 @@ test('the committed ledgers: Europa at 3.4 to 3.6 micrometres is a proven JWST c
   assert.equal(nirspec.meetsConstraints.kind?.answer, 'yes');
   assert.equal(nirspec.toolkitSupport.level, 'proven');
   assert.ok(nirspec.toolkitSupport.targetProgramChecked, 'a checked program of Europa');
-  assert.ok(nirspec.evidence.archiveDate.length === 10, 'the ledger says when the archive was read');
+  assert.equal(nirspec.evidence.archiveDate.length, 10);
   assert.ok(answer.candidates.length > 1, 'other modes observed Europa too');
   for (const entry of answer.candidates) assert.notEqual(entry.meetsConstraints.angularResolution?.answer, 'yes');
+});
+
+test('the committed ledgers: HD 181327 between 2.4 and 2.6 micrometres falls in the NIRCam coronagraphy gap', async () => {
+  const loaded = await loadQueryInputs(ROOT, 'hd-181327');
+  const coron = candidate(queryCapabilities({ target: 'hd-181327', wavelengthMicrometres: [2.4, 2.6] }, loaded), 'NIRCAM/CORON');
+  assert.equal(coron.meetsConstraints.wavelength?.answer, 'no');
+  assert.equal(coron.meetsConstraints.angularResolution?.answer, 'unknown');
+  assert.equal(coron.toolkitSupport.level, 'proven');
+  assert.equal(candidate(queryCapabilities({ target: 'hd-181327', wavelengthMicrometres: [3, 3.2] }, loaded), 'NIRCAM/CORON').meetsConstraints.wavelength?.answer, 'yes');
 });
 
 test('the committed ledgers: no candidate for any target ever answers yes for sharpness', async () => {

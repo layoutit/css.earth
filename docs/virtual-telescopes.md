@@ -88,25 +88,40 @@ node tools/objects/telescopes/query.mts --target europa --wavelength 3.4,3.6 --k
   --range-km 630000000 --radius-km 1560.8 --min-elements 8
 ```
 
-It returns one candidate per mode that observed the target, and each candidate answers three separate things:
+It returns one candidate per mode that observed the target, the ones that cover the requested wavelengths first, and each
+candidate answers three separate things:
 
-1. **What the mode allows.** One answer per constraint (yes, no, partial or unknown) with its reason. Wavelength comes from
-   the mode's recorded coverage. Sharpness is the best the mode can do at the requested wavelength, `1.22 lambda / D` floored
-   at two pixels where a pixel scale is known, and is always phrased as *cannot be sharper than*. Time is unknown unless the
-   ledger dates that object in that mode. Kilometres on the ground and elements across the disc need the range to the body,
-   which only the caller knows.
+1. **What the mode allows.** One answer per constraint (yes, no, partial or unknown) with its reason.
+   - *Wavelength* comes from the mode's recorded intervals, one per documented window, filter or channel. A mode is never
+     given an enclosing minimum and maximum, because the gap between two windows is not coverage: NIRCam coronagraphy
+     observes 1.8 to 2.2 and 2.8 to 5.0 micrometres, so a request for HD 181327 at 2.4 to 2.6 is answered no.
+   - *Sharpness* is two different facts, kept apart. What the **optics** resolve is the diffraction limit of the aperture, or
+     a point spread function the documentation states where diffraction says nothing useful, as for Chandra's grazing
+     incidence mirrors. How finely the **detector** samples that image is two pixels. Only the optics can support a definite
+     no. Coarse pixels make the answer unknown, never no, because dithering, subpixel positioning and event centroiding
+     recover part of what pixels lose and no ledger says whether an observation did. Where only sampling is recorded, the
+     answer is unknown as well.
+   - *Time* is unknown unless the ledger dates that object in that mode.
+   - *Kilometres on the ground* and *elements across the disc* are the same two facts converted, and they need the range to
+     the body, which only the caller knows.
 2. **What the toolkit can do.** No toolkit, a tool with no checked program, or proven on checked receipts, and whether one of
    those programs is a program of this target.
 3. **What supports it, and what is still unknown.** The ledger and the date the archive was read, receipts by name, body maps
-   beside the object whose observations carry a measured resolution, investigation entries about that telescope, and a list of
-   what nobody here knows until an observation is pinned and read.
+   beside the object whose observations carry a measured resolution, investigation entries, and a list of what nobody here
+   knows until an observation is pinned and read.
 
-The one authored input is [`modes.json`](../tools/objects/telescopes/modes.json): each mode's wavelength coverage, aperture,
-pixel scale and product kind, with the handbook page each number was read from. JWST's cube modes take their coverage from
-`jwst/imaging/bands.mts`, which already states it band by band. A mode nobody has sourced is left out, and the query says
-"capabilities not recorded" for it rather than inventing numbers. Nineteen Hubble configurations (aggregates such as `STIS`
-and `ACS`, and retired instruments such as the FOC, the FOS and the HSP) and nine NACO techniques whose own pages state no
-wavelength range are in that position today.
+Evidence reaches a candidate only by naming it. A body map's observation must state a telescope this repository knows and an
+instrument that is exactly one ledger mode key; an investigation entry must contain that mode key in its own words. Anything
+that resolves to several modes, or to none, is listed separately as unassigned evidence with what it could have meant. A
+Hubble STIS/CCD map says nothing about STIS/FUV-MAMA, which sees other wavelengths through another detector, so it is never
+carried there.
+
+The one authored input is [`modes.json`](../tools/objects/telescopes/modes.json): each mode's wavelength intervals, aperture,
+pixel scale, documented point spread function where there is one, and product kind, with the handbook page every number was
+read from. JWST's cube modes take their intervals from `jwst/imaging/bands.mts`, which already states them band by band. A
+mode nobody has sourced is left out, and the query says "capabilities not recorded" for it rather than inventing numbers.
+Nineteen Hubble configurations (aggregates such as `STIS` and `ACS`, and retired instruments such as the FOC, the FOS and the
+HSP) and nine NACO techniques whose own pages state no wavelength range are in that position today.
 
 ### Europa between 3.4 and 3.6 micrometres
 
@@ -114,25 +129,28 @@ Asked for a cube, at Europa's typical range of 630 million kilometres, with at l
 disc, the query finds 23 modes that have observed Europa. In plain language:
 
 - **JWST NIRSPEC/IFU**, 13 observations: covers the wavelengths, produces cubes, and the route is proven on `europa-1250`,
-  a program of Europa itself. It cannot be sharper than 0.2 arcsec (two 0.1 arcsec pixels beat the 0.132 arcsec diffraction
-  limit), which is about 5.1 elements across the disc, so the eight asked for are out of reach.
+  a program of Europa itself. Its optics hold the disc to at most 7.8 elements and its pixels sample 5.1, so the eight asked
+  for are out of reach whichever figure is used, and this one is a definite no.
 - **VLT/NACO spectroscopy**, 98 frames of the object: covers the wavelengths and is proven on `europa-088C0833`, but it
-  produces spectra, not cubes. Its floor of 0.109 arcsec would allow about 9.4 elements, which is why that answer is
-  *possible* rather than yes.
+  produces spectra, not cubes. Its optics allow about 9.8 elements and its pixels 9.4, so the elements answer is *possible*
+  rather than yes.
 - **JWST NIRCAM/IMAGE**, 6 observations: covers the wavelengths, produces images rather than cubes, and its checked program is
   of another object.
-- **Juno JUNOCAM**, 52 colour images, and the Hubble configurations: all proven or partly proven routes, none of which covers
-  3.4 to 3.6 micrometres.
+- **Juno JUNOCAM**, 52 colour images, and the Hubble configurations: proven or partly proven routes, none covering 3.4 to 3.6
+  micrometres, so they sort below the three above.
+- One investigation entry about JWST carbon dioxide is left unassigned: it names the telescope but no single mode, and four
+  JWST modes observed Europa.
 
 Chandra holds no record of Europa at all, and the query says so instead of leaving it out.
 
 ### What this does not establish
 
 A candidate is a place to look, never a result. The query does not say that an observation exists at those exact wavelengths,
-that it is public, that the target was resolved in it, or that it is usable: not whether an exposure saturates, not how much
-of a mode's coverage a given setting used, not what resolution the observation reached, not where the body was pointed or lit.
+that it is public, that the target was resolved in it, or that it is usable: not whether an exposure saturates, not which
+filter or grating it used inside the mode's intervals, not what resolution it reached, not where the body was pointed or lit.
 Saturation is the plainest case: whether a grating saturates on a given body is learned by pinning an observation and reading
 it, and it then belongs in that object's investigation ledger, which the query reports as evidence. No archive ledger knows it.
-The sharpness figure is a bound on the instrument, not a measurement: an answer of *possible* means only that the mode is not
-ruled out. Nothing becomes a fact here until an observation is pinned, re-run and compared, which is what the rest of this
-page is about.
+The sharpness figures are bounds on an instrument and its detector, not measurements: *possible* means only that the mode is
+not ruled out, and *unknown* often means the pixels are coarser than the optics and nobody here knows what a given exposure
+recovered. Nothing becomes a fact until an observation is pinned, re-run and compared, which is what the rest of this page is
+about.

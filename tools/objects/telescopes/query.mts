@@ -36,10 +36,16 @@ export type ProductKind = typeof PRODUCT_KINDS[number];
  * states for that mode's bands, so it is not retyped here. */
 export interface ModeCapability {
   readonly telescope: string; readonly mode: string;
-  readonly wavelengthMicrometres: readonly [number, number];
+  /** One interval per documented window, filter or channel, merged where they touch and sorted. A mode is never given an
+   * enclosing minimum and maximum: NIRCam coronagraphy observes 1.8 to 2.2 and 2.8 to 5.0 micrometres and nothing between. */
+  readonly wavelengthIntervals: readonly (readonly [number, number])[];
   /** Left out where the documentation states no aperture, as for a spacecraft camera given only by its T number. */
   readonly apertureMetres?: number;
+  /** How finely the detector samples the image. This is sampling, not resolution. */
   readonly pixelScaleArcsec?: number;
+  /** What the optics resolve, where the documentation states it directly rather than leaving it to the diffraction limit:
+   * a grazing-incidence X-ray telescope has no useful diffraction limit, and its published point spread function is the fact. */
+  readonly instrumentResolution?: { readonly arcsec: number; readonly basis: string; readonly citation: string };
   readonly kinds: readonly ProductKind[];
   readonly citation: string;
   readonly note?: string;
@@ -62,6 +68,14 @@ export interface CandidateEvidence {
   readonly receipts: readonly string[];
   readonly bodyMaps: readonly MeasuredResolution[];
   readonly investigations: readonly { readonly id: string; readonly status: string; readonly subject: string }[];
+}
+
+/** Evidence that names no single mode. It stays here rather than being attached to a candidate that might not be the one it
+ * is about. */
+export interface UnassignedEvidence {
+  readonly kind: 'body-map' | 'investigation';
+  readonly source: string; readonly identity: string; readonly reason: string;
+  readonly couldMean: readonly string[];
 }
 
 export interface Candidate {
@@ -101,6 +115,7 @@ export interface CapabilityAnswer {
   readonly target: string;
   readonly request: CapabilityRequest;
   readonly candidates: readonly Candidate[];
+  readonly unassignedEvidence: readonly UnassignedEvidence[];
   /** Ledgers that hold no record of this target, so they contribute no candidate. */
   readonly withoutTheTarget: readonly { readonly telescope: string; readonly ledger: string; readonly reason: string }[];
 }
@@ -129,29 +144,55 @@ export function parseModeCapabilities(value: unknown): ModeCapability[] {
       if (!(PRODUCT_KINDS as readonly string[]).includes(kind)) throw new TypeError(`${mode} names an unknown product kind ${kind}.`);
       return kind as ProductKind;
     });
-    const coverage = entry.wavelengthMicrometres === 'bands' ? bandCoverage(mode) : (() => {
-      const range = requireArray(entry.wavelengthMicrometres, `${mode} wavelengthMicrometres`);
-      if (range.length !== 2) throw new TypeError(`${mode} states its coverage as two wavelengths in micrometres.`);
-      return [requireFiniteNumber(range[0], `${mode} shortest wavelength`), requireFiniteNumber(range[1], `${mode} longest wavelength`)] as const;
-    })();
-    if (!(coverage[0] > 0 && coverage[1] > coverage[0])) throw new RangeError(`${mode} covers ${coverage[0]} to ${coverage[1]} micrometres, which is not a range.`);
+    const intervals = entry.wavelengths === 'bands' ? bandIntervals(mode) : mergeIntervals(requireArray(entry.wavelengths, `${mode} wavelengths`).map((raw, position) => {
+      const range = requireArray(raw, `${mode} interval ${position}`);
+      if (range.length !== 2) throw new TypeError(`${mode} states each interval as two wavelengths in micrometres.`);
+      const from = requireFiniteNumber(range[0], `${mode} interval ${position} start`), to = requireFiniteNumber(range[1], `${mode} interval ${position} end`);
+      if (!(from > 0 && to > from)) throw new RangeError(`${mode} covers ${from} to ${to} micrometres, which is not a range.`);
+      return [from, to] as const;
+    }));
+    if (!intervals.length) throw new TypeError(`${mode} names the wavelengths it covers.`);
     if (!kinds.length) throw new TypeError(`${mode} names what it produces.`);
-    if (entry.apertureMetres === undefined && entry.pixelScaleArcsec === undefined) throw new TypeError(`${mode} states an aperture or a pixel scale; without either there is no floor to put under a sharpness.`);
-    return Object.freeze({ telescope, mode, wavelengthMicrometres: coverage,
+    if (entry.apertureMetres === undefined && entry.pixelScaleArcsec === undefined && entry.instrumentResolutionArcsec === undefined)
+      throw new TypeError(`${mode} states an aperture, a point spread function or a pixel scale; without any of them nothing is known about its sharpness.`);
+    if (entry.instrumentResolutionArcsec !== undefined && (entry.instrumentResolutionBasis === undefined || entry.instrumentResolutionCitation === undefined))
+      throw new TypeError(`${mode} states what its point spread function figure is and where it was read.`);
+    return Object.freeze({ telescope, mode, wavelengthIntervals: intervals,
       ...(entry.apertureMetres === undefined ? {} : { apertureMetres: requireFiniteNumber(entry.apertureMetres, `${mode} apertureMetres`) }),
       ...(entry.pixelScaleArcsec === undefined ? {} : { pixelScaleArcsec: requireFiniteNumber(entry.pixelScaleArcsec, `${mode} pixelScaleArcsec`) }),
+      ...(entry.instrumentResolutionArcsec === undefined ? {} : { instrumentResolution: { arcsec: requireFiniteNumber(entry.instrumentResolutionArcsec, `${mode} instrumentResolutionArcsec`),
+        basis: requireString(entry.instrumentResolutionBasis, `${mode} instrumentResolutionBasis`), citation: requireString(entry.instrumentResolutionCitation, `${mode} instrumentResolutionCitation`) } }),
       kinds, citation: requireString(entry.citation, `${mode} citation`), ...(entry.note === undefined ? {} : { note: requireString(entry.note, `${mode} note`) }) });
   });
 }
 
-/** The coverage `bands.mts` already states for a JWST cube mode, as the union of that mode's bands. */
-function bandCoverage(mode: string): readonly [number, number] {
+/** The intervals `bands.mts` already states for a JWST cube mode, one per band, merged where they overlap. */
+function bandIntervals(mode: string): (readonly [number, number])[] {
   const prefix = mode === 'NIRSPEC/IFU' ? 'NIRSPEC-' : mode === 'MIRI/IFU' ? 'MIRI-MRS-' : null;
   if (!prefix) throw new TypeError(`${mode} has no bands in bands.mts to take its coverage from; state it here with its citation.`);
   const ranges = Object.entries(JWST_CUBE_COVERAGE).filter(([id]) => id.startsWith(prefix)).map(([, range]) => range);
   if (!ranges.length) throw new TypeError(`bands.mts holds no ${mode} bands.`);
-  return [Math.min(...ranges.map(range => range[0])), Math.max(...ranges.map(range => range[1]))];
+  return mergeIntervals(ranges);
 }
+
+/** Intervals sorted and joined where they touch or overlap, so a gap that survives is a real gap. */
+export function mergeIntervals(intervals: readonly (readonly [number, number])[]): (readonly [number, number])[] {
+  const merged: [number, number][] = [];
+  for (const [from, to] of [...intervals].sort((a, b) => a[0] - b[0])) {
+    const last = merged.at(-1);
+    if (last && from <= last[1]) last[1] = Math.max(last[1], to); else merged.push([from, to]);
+  }
+  return merged;
+}
+
+/** The parts of `request` that fall inside the intervals. A request of zero width is inside when a interval contains it. */
+export function intersectIntervals(intervals: readonly (readonly [number, number])[], request: readonly [number, number]): (readonly [number, number])[] {
+  return intervals.map(([from, to]) => [Math.max(from, request[0]), Math.min(to, request[1])] as const)
+    .filter(([from, to]) => to > from || (to === from && request[0] === request[1]));
+}
+
+const intervalWords = (intervals: readonly (readonly [number, number])[]): string =>
+  intervals.map(([from, to]) => `${from} to ${to}`).join(intervals.length > 2 ? ', ' : ' and ');
 
 /** JWST: modes carry the tool and its checked programs; each object carries how many observations it has in each mode. */
 function jwstModes(value: unknown, target: string): TargetMode[] {
@@ -250,7 +291,7 @@ export function ledgerModeKeys(ledgers: QueryInputs['ledgers']): { readonly tele
   const keys = new Map<string, { telescope: string; mode: string }>();
   for (const { telescope, value } of ledgers) {
     const ledger = requireRecord(value, `${telescope} ledger`);
-    const add = (name: string, mode: string) => keys.set(`${name} ${mode}`, { telescope: name, mode });
+    const add = (name: string, mode: string) => keys.set(`${name} :: ${mode}`, { telescope: name, mode });
     if (telescope === 'jwst') for (const raw of requireArray(ledger.modes, 'modes')) add('JWST', requireString(requireRecord(raw, 'mode').mode, 'mode'));
     if (telescope === 'hst') for (const raw of requireArray(ledger.configurations, 'configurations')) add('Hubble', requireString(requireRecord(raw, 'configuration').configuration, 'configuration'));
     if (telescope === 'naco') for (const raw of requireArray(ledger.modes, 'modes')) add('VLT/NACO', requireString(requireRecord(raw, 'mode').mode, 'mode'));
@@ -264,59 +305,80 @@ const verdict = (answer: ConstraintAnswer, reason: string): ConstraintVerdict =>
 const round = (value: number): number => Number(value.toPrecision(3));
 const NO_CAPABILITIES = 'Capabilities not recorded: modes.json has no sourced entry for this mode, so nothing here states what it can do.';
 
-/** The sharpest this mode can be at the requested wavelengths: the diffraction limit at the shortest wavelength both the
- * request and the mode cover, never finer than two pixels where a pixel scale is recorded. */
-export function resolutionFloor(request: CapabilityRequest, capability: ModeCapability): { readonly arcsec: number; readonly basis: string } | null {
-  const shortest = Math.max(request.wavelengthMicrometres[0], capability.wavelengthMicrometres[0]);
-  if (shortest > Math.min(request.wavelengthMicrometres[1], capability.wavelengthMicrometres[1])) return null;
-  const diffraction = capability.apertureMetres === undefined ? null : 1.22 * shortest * 1e-6 / capability.apertureMetres * ARCSEC_PER_RADIAN;
-  const pixels = capability.pixelScaleArcsec === undefined ? null : 2 * capability.pixelScaleArcsec;
-  if (diffraction === null) return { arcsec: pixels!, basis: `two ${capability.pixelScaleArcsec} arcsec pixels; no aperture is recorded for this mode, so no diffraction limit is put under it and the true floor may be coarser` };
-  return pixels !== null && pixels > diffraction
-    ? { arcsec: pixels, basis: `two ${capability.pixelScaleArcsec} arcsec pixels, which are wider than the ${round(diffraction)} arcsec diffraction limit of ${capability.apertureMetres} m at ${round(shortest)} micrometres` }
-    : { arcsec: diffraction, basis: `1.22 lambda / D at ${round(shortest)} micrometres on ${capability.apertureMetres} m${pixels === null ? ', with no pixel scale recorded to floor it' : ''}` };
+/** Two different facts about one mode at the requested wavelengths, kept apart because they answer different questions.
+ *
+ * `instrument` is what the optics resolve: the diffraction limit of the aperture, or a point spread function the
+ * documentation states where diffraction says nothing useful. It can support a definite no.
+ * `sampling` is how finely the detector cuts that image up, two pixels. Coarse sampling is not a resolution limit: dithering,
+ * subpixel positioning and event centroiding recover part of it, and whether an observation did is not in any ledger. So
+ * sampling alone never supports a no; it turns an answer into unknown. */
+export interface ResolutionFacts {
+  readonly shortestMicrometres: number;
+  readonly instrument: { readonly arcsec: number; readonly basis: string } | null;
+  readonly sampling: { readonly arcsec: number; readonly basis: string } | null;
+}
+
+export function resolutionFacts(request: CapabilityRequest, capability: ModeCapability): ResolutionFacts | null {
+  const parts = intersectIntervals(capability.wavelengthIntervals, request.wavelengthMicrometres);
+  if (!parts.length) return null;
+  const shortest = Math.min(...parts.map(part => part[0]));
+  const diffraction = capability.apertureMetres === undefined ? null
+    : { arcsec: 1.22 * shortest * 1e-6 / capability.apertureMetres * ARCSEC_PER_RADIAN, basis: `1.22 lambda / D at ${round(shortest)} micrometres on ${capability.apertureMetres} m` };
+  const stated = capability.instrumentResolution;
+  return { shortestMicrometres: shortest,
+    instrument: stated ? { arcsec: stated.arcsec, basis: `${stated.basis} (${stated.citation})` } : diffraction,
+    sampling: capability.pixelScaleArcsec === undefined ? null : { arcsec: 2 * capability.pixelScaleArcsec, basis: `two ${capability.pixelScaleArcsec} arcsec detector pixels` } };
+}
+
+/** One rule for every sharpness question. The caller's wish is turned into the arcsec a resolution element may span, and
+ * `describe` renders a figure in that question's own units. */
+function sharpnessVerdict(facts: ResolutionFacts, askArcsec: number | undefined, describe: (arcsec: number) => string, asked: string, target: string): ConstraintVerdict {
+  const optics = facts.instrument ? `the optics cannot resolve better than ${describe(facts.instrument.arcsec)} (${facts.instrument.basis})` : 'what the optics resolve is not recorded for this mode';
+  const detector = facts.sampling ? `the detector samples at ${describe(facts.sampling.arcsec)} (${facts.sampling.basis})` : 'no pixel scale is recorded';
+  const recovered = 'Dithering, subpixel positioning and event centroiding recover part of what pixels lose, and no ledger says whether any observation did.';
+  if (askArcsec === undefined) return verdict('unknown', `Nothing was asked for here. As facts: ${optics}, and ${detector}.`);
+  if (facts.instrument && facts.instrument.arcsec > askArcsec) return verdict('no', `${optics[0]!.toUpperCase()}${optics.slice(1)}, which is coarser than the ${asked} asked for. ${detector[0]!.toUpperCase()}${detector.slice(1)}.`);
+  if (facts.sampling && facts.sampling.arcsec > askArcsec) return verdict('unknown', `${optics[0]!.toUpperCase()}${optics.slice(1)}, which meets the ${asked} asked for, but ${detector}. ${recovered}`);
+  if (!facts.instrument) return verdict('unknown', `${detector[0]!.toUpperCase()}${detector.slice(1)}, which meets the ${asked} asked for, but ${optics}, so nothing here rules the mode in or out.`);
+  if (facts.instrument) return verdict('partial', `Possible: ${optics}, and ${detector}, both within the ${asked} asked for. What any observation of ${target} reached is not in the ledger.`);
+  return verdict('unknown', 'Nothing is recorded about this mode\'s sharpness.');
 }
 
 function constraintVerdicts(request: CapabilityRequest, mode: TargetMode, capability: ModeCapability | undefined): Record<string, ConstraintVerdict> {
   const [from, to] = request.wavelengthMicrometres;
-  const floor = capability ? resolutionFloor(request, capability) : null;
+  const facts = capability ? resolutionFacts(request, capability) : null;
+  const inside = capability ? intersectIntervals(capability.wavelengthIntervals, request.wavelengthMicrometres) : [];
+  const width = to - from, covered = inside.reduce((sum, [start, end]) => sum + (end - start), 0);
+  const noOverlap = 'The mode covers none of the requested wavelengths, so there is nothing to state about them.';
   const verdicts: Record<string, ConstraintVerdict> = {
     wavelength: !capability ? verdict('unknown', NO_CAPABILITIES)
-      : to < capability.wavelengthMicrometres[0] || from > capability.wavelengthMicrometres[1]
-        ? verdict('no', `The mode covers ${capability.wavelengthMicrometres[0]} to ${capability.wavelengthMicrometres[1]} micrometres; ${from} to ${to} is outside it.`)
-      : from >= capability.wavelengthMicrometres[0] && to <= capability.wavelengthMicrometres[1]
-        ? verdict('yes', `The mode covers ${capability.wavelengthMicrometres[0]} to ${capability.wavelengthMicrometres[1]} micrometres, which contains ${from} to ${to}.`)
-      : verdict('partial', `The mode covers ${capability.wavelengthMicrometres[0]} to ${capability.wavelengthMicrometres[1]} micrometres, so only ${round(Math.max(from, capability.wavelengthMicrometres[0]))} to ${round(Math.min(to, capability.wavelengthMicrometres[1]))} of the request is inside it.`),
-    angularResolution: !capability ? verdict('unknown', NO_CAPABILITIES) : !floor ? verdict('unknown', 'The mode covers none of the requested wavelengths, so there is no sharpness to state for them.')
-      : request.angularResolutionArcsec === undefined ? verdict('unknown', `No sharpness was asked for. This mode cannot be sharper than ${round(floor.arcsec)} arcsec here (${floor.basis}).`)
-      : floor.arcsec > request.angularResolutionArcsec ? verdict('no', `This mode cannot be sharper than ${round(floor.arcsec)} arcsec here (${floor.basis}); the request asks for ${request.angularResolutionArcsec} arcsec or better.`)
-      : verdict('partial', `Possible: this mode cannot be sharper than ${round(floor.arcsec)} arcsec here (${floor.basis}), which is within the ${request.angularResolutionArcsec} arcsec asked for. Whether any observation of ${request.target} reached it is not in the ledger.`),
+      : !inside.length ? verdict('no', `The mode covers ${intervalWords(capability.wavelengthIntervals)} micrometres; ${from} to ${to} falls outside every one of them.`)
+      : covered >= width - 1e-9 ? verdict('yes', `The mode covers ${intervalWords(capability.wavelengthIntervals)} micrometres, which contains ${from} to ${to}.`)
+      : verdict('partial', `The mode covers ${intervalWords(capability.wavelengthIntervals)} micrometres, so only ${intervalWords(inside.map(([start, end]) => [round(start), round(end)] as const))} of the request is inside it.`),
+    angularResolution: !capability ? verdict('unknown', NO_CAPABILITIES) : !facts ? verdict('unknown', noOverlap)
+      : sharpnessVerdict(facts, request.angularResolutionArcsec, arcsec => `${round(arcsec)} arcsec`, `${request.angularResolutionArcsec} arcsec`, request.target),
     time: !request.time ? verdict('unknown', 'No time range was asked for.')
       : !mode.dates.length ? verdict('unknown', 'This ledger carries no dates for this target and mode.')
       : (() => {
-          const inside = mode.dates.filter(date => date.startIso >= request.time!.fromIso && date.startIso <= request.time!.toIso);
-          return inside.length ? verdict('yes', `The ledger names ${inside.length} observation(s) that started inside the range: ${inside.map(date => `${date.id} on ${date.startIso.slice(0, 10)}`).join(', ')}.`)
+          const dated = mode.dates.filter(date => date.startIso >= request.time!.fromIso && date.startIso <= request.time!.toIso);
+          return dated.length ? verdict('yes', `The ledger names ${dated.length} observation(s) that started inside the range: ${dated.map(date => `${date.id} on ${date.startIso.slice(0, 10)}`).join(', ')}.`)
             : verdict('partial', `The ledger dates ${mode.dates.length} observation(s) of this target and mode and all start outside the range (${mode.dates.map(date => date.startIso.slice(0, 10)).join(', ')}); it does not date the rest.`);
         })(),
     kind: !capability ? verdict('unknown', NO_CAPABILITIES)
       : !request.kind ? verdict('unknown', `No product kind was asked for. This mode produces ${capability.kinds.join(', ')}.`)
       : capability.kinds.includes(request.kind) ? verdict('yes', `This mode produces ${capability.kinds.join(', ')}.`)
       : verdict('no', `This mode produces ${capability.kinds.join(', ')}, not ${request.kind}.`) };
-  const ground = floor && request.rangeKm !== undefined
-    ? surfaceResolutionKm({ rangeKm: request.rangeKm, angularResolution: { majorArcsec: floor.arcsec, minorArcsec: floor.arcsec, basis: floor.basis } }).majorKm : null;
+  const kmOf = (arcsec: number) => surfaceResolutionKm({ rangeKm: request.rangeKm!, angularResolution: { majorArcsec: arcsec, minorArcsec: arcsec, basis: 'from the mode' } }).majorKm;
   if (request.surfaceResolutionKm !== undefined) verdicts.surfaceResolution = !capability ? verdict('unknown', NO_CAPABILITIES)
     : request.rangeKm === undefined ? verdict('unknown', 'Unknown: kilometres on the ground need the range to the body, which the caller gives.')
-    : !floor || ground === null ? verdict('unknown', 'The mode covers none of the requested wavelengths, so there is no resolution to convert.')
-    : ground > request.surfaceResolutionKm ? verdict('no', `At ${request.rangeKm} km the finest this mode can reach is ${round(ground)} km at the sub-observer point; the request asks for ${request.surfaceResolutionKm} km or finer.`)
-    : verdict('partial', `Possible: at ${request.rangeKm} km this mode cannot be finer than ${round(ground)} km at the sub-observer point, which is within the ${request.surfaceResolutionKm} km asked for, and it is coarser toward the limb. What any observation reached is not in the ledger.`);
+    : !facts ? verdict('unknown', noOverlap)
+    : sharpnessVerdict(facts, request.surfaceResolutionKm / request.rangeKm * ARCSEC_PER_RADIAN, arcsec => `${round(kmOf(arcsec))} km at the sub-observer point`, `${request.surfaceResolutionKm} km`, request.target);
   if (request.resolutionElements !== undefined) verdicts.resolutionElements = !capability ? verdict('unknown', NO_CAPABILITIES)
     : request.rangeKm === undefined || request.bodyRadiusKm === undefined ? verdict('unknown', 'Unknown: elements across the disc need the range to the body and its radius, which the caller gives.')
-    : !floor ? verdict('unknown', 'The mode covers none of the requested wavelengths, so there is no resolution to convert.')
-    : (() => {
-        const elements = resolutionElementsAcrossDisc({ rangeKm: request.rangeKm!, angularResolution: { majorArcsec: floor.arcsec, minorArcsec: floor.arcsec, basis: floor.basis } }, request.bodyRadiusKm!);
-        return elements < request.resolutionElements! ? verdict('no', `At ${request.rangeKm} km a body of radius ${request.bodyRadiusKm} km spans at most ${round(elements)} elements for this mode; the request asks for ${request.resolutionElements}.`)
-          : verdict('partial', `Possible: at ${request.rangeKm} km the disc spans at most ${round(elements)} elements for this mode, which meets the ${request.resolutionElements} asked for. What any observation reached is not in the ledger.`);
-      })();
+    : !facts ? verdict('unknown', noOverlap)
+    : sharpnessVerdict(facts, 2 * request.bodyRadiusKm / request.resolutionElements / request.rangeKm * ARCSEC_PER_RADIAN,
+      arcsec => `${round(resolutionElementsAcrossDisc({ rangeKm: request.rangeKm!, angularResolution: { majorArcsec: arcsec, minorArcsec: arcsec, basis: 'from the mode' } }, request.bodyRadiusKm!))} elements across the disc`,
+      `${request.resolutionElements} elements`, request.target);
   return verdicts;
 }
 
@@ -331,64 +393,94 @@ function toolkitSupport(mode: TargetMode, target: string): ToolkitSupport {
   return { level, reason, ...(tool ? { tool } : {}), programs, checked, targetProgramPinned: pinned.length > 0, targetProgramChecked: passed.length > 0 };
 }
 
-/** The observations of a body map that were taken in this mode, each with the resolution it actually had. */
-function measuredResolutions(inputs: QueryInputs, mode: TargetMode): MeasuredResolution[] {
-  const matches = (observation: BodyMapObservation) => {
-    const text = `${observation.telescope} ${observation.instrument}`.toUpperCase();
-    return text.includes(mode.telescope.split('/').at(-1)!.toUpperCase()) && mode.mode.split(/[/-]/u).some(part => part.length > 2 && text.includes(part.toUpperCase()));
-  };
-  return inputs.bodyMaps.flatMap(({ path, value }) => {
-    const map = parseBodyMapProduct(value);
-    return map.observations.filter(matches).map(observation => ({ path, quantity: `${map.definition.quantity} (${map.definition.units})`, observation: observation.id,
-      angularResolutionArcsec: observation.angularResolution.majorArcsec, surfaceResolutionKm: round(surfaceResolutionKm(observation).majorKm) }));
-  });
+interface AttachedEvidence { bodyMaps: MeasuredResolution[]; investigations: { id: string; status: string; subject: string }[] }
+
+/** The names a record may call a telescope, and the ledger telescope each one is. Evidence reaches a candidate only through
+ * this table and an exact mode key, because a detector name that merely looks similar is a different instrument: a Hubble
+ * STIS/CCD map says nothing about STIS/FUV-MAMA, which sees other wavelengths at another sampling. */
+const TELESCOPE_NAMES: Readonly<Record<string, string>> = Object.freeze({ JWST: 'JWST', 'JAMES WEBB SPACE TELESCOPE': 'JWST', HST: 'Hubble', HUBBLE: 'Hubble',
+  'HUBBLE SPACE TELESCOPE': 'Hubble', NACO: 'VLT/NACO', 'NAOS+CONICA': 'VLT/NACO', 'VLT/NACO': 'VLT/NACO', CHANDRA: 'Chandra', CXO: 'Chandra', JUNO: 'Juno', JUNOCAM: 'Juno' });
+
+/** The one mode a telescope and an instrument name identify, or the modes they could mean. Equality on the ledger's own mode
+ * key is the rule; anything else is left unassigned. */
+export function resolveMode(telescope: string, instrument: string, modes: readonly TargetMode[]): { readonly mode?: TargetMode; readonly couldMean: readonly string[] } {
+  const named = TELESCOPE_NAMES[telescope.trim().toUpperCase()];
+  if (!named) return { couldMean: [] };
+  const ours = modes.filter(mode => mode.telescope === named);
+  const exact = ours.filter(mode => mode.mode.toUpperCase() === instrument.trim().toUpperCase());
+  return exact.length === 1 ? { mode: exact[0]!, couldMean: [`${named} ${exact[0]!.mode}`] } : { couldMean: ours.map(mode => `${named} ${mode.mode}`) };
 }
 
-function investigationEntries(inputs: QueryInputs, mode: TargetMode): CandidateEvidence['investigations'] {
-  if (!inputs.investigations) return [];
-  const ledger = requireRecord(inputs.investigations.value, 'investigation ledger');
-  const words = [mode.telescope.split('/').at(-1)!, ...mode.mode.split(/[/-]/u)].filter(word => word.length > 2).map(word => word.toLowerCase());
-  return requireArray(ledger.entries, 'entries').map(raw => requireRecord(raw, 'entry')).filter(entry => {
-    const text = `${requireString(entry.subject, 'subject')} ${requireString(entry.finding, 'finding')}`.toLowerCase();
-    return words.some(word => text.includes(word));
-  }).map(entry => ({ id: requireString(entry.id, 'id'), status: requireString(entry.status, 'status'), subject: requireString(entry.subject, 'subject') }));
+/** Body maps and investigation entries, each attached to the one mode it names, or set aside. */
+function resolveEvidence(inputs: QueryInputs, modes: readonly TargetMode[]): { readonly attached: Map<TargetMode, AttachedEvidence>; readonly unassigned: UnassignedEvidence[] } {
+  const attached = new Map<TargetMode, AttachedEvidence>(modes.map(mode => [mode, { bodyMaps: [], investigations: [] }]));
+  const unassigned: UnassignedEvidence[] = [];
+  for (const { path, value } of inputs.bodyMaps) {
+    const map = parseBodyMapProduct(value);
+    for (const observation of map.observations) {
+      const { mode, couldMean } = resolveMode(observation.telescope, observation.instrument, modes);
+      const identity = `${observation.telescope} ${observation.instrument}, observation ${observation.id}`;
+      if (!mode) { unassigned.push({ kind: 'body-map', source: path, identity, couldMean,
+        reason: couldMean.length ? `${observation.instrument} is not one of this telescope's ledger mode keys, so which mode measured this is not stated.` : `Nothing here knows the telescope ${observation.telescope}.` }); continue; }
+      attached.get(mode)!.bodyMaps.push({ path, quantity: `${map.definition.quantity} (${map.definition.units})`, observation: observation.id,
+        angularResolutionArcsec: observation.angularResolution.majorArcsec, surfaceResolutionKm: round(surfaceResolutionKm(observation).majorKm) });
+    }
+  }
+  if (inputs.investigations) {
+    const ledger = requireRecord(inputs.investigations.value, 'investigation ledger');
+    for (const raw of requireArray(ledger.entries, 'entries')) {
+      const entry = requireRecord(raw, 'entry'), id = requireString(entry.id, 'id'), status = requireString(entry.status, 'status'), subject = requireString(entry.subject, 'subject');
+      const text = `${subject} ${requireString(entry.finding, 'finding')}`.toUpperCase();
+      const named = modes.filter(mode => text.includes(mode.mode.toUpperCase()));
+      if (named.length === 1) { attached.get(named[0]!)!.investigations.push({ id, status, subject }); continue; }
+      const telescopes = [...new Set(Object.entries(TELESCOPE_NAMES).filter(([name]) => text.includes(name)).map(([, ledgerName]) => ledgerName))];
+      const couldMean = named.length > 1 ? named.map(mode => `${mode.telescope} ${mode.mode}`) : modes.filter(mode => telescopes.includes(mode.telescope)).map(mode => `${mode.telescope} ${mode.mode}`);
+      if (couldMean.length) unassigned.push({ kind: 'investigation', source: inputs.investigations.path, identity: `${id}: ${subject}`, couldMean,
+        reason: 'The entry names a telescope but no one mode key, so it is evidence about the telescope rather than about any one of its modes.' });
+    }
+  }
+  return { attached, unassigned };
 }
 
 const UNKNOWN_UNTIL_READ = (target: string): string[] => [
   `Whether any exposure of ${target} saturates, or is too faint, at the requested wavelengths.`,
   'Which wavelengths of the mode a given exposure actually used, and how much of its coverage is usable in it.',
-  'The resolution a given observation reached: the ledger holds none, and the figure above is only what the mode cannot beat.',
+  'The resolution a given observation reached: the ledger holds none, and the figures above are what the optics and the pixels allow, not what was achieved.',
+  'Which filter, grating or channel a given exposure used: a mode reaches its wavelengths through discrete elements, and a request can fall between them.',
   `Where ${target} was pointed and lit: the sub-observer and sub-solar points, and the time of day on the ground.`,
   `Whether ${target} was resolved at all in a given exposure, and how much of it the field of view held.`];
 
 export function queryCapabilities(request: CapabilityRequest, inputs: QueryInputs): CapabilityAnswer {
   if (!(request.wavelengthMicrometres[0] > 0 && request.wavelengthMicrometres[1] >= request.wavelengthMicrometres[0])) throw new RangeError('A request states its wavelengths in micrometres, shortest first.');
   if (request.kind && !(PRODUCT_KINDS as readonly string[]).includes(request.kind)) throw new TypeError(`Unknown product kind ${request.kind}.`);
-  const capabilities = new Map(inputs.capabilities.map(entry => [`${entry.telescope} ${entry.mode}`, entry] as const));
-  const candidates: Candidate[] = [], withoutTheTarget: CapabilityAnswer['withoutTheTarget'] = [];
+  const capabilities = new Map(inputs.capabilities.map(entry => [`${entry.telescope} :: ${entry.mode}`, entry] as const));
+  const withoutTheTarget: { telescope: string; ledger: string; reason: string }[] = [], found: { ledger: string; mode: TargetMode }[] = [];
   for (const ledger of inputs.ledgers) {
     const adapter = ADAPTERS[ledger.telescope];
     if (!adapter) throw new TypeError(`No adapter reads the ${ledger.telescope} ledger.`);
     const modes = adapter(ledger.value, request.target);
     if (!modes.length) { withoutTheTarget.push({ telescope: ledger.telescope, ledger: ledger.path, reason: `This ledger holds no record of ${request.target}.` }); continue; }
-    for (const mode of modes) {
-      const capability = capabilities.get(`${mode.telescope} ${mode.mode}`);
-      const bodyMaps = measuredResolutions(inputs, mode);
-      candidates.push({ telescope: mode.telescope, mode: mode.mode, observations: mode.observations, programmes: mode.programmes,
-        meetsConstraints: constraintVerdicts(request, mode, capability), toolkitSupport: toolkitSupport(mode, request.target),
-        evidence: { ledger: ledger.path, archiveDate: mode.archiveDate, receipts: mode.toolkit.receipts, bodyMaps, investigations: investigationEntries(inputs, mode) },
-        unknown: [...(capability ? [] : [`What this mode can do: ${NO_CAPABILITIES}`]), ...UNKNOWN_UNTIL_READ(request.target),
-          ...(bodyMaps.length ? [] : [`Whether anything here has ever measured ${request.target} in this mode: no body map beside the object names it.`])] });
-    }
+    for (const mode of modes) found.push({ ledger: ledger.path, mode });
   }
-  return { target: request.target, request, candidates: candidates.sort((a, b) => `${a.telescope}${a.mode}` < `${b.telescope}${b.mode}` ? -1 : 1), withoutTheTarget };
+  const { attached, unassigned } = resolveEvidence(inputs, found.map(entry => entry.mode));
+  const candidates: Candidate[] = found.map(({ ledger, mode }) => {
+    const capability = capabilities.get(`${mode.telescope} :: ${mode.mode}`), evidence = attached.get(mode)!;
+    return { telescope: mode.telescope, mode: mode.mode, observations: mode.observations, programmes: mode.programmes,
+      meetsConstraints: constraintVerdicts(request, mode, capability), toolkitSupport: toolkitSupport(mode, request.target),
+      evidence: { ledger, archiveDate: mode.archiveDate, receipts: mode.toolkit.receipts, bodyMaps: evidence.bodyMaps, investigations: evidence.investigations },
+      unknown: [...(capability ? [] : [`What this mode can do: ${NO_CAPABILITIES}`]), ...UNKNOWN_UNTIL_READ(request.target),
+        ...(evidence.bodyMaps.length ? [] : [`Whether anything here has ever measured ${request.target} in this mode: no body map beside the object names it.`])] };
+  });
+  const rank = (candidate: Candidate) => candidate.meetsConstraints.wavelength?.answer === 'yes' ? 0 : candidate.meetsConstraints.wavelength?.answer === 'partial' ? 1 : 2;
+  return { target: request.target, request, unassignedEvidence: unassigned, withoutTheTarget,
+    candidates: candidates.sort((a, b) => rank(a) - rank(b) || (`${a.telescope}${a.mode}` < `${b.telescope}${b.mode}` ? -1 : 1)) };
 }
 
 export const LEDGER_TELESCOPES: readonly string[] = Object.keys(ADAPTERS);
 
 /** Read everything the query needs from the repository. The query itself reads nothing. */
 export async function loadQueryInputs(root: string, target: string): Promise<QueryInputs> {
-  const ledgers: QueryInputs['ledgers'] = [];
+  const ledgers: { telescope: string; path: string; value: unknown }[] = [];
   for (const telescope of LEDGER_TELESCOPES) {
     const path = `data/${telescope}/ledger.json`;
     const value = await readJsonSource(resolve(root, path)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
@@ -397,7 +489,7 @@ export async function loadQueryInputs(root: string, target: string): Promise<Que
   const capabilities = parseModeCapabilities(await readJsonSource(resolve(root, 'tools/objects/telescopes/modes.json')));
   const source = resolve(root, 'src/objects', target, 'source');
   const names = await readdir(source, { recursive: true }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return [] as string[]; throw error; });
-  const bodyMaps: QueryInputs['bodyMaps'] = [];
+  const bodyMaps: { path: string; value: unknown }[] = [];
   for (const name of names.filter(entry => entry.endsWith('.body-map.json')).sort()) bodyMaps.push({ path: `src/objects/${target}/source/${name}`, value: await readJsonSource(resolve(source, name)) });
   const investigationPath = `src/objects/${target}/investigations.json`;
   const investigations = await readJsonSource(resolve(root, investigationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return undefined; throw error; });
@@ -407,7 +499,7 @@ export async function loadQueryInputs(root: string, target: string): Promise<Que
 const LEVEL_WORDS: Readonly<Record<ToolkitLevel, string>> = Object.freeze({ none: 'no toolkit', 'tool-without-checked-program': 'a tool, but no checked program', proven: 'proven on checked programs' });
 
 export function formatAnswer(answer: CapabilityAnswer): string {
-  const lines = [`${answer.candidates.length} candidate mode(s) observed ${answer.target} at ${answer.request.wavelengthMicrometres[0]} to ${answer.request.wavelengthMicrometres[1]} micrometres.`,
+  const lines = [`${answer.candidates.length} candidate mode(s) observed ${answer.target}, the ones covering ${answer.request.wavelengthMicrometres[0]} to ${answer.request.wavelengthMicrometres[1]} micrometres first.`,
     'None of these says an observation is adequate: the ledgers hold counts and programmes, not exposures.', ''];
   for (const candidate of answer.candidates) {
     lines.push(`${candidate.telescope} ${candidate.mode}${candidate.observations ? ` (${candidate.observations.count} ${candidate.observations.scope === 'this-mode' ? 'observations in this mode' : 'observations of the object, across its modes'})` : ''}`);
@@ -420,6 +512,8 @@ export function formatAnswer(answer: CapabilityAnswer): string {
     for (const line of candidate.unknown) lines.push(`    unknown: ${line}`);
     lines.push('');
   }
+  for (const entry of answer.unassignedEvidence) lines.push(`unassigned ${entry.kind}: ${entry.source}, ${entry.identity}. ${entry.reason}${entry.couldMean.length ? ` It could be about ${entry.couldMean.join(', ')}.` : ''}`);
+  if (answer.unassignedEvidence.length) lines.push('');
   for (const entry of answer.withoutTheTarget) lines.push(`${entry.ledger}: ${entry.reason}`);
   return `${lines.join('\n')}\n`;
 }
@@ -449,7 +543,7 @@ export function requestFromArguments(args: readonly string[]): CapabilityRequest
     ...(kind ? { kind: kind as ProductKind } : {}) };
 }
 
-if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split('/').at(-1) ?? ' ')) {
+if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split('/').at(-1) ?? ' :: ')) {
   const args = process.argv.slice(2), request = requestFromArguments(args);
   const answer = queryCapabilities(request, await loadQueryInputs(resolve(import.meta.dirname, '../../..'), request.target));
   process.stdout.write(args.includes('--json') ? `${JSON.stringify(answer, null, 2)}\n` : formatAnswer(answer));
