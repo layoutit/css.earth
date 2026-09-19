@@ -7,7 +7,11 @@ product that toolkit has already produced here. Nothing on this page is an archi
 Every picture comes from one renderer, `tools/objects/telescopes/example-picture.mts`, and one checked-in recipe,
 `tools/objects/telescopes/examples.json`. The recipe states the file, the extension or plane, the pixel window, the unit
 the numbers are in, the two values drawn as black and white, the stretch between them, which way up the picture is, the
-whole-number enlargement and the colours. Every source sample becomes a block of equal output pixels. Nothing is
+whole-number enlargement and the colours. Three pictures are in colour, because three measurements of the same target
+exist on one pixel grid: each measurement is stretched on its own limits in its own unit and put straight into red,
+green or blue. That is representative colour, not what an eye would see, and each caption says which band is which
+channel. Channels that do not share a grid are refused rather than resampled onto one another. The rest are grey
+because there is only one measurement to draw. Every source sample becomes a block of equal output pixels. Nothing is
 smoothed, sharpened, interpolated or cleaned up, and a value outside the stated range is clipped rather than rescaled.
 The recipe also pins each product's sha256 and the command that makes it, so the whole chain can be re-run:
 
@@ -21,15 +25,16 @@ records that directory too. The commands below are written as they are run from 
 
 ## JWST, NIRCam: the Southern Ring Nebula
 
-![A bright oval nebula with a ragged rim and two spiked stars at its centre](telescopes/jwst-nircam-ngc3132.webp)
+![A cream and pink oval nebula with a ragged rim and two blue-white spiked stars at its centre](telescopes/jwst-nircam-ngc3132.webp)
 
-NGC 3132 on 3 June 2022 through NIRCam's F187N filter, re-run here through the pipeline's level-3 image stage onto this
-repository's own grid. Brightness is surface brightness in MJy/sr, from 0 to 300, asinh softened at 3. North is up and
-east left, from the mosaic's own world coordinates. F187N is a narrow filter on the hydrogen Paschen alpha line, so the
-shells stand out and most stars stay faint. The two stars in the middle are the pair at the heart of the nebula; the
-dying star that made it is the fainter one.
+NGC 3132 on 3 June 2022, three NIRCam filters re-run here through the pipeline's level-3 image stage onto one grid.
+Representative colour, not what an eye would see: red is F405N at 4.05 microns from 0 to 45 MJy/sr, green is F187N at
+1.87 microns from 0 to 180, blue is F090W at 0.90 microns from 0.2 to 25, each asinh softened at 2, 4 and 1. North is up
+and east left, from the mosaics' own world coordinates. F187N and F405N are narrow filters on hydrogen lines, which is
+why the shells stand out and the stars, bright in the wide blue filter, come out blue-white. The two stars in the middle
+are the pair at the heart of the nebula; the dying star that made it is the fainter one.
 
-`node tools/objects/jwst/imaging/image3.mts ngc-3132-2733 NIRCAM-F187N output/jwst-imaging/f187n-grid --grid src/objects/ngc-3132/source/sky-bands/jwst-nircam.json`
+`node tools/objects/jwst/imaging/image3.mts ngc-3132-2733 NIRCAM-<band> output/jwst-imaging/<band>-grid --grid src/objects/ngc-3132/source/sky-bands/jwst-nircam.json`
 
 ## JWST, NIRSpec: the ring around SN 1987A
 
@@ -110,28 +115,32 @@ around it is the adaptive optics halo, which is in the data, and there is no sur
 
 ## Chandra: Cassiopeia A in X-rays
 
-![A grainy round shell of bright filaments filling the frame, on a black background](telescopes/chandra-acis-cassiopeia-a.webp)
+![A grainy round shell of yellow-green and blue filaments filling the frame, on a black background](telescopes/chandra-acis-cassiopeia-a.webp)
 
 Cassiopeia A on 27 August 1999, a 3.6 ks ACIS-I observation reprocessed from level 1 on Chandra's own software, with
-the resulting events binned here into squares 2 by 2 sky pixels, 0.98 arcseconds a bin. Brightness is counts per bin,
-from 0 to 40, asinh softened at 1. North is up and east left. One dot is one detected X-ray photon between 0.5 and 7
-keV, 831,854 of the observation's 839,545 events, so this is counts, not brightness, and the graininess is the photon
-statistics of a short exposure rather than anything in the rendering. This observation is new here: the Chandra product
+the resulting events binned here into squares 2 by 2 sky pixels, 0.98 arcseconds a bin. Representative colour, not what
+an eye would see: the same event list split by photon energy into the conventional soft, medium and hard bands, red 0.5
+to 1.5 keV from 0 to 25 counts a bin, green 1.5 to 3.0 keV from 0 to 30, blue 3.0 to 7.0 keV from 0 to 6, each asinh
+softened at 1. All three are the same bins of the same list, so nothing is resampled. North is up and east left. One dot
+is one detected X-ray photon, so this is counts, not brightness, and the graininess is the photon statistics of a short
+exposure rather than anything in the rendering. This observation is new here: the Chandra product
 already on disk was a deliberately offset pointing that keeps the Crab Nebula off the detector, so Cas A was pinned and
 reprocessed, and the toolkit's event-by-event comparison against the archive matched all 839,545 events.
 
 `node tools/objects/chandra/reprocess.mts casa-acisi 210 .local/chandra/casa-acisi`
 
-## Spitzer, IRAC: NGC 3132 at 3.6 microns
+## Spitzer, IRAC: NGC 3132 in the infrared
 
-![A faint ring-shaped nebula with a bright pair of stars at its centre, among many field stars](telescopes/spitzer-irac-ngc3132.webp)
+![A salmon-pink ring-shaped nebula with a bright pair of stars at its centre, among blue-white field stars](telescopes/spitzer-irac-ngc3132.webp)
 
-The IRAC channel 1 mosaic of NGC 3132, re-made here from the archive's own twelve level-1 frames of AOR 4416768.
-Brightness is surface brightness in MJy/sr, from 0.05 to 30, asinh softened at 0.2. The mosaic keeps the observation's
-own rotation: north lies 303.4 degrees and east 213.4 degrees clockwise from up, measured from the mosaic's own world
-coordinates, and the picture is the stored rows with the first at the bottom. This is the same nebula as the NIRCam
-picture above, at nearly seven times the pixel size: at 3.6 microns most of what is bright is stars, and the nebula's
-shell is faint but plainly there.
+Three of the four IRAC channels of NGC 3132, re-made here from the archive's own twelve level-1 frames of AOR 4416768
+and mosaicked onto one grid. Representative colour, not what an eye would see: red is channel 4 at 8.0 microns from 2.6
+to 25 MJy/sr, green is channel 2 at 4.5 microns from 0.07 to 20, blue is channel 1 at 3.6 microns from 0.05 to 20, each
+asinh softened at 0.5, 0.2 and 0.2. The mosaics keep the observation's own rotation: north lies 303.4 degrees and east
+213.4 degrees clockwise from up, and the picture is the stored rows with the first at the bottom. The nebula is pink
+because its shell is brightest at 8 microns, and the stars are blue-white because they are brightest at 3.6. The
+scattered single-colour specks are cosmic ray hits that survived in one channel only; a few dark pixels near the centre
+are missing from channel 4. This is the same nebula as the NIRCam picture above, at nearly seven times the pixel size.
 
 `node tools/objects/spitzer/mosaic.mts ngc3132-4416768`
 

@@ -21,6 +21,7 @@ const window = (values: readonly number[], width = 3, height = 2, header = undef
 test('a recipe states everything a picture needs, and a malformed one is refused', () => {
   assert.equal(recipe.id, 'probe');
   assert.deepEqual(recipe.enlarge, [2, 2]);
+  assert.equal(recipe.channels.length, 1);
   assert.deepEqual(parseExampleRecipe({ ...base, enlarge: [7, 3] }).enlarge, [7, 3]);
   assert.equal(recipe.producedIn, undefined);
   assert.equal(parseExampleRecipe({ ...base, producedIn: 'css.earth-probe' }).producedIn, 'css.earth-probe');
@@ -38,13 +39,13 @@ test('a recipe states everything a picture needs, and a malformed one is refused
 });
 
 test('a linear stretch clips outside its range and an asinh one lifts the faint end, both in the image unit', () => {
-  assert.deepEqual([-1, 0, 0.5, 1, 2].map(value => stretchSample(value, recipe.stretch)), [0, 0, 0.5, 1, 1]);
-  const asinh = parseExampleRecipe({ ...base, stretch: { kind: 'asinh', black: 0, white: 100, softening: 1 } }).stretch;
+  assert.deepEqual([-1, 0, 0.5, 1, 2].map(value => stretchSample(value, recipe.channels[0]!.stretch)), [0, 0, 0.5, 1, 1]);
+  const asinh = parseExampleRecipe({ ...base, stretch: { kind: 'asinh', black: 0, white: 100, softening: 1 } }).channels[0]!.stretch;
   assert.deepEqual([0, 100].map(value => stretchSample(value, asinh)), [0, 1]);
   // asinh(1)/asinh(100) lifts a sample at one hundredth of the range to about a fifth of the way to white.
   assert.ok(Math.abs(stretchSample(1, asinh) - Math.asinh(1) / Math.asinh(100)) < 1e-12);
   assert.ok(stretchSample(1, asinh) > 0.16 && stretchSample(1, asinh) < 0.17);
-  assert.ok(Number.isNaN(stretchSample(NaN, recipe.stretch)));
+  assert.ok(Number.isNaN(stretchSample(NaN, recipe.channels[0]!.stretch)));
 });
 
 test('greys and a stated ramp are interpolated in sRGB, and a missing sample needs a stated colour', () => {
@@ -86,18 +87,18 @@ test('north and east on screen are measured from the gnomonic world coordinates,
 });
 
 test('a recipe for another unit is refused, so a picture cannot be drawn to the wrong scale', () => {
-  assert.throws(() => examplePixels(window([0, 0, 0, 0, 0, 0], 3, 2, { BUNIT: 'MJy/sr' }), recipe), /BUNIT MJy\/sr; the recipe states K/u);
+  assert.throws(() => examplePixels([window([0, 0, 0, 0, 0, 0], 3, 2, { BUNIT: 'MJy/sr' })], recipe), /BUNIT MJy\/sr; the recipe states K/u);
 });
 
 test('a sample may be drawn as a rectangle where the instrument samples are not square on the sky', async () => {
-  const picture = await renderExamplePicture(window([0, 0.5, 1, 1, 0.5, 0]), parseExampleRecipe({ ...base, enlarge: [3, 1] }));
+  const picture = await renderExamplePicture([window([0, 0.5, 1, 1, 0.5, 0])], parseExampleRecipe({ ...base, enlarge: [3, 1] }));
   assert.deepEqual([picture.width, picture.height], [9, 2]);
   const { data } = await sharp(picture.bytes).raw().toBuffer({ resolveWithObject: true });
   assert.deepEqual([...data.subarray(0, 27)].filter((_, index) => index % 3 === 0), [255, 255, 255, 128, 128, 128, 0, 0, 0]);
 });
 
 test('every source sample becomes a square of equal pixels in a lossless picture', async () => {
-  const picture = await renderExamplePicture(window([0, 0.5, 1, 1, 0.5, 0]), recipe);
+  const picture = await renderExamplePicture([window([0, 0.5, 1, 1, 0.5, 0])], recipe);
   assert.deepEqual([picture.width, picture.height], [6, 4]);
   const { data, info } = await sharp(picture.bytes).raw().toBuffer({ resolveWithObject: true });
   assert.deepEqual([info.width, info.height, info.channels], [6, 4, 3]);
@@ -105,6 +106,42 @@ test('every source sample becomes a square of equal pixels in a lossless picture
   assert.deepEqual(greys(0), [255, 255, 128, 128, 0, 0]);
   assert.deepEqual(greys(1), [255, 255, 128, 128, 0, 0]);
   assert.deepEqual(greys(2), [0, 0, 128, 128, 255, 255]);
+});
+
+test('three channels go straight into red, green and blue, each on its own stretch, and only on one grid', async () => {
+  const channel = (unit: string, white: number) => ({ label: unit, source: base.source, unit, stretch: { kind: 'linear', black: 0, white }, sha256: 'b'.repeat(64) });
+  const three = parseExampleRecipe({ ...base, source: undefined, unit: undefined, stretch: undefined,
+    product: { command: base.product.command, definition: base.product.definition },
+    channels: [channel('keV-soft', 10), channel('keV-medium', 4), channel('keV-hard', 2)],
+    colour: { kind: 'channels', missing: '#4a4a4a' } });
+  assert.deepEqual(three.channels.map(each => each.unit), ['keV-soft', 'keV-medium', 'keV-hard']);
+  // The same stored value reads differently in each channel because each has its own limits: 5, 2 and 1 are all halfway.
+  const grid = { NAXIS1: 3, NAXIS2: 2, CRVAL1: 10 };
+  const { pixels } = examplePixels([window([5, 0, 10, 0, 0, 0], 3, 2, { ...grid, BUNIT: 'keV-soft' }),
+    window([2, 0, 4, 0, 0, 0], 3, 2, { ...grid, BUNIT: 'keV-medium' }), window([1, 0, 2, 0, 0, 0], 3, 2, { ...grid, BUNIT: 'keV-hard' })], three);
+  // The first stored row is drawn last, so the halfway samples land at the start of the second display row.
+  assert.deepEqual([...pixels.subarray(9, 15)], [128, 128, 128, 0, 0, 0]);
+  assert.deepEqual([...pixels.subarray(15, 18)], [255, 255, 255]);
+  // A sample missing from any one channel takes the stated neutral grey.
+  const { pixels: holed } = examplePixels([window([NaN, 0, 10, 0, 0, 0], 3, 2, { ...grid, BUNIT: 'keV-soft' }),
+    window([2, 0, 4, 0, 0, 0], 3, 2, { ...grid, BUNIT: 'keV-medium' }), window([1, 0, 2, 0, 0, 0], 3, 2, { ...grid, BUNIT: 'keV-hard' })], three);
+  assert.deepEqual([...holed.subarray(9, 12)], [74, 74, 74]);
+  // Channels on different grids are refused rather than resampled onto one another.
+  assert.throws(() => examplePixels([window([1, 1, 1, 1, 1, 1], 3, 2, { ...grid, BUNIT: 'keV-soft' }),
+    window([1, 1, 1, 1, 1, 1], 3, 2, { ...grid, CRVAL1: 11, BUNIT: 'keV-medium' }), window([1, 1, 1, 1, 1, 1], 3, 2, { ...grid, BUNIT: 'keV-hard' })], three),
+    /different grids: CRVAL1/u);
+  // A recipe cannot state three channels and a grey scale, or two channels, or channels binned differently.
+  assert.throws(() => parseExampleRecipe({ ...base, source: undefined, unit: undefined, stretch: undefined,
+    product: { command: base.product.command, definition: base.product.definition },
+    channels: [channel('a', 1), channel('b', 1), channel('c', 1)], colour: { kind: 'greys' } }), /draws them as channels/u);
+  assert.throws(() => parseExampleRecipe({ ...base, source: undefined, unit: undefined, stretch: undefined,
+    product: { command: base.product.command, definition: base.product.definition },
+    channels: [channel('a', 1), channel('b', 1)], colour: { kind: 'channels', missing: '#4a4a4a' } }), /exactly three channels/u);
+  const events = (limits: readonly [number, number], binPixels = 2) => ({ label: 'band', unit: 'counts per bin', stretch: { kind: 'linear', black: 0, white: 1 }, sha256: 'b'.repeat(64),
+    source: { kind: 'fits-events', path: 'e.fits', columns: ['x', 'y'], binPixels, origin: [0, 0], size: [4, 4], band: { column: 'energy', limits } } });
+  assert.throws(() => parseExampleRecipe({ ...base, source: undefined, unit: undefined, stretch: undefined,
+    product: { command: base.product.command, definition: base.product.definition },
+    channels: [events([1, 2]), events([2, 3]), events([3, 4], 4)], colour: { kind: 'channels', missing: '#4a4a4a' } }), /one set of bins/u);
 });
 
 test('events are counted into square bins, and events outside the grid are dropped', () => {

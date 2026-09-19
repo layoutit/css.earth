@@ -46,7 +46,24 @@ export type ExampleSource =
 export type ExampleColour =
   | { readonly kind: 'greys'; readonly missing?: string }
   /** A stated ramp: stops at positions 0 to 1 through the stretched range, interpolated in sRGB. */
-  | { readonly kind: 'ramp'; readonly stops: readonly (readonly [number, string])[]; readonly missing?: string };
+  | { readonly kind: 'ramp'; readonly stops: readonly (readonly [number, string])[]; readonly missing?: string }
+  /** Three channels, each stretched on its own limits in its own unit, put straight into red, green and blue. This is
+   * representative colour: it says which measurement is which channel, not what an eye would see. */
+  | { readonly kind: 'channels'; readonly missing: string };
+
+export interface ExampleStretch { readonly kind: 'linear' | 'asinh'; readonly black: number; readonly white: number; readonly softening?: number }
+
+/** One measurement drawn into the picture: a single grey or ramped channel, or one of three colour channels. */
+export interface ExampleChannel {
+  /** What this channel is, for the caption: a band, a filter or an energy range. */
+  readonly label: string;
+  readonly source: ExampleSource;
+  /** The unit the stored numbers are in. A product that states BUNIT must state this one. */
+  readonly unit: string;
+  /** `black` and `white` are in `unit`. `asinh` needs `softening`, also in `unit`: the width of the linear part. */
+  readonly stretch: ExampleStretch;
+  readonly sha256: string;
+}
 
 export interface ExampleRecipe {
   readonly id: string;
@@ -55,23 +72,21 @@ export interface ExampleRecipe {
   readonly title: string;
   readonly target: string;
   readonly date: string;
-  readonly source: ExampleSource;
+  /** One channel, or exactly three drawn as red, green and blue. Three channels must land on one pixel grid: the
+   * renderer refuses grids that differ rather than resampling one onto another. */
+  readonly channels: readonly ExampleChannel[];
   /** Every source path is where the command writes it inside the repository it runs in. A toolkit that lives in a sibling
    * worktree on this machine names that directory here, and the product is read from beside this checkout. */
   readonly producedIn: string | undefined;
-  /** The unit the stored numbers are in. A product that states BUNIT must state this one. */
-  readonly unit: string;
   /** First column and first stored row, counted from 1 as FITS viewers do, and the size in source samples. */
   readonly window: { readonly x: number; readonly y: number; readonly width: number; readonly height: number };
   /** `sky` reads the WCS and draws north up and east left; the other two state which stored row is drawn at the top. */
   readonly orientation: { readonly mode: 'sky' | 'first-row-top' | 'first-row-bottom'; readonly note: string };
-  /** `black` and `white` are in `unit`. `asinh` needs `softening`, also in `unit`: the width of the linear part. */
-  readonly stretch: { readonly kind: 'linear' | 'asinh'; readonly black: number; readonly white: number; readonly softening?: number };
   readonly colour: ExampleColour;
   /** Output pixels per source sample, across and down. The two differ only where the instrument's samples are not
    * square on the sky, and a rectangle of equal pixels is still a block of equal pixels. */
   readonly enlarge: readonly [number, number];
-  readonly product: { readonly sha256: string; readonly command: string; readonly definition: string };
+  readonly product: { readonly command: string; readonly definition: string };
   readonly note: string;
 }
 
@@ -126,6 +141,10 @@ function parseSource(value: unknown): ExampleSource {
 function parseColour(value: unknown): ExampleColour {
   const colour = record(value, 'colour'), kind = nonEmpty(colour.kind, 'colour.kind');
   const missing = colour.missing === undefined ? undefined : colourValue(colour.missing, 'colour.missing');
+  if (kind === 'channels') {
+    if (missing === undefined) throw new TypeError('A three-channel picture states the colour for a sample missing from any channel.');
+    return { kind, missing };
+  }
   if (kind === 'greys') return { kind, ...(missing === undefined ? {} : { missing }) };
   if (kind !== 'ramp') throw new TypeError(`Unsupported example colour kind: ${kind}.`);
   const stops = colour.stops;
@@ -141,9 +160,45 @@ function parseColour(value: unknown): ExampleColour {
   return { kind, stops: parsed, ...(missing === undefined ? {} : { missing }) };
 }
 
+function parseStretch(value: unknown, label: string): ExampleStretch {
+  const stretch = record(value, label), kind = nonEmpty(stretch.kind, `${label}.kind`);
+  if (kind !== 'linear' && kind !== 'asinh') throw new TypeError(`Unsupported example stretch: ${kind}.`);
+  const [black, white] = [finite(stretch.black, `${label}.black`), finite(stretch.white, `${label}.white`)];
+  if (!(black < white)) throw new TypeError('An example stretch runs from black up to white.');
+  const softening = stretch.softening === undefined ? undefined : finite(stretch.softening, `${label}.softening`);
+  if ((kind === 'asinh') !== (softening !== undefined) || (softening !== undefined && !(softening > 0)))
+    throw new TypeError('An asinh stretch states a positive softening, in the image unit; a linear stretch states none.');
+  return { kind, black, white, ...(softening === undefined ? {} : { softening }) };
+}
+
+function parseSha256(value: unknown, label: string) {
+  const sha256 = nonEmpty(value, label).toLowerCase();
+  if (!/^[0-9a-f]{64}$/u.test(sha256)) throw new TypeError('An example product sha256 is 64 hexadecimal characters.');
+  return sha256;
+}
+
+function parseChannel(value: unknown, label: string): ExampleChannel {
+  const channel = record(value, label);
+  return { label: nonEmpty(channel.label, `${label}.label`), source: parseSource(channel.source), unit: nonEmpty(channel.unit, `${label}.unit`),
+    stretch: parseStretch(channel.stretch, `${label}.stretch`), sha256: parseSha256(channel.sha256, `${label}.sha256`) };
+}
+
+/** Three channels may differ only in what they measure: the same window of the same grid, or the same bins of one event
+ * list. Anything else would need resampling, which this renderer does not do. */
+function checkOneGrid(channels: readonly ExampleChannel[]) {
+  const first = channels[0]!.source;
+  for (const channel of channels.slice(1)) {
+    const source = channel.source;
+    if (source.kind !== first.kind) throw new TypeError('The three channels of a picture come from one kind of product.');
+    if (source.kind === 'fits-events' && first.kind === 'fits-events' &&
+      (source.path !== first.path || source.binPixels !== first.binPixels || String(source.origin) !== String(first.origin) || String(source.size) !== String(first.size)))
+      throw new TypeError('The three channels of an event picture are bands of one event list on one set of bins.');
+  }
+}
+
 export function parseExampleRecipe(value: unknown): ExampleRecipe {
   const recipe = record(value, 'recipe'), window = record(recipe.window, 'window'), orientation = record(recipe.orientation, 'orientation');
-  const stretch = record(recipe.stretch, 'stretch'), product = record(recipe.product, 'product');
+  const product = record(recipe.product, 'product');
   const id = nonEmpty(recipe.id, 'id');
   if (!/^[a-z0-9][a-z0-9-]*$/u.test(id)) throw new TypeError('An example id is lower-case letters, digits and hyphens.');
   const size = { x: whole(window.x, 'window.x'), y: whole(window.y, 'window.y'), width: whole(window.width, 'window.width'), height: whole(window.height, 'window.height') };
@@ -154,24 +209,27 @@ export function parseExampleRecipe(value: unknown): ExampleRecipe {
   if (size.width * enlarge[0] > MAX_OUTPUT_EDGE || size.height * enlarge[1] > MAX_OUTPUT_EDGE) throw new RangeError(`An example picture is larger than ${MAX_OUTPUT_EDGE} pixels on an edge.`);
   const mode = nonEmpty(orientation.mode, 'orientation.mode');
   if (mode !== 'sky' && mode !== 'first-row-top' && mode !== 'first-row-bottom') throw new TypeError(`Unsupported example orientation: ${mode}.`);
-  const kind = nonEmpty(stretch.kind, 'stretch.kind');
-  if (kind !== 'linear' && kind !== 'asinh') throw new TypeError(`Unsupported example stretch: ${kind}.`);
-  const [black, white] = [finite(stretch.black, 'stretch.black'), finite(stretch.white, 'stretch.white')];
-  if (!(black < white)) throw new TypeError('An example stretch runs from black up to white.');
-  const softening = stretch.softening === undefined ? undefined : finite(stretch.softening, 'stretch.softening');
-  if ((kind === 'asinh') !== (softening !== undefined) || (softening !== undefined && !(softening > 0)))
-    throw new TypeError('An asinh stretch states a positive softening, in the image unit; a linear stretch states none.');
-  const sha256 = nonEmpty(product.sha256, 'product.sha256').toLowerCase();
-  if (!/^[0-9a-f]{64}$/u.test(sha256)) throw new TypeError('An example product sha256 is 64 hexadecimal characters.');
+  const colour = parseColour(recipe.colour);
+  let channels: ExampleChannel[];
+  if (recipe.channels === undefined) {
+    if (colour.kind === 'channels') throw new TypeError('A three-channel picture states its three channels.');
+    channels = [{ label: nonEmpty(recipe.unit, 'unit'), source: parseSource(recipe.source), unit: nonEmpty(recipe.unit, 'unit'),
+      stretch: parseStretch(recipe.stretch, 'stretch'), sha256: parseSha256(product.sha256, 'product.sha256') }];
+  } else {
+    if (colour.kind !== 'channels') throw new TypeError('A recipe with three channels draws them as channels.');
+    if (recipe.source !== undefined || recipe.unit !== undefined || recipe.stretch !== undefined || product.sha256 !== undefined)
+      throw new TypeError('A three-channel recipe states its source, unit, stretch and sha256 once per channel, not once for the picture.');
+    if (!Array.isArray(recipe.channels) || recipe.channels.length !== 3) throw new TypeError('A three-channel picture states exactly three channels, red first.');
+    channels = recipe.channels.map((channel, index) => parseChannel(channel, `channels[${index}]`));
+    checkOneGrid(channels);
+  }
   return {
     id, telescope: nonEmpty(recipe.telescope, 'telescope'), instrument: nonEmpty(recipe.instrument, 'instrument'),
     title: nonEmpty(recipe.title, 'title'), target: nonEmpty(recipe.target, 'target'), date: nonEmpty(recipe.date, 'date'),
-    source: parseSource(recipe.source), producedIn: recipe.producedIn === undefined ? undefined : nonEmpty(recipe.producedIn, 'producedIn'),
-    unit: nonEmpty(recipe.unit, 'unit'), window: size,
+    channels, producedIn: recipe.producedIn === undefined ? undefined : nonEmpty(recipe.producedIn, 'producedIn'), window: size,
     orientation: { mode, note: nonEmpty(orientation.note, 'orientation.note') },
-    stretch: { kind, black, white, ...(softening === undefined ? {} : { softening }) },
-    colour: parseColour(recipe.colour), enlarge,
-    product: { sha256, command: nonEmpty(product.command, 'product.command'), definition: nonEmpty(product.definition, 'product.definition') },
+    colour, enlarge,
+    product: { command: nonEmpty(product.command, 'product.command'), definition: nonEmpty(product.definition, 'product.definition') },
     note: nonEmpty(recipe.note, 'note'),
   };
 }
@@ -210,8 +268,8 @@ export function productPath(recipe: Pick<ExampleRecipe, 'producedIn'>, path: str
   return resolve(root, '..', recipe.producedIn, path);
 }
 
-async function readSourceWindow(recipe: ExampleRecipe, root: string): Promise<SourceWindow> {
-  const { source, window } = recipe, path = productPath(recipe, source.path, root);
+async function readSourceWindow(recipe: ExampleRecipe, source: ExampleSource, root: string): Promise<SourceWindow> {
+  const { window } = recipe, path = productPath(recipe, source.path, root);
   if (source.kind === 'fits-events') {
     const bytes = await readFile(path), table = eventTable(bytes);
     const binned = binEventCounts(column(bytes, table, source.columns[0]), column(bytes, table, source.columns[1]), source,
@@ -278,7 +336,7 @@ export function northAndEastOnScreen(header: FitsHeader, mode: ExampleRecipe['or
 }
 
 /** The stretched position of a sample between black and white, clipped to 0 and 1; NaN stays NaN. */
-export function stretchSample(value: number, stretch: ExampleRecipe['stretch']) {
+export function stretchSample(value: number, stretch: ExampleStretch) {
   if (!Number.isFinite(value)) return NaN;
   const span = stretch.white - stretch.black;
   const fraction = stretch.kind === 'linear' ? (value - stretch.black) / span
@@ -286,34 +344,57 @@ export function stretchSample(value: number, stretch: ExampleRecipe['stretch']) 
   return Math.min(1, Math.max(0, fraction));
 }
 
-const channels = (colour: string) => [1, 3, 5].map(at => Number.parseInt(colour.slice(at, at + 2), 16)) as [number, number, number];
+/** The three sRGB bytes of an #rrggbb colour. */
+const sRgb = (colour: string) => [1, 3, 5].map(at => Number.parseInt(colour.slice(at, at + 2), 16)) as [number, number, number];
 
 /** Red, green and blue for a stretched position, or for a missing sample. */
 export function colourOf(fraction: number, colour: ExampleColour): [number, number, number] {
   if (!Number.isFinite(fraction)) {
     if (!colour.missing) throw new Error('A sample has no value and the recipe states no colour for missing samples.');
-    return channels(colour.missing);
+    return sRgb(colour.missing);
   }
   if (colour.kind === 'greys') { const grey = Math.round(255 * fraction); return [grey, grey, grey]; }
+  if (colour.kind === 'channels') throw new Error('A three-channel picture is composed from its channels, not from one value.');
   const stops = colour.stops, next = stops.findIndex(stop => stop[0] >= fraction);
-  if (next <= 0) return channels(stops[Math.max(next, 0)]![1]);
+  if (next <= 0) return sRgb(stops[Math.max(next, 0)]![1]);
   const [aAt, aColour] = stops[next - 1]!, [bAt, bColour] = stops[next]!, t = (fraction - aAt) / (bAt - aAt);
-  const [a, b] = [channels(aColour), channels(bColour)];
+  const [a, b] = [sRgb(aColour), sRgb(bColour)];
   return [0, 1, 2].map(index => Math.round(a[index]! + t * (b[index]! - a[index]!))) as [number, number, number];
 }
 
-/** Display-ordered red, green and blue samples, before enlargement. */
-export function examplePixels(source: SourceWindow, recipe: ExampleRecipe) {
-  if (source.header && typeof source.header.BUNIT === 'string' && source.header.BUNIT.trim() !== recipe.unit)
-    throw new Error(`The product states BUNIT ${source.header.BUNIT.trim()}; the recipe states ${recipe.unit}.`);
-  const display = displayOrder(source, recipe), pixels = new Uint8Array(display.length * 3);
-  for (let index = 0; index < display.length; index++) pixels.set(colourOf(stretchSample(display[index]!, recipe.stretch), recipe.colour), index * 3);
-  return { pixels, width: source.width, height: source.height };
+/** The cards that fix a FITS image's pixel grid. Two channels whose cards differ do not lie on one grid. */
+const GRID_CARDS = ['NAXIS1', 'NAXIS2', 'CRPIX1', 'CRPIX2', 'CRVAL1', 'CRVAL2', 'CDELT1', 'CDELT2',
+  'CD1_1', 'CD1_2', 'CD2_1', 'CD2_2', 'PC1_1', 'PC1_2', 'PC2_1', 'PC2_2'] as const;
+
+/** Display-ordered red, green and blue samples, before enlargement. One window is drawn with the recipe's colour; three
+ * are put straight into red, green and blue, each stretched on its own limits, once their grids are shown to agree. */
+export function examplePixels(windows: readonly SourceWindow[], recipe: ExampleRecipe) {
+  if (windows.length !== recipe.channels.length) throw new Error('A picture needs one window for each channel.');
+  windows.forEach((window, index) => {
+    const unit = recipe.channels[index]!.unit;
+    if (window.header && typeof window.header.BUNIT === 'string' && window.header.BUNIT.trim() !== unit)
+      throw new Error(`The product states BUNIT ${window.header.BUNIT.trim()}; the recipe states ${unit}.`);
+  });
+  const first = windows[0]!;
+  for (const window of windows.slice(1)) {
+    if (window.width !== first.width || window.height !== first.height) throw new Error('The channels of a picture cover different numbers of samples.');
+    for (const card of GRID_CARDS)
+      if (String(window.header?.[card]) !== String(first.header?.[card]))
+        throw new Error(`The channels of a picture are on different grids: ${card} is ${String(first.header?.[card])} and ${String(window.header?.[card])}. They would have to be resampled, which this renderer does not do.`);
+  }
+  const display = windows.map(window => displayOrder(window, recipe)), pixels = new Uint8Array(display[0]!.length * 3);
+  for (let index = 0; index < display[0]!.length; index++) {
+    const fractions = display.map((values, channel) => stretchSample(values[index]!, recipe.channels[channel]!.stretch));
+    if (fractions.length === 1) { pixels.set(colourOf(fractions[0]!, recipe.colour), index * 3); continue; }
+    if (fractions.some(fraction => !Number.isFinite(fraction))) { pixels.set(sRgb((recipe.colour as { missing: string }).missing), index * 3); continue; }
+    pixels.set(fractions.map(fraction => Math.round(255 * fraction)), index * 3);
+  }
+  return { pixels, width: first.width, height: first.height };
 }
 
 /** The picture: every source sample a block of `enlarge` equal pixels, written as a lossless WebP. */
-export async function renderExamplePicture(source: SourceWindow, recipe: ExampleRecipe) {
-  const { pixels, width, height } = examplePixels(source, recipe), [across, down] = recipe.enlarge;
+export async function renderExamplePicture(windows: readonly SourceWindow[], recipe: ExampleRecipe) {
+  const { pixels, width, height } = examplePixels(windows, recipe), [across, down] = recipe.enlarge;
   const [outWidth, outHeight] = [width * across, height * down], out = new Uint8Array(outWidth * outHeight * 3);
   for (let row = 0; row < outHeight; row++) {
     const line = Math.floor(row / down) * width;
@@ -325,11 +406,14 @@ export async function renderExamplePicture(source: SourceWindow, recipe: Example
 
 /** Read the product the recipe pins, checking its sha256, and draw the picture. */
 export async function makeExamplePicture(recipe: ExampleRecipe, root: string) {
-  const digest = createHash('sha256').update(await readFile(productPath(recipe, recipe.source.path, root))).digest('hex');
-  if (digest !== recipe.product.sha256)
-    throw new Error(`${recipe.id}: ${recipe.source.path} hashes to ${digest}; the recipe pins ${recipe.product.sha256}. Re-make the product with: ${recipe.product.command}`);
-  const source = await readSourceWindow(recipe, root);
-  return { ...await renderExamplePicture(source, recipe), header: source.header };
+  const windows: SourceWindow[] = [];
+  for (const channel of recipe.channels) {
+    const digest = createHash('sha256').update(await readFile(productPath(recipe, channel.source.path, root))).digest('hex');
+    if (digest !== channel.sha256)
+      throw new Error(`${recipe.id}: ${channel.source.path} hashes to ${digest}; the recipe pins ${channel.sha256}. Re-make the product with: ${recipe.product.command}`);
+    windows.push(await readSourceWindow(recipe, channel.source, root));
+  }
+  return { ...await renderExamplePicture(windows, recipe), header: windows[0]!.header };
 }
 
 if (process.argv[1] && import.meta.filename === resolve(process.argv[1])) {

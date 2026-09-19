@@ -4,24 +4,43 @@
     {
       "id": "jwst-nircam-ngc3132",
       "telescope": "JWST",
-      "instrument": "NIRCam, F187N",
+      "instrument": "NIRCam, F405N, F187N and F090W",
       "title": "The Southern Ring Nebula",
       "target": "NGC 3132",
       "date": "2022-06-03",
       "producedIn": "css.earth-ngc3132",
-      "source": { "kind": "fits-image", "path": "output/jwst-imaging/f187n-grid/image3/jw02733-o001_t001_nircam_clear-f187n_grid_i2d.fits", "extension": 1, "plane": 1 },
-      "unit": "MJy/sr",
-      "window": { "x": 187, "y": 187, "width": 650, "height": 650 },
-      "orientation": { "mode": "sky", "note": "North up and east left, from the mosaic's own WCS." },
-      "stretch": { "kind": "asinh", "black": 0, "white": 300, "softening": 3 },
-      "colour": { "kind": "greys" },
+      "channels": [
+        {
+          "label": "F405N, 4.05 microns, red",
+          "source": { "kind": "fits-image", "path": "output/jwst-imaging/f405n-grid/image3/jw02733-o001_t001_nircam_f405n-f444w_grid_i2d.fits", "extension": 1, "plane": 1 },
+          "unit": "MJy/sr",
+          "stretch": { "kind": "asinh", "black": 0, "white": 45, "softening": 2 },
+          "sha256": "9c4ca0a94ebcabe7e7ae6fd68acd94d73c6c9d67f724fd494b27044c173de3a7"
+        },
+        {
+          "label": "F187N, 1.87 microns, green",
+          "source": { "kind": "fits-image", "path": "output/jwst-imaging/f187n-grid/image3/jw02733-o001_t001_nircam_clear-f187n_grid_i2d.fits", "extension": 1, "plane": 1 },
+          "unit": "MJy/sr",
+          "stretch": { "kind": "asinh", "black": 0, "white": 180, "softening": 4 },
+          "sha256": "213680aebed947c2c82790b412c174b3bbf9f54113425c6f8429c48c11b65589"
+        },
+        {
+          "label": "F090W, 0.90 microns, blue",
+          "source": { "kind": "fits-image", "path": "output/jwst-imaging/f090w-grid/image3/jw02733-o001_t001_nircam_clear-f090w_grid_i2d.fits", "extension": 1, "plane": 1 },
+          "unit": "MJy/sr",
+          "stretch": { "kind": "asinh", "black": 0.2, "white": 25, "softening": 1 },
+          "sha256": "825f5d6d0186c5088e045403f7e5e1264db1cd8491c15c1423f4330cd9519353"
+        }
+      ],
+      "window": { "x": 267, "y": 267, "width": 490, "height": 490 },
+      "orientation": { "mode": "sky", "note": "North up and east left, from the mosaics' own WCS." },
+      "colour": { "kind": "channels", "missing": "#4a4a4a" },
       "enlarge": 1,
       "product": {
-        "sha256": "213680aebed947c2c82790b412c174b3bbf9f54113425c6f8429c48c11b65589",
-        "command": "node tools/objects/jwst/imaging/image3.mts ngc-3132-2733 NIRCAM-F187N output/jwst-imaging/f187n-grid --grid src/objects/ngc-3132/source/sky-bands/jwst-nircam.json",
+        "command": "node tools/objects/jwst/imaging/image3.mts ngc-3132-2733 NIRCAM-<band> output/jwst-imaging/<band>-grid --grid src/objects/ngc-3132/source/sky-bands/jwst-nircam.json",
         "definition": "tools/objects/jwst/imaging/programs/ngc-3132-2733.json"
       },
-      "note": "F187N is a narrow filter on the hydrogen Paschen alpha line, so the shells show and most stars are faint."
+      "note": "Representative colour, not what an eye would see: three infrared filters put into red, green and blue. All three mosaics were re-run onto one grid, so no channel is resampled. F187N and F405N are narrow filters on hydrogen lines, which is why the shells stand out."
     },
     {
       "id": "jwst-nirspec-sn1987a",
@@ -161,49 +180,79 @@
       "target": "Cassiopeia A",
       "date": "1999-08-27, 3.6 ks",
       "producedIn": "css.earth-chandra",
-      "source": {
-        "kind": "fits-events",
-        "path": ".local/chandra/casa-acisi/repro/acisf00210_repro_evt2.fits",
-        "columns": ["x", "y"],
-        "binPixels": 2,
-        "origin": [3468, 3369],
-        "size": [350, 350],
-        "band": { "column": "energy", "limits": [500, 7000] }
-      },
-      "unit": "counts per bin",
+      "channels": [
+        {
+          "label": "0.5 to 1.5 keV, red",
+          "source": { "kind": "fits-events", "path": ".local/chandra/casa-acisi/repro/acisf00210_repro_evt2.fits", "columns": ["x", "y"], "binPixels": 2, "origin": [3468, 3369], "size": [350, 350], "band": { "column": "energy", "limits": [500, 1500] } },
+          "unit": "counts per bin",
+          "stretch": { "kind": "asinh", "black": 0, "white": 25, "softening": 1 },
+          "sha256": "ed50d48111fd7951b13f50a472133d37d50ad0d40d6c33cc830bd540dd352ab9"
+        },
+        {
+          "label": "1.5 to 3.0 keV, green",
+          "source": { "kind": "fits-events", "path": ".local/chandra/casa-acisi/repro/acisf00210_repro_evt2.fits", "columns": ["x", "y"], "binPixels": 2, "origin": [3468, 3369], "size": [350, 350], "band": { "column": "energy", "limits": [1500, 3000] } },
+          "unit": "counts per bin",
+          "stretch": { "kind": "asinh", "black": 0, "white": 30, "softening": 1 },
+          "sha256": "ed50d48111fd7951b13f50a472133d37d50ad0d40d6c33cc830bd540dd352ab9"
+        },
+        {
+          "label": "3.0 to 7.0 keV, blue",
+          "source": { "kind": "fits-events", "path": ".local/chandra/casa-acisi/repro/acisf00210_repro_evt2.fits", "columns": ["x", "y"], "binPixels": 2, "origin": [3468, 3369], "size": [350, 350], "band": { "column": "energy", "limits": [3000, 7000] } },
+          "unit": "counts per bin",
+          "stretch": { "kind": "asinh", "black": 0, "white": 6, "softening": 1 },
+          "sha256": "ed50d48111fd7951b13f50a472133d37d50ad0d40d6c33cc830bd540dd352ab9"
+        }
+      ],
       "window": { "x": 1, "y": 1, "width": 350, "height": 350 },
       "orientation": { "mode": "first-row-bottom", "note": "Sky coordinates binned 2 by 2 pixels, 0.98 arcseconds a bin, the lowest row at the bottom. Sky x runs with falling right ascension and sky y with rising declination, so north is up and east is left." },
-      "stretch": { "kind": "asinh", "black": 0, "white": 40, "softening": 1 },
-      "colour": { "kind": "greys" },
+      "colour": { "kind": "channels", "missing": "#4a4a4a" },
       "enlarge": 2,
       "product": {
-        "sha256": "ed50d48111fd7951b13f50a472133d37d50ad0d40d6c33cc830bd540dd352ab9",
         "command": "node tools/objects/chandra/reprocess.mts casa-acisi 210 .local/chandra/casa-acisi",
         "definition": "tools/objects/chandra/programs/casa-acisi.json"
       },
-      "note": "One dot is one detected X-ray photon between 0.5 and 7 keV, so this is counts, not brightness: 831,854 of the observation's 839,545 events. Nothing here is smoothed, so the shell looks grainy because it is."
+      "note": "Representative colour, not what an eye would see: the same event list split into a soft, a medium and a hard energy band, on one set of bins. One dot is one detected X-ray photon, so this is counts, not brightness, and the graininess is the photon statistics of a short exposure."
     },
     {
       "id": "spitzer-irac-ngc3132",
       "telescope": "Spitzer",
-      "instrument": "IRAC channel 1, 3.6 microns",
-      "title": "NGC 3132 in the near infrared",
+      "instrument": "IRAC channels 1, 2 and 4",
+      "title": "NGC 3132 in the infrared",
       "target": "NGC 3132",
       "date": "12 level-1 frames of AOR 4416768",
       "producedIn": "css.earth-spitzer",
-      "source": { "kind": "fits-image", "path": "output/spitzer/ngc3132-4416768/ngc3132-4416768.ch1.remosaic.fits", "extension": 0, "plane": 1 },
-      "unit": "MJy/sr",
+      "channels": [
+        {
+          "label": "channel 4, 8.0 microns, red",
+          "source": { "kind": "fits-image", "path": "output/spitzer/ngc3132-4416768/ngc3132-4416768.ch4.remosaic.fits", "extension": 0, "plane": 1 },
+          "unit": "MJy/sr",
+          "stretch": { "kind": "asinh", "black": 2.6, "white": 25, "softening": 0.5 },
+          "sha256": "1f9bc98b6601915f0e72cf4d1a9d8e4d48e169736524ee4d7750d2c27a610fe7"
+        },
+        {
+          "label": "channel 2, 4.5 microns, green",
+          "source": { "kind": "fits-image", "path": "output/spitzer/ngc3132-4416768/ngc3132-4416768.ch2.remosaic.fits", "extension": 0, "plane": 1 },
+          "unit": "MJy/sr",
+          "stretch": { "kind": "asinh", "black": 0.07, "white": 20, "softening": 0.2 },
+          "sha256": "80a806c5919936b1930a279f8f2a25a265a98f06811ea234f6603719ee1118e0"
+        },
+        {
+          "label": "channel 1, 3.6 microns, blue",
+          "source": { "kind": "fits-image", "path": "output/spitzer/ngc3132-4416768/ngc3132-4416768.ch1.remosaic.fits", "extension": 0, "plane": 1 },
+          "unit": "MJy/sr",
+          "stretch": { "kind": "asinh", "black": 0.05, "white": 20, "softening": 0.2 },
+          "sha256": "017c90bc68baf8a8ff77c6292c41a5a8277c73d2f25082cce914b37b1682b93f"
+        }
+      ],
       "window": { "x": 1031, "y": 368, "width": 300, "height": 300 },
-      "orientation": { "mode": "first-row-bottom", "note": "The stored rows of the re-made mosaic, the first at the bottom. The mosaic keeps the observation's own rotation: north is 303.4 degrees and east 213.4 degrees clockwise from up, measured from the mosaic's own WCS." },
-      "stretch": { "kind": "asinh", "black": 0.05, "white": 30, "softening": 0.2 },
-      "colour": { "kind": "greys", "missing": "#4a4a4a" },
+      "orientation": { "mode": "first-row-bottom", "note": "The stored rows of the re-made mosaics, the first at the bottom. They keep the observation's own rotation: north is 303.4 degrees and east 213.4 degrees clockwise from up, measured from the mosaic's own WCS." },
+      "colour": { "kind": "channels", "missing": "#4a4a4a" },
       "enlarge": 2,
       "product": {
-        "sha256": "017c90bc68baf8a8ff77c6292c41a5a8277c73d2f25082cce914b37b1682b93f",
         "command": "node tools/objects/spitzer/mosaic.mts ngc3132-4416768",
         "definition": "tools/objects/spitzer/programs/ngc3132-4416768.ch1.remosaic.reproduction.json"
       },
-      "note": "At 3.6 microns most of what is bright is stars; the nebula's own shell is faint here."
+      "note": "Representative colour, not what an eye would see: three of the four re-made IRAC channels put into red, green and blue. The four channels are mosaicked onto one grid, so no channel is resampled."
     },
     {
       "id": "keck-kcwi-m42",
