@@ -5,7 +5,7 @@ import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } f
 import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-residency.js';
 import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
 import { loadFocusCatalogs } from './focus-catalog.mts';
-import { parseObjectDescriptor } from '@cssearth/objects';
+import { parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/objects';
 import { createSpaceMinimapSetting } from './minimap/minimap-setting.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createPreparedUniverse, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses, createRetainedGeometrySnapshot } from '../src/renderers/css/dist/universe.js';
@@ -85,15 +85,29 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS)
       .map(([id, sprite]) => [id, { ...contextMarkerSprite(sprite),
         minimumDiameterPixels: asteroidIds.includes(id) ? 2 : 2.4 }]));
-    const volumeLenses = await Promise.all(Object.values(descriptors).map(parseObjectDescriptor).filter(descriptor => descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available)
-      .map(async descriptor => {
-        const set = resourceSet(descriptor.id);
-        return { payload: await loadPreparedVolumeLenses(set.descriptor, set.transport),
-          resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
-      }));
+    // Volume lens banks (nebulae, discs, shells) are identified from their descriptor alone, at no
+    // fetch cost; their prepared payload — the same 27 MB raw / ~3.12 MB brotli across all ten of them
+    // that used to block the first frame — is fetched per bank, memoised, only once that bank is
+    // selected or comes into view. This mirrors loadShells' deferral, one bank at a time.
+    const volumeLensDescriptors = Object.values(descriptors).map(parseObjectDescriptor)
+      .filter(descriptor => descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available);
+    const volumeLensBanks = volumeLensDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame) }));
+    const volumeLensLoads = new Map<string, Promise<{ payload: Awaited<ReturnType<typeof loadPreparedVolumeLenses>>; resolveResource(path: string): string }>>();
+    const loadVolumeLens = (id: string) => {
+      let load = volumeLensLoads.get(id);
+      if (!load) {
+        const descriptor = volumeLensDescriptors.find(candidate => candidate.id === id);
+        if (!descriptor) throw new TypeError(`Unknown prepared volume lens bank: ${id}.`);
+        const set = resourceSet(id);
+        load = loadPreparedVolumeLenses(set.descriptor, set.transport)
+          .then(payload => ({ payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`) }));
+        volumeLensLoads.set(id, load);
+      }
+      return load;
+    };
     // The world worker reads its own prepared context; background stars are already baked.
     const plannerSource = { contextUrl: APPLICATION_WORLD_CONTEXT_URL };
-    const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayers, volumeLenses, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: new URL('../src/objects/nearby-universe/prepared/points.json', import.meta.url).href, backgroundPointCloud: new URL('../src/objects/nearby-universe/prepared/cloud.webp', import.meta.url).href, annotationPriorities, annotationOpacities, plannerSource,
+    const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayers, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: new URL('../src/objects/nearby-universe/prepared/points.json', import.meta.url).href, backgroundPointCloud: new URL('../src/objects/nearby-universe/prepared/cloud.webp', import.meta.url).href, annotationPriorities, annotationOpacities, plannerSource,
       catalog: { payload: galaxyCatalog, galaxySample: galaxyDisplaySample, nebulae: nebulaCatalog, fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM,
         fullDistanceM: galaxyPresentation.fullDistanceM,
         clusters: { payload: clusterCatalog, fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } },

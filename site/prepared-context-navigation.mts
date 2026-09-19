@@ -84,7 +84,13 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     writeSelectionUrl(selected);
   };
   const observeLens = (id: string | null) => {
-    const objectId = lensState(id)?.objectId ?? null;
+    // Identity comes from the catalogue record and declared frames, not from lensState(id): a volume
+    // lens bank's payload can still be loading, in which case lensState returns null even though the
+    // object is exactly a bank whose subscription should kick off and then observe that load.
+    const object = id ? layer.resolveGalaxy(id) : null;
+    const candidateId = object && !isPreparedCluster(object) ? object.detailedObjectId ?? null : null;
+    const objectId = candidateId && (layer.imageLayerFrames?.[candidateId] !== undefined || layer.volumeLensFrames?.[candidateId] !== undefined)
+      ? candidateId : null;
     if (objectId === lensObjectId) return;
     unsubscribeLens?.(); unsubscribeLens = null; lensObjectId = objectId;
     if (objectId && !layer.imageLayerFrames?.[objectId]) unsubscribeLens = layer.subscribeVolumeLens?.(objectId, publishLens) ?? null;
