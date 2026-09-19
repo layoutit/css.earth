@@ -477,7 +477,7 @@ export function scanReceipt(run: SlitScanRun) {
     return { cells: values.length, areaKm2: round(areaKm2, 0), resolutionElements: round(elements, 0),
       median: round(middle!, 2), interquartile: round(high! - low!, 2),
       medianError: round(1.2533 * spread / Math.sqrt(elements), 2),
-      medianPhotonError: round(quantiles(errors, [0.5])[0]!, 2) };
+      medianStatisticalError: round(quantiles(errors, [0.5])[0]!, 2) };
   };
   const hemispheres = (from: ReturnType<typeof combineBodyMaps>) => ({
     leading: hemisphere(from.map.depth, from.map.error, 0, 180), trailing: hemisphere(from.map.depth, from.map.error, 180, 360) });
@@ -487,6 +487,7 @@ export function scanReceipt(run: SlitScanRun) {
     target: definition.target, instrument: definition.instrument, opticalElement: definition.opticalElement, aperture: definition.aperture,
     band: { id: definition.band.id, quantity: definition.band.quantity, units: definition.band.units,
       bandAngstrom: definition.band.bandAngstrom, continuumWindowsAngstrom: definition.band.continuumWindowsAngstrom, continuumOrder: definition.band.continuumOrder,
+      minimumBandCoverage: definition.band.minimumBandCoverage, maximumBandGapPixels: definition.band.maximumBandGapPixels,
       reference: { name: definition.reference.name, url: definition.reference.url, sha256: definition.reference.sha256, note: definition.reference.note } },
     frames: { pinned: definition.frames.length, used: run.used.length, visits: run.registration.length,
       exposureSeconds: run.used.reduce((total, frame) => total + frame.exposureSeconds, 0),
@@ -516,6 +517,8 @@ export function scanReceipt(run: SlitScanRun) {
       cells: map.seenCells, areaShare: round(map.areaShare, 4),
       cellsSeenByOneVisit: [...run.coverage].filter(count => count === 1).length, cellsSeenByTwoOrMore: [...run.coverage].filter(count => count >= 2).length,
       bandStrength: { minimum: round(minimum!, 2), lowQuartile: round(lowQuartile!, 2), median: round(median!, 2), highQuartile: round(highQuartile!, 2), maximum: round(maximum!, 2) },
+      /** The median of the ERROR plane: each cell's band pixels' own noise and the anchors' noise carried through the one
+       * continuum they share. It is a statistical error, and says nothing about the continuum model's own systematic. */
       medianErrorAngstrom: round(quantiles([...map.error].filter(Number.isFinite), [0.5])[0]!, 2),
       strongest: { westLongitude: round(peak.westLongitude, 1), latitude: round(peak.latitude, 1), value: round(peak.value, 2) },
       hemispheres: hemispheres(run.combined) },

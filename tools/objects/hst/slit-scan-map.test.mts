@@ -20,6 +20,7 @@ const REDUCTION: ScanReduction = { skyRowsFromDisc: [40, 110], discProfileWindow
   rowSearchPixels: 25, minimumHalfChordArcsec: 0.15, acrossSlitSearchArcsec: 0.3, acrossSlitStepArcsec: 0.002, imageHalfWidthRadii: 2.5 };
 const BAND: ScanBand = { id: 'band', quantity: 'BAND STRENGTH', units: 'Angstrom', readWindowAngstrom: [3000, 5700],
   continuumWindowsAngstrom: [[3100, 3500], [5300, 5500]], continuumOrder: 3, bandAngstrom: [3500, 5300],
+  minimumBandCoverage: 0.9, maximumBandGapPixels: 5,
   featurelessReference: { rule: 'no absorption in the first pass', note: 'test' } };
 /** A reference spectrum with structure in it, so that dividing by it is a real step rather than a no-op. */
 const reference = (): ReferenceSpectrum => {
@@ -240,9 +241,13 @@ const row = (depth: number, tilt: number, solar: ReferenceSpectrum) => {
 test('reflectance is the flux over the reference, on the columns the reference reaches', () => {
   const solar: ReferenceSpectrum = { wavelengthAngstrom: Float64Array.from([3000, 4000]), flux: Float64Array.from([2, 4]) };
   const measured = reflectance({ wavelengthAngstrom: [2000, 3000, 3500, 4000, 5000], flux: [9, 2, 6, 8, 9], error: [1, 1, 3, 2, 1] }, solar);
-  assert.deepEqual([...measured.wavelengthAngstrom], [3000, 3500, 4000]);
-  assert.deepEqual([...measured.value], [1, 2, 2]);
-  assert.deepEqual([...measured.error], [0.5, 1, 0.5]);
+  // The grid stays whole: a column the reference cannot answer becomes NaN in place, so the gap it leaves stays a gap.
+  assert.deepEqual([...measured.wavelengthAngstrom], [2000, 3000, 3500, 4000, 5000]);
+  assert.deepEqual([...measured.value].map(value => Number.isNaN(value) ? 'gap' : value), ['gap', 1, 2, 2, 'gap']);
+  assert.deepEqual([...measured.error].map(value => Number.isNaN(value) ? 'gap' : value), ['gap', 0.5, 1, 0.5, 'gap']);
+  const missing = reflectance({ wavelengthAngstrom: [3000, 3500, 4000], flux: [2, Number.NaN, 8], error: [1, 1, 2] }, solar);
+  assert.equal(missing.wavelengthAngstrom.length, 3);
+  assert.ok(Number.isNaN(missing.value[1]!));
 });
 
 test('the featureless spectrum is the weighted mean of the rows put into it, on one grid', () => {
@@ -285,4 +290,67 @@ test('a scan definition is refused without a featureless rule or a resolution', 
   const broken = (change: (value: Record<string, unknown>) => void) => { const copy = JSON.parse(JSON.stringify(good)) as Record<string, unknown>; change(copy); return () => parseSlitScan(copy); };
   assert.throws(broken(value => { ((value.band as Record<string, unknown>).featurelessReference as Record<string, unknown>).rule = 'whatever'; }), /not a featureless-reference rule/u);
   assert.throws(broken(value => { (value.grid as Record<string, unknown>).resolutionKm = 0; }), /positive size/u);
+});
+
+/** A flat spectrum on a regular grid, with independent noise of a stated size in the anchors and in the band. */
+const noisy = (anchorError: number, bandError: number, noise: (index: number) => number = () => 0) => {
+  const wavelengthAngstrom = Array.from({ length: 541 }, (_, index) => 3000 + index * 5);
+  const anchor = (angstrom: number) => BAND.continuumWindowsAngstrom.some(([low, high]) => angstrom >= low && angstrom <= high);
+  const error = wavelengthAngstrom.map(angstrom => anchor(angstrom) ? anchorError : bandError);
+  return { wavelengthAngstrom, value: wavelengthAngstrom.map((angstrom, index) => 1 + noise(index) * (anchor(angstrom) ? anchorError : bandError)), error };
+};
+
+test('the band’s sigma carries the continuum fit’s own uncertainty, and a Monte Carlo agrees with it', () => {
+  // The anchors' noise reaches the answer through the one continuum every band pixel is divided by, so raising it has to
+  // raise the reported sigma: treating the fitted continuum as exact understates the error by two orders of magnitude.
+  const low = bandFromReflectance(noisy(0.001, 0.001), BAND)!, high = bandFromReflectance(noisy(0.1, 0.001), BAND)!;
+  assert.ok(Math.abs(high.sigmaAngstrom / low.sigmaAngstrom - 100) < 1, `sigma scales with the anchors: ${high.sigmaAngstrom / low.sigmaAngstrom}`);
+
+  let seed = 4321;
+  const random = () => { seed = (Math.imul(1664525, seed) + 1013904223) >>> 0; return (seed + 0.5) / 4294967296; };
+  const normal = () => Math.sqrt(-2 * Math.log(random())) * Math.cos(2 * Math.PI * random());
+  const widths: number[] = [], sigmas: number[] = [];
+  for (let trial = 0; trial < 400; trial++) {
+    const draw = new Map<number, number>();
+    const measured = bandFromReflectance(noisy(0.01, 0.001, index => draw.get(index) ?? (draw.set(index, normal()), draw.get(index)!)), BAND)!;
+    widths.push(measured.equivalentWidthAngstrom); sigmas.push(measured.sigmaAngstrom);
+  }
+  const mean = widths.reduce((total, value) => total + value, 0) / widths.length;
+  const spread = Math.sqrt(widths.reduce((total, value) => total + (value - mean) ** 2, 0) / (widths.length - 1));
+  const reported = sigmas.reduce((total, value) => total + value, 0) / sigmas.length;
+  assert.ok(Math.abs(reported / spread - 1) < 0.1, `the reported sigma is the scatter of the answer: ${reported} against ${spread}`);
+});
+
+test('a band read through holes is refused, and a pixel stands only for its own bin', () => {
+  const grid = Array.from({ length: 541 }, (_, index) => 3000 + index * 5);
+  const line = (keep: (angstrom: number) => boolean) => ({ wavelengthAngstrom: grid,
+    value: grid.map(angstrom => keep(angstrom) ? (angstrom === 4400 ? 0.5 : 1) : Number.NaN), error: grid.map(() => 0.001) });
+  // One 5 A bin half absorbed, everything else observed: the band is 5 A wide times 50 per cent.
+  const complete = bandFromReflectance(line(() => true), BAND)!;
+  assert.ok(Math.abs(complete.equivalentWidthAngstrom - 2.5) < 1e-6, `${complete.equivalentWidthAngstrom}`);
+  assert.equal(complete.bandCoverage, 1);
+  assert.equal(complete.longestGapPixels, 0);
+  // The same one bin, with the rest of the band unobserved. It must not stand for the whole band.
+  assert.equal(bandFromReflectance(line(angstrom => !(angstrom > 3500 && angstrom < 5300) || angstrom === 4400), BAND), null);
+  // A few scattered missing pixels are still measured, and the answer does not grow with the holes.
+  const speckled = bandFromReflectance(line(angstrom => angstrom !== 4200 && angstrom !== 4600 && angstrom !== 5000), BAND)!;
+  assert.ok(Math.abs(speckled.equivalentWidthAngstrom - 2.5) < 1e-6, `${speckled.equivalentWidthAngstrom}`);
+  assert.ok(speckled.bandCoverage > 0.99 && speckled.bandCoverage < 1);
+  // A run of missing pixels longer than the definition allows is refused even when most of the band is there.
+  assert.equal(bandFromReflectance(line(angstrom => !(angstrom >= 4000 && angstrom <= 4040)), BAND), null);
+});
+
+test('a scan that lost an interior step leaves a gap rather than closing up', () => {
+  // A field that rises linearly with the slit position, so a misplaced step reads a value that names it.
+  const field = (steps: number[]) => scanImage({ postArg1Arcsec: steps, value: steps.map(step => Array(5).fill(step)), sigma: steps.map(() => Array(5).fill(1)),
+    discRow: 2, acrossSlitCentreArcsec: 0, plateScaleArcsec: 1, orientatDegrees: 0 }, 11, 1, 'ORIENTAT-90').depth[5 * 11 + 3]!;
+  assert.equal(field([0, 1, 2, 3, 4]), 2, 'the sky place that step 2 scanned reads 2');
+  assert.ok(Number.isNaN(field([0, 1, 3, 4])), 'with that step gone the place is unread, not read as 3');
+  // The steps either side of the hole are still placed by their own coordinates, not by counting slots.
+  const kept = scanImage({ postArg1Arcsec: [0, 1, 3, 4], value: [0, 1, 3, 4].map(step => Array(5).fill(step)), sigma: [0, 1, 3, 4].map(() => Array(5).fill(1)),
+    discRow: 2, acrossSlitCentreArcsec: 0, plateScaleArcsec: 1, orientatDegrees: 0 }, 11, 1, 'ORIENTAT-90');
+  assert.equal(kept.depth[5 * 11 + 4], 1, 'the step at 1 is still at 1');
+  assert.equal(kept.depth[5 * 11 + 1], 4, 'the step at 4 is still at 4');
+  assert.throws(() => scanImage({ postArg1Arcsec: [0, 2, 1], value: [[1], [1], [1]], sigma: [[1], [1], [1]],
+    discRow: 0, acrossSlitCentreArcsec: 0, plateScaleArcsec: 1, orientatDegrees: 0 }, 5, 1, 'ORIENTAT-90'), /steps rise/u);
 });

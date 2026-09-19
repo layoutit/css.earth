@@ -57,7 +57,9 @@
   "featurelessReference": {
    "rule": "no absorption in the first pass",
    "note": "Trumbo, Brown & Hand (2019): 'To remove these effects and achieve the highest possible quality spectrum, we then divided by the average of all spectra from regions where the 450-nm feature is absent.' The paper applies that to its one high signal-to-noise spectrum; this stage applies it to every row, because the published continuum alone sets no common zero and measurably does not put zero where the paper says there is no band. Which rows show no band is decided by a first pass with the published continuum and nothing else."
-  }
+  },
+  "minimumBandCoverage": 0.9,
+  "maximumBandGapPixels": 5
  },
  "reduction": {
   "skyRowsFromDisc": [
@@ -135,18 +137,20 @@
    "What set zero wrong is the continuum itself. The published windows leave 1800 Angstrom between the anchors unconstrained, and the two hemispheres curve differently across it: with the published continuum alone the trailing hemisphere, where Trumbo, Brown & Hand (2019) finds no feature, reads -79.8 plus or minus 3.3 Angstrom, which is not zero and is larger than the leading signal of +22.9.",
    "756 of 1248 on-disc rows show no band in the first pass and make the spectrum zero is measured against. Against it the trailing hemisphere reads +2.6 plus or minus 4.8 Angstrom, consistent with nothing, and the strongest absorption sits at 94.5 degrees west, 16.5 degrees north, at 193.6 Angstrom.",
    "The strongest absorption is 80.2 Angstrom above its own hemisphere median of 113.4, against a leading interquartile spread of 25.9.",
-   "The median photon error on a mapped cell is 1.3 to 1.6 Angstrom, so nothing here is photon limited: what limits it is the continuum model."
+   "The band sigma carries the fitted continuum, not only each band pixel's own noise: one continuum divides every pixel of the band, so the anchors' noise enters the integral once and correlated across it. On synthetic flat spectra with 1 per cent anchor noise, 400 realizations scatter by an amount the reported sigma matches to better than 10 per cent, and raising the anchor errors a hundredfold raises the sigma a hundredfold. On Europa this lifts the median of the ERROR plane from 1.42 to 17.82 Angstrom, and the per-cell statistical error from 1.3 to 16.3 Angstrom on the leading hemisphere and 1.6 to 19.4 on the trailing one. No mapped value moved.",
+   "Every band pixel keeps the width of its own bin and a band is only measured where at least 90 per cent of its pixels were observed with no unobserved run longer than 5 pixels. Every step is placed by its own commanded offset, and an interval wider than half again the scan step is left unread rather than interpolated across. The Europa scan is regular in all four visits and its band is completely observed, so neither rule changes a value here; both stop a scan that lost a frame, or a band read through holes, from reading as a measurement."
   ],
   "notVerified": [
    "The leading hemisphere carries a pedestal. Its median band strength is 113.4 Angstrom while its interquartile spread is only 25.9, so most of what the map shows on that side is a step across the whole hemisphere rather than the concentration in chaos terrain Trumbo, Brown & Hand (2019) describes. The featureless rows are mostly trailing ones, so whatever differs broadly between the two hemispheres continua enters the band. This stage does not separate that from the sodium chloride band, and the honest measure of the feature is the 80.2 Angstrom the strongest cell stands above its own hemisphere.",
    "The trailing hemisphere is not an independent test of zero in the strict sense. The rows that build the featureless spectrum are chosen by their own spectra, not by where they are on the body, but 756 of them are mostly trailing rows, so the set and the test overlap.",
-   "The zero test counts one resolution element as 150 km, which Trumbo, Brown & Hand (2019) gives at the sub-observer point. That is the best the data reach, so it counts the most independent elements and gives the smallest error the median can honestly claim. Away from the sub-observer point the elements are larger and the error is larger.",
+   "The zero test counts one resolution element as 150 km, which Trumbo, Brown & Hand (2019) gives at the sub-observer point. That is the best the data reach, so it counts the most independent elements and gives the smallest error the median can honestly claim. Away from the sub-observer point the elements are larger and the error is larger. The zero test uses the spread of the cells rather than the ERROR plane, because neighbouring cells share a resolution element; the ERROR plane median of 17.82 Angstrom over 480 independent elements would give 0.8 Angstrom, well under the 4.8 the spread gives.",
    "The across-slit direction is settled by the agreement between visits that saw the same ground, not by instrument documentation, which was not obtained. If it is wrong, every visit is reflected about its own slit and the map is not the body.",
    "Hubble's blur is not removed and no anamorphic correction is applied. A 150 km resolution element is smeared across the neighbours of a 27 km map cell, so the map is smoother than its grid.",
    "The rectified products carry no signal off the slit, so the background step subtracts a measured zero and does nothing. Scattered light that varies along the slit underneath the body is neither measured nor modelled here.",
    "The paper's 'small variations on these parameters ... when necessary to achieve a satisfactory continuum fit' are not reproduced, and the second-order continuum it reports as giving qualitatively identical results gives EW values two to three times different here, which is another sign the continuum is the weak part.",
    "The G750L half of programme 14650 is not read here, so the 720 nm M-centre upper limit Trumbo, Brown & Hand (2019) places is not reproduced.",
-   "The x2d products are the archive's own, not re-calibrated for this run. That this route reproduces them is shown for one of these exposures only, od9l12010."
+   "The x2d products are the archive's own, not re-calibrated for this run. That this route reproduces them is shown for one of these exposures only, od9l12010.",
+   "The ERROR plane is the statistical error alone. The continuum model's systematic, which is what the leading pedestal and the trailing overshoot are, is not in it and is not an error bar anywhere: it is described in these notes and in the receipt and nowhere reduced to a number per cell."
   ]
  },
  "frames": [

@@ -10,6 +10,8 @@
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 
 const DEGREE = Math.PI / 180;
+/** How much wider than a scan's own step an interval may be before it counts as a slit position the scan never took. */
+export const MISSING_STEP_INTERVAL = 1.5;
 
 // ---- the pinned definition --------------------------------------------------------------------------------------------
 /** Which way the aperture's first axis (the one `POSTARG1` steps along) lies on the sky, relative to the slit's own position
@@ -46,6 +48,10 @@ export interface ScanBand {
   readonly continuumOrder: number;
   /** The window the continuum-removed residual is integrated over, which is the band. */
   readonly bandAngstrom: readonly [number, number];
+  /** How much of the band has to have been observed before it is measured at all: the least share of its pixels that may
+   * carry a value, and the longest run of them that may not. A band read through holes is not measured, never interpolated. */
+  readonly minimumBandCoverage: number;
+  readonly maximumBandGapPixels: number;
   /** How the spectrum every row is ratioed against, the one that fixes where zero is, is built. */
   readonly featurelessReference: FeaturelessReference;
 }
@@ -144,8 +150,13 @@ export function parseSlitScan(value: unknown): SlitScanDefinition {
   const featurelessRow = requireRecord(bandRow.featurelessReference, 'featurelessReference');
   const rule = requireString(featurelessRow.rule, 'featureless rule');
   if (!(FEATURELESS_RULES as readonly string[]).includes(rule)) throw new TypeError(`${rule} is not a featureless-reference rule.`);
+  const minimumBandCoverage = requireFiniteNumber(bandRow.minimumBandCoverage, 'minimumBandCoverage');
+  const maximumBandGapPixels = requireFiniteNumber(bandRow.maximumBandGapPixels, 'maximumBandGapPixels');
+  if (!(minimumBandCoverage > 0) || !(minimumBandCoverage <= 1)) throw new TypeError('minimumBandCoverage is a share of the band above nothing and at most all of it.');
+  if (!Number.isSafeInteger(maximumBandGapPixels) || maximumBandGapPixels < 0) throw new TypeError('maximumBandGapPixels is a whole number of pixels.');
   const band: ScanBand = { id: requireString(bandRow.id, 'band id'), quantity: requireString(bandRow.quantity, 'band quantity'),
     units: requireString(bandRow.units, 'band units'), readWindowAngstrom, continuumWindowsAngstrom, continuumOrder, bandAngstrom,
+    minimumBandCoverage, maximumBandGapPixels,
     featurelessReference: { rule: rule as FeaturelessRule, note: requireString(featurelessRow.note, 'featureless note') } };
 
   const reductionRow = requireRecord(row.reduction, 'reduction');
@@ -197,17 +208,35 @@ export function parseSlitScan(value: unknown): SlitScanDefinition {
 }
 
 // ---- the band ---------------------------------------------------------------------------------------------------------
-/** A polynomial of the given order through the points, by normal equations with Gauss-Jordan elimination. The abscissa is
- * scaled by the caller; over a few thousand Ångström the raw wavelength would make the normal matrix hopeless. */
-export function polynomialFit(x: readonly number[], y: readonly number[], order: number): (value: number) => number {
+/** A polynomial of the given order through the points, by normal equations with Gauss-Jordan elimination, together with the
+ * inverse of its normal matrix. The abscissa is scaled by the caller; over a few thousand Ångström the raw wavelength would
+ * make the normal matrix hopeless.
+ *
+ * The inverse is what carries the fit's own uncertainty. A continuum fitted to noisy anchor pixels is not exact, and the same
+ * fitted curve divides every pixel of the band, so the anchors' noise enters the band's integral once, correlated across it.
+ * `normalInverse` is (AᵀA)⁻¹ for the unweighted estimator this uses, from which `bandFromReflectance` builds the derivative
+ * of the answer with respect to every pixel that went into it. */
+export interface PolynomialFit {
+  readonly coefficients: readonly number[];
+  /** (AᵀA)⁻¹ for the fitted basis, symmetric, of side `order + 1`. */
+  readonly normalInverse: readonly (readonly number[])[];
+  evaluate(value: number): number;
+}
+/** The basis this fits in: 1, t, t², … up to the order. */
+export const polynomialBasis = (value: number, order: number) => Array.from({ length: order + 1 }, (_, power) => value ** power);
+
+export function polynomialFitDetail(x: readonly number[], y: readonly number[], order: number): PolynomialFit {
   if (x.length !== y.length) throw new RangeError('A fit takes as many abscissae as ordinates.');
   if (x.length <= order) throw new RangeError(`A polynomial of order ${order} needs more than ${order} points.`);
-  const size = order + 1, matrix = Array.from({ length: size }, () => new Float64Array(size + 1));
+  const size = order + 1, columns = size + 1 + size;
+  // [ AᵀA | Aᵀy | I ]: one elimination gives the coefficients and the inverse together.
+  const matrix = Array.from({ length: size }, () => new Float64Array(columns));
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) { let total = 0; for (let k = 0; k < x.length; k++) total += x[k]! ** (i + j); matrix[i]![j] = total; }
     let total = 0;
     for (let k = 0; k < x.length; k++) total += y[k]! * x[k]! ** i;
     matrix[i]![size] = total;
+    matrix[i]![size + 1 + i] = 1;
   }
   for (let column = 0; column < size; column++) {
     let pivot = column;
@@ -215,12 +244,16 @@ export function polynomialFit(x: readonly number[], y: readonly number[], order:
     [matrix[column], matrix[pivot]] = [matrix[pivot]!, matrix[column]!];
     const divisor = matrix[column]![column]!;
     if (!Number.isFinite(divisor) || divisor === 0) throw new RangeError('The continuum fit is singular.');
-    for (let j = column; j <= size; j++) matrix[column]![j]! /= divisor;
-    for (let r = 0; r < size; r++) if (r !== column) { const factor = matrix[r]![column]!; for (let j = column; j <= size; j++) matrix[r]![j]! -= factor * matrix[column]![j]!; }
+    for (let j = column; j < columns; j++) matrix[column]![j]! /= divisor;
+    for (let r = 0; r < size; r++) if (r !== column) { const factor = matrix[r]![column]!; for (let j = column; j < columns; j++) matrix[r]![j]! -= factor * matrix[column]![j]!; }
   }
   const coefficients = Array.from({ length: size }, (_, i) => matrix[i]![size]!);
-  return value => coefficients.reduce((total, coefficient, power) => total + coefficient * value ** power, 0);
+  const normalInverse = Array.from({ length: size }, (_, i) => Array.from({ length: size }, (_, j) => matrix[i]![size + 1 + j]!));
+  return { coefficients, normalInverse,
+    evaluate: value => coefficients.reduce((total, coefficient, power) => total + coefficient * value ** power, 0) };
 }
+/** The fitted polynomial alone, for callers that do not need its uncertainty. */
+export const polynomialFit = (x: readonly number[], y: readonly number[], order: number) => polynomialFitDetail(x, y, order).evaluate;
 
 /** A reference spectrum as two rising, matched arrays, linearly interpolated. */
 export interface ReferenceSpectrum { readonly wavelengthAngstrom: Float64Array; readonly flux: Float64Array }
@@ -240,35 +273,46 @@ export interface BandStrength {
   readonly sigmaAngstrom: number;
   /** The fitted continuum's mean level across the band, in the reflectance the division produced. */
   readonly continuumLevel: number;
+  /** The share of the band's pixels that were observed, and the longest run of them that was not. */
+  readonly bandCoverage: number;
+  readonly longestGapPixels: number;
 }
-/** One row turned into reflectance: its flux divided by the reference spectrum, over the columns the reference reaches. */
+/** One row turned into reflectance: its flux divided by the reference spectrum.
+ *
+ * **The grid is kept whole.** A column the reference does not reach, or one the frame has no value for, becomes NaN in place
+ * rather than disappearing. Dropping it would close the gap it left, and every later step measures wavelength intervals from
+ * the neighbours it can see: a band observed at one pixel would then integrate as though that pixel stood for all of it. */
 export interface Reflectance { readonly wavelengthAngstrom: readonly number[]; readonly value: readonly number[]; readonly error: readonly number[] }
 export function reflectance(spectrum: { readonly wavelengthAngstrom: readonly number[]; readonly flux: readonly number[]; readonly error: readonly number[] },
   reference: ReferenceSpectrum): Reflectance {
-  const wavelengthAngstrom: number[] = [], value: number[] = [], error: number[] = [];
-  for (let index = 0; index < spectrum.wavelengthAngstrom.length; index++) {
-    const angstrom = spectrum.wavelengthAngstrom[index]!, solar = referenceFlux(reference, angstrom);
-    if (!(solar > 0) || !Number.isFinite(spectrum.flux[index]!)) continue;
-    wavelengthAngstrom.push(angstrom); value.push(spectrum.flux[index]! / solar); error.push(Math.abs(spectrum.error[index]!) / solar);
+  const wavelengthAngstrom = [...spectrum.wavelengthAngstrom], value: number[] = [], error: number[] = [];
+  for (let index = 0; index < wavelengthAngstrom.length; index++) {
+    const solar = referenceFlux(reference, wavelengthAngstrom[index]!), flux = spectrum.flux[index]!;
+    const usable = solar > 0 && Number.isFinite(flux);
+    value.push(usable ? flux / solar : Number.NaN); error.push(usable ? Math.abs(spectrum.error[index]!) / solar : Number.NaN);
   }
   return { wavelengthAngstrom, value, error };
 }
 
 /** The mean of the rows that show no band, on the one wavelength grid every frame of a scan shares. A row whose grid differs
  * is refused rather than interpolated: the whole point of the ratio is that the two spectra carry the same instrument. */
-export interface FeaturelessAccumulator { wavelengthAngstrom: readonly number[] | null; sum: Float64Array | null; weight: number; rows: number }
-export const newFeatureless = (): FeaturelessAccumulator => ({ wavelengthAngstrom: null, sum: null, weight: 0, rows: 0 });
+export interface FeaturelessAccumulator { wavelengthAngstrom: readonly number[] | null; sum: Float64Array | null; weight: Float64Array | null; rows: number }
+export const newFeatureless = (): FeaturelessAccumulator => ({ wavelengthAngstrom: null, sum: null, weight: null, rows: 0 });
 export function addFeatureless(accumulator: FeaturelessAccumulator, row: Reflectance, weight: number) {
-  if (!accumulator.sum) { accumulator.wavelengthAngstrom = row.wavelengthAngstrom; accumulator.sum = new Float64Array(row.value.length); }
+  if (!accumulator.sum) { accumulator.wavelengthAngstrom = row.wavelengthAngstrom; accumulator.sum = new Float64Array(row.value.length); accumulator.weight = new Float64Array(row.value.length); }
   if (accumulator.wavelengthAngstrom!.length !== row.wavelengthAngstrom.length || accumulator.wavelengthAngstrom![0] !== row.wavelengthAngstrom[0])
     throw new RangeError('A featureless reference is built on one wavelength grid.');
-  for (let index = 0; index < row.value.length; index++) accumulator.sum[index]! += weight * row.value[index]!;
-  accumulator.weight += weight; accumulator.rows++;
+  // A column this row has no value for takes no part in that column's mean, and only in that column's.
+  for (let index = 0; index < row.value.length; index++) {
+    if (!Number.isFinite(row.value[index]!)) continue;
+    accumulator.sum[index]! += weight * row.value[index]!; accumulator.weight![index]! += weight;
+  }
+  accumulator.rows++;
 }
-/** The accumulated featureless spectrum, or null when no row showed no band. */
+/** The accumulated featureless spectrum, NaN in any column no row filled, or null when no row showed no band. */
 export function featurelessMean(accumulator: FeaturelessAccumulator): Reflectance | null {
-  if (!accumulator.sum || !(accumulator.weight > 0)) return null;
-  const value = Array.from(accumulator.sum, total => total / accumulator.weight);
+  if (!accumulator.sum || !accumulator.rows) return null;
+  const value = Array.from(accumulator.sum, (total, index) => accumulator.weight![index]! > 0 ? total / accumulator.weight![index]! : Number.NaN);
   return { wavelengthAngstrom: accumulator.wavelengthAngstrom!, value, error: value.map(() => 0) };
 }
 
@@ -290,33 +334,78 @@ export function ratioAgainst(row: Reflectance, featureless: Reflectance): Reflec
 /** One row's band strength: a polynomial continuum fitted over the windows that skip the band, and the continuum-removed
  * residual integrated across it. */
 export function bandFromReflectance(row: Reflectance, band: ScanBand): BandStrength | null {
-  const wavelengths: number[] = [], reflectance: number[] = [], errors: number[] = [];
-  for (let index = 0; index < row.wavelengthAngstrom.length; index++) {
-    if (!Number.isFinite(row.value[index]!)) continue;
-    wavelengths.push(row.wavelengthAngstrom[index]!); reflectance.push(row.value[index]!); errors.push(row.error[index]!);
-  }
+  const count = row.wavelengthAngstrom.length;
   const middle = (band.readWindowAngstrom[0] + band.readWindowAngstrom[1]) / 2, scale = 1000;
   const abscissa = (angstrom: number) => (angstrom - middle) / scale;
-  const fitX: number[] = [], fitY: number[] = [];
-  for (let index = 0; index < wavelengths.length; index++) {
-    const angstrom = wavelengths[index]!;
-    if (band.continuumWindowsAngstrom.some(([low, high]) => angstrom >= low && angstrom <= high)) { fitX.push(abscissa(angstrom)); fitY.push(reflectance[index]!); }
+  // Every pixel keeps the width of its own bin, taken from the grid the frame was read on. A pixel whose neighbours are
+  // missing still stands for its own bin and no more: widening it would let a band nobody observed integrate to a detection.
+  const width = (index: number) => {
+    const before = row.wavelengthAngstrom[index - 1], after = row.wavelengthAngstrom[index + 1];
+    if (before !== undefined && after !== undefined) return (after - before) / 2;
+    if (after !== undefined) return after - row.wavelengthAngstrom[index]!;
+    if (before !== undefined) return row.wavelengthAngstrom[index]! - before;
+    return 0;
+  };
+  const inBand = (angstrom: number) => angstrom >= band.bandAngstrom[0] && angstrom <= band.bandAngstrom[1];
+  const inAnchor = (angstrom: number) => band.continuumWindowsAngstrom.some(([low, high]) => angstrom >= low && angstrom <= high);
+
+  // The band has to be observed before it can be measured: enough of its pixels, and no long stretch of them missing.
+  let bandPixels = 0, observed = 0, gap = 0, longestGap = 0;
+  for (let index = 0; index < count; index++) {
+    if (!inBand(row.wavelengthAngstrom[index]!)) continue;
+    bandPixels++;
+    if (Number.isFinite(row.value[index]!)) { observed++; gap = 0; } else { gap++; longestGap = Math.max(longestGap, gap); }
+  }
+  if (!bandPixels || observed / bandPixels < band.minimumBandCoverage || longestGap > band.maximumBandGapPixels) return null;
+
+  const fitX: number[] = [], fitY: number[] = [], fitIndex: number[] = [];
+  for (let index = 0; index < count; index++) {
+    const angstrom = row.wavelengthAngstrom[index]!;
+    if (!inAnchor(angstrom) || !Number.isFinite(row.value[index]!)) continue;
+    fitX.push(abscissa(angstrom)); fitY.push(row.value[index]!); fitIndex.push(index);
   }
   if (fitX.length <= band.continuumOrder * 4) return null;
-  const continuum = polynomialFit(fitX, fitY, band.continuumOrder);
-  let equivalentWidth = 0, variance = 0, level = 0, samples = 0;
-  for (let index = 0; index < wavelengths.length; index++) {
-    const angstrom = wavelengths[index]!;
-    if (angstrom < band.bandAngstrom[0] || angstrom > band.bandAngstrom[1]) continue;
-    const fitted = continuum(abscissa(angstrom));
+  const fit = polynomialFitDetail(fitX, fitY, band.continuumOrder), order = band.continuumOrder;
+
+  // The answer's derivative with respect to every pixel that went into it, so that one variance covers both the band pixels'
+  // own noise and the anchors' noise carried through the one continuum they all share.
+  const derivative = new Float64Array(count);
+  const gradient = new Float64Array(order + 1);
+  let equivalentWidth = 0, level = 0, samples = 0;
+  for (let index = 0; index < count; index++) {
+    const angstrom = row.wavelengthAngstrom[index]!;
+    if (!inBand(angstrom) || !Number.isFinite(row.value[index]!)) continue;
+    const fitted = fit.evaluate(abscissa(angstrom));
     if (!(fitted > 0)) return null;
-    const width = index > 0 && index < wavelengths.length - 1 ? (wavelengths[index + 1]! - wavelengths[index - 1]!) / 2 : 0;
-    equivalentWidth += (1 - reflectance[index]! / fitted) * width;
-    variance += (errors[index]! / fitted * width) ** 2;
+    const bin = width(index);
+    equivalentWidth += (1 - row.value[index]! / fitted) * bin;
+    derivative[index]! -= bin / fitted;
+    // d(equivalent width)/d(continuum at this pixel), gathered onto the fitted coefficients through this pixel's basis.
+    const share = row.value[index]! * bin / (fitted * fitted), basis = polynomialBasis(abscissa(angstrom), order);
+    for (let power = 0; power <= order; power++) gradient[power]! += share * basis[power]!;
     level += fitted; samples++;
   }
   if (!samples || !Number.isFinite(equivalentWidth)) return null;
-  return { equivalentWidthAngstrom: equivalentWidth, sigmaAngstrom: Math.sqrt(variance), continuumLevel: level / samples };
+  // h = (AᵀA)⁻¹ g carries that gradient back onto the anchor pixels the coefficients came from.
+  const carried = Array.from({ length: order + 1 }, (_, i) => {
+    let total = 0;
+    for (let j = 0; j <= order; j++) total += fit.normalInverse[i]![j]! * gradient[j]!;
+    return total;
+  });
+  for (let anchor = 0; anchor < fitIndex.length; anchor++) {
+    const basis = polynomialBasis(fitX[anchor]!, order);
+    let total = 0;
+    for (let power = 0; power <= order; power++) total += basis[power]! * carried[power]!;
+    derivative[fitIndex[anchor]!]! += total;
+  }
+  let variance = 0;
+  for (let index = 0; index < count; index++) {
+    const sigma = row.error[index]!;
+    if (derivative[index] === 0 || !Number.isFinite(sigma)) continue;
+    variance += (derivative[index]! * sigma) ** 2;
+  }
+  return { equivalentWidthAngstrom: equivalentWidth, sigmaAngstrom: Math.sqrt(variance), continuumLevel: level / samples,
+    bandCoverage: observed / bandPixels, longestGapPixels: longestGap };
 }
 
 /** The first pass: reflectance straight into the continuum fit, which is what the published method does to each spectrum on
@@ -395,8 +484,13 @@ export function scanImage(sampling: ScanSampling, pixels: number, arcsecPerPixel
   if (!Number.isSafeInteger(pixels) || pixels < 3 || pixels % 2 === 0) throw new RangeError('A scan image is an odd number of pixels across.');
   const steps = sampling.postArg1Arcsec;
   if (steps.length < 2) throw new RangeError('A scan holds at least two steps.');
-  const spacing = steps[1]! - steps[0]!;
-  if (!(Math.abs(spacing) > 0)) throw new RangeError('A scan steps by a non-zero amount.');
+  for (let index = 1; index < steps.length; index++) if (!(steps[index]! > steps[index - 1]!)) throw new RangeError('A scan\u2019s steps rise.');
+  // The scan's own step, as the median of the intervals it actually holds. A wider interval is a step the scan does not have,
+  // because its frame was never taken or was rejected, and nothing is read across it.
+  const intervals = steps.slice(1).map((value, index) => value - steps[index]!).sort((a, b) => a - b);
+  const spacing = intervals[intervals.length >> 1]!;
+  if (!(spacing > 0)) throw new RangeError('A scan steps by a non-zero amount.');
+  const widestReadableInterval = spacing * MISSING_STEP_INTERVAL;
   const half = (pixels - 1) / 2, depth = new Float64Array(pixels * pixels).fill(Number.NaN), error = new Float64Array(pixels * pixels).fill(Number.NaN);
   const rows = sampling.value[0]!.length;
   let filled = 0;
@@ -405,11 +499,18 @@ export function scanImage(sampling: ScanSampling, pixels: number, arcsecPerPixel
     const offset = apertureOffset(east, north, sampling.orientatDegrees, direction);
     // The body-relative across-slit offset is the negative of the commanded step, because stepping the telescope one way
     // carries the body the other way through the slit.
-    const stepPlace = (sampling.acrossSlitCentreArcsec - offset.across - steps[0]!) / spacing;
+    const commanded = sampling.acrossSlitCentreArcsec - offset.across;
     const rowPlace = sampling.discRow + offset.along / sampling.plateScaleArcsec;
-    const stepLow = Math.floor(stepPlace), rowLow = Math.floor(rowPlace);
-    if (stepLow < 0 || stepLow + 1 >= steps.length || rowLow < 0 || rowLow + 1 >= rows) continue;
-    const stepFraction = stepPlace - stepLow, rowFraction = rowPlace - rowLow;
+    // Which two steps actually bracket this place, by their own commanded offsets rather than by counting array slots.
+    let stepLow = -1;
+    for (let index = 0; index + 1 < steps.length; index++) if (commanded >= steps[index]! && commanded <= steps[index + 1]!) { stepLow = index; break; }
+    if (stepLow < 0) continue;
+    // A bracket wider than the scan's own step spans a slit position the scan never took. Reading across it would invent the
+    // surface in between, so the gap stays a gap.
+    if (steps[stepLow + 1]! - steps[stepLow]! > widestReadableInterval) continue;
+    const rowLow = Math.floor(rowPlace);
+    if (rowLow < 0 || rowLow + 1 >= rows) continue;
+    const stepFraction = (commanded - steps[stepLow]!) / (steps[stepLow + 1]! - steps[stepLow]!), rowFraction = rowPlace - rowLow;
     const corners = [[stepLow, rowLow], [stepLow + 1, rowLow], [stepLow, rowLow + 1], [stepLow + 1, rowLow + 1]] as const;
     const weights = [(1 - stepFraction) * (1 - rowFraction), stepFraction * (1 - rowFraction), (1 - stepFraction) * rowFraction, stepFraction * rowFraction];
     const values = corners.map(([step, row]) => sampling.value[step]![row]!);
