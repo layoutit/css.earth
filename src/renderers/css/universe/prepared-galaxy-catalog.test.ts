@@ -222,3 +222,25 @@ test('baked sparse sample shows dots before names without enabling unsupported n
   }
   expect(onSelect).not.toHaveBeenCalled(); runtime.destroy();
 });
+
+test('a focused catalogue row outside the display sample still shows its marker and caption', () => {
+  const payload = read('local-group/prepared/catalogue.json');
+  const galaxySample = read('local-group/prepared/display-sample.json');
+  const object = payload.objects.find((row: { id: string }) => row.id === 'draco_2');
+  expect(object).toBeTruthy(); expect(galaxySample.ids).not.toContain('draco_2');
+  const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
+  const runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement, before: before as unknown as HTMLElement, payload, galaxySample, onSelect() {} });
+  const captions = () => { const found: Element[] = []; const walk = (node: Element) => { if (node.textContent === 'Draco II') found.push(node); node.children.forEach(walk); }; walk(host); return found; };
+  const viewport = { focalPixels: 600, principalOffsetPixels: [0, 0] as const, widthPixels: 800, heightPixels: 600 };
+  const world = { ...payload.frame, pose: { positionM: [object.positionM[0], object.positionM[1], object.positionM[2] + 3.5e19] as const, orientationXyzw: [0, 0, 0, 1] as const } };
+  const shown = () => captions().some(label => Number(label.style.opacity) > 0);
+  runtime.publish(world, viewport, 1); document.defaultView.advance(400);
+  expect(shown()).toBe(false);
+  runtime.select('draco_2');
+  runtime.publish(world, viewport, 1); document.defaultView.advance(800);
+  expect(shown()).toBe(true);
+  runtime.select(null);
+  runtime.publish(world, viewport, 1); document.defaultView.advance(900); document.defaultView.advance(1400);
+  expect(shown()).toBe(false);
+  runtime.destroy();
+});

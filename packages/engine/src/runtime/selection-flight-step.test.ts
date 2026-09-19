@@ -13,6 +13,38 @@ const clearance = (position: PositionM) => Math.min(...anchors.map(anchor =>
   Math.max(anchor.radiusM, distance(position, anchor.positionM) - anchor.radiusM)));
 
 describe('selection flight continuity', () => {
+  it('reaches a small body from galactic range instead of freezing a few thousand kilometres out', () => {
+    // Milky Way overview to Bennu: 2.9e21 m departure, 1,469 m arrival around a 245 m body.
+    const body = [1.5e11, 0, 0] as const, bodies = [{ positionM: body, radiusM: 245 }];
+    const far = createSelectionFlight({ from: pose([0, 0, 2.9e21]), to: pose([1.5e11, 0, 1469]), focusPositionM: body });
+    let elapsed = 0, frames = 0;
+    const out = createSelectionFlightSample();
+    while (elapsed < far.durationS && frames++ < 5000) {
+      const next = advanceSelectionFlightInto(far, bodies, elapsed, far.durationS, out);
+      expect(next).toBeGreaterThan(elapsed);
+      elapsed = next;
+    }
+    expect(elapsed).toBe(far.durationS);
+    expect(distance(out.positionM, body)).toBeCloseTo(1469, 3);
+  });
+
+  it('leaves a planet for a galactic overview instead of freezing at departure', () => {
+    // Earth to the Nearby Universe overview and the Moon to the Milky Way: 1e24 and 3e21 m destinations.
+    for (const [startM, radiusM, endM] of [[1.5e7, 6.4e6, 1e24], [8e6, 1.7e6, 2.9e21]] as const) {
+      const body = [1.5e11, 0, 0] as const, bodies = [{ positionM: body, radiusM }];
+      const out_ = createSelectionFlight({ from: pose([1.5e11, 0, startM]), to: pose([1.5e11, 0, endM]), focusPositionM: body });
+      let elapsed = 0, frames = 0;
+      const out = createSelectionFlightSample();
+      while (elapsed < out_.durationS && frames++ < 5000) {
+        const next = advanceSelectionFlightInto(out_, bodies, elapsed, out_.durationS, out);
+        expect(next).toBeGreaterThan(elapsed);
+        elapsed = next;
+      }
+      expect(elapsed).toBe(out_.durationS);
+    }
+  });
+
+
   it('bounds default departure movement even after a delayed paint, retaining the original curve', () => {
     expect(distance(sampleSelectionFlight(flight, 1 / 60).positionM, flight.from.positionM)).toBeGreaterThan(1e9);
     for (const requested of [1 / 60, 30]) {

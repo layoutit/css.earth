@@ -13,7 +13,7 @@ import type { ScreenPickTarget } from '../navigation/screen-picking.js';
 import { createLabelBudget, labelEligible, type LabelBudget } from '../labels/universe-label-policy.js';
 
 interface Entry {
-  readonly object: PreparedCatalogObject;
+  object: PreparedCatalogObject;
   readonly marker: HTMLElement;
   readonly dot: HTMLElement | null;
   readonly navigable: boolean;
@@ -61,7 +61,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
   const fader = createOpacityFader(document.defaultView!);
   // The source bank also preserves Local Volume nonmembers for future scopes.
   // Membership is a prepared scientific fact, never a runtime distance cut.
-  const entries: Entry[] = objects.filter(object => labelEligible({ named: Boolean(object.name), notable: isPreparedCluster(object) || Boolean(object.detailedObjectId) })).map(object => {
+  const createEntry = (object: PreparedCatalogObject): Entry => {
     const marker = document.createElement('span'), label = document.createElement('span');
     const navigable = isPreparedCluster(object) || Boolean(object.detailedObjectId && (!renderedObjectIds || renderedObjectIds.has(object.detailedObjectId)));
     const dot = !isPreparedCluster(object) && !isPreparedNebula(object) ? document.createElement('span') : null;
@@ -88,7 +88,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     label.style.cssText = 'position:absolute;left:50%;top:50%;opacity:0;pointer-events:none;cursor:pointer';
     const activate = (event: Event) => {
       if (label.style.pointerEvents !== 'auto') return;
-      event.preventDefault(); event.stopPropagation(); onSelect(object);
+      event.preventDefault(); event.stopPropagation(); onSelect(entry.object);
     };
     label.addEventListener(label.dataset.objectNavigateActivation, activate);
     label.addEventListener('keydown', event => { if (event.key === 'Enter') activate(event); });
@@ -97,9 +97,17 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     label.tabIndex = -1;
     root.append(marker, label);
     const frame = isPreparedNebula(object) ? nebulaFrames?.get(object.detailedObjectId ?? object.id) : undefined;
-    return { object, marker, dot, navigable, label, aperture, activate, cornersM: frame ? catalogVolumeCorners(frame) : null,
+    const entry: Entry = { object, marker, dot, navigable, label, aperture, activate, cornersM: frame ? catalogVolumeCorners(frame) : null,
       placement: 0, shown: false, width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
-  });
+    return entry;
+  };
+  const entries: Entry[] = objects.filter(object => labelEligible({ named: Boolean(object.name), notable: isPreparedCluster(object) || Boolean(object.detailedObjectId) })).map(createEntry);
+  // Every catalogue row is a focus destination, but only the display sample is
+  // drawn as context. One retained entry carries the focused row that has no
+  // entry of its own, so the destination always shows its marker and caption.
+  const unsampled = catalog.objects.filter(object => object.name && !object.detailedObjectId && !entries.some(entry => entry.object.id === object.id));
+  const focusEntry = unsampled[0] ? createEntry(unsampled[0]) : null;
+  let focusBound = false;
   let destroyed = false, selectedId: string | null = null;
   let exclusions: readonly LabelScreenRect[] = [];
   let dormant = false;
@@ -110,7 +118,18 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
   const measure = () => { measured = false; };
   document.fonts?.addEventListener('loadingdone', measure);
   return Object.freeze({ root, catalog,
-    select(id: string | null) { selectedId = entries.find(entry => entry.object.id === id || (!isPreparedCluster(entry.object) && entry.object.detailedObjectId === id))?.object.id ?? id; },
+    select(id: string | null) {
+      selectedId = entries.find(entry => entry.object.id === id || (!isPreparedCluster(entry.object) && entry.object.detailedObjectId === id))?.object.id ?? id;
+      if (!focusEntry) return;
+      const row = unsampled.find(object => object.id === selectedId);
+      if (row && row !== focusEntry.object) {
+        focusEntry.object = row; focusEntry.label.textContent = row.name;
+        focusEntry.label.title = row.status === 'candidate' ? `${row.name} — candidate galaxy` : row.name;
+        focusEntry.shown = false; focusEntry.placement = 0; focusEntry.width = 0;
+      }
+      if (!row && focusBound) for (const element of [focusEntry.label, focusEntry.marker, focusEntry.dot!]) fader.set(element, 0, 200);
+      focusBound = Boolean(row);
+    },
     resolve(id: string) { return [...catalog.objects, ...clusterCatalog?.objects ?? [], ...nebulaCatalog?.objects ?? []].find(object => object.id === id || (!isPreparedCluster(object) && object.detailedObjectId === id)) ?? null; },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, opacity: number, blockerRects: readonly LabelScreenRect[] = [], clusterOpacity = opacity, dotOpacity = opacity,
       budget?: LabelBudget, nebulaOpacity = opacity) {
@@ -136,7 +155,9 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
         for (const entry of entries) { entry.width = entry.label.offsetWidth; entry.height = entry.label.offsetHeight; }
         measured = true;
       }
-      for (const entry of entries) {
+      const drawn = focusBound && focusEntry ? [...entries, focusEntry] : entries;
+      if (focusBound && focusEntry && !focusEntry.width) { focusEntry.width = focusEntry.label.offsetWidth; focusEntry.height = focusEntry.label.offsetHeight; }
+      for (const entry of drawn) {
         const point = projectCatalogPosition(entry.object.positionM, world, viewport);
         if (!point || !(width > 0 && height > 0)) continue;
         if (entry.aperture && isPreparedCluster(entry.object)) {
@@ -178,7 +199,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
       const admitted = admitGalaxyLabels(candidates, blockerRects, selectedId, budget ?? createLabelBudget(width, height));
       const admittedById = new Map(admitted.map(entry => [entry.object.id, entry]));
       const pickTargets: ScreenPickTarget[] = [];
-      for (const entry of entries) {
+      for (const entry of drawn) {
         const objectAlpha = objectOpacity(entry.object);
         const projected = admittedById.get(entry.object.id);
         entry.shown = Boolean(projected);

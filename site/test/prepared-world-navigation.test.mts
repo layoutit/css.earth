@@ -428,6 +428,16 @@ test('cancellation between prepared handoff and mount releases resources and all
   assert.equal(f.pending, 0);
 });
 
+test('input between handoff and mount keeps the prepared lease for the mount to claim', async () => {
+  const f = fixtureFactory(), task = f.start();
+  f.tick(0); f.tick(5000); const handoff = await drainFrames(f, { task });
+  f.input();
+  assert.equal(f.resources.destroyed, 0, 'The router is about to mount these resources');
+  assert.doesNotThrow(() => handoff.mountOptions.onNavigationReady?.(f.mounted().navigation), 'An interrupted flight still mounts its destination');
+  f.controller.abort();
+  assert.equal(f.resources.destroyed, 1, 'Only the router request releases a handed-off lease');
+});
+
 test('an already cancelled request cannot start a frame or retain input listeners', async () => {
   const f = fixtureFactory();
   f.controller.abort();
