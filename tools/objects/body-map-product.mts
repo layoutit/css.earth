@@ -43,6 +43,10 @@ export interface AngularResolution { readonly majorArcsec: number; readonly mino
 
 export interface BodyMapObservation {
   readonly id: string; readonly telescope: string; readonly instrument: string;
+  /** The exact ledger mode this observation belongs to. Older records may omit it; publication requires it. */
+  readonly mode?: string;
+  /** The pinned toolkit program that supplied the observation. Older records may omit it; publication requires it. */
+  readonly programme?: string;
   readonly midTimeJd: number; readonly exposureSeconds?: number;
   readonly rangeKm: number;
   readonly subObserver: { readonly latitudeDegrees: number; readonly westLongitudeDegrees: number };
@@ -122,7 +126,10 @@ export function parseBodyMapProduct(value: unknown): BodyMapProduct {
     if (!(angularResolution.majorArcsec >= angularResolution.minorArcsec && angularResolution.minorArcsec > 0)) throw new RangeError(`Observation ${index}: the resolution's major axis is at least its minor, and both are positive.`);
     const rangeKm = requireFiniteNumber(entry.rangeKm, 'rangeKm');
     if (!(rangeKm > 0)) throw new RangeError(`Observation ${index} needs the range to the body, in kilometres.`);
-    return { id: requireString(entry.id, 'observation id'), telescope: requireString(entry.telescope, 'telescope'), instrument: requireString(entry.instrument, 'instrument'), midTimeJd: requireFiniteNumber(entry.midTimeJd, 'midTimeJd'),
+    return { id: requireString(entry.id, 'observation id'), telescope: requireString(entry.telescope, 'telescope'), instrument: requireString(entry.instrument, 'instrument'),
+      ...(entry.mode === undefined ? {} : { mode: requireString(entry.mode, 'observation mode') }),
+      ...(entry.programme === undefined ? {} : { programme: requireString(entry.programme, 'observation programme') }),
+      midTimeJd: requireFiniteNumber(entry.midTimeJd, 'midTimeJd'),
       ...(entry.exposureSeconds === undefined ? {} : { exposureSeconds: requireFiniteNumber(entry.exposureSeconds, 'exposureSeconds') }), rangeKm, subObserver: point(entry.subObserver, 'subObserver'),
       ...(entry.subSolar === undefined ? {} : { subSolar: point(entry.subSolar, 'subSolar') }), angularResolution };
   });

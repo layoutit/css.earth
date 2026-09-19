@@ -100,8 +100,8 @@ problem, never counted as a check.
 | VLTI (PIONIER, GRAVITY, MATISSE, AMBER) | [Interferometric imaging](interferometric-imaging.md) | `interferometry/calibrate-*.mts` | the authors' published visibilities and images | `published-value` |
 
 The ledgers say how much of each archive these routes have been proved on:
-[JWST](jwst-ledger.md), [Hubble](hubble-ledger.md), [NACO](naco-ledger.md), [Chandra](chandra-ledger.md) and
-[JunoCam](junocam-ledger.md).
+[JWST](jwst-ledger.md), [Hubble](hubble-ledger.md), [NACO](naco-ledger.md), [Chandra](chandra-ledger.md),
+[JunoCam](junocam-ledger.md), [Spitzer](spitzer-ledger.md), [Gemini](gemini-ledger.md) and [Keck](keck-ledger.md).
 
 ## Asking which observations might measure something
 
@@ -139,8 +139,8 @@ candidate answers three separate things:
    beside the object whose observations carry a measured resolution, investigation entries, and a list of what nobody here
    knows until an observation is pinned and read.
 
-Evidence reaches a candidate only by naming it. A body map's observation must state a telescope this repository knows and an
-instrument that is exactly one ledger mode key; an investigation entry must contain that mode key in its own words. Anything
+Evidence reaches a candidate only by naming it. A body map's observation states the telescope, the exact ledger mode and the
+pinned program separately from its instrument setting; an investigation entry must contain that mode key in its own words. Anything
 that resolves to several modes, or to none, is listed separately as unassigned evidence with what it could have meant. A
 Hubble STIS/CCD map says nothing about STIS/FUV-MAMA, which sees other wavelengths through another detector, so it is never
 carried there.
@@ -152,12 +152,45 @@ mode nobody has sourced is left out, and the query says "capabilities not record
 Fifteen Hubble configurations (aggregates such as `STIS` and `ACS`, which name no one detector, and retired instruments such
 as the FOC, the WF/PC and the HSP) and nine NACO techniques whose own pages state no wavelength range are in that position
 today. The FOS and GHRS detectors left that list when their handbooks' own ranges were read for the archive-final route; being
-sourced is not being re-calibrated, and the query keeps those two apart.
+sourced is not being re-calibrated, and the query keeps those two apart. Spitzer, Gemini and Keck modes are visible in the
+query even where those sourced capability facts have not been written yet; every affected constraint stays unknown.
+
+## From a question to a publishable layer
+
+The query can make an explicit selection instead of silently treating the first candidate as the answer:
+
+```
+pnpm telescope:query --target europa --wavelength 4.24,4.28 --kind cube \
+  --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250
+```
+
+The selection is refused when any requested constraint is `no` or the mode has no usable toolkit. Every `partial` and
+`unknown` answer is copied into the selection. The selected program must be a pinned program of this target in that mode; a
+similarly named program of another target cannot pass.
+
+The instrument author then writes the final map, its `*.body-map.json`, and the shared `*.product.json`. JWST band maps,
+Hubble slit-scan maps and ALMA thermal maps use this boundary. The product record pins the recipe, observation products,
+ephemerides and rotation model that the map stage read, along with the output plane and its body-map metadata.
+
+Publication performs the query and verifies the whole chain in one command:
+
+```
+pnpm telescope:publish-map --target europa --wavelength 4.24,4.28 --kind cube \
+  --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250 \
+  --map src/objects/europa/source/jwst/carbon-dioxide.fits.body-map.json \
+  --out src/objects/europa/source/jwst/carbon-dioxide.telescope-layer.json
+```
+
+It refuses a changed plane, stale product record, changed measurement definition, frame, grid or combination policy, a map
+whose observations omit their exact mode or program, and a map that does not contain the selected program. Its output keeps
+the original scientific request, unresolved constraints, selected toolkit level, exact product record, quantity, units,
+definition digest and observations. A body package can therefore expose the layer without recreating a scientific claim in
+presentation code.
 
 ### Europa between 3.4 and 3.6 micrometres
 
 Asked for a cube, at Europa's typical range of 630 million kilometres, with at least eight resolution elements across the
-disc, the query finds 23 modes that have observed Europa. In plain language:
+disc, the query finds the recorded modes that have observed Europa. In plain language:
 
 - **JWST NIRSPEC/IFU**, 13 observations: covers the wavelengths, produces cubes, and the route is proven on `europa-1250`,
   a program of Europa itself. Its optics hold the disc to at most 7.8 elements and its pixels sample 5.1, so the eight asked
@@ -171,6 +204,8 @@ disc, the query finds 23 modes that have observed Europa. In plain language:
   micrometres, so they sort below the three above.
 - One investigation entry about JWST carbon dioxide is left unassigned: it names the telescope but no single mode, and four
   JWST modes observed Europa.
+- Gemini and Keck modes also appear as candidates, while constraints absent from their ledgers remain *unknown*. Keck's
+  pinned NIRSPEC holdings are kept separate from its one runnable, checked KCWI program.
 
 Chandra holds no record of Europa at all, and the query says so instead of leaving it out.
 

@@ -70,7 +70,7 @@ export interface ToolkitSupport {
   readonly targetArchiveFinalQualified: boolean;
 }
 
-export interface MeasuredResolution { readonly path: string; readonly quantity: string; readonly observation: string; readonly angularResolutionArcsec: number; readonly surfaceResolutionKm: number }
+export interface MeasuredResolution { readonly path: string; readonly quantity: string; readonly observation: string; readonly programme?: string; readonly angularResolutionArcsec: number; readonly surfaceResolutionKm: number }
 export interface CandidateEvidence {
   readonly ledger: string; readonly archiveDate: string;
   readonly receipts: readonly string[];
@@ -126,6 +126,19 @@ export interface CapabilityAnswer {
   readonly unassignedEvidence: readonly UnassignedEvidence[];
   /** Ledgers that hold no record of this target, so they contribute no candidate. */
   readonly withoutTheTarget: readonly { readonly telescope: string; readonly ledger: string; readonly reason: string }[];
+}
+
+export const OBSERVATION_SELECTION_SCHEMA = 'cssearth-telescope-observation-selection@1';
+export interface ObservationSelection {
+  readonly schema: typeof OBSERVATION_SELECTION_SCHEMA;
+  readonly request: CapabilityRequest;
+  readonly telescope: string;
+  readonly mode: string;
+  readonly programme: string;
+  readonly toolkitLevel: ToolkitLevel;
+  /** Constraints that remain partial or unknown after selection. They stay visible rather than becoming an implied yes. */
+  readonly unresolved: readonly { readonly constraint: string; readonly answer: 'partial' | 'unknown'; readonly reason: string }[];
+  readonly evidence: CandidateEvidence;
 }
 
 /** What a ledger says about one target in one mode, in the one shape every adapter produces. */
@@ -298,7 +311,64 @@ function junoModes(value: unknown, target: string): TargetMode[] {
     toolkit: { routeState: state, programs, checked: state === 'measured' ? programs : [], receipts: [] } }];
 }
 
-const ADAPTERS: Readonly<Record<string, (value: unknown, target: string) => TargetMode[]>> = Object.freeze({ jwst: jwstModes, hst: hstModes, naco: nacoModes, chandra: chandraModes, juno: junoModes });
+/** Spitzer: holdings carry counts per observing mode. The ledger currently records checked totals, not their program names, so
+ * the query exposes the candidates and tool but does not invent a target-specific checked program. */
+function spitzerModes(value: unknown, target: string): TargetMode[] {
+  const ledger = requireRecord(value, 'Spitzer ledger');
+  if (ledger.schema !== 'cssearth-spitzer-ledger@1') throw new TypeError(`Unsupported Spitzer ledger schema ${String(ledger.schema)}.`);
+  const archiveDate = requireString(ledger.archiveDate, 'archiveDate'), declared = new Map(requireArray(ledger.modes, 'modes').map(raw => {
+    const entry = requireRecord(raw, 'mode'); return [requireString(entry.mode, 'mode'), entry] as const; }));
+  const object = requireArray(ledger.holdings, 'holdings').map(raw => requireRecord(raw, 'holding')).find(entry => entry.object === target);
+  if (!object) return [];
+  return Object.entries(requireRecord(object.modes, 'modes')).map(([mode, count]) => {
+    const entry = declared.get(mode), tool = entry ? optionalString(entry.tool, `${mode} tool`) : undefined;
+    return { telescope: 'Spitzer', mode, archiveDate, observations: { count: requireFiniteNumber(count, `${mode} observations`), scope: 'this-mode' as const }, programmes: [], dates: [],
+      toolkit: { ...(tool ? { tool } : {}), programs: [], checked: [], receipts: [] } };
+  });
+}
+
+/** Gemini: object rows name the instruments that saw the target; the capability row says whether DRAGONS is usable and which
+ * pinned programs have evidence. */
+function geminiModes(value: unknown, target: string): TargetMode[] {
+  const ledger = requireRecord(value, 'Gemini ledger');
+  if (ledger.schema !== 'cssearth-gemini-ledger@1') throw new TypeError(`Unsupported Gemini ledger schema ${String(ledger.schema)}.`);
+  const archiveDate = requireString(ledger.measured, 'measured'), capabilities = new Map(requireArray(ledger.capabilities, 'capabilities').map(raw => {
+    const entry = requireRecord(raw, 'capability'); return [requireString(entry.instrument, 'instrument'), entry] as const; }));
+  const object = requireArray(ledger.objects, 'objects').map(raw => requireRecord(raw, 'object')).find(entry => entry.id === target);
+  if (!object) return [];
+  const count = requireFiniteNumber(object.science, 'science');
+  return stringList(object.instruments, 'instruments').map(mode => {
+    const entry = capabilities.get(mode), state = entry ? requireString(entry.state, `${mode} state`) : 'unsupported';
+    const programs = entry ? stringList(entry.programs, `${mode} programs`) : [];
+    const evidence = entry ? requireArray(entry.evidence, `${mode} evidence`).map(raw => requireRecord(raw, 'evidence')) : [];
+    const receipts = evidence.map(item => requireString(item.receipt, 'receipt'));
+    return { telescope: 'Gemini', mode, archiveDate, observations: { count, scope: 'object-total' as const }, programmes: [], dates: [],
+      toolkit: { ...(state === 'unsupported' ? { routeState: 'refused', refusedBecause: entry ? requireString(entry.reason, `${mode} reason`) : 'No capability row.' }
+        : { routeState: state, tool: 'tools/objects/gemini/reduce.mts' }), programs, checked: state === 'reduced' && receipts.length ? programs : [], receipts } };
+  });
+}
+
+/** Keck: object rows carry exact frame counts per instrument; mode rows carry the installation and accepted receipts. */
+function keckModes(value: unknown, target: string): TargetMode[] {
+  const ledger = requireRecord(value, 'Keck ledger');
+  if (ledger.schema !== 'cssearth-keck-ledger@1') throw new TypeError(`Unsupported Keck ledger schema ${String(ledger.schema)}.`);
+  const archiveDate = requireString(ledger.measured, 'measured'), modes = new Map(requireArray(ledger.modes, 'modes').map(raw => {
+    const entry = requireRecord(raw, 'mode'); return [requireString(entry.instrument, 'instrument'), entry] as const; }));
+  const object = requireArray(ledger.objects, 'objects').map(raw => requireRecord(raw, 'object')).find(entry => entry.id === target);
+  if (!object) return [];
+  return Object.entries(requireRecord(object.instruments, 'instruments')).map(([mode, count]) => {
+    const entry = modes.get(mode), state = entry ? requireString(entry.state, `${mode} state`) : 'held, not reducible';
+    const programs = entry ? stringList(entry.programs, `${mode} programs`).map(name => name.replace(/\.json$/u, '')) : [], receipts = entry ? stringList(entry.receipts, `${mode} receipts`) : [];
+    const reduced = state === 'reduced';
+    return { telescope: 'Keck', mode, archiveDate, observations: { count: requireFiniteNumber(count, `${mode} frames`), scope: 'this-mode' as const }, programmes: [], dates: [],
+      toolkit: { ...(reduced ? { routeState: state, tool: 'tools/objects/keck/reduce.mts' }
+        : { routeState: 'refused', refusedBecause: entry ? requireString(entry.reason, `${mode} reason`) : 'No mode row.' }),
+        programs, checked: reduced && receipts.length ? programs : [], receipts } };
+  });
+}
+
+const ADAPTERS: Readonly<Record<string, (value: unknown, target: string) => TargetMode[]>> = Object.freeze({ jwst: jwstModes, hst: hstModes, naco: nacoModes, chandra: chandraModes, juno: junoModes,
+  spitzer: spitzerModes, gemini: geminiModes, keck: keckModes });
 
 /** Every mode key the ledgers use, so `modes.json` can be tied to them and cannot drift. */
 export function ledgerModeKeys(ledgers: QueryInputs['ledgers']): { readonly telescope: string; readonly mode: string }[] {
@@ -311,6 +381,9 @@ export function ledgerModeKeys(ledgers: QueryInputs['ledgers']): { readonly tele
     if (telescope === 'naco') for (const raw of requireArray(ledger.modes, 'modes')) add('VLT/NACO', requireString(requireRecord(raw, 'mode').mode, 'mode'));
     if (telescope === 'chandra') for (const detector of Object.keys(requireRecord(requireRecord(ledger.archive, 'archive').byInstrument, 'byInstrument'))) add('Chandra', detector);
     if (telescope === 'juno') add('Juno', 'JUNOCAM');
+    if (telescope === 'spitzer') for (const raw of requireArray(ledger.modes, 'modes')) add('Spitzer', requireString(requireRecord(raw, 'mode').mode, 'mode'));
+    if (telescope === 'gemini') for (const raw of requireArray(ledger.capabilities, 'capabilities')) add('Gemini', requireString(requireRecord(raw, 'capability').instrument, 'instrument'));
+    if (telescope === 'keck') for (const raw of requireArray(ledger.modes, 'modes')) add('Keck', requireString(requireRecord(raw, 'mode').instrument, 'instrument'));
   }
   return [...keys.values()].sort((a, b) => `${a.telescope}${a.mode}` < `${b.telescope}${b.mode}` ? -1 : 1);
 }
@@ -420,7 +493,8 @@ interface AttachedEvidence { bodyMaps: MeasuredResolution[]; investigations: { i
  * this table and an exact mode key, because a detector name that merely looks similar is a different instrument: a Hubble
  * STIS/CCD map says nothing about STIS/FUV-MAMA, which sees other wavelengths at another sampling. */
 const TELESCOPE_NAMES: Readonly<Record<string, string>> = Object.freeze({ JWST: 'JWST', 'JAMES WEBB SPACE TELESCOPE': 'JWST', HST: 'Hubble', HUBBLE: 'Hubble',
-  'HUBBLE SPACE TELESCOPE': 'Hubble', NACO: 'VLT/NACO', 'NAOS+CONICA': 'VLT/NACO', 'VLT/NACO': 'VLT/NACO', CHANDRA: 'Chandra', CXO: 'Chandra', JUNO: 'Juno', JUNOCAM: 'Juno' });
+  'HUBBLE SPACE TELESCOPE': 'Hubble', NACO: 'VLT/NACO', 'NAOS+CONICA': 'VLT/NACO', 'VLT/NACO': 'VLT/NACO', CHANDRA: 'Chandra', CXO: 'Chandra', JUNO: 'Juno', JUNOCAM: 'Juno',
+  SPITZER: 'Spitzer', GEMINI: 'Gemini', KECK: 'Keck' });
 
 /** The one mode a telescope and an instrument name identify, or the modes they could mean. Equality on the ledger's own mode
  * key is the rule; anything else is left unassigned. */
@@ -439,11 +513,13 @@ function resolveEvidence(inputs: QueryInputs, modes: readonly TargetMode[]): { r
   for (const { path, value } of inputs.bodyMaps) {
     const map = parseBodyMapProduct(value);
     for (const observation of map.observations) {
-      const { mode, couldMean } = resolveMode(observation.telescope, observation.instrument, modes);
+      const namedMode = observation.mode ?? observation.instrument;
+      const { mode, couldMean } = resolveMode(observation.telescope, namedMode, modes);
       const identity = `${observation.telescope} ${observation.instrument}, observation ${observation.id}`;
       if (!mode) { unassigned.push({ kind: 'body-map', source: path, identity, couldMean,
-        reason: couldMean.length ? `${observation.instrument} is not one of this telescope's ledger mode keys, so which mode measured this is not stated.` : `Nothing here knows the telescope ${observation.telescope}.` }); continue; }
+        reason: couldMean.length ? `${namedMode} is not one of this telescope's ledger mode keys, so which mode measured this is not stated.` : `Nothing here knows the telescope ${observation.telescope}.` }); continue; }
       attached.get(mode)!.bodyMaps.push({ path, quantity: `${map.definition.quantity} (${map.definition.units})`, observation: observation.id,
+        ...(observation.programme === undefined ? {} : { programme: observation.programme }),
         angularResolutionArcsec: observation.angularResolution.majorArcsec, surfaceResolutionKm: round(surfaceResolutionKm(observation).majorKm) });
     }
   }
@@ -495,6 +571,24 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
   const rank = (candidate: Candidate) => candidate.meetsConstraints.wavelength?.answer === 'yes' ? 0 : candidate.meetsConstraints.wavelength?.answer === 'partial' ? 1 : 2;
   return { target: request.target, request, unassignedEvidence: unassigned, withoutTheTarget,
     candidates: candidates.sort((a, b) => rank(a) - rank(b) || (`${a.telescope}${a.mode}` < `${b.telescope}${b.mode}` ? -1 : 1)) };
+}
+
+/** Select one runnable, pinned program from a capability answer. A hard `no` cannot be selected. Partial and unknown facts are
+ * retained on the selection so the reducer and publisher cannot turn them into claims the query never made. */
+export function selectObservation(answer: CapabilityAnswer, telescope: string, mode: string, programme: string): ObservationSelection {
+  const matches = answer.candidates.filter(candidate => candidate.telescope === telescope && candidate.mode === mode);
+  if (matches.length !== 1) throw new Error(matches.length ? `${telescope} ${mode} is ambiguous.` : `${telescope} ${mode} is not a candidate for ${answer.target}.`);
+  const candidate = matches[0]!;
+  const refused = Object.entries(candidate.meetsConstraints).filter(([, verdict_]) => verdict_.answer === 'no');
+  if (refused.length) throw new Error(`${telescope} ${mode} cannot answer this request: ${refused.map(([name, verdict_]) => `${name}: ${verdict_.reason}`).join(' ')}`);
+  if (candidate.toolkitSupport.level === 'none') throw new Error(`${telescope} ${mode} has no usable toolkit: ${candidate.toolkitSupport.reason}`);
+  const targetPrograms = [...candidate.toolkitSupport.programs, ...candidate.toolkitSupport.archiveFinalQualified]
+    .filter(value => value === answer.target || value.startsWith(`${answer.target}-`));
+  if (!targetPrograms.includes(programme)) throw new Error(`${programme} is not a pinned or archive-final program of ${answer.target} in ${telescope} ${mode}; choose one of ${targetPrograms.join(', ') || 'none'}.`);
+  const unresolved = Object.entries(candidate.meetsConstraints).flatMap(([constraint, verdict_]) => verdict_.answer === 'partial' || verdict_.answer === 'unknown'
+    ? [{ constraint, answer: verdict_.answer, reason: verdict_.reason } as const] : []);
+  return { schema: OBSERVATION_SELECTION_SCHEMA, request: answer.request, telescope, mode, programme,
+    toolkitLevel: candidate.toolkitSupport.level, unresolved, evidence: candidate.evidence };
 }
 
 export const LEDGER_TELESCOPES: readonly string[] = Object.keys(ADAPTERS);
@@ -570,5 +664,8 @@ export function requestFromArguments(args: readonly string[]): CapabilityRequest
 if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split('/').at(-1) ?? ' :: ')) {
   const args = process.argv.slice(2), request = requestFromArguments(args);
   const answer = queryCapabilities(request, await loadQueryInputs(resolve(import.meta.dirname, '../../..'), request.target));
-  process.stdout.write(args.includes('--json') ? `${JSON.stringify(answer, null, 2)}\n` : formatAnswer(answer));
+  const telescope = flagValue(args, '--select-telescope'), mode = flagValue(args, '--select-mode'), programme = flagValue(args, '--program');
+  if ([telescope, mode, programme].some(Boolean) && ![telescope, mode, programme].every(Boolean)) throw new TypeError('--select-telescope, --select-mode and --program are given together.');
+  process.stdout.write(telescope && mode && programme ? `${JSON.stringify(selectObservation(answer, telescope, mode, programme), null, 2)}\n`
+    : args.includes('--json') ? `${JSON.stringify(answer, null, 2)}\n` : formatAnswer(answer));
 }
