@@ -20,6 +20,8 @@ const window = (values: readonly number[], width = 3, height = 2, header = undef
 
 test('a recipe states everything a picture needs, and a malformed one is refused', () => {
   assert.equal(recipe.id, 'probe');
+  assert.deepEqual(recipe.enlarge, [2, 2]);
+  assert.deepEqual(parseExampleRecipe({ ...base, enlarge: [7, 3] }).enlarge, [7, 3]);
   assert.equal(recipe.producedIn, undefined);
   assert.equal(parseExampleRecipe({ ...base, producedIn: 'css.earth-probe' }).producedIn, 'css.earth-probe');
   for (const bad of [null, {}, { ...base, id: 'Probe' }, { ...base, enlarge: 0 }, { ...base, enlarge: 1.5 },
@@ -28,7 +30,7 @@ test('a recipe states everything a picture needs, and a malformed one is refused
     { ...base, stretch: { kind: 'asinh', black: 0, white: 1 } }, { ...base, stretch: { kind: 'asinh', black: 0, white: 1, softening: 0 } },
     { ...base, orientation: { mode: 'sideways', note: 'n' } }, { ...base, source: { kind: 'jpeg', path: 'p' } },
     { ...base, colour: { kind: 'ramp', stops: [[0.2, '#000000'], [1, '#ffffff']] } },
-    { ...base, colour: { kind: 'ramp', stops: [[0, '#000000'], [1, 'white']] } },
+    { ...base, colour: { kind: 'ramp', stops: [[0, '#000000'], [1, 'white']] } }, { ...base, enlarge: [2] }, { ...base, enlarge: [2, 0] },
     { ...base, product: { ...base.product, sha256: 'abc' } }])
     assert.throws(() => parseExampleRecipe(bad), JSON.stringify(bad)?.slice(0, 120));
   assert.throws(() => parseExampleRecipes({ schema: 'other', examples: [base] }), /cssearth-telescope-examples@1/u);
@@ -87,6 +89,13 @@ test('a recipe for another unit is refused, so a picture cannot be drawn to the 
   assert.throws(() => examplePixels(window([0, 0, 0, 0, 0, 0], 3, 2, { BUNIT: 'MJy/sr' }), recipe), /BUNIT MJy\/sr; the recipe states K/u);
 });
 
+test('a sample may be drawn as a rectangle where the instrument samples are not square on the sky', async () => {
+  const picture = await renderExamplePicture(window([0, 0.5, 1, 1, 0.5, 0]), parseExampleRecipe({ ...base, enlarge: [3, 1] }));
+  assert.deepEqual([picture.width, picture.height], [9, 2]);
+  const { data } = await sharp(picture.bytes).raw().toBuffer({ resolveWithObject: true });
+  assert.deepEqual([...data.subarray(0, 27)].filter((_, index) => index % 3 === 0), [255, 255, 255, 128, 128, 128, 0, 0, 0]);
+});
+
 test('every source sample becomes a square of equal pixels in a lossless picture', async () => {
   const picture = await renderExamplePicture(window([0, 0.5, 1, 1, 0.5, 0]), recipe);
   assert.deepEqual([picture.width, picture.height], [6, 4]);
@@ -99,7 +108,7 @@ test('every source sample becomes a square of equal pixels in a lossless picture
 });
 
 test('events are counted into square bins, and events outside the grid are dropped', () => {
-  const source = { kind: 'fits-events' as const, path: 'p', columns: ['x', 'y'] as const, binPixels: 10, origin: [100, 200] as const, size: [2, 2] as const };
+  const source = { kind: 'fits-events' as const, path: 'p', columns: ['x', 'y'] as const, binPixels: 10, origin: [100, 200] as const, size: [2, 2] as const, band: undefined };
   const x = Float64Array.from([100, 105, 109.9, 110, 100, 99, 300]);
   const y = Float64Array.from([200, 200, 200, 200, 215, 200, 200]);
   const counts = binEventCounts(x, y, source);
@@ -107,18 +116,23 @@ test('events are counted into square bins, and events outside the grid are dropp
   // Three events in the first bin, one in the bin to its right, one in the bin above; one below the origin and one off the grid.
   assert.deepEqual([...counts.values], [3, 1, 1, 0]);
   assert.throws(() => binEventCounts(x, Float64Array.from([1]), source), /differ in length/u);
+  // A stated band keeps only the events inside it: here the first bin loses the two events outside 1000 to 2000.
+  const banded = { ...source, band: { column: 'energy', limits: [1000, 2000] as const } };
+  const energy = Float64Array.from([1500, 500, 2500, 1200, 1800, 1500, 1500]);
+  assert.deepEqual([...binEventCounts(x, y, banded, energy).values], [1, 1, 1, 0]);
 });
 
 test('every checked-in example states a product, a command and a pinned definition, and fits the documented picture', async () => {
   const examples = parseExampleRecipes(JSON.parse(await readFile(resolve(import.meta.dirname, 'examples.json'), 'utf8')));
   assert.ok(examples.length >= 10, 'one example for each telescope with a finished product');
   const telescopes = new Set(examples.map(example => example.telescope));
-  for (const telescope of ['JWST', 'Hubble', 'ALMA', 'VLT', 'Chandra', 'Spitzer', 'Juno']) assert.ok(telescopes.has(telescope), telescope);
+  for (const telescope of ['JWST', 'Hubble', 'ALMA', 'VLTI', 'VLT', 'Chandra', 'Spitzer', 'Keck II', 'Gemini South', 'Juno']) assert.ok(telescopes.has(telescope), telescope);
   for (const example of examples) {
     assert.ok(example.product.command.startsWith('node tools/objects/'), `${example.id} states the command that makes the product`);
     assert.ok(example.note.length > 20, `${example.id} says what the picture shows and does not show`);
     assert.ok(!/[—–]/u.test(`${example.title}${example.note}${example.orientation.note}`), `${example.id} uses plain punctuation`);
-    assert.ok(example.window.width * example.enlarge <= 900 && example.window.height * example.enlarge <= 900, `${example.id} fits in 900 pixels`);
-    if (example.colour.kind === 'ramp') assert.ok(example.colour.missing, `${example.id} draws missing samples in a stated colour`);
+    assert.ok(example.window.width * example.enlarge[0] <= 900 && example.window.height * example.enlarge[1] <= 900, `${example.id} fits in 900 pixels`);
+    // A sample with no value is drawn in a neutral grey, never in a colour that could be read as a measurement.
+    if (example.colour.missing) assert.match(example.colour.missing, /^#(\w\w)\1\1$/u, `${example.id} draws missing samples in a neutral grey`);
   }
 });

@@ -31,12 +31,15 @@ const MAX_OUTPUT_EDGE = 1024;
 const MAX_WINDOW_SAMPLES = 4_000_000;
 
 export type ExampleSource =
-  /** One extension of a FITS file; `plane` selects a plane of a cube, counted from 1. */
-  | { readonly kind: 'fits-image'; readonly path: string; readonly extension: number; readonly plane: number }
+  /** One extension of a FITS file; `plane` selects a plane of a cube, counted from 1, and `planes` sums that many
+   * consecutive planes from it. A sum is an addition, not a smoothing: no sample is moved or interpolated. */
+  | { readonly kind: 'fits-image'; readonly path: string; readonly extension: number; readonly plane: number; readonly planes: number }
   /** A FITS event list binned to counts per square bin: `binPixels` column units on a side, the first bin's lower-left
-   * corner at `origin` in those same column units, and `size` bins across and up. */
+   * corner at `origin` in those same column units, and `size` bins across and up. `band`, when stated, keeps only the
+   * events whose value in that column lies between its two limits, which is how an energy band is selected. */
   | { readonly kind: 'fits-events'; readonly path: string; readonly columns: readonly [string, string];
-      readonly binPixels: number; readonly origin: readonly [number, number]; readonly size: readonly [number, number] }
+      readonly binPixels: number; readonly origin: readonly [number, number]; readonly size: readonly [number, number];
+      readonly band: { readonly column: string; readonly limits: readonly [number, number] } | undefined }
   /** A JunoCam PDS3 image with its label, in the reflectance the RDR records. */
   | { readonly kind: 'junocam-image'; readonly path: string; readonly labelPath: string };
 
@@ -65,8 +68,9 @@ export interface ExampleRecipe {
   /** `black` and `white` are in `unit`. `asinh` needs `softening`, also in `unit`: the width of the linear part. */
   readonly stretch: { readonly kind: 'linear' | 'asinh'; readonly black: number; readonly white: number; readonly softening?: number };
   readonly colour: ExampleColour;
-  /** Output pixels per source sample along each axis. */
-  readonly enlarge: number;
+  /** Output pixels per source sample, across and down. The two differ only where the instrument's samples are not
+   * square on the sky, and a rectangle of equal pixels is still a block of equal pixels. */
+  readonly enlarge: readonly [number, number];
   readonly product: { readonly sha256: string; readonly command: string; readonly definition: string };
   readonly note: string;
 }
@@ -96,15 +100,24 @@ function colourValue(value: unknown, label: string) {
 
 function parseSource(value: unknown): ExampleSource {
   const source = record(value, 'source'), kind = nonEmpty(source.kind, 'source.kind'), path = nonEmpty(source.path, 'source.path');
-  if (kind === 'fits-image') return { kind, path, extension: whole(source.extension, 'source.extension', 0), plane: whole(source.plane, 'source.plane') };
+  if (kind === 'fits-image') return { kind, path, extension: whole(source.extension, 'source.extension', 0),
+    plane: whole(source.plane, 'source.plane'), planes: source.planes === undefined ? 1 : whole(source.planes, 'source.planes') };
   if (kind === 'fits-events') {
     const columns = source.columns, origin = source.origin, size = source.size;
     if (!Array.isArray(columns) || columns.length !== 2) throw new TypeError('Example source.columns names the two event columns to bin.');
     if (!Array.isArray(origin) || origin.length !== 2 || !Array.isArray(size) || size.length !== 2) throw new TypeError('Example source.origin and source.size are two numbers each.');
     const bins = [whole(size[0], 'source.size[0]'), whole(size[1], 'source.size[1]')] as const;
     if (bins[0] * bins[1] > MAX_WINDOW_SAMPLES) throw new RangeError('An event picture asks for too many bins.');
+    let band: Extract<ExampleSource, { kind: 'fits-events' }>['band'];
+    if (source.band !== undefined) {
+      const stated = record(source.band, 'source.band'), limits = stated.limits;
+      if (!Array.isArray(limits) || limits.length !== 2) throw new TypeError('An event band states two limits.');
+      const [low, high] = [finite(limits[0], 'source.band.limits[0]'), finite(limits[1], 'source.band.limits[1]')];
+      if (!(low < high)) throw new TypeError('An event band runs from its lower limit up.');
+      band = { column: nonEmpty(stated.column, 'source.band.column'), limits: [low, high] };
+    }
     return { kind, path, columns: [nonEmpty(columns[0], 'source.columns[0]'), nonEmpty(columns[1], 'source.columns[1]')],
-      binPixels: whole(source.binPixels, 'source.binPixels'), origin: [finite(origin[0], 'source.origin[0]'), finite(origin[1], 'source.origin[1]')], size: bins };
+      binPixels: whole(source.binPixels, 'source.binPixels'), origin: [finite(origin[0], 'source.origin[0]'), finite(origin[1], 'source.origin[1]')], size: bins, band };
   }
   if (kind === 'junocam-image') return { kind, path, labelPath: nonEmpty(source.labelPath, 'source.labelPath') };
   throw new TypeError(`Unsupported example source kind: ${kind}.`);
@@ -134,9 +147,11 @@ export function parseExampleRecipe(value: unknown): ExampleRecipe {
   const id = nonEmpty(recipe.id, 'id');
   if (!/^[a-z0-9][a-z0-9-]*$/u.test(id)) throw new TypeError('An example id is lower-case letters, digits and hyphens.');
   const size = { x: whole(window.x, 'window.x'), y: whole(window.y, 'window.y'), width: whole(window.width, 'window.width'), height: whole(window.height, 'window.height') };
-  const enlarge = whole(recipe.enlarge, 'enlarge');
+  const stated = recipe.enlarge;
+  if (Array.isArray(stated) && stated.length !== 2) throw new TypeError('An example enlargement is one whole number, or one across and one down.');
+  const enlarge: [number, number] = Array.isArray(stated) ? [whole(stated[0], 'enlarge[0]'), whole(stated[1], 'enlarge[1]')] : [whole(stated, 'enlarge'), whole(stated, 'enlarge')];
   if (size.width * size.height > MAX_WINDOW_SAMPLES) throw new RangeError('An example window asks for too many samples.');
-  if (size.width * enlarge > MAX_OUTPUT_EDGE || size.height * enlarge > MAX_OUTPUT_EDGE) throw new RangeError(`An example picture is larger than ${MAX_OUTPUT_EDGE} pixels on an edge.`);
+  if (size.width * enlarge[0] > MAX_OUTPUT_EDGE || size.height * enlarge[1] > MAX_OUTPUT_EDGE) throw new RangeError(`An example picture is larger than ${MAX_OUTPUT_EDGE} pixels on an edge.`);
   const mode = nonEmpty(orientation.mode, 'orientation.mode');
   if (mode !== 'sky' && mode !== 'first-row-top' && mode !== 'first-row-bottom') throw new TypeError(`Unsupported example orientation: ${mode}.`);
   const kind = nonEmpty(stretch.kind, 'stretch.kind');
@@ -174,11 +189,14 @@ export function parseExampleRecipes(value: unknown): ExampleRecipe[] {
 /** A read window of source samples, in the product's own storage order: the first stored row first. */
 export interface SourceWindow { readonly values: Float64Array; readonly width: number; readonly height: number; readonly header: FitsHeader | undefined }
 
-/** Counts per square bin, the first row the lowest in the second column's value. Events outside the grid are dropped. */
-export function binEventCounts(x: Float64Array, y: Float64Array, source: Extract<ExampleSource, { kind: 'fits-events' }>) {
-  if (x.length !== y.length) throw new Error('Event columns differ in length.');
+/** Counts per square bin, the first row the lowest in the second column's value. Events outside the grid, and events
+ * outside the stated band, are dropped. */
+export function binEventCounts(x: Float64Array, y: Float64Array, source: Extract<ExampleSource, { kind: 'fits-events' }>, band?: Float64Array) {
+  if (x.length !== y.length || (band && band.length !== x.length)) throw new Error('Event columns differ in length.');
   const [width, height] = source.size, [x0, y0] = source.origin, counts = new Float64Array(width * height);
+  const [low, high] = source.band?.limits ?? [-Infinity, Infinity];
   for (let index = 0; index < x.length; index++) {
+    if (band && !(band[index]! >= low && band[index]! <= high)) continue;
     const column = Math.floor((x[index]! - x0) / source.binPixels), row = Math.floor((y[index]! - y0) / source.binPixels);
     if (column >= 0 && column < width && row >= 0 && row < height) counts[row * width + column]! += 1;
   }
@@ -196,7 +214,8 @@ async function readSourceWindow(recipe: ExampleRecipe, root: string): Promise<So
   const { source, window } = recipe, path = productPath(recipe, source.path, root);
   if (source.kind === 'fits-events') {
     const bytes = await readFile(path), table = eventTable(bytes);
-    const binned = binEventCounts(column(bytes, table, source.columns[0]), column(bytes, table, source.columns[1]), source);
+    const binned = binEventCounts(column(bytes, table, source.columns[0]), column(bytes, table, source.columns[1]), source,
+      source.band ? column(bytes, table, source.band.column) : undefined);
     return { ...crop(binned.values, binned.width, binned.height, window), header: table.hdu.header };
   }
   if (source.kind === 'junocam-image') {
@@ -208,16 +227,19 @@ async function readSourceWindow(recipe: ExampleRecipe, root: string): Promise<So
   const extent = imageExtent(hdu.dimensions);
   if (!extent) throw new Error('An example FITS image needs two or three sky axes, with any further axes degenerate.');
   const [width, height, planes = 1] = extent;
-  if (source.plane > planes) throw new RangeError(`The product holds ${planes} plane(s); the recipe asks for plane ${source.plane}.`);
+  if (source.plane + source.planes - 1 > planes) throw new RangeError(`The product holds ${planes} plane(s); the recipe asks for ${source.planes} from plane ${source.plane}.`);
   if (window.x - 1 + window.width > width! || window.y - 1 + window.height > height!) throw new RangeError('An example window leaves the image.');
-  if (extent.length === 2 && source.plane === 1) {
+  if (extent.length === 2 && source.plane === 1 && source.planes === 1) {
     const region = await readFitsFileRegion(path, hdu, { x0: window.x - 1, y0: window.y - 1, width: window.width, height: window.height });
     return { values: region.values, width: window.width, height: window.height, header: hdu.header };
   }
   const bytes = await readFile(path), at = fitsImageAccessor(bytes, readFitsHdus(bytes)[source.extension]!);
-  const values = new Float64Array(window.width * window.height), plane = (source.plane - 1) * width! * height!;
-  for (let row = 0; row < window.height; row++)
-    for (let x = 0; x < window.width; x++) values[row * window.width + x] = at(plane + (window.y - 1 + row) * width! + window.x - 1 + x);
+  const values = new Float64Array(window.width * window.height);
+  for (let index = 0; index < source.planes; index++) {
+    const plane = (source.plane - 1 + index) * width! * height!;
+    for (let row = 0; row < window.height; row++)
+      for (let x = 0; x < window.width; x++) values[row * window.width + x]! += at(plane + (window.y - 1 + row) * width! + window.x - 1 + x);
+  }
   return { values, width: window.width, height: window.height, header: hdu.header };
 }
 
@@ -289,13 +311,13 @@ export function examplePixels(source: SourceWindow, recipe: ExampleRecipe) {
   return { pixels, width: source.width, height: source.height };
 }
 
-/** The picture: every source sample a square of `enlarge` by `enlarge` equal pixels, written as a lossless WebP. */
+/** The picture: every source sample a block of `enlarge` equal pixels, written as a lossless WebP. */
 export async function renderExamplePicture(source: SourceWindow, recipe: ExampleRecipe) {
-  const { pixels, width, height } = examplePixels(source, recipe), scale = recipe.enlarge;
-  const [outWidth, outHeight] = [width * scale, height * scale], out = new Uint8Array(outWidth * outHeight * 3);
+  const { pixels, width, height } = examplePixels(source, recipe), [across, down] = recipe.enlarge;
+  const [outWidth, outHeight] = [width * across, height * down], out = new Uint8Array(outWidth * outHeight * 3);
   for (let row = 0; row < outHeight; row++) {
-    const line = Math.floor(row / scale) * width;
-    for (let x = 0; x < outWidth; x++) out.set(pixels.subarray((line + Math.floor(x / scale)) * 3, (line + Math.floor(x / scale)) * 3 + 3), (row * outWidth + x) * 3);
+    const line = Math.floor(row / down) * width;
+    for (let x = 0; x < outWidth; x++) out.set(pixels.subarray((line + Math.floor(x / across)) * 3, (line + Math.floor(x / across)) * 3 + 3), (row * outWidth + x) * 3);
   }
   const bytes = await sharp(out, { raw: { width: outWidth, height: outHeight, channels: 3 } }).webp({ lossless: true, effort: 6 }).toBuffer();
   return { bytes, width: outWidth, height: outHeight };

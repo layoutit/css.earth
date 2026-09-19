@@ -2,70 +2,70 @@
   "schema": "cssearth-telescope-examples@1",
   "examples": [
     {
-      "id": "jwst-nirspec-europa-carbon-dioxide",
+      "id": "jwst-nircam-ngc3132",
       "telescope": "JWST",
-      "instrument": "NIRSpec IFU, G395H/F290LP",
-      "title": "Carbon dioxide on Europa",
-      "target": "Europa",
-      "date": "eight NIRSpec cubes, programmes 1250, 4023 and 9230",
-      "producedIn": "css.earth-jwst",
-      "source": { "kind": "fits-image", "path": "src/objects/europa/source/jwst/carbon-dioxide.fits", "extension": 1, "plane": 1 },
-      "unit": "band depth",
-      "window": { "x": 1, "y": 1, "width": 360, "height": 180 },
-      "orientation": { "mode": "first-row-top", "note": "A longitude-latitude map of the whole body. The first stored row is the north pole, the first column starts at 0 degrees east longitude and east runs to the right." },
-      "stretch": { "kind": "linear", "black": 0, "white": 0.18 },
-      "colour": { "kind": "ramp", "stops": [[0, "#000000"], [0.45, "#7b2f00"], [0.75, "#e08a2b"], [1, "#ffeec2"]], "missing": "#4a4a4a" },
-      "enlarge": 2,
-      "product": {
-        "sha256": "ad3b7b0a89af2d4f190162a53c492d39643ececafecee95cb83a64a5b550d187",
-        "command": "node tools/objects/jwst/cubes/author-body-maps.mts europa",
-        "definition": "tools/objects/jwst/imaging/programs/europa-1250.NIRSPEC-G395H-F290LP.reproduction.json"
-      },
-      "note": "The grey areas are longitudes and latitudes no cube saw, or saw too obliquely to measure."
-    },
-    {
-      "id": "jwst-miri-europa-f1280w",
-      "telescope": "JWST",
-      "instrument": "MIRI imager, F1280W",
-      "title": "Europa at 12.8 microns",
-      "target": "Europa",
-      "date": "2022-11-23",
-      "producedIn": "css.earth-miri",
-      "source": { "kind": "fits-image", "path": "output/miri-image/image3/jw01250-o004_t001_miri_f1280w-sub64_i2d.fits", "extension": 1, "plane": 1 },
+      "instrument": "NIRCam, F187N",
+      "title": "The Southern Ring Nebula",
+      "target": "NGC 3132",
+      "date": "2022-06-03",
+      "producedIn": "css.earth-ngc3132",
+      "source": { "kind": "fits-image", "path": "output/jwst-imaging/f187n-grid/image3/jw02733-o001_t001_nircam_clear-f187n_grid_i2d.fits", "extension": 1, "plane": 1 },
       "unit": "MJy/sr",
-      "window": { "x": 1, "y": 1, "width": 98, "height": 94 },
-      "orientation": { "mode": "first-row-bottom", "note": "The stored rows of the resampled image, the first at the bottom. The frame is rotated on the sky: north is 70.6 degrees and east 340.6 degrees clockwise from up, measured from the image's own WCS." },
-      "stretch": { "kind": "asinh", "black": 0, "white": 96000, "softening": 3000 },
-      "colour": { "kind": "greys", "missing": "#4a4a4a" },
-      "enlarge": 8,
+      "window": { "x": 187, "y": 187, "width": 650, "height": 650 },
+      "orientation": { "mode": "sky", "note": "North up and east left, from the mosaic's own WCS." },
+      "stretch": { "kind": "asinh", "black": 0, "white": 300, "softening": 3 },
+      "colour": { "kind": "greys" },
+      "enlarge": 1,
       "product": {
-        "sha256": "6fc4ba52f2f3fa5df788a1f9710975a75a79b77dc46217bd005f5936bd694966",
-        "command": "node tools/objects/jwst/imaging/image3.mts europa-1250 MIRI-F1280W output/miri-image",
-        "definition": "tools/objects/jwst/imaging/programs/europa-1250.MIRI-F1280W.reproduction.json"
+        "sha256": "213680aebed947c2c82790b412c174b3bbf9f54113425c6f8429c48c11b65589",
+        "command": "node tools/objects/jwst/imaging/image3.mts ngc-3132-2733 NIRCAM-F187N output/jwst-imaging/f187n-grid --grid src/objects/ngc-3132/source/sky-bands/jwst-nircam.json",
+        "definition": "tools/objects/jwst/imaging/programs/ngc-3132-2733.json"
       },
-      "note": "The four dithered exposures cover a cross-shaped area, and the grey corners were never on the detector. The grey hole in the middle of the disc is saturation: every contributing pixel there was rejected, so the level-3 combination gives those output pixels zero weight and no value."
+      "note": "F187N is a narrow filter on the hydrogen Paschen alpha line, so the shells show and most stars are faint."
     },
     {
-      "id": "hubble-stis-europa-aurora",
-      "telescope": "Hubble",
-      "instrument": "STIS FUV-MAMA, oxygen 135.6 nm",
-      "title": "Europa's oxygen aurora",
-      "target": "Europa",
-      "date": "112 frames summed, 58.4 hours of exposure",
+      "id": "jwst-nirspec-sn1987a",
+      "telescope": "JWST",
+      "instrument": "NIRSpec IFU, G140M/F100LP",
+      "title": "The ring around SN 1987A",
+      "target": "SN 1987A",
+      "date": "2022-07-16",
       "producedIn": "css.earth-jwst",
-      "source": { "kind": "fits-image", "path": "output/europa-aurora/oi1356-all.fits", "extension": 1, "plane": 1 },
-      "unit": "R",
-      "window": { "x": 1, "y": 1, "width": 121, "height": 121 },
-      "orientation": { "mode": "first-row-bottom", "note": "A grid fixed to the body, 0.0496 Europa radii a pixel, drawn as the stack writes it: body north up and celestial east left." },
-      "stretch": { "kind": "linear", "black": -20, "white": 200 },
-      "colour": { "kind": "greys" },
-      "enlarge": 5,
+      "source": { "kind": "fits-image", "path": ".local/sn-1987a-1232/spec3-0.05/jw01232-o003_t001_nirspec_g140m-f100lp_s3d.fits", "extension": 1, "plane": 180 },
+      "unit": "MJy/sr",
+      "window": { "x": 1, "y": 1, "width": 85, "height": 93 },
+      "orientation": { "mode": "sky", "note": "North up and east left, from the cube's own WCS." },
+      "stretch": { "kind": "asinh", "black": 0, "white": 19200, "softening": 100 },
+      "colour": { "kind": "greys", "missing": "#4a4a4a" },
+      "enlarge": 9,
       "product": {
-        "sha256": "1ca8377efc5f3d1575059362abf17c7c51dd7d4004b5ae8ad38e9baca87ce607",
-        "command": "node tools/objects/hst/line-stack.mts europa-oxygen-aurora .local/hst/europa-aurora output/europa-aurora --mirror --receipt",
-        "definition": "tools/objects/hst/programs/europa-oxygen-aurora.stack.json"
+        "sha256": "5946bf8cfe1055c0b09cfee14ef618ef2b33c950b06680023f97d230a7727635",
+        "command": "node tools/objects/jwst/cubes/spec3.mts sn-1987a-1232 NIRSPEC-G140M-F100LP .local/sn-1987a-1232/spec3-0.05",
+        "definition": "tools/objects/jwst/imaging/programs/sn-1987a-1232.NIRSPEC-G140M-F100LP.reproduction.json"
       },
-      "note": "Background scatter runs to about 30 R either side of zero, so the mid grey over most of the frame is noise, not emission."
+      "note": "One plane of the cube, at 1.0842 microns: the helium line that is the brightest thing in this cube. Grey is outside the cube's footprint."
+    },
+    {
+      "id": "jwst-miri-ngc6720",
+      "telescope": "JWST",
+      "instrument": "MIRI imager, F770W",
+      "title": "The Ring Nebula at 7.7 microns",
+      "target": "NGC 6720",
+      "date": "2022-08-20",
+      "producedIn": "css.earth-miri",
+      "source": { "kind": "fits-image", "path": "output/jwst-ngc6720/image3/jw01558-o001_t001_miri_f770w_i2d.fits", "extension": 1, "plane": 1 },
+      "unit": "MJy/sr",
+      "window": { "x": 700, "y": 210, "width": 640, "height": 600 },
+      "orientation": { "mode": "first-row-bottom", "note": "The stored rows of the resampled mosaic, the first at the bottom." },
+      "stretch": { "kind": "asinh", "black": 4.3, "white": 28, "softening": 1.5 },
+      "colour": { "kind": "greys", "missing": "#4a4a4a" },
+      "enlarge": 1,
+      "product": {
+        "sha256": "59bc12176a464215d4cfdef317b9ffae4b3ed99a0626f79a43991bf777918b57",
+        "command": "node tools/objects/jwst/imaging/image3.mts ngc-6720-1558 MIRI-F770W output/jwst-ngc6720",
+        "definition": "tools/objects/jwst/imaging/programs/ngc-6720-1558.json"
+      },
+      "note": "Eight dithered exposures, 444 seconds in all. The central white dwarf and a few stars run past the top of the range and clip to white; grey is outside the dither pattern."
     },
     {
       "id": "hubble-stis-europa-salt",
@@ -89,27 +89,6 @@
       "note": "The four scans leave gaps; grey is where no scan reached or the surface was seen more than 60 degrees from face on."
     },
     {
-      "id": "hubble-stis-europa-transit",
-      "telescope": "Hubble",
-      "instrument": "STIS FUV-MAMA, time-tag events",
-      "title": "Europa in front of Jupiter",
-      "target": "Europa",
-      "date": "2014-01-26",
-      "source": { "kind": "fits-image", "path": "output/timetag-europa-2014/europa-transit-2014-01-26.picture.fits", "extension": 0, "plane": 1 },
-      "unit": "count/s/pixel",
-      "window": { "x": 80, "y": 80, "width": 200, "height": 200 },
-      "orientation": { "mode": "sky", "note": "North up and east left, from the frame's own WCS." },
-      "stretch": { "kind": "linear", "black": 0.004, "white": 0.02 },
-      "colour": { "kind": "greys" },
-      "enlarge": 4,
-      "product": {
-        "sha256": "bbe5d96bf0cdcf9ac4527c2317cc232d8742baaae56df3e7195b2c3fbbece2d4",
-        "command": "node tools/objects/hst/timetag-frame.mts europa-transit-2014-01-26 .local/hst/europa-13438 output/timetag-europa-2014 --receipt",
-        "definition": "tools/objects/hst/programs/europa-transit-2014-01-26.timetag.json"
-      },
-      "note": "Jupiter's far-ultraviolet disc fills the frame and Europa is the dark spot on it. The grain is photon noise, about 20 counts a pixel over the 2,023 second exposure."
-    },
-    {
       "id": "alma-europa-brightness-temperature",
       "telescope": "ALMA",
       "instrument": "Band 6 continuum, 232 GHz",
@@ -119,17 +98,38 @@
       "producedIn": "css.earth-jwst",
       "source": { "kind": "fits-image", "path": "output/alma-europa/selfcal/Europa.final.brightness-temperature.fits", "extension": 0, "plane": 1 },
       "unit": "K",
-      "window": { "x": 931, "y": 920, "width": 160, "height": 160 },
+      "window": { "x": 956, "y": 944, "width": 160, "height": 160 },
       "orientation": { "mode": "sky", "note": "North up and east left, from the image's own WCS." },
-      "stretch": { "kind": "linear", "black": 0, "white": 100 },
-      "colour": { "kind": "greys" },
+      "stretch": { "kind": "linear", "black": 55, "white": 102 },
+      "colour": { "kind": "ramp", "stops": [[0, "#000000"], [0.35, "#7a1500"], [0.7, "#e06b1e"], [1, "#fff6c8"]] },
       "enlarge": 5,
       "product": {
         "sha256": "5ab44d6be1e3c4727d48dc5ef13f6b24a47bac394b139f64951c6790c1b0bbe4",
         "command": "node tools/objects/interferometry/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch",
         "definition": "output/alma-europa/selfcal/Europa.selfcal.receipt.json (this stage has no pinned program file; the run states its parameters on the command line and records them in the receipt)"
       },
-      "note": "The disc is 768 milliarcseconds across and the restoring beam 48 by 21 milliarcseconds, so the soft edge is the beam, not the limb."
+      "note": "The disc is 768 milliarcseconds across and the restoring beam 48 by 21 milliarcseconds, so the soft edge is the beam, not the limb. The fine east-west streaks across the disc are about 2 K, the image noise at the beam scale, not surface features."
+    },
+    {
+      "id": "vlti-matisse-betelgeuse",
+      "telescope": "VLTI",
+      "instrument": "MATISSE, L band continuum",
+      "title": "The surface of Betelgeuse",
+      "target": "Betelgeuse",
+      "date": "February 2020, during the Great Dimming",
+      "source": { "kind": "fits-image", "path": "src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum-4mas.fits", "extension": 0, "plane": 1 },
+      "unit": "normalised intensity",
+      "window": { "x": 1, "y": 1, "width": 128, "height": 128 },
+      "orientation": { "mode": "sky", "note": "North up and east left, 0.78 milliarcseconds a pixel, from the reconstruction's own axes." },
+      "stretch": { "kind": "linear", "black": 0, "white": 0.000493 },
+      "colour": { "kind": "greys" },
+      "enlarge": 6,
+      "product": {
+        "sha256": "43daead1f727fd2e5421bfa4e4dd1d8348f32c9e3e7171b79efe5ddfe645a5dd",
+        "command": "node tools/objects/interferometry/image-star.mts tools/objects/interferometry/seasons/betelgeuse-matisse-2020-02 output/stars/betelgeuse-matisse-2020-02 --raw output/calibration/raw-matisse",
+        "definition": "tools/objects/interferometry/seasons/betelgeuse-matisse-2020-02/season.json"
+      },
+      "note": "This is a reconstruction, not a photograph: the interferometer measures a handful of spatial frequencies and the image is the one that fits them. The toolkit convolved it with a 4 milliarcsecond beam, as interferometric images are shown; nothing further is smoothed here."
     },
     {
       "id": "vlt-naco-ceres",
@@ -154,33 +154,34 @@
       "note": "Ceres is resolved but small: about 52 pixels across at half its peak brightness, in the Ks filter through the S13 camera. The glow around it is the adaptive optics halo, which is blur in the data, not a rendering artefact, and the disc shows no surface detail at this scale."
     },
     {
-      "id": "chandra-acis-crab",
+      "id": "chandra-acis-cassiopeia-a",
       "telescope": "Chandra",
       "instrument": "ACIS-I, event list",
-      "title": "The X-ray halo around the Crab Nebula",
-      "target": "Crab Nebula halo",
-      "date": "2002-04-14, 20.0 ks",
+      "title": "Cassiopeia A in X-rays",
+      "target": "Cassiopeia A",
+      "date": "1999-08-27, 3.6 ks",
       "producedIn": "css.earth-chandra",
       "source": {
         "kind": "fits-events",
-        "path": ".local/chandra/m1-crab-halo/repro/acisf02798_repro_evt2.fits",
+        "path": ".local/chandra/casa-acisi/repro/acisf00210_repro_evt2.fits",
         "columns": ["x", "y"],
-        "binPixels": 9,
-        "origin": [3035, 2955],
-        "size": [250, 250]
+        "binPixels": 2,
+        "origin": [3468, 3369],
+        "size": [350, 350],
+        "band": { "column": "energy", "limits": [500, 7000] }
       },
       "unit": "counts per bin",
-      "window": { "x": 1, "y": 1, "width": 250, "height": 250 },
-      "orientation": { "mode": "first-row-bottom", "note": "Sky coordinates binned 9 by 9 pixels, 4.43 arcseconds a bin, the lowest row at the bottom. Sky x runs with falling right ascension and sky y with rising declination, so north is up and east is left." },
-      "stretch": { "kind": "asinh", "black": 0, "white": 254, "softening": 8 },
+      "window": { "x": 1, "y": 1, "width": 350, "height": 350 },
+      "orientation": { "mode": "first-row-bottom", "note": "Sky coordinates binned 2 by 2 pixels, 0.98 arcseconds a bin, the lowest row at the bottom. Sky x runs with falling right ascension and sky y with rising declination, so north is up and east is left." },
+      "stretch": { "kind": "asinh", "black": 0, "white": 40, "softening": 1 },
       "colour": { "kind": "greys" },
-      "enlarge": 3,
+      "enlarge": 2,
       "product": {
-        "sha256": "e5ca207bbd8fe6a5541a2faf2dbc71a6d343e1bbed3b5567931e48e4d80594a9",
-        "command": "node tools/objects/chandra/reprocess.mts m1-crab-halo 2798 .local/chandra/m1-crab-halo",
-        "definition": "tools/objects/chandra/programs/m1-crab-halo.acisf02798N004_evt2.reproduction.json"
+        "sha256": "ed50d48111fd7951b13f50a472133d37d50ad0d40d6c33cc830bd540dd352ab9",
+        "command": "node tools/objects/chandra/reprocess.mts casa-acisi 210 .local/chandra/casa-acisi",
+        "definition": "tools/objects/chandra/programs/casa-acisi.json"
       },
-      "note": "One dot is one detected X-ray photon, so this is counts, not brightness. The observation points 10.5 arcminutes north of the pulsar and the nebula itself is off the bottom of the array; what fills the lower chips is the halo around it. The dark lines are the gaps between the four ACIS-I chips."
+      "note": "One dot is one detected X-ray photon between 0.5 and 7 keV, so this is counts, not brightness: 831,854 of the observation's 839,545 events. Nothing here is smoothed, so the shell looks grainy because it is."
     },
     {
       "id": "spitzer-irac-ngc3132",
@@ -198,11 +199,55 @@
       "colour": { "kind": "greys", "missing": "#4a4a4a" },
       "enlarge": 2,
       "product": {
-        "sha256": "8ca4e22d185bd8ee21c3958eb6512fee96fe6e9e0a07a6197839c40b6525440c",
+        "sha256": "017c90bc68baf8a8ff77c6292c41a5a8277c73d2f25082cce914b37b1682b93f",
         "command": "node tools/objects/spitzer/mosaic.mts ngc3132-4416768",
         "definition": "tools/objects/spitzer/programs/ngc3132-4416768.ch1.remosaic.reproduction.json"
       },
       "note": "At 3.6 microns most of what is bright is stars; the nebula's own shell is faint here."
+    },
+    {
+      "id": "keck-kcwi-m42",
+      "telescope": "Keck II",
+      "instrument": "KCWI blue, small slicer",
+      "title": "A patch of the Orion Nebula",
+      "target": "M42",
+      "date": "2023-12-09, 5 second exposure",
+      "producedIn": "css.earth-keck",
+      "source": { "kind": "fits-image", "path": "output/keck/m42-kcwi-2023b-u124/KB.20231209.37031.94/redux/kb231209_00085_icube.fits", "extension": 0, "plane": 1726, "planes": 11 },
+      "unit": "electron",
+      "window": { "x": 1, "y": 1, "width": 24, "height": 69 },
+      "orientation": { "mode": "first-row-bottom", "note": "The cube's spatial axes, the first stored row at the bottom. A column is one 0.68 arcsecond slice and a row 0.29 arcseconds along the slit, so each sample is drawn as a rectangle 14 pixels across and 6 down, which keeps the sky nearly square." },
+      "stretch": { "kind": "linear", "black": -4000, "white": 10000 },
+      "colour": { "kind": "greys" },
+      "enlarge": [14, 6],
+      "product": {
+        "sha256": "228f72550288c0c93749adf64c739c9752f5dded28ded6e52274283b3c1b8a1f",
+        "command": "node tools/objects/keck/reduce.mts m42-kcwi-2023b-u124 KB.20231209.37031.94.fits",
+        "definition": "tools/objects/keck/programs/m42-kcwi-2023b-u124.json"
+      },
+      "note": "The eleven wavelength planes from 5004 to 5014 Angstroms added together, which is the bright doubly ionised oxygen line at 5007 Angstroms. Adding planes moves no sample and smooths nothing. This is a 5 second exposure on a 24 by 69 spaxel field, so it is coarse and noisy."
+    },
+    {
+      "id": "gemini-gmos-comet-3i",
+      "telescope": "Gemini South",
+      "instrument": "GMOS-S imaging, r band",
+      "title": "The interstellar comet 3I/ATLAS",
+      "target": "3I/ATLAS",
+      "date": "2025-09-05",
+      "producedIn": "css.earth-gemini",
+      "source": { "kind": "fits-image", "path": ".local/gemini/work/science/S20250906S0037_image.fits", "extension": 1, "plane": 1 },
+      "unit": "electron",
+      "window": { "x": 1317, "y": 875, "width": 500, "height": 500 },
+      "orientation": { "mode": "first-row-top", "note": "The stored rows of the stack, the first at the top, which puts north up: measured from the stack's own WCS, north is 0.1 degrees and east 269.9 degrees clockwise from up." },
+      "stretch": { "kind": "asinh", "black": 3400, "white": 20000, "softening": 60 },
+      "colour": { "kind": "greys" },
+      "enlarge": 1,
+      "product": {
+        "sha256": "82fd87999812f0ca5b0f2fb1c61956226821f786d92be650b68b71c9a5d939d1",
+        "command": "node tools/objects/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science",
+        "definition": "tools/objects/gemini/programs/comet-3i-gs2025bdd102.json"
+      },
+      "note": "Four 25 second frames stacked by the observatory's own DRAGONS recipe on this toolkit's master bias and flat."
     },
     {
       "id": "juno-junocam-europa",
@@ -218,8 +263,8 @@
         "labelPath": "src/objects/europa/source/observations/junocam/JNCR_2022272_45C00001_V01.LBL"
       },
       "unit": "reflectance",
-      "window": { "x": 340, "y": 3841, "width": 640, "height": 384 },
-      "orientation": { "mode": "first-row-top", "note": "The three strips of the eleventh frame in the order the instrument reads them out: blue at the top, then green, then red. Nothing is rotated, and the strips are not combined." },
+      "window": { "x": 300, "y": 1921, "width": 640, "height": 384 },
+      "orientation": { "mode": "first-row-top", "note": "The three strips of the sixth frame in the order the instrument reads them out: blue at the top, then green, then red. Nothing is rotated, and the strips are not combined." },
       "stretch": { "kind": "linear", "black": 0, "white": 0.3 },
       "colour": { "kind": "greys" },
       "enlarge": 1,
