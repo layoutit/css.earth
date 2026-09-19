@@ -29,7 +29,7 @@ import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
-import { mastRequest } from '../jwst/mast.mts';
+import { mastRequest } from '../astronomy-packages/mast.mts';
 import { evidenceFor, parseProductRecord, runDigest, type ProductRecord } from '../product-record.mts';
 import { parseHstProgram, PROGRAMS } from './archive.mts';
 import { ARCHIVE_FINAL_STAGE, archiveFinalQualificationRun, archiveFinalQualifiedRun, parseArchiveFinalProgram, type ArchiveFinalProgram } from './archive-final.mts';

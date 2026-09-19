@@ -1,18 +1,24 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { parseTargetAssociations, TARGET_ASSOCIATIONS_SCHEMA } from '../telescopes/target-associations.mts';
-import { verifyHstAssociationRows } from './target-associations.mts';
+import { hydrateTargetAssociation, parseTargetAssociationSources, TARGET_ASSOCIATIONS_SCHEMA } from '../telescopes/target-associations.mts';
 
-const association = () => parseTargetAssociations({ schema: TARGET_ASSOCIATIONS_SCHEMA, associations: [{ target: 'nix', archive: 'hst', telescope: 'Hubble', mode: 'ACS/WFC',
-  archiveTarget: 'PLUTO', programme: '10427', verified: '2026-09-19', observations: [
-    { id: 'j96o01010', startIso: '2005-05-15T00:21:00.197Z', endIso: '2005-05-15T01:56:09.210Z', filter: 'F606W' }],
-  evidence: [{ citation: 'paper', locator: 'table', establishes: 'Nix is in the field.' }] }] })[0]!;
-const row = () => ({ obs_id: 'j96o01010', target_name: 'PLUTO', proposal_id: '10427', instrument_name: 'ACS/WFC', filters: 'F606W',
-  t_min: 53505.014585613426, t_max: 53505.08066215278 });
+const source = () => parseTargetAssociationSources({ schema: TARGET_ASSOCIATIONS_SCHEMA, associations: [{ target: 'nix', archive: 'mast', collection: 'HST',
+  observations: ['j96o01010'], evidence: [{ citation: 'paper', locator: 'table', establishes: 'Nix is in the field.' }] }] })[0]!;
+const result = () => ({ astroquery: '0.4.11', queriedAt: '2026-09-19T12:00:00.000Z', observations: [{ id: 'j96o01010', collection: 'HST',
+  archiveTarget: 'PLUTO', programme: '10427', mode: 'ACS/WFC', filter: 'F606W', startIso: '2005-05-15T00:21:00.197Z', endIso: '2005-05-15T01:56:09.210Z' }] });
 
-test('the HST verifier requires every archive identity and observing fact to match', () => {
-  assert.equal(verifyHstAssociationRows(association(), [row()]), 1);
-  assert.throws(() => verifyHstAssociationRows(association(), [{ ...row(), target_name: 'NIX' }]), /MAST archiveTarget is NIX/u);
-  assert.throws(() => verifyHstAssociationRows(association(), []), /did not return j96o01010/u);
-  assert.throws(() => verifyHstAssociationRows(association(), [row(), { ...row(), obs_id: 'other' }]), /unrequested observation other/u);
+test('a cited target join is hydrated exclusively from MAST observation facts', () => {
+  assert.deepEqual(hydrateTargetAssociation(source(), result()), [{ target: 'nix', archive: 'mast', collection: 'HST', telescope: 'Hubble',
+    mode: 'ACS/WFC', archiveTarget: 'PLUTO', programme: '10427', astroquery: '0.4.11', queriedAt: '2026-09-19T12:00:00.000Z',
+    observations: result().observations, evidence: [{ citation: 'paper', locator: 'table', establishes: 'Nix is in the field.' }] }]);
+  assert.throws(() => hydrateTargetAssociation(source(), { ...result(), observations: [{ ...result().observations[0]!, collection: 'JWST' }] }), /requested HST, got JWST/u);
+});
+
+test('association sources contain exact unique ids and cited evidence, not copied archive facts', () => {
+  const base = { target: 'nix', archive: 'mast', collection: 'HST', observations: ['j96o01010'],
+    evidence: [{ citation: 'paper', locator: 'table', establishes: 'Nix is in the field.' }] };
+  assert.throws(() => parseTargetAssociationSources({ schema: TARGET_ASSOCIATIONS_SCHEMA, associations: [{ ...base, observations: [] }] }), /at least one exact observation/u);
+  assert.throws(() => parseTargetAssociationSources({ schema: TARGET_ASSOCIATIONS_SCHEMA, associations: [{ ...base, evidence: [] }] }), /no cited evidence/u);
+  assert.throws(() => parseTargetAssociationSources({ schema: TARGET_ASSOCIATIONS_SCHEMA, associations: [base, base] }), /appears twice/u);
+  assert.throws(() => parseTargetAssociationSources({ schema: TARGET_ASSOCIATIONS_SCHEMA, associations: [{ ...base, mode: 'ACS\/WFC' }] }), /unsupported|wrong|mode/u);
 });

@@ -27,7 +27,7 @@ import { hasErrorCode, readJsonSource, requireArray, requireFiniteNumber, requir
 import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import { qualificationActionsFor, type QualificationAction } from './qualification-routes.mts';
-import { parseTargetAssociations, type TargetAssociation } from './target-associations.mts';
+import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociation } from './target-associations.mts';
 import { resolveTarget, type TargetCatalogueEntry, type TargetResolution } from './targets.mts';
 
 const ARCSEC_PER_RADIAN = 206_264.806_247;
@@ -83,7 +83,8 @@ export interface MeasuredResolution { readonly path: string; readonly quantity: 
 export interface CandidateEvidence {
   readonly ledger: string; readonly archiveDate: string;
   readonly receipts: readonly string[];
-  readonly targetAssociations: readonly { readonly source: string; readonly archive: string; readonly archiveTarget: string; readonly programme: string; readonly verified: string;
+  readonly targetAssociations: readonly { readonly source: string; readonly archive: 'mast'; readonly collection: string; readonly archiveTarget: string; readonly programme: string;
+    readonly astroquery: string; readonly queriedAt: string;
     readonly citation: string; readonly locator: string; readonly establishes: string }[];
   readonly bodyMaps: readonly MeasuredResolution[];
   readonly investigations: readonly { readonly id: string; readonly status: string; readonly subject: string }[];
@@ -349,14 +350,16 @@ function hstModes(value: unknown, target: string, targetAssociations: readonly T
   const count = object ? requireFiniteNumber(object.observations, 'observations') : 0;
   const modes: TargetMode[] = object ? stringList(object.configurations, 'configurations').map(mode => ({ telescope: 'Hubble', mode, archiveDate,
     observations: { count, scope: 'object-total' as const }, programmes: [], dates: [], toolkit: toolkitFor(mode) })) : [];
-  for (const association of targetAssociations.filter(entry => entry.archive === 'hst' && entry.telescope === 'Hubble' && entry.target === target)) {
+  for (const association of targetAssociations.filter(entry => entry.archive === 'mast' && entry.collection === 'HST' && entry.telescope === 'Hubble' && entry.target === target)) {
     if (!configurations.has(association.mode)) throw new TypeError(`${target}: target association names unknown Hubble mode ${association.mode}.`);
-    const records = association.observations.map(observation => ({ ...observation, programme: association.programme, archiveTarget: association.archiveTarget }));
-    const evidence = association.evidence.map(item => ({ source: TARGET_ASSOCIATIONS_PATH, archive: association.archive, archiveTarget: association.archiveTarget, programme: association.programme,
-      verified: association.verified, ...item }));
+    const records = association.observations.map(observation => ({ id: observation.id, startIso: observation.startIso,
+      ...(observation.endIso ? { endIso: observation.endIso } : {}), ...(observation.filter ? { filter: observation.filter } : {}),
+      programme: association.programme, archiveTarget: association.archiveTarget }));
+    const evidence = association.evidence.map(item => ({ source: TARGET_ASSOCIATIONS_PATH, archive: association.archive, collection: association.collection,
+      archiveTarget: association.archiveTarget, programme: association.programme, astroquery: association.astroquery, queriedAt: association.queriedAt, ...item }));
     const existing = modes.find(entry => entry.mode === association.mode);
     if (!existing) {
-      modes.push({ telescope: 'Hubble', mode: association.mode, archiveDate: association.verified,
+      modes.push({ telescope: 'Hubble', mode: association.mode, archiveDate: association.queriedAt.slice(0, 10),
         observations: { count: records.length, scope: 'this-mode', records }, programmes: [association.programme],
         dates: records.map(record => ({ id: record.id, startIso: record.startIso, ...(record.endIso ? { endIso: record.endIso } : {}) })),
         toolkit: toolkitFor(association.mode), targetAssociations: evidence });
@@ -890,7 +893,8 @@ export async function loadQueryInputs(root: string, target: string): Promise<Que
     if (value !== undefined) ledgers.push({ telescope, path, value });
   }
   const capabilities = parseModeCapabilities(await readJsonSource(resolve(root, 'tools/objects/telescopes/modes.json')));
-  const targetAssociations = parseTargetAssociations(await readJsonSource(resolve(root, TARGET_ASSOCIATIONS_PATH)));
+  const associationSources = parseTargetAssociationSources(await readJsonSource(resolve(root, TARGET_ASSOCIATIONS_PATH)));
+  const targetAssociations = await loadTargetAssociations(associationSources.filter(entry => entry.target === canonicalTarget));
   const source = resolve(root, 'src/objects', canonicalTarget, 'source');
   const names = await readdir(source, { recursive: true }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return [] as string[]; throw error; });
   const bodyMaps: { path: string; value: unknown }[] = [];
@@ -932,7 +936,7 @@ export function formatAnswer(answer: CapabilityAnswer): string {
     const usable = [...forTarget(candidate.toolkitSupport.checked, answer.target), ...forTarget(candidate.toolkitSupport.archiveFinalQualified, answer.target)];
     lines.push(`  usable program of ${answer.target}: ${usable.join(', ') || 'none'}`);
     lines.push(`  evidence: ${candidate.evidence.ledger} (archive read ${candidate.evidence.archiveDate})${candidate.evidence.receipts.length ? `, receipts ${candidate.evidence.receipts.join(', ')}` : ''}`);
-    for (const association of candidate.evidence.targetAssociations) lines.push(`    target in field: ${association.source}, archive target ${association.archiveTarget}, programme ${association.programme}; ${association.establishes} (${association.citation}, ${association.locator})`);
+    for (const association of candidate.evidence.targetAssociations) lines.push(`    target in field: ${association.source}; MAST ${association.collection} via Astroquery ${association.astroquery}, queried ${association.queriedAt}; archive target ${association.archiveTarget}, programme ${association.programme}; ${association.establishes} (${association.citation}, ${association.locator})`);
     for (const map of candidate.evidence.bodyMaps) lines.push(`    measured: ${map.path}, ${map.quantity}, ${map.angularResolutionArcsec} arcsec, ${map.surfaceResolutionKm} km at the sub-observer point`);
     for (const entry of candidate.evidence.investigations) lines.push(`    investigation ${entry.id} (${entry.status}): ${entry.subject}`);
     for (const line of candidate.unknown) lines.push(`    unknown: ${line}`);

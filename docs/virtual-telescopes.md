@@ -150,11 +150,17 @@ and "the archives contain no observation of a shipped target" are different scie
 
 An archive target is the name of the pointing, not a complete inventory of its field. Source-backed exceptions live in
 [`data/telescopes/target-associations.json`](../data/telescopes/target-associations.json). Each one names a canonical target,
-an exact telescope mode, programme and observation ids, the archive's original target spelling, the date the archive rows
-were verified, and the source that establishes the body was in those fields. The query keeps `archiveTarget` on every returned
-observation. It therefore can find Nix in Hubble programme 10427's two ACS/WFC F606W visits while still reporting that MAST
-calls those pointings `PLUTO`; it does not turn every Pluto exposure into a Nix observation.
-`pnpm telescope:verify-associations` checks those exact HST identities and observing facts against current MAST rows.
+the MAST collection, exact observation ids, and the source that establishes the body was in those fields. It deliberately
+does not copy the programme, instrument, filter, time, or archive target. The query asks current MAST rows for those facts
+through the pinned Astroquery client and refuses missing, duplicate, extra, or wrong-collection results. It therefore can find
+Nix in Hubble programme 10427's two ACS/WFC F606W visits while still reporting that MAST calls those pointings `PLUTO`; it
+does not turn every Pluto exposure into a Nix observation. `pnpm telescope:verify-associations` exercises that live boundary.
+
+MAST owns HST observation and product metadata. The checked-in HST ledger is a reproducible discovery snapshot and offline
+index, not an independent authority; it also records the cssEarth-specific layer MAST cannot know—available reducers, pinned
+programs, accepted receipts, archive-final qualification, and whether the repository can answer a requested workflow. Exact
+observations and products are resolved again from MAST when a workflow uses them. The same shared MAST adapter serves HST and
+JWST; telescope code does not implement the archive protocol.
 
 Every ledger also returns a target-coverage state: `observed`, `searched-empty`, `not-searched` or `unanswered`. Only
 `searched-empty` is an archive negative. A query with no candidates and any incomplete coverage ends at `index-incomplete`
