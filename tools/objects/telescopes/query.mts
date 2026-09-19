@@ -26,6 +26,8 @@ import { flagValue } from '../../cli-arguments.mts';
 import { hasErrorCode, readJsonSource, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
+import { qualificationActionsFor, type QualificationAction } from './qualification-routes.mts';
+import { resolveTarget, type TargetCatalogueEntry, type TargetResolution } from './targets.mts';
 
 const ARCSEC_PER_RADIAN = 206_264.806_247;
 export const MODES_SCHEMA = 'cssearth-telescope-modes@1';
@@ -96,6 +98,8 @@ export interface CandidateSelectionAssessment {
   readonly blockers: readonly WorkflowBlocker[];
   /** One executable, structured action per target-qualified program. Empty while any blocker remains. */
   readonly nextActions: readonly SelectionAction[];
+  /** Concrete archive observations this repository can qualify when that is the only remaining blocker. */
+  readonly qualificationActions: readonly QualificationAction[];
 }
 
 export interface Candidate {
@@ -136,6 +140,7 @@ export interface CapabilityRequest {
 export interface QueryInputs {
   readonly ledgers: readonly { readonly telescope: string; readonly path: string; readonly value: unknown }[];
   readonly capabilities: readonly ModeCapability[];
+  readonly targetCatalogue: readonly TargetCatalogueEntry[];
   readonly bodyMaps: readonly { readonly path: string; readonly value: unknown }[];
   readonly investigations?: { readonly path: string; readonly value: unknown };
 }
@@ -143,9 +148,10 @@ export interface QueryInputs {
 export interface CapabilityAnswer {
   readonly target: string;
   readonly request: CapabilityRequest;
+  readonly targetResolution: TargetResolution;
   readonly candidates: readonly Candidate[];
   readonly unassignedEvidence: readonly UnassignedEvidence[];
-  readonly endpoint: { readonly status: 'request-incomplete' | 'no-selectable-candidate' | 'selectable-candidates'; readonly selectableCandidates: number; readonly blockerCodes: readonly WorkflowBlockerCode[] };
+  readonly endpoint: { readonly status: 'unknown-target' | 'request-incomplete' | 'no-selectable-candidate' | 'selectable-candidates'; readonly selectableCandidates: number; readonly blockerCodes: readonly (WorkflowBlockerCode | 'unknown-target')[] };
   /** Ledgers that hold no record of this target, so they contribute no candidate. */
   readonly withoutTheTarget: readonly { readonly telescope: string; readonly ledger: string; readonly reason: string }[];
 }
@@ -220,7 +226,9 @@ function workflowAssessment(request: CapabilityRequest, target: string, candidat
   if (!programmes.length) blockers.push({ code: 'target-program-unqualified', reason: `No pinned or qualified program of ${target} is available for this mode.` });
   const nextActions = blockers.length ? [] : programmes.map(programme => ({ kind: 'select-observation' as const, programme, command: 'pnpm' as const,
     arguments: ['--silent', 'telescope:query', ...requestArguments(request), '--select-telescope', candidate.telescope, '--select-mode', candidate.mode, '--program', programme, '--json'] }));
-  return { selectable: blockers.length === 0, blockers, nextActions };
+  const qualificationActions = blockers.length === 1 && blockers[0]!.code === 'target-program-unqualified'
+    ? qualificationActionsFor(candidate.telescope, candidate.mode, target, request.wavelengthMicrometres, request.time, candidate.observations?.records ?? []) : [];
+  return { selectable: blockers.length === 0, blockers, nextActions, qualificationActions };
 }
 
 export function parseModeCapabilities(value: unknown): ModeCapability[] {
@@ -379,7 +387,7 @@ function junoModes(value: unknown, target: string): TargetMode[] {
 /** Spitzer: the ledger retains every archive AOR for a target, while toolkit programs remain a separate, smaller set. */
 function spitzerModes(value: unknown, target: string): TargetMode[] {
   const ledger = requireRecord(value, 'Spitzer ledger');
-  if (ledger.schema !== 'cssearth-spitzer-ledger@2') throw new TypeError(`Unsupported Spitzer ledger schema ${String(ledger.schema)}.`);
+  if (ledger.schema !== 'cssearth-spitzer-ledger@3') throw new TypeError(`Unsupported Spitzer ledger schema ${String(ledger.schema)}.`);
   const archiveDate = requireString(ledger.archiveDate, 'archiveDate'), declared = new Map(requireArray(ledger.modes, 'modes').map(raw => {
     const entry = requireRecord(raw, 'mode'); return [requireString(entry.mode, 'mode'), entry] as const; }));
   const object = requireArray(ledger.holdings, 'holdings').map(raw => requireRecord(raw, 'holding')).find(entry => entry.object === target);
@@ -391,10 +399,13 @@ function spitzerModes(value: unknown, target: string): TargetMode[] {
     const entry = declared.get(mode), tool = entry ? optionalString(entry.tool, `${mode} tool`) : undefined, records = allRecords.filter(record => record.mode === mode);
     const expected = requireFiniteNumber(count, `${mode} observations`);
     if (records.length !== expected) throw new Error(`Spitzer ${target} ${mode} counts ${expected} observations but retains ${records.length} records.`);
+    const programs = entry ? stringList(entry.programs, `${mode} programs`) : [], checked = entry ? stringList(entry.checked, `${mode} checked programs`) : [];
+    const targetPrograms = programs.filter(program => program === target || program.startsWith(`${target}-`));
+    const receipts = entry ? stringList(entry.receipts, `${mode} receipts`).filter(path => targetPrograms.some(program => path.includes(`/${program}.`))) : [];
     return { telescope: 'Spitzer', mode, archiveDate, observations: { count: expected, scope: 'this-mode' as const,
       records: records.map(({ mode: _mode, ...record }) => record) }, programmes: [...new Set(records.map(record => record.programme))].sort(),
       dates: records.map(record => ({ id: record.id, startIso: record.startIso, endIso: record.endIso })), datesComplete: true,
-      toolkit: { ...(tool ? { tool } : {}), programs: [], checked: [], receipts: [] } };
+      toolkit: { ...(tool ? { tool } : {}), programs, checked, receipts } };
   });
 }
 
@@ -639,30 +650,34 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
   if (!(request.wavelengthMicrometres[0] > 0 && request.wavelengthMicrometres[1] >= request.wavelengthMicrometres[0])) throw new RangeError('A request states its wavelengths in micrometres, shortest first.');
   if (request.kind && !(PRODUCT_KINDS as readonly string[]).includes(request.kind)) throw new TypeError(`Unknown product kind ${request.kind}.`);
   if (request.result && !(REQUESTED_RESULTS as readonly string[]).includes(request.result)) throw new TypeError(`Unknown requested result ${request.result}.`);
+  const targetResolution = resolveTarget(request.target, inputs.targetCatalogue);
+  if (targetResolution.status === 'unknown') return { target: request.target, request, targetResolution, candidates: [], unassignedEvidence: [], withoutTheTarget: [],
+    endpoint: { status: 'unknown-target', selectableCandidates: 0, blockerCodes: ['unknown-target'] } };
+  const target = targetResolution.canonical.id, canonicalRequest: CapabilityRequest = { ...request, target };
   const capabilities = new Map(inputs.capabilities.map(entry => [`${entry.telescope} :: ${entry.mode}`, entry] as const));
   const withoutTheTarget: { telescope: string; ledger: string; reason: string }[] = [], found: { ledger: string; mode: TargetMode }[] = [];
   for (const ledger of inputs.ledgers) {
     const adapter = ADAPTERS[ledger.telescope];
     if (!adapter) throw new TypeError(`No adapter reads the ${ledger.telescope} ledger.`);
-    const modes = adapter(ledger.value, request.target);
-    if (!modes.length) { withoutTheTarget.push({ telescope: ledger.telescope, ledger: ledger.path, reason: `This ledger holds no record of ${request.target}.` }); continue; }
+    const modes = adapter(ledger.value, target);
+    if (!modes.length) { withoutTheTarget.push({ telescope: ledger.telescope, ledger: ledger.path, reason: `This ledger holds no record of ${target}.` }); continue; }
     for (const mode of modes) found.push({ ledger: ledger.path, mode });
   }
   const { attached, unassigned } = resolveEvidence(inputs, found.map(entry => entry.mode));
   const candidates = found.map(({ ledger, mode }): Omit<Candidate, 'selectionAssessment'> => {
     const capability = capabilities.get(`${mode.telescope} :: ${mode.mode}`), evidence = attached.get(mode)!;
     return { telescope: mode.telescope, mode: mode.mode, observations: mode.observations, programmes: mode.programmes,
-      meetsConstraints: constraintVerdicts(request, mode, capability), toolkitSupport: toolkitSupport(mode, request.target), bodyMapSupport: bodyMapSupport(mode),
+      meetsConstraints: constraintVerdicts(canonicalRequest, mode, capability), toolkitSupport: toolkitSupport(mode, target), bodyMapSupport: bodyMapSupport(mode),
       evidence: { ledger, archiveDate: mode.archiveDate, receipts: mode.toolkit.receipts, bodyMaps: evidence.bodyMaps, investigations: evidence.investigations },
-      unknown: [...(capability ? [] : [`What this mode can do: ${NO_CAPABILITIES}`]), ...UNKNOWN_UNTIL_READ(request.target),
-        ...(evidence.bodyMaps.length ? [] : [`Whether anything here has ever measured ${request.target} in this mode: no body map beside the object names it.`])] };
+      unknown: [...(capability ? [] : [`What this mode can do: ${NO_CAPABILITIES}`]), ...UNKNOWN_UNTIL_READ(target),
+        ...(evidence.bodyMaps.length ? [] : [`Whether anything here has ever measured ${target} in this mode: no body map beside the object names it.`])] };
   });
   const rank = (candidate: Candidate) => candidate.meetsConstraints.wavelength?.answer === 'yes' ? 0 : candidate.meetsConstraints.wavelength?.answer === 'partial' ? 1 : 2;
-  const assessed: Candidate[] = candidates.map(candidate => ({ ...candidate, selectionAssessment: workflowAssessment(request, request.target, candidate) }));
+  const assessed: Candidate[] = candidates.map(candidate => ({ ...candidate, selectionAssessment: workflowAssessment(canonicalRequest, target, candidate) }));
   assessed.sort((a, b) => rank(a) - rank(b) || (`${a.telescope}${a.mode}` < `${b.telescope}${b.mode}` ? -1 : 1));
   const selectableCandidates = assessed.filter(candidate => candidate.selectionAssessment.selectable).length;
-  const status = missingRequestFields(request).length ? 'request-incomplete' : selectableCandidates ? 'selectable-candidates' : 'no-selectable-candidate';
-  return { target: request.target, request, unassignedEvidence: unassigned, withoutTheTarget, candidates: assessed,
+  const status = missingRequestFields(canonicalRequest).length ? 'request-incomplete' : selectableCandidates ? 'selectable-candidates' : 'no-selectable-candidate';
+  return { target, request: canonicalRequest, targetResolution, unassignedEvidence: unassigned, withoutTheTarget, candidates: assessed,
     endpoint: { status, selectableCandidates, blockerCodes: [...new Set(assessed.flatMap(candidate => candidate.selectionAssessment.blockers.map(blocker => blocker.code)))] } };
 }
 
@@ -703,6 +718,30 @@ export const LEDGER_TELESCOPES: readonly string[] = Object.keys(ADAPTERS);
 
 /** Read everything the query needs from the repository. The query itself reads nothing. */
 export async function loadQueryInputs(root: string, target: string): Promise<QueryInputs> {
+  // These package descriptors are the source of the application's generated catalogue. Reading them keeps this CLI usable
+  // in a clean checkout, before `prepare` has emitted site/prepared-object-catalog.mts.
+  const objectRoot = resolve(root, 'src/objects'), targetCatalogue: TargetCatalogueEntry[] = [];
+  for (const directory of (await readdir(objectRoot, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort()) {
+    const value = await readJsonSource(resolve(objectRoot, directory, 'object.json')).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
+    if (value === undefined) continue;
+    const descriptor = requireRecord(value, `${directory} object descriptor`), properties = requireRecord(descriptor.properties, `${directory} properties`);
+    if (properties.catalog === undefined) continue;
+    const catalog = requireRecord(properties.catalog, `${directory} catalogue entry`);
+    const id = requireString(descriptor.id, `${directory} id`), name = requireString(catalog.name, `${directory} name`), systemName = requireString(catalog.systemName, `${directory} system name`);
+    targetCatalogue.push({ id, name, aliases: systemName === name ? [] : [systemName] });
+  }
+  const focusPaths = [...(await readdir(objectRoot, { recursive: true })).filter(name => name.endsWith('/source/nebula.json')).map(name => resolve(objectRoot, name)),
+    resolve(objectRoot, 'local-group/prepared/catalogue.json'), resolve(objectRoot, 'galaxy-clusters/prepared/catalogue.json')];
+  for (const path of focusPaths) {
+    const value = await readJsonSource(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
+    if (value === undefined) continue;
+    for (const raw of requireArray(requireRecord(value, 'focus catalogue').objects, 'focus objects')) {
+      const entry = requireRecord(raw, 'focus object'), id = requireString(entry.id, 'focus id');
+      if (targetCatalogue.some(existing => existing.id === id)) continue;
+      targetCatalogue.push({ id, name: requireString(entry.name, `${id} name`), aliases: entry.aliases === undefined ? [] : stringList(entry.aliases, `${id} aliases`) });
+    }
+  }
+  const resolution = resolveTarget(target, targetCatalogue), canonicalTarget = resolution.status === 'resolved' ? resolution.canonical.id : target;
   const ledgers: { telescope: string; path: string; value: unknown }[] = [];
   for (const telescope of LEDGER_TELESCOPES) {
     const path = `data/${telescope}/ledger.json`;
@@ -710,13 +749,13 @@ export async function loadQueryInputs(root: string, target: string): Promise<Que
     if (value !== undefined) ledgers.push({ telescope, path, value });
   }
   const capabilities = parseModeCapabilities(await readJsonSource(resolve(root, 'tools/objects/telescopes/modes.json')));
-  const source = resolve(root, 'src/objects', target, 'source');
+  const source = resolve(root, 'src/objects', canonicalTarget, 'source');
   const names = await readdir(source, { recursive: true }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return [] as string[]; throw error; });
   const bodyMaps: { path: string; value: unknown }[] = [];
-  for (const name of names.filter(entry => entry.endsWith('.body-map.json')).sort()) bodyMaps.push({ path: `src/objects/${target}/source/${name}`, value: await readJsonSource(resolve(source, name)) });
-  const investigationPath = `src/objects/${target}/investigations.json`;
+  for (const name of names.filter(entry => entry.endsWith('.body-map.json')).sort()) bodyMaps.push({ path: `src/objects/${canonicalTarget}/source/${name}`, value: await readJsonSource(resolve(source, name)) });
+  const investigationPath = `src/objects/${canonicalTarget}/investigations.json`;
   const investigations = await readJsonSource(resolve(root, investigationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return undefined; throw error; });
-  return { ledgers, capabilities, bodyMaps, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
+  return { ledgers, capabilities, targetCatalogue, bodyMaps, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
 }
 
 const LEVEL_WORDS: Readonly<Record<ToolkitLevel, string>> = Object.freeze({ none: 'no toolkit',
@@ -724,6 +763,8 @@ const LEVEL_WORDS: Readonly<Record<ToolkitLevel, string>> = Object.freeze({ none
   proven: 'recalibrated here and checked' });
 
 export function formatAnswer(answer: CapabilityAnswer): string {
+  if (answer.targetResolution.status === 'unknown') return `workflow: unknown-target\nblocker codes: unknown-target\n\nNo shipped object matches ${answer.targetResolution.requested}.${answer.targetResolution.suggestions.length
+    ? ` Did you mean ${answer.targetResolution.suggestions.map(entry => `${entry.name} (${entry.id})`).join(', ')}?` : ''}\n`;
   const lines = [`workflow: ${answer.endpoint.status}; ${answer.endpoint.selectableCandidates} of ${answer.candidates.length} candidate mode(s) can proceed to explicit selection.`,
     ...(answer.endpoint.blockerCodes.length ? [`blocker codes: ${answer.endpoint.blockerCodes.join(', ')}`] : []), '',
     `${answer.candidates.length} candidate mode(s) observed ${answer.target}, the ones covering ${answer.request.wavelengthMicrometres[0]} to ${answer.request.wavelengthMicrometres[1]} micrometres first.`,
@@ -736,6 +777,8 @@ export function formatAnswer(answer: CapabilityAnswer): string {
     lines.push(`  selection: ${candidate.selectionAssessment.selectable ? 'selectable' : 'blocked'}`);
     for (const blocker of candidate.selectionAssessment.blockers) lines.push(`    blocker ${blocker.code}${blocker.constraint ? ` (${blocker.constraint})` : ''}: ${blocker.reason}`);
     for (const action of candidate.selectionAssessment.nextActions) lines.push(`    next: ${action.command} ${action.arguments.map(shellWord).join(' ')}`);
+    for (const action of candidate.selectionAssessment.qualificationActions.slice(0, 1)) lines.push(`    qualify observation ${action.observation}: ${action.command} ${action.arguments.map(shellWord).join(' ')}`);
+    if (candidate.selectionAssessment.qualificationActions.length > 1) lines.push(`    ${candidate.selectionAssessment.qualificationActions.length - 1} more qualification action(s) are present in the JSON answer.`);
     lines.push(`  archive programmes recorded for ${answer.target}: ${candidate.programmes.join(', ') || 'none'}`);
     const records = candidate.observations?.records ?? [];
     for (const record of records.slice(0, 8)) lines.push(`    observation ${record.id}${record.programme ? `, programme ${record.programme}` : ''}: ${record.startIso}${record.endIso ? ` to ${record.endIso}` : ''}${record.title ? `, ${record.title}` : ''}`);
@@ -777,6 +820,7 @@ Required for an explicit workflow verdict:
 Resolution limits are the largest acceptable angular or surface scale: smaller values ask for sharper data.
 Use --range-km with --min-km, and --range-km plus --radius-km with --min-elements.
 Use --select-telescope NAME --select-mode MODE --program ID to emit a typed observation selection.
+When qualification is the only blocker, the answer may provide a telescope:qualify action for an indexed observation.
 Use --json for JSON. With the package script, use pnpm --silent telescope:query ... --json for JSON-only stdout.`;
 
 export function requestFromArguments(args: readonly string[]): CapabilityRequest {
