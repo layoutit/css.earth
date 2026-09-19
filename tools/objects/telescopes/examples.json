@@ -1,0 +1,234 @@
+{
+  "schema": "cssearth-telescope-examples@1",
+  "examples": [
+    {
+      "id": "jwst-nirspec-europa-carbon-dioxide",
+      "telescope": "JWST",
+      "instrument": "NIRSpec IFU, G395H/F290LP",
+      "title": "Carbon dioxide on Europa",
+      "target": "Europa",
+      "date": "2022-11-24 to 2023-11-17, four visits",
+      "producedIn": "css.earth-jwst",
+      "source": { "kind": "fits-image", "path": "src/objects/europa/source/jwst/carbon-dioxide.fits", "extension": 1, "plane": 1 },
+      "unit": "band depth",
+      "window": { "x": 1, "y": 1, "width": 360, "height": 180 },
+      "orientation": { "mode": "first-row-top", "note": "A longitude-latitude map of the whole body. The first stored row is the north pole, the first column starts at 0 degrees east longitude and east runs to the right." },
+      "stretch": { "kind": "linear", "black": 0, "white": 0.18 },
+      "colour": { "kind": "ramp", "stops": [[0, "#000000"], [0.45, "#7b2f00"], [0.75, "#e08a2b"], [1, "#ffeec2"]], "missing": "#4a4a4a" },
+      "enlarge": 2,
+      "product": {
+        "sha256": "ad3b7b0a89af2d4f190162a53c492d39643ececafecee95cb83a64a5b550d187",
+        "command": "node tools/objects/jwst/cubes/author-body-maps.mts europa",
+        "definition": "tools/objects/jwst/imaging/programs/europa-1250.NIRSPEC-G395H-F290LP.reproduction.json"
+      },
+      "note": "The grey areas are longitudes and latitudes no cube saw, or saw too obliquely to measure."
+    },
+    {
+      "id": "jwst-miri-europa-f1280w",
+      "telescope": "JWST",
+      "instrument": "MIRI imager, F1280W",
+      "title": "Europa at 12.8 microns",
+      "target": "Europa",
+      "date": "2022-11-23",
+      "producedIn": "css.earth-miri",
+      "source": { "kind": "fits-image", "path": "output/miri-image/image3/jw01250-o004_t001_miri_f1280w-sub64_i2d.fits", "extension": 1, "plane": 1 },
+      "unit": "MJy/sr",
+      "window": { "x": 1, "y": 1, "width": 98, "height": 94 },
+      "orientation": { "mode": "first-row-bottom", "note": "The stored rows of the resampled image, the first at the bottom. The frame is rotated on the sky: north is 70.6 degrees and east 340.6 degrees clockwise from up, measured from the image's own WCS." },
+      "stretch": { "kind": "asinh", "black": 0, "white": 96000, "softening": 3000 },
+      "colour": { "kind": "greys", "missing": "#4a4a4a" },
+      "enlarge": 8,
+      "product": {
+        "sha256": "6fc4ba52f2f3fa5df788a1f9710975a75a79b77dc46217bd005f5936bd694966",
+        "command": "node tools/objects/jwst/imaging/image3.mts europa-1250 MIRI-F1280W output/miri-image",
+        "definition": "tools/objects/jwst/imaging/programs/europa-1250.MIRI-F1280W.reproduction.json"
+      },
+      "note": "The four dithered exposures cover a cross-shaped area, and the grey corners were never on the detector. The grey hole in the middle of the disc is saturation: every contributing pixel there was rejected, so the level-3 combination gives those output pixels zero weight and no value."
+    },
+    {
+      "id": "hubble-stis-europa-aurora",
+      "telescope": "Hubble",
+      "instrument": "STIS FUV-MAMA, oxygen 135.6 nm",
+      "title": "Europa's oxygen aurora",
+      "target": "Europa",
+      "date": "1999 to 2015, all visits summed (58.4 hours)",
+      "producedIn": "css.earth-jwst",
+      "source": { "kind": "fits-image", "path": "output/europa-aurora/oi1356-all.fits", "extension": 1, "plane": 1 },
+      "unit": "R",
+      "window": { "x": 1, "y": 1, "width": 121, "height": 121 },
+      "orientation": { "mode": "first-row-bottom", "note": "A grid fixed to the body, 0.0496 Europa radii a pixel, drawn as the stack writes it: body north up and celestial east left." },
+      "stretch": { "kind": "linear", "black": -20, "white": 200 },
+      "colour": { "kind": "greys" },
+      "enlarge": 5,
+      "product": {
+        "sha256": "1ca8377efc5f3d1575059362abf17c7c51dd7d4004b5ae8ad38e9baca87ce607",
+        "command": "node tools/objects/hst/line-stack.mts europa-oxygen-aurora .local/hst/europa-aurora output/europa-aurora --mirror --receipt",
+        "definition": "tools/objects/hst/programs/europa-oxygen-aurora.stack.json"
+      },
+      "note": "Background scatter runs to about 30 R either side of zero, so the mid grey over most of the frame is noise, not emission."
+    },
+    {
+      "id": "hubble-stis-europa-salt",
+      "telescope": "Hubble",
+      "instrument": "STIS CCD, G430L, 52x0.1 arcsec slit",
+      "title": "The 450 nm sodium chloride band on Europa",
+      "target": "Europa",
+      "date": "2017-06-28 to 2017-08-29, four scans",
+      "source": { "kind": "fits-image", "path": "output/europa-salt-map/nacl-450nm.fits", "extension": 1, "plane": 1 },
+      "unit": "Angstrom",
+      "window": { "x": 1, "y": 1, "width": 360, "height": 180 },
+      "orientation": { "mode": "first-row-top", "note": "A longitude-latitude map of the whole body. The first stored row is the north pole, the first column starts at 0 degrees east longitude and east runs to the right." },
+      "stretch": { "kind": "linear", "black": -150, "white": 200 },
+      "colour": { "kind": "ramp", "stops": [[0, "#08203a"], [0.4, "#1f5f74"], [0.75, "#c8b26a"], [1, "#fff4d2"]], "missing": "#4a4a4a" },
+      "enlarge": 2,
+      "product": {
+        "sha256": "548febdcad279cc1f2675e1d25de68d110d5664643e92269e7422ac151edf45f",
+        "command": "node tools/objects/hst/slit-scan-map.mts europa-salt-map .local/hst/europa-14650 output/europa-salt-map --mirror --receipt",
+        "definition": "tools/objects/hst/programs/europa-salt-map.scan.json"
+      },
+      "note": "The four scans leave gaps; grey is where no scan reached or the surface was seen more than 60 degrees from face on."
+    },
+    {
+      "id": "hubble-stis-europa-transit",
+      "telescope": "Hubble",
+      "instrument": "STIS FUV-MAMA, time-tag events",
+      "title": "Europa in front of Jupiter",
+      "target": "Europa",
+      "date": "2014-01-26",
+      "source": { "kind": "fits-image", "path": "output/timetag-europa-2014/europa-transit-2014-01-26.picture.fits", "extension": 0, "plane": 1 },
+      "unit": "count/s/pixel",
+      "window": { "x": 80, "y": 80, "width": 200, "height": 200 },
+      "orientation": { "mode": "sky", "note": "North up and east left, from the frame's own WCS." },
+      "stretch": { "kind": "linear", "black": 0.004, "white": 0.02 },
+      "colour": { "kind": "greys" },
+      "enlarge": 4,
+      "product": {
+        "sha256": "bbe5d96bf0cdcf9ac4527c2317cc232d8742baaae56df3e7195b2c3fbbece2d4",
+        "command": "node tools/objects/hst/timetag-frame.mts europa-transit-2014-01-26 .local/hst/europa-13438 output/timetag-europa-2014 --receipt",
+        "definition": "tools/objects/hst/programs/europa-transit-2014-01-26.timetag.json"
+      },
+      "note": "Jupiter's far-ultraviolet disc fills the frame and Europa is the dark spot on it. The grain is photon noise, about 20 counts a pixel over the 2,023 second exposure."
+    },
+    {
+      "id": "alma-europa-brightness-temperature",
+      "telescope": "ALMA",
+      "instrument": "Band 6 continuum, 232 GHz",
+      "title": "Europa's thermal disc",
+      "target": "Europa",
+      "date": "2015-11-26",
+      "producedIn": "css.earth-jwst",
+      "source": { "kind": "fits-image", "path": "output/alma-europa/selfcal/Europa.final.brightness-temperature.fits", "extension": 0, "plane": 1 },
+      "unit": "K",
+      "window": { "x": 931, "y": 920, "width": 160, "height": 160 },
+      "orientation": { "mode": "sky", "note": "North up and east left, from the image's own WCS." },
+      "stretch": { "kind": "linear", "black": 0, "white": 100 },
+      "colour": { "kind": "greys" },
+      "enlarge": 5,
+      "product": {
+        "sha256": "5ab44d6be1e3c4727d48dc5ef13f6b24a47bac394b139f64951c6790c1b0bbe4",
+        "command": "node tools/objects/interferometry/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch",
+        "definition": "output/alma-europa/selfcal/Europa.selfcal.receipt.json (this stage has no pinned program file; the run states its parameters on the command line and records them in the receipt)"
+      },
+      "note": "The disc is 768 milliarcseconds across and the restoring beam 48 by 21 milliarcseconds, so the soft edge is the beam, not the limb."
+    },
+    {
+      "id": "vlt-naco-ceres",
+      "telescope": "VLT",
+      "instrument": "NACO, adaptive optics imaging",
+      "title": "Ceres from the ground",
+      "target": "Ceres",
+      "date": "2007-11-11",
+      "producedIn": "css.earth-naco",
+      "source": { "kind": "fits-image", "path": ".local/naco/ceres-080C0881/jitter-2007-11-11T023847/naco_img_jitter.fits", "extension": 0, "plane": 1 },
+      "unit": "ADU",
+      "window": { "x": 700, "y": 734, "width": 140, "height": 140 },
+      "orientation": { "mode": "first-row-bottom", "note": "The detector rows of the combined image, the first at the bottom. The reduced frame carries no world coordinates, so no sky direction is claimed." },
+      "stretch": { "kind": "linear", "black": 0, "white": 6300 },
+      "colour": { "kind": "greys" },
+      "enlarge": 5,
+      "product": {
+        "sha256": "39edc841ad732ca92657569317fdf107df2a4ab3e77335b62999e2e2180cb2b7",
+        "command": "node tools/objects/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47",
+        "definition": "tools/objects/naco/programs/ceres-080C0881.COADDED_IMG.reproduction.json"
+      },
+      "note": "Ceres is resolved but small: about 52 pixels across at half its peak brightness, in the Ks filter through the S13 camera. The glow around it is the adaptive optics halo, which is blur in the data, not a rendering artefact, and the disc shows no surface detail at this scale."
+    },
+    {
+      "id": "chandra-acis-crab",
+      "telescope": "Chandra",
+      "instrument": "ACIS-I, event list",
+      "title": "The X-ray halo around the Crab Nebula",
+      "target": "Crab Nebula halo",
+      "date": "2002-04-14, 20.0 ks",
+      "producedIn": "css.earth-chandra",
+      "source": {
+        "kind": "fits-events",
+        "path": ".local/chandra/m1-crab-halo/repro/acisf02798_repro_evt2.fits",
+        "columns": ["x", "y"],
+        "binPixels": 9,
+        "origin": [3035, 2955],
+        "size": [250, 250]
+      },
+      "unit": "counts per bin",
+      "window": { "x": 1, "y": 1, "width": 250, "height": 250 },
+      "orientation": { "mode": "first-row-bottom", "note": "Sky coordinates binned 9 by 9 pixels, 4.43 arcseconds a bin, the lowest row at the bottom. Sky x runs with falling right ascension and sky y with rising declination, so north is up and east is left." },
+      "stretch": { "kind": "asinh", "black": 0, "white": 254, "softening": 8 },
+      "colour": { "kind": "greys" },
+      "enlarge": 3,
+      "product": {
+        "sha256": "e5ca207bbd8fe6a5541a2faf2dbc71a6d343e1bbed3b5567931e48e4d80594a9",
+        "command": "node tools/objects/chandra/reprocess.mts m1-crab-halo 2798 .local/chandra/m1-crab-halo",
+        "definition": "tools/objects/chandra/programs/m1-crab-halo.acisf02798N004_evt2.reproduction.json"
+      },
+      "note": "One dot is one detected X-ray photon, so this is counts, not brightness. The observation points 10.5 arcminutes north of the pulsar and the nebula itself is off the bottom of the array; what fills the lower chips is the halo around it. The dark lines are the gaps between the four ACIS-I chips."
+    },
+    {
+      "id": "spitzer-irac-ngc3132",
+      "telescope": "Spitzer",
+      "instrument": "IRAC channel 1, 3.6 microns",
+      "title": "NGC 3132 in the near infrared",
+      "target": "NGC 3132",
+      "date": "2004-02-17",
+      "producedIn": "css.earth-spitzer",
+      "source": { "kind": "fits-image", "path": "output/spitzer/ngc3132-4416768/ngc3132-4416768.ch1.remosaic.fits", "extension": 0, "plane": 1 },
+      "unit": "MJy/sr",
+      "window": { "x": 1031, "y": 368, "width": 300, "height": 300 },
+      "orientation": { "mode": "first-row-bottom", "note": "The stored rows of the re-made mosaic, the first at the bottom. The mosaic keeps the observation's own rotation: north is 303.4 degrees and east 213.4 degrees clockwise from up, measured from the mosaic's own WCS." },
+      "stretch": { "kind": "asinh", "black": 0.05, "white": 30, "softening": 0.2 },
+      "colour": { "kind": "greys", "missing": "#4a4a4a" },
+      "enlarge": 2,
+      "product": {
+        "sha256": "8ca4e22d185bd8ee21c3958eb6512fee96fe6e9e0a07a6197839c40b6525440c",
+        "command": "node tools/objects/spitzer/mosaic.mts ngc3132-4416768",
+        "definition": "tools/objects/spitzer/programs/ngc3132-4416768.ch1.remosaic.reproduction.json"
+      },
+      "note": "At 3.6 microns most of what is bright is stars; the nebula's own shell is faint here."
+    },
+    {
+      "id": "juno-junocam-europa",
+      "telescope": "Juno",
+      "instrument": "JunoCam, push-frame RDR",
+      "title": "One JunoCam strip set of Europa",
+      "target": "Europa",
+      "date": "2022-09-29",
+      "producedIn": "css.earth-stars",
+      "source": {
+        "kind": "junocam-image",
+        "path": "src/objects/europa/source/observations/junocam/JNCR_2022272_45C00001_V01.IMG",
+        "labelPath": "src/objects/europa/source/observations/junocam/JNCR_2022272_45C00001_V01.LBL"
+      },
+      "unit": "reflectance",
+      "window": { "x": 340, "y": 3841, "width": 640, "height": 384 },
+      "orientation": { "mode": "first-row-top", "note": "The three strips of frame 11 in the order the instrument reads them out: blue at the top, then green, then red. Nothing is rotated, and the strips are not combined." },
+      "stretch": { "kind": "linear", "black": 0, "white": 0.3 },
+      "colour": { "kind": "greys" },
+      "enlarge": 1,
+      "product": {
+        "sha256": "2ba58b89307ddf45488c9d0b847e463248fbd89bf8dd009a52c9bc84efc81153",
+        "command": "node tools/objects/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels lsk/naif0012.tls,pck/pck00011.tpc,sclk/JNO_SCLKSCET.00211.tsc,fk/juno_v12.tf,ik/juno_junocam_v03.ti,spk/spk_rec_220909_221019_221027.bsp,ck/juno_sc_rec_220925_221001_v01.bc",
+        "definition": "tools/objects/juno/programs/europa-pj45.json"
+      },
+      "note": "This is the archive's calibrated push-frame image as the instrument records it, not a cast or projected picture: the JunoCam toolkit's cast stage has not been run in this worktree. The window keeps 640 of the 1648 columns, so the strips are cut at both ends."
+    }
+  ]
+}
