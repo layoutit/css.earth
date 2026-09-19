@@ -18,10 +18,10 @@ const product = (): BodyMapProduct => ({ schema: 'cssearth-body-map@1',
   mask: { maximumEmissionDegrees: 65, missing: 'NaN' }, observations: [{ id: 'jw01250-o002', telescope: 'JWST', instrument: 'NIRSPEC-G395H-F290LP',
     mode: 'NIRSPEC/IFU', programme: 'europa-1250', midTimeJd: 2_459_800.5, rangeKm: 6.3e8,
     subObserver: { latitudeDegrees: 0, westLongitudeDegrees: 180 }, angularResolution: { majorArcsec: 0.1, minorArcsec: 0.1, basis: 'disc-edge fit' } }] });
-const selection: ObservationSelection = { schema: 'cssearth-telescope-observation-selection@1', request: { target: 'europa', wavelengthMicrometres: [4.24, 4.28], kind: 'cube', result: 'body-map', time: { any: true }, angularResolutionArcsec: 0.3 },
+const selection: ObservationSelection = { satisfaction: { status: 'unresolved', acceptance: 'all-requested-constraints', constraints: {} }, schema: 'cssearth-telescope-observation-selection@1', request: { target: 'europa', wavelengthMicrometres: [4.24, 4.28], kind: 'cube', result: 'body-map', time: { any: true }, angularResolutionArcsec: 0.3 },
   telescope: 'JWST', mode: 'NIRSPEC/IFU', programme: 'europa-1250', toolkitLevel: 'proven', constraints: {},
   bodyMapSupport: { answer: 'yes', author: 'tools/objects/jwst/cubes/author-body-maps.mts', reason: 'the body-map author' }, unresolved: [],
-  evidence: { ledger: 'data/jwst/ledger.json', archiveDate: '2026-09-19', receipts: [], bodyMaps: [], investigations: [] } };
+  evidence: { ledger: 'data/jwst/ledger.json', archiveDate: '2026-09-19', receipts: [], targetAssociations: [], bodyMaps: [], investigations: [] } };
 
 async function fixture(value = product()) {
   const directory = await mkdtemp(resolve(tmpdir(), 'body-map-publication-')), planePath = resolve(directory, value.planes.file), mapPath = `${planePath}.body-map.json`;
@@ -34,6 +34,8 @@ async function fixture(value = product()) {
 
 test('publication binds the question and selected program to current map bytes', async () => {
   const { mapPath } = await fixture(), layer = await qualifyBodyMap(mapPath, selection);
+  assert.equal(layer.satisfaction.status, 'unresolved');
+  assert.equal(layer.satisfaction.constraints.kind?.answer, 'unknown'); assert.equal(layer.satisfaction.constraints.artifact?.answer, 'yes');
   assert.equal(layer.target, 'europa'); assert.equal(layer.selection.programme, 'europa-1250');
   assert.deepEqual({ metadata: layer.map.metadata, productRecord: layer.map.productRecord, plane: layer.map.plane },
     { metadata: 'co2.fits.body-map.json', productRecord: 'co2.fits.product.json', plane: 'co2.fits' });

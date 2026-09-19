@@ -4,6 +4,7 @@ import { bandOfFilters } from '../jwst/imaging/archive.mts';
 
 export interface QualificationObservation {
   readonly id: string;
+  readonly sourceProductId?: string;
   readonly programme?: string;
   readonly startIso: string;
   readonly endIso?: string;
@@ -21,6 +22,7 @@ export interface QualificationObservation {
 }
 
 export type QualificationConfiguration =
+  | { readonly kind: 'source-product'; readonly id: string }
   | { readonly kind: 'spitzer-irac-channel'; readonly channel: number }
   | { readonly kind: 'jwst-band'; readonly band: string; readonly wavelengthMicrometres: readonly [number, number] }
   | { readonly kind: 'naco-program-night'; readonly programme: string; readonly archiveTarget: string; readonly night: string }
@@ -132,15 +134,21 @@ const routeFor = (telescope: string, mode: string) => ROUTES.find(route => route
 export function qualificationActionsFor(telescope: string, mode: string, target: string, wavelengthMicrometres: readonly [number, number],
   time: { readonly any: true } | { readonly fromIso: string; readonly toIso: string } | undefined,
   observations: readonly QualificationObservation[]): QualificationAction[] {
+  const sourceActions = observations.filter(observation => observation.sourceProductId && overlapsTime(observation, time)).map(observation => {
+    const action = makeAction(target, telescope, mode, observation, { kind: 'source-product', id: observation.sourceProductId! }, ['--source-product', observation.sourceProductId!]);
+    return { ...action, program: observation.sourceProductId! };
+  });
+  const archiveObservations = observations.filter(observation => !observation.sourceProductId);
   const route = routeFor(telescope, mode);
-  if (route) return route.actions({ target, wavelengthMicrometres, time, observations });
-  return observations.filter(observation => observation.kind === 'image' && overlapsTime(observation, time) && observation.targetLid && observation.archiveTarget && observation.productLidvid
+  if (route) return [...sourceActions, ...route.actions({ target, wavelengthMicrometres, time, observations: archiveObservations })];
+  return [...sourceActions, ...archiveObservations.filter(observation => observation.kind === 'image' && overlapsTime(observation, time) && observation.targetLid && observation.archiveTarget && observation.productLidvid
     && observation.observatory && observation.instrument && productCovers(observation, wavelengthMicrometres)).map(observation => makeAction(target, telescope, mode, observation,
       { kind: 'pds-product', targetLid: observation.targetLid!, targetName: observation.archiveTarget!, lidvid: observation.productLidvid! },
-      ['--pds-target-lid', observation.targetLid!, '--pds-target-name', observation.archiveTarget!, '--pds-lidvid', observation.productLidvid!]));
+      ['--pds-target-lid', observation.targetLid!, '--pds-target-name', observation.archiveTarget!, '--pds-lidvid', observation.productLidvid!]))];
 }
 
 export function supportsQualificationRoute(telescope: string, mode: string, configuration: QualificationConfiguration): boolean {
+  if (configuration.kind === 'source-product') return /^[A-Za-z0-9][A-Za-z0-9._-]*$/u.test(configuration.id);
   return configuration.kind === 'pds-product'
     ? configuration.targetLid.startsWith('urn:nasa:pds:context:target:') && configuration.lidvid.startsWith('urn:nasa:pds:')
     : routeFor(telescope, mode)?.accepts(configuration) ?? false;
@@ -148,6 +156,7 @@ export function supportsQualificationRoute(telescope: string, mode: string, conf
 
 /** Parse only the instrument-specific part of a qualification command, through the same route that emitted it. */
 export function qualificationConfigurationFromArguments(telescope: string, mode: string, args: readonly string[]): QualificationConfiguration {
+  if (flagValue(args, '--source-product')) return { kind: 'source-product', id: required(args, '--source-product') };
   if (flagValue(args, '--pds-lidvid')) return { kind: 'pds-product', targetLid: required(args, '--pds-target-lid'), targetName: required(args, '--pds-target-name'), lidvid: required(args, '--pds-lidvid') };
   const route = routeFor(telescope, mode);
   if (!route) throw new TypeError(`No qualification route handles ${telescope} ${mode}.`);

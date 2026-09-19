@@ -162,3 +162,20 @@ highest-resolution surface, polar, limb and off-limb images, selected once when 
 opens.
 
 </details>
+
+## Virtual Telescope API
+
+The [source observation declarations](source/observations.json) expose 31 existing manifest-pinned
+native products through `telescope:query`: 28 HMI continuum frames, the HMI radial-field map, and
+AIA 171/304 synoptic maps. No solar branch is required in the shared query or qualification code.
+
+```sh
+pnpm telescope:query --target sun --wavelength 0.0170,0.0172 \
+  --any-time --min-arcsec 2 --kind image --result telescope-product --json
+```
+
+Execute a returned qualification action to acquire and decode an exact observation. The receipt
+attests source integrity and decoding. HMI keyword metadata, AIA's time-dependent synoptic grid,
+unknown achieved resolution and missing uncertainty remain explicit limitations. These products
+are usable native arrays; they are not yet qualified shared body maps. The display maps described
+above retain their existing separate preparation and provenance.
