@@ -1,0 +1,75 @@
+{
+ "schema": "cssearth-oracle-fixture@1",
+ "oracle": "Astropy blackbody and Rayleigh unit conversions",
+ "generatedBy": "tools/oracles/physical-units/spectral.py",
+ "tool": {
+  "astropy": "8.0.1",
+  "methods": "BlackBody, exact constants and Rayleigh units",
+  "python": "3.12.14",
+  "numpy": "2.5.3"
+ },
+ "inputs": [],
+ "references": [
+  {
+   "url": "https://raw.githubusercontent.com/astropy/astropy/7c5a9c124ce84c76992016e89631566ad398aff7/astropy/modeling/physical_models.py",
+   "sha256": "add7f6bce2c0f764b3a0d333b4e1cfa4083a676894c61823dfdde39dc2d88518",
+   "bytes": 26301
+  },
+  {
+   "url": "https://raw.githubusercontent.com/astropy/astropy/7c5a9c124ce84c76992016e89631566ad398aff7/astropy/units/astrophys.py",
+   "sha256": "a915aa2901518d91d7c2407d2d400b802624f8c92965f57b82984e7d8a9115a7",
+   "bytes": 5302
+  }
+ ],
+ "cases": {
+  "planckFrequency": [
+   {
+    "temperatureKelvin": 2.7255,
+    "frequencyHz": 30000000000.0,
+    "intensityWm2HzSr": 5.720214289910552e-19,
+    "invertedTemperatureKelvin": 2.7254999999999985
+   },
+   {
+    "temperatureKelvin": 20.0,
+    "frequencyHz": 950000000000.0,
+    "intensityWm2HzSr": 1.4409837775424686e-15,
+    "invertedTemperatureKelvin": 20.0
+   },
+   {
+    "temperatureKelvin": 50.0,
+    "frequencyHz": 233000000000.0,
+    "intensityWm2HzSr": 7.441923018049771e-16,
+    "invertedTemperatureKelvin": 50.0
+   },
+   {
+    "temperatureKelvin": 100.0,
+    "frequencyHz": 233000000000.0,
+    "intensityWm2HzSr": 1.576433112781812e-15,
+    "invertedTemperatureKelvin": 100.0
+   },
+   {
+    "temperatureKelvin": 300.0,
+    "frequencyHz": 345000000000.0,
+    "intensityWm2HzSr": 1.0670666841162822e-14,
+    "invertedTemperatureKelvin": 300.0
+   }
+  ],
+  "rayleigh": [
+   {
+    "continuumToEmissionLineAngstrom": 47.47967479674797,
+    "wavelengthAngstrom": 1355.6,
+    "rayleighPerFluxDensitySample": 1.7322983584957786e+18
+   },
+   {
+    "continuumToEmissionLineAngstrom": 10.0,
+    "wavelengthAngstrom": 1304.0,
+    "rayleighPerFluxDensitySample": 3.5096272175371834e+17
+   },
+   {
+    "continuumToEmissionLineAngstrom": 1.0,
+    "wavelengthAngstrom": 6300.0,
+    "rayleighPerFluxDensitySample": 1.6956021066322282e+17
+   }
+  ]
+ }
+}
