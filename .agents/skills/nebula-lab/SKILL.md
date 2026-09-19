@@ -1,0 +1,271 @@
+---
+name: nebula-lab
+description: "The Nebula Lab: cssEarth's volumetric baking lab. Turn images plus a spatial prior into a 3D emission field and bake it into stacked axis-aligned slab textures PolyCSS composites. Use to understand what the lab is, its packages, boundaries, routes and baking methods, to process a new image candidate end to end, and to avoid the defects that cost whole rounds before."
+---
+
+# Nebula Lab
+
+A **volumetric baking lab**. It takes registered images and a spatial prior, fits a
+three-dimensional emission field, and bakes that field into stacked slab textures the shared
+PolyCSS renderer composites. Nothing is derived at runtime.
+
+## The name
+
+Before Hubble settled the Great Debate in 1925, every diffuse object in the sky was a
+*nebula* — the word simply means cloud. Nobody yet knew which fuzzy patches were gas, which
+were star clusters, and which were whole galaxies beyond the Milky Way, so one catalogue held
+them all: the Magellanic Clouds were *Nubecula Major* and *Minor*, Andromeda was the Andromeda
+Nebula, the globulars were nebulae until telescopes resolved their stars, and the "planetary"
+nebulae were named for resembling little planetary discs, which they are not.
+
+The lab keeps that appearance-first scope on purpose. It bakes anything extended that evidence
+can constrain: gas clouds and nearby galaxies today, circumstellar gas and terrestrial volumes
+with the same machine and a different prior. The name is the historical class, not a claim
+about the physics of any one subject.
+
+## The output shape
+
+One fitted field becomes three stacks of leaves, one per axis (X, Y, Z). The viewer shows
+whichever stack faces the camera and swaps at the handoff, so the volume reads solid from any
+angle — leaves on every side. Slabs pack into per-axis atlases for delivery. Inspect the
+handoff explicitly: brightness and colour agreement between banks is an acceptance criterion,
+not a detail.
+
+## Packages and boundaries
+
+`labs/nebula/packages/{lab,volume-core,volume-bake,reconstruction,volume-viewer}`.
+
+- **volume-core** — pure contracts, fields, materials, coordinates. No node builtins, no sharp, no React.
+- **volume-bake** — baking and compact-input IO; may read files.
+- **reconstruction** — fitting and registration algorithms; object-agnostic, ≤600 lines per file.
+- **lab** — React app, processing server, CLI orchestration, recipes, viewer adapters.
+- **volume-viewer** — the retained-DOM scene.
+
+`pnpm check:nebula-boundaries` enforces the graph: a package may import itself, anything may
+import volume-core, and only `lab` may import the rest. **The cssEarth app (`src/`, `site/`,
+`tools/`) may import only volume-core and volume-bake.** Never widen the rule to make code fit;
+move the pure part down and keep a lab-side re-export shim. Moving code between packages
+changes the implementation pins recorded in every delivered file, which forces a re-bake —
+plan relocations before a delivery, not after.
+
+## Routes and commands
+
+- `/alignment?subject=<id>` — registration and overlays. `/reconstruction?subject=<id>` — model, lenses, stars, and the diagnostic tool column (levels, difference map).
+- A result opens directly as `?subject=reconstruction-<resultId>`.
+- Subjects: `labs/nebula/packages/lab/src/state/subjects.json`. Per-object recipes: `labs/nebula/models/<object>/`.
+- Research: `node labs/nebula/run.mts <command>`. Application replay: `node tools/nebula/prepare.mts --if-missing` (run by `prebuild`).
+- Star layers for a finite model: `prepare-smc-stars [recipe]` and `prepare-lmc-finite-stars [recipe]`, both thin wrappers over one shared placement owner (`server/workflows/stars/finite-model-star-layer.ts`).
+- Lens discovery reads `.local/nebula-lab/finite-lenses-<modelResultId>.json`; a model's star layer comes from `finite-stars-<modelResultId>.json`. Newest valid model wins; an invalid bundle is skipped, never silently merged.
+
+## Ways of baking a volume
+
+Pick by what the evidence supports, not by habit.
+
+| Method | Input | Constrains | Use when |
+| --- | --- | --- | --- |
+| **Repaint** `alignment-density-material-v1` | fixed density + one registered image | the Earth-facing view only | legacy; historical comparisons |
+| **Sampled / compiler** | qualified spatial tables, symmetry or kinematics | real 3D structure from measurements | a measured spatial product exists (`docs/sampled-volumes.md`, `docs/nebula-compiler.md`) |
+| **Fixed-density finite region** | density + image, finite regions | colour on finite supports | superseded by the two-scale fit |
+| **Two-scale finite emission** `simulation-guided-finite-emission@1` | image + spatial prior | broad shape from the prior, detail fitted from the image | the current default for clouds and galaxies |
+| **Axial symmetry** | one image + a symmetry hypothesis | rotationally symmetric shells | planetary nebulae (`docs/planetary-nebulae.md`) |
+
+Two-scale in one line: broad light is `gain(x,y) × prior(x,y,z)` with `gain = fraction × blur(image) / blur(column)`; finite components fit the residual at prior-supported depths, so image brightness scales the envelope and never moves it in depth. Example recipe: `labs/nebula/models/smc/constrained/emission-envelope-ellipsoid.json`, with its method note beside it.
+
+**Lenses:** every image recolours one shared geometry, so switching lens changes colour, never shape. **The prior is a hypothesis, never a measurement** — prefer one that scores better against observations; for the SMC a VMC-constrained ellipsoid beat the tidal simulation (withheld deviance 0.457 vs 0.601).
+
+## Matching a lens to its image
+
+Colour and tone are measured, then fitted — never tuned by eye.
+
+**Measure.** The lab server exposes the comparison as JSON; the Reconstruction tab's round
+histogram button shows the same data.
+
+```
+GET http://127.0.0.1:4331/__nebula/reconstruction-levels?resultId=<lensResultId>
+```
+
+It returns, per channel: `sourceHistogram` and `renderHistogram` on shared bins, `sourceP50/P90`,
+`renderP50/P90`, their ratios, `signedMeanDelta`, `absoluteMeanDelta`, `worstBin`, and the
+`transfer` curve (source value → binned median render value) over `transferBins`; plus the
+footprint, sky pedestal, grid and the pinned input files. Source is the lens's own registered
+image, masked to its footprint with the sky pedestal removed; render is the model's front
+projection wearing that lens's chromaticity. Lens result ids come from the model's bundle,
+`.local/nebula-lab/finite-lenses-<modelResultId>.json`.
+
+**Read it.** On the identity diagonal = matched. Above it = painting too bright. A bend =
+mid-tones off, which a single gain cannot fix. Mismatched channels = colour cast. The signed
+delta says where; the ratios say how much.
+
+**Fit.** Invert and smooth the transfer into a monotone per-channel lookup table from *paired*
+pixels, so a knot stays a knot (plain histogram matching can equalise counts while scrambling
+what is where). Solve exposure and per-channel gain first; add curve parameters only when the
+residual is shape-dependent.
+
+**Score the whole range, not the mid-tones.** A p50/p90 objective never sees the top 1%: the
+LMC Horálek lens matched p50 to 4% while its core plateaued (red p99.9 0.72, core 0.88). Score
+p99, p99.9 and the core-disc mean too, each against a tolerance stated up front.
+
+**Highlights need exposure, not a curve.** The render can never exceed the projection byte
+`255·(1 − e^(−E·I))` (the shared opacity), so a curve can only dim or recolour beneath it. A core
+riding that shoulder is lifted by *raising* the shared exposure E, and the curve dims the
+mid-tones back down; lowering E only lowers the ceiling. Solve E jointly with the curve on the
+exposure-free integral: re-expose the byte analytically, `1 − P'/255 = (1 − P/255)^(E'/E)`,
+re-fit the curve per candidate, minimise the predicted score; no bake until the prediction says
+it wins. E belongs to the shared geometry, so the change re-bakes the model once. Its emission field
+must come out byte-identical, and then every lens is re-fitted on it (`lens-tone-fit --solve-exposure
+--recipe <settings>` for the image the model was fitted to, then `--model <id>` for the others).
+
+**Apply and re-measure.** Bake the table into the material stage — never at runtime, which may
+not derive pixels. White balance before the alpha chroma limit, curve and exposure after. Re-bake
+the lens, call the endpoint on the new result id, stop when the delta sits inside a tolerance
+stated up front, at most three bakes.
+The loop is `node labs/nebula/run.mts lens-tone-fit <lensResultId>` (recorded as `toneCurve` in the
+lens provenance; report in `output/lens-tone-fit/`).
+
+**Two cautions.** The endpoint's render side is the analytic projection, which reads about 12%
+brighter than what the browser delivers; fit against a delivered capture or correct for that loss,
+or the table overshoots. The loss is not in the bank bytes (a CPU composite of the delivered z
+slabs matches the analytic projection within 0.5%). It comes from the browser's 8-bit blending
+and depends on level: delivered ÷ analytic is 0.6–0.8 in the faint mid-tones and 0.90–0.92 from
+source level 144 up. The uniform 1.12 therefore holds for the highlights and under-corrects the
+faint zone. And every lens shares one opacity bank, so a table can only
+move colour and brightness inside that opacity: a lens far off its image (VISTA +163%, WISE
++987% on the LMC) needs a per-lens opacity scale, which trades away part of "switch lens, never
+shape". Matching a publisher-processed image matches its stretch, not physical flux — say so.
+
+## Diagnostic tools
+
+The Reconstruction tab has a column of round buttons on the left edge of the right sidebar,
+above the image credit. Each opens a diagnostic for the displayed lens; each is backed by a lab
+server route you can call directly, so an agent sees exactly what a person sees.
+
+| Button | Route | Shows |
+| --- | --- | --- |
+| Levels | `GET /__nebula/reconstruction-levels?resultId=<lens>` | per-channel histograms, signed delta, transfer curve, percentile ratios |
+| Difference map | `GET /__nebula/reconstruction-difference?resultId=<lens>` (`&format=png` for the image) | render − image on luminance, over the Earth view: blue too dark, red too bright, clear within tolerance |
+
+**Read the difference map for *where*, the levels for *how much*.** On the LMC it showed the bar
+blue (core too dark, the opacity shoulder) and the body a red ring (mid-tones too bright), which
+the tone fit then broke up: too-bright share 33% → 12%. It divides out the measured delivery
+factor (1.14 for the LMC Horálek capture); without it the whole body reads red. It is only
+meaningful at the Earth-facing pose and hides when you orbit.
+
+**Prove a diagnostic on a known defect before trusting it.** Keep a bad control and a fixed
+version for every diagnostic: it must flag the first and stay quiet on the second, with numbers.
+A diagnostic that cannot flag its own control is broken. The LMC history supplies the controls:
+the 3× placement model for footprint and star-residual views, the plateaued-bulge lens for
+headroom, the mid-tone-bright lens for the difference map, the SMC bake with 95% of texels at
+alpha 1–3 for banding risk.
+
+Planned, each with its control: star residual arrows (catalogue star → matched photo star; radial
+= scale, swirl = rotation, mirrored = flip), headroom map (where opacity saturates), hue-error map
+(colour angle only), banding-risk map (alpha 1–3 texels), footprint outline (registered vs placed),
+then depth-coded view, bank isolation (force X, Y or Z leaves) and a coverage mask. Build them as
+prepared images or SVG — never canvas, WebGL or CSS filters.
+
+## Defects that cost whole rounds
+
+- **Premultiplied 8-bit compositing.** At alpha 1–3 a slab's colour rounds to a few levels and stacked leaves turn that into strong false tints, plus contour banding. Fade chroma to neutral below a threshold and keep exposure out of that band. Judge on the artefact (faint-annulus roughness, α1–3 share), not the histogram. The delivered bank also loses ~12% of the analytic light there, so compare like with like.
+- **Ordering of colour operations.** A non-uniform channel gain applied *after* the alpha chroma limit re-tints the neutral zone that limit protects. White balance before the limit, exposure after.
+- **No-coverage must stay no-coverage.** NaN or alpha 0 read as measured zero paints black sky into the model; carry the mask through rectification.
+- **Placement is not a free parameter.** The overlay transform already comes from the measured WCS/homography; a hand-typed Alignment scale/rotation is a display fit. Feeding it into geometry once put the LMC on the sky 3× too large; identity placement reproduced the registered corners to 0.000″.
+- **Star layers are optional overlays.** A missing `stars.json`, answered by the dev server's HTML page, once aborted the whole material load. Treat absence as absence.
+- **Screen space is not model space.** CSS y points down; project catalogue stars with the same helper the slabs use, or they render mirrored and drift under rotation.
+- **Exposure is solvable, not guessable.** The emission integral is exposure-free, so re-expose an existing capture analytically and predict the next bake instead of sweeping. And its direction is not intuitive: a core riding the opacity shoulder needs *higher* exposure, not lower.
+- **Per-channel curves bend hue when they must dim hard.** Fitting a lens far brighter than its image (VISTA, WISE on the LMC) pins the curve at its floor and worsens hue; that is the shared-opacity limit, not a fitter bug. Report it instead of forcing it.
+
+## Procedure
+
+Read `labs/nebula/AGENTS.md`, `METHOD.md`, `docs/workflows.md`, `docs/reconstruction.md`, `docs/nebula-compiler-guidelines.md` and `docs/internal-packages.md` before changing the pipeline; they define the app, evidence intake, numerical gates and exact validation boundaries. The steps below apply them to a new source.
+
+The app supports density-based LMC/SMC work, the M2–9 symmetry experiment and configured image/constraint-driven compiler subjects. A new object requires data recipes, registration evidence, a frame and appropriate priors. The procedure is reusable; an arbitrary image is not automatically a configured reconstruction source. Do not transfer one object's shell, expansion law or stellar simulation to another without evidence.
+
+## 1. Define the output and evidence
+
+- Identify the object, intended visible/infrared treatment, projected extent, intended close-view detail and delivery budget.
+- Separate observations, simulation constraints and authored assumptions. A stellar-density simulation is not measured nebular gas/dust depth. Images from Earth in different bands are not independent viewing angles.
+- Start with a small comparison bake and fixed front/oblique cameras. State success and a bounded iteration budget before processing; do not design a new reconstruction framework before trying the baseline.
+- Preserve an existing running lab, browser state and completed caches. Cleanup remains inside the lab unless explicitly requested elsewhere.
+
+## 2. Acquire a suitable image and prior
+
+- Prefer observatory/agency/survey originals; credit the actual author and processing source. APOD publication does not transfer ownership to NASA.
+- Record exact URL, license/credit, SHA-256, native dimensions, bit depth, pixel conventions, filters, display stretch and WCS. Preserve original bytes in the ignored local cache.
+- Compare angular footprint and resolution before selecting: a sharp central image may miss the full cloud. Keep no-data regions explicit. Never upscale a preview and call it native detail.
+- Use a suitable measured/simulated spatial dataset, with units, frame, observer transform, source hash and limitations. Preserve the full prior before cutting a delivery region. A single photo without depth constraints requires explicitly authored geometry; report this instead of inventing measured depth.
+- Put object-specific choices in `models/<object>/` and acquisition metadata in `sources/`. Reuse algorithms rather than adding image-name branches.
+
+### External physical evidence and method selection
+
+- Follow the guidelines' eligibility matrix: independent density, symmetry, kinematic surfaces, irregular fronts, connected filaments/lobes, and absorption/scattering are different constraints that may be combined. Do not reduce every object to shells.
+- Use bounded primary-source research for spectroscopy, extinction, density diagnostics, distances, proper motions and simulations. An authorized specialist returns source identities, actual coverage and candidate constraints before any costly bake. Keep literature discovery distinct from data qualification and runtime implementation.
+- Preserve exact products, hashes, units, WCS/epoch, beam, spectral frame, masks, missing errors and access status. Full arrays, inspected headers and unavailable downloads are distinct. Never invent validity masks or treat pixel sampling as resolution.
+- Write `models/<object>/physical-evidence.json`: source IDs plus evidence IDs classified `observed`, `published-model` or `authored`, with units, footprint, uncertainty when supplied and limitations. Use Orion's ledger as a record example, not its geometry as a template for other objects.
+- Keep executable method/parameter choices in a separate recipe. Pin its ledger, selected method/evidence IDs and every authored setting. Shared TypeScript owns validation and algorithms; object data owns all target-specific values. Changing evidence must change the affected fit identity.
+- Register constraints to the common image frame. Small core maps cannot constrain an entire complex; label unsupported regions and do not infer depth from image intensity or directly from velocity. Retain competing literature interpretations and explicit tracer-to-model mappings.
+- Released XYZ tables also require qualification: inspect units, array ordering, observer side and the original WCS/velocity products before accepting a transform. Use the sampled-volume operator for qualified spatial points; keep analytic wind/jet terms and per-tracer component weights explicit. Different spectral tracers need not share the same emission alpha, even when their spatial frame is identical.
+- A measured component may leave real image emission unexplained. Inspect the residual rather than treating the spatial table as a complete object. When supported, preserve its samples and fit a separate bounded 3D diffuse prior; record inferred depths, per-tracer coefficients and withheld-image checks. Compare projected brightness using the actual normalized material color. Mixed RGB residuals do not uniquely identify synchrotron, gas or dust.
+
+## 3. Register before baking
+
+1. Detect compact sources on the untouched native image, before removing stars.
+2. Start with publisher WCS; verify against a suitable catalogue or registered image using shared stars. Match compatible bands where possible.
+3. If fitting a correction, reserve held-out matches. Record native-pixel/angular residuals, spatial coverage, matched hull and shifted/mirrored/wrong-scale controls. Pin the source bytes and exact accepted transform.
+4. Keep pixel-center conventions, north/east handedness and observer side explicit. Reject an unverified direction rather than compensating by eye.
+5. Open `/alignment` with the complete density field and image footprint. Use the reference observer; compare registration first, then the separate image-to-simulation fit.
+6. Save/export placement including rotation, scale, offset and pivot. A manual model fit is not astrometry; retain both independently.
+
+Importing and aligning a candidate does not authorize processing. A user instruction naming the candidates, or an explicit processing-button click, authorizes that operation. Do not ask for the same authorization again.
+
+## 4. Remove stars once
+
+- Use the Alignment sidebar's **Quick preview** for native crops when direction/removal quality is uncertain; then **Remove stars** for the full source.
+- NOX runs locally on overlapping tiles. Non-RGB8 sources receive a separate full-size RGB8 working image; keep the higher-depth original unchanged and record the conversion.
+- Inspect **Original / Without stars / Residual**, particularly saturated stars, halos, crowded fields and compact nebular knots. Automatic removal is not a membership catalogue or measurement of the hidden cloud.
+- Do not feed a nonstellar X-ray/radio wind map through optical star removal. An explicit preservation treatment keeps structural compact emission and emits a zero extracted residual, with its status recorded. A publisher's shared grid may transfer astrometry through a star-verified companion; label that transfer separately from independent stars in the nonstellar band.
+- Require completed native diffuse/residual/mask products, source/model/code pins and exact native accounting: original = diffuse + residual. Check real artifacts, not just process exit status.
+- Refresh reconnects to server-owned work. Cancel stops it explicitly. Never restart a server merely to refresh UI while processing.
+- The strength slider blends completed preview products; it does not change detection. Reconstruction consumes the complete native diffuse output, not this display blend, browser WebP or a second removal pass.
+
+## 5. Process the volume explicitly
+
+**Mandatory for every new acceptance:** attach observed colors to finite 3D structures before compositing. Sampling the same image XY at every Z is a rejected baseline, even with a valid density cloud. Keep a failing counterfactual test for that path and inspect front, oblique and both side axes. Do not recover lost front detail by reinstating photographic extrusion; missing fine structure requires a supported spatial/emission model. Projection-only historical density/symmetry comparisons remain inspectable but are not newly qualified 3D materials. Preserve fixed-density alpha when changing its material method; explicitly distinguish a new inferred-emission fit from that workflow.
+
+Choose the configured method first. The numbered procedure below is the **fixed-density material workflow**. For image/physical-evidence inference, use `docs/emission-compiler.md` and the process guidelines: compile the selected support hypothesis, fit emission, then paint the same geometry with each lens. For symmetry use `docs/planetary-nebulae.md`. A full user-authorized Compile includes configured source stages; do not add repeated acceptance clicks. New unsupported physical operators remain research work until implemented and tested.
+
+1. Open `/reconstruction`, choose the completed starless source, and press **Preview**. Selecting a candidate alone must not start a bake.
+2. Pin the Alignment density descriptor, prepared slices, source textures, reference projection and catalogue alongside the native starless image and registration. A new object needs an explicitly selected density cloud before it can use this material workflow.
+3. Keep the cloud’s exact geometry, bounds, crops, depth and decoded alpha. Use the exact same prepared density bank shown in Alignment; do not substitute a historical photo-derived benchmark or resample a new volume for each image.
+4. Preserve the entire saved Alignment placement, including its scale, rotation, pivot and offsets. Use one shared Earth observer/framing across both tabs. Compare actual image landmarks across tabs, not only against reconstruction’s own mapping.
+5. Sample registered candidate chromaticity at each existing slice texel’s physical position. Optional saturation, local detail, brightness and gamma are authored RGB material controls; use one coverage-normalized registered detail field for all axes, preserve alpha, and pin settings in the result. Preview explicitly; do not process on slider movement. Image brightness cannot redefine density. Missing/zero-RGB samples retain explicitly counted neutral density color; report this mixed-source coverage.
+6. Preserve observed IDs, astrometry and photometry. One configured sky-to-density fit conditions model depths on the real density field, independently of candidate image. All materials share the same resulting positions and encoded cutoff signal; no per-image selection or repositioning.
+7. Current LMC comparison uses the existing 144 Alignment slices and 943 stars, a 1024px registered color plane, and an original comparison plane up to 2048px within four million pixels. It preserves Alignment density detail, not all native image detail. Prepare original-image geometry through exactly the same mapping.
+8. Verify exact geometry, every decoded alpha byte, catalogue records and resource hashes. Finalize only a complete local result atomically. Decode the next bank before swapping the retained scene; never host or deploy as part of processing.
+
+## 6. Inspect and accept the approximation
+
+- Compare variants at the same camera, scale and brightness. Check front, oblique and edge views plus a continuous orbit.
+- Inspect feature connectivity, parallax, repeated silhouettes, sheet-like depth, slice gaps, disappearing detail, seams, whitening and angle-dependent brightness.
+- Check source identity, placement, exact canonical geometry/alpha, resource hashes, XYZ banks, payload and actual job duration. Use Earth view and the original-image overlay to inspect mapping. Inspect active banks at the same camera pose to isolate handoff defects. A passing front projection does not prove real side geometry.
+- Test switching saved sources without reprocessing or scene teardown; refresh must reconnect/load the same result.
+- Prepare stellar area and opacity jointly from catalogue magnitudes, with global exposure and no arbitrary faint-star opacity floor. Image residuals can check correspondence; candidate image brightness must not redefine the shared catalogue light.
+- Keep stellar overlays independent of image choice and coverage. Preserve the same catalogue XYZ and reference-support signal, validate its common reference and positive source-density support, and use a common projection for cutoff. Keep the star toggle. Inferred member depths need documented constraints, not a flat background plane.
+- Record accepted/rejected outcomes and limits. If the same defect survives a fix, address the owning image/registration/model/sampling layer rather than hiding it through exposure or cutoff.
+- Run the saved-output `browser-reconstruction-stability` command for both X/Z and Y/Z handoffs. It reports and fails brightness/image disagreement separately from successful processing. See `docs/slice-stability.md` for the current measured outcome and historical failed experiments. Do not describe them as fully rotation-stable or promote them on unit-test success alone.
+
+## 7. Preserve and promote deliberately
+
+- Apply `docs/provenance/CONTRACT.md` to every shipped volume, including older lenses touched by the change. Its object README owns the concise Sources, Evidence and Known problems account; lab records retain detailed methods and original experiments. Add `investigations.json` beside the object README, with one `lens-<lensId>` included entry per shipped lens and separate rejected/deferred trials, pinned evidence and revisit conditions.
+- Known observing telescopes belong in the shared facility catalogue with cited capture bindings. A missing catalogue entry is not an unknown observer. Keep model/method citations separate from observations. Put the inferred/simulated nature and material limitations in the visible source-owned summary, not only a hover title. Preserve browser reports and relevant images at retrievable repository paths with their original revision/settings; ignored logs alone cannot support PR claims.
+- For an accepted source set, write a `cssearth-nebula-bake@1` recipe and use `pnpm lab:nebula:bake --research --recipe=<path>`. Follow `labs/nebula/docs/baking.md`. Save exact image placement, RGB treatment, star/removal inputs and presentation choices; a local result ID alone cannot rebuild an image.
+- Validate replay from a separate clean clone with no source/processing caches, not only restored results. Use the nebula-only installation sequence in the bake guide; run `pnpm lab:nebula:bake --research` followed by the read-only `pnpm lab:nebula:verify` when qualifying native research reproducibility. Qualify ordinary compact application replay separately through `tools/nebula/prepare.mts`; its success does not establish a new native-processing run. Record the tested commit, platform, cold-run duration and any limits. Keep generated density textures and native/3D caches out of Git. The current three accepted sources include an explicitly pinned pre-NOX baseline; omitting it changes their pixels.
+
+- Native NOX outputs: `.local/nebula-lab/star-removal-nox-applied/`.
+- Completed volumes: `.local/nebula-lab/reconstructions/`, including descriptor, masters/delivery, provenance and manifest.
+- Preserve exact historical receipt bytes/hashes during organization; resolve relocated paths at loading boundaries.
+- Keep all derived images out of Git, including original-image inspection previews, historical reference panels, extraction previews and every object’s runtime textures; retain inputs, settings and expected hashes. An accepted recipe may restore already-approved app textures through its pinned delivery manifest. New production promotion still requires explicit scope, reproducible input/recipe/transform/depth/bake records and fixed-camera acceptance. Keep runtime PolyCSS plain TypeScript; React owns the lab UI only.
+- For a future high-detail named structure, test a registered local crop and connected volumetric model first. Multi-band color, wavelets, NeRF or Gaussian splats alone do not recover missing physical depth.
+
+### Accepted compact delivery inputs
+
+For ordinary app preparation, replay the source-owned compact pre-slice fields/materials/stars/settings. Explicitly accepted registered material planes may be retained as compact bake inputs; they are not runtime textures. Keep atlases, impostors and XYZ slices ignored. The `--research` route still acquires native observations and reruns fitting. Export only the actual inspected delivery result, preserve source lineage, and verify a cache-free replay against every expected texture digest before promotion. Never silently refit or substitute a new material model during this packaging step.
