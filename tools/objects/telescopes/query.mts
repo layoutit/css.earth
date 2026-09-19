@@ -26,6 +26,7 @@ import { flagValue } from '../../cli-arguments.mts';
 import { hasErrorCode, readJsonSource, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
+import { sourcePds3Capabilities, sourcePds3Observations, withSourcePds3Observations } from '../pds/source-observations.mts';
 import { qualificationActionsFor, type QualificationAction } from './qualification-routes.mts';
 import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociation } from './target-associations.mts';
 import { resolveTarget, type TargetCatalogueEntry, type TargetResolution } from './targets.mts';
@@ -33,7 +34,7 @@ import { resolveTarget, type TargetCatalogueEntry, type TargetResolution } from 
 const ARCSEC_PER_RADIAN = 206_264.806_247;
 const TARGET_ASSOCIATIONS_PATH = 'data/telescopes/target-associations.json';
 export const MODES_SCHEMA = 'cssearth-telescope-modes@1';
-export const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'photometry', 'events', 'strips'] as const;
+export const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'table', 'photometry', 'events', 'strips'] as const;
 export type ProductKind = typeof PRODUCT_KINDS[number];
 export const REQUESTED_RESULTS = ['telescope-product', 'body-map'] as const;
 export type RequestedResult = typeof REQUESTED_RESULTS[number];
@@ -75,6 +76,8 @@ export interface ToolkitSupport {
   readonly programs: readonly string[]; readonly checked: readonly string[];
   /** Programs whose pin of the archive's own final product was checked. Never merged with `checked`, which is re-calibration. */
   readonly archiveFinalQualified: readonly string[];
+  /** Exact target ownership supplied by the adapter when its ledger carries that relation. */
+  readonly targetPrograms: readonly string[]; readonly targetChecked: readonly string[]; readonly targetArchiveFinalQualifiedPrograms: readonly string[];
   readonly targetProgramPinned: boolean; readonly targetProgramChecked: boolean;
   readonly targetArchiveFinalQualified: boolean;
 }
@@ -99,8 +102,9 @@ export interface UnassignedEvidence {
 }
 
 export type WorkflowBlockerCode = 'request-incomplete' | 'constraint-refused' | 'toolkit-unavailable' | 'body-map-author-missing' | 'target-program-unqualified';
-export type TargetCoverageState = 'observed' | 'searched-empty' | 'not-searched' | 'unanswered';
-export interface TargetCoverage { readonly telescope: string; readonly ledger: string; readonly state: TargetCoverageState; readonly reason: string }
+export type TargetCoverageState = 'observed' | 'searched-empty' | 'unsupported-products' | 'not-searched' | 'unanswered';
+export interface TargetCoverage { readonly telescope: string; readonly ledger: string; readonly state: TargetCoverageState; readonly reason: string;
+  readonly registryProducts?: number; readonly admittedProducts?: number; readonly rejected?: readonly { readonly lidvid: string; readonly reason: string }[] }
 export interface WorkflowBlocker { readonly code: WorkflowBlockerCode; readonly reason: string; readonly constraint?: string }
 export interface SelectionAction { readonly kind: 'select-observation'; readonly programme: string; readonly command: 'pnpm'; readonly arguments: readonly string[] }
 export interface CandidateSelectionAssessment {
@@ -118,9 +122,11 @@ export interface Candidate {
     /** Complete observation identities where the ledger preserves them, rather than only a grouped count. */
     readonly records?: readonly { readonly id: string; readonly programme?: string; readonly startIso: string; readonly endIso?: string; readonly title?: string;
       readonly filter?: string; readonly pixelScaleArcsec?: number; readonly quality?: string; readonly observatory?: string; readonly instrument?: string;
-      readonly archiveTarget?: string; readonly night?: string; readonly targetLid?: string; readonly productLidvid?: string;
+      readonly archiveTarget?: string; readonly night?: string; readonly targetLid?: string; readonly productLidvid?: string; readonly archiveProductId?: string;
+      readonly centralWavelengthMicrometres?: number;
       readonly wavelengthIntervalMicrometres?: readonly [number, number]; readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
-      readonly surfaceResolutionKm?: number; readonly kind?: ProductKind; readonly use?: string; readonly units?: string }[] } | null;
+      readonly surfaceResolutionKm?: number; readonly kind?: ProductKind; readonly use?: string; readonly units?: string;
+      readonly sourceFiles?: readonly { readonly role: string; readonly path: string; readonly origin: string; readonly bytes: number; readonly sha256: string }[] }[] } | null;
   readonly programmes: readonly string[];
   readonly meetsConstraints: Readonly<Record<string, ConstraintVerdict>>;
   readonly toolkitSupport: ToolkitSupport;
@@ -166,7 +172,7 @@ export interface CapabilityAnswer {
   readonly targetResolution: TargetResolution;
   readonly candidates: readonly Candidate[];
   readonly unassignedEvidence: readonly UnassignedEvidence[];
-  readonly endpoint: { readonly status: 'unknown-target' | 'request-incomplete' | 'index-incomplete' | 'no-selectable-candidate' | 'selectable-candidates'; readonly selectableCandidates: number; readonly blockerCodes: readonly (WorkflowBlockerCode | 'unknown-target' | 'target-index-unavailable' | 'archive-query-unanswered')[] };
+  readonly endpoint: { readonly status: 'unknown-target' | 'request-incomplete' | 'index-incomplete' | 'no-selectable-candidate' | 'selectable-candidates'; readonly selectableCandidates: number; readonly blockerCodes: readonly (WorkflowBlockerCode | 'unknown-target' | 'target-index-unavailable' | 'archive-query-unanswered' | 'archive-products-unsupported')[] };
   /** One explicit coverage result per ledger. Absence is never silently treated as an archive negative. */
   readonly targetCoverage: readonly TargetCoverage[];
   /** Compatibility view containing only ledgers that explicitly searched for the target and found nothing. */
@@ -208,6 +214,7 @@ interface TargetMode {
   readonly observations: Candidate['observations'];
   readonly programmes: readonly string[];
   readonly toolkit: { readonly tool?: string; readonly routeState?: string; readonly refusedBecause?: string; readonly programs: readonly string[]; readonly checked: readonly string[]; readonly receipts: readonly string[];
+    readonly targetPrograms?: readonly string[]; readonly targetChecked?: readonly string[];
     /** Archive-final programs of this mode, and the ones a record qualified. A ledger that states none leaves this out. */
     readonly archiveFinal?: { readonly programs: readonly string[]; readonly qualified: readonly string[] } };
   /** Dated observations of this target in this mode, where the ledger dates any. */
@@ -239,8 +246,7 @@ function workflowAssessment(request: CapabilityRequest, target: string, candidat
     blockers.push({ code: 'constraint-refused', constraint, reason: `${constraint}: ${verdict_.reason}` });
   if (candidate.toolkitSupport.level === 'none') blockers.push({ code: 'toolkit-unavailable', reason: candidate.toolkitSupport.reason });
   if (request.result === 'body-map' && candidate.bodyMapSupport.answer === 'no') blockers.push({ code: 'body-map-author-missing', reason: candidate.bodyMapSupport.reason });
-  const programmes = [...new Set([...candidate.toolkitSupport.programs, ...candidate.toolkitSupport.archiveFinalQualified])]
-    .filter(value => value === target || value.startsWith(`${target}-`)).sort();
+  const programmes = [...new Set([...candidate.toolkitSupport.targetPrograms, ...candidate.toolkitSupport.targetArchiveFinalQualifiedPrograms])].sort();
   if (!programmes.length) blockers.push({ code: 'target-program-unqualified', reason: `No pinned or qualified program of ${target} is available for this mode.` });
   const nextActions = blockers.length ? [] : programmes.map(programme => ({ kind: 'select-observation' as const, programme, command: 'pnpm' as const,
     arguments: ['--silent', 'telescope:query', ...requestArguments(request), '--select-telescope', candidate.telescope, '--select-mode', candidate.mode, '--program', programme, '--json'] }));
@@ -350,7 +356,7 @@ function hstModes(value: unknown, target: string, targetAssociations: readonly T
   const count = object ? requireFiniteNumber(object.observations, 'observations') : 0;
   const modes: TargetMode[] = object ? stringList(object.configurations, 'configurations').map(mode => ({ telescope: 'Hubble', mode, archiveDate,
     observations: { count, scope: 'object-total' as const }, programmes: [], dates: [], toolkit: toolkitFor(mode) })) : [];
-  for (const association of targetAssociations.filter(entry => entry.archive === 'mast' && entry.collection === 'HST' && entry.telescope === 'Hubble' && entry.target === target)) {
+  for (const association of targetAssociations.filter(entry => entry.archive === 'mast' && entry.collection === 'HST' && entry.target === target)) {
     if (!configurations.has(association.mode)) throw new TypeError(`${target}: target association names unknown Hubble mode ${association.mode}.`);
     const records = association.observations.map(observation => ({ id: observation.id, startIso: observation.startIso,
       ...(observation.endIso ? { endIso: observation.endIso } : {}), ...(observation.filter ? { filter: observation.filter } : {}),
@@ -533,68 +539,116 @@ function pdsModes(value: unknown, target: string): TargetMode[] {
   const archiveDate = requireString(ledger.archiveDate, 'archiveDate'), object = requireArray(ledger.objects, 'objects').map(raw => requireRecord(raw, 'PDS object')).find(entry => entry.id === target);
   if (!object) return [];
   const all = requireArray(object.observations, 'PDS observations').map(raw => { const row = requireRecord(raw, 'PDS observation');
-    const ranges = requireArray(row.wavelengthIntervalsMicrometres ?? [row.wavelengthIntervalMicrometres], 'PDS wavelength intervals').map((rawRange, index) => {
+    const rawRanges = row.wavelengthIntervalsMicrometres ?? (row.wavelengthIntervalMicrometres === undefined ? [] : [row.wavelengthIntervalMicrometres]);
+    const ranges = requireArray(rawRanges, 'PDS wavelength intervals').map((rawRange, index) => {
       const range = requireArray(rawRange, `PDS wavelength interval ${index}`);
       if (range.length !== 2) throw new TypeError('PDS observation wavelength interval has two bounds.');
       return [requireFiniteNumber(range[0], 'PDS wavelength start'), requireFiniteNumber(range[1], 'PDS wavelength end')] as const;
     });
+    const productLidvid = row.lidvid === undefined ? undefined : requireString(row.lidvid, 'PDS lidvid');
+    const archiveProductId = row.archiveProductId === undefined ? undefined : requireString(row.archiveProductId, 'PDS archive product id');
+    const sourceFiles = row.sourceFiles === undefined ? undefined : requireArray(row.sourceFiles, 'PDS source files').map(rawFile => { const file = requireRecord(rawFile, 'PDS source file'); return {
+      role: requireString(file.role, 'PDS source file role'), path: requireString(file.path, 'PDS source file path'), origin: requireString(file.origin, 'PDS source file origin'),
+      bytes: requireFiniteNumber(file.bytes, 'PDS source file bytes'), sha256: requireString(file.sha256, 'PDS source file sha256') }; });
+    const filter = row.filter === undefined ? (row.filters === undefined ? undefined : requireArray(row.filters, 'PDS filters').map(value => requireString(value, 'PDS filter')).join(', ')) : requireString(row.filter, 'PDS filter');
     return { id: requireString(row.id, 'PDS observation id'), programme: requireString(row.program ?? row.lidvid, 'PDS program'), startIso: requireString(row.startIso ?? row.registryStartIso, 'PDS start'),
-      endIso: requireString(row.endIso ?? row.registryStopIso, 'PDS end'), filter: requireString(row.filter ?? requireArray(row.filters, 'PDS filters').join(', '), 'PDS filter'), archiveTarget: requireString(row.targetName, 'PDS target name'),
-      targetLid: requireString(row.targetLid, 'PDS target lid'), productLidvid: requireString(row.lidvid, 'PDS lidvid'), instrument: requireString(row.instrument, 'PDS instrument'),
+      endIso: requireString(row.endIso ?? row.registryStopIso, 'PDS end'), ...(filter === undefined ? {} : { filter }), archiveTarget: requireString(row.targetName, 'PDS target name'),
+      ...(row.targetLid === undefined ? {} : { targetLid: requireString(row.targetLid, 'PDS target lid') }), ...(productLidvid === undefined ? {} : { productLidvid }), ...(archiveProductId === undefined ? {} : { archiveProductId }),
+      ...(row.centralWavelengthMicrometres === undefined ? {} : { centralWavelengthMicrometres: requireFiniteNumber(row.centralWavelengthMicrometres, 'PDS central wavelength') }),
+      ...(sourceFiles === undefined ? {} : { sourceFiles }), instrument: requireString(row.instrument, 'PDS instrument'),
       observatory: requireString(row.observatory ?? row.archiveTelescope, 'PDS observatory'), telescope: requireString(row.telescope, 'PDS telescope'), mode: requireString(row.mode, 'PDS mode'),
-      wavelengthIntervalsMicrometres: ranges, ...(ranges.length === 1 ? { wavelengthIntervalMicrometres: ranges[0] } : {}),
+      ...(ranges.length ? { wavelengthIntervalsMicrometres: ranges } : {}), ...(ranges.length === 1 ? { wavelengthIntervalMicrometres: ranges[0] } : {}),
       ...(row.surfaceResolutionKm === undefined ? {} : { surfaceResolutionKm: requireFiniteNumber(row.surfaceResolutionKm, 'PDS surface resolution') }),
       kind: requireString(row.kind ?? 'image', 'PDS kind') as ProductKind, use: requireString(row.use ?? 'Archive-final PDS product.', 'PDS use'), units: requireString(row.units ?? 'not stated', 'PDS units') }; });
   return requireArray(ledger.modes, 'PDS modes').flatMap(raw => { const declared = requireRecord(raw, 'PDS mode'), telescope = requireString(declared.telescope, 'PDS telescope'), mode = requireString(declared.mode, 'PDS mode');
     const records = all.filter(record => record.telescope === telescope && record.mode === mode), programs = stringList(declared.programs, 'PDS programs'), qualified = stringList(declared.qualified, 'PDS qualified');
     if (!records.length) return [];
-    return [{ telescope, mode, archiveDate, observations: { count: records.length, scope: 'this-mode' as const, records }, programmes: records.map(record => record.productLidvid),
+    return [{ telescope, mode, archiveDate, observations: { count: records.length, scope: 'this-mode' as const, records }, programmes: records.map(record => record.productLidvid ?? record.archiveProductId ?? record.programme),
       dates: records.filter(record => !record.startIso.startsWith('1965-') && !record.endIso?.startsWith('3000-')).map(record => ({ id: record.id, startIso: record.startIso, endIso: record.endIso })),
       datesComplete: records.every(record => !record.startIso.startsWith('1965-') && !record.endIso?.startsWith('3000-')),
-      toolkit: { tool: 'pds.peppi + pdr', programs, checked: [], receipts: stringList(declared.receipts, 'PDS receipts'), archiveFinal: { programs, qualified } } }]; });
+      toolkit: { tool: declared.tool === undefined ? 'pds.peppi + pdr' : requireString(declared.tool, 'PDS tool'), programs, checked: [],
+        targetPrograms: [...new Set(records.map(record => record.programme).filter(program => programs.includes(program)))], targetChecked: [],
+        receipts: stringList(declared.receipts, 'PDS receipts'), archiveFinal: { programs, qualified } } }]; });
 }
 
-const ADAPTERS: Readonly<Record<string, (value: unknown, target: string, targetAssociations: readonly TargetAssociation[]) => TargetMode[]>> = Object.freeze({ jwst: jwstModes, hst: hstModes, naco: nacoModes, chandra: chandraModes, juno: junoModes,
-  spitzer: spitzerModes, gemini: geminiModes, keck: keckModes, ihw: ihwModes, pds: pdsModes });
+interface ArchiveAdapter {
+  readonly modes: (value: unknown, target: string, targetAssociations: readonly TargetAssociation[]) => TargetMode[];
+  readonly modeKeys: (value: unknown) => { readonly telescope: string; readonly mode: string }[];
+  readonly missingCoverage?: (ledgerPath: string, value: unknown, target: string) => TargetCoverage;
+  readonly prepare?: (root: string, target: string, value: unknown) => Promise<{ readonly value: unknown; readonly capabilities?: readonly ModeCapability[] }>;
+  readonly evidenceNames?: Readonly<Record<string, string>>;
+}
 
-function targetCoverage(telescope: string, ledgerPath: string, value: unknown, target: string, modes: readonly TargetMode[]): TargetCoverage {
+const modeRows = (value: unknown, ledgerName: string, field: string, telescope: string, modeField: string) => {
+  const ledger = requireRecord(value, `${ledgerName} ledger`);
+  return requireArray(ledger[field], `${ledgerName} ${field}`).map(raw => ({ telescope, mode: requireString(requireRecord(raw, `${ledgerName} mode`)[modeField], `${ledgerName} mode`) }));
+};
+const ordinaryMissing = (telescope: string) => (ledger: string, _value: unknown, target: string): TargetCoverage => ({ telescope, ledger, state: 'not-searched',
+  reason: `This ledger does not preserve an explicit searched-empty result for ${target}, so absence cannot support a scientific no.` });
+const spitzerMissing = (ledgerPath: string, value: unknown, target: string): TargetCoverage => {
+  const ledger = requireRecord(value, 'spitzer ledger');
+  const skipped = (ledger.notAsked === undefined ? [] : requireArray(ledger.notAsked, 'notAsked')).map(raw => requireRecord(raw, 'notAsked target')).find(entry => entry.object === target);
+  if (skipped) return { telescope: 'spitzer', ledger: ledgerPath, state: 'not-searched', reason: requireString(skipped.reason, 'notAsked reason') };
+  if ((ledger.unanswered === undefined ? [] : stringList(ledger.unanswered, 'unanswered')).includes(target)) return { telescope: 'spitzer', ledger: ledgerPath, state: 'unanswered', reason: 'The archive query was attempted but returned no usable answer.' };
+  return (ledger.searched === undefined ? [] : stringList(ledger.searched, 'searched')).includes(target)
+    ? { telescope: 'spitzer', ledger: ledgerPath, state: 'searched-empty', reason: `The complete Spitzer search set includes ${target} and returned no observation.` }
+    : { telescope: 'spitzer', ledger: ledgerPath, state: 'not-searched', reason: `This Spitzer snapshot carries no completed search for ${target}.` };
+};
+const hstMissing = (ledgerPath: string, value: unknown, target: string): TargetCoverage => {
+  const ledger = requireRecord(value, 'hst ledger');
+  return (ledger.unansweredTargets === undefined ? [] : stringList(ledger.unansweredTargets, 'unansweredTargets')).includes(target)
+    ? { telescope: 'hst', ledger: ledgerPath, state: 'unanswered', reason: 'The MAST target query was attempted but returned no usable answer.' }
+    : ordinaryMissing('hst')(ledgerPath, value, target);
+};
+const pdsMissing = (ledgerPath: string, value: unknown, target: string): TargetCoverage => {
+  const ledger = requireRecord(value, 'pds ledger');
+  const search = (ledger.searches === undefined ? [] : requireArray(ledger.searches, 'PDS searches').map(raw => requireRecord(raw, 'PDS search'))).find(entry => entry.target === target);
+  if (search) {
+    const registryProducts = requireFiniteNumber(search.registryProducts, 'PDS registry products'), admittedProducts = requireFiniteNumber(search.admittedProducts, 'PDS admitted products');
+    const rejected = (search.rejected === undefined ? [] : requireArray(search.rejected, 'PDS rejected products')).map(raw => { const row = requireRecord(raw, 'PDS rejected product'); return {
+      lidvid: requireString(row.lidvid, 'PDS rejected lidvid'), reason: requireString(row.reason, 'PDS rejection reason') }; });
+    return registryProducts === 0
+      ? { telescope: 'pds', ledger: ledgerPath, state: 'searched-empty', reason: `Peppi returned no Product_Observational record for ${target}.`, registryProducts, admittedProducts, rejected }
+      : { telescope: 'pds', ledger: ledgerPath, state: 'unsupported-products', reason: `Peppi returned ${registryProducts} product(s), but none became a supported observation.`, registryProducts, admittedProducts, rejected };
+  }
+  return (ledger.searched === undefined ? [] : stringList(ledger.searched, 'searched')).includes(target)
+    ? { telescope: 'pds', ledger: ledgerPath, state: 'unanswered', reason: `This older PDS search for ${target} does not retain registry and admission counts.` }
+    : { telescope: 'pds', ledger: ledgerPath, state: 'not-searched', reason: `This PDS snapshot carries no completed Peppi search for ${target}.` };
+};
+
+/** One explicit boundary per source. Schema knowledge and absence semantics stay with that source, not in the shared query. */
+const ADAPTERS: Readonly<Record<string, ArchiveAdapter>> = Object.freeze({
+  jwst: { modes: jwstModes, modeKeys: value => modeRows(value, 'JWST', 'modes', 'JWST', 'mode'), missingCoverage: ordinaryMissing('jwst'), evidenceNames: { JWST: 'JWST', 'JAMES WEBB SPACE TELESCOPE': 'JWST' } },
+  hst: { modes: hstModes, modeKeys: value => modeRows(value, 'Hubble', 'configurations', 'Hubble', 'configuration'), missingCoverage: hstMissing, evidenceNames: { HST: 'Hubble', HUBBLE: 'Hubble', 'HUBBLE SPACE TELESCOPE': 'Hubble' } },
+  naco: { modes: nacoModes, modeKeys: value => modeRows(value, 'NACO', 'modes', 'VLT/NACO', 'mode'), missingCoverage: ordinaryMissing('naco'), evidenceNames: { NACO: 'VLT/NACO', 'NAOS+CONICA': 'VLT/NACO', 'VLT/NACO': 'VLT/NACO' } },
+  chandra: { modes: chandraModes, modeKeys: value => Object.keys(requireRecord(requireRecord(requireRecord(value, 'Chandra ledger').archive, 'archive').byInstrument, 'byInstrument')).map(mode => ({ telescope: 'Chandra', mode })), missingCoverage: ordinaryMissing('chandra'), evidenceNames: { CHANDRA: 'Chandra', CXO: 'Chandra' } },
+  juno: { modes: junoModes, modeKeys: () => [{ telescope: 'Juno', mode: 'JUNOCAM' }], missingCoverage: ordinaryMissing('juno'), evidenceNames: { JUNO: 'Juno', JUNOCAM: 'Juno' } },
+  spitzer: { modes: spitzerModes, modeKeys: value => modeRows(value, 'Spitzer', 'modes', 'Spitzer', 'mode'), missingCoverage: spitzerMissing, evidenceNames: { SPITZER: 'Spitzer' } },
+  gemini: { modes: geminiModes, modeKeys: value => modeRows(value, 'Gemini', 'capabilities', 'Gemini', 'instrument'), missingCoverage: ordinaryMissing('gemini'), evidenceNames: { GEMINI: 'Gemini' } },
+  keck: { modes: keckModes, modeKeys: value => modeRows(value, 'Keck', 'modes', 'Keck', 'instrument'), missingCoverage: ordinaryMissing('keck'), evidenceNames: { KECK: 'Keck' } },
+  ihw: { modes: ihwModes, modeKeys: value => modeRows(value, 'IHW', 'modes', 'IHW/PDS', 'mode'), missingCoverage: (ledger, _value, _target) => ({ telescope: 'ihw', ledger, state: 'not-searched', reason: 'This IHW dataset is a target-specific Halley collection; it is not a search of other targets.' }), evidenceNames: { 'IHW/PDS': 'IHW/PDS' } },
+  pds: { modes: pdsModes, modeKeys: value => requireArray(requireRecord(value, 'PDS ledger').modes, 'PDS modes').map(raw => { const entry = requireRecord(raw, 'PDS mode'); return {
+    telescope: requireString(entry.telescope, 'PDS telescope'), mode: requireString(entry.mode, 'PDS mode') }; }), missingCoverage: pdsMissing,
+    prepare: async (root, target, value) => { const observations = await sourcePds3Observations(root, target); return {
+      value: withSourcePds3Observations(value, target, observations), capabilities: sourcePds3Capabilities(observations) }; } },
+});
+const EVIDENCE_TELESCOPE_NAMES: Readonly<Record<string, string>> = Object.freeze(Object.assign({}, ...Object.values(ADAPTERS).map(adapter => adapter.evidenceNames ?? {})));
+
+function targetCoverage(telescope: string, adapter: ArchiveAdapter, ledgerPath: string, value: unknown, target: string, modes: readonly TargetMode[]): TargetCoverage {
   if (modes.length) return { telescope, ledger: ledgerPath, state: 'observed', reason: modes.some(mode => mode.targetAssociations?.length)
     ? `The ledger and cited target-in-field associations index ${modes.length} mode(s) for ${target}.`
     : `The ledger indexes ${modes.length} mode(s) for ${target}.` };
-  const ledger = requireRecord(value, `${telescope} ledger`);
-  if (telescope === 'spitzer') {
-    const skipped = (ledger.notAsked === undefined ? [] : requireArray(ledger.notAsked, 'notAsked')).map(raw => requireRecord(raw, 'notAsked target')).find(entry => entry.object === target);
-    if (skipped) return { telescope, ledger: ledgerPath, state: 'not-searched', reason: requireString(skipped.reason, 'notAsked reason') };
-    if ((ledger.unanswered === undefined ? [] : stringList(ledger.unanswered, 'unanswered')).includes(target)) return { telescope, ledger: ledgerPath, state: 'unanswered', reason: 'The archive query was attempted but returned no usable answer.' };
-    if ((ledger.searched === undefined ? [] : stringList(ledger.searched, 'searched')).includes(target))
-      return { telescope, ledger: ledgerPath, state: 'searched-empty', reason: `The complete Spitzer search set includes ${target} and returned no observation.` };
-    return { telescope, ledger: ledgerPath, state: 'not-searched', reason: `This Spitzer snapshot carries no completed search for ${target}.` };
-  }
-  if (telescope === 'hst' && (ledger.unansweredTargets === undefined ? [] : stringList(ledger.unansweredTargets, 'unansweredTargets')).includes(target))
-    return { telescope, ledger: ledgerPath, state: 'unanswered', reason: 'The MAST target query was attempted but returned no usable answer.' };
-  if (telescope === 'ihw') return { telescope, ledger: ledgerPath, state: 'not-searched', reason: 'This IHW dataset is a target-specific Halley collection; it is not a search of other targets.' };
-  if (telescope === 'pds') return (ledger.searched === undefined ? [] : stringList(ledger.searched, 'searched')).includes(target)
-    ? { telescope, ledger: ledgerPath, state: 'searched-empty', reason: `The complete scoped Peppi search includes ${target} and returned no supported observation.` }
-    : { telescope, ledger: ledgerPath, state: 'not-searched', reason: `This PDS snapshot carries no completed Peppi search for ${target}.` };
-  return { telescope, ledger: ledgerPath, state: 'not-searched', reason: `This ledger does not preserve an explicit searched-empty result for ${target}, so absence cannot support a scientific no.` };
+  return (adapter.missingCoverage ?? ordinaryMissing(telescope))(ledgerPath, value, target);
 }
 
 /** Every mode key the ledgers use, so `modes.json` can be tied to them and cannot drift. */
 export function ledgerModeKeys(ledgers: QueryInputs['ledgers']): { readonly telescope: string; readonly mode: string }[] {
   const keys = new Map<string, { telescope: string; mode: string }>();
   for (const { telescope, value } of ledgers) {
-    const ledger = requireRecord(value, `${telescope} ledger`);
     const add = (name: string, mode: string) => keys.set(`${name} :: ${mode}`, { telescope: name, mode });
-    if (telescope === 'jwst') for (const raw of requireArray(ledger.modes, 'modes')) add('JWST', requireString(requireRecord(raw, 'mode').mode, 'mode'));
-    if (telescope === 'hst') for (const raw of requireArray(ledger.configurations, 'configurations')) add('Hubble', requireString(requireRecord(raw, 'configuration').configuration, 'configuration'));
-    if (telescope === 'naco') for (const raw of requireArray(ledger.modes, 'modes')) add('VLT/NACO', requireString(requireRecord(raw, 'mode').mode, 'mode'));
-    if (telescope === 'chandra') for (const detector of Object.keys(requireRecord(requireRecord(ledger.archive, 'archive').byInstrument, 'byInstrument'))) add('Chandra', detector);
-    if (telescope === 'juno') add('Juno', 'JUNOCAM');
-    if (telescope === 'spitzer') for (const raw of requireArray(ledger.modes, 'modes')) add('Spitzer', requireString(requireRecord(raw, 'mode').mode, 'mode'));
-    if (telescope === 'gemini') for (const raw of requireArray(ledger.capabilities, 'capabilities')) add('Gemini', requireString(requireRecord(raw, 'capability').instrument, 'instrument'));
-    if (telescope === 'keck') for (const raw of requireArray(ledger.modes, 'modes')) add('Keck', requireString(requireRecord(raw, 'mode').instrument, 'instrument'));
-    if (telescope === 'ihw') for (const raw of requireArray(ledger.modes, 'modes')) add('IHW/PDS', requireString(requireRecord(raw, 'mode').mode, 'mode'));
-    if (telescope === 'pds') for (const raw of requireArray(ledger.modes, 'modes')) { const entry = requireRecord(raw, 'PDS mode'); add(requireString(entry.telescope, 'PDS telescope'), requireString(entry.mode, 'PDS mode')); }
+    const adapter = ADAPTERS[telescope];
+    if (!adapter) throw new TypeError(`No adapter reads the ${telescope} ledger.`);
+    for (const key of adapter.modeKeys(value)) add(key.telescope, key.mode);
   }
   return [...keys.values()].sort((a, b) => `${a.telescope}${a.mode}` < `${b.telescope}${b.mode}` ? -1 : 1);
 }
@@ -700,12 +754,13 @@ function constraintVerdicts(request: CapabilityRequest, mode: TargetMode, capabi
 function toolkitSupport(mode: TargetMode, target: string): ToolkitSupport {
   const { tool, routeState, refusedBecause, programs, checked, archiveFinal } = mode.toolkit;
   const qualified = archiveFinal?.qualified ?? [];
-  const pinned = forTarget(programs, target), passed = forTarget(checked, target), held = forTarget(qualified, target);
+  const pinned = mode.toolkit.targetPrograms ?? forTarget(programs, target), passed = mode.toolkit.targetChecked ?? forTarget(checked, target);
+  const held = mode.toolkit.targetPrograms === undefined ? forTarget(qualified, target) : qualified.filter(program => pinned.includes(program));
   // Re-calibrated and checked outranks archive-final, which outranks a tool nothing has been run through. They are never added
   // together: a mode reaches `archive-final` by having the observatory's own product read here, not by half-reproducing it.
   const level: ToolkitLevel = checked.length ? 'proven' : qualified.length ? 'archive-final'
     : tool || (routeState && routeState !== 'refused') ? 'tool-without-checked-program' : 'none';
-  const named = tool ? tool === 'pds.peppi + pdr' ? `${tool} retrieves and decodes products for this mode without recalibrating them`
+  const named = tool ? tool.startsWith('pds.') ? `${tool} retrieves and decodes products for this mode without recalibrating them`
     : level === 'archive-final' ? `${tool} retrieves and decodes this mode without recalibrating it` : `${tool} reduces this mode`
     : routeState ? `the route reached the state "${routeState}" on this mode` : 'no tool for this mode is named in the ledger';
   const archiveSaid = `${qualified.length} archive-final program(s) are qualified: ${qualified.join(', ')}. The archive's own final products were pinned, downloaded and read whole, which establishes those bytes and not a re-calibration here. ${held.length ? `${held.join(', ')} is a program of ${target}.` : `None of them is a program of ${target}.`}`;
@@ -718,6 +773,7 @@ function toolkitSupport(mode: TargetMode, target: string): ToolkitSupport {
   const evidenceBasis = level === 'proven' ? 'accepted-route-receipts' : level === 'archive-final' ? 'archive-origin' : 'none';
   const acceptanceCriterion = level === 'proven' ? 'receipt-valid-for-pinned-program' : level === 'archive-final' ? 'archive-bytes-qualified' : 'none';
   return { level, reason, productionMethod, evidenceBasis, acceptanceCriterion, ...(tool ? { tool } : {}), programs, checked, archiveFinalQualified: qualified,
+    targetPrograms: pinned, targetChecked: passed, targetArchiveFinalQualifiedPrograms: held,
     targetProgramPinned: pinned.length > 0, targetProgramChecked: passed.length > 0, targetArchiveFinalQualified: held.length > 0 };
 }
 
@@ -726,14 +782,11 @@ interface AttachedEvidence { bodyMaps: MeasuredResolution[]; investigations: { i
 /** The names a record may call a telescope, and the ledger telescope each one is. Evidence reaches a candidate only through
  * this table and an exact mode key, because a detector name that merely looks similar is a different instrument: a Hubble
  * STIS/CCD map says nothing about STIS/FUV-MAMA, which sees other wavelengths at another sampling. */
-const TELESCOPE_NAMES: Readonly<Record<string, string>> = Object.freeze({ JWST: 'JWST', 'JAMES WEBB SPACE TELESCOPE': 'JWST', HST: 'Hubble', HUBBLE: 'Hubble',
-  'HUBBLE SPACE TELESCOPE': 'Hubble', NACO: 'VLT/NACO', 'NAOS+CONICA': 'VLT/NACO', 'VLT/NACO': 'VLT/NACO', CHANDRA: 'Chandra', CXO: 'Chandra', JUNO: 'Juno', JUNOCAM: 'Juno',
-  SPITZER: 'Spitzer', GEMINI: 'Gemini', KECK: 'Keck' });
-
 /** The one mode a telescope and an instrument name identify, or the modes they could mean. Equality on the ledger's own mode
  * key is the rule; anything else is left unassigned. */
 export function resolveMode(telescope: string, instrument: string, modes: readonly TargetMode[]): { readonly mode?: TargetMode; readonly couldMean: readonly string[] } {
-  const named = TELESCOPE_NAMES[telescope.trim().toUpperCase()];
+  const input = telescope.trim().toUpperCase(), exactName = [...new Set(modes.map(mode => mode.telescope))].find(name => name.toUpperCase() === input);
+  const named = exactName ?? EVIDENCE_TELESCOPE_NAMES[input];
   if (!named) return { couldMean: [] };
   const ours = modes.filter(mode => mode.telescope === named);
   const exact = ours.filter(mode => mode.mode.toUpperCase() === instrument.trim().toUpperCase());
@@ -764,7 +817,7 @@ function resolveEvidence(inputs: QueryInputs, modes: readonly TargetMode[]): { r
       const text = `${subject} ${requireString(entry.finding, 'finding')}`.toUpperCase();
       const named = modes.filter(mode => text.includes(mode.mode.toUpperCase()));
       if (named.length === 1) { attached.get(named[0]!)!.investigations.push({ id, status, subject }); continue; }
-      const telescopes = [...new Set(Object.entries(TELESCOPE_NAMES).filter(([name]) => text.includes(name)).map(([, ledgerName]) => ledgerName))];
+      const telescopes = [...new Set(Object.entries(EVIDENCE_TELESCOPE_NAMES).filter(([name]) => text.includes(name)).map(([, ledgerName]) => ledgerName))];
       const couldMean = named.length > 1 ? named.map(mode => `${mode.telescope} ${mode.mode}`) : modes.filter(mode => telescopes.includes(mode.telescope)).map(mode => `${mode.telescope} ${mode.mode}`);
       if (couldMean.length) unassigned.push({ kind: 'investigation', source: inputs.investigations.path, identity: `${id}: ${subject}`, couldMean,
         reason: 'The entry names a telescope but no one mode key, so it is evidence about the telescope rather than about any one of its modes.' });
@@ -795,8 +848,8 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
   for (const ledger of inputs.ledgers) {
     const adapter = ADAPTERS[ledger.telescope];
     if (!adapter) throw new TypeError(`No adapter reads the ${ledger.telescope} ledger.`);
-    const modes = adapter(ledger.value, target, inputs.targetAssociations);
-    targetCoverageResults.push(targetCoverage(ledger.telescope, ledger.path, ledger.value, target, modes));
+    const modes = adapter.modes(ledger.value, target, inputs.targetAssociations);
+    targetCoverageResults.push(targetCoverage(ledger.telescope, adapter, ledger.path, ledger.value, target, modes));
     if (!modes.length) continue;
     for (const mode of modes) found.push({ ledger: ledger.path, mode });
   }
@@ -816,7 +869,8 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
   const incompleteIndex = !assessed.length && targetCoverageResults.some(entry => entry.state === 'not-searched' || entry.state === 'unanswered');
   const status = missingRequestFields(canonicalRequest).length ? 'request-incomplete' : selectableCandidates ? 'selectable-candidates' : incompleteIndex ? 'index-incomplete' : 'no-selectable-candidate';
   const coverageBlockers = !assessed.length ? targetCoverageResults.flatMap(entry => entry.state === 'not-searched' ? ['target-index-unavailable' as const]
-    : entry.state === 'unanswered' ? ['archive-query-unanswered' as const] : []) : [];
+    : entry.state === 'unanswered' ? ['archive-query-unanswered' as const]
+    : entry.state === 'unsupported-products' ? ['archive-products-unsupported' as const] : []) : [];
   const withoutTheTarget = targetCoverageResults.filter(entry => entry.state === 'searched-empty').map(({ telescope, ledger, reason }) => ({ telescope, ledger, reason }));
   return { target, request: canonicalRequest, targetResolution, unassignedEvidence: unassigned, targetCoverage: targetCoverageResults, withoutTheTarget, candidates: assessed,
     endpoint: { status, selectableCandidates, blockerCodes: [...new Set([...coverageBlockers, ...assessed.flatMap(candidate => candidate.selectionAssessment.blockers.map(blocker => blocker.code))])] } };
@@ -835,8 +889,7 @@ export function assessObservationSelection(answer: CapabilityAnswer, telescope: 
     blockers.push({ code: 'constraint', constraint, reason: `${telescope} ${mode} cannot answer this request: ${constraint}: ${verdict_.reason}` });
   if (candidate.toolkitSupport.level === 'none') blockers.push({ code: 'toolkit', reason: `${telescope} ${mode} has no usable toolkit: ${candidate.toolkitSupport.reason}` });
   if (request.result === 'body-map' && candidate.bodyMapSupport.answer === 'no') blockers.push({ code: 'body-map', reason: `${telescope} ${mode} cannot produce the requested body map: ${candidate.bodyMapSupport.reason}` });
-  const targetPrograms = [...candidate.toolkitSupport.programs, ...candidate.toolkitSupport.archiveFinalQualified]
-    .filter(value => value === answer.target || value.startsWith(`${answer.target}-`));
+  const targetPrograms = [...candidate.toolkitSupport.targetPrograms, ...candidate.toolkitSupport.targetArchiveFinalQualifiedPrograms];
   if (!targetPrograms.includes(programme)) blockers.push({ code: 'programme', reason: `${programme} is not a pinned or archive-final program of ${answer.target} in ${telescope} ${mode}; ${targetPrograms.length ? `choose one of ${targetPrograms.join(', ')}` : 'no pinned or archive-final program is available'}.` });
   return { candidate, blockers };
 }
@@ -886,13 +939,17 @@ export async function loadQueryInputs(root: string, target: string): Promise<Que
     }
   }
   const resolution = resolveTarget(target, targetCatalogue), canonicalTarget = resolution.status === 'resolved' ? resolution.canonical.id : target;
-  const ledgers: { telescope: string; path: string; value: unknown }[] = [];
+  const ledgers: { telescope: string; path: string; value: unknown }[] = [], dynamicCapabilities: ModeCapability[] = [];
   for (const telescope of LEDGER_TELESCOPES) {
     const path = `data/${telescope}/ledger.json`;
     const value = await readJsonSource(resolve(root, path)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
-    if (value !== undefined) ledgers.push({ telescope, path, value });
+    if (value !== undefined) {
+      const prepared = ADAPTERS[telescope]!.prepare ? await ADAPTERS[telescope]!.prepare!(root, canonicalTarget, value) : { value };
+      ledgers.push({ telescope, path, value: prepared.value });
+      if (prepared.capabilities) dynamicCapabilities.push(...prepared.capabilities);
+    }
   }
-  const capabilities = parseModeCapabilities(await readJsonSource(resolve(root, 'tools/objects/telescopes/modes.json')));
+  const capabilities = [...parseModeCapabilities(await readJsonSource(resolve(root, 'tools/objects/telescopes/modes.json'))), ...dynamicCapabilities];
   const associationSources = parseTargetAssociationSources(await readJsonSource(resolve(root, TARGET_ASSOCIATIONS_PATH)));
   const targetAssociations = await loadTargetAssociations(associationSources.filter(entry => entry.target === canonicalTarget));
   const source = resolve(root, 'src/objects', canonicalTarget, 'source');
@@ -933,7 +990,7 @@ export function formatAnswer(answer: CapabilityAnswer): string {
     lines.push(`  pinned toolkit programs: ${candidate.toolkitSupport.programs.join(', ') || 'none'}`);
     lines.push(`  checked toolkit programs: ${candidate.toolkitSupport.checked.join(', ') || 'none'}`);
     lines.push(`  qualified archive-final programs: ${candidate.toolkitSupport.archiveFinalQualified.join(', ') || 'none'}`);
-    const usable = [...forTarget(candidate.toolkitSupport.checked, answer.target), ...forTarget(candidate.toolkitSupport.archiveFinalQualified, answer.target)];
+    const usable = [...candidate.toolkitSupport.targetChecked, ...candidate.toolkitSupport.targetArchiveFinalQualifiedPrograms];
     lines.push(`  usable program of ${answer.target}: ${usable.join(', ') || 'none'}`);
     lines.push(`  evidence: ${candidate.evidence.ledger} (archive read ${candidate.evidence.archiveDate})${candidate.evidence.receipts.length ? `, receipts ${candidate.evidence.receipts.join(', ')}` : ''}`);
     for (const association of candidate.evidence.targetAssociations) lines.push(`    target in field: ${association.source}; MAST ${association.collection} via Astroquery ${association.astroquery}, queried ${association.queriedAt}; archive target ${association.archiveTarget}, programme ${association.programme}; ${association.establishes} (${association.citation}, ${association.locator})`);

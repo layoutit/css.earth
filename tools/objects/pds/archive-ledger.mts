@@ -15,6 +15,7 @@ export async function buildPdsLedger() {
   const modes = new Map<string, { telescope: string; mode: string; programs: string[]; qualified: string[]; receipts: string[] }>();
   const objects = new Map<string, { id: string; observations: Record<string, unknown>[] }>();
   const searched = new Set<string>();
+  const searchResults: { target: string; registryProducts: number; admittedProducts: number; rejected: { lidvid: string; reason: string }[]; scope: unknown }[] = [];
   const harvestDates: string[] = [];
   const discoveryPath = resolve(ROOT, 'data/pds/discovery.json');
   const discovery = await readFile(discoveryPath, 'utf8').then(text => requireRecord(JSON.parse(text) as unknown, 'PDS discovery')).catch((error: unknown) => {
@@ -30,7 +31,12 @@ export async function buildPdsLedger() {
       const target = requireRecord(search.target, 'PDS discovery target'), targetId = requireString(target.id, 'PDS target id');
       searched.add(targetId);
       harvestDates.push(requireString(search.searchedAt, 'PDS search date').slice(0, 10));
-      for (const raw of requireArray(search.observations, 'PDS discovered observations')) {
+      const discoveredObservations = requireArray(search.observations, 'PDS discovered observations');
+      const rejected = (search.rejected === undefined ? [] : requireArray(search.rejected, 'PDS rejected products')).map(raw => { const row = requireRecord(raw, 'PDS rejected product'); return {
+        lidvid: requireString(row.lidvid, 'PDS rejected lidvid'), reason: requireString(row.reason, 'PDS rejection reason') }; });
+      searchResults.push({ target: targetId, registryProducts: Number(search.registryProducts ?? discoveredObservations.length + rejected.length),
+        admittedProducts: discoveredObservations.length, rejected, scope: search.scope });
+      for (const raw of discoveredObservations) {
         const observation = requireRecord(raw, 'PDS discovered observation'), telescope = requireString(observation.telescope, 'PDS telescope'), mode = requireString(observation.mode, 'PDS mode');
         const key = `${telescope} :: ${mode}`;
         if (!modes.has(key)) modes.set(key, { telescope, mode, programs: [], qualified: [], receipts: [] });
@@ -70,7 +76,8 @@ export async function buildPdsLedger() {
       units: observation.units, program: id });
     objects.set(target, object);
   }
-  return { schema: PDS_LEDGER_SCHEMA, archiveDate: harvestDates.sort().at(-1) ?? 'unknown', searched: [...searched].sort(), modes: [...modes.values()], objects: [...objects.values()] } as const;
+  return { schema: PDS_LEDGER_SCHEMA, archiveDate: harvestDates.sort().at(-1) ?? 'unknown', searched: [...searched].sort(), searches: searchResults,
+    modes: [...modes.values()], objects: [...objects.values()] } as const;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

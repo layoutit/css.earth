@@ -143,6 +143,12 @@ pnpm telescope:query --target europa --wavelength 3.4,3.6 --kind cube \
 smaller `--min-arcsec` or `--min-km` asks for sharper data. For machine input, `pnpm --silent telescope:query ... --json`
 writes JSON alone; ordinary `pnpm` prints its script banner before the program's stdout.
 
+Every archive enters that command through the same adapter contract. JWST, HST, NACO, Chandra, JunoCam, Spitzer, Gemini,
+Keck, IHW and PDS each own how their ledger becomes candidate modes, how mode keys and evidence names are interpreted, what
+absence means, and whether target-specific inputs must be prepared. The shared query only compares the resulting candidates
+with the scientific request. Instrument-specific reducers remain separate because their processing and validation are
+different science, not archive plumbing.
+
 The target is resolved through the source object descriptors that generate the shipped catalogue. An id, display name or
 catalogue alias resolves to one canonical id. A near spelling is never silently substituted: it returns the distinct
 `unknown-target` endpoint with ranked suggestions and no archive negatives. This matters because "the target is not shipped"
@@ -162,12 +168,16 @@ programs, accepted receipts, archive-final qualification, and whether the reposi
 observations and products are resolved again from MAST when a workflow uses them. The same shared MAST adapter serves HST and
 JWST; telescope code does not implement the archive protocol.
 
-Every ledger also returns a target-coverage state: `observed`, `searched-empty`, `not-searched` or `unanswered`. Only
+Every ledger also returns a target-coverage state: `observed`, `searched-empty`, `unsupported-products`, `not-searched` or `unanswered`. Only
 `searched-empty` is an archive negative. A query with no candidates and any incomplete coverage ends at `index-incomplete`
 with `target-index-unavailable` or `archive-query-unanswered`; it cannot silently turn an unattempted lookup into “no data.”
 Spitzer retains every successfully searched target id, including completed empty searches, so an object added after an older
 snapshot remains `not-searched`. TAP-backed ledger builders likewise accept rows only when PyVO reports query status `OK`;
 an overflow is an incomplete result and stops the ledger build.
+
+PDS uses `unsupported-products` when Peppi returned registry products but none could be normalized into a supported
+observation. The result retains the search scope, registry count, admitted count and each rejection reason. That state is
+never presented as an empty archive.
 
 It returns one candidate per mode that observed the target, the ones that cover the requested wavelengths first, and each
 candidate answers four separate things:
@@ -259,15 +269,23 @@ one action per time-matching AOR. For example, the Bennu 3.5–3.9 micrometre re
 that action pinned the archive inputs, produced and compared the mosaic, refreshed the ledger's program and receipt identities,
 and changed the same query from `target-program-unqualified` to a selectable `bennu-21415424` program.
 
-PDS discovery is a complete search within an explicit scope, rather than an exact-product lookup disguised as discovery:
+`telescope:query` is the scientific search entrypoint. Its PDS adapter combines committed Peppi/PDS4 results with complete
+PDS3 products already pinned by object source manifests. A caller does not run archive commands before asking a scientific
+question. For example, Wild 2's exact Stardust NAVCAM labels and science-file pins become query candidates directly; their
+PDS3 labels establish product identity, time, filter, units and surface sampling while leaving the undocumented filter width
+unresolved.
+
+`telescope:discover` is an operator command for auditing or refreshing one archive. It resolves the object's names and
+source-label target names against PDS context products through Peppi; cssEarth keeps no target-LID lookup table. PDS discovery
+is a complete search within an explicit scope, rather than an exact-product lookup disguised as discovery:
 
 ```
 pnpm telescope:discover --archive pds --target charon --write
 ```
 
-Peppi exhausts the target's derived observational products. cssEarth verifies every returned label against the Registry,
+Peppi exhausts the target's `Product_Observational` records across processing levels. cssEarth verifies every returned label against the Registry,
 retains each target's search scope and total without replacing earlier searches, and indexes only product profiles whose scientific metadata it understands. The Charon
-acceptance route reads all 28 derived products and admits the mapped MVIC color product because its own PDS4 label supplies
+acceptance route reads all 28 registry products in the committed search and admits the mapped MVIC color product because its own PDS4 label supplies
 four wavelength bins, cartography and 1 km grid sampling. Its emitted qualification action pins the complete label and image,
 uses pdr to decode all 29,001,728 array elements, applies the label's finite missing-value constant to the recorded statistics,
 and writes an `archive-final` receipt. A fresh 0.5–0.7 micrometre Charon request then selects the qualified product directly;

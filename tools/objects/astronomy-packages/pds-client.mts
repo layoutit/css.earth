@@ -4,13 +4,15 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { pdsToolchain } from './pds-toolchain.mts';
 
 export type PdsPackageRequest =
-  | { readonly operation: 'discover-target'; readonly targetLid: string; readonly processingLevel: 'Derived' }
+  | { readonly operation: 'resolve-target'; readonly names: readonly string[] }
+  | { readonly operation: 'discover-target'; readonly targetLid: string }
   | { readonly operation: 'discover-product'; readonly targetLid: string; readonly lidvid: string }
   | { readonly operation: 'decode-product'; readonly labelPath: string };
 
 export interface PdsPackageAnswer {
   readonly schema: 'cssearth-pds-package-answer@1'; readonly peppi: string; readonly pdr: string;
   readonly operation: PdsPackageRequest['operation']; readonly products?: readonly Record<string, unknown>[];
+  readonly targets?: readonly { readonly lid: string; readonly name: string; readonly aliases: readonly string[]; readonly type: string; readonly harvestIso: string }[];
   readonly decoded?: { readonly standard: string; readonly metadata: Record<string, unknown>; readonly structures: readonly Record<string, unknown>[] };
 }
 
@@ -36,7 +38,22 @@ def value(item):
     if isinstance(item, (str, int, float, bool)): return item
     return str(item)
 
-if operation in ('discover-target', 'discover-product'):
+if operation == 'resolve-target':
+    names = request['names']
+    if not names or any(not isinstance(name,str) or not name or len(name) > 200 or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ._()/+-'" for c in name) for name in names):
+        raise ValueError('PDS target names contain unsupported characters')
+    quoted = lambda text: text.replace('\\','\\\\').replace('"','\\"')
+    clauses = [f'(pds:Target.pds:name eq "{quoted(name)}" or pds:Alias.pds:alternate_title eq "{quoted(name)}")' for name in names]
+    fields = ['lid','pds:Target.pds:name','pds:Alias.pds:alternate_title','pds:Target.pds:type','ops:Harvest_Info.ops:harvest_date_time']
+    table = pep.Products(pep.PDSRegistryClient()).filter('product_class eq "Product_Context"').filter(' or '.join(clauses)).fields(fields).as_dataframe(max_rows=None)
+    rows = [] if table is None else [{str(name):value(row[name]) for name in table.columns} for _,row in table.iterrows()]
+    by_lid = {}
+    for row in rows:
+        lid = row['lid']; aliases = row.get('pds:Alias.pds:alternate_title') or []
+        if not isinstance(aliases,list): aliases = [aliases]
+        by_lid[lid] = {'lid':lid,'name':row['pds:Target.pds:name'],'aliases':aliases,'type':row['pds:Target.pds:type'],'harvestIso':row['ops:Harvest_Info.ops:harvest_date_time']}
+    answer['targets'] = list(by_lid.values())
+elif operation in ('discover-target', 'discover-product'):
     target = request['targetLid']; lidvid = request.get('lidvid')
     identifiers = target + (lidvid or '')
     if not target.startswith('urn:nasa:pds:context:target:') or (lidvid is not None and not lidvid.startswith('urn:nasa:pds:')) or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:._-' for c in identifiers):
@@ -46,11 +63,7 @@ if operation in ('discover-target', 'discover-product'):
       'ref_lid_target','pds:Observing_System_Component.pds:name','pds:Time_Coordinates.pds:start_date_time','pds:Time_Coordinates.pds:stop_date_time',
       'pds:Primary_Result_Summary.pds:processing_level','ops:Harvest_Info.ops:harvest_date_time']
     query = pep.Products(pep.PDSRegistryClient()).has_target(target).observationals()
-    if operation == 'discover-target':
-        level = request['processingLevel']
-        if level != 'Derived': raise ValueError('Unsupported PDS processing level')
-        query = query.filter(f'pds:Primary_Result_Summary.pds:processing_level eq "{level}"')
-    else: query = query.filter(f'lidvid eq "{lidvid}"')
+    if operation == 'discover-product': query = query.filter(f'lidvid eq "{lidvid}"')
     table = query.fields(fields).as_dataframe(max_rows=None if operation == 'discover-target' else 2)
     answer['products'] = [] if table is None else [{str(name):value(row[name]) for name in table.columns} for _,row in table.iterrows()]
 elif operation == 'decode-product':
@@ -152,6 +165,13 @@ export function parsePdsPackageAnswer(value: unknown, request: PdsPackageRequest
   const raw = requireRecord(value, 'PDS package answer');
   if (raw.schema !== 'cssearth-pds-package-answer@1' || raw.operation !== request.operation || raw.peppi !== peppiVersion || raw.pdr !== pdrVersion)
     throw new TypeError('PDS packages answered with the wrong contract, operation or versions.');
+  if (request.operation === 'resolve-target') {
+    const targets = requireArray(raw.targets, 'PDS targets').map((entry, index) => { const target = requireRecord(entry, `PDS target ${index}`); return {
+      lid: requireString(target.lid, 'PDS target lid'), name: requireString(target.name, 'PDS target name'),
+      aliases: requireArray(target.aliases, 'PDS target aliases').map(alias => requireString(alias, 'PDS target alias')),
+      type: requireString(target.type, 'PDS target type'), harvestIso: requireString(target.harvestIso, 'PDS target harvest time') }; });
+    return { schema: 'cssearth-pds-package-answer@1', peppi: peppiVersion, pdr: pdrVersion, operation: request.operation, targets };
+  }
   if (request.operation === 'discover-product' || request.operation === 'discover-target') {
     const products = requireArray(raw.products, 'PDS products').map((entry, index) => requireRecord(entry, `PDS product ${index}`));
     if (request.operation === 'discover-product' && products.length > 1) throw new Error(`${request.lidvid} is not a unique PDS product.`);
