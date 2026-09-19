@@ -17,7 +17,7 @@ interface PrepareRequest {fromId: string; toId: string; fromMount: ShellCamera |
 interface FlightCheckpoint {world: WorldCamera; elapsedS: number; time?: number;}
 /** Shared by every segment of one navigation, so a wheel keeps hurrying it across the handoff. */
 interface FlightPace {speed: number;}
-interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera) => void; stopWhen?: (elapsedS: number) => boolean; pace?: FlightPace;}
+interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera, elapsedS: number) => void; stopWhen?: (elapsedS: number) => boolean; pace?: FlightPace;}
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
 import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
@@ -193,8 +193,17 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       signal.addEventListener('abort', cancel, { once: true });
       if (signal.aborted) cancel();
       const events = ['pointerdown', 'keydown'];
+      // Stopping between bodies strands the camera far from the destination, often facing
+      // along its path with the target off screen. Input there hurries the navigation like
+      // a wheel; it stops the view only before any motion or once the approach is drawn.
+      let moved = false, approaching = false;
       const interrupt = (event: Event) => {
         if (!isFlightInput(event)) return;
+        if (moved && !approaching) {
+          event.preventDefault(); event.stopImmediatePropagation();
+          pace.speed = FLIGHT_WHEEL_SPEEDUP;
+          return;
+        }
         const error = cancelled(); error.preserveView = true;
         controller.abort(error);
       };
@@ -234,9 +243,9 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         return value;
       });
       preparation.catch(() => {});
-      let moved = false;
-      const onPaint = (world: WorldCamera) => {
+      const onPaint = (world: WorldCamera, elapsedS: number) => {
         lastCamera = world;
+        if (elapsedS >= approachLimitS) approaching = true;
         if (!moved && (world.pose.positionM.some((value, axis) => value !== from.pose.positionM[axis]) ||
             world.pose.orientationXyzw.some((value, axis) => value !== from.pose.orientationXyzw[axis]))) {
           moved = true; timing.mark('first-motion');
@@ -435,7 +444,7 @@ export function animateWorldFlight({ owner, from, flight, anchors, signal, reduc
           if (finished) return;
           if (!shown) elapsedS = previousElapsed;
           else {
-            if (publishedElapsed !== elapsedS) { onPaint(world); publishedElapsed = elapsedS; }
+            if (publishedElapsed !== elapsedS) { onPaint(world, elapsedS); publishedElapsed = elapsedS; }
             if (elapsedS >= endElapsedS || stopWhen(elapsedS)) { finish(null, { world, elapsedS, time }); return; }
           }
           // An asynchronous publication already crossed its presentation rAF.
