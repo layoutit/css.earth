@@ -37,10 +37,12 @@ export async function openSpectralCube(path: string): Promise<SpectralCube> {
   return { path, width, height, planes, wavelength: plane => first + (plane + 1 - reference) * step, arcsecPerPixel: scale * 3600, primary: hdus[0]!.header, science: header, sci, err };
 }
 
-/** Mean brightness and its error in a wavelength window, per pixel. A sample that is NaN, or zero where the cube has no
- * coverage, is left out; a pixel with fewer than half the window's samples is NaN. */
-export async function windowMean(cube: SpectralCube, [from, to]: Window): Promise<{ mean: Float64Array; error: Float64Array }> {
-  const pixels = cube.width * cube.height, bytes = pixels * 4, sum = new Float64Array(pixels), variance = new Float64Array(pixels), count = new Uint32Array(pixels);
+/** Mean brightness and its error in a wavelength window, per pixel, and the wavelength that mean belongs to. A sample that is
+ * NaN, or zero where the cube has no coverage, is left out; a pixel with fewer than half the window's samples is NaN. When a
+ * sample is left out the mean of the rest sits at the mean of THEIR wavelengths, not at the window's middle, so that
+ * wavelength is carried with it: on a sloping spectrum, placing a lopsided mean at the nominal centre invents a band. */
+export async function windowMean(cube: SpectralCube, [from, to]: Window): Promise<{ mean: Float64Array; error: Float64Array; wavelength: Float64Array }> {
+  const pixels = cube.width * cube.height, bytes = pixels * 4, sum = new Float64Array(pixels), variance = new Float64Array(pixels), count = new Uint32Array(pixels), reach = new Float64Array(pixels);
   const planes = Array.from({ length: cube.planes }, (_, plane) => plane).filter(plane => cube.wavelength(plane) >= from && cube.wavelength(plane) <= to);
   if (planes.length < 2) throw new RangeError(`The cube has ${planes.length} planes between ${from} and ${to} µm.`);
   const file = await open(cube.path, 'r'), sci = Buffer.alloc(bytes), err = Buffer.alloc(bytes);
@@ -50,29 +52,31 @@ export async function windowMean(cube: SpectralCube, [from, to]: Window): Promis
       for (let pixel = 0; pixel < pixels; pixel++) {
         const value = sci.readFloatBE(pixel * 4), sigma = err.readFloatBE(pixel * 4);
         if (!Number.isFinite(value) || !Number.isFinite(sigma) || value === 0) continue;
-        sum[pixel]! += value; variance[pixel]! += sigma * sigma; count[pixel]!++;
+        sum[pixel]! += value; variance[pixel]! += sigma * sigma; count[pixel]!++; reach[pixel]! += cube.wavelength(plane);
       }
     }
   } finally { await file.close(); }
-  const mean = new Float64Array(pixels), error = new Float64Array(pixels);
+  const mean = new Float64Array(pixels), error = new Float64Array(pixels), wavelength = new Float64Array(pixels);
   for (let pixel = 0; pixel < pixels; pixel++) {
     const n = count[pixel]!, enough = n >= planes.length / 2;
-    mean[pixel] = enough ? sum[pixel]! / n : NaN; error[pixel] = enough ? Math.sqrt(variance[pixel]!) / n : NaN;
+    mean[pixel] = enough ? sum[pixel]! / n : NaN; error[pixel] = enough ? Math.sqrt(variance[pixel]!) / n : NaN; wavelength[pixel] = enough ? reach[pixel]! / n : NaN;
   }
-  return { mean, error };
+  return { mean, error, wavelength };
 }
 
 export interface BandRecipe { readonly band: Window; readonly continuum: readonly [Window, Window] }
 export interface BandDepthMap { readonly width: number; readonly height: number; readonly depth: Float64Array; readonly error: Float64Array; readonly continuum: Float64Array }
 
-/** The band's depth in every pixel, its one-sigma error, and the continuum brightness at the band's centre. */
+/** The band's depth in every pixel, its one-sigma error, and the continuum brightness under the band. The continuum is the
+ * straight line through the two window means, each placed at the wavelength its retained samples average to, read at the
+ * wavelength the band's retained samples average to: in every pixel the three means are compared where they actually sit. */
 export async function bandDepth(cube: SpectralCube, recipe: BandRecipe): Promise<BandDepthMap> {
-  const [left, right] = recipe.continuum, centre = (recipe.band[0] + recipe.band[1]) / 2, leftCentre = (left[0] + left[1]) / 2, rightCentre = (right[0] + right[1]) / 2;
+  const [left, right] = recipe.continuum;
   if (!(left[1] <= recipe.band[0] && recipe.band[1] <= right[0])) throw new RangeError('The continuum windows lie on either side of the band.');
-  const t = (centre - leftCentre) / (rightCentre - leftCentre);
   const [a, b, c] = await Promise.all([windowMean(cube, left), windowMean(cube, recipe.band), windowMean(cube, right)]);
   const pixels = cube.width * cube.height, depth = new Float64Array(pixels), error = new Float64Array(pixels), continuum = new Float64Array(pixels);
   for (let pixel = 0; pixel < pixels; pixel++) {
+    const t = (b.wavelength[pixel]! - a.wavelength[pixel]!) / (c.wavelength[pixel]! - a.wavelength[pixel]!);
     const level = (1 - t) * a.mean[pixel]! + t * c.mean[pixel]!, levelError = Math.hypot((1 - t) * a.error[pixel]!, t * c.error[pixel]!), ratio = b.mean[pixel]! / level;
     continuum[pixel] = level; depth[pixel] = level > 0 ? 1 - ratio : NaN;
     error[pixel] = level > 0 ? Math.abs(ratio) * Math.hypot(b.error[pixel]! / b.mean[pixel]!, levelError / level) : NaN;
