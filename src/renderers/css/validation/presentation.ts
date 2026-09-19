@@ -190,10 +190,26 @@ export function requireOptionalPresentation(plan: Record<string, unknown>, tree:
 
 /** Prepared nomenclature labels: a pinned catalogue anchored to one scene mesh, shown for declared lenses. */
 export function requireSurfaceFeatures(value: unknown, tree: PreparedTree, lensIds: readonly string[]): void {
-  const features = record(value, 'surface features', ['catalog', 'target', 'lensIds', 'meshRadiusUnits', 'policy', 'outline', 'surfaceRadiusUnits', 'surfaceEllipsoidUnits']);
+  const features = record(value, 'surface features', ['catalog', 'selection', 'target', 'lensIds', 'meshRadiusUnits', 'policy', 'outline', 'surfaceRadiusUnits', 'surfaceEllipsoidUnits']);
   const catalog = record(features.catalog, 'surface feature catalog', ['url', 'bytes', 'sha256', 'count']);
   if (!text(catalog.url, 'feature catalog URL').startsWith('/scenes/') || !/^[a-f0-9]{64}$/.test(text(catalog.sha256, 'feature catalog hash'))) fail('surface features require a pinned catalogue');
   integer(catalog.bytes, 'feature catalog bytes', 1); integer(catalog.count, 'feature catalog count', 1);
+  if (features.selection !== undefined) {
+    const selection = record(features.selection, 'surface feature selection', ['count', 'banks']);
+    const count = integer(selection.count, 'surface feature selection count', 1);
+    const banks = array(selection.banks, 'surface feature selection banks');
+    if (!banks.length || banks.length > 256) fail('surface feature selection banks are out of range');
+    let found = 0;
+    const urls: string[] = [];
+    for (const [index, value] of banks.entries()) {
+      const bank = record(value, `surface feature selection bank ${index}`, ['url', 'bytes', 'sha256', 'count']);
+      const url = text(bank.url, 'feature selection bank URL');
+      if (!url.startsWith('/scenes/') || !/^[a-f0-9]{64}$/.test(text(bank.sha256, 'feature selection bank hash'))) fail('surface feature selection requires pinned banks');
+      integer(bank.bytes, 'feature selection bank bytes', 1); found += integer(bank.count, 'feature selection bank count', 1); urls.push(url);
+    }
+    unique(urls, 'surface feature selection bank URLs');
+    if (found !== count) fail('surface feature selection bank counts drifted');
+  }
   if (!ancestor(nodeReference(features.target, tree), tree.scene, tree)) fail('surface feature target must belong to scene');
   const lenses = array(features.lensIds, 'surface feature lenses').map(id => text(id, 'surface feature lens'));
   unique(lenses, 'surface feature lenses');

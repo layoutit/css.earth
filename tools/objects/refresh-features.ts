@@ -23,13 +23,28 @@ export async function refreshObjectFeatures(id: string): Promise<{ count: number
   if (!attached.features) throw new TypeError(`${id} declares features but attached none.`);
   await writeFeatureContent(outputDirectory, attached.features);
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(attached.definition)}\n`);
-  // Only the catalogue changed among the delivered assets: replace its entry in the existing runtime manifest.
+  // Only the feature transport changed among the delivered assets: replace its label catalogue and selection banks.
   const manifestPath = resolve(objectDirectory, 'runtime-assets.json');
   const manifest = parseRuntimeManifest(JSON.parse(await readFile(manifestPath, 'utf8')), id);
-  const catalogName = String(record(record(record(attached.definition, 'definition').features, 'features plan').catalog, 'catalog').url).split('/').at(-1)!;
-  const bytes = await readFile(resolve(publicDirectory, catalogName));
-  const entry = { filename: catalogName, bytes: bytes.byteLength, sha256: sha256(bytes) };
-  const assets = manifest.assets.some(asset => asset.filename === catalogName) ? manifest.assets.map(asset => asset.filename === catalogName ? entry : asset) : [...manifest.assets, entry].sort((a, b) => a.filename.localeCompare(b.filename));
+  const plan = record(record(attached.definition, 'definition').features, 'features plan');
+  const catalog = record(plan.catalog, 'catalog');
+  const urls = [String(catalog.url)];
+  if (plan.selection !== undefined) {
+    const selection = record(plan.selection, 'feature selection');
+    if (!Array.isArray(selection.banks)) throw new TypeError('Feature selection banks are missing.');
+    for (const value of selection.banks) urls.push(String(record(value, 'feature selection bank').url));
+  }
+  const filenames = urls.map(url => url.split('/').at(-1)!);
+  const catalogName = filenames[0]!;
+  const stem = catalogName.replace(/\.json$/u, '');
+  const entries = [];
+  for (const filename of filenames) {
+    const bytes = await readFile(resolve(publicDirectory, filename));
+    entries.push({ filename, bytes: bytes.byteLength, sha256: sha256(bytes) });
+  }
+  const assets = [...manifest.assets.filter(asset => asset.filename !== catalogName &&
+    !(asset.filename.startsWith(`${stem}-selection-`) && asset.filename.endsWith('.json'))), ...entries]
+    .sort((a, b) => a.filename.localeCompare(b.filename));
   const manifestText = `${JSON.stringify({ ...manifest, assets }, null, 2)}\n`;
   await writeFile(manifestPath, manifestText);
   const { prepareObjectProvenance } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
@@ -40,8 +55,8 @@ export async function refreshObjectFeatures(id: string): Promise<{ count: number
   const writer = record(await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-object-json.mts')).href), 'prepared object writer');
   if (typeof writer.writeObjectJson !== 'function') throw new TypeError('Prepared object writer is missing.');
   await (writer.writeObjectJson as (objectId: string, runtime: Record<string, unknown>) => Promise<unknown>)(id, attached.definition as Record<string, unknown>);
-  const plan = record(record(attached.definition, 'definition').features, 'features plan');
-  return { count: Number(record(plan.catalog, 'catalog').count) };
+  return { count: Number(record(plan.catalog, 'catalog').count) +
+      (plan.selection === undefined ? 0 : Number(record(plan.selection, 'selection').count)) };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
