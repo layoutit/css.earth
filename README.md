@@ -18,7 +18,7 @@ css.earth outputs one URL per celestial body with a shared camera, so you can fl
 
 - **Stars and exoplanets:** stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and planetary systems beyond the Sun, such as WASP-43, HD 189733 and TRAPPIST-1.
 
-<img src=".github/assets/stars-exoplanets.webp" alt="Betelgeuse's imaged surface, and the WASP-43 system with its planet WASP-43b, rendered as DOM and CSS markup" width="960">
+<img src=".github/assets/stars-exoplanets.webp" alt="Betelgeuse's imaged surface, and the TRAPPIST-1 system with its seven planets, rendered as DOM and CSS markup" width="960">
 
 - **Interstellar visitors:** 'Oumuamua, Borisov and 3I/ATLAS.
 
