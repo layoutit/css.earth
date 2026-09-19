@@ -1,13 +1,182 @@
 ---
-name: nebula-processing
-description: "Process a galaxy or nebula image in the local Nebula Lab: acquire and pin observations, register direction and angular scale, compare with an appropriate density prior, remove stars with NOX, and bake/inspect a reproducible PolyCSS 3D model. Use for adding an image candidate, processing a new nebula, preparing a reconstruction variant, or diagnosing alignment, coverage, separation and depth artifacts."
+name: nebula-lab
+description: "The Nebula Lab: cssEarth's volumetric baking lab. Turn images plus a spatial prior into a 3D emission field and bake it into stacked axis-aligned slab textures PolyCSS composites. Use to understand what the lab is, its packages, boundaries, routes and baking methods, to process a new image candidate end to end, and to avoid the defects that cost whole rounds before."
 ---
 
-# Nebula image to baked 3D model
+# Nebula Lab
 
-Work in `labs/nebula`. Read its `AGENTS.md`, `METHOD.md`, `docs/workflows.md`, `docs/reconstruction.md` and `docs/nebula-compiler-guidelines.md` before changing the pipeline. They define the actual app, evidence intake and numerical gates; this skill explains how to apply them to another source.
+A **volumetric baking lab**. It takes registered images and a spatial prior, fits a
+three-dimensional emission field, and bakes that field into stacked slab textures the shared
+PolyCSS renderer composites. Nothing is derived at runtime.
 
-The internal packages are `labs/nebula/packages/{lab,volume-core,volume-bake,reconstruction,volume-viewer}`. Research commands use `node labs/nebula/run.mts <command>`; ordinary application replay uses `node tools/nebula/prepare.mts --if-missing`. Algorithms belong to reconstruction/core, baking to volume-bake, and UI/jobs/configuration to lab. Consume public package exports; cssEarth integration belongs in lab adapters. Read `labs/nebula/docs/internal-packages.md` for the exact validation boundaries.
+## The name
+
+Before Hubble settled the Great Debate in 1925, every diffuse object in the sky was a
+*nebula* — the word simply means cloud. Nobody yet knew which fuzzy patches were gas, which
+were star clusters, and which were whole galaxies beyond the Milky Way, so one catalogue held
+them all: the Magellanic Clouds were *Nubecula Major* and *Minor*, Andromeda was the Andromeda
+Nebula, the globulars were nebulae until telescopes resolved their stars, and the "planetary"
+nebulae were named for resembling little planetary discs, which they are not.
+
+The lab keeps that appearance-first scope on purpose. It bakes anything extended that evidence
+can constrain: gas clouds and nearby galaxies today, circumstellar gas and terrestrial volumes
+with the same machine and a different prior. The name is the historical class, not a claim
+about the physics of any one subject.
+
+## The output shape
+
+One fitted field becomes three stacks of leaves, one per axis (X, Y, Z). The viewer shows
+whichever stack faces the camera and swaps at the handoff, so the volume reads solid from any
+angle — leaves on every side. Slabs pack into per-axis atlases for delivery. Inspect the
+handoff explicitly: brightness and colour agreement between banks is an acceptance criterion,
+not a detail.
+
+## Packages and boundaries
+
+`labs/nebula/packages/{lab,volume-core,volume-bake,reconstruction,volume-viewer}`.
+
+- **volume-core** — pure contracts, fields, materials, coordinates. No node builtins, no sharp, no React.
+- **volume-bake** — baking and compact-input IO; may read files.
+- **reconstruction** — fitting and registration algorithms; object-agnostic, ≤600 lines per file.
+- **lab** — React app, processing server, CLI orchestration, recipes, viewer adapters.
+- **volume-viewer** — the retained-DOM scene.
+
+`pnpm check:nebula-boundaries` enforces the graph: a package may import itself, anything may
+import volume-core, and only `lab` may import the rest. **The cssEarth app (`src/`, `site/`,
+`tools/`) may import only volume-core and volume-bake.** Never widen the rule to make code fit;
+move the pure part down and keep a lab-side re-export shim. Moving code between packages
+changes the implementation pins recorded in every delivered file, which forces a re-bake —
+plan relocations before a delivery, not after.
+
+## Routes and commands
+
+- `/alignment?subject=<id>` — registration and overlays. `/reconstruction?subject=<id>` — model, lenses, stars, and the diagnostic tool column (levels, difference map).
+- A result opens directly as `?subject=reconstruction-<resultId>`.
+- Subjects: `labs/nebula/packages/lab/src/state/subjects.json`. Per-object recipes: `labs/nebula/models/<object>/`.
+- Research: `node labs/nebula/run.mts <command>`. Application replay: `node tools/nebula/prepare.mts --if-missing` (run by `prebuild`).
+- Star layers for a finite model: `prepare-smc-stars [recipe]` and `prepare-lmc-finite-stars [recipe]`, both thin wrappers over one shared placement owner (`server/workflows/stars/finite-model-star-layer.ts`).
+- Lens discovery reads `.local/nebula-lab/finite-lenses-<modelResultId>.json`; a model's star layer comes from `finite-stars-<modelResultId>.json`. Newest valid model wins; an invalid bundle is skipped, never silently merged.
+
+## Ways of baking a volume
+
+Pick by what the evidence supports, not by habit.
+
+| Method | Input | Constrains | Use when |
+| --- | --- | --- | --- |
+| **Repaint** `alignment-density-material-v1` | fixed density + one registered image | the Earth-facing view only | legacy; historical comparisons |
+| **Sampled / compiler** | qualified spatial tables, symmetry or kinematics | real 3D structure from measurements | a measured spatial product exists (`docs/sampled-volumes.md`, `docs/nebula-compiler.md`) |
+| **Fixed-density finite region** | density + image, finite regions | colour on finite supports | superseded by the two-scale fit |
+| **Two-scale finite emission** `simulation-guided-finite-emission@1` | image + spatial prior | broad shape from the prior, detail fitted from the image | the current default for clouds and galaxies |
+| **Axial symmetry** | one image + a symmetry hypothesis | rotationally symmetric shells | planetary nebulae (`docs/planetary-nebulae.md`) |
+
+Two-scale in one line: broad light is `gain(x,y) × prior(x,y,z)` with `gain = fraction × blur(image) / blur(column)`; finite components fit the residual at prior-supported depths, so image brightness scales the envelope and never moves it in depth. Example recipe: `labs/nebula/models/smc/constrained/emission-envelope-ellipsoid.json`, with its method note beside it.
+
+**Lenses:** every image recolours one shared geometry, so switching lens changes colour, never shape. **The prior is a hypothesis, never a measurement** — prefer one that scores better against observations; for the SMC a VMC-constrained ellipsoid beat the tidal simulation (withheld deviance 0.457 vs 0.601).
+
+## Matching a lens to its image
+
+Colour and tone are measured, then fitted — never tuned by eye.
+
+**Measure.** The lab server exposes the comparison as JSON; the Reconstruction tab's round
+histogram button shows the same data.
+
+```
+GET http://127.0.0.1:4331/__nebula/reconstruction-levels?resultId=<lensResultId>
+```
+
+It returns, per channel: `sourceHistogram` and `renderHistogram` on shared bins, `sourceP50/P90`,
+`renderP50/P90`, their ratios, `signedMeanDelta`, `absoluteMeanDelta`, `worstBin`, and the
+`transfer` curve (source value → binned median render value) over `transferBins`; plus the
+footprint, sky pedestal, grid and the pinned input files. Source is the lens's own registered
+image, masked to its footprint with the sky pedestal removed; render is the model's front
+projection wearing that lens's chromaticity. Lens result ids come from the model's bundle,
+`.local/nebula-lab/finite-lenses-<modelResultId>.json`.
+
+**Read it.** On the identity diagonal = matched. Above it = painting too bright. A bend =
+mid-tones off, which a single gain cannot fix. Mismatched channels = colour cast. The signed
+delta says where; the ratios say how much.
+
+**Fit.** Invert and smooth the transfer into a monotone per-channel lookup table from *paired*
+pixels, so a knot stays a knot (plain histogram matching can equalise counts while scrambling
+what is where). Solve exposure and per-channel gain first; add curve parameters only when the
+residual is shape-dependent.
+
+**Score the whole range, not the mid-tones.** A p50/p90 objective never sees the top 1%: the
+LMC Horálek lens matched p50 to 4% while its core plateaued (red p99.9 0.72, core 0.88). Score
+p99, p99.9 and the core-disc mean too, each against a tolerance stated up front.
+
+**Highlights need exposure, not a curve.** The render can never exceed the projection byte
+`255·(1 − e^(−E·I))` (the shared opacity), so a curve can only dim or recolour beneath it. A core
+riding that shoulder is lifted by *raising* the shared exposure E, and the curve dims the
+mid-tones back down; lowering E only lowers the ceiling. Solve E jointly with the curve on the
+exposure-free integral: re-expose the byte analytically, `1 − P'/255 = (1 − P/255)^(E'/E)`,
+re-fit the curve per candidate, minimise the predicted score; no bake until the prediction says
+it wins. E belongs to the shared geometry, so the change re-bakes the model once. Its emission field
+must come out byte-identical, and then every lens is re-fitted on it (`lens-tone-fit --solve-exposure
+--recipe <settings>` for the image the model was fitted to, then `--model <id>` for the others).
+
+**Apply and re-measure.** Bake the table into the material stage — never at runtime, which may
+not derive pixels. White balance before the alpha chroma limit, curve and exposure after. Re-bake
+the lens, call the endpoint on the new result id, stop when the delta sits inside a tolerance
+stated up front, at most three bakes.
+The loop is `node labs/nebula/run.mts lens-tone-fit <lensResultId>` (recorded as `toneCurve` in the
+lens provenance; report in `output/lens-tone-fit/`).
+
+**Two cautions.** The endpoint's render side is the analytic projection, which reads about 12%
+brighter than what the browser delivers; fit against a delivered capture or correct for that loss,
+or the table overshoots. The loss is not in the bank bytes (a CPU composite of the delivered z
+slabs matches the analytic projection within 0.5%). It comes from the browser's 8-bit blending
+and depends on level: delivered ÷ analytic is 0.6–0.8 in the faint mid-tones and 0.90–0.92 from
+source level 144 up. The uniform 1.12 therefore holds for the highlights and under-corrects the
+faint zone. And every lens shares one opacity bank, so a table can only
+move colour and brightness inside that opacity: a lens far off its image (VISTA +163%, WISE
++987% on the LMC) needs a per-lens opacity scale, which trades away part of "switch lens, never
+shape". Matching a publisher-processed image matches its stretch, not physical flux — say so.
+
+## Diagnostic tools
+
+The Reconstruction tab has a column of round buttons on the left edge of the right sidebar,
+above the image credit. Each opens a diagnostic for the displayed lens; each is backed by a lab
+server route you can call directly, so an agent sees exactly what a person sees.
+
+| Button | Route | Shows |
+| --- | --- | --- |
+| Levels | `GET /__nebula/reconstruction-levels?resultId=<lens>` | per-channel histograms, signed delta, transfer curve, percentile ratios |
+| Difference map | `GET /__nebula/reconstruction-difference?resultId=<lens>` (`&format=png` for the image) | render − image on luminance, over the Earth view: blue too dark, red too bright, clear within tolerance |
+
+**Read the difference map for *where*, the levels for *how much*.** On the LMC it showed the bar
+blue (core too dark, the opacity shoulder) and the body a red ring (mid-tones too bright), which
+the tone fit then broke up: too-bright share 33% → 12%. It divides out the measured delivery
+factor (1.14 for the LMC Horálek capture); without it the whole body reads red. It is only
+meaningful at the Earth-facing pose and hides when you orbit.
+
+**Prove a diagnostic on a known defect before trusting it.** Keep a bad control and a fixed
+version for every diagnostic: it must flag the first and stay quiet on the second, with numbers.
+A diagnostic that cannot flag its own control is broken. The LMC history supplies the controls:
+the 3× placement model for footprint and star-residual views, the plateaued-bulge lens for
+headroom, the mid-tone-bright lens for the difference map, the SMC bake with 95% of texels at
+alpha 1–3 for banding risk.
+
+Planned, each with its control: star residual arrows (catalogue star → matched photo star; radial
+= scale, swirl = rotation, mirrored = flip), headroom map (where opacity saturates), hue-error map
+(colour angle only), banding-risk map (alpha 1–3 texels), footprint outline (registered vs placed),
+then depth-coded view, bank isolation (force X, Y or Z leaves) and a coverage mask. Build them as
+prepared images or SVG — never canvas, WebGL or CSS filters.
+
+## Defects that cost whole rounds
+
+- **Premultiplied 8-bit compositing.** At alpha 1–3 a slab's colour rounds to a few levels and stacked leaves turn that into strong false tints, plus contour banding. Fade chroma to neutral below a threshold and keep exposure out of that band. Judge on the artefact (faint-annulus roughness, α1–3 share), not the histogram. The delivered bank also loses ~12% of the analytic light there, so compare like with like.
+- **Ordering of colour operations.** A non-uniform channel gain applied *after* the alpha chroma limit re-tints the neutral zone that limit protects. White balance before the limit, exposure after.
+- **No-coverage must stay no-coverage.** NaN or alpha 0 read as measured zero paints black sky into the model; carry the mask through rectification.
+- **Placement is not a free parameter.** The overlay transform already comes from the measured WCS/homography; a hand-typed Alignment scale/rotation is a display fit. Feeding it into geometry once put the LMC on the sky 3× too large; identity placement reproduced the registered corners to 0.000″.
+- **Star layers are optional overlays.** A missing `stars.json`, answered by the dev server's HTML page, once aborted the whole material load. Treat absence as absence.
+- **Screen space is not model space.** CSS y points down; project catalogue stars with the same helper the slabs use, or they render mirrored and drift under rotation.
+- **Exposure is solvable, not guessable.** The emission integral is exposure-free, so re-expose an existing capture analytically and predict the next bake instead of sweeping. And its direction is not intuitive: a core riding the opacity shoulder needs *higher* exposure, not lower.
+- **Per-channel curves bend hue when they must dim hard.** Fitting a lens far brighter than its image (VISTA, WISE on the LMC) pins the curve at its floor and worsens hue; that is the shared-opacity limit, not a fitter bug. Report it instead of forcing it.
+
+## Procedure
+
+Read `labs/nebula/AGENTS.md`, `METHOD.md`, `docs/workflows.md`, `docs/reconstruction.md`, `docs/nebula-compiler-guidelines.md` and `docs/internal-packages.md` before changing the pipeline; they define the app, evidence intake, numerical gates and exact validation boundaries. The steps below apply them to a new source.
 
 The app supports density-based LMC/SMC work, the M2–9 symmetry experiment and configured image/constraint-driven compiler subjects. A new object requires data recipes, registration evidence, a frame and appropriate priors. The procedure is reusable; an arbitrary image is not automatically a configured reconstruction source. Do not transfer one object's shell, expansion law or stellar simulation to another without evidence.
 

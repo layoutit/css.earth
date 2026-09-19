@@ -7,8 +7,9 @@ import {implementationPins} from '../../server/services/implementation.ts';
 import {compileCssVolume} from '../../adapters/preparation/css-volume.ts';
 import {verifyFiniteMaterialArtifacts} from './finite-density-material-artifacts.ts';
 import {physicalToField,angularScale,physicalBounds} from './simulation-guided-coordinates.ts';
+import {parseSimulationGuidedLevels} from './simulation-guided-levels.ts';
 import {fitSimulationGuidedEmission} from '@cssearth/nebula-reconstruction/methods/inference/simulation-guided';
-import {fitSimulationEnvelope,createEnvelopeSampler,envelopeChromaticity,validateEnvelopeSettings} from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
+import {fitSimulationEnvelope,createEnvelopeSampler,envelopeChromaticity,validateEnvelopeSettings,envelopeChromaSettings} from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
 import {loadSimulationPrior} from './simulation-prior.ts';
 import {compilerSlabMaterial,alphaLimitedSlabMaterial} from '@cssearth/volume-core/materials/slab-material';
 import {bakeMasterVolumeSlices} from '@cssearth/volume-bake/slices/emission';
@@ -25,6 +26,10 @@ async function main(settingsPath:string){
  if(priorCloud!==null&&(typeof priorCloud!=='object'||typeof priorCloud.path!=='string'||!/^[a-f0-9]{64}$/.test(priorCloud.sha256)))throw Error('priorCloud must pin a volume recipe path and sha256');
  if(s.envelopeBaselineId!==undefined&&(!/^[a-f0-9]{64}$/.test(s.envelopeBaselineId)||s.envelopeBaselineId===s.baselineId||!envelopeSettings))throw Error('envelopeBaselineId must be a distinct pinned baseline used with envelope settings');
  if(s.fullChromaAlphaByte!==undefined&&(!Number.isFinite(s.fullChromaAlphaByte)||s.fullChromaAlphaByte<1||s.fullChromaAlphaByte>255))throw Error('fullChromaAlphaByte must be 1..255');
+ // Authored display levels. The black quantile is the lowest footprint luma the fit will paint at all, so
+ // with the long-standing 0.25 no recipe value can reach a halo that lives below the footprint's lower
+ // luma quartile. Omitting the block keeps the long-standing 0.25 / 0.995 / 0.85 exactly.
+ const levels=parseSimulationGuidedLevels(s.normalization);
  for(const e of s.exclusions)if(![e.x,e.y,e.rx,e.ry].every(Number.isFinite)||e.rx<=0||e.ry<=0||typeof e.reason!=='string')throw Error('Invalid explicit foreground exclusion');
  const baselineId=s.baselineId,baseline=resolve(root,'.local/nebula-lab/reconstructions',baselineId);
  await verifyFiniteMaterialArtifacts(baseline,`reconstruction-${baselineId}`);
@@ -45,8 +50,8 @@ async function main(settingsPath:string){
  const coverage=new Uint8Array(width*height),luma=new Float32Array(width*height),values:number[]=[];let excludedPixels=0;
  for(let p=0;p<coverage.length;p++){const x=(p%width+.5)/width,y=(Math.floor(p/width)+.5)/height;const excluded=s.exclusions.some((e:{x:number;y:number;rx:number;ry:number})=>((x-e.x)/e.rx)**2+((y-e.y)/e.ry)**2<=1);if(excluded)excludedPixels++;coverage[p]=rgba[p*4+3]>=250&&!excluded?1:0;luma[p]=Math.max(rgb[3*p],rgb[3*p+1],rgb[3*p+2])/255;if(coverage[p])values.push(luma[p]);}
  values.sort((a,b)=>a-b);if(!values.length)throw Error('No eligible image pixels');
- const q=(p:number)=>values[Math.min(values.length-1,Math.floor(values.length*p))]!,black=q(.25),background=black+Math.max(.002,q(.5)-black)*s.backgroundSpread,white=q(.995);
- const target=luma.map((v,p)=>coverage[p]?Math.pow(Math.max(0,Math.min(2,(v-background)/Math.max(.03,white-background))),.85):0);
+ const q=(p:number)=>values[Math.min(values.length-1,Math.floor(values.length*p))]!,black=q(levels.blackQuantile),background=black+Math.max(.002,q(.5)-black)*s.backgroundSpread,white=q(levels.whiteQuantile);
+ const target=luma.map((v,p)=>coverage[p]?Math.pow(Math.max(0,Math.min(2,(v-background)/Math.max(.03,white-background))),levels.gamma):0);
  // An alternative pinned density may carry the envelope: the same image registration, a different shape hypothesis.
  const prior=await loadSimulationPrior(root,priorCloud??work.cloud.provenance,distance,tb),priorBounds:EmissionBounds=prior.bounds;
  // An optional second registered image supplies only the broad envelope: deeper calibrated faint light, while
@@ -76,8 +81,8 @@ async function main(settingsPath:string){
    otherCoverage[p]=1;otherLuma[p]=Math.max(otherRgb[p*3]!,otherRgb[p*3+1]!,otherRgb[p*3+2]!)/255;otherValues.push(otherLuma[p]!);
   }
   otherValues.sort((a,b)=>a-b);if(otherValues.length<1000)throw Error('Envelope baseline covers too little of this fit grid');
-  const oq=(f:number)=>otherValues[Math.min(otherValues.length-1,Math.floor(otherValues.length*f))]!,oBlack=oq(.25),oBackground=oBlack+Math.max(.002,oq(.5)-oBlack)*s.backgroundSpread,oWhite=oq(.995);
-  const otherTarget=otherLuma.map((v,p)=>otherCoverage[p]?Math.pow(Math.max(0,Math.min(2,(v-oBackground)/Math.max(.03,oWhite-oBackground))),.85):0);
+  const oq=(f:number)=>otherValues[Math.min(otherValues.length-1,Math.floor(otherValues.length*f))]!,oBlack=oq(levels.blackQuantile),oBackground=oBlack+Math.max(.002,oq(.5)-oBlack)*s.backgroundSpread,oWhite=oq(levels.whiteQuantile);
+  const otherTarget=otherLuma.map((v,p)=>otherCoverage[p]?Math.pow(Math.max(0,Math.min(2,(v-oBackground)/Math.max(.03,oWhite-oBackground))),levels.gamma):0);
   // Both displays are relative, so match this image's light scale to the primary target on their shared
   // coverage. Without it the envelope would be subtracted in another image's units.
   let sharedPrimary=0,sharedOther=0;
@@ -86,7 +91,7 @@ async function main(settingsPath:string){
   const scale=sharedPrimary/sharedOther;
   for(let p=0;p<otherTarget.length;p++)otherTarget[p]*=scale;
   envelopeSource={id:s.envelopeBaselineId,provenanceSha256:sha256(otherBytes),imageId:otherWork.imageId,target:otherTarget,coverage:otherCoverage,rgb:otherRgb,
-   normalization:{black:oBlack,background:oBackground,white:oWhite,gamma:.85,coveredPixels:otherValues.length,tangentBoundsKpc:otb,
+   normalization:{black:oBlack,background:oBackground,white:oWhite,gamma:levels.gamma,coveredPixels:otherValues.length,tangentBoundsKpc:otb,
     lightScaleToPrimary:scale,sharedCoverageLight:{primary:sharedPrimary,envelopeSource:sharedOther}}};
   console.log(JSON.stringify({phase:'envelope-source',imageId:otherWork.imageId,...envelopeSource.normalization}));
  }
@@ -95,7 +100,8 @@ async function main(settingsPath:string){
  if(envelope)console.log(JSON.stringify({phase:'envelope',...envelope.metrics}));
  const detailTarget=envelope?target.map((v,p)=>coverage[p]?Math.max(0,v-envelope.projection[p]!):0):target;
  const fitted=fitSimulationGuidedEmission({target:detailTarget,coverage,width,height,bounds},s.controls,prior,s.depth,{onProgress:console.log});
- const envelopeAt=envelope?createEnvelopeSampler(envelope.grid,prior):null,envelopeColor=envelope&&envelopeSettings?envelopeChromaticity(envelopeSource?.rgb??rgb,envelopeSource?.coverage??coverage,width,height,bounds,envelopeSettings.scalePixels):null;
+ const chroma=envelopeSettings?envelopeChromaSettings(envelopeSettings):null;
+ const envelopeAt=envelope?createEnvelopeSampler(envelope.grid,prior):null,envelopeColor=envelope&&envelopeSettings&&chroma?envelopeChromaticity(envelopeSource?.rgb??rgb,envelopeSource?.coverage??coverage,width,height,bounds,envelopeSettings.scalePixels,chroma.halfSaturationQuantile,chroma.skyQuantile,chroma.coverageTaper):null;
  const totalProjection=envelope?fitted.projection.map((v,p)=>v+envelope.projection[p]!):fitted.projection,totalResidual=totalProjection.map((v,p)=>coverage[p]?target[p]!-v:0);
  let squared=0,targetSquared=0;for(let p=0;p<target.length;p++)if(coverage[p]){squared+=totalResidual[p]!**2;targetSquared+=target[p]!**2;}
  const metrics={...fitted.metrics,detailOnly:!!envelope,totalRelativeSquaredError:targetSquared>0?squared/targetSquared:0,envelope:envelope?.metrics??null};
@@ -110,7 +116,7 @@ async function main(settingsPath:string){
   fitted.sampleEmission(...p,componentLight);const ce=componentLight[0],ee=envelopeAt(...p),hasComponent=ce>0&&material.sampleMaterial(...p,componentColor),hasEnvelope=ee>0&&envelopeColor(p[0],p[1],envelopeRgb);
   const cw=hasComponent?ce:0,ew=hasEnvelope?ee:0;if(!(cw+ew>0))return false;for(let c=0;c<3;c++)out[c]=Math.min(255,Math.max(0,(cw*componentColor[c]!+ew*envelopeRgb[c]!)/(cw+ew)));return true;};
  const qualification={status:'research-experiment',materialGatePassed:false,reason:'Image-fitted finite emission with conditional stellar-simulation depths; not measured gas geometry. Visual review pending.'};
- const receipt={identity,settings:s,normalization:{signal:"relative RGB peak, not luminosity; consistent with peak-normalized component chromaticity",black,background,white,gamma:.85,excludedPixels},metrics,physicalBounds:physical,sliceCounts,pitchKpc:pitch,minimumSigmaZKpc:Math.min(...fitted.field.components.map(c=>c.sigma[2]))/A,qualification};
+ const receipt={identity,settings:s,normalization:{signal:"relative RGB peak, not luminosity; consistent with peak-normalized component chromaticity",levels,black,background,white,gamma:levels.gamma,excludedPixels},metrics,physicalBounds:physical,sliceCounts,pitchKpc:pitch,minimumSigmaZKpc:Math.min(...fitted.field.components.map(c=>c.sigma[2]))/A,qualification};
  await json(resolve(staging,'source/simulation-guided.json'),receipt);await json(resolve(staging,'source/emission-field.json'),fitted.field);await json(resolve(staging,'source/depth-assignments.json'),fitted.depthAssignments);await json(resolve(staging,'source/component-material.json'),material.receipt);
  const raster=async(name:string,a:Float32Array)=>sharp(Buffer.from(a.map(v=>Math.round(255*(1-Math.exp(-Math.max(0,v)*s.exposureGain))))),{raw:{width,height,channels:1}}).png().toFile(resolve(staging,'source',name));
  await raster('aligned-image.png',totalProjection);await raster('fit-target.png',target);await raster('fit-projection.png',totalProjection);await raster('fit-residual.png',totalResidual.map(Math.abs));if(envelope){await raster('envelope-projection.png',envelope.projection);await raster('detail-target.png',detailTarget);await json(resolve(staging,'source/envelope.json'),{schema:'cssearth-simulation-envelope@1',settings:envelopeSettings,priorIdentity:prior.identity,priorCloud,source:envelopeSource?{resultId:envelopeSource.id,provenanceSha256:envelopeSource.provenanceSha256,imageId:envelopeSource.imageId,normalization:envelopeSource.normalization}:null,metrics:envelope.metrics,width:envelope.grid.width,height:envelope.grid.height,bounds:envelope.grid.bounds,zRange:envelope.grid.zRange,gain:Array.from(envelope.grid.gain,v=>Number(v.toPrecision(7)))});}

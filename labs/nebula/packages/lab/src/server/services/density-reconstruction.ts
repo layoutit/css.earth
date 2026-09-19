@@ -16,7 +16,9 @@ import type { LabSubjectRecord } from '../../features/legacy-viewer/controller';
 import type { ReconstructionRequest, ReconstructionCatalogue, PreparedReconstruction, ReconstructionWork } from '../../features/reconstruction/reconstruction-types.ts';
 import { parseCloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
 import { lensSettingsHandler } from '../routes/lens-settings.ts';
-import { discoverFiniteLensBundle } from './finite-lens-bundles.ts';
+import { discoverFiniteLensBundle, finiteModelStarsPath } from './finite-lens-bundles.ts';
+import { lensLevels } from './lens-levels.ts';
+import { lensDifferenceHandler } from './lens-difference.ts';
 
 const hash = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const cache = '.local/nebula-lab/reconstructions';
@@ -66,9 +68,13 @@ export async function readPreparedReconstruction(root: string, resultId: string)
   if (!record(finite) || !token(finite.modelResultId) || !token(finite.sourceResultId) ||
       !record(provenance.finiteMaterial) || provenance.finiteMaterial.modelResultId !== finite.modelResultId || provenance.finiteMaterial.sourceResultId !== finite.sourceResultId)
     throw new TypeError('Saved finite material differs from its pinned provenance.');
+  // A model's catalogue layer belongs to the model, so a lens opened by its own result id carries it too.
+  const sourceSubjectId = result.subject.sourceSubjectId;
+  const stars = typeof sourceSubjectId === 'string'
+    ? await finiteModelStarsPath(root, sourceSubjectId, finite.modelResultId) : undefined;
   // Every lens of one finite model shares its geometry; the viewer still verifies each retained leaf before swapping.
   return { ...result, processing, finiteMaterial: { modelResultId: finite.modelResultId, sourceResultId: finite.sourceResultId },
-    subject: { ...result.subject, materialGeometry: finite.modelResultId } };
+    subject: { ...result.subject, materialGeometry: finite.modelResultId, ...(stars ? { stars } : {}) } };
 }
 export async function resolveReconstructionSubject(root: string, id: string): Promise<LabSubjectRecord | undefined> {
   const match = /^reconstruction-([a-f0-9]{64})$/.exec(id);
@@ -267,6 +273,18 @@ export function reconstructionPlugin(root: string): Plugin {
     server.middlewares.use('/__nebula/lens-settings', lensSettingsHandler(root));
     server.middlewares.use('/__nebula/reconstruction-jobs', starRemovalJobsHandler(jobs, '/__nebula/reconstruction-jobs'));
     server.httpServer?.once('close', () => { void jobs.shutdown().catch(() => {}); });
+    // Read-only per-channel levels for one saved lens, measured from that lens's own pinned rasters.
+    server.middlewares.use('/__nebula/reconstruction-levels', async (request, response) => {
+      try {
+        if (request.method !== 'GET') throw new TypeError('Lens levels are read-only.');
+        const url = new URL(request.url ?? '/', 'http://localhost'), id = url.searchParams.get('resultId') ?? '';
+        if (!token(id)) throw new TypeError('Invalid reconstruction identity.');
+        const value = await lensLevels(root, await readPreparedReconstruction(root, id));
+        response.setHeader('Content-Type', 'application/json'); response.setHeader('Cache-Control', 'no-store'); response.end(JSON.stringify(value));
+      } catch (error) { response.statusCode = 400; response.setHeader('Content-Type', 'application/json'); response.end(JSON.stringify({ error: (error as Error).message })); }
+    });
+    // Read-only difference map for one saved lens: `format=png` is the overlay image, otherwise its legend JSON.
+    server.middlewares.use('/__nebula/reconstruction-difference', lensDifferenceHandler(root, id => readPreparedReconstruction(root, id)));
     server.middlewares.use('/__nebula/reconstruction', async (request, response) => {
       try {
         if (request.method !== 'GET') throw new TypeError('Use Preview to start a reconstruction.');

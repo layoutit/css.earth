@@ -84,6 +84,7 @@ const reconstruction = createReconstructionControls(element('reconstruction-proc
     if (sourceSubject !== id) await changeSubject(id);
     return current() && sourceSubject === id;
   },
+  onDifference: (enabled, opacity) => run(() => viewer!.setDifferenceOverlay(enabled, opacity)),
 });
 const cloudStarControls = createCloudStarControls({ controls: options.controls, host: element('cloud-star-controls'), onChange(options) { viewer?.setStars(options); } });
 const cloudDensityControls = createCloudDensityControls({ controls: options.controls, host: element('cloud-density-controls'),
@@ -450,6 +451,7 @@ async function mountViewer(id: string, mode: 'density' | 'photo') {
         (!pendingSubject && observationInspectionActive() && state.subjectId !== sourceSubject)) return;
     currentMode = state.mode;
     originalOverlayState = state.originalOverlay; materialState = state.material;
+    reconstruction.setDifference(state.differenceOverlay);
     updateSubject(state.subjectId);
     activePose = state.pose;
     setStatus(state.status ?? '', element('viewer').dataset.ready === 'true' && !state.error);

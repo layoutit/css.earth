@@ -10,7 +10,8 @@ import type { SimulationDepthPrior } from '@cssearth/volume-core/contracts/simul
 import { blurWeighted, pixelCenter, validateEnvelopeSettings, type SimulationEnvelopeGrid, type SimulationEnvelopeSettings }
   from '@cssearth/volume-core/fields/simulation-envelope';
 
-export { blurWeighted, createEnvelopeSampler, envelopeChromaticity, pixelCenter, validateEnvelopeSettings } from '@cssearth/volume-core/fields/simulation-envelope';
+export { blurWeighted, createEnvelopeSampler, DEFAULT_CHROMA_COVERAGE_TAPER, DEFAULT_CHROMA_HALF_SATURATION_QUANTILE,
+  DEFAULT_CHROMA_SKY_QUANTILE, envelopeChromaSettings, envelopeChromaticity, pixelCenter, validateEnvelopeSettings } from '@cssearth/volume-core/fields/simulation-envelope';
 export type { SimulationEnvelopeGrid, SimulationEnvelopeSettings } from '@cssearth/volume-core/fields/simulation-envelope';
 
 export interface SimulationEnvelopeFit {

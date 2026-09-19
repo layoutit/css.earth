@@ -3,6 +3,9 @@ import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { parsePreparedLmcStars, mountPreparedLmcStars, type PreparedLmcStars } from '@cssearth/nebula-lab/adapters/viewer/catalogue-stars';
+import { worldCameraFromCenteredPresentation } from '../../../../../../../../src/renderers/css/navigation/world-camera.ts';
+import { referenceRotationFromPresentation, worldRotationFromQuaternion } from '../../../../../../../../src/renderers/css/navigation/world-camera-math.ts';
+import { preparedVolumeCameraTransform } from '../../../../../../../../src/renderers/css/volume/prepared-volume-runtime.ts';
 import { prepareCatalogue, sampleJointDepth } from '../../../cli/commands/prepare-lmc-stars.ts';
 import { sampleEncoded } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { createObservationMapping } from '../../../adapters/preparation/observation-prior.ts';
@@ -150,7 +153,9 @@ test('actual catalogue projects through shared camera as retained CSS points, wi
     if(node.style.visibility==='hidden')continue;
     const [x,y]=node.style.transform.slice(10,-1).split(',').map((v: string) => parseFloat(v));
     close(x,2000*s.positionUnits[0]/(radius+s.positionUnits[2])-s.sizePx/2,1e-8);
-    close(y,-2000*s.positionUnits[1]/(radius+s.positionUnits[2])-s.sizePx/2,1e-8);
+    // CSS screen y points down, so prepared +y renders upward only once the camera's CSS view has
+    // reversed its y row; the sign here is the prepared volume's, checked against it in the next test.
+    close(y,2000*s.positionUnits[1]/(radius+s.positionUnits[2])-s.sizePx/2,1e-8);
     assert.ok(!/filter:|gradient|mask:|blend-mode|clip-path/.test(node.style.cssText));
   }
   for (const scale of [.5, 2, 3]) {
@@ -161,13 +166,66 @@ test('actual catalogue projects through shared camera as retained CSS points, wi
       if (node.style.visibility === 'hidden') return;
       const [x,y] = node.style.transform.slice(10,-1).split(',').map((v: string) => parseFloat(v));
       close(x + size / 2, 2000*s.positionUnits[0]/(radius+s.positionUnits[2]), 1e-8);
-      close(y + size / 2, -2000*s.positionUnits[1]/(radius+s.positionUnits[2]), 1e-8);
+      close(y + size / 2, 2000*s.positionUnits[1]/(radius+s.positionUnits[2]), 1e-8);
     });
   }
   for (const invalid of [NaN, Infinity, 0, 3.1]) assert.throws(() => mount.setSize(invalid));
   mount.setVisible(false); assert.equal(root.style.display,'none');mount.setVisible(true);mount.publish(frame);
   assert.deepEqual(root.children,initial);assert.equal(mount.count,943);
   mount.destroy(); assert.equal(host.children.length,0);
+});
+
+/** Row-major proper rotations, built without a DOM: the test needs many camera orientations, not the lab's DOMMatrix. */
+const axisRotation = (axis: 0 | 1 | 2, degrees: number): number[] => {
+  const c = Math.cos(degrees * Math.PI / 180), s = Math.sin(degrees * Math.PI / 180);
+  if (axis === 0) return [1, 0, 0, 0, c, -s, 0, s, c];
+  if (axis === 1) return [c, 0, s, 0, 1, 0, -s, 0, c];
+  return [c, -s, 0, s, c, 0, 0, 0, 1];
+};
+const multiplyRotation = (a: number[], b: number[]) => [0, 1, 2].flatMap(row => [0, 1, 2]
+  .map(column => a[row * 3]! * b[column]! + a[row * 3 + 1]! * b[3 + column]! + a[row * 3 + 2]! * b[6 + column]!));
+
+test('prepared stars land exactly where the prepared volume camera puts the same XYZ, at every orbit pose', async () => {
+  const payload = await load(), host = new Element();
+  const mount = mountPreparedLmcStars({ host: host as unknown as HTMLElement, payload });
+  const root = host.children[0], f = payload.frame;
+  // The lab's inspection camera: the presentation looks along Rx(180), then orbits in yaw and pitch.
+  const presentationToReference = referenceRotationFromPresentation(worldRotationFromQuaternion(f.localToReferenceXyzw));
+  const distanceUnits = Math.hypot(...f.originM) / f.metersPerUnit;
+  const viewport = { focalPixels: 2000, widthPixels: 1000, heightPixels: 800, principalOffsetPixels: [0, 0] as const };
+  const base = axisRotation(0, 180);
+  const poses: [number, number][] = [[0, 0], [20, 0], [-20, 0], [60, 0], [-60, 0], [90, 0], [-90, 0],
+    [0, 20], [0, -20], [0, 60], [0, -60], [0, 90], [0, -90], [35, 27], [-48, 133]];
+  let checked = 0;
+  for (const [pitch, yaw] of poses) {
+    const rotation = multiplyRotation(multiplyRotation(axisRotation(0, pitch), axisRotation(1, yaw)), base);
+    const world = worldCameraFromCenteredPresentation({ rotation, distanceUnits },
+      { referenceFrame: f.referenceFrame, epochJdTt: f.epochJdTt, originM: f.originM,
+        presentationToReference, metersPerUnit: f.metersPerUnit, bodyRadiusM: f.metersPerUnit }, viewport);
+    const publication = { world, viewport };
+    mount.publish(publication);
+    // The volume's own camera, from the renderer that mounts the slabs: prepared vertices arrive in
+    // [y,x,z] order at 50 CSS px per unit and are flattened by the camera's CSS perspective.
+    const transform = preparedVolumeCameraTransform(publication, f, 50);
+    const [ox, oy] = viewport.principalOffsetPixels;
+    payload.stars.forEach((star, index) => {
+      const node = root.children[index];
+      if (node.style.visibility === 'hidden') return;
+      const point = [star.positionUnits[1] * 50, star.positionUnits[0] * 50, star.positionUnits[2] * 50];
+      const eye = [0, 1, 2].map(row => transform.rotation[row * 3]! * point[0]! + transform.rotation[row * 3 + 1]! * point[1]! +
+        transform.rotation[row * 3 + 2]! * point[2]! + transform.translationCssPixels[row]!);
+      const near = transform.focalPixels - eye[2]!;
+      assert.ok(near > 0, 'A visible prepared star must sit in front of the volume camera.');
+      const volumeX = ox + (eye[0]! - ox) * transform.focalPixels / near;
+      const volumeY = oy + (eye[1]! - oy) * transform.focalPixels / near;
+      const [x, y] = node.style.transform.slice(10, -1).split(',').map((v: string) => parseFloat(v));
+      close(x + star.sizePx / 2, volumeX, 1e-6);
+      close(y + star.sizePx / 2, volumeY, 1e-6);
+      checked++;
+    });
+  }
+  assert.ok(checked > 10000, `Too few star/pose projections compared: ${checked}`);
+  mount.destroy();
 });
 
 test('actual prepared cloud signal and part membership govern retained star support', async () => {

@@ -1,0 +1,76 @@
+.lens-levels-legend {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 10px 0 4px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.lens-levels-key {
+  display: inline-block;
+  width: 14px;
+  height: 2px;
+}
+.lens-levels-legend .lens-levels-key:not(:first-child) {
+  margin-left: 8px;
+}
+.lens-levels-status,
+.lens-levels-note {
+  margin: 6px 0 0;
+  font-size: 10px;
+  line-height: 1.45;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+.lens-levels-status[data-error="true"] {
+  color: #e8998c;
+}
+.lens-levels-rows {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.lens-levels-row + .lens-levels-row {
+  margin-top: 10px;
+}
+.lens-levels-plot {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #0b0d11;
+  border-radius: 4px;
+}
+.lens-levels-plot .lens-levels-frame {
+  fill: #0b0d11;
+  stroke: #2a2f3a;
+  stroke-width: 1;
+}
+.lens-levels-plot .lens-levels-grid {
+  stroke: #1d222b;
+  stroke-width: 1;
+}
+.lens-levels-plot .lens-levels-zero {
+  stroke: #5b6472;
+  stroke-width: 1;
+}
+.lens-levels-plot .lens-levels-identity {
+  stroke: #555d6c;
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.lens-levels-plot .lens-levels-channel {
+  font-size: 13px;
+  font-weight: 700;
+}
+.lens-levels-plot .lens-levels-axis {
+  font-size: 7px;
+  fill: #9aa3b2;
+}
+.lens-levels-numbers {
+  margin: 3px 0 0;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #c8cfdb;
+  overflow-wrap: anywhere;
+}

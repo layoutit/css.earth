@@ -1,7 +1,7 @@
 /** Retained catalogue points: runtime projects prepared XYZ only, never source astrometry. */
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { projectPreparedPoint } from '@cssearth/volume-viewer/camera/point-projection';
-import { transposeWorldRotation, worldRotationFromQuaternion } from '../../../../../../../src/renderers/css/navigation/world-camera-math';
+import { cssViewFromOrientation } from '../../../../../../../src/renderers/css/navigation/world-camera-math';
 import type { WorldCameraPose, WorldCameraViewport } from '../../../../../../../src/renderers/css/navigation/world-camera';
 import { mountCatalogueStars } from '@cssearth/volume-viewer/scene/catalogue-stars';
 
@@ -17,7 +17,10 @@ export function mountPreparedLmcStars({ host, payload, before = null }: {
     if (world.referenceFrame !== payload.frame.referenceFrame || world.epochJdTt !== payload.frame.epochJdTt)
       throw new TypeError('Prepared stars and camera must share a frame and epoch.');
     const local = presentPhysicalPoseInVolume(world.pose, payload.frame);
-    const rotation = transposeWorldRotation(worldRotationFromQuaternion(local.orientationXyzw));
+    // CSS screen y points down, so the projection needs the camera's CSS view, not the bare transposed
+    // physical rotation: the same `cssViewFromOrientation` the prepared volume and the shipped catalogue
+    // point renderer use. Without the y row reversed the points render mirrored about the principal row.
+    const rotation = cssViewFromOrientation(local.orientationXyzw);
     const [ox, oy] = viewport.principalOffsetPixels, focal = viewport.focalPixels;
     if (!(focal > 0) || ![focal, ox, oy].every(Number.isFinite)) throw new TypeError('Invalid star camera viewport.');
     const halfWidth = (viewport.widthPixels ?? host.clientWidth) / 2, halfHeight = (viewport.heightPixels ?? host.clientHeight) / 2;
