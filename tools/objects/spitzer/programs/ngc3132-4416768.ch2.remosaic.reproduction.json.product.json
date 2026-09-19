@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-telescope-product@1",
+  "telescope": "spitzer",
+  "stage": "archive-comparison",
+  "inputs": [
+    {
+      "role": "archive-mosaic",
+      "identity": "SPITZER_I2_4416768_0000_7_E8349192_maic.fits",
+      "bytes": 9797760,
+      "sha256": "4a7e110d5016fb5319e66be7836694fd5c7f99419a983de94f4f952eed21376a"
+    },
+    {
+      "role": "our-mosaic",
+      "identity": "ngc3132-4416768.ch2.remosaic.fits",
+      "bytes": 9792000,
+      "sha256": "05a298205d54297dec29677196ea9b2f9adf2888688822712ec9977faf6b04f3"
+    },
+    {
+      "role": "archive-uncertainty",
+      "identity": "SPITZER_I2_4416768_0000_7_A42448481_munc.fits",
+      "bytes": 9797760,
+      "sha256": "3e342f869f5e2deb272a75ee0233e494229de2174f45be007ee3be5fde49e6d6"
+    },
+    {
+      "role": "archive-coverage",
+      "identity": "SPITZER_I2_4416768_0000_7_A42448482_mcov.fits",
+      "bytes": 9797760,
+      "sha256": "2bc074f99282797fce011d33531bcdd5f50fbf836ad22b21391ba2f5ae0d53d3"
+    }
+  ],
+  "parameters": {
+    "comparedOver": "pixels the archive covers and both products hold",
+    "maxSamples": 67108864
+  },
+  "software": [
+    {
+      "name": "cssearth-fits",
+      "version": "repository"
+    }
+  ],
+  "toolchainDigest": "57d10b4f335a2b3f6abbe10732b610db92c3e2089cadcaa0059d4b0a78299cc6",
+  "outputs": [
+    {
+      "path": "ngc3132-4416768.ch2.remosaic.reproduction.json",
+      "bytes": 3155,
+      "sha256": "d99973f7648e277a8488175584cb7610d92f5527f337041bdce8e43905327f0a",
+      "units": "dimensionless shares and ratios"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "archive-agreement",
+      "receipt": "ngc3132-4416768.ch2.remosaic.reproduction.json",
+      "product": "ngc3132-4416768.ch2.remosaic.reproduction.json",
+      "establishes": "How far an open re-mosaic of AOR 4416768 channel 2 agrees with the Spitzer Science Center's own level-2 mosaic SPITZER_I2_4416768_0000_7_E8349192_maic.fits (pipeline S18.25.0), measured pixel by pixel against the archive's own uncertainty plane. It does not establish that the observatory's pipeline was reproduced: MOPEX did not run here."
+    }
+  ]
+}

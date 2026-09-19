@@ -1,0 +1,79 @@
+{
+  "schema": "cssearth-spitzer-reproduction@1",
+  "program": "ngc3132-4416768",
+  "aorKey": 4416768,
+  "target": "NGC 3132",
+  "channel": 4,
+  "wavelength": "IRAC 8.0um",
+  "archiveProduct": {
+    "name": "SPITZER_I4_4416768_0000_7_E8348786_maic.fits",
+    "bytes": 9797760,
+    "sha256": "d174ccfb8aa522951bfa40323d370a1f67fd3309c2854a2891a20d5ed5f82210",
+    "pipeline": "S18.25.0"
+  },
+  "ourProduct": {
+    "name": "ngc3132-4416768.ch4.remosaic.fits",
+    "bytes": 9792000,
+    "sha256": "969923b2801872090b205c4fe862a548daefb9410a3211adb95b0c87d077f535",
+    "stage": "open-remosaic",
+    "toolchainDigest": "57d10b4f335a2b3f6abbe10732b610db92c3e2089cadcaa0059d4b0a78299cc6",
+    "software": [
+      {
+        "name": "numpy",
+        "version": "2.5.3"
+      },
+      {
+        "name": "astropy",
+        "version": "8.0.1"
+      },
+      {
+        "name": "reproject",
+        "version": "0.21.0"
+      },
+      {
+        "name": "scipy",
+        "version": "1.18.1"
+      }
+    ]
+  },
+  "framesCombined": [
+    "0001",
+    "0003",
+    "0005",
+    "0007",
+    "0009",
+    "0011",
+    "0013",
+    "0015",
+    "0017",
+    "0019",
+    "0021",
+    "0023"
+  ],
+  "frameTimeSeconds": 30,
+  "statistics": {
+    "comparedPixels": 802563,
+    "archiveCoveredPixels": 810007,
+    "bitIdenticalShare": 0.00013830689927145907,
+    "medianRatio": 0.9999868014908301,
+    "medianLevel": 2.7250595092773438,
+    "medianAbsoluteDifferenceOverLevel": 0.0011727313195904574,
+    "differenceInArchiveSigma": {
+      "median": 0.04236435463201262,
+      "p95": 0.17043411250963267,
+      "p99": 3.240738936815599,
+      "max": 230.16392649646812
+    },
+    "shareWithinArchiveSigma": 0.9869792153388581,
+    "shareWithinOnePercent": 0.9783543472599658,
+    "shareWithinFivePercent": 0.9886339140977095,
+    "correlation": 0.9832565770820094
+  },
+  "limits": [
+    "The observatory's own mosaicker, MOPEX, did not run on this machine: its macOS build is x86_64 and Gatekeeper refused the unsigned quarantined distribution. So this is agreement with the archive's product, not a reproduction of the archive's pipeline.",
+    "The output grid is the archive mosaic's own. This run resamples onto it and does not choose a geometry, so the comparison tests resampling and combination, not astrometry. The grid the frames imply on their own is reported by the run beside the archive's.",
+    "No multi-frame outlier rejection is applied. The archive's pipeline rejects radiation hits across overlapping frames and this does not, so a small share of pixels differ by much more than the rest. A sigma clip across the stack was measured and made agreement worse at this depth, so none is used.",
+    "Frames are put on one background level by a zero-mean additive offset solved on their overlaps, which is not the observatory's overlap correction and carries no sky model. On the proving observation it moved channel 3 from 71% to 98% of pixels inside the archive's stated uncertainty and shifted that channel's overall level by 0.7%; channels 1 and 4 did not move.",
+    "Pixels are rejected when any imask bit is set, which is stricter than the archive's per-bit policy."
+  ]
+}

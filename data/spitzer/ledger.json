@@ -1,0 +1,2298 @@
+{
+  "schema": "cssearth-spitzer-ledger@1",
+  "archiveDate": "2026-09-19",
+  "search": "Spitzer Heritage Archive at IRSA",
+  "shippedObjects": 519,
+  "asked": 460,
+  "notAsked": [
+    {
+      "object": "betelgeuse-shell",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "comet-103p",
+      "reason": "its Horizons code is the designation DES=103P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-109p",
+      "reason": "its Horizons code is the designation DES=109P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-137p",
+      "reason": "its Horizons code is the designation DES=137P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-143p",
+      "reason": "its Horizons code is the designation DES=143P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-153p",
+      "reason": "its Horizons code is the designation DES=153P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-162p",
+      "reason": "its Horizons code is the designation DES=162P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-167p",
+      "reason": "its Horizons code is the designation DES=167P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-17p",
+      "reason": "its Horizons code is the designation DES=17P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-19p",
+      "reason": "its Horizons code is the designation DES=19P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-1p",
+      "reason": "its Horizons code is the designation DES=1P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-209p",
+      "reason": "its Horizons code is the designation DES=209P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-21p",
+      "reason": "its Horizons code is the designation DES=21P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-26p",
+      "reason": "its Horizons code is the designation DES=26P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-29p",
+      "reason": "its Horizons code is the designation DES=29P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-2i",
+      "reason": "its Horizons code is the designation 2I;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-2p",
+      "reason": "its Horizons code is the designation DES=2P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-3i",
+      "reason": "its Horizons code is the designation 3I;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-46p",
+      "reason": "its Horizons code is the designation DES=46P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-55p",
+      "reason": "its Horizons code is the designation DES=55P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-67p",
+      "reason": "its Horizons code is the designation DES=67P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-81p",
+      "reason": "its Horizons code is the designation DES=81P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-8p",
+      "reason": "its Horizons code is the designation DES=8P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-96p",
+      "reason": "its Horizons code is the designation DES=96P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-9p",
+      "reason": "its Horizons code is the designation DES=9P;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-c1956-r1",
+      "reason": "its Horizons code is the designation DES=C/1956 R1;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-c1973-e1",
+      "reason": "its Horizons code is the designation DES=C/1973 E1;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-c1983-h1",
+      "reason": "its Horizons code is the designation DES=C/1983 H1;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-c1995-o1",
+      "reason": "its Horizons code is the designation DES=C/1995 O1;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-c1996-b2",
+      "reason": "its Horizons code is the designation DES=C/1996 B2;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-c2006-p1",
+      "reason": "its Horizons code is the designation DES=C/2006 P1;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-c2013-a1",
+      "reason": "its Horizons code is the designation DES=C/2013 A1;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-c2014-un271",
+      "reason": "its Horizons code is the designation DES=C/2014 UN271;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-c2020-f3",
+      "reason": "its Horizons code is the designation DES=C/2020 F3;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "comet-c2023-a3",
+      "reason": "its Horizons code is the designation DES=C/2023 A3;CAP;, which is not a NAIF id"
+    },
+    {
+      "object": "cupid",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "dactyl",
+      "reason": "its package records no Horizons code"
+    },
+    {
+      "object": "deedee",
+      "reason": "its Horizons code is the designation 2014 UZ224;, which is not a NAIF id"
+    },
+    {
+      "object": "galaxy-clusters",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "hd-181327-disc",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "heliosphere",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "hippocamp",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "lmc",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "local-group",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "m31",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "m33",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "mab",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "milky-way",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "nearby-universe",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "oumuamua",
+      "reason": "its Horizons code is the designation 1I;, which is not a NAIF id"
+    },
+    {
+      "object": "perdita",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "romulus",
+      "reason": "its package records no Horizons code"
+    },
+    {
+      "object": "selam",
+      "reason": "its package records no Horizons code"
+    },
+    {
+      "object": "smc",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "sn263-beta",
+      "reason": "its package records no Horizons code"
+    },
+    {
+      "object": "sn263-gamma",
+      "reason": "its package records no Horizons code"
+    },
+    {
+      "object": "squannit",
+      "reason": "its package records no Horizons code"
+    },
+    {
+      "object": "stellar-neighbourhood",
+      "reason": "it has neither a body record nor a sky position"
+    },
+    {
+      "object": "torifune",
+      "reason": "it has neither a body record nor a sky position"
+    }
+  ],
+  "unanswered": [
+    "antares",
+    "betelgeuse",
+    "ce-tauri",
+    "pi1-gruis"
+  ],
+  "holdings": [
+    {
+      "object": "m42",
+      "name": "m42",
+      "classification": "extended",
+      "askedAs": "83.78715, -5.40038 within 10.0 arcmin",
+      "observations": 734,
+      "modes": {
+        "IRAC IER": 1,
+        "IRAC Map": 22,
+        "IRAC Map PC": 555,
+        "IRS Map": 7,
+        "IRS Stare": 146,
+        "MIPS Phot": 1,
+        "MIPS Scan": 2
+      }
+    },
+    {
+      "object": "trappist-1",
+      "name": "TRAPPIST-1",
+      "classification": "star",
+      "askedAs": "346.62652, -5.04353 within 0.5 arcmin",
+      "observations": 419,
+      "modes": {
+        "IRAC Map PC": 418,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "trappist-1b",
+      "name": "TRAPPIST-1b",
+      "classification": "exoplanet",
+      "askedAs": "346.62652, -5.04353 within 0.5 arcmin",
+      "observations": 419,
+      "modes": {
+        "IRAC Map PC": 418,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "trappist-1c",
+      "name": "TRAPPIST-1c",
+      "classification": "exoplanet",
+      "askedAs": "346.62652, -5.04353 within 0.5 arcmin",
+      "observations": 419,
+      "modes": {
+        "IRAC Map PC": 418,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "trappist-1d",
+      "name": "TRAPPIST-1d",
+      "classification": "exoplanet",
+      "askedAs": "346.62652, -5.04353 within 0.5 arcmin",
+      "observations": 419,
+      "modes": {
+        "IRAC Map PC": 418,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "trappist-1e",
+      "name": "TRAPPIST-1e",
+      "classification": "exoplanet",
+      "askedAs": "346.62652, -5.04353 within 0.5 arcmin",
+      "observations": 419,
+      "modes": {
+        "IRAC Map PC": 418,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "trappist-1f",
+      "name": "TRAPPIST-1f",
+      "classification": "exoplanet",
+      "askedAs": "346.62652, -5.04353 within 0.5 arcmin",
+      "observations": 419,
+      "modes": {
+        "IRAC Map PC": 418,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "trappist-1g",
+      "name": "TRAPPIST-1g",
+      "classification": "exoplanet",
+      "askedAs": "346.62652, -5.04353 within 0.5 arcmin",
+      "observations": 419,
+      "modes": {
+        "IRAC Map PC": 418,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "trappist-1h",
+      "name": "TRAPPIST-1h",
+      "classification": "exoplanet",
+      "askedAs": "346.62652, -5.04353 within 0.5 arcmin",
+      "observations": 419,
+      "modes": {
+        "IRAC Map PC": 418,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "pluto",
+      "name": "Pluto",
+      "classification": "dwarf-planet",
+      "askedAs": "NAIF 999",
+      "observations": 157,
+      "modes": {
+        "IRAC Map": 9,
+        "IRAC Map PC": 95,
+        "IRS Stare": 16,
+        "MIPS Phot": 34,
+        "MIPS SED": 3
+      }
+    },
+    {
+      "object": "hd-189733",
+      "name": "HD 189733 A",
+      "classification": "star",
+      "askedAs": "300.18212, 22.70974 within 0.5 arcmin",
+      "observations": 105,
+      "modes": {
+        "IRAC IER": 10,
+        "IRAC Map": 8,
+        "IRAC Map PC": 40,
+        "IRS IER": 1,
+        "IRS Map": 22,
+        "IRS Peakup Image": 1,
+        "IRS Stare": 5,
+        "MIPS Phot": 16,
+        "MIPS Scan": 2
+      }
+    },
+    {
+      "object": "hd-189733-companion",
+      "name": "HD 189733 B",
+      "classification": "star",
+      "askedAs": "300.17902, 22.70837 within 0.5 arcmin",
+      "observations": 105,
+      "modes": {
+        "IRAC IER": 10,
+        "IRAC Map": 8,
+        "IRAC Map PC": 40,
+        "IRS IER": 1,
+        "IRS Map": 22,
+        "IRS Peakup Image": 1,
+        "IRS Stare": 5,
+        "MIPS Phot": 16,
+        "MIPS Scan": 2
+      }
+    },
+    {
+      "object": "hd-189733b",
+      "name": "HD 189733b",
+      "classification": "exoplanet",
+      "askedAs": "300.18212, 22.70974 within 0.5 arcmin",
+      "observations": 105,
+      "modes": {
+        "IRAC IER": 10,
+        "IRAC Map": 8,
+        "IRAC Map PC": 40,
+        "IRS IER": 1,
+        "IRS Map": 22,
+        "IRS Peakup Image": 1,
+        "IRS Stare": 5,
+        "MIPS Phot": 16,
+        "MIPS Scan": 2
+      }
+    },
+    {
+      "object": "m8",
+      "name": "m8",
+      "classification": "extended",
+      "askedAs": "270.76532, -24.30623 within 10.0 arcmin",
+      "observations": 62,
+      "modes": {
+        "IRAC Map": 11,
+        "IRAC Map PC": 37,
+        "MIPS IER": 9,
+        "MIPS Phot": 2,
+        "MIPS SED": 1,
+        "MIPS Scan": 2
+      }
+    },
+    {
+      "object": "lutetia",
+      "name": "Lutetia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000021",
+      "observations": 42,
+      "modes": {
+        "IRAC Map": 24,
+        "IRS Map": 2,
+        "IRS Stare": 14,
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "isis",
+      "name": "Isis",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000042",
+      "observations": 39,
+      "modes": {
+        "IRAC Map": 25,
+        "MIPS Phot": 13,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "neptune",
+      "name": "Neptune",
+      "classification": "planet",
+      "askedAs": "NAIF 899",
+      "observations": 37,
+      "modes": {
+        "IRAC Map PC": 6,
+        "IRS Map": 13,
+        "IRS Stare": 14,
+        "MIPS SED": 4
+      }
+    },
+    {
+      "object": "quaoar",
+      "name": "Quaoar",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2050000",
+      "observations": 34,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 16,
+        "IRS Stare": 1,
+        "MIPS Phot": 14,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "bennu",
+      "name": "Bennu",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2101955",
+      "observations": 26,
+      "modes": {
+        "IRAC Map": 11,
+        "IRAC Map PC": 1,
+        "IRS Peakup Image": 12,
+        "IRS Stare": 2
+      }
+    },
+    {
+      "object": "eris",
+      "name": "Eris",
+      "classification": "dwarf-planet",
+      "askedAs": "NAIF 2136199",
+      "observations": 26,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 16,
+        "MIPS Phot": 8
+      }
+    },
+    {
+      "object": "hesperia",
+      "name": "Hesperia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000069",
+      "observations": 26,
+      "modes": {
+        "IRAC Map": 25,
+        "IRS Map": 1
+      }
+    },
+    {
+      "object": "io-85",
+      "name": "85 Io",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000085",
+      "observations": 26,
+      "modes": {
+        "IRAC Map": 24,
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "minerva",
+      "name": "Minerva",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000093",
+      "observations": 26,
+      "modes": {
+        "IRAC Map": 24,
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "hidalgo",
+      "name": "Hidalgo",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000944",
+      "observations": 21,
+      "modes": {
+        "IRS Map": 1,
+        "IRS Peakup Image": 10,
+        "IRS Stare": 10
+      }
+    },
+    {
+      "object": "m45",
+      "name": "m45",
+      "classification": "extended",
+      "askedAs": "56.75000, 24.11670 within 10.0 arcmin",
+      "observations": 20,
+      "modes": {
+        "IRAC Map": 6,
+        "IRAC Map PC": 5,
+        "IRS Map": 1,
+        "IRS Stare": 2,
+        "MIPS Phot": 4,
+        "MIPS Scan": 2
+      }
+    },
+    {
+      "object": "wasp-43",
+      "name": "WASP-43",
+      "classification": "star",
+      "askedAs": "154.90837, -9.80628 within 0.5 arcmin",
+      "observations": 19,
+      "modes": {
+        "IRAC Map PC": 19
+      }
+    },
+    {
+      "object": "wasp-43b",
+      "name": "WASP-43b",
+      "classification": "exoplanet",
+      "askedAs": "154.90837, -9.80628 within 0.5 arcmin",
+      "observations": 19,
+      "modes": {
+        "IRAC Map PC": 19
+      }
+    },
+    {
+      "object": "makemake",
+      "name": "Makemake",
+      "classification": "dwarf-planet",
+      "askedAs": "NAIF 2136472",
+      "observations": 18,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 16
+      }
+    },
+    {
+      "object": "metis-9",
+      "name": "9 Metis",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000009",
+      "observations": 18,
+      "modes": {
+        "IRAC Map": 16,
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "titan",
+      "name": "Titan",
+      "classification": "satellite",
+      "askedAs": "NAIF 606",
+      "observations": 18,
+      "modes": {
+        "IRS Map": 13,
+        "IRS Stare": 4,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "ryugu",
+      "name": "Ryugu",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2162173",
+      "observations": 17,
+      "modes": {
+        "IRAC Map PC": 15,
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "massalia",
+      "name": "Massalia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000020",
+      "observations": 16,
+      "modes": {
+        "IRAC Map": 1,
+        "MIPS Phot": 12,
+        "MIPS SED": 3
+      }
+    },
+    {
+      "object": "victoria",
+      "name": "Victoria",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000012",
+      "observations": 16,
+      "modes": {
+        "IRS Map": 1,
+        "MIPS Phot": 12,
+        "MIPS SED": 3
+      }
+    },
+    {
+      "object": "steins",
+      "name": "Steins",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2002867",
+      "observations": 15,
+      "modes": {
+        "IRS Stare": 15
+      }
+    },
+    {
+      "object": "uranus",
+      "name": "Uranus",
+      "classification": "planet",
+      "askedAs": "NAIF 799",
+      "observations": 14,
+      "modes": {
+        "IRS Map": 1,
+        "IRS Stare": 13
+      }
+    },
+    {
+      "object": "eros",
+      "name": "Eros",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000433",
+      "observations": 13,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 1,
+        "IRS Map": 1,
+        "IRS Peakup Image": 1,
+        "MIPS Phot": 7,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "helix",
+      "name": "helix",
+      "classification": "extended",
+      "askedAs": "337.41071, -20.83717 within 10.0 arcmin",
+      "observations": 13,
+      "modes": {
+        "IRAC Map": 5,
+        "IRAC Map PC": 1,
+        "IRS Stare": 4,
+        "MIPS Scan": 3
+      }
+    },
+    {
+      "object": "harmonia",
+      "name": "Harmonia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000040",
+      "observations": 12,
+      "modes": {
+        "MIPS Phot": 9,
+        "MIPS SED": 3
+      }
+    },
+    {
+      "object": "oberon",
+      "name": "Oberon",
+      "classification": "satellite",
+      "askedAs": "NAIF 704",
+      "observations": 12,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 4,
+        "IRS Stare": 2,
+        "MIPS Phot": 1,
+        "MIPS SED": 1,
+        "MIPS TP": 2
+      }
+    },
+    {
+      "object": "titania",
+      "name": "Titania",
+      "classification": "satellite",
+      "askedAs": "NAIF 703",
+      "observations": 12,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 4,
+        "IRS Stare": 2,
+        "MIPS Phot": 2,
+        "MIPS SED": 2
+      }
+    },
+    {
+      "object": "m1",
+      "name": "m1",
+      "classification": "extended",
+      "askedAs": "83.63345, 22.01512 within 10.0 arcmin",
+      "observations": 11,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 1,
+        "IRS Stare": 7,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "hd-181327",
+      "name": "HD 181327",
+      "classification": "star",
+      "askedAs": "290.74579, -54.53841 within 0.5 arcmin",
+      "observations": 10,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 4,
+        "IRS Stare": 1,
+        "MIPS Phot": 2,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "melpomene",
+      "name": "Melpomene",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000018",
+      "observations": 10,
+      "modes": {
+        "IRAC Map": 1,
+        "MIPS Phot": 6,
+        "MIPS SED": 1,
+        "MIPS Scan": 1,
+        "MIPS TP": 1
+      }
+    },
+    {
+      "object": "varuna",
+      "name": "Varuna",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2020000",
+      "observations": 10,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 1,
+        "IRS Stare": 1,
+        "MIPS Phot": 6
+      }
+    },
+    {
+      "object": "ariel",
+      "name": "Ariel",
+      "classification": "satellite",
+      "askedAs": "NAIF 701",
+      "observations": 9,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 4,
+        "IRS Stare": 3
+      }
+    },
+    {
+      "object": "donaldjohanson",
+      "name": "Donaldjohanson",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2052246",
+      "observations": 9,
+      "modes": {
+        "IRAC Map PC": 9
+      }
+    },
+    {
+      "object": "itokawa",
+      "name": "Itokawa",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2025143",
+      "observations": 9,
+      "modes": {
+        "IRAC Map PC": 1,
+        "IRS Peakup Image": 1,
+        "IRS Stare": 7
+      }
+    },
+    {
+      "object": "jupiter",
+      "name": "Jupiter",
+      "classification": "planet",
+      "askedAs": "NAIF 599",
+      "observations": 9,
+      "modes": {
+        "IRAC Map PC": 7,
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "leucus",
+      "name": "Leucus",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2011351",
+      "observations": 9,
+      "modes": {
+        "IRAC Map PC": 9
+      }
+    },
+    {
+      "object": "thalia",
+      "name": "Thalia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000023",
+      "observations": 9,
+      "modes": {
+        "IRAC Map": 2,
+        "MIPS Phot": 6,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "phoebe",
+      "name": "Phoebe",
+      "classification": "satellite",
+      "askedAs": "NAIF 609",
+      "observations": 8,
+      "modes": {
+        "IRAC Map": 2,
+        "IRS Stare": 2,
+        "MIPS Phot": 2,
+        "MIPS SED": 2
+      }
+    },
+    {
+      "object": "rhea",
+      "name": "Rhea",
+      "classification": "satellite",
+      "askedAs": "NAIF 605",
+      "observations": 8,
+      "modes": {
+        "IRAC Map": 2,
+        "IRS Stare": 2,
+        "MIPS TP": 4
+      }
+    },
+    {
+      "object": "salacia",
+      "name": "Salacia",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2120347",
+      "observations": 8,
+      "modes": {
+        "IRAC Map PC": 6,
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "triton",
+      "name": "Triton",
+      "classification": "satellite",
+      "askedAs": "NAIF 801",
+      "observations": 8,
+      "modes": {
+        "IRAC Map": 4,
+        "IRS Map": 4
+      }
+    },
+    {
+      "object": "umbriel",
+      "name": "Umbriel",
+      "classification": "satellite",
+      "askedAs": "NAIF 702",
+      "observations": 8,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 4,
+        "IRS Stare": 2
+      }
+    },
+    {
+      "object": "asteroid-2002-tc302",
+      "name": "2002 TC302",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2084522",
+      "observations": 7,
+      "modes": {
+        "IRAC Map": 4,
+        "IRS Stare": 1,
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "asteroid-2003-vs2",
+      "name": "2003 VS2",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2084922",
+      "observations": 7,
+      "modes": {
+        "IRAC Map": 4,
+        "IRS Stare": 1,
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "echo",
+      "name": "Echo",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000060",
+      "observations": 7,
+      "modes": {
+        "MIPS Phot": 6,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "orcus",
+      "name": "Orcus",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2090482",
+      "observations": 7,
+      "modes": {
+        "IRAC Map": 2,
+        "IRS Stare": 1,
+        "MIPS Phot": 4
+      }
+    },
+    {
+      "object": "bacchus",
+      "name": "Bacchus",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2002063",
+      "observations": 6,
+      "modes": {
+        "IRAC Map PC": 5,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "chariklo",
+      "name": "Chariklo",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2010199",
+      "observations": 6,
+      "modes": {
+        "IRAC Map": 2,
+        "IRS Stare": 1,
+        "MIPS Phot": 2,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "cybele",
+      "name": "Cybele",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000065",
+      "observations": 6,
+      "modes": {
+        "IRS Map": 2,
+        "MIPS Phot": 4
+      }
+    },
+    {
+      "object": "haumea",
+      "name": "Haumea",
+      "classification": "dwarf-planet",
+      "askedAs": "NAIF 2136108",
+      "observations": 6,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 1,
+        "MIPS Phot": 3
+      }
+    },
+    {
+      "object": "huya",
+      "name": "Huya",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2038628",
+      "observations": 6,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 1,
+        "MIPS Phot": 3
+      }
+    },
+    {
+      "object": "iris",
+      "name": "Iris",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000007",
+      "observations": 6,
+      "modes": {
+        "IRAC Map": 1,
+        "IRS Map": 1,
+        "MIPS Phot": 3,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "asteroid-2002-tx300",
+      "name": "2002 TX300",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2055636",
+      "observations": 5,
+      "modes": {
+        "IRAC Map": 2,
+        "IRS Stare": 1,
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "fortuna",
+      "name": "Fortuna",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000019",
+      "observations": 5,
+      "modes": {
+        "IRAC Map": 2,
+        "IRS Map": 1,
+        "MIPS Phot": 1,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "hebe",
+      "name": "Hebe",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000006",
+      "observations": 5,
+      "modes": {
+        "IRAC Map": 1,
+        "MIPS Phot": 4
+      }
+    },
+    {
+      "object": "iapetus",
+      "name": "Iapetus",
+      "classification": "satellite",
+      "askedAs": "NAIF 608",
+      "observations": 5,
+      "modes": {
+        "IRAC Map": 1,
+        "IRS Stare": 2,
+        "MIPS Phot": 1,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "ixion",
+      "name": "Ixion",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2028978",
+      "observations": 5,
+      "modes": {
+        "IRAC Map": 2,
+        "IRS Stare": 1,
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "r-doradus",
+      "name": "R Doradus",
+      "classification": "star",
+      "askedAs": "69.18996, -62.07717 within 0.5 arcmin",
+      "observations": 5,
+      "modes": {
+        "MIPS Scan": 5
+      }
+    },
+    {
+      "object": "saturn",
+      "name": "Saturn",
+      "classification": "planet",
+      "askedAs": "NAIF 699",
+      "observations": 5,
+      "modes": {
+        "IRAC Map": 1,
+        "MIPS Scan": 4
+      }
+    },
+    {
+      "object": "yorp",
+      "name": "YORP",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2054509",
+      "observations": 5,
+      "modes": {
+        "IRAC Map": 1,
+        "IRAC Map PC": 1,
+        "IRS Peakup Image": 2,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "achlys",
+      "name": "Achlys",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2208996",
+      "observations": 4,
+      "modes": {
+        "IRAC Map PC": 4
+      }
+    },
+    {
+      "object": "enceladus",
+      "name": "Enceladus",
+      "classification": "satellite",
+      "askedAs": "NAIF 602",
+      "observations": 4,
+      "modes": {
+        "IRAC Map": 3,
+        "IRS Map": 1
+      }
+    },
+    {
+      "object": "eurybates",
+      "name": "Eurybates",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2003548",
+      "observations": 4,
+      "modes": {
+        "IRAC Map": 2,
+        "IRAC Map PC": 1,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "gkunhomdima",
+      "name": "Gǃkúnǁʼhòmdímà",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2229762",
+      "observations": 4,
+      "modes": {
+        "IRAC Map PC": 4
+      }
+    },
+    {
+      "object": "gonggong",
+      "name": "Gonggong",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2225088",
+      "observations": 4,
+      "modes": {
+        "IRAC Map PC": 4
+      }
+    },
+    {
+      "object": "himalia",
+      "name": "Himalia",
+      "classification": "satellite",
+      "askedAs": "NAIF 506",
+      "observations": 4,
+      "modes": {
+        "IRS Stare": 2,
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "juno",
+      "name": "Juno",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000003",
+      "observations": 4,
+      "modes": {
+        "MIPS Phot": 3,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "mani",
+      "name": "Máni",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2307261",
+      "observations": 4,
+      "modes": {
+        "IRAC Map PC": 4
+      }
+    },
+    {
+      "object": "peitho",
+      "name": "Peitho",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000118",
+      "observations": 4,
+      "modes": {
+        "MIPS Phot": 4
+      }
+    },
+    {
+      "object": "polaris",
+      "name": "Polaris",
+      "classification": "star",
+      "askedAs": "37.95456, 89.26411 within 0.5 arcmin",
+      "observations": 4,
+      "modes": {
+        "IRAC Map": 2,
+        "IRS Stare": 1,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "taurinensis",
+      "name": "Taurinensis",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000512",
+      "observations": 4,
+      "modes": {
+        "MIPS Phot": 3,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "varda",
+      "name": "Varda",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2174567",
+      "observations": 4,
+      "modes": {
+        "IRAC Map PC": 4
+      }
+    },
+    {
+      "object": "achilles",
+      "name": "Achilles",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000588",
+      "observations": 3,
+      "modes": {
+        "IRAC Map": 2,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "ariadne",
+      "name": "Ariadne",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000043",
+      "observations": 3,
+      "modes": {
+        "MIPS Phot": 3
+      }
+    },
+    {
+      "object": "bienor",
+      "name": "Bienor",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2054598",
+      "observations": 3,
+      "modes": {
+        "IRAC Map": 2,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "camilla",
+      "name": "Camilla",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000107",
+      "observations": 3,
+      "modes": {
+        "IRS Map": 3
+      }
+    },
+    {
+      "object": "daphne",
+      "name": "Daphne",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000041",
+      "observations": 3,
+      "modes": {
+        "IRAC Map": 1,
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "diomedes",
+      "name": "Diomedes",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2001437",
+      "observations": 3,
+      "modes": {
+        "IRAC Map": 2,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "emma",
+      "name": "Emma",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000283",
+      "observations": 3,
+      "modes": {
+        "IRS Map": 3
+      }
+    },
+    {
+      "object": "eugenia",
+      "name": "Eugenia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000045",
+      "observations": 3,
+      "modes": {
+        "IRS Map": 3
+      }
+    },
+    {
+      "object": "geographos",
+      "name": "Geographos",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2001620",
+      "observations": 3,
+      "modes": {
+        "IRAC Map PC": 2,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "hektor",
+      "name": "Hektor",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000624",
+      "observations": 3,
+      "modes": {
+        "IRAC Map": 2,
+        "IRS Map": 1
+      }
+    },
+    {
+      "object": "hermione",
+      "name": "Hermione",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000121",
+      "observations": 3,
+      "modes": {
+        "IRS Map": 3
+      }
+    },
+    {
+      "object": "nysa",
+      "name": "Nysa",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000044",
+      "observations": 3,
+      "modes": {
+        "MIPS Phot": 3
+      }
+    },
+    {
+      "object": "phocaea",
+      "name": "Phocaea",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000025",
+      "observations": 3,
+      "modes": {
+        "MIPS Phot": 2,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "proserpina",
+      "name": "Proserpina",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000026",
+      "observations": 3,
+      "modes": {
+        "IRAC Map": 3
+      }
+    },
+    {
+      "object": "sappho",
+      "name": "Sappho",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000080",
+      "observations": 3,
+      "modes": {
+        "MIPS Phot": 2,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "tethys",
+      "name": "Tethys",
+      "classification": "satellite",
+      "askedAs": "NAIF 603",
+      "observations": 3,
+      "modes": {
+        "IRAC Map": 2,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "aglaja",
+      "name": "Aglaja",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000047",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "albiorix",
+      "name": "Albiorix",
+      "classification": "satellite",
+      "askedAs": "NAIF 626",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "antigone",
+      "name": "Antigone",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000129",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "asteroid-1994-cc",
+      "name": "1994 CC Alpha",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2136617",
+      "observations": 2,
+      "modes": {
+        "IRAC Map PC": 2
+      }
+    },
+    {
+      "object": "athor",
+      "name": "Athor",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000161",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "ausonia",
+      "name": "Ausonia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000063",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "beatrix",
+      "name": "Beatrix",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000083",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "bellona",
+      "name": "Bellona",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000028",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "betulia",
+      "name": "Betulia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2001580",
+      "observations": 2,
+      "modes": {
+        "IRAC Map PC": 1,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "castalia",
+      "name": "Castalia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2004769",
+      "observations": 2,
+      "modes": {
+        "IRAC Map PC": 2
+      }
+    },
+    {
+      "object": "ceres",
+      "name": "Ceres",
+      "classification": "dwarf-planet",
+      "askedAs": "NAIF 2000001",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "dejopeja",
+      "name": "Dejopeja",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000184",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "elektra",
+      "name": "Elektra",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000130",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "eleonora",
+      "name": "Eleonora",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000354",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "erriapus",
+      "name": "Erriapus",
+      "classification": "satellite",
+      "askedAs": "NAIF 628",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "eurynome",
+      "name": "Eurynome",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000079",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 1,
+        "MIPS SED": 1
+      }
+    },
+    {
+      "object": "gaspra",
+      "name": "Gaspra",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000951",
+      "observations": 2,
+      "modes": {
+        "IRS Peakup Image": 1,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "hyperion",
+      "name": "Hyperion",
+      "classification": "satellite",
+      "askedAs": "NAIF 607",
+      "observations": 2,
+      "modes": {
+        "IRAC Map": 1,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "ida",
+      "name": "Ida",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000243",
+      "observations": 2,
+      "modes": {
+        "IRS Peakup Image": 1,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "ijiraq",
+      "name": "Ijiraq",
+      "classification": "satellite",
+      "askedAs": "NAIF 622",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "interamnia",
+      "name": "Interamnia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000704",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "kalliope",
+      "name": "Kalliope",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000022",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "kiviuq",
+      "name": "Kiviuq",
+      "classification": "satellite",
+      "askedAs": "NAIF 624",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "kleopatra",
+      "name": "Kleopatra",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000216",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "liberatrix",
+      "name": "Liberatrix",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000125",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "lydia",
+      "name": "Lydia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000110",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "m2-9",
+      "name": "m2-9",
+      "classification": "extended",
+      "askedAs": "256.40796, -10.14255 within 10.0 arcmin",
+      "observations": 2,
+      "modes": {
+        "IRAC Map": 1,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "mathilde",
+      "name": "Mathilde",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000253",
+      "observations": 2,
+      "modes": {
+        "IRS Peakup Image": 1,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "melete",
+      "name": "Melete",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000056",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "nemausa",
+      "name": "Nemausa",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000051",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "nereus",
+      "name": "Nereus",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2004660",
+      "observations": 2,
+      "modes": {
+        "IRAC Map PC": 1,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "paaliaq",
+      "name": "Paaliaq",
+      "classification": "satellite",
+      "askedAs": "NAIF 620",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "pandora-55",
+      "name": "55 Pandora",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000055",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "penelope",
+      "name": "Penelope",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000201",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "phaethon",
+      "name": "Phaethon",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2003200",
+      "observations": 2,
+      "modes": {
+        "IRS Stare": 1,
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "psyche",
+      "name": "Psyche",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000016",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "sedna",
+      "name": "Sedna",
+      "classification": "trans-neptunian",
+      "askedAs": "NAIF 2090377",
+      "observations": 2,
+      "modes": {
+        "IRAC Map": 2
+      }
+    },
+    {
+      "object": "siarnaq",
+      "name": "Siarnaq",
+      "classification": "satellite",
+      "askedAs": "NAIF 629",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "sycorax",
+      "name": "Sycorax",
+      "classification": "satellite",
+      "askedAs": "NAIF 717",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "sylvia",
+      "name": "Sylvia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000087",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "tarvos",
+      "name": "Tarvos",
+      "classification": "satellite",
+      "askedAs": "NAIF 621",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "themis",
+      "name": "Themis",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000024",
+      "observations": 2,
+      "modes": {
+        "IRS Map": 2
+      }
+    },
+    {
+      "object": "thetis",
+      "name": "Thetis",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000017",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "toro",
+      "name": "Toro",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2001685",
+      "observations": 2,
+      "modes": {
+        "IRAC Map PC": 1,
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "velleda",
+      "name": "Velleda",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000126",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "ymir",
+      "name": "Ymir",
+      "classification": "satellite",
+      "askedAs": "NAIF 619",
+      "observations": 2,
+      "modes": {
+        "MIPS Phot": 2
+      }
+    },
+    {
+      "object": "apophis",
+      "name": "Apophis",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2099942",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "asia",
+      "name": "Asia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000067",
+      "observations": 1,
+      "modes": {
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "asteroid-1950-da",
+      "name": "1950 DA",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2029075",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "asteroid-1992-sk",
+      "name": "1992 SK",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2010115",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "asteroid-1996-hw1",
+      "name": "1996 HW1",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2008567",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "asteroid-1998-ml14",
+      "name": "1998 ML14",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2052760",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "asteroid-1998-wt24",
+      "name": "1998 WT24",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2033342",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "asteroid-2001-sn263",
+      "name": "2001 SN263",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2153591",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "astraea",
+      "name": "Astraea",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000005",
+      "observations": 1,
+      "modes": {
+        "IRAC Map": 1
+      }
+    },
+    {
+      "object": "aurora",
+      "name": "Aurora",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000094",
+      "observations": 1,
+      "modes": {
+        "IRAC Map": 1
+      }
+    },
+    {
+      "object": "cerberus",
+      "name": "Cerberus",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2001865",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "davida",
+      "name": "Davida",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000511",
+      "observations": 1,
+      "modes": {
+        "IRS Map": 1
+      }
+    },
+    {
+      "object": "dione",
+      "name": "Dione",
+      "classification": "satellite",
+      "askedAs": "NAIF 604",
+      "observations": 1,
+      "modes": {
+        "IRS Map": 1
+      }
+    },
+    {
+      "object": "doris",
+      "name": "Doris",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000048",
+      "observations": 1,
+      "modes": {
+        "IRAC Map": 1
+      }
+    },
+    {
+      "object": "euphrosyne",
+      "name": "Euphrosyne",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000031",
+      "observations": 1,
+      "modes": {
+        "IRAC Map": 1
+      }
+    },
+    {
+      "object": "fides",
+      "name": "Fides",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000037",
+      "observations": 1,
+      "modes": {
+        "IRAC Map": 1
+      }
+    },
+    {
+      "object": "ganymed",
+      "name": "Ganymed",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2001036",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "hertha",
+      "name": "Hertha",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000135",
+      "observations": 1,
+      "modes": {
+        "IRS Map": 1
+      }
+    },
+    {
+      "object": "ivar",
+      "name": "Ivar",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2001627",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "lucia",
+      "name": "Lucia",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000222",
+      "observations": 1,
+      "modes": {
+        "IRS Stare": 1
+      }
+    },
+    {
+      "object": "nereid",
+      "name": "Nereid",
+      "classification": "satellite",
+      "askedAs": "NAIF 802",
+      "observations": 1,
+      "modes": {
+        "MIPS Phot": 1
+      }
+    },
+    {
+      "object": "orus",
+      "name": "Orus",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2021900",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "polymele",
+      "name": "Polymele",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2015094",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "ra-shalom",
+      "name": "Ra-Shalom",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2002100",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "siwa",
+      "name": "Siwa",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000140",
+      "observations": 1,
+      "modes": {
+        "IRS Map": 1
+      }
+    },
+    {
+      "object": "tantalus",
+      "name": "Tantalus",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2002102",
+      "observations": 1,
+      "modes": {
+        "IRAC Map PC": 1
+      }
+    },
+    {
+      "object": "unitas",
+      "name": "Unitas",
+      "classification": "asteroid",
+      "askedAs": "NAIF 2000306",
+      "observations": 1,
+      "modes": {
+        "MIPS Phot": 1
+      }
+    }
+  ],
+  "modes": [
+    {
+      "mode": "IRAC Map PC",
+      "records": "pictures held on one pointing, the mode exoplanet transits were watched in",
+      "tool": null,
+      "note": "The archive mosaics these too, so the same stage would run; none is pinned here.",
+      "observationsForOurObjects": 4372,
+      "pinnedPrograms": 0,
+      "checkedProducts": 0
+    },
+    {
+      "mode": "MIPS Phot",
+      "records": "photometry at 24, 70 and 160 micron",
+      "tool": null,
+      "note": "The archive mosaics these; this toolkit has not been run on MIPS and does not claim it.",
+      "observationsForOurObjects": 318,
+      "pinnedPrograms": 0,
+      "checkedProducts": 0
+    },
+    {
+      "mode": "IRAC Map",
+      "records": "mapped pictures in the four IRAC channels, 3.6 to 8.0 micron",
+      "tool": "tools/objects/spitzer/mosaic.mts",
+      "observationsForOurObjects": 317,
+      "pinnedPrograms": 4,
+      "checkedProducts": 4
+    },
+    {
+      "mode": "IRS Stare",
+      "records": "spectra of one point, 5 to 38 micron",
+      "tool": null,
+      "note": "Needs the observatory's SPICE, which was not obtained or run here.",
+      "observationsForOurObjects": 312,
+      "pinnedPrograms": 0,
+      "checkedProducts": 0
+    },
+    {
+      "mode": "IRS Map",
+      "records": "spectra stepped across a target, which build a spectral cube",
+      "tool": null,
+      "note": "Needs CUBISM, which was not obtained or run here.",
+      "observationsForOurObjects": 165,
+      "pinnedPrograms": 0,
+      "checkedProducts": 0
+    },
+    {
+      "mode": "MIPS SED",
+      "records": "low-resolution spectra around 70 micron",
+      "tool": null,
+      "observationsForOurObjects": 38,
+      "pinnedPrograms": 0,
+      "checkedProducts": 0
+    },
+    {
+      "mode": "IRS Peakup Image",
+      "records": "a small picture taken to put the target in the slit",
+      "tool": null,
+      "observationsForOurObjects": 32,
+      "pinnedPrograms": 0,
+      "checkedProducts": 0
+    },
+    {
+      "mode": "IRAC IER",
+      "records": "pictures taken on an engineering request rather than a normal observation",
+      "tool": null,
+      "observationsForOurObjects": 31,
+      "pinnedPrograms": 0,
+      "checkedProducts": 0
+    },
+    {
+      "mode": "MIPS Scan",
+      "records": "large maps made by scanning the telescope",
+      "tool": null,
+      "observationsForOurObjects": 25,
+      "pinnedPrograms": 0,
+      "checkedProducts": 0
+    },
+    {
+      "mode": "MIPS IER",
+      "records": null,
+      "tool": null,
+      "note": "The archive returned this mode; it is not described in this toolkit.",
+      "observationsForOurObjects": 9,
+      "pinnedPrograms": 0,
+      "checkedProducts": 0
+    },
+    {
+      "mode": "MIPS TP",
+      "records": "total-power measurements",
+      "tool": null,
+      "observationsForOurObjects": 7,
+      "pinnedPrograms": 0,
+      "checkedProducts": 0
+    },
+    {
+      "mode": "IRS IER",
+      "records": "spectra taken on an engineering request",
+      "tool": null,
+      "observationsForOurObjects": 3,
+      "pinnedPrograms": 0,
+      "checkedProducts": 0
+    },
+    {
+      "mode": "IRAC Post-Cryo Map",
+      "records": "mapped pictures in the two channels that kept working after the cryogen ran out",
+      "tool": null,
+      "note": "The same stage would run; none is pinned here.",
+      "observationsForOurObjects": 0,
+      "pinnedPrograms": 0,
+      "checkedProducts": 0
+    }
+  ]
+}

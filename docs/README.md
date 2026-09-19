@@ -27,6 +27,8 @@ For a body's sources, processing, evidence and known problems, read its
 | What the NACO archive holds for this project's bodies, and which modes are reduced | [NACO archive ledger](naco-ledger.md) |
 | Chandra observations reprocessed from level 1 on the observatory's own software, and checked event by event against the archive's own product | [Chandra](chandra.md) |
 | What the Chandra archive holds, which of our objects it observed, and how far the toolkit is proved | [Chandra archive ledger](chandra-ledger.md) |
+| Spitzer/IRAC mosaics re-made from the archive's own level-1 frames, why the observatory's MOPEX would not run here, and how close an open re-mosaic gets | [Spitzer](spitzer.md) |
+| What the Spitzer archive holds for our objects by observing mode, and which of them this toolkit has checked | [Spitzer archive ledger](spitzer-ledger.md) |
 | JunoCam's push-frame images cast strip by strip from the Juno kernels, the limb fit of their two epochs, and what the four Europa images measured | [JunoCam](junocam.md) |
 | What the JunoCam archive holds, which of our objects it photographed, and which images are measured or cast | [JunoCam archive ledger](junocam-ledger.md) |
 | Connecting prepared outputs to their inputs | [Prepared object provenance](object-provenance.md) |
