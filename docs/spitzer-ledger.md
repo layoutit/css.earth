@@ -216,6 +216,7 @@ Spitzer has no observation of Io, Europa, Ganymede or Callisto in this archive. 
 ## What this ledger does not say
 
 - It does not say what Spitzer holds in total. The archive's search backend answers one target at a time and takes no whole-archive count, so every number here is about this repository's objects.
+- The JSON ledger retains the id of every target whose query completed, including empty results. A target absent from that list is not turned into an archive negative when the application catalogue grows.
 - The JSON ledger retains every returned AORKEY, programme, mode, title, start and end time. The table above groups those same records for reading; the capability query exposes the records for one requested target.
 - A moving body is found only if its observation was scheduled against that NAIF id. An observation that caught a body inside a fixed-target field is not counted, because the archive does not index it that way.
 - 59 objects were not asked for at all. Most are comets and interstellar objects, whose packages carry a Horizons designation rather than a NAIF id; the rest have neither a body record nor a sky position. They are gaps, not zeroes.

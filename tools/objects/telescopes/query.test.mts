@@ -42,15 +42,19 @@ const HST_LEDGER = { schema: 'cssearth-hst-ledger@1', archiveDate: '2026-09-19',
 const CHANDRA_LEDGER = { schema: 'cssearth-chandra-ledger@1', measured: '2026-09-19', archive: { byInstrument: { 'HRC-I': 2006, 'ACIS-S': 14_863 } },
   modes: { 'ACIS-S no grating TIMED/FAINT': { state: 'reproduced', program: 'jupiter-acis', obsid: 18_676, target: 'Jupiter' } },
   shippedObjects: { jupiter: { matchedBy: 'target name', observations: 2, longest: [{ obsid: 18_676, target: 'Jupiter', instrument: 'ACIS-S', grating: 'NONE', exposureKs: 9.3, startDate: '2016-05-24T12:00:00' }] } } };
-const NACO_LEDGER = { schema: 'cssearth-naco-ledger@1', measured: '2026-09-19',
+const NACO_LEDGER = { schema: 'cssearth-naco-ledger@2', measured: '2026-09-19',
   modes: [{ mode: 'imaging', frames: 10, programs: ['ceres-080C0881'], receipts: ['ceres-080C0881.COADDED_IMG.reproduction.json'], state: 'reduced' },
     { mode: 'cube', frames: 4, programs: [], receipts: [], state: 'refused', reason: 'This route refuses the mode.' }],
-  objects: [{ id: 'ceres', targets: ['CERES'], frames: 14, programmes: ['080.C-0881(A)'], modes: ['imaging', 'cube'] },
-    { id: 'vesta', targets: ['VESTA'], frames: 217, programmes: ['076.C-0580(A)'], modes: ['imaging', 'spectroscopy'] }] };
+  objects: [{ id: 'ceres', targets: ['CERES'], frames: 14, programmes: ['080.C-0881(A)'], modes: ['imaging', 'cube'], records: [
+    { id: '080.C-0881-A-CERES-2007-11-11-imaging', programme: '080.C-0881(A)', archiveTarget: 'CERES', mode: 'imaging', night: '2007-11-11',
+      startIso: '2007-11-11T02:38:47Z', endIso: '2007-11-11T02:54:00Z', frames: 10 }] },
+    { id: 'vesta', targets: ['VESTA'], frames: 217, programmes: ['076.C-0580(A)'], modes: ['imaging', 'spectroscopy'], records: [
+      { id: '076.C-0580-A-VESTA-2006-01-01-imaging', programme: '076.C-0580(A)', archiveTarget: 'VESTA', mode: 'imaging', night: '2006-01-01',
+        startIso: '2006-01-01T01:00:00Z', endIso: '2006-01-01T02:00:00Z', frames: 100 }] }] };
 const JUNO_LEDGER = { schema: 'cssearth-junocam-ledger@1', measured: '2026-09-19', objects: [
   { id: 'europa', target: 'EUROPA', colourImages: 52, measuredImages: 4, programs: ['europa-pj45'], state: 'measured', why: '4 image(s) registered.' },
   { id: 'io', target: 'IO', colourImages: 247, measuredImages: 0, programs: [], state: 'not measured', why: 'No program of this target is pinned.' }] };
-const SPITZER_LEDGER = { schema: 'cssearth-spitzer-ledger@3', archiveDate: '2026-09-19', modes: [
+const SPITZER_LEDGER = { schema: 'cssearth-spitzer-ledger@4', archiveDate: '2026-09-19', searched: ['itokawa'], modes: [
   { mode: 'IRAC Map PC', tool: null, programs: [], checked: [], receipts: [] }, { mode: 'IRS Stare', tool: null, programs: [], checked: [], receipts: [] }], holdings: [{ object: 'itokawa', modes: { 'IRAC Map PC': 1, 'IRS Stare': 2 }, records: [
     { id: '1', programme: '292', mode: 'IRS Stare', title: 'epoch one', startIso: '2007-05-03T23:01:47.812Z', endIso: '2007-05-03T23:36:43.455Z' },
     { id: '2', programme: '292', mode: 'IRS Stare', title: 'epoch two', startIso: '2007-05-04T01:42:54.417Z', endIso: '2007-05-04T02:17:50.064Z' },
@@ -108,20 +112,22 @@ test('targets resolve through the shipped catalogue, while a near typo is a dist
 });
 
 test('an unsearched target is an incomplete index, while an explicit empty search is a real negative', () => {
-  const base = { schema: 'cssearth-spitzer-ledger@3', archiveDate: '2026-09-19', modes: [], holdings: [], unanswered: [] };
+  const base = { schema: 'cssearth-spitzer-ledger@4', archiveDate: '2026-09-19', modes: [], holdings: [], unanswered: [], searched: [] };
   const skipped = queryCapabilities({ target: 'comet-1p', wavelengthMicrometres: [0.6, 0.7], time: { any: true }, angularResolutionArcsec: 2,
     kind: 'image', result: 'telescope-product' }, inputs([{ telescope: 'spitzer', value: { ...base, notAsked: [{ object: 'comet-1p', reason: 'moving-target identifier unavailable' }] } }]));
   assert.equal(skipped.endpoint.status, 'index-incomplete');
   assert.deepEqual(skipped.endpoint.blockerCodes, ['target-index-unavailable']);
   assert.deepEqual(skipped.targetCoverage, [{ telescope: 'spitzer', ledger: 'data/spitzer/ledger.json', state: 'not-searched', reason: 'moving-target identifier unavailable' }]);
   assert.deepEqual(skipped.withoutTheTarget, []);
-  const empty = queryCapabilities({ ...skipped.request }, inputs([{ telescope: 'spitzer', value: { ...base, notAsked: [] } }]));
+  const unsearched = queryCapabilities({ ...skipped.request }, inputs([{ telescope: 'spitzer', value: { ...base, notAsked: [] } }]));
+  assert.equal(unsearched.endpoint.status, 'index-incomplete');
+  const empty = queryCapabilities({ ...skipped.request }, inputs([{ telescope: 'spitzer', value: { ...base, searched: ['comet-1p'], notAsked: [] } }]));
   assert.equal(empty.endpoint.status, 'no-selectable-candidate');
   assert.deepEqual(empty.withoutTheTarget.map(entry => entry.telescope), ['spitzer']);
 });
 
 test('an indexed observation exposes a telescope-owned qualification action when qualification is the only blocker', () => {
-  const ledger = { schema: 'cssearth-spitzer-ledger@3', archiveDate: '2026-09-19', modes: [
+  const ledger = { schema: 'cssearth-spitzer-ledger@4', archiveDate: '2026-09-19', searched: ['bennu'], modes: [
     { mode: 'IRAC Map', tool: 'tools/objects/spitzer/mosaic.mts', programs: [], checked: [], receipts: [] }],
   holdings: [{ object: 'bennu', modes: { 'IRAC Map': 1 }, records: [
     { id: '21415424', programme: '289', mode: 'IRAC Map', title: 'Bennu', startIso: '2007-05-08T16:23:47.636Z', endIso: '2007-05-08T16:27:43.816Z' }] }] };
@@ -197,6 +203,9 @@ test('a Vesta selection reports every blocker and human output separates archive
   assert.match(text, /pinned toolkit programs: ceres-080C0881/u);
   assert.match(text, /checked toolkit programs: ceres-080C0881/u);
   assert.match(text, /usable program of vesta: none/u);
+  assert.deepEqual(candidate(answer, 'imaging').selectionAssessment.qualificationActions.map(action => action.configuration), [
+    { kind: 'naco-program-night', programme: '076.C-0580(A)', archiveTarget: 'VESTA', night: '2006-01-01' },
+  ]);
 });
 
 test('what the optics resolve can say no; what the pixels sample cannot', () => {
@@ -273,6 +282,8 @@ test('toolkit support separates a checked program of this target from a tool tha
   const nirspec = candidate(answer, 'NIRSPEC/IFU');
   assert.equal(nirspec.toolkitSupport.level, 'proven');
   assert.deepEqual([nirspec.toolkitSupport.targetProgramPinned, nirspec.toolkitSupport.targetProgramChecked], [true, true]);
+  assert.deepEqual([nirspec.toolkitSupport.productionMethod, nirspec.toolkitSupport.evidenceBasis, nirspec.toolkitSupport.acceptanceCriterion],
+    ['local-pipeline', 'accepted-route-receipts', 'receipt-valid-for-pinned-program']);
   assert.equal(nirspec.toolkitSupport.tool, 'tools/objects/jwst/cubes/spec3.mts');
   assert.equal(candidate(answer, 'NIRCAM/IMAGE').toolkitSupport.level, 'tool-without-checked-program');
   assert.equal(candidate(answer, 'MIRI/IFU').toolkitSupport.level, 'none');
@@ -301,6 +312,7 @@ test('a retired instrument with a qualified archive-final program is usable with
   const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [0.13, 0.15] }, inputs([{ telescope: 'hst', value: ledger }]));
   const qualified = candidate(answer, 'HRS/1').toolkitSupport;
   assert.equal(qualified.level, 'archive-final');
+  assert.deepEqual([qualified.productionMethod, qualified.evidenceBasis, qualified.acceptanceCriterion], ['archive-final', 'archive-origin', 'archive-bytes-qualified']);
   assert.deepEqual(qualified.checked, [], 'nothing was re-calibrated on a retired instrument');
   assert.equal(qualified.tool, undefined);
   assert.deepEqual(qualified.archiveFinalQualified, ['europa-ghrs-5376']);
@@ -388,6 +400,18 @@ test('the committed ledger turns Triton NIRSpec records into runnable band-speci
   assert.deepEqual(nirspec.selectionAssessment.qualificationActions.map(action => [action.observation, action.configuration]), [
     ['jw01272-o003_t001_nirspec_g140h-f100lp', { kind: 'jwst-band', band: 'NIRSPEC-G140H-F100LP' }],
     ['jw01272-o011_t001_nirspec_g140h-f100lp', { kind: 'jwst-band', band: 'NIRSPEC-G140H-F100LP' }],
+  ]);
+});
+
+test('the committed ledger turns each Pallas NACO night into a runnable archive qualification action', async () => {
+  const answer = queryCapabilities({ target: 'pallas', wavelengthMicrometres: [2.1, 2.3], time: { any: true },
+    angularResolutionArcsec: 0.1, kind: 'image', result: 'body-map' }, await loadQueryInputs(ROOT, 'pallas'));
+  const naco = answer.candidates.find(entry => entry.telescope === 'VLT/NACO' && entry.mode === 'imaging')!;
+  assert.deepEqual(naco.selectionAssessment.blockers.map(blocker => blocker.code), ['target-program-unqualified']);
+  assert.deepEqual(naco.selectionAssessment.qualificationActions.map(action => [action.observation, action.configuration]), [
+    ['074.C-0502-A-PALLAS-2005-02-02-imaging', { kind: 'naco-program-night', programme: '074.C-0502(A)', archiveTarget: 'PALLAS', night: '2005-02-02' }],
+    ['074.C-0502-A-PALLAS-2005-03-12-imaging', { kind: 'naco-program-night', programme: '074.C-0502(A)', archiveTarget: 'PALLAS', night: '2005-03-12' }],
+    ['074.C-0502-A-PALLAS-2005-03-13-imaging', { kind: 'naco-program-night', programme: '074.C-0502(A)', archiveTarget: 'PALLAS', night: '2005-03-13' }],
   ]);
 });
 

@@ -10,7 +10,7 @@ import type { ObservationSelection } from './telescopes/query.mts';
 
 const plane = Buffer.from('a small deterministic FITS stand-in');
 const product = (): BodyMapProduct => ({ schema: 'cssearth-body-map@1',
-  definition: { quantity: 'CO2 band depth', units: 'band depth', timeDependence: 'surface-property', source: 'a published definition',
+  definition: { quantity: 'CO2 band depth', units: 'band depth', timeDependence: 'surface-property', wavelengthIntervalsMicrometres: [[4.24, 4.28]], source: 'a published definition',
     method: { bandMicrometres: [4.24, 4.28], continuumMicrometres: [[4.2, 4.225], [4.3, 4.33]] } },
   frame: { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', sha256: 'a'.repeat(64), bodyCode: 502 } },
   grid: { width: 4, height: 2, longitude: 'east-positive-from-0', rows: 'north-to-south' },
@@ -71,6 +71,16 @@ test('publication resolves mode-level uncertainty against the map measured resol
   await assert.rejects(qualifyBodyMap((await fixture()).mapPath, { ...selection, request: { ...selection.request, angularResolutionArcsec: undefined, surfaceResolutionKm: 100 } }), /measured surface resolution/u);
   await assert.rejects(qualifyBodyMap((await fixture()).mapPath, { ...selection, request: { ...selection.request, angularResolutionArcsec: undefined, resolutionElements: 20 } }), /measured resolution elements/u);
   await assert.rejects(qualifyBodyMap((await fixture()).mapPath, { ...selection, request: { ...selection.request, time: { fromIso: '2000-01-01', toIso: '2001-01-01' } } }), /outside the requested time range/u);
+});
+
+test('publication resolves the original wavelength request from the map measurement', async () => {
+  const resolved = await qualifyBodyMap((await fixture()).mapPath, { ...selection,
+    unresolved: [{ constraint: 'observationWavelength', answer: 'unknown', reason: 'the observation product was not read yet' }] });
+  assert.equal(resolved.selection.constraints.observationWavelength?.answer, 'yes');
+  assert.deepEqual(resolved.selection.unresolved, []);
+  await assert.rejects(qualifyBodyMap((await fixture()).mapPath, { ...selection, request: { ...selection.request, wavelengthMicrometres: [4.1, 4.28] } }), /map measurement covers 4\.24 to 4\.28.*requires 4\.1 to 4\.28/u);
+  const missing = product(); delete (missing.definition as { wavelengthIntervalsMicrometres?: unknown }).wavelengthIntervalsMicrometres;
+  await assert.rejects(qualifyBodyMap((await fixture(missing)).mapPath, selection), /does not state the wavelength intervals/u);
 });
 
 test('publication explains the missing body-map contract instead of leaking a file error', async () => {

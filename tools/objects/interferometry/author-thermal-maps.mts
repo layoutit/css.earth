@@ -125,8 +125,9 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
     // A temperature is the state of the ground at one moment, so sessions are never averaged: each cell keeps the session that
     // saw it most squarely, and where sessions overlap their difference is reported. Each session carries its own definition,
     // so sessions imaged at different frequencies are different measurements and the combination refuses them.
-    const definitionAt = (frequencyHz: number): MeasurementDefinition => ({ quantity, units, timeDependence: 'instantaneous-state', source: requireString(entry.source, 'source'),
-      method: { kind: 'brightness-temperature', frequencyGHz: Math.round(frequencyHz / 1e8) / 10, convention: 'Planck', background: 'none added', from: 'self-calibrated continuum image in Jy per beam over the restoring beam solid angle' } });
+    const definitionAt = (frequencyHz: number): MeasurementDefinition => { const wavelength = 299_792_458 / frequencyHz * 1e6; return ({ quantity, units, timeDependence: 'instantaneous-state',
+      wavelengthIntervalsMicrometres: [[wavelength, wavelength]], source: requireString(entry.source, 'source'),
+      method: { kind: 'brightness-temperature', frequencyGHz: Math.round(frequencyHz / 1e8) / 10, convention: 'Planck', background: 'none added', from: 'self-calibrated continuum image in Jy per beam over the restoring beam solid angle' } }); };
     const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(rotationBytes), bodyCode: requireFiniteNumber(rotation.body) } };
     const policy: CombinationPolicy = { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'as-observed' } };
     const { map, overlaps } = combineUnderPolicy(placed.map((placedMap, index) => ({ map: placedMap, definition: definitionAt(frequencies[index]!), frame, observation: observations[index]! })), policy, limit);

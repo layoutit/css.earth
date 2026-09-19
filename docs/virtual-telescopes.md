@@ -151,6 +151,9 @@ and "the archives contain no observation of a shipped target" are different scie
 Every ledger also returns a target-coverage state: `observed`, `searched-empty`, `not-searched` or `unanswered`. Only
 `searched-empty` is an archive negative. A query with no candidates and any incomplete coverage ends at `index-incomplete`
 with `target-index-unavailable` or `archive-query-unanswered`; it cannot silently turn an unattempted lookup into “no data.”
+Spitzer retains every successfully searched target id, including completed empty searches, so an object added after an older
+snapshot remains `not-searched`. TAP-backed ledger builders likewise accept rows only when PyVO reports query status `OK`;
+an overflow is an incomplete result and stops the ledger build.
 
 It returns one candidate per mode that observed the target, the ones that cover the requested wavelengths first, and each
 candidate answers four separate things:
@@ -169,10 +172,12 @@ candidate answers four separate things:
      a partial date sample can answer yes when it finds an overlap, but remains partial when it does not.
    - *Kilometres on the ground* and *elements across the disc* are the same two facts converted, and they need the range to
      the body, which only the caller knows.
-2. **What the toolkit can do.** One of four answers, and whether one of those programs is a program of this target: no toolkit;
+2. **What the toolkit can do.** One of four summary answers, and whether one of those programs is a program of this target: no toolkit;
    a tool with no checked program; *archive-final products qualified, not re-made here*, which is the archive's own final
    product pinned and read whole for a mode nothing here re-calibrates; or *recalibrated here and checked*. The third is never
-   reported as the fourth: a retired instrument can reach it and can never reach re-calibration.
+   reported as the fourth: a retired instrument can reach it and can never reach re-calibration. The machine answer also
+   states `productionMethod`, `evidenceBasis` and `acceptanceCriterion` separately, so the summary level never has to stand in
+   for how bytes were made, what evidence exists, or why the ledger accepted it.
 3. **Whether it can end as a body map.** This is separate from reduction: a proven reducer may correctly end at detector
    pixels. The query names the registered author for modes that reach the shared body-map contract and says no where none is
    registered.
@@ -182,10 +187,12 @@ candidate answers four separate things:
 
 Each candidate also carries a `selectionAssessment` derived from these same facts: `selectable`, stable blocker codes, and a
 structured next action for every target-qualified program only when the explicit selection command can run. If qualification
-is the only blocker and a registered telescope route can cover the entire requested wavelength window, `qualificationActions`
-instead names the indexed archive observation, its detector channel or instrument band, the resulting program id and an executable `telescope:qualify`
-command. That command validates the target, mode and observation against the index, then hands the work to the telescope-owned
-reducer; it is a small dispatcher, not a second reduction framework. The top-level `endpoint` is `unknown-target`,
+is the only blocker, `qualificationActions` asks the registered route whether an indexed archive observation can be run.
+Spitzer supplies an AOR and channel, JWST an observation and band, and NACO a programme, archive target spelling and observing
+night. The executable `telescope:qualify` command checks those fields against the index, then hands the work to the
+telescope-owned reducer and comparison. Route lookup is shared; selection and scientific processing remain telescope-owned.
+An action means the observation can be qualified. It does not turn an observation-level wavelength or achieved-resolution
+unknown into a yes; those facts remain unresolved until the qualified product states them. The top-level `endpoint` is `unknown-target`,
 `request-incomplete`, `no-selectable-candidate`, or `selectable-candidates`; it reports the number that can proceed and the
 blocker codes present across the answer. Consumers do not need to reverse-engineer workflow state from prose.
 

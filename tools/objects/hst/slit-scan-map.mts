@@ -583,6 +583,7 @@ export function scanReceipt(run: SlitScanRun) {
 export const SCAN_COMBINATION: CombinationPolicy = { time: { rule: 'time-invariant' }, resolution: { rule: 'as-observed' } };
 
 export const scanMeasurement = (definition: SlitScanDefinition, direction: AcrossSlitDirection): MeasurementDefinition => ({ quantity: definition.band.quantity, units: definition.band.units, timeDependence: 'surface-property',
+  wavelengthIntervalsMicrometres: [[definition.band.bandAngstrom[0] / 10_000, definition.band.bandAngstrom[1] / 10_000]],
   source: definition.published[0]?.source ?? definition.reference.note,
   method: { kind: 'equivalent-width', bandAngstrom: definition.band.bandAngstrom, continuum: { model: 'polynomial', order: definition.band.continuumOrder, windowsAngstrom: definition.band.continuumWindowsAngstrom },
     solarReference: { name: definition.reference.name, sha256: definition.reference.sha256 }, reduction: definition.reduction, acrossSlitDirection: direction } });
