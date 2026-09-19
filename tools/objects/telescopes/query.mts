@@ -29,7 +29,7 @@ import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 
 const ARCSEC_PER_RADIAN = 206_264.806_247;
 export const MODES_SCHEMA = 'cssearth-telescope-modes@1';
-export const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'events', 'strips'] as const;
+export const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'photometry', 'events', 'strips'] as const;
 export type ProductKind = typeof PRODUCT_KINDS[number];
 export const REQUESTED_RESULTS = ['telescope-product', 'body-map'] as const;
 export type RequestedResult = typeof REQUESTED_RESULTS[number];
@@ -90,7 +90,9 @@ export interface UnassignedEvidence {
 
 export interface Candidate {
   readonly telescope: string; readonly mode: string;
-  readonly observations: { readonly count: number; readonly scope: 'this-mode' | 'object-total' } | null;
+  readonly observations: { readonly count: number; readonly scope: 'this-mode' | 'object-total';
+    /** Complete observation identities where the ledger preserves them, rather than only a grouped count. */
+    readonly records?: readonly { readonly id: string; readonly programme?: string; readonly startIso: string; readonly endIso?: string; readonly title?: string }[] } | null;
   readonly programmes: readonly string[];
   readonly meetsConstraints: Readonly<Record<string, ConstraintVerdict>>;
   readonly toolkitSupport: ToolkitSupport;
@@ -167,13 +169,15 @@ export class ObservationSelectionError extends Error {
 interface TargetMode {
   readonly telescope: string; readonly mode: string;
   readonly archiveDate: string;
-  readonly observations: { readonly count: number; readonly scope: 'this-mode' | 'object-total' } | null;
+  readonly observations: Candidate['observations'];
   readonly programmes: readonly string[];
   readonly toolkit: { readonly tool?: string; readonly routeState?: string; readonly refusedBecause?: string; readonly programs: readonly string[]; readonly checked: readonly string[]; readonly receipts: readonly string[];
     /** Archive-final programs of this mode, and the ones a record qualified. A ledger that states none leaves this out. */
     readonly archiveFinal?: { readonly programs: readonly string[]; readonly qualified: readonly string[] } };
   /** Dated observations of this target in this mode, where the ledger dates any. */
-  readonly dates: readonly { readonly id: string; readonly startIso: string }[];
+  readonly dates: readonly { readonly id: string; readonly startIso: string; readonly endIso?: string }[];
+  /** True only when the ledger retains every observation record counted for this target and mode. */
+  readonly datesComplete?: boolean;
 }
 
 const stringList = (value: unknown, label: string): string[] => requireArray(value, label).map((entry, index) => requireString(entry, `${label}[${index}]`));
@@ -333,18 +337,24 @@ function junoModes(value: unknown, target: string): TargetMode[] {
     toolkit: { routeState: state, programs, checked: state === 'measured' ? programs : [], receipts: [] } }];
 }
 
-/** Spitzer: holdings carry counts per observing mode. The ledger currently records checked totals, not their program names, so
- * the query exposes the candidates and tool but does not invent a target-specific checked program. */
+/** Spitzer: the ledger retains every archive AOR for a target, while toolkit programs remain a separate, smaller set. */
 function spitzerModes(value: unknown, target: string): TargetMode[] {
   const ledger = requireRecord(value, 'Spitzer ledger');
-  if (ledger.schema !== 'cssearth-spitzer-ledger@1') throw new TypeError(`Unsupported Spitzer ledger schema ${String(ledger.schema)}.`);
+  if (ledger.schema !== 'cssearth-spitzer-ledger@2') throw new TypeError(`Unsupported Spitzer ledger schema ${String(ledger.schema)}.`);
   const archiveDate = requireString(ledger.archiveDate, 'archiveDate'), declared = new Map(requireArray(ledger.modes, 'modes').map(raw => {
     const entry = requireRecord(raw, 'mode'); return [requireString(entry.mode, 'mode'), entry] as const; }));
   const object = requireArray(ledger.holdings, 'holdings').map(raw => requireRecord(raw, 'holding')).find(entry => entry.object === target);
   if (!object) return [];
+  const allRecords = requireArray(object.records, 'Spitzer observation records').map((raw, index) => { const record = requireRecord(raw, `Spitzer observation ${index}`);
+    return { id: requireString(record.id, 'AORKEY'), programme: requireString(record.programme, 'programme'), mode: requireString(record.mode, 'mode'),
+      title: requireString(record.title, 'title'), startIso: requireString(record.startIso, 'start'), ...(record.endIso === undefined ? {} : { endIso: requireString(record.endIso, 'end') }) }; });
   return Object.entries(requireRecord(object.modes, 'modes')).map(([mode, count]) => {
-    const entry = declared.get(mode), tool = entry ? optionalString(entry.tool, `${mode} tool`) : undefined;
-    return { telescope: 'Spitzer', mode, archiveDate, observations: { count: requireFiniteNumber(count, `${mode} observations`), scope: 'this-mode' as const }, programmes: [], dates: [],
+    const entry = declared.get(mode), tool = entry ? optionalString(entry.tool, `${mode} tool`) : undefined, records = allRecords.filter(record => record.mode === mode);
+    const expected = requireFiniteNumber(count, `${mode} observations`);
+    if (records.length !== expected) throw new Error(`Spitzer ${target} ${mode} counts ${expected} observations but retains ${records.length} records.`);
+    return { telescope: 'Spitzer', mode, archiveDate, observations: { count: expected, scope: 'this-mode' as const,
+      records: records.map(({ mode: _mode, ...record }) => record) }, programmes: [...new Set(records.map(record => record.programme))].sort(),
+      dates: records.map(record => ({ id: record.id, startIso: record.startIso, endIso: record.endIso })), datesComplete: true,
       toolkit: { ...(tool ? { tool } : {}), programs: [], checked: [], receipts: [] } };
   });
 }
@@ -483,9 +493,11 @@ function constraintVerdicts(request: CapabilityRequest, mode: TargetMode, capabi
       : 'any' in requestedTime ? verdict('yes', 'The request explicitly accepts observations from any time.')
       : !mode.dates.length ? verdict('unknown', 'This ledger carries no dates for this target and mode.')
       : (() => {
-          const dated = mode.dates.filter(date => date.startIso >= requestedTime.fromIso && date.startIso <= requestedTime.toIso);
-          return dated.length ? verdict('yes', `The ledger names ${dated.length} observation(s) that started inside the range: ${dated.map(date => `${date.id} on ${date.startIso.slice(0, 10)}`).join(', ')}.`)
-            : verdict('partial', `The ledger dates ${mode.dates.length} observation(s) of this target and mode and all start outside the range (${mode.dates.map(date => date.startIso.slice(0, 10)).join(', ')}); it does not date the rest.`);
+          const dated = mode.dates.filter(date => (date.endIso ?? date.startIso) >= requestedTime.fromIso && date.startIso <= requestedTime.toIso);
+          if (dated.length) return verdict('yes', `The ledger names ${dated.length} observation(s) overlapping the range: ${dated.map(date => `${date.id} on ${date.startIso.slice(0, 10)}`).join(', ')}.`);
+          const outside = `${mode.dates.length} observation(s) of this target and mode fall outside the range${mode.dates.length ? ` (${mode.dates.map(date => date.startIso.slice(0, 10)).join(', ')})` : ''}`;
+          return mode.datesComplete ? verdict('no', `The ledger retains every observation identity and time; all ${outside}.`)
+            : verdict('partial', `The ledger dates ${outside}; it does not date the rest.`);
         })(),
     kind: !capability ? verdict('unknown', NO_CAPABILITIES)
       : !request.kind ? verdict('unknown', `No product kind was asked for. This mode produces ${capability.kinds.join(', ')}.`)
@@ -671,13 +683,16 @@ const LEVEL_WORDS: Readonly<Record<ToolkitLevel, string>> = Object.freeze({ none
 
 export function formatAnswer(answer: CapabilityAnswer): string {
   const lines = [`${answer.candidates.length} candidate mode(s) observed ${answer.target}, the ones covering ${answer.request.wavelengthMicrometres[0]} to ${answer.request.wavelengthMicrometres[1]} micrometres first.`,
-    'None of these says an observation is adequate: the ledgers hold counts and programmes, not exposures.', ''];
+    'A mode verdict is a discovery filter. Where a ledger retains observation identities they are listed; their exact channel and achieved resolution remain product facts.', ''];
   for (const candidate of answer.candidates) {
     lines.push(`${candidate.telescope} ${candidate.mode}${candidate.observations ? ` (${candidate.observations.count} ${candidate.observations.scope === 'this-mode' ? 'observations in this mode' : 'observations of the object, across its modes'})` : ''}`);
     for (const [name, { answer: verdictAnswer, reason }] of Object.entries(candidate.meetsConstraints)) lines.push(`  ${name}: ${verdictAnswer}. ${reason}`);
     lines.push(`  toolkit: ${LEVEL_WORDS[candidate.toolkitSupport.level]}. ${candidate.toolkitSupport.reason}`);
     lines.push(`  body map: ${candidate.bodyMapSupport.answer}. ${candidate.bodyMapSupport.reason}`);
     lines.push(`  archive programmes recorded for ${answer.target}: ${candidate.programmes.join(', ') || 'none'}`);
+    const records = candidate.observations?.records ?? [];
+    for (const record of records.slice(0, 8)) lines.push(`    observation ${record.id}${record.programme ? `, programme ${record.programme}` : ''}: ${record.startIso}${record.endIso ? ` to ${record.endIso}` : ''}${record.title ? `, ${record.title}` : ''}`);
+    if (records.length > 8) lines.push(`    ${records.length - 8} more observation record(s) are present in the JSON answer.`);
     lines.push(`  pinned toolkit programs: ${candidate.toolkitSupport.programs.join(', ') || 'none'}`);
     lines.push(`  checked toolkit programs: ${candidate.toolkitSupport.checked.join(', ') || 'none'}`);
     lines.push(`  qualified archive-final programs: ${candidate.toolkitSupport.archiveFinalQualified.join(', ') || 'none'}`);

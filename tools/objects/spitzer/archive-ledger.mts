@@ -33,7 +33,7 @@ import { parseReproduction } from './compare.mts';
 
 export const LEDGER = resolve(REPOSITORY, 'data/spitzer/ledger.json');
 export const GUIDE = resolve(REPOSITORY, 'docs/spitzer-ledger.md');
-const SCHEMA = 'cssearth-spitzer-ledger@1';
+const SCHEMA = 'cssearth-spitzer-ledger@2';
 /** How many objects are asked at once. The archive's backend builds a temporary table for every question, so this stays small. */
 const CONCURRENCY = 4;
 const STAR_RADIUS_DEG = 0.5 / 60, EXTENDED_RADIUS_DEG = 1 / 6;
@@ -54,6 +54,7 @@ export const SPITZER_MODES: readonly { readonly mode: string; readonly records: 
   { mode: 'MIPS Scan', records: 'large maps made by scanning the telescope', tool: null },
   { mode: 'MIPS SED', records: 'low-resolution spectra around 70 micron', tool: null },
   { mode: 'MIPS TP', records: 'total-power measurements', tool: null },
+  { mode: 'MIPS IER', records: 'MIPS data taken on an engineering request', tool: null },
 ];
 
 export interface ShippedObject {
@@ -118,7 +119,16 @@ export async function shippedObjects(repository = REPOSITORY): Promise<ShippedOb
   }));
 }
 
-export interface ObjectHoldings { readonly object: string; readonly name: string; readonly classification: string; readonly askedAs: string; readonly observations: number; readonly modes: Readonly<Record<string, number>> }
+export interface ArchiveObservation {
+  /** AORKEY: Spitzer's mission-wide identity for one Astronomical Observation Request. */
+  readonly id: string;
+  readonly programme: string;
+  readonly mode: string;
+  readonly title: string;
+  readonly startIso: string;
+  readonly endIso?: string;
+}
+export interface ObjectHoldings { readonly object: string; readonly name: string; readonly classification: string; readonly askedAs: string; readonly observations: number; readonly modes: Readonly<Record<string, number>>; readonly records: readonly ArchiveObservation[] }
 export interface Ledger {
   readonly schema: typeof SCHEMA;
   readonly archiveDate: string;
@@ -162,6 +172,24 @@ const modeCounts = (rows: readonly ShaRow[]) => {
   return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a < b ? -1 : 1));
 };
 
+const archiveIso = (value: string, label: string) => {
+  const normalized = `${value.trim().replace(' ', 'T')}Z`, milliseconds = Date.parse(normalized);
+  if (!Number.isFinite(milliseconds)) throw new TypeError(`${label} is not an archive UTC time (${value}).`);
+  return new Date(milliseconds).toISOString();
+};
+
+/** Preserve the observation identities that the old count-only ledger discarded. */
+export function observationRecords(rows: readonly ShaRow[]): ArchiveObservation[] {
+  const records = rows.map((row, index): ArchiveObservation => ({
+    id: requireString(row.reqkey, `observation ${index} AORKEY`), programme: requireString(row.progid, `observation ${index} programme`),
+    mode: requireString(row.modedisplayname, `observation ${index} mode`), title: requireString(row.reqtitle, `observation ${index} title`),
+    startIso: archiveIso(requireString(row.reqbegintime, `observation ${index} start`), `observation ${index} start`),
+    ...(row.reqendtime?.trim() ? { endIso: archiveIso(row.reqendtime, `observation ${index} end`) } : {}),
+  })).sort((a, b) => a.startIso.localeCompare(b.startIso) || a.id.localeCompare(b.id));
+  if (new Set(records.map(record => record.id)).size !== records.length) throw new Error('The Spitzer archive returned one AORKEY more than once.');
+  return records;
+}
+
 /** Ask the archive about every object it can be asked about. An object the archive will not answer for is recorded as
  * unanswered and the pass goes on: which objects were asked and which were not is itself the honest result. */
 export async function surveyArchive(objects: readonly ShippedObject[]): Promise<ArchiveSurvey> {
@@ -177,7 +205,8 @@ export async function surveyArchive(objects: readonly ShippedObject[]): Promise<
       const askedAs = query.kind === 'naif' ? `NAIF ${query.naifId}` : `${query.raDeg.toFixed(5)}, ${query.decDeg.toFixed(5)} within ${(query.radiusDeg * 60).toFixed(1)} arcmin`;
       const rows = await shaSearch(request).catch(() => null);
       if (!rows) { unanswered.push(object.id); continue; }
-      holdings.push({ object: object.id, name: object.name, classification: object.classification, askedAs, observations: rows.length, modes: modeCounts(rows) });
+      holdings.push({ object: object.id, name: object.name, classification: object.classification, askedAs,
+        observations: rows.length, modes: modeCounts(rows), records: observationRecords(rows) });
     }
   };
   await Promise.all(Array.from({ length: Math.min(CONCURRENCY, queue.length) }, worker));
@@ -216,9 +245,20 @@ export function parseLedger(value: unknown): Ledger {
     shippedObjects: requireFiniteNumber(row.shippedObjects, 'shipped objects'), asked: requireFiniteNumber(row.asked, 'asked'),
     notAsked: requireArray(row.notAsked, 'not asked').map(raw => { const entry = requireRecord(raw, 'not asked'); return { object: requireString(entry.object, 'object'), reason: requireString(entry.reason, 'reason') }; }),
     unanswered: requireArray(row.unanswered, 'unanswered').map(entry => requireString(entry, 'unanswered')),
-    holdings: requireArray(row.holdings, 'holdings').map(raw => { const entry = requireRecord(raw, 'holdings');
+    holdings: requireArray(row.holdings, 'holdings').map(raw => { const entry = requireRecord(raw, 'holdings'), modes = counts(entry.modes);
+      const records = requireArray(entry.records, 'observation records').map((rawRecord, index) => { const record = requireRecord(rawRecord, `observation record ${index}`);
+        const endIso = record.endIso === undefined ? undefined : requireString(record.endIso, 'end'), parsed = { id: requireString(record.id, 'AORKEY'), programme: requireString(record.programme, 'programme'), mode: requireString(record.mode, 'mode'),
+          title: requireString(record.title, 'title'), startIso: requireString(record.startIso, 'start'), ...(endIso === undefined ? {} : { endIso }) };
+        if (!Number.isFinite(Date.parse(parsed.startIso)) || (parsed.endIso !== undefined && (!Number.isFinite(Date.parse(parsed.endIso)) || parsed.endIso < parsed.startIso))) throw new TypeError(`Spitzer AOR ${parsed.id} has an invalid time range.`);
+        return parsed;
+      });
+      const observations = requireFiniteNumber(entry.observations, 'observations'), fromRecords = new Map<string, number>();
+      for (const record of records) fromRecords.set(record.mode, (fromRecords.get(record.mode) ?? 0) + 1);
+      const mismatchedMode = Object.entries(modes).find(([mode, count]) => fromRecords.get(mode) !== count) ?? [...fromRecords].find(([mode]) => modes[mode] === undefined);
+      if (records.length !== observations || mismatchedMode || new Set(records.map(record => record.id)).size !== records.length)
+        throw new Error(`${String(entry.object)} observation records do not reproduce its ${observations} total, mode counts and unique AORKEYs${mismatchedMode ? ` (${mismatchedMode[0]})` : ''}.`);
       return { object: requireString(entry.object, 'object'), name: requireString(entry.name, 'name'), classification: requireString(entry.classification, 'classification'),
-        askedAs: requireString(entry.askedAs, 'asked as'), observations: requireFiniteNumber(entry.observations, 'observations'), modes: counts(entry.modes) }; }),
+        askedAs: requireString(entry.askedAs, 'asked as'), observations, modes, records }; }),
     modes: requireArray(row.modes, 'modes').map(raw => { const entry = requireRecord(raw, 'mode');
       return { mode: requireString(entry.mode, 'mode'), records: entry.records === null ? null : requireString(entry.records, 'records'),
         tool: entry.tool === null ? null : requireString(entry.tool, 'tool'), ...(entry.note === undefined ? {} : { note: requireString(entry.note, 'note') }),
@@ -268,6 +308,7 @@ export function ledgerGuide(ledger: Ledger): string {
     '## What this ledger does not say',
     '',
     '- It does not say what Spitzer holds in total. The archive\'s search backend answers one target at a time and takes no whole-archive count, so every number here is about this repository\'s objects.',
+    '- The JSON ledger retains every returned AORKEY, programme, mode, title, start and end time. The table above groups those same records for reading; the capability query exposes the records for one requested target.',
     '- A moving body is found only if its observation was scheduled against that NAIF id. An observation that caught a body inside a fixed-target field is not counted, because the archive does not index it that way.',
     `- ${ledger.notAsked.length} ${ledger.notAsked.length === 1 ? 'object was' : 'objects were'} not asked for at all. Most are comets and interstellar objects, whose packages carry a Horizons designation rather than a NAIF id; the rest have neither a body record nor a sky position. They are gaps, not zeroes.`,
     ...ledger.unanswered.length ? ['', `- The archive would not answer for ${ledger.unanswered.join(', ')} in this pass, after three attempts each. Those objects are missing from the table above, not empty.`] : [],

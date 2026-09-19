@@ -44,7 +44,10 @@ node tools/objects/spitzer/archive-ledger.mts --write
 
 **`compare.mts`** checks all four files against their pins before it reads a sample: our mosaic against the record that made it, and the archive's mosaic, uncertainty and coverage planes against the program that fetched them. That check is inside the comparison itself, not in its caller, because the uncertainty plane is the denominator of the headline result: swap it for a valid FITS file with inflated errors and an unchecked comparison would report perfect agreement. It then reads both mosaics with this repository's own FITS reader, row block by row block, and writes the receipt with a product record beside it. The `archive-agreement` evidence itself goes onto the MOSAIC's record, the one the producing stage wrote, so a consumer holding the product finds the check with `evidenceFor(record, mosaic, 'archive-agreement')` without knowing this toolkit exists; its wording says in as many words that the re-mosaic is not the observatory's own. Adding it is refused if the mosaic on disk is no longer the file its record made. The receipt records the digest of every file it actually read, taken from the bytes on disk and never copied out of the program, and the ledger counts a receipt only when those three digests are the ones its program pinned.
 
-**`archive-ledger.mts`** writes [the Spitzer archive ledger](spitzer-ledger.md).
+**`archive-ledger.mts`** writes [the Spitzer archive ledger](spitzer-ledger.md). Its JSON retains every returned AORKEY,
+programme, mode, title, start time and available end time. The grouped counts are reproduced from those records and refused
+when they disagree. The capability query can therefore expose actual candidate observations and make a definite time refusal
+when a requested interval contains none of them.
 
 ### Access
 
@@ -124,7 +127,7 @@ The channel 3 trade is the one unexplained-looking number in the table above and
 | Compare and receipt | [`tools/objects/spitzer/compare.mts`](../tools/objects/spitzer/compare.mts) |
 | Ledger | [`tools/objects/spitzer/archive-ledger.mts`](../tools/objects/spitzer/archive-ledger.mts), [`docs/spitzer-ledger.md`](spitzer-ledger.md) |
 | Pinned observation and receipts | `tools/objects/spitzer/programs/` |
-| Tests | [`tools/objects/spitzer/spitzer.test.mts`](../tools/objects/spitzer/spitzer.test.mts), 13 tests, no network |
+| Tests | [`tools/objects/spitzer/spitzer.test.mts`](../tools/objects/spitzer/spitzer.test.mts), 14 tests, no network |
 
 ### Three gaps in the colour example
 

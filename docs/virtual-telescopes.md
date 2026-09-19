@@ -105,7 +105,8 @@ The ledgers say how much of each archive these routes have been proved on:
 
 ## Asking which observations might measure something
 
-The ledgers say what each archive holds per object and per mode. They say nothing about a single exposure. The capability
+The ledgers say what each archive holds per object and per mode. Where an archive exposes a stable observation identity, a
+ledger can also retain the complete observation index; Spitzer records every AORKEY, programme and observing interval. The capability
 query ([`tools/objects/telescopes/query.mts`](../tools/objects/telescopes/query.mts)) turns that into an answer to one
 question: *which observing modes have ever pointed at this body, and could any of them, in principle, measure the thing I
 care about?* These commands require the Node version declared by the package: Node 22.18.x or Node 24+. The package command
@@ -129,7 +130,8 @@ candidate answers four separate things:
      no. Coarse pixels make the answer unknown, never no, because dithering, subpixel positioning and event centroiding
      recover part of what pixels lose and no ledger says whether an observation did. Where only sampling is recorded, the
      answer is unknown as well.
-   - *Time* is unknown unless the ledger dates that object in that mode.
+   - *Time* is unknown unless the ledger dates that object in that mode. A complete observation index can answer yes or no;
+     a partial date sample can answer yes when it finds an overlap, but remains partial when it does not.
    - *Kilometres on the ground* and *elements across the disc* are the same two facts converted, and they need the range to
      the body, which only the caller knows.
 2. **What the toolkit can do.** One of four answers, and whether one of those programs is a program of this target: no toolkit;
@@ -156,8 +158,9 @@ mode nobody has sourced is left out, and the query says "capabilities not record
 Fifteen Hubble configurations (aggregates such as `STIS` and `ACS`, which name no one detector, and retired instruments such
 as the FOC, the WF/PC and the HSP) and nine NACO techniques whose own pages state no wavelength range are in that position
 today. The FOS and GHRS detectors left that list when their handbooks' own ranges were read for the archive-final route; being
-sourced is not being re-calibrated, and the query keeps those two apart. Spitzer, Gemini and Keck modes are visible in the
-query even where those sourced capability facts have not been written yet; every affected constraint stays unknown.
+sourced is not being re-calibrated, and the query keeps those two apart. All Spitzer archive modes carry instrument-handbook
+wavelength intervals, product kinds, sampling and a documented point-spread function where one is available. Gemini and Keck
+modes remain visible where those sourced capability facts have not been written yet; every affected constraint stays unknown.
 
 ## From a question to a publishable layer
 
@@ -179,7 +182,8 @@ as typed data; `selectObservation` reports them together rather than making a ca
 
 Candidate output keeps three program facts separate: programmes the archive records for this target, programs pinned to the
 toolkit, and programs with checked receipts or qualified archive-final products. An archive programme is therefore visible
-without being presented as something the local route can already run.
+without being presented as something the local route can already run. Where present, complete archive observation records are
+returned under the candidate's observation count; the human output shows the first eight and the JSON answer retains all of them.
 
 The instrument author then writes the final map, its `*.body-map.json`, and the shared `*.product.json`. Resolved images from
 JWST, ALMA and NACO meet at `tools/objects/resolved-disc-map.mts`: an adapter supplies a north-up/east-left value plane, its
