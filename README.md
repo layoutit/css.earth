@@ -22,7 +22,7 @@ The Sun, the eight planets, 5 dwarf planets, 99 moons, 311 asteroids, 32 comets 
 
 Stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and planetary systems beyond the Sun, such as WASP-43, HD 189733 and TRAPPIST-1.
 
-<img src=".github/assets/stars-exoplanets.webp" alt="Betelgeuse's imaged surface, and the TRAPPIST-1 system with its seven planets, rendered as DOM and CSS markup" width="960">
+<img src=".github/assets/stars-exoplanets.webp" alt="Betelgeuse's imaged surface, and the planet TRAPPIST-1b coloured by its JWST MIRI 15 µm temperature map, hot day side to cold night side, rendered as DOM and CSS markup" width="960">
 
 ### Nebulae
 
@@ -70,15 +70,11 @@ Preparation reads archive formats directly with in-house TypeScript readers. The
 
 ## Architecture
 
-css.earth is built on the [PolyCSS](https://github.com/LayoutitStudio/polycss) 3D DOM rendering engine. Every body is a mesh of real HTML elements: faces are placed with CSS `matrix3d(...)` transforms and painted from prepared texture atlases. The scene uses no `<canvas>` or WebGL, and no `clip-path`, masks, filters, gradients or blend modes at runtime.
-
-Preparation reads the original products: PDS and FITS images, shape models, SPICE kernels, star catalogues, interferometric and radio data, and published fact sheets. It checks each input against its pinned hash, then writes the textures, geometry, lighting, orbits, labels and page text for each object. The outputs are reproducible from the checked-in inputs, and each one records the sources it came from.
-
-Each object is a package under [`src/objects/<id>/`](src/objects/README.md) with its pinned inputs, preparation recipe and README. One `OBJECTS` registry, one application shell and one shared camera serve every object, and only one object scene is mounted at a time.
-
-Git tracks a small inventory of each object's prepared files; the files themselves are stored in R2 by content hash. `pnpm setup:assets` downloads them into the checkout, Astro builds the site, and Netlify serves it.
-
-The browser does not derive geometry, textures or charts. It loads the prepared state for the selected object, mounts it into a retained DOM, and moves the camera. Earth is the one object that pages its prepared imagery in and out as you zoom towards city level.
+- **Rendering:** every body is a [PolyCSS](https://github.com/LayoutitStudio/polycss) mesh of HTML elements, placed with CSS `matrix3d(...)` and painted from prepared texture atlases. No canvas or WebGL.
+- **Preparation:** Node reads the original products, checks each against its pinned hash, and writes the textures, geometry, orbits and page text, each recording its sources.
+- **Objects:** each one is a package under [`src/objects/<id>/`](src/objects/README.md). One registry, one shell and one camera serve them all.
+- **Delivery:** prepared files are stored in R2; `pnpm setup:assets` fetches them before Astro builds the site for Netlify.
+- **Runtime:** the browser loads prepared state and moves the camera. It never derives geometry or textures.
 
 ## How to Run
 
