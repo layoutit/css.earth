@@ -9,14 +9,15 @@ import { test } from 'node:test';
 import { combinedNames, declaredBias, mjdToIso, parseGeminiProgram, scienceSequences, requireProgramId,
   configurationComplete, sameConfiguration, type GeminiProgram } from './archive.mts';
 import { ditherHalf, ourCalibrations, stagePlan, stageRequires, stageRun, PRODUCT_SUFFIX, STAGES } from './reduce.mts';
-import { binning, compareOnDetector, overlapAt, parseSection, scienceExtensions, skyToPixel, statistics, storedOrigin,
+import { archiveMasterPin, binning, checkAgainstArchive, compareOnDetector, overlapAt, parseSection, scienceExtensions,
+  skyToPixel, statistics, storedOrigin,
   wcsShift, type Wcs } from './compare.mts';
 import { checkReceipt, galileanNote, hasScience, ledgerMarkdown, matchShippedObject, observationsOf, parseTargetName,
   RECEIPT_SCHEMA, type Ledger, type MoonRow } from './archive-ledger.mts';
 import { PRODUCT_RECORD_SCHEMA } from '../product-record.mts';
 import { readFitsFileHdus } from '../../fits.mts';
 import { sha256File } from '../../../src/platform/sha256.mts';
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
@@ -458,4 +459,31 @@ test('a master whose file changed under its record is refused', async () => {
     await writeFile(resolve(directory, 'bias', product), 'something else entirely');
     await assert.rejects(ourCalibrations(context, ['bias']), /no longer the file its record pins/u);
   } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test('a comparison refuses a master that is not this program current plan, and attaches no evidence', async () => {
+  // The reviewer's case. A work directory holds a perfectly readable master recorded under an unrelated programme, built
+  // from a raw frame this program's bias set never names. Comparing it against this program's archive master would produce
+  // ordinary-looking numbers and a receipt asserting the two were made from the same raw frames, which is false.
+  const directory = await mkdtemp(resolve(tmpdir(), 'gemini-archive-'));
+  try {
+    const stranger = parseGeminiProgram({ ...PROGRAM, id: 'stranger', programme: 'GN-2017A-Q-63',
+      calibrations: PROGRAM.calibrations.map(set => set.id !== 'bias' ? set
+        : { ...set, frames: [calibration('S20170111S0202.fits', 'BIAS'), calibration('S20170111S0203.fits', 'BIAS')] }) } as unknown);
+    const { run } = await stageRun(CONTEXT(stranger, directory), 'bias');
+    await workWithMaster(directory, 'bias', { schema: PRODUCT_RECORD_SCHEMA, ...run, evidence: [] });
+    await assert.rejects(checkAgainstArchive(PROGRAM, directory, 'bias', [], CONTEXT(PROGRAM, directory)),
+      /was not made by fixture's current bias plan/u);
+    // Nothing was written: no receipt, and no evidence on the stranger's record.
+    const record = JSON.parse(await readFile(resolve(directory, 'bias', 'S20250906S0254_bias.fits.product.json'), 'utf8')) as { evidence: unknown[] };
+    assert.deepEqual(record.evidence, []);
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test('an archive master with no digest of its own is refused rather than compared against', () => {
+  const master = PROGRAM.calibrations.find(set => set.id === 'bias')!.product;
+  assert.equal(archiveMasterPin(master).identity, 'gS20250906S0254_bias.fits');
+  const { sha256, ...withoutDigest } = master;
+  assert.ok(sha256);
+  assert.throws(() => archiveMasterPin(withoutDigest as typeof master), /carries no sha256 yet/u);
 });

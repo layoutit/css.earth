@@ -36,10 +36,13 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { positionalArguments } from '../../cli-arguments.mts';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '../../fits.mts';
-import { addProductEvidence, productRecordPath, readProductRecord, type EvidenceKind, type ProductRecord } from '../product-record.mts';
+import { addProductEvidence, assertInputPins, productRecordPath, readProductRecord, sameRun,
+  type EvidenceKind, type ProductInput, type ProductRecord } from '../product-record.mts';
 import { PROGRAMS, readGeminiProgram, type GeminiProgram } from './archive.mts';
 import { geminiFile } from './cadc.mts';
-import { currentProduct, rawDirectory, repositoryPath, stageDirectory, STAGES, type Stage } from './reduce.mts';
+import { currentProduct, rawDirectory, repositoryPath, stageDirectory, stageRun, STAGES,
+  type RunContext, type Stage } from './reduce.mts';
+import { dragonsToolchainVersions, geminiToolchain } from './toolchain.mts';
 
 /** No image larger than this is compared. A mosaicked GMOS stack is about 7 million samples; this is room for several times
  * that and a bound on a mistake, not a limit anything real meets. */
@@ -359,15 +362,40 @@ async function recordEvidence(directory: string, product: string, kind: Evidence
     [{ kind, receipt: repositoryPath(receipt), product, establishes }], output => resolve(directory, output));
 }
 
-/** One calibration stage's product against the archive's own. */
-export async function checkAgainstArchive(program: GeminiProgram, work: string, stage: Stage, sources: readonly string[] = []) {
+/** One calibration stage's product against the archive's own.
+ *
+ * Two things are established before a single sample is read, because the receipt this writes says that two pipelines reduced
+ * **the same raw frames**, and nothing about a file sitting in a work directory says that on its own.
+ *
+ * - **Our master must be the one this program's current plan describes.** A work directory outlives a pin, so a master left
+ *   there by another programme, or by an earlier version of this one that named a different calibration set, is exactly the
+ *   file that would otherwise be compared against an archive master it shares no input with. The comparison would succeed,
+ *   the numbers would look ordinary, and the evidence attached to it would be false. The same expected-run check the
+ *   reduction stage uses answers it: the record beside the product must describe the run `stageRun` builds for this program
+ *   and this stage, whose inputs are that calibration set's pinned frames.
+ * - **The archive master must be the pinned bytes.** It is downloaded here rather than reduced here, so it is checked
+ *   against its pin like any other input rather than trusted for having arrived.
+ *
+ * Either failure refuses by name and nothing is written. */
+export async function checkAgainstArchive(program: GeminiProgram, work: string, stage: Stage, sources: readonly string[] = [],
+  context?: RunContext) {
   const set = program.calibrations.find(entry => entry.id === stage);
   if (!set) throw new Error(`${program.id} pins no ${stage} set.`);
   const directory = stageDirectory(work, stage), product = await currentProduct(directory, stage);
   if (!product) throw new Error(`${stage} has not been reduced in ${repositoryPath(work)}.`);
   const record = await readProductRecord(resolve(directory, productRecordPath(product)));
   if (!record) throw new Error(`${product} has no product record beside it.`);
+
+  const runContext = context ?? await toolchainContext(program, work);
+  const { run: expected } = await stageRun(runContext, stage);
+  if (!await sameRun(record, expected, output => resolve(directory, output)))
+    throw new Error(`${product} in ${repositoryPath(directory)} was not made by ${program.id}'s current ${stage} plan, or is `
+      + `no longer the file its record pins. A receipt would say it and ${set.product.name} were made from the same raw `
+      + `frames, which nothing here has established. Re-run \`reduce ${stage}\` for this program.`);
+
   const archivePath = await geminiFile(set.product, rawDirectory(work), sources);
+  await assertInputPins([archiveMasterPin(set.product)], new Map([[set.product.name, archivePath]]));
+
   const { extensions, total } = await compareOnDetector(resolve(directory, product), archivePath);
   const path = await writeReceipt(receiptPath(program.id, product), {
     programme: program.programme, program: program.id, stage, evidence: 'archive-agreement',
@@ -375,7 +403,10 @@ export async function checkAgainstArchive(program: GeminiProgram, work: string, 
     archive: { product: set.product.name, uri: set.product.uri, bytes: set.product.bytes, md5: set.product.md5,
       madeBy: "Gemini Observatory's IRAF nightly pipeline (gprepare, gireduce, gemcombine), not DRAGONS" },
     association: set.association,
-    registration: "each extension's own DETSEC card, matched by the detector columns it covers; nothing was shifted or resampled",
+    sameInputs: `Checked, not assumed: the record beside ${product} describes the run ${program.id}'s ${stage} plan makes, `
+      + `whose inputs are the ${set.frames.length} raw frames ${set.product.name} names in its own IMCMB cards, and `
+      + `${set.product.name} was checked against its pinned bytes and sha256 before it was read.`,
+    registration: "each extension's own DETSEC card, matched by the detector columns it covers, and each product's own DATASEC origin; nothing was shifted or resampled",
     means: 'Two different official Gemini pipelines reduced the same raw frames. A difference is a difference between the two '
       + 'pipelines, not an error in either. This is not a bit-for-bit reproduction and is not claimed as one.',
     extensions, total });
@@ -383,6 +414,20 @@ export async function checkAgainstArchive(program: GeminiProgram, work: string, 
     `compared sample by sample with the archive's own ${set.product.name}, made from the same raw frames by Gemini's IRAF pipeline`);
   return { product, path, total, extensions };
 }
+
+/** The archive master as an input pin. Its sha256 is added to the program the first time it is downloaded; a master that has
+ * never been downloaded carries none and cannot be checked, which is a reason to refuse it rather than to read it anyway. */
+export function archiveMasterPin(master: GeminiProgram['calibrations'][number]['product']): ProductInput {
+  if (master.sha256 === undefined)
+    throw new Error(`${master.name} carries no sha256 yet. Download it once so the pin can be digested before it is compared against.`);
+  return { role: 'archive master', identity: master.name, bytes: master.bytes, sha256: master.sha256 };
+}
+
+/** What a stage's expected run needs to know, asked of the installed toolchain. Separated so a test can supply it instead. */
+export const toolchainContext = async (program: GeminiProgram, work: string): Promise<RunContext> => {
+  const toolchain = await geminiToolchain();
+  return { program, work, software: dragonsToolchainVersions(toolchain), toolchainDigest: toolchain.digest };
+};
 
 /** The two science halves against each other. */
 export async function checkHalves(program: GeminiProgram, work: string) {
