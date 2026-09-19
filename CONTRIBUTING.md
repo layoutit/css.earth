@@ -89,9 +89,14 @@ are committed evidence, and the comparing tests run without Python. See
 one. When an archive product has no reader, route or kernel bank yet, open an
 issue from the archive-product template instead of writing a reader for one body.
 
-GitHub Actions runs Contract lint, Typecheck, the prepared-universe tests, the
-nebula and renderer tests, and the Object-scope gate on every PR and every push to
-`main`. A nightly workflow checks that every inventoried asset is still published.
+GitHub Actions always runs Contract lint and the Object-scope gate. It also
+always runs Typecheck, the prepared-universe tests, the prepared-universe
+preparation and galaxy field job, and the nebula and renderer tests on every push
+to `main`; on a pull request it runs only the ones `.github/ci-areas.json` maps
+your changed paths to (`tools/ci-affected.mts`, computed by the "Classify
+changes" job) — a job it skips still reports success, never failure, so it never
+blocks merging. When in doubt about what a change affects, it runs everything. A
+nightly workflow checks that every inventoried asset is still published.
 
 `node tools/check-object-runtime-ownership.mts --all` needs `prepare:object-json`'s prerequisites in place first
 (it reads every body's prepared JSON); run `pnpm setup:assets` (which restores `prepared/runtime.json` and
