@@ -28,6 +28,22 @@ describe('selection flight continuity', () => {
     expect(distance(out.positionM, body)).toBeCloseTo(1469, 3);
   });
 
+  it('leaves a planet for a galactic overview instead of freezing at departure', () => {
+    // Earth to the Nearby Universe overview and the Moon to the Milky Way: 1e24 and 3e21 m destinations.
+    for (const [startM, radiusM, endM] of [[1.5e7, 6.4e6, 1e24], [8e6, 1.7e6, 2.9e21]] as const) {
+      const body = [1.5e11, 0, 0] as const, bodies = [{ positionM: body, radiusM }];
+      const out_ = createSelectionFlight({ from: pose([1.5e11, 0, startM]), to: pose([1.5e11, 0, endM]), focusPositionM: body });
+      let elapsed = 0, frames = 0;
+      const out = createSelectionFlightSample();
+      while (elapsed < out_.durationS && frames++ < 5000) {
+        const next = advanceSelectionFlightInto(out_, bodies, elapsed, out_.durationS, out);
+        expect(next).toBeGreaterThan(elapsed);
+        elapsed = next;
+      }
+      expect(elapsed).toBe(out_.durationS);
+    }
+  });
+
 
   it('bounds default departure movement even after a delayed paint, retaining the original curve', () => {
     expect(distance(sampleSelectionFlight(flight, 1 / 60).positionM, flight.from.positionM)).toBeGreaterThan(1e9);

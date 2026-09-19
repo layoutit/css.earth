@@ -71,16 +71,18 @@ export function selectionFlightProgress(curve: SelectionFlightCurve, time: numbe
   return clamp01((curve.startRangeM / 1.96) * hyperbolic / curve.rangeDeltaM);
 }
 
-// 1 - progress without cancellation. Near arrival from galactic range, progress sits within a few
-// ulps of 1, so startRange + delta * progress moves in steps of about startRange * 2^-53
-// (5e5 m from 3e21 m), larger than a small body's whole approach. tanh(end) - tanh(x) equals
-// sinh(end - x) / (cosh(end) cosh(x)); normalised to 1 at departure, as progress reaches 1 at the end.
-function selectionFlightRemaining(curve: SelectionFlightCurve, time: number): number {
+// Both ends of a flight without cancellation. From galactic range a departure's progress
+// starts within a few ulps of 0 and an arrival's within a few ulps of 1, and either range
+// step (range x 2^-53, 1e8 m at 1e24 m) exceeds a small body's whole approach. With
+// x = span * t + offset, progress = sinh(span * t) cosh(offset + span) / (sinh(span) cosh(x))
+// and 1 - progress = sinh(span * (1 - t)) cosh(offset) / (sinh(span) cosh(x)).
+function selectionFlightEnds(curve: SelectionFlightCurve, time: number): { done: number; remaining: number } {
   const t = clamp01(time);
-  if (t === 0 || t === 1) return 1 - t;
-  if (!curve.nonlinear) return (1 - t) * (1 - t) * (1 + 2 * t);
-  const span = 1.4 * curve.curveSpan, x = span * t + curve.curveOffset;
-  return clamp01(Math.sinh(span * (1 - t)) * curve.coshOffset / (Math.sinh(span) * Math.cosh(x)));
+  if (t === 0 || t === 1) return { done: t, remaining: 1 - t };
+  if (!curve.nonlinear) return { done: t * t * (3 - 2 * t), remaining: (1 - t) * (1 - t) * (1 + 2 * t) };
+  const span = 1.4 * curve.curveSpan, x = span * t + curve.curveOffset, scale = Math.sinh(span) * Math.cosh(x);
+  return { done: clamp01(Math.sinh(span * t) * Math.cosh(curve.curveOffset + span) / scale),
+    remaining: clamp01(Math.sinh(span * (1 - t)) * curve.coshOffset / scale) };
 }
 
 export function createSelectionFlight({ from, to, focusPositionM, durationS }: {
@@ -108,9 +110,9 @@ export function sampleSelectionFlightInto(flight: SelectionFlight, elapsedS: num
   if (!Number.isFinite(elapsedS)) throw new TypeError('Flight elapsed time must be finite seconds.');
   const elapsed = Math.max(0, elapsedS);
   const progress = selectionFlightProgress(flight.curve, elapsed / flight.positionDurationS);
-  const remaining = selectionFlightRemaining(flight.curve, elapsed / flight.positionDurationS);
+  const { done, remaining } = selectionFlightEnds(flight.curve, elapsed / flight.positionDurationS);
   slerpQuaternionInto(out.orientationXyzw, flight.from.orientationXyzw, flight.to.orientationXyzw, progress);
-  if (progress === 0) copy3Into(out.positionM, flight.from.positionM);
+  if (done === 0) copy3Into(out.positionM, flight.from.positionM);
   else if (remaining === 0) copy3Into(out.positionM, flight.to.positionM);
   else {
     // Interpolate the focus direction in the camera frame. Its on-screen
@@ -118,7 +120,9 @@ export function sampleSelectionFlightInto(flight: SelectionFlight, elapsedS: num
     // while the camera rotates around it.
     slerpDirectionInto(out.positionM, flight.fromViewDirection, flight.toViewDirection, progress);
     rotateVectorInto(out.positionM, out.orientationXyzw, out.positionM);
-    const rangeM = flight.curve.endRangeM + (flight.curve.startRangeM - flight.curve.endRangeM) * remaining;
+    // Measure from the nearer end, where the fraction still has its precision.
+    const rangeM = done < .5 ? flight.curve.startRangeM + (flight.curve.endRangeM - flight.curve.startRangeM) * done
+      : flight.curve.endRangeM + (flight.curve.startRangeM - flight.curve.endRangeM) * remaining;
     for (let axis = 0; axis < 3; axis++) out.positionM[axis] = flight.focusPositionM[axis] + out.positionM[axis] * rangeM;
   }
   out.progress = progress;
