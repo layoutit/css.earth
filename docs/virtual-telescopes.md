@@ -14,6 +14,27 @@ One route does none of that on purpose. Where an observatory has retired a pipel
 to run again, and the archive's own final product is all there is. That product is pinned and read whole rather than re-made,
 and the difference is kept visible everywhere: see [two capabilities, never one](#two-capabilities-never-one).
 
+## Archive acquisition
+
+The virtual-telescope routes use one pinned archive client where Astroquery has the required public operation. Install it with
+`pnpm telescope:setup-archives`. The hashed lock installs Astroquery 0.4.11 and its exact Python dependency closure into the
+ignored `output/toolchains/astroquery` directory.
+
+Astroquery is the archive client for MAST catalogue queries and complete-file downloads, ALMA TAP and DataLink, and the VizieR
+JMDC cone query. cssEarth does not implement those protocols beside it. cssEarth still checks catalogue fields, observation
+identity, byte counts and hashes, and owns the reducers, product records and evidence. A bounded MAST HTTP range read remains
+for FITS primary-header validation because Astroquery exposes only complete-file downloads; it is not a second catalogue or
+download route.
+
+The boundary is capability-based. The ESO `dbo.raw` TAP query remains direct because Astroquery's ESO client exposes the legacy
+WDB forms rather than that TAP table. Chandra CDA, Keck KOA and the retired Spitzer Heritage Archive also have no equivalent
+Astroquery client used by these routes. DataCite is publication metadata, not an observatory archive. These are explicit
+non-overlapping exceptions rather than fallbacks for the same operation.
+
+Astroquery stays an external dependency: no upstream source is copied into cssEarth. Its BSD 3-Clause license, attribution,
+citation and the separate status of archive-data rights are recorded in
+[`tools/objects/astroquery/NOTICE.md`](../tools/objects/astroquery/NOTICE.md). Acquisition alone supplies no scientific evidence.
+
 ## The product record
 
 Every producing stage writes one `cssearth-telescope-product@1` record beside its output, named `<product>.product.json`

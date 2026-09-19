@@ -9,11 +9,11 @@
  * name. With --associations each observation's coron3 association is read too: how many science rolls and PSF reference
  * exposures it names and how many bytes they are, which is what coron3.mts would download. That is one archive request per
  * observation, six at a time. */
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
-import { mastDownloadUrl, mastRequest } from '../mast.mts';
+import { MAST_CACHE, mastFile, mastRequest, type MastFile } from '../mast.mts';
 import { bandOfFilters } from './archive.mts';
 
 export interface SurveyedObservation {
@@ -39,7 +39,8 @@ export async function surveyCoronagraphy(options: { associations?: boolean } = {
       const products = await mastRequest({ service: 'Mast.Caom.Products', format: 'json', params: { obsid: next.obsid } });
       const association = products.find(p => p.productSubGroupDescription === 'ASN' && p.calib_level === 3 && /_coron3_\d+_asn\.json$/u.test(requireString(p.productFilename)));
       if (!association) { results[next.index] = { ...next.entry, science: 0, references: 0, bytes: 0 }; continue; }
-      const asn = requireRecord(await (await fetch(mastDownloadUrl(requireString(association.dataURI)), { signal: AbortSignal.timeout(120_000) })).json(), 'Association');
+      const asnFile: MastFile = { name: requireString(association.productFilename), uri: requireString(association.dataURI), bytes: requireFiniteNumber(association.size) };
+      const asn = requireRecord(JSON.parse(await readFile(await mastFile(asnFile, MAST_CACHE), 'utf8')) as unknown, 'Association');
       const members = requireArray(requireRecord(requireArray(asn.products)[0]).members).map(value => requireRecord(value));
       const named = new Set(members.filter(member => member.exptype === 'science' || member.exptype === 'psf').map(member => requireString(member.expname)));
       results[next.index] = { ...next.entry, science: members.filter(member => member.exptype === 'science').length, references: members.filter(member => member.exptype === 'psf').length,
