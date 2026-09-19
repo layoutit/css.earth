@@ -32,12 +32,17 @@ function writeExposure(path: string, { headerSubSolar = SUB_SOLAR } = {}) {
   for (const [name, value] of [['OBJECT', 'VENUS'], ['SPCECRFT', 'VCO'], ['INSTRUME', 'Ultra Violet Imager'], ['FILTER', profile.filter],
     ['DATE_BEG', '2023-08-30T10:04:45.198'], ['DATE_OBS', profile.observationMiddle], ['DATE_END', '2023-08-30T10:04:46.869']] as const) text(name, value);
 
+  const written = (name: string): h5.Dataset => {
+    const value = file.get(name);
+    if (!(value instanceof h5.Dataset)) throw new TypeError(`fixture did not write ${name}`);
+    return value;
+  };
   const longitude = Float32Array.from({ length: W }, (_, i) => (i + 0.5) * cellDegrees);
   const latitude = Float32Array.from({ length: H }, (_, i) => -90 + (i + 0.5) * cellDegrees);
   file.create_dataset({ name: 'longitude', data: longitude, shape: [W], dtype: '<f4' });
-  file.get('longitude')!.create_attribute('units', 'degrees_east');
+  written('longitude').create_attribute('units', 'degrees_east');
   file.create_dataset({ name: 'latitude', data: latitude, shape: [H], dtype: '<f4' });
-  file.get('latitude')!.create_attribute('units', 'degrees_north');
+  written('latitude').create_attribute('units', 'degrees_north');
 
   const radiance = new Float32Array(W * H), incidence = new Int16Array(W * H);
   const scale = 180 / 32767, offset = 0, fill = -32768, radianceFill = -3.4028234663852886e38;
@@ -56,11 +61,11 @@ function writeExposure(path: string, { headerSubSolar = SUB_SOLAR } = {}) {
     }
   }
   file.create_dataset({ name: 'radiance', data: radiance, shape: [1, H, W], dtype: '<f4' });
-  const radianceSet = file.get('radiance') as h5.Dataset;
+  const radianceSet = written('radiance');
   radianceSet.create_attribute('units', 'W/m2/sr/m');
   radianceSet.create_attribute('_FillValue', new Float32Array([radianceFill]), [1], '<f4');
   file.create_dataset({ name: 'inangle', data: incidence, shape: [1, H, W], dtype: '<i2' });
-  const incidenceSet = file.get('inangle') as h5.Dataset;
+  const incidenceSet = written('inangle');
   incidenceSet.create_attribute('units', 'degrees');
   incidenceSet.create_attribute('scale_factor', new Float64Array([scale]), [1], '<f8');
   incidenceSet.create_attribute('add_offset', new Float64Array([offset]), [1], '<f8');
