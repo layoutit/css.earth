@@ -30,50 +30,55 @@ export const CI_ONLY_CONDITIONS=["needs.lint.result != 'success'",'failure()'];
  * local run has no such cache to consult, so — like LOCAL_EXPRESSION_SUBSTITUTIONS below — it substitutes the
  * always-correct answer (never skip) instead of failing: the condition is stripped and the step always runs. */
 const CACHE_HIT_CONDITION=/^steps\.[\w-]+\.outputs\.cache-hit(?:-\w+)? != 'true'$/u;
-const UNIVERSE_MATRIX_JOB='universe-checks';
-const UNIVERSE_MATRIX_LANE='${{ matrix.lane }}';
-const UNIVERSE_SELECTED_IF="${{ github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true' }}";
-const UNIVERSE_AGGREGATE_IF="${{ always() && (github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true') }}";
-/** This one aggregate is a verdict, not another suite. Locally every expanded lane must finish successfully;
+const MATRIX_LANE='${{ matrix.lane }}';
+const SUPPORTED_MATRICES=[
+ {aggregate:'universe',job:'universe-checks',laneEnv:'CI_UNIVERSE_LANE',output:'run_universe'},
+ {aggregate:'universe-preparation',job:'universe-preparation-checks',laneEnv:'CI_PREPARATION_LANE',output:'run_universe_preparation'},
+] as const;
+type SupportedMatrix=typeof SUPPORTED_MATRICES[number];
+const selectedMatrixCondition=(matrix:SupportedMatrix)=>`github.event_name != 'pull_request' || needs.changes.outputs.${matrix.output} == 'true'`;
+/** These maintained aggregates are verdicts, not additional suites. Every local lane must finish successfully;
  * never substitute a synthetic success result for a GitHub dependency expression. */
-function requireUniverseAggregate(job:Record<string,unknown>):void {
+function requireMatrixAggregate(job:Record<string,unknown>,matrix:SupportedMatrix):void {
  const needs=requireArray(job.needs).map(value=>requireString(value)).sort();
  const steps=requireArray(job.steps),step=steps.length===1?requireRecord(steps[0]):{};
- if(JSON.stringify(needs)!==JSON.stringify(['changes',UNIVERSE_MATRIX_JOB])||
-    requireString(job.if).trim().replace(/\s+/gu,' ')!==UNIVERSE_AGGREGATE_IF||
+ if(JSON.stringify(needs)!==JSON.stringify(['changes',matrix.job])||
+    requireString(job.if).trim().replace(/\s+/gu,' ')!=='${{ always() && ('+selectedMatrixCondition(matrix)+') }}'||
     job.strategy!==undefined||job.env!==undefined||job['continue-on-error']!==undefined||
     step.if!==undefined||step.uses!==undefined||step.shell!==undefined||step['working-directory']!==undefined||step['continue-on-error']!==undefined||
     typeof step.run!=='string'||step.run.trim()!=='test "$RESULT" = success'||
-    JSON.stringify(step.env)!==JSON.stringify({RESULT:'${{ needs.universe-checks.result }}'}))
-  throw new Error('Local CI needs the explicit fail-closed universe matrix aggregate.');
+    JSON.stringify(step.env)!==JSON.stringify({RESULT:'${{ needs.'+matrix.job+'.result }}'}))
+  throw new Error('Local CI needs the explicit fail-closed maintained matrix aggregate.');
 }
 /** Execute the maintained job's commands, so local checks cannot drift from CI. */
 export function readCiSteps(source:string,jobName='universe', substitutions:Record<string,string>={}):CiStep[] {
  const workflow=requireRecord(parse(source)),jobs=requireRecord(workflow.jobs);
  if(!Object.hasOwn(jobs,jobName))throw new Error(`Unknown CI job: ${jobName}`);
  const job=requireRecord(jobs[jobName]);
- if(jobName==='universe'&&Object.hasOwn(jobs,UNIVERSE_MATRIX_JOB)){
-  requireUniverseAggregate(job);
-  return readCiSteps(source,UNIVERSE_MATRIX_JOB,substitutions);
+ const aggregate=SUPPORTED_MATRICES.find(matrix=>matrix.aggregate===jobName);
+ if(aggregate&&Object.hasOwn(jobs,aggregate.job)){
+  requireMatrixAggregate(job,aggregate);
+  return readCiSteps(source,aggregate.job,substitutions);
  }
+ const supported=SUPPORTED_MATRICES.find(matrix=>matrix.job===jobName);
  if(job.strategy!==undefined){
   const strategy=requireRecord(job.strategy),matrix=requireRecord(strategy.matrix);
-  if(jobName!==UNIVERSE_MATRIX_JOB||Object.keys(strategy).sort().join(',')!=='fail-fast,matrix'||strategy['fail-fast']!==false||
+  if(!supported||Object.keys(strategy).sort().join(',')!=='fail-fast,matrix'||strategy['fail-fast']!==false||
      Object.keys(matrix).join(',')!=='lane'||job['continue-on-error']!==undefined||
-     job.needs!=='changes'||requireString(job.if).trim().replace(/\s+/gu,' ')!==UNIVERSE_SELECTED_IF||
-     requireRecord(job.env).CI_UNIVERSE_LANE!==UNIVERSE_MATRIX_LANE)
-   throw new Error('Local CI supports only the explicit universe lane matrix with fail-fast disabled.');
+     job.needs!=='changes'||requireString(job.if).trim().replace(/\s+/gu,' ')!=='${{ '+selectedMatrixCondition(supported)+' }}'||
+     requireRecord(job.env)[supported.laneEnv]!==MATRIX_LANE)
+   throw new Error('Local CI supports only the explicit maintained lane matrices with fail-fast disabled.');
   const lanes=requireArray(matrix.lane).map(value=>requireString(value));
   if(!lanes.length||new Set(lanes).size!==lanes.length||lanes.some(lane=>!/^[a-z][a-z0-9-]*$/u.test(lane)))
    throw new Error('Local CI needs unique, nonempty literal matrix lanes.');
   return lanes.flatMap(lane=>{
-   const steps=readJobSteps(workflow,job,{...substitutions,[UNIVERSE_MATRIX_LANE]:lane});
-   if(!steps.length||steps.some(step=>step.env.CI_UNIVERSE_LANE!==lane))
+   const steps=readJobSteps(workflow,job,{...substitutions,[MATRIX_LANE]:lane});
+   if(!steps.length||steps.some(step=>step.env[supported.laneEnv]!==lane))
     throw new Error('Local CI needs executable commands for every matrix lane without lane overrides.');
    return steps.map(step=>({...step,name:`[${lane}] ${step.name}`}));
   });
  }
- if(jobName===UNIVERSE_MATRIX_JOB)throw new Error('Local CI needs the universe lane matrix, not a single replacement job.');
+ if(supported)throw new Error('Local CI needs the maintained lane matrix, not a single replacement job.');
  return readJobSteps(workflow,job,substitutions);
 }
 
@@ -114,6 +119,13 @@ export function quickSteps(steps:readonly CiStep[]):CiStep[] {
 /** Paths whose change can break types outside one object package: `--typecheck` appends `pnpm typecheck` for them. */
 export const SHARED_CODE=/^(?:tools|site|src\/platform|src\/renderers|packages)\//u;
 export function sharedCodeChanged(paths:readonly string[]):boolean {return paths.some(path=>SHARED_CODE.test(path));}
+// Matrix lanes share a checkout locally: a later no-DTS build may have cleaned declarations from an earlier
+// typed build. Keep these prerequisites with their consumer so command deduplication cannot discard them.
+export const SHARED_TYPECHECK_STEP:CiStep={
+ name:'Typecheck (shared code changed)',
+ run:'node tools/build-ci.mts full\npnpm prepare:typecheck\npnpm typecheck',
+ env:{NODE_OPTIONS:'--max-old-space-size=4096',CI_PREPARATION_DTS:'true'},
+};
 
 /** CI jobs have separate disks; the local plan shares one checkout. Reuse only explicit common prerequisites,
  * never tests, audits, or a production build with a different environment. */
@@ -170,7 +182,7 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
  steps=steps.map(step=>({...step,env:{...step.env,GITHUB_BASE_REF:base.startsWith('origin/')?base.slice(7):base,CI_BASE_REF:base,GITHUB_EVENT_NAME:'pull_request'}}));
  if(args.includes('--quick'))steps=quickSteps(steps);
  if(args.includes('--typecheck')){
-  if(sharedCodeChanged(changed))steps.push({name:'Typecheck (shared code changed)',run:'pnpm typecheck',env:{NODE_OPTIONS:'--max-old-space-size=4096'}});
+  if(sharedCodeChanged(changed))steps.push(SHARED_TYPECHECK_STEP);
   else console.log('[ci] --typecheck: no shared code changed against origin/main; skipping pnpm typecheck.');
  }
  steps=reuseLocalPreparation(steps);

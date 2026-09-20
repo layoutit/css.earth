@@ -138,9 +138,14 @@ PR source checks validate published package records; main additionally regenerat
 authored provenance. A native Actions matrix gives source, runtime, shell and
 renderer checks separate CPU budgets; the required universe status passes only
 when all four pass. Locally, `test:universe` runs its groups sequentially.
+Preparation uses separate publication/browser and galaxy/world lanes; its required
+status also needs both to pass. The galaxy writer finishes before world readers.
 Compiled artifacts use exact-input caches; these never cache a test verdict.
 Package and renderer caches follow compiler inputs; preparation retains a
-conservative whole-tree key. Cold and cached CI timings must be reported separately.
+conservative whole-tree key. Runtime-only jobs omit preparation declarations;
+compiler jobs and shell checks keep them, with separate cache identities. Cached
+baked JSON remains subject to the installer's byte and SHA-256 checks on every run.
+Cold and cached CI timings must be reported separately.
 
 To run the fast subset before every push, opt in with `pnpm hooks:install`: the
 pre-push hook runs `pnpm check:pr --job=lint --quick`, which skips the network check and the

@@ -132,13 +132,14 @@ jobs:
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
           path: tools/objects/dist
-          key: compiled-preparation-v2-${{ steps.ci-cache-key.outputs.build_digest }}
+          key: compiled-preparation-js-v3-${{ steps.ci-cache-key.outputs.build_digest }}
       - name: Generate the registry, renderer and preparation bundle
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
           CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
           CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
+          CI_PREPARATION_DTS: "false"
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/build-ci.mts lint
@@ -217,7 +218,7 @@ jobs:
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
           path: tools/objects/dist
-          key: compiled-preparation-v2-${{ steps.ci-cache-key.outputs.build_digest }}
+          key: compiled-preparation-dts-v3-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Every tsc invocation in typecheck:pr writes its own .tsbuildinfo (never astro check, which never reads
@@ -293,7 +294,7 @@ jobs:
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
           path: tools/objects/dist
-          key: compiled-preparation-v2-${{ steps.ci-cache-key.outputs.build_digest }}
+          key: compiled-preparation-dts-v3-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Keep this lane separate: caches are immutable, so sharing the application's key lets the
@@ -324,7 +325,33 @@ jobs:
         # covers the 3.9 GB the audit measured, well inside the runner's 16 GB.
         env:
           NODE_OPTIONS: --max-old-space-size=6144
-        run: pnpm typecheck:tests
+        run: |
+          # Read-only cache diagnostics; the native compiler below remains the only verdict.
+          node --input-type=module-typescript - <<'NODE'
+          import ts from 'typescript';
+          import { readFileSync } from 'node:fs';
+          import { dirname, resolve, relative } from 'node:path';
+          import { requireArray, requireRecord, requireString } from './tools/source-values.mts';
+          const state = 'output/tsbuildinfo/tests.tsbuildinfo';
+          let data: Record<string, unknown> | undefined;
+          try { data = requireRecord(JSON.parse(readFileSync(state, 'utf8'))); }
+          catch { console.log('No readable test compiler cache.'); }
+          if (data) {
+            const hash = Reflect.get(ts, 'getSourceFileVersionAsHashFromText');
+            if (typeof hash !== 'function') throw new Error('TypeScript cache diagnostic API unavailable.');
+            const names = requireArray(data.fileNames), infos = requireArray(data.fileInfos);
+            const changed: string[] = [], missing: string[] = [];
+            for (const [index, value] of names.entries()) {
+              const file = resolve(dirname(state), requireString(value)), source = ts.sys.readFile(file);
+              const info = infos[index], version = typeof info === 'string' ? info : requireString(requireRecord(info).version);
+              const label = relative(process.cwd(), file);
+              if (source === undefined) missing.push(label);
+              else if (hash(ts.sys, source) !== version) changed.push(label);
+            }
+            console.log(JSON.stringify({ state, savedVersion: data.version, compilerVersion: ts.version, files: names.length, changed, missing }));
+          }
+          NODE
+          pnpm typecheck:tests --extendedDiagnostics
 
   universe-checks:
     name: Universe / ${{ matrix.lane }}
@@ -372,7 +399,7 @@ jobs:
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
           path: tools/objects/dist
-          key: compiled-preparation-v2-${{ steps.ci-cache-key.outputs.build_digest }}
+          key: compiled-preparation-${{ matrix.lane == 'shell' && 'dts' || 'js' }}-v3-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
@@ -386,7 +413,20 @@ jobs:
           CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
-        run: node tools/build-ci.mts full
+        run: |
+          if [ "$CI_UNIVERSE_LANE" = shell ]; then
+            node tools/build-ci.mts full
+          else
+            CI_PREPARATION_DTS=false node tools/build-ci.mts full
+          fi
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # Only the baked JSON payloads, not texture banks. The following installer revalidates every pin.
+          path: |
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-json-v1-${{ hashFiles('src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-json-v1-
       - name: Restore prepared assets and object JSON
         # Every object's JSON remains SHA-verified. Only tests that consume real prepared images restore them;
         # application texture banks are not inputs to these runtime and renderer assertions.
@@ -433,8 +473,14 @@ jobs:
           RESULT: ${{ needs.universe-checks.result }}
         run: test "$RESULT" = success
 
-  universe-preparation:
-    name: Prepared universe preparation and galaxy field
+  universe-preparation-checks:
+    name: Preparation / ${{ matrix.lane }}
+    strategy:
+      fail-fast: false
+      matrix:
+        lane: [publication, world]
+    env:
+      CI_PREPARATION_LANE: ${{ matrix.lane }}
     needs: changes
     if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_universe_preparation == 'true' }}
     runs-on: ubuntu-latest
@@ -473,7 +519,7 @@ jobs:
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
           path: tools/objects/dist
-          key: compiled-preparation-v2-${{ steps.ci-cache-key.outputs.build_digest }}
+          key: compiled-preparation-js-v3-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
@@ -490,19 +536,46 @@ jobs:
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
           CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
           CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
+          CI_PREPARATION_DTS: "false"
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/build-ci.mts full
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # Only the baked JSON payloads, not texture banks. The following installer revalidates every pin.
+          path: |
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-json-v1-${{ hashFiles('src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-json-v1-
       - name: Restore only the inputs consumed by preparation tests
         run: node tools/prepare-ci-inputs.mts universe-preparation
-      - name: Install the browser used by preparation tests
-        run: pnpm exec playwright install --with-deps chromium
-      - name: Bake and test the scientific galaxy field
-        # This writes provenance consumed by both groups below; finish it before starting readers.
-        run: pnpm test:galaxy-field
-      - name: Test publication, cache, prepared source, materials and world context
-        # Two native groups, each with file concurrency one; no renderer pool competes here.
-        run: pnpm test:ci-preparation
+      - name: Test the selected preparation lane
+        run: |
+          case "$CI_PREPARATION_LANE" in
+            publication)
+              pnpm exec playwright install --with-deps --only-shell chromium
+              pnpm test:ci-preparation:publication
+              ;;
+            world)
+              # The galaxy writer finishes before world/provenance readers in this workspace.
+              pnpm test:galaxy-field
+              pnpm test:ci-preparation:world
+              ;;
+            *) echo "Unknown preparation lane" >&2; exit 1 ;;
+          esac
+
+  universe-preparation:
+    name: Prepared universe preparation and galaxy field
+    needs: [changes, universe-preparation-checks]
+    if: ${{ always() && (github.event_name != 'pull_request' || needs.changes.outputs.run_universe_preparation == 'true') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require every preparation lane to pass
+        env:
+          RESULT: ${{ needs.universe-preparation-checks.result }}
+        run: test "$RESULT" = success
 
   nebula:
     name: Internal nebula packages and isolated controls
@@ -543,7 +616,7 @@ jobs:
         # above, so it runs here rather than adding another checkout+install in Contract lint.
         run: pnpm test:packages
       - name: Install the browser used by isolated control tests
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps --only-shell chromium
       - name: Check all nebula packages, tests and dependency boundaries
         env:
           NODE_OPTIONS: --max-old-space-size=4096
