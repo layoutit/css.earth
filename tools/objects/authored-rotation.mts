@@ -61,23 +61,28 @@ export async function readAuthoredRotation(directory: string, reference: { path:
     spinRateRadPerDay: observed ? 2 * Math.PI * 24 / periodHours : 0 };
 }
 
-/** A planet on a hosted orbit that keeps one face toward its star: the pole is the orbit normal (prograde spin), longitude 0 is
- * the sub-host point at the epoch, and the spin rate is the orbital rate. Everything follows from the planet's hosted orbit
- * record; the source only states the assumption and its qualification. */
+/** A planet on a circular hosted orbit that keeps one face toward its star: the pole is the orbit normal (prograde spin),
+ * longitude 0 is the sub-host point at the epoch, and the uniform spin rate is the orbital rate. An eccentric orbit needs an
+ * explicitly authored rotation law because a uniform spin cannot keep one face toward its star throughout the orbit. */
 async function synchronousRotation(directory: string, source: Record<string, unknown>, epochJdTt: number): Promise<RotationElements> {
   const { id } = requireRecord(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')), 'Object descriptor');
   if (typeof id !== 'string' || typeof source.source !== 'string' || !source.source.trim() || typeof source.qualification !== 'string' || !source.qualification.trim() ||
       typeof source.coordinateSystem !== 'string' || !source.coordinateSystem.trim()) throw new TypeError('Invalid synchronous rotation source.');
   const { HOSTED_PLANET_IDS, hostedOrbit, hostedPlanetStateRelativeKm } = await import('@cssearth/astronomy');
   if (!(HOSTED_PLANET_IDS as readonly string[]).includes(id)) throw new TypeError(`Synchronous rotation needs a hosted orbit: ${id}.`);
-  const planet = id as (typeof HOSTED_PLANET_IDS)[number], { positionKm: r, velocityKmPerDay: v, hostId } = hostedPlanetStateRelativeKm(planet, epochJdTt);
+  const planet = id as (typeof HOSTED_PLANET_IDS)[number], orbit = hostedOrbit(planet);
+  if (orbit.eccentricity !== 0) {
+    throw new TypeError(`Synchronous rotation needs a circular hosted orbit; ${id} has eccentricity ${orbit.eccentricity}. Supply an explicit authored rotation law.`);
+  }
+  const { positionKm: r, velocityKmPerDay: v, hostId } = hostedPlanetStateRelativeKm(planet, epochJdTt);
   if (source.host !== hostId) throw new TypeError(`Synchronous rotation host ${String(source.host)} is not the orbit's host ${hostId}.`);
-  return synchronousRotationElements(r, v, hostedOrbit(planet).periodDays);
+  return synchronousRotationElements(r, v, orbit.periodDays, orbit.eccentricity);
 }
 
-/** IAU-style elements for a body whose +X faces the centre it orbits and whose +Z is its orbit normal. W is measured from the
- * ascending node of the body equator on the ICRF equator, as `bodyFixedToIcrf` expects. */
-export function synchronousRotationElements(positionKm: readonly number[], velocityKmPerDay: readonly number[], periodDays: number): RotationElements {
+/** IAU-style elements for a circular orbit whose +X faces the centre it orbits and whose +Z is its orbit normal. W is measured
+ * from the ascending node of the body equator on the ICRF equator, as `bodyFixedToIcrf` expects. */
+export function synchronousRotationElements(positionKm: readonly number[], velocityKmPerDay: readonly number[], periodDays: number, eccentricity = 0): RotationElements {
+  if (eccentricity !== 0) throw new TypeError('Synchronous rotation needs a circular orbit; supply an explicit authored rotation law for an eccentric orbit.');
   const unit = (v: readonly number[]) => { const n = Math.hypot(...v); if (!(n > 0)) throw new RangeError('Direction has no magnitude.'); return v.map(c => c / n); };
   const cross = (a: readonly number[], b: readonly number[]) => [a[1]! * b[2]! - a[2]! * b[1]!, a[2]! * b[0]! - a[0]! * b[2]!, a[0]! * b[1]! - a[1]! * b[0]!];
   const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;

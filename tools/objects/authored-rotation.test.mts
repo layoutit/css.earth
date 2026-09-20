@@ -60,6 +60,11 @@ test('a synchronous rotation faces +X at the centre it orbits, +Z along the orbi
   }
 });
 
+test('a uniform synchronous rotation refuses an eccentric orbit until an explicit rotation law is authored', async () => {
+  const { synchronousRotationElements } = await import('./authored-rotation.mts');
+  assert.throws(() => synchronousRotationElements([1, 0, 0], [0, 1, 0], 2, .1), /explicit authored rotation law/);
+});
+
 test('a spin axis measured against an orbit reproduces the published true obliquity and lies on the orbit normal when aligned', () => {
   // Cristo et al. (2024, A&A 682, A28), HD 189733: lambda -1.00, i* 71.87 degrees with their orbit's i 85.508 give psi 13.6 +/- 6.9.
   assert.ok(Math.abs(obliquitySpinAxis(85.508, 71.87, -1).trueObliquityDegrees - 13.68) < 0.01);

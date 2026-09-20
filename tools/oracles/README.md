@@ -9,6 +9,7 @@ are older standalone audits; the groups below are fixture oracles.
 | Oracle | Verifies | Script | Comparing test |
 | --- | --- | --- | --- |
 | Astropy ICRS geometry, NumPy vectors | The declared circular hosted-orbit contract: sky frames, phase/state vectors, and the synchronous body orientation derived from them (not physical ephemeris accuracy) | `astronomy/hosted-orbit.py` | `tools/objects/hosted-orbit.oracle.test.mts` |
+| SpiceyPy (CSPICE N0067) | Eccentric hosted-orbit position and velocity, including a sourced TRAPPIST-1f convention conversion; both implementations receive the same representable BMJD_TDB timestamp | `astronomy/hosted-eccentric.py` | `tools/objects/hosted-eccentric.oracle.test.mts` |
 | Astropy blackbody, constants and units | Frequency-form Planck intensity and brightness-temperature inversion used by ALMA preparation, plus the HST flux-density-to-Rayleigh conversion | `physical-units/spectral.py` | `tools/objects/spectral-units.oracle.test.mts` |
 | NumPy SVD, following pinned ThERESA source | `eigenmap-fit.mts`: signed harmonic curves, scale-independent eigencurve ordering, eigenmap coefficients and rejection of the null spectrum; comparisons are invariant to arbitrary eigenvector signs | `eclipse-map/theresa-eigenbasis.py` | `tools/objects/eclipse-map/eigenmap-fit.oracle.test.mts` |
 | NumPy, Astropy, following pinned ThERESA source | Eclipse-map harmonic normalization and signs, weighted linear fit and posterior covariance, Planck radiance and single/band brightness temperatures | `eclipse-map/numerics.py` | `tools/objects/eclipse-map/numerics.oracle.test.mts` |
@@ -47,7 +48,8 @@ same group and name, and the comparing tests beside the code they check (under
   `pnpm test:platform`, refuses a fixture whose tool versions differ from
   `requirements.txt`, whose inputs are not the bodies' manifest input/document pins
   or the hashed checked-in test files and test-only archive acquisition record
-  under `tests/fixtures/fits/`, or whose
+  under `tests/fixtures/fits/` and hosted-orbit qualification records under
+  `tests/fixtures/hosted-orbits/`, or whose
   references are not pinned to a commit. It needs neither Python nor restored
   sources.
 - Comparing tests read the committed fixture and the same pinned inputs the

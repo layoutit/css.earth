@@ -1,0 +1,444 @@
+{
+ "schema": "cssearth-oracle-fixture@1",
+ "oracle": "SpiceyPy CSPICE conics_c eccentric propagation",
+ "generatedBy": "tools/oracles/astronomy/hosted-eccentric.py",
+ "tool": {
+  "spiceypy": "8.2.0",
+  "cspice": "CSPICE_N0067",
+  "method": "conics_c",
+  "python": "3.12.14",
+  "numpy": "2.5.3"
+ },
+ "inputs": [
+  {
+   "path": "tests/fixtures/hosted-orbits/trappist-1f-agol2021/qualification.json",
+   "sha256": "57adcb6d1e8bd20d8111daebbeef653053b67b01c17b589db7867aa9efecf98e",
+   "bytes": 3860
+  }
+ ],
+ "references": [
+  {
+   "url": "https://raw.githubusercontent.com/ChristopherRabotin/cspice/26c72936fb7ff6f366803a1419b7cc3c61e0b6e5/src/cspice/conics_c.c",
+   "sha256": "cf46b31e3440a3af38984ceba0409d8b338b7790c27ffa4732bee52a4f0100c9",
+   "bytes": 5678
+  },
+  {
+   "url": "https://raw.githubusercontent.com/ChristopherRabotin/cspice/26c72936fb7ff6f366803a1419b7cc3c61e0b6e5/src/cspice/conics.c",
+   "sha256": "79c8ac37b15d4197530aee23c4606431ab9bbd5f616e55e0b61cb77516a09f37",
+   "bytes": 14637
+  }
+ ],
+ "cases": {
+  "orbits": [
+   {
+    "id": "low-eccentricity",
+    "periodDays": 2.1,
+    "semiMajorAxisStellarRadii": 8.0,
+    "stellarRadiusKm": 500000.0,
+    "eccentricity": 0.05,
+    "inclinationDegrees": 73.0,
+    "argumentOfPeriapsisDegrees": 0.0,
+    "rightAscensionDegrees": 15.0,
+    "declinationDegrees": -20.0,
+    "nodePositionAngleDegrees": 5.0,
+    "epochDefinition": "inferior-conjunction",
+    "transitTimeBmjdTdb": 60000.25,
+    "states": [
+     {
+      "label": "transit",
+      "epochBmjdTdb": 60000.25,
+      "observerLocalPositionKm": [
+       3.9832659975909874e-11,
+       -1166563.1018437194,
+       3815655.9762925105
+      ],
+      "observerLocalVelocityKmPerDay": [
+       11982960.087192388,
+       -175173.92341584674,
+       572968.0860948627
+      ]
+     },
+     {
+      "label": "sample-0.11-period",
+      "epochBmjdTdb": 60000.481,
+      "observerLocalPositionKm": [
+       2561578.864429127,
+       -942729.3338828087,
+       3083528.710252394
+      ],
+      "observerLocalVelocityKmPerDay": [
+       9382555.149154423,
+       2004103.4824230012,
+       -6555127.1231964575
+      ]
+     },
+     {
+      "label": "behind",
+      "epochBmjdTdb": 60001.36681721353,
+      "observerLocalPositionKm": [
+       2.933962474368651e-06,
+       1166563.1018437624,
+       -3815655.9762926516
+      ],
+      "observerLocalVelocityKmPerDay": [
+       -11982960.087192392,
+       -175173.9234132713,
+       572968.0860864386
+      ]
+     },
+     {
+      "label": "sample-0.77-period",
+      "epochBmjdTdb": 60001.867,
+      "observerLocalPositionKm": [
+       -3798535.804553902,
+       -31600.689936841347,
+       103361.19942582294
+      ],
+      "observerLocalVelocityKmPerDay": [
+       340826.51504626096,
+       -3677234.980598219,
+       12027693.665071163
+      ]
+     },
+     {
+      "label": "periapsis",
+      "epochBmjdTdb": 60001.858408606764,
+      "observerLocalPositionKm": [
+       -3800000.0,
+       3.126011061591571e-06,
+       -1.0224721466217178e-05
+      ],
+      "observerLocalVelocityKmPerDay": [
+       -3.3727189937547485e-05,
+       -3678652.3917328003,
+       12032329.807992175
+      ]
+     },
+     {
+      "label": "next-transit",
+      "epochBmjdTdb": 60002.35,
+      "observerLocalPositionKm": [
+       -1.743316840847448e-05,
+       -1166563.1018434647,
+       3815655.976291677
+      ],
+      "observerLocalVelocityKmPerDay": [
+       11982960.087192386,
+       -175173.9234311547,
+       572968.0861449327
+      ]
+     }
+    ]
+   },
+   {
+    "id": "moderate-eccentricity",
+    "periodDays": 7.5,
+    "semiMajorAxisStellarRadii": 6.0,
+    "stellarRadiusKm": 610000.0,
+    "eccentricity": 0.5,
+    "inclinationDegrees": 88.5,
+    "argumentOfPeriapsisDegrees": 137.0,
+    "rightAscensionDegrees": 211.0,
+    "declinationDegrees": 44.0,
+    "nodePositionAngleDegrees": 123.0,
+    "epochDefinition": "inferior-conjunction",
+    "transitTimeBmjdTdb": 60000.25,
+    "states": [
+     {
+      "label": "transit",
+      "epochBmjdTdb": 60000.25,
+      "observerLocalPositionKm": [
+       -4.4287357548991286e-10,
+       -53583.71889790217,
+       2046279.6681158
+      ],
+      "observerLocalVelocityKmPerDay": [
+       4747856.35426997,
+       33891.090425710994,
+       -1294248.5272540788
+      ]
+     },
+     {
+      "label": "sample-0.11-period",
+      "epochBmjdTdb": 60001.075,
+      "observerLocalPositionKm": [
+       2080877.4219541952,
+       29864.565380989723,
+       -1140481.7394752866
+      ],
+      "observerLocalVelocityKmPerDay": [
+       -494794.41357000096,
+       115158.62376726084,
+       -4397730.41643753
+      ]
+     },
+     {
+      "label": "behind",
+      "epochBmjdTdb": 60002.1906664243,
+      "observerLocalPositionKm": [
+       -5.799104411344871e-06,
+       109037.38042173401,
+       -4163969.564089688
+      ],
+      "observerLocalVelocityKmPerDay": [
+       -2333216.3637004183,
+       33891.090425582,
+       -1294248.5272491532
+      ]
+     },
+     {
+      "label": "sample-0.77-period",
+      "epochBmjdTdb": 60006.025,
+      "observerLocalPositionKm": [
+       -4586141.888927272,
+       15530.651577232564,
+       -593091.6556134329
+      ],
+      "observerLocalVelocityKmPerDay": [
+       753077.0657654423,
+       -58023.40708570438,
+       2215824.5197671703
+      ]
+     },
+     {
+      "label": "periapsis",
+      "epochBmjdTdb": 60000.55528667015,
+      "observerLocalPositionKm": [
+       1338377.2739615678,
+       -32670.32354590331,
+       1247629.3209533866
+      ],
+      "observerLocalVelocityKmPerDay": [
+       3621959.985857469,
+       101673.27127705644,
+       -3882745.581759315
+      ]
+     },
+     {
+      "label": "next-transit",
+      "epochBmjdTdb": 60007.75,
+      "observerLocalPositionKm": [
+       -2.9595539540496552e-09,
+       -53583.718897902276,
+       2046279.6681158042
+      ],
+      "observerLocalVelocityKmPerDay": [
+       4747856.354269969,
+       33891.0904257111,
+       -1294248.5272540834
+      ]
+     }
+    ]
+   },
+   {
+    "id": "high-eccentricity",
+    "periodDays": 31.0,
+    "semiMajorAxisStellarRadii": 30.0,
+    "stellarRadiusKm": 350000.0,
+    "eccentricity": 0.9,
+    "inclinationDegrees": 93.0,
+    "argumentOfPeriapsisDegrees": 319.0,
+    "rightAscensionDegrees": 359.5,
+    "declinationDegrees": 78.0,
+    "nodePositionAngleDegrees": 301.0,
+    "epochDefinition": "inferior-conjunction",
+    "transitTimeBmjdTdb": 60000.25,
+    "states": [
+     {
+      "label": "transit",
+      "epochBmjdTdb": 60000.25,
+      "observerLocalPositionKm": [
+       6.731830489675525e-10,
+       254940.86112347897,
+       4864561.418384237
+      ],
+      "observerLocalVelocityKmPerDay": [
+       1999559.3003570137,
+       173561.42579008278,
+       3311749.289217565
+      ]
+     },
+     {
+      "label": "sample-0.11-period",
+      "epochBmjdTdb": 60003.66,
+      "observerLocalPositionKm": [
+       5849985.391083087,
+       576535.3093097433,
+       11000949.042240873
+      ],
+      "observerLocalVelocityKmPerDay": [
+       1429258.206823501,
+       53717.81832703298,
+       1024997.0340646676
+      ]
+     },
+     {
+      "label": "behind",
+      "epochBmjdTdb": 60030.105367391276,
+      "observerLocalPositionKm": [
+       -2.253962840326483e-05,
+       -65648.10429871466,
+       -1252640.4514140124
+      ],
+      "observerLocalVelocityKmPerDay": [
+       -7765180.3558101,
+       173561.42579466428,
+       3311749.2893049866
+      ]
+     },
+     {
+      "label": "sample-0.77-period",
+      "epochBmjdTdb": 60024.12,
+      "observerLocalPositionKm": [
+       13385540.256673573,
+       325691.89268461213,
+       6214571.52239999
+      ],
+      "observerLocalVelocityKmPerDay": [
+       -824508.1356917983,
+       -58145.20521573751,
+       -1109476.6084574943
+      ]
+     },
+     {
+      "label": "periapsis",
+      "epochBmjdTdb": 60030.21483900145,
+      "observerLocalPositionKm": [
+       -792445.0592196846,
+       -36052.25046659365,
+       -687917.9190532864
+      ],
+      "observerLocalVelocityKmPerDay": [
+       -6085933.336387831,
+       366407.45444226183,
+       6991470.721615345
+      ]
+     },
+     {
+      "label": "next-transit",
+      "epochBmjdTdb": 60031.25,
+      "observerLocalPositionKm": [
+       1.718250610685997e-09,
+       254940.86112347888,
+       4864561.418384234
+      ],
+      "observerLocalVelocityKmPerDay": [
+       1999559.300357014,
+       173561.42579008275,
+       3311749.2892175647
+      ]
+     }
+    ]
+   },
+   {
+    "periodDays": 9.20754,
+    "semiMajorAxisStellarRadii": 69.543,
+    "inclinationDegrees": 89.74,
+    "eccentricity": 0.00841546790143008,
+    "argumentOfPeriapsisDegrees": 3.4744073675316516,
+    "epochDefinition": "inferior-conjunction",
+    "transitTimeBmjdTdb": 57256.57426,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+     "period": "Agol et al. (2021), Table 2: P = 9.207540 +/- 0.000032 d; retained at tests/fixtures/hosted-orbits/trappist-1f-agol2021/agol2021-table2.tex.",
+     "shape": "Agol et al. (2021), Table 5: a/R* = 69.543 and inclination = 89.740 deg. These are separate photodynamical summaries, not a joint draw with the Table 2 eccentricity vector.",
+     "phase": "Agol et al. (2021), Table 2: t0 = BJD_TDB 2457257.07426, the two-body inferior-conjunction parameter at the initial osculating epoch; BMJD_TDB 57256.57426.",
+     "orientation": "Display convention: transit timing does not measure the orbit's sky position angle, so the ascending node remains 0 deg east of celestial north.",
+     "eccentricity": "Agol et al. (2021), Table 2: e cos(omega_source) = -0.00840 and e sin(omega_source) = -0.00051, giving e = 0.00841546790143008.",
+     "argumentOfPeriapsis": "Planet-centric Agol Table 2 vector and its pinned author initializer. The source uses f_transit = 3pi/2 - omega_source. The hosted-orbit convention uses f_transit = pi/2 - omega, so omega = wrap(omega_source - pi) = 3.4744073675316516 deg. This is not a stellar radial-velocity omega or a sky-node angle."
+    },
+    "id": "trappist-1f-agol2021",
+    "stellarRadiusKm": 1.0,
+    "rightAscensionDegrees": 0.0,
+    "declinationDegrees": 0.0,
+    "nodePositionAngleDegrees": 0,
+    "states": [
+     {
+      "label": "transit",
+      "epochBmjdTdb": 57256.57426,
+      "observerLocalPositionKm": [
+       8.533069571439855e-16,
+       -0.31539184168719464,
+       69.50191301457367
+      ],
+      "observerLocalVelocityKmPerDay": [
+       47.48172501019254,
+       -0.0018089791691090447,
+       0.3986390776121878
+      ]
+     },
+     {
+      "label": "sample-0.11-period",
+      "epochBmjdTdb": 57257.5870894,
+      "observerLocalPositionKm": [
+       44.37723580198173,
+       -0.24497355131276832,
+       53.98405476542961
+      ],
+      "observerLocalVelocityKmPerDay": [
+       36.68497068003531,
+       0.13494533947265597,
+       -29.737482097119983
+      ]
+     },
+     {
+      "label": "behind",
+      "epochBmjdTdb": 57261.227267724316,
+      "observerLocalPositionKm": [
+       -9.105202924026689e-11,
+       0.3157137055162648,
+       -69.57284113919131
+      ],
+      "observerLocalVelocityKmPerDay": [
+       -47.433318338084916,
+       -0.0018089791693908714,
+       0.3986390776742937
+      ]
+     },
+     {
+      "label": "sample-0.77-period",
+      "epochBmjdTdb": 57263.6640658,
+      "observerLocalPositionKm": [
+       -68.54401762158234,
+       -0.03425579687401561,
+       7.5488427406567356
+      ],
+      "observerLocalVelocityKmPerDay": [
+       5.219404638326508,
+       -0.21586936899503806,
+       47.57045720061566
+      ]
+     },
+     {
+      "label": "periapsis",
+      "epochBmjdTdb": 57263.59338762554,
+      "observerLocalPositionKm": [
+       -68.8310165229953,
+       -0.018963753369736523,
+       4.178982975851558
+      ],
+      "observerLocalVelocityKmPerDay": [
+       2.900256852992203,
+       -0.21676781334176412,
+       47.76844456928235
+      ]
+     },
+     {
+      "label": "next-transit",
+      "epochBmjdTdb": 57265.781800000004,
+      "observerLocalPositionKm": [
+       1.455026188985402e-10,
+       -0.3153918416872002,
+       69.5019130145749
+      ],
+      "observerLocalVelocityKmPerDay": [
+       47.48172501019254,
+       -0.0018089791686581984,
+       0.39863907751283684
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

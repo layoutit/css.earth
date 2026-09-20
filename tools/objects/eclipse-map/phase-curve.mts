@@ -2,7 +2,7 @@
  * the hosted orbit places the planet, the synchronous rotation turns the map, and the host star hides what passes behind it.
  * It is a check on geometry, not a retrieval: comparing the result with a published light curve shows whether the map, the
  * orbit and the rotation agree, and whether east and west are the right way round. */
-import { bodyFixedToIcrf, hostSkyFrame, hostedOrbitStateRelativeKm, type HostedOrbit } from '@cssearth/astronomy';
+import { bodyFixedToIcrf, hostSkyFrame, hostedOrbitStateRelativeBmjdTdb, type HostedOrbit } from '@cssearth/astronomy';
 import { synchronousRotationElements } from '../authored-rotation.mts';
 
 export interface EmissionGrid { readonly width: number; readonly height: number; readonly values: Float64Array; readonly latitudes: Float64Array; readonly longitudes: Float64Array }
@@ -36,6 +36,7 @@ const LIGHT_KM_PER_DAY = 299792.458 * 86400;
 export function mapBasisCurves(basis: readonly ArrayLike<number>[], grid: Pick<EmissionGrid, 'width' | 'height' | 'latitudes' | 'longitudes'>, orbit: HostedOrbit,
   host: { rightAscensionDegrees: number; declinationDegrees: number }, planetRadiusStellarRadii: number, timesBmjd: ArrayLike<number>, visible?: Uint8Array,
   { stellarRadiusKm }: LightTravel = {}) {
+  if (orbit.eccentricity !== 0) throw new TypeError('An eccentric emission map needs an explicit rotation model; instantaneous star-facing orientation is not synchronous spin.');
   const { x, y, z } = hostSkyFrame(host, orbit.ascendingNodePositionAngleDegrees), cells = grid.width * grid.height;
   if (basis.some(values => values.length !== cells) || (visible && visible.length !== cells)) throw new RangeError('Every basis map must cover the grid.');
   const cellLatitude = Math.PI / grid.height, cellLongitude = 2 * Math.PI / grid.width, normals = new Float64Array(cells * 3), area = new Float64Array(cells);
@@ -45,16 +46,16 @@ export function mapBasisCurves(basis: readonly ArrayLike<number>[], grid: Pick<E
     area[i] = Math.cos(lat) * cellLatitude * cellLongitude;
   }
   const curves = basis.map(() => new Float64Array(timesBmjd.length)), sums = new Float64Array(basis.length);
-  const atTransit = hostedOrbitStateRelativeKm(orbit, host, 1, orbit.transitTimeBmjdTdb + 2400000.5).positionKm;
+  const atTransit = hostedOrbitStateRelativeBmjdTdb(orbit, host, 1, orbit.transitTimeBmjdTdb).positionKm;
   const transitTowardObserver = atTransit[0] * z[0] + atTransit[1] * z[1] + atTransit[2] * z[2];
   for (let t = 0; t < timesBmjd.length; t++) {
     // Unit stellar radius: positions come back in the same units as the radius passed in.
-    let state = hostedOrbitStateRelativeKm(orbit, host, 1, timesBmjd[t]! + 2400000.5);
+    let state = hostedOrbitStateRelativeBmjdTdb(orbit, host, 1, timesBmjd[t]!);
     if (stellarRadiusKm !== undefined) {
       // Emission time: later when the planet is nearer the observer than at transit, earlier when farther (first order in v/c).
       const towardObserver = state.positionKm[0] * z[0] + state.positionKm[1] * z[1] + state.positionKm[2] * z[2];
       const delayDays = (towardObserver - transitTowardObserver) * stellarRadiusKm / LIGHT_KM_PER_DAY;
-      state = hostedOrbitStateRelativeKm(orbit, host, 1, timesBmjd[t]! + delayDays + 2400000.5);
+      state = hostedOrbitStateRelativeBmjdTdb(orbit, host, 1, timesBmjd[t]! + delayDays);
     }
     const m = bodyFixedToIcrf(synchronousRotationElements(state.positionKm, state.velocityKmPerDay, orbit.periodDays));
     const r = state.positionKm, behind = r[0] * z[0] + r[1] * z[1] + r[2] * z[2] < 0;
