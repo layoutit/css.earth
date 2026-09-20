@@ -2,7 +2,7 @@
 import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { sha256 } from '../../../src/platform/sha256.mts';
-import { requireRecord } from '../../source-values.mts';
+import { requireRecord,requireArray } from '../../source-values.mts';
 import { readFile,mkdir,writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -92,10 +92,21 @@ export async function sphereOracle(mapRecord:string,sphereRecord:string,measurem
  if(!originalPin)throw new Error('Sphere does not pin its existing standard runtime');
  const originalBytes=await readFile(originalPin.identity);assert.equal(sha256(originalBytes),originalPin.sha256);
  const original=requireRecord(JSON.parse(originalBytes.toString()));
- for(const key of ['tree','camera','facing','depthPartitions','surfaceHit','sky'] as const)assert.deepEqual(definition[key],original[key],`Standard sphere ${key} changed`);
+ const expectedTree=structuredClone(requireRecord(original.tree));
+ const kept=new Set(assets.entries.map(input=>requireRecord(input).key));
+ const excluded=requireArray(requireRecord(original.assets).entries).map(input=>requireRecord(input)).filter(entry=>!kept.has(entry.key)).map(entry=>String(entry.url));
+ const inactive:string[]=[];
+ expectedTree.properties=requireArray(expectedTree.properties).map(input=>{
+  const property=requireRecord(input),value=String(property.value);
+  const stripped=value.replace(/url\(\s*(["']?)([^"')]+)\1\s*\)/g,(match,_quote,url:string)=>excluded.includes(url.trim())?'none':match);
+  if(stripped!==value)inactive.push(String(property.name));return {...property,value:stripped};
+ });
+ assert.deepEqual(definition.tree,expectedTree,'Only inactive image URLs may change; geometry and node identity remain exact');
+ assert.deepEqual(requireRecord(requireRecord(data.metadata).renderer).inactiveImageProperties??[],inactive);
+ for(const key of ['camera','facing','depthPartitions','surfaceHit','sky'] as const)assert.deepEqual(definition[key],original[key],`Standard sphere ${key} changed`);
  const rejected=structuredClone(definition.tree);requireRecord(rejected).camera=-1;
- assert.notDeepEqual(rejected,original.tree,'Parity check must detect a changed camera owner');
- const sceneParity={runtimeSha256:originalPin.sha256,contextSha256:contextPin.sha256,physicalCameraMountValidated:true,missingContextRejected:true,unchanged:['tree','camera','facing','depthPartitions','surfaceHit','sky'],treeSha256:sha256(JSON.stringify(definition.tree)),mutationRejected:true};
+ assert.notDeepEqual(rejected,expectedTree,'Parity check must detect a changed camera owner');
+ const sceneParity={runtimeSha256:originalPin.sha256,contextSha256:contextPin.sha256,physicalCameraMountValidated:true,missingContextRejected:true,inactiveImageProperties:inactive,unchanged:['tree except inactive image bindings','camera','facing','depthPartitions','surfaceHit','sky'],treeSha256:sha256(JSON.stringify(definition.tree)),mutationRejected:true};
  const result=execFileSync(tc.python,['-c',ORACLE_PYTHON],{env:{...process.env,...tc.env},input:JSON.stringify({map:map.root,html:resolve(sphere.root,'sphere.html'),measurement:resolve(measurement),out:resolve(out)}),encoding:'utf8',maxBuffer:2**20});
  const report={...JSON.parse(result),sceneParity,controlBinding,selfContained:{inlineCss:true,inlineJavaScript:true,embeddedImages:assets.entries.length,networkForbidden:true},inputs:{map:map.pin,sphere:sphere.pin},source:'tools/objects/telescopes/sphere-oracle.mts'};await writeFile(resolve(out,'sphere-oracle.json'),JSON.stringify(report,null,2)+'\n');return report;
 }

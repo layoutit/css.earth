@@ -2,6 +2,7 @@
 import { readFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
+import { clearInactiveImageBindings } from './sphere-assets.mts';
 import { preparedAssets } from '../../runtime-assets.mts';
 import { installRuntimeAssets } from '../../setup.mts';
 import { requireRecord } from '../../source-values.mts';
@@ -80,10 +81,15 @@ export async function measurementSphere(root: string, target: string, texture: s
   // must not be multiplied by the photographic lighting plane, even at full phase.
   const required = variant.required.filter(key => replacement.has(key));
   if (!required.some(key => key.startsWith('surface:'))) throw new Error('Sphere surface binding is unavailable');
+  // Inactive lenses retain image-valued custom properties in the shared tree.
+  // Clear only bindings to excluded assets; node identity and geometry stay intact.
+  const excluded = original.assets.entries.filter(entry => !required.includes(entry.key));
+  const { properties: portableProperties, inactiveImageProperties } = clearInactiveImageBindings(original.tree.properties, excluded);
+  const tree = { ...original.tree, properties: portableProperties };
   const navigation = prepareScientificNavigation(id, focus, original.camera);
   // Apply the measurement view immediately, keeping the viewport's fitted zoom.
   const { features: _features, ...portable } = original;
-  const definition = parsePreparedObjectRuntime({ ...portable,
+  const definition = parsePreparedObjectRuntime({ ...portable, tree,
     controls: { lenses: { defaultLens: lensId, controls: [{ id: lensId, label: 'Measurement' }] }, settings: null },
     materials: [], motion: [], animations: [],
     variants: [{ ...variant, when: { lensId }, required, materials: [],
@@ -119,7 +125,7 @@ export async function measurementSphere(root: string, target: string, texture: s
   }
   return { definition, worldFrame, context, css, inputs, embeddedAssets: Object.fromEntries(oldToNew), owner: {
     object: id, runtimeSha256: inputs.find(input => input.identity.endsWith('/prepared/runtime.json'))!.sha256,
-    treeSha256: sha256(JSON.stringify(original.tree)), geometry: 'existing standard sphere; unchanged prepared tree',
+    treeSha256: sha256(JSON.stringify(original.tree)), geometry: 'existing standard sphere; unchanged nodes and geometry; inactive image bindings cleared', inactiveImageProperties,
     physicalFrame: worldFrame, projectionShape: 'standard reference sphere', surfaceUrl: selected.url,
     rasterToolchain: { node: process.version, sharp: sharp.versions },
   } };

@@ -17,11 +17,13 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 r=json.load(sys.stdin); data=r['data']; out=Path(r['directory']); kind=data['kind']
-values=np.asarray(data['values'],dtype=float); sigma=np.asarray(data['sigma'],dtype=float)
+if 'arrays' in data:
+ values=np.load(out/'arrays'/data['arrays']['values'],mmap_mode='r');sigma=np.load(out/'arrays'/data['arrays']['sigma'],mmap_mode='r')
+else:values=np.asarray(data['values'],dtype=float);sigma=np.asarray(data['sigma'],dtype=float)
 if not np.isfinite(values).any(): raise ValueError('The requested output contains no usable samples')
 if sigma.shape!=values.shape: raise ValueError('Uncertainty shape mismatch')
 unit=u.Unit(data['unit']) if data['unit'] else None
-unit_label=unit.to_string('latex_inline') if unit is not None else 'unit not stated'
+unit_label=('dimensionless' if unit==u.dimensionless_unscaled else unit.to_string('latex_inline')) if unit is not None else 'unit not stated'
 metadata={'kind':kind,'definition':data.get('definition','Native sampled values'),
  'selection':r['selection'],'uncertainty':data.get('uncertaintyPolicy','recorded'),
  'mask':'Non-finite values are missing; no interpolation',
@@ -53,7 +55,7 @@ with (out/'values.csv').open('w',newline='') as file:
    presentation['warnings']=[str(n.message) for n in notices]
   product[0].data=values
   header=product[0].header
-  if unit is not None:header['BUNIT']=unit.to_string('fits')
+  if unit is not None:header['BUNIT']=unit.to_string('fits') or '1'
   header['HIERARCH CSSEARTH KIND']=kind
   header['HIERARCH CSSEARTH UNCERTAINTY']=metadata['uncertainty']
   header['HISTORY']=metadata['definition']
@@ -63,7 +65,7 @@ with (out/'values.csv').open('w',newline='') as file:
   product.append(mask)
   if np.isfinite(sigma).any():
    err=fits.ImageHDU(sigma,name='ERR')
-   if unit is not None:err.header['BUNIT']=unit.to_string('fits')
+   if unit is not None:err.header['BUNIT']=unit.to_string('fits') or '1'
    err.header['HISTORY']='Standard deviation; NaN means unavailable. See uncertainty policy in primary header.'
    product.append(err)
   product.writeto(out/'image.fits',checksum=True);product.close();files.append('image.fits')
@@ -73,7 +75,13 @@ with (out/'values.csv').open('w',newline='') as file:
   norm=ImageNormalize(vmin=lo,vmax=hi,stretch=LinearStretch(),clip=False)
   cmap='RdBu_r' if kind=='feature-map' else 'viridis'
   presentation['normalization']={'owner':'astropy.visualization.ImageNormalize','stretch':'linear','minimum':lo,'maximum':hi,'colormap':cmap,'missing':'transparent'}
-  shown=ax.imshow(np.ma.masked_invalid(values),origin='lower',interpolation='nearest',cmap=cmap,norm=norm)
+  stride=max(1,int(np.ceil(max(values.shape)/1600)))
+  preview=values[::stride,::stride]
+  presentation['preview']={'method':'nearest sample','stride':stride,'shape':list(preview.shape),'numericProducts':'full native grid; no downsampling'}
+  # Preserve source pixel centers, including the last partial stride, for WCSAxes.
+  shown=ax.imshow(np.ma.masked_invalid(preview),origin='lower',interpolation='nearest',cmap=cmap,norm=norm,
+   extent=(-stride/2,(preview.shape[1]-.5)*stride,-stride/2,(preview.shape[0]-.5)*stride))
+  ax.set_xlim(-.5,values.shape[1]-.5);ax.set_ylim(-.5,values.shape[0]-.5)
   fig.colorbar(shown,ax=ax,label=unit_label)
   presentation['normalization'].update(minimum=float(norm.vmin),maximum=float(norm.vmax))
   if spatial is not None:

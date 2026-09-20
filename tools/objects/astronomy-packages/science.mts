@@ -118,8 +118,7 @@ def read_science(path):
                     if specaxis is not None:
                         if not isinstance(plane,int) or plane<0 or plane>=shape[specaxis]: raise ValueError('Select an explicit zero-based spectral plane')
                     elif plane is not None: raise ValueError('A two-dimensional image has no spectral plane selector')
-                    if w*height>1000000: raise ValueError('Output exceeds the one-million-pixel budget; select a smaller product')
-                    output_values=np.full((height,w),np.nan); output_sigma=np.full((height,w),np.nan)
+                    output_values=science_array('values',(height,w),np.nan); output_sigma=science_array('sigma',(height,w),np.nan)
                 elif kind=='spectrum':
                     x=request.get('x'); y=request.get('y')
                     if specaxis!=len(shape)-3 or centers is None: raise ValueError('Output needs a qualified wavelength axis')
@@ -197,7 +196,14 @@ def read_science(path):
             if extract:
                 if aggregate is not None: output_values,output_sigma,measurement=aggregate.result()
                 def nullable(a): return np.where(np.isfinite(a),a,None).tolist()
-                row['extraction']={'kind':kind,'values':nullable(output_values),'sigma':nullable(output_sigma),'unit':rawunit,
+                if request.get('arrayDirectory'):
+                    Path(request['arrayDirectory']).mkdir(parents=True,exist_ok=True)
+                    for key,array in [('values',output_values),('sigma',output_sigma)]:
+                        if not isinstance(array,np.memmap):np.save(Path(request['arrayDirectory'])/(key+'.npy'),array)
+                        else:array.flush()
+                    payload={'arrays':{'values':'values.npy','sigma':'sigma.npy'}}
+                else:payload={'values':nullable(output_values),'sigma':nullable(output_sigma)}
+                row['extraction']={'kind':kind,**payload,'unit':rawunit,
                     'wavelengthsMicrometres':centers.tolist() if centers is not None else None,
                     'plane':request.get('plane'),'x':request.get('x'),'y':request.get('y'),**measurement}
             structures.append(row)
@@ -209,7 +215,7 @@ elif request['operation']=='units':
 else: raise ValueError('Unknown science operation')
 json.dump(answer,sys.stdout,allow_nan=False,separators=(',',':'))
 `;
-export async function sciencePackage(request: { operation: 'fits'; path: string } | { operation:'extract';path:string;hdu:number;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent' } | { operation: 'units'; units: readonly string[] }): Promise<Record<string, unknown>> {
+export async function sciencePackage(request: { operation: 'fits'; path: string } | { operation:'extract';path:string;hdu:number;arrayDirectory?:string;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent' } | { operation: 'units'; units: readonly string[] }): Promise<Record<string, unknown>> {
   const tc = await astroqueryToolchain();
   return new Promise((done, fail) => {
     const child = spawn(tc.python, ['-c', SCIENCE_PYTHON], { env: { ...process.env, ...tc.env }, stdio: ['pipe', 'pipe', 'pipe'] });

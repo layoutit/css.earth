@@ -2,12 +2,16 @@ export const HELP = `Telescope — retrieve a qualified telescope product for a 
 
   telescope query TARGET --wavelength MIN,MAX --kind cube --any-time --min-arcsec N --out DIRECTORY
   telescope get DIRECTORY --pick N
-  telescope outputs DIRECTORY/pick-N/result.json
-  telescope export DIRECTORY/pick-N/result.json --output image --hdu N --plane N --out DIRECTORY
+  telescope outputs DIRECTORY/pick-N/result.json [--structure NAME]
+  telescope export DIRECTORY/pick-N/result.json --output image --hdu N [--structure NAME] --plane N --out DIRECTORY
   telescope export DIRECTORY/pick-N/result.json --output spectrum --hdu N --pixel X,Y --out DIRECTORY
   telescope export RESULT_JSON --output band-image --hdu N --band LO,HI --out DIRECTORY
   telescope export RESULT_JSON --output aperture-spectrum --hdu N --aperture X0,Y0,X1,Y1 --background none --out DIRECTORY
   telescope export RESULT_JSON --output feature-map --hdu N --band LO,HI --continuum L0,L1,R0,R1 --out DIRECTORY
+
+Physical object handoff (existing measured/modelled depth):
+  telescope export OBJECT_JSON --output points|volume --out DIRECTORY
+  Reuses the existing point/volume loaders; copies pinned renderer resources and credits.
 
 Surface outputs:
   telescope project MEASUREMENT/output.product.json --geometry navigation.json --out MAP_DIRECTORY

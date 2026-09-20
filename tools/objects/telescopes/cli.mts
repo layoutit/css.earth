@@ -6,6 +6,7 @@ import { formatAnswer } from './query.mts';
 import { assessRequest } from './request-satisfaction.mts';
 import { getSession, saveSession, type Session } from './session.mts';
 
+import { exportSpatialObject } from './spatial-handoff.mts';
 import { listOutputs, exportOutput, validateOutputRequest, type OutputRequest } from './outputs.mts';
 import { projectOutput } from './projection.mts';
 import { exportSphere } from './sphere.mts';
@@ -13,7 +14,7 @@ import { HELP } from '../../../packages/telescope/src/help.mts';
 export { HELP };
 
 const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--result']);
-export type CliOptions = {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help' } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
+export type CliOptions = {readonly command:'spatial';readonly kind:'points'|'volume';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help' } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
 export function parseCli(args: readonly string[]): CliOptions {
   const command = args[0];
   if (!args.length || args.includes('--help') || args.includes('-h')) return { command: 'help' as const };
@@ -22,14 +23,14 @@ export function parseCli(args: readonly string[]): CliOptions {
     for(let i=1;i<args.length;i++){
       const arg=args[i];if(!arg.startsWith('-')){positional.push(arg);continue;}
       if(['--json','--verbose'].includes(arg)){if(flags.has(arg))throw new TypeError(`Repeated option ${arg}`);flags.add(arg);continue;}
-      if(command==='outputs'||!(command==='project'?['--geometry','--out']:['--output','--hdu','--plane','--pixel','--out','--band','--aperture','--background','--continuum','--uncertainty']).includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated ${command} option ${arg}`);
+      if(!(command==='outputs'?['--structure']:command==='project'?['--geometry','--out']:['--output','--hdu','--structure','--plane','--pixel','--out','--band','--aperture','--background','--continuum','--uncertainty']).includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated ${command} option ${arg}`);
       const value=args[++i];if(!value||value.startsWith('--'))throw new TypeError(`Missing value for ${arg}`);values.set(arg,value);
     }
     if(positional.length!==1)throw new TypeError(`Use telescope ${command} DELIVERY_RESULT_JSON`);
     const common={result:resolve(positional[0]),json:flags.has('--json'),verbose:flags.has('--verbose')};
-    if(command==='outputs')return {command,...common};
+    if(command==='outputs')return {command,...common,...(values.has('--structure')?{structure:values.get('--structure')!}:{})};
     if(command==='project'){const geometry=values.get('--geometry'),directory=values.get('--out');if(!geometry||!directory)throw new TypeError('project requires --geometry FILE and --out DIRECTORY');return {command,...common,geometry:resolve(geometry),directory:resolve(directory)};}
-    const kind=values.get('--output');if(kind==='sphere'){if([...values.keys()].some(k=>!['--output','--out'].includes(k))||!values.get('--out'))throw new TypeError('Sphere takes only --output sphere and --out DIRECTORY');return {command:'sphere',...common,directory:resolve(values.get('--out')!)};}if(kind!=='image'&&kind!=='spectrum'&&kind!=='band-image'&&kind!=='aperture-spectrum'&&kind!=='feature-map')throw new TypeError('--output takes image, spectrum, band-image, aperture-spectrum or feature-map');
+    const kind=values.get('--output');if(kind==='points'||kind==='volume'){if([...values.keys()].some(k=>!['--output','--out'].includes(k))||!values.get('--out'))throw new TypeError('Spatial handoff takes only --output points|volume and --out DIRECTORY');return {command:'spatial',kind,...common,directory:resolve(values.get('--out')!)};}if(kind==='sphere'){if([...values.keys()].some(k=>!['--output','--out'].includes(k))||!values.get('--out'))throw new TypeError('Sphere takes only --output sphere and --out DIRECTORY');return {command:'sphere',...common,directory:resolve(values.get('--out')!)};}if(kind!=='image'&&kind!=='spectrum'&&kind!=='band-image'&&kind!=='aperture-spectrum'&&kind!=='feature-map')throw new TypeError('--output takes image, spectrum, band-image, aperture-spectrum, feature-map, sphere, points or volume');
     const integer=(value:string|undefined)=>{if(value===undefined||!/^\d+$/u.test(value)||!Number.isSafeInteger(Number(value)))throw new TypeError('Selectors must be nonnegative whole numbers');return Number(value);};
     const hdu=integer(values.get('--hdu')),plane=values.has('--plane')?integer(values.get('--plane')):undefined;
     const parts=values.get('--pixel')?.split(',');if(parts&&parts.length!==2)throw new TypeError('--pixel takes X,Y');
@@ -37,7 +38,7 @@ export function parseCli(args: readonly string[]): CliOptions {
     const directory=values.get('--out');if(!directory)throw new TypeError('export requires --out DIRECTORY');
     const numbers=(key:string)=>{const parts=values.get(key)!.split(',');if(parts.some(p=>!p.trim()||!Number.isFinite(Number(p))))throw new TypeError(`${key} requires comma-separated numbers`);return parts.map(Number);};
     const uncertainty=values.get('--uncertainty');if(uncertainty!==undefined&&uncertainty!=='omit'&&uncertainty!=='independent')throw new TypeError('--uncertainty takes omit or independent');
-    const selection:OutputRequest={kind,hdu,...(plane===undefined?{}:{plane}),...(pixel?{pixel}:{}),
+    const selection:OutputRequest={kind,hdu,...(values.has('--structure')?{structure:values.get('--structure')!}:{}),...(plane===undefined?{}:{plane}),...(pixel?{pixel}:{}),
       ...(values.has('--band')?{band:numbers('--band')}:{}),...(values.has('--aperture')?{aperture:numbers('--aperture')}:{}),
       ...(values.has('--background')?{background:values.get('--background')==='none'?'none':numbers('--background')}:{}),
       ...(values.has('--continuum')?{continuum:numbers('--continuum')}:{}),...(uncertainty?{uncertainty}:{})};
@@ -102,10 +103,12 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
     try {
       if(options.command==='project'){
         const result=await projectOutput(options.result,options.geometry,options.directory);text=options.json?JSON.stringify(result)+'\n':`Map: ${result.map}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\n`;code=0;
+      }else if(options.command==='spatial'){
+        const result=await exportSpatialObject(options.result,options.kind,options.directory);text=options.json?JSON.stringify(result)+'\n':`Object: ${result.object}\nEvidence: ${result.receipt}\n`;code=0;
       }else if(options.command==='sphere'){
         const result=await exportSphere(options.result,options.directory);text=options.json?JSON.stringify(result)+'\n':`Sphere: ${result.html}\nEvidence: ${result.receipt}\n`;code=0;
       }else if(options.command==='outputs'){
-        const result=await listOutputs(options.result);
+        const result=await listOutputs(options.result,options.structure);
         text=options.json?`${JSON.stringify(result)}\n`:result.outputs.map(o=>`${o.kind}${'hdu' in o?` HDU ${o.hdu}`:''}: ${o.available?'available':'unavailable'}. ${o.reason}`).join('\n')+'\n';code=0;
       }else if(options.command==='export'){
         const result=await exportOutput(options.result,options.selection,options.directory);

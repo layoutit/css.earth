@@ -66,7 +66,11 @@ in the science unit.
 Aggregation requires every contributing sample to be valid for an output pixel/channel.
 It does not silently change the aperture or renormalize around spectral gaps. Band/feature
 maps require qualified bin edges; tabulated wavelength centers alone are insufficient.
-The one-million-spatial-pixel limit applies; extraction streams through the cube.
+Extraction uses temporary file-backed arrays, with no one-million-pixel CLI limit.
+FITS/CSV retain the full native grid; figures use a recorded nearest-sample stride
+when an axis exceeds 1600 pixels. Reader and serialization memory/disk costs remain.
+PDS and ISIS products enter the same plotting path after decoding by their existing
+owners. Select ambiguous PDS arrays with `--structure NAME` and use `--hdu 0`.
 
 Astropy `NDDataArray` owns weighted arithmetic and standard-deviation propagation; css.earth
 owns the selected regions, continuum definition and strict missing-sample policy.
@@ -113,7 +117,22 @@ the target's existing css.earth standard sphere and physical scale. CSS, JavaScr
 and base64 images are embedded. The projection ellipsoid is recorded separately. Projection preserves
 unknown beam resolution and does not qualify scientific publication. See the
 [navigation contract and oracle](../../docs/virtual-telescopes.md#from-a-measurement-to-a-surface-and-sphere).
-Physical 3D point/volume handoffs remain unavailable.
+Physical 3D handoffs use an existing `point-field` or `density-volume` object package:
+
+```sh
+telescope export src/objects/stellar-neighbourhood/object.json --output points --out stars
+telescope export src/objects/milky-way/object.json --output volume --out galaxy
+```
+
+These copy the prepared renderer files and credits, validate them with the exact
+application loaders, and write a pinned receipt. The physical frame and model
+interpretation stay intact. Raw source datasets are referenced, not bundled.
+A spectral cube still needs a justified physical reconstruction; this export does
+not interpret wavelength as depth. Restore missing prepared inputs with the
+repository's `setup:prepared --object=ID` command.
+
+Mercury's inactive interior image bindings are removed for the surface export;
+its prepared geometry and camera remain unchanged.
 
 ## Independent output checks
 

@@ -764,15 +764,61 @@ Output ownership and remaining adapters:
 | Feature map | Qualified bins plus feature and bracketing continuum windows | Executable continuum-subtracted wavelength integral; signed residual, no detection claim |
 | Surface map | Measurement definition, viewing geometry, rotation/frame and resolution evidence | PlanetMapper-backed `telescope project`; scientific publication remains `body-map-publication.mts` |
 | Body sphere | Qualified surface map plus a prepared layer | Standalone HTML from `telescope export --output sphere`, using the existing PolyCSS renderer |
-| 3D scatter/volume | Explicit coordinate frame, units and measured or explicitly modeled depth | Existing nebula lab preparation and viewer; output handoff remains |
+| 3D scatter/volume | Explicit coordinate frame, units and measured or explicitly modeled depth | Existing point-field and density-volume owners; `--output points` or `volume` packages a physical `object.json` |
 
 A wavelength axis, radial velocity or image intensity cannot silently become physical depth.
-The current draft exposes unavailable families honestly; it does not create a second body or
-nebula renderer. PDS and ISIS retain native qualification and delivery, but their figure export
-adapters remain to be connected to the same output boundary. Images above one million pixels
-require a smaller selected product in this first adapter; no implicit resampling is performed.
+PDS arrays pass through `pdr`; ISIS3 cores use the existing shared reader. Both feed
+Astropy and Matplotlib through temporary file-backed arrays. `--structure NAME`
+selects an ambiguous PDS array, with `--hdu 0` addressing its normalized FITS array.
+The original labels, input hashes, decoding versions and limitations remain in the receipt.
+The recognized IMAGE / SIGMA_MAP_IMAGE / QUALITY_MAP_IMAGE convention preserves
+standard deviations and conservatively accepts only zero quality flags. This is the
+[OSIRIS documented all-science-cases criterion](https://rosetta-osiris.eu/documents/SCIENCE_USER_GUIDE.PDF),
+not an assertion that every flagged pixel is useless for every analysis.
 
-### From a measurement to a surface and sphere
+There is no one-million-pixel CLI cap. Extraction writes NumPy files instead of
+serializing pixel arrays through JSON. PNG/SVG previews use a recorded nearest-sample
+stride when an axis exceeds 1600 pixels; FITS and CSV keep the entire native grid.
+Format readers and serialization still need memory and disk space proportional to their inputs.
+
+### Native examples and physical handoffs
+
+```sh
+telescope export enceladus/pick-1/result.json --output spectrum --hdu 0 --pixel 10,10 --out enceladus-spectrum
+telescope export comet-67p/pick-10/result.json --output image --structure IMAGE --hdu 0 --out comet-image
+telescope export src/objects/stellar-neighbourhood/object.json --output points --out stars-handoff
+telescope export src/objects/milky-way/object.json --output volume --out volume-handoff
+```
+
+![Enceladus spectrum from the delivered ISIS3 cube](images/telescopes/enceladus-isis-spectrum.png)
+
+Enceladus: Cassini VIMS cube C1487299582_1_ir.cub, pixel (10,10), recorded spectral
+centres and dimensionless I/F. No spectral bin edges or uncertainty are invented.
+The source request remains unresolved; a figure does not upgrade qualification.
+
+![Moon native PDS4 radius grid](images/telescopes/moon-pds-radius.png)
+
+Moon: LOLA LDEM_16, 5760 × 2880 (16,588,800 cells). `pdr.get_scaled` applies
+both the label's factor 0.5 and offset 1,737,400 metres. Values span
+1,728,418.5–1,748,085.5 m; the figure's native pixel axes do not assert a new
+planetary projection. Its preview samples every fourth pixel; FITS and CSV retain
+all samples. Supplied uncertainty is unavailable and remains unknown.
+
+The 2048 × 2048 OSIRIS image n20151026t125938783id40f22.img also exported, retaining
+its sigma map and all 4,194,304 grid cells. Only 26,917 cells pass the conservative
+zero-flag criterion. Its mostly masked preview is not a useful picture of the comet;
+the flags remain in the pinned original product for a measurement-specific policy.
+
+The physical handoffs copy the existing prepared object, point bank or volume slices,
+textures, frame, source recipe and credits. The application's loaders validate them;
+a second renderer is not added. HYG's 109,389 stars retain the source astrometry and
+its stated epoch limitations. The Milky Way retains its model interpretation.
+The exports reproduce every renderer file byte-for-byte and reject changed textures.
+Raw source catalogues/grids are referenced, not bundled: this is a renderer handoff.
+An ordinary RA/Dec/wavelength cube still needs a justified physical reconstruction
+before it can enter either 3D owner; this command does not supply one.
+
+### Projection and sphere
 
 ```sh
 telescope export europa/pick-1/result.json --output band-image --hdu 1 \
@@ -789,7 +835,8 @@ using the target's existing standard sphere—the same lane as Mercury. The
 prepared mesh, camera, facing/depth bindings and physical frame are reused;
 the shared raster lane packs the measurement into a surface lens. CSS,
 JavaScript and base64 images are embedded, and the document prohibits network
-requests. There is no export-owned mesh or camera. A target without the existing
+requests. Inactive image bindings (including Mercury’s unused interior images) are
+cleared without changing the prepared geometry or camera. There is no export-owned mesh or camera. A target without the existing
 standard sphere package is refused. The export also embeds the prepared world
 context and uses the application's physical-camera mount. Prepare that context
 with `pnpm prepare:world-context` before exporting.
