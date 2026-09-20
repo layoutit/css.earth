@@ -31,7 +31,10 @@ to the Virtual Observatory”, *Astronomy and Computing* 25 (2018), doi:10.1016/
 
 Astroquery and PyVO depend on [Astropy 8.0.1](https://pypi.org/project/astropy/). It is installed from the hash-locked
 environment and is not copied or modified. Astropy is distributed under the BSD 3-Clause license reproduced in
-[ASTROPY-LICENSE.rst](ASTROPY-LICENSE.rst).
+[ASTROPY-LICENSE.rst](ASTROPY-LICENSE.rst). Its NDData arithmetic owns selected-output
+error propagation. [Astropy visualization](https://docs.astropy.org/en/stable/visualization/index.html)
+owns WCSAxes sky coordinates, ImageNormalize scaling and quantity-aware axes. Astropy FITS
+and QTable serialize the scientific outputs, including units and masks.
 
 # Matplotlib
 

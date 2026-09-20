@@ -26,6 +26,13 @@ for k,v in {'CTYPE3':'WAVE','CUNIT3':'um','CRPIX3':1,'CRVAL3':1.,'CDELT3':1.}.it
 err=fits.ImageHDU(np.full_like(a,2),name='ERR');err.header['BUNIT']='MJy/sr'
 dq=fits.ImageHDU(np.zeros(a.shape,dtype='uint16'),name='DQ');dq.data[2,1,3]=1
 fits.HDUList([fits.PrimaryHDU(),h,err,dq]).writeto(root/'cube.fits')
+sky=h.copy()
+for k,v in {'CTYPE1':'RA---TAN','CTYPE2':'DEC--TAN','CUNIT1':'deg','CUNIT2':'deg','CRPIX1':2,'CRPIX2':1,'CRVAL1':12.,'CRVAL2':-3.,'CDELT1':-.001,'CDELT2':.001,'RADESYS':'ICRS'}.items():sky.header[k]=v
+fits.HDUList([fits.PrimaryHDU(),sky,err,dq]).writeto(root/'sky.fits')
+sky.header['PC1_3']=.1
+fits.HDUList([fits.PrimaryHDU(),sky,err,dq]).writeto(root/'coupled.fits')
+del sky.header['PC1_3'];sky.header['CUNIT1']='kg'
+fits.HDUList([fits.PrimaryHDU(),sky,err,dq]).writeto(root/'invalid-wcs.fits')
 h.data=h.data[::-1];err.data=err.data[::-1];dq.data=dq.data[::-1];h.header['CRVAL3']=6.;h.header['CDELT3']=-1.
 fits.HDUList([fits.PrimaryHDU(),h,err,dq]).writeto(root/'descending.fits')
 fits.HDUList([fits.PrimaryHDU(),h]).writeto(root/'no-error.fits')
@@ -74,6 +81,30 @@ test('all three exports publish figures, CSV and selections with source satisfac
   const exported=await exportOutput(result,selection,resolve(root,selection.kind));
   assert.equal((await readFile(exported.figure)).subarray(1,4).toString(),'PNG');
   const receipt=JSON.parse(await readFile(exported.receipt,'utf8'));assert.deepEqual(receipt.parameters.selection,selection);assert.equal(receipt.parameters.sourceSatisfaction.status,'unresolved');assert.equal(receipt.parameters.measurement.uncertaintyPolicy,'independent');assert.ok((await readFile(exported.values,'utf8')).includes('standard_deviation'));
+  assert.ok(receipt.outputs.some((o:{path:string})=>o.path===exported.data.split('/').at(-1)));
+  const tc=await astroqueryToolchain();
+  execFileSync(tc.python,['-c',String.raw`
+import sys
+import numpy as np
+from astropy.io import fits
+from astropy.table import QTable
+from astropy import units as u
+path,kind=sys.argv[1:]
+if kind=='aperture-spectrum':
+ t=QTable.read(path)
+ assert t['wavelength'].unit==u.um and t['value'].unit==u.MJy/u.sr
+ np.testing.assert_allclose(t['value'].value,10)
+ np.testing.assert_allclose(t['standard_deviation'].value,2)
+ assert t.meta['uncertainty']=='independent' and t.meta['selection']['background']==[2,0,4,1]
+else:
+ with fits.open(path,checksum=True) as f:
+  assert f[0].data.shape==(2,4) and f['MASK'].data[1,3]==1 and np.isnan(f[0].data[1,3])
+  assert u.Unit(f[0].header['BUNIT'])==(u.MJy*u.um/u.sr if kind=='feature-map' else u.MJy/u.sr)
+  np.testing.assert_allclose(f['ERR'].data[0,0],np.sqrt(12 if kind=='feature-map' else 2))
+  assert 'CTYPE1' not in f[0].header
+  assert f[0].verify_checksum()==1
+`,exported.data,selection.kind],{env:{...process.env,...tc.env}});
+  assert.equal(receipt.parameters.software.presentation.coordinates.kind,selection.kind==='aperture-spectrum'?'spectral':'pixel');
   if(process.env.CSSEARTH_ORACLE_PYTHON){const {compareOutput}=await import('./output-oracle.mts');assert.equal((await compareOutput(exported.directory,process.env.CSSEARTH_ORACLE_PYTHON,resolve(root,selection.kind+'-oracle'))).passed,true);}
  }
 });
@@ -83,4 +114,33 @@ test('CLI accepts new selectors and refuses incomplete or silently ignored selec
  assert.throws(()=>parseCli([...args,'--output','aperture-spectrum','--aperture','0,0,2,1']),/background/);
  assert.throws(()=>parseCli([...args,'--output','band-image','--band','2,3','--pixel','1,2']),/not valid/);
  assert.throws(()=>validateOutputRequest({...band,band:[2,2]}),/positive increasing/);
+});
+
+test('Astropy output retains the source sky grid and records when celestial projection is inapplicable',async()=>{
+ const {plotProduct}=await import('../astronomy-packages/plots.mts');
+ const {mkdir}=await import('node:fs/promises');
+ const tc=await astroqueryToolchain();
+ const data=await extract({...band,uncertainty:'omit'});
+ for(const file of ['sky','coupled','invalid-wcs']){
+  const dir=resolve(root,file);await mkdir(dir);
+  const run=plotProduct(dir,'fixture',data,resolve(root,file+'.fits'),{...band,uncertainty:'omit'});
+  if(file==='invalid-wcs'){await assert.rejects(run,/InvalidTransform|mismatched units/);continue;}
+  const result=await run,coordinates=requireRecord(requireRecord(result.presentation).coordinates);
+  assert.equal(coordinates.kind,file==='sky'?'celestial':'pixel');
+  if(file==='coupled'){assert.match(String(coordinates.reason),/beyond/);continue;}
+  assert.equal(coordinates.frame,'<ICRS Frame>');
+  execFileSync(tc.python,['-c',String.raw`
+import sys
+import numpy as np
+from astropy.io import fits
+from astropy.wcs import WCS
+with fits.open(sys.argv[1],checksum=True) as f:
+ w=WCS(f[0].header,f)
+ assert w.pixel_n_dim==2
+ np.testing.assert_allclose(w.pixel_to_world_values(1,0),[12.,-3.],atol=1e-10)
+ ra,dec=w.pixel_to_world_values(2,0)
+ assert ra<12 and abs(dec+3)<1e-6
+ assert 'ERR' not in f and np.isnan(f[0].data[1,3]) and f['MASK'].data[1,3]==1
+`,resolve(dir,'image.fits')],{env:{...process.env,...tc.env}});
+ }
 });

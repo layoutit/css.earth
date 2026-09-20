@@ -112,6 +112,14 @@ test('delivery outputs preserve masked spectrum gaps, label plots, and refuse ch
  assert.equal((await readFile(image.figure)).subarray(1,4).toString(),'PNG');assert.equal(JSON.parse(await readFile(image.receipt,'utf8')).telescope,'Fixture');
  const spectrum=await exportOutput(result,{kind:'spectrum',hdu:1,pixel:[0,0]},resolve(root,'spectrum-output'));
  const rows=(await readFile(spectrum.values,'utf8')).trim().split(/\r?\n/u);assert.equal(rows.length,4);assert.match(rows[2],/,,/);
+ const tc=await astroqueryToolchain();execFileSync(tc.python,['-c',String.raw`
+import sys
+from astropy.table import QTable
+from astropy import units as u
+t=QTable.read(sys.argv[1]);assert list(t['value'].mask)==[False,True,False]
+assert list(t['standard_deviation'].mask)==[False,True,False]
+assert t['wavelength'].unit==u.um and t['value'].unit==u.erg/(u.s*u.cm**2*u.AA)
+`,spectrum.data],{env:{...process.env,...tc.env}});
  await writeFile(file,'changed');await assert.rejects(listOutputs(result),/pin mismatch/);
 });
 

@@ -633,10 +633,33 @@ The CLI exposes `telescope outputs RESULT_JSON` and `telescope export RESULT_JSO
 
 Executable outputs include a native FITS plane, a pixel spectrum, a wavelength-weighted
 band image, a background-subtracted region mean spectrum and a continuum-subtracted feature map. Astropy owns coordinates and units; the shared scientific reader applies the
-same uncertainty and quality policy used by qualification; Astropy NDData owns aggregate arithmetic and uncertainty propagation; Matplotlib owns PNG/SVG figures.
-Numeric CSV and a product record accompany each plot. The record pins the original delivery,
+same uncertainty and quality policy used by qualification; Astropy NDData owns aggregate
+arithmetic and uncertainty propagation. Astropy WCSAxes owns sky-coordinate axes,
+ImageNormalize owns display scaling, and quantity_support owns spectral unit conversion.
+Matplotlib renders PNG/SVG. Astropy also writes reusable FITS images or ECSV spectra;
+CSV and a product record accompany every export. The record pins the original delivery,
 its files, the chosen HDU/plane/pixel, the implementation, package versions and derived bytes.
 No plotting stage upgrades the original scientific request's satisfaction.
+
+There is no embedded viewer or viewer service. The command returns ordinary files; Jdaviz
+is neither installed nor launched. It can be used separately to explore the original cube.
+Static export does not depend on a browser or notebook.
+
+Image FITS files retain the source's separable celestial WCS on the unchanged pixel grid,
+physical BUNIT, a MASK extension (1 = missing), and ERR when uncertainties are available.
+Absent or coupled celestial coordinates produce explicit pixel axes and a recorded reason;
+malformed WCS is refused. Spectral ECSV files retain wavelength and value units, missing-value
+masks, standard deviations, selection and uncertainty policy. Both formats refer to the pinned
+receipt. CSV remains a simple numeric convenience, with semantics in that receipt.
+
+Display scaling is linear over the finite range; feature maps use a range symmetric around
+zero. The receipt records limits, colormap, coordinate frame and WCS warnings. No reprojection,
+smoothing or change to the exported measurements is performed. These are recorded sky
+coordinates, not a new astrometric calibration or body registration.
+
+The package APIs are documented by [Astropy visualization](https://docs.astropy.org/en/stable/visualization/index.html).
+css.earth retains the measurement definition, explicit selection, missing-sample policy and
+provenance. This is a thin file export boundary, not another plotting toolkit.
 
 ### Example exports: Eris, JWST NIRSpec IFU
 
@@ -644,12 +667,12 @@ These figures come from the local level-3 cube
 `jw01191-o019_t002_nirspec_g235m-f170lp_s3d.fits`, SCI HDU 1, with shape
 191 wavelengths × 55 rows × 51 columns. Its SHA-256 is
 `fbeeb9737ecf46c2b1aad5e27cb55a50e6e8f83fc8e7e347c3aa80d3e07f4bab`.
-Both figures use the product's MJy/sr units and quality mask. Pixel and plane selectors
+These figures use the product's MJy/sr units and quality mask. Pixel and plane selectors
 are zero-based. Astropy 8.0.1 reads the product; Matplotlib 3.11.2 renders the figures.
 
-![Eris NIRSpec image plane at 2.2997 micrometres, with image-pixel axes and a surface-brightness colour bar](images/telescopes/eris-native-plane.png)
+![Eris NIRSpec image plane at 2.2997 micrometres, with source sky-coordinate axes and a surface-brightness colour bar](images/telescopes/eris-native-plane.png)
 
-**Image:** plane 95 at 2.2997 µm, shown on the native image grid. The diamond-shaped
+**Image:** plane 95 at 2.2997 µm, shown on the native image grid with source ICRS sky coordinates. The diamond-shaped
 footprint is the cube's sampled field, not Eris's surface. Masked samples are omitted.
 
 ![Eris spectrum at image pixel 25,27, with wavelength and surface-brightness axes and recorded uncertainty](images/telescopes/eris-pixel-spectrum.png)
@@ -700,7 +723,7 @@ All three examples use the same pinned cube above and the default `--uncertainty
 spatial/spectral covariance has not been supplied. The API can propagate sample variances
 with `--uncertainty independent`, including background and continuum errors, but its receipt
 and spectrum legend identify that assumption explicitly. No smoothing, PSF matching or
-resampling is applied. PNG, SVG, CSV and a pinned product record accompany each export.
+resampling is applied. FITS/ECSV data, PNG, SVG, CSV and a pinned product record accompany each export.
 
 
 ### Independent numerical references
@@ -733,7 +756,7 @@ The remaining output families reuse existing scientific owners:
 
 | Output | Required scientific input | Existing owner / remaining adapter |
 | --- | --- | --- |
-| Native image | Qualified pixel array and mask | Executable FITS output adapter; image coordinates, not body coordinates |
+| Native image | Qualified pixel array and mask | Astropy FITS/WCSAxes output adapter; native sky or pixel coordinates, not body coordinates |
 | Spectral chart | Qualified wavelength axis and explicit pixel or fixed region | Executable FITS output adapter; optional background subtraction and explicitly conditional uncertainty |
 | Band image | Qualified units and wavelength bin edges | Executable wavelength-weighted mean; partial boundary bins included |
 | Feature map | Qualified bins plus feature and bracketing continuum windows | Executable continuum-subtracted wavelength integral; signed residual, no detection claim |

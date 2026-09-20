@@ -32,7 +32,8 @@ Queries save immutable numbered choices in DIRECTORY/query.json. Get revalidates
 choice, qualifies it if needed, and exports pinned data and evidence to DIRECTORY/pick-N/.
 Outputs support qualified FITS images, spectra, band images and feature maps. HDU, plane and
 pixel indices are zero-based. Cubes require an explicit plane for image export.
-Export writes PNG, SVG, numeric CSV and a pinned processing receipt into a new directory.
+Export writes FITS images or ECSV spectra, PNG, SVG, CSV and a pinned receipt.
+The output directory must be new. No browser or viewer service is required.
 Surface publication remains telescope:publish-map; sphere and physical 3D adapters need geometry.
 Exit codes: 0 ready/fulfilled, 1 operation failed, 2 invalid arguments,
 3 no retrievable choice or unresolved request, 4 refused request.

@@ -93,7 +93,7 @@ export async function exportOutput(resultPath:string,request:OutputRequest,outpu
   // A fresh output directory preserves earlier selections and their evidence.
   await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
   try{
-    const plotted=await plotProduct(staging,d.target,data);
+    const plotted=await plotProduct(staging,d.target,data,d.file,{...request});
     const fresh=await delivery(resultPath);if(fresh.pin.sha256!==d.pin.sha256)throw new Error('Delivery changed while producing output');
     const softwareFiles=['outputs.mts','native-metadata.mts','../astronomy-packages/science.mts','../astronomy-packages/plots.mts','../astronomy-packages/cube-outputs.mts','../astronomy-packages/requirements.lock'];
     const implementation=sha256(Buffer.concat(await Promise.all(softwareFiles.map(name=>readFile(new URL(name,import.meta.url))))));
@@ -101,6 +101,6 @@ export async function exportOutput(resultPath:string,request:OutputRequest,outpu
     const names=requireArray(plotted.files).map(v=>requireString(v));
     await writeProductRecord(resolve(staging,'output.product.json'),run,names.map(path=>({path,file:beneath(staging,path)})));
     await rmdir(destination);await rename(staging,destination);
-    return {directory:destination,figure:resolve(destination,'figure.png'),values:resolve(destination,'values.csv'),receipt:resolve(destination,'output.product.json'),sourceSatisfaction:d.record.satisfaction};
+    return {directory:destination,figure:resolve(destination,'figure.png'),values:resolve(destination,'values.csv'),data:resolve(destination,names.includes('image.fits')?'image.fits':'spectrum.ecsv'),receipt:resolve(destination,'output.product.json'),sourceSatisfaction:d.record.satisfaction};
   }catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}
 }

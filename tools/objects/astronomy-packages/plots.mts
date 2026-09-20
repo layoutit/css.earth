@@ -1,29 +1,87 @@
-/** Matplotlib owns static scientific figures; the telescope API owns their inputs and receipts. */
+/** Astropy owns scientific serialization and axes; Matplotlib owns static rendering. */
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from './toolchain.mts';
 import { requireRecord, requireString } from '../../source-values.mts';
 export const PLOT_PYTHON = String.raw`
-import csv,json,sys
+import csv,json,sys,warnings
 from pathlib import Path
 import numpy as np
+import astropy
+from astropy import units as u
+from astropy.io import fits
+from astropy.table import QTable,MaskedColumn
+from astropy.wcs import WCS
+from astropy.wcs.utils import wcs_to_celestial_frame
+from astropy.visualization import ImageNormalize,LinearStretch,quantity_support
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from matplotlib.colors import CenteredNorm
 r=json.load(sys.stdin); data=r['data']; out=Path(r['directory']); kind=data['kind']
 values=np.asarray(data['values'],dtype=float); sigma=np.asarray(data['sigma'],dtype=float)
 if not np.isfinite(values).any(): raise ValueError('The requested output contains no usable samples')
+if sigma.shape!=values.shape: raise ValueError('Uncertainty shape mismatch')
+unit=u.Unit(data['unit']) if data['unit'] else None
+unit_label=unit.to_string('latex_inline') if unit is not None else 'unit not stated'
+metadata={'kind':kind,'definition':data.get('definition','Native sampled values'),
+ 'selection':r['selection'],'uncertainty':data.get('uncertaintyPolicy','recorded'),
+ 'mask':'Non-finite values are missing; no interpolation',
+ 'source_file':Path(r['source']).name,'source_hdu':r['selection']['hdu'],
+ 'provenance':'output.product.json'}
+presentation={'coordinates':{'kind':'pixel','reason':'No celestial WCS supplied'},'warnings':[]}
 plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'figure.facecolor':'#181b1f','axes.facecolor':'#181b1f','text.color':'#d5d7dc','axes.labelcolor':'#d5d7dc','xtick.color':'#b8bbc4','ytick.color':'#b8bbc4','axes.edgecolor':'#626770','svg.hashsalt':'cssearth-telescope-output'})
-fig,ax=plt.subplots(figsize=(8,5),layout='constrained')
-unit=data['unit'] or 'unit not stated'
+files=['figure.png','figure.svg','values.csv']
 with (out/'values.csv').open('w',newline='') as file:
  writer=csv.writer(file)
  number=lambda n:float(n) if np.isfinite(n) else ''
  if kind in ('image','band-image','feature-map'):
   if values.ndim!=2:raise ValueError('Expected a two-dimensional image')
-  style={'cmap':'RdBu_r','norm':CenteredNorm(vcenter=0)} if kind=='feature-map' else {'cmap':'viridis'}
-  shown=ax.imshow(values,origin='lower',interpolation='nearest',**style)
-  fig.colorbar(shown,ax=ax,label=unit);ax.set_xlabel('Image x (zero-based pixel)');ax.set_ylabel('Image y (zero-based pixel)')
+  spatial=None
+  with warnings.catch_warnings(record=True) as notices:
+   warnings.simplefilter('always')
+   with fits.open(r['source'],memmap=True) as source:
+    hdu=source[r['selection']['hdu']]
+    if tuple(hdu.shape[-2:])!=values.shape:raise ValueError('Output grid differs from source WCS grid')
+    wcs=WCS(hdu.header,source)
+    if wcs.has_celestial:
+     used=np.flatnonzero(wcs.axis_correlation_matrix[[wcs.wcs.lng,wcs.wcs.lat]].any(axis=0))
+     if np.array_equal(used,[0,1]):
+      spatial=wcs.celestial
+      presentation['coordinates']={'kind':'celestial','frame':str(wcs_to_celestial_frame(spatial)),
+       'physicalTypes':spatial.world_axis_physical_types,'grid':'native; no reprojection'}
+     else:presentation['coordinates']['reason']='Celestial coordinates depend on axes beyond the exported image; no 2D WCS asserted'
+    product=spatial.to_fits(relax=True) if spatial is not None else fits.HDUList([fits.PrimaryHDU()])
+   presentation['warnings']=[str(n.message) for n in notices]
+  product[0].data=values
+  header=product[0].header
+  if unit is not None:header['BUNIT']=unit.to_string('fits')
+  header['HIERARCH CSSEARTH KIND']=kind
+  header['HIERARCH CSSEARTH UNCERTAINTY']=metadata['uncertainty']
+  header['HISTORY']=metadata['definition']
+  header['HISTORY']='Derived product; selection and source evidence are in output.product.json'
+  mask=fits.ImageHDU((~np.isfinite(values)).astype('uint8'),name='MASK')
+  mask.header['HISTORY']='1 = missing output value; 0 = usable. Not original DQ bits.'
+  product.append(mask)
+  if np.isfinite(sigma).any():
+   err=fits.ImageHDU(sigma,name='ERR')
+   if unit is not None:err.header['BUNIT']=unit.to_string('fits')
+   err.header['HISTORY']='Standard deviation; NaN means unavailable. See uncertainty policy in primary header.'
+   product.append(err)
+  product.writeto(out/'image.fits',checksum=True);product.close();files.append('image.fits')
+  fig,ax=plt.subplots(figsize=(8,5),layout='constrained',subplot_kw={'projection':spatial} if spatial is not None else {})
+  lo,hi=float(np.nanmin(values)),float(np.nanmax(values))
+  if kind=='feature-map':hi=max(abs(lo),abs(hi));lo=-hi
+  norm=ImageNormalize(vmin=lo,vmax=hi,stretch=LinearStretch(),clip=False)
+  cmap='RdBu_r' if kind=='feature-map' else 'viridis'
+  presentation['normalization']={'owner':'astropy.visualization.ImageNormalize','stretch':'linear','minimum':lo,'maximum':hi,'colormap':cmap,'missing':'transparent'}
+  shown=ax.imshow(np.ma.masked_invalid(values),origin='lower',interpolation='nearest',cmap=cmap,norm=norm)
+  fig.colorbar(shown,ax=ax,label=unit_label)
+  presentation['normalization'].update(minimum=float(norm.vmin),maximum=float(norm.vmax))
+  if spatial is not None:
+   ax.coords.grid(color='#b8bbc4',alpha=.25,linestyle=':')
+   for index,physical in enumerate(spatial.world_axis_physical_types):
+    label={'pos.eq.ra':'Right ascension','pos.eq.dec':'Declination'}.get(physical)
+    if label:ax.coords[index].set_axislabel(label)
+  else:ax.set_xlabel('Image x (zero-based pixel)');ax.set_ylabel('Image y (zero-based pixel)')
   title=r['target']+' — '+kind
   if data['plane'] is not None:title+=f"; plane {data['plane']} ({data['wavelengthsMicrometres'][data['plane']]:.5g} µm)"
   if kind!='image':title+=f"; {data['selection']['band'][0]:g}–{data['selection']['band'][1]:g} µm\n"+data['definition'].split(';')[0]
@@ -32,28 +90,40 @@ with (out/'values.csv').open('w',newline='') as file:
    for x in range(values.shape[1]):writer.writerow([x,y,number(values[y,x]),number(sigma[y,x])])
  elif kind in ('spectrum','aperture-spectrum'):
   wave=np.asarray(data['wavelengthsMicrometres'],dtype=float)
-  if values.ndim!=1 or wave.shape!=values.shape:raise ValueError('Spectrum coordinate mismatch')
-  ax.plot(wave,values,color='#d5d7dc',lw=1)
-  if np.isfinite(sigma).any():ax.fill_between(wave,values-sigma,values+sigma,color='#d5d7dc',alpha=.2,label=data.get('uncertaintyLabel','Recorded ±1σ'));ax.legend(frameon=False,labelcolor='#d5d7dc')
+  if values.ndim!=1 or wave.shape!=values.shape or not np.isfinite(wave).all():raise ValueError('Spectrum coordinate mismatch')
+  table=QTable(meta=metadata)
+  table['wavelength']=wave*u.um
+  table['value']=MaskedColumn(values,mask=~np.isfinite(values),unit=unit)
+  table['standard_deviation']=MaskedColumn(sigma,mask=~np.isfinite(sigma),unit=unit)
+  table.write(out/'spectrum.ecsv',format='ascii.ecsv');files.append('spectrum.ecsv')
+  presentation['coordinates']={'kind':'spectral','owner':'astropy.visualization.quantity_support','wavelengthUnit':'um','valueUnit':data['unit']}
+  with quantity_support():
+   fig,ax=plt.subplots(figsize=(8,5),layout='constrained')
+   plotted_values=values*unit if unit is not None else values
+   ax.plot(wave*u.um,plotted_values,color='#d5d7dc',lw=1)
+   if np.isfinite(sigma).any():
+    low=(values-sigma)*unit if unit is not None else values-sigma
+    high=(values+sigma)*unit if unit is not None else values+sigma
+    ax.fill_between(wave*u.um,low,high,color='#d5d7dc',alpha=.2,label=data.get('uncertaintyLabel','Recorded ±1σ'));ax.legend(frameon=False,labelcolor='#d5d7dc')
   title=f"{r['target']} — pixel ({data['x']}, {data['y']})" if kind=='spectrum' else f"{r['target']} — aperture {data['selection']['aperture']}\n{data['definition']}"
-  ax.set_xlabel('Wavelength (µm)');ax.set_ylabel(unit);ax.set_title(title,fontsize=10)
+  ax.set_xlabel('Wavelength ('+u.um.to_string('latex_inline')+')');ax.set_ylabel(unit_label);ax.set_title(title,fontsize=10)
   if kind=='aperture-spectrum' and data['uncertaintyPolicy']=='omit':ax.text(.01,.02,data['uncertaintyLabel'],transform=ax.transAxes,fontsize=8)
   writer.writerow(['wavelength_um','value','standard_deviation'])
   for w,v,e in zip(wave,values,sigma):writer.writerow([w,number(v),number(e)])
  else:raise ValueError('Unknown plot kind')
-fig.savefig(out/'figure.png',dpi=160,metadata={'Software':'css.earth telescope / Matplotlib'})
-fig.savefig(out/'figure.svg',metadata={'Date':None,'Creator':'css.earth telescope / Matplotlib'})
+fig.savefig(out/'figure.png',dpi=160,metadata={'Software':'Astropy / Matplotlib; css.earth telescope selections'})
+fig.savefig(out/'figure.svg',metadata={'Date':None,'Creator':'Astropy / Matplotlib; css.earth telescope selections'})
 plt.close(fig)
-json.dump({'matplotlib':matplotlib.__version__,'files':['figure.png','figure.svg','values.csv'],'usable':int(np.isfinite(values).sum())},sys.stdout)
+json.dump({'astropy':astropy.__version__,'matplotlib':matplotlib.__version__,'files':files,'presentation':presentation,'usable':int(np.isfinite(values).sum())},sys.stdout)
 `;
-export async function plotProduct(directory:string,target:string,data:Record<string,unknown>):Promise<Record<string,unknown>> {
+export async function plotProduct(directory:string,target:string,data:Record<string,unknown>,source:string,selection:Readonly<Record<string,unknown>>):Promise<Record<string,unknown>> {
   const tc=await astroqueryToolchain();
   return new Promise((accept,reject)=>{
     const child=spawn(tc.python,['-c',PLOT_PYTHON],{env:{...process.env,...tc.env,MPLBACKEND:'Agg'},stdio:['pipe','pipe','pipe']});
     let out='',err='';child.stdout.setEncoding('utf8').on('data',text=>{out+=text;});child.stderr.setEncoding('utf8').on('data',text=>{err+=text;});
     child.on('error',reject);child.on('close',code=>{
       if(code!==0)return reject(new Error(`Plot failed: ${err.slice(-2000)}`));
-      try{const result=requireRecord(JSON.parse(out));if(requireString(result.matplotlib)!=='3.11.2')throw new Error('Unexpected Matplotlib version');accept(result);}catch(error){reject(error);}
-    });child.stdin.end(JSON.stringify({directory,target,data}));
+      try{const result=requireRecord(JSON.parse(out));if(requireString(result.matplotlib)!=='3.11.2'||requireString(result.astropy)!=='8.0.1')throw new Error('Unexpected plotting package version');accept(result);}catch(error){reject(error);}
+    });child.stdin.end(JSON.stringify({directory,target,data,source,selection}));
   });
 }

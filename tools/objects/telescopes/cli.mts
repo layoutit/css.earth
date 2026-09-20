@@ -102,7 +102,7 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
         text=options.json?`${JSON.stringify(result)}\n`:result.outputs.map(o=>`${o.kind}${'hdu' in o?` HDU ${o.hdu}`:''}: ${o.available?'available':'unavailable'}. ${o.reason}`).join('\n')+'\n';code=0;
       }else if(options.command==='export'){
         const result=await exportOutput(options.result,options.selection,options.directory);
-        text=options.json?`${JSON.stringify(result)}\n`:`Figure: ${result.figure}\nValues: ${result.values}\nEvidence: ${result.receipt}\n`;code=0;
+        text=options.json?`${JSON.stringify(result)}\n`:`Data: ${result.data}\nFigure: ${result.figure}\nValues: ${result.values}\nEvidence: ${result.receipt}\n`;code=0;
       }else if (options.command === 'query') {
         process.stderr.write('Querying observations…\n');
         const session = await saveSession(root, options.requestArgs, options.directory);

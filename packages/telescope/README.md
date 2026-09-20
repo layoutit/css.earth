@@ -46,7 +46,7 @@ telescope export runs/eris/pick-1/result.json --output feature-map --hdu 1 --ban
 ```
 
 Selectors are zero-based and explicit. The adapter exports qualified FITS images, pixel/region spectra,
-band images and continuum-subtracted feature maps to PNG, SVG, numeric CSV and a product record. It uses the same masks,
+band images and continuum-subtracted feature maps to FITS/ECSV, PNG, SVG, CSV and a product record. It uses the same masks,
 units and wavelength coordinates as qualification. CSV blanks preserve excluded samples;
 plots do not bridge them. Supplied variance/inverse variance is converted to standard deviation
 in the science unit.
@@ -70,6 +70,17 @@ The one-million-spatial-pixel limit applies; extraction streams through the cube
 
 Astropy `NDDataArray` owns weighted arithmetic and standard-deviation propagation; css.earth
 owns the selected regions, continuum definition and strict missing-sample policy.
+Astropy WCSAxes, ImageNormalize and quantity_support own scientific plotting conventions;
+Matplotlib renders the PNG/SVG. No Jdaviz installation, notebook or browser is required.
+
+Every export also returns a `data` path: `image.fits` for images or `spectrum.ecsv` for
+spectra, written by Astropy. Images carry their source celestial WCS when it is separable
+on the unchanged grid, BUNIT, MASK (1 = missing) and ERR when supplied. If coordinates are
+absent or coupled to other axes, the figure uses pixels and the receipt explains why;
+malformed WCS is refused. ECSV carries explicit wavelength/value units, masks, selection
+and uncertainty policy. These files can be opened independently of css.earth.
+The receipt pins both the scientific data and figure, and records coordinate frame,
+linear display limits, colormap and WCS warnings. No new astrometric calibration is implied.
 
 Aggregate uncertainties default to omitted because covariance is unknown. Explicit
 `--uncertainty independent` propagates validated per-sample variances, including the

@@ -86,12 +86,21 @@
       ]
     },
     {
+      "mechanic": "Scientific image coordinates, display normalization, quantity axes and portable FITS/ECSV outputs",
+      "package": "astropy",
+      "version": "8.0.1",
+      "operation": "plots.mts: WCSAxes, ImageNormalize, quantity_support, FITS, QTable",
+      "consumers": [
+        "telescope native and derived image/spectrum exports"
+      ]
+    },
+    {
       "mechanic": "Static scientific output figures",
       "package": "matplotlib",
       "version": "3.11.2",
       "operation": "plots.mts",
       "consumers": [
-        "telescope image and single-pixel spectrum exports"
+        "telescope native and derived image/spectrum exports"
       ]
     }
   ],
