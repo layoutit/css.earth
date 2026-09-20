@@ -142,7 +142,8 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   // Deploys consume the exact prepared package restored from R2. Authoring preparation still rebuilds provenance
   // and previews from their sources, but catalog-only publication must never invent a second package identity.
   const volumes = publish === 'catalogues'
-    ? await readPreparedVolumeProvenance({ root, input })
+    ? [...await readPreparedVolumeProvenance({ root, input }),
+      ...((await prepareContextProvenance({ root, input })).map(context => ({ ...context, outputs: [] })))]
     : [...await prepareVolumeProvenance({ root, input, mirrorOrigin }), ...await prepareContextProvenance({ root, input })];
   for (const volume of volumes) {
     const document = validateObjectProvenance(volume.provenance, volume.id);

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { inspectContextAvailability, prepareContextAvailability } from './prepare-context-availability.mts';
@@ -65,7 +65,9 @@ test('an asset-origin build verifies a missing local preview against its publish
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
   manifest.assets[0].sha256 = '0'.repeat(64);
   await writeFile(manifestPath, JSON.stringify(manifest));
-  assert.match((await inspectContextAvailability(root, { publicAssets: 'manifest' })).helix.reason ?? '', /Unpublished dataset preview/);
+  const unavailable = (await inspectContextAvailability(root, { publicAssets: 'manifest' })).helix;
+  if (unavailable.available) assert.fail('Changed preview identity must make the package unavailable.');
+  assert.match(unavailable.reason, /Unpublished dataset preview/);
 });
 
 test('deploy catalogue input reads the installed prepared volume instead of regenerating it', async t => {
@@ -78,4 +80,12 @@ test('deploy catalogue input reads the installed prepared volume instead of rege
   assert.deepEqual(volumes[0]?.controls.map(control => control.id), ['optical']);
   assert.deepEqual(volumes[0]?.provenance, fixture.provenance);
   assert.deepEqual(volumes[0]?.outputs, []);
+});
+
+test('deploy volume input ignores source-only catalogue contexts with no prepared lens metadata', async t => {
+  const root = await mkdtemp(resolve(tmpdir(), 'cssearth-source-context-')); t.after(() => rm(root, { recursive: true, force: true }));
+  const path = resolve(root, 'src/objects/galaxy-clusters/source/presentation.json');
+  await mkdir(resolve(path, '..'), { recursive: true });
+  await writeFile(path, JSON.stringify({ provenance: { products: [] } }));
+  assert.deepEqual(await readPreparedVolumeProvenance({ root }), []);
 });

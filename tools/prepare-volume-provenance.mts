@@ -153,28 +153,24 @@ export async function readPreparedVolumeProvenance({ root = process.cwd(), input
     });
     if (!exists) continue;
     const sourcePresentation = sourceObject(json(await input(sourcePresentationPath)));
-    if (sourcePresentation.schema === 'cssearth-volume-presentation-source@1') {
-      if (sourcePresentation.objectId !== id) throw new TypeError(`Mismatched volume presentation object: ${id}.`);
-      const descriptor = parseObjectDescriptor(json(await input(`${base}/object.json`)));
-      if (descriptor.id !== id || !descriptor.prepared || !['volume-lens-bank', 'image-layer-bank'].includes(descriptor.type))
-        throw new TypeError(`Invalid prepared volume descriptor: ${id}.`);
-      const provenance = validateObjectProvenance(json(await input(`${base}/prepared/provenance.json`)), id);
-      const defaultLens = sourceId(sourcePresentation.defaultLens);
-      const lensIds = sourceArray(sourcePresentation.lenses, raw => sourceId(sourceObject(raw).id));
-      const prepared = parsePreparedVolumePresentation(json(await input(`${base}/prepared/presentation.json`)),
-        { id, defaultLens, lenses: lensIds.map(lensId => ({ id: lensId })) }, provenance);
-      const bankUrl = `${base}/${descriptor.prepared!.url}`;
-      const bankPin = provenance.products.flatMap(product => product.outputs).find(output => output.url === bankUrl);
-      if (!bankPin || bankPin.sha256 !== descriptor.prepared!.sha256) throw new TypeError(`Unbound prepared bank: ${bankUrl}.`);
-      const hostedBy = await hostedDatasets(root, base, id, prepared.controls.map(control => control.id), input);
-      results.push({ id, name: sourceText(sourcePresentation.name), route: hostedBy?.route ?? `/sun/?focus=${id}`, base,
-        controls: prepared.controls, defaultLens: prepared.defaultLens, provenance, outputs: [], ...(hostedBy ? { hostedBy } : {}) });
-      continue;
-    }
-    if (sourcePresentation.provenance === undefined) continue;
-    const preparedPresentation = sourceObject(json(await input(`${base}/prepared/presentation.json`)));
+    // The three source-only catalogue contexts use source/presentation.json too, but are not prepared lens packages.
+    // prepareContextProvenance owns their in-memory catalogue records below; there are no R2 metadata files to read.
+    if (sourcePresentation.schema !== 'cssearth-volume-presentation-source@1') continue;
+    if (sourcePresentation.objectId !== id) throw new TypeError(`Mismatched volume presentation object: ${id}.`);
+    const descriptor = parseObjectDescriptor(json(await input(`${base}/object.json`)));
+    if (descriptor.id !== id || !descriptor.prepared || !['volume-lens-bank', 'image-layer-bank'].includes(descriptor.type))
+      throw new TypeError(`Invalid prepared volume descriptor: ${id}.`);
     const provenance = validateObjectProvenance(json(await input(`${base}/prepared/provenance.json`)), id);
-    results.push({ id, name: sourceText(preparedPresentation.name), route: '/sun/', base, controls: [], defaultLens: '', provenance, outputs: [] });
+    const defaultLens = sourceId(sourcePresentation.defaultLens);
+    const lensIds = sourceArray(sourcePresentation.lenses, raw => sourceId(sourceObject(raw).id));
+    const prepared = parsePreparedVolumePresentation(json(await input(`${base}/prepared/presentation.json`)),
+      { id, defaultLens, lenses: lensIds.map(lensId => ({ id: lensId })) }, provenance);
+    const bankUrl = `${base}/${descriptor.prepared!.url}`;
+    const bankPin = provenance.products.flatMap(product => product.outputs).find(output => output.url === bankUrl);
+    if (!bankPin || bankPin.sha256 !== descriptor.prepared!.sha256) throw new TypeError(`Unbound prepared bank: ${bankUrl}.`);
+    const hostedBy = await hostedDatasets(root, base, id, prepared.controls.map(control => control.id), input);
+    results.push({ id, name: sourceText(sourcePresentation.name), route: hostedBy?.route ?? `/sun/?focus=${id}`, base,
+      controls: prepared.controls, defaultLens: prepared.defaultLens, provenance, outputs: [], ...(hostedBy ? { hostedBy } : {}) });
   }
   return results;
 }

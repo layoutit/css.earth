@@ -66,14 +66,16 @@ async function locatedAssets<T extends RuntimeAsset>(root: string, id: string, a
   return located;
 }
 
-export async function runtimeAssets(root: string, objectIds: readonly string[]): Promise<RuntimeAssetLocation[]> {
+export async function runtimeAssets(root: string, objectIds: readonly string[],
+  { filenames }: { filenames?: readonly string[] } = {}): Promise<RuntimeAssetLocation[]> {
   const assets: RuntimeAssetLocation[] = [];
+  const selectedFilenames = filenames ? new Set(filenames) : null;
   for (const id of objectIds) {
     if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`Unsafe runtime object identity: ${id}`);
     const base = resolve(root, `src/objects/${id}`);
     const bytes = await readFile(resolve(base, "runtime-assets.json"));
     const manifest = requireRuntimeAssetManifest(id, JSON.parse(bytes.toString("utf8")));
-    for (const asset of manifest.assets) {
+    for (const asset of manifest.assets.filter(asset => !selectedFilenames || selectedFilenames.has(asset.filename))) {
       const assetRoot = manifest.resourceRoot === "prepared" && asset.location !== "public" ? resolve(base, "prepared") : resolve(root, `public/scenes/${id}`);
       assets.push(...await locatedAssets(root, id, assetRoot, [asset]));
     }
@@ -82,14 +84,17 @@ export async function runtimeAssets(root: string, objectIds: readonly string[]):
 }
 
 /** Counterpart of `runtimeAssets` for `prepared-assets.json`: always resourceRoot `prepared`, never public. */
-export async function preparedAssets(root: string, objectIds: readonly string[]): Promise<RuntimeAssetLocation[]> {
+export async function preparedAssets(root: string, objectIds: readonly string[],
+  { filenames }: { filenames?: readonly string[] } = {}): Promise<RuntimeAssetLocation[]> {
   const assets: RuntimeAssetLocation[] = [];
+  const selectedFilenames = filenames ? new Set(filenames) : null;
   for (const id of objectIds) {
     if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`Unsafe prepared object identity: ${id}`);
     const base = resolve(root, `src/objects/${id}`);
     const bytes = await readFile(resolve(base, "prepared-assets.json"));
     const manifest = requirePreparedAssetManifest(id, JSON.parse(bytes.toString("utf8")));
-    assets.push(...await locatedAssets(root, id, resolve(base, "prepared"), manifest.assets));
+    assets.push(...await locatedAssets(root, id, resolve(base, "prepared"),
+      manifest.assets.filter(asset => !selectedFilenames || selectedFilenames.has(asset.filename))));
   }
   return assets;
 }

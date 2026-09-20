@@ -7,6 +7,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { inventoriedAssets, inventoriedObjectIds } from '../../tools/runtime-assets.mts';
 import { contentType } from '../../tools/publish-runtime-assets.mts';
+import { sha256 } from '../../src/platform/sha256.mts';
 
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://127.0.0.1:4212';
 const channel = process.env.PLAYWRIGHT_CHANNEL ?? 'chrome';
@@ -36,7 +37,19 @@ try {
       const url = new URL(route.request().url()), asset = assets.get(url.pathname);
       if (!asset) return route.fulfill({ status: 404, body: `Uninventoried asset: ${url.pathname}` });
       assetRequests.push(url.href);
-      return route.fulfill({ body: await readFile(asset.file), contentType: contentType(asset.key),
+      let body = await readFile(asset.file).catch((error: unknown) => {
+        if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined;
+        throw error;
+      });
+      // A deploy intentionally keeps large context datasets on R2. The fake ASSET_ORIGIN route still verifies
+      // their real content-addressed bytes instead of requiring the CI checkout to download every inventory.
+      if (!body) {
+        const response = await fetch(asset.url, { signal: AbortSignal.timeout(120000) });
+        if (!response.ok) throw new Error(`Published asset unavailable: ${asset.url} (HTTP ${response.status}).`);
+        body = Buffer.from(await response.arrayBuffer());
+      }
+      if (body.length !== asset.bytes || sha256(body) !== asset.sha256) throw new Error(`Published asset identity changed: ${asset.key}.`);
+      return route.fulfill({ body, contentType: contentType(asset.key),
         headers: { 'access-control-allow-origin': '*' } });
     });
   }
