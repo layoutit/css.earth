@@ -1,0 +1,179 @@
+{
+  "schema": "cssearth-pds-ledger@1",
+  "archiveDate": "2026-09-19",
+  "searched": [
+    "charon",
+    "hydra"
+  ],
+  "modes": [
+    {
+      "telescope": "New Horizons",
+      "mode": "MVIC mapped color",
+      "programs": [
+        "charon-pds-nh_charon_color_mosaic"
+      ],
+      "qualified": [
+        "charon-pds-nh_charon_color_mosaic"
+      ],
+      "receipts": [
+        "tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json"
+      ]
+    },
+    {
+      "telescope": "New Horizons",
+      "mode": "MVIC color images",
+      "programs": [
+        "hydra-pds-cube_h_color_best"
+      ],
+      "qualified": [
+        "hydra-pds-cube_h_color_best"
+      ],
+      "receipts": [
+        "tools/objects/pds/programs/hydra-pds-cube_h_color_best.archive-final.product.json"
+      ]
+    },
+    {
+      "telescope": "Lowell/LDT",
+      "mode": "LMI/VR calibrated image",
+      "programs": [
+        "didymos-pds-lmi-20201217-0048"
+      ],
+      "qualified": [
+        "didymos-pds-lmi-20201217-0048"
+      ],
+      "receipts": [
+        "tools/objects/pds/programs/didymos-pds-lmi-20201217-0048.archive-final.product.json"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "charon",
+      "observations": [
+        {
+          "id": "nh_charon_color_mosaic",
+          "lidvid": "urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0",
+          "targetLid": "urn:nasa:pds:context:target:satellite.134340_pluto.charon",
+          "targetName": "(134340) Pluto I (Charon)",
+          "telescope": "New Horizons",
+          "mode": "MVIC mapped color",
+          "observatory": "New Horizons",
+          "instrument": "Multispectral Visible Imaging Camera",
+          "startIso": "1965-01-01T00:00:00.000Z",
+          "endIso": "3000-01-01T00:00:00.000Z",
+          "filter": "CH4, NIR, Red, Blue",
+          "filters": [
+            "CH4",
+            "NIR",
+            "Red",
+            "Blue"
+          ],
+          "wavelengthIntervalsMicrometres": [
+            [
+              0.875,
+              0.915
+            ],
+            [
+              0.78,
+              0.96
+            ],
+            [
+              0.55,
+              0.7
+            ],
+            [
+              0.4,
+              0.55
+            ]
+          ],
+          "surfaceResolutionKm": 1,
+          "kind": "image",
+          "use": "Archive-derived, body-registered multiband map. Suitable as a pinned telescope product; wavelength bands and map sampling come from its PDS4 label.",
+          "units": "dimensionless relative values, no longer strictly I/F",
+          "program": "charon-pds-nh_charon_color_mosaic"
+        }
+      ]
+    },
+    {
+      "id": "hydra",
+      "observations": [
+        {
+          "id": "cube_h_color_best",
+          "lidvid": "urn:nasa:pds:nh_derived:plutosystem_composition:cube_h_color_best::1.0",
+          "targetLid": "urn:nasa:pds:context:target:satellite.134340_pluto.hydra",
+          "targetName": "(134340) Pluto III (Hydra)",
+          "telescope": "New Horizons",
+          "mode": "MVIC color images",
+          "observatory": "New Horizons",
+          "instrument": "Multispectral Visible Imaging Camera",
+          "startIso": "2015-07-14T07:36:50.008Z",
+          "endIso": "2015-07-14T07:37:10.876Z",
+          "filter": "Blue, Red, NIR, CH4",
+          "filters": [
+            "Blue",
+            "Red",
+            "NIR",
+            "CH4"
+          ],
+          "wavelengthIntervalsMicrometres": [
+            [
+              0.4,
+              0.55
+            ],
+            [
+              0.54,
+              0.7
+            ],
+            [
+              0.78,
+              0.975
+            ],
+            [
+              0.86,
+              0.91
+            ]
+          ],
+          "kind": "image",
+          "use": "Archive-derived four-filter detector images. Suitable as a pinned telescope product; the PDS4 label establishes each filter band but supplies no body-surface registration.",
+          "units": "not stated by PDS label",
+          "program": "hydra-pds-cube_h_color_best"
+        }
+      ]
+    },
+    {
+      "id": "didymos",
+      "observations": [
+        {
+          "id": "lmi_20201217_0048_cal_v1",
+          "lidvid": "urn:nasa:pds:dart_teleobs:data_ldtcal:lmi_20201217_0048_cal_v1::1.0",
+          "targetLid": "urn:nasa:pds:context:target:asteroid.65803_didymos",
+          "targetName": "65803 Didymos",
+          "telescope": "Lowell/LDT",
+          "mode": "LMI/VR calibrated image",
+          "observatory": "Lowell Discovery Telescope (LDT)",
+          "instrument": "Large Monolithic Imager",
+          "startIso": "2020-12-17T08:44:50.100Z",
+          "endIso": "2020-12-17T08:47:32.340Z",
+          "filter": "VR",
+          "filters": [
+            "VR"
+          ],
+          "wavelengthIntervalsMicrometres": [
+            [
+              0.520975,
+              0.697365
+            ]
+          ],
+          "wavelengthIntervalMicrometres": [
+            0.520975,
+            0.697365
+          ],
+          "kind": "image",
+          "use": "Archive-calibrated VR detector image of the unresolved Didymos system; suitable as a pinned telescope product, not as a resolved body-surface map.",
+          "units": "DN",
+          "program": "didymos-pds-lmi-20201217-0048"
+        }
+      ]
+    }
+  ]
+}

@@ -7,7 +7,7 @@ import {readFile, type FileHandle} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {resolve,basename} from 'node:path';
 import sharp from 'sharp';
-import {invertPreparedAffineMatrix4} from '../../../src/platform/prepared-ellipsoid-projection.mts';
+import {invertPreparedAffineMatrix4} from '../../../src/renderers/css/dist/preparation.js';
 import type { PathLike } from 'node:fs';
 
 const root=resolve(import.meta.dirname,'../../..');

@@ -32,7 +32,7 @@ export interface PreparedPagePlan {
 }
 export interface PageViewport {
   width: number; height: number; originX?: number; originY?: number;
-  projection?: Pick<import('../rendering/physical-projection.js').PhysicalProjection, 'focalPixels' | 'principalOffsetPixels'>;
+  projection?: Pick<import('../prepared-data/physical-projection.js').PhysicalProjection, 'focalPixels' | 'principalOffsetPixels'>;
 }
 export interface PageProjection { visible: boolean; span: number; center: number[]; }
 export interface ProjectedPage extends PageProjection { node: PreparedPage; path: PreparedReference[]; }

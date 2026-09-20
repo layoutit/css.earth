@@ -45,7 +45,7 @@ import { SURFACE_FLY_TO } from
   "../../src/platform/surface-fly-to.mts";
 import { TRACKBALL_DRAG_INERTIA } from
   "../../src/platform/trackball-drag-inertia.mts";
-import { PREPARED_WHEEL_ZOOM } from "../../src/platform/prepared-wheel-zoom.mts";
+import { PREPARED_WHEEL_ZOOM } from "../../src/renderers/css/dist/platform/prepared-wheel-zoom.js";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const requestedId = process.argv[3] ?? null;

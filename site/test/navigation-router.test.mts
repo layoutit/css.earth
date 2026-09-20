@@ -53,6 +53,7 @@ function deferred(): Deferred {
 }
 const saved = (distance: number): SharedView => ({ camera: { distanceKilometers: distance,
   pose: { schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' } },
+  preparedEpochJdTt: null,
   playback: { times: [1234], speed: 1, motionRequested: false } });
 function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget, overviewTarget, savedTarget, initialUrl = null, factoryGate = null, contentGate = null, persistentWorldContext = null, withSun = false, worldFrames = null, datasets = false, datasetGate = null }: HarnessOptions = {}): Harness {
   const documentTarget: MockDocument = Object.assign(new EventTarget(), { hidden: false, querySelector: (_selector: string) => null, documentElement: { dataset: {} }, body: { classList: { add() {}, remove() {} } } });
@@ -187,7 +188,7 @@ function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget
     navigation: {
       focus, centerTarget, systemTarget, overviewTarget, savedTarget,
       supports: (from: string, to: string) => from !== 'earth' && to !== 'earth',
-      prepare(options: MockRequest) { preparations.push(options); return prepare(options); },
+      prepare(options: MockRequest) { preparations.push(options); return Promise.resolve(prepare(options)).then(handoff => Object.assign({ transferTo() {} }, handoff)); },
     } as unknown as RouterOptions['navigation'],
     persistentWorldContext: persistentWorldContext as unknown as RouterOptions['persistentWorldContext'],
   });
@@ -514,6 +515,54 @@ test('rapid Mercury → Venus → Mercury cancels the stale factory without repl
   h.router.destroy();
 });
 
+test('rapid Mercury → Venus → Sun commits only the final destination after a late Venus factory', async t => {
+  const gate = deferred(), h = harness({ factoryGate: gate, withSun: true });
+  t.after(() => { gate.resolve(); h.router.destroy(); });
+  await h.router.settled;
+  const venus = h.router.navigate('venus'); await flush();
+  assert.equal(await h.router.navigate('sun'), true);
+  assert.equal(await venus, false);
+  gate.resolve(); await flush();
+  assert.deepEqual(h.mounts.map(mount => mount.id), ['mercury', 'sun']);
+  assert.equal(h.router.state().ready, true);
+  assert.deepEqual(h.entries.map(entry => new URL(entry.url).pathname), ['/mercury/', '/sun/']);
+  assert.deepEqual(h.disposedContent.sort(), ['sun', 'venus']);
+  assert.equal(h.maxRendered(), 1); assert.equal(h.shells.length, 1); assert.deepEqual(h.errors, []);
+});
+
+test('destroying during transport settles navigation and disposes late content exactly once', async t => {
+  const factory = deferred(), content = deferred(), h = harness({ factoryGate: factory, contentGate: content });
+  t.after(() => { factory.resolve(); content.resolve(); h.router.destroy(); });
+  await h.router.settled;
+  const selected = h.router.navigate('venus'); await flush();
+  h.router.destroy();
+  assert.equal(await selected, false);
+  const writes = h.writes.length;
+  content.resolve(); factory.reject(new Error('late transport failure')); await flush();
+  assert.deepEqual(h.disposedContent, ['venus']);
+  assert.equal(h.writes.length, writes); assert.equal(h.renders.size, 0);
+  assert.equal(h.router.state().ready, false); assert.equal(h.shells[0].destroyed, 1);
+  assert.deepEqual(h.errors, []);
+});
+
+test('superseding a saved view on the retained scene settles its request before restoration completes', async t => {
+  const gate = deferred(), h = harness();
+  t.after(() => { gate.resolve(); h.router.destroy(); });
+  await h.router.settled;
+  h.mounts[0].sharedView.restore = async () => { await gate.promise; return true; };
+  let settled = false;
+  const old = h.router.navigate('mercury', { url: `/mercury/?${formatSharedView(saved(54321))}` });
+  void old.then(() => { settled = true; });
+  await flush(); assert.equal(settled, false);
+  assert.equal(await h.router.navigate('mercury', { preserveView: true }), true);
+  await flush();
+  assert.equal(settled, true, 'Cancelling a request must not wait for a retained scene to retire');
+  assert.equal(await old, false);
+  gate.resolve(); await flush();
+  assert.equal(h.router.state().ready, true); assert.equal(h.mounts.length, 1);
+  assert.deepEqual(h.errors, []);
+});
+
 test('history back restores the departed exact view after target handoff without another push', async () => {
   const h = harness(); await h.router.settled;
   h.mounts[0].value = saved(54321);
@@ -641,6 +690,7 @@ test('real input interruption preserves the last painted source view and flushes
   await h.router.settled;
   assert.equal(await h.router.navigate('venus'), false);
   assert.equal(h.mounts[0].value.camera.distanceKilometers, 123456);
+  assert.equal(h.preparations[0].signal.aborted, true, 'Interruption before handoff cancels destination loading');
   assert.equal(h.router.state().activeObjectId, 'mercury');
   assert.equal(h.windowTarget.location.pathname, '/mercury/');
   assert.equal(h.writes.includes('push'), false);
@@ -1065,10 +1115,10 @@ test('dataset links commit one same-body history entry, preserve the camera and 
   let focuses = 0;
   const h = harness({ datasets: true, focus: async () => { focuses++; } }); await h.router.settled;
   const mount = h.mounts[0]; mount.value = saved(54321);
-  assert.equal(await h.router.navigate('mercury', { url: '/mercury/#dataset=mapped' }), true);
+  assert.equal(await h.router.navigate('mercury', { url: '/mercury/?dataset=mapped' }), true);
   assert.equal(required(mount.datasets).current(), 'mapped'); assert.equal(focuses, 0);
   assert.equal(mount.value.camera.distanceKilometers, 54321);
-  assert.equal(h.windowTarget.location.hash, '#dataset=mapped');
+  assert.equal(h.windowTarget.location.searchParams.get('dataset'), 'mapped');
   assert.equal(h.writes.filter(write => write === 'push').length, 1);
   assert.equal(h.shells[0].datasetShown, true);
   h.windowTarget.history.back(); await h.router.settled;
@@ -1144,11 +1194,11 @@ test('manual dataset queries survive Back and preserve unrelated anchors', async
 
 test('direct dataset links wait for readiness without pushing, and invalid direct links remain diagnostic', async () => {
   for (const id of ['mapped', 'missing']) {
-    const h = harness({ datasets: true, initialUrl: `https://example.test/mercury/#dataset=${id}` });
+    const h = harness({ datasets: true, initialUrl: `https://example.test/mercury/?dataset=${id}` });
     await h.router.settled;
     assert.equal(required(h.mounts[0].datasets).current(), id === 'mapped' ? 'mapped' : 'normal');
     assert.equal(h.router.state().ready, true); assert.equal(h.writes.includes('push'), false);
-    assert.equal(h.windowTarget.location.hash, `#dataset=${id}`);
+    assert.equal(h.windowTarget.location.searchParams.get('dataset'), id);
     if (id === 'missing') assert.match(required(h.shells[0].datasetNotice), /unavailable/);
     h.router.destroy();
   }
@@ -1156,11 +1206,11 @@ test('direct dataset links wait for readiness without pushing, and invalid direc
 
 test('a failed same-body dataset leaves the committed selection and URL together', async () => {
   const h = harness({ datasets: true }); await h.router.settled;
-  await h.router.navigate('mercury', { url: '/mercury/#dataset=mapped' });
+  await h.router.navigate('mercury', { url: '/mercury/?dataset=mapped' });
   for (const id of ['failed', 'missing']) {
-    assert.equal(await h.router.navigate('mercury', { url: `/mercury/#dataset=${id}` }), false);
+    assert.equal(await h.router.navigate('mercury', { url: `/mercury/?dataset=${id}` }), false);
     assert.equal(required(h.mounts[0].datasets).current(), 'mapped');
-    assert.equal(h.windowTarget.location.hash, '#dataset=mapped');
+    assert.equal(h.windowTarget.location.searchParams.get('dataset'), 'mapped');
     assert.ok(h.shells[0].datasetNotice);
   }
   assert.equal(h.writes.filter(write => write === 'push').length, 1); h.router.destroy();
@@ -1168,7 +1218,7 @@ test('a failed same-body dataset leaves the committed selection and URL together
 
 test('a cancelled dataset cannot publish after a replacement navigation', async () => {
   const gate = deferred(), h = harness({ datasets: true, datasetGate: gate }); await h.router.settled;
-  const pending = h.router.navigate('mercury', { url: '/mercury/#dataset=mapped' }); await flush();
+  const pending = h.router.navigate('mercury', { url: '/mercury/?dataset=mapped' }); await flush();
   assert.equal(required(h.mounts[0].datasets).current(), 'normal'); assert.equal(h.writes.includes('push'), false);
   await h.router.navigate('venus'); assert.equal(await pending, false);
   gate.resolve(); await flush();
@@ -1178,8 +1228,8 @@ test('a cancelled dataset cannot publish after a replacement navigation', async 
 
 test('cross-body dataset failure finishes on the destination default without claiming the failed dataset', async () => {
   const h = harness({ datasets: true }); await h.router.settled;
-  assert.equal(await h.router.navigate('venus', { url: '/venus/#dataset=failed' }), true);
-  assert.equal(h.windowTarget.location.pathname, '/venus/'); assert.equal(h.windowTarget.location.hash, '');
+  assert.equal(await h.router.navigate('venus', { url: '/venus/?dataset=failed' }), true);
+  assert.equal(h.windowTarget.location.pathname, '/venus/'); assert.equal(h.windowTarget.location.searchParams.has('dataset'), false);
   assert.equal(required(required(h.mounts.at(-1)).datasets).current(), 'normal');
   assert.match(required(h.shells[0].datasetNotice), /default dataset/);
   assert.equal(h.writes.filter(write => write === 'push').length, 1); h.router.destroy();

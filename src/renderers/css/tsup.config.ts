@@ -2,6 +2,10 @@ import { fileURLToPath } from 'node:url';
 
 export default {
   entry: {
+    'platform/object-orbit': fileURLToPath(new URL('./navigation/object-orbit.ts', import.meta.url)),
+    'platform/camera-input': fileURLToPath(new URL('./navigation/camera-input.ts', import.meta.url)),
+    'platform/camera-layout': fileURLToPath(new URL('./navigation/camera-layout.ts', import.meta.url)),
+    'platform/prepared-wheel-zoom': fileURLToPath(new URL('./navigation/prepared-wheel-zoom.ts', import.meta.url)),
     "platform/prepared-residency": fileURLToPath(new URL("./rendering/prepared-residency.ts", import.meta.url)),
     'platform/object-contract': fileURLToPath(new URL('./runtime/object-contract.ts', import.meta.url)),
     'platform/prepared-playback': fileURLToPath(new URL('./rendering/prepared-playback.ts', import.meta.url)),
@@ -17,7 +21,7 @@ export default {
     'platform/prepared-material-demand': fileURLToPath(new URL('./rendering/prepared-material-demand.ts', import.meta.url)),
     'platform/wmts-image': fileURLToPath(new URL('./paging/wmts-image.ts', import.meta.url)),
     'platform/wms-image': fileURLToPath(new URL('./paging/wms-image.ts', import.meta.url)),
-    'platform/prepared-block': fileURLToPath(new URL('./paging/prepared-block.ts', import.meta.url)),
+    'platform/prepared-block': fileURLToPath(new URL('./prepared-data/prepared-block.ts', import.meta.url)),
     'platform/prepared-camera-runtime': fileURLToPath(new URL('./rendering/prepared-camera-runtime.ts', import.meta.url)),
     'platform/planet-feature-controls': fileURLToPath(new URL('./rendering/planet-feature-controls.ts', import.meta.url)),
     'platform/surface-fly-to': fileURLToPath(new URL('./navigation/surface-fly-to.ts', import.meta.url)),
@@ -25,6 +29,7 @@ export default {
     index: fileURLToPath(new URL('./index.ts', import.meta.url)),
     universe: fileURLToPath(new URL('./universe/index.ts', import.meta.url)),
     navigation: fileURLToPath(new URL('./navigation/index.ts', import.meta.url)),
+    preparation: fileURLToPath(new URL('./preparation.ts', import.meta.url)),
     testing: fileURLToPath(new URL('./testing.ts', import.meta.url)),
     'scene-native-waits': fileURLToPath(new URL('./runtime/scene-native-waits.ts', import.meta.url)),
     'world-context-planner-worker': fileURLToPath(new URL('./universe/world-context-planner-worker.ts', import.meta.url)),
@@ -32,7 +37,7 @@ export default {
   },
   outDir: fileURLToPath(new URL('./dist', import.meta.url)),
   tsconfig: fileURLToPath(new URL('./tsconfig.json', import.meta.url)),
-  format: ['esm', 'cjs'],
+  format: ['esm'],
   external: ['@cssearth/engine', '@cssearth/objects', '@layoutit/polycss'],
   dts: true,
   sourcemap: process.env.CSSEARTH_PERFORMANCE_SOURCEMAPS === '1',

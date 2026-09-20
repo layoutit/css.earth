@@ -1,0 +1,364 @@
+{
+  "schema": "cssearth-chandra-reproduction@1",
+  "program": "jupiter-hrci",
+  "obsid": 18676,
+  "product": "hrcf18676N003_evt2",
+  "instrument": "HRC/HRC-I",
+  "grating": "NONE",
+  "dataMode": "undefined/OBSERVING",
+  "target": "Jupiter",
+  "toolchain": "tools/objects/chandra/toolchain.json",
+  "reprocessedWith": {
+    "ciao": "CIAO 4.18.0 Monday, December 08, 2025",
+    "caldb": "4.12.4"
+  },
+  "archive": {
+    "path": "primary/hrcf18676N003_evt2.fits.gz",
+    "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/6/18676/primary/hrcf18676N003_evt2.fits.gz",
+    "bytes": 57972931,
+    "sha256": "2b234ad7ef5843b6a00b0b019603b7b8c71b829f8822c5f52ebe3e3cd80a4bd0",
+    "CREATOR": "cxc - Version DS10.10",
+    "ASCDSVER": "10.10",
+    "REVISION": 3,
+    "DATE": "2021-08-26T12:06:48",
+    "CALDBVER": "4.9.5",
+    "RAND_SKY": 0,
+    "DTCOR": 0.98746146839,
+    "ONTIME": 9423.0817972422,
+    "LIVETIME": 9304.9301882639,
+    "EXPOSURE": 9304.9301882639
+  },
+  "local": {
+    "name": "hrcf18676_repro_evt2.fits",
+    "bytes": 101125440,
+    "sha256": "333150767c8653f98c816dceba06773cd592de53d82ed909331d41df9dee6451",
+    "CREATOR": "sso_freeze - Version CIAO 4.18.0",
+    "ASCDSVER": "CIAO 4.18.0",
+    "REVISION": 3,
+    "DATE": "2026-09-19T10:37:40",
+    "CALDBVER": "4.9.5",
+    "RAND_SKY": 0,
+    "DTCOR": 0.98746146839047,
+    "ONTIME": 9423.0817972422,
+    "LIVETIME": 9304.9301882683,
+    "EXPOSURE": 9304.9301882683
+  },
+  "differentCards": {
+    "ASCDSVER": {
+      "ours": "CIAO 4.18.0",
+      "archive": "10.10"
+    },
+    "BPIXFILE": {
+      "ours": "hrcf18676_repro_bpix1.fits",
+      "archive": "hrcf18676_000N003_bpix1.fits"
+    },
+    "FLTFILE": {
+      "ours": "hrcf18676_repro_flt2.fits",
+      "archive": "hrcf18676_000N003_std_flt1.fits"
+    }
+  },
+  "events": {
+    "key": [
+      "time",
+      "chipx",
+      "chipy"
+    ],
+    "ours": 990546,
+    "archive": 990546,
+    "matched": 990546,
+    "onlyOurs": 0,
+    "onlyArchive": 0
+  },
+  "sky": {
+    "matched": 990546,
+    "identical": 990545,
+    "identicalShare": 0.9999989904557688,
+    "skyPixels": {
+      "median": 0,
+      "p99": 0,
+      "largest": 0.0009765625
+    },
+    "arcseconds": {
+      "median": 0,
+      "p99": 0,
+      "largest": 0.00048046875
+    }
+  },
+  "binnedImage": {
+    "blockSkyPixels": 19,
+    "shape": [
+      1015,
+      1016
+    ],
+    "bins": 1031240,
+    "occupiedBins": 460591,
+    "identicalBins": 1031240,
+    "identicalShare": 1,
+    "counts": {
+      "ours": 990546,
+      "archive": 990546
+    },
+    "largestBinDifference": 0,
+    "totalAbsoluteBinDifference": 0
+  },
+  "columns": [
+    {
+      "column": "crsv",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "crsu",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "amp_sf",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "av1",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "av2",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "av3",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "au1",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "au2",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "au3",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "rawx",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "rawy",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "tdetx",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "tdety",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "detx",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "dety",
+      "matched": 990546,
+      "identical": 990545,
+      "identicalShare": 0.9999989904557688,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0.0009765625
+      }
+    },
+    {
+      "column": "x",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "y",
+      "matched": 990546,
+      "identical": 990545,
+      "identicalShare": 0.9999989904557688,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0.0009765625
+      }
+    },
+    {
+      "column": "samp",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "pha",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "pi",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "sumamps",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "chip_id",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    },
+    {
+      "column": "status",
+      "matched": 990546,
+      "identical": 990546,
+      "identicalShare": 1,
+      "absoluteDifference": {
+        "median": 0,
+        "p99": 0,
+        "largest": 0
+      }
+    }
+  ],
+  "columnsOnOneSide": [
+    "ocx",
+    "ocy",
+    "PathLength"
+  ]
+}

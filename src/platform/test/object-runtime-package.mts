@@ -94,6 +94,13 @@ class FixtureElement {
         this.appendChild(child); }
     remove(): void { if (this.parentNode)
         this.parentNode.children.splice(this.parentNode.children.indexOf(this), 1); this.parentNode = null; }
+    querySelector(selector: string): FixtureElement | null {
+        const directClass = /^:scope > \.([a-z-]+)$/u.exec(selector);
+        if (directClass) return this.children.find(child => child.classList.contains(directClass[1])) ?? null;
+        const attribute = /^\[([a-z-]+)\]$/u.exec(selector);
+        if (attribute) return this.querySelectorAll().find(child => child.hasAttribute(attribute[1])) ?? null;
+        throw new Error(`Unsupported fixture selector: ${selector}`);
+    }
     querySelectorAll(_selector = "*"): FixtureElement[] { return this.children.flatMap(child => [child, ...child.querySelectorAll()]); }
     addEventListener(name: string, callback: FixtureListener): void { this.listeners.set(name, callback); }
     removeEventListener(name: string, callback: FixtureListener): void { if (this.listeners.get(name) === callback)

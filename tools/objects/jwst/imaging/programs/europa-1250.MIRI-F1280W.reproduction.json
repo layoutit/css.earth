@@ -1,0 +1,138 @@
+{
+  "schema": "cssearth-jwst-image3-reproduction@1",
+  "program": "europa-1250",
+  "band": "MIRI-F1280W",
+  "observation": "jw01250-o004_t001_miri_f1280w-sub64",
+  "toolchain": "tools/objects/jwst/toolchain.json",
+  "crdsContext": "jwst_1535.pmap",
+  "mast": {
+    "name": "jw01250-o004_t001_miri_f1280w-sub64_i2d.fits",
+    "uri": "mast:JWST/product/jw01250-o004_t001_miri_f1280w-sub64_i2d.fits",
+    "bytes": 452160,
+    "sha256": "d1e32c36306fd38e60f61a60d560117175616a65bc601911744a9b21841b409b",
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "local": {
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "wcs": {
+    "NAXIS1": {
+      "ours": 98,
+      "mast": 98
+    },
+    "NAXIS2": {
+      "ours": 94,
+      "mast": 94
+    },
+    "CTYPE1": {
+      "ours": "RA---TAN",
+      "mast": "RA---TAN"
+    },
+    "CTYPE2": {
+      "ours": "DEC--TAN",
+      "mast": "DEC--TAN"
+    },
+    "CRPIX1": {
+      "ours": 49.846693405716216,
+      "mast": 49.84669340541551
+    },
+    "CRPIX2": {
+      "ours": 48.27057848443977,
+      "mast": 48.27057848414878
+    },
+    "CRVAL1": {
+      "ours": 359.1099104036145,
+      "mast": 359.1099104036145
+    },
+    "CRVAL2": {
+      "ours": -1.9653596296754356,
+      "mast": -1.9653596296754356
+    },
+    "CDELT1": {
+      "ours": 0.0000305912011705393,
+      "mast": 0.0000305912011707276
+    },
+    "CDELT2": {
+      "ours": 0.0000305912011705393,
+      "mast": 0.0000305912011707276
+    },
+    "PC1_1": {
+      "ours": -0.3326642187623666,
+      "mast": -0.3326642187623666
+    },
+    "PC1_2": {
+      "ours": 0.9430453422583795,
+      "mast": 0.9430453422583795
+    },
+    "PC2_1": {
+      "ours": 0.9430453422583795,
+      "mast": 0.9430453422583795
+    },
+    "PC2_2": {
+      "ours": 0.3326642187623666,
+      "mast": 0.3326642187623666
+    },
+    "BUNIT": {
+      "ours": "MJy/sr",
+      "mast": "MJy/sr"
+    }
+  },
+  "differentWcs": [],
+  "pixels": {
+    "both": 6183,
+    "onlyOurs": 0,
+    "onlyMast": 0,
+    "identicalShare": 0.5337214944201844,
+    "comparedOn": "pixels",
+    "medianAbsoluteDifferenceOverMedian": 0,
+    "aboveMedian": {
+      "pixels": 3091,
+      "rmsDifferenceOverRms": 9.640980844563603e-8,
+      "correlation": 0.9999999999999958
+    },
+    "ratioBins": [
+      {
+        "mastMJyPerSr": [
+          669.9495239257812,
+          5436.1875
+        ],
+        "pixels": 2472,
+        "medianRatio": 1
+      },
+      {
+        "mastMJyPerSr": [
+          5436.1875,
+          58981.26171875
+        ],
+        "pixels": 557,
+        "medianRatio": 1
+      },
+      {
+        "mastMJyPerSr": [
+          58981.26171875,
+          83777.546875
+        ],
+        "pixels": 55,
+        "medianRatio": 1
+      },
+      {
+        "mastMJyPerSr": [
+          83777.546875,
+          94753.734375
+        ],
+        "pixels": 6,
+        "medianRatio": 1
+      },
+      {
+        "mastMJyPerSr": [
+          94753.734375,
+          95721.546875
+        ],
+        "pixels": 2,
+        "medianRatio": 1
+      }
+    ]
+  }
+}

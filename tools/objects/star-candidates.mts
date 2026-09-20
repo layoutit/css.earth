@@ -18,12 +18,11 @@
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import { almaObservations, archiveLeads, depositsCiting, esoRawObservations, fetchRetrying, mastObservations, measuredDiameters } from './archive-search.mts';
+import { astroqueryRows } from './astronomy-packages/client.mts';
 export { fetchRetrying } from './archive-search.mts';
 
-const SIMBAD = 'https://simbad.cds.unistra.fr/simbad/sim-tap/sync', OIDB = 'https://tap.jmmc.fr/vollt/tap/sync', VIZIER = 'https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync';
+const SIMBAD = 'https://simbad.cds.unistra.fr/simbad/sim-tap', OIDB = 'https://tap.jmmc.fr/vollt/tap', VIZIER = 'https://tapvizier.cds.unistra.fr/TAPVizieR/tap';
 const quote = (text: string) => `'${text.replaceAll("'", "''")}'`;
-
-export const tapUrl = (service: string, query: string) => `${service}?REQUEST=doQuery&LANG=ADQL&FORMAT=json&QUERY=${encodeURIComponent(query)}`;
 
 export interface OidbGroup { readonly instrument: string; readonly calibrationLevel: number; readonly dataPi: string; readonly bibcode: string | null; readonly granules: number; readonly firstMjd: number; readonly lastMjd: number; readonly sampleUrl: string }
 
@@ -87,26 +86,26 @@ export function candidateVerdict(oidb: readonly OidbGroup[], catalogues: readonl
   return { route: 'shape-only', reason: 'no calibrated interferometry and no deposited image: a shape-only package, off the map' } as const;
 }
 
-async function tap(service: string, query: string): Promise<unknown[][]> {
-  const response = await fetchRetrying(tapUrl(service, query));
-  // A TAP error comes back as a VOTable with the reason, not JSON.
-  if (!response.ok) throw new Error(`${service} answered ${response.status}: ${(await response.text()).match(/QUERY_STATUS" value="ERROR">([^<]*)/u)?.[1] ?? 'no reason given'}.`);
-  const body = await response.json() as { data?: unknown[][] };
-  return body.data ?? [];
+async function tap(service: string, query: string, columns: readonly string[]): Promise<unknown[][]> {
+  const rows = await astroqueryRows({ operation: 'tap-query', service, query });
+  return rows.map(row => columns.map(column => row[column] ?? null));
 }
 
 export async function starCandidates(identifier: string, radiusArcsec = 30) {
-  const [star] = await tap(SIMBAD, `SELECT b.oid, b.main_id, b.ra, b.dec, b.plx_value, b.sp_type, b.otype FROM basic b JOIN ident i ON i.oidref = b.oid WHERE i.id = ${quote(identifier)}`);
+  const [star] = await tap(SIMBAD, `SELECT b.oid, b.main_id, b.ra, b.dec, b.plx_value, b.sp_type, b.otype FROM basic b JOIN ident i ON i.oidref = b.oid WHERE i.id = ${quote(identifier)}`,
+    ['oid', 'main_id', 'ra', 'dec', 'plx_value', 'sp_type', 'otype']);
   if (!star) throw new Error(`SIMBAD does not know ${identifier}; use its exact identifier, for example "pi1 Gru" or "V* CE Tau".`);
   const [oid, mainId, ra, dec, parallax, spectralType] = star as [number, string, number, number, number | null, string | null];
   const radius = radiusArcsec / 3600, cosDec = Math.max(Math.cos(Number(dec) * Math.PI / 180), 1e-6);
-  const oidbRows = await tap(OIDB, `SELECT instrument_name, calib_level, datapi, bib_reference, t_min, access_url, facility_name FROM oidb WHERE s_ra BETWEEN ${ra - radius / cosDec} AND ${ra + radius / cosDec} AND s_dec BETWEEN ${dec - radius} AND ${dec + radius}`);
-  const references = await tap(SIMBAD, `SELECT r.bibcode, h.ref_flag, r.nbobject, r.doi FROM has_ref h JOIN ref r ON h.oidbibref = r.oidbib WHERE h.oidref = ${oid}`);
+  const oidbRows = await tap(OIDB, `SELECT instrument_name, calib_level, datapi, bib_reference, t_min, access_url, facility_name FROM oidb WHERE s_ra BETWEEN ${ra - radius / cosDec} AND ${ra + radius / cosDec} AND s_dec BETWEEN ${dec - radius} AND ${dec + radius}`,
+    ['instrument_name', 'calib_level', 'datapi', 'bib_reference', 't_min', 'access_url', 'facility_name']);
+  const references = await tap(SIMBAD, `SELECT r.bibcode, h.ref_flag, r.nbobject, r.doi FROM has_ref h JOIN ref r ON h.oidbibref = r.oidbib WHERE h.oidref = ${oid}`,
+    ['bibcode', 'ref_flag', 'nbobject', 'doi']);
   const bibcodes = references.map(([bibcode]) => String(bibcode)), about = new Set(references.filter(([, flag, objects]) => aboutStar(flag, objects)).map(([bibcode]) => String(bibcode)));
   const catalogues: Catalogue[] = [];
   for (let start = 0; start < bibcodes.length; start += 100) {
     const chunk = bibcodes.slice(start, start + 100);
-    for (const [name, title, bibcode] of await tap(VIZIER, `SELECT name, title, bibcode FROM METAcat WHERE bibcode IN (${chunk.map(quote).join(', ')})`)) {
+    for (const [name, title, bibcode] of await tap(VIZIER, `SELECT name, title, bibcode FROM METAcat WHERE bibcode IN (${chunk.map(quote).join(', ')})`, ['name', 'title', 'bibcode'])) {
       const readme = await fetchRetrying(`https://cdsarc.cds.unistra.fr/ftp/${String(name)}/ReadMe`).then(response => response.ok ? response.text() : '');
       catalogues.push({ name: String(name), title: String(title), bibcode: String(bibcode), imageLines: readmeImageLines(readme), aboutStar: about.has(String(bibcode)), interferometric: readmeInterferometric(readme) });
     }

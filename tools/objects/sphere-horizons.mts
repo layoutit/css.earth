@@ -42,8 +42,14 @@ export function horizonsCommand(record: unknown): string {
 }
 
 const timeList = (epochs: readonly number[]) => `'${epochs.map(epoch => epoch.toFixed(9)).join(' ')}'`;
-export function observerQuery(command: string, epochs: readonly number[]) {
-  return new URLSearchParams({ format: 'text', COMMAND: `'${command}'`, EPHEM_TYPE: "'OBSERVER'", CENTER: "'309'", TLIST: timeList(epochs),
+/** Paranal, where the ground-based lenses were exposed. A space telescope is a Horizons centre too: JWST is 500@-170. */
+export const PARANAL = '309';
+/** ALMA's array centre, which Horizons has no site code for: a centre written `coord@<body>:<east longitude°>,<latitude°>,<altitude km>`
+ * is asked as geodetic coordinates. The values are the ones CASA's observatory table gives for ALMA. */
+export const ALMA = 'coord@399:-67.7549,-23.0229,5.06';
+export function observerQuery(command: string, epochs: readonly number[], center: string = PARANAL) {
+  const [site, coordinates] = center.split(':');
+  return new URLSearchParams({ format: 'text', COMMAND: `'${command}'`, EPHEM_TYPE: "'OBSERVER'", CENTER: `'${site}'`, ...(coordinates ? { COORD_TYPE: "'GEODETIC'", SITE_COORD: `'${coordinates}'` } : {}), TLIST: timeList(epochs),
     TLIST_TYPE: "'JD'", TIME_TYPE: "'UT'", QUANTITIES: "'1,13,20,24,43'", ANG_FORMAT: "'DEG'", CSV_FORMAT: "'NO'" });
 }
 export function heliocentricQuery(command: string, epochs: readonly number[]) {
@@ -86,9 +92,9 @@ function heliocentricEpochs(epochs: readonly number[], observer: string) {
 }
 
 /** Both tables for exposure starts, one observer row per distinct start in time order and one heliocentric row for each. */
-export async function horizonsTables(command: string, starts: readonly number[], ask: HorizonsRequest = request) {
+export async function horizonsTables(command: string, starts: readonly number[], ask: HorizonsRequest = request, center: string = PARANAL) {
   const epochs = [...new Set(starts)].sort((a, b) => a - b);
-  const observer = await batched(list => observerQuery(command, list), epochs, ask);
+  const observer = await batched(list => observerQuery(command, list, center), epochs, ask);
   const heliocentric = await batched(list => heliocentricQuery(command, list), heliocentricEpochs(epochs, observer), ask);
   const vectors = horizonsRows(heliocentric).filter(line => line.trimStart().startsWith('X ='));
   if (vectors.length !== epochs.length) throw new Error(`Horizons returned ${vectors.length} heliocentric vectors for ${epochs.length} epochs.`);
@@ -103,11 +109,11 @@ export const HORIZONS_TIME_LIST = 'horizons-time-list';
  * the time list, and the epochs the time list held. Horizons prints the date it was asked in each response's header,
  * so a refresh compares the rows, not the bytes.
  */
-export function horizonsRefreshOperations(command: string, starts: readonly number[], observer: string, paths: { observer: string; heliocentric: string }) {
+export function horizonsRefreshOperations(command: string, starts: readonly number[], observer: string, paths: { observer: string; heliocentric: string }, center: string = PARANAL) {
   const epochs = [...new Set(starts)].sort((a, b) => a - b);
   const parameters = (query: URLSearchParams) => { query.delete('TLIST'); return Object.fromEntries(query); };
   return [
-    { kind: HORIZONS_TIME_LIST, groups: ['refresh'], path: paths.observer, url: HORIZONS_API, parameters: parameters(observerQuery(command, [])), epochs },
+    { kind: HORIZONS_TIME_LIST, groups: ['refresh'], path: paths.observer, url: HORIZONS_API, parameters: parameters(observerQuery(command, [], center)), epochs },
     { kind: HORIZONS_TIME_LIST, groups: ['refresh'], path: paths.heliocentric, url: HORIZONS_API, parameters: parameters(heliocentricQuery(command, [])), epochs: heliocentricEpochs(epochs, observer) },
   ];
 }

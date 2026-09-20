@@ -1,4 +1,4 @@
-import { composePreparedProjectiveTransform } from '../rendering/prepared-projective-texture-leaf.js';
+import { composePreparedProjectiveTransform } from '../prepared-data/projective-layout.js';
 import type { PreparedPage } from './types.js';
 
 /** Publish final prepared sampling addresses into an existing page slot. */

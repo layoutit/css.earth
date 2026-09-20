@@ -1,0 +1,108 @@
+#!/usr/bin/env node
+import { resolve } from 'node:path';
+import { pathToFileURL, fileURLToPath } from 'node:url';
+import { fork } from 'node:child_process';
+import { formatAnswer } from './query.mts';
+import { assessRequest } from './request-satisfaction.mts';
+import { getSession, saveSession, type Session } from './session.mts';
+
+import { HELP } from '../../../packages/telescope/src/help.mts';
+export { HELP };
+
+const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--result']);
+export type CliOptions = { readonly command: 'help' } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
+export function parseCli(args: readonly string[]): CliOptions {
+  const command = args[0];
+  if (!args.length || args.includes('--help') || args.includes('-h')) return { command: 'help' as const };
+  if (command !== 'query' && command !== 'get') throw new TypeError('Expected query or get. Use telescope --help.');
+  const values = new Map<string, string>(), switches = new Set<string>(), positional: string[] = [], requestArgs: string[] = [];
+  for (let i = 1; i < args.length; i++) {
+    const arg = args[i];
+    if (!arg.startsWith('-')) { positional.push(arg); continue; }
+    if (['--json', '--verbose', ...(command === 'query' ? ['--any-time'] : [])].includes(arg)) {
+      if (switches.has(arg)) throw new TypeError(`Repeated option ${arg}.`);
+      switches.add(arg); if (arg === '--any-time') requestArgs.push(arg); continue;
+    }
+    if (!(command === 'query' ? arg === '--out' || queryValues.has(arg) : arg === '--pick')) throw new TypeError(`Unknown ${command} option ${arg}.`);
+    if (values.has(arg)) throw new TypeError(`Repeated option ${arg}.`);
+    const value = args[++i];
+    if (!value || value.startsWith('--')) throw new TypeError(`Missing value for ${arg}.`);
+    values.set(arg, value); if (queryValues.has(arg)) requestArgs.push(arg, value);
+  }
+  const json = switches.has('--json'), verbose = switches.has('--verbose');
+  if (command === 'query') {
+    if (positional.length > 1 || positional.length && values.has('--target')) throw new TypeError('Give one target, either positional or --target.');
+    if (positional[0]) requestArgs.push('--target', positional[0]);
+    if (!values.has('--result')) requestArgs.push('--result', 'telescope-product');
+    const directory = values.get('--out'); if (!directory) throw new TypeError('query requires --out DIRECTORY.');
+    return { command, directory: resolve(directory), requestArgs, json, verbose };
+  }
+  const pick = Number(values.get('--pick'));
+  if (positional.length !== 1 || !Number.isSafeInteger(pick) || pick < 1) throw new TypeError('Use telescope get DIRECTORY --pick N, with a positive whole number.');
+  return { command, directory: resolve(positional[0]), pick, json, verbose };
+}
+export function formatSession(session: Session, directory: string): string {
+  const lines = [`${session.target} · ${session.answer.request.kind} · ${session.answer.request.wavelengthMicrometres.join('–')} µm`, ''];
+  for (const choice of session.choices) {
+    const verdict = choice.product ? assessRequest(session.answer.request, choice.product.facts) : undefined;
+    lines.push(`${choice.pick}. ${choice.telescope} / ${choice.mode} / ${choice.observation}`,
+      `   ${choice.state === 'ready' ? 'Data qualified' : 'Qualification required'}${verdict ? `; request ${verdict.status}` : ''}`);
+    if (verdict) for (const [name, v] of Object.entries(verdict.constraints)) if (v.answer !== 'yes') lines.push(`   ${name}: ${v.answer}. ${v.reason}`);
+  }
+  if (!session.choices.length) {
+    lines.push(`No retrievable observation. Workflow: ${session.answer.endpoint.status}.`);
+    if (session.answer.targetResolution.status === 'unknown') lines.push(formatAnswer(session.answer).trim());
+    for (const candidate of session.answer.candidates) lines.push(`  ${candidate.telescope} / ${candidate.mode}: ${candidate.selectionAssessment.blockers.map(b => b.reason).join('; ') || 'No exact qualified artifact or executable qualification action.'}`);
+  }
+  for (const coverage of session.answer.targetCoverage) if (coverage.state !== 'observed') lines.push(`${coverage.telescope}: ${coverage.state}. ${coverage.reason}`);
+  for (const issue of session.answer.sourceIntakeIssues ?? []) lines.push(`Source ${issue.state}: ${issue.path}. ${issue.reason}`);
+  lines.push('', `Saved: ${resolve(directory, 'query.json')}`);
+  if (session.choices.length) lines.push(`Next: telescope get ${JSON.stringify(directory)} --pick N`);
+  return `${lines.join('\n')}\n`;
+}
+
+export async function main(args: readonly string[], root = resolve(import.meta.dirname, '../../..'), output: (text: string) => void = text => { process.stdout.write(text); }): Promise<number> {
+  try {
+    const options = parseCli(args);
+    if (options.command === 'help') { output(HELP); return 0; }
+    // Instrument tools own their logging. Keep every such message off machine-readable stdout.
+    const stdout = process.stdout.write;
+    let text: string, code: number;
+    process.stdout.write = process.stderr.write.bind(process.stderr);
+    try {
+      if (options.command === 'query') {
+        process.stderr.write('Querying observations…\n');
+        const session = await saveSession(root, options.requestArgs, options.directory);
+        text = options.json ? `${JSON.stringify(session)}\n` : formatSession(session, options.directory) + (options.verbose ? `\n${formatAnswer(session.answer)}` : '');
+        code = session.choices.length ? 0 : 3;
+      } else {
+        const result = await getSession(root, options.directory, options.pick, line => process.stderr.write(`${line}\n`));
+        text = options.json ? `${JSON.stringify(result)}\n` : [`Product: ${result.product}`, `Evidence: ${result.resultPath}`, `Request: ${result.satisfaction.status}`,
+          ...(result.reused ? ['Reused: verified existing delivery'] : []),
+          ...Object.entries(result.satisfaction.constraints).filter(([, v]) => v.answer !== 'yes').map(([name, v]) => `Remaining ${name}: ${v.answer}. ${v.reason}`)].join('\n') + '\n';
+        code = result.satisfaction.status === 'fulfilled' ? 0 : result.satisfaction.status === 'refused' ? 4 : 3;
+      }
+    } finally { process.stdout.write = stdout; }
+    output(text); return code;
+  } catch (error) {
+    const code = error instanceof TypeError || error instanceof RangeError ? 2 : 1, message = error instanceof Error ? error.message : String(error);
+    if (args.includes('--json')) output(`${JSON.stringify({ error: message, exitCode: code })}\n`);
+    process.stderr.write(`${args.includes('--verbose') && error instanceof Error ? error.stack : message}\n`);
+    return code;
+  }
+}
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  if (process.send) process.exitCode = await main(process.argv.slice(2), undefined, text => { process.send!({ text }); });
+  else {
+    // Give reducers and every inherited Python/native subprocess stderr at the descriptor level.
+    // The single final response crosses IPC, so stdout remains parseable even for noisy tools.
+    const worker = fork(fileURLToPath(import.meta.url), process.argv.slice(2), { stdio: ['inherit', 2, 2, 'ipc'] });
+    worker.on('message', (message: unknown) => {
+      if (message && typeof message === 'object' && 'text' in message && typeof message.text === 'string') process.stdout.write(message.text);
+    });
+    const forward = (signal: NodeJS.Signals) => worker.kill(signal);
+    process.on('SIGINT', forward); process.on('SIGTERM', forward);
+    process.exitCode = await new Promise<number>((accept, reject) => { worker.once('error', reject); worker.once('exit', (code, signal) => accept(code ?? (signal === 'SIGINT' ? 130 : 143))); });
+    process.off('SIGINT', forward); process.off('SIGTERM', forward);
+  }
+}

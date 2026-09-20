@@ -6,7 +6,7 @@ import { chromium, webkit } from 'playwright';
 import type { CDPSession, Page } from 'playwright';
 import sharp from 'sharp';
 import { parseSharedView, formatSharedView } from '../../../src/renderers/css/navigation/view-url.js';
-import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4, serializePreparedMatrix4 } from '../../../src/renderers/css/solar-system/prepared-ellipsoid-projection.js';
+import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4, serializePreparedMatrix4 } from '../../../src/renderers/css/prepared-data/prepared-ellipsoid-projection.js';
 import { conformanceBrowserLaunch } from '../../../site/test/conformance-browser-launch.mts';
 
 const engine=process.argv[2]??'chromium';

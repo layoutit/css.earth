@@ -9,7 +9,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
 
-import { normalizeCityAssetOrigin, preparedCityAssetUrl } from "../../../../src/platform/prepared-map/city-asset-url.mts";
+import { normalizeCityAssetOrigin, preparedCityAssetUrl } from "../../../../src/renderers/css/dist/preparation.js";
 import { cityCoverageRoots, planCityCoverage } from "./plan-coverage.mts";
 import { expectedGlobalCityFace } from "./global-face-receipts.mts";
 import { prepareCityIndex } from "./prepare-index.mts";

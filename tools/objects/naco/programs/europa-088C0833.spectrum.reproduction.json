@@ -1,0 +1,86 @@
+{
+  "schema": "cssearth-naco-spectrum@1",
+  "program": "europa-088C0833",
+  "object": "EUROPA",
+  "night": "2012-01-03",
+  "kind": "two-nod-halves",
+  "note": "Internal and physical checks only. The ESO archive publishes no Phase 3 product and no master calibration for NACO, and ESO's telescope bibliography records no publication for this run, so there is nothing external to check it against. The two halves share no exposure and measure repeatability, not accuracy.",
+  "oracle": "No published or archive product. ESO telbib lists two papers for programme 088.C-0833 and both are the SINFONI run 088.C-0833(A); it lists none for the NACO run 088.C-0833(B).",
+  "halves": [
+    {
+      "half": "a-half",
+      "path": ".local/naco/europa-088C0833/nod-a-half/naco_spc_combine.fits",
+      "sha256": "ba9e3ffc59541a32114f4c0bf3db62c7e4dd56de3ea100d0aedd17c7a6e6cb68",
+      "bytes": 6350400,
+      "frames": 6
+    },
+    {
+      "half": "b-half",
+      "path": ".local/naco/europa-088C0833/nod-b-half/naco_spc_combine.fits",
+      "sha256": "60ae8afca90e8b492b698ca49d118a64b7c4f9bdcfd247ef572a1c1187f0153a",
+      "bytes": 6350400,
+      "frames": 6
+    }
+  ],
+  "slitAxis": {
+    "axis": "x",
+    "runAlongX": 8,
+    "runAlongY": 127
+  },
+  "geometry": {
+    "pixelScaleArcsec": 0.0549,
+    "objective": "L54",
+    "slit": "Slit_172mas",
+    "grism": "Grism2",
+    "filter": "SL",
+    "positionAngleDeg": 90,
+    "rotatorStartDeg": 55.39901,
+    "rotatorEndDeg": 55.67322,
+    "exposureMidpointsUtc": [
+      "2012-01-03T00:38:36.037Z",
+      "2012-01-03T00:39:22.987Z",
+      "2012-01-03T00:40:02.020Z",
+      "2012-01-03T00:40:48.953Z",
+      "2012-01-03T00:41:28.040Z",
+      "2012-01-03T00:42:16.970Z",
+      "2012-01-03T00:42:56.077Z",
+      "2012-01-03T00:43:44.047Z",
+      "2012-01-03T00:44:23.203Z",
+      "2012-01-03T00:45:10.193Z",
+      "2012-01-03T00:45:49.177Z",
+      "2012-01-03T00:46:38.040Z"
+    ],
+    "raDeg": 28.68055,
+    "decDeg": 10.45311,
+    "airmass": 1.2545
+  },
+  "resolution": {
+    "targetFwhmPixels": 2.694959434798591,
+    "targetFwhmArcsec": 0.14795327297044264,
+    "standardFwhmPixels": 3.0878245726330533,
+    "standardFwhmArcsec": 0.1695215690375546,
+    "ratio": 0.8727696057229514,
+    "resolvedAlongSlit": false,
+    "note": "Measured against the telluric standard taken through the same slit and grism on the same night. A ratio above one is a target wider than the instrument profile, which is what resolved along the slit means here."
+  },
+  "spectrum": {
+    "samples": 1024,
+    "both": 1024,
+    "identical": 0,
+    "onlyFirst": 0,
+    "onlySecond": 0,
+    "identicalShare": 0,
+    "medianLevel": 9.54677127301693,
+    "medianAbsoluteDifferenceOverMedian": 1.4812648662525527,
+    "aboveMedian": {
+      "samples": 512,
+      "correlation": 0.3659731332498954,
+      "relativeDifference": {
+        "median": 0.9308374480157745,
+        "p99": 8.771120679138635,
+        "largest": 25.79458992283626
+      }
+    }
+  },
+  "arcs": false
+}

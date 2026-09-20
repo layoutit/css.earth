@@ -1,0 +1,332 @@
+{
+  "schema": "cssearth-gemini-reproduction@1",
+  "programme": "GS-2025B-DD-102",
+  "program": "comet-3i-gs2025bdd102",
+  "stage": "flat",
+  "evidence": "archive-agreement",
+  "ours": {
+    "product": "S20250917S0126_flat.fits",
+    "madeBy": "dragons 4.2.2, numpy 2.5.3, astropy 8.0.1, python 3.12.14",
+    "record": ".local/gemini/work/flat/S20250917S0126_flat.fits.product.json"
+  },
+  "archive": {
+    "product": "gS20250917S0126_flat.fits",
+    "uri": "gemini:GEMINI/gS20250917S0126_flat.fits",
+    "bytes": 25767360,
+    "md5": "bb61f172739a376331a6575fa5013719",
+    "madeBy": "Gemini Observatory's IRAF nightly pipeline (gprepare, gireduce, gemcombine), not DRAGONS"
+  },
+  "association": "The archive's own association, read from the master rather than made here: gS20250917S0126_flat.fits names these 7 frames in the IMCMB001-IMCMB007 cards of its first extension header, and its primary header carries the same DETECTOR, NAMPS, AMPINTEG, DETRO1XS, DETRO1YS as the science frames.",
+  "registration": "each extension's own DETSEC card, matched by the detector columns it covers; nothing was shifted or resampled",
+  "means": "Two different official Gemini pipelines reduced the same raw frames. A difference is a difference between the two pipelines, not an error in either. This is not a bit-for-bit reproduction and is not claimed as one.",
+  "extensions": [
+    {
+      "detector": "1025:1536",
+      "samples": 534528,
+      "statistics": {
+        "both": 534528,
+        "identical": 9,
+        "identicalShare": 0.00001683728448275862,
+        "medianLevel": 1.056174874305725,
+        "medianAbsoluteDifference": 0.0015311241149902344,
+        "absoluteDifference": {
+          "median": 0.0015311241149902344,
+          "p99": 0.9725690241903067,
+          "largest": 2.3654417991638184
+        },
+        "aboveMedian": {
+          "samples": 267264,
+          "correlation": 0.045373781178931254,
+          "relativeDifference": {
+            "median": 0.0013416950332297726,
+            "p99": 0.00957265715730232
+          }
+        }
+      }
+    },
+    {
+      "detector": "1537:2048",
+      "samples": 534528,
+      "statistics": {
+        "both": 534528,
+        "identical": 19,
+        "identicalShare": 0.00003554537835249042,
+        "medianLevel": 1.0745964050292969,
+        "medianAbsoluteDifference": 0.0007684230804443359,
+        "absoluteDifference": {
+          "median": 0.0007684230804443359,
+          "p99": 0.4763432741165161,
+          "largest": 1.8137590885162354
+        },
+        "aboveMedian": {
+          "samples": 267264,
+          "correlation": -0.5221688977614823,
+          "relativeDifference": {
+            "median": 0.0007264749606693192,
+            "p99": 0.3772050247923183
+          }
+        }
+      }
+    },
+    {
+      "detector": "1:512",
+      "samples": 534528,
+      "statistics": {
+        "both": 534528,
+        "identical": 0,
+        "identicalShare": 0,
+        "medianLevel": 0.02029726840555668,
+        "medianAbsoluteDifference": 0.9797027111053467,
+        "absoluteDifference": {
+          "median": 0.9797027111053467,
+          "p99": 0.9876046171411872,
+          "largest": 0.9995594764186535
+        },
+        "aboveMedian": {
+          "samples": 267264,
+          "correlation": null,
+          "relativeDifference": {
+            "median": 42.48984818717541,
+            "p99": 48.13690113960038
+          }
+        }
+      }
+    },
+    {
+      "detector": "2049:2560",
+      "samples": 534528,
+      "statistics": {
+        "both": 534528,
+        "identical": 19,
+        "identicalShare": 0.00003554537835249042,
+        "medianLevel": 1.006791353225708,
+        "medianAbsoluteDifference": 0.0007096529006958008,
+        "absoluteDifference": {
+          "median": 0.0007096529006958008,
+          "p99": 0.3836550712585449,
+          "largest": 1.4393892288208008
+        },
+        "aboveMedian": {
+          "samples": 267264,
+          "correlation": -0.14966448356771755,
+          "relativeDifference": {
+            "median": 0.0007115197112496256,
+            "p99": 0.33873026336067324
+          }
+        }
+      }
+    },
+    {
+      "detector": "2561:3072",
+      "samples": 534528,
+      "statistics": {
+        "both": 534528,
+        "identical": 11,
+        "identicalShare": 0.00002057890325670498,
+        "medianLevel": 0.9976343512535095,
+        "medianAbsoluteDifference": 0.0014771223068237305,
+        "absoluteDifference": {
+          "median": 0.0014771223068237305,
+          "p99": 0.010535776615142822,
+          "largest": 1.9918792247772217
+        },
+        "aboveMedian": {
+          "samples": 267264,
+          "correlation": 0.0804312483837919,
+          "relativeDifference": {
+            "median": 0.0014240266201500994,
+            "p99": 0.01097038897016716
+          }
+        }
+      }
+    },
+    {
+      "detector": "3073:3584",
+      "samples": 534528,
+      "statistics": {
+        "both": 534528,
+        "identical": 12,
+        "identicalShare": 0.00002244971264367816,
+        "medianLevel": 0.9923226237297058,
+        "medianAbsoluteDifference": 0.0014520883560180664,
+        "absoluteDifference": {
+          "median": 0.0014520883560180664,
+          "p99": 0.010434210300445557,
+          "largest": 2.0699076652526855
+        },
+        "aboveMedian": {
+          "samples": 267264,
+          "correlation": 0.12347670513996169,
+          "relativeDifference": {
+            "median": 0.001430100351585746,
+            "p99": 0.010850443405790158
+          }
+        }
+      }
+    },
+    {
+      "detector": "3585:4096",
+      "samples": 534528,
+      "statistics": {
+        "both": 534528,
+        "identical": 20,
+        "identicalShare": 0.0000374161877394636,
+        "medianLevel": 0.9938858151435852,
+        "medianAbsoluteDifference": 0.0007151961326599121,
+        "absoluteDifference": {
+          "median": 0.0007151961326599121,
+          "p99": 0.2393786907196045,
+          "largest": 1.4651174545288086
+        },
+        "aboveMedian": {
+          "samples": 267264,
+          "correlation": -0.06756895130226617,
+          "relativeDifference": {
+            "median": 0.0007349381694088238,
+            "p99": 0.32657073537352305
+          }
+        }
+      }
+    },
+    {
+      "detector": "4097:4608",
+      "samples": 534528,
+      "statistics": {
+        "both": 534528,
+        "identical": 15,
+        "identicalShare": 0.0000280621408045977,
+        "medianLevel": 0.9523749947547913,
+        "medianAbsoluteDifference": 0.000681757926940918,
+        "absoluteDifference": {
+          "median": 0.000681757926940918,
+          "p99": 0.18964612483978271,
+          "largest": 1.2921485900878906
+        },
+        "aboveMedian": {
+          "samples": 267264,
+          "correlation": 0.4568193847767187,
+          "relativeDifference": {
+            "median": 0.0007284775863166664,
+            "p99": 0.29418622574845504
+          }
+        }
+      }
+    },
+    {
+      "detector": "4609:5120",
+      "samples": 534528,
+      "statistics": {
+        "both": 534528,
+        "identical": 10,
+        "identicalShare": 0.0000187080938697318,
+        "medianLevel": 0.9250175356864929,
+        "medianAbsoluteDifference": 0.0014255642890930176,
+        "absoluteDifference": {
+          "median": 0.0014255642890930176,
+          "p99": 0.9736573938280344,
+          "largest": 1.9378724098205566
+        },
+        "aboveMedian": {
+          "samples": 267264,
+          "correlation": 0.4445780397418634,
+          "relativeDifference": {
+            "median": 0.0014263729388386047,
+            "p99": 0.010313985111534403
+          }
+        }
+      }
+    },
+    {
+      "detector": "5121:5632",
+      "samples": 534528,
+      "statistics": {
+        "both": 534528,
+        "identical": 1,
+        "identicalShare": 0.00000187080938697318,
+        "medianLevel": 0.025469083338975906,
+        "medianAbsoluteDifference": 0.9745311811566353,
+        "absoluteDifference": {
+          "median": 0.9745311811566353,
+          "p99": 0.9846197171136737,
+          "largest": 1.1391501426696777
+        },
+        "aboveMedian": {
+          "samples": 267264,
+          "correlation": -0.640134419821615,
+          "relativeDifference": {
+            "median": 26.206576554251658,
+            "p99": 38.08788384685223
+          }
+        }
+      }
+    },
+    {
+      "detector": "513:1024",
+      "samples": 534528,
+      "statistics": {
+        "both": 534528,
+        "identical": 0,
+        "identicalShare": 0,
+        "medianLevel": 0.03016718104481697,
+        "medianAbsoluteDifference": 0.9698332566767931,
+        "absoluteDifference": {
+          "median": 0.9698332566767931,
+          "p99": 0.9829616472125053,
+          "largest": 1.547637939453125
+        },
+        "aboveMedian": {
+          "samples": 267264,
+          "correlation": -0.6316205336976415,
+          "relativeDifference": {
+            "median": 20.148136680852325,
+            "p99": 32.03425399026061
+          }
+        }
+      }
+    },
+    {
+      "detector": "5633:6144",
+      "samples": 534528,
+      "statistics": {
+        "both": 534528,
+        "identical": 0,
+        "identicalShare": 0,
+        "medianLevel": 0.015375468879938126,
+        "medianAbsoluteDifference": 0.9846245143562555,
+        "absoluteDifference": {
+          "median": 0.9846245143562555,
+          "p99": 0.9890480861067772,
+          "largest": 0.9935058858245611
+        },
+        "aboveMedian": {
+          "samples": 267264,
+          "correlation": null,
+          "relativeDifference": {
+            "median": 56.53306128047735,
+            "p99": 63.890869738269785
+          }
+        }
+      }
+    }
+  ],
+  "total": {
+    "both": 6414336,
+    "identical": 116,
+    "identicalShare": 0.00001808449074074074,
+    "medianLevel": 0.9482921957969666,
+    "medianAbsoluteDifference": 0.0018715858459472656,
+    "absoluteDifference": {
+      "median": 0.0018715858459472656,
+      "p99": 0.9875594666227698,
+      "largest": 2.3654417991638184
+    },
+    "aboveMedian": {
+      "samples": 3207167,
+      "correlation": 0.4235134007666028,
+      "relativeDifference": {
+        "median": 0.0009202863051790233,
+        "p99": 0.14464426336806885
+      }
+    }
+  }
+}

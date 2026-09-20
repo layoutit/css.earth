@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { createPreparedEllipsoidProjection, invertPreparedAffineMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4,
-  readPreparedMatrix4 } from './prepared-ellipsoid-projection.js';
-import type { PhysicalProjection } from '../rendering/physical-projection.js';
+  readPreparedMatrix4 } from '../prepared-data/prepared-ellipsoid-projection.js';
+import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 import { createPreparedMaterialPublisher, type PreparedMaterialTrack } from '../rendering/prepared-material.js';
 import type { PreparedResources } from '../rendering/prepared-residency.js';
 

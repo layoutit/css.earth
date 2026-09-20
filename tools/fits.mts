@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { open } from 'node:fs/promises';
+import { open, type FileHandle } from 'node:fs/promises';
 
 /** Preparation-only FITS subset. No projection, calibration, display orientation,
  * table-column interpretation or compression is inferred here. */
@@ -261,9 +261,14 @@ export async function readFitsFileHdus(path: string): Promise<FitsFileHdu[]> {
 }
 
 /** One rectangle of a two-axis image HDU, read row by row from disk with BSCALE/BZERO applied and BLANK as NaN.
- * x0/y0 are zero-based FITS column and row (the first stored row is row 0). */
+ * x0/y0 are zero-based FITS column and row (the first stored row is row 0).
+ *
+ * `handle` may be a file the caller already holds open, and that handle is then left open rather than closed here. A caller
+ * reading many regions of one file, a cube plane by plane, opens it once instead of once per region: comparing two
+ * 2,595-plane cubes over three passes and four extensions is 124,000 opens and closes otherwise. */
 export async function readFitsFileRegion(path: string, hdu: FitsFileHdu,
-  region: { x0: number; y0: number; width: number; height: number }, maxDecodedBytes = 512 * 1024 * 1024) {
+  region: { x0: number; y0: number; width: number; height: number }, maxDecodedBytes = 512 * 1024 * 1024,
+  handle?: FileHandle) {
   const { x0, y0, width, height } = region, [fullWidth, fullHeight] = hdu.dimensions;
   if (hdu.header.XTENSION === 'BINTABLE' || hdu.dimensions.length !== 2 || ![8, 16, 32, -32, -64].includes(hdu.bitpix))
     throw new Error('Unsupported FITS image region (requires a 2D numeric image).');
@@ -273,7 +278,7 @@ export async function readFitsFileRegion(path: string, hdu: FitsFileHdu,
   const scale = optionalNumber(hdu.header, 'BSCALE', 1), zero = optionalNumber(hdu.header, 'BZERO', 0);
   const blank = hdu.bitpix > 0 && Object.hasOwn(hdu.header, 'BLANK') ? integer(hdu.header, 'BLANK', Number.MIN_SAFE_INTEGER) : undefined;
   const stride = Math.abs(hdu.bitpix) / 8, values = new Float64Array(width * height), row = Buffer.alloc(width * stride);
-  const file = await open(path, 'r');
+  const file = handle ?? await open(path, 'r');
   try {
     for (let y = 0; y < height; y++) {
       await file.read(row, 0, row.length, hdu.dataStart + ((y0 + y) * fullWidth! + x0) * stride);
@@ -283,7 +288,7 @@ export async function readFitsFileRegion(path: string, hdu: FitsFileHdu,
         values[y * width + x] = raw === blank ? NaN : scale === 1 && zero === 0 ? raw : raw * scale + zero;
       }
     }
-  } finally { await file.close(); }
+  } finally { if (!handle) await file.close(); }
   return { ...region, values };
 }
 

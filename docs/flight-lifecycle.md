@@ -56,7 +56,58 @@ Search is owned by the user's current browsing interaction. A completed flight
 or overview transition updates the selected body without replacing a newer
 query; choosing a result or dismissing search relinquishes that ownership.
 
+## Application request ownership
+
+`site/navigation-lifecycle.mts` owns the pending request, its abort signal,
+transient resources and terminal outcome. Requests move from preparing to flying
+to committing; same-body dataset changes can proceed directly to committing.
+Loading and flight preparation can overlap. These phases describe application
+ownership, not additional camera paths or clocks.
+
+Only the current request may commit navigation history. Saved history entries
+can be installed before their camera flight completes, preserving Back/Forward
+semantics. Completion, cancellation and failure invalidate the request before
+running cleanup. A successful or input-interrupted arrival releases temporary
+resources without aborting the handed-off scene. Scene resources retain their
+own lifetime until replacement or document teardown.
+
+Saved-view restoration on a retained scene waits on the request lifetime. A
+replacement selection therefore settles the old navigation immediately, even
+when the underlying restoration is still completing. Late transport results
+release their resources and cannot commit a replacement's history or readiness.
+
+`site/world-preferences.mts` retains display intent independently of navigation.
+The shell binds its settings to this owner, and a newly mounted world receives
+the latest settings. Playback remains governed by the shared runtime policy.
+
+## Scene activation and prepared ownership
+
+`site/scene-session.mts` admits one live session. Its state is loading, ready,
+failed or disposed; loading distinguishes native activation from subsequent
+dataset and saved-view restoration. A native handle cannot publish readiness
+before its ready promise resolves and the router commits restoration. Playback
+commands and the current view-URL binding belong to the session. Router
+diagnostics, shell playback and DOM publication read one derived snapshot.
+
+A session owns a returned native handle even if its factory reports an error
+synchronously. Teardown invalidates the session before flushing the URL and
+releasing resources; a failed URL flush or destructor cannot skip the remaining
+cleanup. Cancelled activation observes late promise rejection without mounting
+another scene.
+
+`site/prepared-scene-ownership.mts` keeps the prepared bank under the request's
+abort signal until `WorldHandoff.transferTo` assigns it to the session immediately
+before mounting. A failed mount releases unclaimed preparation through the
+session signal. Successful renderer claims continue owning native residency and
+tree cleanup; the application does not introduce another bank or claim path.
+Both preserved-view and animated handoffs use this transfer.
+
 ## Verification
+
+`pnpm test:shell:router` covers interrupted flights, history, dataset selection,
+late transport disposal and superseded saved-view restoration. The focused
+`site/test/navigation-lifecycle.test.mts` suite checks commit authority and
+cleanup ordering, including abort callbacks and failed destructors.
 
 Use an immutable build for sustained recording; repeated preparation and HMR
 can inflate the development server's compiler heap and interrupt navigation:

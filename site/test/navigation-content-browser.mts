@@ -30,7 +30,9 @@ try {
     };
     navigationFragments(window).prefetch('venus');
     const fragment = await navigationFragments(window).get('venus');
-    if (fragment.querySelector('template[data-object-card], [data-system-results]')) throw new Error('Fragment repeats resident cards/catalog');
+    try {
+      if (fragment.document.querySelector('template[data-object-card], [data-system-results]')) throw new Error('Fragment repeats resident cards/catalog');
+    } finally { fragment.release(); }
     const expectedMetadata = headMetadata(new DOMParser().parseFromString(await fetch('/venus/').then(response => response.text()), 'text/html'));
     const selectors = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content', '.planet-input-surface'];
     const retained = selectors.map(selector => document.querySelector(selector));
@@ -75,6 +77,7 @@ try {
       aboutLabelBound: Boolean(document.getElementById(window.__cssearthTest.required(window.__cssearthTest.element('.explorer-about-panel').getAttribute('aria-labelledby'), 'about label reference'))),
       breadcrumbs: breadcrumbs(),
       fragmentRequests,
+      descriptor: JSON.parse(window.__cssearthTest.required(document.querySelector('script[data-prepared-descriptor]')?.textContent, 'prepared descriptor')).id,
     };
     const reverse = await transport.load(object('mercury'), { signal: new AbortController().signal });
     shell.setObject(reverse);
@@ -85,6 +88,7 @@ try {
       surfaceStylesRetained: surfaceStyles.every(style => style.isConnected),
       selectedSurface: getComputedStyle(window.__cssearthTest.required(leaf, 'computed style element')).backgroundImage,
       breadcrumbs: breadcrumbs(),
+      descriptor: JSON.parse(window.__cssearthTest.required(document.querySelector('script[data-prepared-descriptor]')?.textContent, 'prepared descriptor')).id,
     };
     surfaceProbe.remove();
     shell.destroy();
@@ -107,12 +111,14 @@ try {
   assert.equal(proof.first.selectedTitle, 'Venus');
   assert.equal(proof.first.aboutLabelBound, true);
   assert.equal(proof.first.fragmentRequests, 1, 'The destination load reuses the intent-fetched fragment');
+  assert.equal(proof.first.descriptor, 'venus');
   for (const transition of [proof.first, proof.second]) {
     assert.ok(transition.breadcrumbs.includes('/sun/?overview=milky-way'));
     assert.ok(transition.breadcrumbs.includes('/sun/?overview=system'));
   }
   assert.ok(proof.second.identities.every(Boolean));
   assert.equal(proof.second.selectedSearch, '');
+  assert.equal(proof.second.descriptor, 'mercury');
   assert.equal(proof.second.surfaceStylesRetained, true);
   assert.equal(proof.second.selectedSurface, proof.first.surfaceBefore,
     'Returning to Mercury must restore its image using the retained shared stylesheet.');

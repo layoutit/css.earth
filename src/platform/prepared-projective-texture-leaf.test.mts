@@ -4,7 +4,7 @@ import test from "node:test";
 import {
   scalePreparedBackgroundAddresses,
   scalePreparedPixelLengths,
-} from "./prepared-projective-texture-leaf.mts";
+} from "../renderers/css/dist/preparation.js";
 
 test("scales every prepared pixel address in multi-layer backgrounds", () => {
   assert.equal(
@@ -42,7 +42,7 @@ test("scales variable-backed prepared background addresses", () => {
   assert.equal(style.backgroundSize, "4160px 3072px");
 });
 
-const { applyPreparedProjectiveLayout } = await import("./prepared-projective-texture-leaf.mts");
+const { applyPreparedProjectiveLayout } = await import("../renderers/css/dist/preparation.js");
 test("scaled projective leaves reject missing prepared dimensions and texture size", () => {
   for (const missing of ["width", "height", "backgroundSize"]) {
     const style = { width: "64px", height: "64px", backgroundSize: "1024px 512px", [missing]: "" };

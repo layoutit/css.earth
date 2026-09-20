@@ -16,6 +16,7 @@ import { readFitsPrimary } from '../../observation/fits.mts';
 import { pds3LabelHasReflectance } from './pds3-reflectance.mts';
 import { castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
+import { bandSetFrame } from '../composite.mts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.mts';
 import { deriveLimits } from '../limits.mts';
 import { MAXIMUM_LEVEL_FRAMES } from '../levels.mts';
@@ -208,29 +209,6 @@ async function loadControlledFrame(frame: CameraFrameRecipe, photometry: Observa
   if (silhouette.share > MAXIMUM_LIT_SHAPE_ON_SKY) throw new Error(`Controlled camera ${frame.id} places ${(silhouette.share * 100).toFixed(1)}% of its lit source shape on sky; its stated camera does not register to the photograph.`);
   const built = cameraFrame({ id: frame.id, image: { ...observation, report: { ...observation.report, silhouette } }, camera, geometry, photometry, limits, mesh: radial.grid });
   return { frame: built, label };
-}
-
-/** Three filter photographs shown together. Every band must qualify at a point, and the bands stay separate floats until display. */
-function bandSetFrame(id: string, bands: readonly ObservationFrame[]): ObservationFrame {
-  const coarsest = bands.reduce((a, b) => b.footprint.nadirMedianMeters > a.footprint.nadirMedianMeters ? b : a);
-  return { id, startTime: bands[0].startTime, filter: bands.map(frame => frame.filter).join(' / '), positionKm: coarsest.positionKm,
-    cameraKind: 'control-network', geometrySource: 'source-mesh-rays', nominalPixelScaleMeters: coarsest.nominalPixelScaleMeters, footprint: coarsest.footprint,
-    sample(point) {
-      const color: number[] = [];
-      let separationMeters = 0, gain = 0, maximumEmissionDegrees = 0, maximumIncidenceDegrees = 0;
-      for (const frame of bands) {
-        const sample = frame.sample(point);
-        if (sample.reason !== undefined) return sample;
-        color.push(sample.radiance); separationMeters = Math.max(separationMeters, sample.separationMeters); gain = Math.max(gain, sample.gain);
-        maximumEmissionDegrees = Math.max(maximumEmissionDegrees, sample.maximumEmissionDegrees); maximumIncidenceDegrees = Math.max(maximumIncidenceDegrees, sample.maximumIncidenceDegrees);
-      }
-      // Level matching and coverage use the bands' mean; one gain then scales all three bands, so their measured ratios stay.
-      return { radiance: (color[0] + color[1] + color[2]) / 3, color, gain, separationMeters, maximumEmissionDegrees, maximumIncidenceDegrees };
-    },
-    visible: point => bands.every(frame => frame.visible(point)),
-    // A point is only as deep inside the set's disc as inside its shallowest band's.
-    ...(bands.every(frame => frame.contourDepth) ? { contourDepth: (point: readonly number[]) => Math.min(...bands.map(frame => frame.contourDepth?.(point) ?? 0)) } : {}),
-    report: { id, bands: bands.map(frame => frame.report) } };
 }
 
 const lensPhotometry = (block: CameraLens['photometry'], { sourceDirectory, source }: LoadContext): Promise<ObservationPhotometry> =>

@@ -1,0 +1,24 @@
+{
+  "schema": "cssearth-gemini-toolchain@1",
+  "purpose": "DRAGONS, Gemini Observatory's own reduction platform, to re-run an archive observation from its raw frames: `reduce` on the instrument's recipes, with a local `caldb` holding the processed calibrations the same run made.",
+  "license": "dragons: BSD (the licence its conda package declares)",
+  "platform": "osx-64 under Rosetta 2. There is no osx-arm64 build of DRAGONS: the Gemini channel's osx-arm64 subdir holds only qemu and libslirp, while osx-64 and linux-64 carry every dragons release up to 4.2.2. The environment is therefore created with --platform osx-64 and its binaries are translated by Rosetta on Apple silicon.",
+  "micromamba": {
+    "channels": [
+      "http://astroconda.gemini.edu/public",
+      "conda-forge"
+    ],
+    "platform": "osx-64",
+    "packages": [
+      "python=3.12",
+      "dragons=4.2.2"
+    ]
+  },
+  "lock": "packages.lock",
+  "binaries": {
+    "reduce": "reduce",
+    "caldb": "caldb"
+  },
+  "note": "The Gemini channel is http only; port 443 refuses the connection. The lock pins every package by URL, and each download's integrity is the sha256 micromamba checks against the lock, so the transport is not what the pin rests on.",
+  "memory": "Measured in docs/gemini.md. The GMOS-S imaging slice reduced below the 2 GiB ceiling reduce.mts applies by default."
+}

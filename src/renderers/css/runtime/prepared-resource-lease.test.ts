@@ -18,6 +18,23 @@ test('preflight owns a bank until exactly one matching scene claims it', async (
   residency.destroy();
   expect(destroy).toHaveBeenCalledOnce();
 });
+test('preflight resolves its image bank against the published asset origin', async () => {
+  const assets: PreparedAssets = {
+    entries: [{ key: 'surface', url: '/scenes/venus/surface.webp', pool: 'surface' }],
+    pools: [{ id: 'surface', capacity: 1, concurrency: 1, reuse: false, retention: 'mount' }],
+    startup: ['surface'],
+  };
+  const images: { src: string; decoding: 'async'; naturalWidth: number; naturalHeight: number; decode(): Promise<void> }[] = [];
+  const lease = prepareObjectResources(assets, {
+    assetOrigin: { origin: 'https://earth-assets.example', assets: { 'surface.webp': 'a'.repeat(64) } },
+    createResources: options => createPreparedResidency({ ...options,
+      createImage: () => { const image = { src: '', decoding: 'async' as const, naturalWidth: 8, naturalHeight: 8, decode: async () => {} }; images.push(image); return image; },
+    }),
+  });
+  await lease.ready;
+  expect(images[0]?.src).toBe(`https://earth-assets.example/runtime-assets/${'a'.repeat(64)}/surface.webp`);
+  lease.destroy();
+});
 test('cancelled preflight releases an unclaimed bank and cannot reach a scene', async () => {
   const controller = new AbortController(); controller.abort();
   const residency = createPreparedResidency({ assets });

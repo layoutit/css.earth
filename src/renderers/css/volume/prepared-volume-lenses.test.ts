@@ -41,17 +41,17 @@ const points = (): PreparedCataloguePoints => ({ frame, points: [
   { id: 'catalogue:behind', positionUnits: [0, 0, 20], sizePx: 2, colorCss: '#ffffff', opacity: 1 },
   { id: 'catalogue:removed', positionUnits: [0, 0, 0], sizePx: 2, colorCss: '#ffffff', opacity: 0 },
 ] });
-const volume = (id: string): PreparedCssVolume => ({ schema: 'cssearth-css-volume@1', id, frame, anchors: [],
+const volume = (id: string, atlasOffset = 0, geometryOffset = 0): PreparedCssVolume => ({ schema: 'cssearth-css-volume@1', id, frame, anchors: [],
   stacks: (['x', 'y', 'z'] as const).map(axis => ({ axis, leaves: [{ id: `${axis}-0`, centerUnits: [0, 0, 0],
     texturePath: `${id}/${axis}.webp`, widthPx: 1, heightPx: 1,
-    style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
-      backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
+    style: { width: '1px', height: '1px', transform: `matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,${axis === 'x' ? geometryOffset : 0},0,0,1)`,
+      backgroundSize: '3px 1px', backgroundPosition: `${atlasOffset}px 0px` } }] })),
   resources: ['x', 'y', 'z'].map(axis => ({ path: `${id}/${axis}.webp`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })),
   provenance: {}, approximation: {},
 });
 const payload = (): PreparedVolumeLenses => ({ schema: 'cssearth-volume-lenses@1', id: 'fixture', defaultLens: 'first', framingRadiusUnits: 1,
-  lenses: ['first', 'second', 'third'].map(id => ({ id, label: id, title: `${id} dataset`, description: 'Prepared observation',
-    sourceUrl: 'https://example.org/source', volume: volume(id), brightness: { overall: .8, x: .2, y: .5, z: .9 }, stars: points() })),
+  lenses: ['first', 'second', 'third'].map((id, index) => ({ id, label: id, title: `${id} dataset`, description: 'Prepared observation',
+    sourceUrl: 'https://example.org/source', volume: volume(id, -index), brightness: { overall: .8, x: .2, y: .5, z: .9 }, stars: points() })),
 });
 function publication(distance = 4, direction: VolumeVector = [0, 0, 1]): VolumeCameraPublication {
   const length = Math.hypot(...direction), [x, y, z] = direction.map(value => value / length);
@@ -102,24 +102,28 @@ test('malformed point payloads and lens-specific catalogue geometry are rejected
   expect(() => validatePreparedVolumeLenses({ ...data, lenses: [{ ...data.lenses[0], brightness: { overall: 2, x: 1, y: 1, z: 1 } }] })).toThrow('brightness');
 });
 
-test('switching selects one retained cloud, keeps one catalogue and never resolves another asset', () => {
+test('same-topology lenses reuse one retained cloud and replace all selected material', () => {
   const f = dom(), data = payload();
   const prepared = createPreparedVolumeLenses({ payload: data, resolveResource: vi.fn(path => `/prepared/${path}`) });
   const runtime = prepared.mount(f.options), root = runtime.root as unknown as FakeElement;
   runtime.publish(publication());
-  for (const id of ['second', 'third', 'first']) runtime.selectLens(id);
   const initial = descendants(root), cloudRoots = root.children.filter(node => node.className === 'prepared-volume-lens-cloud');
   const catalogue = root.children.find(node => node.className === 'prepared-catalogue-points')!;
   const pointsBefore = [...catalogue.children], leaves = initial.filter(node => node.style.backgroundImage);
-  expect(leaves).toHaveLength(9);
-  const textures = leaves.map(node => node.style.backgroundImage), geometry = leaves.map(node => node.style.transform);
-  runtime.publish(publication());
+  expect(cloudRoots).toHaveLength(1); expect(leaves).toHaveLength(3);
+  expect(root.dataset).toMatchObject({ volumeLensCount: '3', volumeTopologyCount: '1', volumeResidentTopologyCount: '1' });
+  const geometry = leaves.map(node => node.style.transform);
   for (const id of ['second', 'third', 'first']) {
     runtime.selectLens(id);
     expect(cloudRoots.filter(node => node.style.display !== 'none').map(node => node.dataset.volumeLens)).toEqual([id]);
     expect(runtime.state().id).toBe(id); expect(root.dataset.selectedLens).toBe(id);
-    expect(descendants(root)).toEqual(initial); expect(catalogue.children).toEqual(pointsBefore);
-    expect(leaves.map(node => node.style.backgroundImage)).toEqual(textures);
+    const current = descendants(root);
+    expect(current.length).toBe(initial.length); expect(current.every((node, index) => node === initial[index])).toBe(true);
+    expect(catalogue.children.length).toBe(pointsBefore.length);
+    expect(catalogue.children.every((node, index) => node === pointsBefore[index])).toBe(true);
+    expect([...new Set(leaves.map(node => node.style.backgroundImage))]).toEqual([`url("/prepared/${id}/z.webp")`]);
+    expect([...new Set(initial.filter(node => node.localName === 's' && node.style.backgroundSize).map(node => node.style.backgroundPosition))])
+      .toEqual([`${id === 'first' ? 0 : id === 'second' ? -1 : -2}px 0px`]);
     expect(leaves.map(node => node.style.transform)).toEqual(geometry);
   }
   expect(() => runtime.selectLens('missing')).toThrow('Unknown'); expect(runtime.state().id).toBe('first');
@@ -129,6 +133,23 @@ test('switching selects one retained cloud, keeps one catalogue and never resolv
     .every(node => node.style.opacity === undefined)).toBe(true);
   runtime.destroy(); runtime.publish(publication()); runtime.selectLens('third');
   expect(f.host.children).toEqual([f.before]);
+});
+
+test('a distinct topology is allocated only on first selection and then retained hidden', () => {
+  const base = payload(), second = base.lenses[1]!;
+  const data = { ...base, lenses: [base.lenses[0]!, { ...second, volume: volume(second.id, -1, 1) }, base.lenses[2]!] };
+  const f = dom(), runtime = createPreparedVolumeLenses({ payload: data, resolveResource: path => `/prepared/${path}` }).mount(f.options);
+  const root = runtime.root as unknown as FakeElement;
+  expect(root.children.filter(node => node.className === 'prepared-volume-lens-cloud')).toHaveLength(1);
+  expect(root.dataset).toMatchObject({ volumeTopologyCount: '2', volumeResidentTopologyCount: '1' });
+  runtime.selectLens('second');
+  const families = root.children.filter(node => node.className === 'prepared-volume-lens-cloud');
+  expect(families).toHaveLength(2); expect(root.dataset.volumeResidentTopologyCount).toBe('2');
+  expect(families.filter(node => node.style.display !== 'none').map(node => node.dataset.volumeLens)).toEqual(['second']);
+  runtime.selectLens('third');
+  expect(root.children.filter(node => node.className === 'prepared-volume-lens-cloud')).toEqual(families);
+  expect(families.filter(node => node.style.display !== 'none').map(node => node.dataset.volumeLens)).toEqual(['third']);
+  runtime.destroy();
 });
 
 test('axis brightness matches the lab completed-image oracle through handoffs and stays outside cloud geometry', () => {
@@ -238,9 +259,9 @@ test('declared lens resources do not download at startup or for inactive lenses 
   expect(attached()).toEqual(['url("/prepared/first/z.webp")']);
   runtime.publish(publication(100), false);
   runtime.selectLens('second');
-  expect(attached()).toEqual(['url("/prepared/first/z.webp")']);
+  expect(attached()).toEqual([]);
   runtime.publish(publication());
-  expect(attached()).toEqual(['url("/prepared/first/z.webp")', 'url("/prepared/second/z.webp")']);
+  expect(attached()).toEqual(['url("/prepared/second/z.webp")']);
   runtime.destroy(); lease.destroy();
 });
 

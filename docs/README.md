@@ -17,8 +17,27 @@ For a body's sources, processing, evidence and known problems, read its
 | Interferometric data to star surfaces: calibration, reconstruction and the checks | [Interferometric imaging](interferometric-imaging.md) |
 | What the open archives hold for our bodies, by name | [Archive screen](archive-screen.md) |
 | Drawing an opaque body inside a prepared volume: a proposal and its measurements | [A body inside a volume](mesh-in-volume.md) |
+| Pinning an observation, re-running the observatory's own software, and what each kind of check establishes | [Virtual telescopes](virtual-telescopes.md) |
+| Which upstream packages own a mechanical boundary here, and which contracts stay ours | [Astronomy package ownership](astronomy-package-ownership.md) |
+| One example picture per telescope, each made from a product that telescope's toolkit produced here | [Telescope examples](telescope-examples.md) |
 | Exoplanet light curves to maps: eigencurve fitting and its checks | [Eclipse mapping](eclipse-mapping.md) |
 | JWST images to sky band composites: MAST programs, the re-run level-3 stage, its oracle and depth from a model | [JWST imaging](jwst-imaging.md) |
+| What JWST's public archive holds by observing mode, what this project can already reduce, and which shipped objects JWST has observed | [JWST ledger](jwst-ledger.md) |
+| Hubble observations re-calibrated from raw on the instrument's own pipeline, and checked against the archive's own product | [Hubble](hubble.md) |
+| What Hubble's public archive holds by instrument, how much of it this project can re-calibrate, and which shipped objects Hubble has observed | [Hubble ledger](hubble-ledger.md) |
+| VLT/NACO raw frames re-reduced on ESO's own pipeline, and why its check can only be internal | [VLT/NACO](naco.md) |
+| What the NACO archive holds for this project's bodies, and which modes are reduced | [NACO archive ledger](naco-ledger.md) |
+| Chandra observations reprocessed from level 1 on the observatory's own software, and checked event by event against the archive's own product | [Chandra](chandra.md) |
+| What the Chandra archive holds, which of our objects it observed, and how far the toolkit is proved | [Chandra archive ledger](chandra-ledger.md) |
+| Spitzer/IRAC mosaics re-made from the archive's own level-1 frames, why the observatory's MOPEX would not run here, and how close an open re-mosaic gets | [Spitzer](spitzer.md) |
+| What the Spitzer archive holds for our objects by observing mode, and which of them this toolkit has checked | [Spitzer archive ledger](spitzer-ledger.md) |
+| The complete IHW/PDS near-nucleus Halley index and one qualified archive-final image | [IHW/PDS Halley](ihw-halley.md) |
+| JunoCam's push-frame images cast strip by strip from the Juno kernels, the limb fit of their two epochs, and what the four Europa images measured | [JunoCam](junocam.md) |
+| What the JunoCam archive holds, which of our objects it photographed, and which images are measured or cast | [JunoCam archive ledger](junocam-ledger.md) |
+| Keck observations pinned from KOA, re-reduced on the archive's own pipeline, and checked against the archive's own cube | [Keck](keck.md) |
+| What the Keck archive holds by instrument for this project's objects, and what can be re-reduced here | [What Keck holds](keck-ledger.md) |
+| Gemini raw frames re-reduced on DRAGONS: the CADC route, the archive's own calibration association, and what agrees | [Gemini Observatory](gemini.md) |
+| What the Gemini archive holds for our bodies, by instrument, and what this toolkit has proven | [Gemini ledger](gemini-ledger.md) |
 | Connecting prepared outputs to their inputs | [Prepared object provenance](object-provenance.md) |
 | Published source identities, input bindings and usage links | [Sources catalogue](sources-catalogue.md) |
 | Missions, spacecraft and dataset attribution | [Exploration catalogue](architecture/exploration-catalog.md) |

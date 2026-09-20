@@ -10,6 +10,7 @@ import { SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
 import { optimizePreparedQ75Webp } from "../../tools/prepared-webp.mts";
 import {
+  BODY_MARKER_ATLAS_PAGE_SIZE,
   loadMarkerDescriptors,
   moveNavigationFile,
   prepareBodyMarkers,
@@ -54,13 +55,15 @@ test('metadata-only preparation does not replace or remove images', async contex
   context.after(() => rm(root, { recursive: true, force: true }));
   const files = ['body-sun.webp', 'body-sun@2x.webp'];
   for (const file of files) await copyFile(resolve(projectRoot, 'public/navigation', file), resolve(root, file));
+  await copyFile(resolve(projectRoot, 'public/navigation/body-sun.webp'), resolve(root, 'body-markers-00.webp'));
+  await copyFile(resolve(projectRoot, 'public/navigation/body-sun@2x.webp'), resolve(root, 'body-markers-00@2x.webp'));
   await writeFile(resolve(root, 'sun-context.webp'), 'unrelated existing context');
   const before = new Map(await Promise.all((await readdir(root)).map(async file => [file, await readFile(resolve(root, file))] as const)));
   const presentationPath = resolve(root, 'presentation.mjs');
   await prepareNavigation({ projectRoot, outputRoot: root, planets: SCENE_OBJECTS.filter(body => body.id === 'sun'), presentationPath, catalogOnly: true });
   for (const [file, bytes] of before) assert.deepEqual(await readFile(resolve(root, file)), bytes, file);
   assert.equal((await readdir(root)).length, before.size + 1);
-  assert.match(await readFile(presentationPath, 'utf8'), /body-sun@2x.webp/);
+  assert.match(await readFile(presentationPath, 'utf8'), /body-markers-00@2x.webp/);
 });
 
 test("composes every orbiting-object marker descriptor in catalog order", async () => {
@@ -78,6 +81,30 @@ test("composes every orbiting-object marker descriptor in catalog order", async 
   );
   assert.ok(descriptors.every(({ source }) =>
     source.origin && source.credit && source.license && source.expectedSha256));
+});
+
+test('body marker atlases preserve every visible prepared tile pixel exactly', async () => {
+  const descriptors = await loadMarkerDescriptors({ projectRoot });
+  for (const [descriptorIndex, { planetId }] of descriptors.entries()) {
+    const page = Math.floor(descriptorIndex / BODY_MARKER_ATLAS_PAGE_SIZE);
+    const index = descriptorIndex % BODY_MARKER_ATLAS_PAGE_SIZE;
+    for (const density of [1, 2]) {
+      const tile = 16 * density;
+      const suffix = density === 2 ? '@2x' : '';
+      const accepted = await sharp(resolve(projectRoot, 'public/navigation', `body-${planetId}${suffix}.webp`)).ensureAlpha().raw().toBuffer();
+      const atlas = await sharp(resolve(projectRoot, 'public/navigation', `body-markers-${String(page).padStart(2, '0')}${suffix}.webp`))
+        .extract({ left: index * tile, top: 0, width: tile, height: tile }).ensureAlpha().raw().toBuffer();
+      assert.equal(atlas.length, accepted.length, `${planetId}${suffix}: byte length`);
+      for (let offset = 0; offset < accepted.length; offset += 4) {
+        assert.equal(atlas[offset + 3], accepted[offset + 3], `${planetId}${suffix}: alpha`);
+        // Lossless WebP is allowed to discard RGB under fully transparent
+        // pixels; require exact bytes for every pixel the browser can paint.
+        if (accepted[offset + 3]) {
+          assert.deepEqual(atlas.subarray(offset, offset + 3), accepted.subarray(offset, offset + 3), `${planetId}${suffix}: visible RGB`);
+        }
+      }
+    }
+  }
 });
 
 test("reproduces the checked-in body images and utility markers", async (context) => {

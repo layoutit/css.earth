@@ -6,7 +6,8 @@ import { relative, resolve } from "node:path";
 import { SCENE_OBJECTS } from "../site/objects.mts";
 import { requireRuntimeAssetManifest, requirePreparedAssetManifest } from "../src/platform/runtime-asset-closure.mts";
 
-export const RUNTIME_ASSET_ORIGIN = "https://earth-assets.lowpoly.cc";
+import { RUNTIME_ASSET_ORIGIN } from './asset-origin.mts';
+export { RUNTIME_ASSET_ORIGIN };
 
 function parseObjectArgs(args: readonly string[]): string[] {
   return args.filter(arg => arg !== "--").map(arg => {

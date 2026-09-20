@@ -1,5 +1,6 @@
 import { createPreparedResidency } from '../rendering/prepared-residency.js';
 import type { PreparedAssets, PreparedResourceDemand, PreparedResidencyOptions, PreparedResidencyTicket } from '../rendering/prepared-residency.js';
+import type { PreparedAssetOrigin } from '../rendering/prepared-asset-origin.js';
 
 type Residency = ReturnType<typeof createPreparedResidency>;
 type Callbacks = Pick<PreparedResidencyOptions, 'onReady' | 'onWarmError' | 'onCleanupError'>;
@@ -13,8 +14,8 @@ export interface PreparedResourceLease {
 }
 
 export function prepareObjectResources(assets: PreparedAssets, {
-  signal, createResources = createPreparedResidency,
-}: { signal?: AbortSignal; createResources?: typeof createPreparedResidency } = {}): PreparedResourceLease {
+  signal, createResources = createPreparedResidency, assetOrigin,
+}: { signal?: AbortSignal; createResources?: typeof createPreparedResidency; assetOrigin?: PreparedAssetOrigin } = {}): PreparedResourceLease {
   let claimed = false, destroyed = false, preparing = false, startupComplete = false;
   let preparedTicket: PreparedResidencyTicket | null = null;
   let callbacks: Callbacks = {};
@@ -22,6 +23,7 @@ export function prepareObjectResources(assets: PreparedAssets, {
     onReady(key) { callbacks.onReady?.(key); },
     onWarmError(error) { callbacks.onWarmError?.(error); },
     onCleanupError(error) { callbacks.onCleanupError?.(error); },
+    ...(assetOrigin ? { assetOrigin } : {}),
   });
   const abort = () => destroy();
   signal?.addEventListener('abort', abort, { once: true });

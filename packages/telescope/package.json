@@ -1,0 +1,30 @@
+{
+  "name": "@cssearth/telescope",
+  "version": "0.1.0",
+  "description": "Query and retrieve pinned telescope products with their scientific evidence.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "telescope": "dist/telescope.mjs"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": "^22.18.0 || >=24.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/layoutit/css.earth.git",
+    "directory": "packages/telescope"
+  },
+  "scripts": {
+    "build": "node build.mts",
+    "prepack": "npm run build",
+    "typecheck": "tsc -p tsconfig.json"
+  }
+}

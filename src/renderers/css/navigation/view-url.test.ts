@@ -1,12 +1,8 @@
+import assert from 'node:assert/strict';
 import { describe, expect, it } from 'vitest';
-import { formatViewParameters, parseViewParameters, formatSharedView, parseSharedView } from './view-url.js';
+import { formatSharedView, parseSharedView } from './view-url.js';
 import type { SharedView, PhysicalSharedCamera } from './view-url.js';
 
-const oracleToken = 'ED1EKjVv3t9gpEAk4O9YP9WQv-vR66IJEclAAYBqIc_PCEJ6B0WPzS42';
-// Executed against Galaxio's viewUrl.ts parser: its float64 wire fixture.
-const oracle = { altitudeM: 241732943586926920000, azimuthRad: 10.439326055328621,
-  polarRad: -0.869375053859181, orbitRollRad: 2.1877024308722675,
-  epochUnixMs: 1788658384082.8882, timeScale: 1, fovDeg: 85 };
 const identity = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)';
 const physical = (): SharedView => ({ camera: { distanceKilometers: 39051.89269356484,
   pose: { schema: 'cssearth-camera-pose@2', scene: 'matrix3d(0.951326031283,0.251717501181,-0.177811928175,0,0.137478049482,0.169758540011,0.975849283447,0,0.275823436483,-0.952796063013,0.126890087063,0,0,0,0,1)' } },
@@ -21,16 +17,9 @@ function translated(): SharedView & { camera: PhysicalSharedCamera } {
 }
 
 describe('view URL wire contract', () => {
-  it('decodes the source oracle and re-encodes every bit', () => {
-    expect(parseViewParameters(`?v=${oracleToken}`)).toEqual(oracle);
-    expect(formatViewParameters(oracle)).toBe(`v=${oracleToken}`);
-    expect(formatViewParameters({ timeScale: 0 })).toBe('v=GAA');
-    expect(parseViewParameters('')).toEqual({});
-  });
-
-  it('preserves one physical rotation, distance and time in version 3', () => {
+  it('preserves one physical rotation, distance and time in the current format', () => {
     const view = physical(), query = formatSharedView(view);
-    expect(new DataView(bytes(query).buffer).getUint16(0) >>> 12).toBe(3);
+    expect(new DataView(bytes(query).buffer).getUint16(0) >>> 12).toBe(5);
     let restored = parseSharedView(query);
     const check = (actual: SharedView | null) => {
       if (!actual) throw new Error('Missing shared camera.');
@@ -50,21 +39,21 @@ describe('view URL wire contract', () => {
     expect(Object.keys(restored!.camera).sort()).toEqual(['distanceKilometers', 'pose']);
   });
 
-  it('preserves a nonenumerable pose and reads independent legacy sky frames', () => {
-    const view: SharedView = { camera: { controlPitch: -123.4, controlYaw: 723.9, zoom: .000003,
-      pose: { schema: 'cssearth-camera-pose@1', scene: identity, skybox: identity,
-        sunView: 'matrix3d(0,0,-1,0,0,1,0,0,1,0,0,0,0,0,0,1)' } },
-      playback: { times: [12345.6789, 534.125], speed: 4, motionRequested: true } };
+  it('preserves nonenumerable poses and rejects all retired wire versions', () => {
+    const view = physical();
+    view.camera.pose.scene = identity;
     Object.defineProperty(view.camera, 'pose', { enumerable: false });
-    const query = formatSharedView(view), restored = parseSharedView(query);
-    expect(new DataView(bytes(query).buffer).getUint16(0) >>> 12).toBe(2);
-    expect(restored?.camera.pose).toEqual(view.camera.pose);
-    expect(restored?.playback).toEqual(view.playback);
+    expect(parseSharedView(formatSharedView(view))?.camera.pose).toEqual(view.camera.pose);
+    const payload = bytes(formatSharedView(view));
+    for (const version of [1, 2, 3, 4, 6, 15]) {
+      const old = payload.slice(); old[0] = (old[0] & 15) | (version << 4);
+      expect(() => parseSharedView(encoded(old))).toThrow(/unsupported version/);
+    }
   });
 
-  it('version4 stores one translated centre instead of a redundant range and round-trips the whole observer', () => {
+  it('the current format stores one translated centre instead of a redundant range and round-trips the whole observer', () => {
     const view = translated(), query = formatSharedView(view), payload = bytes(query);
-    expect(new DataView(payload.buffer).getUint16(0) >>> 12).toBe(4);
+    expect(new DataView(payload.buffer).getUint16(0) >>> 12).toBe(5);
     const centred: SharedView = { ...view, camera: { distanceKilometers: view.camera.distanceKilometers, pose: view.camera.pose } };
     expect(payload.length).toBe(bytes(formatSharedView(centred)).length + 16);
     for (let axis = 0; axis < 3; axis++) expect(new DataView(payload.buffer).getFloat64(2 + axis * 8)).toBe(view.camera.bodyCenterKilometers![axis]);
@@ -95,7 +84,7 @@ describe('view URL wire contract', () => {
     }
     const zero = valid.slice(); zero.fill(0, 2, 26);
     expect(() => parseSharedView(encoded(zero))).toThrow();
-    const reserved = valid.slice(); reserved[1] |= 1;
+    const reserved = valid.slice(); reserved[0] |= 1;
     expect(() => parseSharedView(encoded(reserved))).toThrow();
     expect(() => parseSharedView(encoded(Uint8Array.from([...valid, 0])))).toThrow();
     expect(() => parseSharedView(formatSharedView(view) + '=')).toThrow();
@@ -103,14 +92,86 @@ describe('view URL wire contract', () => {
 
   it('rejects malformed, repeated, noncanonical and truncated input', () => {
     for (const query of ['v=', 'v=A', 'v=AA', 'v=AAAAA', 'v=EAB', 'v=EAA=', 'v=EAA&v=EAA', 'v=EAA&extra=1']) {
-      expect(() => parseViewParameters(query)).toThrow();
+      expect(() => parseSharedView(query)).toThrow();
       expect(() => parseSharedView(query)).toThrow();
     }
     const query = formatSharedView(physical());
     for (const cut of [1, 2, 4, 12]) expect(() => parseSharedView(query.slice(0, -cut))).toThrow();
-    expect(() => formatViewParameters({ altitudeM: -1 })).toThrow();
-    expect(() => formatViewParameters({ altitudeM: 20, distanceM: 8500000 })).toThrow();
     const invalid = physical(); invalid.camera.pose.scene = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,10,0,0,1)';
     expect(() => formatSharedView(invalid)).toThrow();
+    const noEpoch = physical(); Reflect.deleteProperty(noEpoch, 'preparedEpochJdTt');
+    expect(() => formatSharedView(noEpoch)).toThrow(/preparedEpochJdTt/);
+    const timeless = { ...physical(), preparedEpochJdTt: null };
+    timeless.camera.pose.scene = identity;
+    expect(parseSharedView(formatSharedView(timeless))).toEqual(timeless);
   });
+});
+
+const unpack = (query: string) => Buffer.from(bytes(query));
+const queryFor = encoded;
+it("smallest-three encoding covers every omitted component and exact rounded-matrix fallback", () => {
+  const scenes = [
+    "matrix3d(1,0,0,0,0,-1,0,0,0,0,-1,0,0,0,0,1)",
+    "matrix3d(-1,0,0,0,0,1,0,0,0,0,-1,0,0,0,0,1)",
+    "matrix3d(-1,0,0,0,0,-1,0,0,0,0,1,0,0,0,0,1)",
+    "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)",
+  ];
+  for (const [largest, scene] of scenes.entries()) {
+    const input = physical(); input.camera.pose.scene = scene;
+    const query = formatSharedView(input);
+    assert.equal((unpack(query).readUInt16BE(0) >> 6) & 3, largest);
+    assert.deepEqual(parseSharedView(query), input);
+  }
+  const input = physical(); input.camera.pose.scene = "matrix3d(0.133333,0.933333,-0.333333,0,-0.666667,0.333333,0.666667,0,0.733333,0.133333,0.666667,0,0,0,0,1)";
+  const query = formatSharedView(input);
+  assert.equal(unpack(query).readUInt16BE(0) & 0xe0, 32);
+  assert.deepEqual(parseSharedView(query), input);
+});
+
+it("current format rejects duplicate camera data, reserved flags, invalid smallest-three values and truncation", () => {
+  const mutations: ((value: SharedView) => void)[] = [
+    value => { Reflect.set(value.camera, 'zoom', 1); }, value => { Reflect.set(value.camera, 'controlPitch', 0); },
+    value => { Reflect.set(value.camera.pose, 'skybox', value.camera.pose.scene); },
+    value => { Reflect.deleteProperty(value.camera, 'distanceKilometers'); },
+    value => { value.camera.distanceKilometers = 0; }, value => { value.camera.distanceKilometers = Infinity; },
+  ];
+  for (const mutate of mutations) {
+    const input = physical(); mutate(input); assert.throws(() => formatSharedView(input));
+  }
+  const bytes = unpack(formatSharedView(physical()));
+  for (let length = 0; length < bytes.length; length += 1) assert.throws(() => parseSharedView(queryFor(bytes.subarray(0, length))));
+  for (const bit of [4, 0x100, 0x200, 0x400, 0x800]) {
+    const bad = Buffer.from(bytes); bad.writeUInt16BE(bad.readUInt16BE(0) | bit, 0);
+    assert.throws(() => parseSharedView(queryFor(bad)));
+  }
+  for (const [offset, value] of [[2, -1], [2, 0], [18, NaN], [18, Infinity], [18, 2], [18, 0.8], [bytes.length - 8, -1]]) {
+    const bad = Buffer.from(bytes); bad.writeDoubleBE(value, offset);
+    assert.throws(() => parseSharedView(queryFor(bad)));
+  }
+  for (const flags of [0x5004, 0x50e2]) {
+    const bad = Buffer.from(bytes); bad.writeUInt16BE(flags, 0);
+    assert.throws(() => parseSharedView(queryFor(bad)));
+  }
+  const count = Buffer.from(bytes); count.writeUInt16BE(2, bytes.length - 10);
+  assert.throws(() => parseSharedView(queryFor(count)));
+  assert.throws(() => parseSharedView(queryFor(Buffer.concat([bytes, Buffer.from([0])]))));
+  const badPadding = formatSharedView(physical()) + "=";
+  assert.throws(() => parseSharedView(badPadding));
+});
+
+it('validates bounded payloads, playback and pure rotations before encoding', () => {
+  for (const scene of ['rotateX(45deg)', 'matrix3d(2,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
+    'matrix3d(-1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)', 'matrix3d(,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)']) {
+    const view = physical(); view.camera.pose.scene = scene;
+    expect(() => formatSharedView(view)).toThrow(/pose/);
+  }
+  for (const times of [[-1], [NaN], Array.from({ length: 4096 }, () => 1)]) {
+    const view = physical(); view.playback.times = times;
+    expect(() => formatSharedView(view)).toThrow();
+  }
+  for (const speed of [-1, NaN, Infinity]) {
+    const view = physical(); view.playback.speed = speed;
+    expect(() => formatSharedView(view)).toThrow();
+  }
+  expect(() => parseSharedView(encoded(new Uint8Array(4097)))).toThrow();
 });

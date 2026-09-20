@@ -8,8 +8,15 @@ export interface SurfaceFeaturePolicy {
   readonly minimumZoomShare: number;
   readonly minimumDiameterPixels: number; readonly alwaysVisibleCount: number; readonly maximumVisible: number; readonly limbCosine: number;
 }
+export interface SurfaceFeatureCatalogDescriptor {
+  readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number;
+}
+export interface SurfaceFeatureSelectionPlan {
+  readonly count: number; readonly banks: readonly SurfaceFeatureCatalogDescriptor[];
+}
 export interface PreparedSurfaceFeaturePlan {
-  readonly catalog: { readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number };
+  readonly catalog: SurfaceFeatureCatalogDescriptor;
+  readonly selection?: SurfaceFeatureSelectionPlan;
   /** Mesh radius in the target node's raw coordinates; anchors sit on this sphere. */
   readonly target: number; readonly lensIds: readonly string[]; readonly meshRadiusUnits: number; readonly policy: SurfaceFeaturePolicy;
   /** Shape-model bodies: the radius band of the prepared picking mesh that every anchor and outline point lies within. */
@@ -66,7 +73,7 @@ export interface SurfaceFeatureNavigationRuntime {
 }
 export interface SurfaceFeatureLayerRuntime extends SurfaceFeatureNavigationRuntime {
   readonly root: HTMLElement;
-  publish(view: { readonly projection?: import('../rendering/physical-projection.js').PhysicalProjection; readonly levelOfDetail?: { readonly stage: string } | null; readonly zoom?: number }): void;
+  publish(view: { readonly projection?: import('../prepared-data/physical-projection.js').PhysicalProjection; readonly levelOfDetail?: { readonly stage: string } | null; readonly zoom?: number }): void;
   setLens(selection: { readonly id: string | null }): void;
   setPlaying(value: boolean): void;
   stats(): SurfaceFeatureLayerStats;

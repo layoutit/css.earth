@@ -276,11 +276,15 @@ test('overview preserves the latest drawn camera through slow preparation, witho
   bank.resolve({ resources: f.resources, destroy: () => f.resources.destroy(), projection: () => undefined, prepareView: async () => {} });
   const handoff = await task;
   assert.deepEqual(handoff.mountOptions.initialWorldCamera, latest, 'Snapshot is taken after input during preparation');
+  const scene = new AbortController();
+  handoff.transferTo(scene.signal);
   const paints = f.paints.length;
   await handoff.afterMount(f.mounted(), { signal: f.controller.signal });
   assert.equal(f.paints.length, paints, 'Handoff does not write an animated or recentered pose');
   f.controller.abort();
   assert.equal(f.resources.destroyed, 0, 'The mounted scene owns its resources');
+  scene.abort();
+  assert.equal(f.resources.destroyed, 1, 'Session teardown releases its prepared ownership');
 });
 
 test('a cancelled preserved-view handoff releases its unmounted resources', async () => {
@@ -288,6 +292,17 @@ test('a cancelled preserved-view handoff releases its unmounted resources', asyn
   await f.start({ preserveView: true });
   f.controller.abort();
   assert.equal(f.resources.destroyed, 1);
+});
+
+test('an animated handoff transfers prepared cleanup to the scene and detaches request ownership', async () => {
+  const f = fixtureFactory(), scene = new AbortController();
+  const handoff = await drainFrames(f, { task: f.start() });
+  handoff.transferTo(scene.signal);
+  await drainFrames(f, { task: handoff.afterMount(f.mounted(), { signal: scene.signal }) });
+  assert.equal(getEventListeners(f.controller.signal, 'abort').length, 0);
+  f.controller.abort(); assert.equal(f.resources.destroyed, 0);
+  scene.abort(); assert.equal(f.resources.destroyed, 1);
+  assert.equal(f.pending, 0);
 });
 
 test('overview handoff uses the requested distant camera instead of flying into the Sun', async () => {

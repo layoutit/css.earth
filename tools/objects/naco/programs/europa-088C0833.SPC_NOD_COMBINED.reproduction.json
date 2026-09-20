@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-naco-reproduction@1",
+  "program": "europa-088C0833",
+  "product": "SPC_NOD_COMBINED",
+  "kind": "two-nod-halves",
+  "note": "Internal check. The ESO archive publishes no Phase 3 product and no master calibration for NACO, and ESO's own telescope bibliography records no publication for this NACO run, so there is nothing external to check it against. A nodded-spectroscopy night is one template, so the two sides compared here are two disjoint halves of its nod pairs, balanced across both nod positions and sharing no exposure, each reduced on its own through the same recipes and the same master flat. It measures repeatability, not accuracy.",
+  "sequences": [
+    {
+      "template": "a-half",
+      "path": ".local/naco/europa-088C0833/nod-a-half/naco_spc_combine.fits",
+      "sha256": "ba9e3ffc59541a32114f4c0bf3db62c7e4dd56de3ea100d0aedd17c7a6e6cb68",
+      "bytes": 6350400,
+      "objectFrames": 6,
+      "skyFrames": 0,
+      "pipeline": "naco/4.4.13"
+    },
+    {
+      "template": "b-half",
+      "path": ".local/naco/europa-088C0833/nod-b-half/naco_spc_combine.fits",
+      "sha256": "60ae8afca90e8b492b698ca49d118a64b7c4f9bdcfd247ef572a1c1187f0153a",
+      "bytes": 6350400,
+      "objectFrames": 6,
+      "skyFrames": 0,
+      "pipeline": "naco/4.4.13"
+    }
+  ],
+  "shapes": [
+    [
+      1024,
+      1024
+    ],
+    [
+      1024,
+      1024
+    ]
+  ],
+  "overlap": {
+    "width": 1024,
+    "height": 1024
+  },
+  "registration": null,
+  "statistics": {
+    "samples": 1048576,
+    "both": 1048576,
+    "identical": 196,
+    "onlyFirst": 0,
+    "onlySecond": 0,
+    "identicalShare": 0.000186920166015625,
+    "medianLevel": 1.4156873226165771,
+    "medianAbsoluteDifferenceOverMedian": 1.452653480913796,
+    "aboveMedian": {
+      "samples": 524288,
+      "correlation": 0.24287654470452447,
+      "relativeDifference": {
+        "median": 1.0770204728667907,
+        "p99": 5.855939914493887,
+        "largest": 59.20669840731534
+      }
+    }
+  },
+  "differingCards": [
+    "DATE-OBS: 2012-01-03T00:38:18.5369 against 2012-01-03T00:42:38.5756",
+    "DATE: 2026-09-19T04:18:13 against 2026-09-19T04:18:39"
+  ]
+}

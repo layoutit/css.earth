@@ -6,9 +6,9 @@ import type { PreparedWrite } from "../renderers/css/rendering/prepared-presenta
 import type { PreparedAssets } from "../renderers/css/rendering/prepared-residency.ts";
 import type { PreparedCubicSkyPlan } from "./cubic-sky-contract.mts";
 import type { PreparedDirectionalSunPlan } from "./directional-sun-contract.mts";
-import type { EllipsoidProjectionPlan } from "./prepared-ellipsoid-projection.mts";
-import type { PreparedMaterialAddress, PreparedMaterialFrameMapping } from "./prepared-material.mts";
-import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialBank } from "./prepared-material.mts";
+import type { EllipsoidProjectionPlan } from "../renderers/css/dist/preparation.js";
+import type { PreparedMaterialAddress, PreparedMaterialFrameMapping } from "../renderers/css/dist/testing.js";
+import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialBank } from "../renderers/css/dist/testing.js";
 import type { PreparedVariant, PreparedPageLayer, PreparedPresentationDefinition, PreparedSelectionNavigation } from "./prepared-presentation.mts";
 import type { PreparedDepthOrder } from "../renderers/css/rendering/prepared-depth-partitions.ts";
 type PreparedContractRotation = {
@@ -294,10 +294,26 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   }
   if (plan.features !== undefined) {
     const features = plan.features;
-    record(features, "surface features", ["catalog", "target", "lensIds", "meshRadiusUnits", "policy", "outline", "surfaceRadiusUnits", "surfaceEllipsoidUnits"]);
+    record(features, "surface features", ["catalog", "selection", "target", "lensIds", "meshRadiusUnits", "policy", "outline", "surfaceRadiusUnits", "surfaceEllipsoidUnits"]);
     record(features.catalog, "surface feature catalog", ["url", "bytes", "sha256", "count"]);
     if (!features.catalog.url?.startsWith("/scenes/") || !/^[a-f0-9]{64}$/.test(features.catalog.sha256 ?? "")) fail("surface features require a pinned catalogue");
     integer(features.catalog.bytes, "feature catalog bytes", 1); integer(features.catalog.count, "feature catalog count", 1);
+    if (features.selection !== undefined) {
+      const selection = features.selection;
+      record(selection, "surface feature selection", ["count", "banks"]);
+      integer(selection.count, "surface feature selection count", 1);
+      const count = selection.count;
+      const banks = array(selection.banks, "surface feature selection banks");
+      if (!banks.length || banks.length > 256) fail("surface feature selection banks are out of range");
+      let found = 0; const urls: string[] = [];
+      for (const bank of banks) {
+        record(bank, "surface feature selection bank", ["url", "bytes", "sha256", "count"]);
+        if (!bank.url?.startsWith("/scenes/") || !/^[a-f0-9]{64}$/.test(bank.sha256 ?? "")) fail("surface feature selection requires pinned banks");
+        integer(bank.bytes, "feature selection bank bytes", 1); integer(bank.count, "feature selection bank count", 1); found += bank.count; urls.push(bank.url);
+      }
+      unique(urls, "surface feature selection bank URLs");
+      if (found !== count) fail("surface feature selection bank counts drifted");
+    }
     node(features.target); if (!ancestor(features.target, tree.scene)) fail("surface feature target must belong to scene");
     const lenses = array(features.lensIds, "surface feature lenses"); unique(lenses, "surface feature lenses");
     if (!lenses.length || lenses.some(id => !lensIds.includes(id))) fail("surface features require declared lenses");

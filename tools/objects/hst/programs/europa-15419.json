@@ -1,0 +1,174 @@
+{
+  "schema": "cssearth-hst-program@1",
+  "id": "europa-15419",
+  "programme": "15419",
+  "target": "EUROPA-ECLIPSE",
+  "crdsContext": "hst_1358.pmap",
+  "observations": [
+    {
+      "observation": "idr203wtq",
+      "instrument": "WFC3",
+      "detector": "UVIS",
+      "opticalElement": "F631N",
+      "aperture": "UVIS2-C512C-SUB",
+      "exposureStartMjd": 58725.51275474,
+      "exposureEndMjd": 58725.51541676,
+      "targetName": "EUROPA-ECLIPSE",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "PERFORM",
+        "CRCORR": "OMIT",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PCTECORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "DRIZCORR": "PERFORM",
+        "FLUXCORR": "PERFORM"
+      },
+      "inputs": [
+        {
+          "name": "idr203wtq_raw.fits",
+          "uri": "mast:HST/product/idr203wtq_raw.fits",
+          "bytes": 590400,
+          "sha256": "12648cca09ee6b93f0dc3d50e1ae04080573fa8de48ec06eb831fab697dff54b"
+        },
+        {
+          "name": "idr203wtq_spt.fits",
+          "uri": "mast:HST/product/idr203wtq_spt.fits",
+          "bytes": 103680,
+          "sha256": "a488b3103527ce021511e4220d6cd2673425487faf385947978d4a3db8d3bd50"
+        }
+      ],
+      "products": [
+        {
+          "name": "idr203wtq_drc.fits",
+          "uri": "mast:HST/product/idr203wtq_drc.fits",
+          "bytes": 3496320
+        },
+        {
+          "name": "idr203wtq_drz.fits",
+          "uri": "mast:HST/product/idr203wtq_drz.fits",
+          "bytes": 3496320
+        },
+        {
+          "name": "idr203wtq_flc.fits",
+          "uri": "mast:HST/product/idr203wtq_flc.fits",
+          "bytes": 2923200
+        },
+        {
+          "name": "idr203wtq_flt.fits",
+          "uri": "mast:HST/product/idr203wtq_flt.fits",
+          "bytes": 2923200
+        }
+      ]
+    },
+    {
+      "observation": "odr2a1010",
+      "instrument": "STIS",
+      "detector": "CCD",
+      "opticalElement": "G750M",
+      "aperture": "52X2",
+      "exposureStartMjd": 58554.94182267,
+      "exposureEndMjd": 58554.94696156,
+      "targetName": "EUROPA-ECLIPSE",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "CRCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "EXPSCORR": "PERFORM",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "WAVECORR": "PERFORM",
+        "X1DCORR": "PERFORM",
+        "BACKCORR": "PERFORM",
+        "HELCORR": "PERFORM",
+        "DISPCORR": "PERFORM",
+        "FLUXCORR": "PERFORM",
+        "CTECORR": "PERFORM",
+        "X2DCORR": "PERFORM"
+      },
+      "association": {
+        "product": "odr2a1010",
+        "members": [
+          {
+            "rootname": "odr2a1j7q",
+            "type": "AUTO-WAVECAL"
+          },
+          {
+            "rootname": "odr2a1j8q",
+            "type": "CRSPLIT"
+          },
+          {
+            "rootname": "odr2a1j9q",
+            "type": "CRSPLIT"
+          },
+          {
+            "rootname": "odr2a1jjq",
+            "type": "AUTO-WAVECAL"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "odr2a1010_asn.fits",
+          "uri": "mast:HST/product/odr2a1010_asn.fits",
+          "bytes": 11520,
+          "sha256": "b8b265ca1c3ced413369a4fdbe589ab06caa68be8b44092b900372f8271071a5"
+        },
+        {
+          "name": "odr2a1010_jit.fits",
+          "uri": "mast:HST/product/odr2a1010_jit.fits",
+          "bytes": 37440,
+          "sha256": "ca1add1f6f9a7bfd62b0a282c3e71e3fc4f0a0a950404b95e784a82b001ac29e"
+        },
+        {
+          "name": "odr2a1010_raw.fits",
+          "uri": "mast:HST/product/odr2a1010_raw.fits",
+          "bytes": 4501440,
+          "sha256": "05f7a9efa8269eb6502df947b1f6eb8422529640bacf6b234cd20021b71b094e"
+        },
+        {
+          "name": "odr2a1010_spt.fits",
+          "uri": "mast:HST/product/odr2a1010_spt.fits",
+          "bytes": 112320,
+          "sha256": "5b94bd39605673d3a62e9039f4d080b02b5007229250b22712a4fde6119d3882"
+        },
+        {
+          "name": "odr2a1010_wav.fits",
+          "uri": "mast:HST/product/odr2a1010_wav.fits",
+          "bytes": 4501440,
+          "sha256": "0bb60159d9775294c24d3468d2168fdc44d24a6a316ee281ba489c4fb8c68863"
+        }
+      ],
+      "products": [
+        {
+          "name": "odr2a1010_crj.fits",
+          "uri": "mast:HST/product/odr2a1010_crj.fits",
+          "bytes": 10537920
+        },
+        {
+          "name": "odr2a1010_flt.fits",
+          "uri": "mast:HST/product/odr2a1010_flt.fits",
+          "bytes": 21052800
+        },
+        {
+          "name": "odr2a1010_sx1.fits",
+          "uri": "mast:HST/product/odr2a1010_sx1.fits",
+          "bytes": 80640
+        },
+        {
+          "name": "odr2a1010_sx2.fits",
+          "uri": "mast:HST/product/odr2a1010_sx2.fits",
+          "bytes": 14477760
+        }
+      ]
+    }
+  ]
+}

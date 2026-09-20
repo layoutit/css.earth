@@ -1,0 +1,112 @@
+{
+  "schema": "cssearth-hst-reproduction@1",
+  "program": "europa-15419",
+  "observation": "odr2a1010",
+  "product": "odr2a1010_crj",
+  "instrument": "STIS/CCD",
+  "opticalElement": "G750M",
+  "toolchain": "tools/objects/hst/toolchain.json",
+  "crdsContext": "hst_1358.pmap",
+  "mast": {
+    "name": "odr2a1010_crj.fits",
+    "uri": "mast:HST/product/odr2a1010_crj.fits",
+    "bytes": 10537920,
+    "sha256": "869e63d36e86ee835f7e0d1d06e73c35b8964b04b90853433cc3b269e94c537a",
+    "CAL_VER": "3.5.0 (02-Feb-2026)",
+    "OPUS_VER": "HSTDP 2026_1",
+    "PROCTIME": 61168.85387731,
+    "FILENAME": "odr2a1010_crj.fits",
+    "DATE": "2026-05-08"
+  },
+  "local": {
+    "sha256": "2e6dc4449e2ddf488f48f877bed32bb08665b23d26cd60732ce4689e027c7b54",
+    "CAL_VER": "3.5.0 (02-Feb-2026)",
+    "OPUS_VER": "HSTDP 2026_1",
+    "PROCTIME": 61168.85387731,
+    "FILENAME": "odr2a1010_crj.fits",
+    "DATE": "2026-09-19"
+  },
+  "differentSettings": {},
+  "differentGrid": [],
+  "repeatedCards": [],
+  "extensions": [
+    {
+      "extname": "SCI",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        1024,
+        1024
+      ],
+      "samples": 1048576,
+      "both": 1048576,
+      "identical": 940182,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 0.8966274261474609,
+      "medianLevel": 894.7633666992188,
+      "medianAbsoluteDifferenceOverMedian": 0,
+      "aboveMedian": {
+        "samples": 524288,
+        "correlation": 0.9999999999999708,
+        "relativeDifference": {
+          "median": 0,
+          "p99": 1.1783108533336417e-7,
+          "largest": 0.0000012866188399129896
+        }
+      }
+    },
+    {
+      "extname": "ERR",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        1024,
+        1024
+      ],
+      "samples": 1048576,
+      "both": 1048576,
+      "identical": 820759,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 0.7827367782592773,
+      "medianLevel": 34.769439697265625,
+      "medianAbsoluteDifferenceOverMedian": 0,
+      "aboveMedian": {
+        "samples": 524288,
+        "correlation": 0.9999999999995786,
+        "relativeDifference": {
+          "median": 0,
+          "p99": 1.4471864062670647e-7,
+          "largest": 5.113455472383066e-7
+        }
+      }
+    },
+    {
+      "extname": "DQ",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        1024,
+        1024
+      ],
+      "samples": 1048576,
+      "both": 1048576,
+      "identical": 1048576,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 1,
+      "medianLevel": 0,
+      "medianAbsoluteDifferenceOverMedian": null,
+      "aboveMedian": {
+        "samples": 147996,
+        "correlation": 1,
+        "relativeDifference": {
+          "median": 0,
+          "p99": 0,
+          "largest": 0
+        }
+      }
+    }
+  ]
+}

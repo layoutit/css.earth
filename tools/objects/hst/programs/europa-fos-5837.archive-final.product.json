@@ -1,0 +1,240 @@
+{
+  "schema": "cssearth-telescope-product@1",
+  "telescope": "Hubble",
+  "stage": "archive-final",
+  "inputs": [
+    {
+      "role": "coordinates",
+      "identity": "mast:HST/product/y2p60503t_c0f.fits",
+      "bytes": 43200,
+      "sha256": "40ef2f74f7261397e2ed5a8a182879d084a68cc15316de40221b76cd42a4f043"
+    },
+    {
+      "role": "science",
+      "identity": "mast:HST/product/y2p60503t_c1f.fits",
+      "bytes": 43200,
+      "sha256": "aabd9708b5d9fc7b34d504a85b23fcdbc1d7593749a5172c95ee90a2ae33d718"
+    },
+    {
+      "role": "uncertainty",
+      "identity": "mast:HST/product/y2p60503t_c2f.fits",
+      "bytes": 43200,
+      "sha256": "d527b80986f0e626298e2ab64290b5f9ee907159c31c63daaa01766c97607560"
+    },
+    {
+      "role": "quality",
+      "identity": "mast:HST/product/y2p60503t_cqf.fits",
+      "bytes": 43200,
+      "sha256": "5545af32a82c43f8076e91583e39c0836fede1684ca15a31612441abbe4d9035"
+    }
+  ],
+  "parameters": {
+    "selection": {
+      "program": "europa-fos-5837",
+      "observation": "y2p60503t",
+      "configuration": "FOS/BL",
+      "target": "europa",
+      "kind": "spectrum",
+      "handbook": "https://www.stsci.edu/documents/dhb/webvol2/c05_fosdata.fm1.html",
+      "identity": {
+        "instrument": "FOS",
+        "detector": "BLUE",
+        "opticalElement": "G270H",
+        "aperture": "B-3",
+        "targetName": "EUROPA-EAST",
+        "proposal": "5837",
+        "exposureStartMjd": 49890.82698155,
+        "exposureEndMjd": 49890.82851627,
+        "headerOpticalElement": "H27"
+      },
+      "components": [
+        {
+          "role": "science",
+          "supplied": true,
+          "file": "y2p60503t_c1f.fits",
+          "hdu": 0,
+          "units": "ERGS/CM**2/S/A",
+          "note": "The calibrated fluxes, one value per pixel of the science data (handbook, Calibrated Flux Files)."
+        },
+        {
+          "role": "coordinates",
+          "supplied": true,
+          "file": "y2p60503t_c0f.fits",
+          "hdu": 0,
+          "units": "ANGSTROMS",
+          "note": "The calibrated vacuum wavelengths at the centre of each pixel (handbook, Calibrated Wavelength Files)."
+        },
+        {
+          "role": "uncertainty",
+          "supplied": true,
+          "file": "y2p60503t_c2f.fits",
+          "hdu": 0,
+          "units": "ERGS/CM**2/S/A",
+          "note": "The propagated statistical error. The handbook states what it leaves out: \"Errors caused by sky and background subtraction, flatfields, and sensitivity are not included in the error estimates.\""
+        },
+        {
+          "role": "quality",
+          "supplied": true,
+          "file": "y2p60503t_cqf.fits",
+          "hdu": 0,
+          "note": "The calibrated science data quality, on the flag scale of table 30.2: 50 is sampling under half of nominal, 170 an intermittent noisy channel, 700 data filled after the geomagnetic image-motion correction."
+        }
+      ]
+    },
+    "archiveStatement": "https://hst-docs.stsci.edu/hstdhb/1-obtaining-hst-data/1-1-archive-overview",
+    "identityAgreedWith": {
+      "catalogue": {
+        "observation": "y2p60503t",
+        "configuration": "FOS/BL",
+        "filters": "G270H",
+        "targetName": "EUROPA-EAST",
+        "proposal": "5837",
+        "startMjd": 49890.826981481485,
+        "endMjd": 49890.82851620371
+      },
+      "headers": {
+        "instrument": "FOS",
+        "detector": "BLUE",
+        "opticalElement": "H27",
+        "aperture": "B-3",
+        "targetName": "EUROPA-EAST",
+        "proposal": "5837",
+        "exposureStartMjd": 49890.82698155,
+        "exposureEndMjd": 49890.82851627
+      }
+    },
+    "archiveCalibration": {
+      "version": {},
+      "versionStated": false,
+      "versionMissing": "These products carry no calibration-version card, so which version of the archive's pipeline made them is not stated in the files themselves; the dates below are when they were written.",
+      "dates": {
+        "DATE": "23/06/95",
+        "FITSDATE": "2004-02-02",
+        "DADSDATE": "23-JUN-1995 12:20:31",
+        "ORIGIN": "STScI-STSDAS"
+      },
+      "switches": {
+        "CNT_CORR": "COMPLETE",
+        "OFF_CORR": "COMPLETE",
+        "PPC_CORR": "COMPLETE",
+        "BAC_CORR": "COMPLETE",
+        "GMF_CORR": "COMPLETE",
+        "SCT_CORR": "OMIT",
+        "FLT_CORR": "COMPLETE",
+        "SKY_CORR": "OMIT",
+        "WAV_CORR": "COMPLETE",
+        "FLX_CORR": "SKIPPED",
+        "ERR_CORR": "COMPLETE",
+        "MOD_CORR": "OMIT",
+        "APR_CORR": "COMPLETE",
+        "AIS_CORR": "COMPLETE",
+        "TIM_CORR": "COMPLETE"
+      },
+      "referenceFiles": {
+        "DADSFILE": "Y2P60503T.D0F",
+        "BACHFILE": "yref$b3m1128my.r0h",
+        "FL1HFILE": "yref$l7m1414jy.r1h",
+        "FL2HFILE": "yref$l7m14174y.r1h",
+        "IV1HFILE": "yref$e3h1450ry.r2h",
+        "IV2HFILE": "yref$N/A",
+        "RETHFILE": "yref$N/A",
+        "DDTHFILE": "yref$d9h1244ay.r4h",
+        "DQ1HFILE": "yref$b2f1308hy.r5h",
+        "DQ2HFILE": "yref$N/A",
+        "CCG2": "mtab$a3d1145ly.cmg",
+        "CCS0": "ytab$a3d1145dy.cy0",
+        "CCS1": "ytab$aaj0732ay.cy1",
+        "CCS2": "ytab$N/A",
+        "CCS3": "ytab$a3d1145gy.cy3",
+        "CCS4": "ytab$N/A",
+        "CCS5": "ytab$a3d1145jy.cy5",
+        "CCS6": "ytab$l611655oy.cy6",
+        "CCS7": "ytab$ba910502y.cy7",
+        "CCS8": "ytab$ba31407ly.cy8",
+        "CCS9": "ytab$e3i09491y.cy9",
+        "OFFS_TAB": "n/a",
+        "AISHFILE": "yref$i1k14320y.r8h",
+        "CCSA": "ytab$fad1554cy.cya",
+        "CCSB": "ytab$i1n1816ey.cyb",
+        "CCSC": "ytab$i1n1816fy.cyc",
+        "CCSD": "ytab$i1n1816dy.cyd",
+        "PCPHFILE": "yref$",
+        "CYCCSER1": "ytab$l5u1623cy.cye",
+        "CYCCSER2": "ytab$l5u16246y.cye",
+        "CYCCSER3": "ytab$l5u1624ay.cye",
+        "CYCCSER4": "ytab$l5u1624ey.cye",
+        "CYCCSER5": "ytab$l5u1624iy.cye",
+        "CYCCSER6": "ytab$l5u1624ny.cye",
+        "CYCCSER7": "ytab$l5u1624qy.cye",
+        "CYCCSER8": "ytab$l5u16250y.cye",
+        "CYCCSER9": "ytab$l5u16255y.cye",
+        "CYCCSFR": "ytab$l5u1739ay.cyf"
+      }
+    },
+    "measured": {
+      "kind": "spectrum",
+      "samples": 2064,
+      "groups": 1,
+      "wavelength": {
+        "units": "ANGSTROMS",
+        "first": 2222.15380859375,
+        "last": 3301.650390625,
+        "medianStep": 0.524658203125
+      },
+      "science": {
+        "units": "ERGS/CM**2/S/A",
+        "median": 7.4398950541954e-13
+      },
+      "signalToNoise": {
+        "samples": 2062,
+        "median": 82.15517601215139,
+        "p90": 188.71262270551412,
+        "note": "the archive's own propagated statistical error, which carries no calibration systematic"
+      },
+      "quality": {
+        "samples": 2064,
+        "flagged": 344,
+        "flaggedShare": 0.16666666666666666,
+        "flags": {
+          "50": 10,
+          "170": 332,
+          "700": 2
+        }
+      }
+    }
+  },
+  "software": [],
+  "outputs": [
+    {
+      "path": "y2p60503t_c0f.fits",
+      "bytes": 43200,
+      "sha256": "40ef2f74f7261397e2ed5a8a182879d084a68cc15316de40221b76cd42a4f043",
+      "units": "ANGSTROMS"
+    },
+    {
+      "path": "y2p60503t_c1f.fits",
+      "bytes": 43200,
+      "sha256": "aabd9708b5d9fc7b34d504a85b23fcdbc1d7593749a5172c95ee90a2ae33d718",
+      "units": "ERGS/CM**2/S/A"
+    },
+    {
+      "path": "y2p60503t_c2f.fits",
+      "bytes": 43200,
+      "sha256": "d527b80986f0e626298e2ab64290b5f9ee907159c31c63daaa01766c97607560",
+      "units": "ERGS/CM**2/S/A"
+    },
+    {
+      "path": "y2p60503t_cqf.fits",
+      "bytes": 43200,
+      "sha256": "5545af32a82c43f8076e91583e39c0836fede1684ca15a31612441abbe4d9035"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "archive-origin",
+      "receipt": "tools/objects/hst/programs/europa-fos-5837.archive-final.product.json",
+      "product": "y2p60503t_c1f.fits",
+      "establishes": "y2p60503t_c1f.fits is the archive's own final calibrated product for y2p60503t, retrieved from MAST and pinned at 43200 bytes, sha256 aabd9708b5d9fc7b34d504a85b23fcdbc1d7593749a5172c95ee90a2ae33d718. It establishes origin and integrity: the file read here is the file the archive distributes, and MAST's catalogue and the file's own headers agree on which observation it is. It does not establish that anything here reproduces that calibration: no pipeline was re-run and nothing was compared, so it is not agreement with the archive."
+    }
+  ]
+}

@@ -5,8 +5,8 @@ function objectLike(value: unknown): value is Record<string, unknown> {
 }
 
 export function requireSceneLifecycle(mount: unknown, objectId = "unknown"): SceneLifecycle {
-  // Shape only. The router supplies mountScene(stage, { onError }), retains
-  // ownership before validation, and owns playback permission. Cancellation,
+  // Shape only. The scene session retains the handle before validation and
+  // commands playback under the application's shared policy. Cancellation,
   // failure cleanup and idempotence are earned by executable lifecycle tests.
   if (!objectLike(mount) || !objectLike(mount.ready) ||
       typeof mount.ready.then !== "function" ||

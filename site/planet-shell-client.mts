@@ -36,7 +36,8 @@ import { createSurfaceMapReader } from "./surface-map-context.mts";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mts';
 import { bindNavigationIntent, navigationFragments } from './navigation-fragments.mts';
-import { loadCatalogueFragment, readCatalogueFragmentPin, scheduleWhenIdle } from './catalogue-fragment-loader.mts';
+import { loadCatalogueFragment, readCatalogueFragmentPin } from './catalogue-fragment-loader.mts';
+import { createNavigationTreeController } from './navigation-tree-client.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
 import { objectClassificationLabel } from './planet-search-objects.mts';
@@ -111,7 +112,7 @@ export function mountPlanetShell({
   }
   try {
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
-    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { onCategoryChange, illustrationModelsEnabled }));
+    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { objectId, onCategoryChange, illustrationModelsEnabled }));
     // Hover, focus or press on another body fetches its card before the click.
     own(bindNavigationIntent({ documentTarget, windowTarget, objects: SCENE_OBJECTS, fragments, skip: id => id === cardObjectId }));
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime));
@@ -193,15 +194,21 @@ export function mountPlanetShell({
         createInformationTabsController(drawer, previewLifetime, 'overview');
       };
       // The destination's static fragment is its card; intent usually fetched it.
-      const card = fragments.peek(object.id)?.querySelector('.planet-information-panel');
-      if (card) showCard(card);
+      const cached = fragments.peek(object.id);
+      const card = cached?.document.querySelector('.planet-information-panel');
+      if (cached && card) {
+        try { showCard(card); } finally { cached.release(); }
+      }
       else {
+        cached?.release();
         // Registry facts show at once; the card follows its fragment without
         // blocking the flight. A failed fragment fails the destination load.
         information.replaceChildren(objectCardPreview(documentTarget, object));
-        fragments.get(object.id).then(source => {
-          const arrived = source.querySelector('.planet-information-panel');
-          if (arrived && selectionPreview === preview) { showCard(arrived); updateBodyCard(); }
+        fragments.get(object.id).then(fragment => {
+          try {
+            const arrived = fragment.document.querySelector('.planet-information-panel');
+            if (arrived && selectionPreview === preview) { showCard(arrived); updateBodyCard(); }
+          } finally { fragment.release(); }
         }, () => {});
       }
       information.ariaBusy = 'true';
@@ -532,7 +539,7 @@ function createSettingsController(
 }
 
 function createObjectBrowserController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime,
-  { onCategoryChange = () => {}, illustrationModelsEnabled = false }: Pick<ShellOptions, 'onCategoryChange' | 'illustrationModelsEnabled'> = {}) {
+  { objectId = '', onCategoryChange = () => {}, illustrationModelsEnabled = false }: Pick<ShellOptions, 'objectId' | 'onCategoryChange' | 'illustrationModelsEnabled'> = { objectId: '' }) {
   const setPanelHidden = (panel: HTMLElement, hidden: boolean) => {
     if (panel.hidden !== hidden) panel.hidden = hidden;
     const inert = hidden || panel.ariaBusy === 'true';
@@ -557,6 +564,18 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       !(empty instanceof windowTarget.HTMLElement)) {
     throw new Error("Planet shell object browser is incomplete.");
   }
+  const navigationRoot = browser.querySelector<HTMLElement>('[data-object-navigation-tree]');
+  const navigation = navigationRoot ? createNavigationTreeController(navigationRoot, windowTarget) : null;
+  lifetime.onDispose(() => navigation?.destroy());
+  const placeNavigation = (card: HTMLElement | null | undefined, current: string) => {
+    if (!navigationRoot) return;
+    const slot = card?.querySelector<HTMLElement>('[data-object-navigation-slot]')
+      ?? (card?.querySelector<HTMLElement>('[data-object-navigation-tree]') === navigationRoot ? card : null);
+    if (!slot) { navigationRoot.hidden = true; return; }
+    if (navigationRoot.parentElement !== slot) slot.append(navigationRoot);
+    navigationRoot.hidden = showingSearchResults;
+    void navigation?.select(current);
+  };
   const tabs = [...browser.querySelectorAll<HTMLElement>('[data-object-tab]')];
   const resultsPanel = requiredElement(browser, '#object-category-results');
   let items = [...browser.querySelectorAll<HTMLElement>(".planet-object-item")]
@@ -573,6 +592,14 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const catalogueRetry = catalogueError?.querySelector<HTMLButtonElement>('[data-catalogue-retry]') ?? null;
   let searchLabels = items.map(item => ({ ...objectSearchLabels(item), item }));
   let sourceLinks = sourceDocuments(documentTarget);
+  const collapseSolarSystemBranches = () => {
+    if (!navigationRoot) return;
+    for (const branch of navigationRoot.querySelectorAll<HTMLDetailsElement>('details[data-atlas-depth]:not([data-atlas-depth="0"])')) {
+      branch.open = false;
+    }
+    const solarSystem = navigationRoot.querySelector<HTMLDetailsElement>('details[data-atlas-depth="0"][data-atlas-key="solar-system"]');
+    if (solarSystem) solarSystem.open = true;
+  };
   let chunks = [...browser.querySelectorAll<HTMLElement>('.planet-object-chunk')]
     .map(node => ({ node, items: [...node.querySelectorAll<HTMLElement>('.planet-object-item')] }));
   const refreshChunks = () => {
@@ -626,8 +653,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     ];
     refreshChunks();
   };
-  // Fetches the shared catalogue fragment at most once, at first idle or as
-  // soon as the browser panel opens, whichever happens first. `filter` and
+  // Fetches the shared catalogue fragment at most once, when the browser panel
+  // first opens. `filter` and
   // `markSelection` are declared further down this closure but only run once
   // this promise settles, well after the whole controller has been built.
   let catalogueLoad: Promise<void> | null = null;
@@ -665,7 +692,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     });
     return catalogueLoad;
   };
-  if (cataloguePin) scheduleWhenIdle(windowTarget, () => { void ensureCatalogueLoaded(); });
   let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
   let showingSearchResults = false;
   let initialCategory: string | null = searchCard.hasAttribute('data-search-submitted') ? activeCategory : null;
@@ -807,6 +833,11 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     if (focusCard) setPanelHidden(focusCard, !focused);
     if (galaxy) setPanelHidden(galaxy, !galactic);
     if (system) setPanelHidden(system, galactic || Boolean(focused) || Boolean(largeScale));
+    const selectedObjectId = SCENE_OBJECTS.find(object => object.name === selectedObjectName)?.id ?? objectId;
+    if (focused) placeNavigation(null, '');
+    else if (galactic) placeNavigation(galaxy, 'milky-way');
+    else if (largeScale) placeNavigation(largeScale, largeScale.dataset.largeScaleOverview ?? '');
+    else placeNavigation(system, selectedObjectId);
     // The results card introduces the system the overview shows; searches and object cards keep the Solar System's.
     const headerSystemId = overview && overviewScope === 'system' ? overviewSystemId : SOLAR_SYSTEM_ID;
     for (const header of systemHeaders) header.toggleAttribute('data-system-current', header.dataset.systemHeader === headerSystemId);
@@ -1029,6 +1060,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     },
     showSystem(systemId: string) {
       overview = true; overviewScope = 'system'; overviewSystemId = systemId;
+      if (systemId === SOLAR_SYSTEM_ID) collapseSolarSystemBranches();
       markSelection(); render(false);
     },
     setOverview(enabled: boolean, scope: OverviewScope, systemId: string) {
@@ -1036,6 +1068,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       overview = enabled;
       overviewScope = scope;
       if (enabled) overviewSystemId = systemById(SCENE_OBJECTS, systemId)?.id ?? SOLAR_SYSTEM_ID;
+      if (enabled && scope === 'system' && overviewSystemId === SOLAR_SYSTEM_ID) collapseSolarSystemBranches();
       markSelection();
       if (enabled) { destinations?.bind(null); features?.bind(null); }
       render(editing);

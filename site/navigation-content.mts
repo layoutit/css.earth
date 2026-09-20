@@ -2,6 +2,7 @@ import type { BrowserWindow } from './browser-types.mts';
 import { requiredElement } from './browser-types.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import { navigationFragments, type NavigationFragments } from './navigation-fragments.mts';
+import { publishPreparedDescriptor, readPreparedDescriptor } from './prepared-descriptor.mts';
 type StyleNode = HTMLStyleElement | HTMLLinkElement;
 interface IncomingStyle { element: StyleNode; media?: string | null; }
 /** Load the static navigation fragment without a second resident card bank. */
@@ -11,22 +12,39 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
   const key = (element: StyleNode) => element instanceof windowTarget.HTMLLinkElement ? `link:${element.href}` : styleKey(element);
 
   return Object.freeze({
+    async descriptor(object: ObjectEntry, { signal }: { signal: AbortSignal }) {
+      const fragment = await fragments.get(object.id, signal);
+      try {
+        const descriptor = readPreparedDescriptor(fragment.document, object.id);
+        if (!descriptor) throw new Error(`Object ${object.id} navigation content has no prepared descriptor.`);
+        return descriptor;
+      } finally { fragment.release(); }
+    },
     async load(object: ObjectEntry, { signal }: { signal: AbortSignal }) {
-      // Selection intent usually requested this fragment already; reuse it.
-      // The cached document is shared, so its nodes are only read or imported.
-      const source = await fragments.get(object.id, signal);
+      // Selection intent usually requested this fragment already; reuse its
+      // encoded HTML while this transition owns the parsed document lease.
+      const fragment = await fragments.get(object.id, signal);
+      let source: Document | null = fragment.document;
+      const readSource = () => {
+        if (!source) throw new Error('Object content released its parsed navigation fragment.');
+        return source;
+      };
+      const releaseSource = () => { if (!source) return; source = null; fragment.release(); };
+      const descriptor = readPreparedDescriptor(readSource(), object.id);
+      if (!descriptor) { releaseSource(); throw new Error(`Object ${object.id} navigation content has no prepared descriptor.`); }
       const required = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content',
         '.planet-object-browser', '.planet-information-panel', '.planet-settings-panel'];
-      for (const selector of required) if (!source.querySelector(selector) || !documentTarget.querySelector(selector)) {
+      for (const selector of required) if (!readSource().querySelector(selector) || !documentTarget.querySelector(selector)) {
+        releaseSource();
         throw new Error(`Object shell content is missing ${selector}.`);
       }
       const existing = new Map(styles.map(style => [key(style), style]));
       const added: StyleNode[] = [], next: IncomingStyle[] = [];
       let committed = false;
-      const dispose = () => { if (!committed) for (const element of added) element.remove(); };
+      const dispose = () => { if (!committed) for (const element of added) element.remove(); releaseSource(); };
       signal.addEventListener('abort', dispose, { once: true });
       try {
-        for (const element of source.head.querySelectorAll<StyleNode>('style, link[rel="stylesheet"]')) {
+        for (const element of readSource().head.querySelectorAll<StyleNode>('style, link[rel="stylesheet"]')) {
           const href = element instanceof windowTarget.HTMLLinkElement
             ? new URL(element.getAttribute('href') ?? '', new URL(object.route, windowTarget.location.href)).href : null;
           const reused = existing.get(href === null ? styleKey(element) : `link:${href}`);
@@ -51,6 +69,8 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
           id: object.id, name: object.name,
           apply({ preserveSidebar = false } = {}) {
             if (signal.aborted || committed) throw new Error('Object content no longer owns this transition.');
+            const incomingSource = readSource();
+            try {
             // Shared stylesheet nodes survive; only the outgoing object's
             // exclusive CSS is removed before the incoming CSS becomes active.
             const retained = new Set(next.map(({ element }) => element));
@@ -67,7 +87,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
             styles = next.map(({ element }) => element);
             committed = true; signal.removeEventListener('abort', dispose);
             for (const selector of ['.planet-information-panel', '.planet-settings-panel', '[data-settings-form]']) {
-              const target = documentTarget.querySelector<HTMLElement>(selector), incoming = source.querySelector<HTMLElement>(selector);
+              const target = documentTarget.querySelector<HTMLElement>(selector), incoming = incomingSource.querySelector<HTMLElement>(selector);
               if (!target || !incoming) throw new Error(`Object shell content disappeared: ${selector}.`);
               // The selection preview was imported from this same fragment and
               // keeps its retained nodes. Only a registry-only preview, whose
@@ -77,14 +97,14 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
             }
             for (const selector of [...required, '[data-settings-form]', '.planet-sidebar-view-all', '.planet-sheet-handle',
               '.explorer-rail-explore', '.explorer-rail-about', '.planet-settings-action', '.explorer-about-panel', '.explorer-about-panel h2']) {
-              const target = documentTarget.querySelector<HTMLElement>(selector), incoming = source.querySelector<HTMLElement>(selector);
+              const target = documentTarget.querySelector<HTMLElement>(selector), incoming = incomingSource.querySelector<HTMLElement>(selector);
               if (!target || !incoming) continue;
               for (const name of ['id', 'action', 'aria-label', 'aria-controls', 'aria-labelledby', 'popovertarget', 'placeholder', 'data-has-destinations']) {
                 const value = incoming.getAttribute(name);
                 if (value === null) target.removeAttribute(name); else target.setAttribute(name, value);
               }
             }
-            const footer = documentTarget.querySelector<HTMLElement>('.planet-attribution-footer'), incomingFooter = source.querySelector('.planet-attribution-footer');
+            const footer = documentTarget.querySelector<HTMLElement>('.planet-attribution-footer'), incomingFooter = incomingSource.querySelector('.planet-attribution-footer');
             if (footer) {
               footer.hidden = !incomingFooter;
               if (incomingFooter) {
@@ -98,8 +118,8 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               const readout = documentTarget.querySelector('.planet-view-readout') ?? documentTarget.body;
               readout.prepend(documentTarget.importNode(incomingFooter, true));
             }
-            documentTarget.title = source.title;
-            for (const incoming of source.head.querySelectorAll(
+            documentTarget.title = incomingSource.title;
+            for (const incoming of incomingSource.head.querySelectorAll(
               'link[rel="canonical"], meta[name="description"], meta[property^="og:"], meta[name^="twitter:"]',
             )) {
               const key = incoming.tagName === 'LINK' ? 'rel' : incoming.hasAttribute('property') ? 'property' : 'name';
@@ -110,6 +130,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               } else documentTarget.head.append(documentTarget.importNode(incoming, true));
             }
             documentTarget.body.dataset.objectShell = object.id;
+            publishPreparedDescriptor(documentTarget, descriptor);
             const stage = requiredElement(documentTarget, '.planet-stage'), input = documentTarget.querySelector('.planet-input-surface');
             stage.dataset.objectId = object.id;
             stage.setAttribute('aria-label', `Interactive 3D CSS visualization of ${object.name}`);
@@ -121,6 +142,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               else if (anchor.getAttribute('aria-current') === 'page') anchor.removeAttribute('aria-current');
               anchor.classList.toggle('is-active', selected);
             }
+            } finally { releaseSource(); }
           },
           dispose,
         });

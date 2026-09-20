@@ -1,0 +1,115 @@
+{
+  "schema": "cssearth-gemini-reproduction@1",
+  "programme": "GS-2025B-DD-102",
+  "program": "comet-3i-gs2025bdd102",
+  "target": "3I",
+  "sequenceStart": "2025-09-05T23:27:40Z",
+  "evidence": "internal-consistency",
+  "halves": [
+    {
+      "half": "a",
+      "product": "S20250906S0037_image.fits",
+      "frames": [
+        "S20250906S0037.fits",
+        "S20250906S0047.fits"
+      ],
+      "record": ".local/gemini/work/science-a/S20250906S0037_image.fits.product.json"
+    },
+    {
+      "half": "b",
+      "product": "S20250906S0042_image.fits",
+      "frames": [
+        "S20250906S0042.fits",
+        "S20250906S0052.fits"
+      ],
+      "record": ".local/gemini/work/science-b/S20250906S0042_image.fits.product.json"
+    }
+  ],
+  "archiveProduct": "none. The archive publishes no processed science product for this programme, so there is nothing external to check this stack against.",
+  "registration": {
+    "dx": -30,
+    "dy": 18,
+    "exactX": -30.481547789029264,
+    "exactY": 17.943477722725675,
+    "residualX": -0.4815477890292641,
+    "residualY": -0.05652227727432546
+  },
+  "registrationCheck": [
+    {
+      "dx": -31,
+      "dy": 17,
+      "correlation": 0.8995239969154872
+    },
+    {
+      "dx": -30,
+      "dy": 17,
+      "correlation": 0.9052541587991232
+    },
+    {
+      "dx": -29,
+      "dy": 17,
+      "correlation": 0.8978337556976255
+    },
+    {
+      "dx": -31,
+      "dy": 18,
+      "correlation": 0.9044736230424634
+    },
+    {
+      "dx": -30,
+      "dy": 18,
+      "correlation": 0.9096917884217405
+    },
+    {
+      "dx": -29,
+      "dy": 18,
+      "correlation": 0.9011798064135659
+    },
+    {
+      "dx": -31,
+      "dy": 19,
+      "correlation": 0.8920074569386179
+    },
+    {
+      "dx": -30,
+      "dy": 19,
+      "correlation": 0.8959297650045127
+    },
+    {
+      "dx": -29,
+      "dy": 19,
+      "correlation": 0.8878473250341755
+    }
+  ],
+  "bestByCorrelation": {
+    "dx": -30,
+    "dy": 18,
+    "correlation": 0.9096917884217405
+  },
+  "registrationMeans": "The shift is the two products' own world coordinates, not a fit. It is a whole number of samples, so a true offset of -30.48, 17.94 is compared up to half a sample out of register. Every agreement figure here is therefore a floor. Nothing was resampled to improve it.",
+  "means": "Two halves of one dither sequence, sharing no exposure, reduced separately through the same masters. This shows the reduction is stable against which exposures went into it. It does not show the pipeline is right, and it cannot: nothing here has a correct answer to check against. It is a repeatability figure, not an accuracy one.",
+  "overlap": {
+    "width": 3180,
+    "height": 2096
+  },
+  "statistics": {
+    "both": 6665280,
+    "identical": 0,
+    "identicalShare": 0,
+    "medianLevel": 2711.93994140625,
+    "medianAbsoluteDifference": 693.860107421875,
+    "absoluteDifference": {
+      "median": 693.860107421875,
+      "p99": 2516.3792724609375,
+      "largest": 60845.42663574219
+    },
+    "aboveMedian": {
+      "samples": 3332634,
+      "correlation": 0.8795260382060204,
+      "relativeDifference": {
+        "median": 0.25783660676232417,
+        "p99": 0.5810683478644616
+      }
+    }
+  }
+}

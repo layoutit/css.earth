@@ -41,6 +41,7 @@ new route.
 | `nh-lorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
 | `nh-mvic-camera` | `formats/geo.mts` | Archived closure through a fitted image transform; three registered filters shown as colour | Source-mesh rays |
 | `spice-camera` | `formats/geo.mts` | SPICE kernels | Source-mesh rays |
+| `junocam-camera` | `formats/junocam.mts` | SPICE kernels, one camera per strip of a push-frame image, with the kernel's radial distortion and two epochs fitted to the lit limb | Source-mesh rays, cast only where a strip can hold lit surface |
 | `encounter-fits` | `formats/encounter.mts` | Registered control network | Source-mesh rays |
 | `controlled-shape-camera` | `formats/controlled-camera.mts` | A published control network (Thomas or Stooke shape releases) or the Galileo SSI image catalog | Source-mesh rays |
 | `controlled-shape-color` | `formats/controlled-camera.mts` | The same cameras for three sequential filters, measured again against reference images | Source-mesh rays |
@@ -48,6 +49,10 @@ new route.
 
 The [implementation map](../../../.agents/skills/celestial-skill/references/implementation-map.md#choose-a-photograph-route)
 says which format fits what an archive ships.
+
+A JunoCam image is a stack of strips, each read at its own instant from a spinning spacecraft, so `junocam-camera` builds one camera per strip and joins them
+with [`composite.mts`](composite.mts): the strips of a filter make a band, and three bands make a colour photograph. The [JunoCam guide](../../../docs/junocam.md)
+records the route and what it measured on Europa.
 
 The NEAR MSI adapter retains calibrated I/F with its original illumination.
 Mathilde's [source method](../../../src/objects/mathilde/README.md) records the
@@ -74,7 +79,7 @@ misspelt field fails instead of being ignored.
 ```
 
 - `frames` lists the photographs. The format caps their number: one for an
-  orthophoto, eight for encounter frames, thirty-two for controlled cameras, and
+  orthophoto, eight for encounter frames and JunoCam images, thirty-two for controlled cameras, and
   each geo schema its own. A lens with more than one frame also names its
   `selection` and `levelMatching`; a single frame names neither.
 - A frame `id` is the archive's product id, such as `n1506184171_1` or a Galileo
@@ -95,6 +100,7 @@ misspelt field fails instead of being ignored.
 | `near-msi-camera` | `startTime`, `cameraPath`, `originalPath` | `filter`, required `refinement`; retained illumination, uncompressed calibrated/raw FITS pairs |
 | `nh-mvic-camera` | `startTime`, `cameraPath`, `labelPath` | `filter`; one frame with retained illumination, `metadata.falseColor` and a `displayRange` from 0 for all three bands |
 | `spice-camera` | `startTime`, and `labelPath` for a VICAR image | `filter`, `spice`, optional `refinement` |
+| `junocam-camera` | `startTime`, `labelPath` | `spice` (kernel bank, kernels in load order, observer, target and its label name, body frame, aberration) and `epochRefinement` with its budgets; the red, green and blue strips shown as colour, so `metadata.falseColor` and a `displayRange` from 0 |
 | `encounter-fits` | `labelPath`, `controlPath` | nothing |
 | `controlled-shape-camera` | `labelPath`, and either every control-network camera field or a `cameraCatalog`; optional `encoding`, `backgroundMaximum`, `backgroundOffset`, `coverageInsetPixels`, `quality` | `photometry`: a published model, `lunar-lambert` with its `weight`, or `retained-observation`; `percentiles` or a `displayRange` from 0 |
 | `controlled-shape-color` | The same, for each band of a band set | `bands` (the red, green and blue filters), `frames` as band sets, optional `bandAlignment`; `metadata.falseColor` and a `displayRange` from 0 |

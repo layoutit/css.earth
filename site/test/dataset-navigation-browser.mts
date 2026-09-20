@@ -42,7 +42,7 @@ async function visit(path: string, body: string, lens?: string) {
   await ready(body, lens);
 }
 async function state() {
-  return page.evaluate(() => ({ hash: location.hash, pathname: location.pathname,
+  return page.evaluate(() => ({ hash: location.hash, dataset: new URL(location.href).searchParams.get("dataset"), pathname: location.pathname,
     camera: new URL(location.href).searchParams.get('v'),
     transform: [...document.querySelectorAll('.planet-stage .polycss-camera > .polycss-scene')].map(node => getComputedStyle(node).transform),
     lens: document.querySelector<HTMLButtonElement>('button[name="dataset"][aria-pressed="true"]')?.value,
@@ -56,7 +56,7 @@ try {
   const rail = page.locator('.planet-information-panel > .planet-dataset-context-rail');
   const active = () => rail.locator('[data-dataset-context]:not([hidden])');
   const sources = page.locator('[data-source-link]');
-  await visit('/mars/#dataset=elevation', 'mars', 'elevation');
+  await visit('/mars/?dataset=elevation', 'mars', 'elevation');
   assert.equal(await page.getByRole('tab', { name: 'Missions', exact: true }).count(), 0);
   assert.equal(await page.getByRole('tab', { name: 'Sources', exact: true }).count(), 0);
   assert.equal(await active().locator('[data-mission="mars-global-surveyor"]').isVisible(), true);
@@ -74,7 +74,7 @@ try {
   assert.equal(await active().locator('[data-mission="odyssey"]').isVisible(), true);
   assert.equal(await active().locator('[data-mission="mars-global-surveyor"]').count(), 0);
   const selected = await state();
-  assert.equal(selected.hash, '#dataset=thermal');
+  assert.equal(selected.dataset, 'thermal');
   assert.deepEqual(selected.transform, before.transform, 'Dataset selection retains the camera');
   assert.equal(await stage?.evaluate(node => node.isConnected), true);
   await page.getByRole('radio', { name: 'Factsheet', exact: true }).press('Space');
@@ -97,17 +97,17 @@ try {
   assert.equal(await active().locator('[data-mission="odyssey"]').isVisible(), true);
   cases.push({ name: 'Moons navigation selects the body and Back restores dataset context' });
 
-  await visit('/mars/#vault&dataset=elevation', 'mars', 'elevation');
+  await visit('/mars/?dataset=elevation#vault', 'mars', 'elevation');
   await page.locator('button[name="dataset"][value="normal"]').click();
   await page.waitForFunction(() => location.hash === '#vault');
   assert.equal(await active().locator('[data-mission]').count(), 0);
   assert.match(await active().innerText(), /Viking/);
   cases.push({ name: 'unresolved capture stays unresolved and unrelated fragments survive' });
 
-  await visit('/mars/#dataset=missing', 'mars', 'normal');
+  await visit('/mars/?dataset=missing', 'mars', 'normal');
   assert.equal(await page.locator('[data-dataset-notice]').isVisible(), true);
   await page.locator('button[name="dataset"][value="normal"]').click();
-  await page.waitForFunction(() => !location.hash.includes('dataset='));
+  await page.waitForFunction(() => !new URL(location.href).searchParams.has('dataset'));
   assert.equal(await page.locator('[data-dataset-notice]').isVisible(), false);
   cases.push({ name: 'invalid dataset fallback and manual repair' });
 
@@ -116,7 +116,7 @@ try {
   assert.equal(await active().locator('[data-mission="osiris-apex"]').count(), 0);
   cases.push({ name: 'mission succession does not create false dataset contributions' });
 
-  await visit('/mars/#dataset=elevation', 'mars', 'elevation');
+  await visit('/mars/?dataset=elevation', 'mars', 'elevation');
   await page.getByRole('searchbox').fill('Mercury');
   await page.locator('.planet-object-link[data-object-id="mercury"]').first().click();
   await ready('mercury');
@@ -126,7 +126,7 @@ try {
   assert.equal(await active().locator('[data-mission="mars-global-surveyor"]').isVisible(), true);
   cases.push({ name: 'cross-body navigation carries the destination dataset context and Back restores the dataset' });
 
-  await visit('/mercury/#dataset=enhanced', 'mercury', 'enhanced');
+  await visit('/mercury/?dataset=enhanced', 'mercury', 'enhanced');
   assert.equal(await active().locator('[data-mission="messenger"]').count(), 1);
   assert.match(await sources.getAttribute('href') ?? '', /\/src\/objects\/mercury\/README\.md$/u);
   await sources.focus();
@@ -138,7 +138,7 @@ try {
   assert.match(await sources.getAttribute('href') ?? '', /\/src\/objects\/mercury\/README\.md$/u);
   cases.push({ name: 'the body source document covers all datasets and unlinked missions stay hidden' });
 
-  await visit('/mars/#dataset=elevation', 'mars', 'elevation');
+  await visit('/mars/?dataset=elevation', 'mars', 'elevation');
   await page.setViewportSize({ width: 390, height: 844 });
   await page.waitForFunction(() => getComputedStyle(document.querySelector('.planet-information-panel > .planet-dataset-context-rail')!).position === 'static');
   await rail.scrollIntoViewIfNeeded();

@@ -22,6 +22,7 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
     <input type="hidden" name="v" data-search-context disabled></form><input class="planet-sheet-handle" type="checkbox">
   <nav class="planet-object-browser" hidden>
     <div data-galactic-overview hidden>Milky Way</div><div data-system-results><section class="planet-selected-panel">Solar System introduction</section>
+    <div data-object-navigation-tree></div>
     <div class="planet-object-tabs">${['all', 'planet', 'satellite', 'nebula'].map(category => `<button data-object-tab="${category}"><span class="planet-object-tab-count"></span></button>`).join('')}</div>
     <div id="object-category-results"><ul><li data-search-overview="milky way" hidden><a href="/sun/?overview=milky-way">Milky Way</a></li><li class="planet-object-chunk"><ul class="planet-object-chunk-list">
     ${row('Saturn', 'planet')}${row('Titan', 'satellite')}${row('M42', 'nebula', ['orion nebula', 'm42'])}
@@ -135,6 +136,7 @@ test('search is a flat list across categories, including queries that name an ov
     assert.equal(document.querySelector<HTMLElement>('[data-galactic-overview]')?.hidden, true);
     assert.equal(document.querySelector<HTMLElement>('[data-system-results] > .planet-selected-panel')?.hidden, true);
     assert.equal(document.querySelector<HTMLElement>('.planet-object-tabs')?.hidden, true);
+    assert.equal(document.querySelector<HTMLElement>('[data-object-navigation-tree]')?.hidden, true);
     assert.equal(document.querySelector('.planet-object-browser')?.getAttribute('aria-label'), 'Search results');
     assert.equal(document.querySelector('#object-category-results')?.getAttribute('aria-labelledby'), null);
     if (query === 't') assert.deepEqual(visibleNames(document), ['Saturn', 'Titan']);

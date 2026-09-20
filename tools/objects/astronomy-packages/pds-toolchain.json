@@ -1,0 +1,15 @@
+{
+  "schema": "cssearth-pds-packages-toolchain@1",
+  "purpose": "One pinned PDS boundary: Peppi owns exact PDS4 Registry discovery and pdr owns supported PDS3/PDS4 decoding. cssEarth owns file acquisition, byte pins and scientific qualification.",
+  "license": "pds.peppi is Apache-2.0 and pdr is BSD-3-Clause. Their notices are retained beside this descriptor; archive products keep their providers' separate terms.",
+  "micromamba": {
+    "channel": "conda-forge",
+    "packages": [
+      "python=3.13",
+      "pds.peppi=0.5.0",
+      "pdr=1.4.4"
+    ]
+  },
+  "peppi": "0.5.0",
+  "pdr": "1.4.4"
+}

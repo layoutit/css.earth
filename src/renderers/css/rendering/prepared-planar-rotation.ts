@@ -1,5 +1,5 @@
 import { readPreparedTransform } from '../navigation/prepared-camera-basis.js';
-import { multiplyPreparedMatrix4, preparedRotationMatrix4, serializePreparedMatrix4 } from '../solar-system/prepared-ellipsoid-projection.js';
+import { multiplyPreparedMatrix4, preparedRotationMatrix4, serializePreparedMatrix4 } from '../prepared-data/prepared-ellipsoid-projection.js';
 import type { Matrix4 } from '../solar-system/types.js';
 
 export interface PreparedPlanarRotationOptions { element: HTMLElement; width: number; height?: number; }

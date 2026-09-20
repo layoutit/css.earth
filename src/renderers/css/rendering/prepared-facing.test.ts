@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import { createPreparedFacing, frontFacing, sceneEye } from './prepared-facing.js';
-import { physicalProjectionFromCamera } from './physical-projection.js';
+import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 
 test('recovers the observer under rotation, translation and scene scale', () => {
   const r = [0, 0, 1, 0, 1, 0, -1, 0, 0];

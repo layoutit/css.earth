@@ -15,6 +15,26 @@ This guide covers prepared nodes, resource leases, motion and leaf visibility.
 | Mounted presentation | Publish camera state, select prepared resource addresses and change retained leaf visibility only when it changes |
 | Application context | Keep the star selector worker and context DOM across object handoffs |
 
+## Implementation and URL ownership
+
+The CSS renderer owns object mounting, camera navigation, saved-view encoding,
+material publication and map paging. Preparation tools use the renderer's
+`dist/preparation.js` entry for the same pure matrix, asset-address and prepared
+transport helpers used by the browser. These helpers live in `prepared-data/`;
+a build-closure test prevents this entry from importing DOM construction or
+runtime modules. CSS-specific layout stays with the renderer. Platform tests exercise those renderer
+implementations; there is no separate platform mount or codec.
+
+Saved views use one binary format (version 5), with a physical rotation, either
+a distance or translated body centre, an explicit epoch and playback state.
+Capture has no angular-camera fallback, and restoration requires the same epoch.
+Versions 1–4, the former JSON format and the unused Galaxio codec are unsupported. Dataset links
+use `?dataset=<id>`; `#dataset=...` is an ordinary fragment and does not select a
+dataset. Restoring a valid saved view preserves its token without upgrading it.
+
+The internal renderer build emits ESM only. Publishable package export contracts
+are separate from this build target.
+
 ## Lifetimes
 
 `preparePresentationTree` can be cancelled before or during construction. Its

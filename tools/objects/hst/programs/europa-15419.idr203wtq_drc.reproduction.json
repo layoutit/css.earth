@@ -1,0 +1,127 @@
+{
+  "schema": "cssearth-hst-reproduction@1",
+  "program": "europa-15419",
+  "observation": "idr203wtq",
+  "product": "idr203wtq_drc",
+  "instrument": "WFC3/UVIS",
+  "opticalElement": "F631N",
+  "toolchain": "tools/objects/hst/toolchain.json",
+  "crdsContext": "hst_1358.pmap",
+  "mast": {
+    "name": "idr203wtq_drc.fits",
+    "uri": "mast:HST/product/idr203wtq_drc.fits",
+    "bytes": 3496320,
+    "sha256": "452c3f8568ec725b2bbeb66c28b054fcaf5ad6d248b9bdc39ee8b066e13fe15a",
+    "CAL_VER": "3.7.3 (Jan-07-2026)",
+    "OPUS_VER": "HSTDP 2026_1",
+    "PROCTIME": 61200.41493056,
+    "FILENAME": "idr203wtq_drc.fits",
+    "DATE": "2026-06-09"
+  },
+  "local": {
+    "sha256": "ec6695027a7e6ef81830f16ce6ef81db303dd2367553e1726a8a8a26f0508832",
+    "CAL_VER": "3.7.3 (Jan-07-2026)",
+    "OPUS_VER": "HSTDP 2026_1",
+    "PROCTIME": 61200.41493056,
+    "FILENAME": "idr203wtq_drc.fits",
+    "DATE": "2026-09-19"
+  },
+  "differentSettings": {
+    "PCTETAB": {
+      "ours": "N/A",
+      "mast": "iref$54l1347ei_cte.fits"
+    },
+    "DRKCFILE": {
+      "ours": "N/A",
+      "mast": "iref$7c418300i_dkc.fits"
+    },
+    "BIACFILE": {
+      "ours": "N/A",
+      "mast": "iref$zcv2057ni_bic.fits"
+    },
+    "RULEFILE": {
+      "ours": "/Users/ekrof/fed/css.earth-hubble/output/toolchains/hst/env/lib/python3.12/site-packages/fitsblender/wfc3_header.rules",
+      "mast": "/opt/conda/envs/linux/lib/python3.12/site-packages/fitsblender/wfc3_header.rules"
+    }
+  },
+  "differentGrid": [
+    "HDRTAB,1: 2178x1 against MAST's 2181x1"
+  ],
+  "repeatedCards": [],
+  "extensions": [
+    {
+      "extname": "SCI",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        515,
+        543
+      ],
+      "samples": 279645,
+      "both": 263811,
+      "identical": 135539,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 0.5137731178760552,
+      "medianLevel": 17.33860206604004,
+      "medianAbsoluteDifferenceOverMedian": 0,
+      "aboveMedian": {
+        "samples": 131905,
+        "correlation": 0.9970695144875925,
+        "relativeDifference": {
+          "median": 1.0776589220995447e-7,
+          "p99": 0.04159868508577347,
+          "largest": 9.95999526977539
+        }
+      }
+    },
+    {
+      "extname": "WHT",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        515,
+        543
+      ],
+      "samples": 279645,
+      "both": 279645,
+      "identical": 203383,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 0.7272899569096533,
+      "medianLevel": 229.73391723632812,
+      "medianAbsoluteDifferenceOverMedian": 0,
+      "aboveMedian": {
+        "samples": 139818,
+        "correlation": -0.2947114621795838,
+        "relativeDifference": {
+          "median": 0,
+          "p99": 1,
+          "largest": 1
+        }
+      }
+    },
+    {
+      "extname": "CTX",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        515,
+        543
+      ],
+      "samples": 279645,
+      "both": 279645,
+      "identical": 247548,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 0.8852223354610309,
+      "medianLevel": 1,
+      "medianAbsoluteDifferenceOverMedian": 0,
+      "aboveMedian": {
+        "samples": 0,
+        "correlation": null,
+        "relativeDifference": null
+      }
+    }
+  ]
+}

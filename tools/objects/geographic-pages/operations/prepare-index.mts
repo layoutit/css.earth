@@ -1,6 +1,6 @@
 import { sha256 } from '../../../../src/platform/sha256.mts';
 import { prepareCityPageGeometry, pageKey } from "../page-geometry.mts";
-import { preparedCityAssetUrl } from "../../../../src/platform/prepared-map/city-asset-url.mts";
+import { preparedCityAssetUrl } from "../../../../src/renderers/css/dist/preparation.js";
 
 import type { GeographicScene, CityRuntimePage, CityIndexNode, AssetReference, CityIndexHead } from '../contracts.mts';
 // Three tree levels per immutable directory. The application imports only the

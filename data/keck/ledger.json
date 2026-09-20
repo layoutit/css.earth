@@ -1,0 +1,3032 @@
+{
+  "schema": "cssearth-keck-ledger@1",
+  "archive": "https://koa.ipac.caltech.edu",
+  "measured": "2026-09-19",
+  "shippedObjects": 519,
+  "receiptProblems": [],
+  "modes": [
+    {
+      "table": "koa_deimos",
+      "instrument": "DEIMOS",
+      "frames": 73524,
+      "unreadableRows": 0,
+      "objectFrames": 306,
+      "objects": 17,
+      "pipeline": "PypeIt keck_deimos",
+      "openPipeline": true,
+      "installedHere": false,
+      "programs": [],
+      "receipts": [],
+      "state": "held",
+      "reason": "PypeIt supports it, but it is not installed here, and KOA publishes only JPEG quick-looks for DEIMOS, so a re-run would have no archive product to be checked against."
+    },
+    {
+      "table": "koa_esi",
+      "instrument": "ESI",
+      "frames": 35305,
+      "unreadableRows": 14,
+      "objectFrames": 222,
+      "objects": 8,
+      "pipeline": "PypeIt keck_esi",
+      "openPipeline": true,
+      "installedHere": false,
+      "programs": [],
+      "receipts": [],
+      "state": "held",
+      "reason": "PypeIt supports it; not installed here and KOA publishes no reduced product for it."
+    },
+    {
+      "table": "koa_guider",
+      "instrument": "GUIDER",
+      "frames": null,
+      "unreadableRows": 0,
+      "objectFrames": 0,
+      "objects": 0,
+      "pipeline": "none",
+      "openPipeline": false,
+      "installedHere": false,
+      "programs": [],
+      "receipts": [],
+      "state": "held, not reducible",
+      "reason": "Guider frames are pointing exposures, not observations. KOA's own count query for the table fails server-side (ORA-12899 on KOAID_ALLOWED), so its rows are not counted here."
+    },
+    {
+      "table": "koa_hires",
+      "instrument": "HIRES",
+      "frames": 192642,
+      "unreadableRows": 1,
+      "objectFrames": 4255,
+      "objects": 33,
+      "pipeline": "none",
+      "openPipeline": false,
+      "installedHere": false,
+      "programs": [],
+      "receipts": [],
+      "state": "held, not reducible",
+      "reason": "PypeIt 2.0.1 lists keck_hires as not supported in its own spectrographs table, and no other open HIRES pipeline was found."
+    },
+    {
+      "table": "koa_kcwi",
+      "instrument": "KCWI",
+      "frames": 42662,
+      "unreadableRows": 0,
+      "objectFrames": 59,
+      "objects": 2,
+      "pipeline": "KCWI DRP (kcwidrp)",
+      "openPipeline": true,
+      "installedHere": true,
+      "programs": [
+        "m42-kcwi-2023b-u124.json"
+      ],
+      "receipts": [
+        "m42-kcwi-2023b-u124.lev1-icubed.reproduction.json",
+        "m42-kcwi-2023b-u124.lev2-icubed.reproduction.json"
+      ],
+      "state": "reduced",
+      "reason": "BSD-3-Clause, pure Python, installed here by toolchain.json; KOA publishes its own products of the same pipeline to check against."
+    },
+    {
+      "table": "koa_kpf",
+      "instrument": "KPF",
+      "frames": 30764,
+      "unreadableRows": 0,
+      "objectFrames": 1853,
+      "objects": 12,
+      "pipeline": "KPF DRP",
+      "openPipeline": true,
+      "installedHere": false,
+      "programs": [],
+      "receipts": [],
+      "state": "held",
+      "reason": "The KPF DRP is open; it is not installed here and KPF observes no Solar System body this project ships."
+    },
+    {
+      "table": "koa_lris",
+      "instrument": "LRIS",
+      "frames": 311931,
+      "unreadableRows": 28,
+      "objectFrames": 1366,
+      "objects": 41,
+      "pipeline": "PypeIt keck_lris_blue/_red",
+      "openPipeline": true,
+      "installedHere": false,
+      "programs": [],
+      "receipts": [],
+      "state": "held",
+      "reason": "PypeIt supports it; not installed here and KOA publishes no reduced product for it."
+    },
+    {
+      "table": "koa_lws",
+      "instrument": "LWS",
+      "frames": 20766,
+      "unreadableRows": 0,
+      "objectFrames": 969,
+      "objects": 13,
+      "pipeline": "none",
+      "openPipeline": false,
+      "installedHere": false,
+      "programs": [],
+      "receipts": [],
+      "state": "held, not reducible",
+      "reason": "LWS was retired and no open pipeline for it was found."
+    },
+    {
+      "table": "koa_mosfire",
+      "instrument": "MOSFIRE",
+      "frames": 224020,
+      "unreadableRows": 0,
+      "objectFrames": 517,
+      "objects": 8,
+      "pipeline": "PypeIt keck_mosfire",
+      "openPipeline": true,
+      "installedHere": false,
+      "programs": [],
+      "receipts": [],
+      "state": "held",
+      "reason": "PypeIt supports it; not installed here and KOA publishes no reduced product for it."
+    },
+    {
+      "table": "koa_nirc",
+      "instrument": "NIRC",
+      "frames": 200250,
+      "unreadableRows": 0,
+      "objectFrames": 5273,
+      "objects": 42,
+      "pipeline": "none",
+      "openPipeline": false,
+      "installedHere": false,
+      "programs": [],
+      "receipts": [],
+      "state": "held, not reducible",
+      "reason": "NIRC was retired in 2010 and no open pipeline for it was found."
+    },
+    {
+      "table": "koa_nirc2",
+      "instrument": "NIRC2",
+      "frames": 889231,
+      "unreadableRows": 0,
+      "objectFrames": 29366,
+      "objects": 48,
+      "pipeline": "KAI (Keck AO Imaging)",
+      "openPipeline": true,
+      "installedHere": false,
+      "programs": [],
+      "receipts": [],
+      "state": "held",
+      "reason": "KAI 2.0.1 (2026-08-18) is BSD-3-Clause by its own licences/LICENSE.rst and setup.cfg, and needs only numpy, scipy, matplotlib, astropy, photutils, ccdproc and drizzle, with no IRAF or PyRAF; it is not installed here and that it runs was not verified. There is nothing to check a re-run against: of nine Europa frames asked of nph-getL1list across nine programmes, seven returned a log file and nothing else, two returned no file at all, and the two frames anywhere in NIRC2 that did return a reduced image state no pipeline, version or recipe in their headers at all (one says only that IDL wrote it). KOA's calibration association for a NIRC2 Europa frame is flats alone, with no darks and no sky frames, so even a consistency run would have to choose its own calibrations."
+    },
+    {
+      "table": "koa_nires",
+      "instrument": "NIRES",
+      "frames": 104744,
+      "unreadableRows": 0,
+      "objectFrames": 1211,
+      "objects": 15,
+      "pipeline": "PypeIt keck_nires",
+      "openPipeline": true,
+      "installedHere": false,
+      "programs": [],
+      "receipts": [],
+      "state": "held",
+      "reason": "PypeIt supports it; not installed here and KOA publishes no reduced product for it."
+    },
+    {
+      "table": "koa_nirspec",
+      "instrument": "NIRSPEC",
+      "frames": 1544474,
+      "unreadableRows": 0,
+      "objectFrames": 186622,
+      "objects": 58,
+      "pipeline": "PypeIt keck_nirspec_high_old",
+      "openPipeline": true,
+      "installedHere": false,
+      "programs": [
+        "europa-nirspec-2006a-c213ol.json"
+      ],
+      "receipts": [],
+      "state": "pinned",
+      "reason": "PypeIt 2.0.1 supports keck_nirspec_high, keck_nirspec_high_old (pre-2018 upgrade) and keck_nirspec_low (post-upgrade only), all BSD-3-Clause; it is not installed here. An archive product to check against exists for two Europa nights only: of thirteen Europa frames asked of nph-getL1list across eleven programmes, only 2006A returned any, and those are 1-D extracted spectra written by KOA's own NSDRP 0.9.16, a different pipeline from PypeIt, so agreement with them would be agreement between two pipelines and not a re-run of the archive's. Every other Europa programme, Paganini's water-vapour campaign included, has no archive product at all."
+    },
+    {
+      "table": "koa_osiris",
+      "instrument": "OSIRIS",
+      "frames": 101653,
+      "unreadableRows": 0,
+      "objectFrames": 3180,
+      "objects": 19,
+      "pipeline": "OSIRIS DRP",
+      "openPipeline": false,
+      "installedHere": false,
+      "programs": [],
+      "receipts": [],
+      "state": "held, not reducible",
+      "reason": "The OSIRIS DRP is written in IDL, which is commercial and is not on this machine. KOA publishes its own OSIRIS level-1 cubes, and each states its whole recipe in DRF comment cards, so they can be pinned and read but not remade."
+    }
+  ],
+  "objects": [
+    {
+      "id": "jupiter",
+      "frames": 80469,
+      "targets": [
+        "Jupiter",
+        "Jupiter   08:30",
+        "Jupiter   09:30",
+        "Jupiter   10:30",
+        "Jupiter   11:00",
+        "Jupiter   11:30",
+        "Jupiter   12:00",
+        "Jupiter   12:30",
+        "Jupiter   13:30",
+        "Jupiter   14:00",
+        "Jupiter   14:30",
+        "Jupiter   15:00",
+        "Jupiter 04:20",
+        "Jupiter 04:22",
+        "Jupiter 04:30",
+        "Jupiter 04:40",
+        "Jupiter 04:53",
+        "Jupiter 05:00",
+        "Jupiter 05:00UT",
+        "Jupiter 05:10",
+        "Jupiter 05:30",
+        "Jupiter 06:00UT",
+        "Jupiter 06:20",
+        "Jupiter 06:30",
+        "Jupiter 06:32",
+        "Jupiter 07:00",
+        "Jupiter 07:00UT",
+        "Jupiter 07:20",
+        "Jupiter 07:30",
+        "Jupiter 07:50",
+        "Jupiter 08:00",
+        "Jupiter 08:00UT",
+        "Jupiter 08:10",
+        "Jupiter 08:30",
+        "Jupiter 08:50",
+        "Jupiter 09:00",
+        "Jupiter 09:30",
+        "Jupiter 10:00",
+        "Jupiter 10:30",
+        "Jupiter 10:46",
+        "Jupiter 11:00UT",
+        "Jupiter 11:16",
+        "Jupiter 11:20",
+        "Jupiter 11:30",
+        "Jupiter 11:50",
+        "Jupiter 12:00",
+        "Jupiter 12:10",
+        "Jupiter 12:30",
+        "Jupiter 12:50",
+        "Jupiter 13:00",
+        "Jupiter 13:00UT",
+        "Jupiter 13:10",
+        "Jupiter 13:18",
+        "Jupiter 13:20",
+        "Jupiter 13:30",
+        "Jupiter 13:40",
+        "Jupiter 13:50",
+        "Jupiter 14:00",
+        "Jupiter 14:00UT",
+        "Jupiter 14:30",
+        "Jupiter 14:46",
+        "Jupiter 14:48",
+        "Jupiter 14:49",
+        "Jupiter 15:00",
+        "Jupiter 15:00UT",
+        "Jupiter 15:06",
+        "Jupiter 15:14",
+        "Jupiter 15:28",
+        "Jupiter 15:30",
+        "Jupiter 15:38",
+        "Jupiter 15:44",
+        "Jupiter 15:50",
+        "Jupiter 16:00",
+        "Jupiter 16:00UT",
+        "Jupiter 5:00UT",
+        "Jupiter UT06:45",
+        "Jupiter_06:15UT",
+        "Jupiter_06:30UT",
+        "Jupiter_07:30UT",
+        "Jupiter_08:45UT",
+        "Jupiter_08UT",
+        "Jupiter_1130UT",
+        "Jupiter_11UT",
+        "Jupiter_11UTC",
+        "Jupiter_12:45UT",
+        "Jupiter_12UT",
+        "Jupiter_14UT",
+        "Jupiter__ 04:30",
+        "Jupiter__ 04:50",
+        "Jupiter__ 05-26",
+        "Jupiter__ 05-56",
+        "Jupiter__ 05:00",
+        "Jupiter__ 05:20",
+        "Jupiter__ 06:00",
+        "Jupiter__ 06:30",
+        "Jupiter__ 07-02",
+        "Jupiter__ 07-11",
+        "Jupiter__ 08:00",
+        "Jupiter__ 08:20",
+        "Jupiter__ 09:10",
+        "Jupiter__ 09:30",
+        "Jupiter__ 09:40",
+        "Jupiter__ 09:50",
+        "Jupiter__ 10:00",
+        "Jupiter__ 10:30",
+        "Jupiter__ 10:40",
+        "Jupiter__ 11:00",
+        "Jupiter__ 11:10",
+        "Jupiter__ 12:20",
+        "Jupiter__ 12:40",
+        "Jupiter__ 13:00",
+        "Jupiter__ 13:10",
+        "Jupiter__ 13:20",
+        "Jupiter__ 13:30",
+        "Jupiter__ 13:40",
+        "Jupiter__ 14:00",
+        "Jupiter__ 14:30",
+        "Jupiter__ 14:40",
+        "jupiter",
+        "jupiter 13 05",
+        "jupiter__ 11-10",
+        "jupiter__ 12-50"
+      ],
+      "instruments": {
+        "NIRSPEC": 77465,
+        "HIRES": 1640,
+        "NIRC2": 632,
+        "NIRC": 570,
+        "LWS": 134,
+        "KPF": 17,
+        "LRIS": 7,
+        "ESI": 2,
+        "NIRES": 2
+      }
+    },
+    {
+      "id": "saturn",
+      "frames": 29678,
+      "targets": [
+        "Saturn",
+        "Saturn 06:00UT",
+        "Saturn 07:00UT",
+        "Saturn 08:00",
+        "Saturn 09:00UT",
+        "Saturn 10:30UT",
+        "Saturn 11:30",
+        "Saturn 11UT",
+        "Saturn 12:00",
+        "Saturn 12:00UT",
+        "Saturn 13:00",
+        "Saturn 1440UT",
+        "Saturn 21st 10",
+        "Saturn_05UT",
+        "Saturn_11UT",
+        "Saturn___ 04:00",
+        "Saturn___ 04:30",
+        "Saturn___ 05:00",
+        "Saturn___ 11:00",
+        "Saturn___ 11:10"
+      ],
+      "instruments": {
+        "NIRSPEC": 29007,
+        "LWS": 266,
+        "NIRC": 254,
+        "NIRC2": 78,
+        "HIRES": 52,
+        "LRIS": 16,
+        "KPF": 3,
+        "MOSFIRE": 2
+      }
+    },
+    {
+      "id": "uranus",
+      "frames": 20967,
+      "targets": [
+        "Uranus",
+        "Uranus    04:30",
+        "Uranus    05:00",
+        "Uranus    05:30",
+        "Uranus    05:50",
+        "Uranus    06:30",
+        "Uranus    07:30",
+        "Uranus    08:00",
+        "Uranus    09:00",
+        "Uranus    09:30",
+        "Uranus    10:00",
+        "Uranus    11:00",
+        "Uranus    11:30",
+        "Uranus    12:00",
+        "Uranus    13:00",
+        "Uranus    13:30",
+        "Uranus    14:00",
+        "Uranus    14:30",
+        "Uranus    15:00",
+        "Uranus    15:10",
+        "Uranus    15:20",
+        "Uranus    15:30",
+        "Uranus    15:45",
+        "Uranus    16:00",
+        "Uranus   07:00",
+        "Uranus   5 UT",
+        "Uranus   6 UT",
+        "Uranus   8 UT",
+        "Uranus  05 UT",
+        "Uranus  07 UT",
+        "Uranus  08:30",
+        "Uranus  09 UT",
+        "Uranus  09:00UT",
+        "Uranus  10 UT",
+        "Uranus  10:00UT",
+        "Uranus  10:30UT",
+        "Uranus  11 UT",
+        "Uranus  11UT",
+        "Uranus  12 UT",
+        "Uranus  13 UT",
+        "Uranus  13:30UT",
+        "Uranus  13UT",
+        "Uranus  15 UT",
+        "Uranus  15:00",
+        "Uranus  15UT",
+        "Uranus  5:00UT",
+        "Uranus  5UT",
+        "Uranus  6UT",
+        "Uranus  7UT",
+        "Uranus  8UT",
+        "Uranus  9UT",
+        "Uranus 04:00",
+        "Uranus 04UT",
+        "Uranus 05:00",
+        "Uranus 05UT",
+        "Uranus 06:00",
+        "Uranus 06UT",
+        "Uranus 07:00",
+        "Uranus 07UT",
+        "Uranus 08:00",
+        "Uranus 08UT",
+        "Uranus 09:00",
+        "Uranus 09UT",
+        "Uranus 10 UT",
+        "Uranus 10:00",
+        "Uranus 10:00UT",
+        "Uranus 10:30",
+        "Uranus 10:30UT",
+        "Uranus 10UT",
+        "Uranus 11:00",
+        "Uranus 11:30",
+        "Uranus 11:30UT",
+        "Uranus 11UT",
+        "Uranus 12:00",
+        "Uranus 12:00UT",
+        "Uranus 12:30UT",
+        "Uranus 12UT",
+        "Uranus 13:00",
+        "Uranus 13:30UT",
+        "Uranus 13UT",
+        "Uranus 14 UT",
+        "Uranus 14:00",
+        "Uranus 14:30",
+        "Uranus 14:30UT",
+        "Uranus 14UT",
+        "Uranus 15:00",
+        "Uranus 15UT",
+        "Uranus 270400",
+        "Uranus 270500",
+        "Uranus 290400",
+        "Uranus UT 10-30",
+        "Uranus UT 10-55",
+        "Uranus UT 11-45",
+        "Uranus-14:30",
+        "Uranus___ 04:40",
+        "Uranus___ 04:50",
+        "Uranus___ 06:20",
+        "Uranus___ 07-26",
+        "Uranus___ 10-00",
+        "Uranus___ 11:00",
+        "Uranus___ 13:30",
+        "uranus",
+        "uranus    15:30",
+        "uranus 14UT",
+        "uranus_06",
+        "uranus_09",
+        "uranus_12"
+      ],
+      "instruments": {
+        "NIRSPEC": 11924,
+        "NIRC2": 8196,
+        "OSIRIS": 291,
+        "NIRC": 192,
+        "NIRES": 172,
+        "KPF": 117,
+        "LWS": 45,
+        "MOSFIRE": 17,
+        "HIRES": 5,
+        "LRIS": 5,
+        "DEIMOS": 3
+      }
+    },
+    {
+      "id": "pluto",
+      "frames": 14794,
+      "targets": [
+        "*Pluto",
+        "PLUTO",
+        "Pluto",
+        "Pluto   6UT",
+        "Pluto 06UT",
+        "Pluto 07UT",
+        "Pluto 08UT",
+        "Pluto 09UT",
+        "Pluto 10UT",
+        "Pluto 11UT",
+        "Pluto 12UT",
+        "Pluto 14UT",
+        "Pluto 15UT",
+        "Pluto 1nt12J06",
+        "Pluto 2713",
+        "Pluto 28",
+        "Pluto 29",
+        "Pluto 2nt12J10",
+        "Pluto 4n13J07",
+        "Pluto 5n13J10",
+        "Pluto 6n13J13",
+        "Pluto-06UT",
+        "Pluto-07UT",
+        "Pluto-09UT",
+        "Pluto-11UT",
+        "Pluto_06",
+        "Pluto______07UT",
+        "Pluto______09UT",
+        "pluto",
+        "pluto 06 11:00",
+        "pluto 08 08",
+        "pluto 27 09:00",
+        "pluto 27 11:00",
+        "pluto 27 12:00",
+        "pluto 28 10:00",
+        "pluto 28 12:00",
+        "pluto'"
+      ],
+      "instruments": {
+        "NIRSPEC": 13264,
+        "NIRC2": 545,
+        "NIRC": 504,
+        "OSIRIS": 401,
+        "DEIMOS": 54,
+        "HIRES": 17,
+        "LRIS": 6,
+        "LWS": 3
+      }
+    },
+    {
+      "id": "titan",
+      "frames": 14391,
+      "targets": [
+        "TITAN",
+        "TITAN 0500 UT",
+        "TITAN 0700 UT",
+        "TITAN 1000 UT",
+        "TITAN UT  7:00",
+        "TITAN UT  9:00",
+        "TITAN UT 11:00",
+        "TITAN UT 12:00",
+        "TITAN UT 13:00",
+        "TITAN UT 14:00",
+        "Titan",
+        "Titan     04:00",
+        "Titan     05:00",
+        "Titan     08:00",
+        "Titan     09:30",
+        "Titan     10:00",
+        "Titan     10:30",
+        "Titan     11:00",
+        "Titan     12:00",
+        "Titan     13:00",
+        "Titan     13:30",
+        "Titan     14-30",
+        "Titan     14:00",
+        "Titan     14:30",
+        "Titan     14:50",
+        "Titan     14:52",
+        "Titan     14:56",
+        "Titan     15:00",
+        "Titan     15:15",
+        "Titan     15:26",
+        "Titan     15:30",
+        "Titan    0500UT",
+        "Titan    0600UT",
+        "Titan    11:00U",
+        "Titan    14:00U",
+        "Titan    15:00U",
+        "Titan   11:00UT",
+        "Titan   5 UT",
+        "Titan   6 UT",
+        "Titan   7 UT",
+        "Titan   7:00UT",
+        "Titan   8 UT",
+        "Titan   8:00UT",
+        "Titan   9 UT",
+        "Titan   9:00UT",
+        "Titan  10 UT",
+        "Titan  10:00UT",
+        "Titan  11 UT",
+        "Titan  11:00UT",
+        "Titan  12 UT",
+        "Titan  12:00UT",
+        "Titan  13 UT",
+        "Titan  14 UT",
+        "Titan  14:00UT",
+        "Titan  15 UT",
+        "Titan  24   7",
+        "Titan  24   8",
+        "Titan  24   9",
+        "Titan  24  11",
+        "Titan  25   6",
+        "Titan  25   7",
+        "Titan  25   8",
+        "Titan  25  10",
+        "Titan  26   6",
+        "Titan  26  11",
+        "Titan  27   6",
+        "Titan  27  10",
+        "Titan  8UT",
+        "Titan  UT 06-15",
+        "Titan  UT 06-45",
+        "Titan  UT 09-10",
+        "Titan 0215",
+        "Titan 031500",
+        "Titan 05:00",
+        "Titan 05:30",
+        "Titan 05_40UT",
+        "Titan 06:00",
+        "Titan 06:30",
+        "Titan 07",
+        "Titan 0705",
+        "Titan 07:00",
+        "Titan 08",
+        "Titan 08:00",
+        "Titan 08:00UT",
+        "Titan 08:30",
+        "Titan 09:00",
+        "Titan 09:00UT",
+        "Titan 10",
+        "Titan 10:00",
+        "Titan 10:00UT",
+        "Titan 10UT",
+        "Titan 11:00",
+        "Titan 11:00UT",
+        "Titan 11:30",
+        "Titan 11UT",
+        "Titan 12:00",
+        "Titan 12:00 UT",
+        "Titan 12:00UT",
+        "Titan 12UT",
+        "Titan 13:00UT",
+        "Titan 13:30",
+        "Titan 13:30UT",
+        "Titan 13UT",
+        "Titan 14:00",
+        "Titan 14:00 UT",
+        "Titan 14:00UT",
+        "Titan 14:30",
+        "Titan 14UT",
+        "Titan 15:00",
+        "Titan 15:00UT",
+        "Titan 15:30",
+        "Titan 15UT",
+        "Titan 16:00",
+        "Titan 16UT",
+        "Titan 3006",
+        "Titan 6UTFeb27",
+        "Titan 6UTFeb28",
+        "Titan 7UT",
+        "Titan 8UTFeb27",
+        "Titan 8UTFeb28",
+        "Titan 9",
+        "Titan-11-19",
+        "Titan_1500",
+        "Titan_15:00",
+        "titan",
+        "titan 04 06:00",
+        "titan 10 06:00",
+        "titan 10 08:00",
+        "titan 10 09:00",
+        "titan 10 10:00",
+        "titan 10 12:00",
+        "titan 11 06:00",
+        "titan 11 07:00",
+        "titan 11 10:00",
+        "titan 11 13:00",
+        "titan 11:00",
+        "titan 18 05:00",
+        "titan_09:00",
+        "titan_29nov06"
+      ],
+      "instruments": {
+        "NIRSPEC": 8292,
+        "NIRC2": 3646,
+        "OSIRIS": 1352,
+        "NIRC": 1022,
+        "LWS": 71,
+        "HIRES": 8
+      }
+    },
+    {
+      "id": "trappist-1",
+      "frames": 10377,
+      "targets": [
+        "TRAPPIST-1",
+        "TRAPPIST1",
+        "Trappist-1"
+      ],
+      "instruments": {
+        "NIRSPEC": 10377
+      }
+    },
+    {
+      "id": "europa",
+      "frames": 10164,
+      "targets": [
+        "Europa",
+        "Europa   12:30",
+        "Europa 020600",
+        "Europa 030900",
+        "Europa 031100",
+        "Europa 04:40",
+        "Europa 05:00",
+        "Europa 05:20",
+        "Europa 05:30",
+        "Europa 05:30UT",
+        "Europa 05:40",
+        "Europa 05:50",
+        "Europa 06:00",
+        "Europa 06:10",
+        "Europa 06:20",
+        "Europa 06:30",
+        "Europa 06:30UT",
+        "Europa 06:50",
+        "Europa 06UT",
+        "Europa 0708",
+        "Europa 07:00",
+        "Europa 07:10",
+        "Europa 07:30",
+        "Europa 07:50",
+        "Europa 0800",
+        "Europa 08:00",
+        "Europa 08:20",
+        "Europa 08:30",
+        "Europa 08:30UT",
+        "Europa 08:40",
+        "Europa 08:50",
+        "Europa 0900",
+        "Europa 09:00",
+        "Europa 09:10",
+        "Europa 09:20",
+        "Europa 09:30",
+        "Europa 09:30UT",
+        "Europa 09:40",
+        "Europa 09:50",
+        "Europa 1000",
+        "Europa 10:00",
+        "Europa 10:10",
+        "Europa 10:24",
+        "Europa 10:30",
+        "Europa 10:30UT",
+        "Europa 10:34",
+        "Europa 10:40",
+        "Europa 10:44",
+        "Europa 10UT",
+        "Europa 1100",
+        "Europa 11:00",
+        "Europa 11:04",
+        "Europa 11:06",
+        "Europa 11:10",
+        "Europa 11:20",
+        "Europa 11:26",
+        "Europa 11:30",
+        "Europa 11:34",
+        "Europa 11:40",
+        "Europa 11:46",
+        "Europa 11:48",
+        "Europa 11:50",
+        "Europa 11:54",
+        "Europa 1200",
+        "Europa 12:00",
+        "Europa 12:06",
+        "Europa 12:10",
+        "Europa 12:15",
+        "Europa 12:20",
+        "Europa 12:24",
+        "Europa 12:26",
+        "Europa 12:30",
+        "Europa 12:34",
+        "Europa 12:50",
+        "Europa 12:56",
+        "Europa 12HST",
+        "Europa 1300",
+        "Europa 13:00",
+        "Europa 13:04",
+        "Europa 13:14",
+        "Europa 13:28",
+        "Europa 13:30",
+        "Europa 13:34",
+        "Europa 13:39",
+        "Europa 13:44",
+        "Europa 13:48",
+        "Europa 13:50",
+        "Europa 13:54",
+        "Europa 14:00",
+        "Europa 14:10",
+        "Europa 14:14",
+        "Europa 14:24",
+        "Europa 14:40",
+        "Europa 14:44",
+        "Europa 14:54",
+        "Europa 14:58",
+        "Europa 14:59",
+        "Europa 15:00",
+        "Europa 15:00 UT",
+        "Europa 15:04",
+        "Europa 15:09",
+        "Europa 15:19",
+        "Europa 15:28",
+        "Europa 15:29",
+        "Europa 15:30",
+        "Europa 15:39",
+        "Europa 16:00 UT",
+        "Europa 17",
+        "Europa 18",
+        "Europa 19",
+        "Europa 20",
+        "Europa 21 13",
+        "Europa 21 14",
+        "Europa 241300",
+        "Europa 241400",
+        "Europa 241500",
+        "Europa 241600",
+        "Europa 2506",
+        "Europa 2507",
+        "Europa 2508",
+        "Europa 2510",
+        "Europa 2513",
+        "Europa 261300",
+        "Europa 261400",
+        "Europa 261500",
+        "Europa 261600",
+        "Europa 270700",
+        "Europa 270900",
+        "Europa 291200",
+        "Europa 291300",
+        "Europa 291400",
+        "Europa 291500",
+        "Europa 7 UT",
+        "Europa 8 UT",
+        "Europa 8HST",
+        "Europa UT 05-20",
+        "Europa UT 05-30",
+        "Europa UT 05-40",
+        "Europa UT 06-30",
+        "Europa UT 07-30",
+        "Europa UT 07-40",
+        "Europa UT 07-45",
+        "Europa UT 08-05",
+        "Europa UT 10-20",
+        "Europa UT 10-45",
+        "Europa UT 10-55",
+        "Europa UT 11-00",
+        "Europa UT 11-05",
+        "Europa UT 12-25",
+        "Europa UT 12-40",
+        "Europa UT 13-25",
+        "Europa UT 13-30",
+        "Europa UT 13-35",
+        "Europa UT 14-55",
+        "Europa UT 15-05",
+        "Europa UT 15-55",
+        "Europa_03-10",
+        "Europa_0500",
+        "Europa_13UT",
+        "Europa___ 05-47",
+        "europa 04 14:00",
+        "europa 04 15:00",
+        "europa 04 16:00",
+        "europa 11 14:00",
+        "europa 11 15:00",
+        "europa 1610",
+        "europa 21 14:00"
+      ],
+      "instruments": {
+        "NIRSPEC": 8444,
+        "NIRC2": 894,
+        "HIRES": 660,
+        "NIRC": 77,
+        "KPF": 46,
+        "OSIRIS": 41,
+        "NIRES": 2
+      }
+    },
+    {
+      "id": "io",
+      "frames": 10020,
+      "targets": [
+        "IO",
+        "IO 1000 UT",
+        "IO 1550",
+        "IO 900 UT",
+        "IO UT 13:00",
+        "IO UT 14:00",
+        "IO UT 15:00",
+        "Io",
+        "Io        04:00",
+        "Io        04:30",
+        "Io        05:00",
+        "Io        05:30",
+        "Io        06:00",
+        "Io        07:00",
+        "Io        09:00",
+        "Io        10:00",
+        "Io        10:30",
+        "Io        11:30",
+        "Io        12:00",
+        "Io        13:00",
+        "Io        13:30",
+        "Io        14:00",
+        "Io        14:10",
+        "Io        14:30",
+        "Io        14:45",
+        "Io        15:00",
+        "Io        15:12",
+        "Io        15:30",
+        "Io        15:50",
+        "Io        16:00",
+        "Io        6:00U",
+        "Io        8:00U",
+        "Io       0500UT",
+        "Io       0730UT",
+        "Io       0900UT",
+        "Io       11:00",
+        "Io       1200UT",
+        "Io       12:00U",
+        "Io       12:30",
+        "Io       1300UT",
+        "Io       13:45",
+        "Io       5:30UT",
+        "Io      11:30UT",
+        "Io      9:00UT",
+        "Io     10:00",
+        "Io     10:30UT",
+        "Io     UT 09-55",
+        "Io    06:00",
+        "Io    11:00",
+        "Io    15:00",
+        "Io    5 UT",
+        "Io    6 UT",
+        "Io    7 UT",
+        "Io    8 UT",
+        "Io    9 UT",
+        "Io   05:30UT",
+        "Io   10 UT",
+        "Io   11 UT",
+        "Io   12 UT",
+        "Io   13 UT",
+        "Io  11:00",
+        "Io  12:00",
+        "Io 04:13",
+        "Io 04:30",
+        "Io 05:00",
+        "Io 05:03",
+        "Io 05:10",
+        "Io 05:13",
+        "Io 05:23",
+        "Io 05:30",
+        "Io 05:33",
+        "Io 05:43",
+        "Io 05:50",
+        "Io 05:53",
+        "Io 05UT",
+        "Io 06:00",
+        "Io 06:03",
+        "Io 06:12",
+        "Io 06:13",
+        "Io 06:20",
+        "Io 06:30",
+        "Io 06:32",
+        "Io 06:40",
+        "Io 06:45",
+        "Io 06:47",
+        "Io 06:50",
+        "Io 06:53",
+        "Io 06:57",
+        "Io 07:00",
+        "Io 07:00UT",
+        "Io 07:10",
+        "Io 07:12",
+        "Io 07:20",
+        "Io 07:30",
+        "Io 07:30UT",
+        "Io 07UT",
+        "Io 08:00",
+        "Io 08:00UT",
+        "Io 08:20",
+        "Io 08:30",
+        "Io 09:00",
+        "Io 09:00UT",
+        "Io 09:30",
+        "Io 09UT",
+        "Io 10:00",
+        "Io 10:00UT",
+        "Io 10:10",
+        "Io 10:30",
+        "Io 11:00",
+        "Io 11:00UT",
+        "Io 11:04",
+        "Io 11:26",
+        "Io 11:30",
+        "Io 11:46",
+        "Io 12:00",
+        "Io 12:00UT",
+        "Io 12:06",
+        "Io 12:16",
+        "Io 12:20",
+        "Io 12:30",
+        "Io 12:50",
+        "Io 12:56",
+        "Io 12UT",
+        "Io 12UTFeb27",
+        "Io 13:00",
+        "Io 13:09",
+        "Io 13:18",
+        "Io 13:19",
+        "Io 13:26",
+        "Io 13:30",
+        "Io 13UT",
+        "Io 14:00",
+        "Io 14:16",
+        "Io 14:26",
+        "Io 14:30",
+        "Io 14:36",
+        "Io 14:48",
+        "Io 14:56",
+        "Io 14:58",
+        "Io 1530ut",
+        "Io 15:00",
+        "Io 15:06",
+        "Io 15:30",
+        "Io 15:30 UT",
+        "Io 15:34",
+        "Io 16:00",
+        "Io 6:15UT",
+        "Io--24-05:40",
+        "Io_0430",
+        "Io_0500",
+        "Io_______ 05-53",
+        "io",
+        "io        05:15",
+        "io    07:30UT",
+        "io 10 10:00",
+        "io 10 13:00",
+        "io 15:00ut",
+        "io_0550",
+        "io_0620",
+        "io_0700",
+        "io_075",
+        "io_080"
+      ],
+      "instruments": {
+        "NIRC2": 5619,
+        "NIRSPEC": 2881,
+        "HIRES": 735,
+        "NIRC": 343,
+        "OSIRIS": 305,
+        "LWS": 80,
+        "NIRES": 44,
+        "KPF": 13
+      }
+    },
+    {
+      "id": "neptune",
+      "frames": 9806,
+      "targets": [
+        "Neptune",
+        "Neptune   04:00",
+        "Neptune   04:30",
+        "Neptune   05:00",
+        "Neptune   05:30",
+        "Neptune   07:00",
+        "Neptune   07:30",
+        "Neptune   08-00",
+        "Neptune   08:30",
+        "Neptune   09:00",
+        "Neptune   10:00",
+        "Neptune   10:30",
+        "Neptune   11:00",
+        "Neptune   11:30",
+        "Neptune   12:00",
+        "Neptune   12:30",
+        "Neptune   13:00",
+        "Neptune   13:30",
+        "Neptune   14:00",
+        "Neptune   14:20",
+        "Neptune   14:30",
+        "Neptune   15:00",
+        "Neptune   15:15",
+        "Neptune   15:30",
+        "Neptune   8 UT",
+        "Neptune   8:00U",
+        "Neptune   9 UT",
+        "Neptune  05:00",
+        "Neptune  06:30",
+        "Neptune  10 UT",
+        "Neptune  10:00U",
+        "Neptune  11 UT",
+        "Neptune  12 UT",
+        "Neptune  13 UT",
+        "Neptune  14 UT",
+        "Neptune  6UT",
+        "Neptune  7UT",
+        "Neptune  8UT",
+        "Neptune  9UT",
+        "Neptune 04:00",
+        "Neptune 04:30",
+        "Neptune 05:00",
+        "Neptune 05:00UT",
+        "Neptune 06 UT",
+        "Neptune 06:00",
+        "Neptune 06:00UT",
+        "Neptune 06UT",
+        "Neptune 07 UT",
+        "Neptune 07:00",
+        "Neptune 07:00UT",
+        "Neptune 07UT",
+        "Neptune 08 UT",
+        "Neptune 08:00",
+        "Neptune 08:00UT",
+        "Neptune 09:00",
+        "Neptune 09:00UT",
+        "Neptune 09:30UT",
+        "Neptune 10:00",
+        "Neptune 10:00UT",
+        "Neptune 10:30",
+        "Neptune 10:30UT",
+        "Neptune 10UT",
+        "Neptune 11:00",
+        "Neptune 11:00UT",
+        "Neptune 11:30",
+        "Neptune 11:30UT",
+        "Neptune 11UT",
+        "Neptune 12 UT",
+        "Neptune 12:00",
+        "Neptune 12:00UT",
+        "Neptune 12:30UT",
+        "Neptune 12UT",
+        "Neptune 13 UT",
+        "Neptune 13:00",
+        "Neptune 13:30UT",
+        "Neptune 13UT",
+        "Neptune 14:00",
+        "Neptune 14:00UT",
+        "Neptune 14UT",
+        "Neptune 15:00",
+        "Neptune 5:00UT",
+        "Neptune 6:00UT",
+        "Neptune 7:00UT",
+        "Neptune 8:00UT",
+        "Neptune-09:00",
+        "Neptune_14UT",
+        "Neptune__ 09-00",
+        "neptune   12:00",
+        "neptune   15:00",
+        "neptune 11UT",
+        "neptune 12UT",
+        "neptune 13UT"
+      ],
+      "instruments": {
+        "NIRC2": 5666,
+        "NIRSPEC": 2358,
+        "NIRC": 961,
+        "OSIRIS": 500,
+        "LWS": 303,
+        "NIRES": 9,
+        "DEIMOS": 8,
+        "LRIS": 1
+      }
+    },
+    {
+      "id": "hd-189733",
+      "frames": 8039,
+      "targets": [
+        "HD 189733",
+        "HD189733",
+        "hd 189733",
+        "hd189733"
+      ],
+      "instruments": {
+        "NIRSPEC": 7680,
+        "LRIS": 205,
+        "HIRES": 119,
+        "NIRC2": 35
+      }
+    },
+    {
+      "id": "mars",
+      "frames": 5892,
+      "targets": [
+        "MARS   UT 11-55",
+        "MARS   UT 12-00",
+        "MARS   UT 12-55",
+        "MARS   UT 14-15",
+        "MARS   UT 14-25",
+        "Mars",
+        "Mars      12:30",
+        "Mars      14:00",
+        "Mars   UT 04-30",
+        "Mars   UT 05-00",
+        "Mars   UT 05-30",
+        "Mars   UT 06-00",
+        "Mars   UT 06-15",
+        "Mars   UT 06-20",
+        "Mars   UT 06-50",
+        "Mars   UT 07-00",
+        "Mars   UT 07-10",
+        "Mars   UT 07-15",
+        "Mars   UT 07-30",
+        "Mars   UT 08-00",
+        "Mars   UT 08-20",
+        "Mars   UT 08-30",
+        "Mars   UT 08-45",
+        "Mars   UT 09-00",
+        "Mars   UT 10-55",
+        "Mars   UT 11-00",
+        "Mars   UT 11-05",
+        "Mars   UT 11-40",
+        "Mars   UT 11-50",
+        "Mars   UT 12-15",
+        "Mars   UT 12-35",
+        "Mars   UT 12-50",
+        "Mars   UT 13-15",
+        "Mars   UT 13-20",
+        "Mars   UT 13-40",
+        "Mars   UT 14-00",
+        "Mars   UT 14-10",
+        "Mars   UT 14-30",
+        "Mars   UT 14-40",
+        "Mars   UT 14-45",
+        "Mars   UT 15-05",
+        "Mars   UT 15-15",
+        "Mars   UT 15-20",
+        "Mars   UT 15-50",
+        "Mars   UT 15-55",
+        "Mars UT 06-50",
+        "Mars-UT11-00",
+        "Mars-UT13-00",
+        "Mars-UT15-00",
+        "Mars_____ 14:00",
+        "Mars_____ 15:20",
+        "mars 13:20",
+        "mars 13:40",
+        "mars 14:00",
+        "mars 14:30",
+        "mars 14:40"
+      ],
+      "instruments": {
+        "NIRSPEC": 5461,
+        "NIRC2": 350,
+        "NIRC": 75,
+        "DEIMOS": 2,
+        "HIRES": 2,
+        "LRIS": 2
+      }
+    },
+    {
+      "id": "wasp-43",
+      "frames": 2836,
+      "targets": [
+        "WASP-43",
+        "WASP43",
+        "WASP_43",
+        "wasp43"
+      ],
+      "instruments": {
+        "NIRSPEC": 2460,
+        "MOSFIRE": 349,
+        "NIRC2": 24,
+        "HIRES": 2,
+        "KPF": 1
+      }
+    },
+    {
+      "id": "sun",
+      "frames": 1595,
+      "targets": [
+        "Sun"
+      ],
+      "instruments": {
+        "KPF": 1595
+      }
+    },
+    {
+      "id": "ganymede",
+      "frames": 1246,
+      "targets": [
+        "GANYMEDE",
+        "Ganymede",
+        "Ganymede 04:20",
+        "Ganymede 04:27",
+        "Ganymede 04:40",
+        "Ganymede 04:50",
+        "Ganymede 05:00",
+        "Ganymede 05:10",
+        "Ganymede 05:40",
+        "Ganymede 05:50",
+        "Ganymede 06:00",
+        "Ganymede 06:10",
+        "Ganymede 06:20",
+        "Ganymede 06:23",
+        "Ganymede 06:30",
+        "Ganymede 06:40",
+        "Ganymede 06:50",
+        "Ganymede 06UT",
+        "Ganymede 07:00",
+        "Ganymede 07:10",
+        "Ganymede 07:20",
+        "Ganymede 07:30",
+        "Ganymede 07:40",
+        "Ganymede 07:50",
+        "Ganymede 08:00",
+        "Ganymede 08:10",
+        "Ganymede 08:20",
+        "Ganymede 08:30",
+        "Ganymede 08:40",
+        "Ganymede 09:00",
+        "Ganymede 10 UT",
+        "Ganymede 10:00",
+        "Ganymede 10:10",
+        "Ganymede 11:30",
+        "Ganymede 11:45",
+        "Ganymede 12:00",
+        "Ganymede 12:30",
+        "Ganymede 13:00",
+        "Ganymede 13:30",
+        "Ganymede 14:00",
+        "Ganymede 14:30",
+        "Ganymede 15:00",
+        "Ganymede 15:30",
+        "Ganymede 15:34",
+        "Ganymede 21 13",
+        "Ganymede 290700",
+        "Ganymede 290800",
+        "Ganymede 290900",
+        "Ganymede 291000",
+        "Ganymede 291100",
+        "Ganymede 700UT",
+        "Ganymede 800UT",
+        "ganymede",
+        "ganymede 1610",
+        "ganymede 1611"
+      ],
+      "instruments": {
+        "NIRC2": 562,
+        "HIRES": 439,
+        "NIRSPEC": 225,
+        "OSIRIS": 13,
+        "KPF": 7
+      }
+    },
+    {
+      "id": "psyche",
+      "frames": 1177,
+      "targets": [
+        "Psyche 08:40",
+        "Psyche 08:45",
+        "Psyche 09:30",
+        "Psyche 09:45",
+        "Psyche 10:30",
+        "Psyche 11:15",
+        "Psyche 12:00",
+        "Psyche 13:00",
+        "Psyche 13:40",
+        "Psyche 14:00",
+        "Psyche 14:40",
+        "psyche 16:05",
+        "psyche___ 09-15"
+      ],
+      "instruments": {
+        "NIRSPEC": 1002,
+        "NIRC2": 157,
+        "OSIRIS": 18
+      }
+    },
+    {
+      "id": "callisto",
+      "frames": 1163,
+      "targets": [
+        "Callisto",
+        "Callisto 05:29",
+        "Callisto 06:00",
+        "Callisto 0800UT",
+        "Callisto 08:00",
+        "Callisto 09:00",
+        "Callisto 12:00",
+        "Callisto 1400",
+        "Callisto 14:00",
+        "Callisto 14:30",
+        "Callisto 15:30",
+        "callisto",
+        "callisto 1610",
+        "callisto_ 06-12",
+        "callisto_ 06-45"
+      ],
+      "instruments": {
+        "NIRC2": 1043,
+        "NIRSPEC": 47,
+        "OSIRIS": 38,
+        "HIRES": 23,
+        "KPF": 12
+      }
+    },
+    {
+      "id": "kalliope",
+      "frames": 1050,
+      "targets": [
+        "KALLIOPE 13:30",
+        "Kalliope 05:00",
+        "Kalliope 07:00",
+        "Kalliope 08:00",
+        "Kalliope 09:00",
+        "Kalliope 10:00",
+        "Kalliope 11:00",
+        "Kalliope 12:00",
+        "kalliope  12-40",
+        "kalliope_ 09-00"
+      ],
+      "instruments": {
+        "NIRSPEC": 924,
+        "NIRC2": 126
+      }
+    },
+    {
+      "id": "juno",
+      "frames": 783,
+      "targets": [
+        "JUNO_08UT",
+        "Juno",
+        "Juno 10:00UT",
+        "Juno 14:50",
+        "Juno 2515",
+        "Juno____UT06:30",
+        "Juno____UT08:30",
+        "Juno____UT09:00",
+        "juno      15-00",
+        "juno      15-10",
+        "juno 04:45",
+        "juno 06:40"
+      ],
+      "instruments": {
+        "NIRSPEC": 670,
+        "OSIRIS": 49,
+        "NIRC2": 45,
+        "NIRC": 9,
+        "HIRES": 7,
+        "LRIS": 3
+      }
+    },
+    {
+      "id": "eris",
+      "frames": 744,
+      "targets": [
+        "Eris 1108",
+        "Eris 1109",
+        "Eris 1205",
+        "Eris_06 1000",
+        "Eris_11_05",
+        "Eris_11_06",
+        "Eris_11_07",
+        "Eris_24 1040",
+        "Eris_24 1400",
+        "Eris_24 1440",
+        "Eris_25 1120",
+        "Eris_25 1220",
+        "Eris_25 1320",
+        "Eris_26 1100",
+        "Eris_26 1320",
+        "eris_28 0500",
+        "eris_28 0520",
+        "eris_28 0620",
+        "eris_28 0700",
+        "eris_28 0720",
+        "eris_28 0900",
+        "eris_29 0440",
+        "eris_29 0600",
+        "eris_29 0720",
+        "eris_29 0820",
+        "eris_30 0500",
+        "eris_30 0620",
+        "eris_30 0820"
+      ],
+      "instruments": {
+        "NIRES": 702,
+        "LRIS": 42
+      }
+    },
+    {
+      "id": "quaoar",
+      "frames": 665,
+      "targets": [
+        "Quaoar 14:00",
+        "Quaoar 26 14:00",
+        "Quaoar_126",
+        "Quaoar_134nr",
+        "Quaoar_145",
+        "quaoar 09 08:00",
+        "quaoar 09 09:00",
+        "quaoar 09 10:00",
+        "quaoar 09 11:00",
+        "quaoar 09 12:00",
+        "quaoar 09 13:00",
+        "quaoar 10 08:00",
+        "quaoar 10 09:00",
+        "quaoar 10 10:00",
+        "quaoar 10 11:00",
+        "quaoar 11 08:00",
+        "quaoar 11 09:00",
+        "quaoar 11 10:00",
+        "quaoar 11 12:00",
+        "quaoar 11 14:00",
+        "quaoar 12 11:00",
+        "quaoar 12 13:00"
+      ],
+      "instruments": {
+        "NIRSPEC": 553,
+        "NIRC": 100,
+        "LRIS": 12
+      }
+    },
+    {
+      "id": "ceres",
+      "frames": 611,
+      "targets": [
+        "CERES",
+        "Ceres",
+        "Ceres 011400",
+        "Ceres 05:00UT",
+        "Ceres 08UT",
+        "Ceres 09:46UT",
+        "Ceres 14:30 UT",
+        "Ceres 14UT",
+        "Ceres 15UT",
+        "Ceres 2514",
+        "Ceres 271530",
+        "Ceres 291500",
+        "Ceres 291600",
+        "Ceres-12:30am",
+        "Ceres_11",
+        "Ceres_14",
+        "Ceres_14hUT",
+        "ceres",
+        "ceres 050600",
+        "ceres 050700",
+        "ceres 050900",
+        "ceres 051000",
+        "ceres 060600",
+        "ceres 060700",
+        "ceres 060900",
+        "ceres 070600",
+        "ceres 070800",
+        "ceres 070900",
+        "ceres 071000",
+        "ceres 08 07",
+        "ceres 08 08",
+        "ceres 09:50",
+        "ceres 10:00",
+        "ceres 11:20",
+        "ceres 13 14",
+        "ceres 15:50",
+        "ceres 271400"
+      ],
+      "instruments": {
+        "NIRSPEC": 441,
+        "NIRC2": 87,
+        "LRIS": 59,
+        "HIRES": 20,
+        "LWS": 4
+      }
+    },
+    {
+      "id": "triton",
+      "frames": 582,
+      "targets": [
+        "Triton",
+        "Triton  9UT",
+        "Triton 10UTb",
+        "Triton 13UT",
+        "Triton 2505",
+        "Triton-13UT",
+        "Triton-14UT",
+        "triton 27 13:00",
+        "triton 27 15:00"
+      ],
+      "instruments": {
+        "NIRSPEC": 387,
+        "NIRC": 123,
+        "NIRC2": 39,
+        "OSIRIS": 33
+      }
+    },
+    {
+      "id": "vesta",
+      "frames": 544,
+      "targets": [
+        "Vesta",
+        "Vesta   10UT",
+        "Vesta   5:05UT",
+        "Vesta  UT 05-15",
+        "Vesta 0900UT",
+        "Vesta 1100UT",
+        "Vesta 14UT",
+        "Vesta 19",
+        "Vesta UT 12:00",
+        "Vesta()",
+        "Vesta-11:20pm",
+        "vesta",
+        "vesta 08 12",
+        "vesta 08 13",
+        "vesta 08 14",
+        "vesta 11 04:40",
+        "vesta 11 05:00",
+        "vesta 11:05",
+        "vesta 15:00",
+        "vesta 15:30",
+        "vesta 16:00",
+        "vesta())"
+      ],
+      "instruments": {
+        "NIRSPEC": 274,
+        "NIRC2": 104,
+        "HIRES": 82,
+        "LRIS": 52,
+        "OSIRIS": 32
+      }
+    },
+    {
+      "id": "makemake",
+      "frames": 530,
+      "targets": [
+        "Makemake 2006",
+        "Makemake 2207",
+        "makemake 2205",
+        "makemake 2206",
+        "makemake 2209",
+        "makemake 2306",
+        "makemake 2308"
+      ],
+      "instruments": {
+        "LRIS": 348,
+        "NIRSPEC": 182
+      }
+    },
+    {
+      "id": "eunomia",
+      "frames": 424,
+      "targets": [
+        "Eunomia 09:54UT",
+        "Eunomia 14:00",
+        "Eunomia 14:04UT",
+        "Eunomia 14:20",
+        "Eunomia 14:40",
+        "Eunomia 14UT"
+      ],
+      "instruments": {
+        "NIRSPEC": 419,
+        "HIRES": 5
+      }
+    },
+    {
+      "id": "moon",
+      "frames": 324,
+      "targets": [
+        "Moon",
+        "moon"
+      ],
+      "instruments": {
+        "ESI": 113,
+        "MOSFIRE": 67,
+        "LRIS": 64,
+        "HIRES": 53,
+        "NIRC": 10,
+        "NIRC2": 9,
+        "NIRSPEC": 6,
+        "KCWI": 2
+      }
+    },
+    {
+      "id": "didymos",
+      "frames": 316,
+      "targets": [
+        "Didymos 14:15",
+        "Didymos_14UT"
+      ],
+      "instruments": {
+        "NIRSPEC": 306,
+        "HIRES": 10
+      }
+    },
+    {
+      "id": "eurybates",
+      "frames": 301,
+      "targets": [
+        "Eurybates 1811",
+        "Eurybates 1814",
+        "Eurybates 1914",
+        "Eurybates 1915",
+        "eurybates 2109"
+      ],
+      "instruments": {
+        "NIRC2": 300,
+        "NIRES": 1
+      }
+    },
+    {
+      "id": "mercury",
+      "frames": 293,
+      "targets": [
+        "Mercury",
+        "Mercury 0515",
+        "Mercury 06:15",
+        "mercury",
+        "mercury_0530"
+      ],
+      "instruments": {
+        "HIRES": 176,
+        "NIRSPEC": 35,
+        "KPF": 34,
+        "ESI": 23,
+        "LRIS": 12,
+        "LWS": 7,
+        "NIRC": 6
+      }
+    },
+    {
+      "id": "himalia",
+      "frames": 274,
+      "targets": [
+        "Himalia 06:00",
+        "Himalia 08:00",
+        "Himalia 10:00",
+        "Himalia 11:00",
+        "Himalia 231315",
+        "Himalia 231430",
+        "Himalia 251300",
+        "Himalia 251500",
+        "Himalia 251600",
+        "Himalia_02-11",
+        "himalia 170500",
+        "himalia 170600",
+        "himalia 20 14:0",
+        "himalia 20 15:0",
+        "himalia 21 13"
+      ],
+      "instruments": {
+        "NIRSPEC": 126,
+        "NIRES": 78,
+        "NIRC": 70
+      }
+    },
+    {
+      "id": "m31",
+      "frames": 231,
+      "targets": [
+        "M 31",
+        "M31",
+        "M31 41-3654",
+        "M31 41-3712",
+        "M31_1",
+        "M31_2",
+        "M31_3",
+        "m31",
+        "m31_125-183"
+      ],
+      "instruments": {
+        "NIRC2": 63,
+        "DEIMOS": 62,
+        "LRIS": 47,
+        "MOSFIRE": 23,
+        "ESI": 21,
+        "LWS": 13,
+        "NIRES": 2
+      }
+    },
+    {
+      "id": "m1",
+      "frames": 214,
+      "targets": [
+        "M1",
+        "M1-16",
+        "M1-5",
+        "M1-92",
+        "m1",
+        "m1_0303.ajb",
+        "m1_0939.ajb"
+      ],
+      "instruments": {
+        "NIRC2": 56,
+        "LRIS": 45,
+        "MOSFIRE": 33,
+        "NIRC": 31,
+        "LWS": 26,
+        "HIRES": 19,
+        "ESI": 3,
+        "DEIMOS": 1
+      }
+    },
+    {
+      "id": "m33",
+      "frames": 213,
+      "targets": [
+        "M33",
+        "M33 117-A",
+        "M33 117-A2",
+        "M33-1115",
+        "M33-1710",
+        "M33-2001",
+        "M33-261",
+        "M33-2c",
+        "M33-6c",
+        "M33_025_3B",
+        "M33_031_1A",
+        "M33_031_4A",
+        "M33_1",
+        "M33_281",
+        "m33",
+        "m33-0755",
+        "m33-101896",
+        "m33-1848",
+        "m33-18650",
+        "m33-206",
+        "m33-261",
+        "m33-28609",
+        "m33-32449",
+        "m33-402",
+        "m33-49A",
+        "m33-65619",
+        "m33-91866"
+      ],
+      "instruments": {
+        "DEIMOS": 78,
+        "NIRC": 35,
+        "ESI": 29,
+        "HIRES": 28,
+        "NIRC2": 28,
+        "LRIS": 15
+      }
+    },
+    {
+      "id": "deimos",
+      "frames": 209,
+      "targets": [
+        "deimos 13:00",
+        "deimos 14:10"
+      ],
+      "instruments": {
+        "NIRC2": 209
+      }
+    },
+    {
+      "id": "phoebe",
+      "frames": 191,
+      "targets": [
+        "Phoebe 12:00",
+        "Phoebe_02-14",
+        "Phoebe_08",
+        "Phoebe_09",
+        "Phoebe_10_04",
+        "phoebe 14",
+        "phoebe 171300",
+        "phoebe 171500",
+        "phoebe 171600"
+      ],
+      "instruments": {
+        "NIRC": 92,
+        "NIRSPEC": 69,
+        "LRIS": 16,
+        "NIRES": 14
+      }
+    },
+    {
+      "id": "iris",
+      "frames": 160,
+      "targets": [
+        "IRIS",
+        "Iris 0608",
+        "Iris 0609",
+        "Iris 14:30",
+        "Iris 15:00",
+        "iris  15:00",
+        "iris 07:00",
+        "iris 07:40",
+        "iris 08:20",
+        "iris 12:30",
+        "iris 13 12"
+      ],
+      "instruments": {
+        "NIRC2": 129,
+        "NIRSPEC": 17,
+        "OSIRIS": 8,
+        "HIRES": 5,
+        "LWS": 1
+      }
+    },
+    {
+      "id": "hygiea",
+      "frames": 156,
+      "targets": [
+        "Hygiea  06UT",
+        "hygiea"
+      ],
+      "instruments": {
+        "NIRSPEC": 155,
+        "HIRES": 1
+      }
+    },
+    {
+      "id": "pallas",
+      "frames": 153,
+      "targets": [
+        "Pallas",
+        "Pallas  10UT",
+        "Pallas 07UT",
+        "Pallas 14UT",
+        "pallas 11:20",
+        "pallas 11:50",
+        "pallas 2005"
+      ],
+      "instruments": {
+        "NIRSPEC": 128,
+        "OSIRIS": 23,
+        "HIRES": 2
+      }
+    },
+    {
+      "id": "iapetus",
+      "frames": 140,
+      "targets": [
+        "Iapetus",
+        "Iapetus 13:00UT",
+        "Iapetus 14:00UT"
+      ],
+      "instruments": {
+        "NIRSPEC": 114,
+        "NIRC": 26
+      }
+    },
+    {
+      "id": "venus",
+      "frames": 138,
+      "targets": [
+        "Venus",
+        "venus",
+        "venus____ 15-30"
+      ],
+      "instruments": {
+        "HIRES": 120,
+        "ESI": 14,
+        "NIRC": 4
+      }
+    },
+    {
+      "id": "ixion",
+      "frames": 136,
+      "targets": [
+        "Ixion 26 09:00",
+        "Ixion 26 14:00",
+        "Ixion 27 09:00",
+        "Ixion 27 13:00",
+        "Ixion 29 13:00",
+        "Ixion_06"
+      ],
+      "instruments": {
+        "NIRC": 126,
+        "LRIS": 10
+      }
+    },
+    {
+      "id": "hebe",
+      "frames": 128,
+      "targets": [
+        "Hebe   15:05UT",
+        "hebe   17-1315",
+        "hebe   17-1430",
+        "hebe 13:50",
+        "hebe 14:10",
+        "hebe 14:20",
+        "hebe 14:40",
+        "hebe 15:10",
+        "hebe 16:10"
+      ],
+      "instruments": {
+        "NIRC2": 92,
+        "NIRC": 35,
+        "HIRES": 1
+      }
+    },
+    {
+      "id": "thalia",
+      "frames": 127,
+      "targets": [
+        "Thalia__UT07:45",
+        "Thalia__UT10:00"
+      ],
+      "instruments": {
+        "NIRSPEC": 127
+      }
+    },
+    {
+      "id": "ariadne",
+      "frames": 121,
+      "targets": [
+        "Ariadne"
+      ],
+      "instruments": {
+        "NIRC2": 121
+      }
+    },
+    {
+      "id": "hektor",
+      "frames": 117,
+      "targets": [
+        "Hektor",
+        "Hektor 101100",
+        "Hektor 14:00",
+        "Hektor 161000",
+        "Hektor 161115",
+        "Hektor 161200",
+        "Hektor 161245",
+        "Hektor 161315",
+        "Hektor-1am",
+        "Hektor_15h",
+        "hektor 18 14"
+      ],
+      "instruments": {
+        "NIRSPEC": 48,
+        "NIRC2": 38,
+        "NIRC": 18,
+        "NIRES": 13
+      }
+    },
+    {
+      "id": "eugenia",
+      "frames": 116,
+      "targets": [
+        "Eugenia",
+        "Eugenia  10:00",
+        "Eugenia 07:30",
+        "Eugenia 14:00",
+        "Eugenia 15:00",
+        "eugenia",
+        "eugenia 08 06"
+      ],
+      "instruments": {
+        "NIRC2": 104,
+        "NIRSPEC": 12
+      }
+    },
+    {
+      "id": "phaethon",
+      "frames": 113,
+      "targets": [
+        "Phaethon  04:40",
+        "Phaethon  05:00",
+        "Phaethon  05:40",
+        "Phaethon  06:10",
+        "Phaethon  06:30",
+        "Phaethon  06:50",
+        "Phaethon  07:50",
+        "Phaethon  08:30",
+        "Phaethon  09:10",
+        "Phaethon  09:50"
+      ],
+      "instruments": {
+        "NIRSPEC": 113
+      }
+    },
+    {
+      "id": "sedna",
+      "frames": 110,
+      "targets": [
+        "Sedna 1113",
+        "Sedna 1212",
+        "Sedna 14 13:00",
+        "Sedna 15 12:00",
+        "Sedna 15 13:00",
+        "Sedna 16 12:00",
+        "Sedna_13"
+      ],
+      "instruments": {
+        "NIRC": 69,
+        "LRIS": 41
+      }
+    },
+    {
+      "id": "titania",
+      "frames": 94,
+      "targets": [
+        "Titania",
+        "Titania_02_08",
+        "titania 21 11:0",
+        "titania 28 14:0"
+      ],
+      "instruments": {
+        "NIRC": 92,
+        "HIRES": 2
+      }
+    },
+    {
+      "id": "charon",
+      "frames": 93,
+      "targets": [
+        "Charon",
+        "charon 05 07"
+      ],
+      "instruments": {
+        "NIRC": 68,
+        "NIRSPEC": 25
+      }
+    },
+    {
+      "id": "kleopatra",
+      "frames": 93,
+      "targets": [
+        "Kleopatra 05:40",
+        "Kleopatra 07:10",
+        "Kleopatra 09:10",
+        "Kleopatra 09:30",
+        "Kleopatra 09:50",
+        "Kleopatra 16ut",
+        "Kleopatra-12am",
+        "Kleopatra_06UT",
+        "Kleopatra_09UT",
+        "Kleopatra_12UT"
+      ],
+      "instruments": {
+        "NIRC2": 93
+      }
+    },
+    {
+      "id": "m42",
+      "frames": 92,
+      "targets": [
+        "M42",
+        "m42",
+        "m42_1891",
+        "m42_1910",
+        "m4_2"
+      ],
+      "instruments": {
+        "KCWI": 57,
+        "NIRC2": 27,
+        "DEIMOS": 6,
+        "MOSFIRE": 2
+      }
+    },
+    {
+      "id": "orcus",
+      "frames": 85,
+      "targets": [
+        "Orcus    3108",
+        "Orcus 06:20",
+        "Orcus 08:00",
+        "Orcus 26 06:00",
+        "Orcus 28 05:00"
+      ],
+      "instruments": {
+        "NIRC2": 70,
+        "LRIS": 10,
+        "NIRC": 5
+      }
+    },
+    {
+      "id": "lutetia",
+      "frames": 84,
+      "targets": [
+        "Lutetia 06UT"
+      ],
+      "instruments": {
+        "NIRSPEC": 84
+      }
+    },
+    {
+      "id": "sycorax",
+      "frames": 81,
+      "targets": [
+        "Sycorax 14",
+        "Sycorax_05",
+        "Sycorax_08",
+        "sycorax 19 12",
+        "sycorax 19 13"
+      ],
+      "instruments": {
+        "NIRC": 47,
+        "LRIS": 34
+      }
+    },
+    {
+      "id": "varuna",
+      "frames": 79,
+      "targets": [
+        "Varuna 14 15:00",
+        "Varuna 24 05:00",
+        "Varuna 24 06:00",
+        "Varuna 24 07:00"
+      ],
+      "instruments": {
+        "NIRSPEC": 54,
+        "NIRC": 25
+      }
+    },
+    {
+      "id": "nereid",
+      "frames": 77,
+      "targets": [
+        "Nereid",
+        "Nereid_07",
+        "Nereid_08",
+        "nereid 12 10:00"
+      ],
+      "instruments": {
+        "NIRSPEC": 38,
+        "LRIS": 26,
+        "NIRC": 13
+      }
+    },
+    {
+      "id": "paaliaq",
+      "frames": 75,
+      "targets": [
+        "Paaliaq 12:00",
+        "Paaliaq 13:00"
+      ],
+      "instruments": {
+        "NIRES": 75
+      }
+    },
+    {
+      "id": "m45",
+      "frames": 70,
+      "targets": [
+        "m45"
+      ],
+      "instruments": {
+        "NIRSPEC": 64,
+        "DEIMOS": 6
+      }
+    },
+    {
+      "id": "mentor",
+      "frames": 67,
+      "targets": [
+        "Mentor",
+        "mentor 28 13:00"
+      ],
+      "instruments": {
+        "NIRC": 67
+      }
+    },
+    {
+      "id": "chariklo",
+      "frames": 66,
+      "targets": [
+        "Chariklo_14",
+        "chariklo 12 11",
+        "chariklo 22 06"
+      ],
+      "instruments": {
+        "NIRSPEC": 42,
+        "LWS": 16,
+        "LRIS": 8
+      }
+    },
+    {
+      "id": "sylvia",
+      "frames": 62,
+      "targets": [
+        "SYLVIA 16:00",
+        "Sylvia 04:30U",
+        "Sylvia UT14:45"
+      ],
+      "instruments": {
+        "OSIRIS": 53,
+        "NIRC2": 9
+      }
+    },
+    {
+      "id": "setebos",
+      "frames": 50,
+      "targets": [
+        "Setebos",
+        "Setebos_06",
+        "Setebos_10",
+        "Setebos_12"
+      ],
+      "instruments": {
+        "LRIS": 42,
+        "DEIMOS": 8
+      }
+    },
+    {
+      "id": "apophis",
+      "frames": 45,
+      "targets": [
+        "Apophis"
+      ],
+      "instruments": {
+        "DEIMOS": 28,
+        "ESI": 17
+      }
+    },
+    {
+      "id": "hertha",
+      "frames": 45,
+      "targets": [
+        "Hertha 06UT",
+        "Hertha 10UT",
+        "Hertha 12UT",
+        "Hertha 14UT"
+      ],
+      "instruments": {
+        "NIRSPEC": 45
+      }
+    },
+    {
+      "id": "huberta",
+      "frames": 43,
+      "targets": [
+        "huberta 2212",
+        "huberta 2312",
+        "huberta 2313"
+      ],
+      "instruments": {
+        "NIRSPEC": 43
+      }
+    },
+    {
+      "id": "m8",
+      "frames": 43,
+      "targets": [
+        "m8",
+        "m8_1",
+        "m8_2",
+        "m8_3"
+      ],
+      "instruments": {
+        "MOSFIRE": 24,
+        "DEIMOS": 17,
+        "LRIS": 2
+      }
+    },
+    {
+      "id": "siarnaq",
+      "frames": 43,
+      "targets": [
+        "Siarnaq 13:00"
+      ],
+      "instruments": {
+        "NIRES": 43
+      }
+    },
+    {
+      "id": "betelgeuse",
+      "frames": 42,
+      "targets": [
+        "Betelgeuse"
+      ],
+      "instruments": {
+        "NIRSPEC": 28,
+        "NIRC2": 14
+      }
+    },
+    {
+      "id": "camilla",
+      "frames": 42,
+      "targets": [
+        "Camilla 041300",
+        "camilla"
+      ],
+      "instruments": {
+        "NIRSPEC": 28,
+        "NIRC2": 14
+      }
+    },
+    {
+      "id": "enceladus",
+      "frames": 41,
+      "targets": [
+        "Enceladus",
+        "Enceladus 09",
+        "Enceladus 1500"
+      ],
+      "instruments": {
+        "LRIS": 14,
+        "NIRSPEC": 13,
+        "OSIRIS": 8,
+        "HIRES": 6
+      }
+    },
+    {
+      "id": "herculina",
+      "frames": 40,
+      "targets": [
+        "Herculina 06UT",
+        "Herculina 11UT"
+      ],
+      "instruments": {
+        "NIRSPEC": 40
+      }
+    },
+    {
+      "id": "umbriel",
+      "frames": 40,
+      "targets": [
+        "umbriel 21 12:0",
+        "umbriel 28 14:0"
+      ],
+      "instruments": {
+        "NIRC": 40
+      }
+    },
+    {
+      "id": "ymir",
+      "frames": 40,
+      "targets": [
+        "Ymir_08"
+      ],
+      "instruments": {
+        "LRIS": 40
+      }
+    },
+    {
+      "id": "albiorix",
+      "frames": 38,
+      "targets": [
+        "Albiorix 13:30"
+      ],
+      "instruments": {
+        "NIRES": 38
+      }
+    },
+    {
+      "id": "achilles",
+      "frames": 37,
+      "targets": [
+        "achilles 18 14",
+        "achilles 19 14"
+      ],
+      "instruments": {
+        "NIRC": 37
+      }
+    },
+    {
+      "id": "polaris",
+      "frames": 37,
+      "targets": [
+        "Polaris"
+      ],
+      "instruments": {
+        "NIRC2": 37
+      }
+    },
+    {
+      "id": "prospero",
+      "frames": 35,
+      "targets": [
+        "Prospero_05",
+        "Prospero_08",
+        "Prospero_12"
+      ],
+      "instruments": {
+        "LRIS": 35
+      }
+    },
+    {
+      "id": "janus",
+      "frames": 34,
+      "targets": [
+        "Janus"
+      ],
+      "instruments": {
+        "LRIS": 34
+      }
+    },
+    {
+      "id": "caliban",
+      "frames": 32,
+      "targets": [
+        "Caliban_07",
+        "Caliban_08"
+      ],
+      "instruments": {
+        "LRIS": 32
+      }
+    },
+    {
+      "id": "hermione",
+      "frames": 29,
+      "targets": [
+        "Hermione",
+        "Hermione 0530UT",
+        "Hermione 12:30",
+        "Hermione 14:00",
+        "Hermione 16:00",
+        "Hermione 9:45"
+      ],
+      "instruments": {
+        "NIRC2": 20,
+        "NIRSPEC": 9
+      }
+    },
+    {
+      "id": "patroclus",
+      "frames": 29,
+      "targets": [
+        "Patroclus",
+        "patroclus_09:00"
+      ],
+      "instruments": {
+        "NIRC": 23,
+        "NIRC2": 6
+      }
+    },
+    {
+      "id": "hd-189733b",
+      "frames": 28,
+      "targets": [
+        "HD189733b"
+      ],
+      "instruments": {
+        "NIRSPEC": 28
+      }
+    },
+    {
+      "id": "atlas",
+      "frames": 27,
+      "targets": [
+        "ATLAS     07:00",
+        "ATLAS-18way",
+        "ATLAS_339_57",
+        "ATLAS_345_52"
+      ],
+      "instruments": {
+        "LRIS": 23,
+        "HIRES": 4
+      }
+    },
+    {
+      "id": "melete",
+      "frames": 25,
+      "targets": [
+        "melete 20 08:00"
+      ],
+      "instruments": {
+        "NIRC": 25
+      }
+    },
+    {
+      "id": "minerva",
+      "frames": 25,
+      "targets": [
+        "Minerva",
+        "Minerva_15UT",
+        "minerva"
+      ],
+      "instruments": {
+        "NIRC2": 21,
+        "OSIRIS": 4
+      }
+    },
+    {
+      "id": "dione",
+      "frames": 22,
+      "targets": [
+        "DIONE",
+        "Dione",
+        "Dione 031500"
+      ],
+      "instruments": {
+        "NIRC2": 19,
+        "KPF": 3
+      }
+    },
+    {
+      "id": "diomedes",
+      "frames": 20,
+      "targets": [
+        "Diomedes 101315",
+        "Diomedes 101330",
+        "Diomedes 101345",
+        "diomedes 2110"
+      ],
+      "instruments": {
+        "NIRES": 16,
+        "NIRC2": 4
+      }
+    },
+    {
+      "id": "feronia",
+      "frames": 19,
+      "targets": [
+        "Feronia 11UT",
+        "Feronia 12UT"
+      ],
+      "instruments": {
+        "NIRSPEC": 19
+      }
+    },
+    {
+      "id": "antigone",
+      "frames": 18,
+      "targets": [
+        "Antigone 05UT",
+        "Antigone 06UT"
+      ],
+      "instruments": {
+        "NIRSPEC": 18
+      }
+    },
+    {
+      "id": "circe",
+      "frames": 18,
+      "targets": [
+        "Circe"
+      ],
+      "instruments": {
+        "NIRC": 12,
+        "DEIMOS": 6
+      }
+    },
+    {
+      "id": "freia",
+      "frames": 18,
+      "targets": [
+        "freia 20 11:00"
+      ],
+      "instruments": {
+        "NIRC": 18
+      }
+    },
+    {
+      "id": "ariel",
+      "frames": 15,
+      "targets": [
+        "ariel 21 13:00"
+      ],
+      "instruments": {
+        "NIRC": 15
+      }
+    },
+    {
+      "id": "oberon",
+      "frames": 15,
+      "targets": [
+        "oberon 21 10:00"
+      ],
+      "instruments": {
+        "NIRC": 15
+      }
+    },
+    {
+      "id": "elektra",
+      "frames": 12,
+      "targets": [
+        "Elektra 0700UT",
+        "Elektra 12:15",
+        "Elektra 14:15"
+      ],
+      "instruments": {
+        "NIRC2": 12
+      }
+    },
+    {
+      "id": "hera",
+      "frames": 12,
+      "targets": [
+        "hera"
+      ],
+      "instruments": {
+        "DEIMOS": 12
+      }
+    },
+    {
+      "id": "ijiraq",
+      "frames": 12,
+      "targets": [
+        "Ijiraq_07",
+        "Ijiraq_12"
+      ],
+      "instruments": {
+        "LRIS": 12
+      }
+    },
+    {
+      "id": "tarvos",
+      "frames": 12,
+      "targets": [
+        "Tarvos_11"
+      ],
+      "instruments": {
+        "LRIS": 12
+      }
+    },
+    {
+      "id": "unitas",
+      "frames": 12,
+      "targets": [
+        "Unitas 06UT",
+        "Unitas 10UT"
+      ],
+      "instruments": {
+        "NIRSPEC": 12
+      }
+    },
+    {
+      "id": "eros",
+      "frames": 11,
+      "targets": [
+        "EROS 0032-44",
+        "eros"
+      ],
+      "instruments": {
+        "NIRSPEC": 10,
+        "LRIS": 1
+      }
+    },
+    {
+      "id": "bebhionn",
+      "frames": 10,
+      "targets": [
+        "Bebhionn_09"
+      ],
+      "instruments": {
+        "LRIS": 10
+      }
+    },
+    {
+      "id": "erriapus",
+      "frames": 10,
+      "targets": [
+        "Erriapus_08"
+      ],
+      "instruments": {
+        "LRIS": 10
+      }
+    },
+    {
+      "id": "egeria",
+      "frames": 9,
+      "targets": [
+        "Egeria"
+      ],
+      "instruments": {
+        "NIRC2": 9
+      }
+    },
+    {
+      "id": "hidalgo",
+      "frames": 9,
+      "targets": [
+        "Hidalgo   07:20"
+      ],
+      "instruments": {
+        "NIRSPEC": 9
+      }
+    },
+    {
+      "id": "m2-9",
+      "frames": 9,
+      "targets": [
+        "m29"
+      ],
+      "instruments": {
+        "OSIRIS": 9
+      }
+    },
+    {
+      "id": "nemesis",
+      "frames": 9,
+      "targets": [
+        "nemesis"
+      ],
+      "instruments": {
+        "NIRC": 9
+      }
+    },
+    {
+      "id": "hekate",
+      "frames": 8,
+      "targets": [
+        "Hekate 10UT"
+      ],
+      "instruments": {
+        "NIRSPEC": 8
+      }
+    },
+    {
+      "id": "henrietta",
+      "frames": 8,
+      "targets": [
+        "henrietta 2311"
+      ],
+      "instruments": {
+        "NIRSPEC": 8
+      }
+    },
+    {
+      "id": "calypso",
+      "frames": 7,
+      "targets": [
+        "Calypso"
+      ],
+      "instruments": {
+        "DEIMOS": 7
+      }
+    },
+    {
+      "id": "amphitrite",
+      "frames": 6,
+      "targets": [
+        "Amphitrite"
+      ],
+      "instruments": {
+        "NIRC2": 6
+      }
+    },
+    {
+      "id": "flora",
+      "frames": 6,
+      "targets": [
+        "Flora 08:00UT"
+      ],
+      "instruments": {
+        "HIRES": 6
+      }
+    },
+    {
+      "id": "huya",
+      "frames": 6,
+      "targets": [
+        "Huya 11:20",
+        "Huya 12:00"
+      ],
+      "instruments": {
+        "LRIS": 6
+      }
+    },
+    {
+      "id": "ophelia",
+      "frames": 6,
+      "targets": [
+        "Ophelia"
+      ],
+      "instruments": {
+        "NIRC": 6
+      }
+    },
+    {
+      "id": "loge",
+      "frames": 5,
+      "targets": [
+        "loge"
+      ],
+      "instruments": {
+        "DEIMOS": 5
+      }
+    },
+    {
+      "id": "rhea",
+      "frames": 5,
+      "targets": [
+        "Rhea"
+      ],
+      "instruments": {
+        "KPF": 5
+      }
+    },
+    {
+      "id": "cybele",
+      "frames": 4,
+      "targets": [
+        "Cybele_12"
+      ],
+      "instruments": {
+        "LRIS": 4
+      }
+    },
+    {
+      "id": "haumea",
+      "frames": 4,
+      "targets": [
+        "Haumea"
+      ],
+      "instruments": {
+        "NIRC2": 4
+      }
+    },
+    {
+      "id": "hypatia",
+      "frames": 4,
+      "targets": [
+        "Hypatia"
+      ],
+      "instruments": {
+        "NIRC": 4
+      }
+    },
+    {
+      "id": "pomona",
+      "frames": 4,
+      "targets": [
+        "Pomona 11UT"
+      ],
+      "instruments": {
+        "NIRSPEC": 4
+      }
+    },
+    {
+      "id": "metis",
+      "frames": 3,
+      "targets": [
+        "Metis 0"
+      ],
+      "instruments": {
+        "HIRES": 3
+      }
+    },
+    {
+      "id": "penelope",
+      "frames": 3,
+      "targets": [
+        "Penelope"
+      ],
+      "instruments": {
+        "DEIMOS": 3
+      }
+    },
+    {
+      "id": "themis",
+      "frames": 3,
+      "targets": [
+        "Themis_06"
+      ],
+      "instruments": {
+        "LRIS": 3
+      }
+    },
+    {
+      "id": "adelheid",
+      "frames": 2,
+      "targets": [
+        "Adelheid"
+      ],
+      "instruments": {
+        "NIRC2": 2
+      }
+    },
+    {
+      "id": "amalthea",
+      "frames": 2,
+      "targets": [
+        "Amalthea 8 UT"
+      ],
+      "instruments": {
+        "NIRC2": 2
+      }
+    },
+    {
+      "id": "julia",
+      "frames": 2,
+      "targets": [
+        "Julia-12:10am"
+      ],
+      "instruments": {
+        "HIRES": 2
+      }
+    },
+    {
+      "id": "mimas",
+      "frames": 2,
+      "targets": [
+        "Mimas 11:30"
+      ],
+      "instruments": {
+        "OSIRIS": 2
+      }
+    },
+    {
+      "id": "isis",
+      "frames": 1,
+      "targets": [
+        "Isis 05:56"
+      ],
+      "instruments": {
+        "HIRES": 1
+      }
+    }
+  ]
+}

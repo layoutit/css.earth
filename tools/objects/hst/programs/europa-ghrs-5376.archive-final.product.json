@@ -1,0 +1,226 @@
+{
+  "schema": "cssearth-telescope-product@1",
+  "telescope": "Hubble",
+  "stage": "archive-final",
+  "inputs": [
+    {
+      "role": "coordinates",
+      "identity": "mast:HST/product/z2cf0206t_c0f.fits",
+      "bytes": 112320,
+      "sha256": "de47336b2c8a3ac5134061bc183571b447b058fd251b33bcc476cb3fb7cdcefa"
+    },
+    {
+      "role": "science",
+      "identity": "mast:HST/product/z2cf0206t_c1f.fits",
+      "bytes": 80640,
+      "sha256": "3c41b26d2fd5d8653438e541e8c611d9fa2aed162b9568303b8d8b0a3d357447"
+    },
+    {
+      "role": "uncertainty",
+      "identity": "mast:HST/product/z2cf0206t_c2f.fits",
+      "bytes": 80640,
+      "sha256": "c06edb1b114741d6a6e1fb24d251e51531466f0125bda4e243f1e78668ce43c7"
+    },
+    {
+      "role": "quality",
+      "identity": "mast:HST/product/z2cf0206t_cqf.fits",
+      "bytes": 80640,
+      "sha256": "c419fa5a939b75c55794fc90b284b1d13059c21eb9fbc6909c1af3fabdf3b99b"
+    }
+  ],
+  "parameters": {
+    "selection": {
+      "program": "europa-ghrs-5376",
+      "observation": "z2cf0206t",
+      "configuration": "HRS/1",
+      "target": "europa",
+      "kind": "spectrum",
+      "handbook": "https://www.stsci.edu/documents/dhb/webvol2/c10_ghrsdata.fm1.html",
+      "identity": {
+        "instrument": "HRS",
+        "detector": "1",
+        "opticalElement": "G140L",
+        "aperture": "LSA",
+        "targetName": "EUROPA",
+        "proposal": "5376",
+        "exposureStartMjd": 49505.41145748,
+        "exposureEndMjd": 49505.41671356
+      },
+      "components": [
+        {
+          "role": "science",
+          "supplied": true,
+          "file": "z2cf0206t_c1f.fits",
+          "hdu": 0,
+          "units": "ERGS/CM**2/S/A",
+          "note": "The calibrated science data. FLX_CORR is COMPLETE in the header, so these are fluxes rather than count rates."
+        },
+        {
+          "role": "coordinates",
+          "supplied": true,
+          "file": "z2cf0206t_c0f.fits",
+          "hdu": 0,
+          "units": "ANGSTROMS",
+          "note": "The calibrated wavelength solution, in the same shape and groups as the science data (handbook, Calibrated Wavelength Solution)."
+        },
+        {
+          "role": "uncertainty",
+          "supplied": true,
+          "file": "z2cf0206t_c2f.fits",
+          "hdu": 0,
+          "units": "ERGS/CM**2/S/A",
+          "note": "The propagated statistical error of the science data, in its units and its shape (handbook, Propagated Statistical Error)."
+        },
+        {
+          "role": "quality",
+          "supplied": true,
+          "file": "z2cf0206t_cqf.fits",
+          "hdu": 0,
+          "note": "The calibrated science data quality: \"The flags are numbers; the higher the value, the worse the data in the corresponding pixel.\""
+        }
+      ]
+    },
+    "archiveStatement": "https://hst-docs.stsci.edu/hstdhb/1-obtaining-hst-data/1-1-archive-overview",
+    "identityAgreedWith": {
+      "catalogue": {
+        "observation": "z2cf0206t",
+        "configuration": "HRS/1",
+        "filters": "G140L",
+        "targetName": "EUROPA",
+        "proposal": "5376",
+        "startMjd": 49505.41145748842,
+        "endMjd": 49505.416713576386
+      },
+      "headers": {
+        "instrument": "HRS",
+        "detector": "1",
+        "opticalElement": "G140L",
+        "aperture": "LSA",
+        "targetName": "EUROPA",
+        "proposal": "5376",
+        "exposureStartMjd": 49505.41145748,
+        "exposureEndMjd": 49505.41671356
+      }
+    },
+    "archiveCalibration": {
+      "version": {},
+      "versionStated": false,
+      "versionMissing": "These products carry no calibration-version card, so which version of the archive's pipeline made them is not stated in the files themselves; the dates below are when they were written.",
+      "dates": {
+        "DATE": "03/06/94",
+        "FITSDATE": "16-DEC-2013",
+        "DADSDATE": "03-JUN-1994 13:47:11",
+        "ORIGIN": "ST-ECF/STSDAS"
+      },
+      "switches": {
+        "DQI_CORR": "COMPLETE",
+        "EXP_CORR": "COMPLETE",
+        "DIO_CORR": "COMPLETE",
+        "PPC_CORR": "COMPLETE",
+        "MAP_CORR": "COMPLETE",
+        "DOP_CORR": "OMIT",
+        "PHC_CORR": "SKIPPED",
+        "VIG_CORR": "COMPLETE",
+        "MER_CORR": "COMPLETE",
+        "GWC_CORR": "COMPLETE",
+        "ADC_CORR": "COMPLETE",
+        "MDF_CORR": "OMIT",
+        "MNF_CORR": "OMIT",
+        "PLY_CORR": "COMPLETE",
+        "BCK_CORR": "COMPLETE",
+        "IAC_CORR": "COMPLETE",
+        "ECH_CORR": "OMIT",
+        "FLX_CORR": "COMPLETE",
+        "HEL_CORR": "COMPLETE",
+        "VAC_CORR": "OMIT",
+        "BMD_CORR": "OMIT"
+      },
+      "referenceFiles": {
+        "DADSFILE": "Z2CF0206T.D0F",
+        "DIOHFILE": "zref$aaj0926dz.r0h",
+        "PHCHFILE": "zref$fbk16110z.r1h",
+        "VIGHFILE": "zref$ebe1353qz.r2h",
+        "ABSHFILE": "zref$h4s1130pz.r3h",
+        "NETHFILE": "zref$h4s1130qz.r4h",
+        "DQIHFILE": "zref$c7u0854mz.r5h",
+        "CCR1": "ztab$aau13518z.cz1",
+        "CCR2": "ztab$ba412190z.cz2",
+        "CCR3": "ztab$c7f1130oz.cz3",
+        "CCR4": "ztab$a3d1045dz.cz4",
+        "CCR5": "ztab$e3u1417oz.cz5",
+        "CCR6": "ztab$e3t1251bz.cz6",
+        "CCR7": "ztab$e3t1250tz.cz7",
+        "CCR8": "ztab$h2615285z.cz8",
+        "CCR9": "ztab$N/A",
+        "CCRB": "ztab$ga20907fz.czb",
+        "CCRC": "ztab$e3u14301z.czc",
+        "CCRD": "ztab$e3t1028nz.czd",
+        "CCG2": "mtab$a3d1145ly.cmg",
+        "CCRE": "ztab$h5m13378z.cze"
+      }
+    },
+    "measured": {
+      "kind": "spectrum",
+      "samples": 2000,
+      "groups": 4,
+      "wavelength": {
+        "units": "ANGSTROMS",
+        "first": 1203.5245609695498,
+        "last": 1499.4876564672559,
+        "medianStep": 0.14331055031857431
+      },
+      "science": {
+        "units": "ERGS/CM**2/S/A",
+        "median": -6.160113283355903e-16
+      },
+      "signalToNoise": {
+        "samples": 8000,
+        "median": -0.1362924397617885,
+        "p90": 0.7698304401586226,
+        "note": "the archive's own propagated statistical error, which carries no calibration systematic"
+      },
+      "quality": {
+        "samples": 8000,
+        "flagged": 256,
+        "flaggedShare": 0.032,
+        "flags": {
+          "30": 256
+        }
+      }
+    }
+  },
+  "software": [],
+  "outputs": [
+    {
+      "path": "z2cf0206t_c0f.fits",
+      "bytes": 112320,
+      "sha256": "de47336b2c8a3ac5134061bc183571b447b058fd251b33bcc476cb3fb7cdcefa",
+      "units": "ANGSTROMS"
+    },
+    {
+      "path": "z2cf0206t_c1f.fits",
+      "bytes": 80640,
+      "sha256": "3c41b26d2fd5d8653438e541e8c611d9fa2aed162b9568303b8d8b0a3d357447",
+      "units": "ERGS/CM**2/S/A"
+    },
+    {
+      "path": "z2cf0206t_c2f.fits",
+      "bytes": 80640,
+      "sha256": "c06edb1b114741d6a6e1fb24d251e51531466f0125bda4e243f1e78668ce43c7",
+      "units": "ERGS/CM**2/S/A"
+    },
+    {
+      "path": "z2cf0206t_cqf.fits",
+      "bytes": 80640,
+      "sha256": "c419fa5a939b75c55794fc90b284b1d13059c21eb9fbc6909c1af3fabdf3b99b"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "archive-origin",
+      "receipt": "tools/objects/hst/programs/europa-ghrs-5376.archive-final.product.json",
+      "product": "z2cf0206t_c1f.fits",
+      "establishes": "z2cf0206t_c1f.fits is the archive's own final calibrated product for z2cf0206t, retrieved from MAST and pinned at 80640 bytes, sha256 3c41b26d2fd5d8653438e541e8c611d9fa2aed162b9568303b8d8b0a3d357447. It establishes origin and integrity: the file read here is the file the archive distributes, and MAST's catalogue and the file's own headers agree on which observation it is. It does not establish that anything here reproduces that calibration: no pipeline was re-run and nothing was compared, so it is not agreement with the archive."
+    }
+  ]
+}

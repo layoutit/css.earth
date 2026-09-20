@@ -14,7 +14,7 @@ import { pathToFileURL } from "node:url";
 import { SCENE_OBJECTS } from "../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "./check-object-runtime-ownership.mts";
 import { readPreparedPresentationModule } from "./check-prepared-presentation.mts";
-import { applyPreparedProjectiveLayout } from "../src/platform/prepared-projective-texture-leaf.mts";
+import { applyPreparedProjectiveLayout } from "../src/renderers/css/dist/preparation.js";
 
 const cssName = (name:string) => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 const projectiveLeaf = (node:TreeNode) => node?.attributes?.["data-prepared-projection"] === "single-leaf";

@@ -1,0 +1,3843 @@
+{
+  "schema": "cssearth-naco-ledger@2",
+  "instrument": "NAOS+CONICA",
+  "measured": "2026-09-19",
+  "frames": {
+    "total": 1171327,
+    "byCategory": {
+      "ACQUISITION": 26130,
+      "CALIB": 594592,
+      "SCIENCE": 550445,
+      "TEST": 160
+    },
+    "byMode": {
+      "coronography": 80281,
+      "app": 6165,
+      "cube": 136973,
+      "imaging": 231839,
+      "sdi4": 2351,
+      "other": 40038,
+      "sam": 21243,
+      "differential": 12692,
+      "sampol": 3075,
+      "fabry-perot": 3441,
+      "chopping": 2909,
+      "spectroscopy": 9438
+    }
+  },
+  "objects": [
+    {
+      "id": "uranus",
+      "targets": [
+        "URANUS"
+      ],
+      "frames": 1746,
+      "programmes": [
+        "079.C-0626(A)",
+        "079.C-0682(A)",
+        "080.C-0357(A)",
+        "2100.C-5006(A)",
+        "2100.C-5006(C)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "079.C-0626-A-URANUS-2007-08-15-imaging",
+          "programme": "079.C-0626(A)",
+          "archiveTarget": "URANUS",
+          "mode": "imaging",
+          "night": "2007-08-15",
+          "startIso": "2007-08-15T03:22:27.343Z",
+          "endIso": "2007-08-15T09:28:20.143Z",
+          "frames": 198
+        },
+        {
+          "id": "079.C-0626-A-URANUS-2007-08-16-imaging",
+          "programme": "079.C-0626(A)",
+          "archiveTarget": "URANUS",
+          "mode": "imaging",
+          "night": "2007-08-16",
+          "startIso": "2007-08-16T03:27:45.947Z",
+          "endIso": "2007-08-16T10:06:51.253Z",
+          "frames": 342
+        },
+        {
+          "id": "079.C-0626-A-URANUS-2007-08-17-imaging",
+          "programme": "079.C-0626(A)",
+          "archiveTarget": "URANUS",
+          "mode": "imaging",
+          "night": "2007-08-17",
+          "startIso": "2007-08-17T03:26:13.390Z",
+          "endIso": "2007-08-17T10:06:46.813Z",
+          "frames": 347
+        },
+        {
+          "id": "079.C-0682-A-URANUS-2007-08-30-imaging",
+          "programme": "079.C-0682(A)",
+          "archiveTarget": "URANUS",
+          "mode": "imaging",
+          "night": "2007-08-30",
+          "startIso": "2007-08-30T08:02:22.260Z",
+          "endIso": "2007-08-30T08:46:29.920Z",
+          "frames": 36
+        },
+        {
+          "id": "079.C-0682-A-URANUS-2007-08-31-imaging",
+          "programme": "079.C-0682(A)",
+          "archiveTarget": "URANUS",
+          "mode": "imaging",
+          "night": "2007-08-31",
+          "startIso": "2007-08-31T08:00:26.337Z",
+          "endIso": "2007-08-31T08:55:36.887Z",
+          "frames": 36
+        },
+        {
+          "id": "080.C-0357-A-URANUS-2007-12-08-imaging",
+          "programme": "080.C-0357(A)",
+          "archiveTarget": "URANUS",
+          "mode": "imaging",
+          "night": "2007-12-08",
+          "startIso": "2007-12-08T00:39:50.943Z",
+          "endIso": "2007-12-08T03:18:26.787Z",
+          "frames": 236
+        },
+        {
+          "id": "080.C-0357-A-URANUS-2007-12-09-imaging",
+          "programme": "080.C-0357(A)",
+          "archiveTarget": "URANUS",
+          "mode": "imaging",
+          "night": "2007-12-09",
+          "startIso": "2007-12-09T00:30:25.563Z",
+          "endIso": "2007-12-09T01:54:16.637Z",
+          "frames": 72
+        },
+        {
+          "id": "080.C-0357-A-URANUS-2007-12-10-imaging",
+          "programme": "080.C-0357(A)",
+          "archiveTarget": "URANUS",
+          "mode": "imaging",
+          "night": "2007-12-10",
+          "startIso": "2007-12-10T00:27:27.593Z",
+          "endIso": "2007-12-10T03:14:59.363Z",
+          "frames": 140
+        },
+        {
+          "id": "080.C-0357-A-URANUS-2007-12-11-imaging",
+          "programme": "080.C-0357(A)",
+          "archiveTarget": "URANUS",
+          "mode": "imaging",
+          "night": "2007-12-11",
+          "startIso": "2007-12-11T00:17:32.840Z",
+          "endIso": "2007-12-11T03:11:51.817Z",
+          "frames": 145
+        },
+        {
+          "id": "2100.C-5006-A-URANUS-2017-11-10-imaging",
+          "programme": "2100.C-5006(A)",
+          "archiveTarget": "URANUS",
+          "mode": "imaging",
+          "night": "2017-11-10",
+          "startIso": "2017-11-10T03:01:26.170Z",
+          "endIso": "2017-11-10T03:27:07.840Z",
+          "frames": 6
+        },
+        {
+          "id": "2100.C-5006-C-URANUS-2017-11-11-imaging",
+          "programme": "2100.C-5006(C)",
+          "archiveTarget": "URANUS",
+          "mode": "imaging",
+          "night": "2017-11-11",
+          "startIso": "2017-11-11T03:16:04.277Z",
+          "endIso": "2017-11-11T04:36:31.653Z",
+          "frames": 112
+        },
+        {
+          "id": "2100.C-5006-C-URANUS-2017-11-12-imaging",
+          "programme": "2100.C-5006(C)",
+          "archiveTarget": "URANUS",
+          "mode": "imaging",
+          "night": "2017-11-12",
+          "startIso": "2017-11-12T02:10:22.257Z",
+          "endIso": "2017-11-12T03:48:03.967Z",
+          "frames": 76
+        }
+      ]
+    },
+    {
+      "id": "neptune",
+      "targets": [
+        "NEPTUNE"
+      ],
+      "frames": 744,
+      "programmes": [
+        "079.C-0626(A)",
+        "079.C-0682(A)",
+        "080.C-0483(A)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "079.C-0626-A-NEPTUNE-2007-08-15-imaging",
+          "programme": "079.C-0626(A)",
+          "archiveTarget": "NEPTUNE",
+          "mode": "imaging",
+          "night": "2007-08-15",
+          "startIso": "2007-08-15T00:57:18.347Z",
+          "endIso": "2007-08-15T02:31:56.200Z",
+          "frames": 68
+        },
+        {
+          "id": "079.C-0626-A-NEPTUNE-2007-08-16-imaging",
+          "programme": "079.C-0626(A)",
+          "archiveTarget": "NEPTUNE",
+          "mode": "imaging",
+          "night": "2007-08-16",
+          "startIso": "2007-08-16T02:37:26.217Z",
+          "endIso": "2007-08-16T03:02:37.277Z",
+          "frames": 30
+        },
+        {
+          "id": "079.C-0626-A-NEPTUNE-2007-08-17-imaging",
+          "programme": "079.C-0626(A)",
+          "archiveTarget": "NEPTUNE",
+          "mode": "imaging",
+          "night": "2007-08-17",
+          "startIso": "2007-08-17T00:28:08.543Z",
+          "endIso": "2007-08-17T03:06:38.610Z",
+          "frames": 120
+        },
+        {
+          "id": "079.C-0682-A-NEPTUNE-2007-08-30-imaging",
+          "programme": "079.C-0682(A)",
+          "archiveTarget": "NEPTUNE",
+          "mode": "imaging",
+          "night": "2007-08-30",
+          "startIso": "2007-08-30T00:57:27.347Z",
+          "endIso": "2007-08-30T23:59:39.467Z",
+          "frames": 170
+        },
+        {
+          "id": "079.C-0682-A-NEPTUNE-2007-08-31-imaging",
+          "programme": "079.C-0682(A)",
+          "archiveTarget": "NEPTUNE",
+          "mode": "imaging",
+          "night": "2007-08-31",
+          "startIso": "2007-08-31T00:00:25.727Z",
+          "endIso": "2007-08-31T07:19:29.547Z",
+          "frames": 261
+        },
+        {
+          "id": "080.C-0483-A-NEPTUNE-2007-11-05-imaging",
+          "programme": "080.C-0483(A)",
+          "archiveTarget": "NEPTUNE",
+          "mode": "imaging",
+          "night": "2007-11-05",
+          "startIso": "2007-11-05T00:12:07.413Z",
+          "endIso": "2007-11-05T00:53:36.457Z",
+          "frames": 19
+        },
+        {
+          "id": "080.C-0483-A-NEPTUNE-2007-11-06-imaging",
+          "programme": "080.C-0483(A)",
+          "archiveTarget": "NEPTUNE",
+          "mode": "imaging",
+          "night": "2007-11-06",
+          "startIso": "2007-11-06T00:15:54.533Z",
+          "endIso": "2007-11-06T00:56:32.960Z",
+          "frames": 19
+        },
+        {
+          "id": "080.C-0483-A-NEPTUNE-2007-11-07-imaging",
+          "programme": "080.C-0483(A)",
+          "archiveTarget": "NEPTUNE",
+          "mode": "imaging",
+          "night": "2007-11-07",
+          "startIso": "2007-11-07T00:06:34.670Z",
+          "endIso": "2007-11-07T00:47:25.553Z",
+          "frames": 19
+        },
+        {
+          "id": "080.C-0483-A-NEPTUNE-2007-11-08-imaging",
+          "programme": "080.C-0483(A)",
+          "archiveTarget": "NEPTUNE",
+          "mode": "imaging",
+          "night": "2007-11-08",
+          "startIso": "2007-11-08T01:37:28.910Z",
+          "endIso": "2007-11-08T02:18:20.237Z",
+          "frames": 19
+        },
+        {
+          "id": "080.C-0483-A-NEPTUNE-2007-11-11-imaging",
+          "programme": "080.C-0483(A)",
+          "archiveTarget": "NEPTUNE",
+          "mode": "imaging",
+          "night": "2007-11-11",
+          "startIso": "2007-11-11T00:28:20.633Z",
+          "endIso": "2007-11-11T01:06:11.617Z",
+          "frames": 19
+        }
+      ]
+    },
+    {
+      "id": "titan",
+      "targets": [
+        "TITAN"
+      ],
+      "frames": 558,
+      "programmes": [
+        "072.C-0593(A)",
+        "074.C-0545(A)",
+        "078.C-0777(A)",
+        "60.A-9026(A)",
+        "70.C-0565(A)"
+      ],
+      "modes": [
+        "differential",
+        "fabry-perot",
+        "other"
+      ],
+      "records": [
+        {
+          "id": "70.C-0565-A-TITAN-2002-11-20-other",
+          "programme": "70.C-0565(A)",
+          "archiveTarget": "TITAN",
+          "mode": "other",
+          "night": "2002-11-20",
+          "startIso": "2002-11-20T06:09:11.317Z",
+          "endIso": "2002-11-20T06:29:10.577Z",
+          "frames": 17
+        },
+        {
+          "id": "70.C-0565-A-TITAN-2002-11-25-other",
+          "programme": "70.C-0565(A)",
+          "archiveTarget": "TITAN",
+          "mode": "other",
+          "night": "2002-11-25",
+          "startIso": "2002-11-25T06:15:05.873Z",
+          "endIso": "2002-11-25T08:20:45.100Z",
+          "frames": 59
+        },
+        {
+          "id": "70.C-0565-A-TITAN-2002-11-26-other",
+          "programme": "70.C-0565(A)",
+          "archiveTarget": "TITAN",
+          "mode": "other",
+          "night": "2002-11-26",
+          "startIso": "2002-11-26T05:50:47.160Z",
+          "endIso": "2002-11-26T06:13:01.577Z",
+          "frames": 20
+        },
+        {
+          "id": "072.C-0593-A-TITAN-2003-12-13-other",
+          "programme": "072.C-0593(A)",
+          "archiveTarget": "TITAN",
+          "mode": "other",
+          "night": "2003-12-13",
+          "startIso": "2003-12-13T07:18:03.303Z",
+          "endIso": "2003-12-13T07:46:31.823Z",
+          "frames": 12
+        },
+        {
+          "id": "074.C-0545-A-TITAN-2004-12-19-fabry-perot",
+          "programme": "074.C-0545(A)",
+          "archiveTarget": "TITAN",
+          "mode": "fabry-perot",
+          "night": "2004-12-19",
+          "startIso": "2004-12-19T04:58:50.497Z",
+          "endIso": "2004-12-19T07:57:21.670Z",
+          "frames": 270
+        },
+        {
+          "id": "078.C-0777-A-TITAN-2007-01-30-fabry-perot",
+          "programme": "078.C-0777(A)",
+          "archiveTarget": "TITAN",
+          "mode": "fabry-perot",
+          "night": "2007-01-30",
+          "startIso": "2007-01-30T05:02:31.373Z",
+          "endIso": "2007-01-30T07:27:02.853Z",
+          "frames": 75
+        },
+        {
+          "id": "078.C-0777-A-TITAN-2007-01-31-fabry-perot",
+          "programme": "078.C-0777(A)",
+          "archiveTarget": "TITAN",
+          "mode": "fabry-perot",
+          "night": "2007-01-31",
+          "startIso": "2007-01-31T05:42:31.703Z",
+          "endIso": "2007-01-31T08:28:08.313Z",
+          "frames": 95
+        },
+        {
+          "id": "60.A-9026-A-TITAN-2007-02-15-differential",
+          "programme": "60.A-9026(A)",
+          "archiveTarget": "TITAN",
+          "mode": "differential",
+          "night": "2007-02-15",
+          "startIso": "2007-02-15T04:09:53.907Z",
+          "endIso": "2007-02-15T04:41:43.877Z",
+          "frames": 10
+        }
+      ]
+    },
+    {
+      "id": "kalliope",
+      "targets": [
+        "KALLIOPE"
+      ],
+      "frames": 548,
+      "programmes": [
+        "085.C-0480(I)",
+        "273.C-5034(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "273.C-5034-A-KALLIOPE-2004-06-28-imaging",
+          "programme": "273.C-5034(A)",
+          "archiveTarget": "KALLIOPE",
+          "mode": "imaging",
+          "night": "2004-06-28",
+          "startIso": "2004-06-28T02:13:33.347Z",
+          "endIso": "2004-06-28T02:26:54.800Z",
+          "frames": 10
+        },
+        {
+          "id": "085.C-0480-I-KALLIOPE-2010-08-30-imaging",
+          "programme": "085.C-0480(I)",
+          "archiveTarget": "KALLIOPE",
+          "mode": "imaging",
+          "night": "2010-08-30",
+          "startIso": "2010-08-30T06:03:40.867Z",
+          "endIso": "2010-08-30T07:41:00.427Z",
+          "frames": 525
+        },
+        {
+          "id": "085.C-0480-I-KALLIOPE-2010-08-30-cube",
+          "programme": "085.C-0480(I)",
+          "archiveTarget": "KALLIOPE",
+          "mode": "cube",
+          "night": "2010-08-30",
+          "startIso": "2010-08-30T07:41:48.133Z",
+          "endIso": "2010-08-30T08:03:11.407Z",
+          "frames": 13
+        }
+      ]
+    },
+    {
+      "id": "jupiter",
+      "targets": [
+        "JUPITER",
+        "JUPITER-3H40",
+        "JUPITER-4H30",
+        "JUPITER-5H40"
+      ],
+      "frames": 491,
+      "programmes": [
+        "072.C-0795(C)",
+        "097.C-0415(A)",
+        "281.C-5045(A)",
+        "281.C-5045(B)",
+        "283.C-5045(A)",
+        "283.C-5045(B)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "072.C-0795-C-JUPITER-3H40-2004-03-28-imaging",
+          "programme": "072.C-0795(C)",
+          "archiveTarget": "JUPITER-3H40",
+          "mode": "imaging",
+          "night": "2004-03-28",
+          "startIso": "2004-03-28T03:55:01.637Z",
+          "endIso": "2004-03-28T04:27:42.407Z",
+          "frames": 30
+        },
+        {
+          "id": "072.C-0795-C-JUPITER-4H30-2004-03-28-imaging",
+          "programme": "072.C-0795(C)",
+          "archiveTarget": "JUPITER-4H30",
+          "mode": "imaging",
+          "night": "2004-03-28",
+          "startIso": "2004-03-28T04:37:27.497Z",
+          "endIso": "2004-03-28T05:34:44.590Z",
+          "frames": 50
+        },
+        {
+          "id": "072.C-0795-C-JUPITER-5H40-2004-03-28-imaging",
+          "programme": "072.C-0795(C)",
+          "archiveTarget": "JUPITER-5H40",
+          "mode": "imaging",
+          "night": "2004-03-28",
+          "startIso": "2004-03-28T05:44:34.800Z",
+          "endIso": "2004-03-28T05:54:03.880Z",
+          "frames": 10
+        },
+        {
+          "id": "281.C-5045-A-JUPITER-2008-08-22-imaging",
+          "programme": "281.C-5045(A)",
+          "archiveTarget": "JUPITER",
+          "mode": "imaging",
+          "night": "2008-08-22",
+          "startIso": "2008-08-22T02:33:03.413Z",
+          "endIso": "2008-08-22T03:24:48.393Z",
+          "frames": 64
+        },
+        {
+          "id": "281.C-5045-B-JUPITER-2008-08-30-imaging",
+          "programme": "281.C-5045(B)",
+          "archiveTarget": "JUPITER",
+          "mode": "imaging",
+          "night": "2008-08-30",
+          "startIso": "2008-08-30T01:17:24.830Z",
+          "endIso": "2008-08-30T01:45:50.907Z",
+          "frames": 42
+        },
+        {
+          "id": "283.C-5045-A-JUPITER-2009-07-26-imaging",
+          "programme": "283.C-5045(A)",
+          "archiveTarget": "JUPITER",
+          "mode": "imaging",
+          "night": "2009-07-26",
+          "startIso": "2009-07-26T07:29:16.237Z",
+          "endIso": "2009-07-26T08:13:41.670Z",
+          "frames": 15
+        },
+        {
+          "id": "283.C-5045-B-JUPITER-2009-08-26-imaging",
+          "programme": "283.C-5045(B)",
+          "archiveTarget": "JUPITER",
+          "mode": "imaging",
+          "night": "2009-08-26",
+          "startIso": "2009-08-26T07:24:23.520Z",
+          "endIso": "2009-08-26T07:31:52.450Z",
+          "frames": 63
+        },
+        {
+          "id": "283.C-5045-B-JUPITER-2009-09-10-imaging",
+          "programme": "283.C-5045(B)",
+          "archiveTarget": "JUPITER",
+          "mode": "imaging",
+          "night": "2009-09-10",
+          "startIso": "2009-09-10T03:57:37.250Z",
+          "endIso": "2009-09-10T05:03:24.860Z",
+          "frames": 213
+        },
+        {
+          "id": "097.C-0415-A-JUPITER-2016-04-07-cube",
+          "programme": "097.C-0415(A)",
+          "archiveTarget": "JUPITER",
+          "mode": "cube",
+          "night": "2016-04-07",
+          "startIso": "2016-04-07T04:08:14.700Z",
+          "endIso": "2016-04-07T04:32:45.153Z",
+          "frames": 4
+        }
+      ]
+    },
+    {
+      "id": "betelgeuse",
+      "targets": [
+        "BETELGEUSE"
+      ],
+      "frames": 375,
+      "programmes": [
+        "082.D-0172(A)",
+        "090.D-0662(A)",
+        "090.D-0662(C)",
+        "094.D-0869(C)",
+        "288.D-5025(A)",
+        "288.D-5025(B)",
+        "386.D-0360(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "082.D-0172-A-BETELGEUSE-2009-01-03-cube",
+          "programme": "082.D-0172(A)",
+          "archiveTarget": "BETELGEUSE",
+          "mode": "cube",
+          "night": "2009-01-03",
+          "startIso": "2009-01-03T02:11:42.447Z",
+          "endIso": "2009-01-03T02:44:26.467Z",
+          "frames": 11
+        },
+        {
+          "id": "082.D-0172-A-BETELGEUSE-2009-01-04-cube",
+          "programme": "082.D-0172(A)",
+          "archiveTarget": "BETELGEUSE",
+          "mode": "cube",
+          "night": "2009-01-04",
+          "startIso": "2009-01-04T01:32:15.917Z",
+          "endIso": "2009-01-04T03:42:33.900Z",
+          "frames": 28
+        },
+        {
+          "id": "386.D-0360-A-BETELGEUSE-2011-01-20-cube",
+          "programme": "386.D-0360(A)",
+          "archiveTarget": "BETELGEUSE",
+          "mode": "cube",
+          "night": "2011-01-20",
+          "startIso": "2011-01-20T01:55:55.407Z",
+          "endIso": "2011-01-20T02:22:52.620Z",
+          "frames": 12
+        },
+        {
+          "id": "386.D-0360-A-BETELGEUSE-2011-02-06-cube",
+          "programme": "386.D-0360(A)",
+          "archiveTarget": "BETELGEUSE",
+          "mode": "cube",
+          "night": "2011-02-06",
+          "startIso": "2011-02-06T01:52:58.873Z",
+          "endIso": "2011-02-06T02:07:44.903Z",
+          "frames": 10
+        },
+        {
+          "id": "386.D-0360-A-BETELGEUSE-2011-02-18-cube",
+          "programme": "386.D-0360(A)",
+          "archiveTarget": "BETELGEUSE",
+          "mode": "cube",
+          "night": "2011-02-18",
+          "startIso": "2011-02-18T00:56:11.430Z",
+          "endIso": "2011-02-18T01:14:29.597Z",
+          "frames": 11
+        },
+        {
+          "id": "386.D-0360-A-BETELGEUSE-2011-03-27-cube",
+          "programme": "386.D-0360(A)",
+          "archiveTarget": "BETELGEUSE",
+          "mode": "cube",
+          "night": "2011-03-27",
+          "startIso": "2011-03-27T23:54:17.443Z",
+          "endIso": "2011-03-27T23:59:05.987Z",
+          "frames": 4
+        },
+        {
+          "id": "386.D-0360-A-BETELGEUSE-2011-03-28-cube",
+          "programme": "386.D-0360(A)",
+          "archiveTarget": "BETELGEUSE",
+          "mode": "cube",
+          "night": "2011-03-28",
+          "startIso": "2011-03-28T00:00:44.333Z",
+          "endIso": "2011-03-28T00:09:03.543Z",
+          "frames": 6
+        },
+        {
+          "id": "288.D-5025-A-BETELGEUSE-2011-12-29-cube",
+          "programme": "288.D-5025(A)",
+          "archiveTarget": "BETELGEUSE",
+          "mode": "cube",
+          "night": "2011-12-29",
+          "startIso": "2011-12-29T03:32:27.637Z",
+          "endIso": "2011-12-29T04:25:49.450Z",
+          "frames": 54
+        },
+        {
+          "id": "288.D-5025-B-BETELGEUSE-2012-01-12-cube",
+          "programme": "288.D-5025(B)",
+          "archiveTarget": "BETELGEUSE",
+          "mode": "cube",
+          "night": "2012-01-12",
+          "startIso": "2012-01-12T01:58:52.943Z",
+          "endIso": "2012-01-12T02:33:48.880Z",
+          "frames": 36
+        },
+        {
+          "id": "090.D-0662-C-BETELGEUSE-2012-12-06-cube",
+          "programme": "090.D-0662(C)",
+          "archiveTarget": "BETELGEUSE",
+          "mode": "cube",
+          "night": "2012-12-06",
+          "startIso": "2012-12-06T04:43:03.390Z",
+          "endIso": "2012-12-06T07:28:44.763Z",
+          "frames": 171
+        },
+        {
+          "id": "090.D-0662-A-BETELGEUSE-2013-01-18-cube",
+          "programme": "090.D-0662(A)",
+          "archiveTarget": "BETELGEUSE",
+          "mode": "cube",
+          "night": "2013-01-18",
+          "startIso": "2013-01-18T01:14:42.917Z",
+          "endIso": "2013-01-18T01:37:19.820Z",
+          "frames": 20
+        },
+        {
+          "id": "090.D-0662-A-BETELGEUSE-2013-01-22-cube",
+          "programme": "090.D-0662(A)",
+          "archiveTarget": "BETELGEUSE",
+          "mode": "cube",
+          "night": "2013-01-22",
+          "startIso": "2013-01-22T01:35:45.813Z",
+          "endIso": "2013-01-22T01:39:41.573Z",
+          "frames": 4
+        },
+        {
+          "id": "094.D-0869-C-BETELGEUSE-2015-02-07-cube",
+          "programme": "094.D-0869(C)",
+          "archiveTarget": "BETELGEUSE",
+          "mode": "cube",
+          "night": "2015-02-07",
+          "startIso": "2015-02-07T01:04:31.327Z",
+          "endIso": "2015-02-07T01:07:04.843Z",
+          "frames": 8
+        }
+      ]
+    },
+    {
+      "id": "patroclus",
+      "targets": [
+        "PATROCLUS"
+      ],
+      "frames": 324,
+      "programmes": [
+        "083.C-0517(H)",
+        "087.C-0014(H)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "083.C-0517-H-PATROCLUS-2009-04-15-imaging",
+          "programme": "083.C-0517(H)",
+          "archiveTarget": "PATROCLUS",
+          "mode": "imaging",
+          "night": "2009-04-15",
+          "startIso": "2009-04-15T07:19:17.227Z",
+          "endIso": "2009-04-15T08:59:52.593Z",
+          "frames": 240
+        },
+        {
+          "id": "087.C-0014-H-PATROCLUS-2011-08-27-imaging",
+          "programme": "087.C-0014(H)",
+          "archiveTarget": "PATROCLUS",
+          "mode": "imaging",
+          "night": "2011-08-27",
+          "startIso": "2011-08-27T03:55:29.367Z",
+          "endIso": "2011-08-27T04:09:20.170Z",
+          "frames": 14
+        },
+        {
+          "id": "087.C-0014-H-PATROCLUS-2011-09-03-imaging",
+          "programme": "087.C-0014(H)",
+          "archiveTarget": "PATROCLUS",
+          "mode": "imaging",
+          "night": "2011-09-03",
+          "startIso": "2011-09-03T03:34:38.487Z",
+          "endIso": "2011-09-03T03:48:25.897Z",
+          "frames": 14
+        },
+        {
+          "id": "087.C-0014-H-PATROCLUS-2011-09-08-imaging",
+          "programme": "087.C-0014(H)",
+          "archiveTarget": "PATROCLUS",
+          "mode": "imaging",
+          "night": "2011-09-08",
+          "startIso": "2011-09-08T01:59:29.877Z",
+          "endIso": "2011-09-08T02:13:17.310Z",
+          "frames": 14
+        },
+        {
+          "id": "087.C-0014-H-PATROCLUS-2011-09-09-imaging",
+          "programme": "087.C-0014(H)",
+          "archiveTarget": "PATROCLUS",
+          "mode": "imaging",
+          "night": "2011-09-09",
+          "startIso": "2011-09-09T01:15:10.763Z",
+          "endIso": "2011-09-09T01:28:57.197Z",
+          "frames": 14
+        },
+        {
+          "id": "087.C-0014-H-PATROCLUS-2011-09-11-imaging",
+          "programme": "087.C-0014(H)",
+          "archiveTarget": "PATROCLUS",
+          "mode": "imaging",
+          "night": "2011-09-11",
+          "startIso": "2011-09-11T02:24:14.797Z",
+          "endIso": "2011-09-11T02:38:03.190Z",
+          "frames": 14
+        },
+        {
+          "id": "087.C-0014-H-PATROCLUS-2011-09-12-imaging",
+          "programme": "087.C-0014(H)",
+          "archiveTarget": "PATROCLUS",
+          "mode": "imaging",
+          "night": "2011-09-12",
+          "startIso": "2011-09-12T02:44:29.407Z",
+          "endIso": "2011-09-12T02:58:18.263Z",
+          "frames": 14
+        }
+      ]
+    },
+    {
+      "id": "pluto",
+      "targets": [
+        "PLUTO"
+      ],
+      "frames": 316,
+      "programmes": [
+        "079.C-0351(A)",
+        "081.C-0462(A)",
+        "081.C-0462(B)",
+        "089.C-0314(C)"
+      ],
+      "modes": [
+        "imaging",
+        "spectroscopy"
+      ],
+      "records": [
+        {
+          "id": "079.C-0351-A-PLUTO-2007-04-12-imaging",
+          "programme": "079.C-0351(A)",
+          "archiveTarget": "PLUTO",
+          "mode": "imaging",
+          "night": "2007-04-12",
+          "startIso": "2007-04-12T07:59:22.380Z",
+          "endIso": "2007-04-12T09:48:14.310Z",
+          "frames": 35
+        },
+        {
+          "id": "079.C-0351-A-PLUTO-2007-09-09-imaging",
+          "programme": "079.C-0351(A)",
+          "archiveTarget": "PLUTO",
+          "mode": "imaging",
+          "night": "2007-09-09",
+          "startIso": "2007-09-09T23:20:07.613Z",
+          "endIso": "2007-09-09T23:57:47.730Z",
+          "frames": 17
+        },
+        {
+          "id": "079.C-0351-A-PLUTO-2007-09-10-imaging",
+          "programme": "079.C-0351(A)",
+          "archiveTarget": "PLUTO",
+          "mode": "imaging",
+          "night": "2007-09-10",
+          "startIso": "2007-09-10T00:00:08.507Z",
+          "endIso": "2007-09-10T02:29:56.450Z",
+          "frames": 58
+        },
+        {
+          "id": "081.C-0462-A-PLUTO-2008-06-25-spectroscopy",
+          "programme": "081.C-0462(A)",
+          "archiveTarget": "PLUTO",
+          "mode": "spectroscopy",
+          "night": "2008-06-25",
+          "startIso": "2008-06-25T00:13:39.900Z",
+          "endIso": "2008-06-25T09:02:44.420Z",
+          "frames": 100
+        },
+        {
+          "id": "081.C-0462-B-PLUTO-2008-06-27-imaging",
+          "programme": "081.C-0462(B)",
+          "archiveTarget": "PLUTO",
+          "mode": "imaging",
+          "night": "2008-06-27",
+          "startIso": "2008-06-27T00:03:43.263Z",
+          "endIso": "2008-06-27T08:13:37.777Z",
+          "frames": 31
+        },
+        {
+          "id": "081.C-0462-B-PLUTO-2008-06-27-spectroscopy",
+          "programme": "081.C-0462(B)",
+          "archiveTarget": "PLUTO",
+          "mode": "spectroscopy",
+          "night": "2008-06-27",
+          "startIso": "2008-06-27T01:00:00.917Z",
+          "endIso": "2008-06-27T07:35:35.110Z",
+          "frames": 70
+        },
+        {
+          "id": "089.C-0314-C-PLUTO-2012-07-18-imaging",
+          "programme": "089.C-0314(C)",
+          "archiveTarget": "PLUTO",
+          "mode": "imaging",
+          "night": "2012-07-18",
+          "startIso": "2012-07-18T04:30:42.213Z",
+          "endIso": "2012-07-18T04:32:56.723Z",
+          "frames": 5
+        }
+      ]
+    },
+    {
+      "id": "quaoar",
+      "targets": [
+        "QUAOAR"
+      ],
+      "frames": 279,
+      "programmes": [
+        "087.C-0470(C)",
+        "087.C-0470(F)",
+        "178.C-0036(V)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "178.C-0036-V-QUAOAR-2007-07-04-imaging",
+          "programme": "178.C-0036(V)",
+          "archiveTarget": "QUAOAR",
+          "mode": "imaging",
+          "night": "2007-07-04",
+          "startIso": "2007-07-04T00:16:35.933Z",
+          "endIso": "2007-07-04T04:23:13.303Z",
+          "frames": 232
+        },
+        {
+          "id": "087.C-0470-F-QUAOAR-2011-05-16-imaging",
+          "programme": "087.C-0470(F)",
+          "archiveTarget": "QUAOAR",
+          "mode": "imaging",
+          "night": "2011-05-16",
+          "startIso": "2011-05-16T07:13:30.123Z",
+          "endIso": "2011-05-16T07:57:42.953Z",
+          "frames": 10
+        },
+        {
+          "id": "087.C-0470-F-QUAOAR-2011-05-27-imaging",
+          "programme": "087.C-0470(F)",
+          "archiveTarget": "QUAOAR",
+          "mode": "imaging",
+          "night": "2011-05-27",
+          "startIso": "2011-05-27T03:45:33.187Z",
+          "endIso": "2011-05-27T04:24:09.193Z",
+          "frames": 10
+        },
+        {
+          "id": "087.C-0470-C-QUAOAR-2011-07-21-imaging",
+          "programme": "087.C-0470(C)",
+          "archiveTarget": "QUAOAR",
+          "mode": "imaging",
+          "night": "2011-07-21",
+          "startIso": "2011-07-21T02:24:33.627Z",
+          "endIso": "2011-07-21T04:13:19.943Z",
+          "frames": 27
+        }
+      ]
+    },
+    {
+      "id": "daphne",
+      "targets": [
+        "DAPHNE"
+      ],
+      "frames": 264,
+      "programmes": [
+        "088.C-0617(A)",
+        "091.C-0526(A)",
+        "281.C-5011(A)",
+        "281.C-5011(E)",
+        "281.C-5011(F)",
+        "281.C-5011(G)",
+        "281.C-5011(H)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "281.C-5011-H-DAPHNE-2008-05-10-imaging",
+          "programme": "281.C-5011(H)",
+          "archiveTarget": "DAPHNE",
+          "mode": "imaging",
+          "night": "2008-05-10",
+          "startIso": "2008-05-10T02:41:36.707Z",
+          "endIso": "2008-05-10T02:50:09.990Z",
+          "frames": 24
+        },
+        {
+          "id": "281.C-5011-A-DAPHNE-2008-05-10-imaging",
+          "programme": "281.C-5011(A)",
+          "archiveTarget": "DAPHNE",
+          "mode": "imaging",
+          "night": "2008-05-10",
+          "startIso": "2008-05-10T03:12:37.480Z",
+          "endIso": "2008-05-10T03:21:11.330Z",
+          "frames": 24
+        },
+        {
+          "id": "281.C-5011-G-DAPHNE-2008-05-11-imaging",
+          "programme": "281.C-5011(G)",
+          "archiveTarget": "DAPHNE",
+          "mode": "imaging",
+          "night": "2008-05-11",
+          "startIso": "2008-05-11T00:43:01.873Z",
+          "endIso": "2008-05-11T00:51:32.807Z",
+          "frames": 24
+        },
+        {
+          "id": "281.C-5011-F-DAPHNE-2008-05-14-imaging",
+          "programme": "281.C-5011(F)",
+          "archiveTarget": "DAPHNE",
+          "mode": "imaging",
+          "night": "2008-05-14",
+          "startIso": "2008-05-14T02:18:49.713Z",
+          "endIso": "2008-05-14T02:27:28.497Z",
+          "frames": 24
+        },
+        {
+          "id": "281.C-5011-E-DAPHNE-2008-05-25-imaging",
+          "programme": "281.C-5011(E)",
+          "archiveTarget": "DAPHNE",
+          "mode": "imaging",
+          "night": "2008-05-25",
+          "startIso": "2008-05-25T23:05:47.570Z",
+          "endIso": "2008-05-25T23:14:17.873Z",
+          "frames": 24
+        },
+        {
+          "id": "281.C-5011-E-DAPHNE-2008-05-27-imaging",
+          "programme": "281.C-5011(E)",
+          "archiveTarget": "DAPHNE",
+          "mode": "imaging",
+          "night": "2008-05-27",
+          "startIso": "2008-05-27T02:43:10.463Z",
+          "endIso": "2008-05-27T02:51:39.717Z",
+          "frames": 24
+        },
+        {
+          "id": "281.C-5011-H-DAPHNE-2008-06-02-imaging",
+          "programme": "281.C-5011(H)",
+          "archiveTarget": "DAPHNE",
+          "mode": "imaging",
+          "night": "2008-06-02",
+          "startIso": "2008-06-02T23:41:50.133Z",
+          "endIso": "2008-06-02T23:58:01.850Z",
+          "frames": 24
+        },
+        {
+          "id": "281.C-5011-H-DAPHNE-2008-06-03-imaging",
+          "programme": "281.C-5011(H)",
+          "archiveTarget": "DAPHNE",
+          "mode": "imaging",
+          "night": "2008-06-03",
+          "startIso": "2008-06-03T01:43:52.810Z",
+          "endIso": "2008-06-03T02:00:34.507Z",
+          "frames": 24
+        },
+        {
+          "id": "088.C-0617-A-DAPHNE-2011-11-30-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "DAPHNE",
+          "mode": "cube",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T05:31:09.163Z",
+          "endIso": "2011-11-30T09:06:50.170Z",
+          "frames": 10
+        },
+        {
+          "id": "088.C-0617-A-DAPHNE-2011-11-30-imaging",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "DAPHNE",
+          "mode": "imaging",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T05:34:47.810Z",
+          "endIso": "2011-11-30T09:13:28.163Z",
+          "frames": 38
+        },
+        {
+          "id": "091.C-0526-A-DAPHNE-2013-06-15-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "DAPHNE",
+          "mode": "cube",
+          "night": "2013-06-15",
+          "startIso": "2013-06-15T05:37:15.127Z",
+          "endIso": "2013-06-15T08:19:22.870Z",
+          "frames": 14
+        },
+        {
+          "id": "091.C-0526-A-DAPHNE-2013-06-17-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "DAPHNE",
+          "mode": "cube",
+          "night": "2013-06-17",
+          "startIso": "2013-06-17T06:04:51.943Z",
+          "endIso": "2013-06-17T07:39:29.427Z",
+          "frames": 10
+        }
+      ]
+    },
+    {
+      "id": "vesta",
+      "targets": [
+        "VESTA"
+      ],
+      "frames": 217,
+      "programmes": [
+        "076.C-0580(A)"
+      ],
+      "modes": [
+        "imaging",
+        "spectroscopy"
+      ],
+      "records": [
+        {
+          "id": "076.C-0580-A-VESTA-2006-01-17-imaging",
+          "programme": "076.C-0580(A)",
+          "archiveTarget": "VESTA",
+          "mode": "imaging",
+          "night": "2006-01-17",
+          "startIso": "2006-01-17T02:02:49.900Z",
+          "endIso": "2006-01-17T04:39:28.853Z",
+          "frames": 35
+        },
+        {
+          "id": "076.C-0580-A-VESTA-2006-01-17-spectroscopy",
+          "programme": "076.C-0580(A)",
+          "archiveTarget": "VESTA",
+          "mode": "spectroscopy",
+          "night": "2006-01-17",
+          "startIso": "2006-01-17T03:17:59.417Z",
+          "endIso": "2006-01-17T05:32:41.697Z",
+          "frames": 72
+        },
+        {
+          "id": "076.C-0580-A-VESTA-2006-01-18-imaging",
+          "programme": "076.C-0580(A)",
+          "archiveTarget": "VESTA",
+          "mode": "imaging",
+          "night": "2006-01-18",
+          "startIso": "2006-01-18T01:54:13.157Z",
+          "endIso": "2006-01-18T03:13:41.560Z",
+          "frames": 30
+        },
+        {
+          "id": "076.C-0580-A-VESTA-2006-01-18-spectroscopy",
+          "programme": "076.C-0580(A)",
+          "archiveTarget": "VESTA",
+          "mode": "spectroscopy",
+          "night": "2006-01-18",
+          "startIso": "2006-01-18T02:12:31.483Z",
+          "endIso": "2006-01-18T05:14:40.660Z",
+          "frames": 80
+        }
+      ]
+    },
+    {
+      "id": "lutetia",
+      "targets": [
+        "LUTETIA"
+      ],
+      "frames": 186,
+      "programmes": [
+        "079.C-0493(A)",
+        "087.C-0577(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging",
+        "spectroscopy"
+      ],
+      "records": [
+        {
+          "id": "079.C-0493-A-LUTETIA-2007-06-06-imaging",
+          "programme": "079.C-0493(A)",
+          "archiveTarget": "LUTETIA",
+          "mode": "imaging",
+          "night": "2007-06-06",
+          "startIso": "2007-06-06T00:12:19.513Z",
+          "endIso": "2007-06-06T08:28:52.663Z",
+          "frames": 100
+        },
+        {
+          "id": "079.C-0493-A-LUTETIA-2007-06-06-spectroscopy",
+          "programme": "079.C-0493(A)",
+          "archiveTarget": "LUTETIA",
+          "mode": "spectroscopy",
+          "night": "2007-06-06",
+          "startIso": "2007-06-06T00:37:23.313Z",
+          "endIso": "2007-06-06T08:00:59.617Z",
+          "frames": 80
+        },
+        {
+          "id": "087.C-0577-A-LUTETIA-2011-08-16-cube",
+          "programme": "087.C-0577(A)",
+          "archiveTarget": "LUTETIA",
+          "mode": "cube",
+          "night": "2011-08-16",
+          "startIso": "2011-08-16T01:50:43.123Z",
+          "endIso": "2011-08-16T01:57:52.970Z",
+          "frames": 6
+        }
+      ]
+    },
+    {
+      "id": "eugenia",
+      "targets": [
+        "EUGENIA"
+      ],
+      "frames": 160,
+      "programmes": [
+        "072.C-0016(A)",
+        "088.C-0528(D)",
+        "088.C-0617(A)",
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging",
+        "other"
+      ],
+      "records": [
+        {
+          "id": "70.C-0458-A-EUGENIA-2003-01-13-other",
+          "programme": "70.C-0458(A)",
+          "archiveTarget": "EUGENIA",
+          "mode": "other",
+          "night": "2003-01-13",
+          "startIso": "2003-01-13T01:14:22.240Z",
+          "endIso": "2003-01-13T01:24:00.660Z",
+          "frames": 8
+        },
+        {
+          "id": "072.C-0016-A-EUGENIA-2004-01-07-imaging",
+          "programme": "072.C-0016(A)",
+          "archiveTarget": "EUGENIA",
+          "mode": "imaging",
+          "night": "2004-01-07",
+          "startIso": "2004-01-07T06:38:32.670Z",
+          "endIso": "2004-01-07T07:27:20.697Z",
+          "frames": 8
+        },
+        {
+          "id": "088.C-0528-D-EUGENIA-2011-11-06-imaging",
+          "programme": "088.C-0528(D)",
+          "archiveTarget": "EUGENIA",
+          "mode": "imaging",
+          "night": "2011-11-06",
+          "startIso": "2011-11-06T04:05:48.117Z",
+          "endIso": "2011-11-06T04:08:00.857Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-D-EUGENIA-2011-11-08-imaging",
+          "programme": "088.C-0528(D)",
+          "archiveTarget": "EUGENIA",
+          "mode": "imaging",
+          "night": "2011-11-08",
+          "startIso": "2011-11-08T03:35:24.247Z",
+          "endIso": "2011-11-08T03:37:31.827Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-D-EUGENIA-2011-11-15-imaging",
+          "programme": "088.C-0528(D)",
+          "archiveTarget": "EUGENIA",
+          "mode": "imaging",
+          "night": "2011-11-15",
+          "startIso": "2011-11-15T01:07:25.920Z",
+          "endIso": "2011-11-15T01:09:35.380Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-D-EUGENIA-2011-11-16-imaging",
+          "programme": "088.C-0528(D)",
+          "archiveTarget": "EUGENIA",
+          "mode": "imaging",
+          "night": "2011-11-16",
+          "startIso": "2011-11-16T01:18:41.723Z",
+          "endIso": "2011-11-16T01:20:51.443Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-D-EUGENIA-2011-11-20-imaging",
+          "programme": "088.C-0528(D)",
+          "archiveTarget": "EUGENIA",
+          "mode": "imaging",
+          "night": "2011-11-20",
+          "startIso": "2011-11-20T01:15:28.790Z",
+          "endIso": "2011-11-20T01:17:35.640Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-D-EUGENIA-2011-11-22-imaging",
+          "programme": "088.C-0528(D)",
+          "archiveTarget": "EUGENIA",
+          "mode": "imaging",
+          "night": "2011-11-22",
+          "startIso": "2011-11-22T00:33:34.613Z",
+          "endIso": "2011-11-22T00:35:51.650Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-D-EUGENIA-2011-11-23-imaging",
+          "programme": "088.C-0528(D)",
+          "archiveTarget": "EUGENIA",
+          "mode": "imaging",
+          "night": "2011-11-23",
+          "startIso": "2011-11-23T01:47:24.327Z",
+          "endIso": "2011-11-23T01:49:37.993Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0617-A-EUGENIA-2011-11-29-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "EUGENIA",
+          "mode": "cube",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T00:40:14.863Z",
+          "endIso": "2011-11-29T05:26:53.757Z",
+          "frames": 12
+        },
+        {
+          "id": "088.C-0617-A-EUGENIA-2011-11-29-imaging",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "EUGENIA",
+          "mode": "imaging",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T00:42:13.543Z",
+          "endIso": "2011-11-29T05:33:31.543Z",
+          "frames": 72
+        },
+        {
+          "id": "088.C-0617-A-EUGENIA-2011-11-30-imaging",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "EUGENIA",
+          "mode": "imaging",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T01:40:57.890Z",
+          "endIso": "2011-11-30T04:37:48.153Z",
+          "frames": 28
+        },
+        {
+          "id": "088.C-0617-A-EUGENIA-2011-11-30-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "EUGENIA",
+          "mode": "cube",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T03:21:06.547Z",
+          "endIso": "2011-11-30T04:31:32.730Z",
+          "frames": 4
+        }
+      ]
+    },
+    {
+      "id": "io",
+      "targets": [
+        "IO"
+      ],
+      "frames": 136,
+      "programmes": [
+        "078.C-0472(A)",
+        "078.C-0472(B)",
+        "078.C-0472(C)",
+        "078.C-0472(D)"
+      ],
+      "modes": [
+        "chopping",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "078.C-0472-A-IO-2007-02-25-imaging",
+          "programme": "078.C-0472(A)",
+          "archiveTarget": "IO",
+          "mode": "imaging",
+          "night": "2007-02-25",
+          "startIso": "2007-02-25T07:51:23.127Z",
+          "endIso": "2007-02-25T09:00:59.947Z",
+          "frames": 30
+        },
+        {
+          "id": "078.C-0472-A-IO-2007-02-25-chopping",
+          "programme": "078.C-0472(A)",
+          "archiveTarget": "IO",
+          "mode": "chopping",
+          "night": "2007-02-25",
+          "startIso": "2007-02-25T07:59:46.623Z",
+          "endIso": "2007-02-25T08:07:36.243Z",
+          "frames": 6
+        },
+        {
+          "id": "078.C-0472-B-IO-2007-02-26-imaging",
+          "programme": "078.C-0472(B)",
+          "archiveTarget": "IO",
+          "mode": "imaging",
+          "night": "2007-02-26",
+          "startIso": "2007-02-26T07:26:04.573Z",
+          "endIso": "2007-02-26T08:41:25.623Z",
+          "frames": 30
+        },
+        {
+          "id": "078.C-0472-B-IO-2007-02-26-chopping",
+          "programme": "078.C-0472(B)",
+          "archiveTarget": "IO",
+          "mode": "chopping",
+          "night": "2007-02-26",
+          "startIso": "2007-02-26T07:34:19.903Z",
+          "endIso": "2007-02-26T07:48:57.860Z",
+          "frames": 7
+        },
+        {
+          "id": "078.C-0472-C-IO-2007-03-02-imaging",
+          "programme": "078.C-0472(C)",
+          "archiveTarget": "IO",
+          "mode": "imaging",
+          "night": "2007-03-02",
+          "startIso": "2007-03-02T07:30:09.313Z",
+          "endIso": "2007-03-02T07:49:24.693Z",
+          "frames": 7
+        },
+        {
+          "id": "078.C-0472-C-IO-2007-03-02-chopping",
+          "programme": "078.C-0472(C)",
+          "archiveTarget": "IO",
+          "mode": "chopping",
+          "night": "2007-03-02",
+          "startIso": "2007-03-02T07:38:46.850Z",
+          "endIso": "2007-03-02T07:46:11.347Z",
+          "frames": 6
+        },
+        {
+          "id": "078.C-0472-D-IO-2007-03-03-imaging",
+          "programme": "078.C-0472(D)",
+          "archiveTarget": "IO",
+          "mode": "imaging",
+          "night": "2007-03-03",
+          "startIso": "2007-03-03T06:29:04.577Z",
+          "endIso": "2007-03-03T08:48:42.827Z",
+          "frames": 38
+        },
+        {
+          "id": "078.C-0472-D-IO-2007-03-03-chopping",
+          "programme": "078.C-0472(D)",
+          "archiveTarget": "IO",
+          "mode": "chopping",
+          "night": "2007-03-03",
+          "startIso": "2007-03-03T06:48:19.617Z",
+          "endIso": "2007-03-03T08:59:49.240Z",
+          "frames": 12
+        }
+      ]
+    },
+    {
+      "id": "europa",
+      "targets": [
+        "EUROPA"
+      ],
+      "frames": 98,
+      "programmes": [
+        "088.C-0833(B)"
+      ],
+      "modes": [
+        "spectroscopy"
+      ],
+      "records": [
+        {
+          "id": "088.C-0833-B-EUROPA-2011-10-04-spectroscopy",
+          "programme": "088.C-0833(B)",
+          "archiveTarget": "EUROPA",
+          "mode": "spectroscopy",
+          "night": "2011-10-04",
+          "startIso": "2011-10-04T07:12:57.667Z",
+          "endIso": "2011-10-04T07:25:38.447Z",
+          "frames": 12
+        },
+        {
+          "id": "088.C-0833-B-EUROPA-2011-10-07-spectroscopy",
+          "programme": "088.C-0833(B)",
+          "archiveTarget": "EUROPA",
+          "mode": "spectroscopy",
+          "night": "2011-10-07",
+          "startIso": "2011-10-07T04:08:18.500Z",
+          "endIso": "2011-10-07T04:20:58.723Z",
+          "frames": 12
+        },
+        {
+          "id": "088.C-0833-B-EUROPA-2011-11-07-spectroscopy",
+          "programme": "088.C-0833(B)",
+          "archiveTarget": "EUROPA",
+          "mode": "spectroscopy",
+          "night": "2011-11-07",
+          "startIso": "2011-11-07T03:03:31.813Z",
+          "endIso": "2011-11-07T03:16:04.837Z",
+          "frames": 12
+        },
+        {
+          "id": "088.C-0833-B-EUROPA-2011-12-01-spectroscopy",
+          "programme": "088.C-0833(B)",
+          "archiveTarget": "EUROPA",
+          "mode": "spectroscopy",
+          "night": "2011-12-01",
+          "startIso": "2011-12-01T03:14:55.977Z",
+          "endIso": "2011-12-01T03:30:14.823Z",
+          "frames": 14
+        },
+        {
+          "id": "088.C-0833-B-EUROPA-2012-01-03-spectroscopy",
+          "programme": "088.C-0833(B)",
+          "archiveTarget": "EUROPA",
+          "mode": "spectroscopy",
+          "night": "2012-01-03",
+          "startIso": "2012-01-03T00:38:18.537Z",
+          "endIso": "2012-01-03T00:46:20.540Z",
+          "frames": 12
+        },
+        {
+          "id": "088.C-0833-B-EUROPA-2012-01-08-spectroscopy",
+          "programme": "088.C-0833(B)",
+          "archiveTarget": "EUROPA",
+          "mode": "spectroscopy",
+          "night": "2012-01-08",
+          "startIso": "2012-01-08T01:56:15.813Z",
+          "endIso": "2012-01-08T02:04:14.957Z",
+          "frames": 12
+        },
+        {
+          "id": "088.C-0833-B-EUROPA-2012-01-17-spectroscopy",
+          "programme": "088.C-0833(B)",
+          "archiveTarget": "EUROPA",
+          "mode": "spectroscopy",
+          "night": "2012-01-17",
+          "startIso": "2012-01-17T00:30:06.357Z",
+          "endIso": "2012-01-17T00:38:14.627Z",
+          "frames": 12
+        },
+        {
+          "id": "088.C-0833-B-EUROPA-2012-01-18-spectroscopy",
+          "programme": "088.C-0833(B)",
+          "archiveTarget": "EUROPA",
+          "mode": "spectroscopy",
+          "night": "2012-01-18",
+          "startIso": "2012-01-18T00:24:30.997Z",
+          "endIso": "2012-01-18T00:32:48.270Z",
+          "frames": 12
+        }
+      ]
+    },
+    {
+      "id": "juno",
+      "targets": [
+        "JUNO"
+      ],
+      "frames": 84,
+      "programmes": [
+        "076.C-0678(A)",
+        "086.C-0785(A)",
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "076.C-0678-A-JUNO-2006-01-12-imaging",
+          "programme": "076.C-0678(A)",
+          "archiveTarget": "JUNO",
+          "mode": "imaging",
+          "night": "2006-01-12",
+          "startIso": "2006-01-12T00:45:51.387Z",
+          "endIso": "2006-01-12T06:01:14.820Z",
+          "frames": 51
+        },
+        {
+          "id": "086.C-0785-A-JUNO-2010-12-13-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "JUNO",
+          "mode": "cube",
+          "night": "2010-12-13",
+          "startIso": "2010-12-13T07:29:15.897Z",
+          "endIso": "2010-12-13T09:06:18.393Z",
+          "frames": 10
+        },
+        {
+          "id": "091.C-0526-A-JUNO-2013-06-15-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "JUNO",
+          "mode": "cube",
+          "night": "2013-06-15",
+          "startIso": "2013-06-15T08:25:20.630Z",
+          "endIso": "2013-06-15T09:30:08.753Z",
+          "frames": 8
+        },
+        {
+          "id": "091.C-0526-A-JUNO-2013-06-17-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "JUNO",
+          "mode": "cube",
+          "night": "2013-06-17",
+          "startIso": "2013-06-17T07:17:46.990Z",
+          "endIso": "2013-06-17T10:00:15.797Z",
+          "frames": 15
+        }
+      ]
+    },
+    {
+      "id": "hd-181327",
+      "targets": [
+        "HD181327"
+      ],
+      "frames": 82,
+      "programmes": [
+        "081.C-0519(A)",
+        "279.C-5052(A)",
+        "383.C-0600(A)"
+      ],
+      "modes": [
+        "coronography",
+        "differential",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "279.C-5052-A-HD181327-2007-09-24-coronography",
+          "programme": "279.C-5052(A)",
+          "archiveTarget": "HD181327",
+          "mode": "coronography",
+          "night": "2007-09-24",
+          "startIso": "2007-09-24T23:37:18.933Z",
+          "endIso": "2007-09-24T23:59:55.697Z",
+          "frames": 10
+        },
+        {
+          "id": "279.C-5052-A-HD181327-2007-09-25-coronography",
+          "programme": "279.C-5052(A)",
+          "archiveTarget": "HD181327",
+          "mode": "coronography",
+          "night": "2007-09-25",
+          "startIso": "2007-09-25T00:02:23.397Z",
+          "endIso": "2007-09-25T00:42:49.847Z",
+          "frames": 18
+        },
+        {
+          "id": "081.C-0519-A-HD181327-2008-08-07-differential",
+          "programme": "081.C-0519(A)",
+          "archiveTarget": "HD181327",
+          "mode": "differential",
+          "night": "2008-08-07",
+          "startIso": "2008-08-07T03:28:48.453Z",
+          "endIso": "2008-08-07T04:03:50.903Z",
+          "frames": 12
+        },
+        {
+          "id": "081.C-0519-A-HD181327-2008-08-07-imaging",
+          "programme": "081.C-0519(A)",
+          "archiveTarget": "HD181327",
+          "mode": "imaging",
+          "night": "2008-08-07",
+          "startIso": "2008-08-07T03:33:23.123Z",
+          "endIso": "2008-08-07T03:59:37.883Z",
+          "frames": 33
+        },
+        {
+          "id": "383.C-0600-A-HD181327-2009-08-29-coronography",
+          "programme": "383.C-0600(A)",
+          "archiveTarget": "HD181327",
+          "mode": "coronography",
+          "night": "2009-08-29",
+          "startIso": "2009-08-29T01:20:12.230Z",
+          "endIso": "2009-08-29T02:43:33.807Z",
+          "frames": 9
+        }
+      ]
+    },
+    {
+      "id": "pallas",
+      "targets": [
+        "PALLAS"
+      ],
+      "frames": 80,
+      "programmes": [
+        "074.C-0502(A)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "074.C-0502-A-PALLAS-2005-02-02-imaging",
+          "programme": "074.C-0502(A)",
+          "archiveTarget": "PALLAS",
+          "mode": "imaging",
+          "night": "2005-02-02",
+          "startIso": "2005-02-02T06:22:00.913Z",
+          "endIso": "2005-02-02T08:16:53.327Z",
+          "frames": 44
+        },
+        {
+          "id": "074.C-0502-A-PALLAS-2005-03-12-imaging",
+          "programme": "074.C-0502(A)",
+          "archiveTarget": "PALLAS",
+          "mode": "imaging",
+          "night": "2005-03-12",
+          "startIso": "2005-03-12T06:00:55.363Z",
+          "endIso": "2005-03-12T06:12:06.427Z",
+          "frames": 18
+        },
+        {
+          "id": "074.C-0502-A-PALLAS-2005-03-13-imaging",
+          "programme": "074.C-0502(A)",
+          "archiveTarget": "PALLAS",
+          "mode": "imaging",
+          "night": "2005-03-13",
+          "startIso": "2005-03-13T04:41:28.917Z",
+          "endIso": "2005-03-13T04:52:44.117Z",
+          "frames": 18
+        }
+      ]
+    },
+    {
+      "id": "ganymede",
+      "targets": [
+        "GANYMEDE"
+      ],
+      "frames": 77,
+      "programmes": [
+        "079.C-0626(A)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "079.C-0626-A-GANYMEDE-2007-08-15-imaging",
+          "programme": "079.C-0626(A)",
+          "archiveTarget": "GANYMEDE",
+          "mode": "imaging",
+          "night": "2007-08-15",
+          "startIso": "2007-08-15T23:57:43.517Z",
+          "endIso": "2007-08-15T23:59:45.250Z",
+          "frames": 10
+        },
+        {
+          "id": "079.C-0626-A-GANYMEDE-2007-08-16-imaging",
+          "programme": "079.C-0626(A)",
+          "archiveTarget": "GANYMEDE",
+          "mode": "imaging",
+          "night": "2007-08-16",
+          "startIso": "2007-08-16T00:03:52.947Z",
+          "endIso": "2007-08-16T02:14:31.353Z",
+          "frames": 67
+        }
+      ]
+    },
+    {
+      "id": "hermione",
+      "targets": [
+        "HERMIONE",
+        "__HERMIONE"
+      ],
+      "frames": 70,
+      "programmes": [
+        "072.C-0016(A)",
+        "088.C-0528(F)",
+        "089.C-0944(A)",
+        "091.C-0526(A)",
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging",
+        "other"
+      ],
+      "records": [
+        {
+          "id": "70.C-0458-A-HERMIONE-2003-01-13-other",
+          "programme": "70.C-0458(A)",
+          "archiveTarget": "HERMIONE",
+          "mode": "other",
+          "night": "2003-01-13",
+          "startIso": "2003-01-13T00:58:54.657Z",
+          "endIso": "2003-01-13T01:03:57.567Z",
+          "frames": 8
+        },
+        {
+          "id": "70.C-0458-A-HERMIONE-2003-01-16-other",
+          "programme": "70.C-0458(A)",
+          "archiveTarget": "HERMIONE",
+          "mode": "other",
+          "night": "2003-01-16",
+          "startIso": "2003-01-16T01:03:25.207Z",
+          "endIso": "2003-01-16T01:07:39.700Z",
+          "frames": 4
+        },
+        {
+          "id": "70.C-0458-A-HERMIONE-2003-01-17-other",
+          "programme": "70.C-0458(A)",
+          "archiveTarget": "HERMIONE",
+          "mode": "other",
+          "night": "2003-01-17",
+          "startIso": "2003-01-17T00:54:42.790Z",
+          "endIso": "2003-01-17T00:58:53.697Z",
+          "frames": 4
+        },
+        {
+          "id": "70.C-0458-A-HERMIONE-2003-01-18-other",
+          "programme": "70.C-0458(A)",
+          "archiveTarget": "HERMIONE",
+          "mode": "other",
+          "night": "2003-01-18",
+          "startIso": "2003-01-18T01:37:43.763Z",
+          "endIso": "2003-01-18T01:41:59.587Z",
+          "frames": 4
+        },
+        {
+          "id": "072.C-0016-A-__HERMIONE-2004-01-04-imaging",
+          "programme": "072.C-0016(A)",
+          "archiveTarget": "__HERMIONE",
+          "mode": "imaging",
+          "night": "2004-01-04",
+          "startIso": "2004-01-04T05:02:19.323Z",
+          "endIso": "2004-01-04T05:06:46.187Z",
+          "frames": 4
+        },
+        {
+          "id": "072.C-0016-A-HERMIONE-2004-01-04-imaging",
+          "programme": "072.C-0016(A)",
+          "archiveTarget": "HERMIONE",
+          "mode": "imaging",
+          "night": "2004-01-04",
+          "startIso": "2004-01-04T05:23:33.253Z",
+          "endIso": "2004-01-04T05:37:18.847Z",
+          "frames": 6
+        },
+        {
+          "id": "072.C-0016-A-HERMIONE-2004-01-07-imaging",
+          "programme": "072.C-0016(A)",
+          "archiveTarget": "HERMIONE",
+          "mode": "imaging",
+          "night": "2004-01-07",
+          "startIso": "2004-01-07T05:55:26.607Z",
+          "endIso": "2004-01-07T05:59:55.990Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-F-HERMIONE-2012-02-19-imaging",
+          "programme": "088.C-0528(F)",
+          "archiveTarget": "HERMIONE",
+          "mode": "imaging",
+          "night": "2012-02-19",
+          "startIso": "2012-02-19T09:09:03.407Z",
+          "endIso": "2012-02-19T09:13:08.460Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-F-HERMIONE-2012-02-22-imaging",
+          "programme": "088.C-0528(F)",
+          "archiveTarget": "HERMIONE",
+          "mode": "imaging",
+          "night": "2012-02-22",
+          "startIso": "2012-02-22T05:59:18.357Z",
+          "endIso": "2012-02-22T06:03:23.343Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-F-HERMIONE-2012-03-21-imaging",
+          "programme": "088.C-0528(F)",
+          "archiveTarget": "HERMIONE",
+          "mode": "imaging",
+          "night": "2012-03-21",
+          "startIso": "2012-03-21T03:28:29.830Z",
+          "endIso": "2012-03-21T03:32:35.587Z",
+          "frames": 4
+        },
+        {
+          "id": "089.C-0944-A-HERMIONE-2012-05-02-imaging",
+          "programme": "089.C-0944(A)",
+          "archiveTarget": "HERMIONE",
+          "mode": "imaging",
+          "night": "2012-05-02",
+          "startIso": "2012-05-02T03:23:51.300Z",
+          "endIso": "2012-05-02T03:28:07.557Z",
+          "frames": 5
+        },
+        {
+          "id": "091.C-0526-A-HERMIONE-2013-06-15-imaging",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "HERMIONE",
+          "mode": "imaging",
+          "night": "2013-06-15",
+          "startIso": "2013-06-15T06:05:25.833Z",
+          "endIso": "2013-06-15T06:09:12.167Z",
+          "frames": 4
+        },
+        {
+          "id": "091.C-0526-A-HERMIONE-2013-06-17-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "HERMIONE",
+          "mode": "cube",
+          "night": "2013-06-17",
+          "startIso": "2013-06-17T04:41:17.727Z",
+          "endIso": "2013-06-17T04:43:43.473Z",
+          "frames": 5
+        },
+        {
+          "id": "091.C-0526-A-HERMIONE-2013-06-17-imaging",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "HERMIONE",
+          "mode": "imaging",
+          "night": "2013-06-17",
+          "startIso": "2013-06-17T05:51:20.507Z",
+          "endIso": "2013-06-17T06:56:00.407Z",
+          "frames": 10
+        }
+      ]
+    },
+    {
+      "id": "minerva",
+      "targets": [
+        "MINERVA"
+      ],
+      "frames": 70,
+      "programmes": [
+        "088.C-0528(B)",
+        "089.C-0565(D)",
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "088.C-0528-B-MINERVA-2012-02-19-imaging",
+          "programme": "088.C-0528(B)",
+          "archiveTarget": "MINERVA",
+          "mode": "imaging",
+          "night": "2012-02-19",
+          "startIso": "2012-02-19T08:56:54.627Z",
+          "endIso": "2012-02-19T08:59:00.147Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-B-MINERVA-2012-02-22-imaging",
+          "programme": "088.C-0528(B)",
+          "archiveTarget": "MINERVA",
+          "mode": "imaging",
+          "night": "2012-02-22",
+          "startIso": "2012-02-22T05:45:11.483Z",
+          "endIso": "2012-02-22T05:47:19.177Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-B-MINERVA-2012-02-26-imaging",
+          "programme": "088.C-0528(B)",
+          "archiveTarget": "MINERVA",
+          "mode": "imaging",
+          "night": "2012-02-26",
+          "startIso": "2012-02-26T04:26:20.660Z",
+          "endIso": "2012-02-26T04:28:26.607Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-B-MINERVA-2012-03-21-imaging",
+          "programme": "088.C-0528(B)",
+          "archiveTarget": "MINERVA",
+          "mode": "imaging",
+          "night": "2012-03-21",
+          "startIso": "2012-03-21T03:02:09.577Z",
+          "endIso": "2012-03-21T03:04:18.607Z",
+          "frames": 4
+        },
+        {
+          "id": "089.C-0565-D-MINERVA-2012-06-29-cube",
+          "programme": "089.C-0565(D)",
+          "archiveTarget": "MINERVA",
+          "mode": "cube",
+          "night": "2012-06-29",
+          "startIso": "2012-06-29T23:46:59.400Z",
+          "endIso": "2012-06-29T23:51:27.667Z",
+          "frames": 6
+        },
+        {
+          "id": "089.C-0565-D-MINERVA-2012-07-01-cube",
+          "programme": "089.C-0565(D)",
+          "archiveTarget": "MINERVA",
+          "mode": "cube",
+          "night": "2012-07-01",
+          "startIso": "2012-07-01T00:42:28.370Z",
+          "endIso": "2012-07-01T00:46:58.897Z",
+          "frames": 6
+        },
+        {
+          "id": "089.C-0565-D-MINERVA-2012-07-02-cube",
+          "programme": "089.C-0565(D)",
+          "archiveTarget": "MINERVA",
+          "mode": "cube",
+          "night": "2012-07-02",
+          "startIso": "2012-07-02T00:59:28.583Z",
+          "endIso": "2012-07-02T01:03:55.803Z",
+          "frames": 6
+        },
+        {
+          "id": "088.C-0528-B-MINERVA-2012-07-14-imaging",
+          "programme": "088.C-0528(B)",
+          "archiveTarget": "MINERVA",
+          "mode": "imaging",
+          "night": "2012-07-14",
+          "startIso": "2012-07-14T00:11:39.650Z",
+          "endIso": "2012-07-14T00:13:50.137Z",
+          "frames": 4
+        },
+        {
+          "id": "091.C-0526-A-MINERVA-2013-06-15-imaging",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "MINERVA",
+          "mode": "imaging",
+          "night": "2013-06-15",
+          "startIso": "2013-06-15T06:24:55.120Z",
+          "endIso": "2013-06-15T10:10:19.203Z",
+          "frames": 17
+        },
+        {
+          "id": "091.C-0526-A-MINERVA-2013-06-17-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "MINERVA",
+          "mode": "cube",
+          "night": "2013-06-17",
+          "startIso": "2013-06-17T07:09:49.717Z",
+          "endIso": "2013-06-17T09:41:31.517Z",
+          "frames": 15
+        }
+      ]
+    },
+    {
+      "id": "elektra",
+      "targets": [
+        "ELEKTRA"
+      ],
+      "frames": 60,
+      "programmes": [
+        "072.C-0016(A)",
+        "089.C-0944(B)",
+        "091.C-0526(A)",
+        "095.C-0618(B)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "072.C-0016-A-ELEKTRA-2004-01-07-imaging",
+          "programme": "072.C-0016(A)",
+          "archiveTarget": "ELEKTRA",
+          "mode": "imaging",
+          "night": "2004-01-07",
+          "startIso": "2004-01-07T04:50:46.573Z",
+          "endIso": "2004-01-07T05:14:47.670Z",
+          "frames": 12
+        },
+        {
+          "id": "089.C-0944-B-ELEKTRA-2012-05-04-imaging",
+          "programme": "089.C-0944(B)",
+          "archiveTarget": "ELEKTRA",
+          "mode": "imaging",
+          "night": "2012-05-04",
+          "startIso": "2012-05-04T04:54:52.203Z",
+          "endIso": "2012-05-04T05:13:28.880Z",
+          "frames": 10
+        },
+        {
+          "id": "091.C-0526-A-ELEKTRA-2013-06-15-imaging",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "ELEKTRA",
+          "mode": "imaging",
+          "night": "2013-06-15",
+          "startIso": "2013-06-15T09:01:59.627Z",
+          "endIso": "2013-06-15T09:54:51.857Z",
+          "frames": 8
+        },
+        {
+          "id": "091.C-0526-A-ELEKTRA-2013-06-17-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "ELEKTRA",
+          "mode": "cube",
+          "night": "2013-06-17",
+          "startIso": "2013-06-17T05:07:39.707Z",
+          "endIso": "2013-06-17T09:10:11.387Z",
+          "frames": 25
+        },
+        {
+          "id": "095.C-0618-B-ELEKTRA-2016-02-16-cube",
+          "programme": "095.C-0618(B)",
+          "archiveTarget": "ELEKTRA",
+          "mode": "cube",
+          "night": "2016-02-16",
+          "startIso": "2016-02-16T03:03:10.527Z",
+          "endIso": "2016-02-16T03:15:50.673Z",
+          "frames": 5
+        }
+      ]
+    },
+    {
+      "id": "ganymed",
+      "targets": [
+        "GANYMED"
+      ],
+      "frames": 54,
+      "programmes": [
+        "488.L-0182(A)",
+        "488.L-0182(B)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "488.L-0182-A-GANYMED-2011-11-12-cube",
+          "programme": "488.L-0182(A)",
+          "archiveTarget": "GANYMED",
+          "mode": "cube",
+          "night": "2011-11-12",
+          "startIso": "2011-11-12T01:39:12.127Z",
+          "endIso": "2011-11-12T04:28:03.203Z",
+          "frames": 46
+        },
+        {
+          "id": "488.L-0182-A-GANYMED-2011-11-13-cube",
+          "programme": "488.L-0182(A)",
+          "archiveTarget": "GANYMED",
+          "mode": "cube",
+          "night": "2011-11-13",
+          "startIso": "2011-11-13T01:10:14.817Z",
+          "endIso": "2011-11-13T01:11:36.997Z",
+          "frames": 2
+        },
+        {
+          "id": "488.L-0182-B-GANYMED-2011-11-13-cube",
+          "programme": "488.L-0182(B)",
+          "archiveTarget": "GANYMED",
+          "mode": "cube",
+          "night": "2011-11-13",
+          "startIso": "2011-11-13T03:21:38.980Z",
+          "endIso": "2011-11-13T04:33:54.443Z",
+          "frames": 6
+        }
+      ]
+    },
+    {
+      "id": "psyche",
+      "targets": [
+        "PSYCHE"
+      ],
+      "frames": 44,
+      "programmes": [
+        "086.C-0785(A)",
+        "60.A-9026(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "086.C-0785-A-PSYCHE-2010-12-13-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "PSYCHE",
+          "mode": "cube",
+          "night": "2010-12-13",
+          "startIso": "2010-12-13T02:10:38.907Z",
+          "endIso": "2010-12-13T05:24:44.697Z",
+          "frames": 17
+        },
+        {
+          "id": "60.A-9026-A-PSYCHE-2010-12-13-cube",
+          "programme": "60.A-9026(A)",
+          "archiveTarget": "PSYCHE",
+          "mode": "cube",
+          "night": "2010-12-13",
+          "startIso": "2010-12-13T05:15:08.557Z",
+          "endIso": "2010-12-13T05:15:08.557Z",
+          "frames": 1
+        },
+        {
+          "id": "086.C-0785-A-PSYCHE-2010-12-14-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "PSYCHE",
+          "mode": "cube",
+          "night": "2010-12-14",
+          "startIso": "2010-12-14T03:24:16.697Z",
+          "endIso": "2010-12-14T06:20:04.800Z",
+          "frames": 26
+        }
+      ]
+    },
+    {
+      "id": "iris",
+      "targets": [
+        "IRIS"
+      ],
+      "frames": 41,
+      "programmes": [
+        "086.C-0785(A)",
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "086.C-0785-A-IRIS-2010-12-13-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "IRIS",
+          "mode": "cube",
+          "night": "2010-12-13",
+          "startIso": "2010-12-13T06:04:26.273Z",
+          "endIso": "2010-12-13T07:05:07.403Z",
+          "frames": 12
+        },
+        {
+          "id": "086.C-0785-A-IRIS-2010-12-14-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "IRIS",
+          "mode": "cube",
+          "night": "2010-12-14",
+          "startIso": "2010-12-14T05:23:25.103Z",
+          "endIso": "2010-12-14T05:32:19.777Z",
+          "frames": 6
+        },
+        {
+          "id": "091.C-0526-A-IRIS-2013-06-15-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "IRIS",
+          "mode": "cube",
+          "night": "2013-06-15",
+          "startIso": "2013-06-15T08:39:12.887Z",
+          "endIso": "2013-06-15T10:01:54.837Z",
+          "frames": 8
+        },
+        {
+          "id": "091.C-0526-A-IRIS-2013-06-17-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "IRIS",
+          "mode": "cube",
+          "night": "2013-06-17",
+          "startIso": "2013-06-17T07:29:59.280Z",
+          "endIso": "2013-06-17T10:08:58.377Z",
+          "frames": 15
+        }
+      ]
+    },
+    {
+      "id": "ceres",
+      "targets": [
+        "CERES"
+      ],
+      "frames": 40,
+      "programmes": [
+        "080.C-0881(C)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "080.C-0881-C-CERES-2007-11-11-imaging",
+          "programme": "080.C-0881(C)",
+          "archiveTarget": "CERES",
+          "mode": "imaging",
+          "night": "2007-11-11",
+          "startIso": "2007-11-11T02:39:14.590Z",
+          "endIso": "2007-11-11T02:51:35.603Z",
+          "frames": 40
+        }
+      ]
+    },
+    {
+      "id": "sylvia",
+      "targets": [
+        "SYLVIA"
+      ],
+      "frames": 40,
+      "programmes": [
+        "085.C-0480(H)",
+        "088.C-0528(E)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "085.C-0480-H-SYLVIA-2010-08-23-imaging",
+          "programme": "085.C-0480(H)",
+          "archiveTarget": "SYLVIA",
+          "mode": "imaging",
+          "night": "2010-08-23",
+          "startIso": "2010-08-23T05:12:37.623Z",
+          "endIso": "2010-08-23T05:35:43.820Z",
+          "frames": 12
+        },
+        {
+          "id": "088.C-0528-E-SYLVIA-2011-10-07-imaging",
+          "programme": "088.C-0528(E)",
+          "archiveTarget": "SYLVIA",
+          "mode": "imaging",
+          "night": "2011-10-07",
+          "startIso": "2011-10-07T02:36:53.347Z",
+          "endIso": "2011-10-07T02:39:00.487Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-E-SYLVIA-2011-11-06-imaging",
+          "programme": "088.C-0528(E)",
+          "archiveTarget": "SYLVIA",
+          "mode": "imaging",
+          "night": "2011-11-06",
+          "startIso": "2011-11-06T02:02:12.107Z",
+          "endIso": "2011-11-06T02:04:17.860Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-E-SYLVIA-2011-11-08-imaging",
+          "programme": "088.C-0528(E)",
+          "archiveTarget": "SYLVIA",
+          "mode": "imaging",
+          "night": "2011-11-08",
+          "startIso": "2011-11-08T03:04:33.487Z",
+          "endIso": "2011-11-08T03:06:39.107Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-E-SYLVIA-2011-11-10-imaging",
+          "programme": "088.C-0528(E)",
+          "archiveTarget": "SYLVIA",
+          "mode": "imaging",
+          "night": "2011-11-10",
+          "startIso": "2011-11-10T01:03:51.660Z",
+          "endIso": "2011-11-10T01:05:57.637Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-E-SYLVIA-2011-11-15-imaging",
+          "programme": "088.C-0528(E)",
+          "archiveTarget": "SYLVIA",
+          "mode": "imaging",
+          "night": "2011-11-15",
+          "startIso": "2011-11-15T00:35:40.953Z",
+          "endIso": "2011-11-15T00:37:49.400Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-E-SYLVIA-2011-11-16-imaging",
+          "programme": "088.C-0528(E)",
+          "archiveTarget": "SYLVIA",
+          "mode": "imaging",
+          "night": "2011-11-16",
+          "startIso": "2011-11-16T01:05:58.383Z",
+          "endIso": "2011-11-16T01:08:07.857Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-E-SYLVIA-2011-11-20-imaging",
+          "programme": "088.C-0528(E)",
+          "archiveTarget": "SYLVIA",
+          "mode": "imaging",
+          "night": "2011-11-20",
+          "startIso": "2011-11-20T01:05:08.463Z",
+          "endIso": "2011-11-20T01:07:16.387Z",
+          "frames": 4
+        }
+      ]
+    },
+    {
+      "id": "cybele",
+      "targets": [
+        "CYBELE"
+      ],
+      "frames": 38,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "088.C-0617-A-CYBELE-2011-11-29-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "CYBELE",
+          "mode": "cube",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T05:11:05.127Z",
+          "endIso": "2011-11-29T08:51:29.677Z",
+          "frames": 16
+        },
+        {
+          "id": "088.C-0617-A-CYBELE-2011-11-29-imaging",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "CYBELE",
+          "mode": "imaging",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T05:13:45.757Z",
+          "endIso": "2011-11-29T05:18:37.157Z",
+          "frames": 12
+        },
+        {
+          "id": "088.C-0617-A-CYBELE-2011-11-30-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "CYBELE",
+          "mode": "cube",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T05:00:39.777Z",
+          "endIso": "2011-11-30T07:29:49.173Z",
+          "frames": 6
+        },
+        {
+          "id": "088.C-0617-A-CYBELE-2011-11-30-imaging",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "CYBELE",
+          "mode": "imaging",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T07:31:55.843Z",
+          "endIso": "2011-11-30T07:33:20.137Z",
+          "frames": 4
+        }
+      ]
+    },
+    {
+      "id": "euphrosyne",
+      "targets": [
+        "EUPHROSYNE"
+      ],
+      "frames": 36,
+      "programmes": [
+        "088.C-0617(A)",
+        "488.L-0182(B)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "488.L-0182-B-EUPHROSYNE-2011-11-13-cube",
+          "programme": "488.L-0182(B)",
+          "archiveTarget": "EUPHROSYNE",
+          "mode": "cube",
+          "night": "2011-11-13",
+          "startIso": "2011-11-13T03:05:52.237Z",
+          "endIso": "2011-11-13T04:18:57.423Z",
+          "frames": 8
+        },
+        {
+          "id": "088.C-0617-A-EUPHROSYNE-2011-11-29-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "EUPHROSYNE",
+          "mode": "cube",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T01:12:17.507Z",
+          "endIso": "2011-11-29T03:45:15.727Z",
+          "frames": 10
+        },
+        {
+          "id": "088.C-0617-A-EUPHROSYNE-2011-11-29-imaging",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "EUPHROSYNE",
+          "mode": "imaging",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T01:13:57.713Z",
+          "endIso": "2011-11-29T01:16:56.213Z",
+          "frames": 12
+        },
+        {
+          "id": "088.C-0617-A-EUPHROSYNE-2011-11-30-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "EUPHROSYNE",
+          "mode": "cube",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T00:40:19.627Z",
+          "endIso": "2011-11-30T02:21:23.997Z",
+          "frames": 6
+        }
+      ]
+    },
+    {
+      "id": "eris",
+      "targets": [
+        "ERIS"
+      ],
+      "frames": 35,
+      "programmes": [
+        "085.C-0480(J)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "085.C-0480-J-ERIS-2010-09-16-imaging",
+          "programme": "085.C-0480(J)",
+          "archiveTarget": "ERIS",
+          "mode": "imaging",
+          "night": "2010-09-16",
+          "startIso": "2010-09-16T06:02:33.467Z",
+          "endIso": "2010-09-16T09:56:19.880Z",
+          "frames": 35
+        }
+      ]
+    },
+    {
+      "id": "irene",
+      "targets": [
+        "IRENE"
+      ],
+      "frames": 32,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "088.C-0617-A-IRENE-2011-11-29-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "IRENE",
+          "mode": "cube",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T00:53:02.387Z",
+          "endIso": "2011-11-29T06:21:28.653Z",
+          "frames": 14
+        },
+        {
+          "id": "088.C-0617-A-IRENE-2011-11-29-imaging",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "IRENE",
+          "mode": "imaging",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T00:54:40.747Z",
+          "endIso": "2011-11-29T00:57:45.407Z",
+          "frames": 12
+        },
+        {
+          "id": "088.C-0617-A-IRENE-2011-11-30-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "IRENE",
+          "mode": "cube",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T00:33:31.410Z",
+          "endIso": "2011-11-30T04:47:12.977Z",
+          "frames": 6
+        }
+      ]
+    },
+    {
+      "id": "amphitrite",
+      "targets": [
+        "AMPHITRITE"
+      ],
+      "frames": 28,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "088.C-0617-A-AMPHITRITE-2011-11-29-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "AMPHITRITE",
+          "mode": "cube",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T01:02:53.300Z",
+          "endIso": "2011-11-29T03:38:58.257Z",
+          "frames": 8
+        },
+        {
+          "id": "088.C-0617-A-AMPHITRITE-2011-11-29-imaging",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "AMPHITRITE",
+          "mode": "imaging",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T01:04:35.547Z",
+          "endIso": "2011-11-29T01:07:37.537Z",
+          "frames": 12
+        },
+        {
+          "id": "088.C-0617-A-AMPHITRITE-2011-11-30-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "AMPHITRITE",
+          "mode": "cube",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T00:47:32.450Z",
+          "endIso": "2011-11-30T03:08:54.317Z",
+          "frames": 8
+        }
+      ]
+    },
+    {
+      "id": "nausikaa",
+      "targets": [
+        "NAUSIKAA"
+      ],
+      "frames": 26,
+      "programmes": [
+        "088.C-0617(A)",
+        "488.L-0182(B)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "488.L-0182-B-NAUSIKAA-2011-11-13-cube",
+          "programme": "488.L-0182(B)",
+          "archiveTarget": "NAUSIKAA",
+          "mode": "cube",
+          "night": "2011-11-13",
+          "startIso": "2011-11-13T02:50:42.427Z",
+          "endIso": "2011-11-13T03:49:32.610Z",
+          "frames": 8
+        },
+        {
+          "id": "088.C-0617-A-NAUSIKAA-2011-11-28-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "NAUSIKAA",
+          "mode": "cube",
+          "night": "2011-11-28",
+          "startIso": "2011-11-28T23:57:57.613Z",
+          "endIso": "2011-11-28T23:58:40.230Z",
+          "frames": 2
+        },
+        {
+          "id": "088.C-0617-A-NAUSIKAA-2011-11-28-imaging",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "NAUSIKAA",
+          "mode": "imaging",
+          "night": "2011-11-28",
+          "startIso": "2011-11-28T23:59:38.757Z",
+          "endIso": "2011-11-28T23:59:52.847Z",
+          "frames": 2
+        },
+        {
+          "id": "088.C-0617-A-NAUSIKAA-2011-11-29-imaging",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "NAUSIKAA",
+          "mode": "imaging",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T00:00:06.943Z",
+          "endIso": "2011-11-29T00:02:41.930Z",
+          "frames": 10
+        },
+        {
+          "id": "088.C-0617-A-NAUSIKAA-2011-11-30-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "NAUSIKAA",
+          "mode": "cube",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T01:09:43.317Z",
+          "endIso": "2011-11-30T02:47:49.650Z",
+          "frames": 4
+        }
+      ]
+    },
+    {
+      "id": "camilla",
+      "targets": [
+        "CAMILLA"
+      ],
+      "frames": 24,
+      "programmes": [
+        "087.C-0014(K)",
+        "088.C-0528(C)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "087.C-0014-K-CAMILLA-2011-09-03-imaging",
+          "programme": "087.C-0014(K)",
+          "archiveTarget": "CAMILLA",
+          "mode": "imaging",
+          "night": "2011-09-03",
+          "startIso": "2011-09-03T04:33:47.830Z",
+          "endIso": "2011-09-03T04:37:27.863Z",
+          "frames": 4
+        },
+        {
+          "id": "087.C-0014-K-CAMILLA-2011-09-27-imaging",
+          "programme": "087.C-0014(K)",
+          "archiveTarget": "CAMILLA",
+          "mode": "imaging",
+          "night": "2011-09-27",
+          "startIso": "2011-09-27T05:02:21.580Z",
+          "endIso": "2011-09-27T05:06:01.437Z",
+          "frames": 4
+        },
+        {
+          "id": "087.C-0014-K-CAMILLA-2011-09-29-imaging",
+          "programme": "087.C-0014(K)",
+          "archiveTarget": "CAMILLA",
+          "mode": "imaging",
+          "night": "2011-09-29",
+          "startIso": "2011-09-29T05:19:00.647Z",
+          "endIso": "2011-09-29T05:22:35.857Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-C-CAMILLA-2011-10-07-imaging",
+          "programme": "088.C-0528(C)",
+          "archiveTarget": "CAMILLA",
+          "mode": "imaging",
+          "night": "2011-10-07",
+          "startIso": "2011-10-07T03:36:38.227Z",
+          "endIso": "2011-10-07T03:40:45.600Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-C-CAMILLA-2011-11-08-imaging",
+          "programme": "088.C-0528(C)",
+          "archiveTarget": "CAMILLA",
+          "mode": "imaging",
+          "night": "2011-11-08",
+          "startIso": "2011-11-08T03:18:56.173Z",
+          "endIso": "2011-11-08T03:23:03.920Z",
+          "frames": 4
+        },
+        {
+          "id": "088.C-0528-C-CAMILLA-2011-11-10-imaging",
+          "programme": "088.C-0528(C)",
+          "archiveTarget": "CAMILLA",
+          "mode": "imaging",
+          "night": "2011-11-10",
+          "startIso": "2011-11-10T01:19:24.573Z",
+          "endIso": "2011-11-10T01:23:34.217Z",
+          "frames": 4
+        }
+      ]
+    },
+    {
+      "id": "europa-52",
+      "targets": [
+        "52EUROPA-26T0340",
+        "52_EUROPA"
+      ],
+      "frames": 24,
+      "programmes": [
+        "079.C-0528(A)",
+        "087.C-0257(A)"
+      ],
+      "modes": [
+        "imaging",
+        "spectroscopy"
+      ],
+      "records": [
+        {
+          "id": "079.C-0528-A-52EUROPA-26T0340-2007-07-26-imaging",
+          "programme": "079.C-0528(A)",
+          "archiveTarget": "52EUROPA-26T0340",
+          "mode": "imaging",
+          "night": "2007-07-26",
+          "startIso": "2007-07-26T03:40:04.773Z",
+          "endIso": "2007-07-26T03:43:51.830Z",
+          "frames": 4
+        },
+        {
+          "id": "087.C-0257-A-52_EUROPA-2011-05-25-spectroscopy",
+          "programme": "087.C-0257(A)",
+          "archiveTarget": "52_EUROPA",
+          "mode": "spectroscopy",
+          "night": "2011-05-25",
+          "startIso": "2011-05-25T23:45:08.577Z",
+          "endIso": "2011-05-25T23:50:55.167Z",
+          "frames": 8
+        },
+        {
+          "id": "087.C-0257-A-52_EUROPA-2011-05-25-imaging",
+          "programme": "087.C-0257(A)",
+          "archiveTarget": "52_EUROPA",
+          "mode": "imaging",
+          "night": "2011-05-25",
+          "startIso": "2011-05-25T23:52:28.433Z",
+          "endIso": "2011-05-25T23:55:06.247Z",
+          "frames": 12
+        }
+      ]
+    },
+    {
+      "id": "victoria",
+      "targets": [
+        "VICTORIA"
+      ],
+      "frames": 24,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "088.C-0617-A-VICTORIA-2011-11-29-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "VICTORIA",
+          "mode": "cube",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T02:45:04.303Z",
+          "endIso": "2011-11-29T07:57:11.757Z",
+          "frames": 16
+        },
+        {
+          "id": "088.C-0617-A-VICTORIA-2011-11-30-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "VICTORIA",
+          "mode": "cube",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T03:46:22.613Z",
+          "endIso": "2011-11-30T07:39:52.883Z",
+          "frames": 8
+        }
+      ]
+    },
+    {
+      "id": "emma",
+      "targets": [
+        "EMMA"
+      ],
+      "frames": 22,
+      "programmes": [
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "091.C-0526-A-EMMA-2013-06-15-imaging",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "EMMA",
+          "mode": "imaging",
+          "night": "2013-06-15",
+          "startIso": "2013-06-15T05:07:52.253Z",
+          "endIso": "2013-06-15T07:08:09.123Z",
+          "frames": 12
+        },
+        {
+          "id": "091.C-0526-A-EMMA-2013-06-17-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "EMMA",
+          "mode": "cube",
+          "night": "2013-06-17",
+          "startIso": "2013-06-17T04:58:38.423Z",
+          "endIso": "2013-06-17T06:27:59.457Z",
+          "frames": 10
+        }
+      ]
+    },
+    {
+      "id": "hektor",
+      "targets": [
+        "HEKTOR"
+      ],
+      "frames": 21,
+      "programmes": [
+        "380.C-0490(A)",
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "imaging",
+        "other"
+      ],
+      "records": [
+        {
+          "id": "70.C-0458-A-HEKTOR-2003-01-14-other",
+          "programme": "70.C-0458(A)",
+          "archiveTarget": "HEKTOR",
+          "mode": "other",
+          "night": "2003-01-14",
+          "startIso": "2003-01-14T08:23:15.707Z",
+          "endIso": "2003-01-14T08:27:32.697Z",
+          "frames": 4
+        },
+        {
+          "id": "380.C-0490-A-HEKTOR-2007-11-05-imaging",
+          "programme": "380.C-0490(A)",
+          "archiveTarget": "HEKTOR",
+          "mode": "imaging",
+          "night": "2007-11-05",
+          "startIso": "2007-11-05T01:36:56.637Z",
+          "endIso": "2007-11-05T01:41:38.373Z",
+          "frames": 4
+        },
+        {
+          "id": "380.C-0490-A-HEKTOR-2007-11-06-imaging",
+          "programme": "380.C-0490(A)",
+          "archiveTarget": "HEKTOR",
+          "mode": "imaging",
+          "night": "2007-11-06",
+          "startIso": "2007-11-06T01:31:13.583Z",
+          "endIso": "2007-11-06T01:35:59.620Z",
+          "frames": 4
+        },
+        {
+          "id": "380.C-0490-A-HEKTOR-2007-11-07-imaging",
+          "programme": "380.C-0490(A)",
+          "archiveTarget": "HEKTOR",
+          "mode": "imaging",
+          "night": "2007-11-07",
+          "startIso": "2007-11-07T02:04:31.707Z",
+          "endIso": "2007-11-07T02:09:09.883Z",
+          "frames": 4
+        },
+        {
+          "id": "380.C-0490-A-HEKTOR-2007-11-08-imaging",
+          "programme": "380.C-0490(A)",
+          "archiveTarget": "HEKTOR",
+          "mode": "imaging",
+          "night": "2007-11-08",
+          "startIso": "2007-11-08T02:44:55.647Z",
+          "endIso": "2007-11-08T03:02:21.463Z",
+          "frames": 5
+        }
+      ]
+    },
+    {
+      "id": "egeria",
+      "targets": [
+        "EGERIA"
+      ],
+      "frames": 20,
+      "programmes": [
+        "087.C-0577(A)",
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube",
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "087.C-0577-A-EGERIA-2011-08-16-cube",
+          "programme": "087.C-0577(A)",
+          "archiveTarget": "EGERIA",
+          "mode": "cube",
+          "night": "2011-08-16",
+          "startIso": "2011-08-16T08:26:02.730Z",
+          "endIso": "2011-08-16T08:37:41.130Z",
+          "frames": 6
+        },
+        {
+          "id": "088.C-0617-A-EGERIA-2011-11-29-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "EGERIA",
+          "mode": "cube",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T00:11:18.110Z",
+          "endIso": "2011-11-29T00:12:00.547Z",
+          "frames": 2
+        },
+        {
+          "id": "088.C-0617-A-EGERIA-2011-11-29-imaging",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "EGERIA",
+          "mode": "imaging",
+          "night": "2011-11-29",
+          "startIso": "2011-11-29T00:12:55.727Z",
+          "endIso": "2011-11-29T00:15:57.673Z",
+          "frames": 12
+        }
+      ]
+    },
+    {
+      "id": "hebe",
+      "targets": [
+        "HEBE"
+      ],
+      "frames": 20,
+      "programmes": [
+        "086.C-0785(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "086.C-0785-A-HEBE-2010-12-13-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "HEBE",
+          "mode": "cube",
+          "night": "2010-12-13",
+          "startIso": "2010-12-13T01:18:02.210Z",
+          "endIso": "2010-12-13T02:46:18.610Z",
+          "frames": 8
+        },
+        {
+          "id": "086.C-0785-A-HEBE-2010-12-14-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "HEBE",
+          "mode": "cube",
+          "night": "2010-12-14",
+          "startIso": "2010-12-14T00:41:16.400Z",
+          "endIso": "2010-12-14T02:17:29.187Z",
+          "frames": 12
+        }
+      ]
+    },
+    {
+      "id": "kleopatra",
+      "targets": [
+        "KLEOPATRA"
+      ],
+      "frames": 20,
+      "programmes": [
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "091.C-0526-A-KLEOPATRA-2013-06-15-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "KLEOPATRA",
+          "mode": "cube",
+          "night": "2013-06-15",
+          "startIso": "2013-06-15T10:30:20.897Z",
+          "endIso": "2013-06-15T10:41:06.537Z",
+          "frames": 8
+        },
+        {
+          "id": "091.C-0526-A-KLEOPATRA-2013-06-17-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "KLEOPATRA",
+          "mode": "cube",
+          "night": "2013-06-17",
+          "startIso": "2013-06-17T10:23:19.167Z",
+          "endIso": "2013-06-17T10:36:00.143Z",
+          "frames": 12
+        }
+      ]
+    },
+    {
+      "id": "vibilia",
+      "targets": [
+        "VIBILIA"
+      ],
+      "frames": 20,
+      "programmes": [
+        "086.C-0785(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "086.C-0785-A-VIBILIA-2010-12-13-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "VIBILIA",
+          "mode": "cube",
+          "night": "2010-12-13",
+          "startIso": "2010-12-13T02:25:48.857Z",
+          "endIso": "2010-12-13T03:44:04.803Z",
+          "frames": 8
+        },
+        {
+          "id": "086.C-0785-A-VIBILIA-2010-12-14-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "VIBILIA",
+          "mode": "cube",
+          "night": "2010-12-14",
+          "startIso": "2010-12-14T01:23:27.750Z",
+          "endIso": "2010-12-14T02:59:29.960Z",
+          "frames": 12
+        }
+      ]
+    },
+    {
+      "id": "thisbe",
+      "targets": [
+        "THISBE"
+      ],
+      "frames": 18,
+      "programmes": [
+        "086.C-0785(A)",
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "086.C-0785-A-THISBE-2010-12-13-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "THISBE",
+          "mode": "cube",
+          "night": "2010-12-13",
+          "startIso": "2010-12-13T05:52:28.227Z",
+          "endIso": "2010-12-13T05:56:39.430Z",
+          "frames": 4
+        },
+        {
+          "id": "086.C-0785-A-THISBE-2010-12-14-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "THISBE",
+          "mode": "cube",
+          "night": "2010-12-14",
+          "startIso": "2010-12-14T03:12:46.667Z",
+          "endIso": "2010-12-14T03:15:45.530Z",
+          "frames": 4
+        },
+        {
+          "id": "091.C-0526-A-THISBE-2013-06-17-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "THISBE",
+          "mode": "cube",
+          "night": "2013-06-17",
+          "startIso": "2013-06-17T05:23:30.163Z",
+          "endIso": "2013-06-17T05:58:09.787Z",
+          "frames": 10
+        }
+      ]
+    },
+    {
+      "id": "flora",
+      "targets": [
+        "FLORA"
+      ],
+      "frames": 15,
+      "programmes": [
+        "086.C-0785(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "086.C-0785-A-FLORA-2010-12-13-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "FLORA",
+          "mode": "cube",
+          "night": "2010-12-13",
+          "startIso": "2010-12-13T00:19:57.100Z",
+          "endIso": "2010-12-13T01:02:54.507Z",
+          "frames": 7
+        },
+        {
+          "id": "086.C-0785-A-FLORA-2010-12-14-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "FLORA",
+          "mode": "cube",
+          "night": "2010-12-14",
+          "startIso": "2010-12-14T00:23:12.647Z",
+          "endIso": "2010-12-14T01:53:59.470Z",
+          "frames": 8
+        }
+      ]
+    },
+    {
+      "id": "harmonia",
+      "targets": [
+        "HARMONIA"
+      ],
+      "frames": 12,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "088.C-0617-A-HARMONIA-2011-11-30-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "HARMONIA",
+          "mode": "cube",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T00:26:54.387Z",
+          "endIso": "2011-11-30T05:24:09.250Z",
+          "frames": 12
+        }
+      ]
+    },
+    {
+      "id": "metis",
+      "targets": [
+        "METIS"
+      ],
+      "frames": 12,
+      "programmes": [
+        "087.C-0577(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "087.C-0577-A-METIS-2011-08-16-cube",
+          "programme": "087.C-0577(A)",
+          "archiveTarget": "METIS",
+          "mode": "cube",
+          "night": "2011-08-16",
+          "startIso": "2011-08-16T02:52:10.163Z",
+          "endIso": "2011-08-16T07:28:41.187Z",
+          "frames": 12
+        }
+      ]
+    },
+    {
+      "id": "eva",
+      "targets": [
+        "EVA"
+      ],
+      "frames": 10,
+      "programmes": [
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "091.C-0526-A-EVA-2013-06-17-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "EVA",
+          "mode": "cube",
+          "night": "2013-06-17",
+          "startIso": "2013-06-17T05:33:49.177Z",
+          "endIso": "2013-06-17T08:19:50.993Z",
+          "frames": 10
+        }
+      ]
+    },
+    {
+      "id": "laetitia",
+      "targets": [
+        "LAETITIA"
+      ],
+      "frames": 10,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "088.C-0617-A-LAETITIA-2011-11-30-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "LAETITIA",
+          "mode": "cube",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T05:16:09.293Z",
+          "endIso": "2011-11-30T08:53:12.643Z",
+          "frames": 10
+        }
+      ]
+    },
+    {
+      "id": "artemis",
+      "targets": [
+        "ARTEMIS"
+      ],
+      "frames": 9,
+      "programmes": [
+        "482.L-0802(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "482.L-0802-A-ARTEMIS-2009-01-08-cube",
+          "programme": "482.L-0802(A)",
+          "archiveTarget": "ARTEMIS",
+          "mode": "cube",
+          "night": "2009-01-08",
+          "startIso": "2009-01-08T04:40:22.583Z",
+          "endIso": "2009-01-08T05:37:08.857Z",
+          "frames": 9
+        }
+      ]
+    },
+    {
+      "id": "althaea",
+      "targets": [
+        "ALTHAEA"
+      ],
+      "frames": 8,
+      "programmes": [
+        "072.C-0016(A)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "072.C-0016-A-ALTHAEA-2004-01-06-imaging",
+          "programme": "072.C-0016(A)",
+          "archiveTarget": "ALTHAEA",
+          "mode": "imaging",
+          "night": "2004-01-06",
+          "startIso": "2004-01-06T05:38:31.583Z",
+          "endIso": "2004-01-06T05:42:58.993Z",
+          "frames": 4
+        },
+        {
+          "id": "072.C-0016-A-ALTHAEA-2004-01-07-imaging",
+          "programme": "072.C-0016(A)",
+          "archiveTarget": "ALTHAEA",
+          "mode": "imaging",
+          "night": "2004-01-07",
+          "startIso": "2004-01-07T06:09:09.917Z",
+          "endIso": "2004-01-07T06:13:37.947Z",
+          "frames": 4
+        }
+      ]
+    },
+    {
+      "id": "diotima",
+      "targets": [
+        "DIOTIMA"
+      ],
+      "frames": 8,
+      "programmes": [
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "091.C-0526-A-DIOTIMA-2013-06-15-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "DIOTIMA",
+          "mode": "cube",
+          "night": "2013-06-15",
+          "startIso": "2013-06-15T08:02:18.893Z",
+          "endIso": "2013-06-15T10:17:33.757Z",
+          "frames": 8
+        }
+      ]
+    },
+    {
+      "id": "euterpe",
+      "targets": [
+        "EUTERPE"
+      ],
+      "frames": 8,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "088.C-0617-A-EUTERPE-2011-11-30-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "EUTERPE",
+          "mode": "cube",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T00:13:00.103Z",
+          "endIso": "2011-11-30T03:40:01.227Z",
+          "frames": 8
+        }
+      ]
+    },
+    {
+      "id": "lucina",
+      "targets": [
+        "LUCINA"
+      ],
+      "frames": 8,
+      "programmes": [
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "other"
+      ],
+      "records": [
+        {
+          "id": "70.C-0458-A-LUCINA-2003-01-13-other",
+          "programme": "70.C-0458(A)",
+          "archiveTarget": "LUCINA",
+          "mode": "other",
+          "night": "2003-01-13",
+          "startIso": "2003-01-13T01:32:55.957Z",
+          "endIso": "2003-01-13T01:36:56.907Z",
+          "frames": 8
+        }
+      ]
+    },
+    {
+      "id": "mentor",
+      "targets": [
+        "MENTOR"
+      ],
+      "frames": 8,
+      "programmes": [
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "other"
+      ],
+      "records": [
+        {
+          "id": "70.C-0458-A-MENTOR-2003-01-13-other",
+          "programme": "70.C-0458(A)",
+          "archiveTarget": "MENTOR",
+          "mode": "other",
+          "night": "2003-01-13",
+          "startIso": "2003-01-13T02:31:55.683Z",
+          "endIso": "2003-01-13T02:41:53.630Z",
+          "frames": 8
+        }
+      ]
+    },
+    {
+      "id": "anahita",
+      "targets": [
+        "ANAHITA"
+      ],
+      "frames": 6,
+      "programmes": [
+        "482.L-0802(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "482.L-0802-A-ANAHITA-2009-01-08-cube",
+          "programme": "482.L-0802(A)",
+          "archiveTarget": "ANAHITA",
+          "mode": "cube",
+          "night": "2009-01-08",
+          "startIso": "2009-01-08T00:51:57.307Z",
+          "endIso": "2009-01-08T01:27:27.517Z",
+          "frames": 6
+        }
+      ]
+    },
+    {
+      "id": "herculina",
+      "targets": [
+        "HERCULINA"
+      ],
+      "frames": 6,
+      "programmes": [
+        "087.C-0577(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "087.C-0577-A-HERCULINA-2011-08-16-cube",
+          "programme": "087.C-0577(A)",
+          "archiveTarget": "HERCULINA",
+          "mode": "cube",
+          "night": "2011-08-16",
+          "startIso": "2011-08-16T02:25:27.287Z",
+          "endIso": "2011-08-16T02:32:02.973Z",
+          "frames": 6
+        }
+      ]
+    },
+    {
+      "id": "moon",
+      "targets": [
+        "MOON"
+      ],
+      "frames": 6,
+      "programmes": [
+        "283.C-5034(A)",
+        "60.A-9026(A)"
+      ],
+      "modes": [
+        "cube",
+        "other"
+      ],
+      "records": [
+        {
+          "id": "60.A-9026-A-MOON-2009-08-11-other",
+          "programme": "60.A-9026(A)",
+          "archiveTarget": "MOON",
+          "mode": "other",
+          "night": "2009-08-11",
+          "startIso": "2009-08-11T07:21:43.923Z",
+          "endIso": "2009-08-11T07:21:43.923Z",
+          "frames": 1
+        },
+        {
+          "id": "283.C-5034-A-MOON-2009-08-11-cube",
+          "programme": "283.C-5034(A)",
+          "archiveTarget": "MOON",
+          "mode": "cube",
+          "night": "2009-08-11",
+          "startIso": "2009-08-11T08:18:56.647Z",
+          "endIso": "2009-08-11T08:24:51.580Z",
+          "frames": 5
+        }
+      ]
+    },
+    {
+      "id": "sappho",
+      "targets": [
+        "SAPPHO"
+      ],
+      "frames": 6,
+      "programmes": [
+        "088.C-0617(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "088.C-0617-A-SAPPHO-2011-11-30-cube",
+          "programme": "088.C-0617(A)",
+          "archiveTarget": "SAPPHO",
+          "mode": "cube",
+          "night": "2011-11-30",
+          "startIso": "2011-11-30T02:32:54.383Z",
+          "endIso": "2011-11-30T06:13:45.260Z",
+          "frames": 6
+        }
+      ]
+    },
+    {
+      "id": "bamberga",
+      "targets": [
+        "BAMBERGA"
+      ],
+      "frames": 5,
+      "programmes": [
+        "091.C-0526(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "091.C-0526-A-BAMBERGA-2013-06-17-cube",
+          "programme": "091.C-0526(A)",
+          "archiveTarget": "BAMBERGA",
+          "mode": "cube",
+          "night": "2013-06-17",
+          "startIso": "2013-06-17T09:52:42.213Z",
+          "endIso": "2013-06-17T09:54:17.923Z",
+          "frames": 5
+        }
+      ]
+    },
+    {
+      "id": "hestia",
+      "targets": [
+        "HESTIA"
+      ],
+      "frames": 5,
+      "programmes": [
+        "086.C-0785(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "086.C-0785-A-HESTIA-2010-12-13-cube",
+          "programme": "086.C-0785(A)",
+          "archiveTarget": "HESTIA",
+          "mode": "cube",
+          "night": "2010-12-13",
+          "startIso": "2010-12-13T00:39:15.757Z",
+          "endIso": "2010-12-13T00:44:59.327Z",
+          "frames": 5
+        }
+      ]
+    },
+    {
+      "id": "circe",
+      "targets": [
+        "CIRCE"
+      ],
+      "frames": 4,
+      "programmes": [
+        "072.C-0016(A)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "072.C-0016-A-CIRCE-2004-01-05-imaging",
+          "programme": "072.C-0016(A)",
+          "archiveTarget": "CIRCE",
+          "mode": "imaging",
+          "night": "2004-01-05",
+          "startIso": "2004-01-05T05:02:28.793Z",
+          "endIso": "2004-01-05T05:06:57.547Z",
+          "frames": 4
+        }
+      ]
+    },
+    {
+      "id": "erigone",
+      "targets": [
+        "ERIGONE"
+      ],
+      "frames": 4,
+      "programmes": [
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "other"
+      ],
+      "records": [
+        {
+          "id": "70.C-0458-A-ERIGONE-2003-01-14-other",
+          "programme": "70.C-0458(A)",
+          "archiveTarget": "ERIGONE",
+          "mode": "other",
+          "night": "2003-01-14",
+          "startIso": "2003-01-14T06:50:50.447Z",
+          "endIso": "2003-01-14T06:55:05.773Z",
+          "frames": 4
+        }
+      ]
+    },
+    {
+      "id": "feronia",
+      "targets": [
+        "FERONIA"
+      ],
+      "frames": 4,
+      "programmes": [
+        "072.C-0016(A)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "072.C-0016-A-FERONIA-2004-01-07-imaging",
+          "programme": "072.C-0016(A)",
+          "archiveTarget": "FERONIA",
+          "mode": "imaging",
+          "night": "2004-01-07",
+          "startIso": "2004-01-07T06:54:40.867Z",
+          "endIso": "2004-01-07T06:59:07.897Z",
+          "frames": 4
+        }
+      ]
+    },
+    {
+      "id": "meliboea",
+      "targets": [
+        "MELIBOEA"
+      ],
+      "frames": 4,
+      "programmes": [
+        "072.C-0016(A)"
+      ],
+      "modes": [
+        "imaging"
+      ],
+      "records": [
+        {
+          "id": "072.C-0016-A-MELIBOEA-2004-01-06-imaging",
+          "programme": "072.C-0016(A)",
+          "archiveTarget": "MELIBOEA",
+          "mode": "imaging",
+          "night": "2004-01-06",
+          "startIso": "2004-01-06T03:19:06.383Z",
+          "endIso": "2004-01-06T03:23:30.670Z",
+          "frames": 4
+        }
+      ]
+    },
+    {
+      "id": "nemausa",
+      "targets": [
+        "NEMAUSA"
+      ],
+      "frames": 4,
+      "programmes": [
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "other"
+      ],
+      "records": [
+        {
+          "id": "70.C-0458-A-NEMAUSA-2003-01-13-other",
+          "programme": "70.C-0458(A)",
+          "archiveTarget": "NEMAUSA",
+          "mode": "other",
+          "night": "2003-01-13",
+          "startIso": "2003-01-13T03:52:38.997Z",
+          "endIso": "2003-01-13T03:56:55.720Z",
+          "frames": 4
+        }
+      ]
+    },
+    {
+      "id": "unitas",
+      "targets": [
+        "UNITAS"
+      ],
+      "frames": 4,
+      "programmes": [
+        "70.C-0458(A)"
+      ],
+      "modes": [
+        "other"
+      ],
+      "records": [
+        {
+          "id": "70.C-0458-A-UNITAS-2003-01-14-other",
+          "programme": "70.C-0458(A)",
+          "archiveTarget": "UNITAS",
+          "mode": "other",
+          "night": "2003-01-14",
+          "startIso": "2003-01-14T06:39:22.787Z",
+          "endIso": "2003-01-14T06:43:41.160Z",
+          "frames": 4
+        }
+      ]
+    },
+    {
+      "id": "doris",
+      "targets": [
+        "DORIS"
+      ],
+      "frames": 3,
+      "programmes": [
+        "087.C-0577(A)"
+      ],
+      "modes": [
+        "cube"
+      ],
+      "records": [
+        {
+          "id": "087.C-0577-A-DORIS-2011-08-16-cube",
+          "programme": "087.C-0577(A)",
+          "archiveTarget": "DORIS",
+          "mode": "cube",
+          "night": "2011-08-16",
+          "startIso": "2011-08-16T08:03:32.813Z",
+          "endIso": "2011-08-16T08:08:00.960Z",
+          "frames": 3
+        }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "mode": "app",
+      "frames": 6165,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "chopping",
+      "frames": 2909,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "coronography",
+      "frames": 80281,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "cube",
+      "frames": 136973,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "differential",
+      "frames": 12692,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "fabry-perot",
+      "frames": 3441,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "imaging",
+      "frames": 231839,
+      "programs": [
+        "ceres-080C0881"
+      ],
+      "receipts": [
+        "ceres-080C0881.COADDED_IMG.reproduction.json"
+      ],
+      "state": "reduced",
+      "reason": "1 receipt(s) beside 1 pinned program(s)."
+    },
+    {
+      "mode": "other",
+      "frames": 40038,
+      "programs": [],
+      "receipts": [],
+      "state": "not reduced",
+      "reason": "No program of this mode is pinned."
+    },
+    {
+      "mode": "sam",
+      "frames": 21243,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "sampol",
+      "frames": 3075,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "sdi4",
+      "frames": 2351,
+      "programs": [],
+      "receipts": [],
+      "state": "refused",
+      "reason": "This route refuses the mode: the technique changes what a frame means and these recipes do not undo it."
+    },
+    {
+      "mode": "spectroscopy",
+      "frames": 9438,
+      "programs": [
+        "europa-088C0833"
+      ],
+      "receipts": [
+        "europa-088C0833.SPC_NOD_COMBINED.reproduction.json",
+        "europa-088C0833.spectrum.reproduction.json"
+      ],
+      "state": "reduced",
+      "reason": "2 receipt(s) beside 1 pinned program(s)."
+    }
+  ],
+  "receiptProblems": []
+}

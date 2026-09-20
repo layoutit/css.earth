@@ -1,7 +1,7 @@
 import { isArray } from '../../../../src/platform/is-array.mts';
 import { readFile } from "node:fs/promises";
 import { gunzipSync } from "node:zlib";
-import { isPreparedCityAssetUrl } from "../../../../src/platform/prepared-map/city-asset-url.mts";
+import { isPreparedCityAssetUrl } from "../../../../src/renderers/css/dist/preparation.js";
 
 import type { CityCoveragePlan } from '../contracts.mts';
 import { parsePublishedCoverage, parseIndexHead } from '../source-records.mts';
