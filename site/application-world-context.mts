@@ -29,7 +29,7 @@ const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => [obje
 const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
 const minorMoonIds = minorMoonOrbitIds(applicationContext.bodies);
 const hiddenOrbitIds = [
-  ...SCENE_OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id),
+  ...SCENE_OBJECTS.filter(object => ['trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id),
   ...minorMoonIds,
 ];
 const annotationPriorities = Object.fromEntries(SCENE_OBJECTS.map(object =>
