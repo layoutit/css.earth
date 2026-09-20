@@ -498,7 +498,7 @@ export function createRetainedCubicSkyOrbit({
         flight.sample(frame.rotation);
         publish();
       };
-      if (windowTarget.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (transition?.durationMilliseconds === 0 || windowTarget.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         sample(1);
         return Promise.resolve({ completed: true });
       }

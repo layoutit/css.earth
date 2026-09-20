@@ -37,8 +37,8 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
         const pose = record(navigation.camera, 'navigation camera', ['controlPitch', 'controlYaw', 'controlRoll', 'zoom', 'transition']);
         if (pose.transition !== undefined) {
           const transition = record(pose.transition, 'camera transition', ['durationMilliseconds', 'preserveZoom']);
-          const duration = positive(transition.durationMilliseconds, 'camera transition duration');
-          if (duration > 10000) fail('camera transition exceeds 10 seconds');
+          const duration = finite(transition.durationMilliseconds, 'camera transition duration');
+          if (duration < 0 || duration > 10000) fail('camera transition duration must be between 0 and 10 seconds');
           boolean(transition.preserveZoom, 'camera transition preserve zoom');
         }
         if (pose.controlRoll !== undefined) finite(pose.controlRoll, 'navigation roll');

@@ -107,7 +107,8 @@ telescope export MAP/map.fits.product.json --output sphere --out SPHERE
 
 The navigation file pins SPICE kernels and chooses WCS or a supported fitted disc.
 `project` writes a body map and a figure. The sphere is a standalone HTML file using
-the target's physical radii and the existing PolyCSS renderer. Projection preserves
+the target's existing css.earth standard sphere and physical scale. CSS, JavaScript
+and base64 images are embedded. The projection ellipsoid is recorded separately. Projection preserves
 unknown beam resolution and does not qualify scientific publication. See the
 [navigation contract and oracle](../../docs/virtual-telescopes.md#from-a-measurement-to-a-surface-and-sphere).
 Physical 3D point/volume handoffs remain unavailable.

@@ -783,8 +783,19 @@ telescope export europa-map/map.fits.product.json --output sphere --out europa-s
 surface resampling. PlanetMapper owns its SPICE geometry through SpiceyPy;
 its projection dependency is pyproj/PROJ. Astropy owns the numerical FITS
 output and Matplotlib the figure. The sphere is one standalone HTML file,
-prepared through the existing PolyCSS geometry and retained-DOM renderer.
-It contains no PlanetMapper GUI, remote scripts, canvas or WebGL.
+using the target's existing standard sphere—the same lane as Mercury. The
+prepared mesh, camera, facing/depth bindings and physical frame are reused;
+the shared raster lane packs the measurement into a surface lens. CSS,
+JavaScript and base64 images are embedded, and the document prohibits network
+requests. There is no export-owned mesh or camera. A target without the existing
+standard sphere package is refused. The export also embeds the prepared world
+context and uses the application's physical-camera mount. Prepare that context
+with `pnpm prepare:world-context` before exporting.
+
+The projection uses the pinned navigation ellipsoid. The display keeps the
+body package's standard reference sphere and physical scale; both are recorded.
+Quantitative colours are unlit. The output contains no PlanetMapper GUI, remote
+scripts, canvas or WebGL.
 
 Navigation is an explicit scientific input. `navigation.json` contains:
 
@@ -845,18 +856,20 @@ coordinates to native FITS coordinates; the map excludes emission angles above 6
 ![Europa projected brightness](images/telescopes/europa-projected-brightness.png)
 
 The independent reference traces orthographic rays through the pinned triaxial
-ellipsoid using NumPy and draws their sampled values using Matplotlib. It reads
-actual prepared CSS matrices to check 9,792 corners, checks five camera directions,
-and must reject vertical flips, horizontal flips and collapsed depth. The
-1.25 CSS-pixel corner tolerance at a 480-pixel diameter follows the existing
-volume orientation oracle's allowance for PolyCSS's conservative edge extension.
-It also checks the emission mask and exact preservation of measurement/error pairs.
+ellipsoid using NumPy and draws their sampled values using Matplotlib. It checks
+the emission mask and exact preservation of measurement/error pairs. Separately,
+the export oracle compares the HTML's prepared tree, camera, facing/depth bindings,
+surface-hit geometry and sky against the hash-pinned original body runtime.
+Those records must be identical. The reference image below checks the projected
+measurement; it is not a screenshot or a second rendering implementation.
 
 ![Independent Europa sphere reference](images/telescopes/europa-sphere-reference.png)
 
-This image is **an independent reference, not an HTML screenshot**. Browser
-appearance, interaction and screenshot comparison remain unverified because
-the browser tool refused the local file URL. The draft does not claim pixel parity.
+This image is **an independent reference, not an HTML screenshot**. The standalone
+Europa HTML was inspected through a local HTTP preview: initial rendering, drag
+rotation and wheel zoom remained visible with no browser errors. There is no
+startup flight; the first drag preserves camera distance. Screenshot
+comparison has not been performed; the draft does not claim pixel parity.
 The [navigation recipe](../tests/fixtures/telescope-projection/europa-navigation.json),
 [registration evidence](../tests/fixtures/telescope-projection/europa-registration.json) and
 [numerical report](../tests/fixtures/telescope-projection/europa-oracle.json) pin this example.

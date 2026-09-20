@@ -1,20 +1,42 @@
 {
   "oracle": "Analytic orthographic ray intersection with pinned triaxial ellipsoid; NumPy / Matplotlib",
-  "preparedCornersChecked": 9792,
-  "maximumCornerErrorPixelsAt480Diameter": 0.8649063424271901,
-  "cornerTolerancePixels": 1.25,
-  "cameraCases": 5,
-  "rejectedMutationsMaximumErrorPixels": {
-    "vertical-flip": 21.516943601334084,
-    "horizontal-flip": 21.519563122390007,
-    "flat-depth": 238.61600217326128
-  },
+  "purpose": "independent projection reference; the HTML uses the existing standard sphere, not this ellipsoid renderer",
   "samplePairsPreserved": true,
   "emissionMaskVerified": true,
-  "pixelComparison": "not run: browser file URL blocked; reference is not an HTML screenshot",
+  "pixelComparison": "not run: reference is not an HTML screenshot",
   "versions": {
     "numpy": "2.5.3",
     "matplotlib": "3.11.2"
+  },
+  "sceneParity": {
+    "runtimeSha256": "b39dddfec4e30954e7908e7893325b6caa6cf516fcdff0e27e03f75ef0d0d31a",
+    "contextSha256": "4330a638b653f9529d1089b0069353ba8669b7f447c055d7c8b929e1e75b7242",
+    "physicalCameraMountValidated": true,
+    "missingContextRejected": true,
+    "unchanged": [
+      "tree",
+      "camera",
+      "facing",
+      "depthPartitions",
+      "surfaceHit",
+      "sky"
+    ],
+    "treeSha256": "4fea4a67e9eaa8ff90df28ed3d75a7523bccabca1d6718dd006dc28724700e95",
+    "mutationRejected": true
+  },
+  "controlBinding": {
+    "lensIds": [
+      "normal"
+    ],
+    "ready": true,
+    "actions": 1,
+    "missingControlRejected": true
+  },
+  "selfContained": {
+    "inlineCss": true,
+    "inlineJavaScript": true,
+    "embeddedImages": 2,
+    "networkForbidden": true
   },
   "inputs": {
     "map": {
@@ -22,8 +44,8 @@
       "bytes": 9318
     },
     "sphere": {
-      "sha256": "aea70f887fccbedf64d0d8fd7218f744f9d2966b7dd714699bf33ba7e3cf7650",
-      "bytes": 4033
+      "sha256": "7ffef328bffc42df4ec224cdac472c815c7f5077efff7de167826f35642cab94",
+      "bytes": 8689
     }
   },
   "source": "tools/objects/telescopes/sphere-oracle.mts",
@@ -52,5 +74,23 @@
       "sha256": "b54d17fe6835caa998424f60e63865e6c2188af450f4b0d411de692b03b82bb7",
       "bytes": 213940
     }
-  ]
+  ],
+  "browser": {
+    "transport": "local HTTP preview of the self-contained HTML",
+    "html": {
+      "path": "sphere.html",
+      "bytes": 8445876,
+      "sha256": "72cbf9b3aaaaa4cf594c5a0730eb0f4bf2bb7da7c80e82110dadab5700cdb896"
+    },
+    "rendered": true,
+    "rotationAndWheelZoomChecked": true,
+    "initialFlight": false,
+    "firstDrag": {
+      "sceneTranslationZBeforePx": -75.0604,
+      "sceneTranslationZAfterPx": -75.0604,
+      "rotationChanged": true
+    },
+    "consoleErrors": 0,
+    "screenshotComparison": "not performed"
+  }
 }
