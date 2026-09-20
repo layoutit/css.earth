@@ -37,7 +37,11 @@ const GALAXY_PREFETCH_RATIO = 1 / 32;
 /** Hidden, unsubscribed lens banks are retained only within this measured DOM budget. */
 export const WARM_VOLUME_LENS_DOM_NODE_BUDGET = 5_000;
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, annotationPriorities, annotationOpacities, plannerSource }: {
+type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource(path: string): string };
+type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
+  clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
+
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationOpacities, plannerSource }: {
   backgroundPointManifest?: string; backgroundPointCloud?: string; backgroundPointSha256?: string;
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;
   /** The same prepared context as files the planner worker reads itself. */
@@ -48,7 +52,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
   environmentLinks?: Readonly<Record<string, string>>;
-  imageLayers?: readonly { payload: PreparedCssImageLayers; resolveResource(path: string): string }[];
+  imageLayers?: readonly PreparedImageLayerBank[];
+  /** Descriptor-only image banks. Their JSON and DOM are admitted only on projected visibility or explicit focus. */
+  imageLayerBanks?: readonly { id: string; frame: DensityVolumeFrame }[];
+  loadImageLayer?(id: string): Promise<PreparedImageLayerBank>;
   /** Volume lens banks are identified and framed from their descriptor alone; their heavy prepared
    * payload (all lenses, plus catalogue points) is fetched only through {@link loadVolumeLens}, the
    * first time a bank is selected or comes into view. Nothing here downloads at construction time. */
@@ -56,8 +63,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   loadVolumeLens?(id: string): Promise<Parameters<typeof createPreparedVolumeLenses>[0]>;
   /** Testable cap for hidden banks with no active navigation subscriber. */
   warmVolumeLensDomNodeBudget?: number;
-  catalog?: { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
-    clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
+  catalog?: PreparedCatalogBank;
+  /** Fade metadata is sufficient to gate the catalogue without fetching or parsing its records. */
+  catalogBank?: Omit<PreparedCatalogBank, 'payload' | 'galaxySample' | 'nebulae' | 'clusters'> & {
+    clusters?: Omit<NonNullable<PreparedCatalogBank['clusters']>, 'payload'> };
+  loadCatalog?(): Promise<PreparedCatalogBank>;
 }) {
   const plan = parsePreparedWorldContext(context), payload = validatePreparedCssVolume(volume);
   if (!Number.isSafeInteger(warmVolumeLensDomNodeBudget) || warmVolumeLensDomNodeBudget < 0) {
@@ -81,6 +91,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
     return payload.resources.map(resource => ({ key: `shell:${payload.id}:${resource.path}`,
       url: resolveResource(resource.path), pool: `shell:${payload.id}` }));
   });
+  const declaredImageLayers = imageLayerBanks.length ? imageLayerBanks : imageLayers.map(({ payload }) => ({ id: payload.id, frame: payload.frame }));
+  const initialImageLayers = new Map(imageLayers.map(bank => [bank.payload.id, bank]));
+  if (new Set(declaredImageLayers.map(bank => bank.id)).size !== declaredImageLayers.length) throw new TypeError('Prepared image-layer identities must be unique.');
   const imageEntries = imageLayers.flatMap(({ payload, resolveResource }) => {
     if (payload.frame.referenceFrame !== plan.frame.referenceFrame || payload.frame.epochJdTt !== plan.frame.epochJdTt) {
       throw new TypeError('Prepared image models must share the universe reference frame and epoch.');
@@ -90,14 +103,14 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   });
   // A bank's frame is validated against its authored descriptor at load time (loadPreparedVolumeLenses);
   // this only catches a descriptor wired to the wrong universe before any network request is made.
-  for (const bank of volumeLensBanks) {
+  for (const bank of [...declaredImageLayers, ...volumeLensBanks]) {
     if (bank.frame.referenceFrame !== plan.frame.referenceFrame || bank.frame.epochJdTt !== plan.frame.epochJdTt) {
       throw new TypeError('Prepared volume lens banks must share the universe reference frame and epoch.');
     }
   }
   // Each galaxy's slices stand for it only while it spans pixels; below that its label does.
   const volumeFramingUnits = volumeFramingRadiusUnits(payload.frame);
-  const imageFramingUnits = imageLayers.map(({ payload }) => volumeFramingRadiusUnits(payload.frame));
+  const imageFramingUnits = declaredImageLayers.map(({ frame }) => volumeFramingRadiusUnits(frame));
   const assets: PreparedAssets = {
     entries: [...entries, ...pointEntries, ...shellEntries, ...imageEntries],
     pools: [{ id: pool, retention: 'mount', capacity: entries.length, concurrency: 8, reuse: false, decoding: 'async' },
@@ -165,7 +178,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       let focusPoint: ReturnType<typeof mountWorldContextPointSource> = null;
       let environmentLabels: ReturnType<typeof mountEnvironmentLabels> | null = null;
       let galaxyCatalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
-      const imageBanks: ReturnType<typeof mountPreparedCssImageLayers>[] = [];
+      const imageBanks: (ReturnType<typeof mountPreparedCssImageLayers> | null)[] = declaredImageLayers.map(() => null);
+      const imageLoading: (Promise<void> | null)[] = declaredImageLayers.map(() => null);
+      let catalogPayload = catalog;
+      let catalogLoading: Promise<void> | null = null;
       let prefetchGalaxy = (_distanceM: number) => {};
       const prefetchAbort = new AbortController();
       // One slot per declared bank. A slot starts empty (no payload fetched yet) and is filled in
@@ -180,7 +196,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const lensPendingStarsVisible: (boolean | undefined)[] = volumeLensBanks.map(() => undefined);
       const lensFraming: { frame: DensityVolumeFrame; radiusUnits: number; visibility: PreparedPointVisibility }[] =
         volumeLensBanks.map(bank => ({ frame: bank.frame, radiusUnits: volumeFramingRadiusUnits(bank.frame), visibility: DEFAULT_POINT_VISIBILITY }));
-      const publishedBankOpacity = imageLayers.map(() => NaN), publishedLensOpacity = volumeLensBanks.map(() => NaN);
+      const publishedBankOpacity = declaredImageLayers.map(() => NaN), publishedLensOpacity = volumeLensBanks.map(() => NaN);
       const lensResidentNodes = volumeLensBanks.map(() => 0), lensVisible = volumeLensBanks.map(() => false);
       const lensLastUsed = volumeLensBanks.map(() => 0), lensSubscribers = volumeLensBanks.map(() => 0);
       let lensUseClock = 0;
@@ -188,6 +204,54 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       // drawn whenever it is in view, as it always was. Unloaded banks default to "drawn when in view";
       // an accompanying cloud corrects this to disabled the moment its payload identifies it as one.
       const lensEnabled = volumeLensBanks.map(() => true);
+      const publishBootstrapResidency = () => {
+        root.dataset.imageLayerDeclaredBankCount = String(declaredImageLayers.length);
+        root.dataset.imageLayerResidentBankCount = String(imageBanks.filter(Boolean).length);
+        root.dataset.imageLayerLoadingBankCount = String(imageLoading.filter(Boolean).length);
+        root.dataset.catalogResident = String(Boolean(galaxyCatalog));
+        root.dataset.catalogLoading = String(Boolean(catalogLoading));
+      };
+      const mountCatalog = (bank: PreparedCatalogBank) => {
+        if (galaxyCatalog || destroyed) return;
+        galaxyCatalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: bank.payload, galaxySample: bank.galaxySample,
+          clusters: bank.clusters?.payload, nebulae: bank.nebulae,
+          renderedObjectIds: new Set([...declaredImageLayers.map(image => image.id), ...volumeLensBanks.map(lens => lens.id)]),
+          nebulaFrames: new Map(volumeLensBanks.map(lens => [lens.id, lens.frame])), onSelect: onSelectGalaxy, pickingHost: stage });
+        publishBootstrapResidency();
+      };
+      const ensureCatalogLoaded = (): Promise<void> => {
+        if (galaxyCatalog) return Promise.resolve();
+        if (catalogPayload) { mountCatalog(catalogPayload); return Promise.resolve(); }
+        if (!loadCatalog) return Promise.resolve();
+        if (catalogLoading) return catalogLoading;
+        catalogLoading = loadCatalog().then(bank => {
+          catalogPayload = bank;
+          mountCatalog(bank);
+          requestPublication?.();
+        }).finally(() => { catalogLoading = null; publishBootstrapResidency(); });
+        publishBootstrapResidency();
+        return catalogLoading;
+      };
+      const ensureImageLayerLoaded = (index: number): Promise<void> => {
+        if (imageBanks[index]) return Promise.resolve();
+        if (imageLoading[index]) return imageLoading[index]!;
+        const declared = declaredImageLayers[index]!;
+        const eager = initialImageLayers.get(declared.id);
+        const loading = eager ? Promise.resolve(eager) : loadImageLayer?.(declared.id);
+        if (!loading) return Promise.resolve();
+        imageLoading[index] = loading.then(bank => {
+          if (destroyed || imageBanks[index]) return;
+          if (bank.payload.id !== declared.id || JSON.stringify(bank.payload.frame) !== JSON.stringify(declared.frame)) {
+            throw new TypeError('Prepared image-layer identity/frame mismatch.');
+          }
+          const mounted = mountPreparedCssImageLayers({ host: root, before: end, ...bank });
+          mounted.root.style.display = 'none';
+          imageBanks[index] = mounted;
+          requestPublication?.();
+        }).finally(() => { imageLoading[index] = null; publishBootstrapResidency(); });
+        publishBootstrapResidency();
+        return imageLoading[index]!;
+      };
       const publishLensResidencyMetadata = () => {
         const resident = lensBanks.flatMap((bank, index) => bank ? [index] : []);
         const visible = resident.filter(index => lensVisible[index]);
@@ -298,7 +362,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         prefetchAbort.abort();
         volumeLayer?.destroy(); skyLayer?.destroy(); spatial?.destroy(); focusPoint?.destroy(); environmentLabels?.destroy();
         for (const shell of shellLayers) shell.destroy();
-        for (const bank of imageBanks) bank.destroy(); galaxyCatalog?.destroy();
+        for (const bank of imageBanks) bank?.destroy(); galaxyCatalog?.destroy();
         for (const bank of lensBanks) bank?.destroy();
         additionalPoints.destroy();
         opacityClock.destroy();
@@ -308,10 +372,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       try {
         if (payload.sky) skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
         volumeLayer = mountPreparedCssVolume({ host: volumeImage, before: volumeEnd, payload, resolveResource });
-        for (const bank of imageLayers) imageBanks.push(mountPreparedCssImageLayers({ host: root, before: end, ...bank }));
-        // Volume lens banks mount lazily, the first time ensureLensLoaded resolves; see its call sites below.
-        // Far layers leave layout, and so image loading, until a publication shows them.
-        for (const bank of imageBanks) bank.root.style.display = 'none';
+        for (const [index, bank] of declaredImageLayers.entries()) if (initialImageLayers.has(bank.id)) void ensureImageLayerLoaded(index);
+        // Image and volume lens banks mount lazily; far layers have no payload or DOM until admitted.
         let galaxyPrefetched = false;
         prefetchGalaxy = (distanceM: number) => {
           if (galaxyPrefetched || distanceM < galaxyPrefetchDistanceM) return;
@@ -327,12 +389,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const bodyAnnotations = spatial.inspect();
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), links: environmentLinks, pickingHost: stage, opacityClock });
-        if (catalog) galaxyCatalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: catalog.payload, galaxySample: catalog.galaxySample, clusters: catalog.clusters?.payload, nebulae: catalog.nebulae,
-          // A bank's identity and frame come from its descriptor, so the catalogue knows about every
-          // declared nebula, loaded or not; only the heavy payload behind it is fetched on demand.
-          renderedObjectIds: new Set([...imageLayers.map(bank => bank.payload.id), ...volumeLensBanks.map(bank => bank.id)]),
-          nebulaFrames: new Map(volumeLensBanks.map(bank => [bank.id, bank.frame])),
-          onSelect: onSelectGalaxy, pickingHost: stage });
+        if (catalogPayload) mountCatalog(catalogPayload);
+        publishBootstrapResidency();
         publishLensResidencyMetadata();
         return Object.freeze({ root, roots: Object.freeze([root, spatial.root]), destroy, opacityClock,
           /** Mount an optional prepared shell after startup, the first time it is enabled. */
@@ -348,7 +406,12 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           },
           selectGalaxy(id: string | null) { galaxyCatalog?.select(id); },
           resolveGalaxy(id: string) { return galaxyCatalog?.resolve(id) ?? null; },
-          imageLayerFrames: Object.freeze(Object.fromEntries(imageLayers.map(({ payload }) => [payload.id, payload.frame]))),
+          ensureGalaxyCatalog: ensureCatalogLoaded,
+          ensureImageLayer(id: string) {
+            const index = declaredImageLayers.findIndex(bank => bank.id === id);
+            return index < 0 ? Promise.resolve() : ensureImageLayerLoaded(index);
+          },
+          imageLayerFrames: Object.freeze(Object.fromEntries(declaredImageLayers.map(bank => [bank.id, bank.frame]))),
           // Framing is exact once a bank's payload has loaded; until then it falls back to the radius that
           // holds the descriptor's own prepared bounds, the same estimate image-layer banks always use.
           // A getter, not a snapshot: framing starts as the descriptor's own bounds and is replaced by
@@ -489,7 +552,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             // A galaxy under a few projected pixels is its label: its bank fades, then
             // leaves layout and compositing. Like lens banks, a faded image bank does too.
             for (const [index, bank] of imageBanks.entries()) {
-              const opacity = volumeOpacity * projectedVolumeOpacity(world, viewport, imageLayers[index]!.payload.frame, imageFramingUnits[index]!);
+              const opacity = volumeOpacity * projectedVolumeOpacity(world, viewport, declaredImageLayers[index]!.frame, imageFramingUnits[index]!);
+              if (!bank) {
+                if (opacity > 0) void ensureImageLayerLoaded(index).catch(() => {});
+                continue;
+              }
               if (opacity !== publishedBankOpacity[index]) {
                 bank.root.style.opacity = String(opacity);
                 bank.root.style.display = opacity > 0 ? '' : 'none';
@@ -547,11 +614,15 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             const localAnnotations = 1 - logarithmicFade(distanceM, 12e6 * 3.085677581491367e16, 40e6 * 3.085677581491367e16);
             const environmentRects = environmentLabels!.publish({ world, viewport, volumeLabelOpacity: localAnnotations,
               shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects, labelBudget });
-            if (catalog) galaxyCatalog!.publish(world, viewport,
-              localAnnotations * logarithmicFade(distanceM, catalog.fadeStartDistanceM, catalog.fullDistanceM), [...foregroundRects, ...environmentRects],
-              catalog.clusters ? logarithmicFade(distanceM, catalog.clusters.fadeStartDistanceM, catalog.clusters.fullDistanceM) : 0,
-              (1 - logarithmicFade(distanceM, 30e6 * 3.085677581491367e16, 120e6 * 3.085677581491367e16)) * logarithmicFade(distanceM, catalog.fadeStartDistanceM, catalog.fullDistanceM),
-              labelBudget, (1 - fade) * logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM));
+            const catalogPresentation = catalogPayload ?? catalogBank;
+            if (catalogPresentation) {
+              const galaxyOpacity = localAnnotations * logarithmicFade(distanceM, catalogPresentation.fadeStartDistanceM, catalogPresentation.fullDistanceM);
+              const clusterOpacity = catalogPresentation.clusters ? logarithmicFade(distanceM, catalogPresentation.clusters.fadeStartDistanceM, catalogPresentation.clusters.fullDistanceM) : 0;
+              const dotOpacity = (1 - logarithmicFade(distanceM, 30e6 * 3.085677581491367e16, 120e6 * 3.085677581491367e16)) * logarithmicFade(distanceM, catalogPresentation.fadeStartDistanceM, catalogPresentation.fullDistanceM);
+              const nebulaOpacity = (1 - fade) * logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM);
+              if (!galaxyCatalog && Math.max(galaxyOpacity, clusterOpacity, dotOpacity, nebulaOpacity) > 0) void ensureCatalogLoaded().catch(() => {});
+              galaxyCatalog?.publish(world, viewport, galaxyOpacity, [...foregroundRects, ...environmentRects], clusterOpacity, dotOpacity, labelBudget, nebulaOpacity);
+            }
             const emphasizedId = selectionPreview === undefined ? (overview ? null : selected.id) : selectionPreview;
             focusPoint?.publish(world, viewport, { opacity: (1 - fade) * (emphasizedId !== null && emphasizedId !== plan.focus.id ? .75 : 1), selectedDetail: selected.id === plan.focus.id,
               ...(selected.id === plan.focus.id ? {} : { occluder: selected }) });

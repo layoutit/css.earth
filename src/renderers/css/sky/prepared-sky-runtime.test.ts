@@ -4,6 +4,7 @@ import { mountPreparedCssSky, preparedSkyCameraTransform } from './prepared-sky-
 import { validatePreparedCssSky } from './validation.js';
 import type { PreparedCssSky } from './types.js';
 import type { PreparedCssVolume } from '../volume/types.js';
+import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 import type { PreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
@@ -14,10 +15,12 @@ import { logarithmicFade } from '../universe/prepared-world-context.js';
 import { readCanonicalPointField } from '../preparation/stars/canonical-point-field-fixture.js';
 
 const spatialPublish = vi.hoisted(() => vi.fn());
+const catalogMount = vi.hoisted(() => vi.fn());
 const foregroundRects = vi.hoisted(() => [{ left: 100, top: 100, right: 150, bottom: 114 }]);
 // These unrelated layers keep their normal publication contract; the test mounts
 // the actual universe, sky and volume compositor without building a star catalogue.
 vi.mock('../universe/world-context-point-source.js', () => ({ mountWorldContextPointSource: () => null }));
+vi.mock('../universe/prepared-galaxy-catalog.js', () => ({ mountPreparedGalaxyCatalog: catalogMount }));
 vi.mock('../universe/prepared-world-context.js', async importOriginal => ({ ...await importOriginal<typeof import('../universe/prepared-world-context.js')>(),
   mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, backgroundExclusionRects: () => foregroundRects, destroy() {} }) }));
 
@@ -58,7 +61,34 @@ class FakeWindow {
   cancelAnimationFrame = (id: number) => { this.pending.delete(id); };
 }
 class FakeDocument { count = 0; defaultView = new FakeWindow(); querySelectorAll(_selector: string): FakeElement[] { return []; } createElement(tag = 'div'): FakeElement { this.count++; return new FakeElement(this, tag); } }
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => { vi.unstubAllGlobals(); catalogMount.mockReset(); });
+
+test('cold bootstrap keeps catalogue and image banks descriptor-only, then reuses their first navigation load', async () => {
+  vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
+  const base = new URL('../../../', import.meta.url);
+  const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const image: PreparedCssImageLayers = { ...volume, id: 'lazy-image', bankViews: volume.stacks.map(stack => ({ axis: stack.axis,
+    normalUnits: stack.axis === 'x' ? [1, 0, 0] : stack.axis === 'y' ? [0, 1, 0] : [0, 0, 1], samplingStepUnits: 1 })) };
+  const loadImageLayer = vi.fn(async () => ({ payload: image, resolveResource: (path: string) => `/image/${path}` }));
+  const catalogRuntime = { destroy: vi.fn(), select: vi.fn(), resolve: vi.fn(), publish: vi.fn(), inspect: vi.fn(() => ({ count: 0 })) };
+  catalogMount.mockReturnValue(catalogRuntime);
+  const loadCatalog = vi.fn(async () => ({ payload: {}, fadeStartDistanceM: 10, fullDistanceM: 20 }));
+  const document = new FakeDocument(), stage = document.createElement();
+  const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
+    resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
+    imageLayerBanks: [{ id: image.id, frame: image.frame }], loadImageLayer,
+    catalogBank: { fadeStartDistanceM: 10, fullDistanceM: 20 }, loadCatalog });
+  const mounted = universe.mount(stage as unknown as HTMLElement), root = mounted.root as unknown as FakeElement;
+  expect(loadImageLayer).not.toHaveBeenCalled(); expect(loadCatalog).not.toHaveBeenCalled();
+  expect(root.dataset).toMatchObject({ imageLayerDeclaredBankCount: '1', imageLayerResidentBankCount: '0', catalogResident: 'false' });
+  await Promise.all([mounted.ensureGalaxyCatalog(), mounted.ensureGalaxyCatalog(), mounted.ensureImageLayer(image.id), mounted.ensureImageLayer(image.id)]);
+  expect(loadCatalog).toHaveBeenCalledTimes(1); expect(loadImageLayer).toHaveBeenCalledTimes(1); expect(catalogMount).toHaveBeenCalledTimes(1);
+  expect(root.dataset).toMatchObject({ imageLayerResidentBankCount: '1', imageLayerLoadingBankCount: '0', catalogResident: 'true', catalogLoading: 'false' });
+  await mounted.ensureGalaxyCatalog(); await mounted.ensureImageLayer(image.id);
+  expect(loadCatalog).toHaveBeenCalledTimes(1); expect(loadImageLayer).toHaveBeenCalledTimes(1);
+  mounted.destroy(); expect(catalogRuntime.destroy).toHaveBeenCalledTimes(1);
+});
 
 test('retains exactly six prepared images and changes only shared camera presentation during travel and rotation', () => {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);

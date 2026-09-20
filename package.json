@@ -137,6 +137,7 @@
     "test:browser:ontology": "node site/test/navigation-ontology-browser.mts",
     "test:browser:typescript-owners": "node site/test/typescript-owners-browser.mts",
     "test:browser:universe": "node site/test/universe-environments-browser.mts",
+    "test:browser:universe-performance-ab": "node site/test/universe-performance-ab-browser.mts",
     "test:browser:universe-labels": "node site/test/universe-labels-browser.mts",
     "test:browser:view-url": "node site/test/view-url-browser.mts",
     "test:earth-delivery": "node tests/objects/browser/earth/global-delivery-browser.mts",

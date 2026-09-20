@@ -19,7 +19,7 @@ export interface FocusCallbacks {
 interface ContextNavigationOptions {
   layer: PreparedContextLayer;
   presentation: { metersPerParsec: number; defaultFocusRadiusM: number; minimumDistanceRadii: number; maximumDistanceM: number };
-  sources?: readonly SpatialCatalogSource[];
+  sources?: readonly SpatialCatalogSource[] | (() => readonly SpatialCatalogSource[]);
   windowTarget: Window;
   onError?(error: unknown): void;
   unavailableObjectIds?: readonly string[];
@@ -33,6 +33,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
   let notify: NonNullable<FocusCallbacks['onFocusChange']> = () => {};
   let beforeFlight: NonNullable<FocusCallbacks['onFlightStart']> = () => {};
   let notifyContent: NonNullable<FocusCallbacks['onFocusContentChange']> = () => {};
+  const currentSources = () => typeof sources === 'function' ? sources() : sources;
   const lensState = (id: string | null) => {
     const object = id ? layer.resolveGalaxy(id) : null;
     const objectId = object && !isPreparedCluster(object) ? object.detailedObjectId : null;
@@ -72,7 +73,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
       } } : {}),
     } : null;
     const citations = references.map(reference => {
-      const citation = resolveSpatialCitation(reference, sources);
+      const citation = resolveSpatialCitation(reference, currentSources());
       if (!citation) throw new TypeError(`Unresolved prepared focus reference: ${reference}`);
       return citation;
     });
