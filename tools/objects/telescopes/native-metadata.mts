@@ -10,7 +10,7 @@ export interface NativeMetadata {
   readonly uncertainty?: { readonly status: 'validated' | 'unknown'; readonly kind: string | null; readonly structure: string | null };
   readonly structure: string;
   readonly units?: { readonly value: string; readonly source: string };
-  readonly spectral?: { readonly axis?: number; readonly centersMicrometres: readonly number[]; readonly source: string; readonly usableBands?: readonly boolean[] };
+  readonly spectral?: { readonly axis?: number; readonly centersMicrometres: readonly number[]; readonly binEdgesMicrometres?: readonly number[]; readonly source: string; readonly usableBands?: readonly boolean[] };
   readonly calibration: readonly { readonly field: string; readonly value: string }[];
   readonly limitations: readonly string[];
 }
@@ -33,7 +33,7 @@ export function parseNativeMetadata(raw: unknown, depth = 0): NativeMetadata {
     ...(quality ? {quality:{policy:requireString(quality.policy),samples:requireFiniteNumber(quality.samples),finite:requireFiniteNumber(quality.finite),usable:requireFiniteNumber(quality.usable),flagged:requireFiniteNumber(quality.flagged),invalidUncertainty:requireFiniteNumber(quality.invalidUncertainty),mask:quality.mask===null?null:requireString(quality.mask)}}:{}),
     ...(uncertainty ? {uncertainty:{status:uncertainty.status as 'validated'|'unknown',kind:uncertainty.kind===null?null:requireString(uncertainty.kind),structure:uncertainty.structure===null?null:requireString(uncertainty.structure)}}:{}),
     ...(units ? { units: { value: requireString(units.value), source: requireString(units.source) } } : {}),
-    ...(spectral ? { spectral: { ...(spectral.axis===undefined?{}:{axis:requireFiniteNumber(spectral.axis)}), centersMicrometres: coordinates(requireArray(spectral.centersMicrometres).map(n => requireFiniteNumber(n))), source: requireString(spectral.source), ...(spectral.usableBands === undefined ? {} : {usableBands: requireArray(spectral.usableBands) as boolean[]}) } } : {}),
+    ...(spectral ? { spectral: { ...(spectral.axis===undefined?{}:{axis:requireFiniteNumber(spectral.axis)}), centersMicrometres: coordinates(requireArray(spectral.centersMicrometres).map(n => requireFiniteNumber(n))), source: requireString(spectral.source), ...(spectral.binEdgesMicrometres === undefined ? {} : {binEdgesMicrometres: coordinates(requireArray(spectral.binEdgesMicrometres).map(n=>requireFiniteNumber(n)),requireArray(spectral.centersMicrometres).length+1)}), ...(spectral.usableBands === undefined ? {} : {usableBands: requireArray(spectral.usableBands) as boolean[]}) } } : {}),
     calibration: requireArray(v.calibration).map(raw => { const row = requireRecord(raw); return { field: requireString(row.field), value: requireString(row.value) }; }),
     limitations: requireArray(v.limitations).map(s => requireString(s)) };
 }

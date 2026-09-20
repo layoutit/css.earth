@@ -41,3 +41,12 @@ source is copied or modified. Its complete license is retained in
 [MATPLOTLIB-LICENSE.txt](MATPLOTLIB-LICENSE.txt). See [savefig](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)
 for the PNG/SVG output boundary. Numeric values, scientific interpretation and receipts remain
 owned by cssEarth. Plotted archive data retain their original provenance and terms.
+
+# Optional output reference tools
+
+The output oracle imports [specutils 2.4.0](https://specutils.readthedocs.io/) and
+[Photutils 3.0.0](https://photutils.readthedocs.io/), both under BSD-3-Clause. They are
+installed in an optional test environment, not copied, modified, or bundled into the
+CLI. Their upstream distributions retain the copyright and license notices. The
+pinned optional versions are in `oracle-requirements.txt`; the reports record the
+versions used. These comparisons do not imply endorsement by either project.

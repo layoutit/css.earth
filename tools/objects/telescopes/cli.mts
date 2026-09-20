@@ -6,7 +6,7 @@ import { formatAnswer } from './query.mts';
 import { assessRequest } from './request-satisfaction.mts';
 import { getSession, saveSession, type Session } from './session.mts';
 
-import { listOutputs, exportOutput, type OutputRequest } from './outputs.mts';
+import { listOutputs, exportOutput, validateOutputRequest, type OutputRequest } from './outputs.mts';
 import { HELP } from '../../../packages/telescope/src/help.mts';
 export { HELP };
 
@@ -20,19 +20,26 @@ export function parseCli(args: readonly string[]): CliOptions {
     for(let i=1;i<args.length;i++){
       const arg=args[i];if(!arg.startsWith('-')){positional.push(arg);continue;}
       if(['--json','--verbose'].includes(arg)){if(flags.has(arg))throw new TypeError(`Repeated option ${arg}`);flags.add(arg);continue;}
-      if(command!=='export'||!['--output','--hdu','--plane','--pixel','--out'].includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated ${command} option ${arg}`);
+      if(command!=='export'||!['--output','--hdu','--plane','--pixel','--out','--band','--aperture','--background','--continuum','--uncertainty'].includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated ${command} option ${arg}`);
       const value=args[++i];if(!value||value.startsWith('--'))throw new TypeError(`Missing value for ${arg}`);values.set(arg,value);
     }
     if(positional.length!==1)throw new TypeError(`Use telescope ${command} DELIVERY_RESULT_JSON`);
     const common={result:resolve(positional[0]),json:flags.has('--json'),verbose:flags.has('--verbose')};
     if(command==='outputs')return {command,...common};
-    const kind=values.get('--output');if(kind!=='image'&&kind!=='spectrum')throw new TypeError('--output takes image or spectrum');
+    const kind=values.get('--output');if(kind!=='image'&&kind!=='spectrum'&&kind!=='band-image'&&kind!=='aperture-spectrum'&&kind!=='feature-map')throw new TypeError('--output takes image, spectrum, band-image, aperture-spectrum or feature-map');
     const integer=(value:string|undefined)=>{if(value===undefined||!/^\d+$/u.test(value)||!Number.isSafeInteger(Number(value)))throw new TypeError('Selectors must be nonnegative whole numbers');return Number(value);};
     const hdu=integer(values.get('--hdu')),plane=values.has('--plane')?integer(values.get('--plane')):undefined;
     const parts=values.get('--pixel')?.split(',');if(parts&&parts.length!==2)throw new TypeError('--pixel takes X,Y');
     const pixel=parts?[integer(parts[0]),integer(parts[1])] as const:undefined;
     const directory=values.get('--out');if(!directory)throw new TypeError('export requires --out DIRECTORY');
-    return {command,...common,directory:resolve(directory),selection:{kind,hdu,...(plane===undefined?{}:{plane}),...(pixel?{pixel}:{})}};
+    const numbers=(key:string)=>{const parts=values.get(key)!.split(',');if(parts.some(p=>!p.trim()||!Number.isFinite(Number(p))))throw new TypeError(`${key} requires comma-separated numbers`);return parts.map(Number);};
+    const uncertainty=values.get('--uncertainty');if(uncertainty!==undefined&&uncertainty!=='omit'&&uncertainty!=='independent')throw new TypeError('--uncertainty takes omit or independent');
+    const selection:OutputRequest={kind,hdu,...(plane===undefined?{}:{plane}),...(pixel?{pixel}:{}),
+      ...(values.has('--band')?{band:numbers('--band')}:{}),...(values.has('--aperture')?{aperture:numbers('--aperture')}:{}),
+      ...(values.has('--background')?{background:values.get('--background')==='none'?'none':numbers('--background')}:{}),
+      ...(values.has('--continuum')?{continuum:numbers('--continuum')}:{}),...(uncertainty?{uncertainty}:{})};
+    validateOutputRequest(selection);
+    return {command,...common,directory:resolve(directory),selection};
   }
   if (command !== 'query' && command !== 'get') throw new TypeError('Expected query, get, outputs or export. Use telescope --help.');
   const values = new Map<string, string>(), switches = new Set<string>(), positional: string[] = [], requestArgs: string[] = [];

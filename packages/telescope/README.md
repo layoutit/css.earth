@@ -40,13 +40,44 @@ After `get`, inspect what the delivered product can support:
 telescope outputs runs/eris/pick-1/result.json
 telescope export runs/eris/pick-1/result.json --output image --hdu 1 --plane 95 --out figures/eris-plane
 telescope export runs/eris/pick-1/result.json --output spectrum --hdu 1 --pixel 25,27 --out figures/eris-pixel
+telescope export runs/eris/pick-1/result.json --output band-image --hdu 1 --band 2.2,2.4 --out figures/eris-band
+telescope export runs/eris/pick-1/result.json --output aperture-spectrum --hdu 1 --aperture 19,24,25,30 --background 29,24,35,30 --out figures/eris-aperture
+telescope export runs/eris/pick-1/result.json --output feature-map --hdu 1 --band 2.30,2.34 --continuum 2.26,2.29,2.35,2.38 --out figures/eris-feature
 ```
 
-Selectors are zero-based and explicit. The first adapter exports qualified FITS images and
-single-pixel spectra to PNG, SVG, numeric CSV and a product record. It uses the same masks,
+Selectors are zero-based and explicit. The adapter exports qualified FITS images, pixel/region spectra,
+band images and continuum-subtracted feature maps to PNG, SVG, numeric CSV and a product record. It uses the same masks,
 units and wavelength coordinates as qualification. CSV blanks preserve excluded samples;
 plots do not bridge them. Supplied variance/inverse variance is converted to standard deviation
-in the science unit. No aperture summation or assumption of independent spatial errors is made.
+in the science unit.
+
+- `band-image` returns a mean weighted by spectral bin overlap with `--band`, in the original
+  science unit. Partial boundary bins contribute their overlap widths; descending axes work too.
+- `aperture-spectrum` returns the arithmetic mean over a fixed rectangular pixel region.
+  Bounds are `X0,Y0,X1,Y1`, with exclusive upper bounds. Choose a disjoint `--background` box
+  to subtract its mean, or explicitly choose `--background none`. This is a mean per-pixel
+  quantity, not total source flux; there is no solid-angle conversion or aperture correction.
+- `feature-map` integrates the residual after subtracting a linear continuum anchored by the
+  weighted means of two bracketing `--continuum` bands. Positive values are emission and
+  negative values absorption relative to that continuum. Units are the source unit × µm;
+  a frequency density integrated over wavelength is not a bolometric flux. The map makes
+  no chemical-identification or detection-significance claim.
+
+Aggregation requires every contributing sample to be valid for an output pixel/channel.
+It does not silently change the aperture or renormalize around spectral gaps. Band/feature
+maps require qualified bin edges; tabulated wavelength centers alone are insufficient.
+The one-million-spatial-pixel limit applies; extraction streams through the cube.
+
+Astropy `NDDataArray` owns weighted arithmetic and standard-deviation propagation; css.earth
+owns the selected regions, continuum definition and strict missing-sample policy.
+
+Aggregate uncertainties default to omitted because covariance is unknown. Explicit
+`--uncertainty independent` propagates validated per-sample variances, including the
+background/continuum contributions, conditional on independent errors. Resampled pixels or
+channels may violate that assumption. Figures label this condition; CSV and the receipt retain
+it. No spatial/spectral resolution matching is performed when combining samples.
+
+[Real Eris examples and source hash](../../docs/virtual-telescopes.md#example-exports-eris-jwst-nirspec-ifu).
 
 Output directories must be new. Delivery files and their producing record are rechecked before
 export, and files are checked again before publication. Outputs keep the original request and
@@ -60,3 +91,30 @@ Surface maps use the existing map authors and `telescope:publish-map`. A body-sp
 requires surface registration and a prepared layer. A physical 3D output requires actual
 position/depth evidence and a nebula-lab adapter. Those export adapters, along with PDS/ISIS
 figure exporters, are not implemented in this initial output slice. The output listing says so.
+
+## Independent output checks
+
+The [output oracle](../../tools/objects/telescopes/output-oracle.mts) reads the original pinned
+FITS data independently of the production reducer. Specutils 2.4.0 integrates the spectral
+windows; Photutils 3.0.0 measures rectangular apertures. Native plane and pixel exports compare
+directly with FITS slices. The reference tools are optional test dependencies, installed without
+changing the production astronomy environment:
+
+```sh
+output/toolchains/astroquery/env/bin/python -m venv --system-site-packages work/telescope-oracles/env
+work/telescope-oracles/env/bin/python -m pip install -c tools/objects/astronomy-packages/requirements.lock -r tools/objects/astronomy-packages/oracle-requirements.txt
+node tools/objects/telescopes/output-oracle.mts figures/eris-band work/telescope-oracles/env/bin/python output/oracles/eris-band
+CSSEARTH_ORACLE_PYTHON="$PWD/work/telescope-oracles/env/bin/python" node --test tools/objects/telescopes/cube-outputs.test.mts
+```
+
+Each comparison writes a residual figure and a JSON report identifying the source hash,
+reference versions, mask/unit agreement and maximum numerical difference. It fails above
+1e-10 of the reference peak. All valid samples are compared; masked samples must agree too.
+The normal tests also check hand-computed signals, continuum slopes, background subtraction,
+partial-bin weighting and propagated errors. Package oracles are opt-in and only run when
+`CSSEARTH_ORACLE_PYTHON` is set; the command above enables them.
+
+This verifies numerical extraction. Both readers still use Astropy FITS/WCS; neither verifies
+archive calibration, unknown covariance, aperture corrections, molecular identity or detection
+significance. Specutils mask interpolation is avoided by checking complete selected coverage
+explicitly. Its line-flux function is called per spectrum, not on a multidimensional flux array.

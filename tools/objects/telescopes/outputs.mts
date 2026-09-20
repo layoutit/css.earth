@@ -8,8 +8,26 @@ import { sha256 } from '../../../src/platform/sha256.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';
 import { plotProduct } from '../astronomy-packages/plots.mts';
 import { parseNativeMetadata, type NativeMetadata } from './native-metadata.mts';
-export interface OutputChoice { readonly kind:'image'|'spectrum'|'body-map'|'sphere'|'points';readonly available:boolean;readonly reason:string;readonly hdu?:number;readonly structure?:string;readonly shape?:readonly number[];readonly parameters?:readonly string[] }
-export interface OutputRequest { readonly kind:'image'|'spectrum';readonly hdu:number;readonly plane?:number;readonly pixel?:readonly [number,number] }
+export interface OutputChoice { readonly kind:OutputRequest['kind']|'body-map'|'sphere'|'points';readonly available:boolean;readonly reason:string;readonly hdu?:number;readonly structure?:string;readonly shape?:readonly number[];readonly parameters?:readonly string[] }
+export interface OutputRequest {
+  readonly kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';
+  readonly hdu:number; readonly plane?:number; readonly pixel?:readonly [number,number];
+  readonly band?:readonly number[]; readonly aperture?:readonly number[];
+  readonly background?:'none'|readonly number[]; readonly continuum?:readonly number[];
+  readonly uncertainty?:'omit'|'independent';
+}
+export function validateOutputRequest(request:OutputRequest):void {
+  const fields:Record<OutputRequest['kind'],readonly string[]>={image:['plane'],spectrum:['pixel'],'band-image':['band','uncertainty'],'aperture-spectrum':['aperture','background','uncertainty'],'feature-map':['band','continuum','uncertainty']};
+  if(!Object.hasOwn(fields,request.kind)||!Number.isSafeInteger(request.hdu)||request.hdu<0)throw new TypeError('Choose a supported output and a nonnegative HDU index');
+  for(const key of Object.keys(request))if(!['kind','hdu',...fields[request.kind]].includes(key))throw new TypeError(`${key} is not valid for ${request.kind}`);
+  const tuple=(value:unknown,count:number,integer=false)=>Array.isArray(value)&&value.length===count&&value.every(n=>typeof n==='number'&&Number.isFinite(n)&&(!integer||Number.isSafeInteger(n)&&n>=0));
+  if(request.plane!==undefined&&(!Number.isSafeInteger(request.plane)||request.plane<0))throw new TypeError('Plane must be a nonnegative integer');
+  if(request.kind==='spectrum'&&!tuple(request.pixel,2,true))throw new TypeError('A spectrum requires --pixel X,Y');
+  if(['band-image','feature-map'].includes(request.kind)&&(!tuple(request.band,2)||request.band![0]<=0||request.band![0]>=request.band![1]))throw new TypeError('A band requires two positive increasing wavelengths');
+  if(request.kind==='feature-map'&&!tuple(request.continuum,4))throw new TypeError('A feature map requires two bracketing continuum bands');
+  if(request.kind==='aperture-spectrum'&&(!tuple(request.aperture,4,true)||request.background!=='none'&&!tuple(request.background,4,true)))throw new TypeError('Choose --aperture X0,Y0,X1,Y1 and --background X0,Y0,X1,Y1 or none');
+  if(request.uncertainty!==undefined&&!['omit','independent'].includes(request.uncertainty))throw new TypeError('Uncertainty takes omit or independent');
+}
 function beneath(root:string,path:string):string {
   const file=resolve(root,path),rel=relative(root,file);
   if(isAbsolute(path)||!rel||rel==='..'||rel.startsWith('../'))throw new Error('Delivery path escapes its directory');
@@ -46,6 +64,11 @@ function choices(structures:readonly NativeMetadata[]):OutputChoice[]{
     const common={hdu:s.fitsHdu,structure:s.structure,shape:dimensions};
     result.push({...common,kind:'image',available:supported&&usable&&dimensions.at(-1)!*dimensions.at(-2)!<=1_000_000,parameters:s.spectral?.axis===undefined?[]:['plane'],reason:!usable?'No usable samples.':!supported?'Select two spatial axes and a separable leading wavelength axis.':'Native image coordinates; masks retained. A cube requires an explicit zero-based plane.'});
     result.push({...common,kind:'spectrum',available:supported&&spectral&&usable,parameters:['pixel'],reason:spectral?'One explicitly selected pixel; supplied uncertainties retain their meaning. No aperture integration or covariance assumption.':'No qualified leading wavelength axis.'});
+    const cube=supported&&spectral&&usable&&!!s.units&&dimensions.at(-1)!*dimensions.at(-2)!<=1_000_000;
+    for(const kind of ['band-image','aperture-spectrum','feature-map'] as const){
+      const edges=kind==='aperture-spectrum'||!!s.spectral?.binEdgesMicrometres;
+      result.push({...common,kind,available:cube&&edges,parameters:kind==='aperture-spectrum'?['aperture','background','uncertainty']:kind==='feature-map'?['band','continuum','uncertainty']:['band','uncertainty'],reason:!cube?'Requires a usable cube with qualified units and leading wavelength axis within the image budget.':!edges?'Qualified bin edges are required; tabulated centers alone cannot establish band integration.':kind==='aperture-spectrum'?'Fixed-region mean spectrum with explicit background choice. Independent-sample uncertainty is opt-in.':kind==='band-image'?'Wavelength-bin-weighted mean; complete selected coverage is required per pixel.':'Continuum-subtracted wavelength integral with two explicit bracketing bands; positive emission, negative absorption.'});
+    }
   }
   return [...result,
     {kind:'body-map',available:false,reason:'This exporter does not register images to a surface. Use the existing body-map author and publication route with a measurement definition and viewing geometry.'},
@@ -60,12 +83,10 @@ export async function listOutputs(resultPath:string){
   return {target:d.target,source:d.product,outputs:choices(structures)};
 }
 export async function exportOutput(resultPath:string,request:OutputRequest,outputDirectory:string){
-  if(!['image','spectrum'].includes(request.kind)||!Number.isSafeInteger(request.hdu)||request.hdu<0)throw new TypeError('Choose image or spectrum and a nonnegative HDU index');
-  if(request.plane!==undefined&&(!Number.isSafeInteger(request.plane)||request.plane<0)||request.pixel?.some(n=>!Number.isSafeInteger(n)||n<0))throw new TypeError('Plane and pixel selectors must be nonnegative integers');
-  if(request.kind==='spectrum'&&(!request.pixel||request.plane!==undefined)||request.kind==='image'&&request.pixel!==undefined)throw new TypeError('A spectrum requires --pixel X,Y; an image uses --plane when spectral');
+  validateOutputRequest(request);
   const d=await delivery(resultPath);
   if(!/\.fits?$/iu.test(d.file))throw new Error('The initial output adapter supports qualified FITS products');
-  const answer=await sciencePackage({operation:'extract',path:d.file,hdu:request.hdu,kind:request.kind,plane:request.plane,x:request.pixel?.[0],y:request.pixel?.[1]});
+  const answer=await sciencePackage({...request,operation:'extract',path:d.file,x:request.pixel?.[0],y:request.pixel?.[1]});
   const rows=requireArray(answer.structures).map(v=>requireRecord(v)),found=rows.filter(s=>s.fitsHdu===request.hdu);
   if(found.length!==1||found[0].extraction===undefined)throw new Error('Selected HDU is not an unambiguous science array');
   const data=requireRecord(found[0].extraction),destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;
@@ -74,9 +95,9 @@ export async function exportOutput(resultPath:string,request:OutputRequest,outpu
   try{
     const plotted=await plotProduct(staging,d.target,data);
     const fresh=await delivery(resultPath);if(fresh.pin.sha256!==d.pin.sha256)throw new Error('Delivery changed while producing output');
-    const softwareFiles=['outputs.mts','native-metadata.mts','../astronomy-packages/science.mts','../astronomy-packages/plots.mts','../astronomy-packages/requirements.lock'];
+    const softwareFiles=['outputs.mts','native-metadata.mts','../astronomy-packages/science.mts','../astronomy-packages/plots.mts','../astronomy-packages/cube-outputs.mts','../astronomy-packages/requirements.lock'];
     const implementation=sha256(Buffer.concat(await Promise.all(softwareFiles.map(name=>readFile(new URL(name,import.meta.url))))));
-    const run={telescope:d.telescope,stage:'telescope-output',inputs:[{role:'delivery',identity:d.path,...d.pin},...d.files.map(f=>({role:'qualified input',identity:resolve(d.directory,f.path),sha256:f.sha256,bytes:f.bytes}))],parameters:{selection:request,definition:request.kind==='image'?'Native sampled image plane; not a registered surface map.':'Single-pixel spectrum; no spatial integration.',sourceRequest:d.record.request,sourceSatisfaction:d.record.satisfaction,metadata:parseNativeMetadata(found[0]),software:plotted},software:[{name:'cssEarth telescope outputs',version:implementation},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'}]};
+    const run={telescope:d.telescope,stage:'telescope-output',inputs:[{role:'delivery',identity:d.path,...d.pin},...d.files.map(f=>({role:'qualified input',identity:resolve(d.directory,f.path),sha256:f.sha256,bytes:f.bytes}))],parameters:{selection:request,definition:data.definition??(request.kind==='image'?'Native sampled image plane; not a registered surface map.':'Single-pixel spectrum; no spatial integration.'),measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},sourceRequest:d.record.request,sourceSatisfaction:d.record.satisfaction,metadata:parseNativeMetadata(found[0]),software:plotted},software:[{name:'cssEarth telescope outputs',version:implementation},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'}]};
     const names=requireArray(plotted.files).map(v=>requireString(v));
     await writeProductRecord(resolve(staging,'output.product.json'),run,names.map(path=>({path,file:beneath(staging,path)})));
     await rmdir(destination);await rename(staging,destination);

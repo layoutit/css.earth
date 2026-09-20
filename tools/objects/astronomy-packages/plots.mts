@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from matplotlib.colors import CenteredNorm
 r=json.load(sys.stdin); data=r['data']; out=Path(r['directory']); kind=data['kind']
 values=np.asarray(data['values'],dtype=float); sigma=np.asarray(data['sigma'],dtype=float)
 if not np.isfinite(values).any(): raise ValueError('The requested output contains no usable samples')
@@ -18,21 +19,25 @@ unit=data['unit'] or 'unit not stated'
 with (out/'values.csv').open('w',newline='') as file:
  writer=csv.writer(file)
  number=lambda n:float(n) if np.isfinite(n) else ''
- if kind=='image':
+ if kind in ('image','band-image','feature-map'):
   if values.ndim!=2:raise ValueError('Expected a two-dimensional image')
-  shown=ax.imshow(values,origin='lower',interpolation='nearest',cmap='viridis')
+  style={'cmap':'RdBu_r','norm':CenteredNorm(vcenter=0)} if kind=='feature-map' else {'cmap':'viridis'}
+  shown=ax.imshow(values,origin='lower',interpolation='nearest',**style)
   fig.colorbar(shown,ax=ax,label=unit);ax.set_xlabel('Image x (zero-based pixel)');ax.set_ylabel('Image y (zero-based pixel)')
-  title=r['target']+' — image'
+  title=r['target']+' — '+kind
   if data['plane'] is not None:title+=f"; plane {data['plane']} ({data['wavelengthsMicrometres'][data['plane']]:.5g} µm)"
-  ax.set_title(title);writer.writerow(['x_pixel','y_pixel','value','standard_deviation'])
+  if kind!='image':title+=f"; {data['selection']['band'][0]:g}–{data['selection']['band'][1]:g} µm\n"+data['definition'].split(';')[0]
+  ax.set_title(title,fontsize=10);writer.writerow(['x_pixel','y_pixel','value','standard_deviation'])
   for y in range(values.shape[0]):
    for x in range(values.shape[1]):writer.writerow([x,y,number(values[y,x]),number(sigma[y,x])])
- elif kind=='spectrum':
+ elif kind in ('spectrum','aperture-spectrum'):
   wave=np.asarray(data['wavelengthsMicrometres'],dtype=float)
   if values.ndim!=1 or wave.shape!=values.shape:raise ValueError('Spectrum coordinate mismatch')
   ax.plot(wave,values,color='#d5d7dc',lw=1)
-  if np.isfinite(sigma).any():ax.fill_between(wave,values-sigma,values+sigma,color='#d5d7dc',alpha=.2,label='Recorded ±1σ');ax.legend(frameon=False,labelcolor='#d5d7dc')
-  ax.set_xlabel('Wavelength (µm)');ax.set_ylabel(unit);ax.set_title(f"{r['target']} — pixel ({data['x']}, {data['y']})")
+  if np.isfinite(sigma).any():ax.fill_between(wave,values-sigma,values+sigma,color='#d5d7dc',alpha=.2,label=data.get('uncertaintyLabel','Recorded ±1σ'));ax.legend(frameon=False,labelcolor='#d5d7dc')
+  title=f"{r['target']} — pixel ({data['x']}, {data['y']})" if kind=='spectrum' else f"{r['target']} — aperture {data['selection']['aperture']}\n{data['definition']}"
+  ax.set_xlabel('Wavelength (µm)');ax.set_ylabel(unit);ax.set_title(title,fontsize=10)
+  if kind=='aperture-spectrum' and data['uncertaintyPolicy']=='omit':ax.text(.01,.02,data['uncertaintyLabel'],transform=ax.transAxes,fontsize=8)
   writer.writerow(['wavelength_um','value','standard_deviation'])
   for w,v,e in zip(wave,values,sigma):writer.writerow([w,number(v),number(e)])
  else:raise ValueError('Unknown plot kind')

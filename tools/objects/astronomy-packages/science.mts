@@ -2,6 +2,7 @@
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from './toolchain.mts';
 import { requireRecord, requireString } from '../../source-values.mts';
+import { CUBE_OUTPUT_PYTHON } from './cube-outputs.mts';
 export const SCIENCE_PYTHON = String.raw`
 import json, sys, warnings
 import numpy as np
@@ -12,6 +13,7 @@ from astropy.wcs import WCS
 from astropy.utils.exceptions import AstropyWarning
 warnings.simplefilter('error')
 request = json.load(sys.stdin)
+${CUBE_OUTPUT_PYTHON}
 def unit(text):
     if text is None: return None
     aliases = {'I/F':'1', 'DIMENSIONLESS':'1', 'DN':'adu', 'counts':'count', 'electrons':'electron'}
@@ -103,9 +105,10 @@ def read_science(path):
                         if not np.all(np.isfinite(edges)&(edges>0)): raise ValueError('Invalid spectral bin edges')
                     else: limits.append('Tabulated centers qualified; continuous bin edges are not inferred between knots.')
                     row['spectral']={'centersMicrometres':centers.tolist(),'axis':specaxis,'source':name+':Astropy WCSLIB'}
+                    if edges is not None: row['spectral']['binEdgesMicrometres']=edges.tolist()
                 except (NotImplementedError, u.UnitConversionError) as exc: limits.append(str(exc)); specaxis=None
             extract=request.get('operation')=='extract' and request.get('hdu')==index
-            output_values=None; output_sigma=None
+            output_values=None; output_sigma=None; aggregate=None; measurement={}
             if extract:
                 if len(shape)<2 or any(n!=1 for n in shape[:max(0,len(shape)-3)]): raise ValueError('Output needs two spatial axes and at most one spectral axis')
                 if (len(shape)>2 and shape[-3]>1 or specaxis is not None) and specaxis!=len(shape)-3: raise ValueError('Output needs a qualified leading spectral axis')
@@ -122,6 +125,9 @@ def read_science(path):
                     if specaxis!=len(shape)-3 or centers is None: raise ValueError('Output needs a qualified wavelength axis')
                     if not isinstance(x,int) or not isinstance(y,int) or not 0<=x<w or not 0<=y<height: raise ValueError('Select an explicit in-bounds zero-based pixel')
                     output_values=np.full(len(centers),np.nan); output_sigma=np.full(len(centers),np.nan)
+                elif kind in ('band-image','aperture-spectrum','feature-map'):
+                    if specaxis!=len(shape)-3: raise ValueError('Aggregation needs a qualified leading wavelength axis')
+                    aggregate=CubeOutput(request,shape,centers,edges,dataunit,error_unit_valid)
                 else: raise ValueError('Unknown output kind')
             total=0; finite=0; goodcount=0; baderror=0; flagged=0
             usable=np.zeros(shape[specaxis],dtype=bool) if specaxis is not None else None
@@ -148,7 +154,9 @@ def read_science(path):
                             scaled=e*eu.to(wanted)
                             with np.errstate(divide='ignore',invalid='ignore'):
                                 sigma=np.sqrt(scaled) if error_kind=='variance' else 1/np.sqrt(scaled) if error_kind=='inverse-variance' else scaled
-                        if kind=='image' and (specaxis is None or prefix[specaxis]==plane):
+                        if aggregate is not None:
+                            aggregate.add(prefix[specaxis],prefix[-1],start,a,sigma,good)
+                        elif kind=='image' and (specaxis is None or prefix[specaxis]==plane):
                             output_values[prefix[-1],start:start+a.size]=np.where(good,a,np.nan)
                             output_sigma[prefix[-1],start:start+a.size]=np.where(good,sigma,np.nan)
                         elif kind=='spectrum' and prefix[-1]==y and start<=x<start+a.size:
@@ -187,10 +195,11 @@ def read_science(path):
             if beam is not None and dataunit is not None and dataunit.is_equivalent(u.Jy/u.beam): row['angularResolutionArcsec']=beam
             else: limits.append('No applicable measured PSF or restoring beam; pixel sampling is not achieved resolution.')
             if extract:
+                if aggregate is not None: output_values,output_sigma,measurement=aggregate.result()
                 def nullable(a): return np.where(np.isfinite(a),a,None).tolist()
                 row['extraction']={'kind':kind,'values':nullable(output_values),'sigma':nullable(output_sigma),'unit':rawunit,
                     'wavelengthsMicrometres':centers.tolist() if centers is not None else None,
-                    'plane':request.get('plane'),'x':request.get('x'),'y':request.get('y')}
+                    'plane':request.get('plane'),'x':request.get('x'),'y':request.get('y'),**measurement}
             structures.append(row)
         return {'structures':structures,'references':refs,'primary':{k:v for k,v in primary.items() if k not in ('COMMENT','HISTORY','') and isinstance(v,(str,int,float,bool))},'astropy':astropy.__version__}
 
@@ -200,7 +209,7 @@ elif request['operation']=='units':
 else: raise ValueError('Unknown science operation')
 json.dump(answer,sys.stdout,allow_nan=False,separators=(',',':'))
 `;
-export async function sciencePackage(request: { operation: 'fits'; path: string } | { operation:'extract';path:string;hdu:number;kind:'image'|'spectrum';plane?:number;x?:number;y?:number } | { operation: 'units'; units: readonly string[] }): Promise<Record<string, unknown>> {
+export async function sciencePackage(request: { operation: 'fits'; path: string } | { operation:'extract';path:string;hdu:number;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent' } | { operation: 'units'; units: readonly string[] }): Promise<Record<string, unknown>> {
   const tc = await astroqueryToolchain();
   return new Promise((done, fail) => {
     const child = spawn(tc.python, ['-c', SCIENCE_PYTHON], { env: { ...process.env, ...tc.env }, stdio: ['pipe', 'pipe', 'pipe'] });

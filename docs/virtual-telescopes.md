@@ -631,9 +631,9 @@ aligned subsets supplied without a request interval.
 The CLI exposes `telescope outputs RESULT_JSON` and `telescope export RESULT_JSON`.
 [The command guide](../packages/telescope/README.md#outputs) covers selectors and files.
 
-The first executable outputs are a two-dimensional native FITS plane and a spectrum at one
-explicit pixel. Astropy owns coordinates and units; the shared scientific reader applies the
-same uncertainty and quality policy used by qualification; Matplotlib owns PNG/SVG figures.
+Executable outputs include a native FITS plane, a pixel spectrum, a wavelength-weighted
+band image, a background-subtracted region mean spectrum and a continuum-subtracted feature map. Astropy owns coordinates and units; the shared scientific reader applies the
+same uncertainty and quality policy used by qualification; Astropy NDData owns aggregate arithmetic and uncertainty propagation; Matplotlib owns PNG/SVG figures.
 Numeric CSV and a product record accompany each plot. The record pins the original delivery,
 its files, the chosen HDU/plane/pixel, the implementation, package versions and derived bytes.
 No plotting stage upgrades the original scientific request's satisfaction.
@@ -668,12 +668,75 @@ telescope export result.json --output spectrum --hdu 1 --pixel 25,27 --out eris-
 The delivery still reports unresolved angular resolution because the caller has not
 accepted its profile-model assumptions. Exporting these figures does not change that verdict.
 
+![Eris mean image over 2.2–2.4 micrometres](images/telescopes/eris-band-image.png)
+
+**Band image:** mean surface brightness over 2.2–2.4 µm, weighted by the overlap of each
+qualified wavelength bin with that interval. Each visible pixel has every selected sample.
+The image retains its native grid; this is not a registered body map.
+
+![Eris aperture spectrum with a separate background region subtracted](images/telescopes/eris-aperture-spectrum.png)
+
+**Aperture spectrum:** mean over the fixed box `[19,24,25,30]`, minus the mean over
+background box `[29,24,35,30]`. Coordinates are zero-based, upper bounds exclusive;
+these are two disjoint 6 × 6 pixel regions. The result remains mean surface brightness
+in MJy/sr, without a total-flux or aperture-correction claim. A missing sample in either
+region masks that channel instead of changing the measured area.
+
+![Eris continuum-subtracted feature integral over 2.30–2.34 micrometres](images/telescopes/eris-feature-map.png)
+
+**Feature map:** the wavelength integral over 2.30–2.34 µm after subtracting a linear
+continuum anchored by weighted means over 2.26–2.29 and 2.35–2.38 µm. The colour scale
+is symmetric around zero: blue is negative (absorption relative to this continuum), red
+is positive. Values are MJy µm/sr, not total flux. This selected-window example does not
+establish a chemical identification or detection significance; field-edge residuals remain.
+
+```sh
+telescope export result.json --output band-image --hdu 1 --band 2.2,2.4 --out eris-band
+telescope export result.json --output aperture-spectrum --hdu 1 --aperture 19,24,25,30 --background 29,24,35,30 --out eris-aperture
+telescope export result.json --output feature-map --hdu 1 --band 2.30,2.34 --continuum 2.26,2.29,2.35,2.38 --out eris-feature
+```
+
+All three examples use the same pinned cube above and the default `--uncertainty omit`:
+spatial/spectral covariance has not been supplied. The API can propagate sample variances
+with `--uncertainty independent`, including background and continuum errors, but its receipt
+and spectrum legend identify that assumption explicitly. No smoothing, PSF matching or
+resampling is applied. PNG, SVG, CSV and a pinned product record accompany each export.
+
+
+### Independent numerical references
+
+The new output arithmetic uses Astropy NDData. A separate reference tool reads the original
+FITS cube and computes spectra with Photutils aperture sums and spectral integrals with
+specutils. It does not call the production reducer. These comparisons cover all finite output
+samples; units and missing-sample masks match exactly. Reproduction commands are in the
+[CLI guide](../packages/telescope/README.md#independent-output-checks).
+
+| Eris output | Independent reference | Valid samples | Maximum absolute difference |
+| --- | --- | ---: | ---: |
+| Band image | specutils 2.4.0 `line_flux`, divided by wavelength width | 1,309 | 4.45e-15 MJy/sr |
+| Aperture spectrum | Photutils 3.0.0 rectangular aperture sums divided by area | 191 | 4.45e-16 MJy/sr |
+| Feature map | specutils 2.4.0 integration after explicit continuum subtraction | 1,312 | 1.12e-16 MJy µm/sr |
+
+![Eris band image, independent specutils reference, and their numerical difference](images/telescopes/eris-band-image-oracle.png)
+
+![Eris aperture spectrum overlaid with the Photutils reference, with residuals below](images/telescopes/eris-aperture-spectrum-oracle.png)
+
+![Eris feature map, independent specutils reference, and their numerical difference](images/telescopes/eris-feature-map-oracle.png)
+
+The residual colour scales are in the stated physical units, at floating-point roundoff levels.
+They are not science signal. Known-answer fixtures separately verify uncertainty propagation,
+including continuum and background contributions. These checks validate the extraction
+arithmetic; they share Astropy FITS/WCS decoding and do not establish calibration accuracy,
+unknown error covariance, molecular identity or detection significance.
+
 The remaining output families reuse existing scientific owners:
 
 | Output | Required scientific input | Existing owner / remaining adapter |
 | --- | --- | --- |
 | Native image | Qualified pixel array and mask | Executable FITS output adapter; image coordinates, not body coordinates |
-| Spectral chart | Qualified wavelength axis and explicit pixel | Executable FITS output adapter; supplied per-sample uncertainty, no spatial covariance claim |
+| Spectral chart | Qualified wavelength axis and explicit pixel or fixed region | Executable FITS output adapter; optional background subtraction and explicitly conditional uncertainty |
+| Band image | Qualified units and wavelength bin edges | Executable wavelength-weighted mean; partial boundary bins included |
+| Feature map | Qualified bins plus feature and bracketing continuum windows | Executable continuum-subtracted wavelength integral; signed residual, no detection claim |
 | Surface map | Measurement definition, viewing geometry, rotation/frame and resolution evidence | Existing instrument map authors and `body-map-publication.mts`; CLI output adapter remains |
 | Body sphere | Qualified surface map plus a prepared layer | Existing body preparation and renderer; output handoff remains |
 | 3D scatter/volume | Explicit coordinate frame, units and measured or explicitly modeled depth | Existing nebula lab preparation and viewer; output handoff remains |
