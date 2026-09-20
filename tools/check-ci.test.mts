@@ -39,6 +39,12 @@ test('the deploy consumes installed assets, rebuilds only catalogues and rejects
  assert.equal(packageFile.scripts['prepare:deploy-catalogues'],'node tools/prepare-facilities.mts --catalog-only');
  assert.doesNotMatch(packageFile.scripts['prepare:deploy']??'',/prepare:(?:facilities|provenance|nebulae)(?:\s|$)/);
 });
+test('the PR asset-origin check exercises the exact deploy build path',async()=>{
+ const workflow=await readFile(new URL('../.github/workflows/nightly.yml',import.meta.url),'utf8');
+ const steps=readCiSteps(workflow,'asset-origin-build');
+ const build=steps.find(step=>step.name==='Build the site with ASSET_ORIGIN set to a test origin');
+ assert.equal(build?.run.trim(),'pnpm build:deploy');
+});
 test('--quick skips only the network and documentation steps, and refuses a job without them',async()=>{
  const lint=readCiSteps(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8'),'lint');
  const quick=quickSteps(lint);
