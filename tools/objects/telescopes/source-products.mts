@@ -1,4 +1,5 @@
 /** Package-owned observations enter the same query as archive holdings. Pins stay in the existing source manifest. */
+import { intakeSources, type SourceIntakeIssue } from './source-intake.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -13,7 +14,7 @@ export const SOURCE_PRODUCTS_SCHEMA = 'cssearth-source-observations@1';
 export interface SourceFile { readonly role: string; readonly path: string; readonly origin: string; readonly bytes: number; readonly sha256: string }
 export interface SourceProduct {
   readonly id: string; readonly target: string; readonly telescope: string; readonly mode: string; readonly kind: ProductKind;
-  readonly archiveProductId: string; readonly decoder: 'fits-image' | 'pds-image'; readonly files: readonly SourceFile[];
+  readonly archiveProductId: string; readonly decoder: 'fits-image' | 'pds-image' | 'pds-product' | 'isis3'; readonly labelPath?: string; readonly files: readonly SourceFile[];
   readonly identity: Readonly<Record<string, string | number | boolean>>;
   readonly startIso?: string; readonly endIso?: string;
   readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
@@ -53,9 +54,9 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
     const row = requireRecord(raw, 'observation'), id = safeId(row.id, 'observation id');
     if (ids.has(id)) throw new TypeError(`Duplicate observation ${id}.`); ids.add(id);
     const decoder = requireString(row.decoder, 'decoder');
-    if (decoder !== 'fits-image' && decoder !== 'pds-image') throw new TypeError(`Unsupported source decoder ${decoder}.`);
+    if (decoder !== 'fits-image' && decoder !== 'pds-image' && decoder !== 'pds-product' && decoder !== 'isis3') throw new TypeError(`Unsupported source decoder ${decoder}.`);
     const kind = requireString(row.kind, 'product kind');
-    if ((kind !== 'image' && kind !== 'cube') || decoder === 'pds-image' && kind !== 'image') throw new TypeError(`${decoder} cannot qualify ${kind}.`);
+    if (!['image', 'cube', 'table'].includes(kind) || (decoder === 'fits-image' || decoder === 'isis3') && kind === 'table' || decoder === 'pds-image' && kind !== 'image') throw new TypeError(`${decoder} cannot qualify ${kind}.`);
     const files = requireArray(row.inputs, 'observation inputs').map(rawFile => {
       const entry = requireRecord(rawFile, 'observation input'), inputId = requireString(entry.input, 'manifest input'), pin = inputs.get(inputId);
       if (!pin) throw new TypeError(`${id} references missing manifest input ${inputId}.`);
@@ -68,6 +69,8 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
     });
     if (new Set(files.map(file => file.path)).size !== files.length || files.filter(file => file.role === 'science').length !== 1 || decoder === 'pds-image' && files.filter(file => file.role === 'label').length !== 1)
       throw new TypeError(`${id} needs one science input and, for PDS, one label, without duplicate files.`);
+    const labelPath = row.labelPath === undefined ? files.find(file => file.role === 'label')?.path : `src/objects/${target}/source/${requireString(row.labelPath, 'label path')}`;
+    if (decoder === 'pds-product' && (!labelPath || !files.some(file => file.path === labelPath))) throw new TypeError(`${id} needs a pinned labelPath.`);
     const identity = Object.fromEntries(Object.entries(requireRecord(row.identity, 'product identity')).map(([key, value]) => {
       if (!key || !['string', 'number', 'boolean'].includes(typeof value) || typeof value === 'number' && !Number.isFinite(value)) throw new TypeError(`Invalid product identity ${key}.`);
       return [key, value as string | number | boolean];
@@ -86,8 +89,8 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
       const value = requireFiniteNumber(row[key], key); if (!(value > 0)) throw new TypeError(`${key} must be positive.`); resolution[key] = value;
     }
     if (Object.keys(resolution).length) resolution.resolutionBasis = requireString(row.resolutionBasis, 'achieved resolution basis');
-    return { ...resolution, id, target, telescope: requireString(row.telescope, 'telescope'), mode: requireString(row.mode, 'mode'), kind,
-      archiveProductId: requireString(row.archiveProductId, 'archive identity'), decoder, files, identity,
+    return { ...resolution, id, target, telescope: requireString(row.telescope, 'telescope'), mode: requireString(row.mode, 'mode'), kind: kind as ProductKind,
+      archiveProductId: requireString(row.archiveProductId, 'archive identity'), decoder, files, identity, ...(labelPath ? { labelPath } : {}),
       ...(startIso ? { startIso } : {}), ...(endIso ? { endIso } : {}), ...(intervals ? { wavelengthIntervalsMicrometres: intervals } : {}),
       ...(row.centralWavelengthMicrometres === undefined ? {} : { centralWavelengthMicrometres: requireFiniteNumber(row.centralWavelengthMicrometres, 'central wavelength') }),
       units: requireString(row.units, 'units'), meaning: requireString(row.meaning, 'measurement meaning'), citation: requireString(row.citation, 'citation'),
@@ -96,13 +99,13 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
 }
 export const sourceReceipt = (product: SourceProduct) => `output/telescopes/${product.target}/${product.id}/qualification.product.json`;
 export async function sourceRun(product: SourceProduct): Promise<ProductRun> {
-  const sources = ['source-products.mts', 'qualify-source.mts', '../../fits.mts', '../../fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'];
+  const sources = ['source-intake.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', '../../fits.mts', '../../fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'];
   const digest = createHash('sha256');
   for (const path of sources) digest.update(path).update(await readFile(resolve(import.meta.dirname, path)));
   return { telescope: product.telescope, stage: 'source-qualification', inputs: product.files.map(file => ({ role: file.role, identity: file.origin, bytes: file.bytes, sha256: file.sha256 })),
     parameters: { observation: product }, software: [{ name: 'cssEarth source qualification', version: digest.digest('hex') }, { name: 'Node.js', version: process.version }] };
 }
-export async function loadSourceProducts(root: string, target: string): Promise<LoadedSourceProduct[]> {
+export async function loadSourceProducts(root: string, target: string, issues: SourceIntakeIssue[] = []): Promise<LoadedSourceProduct[]> {
   safeId(target, 'target');
   const source = resolve(root, 'src/objects', target, 'source');
   const value = await readFile(resolve(source, 'observations.json'), 'utf8').then(text => JSON.parse(text) as unknown).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
@@ -116,6 +119,7 @@ export async function loadSourceProducts(root: string, target: string): Promise<
       units: observation.units, meaning: observation.use, citation: observation.sourceFiles[0]!.origin,
       limitations: ['Filter width and achieved optical resolution are not supplied; pixel sampling is not optical resolution.'] });
   }
+  declared.push(...await intakeSources(root, target, declared, issues));
   if (new Set(declared.map(product => product.id)).size !== declared.length) throw new TypeError('Duplicate source product identity.');
   const loaded: LoadedSourceProduct[] = [];
   for (const product of declared) {

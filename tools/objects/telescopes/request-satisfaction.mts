@@ -1,3 +1,4 @@
+import { inputWavelengths } from './recipe-request.mts';
 /** Product facts answer a request; catalogue capabilities and successful decoding alone do not. */
 import type { CapabilityRequest, ConstraintVerdict, ProductKind, RequestedResult } from './query.mts';
 import { supportsMeasuredResolution, PROFILE_ASSUMPTIONS, RESOLUTION_ASSUMPTIONS, type ResolutionEvidence } from '../resolution-evidence.mts';
@@ -34,7 +35,7 @@ export function assessRequest(request: CapabilityRequest, facts: ProductFacts): 
   const ranges = facts.wavelengthIntervalsMicrometres;
   if (!ranges?.length) constraints.wavelength = unknown('No qualified wavelength interval is stated; a central wavelength does not establish band coverage.');
   else {
-    const [from, to] = request.wavelengthMicrometres; let end = from, started = false;
+    const [from, to] = facts.result === 'body-map' ? request.wavelengthMicrometres : inputWavelengths(request); let end = from, started = false;
     for (const [a, b] of [...ranges].sort((a, b) => a[0] - b[0])) if (a <= end && b >= from) { started = true; end = Math.max(end, b); }
     constraints.wavelength = started && end >= to ? yes('This product covers the complete requested wavelength interval.')
       : { answer: ranges.some(([a, b]) => a <= to && b >= from) ? 'partial' : 'no', reason: 'This product does not cover the complete requested interval.' };

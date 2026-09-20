@@ -1,10 +1,14 @@
 /** Acquire and qualify one exact package observation. Decoding establishes readability, never calibration or map registration. */
+import { sourceHeaders } from './source-transfer.mts';
+import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
+import { requireArray, requireRecord } from '../../source-values.mts';
 import { mkdir, readFile, writeFile, rename, rm, open, realpath } from 'node:fs/promises';
 import { dirname, resolve, basename } from 'node:path';
 import { Readable } from 'node:stream';
 import { withIdleTimeout, sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../../source-mirror.mts';
 import { readFitsHeader, readFitsHdu, readFitsHdus, fitsImageAccessor } from '../../fits.mts';
 import { readRiceCompressedImage } from '../../fits-rice.mts';
+import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field } from '../pds-labels.mts';
 import { pds3Keyword, pds3Values } from '../pds3-labels.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { assertInputPins, pinFile, readProductRecord, sameRun, writeProductRecord } from '../product-record.mts';
@@ -19,10 +23,11 @@ export async function acquireSourceFile(root: string, file: SourceFile): Promise
   await mkdir(dirname(path), { recursive: true });
   const tmp = `${path}.${process.pid}.partial`;
   const urls = [sourceCacheUrl(RUNTIME_ASSET_ORIGIN, file.sha256, basename(file.path)), file.origin];
+  const headers=await sourceHeaders(root,file);
   let last: unknown;
   for (const url of urls) {
     try {
-      const response = await fetch(url, { signal: AbortSignal.timeout(180_000) });
+      const response = await fetch(url, { headers: url === file.origin ? headers : {}, signal: AbortSignal.timeout(180_000) });
       if (!response.ok || !response.body) throw new Error(`HTTP ${response.status} for ${url}`);
       const handle = await open(tmp, 'w'); let bytes = 0, mark = 10_000_000;
       try {
@@ -66,11 +71,24 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
   if (previous && sourceRecordComplete(previous, product) && await sameRun(previous, run, path => inside(root, path))) return { product: product.files.find(file => file.role === 'science')!.path, receipt, reused: true };
   let decoded: unknown;
   if (product.decoder === 'fits-image') decoded = inspectFits(await readFile(inside(root, product.files.find(file => file.role === 'science')!.path)), product.identity, product.kind);
-  else {
-    const labelPath = inside(root, product.files.find(file => file.role === 'label')!.path), label = await readFile(labelPath, 'utf8');
-    for (const [key, expected] of Object.entries(product.identity)) if (pds3Keyword(label, key, []) !== String(expected)) throw new Error(`PDS identity mismatch for ${key}.`);
+  else if (product.decoder === 'isis3') {
+    const core=decodeIsis3Core(await readFile(inside(root,product.files.find(f=>f.role==='science')!.path)), product.labelPath ? await readFile(inside(root,product.labelPath)) : undefined);
+    for(const [key,expected] of Object.entries(product.identity)) if(core.identity[key]!==expected) throw new Error(`ISIS identity mismatch for ${key}.`);
+    if((core.bands===1?'image':'cube')!==product.kind) throw new Error('ISIS dimensions disagree with the declared kind.');
+    let finite=0,min=Infinity,max=-Infinity;
+    // ISIS Real special pixels lie below VALID_MIN4 (0xff7ffffa); retain valid zero/negative noise.
+    const threshold=Buffer.from('faff7fff','hex').readFloatLE();
+    for(const n of core.data) if(Number.isFinite(n)&&n>=threshold){finite++;min=Math.min(min,n);max=Math.max(max,n);}
+    if(!finite) throw new Error('ISIS core contains no finite non-special samples.');
+    decoded={standard:'ISIS3',metadata:{identity:core.identity,scaling:{base:core.base,multiplier:core.multiplier}},structures:[{name:'Core',shape:core.bands===1?[core.height,core.width]:[core.bands,core.height,core.width],elements:core.data.length,finite,missing:core.data.length-finite,minimum:min,maximum:max}]};
+  } else {
+    const labelPath = inside(root, product.labelPath ?? product.files.find(file => file.role === 'label')!.path), label = (await readFile(labelPath)).subarray(0, 128 * 1024).toString('latin1').split(/^END\s*$/imu)[0]!;
+    const pds4=pds4Blocks(label,'Product_Observational').length>0;
+    for (const [key, expected] of Object.entries(product.identity)) if ((pds4 ? requireRecord(pds4ProductIdentity(label))[key] : pds3Keyword(label, key, [])) !== String(expected)) throw new Error(`PDS identity mismatch for ${key}.`);
     await assertPdsDependencies(root, product);
     decoded = (await pdsPackages({ operation: 'decode-product', labelPath })).decoded;
+    const structures = requireArray(requireRecord(decoded).structures).map(value => requireRecord(value));
+    if (!structures.some(s => product.kind === 'table' ? s.kind === 'table' : requireArray(s.shape).length === (product.kind === 'cube' ? 3 : 2))) throw new Error('Decoded structures do not establish the declared product kind.');
   }
   // Recheck after the decoder: the receipt may only attest the exact bytes it read.
   await assertInputPins(run.inputs, new Map(product.files.map(file => [file.origin, inside(root, file.path)])));
@@ -81,16 +99,24 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
     meaning: product.meaning, limitations: product.limitations, acceptance: 'Input pins and header identity agree; complete supported arrays decoded. Calibration accuracy and scientific suitability are not established; measurement descriptions are source declarations.' }, null, 2)}\n`);
   const science = product.files.find(file => file.role === 'science')!;
   await writeProductRecord(resolve(root, receipt), run, [...product.files.map(file => ({ path: file.path, file: inside(root, file.path) })), { path: report, file: resolve(root, report) }],
-    [{ kind: 'archive-origin', receipt, product: science.path, establishes: 'Manifest-pinned archive bytes, matching header identity and complete supported image decoding. No local recalibration, archive comparison or surface registration is claimed.' }]);
+    [{ kind: 'archive-origin', receipt, product: science.path, establishes: 'Manifest-pinned archive bytes, matching header identity and complete supported numeric structure decoding. No local recalibration, archive comparison or surface registration is claimed.' }]);
   return { product: science.path, receipt, reused: false };
 }
 
 /** Check every detached pointer before pdr can resolve files outside the pinned dependency set. */
 export async function assertPdsDependencies(root: string, product: SourceProduct): Promise<void> {
-  const pending = product.files.filter(file => file.role === 'label'), visited = new Set<string>();
+  const pending = product.files.filter(file => file.role === 'label' || file.path === product.labelPath), visited = new Set<string>();
   while (pending.length) {
     const file = pending.shift()!; if (visited.has(file.path)) continue; visited.add(file.path);
-    const label = await readFile(inside(root, file.path), 'utf8');
+    const labelBytes = await readFile(inside(root, file.path));
+    const label = labelBytes.subarray(0, 128 * 1024).toString('latin1').split(/^END\s*$/imu)[0]!;
+    if (pds4Blocks(label,'Product_Observational').length) {
+      for (const entry of pds4Elements(label,'file_name')) {
+        const path=resolve(dirname(inside(root,file.path)),entry.content.trim());
+        if(!product.files.some(f=>inside(root,f.path)===path))throw new Error(`Unpinned PDS4 dependency ${entry.content}.`);
+      }
+      continue;
+    }
     const keys = [...new Set([...label.matchAll(/^\s*(\^[A-Z][A-Z0-9_:]*)\s*=/gmi)].map(match => match[1]!))];
     for (const key of keys) {
       // No scope means nested format pointers are included; ambiguous duplicate keys fail closed in the label parser.

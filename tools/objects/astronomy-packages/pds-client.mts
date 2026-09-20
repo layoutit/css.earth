@@ -72,7 +72,20 @@ elif operation == 'decode-product':
     if str(data.standard) == 'PDS3':
         structures = []
         for key in data.keys():
-            if key == 'LABEL' or key.lower() == 'label' or 'HEADER' in key: continue
+            if key == 'LABEL' or key.lower() == 'label' or 'HEADER' in key or key == 'HISTORY': continue
+            native = data[key]
+            if hasattr(native, 'columns'):
+                columns = []
+                for name in native.columns:
+                    column = native[name]
+                    numeric = np.issubdtype(column.dtype, np.number)
+                    valid = np.asarray(column)[np.isfinite(np.asarray(column))] if numeric else None
+                    columns.append({'name':str(name),'dtype':str(column.dtype),'numeric':numeric,
+                        'finite':int(valid.size) if numeric else None,
+                        'minimum':float(valid.min()) if numeric and valid.size else None,
+                        'maximum':float(valid.max()) if numeric and valid.size else None})
+                structures.append({'name':key,'kind':'table','shape':list(native.shape),'dtype':'table','elements':int(native.size),'columns':columns})
+                continue
             array = np.ma.asarray(data.get_scaled(key))
             if not np.issubdtype(array.dtype, np.number): continue
             valid = np.asarray(array.compressed())
@@ -80,7 +93,7 @@ elif operation == 'decode-product':
             if not valid.size: raise ValueError(f'{key} has no finite samples')
             structures.append({'name':key,'shape':list(array.shape),'dtype':str(array.dtype),'elements':int(array.size),'finite':int(valid.size),'minimum':float(valid.min()),'maximum':float(valid.max())})
         if not structures: raise ValueError('PDS3 product has no supported numeric structure')
-        answer['decoded'] = {'standard':'PDS3','metadata':{'scaling':'pdr get_scaled with special-value masking'},'structures':structures}
+        answer['decoded'] = {'standard':'PDS3','metadata':{'scaling':'pdr get_scaled with special-value masking for arrays; tables as decoded by pdr','excludedNonScienceObjects':[key for key in data.keys() if 'HEADER' in key or key == 'HISTORY']},'structures':structures}
         json.dump(answer, sys.stdout, allow_nan=False, separators=(',',':'))
         sys.exit(0)
     root = ET.parse(label).getroot()

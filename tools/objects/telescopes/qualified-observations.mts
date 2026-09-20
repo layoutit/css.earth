@@ -92,6 +92,6 @@ export async function loadQualifiedObservations(root: string, target: string): P
   return products;
 }
 export function matchingProduct(products: readonly QualifiedObservation[], request: CapabilityRequest, program: string) {
-  return products.filter(product => product.program === program && assessInput(request, product.facts).status !== 'refused')
+  return products.filter(product => product.program === program && assessInput(request, product.facts).status !== 'refused' && (!request.continuumMicrometres || assessInput(request, product.facts).constraints.wavelength?.answer === 'yes'))
     .sort((a, b) => Object.values(assessRequest(request, a.facts).constraints).filter(v => v.answer !== 'yes').length - Object.values(assessRequest(request, b.facts).constraints).filter(v => v.answer !== 'yes').length)[0];
 }

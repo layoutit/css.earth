@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import { assessRequest, type RequestSatisfaction } from './telescopes/request-satisfaction.mts';
+import { selectedProductInput } from './telescopes/selected-product.mts';
+import { assessRequest, summarizeSatisfaction, type RequestSatisfaction } from './telescopes/request-satisfaction.mts';
 /** Bind one scientific question and selected archive program to the exact body-map bytes published for it.
  *
  * The instrument-specific stages still do the science. This module supplies the missing boundary between them: a body map is
@@ -99,6 +100,7 @@ const publicationFile = async (path: string, selection: ObservationSelection, ar
  * measured beam/PSF and exact epoch, so this is where a partial answer becomes a definite yes or no. */
 export function assertMapAnswersRequest(product: BodyMapProduct, selection: ObservationSelection): Record<string, ConstraintVerdict> {
   const { request } = selection, observations = product.observations, resolved: Record<string, ConstraintVerdict> = {};
+  if (request.continuumMicrometres && (product.definition.method.kind !== 'band-depth' || JSON.stringify(product.definition.method.bandMicrometres) !== JSON.stringify(request.wavelengthMicrometres) || JSON.stringify(product.definition.method.continuumMicrometres) !== JSON.stringify(request.continuumMicrometres))) throw new Error('Published estimator does not match the requested band and continuum windows.');
   const measured = observations.every(o => supportsMeasuredResolution(o.angularResolution.evidence));
   const unsupported: ConstraintVerdict = { answer: 'unknown', reason: 'Not every observation has measured or calibrated resolution evidence; a number or prose basis is insufficient.' };
   const intervals = product.definition.wavelengthIntervalsMicrometres;
@@ -127,10 +129,11 @@ export function assertMapAnswersRequest(product: BodyMapProduct, selection: Obse
     resolved.resolutionElements = { answer: 'yes', reason: `The published map has at least ${fewest.toPrecision(3)} measured resolution elements across the disc, meeting the requested ${request.resolutionElements}.` };
   }
   if (request.time && !('any' in request.time)) {
-    const from = Date.parse(request.time.fromIso) / 86_400_000 + 2_440_587.5, to = Date.parse(request.time.toIso) / 86_400_000 + 2_440_587.5;
-    const outside = observations.find(o => o.midTimeJd < from || o.midTimeJd > to || (o.startTimeJd !== undefined && o.startTimeJd < from) || (o.endTimeJd !== undefined && o.endTimeJd > to));
+    const fromMs = Date.parse(request.time.fromIso), toMs = Date.parse(request.time.toIso);
+    const from = fromMs / 86_400_000 + 2_440_587.5, to = toMs / 86_400_000 + 2_440_587.5;
+    const outside = observations.find(o => o.startIso && o.endIso ? Date.parse(o.startIso)<fromMs || Date.parse(o.endIso)>toMs : o.midTimeJd < from || o.midTimeJd > to || (o.startTimeJd !== undefined && o.startTimeJd < from) || (o.endTimeJd !== undefined && o.endTimeJd > to));
     if (outside) throw new RangeError(`Cannot publish: observation ${outside.id} is outside the requested time range.`);
-    resolved.time = observations.every(o => o.startTimeJd !== undefined && o.endTimeJd !== undefined)
+    resolved.time = observations.every(o => o.startIso !== undefined && o.endIso !== undefined || o.startTimeJd !== undefined && o.endTimeJd !== undefined)
       ? { answer: 'yes', reason: 'Every complete observation interval is inside the requested time range.' }
       : { answer: 'unknown', reason: 'Observation midpoints or summed integration times do not establish the complete time interval.' };
   }
@@ -138,7 +141,7 @@ export function assertMapAnswersRequest(product: BodyMapProduct, selection: Obse
 }
 
 /** Verify the complete chain at publication time and return the small descriptor the body package can consume. */
-export async function qualifyBodyMap(mapPath: string, selection: ObservationSelection): Promise<TelescopeLayer> {
+export async function qualifyBodyMap(mapPath: string, selection: ObservationSelection, root = resolve(import.meta.dirname, '../..')): Promise<TelescopeLayer> {
   const metadataPath = resolve(mapPath), product = parseBodyMapProduct(JSON.parse((await publicationFile(metadataPath, selection, 'body-map metadata')).toString('utf8')) as unknown);
   const planePath = resolve(dirname(metadataPath), product.planes.file), expectedMetadata = `${planePath}.body-map.json`;
   if (metadataPath !== expectedMetadata) throw new Error(`The body-map record belongs at ${expectedMetadata}, beside the plane it names.`);
@@ -169,16 +172,19 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
       !row || row.majorArcsec !== observation.angularResolution.majorArcsec || row.minorArcsec !== observation.angularResolution.minorArcsec)
       throw new Error('Resolution receipt does not establish this observation and its beam axes.');
   }
+  const selected = selection.product ? await selectedProductInput(root, selection) : undefined;
+  if (selected && !record.inputs.some(i => i.identity === selected.input.identity && i.sha256 === selected.input.sha256 && i.bytes === selected.input.bytes)) throw new Error('Map did not consume the exact selected qualified artifact.');
   const resolvedConstraints = assertMapAnswersRequest(product, selection), resolvedNames = new Set(Object.keys(resolvedConstraints));
-  return { schema: TELESCOPE_LAYER_SCHEMA, satisfaction: assessRequest(selection.request, { verified: true, target: product.frame.body, result: 'body-map',
+  const satisfaction = assessRequest(selection.request, { verified: true, target: product.frame.body, result: 'body-map', ...(selected?.facts.kind ? { kind: selected.facts.kind } : {}),
       wavelengthIntervalsMicrometres: product.definition.wavelengthIntervalsMicrometres,
       resolutionEvidence: product.observations.map(o => o.angularResolution.evidence ?? { kind: 'unknown' }),
-      ...(product.observations.every(o => o.startTimeJd !== undefined && o.endTimeJd !== undefined) ? {
-        startIso: new Date((Math.min(...product.observations.map(o => o.startTimeJd!)) - 2440587.5) * 86400000).toISOString(),
-        endIso: new Date((Math.max(...product.observations.map(o => o.endTimeJd!)) - 2440587.5) * 86400000).toISOString() } : {}),
+      ...(product.observations.every(o => o.startIso && o.endIso) ? {
+        startIso: product.observations.map(o=>o.startIso!).sort()[0]!, endIso: product.observations.map(o=>o.endIso!).sort().at(-1)!
+      } : {}),
       angularResolutionArcsec: Math.max(...product.observations.map(observation => observation.angularResolution.majorArcsec)),
       surfaceResolutionKm: Math.max(...product.observations.map(observation => surfaceResolutionKm(observation).majorKm)),
-      resolutionElements: Math.min(...product.observations.map(observation => resolutionElementsAcrossDisc(observation, product.frame.radiusKm))) }), target: selection.request.target, request: selection.request,
+      resolutionElements: Math.min(...product.observations.map(observation => resolutionElementsAcrossDisc(observation, product.frame.radiusKm))) });
+  return { schema: TELESCOPE_LAYER_SCHEMA, satisfaction: resolvedConstraints.time ? summarizeSatisfaction({ ...satisfaction.constraints, time: resolvedConstraints.time }) : satisfaction, target: selection.request.target, request: selection.request,
     selection: { telescope: selection.telescope, mode: selection.mode, programme: selection.programme, toolkitLevel: selection.toolkitLevel,
       constraints: { ...selection.constraints, ...resolvedConstraints }, bodyMapSupport: selection.bodyMapSupport,
       unresolved: [...selection.unresolved.filter(item => !resolvedNames.has(item.constraint)),

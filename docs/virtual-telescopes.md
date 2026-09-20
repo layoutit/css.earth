@@ -24,10 +24,20 @@ mode, native product kind, exact archive identity, decoder, header assertions, m
 units, citation and explicit limitations. Optional wavelength intervals, UTC time bounds and achieved-resolution fields can support request fulfillment. Achieved resolution requires a stated measurement basis; source sampling is never promoted into that field. Hashes and sizes remain in the manifest.
 
 The available decoders are numeric FITS images/cubes (including supported RICE compression) and
-PDS images through pinned `pdr`. Existing detached PDS3 image labels produce this same contract
-automatically. Every referenced input must be pinned, including detached labels, metadata and
+supported PDS3/PDS4 images, cubes and tables through pinned `pdr`. ISIS3 Real cores use the
+shared tiled/band-sequential raster decoder, including multiband cores and detached pinned data. Source intake reads bounded headers
+from manifest-pinned FITS and attached or detached PDS products to produce this same contract
+automatically. Local headers are preferred; retrieved headers are cached with origin, time and
+digest. Header discovery does not verify the complete file. The query reports `sourceIntakeIssues`
+for unavailable, unsupported or incomplete inputs, rather than treating them as empty archives.
+Labels and dependencies can be pinned under `inputs`, `documents` or `generatedIntermediates`.
+Origin requests reuse matching download headers from the existing acquisition plan; those headers
+are not sent to the source mirror. Every referenced input must be pinned, including detached labels, metadata and
 external format definitions. PDS pointers to files outside that set are refused before decoding.
 Adding an unsupported format still requires a decoder; declaring a format does not implement it.
+For explicit `pds-product` declarations, `labelPath` identifies a pinned label relative to the
+source directory; it may name the science input itself for an attached-label product. Tables retain
+`pdr` column types and decoded values; array scaling and missing-value handling are reported separately.
 
 For example:
 
@@ -127,6 +137,21 @@ keyword table is pinned alongside the segments. Observation time/geometry from t
 promoted to qualified metadata. Synoptic maps span multiple epochs. Neither those limitations nor
 missing uncertainty/achieved resolution are repaired by labelling the existing display textures
 as scientific body maps.
+
+## Selected cubes and band-map recipes
+
+The JWST band-map author accepts `--selection <file>` for a saved selection, `--recipe <file>`
+for an explicit recipe and `--map-id <id>` to select one map. A supplied selection must match
+its recipe cube and a current qualification. The author reads that exact artifact, and publication
+checks that its byte count and digest occur in the map's recorded inputs. This establishes input
+kind from the qualified product; an author name alone cannot establish it.
+
+Band depth needs the band and both continuum windows. Add `--continuum LEFT_FROM,LEFT_TO,RIGHT_FROM,RIGHT_TO`
+to a cube query, or set `CapabilityRequest.continuumMicrometres`. The requested wavelength remains
+the measurement's band; qualification actions use the enclosing range of all three windows. A
+previously qualified cube missing either continuum cannot be selected for that recipe. Selection
+commands retain the windows, and publication checks that the author's estimator uses the same ones.
+Native source selection does not establish that a scientifically registered body map exists.
 
 ## Archive acquisition
 
