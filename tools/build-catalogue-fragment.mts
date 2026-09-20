@@ -1,11 +1,12 @@
 import { createHash } from "node:crypto";
+import { realpathSync } from 'node:fs';
 import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
 
 /**
- * Every object page inlined the same ~1.65 MB object-browser catalogue
- * (systems, overview scopes, every object). `PlanetCatalogueRows.astro` now
+ * Every object page inlined the same ~1.65 MB object-browser catalogue.
+ * `PlanetCatalogueRows.astro` now
  * renders it exactly once, at the `catalogue-fragment` build target; this
  * script runs right after `astro build` to turn that one render into the
  * shared, content-addressed file every page actually ships, following the
@@ -39,7 +40,12 @@ async function walkHtml(dir: string): Promise<string[]> {
   return files;
 }
 
-export interface BuildCatalogueFragmentResult { sha256: string; bytes: number; url: string; pagesRewritten: number; }
+export interface BuildCatalogueFragmentResult {
+  sha256: string;
+  bytes: number;
+  url: string;
+  pagesRewritten: number;
+}
 
 export async function buildCatalogueFragment(distDir: string): Promise<BuildCatalogueFragmentResult> {
   const fragmentDir = join(distDir, FRAGMENT_ROUTE);
@@ -86,7 +92,8 @@ async function main(argv: readonly string[]) {
   );
 }
 
-const isMain = process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
+const isMain = process.argv[1]
+  && realpathSync(fileURLToPath(import.meta.url)) === realpathSync(resolve(process.argv[1]));
 if (isMain) {
   try {
     await main(process.argv.slice(2));

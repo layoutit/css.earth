@@ -1,7 +1,8 @@
 import type { BrowserWindow } from './browser-types.mts';
-import type { CatalogueFragmentPin } from './catalogue-fragment-pin.mts';
+import type { CatalogueFragmentPin, CatalogueIndexPin } from './catalogue-fragment-pin.mts';
+import { parseCatalogueIndex, type CatalogueIndex } from './catalogue-index.mts';
 
-export { readCatalogueFragmentPin } from './catalogue-fragment-pin.mts';
+export { readCatalogueFragmentPin, readCatalogueIndexPin } from './catalogue-fragment-pin.mts';
 
 type FetchPage = (url: string) => Promise<Response>;
 
@@ -25,6 +26,20 @@ export async function loadCatalogueFragment(pin: CatalogueFragmentPin, { windowT
   const rows = source.querySelector('ul.planet-object-list');
   if (!(rows instanceof windowTarget.HTMLUListElement)) throw new Error('Object catalogue content is missing its list.');
   return rows;
+}
+
+/** Fetch and verify compact catalogue data without parsing or retaining an HTML document. */
+export async function loadCatalogueIndex(pin: CatalogueIndexPin, { windowTarget, fetchPage = url => windowTarget.fetch(url) }: {
+  windowTarget: BrowserWindow; fetchPage?: FetchPage;
+}): Promise<CatalogueIndex> {
+  const response = await fetchPage(pin.url);
+  if (!response.ok) throw new Error(`Object catalogue index request failed: ${response.status}.`);
+  const buffer = await response.arrayBuffer();
+  if (buffer.byteLength !== pin.bytes) throw new Error('Object catalogue index size drifted.');
+  const digest = [...new Uint8Array(await windowTarget.crypto.subtle.digest('SHA-256', buffer))]
+    .map(byte => byte.toString(16).padStart(2, '0')).join('');
+  if (digest !== pin.sha256) throw new Error('Object catalogue index identity drifted.');
+  return parseCatalogueIndex(JSON.parse(new windowTarget.TextDecoder().decode(buffer)) as unknown);
 }
 
 /** Runs `task` once the browser is idle, or soon after if it never reports one. */
