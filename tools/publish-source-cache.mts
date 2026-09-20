@@ -54,7 +54,10 @@ export async function objectSourceCacheCandidates(id: string): Promise<readonly 
     const lenses = (presentation as Record<string, unknown>).lenses;
     if (Array.isArray(lenses)) for (const lens of lenses) {
       const preview = (lens as Record<string, unknown>).preview as Record<string, unknown> | undefined;
-      if (preview && typeof preview.url === 'string' && typeof preview.path === 'string' && typeof preview.sha256 === 'string' && typeof preview.bytes === 'number') {
+      // A sky-band composite has no publisher URL: it is composed here from survey tiles and pinned by its own
+      // hash, so mirroring it is what keeps a fresh checkout off the survey archive.
+      const addressable = typeof preview?.url === 'string' || (typeof preview?.skyBands === 'object' && preview.skyBands !== null);
+      if (preview && addressable && typeof preview.path === 'string' && typeof preview.sha256 === 'string' && typeof preview.bytes === 'number') {
         candidates.push({ filename: basename(preview.path), path: preview.path, sha256: preview.sha256, bytes: preview.bytes });
       }
     }
