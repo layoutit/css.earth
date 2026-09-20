@@ -138,6 +138,12 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
       }
       for (const anchor of root.querySelectorAll<HTMLAnchorElement>('a[data-atlas-object][aria-current]')) anchor.removeAttribute('aria-current');
       target?.setAttribute('aria-current', 'page');
+      const selectedRoot = target?.closest<HTMLDetailsElement>('details[data-atlas-depth="0"]') ?? null;
+      if (selectedRoot) {
+        for (const branch of root.querySelectorAll<HTMLDetailsElement>('details[data-atlas-depth="0"]')) {
+          if (branch !== selectedRoot) branch.open = false;
+        }
+      }
       for (let branch = target?.closest<HTMLDetailsElement>('details') ?? null; branch; branch = branch.parentElement?.closest<HTMLDetailsElement>('details') ?? null) {
         branch.open = true;
       }

@@ -40,3 +40,25 @@ test('deferred navigation materializes only the selected path from its verified 
   assert.equal(root.querySelector<HTMLDetailsElement>('details[data-atlas-key="branch"]')?.open, true);
   controller.destroy();
 });
+
+test('selecting an object keeps only its top-level scale branch open', async () => {
+  const { document, window } = parseHTML(`<div data-object-navigation-tree>
+    <ul class="atlas-tree">
+      <li><details open data-atlas-depth="0" data-atlas-key="solar-system"><summary>Solar System</summary><ul><li><a data-atlas-object="sun">Sun</a></li></ul></details></li>
+      <li><details open data-atlas-depth="0" data-atlas-key="milky-way"><summary>Milky Way</summary><ul><li><a data-atlas-object="milky-way">Milky Way</a></li></ul></details></li>
+    </ul>
+  </div>`);
+  const root = document.querySelector<HTMLElement>('[data-object-navigation-tree]')!;
+  const controller = createNavigationTreeController(root, window as unknown as BrowserWindow);
+  const solarSystem = root.querySelector<HTMLDetailsElement>('details[data-atlas-key="solar-system"]')!;
+  const milkyWay = root.querySelector<HTMLDetailsElement>('details[data-atlas-key="milky-way"]')!;
+
+  await controller.select('milky-way');
+  assert.equal(solarSystem.open, false);
+  assert.equal(milkyWay.open, true);
+
+  await controller.select('sun');
+  assert.equal(solarSystem.open, true);
+  assert.equal(milkyWay.open, false);
+  controller.destroy();
+});
