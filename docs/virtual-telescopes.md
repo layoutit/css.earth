@@ -943,6 +943,8 @@ coordinates to native FITS coordinates; the map excludes emission angles above 6
 The actual standalone HTML export, rotated through the shared drag controls
 (61 browser frames, resized from 1280 × 720 to 960 × 540 and played at 12.5 fps):
 
+![Europa measurement in the standalone HTML sphere](images/telescopes/europa-sphere-html.png)
+
 ![Europa measurement rotating in the standard css.earth sphere](images/telescopes/europa-sphere-rotation.gif)
 
 The independent reference traces orthographic rays through the pinned triaxial
