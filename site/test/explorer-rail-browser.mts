@@ -376,8 +376,8 @@ try {
           : next;
         return node.previousElementSibling?.matches(".planet-motion-setting-control") === true &&
           minimap?.matches(".planet-minimap-setting-control") === true &&
-          minimap.nextElementSibling?.matches(".planet-planetary-labels-setting-control") === true;
-      }), true, `${config.label}: Motion and Speed are consecutive; Minimap precedes Planetary labels`);
+          minimap.nextElementSibling?.matches(".planet-surface-labels-setting-control") === true;
+      }), true, `${config.label}: Motion and Speed are consecutive; Minimap precedes Surface labels`);
       assert.equal(await speed.isDisabled(), !(await motion.isChecked()),
         `${config.label}: Motion controls Speed availability`);
       await settingsPanel.locator(".planet-motion-setting-control").click();
@@ -396,21 +396,21 @@ try {
     }
     await settings.click();
     assert.equal(await settingsPanel.isVisible(), true, "clicking the selected rail item keeps its panel open");
-    const planetaryLabels = settingsPanel.locator(".planet-planetary-labels-setting");
-    const planetaryLabelsSwitch = settingsPanel.locator(".planet-planetary-labels-setting-control .planet-setting-switch");
-    assert.equal(await planetaryLabels.isChecked(), false, "Planetary labels starts off");
-    const offThumbTransform = await planetaryLabelsSwitch.evaluate((node) => getComputedStyle(node, "::before").transform);
-    await settingsPanel.locator(".planet-planetary-labels-setting-control").click();
-    assert.equal(await planetaryLabels.isChecked(), true);
-    assert.notEqual(await planetaryLabelsSwitch.evaluate((node) => getComputedStyle(node, "::before").transform), offThumbTransform,
+    const surfaceLabels = settingsPanel.locator(".planet-surface-labels-setting");
+    const surfaceLabelsSwitch = settingsPanel.locator(".planet-surface-labels-setting-control .planet-setting-switch");
+    assert.equal(await surfaceLabels.isChecked(), false, "Surface labels starts off");
+    const offThumbTransform = await surfaceLabelsSwitch.evaluate((node) => getComputedStyle(node, "::before").transform);
+    await settingsPanel.locator(".planet-surface-labels-setting-control").click();
+    assert.equal(await surfaceLabels.isChecked(), true);
+    assert.notEqual(await surfaceLabelsSwitch.evaluate((node) => getComputedStyle(node, "::before").transform), offThumbTransform,
       `${config.label}: checked switch moves its thumb`);
     await about.click();
     assert.equal(await settingsPanel.isVisible(), false);
     assert.equal(await settings.getAttribute("aria-pressed"), "false");
     await settings.focus();
     await page.keyboard.press("Enter");
-    assert.equal(await planetaryLabels.isChecked(), true, "switching panels retains settings values");
-    await settingsPanel.locator(".planet-planetary-labels-setting-control").click();
+    assert.equal(await surfaceLabels.isChecked(), true, "switching panels retains settings values");
+    await settingsPanel.locator(".planet-surface-labels-setting-control").click();
     if (output && ["jupiter-desktop", "saturn-desktop", "phone-dpr2", "small-phone"].includes(config.label)) {
       await page.screenshot({ path: `${output}/${config.label}-settings.png` });
     }

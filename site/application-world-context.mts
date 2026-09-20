@@ -168,11 +168,11 @@ export function createApplicationWorldContext() {
         const minimap = createSpaceMinimapSetting(stage.ownerDocument, error => target.reportError(error));
         const moonLabels = mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock);
         let heliosphereEnabled = false, shellsMounted = false, destroyed = false;
-        let illustrationModelsEnabled = false, planetaryLabelsEnabled = false;
+        let illustrationModelsEnabled = false;
         let highlightedClassification: string | null = null;
         const updateDiscoveryVisibility = () => {
           const { hiddenBodies, hiddenLabels, highlightedBodies } = discoveryVisibility(SCENE_OBJECTS, { illustrations: illustrationModelsEnabled,
-            planetaryLabels: planetaryLabelsEnabled, highlighted: highlightedClassification });
+            highlighted: highlightedClassification });
           layer.setHiddenBodies(hiddenBodies);
           layer.setHiddenLabels(hiddenLabels);
           layer.setHighlighted(highlightedBodies);
@@ -282,11 +282,6 @@ export function createApplicationWorldContext() {
           setIllustrationModelsEnabled(enabled: boolean) {
             if (destroyed) return;
             illustrationModelsEnabled = enabled === true;
-            updateDiscoveryVisibility();
-          },
-          setPlanetaryLabelsEnabled(enabled: boolean) {
-            if (destroyed) return;
-            planetaryLabelsEnabled = enabled === true;
             updateDiscoveryVisibility();
           },
           setMinimapEnabled(enabled: boolean) {

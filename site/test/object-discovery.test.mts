@@ -14,7 +14,7 @@ import { objectClassificationLabel } from '../planet-search-objects.mts';
 const controls = (...ids: string[]) => ({ lenses: { controls: ids.map(id => ({ id })) } });
 const policy = { illustrationLenses: ['model'] };
 const model = { id: 'model', metadata: { modeled: true } };
-const defaults = { illustrations: false, planetaryLabels: false };
+const defaults = { illustrations: false };
 
 test('all four type searches and scene highlights contain the same eligible registered objects', () => {
   const labels = SCENE_OBJECTS.map(object => ({ id: object.id, name: object.name.toLowerCase(), names: [],
@@ -81,11 +81,11 @@ test('partial photographic coverage still counts; source and lens counts do not'
   assert.throws(() => parseObjectDiscovery({ featured: true, imagery: false, illustration: true }));
 });
 
-test('default discovery admits every non-illustrative asteroid without publishing planetary annotations', () => {
+test('default discovery admits every non-illustrative asteroid without changing context-label policy', () => {
   const initial = discoveryVisibility(SCENE_OBJECTS, defaults);
   for (const id of ['itokawa', 'ryugu', 'bennu', 'vesta', 'eros', 'arrokoth', 'comet-67p']) {
     assert.equal(initial.hiddenBodies.includes(id), false, id);
-    assert.equal(initial.hiddenLabels.includes(id), true, id);
+    assert.equal(initial.hiddenLabels.includes(id), false, id);
     assert.equal(requireSceneObject(id).discovery.imagery, true, id);
   }
   for (const id of ['pallas', 'psyche', 'squannit', 'kleopatra', 'asteroid-2001-sn263']) {
@@ -100,7 +100,7 @@ test('default discovery admits every non-illustrative asteroid without publishin
 });
 
 test('a star with only its shape stays off the map, whatever the settings', () => {
-  for (const options of [defaults, { illustrations: true, planetaryLabels: true, highlighted: 'star' }]) {
+  for (const options of [defaults, { illustrations: true, highlighted: 'star' }]) {
     const scene = discoveryVisibility(SCENE_OBJECTS, options);
     for (const id of ['antares', 'polaris']) {
       assert.equal(requireSceneObject(id).discovery.imagery, false, id);
@@ -115,11 +115,10 @@ test('a shape-only star that a body with imagery orbits stays on the map with it
   assert.equal(requireSceneObject('wasp-43').discovery.hostsImagery, true);
   assert.equal(requireSceneObject('wasp-43b').discovery.imagery, true);
   for (const id of ['antares', 'polaris']) assert.equal(requireSceneObject(id).discovery.hostsImagery, undefined, id);
-  for (const options of [defaults, { illustrations: true, planetaryLabels: true, highlighted: 'star' }]) {
+  for (const options of [defaults, { illustrations: true, highlighted: 'star' }]) {
     const scene = discoveryVisibility(SCENE_OBJECTS, options);
     for (const id of ['wasp-43', 'wasp-43b']) assert.equal(scene.hiddenBodies.includes(id), false, id);
-    assert.equal(scene.hiddenLabels.includes('wasp-43'), false);
-    assert.equal(scene.hiddenLabels.includes('wasp-43b'), !options.planetaryLabels);
+    for (const id of ['wasp-43', 'wasp-43b']) assert.equal(scene.hiddenLabels.includes(id), false, id);
   }
   assert.throws(() => parseObjectDiscovery({ featured: true, imagery: true, illustration: false, hostsImagery: true }), /without imagery of its own/u);
 });
@@ -130,18 +129,17 @@ test('a star whose colour comes from its own measurements stays on the map', () 
   assert.equal(requireSceneObject('hd-189733-companion').discovery.hostsImagery, undefined);
   assert.equal(requireSceneObject('hd-189733-companion').discovery.sourceColor, true);
   for (const id of ['antares', 'polaris']) assert.equal(requireSceneObject(id).discovery.sourceColor, undefined, id);
-  for (const options of [defaults, { illustrations: true, planetaryLabels: true, highlighted: 'star' }]) {
+  for (const options of [defaults, { illustrations: true, highlighted: 'star' }]) {
     const scene = discoveryVisibility(SCENE_OBJECTS, options);
     for (const id of ['hd-189733', 'hd-189733b', 'hd-189733-companion']) assert.equal(scene.hiddenBodies.includes(id), false, id);
-    for (const id of ['hd-189733', 'hd-189733-companion']) assert.equal(scene.hiddenLabels.includes(id), false, id);
-    assert.equal(scene.hiddenLabels.includes('hd-189733b'), !options.planetaryLabels);
+    for (const id of ['hd-189733', 'hd-189733b', 'hd-189733-companion']) assert.equal(scene.hiddenLabels.includes(id), false, id);
     for (const id of ['antares', 'polaris']) assert.ok(scene.hiddenBodies.includes(id), id);
   }
   assert.throws(() => parseObjectDiscovery({ featured: true, imagery: true, illustration: false, sourceColor: true }), /source colour/u);
 });
 
 test('category browsing cannot bypass Illustration models', () => {
-  const browse = discoveryVisibility(SCENE_OBJECTS, { illustrations: false, planetaryLabels: false, highlighted: 'asteroid' });
+  const browse = discoveryVisibility(SCENE_OBJECTS, { illustrations: false, highlighted: 'asteroid' });
   assert.equal(browse.hiddenBodies.includes('annefrank'), true);
   for (const id of ['pallas', 'psyche', 'squannit', 'kleopatra', 'asteroid-2001-sn263', 'eris', 'haumea', 'makemake']) {
     assert.equal(browse.hiddenBodies.includes(id), false, `${id}: reconstructed shape remains available`);
@@ -152,18 +150,6 @@ test('category browsing cannot bypass Illustration models', () => {
   const explicit = discoveryVisibility(SCENE_OBJECTS, { ...defaults, highlighted: 'comet' });
   assert.equal(explicit.hiddenLabels.includes('comet-67p'), false);
   assert.equal(explicit.hiddenBodies.includes('comet-c1995-o1'), true);
-});
-
-test('planetary-scene labels are off by default and can be revealed together or by category highlight', () => {
-  const initial = discoveryVisibility(SCENE_OBJECTS, defaults);
-  assert.equal(initial.hiddenLabels.includes('sun'), false, 'the system-star anchor stays labelled');
-  for (const id of ['earth', 'moon', 'ceres', 'itokawa', 'comet-67p', 'pluto', 'wasp-43b'])
-    assert.equal(initial.hiddenLabels.includes(id), true, id);
-  const enabled = discoveryVisibility(SCENE_OBJECTS, { ...defaults, planetaryLabels: true });
-  for (const id of ['earth', 'moon', 'ceres', 'itokawa', 'comet-67p', 'pluto', 'wasp-43b'])
-    assert.equal(enabled.hiddenLabels.includes(id), false, id);
-  const highlighted = discoveryVisibility(SCENE_OBJECTS, { ...defaults, highlighted: 'planet' });
-  for (const id of ['earth', 'ceres', 'pluto']) assert.equal(highlighted.hiddenLabels.includes(id), false, id);
 });
 
 test('photographic arrivals use the prepared package camera, excluding modeled and unexposed datasets', async () => {

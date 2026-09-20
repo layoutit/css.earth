@@ -89,7 +89,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
     ".planet-information-panel", ".planet-object-browser", ".planet-object-empty",
     ".planet-sheet-handle", ".planet-settings-panel", ".planet-settings-action",
     ".explorer-rail-explore", ".explorer-rail-about", ".explorer-about-panel",
-    ".planet-motion-setting", ".planet-planetary-labels-setting", ".planet-heliosphere-setting", ".planet-illustration-models-setting", ".planet-minimap-setting"]) {
+    ".planet-motion-setting", ".planet-surface-labels-setting", ".planet-heliosphere-setting", ".planet-illustration-models-setting", ".planet-minimap-setting"]) {
     const element = new Element();
     selectors.set(selector, element); elements.push(element);
   }
@@ -196,17 +196,17 @@ test('Illustration models starts off and retains its independent preference acro
   assert.ok(f.elements.every(element => element.listeners.size === 0));
 });
 
-test('Planetary labels starts off and retains its independent preference across body navigation', () => {
-  const changes: boolean[] = [], f = fixture({ onPlanetaryLabelsChange: value => changes.push(value) }), shell = f.mount();
-  const toggle = f.selectors.element('.planet-planetary-labels-setting');
+test('Surface labels starts off and retains its independent preference across body navigation', () => {
+  const changes: boolean[] = [], f = fixture({ onSurfaceLabelsChange: value => changes.push(value) }), shell = f.mount();
+  const toggle = f.selectors.element('.planet-surface-labels-setting');
   assert.equal(toggle.checked, false);
-  assert.equal(f.documentTarget.body.dataset.planetaryLabels, 'off');
+  assert.equal(f.documentTarget.body.dataset.surfaceLabels, 'off');
   for (const enabled of [true, false]) {
     toggle.checked = enabled; toggle.dispatchEvent(new Event('change'));
     for (const id of ['itokawa', 'sun', 'saturn']) {
       shell.setObject({ id, name: id, apply() {}, dispose() {} });
       assert.equal(toggle.checked, enabled);
-      assert.equal(f.documentTarget.body.dataset.planetaryLabels, enabled ? 'on' : 'off');
+      assert.equal(f.documentTarget.body.dataset.surfaceLabels, enabled ? 'on' : 'off');
       assert.equal(f.selectors.element('.planet-heliosphere-setting').checked, false);
     }
   }
@@ -228,7 +228,7 @@ test('Minimap starts off, mirrors its state for the stylesheet and keeps the pre
       shell.setObject({ id, name: id, apply() {}, dispose() {} });
       assert.equal(toggle.checked, enabled);
       assert.equal(f.documentTarget.body.dataset.minimap, enabled ? 'on' : 'off');
-      assert.equal(f.selectors.element('.planet-planetary-labels-setting').checked, false);
+      assert.equal(f.selectors.element('.planet-surface-labels-setting').checked, false);
     }
   }
   assert.deepEqual(changes, [true, false]);
@@ -267,7 +267,7 @@ test("shell with no optional controls keeps Motion and accessible blocked intent
 
 test("failed shell construction cleans earlier controllers and their scheduled work", () => {
   const f = fixture();
-  f.selectors.delete(".planet-planetary-labels-setting");
+  f.selectors.delete(".planet-surface-labels-setting");
   assert.throws(f.mount, /settings controls are incomplete/);
   assert.equal(f.frames.size, 0);
   assert.ok(f.elements.every((element) => element.listeners.size === 0));
@@ -276,14 +276,14 @@ test("failed shell construction cleans earlier controllers and their scheduled w
 });
 
 test('object content replacement retains shell controls and input state without accumulating listeners', () => {
-  const labelChanges: boolean[] = [], f = fixture({ onPlanetaryLabelsChange: value => labelChanges.push(value) }), shell = f.mount();
+  const labelChanges: boolean[] = [], f = fixture({ onSurfaceLabelsChange: value => labelChanges.push(value) }), shell = f.mount();
   const search = f.selectors.element('.planet-sidebar-search');
   const drawer = f.selectors.element('.planet-drawer-content');
   const motion = f.selectors.element('.planet-motion-setting');
-  const planetaryLabels = f.selectors.element('.planet-planetary-labels-setting');
+  const surfaceLabels = f.selectors.element('.planet-surface-labels-setting');
   const heliosphere = f.selectors.element('.planet-heliosphere-setting');
   motion.checked = true; motion.dispatchEvent(new Event('change'));
-  planetaryLabels.checked = true; planetaryLabels.dispatchEvent(new Event('change'));
+  surfaceLabels.checked = true; surfaceLabels.dispatchEvent(new Event('change'));
   heliosphere.checked = true; heliosphere.dispatchEvent(new Event('change'));
   const searchListeners = search.listeners.size, drawerListeners = drawer.listeners.size;
   for (const id of ['second', 'third', 'first']) {
@@ -294,11 +294,11 @@ test('object content replacement retains shell controls and input state without 
     assert.equal(search.listeners.size, searchListeners);
     assert.equal(drawer.listeners.size, drawerListeners);
     assert.equal(motion.checked, true);
-    assert.equal(planetaryLabels.checked, true);
+    assert.equal(surfaceLabels.checked, true);
     assert.equal(heliosphere.checked, true);
-    assert.equal(f.documentTarget.body.dataset.planetaryLabels, 'on');
+    assert.equal(f.documentTarget.body.dataset.surfaceLabels, 'on');
   }
-  assert.deepEqual(labelChanges, [true], 'Content replacement preserves planetary labels without replaying intent');
+  assert.deepEqual(labelChanges, [true], 'Content replacement preserves surface labels without replaying intent');
   assert.deepEqual(f.changes, [true]);
   shell.destroy();
   assert.ok(f.elements.every(element => element.listeners.size === 0));

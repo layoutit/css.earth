@@ -65,7 +65,7 @@ export function requireObjectControls(content: ObjectControls, objectId = 'unkno
   }
   if (lensControls.length && !surfaceIds.length) throw new TypeError(`Object ${objectId} has no prepared surface lens.`);
   const settings = content.settings?.controls ?? [], names = settings.map(setting => setting.name);
-  if (names.some(name => !nonempty(name) || ['motion', 'heliosphere', 'illustrationModels', 'planetaryLabels', 'minimap'].includes(name)) || new Set(names).size !== names.length ||
+  if (names.some(name => !nonempty(name) || ['motion', 'heliosphere', 'illustrationModels', 'surfaceLabels', 'minimap'].includes(name)) || new Set(names).size !== names.length ||
       settings.some(setting => !['toggle', 'cycle'].includes(setting.kind) || !nonempty(setting.label) ||
         (setting.kind === 'toggle' ? typeof setting.checked !== 'boolean' : !nonempty(setting.state)))) {
     throw new TypeError(`Object ${objectId} settings controls are invalid.`);

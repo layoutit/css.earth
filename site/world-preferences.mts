@@ -7,13 +7,13 @@ type World = Awaited<ReturnType<ReturnType<typeof createApplicationWorldContext>
 export function createWorldPreferences(documentTarget: Document) {
   const state = {
     heliosphereEnabled: false, illustrationModelsEnabled: false,
-    planetaryLabelsEnabled: false, minimapEnabled: false,
+    surfaceLabelsEnabled: false, minimapEnabled: false,
     highlightedClassification: null as string | null,
   };
   const setters: { [K in keyof typeof state]: (world: World, value: typeof state[K]) => void } = {
     heliosphereEnabled: (world, value) => world.setHeliosphereEnabled?.(value),
     illustrationModelsEnabled: (world, value) => world.setIllustrationModelsEnabled?.(value),
-    planetaryLabelsEnabled: (world, value) => world.setPlanetaryLabelsEnabled?.(value),
+    surfaceLabelsEnabled: () => {},
     minimapEnabled: (world, value) => world.setMinimapEnabled?.(value),
     highlightedClassification: (world, value) => world.setHighlightedClassification?.(value),
   };
@@ -33,7 +33,7 @@ export function createWorldPreferences(documentTarget: Document) {
         ...state,
         onHeliosphereChange: value => update('heliosphereEnabled', value === true),
         onIllustrationModelsChange: value => update('illustrationModelsEnabled', value === true),
-        onPlanetaryLabelsChange: value => update('planetaryLabelsEnabled', value === true),
+        onSurfaceLabelsChange: value => update('surfaceLabelsEnabled', value === true),
         onMinimapChange: value => update('minimapEnabled', value === true),
         onCategoryChange: value => update('highlightedClassification', value),
       } satisfies Partial<ShellOptions>;

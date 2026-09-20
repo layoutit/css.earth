@@ -31,14 +31,11 @@ export function isDiscoveryAnchor(object: { classification: string }): boolean {
 
 /** Explicit searches still navigate every registered object. This controls the default world. */
 export function discoveryVisibility(objects: readonly { id: string; classification: string; discovery: ObjectDiscovery }[],
-  options: { illustrations: boolean; planetaryLabels: boolean; highlighted?: string | null }) {
+  options: { illustrations: boolean; highlighted?: string | null }) {
   const hiddenBodies: string[] = [], hiddenLabels: string[] = [], highlightedBodies: string[] = [];
   for (const object of objects) {
     const illustration = object.discovery.illustration;
     const featured = object.discovery.featured || isDiscoveryAnchor(object);
-    // This setting owns annotations throughout planetary scenes, not only
-    // objects whose catalogue classification happens to be "planet".
-    const planetary = object.classification !== 'star';
     // A star with only its shape stays off the map until a surface image can be cast; its page still opens from search. A star
     // that a body with imagery orbits stays on it: without the star the planet has no system. So does a star whose colour comes from
     // its own measurements.
@@ -47,8 +44,7 @@ export function discoveryVisibility(objects: readonly { id: string; classificati
     if (highlighted) highlightedBodies.push(object.id);
     if (illustration && !options.illustrations) hiddenBodies.push(object.id);
     if (!featured && object.classification !== 'satellite' && !highlighted &&
-        !(illustration && options.illustrations) && !(planetary && options.planetaryLabels)) hiddenLabels.push(object.id);
-    if (planetary && !options.planetaryLabels && !highlighted && !hiddenLabels.includes(object.id)) hiddenLabels.push(object.id);
+        !(illustration && options.illustrations)) hiddenLabels.push(object.id);
   }
   return { hiddenBodies, hiddenLabels, highlightedBodies };
 }

@@ -17,7 +17,7 @@ export function requireControls(value: unknown): asserts value is ObjectControls
     const settings = record(controls.settings, 'settings'), names: string[] = [];
     for (const input of array(settings.controls, 'setting controls')) {
       const setting = record(input, 'setting'), name = text(setting.name, 'setting name'); names.push(name);
-      if (['motion', 'planetaryLabels', 'heliosphere'].includes(name)) fail('setting belongs to shared shell');
+      if (['motion', 'surfaceLabels', 'heliosphere'].includes(name)) fail('setting belongs to shared shell');
       const label = text(setting.label, 'setting label'), kind = choice(setting.kind, ['cycle', 'toggle'], 'setting kind');
       if (kind === 'toggle') boolean(setting.checked, 'toggle default');
       else {
