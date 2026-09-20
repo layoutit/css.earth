@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-simulation-guided-reconstruction@1",
+  "baselineId": "5fc6d6563f57e5ef6a6d5b4a4f5ebd8e35f8ae8ace946d0cca0997e067424f9b",
+  "width": 384,
+  "longestAxisSlabs": 128,
+  "samplesPerSlab": 4,
+  "exposureGain": 2.418,
+  "backgroundSpread": 0.05,
+  "controls": {
+    "detail": 1,
+    "faint": 0.6,
+    "depth": 1
+  },
+  "depth": {
+    "depthSamples": 256,
+    "maximumModes": 1,
+    "modeRelativeThreshold": 0.25,
+    "minimumSigmaZ": 416,
+    "maximumSigmaZ": 4160,
+    "featureThicknessRatio": 2,
+    "supportSigma": 4
+  },
+  "exclusions": [],
+  "depthInterpretation": "Authored dominant conditional ray-mode hypothesis. Select the strongest prior mode per image component and assign its complete projected weight there. Not a recovered gas depth; no duplicated secondary-mode feature or artificial bridge. Two-scale variant: smoothed image light is carried along the simulation's own density (envelope); finite components fit only the remaining detail. The LMC has no depth tracer intake in this repository, so the envelope keeps the pinned Garver et al. (2026) stellar simulation as its shape hypothesis.",
+  "envelope": {
+    "scalePixels": 10,
+    "fraction": 0.85,
+    "floor": 0.03,
+    "depthSamples": 256,
+    "depthTrim": 0.005
+  },
+  "fullChromaAlphaByte": 11
+}

@@ -14,7 +14,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { createEmissionField } from '@cssearth/volume-core/fields/emission';
 import { createEmissionMaterial } from '@cssearth/volume-core/materials/component-material';
-import { compilerSlabMaterial, lensChannelGainMaterial, validateChannelGain } from '@cssearth/volume-core/materials/slab-material';
+import { compilerSlabMaterial, lensChannelGainMaterial, validateChannelGain, validateLensToneCurve, type LensTone } from '@cssearth/volume-core/materials/slab-material';
 import { createEnvelopeSampler, envelopeChromaticity, envelopeChromaSettings, validateEnvelopeSettings } from '@cssearth/volume-core/fields/simulation-envelope';
 import { physicalToField, angularScale } from '@cssearth/volume-core/coordinates/observer-tangent';
 import { parseCloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
@@ -113,6 +113,25 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
 
   const lenses = input.lenses;
   assert.ok(Array.isArray(lenses) && lenses.length > 0, 'A delivered finite model has at least one lens.');
+  // A lens tone curve is indexed by the model's own front-projection byte at the texel's sky position, read
+  // from the delivered projection exactly as the accepted bake read the model's `fit-projection.png`.
+  const levelAt = input.toneProjection === undefined ? null : await (async () => {
+    const grid = record(input.toneProjection, 'delivered tone projection');
+    const pw = grid.width, ph = grid.height;
+    assert.ok(Number.isInteger(pw) && Number.isInteger(ph) && Number(pw) > 0 && Number(ph) > 0, 'A tone projection needs its pinned grid.');
+    const pb = bounds2(grid.tangentBoundsKpc, 'tone projection bounds'), w = Number(pw), h = Number(ph);
+    const projection = await sharp(await pinned(root, parsePin(grid.image, 'tone projection image'))).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+    assert.ok(projection.info.width === w && projection.info.height === h, 'Front projection differs from its pinned grid.');
+    const pc = projection.info.channels, pd = projection.data;
+    const at = (i: number, j: number) => pd[(Math.min(h - 1, Math.max(0, j)) * w + Math.min(w - 1, Math.max(0, i))) * pc]!;
+    return (x: number, y: number, z: number) => {
+      const p = physicalToField([x, y, z], distance), u = (p[0] / A - pb.min[0]) / (pb.max[0] - pb.min[0]) * w - .5,
+        v = (pb.max[1] - p[1] / A) / (pb.max[1] - pb.min[1]) * h - .5;
+      if (u < -.5 || v < -.5 || u > w - .5 || v > h - .5) return 0;
+      const i = Math.floor(u), j = Math.floor(v), fu = u - i, fv = v - j;
+      return at(i, j) * (1 - fu) * (1 - fv) + at(i + 1, j) * fu * (1 - fv) + at(i, j + 1) * (1 - fu) * fv + at(i + 1, j + 1) * fu * fv;
+    };
+  })();
   const seen = new Set<string>(), results: CompactFiniteLens[] = [];
   for (const value of lenses as unknown[]) {
     const lens = record(value, 'delivered lens');
@@ -173,10 +192,15 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
       for (let c = 0; c < 3; c++) out[c] = Math.min(255, Math.max(0, (cw * componentColor[c]! + ew * envelopeRgb[c]!) / (cw + ew)));
       return true;
     };
-    // A delivered lens may carry its own per-channel display correction against its own source image; it
-    // straddles the alpha chroma limit exactly as the accepted bake applies it.
+    // A delivered lens may carry its own per-channel display correction and fitted tone curve against its own
+    // source image; both straddle the alpha chroma limit exactly as the accepted bake applies them.
+    let tone: LensTone | null = null;
+    if (lens.toneCurve !== undefined) {
+      assert.ok(levelAt, `${imageId} carries a tone curve but the delivery has no tone projection.`);
+      tone = { curve: validateLensToneCurve(lens.toneCurve), levelAt };
+    }
     const slabMaterial = lensChannelGainMaterial(compilerSlabMaterial(sampleEmission, sampleMaterial), sampleEmission,
-      exposureGain, fullChromaAlphaByte, lens.channelGain === undefined ? null : validateChannelGain(lens.channelGain));
+      exposureGain, fullChromaAlphaByte, lens.channelGain === undefined ? null : validateChannelGain(lens.channelGain), tone);
 
     const directory = resolve(destination, imageId);
     await mkdir(directory, { recursive: true });

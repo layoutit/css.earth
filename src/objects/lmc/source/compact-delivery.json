@@ -3,21 +3,14 @@
   "id": "lmc",
   "delivery": {
     "directory": "src/objects/lmc",
-    "manifest": {
-      "path": "src/objects/lmc/source/lens-manifest.json",
-      "sha256": "dfc6b44b4da261e7c856a7d4a6ca0341d42d6c596bba09319f28ebb7acc957f5"
-    },
-    "atlasInputs": {
-      "path": "src/objects/lmc/source/atlas-inputs.json",
-      "sha256": "2f64334242d7d1b1254d38cbb2d5d785999628aed574c4d64a1e4f84f3366132"
-    },
+    "method": "finite-emission",
     "compactInputs": {
-      "path": "src/objects/lmc/source/bake-inputs/inputs.json",
-      "sha256": "cfb652b3d316d3164dcf67974af787a2fc95b11a94465185e8a0dd2511d53cc2"
+      "path": "src/objects/lmc/source/compact/inputs.json",
+      "sha256": "7627b7f10909b4733c96d2edb4889518a562f1d0e9ee65608747b157312ef15d"
     }
   },
   "researchRecipe": {
-    "path": "labs/nebula/models/lmc/bake.json",
-    "sha256": "82e44aebd5dc80e3f44c5258c51040f778a6cfa1f0c105b4b23ef8dcba6154b8"
+    "path": "labs/nebula/models/lmc/envelope/app-lenses.json",
+    "sha256": "38ac1f1e4579d471ac963c8e0a5ddbaa8abd8aacc5a30e828588b3cd77b0943e"
   }
 }
