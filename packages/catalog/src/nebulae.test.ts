@@ -4,9 +4,19 @@ const fixture=()=>({schema:'cssearth-nebula-catalog@1',frame:{referenceFrame:'su
   sources:[{id:'paper',url:'https://example.org/paper',sha256:'a'.repeat(64),bytes:10,citation:'Original measurement'}],
   objects:[{id:'fixture',kind:'nebula',name:'Example',aliases:[],positionM:[3.085677581491367e18,0,0],skyPosition:{raDeg:0,decDeg:0,sourceRef:'paper'},
     distance:{valuePc:100,sourceRef:'paper',method:'Parallax'},classification:{name:'Emission nebula',basis:'Observed extended emission; modeled depth.',sourceRef:'paper'},status:'confirmed',detailedObjectId:'fixture'}]});
-test('nebula records preserve scientific type and are never classified as galaxies',()=>{
+test('nebula records preserve identity in the Galactic volume transport',()=>{
  const input=fixture(), parsed=parsePreparedNebulaCatalog(input);expect(parsed).toBe(input);expect(isPreparedNebula(parsed.objects[0]!)).toBe(true);
  expect(isPreparedNebula({})).toBe(false);
+});
+test('the shared Galactic volume transport preserves globular-cluster identity and source requirements', () => {
+ const input=fixture(); input.objects[0]!.kind='globular-cluster';
+ const parsed=parsePreparedNebulaCatalog(input);
+ expect(parsed.objects[0]!.kind).toBe('globular-cluster');
+ expect(isPreparedNebula(parsed.objects[0]!)).toBe(true);
+ input.objects[0]!.classification.sourceRef='missing';
+ expect(()=>parsePreparedNebulaCatalog(input)).toThrow(/Unknown nebula source reference/);
+ input.objects[0]!.classification.sourceRef='paper'; input.objects[0]!.kind='galaxy';
+ expect(()=>parsePreparedNebulaCatalog(input)).toThrow(/Invalid nebula identity/);
 });
 test('nebula source references, sky domain and distance are guarded',()=>{
  for(const change of [(v:ReturnType<typeof fixture>)=>{v.objects[0]!.skyPosition.raDeg=360;},

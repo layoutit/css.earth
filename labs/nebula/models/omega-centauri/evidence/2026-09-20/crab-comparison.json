@@ -1,0 +1,277 @@
+{
+  "id": "b3dba61dfa3cdc744220bde4abf59e3e7d52a4bc7f499d131edbac83f0effb5d",
+  "sourceResult": "7ffff9eabf29c89d06afe87187dfc3a9565044619b23d4d48aa47df01e9fb9dd",
+  "inputPin": {
+    "path": "src/objects/m1/source/compact/model.json.gz",
+    "sha256": "19a8d6d41d35694861e2ce5db6414f2d8f2a59ad9ea6d0129c3dc1d628b60be5"
+  },
+  "seconds": 494.772349208,
+  "plannedLayers": 391,
+  "referenceLayers": 547,
+  "proxy": {
+    "schema": "cssearth-layer-optimization@1",
+    "method": "gradient-weighted-depth-displacement@1",
+    "maximumLayers": 500,
+    "referenceLayers": 547,
+    "plannedLayers": 391,
+    "probeWidth": 64,
+    "probeSubpixels": 2,
+    "targetNormalizedL1": 0.01,
+    "estimatedNormalizedL1": {
+      "x": 0.00994595469364007,
+      "y": 0.009937762653267417,
+      "z": 0.00935854498311306
+    },
+    "status": "target-met"
+  },
+  "thresholds": {
+    "relativeLuminanceDifference": 0.05,
+    "normalizedL1": 0.04
+  },
+  "oldPassingHandoffs": 12,
+  "newPassingHandoffs": 12,
+  "newlyFailingHandoffs": [],
+  "rows": [
+    {
+      "id": "neutral",
+      "seam": "xz",
+      "oldL1": 0.01611342389813306,
+      "newL1": 0.021557419464845146,
+      "deltaL1": 0.005443995566712087,
+      "oldLuminance": 0.00027552104184480587,
+      "newLuminance": 0.00153794084585362,
+      "oldPassed": true,
+      "newPassed": true
+    },
+    {
+      "id": "neutral",
+      "seam": "yz",
+      "oldL1": 0.014773440583234947,
+      "newL1": 0.02140600176955358,
+      "deltaL1": 0.0066325611863186345,
+      "oldLuminance": 0.00013169512030918756,
+      "newLuminance": 0.002474425224846249,
+      "oldPassed": true,
+      "newPassed": true
+    },
+    {
+      "id": "hubble-optical",
+      "seam": "xz",
+      "oldL1": 0.019883459215999356,
+      "newL1": 0.025121290268514982,
+      "deltaL1": 0.005237831052515626,
+      "oldLuminance": 0.0012833102136353902,
+      "newLuminance": 0.0010019973280881017,
+      "oldPassed": true,
+      "newPassed": true
+    },
+    {
+      "id": "hubble-optical",
+      "seam": "yz",
+      "oldL1": 0.018124596469084063,
+      "newL1": 0.024306401397345925,
+      "deltaL1": 0.006181804928261862,
+      "oldLuminance": 0.0007133230669537579,
+      "newLuminance": 0.0005227232072247526,
+      "oldPassed": true,
+      "newPassed": true
+    },
+    {
+      "id": "webb-infrared",
+      "seam": "xz",
+      "oldL1": 0.021317259108527307,
+      "newL1": 0.025931641487936547,
+      "deltaL1": 0.00461438237940924,
+      "oldLuminance": 0.0018783274754755708,
+      "newLuminance": 0.0007795748246750415,
+      "oldPassed": true,
+      "newPassed": true
+    },
+    {
+      "id": "webb-infrared",
+      "seam": "yz",
+      "oldL1": 0.019996894922608893,
+      "newL1": 0.025260506157460182,
+      "deltaL1": 0.005263611234851289,
+      "oldLuminance": 0.0004364466961828152,
+      "newLuminance": 0.0005879246850327958,
+      "oldPassed": true,
+      "newPassed": true
+    },
+    {
+      "id": "webb-components",
+      "seam": "xz",
+      "oldL1": 0.024794299034011966,
+      "newL1": 0.028528778292168,
+      "deltaL1": 0.0037344792581560336,
+      "oldLuminance": 0.005105976928289425,
+      "newLuminance": 0.004902312949147532,
+      "oldPassed": true,
+      "newPassed": true
+    },
+    {
+      "id": "webb-components",
+      "seam": "yz",
+      "oldL1": 0.024191560556441335,
+      "newL1": 0.02795225760892037,
+      "deltaL1": 0.0037606970524790354,
+      "oldLuminance": 0.00180017315430286,
+      "newLuminance": 0.0015339890776214166,
+      "oldPassed": true,
+      "newPassed": true
+    },
+    {
+      "id": "spitzer-infrared",
+      "seam": "xz",
+      "oldL1": 0.04162007961576139,
+      "newL1": 0.04730136058002308,
+      "deltaL1": 0.005681280964261688,
+      "oldLuminance": 0.00817396217391176,
+      "newLuminance": 0.010624923970739386,
+      "oldPassed": false,
+      "newPassed": false
+    },
+    {
+      "id": "spitzer-infrared",
+      "seam": "yz",
+      "oldL1": 0.040298190851867435,
+      "newL1": 0.046997640170076405,
+      "deltaL1": 0.006699449318208969,
+      "oldLuminance": 0.000048080757939896155,
+      "newLuminance": 0.000039668396440669355,
+      "oldPassed": false,
+      "newPassed": false
+    },
+    {
+      "id": "vla-radio",
+      "seam": "xz",
+      "oldL1": 0.01966909289539202,
+      "newL1": 0.02430044708323659,
+      "deltaL1": 0.0046313541878445705,
+      "oldLuminance": 0.00016423927598018708,
+      "newLuminance": 0.0003125896665436954,
+      "oldPassed": true,
+      "newPassed": true
+    },
+    {
+      "id": "vla-radio",
+      "seam": "yz",
+      "oldL1": 0.019484338848797633,
+      "newL1": 0.024533821109419485,
+      "deltaL1": 0.0050494822606218515,
+      "oldLuminance": 0.0012829696777013151,
+      "newLuminance": 0.0005796496642948497,
+      "oldPassed": true,
+      "newPassed": true
+    },
+    {
+      "id": "chandra-xray",
+      "seam": "xz",
+      "oldL1": 0.014827151353326433,
+      "newL1": 0.014827151353326433,
+      "deltaL1": 0,
+      "oldLuminance": 0.0030534510270157854,
+      "newLuminance": 0.0030534510270157854,
+      "oldPassed": true,
+      "newPassed": true
+    },
+    {
+      "id": "chandra-xray",
+      "seam": "yz",
+      "oldL1": 0.013362636284053831,
+      "newL1": 0.013362636284053831,
+      "deltaL1": 0,
+      "oldLuminance": 0.0009057123734755019,
+      "newLuminance": 0.0009057123734755019,
+      "oldPassed": true,
+      "newPassed": true
+    }
+  ],
+  "payloads": [
+    {
+      "id": "neutral",
+      "oldLayers": 542,
+      "newLayers": 391,
+      "oldTextureBytes": 16608883,
+      "newTextureBytes": 15607732
+    },
+    {
+      "id": "hubble-optical",
+      "oldLayers": 542,
+      "newLayers": 391,
+      "oldTextureBytes": 96994439,
+      "newTextureBytes": 93807947
+    },
+    {
+      "id": "webb-infrared",
+      "oldLayers": 542,
+      "newLayers": 391,
+      "oldTextureBytes": 70359876,
+      "newTextureBytes": 68084516
+    },
+    {
+      "id": "webb-components",
+      "oldLayers": 542,
+      "newLayers": 391,
+      "oldTextureBytes": 82530133,
+      "newTextureBytes": 80394535
+    },
+    {
+      "id": "spitzer-infrared",
+      "oldLayers": 542,
+      "newLayers": 391,
+      "oldTextureBytes": 39738055,
+      "newTextureBytes": 38912299
+    },
+    {
+      "id": "vla-radio",
+      "oldLayers": 542,
+      "newLayers": 391,
+      "oldTextureBytes": 38441484,
+      "newTextureBytes": 37107868
+    },
+    {
+      "id": "chandra-xray",
+      "oldLayers": 542,
+      "newLayers": 391,
+      "oldTextureBytes": 1158012,
+      "newTextureBytes": 1088117
+    }
+  ],
+  "matchedViews": [
+    {
+      "lens": "neutral",
+      "pose": "front",
+      "oldVsNewNormalizedL1": 0.0042863111939171195,
+      "oldVsNewRelativeLuminanceDifference": 0.007934368685691588
+    },
+    {
+      "lens": "neutral",
+      "pose": "oblique",
+      "oldVsNewNormalizedL1": 0.0069732144048081125,
+      "oldVsNewRelativeLuminanceDifference": 0.009067779892565405
+    },
+    {
+      "lens": "hubble-optical",
+      "pose": "front",
+      "oldVsNewNormalizedL1": 0.00544403417960676,
+      "oldVsNewRelativeLuminanceDifference": 0.006831807070630873
+    },
+    {
+      "lens": "hubble-optical",
+      "pose": "oblique",
+      "oldVsNewNormalizedL1": 0.008467885979563996,
+      "oldVsNewRelativeLuminanceDifference": 0.0077562834323448415
+    }
+  ],
+  "actualBrowserErrors": {
+    "baseline": [],
+    "current": [],
+    "baselineFailedRequests": [],
+    "currentFailedRequests": [],
+    "baselineWrites": [],
+    "currentWrites": []
+  },
+  "retainedMounts": true,
+  "interpretation": "Real source-backed retained fields. Source pins/accepted package immutable. The planner proxy is not browser acceptance; every failed handoff remains a failure."
+}

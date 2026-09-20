@@ -7,6 +7,7 @@ import sharp from 'sharp';
 import { sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import type { VolumeSliceQuad, VolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { bakeCompiler, compilerAlphaDigest, compilerFrame, compilerSliceCounts, verifyCompilerAlphaIdentity } from './bake.ts';
+import { compilerPreparedPoint, compilerPreparedSlices, COMPILER_PHYSICAL_REFERENCE } from '@cssearth/volume-core/coordinates/compiler-frame';
 
 function slices(path: string, bytes: Buffer): VolumeSlices {
   const quad: VolumeSliceQuad = { id: 'z-0', axis: 'z', sliceIndex: 0, texturePath: path, widthPx: 2, heightPx: 1,
@@ -24,6 +25,22 @@ test('compiler frame centers absolute west/north/away coordinates without changi
   assert.deepEqual(result.frame.boundsUnits, result.localBounds);
   assert.equal(result.frame.referenceFrame, 'lab-sky-angular');
   assert.throws(() => compilerFrame({ min: [0, 0, 0], max: [1, 0, 1] }), /finite increasing/);
+});
+
+test('prepared compiler transport reflects source depth exactly once without changing image bytes or UVs', () => {
+  const source = slices('slices/a.png', Buffer.from('pinned pixels'));
+  source.boundsUnits = { min: [-1, -2, -3], max: [4, 5, 6] };
+  const quad = source.quads[0]!;
+  quad.vertices.forEach(point => { point[2] = 2; }); quad.center[2] = 2;
+  const before = structuredClone(source), actual = compilerPreparedSlices(source);
+  assert.deepEqual(source, before);
+  assert.deepEqual(actual.boundsUnits, { min: [-1, -2, -6], max: [4, 5, 3] });
+  assert.deepEqual(actual.quads[0]!.vertices.map(point => point[2]), [-2, -2, -2, -2]);
+  assert.deepEqual(actual.quads[0]!.center, [0, 0, -2]);
+  assert.deepEqual(actual.quads[0]!.normal, [0, 0, 1]);
+  assert.deepEqual(actual.quads[0]!.uvs, quad.uvs); assert.equal(actual.quads[0]!.sha256, quad.sha256);
+  assert.deepEqual(compilerPreparedPoint([1, 2, -3]), [1, 2, 3]);
+  assert.equal(compilerFrame(source.boundsUnits, true).frame.referenceFrame, COMPILER_PHYSICAL_REFERENCE);
 });
 
 test('default compiler bake refuses projected-image-only lenses before creating output', async () => {
