@@ -73,7 +73,7 @@ export function normalizeSnapshot(snapshot: DiscoverySnapshot, profile: ServiceP
       target: associateTarget(row.target_name, row.target_class, target, catalogue), kind: epn && row.dataproduct_type === 'im' ? 'image' : epn && row.dataproduct_type === 'sc' ? 'cube' : string('dataproduct_type'),
       calibration: { scheme: epn ? 'epn-tap:processing_level' : 'obscore:calib_level', token: row[epn ? 'processing_level' : 'calib_level'] ?? null },
       wavelengthsMicrometres: wavelengths, startIso: time(epn ? 'time_min' : 't_min'), endIso: time(epn ? 'time_max' : 't_max'),
-      spatial: { frame: epn ? string('spatial_frame_type') : 'icrs', description: row[epn ? 'coordinate_description' : 's_region'] ?? null,
+      spatial: { frame: epn ? string('spatial_frame_type') : 'icrs', description: row[epn ? 'spatial_coordinate_description' : 's_region'] ?? null,
         coordinates: Object.fromEntries((epn ? ['c1min','c1max','c2min','c2max','c3min','c3max'] : ['s_ra','s_dec','s_fov','s_region']).map(k => [k, row[k] ?? null])) },
       access: { url: string('access_url'), mime, estimatedKilobytes: number('access_estsize') }, issues };
   });
@@ -108,7 +108,8 @@ export async function discover(root: string, profile: ServiceProfile, request: C
   const directory = resolve(root, 'output/telescopes/vo/metadata'), query = targetQuery(profile, names, 50, request), sampleLimit = 50;
   await mkdir(directory, { recursive: true });
   const response = (await astroquery({ operation: 'vo-tap', service: profile.service, query, maxrec: sampleLimit, directory, byteLimit: limits.metadataBytes,
-    timeFormat: profile.model === 'obscore-1.1' ? 'mjd' : 'jd', ...(profile.timeScale ? { timeScale: profile.timeScale } : {}) })).vo!;
+    timeFormat: profile.model === 'obscore-1.1' ? 'mjd' : 'jd', ...(profile.timeScale ? { timeScale: profile.timeScale } : {}),
+    ...(profile.model === 'epn-tap-2.0' ? { timeModel: profile.model } : {}) })).vo!;
   const snapshot = parseSnapshot({ schema: 'cssearth-vo-discovery@1', service: profile.service, table: profile.table, model: profile.model,
     request, query, sampleLimit, scope: 'Exact target-name/alias search; bounded sample; incidental targets are not covered.', response,
     completeness: response.queryStatus === 'ERROR' ? 'failed' : response.queryStatus === 'OVERFLOW' ? 'overflow' : 'bounded-sample' });

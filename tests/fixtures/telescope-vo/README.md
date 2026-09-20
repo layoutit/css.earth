@@ -13,3 +13,7 @@ Captured on 2026-09-20 using the repository's pinned PyVO 1.9.1 during the indep
 Source services: [ALMA TAP](https://almascience.eso.org/tap), [ESO DataLink](https://archive.eso.org/datalink/links?ID=ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647), [ESO SODA](https://dataportal.eso.org/dataPortal/soda/sync).
 
 Tests may replace the ESO service endpoint with a local test server. Those responses are synthetic protocol fixtures and make no live-service claim. The ESO fixed-ID UCD `meta.id;meta.dataset` compatibility is limited to that documented declaration; missing parameters are never invented.
+
+The access-standards tests derive positive ID/BAND declarations from [SODA 1.0 §3.5 and §4](https://www.ivoa.net/documents/SODA/20170517/REC-SODA-1.0.html); the ESO exception is tested separately. Nested DataLink tests exercise endpoint-plus-parameter identity, traversal limits and original-response pins. `links-boundary.test.mts` also serves synthetic responses over local HTTP through the actual PyVO boundary and public query loader, checking opaque ID encoding and descriptor traversal. None establishes live ALMA service support.
+
+The EPN time fixtures are synthetic VOTables based on [EPN-TAP 2.0 time parameters](https://www.ivoa.net/documents/EPNTAP/20220822/REC-EPNTAP-2.0.html). They distinguish default UTC, explicit scales, conflicting declarations, unresolved references and missing units. These validate protocol normalization, not astrophysical timing corrections or the completeness of PSA's metadata.

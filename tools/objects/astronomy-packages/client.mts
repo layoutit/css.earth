@@ -16,9 +16,9 @@ export type HorizonsEpochs = readonly number[] | { readonly start: string; reado
 export type AstroqueryRequest =
   | { readonly operation: 'vo-download'; readonly url: string; readonly destination: string; readonly byteLimit: number; readonly format?: 'fits' | 'zip' | 'tar'; readonly parameters: Readonly<Record<string, Json>>;
       readonly descriptor?: { readonly file: Pin; readonly row: number; readonly serviceId: string } }
-  | { readonly operation: 'vo-tap'; readonly service: string; readonly query: string; readonly maxrec: number; readonly directory: string; readonly byteLimit: number; readonly timeFormat?: 'mjd' | 'jd'; readonly timeScale?: 'utc' | 'tai' | 'tt' | 'tdb' }
-  | { readonly operation: 'vo-links'; readonly url: string; readonly directory: string; readonly byteLimit: number }
-  | { readonly operation: 'vo-parse'; readonly file: string; readonly url: string; readonly byteLimit: number; readonly timeFormat?: 'mjd' | 'jd'; readonly timeScale?: 'utc' | 'tai' | 'tt' | 'tdb' }
+  | { readonly operation: 'vo-tap'; readonly service: string; readonly query: string; readonly maxrec: number; readonly directory: string; readonly byteLimit: number; readonly timeFormat?: 'mjd' | 'jd'; readonly timeScale?: 'utc' | 'tai' | 'tt' | 'tdb'; readonly timeModel?: 'epn-tap-2.0' }
+  | { readonly operation: 'vo-links'; readonly url: string; readonly parameters?: Readonly<Record<string, Json>>; readonly directory: string; readonly byteLimit: number }
+  | { readonly operation: 'vo-parse'; readonly file: string; readonly url: string; readonly byteLimit: number; readonly timeFormat?: 'mjd' | 'jd'; readonly timeScale?: 'utc' | 'tai' | 'tt' | 'tdb'; readonly timeModel?: 'epn-tap-2.0' }
   | { readonly operation: 'mast-service'; readonly service: string; readonly parameters: Readonly<Record<string, unknown>>; readonly pagesize?: number; readonly page?: number }
   | { readonly operation: 'mast-download'; readonly uri: string; readonly destination: string }
   | { readonly operation: 'tap-query'; readonly service: string; readonly query: string; readonly maxrec?: number }
@@ -182,7 +182,7 @@ elif operation in ('vo-tap', 'vo-links', 'vo-parse'):
     else:
         session = BoundedSession()
         query = (pyvo.dal.TAPService(request['service'], session=session).create_query(request['query'], maxrec=request['maxrec'])
-                 if operation == 'vo-tap' else DatalinkQuery(request['url'], session=session))
+                 if operation == 'vo-tap' else DatalinkQuery(request['url'], session=session, **request.get('parameters', {})))
         response = query.submit(post=operation == 'vo-tap')
         try:
             response.raw.decode_content = True
@@ -265,15 +265,32 @@ elif operation in ('vo-tap', 'vo-links', 'vo-parse'):
                         metadata['issues'].append('Time ' + name + ': unresolved or ambiguous TIMESYS reference ' + f.ref)
                         continue
                     system = referenced[0] if referenced else None
-                    scale = system.get('timescale') if system is not None else request.get('timeScale')
-                    if row[name] is not None and scale and request.get('timeFormat'):
-                        try:
+                    try:
+                        epn_time = request.get('timeModel') == 'epn-tap-2.0' and name in ('time_min', 'time_max')
+                        row_scale = row.get('time_scale') if epn_time else None
+                        row_refposition = row.get('time_refposition') if epn_time else None
+                        def text(value, label, blank_is_missing=False):
+                            if value is None or (blank_is_missing and isinstance(value, str) and not value.strip()): return None
+                            if not isinstance(value, str) or not value.strip(): raise ValueError(label + ' is malformed')
+                            return value.strip()
+                        row_scale = text(row_scale, 'EPN time_scale', True)
+                        row_refposition = text(row_refposition, 'EPN time_refposition', True)
+                        system_scale = text(system.get('timescale'), 'TIMESYS timescale') if system is not None else None
+                        system_refposition = text(system.get('refposition'), 'TIMESYS refposition') if system is not None else None
+                        if system is not None and not system_scale: raise ValueError('TIMESYS has no time scale')
+                        if system_scale and row_scale and system_scale.casefold() != row_scale.casefold():
+                            raise ValueError('TIMESYS time scale conflicts with EPN time_scale')
+                        if system_refposition and row_refposition and system_refposition.casefold() != row_refposition.casefold():
+                            raise ValueError('TIMESYS reference position conflicts with EPN time_refposition')
+                        scale = system_scale or row_scale or request.get('timeScale') or ('utc' if epn_time else None)
+                        if row[name] is not None and scale and request.get('timeFormat'):
                             if str(f.unit) not in ('d', 'day'): raise ValueError('Time unit is not days')
                             origin = (system or {}).get('timeorigin')
                             expected_origin = 2400000.5 if request['timeFormat'] == 'mjd' else 0
-                            if origin is not None and float(origin) != expected_origin: raise ValueError('Declared time origin disagrees with table model')
+                            expected_token = 'MJD-origin' if request['timeFormat'] == 'mjd' else 'JD-origin'
+                            if origin is not None and not (str(origin) == expected_token or float(origin) == expected_origin): raise ValueError('Declared time origin disagrees with table model')
                             times[name] = Time(row[name], format=request['timeFormat'], scale=scale.lower()).utc.isot + 'Z'
-                        except Exception as e: metadata['issues'].append('Time ' + name + ': ' + str(e))
+                    except Exception as e: metadata['issues'].append('Time ' + name + ': ' + str(e))
                 metadata['times'].append(times)
             metadata['issues'].extend(str(w.message) for w in notices)
     except Exception as e:

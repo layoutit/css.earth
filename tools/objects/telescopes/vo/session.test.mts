@@ -83,7 +83,7 @@ test('two saved SODA subsets of one parent keep separate acquisition, qualificat
     const normalized = normalizeSnapshot(snapshot, profile, target, [target])[0]!;
     const observation = { ...normalized, access: { url: 'https://example.org/links', mime: 'application/x-votable+xml; content=datalink', estimatedKilobytes: null } };
     const localLinksFile = resolve(root, 'links.xml'), originalLinks = await readFile(resolve(fixtures, 'eso-links.xml'), 'utf8');
-    await writeFile(localLinksFile, originalLinks.replaceAll('https://dataportal.eso.org/dataPortal/soda/sync', endpoint).replace('ucd="meta.id;meta.dataset"', 'ucd="meta.id;meta.main"'));
+    await writeFile(localLinksFile, originalLinks.replaceAll('https://dataportal.eso.org/dataPortal/soda/sync', endpoint).replace('ucd="meta.id;meta.dataset"', 'ucd="meta.ref.url;meta.curation"'));
     const localLinks = (await astroquery({ operation: 'vo-parse', file: localLinksFile, url: endpoint, byteLimit: 1e6 })).vo!;
     const plans = new Map<string, Awaited<ReturnType<typeof planAccess>>>();
     const planFor = async (request: ReturnType<typeof sessionRequest>) => {

@@ -106,7 +106,7 @@ test('ESO fixed-ID and CIRCLE resolve via PyVO; a nonexistent BAND capability is
 });
 test('BAND includes continuum support and requires the explicit spectral frame', async () => {
   const descriptor = esoDescriptor(await esoPromise);
-  const band: Resource = { ...descriptor, groups: descriptor.groups.map(g => ({ ...g, parameters: [...g.parameters, { name: 'BAND', id: null, datatype: 'double', arraysize: '2', unit: 'm', ucd: 'em.wl', utype: null, xtype: 'interval', ref: null, value: null }] })) };
+  const band: Resource = { ...descriptor, groups: descriptor.groups.map(g => ({ ...g, parameters: [...g.parameters, { name: 'BAND', id: null, datatype: 'double', arraysize: '2', unit: 'm', ucd: 'em.wl;stat.interval', utype: null, xtype: 'interval', ref: null, value: null }] })) };
   const r = { ...request, kind: 'cube' as const, wavelengthMicrometres: [2.30, 2.34] as const, continuumMicrometres: [[2.2, 2.25], [2.4, 2.45]] as const };
   assert.throws(() => sodaParameters(band, r, { ID: 'opaque' }), /explicit/u);
   const values = sodaParameters(band, { ...r, spectralFrame: 'barycentric' }, { ID: 'opaque' }).BAND;

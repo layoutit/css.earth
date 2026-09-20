@@ -41,25 +41,28 @@ const datalink = (mime: string | null) => { const m = mediaType(mime); return m?
 const fits = (mime: string | null) => ['application/fits', 'image/fits'].includes(mediaType(mime)?.type ?? '');
 const standardId = (resource: Resource) => resource.parameters.find(p => p.name === 'standardID')?.value;
 const url = (value: string, base: string) => { const u = new URL(value, base); if (!['https:', 'http:'].includes(u.protocol) || u.username || u.password) throw new TypeError('Unsupported VO access URL.'); return u.href; };
+const SODA_SYNC = 'ivo://ivoa.net/std/SODA#sync-1.0';
+const DATALINK_LINKS = 'ivo://ivoa.net/std/DataLink#links-1.0';
 
 /** Validate advertised parameter meaning before giving its values to PyVO. */
 export function sodaParameters(descriptor: Resource, request: CapabilityRequest, fixed: Readonly<Record<string, Json>>): Readonly<Record<string, Json>> {
-  if (standardId(descriptor) !== 'ivo://ivoa.net/std/SODA#sync-1.0') throw new TypeError('No advertised synchronous SODA operation.');
+  if (standardId(descriptor) !== SODA_SYNC) throw new TypeError('No advertised synchronous SODA operation.');
   const inputs = descriptor.groups.filter(g => g.name === 'inputParams');
   if (inputs.length !== 1) throw new TypeError('SODA input parameter declarations are missing or ambiguous.');
   const parameters = inputs[0]!.parameters;
   if (new Set(parameters.map(p => p.name)).size !== parameters.length) throw new TypeError('Duplicate SODA input parameter.');
   const id = parameters.find(p => p.name === 'ID');
   if (!id || fixed.ID === undefined || fixed.ID === null || fixed.ID === '') throw new TypeError('No exact SODA dataset ID binding.');
+  const normativeId = id.datatype === 'char' && id.arraysize === '*' && id.unit === null && id.ucd === 'meta.ref.url;meta.curation';
   // ESO uses the older meta.id;meta.dataset UCD. Its actual declaration is retained, never rewritten.
-  const esoCompatibility = id.ucd === 'meta.id;meta.dataset' && !id.ref && typeof id.value === 'string' && id.value.startsWith('ivo://eso.org/') &&
+  const esoCompatibility = id.datatype === 'char' && id.arraysize === '*' && id.unit === null && id.ucd === 'meta.id;meta.dataset' && !id.ref && typeof id.value === 'string' && id.value.startsWith('ivo://eso.org/') &&
     descriptor.parameters.some(p => p.name === 'accessURL' && p.value === 'https://dataportal.eso.org/dataPortal/soda/sync');
-  if (id.ucd !== 'meta.id;meta.main' && !esoCompatibility) throw new TypeError('Unsupported SODA ID declaration.');
+  if (!normativeId && !esoCompatibility) throw new TypeError('Unsupported SODA ID declaration.');
   const result: Record<string, Json> = { ...fixed };
   if (request.spectralFrame !== undefined) {
     if (request.spectralFrame !== 'barycentric') throw new TypeError('SODA BAND requires a barycentric spectral frame.');
     const p = parameters.find(p => p.name === 'BAND');
-    if (!p || p.unit !== 'm' || p.ucd !== 'em.wl' || p.xtype !== 'interval' || p.arraysize !== '2' || !['double','float'].includes(p.datatype)) throw new TypeError('SODA does not advertise a supported BAND interval.');
+    if (!p || p.datatype !== 'double' || p.arraysize !== '2' || p.unit !== 'm' || p.ucd !== 'em.wl;stat.interval' || p.xtype !== 'interval') throw new TypeError('SODA does not advertise a supported BAND interval.');
     result.BAND = inputWavelengths(request).map(n => n * 1e-6);
   }
   if (request.region) {
@@ -83,7 +86,8 @@ export function sodaParameters(descriptor: Resource, request: CapabilityRequest,
   }
   return result;
 }
-export type MetadataLoader = (url: string) => Promise<MetadataResponse>;
+/** `parameters` are PyVO's descriptor-bound DataLink request parameters, never URL text. */
+export type MetadataLoader = (url: string, parameters?: Readonly<Record<string, Json>>) => Promise<MetadataResponse>;
 export async function planAccess(root: string, observation: DiscoveredObservation, snapshot: DiscoverySnapshot, request: CapabilityRequest,
   load?: MetadataLoader): Promise<AccessPlan> {
   const limits = parseLimits(request.transferLimits), products: AcquisitionSpec[] = [], issues: string[] = [], visited = new Set<string>();
@@ -96,7 +100,8 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
   if (observation.target.status !== 'confirmed') return { products, issues: ['The archive record has no confirmed target association.'] };
   if (observation.kind !== 'image' && observation.kind !== 'cube') return { products, issues: [`No native decoder for advertised product kind ${observation.kind}.`] };
   const kind = observation.kind;
-  const loader = load ?? (async (address: string) => (await astroquery({ operation: 'vo-links', url: address, directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes })).vo!);
+  const loader = load ?? (async (address: string, parameters?: Readonly<Record<string, Json>>) => (await astroquery({ operation: 'vo-links', url: address,
+    ...(parameters === undefined ? {} : { parameters }), directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes })).vo!);
   let calls = 0;
   function add(operation: AcquisitionSpec['operation'], binding: Json, metadata: readonly Pin[], descriptor: Resource | null = null, serviceRow: number | null = null, serviceMetadata: string | null = null, format: AcquisitionSpec['format'] = 'fits') {
     const { snapshot: _snapshot, issues: _issues, ...observationFacts } = observation;
@@ -112,13 +117,14 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
     if (typeof size === 'number' && size > limits.scienceBytes) { issues.push('Advertised direct product exceeds the transfer bound.'); return; }
     add({ kind: 'direct', url: address, parameters: {} }, binding, pins, null, null, null, format);
   }
-  async function links(address: string, depth: number, pins: readonly Pin[]): Promise<void> {
+  async function links(address: string, parameters: Readonly<Record<string, Json>>, depth: number, pins: readonly Pin[]): Promise<void> {
     if (depth > limits.nestedEdges) { issues.push('DataLink nesting bound reached.'); return; }
-    if (visited.has(address)) { issues.push('Repeated DataLink URL skipped.'); return; }
+    const identity = digest({ url: address, parameters });
+    if (visited.has(identity)) { issues.push('Repeated DataLink operation skipped.'); return; }
     if (++calls > limits.metadataRequests) { issues.push('DataLink request bound reached.'); return; }
-    visited.add(address);
+    visited.add(identity);
     let response: MetadataResponse;
-    try { response = await loader(address); } catch (error) { issues.push(`DataLink transport or parsing failed: ${String(error)}`); return; }
+    try { response = await loader(address, parameters); } catch (error) { issues.push(`DataLink transport or parsing failed: ${String(error)}`); return; }
     const closure = [...pins, response.raw];
     if (response.queryStatus !== 'OK') { issues.push(`DataLink response is ${response.queryStatus}.`); return; }
     for (let i = 0; i < response.rows.length; i++) {
@@ -129,20 +135,26 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
         const binding = response.bindings.find(b => b.row === i && b.serviceId === row.service_def), descriptor = response.resources.find(r => r.id === row.service_def);
         if (!binding || binding.error || !binding.url || !descriptor) { issues.push('DataLink service descriptor could not be resolved.'); continue; }
         try {
-          const parameters = sodaParameters(descriptor, request, binding.parameters), address = url(binding.url, response.effectiveUrl);
-          add({ kind: 'soda-sync', url: address, parameters }, jsonValue({ row, url: address, dataset: binding.parameters }), closure, descriptor, i, response.raw.path);
+          const address = url(binding.url, response.effectiveUrl), standard = standardId(descriptor);
+          if (standard === DATALINK_LINKS) {
+            await links(address, binding.parameters, depth + 1, closure);
+          } else if (standard === SODA_SYNC) {
+            const parameters = sodaParameters(descriptor, request, binding.parameters);
+            add({ kind: 'soda-sync', url: address, parameters }, jsonValue({ row, url: address, dataset: binding.parameters }), closure, descriptor, i, response.raw.path);
+          } else if (typeof standard === 'string' && standard.startsWith('ivo://ivoa.net/std/SODA#')) throw new TypeError('No advertised synchronous SODA operation.');
+          else throw new TypeError(`Unsupported DataLink service standard ${standard ?? 'missing'}.`);
         } catch (error) { issues.push(String(error)); }
         continue;
       }
       if (typeof row.access_url !== 'string' || !row.access_url) { issues.push('DataLink row has no access URL.'); continue; }
       const next = url(row.access_url, response.effectiveUrl), mime = typeof row.content_type === 'string' ? row.content_type : null;
-      if (datalink(mime)) await links(next, depth + 1, closure);
+      if (datalink(mime)) await links(next, {}, depth + 1, closure);
       else direct(next, mime, row.content_length, jsonValue({ row, url: next }), closure);
     }
   }
   if (!observation.access.url) return { products, issues: ['No archive access URL.'] };
   const address = url(observation.access.url, snapshot.response.effectiveUrl), pins = [snapshot.response.raw, snapshotPin];
-  if (datalink(observation.access.mime)) await links(address, 0, pins);
+  if (datalink(observation.access.mime)) await links(address, {}, 0, pins);
   else direct(address, observation.access.mime, observation.access.estimatedKilobytes === null ? null : observation.access.estimatedKilobytes * 1000,
     jsonValue({ url: address, identities: observation.identities }), pins);
   return { products, issues };

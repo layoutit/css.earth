@@ -34,9 +34,9 @@ export async function loadVoInputs(root: string, request: CapabilityRequest, cat
     if (snapshot.completeness === 'failed') continue;
     for (const observation of normalizeSnapshot(snapshot, profile, target, identities)) {
       if (selectedObservation !== undefined && observation.key !== selectedObservation) { records.push({ observation, snapshot, products: [], issues: ['Access descriptions were not refreshed because get selected a different observation.'] }); continue; }
-      const plan = await planAccess(root, observation, snapshot, request, async url => {
+      const plan = await planAccess(root, observation, snapshot, request, async (url, parameters) => {
         if (++metadataRequests > limits.metadataRequests) throw new Error('The query-wide access-description request limit was reached.');
-        return (await astroquery({ operation: 'vo-links', url, directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes })).vo!;
+        return (await astroquery({ operation: 'vo-links', url, parameters, directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes })).vo!;
       }).catch((error: unknown) => ({ products: [], issues: [String(error)] }));
       records.push({ observation, snapshot, ...plan });
     }
