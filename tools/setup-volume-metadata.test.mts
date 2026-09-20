@@ -9,7 +9,7 @@ import { preparedVolumeMetadataAssets } from './setup-volume-metadata.mts';
 
 const sha256 = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 
-test('catalogue bootstrap restores only prepared volume metadata and leaves dataset bytes on R2', async t => {
+test('catalogue bootstrap restores prepared volume and context metadata while leaving dataset bytes on R2', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-volume-metadata-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const base = resolve(root, 'src/objects/m31');
@@ -39,14 +39,23 @@ test('catalogue bootstrap restores only prepared volume metadata and leaves data
     assets: ['presentation.json', 'provenance.json'].map(filename => ({ filename, bytes: files.get(filename)!.length,
       sha256: sha256(files.get(filename)!) })),
   }));
+  const contextBase = resolve(root, 'src/objects/nearby-universe');
+  const contextSource = resolve(contextBase, 'source/presentation.json');
+  await mkdir(dirname(contextSource), { recursive: true });
+  await writeFile(contextSource, JSON.stringify({ provenance: { products: [] } }));
+  await writeFile(resolve(contextBase, 'runtime-assets.json'), JSON.stringify({
+    schema: 'cssnearby-universe-runtime-assets@1', resourceRoot: 'prepared',
+    assets: [...files].map(([filename, bytes]) => ({ filename, bytes: bytes.length, sha256: sha256(bytes) })),
+  }));
   const sourceOnly = resolve(root, 'src/objects/local-group/source/presentation.json');
   await mkdir(dirname(sourceOnly), { recursive: true });
   await writeFile(sourceOnly, JSON.stringify({ provenance: { products: [] } }));
 
   const selected = await preparedVolumeMetadataAssets(root);
-  assert.deepEqual(selected.ids, ['helix', 'm31']);
+  assert.deepEqual(selected.ids, ['helix', 'm31', 'nearby-universe']);
   assert.deepEqual(selected.assets.map(asset => `${asset.id}/${asset.filename}`).sort(), [
     'helix/presentation.json', 'helix/provenance.json', 'm31/presentation.json', 'm31/provenance.json',
+    'nearby-universe/presentation.json', 'nearby-universe/provenance.json',
   ]);
   const requested: string[] = [];
   assert.deepEqual(await installRuntimeAssets(selected.assets, { fetcher: async url => {
@@ -54,10 +63,11 @@ test('catalogue bootstrap restores only prepared volume metadata and leaves data
     assert.ok(asset);
     requested.push(asset.filename);
     return new Response(files.get(asset.filename));
-  } }), { installed: 4, reused: 0, skipped: 0 });
-  assert.deepEqual(requested.sort(), ['presentation.json', 'presentation.json', 'provenance.json', 'provenance.json']);
+  } }), { installed: 6, reused: 0, skipped: 0 });
+  assert.deepEqual(requested.sort(), ['presentation.json', 'presentation.json', 'presentation.json', 'provenance.json', 'provenance.json', 'provenance.json']);
   assert.equal(await readFile(resolve(base, 'prepared/presentation.json'), 'utf8'), files.get('presentation.json')!.toString());
   assert.equal(await readFile(resolve(preparedBase, 'prepared/provenance.json'), 'utf8'), files.get('provenance.json')!.toString());
+  assert.equal(await readFile(resolve(contextBase, 'prepared/provenance.json'), 'utf8'), files.get('provenance.json')!.toString());
   await assert.rejects(readFile(resolve(base, 'prepared/datasets/large.webp')), { code: 'ENOENT' });
   await assert.rejects(readFile(resolve(root, 'public/scenes/helix/datasets/large.webp')), { code: 'ENOENT' });
 });

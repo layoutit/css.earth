@@ -8,13 +8,25 @@ import { SCENE_SATELLITE_IDS, SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, com
   systemBarycentreHeliocentricAu, M_PER_AU, STAR_IDS, starStateKm, HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm } from '@cssearth/astronomy';
 import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey, StarId, HostedPlanetId } from '@cssearth/astronomy';
 import { readCatalog } from '../prepare-catalog.mts';
-import { prepareSpatialContext } from './prepare-spatial-context.js';
+import { parseSpatialContextCommand, prepareSpatialContext } from './prepare-spatial-context.js';
 
 const root = process.cwd();
 const sourcePath = resolve(root, 'src/objects/sun/source/navigation/universe.json');
 const solarGeometryPath = resolve(root, 'src/platform/solar-geometry.mts');
 const contextEntries = (await readCatalog()).filter(body => body.context && body.id !== 'sun')
   .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
+
+test('deploy generation never repins source manifests unless authoring requests it', () => {
+  const generated = parseSpatialContextCommand(['source.json', 'prepared.json'], '/repo');
+  assert.equal(generated.pinReferences, false);
+  assert.equal(generated.sourcePath, '/repo/source.json');
+  assert.equal(generated.outputPath, '/repo/prepared.json');
+  assert.equal(generated.solarGeometryPath, '/repo/src/platform/solar-geometry.mts');
+
+  const authored = parseSpatialContextCommand(['source.json', 'prepared.json', '--pin-references'], '/repo');
+  assert.equal(authored.pinReferences, true);
+  assert.throws(() => parseSpatialContextCommand(['source.json', 'prepared.json', '--unknown'], '/repo'), /Usage:/);
+});
 
 
 test('migrated world-frame radii override astronomy only at the same position and epoch', async () => {

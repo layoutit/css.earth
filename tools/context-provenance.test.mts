@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, readdir, mkdir, mkdtemp, rm, cp, copyFile, symlink } from 'node:fs/promises';
 import { prepareContextProvenance } from './prepare-context-provenance.mts';
+import { readPreparedContextProvenance } from './read-prepared-context-provenance.mts';
 import { prepareVolumeProvenance } from './prepare-volume-provenance.mts';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
@@ -27,6 +28,15 @@ test('context provenance binds every declared output and installs one complete i
     }
     assert.ok(context.provenance.sources.some(s=>s.sourceBinding?.kind==='catalogued'));
   }
+});
+
+test('deploy catalogue recovery reads prepared contexts without authoring intermediates', async () => {
+  const contexts = await readPreparedContextProvenance({ input: path => {
+    assert.doesNotMatch(path, /sun\/prepared\/world-context\.json/u);
+    return readFile(path);
+  } });
+  assert.deepEqual(contexts.map(context => context.id), ['galaxy-clusters', 'local-group', 'nearby-universe']);
+  assert.ok(contexts.every(context => context.outputs.length === 0));
 });
 test('changed prepared bytes and authored source documents are rejected', async () => {
   for(const target of ['src/objects/local-group/prepared/manifest.json','src/objects/nearby-universe/source/preparation/field.json']) {
@@ -86,6 +96,11 @@ test('offline context recovery is independent of installed generated images and 
     await copyFile(`${base}/object.json`,join(root,base,'object.json'));
     await copyFile(`${base}/prepared/manifest.json`,join(root,base,'prepared/manifest.json'));
   }
+  await mkdir(join(root,'src/objects/sun/source/navigation'),{recursive:true});
+  await copyFile(
+    'src/objects/sun/source/navigation/universe.json',
+    join(root,'src/objects/sun/source/navigation/universe.json'),
+  );
   const offline=await prepareContextProvenance({root,input:path=>readFile(path.startsWith('tools/')?path:join(root,path))});
   assert.deepEqual(offline.map(c=>c.id),['galaxy-clusters','local-group','nearby-universe']);
   const installed=await prepareContextProvenance();

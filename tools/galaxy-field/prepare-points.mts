@@ -17,7 +17,7 @@ const recipe = await readFieldRecipe();
 const presentation=sourceObject(JSON.parse(await readFile('src/objects/nearby-universe/source/presentation.json','utf8')));
 const appearance=Object.fromEntries(['pointExposure','pointReferenceDistanceMpc','cloudExposure','cloudMaximumOpacity'].map(key=>{const value=presentation[key];if(typeof value!=='number'||!Number.isFinite(value)||value<=0)throw new TypeError('Invalid field presentation');return [key,value];}));
 const catalogue = await loadScientificCatalogue(recipe.maximumDistanceMpc, recipe.minimumDistanceMpc, recipe.hubbleKmSPerMpc);
-const world = JSON.parse(await readFile('src/objects/sun/prepared/world-context.json', 'utf8'));
+const world = JSON.parse(await readFile('src/objects/sun/source/navigation/universe.json', 'utf8'));
 if (world.frame?.referenceFrame !== 'sun-icrf' || !Number.isFinite(world.frame.epochJdTt)) throw new TypeError('Invalid application world frame.');
 const frame = parseDensityVolumeFrame({ referenceFrame: world.frame.referenceFrame, epochJdTt: world.frame.epochJdTt, originM: [0,0,0], localToReferenceXyzw: [0,0,0,1], metersPerUnit: 3.085677581491367e22, boundsUnits: { min: [-200,-200,-200], max: [200,200,200] } });
 // Keep half the budget spread through the field; spend the rest on observed concentrations.

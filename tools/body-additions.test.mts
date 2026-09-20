@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readFile, rm, writeFile, type FileHandle } from 'node:f
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import test from 'node:test';
-import { contextObjectModule, readCatalog, prepareCatalog } from './prepare-catalog.mts';
+import { contextObjectAssetUrls, contextObjectModule, readCatalog, prepareCatalog } from './prepare-catalog.mts';
 import { prepareBodyRecords } from '../packages/astronomy/tools/body-records.mts';
 import { literalRecords } from '../packages/astronomy/tools/lib/write-record-sections.mts';
 import type { PathLike } from 'node:fs';
@@ -23,6 +23,27 @@ test('context prepared resources stay external until their bank is selected', ()
   assert.match(source, /\.\.\/src\/objects\/nebula\/prepared\/\*\*\/\*\.\{json,png,webp,bin\}/u);
   assert.match(source, /!\.\.\/src\/objects\/stars\/prepared\/\*\.bin/u,
     'The source-only point bank stays excluded while its published resources remain external.');
+});
+
+test('asset-origin context resources come from inventories without local prepared bytes', async t => {
+  const root = await mkdtemp(resolve(tmpdir(), 'cssearth-context-assets-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await write(resolve(root, 'src/objects/nearby-universe/runtime-assets.json'), {
+    schema: 'cssnearby-universe-runtime-assets@1', resourceRoot: 'prepared', assets: [
+      { filename: 'points.json', sha256: 'a'.repeat(64), bytes: 10 },
+      { filename: 'cloud.webp', sha256: 'b'.repeat(64), bytes: 20 },
+      { filename: 'datasets/preview.webp', sha256: 'c'.repeat(64), bytes: 30, location: 'public' },
+    ],
+  });
+  const origin = 'https://assets.example.test';
+  const assets = await contextObjectAssetUrls([{ id: 'nearby-universe' }], root, origin);
+  assert.deepEqual(assets, {
+    '../src/objects/nearby-universe/prepared/cloud.webp': `${origin}/runtime-assets/${'b'.repeat(64)}/cloud.webp`,
+    '../src/objects/nearby-universe/prepared/points.json': `${origin}/runtime-assets/${'a'.repeat(64)}/points.json`,
+  });
+  const source = contextObjectModule([{ id: 'nearby-universe', type: 'galaxy-point-field' }], assets);
+  assert.match(source, /https:\/\/assets\.example\.test\/runtime-assets/u);
+  assert.doesNotMatch(source, /query: '\?url&no-inline'/u);
 });
 
 async function addBody(root: string, id: string, classification: string, parent = 'sun') {
