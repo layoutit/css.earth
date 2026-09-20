@@ -17,7 +17,7 @@ on:
       - 'src/renderers/css/rendering/**'
       - '.github/workflows/deploy.yml'
       - 'tools/prepare-*.mts'
-      - 'tools/setup-assets.mts'
+      - 'tools/setup*.mts'
 
 permissions:
   contents: read

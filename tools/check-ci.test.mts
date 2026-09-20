@@ -37,6 +37,7 @@ test('the deploy consumes installed assets, rebuilds only catalogues and rejects
  assert.match(packageFile.scripts['prepare:deploy']??'',/pnpm prepare:galaxy-field:data/);
  assert.match(packageFile.scripts['prepare:deploy']??'',/pnpm prepare:deploy-catalogues/);
  assert.equal(packageFile.scripts['prepare:deploy-catalogues'],'node tools/prepare-facilities.mts --catalog-only');
+ assert.match(packageFile.scripts['setup:assets']??'',/node tools\/setup-volume-metadata\.mts/);
  assert.doesNotMatch(packageFile.scripts['prepare:deploy']??'',/prepare:(?:facilities|provenance|nebulae)(?:\s|$)/);
 });
 test('the PR asset-origin check exercises the exact deploy build path',async()=>{
