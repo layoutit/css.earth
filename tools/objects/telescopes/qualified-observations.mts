@@ -1,4 +1,5 @@
 /** Durable result of the public qualifier. A small index of exact local artifacts, not an archive ledger. */
+import { parseNativeMetadata } from './native-metadata.mts';
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { sha256, sha256File } from '../../../src/platform/sha256.mts';
@@ -42,6 +43,7 @@ export function parseProductFacts(raw: unknown): ProductFacts {
     facts.angularResolutionBound = { arcsec, method: bound.method, receipt: requireString(bound.receipt) };
   }
   if (value.resolutionEvidence !== undefined) facts.resolutionEvidence = requireArray(value.resolutionEvidence).map(parseResolutionEvidence);
+  if (value.nativeMetadata !== undefined) facts.nativeMetadata = parseNativeMetadata(value.nativeMetadata);
   return facts;
 }
 const implementation = async () => sha256(Buffer.concat(await Promise.all(['./qualify.mts', '../jwst/cubes/resolution.mts', '../jwst/cubes/spec3.mts', '../jwst/sample-agreement.mts', '../jwst/requirements.lock']

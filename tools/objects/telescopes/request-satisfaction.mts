@@ -1,8 +1,10 @@
+import type { NativeMetadata } from './native-metadata.mts';
 import { inputWavelengths } from './recipe-request.mts';
 /** Product facts answer a request; catalogue capabilities and successful decoding alone do not. */
 import type { CapabilityRequest, ConstraintVerdict, ProductKind, RequestedResult } from './query.mts';
 import { supportsMeasuredResolution, PROFILE_ASSUMPTIONS, RESOLUTION_ASSUMPTIONS, type ResolutionEvidence } from '../resolution-evidence.mts';
 export interface ProductFacts {
+  readonly nativeMetadata?: NativeMetadata;
   readonly verified: boolean;
   readonly target: string;
   readonly kind?: ProductKind;

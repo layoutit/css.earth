@@ -152,10 +152,40 @@ Astropy owns the [weighted fitting](https://docs.astropy.org/en/stable/api/astro
 The wavelength-by-wavelength assessment accommodates the spatial PSF variation
 described in [STScI's IFU guidance](https://jwst-docs.stsci.edu/methods-and-roadmaps/jwst-integral-field-spectroscopy).
 
-Source-package descriptions remain declarations. Successful decoding establishes
-artifact identity and native product kind; it does not promote declared bandpasses,
-times or achieved resolution into verified facts. A source-qualified product can
-therefore remain an unresolved answer to the scientific question.
+Source-package descriptions remain declarations. Native source qualification also reads
+`facts.nativeMetadata` from the pinned product: the selected science structure, supported
+data units, wavelength centers, recorded calibration references and remaining limitations.
+It never copies the package description or instrument catalogue into verified facts.
+
+- FITS images: one unambiguous science HDU; separable linear `WAVE` or `FREQ` WCS,
+  converted to micrometres. Coordinate-bin intervals exclude planes without finite samples.
+  These intervals describe the sampled grid, not optical passbands or spectral resolving power.
+  Coupled, tabular, velocity and air-wavelength WCS remain unsupported and explicit.
+- ISIS3 cubes: `BandBin.Center` must match the core band count and be strictly monotonic.
+  Units must be stated or established by a supported recorded calibration convention.
+  For [VIMS RC19](https://isis.astrogeology.usgs.gov/8.1.0/Application/presentation/Tabbed/vimscal/vimscal.html),
+  the time-dependent `Center` is used, never `MissionAverage`. `RadiometricCalibration.OutputUnits`
+  records the data unit. Calibration filenames are retained as references; their presence does
+  not qualify the external calibration files. Centers alone do not establish continuous coverage;
+  explicit widths are needed, and empty bands remain gaps.
+- PDS products: pdr exposes units and band coordinates from the decoded object's own label
+  block. A PDS4 optical filter must explicitly reference the selected array. Metadata from another
+  array or an ambiguous set of science arrays cannot satisfy the request.
+
+Data-unit validation currently recognizes `I/F`, dimensionless values, counts/DN, electrons,
+`Jy`, `mJy`, `MJy/sr`, `Jy/beam`, `K` and `W m-2 sr-1 um-1`. Other units are retained in an
+explicit limitation instead of guessed. Product metadata validation is not an independent
+validation of radiometric accuracy, quality flags or uncertainty.
+
+Applicable FITS `BMAJ` and `BMIN` headers in `Jy/beam` images establish the recorded
+restoring beam; its major-axis FWHM answers angular-resolution requirements and its evidence
+points to the exact product hash. A missing beam axis, multiple per-plane beams, or incompatible
+units cannot establish that resolution. This does not independently validate deconvolution or
+residual emission. Pixel spacing, map scale and nominal instrument optics never become a PSF.
+
+The metadata reader is part of the qualification implementation digest. Product, label,
+calibration input, reader or output changes invalidate reuse. A source-qualified product can
+still remain an unresolved answer when its files do not establish the requested science facts.
 
 Source observations and explicit selections expose `requestSatisfaction` and `satisfaction`,
 respectively. Published body-map descriptors also carry `satisfaction`. Its status is `fulfilled`,

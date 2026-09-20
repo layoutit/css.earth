@@ -100,7 +100,7 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
 export const sourceReceipt = (product: SourceProduct) => `output/telescopes/${product.target}/${product.id}/qualification.product.json`;
 export async function sourceRun(product: SourceProduct): Promise<ProductRun> {
   assertPinnedLabel(product);
-  const sources = ['source-intake.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', '../../fits.mts', '../../fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'];
+  const sources = ['source-intake.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', 'native-metadata.mts', 'qualified-observations.mts', 'request-satisfaction.mts', '../../fits.mts', '../../fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'];
   const digest = createHash('sha256');
   for (const path of sources) digest.update(path).update(await readFile(resolve(import.meta.dirname, path)));
   return { telescope: product.telescope, stage: 'source-qualification', inputs: product.files.map(file => ({ role: file.role, identity: file.origin, bytes: file.bytes, sha256: file.sha256 })),
