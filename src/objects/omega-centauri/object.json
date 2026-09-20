@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "omega-centauri",
+  "type": "volume-lens-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -105005412559826930000,
+        -41769153670092810000,
+        -123207430757263850000
+      ],
+      "localToReferenceXyzw": [
+        0.7712350124749122,
+        -0.5231773789172258,
+        -0.20356010658195295,
+        0.3000754383991924
+      ],
+      "metersPerUnit": 811718046418199.9,
+      "boundsUnits": {
+        "min": [
+          -2190.705034159304,
+          -2194.8969278075674,
+          -4259.5353966530165
+        ],
+        "max": [
+          2190.705034159304,
+          2194.8969278075674,
+          4259.5353966530165
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json",
+      "sha256": "013ec10f387fb5b8ba47ba08412151abce621df4b48b748a68a795c579cbe2aa"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-volume-lenses@1",
+    "url": "prepared/lenses.json",
+    "sha256": "e2529a1cc053cc4f79620062d40d05dcf921968d83761289b79010b62655b813"
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "omega-centauri",
+  "name": "Omega Centauri",
+  "defaultLens": "eso1119b",
+  "sharedInputs": [
+    "physical-evidence",
+    "photometric-mge",
+    "distance"
+  ],
+  "lenses": [
+    {
+      "id": "eso1119b",
+      "label": "VST · optical G / R / I",
+      "title": "Omega Centauri in the wider VST field",
+      "description": "Integrated cluster starlight on finite 3D emission components conditioned by a published oblate Gaussian profile. Inclination, near/far tilt and individual feature depths are model assumptions. Both optical lenses share geometry; no duplicate resolved-star layer is added. Colors are relative display emission, not calibrated luminosity or a measured stellar mass map. The original VST image supplies the fitted light distribution. This application integration candidate still fails the fixed image-stability gate at axis handoffs; rotation can reveal changes between slab directions.",
+      "summary": "Integrated optical starlight with conditional oblate depth; individual stellar positions are not recovered.",
+      "detail": "14540 × 14540 px · publisher optical composite",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Optical G (480nm) / R (625nm) / I (770nm)"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "14540 × 14540"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "50.88 × 50.88 arcmin"
+        },
+        {
+          "id": "depth",
+          "label": "Depth model",
+          "value": "Published oblate MGE · 50° inclination · 100° major-axis PA"
+        }
+      ],
+      "input": "eso1119b",
+      "preview": {
+        "path": ".local/nebula-lab/observations/omega-centauri/previews/eso1119b-screen.jpg",
+        "sha256": "fde5cacdc6ee88f4dfd62dd77f3ae698cb298a1d9d41cd016f8c407a1cfaeed1",
+        "bytes": 652467,
+        "url": "https://cdn.eso.org/images/screen/eso1119b.jpg"
+      }
+    },
+    {
+      "id": "eso0844a",
+      "label": "WFI · optical B / V / I",
+      "title": "Omega Centauri through the WFI optical mosaic",
+      "description": "Integrated cluster starlight on finite 3D emission components conditioned by a published oblate Gaussian profile. Inclination, near/far tilt and individual feature depths are model assumptions. Both optical lenses share geometry; no duplicate resolved-star layer is added. Colors are relative display emission, not calibrated luminosity or a measured stellar mass map. The WFI image recolors the same fitted geometry over its smaller observed footprint; the publisher reports DSS-filled mosaic gaps. This application integration candidate still fails the fixed image-stability gate at axis handoffs; rotation can reveal changes between slab directions.",
+      "summary": "A second optical view on the same conditional geometry, limited to the WFI mosaic footprint.",
+      "detail": "8040 × 7560 px · publisher optical composite",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Optical B (451nm) / V (539nm) / I (783nm)"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "8040 × 7560"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "31.88 × 29.99 arcmin"
+        },
+        {
+          "id": "depth",
+          "label": "Depth model",
+          "value": "Published oblate MGE · 50° inclination · 100° major-axis PA"
+        }
+      ],
+      "input": "eso0844a",
+      "preview": {
+        "path": ".local/nebula-lab/observations/omega-centauri/previews/eso0844a-screen.jpg",
+        "sha256": "2b629fe339d71db3688ac3a4f65041ef1386be6583b37c5b11e71d340cc9a4f4",
+        "bytes": 699356,
+        "url": "https://cdn.eso.org/images/screen/eso0844a.jpg"
+      }
+    }
+  ],
+  "recipes": [
+    {
+      "id": "request",
+      "path": "src/objects/omega-centauri/source/request.json",
+      "sha256": "043c6218aedd90269ec68822cfa2d729d731b7995150c0e01af8b5c68127e241",
+      "bytes": 365
+    },
+    {
+      "id": "recipe-1",
+      "path": "src/objects/omega-centauri/source/bake-inputs/references/01-compiler.json",
+      "sha256": "37c12a3be28a8dfbebb8931cd5f528673b63018c34aea8a4a07b23b26b6a1f3f",
+      "bytes": 1361
+    },
+    {
+      "id": "recipe-2",
+      "path": "src/objects/omega-centauri/source/bake-inputs/references/02-photometric-mge.json",
+      "sha256": "4e28dac4271eeafd77f77582cfd69105ca02677e6bbe6c88e583f412c7b27914",
+      "bytes": 2508
+    },
+    {
+      "id": "recipe-3",
+      "path": "src/objects/omega-centauri/source/bake-inputs/references/03-observation-structures.json",
+      "sha256": "dc8dd69f0a7f1c15d8b6376e43147e3e2cd2c52ab802d7fc5651d23c28ae8c0e",
+      "bytes": 397
+    },
+    {
+      "id": "recipe-4",
+      "path": "src/objects/omega-centauri/source/bake-inputs/references/04-physical-evidence.json",
+      "sha256": "6e88b6abe042cb66a104931cf1039fb3e6d685dd308b303226bdb6e530ac5b51",
+      "bytes": 36711
+    },
+    {
+      "id": "recipe-5",
+      "path": "src/objects/omega-centauri/source/bake-inputs/references/05-observations.json",
+      "sha256": "5954f0098ffe25ad48ff22b581f6d47cbc67e7d902e5d1f5ac19822c0612b9c2",
+      "bytes": 3842
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/omega-centauri/source/delivery.json",
+      "sha256": "013ec10f387fb5b8ba47ba08412151abce621df4b48b748a68a795c579cbe2aa",
+      "bytes": 2436
+    }
+  ],
+  "inputEvidence": [
+    {
+      "sourceId": "distance",
+      "role": "placement",
+      "evidence": "source/nebula.json#/objects/0/distance: one observed cluster distance locates the scene; individual stellar distances remain unknown."
+    },
+    {
+      "sourceId": "photometric-mge",
+      "role": "geometry",
+      "evidence": "source/bake-inputs/references/02-photometric-mge.json: published projected Gaussian fit and explicit oblate deprojection assumptions."
+    }
+  ],
+  "bank": {
+    "path": "src/objects/omega-centauri/prepared/lenses.json",
+    "sha256": "e2529a1cc053cc4f79620062d40d05dcf921968d83761289b79010b62655b813",
+    "bytes": 1202415
+  }
+}
