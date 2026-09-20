@@ -35,7 +35,10 @@ export default defineConfig({
       // context package that setup:assets deliberately left missing after a 404 from R2, instead of failing the
       // whole build over one object. CI and local builds never set this flag and stay strict.
       const allowMissing = process.env.CSSEARTH_ALLOW_MISSING_ASSETS === '1';
-      const { availability, failures } = await prepareContextAvailability({ strict: command === 'build' && !allowMissing });
+      // An asset-origin build deliberately leaves public/scenes absent. Its tracked manifest is the local,
+      // content-addressed contract for previews already published to R2; all prepared package bytes stay strict.
+      const { availability, failures } = await prepareContextAvailability({ strict: command === 'build' && !allowMissing,
+        publicAssets: assetOrigin() ? 'manifest' : 'local' });
       updateConfig({ vite: { define: { __CSSEARTH_CONTEXT_AVAILABILITY__: JSON.stringify(availability) } } });
       if (failures.length) logger.warn(`Some 3D views are unavailable in this installation:\n${failures.join('\n')}\nPrepare their packages and restart the server to enable them.`);
     },
