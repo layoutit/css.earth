@@ -1,6 +1,6 @@
 /**
  * App acceptance inspection for the promoted LMC volume lens bank: Earth view, oblique view, both exact
- * 90-degree side views, every lens switch and stars on and off, reached by label fly-to like the SMC's.
+ * 90-degree side views, every lens switch and stars on and off, reached by the native `/sun/?focus=lmc` route.
  *
  * Usage: node tests/objects/browser/lmc/promotion-inspection-browser.mts [baseUrl] [outputDirectory]
  */

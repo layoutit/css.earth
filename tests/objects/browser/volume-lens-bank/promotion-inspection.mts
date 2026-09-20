@@ -1,7 +1,8 @@
 /**
  * App acceptance inspection for a promoted volume lens bank.
  *
- * Reaches the object by label fly-to from the shared sun scene, then captures the Earth view, an oblique
+ * Opens the native `/sun/?focus=<id>` route, so the server fragment must retain the object's complete
+ * physical-host chain before the lens bank mounts, then captures the Earth view, an oblique
  * view, both exact 90-degree side views, every lens switch and stars on and off, and writes them with a
  * machine-readable record. Object packages call it through their own inspection entry.
  */
@@ -55,7 +56,7 @@ export async function inspectVolumeLensBank(OBJECT_ID: string, base: string, dir
     objectId: OBJECT_ID, base, browser: browser.version(), viewport, deviceScaleFactor,
     revision: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     dirtyFiles: execFileSync('git', ['status', '--porcelain'], { encoding: 'utf8' }).trim().split('\n').filter(Boolean),
-    inputPins, navigation: 'label fly-to from the shared sun scene', lenses: [],
+    inputPins, navigation: 'direct native /sun/?focus=<id> route', lenses: [],
     stars: { total: 0, visibleWithStarsOn: 0, rootDisplayOn: '', rootDisplayOff: '' },
     captures: [], errors, failed,
   };
@@ -105,22 +106,13 @@ export async function inspectVolumeLensBank(OBJECT_ID: string, base: string, dir
   const cameraState = () => page.evaluate(() => JSON.stringify(window.__cssearthTest.object('sun').camera.state()));
 
   try {
-    const response = await page.goto(`${base}/sun/`, { waitUntil: 'domcontentloaded' });
+    const response = await page.goto(`${base}/sun/?focus=${OBJECT_ID}`, { waitUntil: 'domcontentloaded' });
     assert.equal(response?.status(), 200, 'The shared scene must load.');
     await page.waitForFunction(id => window.__sun?.ready && !!document.querySelector(`[data-volume-lens-object="${id}"]`), OBJECT_ID, { timeout: 180_000 });
     const motion = page.locator('input[name="motion"]');
     if (await motion.count() && await motion.isChecked()) await motion.uncheck({ force: true });
 
-    // Reach the object the way a viewer does: frame it, then fly to its label.
-    await apply(payload.framingRadiusUnits * 8);
-    await page.waitForFunction(id => {
-      const node = document.querySelector<HTMLElement>(`[data-galaxy-label="${id}"]`);
-      return node?.style.pointerEvents === 'auto' && Number(getComputedStyle(node).opacity) > .1;
-    }, OBJECT_ID, { timeout: 30_000 });
-    const bounds = await page.locator(`[data-galaxy-label="${OBJECT_ID}"]`).boundingBox();
-    assert.ok(bounds, 'A visible label needs screen bounds.');
-    await page.mouse.dblclick(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2, { delay: 65 });
-    await page.waitForFunction(id => new URL(location.href).searchParams.get('focus') === id, OBJECT_ID);
+    assert.equal(new URL(page.url()).searchParams.get('focus'), OBJECT_ID);
     const controls = page.locator(`[data-focus-lens-bank="${OBJECT_ID}"]`);
     await controls.waitFor({ state: 'visible' });
     const bank = page.locator(`[data-volume-lens-object="${OBJECT_ID}"]`);
