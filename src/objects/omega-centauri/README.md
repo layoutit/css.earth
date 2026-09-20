@@ -108,6 +108,13 @@ input through an application-owned copy. [Provenance references](source/provenan
 pin those copies to the research files at that commit. No current Lab-file reads
 are required for compact replay.
 
+The [2026-09-21 merge check](evidence/2026-09-21/merge-validation.json) records
+integration with main at `3aebc31094dff8332755b394b88c708b7c3f1062`. A fresh
+[native navigation run](evidence/2026-09-21/native-focus.json) preserves the
+204.5516-pixel cold/warm framing and close-up/background restoration behavior.
+The model, textures and recorded context-owner pins are unchanged; the six views
+and performance measurements above remain the explicitly dated earlier evidence.
+
 ## Known problems
 
 - Desktop GPU performance has not been measured. The headless visibility control

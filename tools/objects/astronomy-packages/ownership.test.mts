@@ -20,6 +20,10 @@ test('the ownership record matches the pinned packages and retained boundaries',
   const pdsToolchain = JSON.parse(await readFile(resolve(import.meta.dirname, 'pds-toolchain.json'), 'utf8')) as Record<string, string>;
   assert.equal(ownership.schema, 'cssearth-astronomy-package-ownership@1');
   for (const name of ['astroquery', 'pyvo']) assert.ok(ownership.owners.some(owner => owner.package === name && owner.version === toolchain[name]));
+  for (const name of ['batman-package', 'scipy']) {
+    const key = name === 'batman-package' ? 'batman' : name;
+    assert.ok(ownership.owners.some(owner => owner.package === name && owner.version === toolchain[key]));
+  }
   for (const name of ['pds.peppi', 'pdr']) assert.ok(ownership.owners.some(owner => owner.package === name && owner.version === pdsToolchain[name === 'pds.peppi' ? 'peppi' : name]));
   for (const mechanic of ['PDS layouts not supported by pdr', 'SPICE kernel evaluation', 'streaming FITS and in-process WCS reads'])
     assert.ok(ownership.retained.some(entry => entry.mechanic === mechanic && entry.implementation && entry.reason));

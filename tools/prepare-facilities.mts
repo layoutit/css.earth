@@ -1,5 +1,6 @@
 import { sha256 } from '../src/platform/sha256.mts';
 import { prepareContextProvenance, contextProvenanceCompilerClosure } from './prepare-context-provenance.mts';
+import { readPreparedContextProvenance } from './read-prepared-context-provenance.mts';
 import { spatialSourceCitations } from './spatial-source-citations.mts';
 import { sourceResolver, parseSourceBinding } from '../src/platform/source-catalog.mts';
 import { compileSourceUsage } from '../src/platform/source-usage.mts';
@@ -24,7 +25,7 @@ import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
 import { restoreFactsheetEvidence } from './restore-factsheet-evidence.mts';
 import type { FactsheetSourceTransport } from './restore-factsheet-evidence.mts';
-import { prepareVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
+import { prepareVolumeProvenance, readPreparedVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
 import { RUNTIME_ASSET_ORIGIN } from './source-mirror.mts';
 export const explorationCompilerClosure = [
   'tools/prepare-facilities.mts', 'tools/spatial-source-citations.mts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
@@ -44,7 +45,7 @@ export const explorationCompilerClosure = [
   'tools/objects/provenance.mts', 'tools/objects/provenance-records.mts', 'tools/objects/provenance-recipes.mts', 'tools/prepare-provenance.mts',
 ] as const;
 
-interface Options { root?: string; publish?: boolean; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport;
+interface Options { root?: string; publish?: boolean | 'catalogues'; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport;
   /** Opt-in (default null/off) content-addressed mirror for volume previews; a production caller names
    * RUNTIME_ASSET_ORIGIN explicitly. Left off by default so a test never makes a surprise real request. */
   mirrorOrigin?: string | null; }
@@ -139,7 +140,12 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path))));
     objects.push({ id: object.id, name: object.name, route: object.route, base, controls: lenses, provenance: document });
   }
-  const volumes = [...await prepareVolumeProvenance({ root, input, mirrorOrigin }), ...await prepareContextProvenance({ root, input })];
+  // Deploys consume the exact prepared package restored from R2. Authoring preparation still rebuilds provenance
+  // and previews from their sources, but catalog-only publication must never invent a second package identity.
+  const volumes = publish === 'catalogues'
+    ? [...await readPreparedVolumeProvenance({ root, input }),
+      ...await readPreparedContextProvenance({ root, input })]
+    : [...await prepareVolumeProvenance({ root, input, mirrorOrigin }), ...await prepareContextProvenance({ root, input })];
   for (const volume of volumes) {
     const document = validateObjectProvenance(volume.provenance, volume.id);
     const manifestPath = `${sourcePath(volume.base)}/${sourcePath(document.manifest.path)}`;
@@ -166,14 +172,18 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   const prepared = parsePreparedExploration(payload,sources);
   const output = { path: resolve(root, 'site/prepared-facilities.json'), text: JSON.stringify(payload, null, 2) + '\n' };
   const sourcesOutput = {path:resolve(root,'site/prepared-sources.json'),text:JSON.stringify(sourcePayload,null,2)+'\n'};
-  const outputs = [...volumes.flatMap(volume => volume.outputs),sourcesOutput,output];
-  if (publish) await writePreparedSet(outputs);
-  return { prepared, preparedSources, output, outputs, factsheets };
+  const catalogueOutputs = [sourcesOutput,output];
+  const outputs = [...volumes.flatMap(volume => volume.outputs),...catalogueOutputs];
+  if (publish) await writePreparedSet(publish === 'catalogues' ? catalogueOutputs : outputs);
+  return { prepared, preparedSources, output, outputs, catalogueOutputs, factsheets };
 
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const args = process.argv.slice(2);
+  if (args.some(arg => arg !== '--catalog-only')) throw new TypeError('Usage: node tools/prepare-facilities.mts [--catalog-only]');
   // The real CLI entry point: opts into the mirror explicitly (library code above defaults it off).
-  const { prepared, factsheets } = await prepareFacilities({ mirrorOrigin: RUNTIME_ASSET_ORIGIN });
+  const { prepared, factsheets } = await prepareFacilities({ mirrorOrigin: RUNTIME_ASSET_ORIGIN,
+    publish: args.includes('--catalog-only') ? 'catalogues' : true });
   console.log(`Prepared ${prepared.catalog.missions.length} missions, ${prepared.catalog.facilities.length} facilities and ${prepared.graph.datasets.length} dataset destinations.`);
   console.log(`Factsheets: ${factsheets.facts} facts, each with its own citation.`);
 }

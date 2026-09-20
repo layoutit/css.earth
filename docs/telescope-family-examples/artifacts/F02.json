@@ -1,0 +1,127 @@
+{
+  "operation": "nd-spectrum",
+  "shape": [
+    3
+  ],
+  "axes": [
+    {
+      "id": "axis-2",
+      "fitsAxis": 3,
+      "numpyIndex": 2,
+      "length": 3,
+      "role": "spectral",
+      "ctype": "FREQ",
+      "unit": null
+    }
+  ],
+  "selection": {
+    "axis-0": 0,
+    "axis-1": 1,
+    "axis-4": 0,
+    "axis-3": 0
+  },
+  "coordinateContext": {
+    "dataUnit": null,
+    "sourceWcsCards": [
+      {
+        "keyword": "CTYPE1",
+        "value": "RA---SIN",
+        "comment": ""
+      },
+      {
+        "keyword": "CTYPE2",
+        "value": "DEC--SIN",
+        "comment": ""
+      },
+      {
+        "keyword": "CTYPE3",
+        "value": "FREQ",
+        "comment": ""
+      },
+      {
+        "keyword": "CTYPE4",
+        "value": "STOKES",
+        "comment": ""
+      },
+      {
+        "keyword": "CTYPE5",
+        "value": "TIME",
+        "comment": ""
+      },
+      {
+        "keyword": "CRVAL4",
+        "value": 1,
+        "comment": ""
+      },
+      {
+        "keyword": "CDELT4",
+        "value": 1,
+        "comment": ""
+      },
+      {
+        "keyword": "CRPIX4",
+        "value": 1,
+        "comment": ""
+      },
+      {
+        "keyword": "RADESYS",
+        "value": "ICRS",
+        "comment": ""
+      }
+    ],
+    "timeReference": {},
+    "coordinateModel": {
+      "kind": "native-fits-wcs",
+      "separable": true,
+      "coupled": false,
+      "matrix": [],
+      "unsupportedFeatures": [],
+      "pixelIndexConvention": "sourceNumpyIndex is zero-based; FITS WCS pixel coordinates are sourceNumpyIndex + 1."
+    },
+    "outputAxisMapping": [
+      {
+        "outputNumpyAxis": 0,
+        "sourceAxisId": "axis-2",
+        "sourceNumpyAxis": 2,
+        "sourceFitsAxis": 3,
+        "sourceIndices": {
+          "start": 0,
+          "step": 1,
+          "length": 3
+        }
+      }
+    ],
+    "fixedAxisSelection": [
+      {
+        "sourceAxisId": "axis-0",
+        "sourceNumpyAxis": 0,
+        "sourceFitsAxis": 5,
+        "sourceIndex": 0
+      },
+      {
+        "sourceAxisId": "axis-1",
+        "sourceNumpyAxis": 1,
+        "sourceFitsAxis": 4,
+        "sourceIndex": 1
+      },
+      {
+        "sourceAxisId": "axis-3",
+        "sourceNumpyAxis": 3,
+        "sourceFitsAxis": 2,
+        "sourceIndex": 0
+      },
+      {
+        "sourceAxisId": "axis-4",
+        "sourceNumpyAxis": 4,
+        "sourceFitsAxis": 1,
+        "sourceIndex": 0
+      }
+    ]
+  },
+  "values": [
+    -3,
+    0,
+    0
+  ],
+  "astropy": "8.0.1"
+}

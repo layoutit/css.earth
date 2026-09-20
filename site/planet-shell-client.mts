@@ -25,7 +25,7 @@ import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createChartPixelAlignmentController } from "./chart-pixel-alignment.mts";
 import { createDestinationBrowser } from "./destination-browser.mts";
 import { createFeatureBrowser } from "./feature-browser.mts";
-import { objectSearchLabels, searchObjects } from './object-search.mts';
+import { objectSearchLabels, searchObjects, type ObjectSearchLabels } from './object-search.mts';
 import { presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
 import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { createSceneLifetime } from "@cssearth/engine";
@@ -36,7 +36,9 @@ import { createSurfaceMapReader } from "./surface-map-context.mts";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mts';
 import { bindNavigationIntent, navigationFragments } from './navigation-fragments.mts';
-import { loadCatalogueFragment, readCatalogueFragmentPin } from './catalogue-fragment-loader.mts';
+import { loadCatalogueFragment, loadCatalogueIndex, readCatalogueFragmentPin, readCatalogueIndexPin } from './catalogue-fragment-loader.mts';
+import type { CatalogueIndexEntry } from './catalogue-index.mts';
+import { createCatalogueWindow } from './catalogue-window.mts';
 import { createNavigationTreeController } from './navigation-tree-client.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
@@ -580,17 +582,28 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const resultsPanel = requiredElement(browser, '#object-category-results');
   let items = [...browser.querySelectorAll<HTMLElement>(".planet-object-item")]
     .filter((item) => item instanceof windowTarget.HTMLLIElement);
-  // Production pages ship the catalogue rows empty and reference the shared,
-  // content-addressed fragment instead (`catalogue-fragment-pin.mts`). A page
-  // or fixture without that pin must still ship its rows inline.
+  // Production pages ship the catalogue rows empty and reference shared,
+  // content-addressed JSON and HTML transports (`catalogue-fragment-pin.mts`).
+  // A page or fixture without either pin must still ship its rows inline.
   const cataloguePin = items.length === 0 ? readCatalogueFragmentPin(resultsPanel) : null;
-  if (items.length === 0 && !cataloguePin) {
+  const catalogueIndexPin = items.length === 0 ? readCatalogueIndexPin(resultsPanel) : null;
+  if (items.length === 0 && !catalogueIndexPin && !cataloguePin) {
     throw new Error("Planet shell object browser has no objects.");
   }
-  const catalogueLoading = cataloguePin ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-loading]') : null;
-  const catalogueError = cataloguePin ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-error]') : null;
+  const remoteCatalogue = catalogueIndexPin ?? cataloguePin;
+  const catalogueLoading = remoteCatalogue ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-loading]') : null;
+  const catalogueError = remoteCatalogue ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-error]') : null;
   const catalogueRetry = catalogueError?.querySelector<HTMLButtonElement>('[data-catalogue-retry]') ?? null;
-  let searchLabels = items.map(item => ({ ...objectSearchLabels(item), item }));
+  type SearchLabel = ObjectSearchLabels & { readonly item?: HTMLElement; readonly entry?: CatalogueIndexEntry };
+  let searchLabels: SearchLabel[] = items.map(item => ({ ...objectSearchLabels(item), item }));
+  let catalogueEntries: readonly CatalogueIndexEntry[] = [];
+  let matchedEntries = new Set<CatalogueIndexEntry>();
+  let distanceEntries: readonly CatalogueIndexEntry[] = [];
+  let planetEntries: readonly CatalogueIndexEntry[] = [];
+  const catalogueList = resultsPanel.querySelector<HTMLUListElement>('[data-catalogue-list]');
+  const catalogueWindow = catalogueIndexPin && catalogueList
+    ? createCatalogueWindow({ documentTarget, windowTarget, list: catalogueList, scrollTarget: resultsPanel }) : null;
+  lifetime.onDispose(() => catalogueWindow?.destroy());
   let sourceLinks = sourceDocuments(documentTarget);
   const collapseSolarSystemBranches = () => {
     if (!navigationRoot) return;
@@ -653,7 +666,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     ];
     refreshChunks();
   };
-  // Fetches the shared catalogue fragment at most once, when the browser panel
+  // Fetches the shared catalogue transport at most once, when the browser panel
   // first opens. `filter` and
   // `markSelection` are declared further down this closure but only run once
   // this promise settles, well after the whole controller has been built.
@@ -661,22 +674,46 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   // Suppresses "No matching results" until the shared fragment has actually
   // arrived: an empty, not-yet-loaded catalogue must never be mistaken for a
   // catalogue that loaded and found nothing.
-  let catalogueLoaded = !cataloguePin;
+  let catalogueLoaded = !remoteCatalogue;
   const setEmptyHidden = (hidden: boolean) => { empty.hidden = hidden || !catalogueLoaded; };
   const showCatalogueError = (show: boolean) => {
     if (catalogueLoading) catalogueLoading.hidden = show || catalogueLoaded;
     if (catalogueError) catalogueError.hidden = !show;
   };
   const ensureCatalogueLoaded = (): Promise<void> => {
-    if (!cataloguePin) return Promise.resolve();
+    if (!remoteCatalogue) return Promise.resolve();
     if (catalogueLoad) return catalogueLoad;
     showCatalogueError(false);
-    catalogueLoad = loadCatalogueFragment(cataloguePin, { windowTarget }).then(rows => {
+    const load = catalogueIndexPin
+      ? loadCatalogueIndex(catalogueIndexPin, { windowTarget }).then(index => {
+          catalogueEntries = index.entries;
+          searchLabels = catalogueEntries.map(entry => ({
+            name: entry.name.toLocaleLowerCase('en'),
+            names: entry.searchNames,
+            classification: entry.classification,
+            classificationName: entry.classificationName,
+            systemName: entry.systemName,
+            illustration: entry.illustration,
+            entry,
+          }));
+          distanceEntries = catalogueEntries.toSorted((left, right) => left.distanceMeters - right.distanceMeters);
+          planetEntries = [
+            ...distanceEntries.filter(entry => entry.classification === 'planet'),
+            ...distanceEntries.filter(entry => entry.classification !== 'planet'),
+          ];
+          sourceLinks = new Map(sourceLinks);
+          for (const entry of catalogueEntries) sourceLinks.set(entry.source.subject, { dataset: {
+            sourceDocument: entry.source.document, sourceLabel: entry.source.label,
+          } });
+        })
+      : loadCatalogueFragment(cataloguePin!, { windowTarget }).then(rows => {
+          requiredElement(resultsPanel, '[data-catalogue-list]').replaceWith(rows);
+          attachCatalogueRows();
+        });
+    catalogueLoad = load.then(() => {
       if (lifetime.disposed) return;
-      requiredElement(resultsPanel, '[data-catalogue-list]').replaceWith(rows);
       catalogueLoaded = true;
       if (catalogueLoading) catalogueLoading.hidden = true;
-      attachCatalogueRows();
       backfillCurrentSelection();
       markSelection();
       publishSourceContext();
@@ -708,9 +745,9 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   };
   const selectTab = (classification: string, { focus = false, resetScroll = true } = {}) => {
     if (resetScroll) resetResultsScroll();
-    if (classification !== activeCategory) {
+    if (!catalogueWindow && classification !== activeCategory) {
       // Reorder the retained rows inside their existing layout groups.
-      const order = classification === 'planet' ? planetOrder : distanceOrder;
+      const order = classification === 'planet' || classification === 'all' ? planetOrder : distanceOrder;
       for (const [index, chunk] of chunks.entries()) {
         chunk.items = order.slice(index * 16, (index + 1) * 16);
         requiredElement(chunk.node,'.planet-object-chunk-list').append(...chunk.items);
@@ -726,10 +763,18 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
         if (focus) tab.focus();
       }
     }
-    for (const item of items) item.hidden = item.dataset.objectMatch !== 'true'
-      || !matchesObjectCategory(item.dataset.objectClassification, classification);
-    refreshChunks();
-    visibleObjects = items.filter(item => !item.hidden).length + visibleOverviews;
+    if (catalogueWindow) {
+      const order = classification === 'planet' || classification === 'all' ? planetEntries : distanceEntries;
+      const visible = order.filter(entry => matchedEntries.has(entry)
+        && matchesObjectCategory(entry.classification, classification));
+      catalogueWindow.setEntries(visible);
+      visibleObjects = visible.length + visibleOverviews;
+    } else {
+      for (const item of items) item.hidden = item.dataset.objectMatch !== 'true'
+        || !matchesObjectCategory(item.dataset.objectClassification, classification);
+      refreshChunks();
+      visibleObjects = items.filter(item => !item.hidden).length + visibleOverviews;
+    }
     setEmptyHidden(visibleObjects > 0);
     presentSearchResults(browser, showingSearchResults, classification);
   };
@@ -863,13 +908,18 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     void features?.search(classification || systemName || showAll ? "" : query);
     if (query.length === 0) {
       for (const item of items) item.hidden = true;
+      catalogueWindow?.clear();
       empty.hidden = true;
       setPanelHidden(browser, true);
       return;
     }
     setPanelHidden(browser, false);
-    const matches = new Set(result.matches.map(match => match.item));
-    for (const item of items) item.dataset.objectMatch = String(matches.has(item));
+    if (catalogueWindow) {
+      matchedEntries = new Set(result.matches.flatMap(match => match.entry ? [match.entry] : []));
+    } else {
+      const matches = new Set(result.matches.flatMap(match => match.item ? [match.item] : []));
+      for (const item of items) item.dataset.objectMatch = String(matches.has(item));
+    }
     const classifications = result.matches.map(match => match.classification);
     for (const tab of tabs) {
       requiredElement(tab, '.planet-object-tab-count').textContent = `(${objectCategoryCount(classifications, tab.dataset.objectTab)})`;
@@ -898,6 +948,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     else {
       setPanelHidden(information, false);
       setPanelHidden(browser, true);
+      catalogueWindow?.clear();
       markCategory();
     }
   };
@@ -986,6 +1037,16 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   browser.addEventListener("keydown", (event) => {
     if ((event.key === 'ArrowDown' || event.key === 'ArrowUp') &&
         event.target instanceof windowTarget.HTMLInputElement && event.target.hasAttribute('data-information-tab')) return;
+    const windowedRow = event.target instanceof windowTarget.Element
+      ? event.target.closest<HTMLElement>('[data-catalogue-index]') : null;
+    if (catalogueWindow && windowedRow && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+      event.preventDefault();
+      const current = Number(windowedRow.dataset.catalogueIndex);
+      const next = current + (event.key === 'ArrowDown' ? 1 : -1);
+      if (next < 0) search.focus();
+      else catalogueWindow.focus(next);
+      return;
+    }
     const controls = [...browser.querySelectorAll<HTMLElement>("summary, a, button")].filter(visibleControl);
     const index = controls.findIndex(control => control === documentTarget.activeElement);
     if (event.key === "Escape") { render(false); search.focus(); }
@@ -1015,6 +1076,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
 
   const markSelection = () => {
     documentTarget.documentElement.dataset.selection = preparedFocus ? 'prepared-focus' : overview ? overviewScope : 'object';
+    catalogueWindow?.setSelection(selectedObjectName, preparedFocus?.id ?? '');
     for (const anchor of browser.querySelectorAll<HTMLElement>('.planet-object-link')) {
       const selected = preparedFocus ? anchor.dataset.preparedFocusId === preparedFocus.id
         : !overview && !anchor.dataset.preparedFocusId && anchor.querySelector('.planet-object-name')?.textContent === selectedObjectName;

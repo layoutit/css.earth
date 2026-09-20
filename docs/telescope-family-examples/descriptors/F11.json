@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-telescope-product-descriptor@1",
+  "dataset": {
+    "id": "vla-day2-tdem0003",
+    "target": "J1008+0730",
+    "acquisition": {
+      "kind": "repository",
+      "identity": "../../../tests/fixtures/telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits"
+    },
+    "producingRecord": "RASG datasets v0.0.5 BSD-2-Clause",
+    "sourceClassifications": [
+      {
+        "term": "UVFITS random-groups visibilities",
+        "vocabulary": "AIPS UVFITS",
+        "version": "pyuvdata",
+        "status": "source"
+      }
+    ],
+    "families": [
+      "F11"
+    ],
+    "profiles": [
+      {
+        "handlerId": "f11-measurement-set",
+        "profileId": "uvfits-complex-visibilities@1"
+      }
+    ]
+  },
+  "members": [
+    {
+      "id": "uvfits",
+      "path": "../../../tests/fixtures/telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits",
+      "role": "science",
+      "bytes": 4253760,
+      "sha256": "926ed6175d6725f6f27b04a97b658d13341f528a3847b5bc1b7246a24bde4b27",
+      "mediaType": "application/fits"
+    }
+  ],
+  "components": [
+    {
+      "id": "visibilities",
+      "name": "UVFITS complex visibilities",
+      "families": [
+        "F11"
+      ],
+      "locations": [
+        {
+          "memberId": "uvfits",
+          "hdu": 0
+        }
+      ],
+      "representation": {
+        "kind": "complex-samples",
+        "rows": 348160
+      },
+      "axes": [],
+      "columns": [],
+      "quantity": {
+        "name": "uncalibrated complex visibility",
+        "semantics": "pyuvdata-decoded native UVFITS values and weights."
+      },
+      "calibration": {
+        "state": "raw",
+        "basis": [
+          "UVFITS BUNIT is UNCALIB."
+        ]
+      },
+      "flags": [
+        {
+          "id": "native-flag",
+          "meaning": "pyuvdata native UVFITS flag state"
+        }
+      ],
+      "dependencyIds": [
+        "uvfits-primary-random-groups"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "uvfits-primary-random-groups",
+      "role": "UVFITS random groups encode baseline, time, UVW and complex samples together",
+      "memberIds": [
+        "uvfits"
+      ],
+      "componentIds": [
+        "visibilities"
+      ],
+      "requiredFor": [
+        "uvfits-visibility-inspect",
+        "uvfits-visibility-export"
+      ],
+      "evidence": "pyuvdata opens the pinned file and retains the random-group conventions."
+    }
+  ],
+  "issues": [
+    {
+      "scope": "dataset",
+      "identity": "casa-ms",
+      "state": "unsupported",
+      "reason": "This source is UVFITS, not a CASA Measurement Set. CASA importuvfits is a separate conversion whose output must be pinned as a new MS closure."
+    }
+  ]
+}

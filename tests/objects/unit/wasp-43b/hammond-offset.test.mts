@@ -35,6 +35,9 @@ test('Hammond et al.\'s ephemeris, read with starry\'s light delay, places the t
   // Measured 2026-09-17: -20.5 s on Bell et al.'s curve, -19.5 s on this project's reduction (batman-package 2.5.3 agrees on both).
   const bellTransit = measureTransitShift(await load(bell), orbit, host, radiusRatio), oursTransit = measureTransitShift(await load(ours), orbit, host, radiusRatio);
   near(bellTransit.shiftSeconds, -20.5, 1, 'Bell et al. curve'); near(oursTransit.shiftSeconds, -19.5, 1, 'this project\'s curve');
+  assert.ok(bellTransit.uncertaintySeconds > .5 && bellTransit.uncertaintySeconds < 2, `Bell timing uncertainty ${bellTransit.uncertaintySeconds} s`);
+  assert.deepEqual(oursTransit.fit.software, { 'batman-package': '2.5.3', scipy: '1.18.1', numpy: '2.5.3' });
+  assert.equal(oursTransit.modelFlux.length, oursTransit.samples); assert.equal(oursTransit.residualFlux.length, oursTransit.samples);
   near(hammondObserved, bellTransit.shiftSeconds, 1, 'their timing matches the curve they fitted');
   // With the rounded period instead, the transit would be at -47 s, which the curve rules out.
   const rounded = (55934.292283 + epoch * 0.813474 - packageTransit) * 86400 - lightSeconds;

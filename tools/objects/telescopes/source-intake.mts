@@ -1,3 +1,4 @@
+import { isisGeometryBands } from './native-metadata.mts';
 /** Inventory native products already pinned by a body package. Header reads are discovery only; qualification verifies whole-file pins. */
 import { sourceHeaders } from './source-transfer.mts';
 import { isis3CoreHeader } from '../terrestrial-layers/isis3-raster.mts';
@@ -7,7 +8,7 @@ import { resolve, dirname, basename } from 'node:path';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErrorCode } from '../../source-values.mts';
 import { readFitsHeader } from '../../fits.mts';
-import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, pds3Values } from '../pds-labels.mts';
+import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, pds3Values, pds3TimeIso } from '../pds-labels.mts';
 import { inside, type SourceFile, type SourceProduct } from './source-products.mts';
 export interface SourceIntakeIssue { readonly path: string; readonly state: 'unavailable' | 'unsupported' | 'incomplete'; readonly reason: string }
 const LIMIT = 128 * 1024;
@@ -53,13 +54,14 @@ export async function intakeSources(root:string,target:string,existing:readonly 
     const telescope=component('Spacecraft')??component('Telescope'),instrument=component('Instrument');
     product={id:file.id,target,telescope:telescope?pds4Field(telescope,'name'):'Source archive',mode:`${instrument?pds4Field(instrument,'name'):'PDS4'}/${kind}`,kind,decoder:'pds-product',archiveProductId:`${identity.logical_identifier}::${identity.version_id}`,labelPath:file.path,files:[{...file,role:'label'},...dependencies.map(f=>({...f,role:f.path===science.path?'science':'support'}))],identity,units:'Label-specified units',meaning:'Native PDS4 numeric product with every referenced file pinned.',citation:file.origin,limitations:['Decoding and byte integrity do not establish measurement suitability or surface registration.']};
    } else if(/^Object\s*=\s*IsisCube/mu.test(text)) {
+    if(isisGeometryBands(bytes)){issues.push({path:file.path,state:'unsupported',reason:'Named geometry backplanes are ancillary data, not a science observation.'});continue;}
     const header=isis3CoreHeader(bytes),kind=header.bands===1?'image':'cube';
     const science=header.coreFile?files.find(f=>resolve(f.path).toLowerCase()===resolve(dirname(file.path),header.coreFile!).toLowerCase()):file;
     if(!science)throw new Error(`Unpinned ISIS Core ${header.coreFile}.`);
     product={id:file.id,target,telescope:header.identity.SpacecraftName??'Source archive',mode:`${header.identity.InstrumentId??'ISIS3'}/${kind}`,kind,decoder:'isis3',archiveProductId:file.origin,labelPath:file.path,files:science===file?[file]:[{...file,role:'label'},{...science,role:'science'}],identity:header.identity,
       units:'Native ISIS values',meaning:'Native ISIS3 numeric core; original labels and metadata remain in the pinned file.',citation:file.origin,limitations:['Core decoding does not establish calibrated scientific suitability, achieved resolution or body-map registration.']};
    } else if(text.startsWith('SIMPLE  =')) {
-    const header=readFitsHeader(bytes).header, axes=Number(header.NAXIS);
+    const header=readFitsHeader(bytes).header, rawAxes=Number(header.NAXIS),axes=rawAxes>3?2+Array.from({length:rawAxes-2},(_,i)=>Number(header[`NAXIS${i+3}`])).filter(n=>n!==1).length:rawAxes;
     if(axes!==2&&axes!==3){issues.push({path:file.path,state:'unsupported',reason:`FITS primary has ${axes} axes; extension-only products need an explicit observation declaration.`});continue;}
     const identity=Object.fromEntries(['SIMPLE','BITPIX','NAXIS','NAXIS1','NAXIS2','NAXIS3','OBJECT','TELESCOP','INSTRUME','OBS_ID'].filter(key=>header[key]!==undefined).map(key=>[key,header[key]!])) as SourceProduct['identity'];
     product={id:file.id,target,telescope:String(header.TELESCOP??'Source archive'),mode:String(header.INSTRUME??'FITS')+`/${axes===3?'cube':'image'}`,kind:axes===3?'cube':'image',decoder:'fits-image',archiveProductId:file.origin,files:[file],identity,
@@ -74,7 +76,11 @@ export async function intakeSources(root:string,target:string,existing:readonly 
     const dependencies:SourceFile[]=[{...file,role:'label'}]; let science:SourceFile|undefined;
     for(const key of [...new Set(pointers)]) {
       const pointer=pds3Values(label,key),name=pointer?.[0];if(!name)throw new Error(`Unreadable ${key} pointer.`);
-      if(/^\d+(?:\s*<BYTES>)?$/u.test(name)){if(!/HISTORY|HEADER|STRUCTURE/u.test(key))science=file;continue;}
+      if(/^\d+(?:\s*<BYTES>)?$/u.test(name)){
+        const recordBytes=Number(pds3Keyword(label,'RECORD_BYTES',[])??1),offset=(Number(name.split(/\s/u)[0])-1)*(name.includes('<BYTES>')?1:recordBytes);
+        if(!Number.isSafeInteger(offset)||offset<0||offset>=file.bytes)throw new Error(`Attached ${key} pointer lies outside the pinned file; an extracted label is not the complete observation.`);
+        if(!/HISTORY|HEADER|STRUCTURE/u.test(key))science=file;continue;
+      }
       const wanted=resolve(dirname(file.path),name).toLowerCase(),dependency=files.find(f=>resolve(f.path).toLowerCase()===wanted);
       if(!dependency)throw new Error(`Unpinned ${key} dependency ${name}.`);
       if(!dependencies.some(f=>f.path===dependency.path))dependencies.push({...dependency,role:'support'});
@@ -84,9 +90,9 @@ export async function intakeSources(root:string,target:string,existing:readonly 
     const identity=Object.fromEntries(['PDS_VERSION_ID','DATA_SET_ID','PRODUCT_ID','TARGET_NAME','INSTRUMENT_ID'].flatMap(key=>{const v=pds3Keyword(label,key,[]);return v===undefined?[]:[[key,v]];}));
     if(!identity.PRODUCT_ID)throw new Error('PDS product identity is absent.');
     const inputFiles=dependencies.map(f=>({...f,role:f.path===science!.path?'science':f.role}));
-    const start=pds3Keyword(label,'START_TIME',[]),stop=pds3Keyword(label,'STOP_TIME',[]),iso=(v:string)=>{const doy=/^(\d{4})-(\d{3})T(.*)$/u.exec(v);if(doy){const day=Number(doy[2]);if(day<1||day>366)throw new Error('Invalid day of year');v=`${new Date(Date.UTC(Number(doy[1]),0,day)).toISOString().slice(0,10)}T${doy[3]}`;}return new Date(/[zZ]|[+-]\d\d:\d\d$/u.test(v)?v:`${v}Z`).toISOString();};
+    const start=pds3Keyword(label,'START_TIME',[]),stop=pds3Keyword(label,'STOP_TIME',[]);
     product={id:file.id,target,telescope:pds3Keyword(label,'INSTRUMENT_HOST_NAME',[])??'Source archive',mode:`${pds3Keyword(label,'INSTRUMENT_ID',[])??'PDS3'}/${kind}`,kind,decoder:'pds-product',archiveProductId:`${identity.DATA_SET_ID??''}:${identity.PRODUCT_ID}`,files:inputFiles,identity,
-      labelPath:file.path,...(start&&stop?{startIso:iso(start),endIso:iso(stop)}:{}),units:pds3Keyword(label,'UNIT',[])??'not stated',meaning:`Native PDS3 ${kind}; preserve every labeled structure, including uncertainty and quality.`,citation:file.origin,
+      labelPath:file.path,...(start&&stop?{startIso:pds3TimeIso(start),endIso:pds3TimeIso(stop)}:{}),units:pds3Keyword(label,'UNIT',[])??'not stated',meaning:`Native PDS3 ${kind}; preserve every labeled structure, including uncertainty and quality.`,citation:file.origin,
       limitations:['Header metadata is discovery evidence until complete source pins and decoded structures are checked.','Decoding does not establish scientific suitability, optical resolution or surface registration.']};
    }
    products.push(product);product.files.forEach(f=>used.add(f.path));

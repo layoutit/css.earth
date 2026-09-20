@@ -4,11 +4,12 @@ import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
-import { loadSourceProducts, parseSourceProducts, sourceRun, SOURCE_PRODUCTS_SCHEMA } from './source-products.mts';
+import { loadSourceProducts, parseSourceProducts, sourceQualifiedObservations, sourceRun, SOURCE_PRODUCTS_SCHEMA } from './source-products.mts';
 import { qualifySourceProduct } from './qualify-source.mts';
 import { queryCapabilities, selectObservation, type QueryInputs } from './query.mts';
 import { selectedProductInput } from './selected-product.mts';
-import { saveSession, getSession, sessionRequest, observationChoices, type SessionServices } from './session.mts';
+import { saveSession, saveExploration, getSession, sessionRequest, observationChoices, type SessionServices } from './session.mts';
+import { explorationAnswer } from './exploration.mts';
 import { parseCli } from './cli.mts';
 
 const args = ['--target', 'test-body', '--wavelength', '1,2', '--kind', 'cube', '--any-time', '--min-arcsec', '1', '--result', 'telescope-product'];
@@ -116,6 +117,7 @@ test('saved choices qualify, export complete dependencies, reassess and reuse wi
     const altered = { ...saved, choices: saved.choices.map(c => ({ ...c, configuration: { kind: 'unknown' }, product: '/untrusted/file' })) };
     await writeFile(resolve(out, 'query.json'), JSON.stringify(altered));
     const result = await getSession(f.root, out, 1, () => {}, f.api);
+    assert.ok('satisfaction' in result);
     assert.equal(result.satisfaction.status, 'unresolved'); assert.equal(f.qualifications(), 1);
     const delivery = JSON.parse(await readFile(result.resultPath, 'utf8'));
     assert.ok(delivery.files.some((f: { path: string }) => f.path.endsWith('core.lbl')));
@@ -139,9 +141,30 @@ test('a saved number never silently follows reordered or removed observations', 
   } finally { await f.cleanup(); }
 });
 
+test('exploration is immutable, revalidates its exact choice, and delivers with not-requested context', async () => {
+  const f = await fixture(); try {
+    const api: SessionServices = { ...f.api, explore: async (_root, request) => {
+      const inputs = await f.load();
+      return explorationAnswer(request, { ...inputs, qualifiedProducts: sourceQualifiedObservations(inputs.sourceProducts ?? []) });
+    } };
+    const out = resolve(f.root, 'explore'), saved = await saveExploration(f.root, ['test-body'], out, api);
+    assert.equal(saved.choices.length, 1); assert.equal(saved.choices[0]!.state, 'qualify');
+    const altered = { ...saved, choices: saved.choices.map(choice => ({ ...choice, configuration: { kind: 'untrusted' } })) };
+    await writeFile(resolve(out, 'explore.json'), JSON.stringify(altered));
+    const result = await getSession(f.root, out, 1, () => {}, api);
+    assert.equal(result.context.kind, 'exploration'); assert.equal(result.context.assessment.status, 'not-requested');
+    const delivery = JSON.parse(await readFile(result.resultPath, 'utf8'));
+    assert.equal(delivery.schema, 'cssearth-telescope-delivery@2'); assert.equal(delivery.context.assessment.status, 'not-requested');
+    assert.equal((await getSession(f.root, out, 1, () => {}, api, { offline: true })).replay, 'pinned-local-artifact');
+    await writeFile(resolve(out, 'query.json'), '{}');
+    await assert.rejects(getSession(f.root, out, 1, () => {}, api), /both query\.json and explore\.json/);
+  } finally { await f.cleanup(); }
+});
+
 test('CLI rejects typos and ambiguous arguments before archive access', () => {
   for (const input of [['query', 'eris', '--wave', '1,2'], ['get', 'x', '--pick', '1.5'], ['get', 'x', '--pick', '1', '--pick', '2'], ['query', 'eris', '--target', 'io', '--out', 'x']]) assert.throws(() => parseCli(input));
   const parsed = parseCli(['query', 'eris', '--wavelength', '1,2', '--kind', 'cube', '--any-time', '--min-arcsec', '1', '--out', 'x']);
   assert.equal(parsed.command, 'query'); if (parsed.command === 'query') assert.equal(sessionRequest(parsed.requestArgs).result, 'telescope-product');
+  assert.throws(() => parseCli(['query', 'eris', '--wavelength', '1,2', '--kind', 'cube', '--any-time', '--min-arcsec', '1', '--result', 'body-map', '--out', 'x']), /retrieve native products/);
   assert.throws(() => sessionRequest(['--target', 'eris', '--wavelength', '1,2', '--result', 'telescope-product']), /State --kind/);
 });

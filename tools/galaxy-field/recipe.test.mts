@@ -6,6 +6,7 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import { parseFieldRecipe } from './recipe.mts';
+import { sha256 } from '../../src/platform/sha256.mts';
 
 const input: unknown = JSON.parse(await readFile(new URL('../../src/objects/nearby-universe/source/preparation/field.json', import.meta.url), 'utf8'));
 const recipe = parseFieldRecipe(input);
@@ -20,6 +21,19 @@ test('field distance bounds must be increasing', () => {
 test('cloud texture needs at least two pixels to normalize its radial coordinates', () => {
   assert.throws(() => parseFieldRecipe({ schema: 'cssearth-galaxy-field-recipe@1', ...recipe, texture: { ...recipe.texture, size: 1 } }), /at least 2/);
   assert.equal(parseFieldRecipe({ schema: 'cssearth-galaxy-field-recipe@1', ...recipe, texture: { ...recipe.texture, size: 2 } }).texture.size, 2);
+});
+
+test('the galaxy field pins the authored frame contract, not rendered world geometry', async () => {
+  const manifest = JSON.parse(await readFile('src/objects/nearby-universe/source/manifest.json', 'utf8'));
+  const navigation = manifest.documents.find((entry: { id: string }) => entry.id === 'navigation-frame');
+  assert.equal(navigation.path, 'src/objects/sun/source/navigation/universe.json');
+  const frame = await readFile(navigation.path);
+  assert.equal(frame.length, navigation.expectedBytes);
+  assert.equal(sha256(frame), navigation.expectedSha256);
+  assert.equal(manifest.generatedIntermediates.length, 0);
+  const preparer = await readFile(new URL('./prepare-points.mts', import.meta.url), 'utf8');
+  assert.match(preparer, /sun\/source\/navigation\/universe\.json/u);
+  assert.doesNotMatch(preparer, /sun\/prepared\/world-context\.json/u);
 });
 
 
@@ -48,8 +62,8 @@ test('the field bake replaces stale generated files and restores missing receipt
   await cp(resolve(base,'source'),resolve(root,base,'source'),{recursive:true});
   await mkdir(resolve(root,'.local/galaxy-field'),{recursive:true});
   await cp('.local/galaxy-field/sources',resolve(root,'.local/galaxy-field/sources'),{recursive:true});
-  await mkdir(resolve(root,'src/objects/sun/prepared'),{recursive:true});
-  await cp('src/objects/sun/prepared/world-context.json',resolve(root,'src/objects/sun/prepared/world-context.json'));
+  await mkdir(resolve(root,'src/objects/sun/source/navigation'),{recursive:true});
+  await cp('src/objects/sun/source/navigation/universe.json',resolve(root,'src/objects/sun/source/navigation/universe.json'));
   await writeFile(resolve(root,base,'prepared/points.json'),'stale generation');
   await writeFile(resolve(root,base,'prepared/cloud.webp'),'stale generation');
   const result=spawnSync(process.execPath,[fileURLToPath(new URL('./prepare-points.mts',import.meta.url))],{cwd:root,encoding:'utf8'});

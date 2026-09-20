@@ -1,0 +1,243 @@
+{
+  "schema": "cssearth-telescope-output-checks@1",
+  "testedBase": "9a93ce772b4376f54844a8b5094ba0097563d66a",
+  "scope": "Native exports, large arrays, physical-object handoffs, inactive sphere assets",
+  "tests": {
+    "existingFocusedPassed": 25,
+    "newHandoffPassed": 3,
+    "inactiveSphereBindingsPassed": 1,
+    "scopedTypeScript": "passed"
+  },
+  "native": {
+    "enceladus": {
+      "outputs": [
+        {
+          "path": "figure.png",
+          "bytes": 52877,
+          "sha256": "b24dafab35bfbfbae854ceff026fbfa313731686f51d8cbeb113810f31ec787f"
+        },
+        {
+          "path": "figure.svg",
+          "bytes": 32020,
+          "sha256": "942113f6a4de210c4fe46e4ff2052f913d5addfa7930b2f44df4831f1e045824"
+        },
+        {
+          "path": "values.csv",
+          "bytes": 7769,
+          "sha256": "4f2661725834af3b91dc2231a0f4bf7b614c3da7e754ebbebdb118cf8619473c"
+        },
+        {
+          "path": "spectrum.ecsv",
+          "bytes": 9311,
+          "sha256": "05e14b6af0ca26b5110925434018cf131d0d6dfd7090f56080d1ef9bb97b9bf4"
+        }
+      ],
+      "selection": {
+        "kind": "spectrum",
+        "hdu": 0,
+        "pixel": [
+          10,
+          10
+        ]
+      },
+      "quality": {
+        "policy": "finite-science; DQ/MASK=0; finite nonnegative uncertainty when supplied",
+        "samples": 139264,
+        "finite": 139264,
+        "usable": 139264,
+        "flagged": 0,
+        "invalidUncertainty": 0,
+        "mask": null
+      },
+      "uncertainty": {
+        "status": "unknown",
+        "kind": null,
+        "structure": null
+      },
+      "sourceSatisfaction": "unresolved"
+    },
+    "comet-67p": {
+      "outputs": [
+        {
+          "path": "figure.png",
+          "bytes": 41368,
+          "sha256": "5327593ac88a47acacda0f22bc2220d00295fa3a9548c4d156e39f17f5f7cf7d"
+        },
+        {
+          "path": "figure.svg",
+          "bytes": 40855,
+          "sha256": "c98a6d8aa818a98841865a4f5ae472f68fbc1cb5fc4094e5ea752301a8bbe6e8"
+        },
+        {
+          "path": "values.csv",
+          "bytes": 50215671,
+          "sha256": "af8244d35828165927f162021abcfb7a4627d52780f115211ee270c3bd1426db"
+        },
+        {
+          "path": "image.fits",
+          "bytes": 71314560,
+          "sha256": "c16c7156f85340cca673a314d3f675070bda4867e21e21a4c792373ae824e5b9"
+        }
+      ],
+      "selection": {
+        "kind": "image",
+        "hdu": 0,
+        "structure": "IMAGE"
+      },
+      "quality": {
+        "policy": "finite-science; DQ/MASK=0; finite nonnegative uncertainty when supplied",
+        "samples": 4194304,
+        "finite": 4194304,
+        "usable": 26917,
+        "flagged": 4167387,
+        "invalidUncertainty": 0,
+        "mask": "MASK"
+      },
+      "uncertainty": {
+        "status": "validated",
+        "kind": "standard-deviation",
+        "structure": "ERR"
+      },
+      "sourceSatisfaction": "unresolved"
+    },
+    "moon": {
+      "outputs": [
+        {
+          "path": "figure.png",
+          "bytes": 664370,
+          "sha256": "8ccffcf4082dea35661a4e227fc36b234bad9eb7ed4154a28cd71fce7f48f8c2"
+        },
+        {
+          "path": "figure.svg",
+          "bytes": 383516,
+          "sha256": "2f0466761e51162f8548a611abc4e0bbeb5cf66b3d58ba5237ebb5b8280bfd48"
+        },
+        {
+          "path": "values.csv",
+          "bytes": 355363242,
+          "sha256": "05a794045ac06b37f55c1e8448e013ba7a4a7f5d48e62efa4401355d8710ee2a"
+        },
+        {
+          "path": "image.fits",
+          "bytes": 149304960,
+          "sha256": "08def453bba204adbf49a75d1eda5f4cf6fe6504e81cc6e968d334193173aa13"
+        }
+      ],
+      "selection": {
+        "kind": "image",
+        "hdu": 0
+      },
+      "quality": {
+        "policy": "finite-science; DQ/MASK=0; finite nonnegative uncertainty when supplied",
+        "samples": 16588800,
+        "finite": 16588800,
+        "usable": 16588800,
+        "flagged": 0,
+        "invalidUncertainty": 0,
+        "mask": null
+      },
+      "sourceSatisfaction": "unresolved",
+      "labelScaling": {
+        "factor": 0.5,
+        "offset": 1737400,
+        "owner": "pdr.get_scaled"
+      },
+      "normalization": {
+        "owner": "astropy.visualization.ImageNormalize",
+        "stretch": "linear",
+        "minimum": 1728418.5,
+        "maximum": 1748085.5,
+        "colormap": "viridis",
+        "missing": "transparent"
+      }
+    }
+  },
+  "spatial": {
+    "points": {
+      "target": "stellar-neighbourhood",
+      "files": 7,
+      "byteIdenticalPortableRoundTrip": true,
+      "modifiedTextureRejected": true,
+      "frame": {
+        "referenceFrame": "sun-icrf",
+        "epochJdTt": 2461286.5,
+        "originM": [
+          0,
+          0,
+          0
+        ],
+        "localToReferenceXyzw": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "metersPerUnit": 30856775814913670,
+        "boundsUnits": {
+          "min": [
+            -1024,
+            -1024,
+            -1024
+          ],
+          "max": [
+            1024,
+            1024,
+            1024
+          ]
+        }
+      }
+    },
+    "volume": {
+      "target": "milky-way",
+      "files": 472,
+      "byteIdenticalPortableRoundTrip": true,
+      "modifiedTextureRejected": true,
+      "frame": {
+        "referenceFrame": "sun-icrf",
+        "epochJdTt": 2461286.5,
+        "originM": [
+          -13547678355343626000,
+          -215634148836467800000,
+          -119449188638369900000
+        ],
+        "localToReferenceXyzw": [
+          0.26949593540448213,
+          -0.4510814161748912,
+          -0.25008111046409387,
+          0.8132385473962505
+        ],
+        "metersPerUnit": 60000000000000000000,
+        "boundsUnits": {
+          "min": [
+            -10,
+            -10,
+            -1.25
+          ],
+          "max": [
+            10,
+            10,
+            1.25
+          ]
+        }
+      }
+    }
+  },
+  "mercury": {
+    "target": "mercury",
+    "treeGeometryExact": true,
+    "inactiveBindings": [
+      "--mercury-interior-outer-image",
+      "--mercury-interior-outer-poles-image"
+    ],
+    "bytes": 9358453
+  },
+  "limits": [
+    "Mercury browser opening blocked by local file URL policy; structural parity only.",
+    "Physical handoffs consume existing physical object packages; no new spectral-cube depth reconstruction.",
+    "PDS quality policy retains zero flags only; most of the 67P example is masked."
+  ],
+  "checks": {
+    "updatedEuropaOracle": "passed",
+    "pdsScalingRegression": "passed"
+  }
+}

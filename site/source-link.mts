@@ -1,10 +1,15 @@
+export interface SourceDocumentReference {
+  readonly dataset: { readonly sourceDocument?: string; readonly sourceLabel?: string };
+}
+
 /** Reuse document links prepared on the retained navigation rows. */
-export function sourceDocuments(document: Document) {
+export function sourceDocuments(document: Document): Map<string, SourceDocumentReference> {
   return new Map([...document.querySelectorAll<HTMLElement>('.planet-object-browser [data-source-subject]')]
     .map(node => [node.dataset.sourceSubject!, node]));
 }
 
-export function renderSourceLink(document: Document, subject: string, documents = sourceDocuments(document)) {
+export function renderSourceLink(document: Document, subject: string,
+  documents: ReadonlyMap<string, SourceDocumentReference> = sourceDocuments(document)) {
   const link = document.querySelector<HTMLAnchorElement>('[data-source-link]');
   if (!link) return;
   const source = documents.get(subject) ?? link;

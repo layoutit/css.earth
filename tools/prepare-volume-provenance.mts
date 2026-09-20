@@ -5,8 +5,10 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
+import { parseObjectDescriptor } from '@cssearth/objects';
 import type { Lens } from '../site/planet-shell-types.ts';
 import { validateDatasetText } from '../site/dataset-content.mts';
+import { parsePreparedVolumePresentation } from '../site/volume-presentation.mts';
 import { parseCapture } from '../src/platform/exploration-catalog.mts';
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
 import type { ProvenanceDocument, ProvenanceSource, ProvenanceJson } from '../src/platform/object-provenance.mts';
@@ -134,6 +136,43 @@ async function hostedDatasets(root: string, base: string, objectId: string, lens
   }
   for (const lensId of lensIds) if (!datasets[lensId]) throw new TypeError(`No dataset of ${hostId} shows ${objectId}/${lensId}.`);
   return { objectId: hostId, name: sourceText(content.displayName), route: `/${hostId}/`, datasets };
+}
+
+/** Read the prepared package that setup:assets installed. Deploy catalogue compilation must bind to these
+ * R2-backed bytes; rebuilding provenance from authoring inputs can describe a different package. */
+export async function readPreparedVolumeProvenance({ root = process.cwd(), input = path => readFile(resolve(root, path)) }: {
+  root?: string; input?: (path: string) => Promise<Buffer>;
+} = {}): Promise<PreparedVolumeProvenance[]> {
+  const results: PreparedVolumeProvenance[] = [];
+  const folders = await readdir(resolve(root, 'src/objects'), { withFileTypes: true });
+  for (const folder of folders.filter(folder => folder.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
+    const id = folder.name, base = `src/objects/${id}`, sourcePresentationPath = `${base}/source/presentation.json`;
+    const exists = await readFile(resolve(root, sourcePresentationPath)).then(() => true, (error: unknown) => {
+      if (hasErrorCode(error, 'ENOENT')) return false;
+      throw error;
+    });
+    if (!exists) continue;
+    const sourcePresentation = sourceObject(json(await input(sourcePresentationPath)));
+    // The three source-only catalogue contexts use source/presentation.json too, but are not prepared lens packages.
+    // prepareContextProvenance owns their in-memory catalogue records below; there are no R2 metadata files to read.
+    if (sourcePresentation.schema !== 'cssearth-volume-presentation-source@1') continue;
+    if (sourcePresentation.objectId !== id) throw new TypeError(`Mismatched volume presentation object: ${id}.`);
+    const descriptor = parseObjectDescriptor(json(await input(`${base}/object.json`)));
+    if (descriptor.id !== id || !descriptor.prepared || !['volume-lens-bank', 'image-layer-bank'].includes(descriptor.type))
+      throw new TypeError(`Invalid prepared volume descriptor: ${id}.`);
+    const provenance = validateObjectProvenance(json(await input(`${base}/prepared/provenance.json`)), id);
+    const defaultLens = sourceId(sourcePresentation.defaultLens);
+    const lensIds = sourceArray(sourcePresentation.lenses, raw => sourceId(sourceObject(raw).id));
+    const prepared = parsePreparedVolumePresentation(json(await input(`${base}/prepared/presentation.json`)),
+      { id, defaultLens, lenses: lensIds.map(lensId => ({ id: lensId })) }, provenance);
+    const bankUrl = `${base}/${descriptor.prepared!.url}`;
+    const bankPin = provenance.products.flatMap(product => product.outputs).find(output => output.url === bankUrl);
+    if (!bankPin || bankPin.sha256 !== descriptor.prepared!.sha256) throw new TypeError(`Unbound prepared bank: ${bankUrl}.`);
+    const hostedBy = await hostedDatasets(root, base, id, prepared.controls.map(control => control.id), input);
+    results.push({ id, name: sourceText(sourcePresentation.name), route: hostedBy?.route ?? `/sun/?focus=${id}`, base,
+      controls: prepared.controls, defaultLens: prepared.defaultLens, provenance, outputs: [], ...(hostedBy ? { hostedBy } : {}) });
+  }
+  return results;
 }
 interface Options {
   root?: string;

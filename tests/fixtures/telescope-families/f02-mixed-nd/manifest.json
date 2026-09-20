@@ -1,0 +1,9 @@
+{
+  "source": "reproject upstream test fixture",
+  "url": "https://github.com/astropy/reproject/blob/main/reproject/tests/data/equatorial_3d.fits",
+  "license": "BSD-3-Clause",
+  "file": "equatorial_3d.fits",
+  "bytes": 5760,
+  "sha256": "078e583b6f6f4cf54c61c56b212c53e139cd1e2b33c3c4b40e8e9fcb5c2d7abb",
+  "metadata": "Upstream FITS/WCS spectral-cube fixture. The adverse mixed time/spectral/polarization permutations are generated in the focused test so their axis values remain deterministic."
+}

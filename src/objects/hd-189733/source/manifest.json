@@ -352,8 +352,8 @@
     {
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 43008,
-      "expectedSha256": "44b59d3f1eb4f74d40ed2a71190a8ee46bca168f301bffe580629b895bbb658f",
+      "expectedBytes": 43408,
+      "expectedSha256": "3cc2b4e9831b3a3e61a22f3a14c454d49f037150303ebb37fa5c9e138274be44",
       "origin": "https://gea.esac.esa.int/archive/",
       "credit": "Photosphere colour from the Gaia DR3 XP spectrum, dimmed toward the limb by the law fitted to TESS transits of HD 189733b; rendered by tools/objects/source-authoring/hd-189733/author.mts",
       "license": "Project-authored display derivative.",

@@ -6,13 +6,18 @@ on:
   workflow_dispatch:
   pull_request:
     # Only the deploy-build job below runs from this trigger (each other job's `if:` stays schedule/dispatch-only):
-    # a full `pnpm build` is too slow to run on every PR, but a PR touching the code this specific path resolves
+    # a full `pnpm build:deploy` is too slow to run on every PR, but a PR touching the code this specific path resolves
     # through gets it anyway, instead of waiting for the nightly schedule to notice a break.
     paths:
+      - '.github/workflows/nightly.yml'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
       - 'site/**'
       - 'astro.config.mts'
       - 'src/renderers/css/rendering/**'
       - '.github/workflows/deploy.yml'
+      - 'tools/prepare-*.mts'
+      - 'tools/setup*.mts'
 
 permissions:
   contents: read
@@ -86,7 +91,7 @@ jobs:
 
   asset-origin-build:
     # Exercises the one path that has broken two real deploys and that no other CI job builds at all: a full
-    # `pnpm build` with `ASSET_ORIGIN` set, the same as .github/workflows/deploy.yml's production path. The static
+    # `pnpm build:deploy` with `ASSET_ORIGIN` set, the same as .github/workflows/deploy.yml's production path. The static
     # scan catches emitted same-origin addresses; the production browser test also exercises the client loader,
     # whose descriptor path can otherwise discard an origin that is present in the emitted page.
     name: Build with ASSET_ORIGIN and exercise the client loader
@@ -118,18 +123,20 @@ jobs:
         env:
           CSSEARTH_ALLOW_MISSING_ASSETS: "1"
         run: pnpm setup:assets
-      - name: Build the site with ASSET_ORIGIN set to a test origin
+      - name: Build the site with the production asset origin and reject metadata drift
         env:
           NODE_OPTIONS: --max-old-space-size=6144
           CSSEARTH_ALLOW_MISSING_ASSETS: "1"
-          ASSET_ORIGIN: https://asset-origin-ci-check.example
-        run: pnpm build
+          ASSET_ORIGIN: https://earth-assets.lowpoly.cc
+        run: |
+          pnpm build:deploy
+          pnpm check:deploy-assets
       - name: Check no page references a same-origin /scenes/ address
         run: node tools/check-asset-origin-scenes.mts dist
       - name: Check production navigation loads content-addressed assets
         env:
           CSSEARTH_TEST_ORIGIN: http://127.0.0.1:4212
-          CSSEARTH_ASSET_ORIGIN: https://asset-origin-ci-check.example
+          CSSEARTH_ASSET_ORIGIN: https://earth-assets.lowpoly.cc
           PLAYWRIGHT_CHANNEL: chromium
         run: |
           pnpm exec playwright install --with-deps chromium

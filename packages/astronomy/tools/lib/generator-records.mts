@@ -9,8 +9,10 @@ export interface StarRecord { rightAscensionDegrees: number; declinationDegrees:
   boundTo?: string;
   sources: { position: string; distance: string; properMotion: string; radialVelocity: string; binary?: string } }
 
-export interface HostedOrbitRecord { periodDays: number; semiMajorAxisStellarRadii: number; inclinationDegrees: number; eccentricity: 0;
-  transitTimeBmjdTdb: number; ascendingNodePositionAngleDegrees: number; sources: { period: string; shape: string; phase: string; orientation: string } }
+export interface HostedOrbitRecord { periodDays: number; semiMajorAxisStellarRadii: number; inclinationDegrees: number; eccentricity: number;
+  argumentOfPeriapsisDegrees?: number; epochDefinition?: 'inferior-conjunction';
+  transitTimeBmjdTdb: number; ascendingNodePositionAngleDegrees: number;
+  sources: { period: string; shape: string; phase: string; orientation: string; eccentricity?: string; argumentOfPeriapsis?: string } }
 
 export function objectValue(value: unknown, label = 'record'): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${label} must be an object`);
@@ -69,16 +71,26 @@ export function readStarRecord(value: unknown): StarRecord {
   return star;
 }
 
-/** A circular transit-fitted orbit around a placed star; only the published transit quantities and a stated node convention. */
+/** Preserve the selected published solution. Eccentric orbits need a sourced planet-centric periapsis and an explicit epoch convention. */
 export function readHostedOrbitRecord(value: unknown): HostedOrbitRecord {
   const record = objectValue(value), sources = objectValue(record.sources, 'hosted orbit sources');
-  if (record.eccentricity !== 0) throw new TypeError('Only circular hosted orbits are modelled.');
-  const orbit = { periodDays: numberValue(record.periodDays), semiMajorAxisStellarRadii: numberValue(record.semiMajorAxisStellarRadii),
-    inclinationDegrees: numberValue(record.inclinationDegrees), eccentricity: 0 as const, transitTimeBmjdTdb: numberValue(record.transitTimeBmjdTdb),
+  const eccentricity = numberValue(record.eccentricity, 'hosted eccentricity');
+  if (!(eccentricity >= 0 && eccentricity < 1)) throw new TypeError('Hosted eccentricity must be in [0, 1).');
+  if (record.epochDefinition !== undefined && record.epochDefinition !== 'inferior-conjunction') throw new TypeError('Unsupported hosted orbit epoch definition.');
+  if (eccentricity > 0 && (record.argumentOfPeriapsisDegrees === undefined || record.epochDefinition !== 'inferior-conjunction' ||
+      sources.eccentricity === undefined || sources.argumentOfPeriapsis === undefined)) throw new TypeError('An eccentric hosted orbit needs planet-centric periapsis, an inferior-conjunction epoch and sources for both eccentricity and periapsis.');
+  const orbit: HostedOrbitRecord = { periodDays: numberValue(record.periodDays), semiMajorAxisStellarRadii: numberValue(record.semiMajorAxisStellarRadii),
+    inclinationDegrees: numberValue(record.inclinationDegrees), eccentricity, transitTimeBmjdTdb: numberValue(record.transitTimeBmjdTdb),
+    ...(record.argumentOfPeriapsisDegrees === undefined ? {} : { argumentOfPeriapsisDegrees: numberValue(record.argumentOfPeriapsisDegrees) }),
+    ...(record.epochDefinition === undefined ? {} : { epochDefinition: 'inferior-conjunction' }),
     ascendingNodePositionAngleDegrees: numberValue(record.ascendingNodePositionAngleDegrees),
-    sources: { period: stringValue(sources.period), shape: stringValue(sources.shape), phase: stringValue(sources.phase), orientation: stringValue(sources.orientation) } };
+    sources: { period: stringValue(sources.period), shape: stringValue(sources.shape), phase: stringValue(sources.phase), orientation: stringValue(sources.orientation),
+      ...(sources.eccentricity === undefined ? {} : { eccentricity: stringValue(sources.eccentricity) }),
+      ...(sources.argumentOfPeriapsis === undefined ? {} : { argumentOfPeriapsis: stringValue(sources.argumentOfPeriapsis) }) } };
   if (!(orbit.periodDays > 0) || !(orbit.semiMajorAxisStellarRadii > 1) || orbit.inclinationDegrees < 0 || orbit.inclinationDegrees > 180 ||
-      orbit.ascendingNodePositionAngleDegrees < 0 || orbit.ascendingNodePositionAngleDegrees >= 360 || Object.values(orbit.sources).some(text => !text.trim())) {
+      orbit.ascendingNodePositionAngleDegrees < 0 || orbit.ascendingNodePositionAngleDegrees >= 360 ||
+      orbit.argumentOfPeriapsisDegrees !== undefined && (orbit.argumentOfPeriapsisDegrees < 0 || orbit.argumentOfPeriapsisDegrees >= 360) ||
+      orbit.semiMajorAxisStellarRadii * (1 - eccentricity) <= 1 || Object.values(orbit.sources).some(text => !text.trim())) {
     throw new TypeError('Invalid hosted orbit.');
   }
   return orbit;

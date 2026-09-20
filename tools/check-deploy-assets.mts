@@ -8,7 +8,7 @@ import { inventoriedAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN } from '.
 const execFileAsync = promisify(execFile);
 const textExtensions = new Set(['.css', '.html', '.js', '.json', '.map', '.svg', '.txt', '.xml']);
 const escapedOrigin = RUNTIME_ASSET_ORIGIN.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
-const runtimeAssetPattern = new RegExp(`${escapedOrigin}/runtime-assets/[a-f0-9]{64}/[a-zA-Z0-9._/-]+`, 'gu');
+const runtimeAssetPattern = new RegExp(`${escapedOrigin}/runtime-assets/[a-f0-9]{64}/[a-zA-Z0-9._@/-]+`, 'gu');
 
 export function runtimeAssetUrls(text: string): string[] {
   return [...new Set(text.match(runtimeAssetPattern) ?? [])].sort();
@@ -29,7 +29,7 @@ export function unknownRuntimeAssetUrls(referenced: readonly string[], inventori
 }
 
 export async function checkDeployAssets(root = resolve(import.meta.dirname, '..')): Promise<{ files: number; urls: number }> {
-  const { stdout } = await execFileAsync('git', ['diff', '--name-only', '--', 'src/objects', 'site/prepared-facilities.json', 'site/prepared-sources.json'], { cwd: root });
+  const { stdout } = await execFileAsync('git', ['diff', '--name-only', '--', 'src/objects'], { cwd: root });
   const drift = stdout.split('\n').map(path => path.trim()).filter(Boolean);
   if (drift.length) throw new Error(`The deploy preparation changed committed object metadata:\n${drift.join('\n')}\nPrepare and publish those assets explicitly before deploying.`);
   const files = await textFiles(resolve(root, 'dist'));

@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-astronomy-packages-toolchain@1",
-  "purpose": "The pinned Python archive client used by cssEarth. Astroquery owns archive-specific services and PyVO owns generic Virtual Observatory TAP; cssEarth still validates identities and bytes and owns every scientific reduction and evidence claim.",
-  "license": "Astroquery, Astropy and PyVO are BSD-3-Clause. Their notices are retained here; archive data keep their providers' separate terms.",
+  "purpose": "Pinned archive clients, scientific metadata, measurement arithmetic, plotting and planetary mapping dependencies. cssEarth validates identities, scientific choices and evidence.",
+  "license": "Astroquery, Astropy, astropy-healpix, PyVO and SciPy are BSD-3-Clause. pyuvdata is BSD-2-Clause. batman-package is GPL-3.0. cdflib is MIT. Their notices are retained here; archive data keep their providers' separate terms.",
   "micromamba": {
     "channel": "conda-forge",
     "packages": [
@@ -11,5 +11,18 @@
   },
   "requirements": "requirements.lock",
   "astroquery": "0.4.11",
-  "pyvo": "1.9.1"
+  "astropyHealpix": "1.1.3",
+  "pyvo": "1.9.1",
+  "scipy": "1.18.1",
+  "batman": "2.5.3",
+  "sourcePackages": [
+    {
+      "name": "batman-package",
+      "url": "https://codeload.github.com/lkreidberg/batman/tar.gz/6fc570e209fa2e3dadd2ffa4c535f528a7bef495",
+      "sha256": "fbe07e6fa22208a5aa38607b73dc828563cb7496624848b488d587056262f392",
+      "build": "installed-numpy"
+    }
+  ],
+  "cdflib": "1.3.12",
+  "pyuvdata": "3.2.4"
 }
