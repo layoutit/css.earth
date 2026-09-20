@@ -4,9 +4,10 @@ import type { VolumeCameraPublication } from '../volume/types.js';
 import { mountBatchedSpatialPoints } from './batched-spatial-points.js';
 
 const colorCss = (rgb: PointFieldRgb) => `#${rgb.map(value=>value.toString(16).padStart(2,'0')).join('')}`;
+export const STELLAR_POINTS_MAX_OPACITY = .5;
 
 export function stellarPointsOpacity(starsHandoff: number, completedVolumeContribution: number): number {
-  return Math.max(0,Math.min(1,starsHandoff))*(1-Math.max(0,Math.min(1,completedVolumeContribution)));
+  return STELLAR_POINTS_MAX_OPACITY*Math.max(0,Math.min(1,starsHandoff))*(1-Math.max(0,Math.min(1,completedVolumeContribution)));
 }
 
 export function mountStellarPoints({host,before,field}:{host:HTMLElement;before:Element;field:PreparedPointAppearance}) {

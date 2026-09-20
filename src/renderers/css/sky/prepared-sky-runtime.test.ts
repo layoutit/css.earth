@@ -12,6 +12,7 @@ import { worldRotationCss } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import { createPreparedUniverse } from '../universe/prepared-universe-runtime.js';
 import { logarithmicFade } from '../universe/prepared-world-context.js';
+import { STELLAR_POINTS_MAX_OPACITY } from '../universe/stellar-points.js';
 import { readCanonicalPointField } from '../preparation/stars/canonical-point-field-fixture.js';
 
 const spatialPublish = vi.hoisted(() => vi.fn());
@@ -153,6 +154,10 @@ test('near star cube is fully handed off before solar-system parallax produces d
   expect(logarithmicFade(591.27 * astronomicalUnitM, source.stars.fadeStartDistanceM, source.stars.fullDistanceM)).toBe(1);
 });
 
+test('direct stars peak at half opacity', () => {
+  expect(STELLAR_POINTS_MAX_OPACITY).toBe(.5);
+});
+
 test.each([
   { withSky: true, withBrightness: true }, { withSky: true, withBrightness: false },
   { withSky: false, withBrightness: true }, { withSky: false, withBrightness: false },
@@ -209,7 +214,7 @@ test.each([
     const expectedSkyContribution = 1 - expected * expectedGain;
     const starHandoff = logarithmicFade(distance, context.stars.fadeStartDistanceM, context.stars.fullDistanceM);
     const completedVolumeContribution = expected * (withSky ? expectedGain : 1);
-    expect(Number(stellarRoot.style.opacity)).toBeCloseTo(starHandoff * (1 - completedVolumeContribution), 12);
+    expect(Number(stellarRoot.style.opacity)).toBeCloseTo(STELLAR_POINTS_MAX_OPACITY * starHandoff * (1 - completedVolumeContribution), 12);
     expect(Number(volumeRoot.dataset.volumeOpacity)).toBeCloseTo(expected, 12);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? expectedGain : 1), 12);
     if (withBrightness && distance === gradedDistance) {
