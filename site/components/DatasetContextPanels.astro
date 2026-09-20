@@ -6,13 +6,12 @@ interface Props {
 }
 import { datasetContributors } from '../dataset-context.mts';
 import { EXPLORATION } from '../exploration-catalog.mts';
-import { SOURCE_CATALOGUE, SOURCES } from '../sources-catalog.mts';
 import PlanetCard from './PlanetCard.astro';
 import InformationTabs from './InformationTabs.astro';
 import SelectedContent from './SelectedContent.astro';
 const { objectId, lenses } = Astro.props;
 const contexts = (lenses?.controls ?? []).map(lens => ({ lens,
-  ...datasetContributors(objectId, lens.id, EXPLORATION.graph, EXPLORATION.catalog, SOURCE_CATALOGUE.usage, SOURCES),
+  ...datasetContributors(objectId, lens.id, EXPLORATION.graph, EXPLORATION.catalog),
 }));
 const span = (from?: { value: string }, to?: { value: string }) =>
   from ? `${from.value}${to ? `–${to.value}` : ''}` : null;
@@ -93,16 +92,6 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
           </article>
         </div>)}
       </PlanetCard>)}
-      {context.sources.length > 0 && <PlanetCard class="planet-dataset-context-card" role="region" aria-label="Dataset sources">
-        <div class="planet-card-tabpanel">
-          <h3 class="planet-lens-details-title">Sources</h3>
-          <ul class="planet-resources-links">
-            {context.sources.map(source => <li class="planet-resource-row">
-              <a class="planet-resource-label" data-dataset-source={source.id} href={source.href} target="_blank" rel="noreferrer">{source.title}</a>
-            </li>)}
-          </ul>
-        </div>
-      </PlanetCard>}
     </div>;
   })}
 </aside>
