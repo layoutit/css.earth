@@ -29,7 +29,6 @@ on:
 
 permissions:
   contents: read
-  pull-requests: read
 
 concurrency:
   # One publish at a time per pull request; never cancel a run mid-upload.
@@ -40,6 +39,9 @@ jobs:
   resolve:
     name: Resolve the pull request head
     if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      pull-requests: read
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
@@ -54,6 +56,10 @@ jobs:
           OBJECT: ${{ inputs.object }}
         run: |
           set -euo pipefail
+          if [[ ! "$NUMBER" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::Not a pull request number: $NUMBER"
+            exit 1
+          fi
           # An object id reaches a shell and a path below, so reject anything that is not the
           # id shape used everywhere else in this repository before it goes further.
           if [[ ! "$OBJECT" =~ ^[a-z][a-z0-9-]*$ ]]; then

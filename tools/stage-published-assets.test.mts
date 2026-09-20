@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
+import { parseDocument } from 'yaml';
 import { sha256 } from '../src/platform/sha256.mts';
 import { stagePublishedAssets } from './stage-published-assets.mts';
 
@@ -108,4 +110,25 @@ test('rejects an empty publication instead of reporting success', async t => {
   const options = await fixture(t);
   for (const root of [options.artifactRoot, options.sourceRoot]) await rm(resolve(root, inventoryPath));
   await assert.rejects(stagePublishedAssets(options), /No committed assets/);
+});
+
+test('the real resolve step rejects unsafe dispatch inputs before invoking GitHub', async () => {
+  const workflow = parseDocument(await readFile(new URL('../.github/workflows/publish-assets.yml', import.meta.url), 'utf8'));
+  const run: unknown = workflow.getIn(['jobs', 'resolve', 'steps', 0, 'run']);
+  assert.ok(typeof run === 'string');
+  // A stub ensures this test cannot contact GitHub, even if the input guard is removed.
+  const script = `gh() { echo GITHUB_WAS_CALLED; return 99; }\n${run}`;
+  for (const [NUMBER, OBJECT, error] of [
+    ['--help', 'earth', 'Not a pull request number'],
+    ['https://github.com/other/repo/pull/1', 'earth', 'Not a pull request number'],
+    ['380\n1', 'earth', 'Not a pull request number'],
+    ['380', 'earth\necho injected', 'Not an object id'],
+    ['380', '../earth', 'Not an object id'],
+  ]) {
+    const result = spawnSync('bash', ['-c', script], { encoding: 'utf8',
+      env: { PATH: process.env.PATH, NUMBER, OBJECT, GITHUB_REPOSITORY: 'fixture/repository' } });
+    assert.equal(result.status, 1, result.stderr);
+    assert.ok(result.stdout.includes(error!));
+    assert.ok(!result.stdout.includes('GITHUB_WAS_CALLED'));
+  }
 });
