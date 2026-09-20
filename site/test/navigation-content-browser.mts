@@ -30,7 +30,9 @@ try {
     };
     navigationFragments(window).prefetch('venus');
     const fragment = await navigationFragments(window).get('venus');
-    if (fragment.querySelector('template[data-object-card], [data-system-results]')) throw new Error('Fragment repeats resident cards/catalog');
+    try {
+      if (fragment.document.querySelector('template[data-object-card], [data-system-results]')) throw new Error('Fragment repeats resident cards/catalog');
+    } finally { fragment.release(); }
     const expectedMetadata = headMetadata(new DOMParser().parseFromString(await fetch('/venus/').then(response => response.text()), 'text/html'));
     const selectors = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content', '.planet-input-surface'];
     const retained = selectors.map(selector => document.querySelector(selector));
