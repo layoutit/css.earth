@@ -65,6 +65,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
         } } };
     };
     const volumeSet = resourceSet(applicationContext.volume.objectId), starSet = resourceSet(applicationContext.stars.objectId);
+    const backgroundPointSet = resourceSet('nearby-universe');
     const [volume, pointAppearance] = await Promise.all([
       loadPreparedCssVolume(volumeSet.descriptor, volumeSet.transport),
       loadPreparedPointAppearance(starSet.descriptor, starSet.transport),
@@ -109,7 +110,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const plannerSource = { contextUrl: APPLICATION_WORLD_CONTEXT_URL };
     const catalogBank = { fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM, fullDistanceM: galaxyPresentation.fullDistanceM,
       clusters: { fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } };
-    const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: new URL('../src/objects/nearby-universe/prepared/points.json', import.meta.url).href, backgroundPointCloud: new URL('../src/objects/nearby-universe/prepared/cloud.webp', import.meta.url).href, annotationPriorities, annotationOpacities, plannerSource, catalogBank,
+    const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: backgroundPointSet.resolve('prepared/points.json'), backgroundPointCloud: backgroundPointSet.resolve('prepared/cloud.webp'), annotationPriorities, annotationOpacities, plannerSource, catalogBank,
       loadCatalog: async () => {
         const { galaxies, clusters, nebulae } = await loadCatalogs();
         return { payload: galaxies, galaxySample: galaxyDisplaySample, nebulae, ...catalogBank,

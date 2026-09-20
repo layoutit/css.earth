@@ -34,7 +34,7 @@ test('the deploy consumes installed assets, rebuilds only catalogues and rejects
  assert.match(workflow,/git diff --quiet -- src\/objects/);
  assert.doesNotMatch(workflow,/ASSET_ORIGIN=https:\/\/earth-assets\.lowpoly\.cc pnpm build(?:\s|$)/);
  assert.match(packageFile.scripts['prepare:deploy']??'',/node tools\/nebula\/prepare\.mts --if-missing/);
- assert.match(packageFile.scripts['prepare:deploy']??'',/pnpm prepare:galaxy-field:data/);
+ assert.doesNotMatch(packageFile.scripts['prepare:deploy']??'',/pnpm prepare:galaxy-field:data/);
  assert.match(packageFile.scripts['prepare:deploy']??'',/pnpm prepare:deploy-catalogues/);
  assert.equal(packageFile.scripts['prepare:deploy-catalogues'],'node tools/prepare-facilities.mts --catalog-only');
  assert.match(packageFile.scripts['setup:assets']??'',/node tools\/setup-volume-metadata\.mts/);
@@ -43,8 +43,9 @@ test('the deploy consumes installed assets, rebuilds only catalogues and rejects
 test('the PR asset-origin check exercises the exact deploy build path',async()=>{
  const workflow=await readFile(new URL('../.github/workflows/nightly.yml',import.meta.url),'utf8');
  const steps=readCiSteps(workflow,'asset-origin-build');
- const build=steps.find(step=>step.name==='Build the site with ASSET_ORIGIN set to a test origin');
- assert.equal(build?.run.trim(),'pnpm build:deploy');
+ const build=steps.find(step=>step.name==='Build the site with the production asset origin and reject metadata drift');
+ assert.equal(build?.env.ASSET_ORIGIN,'https://earth-assets.lowpoly.cc');
+ assert.equal(build?.run.trim(),'pnpm build:deploy\npnpm check:deploy-assets');
 });
 test('--quick skips only the network and documentation steps, and refuses a job without them',async()=>{
  const lint=readCiSteps(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8'),'lint');

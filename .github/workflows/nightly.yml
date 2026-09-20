@@ -123,18 +123,20 @@ jobs:
         env:
           CSSEARTH_ALLOW_MISSING_ASSETS: "1"
         run: pnpm setup:assets
-      - name: Build the site with ASSET_ORIGIN set to a test origin
+      - name: Build the site with the production asset origin and reject metadata drift
         env:
           NODE_OPTIONS: --max-old-space-size=6144
           CSSEARTH_ALLOW_MISSING_ASSETS: "1"
-          ASSET_ORIGIN: https://asset-origin-ci-check.example
-        run: pnpm build:deploy
+          ASSET_ORIGIN: https://earth-assets.lowpoly.cc
+        run: |
+          pnpm build:deploy
+          pnpm check:deploy-assets
       - name: Check no page references a same-origin /scenes/ address
         run: node tools/check-asset-origin-scenes.mts dist
       - name: Check production navigation loads content-addressed assets
         env:
           CSSEARTH_TEST_ORIGIN: http://127.0.0.1:4212
-          CSSEARTH_ASSET_ORIGIN: https://asset-origin-ci-check.example
+          CSSEARTH_ASSET_ORIGIN: https://earth-assets.lowpoly.cc
           PLAYWRIGHT_CHANNEL: chromium
         run: |
           pnpm exec playwright install --with-deps chromium

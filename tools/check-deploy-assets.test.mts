@@ -3,7 +3,7 @@ import test from 'node:test';
 import { runtimeAssetUrls, unknownRuntimeAssetUrls } from './check-deploy-assets.mts';
 
 const hash = 'a'.repeat(64);
-const known = `https://earth-assets.lowpoly.cc/runtime-assets/${hash}/datasets/preview.webp`;
+const known = `https://earth-assets.lowpoly.cc/runtime-assets/${hash}/datasets/preview@2x.webp`;
 
 test('deploy asset closure extracts unique R2 runtime URLs and rejects an uninventoried hash', () => {
   assert.deepEqual(runtimeAssetUrls(`<img src="${known}"><script>const again='${known}'</script>`), [known]);
