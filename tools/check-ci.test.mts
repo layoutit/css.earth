@@ -19,8 +19,8 @@ test('local CI reads the actual workflow jobs in order, including strict TypeScr
  assert.ok(typecheck.some(step=>step.run.includes('pnpm typecheck:pr')&&step.env.NODE_OPTIONS==='--max-old-space-size=4096'));
  assert.ok(!typecheck.some(step=>step.run.includes('typecheck:tests')),'PRs skip the test-file typecheck');
  assert.ok(readCiSteps(workflow,'typecheck-tests').some(step=>step.run.trim()==='pnpm typecheck:tests'));
- assert.ok(universe.length>10);
- assert.equal(universe.at(-1)?.run.trim(),'pnpm test:renderer');
+ assert.ok(universe.some(step=>step.run.includes('prepare-ci-inputs.mts universe')));
+ assert.equal(universe.at(-1)?.run.trim(),'pnpm test:universe');
  const universePreparation=readCiSteps(workflow,'universe-preparation');
  assert.ok(universePreparation.some(step=>step.run.includes('pnpm test:galaxy-field')));
  assert.ok(universePreparation.some(step=>step.run.includes('pnpm test:preparation --universe')));
@@ -136,7 +136,8 @@ test('parallel compiler lanes cannot reserve or restore one another\'s incomplet
   const restores=requireString(options['restore-keys']).trim().split('\n');
   assert.equal(restores.length,2,id);
   for(const restore of restores)assert.ok(restore.startsWith(prefix),`${id}: ${restore}`);
-  assert.ok(restores.every(restore=>restore.includes("hashFiles('pnpm-lock.yaml', '**/tsconfig*.json')")));
+  assert.ok(restores.every(restore=>restore.includes('steps.ci-cache-key.outputs.tsconfig_digest')));
+  assert.doesNotMatch(key,/hashFiles/,'compiler keys must not scan installed dependency trees');
  }
 });
 

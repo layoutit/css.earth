@@ -101,6 +101,18 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Exact compiled inputs only. Generated catalogues and shell data are regenerated on every run.
+          path: |
+            packages/*/dist
+            src/renderers/css/dist
+            tools/objects/dist
+          key: compiled-tools-v1-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: node_modules
@@ -108,37 +120,11 @@ jobs:
           restore-keys: node-modules-
       - name: Install dependencies and prove the lockfile
         run: pnpm install --frozen-lockfile --ignore-scripts
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: lint-bundle-cache
-        with:
-          # Everything the next step writes: packages/renderer/tools-objects builds, and prepare:catalog's,
-          # prepare-solar-geometry's and prepare:titles' generated (gitignored) files. Keyed on their own inputs, so
-          # a change under any of them (or to an object's own object.json) invalidates it; anything else reuses it.
-          path: |
-            packages/*/dist
-            src/renderers/css/dist
-            tools/objects/dist
-            site/prepared-object-catalog.mts
-            site/prepared-object-discovery.json
-            site/prepared-context-objects.mts
-            site/prepared-object-distances.json
-            site/prepared-focus-objects.json
-            src/platform/solar-geometry.mts
-            site/prepared-shell-titles.mjs
-          key: lint-bundle-v2-${{ hashFiles('package.json', 'pnpm-lock.yaml', '.github/workflows/universe.yml', 'tools/**', 'packages/**', 'src/renderers/**', 'site/*.mts', 'site/source/titles/**', 'src/objects/*/object.json') }}
       - name: Generate the registry, renderer and preparation bundle
-        # Only what these checks import: SCENE_OBJECTS (site/objects.mts), the renderer the prepared-object reader
-        # imports, and tools/objects/dist/operations.js with the solar geometry and shell titles it bundles. The
-        # rest of build:tools (navigation, world context, shell assets) and every restored asset are left out.
-        # Skipped outright on a cache hit (see lint-bundle-cache above); tools/check-ci.mts always runs it locally.
-        if: steps.lint-bundle-cache.outputs.cache-hit != 'true'
-        run: |
-          pnpm build:packages
-          pnpm build:renderer
-          pnpm prepare:catalog
-          node tools/prepare-solar-geometry.mts > "$RUNNER_TEMP/solar-geometry.log"
-          pnpm prepare:titles
-          pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts
+        env:
+          CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
+          CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
+        run: node tools/build-ci.mts lint
       - name: Check every object's package files, source citations and restoration plan
         run: |
           node --test tools/restore-source-inputs.test.mts
@@ -156,23 +142,8 @@ jobs:
         # workflow, object-scope.yml), the docs-only classifier (the `changes` job above), the deploy allow-missing
         # path (tools/setup.test.mts — the only place it ran before was the non-CI test:platform), the prune
         # dry-run report, and the runner behind `pnpm check:pr`. Deliberately not the wider `pnpm test:platform`,
-        # which this workflow does not run and which has known unrelated failures.
-        run: >-
-          node --test tools/runtime-assets.test.mts
-          tools/stage-published-assets.test.mts
-          tools/publish-verification.test.mts
-          tools/check-assets-published.test.mts
-          src/platform/runtime-asset-closure.test.mts
-          tools/object-scope-gate.test.mts
-          tools/classify-changes.test.mts
-          tools/ci-affected.test.mts
-          tools/prepare-ci-inputs.test.mts
-          tools/prepare-typecheck.test.mts
-          site/minimap/prepare-projection.test.mts
-          tools/scope-runtime-ownership-check.test.mts
-          tools/setup.test.mts
-          tools/prune-runtime-assets.test.mts
-          tools/check-ci.test.mts
+        # which this workflow does not run. Native filename families include newly added CI/asset checks.
+        run: pnpm test:ci
       - name: Check published assets this change adds
         # HEAD only the R2 keys this change's inventories add (keys are content-addressed, so an unchanged line
         # needs no new proof): on a PR, against its base branch, failing only on a real 404; on a push to main,
@@ -202,6 +173,18 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Exact compiled inputs only. Generated catalogues and shell data are regenerated on every run.
+          path: |
+            packages/*/dist
+            src/renderers/css/dist
+            tools/objects/dist
+          key: compiled-tools-v1-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # node_modules itself, on top of setup-node's pnpm store cache: with both warm, --frozen-lockfile mostly
@@ -214,12 +197,12 @@ jobs:
           # Every tsc invocation in typecheck:pr writes its own .tsbuildinfo (never astro check, which never reads
           # this cache) under output/tsbuildinfo/; tsc's own file-hash bookkeeping recompiles only what changed
           # since the restored state, so a stale entry only costs a slower, still-correct run, never a wrong one.
-          # This step runs before `pnpm install` so the hash below never matches a vendored tsconfig.json.
+          # The tracked-only digest never traverses installed dependency trees.
           path: output/tsbuildinfo
-          key: tsbuildinfo-app-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
+          key: tsbuildinfo-app-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
           restore-keys: |
-            tsbuildinfo-app-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-
-            tsbuildinfo-app-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-main-
+            tsbuildinfo-app-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-
+            tsbuildinfo-app-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -228,7 +211,10 @@ jobs:
           path: src/objects/earth/source/presentation/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
-        run: pnpm build:tools
+        env:
+          CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
+          CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
+        run: node tools/build-ci.mts full
       - name: Restore only compiler inputs and generate real shell data
         run: pnpm prepare:typecheck
       - name: Typecheck shared code and enforce TypeScript ownership
@@ -237,8 +223,6 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=4096
         run: |
           pnpm typecheck:pr
-          pnpm check:typescript-ownership
-          pnpm test:typescript-ownership
 
   typecheck-tests:
     name: Typecheck test files
@@ -256,6 +240,18 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Exact compiled inputs only. Generated catalogues and shell data are regenerated on every run.
+          path: |
+            packages/*/dist
+            src/renderers/css/dist
+            tools/objects/dist
+          key: compiled-tools-v1-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: node_modules
@@ -266,10 +262,10 @@ jobs:
           # Keep this lane separate: caches are immutable, so sharing the application's key lets the
           # faster test job prevent the application from saving its own compiler state.
           path: output/tsbuildinfo
-          key: tsbuildinfo-tests-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
+          key: tsbuildinfo-tests-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
           restore-keys: |
-            tsbuildinfo-tests-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-
-            tsbuildinfo-tests-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-main-
+            tsbuildinfo-tests-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-
+            tsbuildinfo-tests-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -278,7 +274,10 @@ jobs:
           path: src/objects/earth/source/presentation/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
-        run: pnpm build:tools
+        env:
+          CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
+          CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
+        run: node tools/build-ci.mts full
       - name: Restore only compiler inputs and generate real shell data
         run: pnpm prepare:typecheck
       - name: Typecheck test, fixture and capture files
@@ -303,6 +302,18 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Exact compiled inputs only. Generated catalogues and shell data are regenerated on every run.
+          path: |
+            packages/*/dist
+            src/renderers/css/dist
+            tools/objects/dist
+          key: compiled-tools-v1-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: node_modules
@@ -315,91 +326,38 @@ jobs:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
           path: src/objects/earth/source/presentation/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
-      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: prepared-assets
-        with:
-          # setup:assets sha-verifies every restored file and downloads only what is missing or changed.
-          path: |
-            public/scenes
-            src/objects/*/prepared/runtime.json
-            src/objects/*/prepared/scene.json
-          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
-          restore-keys: prepared-assets-v1-
       - name: Build shared packages and affected entry points
-        run: pnpm build:tools
+        env:
+          CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
+          CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
+        run: node tools/build-ci.mts full
       - name: Restore prepared assets and object JSON
-        # setup:assets restores public/scenes AND each object's prepared-assets.json inventory (prepared/runtime.json
-        # + prepared/scene.json, or a context/nebula object's whole prepared/ output) — git no longer tracks those
-        # files, and prepare:object-json reads them.
+        # Every object's JSON remains SHA-verified. Only tests that consume real prepared images restore them;
+        # application texture banks are not inputs to these runtime and renderer assertions.
         run: |
-          pnpm setup:asset-data
+          if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
+            pnpm setup:asset-data
+          else
+            node tools/prepare-ci-inputs.mts universe
+          fi
           node tools/restore-object-json.mts
           node tools/prepare-feature-index.mts
-      - uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        # Main only: a 2.3 GB save costs a minute or more, and PR-scoped entries would crowd the 10 GB cache. This
-        # is the only one of the two prepared-universe jobs that saves; the other only restores (same pattern as
-        # the Typecheck job), so the two parallel jobs never race to write the same cache key.
-        if: github.event_name == 'push' && steps.prepared-assets.outputs.cache-hit != 'true'
-        with:
-          path: |
-            public/scenes
-            src/objects/*/prepared/runtime.json
-            src/objects/*/prepared/scene.json
-          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
-      - name: Test unavailable prepared packages and focus controls
-        run: >-
-          node --test tools/prepare-context-availability.test.mts
-          site/test/prepared-context-navigation.test.mts
-          site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts
-      - name: Restore environment images and prepare minimap
+      - name: Prepare minimap data
         run: |
-          pnpm prepare:environment-images
-          pnpm prepare:minimap
+          node site/minimap/prepare.mts --data-only
       - name: Test source records, provenance and scientific credits
-        run: pnpm test:sources
-      - name: Test pinned JSON transport restoration
-        run: node --test tools/restore-object-json.test.mts
-      - name: Test FITS decoding and offline reference comparisons
-        # Small independent FITS inputs are checked in; no archive downloads or Python needed.
-        run: pnpm test:fits --unit
-      - name: Test SBMT oracle contract and offline projection cases
-        # Native SBMT and real-body archive restoration are opt-in local checks.
+        # PRs verify the published source graph; main additionally reproduces the authored provenance packages.
         run: |
-          pnpm typecheck:oracles
-          pnpm test:sbmt --unit
-      - name: Test selected dataset textures and bounded residency
-        run: |
-          node --test src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts tests/objects/unit/earth/dataset-selection.test.mts tests/objects/unit/earth/surface-image-banks.test.mts
-      - name: Test the minimap setting and prepared minimap point ownership, range and coverage
-        run: node --test site/test/asset-origin.test.mts site/test/minimap-setting.test.mts site/test/minimap-point-range.test.mts site/test/minimap-point-coverage.test.mts
-      - name: Test shared shell and search ownership
-        run: >-
-          node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts
-          --test site/test/shell-lifetime.test.mts
-          site/test/navigation-router.test.mts site/test/planet-shell.test.mts
-          site/test/router-runtime.test.mts
-          site/test/object-page-data.test.mts
-          site/test/search-response.test.mts
-          site/test/dataset-response.test.mts
-          site/test/dataset-url.test.mts
-          site/test/browser-node-imports.test.mts
-          site/test/navigation-tree-data.test.mts
-          tools/serialize-prepared-scene.test.mts
-      - name: Enforce activation preparation for every registered object
-        # Reads every object's restored prepared/runtime.json, so it stays after the restore, not in Contract lint.
-        run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts
-      - name: Check every object's runtime ownership and physical frame receipt
-        # Scoped to the objects this PR touched (tools/scope-runtime-ownership-check.mts, computed in the `changes`
-        # job above); --receipts in Contract lint already covers a scoped run's only real failure mode, and --all
-        # still runs whenever this PR also touched shared code, or on every push to main.
+          if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
+            pnpm test:sources
+          else
+            pnpm test:sources:pr
+          fi
+      - name: Test runtime ownership, shell, oracles and complete renderer
+        # Native pnpm parallel scripts; all preparation and catalogue writers have finished before readers start.
         env:
           RUNTIME_OWNERSHIP_ARGS: ${{ needs.changes.outputs.runtime_ownership_args }}
-        run: |
-          # shellcheck disable=SC2086 # intentional word-splitting: one or more "--object <id>" pairs, or "--all"
-          node tools/check-object-runtime-ownership.mts $RUNTIME_OWNERSHIP_ARGS
-      - name: Test complete shared renderer and camera
-        # Reads restored prepared volumes and the generated world context and catalog, so it stays after the restore.
-        run: pnpm test:renderer
+        run: pnpm test:universe
 
   universe-preparation:
     name: Prepared universe preparation and galaxy field
@@ -416,6 +374,18 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Exact compiled inputs only. Generated catalogues and shell data are regenerated on every run.
+          path: |
+            packages/*/dist
+            src/renderers/css/dist
+            tools/objects/dist
+          key: compiled-tools-v1-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: node_modules
@@ -434,7 +404,10 @@ jobs:
           path: .local/galaxy-field/sources
           key: galaxy-field-sources-${{ hashFiles('src/objects/nearby-universe/source/catalogue.json') }}
       - name: Build shared packages and affected entry points
-        run: pnpm build:tools
+        env:
+          CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
+          CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
+        run: node tools/build-ci.mts full
       - name: Restore only the inputs consumed by preparation tests
         run: node tools/prepare-ci-inputs.mts universe-preparation
       - name: Test authored preparation publication and cache
@@ -469,6 +442,18 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Exact compiled inputs only. Generated catalogues and shell data are regenerated on every run.
+          path: |
+            packages/*/dist
+            src/renderers/css/dist
+            tools/objects/dist
+          key: compiled-tools-v1-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: node_modules

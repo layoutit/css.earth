@@ -16,6 +16,8 @@ const WORKFLOW_TOKEN='${{ github.token }}';
  * local run has no such diff, so it substitutes the most thorough, always-correct value instead of failing. */
 const LOCAL_EXPRESSION_SUBSTITUTIONS:Record<string,string>={
  '${{ needs.changes.outputs.runtime_ownership_args }}':'--all',
+ '${{ steps.build-tools-cache.outputs.cache-hit }}':'false',
+ '${{ steps.ci-cache-key.outputs.build_digest }}':'',
 };
 /** Step conditions that only mean something inside a GitHub run: skip the step when Contract lint failed, or cancel
  * the rest of the run after a failure. */
@@ -69,7 +71,7 @@ export function sharedCodeChanged(paths:readonly string[]):boolean {return paths
 /** CI jobs have separate disks; the local plan shares one checkout. Reuse only explicit common prerequisites,
  * never tests, audits, or a production build with a different environment. */
 export function reuseLocalPreparation(steps:readonly CiStep[]):CiStep[] {
- const reusable=new Set(['pnpm install --frozen-lockfile --ignore-scripts','pnpm build:tools','pnpm prepare:typecheck']);
+ const reusable=new Set(['pnpm install --frozen-lockfile --ignore-scripts','pnpm build:tools','node tools/build-ci.mts full','node tools/ci-cache-key.mts','pnpm prepare:typecheck']);
  const seen=new Set<string>();
  return steps.filter(step=>{
   if(!reusable.has(step.run.trim()))return true;

@@ -126,6 +126,19 @@ JSON inputs and generate real shell data, without downloading body texture banks
 Full-universe integrity and production-build checks remain distinct and can
 still expose unrelated package defects. Report those failures; do not bypass pins.
 
+Test selection belongs in the native `package.json` scripts, not workflow file
+inventories or a separate runner. `test:ci`, `test:sources:checks` and the
+`test:universe:*` suites use quoted Node filename/folder globs; Vitest retains its
+package and renderer discovery. Matching new tests run automatically without a
+workflow edit. Existing filenames with different setup requirements remain explicit
+exceptions; do not broaden a glob to include asset-authoring tests in a read-only
+runtime suite. Tests stay beside their current owners.
+
+PR source checks validate published package records; main additionally regenerates
+authored provenance. Catalogue preparation finishes before parallel runtime readers.
+Compiled artifacts use exact-input caches; these never cache a test verdict. Cold
+and cached CI timings must be reported separately.
+
 To run the fast subset before every push, opt in with `pnpm hooks:install`: the
 pre-push hook runs `pnpm check:pr --job=lint --quick`, which skips the network check and the
 documentation audits. Skip it once with `git push --no-verify` or
