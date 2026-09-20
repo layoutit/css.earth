@@ -30,7 +30,7 @@ export interface ResolvedDiscIdentity {
   readonly instrument: string;
   readonly mode: string;
   readonly programme: string;
-  readonly midTimeJd: number;
+  readonly midTimeJd: number; readonly startTimeJd?: number; readonly endTimeJd?: number;
   readonly exposureSeconds?: number;
 }
 

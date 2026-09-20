@@ -86,8 +86,20 @@ with a two-pixel floor. These are explicit conservative policy margins, not a
 calibrated confidence level or a model of correlated noise. The immutable receipt
 pins the cube, implementation and software and preserves every plane's fit result.
 It is pinned with the qualified product, so changing either invalidates readback.
-A bound within the requested angular resolution can answer yes; a tighter request
-remains unknown, rather than being refused on the strength of an upper bound.
+A bound remains unknown unless the caller explicitly accepts both named assumptions:
+`--accept-assumptions jwst.archive-point-source,jwst.profile-margin-bound`.
+The verdict reports each assumption and its acceptance. With both accepted, a bound
+within the requested angular resolution can answer yes; a tighter request remains
+unknown rather than becoming a measured rejection.
+
+Map resolution carries a typed basis. Measured fits and calibrated beams need a
+receipt pinned to the map run and its input files. Sampling, nominal optics, models
+and historical prose-only values cannot satisfy angular resolution, surface resolution
+or resolution-element requirements. Existing maps must be reauthored to acquire this
+evidence; old metadata is not retroactively promoted. Map time constraints require
+explicit observation start/end bounds: midpoints and summed integration times are
+not temporal extents. Qualified telescope products remain selectable as inputs to a
+body-map author; only publication can establish the requested final result.
 
 Astropy owns the [weighted fitting](https://docs.astropy.org/en/stable/api/astropy.modeling.fitting.TRFLSQFitter.html).
 The wavelength-by-wavelength assessment accommodates the spatial PSF variation
@@ -488,3 +500,10 @@ The sharpness figures are bounds on an instrument and its detector, not measurem
 not ruled out, and *unknown* often means the pixels are coarser than the optics and nobody here knows what a given exposure
 recovered. Nothing becomes a fact until an observation is pinned, re-run and compared, which is what the rest of this page is
 about.
+
+Cube agreement uses finite SCI samples, including valid zeros, and requires matching
+validity masks. A zero reference scale accepts only exact zero. Receipts produced by
+the previous zero-excluding policy do not establish agreement under the new policy;
+recompare existing cubes to renew them. No pipeline rerun is needed for unchanged
+products and inputs. The scope states the actual compared archive planes, including
+aligned subsets supplied without a request interval.

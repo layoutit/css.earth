@@ -1,5 +1,6 @@
 import { loadQualifiedObservations, matchingProduct, type QualifiedObservation } from './qualified-observations.mts';
-import { assessRequest, type RequestSatisfaction } from './request-satisfaction.mts';
+import { assessInput, assessRequest, type RequestSatisfaction } from './request-satisfaction.mts';
+import { parseAcceptedAssumptions, type ResolutionAssumption } from '../resolution-evidence.mts';
 /** Which observations in the archives might measure a quantity on a target, and what stays unknown until one is read.
  *
  * The ledgers hold what each archive has per object and per mode: how many observations, which programmes, which programs are
@@ -61,7 +62,8 @@ export interface ModeCapability {
 }
 
 export type ConstraintAnswer = 'yes' | 'no' | 'partial' | 'unknown';
-export interface ConstraintVerdict { readonly answer: ConstraintAnswer; readonly reason: string }
+export interface ConstraintVerdict { readonly answer: ConstraintAnswer; readonly reason: string;
+  readonly assumptions?: readonly { readonly id: ResolutionAssumption; readonly description: string; readonly accepted: boolean }[] }
 /** What this repository can do with a mode, in rising order of what has actually been established here.
  *
  * `archive-final` is its own level and not a weaker `proven`: the observatory's own final product was pinned, downloaded and
@@ -84,14 +86,14 @@ export interface ToolkitSupport {
   readonly targetArchiveFinalQualified: boolean;
 }
 
-export interface MeasuredResolution { readonly path: string; readonly quantity: string; readonly observation: string; readonly programme?: string; readonly angularResolutionArcsec: number; readonly surfaceResolutionKm: number }
+export interface ReportedResolution { readonly path: string; readonly quantity: string; readonly observation: string; readonly programme?: string; readonly angularResolutionArcsec: number; readonly surfaceResolutionKm: number; readonly basis: string; readonly resolutionKind: string }
 export interface CandidateEvidence {
   readonly ledger: string; readonly archiveDate: string;
   readonly receipts: readonly string[];
   readonly targetAssociations: readonly { readonly source: string; readonly archive: 'mast'; readonly collection: string; readonly archiveTarget: string; readonly programme: string;
     readonly astroquery: string; readonly queriedAt: string;
     readonly citation: string; readonly locator: string; readonly establishes: string }[];
-  readonly bodyMaps: readonly MeasuredResolution[];
+  readonly bodyMaps: readonly ReportedResolution[];
   readonly investigations: readonly { readonly id: string; readonly status: string; readonly subject: string }[];
 }
 
@@ -143,6 +145,7 @@ export interface Candidate {
 }
 
 export interface CapabilityRequest {
+  readonly acceptedAssumptions?: readonly ResolutionAssumption[];
   readonly target: string;
   readonly wavelengthMicrometres: readonly [number, number];
   readonly time?: { readonly any: true } | { readonly fromIso: string; readonly toIso: string };
@@ -241,6 +244,7 @@ const missingRequestFields = (request: CapabilityRequest): string[] => [...(requ
   ...(request.kind ? [] : ['product kind (--kind)']), ...(request.result ? [] : ['requested result (--result telescope-product|body-map)'])];
 
 const requestArguments = (request: CapabilityRequest): string[] => ['--target', request.target, '--wavelength', request.wavelengthMicrometres.join(','),
+  ...(request.acceptedAssumptions?.length ? ['--accept-assumptions', request.acceptedAssumptions.join(',')] : []),
   ...(!request.time ? [] : 'any' in request.time ? ['--any-time'] : ['--from', request.time.fromIso, '--to', request.time.toIso]),
   ...(request.angularResolutionArcsec === undefined ? [] : ['--min-arcsec', String(request.angularResolutionArcsec)]),
   ...(request.surfaceResolutionKm === undefined ? [] : ['--min-km', String(request.surfaceResolutionKm)]),
@@ -585,7 +589,7 @@ function sourceModes(products: readonly LoadedSourceProduct[], request: Capabili
   return [...groups.values()].map(own => {
     const first = own[0]!, qualified = own.filter(product => product.qualified).map(product => product.id);
     return { telescope: first.telescope, mode: first.mode, archiveDate: 'package-owned pins', programmes: own.map(product => product.archiveProductId),
-      observations: { count: own.length, scope: 'this-mode' as const, records: own.map(product => ({ id: product.id, programme: product.id, sourceProductId: product.id, qualification: { verified: product.qualified, receipt: product.receipt, problem: product.receiptProblem, limitations: product.limitations }, requestSatisfaction: assessRequest(request, product.facts ?? { target: product.target, verified: false }),
+      observations: { count: own.length, scope: 'this-mode' as const, records: own.map(product => ({ id: product.id, programme: product.id, sourceProductId: product.id, qualification: { verified: product.qualified, receipt: product.receipt, problem: product.receiptProblem, limitations: product.limitations }, requestSatisfaction: assessInput(request, product.facts ?? { target: product.target, verified: false }),
         startIso: product.startIso ?? '', ...(product.endIso ? { endIso: product.endIso } : {}), archiveProductId: product.archiveProductId, kind: product.kind,
         ...(product.wavelengthIntervalsMicrometres ? { wavelengthIntervalsMicrometres: product.wavelengthIntervalsMicrometres } : {}),
         ...(product.centralWavelengthMicrometres === undefined ? {} : { centralWavelengthMicrometres: product.centralWavelengthMicrometres }),
@@ -803,7 +807,7 @@ function toolkitSupport(mode: TargetMode, target: string): ToolkitSupport {
     targetProgramPinned: pinned.length > 0, targetProgramChecked: passed.length > 0, targetArchiveFinalQualified: held.length > 0 };
 }
 
-interface AttachedEvidence { bodyMaps: MeasuredResolution[]; investigations: { id: string; status: string; subject: string }[] }
+interface AttachedEvidence { bodyMaps: ReportedResolution[]; investigations: { id: string; status: string; subject: string }[] }
 
 /** The names a record may call a telescope, and the ledger telescope each one is. Evidence reaches a candidate only through
  * this table and an exact mode key, because a detector name that merely looks similar is a different instrument: a Hubble
@@ -833,6 +837,7 @@ function resolveEvidence(inputs: QueryInputs, modes: readonly TargetMode[]): { r
         reason: couldMean.length ? `${namedMode} is not one of this telescope's ledger mode keys, so which mode measured this is not stated.` : `Nothing here knows the telescope ${observation.telescope}.` }); continue; }
       attached.get(mode)!.bodyMaps.push({ path, quantity: `${map.definition.quantity} (${map.definition.units})`, observation: observation.id,
         ...(observation.programme === undefined ? {} : { programme: observation.programme }),
+        basis: observation.angularResolution.basis, resolutionKind: observation.angularResolution.evidence?.kind ?? 'unknown',
         angularResolutionArcsec: observation.angularResolution.majorArcsec, surfaceResolutionKm: round(surfaceResolutionKm(observation).majorKm) });
     }
   }
@@ -950,7 +955,8 @@ export function selectObservation(answer: CapabilityAnswer, telescope: string, m
   if (assessment.blockers.length) throw new ObservationSelectionError(telescope, mode, programme, assessment.blockers);
   const request = answer.request, candidate = assessment.candidate!;
   const product = matchingProduct(candidate.qualifiedProducts ?? [], request, programme);
-  const satisfaction = product ? assessRequest(request, { ...product.facts, ...(request.result === 'body-map' ? { result: undefined } : {}) }) : candidate.observations?.records?.find(record => record.programme === programme)?.requestSatisfaction ?? assessRequest(request, { target: answer.target, verified: false });
+  const source = candidate.observations?.records?.find(record => record.programme === programme);
+  const satisfaction = product ? assessInput(request, product.facts) : source?.requestSatisfaction ?? assessRequest(request, { target: answer.target, verified: false });
   const productWavelengthQualified = satisfaction.constraints.wavelength?.answer === 'yes' || (candidate.observations?.records?.some(record => record.programme === programme
     && mergeIntervals(record.wavelengthIntervalsMicrometres ?? (record.wavelengthIntervalMicrometres ? [record.wavelengthIntervalMicrometres] : []))
       .some(interval => interval[0] <= request.wavelengthMicrometres[0] && interval[1] >= request.wavelengthMicrometres[1])) ?? false);
@@ -1047,7 +1053,7 @@ export function formatAnswer(answer: CapabilityAnswer): string {
     lines.push(`  usable program of ${answer.target}: ${usable.join(', ') || 'none'}`);
     lines.push(`  evidence: ${candidate.evidence.ledger} (archive read ${candidate.evidence.archiveDate})${candidate.evidence.receipts.length ? `, receipts ${candidate.evidence.receipts.join(', ')}` : ''}`);
     for (const association of candidate.evidence.targetAssociations) lines.push(`    target in field: ${association.source}; MAST ${association.collection} via Astroquery ${association.astroquery}, queried ${association.queriedAt}; archive target ${association.archiveTarget}, programme ${association.programme}; ${association.establishes} (${association.citation}, ${association.locator})`);
-    for (const map of candidate.evidence.bodyMaps) lines.push(`    measured: ${map.path}, ${map.quantity}, ${map.angularResolutionArcsec} arcsec, ${map.surfaceResolutionKm} km at the sub-observer point`);
+    for (const map of candidate.evidence.bodyMaps) lines.push(`    reported resolution (${map.resolutionKind}): ${map.path}, ${map.quantity}, ${map.angularResolutionArcsec} arcsec, ${map.surfaceResolutionKm} km at the sub-observer point`);
     for (const entry of candidate.evidence.investigations) lines.push(`    investigation ${entry.id} (${entry.status}): ${entry.subject}`);
     for (const line of candidate.unknown) lines.push(`    unknown: ${line}`);
     lines.push('');
@@ -1078,6 +1084,7 @@ Required for an explicit workflow verdict:
 
 Resolution limits are the largest acceptable angular or surface scale: smaller values ask for sharper data.
 Use --range-km with --min-km, and --range-km plus --radius-km with --min-elements.
+Conditional profile bounds require --accept-assumptions jwst.archive-point-source,jwst.profile-margin-bound.
 Use --select-telescope NAME --select-mode MODE --program ID to emit a typed observation selection.
 When qualification is the only blocker, the answer may provide a telescope:qualify action for an indexed observation.
 Use --json for JSON. With the package script, use pnpm --silent telescope:query ... --json for JSON-only stdout.`;
@@ -1092,7 +1099,9 @@ export function requestFromArguments(args: readonly string[]): CapabilityRequest
   if (result && !(REQUESTED_RESULTS as readonly string[]).includes(result)) throw new TypeError(`--result takes one of ${REQUESTED_RESULTS.join(', ')}.`);
   if (Boolean(from) !== Boolean(to)) throw new TypeError('--from and --to are given together.');
   if (anyTime && from) throw new TypeError('--any-time cannot be combined with --from and --to.');
-  return { target, wavelengthMicrometres: [range[0]!, range[1]!], ...(anyTime ? { time: { any: true as const } } : from && to ? { time: { fromIso: from, toIso: to } } : {}),
+  const assumptions = flagValue(args, '--accept-assumptions');
+  return { target, ...(assumptions === undefined ? {} : { acceptedAssumptions: parseAcceptedAssumptions(assumptions.split(',')) }),
+    wavelengthMicrometres: [range[0]!, range[1]!], ...(anyTime ? { time: { any: true as const } } : from && to ? { time: { fromIso: from, toIso: to } } : {}),
     ...(numberFlag(args, '--min-arcsec') === undefined ? {} : { angularResolutionArcsec: numberFlag(args, '--min-arcsec')! }),
     ...(numberFlag(args, '--min-km') === undefined ? {} : { surfaceResolutionKm: numberFlag(args, '--min-km')! }),
     ...(numberFlag(args, '--min-elements') === undefined ? {} : { resolutionElements: numberFlag(args, '--min-elements')! }),

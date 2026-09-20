@@ -599,7 +599,7 @@ export function scanObservation(definition: SlitScanDefinition, entry: VisitMap,
   return { id: entry.registration.visit, telescope: 'HST', instrument: `${definition.instrument} ${definition.opticalElement} ${definition.aperture}`,
     mode: definition.instrument, programme: `${definition.target.toLowerCase()}-${programme}`, midTimeJd: entry.registration.midJulianDate, rangeKm: entry.camera.rangeKm,
     subObserver: { latitudeDegrees: entry.camera.observerLatitude, westLongitudeDegrees: west(entry.camera.observerWestLongitude) }, subSolar: { latitudeDegrees: entry.camera.sunLatitude, westLongitudeDegrees: west(entry.camera.sunWestLongitude) },
-    angularResolution: { majorArcsec: Math.max(slitWidthArcsec, alongArcsec), minorArcsec: Math.min(slitWidthArcsec, alongArcsec), basis: 'slit width across the scan and two detector pixels along the slit; the telescope blur is not removed' } };
+    angularResolution: { majorArcsec: Math.max(slitWidthArcsec, alongArcsec), minorArcsec: Math.min(slitWidthArcsec, alongArcsec), evidence: { kind: 'sampling' }, basis: 'slit width across the scan and two detector pixels along the slit; the telescope blur is not removed' } };
 }
 
 /** What the map means, to be written beside it: the band, the continuum and the reference that define the number, the frame,
