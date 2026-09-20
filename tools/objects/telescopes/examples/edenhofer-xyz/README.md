@@ -98,6 +98,28 @@ volume object, so callers can continue with the existing `volume` handoff. The
 display transfer in `prepare-volume.params.json` is explicit and preserved as
 evidence; it changes presentation only, never the native FITS values.
 
+## Evidence and publication boundary
+
+The three checked-in figures are central physical-coordinate slices produced
+from the pinned restored FITS crop. The independent readback in
+`evidence/real-readback.json` checks their WCS coordinates, the byte-identical
+native output, and the prepared scalar encoding.
+
+| X = -354 pc | Y = -254 pc | Z = -154 pc |
+| --- | --- | --- |
+| ![Central YZ slice](evidence/slice-x.png) | ![Central XZ slice](evidence/slice-y.png) | ![Central XY slice](evidence/slice-z.png) |
+
+The prepared output was also exercised through the existing css.earth volume
+renderer and camera controls; `evidence/app-volume-rotated.png` records that
+bounded integration test. `evidence/existing-body-volume-betelgeuse.png`
+records the existing body-plus-volume attachment route. These are validation
+artifacts only. This example does **not** register the Edenhofer crop as an app
+object or publish it in the css.earth catalogue.
+
+`source-record.json` retains the dataset DOI, creators, release, license, and
+the exact source evidence used for this example without adding that record to
+the app-wide source catalogue.
+
 The offline range-assembly test uses a sparse fake 15.7 GB parent and verifies
 the data ordering, output size, WCS shift, unnumbered CUNIT preservation, and
 rejection of invalid HTTP range evidence:
