@@ -838,11 +838,11 @@ and rotation during the exposure are not propagated. No missing hemisphere
 is synthesized. Source request satisfaction is retained separately; projection
 **does not qualify surface publication or turn pixel sampling into a PSF**.
 
-The HTML uses the target's pinned three reference radii in kilometres. Mesh
-vertices follow that ellipsoid; the view auto-fits to the window. Colour is
-not relit. The mesh is a display approximation, not terrain. Grey is unobserved.
+The HTML preserves the target's prepared reference sphere and physical camera
+frame. It opens directly at the measurement with no startup flight; shared
+controls own drag and zoom. Colour is not relit. Grey is unobserved.
 
-#### Europa projection example and independent sphere oracle
+#### Europa projection, standalone sphere and independent checks
 
 The example uses the archive cube
 `jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits`, SHA256
@@ -855,6 +855,10 @@ coordinates to native FITS coordinates; the map excludes emission angles above 6
 
 ![Europa projected brightness](images/telescopes/europa-projected-brightness.png)
 
+The actual standalone HTML export, captured at its initial view (1280 × 720):
+
+![Europa measurement in the standard css.earth sphere](images/telescopes/europa-sphere-html.png)
+
 The independent reference traces orthographic rays through the pinned triaxial
 ellipsoid using NumPy and draws their sampled values using Matplotlib. It checks
 the emission mask and exact preservation of measurement/error pairs. Separately,
@@ -865,7 +869,7 @@ measurement; it is not a screenshot or a second rendering implementation.
 
 ![Independent Europa sphere reference](images/telescopes/europa-sphere-reference.png)
 
-This image is **an independent reference, not an HTML screenshot**. The standalone
+The preceding reference is separate from the HTML screenshot above. The standalone
 Europa HTML was inspected through a local HTTP preview: initial rendering, drag
 rotation and wheel zoom remained visible with no browser errors. There is no
 startup flight; the first drag preserves camera distance. Screenshot

@@ -73,6 +73,17 @@
       "file": "docs/images/telescopes/europa-sphere-reference.png",
       "sha256": "b54d17fe6835caa998424f60e63865e6c2188af450f4b0d411de692b03b82bb7",
       "bytes": 213940
+    },
+    {
+      "file": "docs/images/telescopes/europa-sphere-html.png",
+      "sha256": "95f160e07822fd33f9d3540d9d2a42166b6a7d053ba9d7f77397ce2bbf231e45",
+      "bytes": 32292,
+      "kind": "browser screenshot of the standalone HTML at its initial view",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "htmlSha256": "72cbf9b3aaaaa4cf594c5a0730eb0f4bf2bb7da7c80e82110dadab5700cdb896"
     }
   ],
   "browser": {
