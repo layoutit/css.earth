@@ -51,6 +51,34 @@ Current source-qualified products also use the common selected-artifact interfac
 Their existing receipt and decoded facts supply the reference, without copying
 unverified wavelength or resolution declarations into the verified facts.
 
+### Telescope API v1 boundary
+
+The public chain has four supported transitions:
+
+| Current artifact | Supported next operation | Required addition |
+| --- | --- | --- |
+| Qualified native delivery | Supported image, spectrum, band, aperture or feature export | The selectors listed by `outputs` |
+| Exported 2D measurement | Registered body map | Explicit pinned navigation |
+| Registered body map | Standalone interactive sphere | An embeddable standard body package |
+| Existing prepared point field or density volume | Renderer handoff | None |
+
+The command coordinates the existing archive, qualification, Astropy, PlanetMapper and renderer
+owners. It does not imply that every observation can traverse every transition. Discovery is
+limited to configured archive routes and bounded profiles, so an empty target-name search is not
+a universal absence claim. A product-kind declaration also does not establish a decoder,
+scientific operation or exporter for those bytes. `outputs` checks the current artifact through
+the same prerequisite validators used by export and reports the routes it can actually support.
+
+Native deliveries retain their recorded files. Intermediate image and map records may retain
+absolute references to their verified workspace sources; relocation does not make those
+dependencies portable. Sphere HTML and physical renderer handoffs are self-contained within
+their published artifact. Missing sources are reported rather than searched for, rebased or
+reconstructed. Export always checks again, because an earlier inspection is only a snapshot.
+
+Query success means retrievable choices exist. Export success means the selected transformation
+completed. Neither means the original scientific request was fulfilled: its fulfilled,
+unresolved or refused verdict remains in every derived product record.
+
 ## Package-owned observations through the same API
 
 `telescope:query` also reads exact observations already pinned in each object's source package.

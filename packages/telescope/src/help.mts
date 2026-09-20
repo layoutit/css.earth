@@ -51,12 +51,20 @@ Query options use micrometres, arcseconds and kilometres:
 Queries save immutable numbered choices in DIRECTORY/query.json. Get revalidates the
 choice, qualifies it if needed, and exports pinned data and evidence to DIRECTORY/pick-N/.
 Outputs inspects deliveries, derived product records and physical object packages, and reports
-only the next supported exports. Qualified FITS images, spectra, band images and feature maps
+only the next supported exports after checking the prerequisites shared with export. The v1
+transitions are native delivery -> scientific output; 2D measurement + navigation -> body map;
+body map + embeddable standard body -> sphere; prepared point/volume object -> renderer handoff.
+Configured, bounded archive searches and a declared product kind do not promise universal
+archive coverage, decoding or export. Qualified FITS images, spectra, band images and feature maps
 use zero-based HDU, plane and pixel indices. Cubes require an explicit plane for image export.
 Export writes FITS images or ECSV spectra, PNG, SVG, CSV and a pinned receipt.
 The output directory must be new. No browser or viewer service is required.
 Scientific surface publication remains an explicit qualification after projection. Physical 3D
 adapters need real geometry. Sphere export prepares one standalone no-JavaScript HTML file.
+Native deliveries, sphere HTML and physical handoffs carry their portable files. Intermediate
+measurement/map records may still depend on retained workspace sources. Missing dependencies
+are refused, never searched for or repaired. Export success preserves the source request's
+fulfilled, unresolved or refused verdict.
 Exit codes: 0 ready/fulfilled, 1 operation failed, 2 invalid arguments,
 3 no retrievable choice or unresolved request, 4 refused request.
 The npm command accepts --workspace PATH (or CSSEARTH_WORKSPACE) for a css.earth science checkout.

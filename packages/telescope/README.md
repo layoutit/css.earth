@@ -32,6 +32,28 @@ Use `--json` for machine-readable stdout and `--verbose` for detailed evidence. 
 
 The wrapper and scientific implementation remain separate versioned components: updating this npm package does not update the checkout's science code. `telescope --version` reports the wrapper version; each product receipt records the scientific software and inputs used.
 
+## Supported v1 boundary
+
+| Current artifact | Supported next operation | Additional input |
+| --- | --- | --- |
+| Qualified native delivery | image, spectrum, band image, aperture spectrum or feature map when `outputs` offers it | Explicit selectors reported by `outputs` |
+| Exported 2D measurement | body map | Pinned navigation geometry |
+| Body map | standalone interactive sphere | Complete embeddable standard body package |
+| Existing prepared point field or density volume | portable renderer handoff | None |
+
+These are supported transitions, not claims that every archive product supports every row.
+Discovery covers the configured archive routes and bounded service profiles; an empty name
+search is not a universal absence-of-observations result. A declared product kind likewise
+does not establish that its bytes have a supported decoder, analysis or exporter. Run
+`telescope outputs ARTIFACT` to inspect the actual artifact and its current prerequisites.
+
+Native deliveries are portable with their recorded file tree. Derived measurements and maps
+may retain absolute references to verified source files and therefore still depend on the
+science workspace. Sphere HTML and physical renderer handoffs are self-contained within their
+document or output directory. Missing retained sources are reported; they are never guessed,
+rebased or replaced. A completed transformation preserves the original request verdict, so
+export success does not turn unresolved or refused scientific evidence into fulfillment.
+
 ## Archive products
 
 Scientific queries also inspect the bounded ESO/ALMA ObsCore and ESA PSA EPN-TAP services through PyVO. Their results enter the same saved choices, `get`, `outputs` and `export` commands. An advertised synchronous SODA service can fulfill an explicit ICRS cutout; failed subsets never fall back to a full download. Direct FITS and supported single-science-file ZIP/TAR products retain their complete pinned input set.
@@ -108,8 +130,10 @@ its satisfaction result. Exporting a figure does not resolve missing science evi
 
 `telescope outputs ARTIFACT.json` is the stage boundary for the whole chain. It accepts a
 delivery, derived product record, or existing physical object package and reports only the next
-supported exports. It revalidates telescope artifact pins; physical handoff validates the full
-object closure when exported. A 2D image can advance to a body map; only a
+supported exports. It revalidates the same current prerequisites used by export, including
+retained source-delivery dependencies, body-map bindings, embeddable sphere resources, and
+the physical object's loader, frame and credit closure. Availability is a checked snapshot;
+export checks again before publication. A 2D image can advance to a body map; only a
 complete projection bundle can advance to a sphere; point and volume handoffs require existing
 physical depth. A completed sphere or spatial handoff is reported as terminal.
 

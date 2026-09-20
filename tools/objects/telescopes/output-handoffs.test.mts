@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { mkdtemp,writeFile,readFile,rm } from 'node:fs/promises';
+import { cp,mkdtemp,writeFile,readFile,rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
@@ -8,8 +8,9 @@ import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { pinFile,writeProductRecord } from '../product-record.mts';
 import { exportOutput,listOutputs } from './outputs.mts';
-import { exportSpatialObject } from './spatial-handoff.mts';
+import { exportSpatialObject,inspectSpatialObject } from './spatial-handoff.mts';
 import { parseCli } from './cli.mts';
+import { listArtifactOutputs } from './artifact-outputs.mts';
 
 test('PDS arrays retain integer flags, special constants and associated uncertainty through figure export',async()=>{
   const root=await mkdtemp(resolve(tmpdir(),'native-output-'));
@@ -62,6 +63,21 @@ test('physical handoffs refuse spectral deliveries and incompatible selectors',a
     await assert.rejects(exportSpatialObject(path,'volume',resolve(root,'output')),/does not establish depth/);
     assert.equal(parseCli(['export','object.json','--output','points','--out','out']).command,'spatial');
     assert.throws(()=>parseCli(['export','object.json','--output','volume','--hdu','1','--out','out']),/only/);
+  }finally{await rm(root,{recursive:true,force:true});}
+});
+
+test('physical inspection and export share the existing loader, frame and credit closure',async()=>{
+  const root=await mkdtemp(resolve(tmpdir(),'spatial-inspection-')),source=resolve(import.meta.dirname,'../../../src/objects/stellar-neighbourhood'),copy=resolve(root,'stellar-neighbourhood');
+  try{
+    await cp(source,copy,{recursive:true});const object=resolve(copy,'object.json');
+    const inspected=await inspectSpatialObject(object),ready=await listArtifactOutputs(object);assert.ok(ready.outputs.some(output=>output.kind==='points'&&output.available));
+    const handoff=await exportSpatialObject(object,'points',resolve(root,'handoff')),receipt=JSON.parse(await readFile(handoff.receipt,'utf8'));
+    assert.deepEqual(receipt.parameters.frame,inspected.frame);assert.deepEqual(receipt.parameters.provenance,inspected.provenance);
+    const terminal=await listArtifactOutputs(handoff.receipt);assert.equal(terminal.terminal,true);assert.deepEqual(terminal.outputs,[]);
+    await writeFile(handoff.object,'changed');await assert.rejects(listArtifactOutputs(handoff.receipt),/pins changed/);
+    await writeFile(resolve(copy,'prepared/stars.bin'),'changed');
+    const blocked=await listArtifactOutputs(object),choice=blocked.outputs.find(output=>output.kind==='points');assert.equal(choice?.available,false);assert.match(choice?.reason??'',/identity mismatch|pin mismatch/);
+    await assert.rejects(exportSpatialObject(object,'points',resolve(root,'output')),/identity mismatch|pin mismatch/);
   }finally{await rm(root,{recursive:true,force:true});}
 });
 

@@ -44,31 +44,42 @@ export function parseGeometry(raw:unknown,root:string){
 }
 async function checkPins(inputs:readonly ProductInput[]){for(const input of inputs){const actual=await pinFile(input.identity);if(actual.sha256!==input.sha256||actual.bytes!==input.bytes)throw new Error(`Input pin mismatch: ${input.identity}`);}}
 
-export async function projectOutput(recordPath:string,geometryPath:string,outputDirectory:string){
-  const source=await verifiedProduct(recordPath);
+export async function validateProjectionSource(source:Awaited<ReturnType<typeof verifiedProduct>>){
   if(source.record.stage!=='telescope-output'||!source.record.outputs.some(o=>o.path==='image.fits'))throw new TypeError('Body-map export requires a telescope image output.product.json');
-  const deliveryPin=source.record.inputs.find(i=>i.role==='delivery');if(!deliveryPin)throw new Error('Measurement has no source delivery');
-  const d=await delivery(deliveryPin.identity);if(d.pin.sha256!==deliveryPin.sha256)throw new Error('Measurement source delivery changed');
+  const selection=requireRecord(source.record.parameters.selection),kind=requireString(selection.kind);
+  if(!['image','band-image','feature-map'].includes(kind))throw new TypeError(`Body-map export cannot project a ${kind} output`);
+  const definition=requireString(source.record.parameters.definition),metadata=requireRecord(source.record.parameters.metadata),measurement=requireRecord(source.record.parameters.measurement);
+  const deliveryPins=source.record.inputs.filter(i=>i.role==='delivery');
+  if(deliveryPins.length!==1)throw new Error('Measurement must name exactly one source delivery');
+  const deliveryPin=deliveryPins[0]!,d=await delivery(deliveryPin.identity);
+  if(d.pin.sha256!==deliveryPin.sha256||d.pin.bytes!==deliveryPin.bytes)throw new Error('Measurement source delivery changed');
+  const inputs:ProductInput[]=[{role:'measurement record',identity:source.file,...source.pin},...source.record.outputs.map(o=>({role:'measurement output',identity:localOutput(source.root,o.path),bytes:o.bytes,sha256:o.sha256})),...source.record.inputs];
+  await checkPins(inputs);
+  return {source,d,selection,definition,metadata,measurement,inputs};
+}
+
+export async function projectionSource(recordPath:string){return validateProjectionSource(await verifiedProduct(recordPath));}
+
+export async function projectOutput(recordPath:string,geometryPath:string,outputDirectory:string){
+  const prepared=await projectionSource(recordPath),{source,d,selection,definition,metadata,measurement}=prepared;
   const geometryFile=resolve(geometryPath),geometryBytes=await readFile(geometryFile),geometry=parseGeometry(JSON.parse(geometryBytes.toString()),dirname(geometryFile));
-  const inputs:ProductInput[]=[{role:'measurement record',identity:source.file,...source.pin},...source.record.outputs.map(o=>({role:'measurement output',identity:localOutput(source.root,o.path),bytes:o.bytes,sha256:o.sha256})),
-    ...source.record.inputs,{role:'navigation choices',identity:geometryFile,bytes:geometryBytes.length,sha256:sha256(geometryBytes)},...geometry.kernels.map(k=>({role:`SPICE ${k.role}: ${k.source}`,identity:k.file,bytes:k.bytes,sha256:k.sha256}))];
+  const inputs:ProductInput[]=[...prepared.inputs,{role:'navigation choices',identity:geometryFile,bytes:geometryBytes.length,sha256:sha256(geometryBytes)},...geometry.kernels.map(k=>({role:`SPICE ${k.role}: ${k.source}`,identity:k.file,bytes:k.bytes,sha256:k.sha256}))];
   if(geometry.registration.evidence)inputs.push({role:'registration evidence',identity:geometry.registration.evidence.file,sha256:geometry.registration.evidence.sha256,bytes:geometry.registration.evidence.bytes});
   await checkPins(inputs);
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;
   await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
   try{
-    const selection=requireRecord(source.record.parameters.selection);
-    const nav=await projectWithPlanetMapper({directory:staging,geometry,image:localOutput(source.root,'image.fits'),source:d.file,target:d.target,quantity:requireString(source.record.parameters.definition)});
+    const nav=await projectWithPlanetMapper({directory:staging,geometry,image:localOutput(source.root,'image.fits'),source:d.file,target:d.target,quantity:definition});
     const rotation=geometry.kernels.find(k=>k.role==='rotation')!,plane=await readFile(resolve(staging,'map.fits'));
-    const metadata=requireRecord(source.record.parameters.metadata),facts=requireRecord(d.record.facts);
+    const facts=requireRecord(d.record.facts);
     // Mapping does not turn sampling or a nominal capability into measured resolution.
     // The map retains explicitly typed sampling; publication cannot treat it as PSF evidence.
     const spectral=requireRecord(metadata.spectral??{}),band=selection.band;
     const sampling=requireFiniteNumber(nav.samplingArcsec);
     const resolution={majorArcsec:sampling,minorArcsec:sampling,basis:'Native angular sampling from the registered disc scale; achieved PSF/beam resolution remains unknown.',evidence:{kind:'sampling'}};
-    const product=parseBodyMapProduct({schema:'cssearth-body-map@1',definition:{quantity:requireString(source.record.parameters.definition),units:requireString(nav.units),timeDependence:'instantaneous-state',
+    const product=parseBodyMapProduct({schema:'cssearth-body-map@1',definition:{quantity:definition,units:requireString(nav.units),timeDependence:'instantaneous-state',
       ...(Array.isArray(band)?{wavelengthIntervalsMicrometres:[band]}:selection.kind==='image'&&Array.isArray(spectral.centersMicrometres)&&typeof selection.plane==='number'?{wavelengthIntervalsMicrometres:[[spectral.centersMicrometres[selection.plane],spectral.centersMicrometres[selection.plane]]]}:{}),
-      method:{measurement:source.record.parameters.measurement,selection:Object.fromEntries(Object.entries(selection).filter(([key])=>key!=='hdu')),projection:{owner:'PlanetMapper',interpolation:'nearest',latitude:'planetocentric',shape:nav.shape,uncertainty:nav.uncertainty}},source:source.file},
+      method:{measurement,selection:Object.fromEntries(Object.entries(selection).filter(([key])=>key!=='hdu')),projection:{owner:'PlanetMapper',interpolation:'nearest',latitude:'planetocentric',shape:nav.shape,uncertainty:nav.uncertainty}},source:source.file},
       frame:{body:d.target,radiusKm:nav.radiusKm,rotation:{model:rotation.file,sha256:rotation.sha256,bodyCode:nav.bodyCode}},grid:{width:geometry.width,height:geometry.height,longitude:'east-positive-from-0',rows:'north-to-south'},
       planes:{file:'map.fits',sha256:sha256(plane),value:'VALUE',uncertainty:'SIGMA'},mask:{maximumEmissionDegrees:geometry.maximumEmissionDegrees,missing:'NaN'},
       observations:[{id:nav.observation,telescope:d.telescope,instrument:nav.instrument,midTimeJd:nav.midTimeJd,startTimeJd:nav.startTimeJd,endTimeJd:nav.endTimeJd,startIso:nav.startIso,endIso:nav.endIso,exposureSeconds:nav.exposureSeconds,rangeKm:nav.rangeKm,subObserver:nav.subObserver,angularResolution:resolution}]});

@@ -14,8 +14,7 @@ import { prepareScientificNavigation } from '../terrestrial-layers/scientific-fo
 import { parsePreparedWorldContext } from '../../../src/renderers/css/universe/prepared-world-context.ts';
 export { sphereHtml } from './sphere-html.mts';
 
-export async function measurementSphere(root: string, target: string, texture: string, output: string,
-  focus: { longitudeDegrees: number; latitudeDegrees: number; zoom: number }) {
+export async function inspectMeasurementSphere(root:string,target:string){
   const id = target.toLowerCase();
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Sphere output needs an existing body identity');
   const object = resolve(root, 'src/objects', id);
@@ -31,14 +30,33 @@ export async function measurementSphere(root: string, target: string, texture: s
   if (geometry.namespace !== id) throw new Error('Standard sphere geometry belongs to another body');
   const recipe = parseRasterRecipe(await json(resolve(object, 'source/preparation/raster.json')));
   await pinned(resolve(object, 'prepared-assets.json'));
-  const prepared = await preparedAssets(root, [id]);
-  await installRuntimeAssets(prepared.filter(asset => asset.filename === 'runtime.json'));
   const original = parsePreparedObjectRuntime(await json(resolve(object, 'prepared/runtime.json')));
   if (original.id !== id || original.pageLayers?.length || original.destinations)
     throw new Error('This sphere requires application capabilities that cannot be exported');
   const lensId = original.controls.lenses?.defaultLens;
   const surface = recipe.surfaces.find(item => item.id === lensId);
   if (!lensId || !surface) throw new Error('Standard sphere has no matching prepared surface lens');
+  const replacementKeys=new Set([`surface:${lensId}`,`poles:${lensId}`,'poles']);
+  const variant = original.variants.find(item => item.when.lensId === lensId && item.when.shadows !== true && item.when.atmosphere !== true);
+  if (!variant) throw new Error('Standard sphere has no unshadowed surface variant');
+  const required = variant.required.filter(key => replacementKeys.has(key));
+  if (!required.some(key => key.startsWith('surface:'))) throw new Error('Sphere surface binding is unavailable');
+  const styles = await Promise.all(['src/renderers/css/styles/planet-surfaces.css', 'site/planet-shell.css'].map(file => pinned(resolve(root, file))));
+  try { styles.push(await pinned(resolve(root, `src/renderers/css/styles/${id}-surfaces.css`))); }
+  catch(error) { if (!error || typeof error !== 'object' || !('code' in error) || error.code !== 'ENOENT') throw error; }
+  const descriptor = requireRecord(await json(resolve(object, 'object.json'))),properties = requireRecord(descriptor.properties),worldFrame = properties.worldFrame;
+  if (!worldFrame) throw new Error('Standard sphere has no prepared physical frame');
+  const context = parsePreparedWorldContext(await json(resolve(root, 'src/objects/sun/prepared/world-context.json')));
+  return {id,object,inputs,pinned,recipe,original,lensId,surface,variant,required,styles,worldFrame,context};
+}
+
+export async function measurementSphere(root: string, target: string, texture: string, output: string,
+  focus: { longitudeDegrees: number; latitudeDegrees: number; zoom: number }) {
+  const id=target.toLowerCase();
+  if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Sphere output needs an existing body identity');
+  const assetsToInstall = await preparedAssets(root, [id]);
+  await installRuntimeAssets(assetsToInstall.filter(asset => asset.filename === 'runtime.json'));
+  const {inputs,pinned,recipe,original,lensId,surface,variant,required,styles,worldFrame,context}=await inspectMeasurementSphere(root,target);
   // Keep the original packing, gutters, pole atlas and density. The standard raster lane
   // receives already projected colours and uses nearest/lossless handling for measurements.
   const rasterDirectory = resolve(output, 'raster');
@@ -76,12 +94,8 @@ export async function measurementSphere(root: string, target: string, texture: s
     // Mercury's row-bank presentation shares a combined pole atlas across lenses.
     ['poles', await dataUrl(resolve(rasterDirectory, poles))],
   ]);
-  const variant = original.variants.find(item => item.when.lensId === lensId && item.when.shadows !== true && item.when.atmosphere !== true);
-  if (!variant) throw new Error('Standard sphere has no unshadowed surface variant');
   // Preserve the exact prepared tree, facing/depth bindings and camera. Quantitative colour
   // must not be multiplied by the photographic lighting plane, even at full phase.
-  const required = variant.required.filter(key => replacement.has(key));
-  if (!required.some(key => key.startsWith('surface:'))) throw new Error('Sphere surface binding is unavailable');
   // Inactive lenses retain image-valued custom properties in the shared tree.
   // Clear only bindings to excluded assets; node identity and geometry stay intact.
   const excluded = original.assets.entries.filter(entry => !required.includes(entry.key));
@@ -101,11 +115,6 @@ export async function measurementSphere(root: string, target: string, texture: s
   // Prepared properties may address the old surface URL directly. Replace only the
   // selected lens's URLs; the geometry, dimensions and texture coordinates remain exact.
   const oldToNew = new Map(original.assets.entries.filter(entry => replacement.has(entry.key)).map(entry => [entry.url, replacement.get(entry.key)!]));
-  const styles = await Promise.all(['src/renderers/css/styles/planet-surfaces.css', 'site/planet-shell.css'].map(file => pinned(resolve(root, file))));
-  // Mercury is fully styled by planet-surfaces.css. Bodies with extra scientific
-  // lenses may also have a body-owned binding sheet.
-  try { styles.push(await pinned(resolve(root, `src/renderers/css/styles/${id}-surfaces.css`))); }
-  catch(error) { if (!error || typeof error !== 'object' || !('code' in error) || error.code !== 'ENOENT') throw error; }
   let css = styles.map(bytes => bytes.toString()).join('\n');
   // Shared styles also contain other bodies/lenses. None is reachable in this
   // one-lens document, and none may trigger a network request from the export.
@@ -113,11 +122,6 @@ export async function measurementSphere(root: string, target: string, texture: s
     const embedded = oldToNew.get(url.trim());
     return embedded ? `url("${embedded}")` : 'none';
   });
-  const descriptor = requireRecord(await json(resolve(object, 'object.json')));
-  const properties = requireRecord(descriptor.properties);
-  const worldFrame = properties.worldFrame;
-  if (!worldFrame) throw new Error('Standard sphere has no prepared physical frame');
-  const context = parsePreparedWorldContext(await json(resolve(root, 'src/objects/sun/prepared/world-context.json')));
   // Only the selected lens is reachable. Reject an asset dependency instead of allowing
   // the supposedly portable HTML to quietly fetch a different scientific image.
   const serialized = JSON.stringify(definition);
