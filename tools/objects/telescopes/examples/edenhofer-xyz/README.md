@@ -1,0 +1,76 @@
+# Edenhofer et al. v1.0.2 physical XYZ demonstrator
+
+This is a narrow, reproducible source boundary for one F16 physical Cartesian
+volume. It restores `X[400:496), Y[450:546), Z[500:596)` from the parent
+`mean_and_std_xyz.fits` as a 96 x 96 x 96 FITS with `MEAN` and standard-
+deviation (`STD.`) image extensions. It is a reconstruction of the parent grid's interpolated dust
+density product, not a new measurement.
+
+The source is [Zenodo record 10658339](https://zenodo.org/records/10658339),
+[DOI 10.5281/zenodo.10658339](https://doi.org/10.5281/zenodo.10658339),
+released under CC-BY-4.0. The record's `mean_and_std_xyz.fits` is 15,662,543,040
+bytes and declares MD5 `13ddd81b5e35e01582b74e0ec8db0fe5`. This restore does
+not download the whole parent, so it cannot independently verify that whole-file
+MD5. It validates HTTP 206, every requested `Content-Range`, response/part
+lengths, and the pinned parent byte total instead.
+
+Its two parent image arrays are uncompressed big-endian float32 FITS cubes with
+`NAXIS1=NAXIS2=NAXIS3=1251`; their bytes begin at offsets 5,760 (`MEAN`) and
+7,831,275,840 (`STD.`). For each selected Z it fetches one contiguous range
+from `Y=450` through `Y=545`, including all 1,251 X samples in those rows, and
+extracts X indices 400 through 495 locally. The selected plane offset is
+`data_offset + (((Z * 1251 + 450) * 1251) * 4)` with inclusive byte bounds
+`start..start+(96*1251*4)-1`. This makes 96 bounded ranges per extension (192
+total, about 92.2 MB), rather than 9,216 fragile row requests per extension.
+Headers are also ranged so the parent never enters the working directory.
+
+The parent’s numbered `CUNIT1..3` are `pc`. Its unnumbered `CUNIT` is the
+nonstandard source string `E of Zhang, Green, and Rix (2023)`, retained as the
+scalar quantity unit. The coordinates are heliocentric Galactic Cartesian:
+`+X` points to Galactic longitude `l=0`, `+Y` to `l=90`, and `+Z` to the north
+Galactic pole. `CRPIX1..3` is reduced by `(400,450,500)`, retaining exactly the
+parent WCS world coordinate at each cropped voxel. NaN values are source support
+information and remain NaN in both MEAN and STD.; they are not replaced by zero.
+
+Run from the repository root after the pinned toolchain is installed:
+
+```sh
+pnpm telescope:setup-archives
+node tools/objects/astronomy-packages/toolchain.mts verify
+output/toolchains/astroquery/env/bin/python tools/objects/telescopes/examples/edenhofer-xyz/restore.py \
+  --out work/mean_and_std_xyz.crop-400-496-450-546-500-596.fits
+```
+
+The command refuses a different Astroquery/Astropy environment and refuses to
+overwrite output. A successful restoration is exactly 7,087,680 bytes with
+SHA-256 `c4338d130262e349b41951edbdf18b5fcb064ae9f6d0b1ba0d688c20627abd33`.
+It uses one ordinary contiguous `Range: bytes=start-end` request for each
+selected Z plane. Each response is about 480 KB, and it reports bounded
+progress after each cumulative 10 MB. The plane range deliberately includes the
+X gaps; that bounded 92.2 MB transfer is the known successful restoration
+strategy.
+
+Use the matching data-only F16 local import specification only after restoring
+the file at its runtime-provided relative path:
+
+```sh
+mkdir -p work/edenhofer-xyz
+output/toolchains/astroquery/env/bin/python tools/objects/telescopes/examples/edenhofer-xyz/restore.py \
+  --out work/edenhofer-xyz/mean_and_std_xyz.crop-400-496-450-546-500-596.fits
+pnpm telescope import tools/objects/telescopes/examples/edenhofer-xyz/edenhofer-xyz.local-import.json \
+  --out work/edenhofer-xyz/imported --json
+```
+
+The relative `path` in the specification is intentional: it is supplied by the
+runtime working directory, never an author-machine path. The explicit
+`physicalContext` provides the F16 branch contract: the frame, density quantity,
+unit, frame and depth bases, HTTPS source URL, citation, license, HDU 1
+MEAN/HDU 2 standard deviation pairing, and `F16` family hint.
+
+The offline range-assembly test uses a sparse fake 15.7 GB parent and verifies
+the data ordering, output size, WCS shift, unnumbered CUNIT preservation, and
+rejection of invalid HTTP range evidence:
+
+```sh
+output/toolchains/astroquery/env/bin/python tools/objects/telescopes/examples/edenhofer-xyz/restore.test.py
+```
