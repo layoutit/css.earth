@@ -111,8 +111,9 @@ with (out/'values.csv').open('w',newline='') as file:
   writer.writerow(['wavelength_um','value','standard_deviation'])
   for w,v,e in zip(wave,values,sigma):writer.writerow([w,number(v),number(e)])
  else:raise ValueError('Unknown plot kind')
-fig.savefig(out/'figure.png',dpi=160,metadata={'Software':'Astropy / Matplotlib; css.earth telescope selections'})
-fig.savefig(out/'figure.svg',metadata={'Date':None,'Creator':'Astropy / Matplotlib; css.earth telescope selections'})
+presentation['png']={'background':'transparent','bounds':'tight','gutterInches':0.12}
+fig.savefig(out/'figure.png',dpi=160,transparent=True,bbox_inches='tight',pad_inches=.12,metadata={'Software':'Astropy / Matplotlib; css.earth telescope selections'})
+fig.savefig(out/'figure.svg',bbox_inches='tight',pad_inches=.12,metadata={'Date':None,'Creator':'Astropy / Matplotlib; css.earth telescope selections'})
 plt.close(fig)
 json.dump({'astropy':astropy.__version__,'matplotlib':matplotlib.__version__,'files':files,'presentation':presentation,'usable':int(np.isfinite(values).sum())},sys.stdout)
 `;

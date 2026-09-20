@@ -71,7 +71,9 @@ The one-million-spatial-pixel limit applies; extraction streams through the cube
 Astropy `NDDataArray` owns weighted arithmetic and standard-deviation propagation; css.earth
 owns the selected regions, continuum definition and strict missing-sample policy.
 Astropy WCSAxes, ImageNormalize and quantity_support own scientific plotting conventions;
-Matplotlib renders the PNG/SVG. No Jdaviz installation, notebook or browser is required.
+Matplotlib renders the PNG/SVG tightly around the chart, labels and legend with a
+0.12-inch gutter. PNG backgrounds are transparent; light labels suit dark backgrounds.
+No Jdaviz installation, notebook or browser is required.
 
 Every export also returns a `data` path: `image.fits` for images or `spectrum.ecsv` for
 spectra, written by Astropy. Images carry their source celestial WCS when it is separable

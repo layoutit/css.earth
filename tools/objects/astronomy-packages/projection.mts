@@ -77,7 +77,7 @@ plt.rcParams.update({'figure.facecolor':'#181b1f','axes.facecolor':'#333941','te
 fig,ax=plt.subplots(figsize=(10,5),layout='constrained')
 im=ax.imshow(np.ma.masked_invalid(mapped),extent=(0,360,-90,90),origin='upper',cmap=cmap,norm=norm,interpolation='nearest')
 ax.set(xlabel='East longitude (degrees)',ylabel='Planetocentric latitude (degrees)',title=r['target']+' — '+r['quantity']+'\n'+g['registration']['method']+' registration; nearest sample; grey = unobserved')
-fig.colorbar(im,ax=ax,label=header['BUNIT']);fig.savefig(out/'figure.png',dpi=160);plt.close(fig)
+fig.colorbar(im,ax=ax,label=header['BUNIT']);fig.savefig(out/'figure.png',dpi=160,transparent=True,bbox_inches='tight',pad_inches=.12);plt.close(fig)
 observer_lon,observer_lat=obs.graphic2centric_lonlat(obs.subpoint_lon,obs.subpoint_lat)
 west=float(-observer_lon)%360
 result={'units':header['BUNIT'],'bodyCode':int(obs.target_body_id),'radiusKm':float(obs.r_eq),'radiiKm':list(map(float,obs.radii)),

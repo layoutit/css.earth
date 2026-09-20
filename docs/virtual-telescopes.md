@@ -636,7 +636,9 @@ band image, a background-subtracted region mean spectrum and a continuum-subtrac
 same uncertainty and quality policy used by qualification; Astropy NDData owns aggregate
 arithmetic and uncertainty propagation. Astropy WCSAxes owns sky-coordinate axes,
 ImageNormalize owns display scaling, and quantity_support owns spectral unit conversion.
-Matplotlib renders PNG/SVG. Astropy also writes reusable FITS images or ECSV spectra;
+Matplotlib renders PNG/SVG, tightly bounded around the chart, labels and legend
+with a 0.12-inch gutter. PNG backgrounds are transparent; the light labels suit
+dark backgrounds. Astropy also writes reusable FITS images or ECSV spectra;
 CSV and a product record accompany every export. The record pins the original delivery,
 its files, the chosen HDU/plane/pixel, the implementation, package versions and derived bytes.
 No plotting stage upgrades the original scientific request's satisfaction.
@@ -855,9 +857,10 @@ coordinates to native FITS coordinates; the map excludes emission angles above 6
 
 ![Europa projected brightness](images/telescopes/europa-projected-brightness.png)
 
-The actual standalone HTML export, captured at its initial view (1280 × 720):
+The actual standalone HTML export, rotated through the shared drag controls
+(61 browser frames, resized from 1280 × 720 to 960 × 540 and played at 12.5 fps):
 
-![Europa measurement in the standard css.earth sphere](images/telescopes/europa-sphere-html.png)
+![Europa measurement rotating in the standard css.earth sphere](images/telescopes/europa-sphere-rotation.gif)
 
 The independent reference traces orthographic rays through the pinned triaxial
 ellipsoid using NumPy and draws their sampled values using Matplotlib. It checks
@@ -869,7 +872,7 @@ measurement; it is not a screenshot or a second rendering implementation.
 
 ![Independent Europa sphere reference](images/telescopes/europa-sphere-reference.png)
 
-The preceding reference is separate from the HTML screenshot above. The standalone
+The preceding reference is separate from the HTML rotation preview above. The standalone
 Europa HTML was inspected through a local HTTP preview: initial rendering, drag
 rotation and wheel zoom remained visible with no browser errors. There is no
 startup flight; the first drag preserves camera distance. Screenshot
