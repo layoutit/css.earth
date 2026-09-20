@@ -1,0 +1,19 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { inputWavelengths } from './recipe-request.mts';
+import { requestFromArguments, type CapabilityRequest } from './query.mts';
+import { qualificationActionsFor } from './qualification-routes.mts';
+import { assessInput } from './request-satisfaction.mts';
+import { matchingProduct, type QualifiedObservation } from './qualified-observations.mts';
+const request:CapabilityRequest={target:'test',kind:'cube',wavelengthMicrometres:[2.28,2.32],continuumMicrometres:[[2.1,2.2],[2.35,2.4]]};
+test('continuum windows expand qualification and prevent selection of a band-only artifact',()=>{
+ assert.deepEqual(inputWavelengths(request),[2.1,2.4]);
+ const action=qualificationActionsFor('JWST','NIRSPEC/IFU','test',inputWavelengths(request),{any:true},[{id:'obs',startIso:'2023-01-01T00:00:00Z',filter:'G235M;F170LP'}])[0]!;
+ assert.ok(action);assert.equal(action.configuration.kind,'jwst-band');assert.ok(action.arguments.includes('2.1,2.4'));
+ const product={target:'test',telescope:'JWST',mode:'NIRSPEC/IFU',observation:'obs',program:'test-obs',product:'cube',receipt:'receipt',productRecord:'record',outputRoot:'.',facts:{target:'test',verified:true,kind:'cube',result:'telescope-product',wavelengthIntervalsMicrometres:[[2.2,2.4]]}} as const satisfies QualifiedObservation;
+ assert.equal(assessInput(request,product.facts).constraints.wavelength?.answer,'partial');
+ assert.equal(matchingProduct([product],request,product.program),undefined);
+ assert.ok(matchingProduct([{...product,facts:{...product.facts,wavelengthIntervalsMicrometres:[[2.1,2.4]]}}],request,product.program));
+ assert.deepEqual(inputWavelengths(requestFromArguments(['--target','test','--wavelength','2.28,2.32','--continuum','2.1,2.2,2.35,2.4','--kind','cube'])),[2.1,2.4]);
+ assert.throws(()=>inputWavelengths({...request,continuumMicrometres:[[2.3,2.31],[2.35,2.4]]}),/bracket/);
+});

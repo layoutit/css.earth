@@ -482,11 +482,16 @@ test('the committed archive ledgers expose sourced capabilities without inventin
   assert.throws(() => selectObservation(selectableEuropa, 'Keck', 'NIRSPEC', 'europa-nirspec-2006a-c213ol'), /has no usable toolkit/u);
 });
 
-test('the committed Itokawa index rules out the clean-room request and names the real AORs', async () => {
+test('Itokawa retains Spitzer refusals and exposes pinned native sources without inventing their suitability', async () => {
   const answer = queryCapabilities({ target: 'itokawa', wavelengthMicrometres: [2, 2.2], time: { fromIso: '2005-09-01', toIso: '2005-10-31' },
     surfaceResolutionKm: 0.1, kind: 'image', result: 'body-map' }, await loadQueryInputs(ROOT, 'itokawa'));
-  assert.deepEqual(answer.candidates.map(entry => entry.mode), ['IRAC Map PC', 'IRS Peakup Image', 'IRS Stare']);
-  for (const entry of answer.candidates) {
+  const archive = answer.candidates.filter(entry => entry.telescope === 'Spitzer');
+  assert.deepEqual(archive.map(entry => entry.mode), ['IRAC Map PC', 'IRS Peakup Image', 'IRS Stare']);
+  const native = answer.candidates.find(entry => entry.observations?.records?.some(record => record.sourceProductId));
+  assert.ok(native, 'pinned native images should be queryable');
+  assert.equal(native.meetsConstraints.wavelength?.answer, 'unknown');
+  assert.ok(native.selectionAssessment.blockers.some(blocker => blocker.code === 'body-map-author-missing'));
+  for (const entry of archive) {
     assert.equal(entry.meetsConstraints.wavelength?.answer, 'no');
     assert.equal(entry.meetsConstraints.time?.answer, 'no');
     assert.equal(entry.toolkitSupport.level, 'none');
@@ -506,7 +511,7 @@ test('the committed Flora request ends explicitly after sourced candidate refusa
   assert.deepEqual([cube.meetsConstraints.wavelength?.answer, cube.meetsConstraints.kind?.answer], ['no', 'no']);
   assert.deepEqual(wfpc2.selectionAssessment.blockers.map(blocker => blocker.code),
     ['body-map-author-missing', 'target-program-unqualified']);
-  assert.match(formatAnswer(answer), /workflow: no-selectable-candidate; 0 of 4 candidate mode\(s\) can proceed/u);
+  assert.match(formatAnswer(answer), /workflow: no-selectable-candidate; 0 of \d+ candidate mode\(s\) can proceed/u);
 });
 
 test('the committed Halley request exposes a real IHW archive-final image and the Spitzer index gap', async () => {

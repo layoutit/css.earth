@@ -131,3 +131,34 @@ test('a midpoint inside a request does not prove that the entire exposure fits',
   const valid = await qualifyBodyMap(f.mapPath, { ...asked, request: { ...asked.request, time: { fromIso: '2026-01-01T09:59:00Z', toIso: '2026-01-01T10:11:00Z' } } });
   assert.equal(valid.satisfaction.constraints.time?.answer, 'yes');
 });
+
+test('exact UTC request edges agree with their Julian dates',async()=>{
+ const startIso='2026-01-01T10:00:00.000Z',endIso='2026-01-01T10:10:00.000Z',jd=(iso:string)=>Date.parse(iso)/86400000+2440587.5;
+ const map=product(),f=await fixture({...map,observations:[{...map.observations[0]!,midTimeJd:(jd(startIso)+jd(endIso))/2,startTimeJd:jd(startIso),endTimeJd:jd(endIso),startIso,endIso}]});
+ const layer=await qualifyBodyMap(f.mapPath,{...selection,request:{...selection.request,time:{fromIso:startIso,toIso:endIso}}});
+ assert.equal(layer.selection.constraints.time?.answer,'yes');assert.equal(layer.satisfaction.constraints.time?.answer,'yes');
+});
+
+test('publication establishes input kind only from a current qualified artifact with matching input bytes',async()=>{
+ const {writeProductRecord,productRecordPath,pinFile}=await import('./product-record.mts');
+ const {rememberQualification,loadQualifiedObservations}=await import('./telescopes/qualified-observations.mts');
+ const f=await fixture(),root=f.directory,cube=resolve(root,'selected.fits'),receipt=resolve(root,'comparison.json');
+ await writeFile(cube,'verified cube fixture');await writeFile(receipt,'{}');
+ await writeProductRecord(productRecordPath(cube),{telescope:'JWST',stage:'fixture-cube',inputs:[],software:[],parameters:{}},[{path:'selected.fits',file:cube}]);
+ await rememberQualification(root,{target:'europa',telescope:'JWST',mode:'NIRSPEC/IFU',program:selection.programme,observation:'jw01250-o002',product:cube,productRecord:productRecordPath(cube),receipt,outputRoot:root,facts:{target:'europa',verified:true,kind:'cube',result:'telescope-product'}});
+ const selected={...selection,product:(await loadQualifiedObservations(root,'europa'))[0]!};
+ await assert.rejects(qualifyBodyMap(f.mapPath,selected,root),/did not consume/);
+ const record=JSON.parse(await readFile(`${f.planePath}.product.json`,'utf8'));record.inputs.push({role:'qualified scientific product',identity:'selected.fits',...await pinFile(cube)});
+ await writeFile(`${f.planePath}.product.json`,JSON.stringify(record));
+ assert.equal((await qualifyBodyMap(f.mapPath,selected,root)).satisfaction.status,'fulfilled');
+ assert.equal((await qualifyBodyMap(f.mapPath,selected,root)).satisfaction.status,'fulfilled');
+ await writeFile(cube,'substituted same-program cube');await assert.rejects(qualifyBodyMap(f.mapPath,selected,root),/stale/);
+ await writeFile(cube,'verified cube fixture');await writeFile(receipt,'changed');await assert.rejects(qualifyBodyMap(f.mapPath,selected,root),/stale/);
+});
+
+test('publication refuses a different estimator even when its band overlaps',async()=>{
+ const p=product(),f=await fixture({...p,definition:{...p.definition,method:{...p.definition.method,kind:'band-depth'}}});
+ const request={...selection.request,continuumMicrometres:[[4.2,4.225],[4.3,4.33]] as const};
+ await qualifyBodyMap(f.mapPath,{...selection,request});
+ await assert.rejects(qualifyBodyMap(f.mapPath,{...selection,request:{...request,continuumMicrometres:[[4.1,4.225],[4.3,4.33]]}}),/estimator/);
+});

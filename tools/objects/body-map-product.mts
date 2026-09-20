@@ -54,6 +54,7 @@ export interface BodyMapObservation {
   readonly programme?: string;
   readonly midTimeJd: number; readonly exposureSeconds?: number;
   readonly startTimeJd?: number; readonly endTimeJd?: number;
+  readonly startIso?: string; readonly endIso?: string;
   readonly rangeKm: number;
   readonly subObserver: { readonly latitudeDegrees: number; readonly westLongitudeDegrees: number };
   readonly subSolar?: { readonly latitudeDegrees: number; readonly westLongitudeDegrees: number };
@@ -141,9 +142,12 @@ export function parseBodyMapProduct(value: unknown): BodyMapProduct {
       ...(resolution.positionAngleDegrees === undefined ? {} : { positionAngleDegrees: requireFiniteNumber(resolution.positionAngleDegrees, 'positionAngleDegrees') }), basis: requireString(resolution.basis, 'angularResolution.basis'),
       ...(resolution.evidence === undefined ? {} : { evidence: parseResolutionEvidence(resolution.evidence) }) };
     if (!(angularResolution.majorArcsec >= angularResolution.minorArcsec && angularResolution.minorArcsec > 0)) throw new RangeError(`Observation ${index}: the resolution's major axis is at least its minor, and both are positive.`);
+    const startIso = entry.startIso === undefined ? undefined : requireString(entry.startIso), endIso = entry.endIso === undefined ? undefined : requireString(entry.endIso);
+    if ((startIso === undefined) !== (endIso === undefined) || startIso !== undefined && (!/Z$/u.test(startIso) || !/Z$/u.test(endIso!) || !Number.isFinite(Date.parse(startIso)) || !Number.isFinite(Date.parse(endIso!)) || Date.parse(startIso)>Date.parse(endIso!))) throw new RangeError('Invalid authoritative UTC interval.');
     const startTimeJd = entry.startTimeJd === undefined ? undefined : requireFiniteNumber(entry.startTimeJd, 'startTimeJd');
     const endTimeJd = entry.endTimeJd === undefined ? undefined : requireFiniteNumber(entry.endTimeJd, 'endTimeJd');
     if ((startTimeJd === undefined) !== (endTimeJd === undefined) || (startTimeJd !== undefined && endTimeJd !== undefined && (startTimeJd > endTimeJd || Number(entry.midTimeJd) < startTimeJd || Number(entry.midTimeJd) > endTimeJd))) throw new RangeError('Observation needs a complete, ordered time interval containing its midpoint.');
+    if (startIso !== undefined && startTimeJd !== undefined && (Math.abs((startTimeJd - 2440587.5) * 86400000 - Date.parse(startIso)) > 1 || Math.abs((endTimeJd! - 2440587.5) * 86400000 - Date.parse(endIso!)) > 1)) throw new RangeError('UTC and Julian date intervals disagree.');
     const rangeKm = requireFiniteNumber(entry.rangeKm, 'rangeKm');
     if (!(rangeKm > 0)) throw new RangeError(`Observation ${index} needs the range to the body, in kilometres.`);
     return { id: requireString(entry.id, 'observation id'), telescope: requireString(entry.telescope, 'telescope'), instrument: requireString(entry.instrument, 'instrument'),
@@ -151,6 +155,7 @@ export function parseBodyMapProduct(value: unknown): BodyMapProduct {
       ...(entry.programme === undefined ? {} : { programme: requireString(entry.programme, 'observation programme') }),
       midTimeJd: requireFiniteNumber(entry.midTimeJd, 'midTimeJd'),
       ...(startTimeJd === undefined ? {} : { startTimeJd, endTimeJd }),
+      ...(startIso === undefined ? {} : { startIso: new Date(startIso).toISOString(), endIso: new Date(endIso!).toISOString() }),
       ...(entry.exposureSeconds === undefined ? {} : { exposureSeconds: requireFiniteNumber(entry.exposureSeconds, 'exposureSeconds') }), rangeKm, subObserver: point(entry.subObserver, 'subObserver'),
       ...(entry.subSolar === undefined ? {} : { subSolar: point(entry.subSolar, 'subSolar') }), angularResolution };
   });
