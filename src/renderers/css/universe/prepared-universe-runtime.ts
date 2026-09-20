@@ -28,6 +28,7 @@ import type { WorldContextPublication } from './world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context-planner-client.js';
 import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 import { createLabelBudget } from '../labels/universe-label-policy.js';
+import { mountStellarPoints, stellarPointsOpacity } from './stellar-points.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
 // Galaxy files download from this fraction of the volume's fade-start distance:
@@ -169,6 +170,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const additionalPoints = mountBackgroundPoints(root, end, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256);
       let volumeLayer: ReturnType<typeof mountPreparedCssVolume> | null = null;
       let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
+      let stellarPoints: ReturnType<typeof mountStellarPoints> = null;
       let spatial: ReturnType<typeof mountPreparedWorldContext> | null = null;
       let labelBudget = createLabelBudget(0, 0);
       let labelBlockers: readonly LabelScreenRect[] = [];
@@ -333,9 +335,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       let publishedVolumeAlpha = NaN, publishedImageAlpha = NaN, publishedSkyAlpha = NaN;
       let publishedVolumeOpacity = NaN, publishedVolumeBrightness = NaN;
       let publishedVolumeVisible: boolean | undefined, publishedScale = '';
-      // The baked star cube holds the Sun's near stars. As the camera leaves the
-      // neighbourhood, it gives way to the plain Milky Way cube; that background
-      // remains until the prepared volume's completed contribution replaces it.
+      // The baked star cube holds the Sun's near view. As the camera leaves the
+      // neighbourhood, its stars hand off to the direct 3D sample while the plain
+      // Milky Way cube remains behind both until the completed volume replaces it.
       let starsHandoff = 0;
       const publishBackground = () => {
         const brightness = volumeBrightness;
@@ -363,7 +365,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         destroyed = true;
         for (let index = 0; index < lensGeneration.length; index++) lensGeneration[index]++;
         prefetchAbort.abort();
-        volumeLayer?.destroy(); skyLayer?.destroy(); spatial?.destroy(); focusPoint?.destroy(); environmentLabels?.destroy();
+        volumeLayer?.destroy(); skyLayer?.destroy(); stellarPoints?.destroy(); spatial?.destroy(); focusPoint?.destroy(); environmentLabels?.destroy();
         for (const shell of shellLayers) shell.destroy();
         for (const bank of imageBanks) bank?.destroy(); galaxyCatalog?.destroy();
         for (const bank of lensBanks) bank?.destroy();
@@ -374,6 +376,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       };
       try {
         if (payload.sky) skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
+        stellarPoints = mountStellarPoints({ host: root, before: volumeHost, field: pointAppearance });
         volumeLayer = mountPreparedCssVolume({ host: volumeImage, before: volumeEnd, payload, resolveResource });
         for (const [index, bank] of declaredImageLayers.entries()) if (initialImageLayers.has(bank.id)) void ensureImageLayerLoaded(index);
         // Image and volume lens banks mount lazily; far layers have no payload or DOM until admitted.
@@ -544,6 +547,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             }
             publishBackground();
             skyLayer?.publish(world, viewport, publishedVolumeAlpha < 1, 1 - starsHandoff);
+            stellarPoints?.publish({world,viewport},stellarPointsOpacity(starsHandoff,publishedVolumeAlpha));
             if (volumeOpacity > 0 && volumeSize > 0) volumeLayer!.publish({ world, viewport });
             // A galaxy under a few projected pixels is its label: its bank fades, then
             // leaves layout and compositing. Like lens banks, a faded image bank does too.

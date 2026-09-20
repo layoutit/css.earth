@@ -93,6 +93,17 @@ test('full source catalogue survives at exact Cartesian positions in a bounded-l
   const best = Array.from({length:6*recipe.coverage.faceDivisions**2},()=>({index:-1,magnitude:Infinity}));
   for(let index=0;index<catalogue.count;index++){const x=p[index*3]!,y=p[index*3+1]!,z=p[index*3+2]!,cell=coverageCell(x,y,z,recipe.coverage.faceDivisions), apparent=mag[index]!+5*Math.log10(Math.hypot(x,y,z))-5; if(apparent<best[cell]!.magnitude)best[cell]={index,magnitude:apparent};}
   assert.deepEqual(new Set(anchors.map(star=>star.id)),new Set(best.map(entry=>`${recipe.catalogue.idPrefix}:${entry.index}`)),'anchors retain the real brightest apparent row for every cube cell');
+  assert(data.directPoints); assert.equal(data.directPoints.catalogueCount,catalogue.count); assert.equal(data.directPoints.points.length,data.policy.activeSlots);
+  const directRows=new Set(data.directPoints.points.map(point=>point.sourceRow)); assert.equal(directRows.size,data.policy.activeSlots);
+  const anchorRows=new Set(anchors.map(star=>Number(star.id.split(':').at(-1))));
+  assert([...anchorRows].every(row=>directRows.has(row)),'the bounded direct field must retain every all-sky coverage anchor');
+  const expectedRows=Array.from({length:catalogue.count},(_,index)=>({index,anchor:anchorRows.has(index),
+    apparent:mag[index]!+5*Math.log10(Math.hypot(p[index*3]!,p[index*3+1]!,p[index*3+2]!))-5}))
+    .sort((left,right)=>Number(right.anchor)-Number(left.anchor)||left.apparent-right.apparent||left.index-right.index)
+    .slice(0,data.policy.activeSlots).map(entry=>entry.index);
+  assert.deepEqual([...directRows].sort((a,b)=>a-b),expectedRows.sort((a,b)=>a-b),'direct stars are the reproducible coverage plus apparent-brightness sample');
+  const decodedByRow=new Map(data.stars.map(star=>[Number(star.id.split(':').at(-1)),star]));
+  for(const point of data.directPoints.points){const star=decodedByRow.get(point.sourceRow);assert(star);assert.deepEqual(point.positionUnits,star.positionUnits);assert.equal(point.absoluteMagnitude,star.absoluteMagnitude);assert.equal(point.colorIndex,star.colorIndex);assert.equal(point.coverageAnchor,star.coverageAnchor);}
   assertTree(data,sourceMagnitude);
   assert.throws(()=>assertTree({...data,stars:data.stars.slice(1)},sourceMagnitude));
   const firstChild = data.nodes[0]!.children[0]!;

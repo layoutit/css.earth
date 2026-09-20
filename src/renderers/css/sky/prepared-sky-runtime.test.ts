@@ -167,7 +167,7 @@ test.each([
   expect(skyAssets).toHaveLength(withSky ? 6 : 0);
   for (const asset of skyAssets) expect(universe.assets.startup).toContain(asset.key);
   const mounted = universe.mount(stage as unknown as HTMLElement), root = mounted.root as unknown as FakeElement;
-  const skyRoot = root.children.find(node => node.className === 'prepared-celestial-sky')!, volumeRoot = root.children.find(node => node.className === 'prepared-volume-context')!;
+  const skyRoot = root.children.find(node => node.className === 'prepared-celestial-sky')!, stellarRoot = root.children.find(node => node.className === 'stellar-direct-points')!, volumeRoot = root.children.find(node => node.className === 'prepared-volume-context')!;
   const volumeImage = volumeRoot.children.find(node => node.className === 'prepared-volume-image')!;
   expect(volumeRoot.style.background).toBe('#000');
   expect(volumeRoot.style.transformStyle).toBe('flat');
@@ -179,8 +179,9 @@ test.each([
     expect(axis.children[0]!.children[0]!.style.opacity).toBeUndefined();
   }
   const count = document.count, originalNodes = [...root.children];
-  if (withSky) expect(root.children.indexOf(skyRoot)).toBeLessThan(root.children.indexOf(volumeRoot));
+  if (withSky) expect(root.children.indexOf(skyRoot)).toBeLessThan(root.children.indexOf(stellarRoot));
   else expect(skyRoot).toBeUndefined();
+  expect(root.children.indexOf(stellarRoot)).toBeLessThan(root.children.indexOf(volumeRoot));
   const profile = context.volume.opacityProfile;
   const nearGain = brightness.nearOpacity;
   const regressionDistance = 98 * 3.085677581491367e16;
@@ -198,6 +199,9 @@ test.each([
     mounted.publish(camera, viewport);
     const expectedGain = withBrightness ? gain : 1;
     const expectedSkyContribution = 1 - expected * expectedGain;
+    const starHandoff = logarithmicFade(distance, context.stars.fadeStartDistanceM, context.stars.fullDistanceM);
+    const completedVolumeContribution = expected * (withSky ? expectedGain : 1);
+    expect(Number(stellarRoot.style.opacity)).toBeCloseTo(starHandoff * (1 - completedVolumeContribution), 12);
     expect(Number(volumeRoot.dataset.volumeOpacity)).toBeCloseTo(expected, 12);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? expectedGain : 1), 12);
     if (withBrightness && distance === gradedDistance) {

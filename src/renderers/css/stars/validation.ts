@@ -1,6 +1,6 @@
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import { POINT_FIELD_BANK_ENCODING, POINT_FIELD_BANK_QUANTIZATION, decodePointFieldBank, pointFieldBankLayout } from './point-field-bank.js';
-import type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedPointFieldBank, PreparedPointFieldNode,
+import type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedDirectStarField, PreparedPointFieldBank, PreparedPointFieldNode,
   PreparedPointFieldQuantization, PreparedPointFieldResource, PointFieldRgb } from './types.js';
 
 const IDENTIFIER = /^[a-z][a-z0-9-]*$/u;
@@ -11,7 +11,7 @@ const MAX_LEAF_STARS = 32;
 /** Validates the JSON manifest of one prepared point field; its rows arrive in the pinned bank. */
 export function parsePreparedCssPointFieldManifest(value: unknown): PreparedCssPointFieldManifest {
   const input = record(value, 'prepared CSS point field');
-  allowedKeys(input, ['schema', 'id', 'frame', 'bank', 'atlas', 'photometry', 'policy', 'labels', 'diffuseSky', 'resources', 'provenance'], 'prepared CSS point field');
+  allowedKeys(input, ['schema', 'id', 'frame', 'bank', 'atlas', 'photometry', 'policy', 'labels', 'diffuseSky', 'directPoints', 'resources', 'provenance'], 'prepared CSS point field');
   for (const key of ['schema', 'id', 'frame', 'bank', 'atlas', 'photometry', 'policy', 'labels', 'resources', 'provenance']) if (!(key in input)) {
     throw new TypeError(`prepared CSS point field is missing ${key}.`);
   }
@@ -28,20 +28,46 @@ export function parsePreparedCssPointFieldManifest(value: unknown): PreparedCssP
   }
   if (resources.some(resource => resource.path === bank.path)) throw new TypeError('Point-field bank cannot also be an image resource.');
   const diffuseSky = parseDiffuseSky(input.diffuseSky, resources);
+  const directPoints = parseDirectPoints(input.directPoints, bank, atlas.colors.length);
   const photometry = parsePhotometry(input.photometry);
   const policy = parsePolicy(input.policy);
   const labels = parseLabels(input.labels);
   return Object.freeze({ schema: 'cssearth-css-point-field-bank@1', id: input.id, frame, bank, atlas,
-    photometry, policy, labels, ...(diffuseSky === undefined ? {} : { diffuseSky }), resources, provenance: input.provenance });
+    photometry, policy, labels, ...(diffuseSky === undefined ? {} : { diffuseSky }), ...(directPoints === undefined ? {} : { directPoints }), resources, provenance: input.provenance });
 }
 
 /** Decodes verified bank bytes into the immutable point field that selection and rendering consume. */
 export function decodePreparedCssPointField(manifest: PreparedCssPointFieldManifest, bytes: ArrayBuffer | Uint8Array): PreparedCssPointField {
   const { stars, nodes } = decodePointFieldBank(bytes, manifest.bank, { frame: manifest.frame, colorCount: manifest.atlas.colors.length });
   validateHierarchy(nodes, stars.length);
-  const { id, frame, atlas, photometry, policy, labels, diffuseSky, resources, provenance } = manifest;
+  const { id, frame, atlas, photometry, policy, labels, diffuseSky, directPoints, resources, provenance } = manifest;
   return Object.freeze({ schema: 'cssearth-css-point-field@1', id, frame, stars, nodes, atlas,
-    photometry, policy, labels, ...(diffuseSky === undefined ? {} : { diffuseSky }), resources, provenance });
+    photometry, policy, labels, ...(diffuseSky === undefined ? {} : { diffuseSky }), ...(directPoints === undefined ? {} : { directPoints }), resources, provenance });
+}
+
+function parseDirectPoints(value: unknown, bank: PreparedPointFieldBank, colorCount: number): PreparedDirectStarField | undefined {
+  if (value === undefined) return undefined;
+  const input = record(value, 'direct star field');
+  exactKeys(input, ['schema', 'catalogueCount', 'selection', 'points'], 'direct star field');
+  const catalogueCount = input.catalogueCount;
+  if (input.schema !== 'cssearth-direct-star-field@1' || !safePositive(catalogueCount) || catalogueCount !== bank.starCount ||
+      typeof input.selection !== 'string' || !input.selection || !Array.isArray(input.points) || input.points.length === 0 || input.points.length > 4096) {
+    throw new TypeError('Prepared direct star field is invalid.');
+  }
+  const rows = new Set<number>();
+  const points = input.points.map((value, index) => {
+    const point = record(value, `direct star point ${index}`);
+    exactKeys(point, ['sourceRow', 'positionUnits', 'absoluteMagnitude', 'colorIndex', 'coverageAnchor'], 'direct star point');
+    if (!safeNonnegative(point.sourceRow) || point.sourceRow >= catalogueCount || rows.has(point.sourceRow) ||
+        !Array.isArray(point.positionUnits) || point.positionUnits.length !== 3 || !point.positionUnits.every(finite) ||
+        !finite(point.absoluteMagnitude) || !safeNonnegative(point.colorIndex) || point.colorIndex >= colorCount || typeof point.coverageAnchor !== 'boolean') {
+      throw new TypeError('Prepared direct star point is invalid.');
+    }
+    rows.add(point.sourceRow);
+    return Object.freeze({ sourceRow:point.sourceRow, positionUnits:Object.freeze([point.positionUnits[0],point.positionUnits[1],point.positionUnits[2]]) as readonly [number,number,number],
+      absoluteMagnitude:point.absoluteMagnitude,colorIndex:point.colorIndex,coverageAnchor:point.coverageAnchor });
+  });
+  return Object.freeze({ schema:'cssearth-direct-star-field@1', catalogueCount, selection:input.selection, points:Object.freeze(points) });
 }
 
 function parseBank(value: unknown): PreparedPointFieldBank {
