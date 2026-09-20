@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-f07-wind-rad1@1",
+  "source": {
+    "url": "https://spdf.gsfc.nasa.gov/pub/data/wind/waves/rad1_l2/2020/wi_l2_wav_rad1_20200101_v01.cdf",
+    "bytes": 423932,
+    "sha256": "a1fd0d0c2487592cd0a43672f50aede256dcdc2fed8bc4c3a87fb0799b20647b",
+    "variable": "PSD_V2_S"
+  },
+  "variables": {
+    "Epoch": {
+      "count": 1856,
+      "encoding": "TT2000 integer nanoseconds preserved as strings"
+    },
+    "FREQUENCY": {
+      "count": 256,
+      "unit": "Hz",
+      "first": [
+        20000,
+        24000.001953125,
+        28000.001953125,
+        32000
+      ]
+    },
+    "PSD_V2_S": {
+      "shape": [
+        1856,
+        256
+      ],
+      "unit": "V^2/Hz"
+    }
+  },
+  "example": {
+    "file": "example.csv",
+    "selection": {
+      "time": [
+        0,
+        3
+      ],
+      "frequency": [
+        0,
+        4
+      ]
+    }
+  },
+  "independentCheck": {
+    "kind": "NASA SPDF archive identity",
+    "url": "https://spdf.gsfc.nasa.gov/pub/data/wind/waves/rad1_l2/2020/wi_l2_wav_rad1_20200101_v01.cdf",
+    "asserts": "Exact archive byte pin plus source-defined variable names; does not reuse cdflib as an oracle."
+  }
+}

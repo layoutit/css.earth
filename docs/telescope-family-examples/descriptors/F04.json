@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-telescope-product-descriptor@1",
+  "dataset": {
+    "id": "europa-salt-map",
+    "target": "europa",
+    "acquisition": {
+      "kind": "repository",
+      "identity": "../../../tools/objects/hst/programs/europa-salt-map.scan.json"
+    },
+    "producingRecord": "tools/objects/hst/programs/europa-salt-map.scan.reproduction.json",
+    "sourceClassifications": [
+      {
+        "term": "slit-scan spectroscopy",
+        "vocabulary": "HST/STIS observing mode",
+        "version": "1",
+        "status": "source"
+      }
+    ],
+    "families": [
+      "F04"
+    ],
+    "profiles": [
+      {
+        "handlerId": "f04-slit-profile",
+        "profileId": "hst-stis-rectified-slit-scan@1"
+      }
+    ]
+  },
+  "members": [
+    {
+      "id": "definition",
+      "path": "../../../tools/objects/hst/programs/europa-salt-map.scan.json",
+      "role": "provenance",
+      "bytes": 31364,
+      "sha256": "08905793dabe7e5a81250e058c98ac5e7620d36bdaab9c0348147d3c87f79323",
+      "mediaType": "application/json"
+    },
+    {
+      "id": "receipt",
+      "path": "../../../tools/objects/hst/programs/europa-salt-map.scan.reproduction.json",
+      "role": "provenance",
+      "bytes": 21487,
+      "sha256": "c23af3b17dd98e3bc95e2620e4729390889a986383e0897eee2b8cf885f5f49e",
+      "mediaType": "application/json"
+    }
+  ],
+  "components": [
+    {
+      "id": "slit-scan",
+      "name": "STIS/CCD G430L 52X0.1",
+      "families": [
+        "F04"
+      ],
+      "locations": [
+        {
+          "memberId": "definition",
+          "structure": "frames"
+        },
+        {
+          "memberId": "receipt",
+          "structure": "frames"
+        }
+      ],
+      "representation": {
+        "kind": "table",
+        "rows": 60
+      },
+      "axes": [
+        {
+          "id": "spectral-window",
+          "index": 0,
+          "length": 2,
+          "role": "spectral-bounds",
+          "coordinates": {
+            "kind": "lookup",
+            "memberId": "definition",
+            "locator": "band.readWindowAngstrom",
+            "binBounds": true
+          },
+          "unit": "Angstrom"
+        }
+      ],
+      "columns": [
+        {
+          "id": "frame",
+          "name": "frame",
+          "role": "exposure-identity",
+          "datatype": "string",
+          "nullable": false,
+          "variableLength": false
+        },
+        {
+          "id": "visit",
+          "name": "visit",
+          "role": "visit-segment",
+          "datatype": "string",
+          "nullable": false,
+          "variableLength": false
+        },
+        {
+          "id": "slit-position",
+          "name": "slit_position",
+          "role": "spatial-sampling",
+          "datatype": "float64",
+          "nullable": false,
+          "variableLength": false,
+          "unit": "arcsec"
+        }
+      ],
+      "quantity": {
+        "name": "rectified slit spectra",
+        "semantics": "One spectrum per detector row; slit width, orientation, visit identity, background and extraction rules remain explicit.",
+        "unit": "Angstrom"
+      },
+      "calibration": {
+        "state": "archive-calibrated",
+        "basis": [
+          "HST calstis rectified x2d products.",
+          "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123",
+          "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123",
+          "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123",
+          "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123",
+          "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123",
+          "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123",
+          "Trumbo, Brown & Hand (2019), Sodium chloride on the surface of Europa, Science Advances 5, eaaw7123, doi:10.1126/sciadv.aaw7123"
+        ]
+      },
+      "uncertainty": {
+        "form": "standard-deviation",
+        "basis": "STIS x2d error plane propagated by the existing slit-scan owner."
+      },
+      "flags": [],
+      "dependencyIds": []
+    }
+  ],
+  "dependencies": [],
+  "issues": [
+    {
+      "scope": "component",
+      "identity": "slit-scan",
+      "state": "unknown",
+      "reason": "The checked receipt validates the repository-specific Europa reduction; it is not a generic slit-spectrum oracle."
+    }
+  ]
+}

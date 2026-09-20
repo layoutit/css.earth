@@ -1,0 +1,15 @@
+{
+  "operationId": "uvfits-visibility-export",
+  "selection": {
+    "field": "J1008+0730",
+    "timeStartJulianDate": 2455312.64022,
+    "timeEndJulianDate": 2455312.64024,
+    "antenna1": 4,
+    "antenna2": 8,
+    "rowOffset": 0,
+    "rowCount": 1,
+    "channelStart": 0,
+    "channelCount": 2,
+    "polarization": -1
+  }
+}

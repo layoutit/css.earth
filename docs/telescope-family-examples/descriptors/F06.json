@@ -1,0 +1,130 @@
+{
+  "schema": "cssearth-telescope-product-descriptor@1",
+  "dataset": {
+    "id": "hd-189733-sector-41",
+    "target": "hd-189733",
+    "acquisition": {
+      "kind": "repository",
+      "identity": "../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
+    },
+    "producingRecord": "src/objects/hd-189733/source/manifest.json",
+    "sourceClassifications": [
+      {
+        "term": "time-series",
+        "vocabulary": "cssEarth observational families",
+        "version": "1",
+        "status": "mapped"
+      }
+    ],
+    "families": [
+      "F06"
+    ],
+    "profiles": [
+      {
+        "handlerId": "f06-time-series",
+        "profileId": "sampled-time-series-table@1"
+      }
+    ]
+  },
+  "members": [
+    {
+      "id": "tess-41",
+      "path": "../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+      "role": "science",
+      "bytes": 1944000,
+      "sha256": "442c1d97c549019f46b98026a6b74cd380112722e3e230e79203559f67cc326b",
+      "mediaType": "application/fits"
+    }
+  ],
+  "components": [
+    {
+      "id": "time-series",
+      "name": "PDCSAP flux",
+      "families": [
+        "F06"
+      ],
+      "locations": [
+        {
+          "memberId": "tess-41"
+        }
+      ],
+      "representation": {
+        "kind": "table",
+        "rows": 18315
+      },
+      "axes": [
+        {
+          "id": "time",
+          "index": 0,
+          "length": 18315,
+          "role": "time",
+          "coordinates": {
+            "kind": "lookup",
+            "memberId": "tess-41",
+            "locator": "time",
+            "binBounds": false
+          },
+          "unit": "d",
+          "frame": "BJD_TDB-2457000"
+        }
+      ],
+      "columns": [
+        {
+          "id": "id",
+          "name": "id",
+          "role": "row-identity",
+          "datatype": "string",
+          "nullable": false,
+          "variableLength": false
+        },
+        {
+          "id": "segment",
+          "name": "segment",
+          "role": "time-segment",
+          "datatype": "string",
+          "nullable": true,
+          "variableLength": false
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "role": "measurement",
+          "datatype": "float64",
+          "nullable": false,
+          "variableLength": false
+        },
+        {
+          "id": "uncertainty",
+          "name": "uncertainty",
+          "role": "standard-deviation",
+          "datatype": "float64",
+          "nullable": true,
+          "variableLength": false
+        }
+      ],
+      "quantity": {
+        "name": "PDCSAP flux",
+        "semantics": "Irregular sampled time series; gaps and segment identities are retained."
+      },
+      "calibration": {
+        "state": "archive-calibrated",
+        "basis": [
+          "TESS SPOC PDCSAP; QUALITY=0 samples selected by existing owner."
+        ]
+      },
+      "uncertainty": {
+        "form": "standard-deviation",
+        "basis": "Supplied per-sample uncertainty.",
+        "columnId": "uncertainty"
+      },
+      "flags": [],
+      "time": {
+        "scale": "BJD_TDB-2457000",
+        "format": "numeric d"
+      },
+      "dependencyIds": []
+    }
+  ],
+  "dependencies": [],
+  "issues": []
+}

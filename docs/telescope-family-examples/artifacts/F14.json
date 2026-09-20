@@ -1,0 +1,29 @@
+{
+  "nside": 512,
+  "ordering": "NESTED",
+  "frame": "C",
+  "quantity": "coinc_event:coinc_event_id:12157",
+  "unit": "pix-1",
+  "semantics": "probability-mass",
+  "pixelAreaSteradians": 0.000003994741635118857,
+  "pixels": 3145728,
+  "astropy": "8.0.1",
+  "astropyHealpix": "1.1.3",
+  "selection": {
+    "pixels": [
+      0,
+      1,
+      3145727
+    ],
+    "components": [
+      "PROB"
+    ]
+  },
+  "values": {
+    "PROB": [
+      1.9026538396872816e-30,
+      1.9026538396872816e-30,
+      8.530134931739042e-10
+    ]
+  }
+}

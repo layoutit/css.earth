@@ -2,6 +2,7 @@ import { flagValue } from '../../cli-arguments.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import { bandOfFilters } from '../jwst/imaging/archive.mts';
 import { queryCapabilities, type CapabilityRequest } from './query.mts';
+import type { DiscoveryRequest } from './vo/discovery.mts';
 
 export interface QualificationObservation {
   readonly id: string;
@@ -23,7 +24,7 @@ export interface QualificationObservation {
 }
 
 export type QualificationConfiguration =
-  | { readonly kind: 'archive-acquisition'; readonly key: string; readonly request: import('./query.mts').CapabilityRequest }
+  | { readonly kind: 'archive-acquisition'; readonly key: string; readonly request: DiscoveryRequest }
   | { readonly kind: 'source-product'; readonly id: string }
   | { readonly kind: 'spitzer-irac-channel'; readonly channel: number }
   | { readonly kind: 'jwst-band'; readonly band: string; readonly wavelengthMicrometres: readonly [number, number] }
@@ -43,7 +44,7 @@ export interface QualificationAction {
 interface QualificationRoute {
   readonly telescope: string;
   readonly mode: string;
-  readonly actions: (context: { readonly target: string; readonly wavelengthMicrometres: readonly [number, number];
+  readonly actions: (context: { readonly target: string; readonly wavelengthMicrometres?: readonly [number, number];
     readonly time: { readonly any: true } | { readonly fromIso: string; readonly toIso: string } | undefined;
     readonly observations: readonly QualificationObservation[] }) => QualificationAction[];
   readonly accepts: (configuration: QualificationConfiguration) => boolean;
@@ -94,6 +95,7 @@ const ROUTES: readonly QualificationRoute[] = [
   {
     telescope: 'Spitzer', mode: 'IRAC Map',
     actions: ({ target, wavelengthMicrometres, time, observations }) => {
+      if (!wavelengthMicrometres) return [];
       const channels = IRAC_CHANNELS.filter(entry => covers(entry.wavelengthMicrometres, wavelengthMicrometres));
       if (channels.length !== 1) return [];
       const channel = channels[0]!.channel;
@@ -109,12 +111,12 @@ const ROUTES: readonly QualificationRoute[] = [
   },
   {
     telescope: 'JWST', mode: 'NIRSPEC/IFU',
-    actions: ({ target, wavelengthMicrometres, time, observations }) => observations.filter(observation => overlapsTime(observation, time) && observation.filter).flatMap(observation => {
+    actions: ({ target, wavelengthMicrometres, time, observations }) => wavelengthMicrometres ? observations.filter(observation => overlapsTime(observation, time) && observation.filter).flatMap(observation => {
       const band = bandOfFilters('NIRSPEC', observation.filter!, observation.id), coverage = JWST_CUBE_COVERAGE[band.id];
       return coverage && covers(coverage, wavelengthMicrometres)
         ? [makeAction(target, 'JWST', 'NIRSPEC/IFU', observation, { kind: 'jwst-band', band: band.id, wavelengthMicrometres },
           ['--band', band.id, '--wavelength', wavelengthMicrometres.join(',')])] : [];
-    }),
+    }) : [],
     accepts: configuration => configuration.kind === 'jwst-band' && configuration.band.startsWith('NIRSPEC-')
       && JWST_CUBE_COVERAGE[configuration.band] !== undefined
       && covers(JWST_CUBE_COVERAGE[configuration.band]!, configuration.wavelengthMicrometres),
@@ -151,6 +153,34 @@ export function qualificationActionsFor(telescope: string, mode: string, target:
     && observation.observatory && observation.instrument && productCovers(observation, wavelengthMicrometres)).map(observation => makeAction(target, telescope, mode, observation,
       { kind: 'pds-product', targetLid: observation.targetLid!, targetName: observation.archiveTarget!, lidvid: observation.productLidvid! },
       ['--pds-target-lid', observation.targetLid!, '--pds-target-name', observation.archiveTarget!, '--pds-lidvid', observation.productLidvid!]))];
+}
+
+export interface ExplorationQualificationAvailability {
+  readonly available: boolean;
+  readonly configuration?: QualificationConfiguration;
+  readonly missingParameters: readonly ('wavelength')[];
+  readonly reason: string;
+}
+
+/** Describe the exact existing route without manufacturing a wavelength merely to make it selectable. */
+export function explorationQualificationFor(telescope: string, mode: string, target: string, observation: QualificationObservation,
+  request: Pick<DiscoveryRequest, 'wavelengthMicrometres' | 'time'>): ExplorationQualificationAvailability {
+  if (observation.sourceProductId) return { available: true, configuration: { kind: 'source-product', id: observation.sourceProductId }, missingParameters: [], reason: 'Package-owned source product can be qualified through its pinned source closure.' };
+  const route = routeFor(telescope, mode);
+  const needsWavelength = telescope === 'Spitzer' && mode === 'IRAC Map' || telescope === 'JWST' && mode === 'NIRSPEC/IFU';
+  if (needsWavelength && !request.wavelengthMicrometres) return { available: false, missingParameters: ['wavelength'], reason: 'This reduction route needs an explicit wavelength interval to select its channel or band.' };
+  if (route) {
+    const action = route.actions({ target, wavelengthMicrometres: request.wavelengthMicrometres, time: request.time, observations: [observation] })[0];
+    return action ? { available: true, configuration: action.configuration, missingParameters: [], reason: 'The existing telescope-specific qualification route accepts this observation and the supplied filters.' }
+      : { available: false, missingParameters: [], reason: 'The existing telescope-specific route cannot qualify this observation with the supplied filters.' };
+  }
+  if (observation.kind === 'image' && observation.targetLid && observation.archiveTarget && observation.productLidvid && observation.observatory && observation.instrument) {
+    if (!request.wavelengthMicrometres) return { available: false, missingParameters: ['wavelength'], reason: 'This PDS route needs an explicit wavelength interval to bind a supported product.' };
+    if (productCovers(observation, request.wavelengthMicrometres)) return { available: true,
+      configuration: { kind: 'pds-product', targetLid: observation.targetLid, targetName: observation.archiveTarget, lidvid: observation.productLidvid },
+      missingParameters: [], reason: 'The existing PDS product route accepts this exact archive identity.' };
+  }
+  return { available: false, missingParameters: [], reason: `No qualification route handles ${telescope} ${mode} for this observation.` };
 }
 
 export function supportsQualificationRoute(telescope: string, mode: string, configuration: QualificationConfiguration): boolean {

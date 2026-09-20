@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-pyuvdata-uvfits@1",
+  "pyuvdata": "3.2.4",
+  "inspection": {
+    "telescope": "EVLA",
+    "target": "J1008+0730",
+    "rows": 1360,
+    "channels": 64,
+    "polarizations": [
+      -1,
+      -2,
+      -3,
+      -4
+    ],
+    "samples": 348160,
+    "frequencyHz": {
+      "first": 36304541952.42,
+      "increment": 125000
+    }
+  },
+  "notices": [
+    "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+    "Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+    "The uvw_array does not match the expected values given the antenna positions. The largest discrepancy is 144.9667668246097 meters. This is a fairly common situation but might indicate an error in the antenna positions, the uvws or the phasing."
+  ],
+  "rows": [
+    {
+      "row": 0,
+      "timeJulianDate": 2455312.64023149,
+      "antenna1": 4,
+      "antenna2": 8,
+      "uvwMeters": [
+        -6.622179231849788,
+        37.997878950300304,
+        -10.568732255604608
+      ],
+      "frequencyHz": 36304541952.42,
+      "polarization": -1,
+      "real": 0.0012469778303056955,
+      "imaginary": 0.0029093418270349503,
+      "weight": 0.15625,
+      "flagged": false
+    },
+    {
+      "row": 0,
+      "timeJulianDate": 2455312.64023149,
+      "antenna1": 4,
+      "antenna2": 8,
+      "uvwMeters": [
+        -6.622179231849788,
+        37.997878950300304,
+        -10.568732255604608
+      ],
+      "frequencyHz": 36304666952.42,
+      "polarization": -1,
+      "real": -0.0039036255329847336,
+      "imaginary": -0.0022881380282342434,
+      "weight": 0.15625,
+      "flagged": false
+    }
+  ]
+}

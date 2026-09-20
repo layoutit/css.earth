@@ -43,7 +43,7 @@ test('saved VO choice acquires, qualifies, exports through existing owners, and 
     const directory = resolve(root, 'delivery'), saved = await saveSession(root, args, directory, api);
     assert.equal(saved.choices.length, 1); assert.equal(saved.choices[0]!.state, 'qualify');
     const result = await getSession(root, directory, 1, () => {}, api), data = await delivery(result.resultPath);
-    assert.equal(data.record.schema, 'cssearth-telescope-delivery@1'); assert.equal(data.record.observation, observation.key);
+    assert.equal(data.record.schema, 'cssearth-telescope-delivery@2'); assert.equal(data.context.kind, 'scientific-request'); assert.equal(data.record.observation, observation.key);
     assert.equal(data.producing.evidence[0]!.kind, 'archive-retrieval-origin');
     assert.ok(data.files.some(f => f.path.endsWith('/acquisition.json'))); assert.ok(data.files.some(f => f.path.endsWith('.xml')));
     assert.ok(data.files.some(f => f.path.endsWith('/archive.zip'))); assert.ok(data.files.some(f => f.path.endsWith('/members/labels/product.lbl')));
@@ -58,6 +58,8 @@ test('saved VO choice acquires, qualifies, exports through existing owners, and 
     const replay = await getSession(root, directory, 1, () => {}, api, { offline: true });
     assert.equal(replay.replay, 'pinned-local-artifact');
     await assert.rejects(getSession(root, directory, 1, () => {}, api), /no longer available/u);
+    await appendFile(resolve(root, 'output/telescopes/vo/acquired', plan.products[0]!.key, 'science.fits'), 'changed');
+    await assert.rejects(qualifyVoProduct(root, plan.products[0]!), /stale|changed/u);
     const metadata = data.files.find(f => f.path.endsWith('.xml'))!;
     await appendFile(resolve(data.directory, metadata.path), '\nchanged');
     await assert.rejects(delivery(result.resultPath), /pin mismatch/u);

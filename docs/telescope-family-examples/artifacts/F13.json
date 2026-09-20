@@ -1,0 +1,35 @@
+{
+  "operation": "stokes-spectrum",
+  "component": "Q",
+  "shape": [
+    3
+  ],
+  "axes": [
+    {
+      "id": "axis-2",
+      "fitsAxis": 3,
+      "length": 3,
+      "role": "spectral",
+      "ctype": "FREQ",
+      "unit": null
+    }
+  ],
+  "selection": {
+    "axis-0": 0,
+    "axis-2": 0,
+    "axis-4": 0,
+    "axis-3": 0,
+    "axis-1": 1
+  },
+  "values": [
+    -3,
+    0,
+    0
+  ],
+  "conventions": {
+    "basis": "FITS STOKES WCS codes",
+    "sign": "as declared by archive FITS/WCS",
+    "frame": "ICRS"
+  },
+  "astropy": "8.0.1"
+}
