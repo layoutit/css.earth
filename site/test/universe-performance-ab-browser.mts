@@ -128,7 +128,7 @@ async function screenshot(page: Page, name: string) {
 function compare(leftBytes: Buffer, rightBytes: Buffer) {
   const left = PNG.sync.read(leftBytes), right = PNG.sync.read(rightBytes);
   assert.equal(left.width, right.width); assert.equal(left.height, right.height);
-  return pixelmatch(left.data, right.data, null, left.width, left.height, { threshold: 0 });
+  return pixelmatch(left.data, right.data, undefined, left.width, left.height, { threshold: 0 });
 }
 
 function withoutPng<T extends { cold: { png: Buffer }; navigation: { png: Buffer } }>(run: T) {

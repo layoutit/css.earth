@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { inspectPdsProduct, mergePdsDiscovery, pdsTargetNameCandidates } from './discover.mts';
+import { requireRecord, requireString } from '../../source-values.mts';
 
 test('PDS target-name candidates normalize a PDS3 designation without storing a target LID', () => {
   assert.deepEqual(pdsTargetNameCandidates(['Wild 2', '81P/WILD 2 (1978 A2)']), ['Wild 2', '81P/WILD 2 (1978 A2)', '81P/WILD 2', '81P/Wild 2']);
@@ -64,10 +65,16 @@ test('a table from an arbitrary instrument is normalized from label structure wi
 
 test('writing a target search preserves searches for other targets and replaces a stale search for the same target', () => {
   const search = (id: string, searchedAt: string) => ({ schema: 'cssearth-pds-discovery@1' as const, searchedAt,
-    package: { name: 'pds.peppi', version: '1' }, target: { id, lid: `urn:${id}`, name: id },
-    scope: { productClass: 'Product_Observational', processingLevels: 'all', complete: true }, registryProducts: 0,
+    package: { name: 'pds.peppi' as const, version: '1' }, target: { id, lid: `urn:${id}`, name: id },
+    scope: { productClass: 'Product_Observational' as const, processingLevels: 'all' as const, complete: true as const }, registryProducts: 0,
     admittedProducts: 0, rejectedProducts: 0, rejected: [], observations: [] });
   const charon = search('charon', '2026-01-01T00:00:00Z'), staleHydra = search('hydra', '2026-01-01T00:00:00Z'), hydra = search('hydra', '2026-01-02T00:00:00Z');
   const merged = mergePdsDiscovery({ schema: 'cssearth-pds-discovery@2', searches: [charon, staleHydra] }, hydra);
-  assert.deepEqual(merged.searches.map(entry => [entry.target.id, entry.searchedAt]), [['charon', charon.searchedAt], ['hydra', hydra.searchedAt]]);
+  // The store keeps searches it did not author, so each merged entry crosses the boundary untyped.
+  const summary = merged.searches.map(entry => {
+    const search = requireRecord(entry, 'PDS discovery search');
+    return [requireString(requireRecord(search.target, 'PDS discovery target').id, 'PDS target id'),
+      requireString(search.searchedAt, 'PDS search time')];
+  });
+  assert.deepEqual(summary, [['charon', charon.searchedAt], ['hydra', hydra.searchedAt]]);
 });
