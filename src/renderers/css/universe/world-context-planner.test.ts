@@ -173,6 +173,18 @@ test('orbit settings do not change admitted names or label placement', () => {
   expect(labels()).toEqual(before);
 });
 
+test('hidden planetary annotations remove labels and circles but leave eligible orbit paths visible', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const points = [plan.focus, ...plan.bodies];
+  const planets = new Set(['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']);
+  input.world.pose.positionM = [0, 0, 40 * 149597870700];
+  input.bodies.forEach((body, index) => { body.labelHidden = planets.has(points[index]!.id); });
+  const bodies = calculate(input).projectedBodies;
+  const outer = bodies.filter(body => ['jupiter', 'saturn', 'uranus', 'neptune'].includes(points[body.index]!.id));
+  expect(outer.every(body => !body.labelShown && !body.indicatorShown)).toBe(true);
+  expect(outer.every(body => body.orbitVisibility > 0 && body.segments.length > 0)).toBe(true);
+});
+
 test('highlighted moons remain identifiable when their orbits are too small to draw', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   const bodies = [plan.focus, ...plan.bodies];

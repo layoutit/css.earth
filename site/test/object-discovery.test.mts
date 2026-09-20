@@ -81,11 +81,11 @@ test('partial photographic coverage still counts; source and lens counts do not'
   assert.throws(() => parseObjectDiscovery({ featured: true, imagery: false, illustration: true }));
 });
 
-test('default discovery admits every non-illustrative asteroid and hides illustrations across classifications', () => {
+test('default discovery admits every non-illustrative asteroid without publishing planetary annotations', () => {
   const initial = discoveryVisibility(SCENE_OBJECTS, defaults);
   for (const id of ['itokawa', 'ryugu', 'bennu', 'vesta', 'eros', 'arrokoth', 'comet-67p']) {
     assert.equal(initial.hiddenBodies.includes(id), false, id);
-    assert.equal(initial.hiddenLabels.includes(id), false, id);
+    assert.equal(initial.hiddenLabels.includes(id), true, id);
     assert.equal(requireSceneObject(id).discovery.imagery, true, id);
   }
   for (const id of ['pallas', 'psyche', 'squannit', 'kleopatra', 'asteroid-2001-sn263']) {
@@ -154,11 +154,14 @@ test('category browsing cannot bypass Illustration models', () => {
   assert.equal(explicit.hiddenBodies.includes('comet-c1995-o1'), true);
 });
 
-test('planetary labels are off by default and can be revealed together or by category highlight', () => {
+test('planetary-scene labels are off by default and can be revealed together or by category highlight', () => {
   const initial = discoveryVisibility(SCENE_OBJECTS, defaults);
-  for (const id of ['earth', 'ceres', 'pluto', 'wasp-43b']) assert.equal(initial.hiddenLabels.includes(id), true, id);
+  assert.equal(initial.hiddenLabels.includes('sun'), false, 'the system-star anchor stays labelled');
+  for (const id of ['earth', 'moon', 'ceres', 'itokawa', 'comet-67p', 'pluto', 'wasp-43b'])
+    assert.equal(initial.hiddenLabels.includes(id), true, id);
   const enabled = discoveryVisibility(SCENE_OBJECTS, { ...defaults, planetaryLabels: true });
-  for (const id of ['earth', 'ceres', 'pluto', 'wasp-43b']) assert.equal(enabled.hiddenLabels.includes(id), false, id);
+  for (const id of ['earth', 'moon', 'ceres', 'itokawa', 'comet-67p', 'pluto', 'wasp-43b'])
+    assert.equal(enabled.hiddenLabels.includes(id), false, id);
   const highlighted = discoveryVisibility(SCENE_OBJECTS, { ...defaults, highlighted: 'planet' });
   for (const id of ['earth', 'ceres', 'pluto']) assert.equal(highlighted.hiddenLabels.includes(id), false, id);
 });

@@ -363,8 +363,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         // or out of context here, and the body is not one this camera names at all.
         projected.nameable = !(entry.labelSuppressed || !annotationVisible || size.width === 0 ||
             alpha <= (entry.labelShown ? .5 : .5 + ANNOTATION_ENTRY_MARGIN) ||
-            (!targeted && (entry.labelHidden || !resolvedDisc && (!inContext || unrelatedMinor))));
-        if (!projected.nameable) continue;
+            (!targeted && !resolvedDisc && (!inContext || unrelatedMinor)));
+        // A presentation setting may hide the caption without hiding the body's
+        // otherwise eligible orbit. Selection/hover can still reveal the label.
+        if (!projected.nameable || (!targeted && entry.labelHidden)) continue;
         const gap = Math.max(5, diameter / 2, circle ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
           [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];

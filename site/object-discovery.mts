@@ -36,7 +36,9 @@ export function discoveryVisibility(objects: readonly { id: string; classificati
   for (const object of objects) {
     const illustration = object.discovery.illustration;
     const featured = object.discovery.featured || isDiscoveryAnchor(object);
-    const planetary = ['planet', 'dwarf-planet', 'exoplanet'].includes(object.classification);
+    // This setting owns annotations throughout planetary scenes, not only
+    // objects whose catalogue classification happens to be "planet".
+    const planetary = object.classification !== 'star';
     // A star with only its shape stays off the map until a surface image can be cast; its page still opens from search. A star
     // that a body with imagery orbits stays on it: without the star the planet has no system. So does a star whose colour comes from
     // its own measurements.
