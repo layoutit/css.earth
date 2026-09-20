@@ -44,7 +44,7 @@ export const explorationCompilerClosure = [
   'tools/objects/provenance.mts', 'tools/objects/provenance-records.mts', 'tools/objects/provenance-recipes.mts', 'tools/prepare-provenance.mts',
 ] as const;
 
-interface Options { root?: string; publish?: boolean; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport;
+interface Options { root?: string; publish?: boolean | 'catalogues'; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport;
   /** Opt-in (default null/off) content-addressed mirror for volume previews; a production caller names
    * RUNTIME_ASSET_ORIGIN explicitly. Left off by default so a test never makes a surprise real request. */
   mirrorOrigin?: string | null; }
@@ -166,14 +166,18 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   const prepared = parsePreparedExploration(payload,sources);
   const output = { path: resolve(root, 'site/prepared-facilities.json'), text: JSON.stringify(payload, null, 2) + '\n' };
   const sourcesOutput = {path:resolve(root,'site/prepared-sources.json'),text:JSON.stringify(sourcePayload,null,2)+'\n'};
-  const outputs = [...volumes.flatMap(volume => volume.outputs),sourcesOutput,output];
-  if (publish) await writePreparedSet(outputs);
-  return { prepared, preparedSources, output, outputs, factsheets };
+  const catalogueOutputs = [sourcesOutput,output];
+  const outputs = [...volumes.flatMap(volume => volume.outputs),...catalogueOutputs];
+  if (publish) await writePreparedSet(publish === 'catalogues' ? catalogueOutputs : outputs);
+  return { prepared, preparedSources, output, outputs, catalogueOutputs, factsheets };
 
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const args = process.argv.slice(2);
+  if (args.some(arg => arg !== '--catalog-only')) throw new TypeError('Usage: node tools/prepare-facilities.mts [--catalog-only]');
   // The real CLI entry point: opts into the mirror explicitly (library code above defaults it off).
-  const { prepared, factsheets } = await prepareFacilities({ mirrorOrigin: RUNTIME_ASSET_ORIGIN });
+  const { prepared, factsheets } = await prepareFacilities({ mirrorOrigin: RUNTIME_ASSET_ORIGIN,
+    publish: args.includes('--catalog-only') ? 'catalogues' : true });
   console.log(`Prepared ${prepared.catalog.missions.length} missions, ${prepared.catalog.facilities.length} facilities and ${prepared.graph.datasets.length} dataset destinations.`);
   console.log(`Factsheets: ${factsheets.facts} facts, each with its own citation.`);
 }

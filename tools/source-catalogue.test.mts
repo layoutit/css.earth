@@ -178,6 +178,7 @@ test('both catalogues prepare deterministically from the same input closure befo
   assert.ok(facts.some(edge => edge.objectId === 'abundantia' && edge.citationUrl?.includes('/4625')));
   assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/objects/earth/source/editorial/factsheet-review.json'));
   assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/objects/abundantia/source/reference/damit-model.json'));
+  assert.deepEqual(result.catalogueOutputs, result.outputs.slice(-2), 'catalog-only publication excludes prepared volume and R2 outputs');
   assert.deepEqual(sourceDatasetViews(prepared.usage, 'damit-models'), [], 'factsheet metadata is not a shape or imagery contribution');
   for (const output of result.outputs) assert.deepEqual(typeof output.text === 'string' ? Buffer.from(output.text) : output.text,await readFile(output.path),output.path);
   assert.equal(result.prepared.sourceCatalogSha256,result.preparedSources.catalogSha256);
