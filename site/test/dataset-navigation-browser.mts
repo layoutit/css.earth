@@ -128,15 +128,25 @@ try {
 
   await visit('/mercury/?dataset=enhanced', 'mercury', 'enhanced');
   assert.equal(await active().locator('[data-mission="messenger"]').count(), 1);
+  assert.deepEqual(await active().locator('[data-dataset-source]').evaluateAll(links => links.map(link => ({
+    id: link.getAttribute('data-dataset-source'), title: link.textContent?.trim(), href: link.getAttribute('href'),
+  }))), [
+    { id: 'source-mercury-usgs-messenger-enhanced-global-z3', title: 'MESSENGER MDIS enhanced-color mosaic', href: 'https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m' },
+    { id: 'source-mercury-usgs-messenger-bdr-global-z3', title: 'MESSENGER MDIS monochrome mosaic', href: 'https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products' },
+    { id: 'source-mercury-usgs-messenger-topography-z3', title: 'MESSENGER global shaded relief', href: 'https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km' },
+  ]);
   assert.match(await sources.getAttribute('href') ?? '', /\/src\/objects\/mercury\/README\.md$/u);
   await sources.focus();
   assert.equal(await sources.evaluate(node => getComputedStyle(node).textDecorationLine), 'underline');
   await page.locator('button[name="dataset"][value="interior"]').click();
   await ready('mercury', 'interior');
   assert.equal(await active().locator('[data-mission]').count(), 0);
+  assert.deepEqual(await active().locator('[data-dataset-source]').evaluateAll(links => links.map(link => link.getAttribute('data-dataset-source'))), [
+    'nasa-mercury-facts', 'source-mercury-usgs-messenger-bdr-global-z3',
+  ]);
   assert.equal(await sources.isVisible(), true);
   assert.match(await sources.getAttribute('href') ?? '', /\/src\/objects\/mercury\/README\.md$/u);
-  cases.push({ name: 'the body source document covers all datasets and unlinked missions stay hidden' });
+  cases.push({ name: 'canonical dataset sources update with the selected lens and unlinked missions stay hidden' });
 
   await visit('/mars/?dataset=elevation', 'mars', 'elevation');
   await page.setViewportSize({ width: 390, height: 844 });

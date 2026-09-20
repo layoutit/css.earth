@@ -1,8 +1,11 @@
 import type { ContributionGraph } from '../src/platform/exploration-contributions.mts';
 import type { ExplorationCatalog } from '../src/platform/exploration-catalog.mts';
+import type { SourceUsage } from '../src/platform/source-usage.mts';
+import { sourceCitationUrl, type SourceResolver } from '../src/platform/source-catalog.mts';
 
-/** The missions, facilities and unresolved credits a dataset card shows beside its summary. */
-export function datasetContributors(objectId: string, lensId: string, graph: ContributionGraph, catalog: ExplorationCatalog) {
+/** The missions, facilities, sources and unresolved credits a dataset card shows beside its summary. */
+export function datasetContributors(objectId: string, lensId: string, graph: ContributionGraph, catalog: ExplorationCatalog,
+  usage: SourceUsage, sources: SourceResolver) {
   const edges = (graph.byObject[objectId] ?? []).map(index => graph.edges[index])
     .filter(edge => edge.lensIds.includes(lensId));
   const missionIds = new Set(edges.flatMap(({ attribution }) =>
@@ -17,5 +20,11 @@ export function datasetContributors(objectId: string, lensId: string, graph: Con
     missions: catalog.missions.filter(mission => missionIds.has(mission.id)),
     facilities: catalog.facilities.filter(vehicle => facilityIds.has(vehicle.id)),
     notes,
+    sources: [...new Set((usage.byObject[objectId] ?? []).map(index => usage.edges[index])
+      .filter(use => use.consumerKind === 'object-product' && use.lensIds.includes(lensId))
+      .map(use => use.catalogueId))].map(id => {
+        const source = sources[id];
+        return { id, title: source.title, href: sourceCitationUrl(source) };
+      }),
   };
 }

@@ -599,6 +599,34 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
    outranking the shared tab-panel text scale. */
 .planet-card-tabpanel .planet-facility .planet-lens-details-title { font: var(--shell-font-panel-heading); }
 
+.planet-resources-links {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  font: var(--shell-font-content);
+}
+
+.planet-resource-row {
+  display: grid;
+  min-width: 0;
+  color: var(--shell-text-secondary);
+}
+
+.planet-resource-label {
+  color: inherit;
+  font: inherit;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.planet-resource-label:is(:hover, :focus-visible) { color: var(--shell-text); }
+.planet-resource-label:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 3px; }
+
 .planet-introduction {
   width: 100%;
   margin: 7px 0 0;
