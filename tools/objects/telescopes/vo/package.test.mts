@@ -54,11 +54,20 @@ for (const kind of ['zip', 'tar'] as const) test(`${kind} package stages its FIT
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-for (const mode of ['two', 'missing-label', 'missing-fmt', 'large', 'traversal', 'duplicate'] as const) test(`unsafe or ambiguous ${mode} package leaves staging empty`, async () => {
+for (const mode of ['missing-label', 'missing-fmt', 'large', 'traversal', 'duplicate'] as const) test(`unsafe ${mode} package leaves staging empty`, async () => {
   const { root, staging } = await workspace();
   try {
     await assert.rejects(extractVoPackage(archive(root, 'zip', mode), staging, { expandedBytes: mode === 'large' ? 4000 : 100_000, members: 10 }));
     assert.deepEqual(await readdir(staging), []);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a compound package retains multiple FITS members without choosing one', async () => {
+  const { root, staging } = await workspace();
+  try {
+    const result = await extractVoPackage(archive(root, 'zip', 'two'), staging, { expandedBytes: 100_000, members: 10 });
+    assert.equal(result.science, null); assert.deepEqual(result.fitsMembers, ['other.fit', 'science.fits']);
+    assert.equal((await readFile(resolve(staging, 'members', 'other.fit'))).subarray(0, 6).toString(), 'SIMPLE');
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

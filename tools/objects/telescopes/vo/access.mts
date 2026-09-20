@@ -5,24 +5,26 @@ import { randomUUID } from 'node:crypto';
 import { pinFile, readProductRecord, sameRun, writeProductRecord, type ProductRun } from '../../product-record.mts';
 import { astroquery } from '../../astronomy-packages/client.mts';
 import { requireRecord } from '../../../source-values.mts';
-import type { CapabilityRequest } from '../query.mts';
 import { extractVoPackage } from './package.mts';
-import { inputWavelengths } from '../recipe-request.mts';
+import { inspectVoFits, type VoContentProfile } from './content.mts';
 import { acquisitionKey, canonical, digest, jsonValue, parseLimits, productKey, type DiscoverySnapshot, type Json, type MetadataResponse, type Pin, type Resource, type TransferLimits } from './contracts.mts';
-import type { DiscoveredObservation } from './discovery.mts';
+import type { DiscoveredObservation, DiscoveryRequest } from './discovery.mts';
 
 export interface AcquisitionSpec {
   readonly schema: 'cssearth-vo-acquisition@1'; readonly key: string; readonly productKey: string;
-  readonly observation: DiscoveredObservation; readonly request: CapabilityRequest;
+  readonly observation: DiscoveredObservation; readonly request: DiscoveryRequest;
   readonly operation: { readonly kind: 'direct' | 'soda-sync'; readonly url: string; readonly parameters: Readonly<Record<string, Json>> };
   readonly descriptor: Resource | null; readonly metadata: readonly Pin[];
   readonly serviceRow: number | null; readonly serviceMetadata: string | null;
-  readonly format: 'fits' | 'zip' | 'tar'; readonly decoder: 'fits-image'; readonly kind: 'image' | 'cube'; readonly limits: TransferLimits;
+  readonly format: 'fits' | 'zip' | 'tar'; readonly decoder: 'fits-raster' | 'family-pending';
+  readonly kind: 'image' | 'cube' | 'spectrum' | 'table' | 'photometry' | 'events' | 'strips'; readonly limits: TransferLimits;
   readonly implementation: string;
 }
 export interface AccessPlan { readonly products: readonly AcquisitionSpec[]; readonly issues: readonly string[] }
+const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'table', 'photometry', 'events', 'strips'] as const;
+function supportedKind(value: string | null): value is AcquisitionSpec['kind'] { return value !== null && (PRODUCT_KINDS as readonly string[]).includes(value); }
 async function implementation(): Promise<string> {
-  return digest(await Promise.all(['./access.mts', './package.mts', './contracts.mts', './discovery.mts', '../../astronomy-packages/client.mts', '../../astronomy-packages/requirements.lock']
+  return digest(await Promise.all(['./access.mts', './content.mts', './package.mts', './contracts.mts', './discovery.mts', '../../astronomy-packages/client.mts', '../../astronomy-packages/requirements.lock']
     .map(path => readFile(new URL(path, import.meta.url), 'utf8'))));
 }
 export function mediaType(value: string | null): { type: string; parameters: Readonly<Record<string, string>> } | null {
@@ -45,7 +47,7 @@ const SODA_SYNC = 'ivo://ivoa.net/std/SODA#sync-1.0';
 const DATALINK_LINKS = 'ivo://ivoa.net/std/DataLink#links-1.0';
 
 /** Validate advertised parameter meaning before giving its values to PyVO. */
-export function sodaParameters(descriptor: Resource, request: CapabilityRequest, fixed: Readonly<Record<string, Json>>): Readonly<Record<string, Json>> {
+export function sodaParameters(descriptor: Resource, request: DiscoveryRequest, fixed: Readonly<Record<string, Json>>): Readonly<Record<string, Json>> {
   if (standardId(descriptor) !== SODA_SYNC) throw new TypeError('No advertised synchronous SODA operation.');
   const inputs = descriptor.groups.filter(g => g.name === 'inputParams');
   if (inputs.length !== 1) throw new TypeError('SODA input parameter declarations are missing or ambiguous.');
@@ -63,7 +65,11 @@ export function sodaParameters(descriptor: Resource, request: CapabilityRequest,
     if (request.spectralFrame !== 'barycentric') throw new TypeError('SODA BAND requires a barycentric spectral frame.');
     const p = parameters.find(p => p.name === 'BAND');
     if (!p || p.datatype !== 'double' || p.arraysize !== '2' || p.unit !== 'm' || p.ucd !== 'em.wl;stat.interval' || p.xtype !== 'interval') throw new TypeError('SODA does not advertise a supported BAND interval.');
-    result.BAND = inputWavelengths(request).map(n => n * 1e-6);
+    if (!request.wavelengthMicrometres) throw new TypeError('SODA BAND requires an explicit wavelength interval.');
+    const interval = request.continuumMicrometres
+      ? [request.continuumMicrometres[0][0], request.continuumMicrometres[1][1]] as const
+      : request.wavelengthMicrometres;
+    result.BAND = interval.map(n => n * 1e-6);
   }
   if (request.region) {
     const p = parameters.find(p => p.name === 'CIRCLE');
@@ -88,7 +94,7 @@ export function sodaParameters(descriptor: Resource, request: CapabilityRequest,
 }
 /** `parameters` are PyVO's descriptor-bound DataLink request parameters, never URL text. */
 export type MetadataLoader = (url: string, parameters?: Readonly<Record<string, Json>>) => Promise<MetadataResponse>;
-export async function planAccess(root: string, observation: DiscoveredObservation, snapshot: DiscoverySnapshot, request: CapabilityRequest,
+export async function planAccess(root: string, observation: DiscoveredObservation, snapshot: DiscoverySnapshot, request: DiscoveryRequest,
   load?: MetadataLoader): Promise<AccessPlan> {
   const limits = parseLimits(request.transferLimits), products: AcquisitionSpec[] = [], issues: string[] = [], visited = new Set<string>();
   const implementationDigest = await implementation();
@@ -98,7 +104,8 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
   await writeFile(snapshotFile, canonical(snapshot));
   const snapshotPin = { path: snapshotFile, ...await pinFile(snapshotFile) };
   if (observation.target.status !== 'confirmed') return { products, issues: ['The archive record has no confirmed target association.'] };
-  if (observation.kind !== 'image' && observation.kind !== 'cube') return { products, issues: [`No native decoder for advertised product kind ${observation.kind}.`] };
+  if (!supportedKind(observation.kind))
+    return { products, issues: [`No native profile route for advertised product kind ${observation.kind}.`] };
   const kind = observation.kind;
   const loader = load ?? (async (address: string, parameters?: Readonly<Record<string, Json>>) => (await astroquery({ operation: 'vo-links', url: address,
     ...(parameters === undefined ? {} : { parameters }), directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes })).vo!);
@@ -108,7 +115,7 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
     const product = productKey(observation.key, jsonValue({ binding, observation: observationFacts }));
     const key = acquisitionKey(product, jsonValue({ operation, request }), jsonValue(descriptor), limits, implementationDigest);
     if (!products.some(p => p.key === key)) products.push({ schema: 'cssearth-vo-acquisition@1', key, productKey: product, observation, request, operation,
-      descriptor, metadata, serviceRow, serviceMetadata, format, decoder: 'fits-image', kind, limits, implementation: implementationDigest });
+      descriptor, metadata, serviceRow, serviceMetadata, format, decoder: kind === 'image' || kind === 'cube' ? 'fits-raster' : 'family-pending', kind, limits, implementation: implementationDigest });
   }
   function direct(address: string, mime: string | null, size: Json | undefined, binding: Json, pins: readonly Pin[]) {
     if (request.region || request.spectralFrame !== undefined) { issues.push('Subset requested; whole-product access is not an alternative.'); return; }
@@ -181,7 +188,7 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec) {
   const previous = await readProductRecord(recordPath);
   if (previous) {
     if (canonical(previous.parameters) !== canonical(run.parameters) || canonical(previous.software) !== canonical(run.software) || !await sameRun(previous, previous, name => resolve(destination, name))) throw new Error('Acquired product or evidence is stale.');
-    return { file: resolve(destination, 'science.fits'), record: recordPath, reused: true, replay: 'pinned-local-artifact' as const };
+    return { file: previous.outputs.some(output => output.path === 'science.fits') ? resolve(destination, 'science.fits') : null, record: recordPath, reused: true, replay: 'pinned-local-artifact' as const };
   }
   await mkdir(dirname(destination), { recursive: true });
   const staging = `${destination}.${randomUUID()}.partial`;
@@ -205,14 +212,29 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec) {
     const unpacked = spec.format === 'fits' ? undefined : await extractVoPackage(resolve(staging, receivedName), staging, { expandedBytes: spec.limits.expandedBytes, members: spec.limits.packageMembers });
     if (unpacked) {
       if (unpacked.format !== spec.format) throw new Error('Archive format disagrees with advertised MIME.');
-      await copyFile(resolve(staging, 'members', unpacked.science), resolve(staging, 'science.fits'));
+      // A package may contain several FITS science members or a table/event product. Never select one by order.
+      if (unpacked.science !== null) await copyFile(resolve(staging, 'members', unpacked.science), resolve(staging, 'science.fits'));
       metadata.push({ path: receivedName, file: resolve(staging, receivedName) }, ...unpacked.members.map(member => ({ path: `members/${member.path}`, file: resolve(staging, 'members', member.path) })));
     }
+    const content: VoContentProfile[] = [];
+    if (unpacked) {
+      for (const member of unpacked.fitsMembers) content.push(inspectVoFits(`members/${member}`, await readFile(resolve(staging, 'members', member))));
+    } else content.push(inspectVoFits('science.fits', await readFile(resolve(staging, 'science.fits'))));
+    const legacySource = content.length === 1 && content[0]!.family === 'raster' && content[0]!.state === 'confirmed' ? content[0]!.member : null;
+    const legacy = legacySource === null ? null : 'science.fits';
+    if (legacySource === null && unpacked?.science !== null && unpacked?.science !== undefined)
+      throw new Error('Package raster candidate disagrees with validated native content.');
+    if (legacySource !== null && unpacked && unpacked.science !== null && legacySource !== `members/${unpacked.science}`)
+      throw new Error('Package raster selection disagrees with validated member identity.');
     await writeFile(resolve(staging, 'origin.json'), canonical({ schema: 'cssearth-vo-origin@1', acquisition: spec.key,
       parent: spec.observation.identities, operation: spec.operation, received: { ...transferred, file: { ...transferred.file, path: receivedName } }, ...(unpacked ? { unpacked } : {}) }));
-    await writeProductRecord(resolve(staging, 'acquisition.json'), run, [{ path: 'science.fits', file: resolve(staging, 'science.fits') },
+    await writeFile(resolve(staging, 'content.json'), canonical({ schema: 'cssearth-vo-content@2', format: spec.format,
+      archiveProposal: { kind: spec.kind, decoder: spec.decoder }, members: content,
+      legacyRasterMember: legacy, qualification: legacy === 'science.fits' ? 'raster candidate requires content qualification.' : 'non-qualifiable through the legacy raster route; select a family-specific qualified operation using the stable member identity above.' }));
+    await writeProductRecord(resolve(staging, 'acquisition.json'), run, [...(legacy === 'science.fits' ? [{ path: 'science.fits', file: resolve(staging, 'science.fits') }] : []),
+      { path: 'content.json', file: resolve(staging, 'content.json') },
       { path: 'origin.json', file: resolve(staging, 'origin.json') }, ...metadata], []);
     await rename(staging, destination);
-    return { file: resolve(destination, 'science.fits'), record: recordPath, reused: false };
+    return { file: legacy === 'science.fits' ? resolve(destination, 'science.fits') : null, record: recordPath, reused: false };
   } finally { await rm(staging, { recursive: true, force: true }); }
 }

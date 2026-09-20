@@ -1,0 +1,173 @@
+{
+  "schema": "cssearth-telescope-product-descriptor@1",
+  "dataset": {
+    "id": "betelgeuse-matisse-2020-02",
+    "target": "betelgeuse",
+    "acquisition": {
+      "kind": "repository",
+      "identity": "../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits"
+    },
+    "producingRecord": "src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
+    "sourceClassifications": [
+      {
+        "term": "OIFITS",
+        "vocabulary": "OIFITS 2",
+        "version": "2",
+        "status": "source"
+      }
+    ],
+    "families": [
+      "F12"
+    ],
+    "profiles": [
+      {
+        "handlerId": "f12-oifits",
+        "profileId": "oifits-observables@1"
+      }
+    ]
+  },
+  "members": [
+    {
+      "id": "oifits",
+      "path": "../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
+      "role": "science",
+      "bytes": 135360,
+      "sha256": "e4f41d2aba17736ff1fca5e819d60eaf3d38a8e784f6fc2998d587b0c682bcbd",
+      "mediaType": "application/fits"
+    }
+  ],
+  "components": [
+    {
+      "id": "vis",
+      "name": "OI_VIS",
+      "families": [
+        "F12"
+      ],
+      "locations": [
+        {
+          "memberId": "oifits",
+          "structure": "OI_VIS"
+        }
+      ],
+      "representation": {
+        "kind": "complex-samples",
+        "rows": 0
+      },
+      "axes": [],
+      "columns": [],
+      "quantity": {
+        "name": "complex visibility",
+        "semantics": "Amplitude/phase observable with linked OI_WAVELENGTH coordinates."
+      },
+      "calibration": {
+        "state": "archive-calibrated",
+        "basis": [
+          "OIFITS observable table."
+        ]
+      },
+      "flags": [
+        {
+          "id": "flag",
+          "meaning": "OIFITS FLAG row/channel validity"
+        }
+      ],
+      "dependencyIds": [
+        "oifits-linked-tables"
+      ]
+    },
+    {
+      "id": "vis2",
+      "name": "OI_VIS2",
+      "families": [
+        "F12"
+      ],
+      "locations": [
+        {
+          "memberId": "oifits",
+          "structure": "OI_VIS2"
+        }
+      ],
+      "representation": {
+        "kind": "table",
+        "rows": 780
+      },
+      "axes": [],
+      "columns": [],
+      "quantity": {
+        "name": "squared visibility",
+        "semantics": "Calibrated V2 with linked wavelength/array tables."
+      },
+      "calibration": {
+        "state": "archive-calibrated",
+        "basis": [
+          "OIFITS observable table."
+        ]
+      },
+      "flags": [
+        {
+          "id": "flag",
+          "meaning": "OIFITS FLAG row/channel validity"
+        }
+      ],
+      "dependencyIds": [
+        "oifits-linked-tables"
+      ]
+    },
+    {
+      "id": "closure",
+      "name": "OI_T3",
+      "families": [
+        "F12"
+      ],
+      "locations": [
+        {
+          "memberId": "oifits",
+          "structure": "OI_T3"
+        }
+      ],
+      "representation": {
+        "kind": "table",
+        "rows": 520
+      },
+      "axes": [],
+      "columns": [],
+      "quantity": {
+        "name": "closure phase",
+        "semantics": "Triangle closure observable with linked wavelength/array tables."
+      },
+      "calibration": {
+        "state": "archive-calibrated",
+        "basis": [
+          "OIFITS observable table."
+        ]
+      },
+      "flags": [
+        {
+          "id": "flag",
+          "meaning": "OIFITS FLAG row/channel validity"
+        }
+      ],
+      "dependencyIds": [
+        "oifits-linked-tables"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "oifits-linked-tables",
+      "role": "OI_TARGET/OI_WAVELENGTH/OI_ARRAY linkage",
+      "memberIds": [
+        "oifits"
+      ],
+      "componentIds": [],
+      "requiredFor": [
+        "visibility-diagnostics",
+        "v2-diagnostics",
+        "closure-diagnostics",
+        "oifits-subset"
+      ],
+      "evidence": "Subset must carry every linked table row it references."
+    }
+  ],
+  "issues": []
+}

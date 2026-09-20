@@ -1,14 +1,28 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { astroquery } from '../../astronomy-packages/client.mts';
-import type { CapabilityRequest } from '../query.mts';
-import { inputWavelengths } from '../recipe-request.mts';
+import type { ProductKind } from '../query.mts';
 import { requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
 import { canonical, digest, jsonValue, parseMetadata, recordKey, type DiscoverySnapshot, type Json, type TransferLimits } from './contracts.mts';
+import { mapIvoaProductType, type ProductTypeMapping } from '../product-type.mts';
+import type { FamilyId } from '../product-descriptor.mts';
 
 export interface ServiceProfile {
   readonly authority: string; readonly service: string; readonly table: string; readonly model: DiscoverySnapshot['model'];
   readonly identityColumns: readonly string[]; readonly timeScale?: 'utc' | 'tai' | 'tt' | 'tdb'; readonly documentation: string;
+}
+/** The archive boundary needs only explicit discovery/subset inputs. Scientific acceptance
+ * criteria remain in CapabilityRequest and are never synthesized for target exploration. */
+export interface DiscoveryRequest {
+  readonly target: string;
+  readonly wavelengthMicrometres?: readonly [number, number];
+  readonly continuumMicrometres?: readonly [readonly [number, number], readonly [number, number]];
+  readonly time?: { readonly any: true } | { readonly fromIso: string; readonly toIso: string };
+  readonly kind?: ProductKind;
+  readonly family?:FamilyId;
+  readonly region?: import('./contracts.mts').IcrsCircle;
+  readonly spectralFrame?: 'barycentric';
+  readonly transferLimits?: TransferLimits;
 }
 /** A bounded service list, with no target-specific selection rules. */
 export const SERVICES: readonly ServiceProfile[] = [
@@ -33,7 +47,7 @@ export function associateTarget(rawName: Json | undefined, rawClass: Json | unde
 export interface DiscoveredObservation {
   readonly key: string; readonly snapshot: string; readonly service: string; readonly table: string;
   readonly identities: Readonly<Record<string, Json>>; readonly target: TargetAssociation; readonly rawTarget: Json;
-  readonly kind: string | null; readonly calibration: { readonly scheme: string; readonly token: Json };
+  readonly kind: string | null; readonly productType:ProductTypeMapping|null; readonly calibration: { readonly scheme: string; readonly token: Json };
   readonly wavelengthsMicrometres: readonly [number | null, number | null]; readonly startIso: string | null; readonly endIso: string | null;
   readonly spatial: { readonly frame: string | null; readonly description: Json; readonly coordinates: Readonly<Record<string, Json>> };
   readonly access: { readonly url: string | null; readonly mime: string | null; readonly estimatedKilobytes: number | null };
@@ -68,9 +82,10 @@ export function normalizeSnapshot(snapshot: DiscoverySnapshot, profile: ServiceP
     const keys = epn ? ['granule_uid', 'granule_gid', 'obs_id'] : ['obs_publisher_did', 'obs_id'];
     const uniqueIdentity = profile.identityColumns.every(k => row[k] !== undefined && row[k] !== null && row[k] !== '') && snapshot.response.rows.filter(r => profile.identityColumns.every(k => canonical(r[k] ?? null) === canonical(row[k] ?? null))).length === 1;
     if (!uniqueIdentity) issues.push('Declared row identity is absent or repeated; this record key is bound to its snapshot and row position.');
+    const kind=epn && row.dataproduct_type === 'im' ? 'image' : epn && row.dataproduct_type === 'sc' ? 'cube' : string('dataproduct_type');
     return { key: recordKey(snapshot, row, profile.identityColumns, index), snapshot: snapshot.response.raw.sha256, service: snapshot.service, table: snapshot.table,
       identities: Object.fromEntries(keys.map(k => [k, row[k] ?? null])), rawTarget: row.target_name ?? null,
-      target: associateTarget(row.target_name, row.target_class, target, catalogue), kind: epn && row.dataproduct_type === 'im' ? 'image' : epn && row.dataproduct_type === 'sc' ? 'cube' : string('dataproduct_type'),
+      target: associateTarget(row.target_name, row.target_class, target, catalogue), kind,productType:mapIvoaProductType(kind),
       calibration: { scheme: epn ? 'epn-tap:processing_level' : 'obscore:calib_level', token: row[epn ? 'processing_level' : 'calib_level'] ?? null },
       wavelengthsMicrometres: wavelengths, startIso: time(epn ? 'time_min' : 't_min'), endIso: time(epn ? 'time_max' : 't_max'),
       spatial: { frame: epn ? string('spatial_frame_type') : 'icrs', description: row[epn ? 'spatial_coordinate_description' : 's_region'] ?? null,
@@ -78,7 +93,13 @@ export function normalizeSnapshot(snapshot: DiscoverySnapshot, profile: ServiceP
       access: { url: string('access_url'), mime, estimatedKilobytes: number('access_estsize') }, issues };
   });
 }
-export function targetQuery(profile: ServiceProfile, names: readonly string[], sampleLimit = 50, request?: CapabilityRequest): string {
+const requestedWavelengths = (request: DiscoveryRequest): readonly [number, number] => {
+  if (!request.wavelengthMicrometres) throw new TypeError('A spectral subset requires an explicit wavelength interval.');
+  return request.continuumMicrometres
+    ? [request.continuumMicrometres[0][0], request.continuumMicrometres[1][1]]
+    : request.wavelengthMicrometres;
+};
+export function targetQuery(profile: ServiceProfile, names: readonly string[], sampleLimit = 50, request?: DiscoveryRequest): string {
   if (!/^[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)?$/u.test(profile.table)) throw new TypeError('Unvalidated TAP table identifier.');
   if (!Number.isSafeInteger(sampleLimit) || sampleLimit < 1 || sampleLimit > 1000 || !names.length) throw new TypeError('A bounded TAP target-name query is required.');
   const literals = [...new Set(names)].map(n => { if (!n.trim() || /[\u0000-\u001f]/u.test(n)) throw new TypeError('Invalid target name.'); return `'${n.replaceAll("'", "''")}'`; });
@@ -87,9 +108,13 @@ export function targetQuery(profile: ServiceProfile, names: readonly string[], s
     const token = profile.model === 'epn-tap-2.0' ? ({ image: 'im', cube: 'sc', spectrum: 'sp', table: 'ca', photometry: 'ts', events: 'ev', strips: 'im' } as const)[request.kind] : request.kind;
     filters.push(`(dataproduct_type IS NULL OR dataproduct_type='${token}')`);
   }
-  if (request && profile.model === 'obscore-1.1') {
-    const [lo, hi] = inputWavelengths(request);
+  if (request?.wavelengthMicrometres && profile.model === 'obscore-1.1') {
+    const [lo, hi] = requestedWavelengths(request);
     filters.push(`(em_min IS NULL OR em_min<=${hi * 1e-6})`, `(em_max IS NULL OR em_max>=${lo * 1e-6})`);
+  }
+  if (request?.time && !('any' in request.time) && profile.model === 'obscore-1.1' && profile.timeScale === 'utc') {
+    const mjd = (iso: string) => Date.parse(iso) / 86_400_000 + 40_587;
+    filters.push(`(t_min IS NULL OR t_min<=${mjd(request.time.toIso)})`, `(t_max IS NULL OR t_max>=${mjd(request.time.fromIso)})`);
   }
   return `SELECT TOP ${sampleLimit} * FROM ${profile.table} WHERE ${filters.join(' AND ')}`;
 }
@@ -104,14 +129,14 @@ export function parseSnapshot(value: unknown): DiscoverySnapshot {
     request: jsonValue(r.request), query: requireString(r.query), scope: requireString(r.scope), sampleLimit, response, completeness };
 }
 /** A failed refresh never replaces a successful immutable snapshot. */
-export async function discover(root: string, profile: ServiceProfile, request: CapabilityRequest, names: readonly string[], limits: TransferLimits): Promise<DiscoverySnapshot> {
+export async function discover(root: string, profile: ServiceProfile, request: DiscoveryRequest, names: readonly string[], limits: TransferLimits): Promise<DiscoverySnapshot> {
   const directory = resolve(root, 'output/telescopes/vo/metadata'), query = targetQuery(profile, names, 50, request), sampleLimit = 50;
   await mkdir(directory, { recursive: true });
   const response = (await astroquery({ operation: 'vo-tap', service: profile.service, query, maxrec: sampleLimit, directory, byteLimit: limits.metadataBytes,
     timeFormat: profile.model === 'obscore-1.1' ? 'mjd' : 'jd', ...(profile.timeScale ? { timeScale: profile.timeScale } : {}),
     ...(profile.model === 'epn-tap-2.0' ? { timeModel: profile.model } : {}) })).vo!;
   const snapshot = parseSnapshot({ schema: 'cssearth-vo-discovery@1', service: profile.service, table: profile.table, model: profile.model,
-    request, query, sampleLimit, scope: 'Exact target-name/alias search; bounded sample; incidental targets are not covered.', response,
+    request, query, sampleLimit, scope: `Exact target-name/alias search; bounded sample; incidental targets are not covered.${request.wavelengthMicrometres && profile.model !== 'obscore-1.1' ? ' This provider did not apply the wavelength filter.' : ''}${request.time && !('any' in request.time) && (profile.model !== 'obscore-1.1' || profile.timeScale !== 'utc') ? ' This provider did not apply the time filter.' : ''}`, response,
     completeness: response.queryStatus === 'ERROR' ? 'failed' : response.queryStatus === 'OVERFLOW' ? 'overflow' : 'bounded-sample' });
   await writeFile(resolve(directory, `${digest(snapshot)}.json`), canonical(snapshot));
   return snapshot;

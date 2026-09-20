@@ -3,7 +3,8 @@ import { access } from 'node:fs/promises';
 import { astroqueryToolchain } from '../../astronomy-packages/toolchain.mts';
 
 export type VoPackageMember = { path: string; bytes: number; sha256: string };
-export type VoPackage = { science: string; members: VoPackageMember[]; format: 'zip' | 'tar' };
+/** `science` is retained for legacy one-raster packages. `fitsMembers` is the complete non-arbitrary FITS candidate set. */
+export type VoPackage = { science: string | null; fitsMembers: readonly string[]; members: VoPackageMember[]; format: 'zip' | 'tar' };
 export type VoPackageLimits = { expandedBytes: number; members: number };
 
 const PYTHON = String.raw`
@@ -153,11 +154,10 @@ def extract(archive, destination, expanded_limit, member_limit):
                 if dependency not in logical_files:
                     fail('declared label dependency is missing: ' + dependency)
         science = [pin['path'] for pin in pins if pin['path'].lower().endswith(('.fits', '.fit', '.fts')) and fits_image(output / pin['path'])]
-        if len(science) != 1:
-            fail('package must contain exactly one FITS science image')
+        fits = [pin['path'] for pin in pins if pin['path'].lower().endswith(('.fits', '.fit', '.fts'))]
         os.rename(output, destination / 'members')
         shutil.rmtree(stage)
-        return {'science': science[0], 'members': sorted(pins, key=lambda pin: pin['path']), 'format': kind}
+        return {'science': science[0] if len(science) == 1 else None, 'fitsMembers': sorted(fits), 'members': sorted(pins, key=lambda pin: pin['path']), 'format': kind}
     except BaseException:
         shutil.rmtree(stage, ignore_errors=True)
         raise
@@ -178,7 +178,7 @@ function positiveLimit(value: number, name: string): number {
 function parsePackage(value: unknown): VoPackage {
   if (!value || typeof value !== 'object') throw new Error('Package extractor returned no result.');
   const result = value as Record<string, unknown>;
-  if (typeof result.science !== 'string' || (result.format !== 'zip' && result.format !== 'tar') || !Array.isArray(result.members))
+  if ((result.science !== null && typeof result.science !== 'string') || !Array.isArray(result.fitsMembers) || (result.format !== 'zip' && result.format !== 'tar') || !Array.isArray(result.members))
     throw new Error('Package extractor returned an invalid result.');
   const members = result.members.map((member): VoPackageMember => {
     if (!member || typeof member !== 'object') throw new Error('Package extractor returned an invalid member.');
@@ -187,8 +187,9 @@ function parsePackage(value: unknown): VoPackage {
       throw new Error('Package extractor returned an invalid member pin.');
     return { path: pin.path, bytes: pin.bytes, sha256: pin.sha256 };
   });
-  if (!members.some(member => member.path === result.science)) throw new Error('Package science member is not pinned.');
-  return { science: result.science, members, format: result.format };
+  const fitsMembers = result.fitsMembers.map(path => { if (typeof path !== 'string' || !members.some(member => member.path === path)) throw new Error('Package FITS member is not pinned.'); return path; });
+  if (result.science !== null && !members.some(member => member.path === result.science)) throw new Error('Package science member is not pinned.');
+  return { science: result.science, fitsMembers, members, format: result.format };
 }
 
 /** Safely stage one archive's complete pinned member closure into `destination/members`. */

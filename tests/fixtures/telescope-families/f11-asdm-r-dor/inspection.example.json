@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-f11-asdm-source-inspection@1",
+  "source": {"memberUid":"uid://A001/X35f5/Xaea","proposal":"2022.1.01071.S","rawUid":"uid://A002/X10a341d/Xcfac","url":"https://almascience.nrao.edu/dataPortal/2022.1.01071.S_uid___A002_X10a341d_Xcfac.asdm.sdm.tar","rawBytes":63307551744,"archiveAccess":"public archive download; no source-data redistribution license asserted"},
+  "memberPins": [
+    {"id":"ASDM.xml","path":"2022.1.01071.S/science_goal.uid___A001_X35f5_Xae2/group.uid___A001_X35f5_Xae9/member.uid___A001_X35f5_Xaea/raw/uid___A002_X10a341d_Xcfac.asdm.sdm/ASDM.xml","bytes":11729,"sha256":"48f0913ad4ef350e601e75c700a0d32838a23c2e0fca5387d13fc3af55c7bc10"},
+    {"id":"Main.xml","path":"2022.1.01071.S/science_goal.uid___A001_X35f5_Xae2/group.uid___A001_X35f5_Xae9/member.uid___A001_X35f5_Xaea/raw/uid___A002_X10a341d_Xcfac.asdm.sdm/Main.xml","bytes":341470,"sha256":"f1845dbb705df8f04573c4854fc7fc100849e01b3a292a8ea2a1035513a9c92c"}
+  ],
+  "execution": {"entityId":"uid://A002/X10a341d/Xcfac","created":"2023-07-18T17:24:38.000Z","antennas":47,"subscans":333,"totalVisibilityBytes":62962444622,"fields":[{"field":"Field_0","seconds":2628.8640000000005,"bytes":21105210157,"subscans":60},{"field":"Field_1","seconds":1741.8239999999992,"bytes":13140771603,"subscans":152},{"field":"Field_2","seconds":3076.415999999997,"bytes":24954421405,"subscans":113},{"field":"Field_3","seconds":435.4560000000001,"bytes":3762041457,"subscans":8}]},
+  "limitations": ["This is raw ASDM execution provenance, not a CASA Measurement Set and not decoded complex visibility samples. Run CASA importasdm, then admit and pin the resulting MS closure before selection/export/diagnostics."]
+}

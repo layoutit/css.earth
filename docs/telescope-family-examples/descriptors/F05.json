@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-telescope-product-descriptor@1",
+  "dataset": {
+    "id": "haumea-photometry",
+    "target": "haumea",
+    "acquisition": {
+      "kind": "repository",
+      "identity": "../../../src/objects/haumea/source/photometry/disc-color.json"
+    },
+    "producingRecord": "src/objects/haumea/source/photometry/disc-color.json",
+    "sourceClassifications": [
+      {
+        "term": "photometry",
+        "vocabulary": "cssEarth observational families",
+        "version": "1",
+        "status": "mapped"
+      }
+    ],
+    "families": [
+      "F05"
+    ],
+    "profiles": [
+      {
+        "handlerId": "f05-photometry",
+        "profileId": "discrete-photometry-table@1"
+      }
+    ]
+  },
+  "members": [
+    {
+      "id": "colours",
+      "path": "../../../src/objects/haumea/source/photometry/disc-color.json",
+      "role": "science",
+      "bytes": 2084,
+      "sha256": "9537eff943560b6d733cdf0aa7b4d675d75e45a7e1b833cd7e56619f4331debc",
+      "mediaType": "application/json"
+    }
+  ],
+  "components": [
+    {
+      "id": "photometry",
+      "name": "geometric albedo",
+      "families": [
+        "F05"
+      ],
+      "locations": [
+        {
+          "memberId": "colours"
+        }
+      ],
+      "representation": {
+        "kind": "table",
+        "rows": 1
+      },
+      "axes": [
+        {
+          "id": "bandpass",
+          "index": 0,
+          "length": 1,
+          "role": "spectral-sampling",
+          "coordinates": {
+            "kind": "lookup",
+            "memberId": "colours",
+            "locator": "effective_wavelength",
+            "binBounds": false
+          },
+          "unit": "nm"
+        }
+      ],
+      "columns": [
+        {
+          "id": "id",
+          "name": "id",
+          "role": "row-identity",
+          "datatype": "string",
+          "nullable": false,
+          "variableLength": false
+        },
+        {
+          "id": "segment",
+          "name": "segment",
+          "role": "segment",
+          "datatype": "string",
+          "nullable": true,
+          "variableLength": false
+        },
+        {
+          "id": "band",
+          "name": "band",
+          "role": "bandpass-identity",
+          "datatype": "string",
+          "nullable": false,
+          "variableLength": false
+        },
+        {
+          "id": "system",
+          "name": "system",
+          "role": "photometric-system",
+          "datatype": "string",
+          "nullable": false,
+          "variableLength": false
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "role": "measurement",
+          "datatype": "float64",
+          "nullable": false,
+          "variableLength": false,
+          "unit": "1"
+        },
+        {
+          "id": "uncertainty",
+          "name": "uncertainty",
+          "role": "standard-deviation",
+          "datatype": "float64",
+          "nullable": true,
+          "variableLength": false,
+          "unit": "1"
+        }
+      ],
+      "quantity": {
+        "name": "geometric albedo",
+        "semantics": "Discrete photometric points; bands and systems remain explicit.",
+        "unit": "1"
+      },
+      "calibration": {
+        "state": "archive-calibrated",
+        "basis": [
+          "Main text and Methods, Geometric albedo of Haumea: occultation projected area with H_V of the main body after removing the ring and satellites"
+        ]
+      },
+      "uncertainty": {
+        "form": "standard-deviation",
+        "basis": "Supplied per-point uncertainty.",
+        "columnId": "uncertainty"
+      },
+      "flags": [],
+      "dependencyIds": []
+    }
+  ],
+  "dependencies": [],
+  "issues": []
+}

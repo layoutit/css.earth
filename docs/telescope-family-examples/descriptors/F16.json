@@ -1,0 +1,88 @@
+{
+  "schema": "cssearth-telescope-product-descriptor@1",
+  "dataset": {
+    "id": "stellar-neighbourhood",
+    "target": "stellar-neighbourhood",
+    "acquisition": {
+      "kind": "repository",
+      "identity": "src/objects/stellar-neighbourhood/object.json"
+    },
+    "producingRecord": "src/objects/stellar-neighbourhood/object.json",
+    "sourceClassifications": [
+      {
+        "term": "physical point field",
+        "vocabulary": "cssearth-object@1",
+        "version": "1",
+        "status": "source"
+      }
+    ],
+    "families": [
+      "F16"
+    ],
+    "profiles": [
+      {
+        "handlerId": "f16-spatial-physical",
+        "profileId": "existing-physical-object@1"
+      }
+    ]
+  },
+  "members": [
+    {
+      "id": "object",
+      "path": "../../../src/objects/stellar-neighbourhood/object.json",
+      "role": "science",
+      "bytes": 906,
+      "sha256": "fa4dbdb551af2ecfa85dc4964218f8708bbab60401f8d452a7a5230776c376e1",
+      "mediaType": "application/json"
+    }
+  ],
+  "components": [
+    {
+      "id": "points",
+      "name": "stellar-neighbourhood points",
+      "families": [
+        "F16"
+      ],
+      "locations": [
+        {
+          "memberId": "object",
+          "path": "object.json"
+        }
+      ],
+      "representation": {
+        "kind": "physical-field",
+        "topology": "points",
+        "samples": null
+      },
+      "axes": [],
+      "columns": [],
+      "quantity": {
+        "name": "physical point samples",
+        "semantics": "Existing prepared physical object; no depth is inferred from an angular or spectral observation."
+      },
+      "calibration": {
+        "state": "model-derived",
+        "basis": [
+          "Validated by the existing points loader across 7 pinned inputs.",
+          "{\"source\":{\"schema\":\"cssearth-source-provenance@1\",\"sources\":[{\"id\":\"catalogue\",\"path\":\"stars-hyg.gxct\",\"sha256\":\"d1574537361ac78d67f32ddf30ac0122e9d52115851f1519cb91bed26dcf8e74\",\"bytes\":4818664,\"key\":\"catalogs/stars-hyg\",\"source\":\"HYG v4.4 (Hipparcos-Yale-Gliese Database, D. Nash / astronexus)\",\"license\":\"CC-BY-SA-4.0\",\"url\":\"https://codeberg.org/astronexus/hyg/raw/branch/main/data/hyg/CURRENT/LICENSE\",\"epoch\":\"ICRS/J2000 equinox; source astrometry primarily Hipparcos-2007 reduction, epoch J1991.25\",\"built\":\"2026-09-02\",\"extra\":{\"count\":109389,\"columns\":[\"posPc\",\"absMag\",\"teffK\",\"radiusSolar\",\"colorIndexBv\",\"hip\",\"name\",\"pmRaMasPerYr\",\"pmDecMasPerYr\"],\"droppedSun\":1,\"droppedNonPositiveDist\":0,\"droppedSentinelDist\":10224,\"totalSourceRows\":119614},\"credit\":\"HYG Stellar Database by David Nash / Astronexus. Prepared derivatives licensed CC-BY-SA-4.0.\",\"modifications\":\"Complete row set reordered into a spatial hierarchy; luminosity-weighted proxies and 32-color display quantization. No astrometry propagation.\"}],\"qualification\":\"Local generated assets; no network publication. HYG astrometry is a local stellar neighbourhood, not a full Milky Way stellar census.\",\"sourceBinding\":{\"kind\":\"catalogued\",\"references\":[{\"catalogueId\":\"hyg-v44\",\"role\":\"material\",\"evidence\":\"src/objects/stellar-neighbourhood/source/provenance.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/sources/0\"}]},\"catalogueDisplay\":{\"feature\":\"stars\",\"label\":\"HYG\",\"credit\":\"Star catalogue · David Nash / Astronexus · CC BY-SA 4.0.\",\"description\":\"HYG Stellar Database by David Nash / Astronexus. Prepared derivatives licensed CC-BY-SA-4.0.\",\"footerAliases\":[\"https://codeberg.org/astronexus/hyg/raw/branch/main/data/hyg/CURRENT/LICENSE\"]}},\"catalogueMetadata\":{\"source\":\"HYG v4.4 (Hipparcos-Yale-Gliese Database, D. Nash / astronexus)\",\"epoch\":\"ICRS/J2000 equinox; source astrometry primarily Hipparcos-2007 reduction, epoch J1991.25\",\"built\":\"2026-09-02\",\"sentinelDistPc\":100000,\"sentinelDistDoc\":\"dist == 100000.0 marks an unmeasurable/negative Hipparcos parallax; rows with it are dropped, not shipped.\",\"hipSentinel\":0,\"hipSentinelDoc\":\"hip == 0 means the row has no Hipparcos catalogue number.\",\"teffCalibration\":\"Ballesteros (2012) eq. 14, B-V -> Teff\",\"totalSourceRows\":119614,\"droppedSun\":1,\"droppedNonPositiveDist\":0,\"droppedSentinelDist\":10224,\"survivingRows\":109389},\"qualification\":\"All catalogue rows retained at their recorded astrometry; no proper-motion propagation to the navigation epoch. Internal nodes approximate unresolved luminosity and position; no fixed pixel-error guarantee when the point pool is saturated.\"}"
+        ]
+      },
+      "flags": [],
+      "frame": {
+        "kind": "physical",
+        "name": "sun-icrf",
+        "epoch": "JD_TT 2461286.5"
+      },
+      "dependencyIds": []
+    }
+  ],
+  "dependencies": [],
+  "issues": [
+    {
+      "scope": "component",
+      "identity": "points",
+      "state": "unknown",
+      "reason": "Portable export retains prepared resources and source recipe; raw source datasets are referenced rather than bundled. Bounds: {\"min\":[-1024,-1024,-1024],\"max\":[1024,1024,1024]}."
+    }
+  ]
+}

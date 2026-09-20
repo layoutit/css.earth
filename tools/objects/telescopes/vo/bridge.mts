@@ -7,7 +7,7 @@ import type { TargetCatalogueEntry } from '../targets.mts';
 import type { QualifiedObservation } from '../qualified-observations.mts';
 import type { QualificationAction } from '../qualification-routes.mts';
 import { jsonValue, parseLimits, type DiscoverySnapshot } from './contracts.mts';
-import { discover, normalizeSnapshot, SERVICES, type DiscoveredObservation } from './discovery.mts';
+import { discover, normalizeSnapshot, SERVICES, type DiscoveredObservation, type DiscoveryRequest } from './discovery.mts';
 import { planAccess, type AcquisitionSpec } from './access.mts';
 
 export interface VoInputs {
@@ -18,7 +18,7 @@ export interface VoProductCandidate {
   readonly acquisitionKey: string; readonly observation: DiscoveredObservation; readonly satisfaction: RequestSatisfaction;
   readonly product?: QualifiedObservation; readonly action?: QualificationAction; readonly limitations: readonly string[];
 }
-export async function loadVoInputs(root: string, request: CapabilityRequest, catalogue: readonly TargetCatalogueEntry[], selectedObservation?: string, discoverer: typeof discover = discover): Promise<VoInputs> {
+export async function loadVoInputs(root: string, request: DiscoveryRequest, catalogue: readonly TargetCatalogueEntry[], selectedObservation?: string, discoverer: typeof discover = discover): Promise<VoInputs> {
   const identities = catalogue.map(t => ({ id: t.id, names: [t.name, ...t.aliases], classification: t.archiveClass, classificationSource: t.classificationSource }));
   const target = identities.find(t => t.id === request.target);
   if (!target) return { records: [], services: [] };

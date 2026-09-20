@@ -22,6 +22,31 @@ existing css.earth science workspace for the catalogue, archive clients and inst
 pipelines. See [package setup](../packages/telescope/README.md). It does not bundle
 Python environments or download the repository during installation.
 
+Start with only a target to preserve the difference between discovery and a scientific request:
+
+```sh
+pnpm telescope explore eris
+pnpm telescope explore eris --kind cube --wavelength 2.2,2.4 --out output/eris-exploration
+```
+
+The terminal flow saves `explore.json`, shows bounded archive and package observations with their
+advertised or verified basis, and retrieves only the identity the person selects. Omitted filters
+remain omitted; no wavelength, time, product kind or resolution requirement is invented. `--json`
+and redirected input or output never prompt. Without `--out`, the command creates a unique directory
+under `./telescope-runs/`. An exploration delivery retains “no scientific acceptance criteria
+requested” through later outputs.
+
+`telescope outputs ARTIFACT.json` is the second human entry point. It identifies the artifact and
+its source context, keeps unavailable operations and blockers visible, and prints the parameters and
+explicit command template for each available next operation. In a terminal it asks which available
+operation to run, then prompts only for that operation's reported inputs and output directory. The
+same explicit-command parser validates the answers before the existing export owner runs. Enter
+cancels without starting that output; JSON and redirected execution never prompt. It accepts
+supported delivery records, derived product records and prepared point/volume object packages,
+not arbitrary raw science files.
+
+Use `query` when the wavelength, time, product kind and resolution are actual acceptance criteria:
+
 ```sh
 pnpm telescope query eris --wavelength 2.2,2.4 --kind cube \
   --any-time --min-arcsec 1 --out output/eris-query
@@ -50,6 +75,34 @@ lock because current reducers update shared archive records.
 Current source-qualified products also use the common selected-artifact interface.
 Their existing receipt and decoded facts supply the reference, without copying
 unverified wavelength or resolution declarations into the verified facts.
+
+### Telescope API v1 boundary
+
+The public chain has four supported transitions:
+
+| Current artifact | Supported next operation | Required addition |
+| --- | --- | --- |
+| Qualified native delivery | Supported image, spectrum, band, aperture or feature export | The selectors listed by `outputs` |
+| Exported 2D measurement | Registered body map | Explicit pinned navigation |
+| Registered body map | Standalone interactive sphere | An embeddable standard body package |
+| Existing prepared point field or density volume | Renderer handoff | None |
+
+The command coordinates the existing archive, qualification, Astropy, PlanetMapper and renderer
+owners. It does not imply that every observation can traverse every transition. Discovery is
+limited to configured archive routes and bounded profiles, so an empty target-name search is not
+a universal absence claim. A product-kind declaration also does not establish a decoder,
+scientific operation or exporter for those bytes. `outputs` checks the current artifact through
+the same prerequisite validators used by export and reports the routes it can actually support.
+
+Native deliveries retain their recorded files. Intermediate image and map records may retain
+absolute references to their verified workspace sources; relocation does not make those
+dependencies portable. Sphere HTML and physical renderer handoffs are self-contained within
+their published artifact. Missing sources are reported rather than searched for, rebased or
+reconstructed. Export always checks again, because an earlier inspection is only a snapshot.
+
+Query success means retrievable choices exist. Export success means the selected transformation
+completed. Neither means the original scientific request was fulfilled: its fulfilled,
+unresolved or refused verdict remains in every derived product record.
 
 ## Package-owned observations through the same API
 
@@ -625,6 +678,41 @@ recompare existing cubes to renew them. No pipeline rerun is needed for unchange
 products and inputs. The scope states the actual compared archive planes, including
 aligned subsets supplied without a request interval.
 
+## Observational families and local products
+
+The artifact contract no longer assumes that every observation is a spatial raster. A versioned
+product descriptor names pinned members, components, axes or columns, quantity and calibration
+semantics, dependencies, uncertainty, flags, time and frames. Static handlers cover F01–F18:
+images, cubes, spectra, slit profiles, photometry, time series, dynamic spectra, tables,
+astrometry, events, radio and optical interferometry, polarimetry, maps, radar, physical fields,
+raw/calibration products and compound closures. One descriptor may name several families.
+
+Run `telescope families` for the derived coverage ledger. Every F01–F18 family now has one
+complete, evidence-backed baseline reachable from the public workflow. Coverage is bounded to
+those declared profiles: additional formats and operations may still report `partial` or remain
+unavailable, and missing dependencies stay visible.
+
+Local files use the same bounded intake boundary:
+
+```sh
+telescope import import-spec.json --out imported-observation
+telescope outputs imported-observation/import.json
+```
+
+The data-only specification names files/directories, roles and byte/member limits. Import copies
+regular files without following symlinks, pins every byte and proposes handlers from bounded
+content inspection. When one declared family selects an existing content validator, import also
+writes a pinned `descriptor.json`; `outputs` exposes that descriptor's package-owned family
+operations. Ambiguous inputs stay pinned and say which family choice is missing. Recognized
+profiles that still lack the metadata or dependency closure their handler needs remain explicitly
+unsupported. Target, origin, units, frame, calibration and family hints supplied by the
+user remain declarations until a handler validates them. A content hash proves integrity, not
+archive origin or scientific fitness.
+
+Archive product terms retain the source label and map against the dated IVOA product-type
+vocabulary. This proposes a family route; product bytes and metadata must still confirm the
+handler profile. Preliminary and unknown vocabulary terms remain marked as such.
+
 ## From a delivered product to an output
 
 `tools/objects/telescopes/outputs.mts` is the final boundary after `session.mts` delivery.
@@ -762,9 +850,18 @@ Output ownership and remaining adapters:
 | Spectral chart | Qualified wavelength axis and explicit pixel or fixed region | Executable FITS output adapter; optional background subtraction and explicitly conditional uncertainty |
 | Band image | Qualified units and wavelength bin edges | Executable wavelength-weighted mean; partial boundary bins included |
 | Feature map | Qualified bins plus feature and bracketing continuum windows | Executable continuum-subtracted wavelength integral; signed residual, no detection claim |
-| Surface map | Measurement definition, viewing geometry, rotation/frame and resolution evidence | PlanetMapper-backed `telescope project`; scientific publication remains `body-map-publication.mts` |
+| Surface map | Measurement definition, viewing geometry, rotation/frame and resolution evidence | PlanetMapper-backed `telescope export --output body-map`; scientific publication remains `body-map-publication.mts` |
 | Body sphere | Qualified surface map plus a prepared layer | Standalone HTML from `telescope export --output sphere`, using the existing PolyCSS renderer |
 | 3D scatter/volume | Explicit coordinate frame, units and measured or explicitly modeled depth | Existing point-field and density-volume owners; `--output points` or `volume` packages a physical `object.json` |
+
+`telescope outputs ARTIFACT.json` validates current telescope artifact pins and exposes this table as an
+executable transition: delivery to scientific output, image output to registered body map,
+body map to standard sphere, or an existing physical object to its point/volume handoff.
+It does not advertise a later stage when the exact prerequisite outputs are absent, and terminal
+sphere and spatial records have no further output. The original request satisfaction travels in
+the derived records; rendering or projection does not upgrade it.
+The point/volume export performs the full object-package, resource, provenance and licence
+validation before it writes a handoff.
 
 A wavelength axis, radial velocity or image intensity cannot silently become physical depth.
 PDS arrays pass through `pdr`; ISIS3 cores use the existing shared reader. Both feed
@@ -823,11 +920,13 @@ before it can enter either 3D owner; this command does not supply one.
 ```sh
 telescope export europa/pick-1/result.json --output band-image --hdu 1 \
   --band 4.2,4.3 --uncertainty independent --out europa-band
-telescope project europa-band/output.product.json --geometry navigation.json --out europa-map
+telescope outputs europa-band/output.product.json
+telescope export europa-band/output.product.json --output body-map --geometry navigation.json --out europa-map
+telescope outputs europa-map/map.fits.product.json
 telescope export europa-map/map.fits.product.json --output sphere --out europa-sphere
 ```
 
-`project` uses PlanetMapper 1.14.0 for image navigation and nearest-neighbour
+The body-map export uses PlanetMapper 1.14.0 for image navigation and nearest-neighbour
 surface resampling. PlanetMapper owns its SPICE geometry through SpiceyPy;
 its projection dependency is pyproj/PROJ. Astropy owns the numerical FITS
 output and Matplotlib the figure. The sphere is one standalone HTML file,

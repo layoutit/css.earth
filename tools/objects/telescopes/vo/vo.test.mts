@@ -127,6 +127,16 @@ test('multiple science links stay distinct, previews are excluded, cycles are bo
   assert.equal(plan.products[0]!.operation.url, 'https://example.org/one.fits');
   assert.equal((await planAccess(root, obs, saved, { ...request, region: circle }, async () => response)).products.length, 0);
 });
+test('archive product kind only proposes a family route; tables and events remain acquirable', async () => {
+  const base = await almaPromise, saved = snapshot(base), normalized = normalizeSnapshot(saved, profile, target, [target])[0]!;
+  for (const kind of ['table', 'events'] as const) {
+    const observation = { ...normalized, kind, target: { status: 'confirmed' as const, target: target.id, reason: 'fixture' }, access: { url: `https://example.org/${kind}.fits`, mime: 'application/fits', estimatedKilobytes: 1 } };
+    const plan = await planAccess(root, observation, saved, { ...request, kind });
+    assert.equal(plan.products.length, 1, plan.issues.join('\n'));
+    assert.equal(plan.products[0]!.decoder, 'family-pending');
+    assert.equal(plan.products[0]!.kind, kind);
+  }
+});
 test('bounded transfer rejects chunked oversized and error bodies without publishing partial files', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'vo-transfer-')), fixture = await readFile(resolve(fixtures, 'eso-circle.fits'));
   const requests: string[] = [];

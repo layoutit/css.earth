@@ -29,7 +29,11 @@ try {
   else if (args.length === 1 && args[0] === '--version') process.stdout.write('0.1.0\n');
   else {
     const root = await workspace(location ?? process.cwd(), Boolean(location));
-    const child = spawn(process.execPath, [resolve(root, 'tools/run-typed-module.mjs'), resolve(root, 'tools/objects/telescopes/cli.mts'), ...args], { stdio: 'inherit' });
+    const child = spawn(process.execPath, [resolve(root, 'tools/run-typed-module.mjs'), resolve(root, 'tools/objects/telescopes/cli.mts'), ...args], { stdio: 'inherit', env: {
+      ...process.env,
+      CSSEARTH_TELESCOPE_STDIN_TTY: process.stdin.isTTY ? '1' : '0',
+      CSSEARTH_TELESCOPE_STDOUT_TTY: process.stdout.isTTY ? '1' : '0',
+    } });
     const forward = (signal: NodeJS.Signals) => child.kill(signal);
     process.on('SIGINT', forward); process.on('SIGTERM', forward);
     process.exitCode = await new Promise<number>((accept, reject) => {

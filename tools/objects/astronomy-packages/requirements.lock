@@ -17,6 +17,23 @@ astropy==8.0.1 \
     # via
     #   astroquery
     #   pyvo
+astropy-healpix==1.1.3 \
+    --hash=sha256:0a798bfdf2176426cf4947c4905f8862c29032635ea513d281ea27cc3a0303e4 \
+    --hash=sha256:0c851836c9327065608c73d67fd8c00462d365c368038cd285bc60570d470e1b \
+    --hash=sha256:0cd93955d0b30bcee07b09b8ddf6e45cc39895f257fab1469524990e3a5b3e9e \
+    --hash=sha256:14133113b137821c1ea1229dc9b1eb9d187ed227ea9c8de60d3eb81296dea67b \
+    --hash=sha256:182b0b6a833afa9daa0c73c8394a2a067da7f42cd27c838e1ced7592979ae934 \
+    --hash=sha256:22327a7d00d28e89b1f182a2ee62d27dc204d0a0bebacfa0d3eabbe9dc25bf8f \
+    --hash=sha256:49dc32289c7fd98c8dbe6794326d9298920dd9212f99d3bcdef31a19a1cde8ea \
+    --hash=sha256:638796f0c532cb4c77b28594b032e5d7de7c88b53b80ded8190b6f32adebd2bd \
+    --hash=sha256:706d2f17bbc97d5348512482ad5e49620724334163a810f23efa54187bb6176a \
+    --hash=sha256:c518d4a8af61097be139fa825ffeb391606207fc0c40e7c60fc078ff620d13a5 \
+    --hash=sha256:da885033f7cf319906f58c61087e137f0e473e78503fe94bf951f569ebd3b033 \
+    --hash=sha256:e83e677f3d66a4d2e1705457915df7021d98936d6167d2780fe2fd2e83a94911 \
+    --hash=sha256:e9c5a81d936120c8aa11e042da6529a2255708150de515364eba79a5dd094ca1 \
+    --hash=sha256:f520d83abe8215d3e8e1a37b2bd91171ee36a6f55f110d5a2db863d75d81b3b7 \
+    --hash=sha256:fe96eeee5b3dd19f4ce7decef4f95a63ff2564652ec62392fbcabc2bd18095d6
+    # via telescope F14 HEALPix indexing
 astropy-iers-data==0.2026.9.14.0.56.43 \
     --hash=sha256:43786a0a9b60c7a55a85e12307c0050d75ea0679710378141255ded9d1bd8ebc \
     --hash=sha256:6d4eca0b906052ce02e47988e736b36e7720cc61784fdc0cb718f66fd88f5b72
@@ -1043,3 +1060,27 @@ spiceypy==8.2.0 \
 tqdm==4.70.1 \
     --hash=sha256:c293e525e6fef9c20e8728fd4612df02a0aa31bb5fe91ecd93e123b1b7bffa73 \
     --hash=sha256:cefd0eca11b2a37a3aee776544d4f4ae913f02688135b5556b8788dfa474afc4
+cdflib==1.3.12 \
+    --hash=sha256:ef3df6e7ea918223059c7c8384802d52d9a1f655d5db677b7b8d29fd9f3d2381
+    # via telescope F07 dynamic spectrum
+docstring-parser==0.18.0 \
+    --hash=sha256:b3fcbed555c47d8479be0796ef7e19c2670d428d72e96da63f3a40122860374b
+    # via pyuvdata
+h5py==3.16.0 \
+    --hash=sha256:42b012933a83e1a558c673176676a10ce2fd3759976a0fedee1e672d1e04fc9d
+    # via pyuvdata
+llvmlite==0.49.0 \
+    --hash=sha256:b541c8fac3450db7574d1f53cf9dff83f285bfed9d69bf81fe71fc2a7d4f97fe
+    # via numba
+numba==0.67.0 \
+    --hash=sha256:6004d8d5f28d4028687fb2d972d629295b13685943bd2ed5cd8810c3b848e219
+    # via pyuvdata
+pyuvdata==3.2.4 \
+    --hash=sha256:bde07eacd0bf7ecf6a98990061f42f60145a394ae86075f944fb13646a242030
+    # via telescope F11 UVFITS visibility inspection/export
+setuptools-scm==10.2.3 \
+    --hash=sha256:7fcf8ff55c95eb8b572a23c81495e5559b9b90f3e82fcf0952bb76c37de27a81
+    # via pyuvdata
+vcs-versioning==2.4.1 \
+    --hash=sha256:b7089ec9bef67b2cad82148366e8eac4d63173f440ec62628282b59eb96bbcb0
+    # via setuptools-scm
