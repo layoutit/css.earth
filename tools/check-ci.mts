@@ -2,9 +2,12 @@ import {readFile, mkdtemp, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve, join} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {execFileSync, spawn} from 'node:child_process';
+import {spawn} from 'node:child_process';
 import {parse} from 'yaml';
 import {requireArray, requireRecord, requireString} from './source-values.mts';
+import {affectedJobNames, classifyAffectedPaths, HEAVY_JOBS, loadCiAreasConfig, localChangedPaths, needsProductionBuild} from './ci-affected.mts';
+import {evaluateObjectScopeGate} from './object-scope-gate.mts';
+import {selectRuntimeOwnershipArgs} from './scope-runtime-ownership-check.mts';
 
 interface CiStep {name:string;run:string;env:Record<string,string>;}
 /** The workflow's own token; a local run uses the contributor's `gh` login instead. */
@@ -22,14 +25,14 @@ export const CI_ONLY_CONDITIONS=["needs.lint.result != 'success'",'failure()'];
  * always-correct answer (never skip) instead of failing: the condition is stripped and the step always runs. */
 const CACHE_HIT_CONDITION=/^steps\.[\w-]+\.outputs\.cache-hit(?:-\w+)? != 'true'$/u;
 /** Execute the maintained job's commands, so local checks cannot drift from CI. */
-export function readCiSteps(source:string,jobName='universe'):CiStep[] {
+export function readCiSteps(source:string,jobName='universe', substitutions:Record<string,string>={}):CiStep[] {
  const workflow=requireRecord(parse(source)),jobs=requireRecord(workflow.jobs);
  if(!Object.hasOwn(jobs,jobName))throw new Error(`Unknown CI job: ${jobName}`);
  const job=requireRecord(jobs[jobName]);
  const decodeEnvironment=(value:unknown)=>Object.fromEntries(Object.entries(value===undefined?{}:requireRecord(value))
    .map(([key,value])=>[key,requireString(value,`CI environment ${key}`)])
    .filter(([,value])=>value!==WORKFLOW_TOKEN)
-   .map(([key,value])=>[key,Object.hasOwn(LOCAL_EXPRESSION_SUBSTITUTIONS,value)?LOCAL_EXPRESSION_SUBSTITUTIONS[value]:value]));
+   .map(([key,value])=>[key,substitutions[value]??LOCAL_EXPRESSION_SUBSTITUTIONS[value]??value]));
  const inherited={...decodeEnvironment(workflow.env),...decodeEnvironment(job.env)};
  return requireArray(job.steps).flatMap(value=>{
   const step=requireRecord(value);
@@ -63,6 +66,19 @@ export function quickSteps(steps:readonly CiStep[]):CiStep[] {
 export const SHARED_CODE=/^(?:tools|site|src\/platform|src\/renderers|packages)\//u;
 export function sharedCodeChanged(paths:readonly string[]):boolean {return paths.some(path=>SHARED_CODE.test(path));}
 
+/** CI jobs have separate disks; the local plan shares one checkout. Reuse only explicit common prerequisites,
+ * never tests, audits, or a production build with a different environment. */
+export function reuseLocalPreparation(steps:readonly CiStep[]):CiStep[] {
+ const reusable=new Set(['pnpm install --frozen-lockfile --ignore-scripts','pnpm build:tools','pnpm prepare:typecheck']);
+ const seen=new Set<string>();
+ return steps.filter(step=>{
+  if(!reusable.has(step.run.trim()))return true;
+  const key=JSON.stringify([step.run.trim(),Object.entries(step.env).sort(([left],[right])=>left.localeCompare(right))]);
+  if(seen.has(key))return false;
+  seen.add(key);return true;
+ });
+}
+
 export async function runCiSteps(steps:readonly CiStep[],root:string,runnerTemp:string):Promise<void> {
  for(const [index,step] of steps.entries()){
   const started=performance.now();
@@ -81,21 +97,33 @@ export async function runCiSteps(steps:readonly CiStep[],root:string,runnerTemp:
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
  const root=resolve(import.meta.dirname,'..'),args=process.argv.slice(2);
- const flags=['--list','--quick','--typecheck'];
- if(args.some(arg=>!flags.includes(arg)&&!/^--job=[a-z][a-z0-9-]*$/.test(arg))||new Set(args.map(arg=>arg.split('=')[0])).size!==args.length)
-  throw new Error('Usage: pnpm check:ci [--job=lint|typecheck|typecheck-tests|universe|universe-preparation|nebula] [--quick] [--typecheck] [--list]');
- // Without --job, run every job the shared-universe checks need, in the order that fails fastest.
- const jobName=args.find(arg=>arg.startsWith('--job='))?.slice(6),
-  jobNames=jobName?[jobName]:['lint','typecheck','typecheck-tests','universe','universe-preparation'];
- const workflow=await readFile(resolve(root,'.github/workflows/universe.yml'),'utf8');
- let steps=jobNames.flatMap(jobName=>readCiSteps(workflow,jobName));
+ const flags=['--list','--quick','--typecheck','--all','--pipeline-change'];
+ if(args.some(arg=>!flags.includes(arg)&&!/^--job=[a-z][a-z0-9-]*$/.test(arg)&&!/^--base=.+$/.test(arg))||new Set(args.map(arg=>arg.split('=')[0])).size!==args.length)
+  throw new Error('Usage: pnpm check:pr [--base=origin/main] [--all | --job=<id>] [--pipeline-change] [--quick] [--typecheck] [--list]');
+ const jobName=args.find(arg=>arg.startsWith('--job='))?.slice(6),base=args.find(arg=>arg.startsWith('--base='))?.slice(7)??'origin/main';
+ if(jobName&&args.includes('--all'))throw new Error('Choose --all or --job, not both.');
+ if(args.includes('--quick')&&jobName!=='lint')throw new Error('--quick is an explicit lint subset: use --job=lint --quick.');
+ const config=await loadCiAreasConfig(),changed=await localChangedPaths(base,root),affected=classifyAffectedPaths(changed,config);
+ const jobNames=jobName?[jobName]:affectedJobNames(args.includes('--all')?{...affected,jobs:new Set(HEAVY_JOBS)}:affected);
+ const production=!jobName&&(args.includes('--all')||needsProductionBuild(changed,config));
+ console.log(`[ci plan] ${changed.length} changed paths against ${base} (including working tree); ${jobNames.join(', ')}${production?', production-build':''}.`);
+ if(!jobName){
+  const scope=evaluateObjectScopeGate(changed,args.includes('--pipeline-change')?[{name:'pipeline-change'}]:[]);
+  if(!scope.ok)throw new Error(`Object-scope gate: ${scope.count} objects exceed ${scope.limit}; split the PR or use --pipeline-change with the matching PR label.`);
+ }
+ const workflow=await readFile(resolve(root,`.github/workflows/${jobName==='asset-origin-build'?'nightly':'universe'}.yml`),'utf8');
+ const substitutions={'${{ needs.changes.outputs.runtime_ownership_args }}':args.includes('--all')?'--all':selectRuntimeOwnershipArgs(changed).join(' ')};
+ let steps=jobNames.flatMap(jobName=>readCiSteps(workflow,jobName,substitutions));
+ if(production)steps.push(...readCiSteps(await readFile(resolve(root,'.github/workflows/nightly.yml'),'utf8'),'asset-origin-build'));
+ // Select the same PR documentation/publish diff locally, including uncommitted changes in the documentation audit.
+ // Pass through env, never interpolate an arbitrary ref into shell source.
+ steps=steps.map(step=>({...step,env:{...step.env,GITHUB_BASE_REF:base.startsWith('origin/')?base.slice(7):base,CI_BASE_REF:base,GITHUB_EVENT_NAME:'pull_request'}}));
  if(args.includes('--quick'))steps=quickSteps(steps);
  if(args.includes('--typecheck')){
-  const changed=[...execFileSync('git',['diff','--name-only','origin/main...HEAD'],{cwd:root,encoding:'utf8'}).split('\n'),
-   ...execFileSync('git',['diff','--name-only','HEAD'],{cwd:root,encoding:'utf8'}).split('\n')].filter(Boolean);
   if(sharedCodeChanged(changed))steps.push({name:'Typecheck (shared code changed)',run:'pnpm typecheck',env:{NODE_OPTIONS:'--max-old-space-size=4096'}});
   else console.log('[ci] --typecheck: no shared code changed against origin/main; skipping pnpm typecheck.');
  }
+ steps=reuseLocalPreparation(steps);
  if(args.includes('--list')){
   console.log(steps.map((step,index)=>`${index+1}. ${step.name}\n${step.run.trim()}`).join('\n\n'));
  }else{

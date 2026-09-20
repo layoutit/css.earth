@@ -47,7 +47,7 @@ jobs:
           test -n "$HOSTING_AUTH_TOKEN"
           test -n "$HOSTING_SITE_ID"
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # The same paths and key as the CI jobs (universe.yml), which save this cache on main pushes. setup:assets
@@ -58,20 +58,6 @@ jobs:
             src/objects/*/prepared/scene.json
           key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
           restore-keys: prepared-assets-v1-
-      - name: Restore prepared assets and textures from R2
-        # Public read access, no credentials. Tolerates one object's asset missing on R2 (a 404
-        # from a transient outage or an unpublished object): the install is skipped loudly and the
-        # object reports unavailable through the existing unavailable-package path
-        # (tools/prepare-context-availability.mts) instead of failing the whole deploy over it.
-        # `pnpm setup:assets --allow-missing` cannot carry a trailing CLI flag past the first `&&`
-        # in that script (pnpm only appends trailing args to the end of a compound script command,
-        # so only the last of its three chained commands would see it) — the flag is an env var
-        # instead, read by tools/setup.mts, tools/setup-prepared.mts and
-        # tools/nebula/application/prepare.ts. CI (.github/workflows/universe.yml) never sets it
-        # and stays strict; `pnpm setup:assets` alone (no env var) also stays strict.
-        env:
-          CSSEARTH_ALLOW_MISSING_ASSETS: "1"
-        run: pnpm setup:assets
       - name: Build the site
         # The deploy build regenerates its ignored source/facility catalogues from committed inputs and the restored
         # R2 closure. Its catalog-only preparation does not publish preview bytes or rewrite asset inventories;

@@ -81,7 +81,7 @@ CI checks local Markdown, reference and HTML links, heading anchors, file placem
 and links from this index.
 It also rejects duplicate body `SOURCE.md`, `EVIDENCE.md` and `USAGE.md` accounts.
 Run the same check with
-`python3 tools/audits/check-documentation-links.py --all`.
+`node tools/audits/check-documentation-links.mts --all`.
 
 For a Git snapshot inventory of body records, retained HTML and duplicate bytes,
 run `python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output /tmp/provenance-inventory.json`.

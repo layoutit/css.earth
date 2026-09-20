@@ -14,6 +14,9 @@ import { loadPreparedCssPointField } from '../../src/renderers/css/dist/index.js
 import volume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
 import slices from '../../src/objects/milky-way/prepared/volume-slices.json' with { type: 'json' };
 import { worldRotationFromQuaternion, rotateWorldPosition } from '../../src/renderers/css/dist/navigation.js';
+import { minimapDataOnly, prepareMinimapProjection } from './prepare-projection.mts';
+
+const dataOnly = minimapDataOnly(process.argv.slice(2));
 
 const radius = 88;
 const registry = new Map(SCENE_OBJECTS.map(object => [object.id, object]));
@@ -71,17 +74,19 @@ await writeFile(new URL('./prepared.json', import.meta.url), JSON.stringify({
 
 // Prepare a small face-on density projection from the shipped Z slabs. This is
 // a map of the existing volume, not another mounted galaxy scene.
-const galaxySize = 512, texelsPerUnit = galaxySize / 20;
-const layers = [];
-for (const quad of slices.quads.filter(quad => quad.axis === 'z' && quad.alphaCoverage > 0)) {
-  const [a, b, c] = quad.vertices;
-  const left = Math.round((a[0] + 10) * texelsPerUnit), top = Math.round((10 - a[1]) * texelsPerUnit);
-  const width = Math.max(1, Math.round((b[0] - a[0]) * texelsPerUnit));
-  const height = Math.max(1, Math.round((a[1] - c[1]) * texelsPerUnit));
-  const path = new URL(`../../src/objects/milky-way/prepared/${quad.texturePath}`, import.meta.url);
-  layers.push({ input: await sharp(path.pathname).resize(width, height).png().toBuffer(), left, top });
-}
-await sharp({ create: { width: galaxySize, height: galaxySize, channels: 4, background: '#00000000' } })
-  .composite(layers).png().toFile(new URL('./galaxy.png', import.meta.url).pathname);
+await prepareMinimapProjection(dataOnly, async () => {
+  const galaxySize = 512, texelsPerUnit = galaxySize / 20;
+  const layers = [];
+  for (const quad of slices.quads.filter(quad => quad.axis === 'z' && quad.alphaCoverage > 0)) {
+    const [a, b, c] = quad.vertices;
+    const left = Math.round((a[0] + 10) * texelsPerUnit), top = Math.round((10 - a[1]) * texelsPerUnit);
+    const width = Math.max(1, Math.round((b[0] - a[0]) * texelsPerUnit));
+    const height = Math.max(1, Math.round((a[1] - c[1]) * texelsPerUnit));
+    const path = new URL(`../../src/objects/milky-way/prepared/${quad.texturePath}`, import.meta.url);
+    layers.push({ input: await sharp(path.pathname).resize(width, height).png().toBuffer(), left, top });
+  }
+  await sharp({ create: { width: galaxySize, height: galaxySize, channels: 4, background: '#00000000' } })
+    .composite(layers).png().toFile(new URL('./galaxy.png', import.meta.url).pathname);
+});
 
-console.log(`Prepared minimap: ${bodies.length} bodies, ${stellarPoints.length} catalog stars, ${extragalacticPoints.length} extragalactic markers, galaxy density projection.`);
+console.log(`Prepared minimap: ${bodies.length} bodies, ${stellarPoints.length} catalog stars, ${extragalacticPoints.length} extragalactic markers${dataOnly ? ' (data only)' : ', galaxy density projection'}.`);

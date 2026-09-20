@@ -1,7 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import {execFileSync} from 'node:child_process';
+import {mkdtemp,writeFile,rename,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
 import {
-  classifyAffectedChanges, classifyAffectedPaths, loadCiAreasConfig, parseCiAreasConfig, patternToRegExp,
+  affectedJobNames, classifyAffectedChanges, classifyAffectedPaths, loadCiAreasConfig, localChangedPaths, needsProductionBuild, parseCiAreasConfig, patternToRegExp,
 } from './ci-affected.mts';
 import type { CiAreasConfig } from './ci-affected.mts';
 
@@ -125,7 +129,46 @@ test('the checked-in .github/ci-areas.json parses and classifies as documented',
   assert.equal(object.shared, false);
   assert.deepEqual([...object.jobs], []);
   const renderer = classifyAffectedPaths(['src/renderers/css/navigation/camera.ts'], config);
-  assert.deepEqual([...renderer.jobs].sort(), ['typecheck', 'universe']);
+  assert.deepEqual([...renderer.jobs].sort(), ['typecheck', 'universe', 'universePreparation']);
   const lockfile = classifyAffectedPaths(['pnpm-lock.yaml'], config);
   assert.equal(lockfile.shared, true);
+});
+
+test('real owner map routes defects to their test lane, not the unrelated lab', async () => {
+  const config = await loadCiAreasConfig();
+  for (const path of ['tools/fits.mts', 'tools/oracles/test-fits.mts']) {
+    const jobs = classifyAffectedPaths([path], config).jobs;
+    assert.equal(jobs.has('universe'), true, path);
+    assert.equal(jobs.has('nebula'), false, path);
+  }
+  const preparation = classifyAffectedPaths(['src/renderers/css/preparation/volume.ts'], config);
+  assert.equal(preparation.jobs.has('universePreparation'), true);
+  assert.equal(preparation.jobs.has('nebula'), false);
+  const object = classifyAffectedPaths(['src/objects/mars/prepared-assets.json'], config);
+  assert.equal(object.jobs.has('universe'), true, 'changed package integrity must be exercised');
+  assert.equal(classifyAffectedPaths(['tools/new-unmapped-owner.mts'], config).shared, true);
+});
+
+test('one plan includes test types and nebula locally, and selects production with the same paths', async () => {
+  const config = await loadCiAreasConfig();
+  const jobs = affectedJobNames(classifyAffectedPaths(['package.json'], config));
+  assert.deepEqual(jobs, ['lint', 'typecheck', 'typecheck-tests', 'universe', 'universe-preparation', 'nebula']);
+  assert.equal(needsProductionBuild(['site/router.mts'], config), true);
+  assert.equal(needsProductionBuild(['README.md'], config), false);
+  assert.equal(needsProductionBuild([], config), true);
+  assert.equal(needsProductionBuild(['netlify/new-function.mts'], config), true, 'unknown ownership is fail-closed for production too');
+});
+
+test('the local plan includes committed renames, staged/unstaged edits and untracked paths', async t => {
+  const root=await mkdtemp(join(tmpdir(),'ci-plan-'));
+  t.after(()=>rm(root,{recursive:true,force:true}));
+  const git=(...args:string[])=>execFileSync('git',args,{cwd:root,encoding:'utf8'});
+  git('init','-q');git('config','user.name','CI fixture');git('config','user.email','fixture@example.invalid');
+  for(const file of ['before.txt','staged.txt','working.txt'])await writeFile(join(root,file),'old');
+  git('add','.');git('commit','-qm','base');git('branch','base');
+  await rename(join(root,'before.txt'),join(root,'after.txt'));git('add','.');git('commit','-qm','rename');
+  await writeFile(join(root,'staged.txt'),'new');git('add','staged.txt');
+  await writeFile(join(root,'working.txt'),'new');await writeFile(join(root,'new file.mts'),'new');
+  assert.deepEqual((await localChangedPaths('base',root)).sort(),['after.txt','before.txt','new file.mts','staged.txt','working.txt']);
+  await assert.rejects(localChangedPaths('missing-base',root),'unresolved local refs must not silently skip checks');
 });

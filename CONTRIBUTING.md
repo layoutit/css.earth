@@ -108,17 +108,26 @@ Both scripts need an authenticated `wrangler`. Neither ever deletes a key.
 
 ## Check your change
 
-`pnpm check:pr` runs the steps of the "Contract lint" CI job (lockfile, package
-files and source citations, physical frame receipts and pins, published assets
-your branch adds, documentation links) in about a minute and stops at the first
-failure. `pnpm check:ci` runs the lint, typecheck and prepared-universe jobs'
-command steps in order and takes far longer; `--job=<id>` picks one job and
-`--list` shows the exact commands. Choose checks by what changed, and say in the
-PR which ones you ran and which you did not. Test files are type-checked nightly
-and on main; run `pnpm typecheck` locally for the full check.
+`pnpm check:pr` and `pnpm check:ci` use the same changed-path plan as GitHub,
+including test types, nebula and the production-build smoke when selected.
+The default base is `origin/main`; `--base=<ref>` changes it. Local selection
+also includes staged, unstaged and untracked files. `--list` prints the selected
+jobs and exact workflow commands without running them; `--job=<id>` selects one
+lane; `--all` runs every lane. Local jobs run serially and stop on failure;
+GitHub runs independent jobs in parallel. More than 12 changed object packages
+requires `--pipeline-change` locally and the matching label on the PR.
+
+Unknown ownership selects all shared lanes. Changed object data selects package
+integrity tests; documentation-only changes keep lint. New documentation defects
+and defects in changed files block PRs, including broken unchanged inbound links.
+Unrelated baseline documentation debt is counted but does not block that PR;
+main retains the complete audit. The compiler lanes restore their actual pinned
+JSON inputs and generate real shell data, without downloading body texture banks.
+Full-universe integrity and production-build checks remain distinct and can
+still expose unrelated package defects. Report those failures; do not bypass pins.
 
 To run the fast subset before every push, opt in with `pnpm hooks:install`: the
-pre-push hook runs `pnpm check:pr --quick`, which skips the network check and the
+pre-push hook runs `pnpm check:pr --job=lint --quick`, which skips the network check and the
 documentation audits. Skip it once with `git push --no-verify` or
 `CSSEARTH_SKIP_HOOKS=1`; remove it with `git config --unset core.hooksPath`.
 

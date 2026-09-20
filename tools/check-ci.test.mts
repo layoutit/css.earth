@@ -3,7 +3,9 @@ import {test} from 'node:test';
 import {mkdtemp,readFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {CI_ONLY_CONDITIONS,QUICK_SKIPPED_STEPS,quickSteps,readCiSteps,runCiSteps,sharedCodeChanged} from './check-ci.mts';
+import {parse} from 'yaml';
+import {requireArray,requireRecord,requireString} from './source-values.mts';
+import {CI_ONLY_CONDITIONS,QUICK_SKIPPED_STEPS,quickSteps,readCiSteps,reuseLocalPreparation,runCiSteps,sharedCodeChanged} from './check-ci.mts';
 
 test('local CI reads the actual workflow jobs in order, including strict TypeScript and renderer gates',async()=>{
  const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
@@ -37,7 +39,8 @@ test('the deploy consumes installed assets, rebuilds only catalogues and rejects
  assert.doesNotMatch(packageFile.scripts['prepare:deploy']??'',/pnpm prepare:galaxy-field:data/);
  assert.match(packageFile.scripts['prepare:deploy']??'',/pnpm prepare:deploy-catalogues/);
  assert.equal(packageFile.scripts['prepare:deploy-catalogues'],'node tools/prepare-facilities.mts --catalog-only');
- assert.match(packageFile.scripts['setup:assets']??'',/node tools\/setup-volume-metadata\.mts/);
+ assert.match(packageFile.scripts['setup:assets']??'',/pnpm setup:asset-data/);
+ assert.match(packageFile.scripts['setup:asset-data']??'',/node tools\/setup-volume-metadata\.mts/);
  assert.doesNotMatch(packageFile.scripts['prepare:deploy']??'',/prepare:(?:facilities|provenance|nebulae)(?:\s|$)/);
 });
 test('the PR asset-origin check exercises the exact deploy build path',async()=>{
@@ -103,4 +106,59 @@ test('a cache-hit-gated step always runs locally instead of being skipped',()=>{
  // allowance cannot silently swallow an unrelated `if:`.
  const other="jobs:\n  universe:\n    steps:\n      - name: t\n        if: steps.x.outputs.something != 'true'\n        run: echo t\n";
  assert.throws(()=>readCiSteps(other),/explicit support/);
+});
+
+test('required lanes depend only on required classification; lint cannot manufacture downstream failures',async()=>{
+ const workflow=requireRecord(parse(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8')));
+ const jobs=requireRecord(workflow.jobs);
+ const expectedNames={changes:'Classify changes',lint:'Contract lint',typecheck:'Typecheck',universe:'Prepared universe and shared renderer','universe-preparation':'Prepared universe preparation and galaxy field',nebula:'Internal nebula packages and isolated controls'};
+ for(const [id,name] of Object.entries(expectedNames))assert.equal(requireRecord(jobs[id]).name,name,'preserve the live required check context');
+ for(const id of ['typecheck','typecheck-tests','universe','universe-preparation','nebula']){
+  const job=requireRecord(jobs[id]);
+  assert.equal(job.needs,'changes',id);
+  assert.match(requireString(job.if),/^\$\{\{ github\.event_name != 'pull_request' \|\| needs\.changes\.outputs\.run_[a-z_]+ == 'true' \}\}$/);
+  assert.ok(requireArray(job.steps).every(value=>!JSON.stringify(value).includes('needs.lint')),id);
+ }
+});
+
+test('local preparation is reused only for identical prerequisites, never tests or a changed environment',()=>{
+ const build={name:'build',run:'pnpm build:tools',env:{}},testStep={name:'test',run:'pnpm test:renderer',env:{}};
+ const production={...build,env:{ASSET_ORIGIN:'https://example.invalid'}};
+ assert.deepEqual(reuseLocalPreparation([build,testStep,build,testStep,production]),[build,testStep,testStep,production]);
+});
+
+test('compiler jobs and preparation tests cannot restore the global texture bank through a cache or script',async()=>{
+ const source=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
+ const jobs=requireRecord(requireRecord(parse(source)).jobs);
+ for(const id of ['typecheck','typecheck-tests','universe-preparation']){
+  const job=requireRecord(jobs[id]);
+  assert.doesNotMatch(JSON.stringify(job),/prepared-assets-v1|public\/scenes/,'even cache transfers must stay scoped');
+  const runs=readCiSteps(source,id).map(step=>step.run).join('\n');
+  assert.doesNotMatch(runs,/pnpm setup:assets|pnpm prepare:object-json|restore-object-json/);
+  assert.match(runs,id==='universe-preparation'?/prepare-ci-inputs\.mts universe-preparation/:/pnpm prepare:typecheck/);
+ }
+});
+
+test('shared preparation expands to each expensive task once, in dependency order',async()=>{
+ const data=requireRecord(JSON.parse(await readFile(new URL('../package.json',import.meta.url),'utf8'))),scripts=requireRecord(data.scripts);
+ const expand=(name:string,stack:string[]=[]):string[]=>{
+  assert.ok(!stack.includes(name),'script dependency cycle');
+  return requireString(scripts[name]).split(' && ').flatMap(command=>{
+   const child=/^pnpm ([\w:-]+)$/.exec(command)?.[1];
+   return child&&scripts[child]!==undefined?expand(child,[...stack,name]):[command];
+  });
+ };
+ for(const name of ['build:tools','prepare:deploy']){
+  const commands=expand(name);
+  for(const task of ['node tools/prepare-catalog.mts','node tools/prepare-shell-titles.mts','node tools/prepare-overview-titles.mts'])
+   assert.equal(commands.filter(command=>command===task).length,1,`${name}: ${task}`);
+  const world=commands.findIndex(command=>command.includes('prepare-spatial-context.js'));
+  const overview=commands.indexOf('node tools/prepare-overview-titles.mts');
+  assert.ok(world>=0&&world<overview,'world context must exist before overview titles');
+ }
+ for(const filename of ['nightly.yml','deploy.yml']){
+  const source=await readFile(new URL(`../.github/workflows/${filename}`,import.meta.url),'utf8');
+  assert.doesNotMatch(source,/run: pnpm install --frozen-lockfile\s*\n/,'postinstall would build tools a second time');
+  assert.doesNotMatch(source,/run: pnpm setup:assets/,'build:deploy owns asset restoration');
+ }
 });
