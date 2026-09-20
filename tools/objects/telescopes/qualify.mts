@@ -6,6 +6,7 @@ import { writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { rememberQualification } from './qualified-observations.mts';
 import { openSpectralCube } from '../jwst/cubes/spectral-cube.mts';
+import { measureCubeResolution } from '../jwst/cubes/resolution.mts';
 import { readFitsFileHdus, type FitsHeader } from '../../fits.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
 import { pathToFileURL } from 'node:url';
@@ -184,6 +185,8 @@ export async function recordQualification(root: string, result: QualificationRes
   if (result.configuration.kind === 'jwst-band') {
     const cube = await openSpectralCube(result.product);
     facts = { ...facts, kind: 'cube', wavelengthIntervalsMicrometres: [[cube.wavelength(0), cube.wavelength(cube.planes - 1)]] };
+    const resolution = await measureCubeResolution(result.product);
+    if (resolution.bound) facts = { ...facts, angularResolutionBound: resolution.bound };
   }
   if (result.configuration.kind !== 'pds-product') {
     const headers = await readFitsFileHdus(result.product), header = headers[0]!.header;

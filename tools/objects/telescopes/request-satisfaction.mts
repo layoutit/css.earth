@@ -8,6 +8,8 @@ export interface ProductFacts {
   readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
   readonly startIso?: string; readonly endIso?: string;
   readonly angularResolutionArcsec?: number; readonly surfaceResolutionKm?: number; readonly resolutionElements?: number;
+  /** Conditional observed-profile upper bound; exceeding a request is unknown, not a measured rejection. */
+  readonly angularResolutionBound?: { readonly arcsec: number; readonly method: 'jwst-point-source-profile@1'; readonly receipt: string };
 }
 export interface RequestSatisfaction {
   readonly status: 'fulfilled' | 'unresolved' | 'refused';
@@ -46,5 +48,11 @@ export function assessRequest(request: CapabilityRequest, facts: ProductFacts): 
     ['resolutionElements', request.resolutionElements, facts.resolutionElements, true],
   ] as const) if (asked !== undefined) constraints[key] = measured === undefined ? unknown('No achieved resolution is established for this product; sampling and nominal optics are insufficient.')
     : verdict(minimum ? measured >= asked : measured <= asked, `Achieved: ${measured}; requested ${minimum ? 'at least' : 'at most'} ${asked}.`);
+  if (request.angularResolutionArcsec !== undefined && facts.angularResolutionArcsec === undefined && facts.angularResolutionBound) {
+    const bound = facts.angularResolutionBound;
+    const reason = `Observed point-source profile bound: ${bound.arcsec} arcsec over every cube plane (archive POINT classification; fit uncertainty and sampling margin). Receipt: ${bound.receipt}.`;
+    constraints.angularResolution = bound.arcsec <= request.angularResolutionArcsec ? yes(reason)
+      : unknown(`${reason} This upper bound does not establish whether the tighter requirement is met.`);
+  }
   return summarizeSatisfaction(constraints);
 }
