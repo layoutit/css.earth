@@ -40,3 +40,15 @@ export function pds4ProductIdentity(xml: string) {
   const area = pds4Block(xml, 'Identification_Area').replace(/<Modification_History(?:\s[^>]*)?>[\s\S]*?<\/Modification_History>/gu, '');
   return { logical_identifier: pds4Field(area, 'logical_identifier'), version_id: pds4Field(area, 'version_id') };
 }
+
+/** PDS UTC calendar or ordinal dates; reject day-of-year rollover. */
+export function pds3TimeIso(value: string): string {
+  const ordinal=/^(\d{4})-(\d{3})T(.*)$/u.exec(value);
+  if(ordinal){const year=Number(ordinal[1]),day=Number(ordinal[2]),date=new Date(Date.UTC(year,0,day));
+    if(day<1||date.getUTCFullYear()!==year)throw new Error('Invalid PDS day of year');
+    value=`${date.toISOString().slice(0,10)}T${ordinal[3]}`;
+  }
+  const date=new Date(/[zZ]|[+-]\d\d:\d\d$/u.test(value)?value:`${value}Z`);
+  if(!Number.isFinite(date.valueOf()))throw new Error('Invalid PDS UTC time');
+  return date.toISOString();
+}

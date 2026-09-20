@@ -31,4 +31,38 @@ to the Virtual Observatory”, *Astronomy and Computing* 25 (2018), doi:10.1016/
 
 Astroquery and PyVO depend on [Astropy 8.0.1](https://pypi.org/project/astropy/). It is installed from the hash-locked
 environment and is not copied or modified. Astropy is distributed under the BSD 3-Clause license reproduced in
-[ASTROPY-LICENSE.rst](ASTROPY-LICENSE.rst).
+[ASTROPY-LICENSE.rst](ASTROPY-LICENSE.rst). Its NDData arithmetic owns selected-output
+error propagation. [Astropy visualization](https://docs.astropy.org/en/stable/visualization/index.html)
+owns WCSAxes sky coordinates, ImageNormalize scaling and quantity-aware axes. Astropy FITS
+and QTable serialize the scientific outputs, including units and masks.
+
+# Matplotlib
+
+cssEarth uses [Matplotlib 3.11.2](https://matplotlib.org/) for static telescope output figures.
+It is an installed, hash-pinned dependency in the astronomy environment; no implementation
+source is copied or modified. Its complete license is retained in
+[MATPLOTLIB-LICENSE.txt](MATPLOTLIB-LICENSE.txt). See [savefig](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)
+for the PNG/SVG output boundary. Numeric values, scientific interpretation and receipts remain
+owned by cssEarth. Plotted archive data retain their original provenance and terms.
+
+# Optional output reference tools
+
+The output oracle imports [specutils 2.4.0](https://specutils.readthedocs.io/) and
+[Photutils 3.0.0](https://photutils.readthedocs.io/), both under BSD-3-Clause. They are
+installed in an optional test environment, not copied, modified, or bundled into the
+CLI. Their upstream distributions retain the copyright and license notices. The
+pinned optional versions are in `oracle-requirements.txt`; the reports record the
+versions used. These comparisons do not imply endorsement by either project.
+
+# PlanetMapper
+
+[PlanetMapper 1.14.0](https://github.com/ortk95/planetmapper) owns the `telescope project`
+route's navigation and nearest-neighbour surface resampling. It chains SpiceyPy/CSPICE
+for geometry and pyproj/PROJ for its map projections. Installed dependencies, not
+copied implementations; MIT notice: [PLANETMAPPER-LICENSE.txt](PLANETMAPPER-LICENSE.txt).
+Citation: [King & Fletcher (2023), JOSS 8(90), 5728](https://doi.org/10.21105/joss.05728).
+The pinned environment also includes SciPy, Photutils, pyproj, SpiceyPy and tqdm;
+their distributions retain their license notices. Photutils is now a production
+transitive dependency as well as an optional oracle dependency. This route never
+starts PlanetMapper's GUI. cssEarth owns input qualification, selection, masks,
+scientific assumptions and evidence; SPICE kernels retain NAIF/provider terms.

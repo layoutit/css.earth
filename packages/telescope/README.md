@@ -31,3 +31,138 @@ Choose a number from your saved query. It is not a fixed observation ID or a cla
 Use `--json` for machine-readable stdout and `--verbose` for detailed evidence. Progress goes to stderr. Exit codes: **0** query has retrievable choices or delivered product fulfills the request; **1** operation failed; **2** invalid arguments; **3** no retrievable choices or delivered data still has unresolved requirements; **4** delivered product refuses the request. A successful download does not imply exit 0.
 
 The wrapper and scientific implementation remain separate versioned components: updating this npm package does not update the checkout's science code. `telescope --version` reports the wrapper version; each product receipt records the scientific software and inputs used.
+
+## Archive products
+
+Scientific queries also inspect the bounded ESO/ALMA ObsCore and ESA PSA EPN-TAP services through PyVO. Their results enter the same saved choices, `get`, `outputs` and `export` commands. An advertised synchronous SODA service can fulfill an explicit ICRS cutout; failed subsets never fall back to a full download. Direct FITS and supported single-science-file ZIP/TAR products retain their complete pinned input set.
+
+Use `telescope help` for region, frame and byte/member limits. `get --offline` replays an already delivered, pinned artifact without a remote refresh; it does not requalify it with current software. Acquisition verifies origin and integrity, while scientific request satisfaction can remain unresolved. [Protocol ownership, evidence and limitations](../../docs/vo-observation-access.md).
+
+## Outputs
+
+After `get`, inspect what the delivered product can support:
+
+```sh
+telescope outputs runs/eris/pick-1/result.json
+telescope export runs/eris/pick-1/result.json --output image --hdu 1 --plane 95 --out figures/eris-plane
+telescope export runs/eris/pick-1/result.json --output spectrum --hdu 1 --pixel 25,27 --out figures/eris-pixel
+telescope export runs/eris/pick-1/result.json --output band-image --hdu 1 --band 2.2,2.4 --out figures/eris-band
+telescope export runs/eris/pick-1/result.json --output aperture-spectrum --hdu 1 --aperture 19,24,25,30 --background 29,24,35,30 --out figures/eris-aperture
+telescope export runs/eris/pick-1/result.json --output feature-map --hdu 1 --band 2.30,2.34 --continuum 2.26,2.29,2.35,2.38 --out figures/eris-feature
+```
+
+Selectors are zero-based and explicit. The adapter exports qualified FITS images, pixel/region spectra,
+band images and continuum-subtracted feature maps to FITS/ECSV, PNG, SVG, CSV and a product record. It uses the same masks,
+units and wavelength coordinates as qualification. CSV blanks preserve excluded samples;
+plots do not bridge them. Supplied variance/inverse variance is converted to standard deviation
+in the science unit.
+
+- `band-image` returns a mean weighted by spectral bin overlap with `--band`, in the original
+  science unit. Partial boundary bins contribute their overlap widths; descending axes work too.
+- `aperture-spectrum` returns the arithmetic mean over a fixed rectangular pixel region.
+  Bounds are `X0,Y0,X1,Y1`, with exclusive upper bounds. Choose a disjoint `--background` box
+  to subtract its mean, or explicitly choose `--background none`. This is a mean per-pixel
+  quantity, not total source flux; there is no solid-angle conversion or aperture correction.
+- `feature-map` integrates the residual after subtracting a linear continuum anchored by the
+  weighted means of two bracketing `--continuum` bands. Positive values are emission and
+  negative values absorption relative to that continuum. Units are the source unit × µm;
+  a frequency density integrated over wavelength is not a bolometric flux. The map makes
+  no chemical-identification or detection-significance claim.
+
+Aggregation requires every contributing sample to be valid for an output pixel/channel.
+It does not silently change the aperture or renormalize around spectral gaps. Band/feature
+maps require qualified bin edges; tabulated wavelength centers alone are insufficient.
+Extraction uses temporary file-backed arrays, with no one-million-pixel CLI limit.
+FITS/CSV retain the full native grid; figures use a recorded nearest-sample stride
+when an axis exceeds 1600 pixels. Reader and serialization memory/disk costs remain.
+PDS and ISIS products enter the same plotting path after decoding by their existing
+owners. Select ambiguous PDS arrays with `--structure NAME` and use `--hdu 0`.
+
+Astropy `NDDataArray` owns weighted arithmetic and standard-deviation propagation; css.earth
+owns the selected regions, continuum definition and strict missing-sample policy.
+Astropy WCSAxes, ImageNormalize and quantity_support own scientific plotting conventions;
+Matplotlib renders the PNG/SVG tightly around the chart, labels and legend with a
+0.12-inch gutter. PNG backgrounds are transparent; light labels suit dark backgrounds.
+No Jdaviz installation, notebook or browser is required.
+
+Every export also returns a `data` path: `image.fits` for images or `spectrum.ecsv` for
+spectra, written by Astropy. Images carry their source celestial WCS when it is separable
+on the unchanged grid, BUNIT, MASK (1 = missing) and ERR when supplied. If coordinates are
+absent or coupled to other axes, the figure uses pixels and the receipt explains why;
+malformed WCS is refused. ECSV carries explicit wavelength/value units, masks, selection
+and uncertainty policy. These files can be opened independently of css.earth.
+The receipt pins both the scientific data and figure, and records coordinate frame,
+linear display limits, colormap and WCS warnings. No new astrometric calibration is implied.
+
+Aggregate uncertainties default to omitted because covariance is unknown. Explicit
+`--uncertainty independent` propagates validated per-sample variances, including the
+background/continuum contributions, conditional on independent errors. Resampled pixels or
+channels may violate that assumption. Figures label this condition; CSV and the receipt retain
+it. No spatial/spectral resolution matching is performed when combining samples.
+
+[Real Eris examples and source hash](../../docs/virtual-telescopes.md#example-exports-eris-jwst-nirspec-ifu).
+
+Output directories must be new. Delivery files and their producing record are rechecked before
+export, and files are checked again before publication. Outputs keep the original request and
+its satisfaction result. Exporting a figure does not resolve missing science evidence.
+
+The existing astronomy Python environment now includes hash-pinned Matplotlib. Reinstall it
+with `node tools/objects/astronomy-packages/toolchain.mts install` after pulling changed pins.
+The npm package still does not install scientific dependencies automatically.
+
+Surface projection is explicit:
+
+```sh
+telescope project MEASUREMENT/output.product.json --geometry navigation.json --out MAP
+telescope export MAP/map.fits.product.json --output sphere --out SPHERE
+```
+
+The navigation file pins SPICE kernels and chooses WCS or a supported fitted disc.
+`project` writes a body map and a figure. The sphere is a standalone HTML file using
+the target's existing css.earth standard sphere and physical scale. CSS, JavaScript
+and base64 images are embedded. The projection ellipsoid is recorded separately. Projection preserves
+unknown beam resolution and does not qualify scientific publication. See the
+[navigation contract and oracle](../../docs/virtual-telescopes.md#from-a-measurement-to-a-surface-and-sphere).
+Physical 3D handoffs use an existing `point-field` or `density-volume` object package:
+
+```sh
+telescope export src/objects/stellar-neighbourhood/object.json --output points --out stars
+telescope export src/objects/milky-way/object.json --output volume --out galaxy
+```
+
+These copy the prepared renderer files and credits, validate them with the exact
+application loaders, and write a pinned receipt. The physical frame and model
+interpretation stay intact. Raw source datasets are referenced, not bundled.
+A spectral cube still needs a justified physical reconstruction; this export does
+not interpret wavelength as depth. Restore missing prepared inputs with the
+repository's `setup:prepared --object=ID` command.
+
+Mercury's inactive interior image bindings are removed for the surface export;
+its prepared geometry and camera remain unchanged.
+
+## Independent output checks
+
+The [output oracle](../../tools/objects/telescopes/output-oracle.mts) reads the original pinned
+FITS data independently of the production reducer. Specutils 2.4.0 integrates the spectral
+windows; Photutils 3.0.0 measures rectangular apertures. Native plane and pixel exports compare
+directly with FITS slices. The reference tools are optional test dependencies, installed without
+changing the production astronomy environment:
+
+```sh
+output/toolchains/astroquery/env/bin/python -m venv --system-site-packages work/telescope-oracles/env
+work/telescope-oracles/env/bin/python -m pip install -c tools/objects/astronomy-packages/requirements.lock -r tools/objects/astronomy-packages/oracle-requirements.txt
+node tools/objects/telescopes/output-oracle.mts figures/eris-band work/telescope-oracles/env/bin/python output/oracles/eris-band
+CSSEARTH_ORACLE_PYTHON="$PWD/work/telescope-oracles/env/bin/python" node --test tools/objects/telescopes/cube-outputs.test.mts
+```
+
+Each comparison writes a residual figure and a JSON report identifying the source hash,
+reference versions, mask/unit agreement and maximum numerical difference. It fails above
+1e-10 of the reference peak. All valid samples are compared; masked samples must agree too.
+The normal tests also check hand-computed signals, continuum slopes, background subtraction,
+partial-bin weighting and propagated errors. Package oracles are opt-in and only run when
+`CSSEARTH_ORACLE_PYTHON` is set; the command above enables them.
+
+This verifies numerical extraction. Both readers still use Astropy FITS/WCS; neither verifies
+archive calibration, unknown covariance, aperture corrections, molecular identity or detection
+significance. Specutils mask interpolation is avoided by checking complete selected coverage
+explicitly. Its line-flux function is called per spectrum, not on a multidimensional flux array.

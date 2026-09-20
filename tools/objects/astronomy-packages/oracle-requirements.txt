@@ -1,0 +1,15 @@
+# Optional reference tools; install in a separate venv with requirements.lock as constraints.
+asdf==5.4.0
+asdf-astropy==0.11.0
+asdf_coordinates_schemas==0.5.1
+asdf_standard==1.5.0
+asdf_transform_schemas==0.6.0
+asdf_wcs_schemas==0.5.0
+attrs==26.1.0
+gwcs==1.0.3
+jmespath==1.1.0
+ndcube==2.4.2
+photutils==3.0.0
+scipy==1.18.1
+semantic-version==2.10.0
+specutils==2.4.0

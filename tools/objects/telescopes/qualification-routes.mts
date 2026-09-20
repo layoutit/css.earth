@@ -1,6 +1,7 @@
 import { flagValue } from '../../cli-arguments.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import { bandOfFilters } from '../jwst/imaging/archive.mts';
+import { queryCapabilities, type CapabilityRequest } from './query.mts';
 
 export interface QualificationObservation {
   readonly id: string;
@@ -22,6 +23,7 @@ export interface QualificationObservation {
 }
 
 export type QualificationConfiguration =
+  | { readonly kind: 'archive-acquisition'; readonly key: string; readonly request: import('./query.mts').CapabilityRequest }
   | { readonly kind: 'source-product'; readonly id: string }
   | { readonly kind: 'spitzer-irac-channel'; readonly channel: number }
   | { readonly kind: 'jwst-band'; readonly band: string; readonly wavelengthMicrometres: readonly [number, number] }
@@ -160,6 +162,12 @@ export function supportsQualificationRoute(telescope: string, mode: string, conf
 
 /** Parse only the instrument-specific part of a qualification command, through the same route that emitted it. */
 export function qualificationConfigurationFromArguments(telescope: string, mode: string, args: readonly string[]): QualificationConfiguration {
+  if (flagValue(args, '--acquisition')) {
+    const request: unknown = JSON.parse(required(args, '--request'));
+    // The public validator checks all constraints before any archive IO. Invalid structures throw here.
+    queryCapabilities(request as CapabilityRequest, { ledgers: [], capabilities: [], targetCatalogue: [], targetAssociations: [], bodyMaps: [] });
+    return { kind: 'archive-acquisition', key: required(args, '--acquisition'), request: request as CapabilityRequest };
+  }
   if (flagValue(args, '--source-product')) return { kind: 'source-product', id: required(args, '--source-product') };
   if (flagValue(args, '--pds-lidvid')) return { kind: 'pds-product', targetLid: required(args, '--pds-target-lid'), targetName: required(args, '--pds-target-name'), lidvid: required(args, '--pds-lidvid') };
   const route = routeFor(telescope, mode);

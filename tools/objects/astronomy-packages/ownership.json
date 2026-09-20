@@ -7,49 +7,110 @@
       "package": "pyvo",
       "version": "1.9.1",
       "operation": "tap-query",
-      "consumers": ["ALMA", "ESO", "Chandra", "KOA", "CADC", "SIMBAD", "OiDB", "VizieR"]
+      "consumers": [
+        "ALMA",
+        "ESO",
+        "Chandra",
+        "KOA",
+        "CADC",
+        "SIMBAD",
+        "OiDB",
+        "VizieR"
+      ]
     },
     {
       "mechanic": "MAST service queries and downloads",
       "package": "astroquery",
       "version": "0.4.11",
       "operation": "mast-service, mast-download",
-      "consumers": ["Hubble", "JWST"]
+      "consumers": [
+        "Hubble",
+        "JWST"
+      ]
     },
     {
       "mechanic": "ALMA product discovery",
       "package": "astroquery",
       "version": "0.4.11",
       "operation": "alma-data-info",
-      "consumers": ["ALMA"]
+      "consumers": [
+        "ALMA"
+      ]
     },
     {
       "mechanic": "VizieR cone search",
       "package": "astroquery",
       "version": "0.4.11",
       "operation": "vizier-region",
-      "consumers": ["stellar diameter discovery"]
+      "consumers": [
+        "stellar diameter discovery"
+      ]
     },
     {
       "mechanic": "JPL Horizons observer ephemerides and vectors",
       "package": "astroquery",
       "version": "0.4.11",
       "operation": "horizons-ephemerides, horizons-vectors",
-      "consumers": ["Chandra", "Hubble", "Juno"]
+      "consumers": [
+        "Chandra",
+        "Hubble",
+        "Juno"
+      ]
     },
     {
       "mechanic": "PDS4 Registry product discovery and pagination",
       "package": "pds.peppi",
       "version": "0.5.0",
       "operation": "resolve-target, discover-target, discover-product",
-      "consumers": ["PDS observation qualification"]
+      "consumers": [
+        "PDS observation qualification"
+      ]
     },
     {
       "mechanic": "Supported PDS3 and PDS4 product decoding",
       "package": "pdr",
       "version": "1.4.4",
       "operation": "decode-product",
-      "consumers": ["PDS observation qualification"]
+      "consumers": [
+        "PDS observation qualification"
+      ]
+    },
+    {
+      "mechanic": "Product qualification units and FITS spectral WCS",
+      "package": "astropy",
+      "version": "8.0.1",
+      "operation": "science.mts: fits, units",
+      "consumers": [
+        "source product qualification",
+        "reducer product qualification"
+      ]
+    },
+    {
+      "mechanic": "Scientific image coordinates, display normalization, quantity axes and portable FITS/ECSV outputs",
+      "package": "astropy",
+      "version": "8.0.1",
+      "operation": "plots.mts: WCSAxes, ImageNormalize, quantity_support, FITS, QTable",
+      "consumers": [
+        "telescope native and derived image/spectrum exports"
+      ]
+    },
+    {
+      "mechanic": "Static scientific output figures",
+      "package": "matplotlib",
+      "version": "3.11.2",
+      "operation": "plots.mts",
+      "consumers": [
+        "telescope native and derived image/spectrum exports"
+      ]
+    },
+    {
+      "mechanic": "Planetary image navigation and surface resampling",
+      "package": "planetmapper",
+      "version": "1.14.0",
+      "operation": "projection.mts",
+      "consumers": [
+        "telescope project"
+      ]
     }
   ],
   "retained": [
@@ -66,12 +127,12 @@
     {
       "mechanic": "SPICE kernel evaluation",
       "implementation": "tools/spice",
-      "reason": "The production TypeScript evaluator is preparation-time infrastructure shared by 22 consumers and is already checked against CSPICE. A partial SpiceyPy path would create two production answers for one operation."
+      "reason": "Existing preparation consumers retain their CSPICE-checked evaluator. PlanetMapper exclusively owns SPICE geometry inside the new telescope project route; results are not mixed between evaluators."
     },
     {
       "mechanic": "streaming FITS and in-process WCS reads",
       "implementation": "tools/fits.mts and tools/objects/interferometry/fits-table.mts",
-      "reason": "Astropy remains the independent oracle. Moving 127 consumers across a process boundary would remove subregion streaming and does not close an archive or science capability gap."
+      "reason": "Existing in-process consumers retain subregion streaming. Astropy owns scientific metadata qualification through science.mts; those consumers do not implement that qualification contract."
     },
     {
       "mechanic": "Spitzer archive discovery and byte retrieval",

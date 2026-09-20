@@ -1,22 +1,39 @@
 /** Product metadata, never catalogue capabilities. Deliberately bounded format support. */
-import { readFitsHdus, fitsImageAccessor } from '../../fits.mts';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../source-values.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
 
 export interface NativeMetadata {
+  readonly fitsHdu?: number;
+  readonly shape?: readonly number[];
+  readonly structures?: readonly NativeMetadata[];
+  readonly quality?: { readonly policy: string; readonly samples: number; readonly finite: number; readonly usable: number; readonly flagged: number; readonly invalidUncertainty: number; readonly mask: string | null };
+  readonly uncertainty?: { readonly status: 'validated' | 'unknown'; readonly kind: string | null; readonly structure: string | null };
   readonly structure: string;
   readonly units?: { readonly value: string; readonly source: string };
-  readonly spectral?: { readonly centersMicrometres: readonly number[]; readonly source: string };
+  readonly spectral?: { readonly axis?: number; readonly centersMicrometres: readonly number[]; readonly binEdgesMicrometres?: readonly number[]; readonly source: string; readonly usableBands?: readonly boolean[] };
   readonly calibration: readonly { readonly field: string; readonly value: string }[];
   readonly limitations: readonly string[];
 }
-export function parseNativeMetadata(raw: unknown): NativeMetadata {
+export function parseNativeMetadata(raw: unknown, depth = 0): NativeMetadata {
+  if(depth > 1) throw new Error('Nested science structures exceed supported depth');
   const v = requireRecord(raw, 'native metadata');
   const units = v.units === undefined ? undefined : requireRecord(v.units);
   const spectral = v.spectral === undefined ? undefined : requireRecord(v.spectral);
+  const quality = v.quality === undefined ? undefined : requireRecord(v.quality);
+  const uncertainty = v.uncertainty === undefined ? undefined : requireRecord(v.uncertainty);
+  if (quality) for (const key of ['samples','finite','usable','flagged','invalidUncertainty']) { const n=requireFiniteNumber(quality[key]); if(!Number.isSafeInteger(n)||n<0||n>requireFiniteNumber(quality.samples))throw new Error('Invalid science quality counts'); }
+  if(uncertainty && !['validated','unknown'].includes(String(uncertainty.status)))throw new Error('Invalid uncertainty status');
+  if(spectral?.usableBands !== undefined && (requireArray(spectral.usableBands).length!==requireArray(spectral.centersMicrometres).length || requireArray(spectral.usableBands).some(x=>typeof x!=='boolean')))throw new Error('Invalid spectral mask');
+  if(v.fitsHdu!==undefined&&(!Number.isSafeInteger(v.fitsHdu)||Number(v.fitsHdu)<0))throw new Error('Invalid FITS HDU identity');
+  if(spectral?.axis!==undefined&&(!Number.isSafeInteger(spectral.axis)||Number(spectral.axis)<0||Number(spectral.axis)>=requireArray(v.shape).length))throw new Error('Invalid spectral axis identity');
   return { structure: requireString(v.structure),
+    ...(v.fitsHdu===undefined?{}:{fitsHdu:requireFiniteNumber(v.fitsHdu)}),
+    ...(v.shape ? {shape:requireArray(v.shape).map(n=>{const value=requireFiniteNumber(n);if(!Number.isSafeInteger(value)||value<1)throw new Error('Invalid science shape');return value;})}:{}),
+    ...(v.structures ? {structures:requireArray(v.structures).map(s=>parseNativeMetadata(s,depth+1))}:{}),
+    ...(quality ? {quality:{policy:requireString(quality.policy),samples:requireFiniteNumber(quality.samples),finite:requireFiniteNumber(quality.finite),usable:requireFiniteNumber(quality.usable),flagged:requireFiniteNumber(quality.flagged),invalidUncertainty:requireFiniteNumber(quality.invalidUncertainty),mask:quality.mask===null?null:requireString(quality.mask)}}:{}),
+    ...(uncertainty ? {uncertainty:{status:uncertainty.status as 'validated'|'unknown',kind:uncertainty.kind===null?null:requireString(uncertainty.kind),structure:uncertainty.structure===null?null:requireString(uncertainty.structure)}}:{}),
     ...(units ? { units: { value: requireString(units.value), source: requireString(units.source) } } : {}),
-    ...(spectral ? { spectral: { centersMicrometres: coordinates(requireArray(spectral.centersMicrometres).map(n => requireFiniteNumber(n))), source: requireString(spectral.source) } } : {}),
+    ...(spectral ? { spectral: { ...(spectral.axis===undefined?{}:{axis:requireFiniteNumber(spectral.axis)}), centersMicrometres: coordinates(requireArray(spectral.centersMicrometres).map(n => requireFiniteNumber(n))), source: requireString(spectral.source), ...(spectral.binEdgesMicrometres === undefined ? {} : {binEdgesMicrometres: coordinates(requireArray(spectral.binEdgesMicrometres).map(n=>requireFiniteNumber(n)),requireArray(spectral.centersMicrometres).length+1)}), ...(spectral.usableBands === undefined ? {} : {usableBands: requireArray(spectral.usableBands) as boolean[]}) } } : {}),
     calibration: requireArray(v.calibration).map(raw => { const row = requireRecord(raw); return { field: requireString(row.field), value: requireString(row.value) }; }),
     limitations: requireArray(v.limitations).map(s => requireString(s)) };
 }
@@ -27,67 +44,15 @@ function coordinates(values: number[], expected = values.length): number[] {
   return values;
 }
 const wavelengthScale = (unit: string) => ({ m: 1e6, nm: .001, um: 1, micron: 1, microns: 1, micrometer: 1, micrometers: 1, micrometre: 1, micrometres: 1, angstrom: .0001, angstroms: .0001 }[unit.trim().toLowerCase().replace(/[µμ]/gu, 'u')]);
-// Supported physical unit spellings. Unknown strings are retained as limitations, not promoted.
+// Read the spelling here. The shared readback validates it with Astropy before publication.
 function units(raw: unknown, source: string, limitations: string[]): NativeMetadata['units'] {
   if (raw === undefined) { limitations.push(`No data unit in ${source}.`); return undefined; }
   if (typeof raw !== 'string' || !raw.trim()) throw new Error(`Invalid native data unit in ${source}.`);
   const value = raw.trim();
-  if (!['I/F', '1', 'DIMENSIONLESS', 'DN', 'count', 'counts', 'electron', 'electrons', 'Jy', 'mJy', 'MJy/sr', 'Jy/beam', 'K', 'W m-2 sr-1 um-1'].includes(value)) {
-    limitations.push(`Unsupported data unit ${JSON.stringify(value)} in ${source}.`); return undefined;
-  }
   return { value, source };
 }
 type MetadataFacts = Pick<ProductFacts, 'nativeMetadata' | 'wavelengthIntervalsMicrometres' | 'angularResolutionArcsec' | 'resolutionEvidence'>;
 const missingResolution = 'No product-specific measured PSF or calibrated beam; pixel spacing and nominal optics do not establish achieved resolution.';
-
-/** FITS image WCS: separable linear WAVE/FREQ axes only. Never interpret axis 3 by position alone. */
-export function fitsMetadata(bytes: Buffer, pin: { file: string; sha256: string }): MetadataFacts {
-  const hdus = readFitsHdus(bytes);
-  const images = hdus.filter(h => h.count && (!h.header.XTENSION || h.header.XTENSION === 'IMAGE'));
-  const science = images.filter(h => h.header.EXTNAME === 'SCI');
-  const hdu = science.length === 1 ? science[0] : images.length === 1 ? images[0] : undefined;
-  const limitations: string[] = [], calibration: { field: string; value: string }[] = [];
-  if (!hdu) return { nativeMetadata: { structure: 'unresolved', calibration, limitations: ['No unique science image HDU; metadata cannot be assigned by file order.'] } };
-  const h = hdu.header, structure = `HDU ${hdus.indexOf(hdu)} (${h.EXTNAME ?? 'PRIMARY'})`;
-  const unit = units(h.BUNIT, `${structure}:BUNIT`, limitations);
-  let spectral: NativeMetadata['spectral'], intervals: [number, number][] | undefined;
-  const axes = hdu.dimensions.map((_, i) => i + 1).filter(i => /^(WAVE|AWAV|FREQ|VRAD|VOPT|VELO)/u.test(String(h[`CTYPE${i}`] ?? '')));
-  if (axes.length > 1) throw new Error('Ambiguous FITS spectral axes.');
-  if (axes.length === 1) {
-    const axis = axes[0], type = h[`CTYPE${axis}`], count = hdu.dimensions[axis - 1];
-    const scale = typeof h[`CUNIT${axis}`] === 'string' ? type === 'WAVE' ? wavelengthScale(String(h[`CUNIT${axis}`]))
-      : ({ Hz: 1, kHz: 1e3, MHz: 1e6, GHz: 1e9 }[String(h[`CUNIT${axis}`])]) : undefined;
-    const coupled = hdu.dimensions.some((_, j) => j + 1 !== axis && (Number(h[`PC${axis}_${j + 1}`] ?? 0) !== 0 || Number(h[`CD${axis}_${j + 1}`] ?? 0) !== 0));
-    if (!['WAVE', 'FREQ'].includes(String(type)) || !scale || coupled) limitations.push('Unsupported spectral WCS, missing/unsupported coordinate units, or spatially coupled wavelengths.');
-    else {
-      const hasCD = Object.keys(h).some(k => /^CD\d+_\d+$/u.test(k));
-      const step = hasCD ? h[`CD${axis}_${axis}`] : Number(h[`CDELT${axis}`]) * Number(h[`PC${axis}_${axis}`] ?? 1);
-      const ref = h[`CRVAL${axis}`], pixel = h[`CRPIX${axis}`];
-      if (![step, ref, pixel].every(n => typeof n === 'number' && Number.isFinite(n)) || step === 0) throw new Error('Incomplete or invalid FITS spectral WCS.');
-      const wavelength = (p: number) => { const coordinate = ((ref as number) + (p - (pixel as number)) * (step as number)) * scale;
-        if (!(coordinate > 0) || !Number.isFinite(coordinate)) throw new Error('Invalid FITS spectral coordinate.'); return type === 'FREQ' ? 299792458e6 / coordinate : coordinate; };
-      const centers = coordinates(Array.from({ length: count }, (_, i) => wavelength(i + 1)));
-      spectral = { centersMicrometres: centers, source: `${structure}:CTYPE${axis}/CUNIT${axis}/CRVAL${axis}/CRPIX${axis}/CD or PC,CDELT` };
-      const valid = new Array<boolean>(count).fill(false), at = fitsImageAccessor(bytes, hdu), stride = hdu.dimensions.slice(0, axis - 1).reduce((a, b) => a * b, 1);
-      for (let i = 0; i < hdu.count; i++) if (Number.isFinite(at(i))) valid[Math.floor(i / stride) % count] = true;
-      intervals = centers.flatMap((_, i) => valid[i] ? [[Math.min(wavelength(i + .5), wavelength(i + 1.5)), Math.max(wavelength(i + .5), wavelength(i + 1.5))] as [number, number]] : []);
-      limitations.push('Spectral intervals are WCS pixel-bin support with finite samples, not optical bandpasses or spectral resolution; quality flags and per-pixel coverage are not assessed.');
-    }
-  } else limitations.push('No spectral coordinate axis in the selected science HDU.');
-  let angularResolutionArcsec: number | undefined;
-  if (h.BMAJ !== undefined || h.BMIN !== undefined) {
-    if (typeof h.BMAJ !== 'number' || typeof h.BMIN !== 'number' || !(h.BMAJ >= h.BMIN && h.BMIN > 0)) throw new Error('Invalid or incomplete FITS restoring beam axes.');
-    for (const key of ['BMAJ', 'BMIN', 'BPA']) if (h[key] !== undefined) calibration.push({ field: `${structure}:${key}`, value: String(h[key]) });
-    if (unit?.value === 'Jy/beam' && !hdus.some(h => h.header.EXTNAME === 'BEAMS') && h.CASAMBM !== true) {
-      angularResolutionArcsec = h.BMAJ * 3600;
-      limitations.push('Resolution is the product restoring-beam major-axis FWHM; this does not independently validate deconvolution or residual emission.');
-    } else limitations.push('Beam metadata is not applicable as one verified restoring beam (unit or per-plane beam ambiguity).');
-  }
-  if (angularResolutionArcsec === undefined) limitations.push(missingResolution);
-  return { nativeMetadata: { structure, ...(unit ? { units: unit } : {}), ...(spectral ? { spectral } : {}), calibration, limitations },
-    ...(intervals?.length ? { wavelengthIntervalsMicrometres: intervals } : {}),
-    ...(angularResolutionArcsec === undefined ? {} : { angularResolutionArcsec, resolutionEvidence: [{ kind: 'calibrated', receipt: pin }] }) };
-}
 
 /** ISIS groups are confined to the attached label, not binary data or original uncalibrated labels. */
 function group(label: string, name: string): string {
@@ -105,6 +70,12 @@ function numbers(text: string): number[] {
   if (new Set(explicitUnits).size > 1) throw new Error('Mixed ISIS coordinate units are unsupported.');
   return text.replace(/<[^<>]*>/gu, '').replace(/[()]/gu, '').split(',').map(s => { const n = Number(s.trim()); if (!s.trim() || !Number.isFinite(n)) throw new Error('Invalid ISIS numeric coordinate.'); return n; });
 }
+/** Named geometry backplanes may inherit spectral keywords from their input cube. */
+export function isisGeometryBands(bytes:Buffer):boolean {
+  const header=bytes.subarray(0,128*1024).toString('latin1').split(/^End\s*$/mu)[0];
+  const names=field(group(header,'BandBin'),'Name')?.replace(/[()"]/gu,'').split(',').map(n=>n.trim().toLowerCase());
+  return !!names?.length && names.every(n=>['phase angle','emission angle','incidence angle','latitude','longitude','pixel resolution'].includes(n));
+}
 export function isisMetadata(bytes: Buffer, bands: number, validBands?: readonly boolean[]): MetadataFacts {
   const header = bytes.subarray(0, 128 * 1024).toString('latin1').split(/^End\s*$/mu)[0];
   const band = group(header, 'BandBin'), cal = group(header, 'RadiometricCalibration');
@@ -112,8 +83,9 @@ export function isisMetadata(bytes: Buffer, bands: number, validBands?: readonly
   for (const key of ['CalibrationVersion', 'OutputUnits', 'WavelengthCalibrationFile', 'BandwidthFile', 'AverageBandwidthFile', 'FlatFile']) {
     const value = field(cal, key); if (value) calibration.push({ field: `RadiometricCalibration:${key}`, value });
   }
-  if (calibration.some(row => row.field.endsWith('File'))) limitations.push('Calibration file references are recorded from the pinned label; their external bytes were not read or independently validated.');
+  if (calibration.some(row => row.field.endsWith('File'))) limitations.push('Calibration file references are recorded from the pinned label; external byte and applicability status is recorded separately in calibrationDependencies.');
   const unit = units(field(cal, 'OutputUnits'), 'RadiometricCalibration:OutputUnits', limitations);
+  if(isisGeometryBands(bytes))return {nativeMetadata:{structure:'IsisCube:geometry backplanes',calibration,limitations:['Named geometry backplanes; inherited spectral keywords do not describe measured wavelengths.']}};
   const center = field(band, 'Center'); let spectral: NativeMetadata['spectral'], intervals: [number, number][] | undefined;
   if (center) {
     const values = coordinates(numbers(center), bands);

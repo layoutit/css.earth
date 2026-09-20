@@ -1,10 +1,13 @@
+import type { CalibrationDependency } from './calibration-dependencies.mts';
 import type { NativeMetadata } from './native-metadata.mts';
 import { inputWavelengths } from './recipe-request.mts';
 /** Product facts answer a request; catalogue capabilities and successful decoding alone do not. */
 import type { CapabilityRequest, ConstraintVerdict, ProductKind, RequestedResult } from './query.mts';
 import { supportsMeasuredResolution, PROFILE_ASSUMPTIONS, RESOLUTION_ASSUMPTIONS, type ResolutionEvidence } from '../resolution-evidence.mts';
 export interface ProductFacts {
+  readonly regionCoverage?: { readonly region: import('./vo/contracts.mts').IcrsCircle; readonly answer: 'partial' | 'unknown'; readonly reason: string; readonly usablePixelCenters: number; readonly invalidPixelCenters: number };
   readonly nativeMetadata?: NativeMetadata;
+  readonly calibrationDependencies?: readonly CalibrationDependency[];
   readonly verified: boolean;
   readonly target: string;
   readonly kind?: ProductKind;
@@ -35,6 +38,9 @@ export function assessRequest(request: CapabilityRequest, facts: ProductFacts): 
     target: verdict(request.target === facts.target, `Product target: ${facts.target}.`),
   };
   const ranges = facts.wavelengthIntervalsMicrometres;
+  if (request.region) constraints.region = facts.regionCoverage && JSON.stringify(facts.regionCoverage.region) === JSON.stringify(request.region)
+    ? { answer: facts.regionCoverage.answer, reason: facts.regionCoverage.reason } : unknown('Usable-pixel coverage of the requested ICRS circle has not been qualified.');
+  if (request.spectralFrame) constraints.spectralFrame = unknown('The product spectral reference frame has not been qualified.');
   if (!ranges?.length) constraints.wavelength = unknown('No qualified wavelength interval is stated; a central wavelength does not establish band coverage.');
   else {
     const [from, to] = facts.result === 'body-map' ? request.wavelengthMicrometres : inputWavelengths(request); let end = from, started = false;

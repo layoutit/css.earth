@@ -1,0 +1,152 @@
+{
+  "captured": "2026-09-20",
+  "scope": "Initial acquisition used the public query/get/outputs/export commands. The smaller subset and direct product used saved-session APIs with retained live ObsCore discovery and fresh DataLink/science requests, followed by public outputs/export. No sample-equivalence or calibration-accuracy claim.",
+  "runs": [
+    {
+      "operation": "soda-circle-0.2-arcsec",
+      "delivery": "output/telescopes/vo/live-betelgeuse-final/pick-2/result.json",
+      "deliverySha256": "648a33ff129acbbabd7b367138aee82ac6b48441e9705e8cbfec87a968375ba0",
+      "product": {
+        "path": "files/output/telescopes/vo/acquired/d54d7b249a8f95df9df68ed3ba8216f4519614ad5c3fe5ab6b88cebc1b2a441d/science.fits",
+        "original": "output/telescopes/vo/acquired/d54d7b249a8f95df9df68ed3ba8216f4519614ad5c3fe5ab6b88cebc1b2a441d/science.fits",
+        "sha256": "626256de642d203412371967584bf0007e817df47ba29afb20bde762d9f22448",
+        "bytes": 169920
+      },
+      "satisfaction": {
+        "status": "unresolved",
+        "acceptance": "all-requested-constraints",
+        "constraints": {
+          "artifact": {
+            "answer": "yes",
+            "reason": "The current receipt verifies this exact product."
+          },
+          "target": {
+            "answer": "yes",
+            "reason": "Product target: betelgeuse."
+          },
+          "region": {
+            "answer": "unknown",
+            "reason": "RADECSYS= 'FK5 ' / Coordinate system \nthe RADECSYS keyword is deprecated, use RADESYSa."
+          },
+          "wavelength": {
+            "answer": "unknown",
+            "reason": "No qualified wavelength interval is stated; a central wavelength does not establish band coverage."
+          },
+          "time": {
+            "answer": "yes",
+            "reason": "Any observation time was accepted."
+          },
+          "kind": {
+            "answer": "yes",
+            "reason": "Product kind: image."
+          },
+          "result": {
+            "answer": "yes",
+            "reason": "Qualified result: telescope-product."
+          },
+          "angularResolution": {
+            "answer": "unknown",
+            "reason": "No supported measured or calibrated resolution evidence is established; numbers, sampling and nominal optics alone are insufficient."
+          }
+        }
+      },
+      "figureSha256": "c0ff414d387cbdceff73e05ec09701b8f6280127c0d34f5a9a031de08d9547f7"
+    },
+    {
+      "operation": "soda-circle-0.1-arcsec",
+      "delivery": "output/telescopes/vo/live-second-subset/pick-1/result.json",
+      "deliverySha256": "9283117149209754108daae7a81d8678711013acbe4cb0dce04d4850eea1ff83",
+      "product": {
+        "path": "files/output/telescopes/vo/acquired/52c12e19985f5f35415101756b8a922f43f901e1e3e8d1e392c2924f1a3fec2b/science.fits",
+        "original": "output/telescopes/vo/acquired/52c12e19985f5f35415101756b8a922f43f901e1e3e8d1e392c2924f1a3fec2b/science.fits",
+        "sha256": "f0a8a0cc5785c19231104dab4fbbc160e3d823b27ce74ea58139da6d1e9f8150",
+        "bytes": 95040
+      },
+      "satisfaction": {
+        "status": "unresolved",
+        "acceptance": "all-requested-constraints",
+        "constraints": {
+          "artifact": {
+            "answer": "yes",
+            "reason": "The current receipt verifies this exact product."
+          },
+          "target": {
+            "answer": "yes",
+            "reason": "Product target: betelgeuse."
+          },
+          "region": {
+            "answer": "partial",
+            "reason": "Requested boundary positions lie outside the returned image."
+          },
+          "wavelength": {
+            "answer": "unknown",
+            "reason": "No qualified wavelength interval is stated; a central wavelength does not establish band coverage."
+          },
+          "time": {
+            "answer": "yes",
+            "reason": "Any observation time was accepted."
+          },
+          "kind": {
+            "answer": "yes",
+            "reason": "Product kind: image."
+          },
+          "result": {
+            "answer": "yes",
+            "reason": "Qualified result: telescope-product."
+          },
+          "angularResolution": {
+            "answer": "unknown",
+            "reason": "No supported measured or calibrated resolution evidence is established; numbers, sampling and nominal optics alone are insufficient."
+          }
+        }
+      },
+      "figureSha256": "cdf4097e906fb6fa148e752c998c7d12bc09c3609fa693695e813adfa15b3f67"
+    },
+    {
+      "operation": "direct",
+      "delivery": "output/telescopes/vo/live-direct/pick-1/result.json",
+      "deliverySha256": "50ec1591f3f0d3231477c077ac906266f7fc9fba6902c1fe0f3275dfc0d56ea3",
+      "product": {
+        "path": "files/output/telescopes/vo/acquired/003058678b192837a6222929eb3881509c2d8483e4bb216ee9ffba20a55bfbee/science.fits",
+        "original": "output/telescopes/vo/acquired/003058678b192837a6222929eb3881509c2d8483e4bb216ee9ffba20a55bfbee/science.fits",
+        "sha256": "50acda00ac3cde75cde275504c90849d33e6f975e4b4e0ac2e98dc40c9e92bb3",
+        "bytes": 8458560
+      },
+      "satisfaction": {
+        "status": "unresolved",
+        "acceptance": "all-requested-constraints",
+        "constraints": {
+          "artifact": {
+            "answer": "yes",
+            "reason": "The current receipt verifies this exact product."
+          },
+          "target": {
+            "answer": "yes",
+            "reason": "Product target: betelgeuse."
+          },
+          "wavelength": {
+            "answer": "unknown",
+            "reason": "No qualified wavelength interval is stated; a central wavelength does not establish band coverage."
+          },
+          "time": {
+            "answer": "yes",
+            "reason": "Any observation time was accepted."
+          },
+          "kind": {
+            "answer": "yes",
+            "reason": "Product kind: image."
+          },
+          "result": {
+            "answer": "yes",
+            "reason": "Qualified result: telescope-product."
+          },
+          "angularResolution": {
+            "answer": "unknown",
+            "reason": "No supported measured or calibrated resolution evidence is established; numbers, sampling and nominal optics alone are insufficient."
+          }
+        }
+      },
+      "figureSha256": "98f4a472e3d3b88aeebab8e1dd14ca2c411a39f4e8385f97c50dbcde0999f177"
+    }
+  ]
+}
