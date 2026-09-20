@@ -193,15 +193,21 @@ export function mountPlanetShell({
         createInformationTabsController(drawer, previewLifetime, 'overview');
       };
       // The destination's static fragment is its card; intent usually fetched it.
-      const card = fragments.peek(object.id)?.querySelector('.planet-information-panel');
-      if (card) showCard(card);
+      const cached = fragments.peek(object.id);
+      const card = cached?.document.querySelector('.planet-information-panel');
+      if (cached && card) {
+        try { showCard(card); } finally { cached.release(); }
+      }
       else {
+        cached?.release();
         // Registry facts show at once; the card follows its fragment without
         // blocking the flight. A failed fragment fails the destination load.
         information.replaceChildren(objectCardPreview(documentTarget, object));
-        fragments.get(object.id).then(source => {
-          const arrived = source.querySelector('.planet-information-panel');
-          if (arrived && selectionPreview === preview) { showCard(arrived); updateBodyCard(); }
+        fragments.get(object.id).then(fragment => {
+          try {
+            const arrived = fragment.document.querySelector('.planet-information-panel');
+            if (arrived && selectionPreview === preview) { showCard(arrived); updateBodyCard(); }
+          } finally { fragment.release(); }
         }, () => {});
       }
       information.ariaBusy = 'true';

@@ -131,6 +131,7 @@
     "test:browser:native-scroll": "node site/test/native-scroll-browser.mts && node site/test/native-scroll-touch-browser.mts",
     "test:browser:navigation-stress": "node site/test/navigation-stress-browser.mts",
     "test:browser:navigation-stress:matrix": "node site/test/navigation-stress-matrix.mts",
+    "test:browser:navigation-residency-ab": "node site/test/navigation-residency-ab-browser.mts",
     "test:browser:nebula": "node --experimental-strip-types labs/nebula/run.mts browser-coherent",
     "test:browser:nebula-density": "node --experimental-strip-types labs/nebula/run.mts browser-density",
     "test:browser:nebula-overlays": "node --experimental-strip-types labs/nebula/run.mts browser-overlays",
