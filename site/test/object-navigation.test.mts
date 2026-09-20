@@ -7,7 +7,7 @@ import { OBJECTS, SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
 import { objectNavigation, PLANET_SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../planet-search-objects.mts";
 import { BODY_MARKER_ATLAS_PAGE_SIZE, loadMarkerDescriptors } from "../../tools/prepare-navigation.mts";
-import { markerStyle, validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
+import { markerStyle, resolveMarkerStyle, validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
 import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
 
 test("search contains every object, including the Sun; only planets enter the scale", () => {
@@ -38,6 +38,22 @@ test("prepared marker atlases and presentation follow packages", async () => {
     assert.ok(result.style.includes("color:#ffffff"));
     assert.ok(result.innerStyle.includes(`background-size:${count * 100}% 100%`));
     assert.ok(result.innerStyle.includes(`url("${marker.url2x}")`));
+    assert.deepEqual(resolveMarkerStyle(marker, { color: "#ffffff" }), {
+      color: "#ffffff",
+      size: descriptor.presentation.size,
+      image: marker.url2x,
+      position: `${(index / Math.max(1, count - 1) * 100).toFixed(4)}%`,
+      backgroundSize: `${count * 100}% 100%`,
+      ring: descriptor.presentation.ringAngle === undefined ? null : {
+        width: descriptor.presentation.size + descriptor.presentation.ringExtra!,
+        height: descriptor.presentation.ringHeight!,
+        colorShare: descriptor.presentation.ringColorShare ?? 100,
+        opacity: descriptor.presentation.ringOpacity ?? 0.65,
+        angle: descriptor.presentation.ringAngle,
+        outlineOpacity: descriptor.presentation.ringOutlineOpacity ?? 0,
+        outlineOffset: descriptor.presentation.ringOutlineOffset ?? 0,
+      },
+    });
   }
   assert.equal(PREPARED_NAVIGATION_MARKERS.saturn.presentation.scale?.ringExtra, 20);
   assert.equal(PREPARED_NAVIGATION_MARKERS.saturn.presentation.ringExtra, 14);

@@ -15,7 +15,7 @@
  * stage establishes and no more. Agreement with an archive product is another kind of evidence, and nothing here gives it. */
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
-import { basename, dirname, relative, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { addProductEvidence, productRecordPath, writeProductRecord, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
 import { loadKernelSet, type KernelSet } from '../../spice/kernel-set.mts';
@@ -103,7 +103,7 @@ export function registrationRun(program: JunocamProgram, kernels: readonly { pat
 export async function addRegistrationEvidence(receiptPath: string, repository = resolve(import.meta.dirname, '../../..')) {
   const product = basename(receiptPath);
   return addProductEvidence(productRecordPath(receiptPath), [{
-    kind: 'geometric-registration', receipt: relative(repository, receiptPath), product,
+    kind: 'geometric-registration', receipt: receiptPath, product,
     establishes: 'Each image\'s lit limb was fitted to the target\'s IAU ellipsoid at the geometry the kernel bank states, and the receipt gives the pointing and ' +
       'ephemeris offsets found and the limb residual on control points held out of the fit. It establishes that this repository\'s camera, trajectory and pointing ' +
       'put the image on the body to within that residual; it is not agreement with any archive product, and an error the kernels and the fit share would not show in it.',

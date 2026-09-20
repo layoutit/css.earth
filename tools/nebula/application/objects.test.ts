@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import ts from 'typescript';
 import { sanitizeVolumeProvenance } from './volume-provenance.ts';
+import { installedDeliveryMatchesRecipe } from './delivery-identity.ts';
 
 // Bundled for execution (test-preparation.mts, like every other `.test.ts` here), so `import.meta.dirname`
 // would resolve against the bundle's own output location, not this file's; the repo root is the actual cwd instead.
@@ -32,7 +33,14 @@ test('sanitizeVolumeProvenance leaves provenance without a staging path untouche
   assert.equal(sanitizeVolumeProvenance(lookalike), lookalike);
 });
 
-test('every volume the nebula delivery validates is sanitized, and the sanitizer invalidates installed deliveries', async () => {
+test('consumer preparation reuses a byte-verified delivery across implementation changes but not recipe changes', () => {
+  const receipt = { recipeSha256: 'a'.repeat(64), implementationSha256: 'b'.repeat(64) };
+  assert.equal(installedDeliveryMatchesRecipe(receipt, 'a'.repeat(64)), true);
+  assert.equal(installedDeliveryMatchesRecipe({ ...receipt, implementationSha256: 'c'.repeat(64) }, 'a'.repeat(64)), true);
+  assert.equal(installedDeliveryMatchesRecipe(receipt, 'd'.repeat(64)), false);
+});
+
+test('every volume the nebula delivery validates is sanitized, and an explicit bake records the sanitizer', async () => {
   const path = 'tools/nebula/application/objects.ts', source = await readFile(resolve(root, path), 'utf8');
   const file = ts.createSourceFile(path, source, ts.ScriptTarget.Latest, true);
   let validated = 0, sanitized = 0;
@@ -48,8 +56,11 @@ test('every volume the nebula delivery validates is sanitized, and the sanitizer
   visit(file);
   assert.ok(validated > 0, 'the delivery validates at least one prepared volume');
   assert.equal(sanitized, validated, 'each validated volume passes straight through sanitizeVolumeProvenance');
-  // `--if-missing` keys installed deliveries on these owners; editing the sanitizer must rebake.
+  // An explicit bake records these owners. `--if-missing` is a consumer path: it verifies the installed byte
+  // closure and recipe without silently rebaking because unrelated runtime code changed.
   assert.match(source, /'tools\/nebula\/application\/volume-provenance\.ts'/);
+  assert.match(source, /installed\(directory,sha256\(recipeBytes\)\)/);
+  assert.doesNotMatch(source, /installed\(directory,sha256\(recipeBytes\),implementationSha256\)/);
 });
 
 test('a prepared m1 lens bank, if baked locally, records no process-pid staging directory', async () => {

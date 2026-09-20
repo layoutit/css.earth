@@ -1,8 +1,9 @@
 /** Shared MAST boundary. Astroquery owns the service protocol and downloads; cssEarth validates returned identities and bytes. */
-import { access, mkdir, rm, stat, symlink } from 'node:fs/promises';
+import { access, mkdir, rm, stat, symlink, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sha256File } from '../../../src/platform/sha256.mts';
-import { requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { sha256, sha256File } from '../../../src/platform/sha256.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString, hasErrorCode } from '../../source-values.mts';
+export { ArchiveTransportError } from './client.mts';
 import { astroquery } from './client.mts';
 
 export const MAST_CACHE = resolve(import.meta.dirname, '../../../output/archive-cache/mast');
@@ -31,7 +32,23 @@ export async function mastFile(file: MastFile, directory: string, sources: reado
 }
 
 export interface MastServiceRequest { readonly service: string; readonly params: Readonly<Record<string, unknown>>; readonly pagesize?: number; readonly page?: number }
-export interface MastServiceResult { readonly astroquery: string; readonly queriedAt: string; readonly rows: readonly Record<string, unknown>[] }
+export interface MastResponsePin { readonly path: string; readonly sha256: string }
+export interface MastServiceResult { readonly astroquery: string; readonly queriedAt: string; readonly rows: readonly Record<string, unknown>[]; readonly responseRecord?: MastResponsePin }
+
+export async function preserveMastResponse(request: MastServiceRequest, result: MastServiceResult, directory = resolve(MAST_CACHE, 'responses')): Promise<MastServiceResult> {
+  const text = `${JSON.stringify({ schema: 'cssearth-mast-response@1', request, response: result }, null, 2)}\n`, digest = sha256(text), path = resolve(directory, `${digest}.json`);
+  await mkdir(directory, { recursive: true });
+  await writeFile(path, text, { flag: 'wx' }).catch(async (error: unknown) => { if (!hasErrorCode(error, 'EEXIST') || sha256(await readFile(path)) !== digest) throw error; });
+  return { ...result, responseRecord: { path, sha256: digest } };
+}
+/** Explicit replay only. A live failure never silently switches to an older response. */
+export async function replayMastResponse(pin: MastResponsePin, request: MastServiceRequest): Promise<MastServiceResult> {
+  const text = await readFile(pin.path, 'utf8'); if (sha256(text) !== pin.sha256) throw new Error('MAST response digest mismatch.');
+  const record = requireRecord(JSON.parse(text), 'MAST response record');
+  if (record.schema !== 'cssearth-mast-response@1' || JSON.stringify(record.request) !== JSON.stringify(request)) throw new Error('MAST response belongs to a different request.');
+  const response = requireRecord(record.response);
+  return { astroquery: requireString(response.astroquery), queriedAt: requireString(response.queriedAt), rows: requireArray(response.rows).map(row => requireRecord(row)), responseRecord: pin };
+}
 
 /** One typed MAST service request through the pinned Astroquery process. */
 export async function mastService(request: MastServiceRequest, now = () => new Date()): Promise<MastServiceResult> {
@@ -40,7 +57,7 @@ export async function mastService(request: MastServiceRequest, now = () => new D
   if (pagesize !== undefined && (!Number.isSafeInteger(pagesize) || pagesize <= 0)) throw new TypeError('MAST pagesize must be a positive integer.');
   if (page !== undefined && (!Number.isSafeInteger(page) || page <= 0)) throw new TypeError('MAST page must be a positive integer.');
   const answer = await astroquery({ operation: 'mast-service', service, parameters, ...(pagesize === undefined ? {} : { pagesize }), ...(page === undefined ? {} : { page }) });
-  return { astroquery: answer.astroquery, queriedAt: now().toISOString(), rows: answer.rows! };
+  return preserveMastResponse(request, { astroquery: answer.astroquery, queriedAt: now().toISOString(), rows: answer.rows! });
 }
 
 /** Compatibility view for callers that only need rows. */
@@ -55,7 +72,7 @@ export interface MastObservation {
   readonly id: string; readonly collection: string; readonly archiveTarget: string; readonly programme: string; readonly mode: string;
   readonly startIso: string; readonly endIso: string; readonly filter?: string;
 }
-export interface MastObservationResult { readonly astroquery: string; readonly queriedAt: string; readonly observations: readonly MastObservation[] }
+export interface MastObservationResult { readonly astroquery: string; readonly queriedAt: string; readonly observations: readonly MastObservation[]; readonly responseRecord?: MastResponsePin }
 const MJD_UNIX_EPOCH = 40_587;
 const mjdIso = (value: unknown, label: string) => new Date((requireFiniteNumber(value, label) - MJD_UNIX_EPOCH) * 86_400_000).toISOString();
 const text = (value: unknown, label: string) => typeof value === 'number' ? String(value) : requireString(value, label);
@@ -76,7 +93,7 @@ export function parseMastObservations(collection: string, ids: readonly string[]
       mode: requireString(row.instrument_name, `${id} mode`), startIso: mjdIso(row.t_min, `${id} start`), endIso: mjdIso(row.t_max, `${id} end`), ...(filter ? { filter } : {}) };
   });
   for (const id of ids) if (!seen.has(id)) throw new Error(`MAST did not return requested observation ${id}.`);
-  return { astroquery: result.astroquery, queriedAt: result.queriedAt, observations };
+  return { astroquery: result.astroquery, queriedAt: result.queriedAt, observations, ...(result.responseRecord ? { responseRecord: result.responseRecord } : {}) };
 }
 
 /** Fetch exact public observation identities through Astroquery's MAST client. */

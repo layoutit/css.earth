@@ -33,7 +33,7 @@ import { placeResolvedDisc } from '../resolved-disc-map.mts';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '../body-map-product.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { bodyMapFits, type BodyMap } from '../jwst/cubes/body-map.mts';
-import { bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
+import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
 import type { ProductInput, ProductSoftware } from '../product-record.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
@@ -134,13 +134,15 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
     const output = requireString(entry.output, 'output'), fits = bodyMapFits(map, { TELESCOP: 'ALMA', OBJECT: requireString(entry.target), QUANTITY: quantity, NSESSION: String(placed.length) },
       [{ name: quantity, units, values: map.depth }, { name: `${quantity} ERROR`, units, values: map.error }]);
     written.set(resolve(source, output), fits);
-    const mapProduct = { schema: 'cssearth-body-map@1',
+    const unqualifiedMap = { schema: 'cssearth-body-map@1',
       definition: definitionAt(frequencies[0]!), frame,
       grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, sha256: sha256(fits), value: quantity, uncertainty: `${quantity} ERROR` },
       mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: policy } : {}) } as const;
+    const resolution = bindMapResolution(unqualifiedMap, 'calibrated', 'applied-restoring-beam', sessions), mapProduct = resolution.product;
     const metadata = Buffer.from(formatBodyMapProduct(mapProduct));
     written.set(resolve(source, `${output}.body-map.json`), metadata);
-    written.set(resolve(source, `${output}.product.json`), Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software))));
+    written.set(resolve(dirname(resolve(source, output)), resolution.output.path), resolution.output.bytes);
+    written.set(resolve(source, `${output}.product.json`), Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software, undefined, [resolution.output]))));
     const seen = [...map.depth].filter(Number.isFinite);
     evidence.push({ id: mapId, sessions, overlaps: overlaps.filter(pair => pair.cells >= 500).map(pair => ({ first: sessions[pair.first]!.session, second: sessions[pair.second]!.session, cells: pair.cells, rmsDifferenceKelvin: round(pair.rmsDifference, 2), correlation: round(pair.correlation, 3) })),
       map: { cells: map.seenCells, areaShare: round(map.areaShare), kelvin: { minimum: round(quantile(seen, 0), 1), median: round(quantile(seen, 0.5), 1), maximum: round(quantile(seen, 1), 1) } } });

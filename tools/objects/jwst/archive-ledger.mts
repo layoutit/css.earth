@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { sampleAgreement } from './sample-agreement.mts';
 /** The JWST ledger: what the public archive holds in each observing mode, which of it this repository can already turn into
  * something drawn, and which of the objects it ships JWST has observed.
  *
@@ -157,10 +158,10 @@ export async function timeSeriesVisits(nowMjd: number): Promise<TimeSeriesVisit[
 const receiptProblem = (file: string, error: unknown) => { const said = error instanceof Error ? error.message : String(error); return said.startsWith(`${file}:`) ? said : `${file}: ${said}`; };
 
 /** The schemas the three imaging stages write their reproduction receipts under. Nothing else is a receipt. */
-export const JWST_REPRODUCTION_SCHEMAS = ['cssearth-jwst-image3-reproduction@1', 'cssearth-jwst-coron3-reproduction@1', 'cssearth-jwst-spec3-reproduction@1', 'cssearth-jwst-spec3-reproduction@2'] as const;
+export const JWST_REPRODUCTION_SCHEMAS = ['cssearth-jwst-image3-reproduction@1', 'cssearth-jwst-image3-reproduction@2', 'cssearth-jwst-coron3-reproduction@1', 'cssearth-jwst-coron3-reproduction@2', 'cssearth-jwst-spec3-reproduction@1', 'cssearth-jwst-spec3-reproduction@2', 'cssearth-jwst-spec3-reproduction@3'] as const;
 /** What a receipt has to say for the band it names to count as checked: which program, band and observation it reduced, and the
  * MAST product it compared the result against, pinned by name, size and digest. */
-export interface ReproductionReceipt { readonly schema: string; readonly program: string; readonly band: string; readonly observation: string;
+export interface ReproductionReceipt { readonly schema: string; readonly program: string; readonly band: string; readonly observation: string; readonly accepted: boolean;
   readonly mast: { readonly name: string; readonly bytes: number; readonly sha256: string } }
 const DIGEST = /^[0-9a-f]{64}$/u;
 
@@ -170,7 +171,15 @@ export function parseReproductionReceipt(value: unknown, label: string): Reprodu
   if (!(JWST_REPRODUCTION_SCHEMAS as readonly string[]).includes(schema)) throw new TypeError(`${label}: ${schema} is not a reproduction receipt.`);
   const mast = requireRecord(record.mast, `${label}: MAST product`), sha256 = requireString(mast.sha256, `${label}: MAST digest`);
   if (!DIGEST.test(sha256)) throw new TypeError(`${label}: the MAST digest it compared is not a sha256.`);
-  return { schema, program: requireString(record.program, `${label}: program`), band: requireString(record.band, `${label}: band`),
+  let accepted = false;
+  if (schema === 'cssearth-jwst-spec3-reproduction@3' || schema === 'cssearth-jwst-image3-reproduction@2' || schema === 'cssearth-jwst-coron3-reproduction@2') {
+    const acceptance = requireRecord(record.acceptance, 'cube acceptance'), local = requireRecord(record.local, 'local cube');
+    if (!DIGEST.test(requireString(local.sha256, 'local cube digest')) || !(requireFiniteNumber(local.bytes, 'local cube bytes') > 0)) throw new TypeError('The compared local cube must be pinned.');
+    const cube = schema.includes('spec3'), expected = sampleAgreement(record.samples, cube ? 'cube' : 'image');
+    accepted = (cube || Array.isArray(record.differentWcs) && record.differentWcs.length === 0 && requireRecord(record.pixels, 'image comparison').comparedOn === 'pixels')
+      && acceptance.policy === expected.policy && acceptance.tolerance === expected.tolerance && acceptance.accepted === true && expected.accepted;
+  }
+  return { schema, accepted, program: requireString(record.program, `${label}: program`), band: requireString(record.band, `${label}: band`),
     observation: requireString(record.observation, `${label}: observation`),
     mast: { name: requireString(mast.name, `${label}: MAST name`), bytes: requireFiniteNumber(mast.bytes, `${label}: MAST bytes`), sha256 } };
 }
@@ -205,7 +214,7 @@ export async function repositoryState(repository = REPOSITORY) {
         : receipt.mast.name !== requireString(level3.name, `${file}: ${name} product name`) ? `the product ${receipt.mast.name}`
         : receipt.mast.bytes !== requireFiniteNumber(level3.bytes, `${file}: ${name} product bytes`) ? `${receipt.mast.bytes} bytes` : null;
       if (wrong) receiptProblems.push(`${id}.${name}.reproduction.json: it compared ${wrong}, which ${file} does not pin.`);
-      else proved.add(mode);
+      else if (receipt.accepted) proved.add(mode);
     }
     for (const mode of pinned) state.get(mode)!.programs.push(id);
     for (const mode of proved) state.get(mode)!.checked.push(id);

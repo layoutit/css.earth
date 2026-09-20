@@ -179,12 +179,12 @@ export async function pinImagingProgram(id: string, crdsContext: string, observa
       members: entry.members.map(member => ({ ...member, ...(bands[index]?.members.find(m => m.name === member.name)?.sha256 ? { sha256: bands[index]!.members.find(m => m.name === member.name)!.sha256 } : {}) })),
       ...(entry.references ? { references: entry.references.map(member => ({ ...member, ...(bands[index]?.references?.find(m => m.name === member.name)?.sha256 ? { sha256: bands[index]!.references!.find(m => m.name === member.name)!.sha256 } : {}) })) } : {}) };
     if (index >= 0) bands[index] = withDigests; else bands.push(withDigests);
-    console.log(`${observation}: ${entry.band}, ${entry.members.length} members${entry.references ? `, ${entry.references.length} PSF references` : ''}`);
+    console.error(`${observation}: ${entry.band}, ${entry.members.length} members${entry.references ? `, ${entry.references.length} PSF references` : ''}`);
   }
   const program = parseImagingProgram({ schema: 'cssearth-jwst-imaging-program@1', id, programme, target, crdsContext, ...(existing?.image3 ? { image3: existing.image3 } : {}), bands });
   await mkdir(PROGRAMS, { recursive: true });
   await writeFile(path, `${JSON.stringify(program, null, 2)}\n`);
-  console.log(`IMAGING_PROGRAM ${path}`);
+  console.error(`IMAGING_PROGRAM ${path}`);
   return { path, program };
 }
 

@@ -5,7 +5,7 @@ import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } f
 import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-residency.js';
 import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
 import { loadFocusCatalogs } from './focus-catalog.mts';
-import { parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/objects';
+import { parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { createSpaceMinimapSetting } from './minimap/minimap-setting.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createPreparedUniverse, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses, createRetainedGeometrySnapshot } from '../src/renderers/css/dist/universe.js';
@@ -24,6 +24,7 @@ import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepare
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { minorMoonOrbitIds, suppressMinorMoonOrbitPaint } from './moon-orbit-policy.mts';
 import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
+import { createInFlightLoader } from './in-flight-loader.mts';
 
 const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
 const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
@@ -38,13 +39,15 @@ const annotationPriorities = Object.fromEntries(SCENE_OBJECTS.map(object =>
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
   loadShells(): Promise<{ payload: Awaited<ReturnType<typeof loadPreparedCssSurfaceShell>>; resolveResource(path: string): string }[]>;
-  catalogs: Awaited<ReturnType<typeof loadFocusCatalogs>>;
+  catalogSources(): Awaited<ReturnType<typeof loadFocusCatalogs>>['galaxies']['sources'];
 };
 let universePromise: Promise<ApplicationUniverse> | null = null;
 function loadApplicationUniverse(): Promise<ApplicationUniverse> {
   universePromise ??= (async () => {
-    const catalogs = await loadFocusCatalogs(document, location.origin);
-    const { galaxies: galaxyCatalog, clusters: clusterCatalog, nebulae: nebulaCatalog } = catalogs;
+    let catalogs: Awaited<ReturnType<typeof loadFocusCatalogs>> | null = null;
+    let catalogsLoading: Promise<Awaited<ReturnType<typeof loadFocusCatalogs>>> | null = null;
+    const loadCatalogs = () => catalogs ? Promise.resolve(catalogs) : catalogsLoading ??= loadFocusCatalogs(document, location.origin)
+      .then(value => catalogs = value).finally(() => { catalogsLoading = null; });
     // Only the context objects' folders are globbed; bodies share src/objects but are not world resources.
     const descriptors = CONTEXT_OBJECT_DESCRIPTORS, assets = CONTEXT_OBJECT_ASSET_URLS;
     const resourceSet = (objectId: string) => {
@@ -76,12 +79,16 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       });
     let shellsLoaded: Promise<Awaited<ReturnType<(typeof shellLoaders)[number]>>[]> | null = null;
     const loadShells = () => shellsLoaded ??= Promise.all(shellLoaders.map(load => load()));
-    const imageLayers = await Promise.all(Object.values(descriptors).map(parseObjectDescriptor).filter(descriptor => descriptor.type === 'image-layer-bank')
-      .map(async descriptor => {
-        const set = resourceSet(descriptor.id);
-        return { payload: await loadPreparedCssImageLayers(set.descriptor, set.transport),
-          resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
-      }));
+    const imageLayerDescriptors = Object.values(descriptors).map(parseObjectDescriptor).filter(descriptor => descriptor.type === 'image-layer-bank')
+      .map(parseImageLayerBankDescriptor);
+    const imageLayerBanks = imageLayerDescriptors.map(descriptor => ({ id: descriptor.id, frame: descriptor.frame }));
+    const loadImageLayer = createInFlightLoader(async (id: string) => {
+      const descriptor = imageLayerDescriptors.find(candidate => candidate.id === id);
+      if (!descriptor) throw new TypeError(`Unknown prepared image-layer bank: ${id}.`);
+      const set = resourceSet(id);
+      return { payload: await loadPreparedCssImageLayers(set.descriptor, set.transport),
+        resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
+    });
     const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS)
       .map(([id, sprite]) => [id, { ...contextMarkerSprite(sprite),
         minimumDiameterPixels: asteroidIds.includes(id) ? 2 : 2.4 }]));
@@ -92,31 +99,30 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const volumeLensDescriptors = Object.values(descriptors).map(parseObjectDescriptor)
       .filter(descriptor => descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available);
     const volumeLensBanks = volumeLensDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame) }));
-    const volumeLensLoads = new Map<string, Promise<{ payload: Awaited<ReturnType<typeof loadPreparedVolumeLenses>>; resolveResource(path: string): string }>>();
-    const loadVolumeLens = (id: string) => {
-      let load = volumeLensLoads.get(id);
-      if (!load) {
-        const descriptor = volumeLensDescriptors.find(candidate => candidate.id === id);
-        if (!descriptor) throw new TypeError(`Unknown prepared volume lens bank: ${id}.`);
-        const set = resourceSet(id);
-        load = loadPreparedVolumeLenses(set.descriptor, set.transport)
-          .then(payload => ({ payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`) }));
-        volumeLensLoads.set(id, load);
-      }
-      return load;
-    };
+    const loadVolumeLens = createInFlightLoader(async (id: string) => {
+      const descriptor = volumeLensDescriptors.find(candidate => candidate.id === id);
+      if (!descriptor) throw new TypeError(`Unknown prepared volume lens bank: ${id}.`);
+      const set = resourceSet(id), payload = await loadPreparedVolumeLenses(set.descriptor, set.transport);
+      return { payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
+    });
     // The world worker reads its own prepared context; background stars are already baked.
     const plannerSource = { contextUrl: APPLICATION_WORLD_CONTEXT_URL };
-    const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayers, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: new URL('../src/objects/nearby-universe/prepared/points.json', import.meta.url).href, backgroundPointCloud: new URL('../src/objects/nearby-universe/prepared/cloud.webp', import.meta.url).href, annotationPriorities, annotationOpacities, plannerSource,
-      catalog: { payload: galaxyCatalog, galaxySample: galaxyDisplaySample, nebulae: nebulaCatalog, fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM,
-        fullDistanceM: galaxyPresentation.fullDistanceM,
-        clusters: { payload: clusterCatalog, fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } },
+    const catalogBank = { fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM, fullDistanceM: galaxyPresentation.fullDistanceM,
+      clusters: { fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } };
+    const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: new URL('../src/objects/nearby-universe/prepared/points.json', import.meta.url).href, backgroundPointCloud: new URL('../src/objects/nearby-universe/prepared/cloud.webp', import.meta.url).href, annotationPriorities, annotationOpacities, plannerSource, catalogBank,
+      loadCatalog: async () => {
+        const { galaxies, clusters, nebulae } = await loadCatalogs();
+        return { payload: galaxies, galaxySample: galaxyDisplaySample, nebulae, ...catalogBank,
+          clusters: { payload: clusters, ...catalogBank.clusters } };
+      },
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
       resolvePointResource: path => starSet.resolve(`prepared/${path}`) });
     const markerPool = 'context-markers';
     const markerEntries = [...new Set(Object.values(sprites).map(sprite => sprite.url))]
       .map((url, index) => ({ key: `${markerPool}:${index}`, url, pool: markerPool }));
-    return { ...universe, loadShells, catalogs, assets: {
+    return { ...universe, loadShells,
+      catalogSources: () => catalogs ? [...catalogs.galaxies.sources, ...catalogs.clusters.sources, ...catalogs.nebulae.sources] : [],
+      assets: {
       entries: [...universe.assets.entries, ...markerEntries],
       pools: [...universe.assets.pools, { id: markerPool, retention: 'mount', capacity: markerEntries.length,
         concurrency: 4, reuse: false, decoding: 'async' }],
@@ -154,7 +160,7 @@ export function createApplicationWorldContext() {
         releaseOcclusion = occlusion.subscribe(updateOcclusion);
         contextNavigation = createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
           unavailableObjectIds: Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id),
-          sources: [...prepared.catalogs.galaxies.sources, ...prepared.catalogs.clusters.sources, ...prepared.catalogs.nebulae.sources], windowTarget });
+          sources: prepared.catalogSources, windowTarget });
         layer.setHiddenOrbits(hiddenOrbitIds);
         const restoreMoonOrbitPaint = suppressMinorMoonOrbitPaint(presentationHost, minorMoonIds);
         const framePlanner = prepared.createFramePlanner();
@@ -239,10 +245,19 @@ export function createApplicationWorldContext() {
             if (!active && !destroyed && publication) minimap.publish(publication.world, publication.viewport);
           },
           connectNavigation: contextNavigation.connect,
-          suspendFocus: contextNavigation.suspend, restoreFocus: contextNavigation.restore,
-          selectPreparedFocus(id: string) {
+          suspendFocus: contextNavigation.suspend,
+          restoreFocus(url: string | URL) {
+            const focus = new URL(url, windowTarget.location.href).searchParams.get('focus');
+            if (!focus) return contextNavigation.restore(url);
+            return layer.ensureGalaxyCatalog().then(() => contextNavigation!.restore(url)).catch(error => target.reportError(error));
+          },
+          async selectPreparedFocus(id: string) {
+            await layer.ensureGalaxyCatalog();
             const object = layer.resolveGalaxy(id);
-            return object ? contextNavigation.select(object) : null;
+            if (!object) return;
+            const detailedId = 'detailedObjectId' in object ? object.detailedObjectId : undefined;
+            if (detailedId) void layer.ensureImageLayer(detailedId).catch(error => target.reportError(error));
+            await contextNavigation.select(object);
           },
           present(world: WorldCameraPose, viewport: WorldCameraViewport, { signal, commit = () => {} }: { signal: AbortSignal; commit?: () => void }) {
             return frameQueue.presentAndWait({ world, viewport, commit,

@@ -99,7 +99,7 @@ test('the measurement adds geometric registration to its own record, and refuses
     const record = await addRegistrationEvidence(path, work);
     const registration = evidenceFor(record, name, 'geometric-registration');
     assert.equal(registration.length, 1);
-    assert.equal(registration[0]!.receipt, name);
+    assert.ok(registration[0]!.receiptPin);
     assert.match(registration[0]!.establishes, /limb was fitted to the target's IAU ellipsoid/u);
     assert.match(registration[0]!.establishes, /not agreement with any archive product/u);
     assert.equal(evidenceFor(record, name, 'archive-agreement').length, 0, 'fitting our own geometry is not agreement with an archive');

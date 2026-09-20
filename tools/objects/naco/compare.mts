@@ -171,7 +171,7 @@ export async function addComparisonEvidence(value: Pick<Reproduction, 'kind' | '
   const establishes = internalConsistencyEstablishes(value);
   for (const product of products) {
     await addProductEvidence(productRecordPath(product),
-      [{ kind: 'internal-consistency', receipt, product: basename(product), establishes }], output => resolve(dirname(product), output));
+      [{ kind: 'internal-consistency', receipt: resolve(receipt), product: basename(product), establishes }], output => resolve(dirname(product), output));
   }
 }
 
@@ -242,7 +242,7 @@ export async function compareTemplates(programId: string, work: string, template
   };
   const receipt = resolve(PROGRAMS, `${program.program}.${value.product}.reproduction.json`);
   // The evidence goes to the records first, so a product whose run wrote none leaves no receipt claiming it was checked.
-  await addComparisonEvidence(value, [a.result.combined, b.result.combined], repositoryPath(receipt));
+  await addComparisonEvidence(value, [a.result.combined, b.result.combined], receipt);
   await writeFile(receipt, `${JSON.stringify(value, null, 2)}\n`);
   return value;
 }

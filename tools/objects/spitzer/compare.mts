@@ -253,7 +253,7 @@ export async function compareChannel(program: SpitzerProgram, channel: SpitzerCh
   // `evidenceFor(record, mosaic, 'archive-agreement')` through the shared API and must find this check there; evidence filed
   // only against the receipt is evidence nobody looking at the product can discover. addProductEvidence rewrites that one
   // list and refuses if the mosaic on disk is no longer the file its record made, so evidence can never drift onto other bytes.
-  await addProductEvidence(resolve(work, `${output}.product.json`), [archiveAgreement(program, channel, archive.name, output)], path => resolve(work, path));
+  await addProductEvidence(resolve(work, `${output}.product.json`), [archiveAgreement(program, channel, archive.name, output)], path => resolve(work, path), () => receiptPath(program.id, channel.channel));
   return reproduction;
 }
 

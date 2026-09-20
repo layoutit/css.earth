@@ -15,7 +15,7 @@ import { requireFiniteNumber, requireRecord, requireString } from '../../source-
 import { sha256, sha256File } from '../../../src/platform/sha256.mts';
 import { bodyMapFits, topRowFirst } from '../jwst/cubes/body-map.mts';
 import { formatBodyMapProduct, type BodyMapFrame, type MeasurementDefinition } from '../body-map-product.mts';
-import { bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
+import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
 import { productRecordPath, readProductRecord, sameRun, type ProductInput, type ProductSoftware } from '../product-record.mts';
 import { placeResolvedDisc } from '../resolved-disc-map.mts';
 import { horizonsTables } from '../sphere-horizons.mts';
@@ -133,7 +133,7 @@ export async function authorNacoBodyMap(target: string, programId: string, produ
     orientation = await loadOrientation(REPOSITORY, { kind: 'iau-pck', path: PCK, body: bodyCode } as never, REPOSITORY);
   const placed = placeResolvedDisc({ plane: { width: crop.width, height: crop.height, values: normalised.values, uncertainty: normalised.uncertainty, arcsecPerPixel: registration.arcsecPerPixel },
     identity: { id: `${programId}:${template}`, telescope: 'VLT/NACO', instrument: `NAOS+CONICA ${String(productHeader['ESO INS OPTI6 NAME'])}`,
-      mode: 'imaging', programme: programId, midTimeJd, exposureSeconds },
+      mode: 'imaging', programme: programId, midTimeJd, startTimeJd: firstJd, endTimeJd: lastJd, exposureSeconds },
     geometry: { epochJd: midTimeJd, targetRightAscensionDegrees: rightAscension!, targetDeclinationDegrees: declination!, rangeAu: rangeAu!,
       sunRightAscensionDegrees: (Math.atan2(-sunY!, -sunX!) / DEGREE + 360) % 360, sunDeclinationDegrees: Math.asin(-sunZ! / sunRange) / DEGREE },
     orientation, radiusKm, grid: { width: 180, height: 90 }, maximumEmissionDegrees: 70, minimumDiscPixels: 20 });
@@ -146,10 +146,11 @@ export async function authorNacoBodyMap(target: string, programId: string, produ
   const frame: BodyMapFrame = { body: target, radiusKm, rotation: { model: PCK, sha256: sha256(pckBytes), bodyCode } };
   const fits = bodyMapFits(placed.map, { TELESCOP: 'VLT/NACO', OBJECT: program.object, QUANTITY: quantity, FILTER: String(productHeader['ESO INS OPTI6 NAME']) },
     [{ name: quantity, units, values: placed.map.depth }, { name: `${quantity} ERROR`, units, values: placed.map.error }]);
-  const mapProduct = { schema: 'cssearth-body-map@1', definition, frame,
+  const unqualifiedMap = { schema: 'cssearth-body-map@1', definition, frame,
     grid: { width: placed.map.width, height: placed.map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' },
     planes: { file: basename(output), sha256: sha256(fits), value: quantity, uncertainty: `${quantity} ERROR` },
     mask: { maximumEmissionDegrees: 70, missing: 'NaN' }, observations: [placed.observation] } as const;
+  const resolution = bindMapResolution(unqualifiedMap, 'measured', 'disc-edge-gaussian-fit', placed.centre), mapProduct = resolution.product;
   const metadata = Buffer.from(formatBodyMapProduct(mapProduct)), metadataPath = `${output}.body-map.json`, mapRecordPath = productRecordPath(output);
   const inputs: ProductInput[] = [
     { role: 'reduced jitter image', identity: product, bytes: productBytes.byteLength, sha256: sha256(productBytes) },
@@ -161,8 +162,8 @@ export async function authorNacoBodyMap(target: string, programId: string, produ
     { role: 'leap seconds', identity: LEAP_SECONDS_KERNEL, bytes: leapBytes.byteLength, sha256: sha256(leapBytes) },
   ];
   const software: ProductSoftware[] = [{ name: 'cssEarth resolved-disc-map', version: '1' }, { name: 'node', version: process.versions.node }];
-  const mapRecord = Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software)));
-  const files = new Map<string, Buffer>([[output, fits], [metadataPath, metadata], [mapRecordPath, mapRecord], [observerPath, Buffer.from(tables.observer)], [heliocentricPath, Buffer.from(tables.heliocentric)]]);
+  const mapRecord = Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software, undefined, [resolution.output])));
+  const files = new Map<string, Buffer>([[resolve(dirname(output), resolution.output.path), resolution.output.bytes], [output, fits], [metadataPath, metadata], [mapRecordPath, mapRecord], [observerPath, Buffer.from(tables.observer)], [heliocentricPath, Buffer.from(tables.heliocentric)]]);
   const changed: string[] = [];
   for (const [path, bytes] of files) if (!(await readFile(path).then(existing => existing.equals(bytes), () => false))) {
     changed.push(path); if (!options.check) { await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes); }

@@ -5,9 +5,10 @@ interface Props {
   label?: string;
   panelSuffix?: 'content' | 'panel';
   tabs?: readonly { id: string; label: string; count?: number }[];
+  hidden?: boolean;
 }
 const { idPrefix, group, label = group === 'overview' ? 'Body overview' : 'Object information', panelSuffix = 'content',
-  tabs = [{ id: 'dataset', label: 'Datasets' }, { id: 'factsheet', label: 'Factsheet' }, { id: 'moons', label: 'Moons' }] } = Astro.props;
+  tabs = [{ id: 'dataset', label: 'Datasets' }, { id: 'factsheet', label: 'Factsheet' }, { id: 'moons', label: 'Moons' }], hidden = false } = Astro.props;
 // The browser owns selection and arrow-key movement. Both the HTML page and
 // the running scene use these same controls and these same panels.
 // Only selection is generated here. All appearance stays in the shared tab rules.
@@ -15,7 +16,7 @@ const selection = tabs.map(({id}) => `#${idPrefix}-${id}-${panelSuffix} { --info
 .planet-native-tabs:has(> #${idPrefix}-${id}-tab:checked) ~ #${idPrefix}-${id}-${panelSuffix} { --information-panel-display: block; }`).join('\n');
 ---
 <div class:list={[group === 'overview' ? 'planet-object-tabs' : 'planet-card-tabs', 'planet-native-tabs']}
-  data-body-overview={group === 'overview' ? true : undefined} role="radiogroup" aria-label={label}>
+  data-body-overview={group === 'overview' ? true : undefined} role="radiogroup" aria-label={label} {hidden}>
   {tabs.map((tab, index) => <>
     <input class="planet-native-tab" type="radio" name={`${idPrefix}-information`} id={`${idPrefix}-${tab.id}-tab`}
       data-information-tab={tab.id} data-information-group={group} value={tab.id} aria-controls={`${idPrefix}-${tab.id}-${panelSuffix}`} checked={index === 0} />

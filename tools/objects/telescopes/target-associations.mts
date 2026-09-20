@@ -3,7 +3,7 @@
  * The checked-in claim stores only the semantic join. MAST remains authoritative for the observation's programme, mode,
  * archive target, filter and time; cssEarth reads those facts live through the pinned Astroquery boundary. */
 import { requireArray, requireRecord, requireString } from '../../source-values.mts';
-import { mastObservations, type MastObservationResult } from '../astronomy-packages/mast.mts';
+import { ArchiveTransportError, mastObservations, type MastObservationResult } from '../astronomy-packages/mast.mts';
 
 export const TARGET_ASSOCIATIONS_SCHEMA = 'cssearth-target-associations@2';
 
@@ -22,6 +22,7 @@ export interface TargetAssociationSource {
 }
 
 export interface TargetAssociation {
+  readonly responseRecord?: MastObservationResult['responseRecord'];
   readonly target: string;
   readonly archive: 'mast';
   readonly collection: string;
@@ -74,12 +75,18 @@ export function hydrateTargetAssociation(source: TargetAssociationSource, result
   }
   return [...groups.values()].map(observations => ({ target: source.target, archive: 'mast', collection: source.collection,
     mode: observations[0]!.mode, archiveTarget: observations[0]!.archiveTarget, programme: observations[0]!.programme,
-    astroquery: result.astroquery, queriedAt: result.queriedAt, observations, evidence: source.evidence }));
+    astroquery: result.astroquery, queriedAt: result.queriedAt, observations, evidence: source.evidence, ...(result.responseRecord ? { responseRecord: result.responseRecord } : {}) }));
 }
 
 /** Resolve only the target associations needed by the current query. */
-export async function loadTargetAssociations(sources: readonly TargetAssociationSource[]): Promise<TargetAssociation[]> {
+export async function loadTargetAssociations(sources: readonly TargetAssociationSource[], options: { lookup?: typeof mastObservations; failures?: { collection: string; reason: string }[] } = {}): Promise<TargetAssociation[]> {
   const hydrated: TargetAssociation[] = [];
-  for (const source of sources) hydrated.push(...hydrateTargetAssociation(source, await mastObservations(source.collection, source.observations)));
+  for (const source of sources) {
+    try { hydrated.push(...hydrateTargetAssociation(source, await (options.lookup ?? mastObservations)(source.collection, source.observations))); }
+    catch (error) {
+      if (!(error instanceof ArchiveTransportError) || !options.failures) throw error;
+      options.failures?.push({ collection: source.collection, reason: error.message });
+    }
+  }
   return hydrated;
 }

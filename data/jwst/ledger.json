@@ -12,9 +12,7 @@
    "programs": [
     "ngc-3132-2733"
    ],
-   "checked": [
-    "ngc-3132-2733"
-   ],
+   "checked": [],
    "shippedObjects": 21
   },
   {
@@ -28,10 +26,7 @@
     "hd-181327-2780",
     "hip-65426-1386"
    ],
-   "checked": [
-    "hd-181327-2780",
-    "hip-65426-1386"
-   ],
+   "checked": [],
    "shippedObjects": 1
   },
   {
@@ -67,8 +62,6 @@
     "trappist-1c-miri-2304-004"
    ],
    "checked": [
-    "europa-1250",
-    "ngc-6720-1558",
     "trappist-1b-miri-3077"
    ],
    "shippedObjects": 23
@@ -94,9 +87,7 @@
    "programs": [
     "europa-1250"
    ],
-   "checked": [
-    "europa-1250"
-   ],
+   "checked": [],
    "shippedObjects": 36
   },
   {
@@ -146,14 +137,12 @@
     "europa-9230-o003",
     "europa-9230-o004",
     "io-jw01373-o024_t007_nirspec_g395h-f290lp",
+    "makemake-jw01254-o004_t001_nirspec_g235m-f170lp",
     "sn-1987a-1232",
     "sn-1987a-3131"
    ],
    "checked": [
-    "europa-1250",
-    "io-jw01373-o024_t007_nirspec_g395h-f290lp",
-    "sn-1987a-1232",
-    "sn-1987a-3131"
+    "makemake-jw01254-o004_t001_nirspec_g235m-f170lp"
    ],
    "shippedObjects": 68
   },
@@ -2573,7 +2562,9 @@
     "1254",
     "9453"
    ],
-   "drawn": []
+   "drawn": [
+    "NIRSPEC/IFU"
+   ]
   },
   {
    "id": "mars",
