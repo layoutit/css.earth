@@ -206,14 +206,16 @@ test.each([
     expect(volumeImage.style.opacity).toBe(withSky ? '' : String(expectedGain));
     expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
     if (withSky) {
-      expect(skyRoot.style.visibility).toBe(expected < 1 ? 'visible' : 'hidden');
-      expect((1 - Number(volumeRoot.style.opacity)) * Number(skyRoot.style.opacity)).toBeCloseTo(1 - expected, 12);
+      const expectedComposite = expected * expectedGain;
+      expect(skyRoot.style.visibility).toBe(expectedComposite < 1 ? 'visible' : 'hidden');
+      expect(Number(skyRoot.style.opacity)).toBe(1);
+      expect((1 - Number(volumeRoot.style.opacity)) * Number(skyRoot.style.opacity)).toBeCloseTo(1 - expectedComposite, 12);
       const skyWeight = Number(skyRoot.dataset.skyContribution);
-      expect(skyWeight).toBeCloseTo(1 - expected, 12);
-      expect(Number(volumeRoot.dataset.volumeOpacity) + skyWeight).toBeCloseTo(1, 12);
+      expect(skyWeight).toBeCloseTo(1 - expectedComposite, 12);
+      expect(Number(volumeRoot.style.opacity) + skyWeight).toBeCloseTo(1, 12);
       // Test the actual DOM source-over equation, not just reported weights.
-      // Regrouping must not turn exposure into extra NASA contribution.
-      expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBeCloseTo(.4 * (expected * expectedGain + 1 - expected), 12);
+      // Equal-brightness sources stay continuous while the prepared volume exposure rises.
+      expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBeCloseTo(.4, 12);
       if (distance === regressionDistance) {
         expect(expected).toBe(0);
         expect(skyWeight).toBe(1);

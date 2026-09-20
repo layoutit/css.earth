@@ -46,11 +46,11 @@ try {
     assert.deepEqual(snapshot.skyFaceNames, ['nx', 'ny', 'nz', 'px', 'py', 'pz']);
     assert.equal(snapshot.skyFaces % 6, 0);
     // Native computed opacity is serialized to fewer digits than the prepared weights.
-    assert.ok(Math.abs(snapshot.skyContribution + snapshot.volumeOpacity - 1) < 1e-6,
+    assert.ok(Math.abs(snapshot.skyContribution + snapshot.volumeCompositeOpacity - 1) < 1e-6,
       'completed-image blend has complementary contributions, without a fade-to-black factor');
     assert.ok(Math.abs(snapshot.volumeCompositeOpacity - snapshot.volumeOpacity * snapshot.volumeBrightness) < 1e-6);
     assert.ok(Math.abs((1 - snapshot.volumeCompositeOpacity) * snapshot.skyOpacity - snapshot.skyContribution) < 1e-6,
-      'actual source-over coefficients preserve the prepared sky contribution');
+      'actual source-over coefficients preserve the visible sky contribution');
     assert.equal(snapshot.volumeWeight, 1);
     if (snapshot.skyContribution > 1e-8) assert.equal(snapshot.skyVisibility, 'visible');
     else assert.equal(snapshot.skyVisibility, 'hidden');

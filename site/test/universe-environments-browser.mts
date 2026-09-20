@@ -96,10 +96,11 @@ try {
     await scrollTo(page, distance);
     snapshots[name] = await read(page);
     assert.ok(Math.abs(snapshots[name].volumeOpacity - opacity) < 1e-6, `${name}: actual volume opacity follows prepared profile`);
-    assert.equal(snapshots[name].skyVisibility, opacity < 1 ? 'visible' : 'hidden');
-    assert.ok(Math.abs(snapshots[name].volumeCompositeOpacity - opacity * snapshots[name].volumeBrightness) < 1e-6);
-    assert.ok(Math.abs((1 - snapshots[name].volumeCompositeOpacity) * snapshots[name].skyOpacity - (1 - opacity)) < 1e-6,
-      'actual background composition preserves the prepared sky contribution');
+    const compositeOpacity = opacity * snapshots[name].volumeBrightness;
+    assert.equal(snapshots[name].skyVisibility, compositeOpacity < 1 ? 'visible' : 'hidden');
+    assert.ok(Math.abs(snapshots[name].volumeCompositeOpacity - compositeOpacity) < 1e-6);
+    assert.ok(Math.abs((1 - snapshots[name].volumeCompositeOpacity) * snapshots[name].skyOpacity - (1 - compositeOpacity)) < 1e-6,
+      'actual background composition preserves the visible sky contribution');
     assert.equal(snapshots[name].volumeImageOpacity, 1, 'exposure no longer nests inside the handoff');
     await page.screenshot({ path: resolve(output, `${name}.png`) });
   }
@@ -218,7 +219,8 @@ async function read(page: Page) {
 
 function assertPhysicalTranslation(before: Snapshot, after: Snapshot) {
   for (const snapshot of [before, after]) {
-    assert.equal(snapshot.skyVisibility, 'hidden', 'physical travel check must be entirely volume-owned');
+    assert.equal(snapshot.skyVisibility, snapshot.volumeCompositeOpacity < 1 ? 'visible' : 'hidden',
+      'physical travel keeps the sky until the volume visibly owns the background');
     assert.equal(snapshot.volumeOpacity, 1);
     assert.equal(snapshot.roots, 1);
   }

@@ -339,11 +339,15 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       let starsHandoff = 0;
       const publishBackground = () => {
         const brightness = volumeBrightness;
-        // The completed images contribute (1-t)*sky + t*b*volume. Factoring
-        // t*b onto the volume avoids nesting its exposure inside its handoff.
-        // Compensate the opaque sky underlay so its contribution stays 1-t.
+        // The volume's prepared exposure is part of its visible contribution. Keep the
+        // opaque sky underneath it until that completed contribution actually replaces it;
+        // fading the sky by raw volume opacity leaves a black trough while b is still low.
         const alpha = skyLayer ? volumeOpacity * brightness : volumeOpacity;
-        if (alpha !== publishedVolumeAlpha) { volumeHost.style.opacity = String(alpha); publishedVolumeAlpha = alpha; }
+        if (alpha !== publishedVolumeAlpha) {
+          volumeHost.style.opacity = String(alpha);
+          if (skyLayer) skyLayer.root.dataset.skyContribution = String(1 - alpha);
+          publishedVolumeAlpha = alpha;
+        }
         // The galaxy's own slices fade with its projected size; the matte and sky handoff do not.
         const imageAlpha = (skyLayer ? 1 : brightness) * volumeSize;
         if (imageAlpha !== publishedImageAlpha) {
@@ -351,7 +355,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           volumeImage.style.display = imageAlpha > 0 ? '' : 'none';
           publishedImageAlpha = imageAlpha;
         }
-        const skyAlpha = alpha < 1 ? (1 - volumeOpacity) / (1 - alpha) : 0;
+        const skyAlpha = 1;
         if (skyLayer && skyAlpha !== publishedSkyAlpha) { skyLayer.root.style.opacity = String(skyAlpha); publishedSkyAlpha = skyAlpha; }
       };
       const destroy = () => {
@@ -533,14 +537,13 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             if (volumeVisible !== publishedVolumeVisible) { volumeHost.style.display = volumeVisible ? '' : 'none'; publishedVolumeVisible = volumeVisible; }
             if (volumeOpacity !== publishedVolumeOpacity) {
               volumeHost.dataset.volumeOpacity = String(volumeOpacity);
-              if (skyLayer) skyLayer.root.dataset.skyContribution = String(1 - volumeOpacity);
               publishedVolumeOpacity = volumeOpacity;
             }
             if (volumeBrightness !== publishedVolumeBrightness) {
               volumeImage.dataset.volumeBrightness = String(volumeBrightness); publishedVolumeBrightness = volumeBrightness;
             }
             publishBackground();
-            skyLayer?.publish(world, viewport, volumeOpacity < 1, 1 - starsHandoff);
+            skyLayer?.publish(world, viewport, publishedVolumeAlpha < 1, 1 - starsHandoff);
             if (volumeOpacity > 0 && volumeSize > 0) volumeLayer!.publish({ world, viewport });
             // A galaxy under a few projected pixels is its label: its bank fades, then
             // leaves layout and compositing. Like lens banks, a faded image bank does too.
