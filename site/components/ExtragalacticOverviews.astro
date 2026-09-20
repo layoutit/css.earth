@@ -10,7 +10,6 @@ import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog } from '@cssear
 import galaxies from '../../src/objects/local-group/prepared/catalogue.json';
 import milkyWay from '../../src/objects/milky-way/object.json';
 import clusters from '../../src/objects/galaxy-clusters/prepared/catalogue.json';
-import NavigationTree from '../../atlas/src/components/NavigationTree.astro';
 const localGalaxies = parsePreparedGalaxyCatalog(galaxies).objects;
 const principal = [
   { id: 'milky-way', focusId: undefined, name: 'Milky Way', href: '/sun/?overview=milky-way', distancePc: null, positionM: milkyWay.properties.volume.originM },
@@ -38,7 +37,7 @@ const groups = [
   <PlanetCardHeader heading={false} title={OVERVIEW_TITLES[group.id]} introduction={group.introduction}>
     <PlanetBreadcrumbs scope={group.id} />
   </PlanetCardHeader>
-  <NavigationTree current={group.id} />
+  <div data-object-navigation-slot data-navigation-current={group.id}></div>
   <InformationTabs idPrefix={group.id} group={group.id} label={`${group.name} information`} hidden
     tabs={[{ id: 'objects', label: group.section, count: group.objects.length }]} />
   <div class="planet-object-results-scroll planet-card-tabpanel" id={`${group.id}-objects-content`} hidden
