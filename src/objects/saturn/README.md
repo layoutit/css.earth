@@ -18,14 +18,22 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
-The record describes source cross-checks and retains a fixed-material comparison
-image. It cites no dated test or browser run. The comparison image is not an
-input to the runtime view.
+On 2026-09-20, Saturn was regenerated from its checked source closure and
+inspected in Chromium at a 1,440 x 1,100 CSS-pixel viewport. The retained DOM
+contained no `saturn-weather` asset or style reference. The matched-camera
+[before/after crop](evidence/weather-overlay-removal.webp) shows the former
+project-authored storm ovals on the left and the source-backed visible mosaic
+on the right. This image is review evidence, not an input to the runtime view.
+
+The focused no-weather regression passes against the prepared scene, runtime
+inventory and provenance document. The independent radial-preparation test
+also reproduces all four canonical ring lenses, confirming that removal of the
+weather path did not alter the Cassini UVIS ring recipe.
 
 ## Known problems
 
 - Ultraviolet and methane views contain filled rows and added visible-light detail; they are not pure single-band observations.
-- Thermal colors, interior layers and storms are illustrations. No measured global thermal raster is qualified here.
+- Thermal colors and interior layers are illustrations. No measured global thermal raster is qualified here.
 - Ring opacity and narrow features are enhanced for readability; they do not establish optical depth or fully resolved ringlets.
 - Rotation is accelerated. The camera, shadows and background orientation are presentation choices, and source observations come from different dates.
 
@@ -323,7 +331,7 @@ the visible and inset caps.
 </details>
 
 <details>
-<summary>Prepared lighting, storm illustration and mutual shadows</summary>
+<summary>Prepared lighting and mutual shadows</summary>
 
 The separate material overlays use a Lambert illumination model with a
 `0.05` ambient intensity, Oren-Nayar roughness `0` and a smoothstep terminator;
@@ -352,19 +360,10 @@ changes. It performs no lighting playback while the scene is idle. The material
 stores the pearl-blue, view- and
 light-dependent limb response from prepared oblate normal samples over the solar
 attenuation. CSS therefore paints one material background over the surface
-instead of separate atmosphere and shadow layers. The nine 32 x 32 storm
-targets sample one checked 290 x 34 static weather snapshot. These illustrative
-visible-color storm overlays are intentionally absent from the observation
-lenses, which use their source-backed spectral body maps. The snapshot is
-`source/saturn-weather-static.webp`, SHA-256
-`04a8df6aa490a2d769b6f579a29d16f78e3c58427438daa6114b3a6ebfbe30b3`.
-It is the accepted three-storm texel result that was prepared from the
-earlier OpenSpace surface texels and the three storm kernels; it is retained
-byte-identical as an illustration and has not been re-sampled from the OPAL
-map recorded in the scene
-preparer. It is explicitly qualified as an adapter-owned artistic presentation,
-not scientific storm data. Preparation validates the snapshot's hash and
-dimensions, then copies its encoded bytes without re-encoding.
+instead of separate atmosphere and shadow layers. The earlier project-authored
+three-storm texture is no longer rendered: the visible dataset now contains only
+the declared Hubble body, Cassini polar cap, Cassini UVIS rings and prepared
+lighting presentation.
 
 The 32 x 16 globe topology uses 448 textured body faces between two prepared
 polar regions. The continuous prepared material field and the 0.8% presentation

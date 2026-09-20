@@ -6,7 +6,6 @@
     "surface": "observations/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
     "polarObservation": "cassini-pia21611.jpg",
     "approvedMaterial": "approved/saturn-fixed-material.webp",
-    "weather": "saturn-weather-static.webp",
     "interior": "interior/manifest.json"
   },
   "files": {
@@ -16,7 +15,6 @@
     "fixedMaterial": "saturn-fixed-material.webp",
     "orbitMaterial": "saturn-orbit-material.webp",
     "interiorAtmosphere": "saturn-interior-atmosphere.webp",
-    "weather": "saturn-weather.webp",
     "rings": "saturn-rings.webp"
   },
   "parameters": {
@@ -43,7 +41,6 @@
     "planetOrbitMaterialTextureUrl": "/scenes/saturn/saturn-orbit-material.webp",
     "planetOrbitMaterialDefaultTextureUrl": "/scenes/saturn/saturn-orbit-material-default.webp",
     "interiorAtmosphereTextureUrl": "/scenes/saturn/saturn-interior-atmosphere.webp",
-    "planetWeatherTextureUrl": "/scenes/saturn/saturn-weather.webp",
     "ringTextureUrl": "/scenes/saturn/saturn-rings.webp",
     "ringTexture_2xUrl": "/scenes/saturn/saturn-rings@2x.webp",
     "ringShadowTextureUrl": "/scenes/saturn/saturn-ring-shadow.webp",
@@ -115,96 +112,6 @@
     "atmosphereMaximumAlpha": 0.72,
     "atmosphereLimbExponent": 1.75,
     "atmosphereNightFloor": 0.22,
-    "weatherCellSize": 32,
-    "weatherFrameGutter": 1,
-    "weatherFrameRate": 0,
-    "weatherFrameCount": 1,
-    "weatherFrameColumns": 1,
-    "weatherFrameRows": 1,
-    "weatherPatchColumns": 3,
-    "weatherVariantCount": 3,
-    "weatherFieldRows": 1,
-    "weatherOpacity": 0.5,
-    "weatherStorms": [
-      {
-        "latitudeIndex": 11,
-        "longitudeStartIndex": 9,
-        "longitudeCount": 3,
-        "sourceCenter": [
-          137,
-          58
-        ],
-        "sourceRadius": [
-          105,
-          34
-        ],
-        "phaseOffsetTurns": 0,
-        "rotationTurnsPerCycle": 1,
-        "sourceMotionGain": 1.75,
-        "armCount": 2,
-        "armProfileExponent": 3,
-        "radialFrequency": 13,
-        "armPhaseRate": 1.4,
-        "eyeWallRadius": 0.28,
-        "eyeWallWidth": 0.09,
-        "brightArmAmplitude": 70,
-        "brightEyeWallAmplitude": 44,
-        "bodyLiftAmplitude": 10,
-        "darkEyeAmplitude": 26
-      },
-      {
-        "latitudeIndex": 9,
-        "longitudeStartIndex": 20,
-        "longitudeCount": 3,
-        "sourceCenter": [
-          110,
-          68
-        ],
-        "sourceRadius": [
-          98,
-          31
-        ],
-        "phaseOffsetTurns": 0.37,
-        "rotationTurnsPerCycle": 1,
-        "sourceMotionGain": 1.45,
-        "armCount": 0,
-        "armProfileExponent": 3,
-        "radialFrequency": 0,
-        "armPhaseRate": 0,
-        "eyeWallRadius": 0.34,
-        "eyeWallWidth": 0.14,
-        "brightArmAmplitude": 0,
-        "brightEyeWallAmplitude": 48,
-        "bodyLiftAmplitude": 11,
-        "darkEyeAmplitude": 20
-      },
-      {
-        "latitudeIndex": 8,
-        "longitudeStartIndex": 30,
-        "longitudeCount": 3,
-        "sourceCenter": [
-          122,
-          62
-        ],
-        "sourceRadius": [
-          76,
-          27
-        ],
-        "phaseOffsetTurns": 0.68,
-        "rotationTurnsPerCycle": 1,
-        "sourceMotionGain": 1.38,
-        "armCount": 0,
-        "armProfileExponent": 3,
-        "radialFrequency": 0,
-        "armPhaseRate": 0,
-        "eyeWallRadius": 0.25,
-        "eyeWallWidth": 0.1,
-        "brightArmAmplitude": 0,
-        "brightEyeWallAmplitude": 42,
-        "bodyLiftAmplitude": 9,
-        "darkEyeAmplitude": 17
-      }
-    ],
     "objectReferenceRotationSeconds": 38018,
     "objectEquatorCloudRotationSeconds": 36900,
     "objectHighLatitudeCloudRotationSeconds": 38280,
@@ -242,7 +149,6 @@
     ]
   },
   "labels": {
-    "label001": "saturn-weather-surface",
     "label002": "saturn-interior-section-face",
     "label003": "prepared-oblate-ellipsoid-camera-projection",
     "label004": "prepared-analytic-oblate-ellipsoid-proportional-overscan",
@@ -251,11 +157,10 @@
     "label007": "prepared-cassini-north-polar-projection-under-fixed-world-material-plane",
     "label008": "Cassini PIA21611 2017 natural-color polar stereographic map",
     "label009": "source/cassini-pia21611.jpg",
-    "label010": "OpenSpace saturn.jpg",
+    "label010": "Hubble OPAL Cycle 32 2025A visible-light map",
     "label011": "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/",
     "label012": ".prepared/saturn-fixed-material.webp",
     "label013": "source/approved/saturn-fixed-material.webp",
-    "label014": "source/saturn-weather-static.webp",
     "label015": "csssaturn-prepared-interaction-frames@1",
     "label016": "csssaturn-prepared-body-visibility@1",
     "label017": "csssaturn-prepared-retained-scene@30",
@@ -286,11 +191,6 @@
       "path": "approved/saturn-fixed-material.webp",
       "expectedSha256": "e25f97df1892978a1140e9c6a27a4b9976c047f8b92162d0a8d898ba13a85007",
       "expectedBytes": 154240
-    },
-    {
-      "path": "saturn-weather-static.webp",
-      "expectedSha256": "04a8df6aa490a2d769b6f579a29d16f78e3c58427438daa6114b3a6ebfbe30b3",
-      "expectedBytes": 1692
     },
     {
       "path": "interior/manifest.json",

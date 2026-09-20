@@ -38,7 +38,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { buildPolyCameraSceneTransform, buildPolyMeshTransform, buildSeamBleedPolygonEdges, computeSolidTrianglePlan, computeTextureAtlasPlanPublic, createPolyCamera, formatCssLength, resolvePolyTextureLeafGeometry, textureTintFactors, worldPositionToCss } from '@layoutit/polycss';
-import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, MAX_PROJECTIVE_TEXTURE_LEAF_LAYOUT_SIZE, packProjectiveSurfaceRaster, prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mts';
+import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, packProjectiveSurfaceRaster, prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mts';
 import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared-webp.mts';
 import { fitTextureGeometry, polarQuad } from './texture-geometry.mts';
 import { verifyObservationSources } from '../observed-surfaces/index.mts';
@@ -112,7 +112,6 @@ const interiorMaterialPreparationPath = (variantId:string) => resolve(
   stagingDirectory,
   requireString(interiorMaterialVariantTextureUrl(variantId).split("/").at(-1)),
 );
-const PLANET_WEATHER_TEXTURE_URL = config.parameters.planetWeatherTextureUrl;
 const RING_TEXTURE_URL = config.parameters.ringTextureUrl;
 const RING_TEXTURE_2X_URL = config.parameters.ringTexture_2xUrl;
 const RING_SHADOW_TEXTURE_URL = config.parameters.ringShadowTextureUrl;
@@ -248,60 +247,6 @@ const ATMOSPHERE_COLOR = config.parameters.atmosphereColor;
 const ATMOSPHERE_MAXIMUM_ALPHA = config.parameters.atmosphereMaximumAlpha;
 const ATMOSPHERE_LIMB_EXPONENT = config.parameters.atmosphereLimbExponent;
 const ATMOSPHERE_NIGHT_FLOOR = config.parameters.atmosphereNightFloor;
-const WEATHER_CELL_SIZE = config.parameters.weatherCellSize;
-const WEATHER_FRAME_GUTTER = config.parameters.weatherFrameGutter;
-const WEATHER_FRAME_RATE = config.parameters.weatherFrameRate;
-const WEATHER_FRAME_COUNT = config.parameters.weatherFrameCount;
-const WEATHER_FRAME_COLUMNS = config.parameters.weatherFrameColumns;
-const WEATHER_FRAME_ROWS = config.parameters.weatherFrameRows;
-const WEATHER_PATCH_COLUMNS = config.parameters.weatherPatchColumns;
-const WEATHER_VARIANT_COUNT = config.parameters.weatherVariantCount;
-const WEATHER_FIELD_COLUMNS = WEATHER_PATCH_COLUMNS * WEATHER_VARIANT_COUNT;
-const WEATHER_FIELD_ROWS = config.parameters.weatherFieldRows;
-const WEATHER_FIELD_WIDTH = WEATHER_CELL_SIZE * WEATHER_FIELD_COLUMNS;
-const WEATHER_FIELD_HEIGHT = WEATHER_CELL_SIZE * WEATHER_FIELD_ROWS;
-const WEATHER_OPACITY = config.parameters.weatherOpacity;
-const WEATHER_FRAME_STRIDE_X = WEATHER_FIELD_WIDTH + WEATHER_FRAME_GUTTER * 2;
-const WEATHER_FRAME_STRIDE_Y = WEATHER_FIELD_HEIGHT + WEATHER_FRAME_GUTTER * 2;
-const WEATHER_TEXTURE_WIDTH =
-  WEATHER_FRAME_COLUMNS * WEATHER_FRAME_STRIDE_X;
-const WEATHER_TEXTURE_HEIGHT =
-  WEATHER_FRAME_ROWS * WEATHER_FRAME_STRIDE_Y;
-const WEATHER_PRESENTATION_SCALE =
-  MAX_PROJECTIVE_TEXTURE_LEAF_LAYOUT_SIZE / WEATHER_CELL_SIZE;
-const WEATHER_PRESENTATION_WIDTH =
-  WEATHER_TEXTURE_WIDTH * WEATHER_PRESENTATION_SCALE;
-const WEATHER_PRESENTATION_HEIGHT =
-  WEATHER_TEXTURE_HEIGHT * WEATHER_PRESENTATION_SCALE;
-const WEATHER_STORMS = config.parameters.weatherStorms;
-const WEATHER_TARGET_FACE_COUNT = WEATHER_STORMS.length * WEATHER_PATCH_COLUMNS;
-const WEATHER_TARGET_FACE_INDICES = Object.freeze(WEATHER_STORMS.flatMap(
-  (storm) => Array.from(
-    { length: storm.longitudeCount },
-    (_, offset) => (storm.latitudeIndex - 1) * LONGITUDE_SEGMENTS +
-      (storm.longitudeStartIndex + offset) % LONGITUDE_SEGMENTS,
-  ),
-));
-const WEATHER_TARGET_FACE_ORDINALS = Object.freeze(Array.from(
-  { length: PLANET_TEXTURE_FACE_COUNT },
-  (_, faceIndex) => weatherTargetOrdinal(faceIndex),
-));
-
-function weatherTargetOrdinal(faceIndex:number) {
-  const lightingBandIndex = Math.floor(faceIndex / LONGITUDE_SEGMENTS);
-  const longitudeIndex = faceIndex % LONGITUDE_SEGMENTS;
-  for (let stormIndex = 0; stormIndex < WEATHER_STORMS.length; stormIndex += 1) {
-    const storm = WEATHER_STORMS[stormIndex];
-    if (lightingBandIndex !== storm.latitudeIndex - 1) continue;
-    const stormOffset = (
-      longitudeIndex - storm.longitudeStartIndex + LONGITUDE_SEGMENTS
-    ) % LONGITUDE_SEGMENTS;
-    if (stormOffset < storm.longitudeCount) {
-      return stormIndex * WEATHER_PATCH_COLUMNS + stormOffset;
-    }
-  }
-  return -1;
-}
 const OBJECT_REFERENCE_ROTATION_SECONDS = config.parameters.objectReferenceRotationSeconds;
 const OBJECT_EQUATOR_CLOUD_ROTATION_SECONDS = config.parameters.objectEquatorCloudRotationSeconds;
 const OBJECT_HIGH_LATITUDE_CLOUD_ROTATION_SECONDS = config.parameters.objectHighLatitudeCloudRotationSeconds;
@@ -383,8 +328,6 @@ const interiorAtmosphereShardTextureUrl = (assetUrl:string, suffix:string) =>
   assetUrl.replace(/\.webp$/, `-${suffix}.webp`);
 const interiorAtmosphereShardTexturePath = (assetUrl:string, suffix:string) =>
   publicTexturePath(interiorAtmosphereShardTextureUrl(assetUrl, suffix));
-const PLANET_WEATHER_TEXTURE_PATH = resolve(publicDirectory, config.files.weather);
-const PLANET_WEATHER_SOURCE_PATH = resolve(sourceDirectory, config.sources.weather);
 const RING_TEXTURE_PATH = resolve(publicDirectory, config.files.rings);
 
 function spherePoint(latitude:number, longitude:number) { return ellipsoidPoint(latitude, longitude, { equatorialRadius: EQUATORIAL_RADIUS, polarRadius: POLAR_RADIUS }); }
@@ -580,10 +523,6 @@ function textureStyle(polygon:LayeredPolygon, index:number, seamEdges?:ComputeTe
   });
   if (!plan || !geometry) throw new Error(`Texture leaf ${index} did not prepare.`);
   const preparedLighting = polygon.lightingFaceIndex !== undefined && Number.isSafeInteger(polygon.lightingFaceIndex);
-  const weatherTargetIndex = preparedLighting
-    ? weatherTargetOrdinal(polygon.lightingFaceIndex!)
-    : -1;
-  const preparedWeather = weatherTargetIndex >= 0;
   const sourceFittedGeometry = preparedLighting
     ? fitTextureGeometry(geometry, PLANET_RASTER_CELL_SIZE, PLANET_RASTER_CELL_SIZE)
     : geometry;
@@ -619,36 +558,13 @@ function textureStyle(polygon:LayeredPolygon, index:number, seamEdges?:ComputeTe
   const backgroundPositionY = surfacePresentation.backgroundPosition[1] === 0
     ? "0px"
     : formatCssLength(surfacePresentation.backgroundPosition[1]);
-  const weatherBackgroundPositionX = preparedWeather
-    ? formatCssLength(-(
-      WEATHER_FRAME_GUTTER + weatherTargetIndex * WEATHER_CELL_SIZE -
-        SURFACE_OVERLAP * WEATHER_CELL_SIZE
-    ) * fittedGeometry.leafWidth / WEATHER_CELL_SIZE)
-    : null;
-  const weatherBackgroundPositionY = preparedWeather
-    ? formatCssLength(-(
-      WEATHER_FRAME_GUTTER - SURFACE_OVERLAP * WEATHER_CELL_SIZE
-    ) * fittedGeometry.leafHeight / WEATHER_CELL_SIZE)
-    : null;
   const backgroundPosition = `${backgroundPositionX} ${backgroundPositionY}`;
   const surfaceBackgroundSize =
     `${formatCssLength(surfacePresentation.backgroundSize[0])} ` +
     formatCssLength(surfacePresentation.backgroundSize[1]);
   const preparedBackgroundImages = preparedLighting
-    ? preparedWeather
-      ? `url(${PLANET_WEATHER_TEXTURE_URL}),` +
-        "var(--polycss-projective-texture-image)"
-      : "var(--polycss-projective-texture-image)"
+    ? "var(--polycss-projective-texture-image)"
     : `url(${fittedGeometry.url})`;
-  const preparedBackgroundPosition = preparedWeather
-    ? `${weatherBackgroundPositionX} ${weatherBackgroundPositionY},` +
-      backgroundPosition
-    : backgroundPosition;
-  const preparedBackgroundSize = preparedWeather
-    ? `${formatCssLength(WEATHER_PRESENTATION_WIDTH)} ` +
-      `${formatCssLength(WEATHER_PRESENTATION_HEIGHT)},` +
-      surfaceBackgroundSize
-    : surfaceBackgroundSize;
   const style = `transform:matrix3d(${fittedGeometry.matrix})` +
     preparedAtlasDimensions(
       fittedGeometry.leafWidth,
@@ -658,12 +574,9 @@ function textureStyle(polygon:LayeredPolygon, index:number, seamEdges?:ComputeTe
       ? `;--${config.namespace}-surface-position:${backgroundPosition}`
       : "") +
     `;background-image:${preparedBackgroundImages}` +
-    `;background-position:${preparedBackgroundPosition}` +
-    `;background-size:${preparedBackgroundSize}`;
+    `;background-position:${backgroundPosition}` +
+    `;background-size:${surfaceBackgroundSize}`;
   return {
-    ...(preparedWeather
-      ? { className: config.labels.label001 }
-      : {}),
     style,
     projectiveTextureLayer: prepareProjectiveTextureLayer(
       fittedGeometry.matrix,
@@ -675,14 +588,6 @@ function textureStyle(polygon:LayeredPolygon, index:number, seamEdges?:ComputeTe
     projection: fittedGeometry.projection,
     lighting: preparedLighting ? "baked" : "source",
     lightingOverlay: false,
-    ...(preparedWeather
-      ? {
-        preparedWeather: true,
-        weatherTargetOrdinal: weatherTargetIndex,
-        weatherSurfacePositionX: backgroundPositionX,
-        weatherSurfacePositionY: backgroundPositionY,
-      }
-      : {}),
   };
 }
 
@@ -1963,13 +1868,6 @@ async function prepareNormalMaterialMasters() {
   ) {
     throw new Error("Ellipsoid prepared ring texture dimensions changed.");
   }
-  const staticWeatherAsset = await readFile(PLANET_WEATHER_SOURCE_PATH);
-  const staticWeatherInfo = await sharp(staticWeatherAsset).metadata();
-  if (staticWeatherInfo.width !== WEATHER_TEXTURE_WIDTH ||
-      staticWeatherInfo.height !== WEATHER_TEXTURE_HEIGHT ||
-      staticWeatherInfo.format !== "webp") {
-    throw new Error("Ellipsoid static weather source dimensions changed.");
-  }
   const initialObjectLight = PREPARED_RING_SOURCE.shadowModel.objectLightDirection;
   const initialObjectView = prepareInitialObjectViewDirection();
   const polarOutput = await preparePolarTextureAtlas({
@@ -2078,7 +1976,6 @@ async function prepareNormalMaterialMasters() {
     })
       .webp({ lossless: true, effort: 6 })
       .toFile(PLANET_POLAR_TEXTURE_PATH),
-    writeFile(PLANET_WEATHER_TEXTURE_PATH, staticWeatherAsset),
     sharp(defaultFixedMaterial.output, {
       raw: {
         width: PLANET_FIXED_MATERIAL_SIZE,
@@ -2145,7 +2042,6 @@ async function prepareNormalMaterialMasters() {
       byteLength: approvedFixedMaterialAsset.byteLength,
       sha256: sha256(approvedFixedMaterialAsset),
     },
-    staticWeatherSourceSha256: sha256(staticWeatherAsset),
     initialObjectView,
     defaultFixedMaterial: materialMetadata(defaultFixedMaterial),
     defaultInteriorMaterial: materialMetadata(defaultInteriorMaterial),
@@ -2165,7 +2061,7 @@ function materialMetadata<T extends {output:Uint8Array}>({ output, ...metadata }
 
 async function composePlanetTextures({
   approvedReferenceFixedMaterialRawSha256, approvedReferenceAsset,
-  staticWeatherSourceSha256, initialObjectView, defaultFixedMaterial,
+  initialObjectView, defaultFixedMaterial,
   defaultInteriorMaterial, defaultFixedMaterialRawSha256,
   approvedReferenceMatchesDefault, orbitMaterialAtlas,
 }:Awaited<ReturnType<typeof prepareNormalMaterialMasters>>) {
@@ -2213,7 +2109,6 @@ async function composePlanetTextures({
     fixedMaterialAsset,
     orbitMaterialAsset,
     interiorAtmosphereAsset,
-    weatherAsset,
   ] =
     await Promise.all([
     readFile(PLANET_SURFACE_TEXTURE_PATH),
@@ -2222,7 +2117,6 @@ async function composePlanetTextures({
     readFile(PLANET_FIXED_MATERIAL_TEXTURE_PATH),
     readFile(publicTexturePath(PLANET_ORBIT_MATERIAL_TEXTURE_URL)),
     readFile(publicTexturePath(INTERIOR_ATMOSPHERE_TEXTURE_URL)),
-    readFile(PLANET_WEATHER_TEXTURE_PATH),
     ]);
   const interiorAtmosphereLensAssets = Object.freeze(Object.fromEntries(
     await Promise.all(Object.values(interiorLensMaterialAtlases).map(
@@ -2767,81 +2661,6 @@ async function composePlanetTextures({
         runtimeRasterization: false,
         runtimeAddressWrites:
           "single-background-position-on-published-input-frame",
-      }),
-      weather: Object.freeze({
-        model: "prepared-source-texel-independent-fixed-center-curls",
-        assetUrl: PLANET_WEATHER_TEXTURE_URL,
-        assetBytes: weatherAsset.byteLength,
-        assetSha256: sha256(weatherAsset),
-        encoding: PREPARED_Q75_WEBP_ENCODING,
-        alphaEncoding: "lossless",
-        opacity: WEATHER_OPACITY,
-        targetFaceCount: WEATHER_TARGET_FACE_COUNT,
-        targetFaceIndices: WEATHER_TARGET_FACE_INDICES,
-        targetFaceOrdinals: WEATHER_TARGET_FACE_ORDINALS,
-        storms: Object.freeze(WEATHER_STORMS.map((storm, stormIndex) =>
-          Object.freeze({
-            stormIndex,
-            latitudeIndex: storm.latitudeIndex,
-            latitudeDegrees: Number((
-              -90 + (storm.latitudeIndex + 0.5) * 180 / LATITUDE_SEGMENTS
-            ).toFixed(3)),
-            longitudeStartIndex: storm.longitudeStartIndex,
-            longitudeCount: storm.longitudeCount,
-            targetFaceIndices: Object.freeze(
-              WEATHER_TARGET_FACE_INDICES.slice(
-                stormIndex * WEATHER_PATCH_COLUMNS,
-                (stormIndex + 1) * WEATHER_PATCH_COLUMNS,
-              ),
-            ),
-            sourceRect: Object.freeze({
-              x: storm.longitudeStartIndex * PLANET_SOURCE_CELL_WIDTH,
-              y: (LATITUDE_SEGMENTS - 1 - storm.latitudeIndex) *
-                PLANET_SOURCE_CELL_HEIGHT,
-              width: storm.longitudeCount * PLANET_SOURCE_CELL_WIDTH,
-              height: PLANET_SOURCE_CELL_HEIGHT,
-            }),
-            sourceCenter: storm.sourceCenter,
-            sourceRadius: storm.sourceRadius,
-            phaseOffsetTurns: storm.phaseOffsetTurns,
-            rotationTurnsPerCycle: storm.rotationTurnsPerCycle,
-            sourceMotionGain: storm.sourceMotionGain,
-            armCount: storm.armCount,
-            armProfileExponent: storm.armProfileExponent,
-            radialFrequency: storm.radialFrequency,
-            armPhaseRate: storm.armPhaseRate,
-            eyeWallRadius: storm.eyeWallRadius,
-            eyeWallWidth: storm.eyeWallWidth,
-            brightArmAmplitude: storm.brightArmAmplitude,
-            brightEyeWallAmplitude: storm.brightEyeWallAmplitude,
-            bodyLiftAmplitude: storm.bodyLiftAmplitude,
-            darkEyeAmplitude: storm.darkEyeAmplitude,
-          }),
-        )),
-        cellSize: WEATHER_CELL_SIZE,
-        fieldColumns: WEATHER_FIELD_COLUMNS,
-        fieldRows: WEATHER_FIELD_ROWS,
-        fieldWidth: WEATHER_FIELD_WIDTH,
-        fieldHeight: WEATHER_FIELD_HEIGHT,
-        frameCount: WEATHER_FRAME_COUNT,
-        frameRate: WEATHER_FRAME_RATE,
-        frameGutter: WEATHER_FRAME_GUTTER,
-        frameStrideX: WEATHER_FRAME_STRIDE_X,
-        frameStrideY: WEATHER_FRAME_STRIDE_Y,
-        frameColumns: WEATHER_FRAME_COLUMNS,
-        frameRows: WEATHER_FRAME_ROWS,
-        atlasWidth: WEATHER_TEXTURE_WIDTH,
-        atlasHeight: WEATHER_TEXTURE_HEIGHT,
-        presentationScale: WEATHER_PRESENTATION_SCALE,
-        sourceSnapshotPath: config.labels.label014,
-        sourceSnapshotSha256: staticWeatherSourceSha256,
-        retainedOverlayBinding: "existing-mount-time-retained-bare-texture-leaf-references",
-        addressPublication: "none-static-prepared-texels",
-        runtimePlayback: false,
-        lensVisibility: "normal-visible-color-only",
-        runtimeMath: false,
-        runtimeRasterization: false,
-        extraDomLeaves: 0,
       }),
       lightingModel:
         "lambert-with-ambient-and-smoothstep-terminator; parameter values adapted from the OpenSpace globe shader defaults (MIT), documented in the body README",

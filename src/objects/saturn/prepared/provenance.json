@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dedf128708029fcd2b5fb033acc8d8213fd9bdeac5ed900164f51774df302477"
+    "sha256": "4b4d13f6efd4b6c6f5a9e1ba27fe932f4920c444051153dd0e13fefbaa253517"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "2459d995d60a8ca3d202a45d35970fe432f7550363c9e268b9d99fd78ee60981"
+    "bindingsSha256": "0eb410cdab54afcf0c6d59a6a309faa9f9483d16d5f63956de58fc7ca633b917"
   },
   "recipes": [
     {
@@ -487,7 +487,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "18a4dce9ffd85aa2e44ec6f8bcbe78acae62236ed51dee290f8237a64d442243",
+      "sha256": "0f2a377ee017750153b34e11c673a0cb92de21700b206a783913d81a03351e72",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -635,7 +635,7 @@
                 "id": "normal",
                 "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
               },
-              "notes": "Visible-light appearance from the Hubble OPAL 2025a global map. This is a presentation texture assembled from observations, not a live image of the scene date."
+              "notes": "Visible-light appearance from the Hubble OPAL 2025A global map with a Cassini PIA21611 north-pole cap and Cassini UVIS ring opacity. Unobserved OPAL rows are filled during preparation. This is a cross-mission presentation, not a live image of the scene date."
             },
             {
               "id": "ultraviolet",
@@ -939,7 +939,7 @@
     {
       "id": "geometry",
       "path": "source/preparation/geometry.json",
-      "sha256": "9622e8017d068049476a935d1cb3d9eb6f0c780f0f7df1d7d21aefd52f106fdb",
+      "sha256": "83923469387c8219a17d7dcd0e95de907f9805f8cd053df178052b0cc85f672c",
       "parameters": {
         "schema": "cssearth-layered-oblate-preparation@1",
         "namespace": "saturn",
@@ -948,7 +948,6 @@
           "surface": "observations/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
           "polarObservation": "cassini-pia21611.jpg",
           "approvedMaterial": "approved/saturn-fixed-material.webp",
-          "weather": "saturn-weather-static.webp",
           "interior": "interior/manifest.json"
         },
         "files": {
@@ -958,7 +957,6 @@
           "fixedMaterial": "saturn-fixed-material.webp",
           "orbitMaterial": "saturn-orbit-material.webp",
           "interiorAtmosphere": "saturn-interior-atmosphere.webp",
-          "weather": "saturn-weather.webp",
           "rings": "saturn-rings.webp"
         },
         "parameters": {
@@ -985,7 +983,6 @@
           "planetOrbitMaterialTextureUrl": "/scenes/saturn/saturn-orbit-material.webp",
           "planetOrbitMaterialDefaultTextureUrl": "/scenes/saturn/saturn-orbit-material-default.webp",
           "interiorAtmosphereTextureUrl": "/scenes/saturn/saturn-interior-atmosphere.webp",
-          "planetWeatherTextureUrl": "/scenes/saturn/saturn-weather.webp",
           "ringTextureUrl": "/scenes/saturn/saturn-rings.webp",
           "ringTexture_2xUrl": "/scenes/saturn/saturn-rings@2x.webp",
           "ringShadowTextureUrl": "/scenes/saturn/saturn-ring-shadow.webp",
@@ -1057,96 +1054,6 @@
           "atmosphereMaximumAlpha": 0.72,
           "atmosphereLimbExponent": 1.75,
           "atmosphereNightFloor": 0.22,
-          "weatherCellSize": 32,
-          "weatherFrameGutter": 1,
-          "weatherFrameRate": 0,
-          "weatherFrameCount": 1,
-          "weatherFrameColumns": 1,
-          "weatherFrameRows": 1,
-          "weatherPatchColumns": 3,
-          "weatherVariantCount": 3,
-          "weatherFieldRows": 1,
-          "weatherOpacity": 0.5,
-          "weatherStorms": [
-            {
-              "latitudeIndex": 11,
-              "longitudeStartIndex": 9,
-              "longitudeCount": 3,
-              "sourceCenter": [
-                137,
-                58
-              ],
-              "sourceRadius": [
-                105,
-                34
-              ],
-              "phaseOffsetTurns": 0,
-              "rotationTurnsPerCycle": 1,
-              "sourceMotionGain": 1.75,
-              "armCount": 2,
-              "armProfileExponent": 3,
-              "radialFrequency": 13,
-              "armPhaseRate": 1.4,
-              "eyeWallRadius": 0.28,
-              "eyeWallWidth": 0.09,
-              "brightArmAmplitude": 70,
-              "brightEyeWallAmplitude": 44,
-              "bodyLiftAmplitude": 10,
-              "darkEyeAmplitude": 26
-            },
-            {
-              "latitudeIndex": 9,
-              "longitudeStartIndex": 20,
-              "longitudeCount": 3,
-              "sourceCenter": [
-                110,
-                68
-              ],
-              "sourceRadius": [
-                98,
-                31
-              ],
-              "phaseOffsetTurns": 0.37,
-              "rotationTurnsPerCycle": 1,
-              "sourceMotionGain": 1.45,
-              "armCount": 0,
-              "armProfileExponent": 3,
-              "radialFrequency": 0,
-              "armPhaseRate": 0,
-              "eyeWallRadius": 0.34,
-              "eyeWallWidth": 0.14,
-              "brightArmAmplitude": 0,
-              "brightEyeWallAmplitude": 48,
-              "bodyLiftAmplitude": 11,
-              "darkEyeAmplitude": 20
-            },
-            {
-              "latitudeIndex": 8,
-              "longitudeStartIndex": 30,
-              "longitudeCount": 3,
-              "sourceCenter": [
-                122,
-                62
-              ],
-              "sourceRadius": [
-                76,
-                27
-              ],
-              "phaseOffsetTurns": 0.68,
-              "rotationTurnsPerCycle": 1,
-              "sourceMotionGain": 1.38,
-              "armCount": 0,
-              "armProfileExponent": 3,
-              "radialFrequency": 0,
-              "armPhaseRate": 0,
-              "eyeWallRadius": 0.25,
-              "eyeWallWidth": 0.1,
-              "brightArmAmplitude": 0,
-              "brightEyeWallAmplitude": 42,
-              "bodyLiftAmplitude": 9,
-              "darkEyeAmplitude": 17
-            }
-          ],
           "objectReferenceRotationSeconds": 38018,
           "objectEquatorCloudRotationSeconds": 36900,
           "objectHighLatitudeCloudRotationSeconds": 38280,
@@ -1184,7 +1091,6 @@
           ]
         },
         "labels": {
-          "label001": "saturn-weather-surface",
           "label002": "saturn-interior-section-face",
           "label003": "prepared-oblate-ellipsoid-camera-projection",
           "label004": "prepared-analytic-oblate-ellipsoid-proportional-overscan",
@@ -1193,11 +1099,10 @@
           "label007": "prepared-cassini-north-polar-projection-under-fixed-world-material-plane",
           "label008": "Cassini PIA21611 2017 natural-color polar stereographic map",
           "label009": "source/cassini-pia21611.jpg",
-          "label010": "OpenSpace saturn.jpg",
+          "label010": "Hubble OPAL Cycle 32 2025A visible-light map",
           "label011": "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/",
           "label012": ".prepared/saturn-fixed-material.webp",
           "label013": "source/approved/saturn-fixed-material.webp",
-          "label014": "source/saturn-weather-static.webp",
           "label015": "csssaturn-prepared-interaction-frames@1",
           "label016": "csssaturn-prepared-body-visibility@1",
           "label017": "csssaturn-prepared-retained-scene@30",
@@ -1230,11 +1135,6 @@
             "expectedBytes": 154240
           },
           {
-            "path": "saturn-weather-static.webp",
-            "expectedSha256": "04a8df6aa490a2d769b6f579a29d16f78e3c58427438daa6114b3a6ebfbe30b3",
-            "expectedBytes": 1692
-          },
-          {
             "path": "interior/manifest.json",
             "expectedSha256": "ec70beed73758cc796becbc3a1338ef3618609e4d2b9788e838ae0e9a1165874",
             "expectedBytes": 5097
@@ -1263,7 +1163,7 @@
     {
       "id": "surface",
       "path": "source/preparation/surface.json",
-      "sha256": "174aaeebbc2c1aa6075903414eace181cf37974dd0eccf1106d62e5ae4dce0e8",
+      "sha256": "6e79578dc8aa6505826e634d387bffb27ca64a0dc1a815d2b9d48b87ff3b8091",
       "parameters": {
         "schema": "cssearth-spectral-material-variants@1",
         "namespace": "saturn",
@@ -1503,7 +1403,7 @@
               "ringUrl": "/scenes/saturn/saturn-rings.webp",
               "ring2xUrl": "/scenes/saturn/saturn-rings@2x.webp",
               "materialUrl": "/scenes/saturn/saturn-orbit-material.webp",
-              "qualification": "visible-color reference"
+              "qualification": "Composite visible presentation: Hubble OPAL 2025A body, Cassini PIA21611 north pole and Cassini UVIS 2006 ring opacity; unobserved OPAL rows are filled by linear interpolation."
             },
             {
               "id": "cross-section",
@@ -1519,14 +1419,14 @@
           "provenance": {
             "bodyAuthority": "Hubble OPAL Cycle 32 Saturn global maps",
             "bodySourceUrl": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32",
-            "bodyDetailAuthority": "OpenSpace synchronized visible-light Saturn surface",
+            "bodyDetailAuthority": "Hubble OPAL Cycle 32 2025A visible-light map",
             "ringAuthority": "Hubble WFC3 program 17843, 2025-08-29",
             "ringProducts": [
               "ifcu37ccq",
               "ifcu37cdq",
               "ifcu37ceq"
             ],
-            "ringMethod": "broad source-derived spectral response over unchanged prepared OpenSpace radial morphology",
+            "ringMethod": "broad source-derived spectral response over the prepared Cassini UVIS radial opacity morphology",
             "fineRingQualification": "D, G, E and unresolved ringlets retain the visible-light morphology because the Hubble frames do not resolve a complete replacement profile",
             "thermalAuthority": "Illustration inspired by Cassini infrared imagery; not Cassini measurement data",
             "thermalMethod": "Authored morphology-based illustration; color does not measure infrared brightness or temperature"
@@ -2009,26 +1909,6 @@
     },
     {
       "kind": "source-input",
-      "id": "saturn-approved-static-weather",
-      "path": "saturn-weather-static.webp",
-      "origin": "accepted cssEarth Saturn three-storm texel snapshot prepared from the declared Saturn surface and documented storm kernels",
-      "credit": "cssEarth adapter preparation using the OpenSpace Saturn surface",
-      "license": "project-authored prepared presentation over the OpenSpace MIT source",
-      "acquisition": "checked accepted static snapshot; shared material-composition preparation validates and copies it without re-encoding",
-      "redistribution": "project runtime asset with OpenSpace attribution",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "The retained record explicitly identifies a cssEarth preparation snapshot or adapter-owned presentation specification. Published input dependencies and qualifications remain in the existing product lineage and source recipe."
-      },
-      "sha256": "04a8df6aa490a2d769b6f579a29d16f78e3c58427438daa6114b3a6ebfbe30b3",
-      "bytes": 1692,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
       "id": "saturn-interior-model",
       "path": "interior/manifest.json",
       "origin": "adapter-owned checked scientific presentation specification with sources recorded inside the file",
@@ -2189,8 +2069,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "18a4dce9ffd85aa2e44ec6f8bcbe78acae62236ed51dee290f8237a64d442243",
-      "bytes": 17218,
+      "sha256": "0f2a377ee017750153b34e11c673a0cb92de21700b206a783913d81a03351e72",
+      "bytes": 17317,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2318,7 +2198,6 @@
         "hubble-opal-saturn-2025a-visible",
         "cassini-pia21611-polar-map",
         "saturn-approved-fixed-material",
-        "saturn-approved-static-weather",
         "saturn-interior-model",
         "cassini-uvis-alpvir-2006-285-occultation"
       ],
@@ -2372,7 +2251,6 @@
         "hubble-opal-saturn-2025a-visible",
         "cassini-pia21611-polar-map",
         "saturn-approved-fixed-material",
-        "saturn-approved-static-weather",
         "saturn-interior-model",
         "cassini-uvis-alpvir-2006-285-occultation"
       ],
@@ -2424,7 +2302,6 @@
         "hubble-opal-saturn-2025a-visible",
         "cassini-pia21611-polar-map",
         "saturn-approved-fixed-material",
-        "saturn-approved-static-weather",
         "saturn-interior-model",
         "cassini-uvis-alpvir-2006-285-occultation"
       ],
@@ -2458,7 +2335,9 @@
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the source-defined oblate body, ring and cutaway material.",
-      "limitations": [],
+      "limitations": [
+        "Composite visible presentation: Hubble OPAL 2025A body, Cassini PIA21611 north pole and Cassini UVIS 2006 ring opacity; unobserved OPAL rows are filled by linear interpolation."
+      ],
       "lensIds": [
         "normal"
       ],
@@ -2471,7 +2350,6 @@
         "hubble-opal-saturn-2025a-visible",
         "cassini-pia21611-polar-map",
         "saturn-approved-fixed-material",
-        "saturn-approved-static-weather",
         "saturn-interior-model",
         "cassini-uvis-alpvir-2006-285-occultation"
       ],
@@ -2511,7 +2389,9 @@
       "observationAttribution": "none",
       "parents": [],
       "process": "Prepare the source-defined oblate body, ring and cutaway material.",
-      "limitations": [],
+      "limitations": [
+        "schematic source-backed interior using the normal visible-color material"
+      ],
       "lensIds": [
         "cross-section"
       ],
@@ -2527,7 +2407,6 @@
         "hubble-opal-saturn-2025a-visible",
         "cassini-pia21611-polar-map",
         "saturn-approved-fixed-material",
-        "saturn-approved-static-weather",
         "saturn-interior-model",
         "cassini-uvis-alpvir-2006-285-occultation"
       ],
@@ -2771,11 +2650,11 @@
   },
   "lastPreparation": {
     "objectId": "saturn",
-    "materialSha256": "8b28cce94978368df6d819dc060d6aa1c72256f7e165b01d879a20b7e3cb5051",
+    "materialSha256": "9349474b209075e14ca90c3e58b39a3a702b8824ccec27f5767ba9f7efc70987",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "2459d995d60a8ca3d202a45d35970fe432f7550363c9e268b9d99fd78ee60981"
+      "bindingsSha256": "0eb410cdab54afcf0c6d59a6a309faa9f9483d16d5f63956de58fc7ca633b917"
     }
   }
 }
