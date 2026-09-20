@@ -19,7 +19,7 @@ import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { readPreparedReconstruction } from '../../server/services/density-reconstruction.ts';
 import { finiteModelStarsPath } from '../../server/services/finite-lens-bundles.ts';
 import { parseVolumeLensPromotion } from '../../server/workflows/density/volume-lens-promotion.ts';
-import { validateChannelGain } from '@cssearth/volume-core/materials/slab-material';
+import { validateChannelGain, validateLensToneCurve } from '@cssearth/volume-core/materials/slab-material';
 
 const sha256 = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
 const text = (value: unknown, at: string): string => { assert.ok(typeof value === 'string' && value, `Expected text: ${at}`); return value; };
@@ -53,11 +53,18 @@ const putJson = (path: string, value: unknown) => put(path, gzipSync(Buffer.from
 const pinOf = async (path: string) => ({ path, sha256: sha256(await readFile(resolve(root, path))) });
 
 // Every lens of one promotion shares a model; its saved reconstruction names the model and its baseline.
+// The per-lens display corrections are read from the lens's own pinned provenance: the normalized saved
+// result keeps only the model and source identities, so reading them there would silently drop both.
 const lensInputs = await Promise.all(recipe.lenses.map(async lens => {
   const result = await readPreparedReconstruction(root, lens.resultId);
   assert.equal(result.imageId, lens.imageId, 'Selected reconstruction belongs to another image');
   assert.ok(result.finiteMaterial, 'A compact finite-emission export needs finite material results.');
-  return { lens, result, finite: result.finiteMaterial };
+  const provenance = record(parseLabModelJson(await readFile(resolve(root, result.subject.directory, 'source/provenance.json'), 'utf8')), 'lens provenance');
+  const material = record(provenance.finiteMaterial, 'lens finite material');
+  assert.equal(material.modelResultId, result.finiteMaterial.modelResultId, 'Lens provenance names another model.');
+  assert.equal(material.sourceResultId, result.finiteMaterial.sourceResultId, 'Lens provenance names another source.');
+  return { lens, result, finite: result.finiteMaterial,
+    channelGain: material.channelGain === null ? undefined : material.channelGain, toneCurve: material.toneCurve };
 }));
 const modelResultId = lensInputs[0]!.finite.modelResultId;
 assert.ok(lensInputs.every(entry => entry.finite.modelResultId === modelResultId), 'Every promoted lens must share one finite model.');
@@ -79,7 +86,9 @@ const neutralSlices = await putJson(`${compact}/neutral-slices.json.gz`,
 await cp(resolve(root, modelDirectory, 'neutral/slices'), resolve(root, compact, 'neutral/slices'), { recursive: true });
 
 // The depth density the envelope was fitted with, carried with the accepted pin so the identity survives.
-const identityPin = record(envelope.priorCloud, 'envelope prior cloud');
+// An envelope that names no alternative density was fitted with the model request's own cloud, exactly as
+// the lens bake resolves it.
+const identityPin = record(envelope.priorCloud ?? record(request.cloud, 'model request cloud').provenance, 'envelope prior cloud');
 assert.ok(typeof identityPin.path === 'string' && typeof identityPin.sha256 === 'string', 'The envelope must pin its depth density.');
 const identityPath = text(identityPin.path, 'envelope prior path'), identityDigest = text(identityPin.sha256, 'envelope prior digest');
 const priorDirectory = dirname(identityPath);
@@ -102,14 +111,26 @@ const starsPath = await finiteModelStarsPath(root, String(lensInputs[0]!.result.
 assert.ok(starsPath, 'A delivered finite model needs its prepared catalogue star layer.');
 const stars = await putJson(`${compact}/stars.json.gz`, parseLabModelJson(await readFile(resolve(root, starsPath), 'utf8')));
 
+// A fitted lens tone curve is indexed by the model's own front-projection byte, so a delivery that carries
+// one also carries that projection and its pinned grid. Only then, so a delivery without curves keeps its bytes.
+let toneProjection: Record<string, unknown> | undefined;
+if (lensInputs.some(entry => entry.toneCurve !== undefined)) {
+  const grid = record(model.densityProjection, 'model projection grid');
+  assert.ok(Number.isInteger(grid.width) && Number.isInteger(grid.height), 'A tone curve needs the model\'s pinned projection grid.');
+  const image = await put(`${compact}/fit-projection.png`, await readFile(resolve(root, modelDirectory, 'source/fit-projection.png')));
+  const meta = await sharp(resolve(root, image.path)).metadata();
+  assert.equal(meta.width, grid.width, 'Front projection differs from its pinned grid.');
+  assert.equal(meta.height, grid.height, 'Front projection differs from its pinned grid.');
+  toneProjection = { image, width: grid.width, height: grid.height, tangentBoundsKpc: grid.tangentBoundsKpc };
+}
+
 const lenses = [];
-for (const { lens, result, finite } of lensInputs) {
+for (const { lens, result, finite, channelGain, toneCurve } of lensInputs) {
   const sourceDirectory = `.local/nebula-lab/reconstructions/${finite.sourceResultId}`;
   const baseline = record(parseLabModelJson(await readFile(resolve(root, sourceDirectory, 'source/provenance.json'), 'utf8')), 'baseline provenance');
   assert.equal(baseline.method, 'alignment-density-material-v1');
   const work = record(baseline.request, 'baseline request');
   assert.equal(work.imageId, lens.imageId);
-  const channelGain = record(result.finiteMaterial ?? {}, 'accepted lens material').channelGain;
   const registeredBytes = await readFile(resolve(root, sourceDirectory, 'source/registered-image.png'));
   const registered = await put(`${compact}/lenses/${lens.imageId}/registered.png`, registeredBytes);
   // Only alpha is read from the registered original, so deliver alpha alone, losslessly and at full size.
@@ -129,6 +150,7 @@ for (const { lens, result, finite } of lensInputs) {
     presentation: { label: lens.label, description: lens.description, sourceUrl: result.subject.sourcePageUrl },
     // Only when the accepted lens carries one, so a delivery without per-lens correction keeps its exact bytes.
     ...(channelGain === undefined ? {} : { channelGain: validateChannelGain(channelGain) }),
+    ...(toneCurve === undefined ? {} : { toneCurve: validateLensToneCurve(toneCurve) }),
     brightness: lens.brightness, stars: lens.stars });
 }
 
@@ -143,6 +165,7 @@ const inputs = {
   encoding: { format: 'webp', quality: record(model.settings, 'model settings').quality },
   emissionField, envelope: envelopeRecord, neutralSlices, neutralTextures: `${compact}/neutral`,
   priorCloud: { identityPin: { path: identityPath, sha256: identityDigest }, recipe: priorRecipe },
+  ...(toneProjection ? { toneProjection } : {}),
   stars, lenses,
   limitations: [
     'Delivered replay of an accepted image-fitted finite emission model. No fit, star removal or registration runs from these inputs.',
@@ -157,11 +180,17 @@ await writeFile(resolve(root, objectDirectory, 'source/compact-delivery.json'), 
   researchRecipe: { path: recipeArgument, sha256: sha256(recipeBytes) },
 }, null, 2) + '\n');
 
-// Numbered records of the laboratory inputs behind these bytes, in the shape the other nebulae use.
+// Numbered records of the laboratory inputs behind these bytes, in the shape the other nebulae use. The
+// promotion recipe names the object-owned copies of its emission and lens recipes; one that predates the
+// field keeps the SMC's original layout.
+const evidence = recipe.evidence ?? {
+  emissionRecipe: `${objectDirectory}/source/evidence/${recipe.id}/constrained/emission-envelope-ellipsoid.json`,
+  lensRecipe: `${objectDirectory}/source/evidence/${recipe.id}/constrained/finite-lenses-ellipsoid.json`,
+};
 const referenced = [
   { name: 'emission-model', path: `${modelDirectory}/source/provenance.json` },
-  { name: 'emission-recipe', path: `${objectDirectory}/source/evidence/smc/constrained/emission-envelope-ellipsoid.json` },
-  { name: 'lens-recipe', path: `${objectDirectory}/source/evidence/smc/constrained/finite-lenses-ellipsoid.json` },
+  { name: 'emission-recipe', path: evidence.emissionRecipe },
+  { name: 'lens-recipe', path: evidence.lensRecipe },
   { name: 'promotion-recipe', path: recipeArgument },
   { name: 'depth-density', path: identityPath },
   { name: 'catalogue-stars', path: starsPath },

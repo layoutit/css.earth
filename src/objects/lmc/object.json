@@ -20,25 +20,25 @@
       "metersPerUnit": 30856775814913670000,
       "boundsUnits": {
         "min": [
-          -34.2494860589516,
-          -39.659852117301206,
-          -14.063476651908141
+          -5.365053401638654,
+          -5.725722957908919,
+          -3.286750705393898
         ],
         "max": [
-          28.24754056340629,
-          21.19251590973147,
-          13.190865784909581
+          8.013586896106158,
+          6.16128561310083,
+          5.969691017466296
         ]
       }
     },
     "preparation": {
-      "source": "source/lenses.json",
-      "sha256": "fbfc0cb34daba7b894046d4c81c3c0be0d9ab80ac357be66d0daa3d053cb651d"
+      "source": "source/compact-delivery.json",
+      "sha256": "7627b7f10909b4733c96d2edb4889518a562f1d0e9ee65608747b157312ef15d"
     }
   },
   "prepared": {
     "format": "cssearth-volume-lenses@1",
     "url": "prepared/lenses.json",
-    "sha256": "75e04281f3f08265f94bbd68a75f3183b351c8d94aae4c624a8d52272f8e4ac0"
+    "sha256": "4dd5f002f13c6610c6b39ec941e64817e6d40eb60a4d74578bd1876d3a6c2d50"
   }
 }

@@ -127,21 +127,6 @@
       "baselineSha256": "1044f3f7f8f6678ee9b75e28d5f4299fda068edc3c0af705be03b8655f2f4b56"
     }
   ],
-  "delivery": {
-    "directory": "src/objects/lmc",
-    "manifest": {
-      "path": "src/objects/lmc/source/lens-manifest.json",
-      "sha256": "dfc6b44b4da261e7c856a7d4a6ca0341d42d6c596bba09319f28ebb7acc957f5"
-    },
-    "atlasInputs": {
-      "path": "src/objects/lmc/source/atlas-inputs.json",
-      "sha256": "2f64334242d7d1b1254d38cbb2d5d785999628aed574c4d64a1e4f84f3366132"
-    },
-    "compactInputs": {
-      "path": "src/objects/lmc/source/bake-inputs/inputs.json",
-      "sha256": "cfb652b3d316d3164dcf67974af787a2fc95b11a94465185e8a0dd2511d53cc2"
-    }
-  },
   "starCalibration": {
     "path": "labs/nebula/models/lmc/stars/source/catalogue.json",
     "sha256": "49c1eb40446ea782d34beba3f2ad85f6a2a042387c1821b04912d0f9d171f8b8"

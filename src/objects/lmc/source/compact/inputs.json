@@ -1,0 +1,731 @@
+{
+  "schema": "cssearth-compact-finite-emission@1",
+  "method": "simulation-guided-finite-material@1",
+  "bankId": "lmc",
+  "defaultLens": "horalek-widefield",
+  "framingRadiusUnits": 5,
+  "modelResultId": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "originM": [
+      105965308676973530000,
+      533209933280955330000,
+      -1.4303831216834226e+21
+    ],
+    "localToReferenceXyzw": [
+      0.09631989992847079,
+      0.9788280334299664,
+      0.17973685917567428,
+      0.01768669847817273
+    ],
+    "metersPerUnit": 30856775814913670000,
+    "boundsUnits": {
+      "min": [
+        -5.365053401638654,
+        -5.725722957908919,
+        -3.286750705393898
+      ],
+      "max": [
+        8.013586896106158,
+        6.16128561310083,
+        5.969691017466296
+      ]
+    }
+  },
+  "geometry": {
+    "observerDistanceKpc": 49.590672750490434,
+    "tangentBoundsKpc": {
+      "min": [
+        -4.351779483333175,
+        -3.6886303332796695
+      ],
+      "max": [
+        5.121066913779062,
+        3.3480334410529595
+      ]
+    },
+    "physicalBoundsKpc": {
+      "min": [
+        -5.365053401638654,
+        -5.725722957908919,
+        -3.286750705393898
+      ],
+      "max": [
+        8.013586896106158,
+        6.16128561310083,
+        5.969691017466296
+      ]
+    }
+  },
+  "material": {
+    "exposureGain": 2.418,
+    "fullChromaAlphaByte": 11
+  },
+  "appearance": {
+    "saturation": 1,
+    "detailStrength": 0,
+    "detailScale": 24,
+    "brightness": 1,
+    "gamma": 1
+  },
+  "encoding": {
+    "format": "webp",
+    "quality": 92
+  },
+  "emissionField": {
+    "path": "src/objects/lmc/source/compact/emission-field.json.gz",
+    "sha256": "7a784cf87ae41fd29462f0875d34e8e59e1f977dc6c11891a21249e02294300f",
+    "bytes": 20704
+  },
+  "envelope": {
+    "path": "src/objects/lmc/source/compact/envelope.json.gz",
+    "sha256": "17fd2ae3a4d0064413b6ca95e201dc251fb46dd683e2ae91fce498f27fe47744",
+    "bytes": 347745
+  },
+  "neutralSlices": {
+    "path": "src/objects/lmc/source/compact/neutral-slices.json.gz",
+    "sha256": "07ab47cf2311b11d7dcd630f83972d12b2fcb01fa44374a2757a6f8510c116f3",
+    "bytes": 39903
+  },
+  "neutralTextures": "src/objects/lmc/source/compact/neutral",
+  "priorCloud": {
+    "identityPin": {
+      "path": "labs/nebula/models/lmc/full-density/source/volume.json",
+      "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c"
+    },
+    "recipe": {
+      "path": "src/objects/lmc/source/compact/prior/volume.json",
+      "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c",
+      "bytes": 1370
+    }
+  },
+  "toneProjection": {
+    "image": {
+      "path": "src/objects/lmc/source/compact/fit-projection.png",
+      "sha256": "a1b45d96bb05ae4b1ac21c8f7ce4dafdb5ff85f2d22ffef2d0640924190ae626",
+      "bytes": 58725
+    },
+    "width": 384,
+    "height": 285,
+    "tangentBoundsKpc": {
+      "min": [
+        -4.351779483333175,
+        -3.6886303332796695
+      ],
+      "max": [
+        5.121066913779062,
+        3.3480334410529595
+      ]
+    }
+  },
+  "stars": {
+    "path": "src/objects/lmc/source/compact/stars.json.gz",
+    "sha256": "90f168d68f06616fac6d1b2be8df42b38498399ec3280ba5b272a44844303a95",
+    "bytes": 98673
+  },
+  "lenses": [
+    {
+      "imageId": "horalek-widefield",
+      "sourceResultId": "5fc6d6563f57e5ef6a6d5b4a4f5ebd8e35f8ae8ace946d0cca0997e067424f9b",
+      "resultId": "cab541ef8eac8f8ef410c5a93317a37a2a4a67b27a7d5c0a9154d59f71759559",
+      "tangentBoundsKpc": {
+        "min": [
+          -4.351779483333175,
+          -3.6886303332796695
+        ],
+        "max": [
+          5.121066913779062,
+          3.3480334410529595
+        ]
+      },
+      "sourceDigest": "fde07f3a937d444e8c03461403ea365998ef4b25195f85f4b7b07b9fc0eafce2",
+      "registered": {
+        "path": "src/objects/lmc/source/compact/lenses/horalek-widefield/registered.png",
+        "sha256": "f593f6df2a48f4b735c39c39628a67f43c0f11fc0ef0ac0cb70775dc24a62e9c",
+        "bytes": 1402422
+      },
+      "coverage": {
+        "path": "src/objects/lmc/source/compact/lenses/horalek-widefield/coverage.png",
+        "sha256": "399131de4c0bd10195e090a41c043f8c4690ea3c3886bd314ed313049e922aad",
+        "bytes": 6909
+      },
+      "densityFilter": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "enabledIds": [
+        "all-light"
+      ],
+      "provenance": {
+        "path": "src/objects/lmc/source/lenses/horalek-widefield/provenance.json",
+        "sha256": "8bcc6db53741bc0ec1b05db438aff713b1a5833c02cfca7858b396e5fe291c4b"
+      },
+      "presentation": {
+        "label": "Horálek optical",
+        "description": "Visible-light colors from Petr Horálek's NOIRLab wide-field photograph, painted onto the shared image-fitted LMC emission model. Its broad envelope follows the Garver et al. stellar simulation's shape hypothesis, not measured gas depth.",
+        "sourceUrl": "https://noirlab.edu/public/images/iotw2547a/"
+      },
+      "toneCurve": {
+        "schema": "cssearth-lens-tone-curve@1",
+        "knots": [
+          0,
+          8,
+          16,
+          24,
+          32,
+          40,
+          48,
+          56,
+          64,
+          72,
+          80,
+          88,
+          96,
+          104,
+          112,
+          120,
+          128,
+          136,
+          144,
+          152,
+          160,
+          168,
+          176,
+          184,
+          192,
+          200,
+          208,
+          216,
+          224,
+          232,
+          240,
+          248,
+          255
+        ],
+        "channels": [
+          [
+            0,
+            6.758,
+            11.174,
+            14.177,
+            16.777,
+            18.982,
+            20.929,
+            22.978,
+            25.702,
+            29.638,
+            34.761,
+            40.261,
+            45.127,
+            49.272,
+            53.639,
+            58.531,
+            63.696,
+            69.924,
+            77.322,
+            84.945,
+            93.253,
+            102.641,
+            112.599,
+            123.432,
+            135.624,
+            149.296,
+            164.701,
+            183.96,
+            225.377,
+            293.559,
+            353.698,
+            389.212,
+            412.854
+          ],
+          [
+            0,
+            6.832,
+            11.346,
+            14.309,
+            16.746,
+            18.857,
+            20.856,
+            22.966,
+            25.429,
+            28.519,
+            32.584,
+            37.873,
+            43.745,
+            49.112,
+            54.097,
+            59.8,
+            67.018,
+            75.295,
+            84.185,
+            93.841,
+            103.057,
+            111.47,
+            121.021,
+            132.772,
+            146.517,
+            160.785,
+            174.322,
+            187.967,
+            200.454,
+            209.904,
+            217.585,
+            224.801,
+            231.798
+          ],
+          [
+            0,
+            6.895,
+            11.694,
+            15.103,
+            17.992,
+            20.429,
+            22.556,
+            24.617,
+            26.871,
+            29.517,
+            32.692,
+            36.487,
+            40.765,
+            45.202,
+            50.329,
+            57.011,
+            64.622,
+            72.068,
+            79.824,
+            88.738,
+            98.828,
+            109.194,
+            118.76,
+            129.634,
+            143.879,
+            158.875,
+            171.739,
+            186.504,
+            208.162,
+            231.414,
+            249.371,
+            262.105,
+            272.202
+          ]
+        ]
+      },
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 1
+      }
+    },
+    {
+      "imageId": "vista-infrared",
+      "sourceResultId": "ba8f4ad93ea837aa3db9190f0a403e17708533ee5047389dd14a1d6c18560c5f",
+      "resultId": "f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f",
+      "tangentBoundsKpc": {
+        "min": [
+          -2.9197263334954138,
+          -4.817396500244309
+        ],
+        "max": [
+          4.263688633549369,
+          3.2676669383136834
+        ]
+      },
+      "sourceDigest": "d595c34af23202b0094b55614575a84e0212b8e4e415bc6fad1f450b674d479d",
+      "registered": {
+        "path": "src/objects/lmc/source/compact/lenses/vista-infrared/registered.png",
+        "sha256": "1f789a54bac4177500e6f9ecd1f0e77f7d2ecbb71e183cea16ab2cff71906c8a",
+        "bytes": 1839895
+      },
+      "coverage": {
+        "path": "src/objects/lmc/source/compact/lenses/vista-infrared/coverage.png",
+        "sha256": "d7fcb15ec7dd8568864ec20eeff9d0ce05e8c58028cfbfb578b48a398078d13f",
+        "bytes": 8723
+      },
+      "densityFilter": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "enabledIds": [
+        "all-light"
+      ],
+      "provenance": {
+        "path": "src/objects/lmc/source/lenses/vista-infrared/provenance.json",
+        "sha256": "5c5d8d03a94268f8370a0cbfb02220c853ea2c5b920fdaafd408364db2086b97"
+      },
+      "presentation": {
+        "label": "ESO VISTA",
+        "description": "Near-infrared colors from ESO's VISTA VMC survey image, painted onto the shared image-fitted LMC emission model. Its broad envelope follows the Garver et al. stellar simulation's shape hypothesis, not measured gas depth.",
+        "sourceUrl": "https://www.eso.org/public/images/eso1914a/"
+      },
+      "toneCurve": {
+        "schema": "cssearth-lens-tone-curve@1",
+        "knots": [
+          0,
+          8,
+          16,
+          24,
+          32,
+          40,
+          48,
+          56,
+          64,
+          72,
+          80,
+          88,
+          96,
+          104,
+          112,
+          120,
+          128,
+          136,
+          144,
+          152,
+          160,
+          168,
+          176,
+          184,
+          192,
+          200,
+          208,
+          216,
+          224,
+          232,
+          240,
+          248,
+          255
+        ],
+        "channels": [
+          [
+            0,
+            2.464,
+            4.232,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18,
+            20,
+            22,
+            24,
+            26,
+            28,
+            30,
+            32,
+            34,
+            36,
+            38.42,
+            42.268,
+            48.034,
+            55.329,
+            63.278,
+            71.081,
+            79.387,
+            94.111,
+            116.577,
+            133.421,
+            138.326,
+            139.634,
+            142.328,
+            145.883
+          ],
+          [
+            0,
+            2.602,
+            4.323,
+            6.014,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18,
+            20,
+            22,
+            24,
+            26,
+            28,
+            30,
+            32,
+            34,
+            36,
+            38.655,
+            43.728,
+            51.349,
+            59.987,
+            68.589,
+            75.734,
+            80.679,
+            83.53,
+            84.803,
+            85.716,
+            87.171,
+            89.361,
+            91.996,
+            94.772
+          ],
+          [
+            0,
+            2.709,
+            4.433,
+            6.052,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18,
+            20,
+            22,
+            24,
+            26,
+            28,
+            30,
+            32,
+            34,
+            36,
+            38,
+            40,
+            43.747,
+            51.879,
+            61.637,
+            68.807,
+            75.291,
+            81.832,
+            85.402,
+            86.121,
+            87.028,
+            89.778,
+            93.394,
+            96.829
+          ]
+        ]
+      },
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 1
+      }
+    },
+    {
+      "imageId": "wise-wide-infrared",
+      "sourceResultId": "19c9f90916a4cfe7100972aa898522fb7eee347dacc83163ffadb3b3337277a6",
+      "resultId": "6223c6cd9b389f00a42d52b9016431a4416d1e77f70ebaaa5694f8ce32fbaff6",
+      "tangentBoundsKpc": {
+        "min": [
+          -10.542579694562741,
+          -10.539066086932486
+        ],
+        "max": [
+          10.539066086932486,
+          10.542579694562738
+        ]
+      },
+      "sourceDigest": "05443d097fa8abda86ba22ed4c5141d085c0614f207d1a278df2e664046767b9",
+      "registered": {
+        "path": "src/objects/lmc/source/compact/lenses/wise-wide-infrared/registered.png",
+        "sha256": "44f386ae92b17d794f7e4e817741d6b499e78f8d89f878bf80739fa2bd5fc229",
+        "bytes": 667742
+      },
+      "coverage": {
+        "path": "src/objects/lmc/source/compact/lenses/wise-wide-infrared/coverage.png",
+        "sha256": "c425c3462c107718bed50bb4d84a0ca81a4915771f4c1cfc183f86787347996d",
+        "bytes": 4181
+      },
+      "densityFilter": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "enabledIds": [
+        "all-light"
+      ],
+      "provenance": {
+        "path": "src/objects/lmc/source/lenses/wise-wide-infrared/provenance.json",
+        "sha256": "333c6fd4a35a2c7b088c6c30c867aee784b5901bd0711d3e5c01c96e47ed00c0"
+      },
+      "presentation": {
+        "label": "NASA AllWISE",
+        "description": "Infrared colors from the NASA/IPAC AllWISE color mosaic served by CDS, painted onto the shared image-fitted LMC emission model. Its broad envelope follows the Garver et al. stellar simulation's shape hypothesis, not measured gas depth.",
+        "sourceUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html"
+      },
+      "toneCurve": {
+        "schema": "cssearth-lens-tone-curve@1",
+        "knots": [
+          0,
+          8,
+          16,
+          24,
+          32,
+          40,
+          48,
+          56,
+          64,
+          72,
+          80,
+          88,
+          96,
+          104,
+          112,
+          120,
+          128,
+          136,
+          144,
+          152,
+          160,
+          168,
+          176,
+          184,
+          192,
+          200,
+          208,
+          216,
+          224,
+          232,
+          240,
+          248,
+          255
+        ],
+        "channels": [
+          [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18,
+            20,
+            22,
+            24,
+            26,
+            28,
+            30,
+            32,
+            34,
+            36,
+            38,
+            40,
+            42,
+            44,
+            46,
+            48,
+            50,
+            52,
+            54,
+            56,
+            58,
+            60,
+            61.938,
+            63.75
+          ],
+          [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18,
+            20,
+            22,
+            24,
+            26,
+            28,
+            30,
+            32,
+            34,
+            36,
+            38,
+            40,
+            42,
+            44,
+            46,
+            48,
+            50,
+            52,
+            54,
+            56,
+            58,
+            60,
+            61.938,
+            63.75
+          ],
+          [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18,
+            20,
+            22,
+            24,
+            26,
+            28,
+            30,
+            32,
+            34,
+            36,
+            38,
+            40,
+            42,
+            44,
+            46,
+            48,
+            50,
+            52,
+            54,
+            56,
+            58,
+            60,
+            61.938,
+            63.75
+          ]
+        ]
+      },
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 1
+      }
+    }
+  ],
+  "limitations": [
+    "Delivered replay of an accepted image-fitted finite emission model. No fit, star removal or registration runs from these inputs.",
+    "The coverage mask carries only the alpha the accepted bake reads from the registered original; its RGB is not delivered because nothing reads it.",
+    "The depth density keeps the accepted pin identity so the envelope still refuses a prior it was not fitted with."
+  ]
+}

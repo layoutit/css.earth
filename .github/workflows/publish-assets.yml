@@ -1,0 +1,206 @@
+name: Publish prepared assets
+
+# Publishes one object's baked bytes to R2 for a pull request whose author cannot, so an outside
+# contributor is not blocked on a maintainer's laptop. The contributor still bakes and commits the
+# inventory themselves — baking needs no credentials, only publishing does.
+#
+# The bake job runs PR code without publication credentials. The publish job uses only trusted tooling,
+# compares inventories against a separate checkout of the frozen PR commit, and stages only verified files.
+# Its artifact is never copied over scripts or dependencies. Content-addressed keys cannot replace existing
+# bytes with different content; a hostile inventory can still create unreferenced keys (storage cost).
+
+on:
+  workflow_dispatch:
+    inputs:
+      pull_request:
+        description: Pull request number whose branch should be baked and published
+        required: true
+        type: string
+      object:
+        description: Object id to bake and publish (one per run)
+        required: true
+        type: string
+      kind:
+        description: Which preparation bakes this object
+        required: true
+        default: body
+        type: choice
+        options: [body, volume]
+
+permissions:
+  contents: read
+
+concurrency:
+  # One publish at a time per pull request; never cancel a run mid-upload.
+  group: publish-prepared-assets-${{ inputs.pull_request }}
+  cancel-in-progress: false
+
+jobs:
+  resolve:
+    name: Resolve the pull request head
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      head_sha: ${{ steps.pr.outputs.head_sha }}
+      repository: ${{ steps.pr.outputs.repository }}
+    steps:
+      - name: Read the pull request head
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUMBER: ${{ inputs.pull_request }}
+          OBJECT: ${{ inputs.object }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$NUMBER" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::Not a pull request number: $NUMBER"
+            exit 1
+          fi
+          # An object id reaches a shell and a path below, so reject anything that is not the
+          # id shape used everywhere else in this repository before it goes further.
+          if [[ ! "$OBJECT" =~ ^[a-z][a-z0-9-]*$ ]]; then
+            echo "::error::Not an object id: $OBJECT"
+            exit 1
+          fi
+          state=$(gh pr view "$NUMBER" -R "$GITHUB_REPOSITORY" --json state --jq .state)
+          if [ "$state" != OPEN ]; then
+            echo "::error::Pull request #$NUMBER is $state, not OPEN."
+            exit 1
+          fi
+          gh pr view "$NUMBER" -R "$GITHUB_REPOSITORY" --json headRefOid,headRepository,headRepositoryOwner \
+            --jq '"head_sha=\(.headRefOid)\nrepository=\(.headRepositoryOwner.login)/\(.headRepository.name)"' >> "$GITHUB_OUTPUT"
+          echo "Publishing $OBJECT for #$NUMBER." >> "$GITHUB_STEP_SUMMARY"
+
+  bake:
+    name: Bake the object from the pull request
+    needs: resolve
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    # No publication credentials are available to this job. It runs the pull request's own code.
+    env:
+      OBJECT: ${{ inputs.object }}
+      KIND: ${{ inputs.kind }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: ${{ needs.resolve.outputs.repository }}
+          ref: ${{ needs.resolve.outputs.head_sha }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Restore the pinned source downloads
+        run: node tools/restore-source-inputs.mts "--object=$OBJECT"
+      - name: Bake
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: |
+          set -euo pipefail
+          if [ "$KIND" = volume ]; then
+            pnpm build:tools
+            pnpm prepare:volume "src/objects/$OBJECT"
+          else
+            pnpm prepare:planets "--object=$OBJECT"
+          fi
+      - name: Check the rebake reproduces the committed inventory
+        # Early contributor feedback. The trusted publish job independently checks the frozen inventory;
+        # no result produced on this runner is a security assertion about the PR code.
+        run: |
+          set -euo pipefail
+          drift=$(git status --porcelain -- \
+            "src/objects/$OBJECT/runtime-assets.json" \
+            "src/objects/$OBJECT/prepared-assets.json")
+          if [ -n "$drift" ]; then
+            echo "::error::Rebaking changed the committed inventory, so it does not match this branch's sources:"
+            echo "$drift"
+            git --no-pager diff --stat -- "src/objects/$OBJECT"
+            echo "Commit the regenerated inventory to the pull request, then publish again." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+      - name: Collect the baked files and their inventories
+        run: |
+          set -euo pipefail
+          mkdir -p upload
+          for path in "src/objects/$OBJECT/runtime-assets.json" \
+                      "src/objects/$OBJECT/prepared-assets.json" ; do
+            [ -f "$path" ] && { mkdir -p "upload/$(dirname "$path")"; cp "$path" "upload/$path"; }
+          done
+          for directory in "src/objects/$OBJECT/prepared" \
+                           "public/scenes/$OBJECT" ; do
+            [ -d "$directory" ] && { mkdir -p "upload/$directory"; cp -R "$directory/." "upload/$directory/"; }
+          done
+          du -sh upload
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: prepared-${{ inputs.object }}
+          path: upload
+          if-no-files-found: error
+          retention-days: 1
+
+  publish:
+    name: Publish the baked bytes to R2
+    needs: [resolve, bake]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: r2-publish
+    env:
+      OBJECT: ${{ inputs.object }}
+    steps:
+      - name: Check the publish credentials are configured
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          if [ -z "${CLOUDFLARE_API_TOKEN:-}" ] || [ -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]; then
+            echo "::error::CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID must be set on the r2-publish environment."
+            exit 1
+          fi
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # The dispatch revision on main is immutable, including the staging validator.
+          # Never run the pull request's publishing tools.
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Install dependencies
+        # Do not restore a cache writable by the untrusted bake runner.
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Prepare the trusted publisher's catalogue imports
+        run: pnpm build:packages && pnpm build:renderer && pnpm prepare:catalog
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: ${{ needs.resolve.outputs.repository }}
+          ref: ${{ needs.resolve.outputs.head_sha }}
+          path: pull-request
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: prepared-${{ inputs.object }}
+          path: ${{ runner.temp }}/prepared-artifact
+      - name: Verify the frozen inventories and stage only their bytes
+        run: node tools/stage-published-assets.mts "$RUNNER_TEMP/prepared-artifact" "$GITHUB_WORKSPACE/pull-request" "$OBJECT"
+      - name: Publish
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node tools/publish-runtime-assets.mts "--object=$OBJECT"
+      - name: Confirm every inventoried key is live
+        run: node tools/check-assets-published.mts "--object=$OBJECT"
+      - name: Report
+        env:
+          NUMBER: ${{ inputs.pull_request }}
+          HEAD_SHA: ${{ needs.resolve.outputs.head_sha }}
+        run: |
+          echo "Published \`$OBJECT\` for #$NUMBER ($HEAD_SHA)." >> "$GITHUB_STEP_SUMMARY"
+          echo "Re-run the pull request's checks so its asset gate sees the published keys." >> "$GITHUB_STEP_SUMMARY"
