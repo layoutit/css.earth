@@ -6,7 +6,7 @@ import { writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { rememberQualification } from './qualified-observations.mts';
 import { openSpectralCube } from '../jwst/cubes/spectral-cube.mts';
-import { readFitsFileHdus } from '../../fits.mts';
+import { readFitsFileHdus, type FitsHeader } from '../../fits.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
 import { pathToFileURL } from 'node:url';
 import { flagValue } from '../../cli-arguments.mts';
@@ -154,6 +154,30 @@ export async function qualifyObservation(root: string, request: QualificationReq
   return recordQualification(root, result);
 }
 
+/** FITS dates use the header's time scale, never the host's timezone.
+ * UTC is the FITS default from 1972 onward. Other scales require conversion;
+ * leave those unknown here rather than labelling TAI/TT/etc. as UTC.
+ * https://fits.gsfc.nasa.gov/year2000.html */
+export function fitsObservationInterval(header: FitsHeader): Pick<ProductFacts, 'startIso' | 'endIso'> {
+  const scale = header.TIMESYS;
+  if (scale !== undefined && (typeof scale !== 'string' || scale.trim() !== 'UTC')) return {};
+  const timestamp = (date: unknown, time: unknown): string | undefined => {
+    if (typeof date !== 'string') return undefined;
+    const text = /^\d{4}-\d{2}-\d{2}$/u.test(date) && typeof time === 'string' ? `${date}T${time}` : date;
+    const parts = /^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(\.\d+)?(Z|[+-]\d{2}:\d{2})?$/u.exec(text);
+    if (!parts || (scale === undefined && text.slice(0, 10) < '1972-01-01')) return undefined;
+    // Reject normalized invalid dates (e.g. February 30), incomplete dates and leap
+    // seconds which JavaScript cannot represent. Keep the interval unknown instead.
+    const wallTime = Date.parse(`${parts[1]}Z`);
+    if (!Number.isFinite(wallTime) || new Date(wallTime).toISOString().slice(0, 19) !== parts[1]) return undefined;
+    const value = Date.parse(parts[3] ? text : `${text}Z`);
+    return Number.isFinite(value) ? new Date(value).toISOString() : undefined;
+  };
+  const startIso = timestamp(header['DATE-BEG'] ?? header['DATE-OBS'], header['TIME-OBS']);
+  const endIso = timestamp(header['DATE-END'], header['TIME-END']);
+  return startIso && endIso && startIso <= endIso ? { startIso, endIso } : {};
+}
+
 /** Read back the produced file, not its mode's nominal capabilities. */
 export async function recordQualification(root: string, result: QualificationResult): Promise<QualificationResult> {
   let facts: ProductFacts = { target: result.target, verified: true, kind: 'image', result: 'telescope-product' };
@@ -163,9 +187,7 @@ export async function recordQualification(root: string, result: QualificationRes
   }
   if (result.configuration.kind !== 'pds-product') {
     const headers = await readFitsFileHdus(result.product), header = headers[0]!.header;
-    const start = header['DATE-BEG'] ?? header['DATE-OBS'], end = header['DATE-END'];
-    if (typeof start === 'string' && typeof end === 'string' && Number.isFinite(Date.parse(start)) && Number.isFinite(Date.parse(end)))
-      facts = { ...facts, startIso: new Date(start).toISOString(), endIso: new Date(end).toISOString() };
+    facts = { ...facts, ...fitsObservationInterval(header) };
   }
   const record = await readProductRecord(productRecordPath(result.product));
   const evidence = record?.evidence.findLast(entry => entry.receiptPin !== undefined);

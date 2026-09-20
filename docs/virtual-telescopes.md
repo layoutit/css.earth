@@ -62,6 +62,11 @@ artifact invalidates this local qualification; the archive's discovery records r
 All public qualification result paths are absolute. Stored local results use
 repository-relative paths so that the checkout can move.
 
+Qualification reads FITS observation times in the header's time scale, independently
+of the machine's timezone. UTC is the default for dates from 1972 onward. Split
+`DATE-OBS`/`TIME-OBS` values retain the time of day; unsupported time scales and
+incomplete or invalid intervals remain unknown.
+
 Selection includes the matching `product` and assesses its verified facts. For example,
 a qualified 2.2–2.4 µm cube cannot answer a 4.24–4.28 µm request. Other observations
 still expose qualification actions. Unmeasured resolution remains unknown, even when
