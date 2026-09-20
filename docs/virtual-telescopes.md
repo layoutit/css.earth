@@ -638,6 +638,36 @@ Numeric CSV and a product record accompany each plot. The record pins the origin
 its files, the chosen HDU/plane/pixel, the implementation, package versions and derived bytes.
 No plotting stage upgrades the original scientific request's satisfaction.
 
+### Example exports: Eris, JWST NIRSpec IFU
+
+These figures come from the local level-3 cube
+`jw01191-o019_t002_nirspec_g235m-f170lp_s3d.fits`, SCI HDU 1, with shape
+191 wavelengths × 55 rows × 51 columns. Its SHA-256 is
+`fbeeb9737ecf46c2b1aad5e27cb55a50e6e8f83fc8e7e347c3aa80d3e07f4bab`.
+Both figures use the product's MJy/sr units and quality mask. Pixel and plane selectors
+are zero-based. Astropy 8.0.1 reads the product; Matplotlib 3.11.2 renders the figures.
+
+![Eris NIRSpec image plane at 2.2997 micrometres, with image-pixel axes and a surface-brightness colour bar](images/telescopes/eris-native-plane.png)
+
+**Image:** plane 95 at 2.2997 µm, shown on the native image grid. The diamond-shaped
+footprint is the cube's sampled field, not Eris's surface. Masked samples are omitted.
+
+![Eris spectrum at image pixel 25,27, with wavelength and surface-brightness axes and recorded uncertainty](images/telescopes/eris-pixel-spectrum.png)
+
+**Spectrum:** one selected pixel, `(25, 27)`, across the cube's approximately
+2.2–2.4 µm interval. Shading shows the recorded ±1σ uncertainty. This is not an
+aperture-integrated spectrum or a claim about the significance of spectral features.
+
+Given this cube's delivered `result.json`, reproduce the selections with:
+
+```sh
+telescope export result.json --output image --hdu 1 --plane 95 --out eris-image
+telescope export result.json --output spectrum --hdu 1 --pixel 25,27 --out eris-spectrum
+```
+
+The delivery still reports unresolved angular resolution because the caller has not
+accepted its profile-model assumptions. Exporting these figures does not change that verdict.
+
 The remaining output families reuse existing scientific owners:
 
 | Output | Required scientific input | Existing owner / remaining adapter |
