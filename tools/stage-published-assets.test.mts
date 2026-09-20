@@ -132,3 +132,9 @@ test('the real resolve step rejects unsafe dispatch inputs before invoking GitHu
     assert.ok(!result.stdout.includes('GITHUB_WAS_CALLED'));
   }
 });
+
+test('the publisher passes the object selector to the actual preparation entry point', async () => {
+  const workflow = await readFile(new URL('../.github/workflows/publish-assets.yml', import.meta.url), 'utf8');
+  assert.match(workflow, /node tools\/prepare-planets\.mts "--object=\$OBJECT"/u);
+  assert.doesNotMatch(workflow, /^\s+pnpm prepare:planets/u);
+});

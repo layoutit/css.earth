@@ -38,26 +38,8 @@ test("setup reports every unavailable file instead of stopping at the first", as
   try {
     const missing = ["first.webp", "second.webp"];
     await assert.rejects(installRuntimeAssets(missing.map(asset), {
-      concurrency: 1, attempts: 1, fetcher: async () => new Response(null, { status: 404 }),
+      concurrency: 1, fetcher: async () => new Response(null, { status: 404 }),
     }), (error: Error) => missing.every(name => error.message.includes(name)) && error.message.includes("2 of 2"));
-  } finally { await rm(root, { recursive: true, force: true }); }
-});
-
-test("setup retries a newly published asset through a fresh URL after a stale 404", async () => {
-  const root = await mkdtemp(join(tmpdir(), "cssearth-setup-retry-"));
-  const bytes = Buffer.from("prepared image");
-  const asset = { id: "earth", key: "earth/image.webp", filename: "image.webp", file: join(root, "image.webp"),
-    url: "https://example.invalid/image.webp", bytes: bytes.length,
-    sha256: createHash("sha256").update(bytes).digest("hex") };
-  const requests: string[] = [];
-  try {
-    assert.deepEqual(await installRuntimeAssets([asset], { retryDelayMs: 0, fetcher: async url => {
-      requests.push(String(url));
-      return requests.length === 1 ? new Response(null, { status: 404 }) : new Response(bytes);
-    } }), { installed: 1, reused: 0, skipped: 0 });
-    assert.equal(requests[0], asset.url);
-    assert.match(requests[1]!, /image\.webp\?cssearth-retry=[a-f0-9]{64}-2$/u);
-    assert.deepEqual(await readFile(asset.file), bytes);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -84,7 +66,7 @@ test("allow-missing (deploy only) skips a genuinely missing R2 file so the objec
     assert.equal(availability.lmc.available, true);
 
     // Default mode (no allow-missing) still fails outright on the exact same 404.
-    await assert.rejects(installRuntimeAssets([asset], { attempts: 1, fetcher }), /helix\/lenses\.json \(HTTP 404\)/);
+    await assert.rejects(installRuntimeAssets([asset], { fetcher }), /helix\/lenses\.json \(HTTP 404\)/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -94,7 +76,7 @@ test("allow-missing does not swallow a non-404 failure (mutation check: a 5xx mu
     const asset = { id: "sun", key: "sun/x.webp", filename: "x.webp", file: join(root, "x.webp"),
       url: "https://example.invalid/x.webp", bytes: 3, sha256: createHash("sha256").update("abc").digest("hex") };
     await assert.rejects(installRuntimeAssets([asset], {
-      allowMissing: true, attempts: 1, fetcher: async () => new Response(null, { status: 500 }),
+      allowMissing: true, fetcher: async () => new Response(null, { status: 500 }),
     }), /HTTP 500/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

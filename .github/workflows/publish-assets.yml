@@ -107,7 +107,14 @@ jobs:
             pnpm build:tools
             pnpm prepare:volume "src/objects/$OBJECT"
           else
-            pnpm prepare:planets "--object=$OBJECT"
+            # Do not pass the selector through the compound prepare:planets package script: pnpm appends it
+            # only to that script's final command, which silently prepares every object instead of this one.
+            pnpm prepare:catalog
+            pnpm build:astronomy
+            node tools/prepare-solar-geometry.mts
+            pnpm build:catalog
+            node tools/prepare-planets.mts "--object=$OBJECT"
+            node tools/prepare-feature-index.mts "--object=$OBJECT"
           fi
       - name: Check the rebake reproduces the committed inventory
         # Early contributor feedback. The trusted publish job independently checks the frozen inventory;

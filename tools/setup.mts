@@ -12,37 +12,10 @@ export function readAllowMissingFlag(args: readonly string[] = []) {
   return args.includes("--allow-missing") || process.env.CSSEARTH_ALLOW_MISSING_ASSETS === "1";
 }
 
-function retryUrl(url: string, sha256: string, attempt: number): string {
-  if (attempt === 1) return url;
-  const retried = new URL(url);
-  retried.searchParams.set("cssearth-retry", `${sha256}-${attempt}`);
-  return retried.href;
-}
-
-async function fetchRuntimeAsset(asset: RuntimeAssetLocation, fetcher: typeof fetch, attempts: number,
-  retryDelayMs: number, retry404: boolean): Promise<Response> {
-  let lastError: unknown;
-  for (let attempt = 1; attempt <= attempts; attempt++) {
-    try {
-      const response = await fetcher(retryUrl(asset.url, asset.sha256, attempt), { signal: AbortSignal.timeout(120000) });
-      const retryable = (retry404 && response.status === 404) || response.status === 408 || response.status === 429 || response.status >= 500;
-      if (!retryable || attempt === attempts) return response;
-      await response.body?.cancel();
-      lastError = new Error(`HTTP ${response.status}`);
-    } catch (error) {
-      lastError = error;
-      if (attempt === attempts) throw error;
-    }
-    await new Promise(resolveDelay => setTimeout(resolveDelay, retryDelayMs * 2 ** (attempt - 1)));
-  }
-  throw lastError;
-}
-
 // Install already prepared files. Source acquisition and geometry authoring
 // remain separate; setup needs neither a browser nor the worldwide mirror.
 export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation[], { fetcher = fetch, concurrency = 8,
-  allowMissing = false, attempts = 4, retryDelayMs = 1000, onProgress = () => {} }: {fetcher?: typeof fetch;
-  concurrency?: number; allowMissing?: boolean; attempts?: number; retryDelayMs?: number;
+  allowMissing = false, onProgress = () => {} }: {fetcher?: typeof fetch; concurrency?: number; allowMissing?: boolean;
   onProgress?: (progress: InstallProgress) => void} = {}) {
   let next = 0, installed = 0, reused = 0, skipped = 0;
   // A fresh checkout should learn about every missing or drifted file in one
@@ -59,10 +32,7 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
             sha256(existing) === asset.sha256) {
           reused++;
         } else {
-          // A newly published immutable key can briefly be a regional 404 through the asset domain even after
-          // R2 accepted it. Retry transient responses with a distinct query so an intermediary cannot keep
-          // replaying one negative lookup. Deploy's explicit allow-missing mode still handles a real 404 at once.
-          const response = await fetchRuntimeAsset(asset, fetcher, attempts, retryDelayMs, !allowMissing);
+          const response = await fetcher(asset.url, { signal: AbortSignal.timeout(120000) });
           // A deploy build may tolerate one object's asset genuinely missing from R2 (a 404, not a flaky
           // 5xx/network error) rather than fail the whole build: skip it loudly and let the object's own
           // unavailable-package path report it, instead of installing a fabricated or partial file here.
