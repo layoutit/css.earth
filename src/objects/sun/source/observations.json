@@ -1,0 +1,1012 @@
+{
+  "schema": "cssearth-source-observations@1",
+  "target": "sun",
+  "observations": [
+    {
+      "id": "jsoc-hmi-continuum-20260513-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM96/D1995449626/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260513-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260514-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM84/D1995830938/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260514-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260515-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM86/D1996196117/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260515-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260516-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM93/D1996591035/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260516-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260517-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM92/D1996919159/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260517-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260518-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM94/D1997290784/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260518-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260519-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM84/D1997660075/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260519-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260520-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM85/D1998041216/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260520-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260521-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM88/D1998368073/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260521-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260522-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM85/D1999155504/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260522-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260523-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM86/D1999153061/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260523-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260524-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM88/D1999414588/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260524-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260525-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM88/D1999878099/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260525-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260526-120000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM88/D2000079510/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260526-120000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260527-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM93/D2000383703/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260527-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260528-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM91/D2000715425/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260528-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260529-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM95/D2001293287/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260529-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260530-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM85/D2001597072/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260530-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260531-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM89/D2001910073/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260531-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260601-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM92/D2002220375/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260601-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260602-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM93/D2002513272/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260602-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260603-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM90/D2002756466/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260603-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260604-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM98/D2002975977/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260604-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260605-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM92/D2003387699/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260605-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260606-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM91/D2003729111/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260606-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260607-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM94/D2004074118/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260607-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260608-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM93/D2004405503/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260608-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-continuum-20260609-000000-tai",
+      "telescope": "SDO",
+      "mode": "HMI/continuum",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM89/D2004711914/S00003/continuum.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-continuum-20260609-000000-tai",
+          "role": "science"
+        },
+        {
+          "input": "jsoc-hmi-continuum-cr2311-keywords",
+          "role": "metadata"
+        }
+      ],
+      "identity": {
+        "ZIMAGE": true,
+        "ZCMPTYPE": "RICE_1",
+        "ZNAXIS1": 4096,
+        "ZNAXIS2": 4096
+      },
+      "centralWavelengthMicrometres": 0.6173,
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed by JSOC.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "Segment FITS omits observation keywords; the pinned JSOC keyword table is retained as a companion. Header checks establish array structure; the manifest pins establish the exact archive segment.",
+        "TAI time and viewing geometry are retained in the companion table; they are not yet promoted to qualified UTC or map geometry.",
+        "Filter width, achieved resolution and per-pixel uncertainty are not qualified."
+      ]
+    },
+    {
+      "id": "jsoc-hmi-cr2311-radial-field-synoptic-map",
+      "telescope": "SDO",
+      "mode": "HMI/radial-field synoptic",
+      "kind": "image",
+      "archiveProductId": "https://jsoc1.stanford.edu/SUM89/D2005165426/S00000/synopMr.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "jsoc-hmi-cr2311-radial-field-synoptic-map",
+          "role": "science"
+        }
+      ],
+      "identity": {
+        "CHECKSUM": "PVF6RS96PSC6PS96",
+        "DATASUM": "3004116690"
+      },
+      "units": "not stated in segment header",
+      "meaning": "JSOC hmi.mrsynop_small_720s[2311] radial magnetic field synoptic map.",
+      "citation": "https://jsoc.stanford.edu/",
+      "limitations": [
+        "A synoptic map combines different observation times; it is not an instantaneous surface measurement.",
+        "Filter width, achieved ground resolution and per-pixel uncertainty are not qualified.",
+        "Native grid is retained. This is not a shared body-map product and no display colour transform is applied."
+      ]
+    },
+    {
+      "id": "sdo-aia-304-cr2311-synoptic-map",
+      "telescope": "SDO",
+      "mode": "AIA/304 synoptic",
+      "kind": "image",
+      "archiveProductId": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0304/CR2311.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "sdo-aia-304-cr2311-synoptic-map",
+          "role": "science"
+        }
+      ],
+      "identity": {
+        "TELESCOP": "SDO/AIA_2",
+        "WAVELNTH": "304 = He II",
+        "CAR_ROT": 2311
+      },
+      "units": "counts / Pixel",
+      "meaning": "CR2311 304 angstrom intensity synoptic map.",
+      "citation": "https://sdo.gsfc.nasa.gov/data/synoptic/",
+      "limitations": [
+        "A synoptic map combines different observation times; it is not an instantaneous surface measurement.",
+        "Filter width, achieved ground resolution and per-pixel uncertainty are not qualified.",
+        "Native grid is retained. This is not a shared body-map product and no display colour transform is applied."
+      ],
+      "centralWavelengthMicrometres": 0.0304
+    },
+    {
+      "id": "sdo-aia-171-cr2311-synoptic-map",
+      "telescope": "SDO",
+      "mode": "AIA/171 synoptic",
+      "kind": "image",
+      "archiveProductId": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0171/CR2311.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "sdo-aia-171-cr2311-synoptic-map",
+          "role": "science"
+        }
+      ],
+      "identity": {
+        "TELESCOP": "SDO/AIA_2",
+        "WAVELNTH": "171 = Fe IX",
+        "CAR_ROT": 2311
+      },
+      "units": "counts / Pixel",
+      "meaning": "CR2311 171 angstrom intensity synoptic map.",
+      "citation": "https://sdo.gsfc.nasa.gov/data/synoptic/",
+      "limitations": [
+        "A synoptic map combines different observation times; it is not an instantaneous surface measurement.",
+        "Filter width, achieved ground resolution and per-pixel uncertainty are not qualified.",
+        "Native grid is retained. This is not a shared body-map product and no display colour transform is applied."
+      ],
+      "centralWavelengthMicrometres": 0.0171
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { preparedDomAdoption } from '../rendering/prepared-dom-adoption.js';
-import { mountPreparedVolumeLod } from './prepared-volume-lod.js';
+import { mountPreparedVolumeLod, samePreparedVolumeTopology } from './prepared-volume-lod.js';
 import { parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject } from '@cssearth/objects';
 import type { PreparedCssTransport } from '../loader.js';
 import { validatePreparedCssVolume } from './validation.js';
@@ -140,6 +140,11 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
   payload: PreparedVolumeLenses; resolveResource(path: string): string;
 }) {
   const data = validatePreparedVolumeLenses(payload), pool = `volume-lenses:${data.id}`;
+  const topologyFamilies: PreparedVolumeLens[][] = [];
+  for (const lens of data.lenses) {
+    const family = topologyFamilies.find(candidate => samePreparedVolumeTopology(candidate[0]!.volume, lens.volume));
+    if (family) family.push(lens); else topologyFamilies.push([lens]);
+  }
   const paths = [...new Set(data.lenses.flatMap(lens => lens.volume.resources.map(resource => resource.path)))];
   const urls = new Map(paths.map(path => {
     const url = resolveResource(path);
@@ -182,15 +187,44 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
       const listeners = new Set<(state: PreparedVolumeLensState) => void>();
       const lensContent = Object.freeze(data.lenses.map(({ id, label, title, description, sourceUrl }) =>
         Object.freeze({ id, label, title, description, sourceUrl })));
-      const banks: { lens: PreparedVolumeLens; surface: HTMLElement; runtime: ReturnType<typeof mountPreparedVolumeLod> }[] = [];
+      const lensById = new Map(data.lenses.map(lens => [lens.id, lens] as const));
+      const families: { lenses: readonly PreparedVolumeLens[]; active: { lens: PreparedVolumeLens }; surface: HTMLElement;
+        runtime: ReturnType<typeof mountPreparedVolumeLod> }[] = [];
       let stars: ReturnType<typeof mountPreparedCataloguePoints> | null = null;
       const state = (): PreparedVolumeLensState => Object.freeze({ id: selected, defaultLens: data.defaultLens, selectedLens: selected,
         objectId: data.id, starsVisible, lenses: lensContent });
       const notify = () => { const next = state(); for (const listener of listeners) listener(next); };
       const destroy = () => {
         if (destroyed) return; destroyed = true; latest = null; listeners.clear();
-        for (const bank of banks) bank.runtime.destroy();
+        for (const family of families) family.runtime.destroy();
         stars?.destroy(); root.remove(); frontRoot?.remove();
+      };
+      const countDescendants = (node: Element): number => [...node.children]
+        .reduce((count, child) => count + 1 + countDescendants(child), 0);
+      const updateResidencyMetadata = () => {
+        root.dataset.volumeLensCount = String(data.lenses.length);
+        root.dataset.volumeTopologyCount = String(topologyFamilies.length);
+        root.dataset.volumeResidentTopologyCount = String(families.length);
+        root.dataset.volumeResidentDomNodes = String(1 + countDescendants(root) + (frontRoot ? 1 + countDescendants(frontRoot) : 0));
+      };
+      const ensureFamily = (lens: PreparedVolumeLens) => {
+        const lenses = topologyFamilies.find(candidate => candidate.includes(lens))!;
+        const existingFamily = families.find(candidate => candidate.lenses === lenses);
+        if (existingFamily) return existingFamily;
+        const surface = create('div'); surface.className = 'prepared-volume-lens-cloud'; surface.dataset.volumeLens = lens.id;
+        surface.dataset.volumeLensTopology = lenses.map(candidate => candidate.id).join(' ');
+        Object.assign(surface.style, { position: 'absolute', inset: '0', pointerEvents: 'none', display: 'none' });
+        const marker = create('span'); marker.hidden = true; surface.append(marker); root.insertBefore(surface, end);
+        const active = { lens };
+        const runtime = mountPreparedVolumeLod({ host: surface, before: marker, payload: lens.volume, resolveResource: resolvePrepared, createElement: create, nativeFocalCss },
+          detail => volumeLensCompositeOpacity(detail.roots.map((axisRoot, index) => ({
+            axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
+          })), active.lens.brightness));
+        for (const axisRoot of runtime.roots) axisRoot.style.background = 'transparent';
+        const family = { lenses: Object.freeze(lenses), active, surface, runtime };
+        families.push(family);
+        updateResidencyMetadata();
+        return family;
       };
       const publish = (publication: VolumeCameraPublication, visible = true) => {
         if (destroyed) return;
@@ -198,27 +232,31 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         // lens while zoomed out could load detail using that stale publication.
         latest = visible ? publication : null;
         if (!visible) return;
-        const bank = banks.find(candidate => candidate.lens.id === selected)!;
+        const bank = ensureFamily(lensById.get(selected)!);
+        const lens = bank.active.lens;
         // A compact structure passes in front of the body and behind it as the camera goes round. Two flattened
         // roots cannot interleave, so the whole surface moves to the side its centre is on; that is exact while the
         // structure stays clear of the body's silhouette in depth, which is why only a compact lens declares one.
-        const centre = bank.lens.occultingCentreUnits;
-        if (centre && frontRoot && frontEnd) {
-          const [px, py, pz] = presentPhysicalPoseInVolume(publication.world.pose, bank.lens.volume.frame).positionUnits;
-          const nearer = Math.hypot(px - centre[0], py - centre[1], pz - centre[2]) < Math.hypot(px, py, pz);
-          const target = nearer ? frontRoot : root, marker = nearer ? frontEnd : end;
+        const centre = lens.occultingCentreUnits;
+        if (frontRoot && frontEnd) {
+          let target: HTMLElement = root, marker: HTMLElement = end;
+          if (centre) {
+            const [px, py, pz] = presentPhysicalPoseInVolume(publication.world.pose, lens.volume.frame).positionUnits;
+            const nearer = Math.hypot(px - centre[0], py - centre[1], pz - centre[2]) < Math.hypot(px, py, pz);
+            if (nearer) { target = frontRoot; marker = frontEnd; }
+          }
           if (bank.surface.parentNode !== target) target.insertBefore(bank.surface, marker);
         }
         bank.runtime.publish(publication);
         const opacity = volumeLensCompositeOpacity(bank.runtime.roots.map((axisRoot, index) => ({
           axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
-        })), bank.lens.brightness);
+        })), lens.brightness);
         // Impostors contain the saved exposure; their detail wrapper owns the matching full-volume exposure.
-        bank.surface.style.opacity = bank.lens.volume.impostors ? '1' : String(opacity);
-        const pointOpacity = projectedVolumeOpacity(publication.world, publication.viewport, bank.lens.volume.frame,
+        bank.surface.style.opacity = lens.volume.impostors ? '1' : String(opacity);
+        const pointOpacity = projectedVolumeOpacity(publication.world, publication.viewport, lens.volume.frame,
           data.framingRadiusUnits, data.pointVisibility!);
         stars!.root.style.opacity = nativeFocalCss === undefined ? String(pointOpacity)
-          : nativeProjectedFade(projectedVolumeRadiusPixels(publication.world, publication.viewport, bank.lens.volume.frame, data.framingRadiusUnits),
+          : nativeProjectedFade(projectedVolumeRadiusPixels(publication.world, publication.viewport, lens.volume.frame, data.framingRadiusUnits),
             publication.viewport.focalPixels, nativeFocalCss, data.pointVisibility!.hiddenBelowRadiusPixels, data.pointVisibility!.fullAboveRadiusPixels);
         const showPoints = starsVisible && (nativeFocalCss !== undefined || pointOpacity > 0);
         stars!.root.style.display = showPoints ? 'block' : 'none';
@@ -227,22 +265,14 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         root.dataset.pointOpacity = String(pointOpacity); root.dataset.cloudOpacity = String(opacity);
       };
       try {
-        for (const lens of data.lenses) {
-          const surface = create('div'); surface.className = 'prepared-volume-lens-cloud'; surface.dataset.volumeLens = lens.id;
-          Object.assign(surface.style, { position: 'absolute', inset: '0', pointerEvents: 'none', display: lens.id === selected ? 'block' : 'none' });
-          const marker = create('span'); marker.hidden = true; surface.append(marker); root.insertBefore(surface, end);
-          const runtime = mountPreparedVolumeLod({ host: surface, before: marker, payload: lens.volume, resolveResource: resolvePrepared, createElement: create, nativeFocalCss },
-            detail => volumeLensCompositeOpacity(detail.roots.map((axisRoot, index) => ({
-              axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
-            })), lens.brightness));
-          // The shared universe must remain visible through the cloud and beyond its prepared footprint.
-          for (const axisRoot of runtime.roots) axisRoot.style.background = 'transparent';
-          banks.push({ lens, surface, runtime });
-        }
-        stars = mountPreparedCataloguePoints({ host: root, before: end, payload: banks.find(bank => bank.lens.id === selected)!.lens.stars, createElement: create, nativeFocalCss });
+        const selectedLens = lensById.get(selected)!;
+        const selectedFamily = ensureFamily(selectedLens);
+        selectedFamily.surface.style.display = 'block';
+        stars = mountPreparedCataloguePoints({ host: root, before: end, payload: selectedLens.stars, createElement: create, nativeFocalCss });
         stars.root.style.display = starsVisible ? 'block' : 'none';
         root.dataset.selectedLens = selected; host.insertBefore(root, before);
         if (frontRoot) frontHost!.insertBefore(frontRoot, frontBefore!);
+        updateResidencyMetadata();
         dom.finish();
         // The bank's visibility is written on its roots from outside. A lens that composites in front of the body
         // lives in the second root, so both must be gated or a disabled cloud keeps drawing over the star.
@@ -262,13 +292,18 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
           },
           selectLens(id: string) {
             if (destroyed) return;
-            const next = banks.find(bank => bank.lens.id === id);
+            const next = lensById.get(id);
             if (!next) throw new TypeError(`Unknown prepared volume lens: ${id}.`);
             if (id === selected) return;
-            stars!.setPresentation(next.lens.stars);
+            stars!.setPresentation(next.stars);
+            const family = ensureFamily(next);
+            family.active.lens = next;
+            family.runtime.setPresentation(next.volume);
+            family.surface.dataset.volumeLens = next.id;
             selected = id;
-            for (const bank of banks) bank.surface.style.display = bank === next ? 'block' : 'none';
+            for (const candidate of families) candidate.surface.style.display = candidate === family ? 'block' : 'none';
             root.dataset.selectedLens = selected;
+            updateResidencyMetadata();
             if (latest) publish(latest);
             notify();
           },

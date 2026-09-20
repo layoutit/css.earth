@@ -314,10 +314,11 @@ const searchCategories = ([
           introduction="Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.">
           <PlanetBreadcrumbs scope="milky-way" />
         </PlanetCardHeader>
-        <InformationTabs idPrefix={`${objectId}-milky-way`} group="milky-way" label="Milky Way information"
+        <div data-object-navigation-slot data-navigation-current="milky-way"></div>
+        <InformationTabs idPrefix={`${objectId}-milky-way`} group="milky-way" label="Milky Way information" hidden
           tabs={[{ id: 'systems', label: 'Systems', count: 1 + hostedSystems.length + unavailableSystems.length },
             { id: 'factsheet', label: 'Factsheet' }]} />
-        <div class="planet-object-results-scroll planet-card-tabpanel" id={`${objectId}-milky-way-systems-content`}
+        <div class="planet-object-results-scroll planet-card-tabpanel" id={`${objectId}-milky-way-systems-content`} hidden
           role="region" aria-label="Planetary systems">
           <ul class="planet-object-list">
             <li>
@@ -348,7 +349,7 @@ const searchCategories = ([
             </li>)}
           </ul>
         </div>
-        <div class="planet-object-results-scroll planet-card-tabpanel" id={`${objectId}-milky-way-factsheet-content`}
+        <div class="planet-object-results-scroll planet-card-tabpanel" id={`${objectId}-milky-way-factsheet-content`} hidden
           role="region" aria-label="Factsheet">
           <PlanetFactsheet id={`${objectId}-milky-way`} facts={overviewFacts['milky-way'].facts} embedded />
         </div>
@@ -360,7 +361,7 @@ const searchCategories = ([
           introduction={system.id === SOLAR_SYSTEM_ID ? "The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets." : star.description}>
           <PlanetBreadcrumbs scope="system" systemId={system.id} />
         </PlanetCardHeader>)}
-        <PlanetObjectResults formId={searchFormId}>
+        <PlanetObjectResults activeObjectId={objectId} formId={searchFormId}>
           <PlanetAccordion title="Named features" count={0} class="planet-feature-results"
             aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
             <p class="planet-feature-hint planet-destination-hint" role="status"></p>

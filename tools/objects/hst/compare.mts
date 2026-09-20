@@ -18,7 +18,7 @@
  * record the stage that made the product wrote beside it, as `archive-agreement` evidence naming that receipt: a product with
  * no record is refused rather than reported as checked, because nothing then says which run made the file compared. */
 import { access, readFile, writeFile } from 'node:fs/promises';
-import { relative, resolve } from 'node:path';
+import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
 import { readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits.mts';
@@ -148,7 +148,7 @@ function differentSettings(ours: FitsHeader, theirs: FitsHeader) {
  * `directory` holds that product; the record sits beside it, written by the stage that made it. */
 export async function addArchiveAgreement(directory: string, product: string, receipt: string) {
   return addProductEvidence(productRecordPath(resolve(directory, product)), [{
-    kind: 'archive-agreement', receipt, product,
+    kind: 'archive-agreement', receipt: resolve(receipt), product,
     establishes: `Every extension this product and the archive's own hold on one grid was compared sample by sample, and ${receipt} states how far apart they are. ` +
       'It establishes that re-running the pipeline over the pinned inputs reproduces what MAST distributes, as closely as that receipt states; it does not establish ' +
       'that either product is right, and it says nothing about the extensions the receipt lists as not on one grid.',
@@ -188,7 +188,7 @@ export async function compareWithMast(id: string, observation: string, run: stri
     };
     const path = resolve(PROGRAMS, `${id}.${receipt.product}.reproduction.json`);
     await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
-    const record = await addArchiveAgreement(run, pinned.name, relative(REPOSITORY, path));
+    const record = await addArchiveAgreement(run, pinned.name, path);
     receipts.push({ path, receipt, record });
   }
   if (!receipts.length) throw new Error(`${observation}: the run directory holds none of the pinned products.`);

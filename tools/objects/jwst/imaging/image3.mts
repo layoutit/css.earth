@@ -19,7 +19,7 @@
  * says this same run made it is not made again. */
 import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { totalmem } from 'node:os';
-import { basename, dirname, relative, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../../src/platform/sha256.mts';
 import { readFitsFileHdus } from '../../../fits.mts';
@@ -124,12 +124,11 @@ export async function level3ProductFacts(path: string): Promise<{ units: string;
     frame: typeof sci.header.RADESYS === 'string' ? sci.header.RADESYS : 'ICRS', ...(typeof sci.header.CUNIT3 === 'string' ? { thirdAxisUnit: sci.header.CUNIT3 } : {}) } };
 }
 
-const REPOSITORY = resolve(import.meta.dirname, '../../../..');
 
 /** Add what a check established to the record the stage that made the product wrote beside it. A product with no record is
  * refused: nothing states what made that file, so nothing can be said about what checking it establishes. */
 export const recordProductEvidence = (product: string, kind: EvidenceKind, receipt: string, establishes: string) =>
-  addProductEvidence(productRecordPath(product), [{ kind, receipt: relative(REPOSITORY, resolve(receipt)), product: basename(product), establishes }],
+  addProductEvidence(productRecordPath(product), [{ kind, receipt: resolve(receipt), product: basename(product), establishes }],
     recorded => resolve(dirname(product), recorded));
 
 export async function runImage3(id: string, band: string, work: string, options: { grid?: SkyGrid; sources?: readonly string[]; maxRssBytes?: number } = {}) {
@@ -145,7 +144,7 @@ export async function runImage3(id: string, band: string, work: string, options:
   const run = imagingProductRun(program, entry, 'image3', { image3: program.image3 ?? {}, grid, sourceCatalog: 'skipped', inMemory: false }, await eurekaPins());
   // A mosaic of eight long-wave exposures takes half an hour. It is reused only when the record beside it says these same
   // exposures, settings and pipeline made it, and the file is still the one that run wrote; anything else runs the stage again.
-  if (await sameRun(await readProductRecord(recordPath), run, () => mosaic)) return { mosaic, reused: true, peakRssBytes: 0, seconds: 0, members: files.length };
+  if (await sameRun(await readProductRecord(recordPath), run, name => resolve(dirname(mosaic), name))) return { mosaic, reused: true, peakRssBytes: 0, seconds: 0, members: files.length };
   await rm(recordPath, { force: true });
   const asn = resolve(work, `${product}_asn.json`);
   await writeFile(asn, `${JSON.stringify({ asn_type: 'image3', asn_rule: 'candidate_Asn_Lv3Image', program: program.programme.padStart(5, '0'),

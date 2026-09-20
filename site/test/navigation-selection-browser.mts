@@ -23,7 +23,7 @@ async function requireHeldRequest(observed:Promise<void>) {
 // The shell's fragment cache is the only card source; poll it through the page's own module.
 async function requirePrefetchedFragment(page:Page, id:string) {
   const deadline = Date.now() + 10000;
-  while (!(await page.evaluate(async id => (await import('/site/navigation-fragments.mts')).navigationFragments(window).peek(id) !== null, id))) {
+  while (!(await page.evaluate(async id => (await import('/site/navigation-fragments.mts')).navigationFragments(window).ready(id), id))) {
     if (Date.now() > deadline) throw new Error(`Intent did not prefetch the ${id} fragment.`);
     await page.waitForTimeout(20);
   }

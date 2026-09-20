@@ -30,9 +30,10 @@
  * it is not compared; run the default first, so the receipt shows these exposures and this toolchain reproduce MAST's cube. */
 import { mkdir, readdir, rm, writeFile, open } from 'node:fs/promises';
 import { totalmem } from 'node:os';
-import { basename, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../../src/platform/sha256.mts';
+import { sampleAgreement } from '../sample-agreement.mts';
 import { readFitsFileHdus } from '../../../fits.mts';
 import { requireRecord } from '../../../source-values.mts';
 import { productRecordPath, readProductRecord, sameRun, writeProductRecord, type ProductInput, type ProductRun } from '../../product-record.mts';
@@ -157,7 +158,7 @@ export async function runSpec3(id: string, band: string, work: string, options: 
   const made = (await readdir(output).catch(() => [])).filter(name => name.endsWith('_s3d.fits'));
   if (made.length === 1) {
     const cube = resolve(output, made[0]!);
-    if (await sameRun(await readProductRecord(productRecordPath(cube)), run, () => cube))
+    if (await sameRun(await readProductRecord(productRecordPath(cube)), run, name => resolve(dirname(cube), name)))
       return { cube, reused: true, peakRssBytes: crfPeak, seconds: crfSeconds, members: files.length };
   }
   await rm(output, { recursive: true, force: true }); await mkdir(output, { recursive: true });
@@ -184,6 +185,13 @@ export function archivePlaneOffset(ours: SpectralCube, theirs: SpectralCube): nu
   return offset;
 }
 
+export function cubeComparisonScope(ours: SpectralCube, theirs: SpectralCube, requested?: readonly [number, number]) {
+  const offset = archivePlaneOffset(ours, theirs), endpoints = [ours.wavelength(0), ours.wavelength(ours.planes - 1)], low = Math.min(...endpoints), high = Math.max(...endpoints);
+  if (requested && (!requested.every(Number.isFinite) || requested[0] > requested[1] || requested[0] < low || requested[1] > high)) throw new RangeError('The requested wavelength interval is not covered by the compared planes.');
+  return { kind: offset === 0 && ours.planes === theirs.planes ? 'complete-cube' : requested ? 'requested-wavelength-slice' : 'aligned-spectral-subset',
+    ...(requested ? { requestedWavelengthMicrometres: requested } : {}), archivePlanes: [offset, offset + ours.planes - 1] };
+}
+
 /** Compare a re-run cube with MAST's level-3 cube, and write the receipt. */
 export async function compareCubeWithMast(id: string, band: string, local: string, downloads: string, sources: readonly string[] = [],
   requestedWavelengthMicrometres?: readonly [number, number]) {
@@ -194,43 +202,48 @@ export async function compareCubeWithMast(id: string, band: string, local: strin
   let archiveOffset: number;
   try { archiveOffset = archivePlaneOffset(ours, theirs); }
   catch { throw new Error(`${id} ${band}: the re-run cube is ${ours.width} × ${ours.height} × ${ours.planes} on a grid that is not an aligned subset of MAST's ${theirs.width} × ${theirs.height} × ${theirs.planes}.`); }
+  const comparison = cubeComparisonScope(ours, theirs, requestedWavelengthMicrometres);
   const samples = await compareSamples(ours, theirs, archiveOffset);
-  const receipt = { schema: 'cssearth-jwst-spec3-reproduction@2', program: id, band, observation: entry.observation, toolchain: 'tools/objects/jwst/toolchain.json', crdsContext: program.crdsContext,
-    mast: { ...entry.level3, sha256: (await sha256File(mastPath)).sha256, calVer: theirs.primary.CAL_VER, crdsContext: theirs.primary.CRDS_CTX }, local: { calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX },
-    comparison: { kind: requestedWavelengthMicrometres ? 'requested-wavelength-slice' : 'complete-cube',
-      ...(requestedWavelengthMicrometres ? { requestedWavelengthMicrometres } : {}), archivePlanes: [archiveOffset, archiveOffset + ours.planes - 1] },
+  const acceptance = sampleAgreement(samples);
+  const receipt = { schema: 'cssearth-jwst-spec3-reproduction@3', program: id, band, observation: entry.observation, toolchain: 'tools/objects/jwst/toolchain.json', crdsContext: program.crdsContext,
+    mast: { ...entry.level3, sha256: (await sha256File(mastPath)).sha256, calVer: theirs.primary.CAL_VER, crdsContext: theirs.primary.CRDS_CTX }, local: { name: basename(local), ...(await sha256File(local)), calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX }, acceptance,
+    comparison,
     grid: { width: ours.width, height: ours.height, planes: ours.planes, arcsecPerPixel: ours.arcsecPerPixel, micrometres: [ours.wavelength(0), ours.wavelength(ours.planes - 1)] }, samples };
   const path = resolve(PROGRAMS, `${id}.${band}.reproduction.json`);
   await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
+  if (!acceptance.accepted) throw new Error(`Cube comparison did not meet ${acceptance.policy}; measurements retained at ${path}. No archive agreement was established.`);
   // Added to the record of the run that built this cube; a cube with no record beside it is refused, because nothing states
   // which exposures and pipeline made the file the samples were taken from.
-  const scope = requestedWavelengthMicrometres ? `the requested ${requestedWavelengthMicrometres.join('–')} µm slice of MAST's` : `MAST's complete`;
+  const scope = comparison.kind === 'complete-cube' ? `MAST's complete` : `the aligned spectral subset (archive planes ${comparison.archivePlanes.join('–')}) of MAST's`;
   const record = await recordProductEvidence(local, 'archive-agreement', path, `These level-2 exposures, this CRDS context and this pinned pipeline reproduce ${scope} ` +
     `level-3 cube of this observation, compared sample by sample on aligned wavelength planes; the receipt holds the coverage, the identical share and the correlation. It establishes that ` +
     `MAST's software was run the way MAST ran it, and nothing about the body the cube shows.`);
-  return { path, receipt, record };
+  const evidence = record.evidence.findLast(entry => entry.kind === 'archive-agreement' && entry.receiptPin?.sha256)!;
+  return { path: resolve(dirname(local), evidence.receipt), receipt, record };
 }
 
 /** Sample by sample over both cubes, a plane at a time: how many samples both cover, how many only one covers, how many are
  * bit-identical, their correlation, and the largest relative difference among samples above the median brightness. */
 export async function compareSamples(ours: SpectralCube, theirs: SpectralCube, archivePlaneOffset = 0) {
   const bytes = ours.width * ours.height * 4, a = Buffer.alloc(bytes), b = Buffer.alloc(bytes), [fa, fb] = await Promise.all([open(ours.path, 'r'), open(theirs.path, 'r')]);
-  const covered = (value: number) => Number.isFinite(value) && value !== 0;
+  const covered = (value: number) => Number.isFinite(value);
   try {
     const levels: number[] = [];
-    for (let plane = 0; plane < ours.planes; plane += 50) { await fb.read(b, 0, bytes, theirs.sci.dataStart + (archivePlaneOffset + plane) * bytes); for (let i = 0; i < bytes; i += 4) { const value = b.readFloatBE(i); if (covered(value)) levels.push(Math.abs(value)); } }
+    for (let plane = 0; plane < ours.planes; plane += 50) { await fb.read(b, 0, bytes, theirs.sci.dataStart + (archivePlaneOffset + plane) * bytes); for (let i = 0; i < bytes; i += 4) { const value = b.readFloatBE(i); if (covered(value) && value !== 0) levels.push(Math.abs(value)); } }
     const median = levels.sort((p, q) => p - q)[levels.length >> 1] ?? 0;
-    let both = 0, onlyOurs = 0, onlyMast = 0, identical = 0, sa = 0, sb = 0, saa = 0, sbb = 0, sab = 0, largest = 0;
+    let both = 0, onlyOurs = 0, onlyMast = 0, identical = 0, sa = 0, sb = 0, saa = 0, sbb = 0, sab = 0, largest = 0, maximumNormalizedDifference = 0;
     for (let plane = 0; plane < ours.planes; plane++) {
       await fa.read(a, 0, bytes, ours.sci.dataStart + plane * bytes); await fb.read(b, 0, bytes, theirs.sci.dataStart + (archivePlaneOffset + plane) * bytes);
       for (let i = 0; i < bytes; i += 4) {
         const x = a.readFloatBE(i), y = b.readFloatBE(i), hasX = covered(x), hasY = covered(y);
         if (!hasX || !hasY) { if (hasX) onlyOurs++; else if (hasY) onlyMast++; continue; }
         both++; if (x === y) identical++; sa += x; sb += y; saa += x * x; sbb += y * y; sab += x * y;
+        const scale = Math.max(Math.abs(y), median), difference = Math.abs(x - y);
+        maximumNormalizedDifference = Math.max(maximumNormalizedDifference, scale > 0 ? difference / scale : difference === 0 ? 0 : Number.MAX_VALUE);
         if (Math.abs(y) > median) largest = Math.max(largest, Math.abs(x / y - 1));
       }
     }
-    return { both, onlyOurs, onlyMast, identicalShare: identical / both, correlation: (both * sab - sa * sb) / Math.sqrt((both * saa - sa * sa) * (both * sbb - sb * sb)), largestRelativeDifferenceAboveMedian: largest };
+    return { both, onlyOurs, onlyMast, maximumNormalizedDifference, identicalShare: identical / both, correlation: both > 0 && identical === both ? 1 : (both * sab - sa * sb) / Math.sqrt((both * saa - sa * sa) * (both * sbb - sb * sb)), largestRelativeDifferenceAboveMedian: largest };
   } finally { await fa.close(); await fb.close(); }
 }
 

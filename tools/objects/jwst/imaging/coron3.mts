@@ -20,7 +20,7 @@
  * reused only when the record says this same run made it. */
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
-import { basename, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireRecord } from '../../../source-values.mts';
 import { productRecordPath, readProductRecord, sameRun, writeProductRecord } from '../../product-record.mts';
@@ -57,7 +57,7 @@ export async function runCoron3(id: string, band: string, work: string, options:
   const run = imagingProductRun(program, entry, 'coron3', { psfReferences: references.length }, await eurekaPins());
   // The references, the rolls, the CRDS context and the pinned pipeline are what the mosaic is; it is reused only when the
   // record beside it says that same run made it and the file is still the one that run wrote.
-  if (await sameRun(await readProductRecord(recordPath), run, () => mosaic)) return { mosaic, reused: true, peakRssBytes: 0, seconds: 0, members: files.length, references: references.length };
+  if (await sameRun(await readProductRecord(recordPath), run, name => resolve(dirname(mosaic), name))) return { mosaic, reused: true, peakRssBytes: 0, seconds: 0, members: files.length, references: references.length };
   await rm(recordPath, { force: true });
   const asn = resolve(work, `${product}_asn.json`);
   await writeFile(asn, `${JSON.stringify({ asn_type: 'coron3', asn_rule: 'candidate_Asn_Lv3Coron', program: program.programme.padStart(5, '0'),

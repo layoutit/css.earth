@@ -184,16 +184,18 @@ test('archive agreement is added to the record beside the exact product, and a p
   const directory = await mkdtemp(join(tmpdir(), 'jwst-record-'));
   try {
     const pinned = pinnedProgram(), mosaic = join(directory, 'jw02733-o001_t001_nircam_f444w-f470n_i2d.fits');
-    const receipt = join(PROGRAMS, 'test.NIRCAM-F470N.reproduction.json'), agreement = 'The re-run reproduces MAST’s own mosaic of this observation.';
+    const receipt = join(directory, 'test.NIRCAM-F470N.reproduction.json'), agreement = 'The re-run reproduces MAST’s own mosaic of this observation.';
     await writeFile(mosaic, 'mosaic');
     // The comparing stage adds evidence; it does not invent the record, so a product no stage recorded is refused.
     await assert.rejects(recordProductEvidence(mosaic, 'archive-agreement', receipt, agreement), /no product record at/u);
     await writeProductRecord(productRecordPath(mosaic), imageRun(pinned), [{ path: basename(mosaic), file: mosaic, units: 'MJy/sr' }]);
     assert.deepEqual((await readProductRecord(productRecordPath(mosaic)))!.evidence, [], 'the producing run states no evidence of its own');
+    await writeFile(receipt, '{}');
     const record = await recordProductEvidence(mosaic, 'archive-agreement', receipt, agreement);
     assert.equal(evidenceFor(record, basename(mosaic), 'archive-agreement').length, 1);
     assert.equal(evidenceFor(record, basename(mosaic), 'geometric-registration').length, 0, 'agreement with MAST places nothing');
-    assert.equal(record.evidence[0]!.receipt, 'tools/objects/jwst/imaging/programs/test.NIRCAM-F470N.reproduction.json');
+    assert.ok(record.evidence[0]!.receiptPin);
+    assert.ok(record.evidence[0]!.receipt.endsWith('.evidence.json'));
     assert.deepEqual(record.inputs, imageRun(pinned).inputs, 'the run facts stay the ones the run recorded');
     // The same comparison run twice replaces its own entry, so the record keeps the same bytes.
     const again = await recordProductEvidence(mosaic, 'archive-agreement', receipt, agreement);

@@ -20,7 +20,7 @@ const cube = async (dimensions: [number, number, number] = [2, 2, 61], wcs = WCS
   const directory = await mkdtemp(join(tmpdir(), 'cube-')), path = join(directory, 'cube_s3d.fits');
   const level = (k: number) => 100 + k, inBand = (k: number) => k >= 24 && k <= 28;
   await writeFile(path, Buffer.concat([block([card('SIMPLE', true), card('BITPIX', 8), card('NAXIS', 0), card('EXTEND', true)]),
-    image('SCI', dimensions, (x, y, k) => missing(x, y, k) ? NaN : x === 0 && y === 1 ? 0 : level(k) * (x === 1 && y === 0 && inBand(k) ? 0.7 : 1), wcs), image('ERR', dimensions, (_x, _y, k) => level(k) / 100)]));
+    image('SCI', dimensions, (x, y, k) => missing(x, y, k) ? NaN : x === 0 && y === 1 ? NaN : level(k) * (x === 1 && y === 0 && inBand(k) ? 0.7 : 1), wcs), image('ERR', dimensions, (_x, _y, k) => level(k) / 100)]));
   return { path, directory };
 };
 
@@ -62,4 +62,18 @@ test('a cube that is not north up, or a window off the cube, is refused', async 
     await assert.rejects(windowMean(opened, [5, 5.1]), /planes between/u);
     await assert.rejects(bandDepth(opened, { band: [4.24, 4.28], continuum: [[4.10, 4.26], [4.32, 4.42]] }), /either side/u);
   } finally { await rm(directory, { recursive: true }); }
+});
+
+test('valid zero band samples and a zero mean retain absorption and finite propagated uncertainty', async () => {
+ const directory=await mkdtemp(join(tmpdir(),'zero-band-'));
+ try {
+  for(const values of [[0,1],[-1,1]]){
+   const path=join(directory,'zero.fits');
+   await writeFile(path,Buffer.concat([block([card('SIMPLE',true),card('BITPIX',8),card('NAXIS',0),card('EXTEND',true)]),
+    image('SCI',[1,1,8],(_x,_y,k)=>k===3?values[0]!:k===4?values[1]!:1,WCS),image('ERR',[1,1,8],()=>.1)]));
+   const opened=await openSpectralCube(path),result=await bandDepth(opened,{band:[4.03,4.04],continuum:[[4,4.02],[4.05,4.07]]});
+   assert.ok(Math.abs(result.depth[0]!-(values[0]===0?.5:1))<1e-6);assert.ok(Number.isFinite(result.error[0]!));
+   await assert.rejects(bandDepth(opened,{band:[4.03,4.04],continuum:[[3.98,4.02],[4.05,4.07]]}),/both continuum/);
+  }
+ } finally {await rm(directory,{recursive:true,force:true});}
 });

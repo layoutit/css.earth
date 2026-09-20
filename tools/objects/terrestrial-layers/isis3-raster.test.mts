@@ -25,3 +25,13 @@ test('mapped longitude extent selects the correct half of a wrapped ISIS3 mosaic
  assert.deepEqual(scienceMapPoint(270,-45,{...base,longitudeRange:[0,360]}),[90,-45]);
  assert.deepEqual(scienceMapPoint(90,-45,{...base,longitudeRange:[-180,180]}),[-90,-45]);
 });
+
+test('native multiband ISIS core uses complete tiles per band and preserves special values before scaling',async()=>{
+ const {decodeIsis3Core}=await import('./isis3-raster.mts');
+ const one=fixture(),header=one.subarray(0,4096).toString().replace('Bands = 1','Bands = 2').replace('Base = 0','Base = 10').replace('Multiplier = 1','Multiplier = 2');
+ const bytes=Buffer.concat([Buffer.alloc(4096),one.subarray(4096),one.subarray(4096)]);bytes.write(header);
+ bytes.writeUInt32LE(0xff7ffffb,4096);
+ const decoded=decodeIsis3Core(bytes);assert.equal(decoded.bands,2);assert.equal(decoded.data.length,18);
+ assert.ok(decoded.data[0]! < -3e38);assert.deepEqual([...decoded.data.slice(9)],[12,14,16,18,20,22,24,26,28]);
+ assert.throws(()=>decodeIsis3Core(bytes.subarray(0,-1)),/Truncated/);
+});

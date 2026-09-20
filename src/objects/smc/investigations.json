@@ -370,12 +370,13 @@
     },
     {
       "id": "shell-focus-link",
-      "subject": "Direct /sun/?focus=smc link and sidebar search",
+      "subject": "Direct /sun/?focus=smc physical-host closure",
       "status": "unresolved",
-      "finding": "Opening the object by its own link fails before the scene mounts: the server-rendered initial-focus payload carries one catalogue object plus the catalogue’s unpositioned hosts, so an object hosted by a positioned object cannot resolve its host and the shell throws \"Unknown physical host: lmc\". The same failure reproduces on the untouched carina_2 and reticulum_2, and 461 catalogue objects name a positioned host. The sidebar search also returned no result rows in this checkout. Both predate this promotion and are not caused by it; the acceptance inspection therefore reaches the object by label fly-to from the shared scene, which works.",
+      "finding": "The failure came from serializing SMC without its positioned LMC host. Commit b8075ee1374be2f68283b9f32cbeee21a1f5e243 makes native focus fragments retain the transitive SMC to LMC to MW host chain and names SMC separately as the selected record. The focused unit check passes for that chain, a missing host and a cycle. The SMC browser inspection now opens the direct route, but this checkout does not hold the complete installed runtime closure needed to rerun it locally.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/site/focus-response.mts",
-        "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/packages/catalog/src/spatial-relations.ts"
+        "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/packages/catalog/src/spatial-relations.ts",
+        "https://github.com/layoutit/css.earth/blob/b8075ee1374be2f68283b9f32cbeee21a1f5e243/site/focus-catalog.mts"
       ],
       "checked": [
         {
@@ -385,9 +386,13 @@
         {
           "date": "2026-09-17",
           "commit": "48458ea64301201c18ecfe13f8dc4bc72e647a64"
+        },
+        {
+          "date": "2026-09-19",
+          "commit": "b8075ee1374be2f68283b9f32cbeee21a1f5e243"
         }
       ],
-      "revisitWhen": "The initial-focus payload resolves its host chain, or host validation moves off the single-object fragment."
+      "revisitWhen": "The direct SMC browser inspection runs against a complete installed runtime closure."
     },
     {
       "id": "model-relocation",

@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+import { sampleAgreement } from '../sample-agreement.mts';
 /** Compare a local image3 mosaic with MAST's level-3 product of the same observation: the oracle for image3.mts.
  *
  *   node tools/objects/jwst/imaging/compare.mts <program id> <band> <local i2d> [--raw <dir>]...
@@ -14,7 +14,7 @@
  * agreement it establishes is added as `archive-agreement` evidence to the product record the stage wrote beside the mosaic. A
  * mosaic with no record is refused. */
 import { writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../../src/platform/sha256.mts';
 import { readFitsFileHdus, readFitsFileRegion } from '../../../fits.mts';
@@ -104,12 +104,16 @@ export async function compareWithMast(id: string, band: string, local: string, s
     if (!Number.isFinite(a) || !Number.isFinite(b) || Math.abs(b) <= median) continue;
     sa += a; sb += b; saa += a * a; sbb += b * b; sab += a * b; sdd += (a - b) ** 2; n++;
   }
+  let maximumNormalizedDifference = 0;
+  for (let k = 0; k < both; k++) maximumNormalizedDifference = Math.max(maximumNormalizedDifference, Math.abs(pairs[2 * k]! - pairs[2 * k + 1]!) / Math.max(Math.abs(pairs[2 * k + 1]!), median, Number.MIN_VALUE));
+  const samples = { both, onlyOurs, onlyMast: onlyTheirs, maximumNormalizedDifference };
+  const acceptance = { ...sampleAgreement(samples, 'image'), accepted: sameGrid && sampleAgreement(samples, 'image').accepted };
   const annuli = entry.stage === 'coron3' ? starAnnuli(theirs, theirProjection, oursAt) : undefined;
   const receipt = {
-    schema: `cssearth-jwst-${entry.stage ?? 'image3'}-reproduction@1`, program: id, band, observation: entry.observation,
+    schema: `cssearth-jwst-${entry.stage ?? 'image3'}-reproduction@2`, program: id, band, observation: entry.observation,
     toolchain: 'tools/objects/jwst/toolchain.json', crdsContext: program.crdsContext,
     mast: { ...entry.level3, sha256: (await sha256File(mastPath)).sha256, calVer: theirs.primary.CAL_VER, crdsContext: theirs.primary.CRDS_CTX },
-    local: { calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX },
+    local: { name: basename(local), ...(await sha256File(local)), calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX }, acceptance, samples,
     wcs, differentWcs,
     pixels: { both, onlyOurs, onlyMast: onlyTheirs, identicalShare: sameGrid ? identical / both : null, comparedOn: sameGrid ? 'pixels' : 'sky positions', medianAbsoluteDifferenceOverMedian: medianDifference / median,
       aboveMedian: { pixels: n, rmsDifferenceOverRms: Math.sqrt(sdd / n) / Math.sqrt(sbb / n),
@@ -117,13 +121,14 @@ export async function compareWithMast(id: string, band: string, local: string, s
   };
   const path = resolve(PROGRAMS, `${id}.${band}.reproduction.json`);
   await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
+  if (!acceptance.accepted) throw new Error(`Image comparison did not meet ${acceptance.policy}; measurements retained at ${path}. No archive agreement was established.`);
   // What this comparison establishes, added to the record of the run that made the mosaic. A mosaic with no record beside it is
   // refused here: nothing states which exposures, settings and pipeline made that file, so agreement with MAST says nothing
   // about a reproduction.
   const record = await recordProductEvidence(local, 'archive-agreement', path, `These level-2 exposures, this CRDS context and this pinned pipeline ` +
     `reproduce MAST's own level-3 ${entry.stage === 'coron3' ? 'PSF-subtracted mosaic' : 'mosaic'} of this observation; the receipt holds the grid cards, the ` +
     `share of identical pixels and the brightness agreement it was measured on. It establishes that MAST's software was run the way MAST ran it, and nothing about the sky.`);
-  return { path, receipt, record };
+  return { path: resolve(dirname(local), record.evidence.findLast(entry => entry.kind === 'archive-agreement' && entry.receiptPin)!.receipt), receipt, record };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

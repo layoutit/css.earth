@@ -41,17 +41,21 @@ test('an intent-fetched fragment is requested once, shared by preview and conten
   const fragments = createNavigationFragments({ windowTarget: fixtureWindow().windowTarget, capacity: 2,
     async fetchPage(url) { calls.push(url); return new Response(url.split('/')[2]); } });
   fragments.prefetch('ceres');
-  assert.equal(fragments.peek('ceres'), null, 'A request in flight is not yet a card');
+  assert.equal(fragments.ready('ceres'), false, 'A request in flight is not yet a card');
   const [preview, content] = await Promise.all([fragments.get('ceres'), fragments.get('ceres')]);
-  assert.equal(preview, content);
-  assert.equal(fragments.peek('ceres'), preview);
-  await fragments.get('venus');
-  assert.equal(fragments.peek('ceres'), preview, 'Reading a card renews it');
-  await fragments.get('mars');
+  assert.notEqual(preview.document, content.document, 'Consumers never share a parsed document');
+  assert.equal(fragments.inspect().activeDocuments, 2);
+  preview.release(); content.release();
+  assert.equal(fragments.inspect().activeDocuments, 0);
+  const cachedCeres = fragments.peek('ceres'); assert.ok(cachedCeres); cachedCeres.release();
+  const venus = await fragments.get('venus'); venus.release();
+  const renewedCeres = fragments.peek('ceres'); assert.ok(renewedCeres, 'Reading a card renews it'); renewedCeres.release();
+  const mars = await fragments.get('mars'); mars.release();
   assert.equal(fragments.peek('venus'), null, 'The least recently used fragment leaves the bounded cache');
-  assert.equal(fragments.peek('ceres'), preview);
-  await fragments.get('venus');
+  const retainedCeres = fragments.peek('ceres'); assert.ok(retainedCeres); retainedCeres.release();
+  const reloadedVenus = await fragments.get('venus'); reloadedVenus.release();
   assert.deepEqual(calls, ['/navigation/ceres/', '/navigation/venus/', '/navigation/mars/', '/navigation/venus/']);
+  assert.deepEqual(fragments.inspect(), { encodedEntries: 2, inFlightEntries: 0, activeDocuments: 0, parsedDocuments: 8 });
   assert.throws(() => createNavigationFragments({ windowTarget: fixtureWindow().windowTarget, capacity: 0 }), RangeError);
 });
 
@@ -83,7 +87,10 @@ test('failed, mismatched and cancelled requests never poison the shared fragment
   controller.abort(reason);
   await assert.rejects(cancelled, error => error === reason);
   const arrived = await fragments.get('venus');
-  assert.equal(fragments.peek('venus'), arrived);
+  const cached = fragments.peek('venus'); assert.ok(cached);
+  assert.notEqual(cached.document, arrived.document);
+  arrived.release(); cached.release();
+  assert.equal(fragments.inspect().activeDocuments, 0);
   assert.equal(calls.length, 3, 'Cancelling one consumer keeps the shared request');
   await assert.rejects(fragments.get('venus', AbortSignal.abort(reason)), error => error === reason);
   assert.equal(calls.length, 3);
@@ -92,8 +99,9 @@ test('failed, mismatched and cancelled requests never poison the shared fragment
 test('hover, focus and world hover prefetch registry routes after a dwell; a press starts at once', () => {
   const { windowTarget, timers, flush } = fixtureWindow(), documentTarget = new EventTarget();
   const requested: string[] = [];
-  const fragments: NavigationFragments = { prefetch(id) { requested.push(id); }, peek: () => null,
-    get: () => Promise.reject(new Error('Intent never waits for a fragment.')) };
+  const fragments: NavigationFragments = { prefetch(id) { requested.push(id); }, ready: () => false, peek: () => null,
+    get: () => Promise.reject(new Error('Intent never waits for a fragment.')),
+    inspect: () => ({ encodedEntries: 0, inFlightEntries: 0, activeDocuments: 0, parsedDocuments: 0 }) };
   const intent = bindNavigationIntent({ documentTarget: documentTarget as unknown as Document, windowTarget, fragments,
     objects: ['sun', 'ceres', 'venus'].map(id => ({ id, route: `/${id}/` })), skip: id => id === 'sun' });
   const link = (pathname: string, origin = 'https://example.test') => new IntentElement(new IntentAnchor(pathname, origin));

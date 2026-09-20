@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 /** Qualify one indexed archive observation with the telescope-specific reducer that owns its physics. */
+import { loadSourceProducts } from './source-products.mts';
+import { qualifySourceProduct } from './qualify-source.mts';
 import { writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { rememberQualification } from './qualified-observations.mts';
+import { openSpectralCube } from '../jwst/cubes/spectral-cube.mts';
+import { measureCubeResolution } from '../jwst/cubes/resolution.mts';
+import { readFitsFileHdus, type FitsHeader } from '../../fits.mts';
+import type { ProductFacts } from './request-satisfaction.mts';
 import { pathToFileURL } from 'node:url';
 import { flagValue } from '../../cli-arguments.mts';
 import { compareCubeWithMast, runSpec3 } from '../jwst/cubes/spec3.mts';
@@ -15,7 +22,7 @@ import { pinFrames, reduceProgram as reduceNacoProgram } from '../naco/reduce.mt
 import { qualifyPdsArchiveProduct } from '../pds/archive-final.mts';
 import { buildPdsLedger } from '../pds/archive-ledger.mts';
 import { productRecordPath, readProductRecord } from '../product-record.mts';
-import { compareChannel, receiptName } from '../spitzer/compare.mts';
+import { compareChannel, receiptPath } from '../spitzer/compare.mts';
 import { defaultDataRoot, pinProgram, writeSpitzerProgram } from '../spitzer/archive.mts';
 import { refreshLocalLedger as refreshSpitzerLedger } from '../spitzer/archive-ledger.mts';
 import { defaultWorkRoot, remosaicChannel } from '../spitzer/mosaic.mts';
@@ -58,7 +65,7 @@ async function qualifySpitzerIrac(root: string, request: QualificationRequest): 
   await compareChannel(program, channel, defaultDataRoot, defaultWorkRoot);
   await refreshSpitzerLedger();
   return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
-    program: programId, configuration: request.configuration, product: record.outputs[0]!.path, receipt: receiptName(programId, channelNumber),
+    program: programId, configuration: request.configuration, product: resolve(defaultWorkRoot, programId, record.outputs[0]!.path), receipt: receiptPath(programId, channelNumber),
     ...(observation.programme ? { archiveProgramme: observation.programme } : {}) };
 }
 
@@ -133,15 +140,69 @@ const QUALIFIERS: Readonly<Record<string, (root: string, request: QualificationR
 });
 
 export async function qualifyObservation(root: string, request: QualificationRequest): Promise<QualificationResult> {
+  if (request.configuration.kind === 'source-product') {
+    const { answer } = await indexedObservation(root, request, [0.000001, 1_000_000]);
+    const id = request.configuration.id;
+    const source = (await loadSourceProducts(root, answer.target)).find(product => product.id === id && product.id === request.observation && product.telescope === request.telescope && product.mode === request.mode);
+    if (!source) throw new TypeError('Source qualification does not match the indexed observation.');
+    const { qualified: _qualified, receipt: _receipt, receiptProblem: _problem, facts: _facts, ...product } = source;
+    const result = await qualifySourceProduct(root, product);
+    return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: id, program: id, configuration: request.configuration, ...result, product: resolve(root, result.product), receipt: resolve(root, result.receipt) };
+  }
   const qualifier = request.configuration.kind === 'pds-product' ? qualifyPdsProduct : QUALIFIERS[`${request.telescope} :: ${request.mode}`];
   if (!qualifier) throw new TypeError(`No qualification implementation is registered for ${request.telescope} ${request.mode}.`);
-  return qualifier(root, request);
+  const result = await qualifier(root, request);
+  return recordQualification(root, result);
+}
+
+/** FITS dates use the header's time scale, never the host's timezone.
+ * UTC is the FITS default from 1972 onward. Other scales require conversion;
+ * leave those unknown here rather than labelling TAI/TT/etc. as UTC.
+ * https://fits.gsfc.nasa.gov/year2000.html */
+export function fitsObservationInterval(header: FitsHeader): Pick<ProductFacts, 'startIso' | 'endIso'> {
+  const scale = header.TIMESYS;
+  if (scale !== undefined && (typeof scale !== 'string' || scale.trim() !== 'UTC')) return {};
+  const timestamp = (date: unknown, time: unknown): string | undefined => {
+    if (typeof date !== 'string') return undefined;
+    const text = /^\d{4}-\d{2}-\d{2}$/u.test(date) && typeof time === 'string' ? `${date}T${time}` : date;
+    const parts = /^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(\.\d+)?(Z|[+-]\d{2}:\d{2})?$/u.exec(text);
+    if (!parts || (scale === undefined && text.slice(0, 10) < '1972-01-01')) return undefined;
+    // Reject normalized invalid dates (e.g. February 30), incomplete dates and leap
+    // seconds which JavaScript cannot represent. Keep the interval unknown instead.
+    const wallTime = Date.parse(`${parts[1]}Z`);
+    if (!Number.isFinite(wallTime) || new Date(wallTime).toISOString().slice(0, 19) !== parts[1]) return undefined;
+    const value = Date.parse(parts[3] ? text : `${text}Z`);
+    return Number.isFinite(value) ? new Date(value).toISOString() : undefined;
+  };
+  const startIso = timestamp(header['DATE-BEG'] ?? header['DATE-OBS'], header['TIME-OBS']);
+  const endIso = timestamp(header['DATE-END'], header['TIME-END']);
+  return startIso && endIso && startIso <= endIso ? { startIso, endIso } : {};
+}
+
+/** Read back the produced file, not its mode's nominal capabilities. */
+export async function recordQualification(root: string, result: QualificationResult): Promise<QualificationResult> {
+  let facts: ProductFacts = { target: result.target, verified: true, kind: 'image', result: 'telescope-product' };
+  if (result.configuration.kind === 'jwst-band') {
+    const cube = await openSpectralCube(result.product);
+    facts = { ...facts, kind: 'cube', wavelengthIntervalsMicrometres: [[cube.wavelength(0), cube.wavelength(cube.planes - 1)]] };
+    const resolution = await measureCubeResolution(result.product);
+    if (resolution.bound) facts = { ...facts, angularResolutionBound: resolution.bound };
+  }
+  if (result.configuration.kind !== 'pds-product') {
+    const headers = await readFitsFileHdus(result.product), header = headers[0]!.header;
+    facts = { ...facts, ...fitsObservationInterval(header) };
+  }
+  const record = await readProductRecord(productRecordPath(result.product));
+  const evidence = record?.evidence.findLast(entry => entry.receiptPin !== undefined);
+  const qualified = { ...result, receipt: evidence ? resolve(dirname(result.product), evidence.receipt) : result.receipt };
+  await rememberQualification(root, { ...qualified, facts, productRecord: result.configuration.kind === 'pds-product' ? result.receipt : productRecordPath(result.product), outputRoot: dirname(result.product) });
+  return qualified;
 }
 
 export const QUALIFY_HELP = `Usage: pnpm telescope:qualify --target TARGET --telescope NAME --mode MODE --observation ID ROUTE_OPTIONS
 
 Route options are emitted by telescope:query. Registered routes currently use --channel N, --band ID --wavelength FROM,TO,
---archive-programme ID --archive-target NAME --night YYYY-MM-DD, or the exact --pds-target-lid/--pds-target-name/--pds-lidvid identity.`;
+--archive-programme ID --archive-target NAME --night YYYY-MM-DD, --source-product ID, or the exact --pds-target-lid/--pds-target-name/--pds-lidvid identity.`;
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2);

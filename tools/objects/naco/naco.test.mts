@@ -309,7 +309,7 @@ test('a comparison adds internal-consistency evidence to those records, and refu
   const other = resolve(fixture.directory, 'work-b');
   const second = await reduceProgram(fixture.program, other, fixture.raw, 'B', fixture.runnerFor(other));
   const measured = { kind: 'two-templates' as const, statistics: await statistics(visit => { for (let index = 0; index < 8; index++) visit(index + 1, index + 1); }, 8) };
-  const receipt = 'tools/objects/naco/programs/fixture.COADDED_IMG.reproduction.json';
+  const receipt = resolve(fixture.directory, 'comparison.json'); await writeFile(receipt, '{}');
   await addComparisonEvidence(measured, [first.combined, second.combined], receipt);
 
   const record = (await readProductRecord(productRecordPath(first.combined)))!;
@@ -317,7 +317,7 @@ test('a comparison adds internal-consistency evidence to those records, and refu
   const [evidence] = record.evidence;
   assert.equal(evidence!.kind, 'internal-consistency');
   assert.equal(evidence!.product, 'naco_img_jitter.fits');
-  assert.equal(evidence!.receipt, receipt);
+  assert.ok(evidence!.receiptPin);
   // What the record says it is worth: there is nothing external to agree with, so this is never archive agreement.
   assert.match(evidence!.establishes, /no archive product for this re-run to agree with/u);
   assert.match(evidence!.establishes, /repeatability, not accuracy/u);
