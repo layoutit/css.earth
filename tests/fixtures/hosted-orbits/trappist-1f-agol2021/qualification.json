@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-hosted-orbit-qualification@1",
+  "id": "trappist-1f-agol2021",
+  "orbit": {
+    "periodDays": 9.20754,
+    "semiMajorAxisStellarRadii": 69.543,
+    "inclinationDegrees": 89.74,
+    "eccentricity": 0.00841546790143008,
+    "argumentOfPeriapsisDegrees": 3.4744073675316516,
+    "epochDefinition": "inferior-conjunction",
+    "transitTimeBmjdTdb": 57256.57426,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+      "period": "Agol et al. (2021), Table 2: P = 9.207540 +/- 0.000032 d; retained at tests/fixtures/hosted-orbits/trappist-1f-agol2021/agol2021-table2.tex.",
+      "shape": "Agol et al. (2021), Table 5: a/R* = 69.543 and inclination = 89.740 deg. These are separate photodynamical summaries, not a joint draw with the Table 2 eccentricity vector.",
+      "phase": "Agol et al. (2021), Table 2: t0 = BJD_TDB 2457257.07426, the two-body inferior-conjunction parameter at the initial osculating epoch; BMJD_TDB 57256.57426.",
+      "orientation": "Display convention: transit timing does not measure the orbit's sky position angle, so the ascending node remains 0 deg east of celestial north.",
+      "eccentricity": "Agol et al. (2021), Table 2: e cos(omega_source) = -0.00840 and e sin(omega_source) = -0.00051, giving e = 0.00841546790143008.",
+      "argumentOfPeriapsis": "Planet-centric Agol Table 2 vector and its pinned author initializer. The source uses f_transit = 3pi/2 - omega_source. The hosted-orbit convention uses f_transit = pi/2 - omega, so omega = wrap(omega_source - pi) = 3.4744073675316516 deg. This is not a stellar radial-velocity omega or a sky-node angle."
+    }
+  },
+  "published": {
+    "osculatingEpochBjdTdb": 2457257.93115525,
+    "periodUncertaintyDays": 0.000032,
+    "transitEpochBjdTdb": 2457257.07426,
+    "transitEpochUncertaintyDays": 0.00085,
+    "eccentricityCosSourceOmega": -0.0084,
+    "eccentricityCosSourceOmegaUncertainty": 0.0013,
+    "eccentricitySinSourceOmega": -0.00051,
+    "eccentricitySinSourceOmegaUncertainty": 0.00087,
+    "sourcePlanetArgumentOfPeriapsisDegrees": 183.47440736753165,
+    "sourceTransitConvention": "f = 3*pi/2 - omega_source"
+  },
+  "conversion": {
+    "hostedTransitConvention": "f = pi/2 - omega",
+    "formula": "omega = wrap(omega_source - pi)",
+    "sourceTransitTrueAnomalyRadians": 1.5101564786759205,
+    "hostedTransitTrueAnomalyRadians": 1.5101564786759205,
+    "transitMeanAnomalyRadians": 1.4933630999488672,
+    "periapsisEpochBjdTdb": 2457254.885847626,
+    "transitRadiusOverSemiMajorAxis": 0.9994194759672567
+  },
+  "qualification": {
+    "model": "Static two-body rendering approximation of the published initial osculating Jacobi orbit.",
+    "summaryStatistics": "Table 2 reports marginal posterior summaries. The derived e, omega, and periapsis epoch are a deterministic summary orbit, not one joint posterior draw.",
+    "photodynamicJoin": "Table 5 a/R* and inclination are from the same paper's staged photodynamical analysis, whose dynamical parameters were fixed at maximum likelihood; inclination was derived while neglecting eccentricity.",
+    "limitations": [
+      "This fixture does not reproduce the seven-body integration or transit-timing variations.",
+      "Planet f's osculating eccentricity vector varies on the approximately 490-day resonant super-period; the retained 2015 vector is not a fixed present-day physical ellipse.",
+      "The linear transit epoch is not a precision 2026 ephemeris.",
+      "Exact star-facing rotation at every epoch suppresses the optical libration of a constant-rate synchronous rotator; first-order peak libration is about 2e radians, or 0.964 degrees.",
+      "The eccentric model places superior conjunction about 4254 seconds after the circular half-period prediction, so circular eclipse timing and eclipse-map geometry require separate requalification."
+    ]
+  }
+}

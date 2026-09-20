@@ -6,7 +6,7 @@
  *
  * Requires packages/astronomy/data/bodies/<id>.json with a `hostedOrbit` and a `physical.parent` that is a placed star.
  * Every number here comes from those two records: the world-frame origin at the scene epoch, the radius facts, the
- * synchronous rotation the orbit implies and the light direction its star gives. The package starts shape-only, in the
+ * circular synchronous rotation the orbit implies and the light direction its star gives. The package starts shape-only, in the
  * shared neutral gray, lit by its own star: no colour of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node tools/prepare-object.mts <id> */
@@ -35,6 +35,8 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
   if (body.id !== spec.id) throw new TypeError(`The astronomy record is for ${String(body.id)}, not ${spec.id}.`);
   const hostId = requireString(physical.parent, 'physical.parent');
   if (host.id !== hostId) throw new TypeError(`${spec.id} orbits ${hostId}, but the host record is ${String(host.id)}.`);
+  const eccentricity = requireFiniteNumber(orbit.eccentricity);
+  if (eccentricity !== 0) throw new TypeError(`Cannot scaffold ${spec.id}: synchronous rotation requires a circular hosted orbit. Supply an explicit authored rotation law for eccentricity ${eccentricity}.`);
   const star = requireRecord(host.star, 'host star astrometry');
   const astrometry = { rightAscensionDegrees: requireFiniteNumber(star.rightAscensionDegrees), declinationDegrees: requireFiniteNumber(star.declinationDegrees),
     positionEpochJulianYear: requireFiniteNumber(star.positionEpochJulianYear), distanceParsecs: requireFiniteNumber(star.distanceParsecs),

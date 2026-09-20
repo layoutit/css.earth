@@ -91,6 +91,7 @@ test('a map saved without its grid arrays states the pixel-centre grid, and show
   assert.ok(Math.abs(range[0] + 108) < 1e-9 && Math.abs(range[1] - 108) < 1e-9);
   // ThERESA wraps each limb before taking the extremes, so a limb past 180 degrees reads as the far west.
   assert.deepEqual(theresaVisibleLongitudes([0.2], 0, 1).map(v => Math.round(v * 1e9) / 1e9), [18, -162]);
+  assert.throws(() => theresaVisibleLongitudes([0.2], 0, 1, .1), /explicit rotation law/);
   const visible = decodeNpyDictionaryMap(bytes, { ...recipe, visibleLongitudes: { times: ['t'], planet: 'p' } }, range);
   // Cells of 45 degrees: the one centred at -112.5 reaches -90 and is kept; the one centred at -157.5 ends at -135 and is not.
   assert.equal(visible.sample(-157.5, 0), null);

@@ -1,7 +1,7 @@
 /** When a transit happened in a light curve, against a package orbit's prediction: a quadratic limb-darkened transit on the
  * orbit's own sky geometry, with the radius ratio and limb darkening fitted and a quadratic baseline solved at each trial time.
  * The eclipse-map fit's longitudes trade against eclipse timing, so the timing a map assumes has to be checked against the data. */
-import { hostSkyFrame, hostedOrbitStateRelativeKm, type HostedOrbit } from '@cssearth/astronomy';
+import { hostSkyFrame, hostedOrbitStateRelativeBmjdTdb, type HostedOrbit } from '@cssearth/astronomy';
 
 /** Fraction of a quadratic limb-darkened star's light left when a disc of radius `p` (stellar radii) sits `d` from its centre. The
  * blocked light is the stellar intensity integrated over the overlap, ring by ring: each ring of radius r contributes its arc inside
@@ -77,7 +77,7 @@ export function measureTransitShift(curve: { time: Float64Array; flux: Float64Ar
   const at = (shiftSeconds: number) => {
     const shifted = { ...orbit, transitTimeBmjdTdb: orbit.transitTimeBmjdTdb + shiftSeconds / 86400 };
     return (t: number) => {
-      const r = hostedOrbitStateRelativeKm(shifted, host, 1, t + 2400000.5).positionKm;
+      const r = hostedOrbitStateRelativeBmjdTdb(shifted, host, 1, t).positionKm;
       // Behind the star there is no transit; place the planet out of contact.
       if (r[0] * z[0] + r[1] * z[1] + r[2] * z[2] < 0) return 10;
       return Math.hypot(r[0] * x[0] + r[1] * x[1] + r[2] * x[2], r[0] * y[0] + r[1] * y[1] + r[2] * y[2]);
