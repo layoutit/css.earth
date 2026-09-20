@@ -13,7 +13,7 @@ import { contextMarkerSprite, contextAnnotationOpacity } from '../src/navigation
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import { SCENE_OBJECTS } from './objects.mts';
-import { discoveryVisibility, showsDefaultContextOrbit } from './object-discovery.mts';
+import { discoveryVisibility, isDefaultContextFeature, showsDefaultContextOrbit } from './object-discovery.mts';
 import { labelImportance } from '../src/renderers/css/labels/universe-label-policy.ts';
 
 import galaxyPresentation from '../src/objects/local-group/source/presentation.json' with { type: 'json' };
@@ -33,7 +33,7 @@ const hiddenOrbitIds = [
   ...minorMoonIds,
 ];
 const annotationPriorities = Object.fromEntries(SCENE_OBJECTS.map(object =>
-  [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, object.discovery.featured || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.discovery.orientationReference ?? 0)]));
+  [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, isDefaultContextFeature(object) || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.discovery.orientationReference ?? 0)]));
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
@@ -227,9 +227,9 @@ export function createApplicationWorldContext() {
           if (!active && publication) minimap.publish(publication.world, publication.viewport);
         };
         inputSurface?.addEventListener('objectrotationchange', rotationChanged);
-        // Featured asteroids keep circles. Other asteroid markers retain their
+        // JPL mission-target asteroids keep circles. Other asteroid markers retain their
         // pick target, with the circle revealed on hover.
-        layer.setHiddenIndicators(SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !object.discovery.featured).map(object => object.id));
+        layer.setHiddenIndicators(SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !isDefaultContextFeature(object)).map(object => object.id));
         updateDiscoveryVisibility();
         layer.setHiddenOrbits(hiddenOrbitIds);
         const diagnostics = DIAGNOSTICS_ENABLED ? createWorldContextDiagnostics(layer, frameQueue, presentationHost !== stage) : null;

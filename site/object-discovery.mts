@@ -1,6 +1,7 @@
 import { record } from './browser-types.mts';
 import { matchesObjectClassification } from './object-categories.mts';
 import { parseArrivalView, type PreparedArrivalView } from './arrival-view.mts';
+import { isJplMissionTarget } from './jpl-mission-targets.mts';
 
 export interface ObjectDiscovery { featured: boolean; imagery: boolean; illustration: boolean; arrival?: PreparedArrivalView; orientationReference?: number;
   /** A star without imagery of its own that a body with imagery orbits: its planetary system is on the map. */
@@ -29,10 +30,15 @@ export function isDiscoveryAnchor(object: { classification: string }): boolean {
   return object.classification === 'star' || object.classification === 'planet';
 }
 
-/** The default context suppresses distant orbit classes and limits asteroid orbits to the prepared notable set. */
-export function showsDefaultContextOrbit(object: { classification: string; discovery: Pick<ObjectDiscovery, 'featured'> }): boolean {
+/** The default context suppresses distant orbit classes and limits asteroid orbits to JPL spacecraft targets. */
+export function showsDefaultContextOrbit(object: { id: string; classification: string }): boolean {
   if (['trans-neptunian', 'interstellar'].includes(object.classification)) return false;
-  return object.classification !== 'asteroid' || object.discovery.featured;
+  return object.classification !== 'asteroid' || isJplMissionTarget(object);
+}
+
+/** Discovery prominence describes prepared content. Asteroid context prominence is instead sourced from JPL. */
+export function isDefaultContextFeature(object: { id: string; classification: string; discovery: Pick<ObjectDiscovery, 'featured'> }): boolean {
+  return object.classification === 'asteroid' ? isJplMissionTarget(object) : object.discovery.featured;
 }
 
 /** Explicit searches still navigate every registered object. This controls the default world. */
@@ -41,7 +47,7 @@ export function discoveryVisibility(objects: readonly { id: string; classificati
   const hiddenBodies: string[] = [], hiddenLabels: string[] = [], highlightedBodies: string[] = [];
   for (const object of objects) {
     const illustration = object.discovery.illustration;
-    const featured = object.discovery.featured || isDiscoveryAnchor(object);
+    const featured = (!illustration || options.illustrations) && (isDefaultContextFeature(object) || isDiscoveryAnchor(object));
     // A star with only its shape stays off the map until a surface image can be cast; its page still opens from search. A star
     // that a body with imagery orbits stays on it: without the star the planet has no system. So does a star whose colour comes from
     // its own measurements.

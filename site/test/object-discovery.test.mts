@@ -10,6 +10,7 @@ import { parseArrivalView } from '../arrival-view.mts';
 import { record } from '../browser-types.mts';
 import { searchObjects } from '../object-search.mts';
 import { objectClassificationLabel } from '../planet-search-objects.mts';
+import { isJplMissionTarget, JPL_MISSION_TARGET_OBJECT_IDS } from '../jpl-mission-targets.mts';
 
 const controls = (...ids: string[]) => ({ lenses: { controls: ids.map(id => ({ id })) } });
 const policy = { illustrationLenses: ['model'] };
@@ -99,12 +100,19 @@ test('default discovery admits every non-illustrative asteroid without changing 
   for (const id of ['pallas', 'psyche', 'squannit', 'kleopatra', 'eris', 'haumea', 'makemake']) assert.equal(requireSceneObject(id).discovery.illustration, false, id);
 });
 
-test('only featured asteroids publish default context orbits while comet and planet orbits remain eligible', () => {
-  const notable = requireSceneObject('bennu'), ordinary = requireSceneObject('apophis');
-  assert.equal(notable.classification, 'asteroid'); assert.equal(notable.discovery.featured, true);
-  assert.equal(ordinary.classification, 'asteroid'); assert.equal(ordinary.discovery.featured, false);
-  assert.equal(showsDefaultContextOrbit(notable), true);
-  assert.equal(showsDefaultContextOrbit(ordinary), false);
+test('JPL mission targets, rather than cssEarth imagery, select default asteroid context', () => {
+  const sourcedWithoutImagery = requireSceneObject('apophis'), incidentalImagery = requireSceneObject('adeona');
+  assert.equal(sourcedWithoutImagery.classification, 'asteroid');
+  assert.equal(sourcedWithoutImagery.discovery.featured, false);
+  assert.equal(isJplMissionTarget(sourcedWithoutImagery), true);
+  assert.equal(showsDefaultContextOrbit(sourcedWithoutImagery), true);
+  assert.equal(incidentalImagery.discovery.featured, true);
+  assert.equal(isJplMissionTarget(incidentalImagery), false);
+  assert.equal(showsDefaultContextOrbit(incidentalImagery), false);
+  const sourcedAsteroids = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && isJplMissionTarget(object));
+  assert.equal(sourcedAsteroids.length, 23);
+  assert.equal(new Set(JPL_MISSION_TARGET_OBJECT_IDS).size, JPL_MISSION_TARGET_OBJECT_IDS.length);
+  for (const id of ['bennu', 'dinkinesh', 'toutatis', 'vesta']) assert.ok(sourcedAsteroids.some(object => object.id === id), id);
   assert.equal(showsDefaultContextOrbit(requireSceneObject('comet-c1995-o1')), true);
   assert.equal(showsDefaultContextOrbit(requireSceneObject('earth')), true);
   assert.equal(showsDefaultContextOrbit(requireSceneObject('arrokoth')), false);
