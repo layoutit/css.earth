@@ -63,7 +63,7 @@ const emptyInputs: QueryInputs = { ledgers: [], capabilities: [], targetCatalogu
 export function sessionRequest(args: readonly string[]): CapabilityRequest {
   const request = requestFromArguments(args);
   queryCapabilities(request, emptyInputs); // Public validation, before archive IO.
-  if (request.result !== 'telescope-product') throw new TypeError('This command retrieves native telescope products. Use telescope:publish-map for body maps.');
+  if (request.result !== 'telescope-product') throw new TypeError('Saved telescope queries retrieve native products. Derived outputs are selected later with telescope export.');
   if (!request.time || !request.kind || (request.angularResolutionArcsec === undefined && request.surfaceResolutionKm === undefined && request.resolutionElements === undefined))
     throw new TypeError('State --kind, --any-time or --from/--to, and a resolution requirement (--min-arcsec, --min-km or --min-elements).');
   if (request.surfaceResolutionKm !== undefined && request.rangeKm === undefined || request.resolutionElements !== undefined && (request.rangeKm === undefined || request.bodyRadiusKm === undefined))

@@ -10,7 +10,7 @@ import { sha256 } from '../../../src/platform/sha256.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';
 import { plotProduct } from '../astronomy-packages/plots.mts';
 import { parseNativeMetadata, type NativeMetadata } from './native-metadata.mts';
-export interface OutputChoice { readonly kind:OutputRequest['kind']|'body-map'|'sphere'|'points';readonly available:boolean;readonly reason:string;readonly hdu?:number;readonly structure?:string;readonly shape?:readonly number[];readonly parameters?:readonly string[] }
+export interface OutputChoice { readonly kind:OutputRequest['kind']|'body-map'|'sphere'|'points'|'volume';readonly available:boolean;readonly reason:string;readonly hdu?:number;readonly structure?:string;readonly shape?:readonly number[];readonly parameters?:readonly string[] }
 export interface OutputRequest {
   readonly kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';
   readonly hdu:number; readonly structure?:string; readonly plane?:number; readonly pixel?:readonly [number,number];
@@ -77,7 +77,7 @@ function choices(structures:readonly NativeMetadata[]):OutputChoice[]{
     }
   }
   return [...result,
-    {kind:'body-map',available:false,reason:'Export a 2D measurement, then telescope project its output.product.json with explicit navigation. Publication remains a separate scientific check.'},
+    {kind:'body-map',available:false,reason:'First export a 2D image measurement. Its output.product.json can then be exported as a body map with explicit navigation.'},
     {kind:'sphere',available:false,reason:'Use telescope export MAP/map.fits.product.json --output sphere after projection; native pixels are insufficient.'},
     {kind:'points',available:false,reason:'Export an existing physical object.json with --output points or volume. A spectral cube requires a scientific reconstruction first; wavelength or radial velocity is not distance.'}];
 }

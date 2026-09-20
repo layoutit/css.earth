@@ -3,7 +3,7 @@ export const HELP = `Telescope — retrieve a qualified telescope product for a 
   telescope query TARGET --wavelength MIN,MAX --kind cube --any-time --min-arcsec N --out DIRECTORY
   telescope get DIRECTORY --pick N
   telescope get DIRECTORY --pick N --offline
-  telescope outputs DIRECTORY/pick-N/result.json [--structure NAME]
+  telescope outputs ARTIFACT.json [--structure NAME]
   telescope export DIRECTORY/pick-N/result.json --output image --hdu N [--structure NAME] --plane N --out DIRECTORY
   telescope export DIRECTORY/pick-N/result.json --output spectrum --hdu N --pixel X,Y --out DIRECTORY
   telescope export RESULT_JSON --output band-image --hdu N --band LO,HI --out DIRECTORY
@@ -15,8 +15,9 @@ Physical object handoff (existing measured/modelled depth):
   Reuses the existing point/volume loaders; copies pinned renderer resources and credits.
 
 Surface outputs:
-  telescope project MEASUREMENT/output.product.json --geometry navigation.json --out MAP_DIRECTORY
+  telescope export MEASUREMENT/output.product.json --output body-map --geometry navigation.json --out MAP_DIRECTORY
   telescope export MAP_DIRECTORY/map.fits.product.json --output sphere --out SPHERE_DIRECTORY
+  telescope project MEASUREMENT/output.product.json --geometry navigation.json --out MAP_DIRECTORY  (compatibility alias)
   Navigation pins SPICE kernels and explicitly chooses WCS or disc registration.
   Projection preserves unknown beam resolution and request satisfaction. See docs/virtual-telescopes.md.
 
@@ -49,11 +50,13 @@ Query options use micrometres, arcseconds and kilometres:
 
 Queries save immutable numbered choices in DIRECTORY/query.json. Get revalidates the
 choice, qualifies it if needed, and exports pinned data and evidence to DIRECTORY/pick-N/.
-Outputs support qualified FITS images, spectra, band images and feature maps. HDU, plane and
-pixel indices are zero-based. Cubes require an explicit plane for image export.
+Outputs inspects deliveries, derived product records and physical object packages, and reports
+only the next supported exports. Qualified FITS images, spectra, band images and feature maps
+use zero-based HDU, plane and pixel indices. Cubes require an explicit plane for image export.
 Export writes FITS images or ECSV spectra, PNG, SVG, CSV and a pinned receipt.
 The output directory must be new. No browser or viewer service is required.
-Surface publication remains telescope:publish-map; physical 3D adapters need geometry. Sphere export prepares one standalone HTML file.
+Scientific surface publication remains an explicit qualification after projection. Physical 3D
+adapters need real geometry. Sphere export prepares one standalone no-JavaScript HTML file.
 Exit codes: 0 ready/fulfilled, 1 operation failed, 2 invalid arguments,
 3 no retrievable choice or unresolved request, 4 refused request.
 The npm command accepts --workspace PATH (or CSSEARTH_WORKSPACE) for a css.earth science checkout.

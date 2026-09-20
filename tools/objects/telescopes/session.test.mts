@@ -143,5 +143,6 @@ test('CLI rejects typos and ambiguous arguments before archive access', () => {
   for (const input of [['query', 'eris', '--wave', '1,2'], ['get', 'x', '--pick', '1.5'], ['get', 'x', '--pick', '1', '--pick', '2'], ['query', 'eris', '--target', 'io', '--out', 'x']]) assert.throws(() => parseCli(input));
   const parsed = parseCli(['query', 'eris', '--wavelength', '1,2', '--kind', 'cube', '--any-time', '--min-arcsec', '1', '--out', 'x']);
   assert.equal(parsed.command, 'query'); if (parsed.command === 'query') assert.equal(sessionRequest(parsed.requestArgs).result, 'telescope-product');
+  assert.throws(() => parseCli(['query', 'eris', '--wavelength', '1,2', '--kind', 'cube', '--any-time', '--min-arcsec', '1', '--result', 'body-map', '--out', 'x']), /retrieve native products/);
   assert.throws(() => sessionRequest(['--target', 'eris', '--wavelength', '1,2', '--result', 'telescope-product']), /State --kind/);
 });

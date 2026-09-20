@@ -7,13 +7,14 @@ import { assessRequest } from './request-satisfaction.mts';
 import { getSession, saveSession, type Session } from './session.mts';
 
 import { exportSpatialObject } from './spatial-handoff.mts';
-import { listOutputs, exportOutput, validateOutputRequest, type OutputRequest } from './outputs.mts';
+import { exportOutput, validateOutputRequest, type OutputRequest } from './outputs.mts';
+import { listArtifactOutputs } from './artifact-outputs.mts';
 import { projectOutput } from './projection.mts';
 import { exportSphere } from './sphere.mts';
 import { HELP } from '../../../packages/telescope/src/help.mts';
 export { HELP };
 
-const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--result', '--icrs-circle', '--spectral-frame', '--max-science-bytes', '--max-metadata-bytes', '--max-link-depth', '--max-link-requests', '--max-expanded-bytes', '--max-package-members']);
+const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--icrs-circle', '--spectral-frame', '--max-science-bytes', '--max-metadata-bytes', '--max-link-depth', '--max-link-requests', '--max-expanded-bytes', '--max-package-members']);
 export type CliOptions = {readonly command:'spatial';readonly kind:'points'|'volume';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help' } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly offline?: boolean; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
 export function parseCli(args: readonly string[]): CliOptions {
   const command = args[0];
@@ -23,14 +24,14 @@ export function parseCli(args: readonly string[]): CliOptions {
     for(let i=1;i<args.length;i++){
       const arg=args[i];if(!arg.startsWith('-')){positional.push(arg);continue;}
       if(['--json','--verbose'].includes(arg)){if(flags.has(arg))throw new TypeError(`Repeated option ${arg}`);flags.add(arg);continue;}
-      if(!(command==='outputs'?['--structure']:command==='project'?['--geometry','--out']:['--output','--hdu','--structure','--plane','--pixel','--out','--band','--aperture','--background','--continuum','--uncertainty']).includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated ${command} option ${arg}`);
+      if(!(command==='outputs'?['--structure']:command==='project'?['--geometry','--out']:['--output','--hdu','--structure','--plane','--pixel','--out','--band','--aperture','--background','--continuum','--uncertainty','--geometry']).includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated ${command} option ${arg}`);
       const value=args[++i];if(!value||value.startsWith('--'))throw new TypeError(`Missing value for ${arg}`);values.set(arg,value);
     }
-    if(positional.length!==1)throw new TypeError(`Use telescope ${command} DELIVERY_RESULT_JSON`);
+    if(positional.length!==1)throw new TypeError(`Use telescope ${command} ARTIFACT_JSON`);
     const common={result:resolve(positional[0]),json:flags.has('--json'),verbose:flags.has('--verbose')};
     if(command==='outputs')return {command,...common,...(values.has('--structure')?{structure:values.get('--structure')!}:{})};
     if(command==='project'){const geometry=values.get('--geometry'),directory=values.get('--out');if(!geometry||!directory)throw new TypeError('project requires --geometry FILE and --out DIRECTORY');return {command,...common,geometry:resolve(geometry),directory:resolve(directory)};}
-    const kind=values.get('--output');if(kind==='points'||kind==='volume'){if([...values.keys()].some(k=>!['--output','--out'].includes(k))||!values.get('--out'))throw new TypeError('Spatial handoff takes only --output points|volume and --out DIRECTORY');return {command:'spatial',kind,...common,directory:resolve(values.get('--out')!)};}if(kind==='sphere'){if([...values.keys()].some(k=>!['--output','--out'].includes(k))||!values.get('--out'))throw new TypeError('Sphere takes only --output sphere and --out DIRECTORY');return {command:'sphere',...common,directory:resolve(values.get('--out')!)};}if(kind!=='image'&&kind!=='spectrum'&&kind!=='band-image'&&kind!=='aperture-spectrum'&&kind!=='feature-map')throw new TypeError('--output takes image, spectrum, band-image, aperture-spectrum, feature-map, sphere, points or volume');
+    const kind=values.get('--output');if(kind==='points'||kind==='volume'){if([...values.keys()].some(k=>!['--output','--out'].includes(k))||!values.get('--out'))throw new TypeError('Spatial handoff takes only --output points|volume and --out DIRECTORY');return {command:'spatial',kind,...common,directory:resolve(values.get('--out')!)};}if(kind==='sphere'){if([...values.keys()].some(k=>!['--output','--out'].includes(k))||!values.get('--out'))throw new TypeError('Sphere takes only --output sphere and --out DIRECTORY');return {command:'sphere',...common,directory:resolve(values.get('--out')!)};}if(kind==='body-map'){if([...values.keys()].some(k=>!['--output','--geometry','--out'].includes(k))||!values.get('--geometry')||!values.get('--out'))throw new TypeError('Body map export takes --output body-map --geometry FILE and --out DIRECTORY');return {command:'project',...common,geometry:resolve(values.get('--geometry')!),directory:resolve(values.get('--out')!)};}if(kind!=='image'&&kind!=='spectrum'&&kind!=='band-image'&&kind!=='aperture-spectrum'&&kind!=='feature-map')throw new TypeError('--output takes image, spectrum, band-image, aperture-spectrum, feature-map, body-map, sphere, points or volume');
     const integer=(value:string|undefined)=>{if(value===undefined||!/^\d+$/u.test(value)||!Number.isSafeInteger(Number(value)))throw new TypeError('Selectors must be nonnegative whole numbers');return Number(value);};
     const hdu=integer(values.get('--hdu')),plane=values.has('--plane')?integer(values.get('--plane')):undefined;
     const parts=values.get('--pixel')?.split(',');if(parts&&parts.length!==2)throw new TypeError('--pixel takes X,Y');
@@ -54,6 +55,7 @@ export function parseCli(args: readonly string[]): CliOptions {
       if (switches.has(arg)) throw new TypeError(`Repeated option ${arg}.`);
       switches.add(arg); if (arg === '--any-time') requestArgs.push(arg); continue;
     }
+    if (command === 'query' && arg === '--result') throw new TypeError('Saved telescope queries retrieve native products. Choose body-map, sphere, points or volume later with telescope export.');
     if (!(command === 'query' ? arg === '--out' || queryValues.has(arg) : arg === '--pick')) throw new TypeError(`Unknown ${command} option ${arg}.`);
     if (values.has(arg)) throw new TypeError(`Repeated option ${arg}.`);
     const value = args[++i];
@@ -64,7 +66,7 @@ export function parseCli(args: readonly string[]): CliOptions {
   if (command === 'query') {
     if (positional.length > 1 || positional.length && values.has('--target')) throw new TypeError('Give one target, either positional or --target.');
     if (positional[0]) requestArgs.push('--target', positional[0]);
-    if (!values.has('--result')) requestArgs.push('--result', 'telescope-product');
+    requestArgs.push('--result', 'telescope-product');
     const directory = values.get('--out'); if (!directory) throw new TypeError('query requires --out DIRECTORY.');
     return { command, directory: resolve(directory), requestArgs, json, verbose };
   }
@@ -110,8 +112,8 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
       }else if(options.command==='sphere'){
         const result=await exportSphere(options.result,options.directory);text=options.json?JSON.stringify(result)+'\n':`Sphere: ${result.html}\nEvidence: ${result.receipt}\n`;code=0;
       }else if(options.command==='outputs'){
-        const result=await listOutputs(options.result,options.structure);
-        text=options.json?`${JSON.stringify(result)}\n`:result.outputs.map(o=>`${o.kind}${'hdu' in o?` HDU ${o.hdu}`:''}: ${o.available?'available':'unavailable'}. ${o.reason}`).join('\n')+'\n';code=0;
+        const result=await listArtifactOutputs(options.result,options.structure);
+        text=options.json?`${JSON.stringify(result)}\n`:result.outputs.length?result.outputs.map(o=>`${o.kind}${'hdu' in o?` HDU ${o.hdu}`:''}: ${o.available?'available':'unavailable'}. ${o.reason}`).join('\n')+'\n':`No further outputs. ${result.artifact} is terminal.\n`;code=0;
       }else if(options.command==='export'){
         const result=await exportOutput(options.result,options.selection,options.directory);
         text=options.json?`${JSON.stringify(result)}\n`:`Data: ${result.data}\nFigure: ${result.figure}\nValues: ${result.values}\nEvidence: ${result.receipt}\n`;code=0;

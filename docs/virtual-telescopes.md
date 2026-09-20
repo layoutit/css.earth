@@ -762,9 +762,18 @@ Output ownership and remaining adapters:
 | Spectral chart | Qualified wavelength axis and explicit pixel or fixed region | Executable FITS output adapter; optional background subtraction and explicitly conditional uncertainty |
 | Band image | Qualified units and wavelength bin edges | Executable wavelength-weighted mean; partial boundary bins included |
 | Feature map | Qualified bins plus feature and bracketing continuum windows | Executable continuum-subtracted wavelength integral; signed residual, no detection claim |
-| Surface map | Measurement definition, viewing geometry, rotation/frame and resolution evidence | PlanetMapper-backed `telescope project`; scientific publication remains `body-map-publication.mts` |
+| Surface map | Measurement definition, viewing geometry, rotation/frame and resolution evidence | PlanetMapper-backed `telescope export --output body-map`; scientific publication remains `body-map-publication.mts` |
 | Body sphere | Qualified surface map plus a prepared layer | Standalone HTML from `telescope export --output sphere`, using the existing PolyCSS renderer |
 | 3D scatter/volume | Explicit coordinate frame, units and measured or explicitly modeled depth | Existing point-field and density-volume owners; `--output points` or `volume` packages a physical `object.json` |
+
+`telescope outputs ARTIFACT.json` validates current telescope artifact pins and exposes this table as an
+executable transition: delivery to scientific output, image output to registered body map,
+body map to standard sphere, or an existing physical object to its point/volume handoff.
+It does not advertise a later stage when the exact prerequisite outputs are absent, and terminal
+sphere and spatial records have no further output. The original request satisfaction travels in
+the derived records; rendering or projection does not upgrade it.
+The point/volume export performs the full object-package, resource, provenance and licence
+validation before it writes a handoff.
 
 A wavelength axis, radial velocity or image intensity cannot silently become physical depth.
 PDS arrays pass through `pdr`; ISIS3 cores use the existing shared reader. Both feed
@@ -823,11 +832,13 @@ before it can enter either 3D owner; this command does not supply one.
 ```sh
 telescope export europa/pick-1/result.json --output band-image --hdu 1 \
   --band 4.2,4.3 --uncertainty independent --out europa-band
-telescope project europa-band/output.product.json --geometry navigation.json --out europa-map
+telescope outputs europa-band/output.product.json
+telescope export europa-band/output.product.json --output body-map --geometry navigation.json --out europa-map
+telescope outputs europa-map/map.fits.product.json
 telescope export europa-map/map.fits.product.json --output sphere --out europa-sphere
 ```
 
-`project` uses PlanetMapper 1.14.0 for image navigation and nearest-neighbour
+The body-map export uses PlanetMapper 1.14.0 for image navigation and nearest-neighbour
 surface resampling. PlanetMapper owns its SPICE geometry through SpiceyPy;
 its projection dependency is pyproj/PROJ. Astropy owns the numerical FITS
 output and Matplotlib the figure. The sphere is one standalone HTML file,

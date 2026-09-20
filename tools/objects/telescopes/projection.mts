@@ -46,7 +46,7 @@ async function checkPins(inputs:readonly ProductInput[]){for(const input of inpu
 
 export async function projectOutput(recordPath:string,geometryPath:string,outputDirectory:string){
   const source=await verifiedProduct(recordPath);
-  if(source.record.stage!=='telescope-output'||!source.record.outputs.some(o=>o.path==='image.fits'))throw new TypeError('project requires a telescope export image product record');
+  if(source.record.stage!=='telescope-output'||!source.record.outputs.some(o=>o.path==='image.fits'))throw new TypeError('Body-map export requires a telescope image output.product.json');
   const deliveryPin=source.record.inputs.find(i=>i.role==='delivery');if(!deliveryPin)throw new Error('Measurement has no source delivery');
   const d=await delivery(deliveryPin.identity);if(d.pin.sha256!==deliveryPin.sha256)throw new Error('Measurement source delivery changed');
   const geometryFile=resolve(geometryPath),geometryBytes=await readFile(geometryFile),geometry=parseGeometry(JSON.parse(geometryBytes.toString()),dirname(geometryFile));

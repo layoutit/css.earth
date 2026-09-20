@@ -106,6 +106,13 @@ Output directories must be new. Delivery files and their producing record are re
 export, and files are checked again before publication. Outputs keep the original request and
 its satisfaction result. Exporting a figure does not resolve missing science evidence.
 
+`telescope outputs ARTIFACT.json` is the stage boundary for the whole chain. It accepts a
+delivery, derived product record, or existing physical object package and reports only the next
+supported exports. It revalidates telescope artifact pins; physical handoff validates the full
+object closure when exported. A 2D image can advance to a body map; only a
+complete projection bundle can advance to a sphere; point and volume handoffs require existing
+physical depth. A completed sphere or spatial handoff is reported as terminal.
+
 The existing astronomy Python environment now includes hash-pinned Matplotlib. Reinstall it
 with `node tools/objects/astronomy-packages/toolchain.mts install` after pulling changed pins.
 The npm package still does not install scientific dependencies automatically.
@@ -113,14 +120,17 @@ The npm package still does not install scientific dependencies automatically.
 Surface projection is explicit:
 
 ```sh
-telescope project MEASUREMENT/output.product.json --geometry navigation.json --out MAP
+telescope outputs MEASUREMENT/output.product.json
+telescope export MEASUREMENT/output.product.json --output body-map --geometry navigation.json --out MAP
+telescope outputs MAP/map.fits.product.json
 telescope export MAP/map.fits.product.json --output sphere --out SPHERE
 ```
 
 The navigation file pins SPICE kernels and chooses WCS or a supported fitted disc.
-`project` writes a body map and a figure. The sphere is a standalone HTML file using
-the target's existing css.earth standard sphere and physical scale. CSS, JavaScript
-and base64 images are embedded. The projection ellipsoid is recorded separately. Projection preserves
+The body-map export writes a map and a figure. `telescope project` remains a compatibility alias.
+The sphere is a standalone HTML file using the target's existing css.earth standard sphere and
+physical scale. CSS and base64 images are embedded; no JavaScript executes. The projection ellipsoid
+is recorded separately. Projection preserves
 unknown beam resolution and does not qualify scientific publication. See the
 [navigation contract and oracle](../../docs/virtual-telescopes.md#from-a-measurement-to-a-surface-and-sphere).
 Physical 3D handoffs use an existing `point-field` or `density-volume` object package:
