@@ -18,6 +18,10 @@ const LOCAL_EXPRESSION_SUBSTITUTIONS:Record<string,string>={
  '${{ needs.changes.outputs.runtime_ownership_args }}':'--all',
  '${{ steps.build-tools-cache.outputs.cache-hit }}':'false',
  '${{ steps.ci-cache-key.outputs.build_digest }}':'',
+ '${{ steps.package-cache.outputs.cache-hit }}':'false',
+ '${{ steps.ci-cache-key.outputs.package_digest }}':'',
+ '${{ steps.renderer-cache.outputs.cache-hit }}':'false',
+ '${{ steps.ci-cache-key.outputs.renderer_digest }}':'',
 };
 /** Step conditions that only mean something inside a GitHub run: skip the step when Contract lint failed, or cancel
  * the rest of the run after a failure. */
@@ -26,11 +30,54 @@ export const CI_ONLY_CONDITIONS=["needs.lint.result != 'success'",'failure()'];
  * local run has no such cache to consult, so — like LOCAL_EXPRESSION_SUBSTITUTIONS below — it substitutes the
  * always-correct answer (never skip) instead of failing: the condition is stripped and the step always runs. */
 const CACHE_HIT_CONDITION=/^steps\.[\w-]+\.outputs\.cache-hit(?:-\w+)? != 'true'$/u;
+const UNIVERSE_MATRIX_JOB='universe-checks';
+const UNIVERSE_MATRIX_LANE='${{ matrix.lane }}';
+const UNIVERSE_SELECTED_IF="${{ github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true' }}";
+const UNIVERSE_AGGREGATE_IF="${{ always() && (github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true') }}";
+/** This one aggregate is a verdict, not another suite. Locally every expanded lane must finish successfully;
+ * never substitute a synthetic success result for a GitHub dependency expression. */
+function requireUniverseAggregate(job:Record<string,unknown>):void {
+ const needs=requireArray(job.needs).map(value=>requireString(value)).sort();
+ const steps=requireArray(job.steps),step=steps.length===1?requireRecord(steps[0]):{};
+ if(JSON.stringify(needs)!==JSON.stringify(['changes',UNIVERSE_MATRIX_JOB])||
+    requireString(job.if).trim().replace(/\s+/gu,' ')!==UNIVERSE_AGGREGATE_IF||
+    job.strategy!==undefined||job.env!==undefined||job['continue-on-error']!==undefined||
+    step.if!==undefined||step.uses!==undefined||step.shell!==undefined||step['working-directory']!==undefined||step['continue-on-error']!==undefined||
+    typeof step.run!=='string'||step.run.trim()!=='test "$RESULT" = success'||
+    JSON.stringify(step.env)!==JSON.stringify({RESULT:'${{ needs.universe-checks.result }}'}))
+  throw new Error('Local CI needs the explicit fail-closed universe matrix aggregate.');
+}
 /** Execute the maintained job's commands, so local checks cannot drift from CI. */
 export function readCiSteps(source:string,jobName='universe', substitutions:Record<string,string>={}):CiStep[] {
  const workflow=requireRecord(parse(source)),jobs=requireRecord(workflow.jobs);
  if(!Object.hasOwn(jobs,jobName))throw new Error(`Unknown CI job: ${jobName}`);
  const job=requireRecord(jobs[jobName]);
+ if(jobName==='universe'&&Object.hasOwn(jobs,UNIVERSE_MATRIX_JOB)){
+  requireUniverseAggregate(job);
+  return readCiSteps(source,UNIVERSE_MATRIX_JOB,substitutions);
+ }
+ if(job.strategy!==undefined){
+  const strategy=requireRecord(job.strategy),matrix=requireRecord(strategy.matrix);
+  if(jobName!==UNIVERSE_MATRIX_JOB||Object.keys(strategy).sort().join(',')!=='fail-fast,matrix'||strategy['fail-fast']!==false||
+     Object.keys(matrix).join(',')!=='lane'||job['continue-on-error']!==undefined||
+     job.needs!=='changes'||requireString(job.if).trim().replace(/\s+/gu,' ')!==UNIVERSE_SELECTED_IF||
+     requireRecord(job.env).CI_UNIVERSE_LANE!==UNIVERSE_MATRIX_LANE)
+   throw new Error('Local CI supports only the explicit universe lane matrix with fail-fast disabled.');
+  const lanes=requireArray(matrix.lane).map(value=>requireString(value));
+  if(!lanes.length||new Set(lanes).size!==lanes.length||lanes.some(lane=>!/^[a-z][a-z0-9-]*$/u.test(lane)))
+   throw new Error('Local CI needs unique, nonempty literal matrix lanes.');
+  return lanes.flatMap(lane=>{
+   const steps=readJobSteps(workflow,job,{...substitutions,[UNIVERSE_MATRIX_LANE]:lane});
+   if(!steps.length||steps.some(step=>step.env.CI_UNIVERSE_LANE!==lane))
+    throw new Error('Local CI needs executable commands for every matrix lane without lane overrides.');
+   return steps.map(step=>({...step,name:`[${lane}] ${step.name}`}));
+  });
+ }
+ if(jobName===UNIVERSE_MATRIX_JOB)throw new Error('Local CI needs the universe lane matrix, not a single replacement job.');
+ return readJobSteps(workflow,job,substitutions);
+}
+
+function readJobSteps(workflow:Record<string,unknown>,job:Record<string,unknown>,substitutions:Record<string,string>):CiStep[] {
  const decodeEnvironment=(value:unknown)=>Object.fromEntries(Object.entries(value===undefined?{}:requireRecord(value))
    .map(([key,value])=>[key,requireString(value,`CI environment ${key}`)])
    .filter(([,value])=>value!==WORKFLOW_TOKEN)

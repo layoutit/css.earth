@@ -4,7 +4,7 @@ import {mkdtemp,readFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {parse} from 'yaml';
-import {execFileSync} from 'node:child_process';
+import {execFileSync,spawnSync} from 'node:child_process';
 import {requireArray,requireRecord,requireString} from './source-values.mts';
 import {CI_ONLY_CONDITIONS,QUICK_SKIPPED_STEPS,quickSteps,readCiSteps,reuseLocalPreparation,runCiSteps,sharedCodeChanged} from './check-ci.mts';
 
@@ -20,13 +20,18 @@ test('local CI reads the actual workflow jobs in order, including strict TypeScr
  assert.ok(!typecheck.some(step=>step.run.includes('typecheck:tests')),'PRs skip the test-file typecheck');
  assert.ok(readCiSteps(workflow,'typecheck-tests').some(step=>step.run.trim()==='pnpm typecheck:tests'));
  assert.ok(universe.some(step=>step.run.includes('prepare-ci-inputs.mts universe')));
- assert.equal(universe.at(-1)?.run.trim(),'pnpm test:universe');
+ assert.deepEqual([...new Set(universe.map(step=>step.env.CI_UNIVERSE_LANE))],['sources','runtime','shell','renderer']);
+ for(const lane of ['sources','runtime','shell','renderer']){
+  const last=universe.filter(step=>step.env.CI_UNIVERSE_LANE===lane).at(-1);
+  assert.match(last?.run??'',/pnpm "test:universe:\$CI_UNIVERSE_LANE"/);
+  assert.match(last?.run??'',/pnpm test:sources:pr/);
+ }
  const universePreparation=readCiSteps(workflow,'universe-preparation');
  assert.ok(universePreparation.some(step=>step.run.includes('pnpm test:galaxy-field')));
- assert.ok(universePreparation.some(step=>step.run.includes('pnpm test:preparation --universe')));
+ assert.ok(universePreparation.some(step=>step.run.includes('pnpm test:ci-preparation')));
  // A local run has no PR diff to scope the ownership check to, so it substitutes the always-correct --all rather
  // than failing on an expression only a real GitHub run (the `changes` job's output) can evaluate.
- const ownership=universe.find(step=>step.name.includes('runtime ownership'));
+ const ownership=universe.find(step=>step.env.RUNTIME_OWNERSHIP_ARGS!==undefined);
  assert.equal(ownership?.env.RUNTIME_OWNERSHIP_ARGS,'--all');
 });
 test('the deploy consumes installed assets, rebuilds only catalogues and rejects uninventoried output',async()=>{
@@ -90,6 +95,131 @@ test('a selected job uses its own steps and inherited environment',()=>{
  assert.deepEqual(readCiSteps(workflow,'nebula'),[{name:'lab',run:'echo lab',env:{SHARED:'shared',SUBJECT:'cloud'}}]);
  assert.throws(()=>readCiSteps(workflow,'absent'),/Unknown CI job/);
 });
+
+const matrixWorkflow=(run='printf "%s\\n" "$CI_UNIVERSE_LANE" >> "$RUNNER_TEMP/lanes"')=>({
+ env:{SHARED:'workflow'},jobs:{
+  'universe-checks':{
+   needs:'changes',
+   if:"${{ github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true' }}",
+   strategy:{'fail-fast':false,matrix:{lane:['sources','runtime','shell','renderer']}},
+   env:{CI_UNIVERSE_LANE:'${{ matrix.lane }}',INHERITED:'job'},
+   steps:[{name:'lane checks',run,env:{STEP:'step'}}],
+  },
+  universe:{
+   needs:['changes','universe-checks'],
+   if:"${{ always() && (github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true') }}",
+   steps:[{name:'Require every universe lane',env:{RESULT:'${{ needs.universe-checks.result }}'},run:'test "$RESULT" = success'}],
+  },
+ },
+});
+
+test('native matrix lanes expand completely and execute with their own inherited environment',async()=>{
+ const fixture=matrixWorkflow(),steps=readCiSteps(JSON.stringify(fixture));
+ const lanes=['sources','runtime','shell','renderer'];
+ assert.deepEqual(steps.map(step=>step.env.CI_UNIVERSE_LANE),lanes);
+ assert.deepEqual(steps.map(step=>step.name),lanes.map(lane=>`[${lane}] lane checks`));
+ for(const [index,step] of steps.entries())assert.deepEqual(step.env,{
+  SHARED:'workflow',CI_UNIVERSE_LANE:lanes[index],INHERITED:'job',STEP:'step',
+ });
+ assert.deepEqual(steps,readCiSteps(JSON.stringify(fixture),'universe-checks'));
+ assert.ok(steps.every(step=>step.env.RESULT===undefined),'A local verdict never fabricates a successful dependency result.');
+ const root=await mkdtemp(join(tmpdir(),'ci-matrix-test-'));
+ try{
+  await runCiSteps(steps,root,root);
+  assert.equal(await readFile(join(root,'lanes'),'utf8'),lanes.join('\n')+'\n');
+ }finally{await rm(root,{recursive:true,force:true});}
+});
+
+test('the maintained aggregate command accepts success only, never failed, cancelled or skipped matrix children',async()=>{
+ const workflow=requireRecord(parse(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8')));
+ // readCiSteps validates the dependency, condition, result binding and exact fail-closed command first.
+ readCiSteps(JSON.stringify(workflow));
+ const aggregate=requireRecord(requireRecord(workflow.jobs).universe),step=requireRecord(requireArray(aggregate.steps)[0]);
+ for(const result of ['success','failure','cancelled','skipped','']){
+  const executed=spawnSync('bash',['--noprofile','--norc','-e','-o','pipefail','-c',requireString(step.run)],{
+   env:{...process.env,RESULT:result},encoding:'utf8',
+  });
+  assert.equal(executed.status,result==='success'?0:1,result);
+ }
+});
+
+test('the actual workflow dispatches every native lane command locally and retains main authoring',async()=>{
+ const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
+ const expanded=readCiSteps(workflow),lanes=['sources','runtime','shell','renderer'];
+ const commands=lanes.map(lane=>{
+  const step=expanded.filter(step=>step.env.CI_UNIVERSE_LANE===lane).at(-1);
+  assert.ok(step,`${lane}: local commands must exist`);
+  return {...step,env:{...step.env,GITHUB_EVENT_NAME:'pull_request'},run:[
+   'pnpm() { printf "pnpm %s\\n" "$*" >> "$RUNNER_TEMP/dispatch"; }',
+   'node() { printf "node %s\\n" "$*" >> "$RUNNER_TEMP/dispatch"; }',step.run,
+  ].join('\n')};
+ });
+ const root=await mkdtemp(join(tmpdir(),'ci-real-matrix-'));
+ try{
+  await runCiSteps(commands,root,root);
+  assert.equal(await readFile(join(root,'dispatch'),'utf8'),[
+   'pnpm test:sources:pr',
+   ...['runtime','shell','renderer'].flatMap(lane=>['node tools/prepare-facilities.mts --catalog-only',`pnpm test:universe:${lane}`]),'',
+  ].join('\n'));
+  const source=commands[0]!;
+  await runCiSteps([{...source,env:{...source.env,GITHUB_EVENT_NAME:'push'}}],root,root);
+  assert.ok((await readFile(join(root,'dispatch'),'utf8')).endsWith('pnpm test:sources\n'));
+ }finally{await rm(root,{recursive:true,force:true});}
+});
+
+test('a failing or cancelled local matrix lane cannot execute later lanes or report a successful aggregate',async()=>{
+ for(const stop of ['exit 1','kill -TERM $$']){
+  const root=await mkdtemp(join(tmpdir(),'ci-matrix-stop-'));
+  const fixture=matrixWorkflow(`if [ "$CI_UNIVERSE_LANE" = runtime ]; then ${stop}; fi\nprintf "%s\\n" "$CI_UNIVERSE_LANE" >> "$RUNNER_TEMP/lanes"`);
+  try{
+   await assert.rejects(runCiSteps(readCiSteps(JSON.stringify(fixture)),root,root),/\[runtime\] lane checks failed/);
+   assert.equal(await readFile(join(root,'lanes'),'utf8'),'sources\n');
+  }finally{await rm(root,{recursive:true,force:true});}
+ }
+});
+
+test('unsupported matrix shapes and expressions cannot silently omit lanes',()=>{
+ const invalid:((job:Record<string,unknown>)=>void)[]=[
+  job=>{job.strategy={matrix:{lane:['sources']}};},
+  job=>{job.strategy={'fail-fast':true,matrix:{lane:['sources']}};},
+  job=>{job.strategy={'fail-fast':false,matrix:{lane:[]}};},
+  job=>{job.strategy={'fail-fast':false,matrix:{lane:['sources','sources']}};},
+  job=>{job.strategy={'fail-fast':false,matrix:{lane:['${{ inputs.lane }}']}};},
+  job=>{job.strategy={'fail-fast':false,matrix:{lane:['sources'],include:[{lane:'renderer'}]}};},
+  job=>{job.strategy={'fail-fast':false,matrix:{lane:['sources'],exclude:[{lane:'sources'}]}};},
+  job=>{job.strategy={'fail-fast':false,matrix:{lane:['sources'],node:['22']}};},
+  job=>{job['continue-on-error']=true;},
+  job=>{job.if='${{ inputs.run_checks }}';},
+  job=>{job.needs=['changes','unknown-writer'];},
+  job=>{job.env={CI_UNIVERSE_LANE:'${{ matrix.unknown }}'};},
+  job=>{job.steps=[{name:'unknown expression',run:'echo ${{ matrix.unknown }}'}];},
+  job=>{job.steps=[{name:'constant lane',run:'true',env:{CI_UNIVERSE_LANE:'sources'}}];},
+  job=>{job.steps=[];},
+  job=>{job.steps=[{uses:'actions/checkout@v4'}];},
+  job=>{delete job.strategy;},
+ ];
+ for(const mutate of invalid){
+  const fixture=matrixWorkflow();mutate(fixture.jobs['universe-checks']);
+  assert.throws(()=>readCiSteps(JSON.stringify(fixture)));
+ }
+});
+
+test('aggregate recognition fails closed when its dependency or success-only guarantee is removed',()=>{
+ const invalid:((job:Record<string,unknown>)=>void)[]=[
+  job=>{job.needs=['changes'];},
+  job=>{job.if="${{ always() }}";},
+  job=>{job['continue-on-error']=true;},
+  job=>{job.steps=[{name:'always green',run:'true'}];},
+  job=>{job.steps=[{name:'ignores cancellations',env:{RESULT:'${{ needs.universe-checks.result }}'},run:'test "$RESULT" != failure'}];},
+  job=>{job.steps=[{name:'constant result',env:{RESULT:'success'},run:'test "$RESULT" = success'}];},
+  job=>{job.steps=[{name:'ignored failure',env:{RESULT:'${{ needs.universe-checks.result }}'},run:'test "$RESULT" = success','continue-on-error':true}];},
+ ];
+ for(const mutate of invalid){
+  const fixture=matrixWorkflow();mutate(fixture.jobs.universe);
+  assert.throws(()=>readCiSteps(JSON.stringify(fixture)));
+ }
+});
+
 test('the lint prerequisite and run-cancel steps are CI-only; any other condition still refuses a local run',async()=>{
  const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
  for(const job of ['typecheck','typecheck-tests','universe','universe-preparation','nebula']){
@@ -114,12 +244,14 @@ test('required lanes depend only on required classification; lint cannot manufac
  const jobs=requireRecord(workflow.jobs);
  const expectedNames={changes:'Classify changes',lint:'Contract lint',typecheck:'Typecheck',universe:'Prepared universe and shared renderer','universe-preparation':'Prepared universe preparation and galaxy field',nebula:'Internal nebula packages and isolated controls'};
  for(const [id,name] of Object.entries(expectedNames))assert.equal(requireRecord(jobs[id]).name,name,'preserve the live required check context');
- for(const id of ['typecheck','typecheck-tests','universe','universe-preparation','nebula']){
+ for(const id of ['typecheck','typecheck-tests','universe-checks','universe-preparation','nebula']){
   const job=requireRecord(jobs[id]);
   assert.equal(job.needs,'changes',id);
   assert.match(requireString(job.if),/^\$\{\{ github\.event_name != 'pull_request' \|\| needs\.changes\.outputs\.run_[a-z_]+ == 'true' \}\}$/);
   assert.ok(requireArray(job.steps).every(value=>!JSON.stringify(value).includes('needs.lint')),id);
  }
+ assert.deepEqual(requireRecord(jobs.universe).needs,['changes','universe-checks']);
+ assert.equal(requireRecord(requireRecord(jobs['universe-checks']).strategy)['fail-fast'],false);
 });
 
 test('parallel compiler lanes cannot reserve or restore one another\'s incomplete cache',async()=>{

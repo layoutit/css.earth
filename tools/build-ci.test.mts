@@ -80,3 +80,17 @@ test('native package graph and the real renderer → catalogue dependency are pr
   assert.deepEqual(plan.find(task => task.id === 'preparation')?.after, ['renderer', 'solar', 'titles']);
   assert.deepEqual(plan.find(task => task.id === 'world')?.after, ['preparation', 'navigation']);
 });
+
+test('CI-only changes can reuse package and renderer outputs while preparation keeps its full input identity', async t => {
+  const f = fixture(t), packageDigest = 'b'.repeat(64), rendererDigest = 'c'.repeat(64);
+  await buildCi({ ...f, mode: 'lint', digest, packageDigest, rendererDigest });
+  f.executed.length = 0;
+  const results = await buildCi({ ...f, mode: 'lint', digest: 'd'.repeat(64), packageDigest, rendererDigest,
+    cacheHit: false, packageCacheHit: true, rendererCacheHit: true });
+  assert.deepEqual(results.filter(result => result.cached).map(result => result.id).sort(), ['packages', 'renderer']);
+  assert.ok(f.executed.includes('preparation'));
+  unlinkSync(resolve(f.root, 'packages/astronomy/dist/index.d.ts'));
+  const missing = await buildCi({ ...f, mode: 'lint', digest: 'd'.repeat(64), packageDigest, rendererDigest,
+    cacheHit: true, packageCacheHit: true, rendererCacheHit: true });
+  assert.equal(missing.find(result => result.id === 'packages')?.cached, false);
+});

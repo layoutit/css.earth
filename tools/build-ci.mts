@@ -109,9 +109,10 @@ async function execute(task: CiBuildTask, root: string): Promise<void> {
 }
 
 export async function buildCi({ root = resolve(import.meta.dirname, '..'), mode, cacheHit = false, digest,
-  run = execute,
-}: { root?: string; mode: CiBuildMode; cacheHit?: boolean; digest: string; run?: (task: CiBuildTask, root: string) => Promise<void> }) {
-  if (!/^[a-f0-9]{64}$/u.test(digest)) throw new TypeError('CI_BUILD_DIGEST must be an exact SHA-256 cache identity.');
+  packageCacheHit = cacheHit, rendererCacheHit = cacheHit, packageDigest = digest, rendererDigest = digest, run = execute,
+}: { root?: string; mode: CiBuildMode; cacheHit?: boolean; digest: string; packageCacheHit?: boolean; rendererCacheHit?: boolean;
+  packageDigest?: string; rendererDigest?: string; run?: (task: CiBuildTask, root: string) => Promise<void> }) {
+  for (const identity of [digest, packageDigest, rendererDigest]) if (!/^[a-f0-9]{64}$/u.test(identity)) throw new TypeError('CI build digests must be an exact SHA-256 cache identity.');
   const plan = ciBuildPlan(root, mode), pending = new Map<string, Promise<void>>(), results: { id: string; cached: boolean; seconds: number }[] = [];
   for (const task of plan) {
     const parents = task.after.map(id => {
@@ -121,13 +122,15 @@ export async function buildCi({ root = resolve(import.meta.dirname, '..'), mode,
     });
     pending.set(task.id, Promise.all(parents).then(async () => {
       const started = performance.now();
-      const cached = Boolean(cacheHit && task.outputs?.length && task.outputs.every(output => compiledOutputsValid(root, output, digest)));
+      const identity = task.id === 'packages' ? packageDigest : task.id === 'renderer' ? rendererDigest : digest;
+      const hit = task.id === 'packages' ? packageCacheHit : task.id === 'renderer' ? rendererCacheHit : cacheHit;
+      const cached = Boolean(hit && task.outputs?.length && task.outputs.every(output => compiledOutputsValid(root, output, identity)));
       if (cached && task.id === 'packages') {
         // The package dist cache intentionally excludes generated TS sources needed by typecheck/tests.
         await run({ id: 'astronomy-data', after: [], command: process.execPath, args: ['packages/astronomy/tools/body-records.mts'] }, root);
       } else if (!cached) {
         await run(task, root);
-        for (const output of task.outputs ?? []) recordOutputs(root, output, digest);
+        for (const output of task.outputs ?? []) recordOutputs(root, output, identity);
       }
       const result = { id: task.id, cached, seconds: Number(((performance.now() - started) / 1000).toFixed(3)) };
       results.push(result);
@@ -143,9 +146,16 @@ export async function buildCi({ root = resolve(import.meta.dirname, '..'), mode,
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const mode = process.argv[2];
   if (process.argv.length !== 3 || (mode !== 'lint' && mode !== 'full')) throw new TypeError('Usage: node tools/build-ci.mts lint|full');
-  const hit = process.env.CI_BUILD_CACHE_HIT;
-  if (hit !== undefined && hit !== '' && hit !== 'true' && hit !== 'false') throw new TypeError('CI_BUILD_CACHE_HIT must be true or false.');
+  const flag = (name: string, fallback = false) => {
+    const value = process.env[name];
+    if (value === undefined || value === '') return fallback;
+    if (value !== 'true' && value !== 'false') throw new TypeError(`${name} must be true or false.`);
+    return value === 'true';
+  };
+  const hit = flag('CI_BUILD_CACHE_HIT');
   const digest = process.env.CI_BUILD_DIGEST || ciCacheKeys().buildDigest;
-  const started = performance.now(), results = await buildCi({ mode, digest, cacheHit: hit === 'true' });
+  const started = performance.now(), results = await buildCi({ mode, digest, cacheHit: hit,
+    packageCacheHit: flag('CI_PACKAGE_CACHE_HIT', hit), rendererCacheHit: flag('CI_RENDERER_CACHE_HIT', hit),
+    packageDigest: process.env.CI_PACKAGE_DIGEST || digest, rendererDigest: process.env.CI_RENDERER_DIGEST || digest });
   console.log(JSON.stringify({ mode, seconds: Number(((performance.now() - started) / 1000).toFixed(3)), compiledCacheHits: results.filter(result => result.cached).length }));
 }

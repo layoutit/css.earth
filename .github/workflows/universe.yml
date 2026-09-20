@@ -36,6 +36,12 @@ jobs:
           # `git diff --name-only` reads only commits and trees either way.
           fetch-depth: 0
           filter: blob:none
+          # Classification reads Git trees, not object bytes. Keep the complete diff/history without
+          # transferring the source-media bank before any validation job can start.
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /tools/*.mts
+            /.github/ci-areas.json
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
@@ -101,18 +107,6 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
-      - name: Hash tracked build and compiler inputs
-        id: ci-cache-key
-        run: node tools/ci-cache-key.mts
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: build-tools-cache
-        with:
-          # Exact compiled inputs only. Generated catalogues and shell data are regenerated on every run.
-          path: |
-            packages/*/dist
-            src/renderers/css/dist
-            tools/objects/dist
-          key: compiled-tools-v1-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: node_modules
@@ -120,8 +114,31 @@ jobs:
           restore-keys: node-modules-
       - name: Install dependencies and prove the lockfile
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: package-cache
+        with:
+          path: packages/*/dist
+          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: renderer-cache
+        with:
+          path: src/renderers/css/dist
+          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Preparation still uses the conservative whole-tree key; generated data is never cached here.
+          path: tools/objects/dist
+          key: compiled-preparation-v2-${{ steps.ci-cache-key.outputs.build_digest }}
       - name: Generate the registry, renderer and preparation bundle
         env:
+          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
+          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
+          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
+          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/build-ci.mts lint
@@ -173,18 +190,6 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
-      - name: Hash tracked build and compiler inputs
-        id: ci-cache-key
-        run: node tools/ci-cache-key.mts
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: build-tools-cache
-        with:
-          # Exact compiled inputs only. Generated catalogues and shell data are regenerated on every run.
-          path: |
-            packages/*/dist
-            src/renderers/css/dist
-            tools/objects/dist
-          key: compiled-tools-v1-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # node_modules itself, on top of setup-node's pnpm store cache: with both warm, --frozen-lockfile mostly
@@ -192,6 +197,27 @@ jobs:
           path: node_modules
           key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: node-modules-
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: package-cache
+        with:
+          path: packages/*/dist
+          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: renderer-cache
+        with:
+          path: src/renderers/css/dist
+          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Preparation still uses the conservative whole-tree key; generated data is never cached here.
+          path: tools/objects/dist
+          key: compiled-preparation-v2-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Every tsc invocation in typecheck:pr writes its own .tsbuildinfo (never astro check, which never reads
@@ -203,8 +229,6 @@ jobs:
           restore-keys: |
             tsbuildinfo-app-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-
             tsbuildinfo-app-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
@@ -212,6 +236,10 @@ jobs:
           key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
+          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
+          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
+          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
+          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/build-ci.mts full
@@ -240,23 +268,32 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
-      - name: Hash tracked build and compiler inputs
-        id: ci-cache-key
-        run: node tools/ci-cache-key.mts
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: build-tools-cache
-        with:
-          # Exact compiled inputs only. Generated catalogues and shell data are regenerated on every run.
-          path: |
-            packages/*/dist
-            src/renderers/css/dist
-            tools/objects/dist
-          key: compiled-tools-v1-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: node-modules-
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: package-cache
+        with:
+          path: packages/*/dist
+          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: renderer-cache
+        with:
+          path: src/renderers/css/dist
+          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Preparation still uses the conservative whole-tree key; generated data is never cached here.
+          path: tools/objects/dist
+          key: compiled-preparation-v2-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Keep this lane separate: caches are immutable, so sharing the application's key lets the
@@ -266,8 +303,6 @@ jobs:
           restore-keys: |
             tsbuildinfo-tests-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-
             tsbuildinfo-tests-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
@@ -275,20 +310,30 @@ jobs:
           key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
+          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
+          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
+          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
+          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/build-ci.mts full
       - name: Restore only compiler inputs and generate real shell data
         run: pnpm prepare:typecheck
       - name: Typecheck test, fixture and capture files
-        # One unbatched program over the whole tests/tsconfig.json closure (tools/typecheck-tests.mts); a 6 GB heap
+        # Native tsc checks the whole tests/tsconfig.json closure in one program; a 6 GB heap
         # covers the 3.9 GB the audit measured, well inside the runner's 16 GB.
         env:
           NODE_OPTIONS: --max-old-space-size=6144
         run: pnpm typecheck:tests
 
-  universe:
-    name: Prepared universe and shared renderer
+  universe-checks:
+    name: Universe / ${{ matrix.lane }}
+    strategy:
+      fail-fast: false
+      matrix:
+        lane: [sources, runtime, shell, renderer]
+    env:
+      CI_UNIVERSE_LANE: ${{ matrix.lane }}
     needs: changes
     if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true' }}
     runs-on: ubuntu-latest
@@ -302,18 +347,6 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
-      - name: Hash tracked build and compiler inputs
-        id: ci-cache-key
-        run: node tools/ci-cache-key.mts
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: build-tools-cache
-        with:
-          # Exact compiled inputs only. Generated catalogues and shell data are regenerated on every run.
-          path: |
-            packages/*/dist
-            src/renderers/css/dist
-            tools/objects/dist
-          key: compiled-tools-v1-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: node_modules
@@ -321,6 +354,25 @@ jobs:
           restore-keys: node-modules-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: package-cache
+        with:
+          path: packages/*/dist
+          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: renderer-cache
+        with:
+          path: src/renderers/css/dist
+          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Preparation still uses the conservative whole-tree key; generated data is never cached here.
+          path: tools/objects/dist
+          key: compiled-preparation-v2-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
@@ -328,6 +380,10 @@ jobs:
           key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
+          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
+          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
+          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
+          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/build-ci.mts full
@@ -345,19 +401,37 @@ jobs:
       - name: Prepare minimap data
         run: |
           node site/minimap/prepare.mts --data-only
-      - name: Test source records, provenance and scientific credits
-        # PRs verify the published source graph; main additionally reproduces the authored provenance packages.
-        run: |
-          if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
-            pnpm test:sources
-          else
-            pnpm test:sources:pr
-          fi
-      - name: Test runtime ownership, shell, oracles and complete renderer
-        # Native pnpm parallel scripts; all preparation and catalogue writers have finished before readers start.
+      - name: Test the selected universe lane
+        # Each runner owns its writers and CPU budget. Native runner discovery is unchanged.
         env:
           RUNTIME_OWNERSHIP_ARGS: ${{ needs.changes.outputs.runtime_ownership_args }}
-        run: pnpm test:universe
+        run: |
+          case "$CI_UNIVERSE_LANE" in
+            sources)
+              if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
+                pnpm test:sources
+              else
+                pnpm test:sources:pr
+              fi
+              ;;
+            runtime|shell|renderer)
+              node tools/prepare-facilities.mts --catalog-only
+              pnpm "test:universe:$CI_UNIVERSE_LANE"
+              ;;
+            *) echo "Unknown universe lane" >&2; exit 1 ;;
+          esac
+
+  universe:
+    name: Prepared universe and shared renderer
+    needs: [changes, universe-checks]
+    if: ${{ always() && (github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require every universe lane to pass
+        env:
+          RESULT: ${{ needs.universe-checks.result }}
+        run: test "$RESULT" = success
 
   universe-preparation:
     name: Prepared universe preparation and galaxy field
@@ -374,18 +448,6 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
-      - name: Hash tracked build and compiler inputs
-        id: ci-cache-key
-        run: node tools/ci-cache-key.mts
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: build-tools-cache
-        with:
-          # Exact compiled inputs only. Generated catalogues and shell data are regenerated on every run.
-          path: |
-            packages/*/dist
-            src/renderers/css/dist
-            tools/objects/dist
-          key: compiled-tools-v1-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: node_modules
@@ -393,6 +455,25 @@ jobs:
           restore-keys: node-modules-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: package-cache
+        with:
+          path: packages/*/dist
+          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: renderer-cache
+        with:
+          path: src/renderers/css/dist
+          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Preparation still uses the conservative whole-tree key; generated data is never cached here.
+          path: tools/objects/dist
+          key: compiled-preparation-v2-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
@@ -405,27 +486,23 @@ jobs:
           key: galaxy-field-sources-${{ hashFiles('src/objects/nearby-universe/source/catalogue.json') }}
       - name: Build shared packages and affected entry points
         env:
+          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
+          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
+          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
+          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/build-ci.mts full
       - name: Restore only the inputs consumed by preparation tests
         run: node tools/prepare-ci-inputs.mts universe-preparation
-      - name: Test authored preparation publication and cache
-        # Finalization renders through headless Chromium, so the browser stays installed here.
-        run: |
-          pnpm exec playwright install --with-deps chromium
-          node --test --test-concurrency=1 \
-            tests/objects/prepared-finalization.test.mts \
-            tests/objects/publication.test.mts \
-            tools/write-prepared-set.test.mts \
-            tools/preparation-cache.test.mts \
-            tools/prepare-planets.test.mts
+      - name: Install the browser used by preparation tests
+        run: pnpm exec playwright install --with-deps chromium
       - name: Bake and test the scientific galaxy field
+        # This writes provenance consumed by both groups below; finish it before starting readers.
         run: pnpm test:galaxy-field
-      - name: Test prepared source, materials and world context
-        run: |
-          pnpm test:preparation --universe
-          node --test tools/objects/material-composition/coplanar-raster.test.mts
+      - name: Test publication, cache, prepared source, materials and world context
+        # Two native groups, each with file concurrency one; no renderer pool competes here.
+        run: pnpm test:ci-preparation
 
   nebula:
     name: Internal nebula packages and isolated controls
@@ -442,18 +519,6 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
-      - name: Hash tracked build and compiler inputs
-        id: ci-cache-key
-        run: node tools/ci-cache-key.mts
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: build-tools-cache
-        with:
-          # Exact compiled inputs only. Generated catalogues and shell data are regenerated on every run.
-          path: |
-            packages/*/dist
-            src/renderers/css/dist
-            tools/objects/dist
-          key: compiled-tools-v1-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: node_modules
@@ -461,6 +526,16 @@ jobs:
           restore-keys: node-modules-
       - name: Install dependencies without preparing application assets
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: output/tsbuildinfo/nebula-*.tsbuildinfo
+          key: tsbuildinfo-nebula-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            tsbuildinfo-nebula-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-
+            tsbuildinfo-nebula-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
       - name: Build shared TypeScript dependencies
         run: pnpm -r --filter "./packages/**" build
       - name: Test the object registry and adapter packages

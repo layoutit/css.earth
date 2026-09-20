@@ -135,9 +135,12 @@ exceptions; do not broaden a glob to include asset-authoring tests in a read-onl
 runtime suite. Tests stay beside their current owners.
 
 PR source checks validate published package records; main additionally regenerates
-authored provenance. Catalogue preparation finishes before parallel runtime readers.
-Compiled artifacts use exact-input caches; these never cache a test verdict. Cold
-and cached CI timings must be reported separately.
+authored provenance. A native Actions matrix gives source, runtime, shell and
+renderer checks separate CPU budgets; the required universe status passes only
+when all four pass. Locally, `test:universe` runs its groups sequentially.
+Compiled artifacts use exact-input caches; these never cache a test verdict.
+Package and renderer caches follow compiler inputs; preparation retains a
+conservative whole-tree key. Cold and cached CI timings must be reported separately.
 
 To run the fast subset before every push, opt in with `pnpm hooks:install`: the
 pre-push hook runs `pnpm check:pr --job=lint --quick`, which skips the network check and the

@@ -4,7 +4,7 @@ import { mkdirSync, mkdtempSync, renameSync, rmSync, symlinkSync, unlinkSync, wr
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
-import { ciCacheKeys, isTypecheckCacheInput, type CacheRuntime } from './ci-cache-key.mts';
+import { ciCacheKeys, compiledCiCacheKeys, isTypecheckCacheInput, type CacheRuntime } from './ci-cache-key.mts';
 
 const runtime: CacheRuntime = { node: '22.23.2', platform: 'linux', arch: 'x64', environment: {} };
 
@@ -120,4 +120,78 @@ test('a dangling internal link is explicit; an untracked target appearing cannot
   assert.throws(f.keys, /tracked target/);
   f.git('add', 'tools/missing.mts');
   assert.notEqual(f.keys().buildDigest, before.buildDigest);
+});
+
+function compilerFixture(t: TestContext) {
+  const f = fixture(t);
+  f.write('packages/core/package.json', JSON.stringify({ name: '@fixture/core', type: 'module', main: 'dist/index.js', types: 'dist/index.d.ts', scripts: { build: 'tsup' } }));
+  const tsconfig = JSON.stringify({ compilerOptions: { strict: true, module: 'ESNext', moduleResolution: 'Bundler', target: 'ES2022', types: [] }, include: ['**/*.ts'] });
+  f.write('packages/core/tsconfig.json', tsconfig);
+  f.write('packages/core/tsup.config.ts', "export default {entry: ['src/index.ts'], format: ['esm'], dts: true};");
+  f.write('packages/core/src/index.ts', 'export const core = 1;');
+  f.write('packages/core/data/records.json', '{"source":1}');
+  f.write('src/renderers/css/tsconfig.json', tsconfig);
+  f.write('src/renderers/css/tsup.config.ts', "import {fileURLToPath} from 'node:url'; export default {entry: {index:fileURLToPath(new URL('./index.ts',import.meta.url))}, tsconfig:fileURLToPath(new URL('./tsconfig.json',import.meta.url)), format:['esm'], dts:true};");
+  f.write('src/renderers/css/index.ts', "import {helper} from '../../platform/outside.js'; import {core} from '@fixture/core'; import type {Contract} from '../../../shared/contracts.mts'; export const value = helper + core; export type Output = Contract;");
+  f.write('src/platform/outside.ts', 'export const helper = 1;');
+  f.write('shared/contracts.mts', 'export interface Contract { value: number; }');
+  f.git('add', '.');
+  mkdirSync(resolve(f.root, 'node_modules/@fixture'), { recursive: true });
+  symlinkSync('../../packages/core', resolve(f.root, 'node_modules/@fixture/core'));
+  return { ...f, compiled: () => compiledCiCacheKeys({ root: f.root, runtime }) };
+}
+
+test('compiler-owned component keys survive CI/test edits and absent or restored package dist', async t => {
+  const f = compilerFixture(t), before = await f.compiled();
+  assert.deepEqual(before.fallbackReasons, [], 'cold compilation inputs must resolve without any dist');
+  f.write('tools/check-ci.test.mts', 'export const testOnly = 1;');
+  f.write('.github/workflows/test.yml', 'name: Changed CI');
+  f.git('add', '.');
+  f.write('packages/core/dist/index.js', 'export const core = 1;');
+  f.write('packages/core/dist/index.d.ts', 'export declare const core = 1;');
+  const after = await f.compiled();
+  assert.deepEqual(after.fallbackReasons, []);
+  assert.notEqual(after.buildDigest, before.buildDigest);
+  assert.equal(after.packageDigest, before.packageDigest);
+  assert.equal(after.rendererDigest, before.rendererDigest);
+});
+
+test('resolved runtime and type-only imports outside the renderer invalidate its key without an owner allowlist', async t => {
+  const f = compilerFixture(t), before = await f.compiled();
+  f.write('src/platform/outside.ts', 'export const helper = 2;');
+  const runtimeEdit = await f.compiled();
+  assert.deepEqual(runtimeEdit.fallbackReasons, []);
+  assert.equal(runtimeEdit.packageDigest, before.packageDigest);
+  assert.notEqual(runtimeEdit.rendererDigest, before.rendererDigest);
+  f.write('shared/contracts.mts', 'export interface Contract { value: string; }');
+  const typeEdit = await f.compiled();
+  assert.deepEqual(typeEdit.fallbackReasons, []);
+  assert.notEqual(typeEdit.rendererDigest, runtimeEdit.rendererDigest);
+});
+
+test('package-local generator data and outside-package source imports affect the package and downstream renderer', async t => {
+  const f = compilerFixture(t), before = await f.compiled();
+  f.write('packages/core/data/records.json', '{"source":2}');
+  const dataEdit = await f.compiled();
+  assert.notEqual(dataEdit.packageDigest, before.packageDigest);
+  assert.notEqual(dataEdit.rendererDigest, before.rendererDigest);
+  f.write('packages/core/src/index.ts', "export {helper as core} from '../../../src/platform/outside.js';");
+  const externalImport = await f.compiled();
+  f.write('src/platform/outside.ts', 'export const helper = 9;');
+  const externalEdit = await f.compiled();
+  assert.deepEqual(externalEdit.fallbackReasons, []);
+  assert.notEqual(externalEdit.packageDigest, externalImport.packageDigest);
+});
+
+test('unresolved authored imports and unaudited package build scripts explicitly fall back to the full identity', async t => {
+  const f = compilerFixture(t);
+  unlinkSync(resolve(f.root, 'src/platform/outside.ts'));
+  const unresolved = await f.compiled();
+  assert.equal(unresolved.rendererDigest, unresolved.buildDigest);
+  assert.match(unresolved.fallbackReasons.join('\n'), /Unresolved authored compiler input/);
+  f.write('src/platform/outside.ts', 'export const helper = 1;');
+  f.write('packages/core/package.json', JSON.stringify({ name: '@fixture/core', scripts: { build: 'node custom-build.mts' } }));
+  const changedBuild = await f.compiled();
+  assert.equal(changedBuild.packageDigest, changedBuild.buildDigest);
+  assert.match(changedBuild.fallbackReasons.join('\n'), /Unaudited package build/);
 });
