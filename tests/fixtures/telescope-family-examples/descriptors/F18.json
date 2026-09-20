@@ -29,7 +29,7 @@
   "members": [
     {
       "id": "archive",
-      "path": "../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
+      "path": "../../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
       "role": "provenance",
       "bytes": 3487,
       "sha256": "2fd4446342943b72ec90e839f154e02e22841075ec21ce51ac4199fa78a5b0be",
@@ -37,7 +37,7 @@
     },
     {
       "id": "product",
-      "path": "../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+      "path": "../../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
       "role": "science",
       "bytes": 4820,
       "sha256": "ab824d182a6eeb08ac4b69ad1dd90c51f12070f3c5f66579258b645f72df4c47",
@@ -47,7 +47,7 @@
   "components": [
     {
       "id": "member-archive",
-      "name": "../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
+      "name": "../../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
       "families": [
         "F18"
       ],
@@ -77,7 +77,7 @@
     },
     {
       "id": "member-product",
-      "name": "../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+      "name": "../../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
       "families": [
         "F18"
       ],
