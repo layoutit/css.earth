@@ -173,7 +173,7 @@ test('orbit settings do not change admitted names or label placement', () => {
   expect(labels()).toEqual(before);
 });
 
-test('hidden planetary annotations remove labels and circles but leave eligible orbit paths visible', () => {
+test('hidden planetary annotations remove labels, circles and their orbit paths', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   const points = [plan.focus, ...plan.bodies];
   const planets = new Set(['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']);
@@ -182,7 +182,7 @@ test('hidden planetary annotations remove labels and circles but leave eligible 
   const bodies = calculate(input).projectedBodies;
   const outer = bodies.filter(body => ['jupiter', 'saturn', 'uranus', 'neptune'].includes(points[body.index]!.id));
   expect(outer.every(body => !body.labelShown && !body.indicatorShown)).toBe(true);
-  expect(outer.every(body => body.orbitVisibility > 0 && body.segments.length > 0)).toBe(true);
+  expect(outer.every(body => body.orbitVisibility === 0 && body.segments.length === 0)).toBe(true);
 });
 
 test('highlighted moons remain identifiable when their orbits are too small to draw', () => {
@@ -218,6 +218,7 @@ test('system zoom and rotation never publish a context circle without its captio
     const frame = calculate(input);
     for (const body of frame.projectedBodies) {
       if (body.indicatorShown) expect(body.labelShown).toBe(true);
+      if (body.segments.length) expect(body.labelShown).toBe(true);
       if (body.segments.length && body.visible && body.labelShown) paths++;
       if (!body.labelShown && body.visible) crowded++;
       Object.assign(input.bodies[body.index], { labelShown: body.labelShown, labelPlacement: body.labelPlacement,
@@ -243,48 +244,51 @@ test('a body too faint for this camera to name draws no ring beside the named on
   expect(near.segments.length).toBeGreaterThan(0);
 });
 
-test('turning the view does not blink rings out with the captions that leave the frame', () => {
+test('turning the view never leaves an orbit without its admitted annotation', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   const points = [plan.focus, ...plan.bodies];
-  const captions = new Map<string, boolean>(), rings = new Map<string, boolean>();
-  let captionFlips = 0, ringFlips = 0, keptWhileUnnamed = 0;
-  // A drag tumbles the camera around the focus. Bodies cross the viewport edge and lose the
-  // captions they cannot place there; the rings they leave behind still cross the view.
+  const captions = new Map<string, boolean>();
+  let captionFlips = 0, paths = 0;
+  // A drag tumbles the camera around the focus. Bodies cross the viewport edge and lose
+  // their annotations; no unidentified context path may survive that final admission.
   for (let step = 0; step < 90; step++) {
     const angle = step * .5 * Math.PI / 180, distance = 8 * 149597870700;
     Object.assign(input.world.pose, { orientationXyzw: [Math.sin(angle / 2), 0, 0, Math.cos(angle / 2)] });
     input.world.pose.positionM = [0, -distance * Math.sin(angle), distance * Math.cos(angle)];
     for (const body of calculate(input).projectedBodies) {
-      const id = points[body.index]!.id, ring = body.segments.length > 0;
+      const id = points[body.index]!.id;
       if (captions.get(id) !== undefined && captions.get(id) !== body.labelShown) captionFlips++;
-      if (rings.get(id) !== undefined && rings.get(id) !== ring) ringFlips++;
-      if (ring && !body.labelShown) keptWhileUnnamed++;
-      captions.set(id, body.labelShown); rings.set(id, ring);
+      if (body.segments.length) {
+        paths++;
+        expect(body.labelShown, `${id}'s path must retain its annotation`).toBe(true);
+      }
+      captions.set(id, body.labelShown);
       Object.assign(input.bodies[body.index]!, { labelShown: body.labelShown, labelPlacement: body.labelPlacement,
         indicatorShown: body.indicatorShown });
     }
   }
   expect(captionFlips, 'captions come and go as their bodies cross the edge').toBeGreaterThan(0);
-  expect(keptWhileUnnamed, 'an unnamed body keeps the ring the camera crosses').toBeGreaterThan(0);
-  expect(ringFlips, 'rings do not follow the captions').toBeLessThan(captionFlips);
+  expect(paths, 'admitted bodies still draw their paths').toBeGreaterThan(0);
 });
 
-test('a ring the camera crosses keeps its path while its body is off screen', () => {
+test('an off-screen body retires its otherwise visible orbit path', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
-  // Closing in on the Sun takes body after body out of the frame while their rings still
-  // sweep the viewport. Those paths used to vanish with the names that could not be placed.
-  let offScreenPaths = 0;
+  // Closing in on the Sun takes body after body out of the frame while their projected
+  // rings can still sweep the viewport. Those unidentified paths retire with the body.
+  let offScreenBodies = 0;
   for (const distance of [1.2, 1.6, 2.2, 3, 4.5]) {
     input.world.pose.positionM = [0, 0, distance * 149597870700];
     for (const body of calculate(input).projectedBodies) {
-      if (body.visible || !body.segments.length) continue;
-      offScreenPaths++;
-      expect(body.orbitVisibility, 'an off-screen ring keeps its own fade').toBeGreaterThan(0);
+      if (body.visible || !plan.bodies[body.index - 1]?.orbit) continue;
+      offScreenBodies++;
+      expect(body.labelShown).toBe(false);
+      expect(body.orbitVisibility, 'an off-screen body publishes no unidentified ring').toBe(0);
+      expect(body.segments).toHaveLength(0);
       Object.assign(input.bodies[body.index], { labelShown: body.labelShown, labelPlacement: body.labelPlacement,
         indicatorShown: body.indicatorShown });
     }
   }
-  expect(offScreenPaths, 'rings stay while their bodies leave the frame').toBeGreaterThan(0);
+  expect(offScreenBodies, 'the fixture moves orbiting bodies outside the frame').toBeGreaterThan(0);
 });
 
 test('Earth priority keeps its ordinary scale fade and leaves the Sun at outer-space distance', () => {
@@ -299,7 +303,7 @@ test('Earth priority keeps its ordinary scale fade and leaves the Sun at outer-s
   expect(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index].id)).toEqual(['sun']);
 });
 
-test('a blocked caption keeps the paths around it instead of retiring them', () => {
+test('a blocked caption retires context paths but preserves the selected path', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   const index = [plan.focus, ...plan.bodies].findIndex(body => body.id === 'saturn');
   const saturn = plan.bodies[index - 1]!;
@@ -310,8 +314,8 @@ test('a blocked caption keeps the paths around it instead of retiring them', () 
   const frame = calculate(input);
   expect(frame.projectedBodies.every(body => !body.labelShown && !body.indicatorShown)).toBe(true);
   expect(frame.projectedBodies[index].segments.length).toBeGreaterThan(0);
-  // Panels block captions, not geometry: the same paths survive with their names withheld.
-  expect(frame.projectedBodies.filter(body => body.segments.length).map(body => body.index)).toEqual(clear);
+  expect(clear.length).toBeGreaterThan(1);
+  expect(frame.projectedBodies.filter(body => body.segments.length).map(body => body.index)).toEqual([index]);
 });
 
 test.each(['ryugu', 'bennu'])('%s remains identifiable when its category is hidden, then retires on deselection', id => {

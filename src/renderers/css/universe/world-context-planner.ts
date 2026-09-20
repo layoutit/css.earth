@@ -245,7 +245,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         if (center) activeSystems.add(center);
       }
       let anchorLineWidth = CONTEXT_LINE_WIDTH;
-      // Declutter annotations without changing physical bodies or projected orbits.
+      // Declutter annotations without changing physical bodies. Orbit geometry is
+      // projected first, then retired with any context annotation that loses admission.
       type Entry = (typeof bodies)[number];
       const projectedBodies: ProjectedBody<Entry>[] = [];
       for (const entry of publishingBodies) {
@@ -364,8 +365,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         projected.nameable = !(entry.labelSuppressed || !annotationVisible || size.width === 0 ||
             alpha <= (entry.labelShown ? .5 : .5 + ANNOTATION_ENTRY_MARGIN) ||
             (!targeted && !resolvedDisc && (!inContext || unrelatedMinor)));
-        // A presentation setting may hide the caption without hiding the body's
-        // otherwise eligible orbit. Selection/hover can still reveal the label.
+        // A presentation setting removes the body from annotation admission;
+        // final admission below retires its context orbit with the caption.
+        // Selection/hover can still reveal the complete annotation.
         if (!projected.nameable || (!targeted && entry.labelHidden)) continue;
         const gap = Math.max(5, diameter / 2, circle ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
@@ -400,12 +402,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       for (const projected of projectedBodies) {
         const { entry, x, y } = projected;
         if (!entry.orbit) continue;
-        // A path belongs to a body this camera names: one too faint, suppressed or out of context
-        // here draws no unidentified ring beside the named ones. Losing a caption slot to a
-        // neighbour or a panel is not that judgement, and neither is leaving the frame, so a
-        // contested or off-screen name keeps the ring the camera crosses instead of blinking it
-        // out while the view turns.
-        if (!projected.nameable && projected.inFrame && (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
+        // A context path belongs to the annotation that identifies its body. Final
+        // admission is authoritative: collision, a panel blocker, or leaving the frame
+        // retires the path together with its circle and caption. The selected object's
+        // own path remains available in detail views, where the surface identifies it.
+        if (!entry.labelShown && (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout
           ? orbitOutsideMarker(projected.segments, x, y, entry.indicatorRadius) : projected.segments;
