@@ -122,6 +122,24 @@ test('required lanes depend only on required classification; lint cannot manufac
  }
 });
 
+test('parallel compiler lanes cannot reserve or restore one another\'s incomplete cache',async()=>{
+ const workflow=requireRecord(parse(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8')));
+ const jobs=requireRecord(workflow.jobs);
+ const namespaces=['tsbuildinfo-app-','tsbuildinfo-tests-'];
+ for(const [index,id] of ['typecheck','typecheck-tests'].entries()){
+  const steps=requireArray(requireRecord(jobs[id]).steps).map(value=>requireRecord(value));
+  const caches=steps.filter(step=>step.with!==undefined&&requireRecord(step.with).path==='output/tsbuildinfo');
+  assert.equal(caches.length,1,id);
+  const options=requireRecord(caches[0]!.with);
+  const key=requireString(options.key),prefix=namespaces[index]!;
+  assert.ok(key.startsWith(prefix),id);
+  const restores=requireString(options['restore-keys']).trim().split('\n');
+  assert.equal(restores.length,2,id);
+  for(const restore of restores)assert.ok(restore.startsWith(prefix),`${id}: ${restore}`);
+  assert.ok(restores.every(restore=>restore.includes("hashFiles('pnpm-lock.yaml', '**/tsconfig*.json')")));
+ }
+});
+
 test('local preparation is reused only for identical prerequisites, never tests or a changed environment',()=>{
  const build={name:'build',run:'pnpm build:tools',env:{}},testStep={name:'test',run:'pnpm test:renderer',env:{}};
  const production={...build,env:{ASSET_ORIGIN:'https://example.invalid'}};

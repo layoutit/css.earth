@@ -216,10 +216,10 @@ jobs:
           # since the restored state, so a stale entry only costs a slower, still-correct run, never a wrong one.
           # This step runs before `pnpm install` so the hash below never matches a vendored tsconfig.json.
           path: output/tsbuildinfo
-          key: tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
+          key: tsbuildinfo-app-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
           restore-keys: |
-            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-
-            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-main-
+            tsbuildinfo-app-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-
+            tsbuildinfo-app-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-main-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -263,13 +263,13 @@ jobs:
           restore-keys: node-modules-
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
-          # See the Typecheck job: one .tsbuildinfo per tsc program, keyed the same way, so a warm cache here
-          # recompiles only the test/fixture/capture files that changed since the last run on this branch.
+          # Keep this lane separate: caches are immutable, so sharing the application's key lets the
+          # faster test job prevent the application from saving its own compiler state.
           path: output/tsbuildinfo
-          key: tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
+          key: tsbuildinfo-tests-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
           restore-keys: |
-            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-
-            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-main-
+            tsbuildinfo-tests-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-
+            tsbuildinfo-tests-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-main-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
