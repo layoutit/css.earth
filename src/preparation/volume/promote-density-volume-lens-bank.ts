@@ -10,8 +10,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import { sha256 } from '../../platform/sha256.mts';
-import { loadPreparedCssVolume } from '../../renderers/css/volume/loader.js';
-import { validatePreparedVolumeLenses } from '../../renderers/css/volume/prepared-volume-lenses.js';
+import { loadPreparedCssVolume, validatePreparedVolumeLenses } from '../../renderers/css/dist/universe.js';
 import type { PreparedCssVolume } from '../../renderers/css/volume/types.js';
 
 export interface DensityVolumeLensBankPromotion {

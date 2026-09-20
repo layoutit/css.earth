@@ -59,6 +59,7 @@ output/toolchains/astroquery/env/bin/python tools/objects/telescopes/examples/ed
   --out work/edenhofer-xyz/mean_and_std_xyz.crop-400-496-450-546-500-596.fits
 pnpm telescope import tools/objects/telescopes/examples/edenhofer-xyz/edenhofer-xyz.local-import.json \
   --out work/edenhofer-xyz/imported --json
+pnpm telescope outputs work/edenhofer-xyz/imported/descriptor.json
 ```
 
 The relative `path` in the specification is intentional: it is supplied by the
@@ -66,6 +67,36 @@ runtime working directory, never an author-machine path. The explicit
 `physicalContext` provides the F16 branch contract: the frame, density quantity,
 unit, frame and depth bases, HTTPS source URL, citation, license, HDU 1
 MEAN/HDU 2 standard deviation pairing, and `F16` family hint.
+
+The checked-in operation parameters carry the rest of the example through the
+public family runner. They export the native product, three orthogonal central
+slices, and a prepared volume without losing the floating-point source product
+or its paired uncertainty:
+
+```sh
+pnpm telescope family-run work/edenhofer-xyz/imported/descriptor.json physical-grid-inspect \
+  --out work/edenhofer-xyz/inspect
+pnpm telescope family-run work/edenhofer-xyz/imported/descriptor.json physical-grid-native \
+  --out work/edenhofer-xyz/native
+pnpm telescope family-run work/edenhofer-xyz/imported/descriptor.json physical-grid-slice \
+  --params tools/objects/telescopes/examples/edenhofer-xyz/slice-x.params.json \
+  --out work/edenhofer-xyz/slice-x
+pnpm telescope family-run work/edenhofer-xyz/imported/descriptor.json physical-grid-slice \
+  --params tools/objects/telescopes/examples/edenhofer-xyz/slice-y.params.json \
+  --out work/edenhofer-xyz/slice-y
+pnpm telescope family-run work/edenhofer-xyz/imported/descriptor.json physical-grid-slice \
+  --params tools/objects/telescopes/examples/edenhofer-xyz/slice-z.params.json \
+  --out work/edenhofer-xyz/slice-z
+pnpm telescope family-run work/edenhofer-xyz/imported/descriptor.json physical-grid-prepare-volume \
+  --params tools/objects/telescopes/examples/edenhofer-xyz/prepare-volume.params.json \
+  --out work/edenhofer-xyz/prepared
+pnpm telescope outputs work/edenhofer-xyz/prepared/physical-grid-volume.json
+```
+
+The final `outputs` call follows the verified wrapper to the ordinary physical
+volume object, so callers can continue with the existing `volume` handoff. The
+display transfer in `prepare-volume.params.json` is explicit and preserved as
+evidence; it changes presentation only, never the native FITS values.
 
 The offline range-assembly test uses a sparse fake 15.7 GB parent and verifies
 the data ordering, output size, WCS shift, unnumbered CUNIT preservation, and

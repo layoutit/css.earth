@@ -31,6 +31,14 @@ export async function listArtifactOutputs(path:string,structure?:string){
   }
   if(raw.schema==='cssearth-telescope-delivery@1'||raw.schema==='cssearth-telescope-delivery@2')return {...await listDeliveryOutputs(artifact,structure),artifact:'delivery'};
   if(structure!==undefined)throw new TypeError('--structure applies only to native delivery inspection');
+  if(raw.schema==='cssearth-physical-grid-volume@1'){
+    const relativePath=requireString(raw.object,'physical grid volume object');
+    if(relativePath!=='physical-volume/object.json')throw new TypeError('Physical grid volume points outside its owned output.');
+    const product=await verifiedProduct(resolve(artifact,'..','output.product.json'));
+    if(!product.record.outputs.some(output=>output.path===relativePath))throw new TypeError('Physical grid volume object is absent from its verified output closure.');
+    const next=await listArtifactOutputs(resolve(artifact,'..',relativePath));
+    return {...next,artifact:'physical-grid-volume',via:artifact};
+  }
   if(raw.schema==='cssearth-object@1'){
     const type=raw.type,target=typeof raw.id==='string'?raw.id:'physical object';
     if(type!=='point-field'&&type!=='density-volume'&&type!=='volume-lens-bank')throw new TypeError('Object is not a supported physical point field, density volume or volume lens bank');
