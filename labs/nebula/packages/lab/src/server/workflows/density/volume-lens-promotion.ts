@@ -20,6 +20,8 @@ export interface LensPromotion {
 export interface VolumeLensPromotion {
   schema: 'cssearth-volume-lens-promotion@1'; id: string; defaultLens: string; framingRadiusUnits: number;
   settingsReceiptSha256: string; lenses: LensPromotion[];
+  /** Object-owned copies of the emission and lens recipes behind a compact finite-emission export. */
+  evidence?: { emissionRecipe: string; lensRecipe: string };
 }
 const hash = (value: string | Uint8Array) => createHash('sha256').update(value).digest('hex');
 const bytes = (value: unknown) => JSON.stringify(value, null, 2) + '\n';
@@ -38,6 +40,15 @@ export function parseVolumeLensPromotion(value: VolumeLensPromotion): VolumeLens
   assert.ok(Array.isArray(value.lenses) && value.lenses.length > 0 && value.lenses.length <= 8);
   assert.equal(new Set(value.lenses.map(lens => lens.imageId)).size, value.lenses.length);
   assert.ok(value.lenses.some(lens => lens.imageId === value.defaultLens));
+  if (value.evidence !== undefined) {
+    const evidence = value.evidence as unknown as Record<string, unknown> | null;
+    assert.ok(evidence && typeof evidence === 'object' && !Array.isArray(evidence), 'Invalid promotion evidence');
+    for (const key of ['emissionRecipe', 'lensRecipe']) {
+      const path: unknown = evidence[key];
+      assert.ok(typeof path === 'string' && /^src\/objects\/[a-z][a-z0-9-]*\/source\/evidence\/[^\\]+\.json$/.test(path) && !path.split('/').includes('..'),
+        `Promotion evidence ${key} must be an object-owned evidence copy`);
+    }
+  }
   for (const lens of value.lenses) {
     assert.ok(token(lens.imageId) && sha(lens.resultId) && typeof lens.label === 'string' && lens.label && typeof lens.description === 'string');
     assert.ok(Array.isArray(lens.enabledIds) && lens.enabledIds.every(token));

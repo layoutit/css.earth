@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-nebula-reconstruction-provenance@1",
-  "method": "alignment-density-material-v1",
+  "method": "simulation-guided-finite-material@1",
   "request": {
     "schema": "cssearth-nebula-reconstruction-work@1",
-    "id": "reconstruction-e7a94397c65ac9a9aa2f2d644c0f5e47e8fa91d0b220ee24137b329ff55a47ca",
+    "id": "reconstruction-cab541ef8eac8f8ef410c5a93317a37a2a4a67b27a7d5c0a9154d59f71759559",
     "imageId": "horalek-widefield",
     "name": "Horálek · optical wide field",
-    "outputDirectory": "/Users/apresmoi/Documents/cssEarth/.local/nebula-lab/reconstructions/e7a94397c65ac9a9aa2f2d644c0f5e47e8fa91d0b220ee24137b329ff55a47ca.pending",
+    "outputDirectory": "/Users/apresmoi/Documents/cssEarth/.local/nebula-lab/reconstructions/cab541ef8eac8f8ef410c5a93317a37a2a4a67b27a7d5c0a9154d59f71759559",
     "appearance": {
       "saturation": 2.5,
       "detailStrength": 1.95,
@@ -35,13 +35,13 @@
         0
       ],
       "placement": {
-        "x": 0.6184424860783384,
-        "y": 2.3793520276221836,
+        "x": 0,
+        "y": 0,
         "z": 0,
         "rotationX": 0,
         "rotationY": 0,
-        "rotationZ": 39,
-        "scale": 3
+        "rotationZ": 0,
+        "scale": 1
       }
     },
     "frame": {
@@ -61,14 +61,14 @@
       "metersPerUnit": 30856775814913670000,
       "boundsUnits": {
         "min": [
-          -34.2494860589516,
-          -39.659852117301206,
-          -14.063476651908141
+          -5.365053401638654,
+          -5.725722957908919,
+          -3.286750705393898
         ],
         "max": [
-          28.24754056340629,
-          21.19251590973147,
-          13.190865784909581
+          8.013586896106158,
+          6.16128561310083,
+          5.969691017466296
         ]
       }
     },
@@ -139,8 +139,8 @@
           }
         },
         "provenancePin": {
-          "path": "labs/nebula/models/lmc/candidates/overlays.json",
-          "sha256": "e9dcdf2eff789af04ec5620d203037206bba544593daf7ba44a4953f60fc873a"
+          "path": "labs/nebula/models/lmc/stars/source/alignment.json",
+          "sha256": "d2213aeb75b7b0a9084a482a6baa361834360599320044c0b18e248043066d12"
         }
       }
     },
@@ -153,21 +153,49 @@
     "quality": 92
   },
   "implementation": {
-    "labs/nebula/src/reconstruction/reconstruction-worker.ts": "db0e88b06ffaa974549c953cf8408b0f6588c700a39269798c7721e26dffa96f",
-    "labs/nebula/src/reconstruction/reconstruction-geometry.ts": "ba2c453aa885b8d31003c49511541e074bad66b3a37ce105e0003c312e1f23b8",
-    "labs/nebula/src/reconstruction/registered-image.ts": "30c538650cf50e1015397ab8a35051029717aae573e3c0d160ab58a7f0631665",
-    "labs/nebula/src/reconstruction/cloud-material.ts": "988d0a3a2084c3c909d667ce7395eda8691cc3431c7cefa12077b0a2a31a27bd",
-    "labs/nebula/src/reconstruction/cloud-appearance.ts": "702cde2ff38ccce2096eb3562681f0ab8c8a9dec424ef8195c84034f4a856930",
-    "labs/nebula/src/reconstruction/cloud-detail.ts": "c375f51a5dfb7fdc0ccec067b5ae90a8300334e33d79f594af03c8468043c503",
-    "labs/nebula/src/reconstruction/reconstruction-stars.ts": "152db8623371942b3ed9acfa4679d98c2d805f50b2568cd462b8ba85db58ced8",
-    "labs/nebula/src/reconstruction/filled-products.ts": "0acb45c17fd087831c34fd8145c02d6f411b4724ac07200083cc19984b3c3cfd",
-    "labs/nebula/src/reconstruction/density-projection.ts": "19331bf2eeeaa5fda2ba8a19ddadbf1fb5a49783cc27e86e2aaf6052f62974e8",
-    "labs/nebula/src/stars/star-photometry.ts": "e89b6d4b95b5ff9b26af05912053ebb30003ffc78680cfe060da18bf598cc5ea",
-    "labs/nebula/src/cli/prepare-lmc-stars.ts": "034384b77c25b5ddbc6ea883c073fe9466bd721b6a8141024bdf63efa098827a",
-    "labs/nebula/src/alignment/overlay-wcs.ts": "b75d36a18cf51a7150469399abb0aa332fae6601bcc315e26b37fa314c9d7534",
-    "labs/nebula/src/alignment/overlay-geometry.ts": "201d738eee4431eff1b841a779093ea727dcfef0bcab46634b75ad51853eead8",
-    "src/preparation/volume/raster.ts": "35073bf454a04f85c6812421079db6db38bbb43117bf26bcbf1d0d7c4a1b915d",
-    "src/renderers/css/preparation/volume.ts": "079ef548a325ee43ec7c33aaba8a9da188d6379f6b3c301207be67ab719c35fe"
+    "labs/nebula/packages/lab/package.json": "df98f52f721b241cc3797e7750beb3ada7f67e3b5e431c21ccc0b9c15e42027b",
+    "labs/nebula/packages/lab/src/adapters/preparation/css-volume.ts": "3c18da162bd93dd04ab1e20eb5552282445aca68525a12dcefd8a3c8f90f2b19",
+    "labs/nebula/packages/lab/src/adapters/preparation/observation-prior.ts": "b606aa4dd32070f4718bdfe8fd82b143ed3b2a8b321ee55c0da6433fd83c0db7",
+    "labs/nebula/packages/lab/src/adapters/renderer/overlay-geometry.ts": "201d738eee4431eff1b841a779093ea727dcfef0bcab46634b75ad51853eead8",
+    "labs/nebula/packages/lab/src/adapters/sources/stellar-color.ts": "22159c656a18818d53b5d9c110c8edffce6a44edba845ea2e6cbcaa6bf2f512f",
+    "labs/nebula/packages/lab/src/cli/commands/prepare-lmc-stars.ts": "30345928e947fcd940af9b06da6bb27782e2c85d87fb8ce37eda8dd4c56e77b0",
+    "labs/nebula/packages/lab/src/resources/model-paths.ts": "55d1686dd43196dbe4d05846330e026f940c3901ae9cf9a9cb6a724f6fbd704f",
+    "labs/nebula/packages/lab/src/server/services/implementation.ts": "e4a0469ef1bdaab4a9aac6905e632a46e24e3fd10ddc3dbb039d43e8ac2d0e3b",
+    "labs/nebula/packages/lab/src/server/workers/density-reconstruction.ts": "1303c22c15be2c821d9d9323cf3c7b3ce542ad84337e87a08454e3fad9938ecf",
+    "labs/nebula/packages/lab/src/server/workflows/density/density-projection.ts": "14208dfbdb486d67c9669ffdbee068724c62449febfebb1a45017d0e4a930674",
+    "labs/nebula/packages/lab/src/server/workflows/density/reconstruction-stars.ts": "db63fd2cb4c90a89eb8d5677735daed72b9473f6b256e7808dc359e0f73bdb9b",
+    "labs/nebula/packages/lab/src/server/workflows/density/registered-image.ts": "3fa9fac1742ecd04b5ecd5a3d0f2acf57105ffef52459fb0e0c412a49a71b93c",
+    "labs/nebula/packages/lab/src/server/workflows/stars/lmc-star-cloud-model.ts": "2089baa85dde342329b0b6acd8db93f2b7750ceb5f96452e6bfb2a0ce36b774d",
+    "labs/nebula/packages/reconstruction/package.json": "f8efe74c8c426ddd0343919527a22d74f73bb8ac9649177ef45853fa97dacbb1",
+    "labs/nebula/packages/reconstruction/src/methods/density-prior/filled-components.ts": "59b4bab583fbac938db5cacd2d739fc75d266e737d7692bc43bf0c28d31bc211",
+    "labs/nebula/packages/reconstruction/src/methods/density-prior/filled-products.ts": "71c48c5decf9f83e508f06f22658db4067822fcc4cfb2f7844bb63bb56dda37f",
+    "labs/nebula/packages/reconstruction/src/methods/density-prior/filled-volume.ts": "8dc9521b6823befb82b11b0749324a3a71c549b606dbcec017e44fbab088780c",
+    "labs/nebula/packages/reconstruction/src/stars/joint-depth.ts": "7efced03bb04cb141dca3be9f49ad91e32bf7e7a44f57bc8f22f01841bb49a7a",
+    "labs/nebula/packages/reconstruction/src/stars/registered-realization.ts": "eda7c0dd49e020b425b3c98c6e549f37bfd5a8f617532df6246e83325def4960",
+    "labs/nebula/packages/volume-bake/package.json": "ea35448cc5de4f9c4a4811f39c7f848f247743710809f0cde717f54a580a2413",
+    "labs/nebula/packages/volume-bake/src/compact-inputs/density-grid.ts": "3c76d8505d9937ca57a68c03f49b2d7dc368171890a52762e0d005837136dd1a",
+    "labs/nebula/packages/volume-bake/src/slices/density.ts": "d20cb061a05ac88cd94ac2a38b013c9801ac0eb57f6e847f8074e684caec82f8",
+    "labs/nebula/packages/volume-bake/src/slices/material.ts": "2c063e2bc38220d67402e61bef08e42efbb8fc6b41ba27a7b26ad468a517306d",
+    "labs/nebula/packages/volume-bake/src/slices/raster.ts": "e10a2774a3613b9700a3f7d8212f24f73438e5df798a6af23f94d102319051d4",
+    "labs/nebula/packages/volume-core/package.json": "ec59a8e7e5f0dfcbab612fd0ca487c49d74f131e29e26056b334cab945669ce3",
+    "labs/nebula/packages/volume-core/src/contracts/prepared-catalogue-stars.ts": "cd08d43506c855186007c70d3528506b4363c485ab27cb91f3e8c4ebdef775ca",
+    "labs/nebula/packages/volume-core/src/contracts/volume-recipe.ts": "50fc1cfc18d60688d18b1650ef6d1353e60401c15bb132269312c2178e1d7c7c",
+    "labs/nebula/packages/volume-core/src/coordinates/density-placement.ts": "86e8190d915e393a650c9734dde189158f6de1f8c53cd874bd3ff1fd6f5e41f7",
+    "labs/nebula/packages/volume-core/src/coordinates/observation-mapping.ts": "c29c8662afa3256254789d685e82c6ee2b0dd7ae05c020627e9b999ef1121678",
+    "labs/nebula/packages/volume-core/src/coordinates/overlay-placement.ts": "be51154c8887f6108c0ec19630fe66e73e98bcf126e0f20f16680a8a1838225c",
+    "labs/nebula/packages/volume-core/src/coordinates/overlay-wcs.ts": "13fb85243e8f790a408a2a1a91d4af8a0fae79a965c452878b965a33707bebeb",
+    "labs/nebula/packages/volume-core/src/fields/cloud-density.ts": "345bf036e022f9c090cab9fb1e494d1c55fc607f4f41e70593312077180303d4",
+    "labs/nebula/packages/volume-core/src/fields/density-projection.ts": "68f4836133d564b8ae647ffc6b25a73a5d2d544518f9e7957bf7a8cedd7df5b6",
+    "labs/nebula/packages/volume-core/src/fields/observation-prior.ts": "fa2647eb0e7b66f9dcb7b01994d7dd205e24ea4418c674a510cbacd6a01da90a",
+    "labs/nebula/packages/volume-core/src/materials/cloud-appearance.ts": "702cde2ff38ccce2096eb3562681f0ab8c8a9dec424ef8195c84034f4a856930",
+    "labs/nebula/packages/volume-core/src/materials/cloud-detail.ts": "3f9f99d5b0e85c222fd9085d808175cb5bb47983a2f6f175cc008474e066afcb",
+    "labs/nebula/packages/volume-core/src/materials/display-color.ts": "f9eea286c01661157fa29ac1d6e7666d6ff10400f4d79d0b1e00f934ab02882c",
+    "labs/nebula/packages/volume-core/src/materials/star-photometry.ts": "e89b6d4b95b5ff9b26af05912053ebb30003ffc78680cfe060da18bf598cc5ea",
+    "labs/nebula/packages/volume-core/src/sampling/registered-raster.ts": "8191d21438f53ada382ed0400c4134622a68611fbc061e7034cb4da74107e86a",
+    "src/preparation/stars/color.ts": "a84062abb3a8540a4aa7fac26484c581b5536a833cfa0acbe47c949a039739ae",
+    "src/renderers/css/preparation/leaf-bounds.ts": "7f090519561a4d13dcecd87e523490429cfbc5aff8f8b902e51019d98db8569c",
+    "src/renderers/css/preparation/volume-order.ts": "491bc4d90a13f23cd5a9d60c55416fef63e5960cdbe33a286777b9438b9f19ea",
+    "src/renderers/css/preparation/volume.ts": "bc32629f7a0a2e54b8064ccc3285e09a5520fa27b76df4a2e3d3d70ca1d5326b"
   },
   "canonicalCloud": {
     "descriptor": {
@@ -228,8 +256,8 @@
         }
       },
       "provenancePin": {
-        "path": "labs/nebula/models/lmc/candidates/overlays.json",
-        "sha256": "e9dcdf2eff789af04ec5620d203037206bba544593daf7ba44a4953f60fc873a"
+        "path": "labs/nebula/models/lmc/stars/source/alignment.json",
+        "sha256": "d2213aeb75b7b0a9084a482a6baa361834360599320044c0b18e248043066d12"
       }
     }
   },
@@ -245,16 +273,5196 @@
     "removalResultId": "5b508bb10419d1927a4df35c9431aa6104f03dd385f84e5753e6378021f387e1.ec65be265d97e820466d900f3c1632a14d512c588e135b9d167c321a6d061618"
   },
   "material": {
-    "appearance": {
-      "saturation": 2.5,
-      "detailStrength": 1.95,
-      "detailScale": 96,
-      "brightness": 1.3,
-      "gamma": 1.3
+    "schema": "cssearth-component-bound-material@1",
+    "sourceId": "fde07f3a937d444e8c03461403ea365998ef4b25195f85f4b7b07b9fc0eafce2",
+    "fieldIdentity": "fdca79c478f6d397a3906d72902a976393db493cb081dd36a45b295d107b4960",
+    "method": "One source chromaticity per finite 3D emission component, mixed by its unchanged local emission.",
+    "quadrature": {
+      "rule": "midpoint",
+      "samplesPerProjectedAxis": 24,
+      "supportSigma": [
+        -4,
+        4
+      ]
     },
-    "detailMethod": "masked-local-material-contrast@1",
-    "scale": "Radius in pixels at 1024px registered width.",
-    "contrast": "Three coverage-normalized box passes; bounded local luminance ratio deepens dark structure, preserving highlight headroom. Authored RGB material only; no inferred depth."
+    "components": [
+      {
+        "id": "component-0-prior-0",
+        "rgb": [
+          236.52081733146485,
+          192.8598217206915,
+          212.80121586630563
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.7290195207261198,
+        "coloredKernelFraction": 0.7290195207261198
+      },
+      {
+        "id": "component-1-prior-0",
+        "rgb": [
+          223.1299452079804,
+          207.53672244281512,
+          240.72777505937086
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.7290193490743503,
+        "coloredKernelFraction": 0.7290193490743503
+      },
+      {
+        "id": "component-2-prior-0",
+        "rgb": [
+          245.036395113999,
+          209.385795368295,
+          218.08154125775022
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9995536224750192,
+        "coloredKernelFraction": 0.9995536224750192
+      },
+      {
+        "id": "component-3-prior-0",
+        "rgb": [
+          212.60175681788323,
+          206.22605747299318,
+          248.93867040554977
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9974149021550709,
+        "coloredKernelFraction": 0.9974149021550709
+      },
+      {
+        "id": "component-4-prior-0",
+        "rgb": [
+          254.0130103005081,
+          128.9591647465555,
+          144.29996675733716
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-5-prior-0",
+        "rgb": [
+          251.2667855198731,
+          120.08838532873226,
+          132.56439681113915
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-6-prior-0",
+        "rgb": [
+          208.32006829170848,
+          192.70390954524152,
+          242.20926219509664
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999601743499573,
+        "coloredKernelFraction": 0.9999601743499573
+      },
+      {
+        "id": "component-7-prior-0",
+        "rgb": [
+          209.31870262670955,
+          182.63308674851146,
+          234.05316457444155
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9563135007677399,
+        "coloredKernelFraction": 0.9563135007677399
+      },
+      {
+        "id": "component-8-prior-0",
+        "rgb": [
+          249.62392250401476,
+          150.3141384963321,
+          170.9393044835691
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-9-prior-0",
+        "rgb": [
+          253.76768177725393,
+          125.27882911193393,
+          136.58927038078576
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-10-prior-0",
+        "rgb": [
+          253.32982282133793,
+          129.94361952255582,
+          147.3790304303973
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-11-prior-0",
+        "rgb": [
+          250.34437804301015,
+          181.79380308864202,
+          192.79734139790264
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-12-prior-0",
+        "rgb": [
+          254.76734170075508,
+          151.69522597643106,
+          161.29752612011004
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-13-prior-0",
+        "rgb": [
+          254.9473663253238,
+          153.75454157577937,
+          160.39040474030136
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-14-prior-0",
+        "rgb": [
+          253.73842386510407,
+          153.00072737811857,
+          170.98079407799028
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-15-prior-0",
+        "rgb": [
+          253.82962285825246,
+          128.4715643741953,
+          139.10420660285993
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-16-prior-0",
+        "rgb": [
+          229.5304033982328,
+          226.15394896956363,
+          243.43958834916967
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999729045031305,
+        "coloredKernelFraction": 0.9999729045031305
+      },
+      {
+        "id": "component-17-prior-0",
+        "rgb": [
+          252.26954162199914,
+          172.1055106493033,
+          196.7131745882671
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-18-prior-0",
+        "rgb": [
+          232.25093295593152,
+          230.5194099586499,
+          248.3783887919441
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.5088181684361094,
+        "coloredKernelFraction": 0.5088181684361094
+      },
+      {
+        "id": "component-19-prior-0",
+        "rgb": [
+          246.64863876493231,
+          168.4637002681155,
+          198.33830073056404
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-20-prior-0",
+        "rgb": [
+          248.55904834151102,
+          204.26329509890644,
+          213.02344091649047
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-21-prior-0",
+        "rgb": [
+          254.14597952150706,
+          168.55438805812096,
+          174.6892029187805
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-22-prior-0",
+        "rgb": [
+          230.88557991771935,
+          220.0785229249682,
+          240.02117112531738
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999506763906099,
+        "coloredKernelFraction": 0.9999506763906099
+      },
+      {
+        "id": "component-23-prior-0",
+        "rgb": [
+          242.20792470388483,
+          236.0626800114777,
+          241.2320329713514
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9998721349271503,
+        "coloredKernelFraction": 0.9998721349271503
+      },
+      {
+        "id": "component-24-prior-0",
+        "rgb": [
+          254.9118340674011,
+          172.29535740062263,
+          172.0904041636569
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-25-prior-0",
+        "rgb": [
+          243.51106308334613,
+          140.65317870655196,
+          174.9901705805712
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-26-prior-0",
+        "rgb": [
+          254.98831769171994,
+          114.75030709372314,
+          130.65855871790518
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-27-prior-0",
+        "rgb": [
+          231.03947743047658,
+          198.09589981889266,
+          233.99345803437748
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-28-prior-0",
+        "rgb": [
+          143.2847466245639,
+          156.4952002369962,
+          252.48691359392228
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-29-prior-0",
+        "rgb": [
+          234.96504961784046,
+          145.72746442831343,
+          186.2194579599349
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-30-prior-0",
+        "rgb": [
+          196.96133960648763,
+          168.1123460464546,
+          241.01681735556195
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-31-prior-0",
+        "rgb": [
+          254.4916201817525,
+          173.8215421909538,
+          178.62432669489078
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-32-prior-0",
+        "rgb": [
+          254.99999999990604,
+          141.4624714989749,
+          150.07526324158417
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-33-prior-0",
+        "rgb": [
+          248.428743002314,
+          235.62764535227225,
+          234.2026017865904
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9995536220316906,
+        "coloredKernelFraction": 0.9995536220316906
+      },
+      {
+        "id": "component-34-prior-0",
+        "rgb": [
+          243.37165010399022,
+          199.2681588508605,
+          217.84591554679048
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-35-prior-0",
+        "rgb": [
+          254.86999997264888,
+          124.98112842940597,
+          135.19049097717394
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-36-prior-0",
+        "rgb": [
+          246.44399674321335,
+          195.44522249300638,
+          222.53356629012796
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-37-prior-0",
+        "rgb": [
+          255,
+          138.86152893794392,
+          144.96667685541092
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-38-prior-0",
+        "rgb": [
+          254.99988116825477,
+          150.19065116881907,
+          153.69976564184628
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-39-prior-0",
+        "rgb": [
+          239.33822817431331,
+          165.69800808336268,
+          202.54666250525335
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-40-prior-0",
+        "rgb": [
+          252.50328033675095,
+          138.81105519215794,
+          156.81066739094467
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-41-prior-0",
+        "rgb": [
+          227.07479164505267,
+          227.06977477129672,
+          252.81207523781796
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.529623514022081,
+        "coloredKernelFraction": 0.529623514022081
+      },
+      {
+        "id": "component-42-prior-0",
+        "rgb": [
+          252.5548714759939,
+          176.69921124589453,
+          187.01058682239787
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.839076329450433,
+        "coloredKernelFraction": 0.839076329450433
+      },
+      {
+        "id": "component-43-prior-0",
+        "rgb": [
+          245.6979754140944,
+          172.4345958029754,
+          182.0777334855923
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-44-prior-0",
+        "rgb": [
+          241.16443297117078,
+          232.3951619714287,
+          241.31983722339993
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999999636614546,
+        "coloredKernelFraction": 0.9999999636614546
+      },
+      {
+        "id": "component-45-prior-0",
+        "rgb": [
+          253.21458739719623,
+          233.82712561760792,
+          222.28272894669624
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999999998063962,
+        "coloredKernelFraction": 0.9999999998063962
+      },
+      {
+        "id": "component-46-prior-0",
+        "rgb": [
+          254.83342754157766,
+          165.57780294079242,
+          173.54016386513564
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-47-prior-0",
+        "rgb": [
+          254.9800292485347,
+          193.02605657351884,
+          193.85251422081106
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-48-prior-0",
+        "rgb": [
+          187.99941139403734,
+          166.4837292404296,
+          243.90860637201015
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-49-prior-0",
+        "rgb": [
+          254.94432468625047,
+          115.1865582865227,
+          116.67554797485636
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-50-prior-0",
+        "rgb": [
+          254.89231489551116,
+          112.7043957239456,
+          118.6812161528814
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-51-prior-0",
+        "rgb": [
+          152.66861003003356,
+          176.3168800413624,
+          254.9999999853662
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-52-prior-0",
+        "rgb": [
+          253.5176543960212,
+          155.2582870769458,
+          171.3241576132111
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-53-prior-0",
+        "rgb": [
+          253.54533462500387,
+          122.05998598950104,
+          133.6032980888808
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-54-prior-0",
+        "rgb": [
+          252.91949359380243,
+          113.04312971528815,
+          133.07611405360493
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-55-prior-0",
+        "rgb": [
+          199.4993732517479,
+          215.0820655183552,
+          254.88312978029325
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.5576773705443084,
+        "coloredKernelFraction": 0.5576773705443084
+      },
+      {
+        "id": "component-56-prior-0",
+        "rgb": [
+          231.7528797761833,
+          204.13136213284145,
+          230.27235435265914
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-57-prior-0",
+        "rgb": [
+          254.9979065171885,
+          175.37933550696692,
+          178.22869096881857
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-58-prior-0",
+        "rgb": [
+          250.5045236574179,
+          197.37623771832162,
+          210.2264202844366
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-59-prior-0",
+        "rgb": [
+          227.29543203167202,
+          208.56142617820822,
+          241.91741456363135
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-60-prior-0",
+        "rgb": [
+          254.18254561606307,
+          189.63476176945255,
+          191.6921711811311
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-61-prior-0",
+        "rgb": [
+          253.34369955787588,
+          187.0976076862172,
+          194.4476172289012
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-62-prior-0",
+        "rgb": [
+          251.87047349248624,
+          221.09839844803372,
+          216.5374243096031
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999987799170557,
+        "coloredKernelFraction": 0.9999987799170557
+      },
+      {
+        "id": "component-63-prior-0",
+        "rgb": [
+          241.90540318947114,
+          212.85101323369972,
+          235.93736885899904
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-64-prior-0",
+        "rgb": [
+          254.26163406845833,
+          143.6317852419098,
+          160.2137136621988
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-65-prior-0",
+        "rgb": [
+          253.2024297147543,
+          195.76347903495017,
+          208.7938343833747
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-66-prior-0",
+        "rgb": [
+          228.87235220916725,
+          209.31538123926595,
+          237.86219587334372
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-67-prior-0",
+        "rgb": [
+          157.37662764817009,
+          165.97183930079663,
+          247.02523432823628
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-68-prior-0",
+        "rgb": [
+          145.7604797934927,
+          166.23596752406402,
+          254.95874619615546
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-69-prior-0",
+        "rgb": [
+          254.9999998076191,
+          150.6575782677025,
+          159.77582288682282
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-70-prior-0",
+        "rgb": [
+          180.6913665221847,
+          178.6743105305838,
+          249.37188922011617
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-71-prior-0",
+        "rgb": [
+          205.6949219043054,
+          223.9572179756766,
+          253.30191124336156
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-72-prior-0",
+        "rgb": [
+          254.39799353174195,
+          160.5232744972019,
+          163.77136021330682
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-73-prior-0",
+        "rgb": [
+          253.71599305332472,
+          181.50781278271072,
+          187.11849208059624
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-74-prior-0",
+        "rgb": [
+          254.73799982034072,
+          172.2475898589938,
+          178.47072229276574
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-75-prior-0",
+        "rgb": [
+          254.88726396494278,
+          152.65060464843958,
+          155.21542449360012
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-76-prior-0",
+        "rgb": [
+          254.99530109846165,
+          156.14005122124192,
+          163.5621412192262
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-77-prior-0",
+        "rgb": [
+          254.5733901239398,
+          195.5517766800709,
+          202.5204650732065
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-78-prior-0",
+        "rgb": [
+          254.2625891498365,
+          134.70383825004558,
+          158.360469750028
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-79-prior-0",
+        "rgb": [
+          254.94259136870124,
+          200.66617711922262,
+          198.5388216712795
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-80-prior-0",
+        "rgb": [
+          252.34160913882923,
+          196.21289101850624,
+          200.1800014834172
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-81-prior-0",
+        "rgb": [
+          254.99833105611683,
+          137.09032733774228,
+          147.48441285281055
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-82-prior-0",
+        "rgb": [
+          238.04241572026925,
+          198.73557894401716,
+          228.46965572540194
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-83-prior-0",
+        "rgb": [
+          139.39885105612535,
+          171.45523232179903,
+          254.31024062440503
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-84-prior-0",
+        "rgb": [
+          254.3146165272745,
+          184.13587664051568,
+          191.86118901008112
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-85-prior-0",
+        "rgb": [
+          252.4101153273818,
+          143.3123689017411,
+          165.86783698980082
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-86-prior-0",
+        "rgb": [
+          224.4352628523842,
+          188.7419901841917,
+          237.33364202813704
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9684264591518428,
+        "coloredKernelFraction": 0.9684264591518428
+      },
+      {
+        "id": "component-87-prior-0",
+        "rgb": [
+          252.52329801642512,
+          241.63059218362983,
+          238.47809710516924
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-88-prior-0",
+        "rgb": [
+          254.98626650497073,
+          104.687626240387,
+          110.61774973853126
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-89-prior-0",
+        "rgb": [
+          253.89583157745503,
+          206.32232027690415,
+          201.34746013813194
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-90-prior-0",
+        "rgb": [
+          252.2890198105588,
+          182.8377122860664,
+          190.82409656581333
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.5914121639604601,
+        "coloredKernelFraction": 0.5914121639604601
+      },
+      {
+        "id": "component-91-prior-0",
+        "rgb": [
+          254.93906246499557,
+          105.96447781461544,
+          118.59103523701638
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-92-prior-0",
+        "rgb": [
+          254.78097641182345,
+          169.5275744808394,
+          170.568763160494
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-93-prior-0",
+        "rgb": [
+          246.43831803850628,
+          202.0462229987818,
+          224.93899756526974
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-94-prior-0",
+        "rgb": [
+          141.9225632809876,
+          163.47507131096805,
+          254.9539636056359
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-95-prior-0",
+        "rgb": [
+          248.5907849278917,
+          207.64649907175266,
+          216.62777836066957
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-96-prior-0",
+        "rgb": [
+          254.6836148988957,
+          206.62486753324694,
+          199.36823856765898
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-97-prior-0",
+        "rgb": [
+          254.99980503915853,
+          172.84953664517653,
+          170.49077109960766
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-98-prior-0",
+        "rgb": [
+          158.4403841480661,
+          178.15727676188416,
+          253.539086602802
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-99-prior-0",
+        "rgb": [
+          254.88798201203792,
+          201.8155282909609,
+          200.5632174621569
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-100-prior-0",
+        "rgb": [
+          254.61171884712846,
+          181.00155952219905,
+          190.23103468832224
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-101-prior-0",
+        "rgb": [
+          254.9998264511404,
+          102.20228526937048,
+          105.37957961095917
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-102-prior-0",
+        "rgb": [
+          254.99936225336938,
+          170.5945691757324,
+          163.96283350877889
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-103-prior-0",
+        "rgb": [
+          252.24026014025492,
+          137.1232832270033,
+          149.87127747680327
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999992333385507,
+        "coloredKernelFraction": 0.9999992333385507
+      },
+      {
+        "id": "component-104-prior-0",
+        "rgb": [
+          254.9992302200852,
+          155.6639567890804,
+          166.51993946943205
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9979717102489668,
+        "coloredKernelFraction": 0.9979717102489668
+      },
+      {
+        "id": "component-105-prior-0",
+        "rgb": [
+          254.10918861311123,
+          150.61893135064466,
+          156.34062230653413
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-106-prior-0",
+        "rgb": [
+          254.9999887564805,
+          158.5827200440067,
+          164.9128660329052
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-107-prior-0",
+        "rgb": [
+          253.05286282920753,
+          199.33679692007982,
+          209.3099919046198
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-108-prior-0",
+        "rgb": [
+          254.997890795464,
+          125.09966073347681,
+          108.35617852390531
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-109-prior-0",
+        "rgb": [
+          242.84776262274966,
+          213.22382060713457,
+          231.50778108466474
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-110-prior-0",
+        "rgb": [
+          255,
+          143.23245532380787,
+          139.5034718342446
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-111-prior-0",
+        "rgb": [
+          254.39119173819734,
+          144.99399953269426,
+          155.45834021227307
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.999999999992362,
+        "coloredKernelFraction": 0.999999999992362
+      },
+      {
+        "id": "component-112-prior-0",
+        "rgb": [
+          252.24703271486925,
+          119.58531398222941,
+          135.32457945306209
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-113-prior-0",
+        "rgb": [
+          252.02147058265732,
+          199.33284849753161,
+          209.6431926965698
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-114-prior-0",
+        "rgb": [
+          210.77030327606386,
+          217.37583057741585,
+          252.250820887692
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-115-prior-0",
+        "rgb": [
+          254.88135676923986,
+          172.72091688654618,
+          166.62522105077343
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-116-prior-0",
+        "rgb": [
+          254.97955339399277,
+          165.54634742279825,
+          169.1745208616368
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-117-prior-0",
+        "rgb": [
+          225.58232274492332,
+          212.47317881036346,
+          246.9739408080367
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999875214948137,
+        "coloredKernelFraction": 0.9999875214948137
+      },
+      {
+        "id": "component-118-prior-0",
+        "rgb": [
+          254.68292594301107,
+          144.02273938781724,
+          154.233071942088
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999483501433871,
+        "coloredKernelFraction": 0.9999483501433871
+      },
+      {
+        "id": "component-119-prior-0",
+        "rgb": [
+          254.82983698096643,
+          112.67517805709868,
+          119.58713423307206
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999733000922746,
+        "coloredKernelFraction": 0.9999733000922746
+      },
+      {
+        "id": "component-120-prior-0",
+        "rgb": [
+          254.9976589366962,
+          151.14524993870054,
+          153.4124292224057
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-121-prior-0",
+        "rgb": [
+          205.53935665893727,
+          214.5325737206232,
+          254.46836412326627
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-122-prior-0",
+        "rgb": [
+          191.58801228163253,
+          189.2713347779685,
+          254.9288506353963
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-123-prior-0",
+        "rgb": [
+          254.87637932568188,
+          130.8219270986692,
+          141.9085819693977
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-124-prior-0",
+        "rgb": [
+          224.46034702315157,
+          161.8441320420029,
+          215.3930659115502
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-125-prior-0",
+        "rgb": [
+          252.8785779411524,
+          162.9514374944515,
+          173.04060046663977
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-126-prior-0",
+        "rgb": [
+          253.6155589325917,
+          155.692102480079,
+          175.23733255417034
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-127-prior-0",
+        "rgb": [
+          254.76489897195992,
+          177.88401971633766,
+          181.07349992412864
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-128-prior-0",
+        "rgb": [
+          229.1104842068509,
+          217.5837581414133,
+          249.3447941527604
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9995536225919256,
+        "coloredKernelFraction": 0.9995536225919256
+      },
+      {
+        "id": "component-129-prior-0",
+        "rgb": [
+          254.83830393770936,
+          205.7858765003556,
+          204.38308296241902
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-130-prior-0",
+        "rgb": [
+          239.16887957828413,
+          226.27289641908578,
+          231.920611996664
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9635083059097428,
+        "coloredKernelFraction": 0.9635083059097428
+      },
+      {
+        "id": "component-131-prior-0",
+        "rgb": [
+          254.615163621304,
+          162.52223971940475,
+          169.61415922633324
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-132-prior-0",
+        "rgb": [
+          252.33541337343735,
+          195.23192129495624,
+          205.5333463975591
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-133-prior-0",
+        "rgb": [
+          254.99908739182462,
+          142.85497714157282,
+          140.25072903921136
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-134-prior-0",
+        "rgb": [
+          254.99110780689054,
+          151.75545258425004,
+          154.7470409945077
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9928582047445198,
+        "coloredKernelFraction": 0.9928582047445198
+      },
+      {
+        "id": "component-135-prior-0",
+        "rgb": [
+          254.9866052911559,
+          169.1679495937779,
+          171.30783313149104
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-136-prior-0",
+        "rgb": [
+          254.16683798757327,
+          127.16688739492113,
+          136.19550654488782
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-137-prior-0",
+        "rgb": [
+          113.46891895454765,
+          144.57780863669694,
+          254.9999901483868
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-138-prior-0",
+        "rgb": [
+          164.31671609422878,
+          174.86834028809605,
+          253.91322907848507
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999817321814995,
+        "coloredKernelFraction": 0.9999817321814995
+      },
+      {
+        "id": "component-139-prior-0",
+        "rgb": [
+          187.81489187964726,
+          210.47574396669876,
+          254.90471336070092
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-140-prior-0",
+        "rgb": [
+          142.6266135618064,
+          162.32886653767073,
+          254.90653673862718
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-141-prior-0",
+        "rgb": [
+          255,
+          137.56015574708886,
+          115.24562590565584
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-142-prior-0",
+        "rgb": [
+          215.65428027791629,
+          226.3696301933003,
+          254.99109939770682
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.591464587953539,
+        "coloredKernelFraction": 0.591464587953539
+      },
+      {
+        "id": "component-143-prior-0",
+        "rgb": [
+          254.82796414384063,
+          168.4753561129193,
+          173.8580559391426
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-144-prior-0",
+        "rgb": [
+          223.48939143138546,
+          197.85445034076463,
+          249.5464992135131
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-145-prior-0",
+        "rgb": [
+          254.99147113475075,
+          149.91797190028498,
+          152.08430786258975
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-146-prior-0",
+        "rgb": [
+          246.66620447195965,
+          196.47781165866337,
+          228.60886523157112
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-147-prior-0",
+        "rgb": [
+          254.89879104854833,
+          111.04908261535687,
+          124.57141549825378
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-148-prior-0",
+        "rgb": [
+          249.92643663804037,
+          198.74265523876517,
+          209.48493990044855
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.7075535461836409,
+        "coloredKernelFraction": 0.7075535461836409
+      },
+      {
+        "id": "component-149-prior-0",
+        "rgb": [
+          232.46492686891685,
+          226.19435409847287,
+          247.770766611201
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-150-prior-0",
+        "rgb": [
+          253.77106332957445,
+          201.15120128408512,
+          205.57738597016964
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.5576162804193959,
+        "coloredKernelFraction": 0.5576162804193959
+      },
+      {
+        "id": "component-151-prior-0",
+        "rgb": [
+          247.46345776687588,
+          169.38102563094074,
+          211.39840965190922
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-152-prior-0",
+        "rgb": [
+          254.87460997676595,
+          225.65030689978767,
+          222.29372465334876
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-153-prior-0",
+        "rgb": [
+          254.89269172245605,
+          106.63259681020044,
+          115.33705068122154
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-154-prior-0",
+        "rgb": [
+          215.7501045110724,
+          189.72727271305212,
+          245.2087797496061
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-155-prior-0",
+        "rgb": [
+          254.99654383485353,
+          162.09529481687449,
+          160.53388533187118
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-156-prior-0",
+        "rgb": [
+          245.97894405150072,
+          177.65290772643897,
+          203.3435639101076
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-157-prior-0",
+        "rgb": [
+          254.98187754877358,
+          177.21234531112785,
+          182.20969139955014
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-158-prior-0",
+        "rgb": [
+          254.91321791805308,
+          127.7698773324818,
+          135.07476144091996
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-159-prior-0",
+        "rgb": [
+          254.90743994095885,
+          161.75234139943527,
+          167.8696612237841
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-160-prior-0",
+        "rgb": [
+          210.14473519785142,
+          211.50457855314116,
+          250.9327782667218
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999907341341706,
+        "coloredKernelFraction": 0.9999907341341706
+      },
+      {
+        "id": "component-161-prior-0",
+        "rgb": [
+          249.38839367454366,
+          227.8919069456222,
+          225.9311161086259
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.999999999837107,
+        "coloredKernelFraction": 0.999999999837107
+      },
+      {
+        "id": "component-162-prior-0",
+        "rgb": [
+          254.7623635984206,
+          101.3301481835168,
+          113.20601867416713
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-163-prior-0",
+        "rgb": [
+          254.83428297136834,
+          139.16418951390656,
+          146.17739118033927
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-164-prior-0",
+        "rgb": [
+          254.9923157143135,
+          181.52211114627733,
+          167.26449107760757
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-165-prior-0",
+        "rgb": [
+          206.31066751469874,
+          214.72307781608623,
+          254.08501581816762
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-166-prior-0",
+        "rgb": [
+          202.52972480189703,
+          181.00678765719184,
+          251.66178689899522
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-167-prior-0",
+        "rgb": [
+          251.8856398580891,
+          206.55058153861023,
+          216.8486030938144
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-168-prior-0",
+        "rgb": [
+          254.57781973055947,
+          180.46416009735825,
+          185.21629292477897
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-169-prior-0",
+        "rgb": [
+          253.39678506206982,
+          195.65477231452078,
+          203.84430713107034
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-170-prior-0",
+        "rgb": [
+          150.84401358849286,
+          161.632867025473,
+          253.82689514427634
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-171-prior-0",
+        "rgb": [
+          140.3951807598143,
+          168.5482521440349,
+          254.0418883141918
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999999999616512,
+        "coloredKernelFraction": 0.9999999999616512
+      },
+      {
+        "id": "component-172-prior-0",
+        "rgb": [
+          210.44393645736884,
+          213.51393588208262,
+          254.65041879513657
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-173-prior-0",
+        "rgb": [
+          203.0679651786699,
+          205.96388430596176,
+          253.03463678896532
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-174-prior-0",
+        "rgb": [
+          129.3774103449927,
+          154.92141991429176,
+          255
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-175-prior-0",
+        "rgb": [
+          254.99807141831002,
+          132.81255454310661,
+          116.93630784690376
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-176-prior-0",
+        "rgb": [
+          254.92477362802575,
+          118.08164110486551,
+          123.48892573841749
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-177-prior-0",
+        "rgb": [
+          255,
+          135.4035885483857,
+          142.67803110134648
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-178-prior-0",
+        "rgb": [
+          254.9178945334865,
+          164.8746704985714,
+          169.3274776205761
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-179-prior-0",
+        "rgb": [
+          253.4560202736355,
+          181.29659236045066,
+          200.7454369874533
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-180-prior-0",
+        "rgb": [
+          254.70557085189387,
+          159.02797999591002,
+          164.73951806844323
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-181-prior-0",
+        "rgb": [
+          254.99994303355555,
+          106.80597315996832,
+          111.39519493876446
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-182-prior-0",
+        "rgb": [
+          245.63069040764663,
+          165.3147325066625,
+          211.76713001301457
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-183-prior-0",
+        "rgb": [
+          153.36469027904192,
+          167.32713764967147,
+          254.9943677631791
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-184-prior-0",
+        "rgb": [
+          254.62857401984428,
+          181.50625130481697,
+          199.33262590429752
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-185-prior-0",
+        "rgb": [
+          220.34592149082502,
+          226.9041553292815,
+          252.9975120628706
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-186-prior-0",
+        "rgb": [
+          255,
+          149.6485280681274,
+          150.3042983790545
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-187-prior-0",
+        "rgb": [
+          247.76564020605164,
+          153.99463308429148,
+          175.13916970493102
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-188-prior-0",
+        "rgb": [
+          253.74123822142315,
+          150.15063834150496,
+          167.730317091078
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-189-prior-0",
+        "rgb": [
+          239.63574922200874,
+          206.78705344042572,
+          231.0905679476852
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-190-prior-0",
+        "rgb": [
+          253.9693367400023,
+          153.87908714099189,
+          173.34707570379558
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-191-prior-0",
+        "rgb": [
+          249.75135659863156,
+          138.99371047625294,
+          157.4872264396072
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9212778102695829,
+        "coloredKernelFraction": 0.9212778102695829
+      },
+      {
+        "id": "component-192-prior-0",
+        "rgb": [
+          194.27147744527204,
+          184.11134959281168,
+          244.39419584772867
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.963502750290653,
+        "coloredKernelFraction": 0.963502750290653
+      },
+      {
+        "id": "component-193-prior-0",
+        "rgb": [
+          237.7814875878003,
+          205.11205982472077,
+          238.51772068040825
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-194-prior-0",
+        "rgb": [
+          250.01541809020554,
+          120.38534622280353,
+          150.34019126640695
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-195-prior-0",
+        "rgb": [
+          254.99949632781247,
+          157.48473931144486,
+          169.2755550301894
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-196-prior-0",
+        "rgb": [
+          254.66796474579448,
+          197.65897492654213,
+          217.95533799909683
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-197-prior-0",
+        "rgb": [
+          239.73643458744485,
+          209.16385473674688,
+          238.06196531247494
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-198-prior-0",
+        "rgb": [
+          254.79779482017773,
+          205.58454952794986,
+          205.42708612230112
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-199-prior-0",
+        "rgb": [
+          254.90017224032968,
+          155.5242529563117,
+          161.38941487172144
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-200-prior-0",
+        "rgb": [
+          249.06701059528243,
+          246.80534615216988,
+          248.63253620361732
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-201-prior-0",
+        "rgb": [
+          254.0078235000884,
+          164.85709062356386,
+          181.13299529377682
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-202-prior-0",
+        "rgb": [
+          254.9623940411609,
+          199.25794392865015,
+          192.54946111656406
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-203-prior-0",
+        "rgb": [
+          254.99999940017065,
+          148.18660098187448,
+          144.1428413901648
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-204-prior-0",
+        "rgb": [
+          254.1402461118141,
+          145.17405353994877,
+          156.00987851325868
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-205-prior-0",
+        "rgb": [
+          254.28254207793913,
+          188.19985314204558,
+          197.25987176926418
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-206-prior-0",
+        "rgb": [
+          254.9996547335914,
+          118.15998559687564,
+          126.5327205551887
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-207-prior-0",
+        "rgb": [
+          199.38253770211273,
+          213.3541016909122,
+          252.75701386458675
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-208-prior-0",
+        "rgb": [
+          254.90110058700463,
+          128.4083315545741,
+          143.05870820996296
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-209-prior-0",
+        "rgb": [
+          214.0016863996284,
+          180.02000432708053,
+          230.20929575323956
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-210-prior-0",
+        "rgb": [
+          254.99869883942713,
+          212.4119315862659,
+          214.06293152759406
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-211-prior-0",
+        "rgb": [
+          254.68964273123171,
+          135.41580731903642,
+          143.7815409729461
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-212-prior-0",
+        "rgb": [
+          188.70259411705237,
+          183.0839369698357,
+          251.3286057776962
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-213-prior-0",
+        "rgb": [
+          252.26642125545507,
+          158.50403417467354,
+          195.44361077263054
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-214-prior-0",
+        "rgb": [
+          254.81559371232348,
+          160.90510833177407,
+          170.4932053358954
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-215-prior-0",
+        "rgb": [
+          252.88464368053656,
+          225.9909084779907,
+          236.0758417616132
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-216-prior-0",
+        "rgb": [
+          254.48593433786127,
+          221.95558731363943,
+          218.69409857370943
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-217-prior-0",
+        "rgb": [
+          254.6408406165589,
+          206.34117697311657,
+          212.8146229876484
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-218-prior-0",
+        "rgb": [
+          254.25648530405022,
+          212.73358755262592,
+          207.28309711854575
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-219-prior-0",
+        "rgb": [
+          254.98574873074773,
+          187.97135573831883,
+          186.85393993975637
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-220-prior-0",
+        "rgb": [
+          254.9999910120229,
+          178.88908286695283,
+          180.46964407747828
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-221-prior-0",
+        "rgb": [
+          203.43506876161968,
+          215.99261503513,
+          254.46328302457138
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999999999998535,
+        "coloredKernelFraction": 0.9999999999998535
+      },
+      {
+        "id": "component-222-prior-0",
+        "rgb": [
+          253.82603635362648,
+          129.40758913389251,
+          147.73345464931327
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-223-prior-0",
+        "rgb": [
+          168.53257995601783,
+          189.86427115862782,
+          254.83358584100878
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-224-prior-0",
+        "rgb": [
+          254.66316699801115,
+          138.9793022270633,
+          152.09216068543137
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-225-prior-0",
+        "rgb": [
+          253.53986890014164,
+          211.72210468601705,
+          221.71638506622088
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-226-prior-0",
+        "rgb": [
+          220.54534042877157,
+          226.72013106304965,
+          253.91737181031007
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.5296321827854669,
+        "coloredKernelFraction": 0.5296321827854669
+      },
+      {
+        "id": "component-227-prior-0",
+        "rgb": [
+          188.482120456844,
+          188.4121355201214,
+          254.46984985482965
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-228-prior-0",
+        "rgb": [
+          252.7033270621796,
+          228.0038027196328,
+          226.6772640778291
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-229-prior-0",
+        "rgb": [
+          252.66660887400147,
+          230.66755164504283,
+          236.45540583230942
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-230-prior-0",
+        "rgb": [
+          254.9999705042895,
+          165.82946056373058,
+          153.18228298042953
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-231-prior-0",
+        "rgb": [
+          252.6277584917641,
+          147.22478698918812,
+          165.2790471256394
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-232-prior-0",
+        "rgb": [
+          254.99999251277518,
+          140.97504843180204,
+          150.34548994409226
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999969788392324,
+        "coloredKernelFraction": 0.9999969788392324
+      },
+      {
+        "id": "component-233-prior-0",
+        "rgb": [
+          255,
+          132.17052267337104,
+          125.18644331861756
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-234-prior-0",
+        "rgb": [
+          254.97909450928287,
+          166.0747755300734,
+          171.9088313527618
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-235-prior-0",
+        "rgb": [
+          254.9246261594686,
+          108.14428301057124,
+          124.01331757660212
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-236-prior-0",
+        "rgb": [
+          231.82791759952465,
+          235.35809611041748,
+          254.5136809016592
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.5911518007636031,
+        "coloredKernelFraction": 0.5911518007636031
+      },
+      {
+        "id": "component-237-prior-0",
+        "rgb": [
+          180.58144847751583,
+          177.71764240650526,
+          248.31384579230186
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-238-prior-0",
+        "rgb": [
+          255,
+          164.56642718031023,
+          158.40631589827916
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-239-prior-0",
+        "rgb": [
+          251.71942233293623,
+          215.33407249955383,
+          228.78006790527635
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-240-prior-0",
+        "rgb": [
+          254.93465805311388,
+          140.32369273137596,
+          150.95515115456755
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-241-prior-0",
+        "rgb": [
+          252.5276424027932,
+          235.67446323714654,
+          237.30812025690864
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-242-prior-0",
+        "rgb": [
+          253.9453297051779,
+          191.274286460827,
+          210.359542615202
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-243-prior-0",
+        "rgb": [
+          211.33767926425827,
+          208.57958501064184,
+          251.59556814244326
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-244-prior-0",
+        "rgb": [
+          246.46080751069985,
+          183.50407302640068,
+          212.18681734790087
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-245-prior-0",
+        "rgb": [
+          127.1538663982258,
+          154.3120135041732,
+          255
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-246-prior-0",
+        "rgb": [
+          254.9999470708587,
+          186.5863002949737,
+          176.4509482986737
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-247-prior-0",
+        "rgb": [
+          254.53727202846474,
+          120.43676536742018,
+          138.8719901801737
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-248-prior-0",
+        "rgb": [
+          254.99995468053694,
+          156.8044308191322,
+          155.70721805323302
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-249-prior-0",
+        "rgb": [
+          254.99971868661746,
+          199.943925039203,
+          197.1411010383784
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-250-prior-0",
+        "rgb": [
+          250.7907829275096,
+          170.52771167541368,
+          198.45892800828037
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-251-prior-0",
+        "rgb": [
+          199.94705914051406,
+          204.6889637817945,
+          248.47636672597196
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.8442048488617678,
+        "coloredKernelFraction": 0.8442048488617678
+      },
+      {
+        "id": "component-252-prior-0",
+        "rgb": [
+          254.99999174494081,
+          147.01070927044842,
+          142.3655797365936
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-253-prior-0",
+        "rgb": [
+          254.99992780197934,
+          201.6961451102643,
+          196.29434086361968
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-254-prior-0",
+        "rgb": [
+          252.50172273173848,
+          147.91813848870126,
+          171.01705294228202
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-255-prior-0",
+        "rgb": [
+          242.5078796081002,
+          206.00612227199443,
+          223.28651524527555
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-256-prior-0",
+        "rgb": [
+          254.97421100772704,
+          171.59644604679156,
+          183.52877553842546
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-257-prior-0",
+        "rgb": [
+          255,
+          143.98507053825267,
+          130.97572637082845
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-258-prior-0",
+        "rgb": [
+          158.3704329285769,
+          186.15230321806362,
+          254.98821092151516
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-259-prior-0",
+        "rgb": [
+          254.28038419440082,
+          178.05126997714774,
+          175.70361053325317
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-260-prior-0",
+        "rgb": [
+          254.89387424375946,
+          190.6188256681823,
+          197.22658078085598
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-261-prior-0",
+        "rgb": [
+          254.99987176440425,
+          165.42262692464877,
+          163.01113765084867
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-262-prior-0",
+        "rgb": [
+          253.7352515879786,
+          122.7634736468046,
+          143.93969013612943
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-263-prior-0",
+        "rgb": [
+          255,
+          152.84069001126954,
+          151.65223254579692
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-264-prior-0",
+        "rgb": [
+          255,
+          134.79971792924312,
+          121.13703615596893
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-265-prior-0",
+        "rgb": [
+          248.40582391880122,
+          248.34628053239945,
+          243.1561510834246
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-266-prior-0",
+        "rgb": [
+          224.22257483606447,
+          218.42813014780177,
+          244.17875835631233
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9635027502906518,
+        "coloredKernelFraction": 0.9635027502906518
+      },
+      {
+        "id": "component-267-prior-0",
+        "rgb": [
+          252.27422350696892,
+          230.4572350716062,
+          238.7034875771935
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-268-prior-0",
+        "rgb": [
+          254.99487361245428,
+          204.85122552084113,
+          205.39760115454794
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-269-prior-0",
+        "rgb": [
+          231.7222648874207,
+          218.51290076473583,
+          236.57764912736428
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-270-prior-0",
+        "rgb": [
+          120.3914757531169,
+          142.94354879007815,
+          255
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-271-prior-0",
+        "rgb": [
+          254.53585754430668,
+          176.098119081251,
+          190.52283921167893
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-272-prior-0",
+        "rgb": [
+          207.725732805388,
+          155.63998061168402,
+          224.27454072135058
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-273-prior-0",
+        "rgb": [
+          253.6653223155255,
+          133.12771732886202,
+          143.42008833298382
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-274-prior-0",
+        "rgb": [
+          157.160503314928,
+          175.66583089192372,
+          255
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-275-prior-0",
+        "rgb": [
+          254.64552620235168,
+          104.81754022232077,
+          119.08595601178642
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-276-prior-0",
+        "rgb": [
+          254.9977053849052,
+          151.9311643335195,
+          158.2244756047672
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-277-prior-0",
+        "rgb": [
+          254.9999999999956,
+          134.90316343089214,
+          126.83431257849668
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-278-prior-0",
+        "rgb": [
+          254.99823499717897,
+          172.29164019735273,
+          175.0107818637832
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-279-prior-0",
+        "rgb": [
+          254.22151877622423,
+          132.18778647666466,
+          150.58987843436284
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-280-prior-0",
+        "rgb": [
+          254.99997959237277,
+          166.95934525660834,
+          163.41548533282057
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-281-prior-0",
+        "rgb": [
+          254.99999999995381,
+          155.78550478805448,
+          138.95177411127017
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-282-prior-0",
+        "rgb": [
+          250.64322961012735,
+          194.52055866945423,
+          216.25109083646984
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-283-prior-0",
+        "rgb": [
+          254.9773675393995,
+          174.815663927098,
+          177.8209305892472
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-284-prior-0",
+        "rgb": [
+          255,
+          156.67059913660134,
+          148.34653291886255
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-285-prior-0",
+        "rgb": [
+          254.96225052772328,
+          168.29218203793724,
+          170.39677705478394
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-286-prior-0",
+        "rgb": [
+          254.18691744929484,
+          191.50905647580686,
+          207.22736762827628
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-287-prior-0",
+        "rgb": [
+          254.6804355179125,
+          163.52757183680214,
+          170.29534595150287
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-288-prior-0",
+        "rgb": [
+          254.99999981680872,
+          151.3964261667372,
+          152.83904487499714
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-289-prior-0",
+        "rgb": [
+          232.7028291284062,
+          238.5202833016262,
+          252.30512214584698
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-290-prior-0",
+        "rgb": [
+          255,
+          147.81405417235592,
+          138.57385957292786
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-291-prior-0",
+        "rgb": [
+          254.56050401527656,
+          115.97372451129014,
+          126.35652758215758
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-292-prior-0",
+        "rgb": [
+          164.67099489042712,
+          177.42547106221372,
+          254.95528881806175
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-293-prior-0",
+        "rgb": [
+          204.18730951640663,
+          187.54869793221195,
+          254.98404203153106
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-294-prior-0",
+        "rgb": [
+          255,
+          147.48054825831068,
+          138.45375777772438
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-295-prior-0",
+        "rgb": [
+          255,
+          135.75049415158952,
+          139.35888469374075
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-296-prior-0",
+        "rgb": [
+          223.88976863043354,
+          223.73312245526472,
+          252.01588740936248
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-297-prior-0",
+        "rgb": [
+          251.19046577746045,
+          179.1813172245179,
+          189.66852432049578
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-298-prior-0",
+        "rgb": [
+          254.57683198146646,
+          110.35534278174883,
+          129.52109265910818
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-299-prior-0",
+        "rgb": [
+          254.31782595018214,
+          179.25773986853267,
+          186.74790284672338
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-300-prior-0",
+        "rgb": [
+          127.33264528057668,
+          162.51970519064187,
+          254.96248604131642
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-301-prior-0",
+        "rgb": [
+          254.9483238248652,
+          202.57893484285057,
+          188.99162916158946
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-302-prior-0",
+        "rgb": [
+          254.78352463204095,
+          182.0893060649743,
+          184.43038820909877
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-303-prior-0",
+        "rgb": [
+          255,
+          161.08342805199106,
+          151.0129235190921
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-304-prior-0",
+        "rgb": [
+          254.9999945622568,
+          172.22397241629494,
+          164.16108010311376
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-305-prior-0",
+        "rgb": [
+          178.2091097823559,
+          188.68979358809085,
+          254.99637841696784
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-306-prior-0",
+        "rgb": [
+          251.95806503974177,
+          169.57973280686195,
+          192.24627437153154
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-307-prior-0",
+        "rgb": [
+          250.60556372834426,
+          196.43688181024186,
+          215.6462291396941
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-308-prior-0",
+        "rgb": [
+          254.98560184442692,
+          147.26082975718046,
+          148.34402978914153
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-309-prior-0",
+        "rgb": [
+          254.99695407248606,
+          106.47280345309042,
+          112.255545504563
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-310-prior-0",
+        "rgb": [
+          254.6758577962132,
+          110.72595932116565,
+          125.189829983798
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-311-prior-0",
+        "rgb": [
+          254.9999999917211,
+          167.76235058226587,
+          173.11719665775772
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-312-prior-0",
+        "rgb": [
+          252.10190258447167,
+          185.07205659692718,
+          197.96345771474435
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-313-prior-0",
+        "rgb": [
+          239.23010442348615,
+          208.87408025855427,
+          241.77166160511166
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-314-prior-0",
+        "rgb": [
+          185.2231893612838,
+          200.23264232943913,
+          254.99999997164676
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-315-prior-0",
+        "rgb": [
+          192.6294831786961,
+          198.48729246726853,
+          254.49869384650012
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-316-prior-0",
+        "rgb": [
+          253.3410056623524,
+          139.04590352312658,
+          155.32126862260932
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-317-prior-0",
+        "rgb": [
+          137.3277821207088,
+          171.5841729719188,
+          254.98044728887845
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-318-prior-0",
+        "rgb": [
+          254.99999996729986,
+          145.9126831717539,
+          144.82749913861798
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-319-prior-0",
+        "rgb": [
+          193.2498635441472,
+          212.73470532565946,
+          254.90668544012036
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-320-prior-0",
+        "rgb": [
+          126.97793600349685,
+          160.85732106583282,
+          255
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-321-prior-0",
+        "rgb": [
+          254.86828921958394,
+          209.31416173401715,
+          193.45833018226813
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-322-prior-0",
+        "rgb": [
+          254.6043247967837,
+          189.9717329837606,
+          190.94477368536718
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-323-prior-0",
+        "rgb": [
+          200.95417016238108,
+          214.49817523120265,
+          253.82119363402256
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-324-prior-0",
+        "rgb": [
+          254.92600728664203,
+          99.38640428323572,
+          104.33060242430668
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-325-prior-0",
+        "rgb": [
+          181.34892056814337,
+          186.4379646264648,
+          255
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-326-prior-0",
+        "rgb": [
+          254.99987635894698,
+          104.17242412677288,
+          110.04829554454336
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-327-prior-0",
+        "rgb": [
+          254.99999912740697,
+          116.0717308791969,
+          121.67489071096945
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-328-prior-0",
+        "rgb": [
+          254.99987971351564,
+          190.94409191269943,
+          182.63003188736877
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-329-prior-0",
+        "rgb": [
+          252.98657840422896,
+          225.25046950634652,
+          227.2649406320391
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-330-prior-0",
+        "rgb": [
+          141.11356537622095,
+          178.8810643880669,
+          255
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-331-prior-0",
+        "rgb": [
+          255,
+          131.77944617381453,
+          135.08923681717258
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-332-prior-0",
+        "rgb": [
+          253.09420640868626,
+          195.8176154257974,
+          212.0040675924474
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-333-prior-0",
+        "rgb": [
+          254.8708715749764,
+          180.03871468611624,
+          183.77392754430707
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-334-prior-0",
+        "rgb": [
+          254.99963054680026,
+          136.99979440793865,
+          124.31051787099673
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-335-prior-0",
+        "rgb": [
+          254.99070841540723,
+          179.67461816350723,
+          182.7805421430652
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-336-prior-0",
+        "rgb": [
+          254.93757224165836,
+          185.52284274096746,
+          180.50678986617916
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-337-prior-0",
+        "rgb": [
+          254.4967594537092,
+          186.12326401313513,
+          192.11899353317904
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-338-prior-0",
+        "rgb": [
+          173.20945445872445,
+          187.70847338420228,
+          254.98030049884576
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-339-prior-0",
+        "rgb": [
+          254.98469695467796,
+          169.62951822646593,
+          161.49411882998328
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-340-prior-0",
+        "rgb": [
+          210.89022876635417,
+          217.9521287292399,
+          254.24488406270757
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-341-prior-0",
+        "rgb": [
+          226.6351713428733,
+          217.2863043042327,
+          245.86134720584602
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-342-prior-0",
+        "rgb": [
+          254.73872537696897,
+          213.58402657735232,
+          215.59040991932952
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-343-prior-0",
+        "rgb": [
+          252.6474663513556,
+          157.04574301527137,
+          187.43202753574832
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-344-prior-0",
+        "rgb": [
+          254.8467894153935,
+          190.98096007292807,
+          206.61204643385577
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-345-prior-0",
+        "rgb": [
+          159.29856225713016,
+          174.6896473058011,
+          248.1812536168381
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-346-prior-0",
+        "rgb": [
+          254.53889730743484,
+          106.97088874100594,
+          115.24908134525131
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-347-prior-0",
+        "rgb": [
+          126.61858847253588,
+          143.82026532499395,
+          254.99999528641928
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-348-prior-0",
+        "rgb": [
+          254.19885261361875,
+          197.6232607109741,
+          198.2573309069227
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-349-prior-0",
+        "rgb": [
+          254.75071964779352,
+          147.89102494932146,
+          161.39635675105598
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-350-prior-0",
+        "rgb": [
+          254.99999999918037,
+          208.03802345948426,
+          198.11900533188225
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-351-prior-0",
+        "rgb": [
+          254.49381570858588,
+          208.15973258892794,
+          213.92638271972785
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-352-prior-0",
+        "rgb": [
+          255,
+          122.22996935610803,
+          101.51041620251064
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-353-prior-0",
+        "rgb": [
+          254.91291576319662,
+          97.11260484822296,
+          115.29132129756292
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-354-prior-0",
+        "rgb": [
+          253.41941945503692,
+          154.22935233265116,
+          165.22227367939215
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-355-prior-0",
+        "rgb": [
+          225.10375873106685,
+          211.10482340769772,
+          253.4082773700591
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-356-prior-0",
+        "rgb": [
+          185.03175005269063,
+          203.79903247918233,
+          254.97039886931293
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-357-prior-0",
+        "rgb": [
+          201.84568630484762,
+          201.89077018060445,
+          253.14106138269733
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-358-prior-0",
+        "rgb": [
+          251.38740490377418,
+          198.4592063894043,
+          209.77264732712564
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-359-prior-0",
+        "rgb": [
+          254.90275810290203,
+          170.81110017035516,
+          175.92805193629357
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-360-prior-0",
+        "rgb": [
+          132.5150289659416,
+          172.5148675124784,
+          255
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-361-prior-0",
+        "rgb": [
+          129.9242750961124,
+          151.130688388444,
+          253.6567841545527
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-362-prior-0",
+        "rgb": [
+          251.31954071964066,
+          164.2942430237693,
+          197.1527440069397
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-363-prior-0",
+        "rgb": [
+          216.20223623205504,
+          220.71281394389828,
+          254.2938272408935
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-364-prior-0",
+        "rgb": [
+          253.97766789853543,
+          140.65364353713855,
+          176.52466138188657
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-365-prior-0",
+        "rgb": [
+          238.13957397983384,
+          201.48899190923836,
+          245.8148032624696
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-366-prior-0",
+        "rgb": [
+          184.39096136738965,
+          200.47766277275034,
+          254.28947916433074
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9933790795167611,
+        "coloredKernelFraction": 0.9933790795167611
+      },
+      {
+        "id": "component-367-prior-0",
+        "rgb": [
+          207.03695112857466,
+          206.8090295372637,
+          253.6683840315398
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-368-prior-0",
+        "rgb": [
+          254.9604757468132,
+          127.83963359899937,
+          134.7040451012136
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-369-prior-0",
+        "rgb": [
+          192.8580083092167,
+          194.4294256502296,
+          254.68033943943732
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-370-prior-0",
+        "rgb": [
+          254.58644842820055,
+          182.81934139922993,
+          207.56840878354998
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-371-prior-0",
+        "rgb": [
+          254.9982163595759,
+          172.9015217540935,
+          167.53101472331875
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-372-prior-0",
+        "rgb": [
+          254.9418941218552,
+          177.30806181864025,
+          177.24981942413834
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-373-prior-0",
+        "rgb": [
+          213.17719755780954,
+          215.05221121688436,
+          251.3983263328832
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-374-prior-0",
+        "rgb": [
+          254.7713762352743,
+          169.20524669809583,
+          186.18964848356677
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-375-prior-0",
+        "rgb": [
+          251.850112580373,
+          183.27946584147102,
+          194.13602529233873
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-376-prior-0",
+        "rgb": [
+          195.46115029051262,
+          192.95123861873975,
+          250.95443309424553
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.999999999999988,
+        "coloredKernelFraction": 0.999999999999988
+      },
+      {
+        "id": "component-377-prior-0",
+        "rgb": [
+          234.09687111243252,
+          239.94639690698565,
+          249.62140820756252
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-378-prior-0",
+        "rgb": [
+          132.78967775351174,
+          169.55372114960426,
+          254.93610008476753
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-379-prior-0",
+        "rgb": [
+          254.33151394520982,
+          182.51731227367907,
+          178.93266130284377
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-380-prior-0",
+        "rgb": [
+          244.90814998903508,
+          182.11665655942588,
+          221.68323732230508
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-381-prior-0",
+        "rgb": [
+          255,
+          120.35837930425986,
+          107.09129501144295
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-382-prior-0",
+        "rgb": [
+          254.99737629984145,
+          215.68213313317423,
+          204.36266109813423
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-383-prior-0",
+        "rgb": [
+          214.7508398172435,
+          197.5883186834849,
+          247.27165212809706
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-384-prior-0",
+        "rgb": [
+          251.20282658741843,
+          199.81713548197894,
+          220.94413405043505
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-385-prior-0",
+        "rgb": [
+          142.037324150099,
+          162.052282661389,
+          254.94326594570794
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-386-prior-0",
+        "rgb": [
+          254.18564351502044,
+          158.2769442569744,
+          166.83327377273145
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-387-prior-0",
+        "rgb": [
+          254.63069890207606,
+          164.27242224231003,
+          177.3429913577661
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-388-prior-0",
+        "rgb": [
+          208.04274642237488,
+          212.30169658916572,
+          251.3736000996356
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9974137207372481,
+        "coloredKernelFraction": 0.9974137207372481
+      },
+      {
+        "id": "component-389-prior-0",
+        "rgb": [
+          189.22111746570076,
+          173.54915627524485,
+          253.51386944970412
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-390-prior-0",
+        "rgb": [
+          134.23472043183492,
+          176.75551750460517,
+          255
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-391-prior-0",
+        "rgb": [
+          131.21463473986813,
+          164.68027893751187,
+          255
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-392-prior-0",
+        "rgb": [
+          254.9946102897209,
+          150.33599811319806,
+          150.11443007270148
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-393-prior-0",
+        "rgb": [
+          254.56099280305244,
+          152.90984922033627,
+          165.89652855369397
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-394-prior-0",
+        "rgb": [
+          252.90451293506663,
+          141.13914236226793,
+          161.7470910697105
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-395-prior-0",
+        "rgb": [
+          254.1736897967013,
+          228.13089827969443,
+          217.60278733017682
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999999998447331,
+        "coloredKernelFraction": 0.9999999998447331
+      },
+      {
+        "id": "component-396-prior-0",
+        "rgb": [
+          254.9975208632463,
+          183.29366946361426,
+          193.22412723991226
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-397-prior-0",
+        "rgb": [
+          183.4597061036124,
+          176.3615589292122,
+          254.93196986647516
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-398-prior-0",
+        "rgb": [
+          224.62585340171478,
+          219.82990532775906,
+          250.67131460413813
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-399-prior-0",
+        "rgb": [
+          254.9970940956009,
+          167.9676751590838,
+          164.22301221736046
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-400-prior-0",
+        "rgb": [
+          254.95766423537845,
+          138.48686605880906,
+          150.25862860014215
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-401-prior-0",
+        "rgb": [
+          253.75310673811856,
+          187.4649824513065,
+          199.2242783022729
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-402-prior-0",
+        "rgb": [
+          254.950554461851,
+          164.7735610285007,
+          171.12630962778044
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-403-prior-0",
+        "rgb": [
+          254.25885664082335,
+          146.48927125301626,
+          161.10173660748902
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-404-prior-0",
+        "rgb": [
+          254.92864758111952,
+          207.7596614234016,
+          209.40010812892203
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-405-prior-0",
+        "rgb": [
+          181.50101436724222,
+          197.0932430733018,
+          254.99985554367908
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-406-prior-0",
+        "rgb": [
+          254.99527024934412,
+          207.43705304313727,
+          206.95500995688576
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-407-prior-0",
+        "rgb": [
+          253.6125050311766,
+          147.01289832790152,
+          170.69845043850987
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-408-prior-0",
+        "rgb": [
+          254.88702296127545,
+          190.12431666091655,
+          218.5141046514899
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-409-prior-0",
+        "rgb": [
+          254.9617985376732,
+          156.34836306137473,
+          163.9035964085982
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-410-prior-0",
+        "rgb": [
+          254.9782052100421,
+          158.71261105252773,
+          177.95499776058546
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-411-prior-0",
+        "rgb": [
+          254.78898675843476,
+          179.7589320111361,
+          184.4478031868214
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-412-prior-0",
+        "rgb": [
+          235.2895988584673,
+          226.9068238475003,
+          243.61433663643928
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-413-prior-0",
+        "rgb": [
+          254.67496455648333,
+          201.74064274635757,
+          212.7446280049703
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-414-prior-0",
+        "rgb": [
+          237.2977805754769,
+          222.49797256341432,
+          246.00498109748855
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-415-prior-0",
+        "rgb": [
+          254.99984605795404,
+          186.8689553799522,
+          176.90070450341554
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-416-prior-0",
+        "rgb": [
+          194.46756719549214,
+          182.42938205487508,
+          250.92401386295236
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-417-prior-0",
+        "rgb": [
+          254.82933891162077,
+          120.99857710721122,
+          126.9500964106569
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-418-prior-0",
+        "rgb": [
+          165.81043398771607,
+          182.35041378354543,
+          254.97795023151534
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-419-prior-0",
+        "rgb": [
+          212.64242581637794,
+          223.02415979727684,
+          254.63458925291144
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.592733848256001,
+        "coloredKernelFraction": 0.592733848256001
+      },
+      {
+        "id": "component-420-prior-0",
+        "rgb": [
+          254.99994097480328,
+          154.87406522375514,
+          150.64801015585837
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-421-prior-0",
+        "rgb": [
+          239.03124967978516,
+          234.41664573126343,
+          253.43988753046904
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.6889783356183273,
+        "coloredKernelFraction": 0.6889783356183273
+      },
+      {
+        "id": "component-422-prior-0",
+        "rgb": [
+          254.92972288683407,
+          184.63691756642936,
+          189.80194961745698
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-423-prior-0",
+        "rgb": [
+          253.37611688158526,
+          160.72454916294353,
+          189.40828158430062
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-424-prior-0",
+        "rgb": [
+          254.9999999978846,
+          105.63237961928718,
+          113.01350913395562
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-425-prior-0",
+        "rgb": [
+          254.8542448371826,
+          185.46580195647994,
+          191.56870659922245
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-426-prior-0",
+        "rgb": [
+          254.9841613907413,
+          186.78612703439782,
+          186.47985246803435
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-427-prior-0",
+        "rgb": [
+          254.99808820318066,
+          175.25454054879427,
+          163.22521014496937
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-428-prior-0",
+        "rgb": [
+          250.37160343922702,
+          243.27293884528888,
+          240.87014668395238
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-429-prior-0",
+        "rgb": [
+          255,
+          129.43299950842479,
+          130.344529302757
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-430-prior-0",
+        "rgb": [
+          223.12116608739024,
+          228.30269659929672,
+          253.4959843936658
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-431-prior-0",
+        "rgb": [
+          137.82736027007846,
+          180.28916821336853,
+          254.99943052992384
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-432-prior-0",
+        "rgb": [
+          246.5501896751809,
+          158.2456274369071,
+          186.51191753458804
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-433-prior-0",
+        "rgb": [
+          254.80319798418193,
+          196.80744609425022,
+          210.07767197843535
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-434-prior-0",
+        "rgb": [
+          232.47682896397947,
+          231.7898051222086,
+          249.6698410345605
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-435-prior-0",
+        "rgb": [
+          167.26495233204366,
+          167.68777053347887,
+          254.89863060142184
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-436-prior-0",
+        "rgb": [
+          166.6158372721646,
+          188.1345977919317,
+          254.97295062655388
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-437-prior-0",
+        "rgb": [
+          254.99012641369444,
+          174.75156178647228,
+          175.312934902382
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-438-prior-0",
+        "rgb": [
+          252.58626794255088,
+          157.3821855165216,
+          185.43318697634405
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-439-prior-0",
+        "rgb": [
+          232.2340580315834,
+          219.50137875642946,
+          244.22864109619496
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-440-prior-0",
+        "rgb": [
+          223.84914013851818,
+          221.2360322781846,
+          247.50807208128595
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9307707171179369,
+        "coloredKernelFraction": 0.9307707171179369
+      },
+      {
+        "id": "component-441-prior-0",
+        "rgb": [
+          255,
+          143.09609021472198,
+          153.63377288813712
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.8591628891371832,
+        "coloredKernelFraction": 0.8591628891371832
+      },
+      {
+        "id": "component-442-prior-0",
+        "rgb": [
+          187.27454607278767,
+          191.3475623481784,
+          254.45568137899096
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-443-prior-0",
+        "rgb": [
+          134.02840069449704,
+          160.80027101660428,
+          254.95418767922237
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-444-prior-0",
+        "rgb": [
+          255,
+          148.19245636123463,
+          145.2968825789653
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-445-prior-0",
+        "rgb": [
+          249.79756365067152,
+          180.65885256808912,
+          197.92297445230443
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-446-prior-0",
+        "rgb": [
+          254.7260558661215,
+          137.00942399023367,
+          148.1030811240358
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-447-prior-0",
+        "rgb": [
+          252.95722599531513,
+          214.38035238960538,
+          240.1983457934716
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-448-prior-0",
+        "rgb": [
+          242.06302878678943,
+          180.15618057874514,
+          222.89092550206723
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-449-prior-0",
+        "rgb": [
+          161.9782520643486,
+          183.30639577602105,
+          254.99999998587992
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-450-prior-0",
+        "rgb": [
+          255,
+          168.6324315849037,
+          162.70079788912417
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-451-prior-0",
+        "rgb": [
+          234.31076521616578,
+          217.91245476195036,
+          243.41197979465875
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-452-prior-0",
+        "rgb": [
+          177.54331872921435,
+          179.31164059766235,
+          252.98862900465943
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-453-prior-0",
+        "rgb": [
+          254.17977977402288,
+          192.74656597312554,
+          207.30208701764732
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-454-prior-0",
+        "rgb": [
+          255,
+          135.56259043576543,
+          144.25304037524984
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999270397758481,
+        "coloredKernelFraction": 0.9999270397758481
+      },
+      {
+        "id": "component-455-prior-0",
+        "rgb": [
+          254.99985329852913,
+          125.94623897178015,
+          124.180097869206
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-456-prior-0",
+        "rgb": [
+          146.08509973510346,
+          176.57790718149406,
+          254.99998591530488
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-457-prior-0",
+        "rgb": [
+          254.99596656478116,
+          151.4326372096819,
+          151.89289363782606
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-458-prior-0",
+        "rgb": [
+          135.62295314186613,
+          161.42637711132238,
+          254.963215803057
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-459-prior-0",
+        "rgb": [
+          214.81197675247742,
+          178.29038532877777,
+          241.50137945080482
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-460-prior-0",
+        "rgb": [
+          254.9999999999707,
+          176.5868764409387,
+          167.7203361175517
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-461-prior-0",
+        "rgb": [
+          195.61089566709668,
+          206.8010503928668,
+          254.66672944732787
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.9999999998447449,
+        "coloredKernelFraction": 0.9999999998447449
+      },
+      {
+        "id": "component-462-prior-0",
+        "rgb": [
+          254.59166973547852,
+          211.56858208405293,
+          217.71309693629775
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-463-prior-0",
+        "rgb": [
+          254.78064075127276,
+          174.0068380235857,
+          173.6404887113655
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-464-prior-0",
+        "rgb": [
+          254.9884357753097,
+          219.59469212847625,
+          214.33526780348828
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-465-prior-0",
+        "rgb": [
+          254.89692031347198,
+          211.72781429974196,
+          208.74326491118885
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-466-prior-0",
+        "rgb": [
+          247.78082017199776,
+          172.47800288622406,
+          198.1040021791305
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-467-prior-0",
+        "rgb": [
+          250.78785008294233,
+          195.45209362992992,
+          210.78814538581642
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-468-prior-0",
+        "rgb": [
+          239.52990814108202,
+          213.00202423667227,
+          232.69471719109603
+        ],
+        "covered": true,
+        "observedKernelFraction": 1,
+        "coloredKernelFraction": 1
+      },
+      {
+        "id": "component-469-prior-0",
+        "rgb": [
+          245.50674841371992,
+          204.8993158355263,
+          225.62818087684295
+        ],
+        "covered": true,
+        "observedKernelFraction": 0.96334907475064,
+        "coloredKernelFraction": 0.96334907475064
+      }
+    ],
+    "assumptions": [
+      "A projected image does not determine front/back colors. Component-footprint color association is an authored approximation, not measured 3D spectroscopy.",
+      "Overlapping projected components with identical footprints remain color-degenerate; no synthetic depth variation is introduced.",
+      "One chromaticity per existing component can smooth detail finer than its support; source imagery never extends that support or changes neutral alpha.",
+      "Missing or black source coverage contributes neutral material and is counted separately; no nearest-pixel color extension."
+    ]
   },
   "alignment": {
     "widthPx": 4096,
@@ -266,37 +5474,37 @@
       0
     ],
     "placement": {
-      "x": 0.6184424860783384,
-      "y": 2.3793520276221836,
+      "x": 0,
+      "y": 0,
       "z": 0,
       "rotationX": 0,
       "rotationY": 0,
-      "rotationZ": 39,
-      "scale": 3
+      "rotationZ": 0,
+      "scale": 1
     },
     "convention": "Use the exact saved Alignment placement, including scale, pivot, all rotations and offsets."
   },
   "geometry": {
     "tangentBoundsKpc": {
       "min": [
-        -12.926625736907944,
-        -13.68759863355698
+        -4.351779483333175,
+        -3.6886303332796695
       ],
       "max": [
-        18.367307685619593,
-        14.59815746611857
+        5.121066913779062,
+        3.3480334410529595
       ]
     },
     "physicalBoundsKpc": {
       "min": [
-        -34.2494860589516,
-        -39.659852117301206,
-        -14.063476651908141
+        -5.365053401638654,
+        -5.725722957908919,
+        -3.286750705393898
       ],
       "max": [
-        28.24754056340629,
-        21.19251590973147,
-        13.190865784909581
+        8.013586896106158,
+        6.16128561310083,
+        5.969691017466296
       ]
     },
     "observerDistanceKpc": 49.590672750490434,
@@ -307,8 +5515,8 @@
           0
         ],
         "pixel": [
-          0,
-          985.1203122109599
+          186.53753373889904,
+          1521
         ]
       },
       {
@@ -317,122 +5525,624 @@
           0
         ],
         "pixel": [
-          737.9170942727499,
-          1418.615204088568
+          1118.4620053782896,
+          1380.6570660073264
         ]
       },
       {
         "uv": [
           1,
           0
-        ],
-        "pixel": [
-          1473.9445266254331,
-          1851
-        ]
-      },
-      {
-        "uv": [
-          0,
-          0.5
-        ],
-        "pixel": [
-          290.3316229252489,
-          491.8418484035335
-        ]
-      },
-      {
-        "uv": [
-          0.5,
-          0.5
-        ],
-        "pixel": [
-          1026.8023036561945,
-          925.3368613042211
-        ]
-      },
-      {
-        "uv": [
-          1,
-          0.5
-        ],
-        "pixel": [
-          1761.389769737707,
-          1357.7233926589217
-        ]
-      },
-      {
-        "uv": [
-          0,
-          1
-        ],
-        "pixel": [
-          579.8176892078819,
-          0
-        ]
-      },
-      {
-        "uv": [
-          0.5,
-          1
-        ],
-        "pixel": [
-          1314.8472444089416,
-          433.4932971245959
-        ]
-      },
-      {
-        "uv": [
-          1,
-          1
         ],
         "pixel": [
           2048,
-          865.8797271236119
+          1240.6735229275002
+        ]
+      },
+      {
+        "uv": [
+          0,
+          0.5
+        ],
+        "pixel": [
+          93.13275165838753,
+          897.7594706571062
+        ]
+      },
+      {
+        "uv": [
+          0.5,
+          0.5
+        ],
+        "pixel": [
+          1023.8194986229307,
+          758.4187969428361
+        ]
+      },
+      {
+        "uv": [
+          1,
+          0.5
+        ],
+        "pixel": [
+          1952.1264048663506,
+          619.434428516565
+        ]
+      },
+      {
+        "uv": [
+          0,
+          1
+        ],
+        "pixel": [
+          0,
+          276.3340559208255
+        ]
+      },
+      {
+        "uv": [
+          0.5,
+          1
+        ],
+        "pixel": [
+          929.4522746684005,
+          137.99040696294873
+        ]
+      },
+      {
+        "uv": [
+          1,
+          1
+        ],
+        "pixel": [
+          1856.53131732964,
+          0
         ]
       }
     ]
   },
   "photo": {
     "width": 1024,
-    "height": 926,
+    "height": 761,
     "nativeDimensions": [
       6582,
       4388
     ]
   },
   "densityProjection": {
-    "width": 256,
-    "height": 249,
+    "width": 384,
+    "height": 285,
     "tangentBoundsKpc": {
       "min": [
-        -47.80717989421432,
-        -55.35924485074724
+        -4.351779483333175,
+        -3.6886303332796695
       ],
       "max": [
-        39.42935817954924,
-        29.581594852654117
+        5.121066913779062,
+        3.3480334410529595
       ]
     },
     "observerDistanceKpc": 49.590672750490434,
-    "meaning": "Integrated signal of the untouched Alignment density source; identical cutoff for all materials."
+    "meaning": "Analytic integrated fitted finite emission, display optical-depth transfer 1-exp(-exposure*projection); not the original stellar prior."
+  },
+  "qualification": {
+    "status": "research-experiment",
+    "materialGatePassed": false,
+    "reason": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry."
   },
   "validation": {
-    "sameGeometry": true,
-    "sameAlpha": true,
-    "sameStars": true,
+    "sameFiniteGeometry": true,
+    "sameNeutralAlpha": true,
+    "alphaProof": "Every decoded texture alpha byte compared with fixed neutral bank during recoloring.",
     "coverage": {
-      "positiveAlphaTexels": 291844,
-      "recoloredTexels": 255365,
-      "outsideImageTexels": 36479,
+      "positiveAlphaTexels": 4193246,
+      "recoloredTexels": 4193246,
+      "outsideImageTexels": 0,
       "blackImageTexels": 0,
-      "preservedReferenceTexels": 36479
+      "preservedReferenceTexels": 0
     }
   },
   "limitations": [
-    "The Alignment cloud is simulated stellar density, not measured gas depth.",
-    "Candidate color and optional local contrast paint the fixed cloud. Image brightness never changes geometry or alpha.",
-    "Uncovered or black image samples retain neutral density colors; coverage counts record this mixed-source material.",
-    "Catalogue astrometry is preserved; one common Alignment mapping and density-conditioned model supplies the same stellar positions for every material."
-  ]
+    "A single optical image does not measure gas depth. Stellar simulation ray modes are conditional guidance only.",
+    "The smooth envelope inherits the stellar simulation's depth distribution; it is a shape hypothesis, not measured gas geometry.",
+    "Foreground exclusion and finite thickness limits are explicit authored settings.",
+    "Geometry and neutral opacity are newly fitted; color application alone preserves this new opacity.",
+    "Preview slab discretization and finite component chromaticity can lose sub-resolution image detail."
+  ],
+  "envelope": {
+    "path": "source/envelope.json",
+    "settings": {
+      "scalePixels": 10,
+      "fraction": 0.85,
+      "floor": 0.03,
+      "depthSamples": 256,
+      "depthTrim": 0.005
+    },
+    "metrics": {
+      "globalRatio": 0.00009803692979765198,
+      "envelopeLightFraction": 0.8074788269601949,
+      "excessLightFraction": 0.03291540991118343,
+      "floorPixels": 32008
+    },
+    "priorCloud": null,
+    "source": null,
+    "meaning": "Smoothed image light carried along the pinned simulation density: gain(x,y) x simulation(x,y,z). Depth shape is the simulation, not recovered gas depth."
+  },
+  "finiteModel": {
+    "resultId": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
+    "provenanceSha256": "223bc533e340241feb4533187ed60c937dc73aa82093d53ab37118b579d43089",
+    "fieldSha256": "c9325a0890571aa3670ce9edba93db55f987605e89926943c0f9f89f0f03b45b"
+  },
+  "finiteMaterial": {
+    "modelResultId": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
+    "sourceResultId": "5fc6d6563f57e5ef6a6d5b4a4f5ebd8e35f8ae8ace946d0cca0997e067424f9b",
+    "channelGain": null,
+    "toneCurve": {
+      "schema": "cssearth-lens-tone-curve@1",
+      "knots": [
+        0,
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64,
+        72,
+        80,
+        88,
+        96,
+        104,
+        112,
+        120,
+        128,
+        136,
+        144,
+        152,
+        160,
+        168,
+        176,
+        184,
+        192,
+        200,
+        208,
+        216,
+        224,
+        232,
+        240,
+        248,
+        255
+      ],
+      "channels": [
+        [
+          0,
+          6.758,
+          11.174,
+          14.177,
+          16.777,
+          18.982,
+          20.929,
+          22.978,
+          25.702,
+          29.638,
+          34.761,
+          40.261,
+          45.127,
+          49.272,
+          53.639,
+          58.531,
+          63.696,
+          69.924,
+          77.322,
+          84.945,
+          93.253,
+          102.641,
+          112.599,
+          123.432,
+          135.624,
+          149.296,
+          164.701,
+          183.96,
+          225.377,
+          293.559,
+          353.698,
+          389.212,
+          412.854
+        ],
+        [
+          0,
+          6.832,
+          11.346,
+          14.309,
+          16.746,
+          18.857,
+          20.856,
+          22.966,
+          25.429,
+          28.519,
+          32.584,
+          37.873,
+          43.745,
+          49.112,
+          54.097,
+          59.8,
+          67.018,
+          75.295,
+          84.185,
+          93.841,
+          103.057,
+          111.47,
+          121.021,
+          132.772,
+          146.517,
+          160.785,
+          174.322,
+          187.967,
+          200.454,
+          209.904,
+          217.585,
+          224.801,
+          231.798
+        ],
+        [
+          0,
+          6.895,
+          11.694,
+          15.103,
+          17.992,
+          20.429,
+          22.556,
+          24.617,
+          26.871,
+          29.517,
+          32.692,
+          36.487,
+          40.765,
+          45.202,
+          50.329,
+          57.011,
+          64.622,
+          72.068,
+          79.824,
+          88.738,
+          98.828,
+          109.194,
+          118.76,
+          129.634,
+          143.879,
+          158.875,
+          171.739,
+          186.504,
+          208.162,
+          231.414,
+          249.371,
+          262.105,
+          272.202
+        ]
+      ]
+    },
+    "toneCurveMeaning": "Per-channel monotone curve fitted from paired pixels against this lens's own image, on the analytic render level (front-projection byte × chromaticity). Its channel ratios act as white balance inside the alpha chroma limit and its common factor after it. It can only dim or recolour inside the shared opacity; a display correction against a processed image, not photometry.",
+    "channelGainMeaning": "This lens is displayed at the shared model exposure with its own hue only."
+  },
+  "identity": {
+    "method": "simulation-guided-finite-material@1",
+    "model": {
+      "resultId": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
+      "provenanceSha256": "223bc533e340241feb4533187ed60c937dc73aa82093d53ab37118b579d43089",
+      "fieldSha256": "c9325a0890571aa3670ce9edba93db55f987605e89926943c0f9f89f0f03b45b"
+    },
+    "source": {
+      "resultId": "5fc6d6563f57e5ef6a6d5b4a4f5ebd8e35f8ae8ace946d0cca0997e067424f9b",
+      "provenanceSha256": "ed621e2847e85a50995c45a2b65d27ef199556611b6ff5925cab74193a3356c5"
+    },
+    "appearance": {
+      "saturation": 1,
+      "detailStrength": 0,
+      "detailScale": 24,
+      "brightness": 1,
+      "gamma": 1
+    },
+    "toneCurve": {
+      "schema": "cssearth-lens-tone-curve@1",
+      "knots": [
+        0,
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64,
+        72,
+        80,
+        88,
+        96,
+        104,
+        112,
+        120,
+        128,
+        136,
+        144,
+        152,
+        160,
+        168,
+        176,
+        184,
+        192,
+        200,
+        208,
+        216,
+        224,
+        232,
+        240,
+        248,
+        255
+      ],
+      "channels": [
+        [
+          0,
+          6.758,
+          11.174,
+          14.177,
+          16.777,
+          18.982,
+          20.929,
+          22.978,
+          25.702,
+          29.638,
+          34.761,
+          40.261,
+          45.127,
+          49.272,
+          53.639,
+          58.531,
+          63.696,
+          69.924,
+          77.322,
+          84.945,
+          93.253,
+          102.641,
+          112.599,
+          123.432,
+          135.624,
+          149.296,
+          164.701,
+          183.96,
+          225.377,
+          293.559,
+          353.698,
+          389.212,
+          412.854
+        ],
+        [
+          0,
+          6.832,
+          11.346,
+          14.309,
+          16.746,
+          18.857,
+          20.856,
+          22.966,
+          25.429,
+          28.519,
+          32.584,
+          37.873,
+          43.745,
+          49.112,
+          54.097,
+          59.8,
+          67.018,
+          75.295,
+          84.185,
+          93.841,
+          103.057,
+          111.47,
+          121.021,
+          132.772,
+          146.517,
+          160.785,
+          174.322,
+          187.967,
+          200.454,
+          209.904,
+          217.585,
+          224.801,
+          231.798
+        ],
+        [
+          0,
+          6.895,
+          11.694,
+          15.103,
+          17.992,
+          20.429,
+          22.556,
+          24.617,
+          26.871,
+          29.517,
+          32.692,
+          36.487,
+          40.765,
+          45.202,
+          50.329,
+          57.011,
+          64.622,
+          72.068,
+          79.824,
+          88.738,
+          98.828,
+          109.194,
+          118.76,
+          129.634,
+          143.879,
+          158.875,
+          171.739,
+          186.504,
+          208.162,
+          231.414,
+          249.371,
+          262.105,
+          272.202
+        ]
+      ]
+    },
+    "implementation": [
+      {
+        "path": "labs/nebula/packages/lab/src/adapters/preparation/css-volume.ts",
+        "sha256": "3c18da162bd93dd04ab1e20eb5552282445aca68525a12dcefd8a3c8f90f2b19"
+      },
+      {
+        "path": "labs/nebula/packages/lab/src/cli/commands/finite-density-material-artifacts.ts",
+        "sha256": "608779a00816c8008be1afc982b091b060b99febb145517c11c2181973954287"
+      },
+      {
+        "path": "labs/nebula/packages/lab/src/cli/commands/simulation-guided-coordinates.ts",
+        "sha256": "0bb8b88ac29bb6adae49740a8b337ab001e336f9daeefd5fc798956645408db4"
+      },
+      {
+        "path": "labs/nebula/packages/lab/src/cli/commands/simulation-prior.ts",
+        "sha256": "da64f916ce772fba92d1e285bca566cabe4256a804bde83b3494609e0ec636b7"
+      },
+      {
+        "path": "labs/nebula/packages/lab/src/resources/model-paths.ts",
+        "sha256": "55d1686dd43196dbe4d05846330e026f940c3901ae9cf9a9cb6a724f6fbd704f"
+      },
+      {
+        "path": "labs/nebula/packages/lab/src/server/services/implementation.ts",
+        "sha256": "e4a0469ef1bdaab4a9aac6905e632a46e24e3fd10ddc3dbb039d43e8ac2d0e3b"
+      },
+      {
+        "path": "labs/nebula/packages/lab/src/server/workflows/density/finite-lens.ts",
+        "sha256": "10c19bd369174a16b97f749c12b654a1bf9cc23fc5426d1f97a7957e77656604"
+      },
+      {
+        "path": "labs/nebula/packages/reconstruction/package.json",
+        "sha256": "f8efe74c8c426ddd0343919527a22d74f73bb8ac9649177ef45853fa97dacbb1"
+      },
+      {
+        "path": "labs/nebula/packages/reconstruction/src/methods/inference/simulation-envelope.ts",
+        "sha256": "0bdf11d34ac08a1c153dfd926c5eccc4cf8ec13bedf88b2fd27a8b04dfbd9100"
+      },
+      {
+        "path": "labs/nebula/packages/volume-bake/package.json",
+        "sha256": "ea35448cc5de4f9c4a4811f39c7f848f247743710809f0cde717f54a580a2413"
+      },
+      {
+        "path": "labs/nebula/packages/volume-bake/src/compact-inputs/density-grid.ts",
+        "sha256": "3c76d8505d9937ca57a68c03f49b2d7dc368171890a52762e0d005837136dd1a"
+      },
+      {
+        "path": "labs/nebula/packages/volume-bake/src/compact-inputs/simulation-prior.ts",
+        "sha256": "733f068e4bc151b1a89ce5c24ea1513668c507eaff07907114bb07d61aa968cf"
+      },
+      {
+        "path": "labs/nebula/packages/volume-bake/src/slices/density.ts",
+        "sha256": "d20cb061a05ac88cd94ac2a38b013c9801ac0eb57f6e847f8074e684caec82f8"
+      },
+      {
+        "path": "labs/nebula/packages/volume-bake/src/slices/material.ts",
+        "sha256": "2c063e2bc38220d67402e61bef08e42efbb8fc6b41ba27a7b26ad468a517306d"
+      },
+      {
+        "path": "labs/nebula/packages/volume-bake/src/slices/raster.ts",
+        "sha256": "e10a2774a3613b9700a3f7d8212f24f73438e5df798a6af23f94d102319051d4"
+      },
+      {
+        "path": "labs/nebula/packages/volume-core/package.json",
+        "sha256": "ec59a8e7e5f0dfcbab612fd0ca487c49d74f131e29e26056b334cab945669ce3"
+      },
+      {
+        "path": "labs/nebula/packages/volume-core/src/contracts/volume-recipe.ts",
+        "sha256": "50fc1cfc18d60688d18b1650ef6d1353e60401c15bb132269312c2178e1d7c7c"
+      },
+      {
+        "path": "labs/nebula/packages/volume-core/src/coordinates/observer-tangent.ts",
+        "sha256": "3068f0cb6a578344a07e9e33efb0e0e70ae68b65518b70d11b4180b747114fcc"
+      },
+      {
+        "path": "labs/nebula/packages/volume-core/src/fields/emission-window.ts",
+        "sha256": "7bd334e0ba2abf7baa923eeca95dd12a4b6aea7a491cfa95e35e9009d8072f72"
+      },
+      {
+        "path": "labs/nebula/packages/volume-core/src/fields/emission.ts",
+        "sha256": "92cf9d9bb8ab35e3c394e612ded9f8565a33029839197961a7fdaa88f5292ab6"
+      },
+      {
+        "path": "labs/nebula/packages/volume-core/src/fields/simulation-envelope.ts",
+        "sha256": "79a97dbf01a33a90e3a7a9ebf3fdc4b57708e66542d943b8ee69fdf22ff5c5d5"
+      },
+      {
+        "path": "labs/nebula/packages/volume-core/src/materials/cloud-appearance.ts",
+        "sha256": "702cde2ff38ccce2096eb3562681f0ab8c8a9dec424ef8195c84034f4a856930"
+      },
+      {
+        "path": "labs/nebula/packages/volume-core/src/materials/component-material.ts",
+        "sha256": "c8c43aa21eb68c602064bf5bac24d5e67c28b19fe0b897324df2cf6f95c5c0aa"
+      },
+      {
+        "path": "labs/nebula/packages/volume-core/src/materials/display-color.ts",
+        "sha256": "f9eea286c01661157fa29ac1d6e7666d6ff10400f4d79d0b1e00f934ab02882c"
+      },
+      {
+        "path": "labs/nebula/packages/volume-core/src/materials/slab-material.ts",
+        "sha256": "0bd1fb81ebf7d40c6087756da0d8bc1d783e34010ac7c71f00425f7d13c59c64"
+      },
+      {
+        "path": "src/renderers/css/preparation/leaf-bounds.ts",
+        "sha256": "7f090519561a4d13dcecd87e523490429cfbc5aff8f8b902e51019d98db8569c"
+      },
+      {
+        "path": "src/renderers/css/preparation/volume-order.ts",
+        "sha256": "491bc4d90a13f23cd5a9d60c55416fef63e5960cdbe33a286777b9438b9f19ea"
+      },
+      {
+        "path": "src/renderers/css/preparation/volume.ts",
+        "sha256": "bc32629f7a0a2e54b8064ccc3285e09a5520fa27b76df4a2e3d3d70ca1d5326b"
+      }
+    ]
+  },
+  "sourceRegistration": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        105965308676973530000,
+        533209933280955330000,
+        -1.4303831216834226e+21
+      ],
+      "localToReferenceXyzw": [
+        0.09631989992847079,
+        0.9788280334299664,
+        0.17973685917567428,
+        0.01768669847817273
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -34.2494860589516,
+          -39.659852117301206,
+          -14.063476651908141
+        ],
+        "max": [
+          28.24754056340629,
+          21.19251590973147,
+          13.190865784909581
+        ]
+      }
+    },
+    "tangentBoundsKpc": {
+      "min": [
+        -4.351779483333175,
+        -3.6886303332796695
+      ],
+      "max": [
+        5.121066913779062,
+        3.3480334410529595
+      ]
+    },
+    "observerDistanceKpc": 49.590672750490434,
+    "baseline": "5fc6d6563f57e5ef6a6d5b4a4f5ebd8e35f8ae8ace946d0cca0997e067424f9b"
+  }
 }

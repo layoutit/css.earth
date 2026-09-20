@@ -38,7 +38,7 @@ Success is **`BAKE_COMPLETE lmc` followed by `NEBULA_VERIFIED`**. The verifier c
 
 The bake downloads missing native originals and the pinned NOX model, creates a local Python environment with pinned dependencies, and verifies hashes before processing. Large downloads and intermediate files stay in `.local/`. Allow at least 8 GiB beyond the clone for dependencies, originals and generated products. The measured clean run took **15 minutes** on macOS arm64, including downloads and Python setup; a cached full replay took **4.2 seconds**. Hardware and network speed affect these times. The saved pre-NOX baseline examines about 1.7 million VISTA candidates and dominates the first run. Later runs verify and reuse completed native removal/reconstruction results. Python package installation requires an available wheel for the machine's platform.
 
-The command does not need the browser's localStorage, a running server or previously completed image jobs. A full bake also restores the app's ignored LMC slice textures, matching the accepted delivery hashes. It does not restart the lab, change browser settings or publish anything.
+The command does not need the browser's localStorage, a running server or previously completed image jobs. A full bake assembles its three-lens repaint bank under `.local/nebula-lab/bakes/` only: the application LMC now ships the finite-emission model in `models/lmc/envelope/`, restored by `pnpm prepare:nebulae` from `src/objects/lmc/source/compact/`, so this recipe no longer writes into `src/objects/lmc`. It does not restart the lab, change browser settings or publish anything.
 
 ## Stages and configuration
 
@@ -48,7 +48,7 @@ The command does not need the browser's localStorage, a running server or previo
 | Images | Three native originals, historical SMASH calibration, source hashes and accepted registration metadata | Full-footprint inspection previews; sky registration is preserved |
 | Removal | Saved baseline recipes, pinned NOX script/model and Python versions | Native starless image, residual and mask with exact subtraction checks |
 | Reconstruction | Shared density, catalogue/sky reference, saved placement and RGB controls | XYZ cloud banks plus the same 943 modeled catalogue stars for every image |
-| Lens bank | Saved cutoff, axis brightness, enabled cloud contributions, star exposure/size | A local three-lens bank and the app's 432 accepted slice textures |
+| Lens bank | Saved cutoff, axis brightness, enabled cloud contributions, star exposure/size | A local three-lens repaint bank (historical; no longer the app delivery) |
 
 `models/lmc/bake.json` is the entry recipe. It records the accepted ESO VISTA, Horálek optical and NASA WISE placements and saturation, detail strength/scale, brightness and gamma. It references the existing source/alignment, baseline, catalogue and presentation recipes by hash. The historical result IDs in `app-lenses.json` are replaced with the newly produced IDs during replay; the recorded presentation settings remain unchanged. Re-running the full bake verifies and reuses completed stages, then refreshes its receipt. Re-running `pnpm lab:nebula:verify` checks the results without processing.
 
@@ -60,7 +60,7 @@ The scalar grids and existing catalogue measurements are the pipeline's scientif
 
 Options with values use `--name=value`. Stages include their preceding dependencies and reuse verified completed results.
 
-Image-filtered bakes require `--research`, for example `pnpm lab:nebula:bake --research --image=wise-wide-infrared`. Without it, the command rejects the filter before reading recipes or starting processing. Run `pnpm lab:nebula:bake` without options to replay all three LMC lenses from compact inputs.
+Image-filtered bakes require `--research`, for example `pnpm lab:nebula:bake --research --image=wise-wide-infrared`. Without it, the command rejects the filter before reading recipes or starting processing. A full bake also requires `--research`: this recipe has no compact application delivery any more, so there is nothing to replay without processing.
 
 | Option | Purpose |
 |---|---|
@@ -69,13 +69,13 @@ Image-filtered bakes require `--research`, for example `pnpm lab:nebula:bake --r
 | `--stage=assets` | Neutral fields and inspection/reference images; used by lab startup/tests, without Python or star removal |
 | `--stage=removal` | Stop after native baseline/NOX products and separation previews |
 | `--stage=reconstruction` | Stop after individual cloud variants |
-| `--stage=all` | Default; also assemble the local lens bank and restore configured app textures |
-| `--if-missing` | Verify the complete app delivery; bake only if textures are absent. Cannot combine with an image filter or partial stage |
+| `--stage=all` | Default; also assemble the local lens bank and restore configured app textures; requires `--research` |
+| `--if-missing` | Verify the complete app delivery of a recipe that has one; bake only if textures are absent. Cannot combine with an image filter or partial stage |
 | `--image=wise-wide-infrared` | Process just one configured image; also accepts `vista-infrared` or `horalek-widefield` |
 | `--recipe=<json>` | Select an explicitly configured source set |
 | `--python=<executable>` | Use an existing environment; verify package versions without modifying it |
 
-This fixed-density command supplies the three LMC color comparisons. SMC supplies only its neutral density field. The six Galactic nebulae use separate saved compiler/symmetry delivery recipes; [the shared app guide](../../../docs/nebulae/README.md) documents all 23 lenses and their different scientific limitations. New objects require their own approved source/registration/prior configuration.
+This fixed-density command supplies the three historical LMC repaint comparisons. SMC supplies only its neutral density field. The six Galactic nebulae use separate saved compiler/symmetry delivery recipes; [the shared app guide](../../../docs/nebulae/README.md) documents all 23 lenses and their different scientific limitations. New objects require their own approved source/registration/prior configuration.
 
 For the separate production environment assets (outside this nebula-only workflow), `pnpm prepare:environment-images` restores the M31/M33/SMC layers, Milky Way slices and sky faces, heliosphere atlas and stellar point atlas from their pinned sources. It only bakes missing banks and verifies every restored byte against the accepted resource manifests. Pass `--verify-replay` to independently rebake even a complete bank. These operations preserve the descriptors and saved rendering settings. App startup/build and universe CI restore these images automatically.
 
