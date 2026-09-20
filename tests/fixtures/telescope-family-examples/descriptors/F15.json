@@ -29,7 +29,7 @@
   "members": [
     {
       "id": "image",
-      "path": "../../../tests/fixtures/telescope-families/geographos-radar/ge007.fit",
+      "path": "../../telescope-families/geographos-radar/ge007.fit",
       "role": "science",
       "bytes": 72000,
       "sha256": "e26d04af718cd5f98a2ba0b1f3a9beee509f1ae2168ddec33cab24653a8725a2",
@@ -37,7 +37,7 @@
     },
     {
       "id": "label",
-      "path": "../../../tests/fixtures/telescope-families/geographos-radar/ge007.lbl",
+      "path": "../../telescope-families/geographos-radar/ge007.lbl",
       "role": "label",
       "bytes": 3600,
       "sha256": "e505b5a1f8d9b38d64a55571d0fa14f14b572ad09cffda5d89b3355e732d2f0c",

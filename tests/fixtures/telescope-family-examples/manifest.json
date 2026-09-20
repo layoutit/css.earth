@@ -43,7 +43,7 @@
         "bytes": 5760,
         "sha256": "53c938b025d398986f37c8861a96caa1a988a403635d4aec1a06e3f4b4d92299"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F02.json nd-spectrum --params docs/telescope-family-examples/params/F02.json --out example-output/F02",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F02.json nd-spectrum --params tests/fixtures/telescope-family-examples/params/F02.json --out example-output/F02",
       "artifact": {
         "path": "artifacts/F02.json",
         "bytes": 2462,
@@ -70,7 +70,7 @@
         "bytes": 13609,
         "sha256": "b1aaec4f4361318c40d4f4cbc10c798baca0dbfb309cdab41152d6f83925d756"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F03.json spectrum-export --out example-output/F03",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F03.json spectrum-export --out example-output/F03",
       "artifact": {
         "path": "artifacts/F03.csv",
         "bytes": 10007,
@@ -97,7 +97,7 @@
         "bytes": 21487,
         "sha256": "c23af3b17dd98e3bc95e2620e4729390889a986383e0897eee2b8cf885f5f49e"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F04.json slit-scan-inspect --out example-output/F04",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F04.json slit-scan-inspect --out example-output/F04",
       "artifact": {
         "path": "artifacts/F04.json",
         "bytes": 2739,
@@ -124,7 +124,7 @@
         "bytes": 2084,
         "sha256": "9537eff943560b6d733cdf0aa7b4d675d75e45a7e1b833cd7e56619f4331debc"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F05.json photometry-export --out example-output/F05",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F05.json photometry-export --out example-output/F05",
       "artifact": {
         "path": "artifacts/F05.csv",
         "bytes": 151,
@@ -151,7 +151,7 @@
         "bytes": 1944000,
         "sha256": "442c1d97c549019f46b98026a6b74cd380112722e3e230e79203559f67cc326b"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F06.json time-series-select --params docs/telescope-family-examples/params/F06.json --out example-output/F06",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F06.json time-series-select --params tests/fixtures/telescope-family-examples/params/F06.json --out example-output/F06",
       "artifact": {
         "path": "artifacts/F06.csv",
         "bytes": 343,
@@ -178,7 +178,7 @@
         "bytes": 423932,
         "sha256": "a1fd0d0c2487592cd0a43672f50aede256dcdc2fed8bc4c3a87fb0799b20647b"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F07.json dynamic-spectrum-export --params docs/telescope-family-examples/params/F07.json --out example-output/F07",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F07.json dynamic-spectrum-export --params tests/fixtures/telescope-family-examples/params/F07.json --out example-output/F07",
       "artifact": {
         "path": "artifacts/F07.csv",
         "bytes": 354,
@@ -205,7 +205,7 @@
         "bytes": 1944000,
         "sha256": "442c1d97c549019f46b98026a6b74cd380112722e3e230e79203559f67cc326b"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F08.json table-inspect --out example-output/F08",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F08.json table-inspect --out example-output/F08",
       "artifact": {
         "path": "artifacts/F08.json",
         "bytes": 3227,
@@ -232,7 +232,7 @@
         "bytes": 128434,
         "sha256": "4b4502d725e6a4df12d46a6aa0339556140a82d8f0dde2df8b32db840ca2d177"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F09.json astrometry-export --out example-output/F09",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F09.json astrometry-export --out example-output/F09",
       "artifact": {
         "path": "artifacts/F09.csv",
         "bytes": 30677,
@@ -259,7 +259,7 @@
         "bytes": 2486220,
         "sha256": "14d5d8da4fcf108a7ec6d3d5ee8db31ed7e641ba8f66a52f7671322b928ce0e5"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F10.json selected-events --params docs/telescope-family-examples/params/F10.json --out example-output/F10",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F10.json selected-events --params tests/fixtures/telescope-family-examples/params/F10.json --out example-output/F10",
       "artifact": {
         "path": "artifacts/F10.csv",
         "bytes": 1234502,
@@ -289,7 +289,7 @@
         "bytes": 4253760,
         "sha256": "926ed6175d6725f6f27b04a97b658d13341f528a3847b5bc1b7246a24bde4b27"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F11.json uvfits-visibility-export --params docs/telescope-family-examples/params/F11.json --out example-output/F11",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F11.json uvfits-visibility-export --params tests/fixtures/telescope-family-examples/params/F11.json --out example-output/F11",
       "artifact": {
         "path": "artifacts/F11.json",
         "bytes": 1816,
@@ -316,7 +316,7 @@
         "bytes": 135360,
         "sha256": "e4f41d2aba17736ff1fca5e819d60eaf3d38a8e784f6fc2998d587b0c682bcbd"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F12.json v2-diagnostics --out example-output/F12",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F12.json v2-diagnostics --out example-output/F12",
       "artifact": {
         "path": "artifacts/F12.json",
         "bytes": 153585,
@@ -346,7 +346,7 @@
         "bytes": 5760,
         "sha256": "53c938b025d398986f37c8861a96caa1a988a403635d4aec1a06e3f4b4d92299"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F13.json stokes-spectrum --params docs/telescope-family-examples/params/F13.json --out example-output/F13",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F13.json stokes-spectrum --params tests/fixtures/telescope-family-examples/params/F13.json --out example-output/F13",
       "artifact": {
         "path": "artifacts/F13.json",
         "bytes": 537,
@@ -375,7 +375,7 @@
         "bytes": 102936,
         "sha256": "18823330e933185c7bb8df402d1abbf20da7dffe34b2a7b94d171a961d224515"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F14.json healpix-select --params docs/telescope-family-examples/params/F14.json --out example-output/F14",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F14.json healpix-select --params tests/fixtures/telescope-family-examples/params/F14.json --out example-output/F14",
       "artifact": {
         "path": "artifacts/F14.json",
         "bytes": 528,
@@ -402,7 +402,7 @@
         "bytes": 72000,
         "sha256": "e26d04af718cd5f98a2ba0b1f3a9beee509f1ae2168ddec33cab24653a8725a2"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F15.json radar-profile --params docs/telescope-family-examples/params/F15.json --out example-output/F15",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F15.json radar-profile --params tests/fixtures/telescope-family-examples/params/F15.json --out example-output/F15",
       "artifact": {
         "path": "artifacts/F15.json",
         "bytes": 235,
@@ -429,7 +429,7 @@
         "bytes": 906,
         "sha256": "fa4dbdb551af2ecfa85dc4964218f8708bbab60401f8d452a7a5230776c376e1"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F16.json spatial-inspect --out example-output/F16",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F16.json spatial-inspect --out example-output/F16",
       "artifact": {
         "path": "artifacts/F16.json",
         "bytes": 399,
@@ -459,7 +459,7 @@
         "bytes": 535680,
         "sha256": "c852aeb4858a579821e724419c4cdebfb895749423c039e54e75b72986a8de8d"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F17.json near-msi-inspect --out example-output/F17",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F17.json near-msi-inspect --out example-output/F17",
       "artifact": {
         "path": "artifacts/F17.json",
         "bytes": 850,
@@ -486,7 +486,7 @@
         "bytes": 4820,
         "sha256": "ab824d182a6eeb08ac4b69ad1dd90c51f12070f3c5f66579258b645f72df4c47"
       },
-      "command": "telescope family-run docs/telescope-family-examples/descriptors/F18.json enumerate-members --out example-output/F18",
+      "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F18.json enumerate-members --out example-output/F18",
       "artifact": {
         "path": "artifacts/F18.json",
         "bytes": 1150,

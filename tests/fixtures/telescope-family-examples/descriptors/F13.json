@@ -4,7 +4,7 @@
     "id": "rm-lite-documented-full-stokes",
     "acquisition": {
       "kind": "archive",
-      "identity": "../../../tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits"
+      "identity": "../../telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits"
     },
     "producingRecord": "RM-lite public 3D RM-synthesis documentation; BSD-3-Clause source fixture.",
     "sourceClassifications": [
@@ -28,7 +28,7 @@
   "members": [
     {
       "id": "stokes",
-      "path": "../../../tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
+      "path": "../../telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
       "role": "science",
       "bytes": 5760,
       "sha256": "53c938b025d398986f37c8861a96caa1a988a403635d4aec1a06e3f4b4d92299",

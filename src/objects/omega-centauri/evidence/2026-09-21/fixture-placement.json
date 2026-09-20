@@ -1,0 +1,1945 @@
+{
+  "schema": "cssearth-fixture-placement-repair@1",
+  "testedBase": "7a4f38985d98c4c03e7c48710428d9017f45f9d5",
+  "reason": "Contract lint rejects 44 raw fixture files in docs plus an unreachable guide; five downstream CI checks stopped before running.",
+  "repair": {
+    "round": 2,
+    "maximumCleanupRounds": 2,
+    "base": "7a4f38985d98c4c03e7c48710428d9017f45f9d5",
+    "lintBase": "3aebc31094dff8332755b394b88c708b7c3f1062",
+    "counts": {
+      "movedFiles": 44,
+      "byteIdenticalArtifacts": 18,
+      "byteIdenticalParameters": 8,
+      "descriptors": 17,
+      "descriptorMembers": 22,
+      "relativeReferenceFields": 34,
+      "sourceEntriesVerified": 18,
+      "notIgnoredEntries": 44
+    },
+    "files": [
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F01.csv",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F01.csv",
+        "bytes": 320309,
+        "sha256": "511587d2174225fee2ea4eaf7050bd580275dc45ef83951144539bc4c61fa64c",
+        "afterBytes": 320309,
+        "afterSha256": "511587d2174225fee2ea4eaf7050bd580275dc45ef83951144539bc4c61fa64c",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F02.json",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F02.json",
+        "bytes": 2462,
+        "sha256": "7d0df1bc4589ac6ca0c7c1389485ab8dcd4e3bb20c5b79b825e93d36f30dce1d",
+        "afterBytes": 2462,
+        "afterSha256": "7d0df1bc4589ac6ca0c7c1389485ab8dcd4e3bb20c5b79b825e93d36f30dce1d",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F03.csv",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F03.csv",
+        "bytes": 10007,
+        "sha256": "d6aaea2ee5c61624057ad502bf392bdc6871acf832e5b35a93608464b4988c76",
+        "afterBytes": 10007,
+        "afterSha256": "d6aaea2ee5c61624057ad502bf392bdc6871acf832e5b35a93608464b4988c76",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F04.json",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F04.json",
+        "bytes": 2739,
+        "sha256": "10118793a5f980fe81a9361b100ad3f4fe1a429c52152ed383e36e043f957ae2",
+        "afterBytes": 2739,
+        "afterSha256": "10118793a5f980fe81a9361b100ad3f4fe1a429c52152ed383e36e043f957ae2",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F05.csv",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F05.csv",
+        "bytes": 151,
+        "sha256": "69f48cfa89a61b1d919592adaec48c0f8f185a46900030462f1198580884152f",
+        "afterBytes": 151,
+        "afterSha256": "69f48cfa89a61b1d919592adaec48c0f8f185a46900030462f1198580884152f",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F06.csv",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F06.csv",
+        "bytes": 343,
+        "sha256": "42fecf1d339745021f7aa337f751b5e8339e4ad5ba1abd9808fc17fb7ce9d0c9",
+        "afterBytes": 343,
+        "afterSha256": "42fecf1d339745021f7aa337f751b5e8339e4ad5ba1abd9808fc17fb7ce9d0c9",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F07.csv",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F07.csv",
+        "bytes": 354,
+        "sha256": "a6724d8ec1746ff26583e1545b0d2f6b1ec04d5cdcd8250225634db5417aa291",
+        "afterBytes": 354,
+        "afterSha256": "a6724d8ec1746ff26583e1545b0d2f6b1ec04d5cdcd8250225634db5417aa291",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F08.json",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F08.json",
+        "bytes": 3227,
+        "sha256": "1f4270ec5ad4467645f043486a789bf47e055ab9599a2ad0b984626ed63fdde2",
+        "afterBytes": 3227,
+        "afterSha256": "1f4270ec5ad4467645f043486a789bf47e055ab9599a2ad0b984626ed63fdde2",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F09.csv",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F09.csv",
+        "bytes": 30677,
+        "sha256": "b41b12fbd1470980a5f9e2676185d6d7bc52eadb26ba9d7b716fc5e916dfcd72",
+        "afterBytes": 30677,
+        "afterSha256": "b41b12fbd1470980a5f9e2676185d6d7bc52eadb26ba9d7b716fc5e916dfcd72",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F10.csv",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F10.csv",
+        "bytes": 1234502,
+        "sha256": "008a06a057b541851b44aa8c9fc823f01954e395d488bf54d6d04f0c6c47d0dc",
+        "afterBytes": 1234502,
+        "afterSha256": "008a06a057b541851b44aa8c9fc823f01954e395d488bf54d6d04f0c6c47d0dc",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F11.json",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F11.json",
+        "bytes": 1816,
+        "sha256": "9324e9afeb0ed225b6279c6b99e135cfad0938caaa22b7be9a926a8d2d8e8536",
+        "afterBytes": 1816,
+        "afterSha256": "9324e9afeb0ed225b6279c6b99e135cfad0938caaa22b7be9a926a8d2d8e8536",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F12.json",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F12.json",
+        "bytes": 153585,
+        "sha256": "fe0e04f589f650ba5ca105f959863493f969e5f0bc07d79b174c97cf47500c22",
+        "afterBytes": 153585,
+        "afterSha256": "fe0e04f589f650ba5ca105f959863493f969e5f0bc07d79b174c97cf47500c22",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F13.json",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F13.json",
+        "bytes": 537,
+        "sha256": "b162ce03379dfe3a287994904fc4bac682a8e511e810b9da2eb5d555c3e109d9",
+        "afterBytes": 537,
+        "afterSha256": "b162ce03379dfe3a287994904fc4bac682a8e511e810b9da2eb5d555c3e109d9",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F14.json",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F14.json",
+        "bytes": 528,
+        "sha256": "d13871b14d55804e8cd88da19608ba6a60babc3abffff82b370c9d8dc697a65f",
+        "afterBytes": 528,
+        "afterSha256": "d13871b14d55804e8cd88da19608ba6a60babc3abffff82b370c9d8dc697a65f",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F15.json",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F15.json",
+        "bytes": 235,
+        "sha256": "f9f23442978f2f328d758eda7f24f5501e5d739ff3d0e3222f9e9676213774f3",
+        "afterBytes": 235,
+        "afterSha256": "f9f23442978f2f328d758eda7f24f5501e5d739ff3d0e3222f9e9676213774f3",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F16.json",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F16.json",
+        "bytes": 399,
+        "sha256": "ab61e17f55f19c6cdd90d189f7c85c2b8ec714f7065b448759bffad699ccd534",
+        "afterBytes": 399,
+        "afterSha256": "ab61e17f55f19c6cdd90d189f7c85c2b8ec714f7065b448759bffad699ccd534",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F17.json",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F17.json",
+        "bytes": 850,
+        "sha256": "3ce0da2fb9110c5d78d52bf10f96a534a4b1e1d1cda920e2b0712af6b87c01ef",
+        "afterBytes": 850,
+        "afterSha256": "3ce0da2fb9110c5d78d52bf10f96a534a4b1e1d1cda920e2b0712af6b87c01ef",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/artifacts/F18.json",
+        "newPath": "tests/fixtures/telescope-family-examples/artifacts/F18.json",
+        "bytes": 1150,
+        "sha256": "850afec6860bc1c07ca50f5da408fcf3f50832f61ee54c8ee351844e5119be13",
+        "afterBytes": 1150,
+        "afterSha256": "850afec6860bc1c07ca50f5da408fcf3f50832f61ee54c8ee351844e5119be13",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F02.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F02.json",
+        "bytes": 3289,
+        "sha256": "62fcd738e49d7e17d879a606ec5a4bea036ba5e2917acd6d9a65e5f232f97f60",
+        "afterBytes": 3271,
+        "afterSha256": "420084ef3535cc83d790ef5652ce4b17fcf10dae431de935d6e6a17b29b94866",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F03.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F03.json",
+        "bytes": 2924,
+        "sha256": "d7c54fa12a84bb6f3619c9393c7f58a5e41cc8e7ae2e04a18993b88443ac61ed",
+        "afterBytes": 2930,
+        "afterSha256": "b3715ae7dc141dbee9b3a099db71de9a34fdd549c02c53ee399e85eb481adfd2",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F04.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F04.json",
+        "bytes": 4677,
+        "sha256": "fa10e0795c6465aa77d802c810a3b07a10e261c247066374b5528ce54ed902ad",
+        "afterBytes": 4686,
+        "afterSha256": "2a0b2eba1c17c24f2e6e915b3509c182a0b17286652805b118a0f34dfff584b5",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F05.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F05.json",
+        "bytes": 3645,
+        "sha256": "ab977b771cc7132d6872bbb8a04d125fa71b65555088db01fcfe7ca7a6c715c2",
+        "afterBytes": 3651,
+        "afterSha256": "30fe57d5cac0b04073eff07e9ec798191fd6ef8ff1bf8dee13e38826219ca0b9",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F06.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F06.json",
+        "bytes": 3289,
+        "sha256": "ce1ad9cfe37228886bbda9dca735ceb4032f729851b9cbfce95652cd82bc9f2d",
+        "afterBytes": 3295,
+        "afterSha256": "eddf325936f716b7715f46f2c491e724bd2833e1046db2a5c6bc6bd27add8f5f",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F07.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F07.json",
+        "bytes": 2778,
+        "sha256": "c1ea1aa867b4dd9634bd6d86bc144ffe14daf3023dbd52f2aa19812a4c57b99e",
+        "afterBytes": 2760,
+        "afterSha256": "8df95c6e1e292a20da0c07481d1e03cdafe442c25c1141f9378e1d263a2b88c3",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F08.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F08.json",
+        "bytes": 6636,
+        "sha256": "2a4769accf40d6f4e5163bf8f5abeb1a918caf5cbb9ebbfa4caab9c4cd2158b1",
+        "afterBytes": 6642,
+        "afterSha256": "f22adfc88e14d293d0f7b4f313a3dccbbd288598f1281542add0f34955d69497",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F09.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F09.json",
+        "bytes": 4310,
+        "sha256": "6204a72d2c4b93b31a354854af189a8b5ba96cb33ebd415da5e872f6c5e0dae3",
+        "afterBytes": 4316,
+        "afterSha256": "02768efe33be9974fc7fbc8cfdd1bc9c51e3f3e272c86bad62fd2e0920e06767",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F10.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F10.json",
+        "bytes": 4715,
+        "sha256": "023170a87411ca8c40b7ca27b5442a22936cc9928cf39d2f0f3d9a7c0489daa4",
+        "afterBytes": 4679,
+        "afterSha256": "0c00ebd8697782fa1b549881c1efadd8ca5dd1bab0278dc2c9293275137cfc24",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F11.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F11.json",
+        "bytes": 2705,
+        "sha256": "6e2ac2b409919a0ca9e050d002864dd99f8ff64a44786252d9eb8b5a69752d29",
+        "afterBytes": 2669,
+        "afterSha256": "432abbf3380bc744907b46e3a3c5dcb2aec18a62287a96dffaf9fecaf1410453",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F12.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F12.json",
+        "bytes": 3991,
+        "sha256": "2a41d16eb5250a976be591d8c1915d2bf438e8fc1c9188281dc19b861c5b8de8",
+        "afterBytes": 3997,
+        "afterSha256": "7a1e9e8bb63a9e35a8fcbf55532b41347cb77d9143c60b8c91d1c3c7d05e91f8",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F13.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F13.json",
+        "bytes": 10231,
+        "sha256": "10cf2dfaef3eb978ca4e3edd4316bae809ea998f98f3557d36849894aba3ba26",
+        "afterBytes": 10195,
+        "afterSha256": "928e541713af255fe8b2b3dc2a7af3030fbcea9768eda8bf81901d4b1666bc93",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F14.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F14.json",
+        "bytes": 2363,
+        "sha256": "94aa9668b1f410840391cf726a2894790b5a022041bed91bc7506e78fb296981",
+        "afterBytes": 2345,
+        "afterSha256": "f7156e3b8ca6ace3d02785da72ba9f4a717f3f27f66ec87b19d10fd7976b09b9",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F15.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F15.json",
+        "bytes": 3405,
+        "sha256": "5794716a87fe7f9144f579f578c46e24ffc6a32122111f34204004f066057ed9",
+        "afterBytes": 3369,
+        "afterSha256": "7790e595e617e7330f6b204cee88b7a68a3aab403b420ca2749bb9733e761aeb",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F16.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F16.json",
+        "bytes": 5092,
+        "sha256": "d7b8449d3f5901de7dc5bbdfb1de54d0b8c44815512aca016cf578acc7cd7037",
+        "afterBytes": 5095,
+        "afterSha256": "45d1ed9e1a1641727d558e58ccaf304d4bb61373d90ef6e134ea3d26d7923584",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F17.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F17.json",
+        "bytes": 3618,
+        "sha256": "d51419422be27489a0e4d489aa7051fda0afeec6c9d60b54bc8bc31c38e79961",
+        "afterBytes": 3564,
+        "afterSha256": "d464887ddb725ae357976be42d7d30e05068a352001b5c3326db075d68eba893",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/descriptors/F18.json",
+        "newPath": "tests/fixtures/telescope-family-examples/descriptors/F18.json",
+        "bytes": 4219,
+        "sha256": "b4e12c081d0bd5695d86e4a474eafdda37bf3f04e408c0de00247614a4c42539",
+        "afterBytes": 4231,
+        "afterSha256": "4617e78eaa8e4ec241f6e4be79e0eb20b67747df90444d42d8e685ea778d862a",
+        "claim": "Only relative references changed; resolved targets and all other values identical."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/manifest.json",
+        "newPath": "tests/fixtures/telescope-family-examples/manifest.json",
+        "bytes": 25150,
+        "sha256": "f6f58874fcc709df139cae1fe72eb1d6945e102cabd76e793e4a564967bc5fc3",
+        "afterBytes": 25400,
+        "afterSha256": "9f06d9f09d17f3db7ba99d29ba2bdb56f27935299c83772862a81a87f7f776f3",
+        "claim": "Only command descriptor and parameter prefixes changed."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/params/F02.json",
+        "newPath": "tests/fixtures/telescope-family-examples/params/F02.json",
+        "bytes": 106,
+        "sha256": "f3d2946202e381939ecd0dddd78fc491cc3feb5e50b2ad269bff5364733fc060",
+        "afterBytes": 106,
+        "afterSha256": "f3d2946202e381939ecd0dddd78fc491cc3feb5e50b2ad269bff5364733fc060",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/params/F06.json",
+        "newPath": "tests/fixtures/telescope-family-examples/params/F06.json",
+        "bytes": 105,
+        "sha256": "2868a5ba16f74eaee6137229c60c557587d2d74b6e5df73837340588160705bb",
+        "afterBytes": 105,
+        "afterSha256": "2868a5ba16f74eaee6137229c60c557587d2d74b6e5df73837340588160705bb",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/params/F07.json",
+        "newPath": "tests/fixtures/telescope-family-examples/params/F07.json",
+        "bytes": 96,
+        "sha256": "0dc96be0ededa57992a6ebf255d70a8add9feaf93cb03899fdb0b389c7cb83d4",
+        "afterBytes": 96,
+        "afterSha256": "0dc96be0ededa57992a6ebf255d70a8add9feaf93cb03899fdb0b389c7cb83d4",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/params/F10.json",
+        "newPath": "tests/fixtures/telescope-family-examples/params/F10.json",
+        "bytes": 124,
+        "sha256": "cf61276bebfd465b6e01d4a8a01757723ec2e81c5c158043c3c2a4bc74959479",
+        "afterBytes": 124,
+        "afterSha256": "cf61276bebfd465b6e01d4a8a01757723ec2e81c5c158043c3c2a4bc74959479",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/params/F11.json",
+        "newPath": "tests/fixtures/telescope-family-examples/params/F11.json",
+        "bytes": 325,
+        "sha256": "ca840fa313c16c9c4606c7efb849108b329dda625605567935384588ff88ae23",
+        "afterBytes": 325,
+        "afterSha256": "ca840fa313c16c9c4606c7efb849108b329dda625605567935384588ff88ae23",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/params/F13.json",
+        "newPath": "tests/fixtures/telescope-family-examples/params/F13.json",
+        "bytes": 130,
+        "sha256": "20cf4eb66ed978177f99a91200d89fe526314d6bd352159fa1e1b442db1f5e0e",
+        "afterBytes": 130,
+        "afterSha256": "20cf4eb66ed978177f99a91200d89fe526314d6bd352159fa1e1b442db1f5e0e",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/params/F14.json",
+        "newPath": "tests/fixtures/telescope-family-examples/params/F14.json",
+        "bytes": 117,
+        "sha256": "9ac35bc28dcd79c762da518096141fc3ba4464ce8a74121de873145ab6a69cdf",
+        "afterBytes": 117,
+        "afterSha256": "9ac35bc28dcd79c762da518096141fc3ba4464ce8a74121de873145ab6a69cdf",
+        "claim": "Byte-identical relocation."
+      },
+      {
+        "oldPath": "docs/telescope-family-examples/params/F15.json",
+        "newPath": "tests/fixtures/telescope-family-examples/params/F15.json",
+        "bytes": 83,
+        "sha256": "dea1e9d07e8f940b01a90914bd82a0f0e8decb4b3667eb109af7ffc658ecce7d",
+        "afterBytes": 83,
+        "afterSha256": "dea1e9d07e8f940b01a90914bd82a0f0e8decb4b3667eb109af7ffc658ecce7d",
+        "claim": "Byte-identical relocation."
+      }
+    ],
+    "references": [
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F02.json",
+        "field": "members.0.path",
+        "oldValue": "../../../tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
+        "newValue": "../../telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
+        "target": "tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F03.json",
+        "field": "dataset.acquisition.identity",
+        "oldValue": "../../../src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json",
+        "newValue": "../../../../src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json",
+        "target": "src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F03.json",
+        "field": "members.0.path",
+        "oldValue": "../../../src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json",
+        "newValue": "../../../../src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json",
+        "target": "src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F04.json",
+        "field": "dataset.acquisition.identity",
+        "oldValue": "../../../tools/objects/hst/programs/europa-salt-map.scan.json",
+        "newValue": "../../../../tools/objects/hst/programs/europa-salt-map.scan.json",
+        "target": "tools/objects/hst/programs/europa-salt-map.scan.json"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F04.json",
+        "field": "members.0.path",
+        "oldValue": "../../../tools/objects/hst/programs/europa-salt-map.scan.json",
+        "newValue": "../../../../tools/objects/hst/programs/europa-salt-map.scan.json",
+        "target": "tools/objects/hst/programs/europa-salt-map.scan.json"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F04.json",
+        "field": "members.1.path",
+        "oldValue": "../../../tools/objects/hst/programs/europa-salt-map.scan.reproduction.json",
+        "newValue": "../../../../tools/objects/hst/programs/europa-salt-map.scan.reproduction.json",
+        "target": "tools/objects/hst/programs/europa-salt-map.scan.reproduction.json"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F05.json",
+        "field": "dataset.acquisition.identity",
+        "oldValue": "../../../src/objects/haumea/source/photometry/disc-color.json",
+        "newValue": "../../../../src/objects/haumea/source/photometry/disc-color.json",
+        "target": "src/objects/haumea/source/photometry/disc-color.json"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F05.json",
+        "field": "members.0.path",
+        "oldValue": "../../../src/objects/haumea/source/photometry/disc-color.json",
+        "newValue": "../../../../src/objects/haumea/source/photometry/disc-color.json",
+        "target": "src/objects/haumea/source/photometry/disc-color.json"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F06.json",
+        "field": "dataset.acquisition.identity",
+        "oldValue": "../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+        "newValue": "../../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+        "target": "src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F06.json",
+        "field": "members.0.path",
+        "oldValue": "../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+        "newValue": "../../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+        "target": "src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F07.json",
+        "field": "members.0.path",
+        "oldValue": "../../../tests/fixtures/telescope-families/wind-rad1/wi_l2_wav_rad1_20200101_v01.cdf",
+        "newValue": "../../telescope-families/wind-rad1/wi_l2_wav_rad1_20200101_v01.cdf",
+        "target": "tests/fixtures/telescope-families/wind-rad1/wi_l2_wav_rad1_20200101_v01.cdf"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F08.json",
+        "field": "dataset.acquisition.identity",
+        "oldValue": "../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+        "newValue": "../../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+        "target": "src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F08.json",
+        "field": "members.0.path",
+        "oldValue": "../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+        "newValue": "../../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+        "target": "src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F09.json",
+        "field": "dataset.acquisition.identity",
+        "oldValue": "../../../src/objects/m1/source/stellar-field.json",
+        "newValue": "../../../../src/objects/m1/source/stellar-field.json",
+        "target": "src/objects/m1/source/stellar-field.json"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F09.json",
+        "field": "members.0.path",
+        "oldValue": "../../../src/objects/m1/source/stellar-field.json",
+        "newValue": "../../../../src/objects/m1/source/stellar-field.json",
+        "target": "src/objects/m1/source/stellar-field.json"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F10.json",
+        "field": "dataset.acquisition.identity",
+        "oldValue": "../../../tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz",
+        "newValue": "../../telescope-families/chandra-events/acisf06431N003_evt2.fits.gz",
+        "target": "tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F10.json",
+        "field": "members.0.path",
+        "oldValue": "../../../tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz",
+        "newValue": "../../telescope-families/chandra-events/acisf06431N003_evt2.fits.gz",
+        "target": "tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F11.json",
+        "field": "dataset.acquisition.identity",
+        "oldValue": "../../../tests/fixtures/telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits",
+        "newValue": "../../telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits",
+        "target": "tests/fixtures/telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F11.json",
+        "field": "members.0.path",
+        "oldValue": "../../../tests/fixtures/telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits",
+        "newValue": "../../telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits",
+        "target": "tests/fixtures/telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F12.json",
+        "field": "dataset.acquisition.identity",
+        "oldValue": "../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
+        "newValue": "../../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
+        "target": "src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F12.json",
+        "field": "members.0.path",
+        "oldValue": "../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
+        "newValue": "../../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
+        "target": "src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F13.json",
+        "field": "dataset.acquisition.identity",
+        "oldValue": "../../../tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
+        "newValue": "../../telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
+        "target": "tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F13.json",
+        "field": "members.0.path",
+        "oldValue": "../../../tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
+        "newValue": "../../telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
+        "target": "tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F14.json",
+        "field": "members.0.path",
+        "oldValue": "../../../tests/fixtures/telescope-families/f14-healpix/bayestar.fits.gz",
+        "newValue": "../../telescope-families/f14-healpix/bayestar.fits.gz",
+        "target": "tests/fixtures/telescope-families/f14-healpix/bayestar.fits.gz"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F15.json",
+        "field": "members.0.path",
+        "oldValue": "../../../tests/fixtures/telescope-families/geographos-radar/ge007.fit",
+        "newValue": "../../telescope-families/geographos-radar/ge007.fit",
+        "target": "tests/fixtures/telescope-families/geographos-radar/ge007.fit"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F15.json",
+        "field": "members.1.path",
+        "oldValue": "../../../tests/fixtures/telescope-families/geographos-radar/ge007.lbl",
+        "newValue": "../../telescope-families/geographos-radar/ge007.lbl",
+        "target": "tests/fixtures/telescope-families/geographos-radar/ge007.lbl"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F16.json",
+        "field": "members.0.path",
+        "oldValue": "../../../src/objects/stellar-neighbourhood/object.json",
+        "newValue": "../../../../src/objects/stellar-neighbourhood/object.json",
+        "target": "src/objects/stellar-neighbourhood/object.json"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F17.json",
+        "field": "members.0.path",
+        "oldValue": "../../../tests/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p.fit",
+        "newValue": "../../telescope-families/f17-mathilde-near-msi/m0042826360f0_2p.fit",
+        "target": "tests/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p.fit"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F17.json",
+        "field": "members.1.path",
+        "oldValue": "../../../tests/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.fit",
+        "newValue": "../../telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.fit",
+        "target": "tests/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.fit"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F17.json",
+        "field": "members.2.path",
+        "oldValue": "../../../tests/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.xml",
+        "newValue": "../../telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.xml",
+        "target": "tests/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.xml"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F18.json",
+        "field": "members.0.path",
+        "oldValue": "../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
+        "newValue": "../../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
+        "target": "tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F18.json",
+        "field": "members.1.path",
+        "oldValue": "../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+        "newValue": "../../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+        "target": "tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F18.json",
+        "field": "components.0.name",
+        "oldValue": "../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
+        "newValue": "../../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
+        "target": "tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json"
+      },
+      {
+        "descriptor": "tests/fixtures/telescope-family-examples/descriptors/F18.json",
+        "field": "components.1.name",
+        "oldValue": "../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+        "newValue": "../../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+        "target": "tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json"
+      }
+    ],
+    "sourceChecks": [
+      {
+        "family": "F01",
+        "path": "src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits",
+        "url": "https://doi.org/10.1051/0004-6361/202244693",
+        "bytes": 141120,
+        "sha256": "372ed3278212fc3a51788e2c695b58d35108d91e3fcda80213b8d440af581dd6",
+        "verified": true
+      },
+      {
+        "family": "F02",
+        "path": "tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
+        "url": "https://rm-lite.readthedocs.io/en/stable/examples/rmsynth_3d.html",
+        "bytes": 5760,
+        "sha256": "53c938b025d398986f37c8861a96caa1a988a403635d4aec1a06e3f4b4d92299",
+        "verified": true
+      },
+      {
+        "family": "F03",
+        "path": "src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json",
+        "url": "https://zenodo.org/records/7433033",
+        "bytes": 13609,
+        "sha256": "b1aaec4f4361318c40d4f4cbc10c798baca0dbfb309cdab41152d6f83925d756",
+        "verified": true
+      },
+      {
+        "family": "F04",
+        "path": "tools/objects/hst/programs/europa-salt-map.scan.reproduction.json",
+        "url": "https://doi.org/10.1126/sciadv.aaw7123",
+        "bytes": 21487,
+        "sha256": "c23af3b17dd98e3bc95e2620e4729390889a986383e0897eee2b8cf885f5f49e",
+        "verified": true
+      },
+      {
+        "family": "F05",
+        "path": "src/objects/haumea/source/photometry/disc-color.json",
+        "url": "https://doi.org/10.1038/s41586-017-1784-8",
+        "bytes": 2084,
+        "sha256": "9537eff943560b6d733cdf0aa7b4d675d75e45a7e1b833cd7e56619f4331debc",
+        "verified": true
+      },
+      {
+        "family": "F06",
+        "path": "src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+        "bytes": 1944000,
+        "sha256": "442c1d97c549019f46b98026a6b74cd380112722e3e230e79203559f67cc326b",
+        "verified": true
+      },
+      {
+        "family": "F07",
+        "path": "tests/fixtures/telescope-families/wind-rad1/wi_l2_wav_rad1_20200101_v01.cdf",
+        "url": "https://spdf.gsfc.nasa.gov/pub/data/wind/waves/rad1_l2/2020/wi_l2_wav_rad1_20200101_v01.cdf",
+        "bytes": 423932,
+        "sha256": "a1fd0d0c2487592cd0a43672f50aede256dcdc2fed8bc4c3a87fb0799b20647b",
+        "verified": true
+      },
+      {
+        "family": "F08",
+        "path": "src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+        "bytes": 1944000,
+        "sha256": "442c1d97c549019f46b98026a6b74cd380112722e3e230e79203559f67cc326b",
+        "verified": true
+      },
+      {
+        "family": "F09",
+        "path": "src/objects/m1/source/stellar-field.json",
+        "url": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+        "bytes": 128434,
+        "sha256": "4b4502d725e6a4df12d46a6aa0339556140a82d8f0dde2df8b32db840ca2d177",
+        "verified": true
+      },
+      {
+        "family": "F10",
+        "path": "tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz",
+        "url": "https://cda.cfa.harvard.edu/chaser/startViewer.do?menuItem=details&obsid=6431",
+        "bytes": 2486220,
+        "sha256": "14d5d8da4fcf108a7ec6d3d5ee8db31ed7e641ba8f66a52f7671322b928ce0e5",
+        "verified": true
+      },
+      {
+        "family": "F11",
+        "path": "tests/fixtures/telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits",
+        "url": "https://github.com/RadioAstronomySoftwareGroup/pyuvdata/tree/main/pyuvdata/data",
+        "bytes": 4253760,
+        "sha256": "926ed6175d6725f6f27b04a97b658d13341f528a3847b5bc1b7246a24bde4b27",
+        "verified": true
+      },
+      {
+        "family": "F12",
+        "path": "src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
+        "url": "https://doi.org/10.1051/0004-6361/202244693",
+        "bytes": 135360,
+        "sha256": "e4f41d2aba17736ff1fca5e819d60eaf3d38a8e784f6fc2998d587b0c682bcbd",
+        "verified": true
+      },
+      {
+        "family": "F13",
+        "path": "tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
+        "url": "https://rm-lite.readthedocs.io/en/stable/examples/rmsynth_3d.html",
+        "bytes": 5760,
+        "sha256": "53c938b025d398986f37c8861a96caa1a988a403635d4aec1a06e3f4b4d92299",
+        "verified": true
+      },
+      {
+        "family": "F14",
+        "path": "tests/fixtures/telescope-families/f14-healpix/bayestar.fits.gz",
+        "url": "https://github.com/astropy/reproject/blob/main/reproject/healpix/tests/data/bayestar.fits.gz",
+        "bytes": 102936,
+        "sha256": "18823330e933185c7bb8df402d1abbf20da7dffe34b2a7b94d171a961d224515",
+        "verified": true
+      },
+      {
+        "family": "F15",
+        "path": "tests/fixtures/telescope-families/geographos-radar/ge007.fit",
+        "url": "https://sbnarchive.psi.edu/pds3/non_mission/EAR_A_GST_3_RDR_GEOGRAPHOS_RADAR_V1_1/data/ge007.fit",
+        "bytes": 72000,
+        "sha256": "e26d04af718cd5f98a2ba0b1f3a9beee509f1ae2168ddec33cab24653a8725a2",
+        "verified": true
+      },
+      {
+        "family": "F16",
+        "path": "src/objects/stellar-neighbourhood/object.json",
+        "url": "https://codeberg.org/astronexus/hyg",
+        "bytes": 906,
+        "sha256": "fa4dbdb551af2ecfa85dc4964218f8708bbab60401f8d452a7a5230776c376e1",
+        "verified": true
+      },
+      {
+        "family": "F17",
+        "path": "tests/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.fit",
+        "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.fit",
+        "bytes": 535680,
+        "sha256": "c852aeb4858a579821e724419c4cdebfb895749423c039e54e75b72986a8de8d",
+        "verified": true
+      },
+      {
+        "family": "F18",
+        "path": "tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/mosaic/nh_charon_color_mosaic.lblx",
+        "bytes": 4820,
+        "sha256": "ab824d182a6eeb08ac4b69ad1dd90c51f12070f3c5f66579258b645f72df4c47",
+        "verified": true
+      }
+    ],
+    "restoredExistingSource": {
+      "donor": "/Users/apresmoi/Documents/cssEarth/src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+      "path": "src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+      "bytes": 1944000,
+      "sha256": "442c1d97c549019f46b98026a6b74cd380112722e3e230e79203559f67cc326b"
+    },
+    "checks": [
+      {
+        "path": "output/pr390-audit/ci-head-bb7cab3/telescope-cleanup-round2-family-examples.log",
+        "bytes": 361,
+        "sha256": "a61ee6924b4b6004154e29304b0032bd2cfcabcc63474dd4c81b04f3d06cd956"
+      },
+      {
+        "path": "output/pr390-audit/ci-head-bb7cab3/telescope-cleanup-round2-documentation.json",
+        "bytes": 477,
+        "sha256": "c06cc8bbfb4e1b9e597f90fd6e76934e80b07d2fef92d4f5f91e66d937c80bf5"
+      },
+      {
+        "path": "output/pr390-audit/ci-head-bb7cab3/telescope-cleanup-round2-acquisition-mutation.log",
+        "bytes": 1029,
+        "sha256": "0d9c8bdd04435f1c86024f4c3faaa09f5abdbee76548cc619ef27ef445e7e6d4"
+      },
+      {
+        "path": "output/pr390-audit/ci-head-bb7cab3/telescope-cleanup-round2-dispatch.log",
+        "bytes": 1493,
+        "sha256": "670f28dbf11681a98a5b3e0cd181d8eb135d5de4c32f4c6fc7709e022d7585f4"
+      },
+      {
+        "path": "output/pr390-audit/ci-head-bb7cab3/telescope-cleanup-round2-test-types.log",
+        "bytes": 162,
+        "sha256": "de92610b441d6a18f51972d19d9f736c3951f906e91ca4163fd24faa87e52502"
+      }
+    ],
+    "restorer": "f13-f17-examples.mts is unchanged. It restores archive bytes into the explicit directory or ignored output/telescope-family-examples/input; receipts/previews go to explicit out or ignored output/telescope-family-examples. It never reads or generates this retained fixture catalog.",
+    "validation": {
+      "familyExamples": "1 test passed, zero failures/skips; all 18 examples checked",
+      "documentation": "zero errors; 161 links; 63/63 guides reachable",
+      "mutation": "Old F04 acquisition depth fails existing closure check with ENOENT at tests/tools/...; original descriptor bytes restored.",
+      "dispatch": "Existing remaining-family dispatcher test resolves relocated F03 and completes range/chart assertions, then fails at spectrum-preview: The astronomy packages are not installed: node tools/objects/astronomy-packages/toolchain.mts install. Not a passing test; no installation or mocks.",
+      "testTypecheck": {
+        "command": "pnpm typecheck:tests",
+        "exitCode": 0,
+        "typedFiles": 1758,
+        "status": "pass"
+      },
+      "diffCheck": {
+        "command": "git diff --check",
+        "exitCode": 0,
+        "status": "pass"
+      }
+    }
+  },
+  "documentation": {
+    "base": "3aebc31094dff8332755b394b88c708b7c3f1062",
+    "markdownFiles": 10,
+    "localLinksChecked": 161,
+    "errors": [],
+    "documentation": {
+      "guides": 63,
+      "reachableGuides": 63,
+      "illustrations": 51,
+      "usedIllustrations": 51
+    },
+    "scope": "Checks inline Markdown, used reference links and HTML a/img targets and Markdown heading anchors, docs placement and duplicate body accounts. Excludes fenced examples, external URL availability and content quality."
+  },
+  "review": {
+    "receipt": {
+      "packet": "fixture-relocation",
+      "sourceRef": "7a4f38985d98c4c03e7c48710428d9017f45f9d5",
+      "durationMs": 45333,
+      "turns": 1,
+      "successful": true,
+      "completeSentinel": true,
+      "emptyTools": true,
+      "emptyMcp": true,
+      "sourceDrift": [],
+      "dataDrift": [],
+      "preservation": {
+        "sourceRef": "7a4f38985d98c4c03e7c48710428d9017f45f9d5",
+        "files": 44,
+        "exactBytes": 26,
+        "descriptorFiles": 17,
+        "manifestCommandChanges": 17,
+        "allChecksPass": true
+      }
+    },
+    "scope": {
+      "tools/objects/telescopes/family-examples.test.mts": {
+        "sha256": "79f26091a79236938ed6a4a2baf818cf6a48d6c3f07c8b2684180a4dfdf75870",
+        "bytes": 3844,
+        "lines": [
+          [
+            1,
+            41
+          ]
+        ]
+      },
+      "tools/objects/telescopes/family-operation.test.mts": {
+        "sha256": "ac29fd2774d5d50150be7166b07ae46e899287843ec3e5307fa10168ce9fc730",
+        "bytes": 18116,
+        "lines": [
+          [
+            1,
+            19
+          ],
+          [
+            59,
+            78
+          ]
+        ]
+      },
+      "tools/objects/telescopes/families/f13-f17-examples.mts": {
+        "sha256": "ecfb98810a57ea9759e554cbd56337fbbc626b7bac82db7c8fedd50ce0454015",
+        "bytes": 3867,
+        "lines": [
+          [
+            1,
+            15
+          ]
+        ]
+      },
+      "tools/objects/telescopes/family-operation.mts": {
+        "sha256": "b4ef99f14b55d6f43dcd032fa45bd5cb3ef0ac29162d00e0370ac10dc8c7d06b",
+        "bytes": 56027,
+        "lines": [
+          [
+            123,
+            136
+          ]
+        ]
+      },
+      "tools/audits/check-documentation-links.py": {
+        "sha256": "f6f3e4bf58f91ee6a597f641d2c8ee0d33479ed73656283931c6821be635cc95",
+        "bytes": 7242,
+        "lines": [
+          [
+            118,
+            143
+          ]
+        ]
+      },
+      "tests/fixtures/telescope-family-examples/descriptors/F04.json": {
+        "sha256": "2a0b2eba1c17c24f2e6e915b3509c182a0b17286652805b118a0f34dfff584b5",
+        "bytes": 4686,
+        "lines": [
+          [
+            1,
+            145
+          ]
+        ]
+      },
+      "tests/fixtures/telescope-family-examples/descriptors/F18.json": {
+        "sha256": "4617e78eaa8e4ec241f6e4be79e0eb20b67747df90444d42d8e685ea778d862a",
+        "bytes": 4231,
+        "lines": [
+          [
+            1,
+            167
+          ]
+        ]
+      },
+      "docs/README.md": {
+        "sha256": "792854f9da8c85fdbcc5aaa94cee5fe894dcd79bd88efc81538fd8fc0d68c0c2",
+        "bytes": 8084,
+        "lines": "diff above"
+      },
+      "docs/telescope-family-examples/README.md": {
+        "sha256": "09e01977a1ab9f55ccbdd47c516410a24adb1757def9ac418f3adf6c7924f5ba",
+        "bytes": 3787,
+        "lines": "diff above"
+      }
+    },
+    "preservation": {
+      "summary": {
+        "sourceRef": "7a4f38985d98c4c03e7c48710428d9017f45f9d5",
+        "files": 44,
+        "exactBytes": 26,
+        "descriptorFiles": 17,
+        "manifestCommandChanges": 17,
+        "allChecksPass": true
+      },
+      "pins": [
+        {
+          "old": "docs/telescope-family-examples/artifacts/F01.csv",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F01.csv",
+          "oldBytes": 320309,
+          "newBytes": 320309,
+          "oldSha256": "511587d2174225fee2ea4eaf7050bd580275dc45ef83951144539bc4c61fa64c",
+          "newSha256": "511587d2174225fee2ea4eaf7050bd580275dc45ef83951144539bc4c61fa64c",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F02.json",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F02.json",
+          "oldBytes": 2462,
+          "newBytes": 2462,
+          "oldSha256": "7d0df1bc4589ac6ca0c7c1389485ab8dcd4e3bb20c5b79b825e93d36f30dce1d",
+          "newSha256": "7d0df1bc4589ac6ca0c7c1389485ab8dcd4e3bb20c5b79b825e93d36f30dce1d",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F03.csv",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F03.csv",
+          "oldBytes": 10007,
+          "newBytes": 10007,
+          "oldSha256": "d6aaea2ee5c61624057ad502bf392bdc6871acf832e5b35a93608464b4988c76",
+          "newSha256": "d6aaea2ee5c61624057ad502bf392bdc6871acf832e5b35a93608464b4988c76",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F04.json",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F04.json",
+          "oldBytes": 2739,
+          "newBytes": 2739,
+          "oldSha256": "10118793a5f980fe81a9361b100ad3f4fe1a429c52152ed383e36e043f957ae2",
+          "newSha256": "10118793a5f980fe81a9361b100ad3f4fe1a429c52152ed383e36e043f957ae2",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F05.csv",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F05.csv",
+          "oldBytes": 151,
+          "newBytes": 151,
+          "oldSha256": "69f48cfa89a61b1d919592adaec48c0f8f185a46900030462f1198580884152f",
+          "newSha256": "69f48cfa89a61b1d919592adaec48c0f8f185a46900030462f1198580884152f",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F06.csv",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F06.csv",
+          "oldBytes": 343,
+          "newBytes": 343,
+          "oldSha256": "42fecf1d339745021f7aa337f751b5e8339e4ad5ba1abd9808fc17fb7ce9d0c9",
+          "newSha256": "42fecf1d339745021f7aa337f751b5e8339e4ad5ba1abd9808fc17fb7ce9d0c9",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F07.csv",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F07.csv",
+          "oldBytes": 354,
+          "newBytes": 354,
+          "oldSha256": "a6724d8ec1746ff26583e1545b0d2f6b1ec04d5cdcd8250225634db5417aa291",
+          "newSha256": "a6724d8ec1746ff26583e1545b0d2f6b1ec04d5cdcd8250225634db5417aa291",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F08.json",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F08.json",
+          "oldBytes": 3227,
+          "newBytes": 3227,
+          "oldSha256": "1f4270ec5ad4467645f043486a789bf47e055ab9599a2ad0b984626ed63fdde2",
+          "newSha256": "1f4270ec5ad4467645f043486a789bf47e055ab9599a2ad0b984626ed63fdde2",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F09.csv",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F09.csv",
+          "oldBytes": 30677,
+          "newBytes": 30677,
+          "oldSha256": "b41b12fbd1470980a5f9e2676185d6d7bc52eadb26ba9d7b716fc5e916dfcd72",
+          "newSha256": "b41b12fbd1470980a5f9e2676185d6d7bc52eadb26ba9d7b716fc5e916dfcd72",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F10.csv",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F10.csv",
+          "oldBytes": 1234502,
+          "newBytes": 1234502,
+          "oldSha256": "008a06a057b541851b44aa8c9fc823f01954e395d488bf54d6d04f0c6c47d0dc",
+          "newSha256": "008a06a057b541851b44aa8c9fc823f01954e395d488bf54d6d04f0c6c47d0dc",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F11.json",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F11.json",
+          "oldBytes": 1816,
+          "newBytes": 1816,
+          "oldSha256": "9324e9afeb0ed225b6279c6b99e135cfad0938caaa22b7be9a926a8d2d8e8536",
+          "newSha256": "9324e9afeb0ed225b6279c6b99e135cfad0938caaa22b7be9a926a8d2d8e8536",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F12.json",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F12.json",
+          "oldBytes": 153585,
+          "newBytes": 153585,
+          "oldSha256": "fe0e04f589f650ba5ca105f959863493f969e5f0bc07d79b174c97cf47500c22",
+          "newSha256": "fe0e04f589f650ba5ca105f959863493f969e5f0bc07d79b174c97cf47500c22",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F13.json",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F13.json",
+          "oldBytes": 537,
+          "newBytes": 537,
+          "oldSha256": "b162ce03379dfe3a287994904fc4bac682a8e511e810b9da2eb5d555c3e109d9",
+          "newSha256": "b162ce03379dfe3a287994904fc4bac682a8e511e810b9da2eb5d555c3e109d9",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F14.json",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F14.json",
+          "oldBytes": 528,
+          "newBytes": 528,
+          "oldSha256": "d13871b14d55804e8cd88da19608ba6a60babc3abffff82b370c9d8dc697a65f",
+          "newSha256": "d13871b14d55804e8cd88da19608ba6a60babc3abffff82b370c9d8dc697a65f",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F15.json",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F15.json",
+          "oldBytes": 235,
+          "newBytes": 235,
+          "oldSha256": "f9f23442978f2f328d758eda7f24f5501e5d739ff3d0e3222f9e9676213774f3",
+          "newSha256": "f9f23442978f2f328d758eda7f24f5501e5d739ff3d0e3222f9e9676213774f3",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F16.json",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F16.json",
+          "oldBytes": 399,
+          "newBytes": 399,
+          "oldSha256": "ab61e17f55f19c6cdd90d189f7c85c2b8ec714f7065b448759bffad699ccd534",
+          "newSha256": "ab61e17f55f19c6cdd90d189f7c85c2b8ec714f7065b448759bffad699ccd534",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F17.json",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F17.json",
+          "oldBytes": 850,
+          "newBytes": 850,
+          "oldSha256": "3ce0da2fb9110c5d78d52bf10f96a534a4b1e1d1cda920e2b0712af6b87c01ef",
+          "newSha256": "3ce0da2fb9110c5d78d52bf10f96a534a4b1e1d1cda920e2b0712af6b87c01ef",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/artifacts/F18.json",
+          "new": "tests/fixtures/telescope-family-examples/artifacts/F18.json",
+          "oldBytes": 1150,
+          "newBytes": 1150,
+          "oldSha256": "850afec6860bc1c07ca50f5da408fcf3f50832f61ee54c8ee351844e5119be13",
+          "newSha256": "850afec6860bc1c07ca50f5da408fcf3f50832f61ee54c8ee351844e5119be13",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F02.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F02.json",
+          "oldBytes": 3289,
+          "newBytes": 3271,
+          "oldSha256": "62fcd738e49d7e17d879a606ec5a4bea036ba5e2917acd6d9a65e5f232f97f60",
+          "newSha256": "420084ef3535cc83d790ef5652ce4b17fcf10dae431de935d6e6a17b29b94866",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F03.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F03.json",
+          "oldBytes": 2924,
+          "newBytes": 2930,
+          "oldSha256": "d7c54fa12a84bb6f3619c9393c7f58a5e41cc8e7ae2e04a18993b88443ac61ed",
+          "newSha256": "b3715ae7dc141dbee9b3a099db71de9a34fdd549c02c53ee399e85eb481adfd2",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F04.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F04.json",
+          "oldBytes": 4677,
+          "newBytes": 4686,
+          "oldSha256": "fa10e0795c6465aa77d802c810a3b07a10e261c247066374b5528ce54ed902ad",
+          "newSha256": "2a0b2eba1c17c24f2e6e915b3509c182a0b17286652805b118a0f34dfff584b5",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F05.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F05.json",
+          "oldBytes": 3645,
+          "newBytes": 3651,
+          "oldSha256": "ab977b771cc7132d6872bbb8a04d125fa71b65555088db01fcfe7ca7a6c715c2",
+          "newSha256": "30fe57d5cac0b04073eff07e9ec798191fd6ef8ff1bf8dee13e38826219ca0b9",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F06.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F06.json",
+          "oldBytes": 3289,
+          "newBytes": 3295,
+          "oldSha256": "ce1ad9cfe37228886bbda9dca735ceb4032f729851b9cbfce95652cd82bc9f2d",
+          "newSha256": "eddf325936f716b7715f46f2c491e724bd2833e1046db2a5c6bc6bd27add8f5f",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F07.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F07.json",
+          "oldBytes": 2778,
+          "newBytes": 2760,
+          "oldSha256": "c1ea1aa867b4dd9634bd6d86bc144ffe14daf3023dbd52f2aa19812a4c57b99e",
+          "newSha256": "8df95c6e1e292a20da0c07481d1e03cdafe442c25c1141f9378e1d263a2b88c3",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F08.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F08.json",
+          "oldBytes": 6636,
+          "newBytes": 6642,
+          "oldSha256": "2a4769accf40d6f4e5163bf8f5abeb1a918caf5cbb9ebbfa4caab9c4cd2158b1",
+          "newSha256": "f22adfc88e14d293d0f7b4f313a3dccbbd288598f1281542add0f34955d69497",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F09.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F09.json",
+          "oldBytes": 4310,
+          "newBytes": 4316,
+          "oldSha256": "6204a72d2c4b93b31a354854af189a8b5ba96cb33ebd415da5e872f6c5e0dae3",
+          "newSha256": "02768efe33be9974fc7fbc8cfdd1bc9c51e3f3e272c86bad62fd2e0920e06767",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F10.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F10.json",
+          "oldBytes": 4715,
+          "newBytes": 4679,
+          "oldSha256": "023170a87411ca8c40b7ca27b5442a22936cc9928cf39d2f0f3d9a7c0489daa4",
+          "newSha256": "0c00ebd8697782fa1b549881c1efadd8ca5dd1bab0278dc2c9293275137cfc24",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F11.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F11.json",
+          "oldBytes": 2705,
+          "newBytes": 2669,
+          "oldSha256": "6e2ac2b409919a0ca9e050d002864dd99f8ff64a44786252d9eb8b5a69752d29",
+          "newSha256": "432abbf3380bc744907b46e3a3c5dcb2aec18a62287a96dffaf9fecaf1410453",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F12.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F12.json",
+          "oldBytes": 3991,
+          "newBytes": 3997,
+          "oldSha256": "2a41d16eb5250a976be591d8c1915d2bf438e8fc1c9188281dc19b861c5b8de8",
+          "newSha256": "7a1e9e8bb63a9e35a8fcbf55532b41347cb77d9143c60b8c91d1c3c7d05e91f8",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F13.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F13.json",
+          "oldBytes": 10231,
+          "newBytes": 10195,
+          "oldSha256": "10cf2dfaef3eb978ca4e3edd4316bae809ea998f98f3557d36849894aba3ba26",
+          "newSha256": "928e541713af255fe8b2b3dc2a7af3030fbcea9768eda8bf81901d4b1666bc93",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F14.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F14.json",
+          "oldBytes": 2363,
+          "newBytes": 2345,
+          "oldSha256": "94aa9668b1f410840391cf726a2894790b5a022041bed91bc7506e78fb296981",
+          "newSha256": "f7156e3b8ca6ace3d02785da72ba9f4a717f3f27f66ec87b19d10fd7976b09b9",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F15.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F15.json",
+          "oldBytes": 3405,
+          "newBytes": 3369,
+          "oldSha256": "5794716a87fe7f9144f579f578c46e24ffc6a32122111f34204004f066057ed9",
+          "newSha256": "7790e595e617e7330f6b204cee88b7a68a3aab403b420ca2749bb9733e761aeb",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F16.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F16.json",
+          "oldBytes": 5092,
+          "newBytes": 5095,
+          "oldSha256": "d7b8449d3f5901de7dc5bbdfb1de54d0b8c44815512aca016cf578acc7cd7037",
+          "newSha256": "45d1ed9e1a1641727d558e58ccaf304d4bb61373d90ef6e134ea3d26d7923584",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F17.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F17.json",
+          "oldBytes": 3618,
+          "newBytes": 3564,
+          "oldSha256": "d51419422be27489a0e4d489aa7051fda0afeec6c9d60b54bc8bc31c38e79961",
+          "newSha256": "d464887ddb725ae357976be42d7d30e05068a352001b5c3326db075d68eba893",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/descriptors/F18.json",
+          "new": "tests/fixtures/telescope-family-examples/descriptors/F18.json",
+          "oldBytes": 4219,
+          "newBytes": 4231,
+          "oldSha256": "b4e12c081d0bd5695d86e4a474eafdda37bf3f04e408c0de00247614a4c42539",
+          "newSha256": "4617e78eaa8e4ec241f6e4be79e0eb20b67747df90444d42d8e685ea778d862a",
+          "kind": "relative path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/manifest.json",
+          "new": "tests/fixtures/telescope-family-examples/manifest.json",
+          "oldBytes": 25150,
+          "newBytes": 25400,
+          "oldSha256": "f6f58874fcc709df139cae1fe72eb1d6945e102cabd76e793e4a564967bc5fc3",
+          "newSha256": "9f06d9f09d17f3db7ba99d29ba2bdb56f27935299c83772862a81a87f7f776f3",
+          "kind": "command path transport only"
+        },
+        {
+          "old": "docs/telescope-family-examples/params/F02.json",
+          "new": "tests/fixtures/telescope-family-examples/params/F02.json",
+          "oldBytes": 106,
+          "newBytes": 106,
+          "oldSha256": "f3d2946202e381939ecd0dddd78fc491cc3feb5e50b2ad269bff5364733fc060",
+          "newSha256": "f3d2946202e381939ecd0dddd78fc491cc3feb5e50b2ad269bff5364733fc060",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/params/F06.json",
+          "new": "tests/fixtures/telescope-family-examples/params/F06.json",
+          "oldBytes": 105,
+          "newBytes": 105,
+          "oldSha256": "2868a5ba16f74eaee6137229c60c557587d2d74b6e5df73837340588160705bb",
+          "newSha256": "2868a5ba16f74eaee6137229c60c557587d2d74b6e5df73837340588160705bb",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/params/F07.json",
+          "new": "tests/fixtures/telescope-family-examples/params/F07.json",
+          "oldBytes": 96,
+          "newBytes": 96,
+          "oldSha256": "0dc96be0ededa57992a6ebf255d70a8add9feaf93cb03899fdb0b389c7cb83d4",
+          "newSha256": "0dc96be0ededa57992a6ebf255d70a8add9feaf93cb03899fdb0b389c7cb83d4",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/params/F10.json",
+          "new": "tests/fixtures/telescope-family-examples/params/F10.json",
+          "oldBytes": 124,
+          "newBytes": 124,
+          "oldSha256": "cf61276bebfd465b6e01d4a8a01757723ec2e81c5c158043c3c2a4bc74959479",
+          "newSha256": "cf61276bebfd465b6e01d4a8a01757723ec2e81c5c158043c3c2a4bc74959479",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/params/F11.json",
+          "new": "tests/fixtures/telescope-family-examples/params/F11.json",
+          "oldBytes": 325,
+          "newBytes": 325,
+          "oldSha256": "ca840fa313c16c9c4606c7efb849108b329dda625605567935384588ff88ae23",
+          "newSha256": "ca840fa313c16c9c4606c7efb849108b329dda625605567935384588ff88ae23",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/params/F13.json",
+          "new": "tests/fixtures/telescope-family-examples/params/F13.json",
+          "oldBytes": 130,
+          "newBytes": 130,
+          "oldSha256": "20cf4eb66ed978177f99a91200d89fe526314d6bd352159fa1e1b442db1f5e0e",
+          "newSha256": "20cf4eb66ed978177f99a91200d89fe526314d6bd352159fa1e1b442db1f5e0e",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/params/F14.json",
+          "new": "tests/fixtures/telescope-family-examples/params/F14.json",
+          "oldBytes": 117,
+          "newBytes": 117,
+          "oldSha256": "9ac35bc28dcd79c762da518096141fc3ba4464ce8a74121de873145ab6a69cdf",
+          "newSha256": "9ac35bc28dcd79c762da518096141fc3ba4464ce8a74121de873145ab6a69cdf",
+          "kind": "exact bytes"
+        },
+        {
+          "old": "docs/telescope-family-examples/params/F15.json",
+          "new": "tests/fixtures/telescope-family-examples/params/F15.json",
+          "oldBytes": 83,
+          "newBytes": 83,
+          "oldSha256": "dea1e9d07e8f940b01a90914bd82a0f0e8decb4b3667eb109af7ffc658ecce7d",
+          "newSha256": "dea1e9d07e8f940b01a90914bd82a0f0e8decb4b3667eb109af7ffc658ecce7d",
+          "kind": "exact bytes"
+        }
+      ],
+      "changes": [
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F02.json",
+          "delta": [
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
+              "new": "../../telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F03.json",
+          "delta": [
+            {
+              "field": [
+                "dataset",
+                "acquisition",
+                "identity"
+              ],
+              "old": "../../../src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json",
+              "new": "../../../../src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json"
+            },
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json",
+              "new": "../../../../src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F04.json",
+          "delta": [
+            {
+              "field": [
+                "dataset",
+                "acquisition",
+                "identity"
+              ],
+              "old": "../../../tools/objects/hst/programs/europa-salt-map.scan.json",
+              "new": "../../../../tools/objects/hst/programs/europa-salt-map.scan.json"
+            },
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../tools/objects/hst/programs/europa-salt-map.scan.json",
+              "new": "../../../../tools/objects/hst/programs/europa-salt-map.scan.json"
+            },
+            {
+              "field": [
+                "members",
+                1,
+                "path"
+              ],
+              "old": "../../../tools/objects/hst/programs/europa-salt-map.scan.reproduction.json",
+              "new": "../../../../tools/objects/hst/programs/europa-salt-map.scan.reproduction.json"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F05.json",
+          "delta": [
+            {
+              "field": [
+                "dataset",
+                "acquisition",
+                "identity"
+              ],
+              "old": "../../../src/objects/haumea/source/photometry/disc-color.json",
+              "new": "../../../../src/objects/haumea/source/photometry/disc-color.json"
+            },
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../src/objects/haumea/source/photometry/disc-color.json",
+              "new": "../../../../src/objects/haumea/source/photometry/disc-color.json"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F06.json",
+          "delta": [
+            {
+              "field": [
+                "dataset",
+                "acquisition",
+                "identity"
+              ],
+              "old": "../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+              "new": "../../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
+            },
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+              "new": "../../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F07.json",
+          "delta": [
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/wind-rad1/wi_l2_wav_rad1_20200101_v01.cdf",
+              "new": "../../telescope-families/wind-rad1/wi_l2_wav_rad1_20200101_v01.cdf"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F08.json",
+          "delta": [
+            {
+              "field": [
+                "dataset",
+                "acquisition",
+                "identity"
+              ],
+              "old": "../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+              "new": "../../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
+            },
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+              "new": "../../../../src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F09.json",
+          "delta": [
+            {
+              "field": [
+                "dataset",
+                "acquisition",
+                "identity"
+              ],
+              "old": "../../../src/objects/m1/source/stellar-field.json",
+              "new": "../../../../src/objects/m1/source/stellar-field.json"
+            },
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../src/objects/m1/source/stellar-field.json",
+              "new": "../../../../src/objects/m1/source/stellar-field.json"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F10.json",
+          "delta": [
+            {
+              "field": [
+                "dataset",
+                "acquisition",
+                "identity"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz",
+              "new": "../../telescope-families/chandra-events/acisf06431N003_evt2.fits.gz"
+            },
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz",
+              "new": "../../telescope-families/chandra-events/acisf06431N003_evt2.fits.gz"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F11.json",
+          "delta": [
+            {
+              "field": [
+                "dataset",
+                "acquisition",
+                "identity"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits",
+              "new": "../../telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits"
+            },
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits",
+              "new": "../../telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F12.json",
+          "delta": [
+            {
+              "field": [
+                "dataset",
+                "acquisition",
+                "identity"
+              ],
+              "old": "../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
+              "new": "../../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits"
+            },
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
+              "new": "../../../../src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F13.json",
+          "delta": [
+            {
+              "field": [
+                "dataset",
+                "acquisition",
+                "identity"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
+              "new": "../../telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits"
+            },
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
+              "new": "../../telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F14.json",
+          "delta": [
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/f14-healpix/bayestar.fits.gz",
+              "new": "../../telescope-families/f14-healpix/bayestar.fits.gz"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F15.json",
+          "delta": [
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/geographos-radar/ge007.fit",
+              "new": "../../telescope-families/geographos-radar/ge007.fit"
+            },
+            {
+              "field": [
+                "members",
+                1,
+                "path"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/geographos-radar/ge007.lbl",
+              "new": "../../telescope-families/geographos-radar/ge007.lbl"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F16.json",
+          "delta": [
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../src/objects/stellar-neighbourhood/object.json",
+              "new": "../../../../src/objects/stellar-neighbourhood/object.json"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F17.json",
+          "delta": [
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p.fit",
+              "new": "../../telescope-families/f17-mathilde-near-msi/m0042826360f0_2p.fit"
+            },
+            {
+              "field": [
+                "members",
+                1,
+                "path"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.fit",
+              "new": "../../telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.fit"
+            },
+            {
+              "field": [
+                "members",
+                2,
+                "path"
+              ],
+              "old": "../../../tests/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.xml",
+              "new": "../../telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.xml"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/descriptors/F18.json",
+          "delta": [
+            {
+              "field": [
+                "members",
+                0,
+                "path"
+              ],
+              "old": "../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
+              "new": "../../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json"
+            },
+            {
+              "field": [
+                "members",
+                1,
+                "path"
+              ],
+              "old": "../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+              "new": "../../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json"
+            },
+            {
+              "field": [
+                "components",
+                0,
+                "name"
+              ],
+              "old": "../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
+              "new": "../../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json"
+            },
+            {
+              "field": [
+                "components",
+                1,
+                "name"
+              ],
+              "old": "../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+              "new": "../../../../tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json"
+            }
+          ]
+        },
+        {
+          "file": "tests/fixtures/telescope-family-examples/manifest.json",
+          "delta": [
+            {
+              "field": [
+                "examples",
+                1,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F02.json nd-spectrum --params docs/telescope-family-examples/params/F02.json --out example-output/F02",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F02.json nd-spectrum --params tests/fixtures/telescope-family-examples/params/F02.json --out example-output/F02"
+            },
+            {
+              "field": [
+                "examples",
+                2,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F03.json spectrum-export --out example-output/F03",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F03.json spectrum-export --out example-output/F03"
+            },
+            {
+              "field": [
+                "examples",
+                3,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F04.json slit-scan-inspect --out example-output/F04",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F04.json slit-scan-inspect --out example-output/F04"
+            },
+            {
+              "field": [
+                "examples",
+                4,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F05.json photometry-export --out example-output/F05",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F05.json photometry-export --out example-output/F05"
+            },
+            {
+              "field": [
+                "examples",
+                5,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F06.json time-series-select --params docs/telescope-family-examples/params/F06.json --out example-output/F06",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F06.json time-series-select --params tests/fixtures/telescope-family-examples/params/F06.json --out example-output/F06"
+            },
+            {
+              "field": [
+                "examples",
+                6,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F07.json dynamic-spectrum-export --params docs/telescope-family-examples/params/F07.json --out example-output/F07",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F07.json dynamic-spectrum-export --params tests/fixtures/telescope-family-examples/params/F07.json --out example-output/F07"
+            },
+            {
+              "field": [
+                "examples",
+                7,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F08.json table-inspect --out example-output/F08",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F08.json table-inspect --out example-output/F08"
+            },
+            {
+              "field": [
+                "examples",
+                8,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F09.json astrometry-export --out example-output/F09",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F09.json astrometry-export --out example-output/F09"
+            },
+            {
+              "field": [
+                "examples",
+                9,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F10.json selected-events --params docs/telescope-family-examples/params/F10.json --out example-output/F10",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F10.json selected-events --params tests/fixtures/telescope-family-examples/params/F10.json --out example-output/F10"
+            },
+            {
+              "field": [
+                "examples",
+                10,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F11.json uvfits-visibility-export --params docs/telescope-family-examples/params/F11.json --out example-output/F11",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F11.json uvfits-visibility-export --params tests/fixtures/telescope-family-examples/params/F11.json --out example-output/F11"
+            },
+            {
+              "field": [
+                "examples",
+                11,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F12.json v2-diagnostics --out example-output/F12",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F12.json v2-diagnostics --out example-output/F12"
+            },
+            {
+              "field": [
+                "examples",
+                12,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F13.json stokes-spectrum --params docs/telescope-family-examples/params/F13.json --out example-output/F13",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F13.json stokes-spectrum --params tests/fixtures/telescope-family-examples/params/F13.json --out example-output/F13"
+            },
+            {
+              "field": [
+                "examples",
+                13,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F14.json healpix-select --params docs/telescope-family-examples/params/F14.json --out example-output/F14",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F14.json healpix-select --params tests/fixtures/telescope-family-examples/params/F14.json --out example-output/F14"
+            },
+            {
+              "field": [
+                "examples",
+                14,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F15.json radar-profile --params docs/telescope-family-examples/params/F15.json --out example-output/F15",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F15.json radar-profile --params tests/fixtures/telescope-family-examples/params/F15.json --out example-output/F15"
+            },
+            {
+              "field": [
+                "examples",
+                15,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F16.json spatial-inspect --out example-output/F16",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F16.json spatial-inspect --out example-output/F16"
+            },
+            {
+              "field": [
+                "examples",
+                16,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F17.json near-msi-inspect --out example-output/F17",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F17.json near-msi-inspect --out example-output/F17"
+            },
+            {
+              "field": [
+                "examples",
+                17,
+                "command"
+              ],
+              "old": "telescope family-run docs/telescope-family-examples/descriptors/F18.json enumerate-members --out example-output/F18",
+              "new": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F18.json enumerate-members --out example-output/F18"
+            }
+          ]
+        }
+      ]
+    },
+    "report": "**Verdict:** Accept. The 44 data files moved with path transport only; payloads were not scientifically regenerated. No P0, P1, or borderline P2 on this relocation.\n\n## Findings\n\nNone blocking.\n\n**P2 (ordinary, non-blocking):** F18 `dataset.acquisition.identity` stays a repo-root string (`tools/objects/pds/...`) while member paths gained one `../`. Loader opens members from the descriptor directory (`family-operation.mts` 130–133), not identity. The new existence check only runs when identity starts with `../` (`family-examples.test.mts` 33). Pre-existing split, not a broken target after the move.\n\n## Independent check inference\n\nThe script is a preservation check, not scientific acceptance.\n\n- Same 44 non-Markdown names, `docs/…` → `tests/fixtures/…`.\n- `artifacts/` and `params/`: exact bytes (26).\n- 17 descriptors (F02–F18): JSON keys/values equal except `../` strings whose resolved targets match old vs new parents.\n- `manifest.json`: 17 `command` strings, prefix replace only (F02–F18). F01 stays `telescope export`.\n- `allChecksPass` follows those asserts; it does not re-qualify science.\n\nPath hop is correct: old descriptors sit three levels under root, new ones four. Repo-root refs `../../../` → `../../../../`. Same-fixtures refs `../../../tests/fixtures/telescope-families/…` → `../../telescope-families/…`.\n\n## Transport, owners, checker\n\n- Loader still `resolve(dirname(descriptorPath), member.path)` (`family-operation.mts` 130–133).\n- Tests point at `tests/fixtures/telescope-family-examples` (`family-examples.test.mts` 9; `family-operation.test.mts` 61).\n- Guide stays Markdown and is indexed (`docs/README.md`; `docs/telescope-family-examples/README.md`).\n- Docs checker unchanged: non-guide files under `docs/` still fail (`check-documentation-links.py` 118–124). Failures were not ignored.\n- F13/F17 restorer still writes `output/telescope-family-examples` (`f13-f17-examples.mts` 15). No docs path.\n\n## Scope / limits\n\nCovered: path transport, byte/JSON preservation vs `7a4f389`, loader/command/test refs, restore/prepare locations, docs contract vs remaining guide.\n\nNot covered: native scientific exports, decoder/Python env, unrelated telescope architecture. Those were already unavailable; this move does not claim they pass.\n\n=== REPORT COMPLETE ===\n"
+  },
+  "productionBeforeRepair": {
+    "head": "7a4f38985d98c4c03e7c48710428d9017f45f9d5",
+    "url": "https://github.com/layoutit/css.earth/actions/runs/35541285697/job/106159310455",
+    "result": "passed",
+    "coverage": "Production build/R2 metadata identity and Venus/Mercury navigation,81 content-addressed requests and zero same-origin scene requests. This does not inspect Omega morphology.",
+    "reuse": "Fixture relocation changes no application,renderer,prepared-asset or navigation-test owner; successful production evidence is retained for that unchanged scope."
+  },
+  "unvalidated": "The existing native dispatcher test reaches relocated source operations then cannot run the plotting boundary without the pinned Python environment. No dependency installation or skip added."
+}
