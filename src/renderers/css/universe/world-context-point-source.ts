@@ -71,7 +71,8 @@ export function worldContextPointAppearance(plan: PreparedWorldContext, field: P
   // Combine the projected disc and optical spread smoothly instead of fitting
   // the whole halo inside the physical photosphere.
   const physicalRadiusPx = Number.isFinite(diameterPx) ? diameterPx / 2 : 0;
-  const radiusPx = Math.max(field.photometry.minimumRadiusPx, Math.hypot(physicalRadiusPx, light.radiusPx * gain.radius));
+  const radiusPx = Math.max(field.photometry.minimumRadiusPx * gain.radius,
+    Math.hypot(physicalRadiusPx, light.radiusPx * gain.radius));
   return Object.freeze({ x: centre[0], y: centre[1], diameterPx, magnitude: light.magnitude, radiusPx,
     // The focus also serves as a navigation landmark once its physical light is too faint.
     luminance: Math.max(.65 * worldContextPointSourceFade(diameterPx, plan), Math.min(1, light.luminance * gain.brightness)),

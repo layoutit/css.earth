@@ -446,3 +446,11 @@ test('each planetary system fades with the camera distance from its own star', (
   expect(fade.of(index('wasp-43b'))).toBe(0);
   expect(fade.update([0, 0, 1e18]), 'between the stars every system has retired').toBe(0);
 });
+
+test('the Solar System begins revealing context as the distance readout hands from light-years to AU', () => {
+  const lightYearM = 299792458 * 31557600;
+  expect(plan.system.hiddenDistanceM).toBe(lightYearM);
+  const fade = createSystemFade(plan);
+  expect(fade.update([0, 0, lightYearM])).toBe(0);
+  expect(fade.update([0, 0, lightYearM / 2])).toBeGreaterThan(0);
+});

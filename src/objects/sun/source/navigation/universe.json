@@ -38,7 +38,7 @@
       "color": "#fff5e0",
       "proximityEnhancement": {
         "fullDistanceM": 1000000000000,
-        "fadeOutDistanceM": 100000000000000,
+        "fadeOutDistanceM": 9460730472580800,
         "radiusMultiplier": 2.4,
         "brightnessMultiplier": 1.5
       }
@@ -85,7 +85,7 @@
   },
   "system": {
     "fadeOutStartDistanceM": 100000000000000,
-    "hiddenDistanceM": 1000000000000000
+    "hiddenDistanceM": 9460730472580800
   },
   "volume": {
     "objectId": "milky-way",
