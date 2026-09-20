@@ -13,7 +13,7 @@ import { contextMarkerSprite, contextAnnotationOpacity } from '../src/navigation
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import { SCENE_OBJECTS } from './objects.mts';
-import { discoveryVisibility } from './object-discovery.mts';
+import { discoveryVisibility, showsDefaultContextOrbit } from './object-discovery.mts';
 import { labelImportance } from '../src/renderers/css/labels/universe-label-policy.ts';
 
 import galaxyPresentation from '../src/objects/local-group/source/presentation.json' with { type: 'json' };
@@ -29,7 +29,7 @@ const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => [obje
 const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
 const minorMoonIds = minorMoonOrbitIds(applicationContext.bodies);
 const hiddenOrbitIds = [
-  ...SCENE_OBJECTS.filter(object => ['trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id),
+  ...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id),
   ...minorMoonIds,
 ];
 const annotationPriorities = Object.fromEntries(SCENE_OBJECTS.map(object =>

@@ -29,6 +29,12 @@ export function isDiscoveryAnchor(object: { classification: string }): boolean {
   return object.classification === 'star' || object.classification === 'planet';
 }
 
+/** The default context suppresses distant orbit classes and limits asteroid orbits to the prepared notable set. */
+export function showsDefaultContextOrbit(object: { classification: string; discovery: Pick<ObjectDiscovery, 'featured'> }): boolean {
+  if (['trans-neptunian', 'interstellar'].includes(object.classification)) return false;
+  return object.classification !== 'asteroid' || object.discovery.featured;
+}
+
 /** Explicit searches still navigate every registered object. This controls the default world. */
 export function discoveryVisibility(objects: readonly { id: string; classification: string; discovery: ObjectDiscovery }[],
   options: { illustrations: boolean; highlighted?: string | null }) {

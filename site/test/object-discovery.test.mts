@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { SCENE_OBJECTS, requireSceneObject } from '../objects.mts';
 import { deriveObjectDiscovery, prepareObjectDiscovery } from '../../tools/prepare-object-discovery.mts';
-import { discoveryVisibility, parseObjectDiscovery } from '../object-discovery.mts';
+import { discoveryVisibility, parseObjectDiscovery, showsDefaultContextOrbit } from '../object-discovery.mts';
 import { parseArrivalView } from '../arrival-view.mts';
 import { record } from '../browser-types.mts';
 import { searchObjects } from '../object-search.mts';
@@ -97,6 +97,17 @@ test('default discovery admits every non-illustrative asteroid without changing 
   }
   // Occultation-measured shapes in neutral gray are "Shape only", like reconstructed asteroid meshes.
   for (const id of ['pallas', 'psyche', 'squannit', 'kleopatra', 'eris', 'haumea', 'makemake']) assert.equal(requireSceneObject(id).discovery.illustration, false, id);
+});
+
+test('only featured asteroids publish default context orbits while comet and planet orbits remain eligible', () => {
+  const notable = requireSceneObject('bennu'), ordinary = requireSceneObject('apophis');
+  assert.equal(notable.classification, 'asteroid'); assert.equal(notable.discovery.featured, true);
+  assert.equal(ordinary.classification, 'asteroid'); assert.equal(ordinary.discovery.featured, false);
+  assert.equal(showsDefaultContextOrbit(notable), true);
+  assert.equal(showsDefaultContextOrbit(ordinary), false);
+  assert.equal(showsDefaultContextOrbit(requireSceneObject('comet-c1995-o1')), true);
+  assert.equal(showsDefaultContextOrbit(requireSceneObject('earth')), true);
+  assert.equal(showsDefaultContextOrbit(requireSceneObject('arrokoth')), false);
 });
 
 test('a star with only its shape stays off the map, whatever the settings', () => {
