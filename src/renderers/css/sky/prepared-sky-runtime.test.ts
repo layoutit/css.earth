@@ -145,6 +145,14 @@ test('optional sky is validated as part of the existing volume capability and sh
   const { sky: _sky, ...legacy } = withSky; expect(validatePreparedCssVolume(legacy).sky).toBeUndefined();
 });
 
+test('near star cube is fully handed off before solar-system parallax produces duplicate stars', () => {
+  const source = JSON.parse(readFileSync(new URL('../../../objects/sun/source/navigation/universe.json', import.meta.url), 'utf8'));
+  const astronomicalUnitM = 149_597_870_700;
+  expect(source.stars.fadeStartDistanceM).toBe(100 * astronomicalUnitM);
+  expect(source.stars.fullDistanceM).toBe(200 * astronomicalUnitM);
+  expect(logarithmicFade(591.27 * astronomicalUnitM, source.stars.fadeStartDistanceM, source.stars.fullDistanceM)).toBe(1);
+});
+
 test.each([
   { withSky: true, withBrightness: true }, { withSky: true, withBrightness: false },
   { withSky: false, withBrightness: true }, { withSky: false, withBrightness: false },
