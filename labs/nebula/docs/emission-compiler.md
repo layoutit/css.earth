@@ -30,6 +30,16 @@ After the first successful compile, fit controls apply automatically; only the n
 
 Image-fit error, missing/excess signal and velocity residuals answer different questions. The fit's baseline RMSE is the zero-emission model on the same covered target pixels. Missing/excess fractions refer to normalized display signal; they are not mass fractions. A better projection cannot validate depth, and the display is not a hydrodynamic simulation. Inspect neutral front, oblique and side views as well as textured source comparisons before accepting any visual result.
 
+## Automatic layer budget
+
+New compiler and sampled-volume bakes allocate **at most 500 slabs in total across X, Y and Z** before transparent slabs are pruned. The field and its supported feature scale still determine the fine reference grid. An offline probe groups adjacent reference cells into wider intervals where less depth detail is needed. Each interval integrates every original reference midpoint, including faint emission, before encoding one RGBA8 texture. Material painting uses those same physical intervals and depth samples. This reduces retained planes and texture files; it does not promise proportionally less sampling work.
+
+The planner probes at 64 pixels wide with four image subpixel phases. Spatial variation and displacement from the reference planes estimate the extra error caused by grouping. Dynamic programming chooses complete partitions instead of making greedy splits, which can strand a concentrated feature inside a wide interval. It selects the fewest layers meeting a 1% planning estimate on each axis; if the budget prevents that, it minimizes the worst axis and records `budget-limited`. Sampled component mixtures plan once from an envelope covering every prepared lens, then share that partition.
+
+The saved sampling receipt contains the exact reference grid, intervals and planning report. `target-met` describes only this coarse estimate: subpixel features, material differences, RGBA8 rounding and browser compositing still require actual output checks. Inspect front, oblique and side views and compare both banks at each axis handoff. Keep the 5% relative-luminance and 4% normalized-L1 handoff gates unchanged. A failed result remains unaccepted; a completed bake or a small layer count cannot qualify it.
+
+Compact replay uses its saved partition exactly and never replans. Historical receipts without a partition retain their original uniform sampling and bytes, including deliveries exceeding 500 layers. Existing research recipes and repaint-only workflows keep their explicit sampling until separately requalified. The shared planner and grouped baker are available to those preparation owners without runtime sampling or geometry generation.
+
 ## Reproduce from a clean checkout
 
 Requires the checkout containing the compiler, **Node 22.18+ or a supported newer release, pnpm 10.33.0, Python 3.9–3.12 with venv/pip**, internet access and disk space for native images and results. `python3` below must select that supported Python. The pinned TensorFlow release needs a wheel for the machine's OS/CPU. Run this complete sequence from the repository root; keep an existing lab server alive and omit only the final server command when it already runs.

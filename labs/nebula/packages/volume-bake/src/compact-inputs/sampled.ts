@@ -63,14 +63,30 @@ function colors(v: unknown): SampledColor[] {
     return { rgb, covered: r.covered };
   });
 }
-export async function replayCompactSampled(
+type EmissionSampler = BakeCompilerOptions['sampleEmission'];
+/** Planning-only envelope: a feature unique to any lens remains represented without summing its brightness into the baked field. */
+export function maximumPlanningEmission(samplers: readonly EmissionSampler[]): EmissionSampler {
+  if (!samplers.length || samplers.some(sample => typeof sample !== 'function')) throw new TypeError('Planning requires at least one emission sampler.');
+  const inputs = [...samplers], value: [number, number, number] = [0, 0, 0];
+  return (x, y, z, out) => {
+    let maximum = 0;
+    for (const sample of inputs) {
+      value.fill(NaN); sample(x, y, z, value);
+      if (value.some(n => !Number.isFinite(n) || n < 0)) throw new TypeError('Planning components must write finite nonnegative emission.');
+      maximum = Math.max(maximum, ...value);
+    }
+    out.fill(maximum);
+  };
+}
+
+/** Verified scientific inputs for replay or a separately identified inspection bake. No fitting, source image access or output writes. */
+export async function prepareCompactSampledInputs(
   root: string,
   inputPin: CompilerPin,
-  outputDirectory: string,
-  backend: SampledReplayBackend,
+  backend: Pick<SampledReplayBackend, 'decodeFits'>,
+  signal: AbortSignal = new AbortController().signal,
 ) {
-  const bakeCompiler = (options: BakeCompilerOptions) => bake(options, backend);
-  const prepareCompilerStarSprites = backend.prepareStarSprites;
+  signal.throwIfAborted();
   const m = object(
     JSON.parse(
       gunzipSync(await pinned(root, inputPin), {
@@ -82,8 +98,8 @@ export async function replayCompactSampled(
     throw new Error("Invalid compact sampled model");
   const recipe = readSampledRecipe(m.recipe),
     original = readCompilerBakeResult(m.scene),
-    id = text(m.sourceResult),
-    signal = new AbortController().signal;
+    id = text(m.sourceResult);
+  if (id !== original.id) throw new TypeError('Compact source result differs from its retained scene.');
   const fits = gunzipSync(await pinned(root, pin(m.particles)), {
       maxOutputLength: 100_000_000,
     }),
@@ -91,6 +107,15 @@ export async function replayCompactSampled(
   if (geometrySha(fits) !== recipe.source.sha256) throw new Error("Compact particles differ from the scientific source pin");
   const prepared = prepareSampledField(values, recipe, signal),
     lensInputs = array(m.lenses).map(object);
+  const lensIds = lensInputs.map(lens => text(lens.id));
+  if (new Set(lensIds).size !== lensIds.length || lensIds.length !== original.lenses.length ||
+      original.lenses.some(lens => !lensIds.includes(lens.id))) throw new TypeError('Compact lenses differ from the retained scene.');
+  const expectedInput = object(m.expected), expected: Record<string, string> = {};
+  for (const id of lensIds) {
+    const digest = expectedInput[id];
+    if (typeof digest !== 'string' || !/^[a-f0-9]{64}$/.test(digest)) throw new TypeError('Missing accepted compact sampled volume hash.');
+    expected[id] = digest;
+  }
   const load = async (l: Record<string, unknown>) => {
     const sourceId = text(l.id),
       weights = recipe.lensComponents[sourceId];
@@ -129,7 +154,10 @@ export async function replayCompactSampled(
       fit && diffuse
         ? { atoms, coefficients, ejectaGain: finite(fit.ejectaGain), diffuse }
         : undefined;
-    const painter = prepareSampledMaterial(
+    const retained = { pointColors, windColors: colors(material.windColors), atomColors: colors(material.diffuseColors) };
+    if (retained.windColors.length !== recipe.terms.length || retained.atomColors.length !== atoms.length)
+      throw new TypeError('Retained material colors differ from sampled components.');
+    const prepareMaterial = () => prepareSampledMaterial(
       values,
       recipe,
       prepared,
@@ -142,11 +170,7 @@ export async function replayCompactSampled(
       weights,
       fitData,
       signal,
-      {
-        pointColors,
-        windColors: colors(material.windColors),
-        atomColors: colors(material.diffuseColors),
-      },
+      retained,
     );
     return {
       sourceId,
@@ -158,7 +182,7 @@ export async function replayCompactSampled(
             diffuse,
           )
         : prepared.field(weights),
-      painter,
+      prepareMaterial,
     };
   };
   const referenceId = original.lenses[0]!.id,
@@ -181,10 +205,24 @@ export async function replayCompactSampled(
         ),
       )
     : prepared.field({ ejecta: 1, pwn: 1 });
+  const lenses = [];
+  for (const input of lensInputs) lenses.push(input === reference ? ref : await load(input));
+  const sources = lensInputs.map(l => ({ id: text(l.id), label: text(l.label), credit: text(l.credit), page: text(l.page) }));
+  return { id, original, recipe, neutralField, lenses, sources, expected,
+    samplePlanningEmission: maximumPlanningEmission([neutralField.sampleEmission, ...lenses.map(lens => lens.field.sampleEmission)]) };
+}
+
+export async function replayCompactSampled(root: string, inputPin: CompilerPin, outputDirectory: string, backend: SampledReplayBackend) {
+  const bakeCompiler = (options: BakeCompilerOptions) => bake(options, backend);
+  const prepareCompilerStarSprites = backend.prepareStarSprites, signal = new AbortController().signal;
+  const input = await prepareCompactSampledInputs(root, inputPin, backend, signal);
+  const { id, original, neutralField, expected, sources } = input;
   const base = {
     root,
     id,
     fieldIdentity: original.fieldIdentity,
+    sampling: original.sampling,
+    preparedPhysical: original.frame.referenceFrame === 'lab-sky-west-north-toward',
     boundsArcsec: original.boundsArcsec,
     skyBoundsArcsec: original.skyBoundsArcsec,
     signal,
@@ -205,8 +243,9 @@ export async function replayCompactSampled(
     ],
   });
   const lenses = [];
-  for (const input of lensInputs) {
-    const l = input === reference ? ref : await load(input);
+  for (const l of input.lenses) {
+    signal.throwIfAborted();
+    const painter = l.prepareMaterial();
     const bank = await bakeCompiler({
       ...base,
       outputDirectory: `${outputDirectory}/${l.sourceId}`,
@@ -215,7 +254,7 @@ export async function replayCompactSampled(
         {
           id: l.sourceId,
           label: l.label,
-          sampleMaterial: l.painter.sampleMaterial,
+          sampleMaterial: painter.sampleMaterial,
         },
       ],
     });
@@ -235,7 +274,6 @@ export async function replayCompactSampled(
     pin => pinned(root, pin),
     backend,
   );
-  const expected = object(m.expected);
   for (const lens of registered.lenses) {
     const volume = object(
       JSON.parse((await pinned(root, lens.volume)).toString()),
@@ -259,11 +297,6 @@ export async function replayCompactSampled(
   return {
     id,
     scene,
-    sources: lensInputs.map((l) => ({
-      id: text(l.id),
-      label: text(l.label),
-      credit: text(l.credit),
-      page: text(l.page),
-    })),
+    sources,
   };
 }

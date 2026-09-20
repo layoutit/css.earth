@@ -198,14 +198,14 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       if ('objectId' in result && result.objectId !== recipe.id) throw new TypeError('Compact input belongs to another object.');
       sourceResult = result.id;
       const frame = embedNebulaFrame(result.scene.frame,recipe.sky,result.scene.coordinates.localOriginArcsec);
-      const anchorPoints = result.scene.stars.map(star => ({id:star.id,positionUnits:reflectNebulaPoint(star.positionUnits),
+      const anchorPoints = result.scene.stars.map(star => ({id:star.id,positionUnits:reflectNebulaPoint(star.positionUnits,result.scene.frame),
         colorCss:`#${star.rgb.map(n=>n.toString(16).padStart(2,'0')).join('')}`,opacity:star.alpha,sizePx:star.widthPx??1,
         ...(star.diameterUnits === undefined?{}:{diameterUnits:star.diameterUnits})}));
       for (const lens of result.scene.lenses) {
         const source = result.sources.find(source => source.id === lens.id)!;
         const points = result.scene.stars.map(star => {
           const material = star.materials?.[lens.id] ?? star;
-          return { id:star.id,positionUnits:reflectNebulaPoint(star.positionUnits),
+          return { id:star.id,positionUnits:reflectNebulaPoint(star.positionUnits,result.scene.frame),
             colorCss:`#${material.rgb.map(n=>n.toString(16).padStart(2,'0')).join('')}`,
             opacity:material.alpha,sizePx:star.widthPx??1,...(material.diameterUnits === undefined?{}:{diameterUnits:material.diameterUnits}) };
         });

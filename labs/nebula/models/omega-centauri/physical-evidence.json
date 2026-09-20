@@ -2,7 +2,7 @@
   "schema": "cssearth-nebula-physical-evidence@1",
   "subjectId": "omega-centauri",
   "asOf": "2026-09-20",
-  "status": "Evidence ledger and a derived spherical emissivity profile only. No baked reconstruction exists; see README.md for the blocked baking stage. Extended 2026-09-20 with published measurements of the cluster's non-spherical 3D shape (flattening, inclination, rotation, profile family); see shape-evidence.md for the plain-language summary.",
+  "status": "Published photometric and dynamical constraints for a conditional oblate integrated-starlight model. The historical King approximation is rejected; runtime acceptance belongs to the delivered object evidence.",
   "parameterClasses": {
     "observed": "measured observable or metadata",
     "published-model": "conditional literature inference, including a value we derived from measured inputs via a standard, non-object-specific mathematical relation",
@@ -64,7 +64,12 @@
       "title": "van de Ven, van den Bosch, Verolme & de Zeeuw (2006), The dynamical distance and intrinsic structure of the globular cluster omega Centauri",
       "url": "https://doi.org/10.1051/0004-6361:20053061",
       "locator": "A&A 445, 513-543; arXiv:astro-ph/0509228. Axisymmetric Schwarzschild orbit-superposition dynamical model combining line-of-sight velocities and internal proper motions.",
-      "access": "Abstract fetched live in this session (arxiv.org/abs/astro-ph/0509228). Full text not fetched, so the position angle of the model's symmetry axis and full parameter table were not independently confirmed beyond the abstract's headline numbers."
+      "access": "Full arXiv PDF downloaded and sections 2.3.3, 2.3.4 and 7.1 inspected on 2026-09-20; photometric major-axis PA100 degrees and coordinate convention confirmed.",
+      "download": {
+        "url": "https://arxiv.org/pdf/astro-ph/0509228",
+        "bytes": 1253405,
+        "sha256": "091115f8b04cf247f0d8ca04e7a6a5840fab8daa24f427168b6451fb37c13dd6"
+      }
     },
     {
       "id": "reijns-2006-radial-velocities",
@@ -76,9 +81,13 @@
     {
       "id": "haberle-2024-omegacat2",
       "title": "Haberle, Neumayer, Bellini, Libralato et al. (2024), oMEGACat II: Photometry and proper motions for 1.4 million stars in Omega Centauri and its rotation in the plane of the sky",
-      "url": "https://arxiv.org/abs/2404.03722",
-      "locator": "ApJ 970, 192. Combined HST+MUSE proper-motion catalog, plane-of-sky rotation and inclination.",
-      "access": "Abstract fetched live in this session; gives inclination directly but the abstract text obtained did not state the rotation-axis position angle or the rotation amplitude in physical units, only the inclination."
+      "url": "https://arxiv.org/html/2404.03722v2",
+      "locator": "Accepted v2, section 8.2: kinematic PA104 +/-1 degree and inclination43.9 +/-1.3 degrees.",
+      "access": "Full accepted-v2 HTML retrieved on 2026-09-20; section8.2 inspected.",
+      "download": {
+        "bytes": 740755,
+        "sha256": "9e46c2738830485c2f0eec0f7bde39654434a02a03a1d445010f2c37531b73c9"
+      }
     },
     {
       "id": "bianchini-2013-flattening",
@@ -105,8 +114,25 @@
       "id": "mclaughlin-vandermarel-2005",
       "title": "McLaughlin & van der Marel (2005), Resolved massive star clusters in the Milky Way and its satellites: brightness profiles and a catalogue of fundamental parameters",
       "url": "https://arxiv.org/abs/astro-ph/0605132",
-      "locator": "ApJS 161, 304. Fits King (1966), Wilson (1975) and power-law models to photometric profiles of many clusters, including NGC 5139 (Table 9).",
-      "access": "Confirmed via live search in this session that NGC 5139 is fit and that the Wilson model fits it better than the King model; the specific fitted concentration and core-radius values in Table 9 were not retrieved in this session."
+      "locator": "CDS J/ApJS/161/304 Table10, NGC5139 rows229-231; Table11 derived structural radii.",
+      "access": "Complete CDS ReadMe, table10.dat and table11.dat downloaded on 2026-09-20. NGC5139 rows decoded using the archive byte-column definitions. Wilson and King(1966) fits use54 points; they are not the empirical King(1962) law.",
+      "tables": [
+        {
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/161/304/ReadMe",
+          "bytes": 27936,
+          "sha256": "48b6e46ffeceb668e3cb108a1ffd8723df2382e0a07a6174260e199354e757b5"
+        },
+        {
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/161/304/table10.dat",
+          "bytes": 75735,
+          "sha256": "536b829f310535759f572dd781f2c9d7cec602999d53f07c2bce9b0638f9abf1"
+        },
+        {
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/161/304/table11.dat",
+          "bytes": 84456,
+          "sha256": "8707d3e19c864e058138bd7d0132ec06c97521a06ac4051132b3f7c149260a2d"
+        }
+      ]
     },
     {
       "id": "noyola-gebhardt-bergmann-2008",
@@ -119,8 +145,8 @@
       "id": "baumgardt-vasiliev-2021-paper",
       "title": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST, and literature data",
       "url": "https://doi.org/10.1093/mnras/stab1474",
-      "locator": "MNRAS 505, 5957-5977. NGC 5139 distance 5.426 +/- 0.047 kpc.",
-      "access": "Confirmed via live search in this session (not the same fetch as the existing baumgardt-2021-distances website source); corroborates rather than independently re-derives the ledger's existing 5430+/-50 pc value."
+      "locator": "Primary article distance table, NGC5139 row, combined-distance column:5.426 +0.047/-0.047 kpc.",
+      "access": "Primary article table inspected directly on 2026-09-20 at https://academic.oup.com/mnras/article/505/4/5957/6283731; exact distance and both uncertainty bounds confirmed."
     },
     {
       "id": "merritt-1997",
@@ -128,25 +154,53 @@
       "url": "https://ui.adsabs.harvard.edu/abs/1997AJ....114.1074M",
       "locator": "AJ 114, 1074. Early line-of-sight rotation-curve measurement.",
       "access": "Confirmed via live search in this session; peak rotation value taken from search summary, not from a direct fetch of the paper text."
+    },
+    {
+      "id": "dsouza-rix-2013-mge",
+      "title": "D’Souza & Rix (2013), Mass estimates from stellar proper motions: the mass of omega Centauri",
+      "url": "https://doi.org/10.1093/mnras/sts426",
+      "locator": "Section4.3 and Table1, manuscript page12: eight Gaussian fit to Ferraro2006 number-density and Geyer1983 flattening profiles.",
+      "access": "Complete author-hosted PDF downloaded and table transcribed on2026-09-20; all eight rows cross-checked against Watkins2013 Table1. Coefficient error bars/covariance are not supplied in the table.",
+      "download": {
+        "url": "https://wwwmpa.mpa-garching.mpg.de/mpa/publications/preprints/pp2013/MPA3537.pdf",
+        "bytes": 480080,
+        "sha256": "5701eed16944eb96e0d3e8dea258f909e99a1fa4a5a0305581e878909e70db92"
+      }
+    },
+    {
+      "id": "watkins-2013-mge-reuse",
+      "title": "Watkins, van de Ven, den Brok & van den Bosch (2013), Discrete dynamical models of omega Centauri",
+      "url": "https://academic.oup.com/mnras/article/436/3/2598/1258888",
+      "locator": "Section4.1 and Table1; central brightness in solar luminosities/pc2, sigma along the major axis in arcmin, projected flattening.",
+      "access": "Primary article table inspected on2026-09-20. Exact same eight MGE rows; caption resolves amplitude semantics. PA-80 degrees equals100 degrees for the undirected major axis; their signed rotation coefficients are not used here."
     }
   ],
   "evidence": [
     {
       "id": "distance",
       "classification": "observed",
-      "sourceIds": ["baumgardt-2021-distances"],
+      "sourceIds": [
+        "baumgardt-vasiliev-2021-paper"
+      ],
       "quantity": "heliocentric distance",
-      "value": { "distancePc": 5430, "uncertaintyPc": 50 },
+      "value": {
+        "distancePc": 5426,
+        "uncertaintyPc": 47
+      },
       "unit": "pc",
       "scope": "Whole cluster",
-      "limitations": "Not independently re-verified against the primary table in this session; taken as given and used only for angular-to-physical scale conversion."
+      "limitations": "Adopted angular-to-physical scale from the combined Gaia EDR3, HST and literature distance. Earlier rounded5430 +/-50pc is retained in historical King evidence; changing distance does not refit the published MGE angular shape or establish a dynamical mass."
     },
     {
       "id": "total-mass",
       "classification": "published-model",
-      "sourceIds": ["baumgardt-hilker-2018"],
+      "sourceIds": [
+        "baumgardt-hilker-2018"
+      ],
       "quantity": "total dynamical mass",
-      "value": { "massSolar": 3.94e6 },
+      "value": {
+        "massSolar": 3940000.0
+      },
       "unit": "solar masses",
       "scope": "Whole cluster",
       "limitations": "N-body/dynamical-model mass, not directly used by the light-emissivity profile in this recipe; recorded for completeness and for the mass-segregation limitation below."
@@ -154,29 +208,42 @@
     {
       "id": "half-mass-radius",
       "classification": "published-model",
-      "sourceIds": ["baumgardt-hilker-2018"],
+      "sourceIds": [
+        "baumgardt-hilker-2018"
+      ],
       "quantity": "3D half-mass radius",
-      "value": { "radiusPc": 10.42 },
+      "value": {
+        "radiusPc": 10.42
+      },
       "unit": "pc",
       "scope": "Whole cluster, dynamical model fit",
-      "limitations": "This is a 3D mass radius from a dynamical model, not a directly observed projected quantity. Used here (via an approximate projected/3D scaling, see projected-half-light-approx) to fix the King concentration of a separately assumed *light* profile; mass and light radii can differ under mass segregation."
+      "limitations": "A 3D dynamical mass radius, not a projected light radius. The historical King-Abel conversion to a light radius is rejected for the selected MGE; mass segregation prevents treating the two as interchangeable."
     },
     {
       "id": "core-radius",
       "classification": "published-model",
-      "sourceIds": ["baumgardt-hilker-2018"],
+      "sourceIds": [
+        "baumgardt-hilker-2018"
+      ],
       "quantity": "3D King core radius",
-      "value": { "radiusPc": 4.54 },
+      "value": {
+        "radiusPc": 4.54
+      },
       "unit": "pc",
       "scope": "Whole cluster, dynamical model fit",
-      "limitations": "Used as an approximation for the projected King core radius (approximation A in king-abel-profile.json); no independent photometric King fit for this specific radius was located in this session."
+      "limitations": "Historical King-Abel experiment set this 3D dynamical core radius equal to a projected King radius. That substitution is rejected for the selected MGE recipe; this value is retained as historical context only."
     },
     {
       "id": "mass-to-light",
       "classification": "observed",
-      "sourceIds": ["baumgardt-hilker-2018"],
+      "sourceIds": [
+        "baumgardt-hilker-2018"
+      ],
       "quantity": "V-band mass-to-light ratio",
-      "value": { "mOverLvSolar": 2.8, "uncertainty": 0.1 },
+      "value": {
+        "mOverLvSolar": 2.8,
+        "uncertainty": 0.1
+      },
       "unit": "Msun/Lsun (V)",
       "scope": "Whole cluster",
       "limitations": "Recorded for completeness; not used to scale the recipe's relative emissivity, which is unitless display light, not calibrated luminosity."
@@ -184,9 +251,13 @@
     {
       "id": "central-velocity-dispersion",
       "classification": "observed",
-      "sourceIds": ["baumgardt-hilker-2018"],
+      "sourceIds": [
+        "baumgardt-hilker-2018"
+      ],
       "quantity": "central velocity dispersion",
-      "value": { "sigmaKmS": 18.1 },
+      "value": {
+        "sigmaKmS": 18.1
+      },
       "unit": "km/s",
       "scope": "Cluster center",
       "limitations": "Kinematic evidence, not used in this image/light recipe; recorded because it is part of the measured structural package and could support a future kinematic cross-check."
@@ -194,94 +265,147 @@
     {
       "id": "ellipticity",
       "classification": "observed",
-      "sourceIds": ["white-shawl-1987"],
+      "sourceIds": [
+        "white-shawl-1987"
+      ],
       "quantity": "projected flattening 1 - b/a",
-      "value": { "ellipticityApprox": 0.17 },
+      "value": {
+        "ellipticityApprox": 0.17
+      },
       "unit": "dimensionless",
       "scope": "Whole cluster; varies with radius across the literature (roughly 0.08 core to ~0.19 outskirts)",
-      "limitations": "This is the primary evidence AGAINST the sphericity assumption used everywhere else in this ledger. Omega Centauri is a measurably flattened, rotating cluster; every quantity below that assumes spherical symmetry is only a first-order approximation to its real triaxial/oblate shape."
+      "limitations": "Historical summary, not a constant flattening consumed by the selected recipe. The MGE uses all eight published projected Gaussian axis ratios to represent radial variation; it does not assume spherical symmetry."
     },
     {
       "id": "cluster-center-agreement",
       "classification": "observed",
-      "sourceIds": ["simbad-ngc5139", "eso1119b-publisher"],
+      "sourceIds": [
+        "simbad-ngc5139",
+        "eso1119b-publisher"
+      ],
       "quantity": "publisher pointing center vs. independent catalogue position",
       "value": {
-        "simbadRaDec": ["13:26:47.28", "-47:28:46.1"],
-        "publisherRaDec": ["13:26:47.27", "-47:28:46.34"],
+        "simbadRaDec": [
+          "13:26:47.28",
+          "-47:28:46.1"
+        ],
+        "publisherRaDec": [
+          "13:26:47.27",
+          "-47:28:46.34"
+        ],
         "separationArcsec": 0.24,
         "nativePixelScaleArcsecPerPx": 0.21
       },
       "unit": "arcsec",
       "scope": "Whole-image registration check",
-      "limitations": "This confirms the publisher WCS center matches the independently catalogued cluster center to sub-pixel accuracy (0.24 arcsec vs. 0.21 arcsec/px). It is a whole-field sanity check, not a star-by-star astrometric fit against an external catalogue (e.g. Gaia); no such per-star fit was performed in this session."
+      "limitations": "The stated0.24arcsec separation is approximately1.14 native pixels at0.21arcsec/pixel, so it is a center sanity check, not sub-pixel evidence or an independent field-star registration. The MGE center is explicitly re-anchored to observations.json; native registration belongs to its separately measured transform."
     },
     {
       "id": "king-profile-family",
       "classification": "published-model",
-      "sourceIds": ["king-1962"],
+      "sourceIds": [
+        "king-1962"
+      ],
       "quantity": "single-mass empirical projected surface-density law",
-      "value": { "formula": "Sigma(R) proportional to [ (1+(R/rc)^2)^-1/2 - (1+(rt/rc)^2)^-1/2 ]^2 for R <= rt" },
+      "value": {
+        "formula": "Sigma(R) proportional to [ (1+(R/rc)^2)^-1/2 - (1+(rt/rc)^2)^-1/2 ]^2 for R <= rt"
+      },
       "unit": "n/a",
       "scope": "Adopted profile family for the projected light distribution",
-      "limitations": "Standard single-mass isotropic empirical law; Omega Centauri has multiple stellar populations and measurable rotation/flattening that a single-mass spherical King law does not capture."
+      "limitations": "Historical King-Abel experiment only; not consumed by photometric-mge.json. Standard single-mass isotropic empirical law; Omega Centauri has multiple stellar populations and measurable rotation/flattening that a single-mass spherical King law does not capture.",
+      "selection": "rejected-historical"
     },
     {
       "id": "projected-half-light-approx",
       "classification": "published-model",
-      "sourceIds": ["wolf-2010"],
+      "sourceIds": [
+        "wolf-2010"
+      ],
       "quantity": "projected half-light radius as a fraction of the 3D half-mass radius",
-      "value": { "factor": 0.75 },
+      "value": {
+        "factor": 0.75
+      },
       "unit": "dimensionless",
       "scope": "Used once, to convert the measured 3D half-mass radius into a target projected half-light radius for solving the King concentration",
-      "limitations": "This factor is an approximate, broadly-applicable result for centrally concentrated dispersion-supported systems, not a value measured for Omega Centauri specifically."
+      "limitations": "Historical King-Abel experiment only; not consumed by photometric-mge.json. This factor is an approximate, broadly-applicable result for centrally concentrated dispersion-supported systems, not a value measured for Omega Centauri specifically.",
+      "selection": "rejected-historical"
     },
     {
       "id": "abel-inverted-emissivity",
       "classification": "published-model",
-      "sourceIds": ["king-1962", "wolf-2010"],
+      "sourceIds": [
+        "king-1962",
+        "wolf-2010"
+      ],
       "quantity": "spherically symmetric 3D relative emissivity vs. radius, derived by Abel-inverting the fitted King projected profile",
-      "value": { "path": "labs/nebula/models/omega-centauri/king-abel-profile.json" },
+      "value": {
+        "path": "labs/nebula/models/omega-centauri/king-abel-profile.json"
+      },
       "unit": "relative (peak-normalized)",
       "scope": "0 to the solved tidal radius (46.4 pc)",
-      "limitations": "Deterministic consequence of assumed spherical symmetry plus the King profile family and its two fixed shape parameters (approximations A and B recorded in king-abel-profile.json). It is not a released, independently measured 3D point table; it is our own Abel-inversion computation from measured/published-model inputs. The single strongest physical limitation is sphericity itself: Omega Centauri's true ellipticity (~0.08-0.19, entry 'ellipticity') means the real 3D structure is oblate/triaxial, not spherical, and this profile cannot represent that flattening."
+      "limitations": "Historical King-Abel experiment only; not consumed by photometric-mge.json. Deterministic consequence of assumed spherical symmetry plus the King profile family and its two fixed shape parameters (approximations A and B recorded in king-abel-profile.json). It is not a released, independently measured 3D point table; it is our own Abel-inversion computation from measured/published-model inputs. The single strongest physical limitation is sphericity itself: Omega Centauri's true ellipticity (~0.08-0.19, entry 'ellipticity') means the real 3D structure is oblate/triaxial, not spherical, and this profile cannot represent that flattening.",
+      "selection": "rejected-historical"
     },
     {
       "id": "no-3d-baking-baseline",
       "classification": "authored",
-      "sourceIds": ["king-1962"],
-      "quantity": "status note, not a physical quantity",
-      "value": { "status": "blocked" },
+      "sourceIds": [
+        "king-1962"
+      ],
+      "quantity": "historical implementation blocker for the original King-Abel experiment",
+      "value": {
+        "status": "historical-blocker"
+      },
       "unit": "n/a",
       "scope": "Lab tooling",
-      "limitations": "The lab's only currently implemented method that treats an external prior as 'broad shape from the prior, detail fitted from the image' (simulation-guided-finite-emission@1 / two-scale) requires a pre-existing fixed-density Alignment reconstruction (a 'baselineId') built from an N-body particle simulation via prepare-full-density. No such simulation or baseline exists for a globular cluster, and building one would mean writing new object-preparation tooling, which this task explicitly excludes. See README.md."
+      "limitations": "The original experiment had no external fixed-density simulation baseline. The selected analytic photometric MGE is a separate published-model prior; this historical entry does not establish that the new recipe has been baked, visually accepted or promoted."
     },
     {
       "id": "inclination-van-de-ven-2006",
       "classification": "published-model",
-      "sourceIds": ["van-de-ven-2006-structure"],
+      "sourceIds": [
+        "van-de-ven-2006-structure"
+      ],
       "quantity": "inclination of the cluster's symmetry axis to the line of sight",
-      "value": { "inclinationDeg": 50, "uncertaintyDeg": 4, "meanIntrinsicAxialRatio": 0.78, "axialRatioUncertainty": 0.03 },
+      "value": {
+        "inclinationDeg": 50,
+        "uncertaintyDeg": 4,
+        "meanIntrinsicAxialRatio": 0.78,
+        "axialRatioUncertainty": 0.03
+      },
       "unit": "degrees",
       "scope": "Whole cluster; axisymmetric Schwarzschild orbit-superposition model fit to line-of-sight velocities plus internal proper motions",
-      "limitations": "This is a dynamical-model result, not a direct geometric measurement: it assumes the cluster is exactly axisymmetric (oblate, one symmetry axis) and infers inclination from how well that assumed shape reproduces the observed kinematics. The same paper reports a dynamical distance of 4.8 +/- 0.3 kpc, which is in tension with the 5430 +/- 50 pc value used elsewhere in this ledger (Baumgardt & Vasiliev 2021); the two papers used independent methods and do not agree to within their stated errors, which is itself evidence that the axisymmetric model is not a perfect fit."
+      "limitations": "Axisymmetric dynamical inference, not direct geometry. The source reports50 +/-4 degrees and dynamical distance4.8 +/-0.3kpc. D’Souza2013 subsequently adopts50 +/-3 degrees for its MGE analysis; that is the selected model convention, not an independently combined uncertainty. The recipe uses the newer observed distance only to set physical scale."
     },
     {
       "id": "inclination-haberle-2024",
       "classification": "published-model",
-      "sourceIds": ["haberle-2024-omegacat2"],
+      "sourceIds": [
+        "haberle-2024-omegacat2"
+      ],
       "quantity": "inclination, independent modern check",
-      "value": { "inclinationDeg": 43.9, "uncertaintyDeg": 1.3 },
+      "value": {
+        "inclinationDeg": 43.9,
+        "uncertaintyDeg": 1.3
+      },
       "unit": "degrees",
       "scope": "Inner few arcminutes, from combined HST+MUSE proper motions (plane-of-sky rotation)",
-      "limitations": "Differs from van de Ven et al. (2006)'s i = 50 +/- 4 deg by about 1.5-2 sigma using much better proper-motion data restricted to the inner region. Both cannot be simultaneously exactly right; this disagreement is direct evidence that the inclination of a single rigid oblate model is not fully converged in the published literature, only bracketed to roughly 40-55 degrees."
+      "limitations": "Accepted-v2 axisymmetric kinematic inference, not direct depth. The1.3-degree interval crosses the selected MGE admissibility boundary43.603810 degrees; this newer fit cannot be substituted as an unconstrained inclination distribution into the older eight-Gaussian profile. Retained as a competing result, not erased or averaged with the selected50-degree convention."
     },
     {
       "id": "rotation-amplitude-reijns-2006",
       "classification": "observed",
-      "sourceIds": ["reijns-2006-radial-velocities"],
+      "sourceIds": [
+        "reijns-2006-radial-velocities"
+      ],
       "quantity": "line-of-sight rotation amplitude",
-      "value": { "amplitudeKmS": 6, "radiusRangeArcmin": [6, 10] },
+      "value": {
+        "amplitudeKmS": 6,
+        "radiusRangeArcmin": [
+          6,
+          10
+        ]
+      },
       "unit": "km/s",
       "scope": "Radial-velocity survey, 1589 member stars",
       "limitations": "Directly observed rotation signal (not a model output), but only along the line of sight; does not by itself give a 3D rotation axis or amplitude. Velocity dispersion drops from about 15 km/s in the inner few arcmin to about 6 km/s at 25 arcmin, so the rotation amplitude is a sizeable fraction of the local dispersion in the outer cluster."
@@ -289,9 +413,14 @@
     {
       "id": "rotation-amplitude-merritt-1997",
       "classification": "observed",
-      "sourceIds": ["merritt-1997"],
+      "sourceIds": [
+        "merritt-1997"
+      ],
       "quantity": "earlier line-of-sight rotation amplitude estimate",
-      "value": { "amplitudeKmS": 7.9, "radiusPc": 11 },
+      "value": {
+        "amplitudeKmS": 7.9,
+        "radiusPc": 11
+      },
       "unit": "km/s",
       "scope": "Earlier radial-velocity dataset, independent of Reijns et al. (2006)",
       "limitations": "Recorded from a search-engine summary of the paper, not a direct fetch of the paper text in this session, so treat the exact 7.9 km/s figure as approximate pending primary verification. Given alongside rotation-amplitude-reijns-2006 to show two independent studies agree the amplitude is of order 6-8 km/s, not to imply a precise consensus number."
@@ -299,9 +428,13 @@
     {
       "id": "rotation-flattening-relation",
       "classification": "published-model",
-      "sourceIds": ["bianchini-2013-flattening"],
+      "sourceIds": [
+        "bianchini-2013-flattening"
+      ],
       "quantity": "whether rotation alone explains the photometric flattening",
-      "value": { "conclusion": "not fully; a purely rotationally-flattened oblate isotropic model under-/over-predicts the observed ellipticity profile at some radii, and matching it needs added radial velocity anisotropy" },
+      "value": {
+        "conclusion": "not fully; a purely rotationally-flattened oblate isotropic model under-/over-predicts the observed ellipticity profile at some radii, and matching it needs added radial velocity anisotropy"
+      },
       "unit": "n/a",
       "scope": "Whole cluster, axisymmetric rotating-anisotropic dynamical models",
       "limitations": "This is model-dependent evidence, not a raw measurement. Its direct consequence for this ledger: an oblate model built only from a measured ellipticity, position angle and inclination (isotropic King/Wilson made oblate) is known to be an approximation even under the axisymmetric assumption; velocity anisotropy, not just rotation, contributes to the real shape."
@@ -309,9 +442,15 @@
     {
       "id": "counter-rotating-core",
       "classification": "observed",
-      "sourceIds": ["pechetti-2024-muse-core"],
+      "sourceIds": [
+        "pechetti-2024-muse-core"
+      ],
       "quantity": "kinematically distinct core",
-      "value": { "counterRotatesInner": true, "innerRadiusArcsec": 20, "innerRadiusPc": 0.5 },
+      "value": {
+        "counterRotatesInner": true,
+        "innerRadiusArcsec": 20,
+        "innerRadiusPc": 0.5
+      },
       "unit": "n/a",
       "scope": "Innermost ~20 arcsec (~0.5 pc), MUSE narrow+wide field integral-field spectroscopy",
       "limitations": "Direct observational evidence that the cluster's inner few tenths of a parsec rotate opposite to the bulk cluster rotation. This is incompatible with a single rigid-body oblate rotation pattern extended all the way to the center; any oblate King/Wilson model built from bulk ellipticity/PA/inclination necessarily misses this innermost feature, which occupies a negligible fraction of the cluster's volume but is a real, measured departure from simple oblate rotation."
@@ -319,9 +458,17 @@
     {
       "id": "kinematic-disk-component",
       "classification": "published-model",
-      "sourceIds": ["van-de-ven-2006-structure"],
+      "sourceIds": [
+        "van-de-ven-2006-structure"
+      ],
       "quantity": "separate disk-like kinematic substructure",
-      "value": { "radialRangeArcmin": [1, 3], "massFraction": 0.04 },
+      "value": {
+        "radialRangeArcmin": [
+          1,
+          3
+        ],
+        "massFraction": 0.04
+      },
       "unit": "dimensionless (mass fraction)",
       "scope": "Axisymmetric dynamical model, intermediate radii",
       "limitations": "A model-inferred substructure (about 4% of total mass) in the same dynamical fit that gives the headline inclination number above; recorded because it is additional evidence that the cluster's true structure is not a single smooth oblate body, even though it is a small mass fraction and localized to a specific radial range."
@@ -329,19 +476,44 @@
     {
       "id": "king-wilson-fit-comparison",
       "classification": "published-model",
-      "sourceIds": ["mclaughlin-vandermarel-2005", "trager-king-djorgovski-1995"],
-      "quantity": "which empirical profile family best fits the projected photometry",
-      "value": { "conclusion": "a Wilson (1975) model fits Omega Centauri's photometry better than a King (1962) model" },
+      "sourceIds": [
+        "mclaughlin-vandermarel-2005"
+      ],
+      "quantity": "comparison of published King(1966), Wilson(1975) and power-law fits",
+      "value": {
+        "pointCount": 54,
+        "unreducedChiSquared": {
+          "king1966": 89.81,
+          "wilson1975": 24.28,
+          "powerLaw": 76.25
+        },
+        "wilson": {
+          "centralPotentialW0": 4.7,
+          "centralPotentialUncertainty": 0.1,
+          "scaleRadiusArcsec": 196.81,
+          "scaleRadiusUncertaintyPlusArcsec": 7.08,
+          "scaleRadiusUncertaintyMinusArcsec": 7.01,
+          "concentrationLogRtOverR0": 1.34,
+          "concentrationUncertainty": 0.03,
+          "centralSurfaceBrightnessMagArcsec2": 16.52,
+          "centralSurfaceBrightnessUncertainty": 0.05,
+          "paperDistancePc": 5300
+        }
+      },
       "unit": "n/a",
       "scope": "Whole-cluster projected surface-brightness photometry",
-      "limitations": "This directly bears on approximation A in king-abel-profile.json (equating the 3D core radius to a projected King core radius): the literature says the projected profile family itself is better represented by a Wilson model for this cluster, so a King-only fit is known to be a worse choice of family, independent of which core radius is used. The specific fitted McLaughlin & van der Marel (2005) Wilson-model concentration and core radius for NGC 5139 were not retrieved from their Table 9 in this session (see mclaughlin-vandermarel-2005 source access note) -- this is a named gap, not an authored substitute value."
+      "limitations": "Actual CDS rows now retrieved. Wilson is a better fit within this comparison, not proof that every King-family or other profile is impossible. r0 is a model scale radius, not the projected half-power core radius. Wilson requires its own distribution-function/Poisson solution; do not insert these parameters into King1962. The selected MGE already supplies a published radially varying flattening and an analytic deprojection."
     },
     {
       "id": "central-cusp-noyola-2008",
       "classification": "observed",
-      "sourceIds": ["noyola-gebhardt-bergmann-2008"],
+      "sourceIds": [
+        "noyola-gebhardt-bergmann-2008"
+      ],
       "quantity": "central surface-brightness slope",
-      "value": { "logarithmicSlope": -0.08 },
+      "value": {
+        "logarithmicSlope": -0.08
+      },
       "unit": "dimensionless (d log I / d log r)",
       "scope": "Innermost several arcsec, HST ACS integrated light",
       "limitations": "Shows a shallow rising cusp rather than a flat King core at the very center; part of the still-debated intermediate-mass-black-hole literature for this cluster (not adjudicated here), and irrelevant at the parsec scales the bulk King-Abel profile in this ledger targets, but recorded because it shows the innermost profile shape is not simply flat."
@@ -349,32 +521,177 @@
     {
       "id": "distance-confirmation-baumgardt-vasiliev-2021",
       "classification": "observed",
-      "sourceIds": ["baumgardt-vasiliev-2021-paper"],
-      "quantity": "heliocentric distance, independent corroboration",
-      "value": { "distancePc": 5426, "uncertaintyPc": 47 },
+      "sourceIds": [
+        "baumgardt-vasiliev-2021-paper"
+      ],
+      "quantity": "adopted heliocentric distance from combined observations",
+      "value": {
+        "distancePc": 5426,
+        "uncertaintyPc": 47
+      },
       "unit": "pc",
       "scope": "Whole cluster, Gaia EDR3 + HST + literature combination",
-      "limitations": "Agrees with the ledger's existing 'distance' entry (5430 +/- 50 pc) to well within its stated uncertainty; recorded as a second, independently-titled peer-reviewed source rather than only the Baumgardt group's public website table, strengthening but not replacing the existing entry."
+      "limitations": "Primary table now inspected directly. This replaces the earlier rounded5430 +/-50pc input for the MGE recipe, while preserving the original King-Abel artifact unchanged."
     },
     {
       "id": "position-angle-not-sourced",
       "classification": "authored",
-      "sourceIds": [],
+      "sourceIds": [
+        "van-de-ven-2006-structure"
+      ],
       "quantity": "status note: position angle of the major axis on the sky",
-      "value": { "status": "not solidly sourced in this session" },
+      "value": {
+        "status": "historical-gap-resolved",
+        "resolvedBy": "photometric-major-axis-position-angle"
+      },
       "unit": "n/a",
       "scope": "Whole cluster",
-      "limitations": "Search-engine summaries in this session surfaced several candidate values (roughly 100, 103 and 108 degrees) attributed inconsistently to different studies (White & Shawl 1987, van de Ven et al. 2006, and later isodispersion-contour analyses), and one general note that White & Shawl (1987) and Chen & Chen (2010) disagree on position angle. None of these numbers were confirmed against a primary paper fetched directly in this session, so none is recorded as a value here. This is a genuine, reported gap: do not treat any of the numbers above as sourced. A future session should fetch White & Shawl (1987) and a recent isophotal/isodispersion fit directly (e.g. via the MUSE or HST proper-motion datasets) to pin this down before building an oriented oblate model."
+      "limitations": "Initial search summaries did not establish PA. Full primary section2.3.3 now supplies photometric major-axis100 degrees; the separate104 +/-1 degree modern kinematic fit remains recorded. This preserved entry is not a current missing-source claim."
     },
     {
       "id": "triaxiality-not-sourced",
       "classification": "authored",
       "sourceIds": [],
       "quantity": "status note: dedicated triaxial (three-axis) shape measurement",
-      "value": { "status": "not found in this session" },
+      "value": {
+        "status": "not found in this session"
+      },
       "unit": "n/a",
       "scope": "Whole cluster",
-      "limitations": "No paper performing a dedicated triaxial ellipsoid fit (e.g. from isophote twist, or a full triaxial Schwarzschild model) to Omega Centauri was located in this session. The evidence that exists and bears on the question is all indirect: the counter-rotating core (counter-rotating-core), the separate disk-like kinematic component (kinematic-disk-component), the tension between two independent axisymmetric inclination fits (inclination-van-de-ven-2006 vs inclination-haberle-2024), and the reported White & Shawl / Chen & Chen position-angle disagreement (position-angle-not-sourced). Together these say the cluster is not a perfectly simple single-axis oblate rotator, but none of them is itself a measured triaxial shape. This is recorded as a gap, not filled with an authored triaxiality value."
+      "limitations": "No direct triaxial spatial fit was qualified for this recipe. Counter-rotation, kinematic substructure and differing fitted inclinations do not by themselves prove triaxiality. The oblate MGE is an explicit conditional approximation; it does not exclude more complex structure."
+    },
+    {
+      "id": "photometric-mge-fit",
+      "classification": "published-model",
+      "sourceIds": [
+        "dsouza-rix-2013-mge",
+        "watkins-2013-mge-reuse"
+      ],
+      "quantity": "eight-component projected Multi-Gaussian Expansion",
+      "value": {
+        "recipePath": "labs/nebula/models/omega-centauri/photometric-mge.json",
+        "gaussianCount": 8,
+        "sourceSigmaUnit": "arcmin",
+        "recipeSigmaUnit": "arcsec",
+        "sigmaConversionFactor": 60,
+        "paperDistancePc": 5500,
+        "paperDistanceUncertaintyPc": 200,
+        "coefficientUncertainty": null
+      },
+      "unit": "central amplitude:Lsun/pc2; angular major-axis sigma:arcmin; projected axis ratio:dimensionless",
+      "scope": "Smooth projected stellar number-density/light and radial flattening profiles fitted in the cited paper; not individual star locations.",
+      "limitations": "Central projected amplitudes are transcribed as published, with no additional1/q correction. Use only relative amplitudes for conditional integrated image light. No coefficient uncertainties or covariance are supplied, and no errors are fabricated. Neither an absolute emissivity calibration nor a modern dynamical refit is performed."
+    },
+    {
+      "id": "photometric-major-axis-position-angle",
+      "classification": "observed",
+      "sourceIds": [
+        "van-de-ven-2006-structure"
+      ],
+      "quantity": "photometric major-axis position angle east of north",
+      "value": {
+        "positionAngleDegrees": 100,
+        "uncertaintyDegrees": null,
+        "radialRangeArcmin": [
+          5,
+          15
+        ]
+      },
+      "unit": "degrees",
+      "scope": "Elliptical isophotes fitted to the smoothed DSS image at5-15arcmin.",
+      "limitations": "The cited section does not give a formal PA uncertainty. This is an undirected major axis modulo180 degrees, not a signed rotation axis or evidence that all radii have identical PA."
+    },
+    {
+      "id": "mge-adopted-inclination",
+      "classification": "published-model",
+      "sourceIds": [
+        "dsouza-rix-2013-mge",
+        "van-de-ven-2006-structure"
+      ],
+      "quantity": "adopted inclination for the published oblate MGE interpretation",
+      "value": {
+        "inclinationDegrees": 50,
+        "paperAdoptedUncertaintyDegrees": 3,
+        "inclinationDefinition": "zero face-on,90 edge-on",
+        "minimumAdmissibleInclinationDegrees": 43.60381018068668
+      },
+      "unit": "degrees",
+      "scope": "Selected smooth axisymmetric deprojection.",
+      "limitations": "D’Souza2013 adopts50 +/-3 degrees citing van de Ven2006, whose own reported interval is50 +/-4 degrees. These are model-dependent conventions, not a new precision estimate. The recipe uses the central50-degree value; all components require qProjected squared greater than cos(inclination) squared."
+    },
+    {
+      "id": "modern-kinematic-position-angle",
+      "classification": "published-model",
+      "sourceIds": [
+        "haberle-2024-omegacat2"
+      ],
+      "quantity": "modern fitted kinematic position angle",
+      "value": {
+        "positionAngleDegrees": 104,
+        "uncertaintyDegrees": 1
+      },
+      "unit": "degrees east of north",
+      "scope": "HST+MUSE rotation fit in accepted-v2 section8.2.",
+      "limitations": "The quoted1-degree uncertainty follows the fitting step size. A kinematic fit is not interchangeable with the older photometric-isophote orientation used by this recipe."
+    },
+    {
+      "id": "mge-observation-frame-center",
+      "classification": "authored",
+      "sourceIds": [
+        "eso1119b-publisher",
+        "dsouza-rix-2013-mge"
+      ],
+      "quantity": "adopted common tangent-frame center",
+      "value": {
+        "centerIcrsDegrees": [
+          201.696958,
+          -47.479539
+        ],
+        "observationRecipe": "labs/nebula/models/omega-centauri/observations.json",
+        "paperKinematicCenterIcrsDegrees": [
+          201.69065,
+          -47.47855
+        ]
+      },
+      "unit": "degrees ICRS",
+      "scope": "One common center for the two image lenses and the conditional spatial prior.",
+      "limitations": "The published radial shape is explicitly re-centered on the observation-frame center; it is not an assertion that the older paper used this same center. Center metadata does not replace independent image registration."
+    },
+    {
+      "id": "mge-oblate-deprojection",
+      "classification": "published-model",
+      "sourceIds": [
+        "dsouza-rix-2013-mge",
+        "watkins-2013-mge-reuse"
+      ],
+      "quantity": "analytic oblate deprojection of the published projected Gaussians",
+      "value": {
+        "methodPath": "labs/nebula/models/omega-centauri/mge-method.md",
+        "intrinsicAxisRatio": "sqrt((qProjected^2-cos(i)^2)/sin(i)^2)",
+        "centralRelativeDensity": "Sigma0*qProjected/(sqrt(2*pi)*sigma*qIntrinsic)",
+        "density": "sum rho0*exp(-(R^2+zIntrinsic^2/qIntrinsic^2)/(2*sigma^2))",
+        "frame": "x west,y north,z away from Earth"
+      },
+      "unit": "relative light per angular-depth unit in the sampler",
+      "scope": "Conditional continuous depth prior for finite integrated-light emitters.",
+      "limitations": "An analytic inference under axisymmetry, not a released XYZ catalogue or measured star-by-star depth. It does not recover population-specific mass segregation, central counter-rotation or triaxial structure. Angular widths stay fixed when physical distance is changed."
+    },
+    {
+      "id": "mge-authored-transport",
+      "classification": "authored",
+      "sourceIds": [
+        "dsouza-rix-2013-mge"
+      ],
+      "quantity": "finite-support and mirror choices for conditional image-light transport",
+      "value": {
+        "lineOfSightTiltSign": 1,
+        "cutoffSigma": 6,
+        "amplitudeNormalization": "divide all projected central amplitudes by their sum",
+        "stellarTreatment": "preserve integrated starlight"
+      },
+      "unit": "dimensionless",
+      "scope": "Offline conditional depth/material construction; common geometry for every lens.",
+      "limitations": "The projected image cannot choose the near/far tilt; sign+1 is authored. Six-sigma truncation is a numerical support bound, not a measured tidal edge. The published profile conditions finite3D image emitters; it does not identify individual member stars or justify copying the same image through every depth. Source registration, actual bake, side-view acceptance and app promotion require their own evidence."
     }
   ]
 }

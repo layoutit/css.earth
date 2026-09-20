@@ -1,17 +1,18 @@
 /** Accepted analytic emission and component colors: no source images, fitting, or baked pixels. */
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { dirname } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { bakeCompiler, type CompilerBakeProgress, type CompilerBakeBackend, type CompiledVolumeArtifact } from '../compiler/bake.ts';
 import { readCompilerBakeResult, type CompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
-import { createEmissionField } from '@cssearth/volume-core/fields/emission';
+import { createPhotometricEmission, readEnvelopeColors, type EnvelopeColors } from '@cssearth/volume-core/fields/photometric-emission';
 import { readRetainedEmissionField } from '@cssearth/volume-core/fields/retained-emission';
 import { pinned, type Pin } from './io.ts';
 
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 const digest = (v: unknown): v is string => typeof v === 'string' && /^[a-f0-9]{64}$/.test(v);
 const text = (v: unknown): v is string => typeof v === 'string' && v.length > 0;
-interface Material { sourceId: string; components: { id: string; rgb: [number, number, number]; covered: boolean }[] }
+interface Material { sourceId: string; envelopeColors?: EnvelopeColors; components: { id: string; rgb: [number, number, number]; covered: boolean }[] }
 interface Resource { path: string; sha256: string; bytes: number; width: number; height: number }
 export function readCompactCompiler(value: unknown) {
   if (!record(value) || value.schema !== 'cssearth-compact-compiler@1' || !text(value.objectId) ||
@@ -25,7 +26,9 @@ export function readCompactCompiler(value: unknown) {
   const materials: Material[] = value.materials.map((material: unknown) => {
     if (!record(material) || !text(material.sourceId) || !Array.isArray(material.components) || material.components.length !== componentIds.length)
       throw new TypeError('Invalid compact material.');
-    return { sourceId: material.sourceId, components: material.components.map((color: unknown, index: number) => {
+    const envelopeColors = field.photometricEnvelope ? readEnvelopeColors(material.envelopeColors, field.photometricEnvelope) : undefined;
+    if (!field.photometricEnvelope && material.envelopeColors !== undefined) throw new TypeError('Envelope material has no retained density.');
+    return { sourceId: material.sourceId, ...(envelopeColors ? { envelopeColors } : {}), components: material.components.map((color: unknown, index: number) => {
       if (!record(color) || color.id !== componentIds[index] || typeof color.covered !== 'boolean' || !Array.isArray(color.rgb) ||
           color.rgb.length !== 3 || !color.rgb.every((n): n is number => typeof n === 'number' && Number.isFinite(n) && n >= 0 && n <= 255))
         throw new TypeError('Compact material component differs.');
@@ -56,6 +59,9 @@ export function readCompactCompiler(value: unknown) {
   const minimumFeatureScaleArcsec = value.minimumFeatureScaleArcsec;
   if (minimumFeatureScaleArcsec !== undefined && (typeof minimumFeatureScaleArcsec !== 'number' || !Number.isFinite(minimumFeatureScaleArcsec) || minimumFeatureScaleArcsec <= 0))
     throw new TypeError('Invalid compact feature scale.');
+  // A retained field is a pinned source artifact, including the envelope. Deleting it cannot select a finite-only fallback.
+  if (createHash('sha256').update(JSON.stringify(value.field)).digest('hex') !== value.provenance.modelSha256)
+    throw new TypeError('Compact retained model hash differs.');
   return { objectId: value.objectId, field, scene, materials, sources, expected, minimumFeatureScaleArcsec };
 }
 
@@ -66,12 +72,15 @@ export interface CompactCompilerBackend extends CompilerBakeBackend {
 export async function replayCompactCompiler(root: string, pin: Pin, outputDirectory: string, backend: CompactCompilerBackend,
   progress?: (progress: CompilerBakeProgress) => void) {
   const input = readCompactCompiler(JSON.parse(gunzipSync(await pinned(root, pin), { maxOutputLength: 16 * 1024 * 1024 }).toString()));
-  const field = createEmissionField(input.field), old = input.scene, origin = old.coordinates.localOriginArcsec;
+  const field = createPhotometricEmission(input.field), old = input.scene, origin = old.coordinates.localOriginArcsec;
+  const preparedPhysical = old.frame.referenceFrame === 'lab-sky-west-north-toward';
   const scene = await bakeCompiler({ root, outputDirectory, id: old.volumeId ?? old.id, fieldIdentity: old.fieldIdentity,
+    sampling: old.sampling, preparedPhysical,
     boundsArcsec: old.boundsArcsec, skyBoundsArcsec: old.skyBoundsArcsec, minimumFeatureScaleArcsec: input.minimumFeatureScaleArcsec,
     sampleEmission: field.sampleEmission, lenses: input.materials.map((material, index) => ({ id: material.sourceId,
-      label: input.sources[index]!.label, sampleMaterial: field.createMaterialSampler(material.components) })),
-    stars: old.stars.map(star => ({ ...star, positionArcsec: [star.positionUnits[0] + origin[0], star.positionUnits[1] + origin[1], star.positionUnits[2] + origin[2]] })), progress }, backend);
+      label: input.sources[index]!.label, sampleMaterial: field.createMaterialSampler(material.components, material.envelopeColors) })),
+    stars: old.stars.map(star => ({ ...star, positionArcsec: [star.positionUnits[0] + origin[0], star.positionUnits[1] + origin[1],
+      (preparedPhysical ? -star.positionUnits[2] : star.positionUnits[2]) + origin[2]] })), progress }, backend);
   assert.equal(scene.alphaSha256, old.alphaSha256, 'Compact replay changed neutral opacity.');
   assert.deepEqual(scene.sampling, old.sampling, 'Compact replay changed sampling.');
   assert.equal(scene.starSprites?.atlas.sha256, old.starSprites?.atlas.sha256, 'Compact replay changed stellar sprites.');

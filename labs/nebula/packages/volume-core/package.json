@@ -50,7 +50,10 @@
     "./materials/slab-material": "./src/materials/slab-material.ts",
     "./materials/star-photometry": "./src/materials/star-photometry.ts",
     "./package.json": "./package.json",
-    "./sampling/registered-raster": "./src/sampling/registered-raster.ts"
+    "./sampling/registered-raster": "./src/sampling/registered-raster.ts",
+    "./sampling/layer-optimization": "./src/sampling/layer-optimization.ts",
+    "./fields/photometric-mge": "./src/fields/photometric-mge.ts",
+    "./fields/photometric-emission": "./src/fields/photometric-emission.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json"

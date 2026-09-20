@@ -119,7 +119,7 @@ export const pixelCenter = (bounds: SkyBounds, width: number, height: number, p:
 ];
 
 /** Bilinear lookup in a row-major sky grid; false outside the grid. */
-function sampleGrid(grid: { width: number; height: number; bounds: SkyBounds }, values: ArrayLike<number>, channels: number, x: number, y: number, out: number[]): boolean {
+export function sampleEnvelopeGrid(grid: { width: number; height: number; bounds: SkyBounds }, values: ArrayLike<number>, channels: number, x: number, y: number, out: number[]): boolean {
   const u = (x - grid.bounds.min[0]) / (grid.bounds.max[0] - grid.bounds.min[0]) * grid.width - .5;
   const v = (grid.bounds.max[1] - y) / (grid.bounds.max[1] - grid.bounds.min[1]) * grid.height - .5;
   if (!(u >= -.5 && v >= -.5 && u <= grid.width - .5 && v <= grid.height - .5)) return false;
@@ -135,7 +135,7 @@ function sampleGrid(grid: { width: number; height: number; bounds: SkyBounds }, 
 export function createEnvelopeSampler(grid: SimulationEnvelopeGrid, prior: SimulationDepthPrior) {
   const scratch = [0];
   return (x: number, y: number, z: number): number => {
-    if (z < grid.zRange[0] || z > grid.zRange[1] || !sampleGrid(grid, grid.gain, 1, x, y, scratch) || !(scratch[0]! > 0)) return 0;
+    if (z < grid.zRange[0] || z > grid.zRange[1] || !sampleEnvelopeGrid(grid, grid.gain, 1, x, y, scratch) || !(scratch[0]! > 0)) return 0;
     return scratch[0]! * prior.sampleDensity(x, y, z);
   };
 }
@@ -188,7 +188,7 @@ export function envelopeChromaticity(rgb: ArrayLike<number>, coverage: Uint8Arra
   }
   const grid = { width, height, bounds }, scratch = [0, 0, 0];
   return (x: number, y: number, out: [number, number, number]): boolean => {
-    if (!sampleGrid(grid, chroma, 3, x, y, scratch)) return false;
+    if (!sampleEnvelopeGrid(grid, chroma, 3, x, y, scratch)) return false;
     for (let c = 0; c < 3; c++) out[c] = Math.min(255, Math.max(0, scratch[c]!));
     return true;
   };

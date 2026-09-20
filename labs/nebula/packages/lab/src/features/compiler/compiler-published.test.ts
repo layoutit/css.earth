@@ -63,18 +63,18 @@ test('saved clouds remain inspectable after producer code changes without rewrit
 });
 
 /** Minimal valid metadata receipt; texture decoding belongs to the volume runtime tests. */
-function completedFixture(options: { depth?: boolean; depthId?: string; ledgerId?: string; declaredEvidenceHash?: string; omitMethodDepth?: boolean; staleSnapshot?: boolean } = {}) {
+function completedFixture(options: { depth?: boolean; photometric?: boolean; depthId?: string; ledgerId?: string; declaredEvidenceHash?: string; omitMethodDepth?: boolean; staleSnapshot?: boolean } = {}) {
   const data = new Map(files), id = '1'.repeat(64), directory = `.local/nebula-lab/compiler/${id}`;
   const depthPath = 'labs/nebula/models/example/depth.json', evidencePath = 'labs/nebula/models/example/evidence.json';
-  const compiler = { ...recipe, ...(options.depth ? { depthRecipe: depthPath } : {}) };
+  const compiler = { ...recipe, ...(options.depth ? { depthRecipe: depthPath } : {}), ...(options.photometric ? { photometricPriorRecipe: depthPath } : {}) };
   data.set(recipePath, JSON.stringify(compiler));
   const inputPaths = [...data.keys()];
   const put = (path: string, value: unknown) => { const bytes = JSON.stringify(value); data.set(path, bytes); return { path, sha256: digest(bytes) }; };
   let physicalDepth: { recipe: { path: string; sha256: string }; evidence: { path: string; sha256: string } } | undefined;
-  if (options.depth) {
+  if (options.depth || options.photometric) {
     const ledger = { schema: 'cssearth-nebula-physical-evidence@1', subjectId: options.ledgerId ?? recipe.id, sources: [], evidence: [], methods: [] };
     const evidence = put(evidencePath, ledger);
-    const depth = { schema: 'cssearth-nebula-depth-model@1', id: options.depthId ?? recipe.id,
+    const depth = { schema: options.photometric ? 'cssearth-photometric-mge@1' : 'cssearth-nebula-depth-model@1', id: options.depthId ?? recipe.id,
       evidence: { ...evidence, sha256: options.declaredEvidenceHash ?? evidence.sha256 } };
     put(depthPath, depth); inputPaths.push(depthPath, evidencePath);
     physicalDepth = { recipe: put(`${directory}/depth.json`, options.staleSnapshot ? { ...depth, historical: true } : depth),
@@ -84,7 +84,7 @@ function completedFixture(options: { depth?: boolean; depthId?: string; ledgerId
   const method = put(`${directory}/method.json`, { recipeSha256: digest(data.get(recipePath)!), implementation: [],
     request: { action: 'apply', imageId: 'compiler', recipePath, cataloguePath: recipe.structureCatalogue,
       imageToFrame: {}, evidence: { sensitivity: 1, weights: [] }, controls },
-    ...(!options.omitMethodDepth && physicalDepth ? { physicalDepth } : {}) });
+    ...(!options.omitMethodDepth && physicalDepth ? options.photometric ? { photometricPrior: physicalDepth } : { physicalDepth } : {}) });
   const blob = put(`${directory}/placeholder.json`, {}), bounds = { min: [-1, -1, -1] as [number, number, number], max: [1, 1, 1] as [number, number, number] };
   const sky = { min: [-1, -1] as [number, number], max: [1, 1] as [number, number] };
   const result: CompilerResult = { schema: 'cssearth-nebula-compiler-result@1', id, label: 'Example', defaultSourceId: 'optical', controls, pipeline: [],
@@ -105,6 +105,20 @@ test('legacy and fully pinned depth receipts both restore without processing', a
   for (const depth of [false, true]) {
     const fixture = completedFixture({ depth });
     assert.equal((await loadPublishedCompiler(pointer, recipePath, fixture.fetchLocal))?.id, fixture.result.id);
+  }
+});
+
+test('photometric publication requires the exact model and evidence used for the saved volume', async () => {
+  const good = completedFixture({ photometric: true });
+  assert.equal((await loadPublishedCompiler(pointer, recipePath, good.fetchLocal))?.id, good.result.id);
+  for (const target of ['depthPath', 'evidencePath'] as const) {
+    const missing = completedFixture({ photometric: true });
+    missing.receipt.inputs = missing.receipt.inputs.filter(pin => pin.path !== missing[target]);
+    await assert.rejects(loadPublishedCompiler(pointer, recipePath, missing.fetchLocal), /configured source|configured evidence/);
+  }
+  for (const options of [{ omitMethodDepth: true }, { depthId: 'other' }, { staleSnapshot: true }]) {
+    const bad = completedFixture({ photometric: true, ...options });
+    await assert.rejects(loadPublishedCompiler(pointer, recipePath, bad.fetchLocal), /configured photometric model|configured evidence/);
   }
 });
 

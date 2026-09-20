@@ -18,7 +18,8 @@ function quaternion(x: VolumeVector, y: VolumeVector, z: VolumeVector): [number,
   if (e > i) { const s = Math.sqrt(1+e-a-i)*2; return [(b+d)/s,s/4,(f+h)/s,(c-g)/s]; }
   const s = Math.sqrt(1+i-a-e)*2; return [(c+g)/s,(f+h)/s,s/4,(d-b)/s];
 }
-/** The lab's west/north/away image frame is reflected into proper east/north/away ICRS. */
+const towardFrame = (source?: Pick<DensityVolumeFrame, 'referenceFrame'>) => source?.referenceFrame === 'lab-sky-west-north-toward';
+/** Historical angular source frames reflect X; physical west/north/toward frames rotate X and Z. */
 export function embedNebulaFrame(source: DensityVolumeFrame, sky: NebulaSkyFrame,
   originUnits: VolumeVector = [0,0,0]): DensityVolumeFrame {
   if (!sky.centerIcrsDegrees.every(Number.isFinite) || sky.centerIcrsDegrees[0] < 0 || sky.centerIcrsDegrees[0] >= 360 ||
@@ -35,13 +36,15 @@ export function embedNebulaFrame(source: DensityVolumeFrame, sky: NebulaSkyFrame
     localToReferenceXyzw: quaternion(x,y,away),
     originM: vector(away.map((n,i) => n*sky.distancePc*METERS_PER_PARSEC +
       (-x[i]!*originUnits[0]+y[i]!*originUnits[1]+n*originUnits[2])*metersPerUnit)),
-    boundsUnits: { min: [-source.boundsUnits.max[0],source.boundsUnits.min[1],source.boundsUnits.min[2]],
-      max: [-source.boundsUnits.min[0],source.boundsUnits.max[1],source.boundsUnits.max[2]] } };
+    boundsUnits: { min: [-source.boundsUnits.max[0],source.boundsUnits.min[1],towardFrame(source) ? -source.boundsUnits.max[2] : source.boundsUnits.min[2]],
+      max: [-source.boundsUnits.min[0],source.boundsUnits.max[1],towardFrame(source) ? -source.boundsUnits.min[2] : source.boundsUnits.max[2]] } };
 }
-export const reflectNebulaPoint = (p: VolumeVector): [number,number,number] => [-p[0],p[1],p[2]];
+export const reflectNebulaPoint = (p: VolumeVector, source?: Pick<DensityVolumeFrame, 'referenceFrame'>): [number,number,number] =>
+  [-p[0],p[1],towardFrame(source) ? -p[2] : p[2]];
 /** PolyCSS encodes physical [x,y,z] as CSS [y,x,z]; reflect the CSS matrix's second row offline. */
 export function embedNebulaVolume(volume: PreparedCssVolume, frame: DensityVolumeFrame, id: string, prefix: string): PreparedCssVolume {
-  return { ...volume, id, frame, anchors: volume.anchors?.map(a => ({ ...a, positionUnits: reflectNebulaPoint(a.positionUnits) })),
+  const toward = towardFrame(volume.frame);
+  return { ...volume, id, frame, anchors: volume.anchors?.map(a => ({ ...a, positionUnits: reflectNebulaPoint(a.positionUnits, volume.frame) })),
     resources: volume.resources.map(r => ({ ...r, path: `${prefix}/${r.path}` })),
     stacks: volume.stacks.map(stack => ({ axis: stack.axis, leaves: balanceVolumeSlices(stack.leaves.map(leaf => {
       const match = /^matrix3d\(([^)]+)\)$/.exec(leaf.style.transform);
@@ -49,9 +52,11 @@ export function embedNebulaVolume(volume: PreparedCssVolume, frame: DensityVolum
       const matrix = match[1]!.split(',').map(Number);
       if (matrix.length !== 16 || !matrix.every(Number.isFinite)) throw new TypeError('Invalid prepared nebula matrix.');
       for (const i of [1,5,9,13]) matrix[i] = -matrix[i]!;
+      if (toward) for (const i of [2,6,10,14]) matrix[i] = -matrix[i]!;
       const b = leaf.boundsCssPixels;
-      return { ...leaf, centerUnits: reflectNebulaPoint(leaf.centerUnits), texturePath: `${prefix}/${leaf.texturePath}`,
-        ...(b ? { boundsCssPixels: { min: [b.min[0],-b.max[1],b.min[2]] as VolumeVector, max: [b.max[0],-b.min[1],b.max[2]] as VolumeVector } } : {}),
+      return { ...leaf, centerUnits: reflectNebulaPoint(leaf.centerUnits, volume.frame), texturePath: `${prefix}/${leaf.texturePath}`,
+        ...(b ? { boundsCssPixels: { min: [b.min[0],-b.max[1],toward ? -b.max[2] : b.min[2]] as VolumeVector,
+          max: [b.max[0],-b.min[1],toward ? -b.min[2] : b.max[2]] as VolumeVector } } : {}),
         style: { ...leaf.style, transform: `matrix3d(${matrix.join(',')})` } };
     }), stack.axis) })) };
 }

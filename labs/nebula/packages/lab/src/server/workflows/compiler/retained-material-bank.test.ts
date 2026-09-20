@@ -13,11 +13,17 @@ import { readCompilerBakeResult } from '@cssearth/volume-core/contracts/compiler
 import { assertCompilerLensGeometry } from './bank-validation.ts';
 import { prepareRetainedMaterialBank, type RetainedMaterialBankOptions } from './retained-material-bank.ts';
 
-async function fixture(t: TestContext) {
+async function fixture(t: TestContext, variable = false) {
   const root = await mkdtemp(join(tmpdir(), 'retained-material-')); t.after(() => rm(root, { recursive: true, force: true }));
   const boundsArcsec = { min: [10, 20, 30] as [number, number, number], max: [12, 22, 32] as [number, number, number] };
   const { frame, localBounds, origin } = compilerFrame(boundsArcsec), fieldIdentity = 'a'.repeat(64);
+  const layerPlan = variable ? { schema: 'cssearth-volume-layer-plan@1' as const,
+    referenceSliceCounts: { x: 4, y: 4, z: 4 }, referenceSamplesPerSlab: 4,
+    axes: { x: [{ startCell: 0, endCell: 1 }, { startCell: 1, endCell: 4 }],
+      y: [{ startCell: 0, endCell: 2 }, { startCell: 2, endCell: 4 }],
+      z: [{ startCell: 0, endCell: 3 }, { startCell: 3, endCell: 4 }] } } : undefined;
   const baked = await bakeMasterVolumeSlices({ boundsKpc: localBounds, sliceCounts: { x: 2, y: 2, z: 2 }, samplesPerSlab: 4,
+    ...(layerPlan ? { layerPlan } : {}),
     exposureGain: 1, masterWidth: 8, masterDirectory: join(root, 'masters'), deliveryBanks: [
       { width: 8, outputDirectory: join(root, 'neutral'), imageEncoding: { format: 'png' } }], unitsPerSourceUnit: 1,
     provenance: {}, cropTransparent: true, sampleEmission(x, y, z, out) { out[0] = out[1] = out[2] = Math.hypot(x, y, z) < .9 ? .2 : 0; },
@@ -33,7 +39,7 @@ async function fixture(t: TestContext) {
     coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin, earthView: 'observer-at-negative-z-looking-away' },
     neutral, alphaSha256, lenses: [{ id: 'original', label: 'Original', volume: neutral,
       coverage: { positiveAlphaTexels: 0, recoloredTexels: 0, outsideImageTexels: 0 } }], stars: [],
-    sampling: { sliceCounts: { x: 2, y: 2, z: 2 }, imageWidth: 512, samplesPerSlab: 4 } });
+    sampling: { sliceCounts: { x: 2, y: 2, z: 2 }, imageWidth: 512, samplesPerSlab: 4, ...(layerPlan ? { layerPlan } : {}) } });
   const options: RetainedMaterialBankOptions = { root, outputDirectory: 'painted', scene,
     neutralSlicesPin: await pin('neutral/volume-slices.json', slices),
     sampleEmission(x, y, z, out) { out[0] = out[1] = out[2] = Math.hypot(x - origin[0], y - origin[1], z - origin[2]) < .9 ? .2 : 0; },
@@ -59,6 +65,24 @@ test('retained material prepares RGB through the existing slab/compiler path wit
     assert.deepEqual(colored.filter((_b, i) => i % 4 === 3), original.filter((_b, i) => i % 4 === 3));
   }
   assert.notEqual(painted.resources[0]!.sha256, neutral.resources[0]!.sha256);
+});
+
+test('retained nonuniform material preserves intervals and rejects missing replay metadata', async t => {
+  const { options, slices, pin } = await fixture(t, true);
+  const lens = await prepareRetainedMaterialBank(options);
+  assert.ok(lens.coverage.recoloredTexels > 0);
+  const painted = JSON.parse(await readFile(join(options.root, 'painted/volume-slices.json'), 'utf8'));
+  assert.deepEqual(painted.approximation.layerPlan, options.scene.sampling.layerPlan);
+  assert.deepEqual(painted.quads.map((q: { slab: unknown }) => q.slab), slices.quads.map(q => q.slab));
+  for (const mutate of [
+    () => { delete slices.quads[0]!.slab; },
+    () => { delete slices.approximation.layerPlan; },
+    () => { slices.quads[0]!.slab!.samples--; },
+  ]) {
+    const before = structuredClone(slices); mutate();
+    await assert.rejects(prepareRetainedMaterialBank({ ...options, neutralSlicesPin: await pin('neutral/volume-slices.json', slices) }), /slab interval|layer plan|samples differ/);
+    Object.assign(slices, before);
+  }
 });
 
 test('retained material rejects changed pinned alpha, positions and slab metadata', async t => {

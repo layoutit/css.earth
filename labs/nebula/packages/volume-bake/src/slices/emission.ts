@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import type { Axis, Bounds3, Vector3, VolumeImageEncoding } from '@cssearth/volume-core/contracts/volume-recipe';
-import type { VolumeSlices, VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
+import { readVolumeLayerPlan, type VolumeLayerPlan, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
 import { encodeVolumeRaster } from './raster.ts';
 import { containedPath, sha256 } from '../compact-inputs/density-grid.ts';
 
@@ -22,6 +22,8 @@ export interface MasterVolumeOptions {
   boundsKpc: Bounds3;
   sliceCounts: Record<Axis, number>;
   samplesPerSlab: number;
+  /** Optional grouped reference cells; omitted preserves historical uniform bytes. */
+  layerPlan?: VolumeLayerPlan;
   exposureGain: number;
   masterWidth: number;
   masterDirectory: string;
@@ -91,12 +93,20 @@ export async function bakeMasterVolumeSlices(options: MasterVolumeOptions): Prom
   integer(width, 'Master width', 8192); integer(samples, 'Samples per slab', 1024);
   positive(options.exposureGain, 'Exposure gain'); positive(options.unitsPerSourceUnit, 'Geometry scale');
   for (const axis of axes) integer(counts[axis], 'Slice count', 512);
+  const layerPlan = options.layerPlan === undefined ? undefined : readVolumeLayerPlan(options.layerPlan);
+  if (layerPlan && (samples !== layerPlan.referenceSamplesPerSlab || axes.some(axis => counts[axis] !== layerPlan.axes[axis].length)))
+    throw new TypeError('Retained slice counts and reference samples must match the volume layer plan.');
   checkBanks(options.masterDirectory, options.deliveryBanks);
   for (const bank of options.deliveryBanks) if (bank.width > width) throw new TypeError('Delivery must not upscale the master.');
   const scale = options.unitsPerSourceUnit;
   const boundsUnits: Bounds3 = {
     min: bounds.min.map(v => v * scale) as Vector3, max: bounds.max.map(v => v * scale) as Vector3,
   };
+  if (layerPlan && axes.some((axis, i) => !Number.isFinite(bounds.max[i]! - bounds.min[i]!) ||
+      !Number.isFinite(boundsUnits.min[i]) || !Number.isFinite(boundsUnits.max[i]) ||
+      !(boundsUnits.max[i]! > boundsUnits.min[i]!) ||
+      !((bounds.max[i]! - bounds.min[i]!) / layerPlan.referenceSliceCounts[axis] / samples > 0)))
+    throw new TypeError('Volume layer physical intervals and reference sample spacing must be finite and positive.');
   const masters: VolumeSlices = { quads: [], boundsUnits, provenance: options.provenance, approximation: {
     method: `Direct XYZ emissivity samples per kpc; shared exponential opacity and optical RGB ratios; lossless full-extent RGBA8 masters. Quantization: ${MASTER_QUANTIZATION}.`,
     radialEmission: 'Provided entirely by the authored emissivity sampler.',
@@ -108,6 +118,11 @@ export async function bakeMasterVolumeSlices(options: MasterVolumeOptions): Prom
     samplesPerSlab: samples, opticalWeight: 1, exposureGain: options.exposureGain,
     emissionTransfer: 'shared-opacity', sliceCounts: { ...counts }, slabPitchUnits: { x: 0, y: 0, z: 0 },
   } };
+  if (layerPlan) {
+    masters.approximation.layerPlan = layerPlan;
+    masters.approximation.method += ' Variable slabs merge contiguous reference cells without thinning depth quadrature.';
+    masters.approximation.limitations.push('Nonuniform slab planes sit at interval midpoints; slabPitchUnits is the axis mean, samplesPerSlab is the reference-cell count. Each quad records its actual interval and sample count. Merging preserves reference quadrature, not continuous depth placement or axis-handoff accuracy.');
+  }
   const total = counts.x + counts.y + counts.z;
   for (const axis of axes) {
     const axial = axis === 'x' ? 0 : axis === 'y' ? 1 : 2;
@@ -116,7 +131,9 @@ export async function bakeMasterVolumeSlices(options: MasterVolumeOptions): Prom
     const vMax = bounds.max[vertical], vSpan = vMax - bounds.min[vertical];
     const height = Math.max(1, Math.round(width * vSpan / uSpan));
     dimensions(width, height);
-    const pitch = (bounds.max[axial] - bounds.min[axial]) / counts[axis], ds = pitch / samples;
+    const pitch = (bounds.max[axial] - bounds.min[axial]) / counts[axis];
+    const referencePitch = layerPlan ? (bounds.max[axial] - bounds.min[axial]) / layerPlan.referenceSliceCounts[axis] : pitch;
+    const ds = referencePitch / samples;
     masters.approximation.slabPitchUnits[axis] = pitch * scale;
     await mkdir(resolve(options.masterDirectory, 'slices', axis), { recursive: true });
     const rgb: Vector3 = [0, 0, 0];
@@ -125,8 +142,18 @@ export async function bakeMasterVolumeSlices(options: MasterVolumeOptions): Prom
     // RGB residuals also conserve faint hue when adjacent slabs differ in color.
     const opticalError = new Float64Array(width * height * 3);
     for (let index = 0; index < counts[axis]; index++) {
-      const depth = bounds.min[axial] + (index + 0.5) * pitch;
-      const depths = Float64Array.from({ length: samples }, (_, sample) => depth + pitch * ((sample + 0.5) / samples - 0.5));
+      const group = layerPlan?.axes[axis][index];
+      const start = group ? bounds.min[axial] + group.startCell * referencePitch : 0;
+      const end = group ? bounds.min[axial] + group.endCell * referencePitch : 0;
+      if (group && (!(end > start) || !Number.isFinite(start) || !Number.isFinite(end) ||
+          !(end * scale > start * scale))) throw new TypeError('Volume layer physical intervals must be finite and increasing.');
+      const depth = group ? (start + end) / 2 : bounds.min[axial] + (index + 0.5) * pitch;
+      const sampleCount = group ? (group.endCell - group.startCell) * samples : samples;
+      const depths = Float64Array.from({ length: sampleCount }, (_, sample) => {
+        if (!group) return depth + pitch * ((sample + 0.5) / samples - 0.5);
+        const cell = group.startCell + Math.floor(sample / samples), sub = sample % samples;
+        return bounds.min[axial] + (cell + 0.5) * referencePitch + referencePitch * ((sub + 0.5) / samples - 0.5);
+      });
       const rgba = Buffer.alloc(width * height * 4);
       let nonzero = 0;
       for (let row = 0; row < height; row++) {
@@ -134,7 +161,7 @@ export async function bakeMasterVolumeSlices(options: MasterVolumeOptions): Prom
         for (let col = 0; col < width; col++) {
           const u = us[col]!;
           let red = 0, green = 0, blue = 0;
-          for (let sample = 0; sample < samples; sample++) {
+          for (let sample = 0; sample < sampleCount; sample++) {
             const d = depths[sample]!;
             if (axis === 'x') options.sampleEmission(d, u, v, rgb);
             else if (axis === 'y') options.sampleEmission(u, d, v, rgb);
@@ -178,7 +205,8 @@ export async function bakeMasterVolumeSlices(options: MasterVolumeOptions): Prom
         vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]],
         center: point(axis, depth * scale, (uMin + uSpan / 2) * scale, (vMax - vSpan / 2) * scale),
         normal: axis === 'x' ? [-1, 0, 0] : axis === 'y' ? [0, 1, 0] : [0, 0, -1],
-        sha256: sha256(bytes), bytes: bytes.length, alphaCoverage: nonzero / (width * height) });
+        sha256: sha256(bytes), bytes: bytes.length, alphaCoverage: nonzero / (width * height),
+        ...(group ? { slab: { start: start * scale, end: end * scale, samples: sampleCount, startCell: group.startCell, endCell: group.endCell } } : {}) });
       report(options.onProgress, { phase: 'master', axis, sliceIndex: index, completed: masters.quads.length, total, width });
     }
   }

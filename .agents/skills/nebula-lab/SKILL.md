@@ -31,6 +31,12 @@ angle — leaves on every side. Slabs pack into per-axis atlases for delivery. I
 handoff explicitly: brightness and colour agreement between banks is an acceptance criterion,
 not a detail.
 
+New compiler and sampled-volume bakes plan at most **500 total XYZ slabs**, integrating all
+reference depth samples inside adaptive intervals. Preserve the saved plan for replay and
+all component mixtures. A planning estimate is not visual acceptance; keep the actual
+brightness/detail/handoff gates. Historical pinned deliveries remain unchanged. See
+`labs/nebula/docs/emission-compiler.md#automatic-layer-budget` before changing this step.
+
 ## Packages and boundaries
 
 `labs/nebula/packages/{lab,volume-core,volume-bake,reconstruction,volume-viewer}`.
@@ -71,7 +77,28 @@ Pick by what the evidence supports, not by habit.
 
 Two-scale in one line: broad light is `gain(x,y) × prior(x,y,z)` with `gain = fraction × blur(image) / blur(column)`; finite components fit the residual at prior-supported depths, so image brightness scales the envelope and never moves it in depth. Example recipe: `labs/nebula/models/smc/constrained/emission-envelope-ellipsoid.json`, with its method note beside it.
 
-**Lenses:** every image recolours one shared geometry, so switching lens changes colour, never shape. **The prior is a hypothesis, never a measurement** — prefer one that scores better against observations; for the SMC a VMC-constrained ellipsoid beat the tidal simulation (withheld deviance 0.457 vs 0.601).
+**RGB-only lenses:** every image recolours one shared geometry, so switching lens changes colour, never shape. **The prior is a hypothesis, never a measurement** — prefer one that scores better against observations; for the SMC a VMC-constrained ellipsoid beat the tidal simulation (withheld deviance 0.457 vs 0.601).
+
+## Numerical alignment before image inspection
+
+Diagnose alignment numerically before judging screenshots or rebaking. Use the configured
+lenses as independent checks of the shared coordinate transport; different spectral structures
+and brightness are expected, so do not force their pixels to match.
+
+- Check registered landmarks or matched stars in the common sky frame: translation, scale,
+  rotation, handedness, footprints and held-out residuals in pixels/arcseconds. Verify the same
+  points through source, prepared geometry and camera projection.
+- Compare shared geometry/alpha across RGB-only lenses. For declared component mixtures,
+  compare the shared frame, slab intervals and layout while preserving legitimate support
+  differences. Use spatial residuals, not histogram agreement, to establish alignment.
+- Separate registration error from material, sampling and browser compositing error. Compare
+  analytic projections, decoded baked values and rendered pixel measurements at the same
+  camera. Fix the owner identified by those measurements; do not compensate with a display
+  offset or assume that every failed image metric proves misregistration.
+- Run capture analysis locally and return compact numerical reports. Keep captures on disk;
+  do not routinely load them into model context. Inspect an image only for a named question
+  that the numbers cannot settle, a required final visual check, or an explicit user request;
+  use the smallest useful crop and fewest images.
 
 ## Matching a lens to its image
 

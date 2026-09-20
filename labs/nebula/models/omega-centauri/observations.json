@@ -28,21 +28,23 @@
       "height": 14540,
       "fieldArcminutes": [50.88, 50.88],
       "centerIcrsDegrees": [201.69695833333333, -47.47953888888889],
+      "northRightDegrees": -0.00051173061,
       "bands": "Optical G (480nm) / R (625nm) / I (770nm)",
       "credit": "ESO/INAF-VST/OmegaCAM. Acknowledgement: A. Grado, L. Limatola/INAF-Capodimonte Observatory",
       "termsUrl": "https://www.eso.org/public/outreach/copyright/",
       "registrationMode": "field-stars",
+      "registrationDetection": { "sourceMaximum": 8000, "referenceMaximum": 8000, "maximumStars": 12000 },
       "stellarTreatment": "preserve",
       "wcs": {
         "projection": "TAN",
         "coordinateFrame": "ICRS",
-        "referenceDimension": [14540, 14540],
-        "referencePixel": [7270, 7270],
-        "referenceValueDeg": [201.69695833333333, -47.47953888888889],
-        "scaleDeg": [-5.832187070151307e-05, 5.832187070151307e-05],
-        "rotationDeg": 0
+        "referenceDimension": [1280, 1280],
+        "referencePixel": [633.141898442, 623.135269606],
+        "referenceValueDeg": [201.696944, -47.479539],
+        "scaleDeg": [-0.00066245096, 0.00066245096],
+        "rotationDeg": 0.00051173061
       },
-      "metadataNote": "Publisher pointing center used as-is; not independently re-derived from pixel data. Native 14540x14540; the checked-in derivative is an 8192px WebP because libwebp cannot encode this source at native size (see sources/omega-centauri-vst.webp.json)."
+      "metadataNote": "Exact embedded AVM WCS from the hash-pinned native TIFF, including its 1280-pixel reference grid and noncentral reference pixel. The AVM sky reference is not the raster centre. Native 14540x14540; the ignored derivative is an 8192px WebP. Relative alignment is tested against WFI; absolute astrometry remains publisher metadata."
     },
     {
       "id": "eso0844a",
@@ -55,21 +57,23 @@
       "height": 7560,
       "fieldArcminutes": [31.88, 29.99],
       "centerIcrsDegrees": [201.69716666666667, -47.479683333333334],
+      "northRightDegrees": 0.00724264734,
       "bands": "Optical B (451nm) / V (539nm) / I (783nm)",
       "credit": "ESO",
       "termsUrl": "https://www.eso.org/public/outreach/copyright/",
       "registrationMode": "field-stars",
+      "registrationDetection": { "sourceMaximum": 8000, "referenceMaximum": 8000, "maximumStars": 12000 },
       "stellarTreatment": "preserve",
       "wcs": {
         "projection": "TAN",
         "coordinateFrame": "ICRS",
-        "referenceDimension": [8040, 7560],
-        "referencePixel": [4020, 3780],
-        "referenceValueDeg": [201.69716666666667, -47.479683333333334],
-        "scaleDeg": [-6.608623548922056e-05, 6.611552028218695e-05],
-        "rotationDeg": 0
+        "referenceDimension": [1280, 1204],
+        "referencePixel": [620.447024342, 636.048276073],
+        "referenceValueDeg": [201.697148, -47.479684],
+        "scaleDeg": [-0.00041507559, 0.00041507559],
+        "rotationDeg": -0.00724264734
       },
-      "metadataNote": "Independent telescope/instrument/epoch from eso1119b (2.2m MPG/ESO WFI vs VST/OmegaCAM), acquired specifically to supply a second raster for real matched-star registration. Publisher notes Digitized Sky Survey data fills some gaps in this mosaic; DSS-filled regions are not independently attributed star detections."
+      "metadataNote": "Exact embedded AVM WCS from the hash-pinned native TIFF, including its 1280x1204 reference grid and noncentral reference pixel. Independent telescope/instrument/epoch from VST/OmegaCAM. Publisher notes Digitized Sky Survey data fills some gaps in this mosaic; DSS-filled regions are not independently attributed star detections."
     }
   ]
 }
