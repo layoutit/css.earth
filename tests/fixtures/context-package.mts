@@ -38,6 +38,10 @@ export async function writeContextPackage(root: string, id: string) {
   const files: [string, string | Uint8Array][] = [
     [`${directory}/object.json`, JSON.stringify(descriptor)], [`${directory}/prepared/lenses.json`, bankBytes],
     [`${directory}/prepared/provenance.json`, JSON.stringify(provenance)], [`${directory}/prepared/presentation.json`, JSON.stringify(presentation)],
+    [`${directory}/runtime-assets.json`, JSON.stringify({ schema: `css${id}-runtime-assets@1`, resourceRoot: 'prepared',
+      assets: [{ filename: 'preview.webp', location: 'public', bytes: image.length, sha256: digest }] })],
+    [`${directory}/source/presentation.json`, JSON.stringify({ schema: 'cssearth-volume-presentation-source@1', objectId: id,
+      name: `${id} fixture`, defaultLens: 'optical', lenses: [{ id: 'optical' }] })],
     [`${directory}/prepared/slice.webp`, image], [`public${preview}`, image],
   ];
   for (const [path, bytes] of files) { const file = resolve(root, path); await mkdir(dirname(file), { recursive: true }); await writeFile(file, bytes); }
