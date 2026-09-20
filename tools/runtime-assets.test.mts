@@ -33,6 +33,8 @@ test('explicit context setup uses prepared paths and hash URLs without changing 
   await writeFile(resolve(base, 'prepared/levels/catalogue.json'), bytes);
   assert.deepEqual(setupObjectIds(['--object=context-fixture'], root), ['context-fixture']);
   assert(!setupObjectIds([], root).includes('context-fixture'));
+  assert.deepEqual(setupObjectIds(['--all-inventoried'], root), ['context-fixture']);
+  assert.throws(() => setupObjectIds(['--all-inventoried', '--object=context-fixture'], root), /not both/);
   assert.throws(() => setupObjectIds(['--object=../context-fixture'], root));
   assert.throws(() => setupObjectIds(['--object=missing-fixture'], root));
   const [asset] = await runtimeAssets(root, ['context-fixture']);

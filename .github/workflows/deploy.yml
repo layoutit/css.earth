@@ -73,9 +73,9 @@ jobs:
           CSSEARTH_ALLOW_MISSING_ASSETS: "1"
         run: pnpm setup:assets
       - name: Build the site
-        # The deploy build consumes the committed prepared metadata and the restored R2 closure. It does not run
-        # prepare:facilities: that authoring command can encode new preview bytes and rewrite their inventories,
-        # which must be published explicitly before a deploy is allowed to reference them.
+        # The deploy build consumes committed object metadata and the restored R2 closure. Its prepared-only
+        # catalogue pass creates the two ignored shared graphs without encoding previews or rewriting inventories;
+        # new object assets must still be prepared and published explicitly before deployment.
         # ASSET_ORIGIN points every texture, scene JSON and startup preload at the published R2
         # bucket instead of bundling public/scenes (1.44 GB) into the deploy; astro.config.mts
         # removes dist/scenes once the build finishes and assemble:planets tolerates its absence.

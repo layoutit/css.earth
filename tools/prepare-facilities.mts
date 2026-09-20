@@ -45,11 +45,13 @@ export const explorationCompilerClosure = [
 ] as const;
 
 interface Options { root?: string; publish?: boolean; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport;
+  /** Rebuild only ignored shared graphs from existing object metadata; never author preview bytes or inventories. */
+  preparedOnly?: boolean;
   /** Opt-in (default null/off) content-addressed mirror for volume previews; a production caller names
    * RUNTIME_ASSET_ORIGIN explicitly. Left off by default so a test never makes a surprise real request. */
   mirrorOrigin?: string | null; }
 /** Compile evidenced links and reuse approved artwork, restoring only missing cited evidence. */
-export async function prepareFacilities({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map(), sourceTransport, mirrorOrigin = null }: Options = {}) {
+export async function prepareFacilities({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map(), sourceTransport, mirrorOrigin = null, preparedOnly = false }: Options = {}) {
   const closure: Record<string, string> = {};
   const input = async (path: string) => {
     const bytes = await readFile(resolve(root, path)); closure[path] = sha256(bytes); return bytes;
@@ -116,6 +118,8 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     if (contentPin.length !== 1 || contentPin[0]!.expectedBytes !== contentBytes.length || contentPin[0]!.expectedSha256 !== sha256(contentBytes)) throw new Error(`Changed content source for ${object.id}.`);
     const content = explorationRecord(JSON.parse(contentBytes.toString('utf8')));
     const objectDirectory = resolve(root, base);
+    // Missing citation documents may be restored byte-for-byte from their pinned download plans.
+    // This verifies source evidence; it never prepares or replaces metadata, imagery or inventories.
     const panel = await verifyFactsheetSources(content.panel, { objectDirectory, manifest, sources,
       read: path => input(`${base}/${path}`),
       restoreMissing: path => restoreFactsheetEvidence({ objectDirectory, path, manifest, transport: sourceTransport }),
@@ -139,7 +143,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path))));
     objects.push({ id: object.id, name: object.name, route: object.route, base, controls: lenses, provenance: document });
   }
-  const volumes = [...await prepareVolumeProvenance({ root, input, mirrorOrigin }), ...await prepareContextProvenance({ root, input })];
+  const volumes = [...await prepareVolumeProvenance({ root, input, mirrorOrigin, preparedOnly }), ...await prepareContextProvenance({ root, input, preparedOnly })];
   for (const volume of volumes) {
     const document = validateObjectProvenance(volume.provenance, volume.id);
     const manifestPath = `${sourcePath(volume.base)}/${sourcePath(document.manifest.path)}`;
@@ -173,7 +177,9 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   // The real CLI entry point: opts into the mirror explicitly (library code above defaults it off).
-  const { prepared, factsheets } = await prepareFacilities({ mirrorOrigin: RUNTIME_ASSET_ORIGIN });
+  const args = process.argv.slice(2);
+  if (args.length > 1 || args.some(arg => arg !== '--prepared-only')) throw new TypeError('Usage: prepare-facilities.mts [--prepared-only]');
+  const { prepared, factsheets } = await prepareFacilities({ mirrorOrigin: RUNTIME_ASSET_ORIGIN, preparedOnly: args.includes('--prepared-only') });
   console.log(`Prepared ${prepared.catalog.missions.length} missions, ${prepared.catalog.facilities.length} facilities and ${prepared.graph.datasets.length} dataset destinations.`);
   console.log(`Factsheets: ${factsheets.facts} facts, each with its own citation.`);
 }

@@ -15,6 +15,13 @@ test('deploy asset closure ignores unrelated URLs and truncated identities', () 
   assert.deepEqual(runtimeAssetUrls(`https://example.test/runtime-assets/${hash}/x.webp ${RUNTIME_ASSET_ORIGIN_FIXTURE()}`), []);
 });
 
+test('deploy asset closure preserves the complete @2x filenames emitted by surface textures', () => {
+  const retina = `https://earth-assets.lowpoly.cc/runtime-assets/${hash}/mercury-poles@2x.webp`;
+  const urls = runtimeAssetUrls(`<img src="${retina}"><style>.surface{background:url(${retina})}</style>`);
+  assert.deepEqual(urls, [retina]);
+  assert.deepEqual(unknownRuntimeAssetUrls(urls, new Set([retina])), []);
+});
+
 function RUNTIME_ASSET_ORIGIN_FIXTURE(): string {
   return `https://earth-assets.lowpoly.cc/runtime-assets/${'c'.repeat(63)}/x.webp`;
 }

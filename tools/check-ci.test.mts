@@ -34,8 +34,14 @@ test('the deploy consumes installed assets and rejects generated metadata or uni
  assert.match(workflow,/git diff --quiet -- src\/objects site\/prepared-facilities\.json site\/prepared-sources\.json/);
  assert.doesNotMatch(workflow,/ASSET_ORIGIN=https:\/\/earth-assets\.lowpoly\.cc pnpm build(?:\s|$)/);
  assert.match(packageFile.scripts['prepare:deploy']??'',/node tools\/nebula\/prepare\.mts --if-missing/);
- assert.match(packageFile.scripts['prepare:deploy']??'',/pnpm prepare:galaxy-field:data/);
+ assert.doesNotMatch(packageFile.scripts['prepare:deploy']??'',/prepare:galaxy-field/);
+ assert.match(packageFile.scripts['prepare:deploy']??'',/node tools\/setup\.mts --all-inventoried/);
+ assert.match(packageFile.scripts['prepare:deploy']??'',/node tools\/prepare-facilities\.mts --prepared-only/);
  assert.doesNotMatch(packageFile.scripts['prepare:deploy']??'',/prepare:(?:facilities|provenance|nebulae)(?:\s|$)/);
+ const buildSmoke=await readFile(new URL('../.github/workflows/nightly.yml',import.meta.url),'utf8');
+ assert.match(buildSmoke,/test ! -e site\/prepared-sources\.json/);
+ assert.match(buildSmoke,/pnpm build:deploy/);
+ assert.doesNotMatch(buildSmoke,/run: pnpm build\s*\n/);
 });
 test('--quick skips only the network and documentation steps, and refuses a job without them',async()=>{
  const lint=readCiSteps(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8'),'lint');

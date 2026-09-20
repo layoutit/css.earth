@@ -17,8 +17,13 @@ function parseObjectArgs(args: readonly string[]): string[] {
 }
 
 export function setupObjectIds(args: readonly string[], root = resolve(import.meta.dirname, "..")) {
-  const ids = parseObjectArgs(args);
-  const selected = ids.length ? ids : SCENE_OBJECTS.map(({ id }) => id);
+  const allInventoried = args.includes('--all-inventoried');
+  const ids = parseObjectArgs(args.filter(arg => arg !== '--all-inventoried'));
+  if (allInventoried && ids.length) throw new Error('Choose --all-inventoried or --object=<id>, not both.');
+  const selected = allInventoried ? readdirSync(resolve(root, 'src/objects'), { withFileTypes: true })
+    .filter(entry => entry.isDirectory() && /^[a-z][a-z0-9-]*$/u.test(entry.name) && existsSync(resolve(root, 'src/objects', entry.name, 'runtime-assets.json')))
+    .map(entry => entry.name).sort((left, right) => left.localeCompare(right))
+    : ids.length ? ids : SCENE_OBJECTS.map(({ id }) => id);
   if (new Set(selected).size !== selected.length ||
       selected.some(id => !/^[a-z][a-z0-9-]*$/u.test(id) || (!SCENE_OBJECTS.some(object => object.id === id) &&
         !existsSync(resolve(root, `src/objects/${id}/runtime-assets.json`))))) {

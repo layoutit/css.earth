@@ -16,8 +16,9 @@ import { writePreparedSet } from './write-prepared-set.mts';
 import { manifestSources } from './context-source-records.mts';
 import { composeSkyBandPng, skyBandCompositeFile, verifySkyBandRecipe } from './objects/observation/sky-band-composite.mts';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from './source-mirror.mts';
+import { parsePreparedVolumePresentation } from '../site/volume-presentation.mts';
 
-export const volumeProvenanceCompilerClosure = ['tools/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/context-source-records.mts',
+export const volumeProvenanceCompilerClosure = ['tools/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'site/volume-presentation.mts', 'site/prepared-panel-content.mts', 'tools/context-source-records.mts',
   'tools/objects/observation/sky-band-composite.mts', 'tools/objects/observation/wise-atlas-mosaic.mts', 'tools/objects/color-transfer.mts', 'tools/fits.mts'] as const;
 
 const integer = (value: unknown): number => {
@@ -137,6 +138,8 @@ async function hostedDatasets(root: string, base: string, objectId: string, lens
 }
 interface Options {
   root?: string;
+  /** Build shared catalogues from committed receipts without encoding or replacing object assets. */
+  preparedOnly?: boolean;
   /** Repository-relative, tracked compiler inputs only. Downloads never enter source closure. */
   input?: (path: string) => Promise<Buffer>;
   /** Opt-in (default null/off): the real content-addressed mirror origin, named explicitly by a production caller.
@@ -197,7 +200,7 @@ export async function preparePreview(root: string, pin: Preview, input: (path: s
 }
 
 /** Recover portable lineage from source-owned byte pins without replaying the cloud compiler. */
-export async function prepareVolumeProvenance({ root = process.cwd(), input = path => readFile(resolve(root, path)), mirrorOrigin = null }: Options = {}): Promise<PreparedVolumeProvenance[]> {
+export async function prepareVolumeProvenance({ root = process.cwd(), input = path => readFile(resolve(root, path)), mirrorOrigin = null, preparedOnly = false }: Options = {}): Promise<PreparedVolumeProvenance[]> {
   const results: PreparedVolumeProvenance[] = [];
   const generatorBytes = await input(volumeProvenanceCompilerClosure[0]);
   for (const path of volumeProvenanceCompilerClosure.slice(1)) await input(path);
@@ -209,6 +212,20 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
     const ownedPresentationBytes = await input(presentationPath);
     const record = presentation(json(ownedPresentationBytes));
     if (record.objectId !== folder.name) throw new TypeError('Mismatched volume presentation object.');
+    if (preparedOnly) {
+      const provenance = validateObjectProvenance(json(await input(`${base}/prepared/provenance.json`)), record.objectId);
+      if (!provenance.recipes.some(recipe => recipe.path === presentationPath && recipe.sha256 === sha256(ownedPresentationBytes)))
+        throw new Error(`Stale prepared volume presentation: ${record.objectId}; prepare and publish it before deploying.`);
+      const prepared = parsePreparedVolumePresentation(json(await input(`${base}/prepared/presentation.json`)),
+        { id: record.objectId, defaultLens: record.defaultLens, lenses: record.lenses }, provenance);
+      await input(`${base}/object.json`);
+      await input(`${base}/runtime-assets.json`);
+      const hostedBy = await hostedDatasets(root, base, record.objectId, prepared.controls.map(lens => lens.id), input);
+      results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/sun/?focus=${record.objectId}`,
+        base, controls: prepared.controls, defaultLens: prepared.defaultLens, provenance, outputs: [],
+        ...(hostedBy === undefined ? {} : { hostedBy }) });
+      continue;
+    }
     const manifestPath = `${base}/source/manifest.json`, manifestBytes = await input(manifestPath);
     const manifest = sourceObject(json(manifestBytes), ['schema', 'pathBase', 'inputs', 'documents', 'generatedIntermediates']);
     if (manifest.schema !== 'cssearth-volume-source-manifest@1' || manifest.pathBase !== 'repository') throw new TypeError('Invalid volume source manifest.');

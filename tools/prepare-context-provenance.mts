@@ -1,11 +1,12 @@
 import { sha256 } from '../src/platform/sha256.mts';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { isDeepStrictEqual } from 'node:util';
 import { sourceArray, sourceObject, sourcePath, sourceText, sourceDigest } from '../src/platform/source-catalog.mts';
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
 import { manifestSources } from './context-source-records.mts';
 export const contextProvenanceCompilerClosure = ['tools/prepare-context-provenance.mts', 'tools/context-source-records.mts'];
-export async function prepareContextProvenance({ root = process.cwd(), input = (path: string) => readFile(resolve(root, path)) } = {}) {
+export async function prepareContextProvenance({ root = process.cwd(), input = (path: string) => readFile(resolve(root, path)), preparedOnly = false } = {}) {
   const results = [];
   const generator = await input(contextProvenanceCompilerClosure[0]!);
   for (const path of contextProvenanceCompilerClosure.slice(1)) await input(path);
@@ -20,6 +21,26 @@ export async function prepareContextProvenance({ root = process.cwd(), input = (
     await input(presentationPath);
     const manifestBytes = await input(`${base}/source/manifest.json`), manifest = sourceObject(JSON.parse(manifestBytes.toString()));
     if (manifest.schema !== 'cssearth-volume-source-manifest@1' || manifest.pathBase !== 'repository') throw new TypeError(`Invalid context manifest: ${id}`);
+    if (preparedOnly) {
+      const provenance = validateObjectProvenance(JSON.parse((await input(`${base}/prepared/provenance.json`)).toString()), id);
+      const prepared = sourceObject(JSON.parse((await input(`${base}/prepared/presentation.json`)).toString()));
+      if (prepared.name !== sourceText(presentation.name)) throw new Error(`Stale prepared context presentation: ${id}.`);
+      const declared = sourceArray(presentation.products, sourceObject).map(product => ({ ...product,
+        selector: product.selector === '/' ? '' : product.selector }));
+      const retained = provenance.products.map(product => {
+        const recipe = provenance.recipes.find(recipe => recipe.id === product.recipe);
+        return { id: product.id, label: product.label, process: product.process,
+          recipe: recipe?.path.slice(base.length + 1), selector: product.selector,
+          inputs: [...product.inputs], outputs: product.outputs.map(output => output.url.slice(base.length + 1)),
+          interpretation: product.interpretation, limitations: [...product.limitations] };
+      });
+      if (!isDeepStrictEqual(declared, retained)) throw new Error(`Stale prepared context products: ${id}; prepare and publish them before deploying.`);
+      for (const recipe of provenance.recipes) if (sha256(await input(recipe.path)) !== recipe.sha256)
+        throw new Error(`Stale prepared context recipe: ${id}; prepare and publish it before deploying.`);
+      await input(`${base}/runtime-assets.json`);
+      results.push({ id, name: sourceText(prepared.name), route: '/sun/', base, controls: [], provenance, outputs: [] });
+      continue;
+    }
     const sources = await manifestSources(manifest, root, input);
     const receipt = sourceObject(JSON.parse((await input(`${base}/prepared/manifest.json`)).toString()));
     const pins = sourceArray(receipt.outputs, sourceObject);
