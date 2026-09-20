@@ -38,10 +38,11 @@ function RadialPlot({ profile }: { profile: LensRadialProfile }) {
     `${(box.x + radius / maxRadius * box.w).toFixed(1)},${(box.y + box.h - Math.max(0, value) / peak * box.h).toFixed(1)}`;
   const sourceLine = defined.map(bin => at(bin.radius, bin.sourceMean, PLOT));
   const renderLine = defined.map(bin => at(bin.radius, bin.renderMean, PLOT));
-  const ratioBins = profile.radialBins.filter((bin): bin is LensRadialBin & { ratio: number } => bin.ratio !== null && bin.ratio > 0);
-  const ratioPeak = Math.max(1, ...ratioBins.map(bin => Math.abs(Math.log(bin.ratio))));
+  const ratioBins = profile.radialBins.filter((bin): bin is LensRadialBin & { ratio: number } => bin.ratio !== null);
+  const logRatio = (ratio: number) => Math.log(Math.max(Number.EPSILON, ratio));
+  const ratioPeak = Math.max(1, ...ratioBins.map(bin => Math.abs(logRatio(bin.ratio))));
   const ratioLine = ratioBins.map(bin => `${(RATIO.x + bin.radius / maxRadius * RATIO.w).toFixed(1)},` +
-    `${(RATIO.y + RATIO.h / 2 - Math.log(bin.ratio) / ratioPeak * (RATIO.h / 2 - 2)).toFixed(1)}`);
+    `${(RATIO.y + RATIO.h / 2 - logRatio(bin.ratio) / ratioPeak * (RATIO.h / 2 - 2)).toFixed(1)}`);
   return <svg className="lens-radial-plot" viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img"
     aria-label="Source and render brightness by radius, and their ratio">
     <rect x={PLOT.x} y={PLOT.y} width={PLOT.w} height={PLOT.h} className="lens-radial-frame" />
