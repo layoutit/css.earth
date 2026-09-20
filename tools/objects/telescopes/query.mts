@@ -31,7 +31,7 @@ import { hasErrorCode, readJsonSource, requireArray, requireFiniteNumber, requir
 import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import type { SourceIntakeIssue } from './source-intake.mts';
-import { loadSourceProducts, type LoadedSourceProduct } from './source-products.mts';
+import { loadSourceProducts, sourceQualifiedObservations, type LoadedSourceProduct } from './source-products.mts';
 import { qualificationActionsFor, type QualificationAction } from './qualification-routes.mts';
 import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociation } from './target-associations.mts';
 import { resolveTarget, type TargetCatalogueEntry, type TargetResolution } from './targets.mts';
@@ -761,9 +761,11 @@ function constraintVerdicts(request: CapabilityRequest, mode: TargetMode, capabi
       : 'any' in requestedTime ? verdict('yes', 'The request explicitly accepts observations from any time.')
       : !mode.dates.length ? verdict('unknown', 'This ledger carries no dates for this target and mode.')
       : (() => {
-          const dated = mode.dates.filter(date => (date.endIso ?? date.startIso) >= requestedTime.fromIso && date.startIso <= requestedTime.toIso);
+          const validDates = mode.dates.filter(date => Number.isFinite(Date.parse(date.startIso)) && Number.isFinite(Date.parse(date.endIso ?? date.startIso)));
+          const dated = validDates.filter(date => Date.parse(date.endIso ?? date.startIso) >= Date.parse(requestedTime.fromIso) && Date.parse(date.startIso) <= Date.parse(requestedTime.toIso));
           if (dated.length) return verdict('yes', `The ledger names ${dated.length} observation(s) overlapping the range: ${dated.slice(0, 8).map(date => `${date.id} on ${date.startIso.slice(0, 10)}`).join(', ')}${dated.length > 8 ? `, and ${dated.length - 8} more` : ''}.`);
           const outside = `${mode.dates.length} observation(s) of this target and mode fall outside the range${mode.dates.length ? ` (${mode.dates.slice(0, 8).map(date => date.startIso.slice(0, 10)).join(', ')}${mode.dates.length > 8 ? `, and ${mode.dates.length - 8} more` : ''})` : ''}`;
+          if (validDates.length !== mode.dates.length) return verdict('unknown', 'Some observation timestamps cannot be interpreted; no complete time exclusion is established.');
           return mode.datesComplete ? verdict('no', `The ledger retains every observation identity and time; all ${outside}.`)
             : verdict('partial', `The ledger dates ${outside}; it does not date the rest.`);
         })(),
@@ -922,7 +924,7 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
   const { attached, unassigned } = resolveEvidence(inputs, found.map(entry => entry.mode));
   const candidates = found.map(({ ledger, mode }): Omit<Candidate, 'selectionAssessment'> => {
     const capability = capabilities.get(`${mode.telescope} :: ${mode.mode}`), evidence = attached.get(mode)!;
-    return { telescope: mode.telescope, mode: mode.mode, qualifiedProducts: (inputs.qualifiedProducts ?? []).filter(product => product.telescope === mode.telescope && product.mode === mode.mode), observations: mode.observations, programmes: mode.programmes,
+    return { telescope: mode.telescope, mode: mode.mode, qualifiedProducts: [...inputs.qualifiedProducts ?? [], ...sourceQualifiedObservations(inputs.sourceProducts ?? [])].filter(product => product.target === target && product.telescope === mode.telescope && product.mode === mode.mode), observations: mode.observations, programmes: mode.programmes,
       meetsConstraints: constraintVerdicts({ ...canonicalRequest, wavelengthMicrometres: inputWavelengths(canonicalRequest) }, mode, capability), toolkitSupport: toolkitSupport(mode, target), bodyMapSupport: bodyMapSupport(mode),
       evidence: { ledger, archiveDate: mode.archiveDate, receipts: mode.toolkit.receipts, targetAssociations: mode.targetAssociations ?? [], bodyMaps: evidence.bodyMaps, investigations: evidence.investigations },
       unknown: [...(capability ? [] : [`What this mode can do: ${NO_CAPABILITIES}`]), ...UNKNOWN_UNTIL_READ(target, mode),

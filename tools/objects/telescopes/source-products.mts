@@ -7,7 +7,7 @@ import { hasErrorCode, requireArray, requireRecord, requireString, requireFinite
 import { pinFile, readProductRecord, sameRun, type ProductRecord, type ProductRun } from '../product-record.mts';
 import { sourcePds3Observations } from '../pds/source-observations.mts';
 import type { ProductKind } from './query.mts';
-import { parseProductFacts } from './qualified-observations.mts';
+import { parseProductFacts, type QualifiedObservation } from './qualified-observations.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
 
 export const SOURCE_PRODUCTS_SCHEMA = 'cssearth-source-observations@1';
@@ -65,12 +65,12 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
       if (!Number.isSafeInteger(bytes) || bytes <= 0 || !HEX.test(sha256)) throw new TypeError(`${inputId} has an invalid pin.`);
       const origin = requireString(pin.origin, 'input origin');
       if (!/^https?:\/\//u.test(origin)) throw new TypeError(`${inputId} needs a retrievable archive origin.`);
-      return { role: requireString(entry.role, 'input role'), path: `src/objects/${target}/source/${path}`, origin, bytes, sha256 };
+      return { role: requireString(entry.role, 'input role'), path: `src/objects/${target}/source/${relative('/package', inside('/package', path))}`, origin, bytes, sha256 };
     });
     if (new Set(files.map(file => file.path)).size !== files.length || files.filter(file => file.role === 'science').length !== 1 || decoder === 'pds-image' && files.filter(file => file.role === 'label').length !== 1)
       throw new TypeError(`${id} needs one science input and, for PDS, one label, without duplicate files.`);
-    const labelPath = row.labelPath === undefined ? files.find(file => file.role === 'label')?.path : `src/objects/${target}/source/${requireString(row.labelPath, 'label path')}`;
-    if (decoder === 'pds-product' && (!labelPath || !files.some(file => file.path === labelPath))) throw new TypeError(`${id} needs a pinned labelPath.`);
+    const labelPath = row.labelPath === undefined ? files.find(file => file.role === 'label')?.path : `src/objects/${target}/source/${relative('/package', inside('/package', requireString(row.labelPath, 'label path')))}`;
+    assertPinnedLabel({ decoder, labelPath, files });
     const identity = Object.fromEntries(Object.entries(requireRecord(row.identity, 'product identity')).map(([key, value]) => {
       if (!key || !['string', 'number', 'boolean'].includes(typeof value) || typeof value === 'number' && !Number.isFinite(value)) throw new TypeError(`Invalid product identity ${key}.`);
       return [key, value as string | number | boolean];
@@ -99,6 +99,7 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
 }
 export const sourceReceipt = (product: SourceProduct) => `output/telescopes/${product.target}/${product.id}/qualification.product.json`;
 export async function sourceRun(product: SourceProduct): Promise<ProductRun> {
+  assertPinnedLabel(product);
   const sources = ['source-intake.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', '../../fits.mts', '../../fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'];
   const digest = createHash('sha256');
   for (const path of sources) digest.update(path).update(await readFile(resolve(import.meta.dirname, path)));
@@ -146,4 +147,22 @@ export function sourceRecordComplete(record: ProductRecord, product: SourceProdu
   return product.files.every(file => record.outputs.some(output => output.path === file.path && output.bytes === file.bytes && output.sha256 === file.sha256))
     && record.outputs.some(output => output.path === sourceReceipt(product).replace('qualification.product.json', 'decoded.json'))
     && record.evidence.some(entry => entry.kind === 'archive-origin' && entry.product === science.path && entry.receipt === sourceReceipt(product));
+}
+
+/** Every label the decoder reads belongs to the same pinned dependency set, including attached labels. */
+export function assertPinnedLabel(product: Pick<SourceProduct, 'decoder' | 'labelPath' | 'files'>): void {
+  const labelPath = product.labelPath ?? product.files.find(file => file.role === 'label')?.path;
+  if (!labelPath) {
+    if (product.decoder === 'pds-product' || product.decoder === 'pds-image') throw new TypeError('PDS decoding requires a pinned labelPath.');
+    return;
+  }
+  const label = inside('/package', labelPath);
+  if (!product.files.some(file => inside('/package', file.path) === label)) throw new TypeError('labelPath must belong to the pinned input files.');
+}
+
+/** Adapt current source receipts to the common artifact contract without promoting declared science metadata. */
+export function sourceQualifiedObservations(products: readonly LoadedSourceProduct[]): QualifiedObservation[] {
+  return products.flatMap(product => product.qualified && product.facts ? [{ target: product.target, telescope: product.telescope, mode: product.mode,
+    observation: product.id, program: product.id, product: product.files.find(file => file.role === 'science')!.path,
+    receipt: product.receipt, productRecord: product.receipt, outputRoot: '.', facts: product.facts }] : []);
 }
