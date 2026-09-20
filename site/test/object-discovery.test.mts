@@ -118,6 +118,16 @@ test('JPL mission targets, rather than cssEarth imagery, select default asteroid
   assert.equal(showsDefaultContextOrbit(requireSceneObject('arrokoth')), false);
 });
 
+test('every dwarf planet keeps its default circle and label independent of imagery', () => {
+  const scene = discoveryVisibility(SCENE_OBJECTS, defaults);
+  for (const id of ['ceres', 'pluto', 'haumea', 'makemake', 'eris']) {
+    const object = requireSceneObject(id);
+    assert.equal(object.classification, 'dwarf-planet', id);
+    assert.equal(scene.hiddenBodies.includes(id), false, `${id}: body`);
+    assert.equal(scene.hiddenLabels.includes(id), false, `${id}: label`);
+  }
+});
+
 test('a star with only its shape stays off the map, whatever the settings', () => {
   for (const options of [defaults, { illustrations: true, highlighted: 'star' }]) {
     const scene = discoveryVisibility(SCENE_OBJECTS, options);

@@ -38,7 +38,8 @@ export function showsDefaultContextOrbit(object: { id: string; classification: s
 
 /** Discovery prominence describes prepared content. Asteroid context prominence is instead sourced from JPL. */
 export function isDefaultContextFeature(object: { id: string; classification: string; discovery: Pick<ObjectDiscovery, 'featured'> }): boolean {
-  return object.classification === 'asteroid' ? isJplMissionTarget(object) : object.discovery.featured;
+  if (object.classification === 'asteroid') return isJplMissionTarget(object);
+  return object.classification === 'dwarf-planet' || object.discovery.featured;
 }
 
 /** Explicit searches still navigate every registered object. This controls the default world. */

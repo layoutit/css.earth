@@ -1,7 +1,7 @@
 # Choosing destinations to explore
 
 The Solar System's default captions guide visitors toward useful content.
-The Sun and major planets remain orientation anchors. Prepared observation
+The Sun, planets and all five dwarf planets remain orientation anchors. Prepared observation
 imagery promotes most destinations automatically; `properties.catalog.featured`
 can also recommend a reviewed package. Asteroids are the exception: their
 default labels, circles and orbits come from JPL's spacecraft-mission target
@@ -139,8 +139,8 @@ that pitch also re-bakes those five.
 ## Stable priority
 
 Selected, hovered and explicitly highlighted labels retain priority. Other
-labels use fixed tiers: Sun, Earth, other orientation anchors, JPL mission-target
-asteroids/featured destinations/major moons, then ordinary objects. Earth keeps the normal distance
+labels use fixed tiers: Sun, Earth, other orientation anchors, dwarf planets/JPL
+mission-target asteroids/featured destinations/major moons, then ordinary objects. Earth keeps the normal distance
 eligibility, so the Sun remains the reference at outer-space scales.
 Clear placements survive within a tier through drag,
 inertia and rest. A lower-tier survivor cannot reserve a slot ahead of a newly
