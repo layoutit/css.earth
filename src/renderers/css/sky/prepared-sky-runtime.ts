@@ -6,8 +6,8 @@ import type { PreparedCssSky } from './types.js';
 import { validatePreparedCssSky, validatePreparedSkyParallax } from './validation.js';
 
 /** Transports retained celestial images through the shared physical observer pose.
- * A sky with baked stars carries two cubes: the Sun's neighbour stars over the diffuse Milky Way. The star cube shows
- * at `near` opacity; the plain cube stays the background from another star, where those stars would be misplaced. */
+ * A sky with baked stars carries two Solar-observer cubes: the Sun's neighbour stars over the diffuse Milky Way. The
+ * near cube gives way to the plain cube only while the owning universe fades the complete Solar sky out of validity. */
 export function mountPreparedCssSky({ host, before, payload: input, resources, resolveResource }: {
   host: HTMLElement; before: Element; payload: PreparedCssSky; resources: PreparedCssVolume['resources']; resolveResource(path: string): string;
 }) {

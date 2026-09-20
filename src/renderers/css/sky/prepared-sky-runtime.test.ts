@@ -192,6 +192,8 @@ test.each([
     profile.fadeStartDistanceM / 2];
   for (const distance of distances) {
     const expected = logarithmicFade(distance, profile.fadeStartDistanceM, profile.fullDistanceM);
+    const skyValidity = 1 - logarithmicFade(distance, context.stars.fadeStartDistanceM, context.stars.fullDistanceM);
+    const expectedSkyContribution = (1 - expected) * skyValidity;
     const gain = nearGain + (brightness.fullOpacity - nearGain) * logarithmicFade(distance, brightness.fadeStartDistanceM, brightness.fullDistanceM);
     const camera: WorldCameraPose = { referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distance], orientationXyzw: [0, 0, 0, 1] } };
@@ -206,22 +208,18 @@ test.each([
     expect(volumeImage.style.opacity).toBe(withSky ? '' : String(expectedGain));
     expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
     if (withSky) {
-      const expectedComposite = expected * expectedGain;
-      expect(skyRoot.style.visibility).toBe(expectedComposite < 1 ? 'visible' : 'hidden');
-      expect(Number(skyRoot.style.opacity)).toBe(1);
-      expect((1 - Number(volumeRoot.style.opacity)) * Number(skyRoot.style.opacity)).toBeCloseTo(1 - expectedComposite, 12);
+      expect(skyRoot.style.visibility).toBe(expectedSkyContribution > 0 ? 'visible' : 'hidden');
+      expect((1 - Number(volumeRoot.style.opacity)) * Number(skyRoot.style.opacity)).toBeCloseTo(expectedSkyContribution, 12);
       const skyWeight = Number(skyRoot.dataset.skyContribution);
-      expect(skyWeight).toBeCloseTo(1 - expectedComposite, 12);
-      expect(Number(volumeRoot.style.opacity) + skyWeight).toBeCloseTo(1, 12);
+      expect(skyWeight).toBeCloseTo(expectedSkyContribution, 12);
       // Test the actual DOM source-over equation, not just reported weights.
-      // Equal-brightness sources stay continuous while the prepared volume exposure rises.
-      expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBeCloseTo(.4, 12);
+      expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBeCloseTo(.4 * (expected * expectedGain + expectedSkyContribution), 12);
       if (distance === regressionDistance) {
         expect(expected).toBe(0);
-        expect(skyWeight).toBe(1);
-        expect(skyRoot.style.visibility).toBe('visible');
+        expect(skyWeight).toBe(0);
+        expect(skyRoot.style.visibility).toBe('hidden');
         if (withBrightness) expect(expectedGain).toBe(.094);
-        expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBe(.4);
+        expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBe(0);
       }
     } else expect(completedPixel(volumeRoot, volumeImage, undefined, .4)).toBeCloseTo(.4 * expected * expectedGain, 12);
     mounted.publish({ ...camera, pose: { ...camera.pose, orientationXyzw: [0, 1, 0, 0] } }, viewport);
