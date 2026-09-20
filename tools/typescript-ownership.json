@@ -20,6 +20,10 @@
       "reason": "Pinned Cesium Camera computeViewRectangle implementation with adapted imports; maintain the upstream source correspondence.",
       "source": "site/vendor/cesium-LICENSE.md",
       "anchor": "The computeViewRectangle routine and its helpers are copied unchanged."
+    },
+    "tools/run-typed-module.mjs": {
+      "category": "configuration",
+      "reason": "Node launcher for the telescope entry points: it selects a runtime that loads .mts without a custom loader, so it must run before any TypeScript module can be imported."
     }
   }
 }
