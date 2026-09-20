@@ -1,0 +1,42 @@
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import test from 'node:test';
+import { parseHTML } from 'linkedom';
+import { createNavigationTreeController } from '../navigation-tree-client.mts';
+import { NAVIGATION_TREE_SCHEMA, type NavigationTreePayload } from '../../src/navigation/navigation-tree-schema.mts';
+import type { BrowserWindow } from '../browser-types.mts';
+
+test('deferred navigation materializes only the selected path from its verified payload', async () => {
+  const payload: NavigationTreePayload = {
+    schema: NAVIGATION_TREE_SCHEMA,
+    roots: ['root'],
+    nodes: {
+      root: { label: 'Root', objectId: null, place: true, count: 2, marker: null, children: ['branch'] },
+      branch: { label: 'Branch', objectId: 'branch', place: false, count: 2,
+        marker: { className: 'atlas-marker atlas-marker-sprite', style: '--atlas-marker-size:8px' }, children: ['leaf'] },
+      leaf: { label: 'Leaf', objectId: 'leaf', place: false, count: 1,
+        marker: { className: 'atlas-marker atlas-marker-catalog', style: '' }, children: [] },
+    },
+  };
+  const text = JSON.stringify(payload);
+  const sha256 = createHash('sha256').update(text).digest('hex');
+  const { document, window } = parseHTML(`<div data-object-navigation-tree data-atlas-current="old"
+    data-atlas-tree-src="/navigation-tree/${sha256}.json" data-atlas-tree-sha256="${sha256}" data-atlas-tree-bytes="${Buffer.byteLength(text)}">
+    <ul class="atlas-tree"><li><details data-atlas-depth="0" data-atlas-key="root" data-atlas-lazy><summary><span>Root (2)</span></summary></details></li></ul>
+  </div>`);
+  let requests = 0;
+  window.fetch = async () => { requests++; return new Response(text); };
+  const root = document.querySelector<HTMLElement>('[data-object-navigation-tree]')!;
+  const controller = createNavigationTreeController(root, window as unknown as BrowserWindow);
+  assert.equal(root.querySelectorAll('a').length, 0, 'cold tree retains no deferred rows');
+
+  await controller.select('leaf');
+
+  assert.equal(requests, 1);
+  assert.equal(root.querySelectorAll('a').length, 2, 'only the selected two-row path materializes');
+  assert.equal(root.querySelector<HTMLAnchorElement>('a[data-atlas-object="branch"]')?.style.getPropertyValue('--atlas-marker-size'), '8px');
+  assert.equal(root.querySelector<HTMLAnchorElement>('a[data-atlas-object="leaf"]')?.getAttribute('aria-current'), 'page');
+  assert.equal(root.querySelector<HTMLDetailsElement>('details[data-atlas-key="root"]')?.open, true);
+  assert.equal(root.querySelector<HTMLDetailsElement>('details[data-atlas-key="branch"]')?.open, true);
+  controller.destroy();
+});

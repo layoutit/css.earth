@@ -50,8 +50,52 @@
 }
 .atlas-row:hover { background: transparent; color: var(--shell-text-secondary); opacity: 0.88; }
 .atlas-row[aria-current='page'] { background: transparent; color: var(--shell-text); font-weight: 600; opacity: 1; }
-.atlas-tree .planet-navigation-marker { flex: none; width: 1rem; height: 1.25rem; }
-.atlas-tree .catalog-navigation-marker::before { width: 0.75rem; height: 0.75rem; color: var(--shell-text-muted); }
+.atlas-marker { position: relative; }
+.atlas-row.atlas-marker { padding-inline-start: calc(0.5rem + 1rem + 0.375rem); }
+.atlas-tree-body.atlas-marker { padding-inline-start: calc(1rem + 0.375rem); }
+.atlas-marker::before, .atlas-marker::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0.5rem;
+  display: block;
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+}
+.atlas-row.atlas-marker::before, .atlas-row.atlas-marker::after { left: 1rem; }
+.atlas-marker-sprite::before {
+  width: var(--atlas-marker-size);
+  height: var(--atlas-marker-size);
+  border-radius: 50%;
+  background-image: var(--atlas-marker-image);
+  background-position: var(--atlas-marker-position);
+  background-size: var(--atlas-marker-background-size);
+  background-repeat: no-repeat;
+}
+.atlas-marker:not(.atlas-marker-ringed)::after { display: none; }
+.atlas-marker-ringed::after {
+  width: var(--atlas-ring-width);
+  height: var(--atlas-ring-height);
+  border: 1px solid color-mix(in srgb, var(--atlas-marker-color) var(--atlas-ring-color-share), white);
+  border-radius: 50%;
+  opacity: var(--atlas-ring-opacity);
+  outline: var(--atlas-ring-outline);
+  outline-offset: var(--atlas-ring-outline-offset);
+  transform: translate(-50%, -50%) rotate(var(--atlas-ring-angle));
+}
+.atlas-marker-context::before {
+  width: 1rem;
+  height: 1rem;
+  background: var(--atlas-marker-image) center / contain no-repeat;
+}
+.atlas-marker-context::after { display: none; }
+.atlas-marker-catalog::before {
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 1px solid var(--shell-text-muted);
+  border-radius: 50%;
+}
+.atlas-marker-catalog::after { display: none; }
 .atlas-tree summary a.atlas-tree-body { flex: 1; min-width: 0; color: var(--shell-text-secondary); text-decoration: none; opacity: 0.62; }
 .atlas-tree summary a.atlas-tree-body:hover { color: var(--shell-text-secondary); opacity: 0.88; }
 .atlas-tree summary a.atlas-tree-body[aria-current='page'] { color: var(--shell-text); font-weight: 600; opacity: 1; }

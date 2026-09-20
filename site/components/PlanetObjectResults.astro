@@ -31,7 +31,9 @@ const catalogueSha256 = '__CATALOGUE_FRAGMENT_SHA__';
 const catalogueBytes = '__CATALOGUE_FRAGMENT_BYTES__';
 ---
 
-<NavigationTree current={activeObjectId ?? ''} />
+<div data-object-navigation-slot>
+  <NavigationTree current={activeObjectId ?? ''} bounded />
+</div>
 <div class="planet-object-tabs" role="tablist" aria-label="Object categories" hidden>
   {groups.map((group) => <button type="submit" form={formId} name="category" value={group.type} role="tab"
     id={`object-tab-${group.type}`} data-object-tab={group.type}

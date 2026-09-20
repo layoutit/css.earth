@@ -6,6 +6,22 @@ export interface MarkerPresentation {
   scale?: Partial<Omit<MarkerPresentation, "scale">>;
 }
 export interface PreparedNavigationMarker { url: string; url2x: string; url2xPixels?: number; presentation: MarkerPresentation; index: number; count: number; context?: { url: string; pixels?: number }; }
+export interface ResolvedMarkerStyle {
+  color?: string;
+  size: number;
+  image: string;
+  position: string;
+  backgroundSize: string;
+  ring: null | {
+    width: number;
+    height: number;
+    colorShare: number;
+    opacity: number;
+    angle: number;
+    outlineOpacity: number;
+    outlineOffset: number;
+  };
+}
 // Shared shell presentation; values come only from each object's marker recipe.
 const fields = new Set(["size", "ringAngle", "ringExtra", "ringHeight", "ringOpacity", "ringColorShare", "ringOutlineOpacity", "ringOutlineOffset"]);
 export function validateMarkerPresentation(input: unknown, partial?: false): MarkerPresentation;
@@ -32,24 +48,44 @@ export function validateMarkerPresentation(input: unknown, partial = false): Par
   return value;
 }
 
-export function markerStyle(marker: PreparedNavigationMarker, { color, scale = 1, view = "navigation" }: { color?: string; scale?: number; view?: string } = {}) {
+export function resolveMarkerStyle(marker: PreparedNavigationMarker, { color, scale = 1, view = "navigation" }: { color?: string; scale?: number; view?: string } = {}): ResolvedMarkerStyle {
   if (!marker) throw new Error("Prepared object marker is missing; run prepare:navigation.");
   const p = view === "scale" ? { ...marker.presentation, ...marker.presentation.scale } : marker.presentation;
   const ringed = p.ringAngle !== undefined;
   const size = p.size * scale;
   const position = `${(marker.index / Math.max(1, marker.count - 1) * 100).toFixed(4)}%`;
   return {
-    ringed,
-    style: `color:${color}`,
-    innerStyle: `width:${size}px;height:${size}px;background-image:url("${marker.url2x}");background-position:${position} center;background-size:${marker.count * 100}% 100%`,
-    ringStyle: ringed ? [
-      `width:${size + (p.ringExtra ?? Number.NaN) * scale}px`,
-      `height:${(p.ringHeight ?? Number.NaN) * scale}px`,
-      `border-color:color-mix(in srgb, currentColor ${p.ringColorShare ?? 100}%, white)`,
-      `opacity:${p.ringOpacity ?? 0.65}`,
-      `transform:translate(-50%, -50%) rotate(${p.ringAngle}deg)`,
-      `outline:${p.ringOutlineOpacity ? `1px solid color-mix(in srgb, currentColor ${p.ringOutlineOpacity}%, transparent)` : "none"}`,
-      `outline-offset:${p.ringOutlineOffset ?? 0}px`,
+    color,
+    size,
+    image: marker.url2x,
+    position,
+    backgroundSize: `${marker.count * 100}% 100%`,
+    ring: ringed ? {
+      width: size + (p.ringExtra ?? Number.NaN) * scale,
+      height: (p.ringHeight ?? Number.NaN) * scale,
+      colorShare: p.ringColorShare ?? 100,
+      opacity: p.ringOpacity ?? 0.65,
+      angle: p.ringAngle!,
+      outlineOpacity: p.ringOutlineOpacity ?? 0,
+      outlineOffset: p.ringOutlineOffset ?? 0,
+    } : null,
+  };
+}
+
+export function markerStyle(marker: PreparedNavigationMarker, options: { color?: string; scale?: number; view?: string } = {}) {
+  const resolved = resolveMarkerStyle(marker, options);
+  return {
+    ringed: resolved.ring !== null,
+    style: `color:${resolved.color}`,
+    innerStyle: `width:${resolved.size}px;height:${resolved.size}px;background-image:url("${resolved.image}");background-position:${resolved.position} center;background-size:${resolved.backgroundSize}`,
+    ringStyle: resolved.ring ? [
+      `width:${resolved.ring.width}px`,
+      `height:${resolved.ring.height}px`,
+      `border-color:color-mix(in srgb, currentColor ${resolved.ring.colorShare}%, white)`,
+      `opacity:${resolved.ring.opacity}`,
+      `transform:translate(-50%, -50%) rotate(${resolved.ring.angle}deg)`,
+      `outline:${resolved.ring.outlineOpacity ? `1px solid color-mix(in srgb, currentColor ${resolved.ring.outlineOpacity}%, transparent)` : "none"}`,
+      `outline-offset:${resolved.ring.outlineOffset}px`,
     ].join(";") : "",
   };
 }
