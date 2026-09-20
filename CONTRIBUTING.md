@@ -72,9 +72,16 @@ unpublished key is a 404 for every visitor, not a local inconvenience.
 ### If you do not have R2 credentials
 
 Publishing needs write access to the bucket, which outside contributors do not
-have. This is expected — open the pull request without it. A maintainer bakes
-your branch, publishes, and pushes the inventory commit to it. Say in the pull
-request that assets need publishing so nobody waits on a gate you cannot clear.
+have. Baking does not — run steps 1 and 3 yourself and commit the inventory,
+then say in the pull request that the bytes still need publishing.
+
+A maintainer then runs the **Publish prepared assets** workflow against your
+pull request (Actions → Publish prepared assets → Run workflow, with the pull
+request number, the object id and its kind, using the main branch). It rebakes
+your branch and checks the inventory. Before uploading, trusted tooling compares
+the inventories with the frozen pull request commit and verifies every file hash.
+Nothing needs to be pushed to your branch, and no maintainer has to reproduce
+your setup locally.
 
 Continuous integration does not run on a pull request from a fork until a
 maintainer approves it, so the asset check will not report at all until then.
