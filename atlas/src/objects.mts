@@ -1,9 +1,10 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { SITE_ORIGIN } from '../../site/seo.mts';
+import { projectRoot } from '../../tools/project-root.mts';
 
 /** Reads the checked-in object packages. The atlas prepares nothing and copies no facts out of them. */
-export const REPOSITORY = resolve(import.meta.dirname, '../..');
+export const REPOSITORY = projectRoot(import.meta.url);
 export const OBJECTS_DIRECTORY = resolve(REPOSITORY, 'src/objects');
 export const REPOSITORY_URL = 'https://github.com/layoutit/css.earth';
 
