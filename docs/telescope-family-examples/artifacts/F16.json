@@ -1,0 +1,15 @@
+{
+  "dataset": "stellar-neighbourhood",
+  "target": "stellar-neighbourhood",
+  "component": "points",
+  "topology": "points",
+  "frame": {
+    "kind": "physical",
+    "name": "sun-icrf",
+    "epoch": "JD_TT 2461286.5"
+  },
+  "quantity": {
+    "name": "physical point samples",
+    "semantics": "Existing prepared physical object; no depth is inferred from an angular or spectral observation."
+  }
+}

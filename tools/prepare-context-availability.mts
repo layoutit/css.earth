@@ -9,11 +9,15 @@ import type { ContextAvailability } from '../src/platform/context-availability.m
 import { parsePreparedVolumePresentation } from '../site/volume-presentation.mts';
 import { readContextObjects } from './prepare-catalog.mts';
 import { hasErrorCode } from './source-values.mts';
+import { requireRuntimeAssetManifest } from '../src/platform/runtime-asset-closure.mts';
 
 const root = resolve(import.meta.dirname, '..');
+type PublicAssetAvailability = 'local' | 'manifest';
 
 /** Verify complete volume packages once before serving; no source processing or downloads. */
-export async function inspectContextAvailability(projectRoot = root): Promise<ContextAvailability> {
+export async function inspectContextAvailability(projectRoot = root, { publicAssets = 'local' }: {
+  publicAssets?: PublicAssetAvailability;
+} = {}): Promise<ContextAvailability> {
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'));
   const entries = await Promise.all(contexts.filter(object => object.type === 'volume-lens-bank').map(async ({ id }) => {
     const directory = resolve(projectRoot, 'src/objects', id);
@@ -50,11 +54,20 @@ export async function inspectContextAvailability(projectRoot = root): Promise<Co
       const bankPin = outputs.find(output => output.url === bankUrl);
       if (!bankPin || bankPin.sha256 !== descriptor.prepared!.sha256) throw new TypeError(`Unbound prepared bank: ${bankUrl}.`);
       await verify(projectRoot, bankUrl, bankPin);
+      const published = publicAssets === 'manifest'
+        ? requireRuntimeAssetManifest(id, JSON.parse((await read(directory, 'runtime-assets.json')).toString()))
+        : null;
       for (const lens of presentation.controls) for (const url of new Set([lens.thumbnailUrl, lens.texture?.url])) {
         if (!url?.startsWith(`/scenes/${id}/`)) throw new TypeError(`Invalid dataset preview URL: ${url}.`);
         const pin = outputs.find(output => output.url === url);
         if (!pin) throw new TypeError(`Unpinned dataset preview: ${url}.`);
-        await verify(resolve(projectRoot, 'public'), url.slice(1), pin);
+        if (published) {
+          const filename = url.slice(`/scenes/${id}/`.length);
+          const asset = published.assets.find(candidate => candidate.filename === filename &&
+            (published.resourceRoot !== 'prepared' || candidate.location === 'public'));
+          if (!asset || asset.sha256 !== pin.sha256 || asset.bytes !== pin.bytes)
+            throw new TypeError(`Unpublished dataset preview: ${url}.`);
+        } else await verify(resolve(projectRoot, 'public'), url.slice(1), pin);
       }
       return [id, { available: true }] as const;
     } catch (error) {
@@ -64,8 +77,10 @@ export async function inspectContextAvailability(projectRoot = root): Promise<Co
   return Object.fromEntries(entries);
 }
 
-export async function prepareContextAvailability({ projectRoot = root, strict = false } = {}) {
-  const availability = await inspectContextAvailability(projectRoot);
+export async function prepareContextAvailability({ projectRoot = root, strict = false, publicAssets = 'local' }: {
+  projectRoot?: string; strict?: boolean; publicAssets?: PublicAssetAvailability;
+} = {}) {
+  const availability = await inspectContextAvailability(projectRoot, { publicAssets });
   const failures = Object.entries(availability).flatMap(([id, state]) => state.available ? [] : [`${id}: ${state.reason}`]);
   if (strict && failures.length) throw new Error(`Prepared context packages unavailable:\n${failures.join('\n')}`);
   return { availability, failures };

@@ -9,8 +9,10 @@ const profile = shape({ path: text, member: optional(text), sampling: text, unit
 
 /** ThERESA's range of observed longitudes (utils.vislon at commit 74a8fec): the sub-observer longitude 180 - 360 (t - t0) / P at every
  * observation time, widened by 90 degrees each way, each limb wrapped into [-180, 180) and the least and greatest taken. The planet
- * rotates synchronously, so its rotation period is the orbital period. Cells outside the range are not shown in ThERESA's maps. */
-export function theresaVisibleLongitudes(times: ArrayLike<number>, transitTime: number, periodDays: number): [number, number] {
+ * rotates synchronously, so its rotation period is the orbital period. An eccentric orbit needs an explicit rotation law before
+ * this phase-to-longitude conversion can be used. Cells outside the range are not shown in ThERESA's maps. */
+export function theresaVisibleLongitudes(times: ArrayLike<number>, transitTime: number, periodDays: number, eccentricity = 0): [number, number] {
+  if (eccentricity !== 0) throw new TypeError('ThERESA visible longitudes need an explicit rotation law for an eccentric hosted orbit.');
   let minimum = Infinity, maximum = -Infinity;
   const wrap = (degrees: number) => ((degrees + 180) % 360 + 360) % 360 - 180;
   for (let i = 0; i < times.length; i++) {
@@ -103,5 +105,5 @@ export async function loadNpyDictionaryMap(root: string, value: unknown) {
   const orbit = hostedOrbit(recipe.visibleLongitudes.planet as Parameters<typeof hostedOrbit>[0]);
   const times = npyArrayAt(readNpyObject(bytes), recipe.visibleLongitudes.times);
   if (times.shape.length !== 1) throw new TypeError('Observation times must be one-dimensional.');
-  return decodeNpyDictionaryMap(bytes, recipe, theresaVisibleLongitudes(times.data as Float64Array, orbit.transitTimeBmjdTdb, orbit.periodDays));
+  return decodeNpyDictionaryMap(bytes, recipe, theresaVisibleLongitudes(times.data as Float64Array, orbit.transitTimeBmjdTdb, orbit.periodDays, orbit.eccentricity));
 }

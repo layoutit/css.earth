@@ -6,14 +6,9 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
-import { pds3Keyword, pds3Values } from '../pds-labels.mts';
+import { pds3Keyword, pds3Values, pds3TimeIso } from '../pds-labels.mts';
 
 const sha256 = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
-const iso = (value: string, field: string) => {
-  const date = new Date(/[zZ]$/u.test(value) ? value : `${value}Z`);
-  if (Number.isNaN(date.valueOf())) throw new TypeError(`PDS3 ${field} is not a time.`);
-  return date.toISOString();
-};
 const measurement = (value: string, field: string) => {
   const match = /^([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[Ee][+-]?\d+)?)\s*<([^<>]+)>$/u.exec(value.trim());
   if (!match) throw new TypeError(`PDS3 ${field} is not a number with a unit.`);
@@ -65,7 +60,7 @@ export async function sourcePds3Observations(root: string, targetId: string): Pr
     const localScience = await readFile(resolve(sourceRoot, science.path)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
     if (localScience !== undefined && (localScience.byteLength !== scienceBytes || sha256(localScience) !== scienceSha)) throw new Error(`${science.path} does not match its source-manifest pin.`);
     const field = (key: string) => { const value = pds3Keyword(label, key, []); if (value === undefined) throw new TypeError(`${labelPath} lacks ${key}.`); return value; };
-    const productId = field('PRODUCT_ID'), productType = field('PRODUCT_TYPE'), datasetId = field('DATA_SET_ID'), host = field('INSTRUMENT_HOST_NAME'), instrumentId = field('INSTRUMENT_ID'), instrument = field('INSTRUMENT_NAME');
+    const productId = field('PRODUCT_ID'), productType = pds3Keyword(label, 'PRODUCT_TYPE', []), datasetId = field('DATA_SET_ID'), host = field('INSTRUMENT_HOST_NAME'), instrumentId = field('INSTRUMENT_ID'), instrument = field('INSTRUMENT_NAME');
     const targetName = field('TARGET_NAME');
     const horizontal = pds3Keyword(label, 'HORIZONTAL_PIXEL_SCALE', []), vertical = pds3Keyword(label, 'VERTICAL_PIXEL_SCALE', []);
     const surfaceResolutionKm = horizontal === undefined || vertical === undefined ? undefined
@@ -74,8 +69,8 @@ export async function sourcePds3Observations(root: string, targetId: string): Pr
     const center = pds3Keyword(label, 'CENTER_FILTER_WAVELENGTH', []);
     const filter = pds3Keyword(label, 'FILTER_NAME', []);
     observations.push({ id: productId.toLowerCase(), archiveProductId: `${datasetId}:${productId}`, datasetId,
-      program: `${targetId}-pds3-${slug(datasetId)}`, targetName, telescope: title(host), mode: `${instrumentId}/${productType} image`,
-      observatory: title(host), instrument, startIso: iso(field('START_TIME'), 'START_TIME'), endIso: iso(field('STOP_TIME'), 'STOP_TIME'),
+      program: `${targetId}-pds3-${slug(datasetId)}`, targetName, telescope: title(host), mode: `${instrumentId}/${productType ? `${productType} ` : ''}image`,
+      observatory: title(host), instrument, startIso: pds3TimeIso(field('START_TIME')), endIso: pds3TimeIso(field('STOP_TIME')),
       ...(filter === undefined ? {} : { filter }), ...(center === undefined ? {} : { centralWavelengthMicrometres: convert(center, 'CENTER_FILTER_WAVELENGTH', WAVELENGTH_TO_MICROMETRES) }),
       ...(surfaceResolutionKm === undefined ? {} : { surfaceResolutionKm }), kind: 'image',
       use: 'Source-pinned PDS3 image. Its detached label establishes identity, time, filter, units and surface sampling; filter width and achieved optical resolution remain unstated.',

@@ -1,0 +1,96 @@
+{
+  "target": "Europa",
+  "instrument": "STIS/CCD",
+  "opticalElement": "G430L",
+  "aperture": "52X0.1",
+  "band": {
+    "id": "nacl-450nm",
+    "quantity": "BAND STRENGTH",
+    "units": "Angstrom",
+    "readWindowAngstrom": [
+      3000,
+      5700
+    ],
+    "continuumWindowsAngstrom": [
+      [
+        3100,
+        3500
+      ],
+      [
+        5300,
+        5500
+      ]
+    ],
+    "continuumOrder": 3,
+    "bandAngstrom": [
+      3500,
+      5300
+    ],
+    "minimumBandCoverage": 0.9,
+    "maximumBandGapPixels": 5,
+    "featurelessReference": {
+      "rule": "no absorption in the first pass",
+      "note": "Trumbo, Brown & Hand (2019): 'To remove these effects and achieve the highest possible quality spectrum, we then divided by the average of all spectra from regions where the 450-nm feature is absent.' The paper applies that to its one high signal-to-noise spectrum; this stage applies it to every row, because the published continuum alone sets no common zero and measurably does not put zero where the paper says there is no band. Which rows show no band is decided by a first pass with the published continuum and nothing else."
+    }
+  },
+  "frames": {
+    "pinned": 60,
+    "used": 60,
+    "rejected": [],
+    "exposureSeconds": 600
+  },
+  "registration": [
+    {
+      "visit": "od9l12",
+      "targetName": "EUROPA-45",
+      "frames": 15,
+      "discRow": 125,
+      "acrossSlitCentreArcsec": 0.03,
+      "chordResidualArcsec": 0.0542,
+      "orientatDegrees": 90.382,
+      "subObserverWestLongitude": 45.91,
+      "subObserverLatitude": -2.9,
+      "sampledPixels": 324,
+      "bandStrengthMedian": 118.69
+    },
+    {
+      "visit": "od9l13",
+      "targetName": "EUROPA-135",
+      "frames": 15,
+      "discRow": 126.5,
+      "acrossSlitCentreArcsec": 0.056,
+      "chordResidualArcsec": 0.0734,
+      "orientatDegrees": 67.04,
+      "subObserverWestLongitude": 132.57,
+      "subObserverLatitude": -2.9,
+      "sampledPixels": 284,
+      "bandStrengthMedian": 108.83
+    },
+    {
+      "visit": "od9l14",
+      "targetName": "EUROPA-225",
+      "frames": 15,
+      "discRow": 125.5,
+      "acrossSlitCentreArcsec": 0.014,
+      "chordResidualArcsec": 0.037,
+      "orientatDegrees": 65.236,
+      "subObserverWestLongitude": 223.54,
+      "subObserverLatitude": -3.05,
+      "sampledPixels": 324,
+      "bandStrengthMedian": 42.33
+    },
+    {
+      "visit": "od9l15",
+      "targetName": "EUROPA-315",
+      "frames": 15,
+      "discRow": 126.5,
+      "acrossSlitCentreArcsec": 0.002,
+      "chordResidualArcsec": 0.0799,
+      "orientatDegrees": 66.858,
+      "subObserverWestLongitude": 313.63,
+      "subObserverLatitude": -2.91,
+      "sampledPixels": 252,
+      "bandStrengthMedian": -29.9
+    }
+  ]
+}

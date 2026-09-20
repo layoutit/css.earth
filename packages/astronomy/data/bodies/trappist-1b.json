@@ -19,7 +19,7 @@
     "ascendingNodePositionAngleDegrees": 0,
     "sources": {
       "period": "Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 2 (transit-timing analysis): 1.510826 d",
-      "shape": "Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 5 (photodynamic model): a/R* 20.843, inclination 89.728 degrees. Eccentricity is set to 0: their Table 2 gives |e| = 0.00306 for this planet, which moves it by less than its own radius.",
+      "shape": "Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 5 (photodynamic model): a/R* 20.843, inclination 89.728 degrees. Eccentricity is set to 0: their Table 2 gives |e| = 0.00306 for this planet. This record retains a circular display approximation; it is not an eccentric orbital solution or an error bound on the planet position.",
       "phase": "Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 2: t0 = BJD_TDB 2457257.55044, the transit time of the osculating elements at the start of their photodynamic model, here BMJD_TDB 57257.05044. Transit-timing variations of up to about half an hour are not modelled.",
       "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
     }

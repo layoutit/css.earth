@@ -112,9 +112,10 @@ export async function loadEclipseMapFit(root: string, value: unknown) {
   const radiusRatio = BODIES[planetId].meanRadiusKm / BODIES[hostId].meanRadiusKm;
   // Eclipse timing moves longitude (about 0.04 degrees per second for WASP-43b, 0.5 for HD 189733b), so a recipe can take the transit
   // time from its own light curve instead of an ephemeris propagated to the visit; light time across the orbit is always modelled.
-  let orbit = hostedOrbit(planetId), transitShiftSeconds = 0;
+  let orbit = hostedOrbit(planetId), transitShiftSeconds = 0, transitFit: ReturnType<typeof measureTransitShift> | null = null;
   if (recipe.fit.transitFromLightCurve) {
-    transitShiftSeconds = measureTransitShift(curve, orbit, starAstrometry(hostId), radiusRatio).shiftSeconds;
+    transitFit = measureTransitShift(curve, orbit, starAstrometry(hostId), radiusRatio);
+    transitShiftSeconds = transitFit.shiftSeconds;
     orbit = { ...orbit, transitTimeBmjdTdb: orbit.transitTimeBmjdTdb + transitShiftSeconds / 86400 };
   }
   const result = fitLightCurveMap(curve, recipe.fit, orbit, starAstrometry(hostId), radiusRatio, { stellarRadiusKm: BODIES[hostId].meanRadiusKm });
@@ -135,7 +136,10 @@ export async function loadEclipseMapFit(root: string, value: unknown) {
       const [a, b, c, d] = corners as number[];
       return a! * (1 - dx) * (1 - dy) + b! * dx * (1 - dy) + c! * (1 - dx) * dy + d! * dx * dy;
     },
-    report: { format: 'eclipse-map-fit', units: 'K', transitShiftSeconds, degree: result.basis.lmax, eigencurves: result.fit.ncurves, candidates: result.candidates, samples: result.samples, chiSquared: result.fit.chiSquared,
+    report: { format: 'eclipse-map-fit', units: 'K', transitShiftSeconds, ...(transitFit ? { transitFit: { shiftUncertaintySeconds: transitFit.uncertaintySeconds,
+      radiusRatio: transitFit.radiusRatio, limbDarkening: transitFit.limbDarkening, reducedChiSquared: transitFit.reducedChiSquared,
+      samples: transitFit.samples, model: transitFit.fit.model, software: transitFit.fit.software } } : {}),
+      degree: result.basis.lmax, eigencurves: result.fit.ncurves, candidates: result.candidates, samples: result.samples, chiSquared: result.fit.chiSquared,
       bic: result.fit.bic, rampTimeConstantDays: result.rampTimeConstantDays, stellarCorrection: result.fit.stellarCorrection, hotspot: result.hotspot },
   };
 }

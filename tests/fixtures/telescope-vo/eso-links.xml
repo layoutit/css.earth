@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Produced with astropy.io.votable version 8.0.1
+     http://www.astropy.org/ -->
+<VOTABLE version="1.3" xmlns="http://www.ivoa.net/xml/VOTable/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ivoa.net/xml/VOTable/v1.3 http://www.ivoa.net/xml/VOTable/VOTable-1.3.xsd">
+ <RESOURCE type="results">
+  <TABLE nrows="7">
+   <FIELD ID="ID" arraysize="*" datatype="char" name="ID" ucd="meta.id;meta.main"/>
+   <FIELD ID="access_url" arraysize="*" datatype="char" name="access_url" ucd="meta.ref.url"/>
+   <FIELD ID="service_def" arraysize="*" datatype="char" name="service_def" ucd="meta.ref"/>
+   <FIELD ID="error_message" arraysize="*" datatype="char" name="error_message" ucd="meta.code.error"/>
+   <FIELD ID="semantics" arraysize="*" datatype="char" name="semantics" ucd="meta.code"/>
+   <FIELD ID="description" arraysize="*" datatype="char" name="description" ucd="meta.note"/>
+   <FIELD ID="content_type" arraysize="*" datatype="char" name="content_type" ucd="meta.code.mime"/>
+   <FIELD ID="content_length" datatype="long" name="content_length" ucd="phys.size;meta.file" unit="byte"/>
+   <FIELD ID="eso_origfile" arraysize="*" datatype="char" name="eso_origfile" ucd="meta.id;meta.file"/>
+   <FIELD ID="eso_category" arraysize="*" datatype="char" name="eso_category" ucd="meta.code.class;meta.dataset"/>
+   <FIELD ID="eso_datalink" arraysize="*" datatype="char" name="eso_datalink" ucd="meta.ref.url"/>
+   <DATA>
+    <TABLEDATA>
+     <TR>
+      <TD>ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647</TD>
+      <TD>https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.647</TD>
+      <TD/>
+      <TD/>
+      <TD>#this</TD>
+      <TD>Requested file</TD>
+      <TD>image/fits</TD>
+      <TD>8458560</TD>
+      <TD>SPHERE_ZIMPOL_Betelgeuse_P1_N_I_phase3.fits</TD>
+      <TD>SCIENCE.IMAGE</TD>
+      <TD>https://archive.eso.org/datalink/links?ID=ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647</TD>
+     </TR>
+     <TR>
+      <TD>ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647</TD>
+      <TD/>
+      <TD>ADP.2026-08-19T13:19:07.647_soda</TD>
+      <TD/>
+      <TD>#cutout</TD>
+      <TD>Cutout of #this (SODA-sync)</TD>
+      <TD>image/fits</TD>
+      <TD/>
+      <TD/>
+      <TD/>
+      <TD/>
+     </TR>
+     <TR>
+      <TD>ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647</TD>
+      <TD>https://archive.eso.org/previews/v1/files/ADP.2026-08-19T13:19:07.647/preview?format=DOWNLOAD</TD>
+      <TD/>
+      <TD/>
+      <TD>#preview</TD>
+      <TD>PDF preview of the requested file</TD>
+      <TD>application/pdf</TD>
+      <TD>1000000</TD>
+      <TD/>
+      <TD/>
+      <TD/>
+     </TR>
+     <TR>
+      <TD>ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647</TD>
+      <TD>https://archive.eso.org/dataset/ADP.2026-08-19T13:19:07.647</TD>
+      <TD/>
+      <TD/>
+      <TD>#preview</TD>
+      <TD>HTML representation of the dataset</TD>
+      <TD>text/html</TD>
+      <TD>1000000</TD>
+      <TD/>
+      <TD/>
+      <TD/>
+     </TR>
+     <TR>
+      <TD>ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647</TD>
+      <TD>https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.648</TD>
+      <TD/>
+      <TD/>
+      <TD>#auxiliary</TD>
+      <TD>Ancillary file associated to the requested file</TD>
+      <TD>application/fits</TD>
+      <TD>8455680</TD>
+      <TD>SPHERE_ZIMPOL_Betelgeuse_P1_N_I_DOLP.fits</TD>
+      <TD>ANCILLARY.IMAGE</TD>
+      <TD>https://archive.eso.org/datalink/links?ID=ivo://eso.org/ID?ADP.2026-08-19T13:19:07.648</TD>
+     </TR>
+     <TR>
+      <TD>ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647</TD>
+      <TD>https://archive.eso.org/datalink/links?ID=ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647&amp;EXCLUDE=ALL&amp;INCLUDE=progenitor</TD>
+      <TD/>
+      <TD/>
+      <TD>#progenitor</TD>
+      <TD>Link that brings to the actual list of progenitors (processing provenance)</TD>
+      <TD>application/x-votable+xml</TD>
+      <TD/>
+      <TD/>
+      <TD/>
+      <TD/>
+     </TR>
+     <TR>
+      <TD>ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647</TD>
+      <TD>https://archive.eso.org/datalink/links?ID=ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647&amp;eso_download=data_documentation</TD>
+      <TD/>
+      <TD/>
+      <TD>http://archive.eso.org/rdf/datalink/eso#data_documentation</TD>
+      <TD>Release description of the collection the requested file belongs to</TD>
+      <TD>application/pdf</TD>
+      <TD>1000000</TD>
+      <TD/>
+      <TD/>
+      <TD/>
+     </TR>
+    </TABLEDATA>
+   </DATA>
+   <INFO ID="QUERY_STATUS" name="QUERY_STATUS" value="OK"/>
+  </TABLE>
+ </RESOURCE>
+ <RESOURCE ID="ADP.2026-08-19T13:19:07.647_soda" type="meta" utype="adhoc:service">
+  
+  <PARAM ID="accessURL" arraysize="*" datatype="char" name="accessURL" ucd="meta.ref.url" value="https://dataportal.eso.org/dataPortal/soda/sync"/>
+  <PARAM ID="standardID" arraysize="*" datatype="char" name="standardID" value="ivo://ivoa.net/std/SODA#sync-1.0"/>
+  <GROUP ID="inputParams" name="inputParams">
+   <PARAM ID="ID" arraysize="*" datatype="char" name="ID" ucd="meta.id;meta.dataset" value="ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647">
+    <DESCRIPTION>
+     The publisher DID of the dataset of interest
+    </DESCRIPTION>
+   </PARAM>
+   <PARAM ID="CIRCLE" arraysize="3" datatype="double" name="CIRCLE" ucd="pos.outline;obs" unit="deg" value="0 0 0" xtype="circle">
+    <DESCRIPTION>
+     A circle (as a flattened array of ra, dec, radius) that should be
+     covered by the cutout.
+    </DESCRIPTION>
+    <VALUES>
+     <MAX inclusive="yes" value="88.7929375 7.40706500029762 0.002048"/>
+    </VALUES>
+   </PARAM>
+  </GROUP>
+ </RESOURCE>
+</VOTABLE>
