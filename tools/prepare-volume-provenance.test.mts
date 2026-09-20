@@ -217,6 +217,69 @@ test('sky band previews verify their recipe with a warm or cold cache and ignore
   } finally { await rm(temporary, { recursive: true, force: true }); }
 });
 
+test('a sky band preview is served by the content-addressed mirror instead of the survey archive', async t => {
+  const { mkdtemp, rm } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const { createServer } = await import('node:http');
+  const { preparePreview } = await import('./prepare-volume-provenance.mts');
+  const { sha256 } = await import('../src/platform/sha256.mts');
+  const composite = await sharp({ create: { width: 16, height: 16, channels: 3, background: '#400' } }).png().toBuffer();
+  // Same length as the composite, one byte different: a length check alone must not be able to accept it, so
+  // deleting the sha256 comparison turns the rejection case red instead of merely loosening it.
+  const wrong = Buffer.from(composite); wrong[Math.floor(wrong.length / 2)] = wrong[Math.floor(wrong.length / 2)]! ^ 0xff;
+  const digest = sha256(composite);
+  const requests: string[] = [];
+  let mirrorBehavior: 'serve' | 'miss' | 'wrong' = 'serve';
+  const server = createServer((req, res) => {
+    requests.push(req.url ?? '');
+    if (req.url?.startsWith('/source-cache/')) {
+      if (mirrorBehavior === 'miss') { res.writeHead(404); res.end(); return; }
+      if (mirrorBehavior === 'wrong') { res.writeHead(200); res.end(wrong); return; }
+      res.writeHead(200); res.end(composite); return;
+    }
+    res.writeHead(404); res.end();
+  });
+  await new Promise<void>(accept => server.listen(0, '127.0.0.1', accept));
+  t.after(() => new Promise<void>(accept => server.close(() => accept())));
+  const address = server.address();
+  assert.ok(address && typeof address !== 'string');
+  const origin = `http://127.0.0.1:${address.port}`;
+  const temporary = await mkdtemp(resolve(tmpdir(), 'sky-mirror-preview-'));
+  t.after(() => rm(temporary, { recursive: true, force: true }));
+  const recipe = Buffer.from(JSON.stringify({ schema: 'cssearth-sky-band-composite@1', grid: { width: 16, height: 16, fovDeg: 0.01, centerIcrsDegrees: [270.9, -24.4] },
+    bands: [{ band: 'IRAC4', sha256: 'a'.repeat(64), bytes: 2880 }], backgroundPercentile: 1, peakPercentile: 99.9, display: { minimum: 0, stretch: 0.1, softening: 8 } }));
+  const directory = '.local/nebula-lab/observations/m8-processed/sources', recipePath = 'src/objects/m8/source/sky-bands/spitzer-irac.json';
+  const input = async (path: string) => { if (path !== recipePath) throw new Error(`Missing recipe ${path}`); return recipe; };
+  const pinFor = (name: string) => ({ path: `${directory}/${name}.${digest}.png`, sha256: digest, bytes: composite.length,
+    skyBands: { path: recipePath, sha256: sha256(recipe) } });
+
+  await t.test('mirror hit: the survey archive is never queried', async () => {
+    requests.length = 0; mirrorBehavior = 'serve';
+    const pin = pinFor('spitzer-mid-infrared');
+    const result = await preparePreview(temporary, pin, input, { mirrorOrigin: origin });
+    assert.equal(result.width, 16);
+    // The composite is written from mirror bytes alone. Composing it here would need the survey tiles, which this
+    // test never serves, so a lost mirror branch fails instead of silently reaching the archive.
+    assert.deepEqual(requests, [`/source-cache/${digest}/${encodeURIComponent(`spitzer-mid-infrared.${digest}.png`)}`]);
+    assert.equal((await readFile(resolve(temporary, pin.path))).length, composite.length);
+  });
+
+  await t.test('mirror serves the wrong bytes: sha verification refuses them rather than caching them', async () => {
+    requests.length = 0; mirrorBehavior = 'wrong';
+    const pin = pinFor('wrong-bytes');
+    // With no survey tiles available the composite cannot be rebuilt, so the run fails; what must never happen is
+    // accepting the mirror's bytes, which a missing sha256 comparison would do.
+    await assert.rejects(preparePreview(temporary, pin, input, { mirrorOrigin: origin }));
+    await assert.rejects(readFile(resolve(temporary, pin.path)), { code: 'ENOENT' }, 'unverified mirror bytes must never be cached');
+  });
+
+  await t.test('no mirror opted in: the archive stays the only route', async () => {
+    requests.length = 0; mirrorBehavior = 'serve';
+    await assert.rejects(preparePreview(temporary, pinFor('no-mirror'), input));
+    assert.deepEqual(requests, [], 'a caller that opted out of the mirror must not contact it');
+  });
+});
+
 test('a publisher preview tries the content-addressed mirror first and falls back to the publisher URL', async t => {
   const { mkdtemp, rm } = await import('node:fs/promises');
   const { tmpdir } = await import('node:os');
