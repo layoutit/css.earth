@@ -1,3 +1,4 @@
+import type { CalibrationDependency } from './calibration-dependencies.mts';
 import type { NativeMetadata } from './native-metadata.mts';
 import { inputWavelengths } from './recipe-request.mts';
 /** Product facts answer a request; catalogue capabilities and successful decoding alone do not. */
@@ -5,6 +6,7 @@ import type { CapabilityRequest, ConstraintVerdict, ProductKind, RequestedResult
 import { supportsMeasuredResolution, PROFILE_ASSUMPTIONS, RESOLUTION_ASSUMPTIONS, type ResolutionEvidence } from '../resolution-evidence.mts';
 export interface ProductFacts {
   readonly nativeMetadata?: NativeMetadata;
+  readonly calibrationDependencies?: readonly CalibrationDependency[];
   readonly verified: boolean;
   readonly target: string;
   readonly kind?: ProductKind;

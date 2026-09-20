@@ -114,7 +114,7 @@ async function resolveArtifact(root: string, answer: CapabilityAnswer, choice: C
   const selected = await selectedProductInput(root, { ...selection, product: choice.product });
   const q = selected.qualification;
   return { file: selected.file, receipt: resolve(root, q.receipt), record: resolve(root, q.productRecord), outputRoot: resolve(root, q.outputRoot), facts: selected.facts,
-    extraEvidence: [...(q.facts.angularResolutionBound ? [resolve(root, q.facts.angularResolutionBound.receipt)] : []),
+    extraEvidence: [...(q.facts.calibrationDependencies??[]).flatMap(d=>d.file?[resolve(root,d.file)]:[]), ...(q.facts.angularResolutionBound ? [resolve(root, q.facts.angularResolutionBound.receipt)] : []),
       ...(q.facts.resolutionEvidence ?? []).flatMap(e => e.receipt ? [resolve(root, e.receipt.file)] : [])] };
 }
 

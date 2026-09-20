@@ -8,6 +8,7 @@ import { pinFile, readProductRecord, sameRun, type ProductRecord, type ProductRu
 import { sourcePds3Observations } from '../pds/source-observations.mts';
 import type { ProductKind } from './query.mts';
 import { parseProductFacts, type QualifiedObservation } from './qualified-observations.mts';
+import { verifyCalibrationDependencies, type CalibrationDependency } from './calibration-dependencies.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
 
 export const SOURCE_PRODUCTS_SCHEMA = 'cssearth-source-observations@1';
@@ -98,12 +99,12 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
   });
 }
 export const sourceReceipt = (product: SourceProduct) => `output/telescopes/${product.target}/${product.id}/qualification.product.json`;
-export async function sourceRun(product: SourceProduct): Promise<ProductRun> {
+export async function sourceRun(product: SourceProduct, dependencies: readonly CalibrationDependency[] = []): Promise<ProductRun> {
   assertPinnedLabel(product);
-  const sources = ['source-intake.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', 'native-metadata.mts', 'qualified-observations.mts', 'request-satisfaction.mts', '../../fits.mts', '../../fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'];
+  const sources = ['source-intake.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', 'native-metadata.mts', 'product-science.mts', 'calibration-dependencies.mts', '../astronomy-packages/science.mts', '../astronomy-packages/requirements.lock', 'qualified-observations.mts', 'request-satisfaction.mts', '../../fits.mts', '../../fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'];
   const digest = createHash('sha256');
   for (const path of sources) digest.update(path).update(await readFile(resolve(import.meta.dirname, path)));
-  return { telescope: product.telescope, stage: 'source-qualification', inputs: product.files.map(file => ({ role: file.role, identity: file.origin, bytes: file.bytes, sha256: file.sha256 })),
+  return { telescope: product.telescope, stage: 'source-qualification', inputs: product.files.map(file => ({ role: file.role, identity: file.origin, bytes: file.bytes, sha256: file.sha256 })).concat(dependencies.filter(d=>d.status==='pinned').map(d=>({role:'calibration dependency',identity:d.origin!,bytes:d.bytes!,sha256:d.sha256!}))),
     parameters: { observation: product }, software: [{ name: 'cssEarth source qualification', version: digest.digest('hex') }, { name: 'Node.js', version: process.version }] };
 }
 export async function loadSourceProducts(root: string, target: string, issues: SourceIntakeIssue[] = []): Promise<LoadedSourceProduct[]> {
@@ -128,12 +129,14 @@ export async function loadSourceProducts(root: string, target: string, issues: S
     let record;
     try { record = await readProductRecord(resolve(root, receipt)); } catch { loaded.push({ ...product, qualified: false, receipt, receiptProblem: 'Qualification receipt is malformed.' }); continue; }
     let qualified = false, receiptProblem: string | undefined;
+    const savedFacts = record ? await readFile(resolve(root, `output/telescopes/${target}/${product.id}/decoded.json`),'utf8').then(t=>parseProductFacts(requireRecord(JSON.parse(t)).facts),()=>undefined).catch(()=>undefined):undefined;
     if (record) {
-      qualified = sourceRecordComplete(record, product) && await sameRun(record, await sourceRun(product), path => inside(root, path));
+      qualified = sourceRecordComplete(record, product) && await sameRun(record, await sourceRun(product,savedFacts?.calibrationDependencies), path => inside(root, path));
       for (const file of product.files) {
         const pin = await pinFile(inside(root, file.path)).catch(() => null);
         qualified &&= pin !== null && pin.bytes === file.bytes && pin.sha256 === file.sha256;
       }
+      qualified &&= await verifyCalibrationDependencies(root,savedFacts?.calibrationDependencies??[]);
       if (!qualified) receiptProblem = 'The qualification receipt is stale: inputs, parameters, implementation, runtime or output bytes changed.';
     }
     const facts = qualified ? parseProductFacts(requireRecord(JSON.parse(await readFile(resolve(root, `output/telescopes/${target}/${product.id}/decoded.json`), 'utf8')), 'decoded product').facts) : undefined;

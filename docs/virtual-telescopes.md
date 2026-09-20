@@ -152,40 +152,65 @@ Astropy owns the [weighted fitting](https://docs.astropy.org/en/stable/api/astro
 The wavelength-by-wavelength assessment accommodates the spatial PSF variation
 described in [STScI's IFU guidance](https://jwst-docs.stsci.edu/methods-and-roadmaps/jwst-integral-field-spectroscopy).
 
-Source-package descriptions remain declarations. Native source qualification also reads
-`facts.nativeMetadata` from the pinned product: the selected science structure, supported
-data units, wavelength centers, recorded calibration references and remaining limitations.
-It never copies the package description or instrument catalogue into verified facts.
+Source descriptions remain declarations. Source qualification and reducer qualification now
+use one `product-science.mts` readback owner. `facts.nativeMetadata` records each science array,
+units, wavelength coordinates, usable samples, uncertainty association and remaining limitations.
+Instrument catalogue values never become verified product facts.
 
-- FITS images: one unambiguous science HDU; separable linear `WAVE` or `FREQ` WCS,
-  converted to micrometres. Coordinate-bin intervals exclude planes without finite samples.
-  These intervals describe the sampled grid, not optical passbands or spectral resolving power.
-  Coupled, tabular, velocity and air-wavelength WCS remain unsupported and explicit.
-- ISIS3 cubes: `BandBin.Center` must match the core band count and be strictly monotonic.
-  Units must be stated or established by a supported recorded calibration convention.
-  For [VIMS RC19](https://isis.astrogeology.usgs.gov/8.1.0/Application/presentation/Tabbed/vimscal/vimscal.html),
-  the time-dependent `Center` is used, never `MissionAverage`. `RadiometricCalibration.OutputUnits`
-  records the data unit. Calibration filenames are retained as references; their presence does
-  not qualify the external calibration files. Centers alone do not establish continuous coverage;
-  explicit widths are needed, and empty bands remain gaps.
-- PDS products: pdr exposes units and band coordinates from the decoded object's own label
-  block. A PDS4 optical filter must explicitly reference the selected array. Metadata from another
-  array or an ambiguous set of science arrays cannot satisfy the request.
+Astropy (the existing pinned Python environment) owns unit parsing and FITS WCS transforms.
+Linear, nonlinear and table-backed separable wavelength/frequency coordinates are supported;
+velocity coordinates require a recorded rest wavelength or frequency. Tabulated centers do not
+invent bin edges. Spatially coupled spectral coordinates and air wavelengths remain explicit
+limitations. Multiple science HDUs retain separate metadata: aggregate wavelength coverage is
+their intersection, never a mosaic. A companion ERR/VAR/IVAR or DQ/MASK must match exactly one
+science array by EXTVER and shape. Uncertainty dimensions must agree with the science unit.
 
-Data-unit validation currently recognizes `I/F`, dimensionless values, counts/DN, electrons,
-`Jy`, `mJy`, `MJy/sr`, `Jy/beam`, `K` and `W m-2 sr-1 um-1`. Other units are retained in an
-explicit limitation instead of guessed. Product metadata validation is not an independent
-validation of radiometric accuracy, quality flags or uncertainty.
+The conservative usable-sample policy requires finite science, zero supplied DQ/MASK and valid
+supplied uncertainty. Negative unmasked errors are refused; missing uncertainty units remain
+unknown and cannot justify usable coverage. No uncertainty array is explicitly recorded as
+unknown. Fully masked wavelength planes do not establish coverage. Numeric validity does not
+independently establish radiometric accuracy or correctness of the observatory's error model.
 
-Applicable FITS `BMAJ` and `BMIN` headers in `Jy/beam` images establish the recorded
-restoring beam; its major-axis FWHM answers angular-resolution requirements and its evidence
-points to the exact product hash. A missing beam axis, multiple per-plane beams, or incompatible
-units cannot establish that resolution. This does not independently validate deconvolution or
-residual emission. Pixel spacing, map scale and nominal instrument optics never become a PSF.
+ISIS BandBin coordinates are count-checked and strictly monotonic, with explicit units or the
+recorded VIMS RC19 convention. Named geometry backplanes are ancillary data, not spectra.
+Singleton ancillary FITS axes do not turn a two-dimensional image into a spectral cube.
+PDS ordinal UTC timestamps and absent optional processing-level labels are handled directly.
+Centers alone do not establish passband widths. pdr owns PDS scaling and special-value masks;
+PDS4 special constants are scoped to their own array. Ambiguous PDS science arrays remain
+unresolved. Extracted PDS labels whose attached pointers lie outside the pinned file are not
+advertised as complete observations.
 
-The metadata reader is part of the qualification implementation digest. Product, label,
-calibration input, reader or output changes invalidate reuse. A source-qualified product can
-still remain an unresolved answer when its files do not establish the requested science facts.
+Recorded CRDS and ISIS calibration references resolve to exact official archive files. Each
+retrieved file is hashed, checked on reuse, and included in delivery. Retrieval is bounded to
+16 MB per file and 64 MB per qualification; missing, timed-out or oversized references remain
+explicitly unresolved. Instrument/configuration selectors are compared where available. VIMS
+band-center references can additionally be checked against recorded original-band indices.
+A pin proves which bytes were used; selector agreement does not independently prove calibration
+accuracy. The product's recorded calibration is not a new raw-data recalibration.
+
+Applicable FITS BMAJ/BMIN or a complete channel-indexed BEAMS table establishes the recorded
+restoring beam for Jy/beam-equivalent units. Per-plane resolution uses the worst usable major
+axis. Missing or ambiguous beam identities remain unknown. Pixel spacing and nominal optics
+never become a measured PSF.
+
+Product, label, calibration dependency, reader, package lock or output mutations invalidate
+qualification reuse. Unknown science requirements remain unknown in request satisfaction,
+even when the delivered bytes are fully verified.
+
+For reproducible empirical delivery checks:
+
+```sh
+node tools/objects/telescopes/survey-delivery.mts output/survey --random 20
+# Repeat with the seed written in output/survey/survey.json:
+node tools/objects/telescopes/survey-delivery.mts output/replay --random 20 SEED
+```
+
+The pool comprises body packages with a locally available numeric product under 256 MB,
+without filtering on prior success. Bodies and eligible observations are sampled separately.
+If fewer bodies are locally available, the survey tests the whole pool and records both counts.
+The report retains the seed, complete pool, chosen targets, failures, blocked cases and delivered
+request-satisfaction results. It exercises saved query → qualification → delivery with existing
+local observations; it is not a fresh all-archive discovery survey or raw pipeline rerun.
 
 Source observations and explicit selections expose `requestSatisfaction` and `satisfaction`,
 respectively. Published body-map descriptors also carry `satisfaction`. Its status is `fulfilled`,
@@ -599,3 +624,32 @@ the previous zero-excluding policy do not establish agreement under the new poli
 recompare existing cubes to renew them. No pipeline rerun is needed for unchanged
 products and inputs. The scope states the actual compared archive planes, including
 aligned subsets supplied without a request interval.
+
+## From a delivered product to an output
+
+`tools/objects/telescopes/outputs.mts` is the final boundary after `session.mts` delivery.
+The CLI exposes `telescope outputs RESULT_JSON` and `telescope export RESULT_JSON`.
+[The command guide](../packages/telescope/README.md#outputs) covers selectors and files.
+
+The first executable outputs are a two-dimensional native FITS plane and a spectrum at one
+explicit pixel. Astropy owns coordinates and units; the shared scientific reader applies the
+same uncertainty and quality policy used by qualification; Matplotlib owns PNG/SVG figures.
+Numeric CSV and a product record accompany each plot. The record pins the original delivery,
+its files, the chosen HDU/plane/pixel, the implementation, package versions and derived bytes.
+No plotting stage upgrades the original scientific request's satisfaction.
+
+The remaining output families reuse existing scientific owners:
+
+| Output | Required scientific input | Existing owner / remaining adapter |
+| --- | --- | --- |
+| Native image | Qualified pixel array and mask | Executable FITS output adapter; image coordinates, not body coordinates |
+| Spectral chart | Qualified wavelength axis and explicit pixel | Executable FITS output adapter; supplied per-sample uncertainty, no spatial covariance claim |
+| Surface map | Measurement definition, viewing geometry, rotation/frame and resolution evidence | Existing instrument map authors and `body-map-publication.mts`; CLI output adapter remains |
+| Body sphere | Qualified surface map plus a prepared layer | Existing body preparation and renderer; output handoff remains |
+| 3D scatter/volume | Explicit coordinate frame, units and measured or explicitly modeled depth | Existing nebula lab preparation and viewer; output handoff remains |
+
+A wavelength axis, radial velocity or image intensity cannot silently become physical depth.
+The current draft exposes unavailable families honestly; it does not create a second body or
+nebula renderer. PDS and ISIS retain native qualification and delivery, but their figure export
+adapters remain to be connected to the same output boundary. Images above one million pixels
+require a smaller selected product in this first adapter; no implicit resampling is performed.

@@ -109,7 +109,7 @@ elif operation == 'decode-product':
         sys.exit(0)
     root = ET.parse(label).getroot()
     def local(tag): return tag.rsplit('}',1)[-1]
-    special_constants = [(local(child.tag),(child.text or '').strip()) for node in root.iter() if local(node.tag) == 'Special_Constants' for child in node if child.text]
+    all_special_constants = [(local(child.tag),(child.text or '').strip()) for node in root.iter() if local(node.tag) == 'Special_Constants' for child in node if child.text]
     structures = []
     for key in data.keys():
         if key == 'label' or key.endswith('_HEADER') or key.startswith('HEADER_'): continue
@@ -118,6 +118,9 @@ elif operation == 'decode-product':
         values = np.asarray(np.ma.filled(array, np.nan))
         numeric = np.issubdtype(values.dtype, np.number)
         finite = np.isfinite(values) if numeric else None
+        matching = [node for node in root.iter() if local(node.tag).startswith('Array_') and
+            any(local(child.tag) == 'local_identifier' and (child.text or '').strip() == key for child in node)]
+        special_constants = [] if len(matching)!=1 else [(local(child.tag),(child.text or '').strip()) for node in matching[0].iter() if local(node.tag)=='Special_Constants' for child in node if child.text]
         special = np.zeros(array.shape, dtype=bool)
         if numeric:
             for _, text in special_constants:
@@ -125,9 +128,7 @@ elif operation == 'decode-product':
                     constant = np.array([int(text,16)], dtype=np.uint32).view(np.float32)[0] if text.lower().startswith('0x') and values.dtype.itemsize == 4 else float(text)
                     special |= values == constant
                 except (ValueError, OverflowError): pass
-        valid = finite & ~special if numeric else None
-        matching = [node for node in root.iter() if local(node.tag).startswith('Array_') and
-            any(local(child.tag) == 'local_identifier' and (child.text or '').strip() == key for child in node)]
+        valid = finite & ~special & ~mask if numeric else None
         units = [] if len(matching) != 1 else [(child.text or '').strip() for element in matching[0] if local(element.tag) == 'Element_Array' for child in element if local(child.tag) == 'unit']
         structures.append({'name':key,'nativeMetadata':{'unit':units[0] if len(units) == 1 else None},'shape':list(array.shape),'dtype':str(array.dtype),'elements':int(array.size),'masked':int(mask.sum()),'special':int(special.sum()),
           **({'finite':int(valid.sum()),'minimum':float(values[valid].min()),'maximum':float(values[valid].max())} if numeric and valid.any() else {})})
@@ -184,7 +185,7 @@ elif operation == 'decode-product':
       'centerFilterWavelength':first('center_filter_wavelength'),'bandwidth':first('bandwidth'),'spectralBins':spectral_bins(),'opticalFilters':optical_filters(),
       'mapProjection':first('map_projection_name'),'longitudeDirection':first('longitude_direction'),
       'pixelResolutionX':field_with_unit('pixel_resolution_x'),'pixelResolutionY':field_with_unit('pixel_resolution_y'),
-      'specialConstants':[{'kind':kind,'value':text} for kind,text in special_constants],'references':refs},'structures':structures}
+      'specialConstants':[{'kind':kind,'value':text} for kind,text in all_special_constants],'references':refs},'structures':structures}
 else: raise ValueError(f'Unsupported PDS package operation: {operation}')
 
 json.dump(answer, sys.stdout, allow_nan=False, separators=(',',':'))

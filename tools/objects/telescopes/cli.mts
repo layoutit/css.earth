@@ -6,15 +6,35 @@ import { formatAnswer } from './query.mts';
 import { assessRequest } from './request-satisfaction.mts';
 import { getSession, saveSession, type Session } from './session.mts';
 
+import { listOutputs, exportOutput, type OutputRequest } from './outputs.mts';
 import { HELP } from '../../../packages/telescope/src/help.mts';
 export { HELP };
 
 const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--result']);
-export type CliOptions = { readonly command: 'help' } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
+export type CliOptions = {readonly command:'outputs';readonly result:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help' } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
 export function parseCli(args: readonly string[]): CliOptions {
   const command = args[0];
   if (!args.length || args.includes('--help') || args.includes('-h')) return { command: 'help' as const };
-  if (command !== 'query' && command !== 'get') throw new TypeError('Expected query or get. Use telescope --help.');
+  if(command==='outputs'||command==='export'){
+    const positional:string[]=[],values=new Map<string,string>(),flags=new Set<string>();
+    for(let i=1;i<args.length;i++){
+      const arg=args[i];if(!arg.startsWith('-')){positional.push(arg);continue;}
+      if(['--json','--verbose'].includes(arg)){if(flags.has(arg))throw new TypeError(`Repeated option ${arg}`);flags.add(arg);continue;}
+      if(command!=='export'||!['--output','--hdu','--plane','--pixel','--out'].includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated ${command} option ${arg}`);
+      const value=args[++i];if(!value||value.startsWith('--'))throw new TypeError(`Missing value for ${arg}`);values.set(arg,value);
+    }
+    if(positional.length!==1)throw new TypeError(`Use telescope ${command} DELIVERY_RESULT_JSON`);
+    const common={result:resolve(positional[0]),json:flags.has('--json'),verbose:flags.has('--verbose')};
+    if(command==='outputs')return {command,...common};
+    const kind=values.get('--output');if(kind!=='image'&&kind!=='spectrum')throw new TypeError('--output takes image or spectrum');
+    const integer=(value:string|undefined)=>{if(value===undefined||!/^\d+$/u.test(value)||!Number.isSafeInteger(Number(value)))throw new TypeError('Selectors must be nonnegative whole numbers');return Number(value);};
+    const hdu=integer(values.get('--hdu')),plane=values.has('--plane')?integer(values.get('--plane')):undefined;
+    const parts=values.get('--pixel')?.split(',');if(parts&&parts.length!==2)throw new TypeError('--pixel takes X,Y');
+    const pixel=parts?[integer(parts[0]),integer(parts[1])] as const:undefined;
+    const directory=values.get('--out');if(!directory)throw new TypeError('export requires --out DIRECTORY');
+    return {command,...common,directory:resolve(directory),selection:{kind,hdu,...(plane===undefined?{}:{plane}),...(pixel?{pixel}:{})}};
+  }
+  if (command !== 'query' && command !== 'get') throw new TypeError('Expected query, get, outputs or export. Use telescope --help.');
   const values = new Map<string, string>(), switches = new Set<string>(), positional: string[] = [], requestArgs: string[] = [];
   for (let i = 1; i < args.length; i++) {
     const arg = args[i];
@@ -70,7 +90,13 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
     let text: string, code: number;
     process.stdout.write = process.stderr.write.bind(process.stderr);
     try {
-      if (options.command === 'query') {
+      if(options.command==='outputs'){
+        const result=await listOutputs(options.result);
+        text=options.json?`${JSON.stringify(result)}\n`:result.outputs.map(o=>`${o.kind}${'hdu' in o?` HDU ${o.hdu}`:''}: ${o.available?'available':'unavailable'}. ${o.reason}`).join('\n')+'\n';code=0;
+      }else if(options.command==='export'){
+        const result=await exportOutput(options.result,options.selection,options.directory);
+        text=options.json?`${JSON.stringify(result)}\n`:`Figure: ${result.figure}\nValues: ${result.values}\nEvidence: ${result.receipt}\n`;code=0;
+      }else if (options.command === 'query') {
         process.stderr.write('Querying observations…\n');
         const session = await saveSession(root, options.requestArgs, options.directory);
         text = options.json ? `${JSON.stringify(session)}\n` : formatSession(session, options.directory) + (options.verbose ? `\n${formatAnswer(session.answer)}` : '');

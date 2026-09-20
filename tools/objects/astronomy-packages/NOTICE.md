@@ -32,3 +32,12 @@ to the Virtual Observatory”, *Astronomy and Computing* 25 (2018), doi:10.1016/
 Astroquery and PyVO depend on [Astropy 8.0.1](https://pypi.org/project/astropy/). It is installed from the hash-locked
 environment and is not copied or modified. Astropy is distributed under the BSD 3-Clause license reproduced in
 [ASTROPY-LICENSE.rst](ASTROPY-LICENSE.rst).
+
+# Matplotlib
+
+cssEarth uses [Matplotlib 3.11.2](https://matplotlib.org/) for static telescope output figures.
+It is an installed, hash-pinned dependency in the astronomy environment; no implementation
+source is copied or modified. Its complete license is retained in
+[MATPLOTLIB-LICENSE.txt](MATPLOTLIB-LICENSE.txt). See [savefig](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)
+for the PNG/SVG output boundary. Numeric values, scientific interpretation and receipts remain
+owned by cssEarth. Plotted archive data retain their original provenance and terms.

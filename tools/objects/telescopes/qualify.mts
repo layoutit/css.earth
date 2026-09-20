@@ -5,7 +5,8 @@ import { qualifySourceProduct } from './qualify-source.mts';
 import { writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { rememberQualification } from './qualified-observations.mts';
-import { openSpectralCube } from '../jwst/cubes/spectral-cube.mts';
+import { readProductScience } from './product-science.mts';
+import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { measureCubeResolution } from '../jwst/cubes/resolution.mts';
 import { readFitsFileHdus, type FitsHeader } from '../../fits.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
@@ -21,7 +22,7 @@ import { compareTemplates } from '../naco/compare.mts';
 import { pinFrames, reduceProgram as reduceNacoProgram } from '../naco/reduce.mts';
 import { qualifyPdsArchiveProduct } from '../pds/archive-final.mts';
 import { buildPdsLedger } from '../pds/archive-ledger.mts';
-import { productRecordPath, readProductRecord } from '../product-record.mts';
+import { productRecordPath, readProductRecord, sameRun } from '../product-record.mts';
 import { compareChannel, receiptPath } from '../spitzer/compare.mts';
 import { defaultDataRoot, pinProgram, writeSpitzerProgram } from '../spitzer/archive.mts';
 import { refreshLocalLedger as refreshSpitzerLedger } from '../spitzer/archive-ledger.mts';
@@ -181,10 +182,18 @@ export function fitsObservationInterval(header: FitsHeader): Pick<ProductFacts, 
 
 /** Read back the produced file, not its mode's nominal capabilities. */
 export async function recordQualification(root: string, result: QualificationResult): Promise<QualificationResult> {
-  let facts: ProductFacts = { target: result.target, verified: true, kind: 'image', result: 'telescope-product' };
+  const recordPath = result.configuration.kind === 'pds-product' ? result.receipt : productRecordPath(result.product);
+  const record = await readProductRecord(recordPath);
+  if(!record || !await sameRun(record,record,path=>resolve(dirname(result.product),path)))throw new Error('Producing record or output pins are invalid');
+  let decoded:unknown;
+  if(result.configuration.kind==='pds-product'){
+    const labels=record.outputs.filter(o=>o.path.endsWith('.xml'));
+    if(labels.length!==1)throw new Error('PDS producing record must identify one pinned observation label');
+    decoded=(await pdsPackages({operation:'decode-product',labelPath:resolve(dirname(result.product),labels[0].path)})).decoded;
+  }
+  let facts: ProductFacts = { target: result.target, verified: true, kind: result.configuration.kind==='jwst-band'?'cube':'image', result: 'telescope-product',
+    ...await readProductScience(root,{file:result.product,format:result.configuration.kind==='pds-product'?'pds':'fits',target:result.target,decoded}) };
   if (result.configuration.kind === 'jwst-band') {
-    const cube = await openSpectralCube(result.product);
-    facts = { ...facts, kind: 'cube', wavelengthIntervalsMicrometres: [[cube.wavelength(0), cube.wavelength(cube.planes - 1)]] };
     const resolution = await measureCubeResolution(result.product);
     if (resolution.bound) facts = { ...facts, angularResolutionBound: resolution.bound };
   }
@@ -192,9 +201,9 @@ export async function recordQualification(root: string, result: QualificationRes
     const headers = await readFitsFileHdus(result.product), header = headers[0]!.header;
     facts = { ...facts, ...fitsObservationInterval(header) };
   }
-  const record = await readProductRecord(productRecordPath(result.product));
   const evidence = record?.evidence.findLast(entry => entry.receiptPin !== undefined);
   const qualified = { ...result, receipt: evidence ? resolve(dirname(result.product), evidence.receipt) : result.receipt };
+  if(!await sameRun(record,record,path=>resolve(dirname(result.product),path)))throw new Error('Producing outputs changed during qualification');
   await rememberQualification(root, { ...qualified, facts, productRecord: result.configuration.kind === 'pds-product' ? result.receipt : productRecordPath(result.product), outputRoot: dirname(result.product) });
   return qualified;
 }
