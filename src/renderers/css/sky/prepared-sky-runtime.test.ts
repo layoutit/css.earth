@@ -192,13 +192,12 @@ test.each([
     profile.fadeStartDistanceM / 2];
   for (const distance of distances) {
     const expected = logarithmicFade(distance, profile.fadeStartDistanceM, profile.fullDistanceM);
-    const skyValidity = 1 - logarithmicFade(distance, context.stars.fadeStartDistanceM, context.stars.fullDistanceM);
-    const expectedSkyContribution = (1 - expected) * skyValidity;
     const gain = nearGain + (brightness.fullOpacity - nearGain) * logarithmicFade(distance, brightness.fadeStartDistanceM, brightness.fullDistanceM);
     const camera: WorldCameraPose = { referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distance], orientationXyzw: [0, 0, 0, 1] } };
     mounted.publish(camera, viewport);
     const expectedGain = withBrightness ? gain : 1;
+    const expectedSkyContribution = 1 - expected * expectedGain;
     expect(Number(volumeRoot.dataset.volumeOpacity)).toBeCloseTo(expected, 12);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? expectedGain : 1), 12);
     if (withBrightness && distance === gradedDistance) {
@@ -216,10 +215,10 @@ test.each([
       expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBeCloseTo(.4 * (expected * expectedGain + expectedSkyContribution), 12);
       if (distance === regressionDistance) {
         expect(expected).toBe(0);
-        expect(skyWeight).toBe(0);
-        expect(skyRoot.style.visibility).toBe('hidden');
+        expect(skyWeight).toBe(1);
+        expect(skyRoot.style.visibility).toBe('visible');
         if (withBrightness) expect(expectedGain).toBe(.094);
-        expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBe(0);
+        expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBe(.4);
       }
     } else expect(completedPixel(volumeRoot, volumeImage, undefined, .4)).toBeCloseTo(.4 * expected * expectedGain, 12);
     mounted.publish({ ...camera, pose: { ...camera.pose, orientationXyzw: [0, 1, 0, 0] } }, viewport);
@@ -487,7 +486,7 @@ function completedPixel(host: FakeElement, image: FakeElement, sky: FakeElement 
   return t * g * volumeValue + (1 - foregroundAlpha) * underlay;
 }
 
-test("baked stars paint one cube through the Sun's neighbourhood and hand the background to the plain Milky Way beyond it", () => {
+test("baked stars hand the background to the plain Milky Way beyond the Sun's neighbourhood", () => {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
   const nearFaces = fixture().faces.map(face => ({ ...face, texturePath: `sky-near/${face.id}.webp` }));
   const payload: PreparedCssSky = { ...fixture(), nearFaces, stars: { objectId: 'stellar-neighbourhood', cssPixelsPerDegree: 21.8 } };

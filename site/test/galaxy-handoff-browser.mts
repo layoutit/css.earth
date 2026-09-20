@@ -49,11 +49,9 @@ try {
     assert.deepEqual(snapshot.skyFaceNames, ['nx', 'ny', 'nz', 'px', 'py', 'pz']);
     assert.equal(snapshot.skyFaces % 6, 0);
     // Native computed opacity is serialized to fewer digits than the prepared weights.
-    const skyValidity = 1 - logarithmicFade(snapshot.distancePc * parsecKm * 1000,
-      context.stars.fadeStartDistanceM, context.stars.fullDistanceM);
-    const expectedSkyContribution = (1 - snapshot.volumeOpacity) * skyValidity;
+    const expectedSkyContribution = 1 - snapshot.volumeCompositeOpacity;
     assert.ok(Math.abs(snapshot.skyContribution - expectedSkyContribution) < 1e-6,
-      'Solar panorama contribution follows its prepared observer-validity range');
+      'one prepared background continuously replaces the other');
     assert.ok(Math.abs(snapshot.volumeCompositeOpacity - snapshot.volumeOpacity * snapshot.volumeBrightness) < 1e-6);
     assert.ok(Math.abs((1 - snapshot.volumeCompositeOpacity) * snapshot.skyOpacity - snapshot.skyContribution) < 1e-6,
       'actual source-over coefficients preserve the prepared sky contribution');
@@ -62,12 +60,14 @@ try {
     else assert.equal(snapshot.skyVisibility, 'hidden');
     assert.ok(await page.evaluate(() => window.__handoffNodes.every(node => node.isConnected)), 'travel retains every environment node');
   }
-  const initial = samples[0], fading = samples[2], retired = samples[3];
+  const initial = samples[0], fading = samples[2], farOnly = samples[3];
   assert.equal(initial.skyContribution, 1);
-  assert.ok(fading.skyContribution > 0 && fading.skyContribution < 1, 'the Solar panorama fades across its prepared nearby range');
-  assert.equal(retired.skyContribution, 0); assert.equal(retired.skyVisibility, 'hidden');
+  assert.equal(fading.skyContribution, 1, 'the plain Milky Way replaces the baked nearby stars without dimming the background');
+  assert.equal(farOnly.skyContribution, 1); assert.equal(farOnly.skyVisibility, 'visible');
+  assert.ok(samples.every(sample => sample.background.mean >= initial.background.mean * .75),
+    'the outward path must not develop a dark background trough');
   assert.ok(context.stars.fullDistanceM < volume.data.sky.parallax.metersPerCssPixel * 50,
-    'the Solar panorama retires long before the camera can approach a cube face');
+    'the baked nearby-star cube retires long before the camera can approach a cube face');
   assert.equal(required(samples.at(-1)).requests, initial.requests, 'the entire prepared image bank is ready before travel');
   await scrollTo(page, initialKm); await page.waitForTimeout(600);
   const returned = await read(page);
@@ -108,11 +108,4 @@ async function backgroundSignal(png:Buffer) {
   for (let offset = 0; offset < data.length; offset += info.channels) values.push((.2126 * data[offset] + .7152 * data[offset + 1] + .0722 * data[offset + 2]) / 255);
   values.sort((a, b) => a - b);
   return { mean: values.reduce((sum, value) => sum + value, 0) / values.length, median: values[Math.floor(values.length / 2)] };
-}
-
-function logarithmicFade(distanceM:number, startM:number, fullM:number) {
-  if (distanceM <= startM) return 0;
-  if (distanceM >= fullM) return 1;
-  const t = (Math.log(distanceM) - Math.log(startM)) / (Math.log(fullM) - Math.log(startM));
-  return t * t * (3 - 2 * t);
 }

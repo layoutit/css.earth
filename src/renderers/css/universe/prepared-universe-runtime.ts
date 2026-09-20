@@ -333,17 +333,21 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       let publishedVolumeAlpha = NaN, publishedImageAlpha = NaN, publishedSkyAlpha = NaN;
       let publishedVolumeOpacity = NaN, publishedVolumeBrightness = NaN;
       let publishedVolumeVisible: boolean | undefined, publishedScale = '';
-      // Both cubes are angular maps observed from the Sun. Retire the entire sky over the
-      // existing nearby-star validity range instead of presenting that Solar view from
-      // another point in the Galaxy.
+      // The baked star cube holds the Sun's near stars. As the camera leaves the
+      // neighbourhood, it gives way to the plain Milky Way cube; that background
+      // remains until the prepared volume's completed contribution replaces it.
       let starsHandoff = 0;
       const publishBackground = () => {
         const brightness = volumeBrightness;
-        // The completed images contribute (1-t)*sky + t*b*volume. Factoring
-        // t*b onto the volume avoids nesting its exposure inside its handoff.
-        // Compensate the opaque sky underlay so its contribution stays 1-t.
+        // The volume's prepared exposure is part of its visible contribution. Keep the
+        // opaque sky underneath it until that completed contribution actually replaces it;
+        // fading the sky by raw volume opacity leaves a black trough while b is still low.
         const alpha = skyLayer ? volumeOpacity * brightness : volumeOpacity;
-        if (alpha !== publishedVolumeAlpha) { volumeHost.style.opacity = String(alpha); publishedVolumeAlpha = alpha; }
+        if (alpha !== publishedVolumeAlpha) {
+          volumeHost.style.opacity = String(alpha);
+          if (skyLayer) skyLayer.root.dataset.skyContribution = String(1 - alpha);
+          publishedVolumeAlpha = alpha;
+        }
         // The galaxy's own slices fade with its projected size; the matte and sky handoff do not.
         const imageAlpha = (skyLayer ? 1 : brightness) * volumeSize;
         if (imageAlpha !== publishedImageAlpha) {
@@ -351,9 +355,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           volumeImage.style.display = imageAlpha > 0 ? '' : 'none';
           publishedImageAlpha = imageAlpha;
         }
-        const skyContribution = (1 - volumeOpacity) * (1 - starsHandoff);
-        if (skyLayer) skyLayer.root.dataset.skyContribution = String(skyContribution);
-        const skyAlpha = alpha < 1 ? skyContribution / (1 - alpha) : 0;
+        const skyAlpha = 1;
         if (skyLayer && skyAlpha !== publishedSkyAlpha) { skyLayer.root.style.opacity = String(skyAlpha); publishedSkyAlpha = skyAlpha; }
       };
       const destroy = () => {
@@ -541,7 +543,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               volumeImage.dataset.volumeBrightness = String(volumeBrightness); publishedVolumeBrightness = volumeBrightness;
             }
             publishBackground();
-            skyLayer?.publish(world, viewport, (1 - volumeOpacity) * (1 - starsHandoff) > 0, 1 - starsHandoff);
+            skyLayer?.publish(world, viewport, publishedVolumeAlpha < 1, 1 - starsHandoff);
             if (volumeOpacity > 0 && volumeSize > 0) volumeLayer!.publish({ world, viewport });
             // A galaxy under a few projected pixels is its label: its bank fades, then
             // leaves layout and compositing. Like lens banks, a faded image bank does too.

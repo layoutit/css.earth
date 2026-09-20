@@ -96,12 +96,11 @@ try {
     await scrollTo(page, distance);
     snapshots[name] = await read(page);
     assert.ok(Math.abs(snapshots[name].volumeOpacity - opacity) < 1e-6, `${name}: actual volume opacity follows prepared profile`);
-    const skyValidity = 1 - logarithmicFade(distance * 1000, worldContext.stars.fadeStartDistanceM, worldContext.stars.fullDistanceM);
-    const skyContribution = (1 - opacity) * skyValidity;
+    const skyContribution = 1 - snapshots[name].volumeCompositeOpacity;
     assert.equal(snapshots[name].skyVisibility, skyContribution > 0 ? 'visible' : 'hidden');
     assert.ok(Math.abs(snapshots[name].volumeCompositeOpacity - opacity * snapshots[name].volumeBrightness) < 1e-6);
     assert.ok(Math.abs((1 - snapshots[name].volumeCompositeOpacity) * snapshots[name].skyOpacity - skyContribution) < 1e-6,
-      'actual background composition preserves the observer-valid Solar sky contribution');
+      'actual background composition stays continuous through the Milky Way handoff');
     assert.equal(snapshots[name].volumeImageOpacity, 1, 'exposure no longer nests inside the handoff');
     await page.screenshot({ path: resolve(output, `${name}.png`) });
   }
@@ -239,11 +238,4 @@ function assertPhysicalTranslation(before: Snapshot, after: Snapshot) {
       'volume translation must equal the actual observer displacement in the prepared physical scale');
     assert.ok(actual > 1e-4, 'volume projection must change during travel, even with fixed orientation');
   });
-}
-
-function logarithmicFade(distanceM:number, startM:number, fullM:number) {
-  if (distanceM <= startM) return 0;
-  if (distanceM >= fullM) return 1;
-  const t = (Math.log(distanceM) - Math.log(startM)) / (Math.log(fullM) - Math.log(startM));
-  return t * t * (3 - 2 * t);
 }
