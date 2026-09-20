@@ -502,6 +502,13 @@
   padding: 0;
   list-style: none;
 }
+.planet-sidebar .planet-object-results-scroll .planet-object-list[data-catalogue-window] {
+  position: relative;
+  display: block;
+}
+.planet-sidebar .planet-object-results-scroll .planet-object-list[data-catalogue-window] > .planet-object-item {
+  width: 100%;
+}
 .planet-object-results-scroll .planet-observation-control { text-decoration: none; }
 .planet-information-panel [data-information-panel="moons"] .planet-object-list {
   width: 100%;

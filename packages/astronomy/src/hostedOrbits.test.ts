@@ -90,6 +90,20 @@ describe('hosted orbits', () => {
     expect(hostedOrbitPhase(orbit, orbit.transitTimeBmjdTdb + 2400000.5 + 2.5 * orbit.periodDays) / (2 * Math.PI)).toBeCloseTo(2.5, 9)
     expect(hostedOrbitPhaseBmjdTdb(orbit, orbit.transitTimeBmjdTdb + 2.5 * orbit.periodDays) / (2 * Math.PI)).toBeCloseTo(2.5, 9)
   })
+  it('preserves the exact original propagator for circular source-pinned orbits', () => {
+    for (const id of HOSTED_PLANET_IDS) {
+      const orbit = hostedOrbit(id), host = starAstrometry(BODIES[id].parent as Parameters<typeof starAstrometry>[0])
+      const radiusKm = BODIES[BODIES[id].parent as keyof typeof BODIES].meanRadiusKm
+      const epochJdTt = orbit.transitTimeBmjdTdb + 2400000.5 + 1234.5 * orbit.periodDays
+      const a = orbit.semiMajorAxisStellarRadii * radiusKm, inclination = orbit.inclinationDegrees * (Math.PI / 180)
+      const phase = 2 * Math.PI * (epochJdTt - 2400000.5 - orbit.transitTimeBmjdTdb) / orbit.periodDays, rate = 2 * Math.PI / orbit.periodDays
+      const { x, y, z } = hostSkyFrame(host, orbit.ascendingNodePositionAngleDegrees)
+      const local = [a * Math.sin(phase), -a * Math.cos(inclination) * Math.cos(phase), a * Math.sin(inclination) * Math.cos(phase)]
+      const localVelocity = [a * rate * Math.cos(phase), a * rate * Math.cos(inclination) * Math.sin(phase), -a * rate * Math.sin(inclination) * Math.sin(phase)]
+      const toIcrf = (v: readonly number[]) => [0, 1, 2].map(axis => v[0]! * x[axis]! + v[1]! * y[axis]! + v[2]! * z[axis]!)
+      expect(hostedOrbitStateRelativeKm(orbit, host, radiusKm, epochJdTt), id).toEqual({ positionKm: toIcrf(local), velocityKmPerDay: toIcrf(localVelocity) })
+    }
+  })
   it('propagates an eccentric orbit periodically with variable radius and speed', () => {
     const star = starAstrometry('wasp-43'), a = eccentricOrbit.semiMajorAxisStellarRadii * hostRadiusKm
     const omega = eccentricOrbit.argumentOfPeriapsisDegrees! * Math.PI / 180, e = eccentricOrbit.eccentricity

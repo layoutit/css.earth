@@ -122,7 +122,7 @@ The navigation file pins SPICE kernels and chooses WCS or a supported fitted dis
 the target's existing css.earth standard sphere and physical scale. CSS, JavaScript
 and base64 images are embedded. The projection ellipsoid is recorded separately. Projection preserves
 unknown beam resolution and does not qualify scientific publication. See the
-[navigation contract and oracle](../../docs/virtual-telescopes.md#from-a-measurement-to-a-surface-and-sphere).
+[navigation contract and oracle](../../docs/virtual-telescopes.md#projection-and-sphere).
 Physical 3D handoffs use an existing `point-field` or `density-volume` object package:
 
 ```sh
