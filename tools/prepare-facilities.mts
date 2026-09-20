@@ -1,5 +1,6 @@
 import { sha256 } from '../src/platform/sha256.mts';
 import { prepareContextProvenance, contextProvenanceCompilerClosure } from './prepare-context-provenance.mts';
+import { readPreparedContextProvenance } from './read-prepared-context-provenance.mts';
 import { spatialSourceCitations } from './spatial-source-citations.mts';
 import { sourceResolver, parseSourceBinding } from '../src/platform/source-catalog.mts';
 import { compileSourceUsage } from '../src/platform/source-usage.mts';
@@ -143,7 +144,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   // and previews from their sources, but catalog-only publication must never invent a second package identity.
   const volumes = publish === 'catalogues'
     ? [...await readPreparedVolumeProvenance({ root, input }),
-      ...((await prepareContextProvenance({ root, input })).map(context => ({ ...context, outputs: [] })))]
+      ...await readPreparedContextProvenance({ root, input })]
     : [...await prepareVolumeProvenance({ root, input, mirrorOrigin }), ...await prepareContextProvenance({ root, input })];
   for (const volume of volumes) {
     const document = validateObjectProvenance(volume.provenance, volume.id);
