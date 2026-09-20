@@ -3,6 +3,7 @@
 import { spawn } from 'node:child_process';
 import { requireArray, requireRecord, requireString } from '../../source-values.mts';
 import { astroqueryToolchain } from './toolchain.mts';
+export class ArchiveTransportError extends Error {}
 
 export type HorizonsEpochs = readonly number[] | { readonly start: string; readonly stop: string; readonly step: string };
 export type AstroqueryRequest =
@@ -65,8 +66,12 @@ answer = {'schema': 'cssearth-astroquery-answer@2', 'astroquery': astroquery.__v
 
 if operation == 'mast-service':
     from astroquery.mast import Mast
-    table = Mast.service_request(request['service'], request['parameters'], pagesize=request.get('pagesize'), page=request.get('page'))
-    answer['rows'] = rows(table)
+    from requests.exceptions import ConnectionError, Timeout, HTTPError
+    try:
+        table = Mast.service_request(request['service'], request['parameters'], pagesize=request.get('pagesize'), page=request.get('page'))
+        answer['rows'] = rows(table)
+    except (ConnectionError, Timeout, HTTPError) as error:
+        answer['transportError'] = str(error)
 elif operation == 'mast-download':
     from astroquery.mast import Observations
     class ProgressToStderr:
@@ -163,6 +168,7 @@ export function parseAstroqueryAnswer(value: unknown, request: AstroqueryRequest
   const raw = requireRecord(value, 'Astroquery answer');
   if (raw.schema !== 'cssearth-astroquery-answer@2' || raw.astroquery !== version || raw.operation !== request.operation)
     throw new TypeError(`Astroquery answered with the wrong contract, version or operation.`);
+  if (request.operation === 'mast-service' && raw.transportError !== undefined) throw new ArchiveTransportError(requireString(raw.transportError, 'MAST transport failure'));
   if (request.operation === 'tap-query' && raw.pyvo !== pyvoVersion) throw new TypeError('PyVO answered with the wrong version.');
   const expectsRows = request.operation !== 'mast-download' && !((request.operation === 'horizons-ephemerides' || request.operation === 'horizons-vectors') && request.raw);
   if (expectsRows && raw.rows === undefined) throw new TypeError(`Astroquery ${request.operation} returned no rows field.`);

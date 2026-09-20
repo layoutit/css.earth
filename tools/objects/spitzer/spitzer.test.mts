@@ -293,10 +293,12 @@ test('a checked mosaic carries its evidence on its own record, and evidence neve
   assert.deepEqual(evidenceFor((await readProductRecord(recordPath))!, mosaic, 'archive-agreement'), []);
 
   const entry = archiveAgreement(pinnedProgram, channel, 'SPITZER_I1_4416768_0000_7_E8348771_maic.fits', mosaic);
+  await writeFile(resolve(work, entry.receipt), '{}');
   await addProductEvidence(recordPath, [entry], path => resolve(work, path));
   const checked = evidenceFor((await readProductRecord(recordPath))!, mosaic, 'archive-agreement');
   assert.equal(checked.length, 1);
-  assert.equal(checked[0]!.receipt, 'ngc3132-4416768.ch1.remosaic.reproduction.json');
+  assert.ok(checked[0]!.receiptPin);
+  assert.ok(checked[0]!.receipt.endsWith('.evidence.json'));
   assert.match(checked[0]!.establishes, /NON-official/u);
   assert.match(checked[0]!.establishes, /MOPEX did not run here/u);
   // Evidence of another kind, or about another product, does not answer for this one.

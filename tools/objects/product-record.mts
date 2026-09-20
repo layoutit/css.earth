@@ -15,6 +15,7 @@
  * may reuse an existing output only when the record beside it says the same inputs, parameters and software made it
  * (`sameRun`). Records hold no clock time, so the same run writes the same bytes. */
 import { readFile, writeFile } from 'node:fs/promises';
+import { basename, dirname, resolve } from 'node:path';
 import { sha256, sha256File } from '../../src/platform/sha256.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../source-values.mts';
 
@@ -32,7 +33,7 @@ export type EvidenceKind = typeof EVIDENCE_KINDS[number];
 export interface ProductInput { readonly role: string; readonly identity: string; readonly bytes: number; readonly sha256: string }
 export interface ProductSoftware { readonly name: string; readonly version: string }
 export interface ProductOutput { readonly path: string; readonly bytes: number; readonly sha256: string; readonly units?: string; readonly conventions?: Readonly<Record<string, string>> }
-export interface ProductEvidence { readonly kind: EvidenceKind; readonly receipt: string; readonly product: string; readonly establishes: string }
+export interface ProductEvidence { readonly kind: EvidenceKind; readonly receipt: string; readonly receiptPin?: { readonly bytes: number; readonly sha256: string }; readonly product: string; readonly establishes: string }
 /** What identifies a run: the same run makes the same outputs. */
 export interface ProductRun {
   readonly telescope: string; readonly stage: string;
@@ -73,7 +74,10 @@ export function parseProductRecord(value: unknown): ProductRecord {
     if (!(EVIDENCE_KINDS as readonly string[]).includes(kind)) throw new TypeError(`Evidence ${index} has no known kind (${kind}).`);
     const product = requireString(entry.product, 'evidence product');
     if (!outputs.some(output => output.path === product)) throw new TypeError(`Evidence ${index} names ${product}, which this record did not produce.`);
-    return { kind: kind as EvidenceKind, receipt: requireString(entry.receipt, 'evidence receipt'), product, establishes: requireString(entry.establishes, 'evidence establishes') }; });
+    const pin = entry.receiptPin === undefined ? undefined : requireRecord(entry.receiptPin, 'receipt pin');
+    return { kind: kind as EvidenceKind, receipt: requireString(entry.receipt, 'evidence receipt'),
+      ...(pin ? { receiptPin: pinned({ bytes: requireFiniteNumber(pin.bytes, 'receipt bytes'), sha256: requireString(pin.sha256, 'receipt digest') }, 'Receipt') } : {}),
+      product, establishes: requireString(entry.establishes, 'evidence establishes') }; });
   if (!outputs.length) throw new TypeError('A product record names at least one output.');
   return { schema: PRODUCT_RECORD_SCHEMA, telescope: requireString(record.telescope, 'telescope'), stage: requireString(record.stage, 'stage'), inputs, parameters: requireRecord(record.parameters, 'parameters'), software,
     ...(record.toolchainDigest === undefined ? {} : { toolchainDigest: requireString(record.toolchainDigest, 'toolchainDigest') }), outputs, evidence };
@@ -113,6 +117,10 @@ export async function sameRun(record: ProductRecord | null, run: ProductRun, loc
     const found = await pinFile(locate(output.path)).catch(() => null);
     if (!found || found.bytes !== output.bytes || found.sha256 !== output.sha256) return false;
   }
+  for (const entry of record.evidence) if (entry.receiptPin) {
+    const found = await pinFile(locate(entry.receipt)).catch(() => null);
+    if (!found || found.bytes !== entry.receiptPin.bytes || found.sha256 !== entry.receiptPin.sha256) return false;
+  }
   return true;
 }
 
@@ -124,12 +132,22 @@ export const productRecordPath = (product: string): string => `${product}.produc
  * Only the evidence list is written, so the run facts stay the ones that run recorded. The outputs must still be the files the
  * record pins, or the check was of something else. Re-running a check replaces its own entry rather than adding a second, so a
  * comparison run twice leaves the same bytes. */
-export async function addProductEvidence(path: string, entries: readonly ProductEvidence[], locate: (output: string) => string): Promise<ProductRecord> {
+export async function addProductEvidence(path: string, entries: readonly ProductEvidence[], locate: (output: string) => string,
+  locateReceipt = (receipt: string) => resolve(dirname(path), receipt)): Promise<ProductRecord> {
   const record = await readProductRecord(path);
   if (!record) throw new Error(`There is no product record at ${path}: the stage that made this product writes one, and evidence is added to it.`);
   if (!await sameRun(record, record, locate)) throw new Error(`The products ${path} records are not the files on disk now; evidence about other files is refused.`);
-  const kept = record.evidence.filter(held => !entries.some(added => added.kind === held.kind && added.product === held.product && added.receipt === held.receipt));
-  const updated = parseProductRecord({ ...record, evidence: [...kept, ...entries] });
+  const pinned = await Promise.all(entries.map(async entry => {
+    const bytes = await readFile(locateReceipt(entry.receipt)), digest = sha256(bytes);
+    const receipt = `${basename(entry.product)}.${digest}.evidence.json`, destination = resolve(dirname(path), receipt);
+    // An immutable snapshot stays beside the exact product; latest/index receipts may subsequently change.
+    await writeFile(destination, bytes, { flag: 'wx' }).catch(async (error: unknown) => {
+      if ((error as NodeJS.ErrnoException).code !== 'EEXIST' || sha256(await readFile(destination)) !== digest) throw error;
+    });
+    return { ...entry, receipt, receiptPin: { bytes: bytes.length, sha256: digest } };
+  }));
+  const kept = record.evidence.filter(held => !pinned.some(added => added.kind === held.kind && added.product === held.product && (!held.receiptPin || added.receipt === held.receipt)));
+  const updated = parseProductRecord({ ...record, evidence: [...kept, ...pinned] });
   await writeFile(path, `${JSON.stringify(updated, null, 2)}\n`);
   return updated;
 }

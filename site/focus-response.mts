@@ -5,7 +5,7 @@ import { loadPreparedVolumeLenses, createPreparedVolumeLenses } from '../src/ren
 import { worldCameraFromCenteredPresentation, presentWorldCamera, createWorldSelectionTarget, savedWorldCamera } from '../src/renderers/css/dist/navigation.js';
 import type { PreparedWorldCameraFrame, SharedView } from '../src/renderers/css/dist/navigation.js';
 import type { ObjectRuntimeDefinition } from '../src/renderers/css/runtime/object-runtime-types.js';
-import { loadFocusCatalogs } from './focus-catalog.mts';
+import { initialFocusCatalog, loadFocusCatalogs } from './focus-catalog.mts';
 import { record, requiredElement } from './browser-types.mts';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
 
@@ -76,8 +76,8 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
   });
   card.set(selected, catalog.sources.filter(source => refs.some(ref => ref === source.id || ref?.startsWith(`${source.id}:`))), presentation);
   card.destroy(); root.hidden = false;
-  const initial = shell.createElement('script'); initial.type = 'application/json'; initial.dataset.initialFocus = '';
-  initial.textContent = JSON.stringify({ ...catalog, objects: [selected] }).replace(/</gu, '\\u003c'); root.append(initial);
+  const initial = shell.createElement('script'); initial.type = 'application/json'; initial.dataset.initialFocus = selected.id;
+  initial.textContent = JSON.stringify(initialFocusCatalog(catalog, selected)).replace(/</gu, '\\u003c'); root.append(initial);
   requiredElement<HTMLInputElement>(shell, '.planet-sidebar-search').setAttribute('value', selected.name);
   requiredElement(shell, '.planet-sheet-handle').setAttribute('checked', '');
   return saved;

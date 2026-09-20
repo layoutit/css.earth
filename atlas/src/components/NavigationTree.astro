@@ -1,0 +1,20 @@
+---
+import '../navigation-tree.css';
+import TreeItem from './TreeItem.astro';
+import { atlasTree, readObjects } from '../objects.mts';
+import { navigationTreeArtifact } from '../navigation-tree-data.mts';
+
+interface Props { current: string; bounded?: boolean }
+
+const { current, bounded = false } = Astro.props;
+// One owner for the Atlas hierarchy. The Atlas site and the application shell
+// render this component directly; neither keeps a parallel navigation tree.
+const tree = atlasTree(readObjects());
+const artifact = bounded ? navigationTreeArtifact(tree) : null;
+---
+<div class="atlas-tree-card" data-object-navigation-tree data-atlas-current={current}
+  data-atlas-tree-src={artifact?.url} data-atlas-tree-sha256={artifact?.sha256} data-atlas-tree-bytes={artifact?.bytes}>
+  <ul class="atlas-tree top-level">
+    {tree.map(node => <li><TreeItem node={node} current={current} depth={0} {bounded} assetOrigin={bounded ? '' : undefined} /></li>)}
+  </ul>
+</div>

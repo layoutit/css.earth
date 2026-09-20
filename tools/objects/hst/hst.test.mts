@@ -383,11 +383,11 @@ test('the comparison adds its receipt to the record of the exact product it comp
   const work = await mkdtemp(join(tmpdir(), 'hst-evidence-'));
   try {
     const product = await calibratedProduct(work), name = 'od9l12010_flt.fits';
-    const receiptPath = 'tools/objects/hst/programs/test.od9l12010_flt.reproduction.json';
+    const receiptPath = join(work, 'comparison.json'); await writeFile(receiptPath, '{}');
     const record = await addArchiveAgreement(work, name, receiptPath);
     const agreement = evidenceFor(record, name, 'archive-agreement');
     assert.equal(agreement.length, 1);
-    assert.equal(agreement[0]!.receipt, receiptPath);
+    assert.ok(agreement[0]!.receiptPin);
     assert.match(agreement[0]!.establishes, /reproduces what MAST distributes/u);
     assert.equal(evidenceFor(record, name, 'internal-consistency').length, 0, 'agreement with the archive is not consistency of our own');
     // The same comparison run again says the same thing once, rather than twice.

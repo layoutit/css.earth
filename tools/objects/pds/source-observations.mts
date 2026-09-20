@@ -38,10 +38,6 @@ export interface SourcePds3Observation {
   readonly sourceFiles: readonly { readonly role: 'label' | 'science'; readonly path: string; readonly origin: string; readonly bytes: number; readonly sha256: string }[];
 }
 
-export interface SourcePds3Capability {
-  readonly telescope: string; readonly mode: string; readonly kinds: readonly ['image']; readonly citation: string; readonly note: string;
-}
-
 /** Read only complete detached-image pairs whose label bytes and absent-or-present science bytes are exactly pinned. */
 export async function sourcePds3Observations(root: string, targetId: string): Promise<SourcePds3Observation[]> {
   const sourceRoot = resolve(root, 'src/objects', targetId, 'source');
@@ -82,7 +78,7 @@ export async function sourcePds3Observations(root: string, targetId: string): Pr
       observatory: title(host), instrument, startIso: iso(field('START_TIME'), 'START_TIME'), endIso: iso(field('STOP_TIME'), 'STOP_TIME'),
       ...(filter === undefined ? {} : { filter }), ...(center === undefined ? {} : { centralWavelengthMicrometres: convert(center, 'CENTER_FILTER_WAVELENGTH', WAVELENGTH_TO_MICROMETRES) }),
       ...(surfaceResolutionKm === undefined ? {} : { surfaceResolutionKm }), kind: 'image',
-      use: 'Source-pinned calibrated PDS3 image. Its detached label establishes identity, time, filter, units and surface sampling; filter width and achieved optical resolution remain unstated.',
+      use: 'Source-pinned PDS3 image. Its detached label establishes identity, time, filter, units and surface sampling; filter width and achieved optical resolution remain unstated.',
       units: pds3Keyword(label, 'UNIT', ['IMAGE']) ?? pds3Keyword(label, 'UNITS', ['IMAGE']) ?? 'not stated',
       sourceFiles: [
         { role: 'label', path: `src/objects/${targetId}/source/${labelPath}`, origin: requireString(labelInput.origin, `${labelPath} origin`), bytes: expectedLabelBytes, sha256: expectedLabelSha },
@@ -90,37 +86,4 @@ export async function sourcePds3Observations(root: string, targetId: string): Pr
       ] });
   }
   return observations.sort((a, b) => a.startIso.localeCompare(b.startIso) || a.id.localeCompare(b.id));
-}
-
-/** Merge source-owned products into the PDS query view. This mutates neither the archive snapshot nor the source manifest. */
-export function withSourcePds3Observations(value: unknown, targetId: string, observations: readonly SourcePds3Observation[]): unknown {
-  if (!observations.length) return value;
-  const ledger = requireRecord(value, 'PDS ledger');
-  if (ledger.schema !== 'cssearth-pds-ledger@1') throw new TypeError('Source PDS3 observations require the PDS ledger schema.');
-  const modes = requireArray(ledger.modes, 'PDS modes').map(raw => ({ ...requireRecord(raw, 'PDS mode') }));
-  for (const observation of observations) {
-    let mode = modes.find(entry => entry.telescope === observation.telescope && entry.mode === observation.mode);
-    if (!mode) { mode = { telescope: observation.telescope, mode: observation.mode, programs: [], qualified: [], receipts: [], tool: 'pds.pdr' }; modes.push(mode); }
-    const programs = requireArray(mode.programs, 'PDS programs');
-    if (!programs.includes(observation.program)) mode.programs = [...programs, observation.program];
-  }
-  const objects = requireArray(ledger.objects, 'PDS objects').map(raw => ({ ...requireRecord(raw, 'PDS object') }));
-  const existing = objects.find(entry => entry.id === targetId), records = existing ? requireArray(existing.observations, 'PDS observations') : [];
-  const sourceIds = new Set(observations.map(observation => observation.archiveProductId));
-  const merged = [...records.filter(raw => !sourceIds.has(String(requireRecord(raw, 'PDS observation').archiveProductId))), ...observations];
-  if (existing) existing.observations = merged;
-  else objects.push({ id: targetId, observations: merged });
-  return { ...ledger, modes, objects };
-}
-
-/** Exact product labels establish product kind, while deliberately leaving undocumented mode-wide wavelength limits absent. */
-export function sourcePds3Capabilities(observations: readonly SourcePds3Observation[]): SourcePds3Capability[] {
-  const capabilities = new Map<string, SourcePds3Capability>();
-  for (const observation of observations) {
-    const key = `${observation.telescope} :: ${observation.mode}`;
-    if (capabilities.has(key)) continue;
-    capabilities.set(key, { telescope: observation.telescope, mode: observation.mode, kinds: ['image'], citation: observation.sourceFiles[0]!.origin,
-      note: 'The exact PDS3 product identifies an image and its filter. No mode-wide wavelength interval or optical resolution is inferred when its label does not state one.' });
-  }
-  return [...capabilities.values()];
 }

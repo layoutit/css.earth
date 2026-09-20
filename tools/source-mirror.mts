@@ -4,7 +4,7 @@
 // blocking a build.
 import { PassThrough, Readable, Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
-import { RUNTIME_ASSET_ORIGIN } from './runtime-assets.mts';
+import { RUNTIME_ASSET_ORIGIN } from './asset-origin.mts';
 export { RUNTIME_ASSET_ORIGIN };
 
 /** `source-cache/<sha256>/<filename>`, percent-encoding the filename segment (it can carry spaces or other

@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-jwst-imaging-program@1",
+  "id": "makemake-jw01254-o004_t001_nirspec_g235m-f170lp",
+  "programme": "1254",
+  "target": "MAKEMAKE",
+  "crdsContext": "jwst_1535.pmap",
+  "bands": [
+    {
+      "band": "NIRSPEC-G235M-F170LP",
+      "observation": "jw01254-o004_t001_nirspec_g235m-f170lp",
+      "level3": {
+        "name": "jw01254-o004_t001_nirspec_g235m-f170lp_s3d.fits",
+        "uri": "mast:JWST/product/jw01254-o004_t001_nirspec_g235m-f170lp_s3d.fits",
+        "bytes": 92485440
+      },
+      "association": {
+        "name": "jw01254-o004_20260708t142150_spec3_00002_asn.json",
+        "uri": "mast:JWST/product/jw01254-o004_20260708t142150_spec3_00002_asn.json",
+        "bytes": 2146
+      },
+      "stage": "spec3",
+      "members": [
+        {
+          "name": "jw01254004001_02103_00001_nrs1_cal.fits",
+          "uri": "mast:JWST/product/jw01254004001_02103_00001_nrs1_cal.fits",
+          "bytes": 203051520,
+          "sha256": "46fd39a7335fcff8e46048688419eeb7b77f3444ac9f6ea7ec63460961e84701"
+        },
+        {
+          "name": "jw01254004001_02103_00002_nrs1_cal.fits",
+          "uri": "mast:JWST/product/jw01254004001_02103_00002_nrs1_cal.fits",
+          "bytes": 203051520,
+          "sha256": "95e7c4a45bde34311d55c3c43a52fcfe4d730fe3cc8f5657fc9883ab511518f6"
+        }
+      ]
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import { mountPreparedCssSky, preparedSkyCameraTransform } from './prepared-sky-
 import { validatePreparedCssSky } from './validation.js';
 import type { PreparedCssSky } from './types.js';
 import type { PreparedCssVolume } from '../volume/types.js';
+import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 import type { PreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
@@ -14,10 +15,12 @@ import { logarithmicFade } from '../universe/prepared-world-context.js';
 import { readCanonicalPointField } from '../preparation/stars/canonical-point-field-fixture.js';
 
 const spatialPublish = vi.hoisted(() => vi.fn());
+const catalogMount = vi.hoisted(() => vi.fn());
 const foregroundRects = vi.hoisted(() => [{ left: 100, top: 100, right: 150, bottom: 114 }]);
 // These unrelated layers keep their normal publication contract; the test mounts
 // the actual universe, sky and volume compositor without building a star catalogue.
 vi.mock('../universe/world-context-point-source.js', () => ({ mountWorldContextPointSource: () => null }));
+vi.mock('../universe/prepared-galaxy-catalog.js', () => ({ mountPreparedGalaxyCatalog: catalogMount }));
 vi.mock('../universe/prepared-world-context.js', async importOriginal => ({ ...await importOriginal<typeof import('../universe/prepared-world-context.js')>(),
   mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, backgroundExclusionRects: () => foregroundRects, destroy() {} }) }));
 
@@ -58,7 +61,34 @@ class FakeWindow {
   cancelAnimationFrame = (id: number) => { this.pending.delete(id); };
 }
 class FakeDocument { count = 0; defaultView = new FakeWindow(); querySelectorAll(_selector: string): FakeElement[] { return []; } createElement(tag = 'div'): FakeElement { this.count++; return new FakeElement(this, tag); } }
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => { vi.unstubAllGlobals(); catalogMount.mockReset(); });
+
+test('cold bootstrap keeps catalogue and image banks descriptor-only, then reuses their first navigation load', async () => {
+  vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
+  const base = new URL('../../../', import.meta.url);
+  const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const image: PreparedCssImageLayers = { ...volume, id: 'lazy-image', bankViews: volume.stacks.map(stack => ({ axis: stack.axis,
+    normalUnits: stack.axis === 'x' ? [1, 0, 0] : stack.axis === 'y' ? [0, 1, 0] : [0, 0, 1], samplingStepUnits: 1 })) };
+  const loadImageLayer = vi.fn(async () => ({ payload: image, resolveResource: (path: string) => `/image/${path}` }));
+  const catalogRuntime = { destroy: vi.fn(), select: vi.fn(), resolve: vi.fn(), publish: vi.fn(), inspect: vi.fn(() => ({ count: 0 })) };
+  catalogMount.mockReturnValue(catalogRuntime);
+  const loadCatalog = vi.fn(async () => ({ payload: {}, fadeStartDistanceM: 10, fullDistanceM: 20 }));
+  const document = new FakeDocument(), stage = document.createElement();
+  const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
+    resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
+    imageLayerBanks: [{ id: image.id, frame: image.frame }], loadImageLayer,
+    catalogBank: { fadeStartDistanceM: 10, fullDistanceM: 20 }, loadCatalog });
+  const mounted = universe.mount(stage as unknown as HTMLElement), root = mounted.root as unknown as FakeElement;
+  expect(loadImageLayer).not.toHaveBeenCalled(); expect(loadCatalog).not.toHaveBeenCalled();
+  expect(root.dataset).toMatchObject({ imageLayerDeclaredBankCount: '1', imageLayerResidentBankCount: '0', catalogResident: 'false' });
+  await Promise.all([mounted.ensureGalaxyCatalog(), mounted.ensureGalaxyCatalog(), mounted.ensureImageLayer(image.id), mounted.ensureImageLayer(image.id)]);
+  expect(loadCatalog).toHaveBeenCalledTimes(1); expect(loadImageLayer).toHaveBeenCalledTimes(1); expect(catalogMount).toHaveBeenCalledTimes(1);
+  expect(root.dataset).toMatchObject({ imageLayerResidentBankCount: '1', imageLayerLoadingBankCount: '0', catalogResident: 'true', catalogLoading: 'false' });
+  await mounted.ensureGalaxyCatalog(); await mounted.ensureImageLayer(image.id);
+  expect(loadCatalog).toHaveBeenCalledTimes(1); expect(loadImageLayer).toHaveBeenCalledTimes(1);
+  mounted.destroy(); expect(catalogRuntime.destroy).toHaveBeenCalledTimes(1);
+});
 
 test('retains exactly six prepared images and changes only shared camera presentation during travel and rotation', () => {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
@@ -388,6 +418,72 @@ test('selecting a nebula loads its bank on demand even while it is out of view',
     expect(loadVolumeLens).toHaveBeenCalledExactlyOnceWith(bank.id);
     await vi.waitFor(() => expect(mounted.volumeLensState(bank.id)).not.toBeNull());
     expect(mounted.volumeLensState(bank.id)!.selectedLens).toBe('optical');
+  } finally { mounted.destroy(); }
+});
+
+test('hidden lens banks are bounded, active subscriptions pin them, and eviction reloads saved presentation', async () => {
+  vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
+  const base = new URL('../../../', import.meta.url), parsecM = 3.085677581491367e16;
+  const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const makeBank = (id: string, distancePc: number): PreparedVolumeLenses => {
+    const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
+      originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distancePc * parsecM],
+      localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: .1 * parsecM,
+      boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };
+    const prepared = (lensId: string): PreparedCssVolume => ({ schema: 'cssearth-css-volume@1', id: `${id}-${lensId}`, frame, anchors: [],
+      stacks: (['x', 'y', 'z'] as const).map(axis => ({ axis, leaves: [{ id: `${axis}-0`, centerUnits: [0, 0, 0],
+        texturePath: `${lensId}/${axis}.webp`, widthPx: 1, heightPx: 1,
+        style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
+          backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
+      resources: ['x', 'y', 'z'].map(axis => ({ path: `${lensId}/${axis}.webp`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })),
+      provenance: {}, approximation: {} });
+    return { schema: 'cssearth-volume-lenses@1', id, defaultLens: 'optical', framingRadiusUnits: 1, contextVisibility: 'independent',
+      lenses: ['optical', 'infrared'].map(lensId => ({ id: lensId, label: lensId, title: `${lensId} emission`,
+        description: `${id} prepared observation`, sourceUrl: 'https://example.org/nebula', volume: prepared(lensId),
+        brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } })) };
+  };
+  const banks = [makeBank('near-bank', 50), makeBank('far-bank', 100)], byId = new Map(banks.map(bank => [bank.id, bank]));
+  const loadVolumeLens = vi.fn(async (id: string) => ({ payload: byId.get(id)!, resolveResource: (path: string) => `/nebula/${id}/${path}` }));
+  const document = new FakeDocument(), stage = document.createElement();
+  const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
+    resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
+    volumeLensBanks: banks.map(bank => ({ id: bank.id, frame: bank.lenses[0]!.volume.frame })), loadVolumeLens,
+    warmVolumeLensDomNodeBudget: 0 });
+  const mounted = universe.mount(stage as unknown as HTMLElement);
+  try {
+    mounted.selectVolumeLens('near-bank', 'infrared');
+    mounted.setVolumeStarsVisible('near-bank', false);
+    const releaseNear = mounted.subscribeVolumeLens('near-bank', () => {});
+    await vi.waitFor(() => expect(mounted.volumeLensState('near-bank')).not.toBeNull());
+    const camera = (distancePc: number): WorldCameraPose => ({ referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
+      pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distancePc * parsecM],
+        orientationXyzw: [0, 0, 0, 1] } });
+    mounted.publish(camera(52), viewport);
+    mounted.publish(camera(102), viewport);
+    await vi.waitFor(() => expect(mounted.volumeLensState('far-bank')).not.toBeNull());
+    mounted.publish(camera(102), viewport);
+    expect(mounted.volumeLensState('near-bank')).not.toBeNull();
+    expect((mounted.root as unknown as FakeElement).dataset).toMatchObject({ volumeLensPinnedBankCount: '1', volumeLensWarmDomNodeBudget: '0' });
+
+    releaseNear();
+    expect(mounted.volumeLensState('near-bank')).toBeNull();
+    expect((mounted.root as unknown as FakeElement).dataset.volumeLensWarmDomNodes).toBe('0');
+
+    const releaseReloaded = mounted.subscribeVolumeLens('near-bank', () => {});
+    await vi.waitFor(() => expect(mounted.volumeLensState('near-bank')).not.toBeNull());
+    expect(mounted.volumeLensState('near-bank')).toMatchObject({ selectedLens: 'infrared', starsVisible: false });
+    expect(loadVolumeLens.mock.calls.filter(([id]) => id === 'near-bank')).toHaveLength(2);
+    releaseReloaded();
+    expect(mounted.volumeLensState('near-bank')).toBeNull();
+
+    // A hidden, unpinned explicit load is trimmed when it settles; eviction does
+    // not need another camera publication to enforce the warm budget.
+    mounted.selectVolumeLens('near-bank', 'optical');
+    await vi.waitFor(() => expect(loadVolumeLens.mock.calls.filter(([id]) => id === 'near-bank')).toHaveLength(3));
+    await loadVolumeLens.mock.results.at(-1)!.value; await Promise.resolve(); await Promise.resolve();
+    expect(mounted.volumeLensState('near-bank')).toBeNull();
+    expect((mounted.root as unknown as FakeElement).dataset.volumeLensWarmDomNodes).toBe('0');
   } finally { mounted.destroy(); }
 });
 

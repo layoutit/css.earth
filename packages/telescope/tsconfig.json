@@ -1,0 +1,11 @@
+{
+  "extends": "../../tools/tsconfig.json",
+  "compilerOptions": {
+    "incremental": false
+  },
+  "include": [
+    "src/**/*.mts",
+    "build.mts"
+  ],
+  "exclude": []
+}

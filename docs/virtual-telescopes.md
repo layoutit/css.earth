@@ -14,6 +14,212 @@ One route does none of that on purpose. Where an observatory has retired a pipel
 to run again, and the archive's own final product is all there is. That product is pinned and read whole rather than re-made,
 and the difference is kept visible everywhere: see [two capabilities, never one](#two-capabilities-never-one).
 
+## Saved questions with the Telescope CLI
+
+`pnpm telescope` provides a saved query and retrieval workflow over this API. The
+`@cssearth/telescope` npm package exposes the same command as `telescope`; it uses an
+existing css.earth science workspace for the catalogue, archive clients and instrument
+pipelines. See [package setup](../packages/telescope/README.md). It does not bundle
+Python environments or download the repository during installation.
+
+```sh
+pnpm telescope query eris --wavelength 2.2,2.4 --kind cube \
+  --any-time --min-arcsec 1 --out output/eris-query
+pnpm telescope get output/eris-query --pick 1
+```
+
+Choose a number from the saved observation list. `get` reloads the same target and
+observation identity, uses the current qualification action, and reassesses the original
+question. It does not execute commands from the saved JSON. Archive changes can make a
+choice unavailable, in which case a new query is required. A declared wavelength or
+resolution never becomes verified merely because a file was decoded.
+
+The delivery contains the native product's complete recorded output set (including
+pinned labels and dependencies), evidence, SHA-256 pins and a `result.json` verdict.
+For the repository script, use `pnpm --silent telescope … --json` to suppress pnpm’s own preamble.
+Progress goes to stderr; `--json` keeps stdout machine-readable, including when a
+native reducer prints to its inherited stdout. `--verbose` retains the full query report.
+Exit 3 can accompany a valid delivered cube: it means scientific requirements remain
+unresolved. Repeating `get` revalidates current qualifications and the exported files
+before reporting reuse. It refuses modified deliveries rather than overwriting them.
+Queries preserve their numbered choices; reuse an existing query directory with `get`,
+not another `query`. Interrupted operations retain a PID-bearing `.session.lock`;
+inspect that process before removing a stale lock. Qualifications share a workspace
+lock because current reducers update shared archive records.
+
+Current source-qualified products also use the common selected-artifact interface.
+Their existing receipt and decoded facts supply the reference, without copying
+unverified wavelength or resolution declarations into the verified facts.
+
+## Package-owned observations through the same API
+
+`telescope:query` also reads exact observations already pinned in each object's source package.
+These observations do not need a new telescope adapter or a synthetic archive ledger. An optional
+`src/objects/<target>/source/observations.json` uses schema `cssearth-source-observations@1` and
+references input IDs in the existing source manifest. The declaration supplies the instrument,
+mode, native product kind, exact archive identity, decoder, header assertions, measurement meaning,
+units, citation and explicit limitations. Optional wavelength intervals, UTC time bounds and achieved-resolution fields can support request fulfillment. Achieved resolution requires a stated measurement basis; source sampling is never promoted into that field. Hashes and sizes remain in the manifest.
+
+The available decoders are numeric FITS images/cubes (including supported RICE compression) and
+supported PDS3/PDS4 images, cubes and tables through pinned `pdr`. ISIS3 Real cores use the
+shared tiled/band-sequential raster decoder, including multiband cores and detached pinned data. Source intake reads bounded headers
+from manifest-pinned FITS and attached or detached PDS products to produce this same contract
+automatically. Local headers are preferred; retrieved headers are cached with origin, time and
+digest. Header discovery does not verify the complete file. The query reports `sourceIntakeIssues`
+for unavailable, unsupported or incomplete inputs, rather than treating them as empty archives.
+Labels and dependencies can be pinned under `inputs`, `documents` or `generatedIntermediates`.
+Origin requests reuse matching download headers from the existing acquisition plan; those headers
+are not sent to the source mirror. Every referenced input must be pinned, including detached labels, metadata and
+external format definitions. PDS pointers to files outside that set are refused before decoding.
+Adding an unsupported format still requires a decoder; declaring a format does not implement it.
+For explicit `pds-product` declarations, `labelPath` identifies a pinned label relative to the
+source directory; it may name the science input itself for an attached-label product. Tables retain
+`pdr` column types and decoded values; array scaling and missing-value handling are reported separately.
+
+For example:
+
+```sh
+pnpm telescope:query --target sun --wavelength 0.0170,0.0172 \
+  --any-time --min-arcsec 2 --kind image --result telescope-product --json
+```
+
+Execute one of the returned `qualificationActions` exactly as emitted. The action verifies/acquires
+its entire input set, checks declared FITS/PDS identity fields, decodes the native samples, and writes
+`output/telescopes/<target>/<observation>/qualification.product.json` and `decoded.json`. Downloads
+report each 10 MB to stderr. The science product remains the original file, with its original grid
+and missing values. The decoded report contains full-array statistics, metadata and limitations.
+
+Run the same query again: a current receipt exposes a selectable program. `source-qualified` means
+**pinned source bytes and decoding**, with production method `archive-retrieval` and evidence
+`archive-origin`. It does not claim archive-final calibration, a reproduced pipeline, agreement
+with another reduction, or a scientifically qualified surface map. `package-sources` coverage is
+separate from the archive's search coverage and never asserts that the archive was fully searched.
+
+Qualification reuse checks the complete input pins, observation parameters, implementation digest,
+runtime and output bytes. Changed or missing files invalidate the receipt. A mode with one qualified
+observation still offers actions for its other observations.
+
+### Verified product versus answered question
+
+The public qualifier records a small, immutable result under
+`output/telescopes/<target>/qualifications/`. It links the exact observation and
+program to the produced file, its producing record and its comparison receipt.
+Queries read these results back and check all three file pins. A missing or changed
+artifact invalidates this local qualification; the archive's discovery records remain.
+All public qualification result paths are absolute. Stored local results use
+repository-relative paths so that the checkout can move.
+
+Qualification reads FITS observation times in the header's time scale, independently
+of the machine's timezone. UTC is the default for dates from 1972 onward. Split
+`DATE-OBS`/`TIME-OBS` values retain the time of day; unsupported time scales and
+incomplete or invalid intervals remain unknown.
+
+Selection includes the matching `product` and assesses its verified facts. For example,
+a qualified 2.2–2.4 µm cube cannot answer a 4.24–4.28 µm request. Other observations
+still expose qualification actions. Unmeasured resolution remains unknown, even when
+the cube's identity, kind and wavelength coverage are established.
+
+For JWST cubes classified as `POINT` in both the proposal and SCI headers, the
+qualifier fits an elliptical Gaussian plus background independently in every
+wavelength plane, using the pinned Astropy/SciPy toolchain and SCI/ERR samples.
+Both axes, fitted background, SCI/ERR masks, DQ flags, convergence and residuals matter. A missing,
+faint, clipped or unsuitable plane leaves resolution unknown for the whole cube.
+
+An accepted fit supplies an **observed source-profile upper bound**, conditional
+on that archive point-source classification. This is not a deconvolved instrument
+PSF: intrinsic source extent can broaden it. The bound uses the worst axis and
+wavelength, three residual-scaled formal fit errors and one output pixel of margin,
+with a two-pixel floor. These are explicit conservative policy margins, not a
+calibrated confidence level or a model of correlated noise. The immutable receipt
+pins the cube, implementation and software and preserves every plane's fit result.
+It is pinned with the qualified product, so changing either invalidates readback.
+A bound remains unknown unless the caller explicitly accepts both named assumptions:
+`--accept-assumptions jwst.archive-point-source,jwst.profile-margin-bound`.
+The verdict reports each assumption and its acceptance. With both accepted, a bound
+within the requested angular resolution can answer yes; a tighter request remains
+unknown rather than becoming a measured rejection.
+
+Map resolution carries a typed basis. Measured fits and calibrated beams need a
+receipt pinned to the map run and its input files. Sampling, nominal optics, models
+and historical prose-only values cannot satisfy angular resolution, surface resolution
+or resolution-element requirements. Existing maps must be reauthored to acquire this
+evidence; old metadata is not retroactively promoted. Map time constraints require
+explicit observation start/end bounds: midpoints and summed integration times are
+not temporal extents. Qualified telescope products remain selectable as inputs to a
+body-map author; only publication can establish the requested final result.
+
+Astropy owns the [weighted fitting](https://docs.astropy.org/en/stable/api/astropy.modeling.fitting.TRFLSQFitter.html).
+The wavelength-by-wavelength assessment accommodates the spatial PSF variation
+described in [STScI's IFU guidance](https://jwst-docs.stsci.edu/methods-and-roadmaps/jwst-integral-field-spectroscopy).
+
+Source-package descriptions remain declarations. Native source qualification also reads
+`facts.nativeMetadata` from the pinned product: the selected science structure, supported
+data units, wavelength centers, recorded calibration references and remaining limitations.
+It never copies the package description or instrument catalogue into verified facts.
+
+- FITS images: one unambiguous science HDU; separable linear `WAVE` or `FREQ` WCS,
+  converted to micrometres. Coordinate-bin intervals exclude planes without finite samples.
+  These intervals describe the sampled grid, not optical passbands or spectral resolving power.
+  Coupled, tabular, velocity and air-wavelength WCS remain unsupported and explicit.
+- ISIS3 cubes: `BandBin.Center` must match the core band count and be strictly monotonic.
+  Units must be stated or established by a supported recorded calibration convention.
+  For [VIMS RC19](https://isis.astrogeology.usgs.gov/8.1.0/Application/presentation/Tabbed/vimscal/vimscal.html),
+  the time-dependent `Center` is used, never `MissionAverage`. `RadiometricCalibration.OutputUnits`
+  records the data unit. Calibration filenames are retained as references; their presence does
+  not qualify the external calibration files. Centers alone do not establish continuous coverage;
+  explicit widths are needed, and empty bands remain gaps.
+- PDS products: pdr exposes units and band coordinates from the decoded object's own label
+  block. A PDS4 optical filter must explicitly reference the selected array. Metadata from another
+  array or an ambiguous set of science arrays cannot satisfy the request.
+
+Data-unit validation currently recognizes `I/F`, dimensionless values, counts/DN, electrons,
+`Jy`, `mJy`, `MJy/sr`, `Jy/beam`, `K` and `W m-2 sr-1 um-1`. Other units are retained in an
+explicit limitation instead of guessed. Product metadata validation is not an independent
+validation of radiometric accuracy, quality flags or uncertainty.
+
+Applicable FITS `BMAJ` and `BMIN` headers in `Jy/beam` images establish the recorded
+restoring beam; its major-axis FWHM answers angular-resolution requirements and its evidence
+points to the exact product hash. A missing beam axis, multiple per-plane beams, or incompatible
+units cannot establish that resolution. This does not independently validate deconvolution or
+residual emission. Pixel spacing, map scale and nominal instrument optics never become a PSF.
+
+The metadata reader is part of the qualification implementation digest. Product, label,
+calibration input, reader or output changes invalidate reuse. A source-qualified product can
+still remain an unresolved answer when its files do not establish the requested science facts.
+
+Source observations and explicit selections expose `requestSatisfaction` and `satisfaction`,
+respectively. Published body-map descriptors also carry `satisfaction`. Its status is `fulfilled`,
+`unresolved` or `refused`, with a verdict for each requested constraint and the explicit acceptance
+rule `all-requested-constraints`. Selecting an executable program does not establish fulfillment. A published map whose provenance does not establish the requested native input kind retains that requirement as unknown.
+
+Coverage is evaluated for each product, never by joining spectral intervals from different
+observations. A central wavelength cannot establish a passband; pixel scale cannot establish
+achieved resolution; a readable native image cannot establish body-map registration. Missing
+facts remain unknown. Qualification actions can still be useful when a later mapping stage is
+missing, and that blocker remains visible.
+
+The Sun declarations cover 28 HMI continuum segments, an HMI radial-field synoptic map and AIA
+171/304 synoptic maps. HMI's stripped segment headers retain only structural checks; the continuum
+keyword table is pinned alongside the segments. Observation time/geometry from that table is not
+promoted to qualified metadata. Synoptic maps span multiple epochs. Neither those limitations nor
+missing uncertainty/achieved resolution are repaired by labelling the existing display textures
+as scientific body maps.
+
+## Selected cubes and band-map recipes
+
+The JWST band-map author accepts `--selection <file>` for a saved selection, `--recipe <file>`
+for an explicit recipe and `--map-id <id>` to select one map. A supplied selection must match
+its recipe cube and a current qualification. The author reads that exact artifact, and publication
+checks that its byte count and digest occur in the map's recorded inputs. This establishes input
+kind from the qualified product; an author name alone cannot establish it.
+
+Band depth needs the band and both continuum windows. Add `--continuum LEFT_FROM,LEFT_TO,RIGHT_FROM,RIGHT_TO`
+to a cube query, or set `CapabilityRequest.continuumMicrometres`. The requested wavelength remains
+the measurement's band; qualification actions use the enclosing range of all three windows. A
+previously qualified cube missing either continuum cannot be selected for that recipe. Selection
+commands retain the windows, and publication checks that the author's estimator uses the same ones.
+Native source selection does not establish that a scientifically registered body map exists.
+
 ## Archive acquisition
 
 The virtual-telescope routes use one pinned archive client where Astroquery has the required public operation. Install it with
@@ -48,6 +254,37 @@ Every producing stage writes one `cssearth-telescope-product@1` record beside it
 | `software`, `toolchainDigest` | The versions that ran, and the digest of the pin they were installed from. |
 | `outputs` | Every file that came out, by path, byte count and sha256, with its units and conventions. |
 | `evidence` | What was checked afterwards, each entry naming its kind, its receipt and the exact product it checked. |
+
+New comparison evidence carries a `receiptPin` (bytes and SHA-256). Adding evidence
+copies the receipt to a content-addressed file beside the exact product. A later run
+may update an archive's latest/index receipt without changing an earlier product's
+evidence. Reuse verifies these receipt pins as well as output pins. Older unpinned
+receipts remain historical records; running a new comparison replaces the corresponding
+legacy entry with pinned evidence.
+
+JWST cube comparisons use `jwst-cube-samples@1`: identical finite/nonzero coverage,
+at least one shared sample, and a maximum absolute difference divided by
+`max(abs(archive sample), median absolute archive brightness)` of at most `1e-5`.
+The tolerance is a numerical reproduction criterion, not an astrophysical accuracy
+claim. Image and coronagraph comparisons apply the same sample criterion as
+`jwst-image-samples@1` and also require an identical pixel grid; a comparison made
+by interpolating sky positions remains a comparison without accepted agreement.
+Every new receipt names its rule and acceptance result and pins the local
+cube. A failed comparison retains its measurements and does not attach agreement.
+Historical JWST receipts without an explicit acceptance rule are retained but no
+longer counted as checked agreement. They need a fresh comparison, not an inferred pass.
+
+Body-map publication reads the actual FITS value and uncertainty planes. Each must
+exist exactly once, match the declared grid and units, and share a finite/NaN mask;
+finite uncertainties must be nonnegative. Hash agreement alone cannot publish a map.
+
+MAST transport failures leave the affected association lookup `unanswered` while
+independent archive results remain available. Wrong collections, missing identities
+and malformed contracts still fail integrity checks. Every successful MAST service
+response is retained with its exact request, timestamp, package version and digest
+under `output/archive-cache/mast/responses/`; association evidence carries its pin.
+`replayMastResponse(pin, request)` permits explicit replay after checking the digest
+and request. A failed live request never silently selects an old response.
 
 A record carries no clock time, so the same run writes the same bytes. The run that made the outputs writes the record, from
 what it actually used; nothing later rewrites those facts. Evidence is the one thing added afterwards, by the stage that did
@@ -355,3 +592,10 @@ The sharpness figures are bounds on an instrument and its detector, not measurem
 not ruled out, and *unknown* often means the pixels are coarser than the optics and nobody here knows what a given exposure
 recovered. Nothing becomes a fact until an observation is pinned, re-run and compared, which is what the rest of this page is
 about.
+
+Cube agreement uses finite SCI samples, including valid zeros, and requires matching
+validity masks. A zero reference scale accepts only exact zero. Receipts produced by
+the previous zero-excluding policy do not establish agreement under the new policy;
+recompare existing cubes to renew them. No pipeline rerun is needed for unchanged
+products and inputs. The scope states the actual compared archive planes, including
+aligned subsets supplied without a request interval.

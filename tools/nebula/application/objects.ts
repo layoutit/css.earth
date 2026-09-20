@@ -1,4 +1,5 @@
 import { packageImplementationPins } from './package-identity.ts';
+import { installedDeliveryMatchesRecipe } from './delivery-identity.ts';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
 import type { CompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
@@ -26,9 +27,10 @@ const json = (v: unknown) => JSON.stringify(v, null, 2) + '\n';
 const record = (v: unknown): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Expected nebula delivery object.'); return v as Record<string, unknown>; };
 const text = (v: unknown) => { if (typeof v !== 'string' || !v) throw new TypeError('Expected nebula delivery text.'); return v; };
 const finite = (v: unknown) => { if (typeof v !== 'number' || !Number.isFinite(v)) throw new TypeError('Expected finite nebula delivery value.'); return v; };
-// Prepared pixels and their contract must invalidate a previously installed handoff together.
+// This identity records the implementation used by an explicit bake. Consumer builds reuse a complete installed
+// delivery by recipe identity and byte closure; they never turn a runtime change into an implicit scientific bake.
 const implementationFiles = [
-  'tools/nebula/application/package-identity.ts', 'tools/nebula/application/objects.ts', 'tools/nebula/application/backend.ts',
+  'tools/nebula/application/package-identity.ts', 'tools/nebula/application/delivery-identity.ts', 'tools/nebula/application/objects.ts', 'tools/nebula/application/backend.ts',
   'tools/nebula/application/references.ts', 'tools/nebula/application/nebula-frame.ts', 'tools/nebula/application/volume-provenance.ts',
   'tools/nebula/application/star-sprites.ts', 'tools/nebula/application/fits.ts',
   'src/preparation/volume/atlas.ts', 'src/renderers/css/preparation/volume.ts',
@@ -96,11 +98,11 @@ export function readNebulaDelivery(v: unknown) {
     ...(r.fieldStars === undefined ? {} : { fieldStars: pin(r.fieldStars) }),
     ...(r.symmetryDirectory === undefined ? {} : { symmetryDirectory: text(r.symmetryDirectory) }) };
 }
-/** Validate every installed resource before reusing the bank; missing files rebuild, drift fails. */
-async function installed(directory: string, recipeSha256: string, implementationSha256: string): Promise<boolean> {
+/** Validate every installed resource before reusing the bank; source-recipe drift rebuilds and byte drift fails. */
+async function installed(directory: string, recipeSha256: string): Promise<boolean> {
   try {
     const receipt = record(await read(directory,'prepared/delivery.json'));
-    if (receipt.recipeSha256 !== recipeSha256 || receipt.implementationSha256 !== implementationSha256) return false;
+    if (!installedDeliveryMatchesRecipe(receipt,recipeSha256)) return false;
     const descriptor = record(await read(directory,'object.json')), prepared = pin({ path:record(descriptor.prepared).url,sha256:record(descriptor.prepared).sha256 });
     const envelope = record(JSON.parse((await pinned(directory,prepared)).toString())), data = validatePreparedVolumeLenses(envelope.data);
     for (const lens of data.lenses) for (const resource of lens.volume.resources) await pinned(directory,{path:`prepared/${resource.path}`,sha256:resource.sha256});
@@ -135,7 +137,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
   // Package inventories define numerical owners without exposing their installation layout.
   const packagePins = await packageImplementationPins(root, ['@cssearth/volume-core', '@cssearth/volume-bake']);
   const implementationSha256 = sha256(json([...await Promise.all(owners.map(async path => ({path,sha256:sha256(await readFile(local(root,path)))}))), ...packagePins]));
-  if (ifMissing && await installed(directory,sha256(recipeBytes),implementationSha256)) return { id:recipe.id,status:'verified' };
+  if (ifMissing && await installed(directory,sha256(recipeBytes))) return { id:recipe.id,status:'verified' };
   // Deploy builds may tolerate a package missing from R2 instead of baking one from scratch here (no source
   // acquisition service runs at build time): report it unavailable and move on, loudly.
   if (allowMissing) {

@@ -169,6 +169,23 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     if (urls.length !== materialLeaves.length || urls.some(url => typeof url !== 'string' || !url))
       throw new TypeError('Prepared material texture count or URL is invalid.');
     urls.forEach((url, index) => setTexture(index, url));
+  }, setMaterials(materials: readonly { textureUrl: string; backgroundSize: string; backgroundPosition: string }[]) {
+    if (materials.length !== materialLeaves.length || materials.some(material => !material || typeof material.textureUrl !== 'string' || !material.textureUrl ||
+        typeof material.backgroundSize !== 'string' || !material.backgroundSize || typeof material.backgroundPosition !== 'string' || !material.backgroundPosition)) {
+      throw new TypeError('Prepared volume material count or CSS is invalid.');
+    }
+    if (destroyed) return;
+    materials.forEach((material, index) => {
+      const { axis, leaf } = materialLeaves[index]!;
+      for (const node of leaf.nodes) {
+        // Detach the former resource immediately. The selected material is attached
+        // only by the next visible publication, through the ordinary demand gate.
+        node.style.backgroundImage = '';
+        node.style.backgroundSize = material.backgroundSize;
+        node.style.backgroundPosition = material.backgroundPosition;
+      }
+      pendingTextures[axis]!.set(leaf, material.textureUrl);
+    });
   }, roots: Object.freeze(roots), destroy() {
     if (destroyed) return;
     destroyed = true;

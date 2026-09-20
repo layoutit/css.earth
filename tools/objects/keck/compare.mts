@@ -292,7 +292,7 @@ export async function compareWithArchive(id: string, koaid: string, run: string)
     await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
     // What this comparison established goes on the record of the run that made the cube, naming the exact product checked and
     // the receipt holding the numbers. The record refuses it unless the product it pins is still the file on disk.
-    await addProductEvidence(productRecordPath(local), [archiveAgreement(basename(local), relative(REPOSITORY, path), product.filehand, {
+    await addProductEvidence(productRecordPath(local), [archiveAgreement(basename(local), path, product.filehand, {
       extensions: extensions.map(entry => ({ extname: String(entry.extname), identicalShare: entry.identicalShare as number | null,
         correlation: (entry.aboveBrightestPercent as { correlation: number | null }).correlation })),
       samePipelineVersion: receipt.samePipelineVersion,

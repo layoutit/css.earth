@@ -34,3 +34,9 @@ export function pds4Number(xml: string, name: string, unit?: string) {
       (unit !== undefined && pds4Elements(xml, name)[0].tag !== `<${name} unit="${unit}">`)) throw new Error(`Invalid PDS4 number or unit: ${name}`);
   return value;
 }
+
+/** Product identity excludes version numbers belonging to modification-history entries. */
+export function pds4ProductIdentity(xml: string) {
+  const area = pds4Block(xml, 'Identification_Area').replace(/<Modification_History(?:\s[^>]*)?>[\s\S]*?<\/Modification_History>/gu, '');
+  return { logical_identifier: pds4Field(area, 'logical_identifier'), version_id: pds4Field(area, 'version_id') };
+}

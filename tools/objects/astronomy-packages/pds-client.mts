@@ -68,10 +68,48 @@ elif operation in ('discover-target', 'discover-product'):
     answer['products'] = [] if table is None else [{str(name):value(row[name]) for name in table.columns} for _,row in table.iterrows()]
 elif operation == 'decode-product':
     label = Path(request['labelPath']).resolve()
+    data = pdr.read(label)
+    if str(data.standard) == 'PDS3':
+        structures = []
+        def native_metadata(key):
+            if data.metadata.fieldcounts.get(key, 0) != 1: return {}
+            block = data.metablock(key) or {}
+            bins = block.get('BAND_BIN') or {}
+            names, sizes = block.get('AXIS_NAME', []), block.get('CORE_ITEMS', [])
+            bands = block.get('BANDS')
+            if isinstance(names, (list, tuple)) and isinstance(sizes, (list, tuple)) and len(names) == len(sizes) and list(names).count('BAND') == 1:
+                bands = sizes[list(names).index('BAND')]
+            return {'unit':value(block.get('CORE_UNIT', block.get('UNIT'))),
+                'centers':value(bins.get('BAND_BIN_CENTER')), 'wavelengthUnit':value(bins.get('BAND_BIN_UNIT')),
+                'bands':value(bands)}
+        for key in data.keys():
+            if key == 'LABEL' or key.lower() == 'label' or 'HEADER' in key or key == 'HISTORY': continue
+            native = data[key]
+            if hasattr(native, 'columns'):
+                columns = []
+                for name in native.columns:
+                    column = native[name]
+                    numeric = np.issubdtype(column.dtype, np.number)
+                    valid = np.asarray(column)[np.isfinite(np.asarray(column))] if numeric else None
+                    columns.append({'name':str(name),'dtype':str(column.dtype),'numeric':numeric,
+                        'finite':int(valid.size) if numeric else None,
+                        'minimum':float(valid.min()) if numeric and valid.size else None,
+                        'maximum':float(valid.max()) if numeric and valid.size else None})
+                structures.append({'name':key,'kind':'table','shape':list(native.shape),'dtype':'table','elements':int(native.size),'columns':columns})
+                continue
+            array = np.ma.asarray(data.get_scaled(key))
+            if not np.issubdtype(array.dtype, np.number): continue
+            valid = np.asarray(array.compressed())
+            valid = valid[np.isfinite(valid)]
+            if not valid.size: raise ValueError(f'{key} has no finite samples')
+            structures.append({'name':key,'nativeMetadata':native_metadata(key),'shape':list(array.shape),'dtype':str(array.dtype),'elements':int(array.size),'finite':int(valid.size),'minimum':float(valid.min()),'maximum':float(valid.max())})
+        if not structures: raise ValueError('PDS3 product has no supported numeric structure')
+        answer['decoded'] = {'standard':'PDS3','metadata':{'scaling':'pdr get_scaled with special-value masking for arrays; tables as decoded by pdr','excludedNonScienceObjects':[key for key in data.keys() if 'HEADER' in key or key == 'HISTORY']},'structures':structures}
+        json.dump(answer, sys.stdout, allow_nan=False, separators=(',',':'))
+        sys.exit(0)
     root = ET.parse(label).getroot()
     def local(tag): return tag.rsplit('}',1)[-1]
     special_constants = [(local(child.tag),(child.text or '').strip()) for node in root.iter() if local(node.tag) == 'Special_Constants' for child in node if child.text]
-    data = pdr.read(label)
     structures = []
     for key in data.keys():
         if key == 'label' or key.endswith('_HEADER') or key.startswith('HEADER_'): continue
@@ -88,7 +126,10 @@ elif operation == 'decode-product':
                     special |= values == constant
                 except (ValueError, OverflowError): pass
         valid = finite & ~special if numeric else None
-        structures.append({'name':key,'shape':list(array.shape),'dtype':str(array.dtype),'elements':int(array.size),'masked':int(mask.sum()),'special':int(special.sum()),
+        matching = [node for node in root.iter() if local(node.tag).startswith('Array_') and
+            any(local(child.tag) == 'local_identifier' and (child.text or '').strip() == key for child in node)]
+        units = [] if len(matching) != 1 else [(child.text or '').strip() for element in matching[0] if local(element.tag) == 'Element_Array' for child in element if local(child.tag) == 'unit']
+        structures.append({'name':key,'nativeMetadata':{'unit':units[0] if len(units) == 1 else None},'shape':list(array.shape),'dtype':str(array.dtype),'elements':int(array.size),'masked':int(mask.sum()),'special':int(special.sum()),
           **({'finite':int(valid.sum()),'minimum':float(values[valid].min()),'maximum':float(values[valid].max())} if numeric and valid.any() else {})})
     def first(name):
         node = next((node for node in root.iter() if local(node.tag) == name), None)

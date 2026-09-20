@@ -424,15 +424,22 @@ test('destination card stays fixed across flight poses and camera handoff, then 
   shell.destroy();
 });
 
-test('camera scale keeps the overview, while search shows only results and dismissal restores its tabs', () => {
+test('camera scale keeps the overview, while search hides and dismissal restores its Atlas navigation', () => {
   const f = fixture(), browser = f.selectors.element('.planet-object-browser');
   const galaxy = new Element(), system = new Element(), introduction = new Element();
   system.selectors.set('.planet-introduction', introduction);
   browser.selectors.set('[data-galactic-overview]', galaxy);
   browser.selectors.set('[data-system-results]', system);
   const categoryTabs = new Element();
+  const navigationTree = new Element();
+  const solarSystemBranch = new Element(), planetBranch = new Element(), earthBranch = new Element();
+  solarSystemBranch.open = false; planetBranch.open = true; earthBranch.open = true;
+  navigationTree.selectors.set('details[data-atlas-depth]:not([data-atlas-depth="0"])', [planetBranch, earthBranch]);
+  navigationTree.selectors.set('details[data-atlas-depth="0"][data-atlas-key="solar-system"]', solarSystemBranch);
+  system.selectors.set('[data-object-navigation-tree]', navigationTree);
   browser.selectors.set('[data-system-results] > .planet-selected-panel', introduction);
   browser.selectors.set('[data-system-results] > .planet-object-tabs', categoryTabs);
+  browser.selectors.set('[data-object-navigation-tree]', navigationTree);
   const items = ['planet', 'satellite'].map(type => {
     const item = new Element();
     item.dataset = { objectName: type === 'planet' ? 'earth' : 'moon', objectSystemName: 'solar system',
@@ -449,12 +456,18 @@ test('camera scale keeps the overview, while search shows only results and dismi
   assert.equal(search.value, '');
   assert.equal(galaxy.hidden, false); assert.equal(system.hidden, true);
   assert.deepEqual(world, before, 'Only the sidebar context changes');
+  planetBranch.open = true; earthBranch.open = true;
   world = worldAt(context.volume.fadeStartDistanceM * .9);
   for (const callback of listeners) callback(world);
   assert.equal(search.value, ''); assert.equal(system.hidden, false); assert.equal(galaxy.hidden, true);
+  assert.equal(solarSystemBranch.open, true, 'Solar System stays expanded when its overview auto-selects');
+  assert.equal(planetBranch.open, false, 'Second-level groups collapse when Solar System auto-selects');
+  assert.equal(earthBranch.open, false, 'Deeper body branches collapse with their second-level group');
   search.value = 'moon'; search.dispatchEvent(new Event('input'));
   assert.equal(introduction.hidden, true, 'Search hides the card heading and introduction');
   assert.equal(categoryTabs.hidden, true);
+  assert.equal(navigationTree.hidden, true);
+  assert.equal(browser.requireSelector('#object-category-results').hidden, false);
   assert.equal(items[0].hidden, true); assert.equal(items[1].hidden, false);
   assert.equal(tabs[2].getAttribute('aria-selected'), 'true');
   search.value = 'Solar System'; search.dispatchEvent(new Event('input'));
@@ -462,9 +475,9 @@ test('camera scale keeps the overview, while search shows only results and dismi
   assert.equal(browser.requireSelector('#object-category-results').getAttribute('aria-labelledby'), null);
   search.dispatchEvent(Object.assign(new Event('keydown'), { key: 'Escape' }));
   assert.equal(introduction.hidden, false);
-  assert.equal(categoryTabs.hidden, false);
-  tabs[2].dispatchEvent(Object.assign(new Event('keydown', { cancelable: true }), { key: 'Home' }));
-  assert.equal(f.documentTarget.activeElement, tabs[0]);
+  assert.equal(categoryTabs.hidden, true);
+  assert.equal(navigationTree.hidden, false);
+  assert.equal(browser.requireSelector('#object-category-results').hidden, true);
   assert.equal(items[0].hidden, false); assert.equal(items[1].hidden, false);
   assert.equal(tabs[0].requireSelector('.planet-object-tab-count').textContent, '(2)');
   tabs[2].dispatchEvent(new Event('click'));
