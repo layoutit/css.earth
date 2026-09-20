@@ -34,7 +34,7 @@ test('a new telescope and target need no query registry change: actions, exact q
     assert.equal(selection.satisfaction.status, 'unresolved'); assert.equal(selection.satisfaction.constraints.artifact!.answer, 'yes'); assert.equal(selection.satisfaction.constraints.wavelength!.answer, 'unknown');
     const map = queryCapabilities({ ...request, result: 'body-map' }, await queryInputs(f.root));
     assert.ok(map.candidates[0]!.selectionAssessment.blockers.some(b => b.code === 'body-map-author-missing'));
-    assert.equal(map.candidates[0]!.observations!.records![0]!.requestSatisfaction!.constraints.result!.answer, 'no');
+    assert.equal(map.candidates[0]!.observations!.records![0]!.requestSatisfaction!.constraints.result!.answer, 'unknown');
     // Output mutation invalidates even though the run parameters still agree.
     const report = resolve(f.root, 'output/telescopes/test-body/frame-1/decoded.json'); await writeFile(report, '{}');
     assert.equal((await loadSourceProducts(f.root, 'test-body'))[0]!.qualified, false);
@@ -61,7 +61,8 @@ test('header identity, complete pins and supported configuration are enforced', 
 });
 test('request satisfaction uses one product, preserves spectral gaps, and separates missing science from valid bytes', () => {
   const facts = { target: request.target, verified: true, kind: 'image' as const, result: 'telescope-product' as const, wavelengthIntervalsMicrometres: [[1, 2]] as const, angularResolutionArcsec: .5 };
-  assert.equal(assessRequest(request, facts).status, 'fulfilled');
+  assert.equal(assessRequest(request, facts).status, 'unresolved');
+  assert.equal(assessRequest(request, { ...facts, resolutionEvidence: [{ kind: 'measured', receipt: { file: 'fit.json', sha256: 'a'.repeat(64) } }] }).status, 'fulfilled');
   assert.equal(assessRequest(request, { ...facts, wavelengthIntervalsMicrometres: [[1, 1.2], [1.8, 2]] }).status, 'unresolved');
   assert.equal(assessRequest(request, { ...facts, wavelengthIntervalsMicrometres: [[3, 4]] }).status, 'refused');
   assert.equal(assessRequest(request, { ...facts, angularResolutionArcsec: undefined }).constraints.angularResolution!.answer, 'unknown');
@@ -96,5 +97,17 @@ test('successful decoding never promotes declared wavelength or resolution into 
     assert.equal(satisfaction.constraints.wavelength!.answer, 'unknown');
     assert.equal(satisfaction.constraints.angularResolution!.answer, 'unknown');
     assert.equal(satisfaction.status, 'unresolved');
+  } finally { await rm(f.root, { recursive: true, force: true }); }
+});
+
+test('a source-qualified cube remains selectable as an intermediate for a supported map author', async () => {
+  const f = await fixture(); try {
+    const product = { ...f.product, telescope: 'JWST', mode: 'NIRSPEC/IFU', kind: 'cube' as const, qualified: true, receipt: 'fixture.json', facts: { verified: true, target: request.target, kind: 'cube' as const, result: 'telescope-product' as const } };
+    const answer = queryCapabilities({ ...request, kind: 'cube', result: 'body-map' }, { ...await queryInputs(f.root), sourceProducts: [product] });
+    const selected = selectObservation(answer, product.telescope, product.mode, product.id);
+    assert.equal(selected.satisfaction.constraints.kind?.answer, 'yes');
+    assert.equal(selected.satisfaction.constraints.result?.answer, 'unknown');
+    assert.equal(selected.satisfaction.status, 'unresolved');
+    assert.ok(answer.candidates[0]!.selectionAssessment.nextActions.some(action => action.kind === 'select-observation'));
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });

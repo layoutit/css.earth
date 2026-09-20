@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { sha256 } from '../../src/platform/sha256.mts';
 import { formatBodyMapProduct, type BodyMapProduct } from './body-map-product.mts';
-import { bodyMapProductRecord, formatProductRecord, qualifyBodyMap } from './body-map-publication.mts';
+import { bindMapResolution, bodyMapProductRecord, formatProductRecord, qualifyBodyMap } from './body-map-publication.mts';
 import type { ObservationSelection } from './telescopes/query.mts';
 
 const plane = bodyMapFits({ width: 4, height: 2 }, {}, [{ name: 'CO2 BAND DEPTH', units: 'band depth', values: new Float32Array(8).fill(1) }, { name: 'CO2 BAND DEPTH ERROR', units: 'band depth', values: new Float32Array(8).fill(.1) }]);
@@ -24,11 +24,14 @@ const selection: ObservationSelection = { satisfaction: { status: 'unresolved', 
   bodyMapSupport: { answer: 'yes', author: 'tools/objects/jwst/cubes/author-body-maps.mts', reason: 'the body-map author' }, unresolved: [],
   evidence: { ledger: 'data/jwst/ledger.json', archiveDate: '2026-09-19', receipts: [], targetAssociations: [], bodyMaps: [], investigations: [] } };
 
-async function fixture(value = product()) {
+async function fixture(value = product(), measured = true) {
+  const bound = measured ? bindMapResolution(value, 'measured', 'fixture-disc-fit', { residual: 0.01 }) : undefined;
+  if (bound) value = bound.product;
   const directory = await mkdtemp(resolve(tmpdir(), 'body-map-publication-')), planePath = resolve(directory, value.planes.file), mapPath = `${planePath}.body-map.json`;
   const metadata = Buffer.from(formatBodyMapProduct(value)), record = bodyMapProductRecord(value, plane, metadata,
     [{ role: 'spectral cube', identity: 'mast:JWST/product/jw01250-o002_s3d.fits', bytes: 12, sha256: 'b'.repeat(64) }],
-    [{ name: 'cssEarth author-body-maps', version: '1' }]);
+    [{ name: 'cssEarth author-body-maps', version: '1' }], undefined, bound ? [bound.output] : []);
+  if (bound) await writeFile(resolve(directory, bound.output.path), bound.output.bytes);
   await writeFile(planePath, plane); await writeFile(mapPath, metadata); await writeFile(`${planePath}.product.json`, formatProductRecord(record));
   return { directory, planePath, mapPath };
 }
@@ -98,4 +101,33 @@ test('publication validates the actual FITS planes, units, grid and uncertainty 
   assert.throws(() => assertBodyMapPlanes(plane, { ...product(), definition: { ...product().definition, units: 'K' } }), /units/);
   const invalid = bodyMapFits({ width: 4, height: 2 }, {}, [{ name: 'CO2 BAND DEPTH', units: 'band depth', values: new Float32Array(8).fill(1) }, { name: 'CO2 BAND DEPTH ERROR', units: 'band depth', values: new Float32Array(8).fill(-1) }]);
   assert.throws(() => assertBodyMapPlanes(invalid, product()), /uncertainties/);
+});
+
+test('prose, nominal optics, sampling and unpinned measurements cannot satisfy any resolution requirement', async () => {
+  for (const kind of [undefined, 'nominal', 'sampling', 'modeled', 'measured'] as const) {
+    const map = product(), observation = map.observations[0]!;
+    const value = { ...map, observations: [{ ...observation, angularResolution: { ...observation.angularResolution, basis: '0.1 arcsec; nominal diffraction or pixel spacing, not a measured PSF', ...(kind ? { evidence: { kind } } : {}) } }] };
+    const layer = await qualifyBodyMap((await fixture(value, false)).mapPath, { ...selection, request: { ...selection.request, surfaceResolutionKm: 500, resolutionElements: 1 } });
+    for (const constraint of ['angularResolution', 'surfaceResolution', 'resolutionElements']) {
+      assert.equal(layer.satisfaction.constraints[constraint]?.answer, 'unknown');
+      assert.ok(layer.selection.unresolved.some(item => item.constraint === constraint));
+    }
+  }
+});
+test('a changed resolution receipt invalidates map publication', async () => {
+  const f = await fixture(); await writeFile(`${f.planePath}.resolution.json`, '{}');
+  await assert.rejects(qualifyBodyMap(f.mapPath, selection), /output bytes/);
+});
+test('a midpoint inside a request does not prove that the entire exposure fits', async () => {
+  const map = product(), jd = (iso: string) => Date.parse(iso) / 86400000 + 2440587.5;
+  const value = { ...map, observations: [{ ...map.observations[0]!, midTimeJd: jd('2026-01-01T10:05:00Z'), exposureSeconds: 600 }] };
+  const asked = { ...selection, request: { ...selection.request, time: { fromIso: '2026-01-01T10:04:00Z', toIso: '2026-01-01T10:06:00Z' } } };
+  const unknown = await qualifyBodyMap((await fixture(value)).mapPath, asked);
+  assert.equal(unknown.satisfaction.constraints.time?.answer, 'unknown');
+  assert.equal(unknown.selection.constraints.time?.answer, 'unknown');
+  const timed = { ...value, observations: [{ ...value.observations[0]!, startTimeJd: jd('2026-01-01T10:00:00Z'), endTimeJd: jd('2026-01-01T10:10:00Z') }] };
+  const f = await fixture(timed);
+  await assert.rejects(qualifyBodyMap(f.mapPath, asked), /outside the requested time/);
+  const valid = await qualifyBodyMap(f.mapPath, { ...asked, request: { ...asked.request, time: { fromIso: '2026-01-01T09:59:00Z', toIso: '2026-01-01T10:11:00Z' } } });
+  assert.equal(valid.satisfaction.constraints.time?.answer, 'yes');
 });

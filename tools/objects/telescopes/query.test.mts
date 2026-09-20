@@ -377,7 +377,7 @@ test('a body map reaches the one detector it names, and no other', () => {
   const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [0.45, 0.5] },
     inputs([{ telescope: 'hst', value: HST_LEDGER }], { bodyMaps: [{ path: 'src/objects/europa/source/hst/salt.body-map.json', value: bodyMap('HST', 'STIS/CCD', 'oc-salt-1') }] }));
   assert.deepEqual(candidate(answer, 'STIS/CCD').evidence.bodyMaps, [{ path: 'src/objects/europa/source/hst/salt.body-map.json', quantity: 'salt band depth (dimensionless)',
-    observation: 'oc-salt-1', angularResolutionArcsec: 0.05, surfaceResolutionKm: 153 }]);
+    observation: 'oc-salt-1', basis: 'fitted point spread function', resolutionKind: 'unknown', angularResolutionArcsec: 0.05, surfaceResolutionKm: 153 }]);
   assert.deepEqual(candidate(answer, 'STIS/FUV-MAMA').evidence.bodyMaps, []);
   assert.deepEqual(candidate(answer, 'STIS/NUV-MAMA').evidence.bodyMaps, []);
   assert.deepEqual(answer.unassignedEvidence, []);

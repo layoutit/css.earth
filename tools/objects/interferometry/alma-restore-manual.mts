@@ -430,7 +430,7 @@ export async function restoreManualExecution(directory: string, options: { reado
   // A restore is an import, five calibration stages and a clean; it runs for hours. It is skipped only when the record beside
   // the image says this same delivery, script and CASA made it and the image is still the file that run wrote.
   const recordPath = productRecordPath(image);
-  const reused = await sameRun(await readProductRecord(recordPath), productRun, () => image);
+  const reused = await sameRun(await readProductRecord(recordPath), productRun, name => resolve(dirname(image), name));
   if (!reused) { await rm(recordPath, { force: true }); run(resolve(casa, 'venv/bin/python'), [path], work); }
 
   const restored = readContinuumImage(await readFile(image));
