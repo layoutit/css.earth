@@ -11,8 +11,17 @@ import { acquireVoProduct, type AcquisitionSpec } from './access.mts';
 export async function qualifyVoProduct(root: string, spec: AcquisitionSpec): Promise<QualifiedObservation> {
   if (spec.observation.target.status !== 'confirmed' || spec.observation.target.target !== spec.request.target || typeof spec.observation.rawTarget !== 'string')
     throw new Error('The selected archive record does not establish the requested target.');
-  const acquired = await acquireVoProduct(root, spec), outputRoot = dirname(acquired.file), acquisition = await readProductRecord(acquired.record);
+  const acquired = await acquireVoProduct(root, spec), outputRoot = dirname(acquired.record), acquisition = await readProductRecord(acquired.record);
   if (!acquisition) throw new Error('Acquisition record is missing.');
+  const content = JSON.parse(await readFile(resolve(outputRoot, 'content.json'), 'utf8')) as { schema?: unknown; archiveProposal?: { kind?: unknown; decoder?: unknown }; legacyRasterMember?: unknown; members?: readonly { member?: unknown; profile?: unknown; state?: unknown; reason?: unknown }[] };
+  const legacyContent = content.schema === 'cssearth-vo-content@1';
+  if (!legacyContent && content.schema !== 'cssearth-vo-content@2') throw new Error('Acquired VO content manifest is missing or unsupported. Reacquire the product.');
+  if (!legacyContent && (content.archiveProposal?.kind !== spec.kind || content.archiveProposal.decoder !== spec.decoder)) throw new Error('Archive proposal changed after acquisition. Requery the product.');
+  if (!acquired.file || content.legacyRasterMember !== 'science.fits' || spec.decoder !== 'fits-raster' || (spec.kind !== 'image' && spec.kind !== 'cube')) {
+    const reasons = Array.isArray(content.members) ? content.members.map(member => typeof member.reason === 'string' ? member.reason : null).filter((reason): reason is string => reason !== null) : [];
+    throw new Error(`The retained archive product is discoverable but not qualifiable by the legacy raster route.${reasons.length ? ` ${reasons.join(' ')}` : ''}`);
+  }
+  if (!acquisition.outputs.some(output => output.path === 'science.fits')) throw new Error('Legacy raster content has no pinned science FITS output.');
   const pin = await pinFile(acquired.file);
   if (!acquisition.outputs.some(p => p.path === 'science.fits' && p.bytes === pin.bytes && p.sha256 === pin.sha256)) throw new Error('Acquired bytes changed.');
   const decoded = inspectFits(await readFile(acquired.file), { OBJECT: spec.observation.rawTarget }, spec.kind);

@@ -10,7 +10,12 @@ import { sha256 } from '../../../src/platform/sha256.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';
 import { plotProduct } from '../astronomy-packages/plots.mts';
 import { parseNativeMetadata, type NativeMetadata } from './native-metadata.mts';
-export interface OutputChoice { readonly kind:OutputRequest['kind']|'body-map'|'sphere'|'points'|'volume';readonly available:boolean;readonly reason:string;readonly hdu?:number;readonly structure?:string;readonly shape?:readonly number[];readonly parameters?:readonly string[] }
+import { contextTarget, deliveryContext } from './delivery-context.mts';
+export interface OutputChoice {
+  readonly kind:OutputRequest['kind']|'body-map'|'sphere'|'points'|'volume';readonly available:boolean;readonly reason:string;
+  readonly hdu?:number;readonly structure?:string;readonly shape?:readonly number[];readonly parameters?:readonly string[];
+  readonly unit?:NativeMetadata['units'];readonly spectral?:NativeMetadata['spectral'];readonly limitations?:readonly string[];
+}
 export interface OutputRequest {
   readonly kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';
   readonly hdu:number; readonly structure?:string; readonly plane?:number; readonly pixel?:readonly [number,number];
@@ -38,7 +43,7 @@ function beneath(root:string,path:string):string {
 }
 export async function delivery(resultPath:string){
   const path=resolve(resultPath),directory=dirname(path),bytes=await readFile(path),record=requireRecord(JSON.parse(bytes.toString('utf8')));
-  if(record.schema!=='cssearth-telescope-delivery@1')throw new Error('Expected a telescope delivery result.json');
+  const context=deliveryContext(record);
   const files=requireArray(record.files).map(raw=>{const f=requireRecord(raw);return {path:requireString(f.path),sha256:requireString(f.sha256),bytes:requireFiniteNumber(f.bytes)};});
   if(!files.length||new Set(files.map(f=>f.path)).size!==files.length)throw new Error('Delivery files must be unique and pinned');
   const realDirectory=await realpath(directory);
@@ -59,7 +64,8 @@ export async function delivery(resultPath:string){
   });
   if(!outputPins.some(f=>f.path===product.path))throw new Error('Product is not bound by its producing record');
   const facts=requireRecord(record.facts);if(facts.verified!==true)throw new Error('The delivery is not verified');
-  return {path,directory,record,files,product,producing,telescope:producing.telescope,file:beneath(directory,productPath),target:requireString(facts.target),pin:{sha256:sha256(bytes),bytes:bytes.length}};
+  const target=requireString(facts.target);if(target!==contextTarget(context))throw new Error('Delivery facts disagree with source context target');
+  return {path,directory,record,context,files,product,producing,telescope:producing.telescope,file:beneath(directory,productPath),target,pin:{sha256:sha256(bytes),bytes:bytes.length}};
 }
 function choices(structures:readonly NativeMetadata[]):OutputChoice[]{
   const result:OutputChoice[]=[];
@@ -67,7 +73,7 @@ function choices(structures:readonly NativeMetadata[]):OutputChoice[]{
     if(s.fitsHdu===undefined||!s.shape)continue;
     const dimensions=s.shape,spatial=dimensions.length>=2&&dimensions.slice(0,-3).every(n=>n===1),spectral=s.spectral?.axis===dimensions.length-3;
     const supported=spatial&&(s.spectral?.axis===undefined?(dimensions.length===2||dimensions.at(-3)===1):spectral),usable=(s.quality?.usable??0)>0;
-    const common={hdu:s.fitsHdu,structure:s.structure,shape:dimensions};
+    const common={hdu:s.fitsHdu,structure:s.structure,shape:dimensions,...(s.units?{unit:s.units}:{}),...(s.spectral?{spectral:s.spectral}:{}),...(s.limitations.length?{limitations:s.limitations}:{})};
     result.push({...common,kind:'image',available:supported&&usable,parameters:s.spectral?.axis===undefined?[]:['plane'],reason:!usable?'No usable samples.':!supported?'Select two spatial axes and a separable leading wavelength axis.':'Native image coordinates; masks retained. A cube requires an explicit zero-based plane.'});
     result.push({...common,kind:'spectrum',available:supported&&spectral&&usable,parameters:['pixel'],reason:spectral?'One explicitly selected pixel; supplied uncertainties retain their meaning. No aperture integration or covariance assumption.':'No qualified leading wavelength axis.'});
     const cube=supported&&spectral&&usable&&!!s.units;
@@ -88,7 +94,7 @@ export async function listOutputs(resultPath:string,structure?:string){
     const input=await nativeFigureInput(d,scratch,structure);
     const metadata=await sciencePackage({operation:'fits',path:input.file});
     const structures=requireArray(metadata.structures).map(s=>parseNativeMetadata(s));
-    return {target:d.target,source:d.product,outputs:choices(structures),...(input.native?{native:input.native}: {})};
+    return {target:d.target,source:d.product,sourceContext:d.context,outputs:choices(structures),...(input.native?{native:input.native}: {})};
   }finally{await rm(scratch,{recursive:true,force:true});}
 }
 export async function exportOutput(resultPath:string,request:OutputRequest,outputDirectory:string){
@@ -108,11 +114,11 @@ export async function exportOutput(resultPath:string,request:OutputRequest,outpu
     const fresh=await delivery(resultPath);if(fresh.pin.sha256!==d.pin.sha256)throw new Error('Delivery changed while producing output');
     const softwareFiles=['outputs.mts','native-figure.mts','native-metadata.mts','../astronomy-packages/pds-client.mts','../terrestrial-layers/isis3-raster.mts','../astronomy-packages/science.mts','../astronomy-packages/plots.mts','../astronomy-packages/cube-outputs.mts','../astronomy-packages/requirements.lock'];
     const implementation=sha256(Buffer.concat(await Promise.all(softwareFiles.map(name=>readFile(new URL(name,import.meta.url))))));
-    const run={telescope:d.telescope,stage:'telescope-output',inputs:[{role:'delivery',identity:d.path,...d.pin},...d.files.map(f=>({role:'qualified input',identity:resolve(d.directory,f.path),sha256:f.sha256,bytes:f.bytes}))],parameters:{selection:request,...(input.native?{native:input.native}:{}),definition:data.definition??(request.kind==='image'?'Native sampled image plane; not a registered surface map.':'Single-pixel spectrum; no spatial integration.'),measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},sourceRequest:d.record.request,sourceSatisfaction:d.record.satisfaction,metadata:parseNativeMetadata(found[0]),software:plotted},software:[{name:'cssEarth telescope outputs',version:implementation},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'},...Object.entries(input.native?.packages??{}).map(([name,version])=>({name,version}))]};
+    const run={telescope:d.telescope,stage:'telescope-output',inputs:[{role:'delivery',identity:d.path,...d.pin},...d.files.map(f=>({role:'qualified input',identity:resolve(d.directory,f.path),sha256:f.sha256,bytes:f.bytes}))],parameters:{selection:request,...(input.native?{native:input.native}:{}),definition:data.definition??(request.kind==='image'?'Native sampled image plane; not a registered surface map.':'Single-pixel spectrum; no spatial integration.'),measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},sourceContext:d.context,metadata:parseNativeMetadata(found[0]),software:plotted},software:[{name:'cssEarth telescope outputs',version:implementation},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'},...Object.entries(input.native?.packages??{}).map(([name,version])=>({name,version}))]};
     const names=requireArray(plotted.files).map(v=>requireString(v));
     await writeProductRecord(resolve(staging,'output.product.json'),run,names.map(path=>({path,file:beneath(staging,path)})));
     await rm(resolve(staging,'arrays'),{recursive:true,force:true});await rm(resolve(staging,'native'),{recursive:true,force:true});
     await rmdir(destination);await rename(staging,destination);
-    return {directory:destination,figure:resolve(destination,'figure.png'),values:resolve(destination,'values.csv'),data:resolve(destination,names.includes('image.fits')?'image.fits':'spectrum.ecsv'),receipt:resolve(destination,'output.product.json'),sourceSatisfaction:d.record.satisfaction};
+    return {directory:destination,figure:resolve(destination,'figure.png'),values:resolve(destination,'values.csv'),data:resolve(destination,names.includes('image.fits')?'image.fits':'spectrum.ecsv'),receipt:resolve(destination,'output.product.json'),sourceContext:d.context};
   }catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}
 }

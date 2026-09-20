@@ -1,6 +1,7 @@
 import { inputWavelengths } from './recipe-request.mts';
 import { parseLimits, parseRegion } from './vo/contracts.mts';
 import { loadVoInputs, voCandidates, type VoInputs, type VoProductCandidate } from './vo/bridge.mts';
+import type { DiscoveryRequest } from './vo/discovery.mts';
 import { loadQualifiedObservations, matchingProduct, type QualifiedObservation } from './qualified-observations.mts';
 import { assessInput, assessRequest, type RequestSatisfaction } from './request-satisfaction.mts';
 import { parseAcceptedAssumptions, type ResolutionAssumption } from '../resolution-evidence.mts';
@@ -686,6 +687,48 @@ function targetCoverage(telescope: string, adapter: ArchiveAdapter, ledgerPath: 
   return (adapter.missingCoverage ?? ordinaryMissing(telescope))(ledgerPath, value, target);
 }
 
+export interface IndexedObservation {
+  readonly source: 'ledger' | 'package';
+  readonly telescope: string; readonly mode: string; readonly archiveDate: string;
+  readonly observation: string; readonly programme?: string; readonly title?: string;
+  readonly startIso: string | null; readonly endIso: string | null;
+  readonly kind?: ProductKind; readonly instrument?: string; readonly filter?: string;
+  readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
+  readonly sourceProductId?: string;
+  readonly qualification?: { readonly verified: boolean; readonly receipt: string; readonly problem?: string; readonly limitations: readonly string[] };
+  readonly qualifiedProducts: readonly QualifiedObservation[];
+  readonly routeObservation: import('./qualification-routes.mts').QualificationObservation;
+}
+
+/** Expose exact indexed observation identities without running scientific-request assessment. */
+export function indexedTargetObservations(inputs: QueryInputs, target: string): { readonly observations: readonly IndexedObservation[]; readonly coverage: readonly TargetCoverage[] } {
+  const rows = new Map<string, IndexedObservation>(), coverage: TargetCoverage[] = [];
+  const add = (row: Omit<IndexedObservation, 'qualifiedProducts'>) => {
+    const key = JSON.stringify([row.telescope, row.mode, row.observation]);
+    const qualifiedProducts = (inputs.qualifiedProducts ?? []).filter(product => product.target === target && product.telescope === row.telescope && product.mode === row.mode && product.observation === row.observation);
+    const previous = rows.get(key);
+    rows.set(key, { ...(previous ?? row), ...row, qualifiedProducts });
+  };
+  for (const ledger of inputs.ledgers) {
+    const adapter = ADAPTERS[ledger.telescope];
+    if (!adapter) throw new TypeError(`No adapter reads the ${ledger.telescope} ledger.`);
+    const modes = adapter.modes(ledger.value, target, inputs.targetAssociations);
+    coverage.push(targetCoverage(ledger.telescope, adapter, ledger.path, ledger.value, target, modes));
+    for (const mode of modes) for (const record of mode.observations?.records ?? []) add({ source: 'ledger', telescope: mode.telescope, mode: mode.mode, archiveDate: mode.archiveDate,
+      observation: record.id, ...(record.programme ? { programme: record.programme } : {}), ...(record.title ? { title: record.title } : {}),
+      startIso: record.startIso || null, endIso: record.endIso ?? null, ...(record.kind ? { kind: record.kind } : {}),
+      ...(record.instrument ? { instrument: record.instrument } : {}), ...(record.filter ? { filter: record.filter } : {}),
+      ...(record.wavelengthIntervalsMicrometres ? { wavelengthIntervalsMicrometres: record.wavelengthIntervalsMicrometres } : record.wavelengthIntervalMicrometres ? { wavelengthIntervalsMicrometres: [record.wavelengthIntervalMicrometres] } : {}),
+      ...(record.sourceProductId ? { sourceProductId: record.sourceProductId } : {}), ...(record.qualification ? { qualification: record.qualification } : {}), routeObservation: record });
+  }
+  for (const product of inputs.sourceProducts ?? []) add({ source: 'package', telescope: product.telescope, mode: product.mode, archiveDate: 'package-owned pins', observation: product.id,
+    programme: product.id, startIso: product.startIso ?? null, endIso: product.endIso ?? null, kind: product.kind, wavelengthIntervalsMicrometres: product.wavelengthIntervalsMicrometres,
+    sourceProductId: product.id, qualification: { verified: product.qualified, receipt: product.receipt, problem: product.receiptProblem, limitations: product.limitations },
+    routeObservation: { id: product.id, programme: product.id, startIso: product.startIso ?? '', ...(product.endIso ? { endIso: product.endIso } : {}), sourceProductId: product.id,
+      kind: product.kind, wavelengthIntervalsMicrometres: product.wavelengthIntervalsMicrometres } });
+  return { observations: [...rows.values()], coverage };
+}
+
 /** Every mode key the ledgers use, so `modes.json` can be tied to them and cannot drift. */
 export function ledgerModeKeys(ledgers: QueryInputs['ledgers']): { readonly telescope: string; readonly mode: string }[] {
   const keys = new Map<string, { telescope: string; mode: string }>();
@@ -1018,11 +1061,8 @@ export function selectObservation(answer: CapabilityAnswer, telescope: string, m
 
 export const LEDGER_TELESCOPES: readonly string[] = Object.keys(ADAPTERS);
 
-/** Read everything the query needs from the repository. The query itself reads nothing. */
-/** The string overload retains legacy archive loading; the full request also searches bounded VO services. */
-export async function loadQueryInputs(root: string, targetOrRequest: string | CapabilityRequest, selectedObservation?: string): Promise<QueryInputs> {
-  if (typeof targetOrRequest !== 'string') queryCapabilities(targetOrRequest, { ledgers: [], capabilities: [], targetCatalogue: [], targetAssociations: [], bodyMaps: [] });
-  const target = typeof targetOrRequest === 'string' ? targetOrRequest : targetOrRequest.target;
+/** Load only the shipped target catalogue, so human entry points can resolve ambiguity before archive access. */
+export async function loadTargetCatalogue(root: string): Promise<TargetCatalogueEntry[]> {
   // These package descriptors are the source of the application's generated catalogue. Reading them keeps this CLI usable
   // in a clean checkout, before `prepare` has emitted site/prepared-object-catalog.mts.
   const objectRoot = resolve(root, 'src/objects'), targetCatalogue: TargetCatalogueEntry[] = [];
@@ -1047,6 +1087,14 @@ export async function loadQueryInputs(root: string, targetOrRequest: string | Ca
       targetCatalogue.push({ id, name: requireString(entry.name, `${id} name`), aliases: entry.aliases === undefined ? [] : stringList(entry.aliases, `${id} aliases`) });
     }
   }
+  return targetCatalogue;
+}
+
+/** Read everything the query needs from the repository. The query itself reads nothing. */
+/** The string overload retains legacy archive loading; an explicit request also searches bounded VO services. */
+export async function loadQueryInputs(root: string, targetOrRequest: string | CapabilityRequest | DiscoveryRequest, selectedObservation?: string): Promise<QueryInputs> {
+  const target = typeof targetOrRequest === 'string' ? targetOrRequest : targetOrRequest.target;
+  const objectRoot = resolve(root, 'src/objects'), targetCatalogue = await loadTargetCatalogue(root);
   const resolution = resolveTarget(target, targetCatalogue), canonicalTarget = resolution.status === 'resolved' ? resolution.canonical.id : target;
   const ledgers: { telescope: string; path: string; value: unknown }[] = [], dynamicCapabilities: ModeCapability[] = [];
   for (const telescope of LEDGER_TELESCOPES) {

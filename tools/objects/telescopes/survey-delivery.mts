@@ -57,8 +57,9 @@ export async function surveyDeliveries(root:string,targets:readonly string[],out
       const session=await saveSession(root,args,dir,api),choice=session.choices.find(c=>c.observation===product.id);
       if(!choice)throw new Error('Indexed source has no saved-query choice');
       const result=await getSession(root,dir,choice.pick,()=>{},api);
+      if(result.context.kind!=='scientific-request')throw new Error('Saved scientific query returned an exploration context');
       const delivery=requireRecord(JSON.parse(await readFile(result.resultPath,'utf8'))),facts=requireRecord(delivery.facts);
-      results.push({target,state:'delivered',product:product.id,decoder:product.decoder,result:result.resultPath,satisfaction:result.satisfaction,metadata:facts.nativeMetadata,calibrationDependencies:facts.calibrationDependencies});
+      results.push({target,state:'delivered',product:product.id,decoder:product.decoder,result:result.resultPath,satisfaction:result.context.assessment,metadata:facts.nativeMetadata,calibrationDependencies:facts.calibrationDependencies});
     }catch(error){
       // A newly established contradiction is a scientific refusal, not a decoder crash.
       const product=selected&&requestArgs?(await loadSourceProducts(root,target).catch(()=>[])).find(p=>p.id===selected!.id):undefined;

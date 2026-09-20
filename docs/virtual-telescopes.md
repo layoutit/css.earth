@@ -22,6 +22,31 @@ existing css.earth science workspace for the catalogue, archive clients and inst
 pipelines. See [package setup](../packages/telescope/README.md). It does not bundle
 Python environments or download the repository during installation.
 
+Start with only a target to preserve the difference between discovery and a scientific request:
+
+```sh
+pnpm telescope explore eris
+pnpm telescope explore eris --kind cube --wavelength 2.2,2.4 --out output/eris-exploration
+```
+
+The terminal flow saves `explore.json`, shows bounded archive and package observations with their
+advertised or verified basis, and retrieves only the identity the person selects. Omitted filters
+remain omitted; no wavelength, time, product kind or resolution requirement is invented. `--json`
+and redirected input or output never prompt. Without `--out`, the command creates a unique directory
+under `./telescope-runs/`. An exploration delivery retains “no scientific acceptance criteria
+requested” through later outputs.
+
+`telescope outputs ARTIFACT.json` is the second human entry point. It identifies the artifact and
+its source context, keeps unavailable operations and blockers visible, and prints the parameters and
+explicit command template for each available next operation. In a terminal it asks which available
+operation to run, then prompts only for that operation's reported inputs and output directory. The
+same explicit-command parser validates the answers before the existing export owner runs. Enter
+cancels without starting that output; JSON and redirected execution never prompt. It accepts
+supported delivery records, derived product records and prepared point/volume object packages,
+not arbitrary raw science files.
+
+Use `query` when the wavelength, time, product kind and resolution are actual acceptance criteria:
+
 ```sh
 pnpm telescope query eris --wavelength 2.2,2.4 --kind cube \
   --any-time --min-arcsec 1 --out output/eris-query
@@ -652,6 +677,37 @@ the previous zero-excluding policy do not establish agreement under the new poli
 recompare existing cubes to renew them. No pipeline rerun is needed for unchanged
 products and inputs. The scope states the actual compared archive planes, including
 aligned subsets supplied without a request interval.
+
+## Observational families and local products
+
+The artifact contract no longer assumes that every observation is a spatial raster. A versioned
+product descriptor names pinned members, components, axes or columns, quantity and calibration
+semantics, dependencies, uncertainty, flags, time and frames. Static handlers cover F01–F18:
+images, cubes, spectra, slit profiles, photometry, time series, dynamic spectra, tables,
+astrometry, events, radio and optical interferometry, polarimetry, maps, radar, physical fields,
+raw/calibration products and compound closures. One descriptor may name several families.
+
+Run `telescope families` for the derived coverage ledger. Every F01–F18 family now has one
+complete, evidence-backed baseline reachable from the public workflow. Coverage is bounded to
+those declared profiles: additional formats and operations may still report `partial` or remain
+unavailable, and missing dependencies stay visible.
+
+Local files use the same bounded intake boundary:
+
+```sh
+telescope import import-spec.json --out imported-observation
+telescope outputs imported-observation/import.json
+```
+
+The data-only specification names files/directories, roles and byte/member limits. Import copies
+regular files without following symlinks, pins every byte and proposes handlers from bounded
+content inspection. Target, origin, units, frame, calibration and family hints supplied by the
+user remain declarations until a handler validates them. A content hash proves integrity, not
+archive origin or scientific fitness.
+
+Archive product terms retain the source label and map against the dated IVOA product-type
+vocabulary. This proposes a family route; product bytes and metadata must still confirm the
+handler profile. Preliminary and unknown vocabulary terms remain marked as such.
 
 ## From a delivered product to an output
 

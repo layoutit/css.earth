@@ -1,9 +1,29 @@
-export const HELP = `Telescope — retrieve a qualified telescope product for a saved scientific question.
+export const HELP = `Telescope — explore observations or continue from an existing artifact.
 
+Human entry points:
+  telescope explore TARGET [--family F01..F18] [--kind KIND] [--wavelength MIN,MAX] [--out DIRECTORY]
+  telescope import SPEC.json --out DIRECTORY
+  telescope families [--json]
+  telescope family-assess REQUEST.json DESCRIPTOR.json --out DIRECTORY [--json]
+  telescope family-run DESCRIPTOR.json OPERATION [--params PARAMS.json] --out DIRECTORY [--json]
+  telescope outputs ARTIFACT.json [--structure NAME]
+
+Explore needs only a target. In a terminal it saves the bounded discovery snapshot, shows actual
+observations and limitations, and asks which exact identity to retrieve. With --json, redirected
+stdin, or redirected stdout it never prompts and writes the saved exploration as JSON. If --out is
+omitted, a unique directory is created under ./telescope-runs/. Get accepts that directory's
+explore.json as well as a strict query.json. Exploration does not state scientific acceptance criteria.
+In a terminal, outputs asks which available operation to run, then asks only for that operation's
+reported inputs and a new output directory. Press Enter at any prompt to cancel before an export
+starts. With --json or redirected input/output it never prompts; the listed command templates remain.
+Family-run executes one operation from a verified product descriptor through the static owner allowlist.
+Its params file is optional only when that operation has no required parameters. The output directory
+must be new; reusable data and a pinned product record are reopened before success is reported.
+
+Explicit scientific request:
   telescope query TARGET --wavelength MIN,MAX --kind cube --any-time --min-arcsec N --out DIRECTORY
   telescope get DIRECTORY --pick N
   telescope get DIRECTORY --pick N --offline
-  telescope outputs ARTIFACT.json [--structure NAME]
   telescope export DIRECTORY/pick-N/result.json --output image --hdu N [--structure NAME] --plane N --out DIRECTORY
   telescope export DIRECTORY/pick-N/result.json --output spectrum --hdu N --pixel X,Y --out DIRECTORY
   telescope export RESULT_JSON --output band-image --hdu N --band LO,HI --out DIRECTORY
@@ -28,7 +48,7 @@ Aggregate outputs:
   Apertures are fixed pixel boxes with exclusive upper bounds; spectra are region means.
   Band images are wavelength-weighted means. Feature maps integrate a continuum residual.
 
-Query options use micrometres, arcseconds and kilometres:
+Explore filters and query options use micrometres, arcseconds and kilometres:
   --from ISO --to ISO                 Time range instead of --any-time
   --icrs-circle RA,DEC,RADIUS          Explicit ICRS cutout, in degrees
   --spectral-frame barycentric        Permit advertised SODA BAND subsetting
@@ -48,10 +68,14 @@ Query options use micrometres, arcseconds and kilometres:
   --verbose                          Full query evidence or error stack
   --help                             Show this help
 
-Queries save immutable numbered choices in DIRECTORY/query.json. Get revalidates the
-choice, qualifies it if needed, and exports pinned data and evidence to DIRECTORY/pick-N/.
+Explorations and queries save immutable numbered choices in explore.json and query.json. Get
+revalidates the exact saved identity, qualifies it if needed, and exports pinned data and evidence
+to DIRECTORY/pick-N/. If both snapshot files are present, get refuses the ambiguous directory.
 Outputs inspects deliveries, derived product records and physical object packages, and reports
-only the next supported exports after checking the prerequisites shared with export. The v1
+the artifact stage and source context, then reports available operations, blockers, required inputs
+and concrete commands after checking the prerequisites shared with export. Supported inputs are
+existing telescope deliveries, product records and prepared point/volume object packages; raw
+FITS/PDS files are not admitted without their qualification evidence. The v1
 transitions are native delivery -> scientific output; 2D measurement + navigation -> body map;
 body map + embeddable standard body -> sphere; prepared point/volume object -> renderer handoff.
 Configured, bounded archive searches and a declared product kind do not promise universal
@@ -59,13 +83,16 @@ archive coverage, decoding or export. Qualified FITS images, spectra, band image
 use zero-based HDU, plane and pixel indices. Cubes require an explicit plane for image export.
 Export writes FITS images or ECSV spectra, PNG, SVG, CSV and a pinned receipt.
 The output directory must be new. No browser or viewer service is required.
+Local import copies and pins a bounded file or directory closure from a data-only JSON specification.
+It records user declarations as unverified and proposes a registered handler from byte content; import
+does not establish archive origin, calibration, or scientific qualification.
 Scientific surface publication remains an explicit qualification after projection. Physical 3D
 adapters need real geometry. Sphere export prepares one standalone no-JavaScript HTML file.
 Native deliveries, sphere HTML and physical handoffs carry their portable files. Intermediate
 measurement/map records may still depend on retained workspace sources. Missing dependencies
 are refused, never searched for or repaired. Export success preserves the source request's
 fulfilled, unresolved or refused verdict.
-Exit codes: 0 ready/fulfilled, 1 operation failed, 2 invalid arguments,
+Exit codes: 0 exploration/retrieval completed or request fulfilled, 1 operation failed, 2 invalid arguments,
 3 no retrievable choice or unresolved request, 4 refused request.
 The npm command accepts --workspace PATH (or CSSEARTH_WORKSPACE) for a css.earth science checkout.
 `;

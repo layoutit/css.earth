@@ -9,6 +9,8 @@ import { assertBodyMapPlanes,bodyMapProductRecord,formatProductRecord } from '..
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { projectWithPlanetMapper } from '../astronomy-packages/projection.mts';
+import { canonical } from './vo/contracts.mts';
+import { sourceContext } from './delivery-context.mts';
 import { delivery } from './outputs.mts';
 
 export function localOutput(root:string,name:string):string {
@@ -53,15 +55,16 @@ export async function validateProjectionSource(source:Awaited<ReturnType<typeof 
   if(deliveryPins.length!==1)throw new Error('Measurement must name exactly one source delivery');
   const deliveryPin=deliveryPins[0]!,d=await delivery(deliveryPin.identity);
   if(d.pin.sha256!==deliveryPin.sha256||d.pin.bytes!==deliveryPin.bytes)throw new Error('Measurement source delivery changed');
+  const context=sourceContext(source.record.parameters);if(canonical(context)!==canonical(d.context))throw new Error('Measurement source context differs from its delivery');
   const inputs:ProductInput[]=[{role:'measurement record',identity:source.file,...source.pin},...source.record.outputs.map(o=>({role:'measurement output',identity:localOutput(source.root,o.path),bytes:o.bytes,sha256:o.sha256})),...source.record.inputs];
   await checkPins(inputs);
-  return {source,d,selection,definition,metadata,measurement,inputs};
+  return {source,d,context,selection,definition,metadata,measurement,inputs};
 }
 
 export async function projectionSource(recordPath:string){return validateProjectionSource(await verifiedProduct(recordPath));}
 
 export async function projectOutput(recordPath:string,geometryPath:string,outputDirectory:string){
-  const prepared=await projectionSource(recordPath),{source,d,selection,definition,metadata,measurement}=prepared;
+  const prepared=await projectionSource(recordPath),{source,d,context,selection,definition,metadata,measurement}=prepared;
   const geometryFile=resolve(geometryPath),geometryBytes=await readFile(geometryFile),geometry=parseGeometry(JSON.parse(geometryBytes.toString()),dirname(geometryFile));
   const inputs:ProductInput[]=[...prepared.inputs,{role:'navigation choices',identity:geometryFile,bytes:geometryBytes.length,sha256:sha256(geometryBytes)},...geometry.kernels.map(k=>({role:`SPICE ${k.role}: ${k.source}`,identity:k.file,bytes:k.bytes,sha256:k.sha256}))];
   if(geometry.registration.evidence)inputs.push({role:'registration evidence',identity:geometry.registration.evidence.file,sha256:geometry.registration.evidence.sha256,bytes:geometry.registration.evidence.bytes});
@@ -84,13 +87,13 @@ export async function projectOutput(recordPath:string,geometryPath:string,output
       planes:{file:'map.fits',sha256:sha256(plane),value:'VALUE',uncertainty:'SIGMA'},mask:{maximumEmissionDegrees:geometry.maximumEmissionDegrees,missing:'NaN'},
       observations:[{id:nav.observation,telescope:d.telescope,instrument:nav.instrument,midTimeJd:nav.midTimeJd,startTimeJd:nav.startTimeJd,endTimeJd:nav.endTimeJd,startIso:nav.startIso,endIso:nav.endIso,exposureSeconds:nav.exposureSeconds,rangeKm:nav.rangeKm,subObserver:nav.subObserver,angularResolution:resolution}]});
     assertBodyMapPlanes(plane,product);const bytes=Buffer.from(JSON.stringify(product,null,2)+'\n');await writeFile(resolve(staging,'map.fits.body-map.json'),bytes);
-    await writeFile(resolve(staging,'navigation.json'),JSON.stringify({...nav,sourceRequest:d.record.request,sourceSatisfaction:d.record.satisfaction,sourceResolution:{angularResolutionArcsec:facts.angularResolutionArcsec??null,evidence:facts.resolutionEvidence??[]},publication:'not-evaluated'},null,2)+'\n');
+    await writeFile(resolve(staging,'navigation.json'),JSON.stringify({...nav,sourceContext:context,sourceResolution:{angularResolutionArcsec:facts.angularResolutionArcsec??null,evidence:facts.resolutionEvidence??[]},publication:'not-evaluated'},null,2)+'\n');
     const names=['navigation.json','texture.png','poles.png','figure.png'],extras=await Promise.all(names.map(async path=>({path,bytes:await readFile(resolve(staging,path))})));
     const implementation=sha256(Buffer.concat(await Promise.all(['projection.mts','../astronomy-packages/projection.mts','../body-map-product.mts','../body-map-publication.mts'].map(path=>readFile(new URL(path,import.meta.url))))));
     const software=[{name:'cssEarth projection',version:implementation},...Object.entries(requireRecord(nav.software)).map(([name,v])=>({name,version:requireString(v)}))];
     const record=bodyMapProductRecord(product,plane,bytes,inputs,software,(await astroqueryToolchain()).digest,extras);
     await checkPins(inputs);await writeFile(resolve(staging,'map.fits.product.json'),formatProductRecord(record));
     await rmdir(destination);await rename(staging,destination);
-    return {directory:destination,map:resolve(destination,'map.fits'),figure:resolve(destination,'figure.png'),receipt:resolve(destination,'map.fits.product.json'),sourceSatisfaction:d.record.satisfaction,registration:geometry.registration,publication:'not-evaluated' as const};
+    return {directory:destination,map:resolve(destination,'map.fits'),figure:resolve(destination,'figure.png'),receipt:resolve(destination,'map.fits.product.json'),sourceContext:context,registration:geometry.registration,publication:'not-evaluated' as const};
   }catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}
 }

@@ -1,0 +1,45 @@
+PDS_VERSION_ID        = PDS3                                                  
+                                                                              
+PRODUCT_ID            = "GEOGRAPH-GE007-200204"                               
+PRODUCT_NAME          = "GEOGRAPHOS RADAR INDIVIDUAL RUN 007"                 
+PRODUCT_CREATION_TIME = 1998-03-23                                            
+                                                                              
+RECORD_TYPE           = "FIXED_LENGTH"                                        
+RECORD_BYTES          = 2880                                                  
+FILE_RECORDS          = 25                                                    
+                                                                              
+^HEADER               = ("GE007.FIT",1)                                       
+^IMAGE                = ("GE007.FIT",2)                                       
+                                                                              
+DATA_SET_ID           = "EAR-A-GST-3-RDR-GEOGRAPHOS-RADAR-V1.1"               
+INSTRUMENT_HOST_NAME  = "GOLDSTONE DEEP SPACE COMMUNICATIONS COMPLEX"         
+INSTRUMENT_NAME       = "GOLDSTONE DEEP SPACE NETWORK ANTENNA DSS-14"         
+START_TIME            = 1994-08-28T07:11                                      
+STOP_TIME             = 1994-08-28T07:47                                      
+TARGET_NAME           = "1620 GEOGRAPHOS"                                     
+DESCRIPTION           = "Geographos radar individual imaging run.  The        
+  setup and observing circumstances for each run are given in the index       
+  file, geindex.tab, as well as in Table III of Ostro et al. (1996)           
+  [OSTROETAL1996], where these data were originally published."               
+                                                                              
+                                                                              
+OBJECT     = HEADER                                                           
+  INTERCHANGE_FORMAT = "ASCII"                                                
+  HEADER_TYPE        = "FITS"                                                 
+  BYTES              = 2880                                                   
+  RECORDS            = 1                                                      
+  DESCRIPTION        = "FITS header for Geographos radar individual           
+    runs."                                                                    
+END_OBJECT                                                                    
+                                                                              
+                                                                              
+OBJECT     = IMAGE                                                            
+  LINES           = 64                                                        
+  LINE_SAMPLES    = 127                                                       
+  SAMPLE_BITS     = 32                                                        
+  SAMPLE_TYPE     = "IEEE_REAL"                                               
+  AXIS_ORDER_TYPE = "FIRST_INDEX_FASTEST"                                     
+  DESCRIPTION     = "This is a low-resolution image."                         
+END_OBJECT                                                                    
+                                                                              
+END                                                                           

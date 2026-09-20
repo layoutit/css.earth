@@ -11,6 +11,7 @@ import { assertBodyMapPlanes } from '../body-map-publication.mts';
 import { writeProductRecord } from '../product-record.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { verifiedProduct,localOutput } from './projection.mts';
+import { contextTarget,sourceContext } from './delivery-context.mts';
 
 const root=resolve(import.meta.dirname,'../../..');
 type SphereOwner=typeof import('./sphere-lane.mts');
@@ -31,9 +32,9 @@ export async function validateSphereBundle(source:Awaited<ReturnType<typeof veri
   if(radii.length!==3||radii.some(n=>n<=0)||radii[0]!==map.frame.radiusKm)throw new Error('Body dimensions disagree with navigation');
   requireString(nav.shape);requireRecord(nav.registration);requireString(nav.uncertainty);
   const norm=requireRecord(nav.normalization);requireFiniteNumber(norm.minimum);requireFiniteNumber(norm.maximum);requireString(norm.colormap);requireString(norm.missing);
-  const satisfaction=requireRecord(nav.sourceSatisfaction),request=requireRecord(nav.sourceRequest);
-  if(request.target!==map.frame.body)throw new Error('Source request target disagrees with the body map');
-  return {source,map,nav,radii,norm,satisfaction,request,plane};
+  const context=sourceContext(nav);
+  if(contextTarget(context)!==map.frame.body)throw new Error('Source context target disagrees with the body map');
+  return {source,map,nav,radii,norm,context,plane};
 }
 export async function validateSphereSource(source:Awaited<ReturnType<typeof verifiedProduct>>,workspaceRoot=root,heldOwner?:SphereOwner){
   const bundle=await validateSphereBundle(source);
@@ -47,10 +48,10 @@ export async function exportSphere(recordPath:string,outputDirectory:string){
   const source=await verifiedProduct(recordPath),bundle=await validateSphereBundle(source);
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
   try{
-  const loaded=await loadSphereOwner();try{const {compiled,owner}=loaded;await owner.inspectMeasurementSphere(root,bundle.map.frame.body);const {map,nav,radii,norm,satisfaction,request}=bundle;
+  const loaded=await loadSphereOwner();try{const {compiled,owner}=loaded;await owner.inspectMeasurementSphere(root,bundle.map.frame.body);const {map,nav,radii,norm,context}=bundle;
   const longitude=(360-map.observations[0].subObserver.westLongitudeDegrees)%360,latitude=map.observations[0].subObserver.latitudeDegrees;
   const prepared=await owner.measurementSphere(root,map.frame.body,localOutput(source.root,'texture.png'),staging,{longitudeDegrees:longitude,latitudeDegrees:latitude,zoom:1.1});
-  const metadata={target:map.frame.body,radiiKm:radii,shape:nav.shape,grid:map.grid,units:map.definition.units,normalization:norm,registration:nav.registration,sourceRequest:request,sourceSatisfaction:satisfaction,uncertainty:nav.uncertainty,mapSha256:map.planes.sha256,renderer:prepared.owner};
+  const metadata={target:map.frame.body,radiiKm:radii,shape:nav.shape,grid:map.grid,units:map.definition.units,normalization:norm,registration:nav.registration,sourceContext:context,uncertainty:nav.uncertainty,mapSha256:map.planes.sha256,renderer:prepared.owner};
   const html=owner.sphereHtml(prepared,metadata,`${map.frame.body} · ${map.definition.quantity}`,`${map.definition.units} · ${Number(norm.minimum).toPrecision(4)}–${Number(norm.maximum).toPrecision(4)} · grey: unobserved`);
     await writeFile(resolve(staging,'sphere.html'),html);
     const fresh=await verifiedProduct(source.file);if(fresh.pin.sha256!==source.pin.sha256)throw new Error('Body map changed during sphere preparation');
@@ -59,7 +60,7 @@ export async function exportSphere(recordPath:string,outputDirectory:string){
     await writeProductRecord(resolve(staging,'sphere.product.json'),{telescope:source.record.telescope,stage:'telescope-sphere',inputs:[{role:'body-map record',identity:source.file,...source.pin},...prepared.inputs.filter(input=>!input.identity.startsWith(staging)),...source.record.outputs.map(o=>({role:'body-map output',identity:localOutput(source.root,o.path),sha256:o.sha256,bytes:o.bytes}))],parameters:metadata,software:[{name:'cssEarth / PolyCSS prepared sphere',version:implementation}]},[{path:'sphere.html',file:resolve(staging,'sphere.html')}]);
     await rm(resolve(staging,'raster'),{recursive:true});
     await rmdir(destination);await rename(staging,destination);
-    return {directory:destination,html:resolve(destination,'sphere.html'),receipt:resolve(destination,'sphere.product.json'),sourceRequest:request,sourceSatisfaction:satisfaction};
+    return {directory:destination,html:resolve(destination,'sphere.html'),receipt:resolve(destination,'sphere.product.json'),sourceContext:context};
   }finally{await loaded.cleanup();}
   }catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}
 }

@@ -1,7 +1,7 @@
 /** Astropy owns scientific serialization and axes; Matplotlib owns static rendering. */
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from './toolchain.mts';
-import { requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../source-values.mts';
 export const PLOT_PYTHON = String.raw`
 import csv,json,sys,warnings
 from pathlib import Path
@@ -134,5 +134,82 @@ export async function plotProduct(directory:string,target:string,data:Record<str
       if(code!==0)return reject(new Error(`Plot failed: ${err.slice(-2000)}`));
       try{const result=requireRecord(JSON.parse(out));if(requireString(result.matplotlib)!=='3.11.2'||requireString(result.astropy)!=='8.0.1')throw new Error('Unexpected plotting package version');accept(result);}catch(error){reject(error);}
     });child.stdin.end(JSON.stringify({directory,target,data,source,selection}));
+  });
+}
+
+/**
+ * The compact family views below are deliberately limited to the four native
+ * numeric shapes that the Telescope API already exposes.  Astropy supplies
+ * units and Matplotlib owns the rendered figure; callers retain selection,
+ * calibration and scientific interpretation in their family receipts.
+ */
+export type NumericPreview =
+  | { readonly kind:'series'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly series:readonly {readonly label:string;readonly x:readonly number[];readonly y:readonly number[];readonly uncertainty?:readonly (number|null)[];readonly upperLimit?:readonly boolean[]}[] }
+  | { readonly kind:'scatter'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly points:readonly {readonly x:number;readonly y:number;readonly label?:string}[] }
+  | { readonly kind:'histogram'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly edges:readonly number[]; readonly counts:readonly number[] }
+  | { readonly kind:'raster'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly width:number; readonly height:number; readonly values:readonly number[]; readonly colorLabel:string };
+
+const NUMERIC_PREVIEW_PYTHON=String.raw`
+import json,sys
+from pathlib import Path
+import numpy as np
+import astropy
+from astropy import units as u
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+r=json.load(sys.stdin); d=r['preview']; out=Path(r['directory']); out.mkdir(parents=True,exist_ok=True)
+kind=d['kind']; fig,ax=plt.subplots(figsize=(8,5),layout='constrained')
+if kind=='series':
+ for s in d['series']:
+  x=np.asarray(s['x'],dtype=float); y=np.asarray(s['y'],dtype=float)
+  if x.ndim!=1 or y.shape!=x.shape or not np.isfinite(x).all(): raise ValueError('Series coordinates are invalid')
+  valid=np.isfinite(y); ax.plot(x[valid],y[valid],lw=1,label=s['label'])
+  if 'uncertainty' in s:
+   e=np.asarray([np.nan if v is None else v for v in s['uncertainty']],dtype=float)
+   if e.shape!=x.shape or np.any(e[np.isfinite(e)]<0): raise ValueError('Series uncertainty is invalid')
+   ax.fill_between(x[valid],(y-e)[valid],(y+e)[valid],alpha=.18)
+  if 'upperLimit' in s:
+   limits=np.asarray(s['upperLimit'],dtype=bool)
+   if limits.shape!=x.shape: raise ValueError('Series upper-limit shape is invalid')
+   ax.scatter(x[limits & valid],y[limits & valid],marker='v',s=20)
+ if len(d['series'])>1: ax.legend(frameon=False)
+elif kind=='scatter':
+ p=d['points']; x=np.asarray([q['x'] for q in p],dtype=float); y=np.asarray([q['y'] for q in p],dtype=float)
+ if x.shape!=y.shape or not np.isfinite(x).all() or not np.isfinite(y).all(): raise ValueError('Scatter coordinates are invalid')
+ ax.scatter(x,y,s=16,alpha=.8)
+elif kind=='histogram':
+ edges=np.asarray(d['edges'],dtype=float); counts=np.asarray(d['counts'],dtype=float)
+ if len(edges)!=len(counts)+1 or not np.isfinite(edges).all() or np.any(np.diff(edges)<=0) or np.any(counts<0): raise ValueError('Histogram bins are invalid')
+ ax.stairs(counts,edges,fill=True,alpha=.35)
+elif kind=='raster':
+ width=int(d['width']); height=int(d['height']); values=np.asarray(d['values'],dtype=float)
+ if width<1 or height<1 or values.size!=width*height: raise ValueError('Raster shape is invalid')
+ shown=ax.imshow(np.ma.masked_invalid(values.reshape((height,width))),origin='lower',interpolation='nearest',cmap='viridis')
+ fig.colorbar(shown,ax=ax,label=d['colorLabel'])
+else: raise ValueError('Unknown numeric preview kind')
+ax.set_title(d['title'],fontsize=10);ax.set_xlabel(d['xLabel']);ax.set_ylabel(d['yLabel'])
+fig.savefig(out/'preview.png',dpi=160,transparent=True,bbox_inches='tight',pad_inches=.12,metadata={'Software':'Astropy / Matplotlib; css.earth telescope family preview'})
+fig.savefig(out/'preview.svg',bbox_inches='tight',pad_inches=.12,metadata={'Date':None,'Creator':'Astropy / Matplotlib; css.earth telescope family preview'})
+plt.close(fig)
+json.dump({'astropy':astropy.__version__,'matplotlib':matplotlib.__version__,'files':['preview.png','preview.svg'],'kind':kind},sys.stdout)
+`;
+
+export async function plotNumericPreview(directory:string,preview:NumericPreview):Promise<{readonly astropy:string;readonly matplotlib:string;readonly files:readonly string[];readonly kind:NumericPreview['kind']}> {
+  const tc=await astroqueryToolchain();
+  return new Promise((accept,reject)=>{
+    const child=spawn(tc.python,['-c',NUMERIC_PREVIEW_PYTHON],{env:{...process.env,...tc.env,MPLBACKEND:'Agg'},stdio:['pipe','pipe','pipe']});
+    let out='',err='';child.stdout.setEncoding('utf8').on('data',text=>{out+=text;});child.stderr.setEncoding('utf8').on('data',text=>{err+=text;});
+    child.on('error',reject);child.on('close',code=>{
+      if(code!==0)return reject(new Error(`Numeric preview failed: ${err.slice(-2000)}`));
+      try{
+        const result=requireRecord(JSON.parse(out));
+        if(requireString(result.matplotlib)!=='3.11.2'||requireString(result.astropy)!=='8.0.1')throw new Error('Unexpected plotting package version');
+        const files=requireArray(result.files).map((value,index)=>requireString(value,`plot file ${index}`));
+        accept({astropy:requireString(result.astropy),matplotlib:requireString(result.matplotlib),files,kind:preview.kind});
+      }catch(error){reject(error);}
+    });
+    child.stdin.end(JSON.stringify({directory,preview}));
   });
 }

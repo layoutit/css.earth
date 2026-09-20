@@ -1,6 +1,6 @@
 # @cssearth/telescope
 
-The `telescope` command saves a scientific question, lists retrievable observations, and retrieves a chosen product with its qualification evidence. It distinguishes verified data from a fulfilled scientific request.
+The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request.
 
 This package supplies the command, not the observatory pipelines or catalogue. It uses a **css.earth science checkout** containing the telescope API, source manifests and any required Python environments. It can run from any directory with `--workspace PATH` or `CSSEARTH_WORKSPACE`; inside the checkout it finds the workspace automatically. Acquisition and reduction caches stay in that checkout, while deliveries go to your `--out` directory. The package does not download a checkout, install Python, or run pipelines during npm installation.
 
@@ -18,17 +18,50 @@ export CSSEARTH_WORKSPACE=/path/to/css.earth
 
 ## Use
 
+Start with a target when you want to see what is available:
+
+```sh
+telescope explore eris
+telescope explore eris --kind cube --wavelength 2.2,2.4 --out runs/eris
+```
+
+In a terminal, `explore` shows the actual observations, unknown metadata, unsupported records and
+provider limits in its saved snapshot, then asks which observation to retrieve. It does not download
+or qualify a product until you select one. Press Enter at the prompt to leave the valid exploration
+saved without starting a retrieval. With `--json`, redirected stdin, or redirected stdout, it never
+prompts and emits the saved exploration as one JSON value. Without `--out`, it creates a unique run
+under `./telescope-runs/` and reports that path.
+
+Start with an existing supported artifact to inspect its source context and next operations:
+
+```sh
+telescope outputs runs/eris/pick-1/result.json
+```
+
+The human screen keeps unavailable operations and their blockers visible and prints concrete
+`telescope export` command templates for available operations. In a terminal it also asks which
+available operation to run, then requests only that operation's reported selectors and a new output
+directory. Invalid selectors are rejected by the same command parser used by explicit exports and can
+be entered again. Press Enter at any selection or parameter prompt to cancel before an export starts.
+With `--json` or redirected input/output, inspection never prompts or starts an operation. The same
+inspection is returned as structured data with `--json`. Supported inputs are telescope delivery
+JSON, telescope product records, and prepared point-field or density-volume `object.json` packages.
+A raw FITS or PDS file alone has no admitted provenance or qualification and is refused with that
+boundary explained.
+
+When you already know the scientific acceptance criteria, save an explicit request:
+
 ```sh
 telescope query eris --wavelength 2.2,2.4 --kind cube \
   --any-time --min-arcsec 1 --out runs/eris
 telescope get runs/eris --pick 1
 ```
 
-Choose a number from your saved query. It is not a fixed observation ID or a claim that every target has a retrievable cube. `get` reloads current archive and qualification information; saved commands and file paths are never executed as authority. A stale choice requires a new query. Existing verified results are reused only after their pins are checked again.
+Choose a number from the saved snapshot. The number is only presentation within that immutable snapshot; `get` binds to its recorded observation identity. It reloads current archive and qualification information, and saved commands and file paths are never executed as authority. A stale choice requires a new exploration or query. Existing verified results are reused only after their pins are checked again. A directory containing both `explore.json` and `query.json` is refused rather than guessed.
 
 `query.json` preserves the question and evidence. Each `pick-N/` contains `result.json` and a `files/` tree with the complete recorded native output set, detached dependencies and evidence. Relative paths in the original receipts remain intact inside that tree. Raw calibration inputs are referenced by the original receipt, not all copied into the delivery. Scientific facts in `result.json` retain their workspace-relative receipt locations; use its file manifest to locate the exported copies.
 
-Use `--json` for machine-readable stdout and `--verbose` for detailed evidence. Progress goes to stderr. Exit codes: **0** query has retrievable choices or delivered product fulfills the request; **1** operation failed; **2** invalid arguments; **3** no retrievable choices or delivered data still has unresolved requirements; **4** delivered product refuses the request. A successful download does not imply exit 0.
+Use `--json` for machine-readable stdout and `--verbose` for detailed evidence. Progress goes to stderr. Exit codes: **0** exploration/retrieval completed or a scientific request was fulfilled; **1** operation failed; **2** invalid arguments; **3** no retrievable choices or delivered data still has unresolved requirements; **4** delivered product refuses the request. Exploration exit 0 means the requested discovery or retrieval completed; it makes no scientific fulfillment claim.
 
 The wrapper and scientific implementation remain separate versioned components: updating this npm package does not update the checkout's science code. `telescope --version` reports the wrapper version; each product receipt records the scientific software and inputs used.
 
@@ -65,6 +98,9 @@ Use `telescope help` for region, frame and byte/member limits. `get --offline` r
 After `get`, inspect what the delivered product can support:
 
 ```sh
+telescope families
+telescope import import-spec.json --out imported-observation
+telescope outputs imported-observation/import.json
 telescope outputs runs/eris/pick-1/result.json
 telescope export runs/eris/pick-1/result.json --output image --hdu 1 --plane 95 --out figures/eris-plane
 telescope export runs/eris/pick-1/result.json --output spectrum --hdu 1 --pixel 25,27 --out figures/eris-pixel

@@ -1,0 +1,24 @@
+{
+  "width": 537,
+  "height": 244,
+  "startTime": "1997-06-27T12:55:52.496Z",
+  "filter": "0",
+  "unit": "I/F",
+  "acceptedPixels": 131028,
+  "totalPixels": 131028,
+  "qualityReport": {
+    "instrument": "NEAR MSI",
+    "units": "I/F",
+    "rawMissingPixels": 0,
+    "rawSaturatedPixels": 0,
+    "quality": "Paired raw DN: zero is missing telemetry, 4095 is saturation; nonfinite and PDS unknown/not-applicable I/F rejected.",
+    "archiveQualityIndex": "20000000",
+    "archiveQualityIndexInterpretation": "Unresolved, as warned by the PDS4 bundle overview; not treated as a good-quality flag.",
+    "limitations": "No authoritative per-pixel quality plane. Readout smear, scattered light, periodic noise and calibration uncertainty can remain."
+  },
+  "sourceMembers": {
+    "raw": "raw",
+    "calibrated": "calibrated",
+    "label": "label"
+  }
+}

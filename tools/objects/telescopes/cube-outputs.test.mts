@@ -11,6 +11,8 @@ import { pinFile, writeProductRecord } from '../product-record.mts';
 import { exportOutput, listOutputs, validateOutputRequest, type OutputRequest } from './outputs.mts';
 import { parseCli } from './cli.mts';
 let root:string;
+const sourceRequest={target:'fixture',wavelengthMicrometres:[1,6],kind:'cube',time:{any:true},angularResolutionArcsec:1,result:'telescope-product'};
+const sourceAssessment={status:'unresolved',acceptance:'all-requested-constraints',constraints:{wavelength:{answer:'unknown',reason:'Fixture assessment.'}}};
 before(async()=>{
   root=await mkdtemp(resolve(tmpdir(),'cube-outputs-'));
   const tc=await astroqueryToolchain();
@@ -43,7 +45,7 @@ fits.HDUList([fits.PrimaryHDU(),h,table]).writeto(root/'tab.fits')
 `,root],{env:{...process.env,...tc.env}});
   const file=resolve(root,'cube.fits'),record=resolve(root,'input.product.json');
   await writeProductRecord(record,{telescope:'Fixture',stage:'fixture',inputs:[],parameters:{},software:[]},[{path:'cube.fits',file}]);
-  await writeFile(resolve(root,'result.json'),JSON.stringify({schema:'cssearth-telescope-delivery@1',product:'cube.fits',record:'input.product.json',receipt:'input.product.json',facts:{target:'fixture',verified:true},request:{target:'fixture'},satisfaction:{status:'unresolved'},files:[{path:'cube.fits',...await pinFile(file)},{path:'input.product.json',...await pinFile(record)}]}));
+  await writeFile(resolve(root,'result.json'),JSON.stringify({schema:'cssearth-telescope-delivery@1',product:'cube.fits',record:'input.product.json',receipt:'input.product.json',facts:{target:'fixture',verified:true},request:sourceRequest,satisfaction:sourceAssessment,files:[{path:'cube.fits',...await pinFile(file)},{path:'input.product.json',...await pinFile(record)}]}));
 });
 after(async()=>{await rm(root,{recursive:true,force:true});});
 async function extract(selection:OutputRequest,file='cube.fits'){
@@ -76,11 +78,12 @@ test('fixed aperture subtracts mean background, requires full footprints and exp
 });
 test('all three exports publish figures, CSV and selections with source satisfaction preserved',async()=>{
  const result=resolve(root,'result.json'),options=await listOutputs(result);
+ const native=options.outputs.find(o=>o.kind==='image'&&o.hdu===1);assert.equal(native?.unit?.value,'MJy/sr');assert.equal(native?.spectral?.centersMicrometres.length,6);near(native?.spectral?.centersMicrometres.at(-1),6);assert.ok(native?.limitations?.length);
  for(const selection of [band,aperture,feature]){
   assert.ok(options.outputs.some(o=>o.kind===selection.kind&&o.available));
   const exported=await exportOutput(result,selection,resolve(root,selection.kind));
   assert.equal((await readFile(exported.figure)).subarray(1,4).toString(),'PNG');
-  const receipt=JSON.parse(await readFile(exported.receipt,'utf8'));assert.deepEqual(receipt.parameters.selection,selection);assert.equal(receipt.parameters.sourceSatisfaction.status,'unresolved');assert.equal(receipt.parameters.measurement.uncertaintyPolicy,'independent');assert.ok((await readFile(exported.values,'utf8')).includes('standard_deviation'));
+  const receipt=JSON.parse(await readFile(exported.receipt,'utf8'));assert.deepEqual(receipt.parameters.selection,selection);assert.equal(receipt.parameters.sourceContext.assessment.status,'unresolved');assert.equal(receipt.parameters.measurement.uncertaintyPolicy,'independent');assert.ok((await readFile(exported.values,'utf8')).includes('standard_deviation'));
   assert.ok(receipt.outputs.some((o:{path:string})=>o.path===exported.data.split('/').at(-1)));
   const tc=await astroqueryToolchain();
   execFileSync(tc.python,['-c',String.raw`

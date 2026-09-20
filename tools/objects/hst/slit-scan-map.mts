@@ -126,6 +126,44 @@ async function readFrameRegion(path: string, frame: ScanFrameHeader, definition:
   return { x0, width, height, flux, error: errors.values, wavelengthAngstrom };
 }
 
+/** One actual detector row from a pinned rectified product. */
+export interface SlitRegionSpectrum {
+  readonly frame: string; readonly visit: string; readonly row: number;
+  readonly alongSlitArcsec: number; readonly acrossSlitArcsec: number;
+  readonly wavelengthAngstrom: readonly number[]; readonly flux: readonly number[]; readonly error: readonly number[];
+}
+
+/** Extract one background-subtracted STIS row. Either a checked scan registration is supplied by the pinned receipt, or the
+ * complete pinned scan is registered here; neither path expands receipt values into detector data. */
+export async function extractSlitRegionSpectrum(definition: SlitScanDefinition, options: {
+  readonly directory: string; readonly frame: string; readonly row: number; readonly mayAsk?: boolean; readonly verifyDigests?: boolean;
+  readonly registration?: Pick<VisitRegistration, 'visit' | 'discRow' | 'acrossSlitCentreArcsec'>;
+}): Promise<SlitRegionSpectrum> {
+  if (!Number.isSafeInteger(options.row) || options.row < 0) throw new RangeError('A slit-region row is a non-negative detector row.');
+  const pinned = definition.frames.find(candidate => candidate.name === options.frame);
+  if (!pinned) throw new Error(`${options.frame} is not a pinned slit-scan frame.`);
+  const path = resolve(options.directory, pinned.name), header = await readScanFrameHeader(path, pinned.name);
+  if (header.programme !== pinned.programme || header.targetName !== pinned.targetName || header.aperture !== definition.aperture || header.opticalElement !== definition.opticalElement)
+    throw new Error(`${pinned.name} does not match its pinned STIS scan identity.`);
+  if (options.verifyDigests ?? true) { const digest = await sha256File(path); if (digest.sha256 !== pinned.sha256) throw new Error(`${pinned.name}: the file on disk is not the pinned one.`); }
+  const frame = header;
+  if (options.row >= frame.height) throw new RangeError(`${options.frame} has ${frame.height} rows, not row ${options.row}.`);
+  const visit = options.registration ?? (await (async () => {
+    const frames = await prepareFrames(definition, options.directory, options.mayAsk ?? false, options.verifyDigests ?? true);
+    return (await registerVisits(definition, options.directory, frames)).find(candidate => candidate.visit === frame.visit);
+  })());
+  if (!visit) throw new Error(`${frame.name} has no registered visit.`);
+  if (visit.visit !== frame.visit) throw new Error(`${frame.name} does not match the supplied scan registration.`);
+  const commandedRow = frame.crpix2 - 1 + frame.postArg2Arcsec / frame.plateScaleArcsec;
+  const region = await readFrameRegion(path, frame, definition, commandedRow);
+  const offset = options.row * region.width;
+  return { frame: frame.name, visit: visit.visit, row: options.row,
+    alongSlitArcsec: (options.row - visit.discRow) * frame.plateScaleArcsec,
+    acrossSlitArcsec: frame.postArg1Arcsec - visit.acrossSlitCentreArcsec,
+    wavelengthAngstrom: Array.from(region.wavelengthAngstrom), flux: Array.from(region.flux.subarray(offset, offset + region.width)),
+    error: Array.from(region.error.subarray(offset, offset + region.width)) };
+}
+
 /** The body's own profile along the slit: the reflected sunlight of every row over a window with no band in it. */
 function slitProfile(region: FrameRegion, definition: SlitScanDefinition): number[] {
   const [low, high] = definition.reduction.discProfileWindowAngstrom, profile: number[] = [];
