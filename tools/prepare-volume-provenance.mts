@@ -159,8 +159,17 @@ export async function preparePreview(root: string, pin: Preview, input: (path: s
     ? await input(pin.path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) throw new Error(`Authored preview is missing: ${pin.path}; run this object's source author.`); throw error; })
     : await readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
   if (bytes === null && pin.skyBands) {
+    // The composite is pinned by its own hash, so our own content-addressed mirror can serve it (only when a caller
+    // opted in), sha-verified before use. That keeps an ordinary build off the survey archive, whose availability is
+    // outside this project: a miss, a mismatch or any mirror error composes from the archive exactly as before.
+    if (mirrorOrigin) {
+      const mirrorUrl = sourceCacheUrl(mirrorOrigin, pin.sha256, basename(pin.path));
+      bytes = await fetchWithRetry(fetcher, mirrorUrl, { idleMs: 5000, attempts: 1 })
+        .then(candidate => (candidate.length === pin.bytes && sha256(candidate) === pin.sha256) ? candidate : null)
+        .catch(() => null);
+    }
     // The survey bands download into the shared cache; only the pinned recipe and tile lists are source closure.
-    bytes = (await composeSkyBandPng(pin.skyBands, { input, cache: resolve(root, '.local/nebula-lab/sky-bands') })).bytes;
+    if (bytes === null) bytes = (await composeSkyBandPng(pin.skyBands, { input, cache: resolve(root, '.local/nebula-lab/sky-bands') })).bytes;
     if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed sky band preview: ${pin.skyBands.path}`);
     await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
   } else if (bytes === null) {
