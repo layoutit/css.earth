@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-nebula-delivery@1",
+  "id": "omega-centauri",
+  "method": "compiler",
+  "request": {
+    "path": "src/objects/omega-centauri/source/request.json",
+    "sha256": "043c6218aedd90269ec68822cfa2d729d731b7995150c0e01af8b5c68127e241"
+  },
+  "inputPins": [
+    {
+      "path": "labs/nebula/models/omega-centauri/compiler.json",
+      "sha256": "37c12a3be28a8dfbebb8931cd5f528673b63018c34aea8a4a07b23b26b6a1f3f"
+    },
+    {
+      "path": "labs/nebula/models/omega-centauri/photometric-mge.json",
+      "sha256": "4e28dac4271eeafd77f77582cfd69105ca02677e6bbe6c88e583f412c7b27914"
+    },
+    {
+      "path": "labs/nebula/models/omega-centauri/observation-structures.json",
+      "sha256": "dc8dd69f0a7f1c15d8b6376e43147e3e2cd2c52ab802d7fc5651d23c28ae8c0e"
+    },
+    {
+      "path": "labs/nebula/models/omega-centauri/physical-evidence.json",
+      "sha256": "6e88b6abe042cb66a104931cf1039fb3e6d685dd308b303226bdb6e530ac5b51"
+    },
+    {
+      "path": "labs/nebula/models/omega-centauri/observations.json",
+      "sha256": "5954f0098ffe25ad48ff22b581f6d47cbc67e7d902e5d1f5ac19822c0612b9c2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      201.696958,
+      -47.479539
+    ],
+    "distancePc": 5426,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 1
+  },
+  "sourceUrl": "https://www.eso.org/public/images/eso1119b/",
+  "description": "Integrated cluster starlight on finite 3D emission components conditioned by a published oblate Gaussian profile. Inclination, near/far tilt and individual feature depths are model assumptions. Both optical lenses share geometry; no duplicate resolved-star layer is added. Colors are relative display emission, not calibrated luminosity or a measured stellar mass map.",
+  "defaultLens": "eso1119b",
+  "framingRadiusUnits": 1650,
+  "acceptedLabResult": "7a4f8781a7d19fafa57f11e65eae6ee24975082d3fcae0c1644cbdd68a5ac549",
+  "compactMethod": "compiler",
+  "compactInputs": {
+    "path": "src/objects/omega-centauri/source/bake-inputs.json.gz",
+    "sha256": "869e9ab24b644c4ea7d04cf2d4e2c719445c205b879eaebf13a420c7d7d75eac"
+  },
+  "qualification": {
+    "status": "app-integration-candidate",
+    "visualHandoff": "failed",
+    "evidence": "labs/nebula/models/omega-centauri/evidence/2026-09-20/layer-handoffs.json",
+    "meaning": "acceptedLabResult identifies the user-inspected source selected for app integration; it is not a passed quantitative acceptance receipt."
+  }
+}

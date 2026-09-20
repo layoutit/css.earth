@@ -17,7 +17,9 @@ import type { OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import { mountEnvironmentLabels } from './environment-labels.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
-import type { PreparedCatalogObject } from '@cssearth/catalog';
+import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog';
+import type { PreparedNavigationFocus } from '../navigation/prepared-focus.js';
+import { detailedFocusContextOpacity } from './detailed-focus-context.js';
 import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 import { createPreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
 import type { PreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
@@ -329,6 +331,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
       const mountedShells = [...shells];
       let selected = plan.focus;
+      let detailedFocus: { objectId: string; focus: PreparedNavigationFocus } | null = null;
+      let detailContextOpacity = 1;
       let destroyed = false;
       let highContrastSky = false, volumeOpacity = 0, volumeBrightness = 1, volumeSize = 1;
       let publishedVolumeAlpha = NaN, publishedImageAlpha = NaN, publishedSkyAlpha = NaN;
@@ -342,8 +346,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const brightness = highContrastSky ? 1 : volumeBrightness;
         // The completed images contribute (1-t)*sky + t*b*volume. Factoring
         // t*b onto the volume avoids nesting its exposure inside its handoff.
-        // Compensate the opaque sky underlay so its contribution stays 1-t.
-        const alpha = skyLayer ? volumeOpacity * brightness : volumeOpacity;
+        // Compensate the opaque sky underlay so its contribution stays 1-t,
+        // including when close-up presentation suppresses the surrounding volume.
+        const alpha = (skyLayer ? volumeOpacity * brightness : volumeOpacity) * detailContextOpacity;
         if (alpha !== publishedVolumeAlpha) { volumeHost.style.opacity = String(alpha); publishedVolumeAlpha = alpha; }
         // The galaxy's own slices fade with its projected size; the matte and sky handoff do not.
         const imageAlpha = (skyLayer ? 1 : brightness) * volumeSize;
@@ -404,12 +409,32 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             environmentLabels!.addShell(shell.payload);
             requestPublication?.();
           },
-          selectGalaxy(id: string | null) { galaxyCatalog?.select(id); },
+          selectGalaxy(id: string | null, focus: PreparedNavigationFocus | null = null) {
+            if (focus && (focus.id !== id || !Number.isFinite(focus.framingRadiusM) || focus.framingRadiusM <= 0 ||
+                focus.positionM.length !== 3 || !focus.positionM.every(Number.isFinite))) {
+              throw new TypeError('Prepared context focus must match its selection and have finite authored framing.');
+            }
+            const record = id ? galaxyCatalog?.resolve(id) : null;
+            const objectId = record && !isPreparedCluster(record) ? record.detailedObjectId : undefined;
+            const next = focus && objectId && [...declaredImageLayers, ...volumeLensBanks].some(bank => bank.id === objectId)
+              ? { objectId, focus } : null;
+            const changed = next?.objectId !== detailedFocus?.objectId || next?.focus.framingRadiusM !== detailedFocus?.focus.framingRadiusM ||
+              next?.focus.positionM.some((value, axis) => value !== detailedFocus?.focus.positionM[axis]);
+            detailedFocus = next;
+            galaxyCatalog?.select(id);
+            if (changed) requestPublication?.();
+          },
           resolveGalaxy(id: string) { return galaxyCatalog?.resolve(id) ?? null; },
           ensureGalaxyCatalog: ensureCatalogLoaded,
           ensureImageLayer(id: string) {
             const index = declaredImageLayers.findIndex(bank => bank.id === id);
             return index < 0 ? Promise.resolve() : ensureImageLayerLoaded(index);
+          },
+          /** Await the shared loader so focus consumers can use the payload's authored framing and report failures. */
+          ensureVolumeLens(id: string) {
+            const index = volumeLensBanks.findIndex(bank => bank.id === id);
+            if (index < 0) return Promise.reject(new TypeError('Unknown prepared volume lens bank.'));
+            return ensureLensLoaded(index);
           },
           imageLayerFrames: Object.freeze(Object.fromEntries(declaredImageLayers.map(bank => [bank.id, bank.frame]))),
           // Framing is exact once a bank's payload has loaded; until then it falls back to the radius that
@@ -529,14 +554,15 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             if (destroyed) return;
             opacityClock.batch(() => {
             const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
-            prefetchGalaxy(distanceM);
+            detailContextOpacity = detailedFocusContextOpacity(world, detailedFocus?.focus ?? null);
+            if (detailContextOpacity > 0) prefetchGalaxy(distanceM);
             additionalPoints.publish({world, viewport}, distanceM);
             const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
             starsHandoff = logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM);
             volumeOpacity = preparedVolumeOpacity(distanceM, plan.volume.opacityProfile);
             volumeBrightness = preparedVolumeOpacity(distanceM, plan.volume.brightnessProfile);
             volumeSize = projectedVolumeOpacity(world, viewport, payload.frame, volumeFramingUnits);
-            const volumeVisible = volumeOpacity > 0;
+            const volumeVisible = volumeOpacity * detailContextOpacity > 0;
             if (volumeVisible !== publishedVolumeVisible) { volumeHost.style.display = volumeVisible ? '' : 'none'; publishedVolumeVisible = volumeVisible; }
             if (volumeOpacity !== publishedVolumeOpacity) {
               volumeHost.dataset.volumeOpacity = String(volumeOpacity);
@@ -548,11 +574,12 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             }
             publishBackground();
             skyLayer?.publish(world, viewport, volumeOpacity < 1, 1 - starsHandoff);
-            if (volumeOpacity > 0 && volumeSize > 0) volumeLayer!.publish({ world, viewport });
+            if (volumeVisible && volumeSize > 0) volumeLayer!.publish({ world, viewport });
             // A galaxy under a few projected pixels is its label: its bank fades, then
             // leaves layout and compositing. Like lens banks, a faded image bank does too.
             for (const [index, bank] of imageBanks.entries()) {
-              const opacity = volumeOpacity * projectedVolumeOpacity(world, viewport, declaredImageLayers[index]!.frame, imageFramingUnits[index]!);
+              const presentationOpacity = declaredImageLayers[index]!.id === detailedFocus?.objectId ? 1 : detailContextOpacity;
+              const opacity = presentationOpacity * volumeOpacity * projectedVolumeOpacity(world, viewport, declaredImageLayers[index]!.frame, imageFramingUnits[index]!);
               if (!bank) {
                 if (opacity > 0) void ensureImageLayerLoaded(index).catch(() => {});
                 continue;
@@ -567,6 +594,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             let lensResidencyChanged = false;
             for (const [index, bank] of lensBanks.entries()) {
               const { frame, radiusUnits, visibility } = lensFraming[index]!;
+              const presentationOpacity = volumeLensBanks[index]!.id === detailedFocus?.objectId ? 1 : detailContextOpacity;
               if (!bank) {
                 // The fetch gate and the render gate are deliberately different. Rendering multiplies by
                 // contextOpacity (the general galactic fade, 'galactic' by default) below, once the payload
@@ -576,7 +604,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 // proximity at all, only by explicit selection. Fetching a 'galactic' bank a little earlier
                 // than its fade would have shown it is cheap; never fetching an 'independent' one is a blank
                 // nebula.
-                const visible = lensEnabled[index] && projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) > 0;
+                const visible = lensEnabled[index] && presentationOpacity > 0 && projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) > 0;
                 if (visible !== lensVisible[index]) {
                   lensVisible[index] = visible; lensLastUsed[index] = ++lensUseClock; lensResidencyChanged = true;
                 }
@@ -586,7 +614,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 continue;
               }
               const contextOpacity = lensPayload[index]!.contextVisibility === 'independent' ? 1 : volumeOpacity;
-              const opacity = lensEnabled[index] ? contextOpacity * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) : 0;
+              const opacity = lensEnabled[index] ? presentationOpacity * contextOpacity * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) : 0;
               const visible = opacity > 0;
               if (visible !== lensVisible[index]) {
                 lensVisible[index] = visible; lensLastUsed[index] = ++lensUseClock; lensResidencyChanged = true;

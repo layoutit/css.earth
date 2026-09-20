@@ -1,0 +1,52 @@
+{
+  "id": "dsouza-rix-2013",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mass estimates from stellar proper motions: the mass of omega Centauri",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/sts426"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/sts426",
+      "label": "Published paper"
+    },
+    {
+      "role": "original",
+      "url": "https://wwwmpa.mpa-garching.mpg.de/mpa/publications/preprints/pp2013/MPA3537.pdf",
+      "label": "Inspected full-paper copy"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://wwwmpa.mpa-garching.mpg.de/mpa/publications/preprints/pp2013/MPA3537.pdf",
+      "checkedOn": "2026-09-20",
+      "locator": "Table 1 and section 4.3: eight projected Gaussian components, angular widths, projected flattening and adopted inclination"
+    }
+  ],
+  "creators": [
+    "Richard D’Souza",
+    "Hans-Walter Rix"
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society",
+  "publicationDate": "2013",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Richard D’Souza; Hans-Walter Rix",
+      "scope": "Published scientific method and measurements",
+      "evidence": "https://doi.org/10.1093/mnras/sts426"
+    },
+    {
+      "kind": "limitation",
+      "text": "The table supplies a fitted projected stellar distribution. Oblate deprojection is conditional on inclination; coefficient errors/covariance are not given, and individual stellar depths are not measured.",
+      "scope": "Adopted interpretation",
+      "evidence": "https://doi.org/10.1093/mnras/sts426"
+    }
+  ]
+}

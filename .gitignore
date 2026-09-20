@@ -296,6 +296,7 @@ src/objects/*/source/**/*.bpc
 /src/objects/m8/prepared/
 /src/objects/smc/prepared/
 /src/objects/lmc/prepared/
+/src/objects/omega-centauri/prepared/
 /src/objects/betelgeuse-shell/.prepared-*/
 /src/objects/hd-181327-disc/.prepared-*/
 /src/objects/m42/.prepared-*/
@@ -306,6 +307,7 @@ src/objects/*/source/**/*.bpc
 /src/objects/lmc/.prepared-*/
 /src/objects/m45/.prepared-*/
 /src/objects/m8/.prepared-*/
+/src/objects/omega-centauri/.prepared-*/
 # Binary kernels in shared SPICE kernel banks are restored by tools/spice/kernel-bank.mts; text kernels are committed.
 src/spice/**/*.bsp
 src/spice/**/*.bc
