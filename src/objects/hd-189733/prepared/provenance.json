@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f3db421901cb982d7b018023e2e567d1392a97928d9a8c9a317281f93dad1080"
+    "sha256": "fbf4f644d892cfb8f63e5b656c0f91fedab2b459986067523f3ee4f03fc9bff0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -473,8 +473,8 @@
         },
         {
           "url": "/scenes/hd-189733/hd-189733-limb-color@2x.webp",
-          "bytes": 95120,
-          "sha256": "333e1bf569046344d956799b4daa6d6ad3c6e44304d90e0d9b9e7d24749f14e2",
+          "bytes": 94638,
+          "sha256": "ae8a18ced2db26bb118379f8a070e2a08fa21a3a6cfdc4fb1389c7feaa8563aa",
           "verification": "bytes-verified"
         }
       ],
@@ -545,7 +545,7 @@
   },
   "lastPreparation": {
     "objectId": "hd-189733",
-    "materialSha256": "f49d9fda07e67cd94820c4407610ce88d39f456336559d9d9b7361bad1caa2f1",
+    "materialSha256": "3b534e554b46574949234b0c1283facef3fa2c4539339e5b1acf0e5a6f705421",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

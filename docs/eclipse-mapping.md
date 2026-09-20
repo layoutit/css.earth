@@ -17,6 +17,8 @@ A hot Jupiter's map reaches this project as a light curve, not as a picture: the
 
 **Spin axis.** The planet spins about the orbit normal, because the geometry is the package's own orbit. The public ThERESA code leaves the map's inclination at 90°, which tilts the axis off the orbit normal for any orbit that is not edge-on (see [WASP-43b's re-runs](../src/objects/wasp-43b/source/reference/theresa-reruns.md)). That tilt cannot occur here.
 
+**Transit timing.** A light curve that covers transit is fitted against the package orbit before its eclipse map is fitted. [batman-package 2.5.3](https://github.com/lkreidberg/batman/tree/v2.5.3) owns the quadratic limb-darkened transit, including eccentric geometry and exposure integration when the product records its duration. SciPy 1.18.1 owns the bounded nonlinear least-squares fit. cssEarth supplies BMJD_TDB times, the fixed source-backed orbit, the sample mask, a quadratic local baseline and physical limb-darkening bounds. The result carries model samples, residuals, software versions and a local timing uncertainty under that fixed model; it does not include uncertainty in the orbital elements or baseline choice.
+
 ## From raw exposures
 
 `tools/objects/jwst/reduce-tso.mts` turns raw JWST time-series exposures into the light curves the fit reads, with [Eureka!](https://github.com/kevin218/Eureka) on the STScI `jwst` pipeline.
@@ -85,6 +87,7 @@ WASP-43b's offset moved with two choices the data barely constrain: the detector
   - The temperature inversion returns the star's temperature for a planet as bright per area as the star.
 - [`eigenmap-fit.oracle.test.mts`](../tools/objects/eclipse-map/eigenmap-fit.oracle.test.mts): the production eigencurve decomposition matches NumPy's independent LAPACK SVD under the signed-harmonic convention in pinned ThERESA source. Sign-invariant eigenmap and eigencurve projectors cover full-rank, rank-deficient and uniformly rescaled inputs.
 - [`numerics.oracle.test.mts`](../tools/objects/eclipse-map/numerics.oracle.test.mts): independent NumPy and Astropy results cover spherical harmonics, the weighted linear fit, posterior covariance, Planck radiance and brightness-temperature inversion. Phase-curve tests separately enforce uniform-sphere normalization and mirror/time-reversal symmetry through eclipse.
+- [`transit.test.mts`](../tools/objects/astronomy-packages/transit.test.mts): an eccentric transit made with the shared orbit geometry and an independent 2,500-ring stellar-disc integration is recovered by the batman/SciPy boundary. The real WASP-43b check below independently holds its timing to Hammond et al.'s propagated ephemeris.
 - [`tests/objects/unit/wasp-43b/eigenmap-fit.test.mts`](../tests/objects/unit/wasp-43b/eigenmap-fit.test.mts): on the deposited JWST NIRSpec white-light curve of WASP-43b, the fit must reproduce ThERESA run with the corrected axis.
 
 | Degree 3, 6 eigencurves, positive | This fit | ThERESA, axis corrected |

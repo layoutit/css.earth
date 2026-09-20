@@ -103,7 +103,7 @@
       "id": "tess-limb-darkening-fit",
       "subject": "Quadratic limb darkening fitted here to TESS transits",
       "status": "included",
-      "finding": "SPOC 2-minute light curves of sectors 41, 54 and 81 (TIC 256364928) hold 30 complete transits. Folded and fitted together: u1 0.236, u2 0.417, radius ratio 0.1556 (the map's 0.1553), transit 6.5 s before the map ephemeris, reduced chi-squared 3.4. Sector by sector u1 runs 0.16-0.30 and u2 0.35-0.51 with u1 + u2 within 0.64-0.67. The 20-second light curves of sectors 41, 54 and 81 and the multi-sector DV products were not used.",
+      "finding": "SPOC 2-minute light curves of sectors 41, 54 and 81 (TIC 256364928) hold 30 complete transits. Their headers record 118.8-second integrations. Folded and fitted together with batman 2.5.3 and SciPy 1.18.1: u1 0.216, u2 0.440, radius ratio 0.1556 (the map's 0.1553), transit 6.4 +/- 0.9 s before the map ephemeris, reduced chi-squared 3.4. Sector by sector u1 runs 0.13-0.28 and u2 0.37-0.54 with u1 + u2 within 0.65-0.67. The timing error is the local covariance of this model and does not include starspots or other model error. The 20-second light curves of sectors 41, 54 and 81 and the multi-sector DV products were not used.",
       "evidence": [
         "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
       ],

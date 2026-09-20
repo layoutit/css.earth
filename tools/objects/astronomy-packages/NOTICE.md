@@ -1,3 +1,7 @@
+# Transit fitting
+
+cssEarth uses [batman-package 2.5.3](https://github.com/lkreidberg/batman/tree/v2.5.3) for transit light curves and SciPy 1.18.1 for bounded nonlinear least-squares fitting. batman-package is copyright Laura Kreidberg and contributors and distributed under GPL-3.0; see [BATMAN-NOTICE.txt](BATMAN-NOTICE.txt). It is installed from pinned, unmodified upstream source. SciPy is distributed under BSD-3-Clause.
+
 # Astroquery
 
 cssEarth uses [Astroquery 0.4.11](https://pypi.org/project/astroquery/), installed into an ignored local toolchain from the

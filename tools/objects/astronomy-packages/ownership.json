@@ -76,6 +76,26 @@
       ]
     },
     {
+      "mechanic": "Exoplanet transit light curves",
+      "package": "batman-package",
+      "version": "2.5.3",
+      "operation": "transit.mts: model",
+      "consumers": [
+        "eclipse-map transit timing",
+        "TESS limb-darkening measurement"
+      ]
+    },
+    {
+      "mechanic": "Bounded nonlinear least-squares transit fitting",
+      "package": "scipy",
+      "version": "1.18.1",
+      "operation": "transit.mts: fit, profile",
+      "consumers": [
+        "eclipse-map transit timing",
+        "TESS limb-darkening measurement"
+      ]
+    },
+    {
       "mechanic": "Product qualification units and FITS spectral WCS",
       "package": "astropy",
       "version": "8.0.1",
