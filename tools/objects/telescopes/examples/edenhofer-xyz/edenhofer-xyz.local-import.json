@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-telescope-local-import-spec@1",
+  "datasetId": "edenhofer-xyz-v1-0-2-crop-400-496-450-546-500-596",
+  "sources": [
+    {
+      "path": "work/edenhofer-xyz/mean_and_std_xyz.crop-400-496-450-546-500-596.fits",
+      "role": "science",
+      "name": "mean_and_std_xyz.crop-400-496-450-546-500-596.fits"
+    }
+  ],
+  "declarations": {
+    "target": "milky-way",
+    "origin": "Zenodo record 10658339, DOI 10.5281/zenodo.10658339",
+    "familyHints": ["F16"],
+    "units": "E of Zhang, Green, and Rix (2023)",
+    "frame": "heliocentric Galactic Cartesian",
+    "calibrationState": "reconstructed",
+    "physicalContext": {
+      "frame": "heliocentric Galactic Cartesian",
+      "frameBasis": "Right-handed heliocentric Galactic Cartesian: +X at l=0 deg, +Y at l=90 deg, +Z at the north Galactic pole.",
+      "depthBasis": "Posterior dust-extinction reconstruction already interpolated by the authors onto a physical 2 pc Galactic XYZ grid.",
+      "sourceUrl": "https://zenodo.org/records/10658339",
+      "citation": "Edenhofer et al. (2024), A parsec-scale Galactic 3D dust map out to 1.25 kpc, dataset v1.0.2, DOI 10.5281/zenodo.10658339",
+      "license": "CC-BY-4.0",
+      "quantity": "reconstructed/interpolated dust density",
+      "unit": "E of Zhang, Green, and Rix (2023)",
+      "meanHdu": 1,
+      "uncertaintyHdu": 2,
+      "uncertaintyForm": "standard-deviation"
+    }
+  },
+  "limits": {
+    "maxMembers": 1,
+    "maxBytes": 7087680,
+    "maxFileBytes": 7087680
+  }
+}

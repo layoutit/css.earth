@@ -14,7 +14,22 @@ import { executableFamilyOperations } from './family-operation.mts';
 const unavailable = (kind:OutputChoice['kind'],reason:string):OutputChoice => ({kind,available:false,reason});
 const available = (kind:OutputChoice['kind'],reason:string,parameters:readonly string[]=[]):OutputChoice => ({kind,available:true,reason,...(parameters.length?{parameters}:{})});
 
-export async function listArtifactOutputs(path:string,structure?:string){
+type DeliveryOutputs = Awaited<ReturnType<typeof listDeliveryOutputs>>;
+export interface ArtifactOutputs {
+  readonly artifact:string;
+  readonly target?:unknown;
+  readonly source:string|DeliveryOutputs['source'];
+  readonly outputs:OutputChoice[];
+  readonly sourceContext?:DeliveryOutputs['sourceContext'];
+  readonly native?:DeliveryOutputs['native'];
+  readonly terminal?:boolean;
+  readonly profiles?:{handlerId:string;profileId:string}[];
+  readonly issues?:string[];
+  readonly familyOperations?:readonly FamilyOperation[];
+  readonly via?:string;
+}
+
+export async function listArtifactOutputs(path:string,structure?:string):Promise<ArtifactOutputs>{
   const artifact=resolve(path),raw=requireRecord(JSON.parse(await readFile(artifact,'utf8')));
   if(raw.schema==='cssearth-telescope-local-import@1'){
     if(structure!==undefined)throw new TypeError('--structure does not select a local-import member.');
@@ -31,14 +46,23 @@ export async function listArtifactOutputs(path:string,structure?:string){
   }
   if(raw.schema==='cssearth-telescope-delivery@1'||raw.schema==='cssearth-telescope-delivery@2')return {...await listDeliveryOutputs(artifact,structure),artifact:'delivery'};
   if(structure!==undefined)throw new TypeError('--structure applies only to native delivery inspection');
+  if(raw.schema==='cssearth-physical-grid-volume@1'){
+    const relativePath=requireString(raw.object,'physical grid volume object');
+    if(relativePath!=='physical-volume/object.json')throw new TypeError('Physical grid volume points outside its owned output.');
+    const product=await verifiedProduct(resolve(artifact,'..','output.product.json'));
+    if(!product.record.outputs.some(output=>output.path===relativePath))throw new TypeError('Physical grid volume object is absent from its verified output closure.');
+    const next=await listArtifactOutputs(resolve(artifact,'..',relativePath));
+    return {...next,artifact:'physical-grid-volume',via:artifact};
+  }
   if(raw.schema==='cssearth-object@1'){
     const type=raw.type,target=typeof raw.id==='string'?raw.id:'physical object';
-    if(type!=='point-field'&&type!=='density-volume')throw new TypeError('Object is not a supported physical point field or density volume');
-    const kind=type==='point-field'?'points':'volume';let issue:string|undefined;
+    if(type!=='point-field'&&type!=='density-volume'&&type!=='volume-lens-bank')throw new TypeError('Object is not a supported physical point field, density volume or volume lens bank');
+    const kind=type==='point-field'?'points':type==='density-volume'?'volume':'volume-lens-bank';let issue:string|undefined;
     try{await inspectSpatialObject(artifact);}catch(error){issue=error instanceof Error?error.message:String(error);}
     return {artifact:'physical-object',target,source:artifact,outputs:[
       kind==='points'?(issue?unavailable('points',`Physical point-field prerequisites are unavailable: ${issue}`):available('points','The existing prepared physical point field, renderer resources, frame, provenance and licence were verified.')):unavailable('points','This object is not a point field.'),
-      kind==='volume'?(issue?unavailable('volume',`Physical density-volume prerequisites are unavailable: ${issue}`):available('volume','The existing prepared physical density volume, renderer resources, frame, provenance and licence were verified.')):unavailable('volume','This object is not a density volume.')
+      kind==='volume'?(issue?unavailable('volume',`Physical density-volume prerequisites are unavailable: ${issue}`):available('volume','The existing prepared physical density volume, renderer resources, frame, provenance and licence were verified.')):unavailable('volume','This object is not a density volume.'),
+      kind==='volume-lens-bank'?(issue?unavailable('volume-lens-bank',`Physical volume-lens-bank prerequisites are unavailable: ${issue}`):available('volume-lens-bank','The existing prepared physical volume lens bank, selectable grids, body attachment, renderer resources, frame and provenance were verified.')):unavailable('volume-lens-bank','This object is not a volume lens bank.')
     ]};
   }
   if(raw.schema!==PRODUCT_RECORD_SCHEMA)throw new TypeError('Expected a telescope delivery, product record, or supported physical object.json');
