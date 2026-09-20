@@ -1,4 +1,6 @@
 /** Acquire and qualify one exact package observation. Decoding establishes readability, never calibration or map registration. */
+import { fitsMetadata, isisMetadata, pdsMetadata } from './native-metadata.mts';
+import type { ProductFacts } from './request-satisfaction.mts';
 import { sourceHeaders } from './source-transfer.mts';
 import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
 import { requireArray, requireRecord } from '../../source-values.mts';
@@ -71,16 +73,25 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
   const previous = await readProductRecord(resolve(root, receipt));
   if (previous && sourceRecordComplete(previous, product) && await sameRun(previous, run, path => inside(root, path))) return { product: product.files.find(file => file.role === 'science')!.path, receipt, reused: true };
   let decoded: unknown;
-  if (product.decoder === 'fits-image') decoded = inspectFits(await readFile(inside(root, product.files.find(file => file.role === 'science')!.path)), product.identity, product.kind);
+  let metadata: Partial<ProductFacts> = {};
+  if (product.decoder === 'fits-image') {
+    const science = product.files.find(file => file.role === 'science')!, bytes = await readFile(inside(root, science.path));
+    decoded = inspectFits(bytes, product.identity, product.kind);
+    metadata = fitsMetadata(bytes, { file: science.path, sha256: science.sha256 });
+  }
   else if (product.decoder === 'isis3') {
-    const core=decodeIsis3Core(await readFile(inside(root,product.files.find(f=>f.role==='science')!.path)), product.labelPath ? await readFile(inside(root,product.labelPath)) : undefined);
+    const bytes = await readFile(inside(root,product.files.find(f=>f.role==='science')!.path));
+    const label = product.labelPath ? await readFile(inside(root,product.labelPath)) : bytes;
+    const core=decodeIsis3Core(bytes, label);
     for(const [key,expected] of Object.entries(product.identity)) if(core.identity[key]!==expected) throw new Error(`ISIS identity mismatch for ${key}.`);
     if((core.bands===1?'image':'cube')!==product.kind) throw new Error('ISIS dimensions disagree with the declared kind.');
     let finite=0,min=Infinity,max=-Infinity;
+    const validBands = new Array<boolean>(core.bands).fill(false);
     // ISIS Real special pixels lie below VALID_MIN4 (0xff7ffffa); retain valid zero/negative noise.
     const threshold=Buffer.from('faff7fff','hex').readFloatLE();
-    for(const n of core.data) if(Number.isFinite(n)&&n>=threshold){finite++;min=Math.min(min,n);max=Math.max(max,n);}
+    for(let i=0;i<core.data.length;i++) { const n=core.data[i]; if(Number.isFinite(n)&&n>=threshold){finite++;min=Math.min(min,n);max=Math.max(max,n);validBands[Math.floor(i/(core.width*core.height))]=true;} }
     if(!finite) throw new Error('ISIS core contains no finite non-special samples.');
+    metadata = isisMetadata(label, core.bands, validBands);
     decoded={standard:'ISIS3',metadata:{identity:core.identity,scaling:{base:core.base,multiplier:core.multiplier}},structures:[{name:'Core',shape:core.bands===1?[core.height,core.width]:[core.bands,core.height,core.width],elements:core.data.length,finite,missing:core.data.length-finite,minimum:min,maximum:max}]};
   } else {
     const labelPath = inside(root, product.labelPath ?? product.files.find(file => file.role === 'label')!.path), label = (await readFile(labelPath)).subarray(0, 128 * 1024).toString('latin1').split(/^END\s*$/imu)[0]!;
@@ -88,6 +99,7 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
     for (const [key, expected] of Object.entries(product.identity)) if ((pds4 ? requireRecord(pds4ProductIdentity(label))[key] : pds3Keyword(label, key, [])) !== String(expected)) throw new Error(`PDS identity mismatch for ${key}.`);
     await assertPdsDependencies(root, product);
     decoded = (await pdsPackages({ operation: 'decode-product', labelPath })).decoded;
+    metadata = pdsMetadata(decoded);
     const structures = requireArray(requireRecord(decoded).structures).map(value => requireRecord(value));
     if (!structures.some(s => product.kind === 'table' ? s.kind === 'table' : requireArray(s.shape).length === (product.kind === 'cube' ? 3 : 2))) throw new Error('Decoded structures do not establish the declared product kind.');
   }
@@ -96,8 +108,8 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
   const report = `${dirname(receipt)}/decoded.json`;
   await mkdir(resolve(root, dirname(receipt)), { recursive: true });
   await writeFile(resolve(root, report), `${JSON.stringify({ schema: 'cssearth-decoded-source@1', observation: product.id, archiveProductId: product.archiveProductId, decoded,
-    facts: { target: product.target, verified: true, kind: product.kind, result: 'telescope-product' },
-    meaning: product.meaning, limitations: product.limitations, acceptance: 'Input pins and header identity agree; complete supported arrays decoded. Calibration accuracy and scientific suitability are not established; measurement descriptions are source declarations.' }, null, 2)}\n`);
+    facts: { target: product.target, verified: true, kind: product.kind, result: 'telescope-product', ...metadata },
+    meaning: product.meaning, limitations: product.limitations, acceptance: 'Input pins and header identity agree; complete supported arrays decoded. Native metadata are validated only for supported product conventions. External calibration accuracy and scientific suitability are not independently established; measurement descriptions remain source declarations.' }, null, 2)}\n`);
   const science = product.files.find(file => file.role === 'science')!;
   await writeProductRecord(resolve(root, receipt), run, [...product.files.map(file => ({ path: file.path, file: inside(root, file.path) })), { path: report, file: resolve(root, report) }],
     [{ kind: 'archive-origin', receipt, product: science.path, establishes: 'Manifest-pinned archive bytes, matching header identity and complete supported numeric structure decoding. No local recalibration, archive comparison or surface registration is claimed.' }]);
