@@ -73,9 +73,9 @@ jobs:
           CSSEARTH_ALLOW_MISSING_ASSETS: "1"
         run: pnpm setup:assets
       - name: Build the site
-        # The deploy build consumes the committed prepared metadata and the restored R2 closure. It does not run
-        # prepare:facilities: that authoring command can encode new preview bytes and rewrite their inventories,
-        # which must be published explicitly before a deploy is allowed to reference them.
+        # The deploy build regenerates its ignored source/facility catalogues from committed inputs and the restored
+        # R2 closure. Its catalog-only preparation does not publish preview bytes or rewrite asset inventories;
+        # those authoring outputs must be published explicitly before a deploy is allowed to reference them.
         # ASSET_ORIGIN points every texture, scene JSON and startup preload at the published R2
         # bucket instead of bundling public/scenes (1.44 GB) into the deploy; astro.config.mts
         # removes dist/scenes once the build finishes and assemble:planets tolerates its absence.
@@ -113,9 +113,9 @@ jobs:
             echo "::error::Only $page_count HTML pages were built (expected roughly 974, refusing below $min_pages). Refusing to deploy a truncated site."
             exit 1
           fi
-          if ! git diff --quiet -- src/objects site/prepared-facilities.json site/prepared-sources.json; then
+          if ! git diff --quiet -- src/objects; then
             echo "::error::Deploy preparation changed committed object metadata. Prepare and publish it explicitly before deploying."
-            git diff --name-only -- src/objects site/prepared-facilities.json site/prepared-sources.json
+            git diff --name-only -- src/objects
             exit 1
           fi
       - name: Publish the prebuilt site

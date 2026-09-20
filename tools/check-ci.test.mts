@@ -26,15 +26,17 @@ test('local CI reads the actual workflow jobs in order, including strict TypeScr
  const ownership=universe.find(step=>step.name.includes('runtime ownership'));
  assert.equal(ownership?.env.RUNTIME_OWNERSHIP_ARGS,'--all');
 });
-test('the deploy consumes installed assets and rejects generated metadata or uninventoried output',async()=>{
+test('the deploy consumes installed assets, rebuilds only catalogues and rejects uninventoried output',async()=>{
  const workflow=await readFile(new URL('../.github/workflows/deploy.yml',import.meta.url),'utf8');
  const packageFile=JSON.parse(await readFile(new URL('../package.json',import.meta.url),'utf8')) as {scripts:Record<string,string>};
  assert.match(workflow,/pnpm build:deploy/);
  assert.match(workflow,/pnpm check:deploy-assets/);
- assert.match(workflow,/git diff --quiet -- src\/objects site\/prepared-facilities\.json site\/prepared-sources\.json/);
+ assert.match(workflow,/git diff --quiet -- src\/objects/);
  assert.doesNotMatch(workflow,/ASSET_ORIGIN=https:\/\/earth-assets\.lowpoly\.cc pnpm build(?:\s|$)/);
  assert.match(packageFile.scripts['prepare:deploy']??'',/node tools\/nebula\/prepare\.mts --if-missing/);
  assert.match(packageFile.scripts['prepare:deploy']??'',/pnpm prepare:galaxy-field:data/);
+ assert.match(packageFile.scripts['prepare:deploy']??'',/pnpm prepare:deploy-catalogues/);
+ assert.equal(packageFile.scripts['prepare:deploy-catalogues'],'node tools/prepare-facilities.mts --catalog-only');
  assert.doesNotMatch(packageFile.scripts['prepare:deploy']??'',/prepare:(?:facilities|provenance|nebulae)(?:\s|$)/);
 });
 test('--quick skips only the network and documentation steps, and refuses a job without them',async()=>{
