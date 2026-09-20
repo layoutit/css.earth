@@ -88,6 +88,16 @@ test('a JWST cube mode takes its coverage from the bands, and touching bands bec
   assert.equal(candidate(answer, 'NIRSPEC/IFU').meetsConstraints.wavelength?.answer, 'yes');
 });
 
+test('a colliding designation remains ambiguous through the capability query', () => {
+  const answer = queryCapabilities({ target: '2009 RE26', wavelengthMicrometres: [0.5, 0.7] }, inputs([], { targetCatalogue: [
+    { id: 'emilylakdawalla', name: 'Emilylakdawalla', aliases: ['2009 RE26'] },
+    { id: 'other-object', name: 'Other object', aliases: ['2009RE26'] },
+  ] }));
+  assert.equal(answer.targetResolution.status, 'ambiguous');
+  assert.equal(answer.endpoint.status, 'unknown-target');
+  assert.match(formatAnswer(answer), /Ambiguous target 2009 RE26/u);
+});
+
 test('a gap between the two intervals of a mode is not coverage', () => {
   const ask = (from: number, to: number) => candidate(queryCapabilities({ target: 'hd-181327', wavelengthMicrometres: [from, to] },
     inputs([{ telescope: 'jwst', value: JWST_LEDGER }])), 'NIRCAM/CORON').meetsConstraints.wavelength!;

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><VOTABLE version="1.3" xmlns="http://www.ivoa.net/xml/VOTable/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ivoa.net/xml/VOTable/v1.3 http://www.ivoa.net/xml/VOTable/v1.3">
+<RESOURCE type="results">
+<INFO name="QUERY_STATUS" value="OK"/>
+<INFO name="QUERY" value="SELECT TOP 1 * FROM ivoa.ObsCore WHERE dataproduct_type=&apos;image&apos; AND s_ra BETWEEN 88.78 AND 88.81 AND s_dec BETWEEN 7.39 AND 7.42"/>
+<TABLE>
+<FIELD datatype="double" name="abmaglim" ucd="phot.mag;stat.max" unit="mag">
+<DESCRIPTION>ESO-specific field not present in the standard ObsCore. 5-sigma limiting AB (Oke) magnitude. The quoted magnitude should refer to the total flux of a point source. Applicable to the following data product type: cube, image, and measurements.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="long" name="access_estsize" ucd="phys.size;meta.file" unit="kbyte" utype="obscore:Access.size">
+<DESCRIPTION>Estimated size of the downloaded file in KBytes.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="access_format" ucd="meta.code.mime" utype="obscore:Access.format">
+<DESCRIPTION>The format of the downloaded file.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="access_url" ucd="meta.ref.url" utype="obscore:Access.reference">
+<DESCRIPTION>A URL that points to the DataLink (VO Standard) service that is used to download the dataset, associated files, their provenance or derived products, etc.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="bib_reference" ucd="meta.bib" utype="obscore:Curation.reference">
+<DESCRIPTION>URL or bibcode to the main publication that refers to the data set.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="int" name="calib_level" ucd="meta.code;obs.calib" utype="obscore:ObsDataset.calibLevel">
+<DESCRIPTION>Calibration level: 0-instrument (raw) data in non-standard format, 1-instrumental (raw) data in standard format, 2-science ready data with instrument signature removed, 3-more highly processed data. Ref. PRODLVL keyword in ESO SDP standard if present, otherwise: set to 3 when dataproduct_type contains token deep or tile, set to 4 for catalogs.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="dataproduct_subtype" ucd="meta.code.class" utype="obscore:ObsDataset.dataProductSubtype">
+<DESCRIPTION>A data-provider/collection specific secondary type, e.g. srctbl or catalog for measurements, tile or pawprint for VISTA images, etc.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="dataproduct_type" ucd="meta.code.class" utype="obscore:ObsDataset.dataProductType">
+<DESCRIPTION>Logical data set type (image, spectrum, visibility, cube, measurements, etc.)</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="dp_id" ucd="meta.id">
+<DESCRIPTION>ESO-specific field not present in the standard ObsCore. The original ESO identifier of the main science file. ObsCore uses obs_publisher_did, which returns the full IVO Identifier. This field can be used to join with other ESO (non-VO) tables, like provenance.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="em_max" ucd="em.wl;stat.max" unit="m" utype="obscore:Char.SpectralAxis.Coverage.Bounds.Limits.HiLimit">
+<DESCRIPTION>Maximum spectral value observed, expressed in vacuum wavelength in meters; ref. WAVELMAX keyword in ESO SDP standard.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="em_min" ucd="em.wl;stat.min" unit="m" utype="obscore:Char.SpectralAxis.Coverage.Bounds.Limits.LoLimit">
+<DESCRIPTION>Minimum specrtal value observed, expressed in vacuum wavelength in meters; ref. WAVELMIN keyword in ESO SDP standard.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="em_res_power" ucd="spect.resolution" utype="obscore:Char.SpectralAxis.Resolution.ResolPower.refVal">
+<DESCRIPTION>The characteristic spectral resolving power (lambda/delta(lambda)) of the data set. Ref. SPECRES keyword in ESO SDP standard, computed from em_min and em_max when SPECRES not provided := central lambda / delta(lambda) = 0.5*(wavelmin+wavelmax) / (wavelmax-wavelmin)</DESCRIPTION>
+</FIELD>
+<FIELD datatype="long" name="em_xel" ucd="meta.number" utype="obscore:Char.SpectralAxis.numBins">
+<DESCRIPTION>Number of elements on the spectral axis.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="facility_name" ucd="meta.id;instr.tel" utype="obscore:Provenance.ObsConfig.Facility.name">
+<DESCRIPTION>Name of the ESO telescope utilised to gather the photons. Possible values are: APEX-12m ESO-3.6 ESO-NTT ESO-VISTA ESO-VLT-U1 ESO-VLT-U2 ESO-VLT-U3 ESO-VLT-U4 ESO-VST MPG/ESO-2.2, and more to come, plus any combination of those (comma-separated), or the word MULTI.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="filter" ucd="meta.id;instr.filter">
+<DESCRIPTION>ESO-specific field not present in the standard ObsCore. The ESO instrument filter name. ObsCore uses em_min, em_max, and em_res_power to characterise the transmission curve of the bandpass; this field can be used to improve readibility.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="gal_lat" ucd="pos.galactic.lat" unit="deg" utype="galactic:Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C2">
+<DESCRIPTION>ESO-specific field not present in the standard ObsCore. Galactic coordinate: latitude; Image/tile/cube centre, barycentre of image arrays in MEF format ; spectroscopic target position; centre of the survey field in case of catalogues.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="gal_lon" ucd="pos.galactic.lon" unit="deg" utype="galactic:Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C1">
+<DESCRIPTION>ESO-specific field not present in the standard ObsCore. Galactic coordinate: longitude; Image/tile/cube centre, barycentre of image arrays in MEF format ; spectroscopic target position; centre of the survey field in case of catalogues.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="instrument_name" ucd="meta.id;instr" utype="obscore:Provenance.ObsConfig.Instrument.name">
+<DESCRIPTION>Name of the instrument(s) utilised to gather the data; if the data set combines multiple instruments, usually the value MULTI is assigned.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="short" name="is_solar">
+<DESCRIPTION>A flag indicating whether the target is the Sun (1) or not (0). It is currently known to be properly set for ALMA products, and for the ESO HELIOS (feeding HARPS and NIRPS) and POET (feeding ESPRESSO) solar telescopes.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="last_mod_date" ucd="time" utype="ssa:Curation.Date" xtype="timestamp">
+<DESCRIPTION>Time stamp of last modification of the metadata</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="multi_ob" ucd="meta.code.multip;obs">
+<DESCRIPTION>ESO-specific field not present in the standard ObsCore. A flag, either M or S. M-Multi OB means that the exposures from different telescope visits have been combined together; S-Single OB means that the product is the result of either a single exposure, or of the combination of exposures taken during the same visit, hence with similar atmospheric conditions, airmasses, etc.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="int" name="n_obs" ucd="meta.number;obs">
+<DESCRIPTION>ESO-specific field not present in the standard ObsCore. Number of observations participating into this data product.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="o_calib_status" ucd="meta.code.qual" utype="obscore:Char.ObservableAxis.calibrationStatus">
+<DESCRIPTION>Level of the calibration of the observable (e.g. flux).</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="o_ucd" ucd="meta.ucd" utype="obscore:Char.ObservableAxis.ucd">
+<DESCRIPTION>Nature of the observable within the data set, expressed as an Uniform Content Descriptor (IVOA standard).</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="obs_collection" ucd="meta.id" utype="obscore:DataID.collection">
+<DESCRIPTION>The name of the data collection the data set belongs to.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="obs_creator_did" ucd="meta.id" utype="obscore:DataID.creatorDID">
+<DESCRIPTION>The original file name as assigned by the data producer, in form of a IVOA identifier.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="obs_creator_name" ucd="meta.id" utype="obscore:DataID.creator">
+<DESCRIPTION>The Principal Investigator either of the team that provided the data set to ESO through the Phase 3 process, or of the observing team in case the data have been certified by ESO.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="obs_id" ucd="meta.id" utype="obscore:DataID.observationID">
+<DESCRIPTION>In case multiple data sets are available for an observation, e.g. with different calibration levels, the obs_id value will be the same for each data set the observation comprises. The obs_id should remain identical through time for future reference.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="obs_publisher_did" ucd="meta.ref.ivoid" utype="obscore:Curation.publisherDID">
+<DESCRIPTION>IVOA dataset identifier for the published data set. It must be unique within the namespace controlled by the publisher.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="obs_release_date" ucd="time.release" utype="obscore:Curation.releaseDate" xtype="timestamp">
+<DESCRIPTION>The date when the data set becomes public.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="obs_title" ucd="meta.title;obs" utype="obscore:DataID.title">
+<DESCRIPTION>It should contain a brief description (displayable in less than one line of text) specifying in scientific terms the content of the dataset.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="obstech" ucd="instr.setup">
+<DESCRIPTION>ESO-specific field not present in the standard ObsCore. Technique used during the observation. Normally, OBSTECH should be adopted from the keyword HIERARCH ESO DPR TECH of the original data.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="p3orig" ucd="meta.ref">
+<DESCRIPTION>ESO-specific field not present in the standard ObsCore. Possible values: EDP or IDP. EDP is for products prepared and certified by the astronomical community, IDP is for products generated and certified by ESO.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="pol_states" ucd="meta.code;phys.polarization" utype="obscore:Char.PolarizationAxis.stateList">
+<DESCRIPTION>A list of the polarisation states present in the data set. It is serialised as a concatenated list of the possible values: {I Q U V RR LL RL LR XX YY XY YX POLI POLA} where the list separator is a slash /. Leading and trailing slashes must always be present; example: /YY/.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="long" name="pol_xel" ucd="meta.number" utype="obscore:Char.PolarizationAxis.numBins">
+<DESCRIPTION>Number of polarisation states available in the data set.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="preview_html" ucd="meta.ref.url;meta.preview">
+<DESCRIPTION>The web (html) rendering of the preview, both for ALMA and LPO data. (The datalink offered by the access_url does not support ALMA data)</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="proposal_id" ucd="meta.id;obs.proposal" utype="obscore:Provenance.Proposal.identifier">
+<DESCRIPTION>The identifier(s) of the observing programme(s) this data set originates from.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="publication_date" ucd="time.publiYear" xtype="timestamp">
+<DESCRIPTION>ESO-specific field not present in the standard ObsCore. The publication date is the time when the product has been made available to the user community (whether under proprietary period or not).</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="release_description" ucd="meta.ref.url">
+<DESCRIPTION>ESO-specific field. It provides the link to the PDF document describing the release content, the originating observations, the calibration and data reduction procedures, the data quality, the data format, and the scientific context of the programme</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="s_dec" ucd="pos.eq.dec" unit="deg" utype="obscore:Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C2">
+<DESCRIPTION>Equatorial coordinate: Declination (FK5/J2000); Image/tile/cube centre, barycentre of image arrays in MEF format ; spectroscopic target position; centre of the survey field in case of catalogues. Ref. DEC keyword in ESO SDP standard.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="s_fov" ucd="phys.angSize;instr.fov" unit="deg" utype="obscore:Char.SpatialAxis.Coverage.Bounds.Extent.diameter">
+<DESCRIPTION>Angular size of the spatial field of view the photons were collected from.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="s_pixel_scale" ucd="phys.angSize;instr.pixel" unit="arcsec" utype="obscore:Char.SpatialAxis.Sampling.RefVal.SamplingPeriod">
+<DESCRIPTION>Spatial pixel scale</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="s_ra" ucd="pos.eq.ra" unit="deg" utype="obscore:Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C1">
+<DESCRIPTION>Equatorial coordinate: Right Ascension (FK5/J2000); Image/tile/cube centre, barycentre of image arrays in MEF format ; spectroscopic target position; centre of the survey field in case of catalogues. Ref. RA keyword in ESO SDP standard.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="s_region" ucd="pos.outline;obs.field" utype="obscore:Char.SpatialAxis.Coverage.Support.Area" xtype="adql:REGION">
+<DESCRIPTION>The spatial footprint of the data set. For an ESO spectrum, the returned footprint is the position (s_ra,s_dec).</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="s_resolution" ucd="pos.angResolution" unit="arcsec" utype="obscore:Char.SpatialAxis.Resolution.Refval.value">
+<DESCRIPTION>The characteristic spatial resolution of the data set; ref. ESO SDP standard: PSF_FWHM for images, SKY_RES for 3d cubes, assumed to be the APERTURE for spectral data.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="long" name="s_xel1" ucd="meta.number" utype="obscore:Char.SpatialAxis.numBins1">
+<DESCRIPTION>Number of elements (e.g. pixels) along the first spatial axis.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="long" name="s_xel2" ucd="meta.number" utype="obscore:Char.SpatialAxis.numBins2">
+<DESCRIPTION>Number of elements (e.g. pixels) along the second spatial axis.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="snr" ucd="stat.snr">
+<DESCRIPTION>ESO-specific field not present in the standard ObsCore. The average signal-to-noise ratio of a spectrum. Not applicable to other data product types.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="strehl" ucd="instr.param">
+<DESCRIPTION>Strehl ratio: Ratio of the intensity at the peak of the light distribution of an on-axis point source to the intensity assuming an ideal optical system limited only by diffraction over the aperture. It should be a value between 0 and 1</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="t_exptime" ucd="time.duration;obs.exposure" unit="s" utype="obscore:Char.TimeAxis.Coverage.Support.Extent">
+<DESCRIPTION>Total integration time per pixel (in seconds); ref. EXPTIME keyword in ESO SDP standard.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="t_max" ucd="time.end;obs.exposure" unit="d" utype="obscore:Char.TimeAxis.Coverage.Bounds.Limits.StopTime">
+<DESCRIPTION>Stop time in MJD; ref. MJD-END keyword in ESO SDP standard.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="t_min" ucd="time.start;obs.exposure" unit="d" utype="obscore:Char.TimeAxis.Coverage.Bounds.Limits.StartTime">
+<DESCRIPTION>Start time in MJD; ref MJD-OBS keyword in ESO SDP standard.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="t_resolution" ucd="time.resolution" unit="s" utype="obscore:Char.TimeAxis.Resolution.Refval.value">
+<DESCRIPTION>Temporal resolution (FWHM) in seconds; currently defined as := (t_max-t_min)*86400.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="long" name="t_xel" ucd="meta.number" utype="obscore:Char.TimeAxis.numBins">
+<DESCRIPTION>Number of elements along the time axis (currently set to 1 for all observations).</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="target_name" ucd="meta.id;src" utype="obscore:Target.name">
+<DESCRIPTION>The target name as assigned by the Principal Investigator; ref. Ref. OBJECT keyword in ESO SDP standard. For spectroscopic public surveys, the value shall be set to the survey source identifier, which shall be unique within the survey</DESCRIPTION>
+</FIELD>
+<DATA>
+<TABLEDATA>
+  <TR>
+    <TD>8.338</TD>
+    <TD>8458</TD>
+    <TD>application/x-votable+xml;content=datalink</TD>
+    <TD>https://archive.eso.org/datalink/links?ID=ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647</TD>
+    <TD>doi:10.1051/0004-6361/202661023</TD>
+    <TD>2</TD>
+    <TD></TD>
+    <TD>image</TD>
+    <TD>ADP.2026-08-19T13:19:07.647</TD>
+    <TD>8.570499999999999E-7</TD>
+    <TD>7.7655E-7</TD>
+    <TD>10.146583557128906</TD>
+    <TD>1</TD>
+    <TD>ESO-VLT-U3</TD>
+    <TD>N_I</TD>
+    <TD>-8.958607</TD>
+    <TD>199.787228</TD>
+    <TD>SPHERE</TD>
+    <TD>0</TD>
+    <TD>2026-08-19T13:32:34.690Z</TD>
+    <TD>S</TD>
+    <TD>96</TD>
+    <TD>absolute</TD>
+    <TD></TD>
+    <TD>BETELGEUSE-B</TD>
+    <TD>ivo://eso.org/origfile?SPHERE_ZIMPOL_Betelgeuse_P1_N_I_phase3.fits</TD>
+    <TD>MONTARGES, MIGUEL</TD>
+    <TD>4101305</TD>
+    <TD>ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647</TD>
+    <TD>2026-08-19T13:28:29Z</TD>
+    <TD></TD>
+    <TD>POLARIMETRY,P1</TD>
+    <TD>EDP</TD>
+    <TD></TD>
+    <TD></TD>
+    <TD>https://archive.eso.org/dataset/ADP.2026-08-19T13:19:07.647</TD>
+    <TD>114.28H9.001</TD>
+    <TD>2026-08-19T13:28:29Z</TD>
+    <TD>https://www.eso.org/rm/api/v1/public/releaseDescriptions/254</TD>
+    <TD>7.407063</TD>
+    <TD>0.00144815472</TD>
+    <TD>0.0036</TD>
+    <TD>88.792938</TD>
+    <TD>POLYGON J2000 88.793454 7.406553 88.792421 7.406553 88.792421 7.407577 88.793454 7.407577</TD>
+    <TD>0.016</TD>
+    <TD>1024</TD>
+    <TD>1024</TD>
+    <TD></TD>
+    <TD></TD>
+    <TD>24.762</TD>
+    <TD>60647.24137805</TD>
+    <TD>60647.20658711</TD>
+    <TD>3005.937216</TD>
+    <TD></TD>
+    <TD>Betelgeuse</TD>
+  </TR>
+</TABLEDATA>
+</DATA>
+</TABLE>
+</RESOURCE>
+</VOTABLE>

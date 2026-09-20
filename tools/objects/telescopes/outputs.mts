@@ -50,8 +50,11 @@ export async function delivery(resultPath:string){
   if(!product)throw new Error('The chosen product is absent from the delivery pins');
   for(const key of ['record','receipt'])if(!files.some(f=>f.path===requireString(record[key])))throw new Error('Delivery evidence is not pinned');
   const producing=parseProductRecord(JSON.parse(await readFile(beneath(directory,requireString(record.record)),'utf8')));
+  // New deliveries bind output paths to their producer's root. Legacy deliveries retain strict unique-suffix matching.
+  const outputRoot=record.outputRoot===undefined?undefined:beneath(directory,requireString(record.outputRoot));
   const outputPins=producing.outputs.map(output=>{
-    const matches=files.filter(f=>f.sha256===output.sha256&&f.bytes===output.bytes&&(f.path===output.path||f.path.endsWith('/'+output.path)));
+    const exact=outputRoot===undefined?undefined:relative(directory,beneath(outputRoot,output.path));
+    const matches=files.filter(f=>f.sha256===output.sha256&&f.bytes===output.bytes&&(exact===undefined?(f.path===output.path||f.path.endsWith('/'+output.path)):f.path===exact));
     if(matches.length!==1)throw new Error('Producing output is absent or ambiguous in delivery');return matches[0];
   });
   if(!outputPins.some(f=>f.path===product.path))throw new Error('Product is not bound by its producing record');

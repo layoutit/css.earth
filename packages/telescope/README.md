@@ -32,6 +32,12 @@ Use `--json` for machine-readable stdout and `--verbose` for detailed evidence. 
 
 The wrapper and scientific implementation remain separate versioned components: updating this npm package does not update the checkout's science code. `telescope --version` reports the wrapper version; each product receipt records the scientific software and inputs used.
 
+## Archive products
+
+Scientific queries also inspect the bounded ESO/ALMA ObsCore and ESA PSA EPN-TAP services through PyVO. Their results enter the same saved choices, `get`, `outputs` and `export` commands. An advertised synchronous SODA service can fulfill an explicit ICRS cutout; failed subsets never fall back to a full download. Direct FITS and supported single-science-file ZIP/TAR products retain their complete pinned input set.
+
+Use `telescope help` for region, frame and byte/member limits. `get --offline` replays an already delivered, pinned artifact without a remote refresh; it does not requalify it with current software. Acquisition verifies origin and integrity, while scientific request satisfaction can remain unresolved. [Protocol ownership, evidence and limitations](../../docs/vo-observation-access.md).
+
 ## Outputs
 
 After `get`, inspect what the delivered product can support:

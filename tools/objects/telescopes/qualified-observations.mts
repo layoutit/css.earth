@@ -9,6 +9,7 @@ import { readProductRecord, sameRun } from '../product-record.mts';
 import { assessInput, assessRequest, type ProductFacts } from './request-satisfaction.mts';
 import type { CapabilityRequest } from './query.mts';
 import { parseResolutionEvidence } from '../resolution-evidence.mts';
+import { parseRegion } from './vo/contracts.mts';
 
 export interface QualifiedObservation {
   readonly target: string; readonly telescope: string; readonly mode: string; readonly observation: string; readonly program: string;
@@ -19,6 +20,11 @@ export function parseProductFacts(raw: unknown): ProductFacts {
   const value = requireRecord(raw, 'product facts');
   if (typeof value.verified !== 'boolean') throw new TypeError('Product verification must be explicit.');
   const facts: { -readonly [K in keyof ProductFacts]: ProductFacts[K] } = { target: requireString(value.target, 'product target'), verified: value.verified };
+  if (value.regionCoverage !== undefined) {
+    const r = requireRecord(value.regionCoverage), usablePixelCenters = requireFiniteNumber(r.usablePixelCenters), invalidPixelCenters = requireFiniteNumber(r.invalidPixelCenters);
+    if (r.answer !== 'partial' && r.answer !== 'unknown' || ![usablePixelCenters,invalidPixelCenters].every(n => Number.isSafeInteger(n) && n >= 0)) throw new TypeError('Invalid region assessment.');
+    facts.regionCoverage = { region: parseRegion(r.region), answer: r.answer, reason: requireString(r.reason), usablePixelCenters, invalidPixelCenters };
+  }
   if (value.kind !== undefined) {
     if (!['image', 'cube', 'spectrum', 'table', 'photometry', 'events', 'strips'].includes(String(value.kind))) throw new TypeError('Unknown qualified product kind.');
     facts.kind = value.kind as ProductFacts['kind'];
@@ -48,7 +54,7 @@ export function parseProductFacts(raw: unknown): ProductFacts {
   if(value.calibrationDependencies !== undefined) facts.calibrationDependencies = parseCalibrationDependencies(value.calibrationDependencies);
   return facts;
 }
-const implementation = async () => sha256(Buffer.concat(await Promise.all(['./qualify.mts', './product-science.mts', './native-metadata.mts', './calibration-dependencies.mts', '../astronomy-packages/science.mts', '../astronomy-packages/requirements.lock', '../jwst/cubes/resolution.mts', '../jwst/cubes/spec3.mts', '../jwst/sample-agreement.mts', '../jwst/requirements.lock']
+const implementation = async () => sha256(Buffer.concat(await Promise.all(['./vo/package.mts', './vo/contracts.mts', './vo/discovery.mts', './vo/access.mts', './vo/bridge.mts', './vo/qualify.mts', '../astronomy-packages/client.mts', './qualify.mts', './product-science.mts', './native-metadata.mts', './calibration-dependencies.mts', '../astronomy-packages/science.mts', '../astronomy-packages/requirements.lock', '../jwst/cubes/resolution.mts', '../jwst/cubes/spec3.mts', '../jwst/sample-agreement.mts', '../jwst/requirements.lock']
   .map(path => readFile(new URL(path, import.meta.url))))));
 export async function rememberQualification(root: string, result: QualifiedObservation): Promise<void> {
   const locations = Object.fromEntries((['product', 'receipt', 'productRecord', 'outputRoot'] as const).map(key => [key, relative(root, resolve(root, result[key]))]));

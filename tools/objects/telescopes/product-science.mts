@@ -9,14 +9,14 @@ import { pinFile } from '../product-record.mts';
 import { requireArray, requireRecord, requireString } from '../../source-values.mts';
 import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
-export interface ScienceProduct { readonly file:string; readonly format:'fits'|'isis3'|'pds'; readonly target:string; readonly label?:string; readonly decoded?:unknown }
+export interface ScienceProduct { readonly file:string; readonly format:'fits'|'isis3'|'pds'; readonly target:string; readonly label?:string; readonly decoded?:unknown; readonly region?: import('./vo/contracts.mts').IcrsCircle }
 function intersection(left:readonly (readonly [number,number])[],right:readonly (readonly [number,number])[]): [number,number][] {
   return left.flatMap(([a,b])=>right.flatMap(([c,d])=>Math.max(a,c)<=Math.min(b,d)?[[Math.max(a,c),Math.min(b,d)] as [number,number]]:[]));
 }
 export async function readProductScience(root:string, product:ScienceProduct, options:{resolveCalibrations?:boolean}={}):Promise<Partial<ProductFacts>> {
   const before=await pinFile(resolve(root,product.file));let facts:Partial<ProductFacts>, references:{field:string;value:string}[]=[],header:Record<string,unknown>={};
   if(product.format==='fits'){
-    const answer=await sciencePackage({operation:'fits',path:resolve(root,product.file)});
+    const answer=await sciencePackage({operation:'fits',path:resolve(root,product.file), ...(product.region ? { region: product.region } : {})});
     const rows=requireArray(answer.structures).map(v=>requireRecord(v));
     const structures=rows.map(r=>parseNativeMetadata(r)), first=structures[0];
     let intervals=rows[0]?.wavelengthIntervalsMicrometres;
@@ -24,6 +24,7 @@ export async function readProductScience(root:string, product:ScienceProduct, op
     const beams=rows.map(r=>r.angularResolutionArcsec), beam=beams.length&&beams.every(n=>typeof n==='number'&&Number.isFinite(n)&&n>0)?Math.max(...beams as number[]):undefined;
     const multi:NativeMetadata={structure:'multiple science arrays',structures,calibration:structures.flatMap(s=>s.calibration),limitations:['Each science array is qualified separately; top-level coverage is their intersection. No measurements are averaged.']};
     facts=parseProductFacts({target:product.target,verified:true,nativeMetadata:structures.length===1?first:multi,
+      ...(rows.length === 1 && rows[0]!.regionCoverage ? { regionCoverage: rows[0]!.regionCoverage } : {}),
       kind:structures.every(s=>s.shape && (s.shape.length>3?2+s.shape.slice(0,-2).filter(n=>n!==1).length:s.shape.length)===3)?'cube':structures.every(s=>s.shape && (s.shape.length>3?2+s.shape.slice(0,-2).filter(n=>n!==1).length:s.shape.length)===2)?'image':undefined,
       ...(intervals===undefined?{}:{wavelengthIntervalsMicrometres:intervals}),
       ...(beam===undefined?{}:{angularResolutionArcsec:beam,resolutionEvidence:[{kind:'calibrated',receipt:{file:product.file,sha256:before.sha256}}]})});

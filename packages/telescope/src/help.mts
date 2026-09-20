@@ -2,6 +2,7 @@ export const HELP = `Telescope — retrieve a qualified telescope product for a 
 
   telescope query TARGET --wavelength MIN,MAX --kind cube --any-time --min-arcsec N --out DIRECTORY
   telescope get DIRECTORY --pick N
+  telescope get DIRECTORY --pick N --offline
   telescope outputs DIRECTORY/pick-N/result.json [--structure NAME]
   telescope export DIRECTORY/pick-N/result.json --output image --hdu N [--structure NAME] --plane N --out DIRECTORY
   telescope export DIRECTORY/pick-N/result.json --output spectrum --hdu N --pixel X,Y --out DIRECTORY
@@ -28,6 +29,14 @@ Aggregate outputs:
 
 Query options use micrometres, arcseconds and kilometres:
   --from ISO --to ISO                 Time range instead of --any-time
+  --icrs-circle RA,DEC,RADIUS          Explicit ICRS cutout, in degrees
+  --spectral-frame barycentric        Permit advertised SODA BAND subsetting
+  --max-science-bytes N               Science transfer bound (default 1 GiB)
+  --max-metadata-bytes N              Metadata response bound (default 32 MiB)
+  --max-expanded-bytes N              Expanded package bound (default 1 GiB)
+  --max-package-members N             Package file bound (default 1024)
+  --max-link-depth N                  Nested DataLink edges (default 3)
+  --max-link-requests N               Access-description requests (default 32)
   --min-km N --range-km N             Required surface resolution
   --min-elements N --range-km N --radius-km N
   --continuum LEFT_MIN,LEFT_MAX,RIGHT_MIN,RIGHT_MAX

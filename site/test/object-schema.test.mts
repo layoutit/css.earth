@@ -8,6 +8,7 @@ import { resolve } from "node:path";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
 
 import { defineObject, defineObjects, OBJECT_CLASSIFICATIONS } from "../object-schema.mts";
+import { catalogEntry } from '../object-catalog.mts';
 import { SCENE_OBJECTS, requireSceneObject } from "../objects.mts";
 import { parsePreparedWorldCameraFrame } from '../../src/renderers/css/dist/index.js';
 import {
@@ -48,6 +49,16 @@ test("defines one generic renderable-object contract", () => {
   assert.equal(objectRecord.loadScene, loadScene);
   assert.equal(Object.isFrozen(objectRecord), true);
   assert.equal(objectRecord.worldFrame, null);
+});
+
+test('catalogue metadata carries only explicit scientific aliases', () => {
+  const descriptor = { schema: 'cssearth-object@1', id: 'fixture', properties: { catalog: {
+    name: 'Fixture', systemName: 'Test System', classification: 'dwarf-planet', color: '#abcdef', distanceAu: 1,
+    description: 'Prepared fixture object.', aliases: ['274860', '2009 RE26'],
+  } } };
+  const entry = catalogEntry(descriptor, loadScene, testDistance(1));
+  assert.deepEqual(entry.aliases, ['274860', '2009 RE26']);
+  assert.throws(() => catalogEntry({ ...descriptor, properties: { catalog: { ...descriptor.properties.catalog, aliases: [''] } } }, loadScene, testDistance(1)), /Invalid catalogue aliases/);
 });
 
 test('world-frame capability is validated and copied at the registry boundary', () => {

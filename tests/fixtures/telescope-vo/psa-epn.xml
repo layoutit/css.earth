@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VOTABLE version="1.4" xmlns="http://www.ivoa.net/xml/VOTable/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ivoa.net/xml/VOTable/v1.3 http://www.ivoa.net/xml/VOTable/votable-1.4.xsd">
+<RESOURCE type="results">
+<INFO name="QUERY_STATUS" value="OK"/>
+
+<INFO name="QUERY" value="SELECT TOP 1 * FROM psa.epn_core WHERE target_name=&#039;Mars&#039;"><![CDATA[SELECT TOP 1 * FROM psa.epn_core WHERE target_name='Mars']]></INFO>
+<INFO name="JOBID" value="d12057f1-b4fa-11f1-b8c5-005056a06554-PROD"><![CDATA[d12057f1-b4fa-11f1-b8c5-005056a06554-PROD]]></INFO>
+
+<TABLE>
+<FIELD datatype="int" name="access_estsize" ucd="phys.size;meta.file">
+<DESCRIPTION>Estimate file size in kbyte (with this spelling)</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="access_format" ucd="meta.code.mime">
+<DESCRIPTION>RFC 2045 media type (mime), required to be all-lower case</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="access_url" ucd="meta.ref.url;meta.file">
+<DESCRIPTION>URL of the data file, case sensitive (additional files may be linked through datalink_url). Can point to a script. If present, next 2 parameters must also be present.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="c1_resol_max" ucd="See table notes in EPN-TAP documentation">
+<DESCRIPTION>Max resolution in first coordinate</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="c1_resol_min" ucd="See table notes in EPN-TAP documentation">
+<DESCRIPTION>Min resolution in first coordinate</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="c1max" ucd="See table notes in EPN-TAP documentation">
+<DESCRIPTION>Max of first coordinate, depends on the frame</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="c1min" ucd="See table notes in EPN-TAP documentation">
+<DESCRIPTION>Min of first coordinate, depends on the frame</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="c2_resol_max" ucd="See table notes in EPN-TAP documentation">
+<DESCRIPTION>Max resolution in second coordinate</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="c2_resol_min" ucd="See table notes in EPN-TAP documentation">
+<DESCRIPTION>Min resolution in second coordinate</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="c2max" ucd="See table notes in EPN-TAP documentation">
+<DESCRIPTION>Max of second coordinate, depends on the frame</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="c2min" ucd="See table notes in EPN-TAP documentation">
+<DESCRIPTION>Min of second coordinate, depends on the frame</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="c3_resol_max" ucd="See table notes in EPN-TAP documentation">
+<DESCRIPTION>Max resolution in third coordinate</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="c3_resol_min" ucd="See table notes in EPN-TAP documentation">
+<DESCRIPTION>Min resolution in third coordinate</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="c3max" ucd="See table notes in EPN-TAP documentation">
+<DESCRIPTION>Max of third coordinate</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="c3min" ucd="See table notes in EPN-TAP documentation">
+<DESCRIPTION>Min of third coordinate</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="creation_date" ucd="time.creation" xtype="timestamp">
+<DESCRIPTION>Date of first entry of this granule</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="datalabs_path" ucd="meta.id;meta.file">
+<DESCRIPTION>Path of the label file in the ESDC Datalabs environment.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="dataproduct_type" ucd="meta.code.class">
+<DESCRIPTION>Organization of the data product, from enumerated list</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="emergence_max" ucd="pos.emergenceAng;stat.max">
+<DESCRIPTION>Max emergence angle</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="emergence_min" ucd="pos.emergenceAng;stat.min">
+<DESCRIPTION>Min emergence angle</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="granule_gid" ucd="meta.id">
+<DESCRIPTION>Common to granules of same type</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="granule_uid" ucd="meta.id">
+<DESCRIPTION>Unique ID in data service</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="incidence_max" ucd="pos.incidenceAng;stat.max">
+<DESCRIPTION>Max incidence angle (solar zenithal angle)</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="incidence_min" ucd="pos.incidenceAng;stat.min">
+<DESCRIPTION>Min incidence angle (solar zenithal angle)</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="instrument_host_name" ucd="meta.id;instr.obsty">
+<DESCRIPTION>Standard name of the observatory or spacecraft</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="instrument_name" ucd="meta.id;instr">
+<DESCRIPTION>Standard name of instrument</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="instrument_type" ucd="meta.id;instr">
+<DESCRIPTION>Type of instrument</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="label_url" ucd="meta.ref.url;meta.file">
+<DESCRIPTION>URL of the label file in the PSA ftp.</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="measurement_type" ucd="meta.ucd">
+<DESCRIPTION>UCD(s) defining the data</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="modification_date" ucd="time.processing" xtype="timestamp">
+<DESCRIPTION>Date of last modification</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="obs_id" ucd="meta.id;obs">
+<DESCRIPTION>Associates granules derived from the same data</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="phase_max" ucd="pos.phaseAng;stat.max">
+<DESCRIPTION>Max phase angle</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="phase_min" ucd="pos.phaseAng;stat.min">
+<DESCRIPTION>Min phase angle</DESCRIPTION>
+</FIELD>
+<FIELD datatype="int" name="processing_level" ucd="meta.calibLevel">
+<DESCRIPTION>Dataset-related encoding, or simplified CODMAC calibration level</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="release_date" ucd="time.release" xtype="timestamp">
+<DESCRIPTION>Start of public access period (set to creation_date if no proprietary period)</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="s_region" ucd="pos.outline;obs.field">
+<DESCRIPTION>ObsCore-like footprint in 2D (if spatial_frame_type = celestial or body)</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="service_title" ucd="meta.title">
+<DESCRIPTION>Title of resource = schema name</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="spatial_frame_type" ucd="meta.code.class;pos.frame">
+<DESCRIPTION>Flavor of coordinate system, defines the nature of coordinates. From enumerated list. Use "none" if undefined.</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="spectral_range_max" ucd="em.freq;stat.max">
+<DESCRIPTION>Max spectral range (as frequency)</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="spectral_range_min" ucd="em.freq;stat.min">
+<DESCRIPTION>Min spectral range (as frequency)</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="spectral_resolution_max" ucd="spect.resolution;stat.max">
+<DESCRIPTION>Max spectral resolution (resolving power)</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="spectral_resolution_min" ucd="spect.resolution;stat.min">
+<DESCRIPTION>Min spectral resolution (resolving power)</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="spectral_sampling_step_max" ucd="em.freq;spect.binSize;stat.max">
+<DESCRIPTION>Max spectral sampling step</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="spectral_sampling_step_min" ucd="em.freq;spect.binSize;stat.min">
+<DESCRIPTION>Min spectral sampling step</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="target_class" ucd="src.class">
+<DESCRIPTION>Type of target, from enumerated list</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="target_name" ucd="meta.id;src">
+<DESCRIPTION>Standard IAU name of target (must match target_class), case sensitive</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="*" datatype="char" name="thumbnail_url" ucd="meta.ref.url;meta.preview">
+<DESCRIPTION>URL of a thumbnail image with predefined size (png  200 pix, for use in a client only)</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="time_exp_max" ucd="time.duration;obs.exposure;stat.max">
+<DESCRIPTION>Max integration time</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="time_exp_min" ucd="time.duration;obs.exposure;stat.min">
+<DESCRIPTION>Min integration time</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="time_max" ucd="time.end;obs">
+<DESCRIPTION>Stop time (in JD). UTC measured at time_origin location (default is observer's frame)</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="time_min" ucd="time.start;obs">
+<DESCRIPTION>Start time (in JD). UTC measured at time_origin location (default is observer's frame)</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="time_sampling_step_max" ucd="time.resolution;stat.max">
+<DESCRIPTION>Max time sampling step</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="time_sampling_step_min" ucd="time.resolution;stat.min">
+<DESCRIPTION>Min time sampling step</DESCRIPTION>
+</FIELD>
+<DATA>
+<BINARY2>
+<STREAM encoding='base64'>
+H/4zCZPxmAAABbUAAAAVYXBwbGljYXRpb24veC1wZHMtemlwAAAA02h0dHBzOi8v
+cHNhLmVzYS5pbnQvcHNhLXRhcC9kYXRhP3JldHJpZXZhbF9hY2Nlc3M9RElSRUNU
+JnJldHJpZXZhbF90eXBlPVBST0RVQ1QmdGFwY2xpZW50PUVQTi1UQVAmaWQ9dXJu
+OmVzYTpwc2E6ZW0xNl90Z29fY2FzOmRhdGFfY2FsaWJyYXRlZDpjYXNfY2FsX3Nj
+XzIwMjIxMTEydDE2MzQ1MC0yMDIyMTExMnQxNjM0NTQtMjIxNzctMS1wYW4tODUw
+NzI1Nzk2LTIyLTB/+AAAAAAAAH/4AAAAAAAAf/gAAAAAAAB/+AAAAAAAAH/4AAAA
+AAAAf/gAAAAAAAB/+AAAAAAAAH/4AAAAAAAAf/gAAAAAAAB/+AAAAAAAAH/4AAAA
+AAAAf/gAAAAAAAAAAAAVMjAyNS0wNi0zMFQwMDowMDowMC4wAAAA2i9kYXRhL3Bz
+YV9wc2EwMV9kYXRhbGFiczAxL0V4b01hcnMyMDE2L2VtMTZfdGdvX2Nhcy9kYXRh
+X2NhbGlicmF0ZWQvU2NpZW5jZV9QaGFzZS9PcmJpdF9SYW5nZV8yMjEwMF8yMjE5
+OS9PcmJpdF8yMjE3Ny9TY2llbmNlLzg1MDcyNTc5Ni9QQU4vY2FzX2NhbF9zY18y
+MDIyMTExMlQxNjM0NTAtMjAyMjExMTJUMTYzNDU0LTIyMTc3LTEtUEFOLTg1MDcy
+NTc5Ni0yMi0wX180XzAueG1sAAAAAmNpf/gAAAAAAAB/+AAAAAAAAAAAACh1cm46
+ZXNhOnBzYTplbTE2X3Rnb19jYXM6ZGF0YV9jYWxpYnJhdGVkAAAAc3Vybjplc2E6
+cHNhOmVtMTZfdGdvX2NhczpkYXRhX2NhbGlicmF0ZWQ6Y2FzX2NhbF9zY18yMDIy
+MTExMnQxNjM0NTAtMjAyMjExMTJ0MTYzNDU0LTIyMTc3LTEtcGFuLTg1MDcyNTc5
+Ni0yMi0wOjo0LjB/+AAAAAAAAH/4AAAAAAAAAAAADEV4b01hcnMgMjAxNgAAAAZD
+YVNTSVMAAAAAAAAA5Wh0dHBzOi8vYXJjaGl2ZXMuZXNhYy5lc2EuaW50L3BzYS9m
+dHAvRXhvTWFyczIwMTYvZW0xNl90Z29fY2FzL2RhdGFfY2FsaWJyYXRlZC9TY2ll
+bmNlX1BoYXNlL09yYml0X1JhbmdlXzIyMTAwXzIyMTk5L09yYml0XzIyMTc3L1Nj
+aWVuY2UvODUwNzI1Nzk2L1BBTi9jYXNfY2FsX3NjXzIwMjIxMTEyVDE2MzQ1MC0y
+MDIyMTExMlQxNjM0NTQtMjIxNzctMS1QQU4tODUwNzI1Nzk2LTIyLTBfXzRfMC54
+bWwAAAAAAAAAFTIwMjUtMDYtMzBUMDA6MDA6MDAuMAAAAG51cm46ZXNhOnBzYTpl
+bTE2X3Rnb19jYXM6ZGF0YV9jYWxpYnJhdGVkOmNhc19jYWxfc2NfMjAyMjExMTJ0
+MTYzNDUwLTIwMjIxMTEydDE2MzQ1NC0yMjE3Ny0xLXBhbi04NTA3MjU3OTYtMjIt
+MH/4AAAAAAAAf/gAAAAAAAAAAAADAAAAFTIwMjMtMDUtMTJUMDA6MDA6MDAuMAAA
+AAAAAAADcHNhAAAABG5vbmV/+AAAAAAAAH/4AAAAAAAAf/gAAAAAAAB/+AAAAAAA
+AH/4AAAAAAAAf/gAAAAAAAAAAAAGcGxhbmV0AAAABE1hcnMAAADIaHR0cHM6Ly9w
+c2EuZXNhLmludC9wc2EtdGFwL2RhdGE/cmV0cmlldmFsX2FjY2Vzcz1ESVJFQ1Qm
+cmV0cmlldmFsX3R5cGU9SU1BR0UmbGlkdmlkPXVybjplc2E6cHNhOmVtMTZfdGdv
+X2NhczpkYXRhX2NhbGlicmF0ZWQ6Y2FzX2NhbF9zY18yMDIyMTExMnQxNjM0NTAt
+MjAyMjExMTJ0MTYzNDU0LTIyMTc3LTEtcGFuLTg1MDcyNTc5Ni0yMi0wOjo0LjB/
++AAAAAAAAH/4AAAAAAAAQULEfBhvoM5BQsR8GG4ccX/4AAAAAAAAf/gAAAAAAAA=
+</STREAM>
+</BINARY2>
+</DATA>
+</TABLE>
+<INFO name="QUERY_STATUS" value="OVERFLOW"/>
+
+</RESOURCE>
+</VOTABLE>

@@ -10,6 +10,7 @@ import astropy
 from astropy import units as u
 from astropy.io import fits
 from astropy.wcs import WCS
+from astropy.coordinates import SkyCoord
 from astropy.utils.exceptions import AstropyWarning
 warnings.simplefilter('error')
 request = json.load(sys.stdin)
@@ -129,6 +130,23 @@ def read_science(path):
                     aggregate=CubeOutput(request,shape,centers,edges,dataunit,error_unit_valid)
                 else: raise ValueError('Unknown output kind')
             total=0; finite=0; goodcount=0; baderror=0; flagged=0
+            region_check=None; region_wcs=None; region_center=None; region_radius=None; region_usable=0; region_bad=0
+            if request.get('region'):
+                region_check={'answer':'unknown','reason':'No supported two-dimensional celestial WCS for the requested region.'}
+                try:
+                    if len(shape)!=2: raise ValueError('Region checks currently require one two-dimensional science image')
+                    with warnings.catch_warnings():
+                        warnings.simplefilter('ignore', AstropyWarning)
+                        region_wcs=WCS(h,hdus).celestial
+                    if not region_wcs.has_celestial: raise ValueError('No celestial WCS')
+                    r=request['region']; region_center=SkyCoord(r['raDegrees']*u.deg,r['decDegrees']*u.deg,frame='icrs'); region_radius=r['radiusDegrees']*u.deg
+                    boundary=region_center.directional_offset_by(np.arange(0,360,0.5)*u.deg,region_radius)
+                    bx,by=region_wcs.world_to_pixel(boundary)
+                    outside=np.any(~np.isfinite(bx)|~np.isfinite(by)|(bx<-.5)|(bx>shape[1]-.5)|(by<-.5)|(by>shape[0]-.5))
+                    region_check={'answer':'partial' if outside else 'unknown','reason':'Requested boundary positions lie outside the returned image.' if outside else 'Boundary samples are in the image; complete continuous-region coverage is not established by samples alone.'}
+                except Exception as e:
+                    region_wcs=None
+                    region_check['reason']=str(e)
             usable=np.zeros(shape[specaxis],dtype=bool) if specaxis is not None else None
             # Bound temporary masks to about one million samples; no whole-cube boolean allocations.
             flatlast=shape[-1]; leading=int(np.prod(shape[:-1])) if len(shape)>1 else 1
@@ -166,6 +184,20 @@ def read_science(path):
                         if specaxis==len(shape)-1: usable[start:start+a.size] |= good
                         elif good.any(): usable[prefix[specaxis]]=True
             row['quality']={'policy':'finite-science; DQ/MASK=0; finite nonnegative uncertainty when supplied','samples':total,'finite':finite,'usable':goodcount,'flagged':flagged,'invalidUncertainty':baderror,'mask':dq.name if dq is not None else None}
+            if region_check is not None:
+                # Reuse the extraction mask policy, row by row, without allocating a whole-image sky grid.
+                if region_wcs is not None:
+                    for y in range(shape[0]):
+                        world=region_wcs.pixel_to_world(np.arange(shape[1]),np.full(shape[1],y))
+                        within=world.icrs.separation(region_center)<=region_radius
+                        valid=np.isfinite(np.asarray(hdu.section[y,:]))
+                        if dq is not None: valid &= np.asarray(dq.section[y,:])==0
+                        if error is not None:
+                            e=np.asarray(error.section[y,:]); valid &= np.isfinite(e)&(e>0 if error_kind=='inverse-variance' else e>=0)
+                        region_usable+=int((within&valid).sum()); region_bad+=int((within&~valid).sum())
+                    if region_bad:
+                        region_check={'answer':'partial','reason':'Some pixel centers in the requested circle have invalid science, quality flags or invalid supplied uncertainty.'}
+                row['regionCoverage']={**region_check,'region':request['region'],'usablePixelCenters':region_usable,'invalidPixelCenters':region_bad}
             row['uncertainty']={'status':'validated' if error_unit_valid else 'unknown','kind':error_kind,'structure':error.name if error is not None else None}
             if usable is not None:
                 row['spectral']['usableBands']=usable.tolist()
@@ -215,7 +247,7 @@ elif request['operation']=='units':
 else: raise ValueError('Unknown science operation')
 json.dump(answer,sys.stdout,allow_nan=False,separators=(',',':'))
 `;
-export async function sciencePackage(request: { operation: 'fits'; path: string } | { operation:'extract';path:string;hdu:number;arrayDirectory?:string;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent' } | { operation: 'units'; units: readonly string[] }): Promise<Record<string, unknown>> {
+export async function sciencePackage(request: { operation: 'fits'; path: string; region?: import('../telescopes/vo/contracts.mts').IcrsCircle } | { operation:'extract';path:string;hdu:number;arrayDirectory?:string;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent' } | { operation: 'units'; units: readonly string[] }): Promise<Record<string, unknown>> {
   const tc = await astroqueryToolchain();
   return new Promise((done, fail) => {
     const child = spawn(tc.python, ['-c', SCIENCE_PYTHON], { env: { ...process.env, ...tc.env }, stdio: ['pipe', 'pipe', 'pipe'] });

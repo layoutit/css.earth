@@ -6,7 +6,7 @@ import { hasErrorCode, requireArray, requireRecord, requireString } from '../../
 import { pinFile, readProductRecord, type ProductRecord } from '../product-record.mts';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection,
   type CapabilityAnswer, type CapabilityRequest, type QueryInputs } from './query.mts';
-import { matchingProduct, type QualifiedObservation } from './qualified-observations.mts';
+import { matchingProduct, loadQualifiedObservations, type QualifiedObservation } from './qualified-observations.mts';
 import { qualifyObservation, type QualificationRequest } from './qualify.mts';
 import { selectedProductInput } from './selected-product.mts';
 import { assessRequest, type ProductFacts } from './request-satisfaction.mts';
@@ -14,12 +14,13 @@ import type { QualificationConfiguration } from './qualification-routes.mts';
 
 export const SESSION_SCHEMA = 'cssearth-telescope-session@1';
 export interface Choice {
+  readonly acquisitionKey?: string;
   readonly pick: number; readonly telescope: string; readonly mode: string; readonly observation: string; readonly program: string;
   readonly state: 'ready' | 'qualify'; readonly configuration?: QualificationConfiguration; readonly product?: QualifiedObservation;
   readonly sourceId?: string;
 }
-export const choiceKey = (choice: Pick<Choice, 'telescope' | 'mode' | 'observation' | 'program'>): string =>
-  JSON.stringify([choice.telescope, choice.mode, choice.observation, choice.program]);
+export const choiceKey = (choice: Pick<Choice, 'telescope' | 'mode' | 'observation' | 'program' | 'acquisitionKey'>): string =>
+  JSON.stringify(choice.acquisitionKey ? ['vo-acquisition@1', choice.acquisitionKey] : [choice.telescope, choice.mode, choice.observation, choice.program]);
 
 /** Only offer observations that have a current artifact or an API-provided qualification action. */
 export function observationChoices(answer: CapabilityAnswer): Choice[] {
@@ -37,6 +38,13 @@ export function observationChoices(answer: CapabilityAnswer): Choice[] {
         configuration: action.configuration, ...(action.configuration.kind === 'source-product' ? { sourceId: action.configuration.id } : {}), state: 'qualify' });
     }
   }
+  for (const candidate of answer.archiveProducts ?? []) {
+    if (candidate.satisfaction.status === 'refused' || !candidate.product && !candidate.action) continue;
+    const configuration = candidate.action?.configuration;
+    add({ acquisitionKey: candidate.acquisitionKey, telescope: candidate.observation.service, mode: candidate.product?.mode ?? `native-${candidate.observation.kind}`,
+      observation: candidate.observation.key, program: candidate.acquisitionKey, state: candidate.product ? 'ready' : 'qualify',
+      ...(configuration ? { configuration } : {}), ...(candidate.product ? { product: candidate.product } : {}) });
+  }
   return [...choices.values()];
 }
 
@@ -45,10 +53,12 @@ export interface Session {
   readonly target: string; readonly choices: readonly Choice[]; readonly answer: CapabilityAnswer;
 }
 export interface SessionServices {
+  readonly loadRequest?: (root: string, request: CapabilityRequest, selectedObservation?: string) => Promise<QueryInputs>;
   readonly load: (root: string, target: string) => Promise<QueryInputs>;
   readonly qualify: (root: string, request: QualificationRequest) => Promise<unknown>;
 }
-const services: SessionServices = { load: loadQueryInputs, qualify: qualifyObservation };
+const services: SessionServices = { load: loadQueryInputs, loadRequest: loadQueryInputs, qualify: qualifyObservation };
+const loadForRequest = (api: SessionServices, root: string, request: CapabilityRequest, selectedObservation?: string) => api.loadRequest ? api.loadRequest(root, request, selectedObservation) : api.load(root, request.target);
 const emptyInputs: QueryInputs = { ledgers: [], capabilities: [], targetCatalogue: [], targetAssociations: [], bodyMaps: [] };
 export function sessionRequest(args: readonly string[]): CapabilityRequest {
   const request = requestFromArguments(args);
@@ -76,7 +86,7 @@ export async function saveSession(root: string, args: readonly string[], directo
     const path = resolve(directory, 'query.json');
     try { await readFile(path); throw new Error(`${path} already exists. Use a new --out directory to preserve its numbered choices.`); }
     catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
-    const answer = queryCapabilities(request, await api.load(root, request.target));
+    const answer = queryCapabilities(request, await loadForRequest(api, root, request));
     const session: Session = { schema: SESSION_SCHEMA, createdAt: new Date().toISOString(), arguments: args, target: answer.target, choices: observationChoices(answer), answer };
     const temporary = `${path}.${randomUUID()}.partial`;
     try { await writeFile(temporary, `${JSON.stringify(session, null, 2)}\n`); await rename(temporary, path); }
@@ -93,7 +103,7 @@ function readSavedChoice(value: unknown, pick: number) {
   if (!Number.isSafeInteger(pick) || pick < 1 || pick > choices.length) throw new TypeError(`--pick must be between 1 and ${choices.length}.`);
   const choice = requireRecord(choices[pick - 1], 'saved choice');
   if (choice.pick !== pick) throw new TypeError('Saved choice numbering is inconsistent.');
-  return { args, target: requireString(session.target, 'saved target'), key: choiceKey({ telescope: requireString(choice.telescope), mode: requireString(choice.mode),
+  return { args, ...(choice.acquisitionKey === undefined ? {} : { selectedObservation: requireString(choice.observation) }), target: requireString(session.target, 'saved target'), key: choiceKey({ ...(choice.acquisitionKey === undefined ? {} : { acquisitionKey: requireString(choice.acquisitionKey) }), telescope: requireString(choice.telescope), mode: requireString(choice.mode),
     observation: requireString(choice.observation), program: requireString(choice.program) }) };
 }
 interface FilePin { readonly bytes: number; readonly sha256: string }
@@ -108,10 +118,9 @@ function relativeFile(root: string, file: string): string {
   return path;
 }
 async function resolveArtifact(root: string, answer: CapabilityAnswer, choice: Choice): Promise<Artifact> {
-  const selection = selectObservation(answer, choice.telescope, choice.mode, choice.program);
   if (!choice.product) throw new Error('The route did not produce a current, selectable artifact.');
   // Bind this observation even when a program contains several qualified observations.
-  const selected = await selectedProductInput(root, { ...selection, product: choice.product });
+  const selected = await selectedProductInput(root, { ...selectObservation(answer, choice.telescope, choice.mode, choice.program), product: choice.product });
   const q = selected.qualification;
   return { file: selected.file, receipt: resolve(root, q.receipt), record: resolve(root, q.productRecord), outputRoot: resolve(root, q.outputRoot), facts: selected.facts,
     extraEvidence: [...(q.facts.calibrationDependencies??[]).flatMap(d=>d.file?[resolve(root,d.file)]:[]), ...(q.facts.angularResolutionBound ? [resolve(root, q.facts.angularResolutionBound.receipt)] : []),
@@ -145,11 +154,18 @@ async function exportArtifact(root: string, destination: string, artifact: Artif
   return { files, record };
 }
 
-export async function getSession(root: string, directory: string, pick: number, progress: (text: string) => void = () => {}, api: SessionServices = services) {
+export async function getSession(root: string, directory: string, pick: number, progress: (text: string) => void = () => {}, api: SessionServices = services, options: { readonly offline?: boolean } = {}) {
   return locked(directory, async () => {
     const saved = readSavedChoice(JSON.parse(await readFile(resolve(directory, 'query.json'), 'utf8')), pick), request = sessionRequest(saved.args);
+    if (options.offline) {
+      const resultPath = resolve(directory, `pick-${pick}`, 'result.json'), { delivery } = await import('./outputs.mts');
+      const local = await delivery(resultPath), { canonical } = await import('./vo/contracts.mts');
+      if (local.record.choice !== saved.key || canonical(local.record.request) !== canonical({ ...request, target: saved.target })) throw new Error('Offline delivery differs from its saved scientific request or choice.');
+      progress('Replaying the pinned local delivery; no remote archive was refreshed.');
+      return { resultPath, product: local.file, satisfaction: assessRequest({ ...request, target: saved.target }, (await import('./qualified-observations.mts')).parseProductFacts(local.record.facts)), reused: true, replay: 'pinned-local-artifact' as const };
+    }
     progress('Revalidating the saved observation');
-    let inputs = await api.load(root, request.target), answer = queryCapabilities(request, inputs);
+    let inputs = await loadForRequest(api, root, request, saved.selectedObservation), answer = queryCapabilities(request, inputs);
     if (answer.target !== saved.target) throw new Error('Target identity changed since the saved query. Save a new query.');
     let choice = observationChoices(answer).find(entry => choiceKey(entry) === saved.key);
     if (!choice) throw new Error('The saved observation is no longer available for this request. Save a new query to inspect current blockers.');
@@ -158,7 +174,8 @@ export async function getSession(root: string, directory: string, pick: number, 
       progress(`Qualifying ${choice.telescope} ${choice.mode}: ${choice.observation}`);
       const qualification = { target: answer.target, telescope: choice.telescope, mode: choice.mode, observation: choice.observation, configuration: choice.configuration };
       await locked(resolve(root, 'output/telescopes'), () => api.qualify(root, qualification));
-      inputs = await api.load(root, answer.target); answer = queryCapabilities(request, inputs);
+      inputs = choice.acquisitionKey ? { ...inputs, qualifiedProducts: await loadQualifiedObservations(root, answer.target) } : await loadForRequest(api, root, { ...request, target: answer.target });
+      answer = queryCapabilities(request, inputs);
       choice = observationChoices(answer).find(entry => choiceKey(entry) === saved.key);
       if (!choice || choice.state !== 'ready') throw new Error('Qualification did not produce a selectable artifact for the original request. Re-query for the current verdict.');
     }
@@ -171,7 +188,7 @@ export async function getSession(root: string, directory: string, pick: number, 
         throw new Error('Saved result identity differs. Preserve it and use a new query directory.');
       const { files, record } = await exportArtifact(root, dirname(resultPath), artifact, progress, true);
       const product = `files/${relativeFile(root, artifact.file)}`;
-      const result = { schema: 'cssearth-telescope-delivery@1', choice: saved.key, request: answer.request, observation: choice.observation, product,
+      const result = { schema: 'cssearth-telescope-delivery@1', choice: saved.key, request: answer.request, observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
         receipt: `files/${relativeFile(root, artifact.receipt)}`, record: `files/${relativeFile(root, artifact.record)}`, facts: artifact.facts,
         satisfaction, evidence: record.evidence, files, reused: true };
       const temporary = `${resultPath}.${randomUUID()}.partial`;
@@ -184,7 +201,7 @@ export async function getSession(root: string, directory: string, pick: number, 
     try {
       const { files, record } = await exportArtifact(root, staging, artifact, progress);
       const product = `files/${relativeFile(root, artifact.file)}`;
-      const result = { schema: 'cssearth-telescope-delivery@1', choice: saved.key, request: answer.request, observation: choice.observation, product,
+      const result = { schema: 'cssearth-telescope-delivery@1', choice: saved.key, request: answer.request, observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
         receipt: `files/${relativeFile(root, artifact.receipt)}`, record: `files/${relativeFile(root, artifact.record)}`, facts: artifact.facts,
         satisfaction, evidence: record.evidence, files, reused: false };
       await writeFile(resolve(staging, 'result.json'), `${JSON.stringify(result, null, 2)}\n`);

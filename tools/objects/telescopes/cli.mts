@@ -13,8 +13,8 @@ import { exportSphere } from './sphere.mts';
 import { HELP } from '../../../packages/telescope/src/help.mts';
 export { HELP };
 
-const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--result']);
-export type CliOptions = {readonly command:'spatial';readonly kind:'points'|'volume';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help' } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
+const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--result', '--icrs-circle', '--spectral-frame', '--max-science-bytes', '--max-metadata-bytes', '--max-link-depth', '--max-link-requests', '--max-expanded-bytes', '--max-package-members']);
+export type CliOptions = {readonly command:'spatial';readonly kind:'points'|'volume';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'project';readonly result:string;readonly geometry:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'sphere';readonly result:string;readonly directory:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'outputs';readonly result:string;readonly structure?:string;readonly json:boolean;readonly verbose:boolean} | {readonly command:'export';readonly result:string;readonly directory:string;readonly selection:OutputRequest;readonly json:boolean;readonly verbose:boolean} | { readonly command: 'help' } | { readonly command: 'query'; readonly directory: string; readonly requestArgs: string[]; readonly json: boolean; readonly verbose: boolean } | { readonly command: 'get'; readonly offline?: boolean; readonly directory: string; readonly pick: number; readonly json: boolean; readonly verbose: boolean };
 export function parseCli(args: readonly string[]): CliOptions {
   const command = args[0];
   if (!args.length || args.includes('--help') || args.includes('-h')) return { command: 'help' as const };
@@ -50,7 +50,7 @@ export function parseCli(args: readonly string[]): CliOptions {
   for (let i = 1; i < args.length; i++) {
     const arg = args[i];
     if (!arg.startsWith('-')) { positional.push(arg); continue; }
-    if (['--json', '--verbose', ...(command === 'query' ? ['--any-time'] : [])].includes(arg)) {
+    if (['--json', '--verbose', ...(command === 'query' ? ['--any-time'] : ['--offline'])].includes(arg)) {
       if (switches.has(arg)) throw new TypeError(`Repeated option ${arg}.`);
       switches.add(arg); if (arg === '--any-time') requestArgs.push(arg); continue;
     }
@@ -70,7 +70,7 @@ export function parseCli(args: readonly string[]): CliOptions {
   }
   const pick = Number(values.get('--pick'));
   if (positional.length !== 1 || !Number.isSafeInteger(pick) || pick < 1) throw new TypeError('Use telescope get DIRECTORY --pick N, with a positive whole number.');
-  return { command, directory: resolve(positional[0]), pick, json, verbose };
+  return { command, directory: resolve(positional[0]), pick, json, verbose, ...(switches.has('--offline') ? { offline: true } : {}) };
 }
 export function formatSession(session: Session, directory: string): string {
   const lines = [`${session.target} · ${session.answer.request.kind} · ${session.answer.request.wavelengthMicrometres.join('–')} µm`, ''];
@@ -82,11 +82,13 @@ export function formatSession(session: Session, directory: string): string {
   }
   if (!session.choices.length) {
     lines.push(`No retrievable observation. Workflow: ${session.answer.endpoint.status}.`);
-    if (session.answer.targetResolution.status === 'unknown') lines.push(formatAnswer(session.answer).trim());
+    if (session.answer.targetResolution.status !== 'resolved') lines.push(formatAnswer(session.answer).trim());
     for (const candidate of session.answer.candidates) lines.push(`  ${candidate.telescope} / ${candidate.mode}: ${candidate.selectionAssessment.blockers.map(b => b.reason).join('; ') || 'No exact qualified artifact or executable qualification action.'}`);
   }
   for (const coverage of session.answer.targetCoverage) if (coverage.state !== 'observed') lines.push(`${coverage.telescope}: ${coverage.state}. ${coverage.reason}`);
   for (const issue of session.answer.sourceIntakeIssues ?? []) lines.push(`Source ${issue.state}: ${issue.path}. ${issue.reason}`);
+  for (const service of session.answer.archiveAccess?.services ?? []) lines.push(`${service.service}: ${service.state}. ${service.reason}`);
+  for (const record of session.answer.archiveAccess?.records ?? []) if (!record.products.length) lines.push(`Archive ${record.observation.key}: ${record.observation.target.status}. ${record.issues.join('; ')}`);
   lines.push('', `Saved: ${resolve(directory, 'query.json')}`);
   if (session.choices.length) lines.push(`Next: telescope get ${JSON.stringify(directory)} --pick N`);
   return `${lines.join('\n')}\n`;
@@ -119,7 +121,7 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
         text = options.json ? `${JSON.stringify(session)}\n` : formatSession(session, options.directory) + (options.verbose ? `\n${formatAnswer(session.answer)}` : '');
         code = session.choices.length ? 0 : 3;
       } else {
-        const result = await getSession(root, options.directory, options.pick, line => process.stderr.write(`${line}\n`));
+        const result = await getSession(root, options.directory, options.pick, line => process.stderr.write(`${line}\n`), undefined, { offline: options.offline });
         text = options.json ? `${JSON.stringify(result)}\n` : [`Product: ${result.product}`, `Evidence: ${result.resultPath}`, `Request: ${result.satisfaction.status}`,
           ...(result.reused ? ['Reused: verified existing delivery'] : []),
           ...Object.entries(result.satisfaction.constraints).filter(([, v]) => v.answer !== 'yes').map(([name, v]) => `Remaining ${name}: ${v.answer}. ${v.reason}`)].join('\n') + '\n';

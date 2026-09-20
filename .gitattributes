@@ -120,3 +120,7 @@ src/objects/*/source/observations/*.INFO -text -whitespace
 # Native results and byte inventories are reproducible generated evidence.
 tests/oracles/sbmt/projection.json linguist-generated=true
 tools/oracles/sbmt/runtime.lock.json linguist-generated=true
+
+# Preserve the exact archived VOTable response bytes, including CRLF.
+tests/fixtures/telescope-vo/*.xml -text -whitespace
+tests/fixtures/telescope-vo/*.fits binary
