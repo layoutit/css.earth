@@ -100,6 +100,17 @@ test('a radially compressed render is caught by the half-light radius even thoug
     `milder ${milder.halfLightRadiusRatio} vs compressed ${compressed.halfLightRadiusRatio}`);
 });
 
+test('a missing bright core remains the worst radial defect even when its render is exactly zero', () => {
+  const stats = radialProfileStatistics(buildGrid(p => radiusAt(p) < 8 ? 0 : identity(p)), material);
+  assert.ok(stats.radialBins.some(bin => bin.ratio === 0));
+  assert.equal(stats.worstBin?.ratio, 0);
+  assert.ok(stats.rmsLogRatio !== null && Number.isFinite(stats.rmsLogRatio) && stats.rmsLogRatio > 1);
+  const dark = radialProfileStatistics(buildGrid(() => 0), material);
+  assert.equal(dark.worstBin?.ratio, 0);
+  assert.ok(dark.rmsLogRatio !== null && Number.isFinite(dark.rmsLogRatio) && dark.rmsLogRatio > 1);
+  assert.equal(dark.halfLightRadiusRender, null);
+});
+
 test('the footprint mask is respected, and empty or degenerate bins report null rather than NaN', () => {
   // A small disk footprint inside the same field, with many more bins than the disk has room for at large radius.
   const disk = buildGrid(identity);

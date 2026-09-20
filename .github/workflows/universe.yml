@@ -599,6 +599,7 @@ jobs:
           workspace-sections workspace-portals workspace-objects camera-model-panel image-appearance-panel
           catalogue object-browser papers survey-images
           geometry-model observation-alignment structures-model
+          build lens-levels lens-difference lens-radial lens-radial-panel
 
   ci-guard:
     name: Report the first CI failure

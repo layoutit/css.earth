@@ -44,7 +44,7 @@ export interface LensRadialProfile {
   halfLightRadiusSource: number | null; halfLightRadiusRender: number | null;
   /** Render half-light radius over source: 1 matched, below 1 render compressed toward the centre, above 1 expanded. */
   halfLightRadiusRatio: number | null;
-  /** Pixel-count-weighted RMS of |log(ratio)| over bins with a defined ratio; 0 is a perfect radial match. */
+  /** Pixel-count-weighted RMS of |log(ratio)|; ratios below machine epsilon use that finite floor. */
   rmsLogRatio: number | null;
   /** The bin whose ratio departs furthest from one. Null when no bin has a defined ratio. */
   worstBin: LensRadialWorstBin | null;
@@ -86,8 +86,9 @@ export function radialProfileStatistics(grid: LensLevelGrid, material: LensLevel
     const sourceMean = sourceSum[i]! / pixels, renderMean = renderSum[i]! / pixels, signedDelta = renderMean - sourceMean;
     const ratio = sourceMean > 1e-6 ? renderMean / sourceMean : null;
     radialBins.push({ radius, pixels, sourceMean, renderMean, ratio, signedDelta });
-    if (ratio !== null && ratio > 0) {
-      const deviation = Math.abs(Math.log(ratio));
+    if (ratio !== null) {
+      // A completely missing bright bin is a maximal defect, not missing evidence. Keep JSON finite.
+      const deviation = Math.abs(Math.log(Math.max(Number.EPSILON, ratio)));
       weightedSquare += deviation * deviation * pixels; weight += pixels;
       if (deviation > worstDeviation) { worstDeviation = deviation; worstBin = { radius, ratio, pixels }; }
     }
@@ -116,7 +117,8 @@ export async function lensRadialProfile(root: string, prepared: PreparedReconstr
     grid: { width: grid.width, height: grid.height }, bins, ...statistics,
     note: 'Azimuthally averaged luminance in radial bins from the footprint’s own geometric centroid. Levels ' +
       'can match p50/p90/p99 while the structure sits in the wrong place; a per-bin ratio far from one, or a ' +
-      'half-light radius ratio far from one, means the render’s radial shape differs even where its histogram does not.' };
+      'half-light radius ratio far from one, means the render’s radial shape differs even where its histogram does not. ' +
+      'Log ratios use machine epsilon as a finite floor for a completely dark render bin.' };
 }
 
 /** GET `?resultId=<lens>` answers the radial profile JSON. Never writes. */

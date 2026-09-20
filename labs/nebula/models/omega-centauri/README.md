@@ -27,7 +27,7 @@ extracted stellar residual, and that status is recorded rather than hidden.
 50.88' x 50.88' (0.2099"/px), CC BY 4.0, credit ESO/INAF-VST/OmegaCAM (A. Grado, L.
 Limatola/INAF-Capodimonte Observatory). Already acquired and hash-pinned via
 `labs/nebula/sources/reference-images.json`; libwebp cannot encode the 14540px original for
-this crowded field at any quality, so the checked-in derivative is an 8192px-wide, 0.373"/px
+this crowded field at the tested qualities (80 and 92), so the ignored derivative is an 8192px-wide, 0.373"/px
 WebP (`labs/nebula/sources/omega-centauri-vst.webp`). Angular scale must always be measured
 from the native dimensions, never the derivative.
 
@@ -35,10 +35,11 @@ from the native dimensions, never the derivative.
 
 The publisher's stated pointing center (RA 13:26:47.27, Dec -47:28:46.34, fetched live from
 the ESO image page) agrees with the independently catalogued NGC 5139 center from SIMBAD (RA
-13:26:47.28, Dec -47:28:46.1, ref 2010AJ....140.1830G) to 0.24 arcsec -- sub-pixel at the
-native 0.21"/px scale. This is a whole-field pointing check, not a matched-star homography fit
-against an external catalogue; no per-star astrometric residuals were computed in this
-session, so the skill's full registration gate (METHOD.md step 2) is only partially satisfied.
+13:26:47.28, Dec -47:28:46.1, ref 2010AJ....140.1830G) to about 0.24 arcsec — roughly one pixel at the
+native 0.21"/px scale, rather than sub-pixel as the initial receipt called it. This initial whole-field pointing check was followed by matched-star
+fits against DSS2. The [exact-WCS report](dss2-fits-registration-report.json) records residuals
+of roughly 10–16 arcsec, too coarse for the native pixel scale. The full registration gate
+remains unmet; no accepted transform or bake is claimed.
 
 ## Method choice
 
@@ -77,7 +78,7 @@ measured departure from that assumption is Omega Centauri's flattening (elliptic
 That flattening, not an invented shell or expansion law, is the honest limitation carried
 through this recipe.
 
-## The derived profile (`king-abel-profile.json`, `king-abel-derivation.mjs`)
+## The derived profile (`king-abel-profile.json`, `king-abel-derivation.mts`)
 
 1. Adopted the single-mass King (1962) empirical projected-density law as the profile family
    (`physical-evidence.json` id `king-profile-family`).
@@ -150,8 +151,11 @@ mismatched schema.
 
 - No baked reconstruction, hence no front/oblique/side inspection and no X/Z or Y/Z handoff
   check could be performed.
-- Registration is a whole-field pointing check only, not a matched-star fit.
+- Matched-star registration against DSS2 remains too coarse for a pixel-level bake.
 - Sphericity is known to be wrong at the ~10-20% flattening level; this profile cannot
   represent that.
 - The King concentration was solved from two 3D dynamical-model radii via an approximate
   projected/3D scaling, not fit directly to photometry.
+- [Later literature evidence](shape-evidence.md) favors a Wilson profile and reports
+  radius-dependent flattening and competing inclinations. The spherical King table above
+  remains an exploratory derivation, not an accepted reconstruction prior.
