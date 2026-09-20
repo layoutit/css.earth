@@ -159,6 +159,7 @@ jobs:
         # which this workflow does not run and which has known unrelated failures.
         run: >-
           node --test tools/runtime-assets.test.mts
+          tools/stage-published-assets.test.mts
           tools/publish-verification.test.mts
           tools/check-assets-published.test.mts
           src/platform/runtime-asset-closure.test.mts
