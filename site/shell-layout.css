@@ -547,6 +547,8 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
 
 @media (min-width: 821px) and (orientation: landscape) {
   body[data-object-shell] {
+    /* With the 40px single-line wordmark, this places its ink 22px above the search pill. */
+    --explorer-header-row-gap: 3.28125px;
     --explorer-header-height: calc(var(--explorer-header-bar-height) + var(--explorer-header-row-gap) + var(--explorer-search-height));
   }
 
