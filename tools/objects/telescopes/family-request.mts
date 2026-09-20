@@ -15,7 +15,7 @@ export interface FamilyCriteria {
 }
 export interface FamilyScientificRequest {readonly legacy:CapabilityRequest;readonly family?:FamilyId;readonly criteria?:FamilyCriteria}
 export interface NormalizedFamilyRequest {readonly legacy:CapabilityRequest;readonly family?:FamilyId;readonly criteria:FamilyCriteria}
-export interface FamilyRequestAssessment {readonly request:NormalizedFamilyRequest;readonly verdicts:Readonly<Record<FamilyCriterionName,ConstraintVerdict|undefined>>}
+export interface FamilyRequestAssessment {readonly request:NormalizedFamilyRequest;readonly verdicts:Readonly<Partial<Record<FamilyCriterionName,ConstraintVerdict>>>}
 const verdict=(answer:ConstraintAnswer,reason:string):ConstraintVerdict=>({answer,reason});
 const norm=(text:string)=>text.trim().toLowerCase().replaceAll(/[^a-z0-9]+/gu,'-').replaceAll(/^-|-$/gu,'');
 const supported:Readonly<Record<FamilyCriterionName,readonly FamilyId[]>>={

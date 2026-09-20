@@ -57,6 +57,6 @@ test('local HEALPix import reuses its Astropy-owned descriptor and operations',a
   const root=await mkdtemp(resolve(tmpdir(),'telescope-import-healpix-')),source=resolve(import.meta.dirname,'../../../tests/fixtures/telescope-families/f14-healpix/bayestar.fits.gz'),copy=resolve(root,'bayestar.fits.gz'),out=resolve(root,'imported');
   try{
     await copyFile(source,copy);const result=await importLocalArtifact({schema:'cssearth-telescope-local-import-spec@1',datasetId:'bayestar-import',sources:[{path:copy,role:'science'}],declarations:{familyHints:['F14']},limits:{maxMembers:1,maxBytes:200000,maxFileBytes:200000}},out),inspected=await listArtifactOutputs(result.manifest);
-    assert.equal(result.value.descriptor?.path,'descriptor.json');assert.ok(inspected.familyOperations?.some(operation=>operation.id==='healpix-select'&&operation.available));
+    assert.equal(result.value.descriptor?.path,'descriptor.json');assert.ok('familyOperations' in inspected);assert.ok(inspected.familyOperations?.some(operation=>operation.id==='healpix-select'&&operation.available));
   }finally{await rm(root,{recursive:true,force:true});}
 });

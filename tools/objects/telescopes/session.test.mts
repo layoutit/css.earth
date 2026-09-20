@@ -117,6 +117,7 @@ test('saved choices qualify, export complete dependencies, reassess and reuse wi
     const altered = { ...saved, choices: saved.choices.map(c => ({ ...c, configuration: { kind: 'unknown' }, product: '/untrusted/file' })) };
     await writeFile(resolve(out, 'query.json'), JSON.stringify(altered));
     const result = await getSession(f.root, out, 1, () => {}, f.api);
+    assert.ok('satisfaction' in result);
     assert.equal(result.satisfaction.status, 'unresolved'); assert.equal(f.qualifications(), 1);
     const delivery = JSON.parse(await readFile(result.resultPath, 'utf8'));
     assert.ok(delivery.files.some((f: { path: string }) => f.path.endsWith('core.lbl')));
