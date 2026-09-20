@@ -109,6 +109,11 @@ telescope export runs/eris/pick-1/result.json --output aperture-spectrum --hdu 1
 telescope export runs/eris/pick-1/result.json --output feature-map --hdu 1 --band 2.30,2.34 --continuum 2.26,2.29,2.35,2.38 --out figures/eris-feature
 ```
 
+When one declared family selects an existing content validator, import writes a pinned
+`descriptor.json` and `outputs` lists the package-owned `family-run` operations. Ambiguous inputs
+remain pinned and request an explicit family hint; recognition alone never establishes origin,
+calibration or scientific fitness.
+
 Selectors are zero-based and explicit. The adapter exports qualified FITS images, pixel/region spectra,
 band images and continuum-subtracted feature maps to FITS/ECSV, PNG, SVG, CSV and a product record. It uses the same masks,
 units and wavelength coordinates as qualification. CSV blanks preserve excluded samples;

@@ -701,7 +701,11 @@ telescope outputs imported-observation/import.json
 
 The data-only specification names files/directories, roles and byte/member limits. Import copies
 regular files without following symlinks, pins every byte and proposes handlers from bounded
-content inspection. Target, origin, units, frame, calibration and family hints supplied by the
+content inspection. When one declared family selects an existing content validator, import also
+writes a pinned `descriptor.json`; `outputs` exposes that descriptor's package-owned family
+operations. Ambiguous inputs stay pinned and say which family choice is missing. Recognized
+profiles that still lack the metadata or dependency closure their handler needs remain explicitly
+unsupported. Target, origin, units, frame, calibration and family hints supplied by the
 user remain declarations until a handler validates them. A content hash proves integrity, not
 archive origin or scientific fitness.
 

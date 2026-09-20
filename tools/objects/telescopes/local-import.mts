@@ -7,6 +7,8 @@ import { pinFile, writeProductRecord, type ProductInput } from '../product-recor
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { proposedFamilyProfiles } from './family-handlers.mts';
 import { FAMILY_IDS, type CalibrationState, type DescriptorMember, type FamilyId, type MemberRole } from './product-descriptor.mts';
+import { describeMixedNd, inspectMixedNd } from './families/f02-mixed-nd.mts';
+import { describeHealpix, inspectHealpix } from './families/f14-healpix.mts';
 
 export const LOCAL_IMPORT_SPEC_SCHEMA='cssearth-telescope-local-import-spec@1' as const;
 export const LOCAL_IMPORT_SCHEMA='cssearth-telescope-local-import@1' as const;
@@ -19,6 +21,7 @@ export interface LocalImportSpec {
 export interface LocalImportManifest {
   readonly schema:typeof LOCAL_IMPORT_SCHEMA;readonly datasetId:string;readonly declarations?:LocalImportSpec['declarations'];readonly limits:LocalImportSpec['limits'];
   readonly members:readonly DescriptorMember[];readonly proposedProfiles:readonly {readonly handlerId:string;readonly profileId:string}[];
+  readonly descriptor?:{readonly path:string;readonly bytes:number;readonly sha256:string};
   readonly issues:readonly {readonly state:'unknown'|'unsupported';readonly reason:string}[];
 }
 const ID=/^[A-Za-z0-9][A-Za-z0-9._:-]*$/u;
@@ -45,7 +48,33 @@ async function enumerate(source:string,logical:string,role:MemberRole):Promise<P
 const mediaType=(path:string)=>/\.fits?$/iu.test(path)?'application/fits':/\.xml$/iu.test(path)?'application/xml':/\.json$/iu.test(path)?'application/json':/\.csv$/iu.test(path)?'text/csv':'application/octet-stream';
 async function prefix(path:string):Promise<Uint8Array>{const file=await open(path,constants.O_RDONLY|(constants.O_NOFOLLOW??0));try{const bytes=Buffer.alloc(16*1024),answer=await file.read(bytes,0,bytes.length,0);return bytes.subarray(0,answer.bytesRead);}finally{await file.close();}}
 
-export async function importLocalArtifact(value:unknown,outputDirectory:string):Promise<{readonly directory:string;readonly manifest:string;readonly receipt:string;readonly value:LocalImportManifest}>{
+const LOCAL_QUALIFIERS=new Map([
+  ['astropy-mixed-nd-fits@1','F02'],
+  ['astropy-healpix-fits@1','F14'],
+] as const);
+async function qualifyLocalImport(spec:LocalImportSpec,members:readonly DescriptorMember[],candidates:readonly {readonly handlerId:string;readonly profileId:string}[],staging:string):Promise<{readonly descriptor?:{readonly path:string;readonly bytes:number;readonly sha256:string};readonly issue?:LocalImportManifest['issues'][number]}> {
+  const supported=candidates.filter(candidate=>LOCAL_QUALIFIERS.has(candidate.profileId as 'astropy-mixed-nd-fits@1'|'astropy-healpix-fits@1'));
+  const hints=spec.declarations?.familyHints;
+  if(!hints?.length&&candidates.length>1)return{issue:{state:'unknown',reason:'Several handlers recognized these bytes. Add one familyHints entry and import again before a content validator selects a route.'}};
+  const selected=supported.filter(candidate=>!hints?.length||hints.includes(LOCAL_QUALIFIERS.get(candidate.profileId as 'astropy-mixed-nd-fits@1'|'astropy-healpix-fits@1')!));
+  if(selected.length!==1){
+    if(selected.length>1)return{issue:{state:'unknown',reason:'The declared family still selects several content-qualified routes; the import remains pinned without choosing one.'}};
+    if(candidates.length)return{issue:{state:'unsupported',reason:'Recognized profiles need metadata or dependency closure that this local import cannot yet qualify.'}};
+    return{};
+  }
+  const science=members.filter(member=>member.role==='science');
+  if(science.length!==1)return{issue:{state:'unknown',reason:`The selected local profile requires exactly one science member; this import has ${science.length}.`}};
+  const member=science[0]!,pin={path:resolve(staging,member.path),bytes:member.bytes,sha256:member.sha256},profile=selected[0]!;
+  try{
+    const acquisition={kind:'local-import' as const,identity:'import.json'},calibration={state:'unknown' as const,basis:['Local byte import and content inspection establish structure, not archive origin or calibration.']};
+    const value=profile.profileId==='astropy-mixed-nd-fits@1'
+      ?describeMixedNd({id:spec.datasetId,member,inspection:await inspectMixedNd(pin),producingRecord:'import.product.json',acquisition,calibration})
+      :describeHealpix({id:spec.datasetId,member,map:await inspectHealpix(pin),producingRecord:'import.product.json',acquisition,calibration});
+    const path=resolve(staging,'descriptor.json');await writeFile(path,`${JSON.stringify(value,null,2)}\n`);return{descriptor:{path:'descriptor.json',...await pinFile(path)}};
+  }catch(error){return{issue:{state:'unsupported',reason:`The selected ${profile.profileId} content validator refused the imported bytes: ${error instanceof Error?error.message:String(error)}`}};}
+}
+
+export async function importLocalArtifact(value:unknown,outputDirectory:string):Promise<{readonly directory:string;readonly manifest:string;readonly receipt:string;readonly descriptor?:string;readonly value:LocalImportManifest}>{
   const spec=parseLocalImportSpec(value),destination=resolve(outputDirectory),pending:PendingFile[]=[];
   for(const [index,source] of spec.sources.entries()){const path=resolve(source.path),name=safeName(source.name??(basename(path)||`source-${index+1}`),`source ${index} name`);pending.push(...await enumerate(path,name,source.role));}
   pending.sort((a,b)=>a.logical.localeCompare(b.logical));if(new Set(pending.map(file=>file.logical.toLowerCase())).size!==pending.length)throw new TypeError('Local import member paths collide.');
@@ -60,10 +89,11 @@ export async function importLocalArtifact(value:unknown,outputDirectory:string):
       copiedBytes+=copied.bytes;if(copiedBytes>spec.limits.maxBytes)throw new RangeError('Local import byte limit exceeded.');const id=`member-${String(index+1).padStart(4,'0')}`;members.push({id,path:`files/${file.logical}`,role:file.role,...copied,mediaType:mediaType(file.logical)});inputs.push({role:`local ${file.role}`,identity:file.source,...before});
     }
     const candidates=proposedFamilyProfiles(await Promise.all(members.map(async member=>({path:member.path,prefix:await prefix(resolve(staging,member.path))}))));
-    const issues:LocalImportManifest['issues']=[{state:'unknown',reason:spec.declarations?.origin?'Origin was declared by the importer and remains unverified; local byte integrity does not establish it.':'No archive origin was declared; local byte integrity does not establish origin.'},...(spec.declarations?[{state:'unknown' as const,reason:'Target, family, units, frame and calibration metadata in declarations are user-supplied assertions until a handler qualifies each applicable fact.'}]:[]),...(candidates.length?[]:[{state:'unsupported' as const,reason:'No registered handler recognized the imported bytes. Original files remain pinned.'}])];
-    const manifestValue:LocalImportManifest={schema:LOCAL_IMPORT_SCHEMA,datasetId:spec.datasetId,...(spec.declarations?{declarations:spec.declarations}:{}),limits:spec.limits,members,proposedProfiles:candidates,issues};const manifest=resolve(staging,'import.json');await writeFile(manifest,`${JSON.stringify(manifestValue,null,2)}\n`);
-    const implementation=sha256(Buffer.concat(await Promise.all(['local-import.mts','family-handlers.mts','product-descriptor.mts'].map(name=>readFile(new URL(name,import.meta.url))))));
-    const receipt=resolve(staging,'import.product.json');await writeProductRecord(receipt,{telescope:'local import',stage:'telescope-local-import',inputs,parameters:{datasetId:spec.datasetId,declarations:spec.declarations??{},limits:spec.limits,classification:'Handler profiles are candidates until content and metadata qualification confirms them.'},software:[{name:'cssEarth telescope local import',version:implementation}]},[...members.map(member=>({path:member.path,file:resolve(staging,member.path)})),{path:'import.json',file:manifest}]);
-    await rmdir(destination);await rename(staging,destination);return {directory:destination,manifest:resolve(destination,'import.json'),receipt:resolve(destination,'import.product.json'),value:manifestValue};
+    const qualification=await qualifyLocalImport(spec,members,candidates,staging);
+    const issues:LocalImportManifest['issues']=[{state:'unknown',reason:spec.declarations?.origin?'Origin was declared by the importer and remains unverified; local byte integrity does not establish it.':'No archive origin was declared; local byte integrity does not establish origin.'},...(spec.declarations?[{state:'unknown' as const,reason:'Target, family, units, frame and calibration metadata in declarations are user-supplied assertions until a handler qualifies each applicable fact.'}]:[]),...(candidates.length?[]:[{state:'unsupported' as const,reason:'No registered handler recognized the imported bytes. Original files remain pinned.'}]),...(qualification.issue?[qualification.issue]:[])];
+    const manifestValue:LocalImportManifest={schema:LOCAL_IMPORT_SCHEMA,datasetId:spec.datasetId,...(spec.declarations?{declarations:spec.declarations}:{}),limits:spec.limits,members,proposedProfiles:candidates,...(qualification.descriptor?{descriptor:qualification.descriptor}:{}),issues};const manifest=resolve(staging,'import.json');await writeFile(manifest,`${JSON.stringify(manifestValue,null,2)}\n`);
+    const implementation=sha256(Buffer.concat(await Promise.all(['local-import.mts','family-handlers.mts','product-descriptor.mts','families/f02-mixed-nd.mts','families/f14-healpix.mts'].map(name=>readFile(new URL(name,import.meta.url))))));
+    const receipt=resolve(staging,'import.product.json');await writeProductRecord(receipt,{telescope:'local import',stage:'telescope-local-import',inputs,parameters:{datasetId:spec.datasetId,declarations:spec.declarations??{},limits:spec.limits,classification:'Handler profiles are candidates until content and metadata qualification confirms them.'},software:[{name:'cssEarth telescope local import',version:implementation}]},[...members.map(member=>({path:member.path,file:resolve(staging,member.path)})),{path:'import.json',file:manifest},...(qualification.descriptor?[{path:qualification.descriptor.path,file:resolve(staging,qualification.descriptor.path)}]:[])]);
+    await rmdir(destination);await rename(staging,destination);return {directory:destination,manifest:resolve(destination,'import.json'),receipt:resolve(destination,'import.product.json'),...(qualification.descriptor?{descriptor:resolve(destination,qualification.descriptor.path)}:{}),value:manifestValue};
   }catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}
 }

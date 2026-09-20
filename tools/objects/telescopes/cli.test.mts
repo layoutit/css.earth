@@ -99,7 +99,7 @@ test('guided native image retries invalid selectors, then invokes the existing e
   const source=resolve('/tmp','delivery.json'),mock=mockIo(true,true,['1','bad','/tmp/unused','2','/tmp/native-output']),api=mockServices('/tmp');
   const code=await main(['outputs',source],'/workspace',text=>mock.io.write(text),mock.io,api.services);
   assert.equal(code,0);assert.equal(api.calls.runs.length,1);assert.equal(api.calls.runs[0]!.kind,'native');
-  assert.deepEqual(api.calls.runs[0]!.args,[source,{kind:'image',hdu:1,structure:'SCI',plane:2},resolve('/tmp/native-output')]);
+  assert.deepEqual(api.calls.runs[0]!.args,[inspection.source,{kind:'image',hdu:1,structure:'SCI',plane:2},resolve('/tmp/native-output')]);
   assert.match(mock.stderr.join(''),/Selectors must be nonnegative whole numbers/u);
   assert.match(mock.stdout.join(''),/Data: \/tmp\/image\.fits/u);
 });

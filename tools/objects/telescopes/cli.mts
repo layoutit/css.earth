@@ -20,6 +20,7 @@ import { importLocalArtifact } from './local-import.mts';
 import { familyCoverageLedger } from './family-handlers.mts';
 import type { FamilyOperation } from './family-handlers.mts';
 import { executeFamilyOperation, familyOperationNeedsParameters, type FamilyOperationParameters } from './family-operation.mts';
+import { requireString } from '../../source-values.mts';
 export { HELP };
 
 const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--icrs-circle', '--spectral-frame', '--max-science-bytes', '--max-metadata-bytes', '--max-link-depth', '--max-link-requests', '--max-expanded-bytes', '--max-package-members']);
@@ -173,7 +174,7 @@ interface InspectedArtifact {
   readonly artifact:string;readonly target?:unknown;readonly source:unknown;readonly sourceContext?:DeliveryContext;
   readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];
 }
-const artifactScreen=(result:InspectedArtifact,path:string):ArtifactInspection=>({artifact:result.artifact,...(typeof result.target==='string'?{target:result.target}:{}),source:resolve(path),...(result.sourceContext?{sourceContext:result.sourceContext}:{}),outputs:result.outputs,...(result.terminal?{terminal:true}:{}),...(result.profiles?{profiles:result.profiles}:{}),...(result.issues?{issues:result.issues}:{}),...(result.familyOperations?{familyOperations:result.familyOperations}:{})});
+const artifactScreen=(result:InspectedArtifact,_path:string):ArtifactInspection=>({artifact:result.artifact,...(typeof result.target==='string'?{target:result.target}:{}),source:resolve(requireString(result.source,'artifact source')),...(result.sourceContext?{sourceContext:result.sourceContext}:{}),outputs:result.outputs,...(result.terminal?{terminal:true}:{}),...(result.profiles?{profiles:result.profiles}:{}),...(result.issues?{issues:result.issues}:{}),...(result.familyOperations?{familyOperations:result.familyOperations}:{})});
 function contextText(context:DeliveryContext|undefined):string|undefined {
   if(!context)return undefined;
   return context.kind==='exploration'?'No scientific acceptance criteria requested.':`Scientific request: ${context.assessment.status}.`;
@@ -194,7 +195,7 @@ export function formatArtifact(result:ArtifactInspection):string {
   const context=contextText(result.sourceContext);if(context)lines.push(context);
   if(result.profiles?.length)lines.push(`Proposed profiles: ${result.profiles.map(profile=>`${profile.handlerId}/${profile.profileId}`).join(', ')}.`);
   for(const issue of result.issues??[])lines.push(`Limitation: ${issue}`);
-  if(result.familyOperations?.length){lines.push('','Family operations:');for(const operation of result.familyOperations){lines.push(`${operation.id} · ${operation.componentId}: ${operation.available?'available':'unavailable'}.`, `   ${operation.reason}`,`   Owner: ${operation.owner.module}#${operation.owner.export}`);for(const limitation of operation.limitations)lines.push(`   Limitation: ${limitation}`);}}
+  if(result.familyOperations?.length){lines.push('','Family operations:');for(const operation of result.familyOperations){const needsParameters=operation.parameters.some(parameter=>parameter.id!=='out'&&parameter.required);lines.push(`${operation.id} · ${operation.componentId}: ${operation.available?'available':'unavailable'}.`, `   ${operation.reason}`,`   Owner: ${operation.owner.module}#${operation.owner.export}`);for(const limitation of operation.limitations)lines.push(`   Limitation: ${limitation}`);if(operation.available)lines.push(`   Next: ${['telescope','family-run',result.source,operation.id,...(needsParameters?['--params','PARAMS.json']:[]),'--out','DIRECTORY'].map(shellWord).join(' ')}`);}}
   if(result.terminal||!result.outputs.length&&!result.familyOperations?.length)lines.push('No further supported outputs. This artifact is terminal.');
   else{
     lines.push('','Supported next operations:');
@@ -332,7 +333,7 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
       }else if(options.command==='import'){
         const spec=JSON.parse(await readFile(options.specification,'utf8'));
         const result=await api.importLocalArtifact(spec,options.directory);
-        text=options.json?`${JSON.stringify(result)}\n`:`Imported: ${result.manifest}\nEvidence: ${result.receipt}\nProfiles proposed: ${result.value.proposedProfiles.length}\n`;
+        text=options.json?`${JSON.stringify(result)}\n`:`Imported: ${result.manifest}\n${result.descriptor?`Descriptor: ${result.descriptor}\n`:''}Evidence: ${result.receipt}\nProfiles proposed: ${result.value.proposedProfiles.length}\n`;
         code=0;
       }else if(options.command==='explore'){
         io.error('Exploring observations…\n');
