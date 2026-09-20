@@ -833,18 +833,54 @@ its projection dependency is pyproj/PROJ. Astropy owns the numerical FITS
 output and Matplotlib the figure. The sphere is one standalone HTML file,
 using the target's existing standard sphere—the same lane as Mercury. The
 prepared mesh, camera, facing/depth bindings and physical frame are reused;
-the shared raster lane packs the measurement into a surface lens. CSS,
-JavaScript and base64 images are embedded, and the document prohibits network
+the shared raster lane packs the measurement into a surface lens. The exporter
+serializes the scene and compiles the existing native CSS camera ahead of time.
+CSS and base64 images are embedded; the document contains no script elements
+and prohibits both scripts and network
 requests. Inactive image bindings (including Mercury’s unused interior images) are
 cleared without changing the prepared geometry or camera. There is no export-owned mesh or camera. A target without the existing
 standard sphere package is refused. The export also embeds the prepared world
-context and uses the application's physical-camera mount. Prepare that context
+context for provenance and publishes the application's physical-camera view at export time. Prepare that context
 with `pnpm prepare:world-context` before exporting.
 
 The projection uses the pinned navigation ellipsoid. The display keeps the
 body package's standard reference sphere and physical scale; both are recorded.
 Quantitative colours are unlit. The output contains no PlanetMapper GUI, remote
 scripts, canvas or WebGL.
+
+Native resize handles store drag displacement in element dimensions. CSS view
+timelines read those dimensions to rotate the camera; a separate native scroll
+surface controls zoom. Dragging does not change zoom, and releasing the pointer
+holds the view. No JavaScript executes in the exported file. Preparation tools
+still run on Node.js.
+
+This portable view stays on the detailed sphere: zoom spans 0.7–3 times the
+initial camera distance, with a minimum viewport of 240px. Rotation uses two
+axes with roughly 3.4 turns of travel in each direction; reloading resets it.
+It does not provide the application's unbounded trackball, keyboard rotation,
+interior views or Solar System navigation. The enlarged resize handle requires
+Chromium's scrollbar/resizer styling and CSS view timelines. Firefox and real
+mobile hardware are not qualified. Unsupported prepared camera bindings are
+refused instead of producing an incomplete view.
+
+Check real exported documents with scripting disabled:
+
+```sh
+node tests/experiments/native-scroll/sphere-browser.mts europa-sphere/sphere.html mercury-sphere/sphere.html
+```
+
+The browser check compares the CSS rotation with native DOMMatrix arithmetic,
+checks repeated drags, release and independent zoom, and rejects script elements
+or external resource requests. It retains screenshots and a numerical report
+under `output/playwright/telescope-no-js/`.
+
+![Europa after native drag and zoom, with JavaScript disabled](images/telescopes/europa-sphere-no-js.png)
+
+The script-free export was checked in Chromium 153.0.8010.48 with Europa's
+457 prepared nodes and Mercury's 910. Rotation differed from DOMMatrix by at
+most `8.3e-8` per matrix component (budget `1e-6`); first-drag radius and zoom
+were unchanged. These are camera and interaction checks, not new scientific
+measurement qualification or a cross-browser guarantee.
 
 Navigation is an explicit scientific input. `navigation.json` contains:
 

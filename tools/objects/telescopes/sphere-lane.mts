@@ -12,6 +12,7 @@ import { parsePreparedObjectRuntime } from '../../../src/renderers/css/validatio
 import { parseGeometryProfile } from '../../../src/renderers/css/preparation/scene/profile.ts';
 import { prepareScientificNavigation } from '../terrestrial-layers/scientific-focus.mts';
 import { parsePreparedWorldContext } from '../../../src/renderers/css/universe/prepared-world-context.ts';
+export { sphereHtml } from './sphere-html.mts';
 
 export async function measurementSphere(root: string, target: string, texture: string, output: string,
   focus: { longitudeDegrees: number; latitudeDegrees: number; zoom: number }) {
