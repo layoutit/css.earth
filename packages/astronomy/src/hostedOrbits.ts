@@ -100,11 +100,21 @@ export const hostedOrbitStateRelativeBmjdTdb = (orbit: HostedOrbit, host: { righ
   if (!(Number.isFinite(host.rightAscensionDegrees) && Number.isFinite(host.declinationDegrees))) throw new TypeError('Host right ascension and declination must be finite.')
   const a = orbit.semiMajorAxisStellarRadii * stellarRadiusKm
   const inclination = orbit.inclinationDegrees * RAD_PER_DEG
+  const rate = 2 * Math.PI / orbit.periodDays
+  const { x, y, z } = hostSkyFrame(host, orbit.ascendingNodePositionAngleDegrees)
+  const toIcrf = (v: readonly number[]) => [0, 1, 2].map(axis => v[0]! * x[axis]! + v[1]! * y[axis]! + v[2]! * z[axis]!) as unknown as Vec3
+  // Preserve the original circular propagator exactly. Besides avoiding needless Kepler work, this keeps source-pinned
+  // prepared coordinates (including signed zero) stable when eccentric-orbit support is added.
+  if (e === 0) {
+    const phase = hostedOrbitPhaseBmjdTdb(orbit, epochBmjdTdb)
+    const local = [a * Math.sin(phase), -a * Math.cos(inclination) * Math.cos(phase), a * Math.sin(inclination) * Math.cos(phase)]
+    const localVelocity = [a * rate * Math.cos(phase), a * rate * Math.cos(inclination) * Math.sin(phase), -a * rate * Math.sin(inclination) * Math.sin(phase)]
+    return { positionKm: toIcrf(local), velocityKmPerDay: toIcrf(localVelocity) }
+  }
   const beta = Math.sqrt(1 - e * e)
   const conjunctionTrueAnomaly = Math.PI / 2 - periapsis
   const conjunctionEccentricAnomaly = Math.atan2(beta * Math.sin(conjunctionTrueAnomaly), e + Math.cos(conjunctionTrueAnomaly))
   const conjunctionMeanAnomaly = conjunctionEccentricAnomaly - e * Math.sin(conjunctionEccentricAnomaly)
-  const rate = 2 * Math.PI / orbit.periodDays
   const meanAnomaly = conjunctionMeanAnomaly + hostedOrbitPhaseBmjdTdb(orbit, epochBmjdTdb)
   const eccentricAnomaly = solveKeplerEccentricAnomalyRad(meanAnomaly, e)
   const cosE = Math.cos(eccentricAnomaly), sinE = Math.sin(eccentricAnomaly)
@@ -118,8 +128,6 @@ export const hostedOrbitStateRelativeBmjdTdb = (orbit: HostedOrbit, host: { righ
   const acrossNodeVelocity = vxOrbital * sinPeriapsis + vyOrbital * cosPeriapsis
   const local = [-alongNode, -acrossNode * Math.cos(inclination), acrossNode * Math.sin(inclination)]
   const localVelocity = [-alongNodeVelocity, -acrossNodeVelocity * Math.cos(inclination), acrossNodeVelocity * Math.sin(inclination)]
-  const { x, y, z } = hostSkyFrame(host, orbit.ascendingNodePositionAngleDegrees)
-  const toIcrf = (v: readonly number[]) => [0, 1, 2].map(axis => v[0]! * x[axis]! + v[1]! * y[axis]! + v[2]! * z[axis]!) as unknown as Vec3
   return { positionKm: toIcrf(local), velocityKmPerDay: toIcrf(localVelocity) }
 }
 
