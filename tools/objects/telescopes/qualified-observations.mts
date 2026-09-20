@@ -35,13 +35,21 @@ export function parseProductFacts(raw: unknown): ProductFacts {
     const range = requireArray(raw, 'wavelength interval'), a = requireFiniteNumber(range[0]), b = requireFiniteNumber(range[1]);
     if (range.length !== 2 || !(a > 0 && b >= a)) throw new TypeError('Invalid product wavelengths.'); return [a, b] as const;
   });
+  if (value.angularResolutionBound !== undefined) {
+    const bound = requireRecord(value.angularResolutionBound), arcsec = requireFiniteNumber(bound.arcsec);
+    if (!(arcsec > 0) || bound.method !== 'jwst-point-source-profile@1') throw new TypeError('Invalid angular resolution bound.');
+    facts.angularResolutionBound = { arcsec, method: bound.method, receipt: requireString(bound.receipt) };
+  }
   return facts;
 }
-const implementation = async () => sha256(await readFile(new URL('./qualify.mts', import.meta.url)));
+const implementation = async () => sha256(Buffer.concat(await Promise.all(['./qualify.mts', '../jwst/cubes/resolution.mts', '../jwst/requirements.lock']
+  .map(path => readFile(new URL(path, import.meta.url))))));
 export async function rememberQualification(root: string, result: QualifiedObservation): Promise<void> {
   const locations = Object.fromEntries((['product', 'receipt', 'productRecord', 'outputRoot'] as const).map(key => [key, relative(root, resolve(root, result[key]))]));
-  const pins = await Promise.all([result.product, result.receipt, result.productRecord].map(async file => ({ path: relative(root, resolve(root, file)), ...(await sha256File(resolve(root, file))) })));
-  const value = { ...result, ...locations, schema: 'cssearth-qualified-observation@1', facts: parseProductFacts(result.facts), implementation: await implementation(), pins };
+  const facts = parseProductFacts(result.facts), bound = facts.angularResolutionBound;
+  const pins = await Promise.all([result.product, result.receipt, result.productRecord, ...(bound ? [bound.receipt] : [])].map(async file => ({ path: relative(root, resolve(root, file)), ...(await sha256File(resolve(root, file))) })));
+  const portableFacts = { ...facts, ...(bound ? { angularResolutionBound: { ...bound, receipt: relative(root, resolve(root, bound.receipt)) } } : {}) };
+  const value = { ...result, ...locations, schema: 'cssearth-qualified-observation@1', facts: portableFacts, implementation: await implementation(), pins };
   const text = `${JSON.stringify(value, null, 2)}\n`, directory = resolve(root, 'output/telescopes', result.target, 'qualifications');
   await mkdir(directory, { recursive: true }); await writeFile(resolve(directory, `${sha256(text)}.json`), text);
 }
@@ -65,6 +73,7 @@ export async function loadQualifiedObservations(root: string, target: string): P
     if (!record || !await sameRun(record, record, name => resolve(root, fields.outputRoot!, name))) continue;
     if (!record.outputs.some(output => resolve(root, fields.outputRoot!, output.path) === resolve(root, fields.product!))) continue;
     const facts = parseProductFacts(value.facts);
+    if (facts.angularResolutionBound && !requireArray(value.pins).some(raw => requireRecord(raw).path === facts.angularResolutionBound!.receipt)) continue;
     if (!facts.verified || facts.target !== target) continue;
     products.push({ target, telescope: fields.telescope!, mode: fields.mode!, observation: fields.observation!, program: fields.program!, product: fields.product!, receipt: fields.receipt!, productRecord: fields.productRecord!, outputRoot: fields.outputRoot!, facts });
   }

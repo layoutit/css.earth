@@ -62,10 +62,36 @@ artifact invalidates this local qualification; the archive's discovery records r
 All public qualification result paths are absolute. Stored local results use
 repository-relative paths so that the checkout can move.
 
+Qualification reads FITS observation times in the header's time scale, independently
+of the machine's timezone. UTC is the default for dates from 1972 onward. Split
+`DATE-OBS`/`TIME-OBS` values retain the time of day; unsupported time scales and
+incomplete or invalid intervals remain unknown.
+
 Selection includes the matching `product` and assesses its verified facts. For example,
 a qualified 2.2–2.4 µm cube cannot answer a 4.24–4.28 µm request. Other observations
 still expose qualification actions. Unmeasured resolution remains unknown, even when
 the cube's identity, kind and wavelength coverage are established.
+
+For JWST cubes classified as `POINT` in both the proposal and SCI headers, the
+qualifier fits an elliptical Gaussian plus background independently in every
+wavelength plane, using the pinned Astropy/SciPy toolchain and SCI/ERR samples.
+Both axes, fitted background, SCI/ERR masks, DQ flags, convergence and residuals matter. A missing,
+faint, clipped or unsuitable plane leaves resolution unknown for the whole cube.
+
+An accepted fit supplies an **observed source-profile upper bound**, conditional
+on that archive point-source classification. This is not a deconvolved instrument
+PSF: intrinsic source extent can broaden it. The bound uses the worst axis and
+wavelength, three residual-scaled formal fit errors and one output pixel of margin,
+with a two-pixel floor. These are explicit conservative policy margins, not a
+calibrated confidence level or a model of correlated noise. The immutable receipt
+pins the cube, implementation and software and preserves every plane's fit result.
+It is pinned with the qualified product, so changing either invalidates readback.
+A bound within the requested angular resolution can answer yes; a tighter request
+remains unknown, rather than being refused on the strength of an upper bound.
+
+Astropy owns the [weighted fitting](https://docs.astropy.org/en/stable/api/astropy.modeling.fitting.TRFLSQFitter.html).
+The wavelength-by-wavelength assessment accommodates the spatial PSF variation
+described in [STScI's IFU guidance](https://jwst-docs.stsci.edu/methods-and-roadmaps/jwst-integral-field-spectroscopy).
 
 Source-package descriptions remain declarations. Successful decoding establishes
 artifact identity and native product kind; it does not promote declared bandpasses,
