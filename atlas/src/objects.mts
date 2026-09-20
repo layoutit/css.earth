@@ -112,6 +112,8 @@ function appOrigin(value: string | undefined) {
 function worldContext() {
   const context = readJson(resolve(OBJECTS_DIRECTORY, 'sun/prepared/world-context.json'));
   if (!isRecord(context)) throw new Error('src/objects/sun/prepared/world-context.json is missing. Run pnpm prepare:world-context.');
+  const focus = isRecord(context.focus) ? text(context.focus.id) : null;
+  if (!focus) throw new Error('The prepared world context names no focus object.');
   const parents = new Map<string, string>(), colors = new Map<string, string>();
   for (const body of [...list(context.bodies), context.focus].filter(isRecord)) {
     const id = text(body.id);
@@ -122,7 +124,7 @@ function worldContext() {
     if (color) colors.set(id, color);
   }
   if (!parents.size) throw new Error('The prepared world context lists no orbits.');
-  return { parents, colors };
+  return { parents, colors, focus };
 }
 
 /** Each object's prepared marker colour, for the shell's navigation markers. */
@@ -216,6 +218,8 @@ export interface TreeNode { key: string; label: string; object: ObjectRecord | n
 export function atlasTree(objects: readonly ObjectRecord[]): TreeNode[] {
   const visibleObjects = objects.filter(object => !NAVIGATION_HIDDEN.has(object.id));
   const systems = systemGroups(visibleObjects), byId = new Map(visibleObjects.map(object => [object.id, object]));
+  // The home system is the one the prepared world context focuses on, so no object id is written here.
+  const { focus: homeSystem } = worldContext();
   const placed = new Set<string>();
   const body = (entry: SystemEntry): TreeNode => {
     placed.add(entry.object.id);
@@ -234,12 +238,12 @@ export function atlasTree(objects: readonly ObjectRecord[]): TreeNode[] {
     const companions = loneStars.filter(entry => entry.object.system === item.label);
     return [...(item.star ? [body(item.star)] : []), ...companions.map(body), ...item.groups.flatMap(member => member.entries.map(body))];
   };
-  const solar = systems.find(item => item.id === 'sun');
+  const solar = systems.find(item => item.id === homeSystem);
   const solarSystem = solar ? group('solar-system', solar.label, [
     ...(solar.star ? [body(solar.star)] : []),
     ...solar.groups.flatMap(member => group(`sun:${member.label}`, member.label, member.entries.map(body))),
   ]) : [];
-  const starSystems = systems.filter(item => item.star && item.id !== 'sun').flatMap(item => group(`system:${item.id}`, item.label, members(item)));
+  const starSystems = systems.filter(item => item.star && item.id !== homeSystem).flatMap(item => group(`system:${item.id}`, item.label, members(item)));
   const stars = group('stars', 'Stars', [...starSystems, ...loneStars.filter(entry => !placed.has(entry.object.id)).map(body)]);
   const milkyWay = group('milky-way-section', 'Milky Way', [...place('milky-way'), ...place('stellar-neighbourhood'), ...entriesOf('nebula').map(body), ...place('lmc'), ...place('smc')]);
   const localGroup = group('local-group-section', 'Local Group', [...place('local-group'), ...place('m31'), ...place('m33')]);
