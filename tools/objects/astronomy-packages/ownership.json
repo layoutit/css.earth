@@ -102,6 +102,15 @@
       "consumers": [
         "telescope native and derived image/spectrum exports"
       ]
+    },
+    {
+      "mechanic": "Planetary image navigation and surface resampling",
+      "package": "planetmapper",
+      "version": "1.14.0",
+      "operation": "projection.mts",
+      "consumers": [
+        "telescope project"
+      ]
     }
   ],
   "retained": [
@@ -118,7 +127,7 @@
     {
       "mechanic": "SPICE kernel evaluation",
       "implementation": "tools/spice",
-      "reason": "The production TypeScript evaluator is preparation-time infrastructure shared by 22 consumers and is already checked against CSPICE. A partial SpiceyPy path would create two production answers for one operation."
+      "reason": "Existing preparation consumers retain their CSPICE-checked evaluator. PlanetMapper exclusively owns SPICE geometry inside the new telescope project route; results are not mixed between evaluators."
     },
     {
       "mechanic": "streaming FITS and in-process WCS reads",

@@ -33,7 +33,7 @@ function beneath(root:string,path:string):string {
   if(isAbsolute(path)||!rel||rel==='..'||rel.startsWith('../'))throw new Error('Delivery path escapes its directory');
   return file;
 }
-async function delivery(resultPath:string){
+export async function delivery(resultPath:string){
   const path=resolve(resultPath),directory=dirname(path),bytes=await readFile(path),record=requireRecord(JSON.parse(bytes.toString('utf8')));
   if(record.schema!=='cssearth-telescope-delivery@1')throw new Error('Expected a telescope delivery result.json');
   const files=requireArray(record.files).map(raw=>{const f=requireRecord(raw);return {path:requireString(f.path),sha256:requireString(f.sha256),bytes:requireFiniteNumber(f.bytes)};});
@@ -71,8 +71,8 @@ function choices(structures:readonly NativeMetadata[]):OutputChoice[]{
     }
   }
   return [...result,
-    {kind:'body-map',available:false,reason:'This exporter does not register images to a surface. Use the existing body-map author and publication route with a measurement definition and viewing geometry.'},
-    {kind:'sphere',available:false,reason:'Requires a qualified body map and a prepared layer for the existing body renderer; native image pixels are insufficient.'},
+    {kind:'body-map',available:false,reason:'Export a 2D measurement, then telescope project its output.product.json with explicit navigation. Publication remains a separate scientific check.'},
+    {kind:'sphere',available:false,reason:'Use telescope export MAP/map.fits.product.json --output sphere after projection; native pixels are insufficient.'},
     {kind:'points',available:false,reason:'Requires coordinate semantics and a prepared nebula-lab adapter. Wavelength or radial velocity is not line-of-sight distance.'}];
 }
 export async function listOutputs(resultPath:string){

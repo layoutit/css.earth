@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-astronomy-packages-toolchain@1",
-  "purpose": "The pinned Python archive client used by cssEarth. Astroquery owns archive-specific services and PyVO owns generic Virtual Observatory TAP; cssEarth still validates identities and bytes and owns every scientific reduction and evidence claim.",
+  "purpose": "Pinned archive clients, scientific metadata, measurement arithmetic, plotting and planetary mapping dependencies. cssEarth validates identities, scientific choices and evidence.",
   "license": "Astroquery, Astropy and PyVO are BSD-3-Clause. Their notices are retained here; archive data keep their providers' separate terms.",
   "micromamba": {
     "channel": "conda-forge",

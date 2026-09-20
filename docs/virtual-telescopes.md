@@ -752,7 +752,7 @@ including continuum and background contributions. These checks validate the extr
 arithmetic; they share Astropy FITS/WCS decoding and do not establish calibration accuracy,
 unknown error covariance, molecular identity or detection significance.
 
-The remaining output families reuse existing scientific owners:
+Output ownership and remaining adapters:
 
 | Output | Required scientific input | Existing owner / remaining adapter |
 | --- | --- | --- |
@@ -760,8 +760,8 @@ The remaining output families reuse existing scientific owners:
 | Spectral chart | Qualified wavelength axis and explicit pixel or fixed region | Executable FITS output adapter; optional background subtraction and explicitly conditional uncertainty |
 | Band image | Qualified units and wavelength bin edges | Executable wavelength-weighted mean; partial boundary bins included |
 | Feature map | Qualified bins plus feature and bracketing continuum windows | Executable continuum-subtracted wavelength integral; signed residual, no detection claim |
-| Surface map | Measurement definition, viewing geometry, rotation/frame and resolution evidence | Existing instrument map authors and `body-map-publication.mts`; CLI output adapter remains |
-| Body sphere | Qualified surface map plus a prepared layer | Existing body preparation and renderer; output handoff remains |
+| Surface map | Measurement definition, viewing geometry, rotation/frame and resolution evidence | PlanetMapper-backed `telescope project`; scientific publication remains `body-map-publication.mts` |
+| Body sphere | Qualified surface map plus a prepared layer | Standalone HTML from `telescope export --output sphere`, using the existing PolyCSS renderer |
 | 3D scatter/volume | Explicit coordinate frame, units and measured or explicitly modeled depth | Existing nebula lab preparation and viewer; output handoff remains |
 
 A wavelength axis, radial velocity or image intensity cannot silently become physical depth.
@@ -769,3 +769,102 @@ The current draft exposes unavailable families honestly; it does not create a se
 nebula renderer. PDS and ISIS retain native qualification and delivery, but their figure export
 adapters remain to be connected to the same output boundary. Images above one million pixels
 require a smaller selected product in this first adapter; no implicit resampling is performed.
+
+### From a measurement to a surface and sphere
+
+```sh
+telescope export europa/pick-1/result.json --output band-image --hdu 1 \
+  --band 4.2,4.3 --uncertainty independent --out europa-band
+telescope project europa-band/output.product.json --geometry navigation.json --out europa-map
+telescope export europa-map/map.fits.product.json --output sphere --out europa-sphere
+```
+
+`project` uses PlanetMapper 1.14.0 for image navigation and nearest-neighbour
+surface resampling. PlanetMapper owns its SPICE geometry through SpiceyPy;
+its projection dependency is pyproj/PROJ. Astropy owns the numerical FITS
+output and Matplotlib the figure. The sphere is one standalone HTML file,
+prepared through the existing PolyCSS geometry and retained-DOM renderer.
+It contains no PlanetMapper GUI, remote scripts, canvas or WebGL.
+
+Navigation is an explicit scientific input. `navigation.json` contains:
+
+```json
+{
+  "schema": "cssearth-navigation-input@1",
+  "observer": "JWST",
+  "kernels": [
+    {"file": "pck00011.tpc", "role": "rotation", "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc", "bytes": 131226, "sha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"}
+  ],
+  "registration": {"method": "wcs", "explanation": "Header WCS; no independently fitted centre"},
+  "width": 360,
+  "height": 180,
+  "maximumEmissionDegrees": 65
+}
+```
+
+The example shows the rotation pin; supply the complete ordered kernel set
+(leapseconds, shape/rotation, target ephemeris and observer ephemeris) for the
+observation. Paths are relative to the navigation file. No kernels are found
+implicitly in a home directory or downloaded by the projection command.
+A fitted registration uses `method: "disc"`, `parameters: [x, y, radius, rotation]`
+in PlanetMapper's zero-based native-image convention, an explanation, and an
+`evidence` file with its `file`, `bytes` and `sha256`. WCS must still be valid;
+there is no silent image-centre fallback. WCS registration establishes a
+coordinate model, not an independently measured pointing accuracy.
+
+The current route accepts bounded two-dimensional intensive measurements
+(dimensionless or per steradian) with supplied uncertainty, a celestial WCS,
+a matching target/telescope header and `DATE-BEG`/`DATE-END`. Flux per pixel,
+missing uncertainty, unresolved discs and unsupported WCS distortion are
+refused. This bounded route does not yet cover every instrument's metadata
+conventions or target-in-field associations.
+
+`map.fits` contains VALUE, SIGMA and EMISSION planes. Its existing body-map
+sidecar records east-positive longitude, planetocentric latitude, the frame,
+measurement and mask. Nearest sampling preserves the original value/error
+pair; repeated cells are correlated. Navigation uncertainty, beam smearing
+and rotation during the exposure are not propagated. No missing hemisphere
+is synthesized. Source request satisfaction is retained separately; projection
+**does not qualify surface publication or turn pixel sampling into a PSF**.
+
+The HTML uses the target's pinned three reference radii in kilometres. Mesh
+vertices follow that ellipsoid; the view auto-fits to the window. Colour is
+not relit. The mesh is a display approximation, not terrain. Grey is unobserved.
+
+#### Europa projection example and independent sphere oracle
+
+The example uses the archive cube
+`jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits`, SHA256
+`838c59a8b0ddcb8e7f464324e1a1515dcfe8f4a42c7c79b7d10e8f23f5ffe64a`,
+already pinned by the Europa 1250 reproduction record. This run checks those
+archive bytes; it does not claim a new Spec3 reproduction. Its 4.2–4.3 µm
+brightness image uses the explicit independent-sample uncertainty assumption.
+The disc registration reuses the [previous Europa fit](https://github.com/layoutit/css.earth/blob/4ac4a4a9eb076d63760768e9f4ca3408882f2bcc/src/objects/europa/evidence/jwst-band-maps.json), converted from top-row-first
+coordinates to native FITS coordinates; the map excludes emission angles above 65°.
+
+![Europa projected brightness](images/telescopes/europa-projected-brightness.png)
+
+The independent reference traces orthographic rays through the pinned triaxial
+ellipsoid using NumPy and draws their sampled values using Matplotlib. It reads
+actual prepared CSS matrices to check 9,792 corners, checks five camera directions,
+and must reject vertical flips, horizontal flips and collapsed depth. The
+1.25 CSS-pixel corner tolerance at a 480-pixel diameter follows the existing
+volume orientation oracle's allowance for PolyCSS's conservative edge extension.
+It also checks the emission mask and exact preservation of measurement/error pairs.
+
+![Independent Europa sphere reference](images/telescopes/europa-sphere-reference.png)
+
+This image is **an independent reference, not an HTML screenshot**. Browser
+appearance, interaction and screenshot comparison remain unverified because
+the browser tool refused the local file URL. The draft does not claim pixel parity.
+The [navigation recipe](../tests/fixtures/telescope-projection/europa-navigation.json),
+[registration evidence](../tests/fixtures/telescope-projection/europa-registration.json) and
+[numerical report](../tests/fixtures/telescope-projection/europa-oracle.json) pin this example.
+Place each downloaded kernel under the recipe's `kernels/` directory; changed archive bytes
+are refused. The executable oracle is:
+
+```sh
+node tools/objects/telescopes/sphere-oracle.mts \
+  europa-map/map.fits.product.json europa-sphere/sphere.product.json \
+  europa-band/image.fits output/sphere-oracle
+```

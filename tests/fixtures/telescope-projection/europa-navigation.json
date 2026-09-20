@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-navigation-input@1",
+  "observer": "JWST",
+  "kernels": [
+    {
+      "file": "kernels/naif0012.tls",
+      "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls",
+      "bytes": 5257,
+      "sha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
+      "role": "ephemeris"
+    },
+    {
+      "file": "kernels/pck00011.tpc",
+      "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+      "bytes": 131226,
+      "sha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "role": "rotation"
+    },
+    {
+      "file": "kernels/de440s.bsp",
+      "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de440s.bsp",
+      "bytes": 32726016,
+      "sha256": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2",
+      "role": "ephemeris"
+    },
+    {
+      "file": "kernels/jup365.bsp",
+      "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/jup365.bsp",
+      "bytes": 1136581632,
+      "sha256": "dbf016c01ba4d022154838000cf3f06962cf958ddc503a366f7fe8f81495c5cb",
+      "role": "ephemeris"
+    },
+    {
+      "file": "kernels/jwst_rec.bsp",
+      "source": "https://naif.jpl.nasa.gov/pub/naif/JWST/kernels/spk/jwst_rec.bsp",
+      "bytes": 139507712,
+      "sha256": "6f2f9b66854926a07237301e1033e2cba59245ef26338828e5bf7e5aad92768f",
+      "role": "ephemeris"
+    }
+  ],
+  "registration": {
+    "method": "disc",
+    "parameters": [
+      24.71,
+      25.14,
+      4.875,
+      0
+    ],
+    "explanation": "Prior Europa 1250 blurred-disc fit: top-row-first centre [24.71,26.86] becomes native FITS [24.71,25.14]; radius 9.75/2 pixels. Rotation from celestial WCS. Input evidence: existing Europa jwst-band-maps.json; positional uncertainty is not propagated.",
+    "evidence": {
+      "file": "europa-registration.json",
+      "sha256": "0c1b43f6df7b875871bfb5fabdbce9cbf03b32638c6710595adcc7e1c349bf08",
+      "bytes": 25766
+    }
+  },
+  "width": 360,
+  "height": 180,
+  "maximumEmissionDegrees": 65
+}

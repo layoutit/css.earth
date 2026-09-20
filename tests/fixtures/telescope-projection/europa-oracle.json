@@ -1,0 +1,56 @@
+{
+  "oracle": "Analytic orthographic ray intersection with pinned triaxial ellipsoid; NumPy / Matplotlib",
+  "preparedCornersChecked": 9792,
+  "maximumCornerErrorPixelsAt480Diameter": 0.8649063424271901,
+  "cornerTolerancePixels": 1.25,
+  "cameraCases": 5,
+  "rejectedMutationsMaximumErrorPixels": {
+    "vertical-flip": 21.516943601334084,
+    "horizontal-flip": 21.519563122390007,
+    "flat-depth": 238.61600217326128
+  },
+  "samplePairsPreserved": true,
+  "emissionMaskVerified": true,
+  "pixelComparison": "not run: browser file URL blocked; reference is not an HTML screenshot",
+  "versions": {
+    "numpy": "2.5.3",
+    "matplotlib": "3.11.2"
+  },
+  "inputs": {
+    "map": {
+      "sha256": "69333e2b7a98858e8b83f91aeb523774eef3d607b99368b00e0c2145249ef16e",
+      "bytes": 9318
+    },
+    "sphere": {
+      "sha256": "aea70f887fccbedf64d0d8fd7218f744f9d2966b7dd714699bf33ba7e3cf7650",
+      "bytes": 4033
+    }
+  },
+  "source": "tools/objects/telescopes/sphere-oracle.mts",
+  "example": {
+    "cube": "jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits",
+    "cubeSha256": "838c59a8b0ddcb8e7f464324e1a1515dcfe8f4a42c7c79b7d10e8f23f5ffe64a",
+    "selection": {
+      "kind": "band-image",
+      "hdu": 1,
+      "band": [
+        4.2,
+        4.3
+      ],
+      "uncertainty": "independent"
+    },
+    "registrationSource": "https://github.com/layoutit/css.earth/blob/4ac4a4a9eb076d63760768e9f4ca3408882f2bcc/src/objects/europa/evidence/jwst-band-maps.json"
+  },
+  "illustrations": [
+    {
+      "file": "docs/images/telescopes/europa-projected-brightness.png",
+      "sha256": "c1092386fd97d5baefbf5827e43382bd31608c4d97bf723a19d5d37317651097",
+      "bytes": 71132
+    },
+    {
+      "file": "docs/images/telescopes/europa-sphere-reference.png",
+      "sha256": "b54d17fe6835caa998424f60e63865e6c2188af450f4b0d411de692b03b82bb7",
+      "bytes": 213940
+    }
+  ]
+}

@@ -53,3 +53,16 @@ installed in an optional test environment, not copied, modified, or bundled into
 CLI. Their upstream distributions retain the copyright and license notices. The
 pinned optional versions are in `oracle-requirements.txt`; the reports record the
 versions used. These comparisons do not imply endorsement by either project.
+
+# PlanetMapper
+
+[PlanetMapper 1.14.0](https://github.com/ortk95/planetmapper) owns the `telescope project`
+route's navigation and nearest-neighbour surface resampling. It chains SpiceyPy/CSPICE
+for geometry and pyproj/PROJ for its map projections. Installed dependencies, not
+copied implementations; MIT notice: [PLANETMAPPER-LICENSE.txt](PLANETMAPPER-LICENSE.txt).
+Citation: [King & Fletcher (2023), JOSS 8(90), 5728](https://doi.org/10.21105/joss.05728).
+The pinned environment also includes SciPy, Photutils, pyproj, SpiceyPy and tqdm;
+their distributions retain their license notices. Photutils is now a production
+transitive dependency as well as an optional oracle dependency. This route never
+starts PlanetMapper's GUI. cssEarth owns input qualification, selection, masks,
+scientific assumptions and evidence; SPICE kernels retain NAIF/provider terms.

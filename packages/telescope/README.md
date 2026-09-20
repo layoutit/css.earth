@@ -98,10 +98,19 @@ The existing astronomy Python environment now includes hash-pinned Matplotlib. R
 with `node tools/objects/astronomy-packages/toolchain.mts install` after pulling changed pins.
 The npm package still does not install scientific dependencies automatically.
 
-Surface maps use the existing map authors and `telescope:publish-map`. A body-sphere output
-requires surface registration and a prepared layer. A physical 3D output requires actual
-position/depth evidence and a nebula-lab adapter. Those export adapters, along with PDS/ISIS
-figure exporters, are not implemented in this initial output slice. The output listing says so.
+Surface projection is explicit:
+
+```sh
+telescope project MEASUREMENT/output.product.json --geometry navigation.json --out MAP
+telescope export MAP/map.fits.product.json --output sphere --out SPHERE
+```
+
+The navigation file pins SPICE kernels and chooses WCS or a supported fitted disc.
+`project` writes a body map and a figure. The sphere is a standalone HTML file using
+the target's physical radii and the existing PolyCSS renderer. Projection preserves
+unknown beam resolution and does not qualify scientific publication. See the
+[navigation contract and oracle](../../docs/virtual-telescopes.md#from-a-measurement-to-a-surface-and-sphere).
+Physical 3D point/volume handoffs remain unavailable.
 
 ## Independent output checks
 
