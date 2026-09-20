@@ -129,7 +129,7 @@ try {
   await visit('/mercury/?dataset=enhanced', 'mercury', 'enhanced');
   assert.equal(await active().locator('[data-mission="messenger"]').count(), 1);
   assert.deepEqual(await page.locator('#mercury-lenses .planet-lens-detail').allTextContents(),
-    ['750 nm', 'False color', 'Shaded relief', 'Structure']);
+    ['MESSENGER MDIS', 'MESSENGER MDIS', 'USGS / MESSENGER', 'NASA Science']);
   assert.match(await sources.getAttribute('href') ?? '', /\/src\/objects\/mercury\/README\.md$/u);
   await sources.focus();
   assert.equal(await sources.evaluate(node => getComputedStyle(node).textDecorationLine), 'underline');
@@ -138,7 +138,7 @@ try {
   assert.equal(await active().locator('[data-mission]').count(), 0);
   assert.equal(await sources.isVisible(), true);
   assert.match(await sources.getAttribute('href') ?? '', /\/src\/objects\/mercury\/README\.md$/u);
-  cases.push({ name: 'dataset rows retain their prepared detail and unlinked missions stay hidden' });
+  cases.push({ name: 'dataset rows show their source product and unlinked missions stay hidden' });
 
   await visit('/mars/?dataset=elevation', 'mars', 'elevation');
   await page.setViewportSize({ width: 390, height: 844 });
