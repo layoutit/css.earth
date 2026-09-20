@@ -20,7 +20,7 @@ body[data-object-shell] {
   --explorer-panel-left: 12px;
   --explorer-panel-width: 340px;
   --explorer-logo-size: 36px;
-  --explorer-wordmark-size: 38px;
+  --explorer-wordmark-size: 40px;
   --explorer-content-inset: 20px;
   --explorer-categories-sidebar-gap: 12px;
   --explorer-panel-padding: 0px;
@@ -115,7 +115,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
 .explorer-shell-header {
   --explorer-header-control-gap: 4px;
-  --explorer-wordmark-size: 38px;
+  --explorer-wordmark-size: 40px;
   position: fixed;
   z-index: 220;
   inset: var(--explorer-header-top) auto auto var(--explorer-panel-left);
