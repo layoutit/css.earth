@@ -325,33 +325,7 @@ jobs:
         # covers the 3.9 GB the audit measured, well inside the runner's 16 GB.
         env:
           NODE_OPTIONS: --max-old-space-size=6144
-        run: |
-          # Read-only cache diagnostics; the native compiler below remains the only verdict.
-          node --input-type=module-typescript - <<'NODE'
-          import ts from 'typescript';
-          import { readFileSync } from 'node:fs';
-          import { dirname, resolve, relative } from 'node:path';
-          import { requireArray, requireRecord, requireString } from './tools/source-values.mts';
-          const state = 'output/tsbuildinfo/tests.tsbuildinfo';
-          let data: Record<string, unknown> | undefined;
-          try { data = requireRecord(JSON.parse(readFileSync(state, 'utf8'))); }
-          catch { console.log('No readable test compiler cache.'); }
-          if (data) {
-            const hash = Reflect.get(ts, 'getSourceFileVersionAsHashFromText');
-            if (typeof hash !== 'function') throw new Error('TypeScript cache diagnostic API unavailable.');
-            const names = requireArray(data.fileNames), infos = requireArray(data.fileInfos);
-            const changed: string[] = [], missing: string[] = [];
-            for (const [index, value] of names.entries()) {
-              const file = resolve(dirname(state), requireString(value)), source = ts.sys.readFile(file);
-              const info = infos[index], version = typeof info === 'string' ? info : requireString(requireRecord(info).version);
-              const label = relative(process.cwd(), file);
-              if (source === undefined) missing.push(label);
-              else if (hash(ts.sys, source) !== version) changed.push(label);
-            }
-            console.log(JSON.stringify({ state, savedVersion: data.version, compilerVersion: ts.version, files: names.length, changed, missing }));
-          }
-          NODE
-          pnpm typecheck:tests --extendedDiagnostics
+        run: pnpm typecheck:tests --extendedDiagnostics
 
   universe-checks:
     name: Universe / ${{ matrix.lane }}

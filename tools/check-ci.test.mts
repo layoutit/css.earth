@@ -18,7 +18,7 @@ test('local CI reads the actual workflow jobs in order, including strict TypeScr
  assert.match(gate?.run??'',/--added-since-last-green --report-only/,'a push to main never fails on assets');
  assert.ok(typecheck.some(step=>step.run.includes('pnpm typecheck:pr')&&step.env.NODE_OPTIONS==='--max-old-space-size=4096'));
  assert.ok(!typecheck.some(step=>step.run.includes('typecheck:tests')),'PRs skip the test-file typecheck');
- assert.equal(readCiSteps(workflow,'typecheck-tests').at(-1)?.run.trim().split('\n').at(-1),'pnpm typecheck:tests --extendedDiagnostics');
+ assert.equal(readCiSteps(workflow,'typecheck-tests').at(-1)?.run.trim(),'pnpm typecheck:tests --extendedDiagnostics');
  assert.ok(universe.some(step=>step.run.includes('prepare-ci-inputs.mts universe')));
  assert.deepEqual([...new Set(universe.map(step=>step.env.CI_UNIVERSE_LANE))],['sources','runtime','shell','renderer']);
  for(const lane of ['sources','runtime','shell','renderer']){
