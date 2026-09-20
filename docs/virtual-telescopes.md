@@ -239,7 +239,7 @@ non-overlapping exceptions rather than fallbacks for the same operation.
 
 Astroquery stays an external dependency: no upstream source is copied into cssEarth. Its BSD 3-Clause license, attribution,
 citation and the separate status of archive-data rights are recorded in
-[`tools/objects/astroquery/NOTICE.md`](../tools/objects/astroquery/NOTICE.md). Acquisition alone supplies no scientific evidence.
+[`tools/objects/astronomy-packages/NOTICE.md`](../tools/objects/astronomy-packages/NOTICE.md). Acquisition alone supplies no scientific evidence.
 
 ## The product record
 

@@ -25,7 +25,7 @@ export async function loadTrace(path: string, { highWaterMark = 64 * 1024 }: { h
   const compressed = header[0] === 0x1f && header[1] === 0x8b;
   const sourceHash = createHash('sha256');
   const source = createReadStream(absolutePath, { highWaterMark });
-  source.on('data', (chunk: Buffer) => sourceHash.update(chunk));
+  source.on('data', (chunk: string | Buffer) => { sourceHash.update(chunk); });
   const gunzip = compressed ? createGunzip() : undefined, decoded = gunzip ?? source;
   let decodedBytes = 0, parsed: unknown;
   decoded.on('data', (chunk: Buffer) => { decodedBytes += chunk.byteLength; });

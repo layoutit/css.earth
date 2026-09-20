@@ -39,7 +39,7 @@ test('a spot north-east of the disc centre on the sky lands north and at a large
 
 test('the written map is read back by the scalar-map reader, north first, east longitude from zero', () => {
   const values = new Float32Array(8 * 4).fill(NaN); values[1 * 8 + 6] = 0.25;
-  const bytes = bodyMapFits({ width: 8, height: 4, depth: values, error: values, seenCells: 1, areaShare: 0 }, { TELESCOP: 'JWST' }, [{ name: 'DEPTH', units: 'band depth', values }]);
+  const bytes = bodyMapFits({ width: 8, height: 4 }, { TELESCOP: 'JWST' }, [{ name: 'DEPTH', units: 'band depth', values }]);
   const map = decodeFitsImageMap(bytes, { path: 'x.fits', sampling: 'nearest', extension: 1, name: 'DEPTH', units: 'band depth', primary: { TELESCOP: 'JWST' }, grid: { width: 8, height: 4, longitudeOrigin: 0, rowOrder: 'north-to-south' } });
   assert.equal(map.sample(292.5, 22.5), 0.25); assert.equal(map.sample(10, 22.5), null);
 });

@@ -5,6 +5,7 @@ import pixelmatch from 'pixelmatch';
 import { PNG } from 'pngjs';
 import { chromium, type Page } from 'playwright';
 import { conformanceBrowserLaunch } from './conformance-browser-launch.mts';
+import { isRecord, requireFiniteNumber } from '../../tools/source-values.mts';
 
 const [baselineOrigin, candidateOrigin, outputArgument] = process.argv.slice(2);
 assert.match(baselineOrigin ?? '', /^https?:\/\//u, 'Baseline origin is required.');
@@ -92,6 +93,16 @@ async function ready(page: Page, id: string) {
   assert.fail(`${id}: renderer did not remain ready`);
 }
 
+/** The page returns the fragment cache's own `inspect()` result, which crosses the boundary untyped. */
+function fragmentCounts(value: unknown): { activeDocuments: number; inFlightEntries: number; encodedEntries: number } | null {
+  if (!isRecord(value)) return null;
+  return {
+    activeDocuments: requireFiniteNumber(value.activeDocuments, 'Active navigation documents'),
+    inFlightEntries: requireFiniteNumber(value.inFlightEntries, 'In-flight navigation entries'),
+    encodedEntries: requireFiniteNumber(value.encodedEntries, 'Encoded navigation entries'),
+  };
+}
+
 async function snapshot(page: Page) {
   const session = await page.context().newCDPSession(page);
   await session.send('HeapProfiler.collectGarbage');
@@ -103,11 +114,11 @@ async function snapshot(page: Page) {
       const fragments: unknown = Reflect.get(window, Symbol.for('cssearth.navigation-fragments'));
       const inspect = typeof fragments === 'object' && fragments !== null ? Reflect.get(fragments, 'inspect') : null;
       return { elements: document.querySelectorAll('*').length,
-        fragments: typeof inspect === 'function' ? Reflect.apply(inspect, fragments, []) : null };
+        fragments: (typeof inspect === 'function' ? Reflect.apply(inspect, fragments, []) : null) as unknown };
     }),
   ]);
   await session.detach();
-  return { ...browserState, dom, heap };
+  return { ...browserState, fragments: fragmentCounts(browserState.fragments), dom, heap };
 }
 
 async function screenshot(page: Page, name: string, sceneOnly: boolean) {
