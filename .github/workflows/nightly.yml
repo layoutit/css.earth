@@ -9,10 +9,15 @@ on:
     # a full `pnpm build:deploy` is too slow to run on every PR, but a PR touching the code this specific path resolves
     # through gets it anyway, instead of waiting for the nightly schedule to notice a break.
     paths:
+      - '.github/workflows/nightly.yml'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
       - 'site/**'
       - 'astro.config.mts'
       - 'src/renderers/css/rendering/**'
       - '.github/workflows/deploy.yml'
+      - 'tools/prepare-*.mts'
+      - 'tools/setup-assets.mts'
 
 permissions:
   contents: read
