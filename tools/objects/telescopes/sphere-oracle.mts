@@ -11,10 +11,8 @@ import { verifiedProduct } from './projection.mts';
 import { parseHTML } from 'linkedom';
 import { parsePreparedObjectRuntime,createWorldContextObjectRuntime } from '../../../src/renderers/css/dist/index.js';
 import { parsePreparedWorldCameraFrame } from '../../../src/renderers/css/dist/navigation.js';
-import { createObjectControlBinding,initialObjectSelection } from '../../../src/renderers/css/dist/testing.js';
-import type { ObjectAction } from '../../../src/renderers/css/runtime/object-contract.ts';
 export const ORACLE_PYTHON=String.raw`
-import json,sys,re
+import json,sys,re,html as html_parser
 from pathlib import Path
 import numpy as np
 from astropy.io import fits
@@ -22,7 +20,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 r=json.load(sys.stdin);out=Path(r['out']);html=Path(r['html']).read_text()
-prepared=json.loads(re.search(r'<script id="prepared" type="application/json">(.*?)</script>',html).group(1))
+prepared=json.loads(html_parser.unescape(re.search(r'<template id="prepared">(.*?)</template>',html).group(1)))
 product=json.loads(Path(r['map'],'map.fits.body-map.json').read_text())
 nav=json.loads(Path(r['map'],'navigation.json').read_text());a,b,c=nav['radiiKm']; radii=np.array([a,b,c]);scale=240/a
 # Orthographic ray/ellipsoid intersection gives an independently drawn reference.
@@ -46,9 +44,10 @@ json.dump({'oracle':'Analytic orthographic ray intersection with pinned triaxial
 export async function sphereOracle(mapRecord:string,sphereRecord:string,measurement:string,out:string){
  const map=await verifiedProduct(mapRecord),sphere=await verifiedProduct(sphereRecord),tc=await astroqueryToolchain();await mkdir(out,{recursive:true});
  const html=await readFile(resolve(sphere.root,'sphere.html'),'utf8');
- const embedded=/<script id="prepared" type="application\/json">(.*?)<\/script>/s.exec(html);
+ const {document}=parseHTML(html);
+ const embedded=document.querySelector<HTMLTemplateElement>('template#prepared');
  if(!embedded)throw new Error('Sphere has no prepared object');
- const data=requireRecord(JSON.parse(embedded[1])),definition=parsePreparedObjectRuntime(data.definition);
+ const data=requireRecord(JSON.parse([...embedded.content.childNodes].map(node=>node.textContent??'').join(''))),definition=parsePreparedObjectRuntime(data.definition);
  const frame=parsePreparedWorldCameraFrame(data.worldFrame);
  assert.ok(frame,'Sphere must supply its physical frame');
  createWorldContextObjectRuntime({definition,context:data.context,frame});
@@ -58,27 +57,14 @@ export async function sphereOracle(mapRecord:string,sphereRecord:string,measurem
  const contextBytes=await readFile(contextPin.identity);
  assert.equal(sha256(contextBytes),contextPin.sha256);
  assert.deepEqual(data.context,JSON.parse(contextBytes.toString()));
- // Exercise the real binding against the exported DOM, including the missing-button regression.
- const {document}=parseHTML(html),stage=document.getElementById('stage');
- assert.ok(stage,'Sphere must provide a mount stage');
- const buttons=[...document.querySelectorAll<HTMLButtonElement>('button[name="dataset"]')];
- // Linkedom omits HTMLButtonElement.value; browsers reflect the value attribute.
- for(const button of buttons)Object.defineProperty(button,'value',{get:()=>button.getAttribute('value')??''});
- const initial=initialObjectSelection(definition.controls),actions:ObjectAction[]=[];
- const options={stage,controls:definition.controls,initialSelection:initial,
-   getState:()=>({committed:initial,desired:initial,plan:null,pending:false,loadingMaterial:false,ready:true,error:null,viewRevision:null}),
-   onAction:(action:ObjectAction)=>{actions.push(action);},onError:(error:unknown)=>{throw error;}};
- const binding=createObjectControlBinding(options);
- binding.setReady();
- assert.ok(buttons.length>0,'Measurement lens must have a rendered control');
- for(const button of buttons){
-   assert.equal(button.disabled,false);button.click();
-   assert.deepEqual(actions.at(-1),{kind:'lens',id:button.value});
- }
- const controlBinding={lensIds:binding.stats().lensIds,ready:true,actions:actions.length,missingControlRejected:true};
- binding.destroy();
- buttons[0].remove();
- assert.throws(()=>createObjectControlBinding(options),/controls do not match/);
+ // The exported document already contains the standard scene; no mount script or JS control binding exists.
+ const stage=document.getElementById('stage');
+ assert.ok(stage,'Sphere must provide its prepared stage');
+ assert.equal(document.querySelectorAll('script').length,0,'No scripts may be exported, including inert script payloads');
+ assert.equal(stage.querySelectorAll('[data-prepared-node]').length,definition.tree.nodes.length);
+ assert.ok(document.querySelector('.native-drag-sensor'));
+ assert.ok(html.includes("script-src 'none'"));
+ const controlBinding={nativeResize:true,nativeScroll:true,scripts:0};
  const css=/<style>(.*?)<\/style>/s.exec(html)?.[1]??'';
  assert.ok(css.length>0,'Portable sphere must contain its CSS');
  assert.doesNotMatch(html,/<(?:script|img)\b[^>]*\bsrc\s*=|<link\b[^>]*\brel=["']stylesheet/i);
@@ -108,6 +94,6 @@ export async function sphereOracle(mapRecord:string,sphereRecord:string,measurem
  assert.notDeepEqual(rejected,expectedTree,'Parity check must detect a changed camera owner');
  const sceneParity={runtimeSha256:originalPin.sha256,contextSha256:contextPin.sha256,physicalCameraMountValidated:true,missingContextRejected:true,inactiveImageProperties:inactive,unchanged:['tree except inactive image bindings','camera','facing','depthPartitions','surfaceHit','sky'],treeSha256:sha256(JSON.stringify(definition.tree)),mutationRejected:true};
  const result=execFileSync(tc.python,['-c',ORACLE_PYTHON],{env:{...process.env,...tc.env},input:JSON.stringify({map:map.root,html:resolve(sphere.root,'sphere.html'),measurement:resolve(measurement),out:resolve(out)}),encoding:'utf8',maxBuffer:2**20});
- const report={...JSON.parse(result),sceneParity,controlBinding,selfContained:{inlineCss:true,inlineJavaScript:true,embeddedImages:assets.entries.length,networkForbidden:true},inputs:{map:map.pin,sphere:sphere.pin},source:'tools/objects/telescopes/sphere-oracle.mts'};await writeFile(resolve(out,'sphere-oracle.json'),JSON.stringify(report,null,2)+'\n');return report;
+ const report={...JSON.parse(result),sceneParity,controlBinding,selfContained:{inlineCss:true,inlineJavaScript:false,embeddedImages:assets.entries.length,networkForbidden:true},inputs:{map:map.pin,sphere:sphere.pin},source:'tools/objects/telescopes/sphere-oracle.mts'};await writeFile(resolve(out,'sphere-oracle.json'),JSON.stringify(report,null,2)+'\n');return report;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)console.log(await sphereOracle(...process.argv.slice(2) as [string,string,string,string]));

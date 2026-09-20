@@ -27,7 +27,8 @@ type PairMatrix = readonly [Value,Value,Value,Value];
 /** Experimental CSS publication of the same prepared camera/material inputs.
  * All expressions are emitted in the response; the browser runs no publisher. */
 export function addNativeCamera(document: Document, definition: ObjectRuntimeDefinition,
-  selection: ObjectSelection, frame: PreparedWorldCameraFrame, publication: Publication): NativeCameraRotation {
+  selection: ObjectSelection, frame: PreparedWorldCameraFrame, publication: Publication,
+  options: { surfaceOnly?: boolean } = {}): NativeCameraRotation {
   if (!publication.view.projection) throw new TypeError('Native drag requires a physical camera.');
   if (definition.depthPartitions || definition.facing?.length || definition.features || definition.animations.length) {
     throw new TypeError('This camera experiment has not yet compiled this object’s extra view bindings.');
@@ -45,6 +46,24 @@ export function addNativeCamera(document: Document, definition: ObjectRuntimeDef
   const scene=publication.nodes[definition.tree.scene];
   scene.style.transform=`translate3d(${centre[0]}px,${centre[1]}px,calc(var(--native-focal) + ${centre[2]}px)) scale3d(${definition.camera.sceneScale},${definition.camera.sceneScale},${definition.camera.sceneScale}) ${values.outputMatrix(rotation)}`;
   for(const binding of definition.viewBindings){
+    // A portable measurement view stays on the prepared geometry lane. Its
+    // bounded dolly never reaches the billboard/marker transition.
+    if(options.surfaceOnly && binding.kind==='view-attribute') {
+      if(binding.source!=='level-of-detail-stage') (binding.target===-1?document.querySelector('.planet-stage')!:publication.nodes[binding.target]).removeAttribute(binding.property);
+      continue;
+    }
+    if(options.surfaceOnly && binding.kind==='view-property') { publication.nodes[binding.target].style.setProperty(binding.property,'0'); continue; }
+    if(options.surfaceOnly && binding.kind==='interior-disc' && !selection.interior) { publication.nodes[binding.target].style.visibility='hidden'; continue; }
+    if(options.surfaceOnly && binding.kind==='silhouette-fit') {
+      publication.nodes[binding.target].style.transform=`scale(calc(max(${binding.minimumRadius}, var(--native-radius-px)) * ${binding.unitScale}))`;
+      continue;
+    }
+    if(options.surfaceOnly && binding.kind==='silhouette-step-property') {
+      const terms=binding.levels.slice(1).map((level,i)=>`${Number(level.value)-Number(binding.levels[i].value)} * clamp(0, 1 + sign(var(--native-radius-px) * 2 - ${level.minimumDiameter}), 1)`);
+      if(binding.levels.some(level=>!Number.isFinite(Number(level.value)))) throw new TypeError('Native silhouette steps require numeric prepared values.');
+      publication.nodes[binding.target].style.setProperty(binding.property,`calc(${binding.levels[0].value} + ${terms.join(' + ') || '0'})`);
+      continue;
+    }
     if(binding.kind!=='counter-rotation') throw new TypeError(`Uncompiled native view binding: ${binding.kind}`);
     const local=readPreparedTransform(binding.systemTransform);
     publication.nodes[binding.target].style.transform=values.outputMatrix(values.chain(values.inverse(local),counter,local));
