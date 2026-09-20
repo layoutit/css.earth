@@ -159,9 +159,6 @@
     "expect": "fail",
     "reason": "a lens group is not a <details> element"
   },
-  "sky-contrast-browser.mts": {
-    "expect": "pass"
-  },
   "surface-destination-browser.mts": {
     "expect": "fail",
     "reason": "needs the Earth city assets (public/scenes/earth/earth-places.json), which setup does not install"

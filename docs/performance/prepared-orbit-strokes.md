@@ -6,8 +6,9 @@ by one `<path>` per trail-opacity level inside a `<g>` per orbit, all in a singl
 worker still projects, clips and cuts the chords; the main thread formats one
 `d` per changed level, so a camera frame writes a few strings per orbit instead
 of one transform per chord, and the whole orbit bank is one paint chunk. The
-retained CSS unit-bar owner (`bars`) remains as the fallback and as the
-"Orbit lines" setting for comparison. Measured with the same recorded motion on
+retained CSS unit-bar owner (`bars`) remains as a low-level fallback and benchmark
+comparison; the application has no renderer selector and always mounts `strokes`.
+Measured with the same recorded motion on
 the Solar System overview (per-frame task medians, user traces): CSS chords
 6.2 ms, one SVG per orbit 3.8 ms, shared SVG 3.0 ms; prebaked arc images placed
 in 2D (3.9 ms) or 3D (3.7 ms) did not beat it, and static 3D chord leaves behind

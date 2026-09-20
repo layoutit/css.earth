@@ -32,7 +32,6 @@ try {
     assert.equal(await page.locator('.planet-settings-action').evaluate(node => node === document.activeElement), true);
     await page.getByRole('button', { name: 'Settings', exact: true }).click();
     await panel.locator('label:has(input[name="shadows"])').click();
-    await panel.locator('label:has(input[name="skyContrast"])').click();
     await panel.getByRole('button', { name: 'Apply settings' }).click();
     await page.waitForURL(url => url.searchParams.get('settings') === '1');
     assert.equal(new URL(page.url()).searchParams.get('dataset'), 'ultraviolet');
@@ -40,7 +39,6 @@ try {
     assert.equal(JSON.parse(await page.locator('.planet-stage').getAttribute('data-prepared-settings') ?? '{}').shadows, true);
     await page.getByRole('button', { name: 'Settings', exact: true }).click();
     assert.equal(await page.locator('.planet-settings input[name="shadows"]').isChecked(), true);
-    assert.equal(await page.locator('.planet-settings input[name="skyContrast"]').isChecked(), true);
     await page.screenshot({ path: `${output}/native-settings-${width}.png` });
     await page.keyboard.press('Escape');
     await page.locator('button[name="dataset"][value="normal"]').click();
@@ -69,12 +67,10 @@ try {
     await page.goto(`${origin}/saturn/?dataset=ultraviolet&settings=1&shadows=on`, { waitUntil: 'commit' });
     await page.locator('.planet-information-panel > .planet-dataset-context-rail [data-mission="cassini"]').first().waitFor({ state: 'attached' });
     await page.getByRole('button', { name: 'Settings', exact: true }).click();
-    await page.locator('label:has(input[name="skyContrast"])').click();
     await page.evaluate(() => { window.__nativeShellNodes = [...document.querySelectorAll('.planet-information-panel > .planet-dataset-context-rail, .planet-settings-panel, .planet-settings input, .planet-stage [data-prepared-node]')]; });
     release();
     await page.waitForFunction(expected => document.documentElement.dataset.ready === expected, failure ? 'error' : 'true', { timeout: 90_000 });
     assert.equal(await page.locator('.planet-settings-panel').isVisible(), true);
-    assert.equal(await page.locator('.planet-settings input[name="skyContrast"]').isChecked(), true);
     assert.equal(await page.locator('.planet-settings input[name="shadows"]').isChecked(), true);
     assert.equal(await page.evaluate(() => window.__nativeShellNodes.every(node => node.isConnected)), true);
     assert.equal(await page.locator('.polycss-scene').count(), 1);

@@ -182,19 +182,14 @@ const searchCategories = ([
       <span class="planet-setting-text">{shadowSetting.label}</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>}
-    <label class="planet-setting-control planet-sky-contrast-setting-control">
-      <input
-        class="planet-sky-contrast-setting"
-        type="checkbox"
-        name="skyContrast"
-        form={`${objectId}-settings-form`}
-      />
-      <span class="planet-setting-text">High contrast</span>
-      <span class="planet-setting-switch" aria-hidden="true"></span>
-    </label>
     <label class="planet-setting-control planet-minimap-setting-control">
       <input class="planet-minimap-setting" type="checkbox" name="minimap" disabled />
       <span class="planet-setting-text">Minimap</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>
+    <label class="planet-setting-control planet-planetary-labels-setting-control">
+      <input class="planet-planetary-labels-setting" type="checkbox" name="planetaryLabels" disabled />
+      <span class="planet-setting-text">Planetary labels</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <label class="planet-setting-control">
@@ -208,28 +203,6 @@ const searchCategories = ([
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <p id={`${objectId}-illustration-models-description`} class="planet-motion-description">Approximate stand-ins only. Body-specific meshes remain available without imagery.</p>
-    <label class="planet-setting-control">
-      <input class="planet-asteroid-bodies-setting" type="checkbox" name="asteroidBodies" disabled />
-      <span class="planet-setting-text">Asteroids</span>
-      <span class="planet-setting-switch" aria-hidden="true"></span>
-    </label>
-    <label class="planet-setting-control">
-      <input class="planet-asteroid-orbits-setting" type="checkbox" name="asteroidOrbits" disabled />
-      <span class="planet-setting-text">Asteroid orbits</span>
-      <span class="planet-setting-switch" aria-hidden="true"></span>
-    </label>
-    <label class="planet-setting-control">
-      <input class="planet-asteroid-labels-setting" type="checkbox" name="asteroidLabels" disabled />
-      <span class="planet-setting-text">Asteroid labels</span>
-      <span class="planet-setting-switch" aria-hidden="true"></span>
-    </label>
-    <label class="planet-setting-control">
-      <span class="planet-setting-text">Orbit lines</span>
-      <select class="planet-orbit-renderer-setting planet-setting-select" name="orbitRenderer" disabled>
-        <option value="strokes">SVG strokes</option>
-        <option value="bars">CSS chords</option>
-      </select>
-    </label>
     {remainingSettings.map((setting) => setting.kind === "cycle" ? (
       <button class="planet-setting-control" type="button" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`}>
         <span class="planet-setting-text">{setting.label}</span>

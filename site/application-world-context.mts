@@ -3,7 +3,6 @@ import galaxyFieldDescriptor from '../src/objects/nearby-universe/object.json' w
 import galaxyDisplaySample from '../src/objects/local-group/prepared/display-sample.json' with { type: 'json' };
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-residency.js';
-import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
 import { loadFocusCatalogs } from './focus-catalog.mts';
 import { parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { createSpaceMinimapSetting } from './minimap/minimap-setting.mts';
@@ -162,7 +161,6 @@ export function createApplicationWorldContext() {
         contextNavigation = createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
           unavailableObjectIds: Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id),
           sources: prepared.catalogSources, windowTarget });
-        layer.setHiddenOrbits(hiddenOrbitIds);
         const restoreMoonOrbitPaint = suppressMinorMoonOrbitPaint(presentationHost, minorMoonIds);
         const framePlanner = prepared.createFramePlanner();
         pendingPlanner = framePlanner;
@@ -170,20 +168,17 @@ export function createApplicationWorldContext() {
         const minimap = createSpaceMinimapSetting(stage.ownerDocument, error => target.reportError(error));
         const moonLabels = mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock);
         let heliosphereEnabled = false, shellsMounted = false, destroyed = false;
-        let selectedObjectId = applicationContext.focus.id, asteroidOrbitsEnabled = false;
-        let illustrationModelsEnabled = false, asteroidBodiesEnabled = false, asteroidLabelsEnabled = false;
+        let illustrationModelsEnabled = false, planetaryLabelsEnabled = false;
         let highlightedClassification: string | null = null;
         const updateDiscoveryVisibility = () => {
           const { hiddenBodies, hiddenLabels, highlightedBodies } = discoveryVisibility(SCENE_OBJECTS, { illustrations: illustrationModelsEnabled,
-            asteroids: asteroidBodiesEnabled, asteroidLabels: asteroidLabelsEnabled, highlighted: highlightedClassification });
+            planetaryLabels: planetaryLabelsEnabled, highlighted: highlightedClassification });
           layer.setHiddenBodies(hiddenBodies);
           layer.setHiddenLabels(hiddenLabels);
           layer.setHighlighted(highlightedBodies);
           minimap.setHiddenBodies(hiddenBodies);
           if (publication) minimap.publish(publication.world, publication.viewport);
         };
-        const updateOrbitVisibility = () => layer.setHiddenOrbits(asteroidOrbitsEnabled ? hiddenOrbitIds
-          : [...hiddenOrbitIds, ...asteroidIds.filter(id => id !== selectedObjectId)]);
         let publication: { world: WorldCameraPose; viewport: WorldCameraViewport } | null = null;
         let stagedFrame: {world: WorldCameraPose; viewport: WorldCameraViewport; frame: Awaited<ReturnType<typeof framePlanner.plan>>; snapshot: ReturnType<typeof layer.captureFrame>; consumed: boolean} | null = null;
         const publish = (world: WorldCameraPose, viewport: WorldCameraViewport) => {
@@ -233,9 +228,10 @@ export function createApplicationWorldContext() {
         };
         inputSurface?.addEventListener('objectrotationchange', rotationChanged);
         // Featured asteroids keep circles. Other asteroid markers retain their
-        // pick target when enabled, with the circle revealed on hover.
+        // pick target, with the circle revealed on hover.
         layer.setHiddenIndicators(SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !object.discovery.featured).map(object => object.id));
         updateDiscoveryVisibility();
+        layer.setHiddenOrbits(hiddenOrbitIds);
         const diagnostics = DIAGNOSTICS_ENABLED ? createWorldContextDiagnostics(layer, frameQueue, presentationHost !== stage) : null;
         if (diagnostics) Reflect.set(target, '__cssEarthUniverse', diagnostics);
         return { ...layer, viewport, publish,
@@ -280,8 +276,6 @@ export function createApplicationWorldContext() {
           },
           selectObject(id: string, frame: PreparedWorldCameraFrame) {
             layer.selectObject(id, frame);
-            selectedObjectId = id;
-            updateOrbitVisibility();
             minimap.selectObject(frame);
             moonLabels.selectObject(id);
           },
@@ -290,22 +284,9 @@ export function createApplicationWorldContext() {
             illustrationModelsEnabled = enabled === true;
             updateDiscoveryVisibility();
           },
-          setAsteroidBodiesEnabled(enabled: boolean) {
+          setPlanetaryLabelsEnabled(enabled: boolean) {
             if (destroyed) return;
-            asteroidBodiesEnabled = enabled === true;
-            updateDiscoveryVisibility();
-          },
-          setAsteroidOrbitsEnabled(enabled: boolean) {
-            if (destroyed) return;
-            asteroidOrbitsEnabled = enabled === true;
-            updateOrbitVisibility();
-          },
-          setOrbitRenderer(renderer: OrbitRenderer) {
-            if (!destroyed) layer.setOrbitRenderer(renderer);
-          },
-          setAsteroidLabelsEnabled(enabled: boolean) {
-            if (destroyed) return;
-            asteroidLabelsEnabled = enabled === true;
+            planetaryLabelsEnabled = enabled === true;
             updateDiscoveryVisibility();
           },
           setMinimapEnabled(enabled: boolean) {

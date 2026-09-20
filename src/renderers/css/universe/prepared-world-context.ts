@@ -397,14 +397,14 @@ export function preparedVolumeOpacity(distanceM: number, profile?: PreparedVolum
 /** Existing retained segment/sprite rendering, driven by the same observer as the detailed body. */
 export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationPriorities = {}, annotationOpacities = {}, opacityClock, orbitRenderer: initialOrbitRenderer = 'bars' }: {
   host: HTMLElement; before: Element; plan: PreparedWorldContext; sprites: Readonly<Record<string, SpriteWithUrl>>;
-  /** Which retained paint owner draws the planned orbit chords; switchable at runtime. */
-  orbitRenderer?: OrbitRenderer;
+  /** Which retained paint owner draws the prepared orbit lines. */
   /** Presentation may live outside the input host's changing CSS scope. */
   presentationHost?: HTMLElement;
   requestPublication?: () => boolean;
   annotationPriorities?: Readonly<Record<string, number>>;
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
   opacityClock?: OpacityClock;
+  orbitRenderer?: OrbitRenderer;
 }) {
   const root = host.ownerDocument.createElement('div');
   root.className = 'prepared-world-context';
@@ -418,7 +418,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let pickTargets: ScreenPickTarget[] = [];
   const points = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
   const selectionPolicy = createContextSelectionPolicy(plan);
-  let orbitRenderer: OrbitRenderer = initialOrbitRenderer, publishCount = 0;
+  const orbitRenderer: OrbitRenderer = initialOrbitRenderer;
+  let publishCount = 0;
   const bodies = [plan.focus, ...plan.bodies].map((body, index) => {
     const sprite = sprites[body.id];
     if (!sprite) { root.remove(); throw new TypeError(`Missing prepared navigation sprite ${body.id}.`); }
@@ -666,18 +667,6 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         depthOrientation = null;
         presentationRevision++; policyRevision++; refresh();
       }
-    },
-    setOrbitRenderer(renderer: OrbitRenderer) {
-      if (destroyed || orbitRenderer === renderer) return;
-      orbitRenderer = renderer;
-      for (const entry of bodies) {
-        entry.piecePool.destroy();
-        entry.piecePool = mountPreparedOrbitLines(entry.orbitRoot, { renderer, dashed: entry.orbitRoot.dataset.contextPlacement === 'approximate',
-          capacity: orbitProjectionCapacity(entry.orbit?.verticesM.length ?? 0), id: entry.body.id });
-        entry.pieces = entry.piecePool.elements; entry.previousCount = 0;
-      }
-      // The next publication carries every chord again: retained deltas name leaves that no longer exist.
-      contextFrames.invalidate(); presentationRevision++; policyRevision++; refresh();
     },
     setHiddenOrbits(ids: readonly string[]) {
       if (destroyed) return;

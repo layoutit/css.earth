@@ -104,7 +104,6 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
       if (input.type === 'checkbox') input.toggleAttribute('checked', settings[input.name] === true);
       else input.setAttribute('value', String(settings[input.name]));
     }
-    if (input.name === 'skyContrast') input.toggleAttribute('checked', url.searchParams.get('skyContrast') === 'on');
   }
   for (const tab of ids.length ? shell.document.querySelectorAll<HTMLInputElement>('.planet-information-panel > .planet-native-tabs > [data-information-tab]') : []) {
     tab.toggleAttribute('checked', tab.dataset.informationTab === 'dataset');

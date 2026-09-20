@@ -222,14 +222,6 @@ test.each([
         expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBe(.4);
       }
     } else expect(completedPixel(volumeRoot, volumeImage, undefined, .4)).toBeCloseTo(.4 * expected * expectedGain, 12);
-    for (const high of [true, false]) {
-      mounted.setHighContrastSky(high);
-      const effectiveGain = high ? 1 : expectedGain;
-      expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? effectiveGain : 1), 12);
-      expect(completedPixel(volumeRoot, volumeImage, skyRoot, .2, .7)).toBeCloseTo(
-        .2 * expected * effectiveGain + (withSky ? .7 * (1 - expected) : 0), 12);
-      expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
-    }
     mounted.publish({ ...camera, pose: { ...camera.pose, orientationXyzw: [0, 1, 0, 0] } }, viewport);
     expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? expectedGain : 1), 12);

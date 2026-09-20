@@ -112,7 +112,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   }
   // Native searches and dataset submits carry the same declared object settings.
   if (url.searchParams.get('settings') === '1') {
-    const names = ['settings', 'skyContrast', ...[...document.querySelectorAll<HTMLInputElement>('.planet-settings input[form][name]')].map(input => input.name)];
+    const names = ['settings', ...[...document.querySelectorAll<HTMLInputElement>('.planet-settings input[form][name]')].map(input => input.name)];
     for (const form of document.querySelectorAll<HTMLFormElement>('[data-dataset-form], .planet-sidebar-search-card')) {
       for (const name of new Set(names)) {
         const value = url.searchParams.get(name);
@@ -125,7 +125,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
     }
   }
   const clear = new URL(`/${objectId}/`, url.origin);
-  for (const name of ['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature', 'settings', 'skyContrast', ...[...document.querySelectorAll<HTMLInputElement>('.planet-settings input[form][name]')].map(input => input.name)]) {
+  for (const name of ['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature', 'settings', ...[...document.querySelectorAll<HTMLInputElement>('.planet-settings input[form][name]')].map(input => input.name)]) {
     const value = url.searchParams.get(name);
     if (value) clear.searchParams.set(name, value.slice(0, 2048));
   }

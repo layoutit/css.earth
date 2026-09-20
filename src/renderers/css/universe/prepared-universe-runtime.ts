@@ -13,7 +13,6 @@ import type { PreparedAssets } from '../rendering/prepared-residency.js';
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js';
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
-import type { OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import { mountEnvironmentLabels } from './environment-labels.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
@@ -330,7 +329,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const mountedShells = [...shells];
       let selected = plan.focus;
       let destroyed = false;
-      let highContrastSky = false, volumeOpacity = 0, volumeBrightness = 1, volumeSize = 1;
+      let volumeOpacity = 0, volumeBrightness = 1, volumeSize = 1;
       let publishedVolumeAlpha = NaN, publishedImageAlpha = NaN, publishedSkyAlpha = NaN;
       let publishedVolumeOpacity = NaN, publishedVolumeBrightness = NaN;
       let publishedVolumeVisible: boolean | undefined, publishedScale = '';
@@ -339,7 +338,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       // background to the plain Milky Way cube, which still holds from another star.
       let starsHandoff = 0;
       const publishBackground = () => {
-        const brightness = highContrastSky ? 1 : volumeBrightness;
+        const brightness = volumeBrightness;
         // The completed images contribute (1-t)*sky + t*b*volume. Factoring
         // t*b onto the volume avoids nesting its exposure inside its handoff.
         // Compensate the opaque sky underlay so its contribution stays 1-t.
@@ -385,7 +384,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         // Picking and navigation stay on the detail stage's input owner. Billboards
         // share its viewport and depth band from outside its changing CSS scope.
-        spatial = mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationPriorities, annotationOpacities, opacityClock });
+        spatial = mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationPriorities, annotationOpacities, opacityClock, orbitRenderer: 'strokes' });
         const bodyAnnotations = spatial.inspect();
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), links: environmentLinks, pickingHost: stage, opacityClock });
@@ -495,14 +494,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           },
           previewSelection(id?: string | null) { selectionPreview = id; spatial!.previewSelection(id); },
           setOverview(enabled: boolean) { overview = enabled; spatial!.setOverview(enabled); },
-          setHighContrastSky(enabled: boolean) {
-            if (destroyed || highContrastSky === enabled) return;
-            highContrastSky = enabled;
-            publishBackground();
-          },
           setNavigationInFlight(active: boolean) { spatial!.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
           setHiddenOrbits(ids: readonly string[]) { spatial!.setHiddenOrbits(ids); },
-          setOrbitRenderer(renderer: OrbitRenderer) { spatial!.setOrbitRenderer(renderer); },
           setHiddenBodies(ids: readonly string[]) { spatial!.setHiddenBodies(ids); },
           setHiddenLabels(ids: readonly string[]) { spatial!.setHiddenLabels(ids); },
           setSuppressedLabels(ids: readonly string[]) { spatial!.setSuppressedLabels(ids); },

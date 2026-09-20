@@ -32,7 +32,7 @@ type MockPrepare = (options: MockRequest) => unknown | Promise<unknown>;
 type FocusController = ReturnType<typeof createPreparedContextNavigation>;
 type FocusCallbacks = NonNullable<Parameters<FocusController['connect']>[1]>;
 type MockWorldContext = { mount(options: { stage: HTMLElement; signal: AbortSignal; windowTarget: Window }): Promise<MockWorldMount> };
-type MockWorldMount = { destroy(): void; publish?(world: WorldCameraPose & {pose: {id?: string}}, viewport: {principalOffsetPixels: readonly [number, number]}): void; selectObject?(id: string, frame: PreparedWorldCameraFrame & {id?: string}): void; previewSelection?(id?: string | null): void; setHighContrastSky?(value: boolean): void; setAsteroidBodiesEnabled?(value: boolean): void; setAsteroidLabelsEnabled?(value: boolean): void; setAsteroidOrbitsEnabled?(value: boolean): void; setMinimapEnabled?(value: boolean): void; setNavigationInFlight?(value: boolean): void; connectNavigation?: FocusController['connect']; suspendFocus?: FocusController['suspend']; restoreFocus?: FocusController['restore'] };
+type MockWorldMount = { destroy(): void; publish?(world: WorldCameraPose & {pose: {id?: string}}, viewport: {principalOffsetPixels: readonly [number, number]}): void; selectObject?(id: string, frame: PreparedWorldCameraFrame & {id?: string}): void; previewSelection?(id?: string | null): void; setPlanetaryLabelsEnabled?(value: boolean): void; setMinimapEnabled?(value: boolean): void; setNavigationInFlight?(value: boolean): void; connectNavigation?: FocusController['connect']; suspendFocus?: FocusController['suspend']; restoreFocus?: FocusController['restore'] };
 type MockDataset = { ids: readonly string[]; defaultId: string; volumes: readonly LensVolume[]; volumeOf(id: string): LensVolume | null; current(): string; select(id: string, options?: { signal?: AbortSignal }): Promise<boolean>; subscribe(listener: (id: string) => void): () => void };
 type MockMount = Mutable<Omit<ObjectSceneLifecycle, 'navigation' | 'datasets'>> & { id: string; options: MountOptions & {proof?: string}; value: SharedView; calls: string[]; restores: number; publishCamera?(camera: WorldCameraPose): void; manualDataset?(id: string): void; datasets?: MockDataset; navigation?: ObjectWorldNavigation };
 type MockShell = { input: Record<string, never>; options: ShellOptions; destroyed: number; selected: string; playback?: unknown; datasetShown?: boolean; datasetNotice?: string | null; preparedFocus?: PreparedGalaxyRecord | null; focusSources?: readonly SpatialCitation[]; focusPresentation?: PreparedFocusPresentation | null; beginCardNavigation?: (object: ObjectEntry, world: unknown) => () => void; beginOverviewSelection?: (scope?: string) => (() => void) | void; setPlaybackState(value: unknown): void; showDataset(): void; setDatasetNotice(message: string | null): void; setMotionEnabled(value: boolean): void; setPreparedFocus(record: PreparedGalaxyRecord | null, sources: readonly SpatialCitation[], presentation: PreparedFocusPresentation | null): void; setObject(content: { id: string; apply(): void }): void; destroy(): void };
@@ -330,20 +330,20 @@ test('persistent world context is mounted once and follows the active physical n
   assert.deepEqual(events.at(-1), ['destroy']);
 });
 
-test('contrast intent reaches a loading world once and survives detail navigation', async () => {
+test('planetary label intent reaches a loading world once and survives detail navigation', async () => {
   const gate = deferred(), changes: (boolean)[] = [];
   const h = harness({ persistentWorldContext: { async mount() {
     await gate.promise;
-    return { selectObject() {}, publish() {}, destroy() {}, setHighContrastSky(value) { changes.push(value); } };
+    return { selectObject() {}, publish() {}, destroy() {}, setPlanetaryLabelsEnabled(value) { changes.push(value); } };
   } } });
-  required(h.shells[0].options.onSkyContrastChange)(true);
+  required(h.shells[0].options.onPlanetaryLabelsChange)(true);
   gate.resolve(); await h.router.settled;
   assert.deepEqual(changes, [true]);
   await h.router.navigate('venus');
   assert.deepEqual(changes, [true]);
-  required(h.shells[0].options.onSkyContrastChange)(false);
+  required(h.shells[0].options.onPlanetaryLabelsChange)(false);
   assert.deepEqual(changes, [true, false]);
-  h.router.destroy(); required(h.shells[0].options.onSkyContrastChange)(true);
+  h.router.destroy(); required(h.shells[0].options.onPlanetaryLabelsChange)(true);
   assert.deepEqual(changes, [true, false]);
   assert.deepEqual(h.errors, []);
 });
@@ -392,44 +392,32 @@ test('the destination card stays held until arrival, including the new camera mo
   h.router.destroy();
 });
 
-test('asteroid label and orbit settings default off and reach the retained context independently', async () => {
-  const labels: boolean[] = [], orbits: boolean[] = [], bodies: boolean[] = [], illustrations: boolean[] = [];
+test('planetary labels default off and reach the retained context independently', async () => {
+  const labels: boolean[] = [], illustrations: boolean[] = [];
   const h = harness({ persistentWorldContext: { async mount() {
     return { selectObject() {}, publish() {}, destroy() {},
       setIllustrationModelsEnabled: (value: boolean) => illustrations.push(value),
-      setAsteroidLabelsEnabled: (value: boolean) => labels.push(value),
-      setAsteroidOrbitsEnabled: value => orbits.push(value),
-      setAsteroidBodiesEnabled: value => bodies.push(value) };
+      setPlanetaryLabelsEnabled: (value: boolean) => labels.push(value) };
   } } });
   await h.router.settled;
   const settings = h.shells[0].options;
   assert.equal(settings.illustrationModelsEnabled, false);
+  assert.equal(settings.planetaryLabelsEnabled, false);
   assert.deepEqual(illustrations, [false]);
+  assert.deepEqual(labels, [false]);
   required(settings.onIllustrationModelsChange)(true);
-  assert.equal(settings.asteroidLabelsEnabled, false);
-  assert.equal(settings.asteroidBodiesEnabled, false);
-  // The mount itself carries the defaults: a context that never received them
-  // would draw the asteroids the shell reports as off.
-  assert.deepEqual(labels, [false]); assert.deepEqual(orbits, [false]); assert.deepEqual(bodies, [false]);
-  required(settings.onAsteroidLabelsChange)(true);
-  required(settings.onAsteroidBodiesChange)(true);
+  required(settings.onPlanetaryLabelsChange)(true);
   await h.router.navigate('venus');
   assert.equal(h.shells.length, 1);
   assert.deepEqual(illustrations, [false, true]);
-  // Each setting carries its own preference across the body change, so turning
-  // one on cannot switch on the asteroid work the others still leave off.
-  assert.deepEqual(labels, [false, true]); assert.deepEqual(orbits, [false]);
-  assert.deepEqual(bodies, [false, true]);
-  required(settings.onAsteroidOrbitsChange)(true);
-  required(settings.onAsteroidLabelsChange)(false);
-  assert.deepEqual(labels, [false, true, false]); assert.deepEqual(orbits, [false, true]);
-  assert.deepEqual(bodies, [false, true]);
+  assert.deepEqual(labels, [false, true]);
+  required(settings.onPlanetaryLabelsChange)(false);
+  assert.deepEqual(labels, [false, true, false]);
   h.router.destroy();
-  required(settings.onAsteroidLabelsChange)(true);
-  required(settings.onAsteroidBodiesChange)(false);
+  required(settings.onPlanetaryLabelsChange)(true);
   required(settings.onIllustrationModelsChange)(false);
   assert.deepEqual(illustrations, [false, true]);
-  assert.deepEqual(labels, [false, true, false]); assert.deepEqual(bodies, [false, true]);
+  assert.deepEqual(labels, [false, true, false]);
 });
 
 test('the minimap setting defaults off, reaches the retained context and survives a body change', async () => {
@@ -437,7 +425,7 @@ test('the minimap setting defaults off, reaches the retained context and survive
   const h = harness({ persistentWorldContext: { async mount() {
     return { selectObject() {}, publish() {}, destroy() {},
       setMinimapEnabled: (value: boolean) => minimap.push(value),
-      setAsteroidLabelsEnabled: (value: boolean) => labels.push(value) };
+      setPlanetaryLabelsEnabled: (value: boolean) => labels.push(value) };
   } } });
   await h.router.settled;
   const settings = h.shells[0].options;

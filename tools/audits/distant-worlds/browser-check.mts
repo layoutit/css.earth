@@ -73,7 +73,11 @@ try{
   if(dpr===1&&!defaultsOnly){
    await page.goto(`${origin}/sun/?overview=system`,{waitUntil:'networkidle'});
    await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');
-   assert.equal(await page.locator('input[name="asteroidOrbits"]').isChecked(),false);
+   assert.equal(await page.locator('input[name="asteroidOrbits"]').count(),0);
+   for(const id of ['eros','itokawa','bennu']){
+    assert.equal(await page.locator(`[data-context-body="${id}"]`).count(),1,`${id}: asteroid body is retained`);
+    assert.equal(await page.locator(`[data-context-orbit="${id}"]`).count()>0,true,`${id}: asteroid orbit is retained`);
+   }
    const search=page.locator('.planet-sidebar-search');await search.fill('Solar System');
    await page.locator('[data-object-tab="trans-neptunian"]').click();
    assert.equal(await page.locator('[data-system-results]').evaluate(node=>node.scrollLeft),0,
