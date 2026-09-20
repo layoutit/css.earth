@@ -53,8 +53,12 @@ const IRAC_CHANNELS = [
   { channel: 3, wavelengthMicrometres: [5.02, 6.44] }, { channel: 4, wavelengthMicrometres: [6.408, 9.338] },
 ] as const;
 
-const overlapsTime = (observation: QualificationObservation, time: { readonly any: true } | { readonly fromIso: string; readonly toIso: string } | undefined): boolean =>
-  !time || 'any' in time || observation.startIso <= time.toIso && (observation.endIso ?? observation.startIso) >= time.fromIso;
+const overlapsTime = (observation: QualificationObservation, time: { readonly any: true } | { readonly fromIso: string; readonly toIso: string } | undefined): boolean => {
+  if (!time || 'any' in time) return true;
+  const start = Date.parse(observation.startIso), end = Date.parse(observation.endIso ?? observation.startIso);
+  // Missing dates cannot establish exclusion; qualification must resolve the product's time.
+  return !Number.isFinite(start) || !Number.isFinite(end) || end >= Date.parse(time.fromIso) && start <= Date.parse(time.toIso);
+};
 const covers = (coverage: readonly [number, number], request: readonly [number, number]) => coverage[0] <= request[0] && coverage[1] >= request[1];
 const productCovers = (observation: QualificationObservation, request: readonly [number, number]) => {
   const intervals = observation.wavelengthIntervalsMicrometres ?? (observation.wavelengthIntervalMicrometres ? [observation.wavelengthIntervalMicrometres] : []);

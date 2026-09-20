@@ -12,7 +12,7 @@ import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field } from '../pds
 import { pds3Keyword, pds3Values } from '../pds3-labels.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { assertInputPins, pinFile, readProductRecord, sameRun, writeProductRecord } from '../product-record.mts';
-import { inside, sourceReceipt, sourceRun, sourceRecordComplete, type SourceFile, type SourceProduct } from './source-products.mts';
+import { inside, assertPinnedLabel, sourceReceipt, sourceRun, sourceRecordComplete, type SourceFile, type SourceProduct } from './source-products.mts';
 
 export async function acquireSourceFile(root: string, file: SourceFile): Promise<void> {
   const path = inside(root, file.path), existing = await pinFile(path).catch(() => null);
@@ -64,6 +64,7 @@ export function inspectFits(bytes: Buffer, identity: SourceProduct['identity'], 
   return { standard: 'FITS', header, structures };
 }
 export async function qualifySourceProduct(root: string, product: SourceProduct) {
+  assertPinnedLabel(product);
   for (const file of product.files) await acquireSourceFile(root, file);
   const run = await sourceRun(product), receipt = sourceReceipt(product);
   await assertInputPins(run.inputs, new Map(product.files.map(file => [file.origin, inside(root, file.path)])));

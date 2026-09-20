@@ -14,6 +14,43 @@ One route does none of that on purpose. Where an observatory has retired a pipel
 to run again, and the archive's own final product is all there is. That product is pinned and read whole rather than re-made,
 and the difference is kept visible everywhere: see [two capabilities, never one](#two-capabilities-never-one).
 
+## Saved questions with the Telescope CLI
+
+`pnpm telescope` provides a saved query and retrieval workflow over this API. The
+`@cssearth/telescope` npm package exposes the same command as `telescope`; it uses an
+existing css.earth science workspace for the catalogue, archive clients and instrument
+pipelines. See [package setup](../packages/telescope/README.md). It does not bundle
+Python environments or download the repository during installation.
+
+```sh
+pnpm telescope query eris --wavelength 2.2,2.4 --kind cube \
+  --any-time --min-arcsec 1 --out output/eris-query
+pnpm telescope get output/eris-query --pick 1
+```
+
+Choose a number from the saved observation list. `get` reloads the same target and
+observation identity, uses the current qualification action, and reassesses the original
+question. It does not execute commands from the saved JSON. Archive changes can make a
+choice unavailable, in which case a new query is required. A declared wavelength or
+resolution never becomes verified merely because a file was decoded.
+
+The delivery contains the native product's complete recorded output set (including
+pinned labels and dependencies), evidence, SHA-256 pins and a `result.json` verdict.
+For the repository script, use `pnpm --silent telescope … --json` to suppress pnpm’s own preamble.
+Progress goes to stderr; `--json` keeps stdout machine-readable, including when a
+native reducer prints to its inherited stdout. `--verbose` retains the full query report.
+Exit 3 can accompany a valid delivered cube: it means scientific requirements remain
+unresolved. Repeating `get` revalidates current qualifications and the exported files
+before reporting reuse. It refuses modified deliveries rather than overwriting them.
+Queries preserve their numbered choices; reuse an existing query directory with `get`,
+not another `query`. Interrupted operations retain a PID-bearing `.session.lock`;
+inspect that process before removing a stale lock. Qualifications share a workspace
+lock because current reducers update shared archive records.
+
+Current source-qualified products also use the common selected-artifact interface.
+Their existing receipt and decoded facts supply the reference, without copying
+unverified wavelength or resolution declarations into the verified facts.
+
 ## Package-owned observations through the same API
 
 `telescope:query` also reads exact observations already pinned in each object's source package.

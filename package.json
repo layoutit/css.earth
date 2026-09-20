@@ -174,7 +174,8 @@
     "typecheck:shell": "pnpm --filter @cssearth/engine exec tsc -p ../../site/tsconfig.json",
     "typecheck:tests": "node tools/typecheck-tests.mts",
     "typecheck:tools": "tsc -p tools/tsconfig.json",
-    "verify:earth-delivery": "node tools/objects/geographic-pages/operations/verify-global-wmts-delivery.mts --object=earth"
+    "verify:earth-delivery": "node tools/objects/geographic-pages/operations/verify-global-wmts-delivery.mts --object=earth",
+    "telescope": "node tools/run-typed-module.mjs tools/objects/telescopes/cli.mts"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",
