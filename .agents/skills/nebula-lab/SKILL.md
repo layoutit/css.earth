@@ -31,10 +31,15 @@ angle — leaves on every side. Slabs pack into per-axis atlases for delivery. I
 handoff explicitly: brightness and colour agreement between banks is an acceptance criterion,
 not a detail.
 
-New compiler and sampled-volume bakes plan at most **500 total XYZ slabs**, integrating all
-reference depth samples inside adaptive intervals. Preserve the saved plan for replay and
-all component mixtures. A planning estimate is not visual acceptance; keep the actual
-brightness/detail/handoff gates. Historical pinned deliveries remain unchanged. See
+New compiler and sampled-volume deliveries target **500 total retained scene elements**,
+including stars, every optical slab copy, impostors and wrappers. Reserve their actual costs
+before planning XYZ intervals; 500 slabs is not a 500-element scene. Prefer source-backed
+slab emission for unresolved or dense light, and use fewer separate catalogue stars where
+the evidence supports that representation. Never count the same light in both, invent stellar
+depths, or silently discard retained stars to fit the quota. Preserve the saved plan and
+cost receipt for replay and all component mixtures. A planning estimate is not visual
+acceptance; keep the actual brightness/detail/handoff gates. Historical pinned deliveries
+remain unchanged and report when over budget. See
 `labs/nebula/docs/emission-compiler.md#automatic-layer-budget` before changing this step.
 
 ## Packages and boundaries

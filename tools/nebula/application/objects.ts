@@ -23,6 +23,7 @@ import { prepareVolumeImpostors } from '../../../src/renderers/css/preparation/v
 import type { PreparedVolumeLens } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, type NebulaSkyFrame } from './nebula-frame.ts';
 import { sanitizeVolumeProvenance } from './volume-provenance.ts';
+import { assertCompilerDeliveryElementBudget } from './element-budget.ts';
 const json = (v: unknown) => JSON.stringify(v, null, 2) + '\n';
 const record = (v: unknown): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Expected nebula delivery object.'); return v as Record<string, unknown>; };
 const text = (v: unknown) => { if (typeof v !== 'string' || !v) throw new TypeError('Expected nebula delivery text.'); return v; };
@@ -32,6 +33,8 @@ const finite = (v: unknown) => { if (typeof v !== 'number' || !Number.isFinite(v
 const implementationFiles = [
   'tools/nebula/application/package-identity.ts', 'tools/nebula/application/delivery-identity.ts', 'tools/nebula/application/objects.ts', 'tools/nebula/application/backend.ts',
   'tools/nebula/application/references.ts', 'tools/nebula/application/nebula-frame.ts', 'tools/nebula/application/volume-provenance.ts',
+  'tools/nebula/application/element-budget.ts', 'src/renderers/css/volume/compiler-render-budget.ts',
+  'src/renderers/css/volume/prepared-volume-lod.ts',
   'tools/nebula/application/star-sprites.ts', 'tools/nebula/application/fits.ts',
   'src/preparation/volume/atlas.ts', 'src/renderers/css/preparation/volume.ts',
   'src/renderers/css/preparation/volume-order.ts', 'src/renderers/css/preparation/volume-impostors.ts',
@@ -146,6 +149,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
   }
   const staging = resolve(directory,`.prepared-${process.pid}`); await mkdir(staging,{recursive:true});
   const lenses: PreparedVolumeLens[] = []; let sourceResult = recipe.acceptedLabResult;
+  let compilerSampling: CompilerBakeResult['sampling'] | undefined;
   let fieldStars: Awaited<ReturnType<typeof prepareNebulaCatalogueField>>['receipt'] | undefined;
   try {
     const add = async (id: string,label: string,sourceUrl: string,volumePath: string,volumeSha: string,
@@ -195,6 +199,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
         return research.compiler(root, recipe, progress);
       };
       const result = await prepareResult();
+      compilerSampling = result.scene.sampling;
       if ('objectId' in result && result.objectId !== recipe.id) throw new TypeError('Compact input belongs to another object.');
       sourceResult = result.id;
       const frame = embedNebulaFrame(result.scene.frame,recipe.sky,result.scene.coordinates.localOriginArcsec);
@@ -246,10 +251,11 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     const data = validatePreparedVolumeLenses({schema:'cssearth-volume-lenses@1',id:recipe.id,defaultLens:recipe.defaultLens,
       framingRadiusUnits:recipe.framingRadiusUnits,contextVisibility:'independent',starsEnabled:lenses[0]!.stars.points.length>0,
       ...(recipe.attachedTo === undefined ? {} : {attachedTo:recipe.attachedTo}),lenses});
+    const renderElements = assertCompilerDeliveryElementBudget(compilerSampling, data);
     const envelope = json({schema:'cssearth-prepared-object@1',id:recipe.id,type:'volume-lens-bank',format:'cssearth-volume-lenses@1',data});
     await put(resolve(staging,'lenses.json'),envelope);
     await put(resolve(staging,'delivery.json'),json({schema:'cssearth-nebula-delivery-receipt@1',recipeSha256:sha256(recipeBytes),implementationSha256,sourceResult,
-      acceptedLabResult:recipe.acceptedLabResult,...(fieldStars ? {fieldStars} : {}),
+      acceptedLabResult:recipe.acceptedLabResult,...(fieldStars ? {fieldStars} : {}), ...(renderElements ? { renderElements } : {}),
       lenses:lenses.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length}))}));
     // Install complete generated files only. Authored source inputs stay untouched.
     await mkdir(resolve(directory,'prepared'),{recursive:true});

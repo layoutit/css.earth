@@ -2,6 +2,7 @@ import type { DensityVolumeFrame } from './volume-frame.ts';
 import type { EmissionBounds, EmissionVector3, SkyBounds } from './emission.ts';
 import { readVolumeLayerPlan, type VolumeLayerPlan } from './volume-slices.ts';
 import { readLayerOptimizationReport, type LayerOptimizationReport } from '../sampling/layer-optimization.ts';
+import { readRenderElementBudget, type RenderElementBudget } from './render-element-budget.ts';
 
 export const COMPILER_LONGEST_AXIS_SLICES = 512;
 
@@ -59,7 +60,7 @@ export interface CompilerBakeResult {
   starSprites?: CompilerStarSprites;
   alphaSha256: string;
   sampling: { sliceCounts: { x: number; y: number; z: number }; imageWidth: 512; samplesPerSlab: 4;
-    layerPlan?: VolumeLayerPlan; layerOptimization?: LayerOptimizationReport };
+    layerPlan?: VolumeLayerPlan; layerOptimization?: LayerOptimizationReport; renderBudget?: RenderElementBudget };
 }
 
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -159,6 +160,8 @@ export function readCompilerBakeResult(value: unknown): CompilerBakeResult {
   if (Math.abs(value.spanArcsec - expectedSpan) > 1e-10) throw new TypeError('Compiler source span differs from its sky bounds.');
   if (!Array.isArray(value.lenses) || value.lenses.length < 1 || value.lenses.length > 8 ||
       !Array.isArray(value.stars) || value.stars.length > 5000) throw new TypeError('Compiler bake collections are invalid.');
+  if (sampling.renderBudget !== undefined) readRenderElementBudget(sampling.renderBudget, value.stars.length,
+    Number(counts.x) + Number(counts.y) + Number(counts.z));
   const lensIds = new Set<string>();
   for (const item of value.lenses) {
     if (!record(item)) throw new TypeError('Invalid compiler lens volume.');

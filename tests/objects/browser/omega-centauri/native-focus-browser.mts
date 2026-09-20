@@ -66,6 +66,19 @@ const focus = async () => {
   await settle();
 };
 const report: Record<string, unknown> = { base, viewport, browser: browser.version(), inputPins: pins, errors, failed };
+const retainedCounts: { stage: string; elements: number; planes: number; stars: number }[] = [];
+report.retainedCounts = retainedCounts;
+const assertElementBudget = async (stage: string) => {
+  const count = await page.locator('[data-volume-lens-object="omega-centauri"]').evaluate(root => ({
+    elements: 1 + root.querySelectorAll('*').length,
+    planes: root.querySelectorAll('.css-volume-mesh > s').length,
+    stars: root.querySelectorAll('[data-catalogue-source]').length,
+  }));
+  retainedCounts.push({ stage, ...count });
+  assert.ok(count.planes > 0, `${stage}: Omega must retain real XYZ slabs.`);
+  assert.ok(count.elements <= 500, `${stage}: Omega retains ${count.elements} elements; the inclusive budget is 500.`);
+  assert.equal(count.stars, 0, 'Omega starlight is already baked into the slabs.');
+};
 try {
   assert.equal((await page.goto(`${base}/sun/?focus=omega-centauri`, { waitUntil: 'domcontentloaded' }))?.status(), 200);
   await page.waitForFunction(() => window.__sun?.ready, null, { timeout: 180_000 });
@@ -82,17 +95,21 @@ try {
   // The former unloaded-bounds arrival measured only 64 px and fails this condition.
   assert.ok(cold.projectedRadiusPixels >= 150 && cold.projectedRadiusPixels <= 300);
   report.coldContext = await assertCloseContext();
+  await assertElementBudget('cold arrival');
   await page.screenshot({ path: resolve(out, 'native-arrival.png') });
   await focus();
   const warm = await measure(); report.warm = warm;
+  await assertElementBudget('warm reselection');
   assert.ok(Math.abs(cold.distanceM / warm.distanceM - 1) < .01, 'Cold arrival and ordinary reselection must use the same prepared radius.');
   const beforeDrag = JSON.stringify(warm.world.pose.orientationXyzw);
   await page.mouse.move(720, 500); await page.mouse.down();
   await page.mouse.move(820, 530, { steps: 10 }); await page.mouse.up(); await settle();
   const dragged = await measure(); report.dragged = dragged;
+  await assertElementBudget('orbit');
   assert.notEqual(JSON.stringify(dragged.world.pose.orientationXyzw), beforeDrag, 'Ordinary drag must orbit the focused object.');
   await page.mouse.wheel(0, -5000); await settle();
   const zoomed = await measure(); report.zoomed = zoomed;
+  await assertElementBudget('close zoom');
   assert.ok(zoomed.distanceM < dragged.distanceM, 'Ordinary wheel input must approach the cluster.');
   assert.ok(zoomed.distanceRadii >= .05 * (1 - 1e-8), 'Wheel input must respect the existing shared volume minimum.');
   await focus();
@@ -114,11 +131,18 @@ try {
     'Zooming out must restore the detailed galaxy context.');
   await focus();
   report.returnedContext = await assertCloseContext();
+  await assertElementBudget('return from galaxy context');
+  for (const lens of payload.lenses) {
+    await page.locator(`[data-focus-lens-bank="omega-centauri"] [data-focus-lens][value="${lens.id}"]`).click();
+    await page.waitForFunction(id => document.querySelector('[data-volume-lens-object="omega-centauri"]')?.getAttribute('data-selected-lens') === id, lens.id);
+    await settle();
+    await assertElementBudget(`lens ${lens.id}`);
+  }
   report.rendering = await page.evaluate(() => ({
     totalElements: document.querySelectorAll('*').length,
     volumes: [...document.querySelectorAll<HTMLElement>('[data-volume-lens-object]')].map(root => ({
       id: root.dataset.volumeLensObject, display: getComputedStyle(root).display, opacity: getComputedStyle(root).opacity,
-      elements: root.querySelectorAll('*').length, planes: root.querySelectorAll('.css-volume-mesh > s').length,
+      elements: 1 + root.querySelectorAll('*').length, planes: root.querySelectorAll('.css-volume-mesh > s').length,
       stars: root.querySelectorAll('[data-catalogue-source]').length,
     })),
     galaxyOverview: [...document.querySelectorAll<HTMLElement>('[data-volume-opacity]')].map(root => ({

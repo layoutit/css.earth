@@ -15,6 +15,7 @@
     "./contracts/observation-mapping": "./src/contracts/observation-mapping.ts",
     "./contracts/observation-photo": "./src/contracts/observation-photo.ts",
     "./contracts/prepared-catalogue-stars": "./src/contracts/prepared-catalogue-stars.ts",
+    "./contracts/render-element-budget": "./src/contracts/render-element-budget.ts",
     "./contracts/sampled-emission-fit": "./src/contracts/sampled-emission-fit.ts",
     "./contracts/sampled-recipe": "./src/contracts/sampled-recipe.ts",
     "./contracts/shape-scene": "./src/contracts/shape-scene.ts",

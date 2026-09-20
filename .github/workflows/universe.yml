@@ -593,7 +593,7 @@ jobs:
           overlay-placement overlay-registration overlay-alignment
           field-tilt emission-window component-material material
           point-projection cloud-inspection compact shape-cloud-camera
-          nebula-frame bake retained-material-bank optical-composite-preparation
+          nebula-frame bake compiler-sampling render-element-budget retained-material-bank optical-composite-preparation
           detect-shapes structure-wavelets structure-map ridge-graph
           material-solver shape-prior solver
           acquisition footprint image-links image-ranking

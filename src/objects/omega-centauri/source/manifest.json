@@ -187,8 +187,8 @@
     {
       "id": "compact-inputs",
       "path": "src/objects/omega-centauri/source/bake-inputs.json.gz",
-      "expectedSha256": "869e9ab24b644c4ea7d04cf2d4e2c719445c205b879eaebf13a420c7d7d75eac",
-      "expectedBytes": 2277027,
+      "expectedSha256": "c9f2535b13f4b4745179ec53b63240df1207ef7f38a4ea34dff76cba50a74d68",
+      "expectedBytes": 2229420,
       "sourceBinding": {
         "kind": "local",
         "reason": "Pinned pre-slice emission field, per-component materials and adaptive sampling; no derived runtime textures. Quantitative handoff qualification remains failed."
@@ -227,8 +227,8 @@
     {
       "id": "document-delivery",
       "path": "src/objects/omega-centauri/source/delivery.json",
-      "expectedSha256": "013ec10f387fb5b8ba47ba08412151abce621df4b48b748a68a795c579cbe2aa",
-      "expectedBytes": 2436,
+      "expectedSha256": "d1e34564e98eae6ebe9d8d59b8cfd4ebe19c20e0c14f8279c72444f96faf36a5",
+      "expectedBytes": 2428,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned application candidate recipe or presentation; qualification and published source identities are recorded explicitly."
@@ -237,8 +237,8 @@
     {
       "id": "document-presentation",
       "path": "src/objects/omega-centauri/source/presentation.json",
-      "expectedSha256": "a3e6293031bf6c92c90fd14cc3c9f2329f8bbe7389c443ee6fe8c832d7740859",
-      "expectedBytes": 6278,
+      "expectedSha256": "3096d25d13618cb24f18e731c8d8980ed424b9acb13792ff1439d090ccea85f8",
+      "expectedBytes": 6277,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned application candidate recipe or presentation; qualification and published source identities are recorded explicitly."

@@ -75,7 +75,7 @@ export async function replayCompactCompiler(root: string, pin: Pin, outputDirect
   const field = createPhotometricEmission(input.field), old = input.scene, origin = old.coordinates.localOriginArcsec;
   const preparedPhysical = old.frame.referenceFrame === 'lab-sky-west-north-toward';
   const scene = await bakeCompiler({ root, outputDirectory, id: old.volumeId ?? old.id, fieldIdentity: old.fieldIdentity,
-    sampling: old.sampling, preparedPhysical,
+    sampling: old.sampling, preparedPhysical, historicalReplay: old.sampling.renderBudget === undefined,
     boundsArcsec: old.boundsArcsec, skyBoundsArcsec: old.skyBoundsArcsec, minimumFeatureScaleArcsec: input.minimumFeatureScaleArcsec,
     sampleEmission: field.sampleEmission, lenses: input.materials.map((material, index) => ({ id: material.sourceId,
       label: input.sources[index]!.label, sampleMaterial: field.createMaterialSampler(material.components, material.envelopeColors) })),
