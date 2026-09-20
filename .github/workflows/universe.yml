@@ -442,6 +442,7 @@ jobs:
           site/test/dataset-response.test.mts
           site/test/dataset-url.test.mts
           site/test/browser-node-imports.test.mts
+          site/test/navigation-tree-data.test.mts
           tools/serialize-prepared-scene.test.mts
       - name: Enforce activation preparation for every registered object
         # Reads every object's restored prepared/runtime.json, so it stays after the restore, not in Contract lint.
