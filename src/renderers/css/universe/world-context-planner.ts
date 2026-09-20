@@ -114,6 +114,8 @@ interface ProjectedBody<Entry> {
   annotationVisible: boolean; hovered: boolean; inFrame: boolean; priority: number; lineWidth: number; orbitVisibility: number;
   /** The body reaches this camera's naming policy, whether or not a caption slot was free for it. */
   nameable: boolean;
+  /** Fixed shell/viewport bounds leave no possible annotation placement. */
+  annotationOccluded: boolean;
   segments: readonly OrbitSegment[]; labelPosition?: readonly number[];
 }
 /** Each planetary system fades with the camera's distance from its own star: the Sun's
@@ -246,7 +248,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       }
       let anchorLineWidth = CONTEXT_LINE_WIDTH;
       // Declutter annotations without changing physical bodies. Orbit geometry is
-      // projected first, then retired with any context annotation that loses admission.
+      // projected first, then retired when an on-screen body loses annotation admission.
       type Entry = (typeof bodies)[number];
       const projectedBodies: ProjectedBody<Entry>[] = [];
       for (const entry of publishingBodies) {
@@ -258,7 +260,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           // A hidden body's changing depth has no consumer. Keeping its
           // retirement state stable avoids a worker patch on every camera move.
           const stub = (prepared[entry.index]!.hiddenStub ??= { projected: { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false,
-            visible: false, annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false,
+            visible: false, annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false, annotationOccluded: false,
             lineWidth: CONTEXT_LINE_WIDTH, orbitVisibility: 0, segments: [] } });
           stub.projected.entry = entry;
           projectedBodies.push(stub.projected as ProjectedBody<Entry>);
@@ -334,10 +336,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const primary = !entry.orbit || systemFade.isSystemStar(entry.orbit.centerBodyId);
         const priority = (isAnchor ? 1000 : isLocator ? 500 : 0) + (primary ? 100 : 0) + body.radiusM / plan.focus.radiusM;
         const projected = (prepared[entry.index]!.projected ??= { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false, visible: false,
-          annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false, lineWidth: 0, orbitVisibility: 0, segments: [] }) as ProjectedBody<Entry>;
+          annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false, annotationOccluded: false,
+          lineWidth: 0, orbitVisibility: 0, segments: [] }) as ProjectedBody<Entry>;
         projected.entry = entry; projected.x = x; projected.y = y; projected.depth = depth; projected.diameter = diameter; projected.markerOpacity = markerOpacity;
         projected.circle = circle; projected.visible = visible; projected.annotationVisible = annotationVisible; projected.hovered = hovered;
-        projected.inFrame = inFrame; projected.priority = priority; projected.lineWidth = appearance.width; projected.orbitVisibility = orbitVisibility;
+        projected.inFrame = inFrame; projected.priority = priority; projected.annotationOccluded = false;
+        projected.lineWidth = appearance.width; projected.orbitVisibility = orbitVisibility;
         projected.segments = segments; projected.labelPosition = undefined;
         projectedBodies.push(projected);
       }
@@ -366,7 +370,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
             alpha <= (entry.labelShown ? .5 : .5 + ANNOTATION_ENTRY_MARGIN) ||
             (!targeted && !resolvedDisc && (!inContext || unrelatedMinor)));
         // A presentation setting removes the body from annotation admission;
-        // final admission below retires its context orbit with the caption.
+        // final admission below retires an on-screen context orbit with the caption.
         // Selection/hover can still reveal the complete annotation.
         if (!projected.nameable || (!targeted && entry.labelHidden)) continue;
         const gap = Math.max(5, diameter / 2, circle ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
@@ -382,11 +386,16 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           return { slot, rect: { left, top, right: left + size.width, bottom: top + size.height } };
         });
         const radius = BODY_INDICATOR_DIAMETER / 2;
+        const anchor = circle ? { left: x - radius, right: x + radius, top: y - radius, bottom: y + radius } : undefined;
+        // Test fixed constraints before admission mutates the shared budget. If the
+        // shell or viewport makes every placement impossible, the body's path is
+        // still meaningful in the visible stage, just as when the body is offscreen.
+        projected.annotationOccluded = !placements.some(({ rect }) => labelBudget.accepts(rect, anchor));
         candidates.push({ id: body.id, projected, navigable: true,
           pinned: hovered ? 3 : highlighted ? 2 : body.id === emphasizedId ? 1 : 0,
           priority, tier: annotationPriorities[body.id] ?? 0, shown: entry.labelShown,
           previousPlacement: entry.labelShown ? entry.labelPlacement : sides[0], placements,
-          ...(circle ? { anchor: { left: x - radius, right: x + radius, top: y - radius, bottom: y + radius } } : {}),
+          ...(anchor ? { anchor } : {}),
         });
       }
       // Circle and caption reserve space together. A rejected candidate owns no
@@ -402,11 +411,13 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       for (const projected of projectedBodies) {
         const { entry, x, y } = projected;
         if (!entry.orbit) continue;
-        // A context path belongs to the annotation that identifies its body. Final
-        // admission is authoritative: collision, a panel blocker, or leaving the frame
-        // retires the path together with its circle and caption. The selected object's
-        // own path remains available in detail views, where the surface identifies it.
-        if (!entry.labelShown && (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
+        // An on-screen context path belongs to the annotation that identifies its body
+        // when that annotation lost ordinary decluttering. If fixed shell/viewport
+        // occlusion made every placement impossible, the orbit can still identify the
+        // body's neighbourhood in the visible stage, just as it can for an off-screen
+        // body. The selected object's own path also remains available in detail views.
+        if (projected.inFrame && !projected.annotationOccluded && !entry.labelShown &&
+            (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout
           ? orbitOutsideMarker(projected.segments, x, y, entry.indicatorRadius) : projected.segments;

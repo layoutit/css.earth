@@ -1443,7 +1443,7 @@ test.each([true, false])('admitted annotations retain physical alpha while orbit
   layer.destroy();
 });
 
-test('an offscreen context body retires its ring; explicit selection retains the clipped path', () => {
+test('an offscreen context body keeps the ring the camera crosses; explicit selection retains the clipped path', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const source = plan(1);
@@ -1461,9 +1461,9 @@ test('an offscreen context body retires its ring; explicit selection retains the
     {focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600});
   const body = layer.inspect().find(entry => entry.id === 'mercury')!;
   expect(body.billboard.style.visibility).toBe('hidden');
-  // The path crosses the viewport, but without an admitted annotation it would be an
-  // unidentified ring, so the ordinary context view retires it.
-  expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(false);
+  // The body is off screen and cannot own an annotation, but its path still crosses
+  // the viewport and remains useful in the ordinary context view.
+  expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
   layer.setOverview(false); layer.selectObject('mercury');
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
