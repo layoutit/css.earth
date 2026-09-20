@@ -107,6 +107,7 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
  const jobNames=jobName?[jobName]:affectedJobNames(args.includes('--all')?{...affected,jobs:new Set(HEAVY_JOBS)}:affected);
  const production=!jobName&&(args.includes('--all')||needsProductionBuild(changed,config));
  console.log(`[ci plan] ${changed.length} changed paths against ${base} (including working tree); ${jobNames.join(', ')}${production?', production-build':''}.`);
+ if(jobName)console.log(`[ci subset] Only ${jobName}; this is not a complete PR verdict (lint, scope and other selected jobs may be omitted).`);
  if(!jobName){
   const scope=evaluateObjectScopeGate(changed,args.includes('--pipeline-change')?[{name:'pipeline-change'}]:[]);
   if(!scope.ok)throw new Error(`Object-scope gate: ${scope.count} objects exceed ${scope.limit}; split the PR or use --pipeline-change with the matching PR label.`);

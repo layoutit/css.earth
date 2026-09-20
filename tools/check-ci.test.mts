@@ -4,6 +4,7 @@ import {mkdtemp,readFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {parse} from 'yaml';
+import {execFileSync} from 'node:child_process';
 import {requireArray,requireRecord,requireString} from './source-values.mts';
 import {CI_ONLY_CONDITIONS,QUICK_SKIPPED_STEPS,quickSteps,readCiSteps,reuseLocalPreparation,runCiSteps,sharedCodeChanged} from './check-ci.mts';
 
@@ -125,6 +126,11 @@ test('local preparation is reused only for identical prerequisites, never tests 
  const build={name:'build',run:'pnpm build:tools',env:{}},testStep={name:'test',run:'pnpm test:renderer',env:{}};
  const production={...build,env:{ASSET_ORIGIN:'https://example.invalid'}};
  assert.deepEqual(reuseLocalPreparation([build,testStep,build,testStep,production]),[build,testStep,testStep,production]);
+});
+
+test('an explicit single-job invocation cannot present itself as a full PR verdict',()=>{
+ const output=execFileSync(process.execPath,[new URL('./check-ci.mts',import.meta.url).pathname,'--job=lint','--base=HEAD','--list'],{encoding:'utf8'});
+ assert.match(output,/\[ci subset\] Only lint; this is not a complete PR verdict/);
 });
 
 test('compiler jobs and preparation tests cannot restore the global texture bank through a cache or script',async()=>{
