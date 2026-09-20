@@ -25,6 +25,7 @@ async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   }
   await copyFile(resolve(project, 'tools/restore-source-inputs.mts'), resolve(root, 'tools/restore-source-inputs.mts'));
   await copyFile(resolve(project, 'tools/runtime-assets.mts'), resolve(root, 'tools/runtime-assets.mts'));
+  await copyFile(resolve(project, 'tools/asset-origin.mts'), resolve(root, 'tools/asset-origin.mts'));
   await copyFile(resolve(project, 'tools/source-values.mts'), resolve(root, 'tools/source-values.mts'));
   await copyFile(resolve(project, 'tools/objects/dist/operations.js'), resolve(root, 'tools/objects/dist/operations.js'));
   await symlink(resolve(project, 'src/platform'), resolve(root, 'src/platform'));
