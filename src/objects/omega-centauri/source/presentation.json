@@ -124,8 +124,8 @@
     {
       "id": "delivery",
       "path": "src/objects/omega-centauri/source/delivery.json",
-      "sha256": "013ec10f387fb5b8ba47ba08412151abce621df4b48b748a68a795c579cbe2aa",
-      "bytes": 2436
+      "sha256": "d1e34564e98eae6ebe9d8d59b8cfd4ebe19c20e0c14f8279c72444f96faf36a5",
+      "bytes": 2428
     }
   ],
   "inputEvidence": [
@@ -142,7 +142,7 @@
   ],
   "bank": {
     "path": "src/objects/omega-centauri/prepared/lenses.json",
-    "sha256": "e2529a1cc053cc4f79620062d40d05dcf921968d83761289b79010b62655b813",
-    "bytes": 1202415
+    "sha256": "42121aa3e3a35d16034954fb982b43a693d35d8724165e388f2a5f7d6087495c",
+    "bytes": 433153
   }
 }

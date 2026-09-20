@@ -1,11 +1,10 @@
 # Omega Centauri (NGC 5139)
 
-**Application integration candidate; visual acceptance remains blocked.** The
-selected Lab result now replays into the shared application volume contract with
-459 retained slabs per optical lens. It still fails the fixed axis-handoff image
-gate. Cold compact replay, R2 restoration and native arrival/navigation checks
-pass. Close-ups now suppress surrounding detailed models and restore them on
-zoom-out. Successful navigation does not establish visual acceptance.
+**493 total retained app elements; visual acceptance remains blocked.** Omega now
+uses 149 XYZ slabs, zero separate stars and one shared geometry bank for both
+optical lenses. Stellar light is baked into the slabs. The new allocation fits
+the inclusive 500-element limit, but still fails the fixed axis-handoff image
+gate and changes delivered brightness. It remains an integration candidate.
 
 ## Sources
 
@@ -27,24 +26,77 @@ NGC 5139 distance in Baumgardt & Vasiliev (2021), Table 2. This locates the clus
 not individual stars. Competing fits and the rejected spherical King-Abel
 experiment remain in the [physical evidence](source/bake-inputs/references/04-physical-evidence.json).
 
-## Evidence
+## Current 500-element bake
 
-- The selected result is `7a4f8781a7d19fafa57f11e65eae6ee24975082d3fcae0c1644cbdd68a5ac549`.
+The selected result is `59ae6e1a336d5a7b0d946197decfbbc093beb39f0181fac2ef88300314c08b8e`.
+Its [delivery recipe](source/delivery.json) records the failed visual qualification;
+`acceptedLabResult` identifies this candidate, not an acceptance certificate.
+
+- **Budget:** the compiler reserves stars, renderer copies and overhead before
+  allocating XYZ slabs. It planned 151 slabs and removed two fully transparent
+  slabs, retaining **X 48, Y 45, Z 56**. All hidden nodes count. The app retains
+  **447 slab elements + 26 impostors + 20 wrappers = 493**, down from 1,423.
+  RGB lens switches reuse the same topology. The actual Lab retains 462 elements.
+  [Bake and validation record](evidence/2026-09-21/element-budget/validation.json).
+- **Preserved light:** all 4,085 fitted emission features, the photometric
+  envelope, registration and optical materials are unchanged. Zero separate
+  stellar points were present before or after; no stellar light was silently
+  dropped or counted twice. The source-owned [compact input](source/bake-inputs.json.gz)
+  is 2,229,420 bytes, SHA-256
+  `c9f2535b13f4b4745179ec53b63240df1207ef7f38a4ea34dff76cba50a74d68`.
+- **Replay:** the ordinary application command ran without the Lab, caches or
+  network in 232.93 seconds. It reproduced all 447 expected raw PNGs and 59
+  delivery texture/bank files exactly. The current final receipt admits 493
+  elements. [Cold replay](evidence/2026-09-21/element-budget/cold-replay.json).
+- **Lab behavior:** the real Reconstruction route loads this result, keeps 462
+  elements through both lenses, orbit and zoom, and restores the same result and
+  camera after refresh. No processing requests or browser errors occurred.
+  [Actual Lab check](evidence/2026-09-21/element-budget/lab-browser.json).
+- **App behavior and delivery:** actual native arrival, orbit, close zoom,
+  galaxy-context return and both lens switches each retain exactly 493 elements.
+  Cold and warm framing remain 204.5516 pixels; one scene/camera and no browser
+  errors are recorded. [Native check](evidence/2026-09-21/element-budget/native-focus.json)
+  and [seven controlled views](evidence/2026-09-21/element-budget/app-inspection.json).
+  All 64 published files passed [cold R2 restoration and network-free reuse](evidence/2026-09-21/element-budget/r2-restore.json).
+- **Approximation tradeoff:** all 1,040 reference depth cells remain integrated,
+  but their positions are represented by fewer slabs. The planner explicitly
+  reports `budget-limited`: estimated axis errors are 10.5–10.7% against its 1%
+  target. Measured front views are 23–25% brighter than the previous 459-slab
+  bank. The [matched comparison](evidence/2026-09-21/element-budget/pixelmatch.json)
+  retains equal-size inputs and Pixelmatch diffs at threshold 0.1.
+- **Visual blocker:** neutral X/Z and Y/Z handoff L1 is **0.131881 / 0.125192**,
+  above the unchanged **0.04** limit. All nine tested lens/axis pairs fail that
+  image-stability limit; brightness disagreement between axes stays below 5%.
+  [Fixed-camera handoffs](evidence/2026-09-21/element-budget/handoffs.json).
+
+The [descriptor](object.json), [prepared inventory](prepared-assets.json) and
+[runtime inventory](runtime-assets.json) pin the current delivery. Earlier fit
+metrics below still describe its identical field; older captures, byte counts
+and performance timings describe their explicitly dated earlier banks.
+
+The production build, 596 renderer tests, 29 source/package checks, 22 maintained
+CI-entry checks and strict types pass. The complete Lab sweep has 664 passes,
+17 skips and five failures from missing LMC research assets or temporary fixture
+package resolution; [the transcript](evidence/2026-09-21/element-budget/lab-suite.tap)
+is retained. This is not a full-suite pass. [Independent review and mutation evidence](evidence/2026-09-21/element-budget/review/verified.md)
+cover total accounting and rejection before package replacement.
+
+## Earlier integration evidence
+
+- The earlier selected result was `7a4f8781a7d19fafa57f11e65eae6ee24975082d3fcae0c1644cbdd68a5ac549`.
   Its [delivery recipe](source/delivery.json) explicitly records
   `app-integration-candidate` and failed visual handoff. The legacy field
   `acceptedLabResult` identifies this selected source; it is not an acceptance
   certificate.
-- The 2,277,027-byte [compact input](source/bake-inputs.json.gz), SHA-256
+- The earlier 2,277,027-byte compact input, SHA-256
   `869e9ab24b644c4ea7d04cf2d4e2c719445c205b879eaebf13a420c7d7d75eac`,
   retains the emission field, component materials and adaptive sampling.
   [Cold application replay](evidence/2026-09-20/cold-replay.json) reproduced all
   1,377 expected raw resource identities across neutral and two optical banks,
   then matched all 60 prepared delivery files in 218.60 seconds. It started
   without the local cache, Omega prepared files or staging outputs.
-- The [object descriptor](object.json) and [prepared inventory](prepared-assets.json)
-  identify the current local delivery. Both optical lenses have 459 retained
-  planes, 29 packed resources and zero separate stars. The
-  [runtime inventory](runtime-assets.json) separately pins the two dataset previews.
+- That earlier delivery had 459 retained slabs per optical lens, 29 packed
+  resources and zero separate stars, plus two separate dataset previews.
   These file checks do not qualify the rendered appearance.
 - The generic application discovery functions admit one destination at
   `/sun/?focus=omega-centauri`, classified as a Galactic globular cluster.
@@ -145,7 +197,8 @@ optical lenses use the same geometry. The
 numerical choices and retains earlier trials: bake 1 was rejected for bright
 clumps, bake 2 stopped during material painting, and bake 3 completed after the
 roundoff correction but retained the failed neutral handoff. Adaptive grouping
-reduced the 779 retained slabs to this 459-slab candidate without passing that gate.
+reduced the 779 retained slabs to the earlier 459-slab candidate without passing
+that gate. The current total-element allocation reduces it further to 149 slabs.
 
 The [investigation ledger](investigations.json) records selected sources,
 alternatives and unresolved acceptance. Shared preparation and replay commands

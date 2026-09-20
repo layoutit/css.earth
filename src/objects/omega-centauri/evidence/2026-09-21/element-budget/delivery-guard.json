@@ -1,0 +1,71 @@
+{
+  "head": "0e22ec624e42986944cd914c7ddb88c84e3ef958",
+  "recordedAt": "2026-09-20T22:58:26.471435+00:00",
+  "sourceFiles": {
+    "tools/nebula/application/element-budget.ts": {
+      "bytes": 3096,
+      "sha256": "9d0678bee9988b51b2afbefe874ce92feabecc369a63403a58f03946af592a28"
+    },
+    "tools/nebula/application/element-budget.test.ts": {
+      "bytes": 1717,
+      "sha256": "500c59b9e5ce79dd9912a21be84c400f501c9222ad54fa3296bb6634bb43256b"
+    },
+    "tools/nebula/application/element-budget.cases.ts": {
+      "bytes": 6506,
+      "sha256": "435af09c9f369ccbc579006fb20fd0ef0bc18f6a5a466729175977e830ab223c"
+    },
+    "tools/nebula/application/objects.ts": {
+      "bytes": 23232,
+      "sha256": "3af766116ebc0436162b13db781b851b69b4060f470ff79e36a1cd3912bb04d6"
+    },
+    "tools/nebula/application/objects.test.ts": {
+      "bytes": 1696,
+      "sha256": "cfe387a0db16c48988f29a95ad32914638cc667fb03a02b227386aba52cc63c5"
+    },
+    "tools/nebula/application/objects.cases.ts": {
+      "bytes": 11547,
+      "sha256": "80ee489ed7724993d14aafa766e77b8fa3723af22cea00626011ee45f51e4fdb"
+    },
+    "src/renderers/css/volume/compiler-render-budget.ts": {
+      "bytes": 595,
+      "sha256": "68acdb48f890c5624a819a5a215d242284c8e9603d61aa8a5ca75306015c7b63"
+    },
+    "labs/nebula/packages/volume-core/src/contracts/render-element-budget.ts": {
+      "bytes": 4298,
+      "sha256": "ebde15faebea147d751ae75cfe62be549e1b81392a0982915dea8efc982cdc58"
+    }
+  },
+  "behavior": {
+    "unitPassed": 9,
+    "installerAndExistingPassed": 6,
+    "nativeWrappersPassed": 2
+  },
+  "mutation": {
+    "change": "remove objects.ts final admission call in isolated bundled current cases",
+    "pass": 5,
+    "fail": 1,
+    "expectedError": "Missing expected rejection."
+  },
+  "typecheck": {
+    "status": "pass",
+    "diagnostics": 0,
+    "log": "typecheck-stable.log",
+    "concurrentBuildFailureLog": "typecheck-final.log",
+    "reason": "Final rerun after root full build restored renderer declarations."
+  },
+  "exactCICommand": {
+    "outerPass": 22,
+    "outerFail": 0,
+    "unitInnerPass": 9,
+    "installerInnerPass": 6,
+    "log": "exact-ci-tests-final.log",
+    "priorFailureResolved": "Parent regenerated final Omega metadata; prior log preserved."
+  },
+  "updatedAt": "2026-09-20T22:59:51.480666+00:00",
+  "environment": {
+    "node": "v22.23.2",
+    "platform": "Darwin arm64",
+    "execution": "Local exact maintained CI command, not a GitHub run of unpushed changes."
+  },
+  "finalVerifiedAt": "2026-09-20T23:01:57.551119+00:00"
+}

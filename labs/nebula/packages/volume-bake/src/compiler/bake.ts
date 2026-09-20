@@ -12,6 +12,8 @@ import { bakeMasterVolumeSlices } from '../slices/emission.ts';
 import { compilerSlabMaterial } from '@cssearth/volume-core/materials/slab-material';
 import { optimizeVolumeLayers, readLayerOptimizationReport } from '@cssearth/volume-core/sampling/layer-optimization';
 import { readVolumeLayerPlan } from '@cssearth/volume-core/contracts/volume-slices';
+import { createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount,
+  type RenderElementProfile } from '@cssearth/volume-core/contracts/render-element-budget';
 import { readCompilerBakeResult, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites } from '@cssearth/volume-core/contracts/compiler-bake';
 import type { EmissionBounds, EmissionVector3, SkyBounds } from '@cssearth/volume-core/contracts/emission';
 
@@ -33,6 +35,8 @@ export interface CompiledVolumeArtifact {
   resources: readonly { path: string; sha256: string; bytes: number }[];
 }
 export interface CompilerBakeBackend {
+  /** Host-owned, tested cost of its retained geometry, points and delivery wrappers. */
+  renderBudget?: RenderElementProfile;
   compileVolume(input: { id: string; frame: DensityVolumeFrame; slices: VolumeSlices }): CompiledVolumeArtifact;
   prepareStarSprites(root: string, outputDirectory: string, stars: readonly PreparedCompilerStar[]): Promise<{ starSprites?: CompilerStarSprites }>;
 }
@@ -45,6 +49,10 @@ export interface BakeCompilerOptions {
   samplePlanningEmission?: BakeCompilerOptions['sampleEmission'];
   /** Exact saved sampling for compact replay or a shared component layout. Absence selects the automatic budget. */
   sampling?: CompilerBakeResult['sampling'];
+  /** Internal verified compact replay only. Never a research recipe option. New budget receipts still validate. */
+  historicalReplay?: boolean;
+  /** Component unions may add their pinned stars only after individual material bakes. Never below stars.length. */
+  reservedStars?: number;
   /** Historical compact receipts retain their original unreflected coordinate convention. */
   preparedPhysical?: boolean;
   /** Smallest supported kernel scale; reduces slab spacing for thin, tilted structures. */
@@ -58,7 +66,12 @@ const json = (value: unknown) => Buffer.from(JSON.stringify(value) + '\n');
 function cancel(signal?: AbortSignal) { if (signal?.aborted) throw new DOMException('Nebula compile cancelled.', 'AbortError'); }
 
 /** New authoring plans once; immutable compact replay uses its saved quadrature and partition. */
-export function compilerSampling(options: Pick<BakeCompilerOptions, 'boundsArcsec' | 'minimumFeatureScaleArcsec' | 'sampleEmission' | 'samplePlanningEmission' | 'sampling' | 'signal' | 'progress'>): CompilerBakeResult['sampling'] {
+export function compilerSampling(options: Pick<BakeCompilerOptions, 'boundsArcsec' | 'minimumFeatureScaleArcsec' | 'sampleEmission' | 'samplePlanningEmission' | 'sampling' | 'signal' | 'progress' | 'historicalReplay'> &
+  { renderProfile?: RenderElementProfile; starCount?: number }): CompilerBakeResult['sampling'] {
+  const starCount = options.starCount ?? 0, profile = options.renderProfile && readRenderElementProfile(options.renderProfile);
+  if (!Number.isSafeInteger(starCount) || starCount < 0 ||
+      (options.historicalReplay !== undefined && typeof options.historicalReplay !== 'boolean')) throw new TypeError('Invalid compiler star reservation or replay mode.');
+  if (options.historicalReplay && !options.sampling) throw new TypeError('Historical replay requires exact saved sampling.');
   if (options.sampling !== undefined) {
     const saved = options.sampling, counts = saved.sliceCounts;
     if (!counts || saved.imageWidth !== IMAGE_WIDTH || saved.samplesPerSlab !== DEPTH_SAMPLES ||
@@ -69,14 +82,34 @@ export function compilerSampling(options: Pick<BakeCompilerOptions, 'boundsArcse
         throw new TypeError('Saved compiler sampling differs from its layer plan.');
       if (saved.layerOptimization !== undefined) readLayerOptimizationReport(saved.layerOptimization, plan);
     } else if (saved.layerOptimization !== undefined) throw new TypeError('Saved layer optimization requires a layer plan.');
-    return structuredClone(saved);
+    const slabCount = counts.x + counts.y + counts.z;
+    if (saved.renderBudget !== undefined) {
+      if (!profile) throw new TypeError('A budgeted compiler scene requires its host render profile.');
+      readRenderElementBudget(saved.renderBudget, starCount, slabCount, profile);
+      return structuredClone(saved);
+    }
+    if (options.historicalReplay) {
+      if (profile) {
+        const elements = renderElementCount(profile, starCount, slabCount);
+        options.progress?.({ phase: 'volume', completed: 0, total: slabCount,
+          message: `Replaying pinned historical sampling unchanged: ${elements} reserved renderer elements (${elements > profile.maximumElements ? 'over budget' : 'within budget'}).` });
+      }
+      return structuredClone(saved);
+    }
+    if (!profile) throw new TypeError('New compiler sampling requires a host render-element profile.');
+    return { ...structuredClone(saved), renderBudget: createRenderElementBudget(profile, starCount, slabCount) };
   }
+  if (!profile) throw new TypeError('New compiler sampling requires a host render-element profile.');
+  const maximumLayers = Math.min(500, maximumRenderSlabs(profile, starCount));
   const { plan, report } = optimizeVolumeLayers({ bounds: options.boundsArcsec,
+    maximumLayers,
     referenceSliceCounts: compilerSliceCounts(options.boundsArcsec, options.minimumFeatureScaleArcsec), referenceSamplesPerSlab: DEPTH_SAMPLES,
     sampleEmission: options.samplePlanningEmission ?? options.sampleEmission, signal: options.signal,
-    onProgress: ({ completed, total }) => options.progress?.({ phase: 'volume', completed, total, message: 'Choosing layer spacing within the 500-layer budget' }) });
+    onProgress: ({ completed, total }) => options.progress?.({ phase: 'volume', completed, total,
+      message: `Choosing at most ${maximumLayers} XYZ slabs within ${profile.maximumElements} retained renderer elements` }) });
   return { sliceCounts: { x: plan.axes.x.length, y: plan.axes.y.length, z: plan.axes.z.length }, imageWidth: IMAGE_WIDTH,
-    samplesPerSlab: DEPTH_SAMPLES, layerPlan: plan, layerOptimization: report };
+    samplesPerSlab: DEPTH_SAMPLES, layerPlan: plan, layerOptimization: report,
+    renderBudget: createRenderElementBudget(profile, starCount, plan.axes.x.length + plan.axes.y.length + plan.axes.z.length) };
 }
 function validSkyBounds(bounds: SkyBounds): boolean {
   return Array.isArray(bounds?.min) && Array.isArray(bounds?.max) && bounds.min.length === 2 && bounds.max.length === 2 &&
@@ -132,7 +165,9 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
       ...(star.materials ? { materials: structuredClone(star.materials) } : {}) });
   }
   if (stars.length > 5000) throw new TypeError('Compiler star count exceeds the retained point budget.');
-  const sampling = compilerSampling(options), { sliceCounts, layerPlan } = sampling;
+  const reservedStars = options.reservedStars ?? options.sampling?.renderBudget?.starCount ?? stars.length;
+  if (!Number.isSafeInteger(reservedStars) || reservedStars < stars.length) throw new TypeError('Compiler star reservation cannot omit retained stars.');
+  const sampling = compilerSampling({ ...options, renderProfile: backend.renderBudget, starCount: reservedStars }), { sliceCounts, layerPlan } = sampling;
   const output = containedPath(root, outputDirectory), masterDirectory = containedPath(output, 'masters');
   const neutralDirectory = containedPath(output, 'neutral');
   await mkdir(output, { recursive: true }); cancel(signal);
@@ -147,7 +182,8 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
       'Angular depth is an inferred display coordinate, not a measured line-of-sight distance.',
       layerPlan ? 'Grouped finite slabs retain four depth samples per reference cell; RGBA8 opacity and plane collapse approximate the continuous field. The coarse optimization estimate is not visual acceptance.'
         : 'Finite slabs, four depth samples per slab, and RGBA8 opacity approximate the continuous field.'],
-    ...(sampling.layerOptimization ? { layerOptimization: sampling.layerOptimization } : {}) };
+    ...(sampling.layerOptimization ? { layerOptimization: sampling.layerOptimization } : {}),
+    ...(sampling.renderBudget ? { renderBudget: sampling.renderBudget } : {}) };
   const totalSlices = sliceCounts.x + sliceCounts.y + sliceCounts.z;
   options.progress?.({ phase: 'volume', completed: 0, total: totalSlices * 2, message: 'Preparing shared neutral geometry' });
   let calls = 0;

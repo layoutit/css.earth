@@ -41,16 +41,16 @@
   "description": "Integrated cluster starlight on finite 3D emission components conditioned by a published oblate Gaussian profile. Inclination, near/far tilt and individual feature depths are model assumptions. Both optical lenses share geometry; no duplicate resolved-star layer is added. Colors are relative display emission, not calibrated luminosity or a measured stellar mass map.",
   "defaultLens": "eso1119b",
   "framingRadiusUnits": 1650,
-  "acceptedLabResult": "7a4f8781a7d19fafa57f11e65eae6ee24975082d3fcae0c1644cbdd68a5ac549",
+  "acceptedLabResult": "59ae6e1a336d5a7b0d946197decfbbc093beb39f0181fac2ef88300314c08b8e",
   "compactMethod": "compiler",
   "compactInputs": {
     "path": "src/objects/omega-centauri/source/bake-inputs.json.gz",
-    "sha256": "869e9ab24b644c4ea7d04cf2d4e2c719445c205b879eaebf13a420c7d7d75eac"
+    "sha256": "c9f2535b13f4b4745179ec53b63240df1207ef7f38a4ea34dff76cba50a74d68"
   },
   "qualification": {
     "status": "app-integration-candidate",
     "visualHandoff": "failed",
-    "evidence": "labs/nebula/models/omega-centauri/evidence/2026-09-20/layer-handoffs.json",
-    "meaning": "acceptedLabResult identifies the user-inspected source selected for app integration; it is not a passed quantitative acceptance receipt."
+    "evidence": "src/objects/omega-centauri/evidence/2026-09-21/element-budget/handoffs.json",
+    "meaning": "Selected quota rebake of the unchanged fitted field; acceptedLabResult is an identity, not a passed visual acceptance receipt."
   }
 }

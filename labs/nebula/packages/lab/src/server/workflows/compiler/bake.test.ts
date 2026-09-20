@@ -53,6 +53,16 @@ test('default compiler bake refuses projected-image-only lenses before creating 
   }), /3D material sampler/);
 });
 
+test('the actual CSS compiler backend rejects an oversized explicit plan before sampling or writing', async () => {
+  await assert.rejects(bakeCompiler({ root: tmpdir(), outputDirectory: 'should-not-create-oversized-renderer', id: 'oversized',
+    fieldIdentity: '0'.repeat(64), boundsArcsec: { min: [-1, -1, -1], max: [1, 1, 1] },
+    skyBoundsArcsec: { min: [-1, -1], max: [1, 1] },
+    sampling: { sliceCounts: { x: 50, y: 50, z: 52 }, imageWidth: 512, samplesPerSlab: 4 },
+    sampleEmission() { throw new Error('The rejected plan must not sample its field.'); },
+    lenses: [{ id: 'material', label: 'Material', sampleMaterial(_x, _y, _z, out) { out.fill(255); return true; } }],
+  }), /503 retained elements; limit is 500/);
+});
+
 test('thin supported features receive finer equally spaced banks without an unbounded slice count', () => {
   const bounds = { min: [0, 0, 0] as [number, number, number], max: [960, 480, 120] as [number, number, number] };
   const baseline = compilerSliceCounts(bounds), fine = compilerSliceCounts(bounds, 2);

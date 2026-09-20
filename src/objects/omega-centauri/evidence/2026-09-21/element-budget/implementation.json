@@ -1,0 +1,139 @@
+{
+  "recordedAt": "2026-09-20T22:56:22.889199+00:00",
+  "round": "implementation1of3",
+  "status": "frozen-targeted-verified",
+  "scope": "Pure element budget + compiler admission + verified replay compatibility; renderer tests by pr380, application final admission by ci_analysis; no changes to scientific fit or optical copies",
+  "rule": "47 + separateStars + 3*plannedXYZ <= 500 for the renderer-owned single-topology delivery profile; zero-star allowance151",
+  "historicalCompatibility": "Saved missing-budget sampling only preserved by explicitly verified compact replay callers; saved new renderBudget always validated, including historical flag path",
+  "checks": [
+    {
+      "name": "targeted core/baker/direct dependents",
+      "passed": 31,
+      "failed": 0,
+      "log": "output/pr390-audit/renderer-budget-round1-final-targeted.log"
+    },
+    {
+      "name": "core+bake+Lab package types",
+      "passed": true,
+      "log": "output/pr390-audit/renderer-budget-round1-types.log"
+    },
+    {
+      "name": "root test types",
+      "files": 1758,
+      "passed": true,
+      "log": "output/pr390-audit/renderer-budget-round1-test-types.log"
+    },
+    {
+      "name": "narrow strict Nebula test types",
+      "rootFiles": 3,
+      "passed": true,
+      "config": "output/pr390-audit/render-element-budget/tsconfig.tests.json",
+      "log": "output/pr390-audit/renderer-budget-round1-nebula-test-types.log"
+    },
+    {
+      "name": "nebula dependency boundary",
+      "sentinel": "NEBULA_BOUNDARIES_OK",
+      "passed": true
+    },
+    {
+      "name": "documentation links",
+      "passed": true,
+      "log": "output/pr390-audit/renderer-budget-round1-docs.json"
+    }
+  ],
+  "mutation": "output/pr390-audit/render-element-budget/planner-mutation-receipt.json",
+  "review": "output/pr390-audit/render-element-budget/review/verified.md",
+  "sourcePins": [
+    {
+      "path": "labs/nebula/packages/volume-core/src/contracts/render-element-budget.ts",
+      "bytes": 4298,
+      "sha256": "ebde15faebea147d751ae75cfe62be549e1b81392a0982915dea8efc982cdc58"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/contracts/render-element-budget.test.ts",
+      "bytes": 2042,
+      "sha256": "e4cade4f12c2f7e43c310be74c9b95a42f83d773ab46a7df2440d4eb8040282d"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/contracts/compiler-bake.ts",
+      "bytes": 12864,
+      "sha256": "f85da67f5a3ea68a529ae0b449c9a83e991a9b37a926ec54604991a71cd1a4b8"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/package.json",
+      "bytes": 4100,
+      "sha256": "767f04fabfceab60608e9ee5fedf637392ee026b3ec5066ff9e59dbdb01a35af"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compiler/bake.ts",
+      "bytes": 21310,
+      "sha256": "004bbf282306ea47aa37abed065f5118663d4de18783c51b5ecaa6c3aea24579"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compiler/compiler-sampling.test.ts",
+      "bytes": 7824,
+      "sha256": "9c93e885ec7096aa60dedd3444af2e97887811b50fa85b9fb06bcbd26e521c21"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compact-inputs/compiler.ts",
+      "bytes": 8788,
+      "sha256": "2b788e4cb4f2b7b85ac6e9134457f540db4940d7f929e06beef82546a4c8be20"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compact-inputs/sampled.ts",
+      "bytes": 12102,
+      "sha256": "c5c733bcc6225cef08279c6a876bd8391181951b598069a2834ca6b88cefc745"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/compiler/bake.ts",
+      "bytes": 824,
+      "sha256": "1b7a185027c89f8f3bd529e6c791eec551b047881ed2995d468b313b6323da12"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/compiler/bake.test.ts",
+      "bytes": 6532,
+      "sha256": "ce026d64be3724ec2af7c3e18d0385084aa84d425f3da9f677e71ab26c5b652c"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/preparation/css-volume.ts",
+      "bytes": 407,
+      "sha256": "ff2e403521e695afd4b1ced22b177e888c8220024e30c4a8ff3117fe2c4a3616"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/application/delivery/compact-compiler.ts",
+      "bytes": 1362,
+      "sha256": "ceae17acf80fe487e1a5e5923d38a5671e5409ae986a5b80b2319aa62a002067"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/application/delivery/compact-sampled.ts",
+      "bytes": 7348,
+      "sha256": "efa3fa10cac440fe2a4dd8a38283315a7fe58410e498c2a98c22f659385c56ee"
+    },
+    {
+      "path": "src/renderers/css/volume/compiler-render-budget.ts",
+      "bytes": 595,
+      "sha256": "68acdb48f890c5624a819a5a215d242284c8e9603d61aa8a5ca75306015c7b63"
+    },
+    {
+      "path": "tools/nebula/application/backend.ts",
+      "bytes": 974,
+      "sha256": "b70550d2f3db3d5a41125425cbf0556f50468c68fd765cc7b06f2dcb5e925d4f"
+    },
+    {
+      "path": ".agents/skills/nebula-lab/SKILL.md",
+      "bytes": 34046,
+      "sha256": "c351ad535966dfb39d2e4621940317f4880055b80450e0688141f4a4183cadfd"
+    },
+    {
+      "path": "labs/nebula/docs/emission-compiler.md",
+      "bytes": 15405,
+      "sha256": "ef7a14c75d14d5a01d0bfd1b753ea25a87faa2a130e559be52f9d3e7b6d28155"
+    },
+    {
+      "path": ".github/workflows/universe.yml",
+      "bytes": 36948,
+      "sha256": "80927298ee9103f682640c41e6dab4052a839f43a6516f2293fdf8c577ecf5f1"
+    }
+  ],
+  "remaining": "Actual new Omega application cold replay and parent-owned real Lab/app counts. Scientific handoff remains failed and is not reclassified by quota validation."
+}

@@ -1,0 +1,185 @@
+{
+  "objectId": "omega-centauri",
+  "base": "http://127.0.0.1:4219",
+  "browser": "148.0.7778.96",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "deviceScaleFactor": 1,
+  "revision": "0e22ec624e42986944cd914c7ddb88c84e3ef958",
+  "dirtyFiles": [
+    "M .agents/skills/nebula-lab/SKILL.md",
+    " M .github/workflows/universe.yml",
+    " M labs/nebula/docs/emission-compiler.md",
+    " M labs/nebula/packages/lab/src/adapters/application/delivery/compact-compiler.ts",
+    " M labs/nebula/packages/lab/src/adapters/application/delivery/compact-sampled.ts",
+    " M labs/nebula/packages/lab/src/adapters/preparation/css-volume.ts",
+    " M labs/nebula/packages/lab/src/server/workflows/compiler/bake.test.ts",
+    " M labs/nebula/packages/lab/src/server/workflows/compiler/bake.ts",
+    " M labs/nebula/packages/volume-bake/src/compact-inputs/compiler.ts",
+    " M labs/nebula/packages/volume-bake/src/compact-inputs/sampled.ts",
+    " M labs/nebula/packages/volume-bake/src/compiler/bake.ts",
+    " M labs/nebula/packages/volume-bake/src/compiler/compiler-sampling.test.ts",
+    " M labs/nebula/packages/volume-core/package.json",
+    " M labs/nebula/packages/volume-core/src/contracts/compiler-bake.ts",
+    " M src/objects/omega-centauri/README.md",
+    " M src/objects/omega-centauri/object.json",
+    " M src/objects/omega-centauri/prepared-assets.json",
+    " M src/objects/omega-centauri/source/bake-inputs.json.gz",
+    " M src/objects/omega-centauri/source/delivery.json",
+    " M src/objects/omega-centauri/source/manifest.json",
+    " M src/objects/omega-centauri/source/presentation.json",
+    " M src/renderers/css/volume/prepared-volume-lenses.test.ts",
+    " M tests/objects/browser/omega-centauri/native-focus-browser.mts",
+    " M tools/nebula/application/backend.ts",
+    " M tools/nebula/application/objects.test.ts",
+    " M tools/nebula/application/objects.ts",
+    "?? labs/nebula/packages/volume-core/src/contracts/render-element-budget.test.ts",
+    "?? labs/nebula/packages/volume-core/src/contracts/render-element-budget.ts",
+    "?? src/objects/omega-centauri/evidence/2026-09-21/element-budget/",
+    "?? src/renderers/css/volume/compiler-render-budget.ts",
+    "?? tools/nebula/application/element-budget.cases.ts",
+    "?? tools/nebula/application/element-budget.test.ts",
+    "?? tools/nebula/application/element-budget.ts",
+    "?? tools/nebula/application/objects.cases.ts"
+  ],
+  "inputPins": [
+    {
+      "path": "src/objects/sun/prepared/world-context.json",
+      "bytes": 7536975,
+      "sha256": "4330a638b653f9529d1089b0069353ba8669b7f447c055d7c8b929e1e75b7242"
+    },
+    {
+      "path": "src/objects/omega-centauri/prepared/lenses.json",
+      "bytes": 433153,
+      "sha256": "42121aa3e3a35d16034954fb982b43a693d35d8724165e388f2a5f7d6087495c"
+    },
+    {
+      "path": "src/objects/omega-centauri/prepared/provenance.json",
+      "bytes": 76924,
+      "sha256": "974bcfa338298a83ac0190a5668bf4e4d377bb5fbe90e93e04b27afaf256ffd9"
+    },
+    {
+      "path": "src/objects/omega-centauri/prepared/presentation.json",
+      "bytes": 4200,
+      "sha256": "69e809ee3e10109b51e9e3a2e8f159436a7038a43693e8820da396a90e0c53cc"
+    }
+  ],
+  "navigation": "direct native /sun/?focus=<id> route",
+  "lenses": [
+    {
+      "id": "eso1119b",
+      "label": "VST · optical G / R / I",
+      "textures": 5,
+      "cameraRetained": true,
+      "sourceIds": [
+        "eso-eso1119b"
+      ]
+    },
+    {
+      "id": "eso0844a",
+      "label": "WFI · optical B / V / I",
+      "textures": 1,
+      "cameraRetained": true,
+      "sourceIds": [
+        "eso-eso0844a"
+      ]
+    }
+  ],
+  "stars": {
+    "total": 0,
+    "visibleWithStarsOn": 0,
+    "rootDisplayOn": "",
+    "rootDisplayOff": ""
+  },
+  "captures": [
+    {
+      "name": "lens-eso1119b",
+      "path": "lens-eso1119b.png",
+      "bytes": 368284,
+      "sha256": "2c945a4c09508dd9530233759e79de5fff97dac470a05711be4997353f48537f",
+      "camera": "{\"pose\":{\"schema\":\"cssearth-camera-pose@1\",\"scene\":\"matrix3d(0.369697426395,-0.684818648265,0.627970725357,0,0.929152201158,0.272480322918,-0.249861282927,0,0,0.675853454982,0.737036028556,0,0,0,0,1)\",\"skybox\":\"matrix3d(-0.017370865949,0.767816489802,-0.640434129591,0,0.885889099856,-0.28515750824,-0.365903839695,0,-0.463571706821,-0.573709677337,-0.675246952839,0,0,0,0,1)\",\"sunView\":\"matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)\"},\"pitch\":143.76923076923077,\"controlPitch\":143.76923076923077,\"controlYaw\":0,\"zoom\":0.6462637826065765,\"distance\":69961698138109.18,\"distanceKilometers\":157007591595750180,\"distanceRadii\":225682897219.70703,\"levelOfDetail\":{\"stage\":\"marker\",\"silhouetteDiameter\":0,\"billboardOpacity\":0,\"markerOpacity\":1,\"proxyOpacity\":1},\"focal\":1247.08,\"principalOffset\":[0,0],\"visibleRect\":{\"left\":-720,\"right\":720,\"top\":-500,\"bottom\":500},\"offAxisDegrees\":179.99153509804657,\"silhouetteRadius\":0,\"bodyCenterKilometers\":[10329707871598.312,-20769413064916.992,157007589882229860]}",
+      "url": "http://127.0.0.1:4219/sun/?focus=omega-centauri&focusLens=eso1119b&v=UMNCosolIvrcoMKy48F86NT-Q4FubJGvw6NBQsczQAAAAL_TNG-ckHq_v8oOQfBFK1i_4L3efI6XFgABAAAAAAAAAAA",
+      "view": "earth",
+      "lens": "eso1119b",
+      "textures": 5,
+      "originalPath": "output/pr390-audit/element-budget/app-captures/lens-eso1119b.png"
+    },
+    {
+      "name": "lens-eso0844a",
+      "path": "lens-eso0844a.png",
+      "bytes": 387489,
+      "sha256": "18366727dbd7f82335187ea9c93923ff902e8ef920e425c65a579fa495df20ec",
+      "camera": "{\"pose\":{\"schema\":\"cssearth-camera-pose@1\",\"scene\":\"matrix3d(0.369697426395,-0.684818648265,0.627970725357,0,0.929152201158,0.272480322918,-0.249861282927,0,0,0.675853454982,0.737036028556,0,0,0,0,1)\",\"skybox\":\"matrix3d(-0.017370865949,0.767816489802,-0.640434129591,0,0.885889099856,-0.28515750824,-0.365903839695,0,-0.463571706821,-0.573709677337,-0.675246952839,0,0,0,0,1)\",\"sunView\":\"matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)\"},\"pitch\":143.76923076923077,\"controlPitch\":143.76923076923077,\"controlYaw\":0,\"zoom\":0.6462637826065765,\"distance\":69961698138109.18,\"distanceKilometers\":157007591595750180,\"distanceRadii\":225682897219.70703,\"levelOfDetail\":{\"stage\":\"marker\",\"silhouetteDiameter\":0,\"billboardOpacity\":0,\"markerOpacity\":1,\"proxyOpacity\":1},\"focal\":1247.08,\"principalOffset\":[0,0],\"visibleRect\":{\"left\":-720,\"right\":720,\"top\":-500,\"bottom\":500},\"offAxisDegrees\":179.99153509804657,\"silhouetteRadius\":0,\"bodyCenterKilometers\":[10329707871598.312,-20769413064916.992,157007589882229860]}",
+      "url": "http://127.0.0.1:4219/sun/?focus=omega-centauri&focusLens=eso0844a&v=UMNCosolIvrcoMKy48F86NT-Q4FubJGvw6NBQsczQAAAAL_TNG-ckHq_v8oOQfBFK1i_4L3efI6XFgABAAAAAAAAAAA",
+      "view": "earth",
+      "lens": "eso0844a",
+      "textures": 1,
+      "originalPath": "output/pr390-audit/element-budget/app-captures/lens-eso0844a.png"
+    },
+    {
+      "name": "view-earth",
+      "path": "view-earth.png",
+      "bytes": 368284,
+      "sha256": "2075f92769429698329d499590dc21f3edbd342ff6cefc552e3e03ec7e899ea4",
+      "camera": "{\"pose\":{\"schema\":\"cssearth-camera-pose@1\",\"scene\":\"matrix3d(0.369697426395,-0.684818648265,0.627970725357,0,0.929152201158,0.272480322918,-0.249861282927,0,0,0.675853454982,0.737036028556,0,0,0,0,1)\",\"skybox\":\"matrix3d(-0.017370865949,0.767816489802,-0.640434129591,0,0.885889099856,-0.28515750824,-0.365903839695,0,-0.463571706821,-0.573709677337,-0.675246952839,0,0,0,0,1)\",\"sunView\":\"matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)\"},\"pitch\":143.76923076923077,\"controlPitch\":143.76923076923077,\"controlYaw\":0,\"zoom\":0.6462637826065765,\"distance\":69961698138109.18,\"distanceKilometers\":157007591595750180,\"distanceRadii\":225682897219.70703,\"levelOfDetail\":{\"stage\":\"marker\",\"silhouetteDiameter\":0,\"billboardOpacity\":0,\"markerOpacity\":1,\"proxyOpacity\":1},\"focal\":1247.08,\"principalOffset\":[0,0],\"visibleRect\":{\"left\":-720,\"right\":720,\"top\":-500,\"bottom\":500},\"offAxisDegrees\":179.99153509804657,\"silhouetteRadius\":0,\"bodyCenterKilometers\":[10329707871598.312,-20769413064916.992,157007589882229860]}",
+      "url": "http://127.0.0.1:4219/sun/?focus=omega-centauri&focusLens=eso1119b&v=UMNCosolIvrcoMKy48F86NT-Q4FubJGvw6NBQsczQAAAAL_TNG-ckHq_v8oOQfBFK1i_4L3efI6XFgABAAAAAAAAAAA",
+      "view": "earth (0°)",
+      "lens": "eso1119b",
+      "textures": 1,
+      "originalPath": "output/pr390-audit/element-budget/app-captures/view-earth.png"
+    },
+    {
+      "name": "view-oblique",
+      "path": "view-oblique.png",
+      "bytes": 389332,
+      "sha256": "e24faef4d0b98ba8c417d4908c7da7030caecd4ae7c8c2031af5ef6b8db0e6c1",
+      "camera": "{\"pose\":{\"schema\":\"cssearth-camera-pose@1\",\"scene\":\"matrix3d(0.659703396329,-0.684818648265,0.30953973551,0,0.62578011049,0.272480322918,-0.730858212609,0,0.416161846145,0.675853454982,0.608302083839,0,0,0,0,1)\",\"skybox\":\"matrix3d(-0.375953105308,0.767816489802,-0.51876476744,0,0.524550975902,-0.28515750824,-0.802204083029,0,-0.763875349308,-0.573709677337,-0.295553083902,0,0,0,0,1)\",\"sunView\":\"matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)\"},\"pitch\":143.76923076923077,\"controlPitch\":143.76923076923077,\"controlYaw\":0,\"zoom\":0.39642396816377173,\"distance\":68455670452062.64,\"distanceKilometers\":153627773979032200,\"distanceRadii\":220824743393.75046,\"levelOfDetail\":{\"stage\":\"marker\",\"silhouetteDiameter\":0,\"billboardOpacity\":0,\"markerOpacity\":1,\"proxyOpacity\":1},\"focal\":1247.08,\"principalOffset\":[0,0],\"visibleRect\":{\"left\":-720,\"right\":720,\"top\":-500,\"bottom\":500},\"offAxisDegrees\":142.08246869895342,\"silhouetteRadius\":0,\"bodyCenterKilometers\":[94408353542680690,-20769413064933.375,121196350142008350]}",
+      "url": "http://127.0.0.1:4219/sun/?focus=omega-centauri&focusLens=eso1119b&v=UMNDdPZ-W4vbB8Ky48F86OVgQ3rpNwNknMJBQsczQAAAAL_cPfj3mMPjP6Ef-4phSgq_2k_88qH1IAABAAAAAAAAAAA",
+      "view": "oblique (34°)",
+      "lens": "eso1119b",
+      "textures": 1,
+      "originalPath": "output/pr390-audit/element-budget/app-captures/view-oblique.png"
+    },
+    {
+      "name": "view-side-plus",
+      "path": "view-side-plus.png",
+      "bytes": 414928,
+      "sha256": "1a583dae314679ab525cb7915b42c4e0977ae5e16898a4d4ed547de7cc4a3fcb",
+      "camera": "{\"pose\":{\"schema\":\"cssearth-camera-pose@1\",\"scene\":\"matrix3d(0.627970725357,-0.684818648265,-0.369697426395,0,-0.249861282927,0.272480322918,-0.929152201158,0,0.737036028556,0.675853454982,0,0,0,0,0,1)\",\"skybox\":\"matrix3d(-0.640434129591,0.767816489802,0.017370865949,0,-0.365903839695,-0.28515750824,-0.885889099856,0,-0.675246952839,-0.573709677337,0.463571706821,0,0,0,0,1)\",\"sunView\":\"matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)\"},\"pitch\":143.76923076923077,\"controlPitch\":143.76923076923077,\"controlYaw\":0,\"zoom\":0.4533237230626572,\"distance\":74790239926811.3,\"distanceKilometers\":167843773926072960,\"distanceRadii\":241258838473.58484,\"levelOfDetail\":{\"stage\":\"marker\",\"silhouetteDiameter\":1.1681049271654376e-7,\"billboardOpacity\":0,\"markerOpacity\":1,\"proxyOpacity\":1},\"focal\":1247.08,\"principalOffset\":[0,0],\"visibleRect\":{\"left\":-720,\"right\":720,\"top\":-500,\"bottom\":500},\"offAxisDegrees\":84.92249396653635,\"silhouetteRadius\":5.840524635827188e-8,\"bodyCenterKilometers\":[167185134868234850,-20769413064916.992,-14854719568820442]}",
+      "url": "http://127.0.0.1:4219/sun/?focus=omega-centauri&focusLens=eso1119b&v=UMNDgo-v9HxgE8Ky48F86NT-w0pjJPWRnG1BQsczQAAAAL_ioMoqOXy5P9mwpgtBTDe_xDFgwHL_2QABAAAAAAAAAAA",
+      "view": "exact +90° side",
+      "lens": "eso1119b",
+      "textures": 2,
+      "originalPath": "output/pr390-audit/element-budget/app-captures/view-side-plus.png"
+    },
+    {
+      "name": "view-side-minus",
+      "path": "view-side-minus.png",
+      "bytes": 328742,
+      "sha256": "7717f9ad2eae93497df2d4ee0f3be5afd44577128ddac4eb83ea52693c8c9481",
+      "camera": "{\"pose\":{\"schema\":\"cssearth-camera-pose@1\",\"scene\":\"matrix3d(-0.627970725357,-0.684818648265,0.369697426395,0,0.249861282927,0.272480322918,0.929152201158,0,-0.737036028556,0.675853454982,0,0,0,0,0,1)\",\"skybox\":\"matrix3d(0.640434129591,0.767816489802,-0.017370865949,0,0.365903839695,-0.28515750824,0.885889099856,0,0.675246952839,-0.573709677337,-0.463571706821,0,0,0,0,1)\",\"sunView\":\"matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)\"},\"pitch\":143.76923076923077,\"controlPitch\":143.76923076923077,\"controlYaw\":0,\"zoom\":0.45395489611826695,\"distance\":74789425752856.11,\"distanceKilometers\":167841946762135460,\"distanceRadii\":241256212105.98746,\"levelOfDetail\":{\"stage\":\"marker\",\"silhouetteDiameter\":1.1697317484856256e-7,\"billboardOpacity\":0,\"markerOpacity\":1,\"proxyOpacity\":1},\"focal\":1247.08,\"principalOffset\":[0,0],\"visibleRect\":{\"left\":-720,\"right\":720,\"top\":-500,\"bottom\":500},\"offAxisDegrees\":84.92951874427573,\"silhouetteRadius\":5.848658742428128e-8,\"bodyCenterKilometers\":[-167185134868234850,-20769413064933.375,-14834060153077260]}",
+      "url": "http://127.0.0.1:4219/sun/?focus=omega-centauri&focusLens=eso1119b&v=UEPDgo-v9HxgE8Ky48F86OVgw0pZv-MAHwZBQsczQAAAAL_EMWDAcv_YP-Kgyio5fLi_2bCmC0FMNQABAAAAAAAAAAA",
+      "view": "exact −90° side",
+      "lens": "eso1119b",
+      "textures": 2,
+      "originalPath": "output/pr390-audit/element-budget/app-captures/view-side-minus.png"
+    },
+    {
+      "name": "view-side-y",
+      "path": "view-side-y.png",
+      "bytes": 346817,
+      "sha256": "9c3f24ec147b78541513ec2e874d88eb5b3f6d546a663d5adaee53348a62eea6",
+      "camera": "{\"pose\":{\"schema\":\"cssearth-camera-pose@1\",\"scene\":\"matrix3d(0.369697426395,-0.627970725357,-0.684818648265,0,0.929152201158,0.249861282927,0.272480322918,0,0,-0.737036028556,0.675853454982,0,0,0,0,1)\",\"skybox\":\"matrix3d(-0.017370865949,0.640434129591,0.767816489802,0,0.885889099856,0.365903839695,-0.28515750824,0,-0.463571706821,0.675246952839,-0.573709677337,0,0,0,0,1)\",\"sunView\":\"matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)\"},\"pitch\":143.76923076923077,\"controlPitch\":143.76923076923077,\"controlYaw\":0,\"zoom\":0.535181395928246,\"distance\":74707421314841.7,\"distanceKilometers\":167657912931404400,\"distanceRadii\":240991681660.7797,\"levelOfDetail\":{\"stage\":\"marker\",\"silhouetteDiameter\":1.3791044440937067e-7,\"billboardOpacity\":0,\"markerOpacity\":1,\"proxyOpacity\":1},\"focal\":1247.08,\"principalOffset\":[0,0],\"visibleRect\":{\"left\":-720,\"right\":720,\"top\":-500,\"bottom\":500},\"offAxisDegrees\":85.6961589587144,\"silhouetteRadius\":6.895522220468534e-8,\"bodyCenterKilometers\":[10329707871615.2,-167185134868234850,-12581984775926776]}",
+      "url": "http://127.0.0.1:4219/sun/?focus=omega-centauri&focusLens=eso1119b&v=UMNCosolIvr-ZsOCj6_0fGATw0ZZn86RufxBQsczQAAAAD_VUn7dgmC8P8ztrxvw-8q_4HG2k1oDJQABAAAAAAAAAAA",
+      "view": "exact local Y-axis side (90° about X)",
+      "lens": "eso1119b",
+      "textures": 3,
+      "originalPath": "output/pr390-audit/element-budget/app-captures/view-side-y.png"
+    }
+  ],
+  "errors": [],
+  "failed": [],
+  "result": "passed"
+}
