@@ -44,7 +44,9 @@ export function isDefaultContextFeature(object: { id: string; classification: st
 
 /** Explicit searches still navigate every registered object. This controls the default world. */
 export function discoveryVisibility(objects: readonly { id: string; classification: string; discovery: ObjectDiscovery }[],
-  options: { illustrations: boolean; highlighted?: string | null }) {
+  options: { illustrations: boolean; highlighted?: string | null;
+    /** Phones: an asteroid that is not a mission target draws nothing unless its category is highlighted. */
+    compact?: boolean }) {
   const hiddenBodies: string[] = [], hiddenLabels: string[] = [], highlightedBodies: string[] = [];
   for (const object of objects) {
     const illustration = object.discovery.illustration;
@@ -56,6 +58,7 @@ export function discoveryVisibility(objects: readonly { id: string; classificati
     const highlighted = matchesObjectClassification(object.classification, options.highlighted) && (!illustration || options.illustrations);
     if (highlighted) highlightedBodies.push(object.id);
     if (illustration && !options.illustrations) hiddenBodies.push(object.id);
+    else if (options.compact && object.classification === 'asteroid' && !isDefaultContextFeature(object) && !highlighted) hiddenBodies.push(object.id);
     if (!featured && object.classification !== 'satellite' && !highlighted &&
         !(illustration && options.illustrations)) hiddenLabels.push(object.id);
   }

@@ -132,15 +132,10 @@ try {
           assert.equal(result.minimapShown, false, "phones leave the scene uncovered");
           assert.equal(result.minimapSettingShown, false, "phones offer no minimap setting");
           assert.equal(result.sourcesShown, true, "phones carry the shared Sources card in the sheet");
-          assert.equal(result.githubShown, false, "the version link carries GitHub on phones");
-          assert.ok(result.settings.left >= result.search.right,
-            "Settings ends the header row, clear of the search field");
-          assert.ok(result.facilityAction.left >= result.search.right
-            && result.facilityAction.right <= result.settings.left,
-            "Spacecraft sits between the search field and Settings");
-          assert.ok(Math.abs(result.settings.height - result.search.height) < 1
-            && Math.abs(result.facilityAction.height - result.search.height) < 1,
-            "both header buttons match the search field's height");
+          assert.equal(result.githubShown, false, "phones show no GitHub link");
+          // For now phones show no app actions; the search field takes the rest of the header row.
+          assert.ok(result.settings.width === 0 && result.facilityAction.width === 0, "phones show no Settings or Machines action");
+          assert.ok(result.search.right >= result.header.right - 24, "the search field reaches the end of the header row");
           assert.ok(result.brand.right <= result.search.left, "the wordmark heads the row");
         } else {
           near(result.sidebar.x, 12, "panel left margin");

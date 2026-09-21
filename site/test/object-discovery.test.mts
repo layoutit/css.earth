@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { SCENE_OBJECTS, requireSceneObject } from '../objects.mts';
 import { deriveObjectDiscovery, prepareObjectDiscovery } from '../../tools/prepare-object-discovery.mts';
-import { discoveryVisibility, parseObjectDiscovery, showsDefaultContextOrbit } from '../object-discovery.mts';
+import { discoveryVisibility, isDefaultContextFeature, parseObjectDiscovery, showsDefaultContextOrbit } from '../object-discovery.mts';
 import { parseArrivalView } from '../arrival-view.mts';
 import { record } from '../browser-types.mts';
 import { searchObjects } from '../object-search.mts';
@@ -206,4 +206,18 @@ test('a package that was never prepared is discoverable as shape only instead of
     const descriptor = { properties: { catalog: {}, recipe: { sources: [{ id: 'raster', path: 'source/preparation/raster.json' }] } } };
     assert.deepEqual(await prepareObjectDiscovery(descriptor, folder), { imagery: false, illustration: false, featured: false });
   } finally { await rm(folder, { recursive: true, force: true }); }
+});
+
+test('phones hide ordinary asteroids but keep mission targets and a highlighted category', () => {
+  const ordinary = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !isDefaultContextFeature(object)).map(object => object.id);
+  const targets = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && isDefaultContextFeature(object)).map(object => object.id);
+  assert.ok(ordinary.length > 0 && targets.length > 0);
+  const desktop = discoveryVisibility(SCENE_OBJECTS, defaults), phone = discoveryVisibility(SCENE_OBJECTS, { ...defaults, compact: true });
+  for (const id of ordinary) {
+    assert.equal(phone.hiddenBodies.includes(id), true, `${id}: hidden on phones`);
+    assert.equal(desktop.hiddenBodies.includes(id), requireSceneObject(id).discovery.illustration && !defaults.illustrations, `${id}: desktop unchanged`);
+  }
+  for (const id of targets) assert.equal(phone.hiddenBodies.includes(id), desktop.hiddenBodies.includes(id), `${id}: mission targets stay`);
+  const browsing = discoveryVisibility(SCENE_OBJECTS, { ...defaults, compact: true, highlighted: 'asteroid' });
+  for (const id of ordinary) assert.equal(browsing.hiddenBodies.includes(id), desktop.hiddenBodies.includes(id), `${id}: shown while asteroids are highlighted`);
 });
