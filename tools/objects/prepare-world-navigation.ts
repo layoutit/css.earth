@@ -18,7 +18,6 @@ export interface WorldNavigationOptions { readonly objectDirectory: string; read
 export async function prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot = resolve(objectDirectory, '../../..') }: WorldNavigationOptions) {
   const bound = await readAuthoredSources(objectDirectory), descriptor = bound.descriptor;
   // The receipt names the manifest pins each source had, so a later reader can tell which inputs this frame came from.
-  const pinnedSources = bound.entries.map(entry => entry.reference);
   const sources = new Map<string, Input>([...bound.sources].map(([id, entry]) => [id, entry.value as Input]));
   if (definition.id !== descriptor.id || definition.schema !== 'cssearth-object-runtime@4') throw new TypeError('Physical navigation runtime identity differs.');
   const contextSource = sources.get('world-context');
@@ -26,7 +25,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     const context = parseWorldContextSource(contextSource);
     if (context.focus.id !== descriptor.id) throw new TypeError('Authored context focus differs.');
     return { definition, frame: context.frame, systemTransform: null, defaultCamera: null, receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
-      sources: pinnedSources, frame: context.frame, model: 'authored-context-focus' } };
+      frame: context.frame, model: 'authored-context-focus' } };
   }
   const solar = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-geometry.mts')).href) as Input;
   const presentation = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-presentation-frame.mts')).href) as Input;
@@ -81,7 +80,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const prepared = preparePhysicalMaterialTracks({ definition: { ...(posed?.definition ?? oriented), camera, sky, sun }, ...authored, sources, refreshPhysical: solved !== null,
     physicalShape: { equatorialRadiusM: bodyRadiusM, polarRadiusM: (descriptor.recipe.shape.polarRadiusKm ?? descriptor.recipe.shape.radiusKm) * 1000 } });
   return { definition: prepared, frame, systemTransform: solved, defaultCamera: posed ? { angles, transform: posed.transform } : null,
-    receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id, sources: pinnedSources,
+    receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
       frame, bodyToPresentation, sourceRadiusUnits: authored.sourceRadiusUnits,
       tilePixels: authored.tilePixels, sceneScale: camera.sceneScale, renderedRadiusUnits, ...(posed ? { defaultCamera: angles } : {}),
       sourceGeometryConvention: solved
