@@ -29,9 +29,9 @@
   },
   "datasets": {
     "temperature": {
-      "title": "JWST MIRI map",
-      "detail": "Our map from raw data",
-      "summary": "Heat at 15 µm, mapped here from ten raw JWST visits. A hot day side and a dark night side: no sign of an atmosphere."
+      "title": "JWST MIRI bare rock",
+      "detail": "Fitted to our raw data",
+      "summary": "Heat at 15 µm: a bare rock fitted to ten raw JWST visits. About 575 K under the star, cold at night: no atmosphere seen."
     }
   }
 }
