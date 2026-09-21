@@ -430,6 +430,33 @@ test('open trajectories stay hidden until their body circle is hovered', () => {
   layer.destroy();
 });
 
+test('an unlabelled minor body cannot leave an anonymous orbit across the stage', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite },
+    annotationPriorities: { mercury: 1, venus: 3 } });
+  layer.setHiddenLabels(['mercury']);
+  const publish = () => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
+  publish();
+  const root = layer.root as unknown as FakeElement;
+  const marker = find(root, 'contextBody', 'mercury'), orbit = find(root, 'contextOrbit', 'mercury');
+  expect(annotationVisibility(marker, 'indicator')).toBe('hidden');
+  expect(orbit.style.opacity).toBe('0');
+  marker.dataset.objectHovered = 'true';
+  host.dispatchEvent(new Event('objecthoverchange'));
+  document.defaultView.advance(16); publish(); document.defaultView.advance(200);
+  expect(annotationVisibility(marker, 'indicator')).toBe('');
+  expect(orbit.style.opacity).not.toBe('0');
+  marker.dataset.objectHovered = 'false';
+  host.dispatchEvent(new Event('objecthoverchange'));
+  document.defaultView.advance(16); publish(); document.defaultView.advance(200);
+  expect(orbit.style.opacity).toBe('0');
+  layer.destroy();
+});
+
 test('hidden annotations leave the physical dot pickable and hover reveals the complete annotation', () => {
   const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
   const clock = root.ownerDocument.defaultView, host = root.parentNode!;

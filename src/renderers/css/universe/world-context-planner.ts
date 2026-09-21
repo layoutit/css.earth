@@ -468,12 +468,16 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       for (const projected of projectedBodies) {
         const { entry, x, y } = projected;
         if (!entry.orbit) continue;
+        // A minor body's path cannot identify itself when its caption is absent:
+        // highly eccentric comet trails otherwise cross the stage as anonymous
+        // near-straight rays while their bodies are off screen. Major bodies retain
+        // the useful orbit field, and hover/highlight/selection reveal a minor path.
+        const anonymousMinor = (annotationPriorities[entry.body.id] ?? 2) < 2 && !entry.labelShown &&
+          !projected.hovered && entry.highlighted !== true && entry.body.id !== emphasizedId;
         // An on-screen context path belongs to the annotation that identifies its body
-        // when that annotation lost ordinary decluttering. If fixed shell/viewport
-        // occlusion made every placement impossible, the orbit can still identify the
-        // body's neighbourhood in the visible stage, just as it can for an off-screen
-        // body. The selected object's own path also remains available in detail views.
-        if (projected.inFrame && !projected.annotationOccluded && !entry.labelShown &&
+        // when that annotation lost ordinary decluttering. Fixed shell occlusion still
+        // preserves major paths, and the selected object's own path remains available.
+        if (anonymousMinor || projected.inFrame && !projected.annotationOccluded && !entry.labelShown &&
             (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout
