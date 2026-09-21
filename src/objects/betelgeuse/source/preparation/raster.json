@@ -109,6 +109,180 @@
       }
     },
     {
+      "id": "matisse-2018-12",
+      "source": "observations/betelgeuse-matisse-2018-12-continuum-3mas.fits",
+      "falseColor": true,
+      "output": "betelgeuse-surface-{id}{suffix}.webp",
+      "thumbnail": "betelgeuse-lens-{id}.webp",
+      "science": {
+        "kind": "surface-observation",
+        "shape": {
+          "path": "shape/uniform-disc.tab",
+          "format": "pds-radius-table",
+          "grid": {
+            "metersPerUnit": 1000,
+            "expectedVertices": 2522,
+            "expectedFaces": 5040,
+            "stepDegrees": 5,
+            "longitudeDirection": "east-positive"
+          },
+          "radiusKm": 531514800,
+          "rows": 36,
+          "columns": 72,
+          "flatFaceErrorMeters": 1020000000
+        },
+        "lens": {
+          "format": "controlled-shape-camera",
+          "metadata": {
+            "label": "MATISSE December 2018",
+            "falseColor": true,
+            "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 3240 squared visibilities and 2160 closure phases measured by VLT/MATISSE on eight nights from 3 to 15 December 2018 in the 3.94-4.00 micrometre pseudo-continuum, with the February 2020 recipe unchanged, convolved to the 3 milliarcsecond beam of this epoch's longest baseline and cast onto a sphere of the published radius. The camera is computed as for February 2020. The reconstruction does not reach the check: it fits the closure phases at reduced chi-squared 3.03 against a limit of 3, and a spotless disc from the same coverage leaves patches as strong (ratio 1.04, limit 2). The bright and dark patches are therefore not confirmed as surface features. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale, not colour or temperature. The far hemisphere is unobserved."
+          },
+          "frames": [
+            {
+              "id": "matisse-2018-12-continuum",
+              "path": "observations/betelgeuse-matisse-2018-12-continuum-3mas.fits",
+              "encoding": "fits-oi-reconstruction",
+              "backgroundMaximum": 1e-05,
+              "observerLatitude": 0,
+              "observerWestLongitude": 0,
+              "sunLatitude": 0,
+              "sunWestLongitude": 0,
+              "rangeKm": 5183938336905497,
+              "northAzimuthDegrees": 312,
+              "pixelAngleMicroradians": 0.003781546712654381,
+              "center": [
+                63.519,
+                63.374
+              ],
+              "reconstruction": {
+                "startTime": "2018-12-03T06:36:48",
+                "filter": "L-band pseudo-continuum 3.942-3.974 and 3.992-3.998 um",
+                "visibilitiesPath": "observations/betelgeuse-matisse-2018-12-continuum.oifits"
+              }
+            }
+          ],
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "visibilityToleranceMeters": 1,
+            "maximumEmissionDegrees": 70,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "maximumGain": 1
+          },
+          "display": {
+            "basis": "authored",
+            "percentiles": [
+              1,
+              99.5
+            ],
+            "palette": [
+              "#3b0500",
+              "#9a1e00",
+              "#e0641a",
+              "#ffb340",
+              "#ffe9a0",
+              "#fffbf0"
+            ]
+          },
+          "consumer": "sphere-photograph-2018-12"
+        }
+      }
+    },
+    {
+      "id": "matisse-2020-12",
+      "source": "observations/betelgeuse-matisse-2020-12-continuum-3.1mas.fits",
+      "falseColor": true,
+      "output": "betelgeuse-surface-{id}{suffix}.webp",
+      "thumbnail": "betelgeuse-lens-{id}.webp",
+      "science": {
+        "kind": "surface-observation",
+        "shape": {
+          "path": "shape/uniform-disc.tab",
+          "format": "pds-radius-table",
+          "grid": {
+            "metersPerUnit": 1000,
+            "expectedVertices": 2522,
+            "expectedFaces": 5040,
+            "stepDegrees": 5,
+            "longitudeDirection": "east-positive"
+          },
+          "radiusKm": 531514800,
+          "rows": 36,
+          "columns": 72,
+          "flatFaceErrorMeters": 1020000000
+        },
+        "lens": {
+          "format": "controlled-shape-camera",
+          "metadata": {
+            "label": "MATISSE December 2020",
+            "falseColor": true,
+            "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 1248 squared visibilities and 832 closure phases measured by VLT/MATISSE on three nights on 14, 18 and 27 December 2020 in the 3.94-4.00 micrometre pseudo-continuum, with the February 2020 recipe unchanged, convolved to the 3.1 milliarcsecond beam of this epoch's longest baseline and cast onto a sphere of the published radius. The camera is computed as for February 2020. The reconstruction fits its data (reduced chi-squared 0.53 and 1.77), but a spotless disc from the same coverage leaves patches as strong (ratio 0.87, limit 2), and the two halves of the data agree only at 0.45 (limit 0.5). The bright and dark patches are therefore not confirmed as surface features. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale, not colour or temperature. The far hemisphere is unobserved."
+          },
+          "frames": [
+            {
+              "id": "matisse-2020-12-continuum",
+              "path": "observations/betelgeuse-matisse-2020-12-continuum-3.1mas.fits",
+              "encoding": "fits-oi-reconstruction",
+              "backgroundMaximum": 1e-05,
+              "observerLatitude": 0,
+              "observerWestLongitude": 0,
+              "sunLatitude": 0,
+              "sunWestLongitude": 0,
+              "rangeKm": 5183938336905497,
+              "northAzimuthDegrees": 312,
+              "pixelAngleMicroradians": 0.003781546712654381,
+              "center": [
+                63.918,
+                63.112
+              ],
+              "reconstruction": {
+                "startTime": "2020-12-14T06:26:42",
+                "filter": "L-band pseudo-continuum 3.942-3.974 and 3.992-3.998 um",
+                "visibilitiesPath": "observations/betelgeuse-matisse-2020-12-continuum.oifits"
+              }
+            }
+          ],
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "visibilityToleranceMeters": 1,
+            "maximumEmissionDegrees": 70,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "maximumGain": 1
+          },
+          "display": {
+            "basis": "authored",
+            "percentiles": [
+              1,
+              99.5
+            ],
+            "palette": [
+              "#3b0500",
+              "#9a1e00",
+              "#e0641a",
+              "#ffb340",
+              "#ffe9a0",
+              "#fffbf0"
+            ]
+          },
+          "consumer": "sphere-photograph-2020-12"
+        }
+      }
+    },
+    {
       "id": "color",
       "output": "betelgeuse-surface-{id}{suffix}.webp",
       "thumbnail": "betelgeuse-lens-{id}.webp",

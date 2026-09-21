@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-roche-von-zeipel@1",
+  "objectId": "alderamin",
+  "source": "Zhao et al. (2009), Imaging and Modeling Rapidly Rotating Stars: alpha Cephei and alpha Ophiuchi, https://arxiv.org/abs/0906.2241, Table 3, non-standard model (beta free), adopted as the final model, read from the authors' LaTeX source",
+  "caption": "Best-fit and physical parameters of alpha Cep; the non-standard model with beta free, adopted as the final model. Mass 2.0 solar masses assumed, distance 14.96 pc (Hipparcos 1997).",
+  "model": {
+    "omega": {
+      "value": 0.941,
+      "uncertainty": 0.02,
+      "cell": "0.941 ± 0.020"
+    },
+    "beta": {
+      "value": 0.216,
+      "uncertainty": 0.021,
+      "cell": "0.216 ± 0.021"
+    },
+    "poleTemperatureK": {
+      "value": 8588,
+      "uncertainty": 300,
+      "cell": "8588 ± 300"
+    },
+    "equatorTemperatureK": {
+      "value": 6574,
+      "uncertainty": 200,
+      "cell": "6574 ± 200"
+    },
+    "polarRadiusSolar": {
+      "value": 2.162,
+      "uncertainty": 0.036,
+      "cell": "2.162 ± 0.036"
+    },
+    "equatorialRadiusSolar": {
+      "value": 2.74,
+      "uncertainty": 0.044,
+      "cell": "2.740 ± 0.044"
+    }
+  },
+  "view": {
+    "inclinationDegrees": {
+      "value": 55.7,
+      "uncertainty": 6.23,
+      "cell": "55.70 ± 6.23"
+    },
+    "polePositionAngleDegrees": {
+      "value": -178.84,
+      "uncertainty": 4.28,
+      "cell": "-178.84 ± 4.28"
+    }
+  },
+  "note": "Section 4.1 places the bright polar region at the bottom (south) of the image, toward the position angle, so that pole faces us. The fit assumed 14.96 pc; the placement here uses van Leeuwen's 15.04 pc, and the radii are the paper's."
+}

@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "rasalhague",
+  "displayName": "Rasalhague",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.858 solar radii at the equator",
+        "source": {
+          "catalogueId": "arxiv-1012-0787",
+          "url": "https://arxiv.org/abs/1012.0787",
+          "label": "Monnier et al. 2010",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "15 parsecs",
+        "source": {
+          "catalogueId": "simbad-alf-oph",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Oph",
+          "label": "SIMBAD parallax",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The poles are hotter and brighter than the equator, from a fit to interferometric images; the disc is unresolved in colour, and its darker edge follows a model limb-darkening law.",
+        "thumbnail": "rasalhague-lens-color.webp",
+        "surface": "rasalhague-surface-color@2x.webp",
+        "poles": "rasalhague-poles-color@2x.webp",
+        "source": {
+          "id": "rasalhague-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
+        },
+        "falseColor": false,
+        "notes": "The colour of Rasalhague's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. No resolved image of the surface is cast; the display axis is celestial north, a convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Monnier et al. 2010, Rotationally-modulated g-modes in the rapidly-rotating delta Scuti star Rasalhague (alpha Ophiuchi)",
+      "href": "https://arxiv.org/abs/1012.0787"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "Pulkovo spectrophotometric catalogue, HR 6556 (VizieR III/201)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1012.0787",
+      "credit": "J. D. Monnier, R. H. D. Townsend, X. Che et al."
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/rasalhague.json",
+      "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

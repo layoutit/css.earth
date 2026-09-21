@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-roche-von-zeipel@1",
+  "objectId": "rasalhague",
+  "source": "Monnier et al. (2010), Rotationally-modulated g-modes in the rapidly-rotating delta Scuti star Rasalhague (alpha Ophiuchi), https://arxiv.org/abs/1012.0787, Table 1, read from the authors' LaTeX source",
+  "caption": "Best-fit and physical parameters of alpha Oph from CHARA-MIRC interferometry. Beta is fixed at 0.25; the authors state that the error bars rely on fixing it. Mass 2.18 ± 0.02 solar masses, distance 14.68 pc.",
+  "model": {
+    "omega": {
+      "value": 0.88,
+      "uncertainty": 0.026,
+      "cell": "0.880 ± 0.026"
+    },
+    "beta": {
+      "value": 0.25,
+      "uncertainty": null,
+      "cell": "0.25 (fixed)"
+    },
+    "poleTemperatureK": {
+      "value": 9384,
+      "uncertainty": 154,
+      "cell": "9384 ± 154"
+    },
+    "equatorTemperatureK": {
+      "value": 7569,
+      "uncertainty": 124,
+      "cell": "7569 ± 124"
+    },
+    "polarRadiusSolar": {
+      "value": 2.388,
+      "uncertainty": 0.013,
+      "cell": "2.388 ± 0.013"
+    },
+    "equatorialRadiusSolar": {
+      "value": 2.858,
+      "uncertainty": 0.015,
+      "cell": "2.858 ± 0.015"
+    }
+  },
+  "view": {
+    "inclinationDegrees": {
+      "value": 87.5,
+      "uncertainty": 0.6,
+      "cell": "87.5 ± 0.6"
+    },
+    "polePositionAngleDegrees": {
+      "value": -53.5,
+      "uncertainty": 1.7,
+      "cell": "-53.5 ± 1.7"
+    }
+  },
+  "note": "beta is not fitted: the error bars rely on fixing it at 0.25, and the authors say it might be substantially lower. Lazzarotto et al. (2026, A&A 709, A251) dispute the inclination: 68.9 ± 5.6 degrees from 2D ESTER models and spectrophotometry, attributing the near edge-on value to the fixed beta. The paper does not say which pole faces us. The fit assumed 14.68 pc; the placement uses 14.90 pc."
+}
