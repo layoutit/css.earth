@@ -19,6 +19,7 @@ import { F15_RADAR_HANDLER } from './families/f15-radar.mts';
 import { F16_SPATIAL_PHYSICAL_HANDLER } from './families/f16-spatial-physical.mts';
 import { F16_CARTESIAN_GRID_HANDLER } from './families/f16-cartesian-grid.mts';
 import { F16_SPHERICAL_GRID_HANDLER } from './families/f16-spherical-grid.mts';
+import { F16_PLANETARY_DEPTH_HANDLER } from './families/f16-planetary-depth.mts';
 import { F17_CALIBRATION_HANDLER } from './families/f17-calibration.mts';
 import { F18_COMPOUND_HANDLER } from './families/f18-compound.mts';
 
@@ -73,7 +74,7 @@ const RASTER_PROFILES:readonly FormatProfile[]=[
   {id:'isis3-image-array@1',format:'ISIS3 numeric core',version:'repository ISIS3 compatibility profile',families:['F01','F02'],evidence:[{path:'tools/objects/telescopes/product-science.test.mts',establishes:'ISIS core metadata, masks and calibration dependency checks.',status:'partial'}]},
 ] as const;
 export const RASTER_F01_F02_HANDLER:FamilyHandler={id:'raster-f01-f02',profiles:RASTER_PROFILES,families:['F01','F02'],recognizes:members=>members.some(member=>Buffer.from(member.prefix).subarray(0,9).toString('latin1')==='SIMPLE  =')?['fits-image-array@1']:[],operations:rasterOperations};
-export const FAMILY_HANDLERS:readonly FamilyHandler[]=[RASTER_F01_F02_HANDLER,F02_MIXED_ND_HANDLER,F03_SPECTRUM_HANDLER,F04_SLIT_PROFILE_HANDLER,F05_PHOTOMETRY_HANDLER,F06_TIME_SERIES_HANDLER,F07_DYNAMIC_SPECTRUM_HANDLER,F08_TABLE_HANDLER,F09_ASTROMETRY_HANDLER,F10_EVENTS_HANDLER,F11_MEASUREMENT_SET_HANDLER,F12_OIFITS_HANDLER,F13_POLARIMETRY_HANDLER,F14_BODY_MAP_SPHERE_HANDLER,F14_HEALPIX_HANDLER,F15_RADAR_HANDLER,F16_SPATIAL_PHYSICAL_HANDLER,F16_CARTESIAN_GRID_HANDLER,F16_SPHERICAL_GRID_HANDLER,F17_CALIBRATION_HANDLER,F18_COMPOUND_HANDLER];
+export const FAMILY_HANDLERS:readonly FamilyHandler[]=[RASTER_F01_F02_HANDLER,F02_MIXED_ND_HANDLER,F03_SPECTRUM_HANDLER,F04_SLIT_PROFILE_HANDLER,F05_PHOTOMETRY_HANDLER,F06_TIME_SERIES_HANDLER,F07_DYNAMIC_SPECTRUM_HANDLER,F08_TABLE_HANDLER,F09_ASTROMETRY_HANDLER,F10_EVENTS_HANDLER,F11_MEASUREMENT_SET_HANDLER,F12_OIFITS_HANDLER,F13_POLARIMETRY_HANDLER,F14_BODY_MAP_SPHERE_HANDLER,F14_HEALPIX_HANDLER,F15_RADAR_HANDLER,F16_SPATIAL_PHYSICAL_HANDLER,F16_CARTESIAN_GRID_HANDLER,F16_SPHERICAL_GRID_HANDLER,F16_PLANETARY_DEPTH_HANDLER,F17_CALIBRATION_HANDLER,F18_COMPOUND_HANDLER];
 
 export function familyCoverageLedger():readonly {readonly family:FamilyId;readonly status:'unimplemented'|'partial'|'complete';readonly profiles:readonly {readonly handlerId:string;readonly profileId:string;readonly evidence:readonly HandlerEvidenceReference[]}[]}[]{
   return (['F01','F02','F03','F04','F05','F06','F07','F08','F09','F10','F11','F12','F13','F14','F15','F16','F17','F18'] as const).map(family=>{
