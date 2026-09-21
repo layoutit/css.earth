@@ -131,7 +131,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     datasets: { shape: { title: 'Shape only', detail: 'Published radius', summary: `${TODO}: what the sphere is and is not, 125 characters at most.` } } });
   put(`${o}/.gitignore`, '# No observation files: the sphere is the shared neutral gray.\n');
   const pin = { expectedBytes: 0, expectedSha256: '0'.repeat(64) }, local = (reason: string) => ({ kind: 'local', reason });
-  const catalogued = (entryId: string, index: number) => ({ kind: 'catalogued', references: [{ catalogueId: `source-${id}-${entryId}`, role: 'material', evidence: `src/objects/${id}/source/manifest.json@${'0'.repeat(40)}#/inputs/${index}` }] });
+  const catalogued = (entryId: string, index: number) => ({ kind: 'catalogued', references: [{ catalogueId: `source-${id}-${entryId}`, role: 'material', evidence: 'Origin and product identifier recorded on this manifest entry.' }] });
   const preparation = (entryId: string, path: string, origin: string, consumers: string[]) => ({ id: `${id}-${entryId}`, path, ...pin, origin,
     sourceBinding: local('Project-authored preparation record; published inputs retain their own identities and hashes.'),
     credit: 'cssEarth and the institutional sources identified in this record', license: 'Project-authored preparation record; referenced observations retain their source terms',

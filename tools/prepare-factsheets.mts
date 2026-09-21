@@ -49,7 +49,7 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
     try {
       const receipt = await read(path);
       await publish(path, { ...receipt,
-        sources: requireArray(receipt.sources).map(value => {const source=requireRecord(value);return source.id === 'content' ? { id: reference.id, path: reference.path, sha256: sha256(bytes) } : source;}) });
+        sources: requireArray(receipt.sources).map(value => {const source=requireRecord(value);return source.id === 'content' && source.sha256 !== undefined ? { ...source, sha256: sha256(bytes) } : source;}) });
     } catch (error) { if (!hasErrorCode(error,'ENOENT')) throw error; }
   }
   return { id: descriptor.id, count: ordered.length, preview: ordered.slice(0, 4).map(fact => fact.id) };
