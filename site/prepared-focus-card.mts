@@ -14,8 +14,9 @@ const words = (value: string) => value.replaceAll('-', ' ').replace(/^./u, lette
 /** One retained card transports the selected prepared record; no catalogue is imported here. */
 export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: string) => void = () => {}): PreparedFocusCard {
   if (!root) return { set() {}, destroy() {} };
-  const fields = Object.fromEntries(['name', 'aliases', 'status', 'distance', 'uncertainty', 'membership', 'association', 'basis', 'reference']
+  const fields = Object.fromEntries(['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association', 'basis', 'reference']
     .map(name => [name, requiredElement(root, `[data-focus-${name}]`)]));
+  const aliasesRow = root.querySelector<HTMLElement>('[data-focus-aliases-row]');
   const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-focus-source]')];
   const sourceRows = [...root.querySelectorAll<HTMLElement>('[data-focus-source-row]')];
   const breadcrumbs = [...root.querySelectorAll<HTMLElement>('[data-focus-breadcrumb-scope]')];
@@ -67,10 +68,13 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     if (!record) { root.hidden = true; return; }
     root.dataset.preparedFocusId = record.id;
     for (const bank of root.querySelectorAll<HTMLElement>('[data-focus-record-bank]')) bank.hidden = bank.dataset.focusRecordBank !== record.id;
-    write('name', record.name);
-    write('aliases', record.aliases.length ? `Also known as ${record.aliases.join(', ')}` : '');
-    fields.aliases.hidden = record.aliases.length === 0;
     const cluster = isPreparedCluster(record), nebula = isPreparedNebula(record);
+    const aliases = record.aliases.join(', ');
+    write('name', record.name);
+    write('aliases', aliases);
+    write('introduction', nebula ? record.introduction.text : aliases ? `Also known as ${aliases}` : '');
+    fields.introduction.hidden = !nebula && !aliases;
+    if (aliasesRow) aliasesRow.hidden = !nebula || !aliases;
     const parentScope = cluster ? 'nearby-universe' : nebula ? 'milky-way' : 'local-group';
     for (const trail of breadcrumbs) trail.hidden = trail.dataset.focusBreadcrumbScope !== parentScope;
     fields.status.hidden = nebula;

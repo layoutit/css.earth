@@ -6,6 +6,7 @@ export interface PreparedNebulaRecord extends Pick<PreparedGalaxyRecord,
   'id' | 'name' | 'aliases' | 'positionM' | 'skyPosition' | 'distance' | 'status' | 'presentation'> {
   readonly kind: 'nebula';
   readonly detailedObjectId: string;
+  readonly introduction: { readonly text: string; readonly sourceRefs: readonly string[] };
   readonly classification: { readonly name: string; readonly basis: string; readonly sourceRef: string };
 }
 export interface PreparedNebulaCatalog {
@@ -44,6 +45,11 @@ export function parsePreparedNebulaCatalog(input: unknown): PreparedNebulaCatalo
     if (row.kind !== 'nebula' || row.status !== 'confirmed' || ids.has(id) || details.has(detail) ||
         !/^[a-z][a-z0-9-]*$/.test(id) || !/^[a-z][a-z0-9-]*$/.test(detail)) throw new TypeError('Invalid nebula identity.');
     ids.add(id); details.add(detail); text(row.name); array(row.aliases).forEach(text);
+    const introduction = record(row.introduction), introductionText = text(introduction.text);
+    const introductionRefs = array(introduction.sourceRefs).map(text);
+    if (introductionText.length > 180 || !introductionRefs.length || new Set(introductionRefs).size !== introductionRefs.length)
+      throw new TypeError('Invalid nebula introduction.');
+    introductionRefs.forEach(reference);
     const position = array(row.positionM); if (position.length !== 3) throw new TypeError('Nebula position requires three metre coordinates.'); position.forEach(finite);
     const sky = record(row.skyPosition), ra = finite(sky.raDeg), dec = finite(sky.decDeg);
     if (ra < 0 || ra >= 360 || dec < -90 || dec > 90) throw new TypeError('Invalid nebula sky coordinates.'); reference(sky.sourceRef);

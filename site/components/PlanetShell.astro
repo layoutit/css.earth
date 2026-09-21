@@ -296,7 +296,7 @@ const searchCategories = ([
             <p class="planet-title planet-title-text" data-focus-name></p>
             <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-focus-status></span></div>
           </div>
-          <p class="planet-introduction" data-focus-aliases hidden></p>
+          <p class="planet-introduction" data-focus-introduction hidden></p>
           <p class="planet-introduction" data-focus-unavailable role="status" hidden
             data-unavailable-objects={Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id).join(' ')}></p>
         </section>
@@ -308,6 +308,7 @@ const searchCategories = ([
         <div class="planet-card-tabpanel" id="prepared-focus-factsheet-content" data-information-panel="factsheet"
           data-information-group="prepared-focus" role="region" aria-label="Factsheet">
           <div class="planet-factsheet-body"><div class="planet-facts"><ul class="planet-primary-facts">
+            <li data-focus-aliases-row hidden><span class="planet-fact-label">Also known as</span><span class="planet-fact-value" data-focus-aliases></span></li>
             {[['distance', 'Observer distance'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
               <li><span class="planet-fact-label" data-focus-fact-label={id}>{label}</span><span class="planet-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
           </ul></div></div>

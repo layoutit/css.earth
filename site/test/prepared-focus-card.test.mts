@@ -28,9 +28,10 @@ function fixture(unavailableObjects = '') {
   const facts = ids.map(id => Object.assign(new Element(), { dataset: { focusLensDetails: id }, textContent: 'Source pixels 2048 × 4096' }));
   factsBank.selectors.set('[data-focus-lens-details]', facts);
   root.selectors.set('[data-focus-lens-bank], [data-focus-facts-bank]', [bank, factsBank]);
-  for (const name of ['name', 'aliases', 'status', 'distance', 'uncertainty', 'membership', 'association', 'basis', 'reference']) {
+  for (const name of ['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association', 'basis', 'reference']) {
     root.selectors.set(`[data-focus-${name}]`, new Element());
   }
+  root.selectors.set('[data-focus-aliases-row]', new Element());
   const record: PreparedGalaxyRecord = { id: 'catalogue:galaxy', detailedObjectId: 'prepared-galaxy', name: 'Prepared galaxy', aliases: [], status: 'confirmed',
     positionM: [0, 0, 0], skyPosition: { raDeg: 0, decDeg: 0, sourceRef: 'observations' },
     distance: { valuePc: 50000, sourceRef: 'observations', method: 'Published distance' }, membership: { group: 'local-group', subgroup: 'milky-way', basis: 'Published membership' } };
@@ -103,7 +104,11 @@ test('a nebula focus keeps classification out of the title and preserves the sha
   const f = fixture();
   const { membership: _membership, ...common } = f.record;
   f.card.set({ ...common, kind: 'nebula', detailedObjectId: 'prepared-galaxy',
+    aliases: ['Example 1'], introduction: { text: 'A source-backed introduction to this nebula.', sourceRefs: ['observations'] },
     classification: { name: 'Emission nebula', basis: 'Conditional image reconstruction.', sourceRef: 'observations' } }, [], f.presentation);
+  assert.equal(f.root.querySelector('[data-focus-introduction]')?.textContent, 'A source-backed introduction to this nebula.');
+  assert.equal(f.root.querySelector('[data-focus-aliases]')?.textContent, 'Example 1');
+  assert.equal(f.root.querySelector('[data-focus-aliases-row]')?.hidden, false);
   assert.equal(f.root.querySelector('[data-focus-status]')?.textContent, '');
   assert.equal(f.root.querySelector('[data-focus-status]')?.hidden, true);
   assert.equal(f.root.querySelector('[data-focus-membership]')?.textContent, 'Milky Way');

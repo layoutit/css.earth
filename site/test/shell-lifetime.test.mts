@@ -492,7 +492,7 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   browser.selectors.set('[data-galactic-overview]', galaxy);
   browser.selectors.set('[data-system-results]', system);
   browser.selectors.set('[data-prepared-focus-card]', card); drawer.selectors.set('[data-prepared-focus-card]', card);
-  const names = ['name','aliases','status','distance','uncertainty','membership','association','basis','reference'];
+  const names = ['name','aliases','introduction','status','distance','uncertainty','membership','association','basis','reference'];
   for (const name of names) card.selectors.set(`[data-focus-${name}]`, new Element());
   card.selectors.set('[data-focus-fact-label=distance]', new Element());
   const links = [new Element(), new Element(), new Element()];
