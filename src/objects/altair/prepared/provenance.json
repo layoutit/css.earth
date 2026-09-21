@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ddfa286acc06698b04473aec70c848ec22905dbd6a740300e7303914b469221e"
+    "sha256": "514926456808940e225e08a9e12f2633eac6ab504c339969d7fc573f9ba04e3b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -221,8 +221,8 @@
           }
         ]
       },
-      "sha256": "d31c0291d00f4760f6ccf3affdb007e5199016bfdfbcb8edc16adb0fde626ce3",
-      "bytes": 1078,
+      "sha256": "24e7fafdc73268b218460da72a85e454e4c3592e55f41181b3d903cc52a9e683",
+      "bytes": 1688,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -488,7 +488,7 @@
   },
   "lastPreparation": {
     "objectId": "altair",
-    "materialSha256": "da9846161bc29c8b8a21e8d2646f8f2a66b83e24046e3ce0296839f8616d53c5",
+    "materialSha256": "c1a4af1a5a9e2f885547b1feedfe1396798357371c2b6f6e8c374814997d21d9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

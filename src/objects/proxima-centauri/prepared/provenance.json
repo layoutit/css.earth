@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b753e5683437491357469bf3177d38235b1dd2326db252ba405ce2bc12eddff0"
+    "sha256": "9e994e3e556d25e20d19c9e57968906befcba3757e716ec64ab4a37d09e24220"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "e1312dc040e72148488251cc8cdcb2ad1c120bf69e187539d31f26d88932b5f3"
+    "bindingsSha256": "a5ac026a56144bce26c5548435313e0b2e4f8dbef5e576fb91db96bf290d7b17"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "9c8aebb9ded1ebf935060e63188e95e344b3cfc81248ddde42e4ccbb0e750044",
+      "sha256": "010d907d8de02c69b74e2167d102b85dc32f7bad7d7501be650783d120a1b247",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/proxima-centauri/",
@@ -47,7 +47,7 @@
             "science": {
               "kind": "stellar-photometric-color",
               "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
-              "qualification": "Uniform photosphere colour from the star's VLT/X-shooter spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
+              "qualification": "Uniform photosphere colour from the star's HST/STIS spectrum (LowLib). The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
             }
           }
         ],
@@ -83,7 +83,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "79a325f2b491ea7c3bb0e066a457fecafb670570105e3905eba11447b167546f",
+      "sha256": "d795a0aaa840c870961d62bfd2568ed704d17ded164563145bc3205be22096bf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -127,17 +127,17 @@
             {
               "id": "color",
               "label": "Color",
-              "qualification": "Colour from a measured spectrum of the star (VLT/X-shooter). The disc is unresolved, and no darkening toward the edge is measured.",
+              "qualification": "Colour from Hubble's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured.",
               "thumbnail": "proxima-centauri-lens-color.webp",
               "surface": "proxima-centauri-surface-color@2x.webp",
               "poles": "proxima-centauri-poles-color@2x.webp",
               "source": {
                 "id": "proxima-centauri-stellar-color",
                 "path": "../manifest.json",
-                "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34"
+                "url": "https://doi.org/10.17909/kmdt-pw63"
               },
               "falseColor": false,
-              "notes": "The colour of Proxima Centauri's VLT/X-shooter spectrum. ESO's Very Large Telescope observed it on 15 January 2014; Proxima flares, so this is one moment. No resolved image of the surface is cast here."
+              "notes": "The colour of the Hubble Space Telescope's STIS spectrum of Proxima Centauri from 26 April 2015; Proxima flares, so this is one moment."
             }
           ]
         },
@@ -156,8 +156,8 @@
           {
             "label": "Spectrum",
             "role": "facts",
-            "description": "X-Shooter Spectral Library DR3: MD021 (Proxima Centauri)",
-            "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34"
+            "description": "HST LowLib GJ 551 (programme 13776)",
+            "href": "https://doi.org/10.17909/kmdt-pw63"
           }
         ],
         "provenance": {
@@ -181,8 +181,8 @@
       "kind": "source-input",
       "id": "proxima-centauri-stellar-color",
       "path": "photometry/stellar-color.json",
-      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34",
-      "credit": "Verro et al. (2022), A&A 660, A34 (X-Shooter Spectral Library DR3); VizieR J/A+A/660/A34; CIE 1931 2° observer",
+      "origin": "https://doi.org/10.17909/kmdt-pw63",
+      "credit": "NASA/STScI; HST Low Resolution Stellar Library (LowLib, Worthey), programme 13776; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
       "redistribution": "Method record only",
@@ -190,7 +190,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "xsl-dr3-md021",
+            "catalogueId": "hst-lowlib-gj551",
             "role": "material",
             "evidence": "src/objects/proxima-centauri/source/photometry/stellar-color.json#/measuredSpectrum"
           },
@@ -201,8 +201,8 @@
           }
         ]
       },
-      "sha256": "777962b8783673899b27d6b12fcd65f2e207c41fb886dcfa475ff3ede4fef7bb",
-      "bytes": 973,
+      "sha256": "5792a3847eb1f705dc08ea74f91043c160b31fcb84a4e3adf3ae25f546bedb80",
+      "bytes": 1614,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -250,8 +250,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "79a325f2b491ea7c3bb0e066a457fecafb670570105e3905eba11447b167546f",
-      "bytes": 3169,
+      "sha256": "d795a0aaa840c870961d62bfd2568ed704d17ded164563145bc3205be22096bf",
+      "bytes": 3022,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -268,7 +268,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Colour from a measured spectrum of the star (VLT/X-shooter). The disc is unresolved, and no darkening toward the edge is measured."
+        "Colour from Hubble's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured."
       ],
       "lensIds": [
         "color"
@@ -287,19 +287,19 @@
         {
           "url": "/scenes/proxima-centauri/proxima-centauri-surface-color@2x.webp",
           "bytes": 178,
-          "sha256": "e4f02a9df46f81c555251725068eacec6e3e92faacb3c1f959eec75d93c6982f",
+          "sha256": "fa9af3dcf5fbb67a08d1f56fbffe0821dd102be80f38eedfeaecc76862503dfb",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proxima-centauri/proxima-centauri-lens-color.webp",
           "bytes": 44,
-          "sha256": "edca032595fef144dff2f9c563139c20416bbd6f5e17cee5ca6423fd536038de",
+          "sha256": "2172156ae50ed344ff3dd542b15cd68b7900e03b84c23871ee1d3fe273b93e2b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proxima-centauri/proxima-centauri-poles-color@2x.webp",
           "bytes": 1340,
-          "sha256": "ae67fb897b1666ff3defd2075279ca34ae076a2e939d0d355e27a613721ee7e2",
+          "sha256": "89c85496d94ad2e87485414b9677b1fff797839ce21a9ac5855474df1040fdfa",
           "verification": "bytes-verified"
         },
         {
@@ -343,8 +343,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9954,
-          "sha256": "97f03f014bb555b4ee18ae7ac6d974943d849632f724389e0694cfb70869eba9",
+          "bytes": 9912,
+          "sha256": "f4bbc39f15bbd17ec89d84ab7cc1109d3cb2b166b438548f7bfeec419145dd30",
           "verification": "bytes-verified"
         }
       ],
@@ -370,7 +370,7 @@
         {
           "url": "object:prepared/minimaps/color.webp",
           "bytes": 448,
-          "sha256": "285cab649a4e789411c8bc41672fc11d16c62be7aa1d3f8a75e2e1323caba6af",
+          "sha256": "586ac6ed67995cac9a1343a98489beed61890db8b6be1f6f63658731a93c3fb2",
           "verification": "bytes-verified"
         }
       ]
@@ -382,11 +382,11 @@
   },
   "lastPreparation": {
     "objectId": "proxima-centauri",
-    "materialSha256": "19752c2c97186b06d6dc133496278882595bbf2830d99984cb119d21330403b1",
+    "materialSha256": "8dd8c4a2a12d3810575cbbab3a1b7f1b1d1612e3cf4bdb71f963e5c716a2b2be",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "e1312dc040e72148488251cc8cdcb2ad1c120bf69e187539d31f26d88932b5f3"
+      "bindingsSha256": "a5ac026a56144bce26c5548435313e0b2e4f8dbef5e576fb91db96bf290d7b17"
     }
   }
 }

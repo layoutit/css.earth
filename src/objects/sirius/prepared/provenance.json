@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9ec02e8aca8fc27aa2c6038232898376eb50d1ad56e524dc8172698afcfaf40d"
+    "sha256": "403e42f9aeed71b8099e946f74cfac2b065d97191e7e9d4e2811e02f12226aa4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -220,8 +220,8 @@
           }
         ]
       },
-      "sha256": "169976ccf76899d225497a149f6df015cb9b6b36a636c4d3f819da6c119a2ee0",
-      "bytes": 1073,
+      "sha256": "d2b9218b71acce1cb72e72df8e7073058cb95a25caa7aa34c54b4e5ec292201e",
+      "bytes": 1481,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -466,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "sirius",
-    "materialSha256": "70eb7379783799327944728a9ebd2bc7f1bfe56723f339b5178a7d02202beae5",
+    "materialSha256": "40a74093a70f96fc1ff6a356ffcb718c5807141f2eb786baca18afafca03ab10",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

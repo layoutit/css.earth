@@ -175,8 +175,8 @@
     {
       "id": "polaris-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1018,
-      "expectedSha256": "b047df29e6075b810b9e05ea0e2c5e85b0584696a31717e8f8135308f613fe80",
+      "expectedBytes": 1587,
+      "expectedSha256": "7ca4660180fb71728942f568850ce351d2f2b7bcf0a647ef2457f5d5514b3b73",
       "origin": "https://archive.stsci.edu/prepds/stisngsl/",
       "credit": "NASA/STScI; STIS Next Generation Spectral Library v2 (Heap & Lindler), MAST; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -257,6 +257,34 @@
           }
         ]
       }
+    },
+    {
+      "id": "polaris-crosscheck-spectrum",
+      "path": "photometry/crosscheck-kharitonov-catalog.dat",
+      "expectedBytes": 798312,
+      "expectedSha256": "e7cc5be688f5e901665debb10a296230ab8ff59b6288c7ed5965821217b0c28d",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+      "credit": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars, Alma-Ata; VizieR III/202 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-202-kharitonov-74",
+            "role": "material",
+            "evidence": "src/objects/polaris/source/photometry/crosscheck-kharitonov-catalog.dat"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -300,8 +328,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1415,
-      "expectedSha256": "41194ecd64df7de69f3217d5aeb9f30c5126ab1c6e75a55a3e4c2f62554c674d"
+      "expectedBytes": 1649,
+      "expectedSha256": "ed3726c2bf1630f76193c10aebade5b0c4980b9b89f8f4b7a50bd8b02ae52a6c"
     },
     {
       "path": "preparation/navigation.json",

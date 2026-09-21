@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5428f240d78b2f6fe6c050ad121b0007fb7e3510709d1a656c51a83093d1f28e"
+    "sha256": "d58ae95df4a7c0a559a18de946fff1890e6af3aeb80cab61b6cb933026f5c1b1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -201,8 +201,8 @@
           }
         ]
       },
-      "sha256": "87812b9f95f5e6df2a1db27ddb14ffa82465a5f5c26d84c62882197d41df57b7",
-      "bytes": 1076,
+      "sha256": "900a353f8d2c694405bb3b7a34ff02ca44f509d53d7a29399faa9a30cb1fa43f",
+      "bytes": 1647,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -382,7 +382,7 @@
   },
   "lastPreparation": {
     "objectId": "rigel",
-    "materialSha256": "bf1819d2a25de58483b3827cb3b60d113e0f176b2c22507899f4f540a92e2cde",
+    "materialSha256": "851305b1255f0cc2e38be0b5e09b586fae118b9f49bc75938495602b75a6a188",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

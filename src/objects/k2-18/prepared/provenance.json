@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3659909072c35f582c3ba34f037394443c57a147e38aaf996e8af1bff77ed087"
+    "sha256": "3bede12078bedf4aa85360507df2a255b775ddfbec19ffcd0f7f6a7e0c01c970"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -220,8 +220,8 @@
           }
         ]
       },
-      "sha256": "40f0a17acc305677aa10383986d7958cbf19782b28b807872cd752f14d1d558c",
-      "bytes": 920,
+      "sha256": "d59c4e1eaa04798c6dc3f71111856f2c56b69ea2198e39b8d1bb839fccf711f4",
+      "bytes": 1399,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -466,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "k2-18",
-    "materialSha256": "078341c0f7fe916034e313a53dc80d3c1f1a86057fdb2044cdb04ed21902cae4",
+    "materialSha256": "0de411d40821175615268148ce261ee596c2793e26a74108eb70ce46a0f063c2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

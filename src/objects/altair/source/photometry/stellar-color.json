@@ -20,5 +20,28 @@
     "note": "Ground-based photoelectric scans by Pulkovo astronomers, combined into one absolute energy distribution per star with a stated accuracy of 1.5-2%. The catalogue gives no observation dates. HR 7557's column is read from the raw flux file, which lists seven stars per block."
   },
   "whitePoint": "sRGB D65",
-  "normalization": "brightest linear sRGB channel = 1"
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Burnashev (1985), record 593: a Crimean scan of 1982",
+    "spectrum": {
+      "path": "photometry/crosscheck-III_126_part2.dat.gz",
+      "format": "burnashev-records",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "angstrom"
+      },
+      "flux": {
+        "column": "593",
+        "kind": "log10",
+        "missing": -9.999999
+      },
+      "gaps": [
+        {
+          "fromNm": 750,
+          "toNm": 780,
+          "reason": "the scan ends near 755 nm; the last value is held to 780 nm, where the observer adds little"
+        }
+      ]
+    }
+  }
 }

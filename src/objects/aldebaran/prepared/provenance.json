@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6fe724d50b109b80bd8ea8bad533e1fcfe324c79780c63ebbbec79822c041577"
+    "sha256": "87dcaf73eabf35f916d4c3b26c8bf439b3d0ead315680e1aaf7b813e96fde5df"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -220,8 +220,8 @@
           }
         ]
       },
-      "sha256": "a13cf072415614ee767fb16cc6b8b9b1eabb004731c3d4c5d669ad9343fa4156",
-      "bytes": 1044,
+      "sha256": "d529b2b2f03f7f070b075d3886ebac9a6e68ef201e8d2e7b723abf77217e78c0",
+      "bytes": 1654,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -466,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "aldebaran",
-    "materialSha256": "4cefab0713b186260ad48c410e415a06ef717c4dbcff626daf24c077d4fe892c",
+    "materialSha256": "af1f56e4d2576b51edc6b9bac12f2a680c66822964d892309e813fc4acc91fb6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

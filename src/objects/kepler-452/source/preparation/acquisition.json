@@ -54,6 +54,15 @@
           "replacement": ""
         }
       ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/crosscheck-lamost-247708059.fits.gz",
+      "url": "https://www.lamost.org/dr11/v2.0/spectrum/fits/247708059"
     }
   ]
 }

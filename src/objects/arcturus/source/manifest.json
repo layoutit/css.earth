@@ -169,8 +169,8 @@
     {
       "id": "arcturus-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1082,
-      "expectedSha256": "3a2d456deb3ceb339386e65b7708213d4c02123abfa754003f9333466e02b5e5",
+      "expectedBytes": 1501,
+      "expectedSha256": "a830f39badc943920396b740681272a21c4e91ebba2f4720ef8db4f62ac2e339",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
       "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -251,6 +251,34 @@
           }
         ]
       }
+    },
+    {
+      "id": "arcturus-crosscheck-spectrum",
+      "path": "photometry/crosscheck-kiehling-5340.tsv",
+      "expectedBytes": 6086,
+      "expectedSha256": "6b879cf8cb57bc67ed08bab2f7daeeb469ba8ff0b67584ddffe77a581ede8c25",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-124-kiehling-hr5340",
+            "role": "material",
+            "evidence": "src/objects/arcturus/source/photometry/crosscheck-kiehling-5340.tsv"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -294,8 +322,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1373,
-      "expectedSha256": "43c5ddb29f505671d17fd7c2b2382bb66aac69cad099424517884ff687b83dad"
+      "expectedBytes": 2026,
+      "expectedSha256": "29e67f27dde5256e194f37c280fa0a53f219c636950164bac20cce1a45fbf570"
     },
     {
       "path": "preparation/navigation.json",

@@ -21,5 +21,22 @@
     "note": "Ground-based fibre spectrum taken 2014-03-21, 370-910 nm with a relative flux calibration, which is all a colour needs. The header carries a fibre warning (FIB_MASK 192); both pixel masks are zero."
   },
   "whitePoint": "sRGB D65",
-  "normalization": "brightest linear sRGB channel = 1"
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "LAMOST DR11 spectrum 400516214 (2016-01-04): the same survey on another night, not a different instrument",
+    "spectrum": {
+      "path": "photometry/crosscheck-lamost-400516214.fits.gz",
+      "format": "fits-table-array",
+      "extension": "COADD",
+      "wavelength": {
+        "column": "WAVELENGTH",
+        "unit": "angstrom"
+      },
+      "flux": {
+        "column": "FLUX",
+        "kind": "flux"
+      },
+      "gaps": []
+    }
+  }
 }

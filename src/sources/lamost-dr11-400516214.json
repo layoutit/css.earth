@@ -1,0 +1,36 @@
+{
+  "id": "lamost-dr11-400516214",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "LAMOST DR11 v2.0 spectrum 400516214",
+  "identifiers": [
+    {
+      "type": "LAMOST obsid",
+      "value": "400516214"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.lamost.org/dr11/v2.0/",
+      "label": "LAMOST DR11"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.lamost.org/dr11/v2.0/spectrum/fits/400516214",
+      "checkedOn": "2026-09-21",
+      "locator": "COADD binary table, one row: WAVELENGTH (Angstrom, vacuum), FLUX (relative)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "LAMOST DR11 (National Astronomical Observatories, Chinese Academy of Sciences); Cui et al. (2012), RAA 12, 1197",
+      "scope": "citation",
+      "evidence": "https://www.lamost.org/dr11/v2.0/"
+    }
+  ],
+  "publisher": "National Astronomical Observatories, Chinese Academy of Sciences"
+}

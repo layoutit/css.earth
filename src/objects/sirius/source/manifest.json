@@ -169,8 +169,8 @@
     {
       "id": "sirius-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1073,
-      "expectedSha256": "169976ccf76899d225497a149f6df015cb9b6b36a636c4d3f819da6c119a2ee0",
+      "expectedBytes": 1481,
+      "expectedSha256": "d2b9218b71acce1cb72e72df8e7073058cb95a25caa7aa34c54b4e5ec292201e",
       "origin": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
       "credit": "NASA/STScI HST CALSPEC; flux scale Bohlin et al. (2020), AJ 160, 21; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -251,6 +251,34 @@
           }
         ]
       }
+    },
+    {
+      "id": "sirius-crosscheck-spectrum",
+      "path": "photometry/crosscheck-table5.dat",
+      "expectedBytes": 935951,
+      "expectedSha256": "9deaea527750d81f89d9f61476ae3fd6a40166da8f401071ff6b2d5c9aea6e88",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
+      "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-201-pulkovo-spectrophotometry",
+            "role": "material",
+            "evidence": "src/objects/sirius/source/photometry/crosscheck-table5.dat"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -294,8 +322,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1415,
-      "expectedSha256": "ebf7676ed2abd2a9384c3af6c6a3490d119eccaec706eb55b40eb8491b61133b"
+      "expectedBytes": 1636,
+      "expectedSha256": "0d4126e3b4eaad43d4476720f879e05b6943a239b29caa2e12eb8cf0ee77671e"
     },
     {
       "path": "preparation/navigation.json",

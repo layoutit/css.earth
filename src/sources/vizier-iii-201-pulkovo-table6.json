@@ -1,0 +1,36 @@
+{
+  "id": "vizier-iii-201-pulkovo-table6",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Pulkovo spectrophotometric catalog of bright stars, 320-735 nm (VizieR III/201, table6.dat)",
+  "identifiers": [
+    {
+      "type": "VizieR III/201 file",
+      "value": "table6.dat"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
+      "label": "VizieR III/201"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/III/201/table6.dat",
+      "checkedOn": "2026-09-21",
+      "locator": "table6.dat: blocks of seven stars introduced by their HR numbers; each line a wavelength in nm and seven absolute fluxes"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS)",
+      "scope": "citation",
+      "evidence": "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

@@ -902,8 +902,8 @@
     {
       "id": "ce-tauri-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1178,
-      "expectedSha256": "04a519a1245beb80b012b83e9c0876e2925cebd1d29641d9deaa9e9cd0c455b8",
+      "expectedBytes": 1842,
+      "expectedSha256": "eeb7ed20e2528dfe83daa9f43c2328c7d001bf6275e6fc0fcf5ddc1a154b9642",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/126",
       "credit": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -956,6 +956,34 @@
           }
         ]
       }
+    },
+    {
+      "id": "ce-tauri-crosscheck-spectrum",
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled.csv",
+      "expectedBytes": 10196,
+      "expectedSha256": "3b31d407de7e7f3355ad9df89e69c9c5114861e2b0010292fe2137d51a9d0488",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3400796031719045632&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-xp-3400796031719045632",
+            "role": "material",
+            "evidence": "src/objects/ce-tauri/source/photometry/crosscheck-gaia-dr3-xp-sampled.csv"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -994,8 +1022,8 @@
       }
     },
     {
-      "expectedBytes": 6165,
-      "expectedSha256": "4d855a9fd24a15b69d2c86ff576db69f31dae7f71b06368eb55a8391af562ae4",
+      "expectedBytes": 6484,
+      "expectedSha256": "d6d257fa3f98ea168d6c3cbba64673054731781fc3dca306eab0e632a608d443",
       "path": "preparation/acquisition.json"
     },
     {

@@ -25,5 +25,21 @@
     "note": "Space spectrophotometry, a CALSPEC flux standard. Between 380 and 780 nm every sample is STIS measurement. Rows with DATAQUAL 0 are left out."
   },
   "whitePoint": "sRGB D65",
-  "normalization": "brightest linear sRGB channel = 1"
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Pulkovo spectrophotometric catalogue, HR 7001: ground-based scans, independent of Hubble",
+    "spectrum": {
+      "path": "photometry/crosscheck-table5.dat",
+      "format": "pulkovo-blocks",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "7001",
+        "kind": "flux"
+      },
+      "gaps": []
+    }
+  }
 }

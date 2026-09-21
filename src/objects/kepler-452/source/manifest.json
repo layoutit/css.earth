@@ -169,8 +169,8 @@
     {
       "id": "kepler-452-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1145,
-      "expectedSha256": "77ce0bd1915f6bdc59c7ce55f9124033e968bbb4d59a375bbe97547f2190a81f",
+      "expectedBytes": 1584,
+      "expectedSha256": "e99876692dcec380d3a5a5620087aa0234148a6ecd918a4750f52bd6f39c4ad2",
       "origin": "https://gea.esac.esa.int/archive/",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -251,6 +251,34 @@
           }
         ]
       }
+    },
+    {
+      "id": "kepler-452-crosscheck-spectrum",
+      "path": "photometry/crosscheck-lamost-247708059.fits.gz",
+      "expectedBytes": 58344,
+      "expectedSha256": "43e63e6c7ba637ad35869f5784bc58b7d460b392bcc69f52a1ed05bce15d3bad",
+      "origin": "https://www.lamost.org/dr11/v2.0/spectrum/fits/247708059",
+      "credit": "LAMOST DR11 (National Astronomical Observatories, Chinese Academy of Sciences); Cui et al. (2012), RAA 12, 1197",
+      "license": "LAMOST public data release: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.lamost.org/dr11/v2.0/"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lamost-dr11-247708059",
+            "role": "material",
+            "evidence": "src/objects/kepler-452/source/photometry/crosscheck-lamost-247708059.fits.gz"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -294,8 +322,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1463,
-      "expectedSha256": "944501d83a17b9098262c5cad8a377d62006f5f635db34c3bd041896f8189d40"
+      "expectedBytes": 1702,
+      "expectedSha256": "6cee9e47b746b221e3d31b9a742368f1c3f3d13cc2b0243d962872dd626fc307"
     },
     {
       "path": "preparation/navigation.json",

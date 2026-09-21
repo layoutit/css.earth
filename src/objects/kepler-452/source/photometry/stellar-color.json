@@ -12,5 +12,22 @@
     "note": "Gaia's own low-resolution spectrum of the star, calibrated to absolute flux. Its samples at the even wavelengths from 380 to 780 nm are weighted by the CIE 1931 2-degree observer. The range in the prepared report is the colour of the spectrum moved one standard error down and up at every sample."
   },
   "whitePoint": "sRGB D65",
-  "normalization": "brightest linear sRGB channel = 1"
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "LAMOST DR11 spectrum 247708059 (2014-09-13, relative calibration)",
+    "spectrum": {
+      "path": "photometry/crosscheck-lamost-247708059.fits.gz",
+      "format": "fits-table-array",
+      "extension": "COADD",
+      "wavelength": {
+        "column": "WAVELENGTH",
+        "unit": "angstrom"
+      },
+      "flux": {
+        "column": "FLUX",
+        "kind": "flux"
+      },
+      "gaps": []
+    }
+  }
 }

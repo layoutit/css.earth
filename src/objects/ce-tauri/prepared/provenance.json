@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d4b2700a3cd1a4befc6c3a7805a0fcd8514b54633376e888e3098e616d30a0ed"
+    "sha256": "f5871b8bd6d7393c2b092556352001f3588a79c412aee66b487729d89ce5e2b3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -676,8 +676,8 @@
           }
         ]
       },
-      "sha256": "04a519a1245beb80b012b83e9c0876e2925cebd1d29641d9deaa9e9cd0c455b8",
-      "bytes": 1178,
+      "sha256": "eeb7ed20e2528dfe83daa9f43c2328c7d001bf6275e6fc0fcf5ddc1a154b9642",
+      "bytes": 1842,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1129,7 +1129,7 @@
   },
   "lastPreparation": {
     "objectId": "ce-tauri",
-    "materialSha256": "f09f57ad6b51a34e7143df1380675a0187ac032a0ac43c2b58df9b925997fb8d",
+    "materialSha256": "ccfeb1c8787170e62dd5d87542712f859b4a0ee29a298db61c7f0e7404dc7be8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

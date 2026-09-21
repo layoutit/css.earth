@@ -9,6 +9,7 @@ import { dirname, relative, resolve } from 'node:path';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from './source-values.mts';
 import { TODO, starStylesheet } from './objects/new-star.mts';
 import { readStarTemperature, temperatureCatalogueColor } from './objects/star-catalogue-color.mts';
+import { CROSS_CHECK_AGREEMENT } from './objects/observation/stellar-photometric-color.mts';
 
 const root = resolve(import.meta.dirname, '..');
 const objectsDirectory = resolve(root, 'src/objects');
@@ -97,9 +98,21 @@ test('every placed star states its catalogue distance, colour and stylesheet fro
     const raster = requireRecord(JSON.parse(await readFile(resolve(directory, 'source/preparation/raster.json'), 'utf8')) as unknown);
     const measured = requireArray(raster.surfaces).map(surface => requireRecord(surface)).find(surface => isRecord(surface.science) && surface.science.kind === 'stellar-photometric-color');
     if (measured) {
-      const lenses = requireRecord(JSON.parse(await readFile(resolve(directory, 'prepared/lenses.json'), 'utf8')) as unknown);
-      const control = requireArray(lenses.controls).map(value => requireRecord(value)).find(value => value.id === measured.id);
-      assert.equal(catalog.color, control?.billboardColor, `${id}: the catalogue colour is the prepared colour of its measured ${String(measured.id)} lens`);
+      // The colour the preparation report records for the lens: the measured disc colour, before any gravity darkening by latitude.
+      const reports: Record<string, unknown>[] = [];
+      const walkReports = (value: unknown) => { if (isRecord(value)) { if (isRecord(value.stellarPhotometricColor)) reports.push(value.stellarPhotometricColor); Object.values(value).forEach(walkReports); } else if (Array.isArray(value)) value.forEach(walkReports); };
+      walkReports(JSON.parse(await readFile(resolve(directory, 'prepared/assets.json'), 'utf8')) as unknown);
+      const srgb = requireArray(reports[0]?.srgb).map(value => requireFiniteNumber(value));
+      assert.equal(catalog.color, `#${srgb.map(value => value.toString(16).padStart(2, '0')).join('')}`, `${id}: the catalogue colour is the prepared colour of its measured ${String(measured.id)} lens`);
+      // An independent second spectrum, when the colour record names one, agrees within the threshold or the record says why not.
+      const colorRecord = requireRecord(JSON.parse(await readFile(resolve(directory, 'source', requireString(measured.source)), 'utf8')) as unknown);
+      if (colorRecord.crossCheck !== undefined) {
+        const cross = reports.map(report => report.crossCheck).find(isRecord);
+        assert.ok(cross, `${id}: the prepared report records the cross-check the colour record names`);
+        const difference = requireFiniteNumber(cross.maxChannelDifference);
+        assert.ok(difference <= CROSS_CHECK_AGREEMENT || typeof requireRecord(colorRecord.crossCheck).disagreement === 'string',
+          `${id}: the second spectrum differs by ${difference} levels and the record states no disagreement`);
+      }
       // A model limb-darkening law is read at the temperature and gravity the measurement record cites.
       const limb = requireRecord(measured.science).limbDarkening;
       if (isRecord(limb) && isRecord(limb.grid) && limb.path === 'photometry/claret-2011-v-quadratic.tsv') {

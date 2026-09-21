@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4749acfb602db0ddff1c9a3d9fca116811cf2b379c39c874271685dab4c0e5dd"
+    "sha256": "340cad637a6f795a10fe8f53f0143372447c89198591d1ff0849b536fd8c39b0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -220,8 +220,8 @@
           }
         ]
       },
-      "sha256": "77ce0bd1915f6bdc59c7ce55f9124033e968bbb4d59a375bbe97547f2190a81f",
-      "bytes": 1145,
+      "sha256": "e99876692dcec380d3a5a5620087aa0234148a6ecd918a4750f52bd6f39c4ad2",
+      "bytes": 1584,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -466,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "kepler-452",
-    "materialSha256": "a8d3e556cc1504199b0d4b3e27be8eda37d4ce1e24a59565605b1f134418ad16",
+    "materialSha256": "51e0130500b0e984688ada234c9fafb028bb6f8950f286af5ba368cf5e051827",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

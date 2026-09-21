@@ -21,5 +21,27 @@
     "note": "Ground-based photoelectric spectrophotometry, published as magnitudes normalised to the star's own flux near 555 nm; read here as flux 10^(-0.4 m). The calibration is relative, which is all a colour needs. The catalogue gives no observation dates."
   },
   "whitePoint": "sRGB D65",
-  "normalization": "brightest linear sRGB channel = 1"
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Pulkovo spectrophotometric catalogue, table 6, HR 5460 (320-735 nm)",
+    "spectrum": {
+      "path": "photometry/crosscheck-table6.dat",
+      "format": "pulkovo-blocks",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "5460",
+        "kind": "flux"
+      },
+      "gaps": [
+        {
+          "fromNm": 735,
+          "toNm": 780,
+          "reason": "table 6 ends at 735 nm; the last value is held to 780 nm"
+        }
+      ]
+    }
+  }
 }

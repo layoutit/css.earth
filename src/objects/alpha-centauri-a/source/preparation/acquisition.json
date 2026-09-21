@@ -74,6 +74,15 @@
           "replacement": ""
         }
       ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/crosscheck-table6.dat",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/III/201/table6.dat"
     }
   ]
 }

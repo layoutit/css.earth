@@ -169,8 +169,8 @@
     {
       "id": "k2-18-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 920,
-      "expectedSha256": "40f0a17acc305677aa10383986d7958cbf19782b28b807872cd752f14d1d558c",
+      "expectedBytes": 1399,
+      "expectedSha256": "d59c4e1eaa04798c6dc3f71111856f2c56b69ea2198e39b8d1bb839fccf711f4",
       "origin": "https://www.lamost.org/dr11/v2.0/",
       "credit": "LAMOST DR11 (National Astronomical Observatories, Chinese Academy of Sciences); Cui et al. (2012), RAA 12, 1197; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -251,6 +251,34 @@
           }
         ]
       }
+    },
+    {
+      "id": "k2-18-crosscheck-spectrum",
+      "path": "photometry/crosscheck-lamost-400516214.fits.gz",
+      "expectedBytes": 42847,
+      "expectedSha256": "c1c164f23474464c6709d1168aaa17f8d5ec23e1b921c10462cce4ba81e5c029",
+      "origin": "https://www.lamost.org/dr11/v2.0/spectrum/fits/400516214",
+      "credit": "LAMOST DR11 (National Astronomical Observatories, Chinese Academy of Sciences); Cui et al. (2012), RAA 12, 1197",
+      "license": "LAMOST public data release: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.lamost.org/dr11/v2.0/"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lamost-dr11-400516214",
+            "role": "material",
+            "evidence": "src/objects/k2-18/source/photometry/crosscheck-lamost-400516214.fits.gz"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -294,8 +322,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1388,
-      "expectedSha256": "b8b40ab5b6f2c4186f8a982acfe14428007b419357139e6c7937e01b56ada0c8"
+      "expectedBytes": 1627,
+      "expectedSha256": "799c7942e8a42575e5f113190a14a73df4dd5a9397c0ab45abe97dacce3e02d6"
     },
     {
       "path": "preparation/navigation.json",

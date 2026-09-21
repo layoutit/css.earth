@@ -132,8 +132,30 @@ export function xpSampledColor(flux: readonly number[], colorMatching: Map<numbe
   return spectrumColor(wavelengths, sample, colorMatching, 'The XP spectrum colour');
 }
 
+/** An independent second spectrum of the same star, read the same way: its colour is reported beside the lens colour so a reader
+ * sees whether two instruments agree. `disagreement` states why, when they differ by more than the agreement threshold. */
+export const CROSS_CHECK_AGREEMENT = 12;
+export interface StellarColorCrossCheck { readonly source: string; readonly record: MeasuredSpectrumRecord; readonly disagreement?: string }
+export function parseStellarColorCrossCheck(value: unknown): StellarColorCrossCheck | undefined {
+  if (value === undefined) return undefined;
+  const input = requireRecord(value, 'crossCheck');
+  return { source: requireString(input.source, 'crossCheck.source'), record: parseMeasuredSpectrumRecord(input.spectrum),
+    ...(input.disagreement === undefined ? {} : { disagreement: requireString(input.disagreement, 'crossCheck.disagreement') }) };
+}
+
 export async function loadStellarPhotometricColor(read: (path: string) => Promise<Buffer>, science: Record<string, unknown>, sourcePath: string) {
-  const record = parseStellarColorRecord(JSON.parse((await read(sourcePath)).toString('utf8')));
+  const raw = JSON.parse((await read(sourcePath)).toString('utf8')) as unknown;
+  const record = parseStellarColorRecord(raw), crossRecord = parseStellarColorCrossCheck(requireRecord(raw).crossCheck);
+  const result = await loadStellarColorOnly(read, science, record);
+  if (!crossRecord) return { ...result, crossCheck: null };
+  const { parseCieTable } = await import('./disc-integrated-color.mts');
+  const colorMatching = parseCieTable((await read(requireString(science.colorMatching, 'science.colorMatching'))).toString('utf8'), 3);
+  const color = measuredSpectrumColor(readMeasuredSpectrum(await read(crossRecord.record.path), crossRecord.record), colorMatching, crossRecord.record.gaps);
+  const difference = Math.max(...color.srgb.map((value, channel) => Math.abs(value - result.color.srgb[channel]!)));
+  return { ...result, crossCheck: { source: crossRecord.source, srgb: color.srgb, maxChannelDifference: difference, ...(crossRecord.disagreement ? { disagreement: crossRecord.disagreement } : {}) } };
+}
+
+async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, science: Record<string, unknown>, record: StellarColorRecord) {
   const { parseCieTable } = await import('./disc-integrated-color.mts');
   const colorMatching = parseCieTable((await read(requireString(science.colorMatching, 'science.colorMatching'))).toString('utf8'), 3);
   const limbDarkening = science.limbDarkening === undefined ? null : await (async () => {
@@ -182,13 +204,16 @@ export async function loadStellarPhotometricColor(read: (path: string) => Promis
 // - burnashev-records: the raw file of Burnashev's spectrophotometric compilation (VizieR III/126 part2.dat), one scan per line: a
 //   name in bytes 1-19, then from byte 59 pairs of a wavelength in tenths of a nanometre (I4) and log10 of the flux (F9.6), with
 //   -9.999999 for no data; `flux.column` is the record number, which is the line number.
+// - kharitonov-records: the Alma-Ata catalogue's raw file (VizieR III/202 catalog.dat), one star per line with 88 fluxes (I7) in
+//   bytes 80-695, 322.5 to 757.5 nm in 5 nm steps, zero for no data; `flux.column` is the running number, which is the line number.
+// - gaia-xp-sampled: a Gaia DataLink XP sampled CSV (readXpSampledSpectrum); `flux.column` is the source id.
 // A file stored gzip-compressed, as the archive serves it, is read through gunzip. Photometric scans published as magnitudes are
 // read as flux 10^(-0.4 m), and logarithmic fluxes as 10^value. Samples inside 380-780 nm are averaged into 1 nm bins; a
 // bin with no sample takes the straight line between neighbours within 5 nm. A longer stretch with no data inside the visible
 // range must be declared as a gap, with the reason, or the record fails.
 export interface MeasuredSpectrumRecord {
   readonly path: string;
-  readonly format: 'fits-table' | 'fits-table-array' | 'tsv-columns' | 'pulkovo-blocks' | 'burnashev-records';
+  readonly format: 'fits-table' | 'fits-table-array' | 'tsv-columns' | 'pulkovo-blocks' | 'burnashev-records' | 'kharitonov-records' | 'gaia-xp-sampled';
   /** FITS: the extension name, or its HDU number when it has none. */
   readonly extension?: string;
   readonly wavelength: { readonly column: string; readonly unit: 'angstrom' | 'nm' | 'um' };
@@ -198,7 +223,7 @@ export interface MeasuredSpectrumRecord {
   readonly gaps: readonly { readonly fromNm: number; readonly toNm: number; readonly reason: string }[];
 }
 
-const FORMATS = ['fits-table', 'fits-table-array', 'tsv-columns', 'pulkovo-blocks', 'burnashev-records'] as const;
+const FORMATS = ['fits-table', 'fits-table-array', 'tsv-columns', 'pulkovo-blocks', 'burnashev-records', 'kharitonov-records', 'gaia-xp-sampled'] as const;
 export function parseMeasuredSpectrumRecord(value: unknown): MeasuredSpectrumRecord {
   const input = requireRecord(value, 'measuredSpectrum');
   const format = requireString(input.format, 'measuredSpectrum.format');
@@ -233,7 +258,15 @@ export function readMeasuredSpectrum(stored: Buffer, record: MeasuredSpectrumRec
     if (record.flux.missing !== undefined && value === record.flux.missing) return;
     samples.push([wavelength * NM_PER_UNIT[record.wavelength.unit], toFlux(value)]);
   };
-  if (record.format === 'tsv-columns') {
+  if (record.format === 'gaia-xp-sampled') {
+    // As xpSampledColor does: a sample not above zero but within its noise floor is no emission; one further below fails.
+    const { flux, fluxError } = readXpSampledSpectrum(bytes.toString('utf8'), record.flux.column);
+    XP_SAMPLED_WAVELENGTHS_NM.forEach((wavelength, i) => {
+      const value = flux[i]!;
+      if (value <= 0 && !(Math.abs(value) <= NOISE_FLOOR_SIGMA * fluxError[i]!)) throw new TypeError(`The XP sample at ${wavelength} nm is below zero beyond its noise.`);
+      add(wavelength, Math.max(0, value));
+    });
+  } else if (record.format === 'tsv-columns') {
     const lines = bytes.toString('utf8').split(/\r?\n/u).filter(line => line.trim() && !line.startsWith('#'));
     const header = lines[0]!.split('\t').map(name => name.trim());
     const w = header.indexOf(record.wavelength.column), f = header.indexOf(record.flux.column);
@@ -243,6 +276,13 @@ export function readMeasuredSpectrum(stored: Buffer, record: MeasuredSpectrumRec
       if (cells[w]!.trim() === '' || !Number.isFinite(wavelength)) continue; // unit and dash rows
       if (cells[f]!.trim() === '') continue;
       add(wavelength, requireFiniteNumber(value, record.flux.column));
+    }
+  } else if (record.format === 'kharitonov-records') {
+    const line = bytes.toString('latin1').split(/\r?\n/u)[Number(record.flux.column) - 1];
+    if (!line || Number(line.slice(0, 4)) !== Number(record.flux.column)) throw new TypeError(`The Kharitonov file has no record ${record.flux.column}.`);
+    for (let k = 0; k < 88; k++) {
+      const cell = line.slice(79 + 7 * k, 86 + 7 * k).trim();
+      if (cell) add(322.5 + 5 * k, requireFiniteNumber(Number(cell), 'Kharitonov flux'));
     }
   } else if (record.format === 'burnashev-records') {
     const line = bytes.toString('latin1').split(/\r?\n/u)[Number(record.flux.column) - 1];
@@ -310,7 +350,7 @@ export function binMeasuredSpectrum(spectrum: { wavelengthsNm: readonly number[]
 export function measuredSpectrumColor(spectrum: { wavelengthsNm: readonly number[]; flux: readonly number[] }, colorMatching: Map<number, readonly number[]>,
   gaps: MeasuredSpectrumRecord['gaps'] = []): StellarColor {
   const binned = binMeasuredSpectrum(spectrum, gaps);
-  if (binned.some(value => !(value > 0))) throw new TypeError('The measured spectrum must be positive across the visible range.');
+  if (binned.some(value => !(value >= 0)) || !binned.some(value => value > 0)) throw new TypeError('The measured spectrum must be positive across the visible range, or zero where a faint star is not detected.');
   return spectrumColor(binned.map((_, i) => 380 + i), wavelength => binned[wavelength - 380]!, colorMatching, 'The measured spectrum colour');
 }
 

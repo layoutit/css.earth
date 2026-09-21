@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bc2452c3f272cf99abd55c2db5c44ba5861118b5f5a793633304d9b19f58e211"
+    "sha256": "149acf14ad977091bdeaa56c76e502d04e141bc74de45fd12ee6cf6614859156"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "7ef8120b51408b40af89ca3a7235ca25d0cd41239a4e4e5df048f0964ec0f3bc"
+    "bindingsSha256": "3cbd927a56c06225baeba188adf7b6683dcce775699fa079a03e4f45725a3431"
   },
   "recipes": [
     {
@@ -220,8 +220,8 @@
           }
         ]
       },
-      "sha256": "b047df29e6075b810b9e05ea0e2c5e85b0584696a31717e8f8135308f613fe80",
-      "bytes": 1018,
+      "sha256": "7ca4660180fb71728942f568850ce351d2f2b7bcf0a647ef2457f5d5514b3b73",
+      "bytes": 1587,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -351,7 +351,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Colour from a measured spectrum of the star (HST/STIS). The disc is unresolved, and no darkening toward the edge is measured."
+        "Colour from a measured spectrum of the star (HST/STIS). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement."
       ],
       "lensIds": [
         "color"
@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/polaris/polaris-limb-color@2x.webp",
-          "bytes": 84,
-          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "bytes": 97562,
+          "sha256": "54676f06f0535293d5e4d678113ee1fe3e3bcf87ef1350e8427f347d749ffd35",
           "verification": "bytes-verified"
         }
       ],
@@ -466,11 +466,11 @@
   },
   "lastPreparation": {
     "objectId": "polaris",
-    "materialSha256": "8ae6671ae61211f0c5a7e7685ca52228a8433204e51bda15fa05839c268a7784",
+    "materialSha256": "b380406b40298e15a949ddcd479f6d364d1b1c2efe0bc4ea3dab364eea64f918",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "7ef8120b51408b40af89ca3a7235ca25d0cd41239a4e4e5df048f0964ec0f3bc"
+      "bindingsSha256": "3cbd927a56c06225baeba188adf7b6683dcce775699fa079a03e4f45725a3431"
     }
   }
 }

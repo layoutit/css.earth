@@ -198,6 +198,15 @@
       ],
       "url": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
       "path": "photometry/III_126_part2.dat.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled.csv",
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3400796031719045632&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
     }
   ]
 }

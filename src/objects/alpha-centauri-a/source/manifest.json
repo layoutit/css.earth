@@ -169,8 +169,8 @@
     {
       "id": "alpha-centauri-a-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1058,
-      "expectedSha256": "28032dfabf03f747c05183351daff69fdeb6d178f850a15f04c15e5fec2e3bf0",
+      "expectedBytes": 1599,
+      "expectedSha256": "016761794d8c74d23af36b7e60e5da052d404fc8b99aca22ae88555f096fb9a9",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124",
       "credit": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -251,6 +251,34 @@
           }
         ]
       }
+    },
+    {
+      "id": "alpha-centauri-a-crosscheck-spectrum",
+      "path": "photometry/crosscheck-table6.dat",
+      "expectedBytes": 1096872,
+      "expectedSha256": "27a49fd34efe2b4f8fc38bd189401e7045c81a0dc1b40d3fb95c61ac8fb31082",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/201/table6.dat",
+      "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-201-pulkovo-table6",
+            "role": "material",
+            "evidence": "src/objects/alpha-centauri-a/source/photometry/crosscheck-table6.dat"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -294,8 +322,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1797,
-      "expectedSha256": "f1ba2ba460dfcacb4e18fabb93f0a4352a883ccface596f5863cb8934b99628d"
+      "expectedBytes": 2018,
+      "expectedSha256": "c511401dfffb0211b98dcdf55a1da14b33f5c74d74c1b238b6befdee8ba9e2c9"
     },
     {
       "path": "preparation/navigation.json",

@@ -21,5 +21,22 @@
     "note": "VLT/X-shooter spectrum taken 2009-10-12, ten years before the Great Dimming. It is not corrected for slit losses, which can tilt the overall shape; Kiehling (1987, VizieR III/124, HR 2061) gives a close colour from an independent scan."
   },
   "whitePoint": "sRGB D65",
-  "normalization": "brightest linear sRGB channel = 1"
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Kiehling (1987), HR 2061: an independent ground-based scan",
+    "spectrum": {
+      "path": "photometry/crosscheck-kiehling-2061.tsv",
+      "format": "tsv-columns",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "m(HR2061)",
+        "kind": "magnitude",
+        "missing": 99.999
+      },
+      "gaps": []
+    }
+  }
 }

@@ -169,8 +169,8 @@
     {
       "id": "altair-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1078,
-      "expectedSha256": "d31c0291d00f4760f6ccf3affdb007e5199016bfdfbcb8edc16adb0fde626ce3",
+      "expectedBytes": 1688,
+      "expectedSha256": "24e7fafdc73268b218460da72a85e454e4c3592e55f41181b3d903cc52a9e683",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
       "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -271,6 +271,34 @@
         "kind": "local",
         "reason": "Published model parameters transcribed in this package with their table cells; repinned when edited."
       }
+    },
+    {
+      "id": "altair-crosscheck-spectrum",
+      "path": "photometry/crosscheck-III_126_part2.dat.gz",
+      "expectedBytes": 506596,
+      "expectedSha256": "b031729b448d64e34a2801e208e7f22254cfe03a32ea8b9b5dc1dfac329d4d10",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
+      "credit": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-126-burnashev-593",
+            "role": "material",
+            "evidence": "src/objects/altair/source/photometry/crosscheck-III_126_part2.dat.gz"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -314,8 +342,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1373,
-      "expectedSha256": "6c98d2c508005de67c4bb963adb38b32d338b131b18dfdac88aef9f1fe775ca9"
+      "expectedBytes": 1606,
+      "expectedSha256": "a0c1293fca90bb2580b7850d58c4efbaf83597f4d18fb307a23b5cbce5b65684"
     },
     {
       "path": "preparation/navigation.json",

@@ -21,5 +21,28 @@
     "note": "Space spectrophotometry taken 2001-09-20. The header marks the spectrum good, with a slit offset of 0.815 pixel, under the 0.9 pixel limit for a reliable correction. Polaris is a low-amplitude Cepheid, so the colour is one moment of its 4-day cycle."
   },
   "whitePoint": "sRGB D65",
-  "normalization": "brightest linear sRGB channel = 1"
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Kharitonov et al. (1988), record 74: Alma-Ata scans",
+    "spectrum": {
+      "path": "photometry/crosscheck-kharitonov-catalog.dat",
+      "format": "kharitonov-records",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "74",
+        "kind": "flux",
+        "missing": 0
+      },
+      "gaps": [
+        {
+          "fromNm": 757,
+          "toNm": 780,
+          "reason": "the catalogue ends at 757.5 nm; the last value is held to 780 nm"
+        }
+      ]
+    }
+  }
 }
