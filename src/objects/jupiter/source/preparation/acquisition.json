@@ -135,6 +135,54 @@
       "expectedPath": "atmosphere/psg-jupiter-r240-rif.txt",
       "selector": "numeric-lines",
       "rowCount": 253
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/juno-mwr/MWRNH3A2016240070004_R00548_V01.CSV",
+      "url": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/DATA/NH3-DISTRIBUTION/MWRNH3A2016240070004_R00548_V01.CSV"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/juno-mwr/MWRNH3A2016240070004_R00548_V01.LBL",
+      "url": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/DATA/NH3-DISTRIBUTION/MWRNH3A2016240070004_R00548_V01.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/juno-mwr/MWRNH3U2016240070004_R00548_V01.CSV",
+      "url": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/DATA/NH3-DISTRIBUTION/MWRNH3U2016240070004_R00548_V01.CSV"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/juno-mwr/MWRNH3U2016240070004_R00548_V01.LBL",
+      "url": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/DATA/NH3-DISTRIBUTION/MWRNH3U2016240070004_R00548_V01.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/juno-mwr/MWR_J_NH3A_V01.FMT",
+      "url": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/LABEL/MWR_J_NH3A_V01.FMT"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/juno-mwr/MWR_J_NH3U_V01.FMT",
+      "url": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/LABEL/MWR_J_NH3U_V01.FMT"
     }
   ]
 }
