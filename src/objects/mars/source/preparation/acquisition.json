@@ -89,6 +89,22 @@
       ],
       "path": "features/traverses/msl_localized_pos.csv",
       "url": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/localized_pos.csv"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/mro-sharad-3d/slices/plane-x0640.dat",
+      "url": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/data/east_deuteronilus_mensae_3d_v2_time.dat"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/mro-sharad-3d/east_deuteronilus_mensae_3d_v2_observations.tab",
+      "url": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/index/east_deuteronilus_mensae_3d_v2_observations.tab"
     }
   ]
 }
