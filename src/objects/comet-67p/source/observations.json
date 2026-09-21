@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-source-observations@1",
+  "target": "comet-67p",
+  "observations": [
+    {
+      "id": "consert-4-fss-orbiter-geometry",
+      "telescope": "Rosetta",
+      "mode": "CONSERT/FSS geometry",
+      "kind": "table",
+      "archiveProductId": "RO/RL-C-CONSERT-4-FSS-V1.0:CN_G_O_FSS",
+      "decoder": "pds-product",
+      "familyProfile": "consert-fss-body-fixed-geometry@2019-02-19",
+      "labelPath": "telescopes/consert/cn_g_o_fss.lbl",
+      "inputs": [
+        { "input": "consert-fss-orbiter-geometry-table", "role": "science" },
+        { "input": "consert-fss-orbiter-geometry-label", "role": "label" }
+      ],
+      "identity": {
+        "DATA_SET_ID": "RO/RL-C-CONSERT-4-FSS-V1.0",
+        "PRODUCT_ID": "CN_G_O_FSS",
+        "TARGET_NAME": "67P/CHURYUMOV-GERASIMENKO 1 (1969 R1)",
+        "INSTRUMENT_ID": "CONSERT",
+        "INSTRUMENT_HOST_ID": "RO",
+        "PROCESSING_LEVEL_ID": "4"
+      },
+      "startIso": "2014-11-12T18:56:40Z",
+      "endIso": "2014-11-13T05:41:10Z",
+      "units": "km",
+      "meaning": "Archive-published Rosetta orbiter position at each CONSERT First Science Sequence measurement point, 15468 rows of SC_POS_X/Y/Z in kilometres. This is the orbiter end of each sounding path; the lander end is the paired CN_G_L_FSS product.",
+      "citation": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/catalog/dataset.cat",
+      "limitations": [
+        "The archive states the frame for these tables only in DATASET.CAT: 'The geometric data, composed of Rosetta and Philae position, velocity and attitude, are provided in the Comet Fixed Frame coordinate system.' The detached label does not repeat it.",
+        "The label's own SC_TARGET_POSITION_VECTOR and SC_SUN_POSITION_VECTOR keywords are a different frame from the table columns; DATASET.CAT gives them as Earth Mean Equator and Equinox of J2000, and the level-2 ERRATA.TXT states the label geometry keywords must not be used.",
+        "This product is positions only. The CONSERT propagation time is in the level-4 signal files, not here, so no delay, amplitude or quality value accompanies these rows.",
+        "Whether a given orbiter-to-lander path crosses the nucleus is a property of a shape model and is not asserted by this product.",
+        "The archived Philae position is the one known at delivery and is not updated when the localisation improves; Kofman et al. (2020, MNRAS 497, 2616) work from a position about 13 m from the archived one."
+      ]
+    },
+    {
+      "id": "consert-4-fss-lander-geometry",
+      "telescope": "Rosetta",
+      "mode": "CONSERT/FSS geometry",
+      "kind": "table",
+      "archiveProductId": "RO/RL-C-CONSERT-4-FSS-V1.0:CN_G_L_FSS",
+      "decoder": "pds-product",
+      "familyProfile": "consert-fss-body-fixed-geometry@2019-02-19",
+      "labelPath": "telescopes/consert/cn_g_l_fss.lbl",
+      "inputs": [
+        { "input": "consert-fss-lander-geometry-table", "role": "science" },
+        { "input": "consert-fss-lander-geometry-label", "role": "label" }
+      ],
+      "identity": {
+        "DATA_SET_ID": "RO/RL-C-CONSERT-4-FSS-V1.0",
+        "PRODUCT_ID": "CN_G_L_FSS",
+        "TARGET_NAME": "67P/CHURYUMOV-GERASIMENKO 1 (1969 R1)",
+        "INSTRUMENT_ID": "CONSERT",
+        "INSTRUMENT_HOST_ID": "RL",
+        "PROCESSING_LEVEL_ID": "4"
+      },
+      "startIso": "2014-11-12T18:56:40Z",
+      "endIso": "2014-11-13T05:41:10Z",
+      "units": "km",
+      "meaning": "Archive-published Philae lander position at each CONSERT First Science Sequence measurement point, 15468 rows of SC_POS_X/Y/Z in kilometres. This is the lander end of each sounding path; the orbiter end is the paired CN_G_O_FSS product.",
+      "citation": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/catalog/dataset.cat",
+      "limitations": [
+        "The archive states the frame for these tables only in DATASET.CAT: 'The geometric data, composed of Rosetta and Philae position, velocity and attitude, are provided in the Comet Fixed Frame coordinate system.' The detached label does not repeat it.",
+        "The label's own SC_TARGET_POSITION_VECTOR and SC_SUN_POSITION_VECTOR keywords are a different frame from the table columns; DATASET.CAT gives them as Earth Mean Equator and Equinox of J2000, and the level-2 ERRATA.TXT states the label geometry keywords must not be used.",
+        "The lander position is one fixed point for the whole sequence. It is the position known at delivery, not a re-derived one; Kofman et al. (2020, MNRAS 497, 2616) work from a position about 13 m away.",
+        "This product is positions only. The CONSERT propagation time is in the level-4 signal files, not here.",
+        "Whether a given lander-to-orbiter path crosses the nucleus is a property of a shape model and is not asserted by this product."
+      ]
+    }
+  ]
+}
