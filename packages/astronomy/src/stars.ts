@@ -5,6 +5,8 @@ import type { Vec3 } from './vec3.js'
 /** Catalogue astrometry of a star beyond the Solar System: an ICRS direction and epoch, a distance, a proper
  * motion and a radial velocity. Each value names the publication it was read from. */
 export interface StarAstrometry {
+  /** Stable cross-identification for a HYG/Hipparcos row, when one exists. */
+  readonly hipparcosId?: number
   readonly rightAscensionDegrees: number
   readonly declinationDegrees: number
   /** Epoch of the catalogue position, Julian years (ICRS positions are quoted at J2000.0). */

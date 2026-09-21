@@ -1430,8 +1430,8 @@
     {
       "id": "sun-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 21260,
-      "expectedSha256": "a3da9a48df9442c29cd85a56ee40863fbf49c91d1c57d1369eaa47fc9d29027e",
+      "expectedBytes": 21016,
+      "expectedSha256": "385a75cdef7d8c18a43e7c74104af7002b090e1ad360f90711e3ea414f1648ff",
       "origin": "Checked source acquisition recipe retaining the accepted institutional inputs and numerical semantics",
       "credit": "cssEarth and the institutional sources identified in this recipe",
       "license": "Project-authored acquisition specification; referenced observations retain their source terms",
@@ -1456,9 +1456,9 @@
       "consumers": [
         "world-context"
       ],
-      "expectedBytes": 3395,
-      "expectedSha256": "84f7b26c703371a694ef560f80bff255ab81585b3d60756e72037f36af8a81af",
-      "sha256": "84f7b26c703371a694ef560f80bff255ab81585b3d60756e72037f36af8a81af",
+      "expectedBytes": 3396,
+      "expectedSha256": "02a2fc7561bf3402bdda66f88d21108bc0fca01308eaf864ad108321039b4195",
+      "sha256": "8095f6b133b30988cc6908bc5287130a1567b5c6806ad1343ff9b1eb117e0f78",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored navigation context with physical records and a pinned epoch; its component sources remain cited in the navigation data."
@@ -1562,8 +1562,8 @@
     {
       "id": "sun-object-content",
       "path": "content/object.json",
-      "expectedBytes": 10922,
-      "expectedSha256": "41a9918afb9b3c8e35be8e99bb2bddc8759e1c5940cbdc0fb2c6d1322dbfae65",
+      "expectedBytes": 12845,
+      "expectedSha256": "7e7e81bf2f658187ba4c6db37f289bdfac1f6fbf01635b7a9ea52809252ec2ca",
       "origin": "Repository-authored object content: NASA Science facts with citations, four lens descriptions, legends as palette recipes, resources",
       "sourceBinding": {
         "kind": "local",
@@ -1622,6 +1622,33 @@
           }
         ]
       }
+    },
+    {
+      "id": "stereo-cor1b-n3d-cr2053p1-m10",
+      "path": "stereo/cor1/cor1b-n3d_CR2053P1_m10.fits",
+      "origin": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1B/fits/n3d_CR2053P1_m10.fits",
+      "credit": "NASA STEREO Science Center; Wang, Arge, and Jones (2025)",
+      "license": "NASA scientific data; the archive requests citation of Wang, Arge, and Jones (2025), Solar Physics 300:46",
+      "licenseEvidence": [
+        "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
+      ],
+      "acquisition": "Exact COR1-B 3D electron-density reconstruction for Carrington rotation 2053, first half, regularization μ=10",
+      "redistribution": "Exact archive FITS retained locally with NASA/STEREO/SECCHI credit and the requested paper citation",
+      "consumers": [
+        "telescopes"
+      ],
+      "expectedBytes": 13337280,
+      "expectedSha256": "16b2cb6894f9a72bfb13cfbb43d8c0f4f056b8f6311cc924c6bba04242a4a7ca",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-stereo-cor1-tomography-2025",
+            "role": "material",
+            "evidence": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1B/fits/n3d_CR2053P1_m10.fits"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -1654,8 +1681,8 @@
     {
       "path": "observations.json",
       "purpose": "Telescope API observation descriptors derived from the pinned Sun archive inputs and their native metadata; scientific limitations remain explicit per observation.",
-      "expectedBytes": 43130,
-      "expectedSha256": "1bf10409fd42c5e494858bc35a94b58e5d1fcbef60e82e2767f625db46f2469a",
+      "expectedBytes": 43544,
+      "expectedSha256": "800dfdc2401f282190268acf6bb2fa277ca24a402bdfeead8f7647224144baea",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored normalized observation records derived only from the exact inputs pinned by this manifest."

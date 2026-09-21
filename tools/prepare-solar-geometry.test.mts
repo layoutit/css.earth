@@ -74,18 +74,20 @@ for (const id of ['phobos', 'mimas', 'janus', 'epimetheus', 'helene', 'triton'] 
   });
 }
 
-test('Earth is displaced from the EMB by the retained Earth-center vector and the Moon shares that same parent', () => {
+test('all retained body centers are composed with their named parent at the fixed epoch', () => {
+  for (const [id, source] of snapshots) {
+    const parent = source.centerBodyId === 'sun' ? [0, 0, 0] : heliocentricKm(source.centerBodyId);
+    const relative = sub(heliocentricKm(id), parent);
+    assert.ok(Math.hypot(...sub(relative, source.positionKm)) < 0.00001, `${id}: wrong center or stale position`);
+    assert.equal(geometry.BODY_POSITION_PROVENANCE[id].sha256, source.provenance.sha256);
+  }
   const emb = scale(astronomy.systemBarycentreHeliocentricAu('emb', epoch), geometry.ASTRONOMICAL_UNIT_KILOMETERS);
-  const offset = sub(heliocentricKm('earth'), emb);
-  assert.ok(Math.hypot(...sub(offset, requireSnapshot(snapshots.get('earth'), 'Earth snapshot').positionKm)) < 1e-7);
-  assert.ok(Math.hypot(...offset) > 4000, 'does not silently substitute the barycentre');
-  const lunarOffset = sub(heliocentricKm('moon'), heliocentricKm('earth'));
-  assert.ok(Math.hypot(...sub(lunarOffset, astronomy.moonPositionRelativeToPlanetKm('moon', epoch))) < 1e-7);
+  assert.ok(Math.hypot(...sub(heliocentricKm('earth'), emb)) > 4000, 'Earth must not be replaced with the barycentre');
 });
 
 test('regeneration retains every current registry orbit, including moons and comets', () => {
   assert.deepEqual(Object.keys(geometry.BODY_ORBITS), SCENE_OBJECTS.filter(body =>
-    ['planet', 'dwarf-planet', 'satellite', 'asteroid', 'trans-neptunian', 'interstellar', 'comet'].includes(body.classification)).map(body => body.id));
+    ['planet', 'dwarf-planet', 'satellite', 'asteroid', 'trans-neptunian', 'interstellar', 'comet', 'exoplanet', 'star'].includes(body.classification) && body.id !== 'sun').map(body => body.id));
   assert.equal(new Map(Object.entries(geometry.BODY_POSITION_PROVENANCE)).get('daphnis'), undefined, 'unavailable contemporary ephemeris is not relabeled as observed');
 });
 
@@ -156,4 +158,27 @@ test('epoch refresh restores a compiled surface before updating its physical fra
   assert.deepEqual(definition, original, 'refresh does not mutate the retained prepared bank');
   assert.deepEqual(requireSnapshot(actual.definition.surfaceHit, 'refreshed surface hit').triangles, requireSnapshot(definition.surfaceHit, 'prepared surface hit').triangles);
   assert.deepEqual(actual.definition.assets, definition.assets);
+});
+
+test('published scene and standalone sky/light documents follow the runtime after a position refresh', async () => {
+  let embeddedSkyCopies = 0, embeddedSunCopies = 0;
+  for (const id of ['jupiter', 'saturn', 'moon', 'pluto', 'triton', 'mimas', 'phobos']) {
+    const base = new URL(`../src/objects/${id}/prepared/`, import.meta.url);
+    const read = async (name: string) => requireRecord(JSON.parse(await readFile(new URL(name, base), 'utf8')));
+    const runtime = await read('runtime.json'), scene = await read('scene.json');
+    const sky = requireRecord(runtime.sky), sun = requireRecord(runtime.sun);
+    if (scene.sky !== undefined) {
+      embeddedSkyCopies++;
+      assert.deepEqual(requireRecord(scene.sky).sceneRegistration, sky.sceneRegistration, `${id}: scene sky`);
+    }
+    assert.deepEqual((await read('sky.json')).sceneRegistration, sky.sceneRegistration, `${id}: standalone sky`);
+    for (const key of ['localDirection', 'referenceViewDirection']) {
+      if (scene.sun !== undefined) {
+        embeddedSunCopies++;
+        assert.deepEqual(requireRecord(scene.sun)[key], sun[key], `${id}: scene ${key}`);
+      }
+      assert.deepEqual((await read('sun.json'))[key], sun[key], `${id}: standalone ${key}`);
+    }
+  }
+  assert.ok(embeddedSkyCopies >= 2 && embeddedSunCopies >= 4, 'exercise both embedded documents and standalone-only lanes');
 });

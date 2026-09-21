@@ -276,15 +276,23 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         }
         const eye = frame.eye(body), depth = -eye[2];
         const occlusion = frame.occlusion(entry.parent);
-        const [x, y] = project(eye);
+        const [bodyX, bodyY] = project(eye);
         const diameter = depth > body.radiusM ? 2 * focal * body.radiusM / Math.sqrt(depth * depth - body.radiusM ** 2) : Infinity;
         const isAnchor = body.id === plan.focus.id;
         const isLocator = isAnchor || entry.orbit === null;
-        const inFrame = depth > body.radiusM && Math.abs(x) < width / 2 && Math.abs(y) < height / 2;
+        const stablePlanet = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId) &&
+          (annotationPriorities[body.id] ?? 0) >= 3;
+        const inFrame = depth > body.radiusM && Math.abs(bodyX) < width / 2 && Math.abs(bodyY) < height / 2;
         const visible = inFrame && !occlusion.hidden(eye, body.id);
+        // Planet circles and captions are orientation landmarks, not physical
+        // sprites. Keep them through occultation and pin an off-screen planet to
+        // the nearest stage edge; the body sprite itself remains truthful below.
+        const locatorMargin = BODY_INDICATOR_DIAMETER / 2 + 4;
+        const x = stablePlanet ? Math.max(-width / 2 + locatorMargin, Math.min(bodyX, width / 2 - locatorMargin)) : bodyX;
+        const y = stablePlanet ? Math.max(-height / 2 + locatorMargin, Math.min(bodyY, height / 2 - locatorMargin)) : bodyY;
         // The retained locator indicators (the anchor and placed stars) are also the galactic locators.
         // Unresolved foreground points cannot occlude this annotation; physical sprites keep exact occlusion.
-        const annotationVisible = isLocator ? inFrame && !(selectedId !== body.id &&
+        const annotationVisible = stablePlanet ? depth > body.radiusM : isLocator ? inFrame && !(selectedId !== body.id &&
           focusDiameter >= plan.camera.presentation.levelOfDetail.markerFullDiscPixels &&
           rayHitsSphereBefore(eye, selectedEye, selected.radiusM)) : visible;
         const hovered = entry.hovered, highlighted = entry.highlighted === true;
@@ -366,9 +374,15 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       const labelBudget = worldLabelBudget();
       const candidates: (StableLabelCandidate & { projected: ProjectedBody<Entry> })[] = [];
       for (const projected of projectedBodies) {
-        const { entry, x, y, diameter, markerOpacity, annotationVisible, hovered, priority } = projected;
+        const { entry, x, y, diameter, annotationVisible, hovered, priority } = projected;
         let { circle } = projected;
         const { body, labelSize: size } = entry;
+        const stablePlanet = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId) &&
+          (annotationPriorities[body.id] ?? 0) >= 3;
+        // An edge-on orbit can briefly drive the shared proxy alpha to zero.
+        // During rotation, a planet locator that is already on stays on.
+        if (stablePlanet && (rotationActive || preserveCommittedAnnotations) && entry.indicatorShown) projected.markerOpacity = 1;
+        const markerOpacity = projected.markerOpacity;
         const satellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id);
         const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
         const highlighted = entry.highlighted === true;
@@ -420,7 +434,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           return Math.abs(dx) >= Math.abs(dy) ? dx >= 0 ? 0 : 1 : dy >= 0 ? 3 : 2;
         })() : 0;
         const radialSides = [radialSide, ...[0, 1, 2, 3].filter(side => side !== radialSide)];
-        const sides = body.id === plan.focus.id ? [3] : flightDestination ? [0, 1, 2, 3]
+        const sides = body.id === plan.focus.id ? [2] : flightDestination ? [0, 1, 2, 3]
           : resolvedDisc || body.id === emphasizedId ? [3, 2, 0, 1] : primary ? radialSides : [0, 1, 2, 3];
         const placements = sides.map(slot => {
           let [left, top] = positions[slot];
@@ -449,12 +463,29 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       // and captions blinked while the physical markers remained visible. Keep the
       // committed membership and side until release. A caption is constrained
       // rather than retired when its committed side reaches the viewport edge.
-      const accepted = rotationActive || preserveCommittedAnnotations ? candidates.flatMap(candidate => {
-        if (!candidate.shown) return [];
-        const previous = candidate.placements.find(item => item.slot === candidate.previousPlacement);
-        if (!previous || !worldLabelBudget().accepts(previous.rect, candidate.anchor)) return [];
-        return [{ candidate, placement: previous.slot, rect: previous.rect }];
-      }) : admitStableLabels(candidates, labelBudget);
+      // The system anchor and its planets are permanent orientation landmarks
+      // at the zoom levels where their normal alpha policy names them. Admit
+      // each independently so minor-body labels cannot make one blink.
+      const landmarks = candidates.filter(candidate => candidate.projected.entry.body.id === plan.focus.id ||
+        candidate.projected.entry.orbit !== null && systemFade.isSystemStar(candidate.projected.entry.orbit.centerBodyId) &&
+        (candidate.tier ?? 0) >= 3);
+      const acceptedLandmarks = landmarks.flatMap(candidate => admitStableLabels([candidate], worldLabelBudget()));
+      for (const { candidate, rect } of acceptedLandmarks) labelBudget.admit(rect, candidate.anchor);
+      const landmarkSet = new Set(landmarks);
+      const otherCandidates = candidates.filter(candidate => !landmarkSet.has(candidate));
+      const acceptedOthers = rotationActive || preserveCommittedAnnotations ? (() => {
+        const admitted = admitStableLabels(otherCandidates.filter(candidate => candidate.pinned > 0), labelBudget);
+        const admittedCandidates = new Set(admitted.map(item => item.candidate));
+        for (const candidate of otherCandidates) {
+          if (admittedCandidates.has(candidate) || !candidate.shown) continue;
+          const previous = candidate.placements.find(item => item.slot === candidate.previousPlacement);
+          if (previous && labelBudget.admit(previous.rect, candidate.anchor)) {
+            admitted.push({ candidate, placement: previous.slot, rect: previous.rect });
+          }
+        }
+        return admitted;
+      })() : admitStableLabels(otherCandidates, labelBudget);
+      const accepted = [...acceptedLandmarks, ...acceptedOthers];
       for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; }
       for (const { candidate, placement, rect } of accepted) {
         const { projected } = candidate;

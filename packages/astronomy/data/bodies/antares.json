@@ -14,16 +14,17 @@
     "rightAscensionDegrees": 247.3519154198264,
     "declinationDegrees": -26.432002611950832,
     "positionEpochJulianYear": 2000,
-    "distanceParsecs": 169.77928692699492,
+    "distanceParsecs": 169.77928692699493,
     "properMotionRaMasPerYear": -12.11,
     "properMotionDecMasPerYear": -23.3,
     "radialVelocityKmPerS": -3.5,
     "presentationUp": "display-axis",
     "sources": {
-      "position": "SIMBAD basic record for * alf Sco (HD 148478, HIP 80763), ICRS J2000 position from the Hipparcos re-reduction (van Leeuwen 2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-16",
+      "position": "SIMBAD basic record for * alf Sco (HD 148478, HIP 80763), ICRS J2000 position from the Hipparcos re-reduction (van Leeuwen 2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-16; cross-identification HIP 80763: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2080763",
       "distance": "Hipparcos parallax 5.89 +/- 1.00 mas (van Leeuwen 2007) via SIMBAD: 170 pc. The star is too bright for a Gaia parallax.",
       "properMotion": "van Leeuwen (2007) via SIMBAD: -12.11, -23.30 mas/yr",
       "radialVelocity": "Gontcharov (2006, AstL 32, 759; bibcode 2006AstL...32..759G) via SIMBAD: -3.5 +/- 0.8 km/s"
-    }
+    },
+    "hipparcosId": 80763
   }
 }

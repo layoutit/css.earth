@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '../../source-values.mts';
 import { pinFile, PRODUCT_RECORD_SCHEMA } from '../product-record.mts';
-import { listOutputs as listDeliveryOutputs, type OutputChoice } from './outputs.mts';
+import { delivery, listOutputs as listDeliveryOutputs, type OutputChoice } from './outputs.mts';
 import { validateProjectionSource, verifiedProduct } from './projection.mts';
 import { validateSphereSource } from './sphere.mts';
 import { inspectSpatialObject } from './spatial-handoff.mts';
@@ -30,7 +30,15 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
     const dataset=requireRecord(raw.dataset,'descriptor dataset'),target=typeof dataset.target==='string'?dataset.target:undefined;
     return {artifact:'product-descriptor',...(target?{target}:{}),source:artifact,outputs:[],familyOperations:await verifiedExecutableFamilyOperations(artifact)};
   }
-  if(raw.schema==='cssearth-telescope-delivery@1'||raw.schema==='cssearth-telescope-delivery@2')return {...await listDeliveryOutputs(artifact,structure),artifact:'delivery'};
+  if(raw.schema==='cssearth-telescope-delivery@1'||raw.schema==='cssearth-telescope-delivery@2'){
+    const listed=await listDeliveryOutputs(artifact,structure),delivered=await delivery(artifact),descriptorOutputs=delivered.producing.outputs.filter(output=>output.path.endsWith('/descriptor.json')||output.path==='descriptor.json');
+    if(!descriptorOutputs.length)return{...listed,artifact:'delivery'};
+    if(descriptorOutputs.length!==1)throw new TypeError('Delivery has an ambiguous family descriptor.');
+    const output=descriptorOutputs[0]!,matches=delivered.files.filter(file=>file.sha256===output.sha256&&file.bytes===output.bytes&&file.path.endsWith('/descriptor.json'));
+    if(matches.length!==1)throw new TypeError('Delivery family descriptor is absent or ambiguous.');
+    const descriptorPath=resolve(delivered.directory,matches[0]!.path);
+    return{...listed,artifact:'delivery',source:descriptorPath,familyOperations:await verifiedExecutableFamilyOperations(descriptorPath)};
+  }
   if(structure!==undefined)throw new TypeError('--structure applies only to native delivery inspection');
   if(raw.schema==='cssearth-physical-grid-volume@1'){
     const relativePath=requireString(raw.object,'physical grid volume object');

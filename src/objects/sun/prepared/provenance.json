@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e69cb699f13adebf6992bd483a180aeae9b9ae59b86c35dc602a82d587b79513"
+    "sha256": "527b3329fe35f82b4fb9579cf703c80c4b8e7cc046efda2f755476f402dbd07b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "5e7b828c4e11fdea7d2d6f178dba17a7859f1a42cb74fff11210bb8c12f37303"
+    "bindingsSha256": "b56e6cdecf4b8d156f6e3fd34ec2ba7af77ca8fef0ee2e7a5f5c48f41ea7e7c5"
   },
   "recipes": [
     {
@@ -438,7 +438,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "41a9918afb9b3c8e35be8e99bb2bddc8759e1c5940cbdc0fb2c6d1322dbfae65",
+      "sha256": "7e7e81bf2f658187ba4c6db37f289bdfac1f6fbf01635b7a9ea52809252ec2ca",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -670,6 +670,55 @@
                 "sourceUrl": "https://sdo.gsfc.nasa.gov/data/synoptic/"
               },
               "notes": "False-color AIA 171 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026."
+            },
+            {
+              "id": "cor1-density",
+              "label": "COR1-B density · μ=10",
+              "shortLabel": "COR1-B μ=10",
+              "thumbnail": "sun-lens-corona.webp",
+              "falseColor": true,
+              "qualification": "STEREO-B/SECCHI COR1 tomographic electron-density reconstruction with the archive μ=10 regularization, resampled to a Cartesian display volume",
+              "volume": {
+                "objectId": "sun-cor1-density",
+                "lensId": "electron-density",
+                "surface": "photosphere"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Electron number density",
+                "labels": [
+                  "10⁵",
+                  "8.1 × 10⁵",
+                  "6.5 × 10⁶"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      0,
+                      0,
+                      0
+                    ],
+                    [
+                      184,
+                      110,
+                      50
+                    ],
+                    [
+                      255,
+                      184,
+                      97
+                    ]
+                  ],
+                  "labels": [
+                    "10⁵",
+                    "8.1 × 10⁵",
+                    "6.5 × 10⁶"
+                  ]
+                },
+                "meta": "electrons cm⁻³ · logarithmic display scale",
+                "sourceUrl": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
+              },
+              "notes": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. The logarithmic display preserves density structure across the measured shell. A recorded display-only bridge copies the nearest measured 1.5 R☉ shell through the coronagraph blind zone; the native float cube remains unfilled."
             }
           ]
         },
@@ -730,7 +779,8 @@
             "photosphere": "NASA SDO/HMI daily continuum browse observations across Carrington Rotation 2311",
             "magnetic": "NASA SDO/HMI and JSOC hmi.mrsynop_small_720s Carrington Rotation 2311",
             "chromosphere": "NASA SDO AIA 304 angstrom Carrington Rotation 2311",
-            "corona": "NASA SDO AIA 171 angstrom Carrington Rotation 2311"
+            "corona": "NASA SDO AIA 171 angstrom Carrington Rotation 2311",
+            "cor1-density": "NASA STEREO-B/SECCHI COR1 CR2053 P1 electron-density reconstruction, archive μ=10 regularization"
           }
         }
       }
@@ -2411,8 +2461,8 @@
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
-      "sha256": "41a9918afb9b3c8e35be8e99bb2bddc8759e1c5940cbdc0fb2c6d1322dbfae65",
-      "bytes": 10922,
+      "sha256": "7e7e81bf2f658187ba4c6db37f289bdfac1f6fbf01635b7a9ea52809252ec2ca",
+      "bytes": 12845,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2868,6 +2918,42 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "cor1-density",
+      "label": "COR1-B density · μ=10",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [
+        "photosphere"
+      ],
+      "process": "Keep the borrowed lens's prepared plates and enable the companion volume this dataset names.",
+      "limitations": [
+        "STEREO-B/SECCHI COR1 tomographic electron-density reconstruction with the archive μ=10 regularization, resampled to a Cartesian display volume"
+      ],
+      "lensIds": [
+        "cor1-density"
+      ],
+      "recipeDependencies": [
+        "content"
+      ],
+      "interpretation": {
+        "kind": "companion-volume",
+        "objectId": "sun-cor1-density",
+        "lensId": "electron-density",
+        "surface": "photosphere"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/sun/sun-lens-corona.webp",
+          "bytes": 2226,
+          "sha256": "cc1c65146e61eb76f1daaadd6d3500bce510f97f465589e0130dbe5d9c316a2f",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -2886,8 +2972,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4557,
-          "sha256": "60cc5415629adbc255817e98616df3efdcb13976a6e90b491ef96814b319d2d1",
+          "bytes": 4672,
+          "sha256": "6f0d20b2bd6a73bfe150d5badd223e2c7a5172c4cdf022b39bb6ec947b4ba07c",
           "verification": "bytes-verified"
         }
       ],
@@ -3000,11 +3086,11 @@
   },
   "lastPreparation": {
     "objectId": "sun",
-    "materialSha256": "2896dced4f46eadd329deba86737ab09f8dc8c8398e8c45df01cbf0c6f0da018",
+    "materialSha256": "4141937b3c93f00a65eb637321ecc08c742154d24163e9da33b174003f955650",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "5e7b828c4e11fdea7d2d6f178dba17a7859f1a42cb74fff11210bb8c12f37303"
+      "bindingsSha256": "b56e6cdecf4b8d156f6e3fd34ec2ba7af77ca8fef0ee2e7a5f5c48f41ea7e7c5"
     }
   }
 }
