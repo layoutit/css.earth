@@ -15,6 +15,7 @@ test('a source-owned globular cluster is discovered, classified and searched thr
       schema: 'cssearth-nebula-catalog@1', frame: { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5 },
       sources: [{ id: 'paper', url: 'https://example.org/paper', sha256: 'a'.repeat(64), bytes: 10, citation: 'Test measurement' }],
       objects: [{ id: 'test-cluster', kind: 'globular-cluster', name: 'Test cluster', aliases: ['Cluster alias'],
+        introduction: { text: 'A source-backed test globular cluster.', sourceRefs: ['paper'] },
         positionM: [3.085677581491367e18, 0, 0], skyPosition: { raDeg: 0, decDeg: 0, sourceRef: 'paper' },
         distance: { valuePc: 100, sourceRef: 'paper', method: 'Test distance' },
         classification: { name: 'Globular cluster', basis: 'Integrated stellar light.', sourceRef: 'paper' },
