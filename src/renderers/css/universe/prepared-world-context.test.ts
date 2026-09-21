@@ -603,7 +603,7 @@ test('the Earth reference remains painted when its physical marker has faded at 
     pose: { positionM: [0, 0, 233.27 * 149_597_870_700], orientationXyzw: [0, 0, 0, 1] } },
   { focalPixels: 1100, principalOffsetPixels: [0, 0], widthPixels: 1280, heightPixels: 720 });
   const earth = layer.inspect().find(body => body.id === 'earth')!;
-  expect(annotationVisibility(earth.billboard, 'indicator')).toBe('');
+  expect(annotationVisibility(earth.billboard, 'indicator')).toBe('hidden');
   expect(annotationVisibility(earth.billboard, 'label')).toBe('');
   expect(earth.billboard.style.visibility).toBe('');
   expect(Number(earth.billboard.style.opacity)).toBeGreaterThan(0);

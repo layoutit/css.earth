@@ -10,7 +10,7 @@ import type { OrbitSegment } from '../solar-system/types.js';
 import { createWorldFrameProjection } from './world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../labels/stable-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
-import { createLabelBudget, labelExtentOpacity } from '../labels/universe-label-policy.js';
+import { createLabelBudget, labelExtentOpacity, UNIVERSE_LABEL_POLICY } from '../labels/universe-label-policy.js';
 
 export const BODY_INDICATOR_DIAMETER = 16;
 export const CONTEXT_LINE_WIDTH = 1;
@@ -360,7 +360,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       const labelBudget = createLabelBudget(width, height, [], view.labelBlockers);
       const candidates: (StableLabelCandidate & { projected: ProjectedBody<Entry> })[] = [];
       for (const projected of projectedBodies) {
-        const { entry, x, y, diameter, markerOpacity, annotationVisible, hovered, priority, circle } = projected;
+        const { entry, x, y, diameter, markerOpacity, annotationVisible, hovered, priority } = projected;
+        let { circle } = projected;
         const { body, labelSize: size } = entry;
         const satellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id);
         const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
@@ -385,6 +386,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         // still publish non-zero leaf opacity; `visible` keeps the sprite itself
         // suppressed while the circle and caption remain paintable.
         if (referenceAnnotationOnly) projected.markerOpacity = 1;
+        // Never force two locator circles to overlap. At a safe projected
+        // separation Earth keeps circle + label; once its orbit collapses into
+        // the Sun's locator, retain the truthful caption but retire the circle.
+        if (referenceAnnotationOnly && localExtent < BODY_INDICATOR_DIAMETER + UNIVERSE_LABEL_POLICY.spacingPixels) {
+          circle = projected.circle = false;
+        }
         // The destination stays named through the whole flight, across its preview fade.
         const alpha = flightDestination || referenceAnnotationOnly ? 1 : targeted ? markerOpacity : Math.min(markerOpacity, resolvedDisc ? 1 : labelExtentOpacity(localExtent));
         // Naming policy, decided before any slot is contested: suppressed, unresolved, too faint
@@ -397,7 +404,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         // final admission below retires an on-screen context orbit with the caption.
         // Selection/hover can still reveal the complete annotation.
         if (!projected.nameable || (!targeted && entry.labelHidden)) continue;
-        const gap = Math.max(5, diameter / 2, circle ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
+        const gap = Math.max(5, diameter / 2, circle || referenceAnnotationOnly ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
           [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];
         const primary = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId);

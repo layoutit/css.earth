@@ -359,15 +359,22 @@ test('Earth priority keeps its ordinary scale fade and leaves the Sun at outer-s
 
 test('Earth remains a circle-and-label reference through the framed outer Solar System, then retires normally', () => {
   const input = view(), points = [plan.focus, ...plan.bodies];
-  input.viewport = { focalPixels: 600, widthPixels: 1445, heightPixels: 720, principalOffsetPixels: [0, 0] };
+  input.viewport = { focalPixels: 1100, widthPixels: 1445, heightPixels: 720, principalOffsetPixels: [0, 0] };
   const calculate = createWorldContextPlanner(plan, {
     sun: labelImportance('star', true, 5), earth: labelImportance('planet', true, 4),
   });
-  for (const distanceAu of [27.5, 50, 233.27, plan.system.fadeOutStartDistanceM / 149597870700]) {
+  for (const distanceAu of [50]) {
     input.world.pose.positionM = [0, 0, distanceAu * 149597870700];
     const frame = calculate(input), earth = frame.projectedBodies.find(body => points[body.index].id === 'earth')!;
     expect(earth.labelShown).toBe(true);
     expect(earth.indicatorShown).toBe(true);
+    expect(earth.segments).toHaveLength(0);
+  }
+  for (const distanceAu of [233.27, plan.system.fadeOutStartDistanceM / 149597870700]) {
+    input.world.pose.positionM = [0, 0, distanceAu * 149597870700];
+    const frame = calculate(input), earth = frame.projectedBodies.find(body => points[body.index].id === 'earth')!;
+    expect(earth.labelShown).toBe(true);
+    expect(earth.indicatorShown).toBe(false);
     expect(earth.segments).toHaveLength(0);
   }
   input.world.pose.positionM = [0, 0, plan.system.hiddenDistanceM * 2];
