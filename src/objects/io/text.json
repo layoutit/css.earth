@@ -50,6 +50,11 @@
       "title": "Continuum-relative visible absorption",
       "detail": "2019 MUSE",
       "summary": "A broad 520–660 nm absorption from 2019 VLT observations; which chemical causes it is uncertain."
+    },
+    "volcanic-heat": {
+      "title": "Global map of volcanic hot spots",
+      "detail": "Davies et al. 2024",
+      "summary": "343 hot spots colored by thermal power, up to Juno's 49th orbit. Symbol size marks the power class, not the spot's size."
     }
   }
 }

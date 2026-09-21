@@ -23,6 +23,7 @@ import { loadFitsImageMap } from './fits-image-map.mts';
 import { loadNpyDictionaryMap } from './npy-dictionary-map.mts';
 import { loadNpyLonLatGrid } from './npy-lonlat-grid.mts';
 import { loadBareRockEclipse, loadBareRockFit, loadEclipseMapFit } from './eclipse-map-fit.mts';
+import { loadPointTable } from './mrt-point-table.mts';
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
 export function colorForValue(value: number, recipe: SciencePalette) {
@@ -145,6 +146,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
     } };
   }
   if (lens.format === 'pds3-float-map') return loadPdsFloatMap(root, lens);
+  if (lens.format === 'mrt-point-table') return loadPointTable(root, value);
   if (lens.format === 'fits-image-map') return loadFitsImageMap(root, lens);
   if (lens.format === 'npy-dictionary-map') return loadNpyDictionaryMap(root, lens);
   if (lens.format === 'npy-lonlat-grid') return loadNpyLonLatGrid(root, value);
