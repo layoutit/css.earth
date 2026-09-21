@@ -111,8 +111,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   // Frame files on disk that the manifest does not declare, an earlier attempt's or a frame left out, would stop preparation.
   const declared = new Set(requireArray((await readJson(resolve(packageSource, 'manifest.json'))).inputs).map(value => requireString(requireRecord(value).path)));
   for (const file of await readdir(resolve(packageSource, 'observations')).catch(() => [] as string[])) if (!declared.has(`observations/${file}`)) await rm(resolve(packageSource, 'observations', file), { force: true });
-  // Every new input is bound to a catalogue record now, with placeholder evidence, because the first preparation step
-  // validates the manifest; the evidence is pinned after the manifest is committed.
+  // Every new input is bound to a catalogue record now, because the first preparation step validates the manifest.
   const bound = await authorSourceRecords({ root: ROOT, objectId });
   const cameras = await readJson(resolve(packageSource, OBSERVER_CAMERAS_FILE));
   cameras.publishedComparison = { ledgerEntry: COMPARISON_ENTRY };
@@ -224,7 +223,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   if (moved.length) console.log(`Moved ${moved.length} scene file(s) no inventory owns to output/stale-public/${objectId}/; preparation refuses unowned assets.`);
   console.log([`Installed ${objectId}'s ${LENS_ID} lens and bound ${bound.bindings.length} new inputs to ${bound.records.length} new source records. Next:`,
     `  node tools/prepare-object.mts ${objectId}`, `  node tools/objects/report-registration.mts ${objectId} --write`,
-    `  commit, then pnpm author:sources ${objectId} --evidence <commit> and commit again`, `  pnpm publish:runtime-assets --object=${objectId}`].join('\n'));
+    `  commit, then pnpm publish:runtime-assets --object=${objectId}`].join('\n'));
 }
 
 /** An anchor table with a lens appended to one body's `lenses`, as text; a body without a row, or already listing it, is unchanged. */

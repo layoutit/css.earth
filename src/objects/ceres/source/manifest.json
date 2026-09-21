@@ -52,7 +52,7 @@
           {
             "catalogueId": "source-ceres-usgs-dawn-fc-global-140m",
             "role": "material",
-            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -108,7 +108,7 @@
           {
             "catalogueId": "source-ceres-nasa-dawn-fc-pia19977",
             "role": "material",
-            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -135,7 +135,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -175,7 +175,7 @@
           {
             "catalogueId": "source-ceres-dawn-elevation",
             "role": "material",
-            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -223,7 +223,7 @@
           {
             "catalogueId": "source-ceres-usgs-gazetteer-nomenclature-center-pts",
             "role": "material",
-            "evidence": "src/planets/ceres/source/features/manifest.json@01bd7bd566517f8b80cc21bd138e7f5901bca24e#/inputs/0"
+            "evidence": "src/objects/ceres/source/features/manifest.json#/inputs/0"
           }
         ]
       }
@@ -282,7 +282,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }

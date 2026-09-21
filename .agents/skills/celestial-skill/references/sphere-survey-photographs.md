@@ -119,7 +119,7 @@ node tools/objects/sphere-survey/install.mts <id>
 ```
 
 It reruns the setup and writes it into the package: the frames, mesh, tables
-and records, the source bindings with placeholder evidence, download
+and records, the source bindings, download
 operations, the lens control and reader text, the ledger decision and the
 entries it closes, the README's source rows and generated evidence blocks, and
 the credits. It copies missing pinned inputs from sibling checkouts by hash and
@@ -162,8 +162,7 @@ measurements are in the
 
 ![Kleopatra and Kalliope in the app's default view, one frame per point on the left and the edge-weighted average on the right](sphere-survey-blend.webp)
 
-Commit, then run `pnpm author:sources <id> --evidence <commit>` and commit again.
-Publish with `pnpm publish:runtime-assets --object=<id>` before merging.
+Commit, then publish with `pnpm publish:runtime-assets --object=<id>` before merging.
 
 ## Survey figure conventions
 

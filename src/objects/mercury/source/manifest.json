@@ -61,7 +61,7 @@
           {
             "catalogueId": "source-mercury-usgs-messenger-bdr-global-z3",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       },
@@ -110,7 +110,7 @@
           {
             "catalogueId": "source-mercury-usgs-messenger-enhanced-global-z3",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -156,7 +156,7 @@
           {
             "catalogueId": "source-mercury-usgs-messenger-topography-z3",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       },
@@ -185,7 +185,7 @@
           {
             "catalogueId": "source-mercury-usgs-messenger-topography-legend",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -209,7 +209,7 @@
           {
             "catalogueId": "source-mercury-nasa-mercury-pia15162-navigation",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -235,7 +235,7 @@
           {
             "catalogueId": "source-mercury-nasa-mercury-facts-107747",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -291,7 +291,7 @@
           {
             "catalogueId": "doi-10-5281-zenodo-7433033",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -345,7 +345,7 @@
           {
             "catalogueId": "nasa-mercury-facts",
             "role": "reference",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -369,7 +369,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -553,7 +553,7 @@
           {
             "catalogueId": "source-mercury-usgs-gazetteer-nomenclature-center-pts",
             "role": "material",
-            "evidence": "src/planets/mercury/source/features/manifest.json@d1df0e9439e71dcf03fec387859d2817ca5285f1#/inputs/0"
+            "evidence": "src/objects/mercury/source/features/manifest.json#/inputs/0"
           }
         ]
       }
@@ -615,7 +615,7 @@
           {
             "catalogueId": "doi-10-17632-p43b9wttpj-2",
             "role": "material",
-            "evidence": "src/planets/mercury/source/features/tectonic/manifest.json@2a491c27cde809cb7b26b95a967b07b949b17d11#/inputs/0"
+            "evidence": "src/objects/mercury/source/features/tectonic/manifest.json#/inputs/0"
           }
         ]
       }
