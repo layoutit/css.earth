@@ -1,0 +1,30 @@
+{
+ "id": "alpha-centauri-a",
+ "classification": "star",
+ "order": 1201,
+ "physical": {
+  "name": "Alpha Centauri A",
+  "horizonsCode": null,
+  "meanRadiusKm": 851119,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null
+ },
+ "physicalNotes": "Radius: Limb-darkened angular diameter 8.502 \u00b1 0.038 mas measured with VLTI/PIONIER by Kervella et al. (2017), A&A 597, A137, who derive 1.2234 \u00b1 0.0053 solar radii with the parallax 747.17 \u00b1 0.61 mas. Adopted 851,119 km, 1.2234 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
+ "star": {
+  "rightAscensionDegrees": 219.90205833170774,
+  "declinationDegrees": -60.83399268831004,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 1.3384,
+  "properMotionRaMasPerYear": -3679.25,
+  "properMotionDecMasPerYear": 473.67,
+  "radialVelocityKmPerS": -15.252,
+  "sources": {
+   "position": "SIMBAD basic record for * alf Cen A (HIP 71683), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Cen+A",
+   "distance": "Inverse of the parallax 747.17 \u00b1 0.61 mas that Kervella et al. (2017) adopt from Kervella et al. (2016)",
+   "properMotion": "SIMBAD: -3679.25, 473.67 mas/yr, reference 2007A&A...474..653V",
+   "radialVelocity": "SIMBAD: -15.252 km/s, reference 2021MNRAS.506..150B"
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 71683
+ }
+}

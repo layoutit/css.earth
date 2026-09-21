@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-astro-ph-0502181",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Aldebaran’s angular diameter: How well do we know it?",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0502181"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0502181",
+      "label": "Richichi & Roccatagliata 2005"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/aldebaran/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "be0556a21c69d7f324bcef19db5d59d85fad1fce48eca15a8d34ea4e3dff5c00",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "A. Richichi, V. Roccatagliata",
+      "scope": "citation",
+      "evidence": "src/objects/aldebaran/text.json#/introduction/sources/0"
+    }
+  ]
+}

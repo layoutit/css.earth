@@ -1,0 +1,344 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "rigel",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "372fabc83dc2e4c496ecab8957af59ad103f0a7a1b82d2846a0371b1b88b2568"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "c03c5c77256c53c3f6a72b9c4c69467fbebf43f60357b03b5423180c88a85b6e"
+  },
+  "recipes": [
+    {
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "d349e0a4b11a912a09fdaf2ddcf631b1b435bd682df18928bbc2ec56e29ce99d",
+      "parameters": {
+        "schema": "cssearth-raster-recipe@1",
+        "publicBase": "/scenes/rigel/",
+        "sourceWidth": 1024,
+        "sourceHeight": 512,
+        "width": 1024,
+        "height": 512,
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "rigel-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "cssrigel-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88,
+          "centerLongitudeDegrees": 0
+        },
+        "surfaces": [
+          {
+            "id": "shape",
+            "output": "rigel-surface-{id}{suffix}.webp",
+            "thumbnail": "rigel-lens-{id}.webp",
+            "source": "measurements.json",
+            "falseColor": false,
+            "science": {
+              "kind": "neutral-shape",
+              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+            }
+          }
+        ],
+        "emission": {
+          "offLimbSize": 600,
+          "limbSize": 512,
+          "bodyDiameter": 496,
+          "offLimbOutput": "rigel-context-{id}{suffix}.webp",
+          "limbOutput": "rigel-limb-{id}{suffix}.webp",
+          "metadata": {
+            "schema": "cssrigel-prepared-emission@1",
+            "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+            "offLimbContext": {
+              "logicalSize": 600,
+              "source": "none: no observation, a transparent plate",
+              "composition": "transparent",
+              "rotation": "none",
+              "runtimeAlphaProcessing": false
+            },
+            "limbMaterial": {
+              "logicalSize": 496,
+              "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+              "surfaceReplacement": false,
+              "runtimeAlphaProcessing": false
+            },
+            "lighting": false,
+            "shadows": false,
+            "runtimeLighting": false
+          }
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "4c5b5c709d64c00b29a71b96029870719500c2d03ed516eaf8b1ca5111ad4a7c",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "rigel",
+        "displayName": "Rigel",
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Radius",
+              "value": "78.90 solar radii",
+              "source": {
+                "catalogueId": "arxiv-1201-0843",
+                "url": "https://arxiv.org/abs/1201.0843",
+                "label": "Moravveji et al. 2012",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "locator": "radiusKm; radiusSource"
+              }
+            },
+            {
+              "id": "distance",
+              "label": "Distance from the Sun",
+              "value": "264.55 parsecs",
+              "source": {
+                "catalogueId": "simbad-bet-ori",
+                "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=bet+Ori",
+                "label": "SIMBAD parallax",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "locator": "distanceParsecs; distanceSource"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+              "thumbnail": "rigel-lens-shape.webp",
+              "surface": "rigel-surface-shape@2x.webp",
+              "poles": "rigel-poles-shape@2x.webp",
+              "source": {
+                "id": "rigel-observational-measurements",
+                "path": "../manifest.json",
+                "url": "https://arxiv.org/abs/1201.0843"
+              },
+              "falseColor": false,
+              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": []
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "Moravveji, Guinan, Shultz et al., \"Asteroseismology of the nearby SN-II progenitor Rigel. Part I\", ApJ 747, 108 (2012), arXiv:1201.0843",
+            "href": "https://arxiv.org/abs/1201.0843"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://arxiv.org/abs/1201.0843",
+            "credit": "Moravveji, Guinan, Shultz et al., \"Asteroseismology of the nearby SN-II progenitor Rigel. Part I\", ApJ 747, 108 (2012), arXiv:1201.0843"
+          },
+          "physical": {
+            "path": "../../../../../packages/astronomy/data/bodies/rigel.json",
+            "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "rigel-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://arxiv.org/abs/1201.0843",
+      "credit": "Moravveji, Guinan, Shultz et al., \"Asteroseismology of the nearby SN-II progenitor Rigel. Part I\", ApJ 747, 108 (2012), arXiv:1201.0843",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      },
+      "sha256": "63ad077f4b0fe0b5543d08a995118f848946509f6e1eedeee1df673dc86c0dc7",
+      "bytes": 1102,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "4c5b5c709d64c00b29a71b96029870719500c2d03ed516eaf8b1ca5111ad4a7c",
+      "bytes": 2856,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": false
+      },
+      "inputs": [
+        "rigel-observational-measurements"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/rigel/rigel-surface-shape@2x.webp",
+          "bytes": 178,
+          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/rigel/rigel-lens-shape.webp",
+          "bytes": 44,
+          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/rigel/rigel-poles-shape@2x.webp",
+          "bytes": 1340,
+          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/rigel/rigel-context-shape@2x.webp",
+          "bytes": 100,
+          "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/rigel/rigel-limb-shape@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "rigel-observational-measurements",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4272,
+          "sha256": "871428ab4866be8798c775ab5fc79883a7ae0864f6c016f3a6ca529aa7978e2a",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "rigel",
+    "materialSha256": "249000b1ce6d4928e11bac054585c47aad0a1b7a35b3962a1871ab571c3c998c",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "c03c5c77256c53c3f6a72b9c4c69467fbebf43f60357b03b5423180c88a85b6e"
+    }
+  }
+}

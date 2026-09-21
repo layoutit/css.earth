@@ -1,0 +1,40 @@
+{
+  "id": "arxiv-astro-ph-0306604",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The interferometric diameter and internal structure of Sirius A",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0306604"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:20030994"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0306604",
+      "label": "Kervella et al. 2003"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/sirius/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "7d371059220deeef88910cb9922a0786fcf05f9ce3e8b2109e462c6a892696d9",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Kervella, F. Thévenin, P. Morel, P. Bordé, E. Di Folco",
+      "scope": "citation",
+      "evidence": "src/objects/sirius/text.json#/introduction/sources/0"
+    }
+  ]
+}

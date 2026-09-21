@@ -1,0 +1,32 @@
+{
+  "id": "simbad-alf-psa",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for * alf PsA (Fomalhaut)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+PsA",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/fomalhaut/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "2de663de9957d5846d5c5f6890dc97bb02b643ae411adc481e3c5194b8b123ba",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; astrometry and radial velocity with the references SIMBAD lists",
+      "scope": "citation",
+      "evidence": "src/objects/fomalhaut/text.json#/card/sources/0"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}
