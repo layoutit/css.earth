@@ -38,9 +38,8 @@ interface HarnessOptions {
   onTicket?: (ticket: PreparedResidencyTicket) => void;
   onChange?: (state: Readonly<ObjectSelectionState>) => void;
   deferTextureRefinement?: boolean;
-  shadows?: boolean;
 }
-function harness({ onTicket, onChange, deferTextureRefinement, initialLens, shadows }: HarnessOptions = {}) {
+function harness({ onTicket, onChange, deferTextureRefinement, initialLens }: HarnessOptions = {}) {
   const definition = earthDefinition, f = retainedPresentationFixture(definition);
   const jobs: ImageJob[] = [], commits: { selection: ObjectSelection; plan: PreparedPresentationPlan }[] = [], changes: Readonly<ObjectSelectionState>[] = [], fatal: unknown[] = [], materialErrors: unknown[] = [], created: ReturnType<typeof f.document.createElement>[] = [];
   const createElement = f.document.createElement;
@@ -72,8 +71,6 @@ function harness({ onTicket, onChange, deferTextureRefinement, initialLens, shad
       sunViewDirection: direction, reference: currentView?.reference, };
     next.reference = currentView?.reference ?? next; currentView = next; coordinator.setView(next); return next;
   }
-  // Dispatched before start so the first pass is planned under directional light, not flood lighting.
-  if (shadows) coordinator.dispatch({ kind: "toggle", name: "shadows", value: true });
   view(0); const initialReady = coordinator.start();
   async function resolveJobs({ exclude = [] }: { exclude?: readonly ImageJob[] } = {}) {
     for (let wave = 0; wave < 45; wave++) {
@@ -126,16 +123,17 @@ test('URL restoration admits no default-camera detail before the router releases
   const restoredPlan = h.coordinator.state().plan; assert.ok(restoredPlan); assert.equal(restoredPlan.textureLevel, 0);
 });
 
-test("camera movement cancels the old resource pass while startup waits for its current atmosphere row", async t => {
-  // Only a directional light turns the atmosphere with the view; Earth's flood lighting pins it to
-  // its full-phase frame, so this pass needs shadows on to have a per-view atmosphere row at all.
-  const h = harness({ shadows: true }); t.after(h.restore); await flush();
-  const obsolete = h.jobs.find(job => job.url.includes("atmosphere")); assert.ok(obsolete);
+test("camera movement during startup keeps the pinned atmosphere rows and still settles", async t => {
+  const h = harness(); t.after(h.restore); await flush();
+  const atmosphere = h.jobs.filter(job => job.url.includes("atmosphere")); assert.ok(atmosphere.length);
   let settled = false; h.initialReady.then(() => { settled = true; });
   h.view(1); await flush(); assert.equal(settled, false);
-  await h.resolveJobs({ exclude: [obsolete] }); assert.equal(await h.initialReady, true);
-  const startupCommit = h.commits[0]; assert.ok(startupCommit); assert.equal(h.commits.length, 1); assert.equal(startupCommit.plan.materials.atmosphere.frame, 52);
-  obsolete.reject(new Error("late")); await flush(); assert.deepEqual(h.fatal, []);
+  // Earth's flood lighting pins the atmosphere to its full-phase frame, so moving the camera asks for
+  // no new row: startup keeps waiting on exactly the rows it already planned, and none is obsolete.
+  assert.deepEqual(h.jobs.filter(job => job.url.includes("atmosphere")), atmosphere);
+  await h.resolveJobs(); assert.equal(await h.initialReady, true);
+  const startupCommit = h.commits[0]; assert.ok(startupCommit); assert.equal(h.commits.length, 1); assert.equal(startupCommit.plan.materials.atmosphere.frame, 127);
+  atmosphere[0]!.reject(new Error("late")); await flush(); assert.deepEqual(h.fatal, []);
 });
 test("A/B/A lens races retain the real active page group and only the latest action commits", async t => {
   const h = harness(); t.after(h.restore); await h.ready();
@@ -153,7 +151,7 @@ test("view changes during pending lens decoding publish current registration and
   const committedNormal = h.coordinator.state().committed; assert.ok(committedNormal); assert.ok(h.frameCount() > frames); assert.equal(committedNormal.lensId, "normal");
   assert.equal(h.atmosphereTarget().style.backgroundImage, before);
   await h.resolveJobs(); assert.equal(await request, true);
-  const topographyCommit = h.commits.at(-1); assert.ok(topographyCommit); assert.equal(topographyCommit.selection.lensId, "topography"); assert.equal(topographyCommit.plan.materials.atmosphere.frame, 84);
+  const topographyCommit = h.commits.at(-1); assert.ok(topographyCommit); assert.equal(topographyCommit.selection.lensId, "topography"); assert.equal(topographyCommit.plan.materials.atmosphere.frame, 127);
 });
 test("same resource demand is coalesced across lens and speed actions", async t => {
   const h = harness(); t.after(h.restore); await h.ready();
@@ -184,12 +182,16 @@ test("Saturn's actual cutaway is exclusive and repeated selection stays selected
   const exterior = h.selection.dispatch({ kind: "lens", id: "methane" }); await h.settle(); assert.equal(await exterior, true);
   const methane = h.selection.state().committed; assert.ok(methane); assert.equal(methane.lensId, "methane");
 });
-test("frame row misses keep the real material while shared residency loads a replacement", async t => {
+// Earth's flood lighting pins the atmosphere to its full-phase frame, so a camera move asks for no
+// new row and there is no row miss to recover from. The row-miss path itself is exercised by a
+// directional body in prepared-illumination-consumers.test.mts; this asserts the pinned contract.
+test("the flood-lit atmosphere holds its real material when the camera moves", async t => {
   const h = harness(); t.after(h.restore); await h.ready(); const image = h.atmosphereTarget().style.backgroundImage;
+  const jobs = h.jobs.length;
   h.view(1); assert.equal(h.atmosphereTarget().style.backgroundImage, image); await flush();
-  assert.equal(h.coordinator.state().pending, false); assert.equal(h.coordinator.state().loadingMaterial, true);
-  await h.resolveJobs(); assert.notEqual(h.atmosphereTarget().style.backgroundImage, image);
-  const rowPlan = h.coordinator.state().plan; assert.ok(rowPlan); assert.equal(h.coordinator.state().loadingMaterial, false); assert.equal(rowPlan.materials.atmosphere.frame, 52);
+  assert.equal(h.coordinator.state().pending, false); assert.equal(h.coordinator.state().loadingMaterial, false);
+  assert.equal(h.jobs.length, jobs); assert.equal(h.atmosphereTarget().style.backgroundImage, image);
+  const rowPlan = h.coordinator.state().plan; assert.ok(rowPlan); assert.equal(rowPlan.materials.atmosphere.frame, 127);
 });
 test("a native selection write failure retires the session with no successful control tail", async t => {
   const h = harness(); t.after(h.restore); await h.ready(); const before = h.changes.length;
@@ -216,8 +218,8 @@ test("camera movement in the prepared-ticket promise handoff retries the origina
     if (ready && armed && !fired) { fired = true; queueMicrotask(() => h.view(2)); }
   }).catch(() => {}); } }); t.after(h.restore); await h.ready(); armed = true;
   const request = h.lens("topography"); await h.resolveJobs(); assert.equal(await request, true);
-  const retryCommit = h.commits.at(-1); assert.ok(retryCommit); assert.equal(fired, true); assert.equal(retryCommit.plan.materials.atmosphere.frame, 84);
-  assert.equal(h.commits.length, 2); assert.deepEqual(h.fatal, []); assert.ok(h.coordinator.stats().passes >= 3);
+  const retryCommit = h.commits.at(-1); assert.ok(retryCommit); assert.equal(fired, true); assert.equal(retryCommit.plan.materials.atmosphere.frame, 127);
+  assert.equal(h.commits.length, 2); assert.deepEqual(h.fatal, []); assert.ok(h.coordinator.stats().passes >= 2);
 });
 test("package reducers and resolvers are rejected before hidden work can start", () => {
   for (const name of ["reduceSelection", "resolvePresentation"]) {
@@ -228,7 +230,7 @@ test("package reducers and resolvers are rejected before hidden work can start",
 });
 test("same-row facts advance only after a successful shared native frame publication", async t => {
   const h = harness(); t.after(h.restore); await h.ready(); const jobs = h.jobs.length, commits = h.commits.length;
-  h.view(0, 1); const sameRowPlan = h.coordinator.state().plan; assert.ok(sameRowPlan); assert.equal(sameRowPlan.materials.atmosphere.frame, 21);
+  h.view(0, 1); const sameRowPlan = h.coordinator.state().plan; assert.ok(sameRowPlan); assert.equal(sameRowPlan.materials.atmosphere.frame, 127);
   assert.equal(h.jobs.length, jobs); assert.equal(h.commits.length, commits); const successful = h.coordinator.state().plan;
   const binding = earthDefinition.viewBindings.find(binding => binding.kind === "counter-rotation"); assert.ok(binding);
   Object.defineProperty(h.created[binding.target].style, "transform", { configurable: true, get() { throw new Error("native frame failed"); } });
