@@ -174,6 +174,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
     addObservationLenses();
   } else if (recipe('surface')?.lenses) {
     const plan = record(recipe('surface'));
+    const materialControls = namedRecords(record(plan.descriptor).controls);
     // In this family geometry.sources is an executable input map, not an
     // attribution inventory. The material preparer reads these exact paths.
     const baseInputs = paths(recipe('geometry')?.sources);
@@ -186,8 +187,11 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       }));
     // The base material and cutaway are produced by the material recipe.
     for (const lens of controls.filter(lens => !products.some(product => product.id === lens.id))) {
+      const materialControl = materialControls.find(control => control.id === lens.id);
+      const qualification = materialControl ? optionalText(materialControl.qualification) : undefined;
       add(lens.id, 'geometry', '', [...baseInputs, ...paths(recipe('materials')), ...paths(recipe('rings'))],
         'Prepare the source-defined oblate body, ring and cutaway material.', { recipeDependencies: baseRecipes,
+          ...(qualification ? { limitations: [qualification] } : {}),
           ...(lens.view === 'interior' ? { observationAttribution: 'none' as const, interpretation: { kind: 'schematic-interior' } } : {}),
         });
     }

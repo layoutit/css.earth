@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
-import { datasetContributors } from '../dataset-context.mts';
+import { datasetContributors, datasetSourceDetail } from '../dataset-context.mts';
 import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
 import { parsePreparedExploration } from '../../src/platform/prepared-exploration.mts';
+import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 const prepared = parsePreparedSources(await read('../prepared-sources.json'));
@@ -30,4 +31,12 @@ test('unresolved capture attribution names the credited group without guessing a
 
 test('an unknown dataset does not inherit another dataset’s contributors', () => {
   assert.deepEqual(context('earth', 'missing-dataset'), { missions: [], facilities: [], notes: [] });
+});
+
+test('volume dataset rows name their directly captured instrument instead of image dimensions', async () => {
+  const provenance = validateObjectProvenance(await read('../../src/objects/m42/prepared/provenance.json'), 'm42');
+  assert.equal(datasetSourceDetail('eso-optical', provenance, exploration.catalog), 'VLT');
+  assert.equal(datasetSourceDetail('eso-vista', provenance, exploration.catalog), 'VISTA');
+  const direct = provenance.sources.filter(source => source.lensId === 'eso-vista').map(source => source.id);
+  assert.deepEqual(datasetContributors('m42', 'eso-vista', exploration.graph, exploration.catalog, direct).facilities.map(facility => facility.id), ['vista']);
 });

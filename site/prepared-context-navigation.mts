@@ -3,13 +3,13 @@ import type { PreparedCatalogObject, SpatialCatalogSource, SpatialCitation } fro
 import type { createPreparedUniverse } from '../src/renderers/css/universe/prepared-universe-runtime.js';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
 import type { PreparedNavigationFocus } from '../src/renderers/css/navigation/prepared-focus.js';
+import { presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 import { record } from './browser-types.mts';
 
 type PreparedContextLayer = ReturnType<ReturnType<typeof createPreparedUniverse>['mount']>;
 type VolumeLensState = NonNullable<ReturnType<PreparedContextLayer['volumeLensState']>>;
 export type PreparedFocusPresentation = VolumeLensState & {
   selectLens(lensId: string): void;
-  setStarsVisible?(enabled: boolean): void;
 };
 export interface FocusCallbacks {
   onFocusChange?(url: string): void;
@@ -23,6 +23,26 @@ interface ContextNavigationOptions {
   windowTarget: Window;
   onError?(error: unknown): void;
   unavailableObjectIds?: readonly string[];
+}
+
+/** A saved focus camera is authoritative only while its named subject still intersects the stage. */
+function savedCameraShowsFocus(navigation: ObjectWorldNavigation, focus: PreparedNavigationFocus) {
+  const optics = navigation.optics();
+  const view = presentWorldCamera(navigation.capture(), { ...navigation.frame,
+    originM: focus.positionM, bodyRadiusM: focus.framingRadiusM }, optics);
+  // A camera inside a prepared volume can validly look away from its centre while the volume surrounds it.
+  if (view.distanceM <= focus.framingRadiusM) return true;
+  const ellipse = view.silhouette;
+  if (!ellipse) return false;
+  const width = optics.widthPixels ?? optics.framingRadiusPixels * 2;
+  const height = optics.heightPixels ?? optics.framingRadiusPixels * 2;
+  const rect = optics.visibleRect ?? { left: -width / 2, right: width / 2, top: -height / 2, bottom: height / 2 };
+  // The ellipse can be rotated. Its largest semi-axis is a conservative intersection bound:
+  // false means certainly off-screen, while an edge-on saved composition remains untouched.
+  const radius = Math.max(ellipse.radialSemiAxis, ellipse.tangentialSemiAxis);
+  const [x, y] = ellipse.centre;
+  return x + radius >= rect.left && x - radius <= rect.right &&
+    y + radius >= rect.top && y - radius <= rect.bottom;
 }
 
 /** Catalogue focus on the current detailed scene's shared camera owner. */
@@ -51,6 +71,13 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     windowTarget.history.replaceState(windowTarget.history.state, '', url.pathname + url.search + url.hash);
     notify(url.href);
   };
+  const clearSavedCameraUrl = () => {
+    const url = new URL(windowTarget.location.href);
+    if (!url.searchParams.has('v')) return;
+    url.searchParams.delete('v');
+    windowTarget.history.replaceState(windowTarget.history.state, '', url.pathname + url.search + url.hash);
+    notify(url.href);
+  };
   const publishContent = (id: string | null) => {
     const record = id ? layer.resolveGalaxy(id) : null;
     const references = record ? [record.skyPosition.sourceRef, record.distance.sourceRef, (isPreparedCluster(record) || isPreparedNebula(record) ? record.classification.sourceRef : record.membership.sourceRef)].filter((reference): reference is string => Boolean(reference)) : [];
@@ -66,11 +93,6 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         layer.selectVolumeLens(state.objectId, lensId);
         if (!unsubscribeLens) publishLens();
       },
-      ...(!layer.imageLayerFrames?.[state?.objectId ?? ''] && layer.setVolumeStarsVisible ? { setStarsVisible(enabled: boolean) {
-        if (!canSelect()) return;
-        layer.setVolumeStarsVisible(state.objectId, enabled);
-        if (!unsubscribeLens) publishLens();
-      } } : {}),
     } : null;
     const citations = references.map(reference => {
       const citation = resolveSpatialCitation(reference, currentSources());
@@ -162,19 +184,25 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         const id = query.get('focus'), focus = id ? resolve(id) : null, state = lensState(id);
         const lensId = query.get('focusLens') ?? state?.defaultLens;
         const object = id ? layer.resolveGalaxy(id) : null;
+        const detailedObjectId = object && !isPreparedCluster(object) ? object.detailedObjectId : undefined;
+        const declaredVolume = detailedObjectId ? layer.volumeLensFrames?.[detailedObjectId] : undefined;
+        const selectableVolumeId = declaredVolume && detailedObjectId ? detailedObjectId
+          : state && !layer.imageLayerFrames?.[state.objectId] ? state.objectId : null;
         const unavailable = object && !isPreparedCluster(object) && object.detailedObjectId && unavailableObjectIds.includes(object.detailedObjectId);
-        if (id && !unavailable && lensId !== undefined && (!state || !state.lenses.some(lens => lens.id === lensId))) {
+        if (id && !unavailable && lensId !== undefined && state && !state.lenses.some(lens => lens.id === lensId)) {
           throw new TypeError(`Unknown prepared focus lens: ${lensId}`);
         }
         owner.setPreparedFocus!(focus);
-        if (state && lensId !== undefined && !layer.imageLayerFrames?.[state.objectId]) layer.selectVolumeLens(state.objectId, lensId);
+        if (!unavailable && lensId !== undefined && selectableVolumeId) layer.selectVolumeLens(selectableVolumeId, lensId);
         selected = id; layer.selectGalaxy(id, focus); observeLens(id);
         publishContent(id);
         if (!id || (state && !query.has('focusLens'))) writeSelectionUrl(id);
         ready = true;
-        // A focus-only link is a destination. Saved camera links retain their
-        // exact observer pose; changing the pivot alone must not reframe them.
-        if (focus && !query.has('v')) {
+        // A focus-only link is a destination. A saved camera remains exact while it still shows
+        // the named focus; a stale focus+camera pairing must not strand the user in empty space.
+        const savedCameraIsCompatible = focus && query.has('v') ? savedCameraShowsFocus(owner, focus) : false;
+        if (focus && (!query.has('v') || !savedCameraIsCompatible)) {
+          if (query.has('v')) clearSavedCameraUrl();
           beforeFlight();
           if (current()) return owner.flyToPreparedFocus(focus, { signal: controller.signal, reducedMotion: true });
         }
