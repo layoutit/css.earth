@@ -10,7 +10,7 @@ import type { OrbitSegment } from '../solar-system/types.js';
 import { createWorldFrameProjection } from './world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../labels/stable-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
-import { createLabelBudget, labelExtentOpacity, UNIVERSE_LABEL_POLICY } from '../labels/universe-label-policy.js';
+import { createLabelBudget, labelExtentOpacity, labelLimit, UNIVERSE_LABEL_POLICY } from '../labels/universe-label-policy.js';
 
 export const BODY_INDICATOR_DIAMETER = 16;
 export const CONTEXT_LINE_WIDTH = 1;
@@ -93,7 +93,7 @@ export interface WorldContextView {
   rotationActive?: boolean;
   /** Preserve the last moving frame through the first settled publication. */
   preserveCommittedAnnotations?: boolean;
-  /** Shell occlusion bounds in the same screen coordinates as annotations. */
+  /** External exclusion data retained for transport compatibility; world annotations ignore shell footprints. */
   labelBlockers?: readonly LabelScreenRect[];
   /** Largest chord-bank deviation, in screen pixels, the paint owner accepts; default 0.1. */
   orbitLodPixels?: number;
@@ -118,8 +118,6 @@ interface ProjectedBody<Entry> {
   annotationVisible: boolean; hovered: boolean; inFrame: boolean; priority: number; lineWidth: number; orbitVisibility: number;
   /** The body reaches this camera's naming policy, whether or not a caption slot was free for it. */
   nameable: boolean;
-  /** Fixed shell/viewport bounds leave no possible annotation placement. */
-  annotationOccluded: boolean;
   segments: readonly OrbitSegment[]; labelPosition?: readonly number[];
 }
 /** Each planetary system fades with the camera's distance from its own star: the Sun's
@@ -270,7 +268,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           // A hidden body's changing depth has no consumer. Keeping its
           // retirement state stable avoids a worker patch on every camera move.
           const stub = (prepared[entry.index]!.hiddenStub ??= { projected: { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false,
-            visible: false, annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false, annotationOccluded: false,
+            visible: false, annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false,
             lineWidth: CONTEXT_LINE_WIDTH, orbitVisibility: 0, segments: [] } });
           stub.projected.entry = entry;
           projectedBodies.push(stub.projected as ProjectedBody<Entry>);
@@ -349,18 +347,23 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const primary = !entry.orbit || systemFade.isSystemStar(entry.orbit.centerBodyId);
         const priority = (isAnchor ? 1000 : isLocator ? 500 : 0) + (primary ? 100 : 0) + body.radiusM / plan.focus.radiusM;
         const projected = (prepared[entry.index]!.projected ??= { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false, visible: false,
-          annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false, annotationOccluded: false,
+          annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false,
           lineWidth: 0, orbitVisibility: 0, segments: [] }) as ProjectedBody<Entry>;
         projected.entry = entry; projected.x = x; projected.y = y; projected.depth = depth; projected.diameter = diameter; projected.markerOpacity = markerOpacity;
         projected.circle = circle; projected.visible = visible; projected.annotationVisible = annotationVisible; projected.hovered = hovered;
-        projected.inFrame = inFrame; projected.priority = priority; projected.annotationOccluded = false;
+        projected.inFrame = inFrame; projected.priority = priority;
         projected.lineWidth = appearance.width; projected.orbitVisibility = orbitVisibility;
         projected.segments = segments; projected.labelPosition = undefined;
         projectedBodies.push(projected);
       }
       // Orbitless locators use the same stroke as the visible system, then thin as they recede.
       for (const projected of projectedBodies) if (projected.entry.orbit === null && (projected === projectedBodies[0] || !projected.entry.bodyHidden)) projected.lineWidth = anchorLineWidth;
-      const labelBudget = createLabelBudget(width, height, [], view.labelBlockers);
+      // Shell chrome never decides whether a world annotation exists. An
+      // in-frame anchor is already the visibility boundary; captions are kept
+      // inside the viewport below, while partially clipped circles are left to
+      // normal browser clipping. The viewport width still owns density only.
+      const worldLabelBudget = () => createLabelBudget(Infinity, Infinity, [], [], labelLimit(width));
+      const labelBudget = worldLabelBudget();
       const candidates: (StableLabelCandidate & { projected: ProjectedBody<Entry> })[] = [];
       for (const projected of projectedBodies) {
         const { entry, x, y, diameter, markerOpacity, annotationVisible, hovered, priority } = projected;
@@ -421,10 +424,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           : resolvedDisc || body.id === emphasizedId ? [3, 2, 0, 1] : primary ? radialSides : [0, 1, 2, 3];
         const placements = sides.map(slot => {
           let [left, top] = positions[slot];
-          if (hovered) {
-            left = Math.max(-width / 2 + 4, Math.min(left, width / 2 - size.width - 4));
-            top = Math.max(-height / 2 + 4, Math.min(top, height / 2 - size.height - 4));
-          }
+          left = Math.max(-width / 2 + 4, Math.min(left, width / 2 - size.width - 4));
+          top = Math.max(-height / 2 + 4, Math.min(top, height / 2 - size.height - 4));
           return { slot, rect: { left, top, right: left + size.width, bottom: top + size.height } };
         });
         const radius = BODY_INDICATOR_DIAMETER / 2;
@@ -434,10 +435,6 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const anchor = circle && !referenceAnnotationOnly
           ? { left: x - radius, right: x + radius, top: y - radius, bottom: y + radius }
           : undefined;
-        // Test fixed constraints before admission mutates the shared budget. If the
-        // shell or viewport makes every placement impossible, the body's path is
-        // still meaningful in the visible stage, just as when the body is offscreen.
-        projected.annotationOccluded = !placements.some(({ rect }) => labelBudget.accepts(rect, anchor));
         candidates.push({ id: body.id, projected, navigable: true,
           pinned: hovered ? 3 : highlighted ? 2 : body.id === emphasizedId ? 1 : 0,
           priority, tier: annotationPriorities[body.id] ?? 0, shown: entry.labelShown,
@@ -450,12 +447,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       // A drag moves every candidate on every frame. Re-running collision admission
       // during that motion made adjacent bodies trade the same slot, so their circles
       // and captions blinked while the physical markers remained visible. Keep the
-      // committed membership and side until release; only the fixed viewport/shell
-      // bounds may retire a moving annotation during the gesture.
+      // committed membership and side until release. A caption is constrained
+      // rather than retired when its committed side reaches the viewport edge.
       const accepted = rotationActive || preserveCommittedAnnotations ? candidates.flatMap(candidate => {
         if (!candidate.shown) return [];
         const previous = candidate.placements.find(item => item.slot === candidate.previousPlacement);
-        if (!previous || !createLabelBudget(width, height, [], view.labelBlockers).accepts(previous.rect, candidate.anchor)) return [];
+        if (!previous || !worldLabelBudget().accepts(previous.rect, candidate.anchor)) return [];
         return [{ candidate, placement: previous.slot, rect: previous.rect }];
       }) : admitStableLabels(candidates, labelBudget);
       for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; }
@@ -475,9 +472,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const anonymousMinor = (annotationPriorities[entry.body.id] ?? 2) < 2 && !entry.labelShown &&
           !projected.hovered && entry.highlighted !== true && entry.body.id !== emphasizedId;
         // An on-screen context path belongs to the annotation that identifies its body
-        // when that annotation lost ordinary decluttering. Fixed shell occlusion still
-        // preserves major paths, and the selected object's own path remains available.
-        if (anonymousMinor || projected.inFrame && !projected.annotationOccluded && !entry.labelShown &&
+        // when that annotation lost ordinary decluttering. The selected object's own
+        // path remains available.
+        if (anonymousMinor || projected.inFrame && !entry.labelShown &&
             (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout

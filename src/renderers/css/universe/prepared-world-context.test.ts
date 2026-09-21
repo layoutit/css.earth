@@ -1395,7 +1395,7 @@ test.each(['pointer', 'keyboard'])('a hidden moon annotation reveals together on
   layer.destroy();
 });
 
-test('hover keeps a circle label inside the viewport when every normal placement is clipped', () => {
+test('an in-frame circle and caption stay visible and constrained at the viewport edge', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const source = plan(1);
@@ -1408,13 +1408,16 @@ test('hover keeps a circle label inside the viewport when every normal placement
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   const root = layer.root as unknown as FakeElement;
   const circle = find(root, 'contextBody', 'mercury'), label = find(root, 'contextLabel', 'mercury');
-  expect(annotationVisibility(circle, 'indicator')).toBe('hidden');
-  expect(annotationVisibility(label, 'label')).toBe('hidden');
+  expect(annotationVisibility(circle, 'indicator')).toBe('');
+  expect(annotationVisibility(label, 'label')).toBe('');
+  const beforeHover = captionPosition(label);
   circle.dataset.objectHovered = 'true';
   host.dispatchEvent(new Event('objecthoverchange'));
   document.defaultView.advance(16); document.defaultView.advance(200);
+  expect(annotationVisibility(circle, 'indicator')).toBe('');
   expect(annotationVisibility(label, 'label')).toBe('');
   const [x, y] = captionPosition(label);
+  expect([x, y]).toEqual(beforeHover);
   expect(x).toBeGreaterThanOrEqual(-396); expect(x + label.dataset.contextName.length * 6).toBeLessThanOrEqual(396);
   expect(y).toBeGreaterThanOrEqual(-296); expect(y + 14).toBeLessThanOrEqual(296);
   layer.destroy();

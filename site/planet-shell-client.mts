@@ -1,4 +1,3 @@
-import { createLabelOcclusionController } from './label-occlusion-controller.mts';
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
@@ -106,7 +105,6 @@ export function mountPlanetShell({
     // Hover, focus or press on another body fetches its card before the click.
     own(bindNavigationIntent({ documentTarget, windowTarget, objects: SCENE_OBJECTS, fragments, skip: id => id === cardObjectId }));
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime));
-    own(createLabelOcclusionController(documentTarget));
     own(createExplorerRailController(documentTarget, windowTarget, {
       onOpenSolarSystem: () => objectBrowser.showSystem(SOLAR_SYSTEM_ID),
     }));

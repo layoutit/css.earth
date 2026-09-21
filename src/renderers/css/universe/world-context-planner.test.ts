@@ -29,7 +29,7 @@ function view(): TestView {
       indicatorShown: false, indicatorRadius: 8, orbitAppearance: { width: 1, opacity: 1 } })) };
 }
 
-test('shell occlusion excludes admitted body labels and repeated committed frames keep their placements', () => {
+test('shell rectangles do not decide world annotation membership or placement', () => {
   const current = view(), planner = createWorldContextPlanner(plan);
   const publish = () => {
     const frame = planner(current);
@@ -42,27 +42,31 @@ test('shell occlusion excludes admitted body labels and repeated committed frame
   const settled = publish();
   expect(publish()).toEqual(settled);
   expect(settled.length).toBeGreaterThan(0);
-  const first = settled[0], size = current.bodies[first.index].labelSize;
-  const [x, y] = first.point;
-  current.labelBlockers = [{ left: x - 2, top: y - 2, right: x + size.width + 2, bottom: y + size.height + 2 }];
-  const next = publish();
-  for (const label of next) {
-    const [lx, ly] = label.point, labelSize = current.bodies[label.index].labelSize, blocked = current.labelBlockers[0];
-    expect(lx < blocked.right && lx + labelSize.width > blocked.left && ly < blocked.bottom && ly + labelSize.height > blocked.top).toBe(false);
-  }
+  current.labelBlockers = [{ left: -10000, top: -10000, right: 10000, bottom: 10000 }];
+  expect(publish()).toEqual(settled);
 });
 
-test('shell occlusion keeps the path of a body whose annotation has no possible placement', () => {
+test('viewport edges constrain captions without retiring an in-frame circle', () => {
   const current = view(), planner = createWorldContextPlanner(plan);
-  const clear = planner(current);
-  const target = clear.projectedBodies.find(body => body.visible && body.labelShown && body.segments.length > 0 && body.index > 0)!;
-  expect(target).toBeDefined();
-  current.labelBlockers = [{ left: target.x - 100, top: target.y - 100, right: target.x + 100, bottom: target.y + 100 }];
-  const occluded = planner(current).projectedBodies.find(body => body.index === target.index)!;
-  expect(occluded.labelShown).toBe(false);
-  expect(occluded.indicatorShown).toBe(false);
-  expect(occluded.orbitVisibility).toBeGreaterThan(0);
-  expect(occluded.segments.length).toBeGreaterThan(0);
+  const initial = planner(current);
+  const targetIndex = [plan.focus, ...plan.bodies].findIndex(body => body.id === 'earth');
+  const target = initial.projectedBodies.find(body => body.index === targetIndex)!;
+  expect(target.labelShown).toBe(true);
+  expect(target.indicatorShown).toBe(true);
+  const targetX = target.x;
+  for (const body of initial.projectedBodies) Object.assign(current.bodies[body.index], {
+    labelShown: body.labelShown, labelPlacement: body.labelPlacement, indicatorShown: body.indicatorShown,
+  });
+  current.bodies.forEach((body, index) => { body.labelHidden = index !== targetIndex; });
+  const width = current.viewport.widthPixels!, [offsetX, offsetY] = current.viewport.principalOffsetPixels!;
+  current.viewport.principalOffsetPixels = [offsetX + width / 2 - 1 - targetX, offsetY];
+  const edge = planner(current).projectedBodies.find(body => body.index === targetIndex)!;
+  expect(edge.visible).toBe(true);
+  expect(edge.labelShown).toBe(true);
+  expect(edge.indicatorShown).toBe(true);
+  const label = current.bodies[targetIndex]!.labelSize;
+  expect(edge.labelPosition![0]).toBeGreaterThanOrEqual(-width / 2 + 4);
+  expect(edge.labelPosition![0] + label.width).toBeLessThanOrEqual(width / 2 - 4);
 });
 
 test('complete context frames cross a structured-clone boundary without mutating the input owner', () => {
@@ -395,21 +399,6 @@ test('Earth remains a circle-and-label reference through the framed outer Solar 
   const beyond = calculate(input).projectedBodies.find(body => points[body.index].id === 'earth')!;
   expect(beyond.labelShown).toBe(false);
   expect(beyond.indicatorShown).toBe(false);
-});
-
-test('fixed shell occlusion preserves context paths that still cross the visible stage', () => {
-  const calculate = createWorldContextPlanner(plan), input = view();
-  const index = [plan.focus, ...plan.bodies].findIndex(body => body.id === 'saturn');
-  const saturn = plan.bodies[index - 1]!;
-  input.selectedId = 'saturn'; input.overview = false;
-  input.world.pose.positionM = [saturn.positionM[0], saturn.positionM[1], saturn.positionM[2] + saturn.radiusM * 8];
-  const clear = calculate(input).projectedBodies.filter(body => body.segments.length).map(body => body.index);
-  input.labelBlockers = [{ left: -1000, right: 1000, top: -1000, bottom: 1000 }];
-  const frame = calculate(input);
-  expect(frame.projectedBodies.every(body => !body.labelShown && !body.indicatorShown)).toBe(true);
-  expect(frame.projectedBodies[index].segments.length).toBeGreaterThan(0);
-  expect(clear.length).toBeGreaterThan(1);
-  expect(frame.projectedBodies.filter(body => body.segments.length).length).toBeGreaterThan(1);
 });
 
 test.each(['ryugu', 'bennu'])('%s remains identifiable when its category is hidden, then retires on deselection', id => {
