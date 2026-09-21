@@ -34,62 +34,42 @@
   "evidence": [
     {
       "path": "src/objects/bennu/source/features/sites.json",
-      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
-      "sha256": "593a9885578080b1e8512aa67688dd1839c2b2e6a4e5a523c0fa28e9b50d05db",
       "locator": "/sites"
     },
     {
       "path": "src/objects/comet-67p/source/features/sites.json",
-      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
-      "sha256": "82872a1dc96d6d97fcd9ffef2c480ef39feafb4a50db2fc19d3a4db852d3999b",
       "locator": "/sites"
     },
     {
       "path": "src/objects/dimorphos/source/features/sites.json",
-      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
-      "sha256": "609602bd18bbf589de8d86c3a374a6f0f5bfe73a86bb790053ccfbc4223ad0a2",
       "locator": "/sites"
     },
     {
       "path": "src/objects/eros/source/features/sites.json",
-      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
-      "sha256": "e91a00f6e8313ec4c2dfbe9841584f47c5299479d7c66c03f16a5bdf511f6ab9",
       "locator": "/sites"
     },
     {
       "path": "src/objects/mars/source/features/sites.json",
-      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
-      "sha256": "a14285fa6b38fd1dd403119fee66b3d285eac41851e5ca57972df6285dd1921c",
       "locator": "/sites"
     },
     {
       "path": "src/objects/mercury/source/features/sites.json",
-      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
-      "sha256": "4568f15244d6886ab3f1c11c39ee64f05f8c5ec7ab91a3971e6af34bf0b82858",
       "locator": "/sites"
     },
     {
       "path": "src/objects/moon/source/features/sites.json",
-      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
-      "sha256": "9c85d21238be3cbf1186a964d9eff8718dff93f934dbfdb7aa71076d19b39cc2",
       "locator": "/sites"
     },
     {
       "path": "src/objects/ryugu/source/features/sites.json",
-      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
-      "sha256": "8e7cb7fc9b9912414263cb5bb6095f0693ec4a671c8f7ece0f787627f5e0b641",
       "locator": "/sites"
     },
     {
       "path": "src/objects/titan/source/features/sites.json",
-      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
-      "sha256": "9f2dd6d9f490b4c8b775ad1764699d27cd6899e65065cc93604f8a187d59d27f",
       "locator": "/sites"
     },
     {
       "path": "src/objects/venus/source/features/sites.json",
-      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
-      "sha256": "54cc7c82a696f47dca88aa7d4e7e4679fbc3012394628b357b9eb12715883d04",
       "locator": "/sites"
     }
   ],

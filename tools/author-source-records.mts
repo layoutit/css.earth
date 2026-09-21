@@ -1,50 +1,38 @@
 /**
  * Bind an object's pinned inputs to the source catalogue. Every input needs a
- * catalogued binding and a record in `src/sources/<catalogueId>.json`; the
- * binding's evidence names the manifest revision that introduced the entry,
- * which exists only after that manifest is committed. Run without `--evidence`
- * to add missing bindings and records with placeholder evidence, commit the
- * manifest, then run with `--evidence <revision>` to pin the placeholders to
- * that revision's manifest bytes. Documents cite records authored by hand,
- * such as the publication behind a photometric model record; their placeholder
- * evidence is pinned the same way, for this manifest and locator only. Existing
- * records and pinned evidence are never rewritten. The body's provenance record
+ * catalogued binding and a record in `src/sources/<catalogueId>.json`. A record's
+ * evidence names the manifest and the entry that cites it; git history holds the
+ * rest. The binding's own evidence string still names the manifest revision that
+ * introduced the entry, which exists only after that manifest is committed. Run
+ * without `--evidence` to add missing bindings and records, commit the manifest,
+ * then run with `--evidence <revision>` to pin the binding placeholders. Documents
+ * cite records authored by hand, such as the publication behind a photometric
+ * model record; each must exist. Existing records are never rewritten. The body's provenance record
  * pins the manifest's bytes, so the command line records it again whenever it
  * changed the manifest; a stale record otherwise fails the next preparation of
  * any body.
  */
-import { sha256 } from '../src/platform/sha256.mts';
-import { execFile } from 'node:child_process';
 import { access, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
-import { promisify } from 'node:util';
 import { pathToFileURL } from 'node:url';
 import { parseSourceCatalog } from '../src/platform/source-catalog.mts';
 import { requireArray, requireRecord, requireString } from './source-values.mts';
 
 export const PLACEHOLDER_REVISION = '0'.repeat(40);
-const exec = promisify(execFile);
 const text = (value: unknown) => typeof value === 'string' && value.trim() ? value.trim() : undefined;
 
 const exists = (path: string) => access(path).then(() => true, () => false);
 
 export interface AuthoringOptions {
   root: string; objectId: string;
-  /** Pin placeholder evidence to this manifest revision. */
+  /** Pin placeholder binding evidence to this manifest revision. */
   evidence?: string;
-  /** Manifest bytes at a revision; defaults to `git show`. */
-  manifestAt?: (revision: string, repositoryPath: string) => Promise<Uint8Array>;
   write?: boolean;
 }
 export interface AuthoringResult { bindings: string[]; records: string[]; pinned: string[] }
 
-async function gitShow(revision: string, repositoryPath: string, root: string) {
-  const { stdout } = await exec('git', ['show', `${revision}:${repositoryPath}`], { cwd: root, encoding: 'buffer', maxBuffer: 64 * 1024 * 1024 });
-  return new Uint8Array(stdout);
-}
-
-/** Add missing bindings and records; pin placeholder evidence when a revision is given. */
-export async function authorSourceRecords({ root, objectId, evidence, manifestAt, write = true }: AuthoringOptions): Promise<AuthoringResult> {
+/** Add missing bindings and records; pin placeholder binding evidence when a revision is given. */
+export async function authorSourceRecords({ root, objectId, evidence, write = true }: AuthoringOptions): Promise<AuthoringResult> {
   if (!/^[a-z][a-z0-9-]*$/u.test(objectId)) throw new TypeError(`Invalid object id: ${objectId}`);
   const objectDirectory = resolve(root, 'src/objects', objectId), manifestPath = resolve(objectDirectory, 'source/manifest.json');
   const repositoryPath = relative(root, manifestPath).split('\\').join('/');
@@ -54,7 +42,7 @@ export async function authorSourceRecords({ root, objectId, evidence, manifestAt
   const objectName = text(content.displayName) ?? text(content.title) ?? objectId.replace(/-/gu, ' ').replace(/\b[a-z]/gu, letter => letter.toUpperCase());
   const productIds = inputs.map(input => text(input.productId)), result: AuthoringResult = { bindings: [], records: [], pinned: [] };
   let manifestChanged = false;
-  const pinned = evidence ? { revision: evidence, sha256: sha256(await (manifestAt ?? ((revision, path) => gitShow(revision, path, root)))(evidence, repositoryPath)) } : null;
+  const pinned = evidence ? { revision: evidence } : null;
   if (pinned && !/^[a-f0-9]{40}$/u.test(pinned.revision)) throw new TypeError('Evidence revision must be a full 40-character commit hash.');
 
   for (const [index, input] of inputs.entries()) {
@@ -83,43 +71,28 @@ export async function authorSourceRecords({ root, objectId, evidence, manifestAt
         record = { id: catalogueId, kind: 'data-product', identityLevel: 'work', title: `${objectName} · ${inputId.replace(/[-_]+/gu, ' ')}`,
           identifiers: unique ? [{ type: 'pds4-lidvid', value: productId }] : [],
           links: origin ? [{ role: 'landing', url: origin, label: 'Source' }] : [],
-          evidence: [{ path: repositoryPath, revision: PLACEHOLDER_REVISION, sha256: '0'.repeat(64), locator }], relations: [],
+          evidence: [{ path: repositoryPath, locator }], relations: [],
           statements: [...(text(input.credit) ? [{ kind: 'credit', text: text(input.credit), scope: `The ${inputId.replace(/[-_]+/gu, ' ')} input.`, evidence: 'Manifest credit field.' }] : []),
             ...(text(input.license) ? [{ kind: 'rights', text: text(input.license), scope: 'Redistributed display derivatives.', evidence: 'Manifest license field.' }] : [])] };
         result.records.push(catalogueId);
       }
-      if (pinned) for (const entry of requireArray(record.evidence, 'record evidence').map(value => requireRecord(value, 'record evidence entry'))) {
-        if (entry.revision !== PLACEHOLDER_REVISION) continue;
-        entry.revision = pinned.revision; entry.sha256 = pinned.sha256; entry.locator = locator;
-        if (!result.pinned.includes(catalogueId)) result.pinned.push(catalogueId);
-      }
-      if (result.records.includes(catalogueId) || result.pinned.includes(catalogueId)) {
+      if (result.records.includes(catalogueId)) {
         parseSourceCatalog({ schema: 'cssearth-source-catalog@1', records: [record] });
         if (write) await writeFile(recordPath, JSON.stringify(record, null, 2) + '\n');
       }
     }
   }
-  if (pinned) {
+  // A document cites records authored by hand; each citation must reach one.
+  {
     const documents = requireArray(manifest.documents ?? [], 'manifest documents').map(value => requireRecord(value, 'manifest document'));
-    for (const [index, document] of documents.entries()) {
+    for (const document of documents) {
       if (document.sourceBinding === undefined) continue;
-      const binding = requireRecord(document.sourceBinding, 'source binding'), locator = `/documents/${index}`;
+      const binding = requireRecord(document.sourceBinding, 'source binding');
       if (binding.kind !== 'catalogued') continue;
       for (const value of requireArray(binding.references, 'binding references')) {
         const catalogueId = requireString(requireRecord(value, 'binding reference').catalogueId, 'catalogue id');
         const recordPath = resolve(root, 'src/sources', `${catalogueId}.json`);
         if (!await exists(recordPath)) throw new TypeError(`Document ${requireString(document.path, 'document path')} cites ${catalogueId}, which has no catalogue record.`);
-        const record = requireRecord(JSON.parse(await readFile(recordPath, 'utf8')), 'catalogue record');
-        let changed = false;
-        // A publication may be cited by several bodies; only this manifest's placeholder at this locator is pinned now.
-        for (const entry of requireArray(record.evidence, 'record evidence').map(item => requireRecord(item, 'record evidence entry'))) {
-          if (entry.revision !== PLACEHOLDER_REVISION || entry.path !== repositoryPath || entry.locator !== locator) continue;
-          entry.revision = pinned.revision; entry.sha256 = pinned.sha256; changed = true;
-        }
-        if (!changed) continue;
-        parseSourceCatalog({ schema: 'cssearth-source-catalog@1', records: [record] });
-        if (write) await writeFile(recordPath, JSON.stringify(record, null, 2) + '\n');
-        if (!result.pinned.includes(catalogueId)) result.pinned.push(catalogueId);
       }
     }
   }
@@ -136,7 +109,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const root = process.cwd(), manifestPath = resolve(root, 'src/objects', ids[0], 'source/manifest.json'), before = await readFile(manifestPath);
   const result = await authorSourceRecords({ root, objectId: ids[0], evidence });
   console.log(JSON.stringify(result, null, 1));
-  if (result.records.length && !evidence) console.log(`Commit the manifest, then rerun with --evidence <revision> to pin ${result.records.length} record(s).`);
+  if (result.bindings.length && !evidence) console.log(`Commit the manifest, then rerun with --evidence <revision> to pin ${result.bindings.length} binding(s).`);
   if (!before.equals(await readFile(manifestPath))) {
     // A volume package's provenance is the volume compiler's, not a body's.
     const presentation = await readFile(resolve(root, 'src/objects', ids[0], 'source/presentation.json'), 'utf8').then(text => JSON.parse(text) as { schema?: unknown }, () => null);

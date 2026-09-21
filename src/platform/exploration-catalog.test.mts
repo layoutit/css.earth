@@ -5,7 +5,7 @@ const agencies = parseAgencies({ NASA: { name: 'NASA', sourceUrl: 'https://www.n
 import { parseSourceCatalog, sourceResolver } from './source-catalog.mts';
 const sources = sourceResolver(parseSourceCatalog({schema:'cssearth-source-catalog@1',records:[{
   id:'source',title:'Mission source',kind:'reference-page',identityLevel:'work',identifiers:[],relations:[],statements:[],
-  links:[{role:'landing',url:'https://www.nasa.gov/',label:'NASA'}],evidence:[{path:'tests/source.json',revision:'a'.repeat(40),sha256:'b'.repeat(64),locator:'/source'}],
+  links:[{role:'landing',url:'https://www.nasa.gov/',label:'NASA'}],evidence:[{path:'tests/source.json',locator:'/source'}],
 }]}));
 const parseExplorationCatalog = (raw: unknown, agencies: Parameters<typeof parse>[1]) => parse(raw,agencies,sources);
 const cited = <T,>(value: T) => ({ value, citations: [{catalogueId:'source',checkedOn:'2026-09-10'}] });

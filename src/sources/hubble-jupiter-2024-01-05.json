@@ -19,32 +19,22 @@
   "evidence": [
     {
       "path": "src/objects/callisto/source/manifest.json",
-      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-      "sha256": "4ebe4dae350c76f1c482b5d7c422caf840d09eb73c4e446e3a76e6f98c3ba215",
       "locator": "/inputs/3"
     },
     {
       "path": "src/objects/europa/source/manifest.json",
-      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-      "sha256": "0686fe673474b00624a9aa620b81b2b0dd1da8df0d76b306ecb0dbcb4408a90d",
       "locator": "/inputs/3"
     },
     {
       "path": "src/objects/ganymede/source/manifest.json",
-      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-      "sha256": "de978afebd399e1bf1403c1cfd18ec2ff398cddf6e1941130d634e2e6c02408e",
       "locator": "/inputs/4"
     },
     {
       "path": "src/objects/io/source/manifest.json",
-      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-      "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
       "locator": "/inputs/4"
     },
     {
       "path": "src/objects/jupiter/source/manifest.json",
-      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-      "sha256": "2ffa5896b236cbe154361b47f7344ab3a3c21d31cc3689973284597326e15341",
       "locator": "/inputs/0"
     }
   ],

@@ -41,8 +41,8 @@ evidence and plain language. Keep scientific tables in their existing records.
    Use the existing [source record fields](../src/platform/source-catalog.mts).
    Add its published title, provider identifiers and citation link.
    Record authors, date and version when established by the source. Cite the
-   provider page with a checked date and locator, or an existing record at its
-   exact Git revision with its hash and field. Do not invent a release or archive
+   provider page with a checked date and locator, or the repository file and
+   field that cites it. Git history records when. Do not invent a release or archive
    identifier. Use `relations` for evidenced versions, parts and derivations.
 3. Add a `sourceBinding` to the body's input. It names the canonical ID, the
    source's role (`material`, `method`, `reference` or `artwork`) and the evidence
