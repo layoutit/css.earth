@@ -64,11 +64,27 @@ export interface PreparedContextBody extends PreparedContextPoint {
   readonly systemView?: { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
     readonly candidates: readonly { readonly cameraToReference: readonly number[];
       readonly minimumM: PositionM; readonly maximumM: PositionM; readonly memberPositionsM: readonly PositionM[] }[] };
-  readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: PositionM; readonly verticesM: readonly PositionM[]; readonly trail: readonly number[];
-    readonly bounds?: { readonly centerM: PositionM; readonly radiusM: number }; readonly activeChords?: readonly number[];
-    readonly extentChords?: readonly number[]; readonly lod?: PreparedOrbitLod;
-    readonly closed?: false; readonly bodyVertexIndex?: number; readonly displayExtentAu?: number;
-    readonly trailModel?: 'finite-open-trajectory-constant-weight'; readonly strokes?: PreparedOrbitStrokes };
+  readonly orbit?: PreparedContextOrbit;
+}
+/** What the main thread knows about an orbit: its parent, extent and size. The
+ * planner worker alone reads the path itself (`PreparedContextOrbitGeometry`). */
+export interface PreparedContextOrbit {
+  readonly centerBodyId: string; readonly centerPositionM: PositionM;
+  /** Path vertex count; the retained stroke pool holds two segments per vertex. */
+  readonly vertexCount: number;
+  /** Every trail weight is 1: the whole path draws at full strength. */
+  readonly fullTrail: boolean;
+  readonly bounds?: { readonly centerM: PositionM; readonly radiusM: number };
+  readonly lod?: { readonly bounds: { readonly centerM: PositionM; readonly radiusM: number } };
+  readonly closed?: false; readonly displayExtentAu?: number;
+}
+export interface PreparedContextOrbitGeometry extends PreparedContextOrbit {
+  readonly verticesM: readonly PositionM[]; readonly trail: readonly number[];
+  readonly activeChords?: readonly number[]; readonly extentChords?: readonly number[]; readonly lod?: PreparedOrbitLod;
+  readonly bodyVertexIndex?: number; readonly trailModel?: 'finite-open-trajectory-constant-weight'; readonly strokes?: PreparedOrbitStrokes;
+}
+export interface PreparedContextGeometryBody extends PreparedContextBody {
+  readonly orbit?: PreparedContextOrbitGeometry;
 }
 /** Prepared coarser chord banks: vertex selections of the full path, each with
  * its own trail weights and its largest distance from the full path. */
@@ -91,14 +107,14 @@ export interface PreparedVolumeOpacityProfile {
   readonly fadeStartDistanceM: number;
   readonly fullDistanceM: number;
 }
+/** The world context the main thread holds: every body, placement and camera
+ * fact, with each orbit reduced to `PreparedContextOrbit`. */
 export interface PreparedWorldContext {
-  readonly schema: 'cssearth-world-context@1';
+  readonly schema: 'cssearth-world-context@1' | 'cssearth-world-context-summary@1';
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: PreparedContextFocus;
   readonly bodies: readonly PreparedContextBody[];
   readonly orbitCenters?: Readonly<Record<string, PreparedOrbitCenter>>;
-  /** Each classification framed by its members' prepared positions. */
-  readonly classificationViews?: Readonly<Record<string, NonNullable<PreparedContextBody['systemView']>>>;
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
     readonly presentation: PreparedContextCameraPresentation };
   readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
@@ -108,6 +124,13 @@ export interface PreparedWorldContext {
   readonly stars: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number };
   readonly system: { readonly fadeOutStartDistanceM: number; readonly hiddenDistanceM: number };
   readonly sky: { readonly sceneRegistration: string };
+}
+/** The full prepared file: orbit paths and detail levels for the planner worker and build tools. */
+export interface PreparedWorldContextGeometry extends PreparedWorldContext {
+  readonly schema: 'cssearth-world-context@1';
+  readonly bodies: readonly PreparedContextGeometryBody[];
+  /** Each classification framed by its members' prepared positions. */
+  readonly classificationViews?: Readonly<Record<string, NonNullable<PreparedContextBody['systemView']>>>;
 }
 
 function vector(value: unknown, label: string): PositionM {
@@ -220,16 +243,55 @@ function parsePresentation(value: unknown): PreparedContextCameraPresentation {
 // Only our immutable validated outputs are reusable. Mutable transport inputs
 // always cross validation, including callers that modify and submit them again.
 const validatedContexts = new WeakSet<object>();
-export function parsePreparedWorldContext(value: unknown): PreparedWorldContext {
-  if (value && typeof value === 'object' && validatedContexts.has(value)) return value as PreparedWorldContext;
+/** The full prepared file, orbit paths included: the planner worker and build tools read this. */
+export function parsePreparedWorldContext(value: unknown): PreparedWorldContextGeometry {
+  return parseContext(value, true) as PreparedWorldContextGeometry;
+}
+/** The main thread's copy: `world-context-summary.json`, whose orbits carry no paths. */
+export function parsePreparedWorldContextSummary(value: unknown): PreparedWorldContext {
+  return parseContext(value, false);
+}
+/** Either file, by its schema: runtimes that hold the plan accept the summary or the full context. */
+export function parsePreparedWorldContextPlan(value: unknown): PreparedWorldContext {
+  const schema = value && typeof value === 'object' ? (value as { schema?: unknown }).schema : undefined;
+  return parseContext(value, schema === 'cssearth-world-context@1');
+}
+/** A plan whose orbits carry their paths, for the synchronous planner. */
+export function worldContextGeometry(plan: PreparedWorldContext): PreparedWorldContextGeometry {
+  if (plan.schema !== 'cssearth-world-context@1') throw new TypeError('Planning orbits requires the full prepared world context.');
+  return plan as PreparedWorldContextGeometry;
+}
+function parseSummaryOrbit(value: unknown): PreparedContextOrbit {
+  const orbit = record(value, 'body orbit', ['centerBodyId', 'centerPositionM', 'vertexCount', 'fullTrail', 'bounds', 'lod', 'closed', 'displayExtentAu']);
+  const vertexCount = finite(orbit.vertexCount, 'orbit vertex count');
+  if (!Number.isSafeInteger(vertexCount) || vertexCount < 8) throw new TypeError('Context orbit must carry at least eight prepared vertices.');
+  if (typeof orbit.fullTrail !== 'boolean') throw new TypeError('Context orbit must state whether its trail is full.');
+  if (orbit.closed === undefined ? orbit.displayExtentAu !== undefined : orbit.closed !== false) {
+    throw new TypeError('Open trajectory metadata requires closed: false.');
+  }
+  const sphere = (input: unknown, label: string) => {
+    const bounds = record(input, label, ['centerM', 'radiusM']);
+    return Object.freeze({ centerM: vector(bounds.centerM, `${label} centre`), radiusM: positive(bounds.radiusM, `${label} radius`) });
+  };
+  return Object.freeze({ centerBodyId: text(orbit.centerBodyId, 'orbit parent identity'), centerPositionM: vector(orbit.centerPositionM, 'orbit centre position'),
+    vertexCount, fullTrail: orbit.fullTrail,
+    ...(orbit.bounds === undefined ? {} : { bounds: sphere(orbit.bounds, 'orbit bounds') }),
+    ...(orbit.lod === undefined ? {} : { lod: Object.freeze({ bounds: sphere(record(orbit.lod, 'orbit detail levels', ['bounds']).bounds, 'orbit detail bounds') }) }),
+    ...(orbit.closed === false ? { closed: false as const, displayExtentAu: positive(orbit.displayExtentAu, 'Open trajectory display extent') } : {}) });
+}
+function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
+  if (value && typeof value === 'object' && validatedContexts.has(value) &&
+      (!geometry || (value as PreparedWorldContext).schema === 'cssearth-world-context@1')) return value as PreparedWorldContext;
   const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'classificationViews', 'camera', 'volume', 'stars', 'system', 'sky']);
-  if (input.schema !== 'cssearth-world-context@1') throw new TypeError('Unsupported prepared world context.');
+  const schema = geometry ? 'cssearth-world-context@1' : 'cssearth-world-context-summary@1';
+  if (input.schema !== schema) throw new TypeError('Unsupported prepared world context.');
+  if (!geometry && input.classificationViews !== undefined) throw new TypeError('The world context summary carries no classification views.');
   const frame = parsePreparedWorldCameraFrame(input.frame);
   if (!frame) throw new TypeError('World context requires its prepared frame.');
   const focus = focusPoint(input.focus);
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const renderedIds = new Set(array(input.bodies, 'context bodies').map(value => text(record(value, 'context body').id, 'context body id')));
-  const bodies = array(input.bodies, 'context bodies').map<PreparedContextBody>(value => {
+  const bodies = array(input.bodies, 'context bodies').map<PreparedContextGeometryBody | PreparedContextBody>(value => {
     const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo'];
     const input = record(value, 'context body', fields);
     const rawBody = point(input, fields);
@@ -243,8 +305,11 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     const body = { ...rawBody, ...(systemView ? { systemView } : {}), ...(bound ? { boundTo: bound } : {}),
       ...(input.placement === 'approximate' ? { placement: 'approximate' as const } : {}) };
     if (input.orbit === undefined) return Object.freeze(body);
+    if (!geometry) return Object.freeze({ ...body, orbit: parseSummaryOrbit(input.orbit) });
     const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords', 'extentChords',
-      'closed', 'bodyVertexIndex', 'displayExtentAu', 'trailModel', 'strokes', 'lod']);
+      'closed', 'bodyVertexIndex', 'displayExtentAu', 'trailModel', 'strokes', 'lod',
+      // A parsed copy carries these; both are derived again from the path below.
+      'vertexCount', 'fullTrail']);
     const centerBodyId = text(orbit.centerBodyId, 'orbit parent identity'), centerPositionM = vector(orbit.centerPositionM, 'orbit centre position');
     const verticesM = array(orbit.verticesM, 'orbit vertices').map(value => vector(value, 'orbit vertex'));
     const trail = numbers(orbit.trail, 'orbit trail');
@@ -327,6 +392,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     }
     // Older prepared banks retain their exact bar representation; no runtime bake.
     return Object.freeze({ ...body, orbit: Object.freeze({ centerBodyId, centerPositionM, verticesM: Object.freeze(verticesM), trail: Object.freeze(trail),
+      vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),
       ...openMetadata, ...(bounds ? { bounds } : {}), ...(activeChords ? { activeChords: Object.freeze(activeChords) } : {}),
       ...(extentChords ? { extentChords: Object.freeze(extentChords) } : {}), ...(strokes ? { strokes } : {}), ...(lod ? { lod } : {}) }) });
   });
@@ -340,7 +406,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     if (moon.radiusM !== body.systemView!.memberRadiiM[index]) throw new TypeError('System view radii must match their prepared members.');
   }
   const orbitCenters = parsePreparedOrbitCenters(input.orbitCenters, focus, bodies);
-  const classificationViews = parseClassificationViews(input.classificationViews, bodies);
+  const classificationViews = geometry ? parseClassificationViews(input.classificationViews, bodies) : undefined;
   const camera = record(input.camera, 'context camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
   const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile', 'brightnessProfile']);
   const stars = record(input.stars, 'context stars', ['objectId', 'fadeStartDistanceM', 'fullDistanceM']);
@@ -365,7 +431,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   }
   const objectId = text(volume.objectId, 'volume identity');
   if (!/^[a-z][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid context volume identity.');
-  const result: PreparedWorldContext = Object.freeze({ schema: 'cssearth-world-context@1', frame, focus, bodies: Object.freeze(bodies),
+  const result: PreparedWorldContext = Object.freeze({ schema, frame, focus, bodies: Object.freeze(bodies),
     ...(input.orbitCenters === undefined ? {} : { orbitCenters }),
     ...(classificationViews ? { classificationViews } : {}),
     camera: Object.freeze({ minimumDistanceM, maximumDistanceM, framingReferenceZoom, presentation }),
@@ -470,14 +536,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     orbitRoot.style.cssText = orbitRenderer === 'bars' ? 'position:absolute;inset:0;width:0;height:0;pointer-events:none' : 'pointer-events:none';
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
     if (orbit) root.insertBefore(orbitRoot, mover);
-    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.verticesM.length ?? 0), id: body.id });
+    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
     const navigation = bindObjectNavigationTarget(marker, host, { pointerTarget: false });
     const orbitNavigation = orbit ? bindObjectNavigationTarget(orbitRoot, host, { pointerTarget: false }) : null;
     return { index, body, sprite, marker, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, navigation, orbitNavigation,
-      closedOrbit: orbit?.trail.every(weight => weight === 1) === true,
+      closedOrbit: orbit?.fullTrail === true,
       indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
       indicatorHovered: false,
       orbitPick: null as ScreenPickTarget | null,
@@ -515,7 +581,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   flightCircle.style.visibility = 'hidden';
   flightCircle.setAttribute('aria-hidden', 'true');
   root.appendChild(flightCircle);
-  const planWorld = createWorldContextPlanner(plan, annotationPriorities);
+  // The app plans every frame in the worker. Only a caller that publishes without a
+  // prepared frame plans here, and that needs the full context with its orbit paths.
+  let syncPlanner: ReturnType<typeof createWorldContextPlanner> | undefined;
+  const planWorld = (view: WorldContextView) => (syncPlanner ??= createWorldContextPlanner(worldContextGeometry(plan), annotationPriorities))(view);
   const systemFade = createSystemFade(plan);
   const windowTarget = host.ownerDocument.defaultView!;
   const ownClock = opacityClock ?? createOpacityClock(windowTarget);

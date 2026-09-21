@@ -4,7 +4,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, M_PER_KM, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { parseWorldContextSource, prepareWorldContext } from '../../src/preparation/spatial-context.js';
+import { parseWorldContextSource, prepareWorldContext, summarizeWorldContext } from '../../src/preparation/spatial-context.js';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '../../src/preparation/spatial-context.js';
 
 interface Orbit { readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly heliocentricDistanceAu: number; readonly perihelionDirection: Vector3; readonly trueAnomalyDegrees: number; readonly centerBodyId?: string; readonly centerPositionAu?: Vector3; }
@@ -132,11 +132,21 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   const prepared = prepareWorldContext(source, facts, states, orbitCenters, {
     minimumRadiusShare: SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, ...SYSTEM_FRAMING_ANGLES });
   // Browser payload: compact JSON. Indentation was 60% of the fetched bytes.
-  const text = `${JSON.stringify(prepared)}\n`;
-  try { if (await readFile(options.outputPath, 'utf8') === text) return; }
+  await writeIfChanged(options.outputPath, `${JSON.stringify(prepared)}\n`);
+  // The main thread reads the summary; the planner worker reads the full file.
+  await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify(summarizeWorldContext(prepared))}\n`);
+}
+
+/** `world-context.json` → `world-context-summary.json`, beside it. */
+export function worldContextSummaryPath(outputPath: string): string {
+  return outputPath.replace(/\.json$/, '-summary.json');
+}
+
+async function writeIfChanged(path: string, text: string): Promise<void> {
+  try { if (await readFile(path, 'utf8') === text) return; }
   catch (error: unknown) { if (!isMissingFile(error)) throw error; }
-  await mkdir(dirname(options.outputPath), { recursive: true });
-  await writeFile(options.outputPath, text);
+  await mkdir(dirname(path), { recursive: true });
+  await writeFile(path, text);
 }
 
 /** A migrated object's prepared frame is authoritative when it names this exact physical epoch and centre. */
