@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-1105-0740",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Colder and Hotter: Interferometric imaging of beta Cassiopeiae and alpha Leonis",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1105.0740"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1105.0740",
+      "label": "Che et al. 2011"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/regulus/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "e555c70abfa2c679b1a25d9f607890d62ae2bd560e20ab8d863cc0b4e35c6422",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "X. Che, J. D. Monnier, M. Zhao et al.",
+      "scope": "citation",
+      "evidence": "src/objects/regulus/text.json#/introduction/sources/0"
+    }
+  ]
+}

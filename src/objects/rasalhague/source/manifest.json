@@ -1,0 +1,369 @@
+{
+  "schema": "cssrasalhague-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "rasalhague-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 1431,
+      "expectedSha256": "5a3fd0a6fbea46495dad1f73b20f7d0cbe003795b44ab68a59d8d97ffe42d5a0",
+      "origin": "https://arxiv.org/abs/1012.0787",
+      "credit": "Monnier et al. (2010), ApJ 725, 1192",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rasalhague-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/rasalhague/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rasalhague-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2980,
+      "expectedSha256": "8dead27264f2074ff200d311f4680bac4b988cf763226ed2e0a7e8cf2200d631",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "rasalhague-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1716,
+      "expectedSha256": "4b78f6dc211fb9890f673b297dd697bc90687a77257709316835855cdcac26c7",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "rasalhague-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "rasalhague-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 105,
+      "expectedSha256": "18af6b85ecf420d4c10ae086052f4e3737eedfea80e9d8bf8f341c4120d05d43",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "rasalhague-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 220,
+      "expectedSha256": "340cf21d743d51d7e6eaa48c980c659c1a78d8d3614ab27fcef1b820e370a561",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "rasalhague-pulkovo-spectrophotometry",
+      "path": "photometry/pulkovo-table5.dat",
+      "expectedBytes": 935951,
+      "expectedSha256": "9deaea527750d81f89d9f61476ae3fd6a40166da8f401071ff6b2d5c9aea6e88",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
+      "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Raw catalogue flux file table5.dat downloaded unchanged from the CDS archive on 2026-09-21; restored through source/preparation/acquisition.json",
+      "redistribution": "One catalogue file, unchanged, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-201-pulkovo-spectrophotometry",
+            "role": "material",
+            "evidence": "src/objects/rasalhague/source/photometry/pulkovo-table5.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rasalhague-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1688,
+      "expectedSha256": "aec67fd19d11902b900b53f63c55c2c05be838b08ab8e6737d2fe9790fef4224",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
+      "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-201-pulkovo-spectrophotometry",
+            "role": "material",
+            "evidence": "src/objects/rasalhague/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rasalhague-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rasalhague-crosscheck-spectrum",
+      "path": "photometry/crosscheck-III_126_part2.dat.gz",
+      "expectedBytes": 506596,
+      "expectedSha256": "b031729b448d64e34a2801e208e7f22254cfe03a32ea8b9b5dc1dfac329d4d10",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
+      "credit": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-126-burnashev-337",
+            "role": "material",
+            "evidence": "src/objects/rasalhague/source/photometry/crosscheck-III_126_part2.dat.gz"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rasalhague-roche-von-zeipel",
+      "path": "photometry/gravity-darkening.json",
+      "expectedBytes": 1839,
+      "expectedSha256": "103803c013078f56b9f4869fc97db7f75d5e2440f9f7bf061c6d73f2170eda94",
+      "origin": "https://arxiv.org/abs/1012.0787",
+      "credit": "Monnier et al. (2010), Rotationally-modulated g-modes in the rapidly-rotating delta Scuti star Rasalhague (alpha Ophiuchi)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper's table in the authors' LaTeX source, with each cell quoted",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "lenses",
+        "rotation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published model parameters transcribed in this package with their table cells; repinned when edited."
+      }
+    },
+    {
+      "id": "rasalhague-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "expectedBytes": 844,
+      "expectedSha256": "02ba813284711afe81ed287401bb929b1df0e06904ed818554c6fc2c7827f6b0",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/rasalhague/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "stellar-color-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 42408,
+      "expectedSha256": "2df79956522d7eb89d8a7b8fd44270f58f8371bf2751c602b4173e79fcec3c70",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
+      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
+        "inputs": [
+          "rasalhague-stellar-color",
+          "rasalhague-pulkovo-spectrophotometry",
+          "rasalhague-cie-1931-2deg-cmf",
+          "rasalhague-preparation-raster",
+          "rasalhague-claret-2011-v-quadratic"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3127,
+      "expectedSha256": "4fddcd1fcfa56c2755289810968b73096fc5307c9ef593c5ef11f495ddb57ebf",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1606,
+      "expectedSha256": "481cf069cfb4d595267ea4b72a754843a912c1bbdb87be82a20563b8070491c0"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 447,
+      "expectedSha256": "19eae1129e1afcec4a06bca752c69eea091e9ebb0ef9c71a9d56b1196d0bef7d"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 1041,
+      "expectedSha256": "e9916cdace280f39f888c1d690aa0c384197f6952d8f7517d6bbdc85a361a421"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 7249,
+      "expectedSha256": "44e4691f18b452f2f9a1569a98de0cda51bee6d79001b6e6043ffb64b7fd602e"
+    }
+  ]
+}

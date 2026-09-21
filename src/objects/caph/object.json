@@ -1,0 +1,152 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "caph",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Caph",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "ellipsoid",
+        "radiusKm": 2636703,
+        "polarRadiusKm": 2128842
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/caph-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7a71b98bb784fac294036732a242d13f779fa32d8fe2c035213c711b9663c389"
+      }
+    },
+    "catalog": {
+      "name": "Caph",
+      "classification": "star",
+      "color": "#e5e9ff",
+      "distanceAu": 3462014,
+      "description": "Yellow-white giant in Cassiopeia, seen nearly pole-on, spinning fast.",
+      "systemName": "Cassiopeia",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        265377878999796580,
+        10668346745325988,
+        444625066733493300
+      ],
+      "presentationToReference": [
+        -0.6214083801957255,
+        0.769859485040433,
+        0.14549226204786242,
+        -0.14086245889324683,
+        0.07289319527610379,
+        -0.9873420631964325,
+        0.7707200481997811,
+        0.6340370299720033,
+        -0.0631478576612698
+      ],
+      "orbitUpReference": [
+        -0.769859485040433,
+        -0.07289319527610379,
+        -0.6340370299720033
+      ],
+      "metersPerUnit": 8505493.548387097,
+      "bodyRadiusM": 2636703000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "b678e869641a19be618a42a79b2e0e720794eed7ae327f7cecd1a6ae60b1dc48"
+  }
+}

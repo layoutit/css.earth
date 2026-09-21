@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-star-season@1",
+  "id": "betelgeuse-matisse-2020-12",
+  "object": "betelgeuse",
+  "title": "Betelgeuse, VLTI/MATISSE LM band, three nights on 14, 18 and 27 December 2020 (calibrated by Drevon et al. 2024 and distributed by the JMMC OiDB)",
+  "instrument": "matisse",
+  "target": "ALF ORI",
+  "exposures": [],
+  "exposuresSource": "No raw exposures: the 48 calibrated LM-band files of the nights Drevon et al. (2024, MNRAS 527, L88) list in their Table 1 after rejecting contaminated nights (14, 18 and 27 December 2020), from their OiDB collection f9418307-0127-49cf-8183-070127f9cf08, pinned in src/objects/betelgeuse/source/manifest.json and passed with --calibrated.",
+  "referenceDiameter": {
+    "mas": 42.45,
+    "source": "src/objects/betelgeuse/source/measurements.json angularDiameterMas"
+  },
+  "selection": {
+    "continuum": {
+      "windowsMicrometres": [
+        [
+          3.942,
+          3.974
+        ],
+        [
+          3.992,
+          3.998
+        ]
+      ],
+      "referenceWavelengthMetres": 3.97e-06,
+      "referenceBandMetres": 6e-08,
+      "vis2MultiplicativeFloor": 0.12,
+      "vis2AdditiveFloor": 0.000565,
+      "closurePhaseFloorDegrees": 2,
+      "outputMjd": 59201,
+      "outputDateObs": "2020-12-14",
+      "target": {
+        "name": "alf Ori",
+        "rightAscensionDegrees": 88.7929,
+        "declinationDegrees": 7.4071,
+        "spectralType": "M2Iab"
+      }
+    },
+    "continuumSource": "CONTINUUM_RECIPE in tools/objects/source-authoring/betelgeuse/author.mts, the recipe of the shipped image. Its error floors are a conservative envelope over the beam-commuter repeats, not the repeats themselves. Measured on the February 2020 files, every averaged point has 8 or 12 repeats, and a least-squares fit of the repeat scatter to sqrt((a V2)^2 + b^2) gives a = 0.085 with no positive b, unchanged by correcting the small-sample bias; the median fractional scatter above V2 = 0.05 is 4.9 per cent and the median absolute scatter below it is 3.5e-4. The recipe states 0.12 and 5.65e-4, larger than both, so every error it writes is at least the measured scatter. Erring large claims less structure, the safe direction for a lens whose patches are already labelled unconfirmed. The same recipe is applied unchanged to this epoch."
+  },
+  "reconstruction": {
+    "code": "squeeze",
+    "pixelMas": 0.78,
+    "width": 128,
+    "entropy": 10,
+    "elements": 3000,
+    "iterations": 3000,
+    "discard": 500,
+    "source": "src/objects/betelgeuse/source/reference/squeeze-command.txt"
+  },
+  "check": {
+    "limbDarkening": 0
+  },
+  "oracles": {}
+}

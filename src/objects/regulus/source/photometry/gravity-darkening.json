@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-roche-von-zeipel@1",
+  "objectId": "regulus",
+  "source": "Che et al. (2011), Colder and Hotter: Interferometric imaging of beta Cassiopeiae and alpha Leonis, https://arxiv.org/abs/1105.0740, Table 4, modified von Zeipel model (beta free), read from the authors' LaTeX source",
+  "caption": "Best-fit and physical parameters of alpha Leo; the modified von Zeipel model with beta free. Model mass 4.15 ± 0.06 solar masses, distance 24.31 pc.",
+  "model": {
+    "omega": {
+      "value": 0.962,
+      "uncertainty": 0.026,
+      "cell": "0.962^{+0.014}_{-0.026}"
+    },
+    "beta": {
+      "value": 0.188,
+      "uncertainty": 0.029,
+      "cell": "0.188^{+0.012}_{-0.029}"
+    },
+    "poleTemperatureK": {
+      "value": 14520,
+      "uncertainty": 690,
+      "cell": "14520^{+550}_{-690}"
+    },
+    "equatorTemperatureK": {
+      "value": 11010,
+      "uncertainty": 520,
+      "cell": "11010^{+420}_{-520}"
+    },
+    "polarRadiusSolar": {
+      "value": 3.22,
+      "uncertainty": 0.05,
+      "cell": "3.22^{+0.05}_{-0.04}"
+    },
+    "equatorialRadiusSolar": {
+      "value": 4.21,
+      "uncertainty": 0.07,
+      "cell": "4.21^{+0.07}_{-0.06}"
+    }
+  },
+  "view": {
+    "inclinationDegrees": {
+      "value": 86.3,
+      "uncertainty": 1.6,
+      "cell": "86.3^{+1.0}_{-1.6}"
+    },
+    "polePositionAngleDegrees": {
+      "value": 258,
+      "uncertainty": 2,
+      "cell": "258^{+2}_{-1}"
+    }
+  },
+  "note": "The paper does not say which pole faces us; Regulus is seen almost equator-on, so the two poles show nearly alike."
+}

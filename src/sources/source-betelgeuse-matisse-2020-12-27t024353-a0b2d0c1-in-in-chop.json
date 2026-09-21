@@ -1,0 +1,37 @@
+{
+  "id": "source-betelgeuse-matisse-2020-12-27t024353-a0b2d0c1-in-in-chop",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Betelgeuse · matisse 2020 12 27t024353 a0b2d0c1 in in chop",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T024353_alf_Ori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/betelgeuse/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/188"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/VLTI/MATISSE, programme 106.21L4.001 as calibrated by the MATISSE consortium (Drevon et al. 2024); distributed by the JMMC OiDB",
+      "scope": "The matisse 2020 12 27t024353 a0b2d0c1 in in chop input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public calibrated data (OiDB calibration level 3); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "rasalhague",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Rasalhague",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "ellipsoid",
+        "radiusKm": 1988311,
+        "polarRadiusKm": 1661332
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/rasalhague-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2c70103397e8c33688529c1dc90228b53610a1fbe537d7c7bb7f45acb9e8ae3e"
+      }
+    },
+    "catalog": {
+      "name": "Rasalhague",
+      "classification": "star",
+      "color": "#ccdaff",
+      "distanceAu": 3072689.5,
+      "description": "White star in Ophiuchus, seen almost equator-on, flattened by its fast spin.",
+      "systemName": "Ophiuchus",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -48966421558268490,
+        -445990189499644740,
+        99947659987676030
+      ],
+      "presentationToReference": [
+        -0.1406848589878538,
+        0.779540851506418,
+        -0.6103473038231727,
+        -0.959879220932022,
+        -0.25843583606018705,
+        -0.1088246289348432,
+        0.24256885965536032,
+        -0.5705497169156434,
+        -0.7846230743822012
+      ],
+      "orbitUpReference": [
+        -0.779540851506418,
+        0.25843583606018705,
+        0.5705497169156434
+      ],
+      "metersPerUnit": 6413906.451612903,
+      "bodyRadiusM": 1988311000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "c1d45aa4848ffbdd8fb23c14dd9c4e95197e3a6be598a6f0ad754aa7230d19e1"
+  }
+}

@@ -58,9 +58,9 @@
     {
       "id": "other-epochs",
       "subject": "December 2018 and December 2020 MATISSE epochs; PIONIER 2014, GRAVITY 2019-2023, AMBER 2006-2018, ALMA 2015 and 2023",
-      "status": "unresolved",
-      "finding": "The JMMC OiDB holds calibrated (level 3) MATISSE data of Betelgeuse for two more epochs, found by a TAP query on 2026-09-21: 2-15 December 2018 (about 200 files, PI Drevon, several station sets; some night-1 files are calibrator products or noChop) and 14-27 December 2020 (98 files). Drevon et al. (2024, MNRAS 527, L88) image all three epochs, so each has an author image to compare against, and the February 2020 recipe (image-star.mts --calibrated) should apply unchanged. The earlier statement that the OiDB held calibrated data only for February 2020 was wrong. The ESO archive also holds raw PIONIER, GRAVITY and AMBER frames and ALMA six public projects, which each need their pipeline run first.",
-      "revisitWhen": "Reconstruct the December 2018 and December 2020 MATISSE epochs with the February 2020 recipe and compare them with Drevon et al. (2024).",
+      "status": "included",
+      "finding": "The December 2018 and December 2020 MATISSE epochs are cast as lenses matisse-2018-12 and matisse-2020-12 from the 111 and 48 calibrated OiDB files of Drevon et al.'s collection, with the February 2020 recipe; neither passes the reconstruction check (see the README), so their patches are labelled unconfirmed. The ESO archive also holds raw PIONIER, GRAVITY and AMBER frames and ALMA six public projects, which each need their pipeline run first.",
+      "revisitWhen": "A raw-pipeline epoch that passes the reconstruction check.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/c4bf87a07d4159a8ef06278b02f567c5782215a6/src/objects/betelgeuse/README.md",
         "https://archive.eso.org/",

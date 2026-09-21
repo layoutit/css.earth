@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "regulus",
+  "card": {
+    "text": "Blue-white star in Leo that spins so fast its equator bulges.",
+    "sources": [
+      {
+        "catalogueId": "simbad-alf-leo",
+        "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Leo",
+        "label": "SIMBAD",
+        "checked": "2026-09-21",
+        "locator": "Basic data: spectral type",
+        "quote": "B8IVn"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Regulus spins so fast that its equator swells to 4.21 solar radii while its poles sit at 3.22. It is drawn that shape, 24.3 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1105-0740",
+        "url": "https://arxiv.org/abs/1105.0740",
+        "label": "Che et al. 2011",
+        "checked": "2026-09-21",
+        "locator": "Table 4, modified von Zeipel model (beta free), row R_eq",
+        "quote": "4.21^{+0.07}_{-0.06}"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "Spectrum and spin",
+      "summary": "Measured colour, with hot bright poles and a cool equator from the star's fast spin. The darker edge is a model."
+    }
+  }
+}
