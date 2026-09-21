@@ -255,6 +255,19 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     })), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
 }
 
+/** The main thread's copy of a prepared world context. Orbit paths and detail levels
+ * stay in the full file, which only the planner worker and build tools read; each
+ * orbit keeps its parent, bounds and size. Classification views are build-time only. */
+export function summarizeWorldContext(prepared: PreparedWorldContext) {
+  const { classificationViews: _views, ...rest } = prepared;
+  return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, bodies: freeze(prepared.bodies.map(body => {
+    if (!body.orbit) return body;
+    const { centerBodyId, centerPositionM, verticesM, trail, bounds, lod, closed, displayExtentAu } = body.orbit;
+    return freeze({ ...body, orbit: freeze({ centerBodyId, centerPositionM, vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),
+      bounds, lod: freeze({ bounds: lod.bounds }), ...(closed === false ? { closed, displayExtentAu } : {}) }) });
+  })) });
+}
+
 export interface PreparedOrbitLodLevel {
   readonly vertexIndices: readonly number[]; readonly trail: readonly number[];
   readonly activeChords: readonly number[]; readonly deviationM: number;

@@ -4,8 +4,8 @@
     {
       "id": "kepler-186f-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 722,
-      "expectedSha256": "41b9ab215caebaef5e448291e480cd71663f5b5c03e48a9c186074997abd3d9f",
+      "expectedBytes": 716,
+      "expectedSha256": "f8e52d0f34305faa0dc45cc0a4c561bf0bd06ab38263bde672426312e6a33c19",
       "origin": "https://arxiv.org/abs/1501.01101",
       "credit": "G. Torres et al., \"Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone\", ApJ 800, 99 (2015), arXiv:1501.01101",
       "license": "Factual numerical measurements; source attribution retained",
@@ -168,8 +168,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3278,
-      "expectedSha256": "f0c68b53fd381f1ab07d2d2b705d6b33faa0fbd3027d33dd22185df80db99cdd",
+      "expectedBytes": 3464,
+      "expectedSha256": "16cc9549772942164628f1b8b6405e7405d32770d6c012ae55dac0f1dc8ec8e7",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."

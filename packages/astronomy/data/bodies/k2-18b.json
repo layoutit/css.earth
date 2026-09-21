@@ -5,26 +5,26 @@
  "physical": {
   "name": "K2-18 b",
   "horizonsCode": null,
-  "meanRadiusKm": 15116.2,
-  "gravitationalParameterKm3PerS2": 0,
+  "meanRadiusKm": 16646.9,
+  "gravitationalParameterKm3PerS2": 3439921.8,
   "parent": "k2-18"
  },
- "physicalNotes": "Radius 2.37 +/- 0.22 Earth radii from Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830, Table 2), at 6378.137 km per Earth radius. No gravitational parameter is adopted. A sphere: no oblateness is measured.",
+ "physicalNotes": "Radius 2.610 +/- 0.087 Earth radii from Benneke et al. (2019, ApJL 887, L14; arXiv:1909.04642), Table 1, at 6378.137 km per Earth radius. GM from the mass 8.63 +/- 1.35 Earth masses Benneke et al. list from Cloutier et al. (2019, A&A 621, A49), times Earth's GM 398600.4418 km^3/s^2. A sphere: no oblateness is measured.",
  "hostedOrbit": {
-  "periodDays": 32.939614,
-  "semiMajorAxisStellarRadii": 74.78,
-  "inclinationDegrees": 89.5785,
+  "periodDays": 32.940045,
+  "semiMajorAxisStellarRadii": 76.97,
+  "inclinationDegrees": 89.5228,
   "eccentricity": 0.2,
   "argumentOfPeriapsisDegrees": 354.27,
   "epochDefinition": "inferior-conjunction",
-  "transitTimeBmjdTdb": 57263.89144,
+  "transitTimeBmjdTdb": 57725.05199,
   "ascendingNodePositionAngleDegrees": 0,
   "sources": {
-   "period": "Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830), Table 2: 32.939614 d",
-   "shape": "Inclination 89.5785 degrees from Sarkis et al. (2018), Table 2. The scaled distance a/R* = 74.78 is DERIVED here, not quoted: Kepler's third law with their period, their stellar mass 0.359 solar masses and their stellar radius 0.411 solar radii.",
-   "phase": "Sarkis et al. (2018), Tables 2 and 3: T0 = BJD 2457264.39144, the time of inferior conjunction, here BMJD 57263.89144.",
+   "period": "Benneke et al. (2019, ApJL 887, L14; arXiv:1909.04642), Table 1: 32.940045 +/- 0.000010 d. Measured here, eight JWST transits of 2023-2025 (programmes 2722 and 2372, MAST white-light curves, trapezoid fits) fall 8.5 to 12.0 minutes before this ephemeris, drifting about 3 minutes over 26 orbits; the drift is not drawn.",
+   "shape": "Benneke et al. (2019, ApJL 887, L14; arXiv:1909.04642), Table 1: a = 0.15910 au and R* = 0.4445 solar radii give a/R* = 76.97; impact parameter b = 0.641 gives inclination 89.5228 degrees (circular geometry: with this record's eccentricity the inclination differs by about 0.01 degrees).",
+   "phase": "Benneke et al. (2019, ApJL 887, L14; arXiv:1909.04642), Table 1: T0 = BJD_UTC 2457725.551189, the time of inferior conjunction, here BMJD_TDB 57725.05199 (TT - UTC = 69.184 s).",
    "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
-   "eccentricity": "Sarkis et al. (2018), Table 3 (joint HARPS and CARMENES-VIS radial velocities): e = 0.20 +/- 0.08.",
+   "eccentricity": "Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830), Table 3 (joint HARPS and CARMENES-VIS radial velocities): e = 0.20 +/- 0.08.",
    "argumentOfPeriapsis": "Sarkis et al. (2018), Table 3: omega = -0.10 (+0.81/-0.59) rad, fitted with RadVel, whose transit convention f = pi/2 - omega is the one this record uses; here 354.27 degrees."
   }
  }

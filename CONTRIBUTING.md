@@ -61,13 +61,16 @@ inventory; R2 holds the bytes.
    missing.
 3. Commit the refreshed `runtime-assets.json` and/or `prepared-assets.json`.
    **Never commit the baked files themselves**; they are gitignored.
-4. Confirm before pushing, if you want the answer early:
-   `node tools/check-assets-published.mts --object=<id>`. CI checks this anyway.
+4. Confirm before pushing: `node tools/check-assets-published.mts --object=<id>`.
+   **Run this yourself.** No pull-request check contacts R2 any more, so nothing
+   between your keyboard and production will notice a missing key until the
+   nightly sweep does.
 
-Skipping step 2 or 3 turns the pull request red, and that gate is the only thing
-between a missing key and a body that renders blank in production. Textures are
-served from R2 in production and the deploy ships no `public/scenes` copy, so an
-unpublished key is a 404 for every visitor, not a local inconvenience.
+Skipping step 2 or 3 no longer turns the pull request red; it turns the body
+blank in production instead. Textures are served from R2 and the deploy ships no
+`public/scenes` copy, so an unpublished key is a 404 for every visitor, not a
+local inconvenience. The nightly sweep (`.github/workflows/nightly.yml`) is what
+finds it, after the fact.
 
 ### If you do not have R2 credentials
 
@@ -98,7 +101,7 @@ node tools/publish-runtime-assets.mts --object=<id>
 
 Omit `--object` to publish everything under `src/objects/`. The publisher is incremental: it checks every key first, uploads only the missing ones, then checks every key again, retries anything the bulk upload dropped, and byte-verifies every JSON key plus a sample of the rest. A publish that reports success has confirmed the files are live. JSON keys upload as `application/json`; everything else as `application/octet-stream`.
 
-`node tools/check-assets-published.mts [--object=<id> ...]` checks both inventories without uploading. It retries a miss before reporting it: longest (about two minutes, two at a time) for a network error, which it reports by its socket code. With `--added-since=<git ref>` it checks only the keys the branch's inventories add; `--added-since-last-green` compares with the last green `main` run. Only a real 404 fails it; other answers and unverified (network) keys are warnings, and `--report-only` (a push to `main`) never fails. A nightly workflow checks every key.
+`node tools/check-assets-published.mts [--object=<id> ...]` checks both inventories without uploading. It retries a miss before reporting it: longest (about two minutes, two at a time) for a network error, which it reports by its socket code. With `--added-since=<git ref>` it checks only the keys the branch's inventories add; `--added-since-last-green` compares with the last green `main` run. Only a real 404 fails it; other answers and unverified (network) keys are warnings, and `--report-only` never fails. A nightly workflow checks every key; pull requests check none.
 
 A second cache, `source-cache/<sha256>/<filename>`, mirrors pinned publisher inputs from fragile upstreams, such as a facility volume preview or a USGS Gazetteer export, so a build never depends on a third party's uptime. `node tools/publish-source-cache.mts --object=<id>` publishes every pin it can find for that object; run `node tools/restore-source-inputs.mts --object=<id>` first. `--file=<path> --sha256=<hex> --bytes=<n>` publishes one file directly. It verifies after publishing in the same way. The three pinned VizieR galaxy-field catalogues (`src/objects/nearby-universe/source/catalogue.json`) are mirrored the same way with `--file=...`; `pnpm prepare:galaxy-field` tries that mirror first and only queries VizieR live on a miss, so an ordinary clean build never depends on VizieR's uptime.
 
@@ -151,7 +154,8 @@ baked JSON remains subject to the installer's byte and SHA-256 checks on every r
 Cold and cached CI timings must be reported separately.
 
 To run the fast subset before every push, opt in with `pnpm hooks:install`: the
-pre-push hook runs `pnpm check:pr --job=lint --quick`, which skips the network check and the
+pre-push hook runs `pnpm check:pr --quick`, which runs the `Contract lint` merge
+gate and the advisory repository audit, skipping the network check and the
 documentation audits. Skip it once with `git push --no-verify` or
 `CSSEARTH_SKIP_HOOKS=1`; remove it with `git config --unset core.hooksPath`.
 

@@ -6,7 +6,7 @@
       "id": "jwst-archive-observations",
       "subject": "JWST observations of WASP-39 (programmes 1366, 2783, 5634, 8017)",
       "status": "unresolved",
-      "finding": "JWST observed WASP-39 in programmes 1366, 2783, 5634, 8017 (NIRCam grism, NIRISS SOSS, NIRSpec and MIRI slitless time series). These measure the planet's atmosphere in transmission against its star; the planet is never resolved, so they give no surface image, map or colour. Not reduced here.",
+      "finding": "JWST observed WASP-39 b in programmes 1366 (NIRCam grism, NIRISS SOSS, NIRSpec PRISM and G395H), 2783 (MIRI LRS) and 8017 (NIRSpec G140H and G235H), which measure its atmosphere in transmission against its star, and 5634 (NIRSpec G395H, 2025), which observes its day side at secondary eclipse. The planet is never resolved, so none gives a surface image; the 5634 eclipse could support a dayside brightness or thermal lens. Not reduced here.",
       "evidence": [
         "https://www.stsci.edu/jwst/science-execution/program-information?id=1366",
         "https://www.stsci.edu/jwst/science-execution/program-information?id=2783",
@@ -16,7 +16,7 @@
       "checked": [
         {
           "date": "2026-09-21",
-          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+          "commit": "3f7319c1db"
         }
       ],
       "revisitWhen": "When these observations are reduced for this body, or a resolved image or map derived from them is published."
