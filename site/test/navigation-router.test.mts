@@ -197,8 +197,9 @@ function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget
 }
 
 const identityRotation = [1,0,0,0,1,0,0,0,1] as const;
+const cssToReference = [1,0,0,0,-1,0,0,0,1] as const;
 const cameraFrame = (originM: readonly [number, number, number], bodyRadiusM: number): PreparedWorldCameraFrame => ({
-  originM, bodyRadiusM, referenceFrame: 'test', epochJdTt: 1, presentationToReference: identityRotation, metersPerUnit: 1,
+  originM, bodyRadiusM, referenceFrame: 'test', epochJdTt: 1, presentationToReference: cssToReference, metersPerUnit: 1,
 });
 const catalogueSources: SpatialCatalogSource[] = ['catalogue', 'paper'].map(id => ({ id, citation: id, url: `https://example.test/${id}`, bytes: 1, sha256: '0'.repeat(64) }));
 const galaxyRecord = (id: string): PreparedGalaxyRecord => ({id, name: id, aliases: [], status: 'confirmed', positionM: [1e20,0,0],

@@ -13,20 +13,28 @@ type Content = { record: PreparedCatalogObject | null; references: readonly Spat
 type FixtureOptions = { object?: Partial<PreparedGalaxyRecord> & Partial<Pick<PreparedClusterRecord, 'kind' | 'classification'>>;
   unavailableObjectIds?: readonly string[];
   imageLayerFrames?: ContextLayer['imageLayerFrames']; volumeLensFrames?: ContextLayer['volumeLensFrames']; volumeBank?: PreparedVolumeLensState | null;
-  deferredVolumeBank?: PreparedVolumeLensState | null };
+  deferredVolumeBank?: PreparedVolumeLensState | null;
+  cameraPositionM?: readonly [number, number, number] };
 const baseFrame: DensityVolumeFrame = { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0,0,0], localToReferenceXyzw: [0,0,0,1],
   metersPerUnit: 1e18, boundsUnits: { min: [-500,-500,-500], max: [500,500,500] } };
 function required<T>(value: T | null | undefined): T { assert.ok(value !== null && value !== undefined); return value; }
 function last<T>(values: T[]): T { return required(values.at(-1)); }
 
 
-function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, volumeBank = null, deferredVolumeBank = null, unavailableObjectIds = [] }: FixtureOptions = {}) {
+function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, volumeBank = null, deferredVolumeBank = null,
+  unavailableObjectIds = [], cameraPositionM = [1e20, 0, 1e19] }: FixtureOptions = {}) {
   let current: PreparedNavigationFocus | null = null, signal: AbortSignal | undefined;
   const flights: {id:string; reducedMotion?:boolean}[] = [];
   const callbacks = new Set<() => void>(), errors: Error[] = [], selections: (string | null)[] = [], writes: (string | URL)[] = [], content: Content[] = [];
   const windowTarget = { location: new URL('https://example.test/mercury/?focus=catalogue:a&v=saved'),
     history: { state: {}, replaceState(state: unknown, _: string, url?: string | URL | null) { assert.ok(url); windowTarget.location = new URL(url, windowTarget.location); writes.push(url); } } };
-  const owner = { preparedFocus: () => current,
+  const owner = { frame: { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0,0,0],
+      presentationToReference: [1,0,0,0,-1,0,0,0,1], metersPerUnit: 1e18, bodyRadiusM: 1e18 },
+    capture: () => ({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+      pose: { positionM: cameraPositionM, orientationXyzw: [0,0,0,1] } }),
+    optics: () => ({ focalPixels: 1000, widthPixels: 1000, heightPixels: 1000, principalOffsetPixels: [0,0],
+      framingRadiusPixels: 400, visibleRect: {left:-500,right:500,top:-500,bottom:500}, detailHandoffDiameterPixels: 20 }),
+    preparedFocus: () => current,
     setPreparedFocus(focus: PreparedNavigationFocus | null) { current = focus; for (const callback of callbacks) callback(); },
     subscribe(callback: () => void) { callbacks.add(callback); callback(); return () => callbacks.delete(callback); },
     flyToPreparedFocus(focus: PreparedNavigationFocus, options: { signal?: AbortSignal; reducedMotion?: boolean } = {}) { signal = required(options.signal); this.setPreparedFocus(focus);
@@ -97,11 +105,30 @@ test('a direct focus link without a saved camera frames its target immediately',
   f.controller.destroy();
 });
 
-test('a focus link with a saved camera restores selection without reframing', () => {
+test('a focus link with a visible saved camera restores selection without reframing', () => {
   const f = fixture();
   f.controller.restore(f.windowTarget.location.href);
   assert.deepEqual(f.flights,[]);
   assert.equal(f.owner.preparedFocus()?.id,'catalogue:a');
+  f.controller.destroy();
+});
+
+test('a focus link whose saved camera looks away reframes the named target', () => {
+  const f = fixture({ cameraPositionM: [1e20, 0, -1e19] });
+  f.controller.restore(f.windowTarget.location.href);
+  assert.deepEqual(f.flights,[{id:'catalogue:a',reducedMotion:true}]);
+  assert.equal(f.owner.preparedFocus()?.id,'catalogue:a');
+  assert.equal(f.windowTarget.location.searchParams.has('v'), false);
+  assert.deepEqual(f.errors,[]);
+  f.controller.destroy();
+});
+
+test('a focus link whose saved camera puts the named target off-screen reframes it', () => {
+  const f = fixture({ cameraPositionM: [2e20, 0, 1e19] });
+  f.controller.restore(f.windowTarget.location.href);
+  assert.deepEqual(f.flights,[{id:'catalogue:a',reducedMotion:true}]);
+  assert.equal(f.windowTarget.location.searchParams.has('v'), false);
+  assert.deepEqual(f.errors,[]);
   f.controller.destroy();
 });
 

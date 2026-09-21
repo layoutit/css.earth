@@ -3,6 +3,7 @@ import type { PreparedCatalogObject, SpatialCatalogSource, SpatialCitation } fro
 import type { createPreparedUniverse } from '../src/renderers/css/universe/prepared-universe-runtime.js';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
 import type { PreparedNavigationFocus } from '../src/renderers/css/navigation/prepared-focus.js';
+import { presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 import { record } from './browser-types.mts';
 
 type PreparedContextLayer = ReturnType<ReturnType<typeof createPreparedUniverse>['mount']>;
@@ -22,6 +23,26 @@ interface ContextNavigationOptions {
   windowTarget: Window;
   onError?(error: unknown): void;
   unavailableObjectIds?: readonly string[];
+}
+
+/** A saved focus camera is authoritative only while its named subject still intersects the stage. */
+function savedCameraShowsFocus(navigation: ObjectWorldNavigation, focus: PreparedNavigationFocus) {
+  const optics = navigation.optics();
+  const view = presentWorldCamera(navigation.capture(), { ...navigation.frame,
+    originM: focus.positionM, bodyRadiusM: focus.framingRadiusM }, optics);
+  // A camera inside a prepared volume can validly look away from its centre while the volume surrounds it.
+  if (view.distanceM <= focus.framingRadiusM) return true;
+  const ellipse = view.silhouette;
+  if (!ellipse) return false;
+  const width = optics.widthPixels ?? optics.framingRadiusPixels * 2;
+  const height = optics.heightPixels ?? optics.framingRadiusPixels * 2;
+  const rect = optics.visibleRect ?? { left: -width / 2, right: width / 2, top: -height / 2, bottom: height / 2 };
+  // The ellipse can be rotated. Its largest semi-axis is a conservative intersection bound:
+  // false means certainly off-screen, while an edge-on saved composition remains untouched.
+  const radius = Math.max(ellipse.radialSemiAxis, ellipse.tangentialSemiAxis);
+  const [x, y] = ellipse.centre;
+  return x + radius >= rect.left && x - radius <= rect.right &&
+    y + radius >= rect.top && y - radius <= rect.bottom;
 }
 
 /** Catalogue focus on the current detailed scene's shared camera owner. */
@@ -47,6 +68,13 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     if (id) url.searchParams.set('focus', id); else url.searchParams.delete('focus');
     if (state) url.searchParams.set('focusLens', state.selectedLens); else url.searchParams.delete('focusLens');
     if (url.href === windowTarget.location.href) return;
+    windowTarget.history.replaceState(windowTarget.history.state, '', url.pathname + url.search + url.hash);
+    notify(url.href);
+  };
+  const clearSavedCameraUrl = () => {
+    const url = new URL(windowTarget.location.href);
+    if (!url.searchParams.has('v')) return;
+    url.searchParams.delete('v');
     windowTarget.history.replaceState(windowTarget.history.state, '', url.pathname + url.search + url.hash);
     notify(url.href);
   };
@@ -146,9 +174,11 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         selected = id; layer.selectGalaxy(id); observeLens(id);
         publishContent(id);
         if (!id || (state && !query.has('focusLens'))) writeSelectionUrl(id);
-        // A focus-only link is a destination. Saved camera links retain their
-        // exact observer pose; changing the pivot alone must not reframe them.
-        if (focus && !query.has('v')) {
+        // A focus-only link is a destination. A saved camera remains exact while it still shows
+        // the named focus; a stale focus+camera pairing must not strand the user in empty space.
+        const savedCameraIsCompatible = focus && query.has('v') ? savedCameraShowsFocus(navigation, focus) : false;
+        if (focus && (!query.has('v') || !savedCameraIsCompatible)) {
+          if (query.has('v')) clearSavedCameraUrl();
           flight?.abort();
           const controller = new AbortController(); flight = controller;
           beforeFlight();
