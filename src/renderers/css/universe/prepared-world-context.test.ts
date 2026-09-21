@@ -397,6 +397,39 @@ test('hover-only trails reveal the full orbit and keep their circle and label be
   layer.destroy();
 });
 
+test('open trajectories stay hidden until their body circle is hovered', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const source = plan(1), body = source.bodies[0]!;
+  const verticesM = [[-100, -50, 0], [-50, -30, 0], [0, -10, 0], [100, 0, 0],
+    [150, 20, 0], [200, 50, 0], [250, 90, 0], [300, 140, 0]];
+  const context = parsePreparedWorldContext({ ...source, bodies: [{ ...body, orbit: {
+    centerBodyId: 'sun', centerPositionM: [0, 0, 0], verticesM, closed: false,
+    bodyVertexIndex: 3, displayExtentAu: 600, trailModel: 'finite-open-trajectory-constant-weight',
+    trail: Array(7).fill(1), activeChords: [0, 1, 2, 3, 4, 5, 6], extentChords: [0, 3, 1, 5, 2, 4, 6],
+  } }, source.bodies[1]!] });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const publish = () => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
+  publish();
+  const root = layer.root as unknown as FakeElement;
+  const circle = find(root, 'contextBody', 'mercury'), orbit = find(root, 'contextOrbit', 'mercury');
+  expect(annotationVisibility(circle, 'indicator')).toBe('');
+  expect(orbit.style.opacity).toBe('0');
+  circle.dataset.objectHovered = 'true';
+  host.dispatchEvent(new Event('objecthoverchange'));
+  document.defaultView.advance(16); publish(); document.defaultView.advance(200);
+  expect(orbit.style.opacity).not.toBe('0');
+  expect(layer.inspect().find(entry => entry.id === 'mercury')!.orbit.some(piece => paintedOrbitLeaf(piece))).toBe(true);
+  circle.dataset.objectHovered = 'false';
+  host.dispatchEvent(new Event('objecthoverchange'));
+  document.defaultView.advance(16); publish(); document.defaultView.advance(200);
+  expect(orbit.style.opacity).toBe('0');
+  layer.destroy();
+});
+
 test('hidden annotations leave the physical dot pickable and hover reveals the complete annotation', () => {
   const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
   const clock = root.ownerDocument.defaultView, host = root.parentNode!;

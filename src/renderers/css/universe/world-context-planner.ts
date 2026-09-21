@@ -295,7 +295,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const satellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id);
         const fullOrbit = satellite || hovered;
         const inactiveMoon = satellite && !hovered && !activeSystems.has(entry.parent!.id);
-        let skipped = !hovered && entry.orbitHidden;
+        // Open trajectories have no physical apoapsis and read as unbounded
+        // guide lines at system scale. Keep them quiet until the body itself
+        // is hovered; closed orbits retain their normal category policy.
+        let skipped = !hovered && (entry.orbitHidden || entry.orbit?.closed === false);
         // Prepared trail bounds enclose the faded trail; a complete orbit uses the
         // prepared sphere around every vertex. Either way a path that cannot reach
         // the fade's first visible extent inside the viewport is not projected.
