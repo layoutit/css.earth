@@ -11,11 +11,11 @@ test('deferred navigation materializes only the selected path from its verified 
     schema: NAVIGATION_TREE_SCHEMA,
     roots: ['root'],
     nodes: {
-      root: { label: 'Root', objectId: null, place: true, count: 2, marker: null, children: ['branch'] },
+      root: { label: 'Root', objectId: null, place: true, count: 2, marker: null, children: ['branch'], href: null, focusId: null },
       branch: { label: 'Branch', objectId: 'branch', place: false, count: 2,
-        marker: { className: 'atlas-marker atlas-marker-sprite', style: '--atlas-marker-size:8px' }, children: ['leaf'] },
+        marker: { className: 'atlas-marker atlas-marker-sprite', style: '--atlas-marker-size:8px' }, children: ['leaf'], href: '/branch/', focusId: null },
       leaf: { label: 'Leaf', objectId: 'leaf', place: false, count: 1,
-        marker: { className: 'atlas-marker atlas-marker-catalog', style: '' }, children: [] },
+        marker: { className: 'atlas-marker atlas-marker-catalog', style: '' }, children: [], href: '/leaf/', focusId: null },
     },
   };
   const text = JSON.stringify(payload);
@@ -38,6 +38,40 @@ test('deferred navigation materializes only the selected path from its verified 
   assert.equal(root.querySelector<HTMLAnchorElement>('a[data-atlas-object="leaf"]')?.getAttribute('aria-current'), 'page');
   assert.equal(root.querySelector<HTMLDetailsElement>('details[data-atlas-key="root"]')?.open, true);
   assert.equal(root.querySelector<HTMLDetailsElement>('details[data-atlas-key="branch"]')?.open, true);
+  controller.destroy();
+});
+
+test('deferred rows open the destination the payload names, and a row with none is a label', async () => {
+  const payload: NavigationTreePayload = {
+    schema: NAVIGATION_TREE_SCHEMA,
+    roots: ['root'],
+    nodes: {
+      root: { label: 'Milky Way', objectId: null, place: true, count: 3, marker: null, children: ['orion', 'clusters', 'saturn'], href: null, focusId: null },
+      orion: { label: 'Orion Nebula (M42)', objectId: 'm42', place: false, count: 1, marker: null, children: [], href: '/sun/?focus=m42', focusId: 'm42' },
+      clusters: { label: 'Galaxy clusters', objectId: 'galaxy-clusters', place: true, count: 1, marker: null, children: [], href: null, focusId: null },
+      saturn: { label: 'Saturn', objectId: 'saturn', place: false, count: 1, marker: null, children: [], href: '/saturn/', focusId: null },
+    },
+  };
+  const text = JSON.stringify(payload);
+  const sha256 = createHash('sha256').update(text).digest('hex');
+  const { document, window } = parseHTML(`<div data-object-navigation-tree data-atlas-current="saturn"
+    data-atlas-tree-src="/navigation-tree/${sha256}.json" data-atlas-tree-sha256="${sha256}" data-atlas-tree-bytes="${Buffer.byteLength(text)}">
+    <ul class="atlas-tree"><li><details data-atlas-depth="0" data-atlas-key="root" data-atlas-lazy><summary><span>Milky Way (3)</span></summary></details></li></ul>
+  </div>`);
+  window.fetch = async () => new Response(text);
+  const root = document.querySelector<HTMLElement>('[data-object-navigation-tree]')!;
+  const controller = createNavigationTreeController(root, window as unknown as BrowserWindow);
+
+  await controller.select('saturn');
+
+  const orion = root.querySelector<HTMLAnchorElement>('a[data-atlas-object="m42"]');
+  assert.equal(orion?.getAttribute('href'), '/sun/?focus=m42', 'a catalogue subject opens on its host scene');
+  assert.equal(orion?.dataset.preparedFocusId, 'm42', 'and is selected in place instead of navigating');
+  assert.equal(root.querySelector<HTMLAnchorElement>('a[data-atlas-object="saturn"]')?.getAttribute('href'), '/saturn/');
+  assert.equal(root.querySelector('a[data-atlas-object="galaxy-clusters"]'), null,
+    'nothing clickable for a package the application cannot open');
+  assert.equal(root.querySelector<HTMLElement>('[data-atlas-place="galaxy-clusters"]')?.textContent, 'Galaxy clusters');
+  assert.equal(root.querySelectorAll('a[href]').length, 2, 'every rendered link has a destination');
   controller.destroy();
 });
 
@@ -68,11 +102,11 @@ test('filtering retains matching objects inside their hierarchy and restores the
     schema: NAVIGATION_TREE_SCHEMA,
     roots: ['root'],
     nodes: {
-      root: { label: 'Root', objectId: null, place: true, count: 3, marker: null, children: ['planets', 'stars'] },
-      planets: { label: 'Planets', objectId: null, place: true, count: 1, marker: null, children: ['earth'] },
-      earth: { label: 'Earth', objectId: 'earth', place: false, count: 1, marker: null, children: [] },
-      stars: { label: 'Stars', objectId: null, place: true, count: 1, marker: null, children: ['sirius'] },
-      sirius: { label: 'Sirius', objectId: 'sirius', place: false, count: 1, marker: null, children: [] },
+      root: { label: 'Root', objectId: null, place: true, count: 3, marker: null, children: ['planets', 'stars'], href: null, focusId: null },
+      planets: { label: 'Planets', objectId: null, place: true, count: 1, marker: null, children: ['earth'], href: null, focusId: null },
+      earth: { label: 'Earth', objectId: 'earth', place: false, count: 1, marker: null, children: [], href: '/earth/', focusId: null },
+      stars: { label: 'Stars', objectId: null, place: true, count: 1, marker: null, children: ['sirius'], href: null, focusId: null },
+      sirius: { label: 'Sirius', objectId: 'sirius', place: false, count: 1, marker: null, children: [], href: '/sirius/', focusId: null },
     },
   };
   const text = JSON.stringify(payload), sha256 = createHash('sha256').update(text).digest('hex');
