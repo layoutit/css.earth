@@ -1,0 +1,27 @@
+{
+ "id": "hd-209458b",
+ "classification": "exoplanet",
+ "order": 1251,
+ "physical": {
+  "name": "HD 209458 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 97139.0,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "hd-209458"
+ },
+ "physicalNotes": "Radius 1.359 +0.016 \u22120.019 Jupiter radii (at 71492 km per Jupiter radius) from Torres et al. 2008 (ApJ 677, 1324 (2008); arXiv:0801.1841), at 6378.137 km per Earth radius. No gravitational parameter is adopted. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 3.524746,
+  "semiMajorAxisStellarRadii": 8.76,
+  "inclinationDegrees": 86.71,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59893.2512,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Torres et al. 2008 (ApJ 677, 1324 (2008); arXiv:0801.1841), Table 2, row 3 HD 209458: 3.524746 d",
+   "shape": "Inclination 86.71 degrees and a/R* = 8.76 \u00b1 0.04, both from Torres et al. 2008, Table 2. Eccentricity is set to 0: a circular display approximation, not an orbital solution.",
+   "phase": "Torres et al. 2008, Table 2, row 3 HD 209458: T0 = BJD_TDB 2459893.75120 \u00b1 0.00005, MEASURED here from the JWST NIRCam F322W2 grism white-light curve of programme 1274 observation 2 (MAST product jw01274-o002_t002_nircam_f322w2-grismr-subgrism64_whtlt.ecsv), by a trapezoid fit with a linear baseline; the paper gives no transit time.",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

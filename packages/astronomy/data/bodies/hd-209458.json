@@ -1,0 +1,29 @@
+{
+ "id": "hd-209458",
+ "classification": "star",
+ "order": 1250,
+ "physical": {
+  "name": "HD 209458",
+  "horizonsCode": null,
+  "meanRadiusKm": 803534,
+  "gravitationalParameterKm3PerS2": 148505220406.93018,
+  "parent": null
+ },
+ "physicalNotes": "Radius: 1.155 +0.014 \u22120.016 solar radii at 695700 km per solar radius, from Torres et al. 2008 (ApJ 677, 1324 (2008); arXiv:0801.1841). GM from their stellar mass 1.119 solar masses times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: no spin axis is measured, so the display axis (celestial north at the star) is up.",
+ "star": {
+  "rightAscensionDegrees": 330.79488644388,
+  "declinationDegrees": 18.88431927594,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 48.1478,
+  "properMotionRaMasPerYear": 29.766,
+  "properMotionDecMasPerYear": -17.976,
+  "radialVelocityKmPerS": -14.743,
+  "sources": {
+   "position": "SIMBAD basic record for HD 209458, ICRS J2000 position, reference 2020yCat.1350....0G, retrieved 2026-09-21",
+   "distance": "Gaia EDR3 parallax 20.7694 +/- 0.0266 mas via SIMBAD (2020yCat.1350....0G): 48.15 pc, no zero-point correction",
+   "properMotion": "SIMBAD: 29.766, -17.976 mas/yr, reference 2020yCat.1350....0G",
+   "radialVelocity": "SIMBAD: -14.743 km/s, reference 2018A&A...616A...7S"
+  },
+  "presentationUp": "display-axis"
+ }
+}

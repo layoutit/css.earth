@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-209458b",
+  "displayName": "HD 209458 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.359 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-0801-1841",
+          "url": "https://arxiv.org/abs/0801.1841",
+          "label": "G. Torres et al., \"Improved parameters for extrasolar transiting planets\", ApJ 677, 1324 (2008), arXiv:0801.1841",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.52 days",
+        "source": {
+          "catalogueId": "arxiv-0801-1841",
+          "url": "https://arxiv.org/abs/0801.1841",
+          "label": "G. Torres et al., \"Improved parameters for extrasolar transiting planets\", ApJ 677, 1324 (2008), arXiv:0801.1841",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 209458; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-209458b-lens-shape.webp",
+        "surface": "hd-209458b-surface-shape@2x.webp",
+        "poles": "hd-209458b-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-209458b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/0801.1841"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of this planet exists (it has never been resolved: only its transit depth and orbit are measured; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "G. Torres et al., \"Improved parameters for extrasolar transiting planets\", ApJ 677, 1324 (2008), arXiv:0801.1841",
+      "href": "https://arxiv.org/abs/0801.1841"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/0801.1841",
+      "credit": "G. Torres et al., \"Improved parameters for extrasolar transiting planets\", ApJ 677, 1324 (2008), arXiv:0801.1841"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-209458b.json",
+      "credit": "Published radius and transit-fitted orbit; G. Torres et al., \"Improved parameters for extrasolar transiting planets\", ApJ 677, 1324 (2008), arXiv:0801.1841"
+    }
+  }
+}
