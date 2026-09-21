@@ -6,9 +6,9 @@ Kepler-452 is a Sun-like star about 554 parsecs away, 1.11 times the Sun’s rad
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
-Placement: the SIMBAD position, proper motion and radial velocity with the references SIMBAD gives, and the distance from the Gaia EDR3 parallax 1.8053 ± 0.0103 mas via SIMBAD. The package binds to the star the shared star field already draws through its Hipparcos number, so there is one Kepler-452, not two.
+Placement: the SIMBAD position, proper motion and radial velocity with the references SIMBAD gives, and the distance from the Gaia EDR3 parallax 1.8053 ± 0.0103 mas via SIMBAD. Kepler-452 has no Hipparcos number, so it matches no entry of the shared star field; the package places it from the astrometry above.
 
-Radius: Stellar radius 1.11 (+0.15) solar radii from Jenkins et al. 2015, AJ 150, 56 (2015). It is a radius from stellar characterisation, not an interferometric diameter; the angular diameter in the record is that radius at the Gaia distance.
+Radius: Stellar radius 1.11 (+0.15/−0.09) solar radii from Jenkins et al. 2015, AJ 150, 56 (2015). It is a radius from stellar characterisation, not an interferometric diameter; the angular diameter in the record is that radius at the Gaia distance.
 
 Rotation: no spin axis or rotation period is adopted The display axis is celestial north at the star, a convention.
 

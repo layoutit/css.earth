@@ -7,7 +7,8 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
   const systems = allPlanetarySystems(SCENE_OBJECTS);
   assert.deepEqual(systems.map(system => [system.id, system.name, system.route]),
     [[SOLAR_SYSTEM_ID, 'Solar System', '/sun/'], ['wasp-43', 'WASP-43 system', '/wasp-43/'], ['hd-189733', 'HD 189733 system', '/hd-189733/'],
-      ['trappist-1', 'TRAPPIST-1 system', '/trappist-1/']]);
+      ['hd-209458', 'HD 209458 system', '/hd-209458/'], ['k2-18', 'K2-18 system', '/k2-18/'], ['kepler-186', 'Kepler-186 system', '/kepler-186/'],
+      ['kepler-452', 'Kepler-452 system', '/kepler-452/'], ['trappist-1', 'TRAPPIST-1 system', '/trappist-1/'], ['wasp-39', 'WASP-39 system', '/wasp-39/']]);
   // HD 189733 B has no measured orbit; it belongs to the system through the candidate orbits its measurements allow.
   for (const [id, system] of [['earth', 'sun'], ['moon', 'sun'], ['comet-3i', 'sun'], ['sun', 'sun'], ['wasp-43b', 'wasp-43'], ['wasp-43', 'wasp-43'],
     ['hd-189733b', 'hd-189733'], ['hd-189733-companion', 'hd-189733'], ['hd-189733', 'hd-189733'],

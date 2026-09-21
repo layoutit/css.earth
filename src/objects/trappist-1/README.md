@@ -53,7 +53,7 @@ the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](..
 **The blue end of the spectrum is noise.** Below about 450 nm this star is too faint for Gaia to measure, and those samples are
 read as no emission. The one-sigma range above bounds what that can move.
 
-**No image, diameter or axis.** The disc is about 0.07 milliarcseconds across; nothing resolves it.
+**No image, diameter or axis.** The disc is about 0.09 milliarcseconds across; nothing resolves it.
 
 **The system is seen almost edge-on from the Sun.** The seven orbits lie nearly in the line of sight, which is why they transit; on
 arrival the overview turns up to 30° above their plane so they open into ellipses, as it does for every other star's system.

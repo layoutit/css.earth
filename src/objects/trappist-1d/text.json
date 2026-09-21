@@ -2,7 +2,7 @@
   "schema": "cssearth-object-text@1",
   "objectId": "trappist-1d",
   "card": {
-    "text": "Smaller than earth planet of TRAPPIST-1, one year every 4.05 days.",
+    "text": "Planet smaller than Earth of TRAPPIST-1, one year every 4.05 days.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-psj-abd022",
@@ -15,7 +15,7 @@
     ]
   },
   "introduction": {
-    "text": "TRAPPIST-1d is 0.79 Earth radii across and 0.39 Earth masses. It circles its star every 4.05 days at 0.022 au, receiving 1.11 times the sunlight Earth does.",
+    "text": "TRAPPIST-1d is 0.79 Earth radii across and 0.39 Earth masses. It circles its star every 4.05 days at 0.022 au, receiving 1.12 times the sunlight Earth does.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-psj-abd022",
@@ -24,6 +24,14 @@
         "checked": "2026-09-17",
         "locator": "Table 6",
         "quote": "R [R_earth]: 0.788; M [M_earth]: 0.388"
+      },
+      {
+        "catalogueId": "doi-10-3847-psj-abd022",
+        "url": "https://doi.org/10.3847/PSJ/abd022",
+        "label": "Agol et al. 2021",
+        "checked": "2026-09-17",
+        "locator": "Table 2",
+        "quote": "P [day]: 4.049219"
       }
     ]
   },

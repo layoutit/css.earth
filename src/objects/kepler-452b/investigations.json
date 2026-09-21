@@ -16,6 +16,23 @@
           "commit": "f137b67d36a74346d81bb81663864285091e9dda"
         }
       ]
+    },
+    {
+      "id": "planet-status",
+      "subject": "Whether the transit signal is a planet",
+      "status": "included",
+      "finding": "Planet or false alarm: Jenkins et al. (2015) validated the signal. Mullally et al. (2018): \"can not be confirmed using a purely statistical validation approach\", still a candidate; Burke et al. (2019): not statistically validated; Robnik & Seljak (2025): star-specific false-alarm probability below 1%, supporting validation. The dispute is stated on the page.",
+      "evidence": [
+        "https://arxiv.org/abs/1803.11307",
+        "https://arxiv.org/abs/1901.00506",
+        "https://arxiv.org/abs/2509.07409"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "3f7319c1db"
+        }
+      ]
     }
   ]
 }

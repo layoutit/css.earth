@@ -10,10 +10,12 @@ planets perturb each other enough for their masses to be read from the timing of
 surface gravity of 1.102 Earth's. The radius comes from the transit depth against the star's own radius; the mass from the
 transit-timing variations, scaled by the stellar mass Mann et al. (2019) give.
 
-**Orbit.** 1.510826 days at 0.01154 au, 4.153 times the starlight Earth receives (Agol et al. (2021, PSJ 2, 1), Tables 2, 5 and 6). The
+**Orbit.** 1.5108 days at 0.01154 au, 4.153 times the starlight Earth receives (Agol et al. (2021, PSJ 2, 1), Tables 2, 5 and 6). The
 scene draws a circle: the paper's eccentricity for this planet is under 0.01, which moves it by less than its own radius. The
-transit time is the paper's, and transit-timing variations of up to about half an hour are not modelled; carried forward
-to 2022 and 2023 its reference transit falls 2.0 to 2.5 hours early, so the lens uses the timing of its own observations (see Timing). The orbit's position
+period and transit time are the ones the Agol et al. (2024, arXiv:2409.11620) forecast gives around the scene epoch
+(2026-09-03), which adds JWST timings to the Agol et al. (2021) model; their Table 2 period, 1.510826 d, is an osculating value at
+the start of their simulation and drifts hours off by 2026. Transit-timing variations of -1.2 to +0.1 minutes about that
+line are not modelled. The temperature lens uses the timing of its own 2022 and 2023 observations (see Timing). The orbit's position
 angle on the sky is not measured, so the ascending node is drawn at celestial north, a stated convention.
 
 **Rotation.** Assumed synchronous: this close to its star the planet is expected to be tidally locked, and no rotation period of
@@ -35,11 +37,12 @@ Checked against the published result: with Bell's own phase-curve shape the join
 797 ± 77 ppm, and a shape exponent of 2.71 against 2.64. Single-visit eclipse depths of b come out between 731 and 880 ppm, against
 the 861 ppm of Greene et al. (2023) that Bell's fit starts from.
 
-**Timing.** The package orbit carries Agol's 2015 osculating elements, which put these eclipses 2.0 to 2.4 hours before they
-happen: the eclipse visits are centred on dips of 850 to 950 ppm that the old fits placed outside the eclipse. The lens therefore uses
-the linear ephemeris of these observations (transit at 60271.25431 BMJD, period 1.5108699 days), from the joint fit's transit of b
-and the five 2022 eclipse centres, which it places within 1.3 minutes. With that timing the fit improves from 1.039 to 0.985 in
-chi-squared per sample.
+**Timing.** Agol's 2015 osculating elements, which the package orbit carried before, put these eclipses 2.0 to 2.4 hours before
+they happen: the eclipse visits are centred on dips of 850 to 950 ppm that the old fits placed outside the eclipse. The package orbit
+now follows the Agol et al. (2024) forecast around the 2026 scene epoch, which still puts these 2022 eclipses about 17 minutes late.
+The lens therefore uses the linear ephemeris of these observations (transit at 60271.25431 BMJD, period 1.5108699 days), from the
+joint fit's transit of b and the five 2022 eclipse centres, which it places within 1.3 minutes. The fit gives 0.985 in chi-squared
+per sample with that timing, 1.016 with the package orbit's and 1.039 with the 2015 elements'.
 
 **Why a bare rock.** A bare rock has no atmosphere to carry heat, so each patch of ground re-radiates the starlight it absorbs: the
 temperature is T cos(z)^(1/4) at an angle z from the point under the star, and there is none on the night side (the equilibrium
