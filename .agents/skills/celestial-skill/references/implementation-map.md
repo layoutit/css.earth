@@ -403,7 +403,7 @@ purposes; run those needed for the task, not every preparation step by default.
 | Prepare selected objects through the cache and shared steps | `pnpm prepare:planets -- --object=<id>` |
 | Create the oracle environment and regenerate oracle fixtures | `pnpm oracles:setup`, then `pnpm oracles:run [group/name ...]` |
 | Invoke authored preparation directly | `node tools/objects/dist/prepare-authored.js <id> --write` |
-| Prepare one authored object end to end, resumable by step | `node tools/prepare-object.mts <id> [--from <step>]`: stale builds, pins, catalogue, title, geometry, write mode, discovery, source records, page, text, markers, world context, provenance for this object only |
+| Prepare one authored object end to end, resumable by step | `node tools/prepare-object.mts <id> [--from <step>] [--presentation-only]` (the last reuses a paged-ellipsoid body's published heavy outputs): stale builds, pins, catalogue, title, geometry, write mode, discovery, source records, page, text, markers, world context, provenance for this object only |
 | Say which build a run would read stale | `node tools/check-stale-builds.mts` |
 | Repin authored, generated and tool-written files; adopt a new download's first pin | `node tools/pin-object-documents.mts <id> [--check] [--adopt-downloads]` (write mode runs it; manifests pinning a repository output follow the world-context writer) |
 | Re-prepare only the content record after a credit or provenance edit | `node tools/objects/refresh-content.mts <id> ...` (refuses if any other prepared file would change) |

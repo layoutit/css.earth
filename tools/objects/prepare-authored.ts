@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { type AuthoredObjectDescriptor } from '@cssearth/objects';
@@ -16,7 +16,9 @@ import { attachSurfaceFeatures, writeFeatureContent } from './surface-features/a
 
 export interface AuthoredPreparationContext { readonly objectDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly write?: boolean;
   /** Write mode: regenerated reviewed images replace their source copies and pins instead of failing. */
-  readonly replaceReviewedImages?: boolean; }
+  readonly replaceReviewedImages?: boolean;
+  /** Reuse the published heavy outputs and prepare only the presentation; supported by the paged-ellipsoid lane. */
+  readonly presentationOnly?: boolean; }
 export interface AuthoredPreparationResult { readonly descriptor: AuthoredObjectDescriptor; readonly sources: ReadonlyMap<string, VerifiedSource>; readonly raster?: unknown; readonly celestial?: unknown; readonly scene?: unknown; readonly definition?: unknown; }
 type Input = Record<string, unknown>;
 
@@ -58,16 +60,20 @@ async function writePreparedObject(id: string, definition: Record<string, unknow
 }
 
 /** Verify authored source pins, then prepare each available generic capability lane. */
-export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = write }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
-  const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages });
+export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = write, presentationOnly = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
+  const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, presentationOnly });
   if (write || !result.definition) return result;
   const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-surface-minimaps.mts')).href);
-  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory });
+  // Minimaps render from the raw imagery; a presentation-only stage already carries the published ones.
+  if (!presentationOnly) await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory });
   const prepared = await prepareWorldNavigationDefinition({ objectDirectory, definition: result.definition as Record<string, unknown> });
   await assertDefaultViewsFaceLenses(objectDirectory, prepared.definition as Record<string, unknown>, prepared.frame);
   const scene = await writeWorldNavigationArtifacts(outputDirectory, prepared, result.scene as Record<string, unknown> | undefined);
-  const { prepareObjectProvenance } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/provenance.mts')).href);
-  await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'prepared' });
+  // Provenance verifies raw source bytes; a presentation-only stage carries the published record for its unchanged images.
+  if (!presentationOnly) {
+    const { prepareObjectProvenance } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/provenance.mts')).href);
+    await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'prepared' });
+  }
   return Object.freeze({ ...result, definition: prepared.definition, scene });
 }
 
@@ -100,7 +106,18 @@ async function assertDefaultViewsFaceLenses(objectDirectory: string, definition:
   }
 }
 
-async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
+/** Feature anchors address scene-tree nodes, so they carry over only while the tree is the published one. */
+function carryPublishedFeatures(id: string, definition: Record<string, unknown>, published: { runtime: Record<string, unknown>; content: Record<string, unknown> }) {
+  if (published.runtime.features === undefined) return { definition, features: null };
+  // Finalization appends nodes and activation groups to the lane's tree; the lane's own tree must be the published prefix.
+  const tree = record(definition.tree, 'prepared tree'), previous = record(published.runtime.tree, 'published tree');
+  const nodes = Array.isArray(tree.nodes) ? tree.nodes : [], previousNodes = Array.isArray(previous.nodes) ? previous.nodes : [];
+  if (Object.entries(tree).some(([key, value]) => JSON.stringify(key === 'nodes' ? previousNodes.slice(0, nodes.length) : previous[key]) !== JSON.stringify(value))) throw new Error(`${id}: the scene tree differs from the published preparation, so its feature anchors cannot carry over; run the full preparation.`);
+  return { definition: { ...definition, features: published.runtime.features },
+    features: record(published.content.features, 'published feature content') as unknown as Parameters<typeof writeFeatureContent>[1] };
+}
+
+async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = false, presentationOnly = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
   if (write) {
     const id = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')), 'descriptor').id;
     if (typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid preparation identity.');
@@ -109,7 +126,9 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const stage = await mkdtemp(resolve(stageRoot, `${id}-`));
     try {
       const stagedPublic = resolve(stage, 'public'), stagedData = resolve(stage, 'prepared');
-      const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, replaceReviewedImages });
+      // The stage starts from the published set; publication verifies every carried image against the new manifest.
+      if (presentationOnly) await Promise.all([cp(outputDirectory, stagedData, { recursive: true }), cp(publicDirectory, stagedPublic, { recursive: true })]);
+      const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, replaceReviewedImages, presentationOnly });
       if (!result.definition) throw new TypeError('Preparation produced no runtime payload.');
       // Palette legend labels are derived from the stretch this run just measured: refresh them, repin, and prepare again.
       const legend = await stagedLegendLabelChanges(objectDirectory, stagedData);
@@ -119,13 +138,20 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         console.log(`refreshed legend labels ${legend.summary}`);
         const { pinObjectDocuments } = await import(pathToFileURL(resolve(projectRoot, 'tools/pin-object-documents.mts')).href) as typeof import('../pin-object-documents.mts');
         await pinObjectDocuments(objectDirectory);
-        return await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages });
+        return await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, presentationOnly });
       }
       const { finalizeObjectJson } = await import(pathToFileURL(resolve(projectRoot, 'tools/prepare-object-json.mts')).href) as typeof import('../prepare-object-json.mts');
       const finalized = await finalizeObjectJson(id, result.definition, { projectRoot, objectDirectory, preparedDirectory: stagedData,
         descriptorPath: resolve(stage, 'object.json') }, { publicDirectory: stagedPublic });
-      const { prepareObjectProvenance } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
-      await prepareObjectProvenance({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, basis: 'prepared' });
+      if (presentationOnly) {
+        // The carried provenance describes the published images, so the run must publish exactly those images.
+        const inventory = async (path: string) => JSON.stringify(JSON.parse(await readFile(path, 'utf8')));
+        if (await inventory(resolve(stagedData, 'runtime-assets.json')) !== await inventory(resolve(objectDirectory, 'runtime-assets.json')))
+          throw new Error(`${id}: the presentation changed the published image set; run the full preparation.`);
+      } else {
+        const { prepareObjectProvenance } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
+        await prepareObjectProvenance({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, basis: 'prepared' });
+      }
       const { publishPreparedObject } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/publication.mts')).href) as typeof import('./publication.mts');
       await publishPreparedObject({ id, stage, objectDirectory, publicDirectory, outputDirectory, projectRoot });
       return Object.freeze({ ...result, definition: finalized.definition,
@@ -136,6 +162,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   // Every recipe source is verified against the source manifest, the one owner of input pins.
   const { descriptor, entries, sources } = await readAuthoredSources(objectDirectory);
   // Nomenclature labels ride the generic sphere lane; other lanes declare no mesh anchor frame yet.
+  if (presentationOnly && !source(sources, 'paged-ellipsoid')) throw new TypeError(`${descriptor.id}: presentation-only preparation is implemented for the paged-ellipsoid lane only.`);
   const genericLaneOnly = () => { if (descriptor.recipe.features) throw new TypeError('Surface features are prepared by the generic authored lane only.'); };
   await mkdir(outputDirectory, { recursive: true });
   const sourceDirectory = resolve(objectDirectory, 'source');
@@ -146,9 +173,14 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   }
   if (source(sources, 'paged-ellipsoid')) {
     const { preparePagedEllipsoidObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/paged-ellipsoid/index.mts')).href) as typeof import('./paged-ellipsoid/index.mts');
-    const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
+    // A presentation-only run carries the published feature anchors; read them before the lane rewrites this directory.
+    const publishedFeatures = presentationOnly ? {
+      runtime: record(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), 'published runtime'),
+      content: record(JSON.parse(await readFile(resolve(outputDirectory, 'content.json'), 'utf8')), 'published content') } : null;
+    const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets, presentationOnly });
     // Named features anchor on the rendered ellipsoid (attach.ts casts map directions through the lane's own surface sampler).
-    const attached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: prepared.definition as unknown as Record<string, unknown> });
+    const attached = publishedFeatures ? carryPublishedFeatures(descriptor.id, prepared.definition as unknown as Record<string, unknown>, publishedFeatures)
+      : await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: prepared.definition as unknown as Record<string, unknown> });
     if (attached.features) { await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(attached.definition)}\n`); await writeFeatureContent(outputDirectory, attached.features); }
     const definition = attached.definition as typeof prepared.definition;
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
@@ -259,17 +291,18 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   return result;
 }
 
-const [id, flag] = process.argv.slice(2);
+const [id, ...flags] = process.argv.slice(2);
 const direct = process.argv[1] !== undefined && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (direct) {
-  if (!id || !/^[a-z][a-z0-9-]*$/u.test(id) || (flag !== undefined && flag !== '--write')) throw new TypeError('Usage: prepare-authored <object-id> [--write].');
-  const root = process.cwd(), write = flag === '--write';
+  if (!id || !/^[a-z][a-z0-9-]*$/u.test(id) || flags.some(flag => flag !== '--write' && flag !== '--presentation-only') || new Set(flags).size !== flags.length ||
+      (flags.includes('--presentation-only') && !flags.includes('--write'))) throw new TypeError('Usage: prepare-authored <object-id> [--write [--presentation-only]].');
+  const root = process.cwd(), write = flags.includes('--write'), presentationOnly = flags.includes('--presentation-only');
   // A traced run's pins were refreshed by its runner; rewriting recipe pins mid-run would change its own inputs.
   if (write && !process.env.CSSEARTH_PREPARATION_TRACE) {
     const { pinObjectDocuments } = await import(pathToFileURL(resolve(root, 'tools/pin-object-documents.mts')).href) as typeof import('../pin-object-documents.mts');
     for (const change of await pinObjectDocuments(resolve(root, 'src/objects', id))) console.log(`pinned ${change.file} ${change.path} (${change.expectedBytes} bytes)`);
   }
-  const result = await prepareAuthoredObject({ objectDirectory: resolve(root, 'src/objects', id), publicDirectory: write ? resolve(root, 'public/scenes', id) : resolve(root, '.local/full-json-migration/staged-public', id), outputDirectory: write ? resolve(root, 'src/objects', id, 'prepared') : resolve(root, '.local/full-json-migration/staged', id), write });
+  const result = await prepareAuthoredObject({ objectDirectory: resolve(root, 'src/objects', id), publicDirectory: write ? resolve(root, 'public/scenes', id) : resolve(root, '.local/full-json-migration/staged-public', id), outputDirectory: write ? resolve(root, 'src/objects', id, 'prepared') : resolve(root, '.local/full-json-migration/staged', id), write, presentationOnly });
   if (!write) {
     // A check run refuses labels its own report contradicts; write mode rewrites them.
     const legend = await stagedLegendLabelChanges(resolve(root, 'src/objects', id), resolve(root, '.local/full-json-migration/staged', id));

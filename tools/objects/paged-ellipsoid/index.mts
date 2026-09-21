@@ -3,7 +3,7 @@ import { readAuthoredSources } from '../authored-sources.ts';
 import {requireObjectControls} from '../../../site/scene-contract.mts';
 import type {AuthoredObjectDescriptor} from '@cssearth/objects';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
-import {readJsonSource, requireFiniteNumber} from '../../source-values.mts';
+import {readJsonSource, requireFiniteNumber, requireRecord} from '../../source-values.mts';
 import {validateSourceManifest} from '../../../src/platform/source-manifest.mts';
 import {parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe} from './profile-source.mts';
 import {parseInteriorSource} from './source-contract.mts';
@@ -12,6 +12,9 @@ export {isPagedEllipsoidRecipe} from './profile-source.mts';
 export interface PagedEllipsoidContext {
   objectDirectory: string; publicDirectory: string; outputDirectory: string; packDirectory?: string;
   prepareContent: typeof prepareObjectContentAssets;
+  /** Reuse this object's published raster, overlay, place, page and texture-level outputs from outputDirectory and publicDirectory,
+   * and prepare only what the presentation derives from them. Refuses when the recipe sources or the recomputed plan differ. */
+  presentationOnly?: boolean;
 }
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -39,7 +42,7 @@ const write = (directory: string, name: string, value: unknown) => writeFile(res
 
 
 /** Source-derived projective globe, atmosphere, cutaway, map hierarchy and places. */
-export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(process.cwd(), '.local/wmts-global') }: PagedEllipsoidContext) {
+export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, presentationOnly = false, packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(process.cwd(), '.local/wmts-global') }: PagedEllipsoidContext) {
   const { descriptor, entries, sources } = await readAuthoredSources(objectDirectory);
   const required = (id: string) => { const source = sources.get(id); if (!source) throw new TypeError(`Paged ellipsoid requires ${id}.`); return source.value; };
   const config = parsePagedProfile(required('paged-ellipsoid')), bindingSource = parsePagedLensBindings(required('lens-bindings'));
@@ -49,8 +52,20 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const declared = descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id));
   if (JSON.stringify(declared) !== JSON.stringify(bindingSource.controls.map(lens => lens.id))) throw new TypeError('Authored lenses differ from presentation bindings.');
   const sourceDirectory = resolve(objectDirectory, 'source'), sourceManifest = validateSourceManifest(config.namespace, await json(resolve(sourceDirectory, 'manifest.json')));
-  await verifySourceManifest({ sourceRoot: sourceDirectory, manifest: sourceManifest, planetName: config.displayName });
+  // The raw imagery is read only by the stages a presentation-only run reuses; it may be absent from this checkout.
+  if (!presentationOnly) await verifySourceManifest({ sourceRoot: sourceDirectory, manifest: sourceManifest, planetName: config.displayName });
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
+  const published = async (name: string) => requireRecord(await json(resolve(outputDirectory, `${name}.json`)), `published ${name}`);
+  // Published JSON may order keys differently from a fresh run; compare values, not serializations.
+  const canonical = (value: unknown): string => JSON.stringify(value, (_key, item: unknown) => item && typeof item === 'object' && !Array.isArray(item)
+    ? Object.fromEntries(Object.entries(item).sort(([left], [right]) => left < right ? -1 : left > right ? 1 : 0)) : item);
+  // Read the published plan before any stage below rewrites a file in this output directory.
+  const publishedPlan = presentationOnly ? { scene: await published('scene'), 'surface-raster-plan': await published('surface-raster-plan'), lenses: await published('lenses') } : null;
+  if (presentationOnly) {
+    const previous = await published('authored-preparation');
+    if (JSON.stringify(previous.sources) !== JSON.stringify(entries.map(entry => entry.reference)))
+      throw new Error(`${descriptor.id}: recipe sources changed since the published preparation; run the full preparation.`);
+  }
   const sun = preparePlanetDirectionalSun();
   const sky = preparePlanetCubicSky({ objectId: descriptor.id, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
   const atmosphere = createAtmospherePreparation({ config, sourceDirectory, sourceManifest, sun }), atmosphereModel = await atmosphere.readAtmosphereModel(), raster = createPagedSurfaceRaster(config);
@@ -68,7 +83,13 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const attitude = prepareEllipsoidAttitude(descriptor.id, { meshRotationZDegrees: config.geometry.MESH_ROTATION_Z,
     mapLeftEdgeLongitudeDeg: surfaceMap ? requireFiniteNumber(surfaceMap.mapLeftEdgeLongitudeDeg, 'surface map left edge') : 0 });
   const { scene, surfaceRasterPlan } = preparePagedEllipsoidScene({ config, interiorSource, citySource, noise: paging ? { poolSize: config.geographic.noise.poolSize } : null, atmosphereModel, atmosphere, raster, attitude });
-  const rasterAssets = await preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, attitude });
+  if (publishedPlan) for (const [name, value] of Object.entries({ scene, 'surface-raster-plan': surfaceRasterPlan })) {
+    // World navigation adds the scene's worldFrame after this lane; the lane's own plan is everything else.
+    const { worldFrame: _worldFrame, ...previous } = publishedPlan[name as 'scene'];
+    if (canonical(previous) !== canonical(value)) throw new Error(`${descriptor.id}: ${name} differs from the published preparation; run the full preparation.`);
+  }
+  const rasterAssets = presentationOnly ? await published('raster-assets') as unknown as Awaited<ReturnType<typeof preparePagedEllipsoidAssets>>
+    : await preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, attitude });
   const context = { sourceDirectory, publicDirectory, config, scene };
   let noise: Awaited<ReturnType<typeof prepareVectorOverlay>> | undefined;
   let catalog: Awaited<ReturnType<typeof preparePlaces>> | undefined;
@@ -77,9 +98,9 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   // Geographic preparation is an authored capability, not a requirement of a globe.
   if (paging) {
     if (!destinations) throw new TypeError('Geographic paging requires destinations.');
-    noise = await prepareVectorOverlay(context);
-    catalog = await preparePlaces(context);
-    const geographic = await preparePinnedGlobalWmts({ sourceRoot: sourceDirectory, packDirectory, scene, namespace: descriptor.id, displayName: config.displayName, assetPath: config.publicBase, pages: config.geographic.pages });
+    noise = presentationOnly ? await published('noise') as unknown as NonNullable<typeof noise> : await prepareVectorOverlay(context);
+    catalog = presentationOnly ? await published('places') as unknown as NonNullable<typeof catalog> : await preparePlaces(context);
+    const geographic = presentationOnly ? { plan: await published('pages') as unknown as NonNullable<typeof city>, report: await published('page-preparation') as unknown as NonNullable<typeof report> } : await preparePinnedGlobalWmts({ sourceRoot: sourceDirectory, packDirectory, scene, namespace: descriptor.id, displayName: config.displayName, assetPath: config.publicBase, pages: config.geographic.pages });
     if (!geographic.plan) throw new TypeError('Geographic preparation did not produce a page plan.');
     city = geographic.plan; report = geographic.report;
     if (paging.surface !== 'body' || paging.maxResidentPages !== city.poolSize ||
@@ -99,8 +120,11 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   }; }) };
   const preparedContent = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
   const content = { ...preparedContent.content, ...(catalog ? { destinations: { searchLabel: config.destinations.searchLabel, description: `${catalog.count.toLocaleString('en')}${config.destinations.descriptionSuffix}` } } : {}) };
-  const textureLevels = await prepareTextureLevels({ config, plan: scene, lenses, publicDirectory });
+  const textureLevels = presentationOnly ? await json(resolve(outputDirectory, 'texture-levels.json')).then(value => value === null ? null : requireRecord(value, 'published texture-levels') as unknown as Awaited<ReturnType<typeof prepareTextureLevels>>,
+      error => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null; throw error; })
+    : await prepareTextureLevels({ config, plan: scene, lenses, publicDirectory });
   if (textureLevels) await write(outputDirectory, 'texture-levels', textureLevels);
+  if (publishedPlan && canonical(publishedPlan.lenses) !== canonical(lenses)) throw new Error(`${descriptor.id}: lenses differ from the published preparation; run the full preparation.`);
   const controls = requireObjectControls(preparedContent.controls, descriptor.id);
   const rawDefinition = await preparePagedEllipsoidPresentation({ config, plan: scene, lenses, sky, sun, catalog, city, noise, textureLevels, controls });
   const definition = withFocusedCamera(rawDefinition, sky);
