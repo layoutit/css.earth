@@ -118,8 +118,6 @@
     {
       "id": "oberon-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1004,
-      "expectedSha256": "97db2fbece629a5b1d00e950c5a7504f3a3126c190f24f4c8f114ee9416bbf0e",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -136,8 +134,6 @@
     {
       "id": "oberon-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1094,
-      "expectedSha256": "045ad7252c3e74aaea4020772851feecc5f8ead24ef84e79c88b9ddf34b60b9e",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -154,8 +150,6 @@
     {
       "id": "oberon-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 187,
-      "expectedSha256": "3d7ce0be38437922bd91628bf55e483deb9a44fa53f101504ab08e1d436a0526",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -199,8 +193,6 @@
     {
       "id": "oberon-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 206,
-      "expectedSha256": "375b5c3eb115437c57cd4963adac5376cc6df938d36e2d4f45c8ea50e93d8f67",
       "origin": "Repository-authored Oberon solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -220,8 +212,6 @@
     {
       "id": "oberon-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2966,
-      "expectedSha256": "aa5028aeca588f0d169a67fdd3ebf1ed308b11d78e444629f4df1fb740124f02",
       "origin": "Repository-authored Oberon raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -239,8 +229,6 @@
     {
       "id": "oberon-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1600,
-      "expectedSha256": "01df77bb58fa26fef37f9f840da1e31372a5a24870bd07638b2f5d75722e28c9",
       "origin": "Repository-authored Oberon geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -258,8 +246,6 @@
     {
       "id": "oberon-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Oberon celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -278,8 +264,6 @@
     {
       "id": "oberon-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 102,
-      "expectedSha256": "7867a5978b0a647f9d4205b2f2427f22e12734bd2fbbe611d4db817f089dbed8",
       "origin": "Repository-authored Oberon presentation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -296,8 +280,6 @@
     {
       "id": "oberon-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 1340,
-      "expectedSha256": "856d627bd507af48e9737386053118ac8871ffed6fb221ac24dec9895fab1d18",
       "origin": "Repository-authored Oberon navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -314,8 +296,6 @@
     {
       "id": "oberon-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 846,
-      "expectedSha256": "445e1c4306638a95d7056b29262bc16ac7969c515e8d279300e431ac59e644f7",
       "origin": "Repository-authored Oberon acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -333,8 +313,6 @@
     {
       "id": "oberon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7982,
-      "expectedSha256": "21e555bb90dd6d8bb008be0c1127a53572c606e9622ccc9f218ed4f5fe29c97c",
       "origin": "Repository-authored Oberon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -353,27 +331,19 @@
   "generatedIntermediates": [],
   "documents": [
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "observations/aaReadMe_uranian_MAP_DEM.txt",
-      "expectedBytes": 2426,
-      "expectedSha256": "655661b4e4d5f5ada71d7b4b797afffefc2e908ae63b51d9d1fe3fca964d51a3"
+      "path": "observations/aaReadMe_uranian_MAP_DEM.txt"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2322,
-      "expectedSha256": "dfae092f2fba44d6af417da77f59f69a735c5f5f7f862963c47f67417bddaa78"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "oberon-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 1354,
-      "expectedSha256": "af7586a71b81d1d4c3f7fc239a5b13eec0525770a9fb7a89d25682eb2823f9d3",
       "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

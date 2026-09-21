@@ -619,8 +619,6 @@
     {
       "id": "moon-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1001,
-      "expectedSha256": "84ebaac0d933fe026ec361a5a4e1da024ec72c35c7d08bda0360a576778c4171",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -637,8 +635,6 @@
     {
       "id": "moon-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1372,
-      "expectedSha256": "a4b98df89e6482faf79da809d09d33bdcfec581cf334ad87685d808295b6a7a0",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -655,8 +651,6 @@
     {
       "id": "moon-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 185,
-      "expectedSha256": "8cb169b7cafdc2e1dc397a406bf246f1a66a03a4b31036829cd14fe65456a5ad",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -673,8 +667,6 @@
     {
       "id": "moon-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "8866d8a4ad6dac17fa91e02705672f80f95a975bca434f196729f6326e0e2650",
-      "expectedBytes": 203,
       "origin": "Repository-authored physical scene recipe; mean radius 1737.4 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40°) carried over from the retired static-surface geometry",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -694,8 +686,6 @@
     {
       "id": "moon-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "523fa6e05d792e7af1aad119488bd5f3b8f8a5f5a57dcd180717c5a72ab9c749",
-      "expectedBytes": 18077,
       "origin": "Repository-authored Moon raster preparation recipe (generic sphere lane) carrying the science interpretation blocks of the retired static recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -713,8 +703,6 @@
     {
       "id": "moon-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedSha256": "bdee5d629e3d998bb95e8fce9b887866dc4525d6cf98bdac6dd9fa7db203de93",
-      "expectedBytes": 1411,
       "origin": "Repository-authored Moon CSS geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -732,8 +720,6 @@
     {
       "id": "moon-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
-      "expectedBytes": 108,
       "origin": "Repository-authored Moon sky, sun, and marker recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -752,8 +738,6 @@
     {
       "id": "moon-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedSha256": "2b58cc254008f2428bd2ebd7d649fc8a0e5a6162b121d0c8a4e76f591ace8daa",
-      "expectedBytes": 100,
       "origin": "Repository-authored Moon presentation capability recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -770,8 +754,6 @@
     {
       "id": "moon-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedSha256": "1c3491c330f0167fa43ad314197bbc18b3d8743099854b5b24068fced9440b76",
-      "expectedBytes": 404,
       "origin": "Repository-authored Moon navigation asset recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -788,8 +770,6 @@
     {
       "id": "moon-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "14faffc254af1b926c4a55eff2b3c48e605a39c77331b2bc6c9c64ae9e5a43e8",
-      "expectedBytes": 6068,
       "origin": "Repository-authored Moon acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -807,8 +787,6 @@
     {
       "id": "moon-object-content",
       "path": "content/object.json",
-      "expectedSha256": "622754644b7f0533e235443bc46d5610b37b103195b07b012f34276e03089b2a",
-      "expectedBytes": 35962,
       "origin": "Repository-authored Moon panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -988,43 +966,31 @@
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1702,
-      "expectedSha256": "b0d8b6df1aa1d1fe804b90eaa5c53d20ae1e120acf97c7171102ff040c278e73"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "science/ldem_16.lbl",
-      "expectedBytes": 5121,
-      "expectedSha256": "9aef29463ccc6ed3a3fbe0df3ecd830a99c69e16b564f455507dee2697096579",
       "origin": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.lbl",
       "purpose": "Original PDS product identity, unit transform, reference frame, grid registration and coverage label."
     },
     {
       "path": "science/ldem_16.xml",
-      "expectedBytes": 11941,
-      "expectedSha256": "011ebff260abb7c9a10a0f18601d7505e807b9a1b51d238b5587f5b02de59218",
       "origin": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml",
       "purpose": "Original PDS product identity, unit transform, reference frame, grid registration and coverage label."
     },
     {
       "path": "science/dgdr_ra_avg_cyl_032_img.lbl",
-      "expectedBytes": 4373,
-      "expectedSha256": "2c84b7d76764f503baf415ec780abfc5da55d9724030cf7587a09b868c5a0206",
       "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.lbl",
       "purpose": "Original PDS product identity, unit transform, reference frame, grid registration and coverage label."
     },
     {
       "path": "science/dgdr_ra_avg_cyl_032_img.xml",
-      "expectedBytes": 11380,
-      "expectedSha256": "c23fc15be7057ad443936f51792f446f71ea1112842cf62cc1392de003cdab4b",
       "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.xml",
       "purpose": "Original PDS product identity, unit transform, reference frame, grid registration and coverage label."
     },
     {
       "path": "validation/scientific-source-anchors.json",
-      "purpose": "Independent raw-DN coordinate/coverage/unit anchors and full-grid numeric source statistics.",
-      "expectedSha256": "43b7773477dc1cf9445ad7353a7f0ee67654750e4a22ab325526c1ce2380fe35",
-      "expectedBytes": 7940
+      "purpose": "Independent raw-DN coordinate/coverage/unit anchors and full-grid numeric source statistics."
     },
     {
       "path": "geology/GeoUnits.prj",
@@ -1032,30 +998,20 @@
       "expectedSha256": "4473b61e75ee5e9c120f4c342b4ab85276a0c69090a2c9d7771b4b88ba835fd4"
     },
     {
-      "path": "science/prepare-cf-map.json",
-      "expectedBytes": 800,
-      "expectedSha256": "3201640d22eae25b296732b4da78754a3dac2024bb753e84860c00cc78bb1853"
+      "path": "science/prepare-cf-map.json"
     },
     {
-      "path": "science/diviner-cf-2021-georeferenced.json",
-      "expectedBytes": 717,
-      "expectedSha256": "b0ba8825dfc6e38dfe911fda3eba9a885db011e756386c16a821a5829f922991"
+      "path": "science/diviner-cf-2021-georeferenced.json"
     },
     {
-      "path": "geology/prepare-grid.json",
-      "expectedBytes": 6867,
-      "expectedSha256": "3aa325574c1c7fbf5b3dfc0c490de426dc0c0bd5283c3e008215eb3447e72fb3"
+      "path": "geology/prepare-grid.json"
     },
     {
-      "path": "geology/moon-geologic-units.json",
-      "expectedBytes": 6835,
-      "expectedSha256": "42aeb5dfb20075035c9a04d3d5bbd9cf94996fbf02c6da1180875f9db54cc45f"
+      "path": "geology/moon-geologic-units.json"
     },
     {
       "path": "geology/Unified_Geologic_Map_of_the_Moon_v2_March2020.txt",
-      "purpose": "Published B6 GIS metadata or original map symbols.",
-      "expectedBytes": 5054,
-      "expectedSha256": "d47f7d22481833224005b269b1d61e748875f49580d3396b54029a797f9b875b"
+      "purpose": "Published B6 GIS metadata or original map symbols."
     },
     {
       "path": "science/diviner-ghrm/dghrm_ra_sam_70s70n_img.xml",
@@ -1077,45 +1033,31 @@
     },
     {
       "path": "science/diviner-ghrm/prepare-tbol_m.json",
-      "expectedSha256": "b09f2c2b32319c00ff2d8e6cdd8ffd7f81d05e6930893aad28b3d855b0a0f133",
-      "expectedBytes": 1040,
       "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
     },
     {
       "path": "science/diviner-ghrm/tbol_m-receipt.json",
-      "expectedSha256": "bf329009d025e19d21a6d3244e9cabd67b5c697badd84039f7f0585e50d9274f",
-      "expectedBytes": 15207,
       "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
     },
     {
       "path": "science/diviner-ghrm/prepare-ra_sam.json",
-      "expectedSha256": "260fcc90758033c62d6ade809c983847ff597eac110bbe5374bc52736466e235",
-      "expectedBytes": 1059,
       "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
     },
     {
       "path": "science/diviner-ghrm/prepare-tbol_anom.json",
-      "expectedSha256": "cc9b79fb3e6e62050f52b40ce683a69207183264ba50db923d6e7b0e2ee7310d",
-      "expectedBytes": 1074,
       "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
     },
     {
       "path": "science/diviner-ghrm/ra_sam-receipt.json",
-      "expectedSha256": "295292975706c2e3b1d388c6c1d1f5d5195a42e7aab1d23d7577c2a20dfe0e18",
-      "expectedBytes": 16444,
       "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
     },
     {
       "path": "science/diviner-ghrm/tbol_anom-receipt.json",
-      "expectedSha256": "aec2287b52f7d4ba9e773e46bd12ef0332f5cb872403040ad9fc11c741a78ef0",
-      "expectedBytes": 16526,
       "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
     },
     {
       "id": "moon-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 115313,
-      "expectedSha256": "d1cccc85a33bf459376d5f3f62e4624d33fbe2683680f474e44d775cb3c63333",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
@@ -1135,8 +1077,6 @@
     {
       "id": "moon-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 804723,
-      "expectedSha256": "9c2120b8b5f87ffddfd3276cac3b97442c1c17e5ecbb0975eb3c44ccd649547d",
       "origin": "Repository-pinned English Wikipedia lead summaries for 1749 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -1158,8 +1098,6 @@
     {
       "id": "lroc-wac-global-readme",
       "path": "surface/WAC_GLOBAL_README.TXT",
-      "expectedBytes": 5471,
-      "expectedSha256": "48570b8b896febab6440e54ad192c54fb99ab9873f3466ecf5c0dd8fb30c9865",
       "origin": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_README.TXT",
       "credit": "NASA/GSFC/Arizona State University",
       "license": "Public domain PDS archive data",

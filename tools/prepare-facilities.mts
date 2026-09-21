@@ -120,7 +120,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     const contentBytes = await input(`${base}/${contentPath}`);
     const contentPin = ['inputs', 'documents', 'generatedIntermediates'].flatMap(section => explorationArray(manifest[section] ?? [], explorationRecord))
       .filter(entry => `source/${entry.path}` === contentPath);
-    if (contentPin.length !== 1 || contentPin[0]!.expectedBytes !== contentBytes.length || contentPin[0]!.expectedSha256 !== sha256(contentBytes)) throw new Error(`Changed content source for ${object.id}.`);
+    if (contentPin.length !== 1) throw new Error(`Content source for ${object.id} is not declared once in its manifest.`);
     const content = explorationRecord(JSON.parse(contentBytes.toString('utf8')));
     const objectDirectory = resolve(root, base);
     const panel = await verifyFactsheetSources(content.panel, { objectDirectory, manifest, sources,

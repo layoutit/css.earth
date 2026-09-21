@@ -3,12 +3,11 @@ import test from 'node:test';
 import packageJson from '../package.json' with { type: 'json' };
 import { PREPARATION_STEPS } from './prepare-object.mts';
 
-test('deploy generation and object authoring use distinct world-context commands', async () => {
-  assert.doesNotMatch(packageJson.scripts['prepare:world-context'], /--pin-references/u);
-  assert.match(packageJson.scripts['prepare:world-context:author'], /--pin-references/u);
+test('deploy generation and object authoring place the object with the same world-context command', async () => {
+  assert.ok(packageJson.scripts['prepare:world-context']);
   const world = PREPARATION_STEPS.find(step => step.name === 'world');
   assert.ok(world);
-  assert.deepEqual(await world.commands('sun'), [['pnpm', 'prepare:world-context:author']]);
+  assert.deepEqual(await world.commands('sun'), [['pnpm', 'prepare:world-context']]);
 });
 
 test('presentation-only preparation reaches the authored preparation only when asked', async () => {

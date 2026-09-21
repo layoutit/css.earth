@@ -31,8 +31,6 @@
     {
       "id": "model-surface",
       "path": "material/model-coverage.png",
-      "expectedBytes": 7580,
-      "expectedSha256": "b5a1d39f0f0b7453507a01ba1507958be6ec0a8090ac3f2cc6abc783d9a75add",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "Farnham & Thomas (2013), NASA PDS flags; cssEarth coverage material",
       "license": "MIT",
@@ -210,8 +208,6 @@
     {
       "id": "iv05070405-9000632-001-r-controlPath",
       "path": "photography/deep-impact/iv05070405_9000632_001_r.json",
-      "expectedBytes": 22719,
-      "expectedSha256": "2b145f846105a7b972360041c31a94d1f01fdb4e756520a88b8248c44fef4f51",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -285,8 +281,6 @@
     {
       "id": "iv05070405-9000639-001-r-controlPath",
       "path": "photography/deep-impact/iv05070405_9000639_001_r.json",
-      "expectedBytes": 17827,
-      "expectedSha256": "f43b5c3747b1b2fbc55c696067dc5fdea036a0ae6286c64e32a495967fd41628",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -360,8 +354,6 @@
     {
       "id": "iv05070405-9000654-001-r-controlPath",
       "path": "photography/deep-impact/iv05070405_9000654_001_r.json",
-      "expectedBytes": 14834,
-      "expectedSha256": "3f7535c22735e89e43f77f77b32ee423ea0fb8a18bfeba6b2a43c137bdb4234d",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -435,8 +427,6 @@
     {
       "id": "n30036te02-rr-controlPath",
       "path": "photography/next/n30036te02_rr.json",
-      "expectedBytes": 23080,
-      "expectedSha256": "0cf2cdb79d4e5a10173125aa102e628820ec61f31b15793490133dcea8c886e4",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -510,8 +500,6 @@
     {
       "id": "n30039te02-rr-controlPath",
       "path": "photography/next/n30039te02_rr.json",
-      "expectedBytes": 16354,
-      "expectedSha256": "90c0459b6a86faab62a1ca22e4bd3c079e3bae88e786d82260bb32925f577691",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -585,8 +573,6 @@
     {
       "id": "n30042te02-rr-controlPath",
       "path": "photography/next/n30042te02_rr.json",
-      "expectedBytes": 17694,
-      "expectedSha256": "9e799a22bcfe3363817a606f77a5a9dbb60eaad94d1836221e65337d2e84447e",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -660,8 +646,6 @@
     {
       "id": "iv05070405-9000644-001-r-controlPath",
       "path": "photography/deep-impact/iv05070405_9000644_001_r.json",
-      "expectedBytes": 17997,
-      "expectedSha256": "696ffa2a70e8f1eb26b135d786af0789c6b7943f47f68bbaf1a111d63b8c8452",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -735,8 +719,6 @@
     {
       "id": "iv05070405-9000673-001-r-controlPath",
       "path": "photography/deep-impact/iv05070405_9000673_001_r.json",
-      "expectedBytes": 13379,
-      "expectedSha256": "41a8b4f8558f50db5dfd8fa7e54aa2bee03d0c5f8a6ef1a0944d914314ef36e1",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -810,8 +792,6 @@
     {
       "id": "n30033te02-rr-controlPath",
       "path": "photography/next/n30033te02_rr.json",
-      "expectedBytes": 17740,
-      "expectedSha256": "ff0de3863638c44954eec125b8ecedf6228d13a127913e575ea11ebf269bbd15",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -885,8 +865,6 @@
     {
       "id": "n30045te02-rr-controlPath",
       "path": "photography/next/n30045te02_rr.json",
-      "expectedBytes": 17370,
-      "expectedSha256": "3c0ce1af03d4a374b68c6cde5ae4fba4f8f9e8182272e8f2baffdd95a88ec781",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -960,8 +938,6 @@
     {
       "id": "n30048te02-rr-controlPath",
       "path": "photography/next/n30048te02_rr.json",
-      "expectedBytes": 17360,
-      "expectedSha256": "1c07ba7d6547cb8e51d959fb38c6ba9bb3a4b020eb1b8b6020ab4f2d6bac9904",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -1037,8 +1013,6 @@
     {
       "id": "iv05070405_9000675_001_r-control",
       "path": "photography/deep-impact/iv05070405_9000675_001_r.json",
-      "expectedBytes": 57084,
-      "expectedSha256": "87d8b0a9e4992ad62bd57fd7c8165f0cce39e639ce7873d7bff67634c583eacb",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -1114,8 +1088,6 @@
     {
       "id": "iv05070405_9000680_001_r-control",
       "path": "photography/deep-impact/iv05070405_9000680_001_r.json",
-      "expectedBytes": 15703,
-      "expectedSha256": "75faeb131deaf390f5931556db492878570eb94fb72d185b6ef55d70fb69c7b1",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -1191,8 +1163,6 @@
     {
       "id": "iv05070405_9000688_001_r-control",
       "path": "photography/deep-impact/iv05070405_9000688_001_r.json",
-      "expectedBytes": 16038,
-      "expectedSha256": "5c081d34acb7869b2432322ff1bc13ace9b9d935ed4aaee412b8d335e1e7156d",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -1212,8 +1182,6 @@
     {
       "id": "tempel-closeup-registration",
       "path": "preparation/closeups.json",
-      "expectedBytes": 1554,
-      "expectedSha256": "65221b0b656805620f31c35be63d023392c133f8734073fe5166720ad7b2908b",
       "origin": "https://github.com/layoutit/css.earth",
       "credit": "cssEarth image registration; NASA/JPL-Caltech ITS photographs",
       "license": "MIT",
@@ -1262,8 +1230,6 @@
     {
       "id": "comet-9p-features-manifest",
       "path": "features/manifest.json",
-      "expectedBytes": 1016,
-      "expectedSha256": "76d286a5de111ba36b41fac8bb1224585fac07f10c7347403537279b680731a9",
       "origin": "Byte pins and source qualifications for the surface-place compilation.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -1280,8 +1246,6 @@
     {
       "id": "comet-9p-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 798,
-      "expectedSha256": "d2f4fe19e4f2fbc891855b4ea392aa632b095aa0a79b6d372be18b816f7c8ddf",
       "origin": "Object-owned selection of surface-place source records, datasets and label policy.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -1298,8 +1262,6 @@
     {
       "id": "comet-9p-presentation-surface-map",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 187,
-      "expectedSha256": "33bf563bcc804c2db463284b58faedf00f33d5d038416d096c81da70e9bf7d0d",
       "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -3626,8 +3588,6 @@
     {
       "id": "hrii-scan-json",
       "path": "science/hrii/scan.json",
-      "expectedBytes": 23675,
-      "expectedSha256": "00386f1605d85c75af635bcf27bbcf5acf8aa972a9738223a2e505697ec02951",
       "origin": "object:source/science/hrii/scan.json",
       "credit": "cssEarth, derived from NASA Deep Impact/EPOXI HRI-IR and Farnham & Thomas shape models",
       "license": "MIT; underlying PDS scientific data",
@@ -3649,8 +3609,6 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 77009,
-      "expectedSha256": "c5f29901da5a74f1009082cc29548a2b87cdb15c9fdcc3a11aab529ff4f2ff9a",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab",
       "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3681,82 +3639,52 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11232,
-      "expectedSha256": "87ca0fba6f42bcdd8afab6047be7378516e2cbfc7de5a60467a7376cbe47434e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 32654,
-      "expectedSha256": "687e78464cf89be038366473c32ee7052294be7819a7b03ff50352170ba0ecd2"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "3bdb5f8ef2ce8e2380642708ac678ec1b44fbd93545f234168ed97f2a1b85cc0"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 407,
-      "expectedSha256": "0b095c218de9507ce7c95a006f17b4cf8346e20ec9743c294f5fe5657040655a"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 12663,
-      "expectedSha256": "f44349dbe843fc261f4d169e4e12511f0e77eca72ad61b5518893a7db97f6936"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 41,
-      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3446,
-      "expectedSha256": "221a3d3352f0f326de337017b175028c31bf753069b9176ba83267de55cefb59"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/dataset.cat",
-      "expectedBytes": 17440,
-      "expectedSha256": "24887b4f6f74ffb68e705bb132d24fbae83088fd2444ef0e3208ad7e69ead138"
+      "path": "reference/dataset.cat"
     },
     {
-      "path": "shape/tempel1_2012_plan.lbl",
-      "expectedBytes": 12720,
-      "expectedSha256": "a8ceea25c3526ebb30f12adc6daf9d19551d34a87d13064338ca295e07c61e69"
+      "path": "shape/tempel1_2012_plan.lbl"
     },
     {
-      "path": "reference/encounter-photography.md",
-      "expectedBytes": 10460,
-      "expectedSha256": "13b2379ca63ac16934d439f69dc7e33a7d0f969b7cc45f1d7c219d8e089cfeba"
+      "path": "reference/encounter-photography.md"
     },
     {
-      "path": "reference/its-dataset.cat",
-      "expectedBytes": 46560,
-      "expectedSha256": "578f0d61df8566c6aa7d52827c0466fa6d773ab2bc52a748b232729e3a33ee15"
+      "path": "reference/its-dataset.cat"
     },
     {
-      "path": "reference/next-dataset.cat",
-      "expectedBytes": 49440,
-      "expectedSha256": "6966339e8ae56bcc51dff297e6a45927c73c3dbad33eeb75c969a019b54fc3b3"
+      "path": "reference/next-dataset.cat"
     },
     {
-      "path": "reference/epoxi-sis.pdf",
-      "expectedBytes": 6311705,
-      "expectedSha256": "3f5e960fd23d2d36dea0480583cc416acb0cd8445535e61703f44136ec3375aa"
+      "path": "reference/epoxi-sis.pdf"
     },
     {
-      "path": "reference/tempel1_2012_cart.wrl",
-      "expectedBytes": 3871120,
-      "expectedSha256": "0a2baed9f6c3f6c243968310b949b07c57b5a249925903b6926a84be2b168d35"
+      "path": "reference/tempel1_2012_cart.wrl"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3782,
-      "expectedSha256": "2bd09d1f557cb031cb1510c882349ae13228612b57ec546b9725b84e2159bd10",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -61,8 +61,6 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 11372,
-      "expectedSha256": "b9c0be2c03512e6fb0307e5047d879794a2eda844e9d0674d58ec1df5a52b605",
       "origin": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
       "credit": "Abbie L. Donaldson (2025); Fernández et al. (2013); cssEarth approximation",
       "license": "Published scientific parameters; cssEarth implementation MIT",
@@ -93,62 +91,40 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3304,
-      "expectedSha256": "f7b84dc403ccaac777f79d8482057f90315ceb4a1486b212a3b315ef11a713d8",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 447,
-      "expectedSha256": "fbbd220cc241710011cf4374c5c37d69584dbb67af05138c8fe9c37185457945"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 405,
-      "expectedSha256": "372bbf8d78fb4b4adb87b269aa36e21bb512d1a6aa816ef1caad276f049bdb53"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2751,
-      "expectedSha256": "5683236e7f22dcd2f7d0d738c15bb04e7c0b4f635d798fb412a5b00225bce5e1"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 41,
-      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 8010,
-      "expectedSha256": "941e3790bd99de1b2189739e5ccdbbd09c77573cf5afea29f61e06d8930b303f"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 6975,
-      "expectedSha256": "1baf2e3744346f9ff3ad9cf310398af00c24e856718aea5e7081520f4ed9b2f7"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6262,
-      "expectedSha256": "86431d716d0bfef4235120dd72dd715711b1c26919bc0694ab0ac17bc9753461"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/source-record.json",
-      "expectedBytes": 1223,
-      "expectedSha256": "c1c2ff6c28eb0caf817f0caf3b446c688012f58ca630a87568a81752a211d21d"
+      "path": "reference/source-record.json"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3228,
-      "expectedSha256": "569612ef80d7a7bda50cdad000d50df0d4c5fd8e69bc468be8c17082961e06da",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

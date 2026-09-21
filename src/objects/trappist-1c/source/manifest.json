@@ -4,8 +4,6 @@
     {
       "id": "trappist-1c-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1490,
-      "expectedSha256": "06061867de7770d343265b68f57d4a32b24fee979c780c892e068ebccd943ca1",
       "origin": "https://doi.org/10.3847/PSJ/abd022",
       "credit": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +47,6 @@
     {
       "id": "trappist-1c-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 3131,
-      "expectedSha256": "48cd56e48b86dbb08a7052e870a663b42b5d950aabc41d41b4985603a3050d0d",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "trappist-1c-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1810,
-      "expectedSha256": "1db8ee1f612f18d409f5f8dbdc57e3f6e88b48929d94be7a50c147dcb674dad7",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "trappist-1c-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration and the host star as the light",
       "sourceBinding": {
         "kind": "local",
@@ -106,8 +98,6 @@
     {
       "id": "trappist-1c-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 106,
-      "expectedSha256": "c2a29bfccdac2f00af36c415c8d396fb36f42aee8f6e77eb66098d1f773d39c7",
       "origin": "Repository-authored presentation profile: composite mode",
       "sourceBinding": {
         "kind": "local",
@@ -124,8 +114,6 @@
     {
       "id": "trappist-1c-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 219,
-      "expectedSha256": "a762a8a213d896e7c334fe1f6e94af45f999f7e121645022409cfb786a0cf250",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -142,8 +130,6 @@
     {
       "id": "trappist-1c-miri-dayside",
       "path": "science/jwst-trappist-1/c-dayside-15um.json",
-      "expectedBytes": 764,
-      "expectedSha256": "77278cfd1bfb3a191fcc0bca0b8436d21b28370a165b467c89411eda0b81ec48",
       "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304",
       "credit": "JWST programs 3077 (PI Gillon), 1177 and 2304; reduced and jointly fitted in this project with Eureka! 1.4 on Bell's settings (Gillon, Ducrot et al. 2025)",
       "license": "JWST data are public; the derived depths are this project's measurement",
@@ -214,8 +200,6 @@
     {
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
       "origin": "https://doi.org/10.3847/PSJ/abd022",
       "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
       "license": "Project-authored display derivative.",
@@ -238,42 +222,28 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4836,
-      "expectedSha256": "ae59ea6a59d45038debd7a571ef35993607a1bdaa0b6044836db7e9a6336e14c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 835,
-      "expectedSha256": "13bf0b815da895cdc90121738d7635d415394ba543ac743b08910308e6187664"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 448,
-      "expectedSha256": "e40e68c85ae25524b4669ebc92416a38c0e558c8ab23975c055a7ec1fd059aac"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 862,
-      "expectedSha256": "908cc08c92e56f0ce0ee0f76ff1f7b3db053b745a06b6220199dfb6d3149f93c"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4020,
-      "expectedSha256": "7199870fc4b049e3b0dd0af95e1fa5fa4224c657ad90b4c3686ff2cfee64598e"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/rendered-model-day.png",
-      "expectedBytes": 333282,
-      "expectedSha256": "ff2f9619b1d177fe1c1e01849ff9e05c996c99f60e0facacf570ebcc3910d62b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /trappist-1c/, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-21 after preparation, no console errors: the default camera on the day side: the bare-rock model at 407 K under the star, with the lens panel labelled a model."
@@ -281,8 +251,6 @@
     },
     {
       "path": "reference/rendered-model-terminator.png",
-      "expectedBytes": 331193,
-      "expectedSha256": "c88e6aae7c8b461056f9e9a6731ad042de323e8d2f6270e6ea06a1992b1d3f19",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /trappist-1c/, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-21 after preparation, no console errors: after dragging the camera a quarter turn: the model's terminator edge on and its dark night side."

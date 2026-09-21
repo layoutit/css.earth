@@ -26,10 +26,8 @@ const exists = (path: string) => access(path).then(() => true, () => false);
 export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<PreparationStep[]>([
   { name: 'builds', purpose: 'rebuild every package or bundle a later step would read stale', commands: async () =>
     (await staleBuilds()).filter(build => build.name !== 'solar geometry').map(build => build.command.split(' ')) },
-  { name: 'pins', purpose: 'pin authored, generated and tool-written files so recipe sources verify', commands: async id => [node('tools/pin-object-documents.mts', id)] },
   { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', commands: async () => [node('tools/prepare-catalog.mts')] },
   { name: 'title', purpose: 'draw the title mark from the content display name', commands: async id => [node('tools/prepare-planet-title-sources.mts', id)] },
-  { name: 'repin', purpose: 'pin the title mark and anything else a previous step wrote', commands: async id => [node('tools/pin-object-documents.mts', id)] },
   { name: 'geometry', purpose: 'place a body with an astronomy record in the solar geometry the scene frame reads', commands: async id =>
     await exists(resolve('packages/astronomy/data/bodies', `${id}.json`)) ? [node('tools/prepare-solar-geometry.mts')] : [] },
   { name: 'prepare', purpose: 'prepare lenses, scene and presentation; refresh derived legend labels and the world frame', commands: async (id, { presentationOnly = false } = {}) =>
@@ -39,7 +37,7 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'page', purpose: 'pin the prepared page data into the descriptor', commands: async id => [node('tools/prepare-object-json.mts', id)] },
   { name: 'text', purpose: 'prepare the reader text within its budgets', commands: async id => [node('tools/prepare-text.mts', id)] },
   { name: 'markers', purpose: 'draw the navigation markers', commands: async id => [node('tools/prepare-navigation.mts', id)] },
-  { name: 'world', purpose: 'place the object in the world context; manifests that pin it follow', commands: async () => [['pnpm', 'prepare:world-context:author']] },
+  { name: 'world', purpose: 'place the object in the world context', commands: async () => [['pnpm', 'prepare:world-context']] },
   { name: 'provenance', purpose: 'record provenance for this object and rebuild the shared sources catalogue', commands: async id => [node('tools/prepare-provenance.mts', id)] },
 ]);
 

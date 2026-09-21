@@ -4,8 +4,6 @@
     {
       "id": "rigel-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1425,
-      "expectedSha256": "3198b45153590b062e948c558490d2363d1dfeac7e20ebb04eaf32d0ee33883c",
       "origin": "https://arxiv.org/abs/1201.0843",
       "credit": "Moravveji, Guinan, Shultz et al., \"Asteroseismology of the nearby SN-II progenitor Rigel. Part I\", ApJ 747, 108 (2012), arXiv:1201.0843; effective temperature: Przybilla et al. (2010), A&A 517, A38",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +47,6 @@
     {
       "id": "rigel-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2059,
-      "expectedSha256": "0296dbe5cf35db4b5ba614d04ec471fc3e28b4d35d5cc12f9245efe959d2971e",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "rigel-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1676,
-      "expectedSha256": "fc1320f4f38d8a8fb3d6c719d9fb345199e2997d042ae8725be669b0d83c45ca",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "rigel-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -105,8 +97,6 @@
     {
       "id": "rigel-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 100,
-      "expectedSha256": "27c2397ce7ed6a8f8759eeef30d32a784151c66378279db1fd2f551db58cd446",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -123,8 +113,6 @@
     {
       "id": "rigel-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 211,
-      "expectedSha256": "36ae4247d0a599046dbc3f3b25c597de70110bc46d47739c7f075a0bd269d52d",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -257,8 +245,6 @@
     {
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6347,
-      "expectedSha256": "5be5d954cc1e47446121a498a4a8c52d539b20b472e812c754b0391bb5fd44d5",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
       "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
@@ -284,37 +270,25 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3075,
-      "expectedSha256": "942f06c0e678817195f5fd78326ff8f3ec304c41f5c4c77d6ba852bcc4d75967",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 775,
-      "expectedSha256": "e3474b0d832dbba7787d4577c92ab6e295a4e87f8e7f3c8354acd5b8abf440bc"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 442,
-      "expectedSha256": "088fecd801ce67c22f5a176e4bc7e6db78eddd830edd19f5eaa86608ad896963"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 973,
-      "expectedSha256": "125ffd5de896d3a711715a258a5bc2219c0c00f02bdcd4a85493d04cd9fe9664"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2860,
-      "expectedSha256": "2d888479636de9cd86a696281c2bcee1c6a38f7ec4d694b3611976f70784ae23"
+      "path": "presentation/title-mark.json"
     }
   ]
 }

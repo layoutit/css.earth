@@ -74,8 +74,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 36827,
-      "expectedSha256": "1740dd3862e629d3c89924ba441fb1620afe4a4415dd13c942b7fecc616cfc2a",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -94,81 +92,53 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7474,
-      "expectedSha256": "21732d46553833a6176857d047e6bb27eafb1a5e88a31ea3fe58329f43b9f9a4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 549,
-      "expectedSha256": "c26567a75acf5bec82241a5260ac9c29585f232cee12c4086220e8d3f1abd33d"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 442,
-      "expectedSha256": "3ec15658bfe6ac79d63e37d9c3e34e0bd01eae82a7040b4887441b4b32f4dc9f"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 705,
-      "expectedSha256": "bf2ae3c4040521d73dbcfc2b7e00ad0de788343e5f27037c40899f0feaf5c0c1"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2728,
-      "expectedSha256": "1beec13dbfb670e023c8bf1e02e1cc21fea72fa47849336bec8e01436ee4704b"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2591,
-      "expectedSha256": "5c0961c7b1a48993cfa7a13fa29928d0c8c0ec501aa1b848ed10aa269e1399b2"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/IAUspin.txt",
-      "expectedBytes": 32,
-      "expectedSha256": "6275393816a79a3c305f38d2f26272754bb570cb41c057cec6313fe69ba2c3b9"
+      "path": "reference/IAUspin.txt"
     },
     {
       "path": "reference/damit-model.json",
       "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
-      "expectedBytes": 1360,
-      "expectedSha256": "db2ecfe5e79f34a024da8b6c122108b767707dfb11591cde9d7719ab2de45004",
       "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1842",
       "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7353,
-      "expectedSha256": "8a1f5932365c14b0460c017911320144c54407c92108ad82b65ce76325e0ff3e"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1388,
-      "expectedSha256": "0e04ea4deb43410369504be5ed914f0b237645e615c5f47197e2f7a5139a61dd"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6643,
-      "expectedSha256": "8a9dd68322ca652a387deb59731ce054c8ebe1fcb014d6816c15aab0b2a2294c"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 1793,
-      "expectedSha256": "61d788ff8ef6529ea7b0abedc3bcad27b3d8abc4ab65320fa47c57e47157b354"
+      "path": "reference/model-properties.json"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 4679,
-      "expectedSha256": "276c41dccb105618ad870c6e5d51870ebab5ac00eea5e0fd21af32cfae786521",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

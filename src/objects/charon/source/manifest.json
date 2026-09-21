@@ -291,8 +291,6 @@
     {
       "id": "charon-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1239,
-      "expectedSha256": "e2aa1821dc8e0ff93d4e38ef94455827eaba0c5d64c5d8c7ea2084587f270925",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -309,8 +307,6 @@
     {
       "id": "charon-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1280,
-      "expectedSha256": "662140dd6bd8c85324d7b09d0e1ad7232ee2dafcf8affa4a0c28210cc2573e30",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -327,8 +323,6 @@
     {
       "id": "charon-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 185,
-      "expectedSha256": "1acefde243e6ba0451a5504d27165acd141c3ba99f9e77fb44ebc0dd5e1653f5",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -372,8 +366,6 @@
     {
       "id": "charon-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 204,
-      "expectedSha256": "b562fee8dbc18fcf6bc108b081ae15478c205bcb4b53cb60099cd6989264a887",
       "origin": "Repository-authored Charon solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -393,8 +385,6 @@
     {
       "id": "charon-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 10443,
-      "expectedSha256": "63038330488fec4ba41fa9890a0c19f463ad0186b45c5f10e5b580216d5c0529",
       "origin": "Repository-authored Charon raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -412,8 +402,6 @@
     {
       "id": "charon-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1596,
-      "expectedSha256": "c6e36a0012bdef3b9392a258158639f9a98d336079be2d22e90f1320c37b98d9",
       "origin": "Repository-authored Charon geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -431,8 +419,6 @@
     {
       "id": "charon-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Charon celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -451,8 +437,6 @@
     {
       "id": "charon-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 102,
-      "expectedSha256": "1b5242c764391aac1d1575a7888e4fe13be66525a56bfac326209f252a05a25a",
       "origin": "Repository-authored Charon presentation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -469,8 +453,6 @@
     {
       "id": "charon-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 797,
-      "expectedSha256": "aa710920bd90621e7ebdd55e253904e9d3a1586898c1105eab0ae9ada033894f",
       "origin": "Repository-authored Charon navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -487,8 +469,6 @@
     {
       "id": "charon-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 5055,
-      "expectedSha256": "3a121500ad606d0eda4de5ec9863f4bedb75bc15b2c66ea2e4b1b01253af8c05",
       "origin": "Repository-authored Charon acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -506,8 +486,6 @@
     {
       "id": "charon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 16897,
-      "expectedSha256": "56fa9b0c1b1b6b0ff0950790eac4d314b38bcac81b4ba51b6bd8e8ce4d95d40a",
       "origin": "Repository-authored Charon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -923,8 +901,6 @@
     {
       "id": "charon-leisa-bands",
       "path": "science/leisa/bands.json",
-      "expectedBytes": 3115,
-      "expectedSha256": "1887411040bae02b71058eea94422db5ba8800b03f5b4a2eb3eb314fe7a65384",
       "sourceBinding": {
         "kind": "local",
         "reason": "Authored spectral windows, averaging, geometry limits and output grid."
@@ -990,8 +966,6 @@
   "documents": [
     {
       "path": "observations/dataset.cat",
-      "expectedBytes": 35600,
-      "expectedSha256": "b2a0a6f7e0eea428d82de3a5ca8e91722510275634e540ea05ed31cc724f3d60",
       "purpose": "PDS3 data set catalog for the New Horizons Pluto-system composition maps: archive identity, producer and citation text.",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/",
       "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
@@ -1003,22 +977,16 @@
       ]
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 36,
-      "expectedSha256": "a37bac73fe389c3d53ec16b60d032adbccea9cec413b8d866ae712b28164c0a9"
+      "path": "presentation/minimap.json"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2483,
-      "expectedSha256": "9eefd698f893b2034b851cf5b24c274c18505a3d6e9c5739b5e1da77c111002c"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "observations/nh_charon_color_mosaic.lblx",
       "purpose": "Exact PDS4 identity, band wavelengths/order, float byte layout, missing code and metric map coordinates.",
-      "expectedBytes": 14320,
-      "expectedSha256": "939f23390f8d7f525821b822d06bf15d08ba49ee5bc472af6ed4c41c4f2a2a40",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1041,8 +1009,6 @@
     {
       "path": "observations/nh-plutosystem-composition-overview.pdf",
       "purpose": "Archive processing, coverage, photometry and calibration-uncertainty references.",
-      "expectedBytes": 206962,
-      "expectedSha256": "daad58c129eb22945026cbe2960046b62de27ea57ea12f336ae06dfb8c3c22c1",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/overview.pdf",
       "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
       "license": "Public NASA scientific mission data; retain archive and author attribution",
@@ -1055,16 +1021,12 @@
     {
       "path": "observations/nh-charon-color-download.json",
       "purpose": "Actual full binary download HTTP headers and SHA256 receipt.",
-      "expectedBytes": 631,
-      "expectedSha256": "fc8d000377636f8d1f224eabeb4fbbc907464929f63b55348b112dc4ab716e51",
       "credit": "cssEarth",
       "acquisition": "Recorded by the project when the colour mosaic was downloaded: the HTTP response headers and the SHA-256 of the received bytes."
     },
     {
       "path": "validation/color-source-inspection.json",
-      "purpose": "Independent NumPy source mask counts and raw numeric/bit-pattern anchors.",
-      "expectedBytes": 4575,
-      "expectedSha256": "cc4a75bb4673a358d20ee4a3af9d893117785bbbadb8ec7fcf77a6182fcd88e7"
+      "purpose": "Independent NumPy source mask counts and raw numeric/bit-pattern anchors."
     },
     {
       "path": "science/nh_charon_bond.lblx",
@@ -1072,20 +1034,14 @@
       "expectedSha256": "daa71e1c658e8c497203177290dc105c3ecad1c0280943affffaaa8ceddab867"
     },
     {
-      "path": "science/prepare-bond-map.json",
-      "expectedBytes": 1919,
-      "expectedSha256": "07f9e0888d48d121243cd736165a91a5c365758b24a8309dfe8939882623575f"
+      "path": "science/prepare-bond-map.json"
     },
     {
-      "path": "science/nh-charon-bond-georeferenced.json",
-      "expectedBytes": 557,
-      "expectedSha256": "23bac0c15b44cb683ec4c3d55c647fad6c73036b68b56d79c62f8dee44ce0101"
+      "path": "science/nh-charon-bond-georeferenced.json"
     },
     {
       "id": "charon-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 3655,
-      "expectedSha256": "095a48ea646fb7aaf1b3a7060cfd23cc35a13f432a8dbe253dd2f225ffe9da95",
       "origin": "Repository-pinned English Wikipedia lead summaries for 7 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

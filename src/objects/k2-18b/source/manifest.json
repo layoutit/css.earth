@@ -4,8 +4,6 @@
     {
       "id": "k2-18b-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 815,
-      "expectedSha256": "12e73dcfbdac7b4937337fd2b086936ed07dc5e9e36f8aa6f20d9887a8e4d23b",
       "origin": "https://arxiv.org/abs/1805.00830",
       "credit": "Sarkis, Henning, Kürster et al., AJ 155, 257 (2018), arXiv:1805.00830",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +47,6 @@
     {
       "id": "k2-18b-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2340,
-      "expectedSha256": "076fa69dd3334ef0ced26f5eb4901cfb1218f4a12f7a4b446303ad591db704ef",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "k2-18b-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1631,
-      "expectedSha256": "cfc3968515188a238e0e4201065c12dfe3c2feff1ab262725222b6049b4bcb6f",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "k2-18b-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored celestial recipe: astrometric sky registration and the host star as the light",
       "sourceBinding": {
         "kind": "local",
@@ -106,8 +98,6 @@
     {
       "id": "k2-18b-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 102,
-      "expectedSha256": "d335a0a46aa5b5e4e73ca244f6ed6755afa7d852681f0c2ff52fdd22ced84940",
       "origin": "Repository-authored presentation profile: composite mode",
       "sourceBinding": {
         "kind": "local",
@@ -124,8 +114,6 @@
     {
       "id": "k2-18b-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 213,
-      "expectedSha256": "b08e4ea7c3202b44c6c6a92e2b475a813ced616d66f8f8b6a7bdc7ddb341e92e",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -144,8 +132,6 @@
     {
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
       "origin": "https://arxiv.org/abs/1805.00830",
       "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
       "license": "Project-authored display derivative.",
@@ -168,37 +154,25 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2924,
-      "expectedSha256": "60b150c38e122559960ab1f3543580dcd83b5ebb7092a06076e4726a7c4a2875",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "59498de17f5f235dd7a4f0c2e0581d3e6ee380da01eae190666047a52b6d2cd6"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 898,
-      "expectedSha256": "9b31ead0a94439f23b6eec37fbf4b9a762d0bc12e7779c0367515e40b617a706"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3243,
-      "expectedSha256": "8d7e21b7e60159081127859c7727df1e91c6be006524106458119e3ecbb05e13"
+      "path": "presentation/title-mark.json"
     }
   ]
 }

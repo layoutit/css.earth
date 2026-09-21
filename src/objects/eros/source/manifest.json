@@ -164,8 +164,6 @@
     {
       "id": "eros-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 995,
-      "expectedSha256": "ceb31a5e361d2d38e47a902c773d9da9d28c03d7f881d35340eecde2d92740c7",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -182,8 +180,6 @@
     {
       "id": "eros-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1148,
-      "expectedSha256": "367b2472a5a0953c0936be2a3995de249b59576a537f925caf93b61d6bf38640",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -200,8 +196,6 @@
     {
       "id": "eros-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 183,
-      "expectedSha256": "6e8c1b50fbc63feb0c6fe2aa403e7a52166e67cb9dbaa645b4498780b1963be4",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -223,8 +217,6 @@
       "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
       "credit": "NASA/JHUAPL/NEAR; R. Gaskell; D. Golish and colleagues",
       "license": "Public mission scientific data; retain attribution and source notices.",
-      "expectedBytes": 71352,
-      "expectedSha256": "2023a49dcde1be44545b024ec29a0734762c183747196e1f83b3e1feb1185e2a",
       "consumers": [
         "navigation"
       ],
@@ -247,67 +239,43 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8530,
-      "expectedSha256": "8986671caeea652e5cb345c53dfea6ebe270316dee4cf59d88477747d47ba05d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 3576,
-      "expectedSha256": "b8007ace1f1b655e735a35fda198bf9e80b463b5a3db2509ee367a5b5ed98a42"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 441,
-      "expectedSha256": "dcb084a610bcbe228d96e30b3e15fa47e4813f5f04ca1f7b7a152057b05294e3"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 330,
-      "expectedSha256": "ee8663d06f7e162cfe63d793ec646f439ee42bf72de41666ada901b798ddd1fa"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 3646,
-      "expectedSha256": "90977bd46e817194a01c437326b2c01415cfae8c67bbd057ab69c302411d205f"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2296,
-      "expectedSha256": "60ecf20669b2b0f72a946c58a0b038e7b7dca1de89dfb72e91f66e958b3c865d"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/bundle_description.txt",
-      "expectedBytes": 12414,
-      "expectedSha256": "eface4eccf78fbcae1f693008b39af2487586137c858d79e6654335a291727bf"
+      "path": "reference/bundle_description.txt"
     },
     {
-      "path": "reference/eros_alex.tpc.txt",
-      "expectedBytes": 1353,
-      "expectedSha256": "0b410adcbd14bc6f678781524050b979714c7f64acd8693786f35acaa1363673"
+      "path": "reference/eros_alex.tpc.txt"
     },
     {
-      "path": "reference/eros_nearmsi_filter1.lbl",
-      "expectedBytes": 1525,
-      "expectedSha256": "a7920e5e986c3823f6eb281b87cbf17b49c1367d3abe176ac544d4685a0c851b"
+      "path": "reference/eros_nearmsi_filter1.lbl"
     },
     {
-      "path": "reference/eros_nearmsi_filter1.xml",
-      "expectedBytes": 10462,
-      "expectedSha256": "d653d34a582878ffcc58f49a1692bd26cb652e599c5eb79812d6ccbec5b131d0"
+      "path": "reference/eros_nearmsi_filter1.xml"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1317,
-      "expectedSha256": "a58972f97087bd477154ef2c2218dbeabecc34d088e1e85f83bef21230a57c51"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/ver128q.xml",
-      "expectedBytes": 9673,
-      "expectedSha256": "e6fbe936c28b12699ae66d80c2e6b19c56d8889f1d280c9fa3974879bfdc9df8"
+      "path": "reference/ver128q.xml"
     },
     {
       "path": "reference/eros_nearmsi_filter4.lbl",
@@ -324,8 +292,6 @@
     {
       "id": "eros-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 1772,
-      "expectedSha256": "06caf91e611c4ab5e5110af22327ec204349deb521a7f3dc538c768bae13e796",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
@@ -345,8 +311,6 @@
     {
       "id": "eros-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 1269,
-      "expectedSha256": "00a18eafb133828c3a67250ae9b89e4c1b98cedbeebc4a33e2ebbf55d44163e0",
       "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -421,8 +385,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 6560,
-      "expectedSha256": "c79f70a823aa8baf7f128a3a7863a3a0e93dae9b86e9d51d5452d01b7341bbb8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -32,8 +32,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 137,
-      "expectedSha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth neutral model material",
       "license": "MIT",
@@ -119,8 +117,6 @@
     {
       "id": "arecibo-surface",
       "path": "material/arecibo-neutral.png",
-      "expectedBytes": 137,
-      "expectedSha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth neutral model material",
       "license": "MIT",
@@ -175,8 +171,6 @@
     {
       "id": "comet-8p-features-manifest",
       "path": "features/manifest.json",
-      "expectedBytes": 1010,
-      "expectedSha256": "4ec0506d8e02b4fcc8fd5bb42bfb9584c0ac9c0ca2b703b268d335bd92a1a22e",
       "origin": "Byte pins and source qualifications for the surface-place compilation.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -193,8 +187,6 @@
     {
       "id": "comet-8p-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 748,
-      "expectedSha256": "9e74b2c2ef8ba475083e034d16ff8f6d4940c0ade98c83d1c89dea42d7e631a8",
       "origin": "Object-owned selection of surface-place source records, datasets and label policy.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -211,8 +203,6 @@
     {
       "id": "comet-8p-presentation-surface-map",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 187,
-      "expectedSha256": "fba7ce7f6ad59239f656a8072a0a26f80867923e7b2ecc6be2971858639e3af1",
       "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -231,8 +221,6 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 69474,
-      "expectedSha256": "137994fd40cdebb5510f2b21d1d084d6c36b836891edd982705493694cce869e",
       "origin": "https://arxiv.org/abs/1911.04897",
       "credit": "Lamy et al.; Groussin et al. (2019); cssEarth tessellation",
       "license": "Published scientific parameters; cssEarth implementation MIT",
@@ -264,67 +252,43 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3599,
-      "expectedSha256": "9d3d06bfe7a8a1b277c165762c7a65198697222ecfe4efd1c967295c6458a7cc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "f4b5d7a6f10589402bb043392a6a723cce7641f2ccd29e67389a590235bbd5eb"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 412,
-      "expectedSha256": "0029e09de66921e2a22c5ec1bd13e26bfe9fefae7f00f2732ea3fb58c1e5671c"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 4917,
-      "expectedSha256": "d002849c4e0bfc059ebb432f5c257166b229083d2a422caf8fa70762cd4027fe"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 56,
-      "expectedSha256": "fd0259d6adfd494c9e376193813fc8d355cddcc8364eaa788abc06f359b5faa2"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2292,
-      "expectedSha256": "ab49426ea608aa905b692ccd785d7e56eb57836c6cdc8d86e7750f6d8cee3240"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7689,
-      "expectedSha256": "48b5685d301f690ead3cf7121b29487f5fe9d6eed79eb5ad1895007cbdbae76e"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-spitzer.txt",
-      "expectedBytes": 6761,
-      "expectedSha256": "4f07089d5e7b5a8c58091dbae46ff6664c63276e7a29ea38c49facff4efcf65f"
+      "path": "reference/horizons-spitzer.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6979,
-      "expectedSha256": "e2ea2bba74157fc495d36637a25bd0d4f79739a9c78f373e1cd4843a92ef5b0c"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-alternatives.json",
-      "expectedBytes": 1819,
-      "expectedSha256": "6fe0824166a0d9ee2f6d0601ca052935453a071c2c2c0f74e9758b39b6242c69"
+      "path": "reference/model-alternatives.json"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3644,
-      "expectedSha256": "4e9f526e89ec7d16df54169f9e0b3f2b74b45c563ce504b4e16050c7f47ba125",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

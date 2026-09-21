@@ -1191,67 +1191,45 @@
         "diffuse": 0.55,
         "lensId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 88364,
-      "expectedSha256": "1ef66158961a524ab4bfc4a85341240916d7f074ee944b1c78ae6b7544a3af9c"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6139,
-      "expectedSha256": "35c91d35253fb732f720976c9a114664b94ccffe5cb90362dad4d480b6233370",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 7774,
-      "expectedSha256": "0b1cdf87470cdb4bc8d310b1d4407921f7f63b3b2fde8586f6e34ec6bf8fefa3"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 444,
-      "expectedSha256": "bc2fda4d5dad037a4634476b166c7ec84740b6fe9fea67eaa1321449f6f87755"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 622,
-      "expectedSha256": "d5b25770a7642091ebaebc55aeefd9747b08048b1eb1256687143bdc072b3a9b"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 13541,
-      "expectedSha256": "ede40ea0f98490126617a8c6be84a9e53dc76ef0b0096e8d9a75b2b88a80da4a"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4858,
-      "expectedSha256": "d4f8212a24a5d58a632d7285d1cf4da2d4501631049c40786401e18bd987672c"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "shape/pandora_30k_plt.xml",
-      "expectedBytes": 12137,
-      "expectedSha256": "3e5ee483c232e6379580ab5dc887a9664ac4ad8392d829d49969b401175eac75"
+      "path": "shape/pandora_30k_plt.xml"
     },
     {
-      "path": "shape/pandora_document.pdf",
-      "expectedBytes": 71359,
-      "expectedSha256": "68555dc6825b8f94106a790da08752d112f51eb4175d42ae8500a16a0ff0fb45"
+      "path": "shape/pandora_document.pdf"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2355,
-      "expectedSha256": "7709919a95c0f57d079787aa849ec3f406b41d1a568e657d12cf8609548f5968"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     }
   ]
 }

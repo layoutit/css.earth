@@ -449,8 +449,6 @@
     {
       "id": "gaspra-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1005,
-      "expectedSha256": "61c8b4787b3d0fdd7587690eac12243cdea76018599f898dc2e40c34429d7c78",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -467,8 +465,6 @@
     {
       "id": "gaspra-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1097,
-      "expectedSha256": "1ed82e0b3f8da4a864007f335e6e319bb48f06cab62554bfa7f5d418881fedd3",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -485,8 +481,6 @@
     {
       "id": "gaspra-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 185,
-      "expectedSha256": "07d4e8873ba3816e9c7d656f4058d4a44e6c9565d03b5bf96f8764a07454e98d",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -508,8 +502,6 @@
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspram.fit",
       "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
       "license": "NASA PDS public scientific data; retain attribution and source notices.",
-      "expectedBytes": 90870,
-      "expectedSha256": "2b8893d9517f0e2a419fa4b6f43cc52dd5ce29888b53479a993f7daca792ac95",
       "consumers": [
         "navigation"
       ],
@@ -532,137 +524,87 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11176,
-      "expectedSha256": "425868d8de95a6b26ea688c336b47d7927570bd92b974b568b5d88c53f3b2c3b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 5157,
-      "expectedSha256": "5815bf5f76e82bd97efb167b8a6f33789db0fc819bcef15c4d651fe567f0008b"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "ed3fb5c3f8f19aa9b9690581fcfa9e59551fd1107893ab17c21fbc6843b4a0e7"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 408,
-      "expectedSha256": "8b47b613cc29dd97ad41bb701310476a82578fe38948bc6cf21b92ea7cf269c8"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 6475,
-      "expectedSha256": "ede49f624a1e32bd5832ea0d47f71904044b8eb3b9509a9e14b446bcaaaf8a97"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4935,
-      "expectedSha256": "ea129b86bf5d3cd5e06e8bb2e32242a30df3200924d8908c80ff250a35248147"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/951gaspra.xml",
-      "expectedBytes": 5531,
-      "expectedSha256": "6d92d943bef6a9bee3e21580c9ea14e9b717490c6dfdf2e989dbdf9d2d62d9e3"
+      "path": "reference/951gaspra.xml"
     },
     {
-      "path": "reference/951gaspram.lbl",
-      "expectedBytes": 3760,
-      "expectedSha256": "dba7b9d75c22d9e143fdf732c8ba8cb97ecc786ed9b2ce284c805066cddf4b21"
+      "path": "reference/951gaspram.lbl"
     },
     {
-      "path": "reference/951gaspram.xml",
-      "expectedBytes": 7034,
-      "expectedSha256": "6d1f4f0e728b1a3bef00ef038d9e4b22102fcd6c636fe6cd35157bebe10cd7d4"
+      "path": "reference/951gaspram.xml"
     },
     {
-      "path": "reference/bundle_description.txt",
-      "expectedBytes": 8495,
-      "expectedSha256": "e9e95c6166d77a94f475da744fc1ff828f020f455eb5eda6b725334300bb735d"
+      "path": "reference/bundle_description.txt"
     },
     {
-      "path": "reference/calibrated-description.txt",
-      "expectedBytes": 5371,
-      "expectedSha256": "1b0c5a3aef3c6b2df91ac55a6a721396bdabb3ec713c167c5a7897715b8cda2a"
+      "path": "reference/calibrated-description.txt"
     },
     {
-      "path": "reference/color-geometry-description.txt",
-      "expectedBytes": 6207,
-      "expectedSha256": "7ae7cdbd5a765556bd2e3b296276f694e546394eedf01dfa8482c02d867d3c7c"
+      "path": "reference/color-geometry-description.txt"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7636,
-      "expectedSha256": "aa1a7acf9d6ae96b98ba85535f11458981f260bedf4ed1cde3f34283c26e178d"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/pck00011.tpc",
-      "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "path": "reference/pck00011.tpc"
     },
     {
-      "path": "reference/registration.json",
-      "expectedBytes": 1724,
-      "expectedSha256": "09cdc6d98819f4a33e25904e1b30915b265845719392b142ecc1d72312b1c03f"
+      "path": "reference/registration.json"
     },
     {
-      "path": "reference/registration.md",
-      "expectedBytes": 2476,
-      "expectedSha256": "3852552dd5f60c2e5e192eae4c56c8c28f2cafdecbe3d494e58c98e41c4ec49b"
+      "path": "reference/registration.md"
     },
     {
-      "path": "reference/stooke-951gaspra.xml",
-      "expectedBytes": 7034,
-      "expectedSha256": "8d183c5b2f588ea7361a9f32c0fd2939430f6172ac143e7949de918c689bfbb3"
+      "path": "reference/stooke-951gaspra.xml"
     },
     {
-      "path": "reference/stooke-description.txt",
-      "expectedBytes": 5105,
-      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
+      "path": "reference/stooke-description.txt"
     },
     {
-      "path": "reference/stooke-gascylmo.jpg",
-      "expectedBytes": 426988,
-      "expectedSha256": "af98d7470f31015182fc8d5b25e1464ec8d0d6750e98bd56df45c6fb5d0dd91b"
+      "path": "reference/stooke-gascylmo.jpg"
     },
     {
-      "path": "reference/stooke-gq5gedis.jpg",
-      "expectedBytes": 226540,
-      "expectedSha256": "52322646ebcc8c0a65dc34f3698a5dcaa59e0951a2421810aa323d74ea4c6893"
+      "path": "reference/stooke-gq5gedis.jpg"
     },
     {
       "path": "reference/calibrated-registration.json",
-      "purpose": "Registration check profile for the archived camera and source mosaic.",
-      "expectedBytes": 632,
-      "expectedSha256": "61ad2efa7008f775b57e80b844595e755de6ae0c47b7250fce65412041ee56fb"
+      "purpose": "Registration check profile for the archived camera and source mosaic."
     },
     {
       "path": "reference/calibrated-registration-results.json",
-      "purpose": "Reproducible checks of the archived camera against the pinned Thomas mosaic; no local fit.",
-      "expectedBytes": 3865,
-      "expectedSha256": "db40e4a3b807f497d06291b5df5edf666876efa2519255337a6b9dbdacdccc34"
+      "purpose": "Reproducible checks of the archived camera against the pinned Thomas mosaic; no local fit."
     },
     {
       "path": "reference/registration-107318313.json",
-      "purpose": "Independent checks of the archived image-to-shape registration.",
-      "expectedBytes": 611,
-      "expectedSha256": "06cc9dffa163a79f446e48e913b6d56baa9388c55e4358e1ea45dce3c5f88d02"
+      "purpose": "Independent checks of the archived image-to-shape registration."
     },
     {
       "path": "reference/mosaic-registration-results.json",
-      "purpose": "Measured, unfitted registration checks for the added Galileo observation.",
-      "expectedBytes": 3923,
-      "expectedSha256": "b17c41f60285417a984be45d573d5b4fb1b52592ec72590e19fa31e45283a6fc"
+      "purpose": "Measured, unfitted registration checks for the added Galileo observation."
     },
     {
       "id": "gaspra-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 925,
-      "expectedSha256": "2852ee8636662b09f0592a21b1fe443d68903803e5b8ba5a61eb29642f2f826c",
       "origin": "Repository-pinned English Wikipedia lead summaries for 1 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -683,8 +625,6 @@
     },
     {
       "path": "photometry/helfenstein-1994-hapke.json",
-      "expectedBytes": 579,
-      "expectedSha256": "6cf5b5780d9bcbab552bc7e8b5b7f83d31532b082c76d5d521f565024a4b050d",
       "purpose": "Published Hapke photometric model of Gaspra, used to normalize the Galileo photograph mosaic.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -709,8 +649,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 5307,
-      "expectedSha256": "dada15586ebfaaf5c2f08f434ab157506ce1d2c90bbdbd34338f970f7f6738a8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -103,58 +103,38 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3063,
-      "expectedSha256": "8d77ba7e664859570961009e7e9d9012b1dd442eb095f23336c2522e12f51b5e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 4108,
-      "expectedSha256": "41f37a404d463a56bf440000734656850e21068528a93eb9be8dc7557b7b09c3"
+      "path": "measurements.json"
     },
     {
       "path": "orbit/published-parameters.json",
-      "expectedBytes": 4407,
-      "expectedSha256": "0061b2a8a915b03b9cd65cb4216fb757249ae868face4c8014e95cdbb86bb2bf",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 506,
-      "expectedSha256": "68fea15149e26c76c27dc9ecee908d89aa672f291d6ecec49f6fb24097db1ec9"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "4960c8dc89a626b16fca093f8b52d809f8a8efb0c579a417d65177417862ab6f"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 384,
-      "expectedSha256": "f753949667c9f6adc347002677cedf00cf9ca4f89f9d833ef369ece55e143784"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2524,
-      "expectedSha256": "2925bcdc2bb832ef422f4d7983f4cab434fcb3abeffc4afb1b8d6d6630f79756"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4688,
-      "expectedSha256": "758fa3478adcd5f9fd29df3c561709a3a25edc6beb89a02742f31bc68be25799"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "validation/epoch-state.json",
-      "expectedBytes": 2967,
-      "expectedSha256": "56bf6533cc0f6257bdb92bd25b94f39aef905d43799a3750c66267b151421b44",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     }
   ],
@@ -181,9 +161,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 65601,
-      "expectedSha256": "1adf35ea1669416b9088e4cb707f8103a7e746925ab758af82917daee3fe32ce"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

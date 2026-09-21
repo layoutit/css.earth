@@ -101,86 +101,56 @@
         "ambient": 0.45,
         "diffuse": 0.55,
         "lensId": "shape"
-      },
-      "expectedBytes": 31736,
-      "expectedSha256": "86d349a295efddd6ee345d269dfb6c8390507ed8d32dae3bd612aad8d6a660af"
+      }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2761,
-      "expectedSha256": "083daaab4f63d0543b6262f82faea145961a0f43a44bb5320fc7a361fa7d7eae",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1572,
-      "expectedSha256": "550ae32feddcf243762b1aee2bd4e6aeff7e6e9107fe82da0c222b72071822ae"
+      "path": "measurements.json"
     },
     {
-      "path": "orbit/published-parameters.json",
-      "expectedBytes": 1662,
-      "expectedSha256": "64e0bceb305b89bbc469edef488afba4c9c82c1e6e8e1a0fd1a5d11ea53afd0e"
+      "path": "orbit/published-parameters.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 577,
-      "expectedSha256": "a6ebbb96f0ae3d6839ee814c094826ebdbf405ec7b21d397b511a7c9a0862e20"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "b4a313ce7bdca13a61d730c4848ef1684b1b50848c4346e88628f46d68eee3cf"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 581,
-      "expectedSha256": "f5cbdd4577e22481dc57cdc9b6d419f7861734a2dd181fbf8e7b512eee8e1b7f"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 1949,
-      "expectedSha256": "372f8b13dfd810b29f457eb6ed5e0c2d0b0fa74e6937796d12647a8e9e4472a9"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3414,
-      "expectedSha256": "2e1e43bca0ff0a5bcc125f3aa5861c9eb41973e328cf39ae5496de28f51e0a24"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/asteroids.ssc",
-      "expectedBytes": 67921,
-      "expectedSha256": "7858a930a83aaf6ff9fcea86b4a6b1e2711658fe0a2d07dc0925161ed296fbd5"
+      "path": "reference/asteroids.ssc"
     },
     {
-      "path": "reference/celestia.json",
-      "expectedBytes": 324,
-      "expectedSha256": "0f07960200c3375fa0966549bb5e2e0d10971ccd6113ccd3111fcda4ba15c9cc"
+      "path": "reference/celestia.json"
     },
     {
-      "path": "reference/GPL-2.0-or-later.txt",
-      "expectedBytes": 17337,
-      "expectedSha256": "aaf135472f81c5b4a0dca9367e5bb5e9750032b5bebe5442b36e4c0a47430df3"
+      "path": "reference/GPL-2.0-or-later.txt"
     },
     {
-      "path": "validation/epoch-state.json",
-      "expectedBytes": 1724,
-      "expectedSha256": "e129722404c4366e34a05feb988e4f0d17d3afe925e3d08a15c7092538176dd4"
+      "path": "validation/epoch-state.json"
     },
     {
       "id": "dactyl-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1066,
-      "expectedSha256": "54771134f201aecfa71d4fb946c3447cc52c048a0db2b40f237c20ba68d1d948",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -197,8 +167,6 @@
     {
       "id": "dactyl-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1061,
-      "expectedSha256": "e659db66474cf90402c7546bc206cdb046f4555b37265aeb765e5e10fb29eb9f",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -215,8 +183,6 @@
     {
       "id": "dactyl-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 185,
-      "expectedSha256": "52b2d2c09ec3f899a4e02b0dcfab5ba0a54c3dffce297afecb0d847d23d9c5ec",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -233,8 +199,6 @@
     {
       "id": "dactyl-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 478,
-      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

@@ -2745,8 +2745,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 35886,
-      "expectedSha256": "6c108742fbd56e310359389bb117402d2f1ad380b4978a54e559ee392cf5abb4",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -2765,72 +2763,46 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 12160,
-      "expectedSha256": "2b26590f961a62e2c9bfaba7c6d671328ae10e38eda256e9d582a6d428cb5504",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 31335,
-      "expectedSha256": "713d63c29b277ae1baccad005cdaa8c2f6d667d14c66d77ff15a3fda23730008"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "bb6b97b295fdd3c49bb21c7bbd53fe3a150b1f1e62d843cadeb3596d176f76e4"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 669,
-      "expectedSha256": "7200223f51c797d67b4be5851a1843de2ce70c1c535d7f9c0f17c5294b6c155f"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 43411,
-      "expectedSha256": "ca15f2241cc6fd55769d084ed82c0d01540090efe1f66461fba0018ec6810ec9"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3788,
-      "expectedSha256": "7d61b2b943ecfdb66e70586e3556f0f983277b97129972d67cb4bcb8f151275a"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7352,
-      "expectedSha256": "6c6012e8c27e2f0c09ce6f80f56b021026b4bf092c43fc6c7e99401f0fb0aba1"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1387,
-      "expectedSha256": "a5e6274316682552892e1e5e5b1241ab861b01c4a08e46104f2a48e491b4d8bb"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6642,
-      "expectedSha256": "54246e2835064b3f79956b1e7b6730040bdb3010a72a932d0fe8301a7e1df6d0"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 1824,
-      "expectedSha256": "2e0a3cf26fce436a13993590b1285d2faead55115e1a9d66376f2474cf0b2ab3"
+      "path": "reference/model-properties.json"
     },
     {
-      "path": "preparation/observer-cameras.json",
-      "expectedBytes": 522,
-      "expectedSha256": "d467556325590bed863d021b156cfabc6c85ba70422cb242ba5610623263777a"
+      "path": "preparation/observer-cameras.json"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 7650,
-      "expectedSha256": "37536cdddaf3c61d56daab64b3bff4a29e89e608213ff414cbe9b3b4b3868adf",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2847,54 +2819,42 @@
       "origin": "https://zenodo.org/api/records/6321315/files/ThermalInertia_Uncertainty.npy/content",
       "credit": "Cambioni, de Kleer & Shepard (2022), ALMA maps of (16) Psyche, Zenodo doi:10.5281/zenodo.6321315",
       "license": "CC-BY-4.0",
-      "purpose": "Per-node thermal inertia uncertainty; the README reports its range. Not drawn.",
-      "expectedBytes": 21736,
-      "expectedSha256": "a9cbbea18ad1bae6da774953bf7bc3184f078e7325609ba682da6df21d8597e1"
+      "purpose": "Per-node thermal inertia uncertainty; the README reports its range. Not drawn."
     },
     {
       "path": "thermal/DielectricConstant_Uncertainty.npy",
       "origin": "https://zenodo.org/api/records/6321315/files/DielectricConstant_Uncertainty.npy/content",
       "credit": "Cambioni, de Kleer & Shepard (2022), ALMA maps of (16) Psyche, Zenodo doi:10.5281/zenodo.6321315",
       "license": "CC-BY-4.0",
-      "purpose": "Per-node dielectric constant uncertainty; the README reports its range. Not drawn.",
-      "expectedBytes": 21736,
-      "expectedSha256": "54ee0b378d61db8a8ce0d0b32b9e62331c96887ab7d5da41d00244f5f69ae011"
+      "purpose": "Per-node dielectric constant uncertainty; the README reports its range. Not drawn."
     },
     {
       "path": "thermal/AltitudeMap.npy",
       "origin": "https://zenodo.org/api/records/6321315/files/AltitudeMap.npy/content",
       "credit": "Cambioni, de Kleer & Shepard (2022), ALMA maps of (16) Psyche, Zenodo doi:10.5281/zenodo.6321315",
       "license": "CC-BY-4.0",
-      "purpose": "Altitude above the best-fit ellipsoid of the Shepard et al. (2021) shape on the same grid; the frame test registers it against the ADAM mesh by shape alone.",
-      "expectedBytes": 21736,
-      "expectedSha256": "35b5073e0c1a63c138d2fd93a1e142cb1397e3e9a401c92d7dee43622936e664"
+      "purpose": "Altitude above the best-fit ellipsoid of the Shepard et al. (2021) shape on the same grid; the frame test registers it against the ADAM mesh by shape alone."
     },
     {
       "path": "thermal/Readme.pdf",
       "origin": "https://zenodo.org/api/records/6321315/files/Readme.pdf/content",
       "credit": "Cambioni, de Kleer & Shepard (2022), ALMA maps of (16) Psyche, Zenodo doi:10.5281/zenodo.6321315",
       "license": "CC-BY-4.0",
-      "purpose": "The release's description of every array, including the altitude definition.",
-      "expectedBytes": 57539,
-      "expectedSha256": "728ecea3c7bee41af28f9196cfd0ecfda0523d40ceaa588482094995aff0da5e"
+      "purpose": "The release's description of every array, including the altitude definition."
     },
     {
       "path": "reference/de-kleer-2021-table1.json",
       "origin": "https://arxiv.org/abs/2105.11372",
       "credit": "de Kleer, Cambioni & Shepard (2021), PSJ 2, 149, Table 1",
       "license": "Factual numerical measurements; source attribution retained",
-      "purpose": "Transcribed ALMA image times and sub-observer longitudes; the frame test reproduces them from the grid spin state.",
-      "expectedBytes": 3095,
-      "expectedSha256": "126438f5448fb465b2dd003c10656b85d398f1fefefc0d64c16bbb284dc53f7b"
+      "purpose": "Transcribed ALMA image times and sub-observer longitudes; the frame test reproduces them from the grid spin state."
     },
     {
       "path": "reference/horizons-alma-2019-06-19.txt",
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL Solar System Dynamics, Horizons",
       "license": "Public NASA/JPL data",
-      "purpose": "JPL Horizons geocentric ICRF vectors of Psyche at the Table 1 image midpoints (VEC_CORR=LT, TIME_TYPE=UT), queried 2026-09-16, for the frame test.",
-      "expectedBytes": 12042,
-      "expectedSha256": "17c0f9e32f0207070e1d55aa49ca24d416edeec2d648dd7ffe072e9e15b6ec12"
+      "purpose": "JPL Horizons geocentric ICRF vectors of Psyche at the Table 1 image midpoints (VEC_CORR=LT, TIME_TYPE=UT), queried 2026-09-16, for the frame test."
     },
     {
       "path": "thermal/alma-body-frame.json",
@@ -2902,8 +2862,6 @@
       "credit": "Spin state: Cambioni, de Kleer & Shepard (2022) equation 2 and Shepard et al. (2021) Table 5; epoch: de Kleer, Cambioni & Shepard (2021)",
       "license": "Factual numerical parameters; source attribution retained",
       "purpose": "Transcribed spin state, epoch and time-scale offset that carry ADAM mesh directions into the ALMA grid frame for the thermal-inertia and dielectric-constant lenses.",
-      "expectedBytes": 1726,
-      "expectedSha256": "0dc4f19e8f3613dbc4ec320ae1c2fa36a48103f9e6a61390aeff141d5553166e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2930,14 +2888,10 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /psyche/ with the default camera and the Thermal inertia lens selected, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide, JPEG quality 90), taken 2026-09-16 after preparation."
-      },
-      "expectedBytes": 131719,
-      "expectedSha256": "79673919d53ce8508a818a6d5d454910f00f9de8f62ab2905c3f969ad485aa57"
+      }
     },
     {
-      "path": "preparation/published-comparison.json",
-      "expectedBytes": 1758,
-      "expectedSha256": "85f6cc588a83b51ea6f130d0b6c1dc04968a94ab69c579adb231179fb251ae76"
+      "path": "preparation/published-comparison.json"
     }
   ]
 }

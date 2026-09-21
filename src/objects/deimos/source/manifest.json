@@ -186,8 +186,6 @@
     {
       "id": "deimos-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1004,
-      "expectedSha256": "189ecc12549ac04c847cc2e2bf7b060e64a18dc01ad39a13f3ae0579335711e9",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -204,8 +202,6 @@
     {
       "id": "deimos-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1138,
-      "expectedSha256": "c4eba8cf9661a8275ce0d6754fee100b70bb1c16c9b0d61af6d8e94ac7b9ba2b",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -222,8 +218,6 @@
     {
       "id": "deimos-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 185,
-      "expectedSha256": "4425ba76faafd30b12bccb8ecaa34564ed43fe240c4d4cd5ff0e68d3b9d4e354",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -261,63 +255,43 @@
         "diffuse": 0.55,
         "lensId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 90860,
-      "expectedSha256": "c087dddad132508d31b892a771b2e7d4c69eb13679d7cdbdec9ccbf14c3067d5"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11399,
-      "expectedSha256": "f84855d2df8856e95b04c2ce72a19581598208562e18998d75ae355cb33b1ffc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1350,
-      "expectedSha256": "8dde520141cd396de92eb65374af3e78cd920d71e43e25ac6e9446a6a79d4462"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "61bbf3d8a5ad6ca90626a5cef0cb9673003817d82661cda96690191f02b2cb60"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 5682,
-      "expectedSha256": "fd449bf44d69f93a8af66ce2ed78484055bff7c007c7f201a099d8c626ad7599"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 30,
-      "expectedSha256": "68aa5300cb47a748e165cd7242f7f5b5559acbc2c8f29848b8ae548b31530127"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3806,
-      "expectedSha256": "29154db7230989da9f3c1812aeba6af41d11804894d26405d834c8e981282ca6"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "shape/deimos_g_083m_spc_obj_0000n00000_v002.lbl",
-      "expectedBytes": 1081,
-      "expectedSha256": "472575bf00e8731739bd7aeb9cb0360363db1b427af32b08262089fedd7247a5"
+      "path": "shape/deimos_g_083m_spc_obj_0000n00000_v002.lbl"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2315,
-      "expectedSha256": "ade7ed150d2b41da1d43228583bda90537d2e26ed85ed5c6fb08f662beaad1a7"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "deimos-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 1478,
-      "expectedSha256": "3381847add3b9ca15bce9d5d487792cab0ecd270708ab7348e5290ee8917aa7e",
       "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

@@ -75,8 +75,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 35290,
-      "expectedSha256": "c83bb47131023fd947ce8f02c1b49a75330e76d5451c33fedba2014e2f242505",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -95,81 +93,53 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11416,
-      "expectedSha256": "ee3dce77d7fbfe618f7eef29262008dc4fb0b6b67b7e6de93da77c08d5f696d9",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 930,
-      "expectedSha256": "65e8a168ef0e256c50ab30d92468556ae39983386d5ca3294c4508b1a58bdbb2"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 446,
-      "expectedSha256": "459ea0182c7cfc80e362b87370586895db5e2d8108b029472c3de6145a2e6b88"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 596,
-      "expectedSha256": "4ab51aa09e3b9d638f50852258baef5297bc769a3f5bd8981c428e206bfe695b"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2977,
-      "expectedSha256": "84e84704573a27d16861ef6d7c65fca5fe775955376ba60b501f99f4c9b83150"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5469,
-      "expectedSha256": "3dc41d3c311d7c00dc029db09373b259cedb337fcd716c327cf665fcd82f7bb5"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/3896-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "a0b903a3cd6deb1f94cb54796a3e0f009c764aab04129d7295221d631047f11d"
+      "path": "reference/3896-IAUspin.txt"
     },
     {
-      "path": "reference/calibration.json",
-      "expectedBytes": 2112,
-      "expectedSha256": "a9361df08c6c0df612b42df592e70a5e5d4b175b966cb50f8b7511c98d0b96f7"
+      "path": "reference/calibration.json"
     },
     {
       "path": "reference/damit-model.json",
       "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
-      "expectedBytes": 5895,
-      "expectedSha256": "bf46bf244d425c468c4b9ab202ba7bc2646a9617305dd8b5c259998cb9ce6907",
       "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3896",
       "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7355,
-      "expectedSha256": "570f179239ecda7b508f00eb5a7105184643aa718d061301dcaa2c5fd3fd904d"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6645,
-      "expectedSha256": "e46b8a9b5e28194acdcc5034a06c737efb2894e0a98a767395454fe499b0e30f"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 4433,
-      "expectedSha256": "ffe0ae033a946edb30a5ebf516a12e8518b26013bb85d9f82ba46380a9b43514"
+      "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/neowise-query.txt",
-      "expectedBytes": 214,
-      "expectedSha256": "4b4b894a91f7d5e607ae2f70d742a6207554535e0ee138ec92a5162dae847ee0"
+      "path": "reference/neowise-query.txt"
     },
     {
       "path": "reference/neowise-selected.csv",

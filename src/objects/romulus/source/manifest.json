@@ -103,118 +103,78 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3164,
-      "expectedSha256": "9873eea8331d77d5395a1fe4298d2077bec2a788d847ba77488f6a18ce929e80",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 3351,
-      "expectedSha256": "c78561f080fcc8ff4410573d9a1086ab642bc3c0dd8e66df2d8cb4bbe7880c12"
+      "path": "measurements.json"
     },
     {
       "path": "orbit/geocentric-2018.txt",
-      "expectedBytes": 9044,
-      "expectedSha256": "3a532625e0a4436905bed3187d9a4359648d5790bf9c0d20f6cdc9c723d65425",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     },
     {
       "path": "orbit/geocentric-2026.txt",
-      "expectedBytes": 9044,
-      "expectedSha256": "e8afc90caa7fd06b9ab42e3eb7f2d56704b7eefdb3baecf4ab977c33afc074c2",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     },
     {
       "path": "orbit/geocentric-astrometry.txt",
-      "expectedBytes": 9845,
-      "expectedSha256": "a6a058d9e1ba7bbb96a474acec1e2d3bb217180eaf8589cafadc47275ce4306a",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     },
     {
       "path": "orbit/miriade-2018.xml",
-      "expectedBytes": 20658,
-      "expectedSha256": "6e51c7cf84e038ccb32fd443c2b1d493ceb3eac52476d0d52901bd5e6974c242",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     },
     {
       "path": "orbit/miriade-2026.xml",
-      "expectedBytes": 20657,
-      "expectedSha256": "c17731d2b40b1f80cb593e3f2ec35740afbfe848ee16d99998e6e74e3c87d468",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     },
     {
       "path": "orbit/miriade-solutions.txt",
-      "expectedBytes": 719,
-      "expectedSha256": "c3c0bd648373e3b47b8849fe68b3b3663b9054496aa560ab6fd7be34e69eb500",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     },
     {
       "path": "orbit/paper-astrometry-readme.txt",
-      "expectedBytes": 9139,
-      "expectedSha256": "0f1aa8a1b2b56d6bd76b8d272f706358492a38b63799b3e5e34adfff2ea35276",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     },
     {
       "path": "orbit/paper-astrometry.dat",
-      "expectedBytes": 10530,
-      "expectedSha256": "412aa8442b2784595a3ffc038384f4c007e9253e8f1a7cf35663a600c5df0ecc",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     },
     {
       "path": "orbit/published-parameters.json",
-      "expectedBytes": 5247,
-      "expectedSha256": "8a1e50f6040b207756bec082d48d03537da1dcc8a466a5b363e184e73b4e6362",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     },
     {
       "path": "orbit/sylvia-heliocentric.txt",
-      "expectedBytes": 8489,
-      "expectedSha256": "52d6187949be5192c1a56d5e47186335d05a6800c42a87f6cd3aa9408d795118",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 444,
-      "expectedSha256": "1a3511e2fd3bedc14ca0c12fbd62662398a9729f645a8e2de0537d023cbafd44"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 386,
-      "expectedSha256": "b55a8ca12859975227899193dc35284eeb9741a75a81c710a9cd52ff102d78ce"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2376,
-      "expectedSha256": "9fce14ab34380c6228b0ff04e55b3a781cc41219aeca5eef48c7c853f06bc535"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3673,
-      "expectedSha256": "3a2d675bab41dd663b005ec2688032ede3abc6d1780f92a494117135b9895271"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "validation/epoch-state.json",
-      "expectedBytes": 19324,
-      "expectedSha256": "9bf21db63fad290b0ba0a85711a7b811e04e2106307f701ee724f372ddf5936d",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     },
     {
       "path": "validation/projection-checks.json",
-      "expectedBytes": 17428,
-      "expectedSha256": "da5c5a662916973a416855c58f16c88b420d5abde411dde1105956091fbb3a7e",
       "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
     }
   ],
@@ -241,9 +201,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 45821,
-      "expectedSha256": "85feab9c5db07b89f7d097d76d748f4621dfd6bea3866bd7697e60a01b8c22d5"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

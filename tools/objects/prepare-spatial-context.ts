@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { basename, dirname, relative, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, M_PER_KM, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
@@ -27,23 +27,15 @@ export interface SpatialContextPreparationOptions {
   readonly objectsDirectory?: string;
 }
 
-export interface SpatialContextCommandOptions extends SpatialContextPreparationOptions {
-  /** Authoring-only: update source manifests that deliberately pin the generated context. */
-  readonly pinReferences: boolean;
-}
+export type SpatialContextCommandOptions = SpatialContextPreparationOptions;
 
-/** Parse the CLI without making deploy/build generation an implicit authoring operation. */
+/** Parse the CLI. No manifest pins the generated context, so there is nothing to refresh after writing it. */
 export function parseSpatialContextCommand(args: readonly string[], cwd = process.cwd()): SpatialContextCommandOptions {
-  const pinReferences = args.includes('--pin-references');
-  if (args.filter(argument => argument === '--pin-references').length > 1 || args.some(argument => argument.startsWith('--') && argument !== '--pin-references')) {
-    throw new TypeError('Usage: prepare-spatial-context <source.json> <world-context.json> [solar-geometry.mts] [--pin-references]');
+  const [sourcePath, outputPath, solarGeometryPath = resolve(cwd, 'src/platform/solar-geometry.mts'), ...extra] = args;
+  if (!sourcePath || !outputPath || extra.length > 0 || args.some(argument => argument.startsWith('--'))) {
+    throw new TypeError('Usage: prepare-spatial-context <source.json> <world-context.json> [solar-geometry.mts]');
   }
-  const [sourcePath, outputPath, solarGeometryPath = resolve(cwd, 'src/platform/solar-geometry.mts'), ...extra] =
-    args.filter(argument => argument !== '--pin-references');
-  if (!sourcePath || !outputPath || extra.length > 0) {
-    throw new TypeError('Usage: prepare-spatial-context <source.json> <world-context.json> [solar-geometry.mts] [--pin-references]');
-  }
-  return { sourcePath: resolve(cwd, sourcePath), outputPath: resolve(cwd, outputPath), solarGeometryPath: resolve(cwd, solarGeometryPath), pinReferences };
+  return { sourcePath: resolve(cwd, sourcePath), outputPath: resolve(cwd, outputPath), solarGeometryPath: resolve(cwd, solarGeometryPath) };
 }
 
 /** Prepares a renderer-neutral solar context from a pinned source document and epoch geometry adapter. */
@@ -246,11 +238,5 @@ function eccentricity(value: unknown, id: string): number { const result = numbe
 const invoked = process.argv[1] && basename(fileURLToPath(import.meta.url)) === 'prepare-spatial-context.js' &&
   resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (invoked) {
-  const { pinReferences, ...options } = parseSpatialContextCommand(process.argv.slice(2));
-  await prepareSpatialContext(options);
-  if (pinReferences) {
-    // Explicit object authoring keeps manifests that pin this output in step with it.
-    const { pinManifestsReferencing } = await import(pathToFileURL(resolve(process.cwd(), 'tools/pin-object-documents.mts')).href) as { pinManifestsReferencing: (root: string, path: string) => Promise<{ objectId: string; path: string; expectedBytes: number }[]> };
-    for (const change of await pinManifestsReferencing(process.cwd(), relative(process.cwd(), options.outputPath))) console.log(`pinned ${change.objectId} ${change.path} (${change.expectedBytes} bytes)`);
-  }
+  await prepareSpatialContext(parseSpatialContextCommand(process.argv.slice(2)));
 }

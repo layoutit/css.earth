@@ -53,8 +53,6 @@
       }
     },
     {
-      "expectedBytes": 1946,
-      "expectedSha256": "658a8387ea04f009f759a361066b199b57dc3863fc14b59f208b053284d308a5",
       "id": "antares-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, no observation, transparent plates",
@@ -72,8 +70,6 @@
       ]
     },
     {
-      "expectedBytes": 1690,
-      "expectedSha256": "c1da976c21cddeab934c1f2746bed7899ef6121de9aa818c71617d5acbba2c29",
       "id": "antares-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
@@ -91,8 +87,6 @@
       ]
     },
     {
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "id": "antares-preparation-celestial",
       "path": "preparation/celestial.json",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
@@ -109,8 +103,6 @@
       ]
     },
     {
-      "expectedBytes": 102,
-      "expectedSha256": "89f6d3670f778b75a7d6bbbe6fcf9574c7a495c26bbed1dbb0322d4b11e80e55",
       "id": "antares-preparation-presentation",
       "path": "preparation/presentation.json",
       "origin": "Repository-authored presentation profile: emissive mode (no lighting track, no Shadows toggle)",
@@ -127,8 +119,6 @@
       ]
     },
     {
-      "expectedBytes": 216,
-      "expectedSha256": "290a57fa41a10caccc58530d23eefdc963114c0e1ff9f1c05b772f8b865ed059",
       "id": "antares-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
@@ -147,8 +137,6 @@
   ],
   "generatedIntermediates": [
     {
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/1304.4800",
@@ -172,8 +160,6 @@
   ],
   "documents": [
     {
-      "expectedBytes": 3879,
-      "expectedSha256": "d036c0c5af51c73be6e8f5645900bd00df2bc245c019d71040ec3d44811cc479",
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -181,33 +167,21 @@
       }
     },
     {
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c",
       "path": "preparation/acquisition.json"
     },
     {
-      "expectedBytes": 444,
-      "expectedSha256": "2b1d7ab67ee5112cb4708f825634bb641aef4457577d553ff06509b555116d60",
       "path": "preparation/navigation.json"
     },
     {
-      "expectedBytes": 1084,
-      "expectedSha256": "725beec672264575d627b85c2d587dc5637fc62894fb489c14b5703716715d08",
       "path": "preparation/rotation.json"
     },
     {
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88",
       "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "expectedBytes": 4129,
-      "expectedSha256": "013c962a4306a5e65554d8ac7d7b34fcfeedd93dd0587370a2c04b89ea2455da",
       "path": "presentation/title-mark.json"
     },
     {
-      "expectedBytes": 74603,
-      "expectedSha256": "e59763af517a453a7800b4da7d565de251047b9f577b87cfe36f4f02acc9cd1d",
       "path": "reference/rendered-default-view.png",
       "sourceBinding": {
         "kind": "local",

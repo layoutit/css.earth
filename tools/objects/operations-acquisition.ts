@@ -93,7 +93,8 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
     // stays the recorded provenance either way. Streaming (not buffering) means a >20 MB input costs no more memory
     // here than the publisher path already does.
     let usedMirror=false;
-    if(mirrorOrigin){
+    // The mirror is addressed by the pin, so only a pinned download can come from it.
+    if(mirrorOrigin&&entry.expectedSha256!==undefined){
      const filename=step.path.split('/').at(-1)!;
      try{
       const response=await transport.fetch(sourceCacheUrl(mirrorOrigin,entry.expectedSha256,filename));

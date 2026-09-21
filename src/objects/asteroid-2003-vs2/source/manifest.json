@@ -64,8 +64,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth missing-coverage grid",
       "license": "MIT",
@@ -94,57 +92,37 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3751,
-      "expectedSha256": "dd879752ab5860d2d6aaf219bf895ef77eebbc87deb153f092cc95af96ad8031",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 3228,
-      "expectedSha256": "885e9bb80fdbf7ff6c67c09981a006d1a9c86c131c8a26df013c26db69aa42c3"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 800,
-      "expectedSha256": "3b7be3deab2fcf5b297fb031e6f560e53b9c43997b9b6a28735cc7fb3ea7571f"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 454,
-      "expectedSha256": "ed799db45086a8e64eaeec3c745dd4fb712735d3bc316bd6382ecef5dfc96638"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 604,
-      "expectedSha256": "749f0066bb87789ebac3a1f163b4d3b005c7dae3d8ea030a735dbe4c7c4dbf21"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2931,
-      "expectedSha256": "c5dfcbd001286b78f0da24d78e2d5c1342461586a179143bf24bc6b4ccf2e841"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4805,
-      "expectedSha256": "5df4697e235e0e749459f5d0401fc86817520e0235e5d8c994963611fbbbeb4d"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7355,
-      "expectedSha256": "4229f5f5e19a63f58c84ed80a4f7f33ded7417f2b54362b9fa85951c505f1a04"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6645,
-      "expectedSha256": "816820675fd162dd1549ae510e1a4502dd26632ad5ae0d171814909a0ab6874d"
+      "path": "reference/horizons-vectors.txt"
     },
     {
       "path": "reference/outer-worlds-gomez-limon-2026.pdf",
@@ -158,8 +136,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 2831,
-      "expectedSha256": "b987c058e1c51b9914b7523b6af9ad9edb86715896ff40d55d7a34fbb188c9dd",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -195,9 +171,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 68135,
-      "expectedSha256": "e85f6821365c6a126ebb751fed1469e012dbddad9b91d30f8ddbad73415580fc"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

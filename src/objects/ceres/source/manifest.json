@@ -183,8 +183,6 @@
     {
       "id": "ceres-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 184,
-      "expectedSha256": "19f737699beda385a474893d66887ac7f676f3e483e22b6d9a28206952a84f57",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -233,8 +231,6 @@
     {
       "id": "ceres-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1000,
-      "expectedSha256": "14d0e2248ba34ad2c7d7f89e04a416d7fe081b4eb8b96f186d5bdc39aa32bbb0",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -251,8 +247,6 @@
     {
       "id": "ceres-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1158,
-      "expectedSha256": "b2fbf156d93eda48891a38d3a8834c651661a85d20d3aebc19cc94cdaab37f18",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -296,8 +290,6 @@
     {
       "id": "ceres-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 204,
-      "expectedSha256": "0f49007ff9468aa68712d007113423e313dde4edfa33333750569fca232527a7",
       "origin": "Repository-authored Ceres solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -317,8 +309,6 @@
     {
       "id": "ceres-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 13215,
-      "expectedSha256": "23f7415b3490b47e495fe0ee19ee2337f2ab83413d50b81c98686c7b2c7fa146",
       "origin": "Repository-authored Ceres raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -336,8 +326,6 @@
     {
       "id": "ceres-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1594,
-      "expectedSha256": "3f41ac7b04067d9c536651a65adc516a12388bda9fefce157268fd1372e02c64",
       "origin": "Repository-authored Ceres geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -355,8 +343,6 @@
     {
       "id": "ceres-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Ceres celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -375,8 +361,6 @@
     {
       "id": "ceres-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 101,
-      "expectedSha256": "44904697b9cb89cf76767293d969a51cce48ff0b698041e897ec3829a17ae89a",
       "origin": "Repository-authored Ceres presentation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -393,8 +377,6 @@
     {
       "id": "ceres-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 399,
-      "expectedSha256": "895c73c8c47a0ba9180be6f20fc0c5bc054b4d387b0d8afe3188bd845d0fb931",
       "origin": "Repository-authored Ceres navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -411,8 +393,6 @@
     {
       "id": "ceres-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2667,
-      "expectedSha256": "fde976ca3318d7ded9937e19f46556f566353ffb68ed7d78c8852c0b6867c544",
       "origin": "Repository-authored Ceres acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -430,8 +410,6 @@
     {
       "id": "ceres-object-content",
       "path": "content/object.json",
-      "expectedBytes": 32983,
-      "expectedSha256": "f5eacd3e0fab26e0f2d5cd377ff38769c43f3f437578c4e186855cbb8bd53d6e",
       "origin": "Repository-authored Ceres object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -623,22 +601,16 @@
   "documents": [
     {
       "path": "wms-capabilities.xml",
-      "expectedBytes": 6483,
-      "expectedSha256": "33c538aca7929dc2bdf589300a34bbc02a696671fd052a9a9c76647a389d499f",
       "purpose": "USGS WMS 1.1.1 capabilities snapshot: Ceres_FC_global layer, projection, credit, and source resolution. Retrieved 2026-09-05."
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 825,
-      "expectedSha256": "97da5328e7dec76d7b926f8085f0e59f249a2b6cdee4032e4897b4532eb6e7a8"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "ceres-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 14783,
-      "expectedSha256": "c26913d880d637c2d2abb0e581ce257ed3531f2080b504bacc16c219bd0108b2",
       "origin": "Repository-pinned English Wikipedia lead summaries for 31 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -659,8 +631,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 5124,
-      "expectedSha256": "8c5b59758d1b94f930dee3c03a2ae6e9cf096763a149c00410b16df9c7e4a4a3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

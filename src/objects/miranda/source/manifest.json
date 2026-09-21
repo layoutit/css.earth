@@ -1414,8 +1414,6 @@
     {
       "id": "miranda-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1009,
-      "expectedSha256": "d83314002237aa5455b78d1d7db03f1904dea4c05c48c7db516c486b6c067bf4",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -1432,8 +1430,6 @@
     {
       "id": "miranda-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1133,
-      "expectedSha256": "6250b77efb266e10b59bc0e0bcd9ea71c2bbe9431c6ea7d0affb72158c5568bb",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -1450,8 +1446,6 @@
     {
       "id": "miranda-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 188,
-      "expectedSha256": "9f27edddd46d4579044bc75438c6ae304e8b9b33f269f93f0f25ae0cfc91d399",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -1495,8 +1489,6 @@
     {
       "id": "miranda-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 208,
-      "expectedSha256": "b4efcc19f171b03717ddbe01c09977d089f2905a7ee6e71879dfa0d0c9f8d230",
       "origin": "Repository-authored Miranda solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1516,8 +1508,6 @@
     {
       "id": "miranda-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 9087,
-      "expectedSha256": "81a4eeba04c867da89212276482e3ab6dc54f292cd493df53fd8b7e71959542f",
       "origin": "Repository-authored Miranda raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1535,8 +1525,6 @@
     {
       "id": "miranda-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1602,
-      "expectedSha256": "e23f4276ff5e665b5e4fb813619fe09a97f39c45aa0eb8fdf204c8e24d1bbf13",
       "origin": "Repository-authored Miranda geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1554,8 +1542,6 @@
     {
       "id": "miranda-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Miranda celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1574,8 +1560,6 @@
     {
       "id": "miranda-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 103,
-      "expectedSha256": "85bc3fbff8907a8d1c112729f084a0f4c8f1f707dcefa1618d6ea1a092ca61f7",
       "origin": "Repository-authored Miranda presentation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1592,8 +1576,6 @@
     {
       "id": "miranda-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 1345,
-      "expectedSha256": "f7ee8c1b4dd2c9277e06269ff881c77e24c6ed784f2166c1c8645bc69418553f",
       "origin": "Repository-authored Miranda navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1610,8 +1592,6 @@
     {
       "id": "miranda-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 11474,
-      "expectedSha256": "a60a9104e95567dfc90348a9bbcee11dde2c141782a40e2f7c5938db6e76a64a",
       "origin": "Repository-authored Miranda acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1629,8 +1609,6 @@
     {
       "id": "miranda-object-content",
       "path": "content/object.json",
-      "expectedBytes": 14798,
-      "expectedSha256": "8a80f5ba1aa9478bd9af6cb97bf4cfe830d05a6da2cedf822963579f69024d31",
       "origin": "Repository-authored Miranda object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1649,88 +1627,60 @@
   "generatedIntermediates": [],
   "documents": [
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
       "path": "observations/aaReadMe_uranian_MAP_DEM.txt",
-      "purpose": "Original author README with DEM datum, construction and limitations.",
-      "expectedBytes": 2426,
-      "expectedSha256": "655661b4e4d5f5ada71d7b4b797afffefc2e908ae63b51d9d1fe3fca964d51a3"
+      "purpose": "Original author README with DEM datum, construction and limitations."
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2317,
-      "expectedSha256": "1e2ef8e8ef816eb4cfc7b6c50d9cba54740061ac74867252d8a9797f6c8b6d97"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "preparation/geology-conversion.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 14291,
-      "expectedSha256": "5e723e95052b5978ec8ba7cf1639d2efaa79c04a5e23fdc3ac5c81bdd8c7411e"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/preview-overlap-evidence.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 3018,
-      "expectedSha256": "189c60834771ecf35999fe7559eef38f8d254f128f243e8a627d3ee1343abc12"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/nomenclature.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 10590,
-      "expectedSha256": "a85c2dcf6446007b6f5f5c34dcd42f416969e254915bd17baa4822505fd45a59"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/categories.receipt.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 9526,
-      "expectedSha256": "00452a96b76a0d5777c93c03d2751da74f39571cddee5218a6e067187a9d4cc0"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/registration.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 3367,
-      "expectedSha256": "e43c52d5af339a805b9a3c0152b6a02fe73c492b25e93e56353e3b4fdc6380e3"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/release-metadata.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 15654,
-      "expectedSha256": "73567ba3e54818f748897f2ab43f32415744c6a210c9e2711c042d1765ca0876"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/acquisition-receipt.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 14982,
-      "expectedSha256": "4270eae4014b1854e4a3b996223c191a0bd6e8231f7f4534487136918c57d258"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/registration-proof.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 10518,
-      "expectedSha256": "9be224b092edeb7512010b70006eb8a0070ae85d8a43564a2eb010ef8ed9c4b5"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/nomenclature.pdf",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 2527631,
-      "expectedSha256": "7b50f3ed3e50c6b9647f26023621efecba691744b2b019c0c22c7a50307cd5a8"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/nomenclature.zip",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 84340,
-      "expectedSha256": "142fe3942fc80c4dfcdbad0258da5259e656c395b273c759594a3c163cd58ecd"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "id": "miranda-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 1859,
-      "expectedSha256": "127b6efd1f9072786f938acd3f2f302afc4f11f14d3f417c75623294392446c0",
       "origin": "Repository-pinned English Wikipedia lead summaries for 3 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

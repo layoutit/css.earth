@@ -119,8 +119,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 38417,
-      "expectedSha256": "12cf7104f9d5243167b31cda052cebf005ce25eac1dec3b6d70d1415f1c5fca7",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -139,99 +137,63 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11782,
-      "expectedSha256": "426cf8e0649811e5dcc7f10e2478107507f5427e6dcf5f2d36a986d3c5f8156c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 772,
-      "expectedSha256": "14a4330f96b7a3ba9b01d45fea4d8a7c36b4f8e7b6c1e180fbff48f87e8fa202"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 446,
-      "expectedSha256": "a0444472c4bb77fd54acc62c15d479bd6006d53639b79c08bd077206afe51310"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 981,
-      "expectedSha256": "e9d39b5c6d97e7162d9da2b230413f9757ab96d13c55b9fa5b48c35a6a61996d"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2828,
-      "expectedSha256": "6babb5858083d4f8e37e017ce6b50c2c9adf617f39406c1470cb90516e310a3f"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5650,
-      "expectedSha256": "299ebf490881b4158d989c397788e226e82f2fd56d537da9b5de32378dc108cf"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7758,
-      "expectedSha256": "4bfb2785deaabcef8fd028c9cf7c47fac1799e90d86c20698a1c65c174262608"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1755,
-      "expectedSha256": "e01683393f61e17a89e397e93c0b8368c7519b8e3a9f22cbc7fc57df2decd55b"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 7048,
-      "expectedSha256": "8cbdf52d86cb25e44fc7a224bf435bebd63ecddde5632bc4745bf4969dcbd9bc"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 2006,
-      "expectedSha256": "a9e11fe4cffba067eea37e6de9216f1676e05b634a9e3ee82416fe1dfc0f12e7"
+      "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/pds-a2100_spin_state.csv",
-      "expectedBytes": 55,
-      "expectedSha256": "df9aa653fefa91fd37925e0bc96810640b1f871a41ce261e07f45efd78cc6a31"
+      "path": "reference/pds-a2100_spin_state.csv"
     },
     {
-      "path": "reference/pds-a2100_spin_state.xml",
-      "expectedBytes": 10946,
-      "expectedSha256": "0062a604e0860223e3e7a76859f06a9127c921eea39032a8842c380134903102"
+      "path": "reference/pds-a2100_spin_state.xml"
     },
     {
-      "path": "reference/pds-a2100rashalom.xml",
-      "expectedBytes": 10567,
-      "expectedSha256": "f9fed2bb09365e3294ca881ac0e81d59fd7fed592f958dce3dd0e62f734fce69"
+      "path": "reference/pds-a2100rashalom.xml"
     },
     {
-      "path": "reference/pds-bundle_description.txt",
-      "expectedBytes": 7530,
-      "expectedSha256": "e60fe2bc0a6364689d1cf4e8b467e808dec7177a23d2f0bb26e62dada8f052ef"
+      "path": "reference/pds-bundle_description.txt"
     },
     {
       "path": "reference/scalar-anchors.json",
-      "purpose": "Independent NumPy source-surface scalar anchors; measured against every original triangle.",
-      "expectedBytes": 9668,
-      "expectedSha256": "afa6ae7f80d7439f26dba1234d69cea5706543dbaeca118203177c6801a640b7"
+      "purpose": "Independent NumPy source-surface scalar anchors; measured against every original triangle."
     },
     {
       "path": "reference/pds-mesh-comparison.json",
-      "purpose": "Independent parsed-coordinate and connectivity comparison with the PDS archive counterpart.",
-      "expectedBytes": 176,
-      "expectedSha256": "f3d2554e5ec688a2b3969355141f88f8bb3e6d8c5717e09c054607a96063a086"
+      "purpose": "Independent parsed-coordinate and connectivity comparison with the PDS archive counterpart."
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 5971,
-      "expectedSha256": "cb47cc079f12b5ef2bd59d73026ac781695dd63c5ae42ac4f392151183e38d9a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

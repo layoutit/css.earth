@@ -152,102 +152,66 @@
         "diffuse": 0.55,
         "lensId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 101814,
-      "expectedSha256": "655779362b3622adae77817183edcf576f13f00d1583ed8d04ae67b2854d53ff"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5074,
-      "expectedSha256": "9d576df65e0b9e7e073710e2a6b43486b073697004f33f46be0d96b0d126b314",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "geometry/c1138148-opus.json",
-      "expectedBytes": 11704,
-      "expectedSha256": "10a057026351d359ec7a33b37e1878aea50d1a98b5ff4c1c022e6b9380d0279e"
+      "path": "geometry/c1138148-opus.json"
     },
     {
-      "path": "geometry/naif0012.tls",
-      "expectedBytes": 5257,
-      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+      "path": "geometry/naif0012.tls"
     },
     {
-      "path": "geometry/registration.json",
-      "expectedBytes": 1802,
-      "expectedSha256": "486de67f47252d01f1f19621ed66e970311b4accb22ebe65eb29404472b36e95"
+      "path": "geometry/registration.json"
     },
     {
-      "path": "geometry/vg200051.tsc",
-      "expectedBytes": 108191,
-      "expectedSha256": "bf8ae3b237a4f75362ae4bf5fe133ec4a888877f6183f1705330b9433f81dcac"
+      "path": "geometry/vg200051.tsc"
     },
     {
-      "path": "geometry/vg2_nep_version1_type1_iss_sedr.bc",
-      "expectedBytes": 885760,
-      "expectedSha256": "f181a43f5785867afc81436a202a6ec453c8dd5538172ae916ca979981051f11"
+      "path": "geometry/vg2_nep_version1_type1_iss_sedr.bc"
     },
     {
-      "path": "geometry/vg2_nep_version1_type1_iss_sedr.txt",
-      "expectedBytes": 5575,
-      "expectedSha256": "8bce7257eea9a974b3b6a488bb248c662048459c8669d19c1e1b3259a7fbfab7"
+      "path": "geometry/vg2_nep_version1_type1_iss_sedr.txt"
     },
     {
-      "path": "geometry/vg2_v02.tf",
-      "expectedBytes": 12008,
-      "expectedSha256": "aa529b2dbf43b7f925b3e81e86a3d7e74a4d99c392113197e5f6d5bf13c37fcb"
+      "path": "geometry/vg2_v02.tf"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1044,
-      "expectedSha256": "6a436cd5c36bbb56151b0204cd09b7a81165977395b2144ef3ec4d049cb41032"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 444,
-      "expectedSha256": "291e3db66534e828b35c4319c9dbc84ac3b6cad7feb9ec41cad64e66c342f13b"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 4633,
-      "expectedSha256": "cfbf8cf9a6a549e0da490fd49eef583845766c553d2fcab5e804f08bb13d033f"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4630,
-      "expectedSha256": "711017306cf04ff82256c8b820f65e70eedafc1dff0f7d5074294c420e2215e9"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "shape/bundle_description.txt",
-      "expectedBytes": 5105,
-      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
+      "path": "shape/bundle_description.txt"
     },
     {
-      "path": "shape/n7larissa.xml",
-      "expectedBytes": 6399,
-      "expectedSha256": "23af7778a3917263f5ee479036ac9bd6b05527718793b2883d480d8670604085"
+      "path": "shape/n7larissa.xml"
     },
     {
-      "path": "shape/pck00011.tpc",
-      "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "path": "shape/pck00011.tpc"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2360,
-      "expectedSha256": "2e24f4da5beb84b816e5d84d6af3dde52a55e54a9a465c77f039e434d5650900"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     }
   ]
 }

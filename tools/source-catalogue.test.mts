@@ -218,7 +218,7 @@ test(`both catalogues prepare deterministically from ${sourceCheckMode()} packag
   assert.deepEqual(await Promise.all(result.outputs.map(output=>readFile(output.path))),before);
 });
 
-test('changed fact evidence and stale displayed facts leave both published catalogues intact', async t => {
+test('an undeclared fact citation and stale displayed facts leave both published catalogues intact', async t => {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-citation-publication-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const outputs = ['site/prepared-sources.json', 'site/prepared-facilities.json'];
@@ -234,12 +234,14 @@ test('changed fact evidence and stale displayed facts leave both published catal
     await copyFile(path, target);
   }
   const before = await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8')));
-  const evidencePath = join(root, 'src/objects/abundantia/source/reference/calibration.json');
-  const evidence = await readFile(evidencePath, 'utf8');
-  await writeFile(evidencePath, evidence.replace('42.18', '52.18'));
-  await assert.rejects(prepareFacilities({ root, provenance }), /fact evidence pin differs/);
+  // Evidence authored here carries no pin; git shows an edit to it. A fact must still cite a file the manifest declares.
+  const manifestPath = join(root, 'src/objects/abundantia/source/manifest.json'), manifestText = await readFile(manifestPath, 'utf8');
+  const undeclared = sourceObject(JSON.parse(manifestText));
+  for (const section of ['inputs', 'documents', 'generatedIntermediates']) undeclared[section] = sourceArray(undeclared[section] ?? [], sourceObject).filter(entry => entry.path !== 'reference/calibration.json');
+  await writeFile(manifestPath, JSON.stringify(undeclared, null, 2) + '\n');
+  await assert.rejects(prepareFacilities({ root, provenance }), /fact evidence needs one manifest entry/);
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
-  await writeFile(evidencePath, evidence);
+  await writeFile(manifestPath, manifestText);
   const contentPath = join(root, 'src/objects/abundantia/prepared/content.json');
   const originalContent = await readFile(contentPath, 'utf8'), content = sourceObject(JSON.parse(originalContent));
   sourceObject(sourceArray(content.facts, sourceObject)[0]).value = '99 km';

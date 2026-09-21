@@ -424,8 +424,6 @@
     {
       "id": "amalthea-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1014,
-      "expectedSha256": "13c207f7804b474543fc841279f64ab3c7e6aea5b4270f491e2c4c9534609e4a",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -442,8 +440,6 @@
     {
       "id": "amalthea-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1125,
-      "expectedSha256": "7c28165f8cee607ed263798df77a92c2f16414e4b3501824b99aa0b6e256cf4d",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -460,8 +456,6 @@
     {
       "id": "amalthea-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 187,
-      "expectedSha256": "acc02f8a7259c2b6074f84032d6f93673a3e52c7ef42c80c982af3101e009e49",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -502,98 +496,64 @@
         "diffuse": 0.55,
         "lensId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 45207,
-      "expectedSha256": "72d73e2bd1032e89b334b2d59011454a78576de6b48d812509b25f327d11dc19"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5605,
-      "expectedSha256": "3c4b7d7d9cd947af54d97cc3facf73cf22245d58aaa75eb6effd2088dd613d9c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "geometry/c0420626379-opus.json",
-      "expectedBytes": 11837,
-      "expectedSha256": "599e1a01848fa006fe07437da0060b8fee6e634e5e035e9f8a64ac6ce2e3461f"
+      "path": "geometry/c0420626379-opus.json"
     },
     {
-      "path": "geometry/c0420652501-opus.json",
-      "expectedBytes": 11861,
-      "expectedSha256": "543c22228daf4fa42b8504da65b30a4232ff17cd77f3b4d54637d97b54a9474b"
+      "path": "geometry/c0420652501-opus.json"
     },
     {
-      "path": "geometry/c0512324200-opus.json",
-      "expectedBytes": 11743,
-      "expectedSha256": "45e26a333c72e95b5a1e750299af1319166711b0a8cec746a2e2df126bda5dba"
+      "path": "geometry/c0512324200-opus.json"
     },
     {
-      "path": "geometry/c0532888100-opus.json",
-      "expectedBytes": 11894,
-      "expectedSha256": "178124fb4138043d6547fd4cb3eea736d6255f1084ee40160da42b9a3ff3647c"
+      "path": "geometry/c0532888100-opus.json"
     },
     {
-      "path": "geometry/registration.json",
-      "expectedBytes": 4525,
-      "expectedSha256": "06b779f9cfca636e8770b9b7d1284ab4263e720b478e397967e574cf0dc39684"
+      "path": "geometry/registration.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 2712,
-      "expectedSha256": "f664b1c95f1851c759887d6847f58b4f21c75634a1baf61112fa43b33dfc7ea0"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "9f8d633ed486cfd498e215e5c07f649a8136250ab48a90d3093eb2d9f7a4a2c9"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 6953,
-      "expectedSha256": "e09cd6d6bf4f9a0804db8c30c9b998f4d4e0b37102dfc3594f4f35c99c157c01"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4916,
-      "expectedSha256": "e09217233c486be1bed48d9f4d5387cafd9452f4fdfbce8574ea87534b02c2fe"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "shape/bundle_description.txt",
-      "expectedBytes": 5105,
-      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
+      "path": "shape/bundle_description.txt"
     },
     {
-      "path": "shape/j5amalthea.xml",
-      "expectedBytes": 7253,
-      "expectedSha256": "28dc9407ec6bcc566522edbede2bc7255e3f5fd8ed7167df49a4aa227e9d7aed"
+      "path": "shape/j5amalthea.xml"
     },
     {
-      "path": "shape/pck00011.tpc",
-      "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "path": "shape/pck00011.tpc"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2343,
-      "expectedSha256": "6fe8cfa58f569fcc28ec5fb96dcc64093393ddb25753087304fb277739f8cbe6"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "amalthea-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 2424,
-      "expectedSha256": "1be489ba72361b411b6aff145ec081f6834c4c791c14c93de2fe45a6cf37359b",
       "origin": "Repository-pinned English Wikipedia lead summaries for 4 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

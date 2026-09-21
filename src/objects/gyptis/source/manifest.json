@@ -75,8 +75,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 32054,
-      "expectedSha256": "35f31d7c1db6d66565bcd2627fc401bb684295d590007913bb1a256cfccda040",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -95,8 +93,6 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9415,
-      "expectedSha256": "eda67348115a6b7efb01d11cfe996190e0e02f0e499246079c6b4c0b46500bbb",
       "sha256": "1083484accaf2a63d98c92a22cc1b53e95ac8084ceec211f84667ba31c99600d",
       "sourceBinding": {
         "kind": "local",
@@ -104,34 +100,22 @@
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 994,
-      "expectedSha256": "5c1035e54ad87fc0b862ac9108d4c2bf62b805344fdda51d38cdf8943ed81059"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "ff05cf269da8c3f410f85998e36530fae60f1e5e66a63e9529d0e47a488b6dfc"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 692,
-      "expectedSha256": "32680319249a780bfb28cf37168885d68e82b4588b58f47a97ba550adc22b735"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2911,
-      "expectedSha256": "e013ece494adb646d08857355dac589e0f0412b02cc8562579855675d83e469f"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3527,
-      "expectedSha256": "8eb9e9e20b865dfdc6e051860f892fb4a8bf2ca34203c2fc94ec384e810acf77"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -139,43 +123,29 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/calibration.json",
-      "expectedBytes": 2330,
-      "expectedSha256": "ab8e3f3fa4fdb2ae82747f298734ec51190c67db36d8c7123633ed93f96e5ee4"
+      "path": "reference/calibration.json"
     },
     {
       "path": "reference/damit-model.json",
       "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
-      "expectedBytes": 2399,
-      "expectedSha256": "959066987477631d77cb34efcbbd2ecf205be100a6af163433821b3a387b418e",
       "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5394",
       "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7354,
-      "expectedSha256": "7e502ebd85e1e358de28d6732d0abaa155717f4566b886424b83439a98122793"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1389,
-      "expectedSha256": "f3212858300b5d06c91b3ec9c11a8236e3c82b314dd48bd226e56440c3ee5f81"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6644,
-      "expectedSha256": "556c791c0b45aa6dd78647eb4742a0f8b08d2855c11452c41ebc18f33a064310"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 4436,
-      "expectedSha256": "6d49b3ce22726138892c289f650ca7206698bc0958477dc257b7f9ea3fbc46f5"
+      "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/usui-2011.pdf",

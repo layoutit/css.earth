@@ -418,8 +418,6 @@
       "origin": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif",
       "credit": "JAXA/Hayabusa2 ONC team; N. Hirata and colleagues",
       "license": "Public mission scientific data; retain attribution and source notices.",
-      "expectedBytes": 133068,
-      "expectedSha256": "6dc9082db4fa294c4ab52430af3d8ee45dbb4bf2d79540c6495be672e9159857",
       "consumers": [
         "navigation"
       ],
@@ -442,88 +440,56 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 12597,
-      "expectedSha256": "7baf5119816cc696e4a437bad9682f19cf297007badf729bee0fee1c6d6ff0bc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 3429,
-      "expectedSha256": "4447dee54993b63f26027f613ddc5de7bc52e45cc191299032919f3911f94284"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 442,
-      "expectedSha256": "380067b57307611ef8b42a49b8c7c61a6f26364d194f80a31a738e7e886f5817"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 338,
-      "expectedSha256": "556d6f72a71cff1c5303fa10ed0034be9023703d72078e6df250713124ee02a1"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 6269,
-      "expectedSha256": "b05137cc6a5b05156a439f843afaad4ed7c3e4d6dd0c1d9b1775d6ab2ff0dc2b"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3007,
-      "expectedSha256": "f8459547fa630651abcddddf187d276eda8d348567bdda9d73d7a498544def16"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/ReadMeSecond.txt",
-      "expectedBytes": 69620,
-      "expectedSha256": "832a58efd9fe25e62325f333d28264e632c2d24ee47de683081b603a85d19622"
+      "path": "reference/ReadMeSecond.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1652,
-      "expectedSha256": "2a0abdb0ed2eeb9434aea81c59763df94e2213f990016829b05bf866a1d99492"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/hyb2_onc_20180703_BOX-A_l3erm_v06.lblx",
-      "expectedBytes": 24429,
-      "expectedSha256": "aeff2bb61ba8fe981bb823c4eafe6fd5c70025d7df8eebb6e5a5d1f07e4c6fa9"
+      "path": "reference/hyb2_onc_20180703_BOX-A_l3erm_v06.lblx"
     },
     {
-      "path": "reference/hyb2_onc_20180710_BOX-A_l3em_v06.lblx",
-      "expectedBytes": 25515,
-      "expectedSha256": "278aa5d446a7661d3513b7ec5f22e194c949e4b0e738635dbc9020cad4e21dce"
+      "path": "reference/hyb2_onc_20180710_BOX-A_l3em_v06.lblx"
     },
     {
-      "path": "reference/mosaic_info.xlsx",
-      "expectedBytes": 16859,
-      "expectedSha256": "9b9bf04b3c375732414d64e9aa2a71ae42ccc6fbf8d879c15b356b53417addef"
+      "path": "reference/mosaic_info.xlsx"
     },
     {
-      "path": "reference/paper.pdf",
-      "expectedBytes": 1000264,
-      "expectedSha256": "d81f6379ea16479ca3cc15e31ff1632ba050c4cdf03733eebad0bc6819f360d1"
+      "path": "reference/paper.pdf"
     },
     {
-      "path": "reference/ryugu_global.lis",
-      "expectedBytes": 15631,
-      "expectedSha256": "5338a995e8ee3c2c76db1c7ce408143fba4fd6f9b642e9104626be6d969b76ac"
+      "path": "reference/ryugu_global.lis"
     },
     {
-      "path": "reference/ryugu_shape_spc_200k_v20200323.xml",
-      "expectedBytes": 4083,
-      "expectedSha256": "edaa06f9eb442a375b0bad4b56ee4afb3ebadd79e72ce092e1940cea3df76c70"
+      "path": "reference/ryugu_shape_spc_200k_v20200323.xml"
     },
     {
-      "path": "reference/ryugu_v10.tpc",
-      "expectedBytes": 11410,
-      "expectedSha256": "5c06e668bbc96fdd1c7a5e027543a5b8f8b70d75bc2dbb5e171b24389d0db10c"
+      "path": "reference/ryugu_v10.tpc"
     },
     {
       "id": "ryugu-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1303,
-      "expectedSha256": "fa840f5eb14c5ba53888feb846b14ec3afb17136a7f744d01b4823cb6a012ca4",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -540,8 +506,6 @@
     {
       "id": "ryugu-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1118,
-      "expectedSha256": "b37bda5223d6b4f4ebce0c8a076f4b2aff567a338e1b59307647dda9163b6319",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -558,8 +522,6 @@
     {
       "id": "ryugu-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 184,
-      "expectedSha256": "3f19b366469430b6c025f610804eadb79be3d19c548c2a7955c988d2ca2109e6",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -576,8 +538,6 @@
     {
       "id": "ryugu-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 1790,
-      "expectedSha256": "43e4385349a320ea5173863dace09c86ca7e0e60353e071146684bc29dc6681a",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
@@ -597,8 +557,6 @@
     {
       "id": "ryugu-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 478,
-      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -642,8 +600,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 5537,
-      "expectedSha256": "aac2448ebb2b0cc67a916639ec52bd9f005c260c536f70f8f0644b947b94b0e9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

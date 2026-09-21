@@ -230,8 +230,6 @@
     {
       "id": "uranus-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 8825,
-      "expectedSha256": "fdc8f335519035b8f9f8c52d713970063cda6c24cf0709f8d8bce4c50a04a30d",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -248,8 +246,6 @@
     {
       "id": "uranus-authored-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 584,
-      "expectedSha256": "54b9596114f002e5db616165cfa8ab878880777d38b4b2dd245faf97c2d38613",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -266,8 +262,6 @@
     {
       "id": "uranus-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 14003,
-      "expectedSha256": "181039f71ff4b2408c1b9af36536b77f87d46963cf506afe7a9918c3849e2d08",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -284,8 +278,6 @@
     {
       "id": "uranus-authored-presentation-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 3634,
-      "expectedSha256": "047c80f30a66d0c2f86c2ed792ffa980cd5d862d2446f7a796f340817eff7939",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "Rasmus Andersson and the Inter project",
       "license": "SIL Open Font License 1.1",
@@ -327,8 +319,6 @@
     {
       "id": "uranus-authored-observations",
       "path": "preparation/observations.json",
-      "expectedBytes": 13771,
-      "expectedSha256": "3ea5ccd0c688685a367602bc98806e2f6182ef9a9f3446c1410bcb64fed913af",
       "origin": "Checked source-observation preparation parameters, preserving the accepted scientific interpretation",
       "credit": "cssEarth and the institutional sources identified in the recipe",
       "license": "Project-authored specification; observation source terms retained",
@@ -345,8 +335,6 @@
     {
       "id": "uranus-authored-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1526,
-      "expectedSha256": "f08afccb89023e275a701c577a2e993b9ee9a172d1e5fbc5bc83d1e61e5cd96f",
       "origin": "Checked oblate tessellation and retained texture presentation conventions",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -363,8 +351,6 @@
     {
       "id": "uranus-authored-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 102,
-      "expectedSha256": "7c0be776127ae6e06cea91841e8c296c0741e9eefee9a8b252083d4f312b3820",
       "origin": "Checked retained scene composition, physical presentation and material residency policy",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -381,8 +367,6 @@
     {
       "id": "uranus-authored-charts",
       "path": "content/charts.json",
-      "expectedBytes": 3317,
-      "expectedSha256": "e601104a469ea0f3e5f36776145bfb303f6a60fc50e268db1215b97b96af71b1",
       "origin": "Checked source-dependent chart axes and source/provenance declarations",
       "credit": "cssEarth and NASA GSFC Planetary Spectrum Generator",
       "license": "Project-authored scientific specification with cited authority",
@@ -424,8 +408,6 @@
     {
       "id": "uranus-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2745,
-      "expectedSha256": "532c0dae4a5274c62ce06b4bbf3a31a17af2b0d4b9918576f8ca7dd0f35a52bc",
       "origin": "Checked source restoration and verification operations",
       "credit": "cssEarth with original source credits preserved per input",
       "license": "Project-authored acquisition specification",
@@ -442,8 +424,6 @@
     {
       "id": "uranus-authored-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2024,
-      "expectedSha256": "3030ec02f87eb10cbe02928a241c7ad3edfe7df1c22b66d63f8c30a97836f4f5",
       "origin": "Checked lighting bank parameters for the shared sphere lane",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -460,8 +440,6 @@
     {
       "id": "uranus-authored-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Project-authored sky and Sun composition for the shared lane",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -478,8 +456,6 @@
     {
       "id": "uranus-authored-solar-system",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 206,
-      "expectedSha256": "b36e10f85bc78cc1a1458f17fc815e7fbd9125ebfccb02b8388f437bb92af7c0",
       "origin": "Project-authored physical scene scale",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -499,14 +475,10 @@
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1334,
-      "expectedSha256": "18f2299be544ea2387c5e3c6c45575e9f486c2d44c1e377d251ded6aad778c07"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "presentation/overview.json",
-      "expectedBytes": 39,
-      "expectedSha256": "7f08503fc83aac60a0584ca706b5b6cb4868c9f20d2743cca87426f6772163d2",
       "purpose": "Repository-authored classification label consumed by the shared body overview during site preparation."
     }
   ]

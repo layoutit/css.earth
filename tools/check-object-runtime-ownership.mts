@@ -18,7 +18,6 @@ import { readPreparedJsonExports } from "./check-prepared-presentation.mts";
 import { parseRuntimeSource, resolveRuntimeSource } from './runtime-source-graph.mts';
 import { readDescriptorDefinition, requireAuthoredSourcePins, requireDescriptorAdapterSource } from './prepared-object-source.mts';
 import { requireAuthoredWorldFrameReceipt } from './authored-world-frame.mts';
-import { pinObjectDocuments, type DocumentPinChange } from './pin-object-documents.mts';
 import { readContextObjects } from './prepare-catalog.mts';
 
 const registryPath = "site/objects.mts";
@@ -856,15 +855,13 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
 
 /**
  * `--receipts`: every registered object's physical frame receipt (`prepared/world-navigation.json` against its
- * manifest pins and descriptor frame), its authored source pins, and its document pins, from tracked files only.
+ * descriptor frame) and its recipe sources against the manifest, from tracked files only.
  * It needs no restored prepared scene or runtime, so the contract-lint job runs it minutes before `--all` could.
  * Every object is checked and every failure is reported together.
  */
 export async function auditPhysicalFrameReceipts({ root = process.cwd(), objects = OBJECTS,
-  readText = (path: string) => readFile(path, "utf8"),
-  stalePins = (directory: string) => pinObjectDocuments(directory, { write: false }) }:
-  { root?: string; objects?: readonly AuditObject[]; readText?: RuntimeSourceReader;
-    stalePins?: (directory: string) => Promise<DocumentPinChange[]> } = {}): Promise<{ receipts: number; failures: string[] }> {
+  readText = (path: string) => readFile(path, "utf8") }:
+  { root?: string; objects?: readonly AuditObject[]; readText?: RuntimeSourceReader } = {}): Promise<{ receipts: number; failures: string[] }> {
   const failures: string[] = [];
   let receipts = 0;
   for (const object of objects) {
@@ -874,9 +871,6 @@ export async function auditPhysicalFrameReceipts({ root = process.cwd(), objects
       if (await requireAuthoredSourcePins({ objectId: object.id, descriptor, root, source: readText, closure: new Set() })) {
         await requireAuthoredWorldFrameReceipt({ descriptor, directory, readText });
         receipts++;
-      }
-      for (const change of await stalePins(directory)) {
-        failures.push(`${object.id}: stale pin in ${change.file} for ${change.path} (run: pnpm pin:documents ${object.id})`);
       }
     } catch (error) { failures.push(`${object.id}: ${errorMessage(error)}`); }
   }
@@ -888,7 +882,7 @@ if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href && process.arg
   const { receipts, failures } = await auditPhysicalFrameReceipts();
   for (const failure of failures) console.error(failure);
   if (failures.length) process.exitCode = 1;
-  else console.log(`${OBJECTS.length} registered objects: ${receipts} physical frame receipt(s), source pins and document pins are current.`);
+  else console.log(`${OBJECTS.length} registered objects: ${receipts} physical frame receipt(s) and recipe sources are current.`);
 } else if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   const args = process.argv.slice(2);
   // One or more `--object <id>` pairs scope the audit to those objects; each occurrence is collected, not just

@@ -96,115 +96,73 @@
         "ambient": 0.45,
         "diffuse": 0.55,
         "lensId": "shape"
-      },
-      "expectedBytes": 34114,
-      "expectedSha256": "18f0ae8cf9861cf8ce0e130d3752acc079b56a4cad70de9a8c9a43671868090c"
+      }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3289,
-      "expectedSha256": "8c86a24d8c991fa2560293fbc2cd19b837a989794e0f2113ae4fb885a66ae99f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1267,
-      "expectedSha256": "994149e61c84fcb9cb9d9dacbf0eb3d273bf4f684bc8c62c2d2b9c4159650b22"
+      "path": "measurements.json"
     },
     {
-      "path": "orbit/jpl-satellites.txt",
-      "expectedBytes": 1560,
-      "expectedSha256": "11e8f878ff43711088242490f91ab8d63d9828978fa97b88c75d68ebe2ded44b"
+      "path": "orbit/jpl-satellites.txt"
     },
     {
-      "path": "orbit/parent-heliocentric.txt",
-      "expectedBytes": 8527,
-      "expectedSha256": "dc7498210ab08f4123ae3a3ebcfcea42ebd8655b0819a187b39bbd31a168dcb8"
+      "path": "orbit/parent-heliocentric.txt"
     },
     {
-      "path": "orbit/published-parameters.json",
-      "expectedBytes": 3268,
-      "expectedSha256": "ccf972f3449a85b29229adf9561f4d30b74e9808eef7d7b0e354cce1aa170285"
+      "path": "orbit/published-parameters.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 580,
-      "expectedSha256": "d212a47395cc9548e567e2dcd751697ecef4f0ff759ba66b0f3e4d85d2d7384d"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 448,
-      "expectedSha256": "4eed6efe57055c0935b4c46ee5151c0f738afb3eb7a8d669ca17f0e205e1f7a7"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 708,
-      "expectedSha256": "df324a4d139759b3b04faef882d907cc88e27f7f2a763159f2588ad018bcb99f"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2107,
-      "expectedSha256": "3191dfd66224e5c3c98fdcac3c2e086b21a653d4e1f551a73fa09664e3f14a35"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 10503,
-      "expectedSha256": "d968f6029b8842e351e87fbb28dc0b3afbcf617ab278b6462db3da57e29196e3"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/a153591gamma.xml",
-      "expectedBytes": 29752,
-      "expectedSha256": "9db384c1662454c8aeb271dabac36524edab2e9c25a2c5df77d1d79353fef317"
+      "path": "reference/a153591gamma.xml"
     },
     {
-      "path": "reference/a153591gamma_unseen.tab",
-      "expectedBytes": 762,
-      "expectedSha256": "98a8961a0e8f145d36207f29514e3301364c0142792a1d9d3db72e57f5890b77"
+      "path": "reference/a153591gamma_unseen.tab"
     },
     {
-      "path": "reference/a153591gamma_unseen.xml",
-      "expectedBytes": 20999,
-      "expectedSha256": "21a08e99cf010d14d0f2c75eaa1677a90a2df59ee501d9794840bd87298fb1c4"
+      "path": "reference/a153591gamma_unseen.xml"
     },
     {
-      "path": "reference/a153591pole.tab",
-      "expectedBytes": 84,
-      "expectedSha256": "351db44d8b38b61f83d3331af12ef539d4b46f1c1cefb2c56f5071d505356776"
+      "path": "reference/a153591pole.tab"
     },
     {
-      "path": "reference/a153591pole.xml",
-      "expectedBytes": 22479,
-      "expectedSha256": "3704ead299350319f5a2ff41cb7bb7f7ecbe828521d9387bf88edb59fe0b1eb3"
+      "path": "reference/a153591pole.xml"
     },
     {
-      "path": "reference/a153591rot.tab",
-      "expectedBytes": 114,
-      "expectedSha256": "f0b3b3ebd457a001a4de0019a440c50777672bcc9389f59aa8930ae98c886cd8"
+      "path": "reference/a153591rot.tab"
     },
     {
-      "path": "reference/a153591rot.xml",
-      "expectedBytes": 21828,
-      "expectedSha256": "a41a80203fe71a9dca9ee80c87d989892b1b64eebe4e63bff644998c85512239"
+      "path": "reference/a153591rot.xml"
     },
     {
-      "path": "reference/archive-readme.txt",
-      "expectedBytes": 3941,
-      "expectedSha256": "cf69ba80b23c703c3e56efc465c4ca80b37abdbbdc1f7f01529301e26a0d5bdb"
+      "path": "reference/archive-readme.txt"
     },
     {
-      "path": "validation/epoch-state.json",
-      "expectedBytes": 4490,
-      "expectedSha256": "aa9b0b787e98a840d9aa85b7933e97bb2b695ddbc164b6956924ea5cc33df386"
+      "path": "validation/epoch-state.json"
     }
   ]
 }

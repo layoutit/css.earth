@@ -18,7 +18,9 @@ export function identity(value: unknown) {
 }
 export function sourceEntry(value: unknown) {
   const input = requireRecord(value);
-  return Object.assign({}, input, {path: requireString(input.path), expectedBytes: requireFiniteNumber(input.expectedBytes), expectedSha256: requireString(input.expectedSha256)},
+  // Only bytes git does not hold are pinned; an authored file is identified from disk when the record is written.
+  return Object.assign({}, input, {path: requireString(input.path)},
+    input.expectedSha256 === undefined ? {} : {expectedBytes: requireFiniteNumber(input.expectedBytes), expectedSha256: requireString(input.expectedSha256)},
     input.capture === undefined ? {} : { capture: parseCapture(input.capture) },
     input.sourceBinding === undefined ? {} : { sourceBinding: parseSourceBinding(input.sourceBinding) });
 }

@@ -103,67 +103,43 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3099,
-      "expectedSha256": "eea5678f443c55b990569dfc831ffb1006cf710da45273453a2e02df7ae850bc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 2110,
-      "expectedSha256": "025485b424984c1356fe2928be1020b07641815684eece588b3ed005839edd5e"
+      "path": "measurements.json"
     },
     {
-      "path": "orbit/menoetius-epoch.txt",
-      "expectedBytes": 6811,
-      "expectedSha256": "f6469c4b2b71cf87e87f1965c8dccf57960669e0843fae1928f41a66d1b38b9b"
+      "path": "orbit/menoetius-epoch.txt"
     },
     {
-      "path": "orbit/menoetius-heliocentric-check.txt",
-      "expectedBytes": 6787,
-      "expectedSha256": "6f7fbf39c867990ad2ef04f9c632fe9c0a031467b6e48d937143ffc088469768"
+      "path": "orbit/menoetius-heliocentric-check.txt"
     },
     {
-      "path": "orbit/patroclus-epoch.txt",
-      "expectedBytes": 6801,
-      "expectedSha256": "427924d795a0887115acb4ee033f42f7a2c254d63a9a2d6abe51b421c9132a97"
+      "path": "orbit/patroclus-epoch.txt"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 446,
-      "expectedSha256": "e10276892850f9c3e4aadb03067cd8edd5821188effa17a18b58d9e2638a364b"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 412,
-      "expectedSha256": "d41025c604456a98b4a31b658567dacdc4c4488a0b885940a83094c8c39389f2"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2403,
-      "expectedSha256": "fc8a4c84cbc3720c7cd7819774526b8378733677c704235b0d9cde04b2538f23"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5247,
-      "expectedSha256": "c5fb8134eaf6d74a637887e5a99b0e94f409fff4ab7c85d56d2e36cffa3c55c0"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "validation/epoch-state.json",
-      "expectedBytes": 3570,
-      "expectedSha256": "73f50988226fe571e10c906562f7016634066a0012e331610e5f058d063f383b"
+      "path": "validation/epoch-state.json"
     }
   ],
   "generatedIntermediates": [
@@ -189,9 +165,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 76616,
-      "expectedSha256": "bd51b681a42cc836fb5957daccffa55940b65aa2bd78028210fa82c9f6156d62"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }
