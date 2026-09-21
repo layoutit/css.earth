@@ -719,6 +719,24 @@ eligible component. Requested observation bounds or measured-resolution threshol
 unresolved when the descriptor does not carry those facts. Criteria that do not apply to the
 selected family are not inherited from the legacy query shape.
 
+Planetary depth products use the same F16 descriptor instead of a separate workflow. Their axes
+name delay, geometric depth, pressure, altitude, radius, projected coordinates, body-fixed
+coordinates or path distance. Every admitted component separately retains its supported domain,
+sampling, resolution evidence, uncertainty, measurement operator and inference method. A FITS
+interval is sampling only; it cannot satisfy a requested resolution maximum. Derived depth
+conversion requires a named method and explicit parameters. Published reconstructions and model
+ensembles require their inference evidence and source members.
+
+Output availability follows those retained facts. Native export preserves every qualified product.
+Slices require a grid, profiles require an explicit depth-like axis, and coverage views require the
+exact tracks, rays, stations, channels or profiles. Delay and pressure coordinates cannot be
+attached to a body as geometric depth. Sparse rays cannot become a measured volume. Gravity and
+magnetic fields retain non-unique localization; a posterior model may be rendered only with an
+inference label. The generic FITS profile validates one- to three-dimensional linear grids through
+Astropy, but archive adapters must supply the source-backed semantic qualification. Local user
+declarations cannot admit a planetary product. This architecture change includes no planetary
+dataset.
+
 Archive product terms retain the source label and map against the dated IVOA product-type
 vocabulary. This proposes a family route; product bytes and metadata must still confirm the
 handler profile. Preliminary and unknown vocabulary terms remain marked as such.
