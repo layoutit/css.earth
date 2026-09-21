@@ -10,7 +10,7 @@
 
 - The VLT/MUSE views use original July 2019 measured maps from King et al. The [source interpretation](source/muse/INTERPRETATION.md) defines units, coordinate evidence, first-valid-night coverage, registration limits and residual night differences.
 
-- **Volcanic heat:** Table A1 of [Davies et al. (2024), Planetary Science Journal 5, 121](https://doi.org/10.3847/PSJ/ad4346) (CC BY 4.0), in its [machine-readable form](https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt): 343 thermal sources ranked by power, with latitude, west longitude and power in GW. Per the table notes it combines the estimates of Veeder et al. (2015), Keck and Gemini detections, and new Juno JIRAM detections up to Juno's orbit PJ49; the paper's Figure 1 caption calls it nearly 30 years of observations. The symbol classes, colors and sizes are the paper's Figure 1, drawn over the Monochrome mosaic as the figure draws them over a grayscale Io.
+- **Volcanic heat:** our own map of Io's night side at 4.8 µm, reduced from Juno JIRAM imager frames ([JNO-J-JIRAM-3-RDR-V1.0](https://atmos.nmsu.edu/PDS/data/jnojir_2041/CATALOG/JNO_JIRAM_RDR_DS.CAT), PDS Atmospheres Node) with NAIF Juno SPICE kernels. It follows [Mura et al. (2024)](https://doi.org/10.3389/fspas.2024.1369472) (CC BY 4.0), which made the same maps: the same orbits (41, 43, 47 and 49, their Table 1), SPICE geometry refined to the sunlit limb with a Lambertian disc, frames stacked per orbit, and their Figure 2 color scale, linear from 0 to 0.15 W sr⁻¹ m⁻². They say frames before orbit 37 are saturated and fit only for locating hot spots, so none are used. Their maps are published only as figures, so the numbers here are our own reduction. [The recipe](source/science/jiram/recipe.json) pins every frame; [the receipt](source/science/jiram/receipt.json) records each frame's fit.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
@@ -58,12 +58,15 @@ The earlier map-edge claim was incorrect for Io: it confused the native GeoTIFF 
 
 - Focused checks are defined in the [unit tests](../../../tests/objects/unit/io).
 
-Volcanic heat, September 2026:
+Volcanic heat, 21 September 2026:
 
-- **Reading the table.** `tools/objects/terrestrial-layers/mrt-point-table.mts` checks the table's own column description (byte ranges, formats, units and wording, including "Degrees West longitude") against the recipe, then reads 343 rows in rank order ([unit tests](../../../tools/objects/terrestrial-layers/mrt-point-table.test.mts)).
-- **Handedness.** West longitudes become east as 360° − W. Loki Patera (308.4°W), Pele (255.6°W), Janus Patera (39.0°W) and Pillan (241.5°W) then land within 2° of their [IAU Gazetteer](https://planetarynames.wr.usgs.gov/Page/IO/target) east longitudes, and nothing is drawn at the mirrored longitudes ([test](../../../tests/objects/unit/io/volcanic-heat.test.mts)).
-- **Classes.** The legend's five classes are <1, 1 to 10, 10 to 100, 100 to 1000 and 1000 to 10,000 GW. A source exactly on a boundary goes to the higher class: Figure 1 shows 7 blue dots, the 7 sources under 1 GW, and Michabo Patera at exactly 1.0 GW is not among them. The table gives 7, 76, 150, 101 and 9 sources per class; we counted 7, 75, 138, 97 and 8 separate symbols of each color in the figure, where touching symbols merge.
-- **In the browser.** [Volcanic heat](evidence/volcanic-heat/volcanic-heat.png) at the default camera, headless Chromium 148, 1440 × 900, DPR 1, Shadows off; the page loaded the lens's own surface and pole images with no console errors.
+- **Frames.** The M-band frames of the four orbits in Mura et al. (2024), Table 1: 59 frames, which match their passes in time and distance. The orbit 43, 47 and 49 frames name no target in their labels; we found them by projecting Io through each frame's SPICE camera.
+- **Which half is M.** A 256-line frame holds the L band in its first 128 lines and the M band in its last 128 (the imager's two filters, Mura et al. 2024, Section 2.1). Sunlit Io, divided by the cosine of incidence, reads 0.023 to 0.030 W sr⁻¹ m⁻² in the first half and 0.014 in M-band-only frames of nearby dates, the ratio of sunlight at 3.3–3.6 µm to 4.5–5.0 µm. The kernels' L-band frame also places the first-half disc within 13 lines.
+- **Pointing.** The fitted offsets are constant within an orbit: about 5 lines for orbits 41 and 43, and about 530 lines (7°) for orbits 47 and 49, after JIRAM stopped using its despinning mirror from orbit 44 (Mura et al. 2024, Section 2.1). Good fits sit within 4 lines of their orbit's offset; false fits, on nearly empty frames, sit 13 or more away. Frames more than 8 lines from their orbit's offset are rejected.
+- **Accepted.** 34 frames, at 13.5 to 27 km per pixel, median correlation 0.92. Rejected: 8 with too little sunlit disc, 7 off their orbit's offset, 7 below a correlation of 0.5, 3 with the best offset on the search edge. [One registered frame per orbit](evidence/volcanic-heat/registration.png) shows the fitted limb (red) and terminator (blue).
+- **Against the paper's figure.** [Our four per-orbit maps under Figure 2A](evidence/volcanic-heat/figure-2.png), on its axes and scale: the hot spots fall in the same places at similar brightness.
+- **Against the paper's numbers.** Table 3 of Mura et al. (2024) gives each hot spot's total M-band output. Integrating our radiance within 2.5° of each, above the local background, gives a median ratio of 1.06 (middle half 0.72 to 1.32) over 94 measurements in the per-orbit maps, and 0.83 (0.46 to 1.11) for the 46 hot spots fully inside the merged map, where spots can be stitched from different orbits ([test](../../../tests/objects/unit/io/volcanic-heat.test.mts), [table extract](source/science/mura-2024/table3-m-band.json)).
+- **Against an independent catalogue.** Of 24 local peaks above 0.03 W sr⁻¹ m⁻², 22 lie within 3° of a hot spot in Table A1 of [Davies et al. (2024)](https://doi.org/10.3847/PSJ/ad4346) (Galileo, Keck, Gemini and JIRAM detections); with longitudes mirrored, 4 do. The unmatched peaks are Monan Patera, Volund B and Kotar Patera in Mura et al.'s Table 2, which Davies et al. place 3 to 5° away.
 
 Edge meridian, 13 September 2026: the Normal and Enhanced GeoTIFFs span 360° of longitude, and their recipe now declares `wrapLongitude`. Before, the 2× maps kept one missing column at 180°, filled by the gray coverage grid. A [matched crop](evidence/wrap-longitude/crop.json) of the Normal 2× map, taken from main's published file and from this version, has 33 of 36,864 pixels over the Pixelmatch threshold of 0.1 ([report](evidence/wrap-longitude/change.json)). The largest change is 36 levels at the 180° column; no other column changes by more than 7, which is WebP re-encoding. The [comparison](evidence/wrap-longitude/comparison.png) shows the map pixels and this version in the browser.
 
@@ -86,9 +89,10 @@ Feature notes: 44 of the labelled names carry a caption note, the lead summary o
 
 - The scene is a mean-radius sphere, not a topographic shape model.
 
-- **Volcanic heat symbols are not the size of the hot spots.** Most hot spots are far smaller than one symbol. The sizes are the paper's display classes, kept as fixed angles on the sphere, so on the flat map preview they widen toward the poles.
-- **Volcanic heat layering.** Where symbols overlap, later rows in the table (the stronger sources) are drawn on top. The paper does not state its drawing order, and in at least one place (beside Tvashtar Paterae) its figure draws a 10 to 100 GW symbol over a 100 to 1000 GW one.
-- **Volcanic heat is a composite of different epochs.** The table combines nearly 30 years of observations; a source's power is the paper's estimate, not a single-date measurement.
+- **Volcanic heat covers 22% of Io.** The four orbits saw Io from the north, and only the night side is kept. Nothing south of 9° S, and no longitude between 354° and 166° E, was seen at night; that includes Loki Patera and Pele. Those cells show the gray grid. Mura et al. note the same poor southern coverage.
+- **Night side only.** Mura et al.'s maps also keep the day side and remove reflected sunlight afterwards with their photometric model. We do not model sunlight, so the day side is left out.
+- **Peaks are lower than the paper's.** Mura et al. stack frames with a super-resolution method and correct the smear; we take a median of registered frames. The total output of each hot spot agrees (above), but a hot spot's light is spread over more cells, so its peak is lower, most for small spots near the limb. A hot spot is usually far smaller than one pixel (13.5 to 27 km).
+- **Volcanic heat mixes dates.** Each cell comes from the orbit that saw it sharpest, between April 2022 and March 2023, and hot spots change: Mura et al. find single hot spots varying by about 40% between these orbits.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
@@ -159,23 +163,6 @@ These source discrepancies and the explicit `Pb/Pby`, `Pw/Pbw`, `T/Tb` aliases a
 ## Visible spectral surface views
 
 Every conversion is offline; the scene geometry remains unchanged.
-
-</details>
-
-<details>
-<summary>Volcanic heat symbols</summary>
-
-Each source is a circle on the sphere centred on its table position. The circle's angular diameter is the Figure 1 symbol width converted at the map's equator, where the Mollweide scale is 2033 pixels for 360° of longitude (5.647 pixels per degree) in the published high-resolution figure (`psjad4346f1_hr.jpg`, 2166 × 1219):
-
-| Class | Symbol width in the figure | On the sphere | Color |
-| --- | --- | --- | --- |
-| <1 GW | 17 px | 3.01° | `#2a00f7` |
-| 1 to 10 GW | 23 px | 4.07° | `#84ff2b` |
-| 10 to 100 GW | 25 px | 4.43° | `#cb181b` |
-| 100 to 1000 GW | 27 px and a 3 px black ring | 4.78° and 0.53° | `#e3b229` |
-| 1000 to 10,000 GW | 40 px and a 3 px black ring | 7.08° and 0.53° | `#f3ff31` |
-
-Widths are the median bounding-box width of the symbols of each color that stand alone; colors are the median centre pixel of those symbols; the ring is the dark run beyond the fill in horizontal profiles, and its color the median of those pixels (`#010101`). Pixels outside every symbol show the Monochrome lens at the same size. On Io, 1° is about 31.8 km.
 
 </details>
 

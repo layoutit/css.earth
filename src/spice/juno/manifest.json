@@ -168,6 +168,246 @@
           }
         ]
       }
+    },
+    {
+      "id": "juno-juno-jiram-v02-ti",
+      "path": "ik/juno_jiram_v02.ti",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/ik/juno_jiram_v02.ti",
+      "credit": "NASA/JPL NAIF; Juno project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Juno project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire juno; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 18573,
+      "expectedSha256": "814c98849618c1f497960d2babf91152bee02de47dec06981fb90d6d8985185a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/juno/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "juno-juno-sc-rec-220403-220409-v01-bc",
+      "path": "ck/juno_sc_rec_220403_220409_v01.bc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/ck/juno_sc_rec_220403_220409_v01.bc",
+      "credit": "NASA/JPL NAIF; Juno project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Juno project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire juno; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 38771712,
+      "expectedSha256": "b3388586ed14ada83ec28db7834abe131d8d412993cfe5e7f924bcc674038524",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/juno/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "juno-spk-rec-220319-220502-220510-bsp",
+      "path": "spk/spk_rec_220319_220502_220510.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/spk/spk_rec_220319_220502_220510.bsp",
+      "credit": "NASA/JPL NAIF; Juno project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Juno project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire juno; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 1825792,
+      "expectedSha256": "43be7235fcd178392dc94ff857e47c198e96191e57223fde7cd137e0e3155bc2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/juno/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "juno-jup363-bsp",
+      "path": "spk/jup363.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/spk/jup363.bsp",
+      "credit": "NASA/JPL NAIF; Juno project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Juno project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire juno; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 54829056,
+      "expectedSha256": "9f09603885e191ad5f4a0edcd6334116df616e125610a38a3891bdfb6ac27dad",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/juno/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "juno-juno-sc-rec-220703-220709-v01-bc",
+      "path": "ck/juno_sc_rec_220703_220709_v01.bc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/ck/juno_sc_rec_220703_220709_v01.bc",
+      "credit": "NASA/JPL NAIF; Juno project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Juno project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire juno; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 38771712,
+      "expectedSha256": "77072f25ab6f17e9b3a9841a7742d1d7a867e0eb34eeb5a8f8c5a723f6bc79a6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/juno/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "juno-juno-sc-rec-221210-221215-v01-bc",
+      "path": "ck/juno_sc_rec_221210_221215_v01.bc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/ck/juno_sc_rec_221210_221215_v01.bc",
+      "credit": "NASA/JPL NAIF; Juno project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Juno project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire juno; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 23404544,
+      "expectedSha256": "00998ffc7e9e38da39bb81c7b67c14c8aa7cb0e80e584adb168af6f7e7968668",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/juno/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "juno-juno-sc-rec-230226-230304-v01-bc",
+      "path": "ck/juno_sc_rec_230226_230304_v01.bc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/ck/juno_sc_rec_230226_230304_v01.bc",
+      "credit": "NASA/JPL NAIF; Juno project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Juno project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire juno; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 38771712,
+      "expectedSha256": "63f0737e7c1826a2b8baff17151ef32f653b002879635a8d8686bac8cd5ad9fe",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/juno/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "juno-spk-rec-220614-220728-220805-bsp",
+      "path": "spk/spk_rec_220614_220728_220805.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/spk/spk_rec_220614_220728_220805.bsp",
+      "credit": "NASA/JPL NAIF; Juno project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Juno project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire juno; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 1696768,
+      "expectedSha256": "9dcc5a463d34de819f598641707a47c72d0b93926296ffbd3556de6faa563fd5",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/juno/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "juno-spk-rec-221127-230104-230111-bsp",
+      "path": "spk/spk_rec_221127_230104_230111.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/spk/spk_rec_221127_230104_230111.bsp",
+      "credit": "NASA/JPL NAIF; Juno project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Juno project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire juno; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 2417664,
+      "expectedSha256": "00a12656ab7b3aadb7ccf0390aae1d5fc8ba800f75734c0d299490299f855ae8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/juno/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "juno-spk-rec-230211-230321-230327-bsp",
+      "path": "spk/spk_rec_230211_230321_230327.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/JUNO/kernels/spk/spk_rec_230211_230321_230327.bsp",
+      "credit": "NASA/JPL NAIF; Juno project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Juno project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire juno; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 2223104,
+      "expectedSha256": "22ab39db2294b7f2e7dc15121ed759b12d1e256ad373a3560c6a1e0821119944",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/juno/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],

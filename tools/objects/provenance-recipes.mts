@@ -80,7 +80,6 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
         ? 'Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.'
         : 'Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.', {
         inputRoles: frames ? {} : { [text(plan.source)]: { role: 'appearance', evidence: `Raster source at /surfaces/${index}/source.` } },
-        ...(maybeRecord(plan.science)?.monochromeBase !== undefined ? { parents: [text(record(plan.science).monochromeBase)] } : {}),
         ...(maybeRecord(plan.science)?.kind === 'glb-base-color' ? { observationAttribution: 'none' as const } : {}),
         urls: outputUrls, interpretation: { falseColor: plan.falseColor,
           ...(maybeRecord(plan.science)?.kind === 'glb-base-color' ? { kind: 'illustrative-model', resolvedSurfaceObservation: false } : {}),
