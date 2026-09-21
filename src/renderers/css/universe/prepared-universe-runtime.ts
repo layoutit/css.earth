@@ -43,7 +43,7 @@ type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource
 type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
   clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationOpacities, plannerSource, distantNavigation }: {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationOpacities, plannerSource, distantNavigation, lensVisibility = DEFAULT_POINT_VISIBILITY }: {
   backgroundPointManifest?: string; backgroundPointCloud?: string; backgroundPointSha256?: string;
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;
   /** The same prepared context as files the planner worker reads itself. */
@@ -53,6 +53,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   annotationPriorities?: Readonly<Record<string, number>>;
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
   distantNavigation?: { readonly afterDistanceM: number; readonly nonNavigableIds: readonly string[] };
+  /** Projected size at which any lens bank (nebula, cluster, galaxy or accompanying cloud) is fetched and drawn.
+   * It may only raise the prepared thresholds: a small cloud is decoration, not worth its lens payload. */
+  lensVisibility?: PreparedPointVisibility;
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
   environmentLinks?: Readonly<Record<string, string>>;
   imageLayers?: readonly PreparedImageLayerBank[];
@@ -201,7 +204,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const lensPendingSelection: (string | undefined)[] = volumeLensBanks.map(() => undefined);
       const lensPendingStarsVisible: (boolean | undefined)[] = volumeLensBanks.map(() => undefined);
       const lensFraming: { frame: DensityVolumeFrame; radiusUnits: number; visibility: PreparedPointVisibility }[] =
-        volumeLensBanks.map(bank => ({ frame: bank.frame, radiusUnits: volumeFramingRadiusUnits(bank.frame), visibility: DEFAULT_POINT_VISIBILITY }));
+        volumeLensBanks.map(bank => ({ frame: bank.frame, radiusUnits: volumeFramingRadiusUnits(bank.frame), visibility: lensVisibility }));
       const publishedBankOpacity = declaredImageLayers.map(() => NaN), publishedLensOpacity = volumeLensBanks.map(() => NaN);
       const lensResidentNodes = volumeLensBanks.map(() => 0), lensVisible = volumeLensBanks.map(() => false);
       const lensLastUsed = volumeLensBanks.map(() => 0), lensSubscribers = volumeLensBanks.map(() => 0);
@@ -323,7 +326,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           } catch (error) { mounted.destroy(); throw error; }
           if (destroyed || generation !== lensGeneration[index]) { mounted.destroy(); return; }
           lensBanks[index] = mounted; lensPayload[index] = bank.payload;
-          lensFraming[index] = { frame, radiusUnits: bank.payload.framingRadiusUnits, visibility: bank.payload.pointVisibility! };
+          const prepared = bank.payload.pointVisibility!;
+          lensFraming[index] = { frame, radiusUnits: bank.payload.framingRadiusUnits, visibility: {
+            hiddenBelowRadiusPixels: Math.max(prepared.hiddenBelowRadiusPixels, lensVisibility.hiddenBelowRadiusPixels),
+            fullAboveRadiusPixels: Math.max(prepared.fullAboveRadiusPixels, lensVisibility.fullAboveRadiusPixels) } };
           lensEnabled[index] = lensExplicitEnabled[index] ?? bank.payload.attachedTo === undefined;
           lensLastUsed[index] = ++lensUseClock; publishedLensOpacity[index] = NaN;
           updateLensWeight(index); trimWarmLensResidency();
