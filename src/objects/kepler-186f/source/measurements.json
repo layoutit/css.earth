@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-186f",
+  "radiusKm": 7462.4,
+  "radiusSource": "Radius 1.17 (+0.08) Earth radii from Torres et al. 2015 (ApJ 800, 99 (2015); arXiv:1501.01101), at 6378.137 km per Earth radius. No mass is measured, so no gravitational parameter is adopted. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 129.9441,
+  "orbitalPeriodSource": "Torres et al. 2015 (ApJ 800, 99 (2015); arXiv:1501.01101), Table 8, column KOI-0571.05: 129.9441 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Kepler-186 f is measured; only its size, mass and orbit are."
+  }
+}
