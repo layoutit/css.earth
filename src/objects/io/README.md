@@ -10,6 +10,8 @@
 
 - The VLT/MUSE views use original July 2019 measured maps from King et al. The [source interpretation](source/muse/INTERPRETATION.md) defines units, coordinate evidence, first-valid-night coverage, registration limits and residual night differences.
 
+- **Volcanic heat:** our own map of Io's night side at 4.8 µm, reduced from Juno JIRAM imager frames ([JNO-J-JIRAM-3-RDR-V1.0](https://atmos.nmsu.edu/PDS/data/jnojir_2041/CATALOG/JNO_JIRAM_RDR_DS.CAT), PDS Atmospheres Node) with NAIF Juno SPICE kernels. It follows [Mura et al. (2024)](https://doi.org/10.3389/fspas.2024.1369472) (CC BY 4.0), which made the same maps: the same orbits (41, 43, 47 and 49, their Table 1), SPICE geometry refined to the sunlit limb with a Lambertian disc, frames stacked per orbit, and their Figure 2 color scale, linear from 0 to 0.15 W sr⁻¹ m⁻². They say frames before orbit 37 are saturated and fit only for locating hot spots, so none are used. Their maps are published only as figures, so the numbers here are our own reduction. [The recipe](source/science/jiram/recipe.json) pins every frame; [the receipt](source/science/jiram/receipt.json) records each frame's fit.
+
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
 ## Evidence
@@ -56,6 +58,16 @@ The earlier map-edge claim was incorrect for Io: it confused the native GeoTIFF 
 
 - Focused checks are defined in the [unit tests](../../../tests/objects/unit/io).
 
+Volcanic heat, 21 September 2026:
+
+- **Frames.** The M-band frames of the four orbits in Mura et al. (2024), Table 1: 59 frames, which match their passes in time and distance. The orbit 43, 47 and 49 frames name no target in their labels; we found them by projecting Io through each frame's SPICE camera.
+- **Which half is M.** A 256-line frame holds the L band in its first 128 lines and the M band in its last 128 (the imager's two filters, Mura et al. 2024, Section 2.1). Sunlit Io, divided by the cosine of incidence, reads 0.023 to 0.030 W sr⁻¹ m⁻² in the first half and 0.014 in M-band-only frames of nearby dates, the ratio of sunlight at 3.3–3.6 µm to 4.5–5.0 µm. The kernels' L-band frame also places the first-half disc within 13 lines.
+- **Pointing.** The fitted offsets are constant within an orbit: about 5 lines for orbits 41 and 43, and about 530 lines (7°) for orbits 47 and 49, after JIRAM stopped using its despinning mirror from orbit 44 (Mura et al. 2024, Section 2.1). Good fits sit within 4 lines of their orbit's offset; false fits, on nearly empty frames, sit 13 or more away. Frames more than 8 lines from their orbit's offset are rejected.
+- **Accepted.** 34 frames, at 13.5 to 27 km per pixel, median correlation 0.92. Rejected: 8 with too little sunlit disc, 7 off their orbit's offset, 7 below a correlation of 0.5, 3 with the best offset on the search edge. [One registered frame per orbit](evidence/volcanic-heat/registration.png) shows the fitted limb (red) and terminator (blue).
+- **Against the paper's figure.** [Our four per-orbit maps under Figure 2A](evidence/volcanic-heat/figure-2.png), on its axes and scale: the hot spots fall in the same places at similar brightness.
+- **Against the paper's numbers.** Table 3 of Mura et al. (2024) gives each hot spot's total M-band output. Integrating our radiance within 2.5° of each, above the local background, gives a median ratio of 1.06 (middle half 0.72 to 1.32) over 94 measurements in the per-orbit maps, and 0.83 (0.46 to 1.11) for the 46 hot spots fully inside the merged map, where spots can be stitched from different orbits ([test](../../../tests/objects/unit/io/volcanic-heat.test.mts), [table extract](source/science/mura-2024/table3-m-band.json)).
+- **Against an independent catalogue.** Of 24 local peaks above 0.03 W sr⁻¹ m⁻², 22 lie within 3° of a hot spot in Table A1 of [Davies et al. (2024)](https://doi.org/10.3847/PSJ/ad4346) (Galileo, Keck, Gemini and JIRAM detections); with longitudes mirrored, 4 do. The unmatched peaks are Monan Patera, Volund B and Kotar Patera in Mura et al.'s Table 2, which Davies et al. place 3 to 5° away.
+
 Edge meridian, 13 September 2026: the Normal and Enhanced GeoTIFFs span 360° of longitude, and their recipe now declares `wrapLongitude`. Before, the 2× maps kept one missing column at 180°, filled by the gray coverage grid. A [matched crop](evidence/wrap-longitude/crop.json) of the Normal 2× map, taken from main's published file and from this version, has 33 of 36,864 pixels over the Pixelmatch threshold of 0.1 ([report](evidence/wrap-longitude/change.json)). The largest change is 36 levels at the 180° column; no other column changes by more than 7, which is WebP re-encoding. The [comparison](evidence/wrap-longitude/comparison.png) shows the map pixels and this version in the browser.
 
 ## Known problems
@@ -76,6 +88,11 @@ Feature notes: 44 of the labelled names carry a caption note, the lead summary o
 - **Geology source audit:** The separate label-point layer differs from final polygon classifications at 43 of 1,498 comparable points.
 
 - The scene is a mean-radius sphere, not a topographic shape model.
+
+- **Volcanic heat covers 22% of Io.** The four orbits saw Io from the north, and only the night side is kept. Nothing south of 9° S, and no longitude between 354° and 166° E, was seen at night; that includes Loki Patera and Pele. Those cells show the gray grid. Mura et al. note the same poor southern coverage.
+- **Night side only.** Mura et al.'s maps also keep the day side and remove reflected sunlight afterwards with their photometric model. We do not model sunlight, so the day side is left out.
+- **Peaks are lower than the paper's.** Mura et al. stack frames with a super-resolution method and correct the smear; we take a median of registered frames. The total output of each hot spot agrees (above), but a hot spot's light is spread over more cells, so its peak is lower, most for small spots near the limb. A hot spot is usually far smaller than one pixel (13.5 to 27 km).
+- **Volcanic heat mixes dates.** Each cell comes from the orbit that saw it sharpest, between April 2022 and March 2023, and hot spots change: Mura et al. find single hot spots varying by about 40% between these orbits.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 

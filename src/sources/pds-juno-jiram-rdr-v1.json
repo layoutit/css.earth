@@ -1,0 +1,40 @@
+{
+  "id": "pds-juno-jiram-rdr-v1",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Juno Jupiter JIRAM reduced data record",
+  "version": "1.0",
+  "identifiers": [
+    {
+      "type": "PDS3 data set",
+      "value": "JNO-J-JIRAM-3-RDR-V1.0"
+    }
+  ],
+  "creators": [
+    "A. Adriani",
+    "R. Noschese"
+  ],
+  "publisher": "NASA Planetary Data System, Atmospheres Node",
+  "publicationDate": "2017",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://atmos.nmsu.edu/PDS/data/",
+      "label": "PDS Atmospheres Node, volumes jnojir_1001 onward"
+    },
+    {
+      "role": "original",
+      "url": "https://atmos.nmsu.edu/PDS/data/jnojir_2041/CATALOG/JNO_JIRAM_RDR_DS.CAT",
+      "label": "Data set catalogue"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://atmos.nmsu.edu/PDS/data/jnojir_2041/CATALOG/JNO_JIRAM_RDR_DS.CAT",
+      "checkedOn": "2026-09-21",
+      "locator": "DATA_SET_ID, DATA_SET_NAME and PRODUCER_FULL_NAME"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

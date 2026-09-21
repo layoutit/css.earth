@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "13ec46061de8fc501648a822082dec3d06a7a0444b37553405b08e6776cc0f47"
+    "sha256": "2d0d131bedc61b46b1821014ec603f2e1eb56bd191fe72f9967d7ccdbb524b88"
   },
   "id": "ceres",
   "properties": {
@@ -71,6 +71,16 @@
             },
             {
               "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "clay-band",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ammonium-band",
               "source": "content",
               "material": "lighting"
             }
@@ -142,7 +152,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e00c9cf658846e99e61491f56fbee814866f360e95ef3a5c3b3a5c47e9f53212"
+        "sha256": "ba1c0c5a72da1b098ac4ebeaf0aeaa3978894db813d6389714a062fbfe86c8b9"
       }
     },
     "catalog": {
