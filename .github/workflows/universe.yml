@@ -533,6 +533,7 @@ jobs:
               ;;
             world)
               # The galaxy writer finishes before world/provenance readers in this workspace.
+              node tools/restore-source-inputs.mts --repository-volumes
               pnpm test:galaxy-field
               pnpm test:ci-preparation:world
               ;;

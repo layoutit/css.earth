@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import ts from 'typescript';
 import { sanitizeVolumeProvenance } from './volume-provenance.ts';
-import { installedDeliveryMatchesRecipe } from './delivery-identity.ts';
+import { applicationDeliveryKind, installedDeliveryMatchesRecipe } from './delivery-identity.ts';
 
 // Bundled for execution (test-preparation.mts, like every other `.test.ts` here), so `import.meta.dirname`
 // would resolve against the bundle's own output location, not this file's; the repo root is the actual cwd instead.
@@ -38,6 +38,14 @@ test('consumer preparation reuses a byte-verified delivery across implementation
   assert.equal(installedDeliveryMatchesRecipe(receipt, 'a'.repeat(64)), true);
   assert.equal(installedDeliveryMatchesRecipe({ ...receipt, implementationSha256: 'c'.repeat(64) }, 'a'.repeat(64)), true);
   assert.equal(installedDeliveryMatchesRecipe(receipt, 'd'.repeat(64)), false);
+});
+
+test('application preparation dispatches only delivery schemas owned by the nebula pipeline', () => {
+  assert.equal(applicationDeliveryKind('delivery.json', { schema: 'cssearth-nebula-delivery@1' }), 'nebula');
+  assert.equal(applicationDeliveryKind('compact-delivery.json', { schema: 'cssearth-compact-density-delivery@1' }), 'compact-density');
+  assert.equal(applicationDeliveryKind('delivery.json', { schema: 'cssearth-density-volume-lens-bank-source@1' }), null);
+  assert.equal(applicationDeliveryKind('delivery.json', {}), null);
+  assert.throws(() => applicationDeliveryKind('compact-delivery.json', { schema: 'foreign@1' }), /Unsupported compact density delivery schema/);
 });
 
 test('every volume the nebula delivery validates is sanitized, and an explicit bake records the sanitizer', async () => {

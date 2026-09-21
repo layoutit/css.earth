@@ -219,15 +219,19 @@ test('preparation dispatch keeps the browser with publication and the galaxy wri
  const commands=['publication','world'].map(lane=>{
   const step=expanded.filter(step=>step.env.CI_PREPARATION_LANE===lane).at(-1);
   assert.ok(step,`${lane}: preparation commands must exist`);
-  return {...step,run:'pnpm() { printf "%s %s\\n" "$CI_PREPARATION_LANE" "$*" >> "$RUNNER_TEMP/dispatch"; }\n'+step.run};
+  return {...step,run:[
+   'pnpm() { printf "%s pnpm %s\\n" "$CI_PREPARATION_LANE" "$*" >> "$RUNNER_TEMP/dispatch"; }',
+   'node() { printf "%s node %s\\n" "$CI_PREPARATION_LANE" "$*" >> "$RUNNER_TEMP/dispatch"; }',step.run,
+  ].join('\n')};
  });
  const root=await mkdtemp(join(tmpdir(),'ci-preparation-matrix-'));
  try{
   await runCiSteps(commands,root,root);
   assert.equal(await readFile(join(root,'dispatch'),'utf8'),[
-   'publication exec playwright install --with-deps --only-shell chromium',
-   'publication test:ci-preparation:publication',
-   'world test:galaxy-field','world test:ci-preparation:world','',
+   'publication pnpm exec playwright install --with-deps --only-shell chromium',
+   'publication pnpm test:ci-preparation:publication',
+   'world node tools/restore-source-inputs.mts --repository-volumes',
+   'world pnpm test:galaxy-field','world pnpm test:ci-preparation:world','',
   ].join('\n'));
  }finally{await rm(root,{recursive:true,force:true});}
 });
