@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Hanuš2017 rejects the opposite pole using two disk-resolved AO images and three occultation epochs. Archive D143±3 km and pole(251,63) are retained rather than paper ensemble D141±3 km and pole(250,58). No resolved surface imagery is projected onto this mesh.
+Hanuš 2017 rejects the opposite pole using two disk-resolved AO images and three occultation epochs. Archive D143±3 km and pole(251,63) are retained rather than paper ensemble D141±3 km and pole(250,58). No resolved surface imagery is projected onto this mesh.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

@@ -11,7 +11,7 @@
     "reportedUncertaintyKm": 1.86,
     "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
     "systematicUncertaintyFraction": null,
-    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "additionalSystematics": "Usui 2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about 10% in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
     "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
     "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
     "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
@@ -23,7 +23,7 @@
       "detections": 8,
       "originalRow": "117    Lomia                          7.95  0.15  8  144.92  1.86 0.056 0.002"
     },
-    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2016 Table2 reports19 dense curves across four apparitions plus459 sparse measurements. The selected (117,-19) pole matches the published second family (117,-18). The other archive pole (323,-57) differs from the paper table (312,-40); it is retained as an archive alternative rather than substituted. Hanuš2021 sparse-only comparison shifts the pole latitude, so absolute attitude remains model-dependent.",
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš 2016 Table 2 reports 19 dense curves across four apparitions plus 459 sparse measurements. The selected (117,-19) pole matches the published second family (117,-18). The other archive pole (323,-57) differs from the paper table (312,-40); it is retained as an archive alternative rather than substituted. Hanuš 2021 sparse-only comparison shifts the pole latitude, so absolute attitude remains model-dependent.",
     "scaleKmPerSourceUnit": 116.80493412433646,
     "metersPerSourceUnit": 116804.93412433646,
     "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
@@ -34,7 +34,7 @@
     117,
     -19
   ],
-  "modelLimitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2016 Table2 reports19 dense curves across four apparitions plus459 sparse measurements. The selected (117,-19) pole matches the published second family (117,-18). The other archive pole (323,-57) differs from the paper table (312,-40); it is retained as an archive alternative rather than substituted. Hanuš2021 sparse-only comparison shifts the pole latitude, so absolute attitude remains model-dependent.",
+  "modelLimitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš 2016 Table 2 reports 19 dense curves across four apparitions plus 459 sparse measurements. The selected (117,-19) pole matches the published second family (117,-18). The other archive pole (323,-57) differs from the paper table (312,-40); it is retained as an archive alternative rather than substituted. Hanuš 2021 sparse-only comparison shifts the pole latitude, so absolute attitude remains model-dependent.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/3229/shape.txt",
     "vertices": 1022,

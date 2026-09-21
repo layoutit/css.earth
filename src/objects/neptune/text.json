@@ -29,7 +29,7 @@
     "normal": {
       "title": "OPAL visible-color map",
       "detail": "Visible light",
-      "summary": "Colors approximate visible cloud patterns; north of about 30° N, an illustrative cap fills the gap.",
+      "summary": "Colors approximate visible cloud patterns; north of about 41° N, where Hubble saw little, an illustrative cap fills in.",
       "sources": [
         {
           "catalogueId": "source-neptune-hubble-opal-neptune-visible",
@@ -43,7 +43,7 @@
     "methane": {
       "title": "OPAL FQ619N map",
       "detail": "619 nm",
-      "summary": "Reflectance at 619 nm in false color; north of 30° N, gaps are filled from the edge.",
+      "summary": "Reflectance at 619 nm in false color; north of about 57° N, the unobserved pole is filled from the edge.",
       "sources": [
         {
           "catalogueId": "source-neptune-hubble-opal-neptune-fq619n",
@@ -57,7 +57,7 @@
     "near-infrared": {
       "title": "OPAL F845M map",
       "detail": "845 nm",
-      "summary": "Reflectance at 845 nm in false color. Coverage north of 30° N is filled, not measured.",
+      "summary": "Reflectance at 845 nm in false color; north of about 57° N, the unobserved pole is filled, not measured.",
       "sources": [
         {
           "catalogueId": "source-neptune-hubble-opal-neptune-f845m",

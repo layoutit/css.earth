@@ -35,7 +35,7 @@ Published full axes are halved to construct the ellipsoid. The 2024 orbital pole
 
 **Selected geometry**
 
-Buie 2015 mean-ellipsoidal full axes 117×108×90km; not the observed projected 117.2×93km limb.
+Buie 2015 mean-ellipsoidal full axes 117×108×90 km; not the observed projected 117.2×93 km limb.
 
 **Orbit and orientation**
 

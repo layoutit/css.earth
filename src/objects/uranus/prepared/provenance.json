@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ed55e979b3e83ce39f2176af349ea98d1012617ecda019a93fee90b65824286f"
+    "sha256": "bc8a6cad82903cb2fa0f6973db28bd12292953d5a9b8873cc5d13de9c33b4043"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5d8c13b4d02025f0ac5466eb3f8faffbb1c42267bd60f9414867c19a9082933c",
+      "sha256": "181039f71ff4b2408c1b9af36536b77f87d46963cf506afe7a9918c3849e2d08",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,7 +163,7 @@
                 "id": "normal",
                 "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
               },
-              "notes": "Hubble OPAL F657N/F547M/F467M composite from October 2025. The northern region is observed; the unobserved southern region fades into a uniform Voyager-derived color baseline with no measured local detail."
+              "notes": "Hubble OPAL F657N/F547M/F467M composite from October 2025, with OPAL's slight contrast enhancement. The northern region is observed; the unobserved southern region fades into a uniform Voyager-derived color baseline with no measured local detail."
             },
             {
               "id": "methane",
@@ -367,7 +367,7 @@
     {
       "id": "observations",
       "path": "source/preparation/observations.json",
-      "sha256": "d9663f61e4a395238ec8ac73bbbc93bd2bf0d6b552239fd2de8dc4c72cd154df",
+      "sha256": "3ea5ccd0c688685a367602bc98806e2f6182ef9a9f3446c1410bcb64fed913af",
       "parameters": {
         "schema": "cssearth-observed-surfaces@1",
         "sources": [
@@ -377,8 +377,8 @@
             "expectedBytes": 787756,
             "expectedSha256": "854ba9d0b744c2d6e6b646d315847a3528b94b4f0b8970cc4285d71228e69c7b",
             "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
-            "credit": "NASA, ESA, STScI, and the OPAL team",
-            "license": "STScI public science archive data"
+            "credit": "NASA, ESA, A.A. Simon, M.H. Wong",
+            "license": "CC BY 4.0"
           },
           {
             "id": "hubble-opal-uranus-2025a-fq727n",
@@ -386,8 +386,8 @@
             "expectedBytes": 1045440,
             "expectedSha256": "36ff34743fff69c09ec03b90b3d3e193d9b17e5dfdc41a3cacb2fae878d37c79",
             "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits",
-            "credit": "NASA, ESA, STScI, and the OPAL team",
-            "license": "STScI public science archive data"
+            "credit": "NASA, ESA, A.A. Simon, M.H. Wong",
+            "license": "CC BY 4.0"
           },
           {
             "id": "hubble-opal-uranus-2025a-f845m",
@@ -395,8 +395,8 @@
             "expectedBytes": 1045440,
             "expectedSha256": "96afebec48e8da3b5b72a80909a0041ddd50255ce5101f51cab3ffda1e151ac8",
             "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
-            "credit": "NASA, ESA, STScI, and the OPAL team",
-            "license": "STScI public science archive data"
+            "credit": "NASA, ESA, A.A. Simon, M.H. Wong",
+            "license": "CC BY 4.0"
           },
           {
             "id": "nasa-pia18182-uranus-navigation-disc",
@@ -534,7 +534,8 @@
               "transitionRows": 12,
               "alphaValidity": false,
               "baseline": "visible-disc"
-            }
+            },
+            "planetographicAxisRatio": 1.0234653425699756
           },
           {
             "id": "methane",
@@ -694,7 +695,8 @@
                 "authority": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits",
                 "model": "source-filter observed-disc chromatic mean with no synthesized local features"
               }
-            }
+            },
+            "planetographicAxisRatio": 1.0234653425699756
           },
           {
             "id": "near-infrared",
@@ -854,7 +856,8 @@
                 "authority": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
                 "model": "source-filter observed-disc chromatic mean with no synthesized local features"
               }
-            }
+            },
+            "planetographicAxisRatio": 1.0234653425699756
           }
         ],
         "baselines": [
@@ -1056,8 +1059,8 @@
       "id": "hubble-opal-uranus-2025a-color",
       "path": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
-      "credit": "NASA, ESA, STScI, and the OPAL team",
-      "license": "STScI public science archive data",
+      "credit": "NASA, ESA, A.A. Simon, M.H. Wong",
+      "license": "CC BY 4.0",
       "acquisition": "pinned Hubble OPAL Cycle 33 rotation-A global-map product",
       "redistribution": "checked scientific archive product with full credit",
       "capture": {
@@ -1099,8 +1102,8 @@
       "id": "hubble-opal-uranus-2025a-fq727n",
       "path": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits",
-      "credit": "NASA, ESA, STScI, and the OPAL team",
-      "license": "STScI public science archive data",
+      "credit": "NASA, ESA, A.A. Simon, M.H. Wong",
+      "license": "CC BY 4.0",
       "acquisition": "pinned Hubble OPAL Cycle 33 FQ727N global-map product",
       "redistribution": "checked scientific archive product with full credit",
       "capture": {
@@ -1142,8 +1145,8 @@
       "id": "hubble-opal-uranus-2025a-f845m",
       "path": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
-      "credit": "NASA, ESA, STScI, and the OPAL team",
-      "license": "STScI public science archive data",
+      "credit": "NASA, ESA, A.A. Simon, M.H. Wong",
+      "license": "CC BY 4.0",
       "acquisition": "pinned Hubble OPAL Cycle 33 F845M global-map product",
       "redistribution": "checked scientific archive product with full credit",
       "capture": {
@@ -1193,8 +1196,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "5d8c13b4d02025f0ac5466eb3f8faffbb1c42267bd60f9414867c19a9082933c",
-      "bytes": 13962,
+      "sha256": "181039f71ff4b2408c1b9af36536b77f87d46963cf506afe7a9918c3849e2d08",
+      "bytes": 14003,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1435,32 +1438,32 @@
       "outputs": [
         {
           "url": "/scenes/uranus/uranus-lens-normal.webp",
-          "bytes": 182,
-          "sha256": "ea4b60694d819f552c75d7dd5929c4ed523f843eeec56d8ebe766fc93137ee15",
+          "bytes": 170,
+          "sha256": "c1076d759d598a7ad34ead3b478df0166701fe644c17488d8c4a30e2957455a8",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/uranus/uranus-surface-normal.webp",
-          "bytes": 51094,
-          "sha256": "2964d16818955a3ccd164a80409f32fb72cc888d56ed36b4820bbaea9124f889",
+          "bytes": 50024,
+          "sha256": "83f85c865d3047732e5e4b6c26261817c9ba9470972a54f8dc0f0b84fd0b4c5d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/uranus/uranus-surface-normal@2x.webp",
-          "bytes": 146004,
-          "sha256": "f4510a09c036e9f0e0a6a9e0c687f42ea64760bd9cd2873b77c6bf23ba2bdf39",
+          "bytes": 143348,
+          "sha256": "26f2daa62218faa38b4efb9b538c9eb73937ad9a5fbdb0baafff527aa53e6f28",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/uranus/uranus-poles-normal.webp",
-          "bytes": 2046,
-          "sha256": "319e98cc01567b6d7e47c0b27cca4035889a87e8e548fb85a080d7ccf66908ac",
+          "bytes": 2028,
+          "sha256": "4d1d5c325348f44ae71a05dc24bd775f52573c7ff17d4e3c0d57c45bd8e0691b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/uranus/uranus-poles-normal@2x.webp",
-          "bytes": 4308,
-          "sha256": "d840fff007ed6b0b65c029b2004e1bef500e7bc18aa8980a3583d34aceba788b",
+          "bytes": 4302,
+          "sha256": "18f1f0ffc98a583514606da02e4d44c935ee37ebf2beee56467e90a8438c7e18",
           "verification": "bytes-verified"
         }
       ],
@@ -1489,31 +1492,31 @@
         {
           "url": "/scenes/uranus/uranus-lens-methane.webp",
           "bytes": 326,
-          "sha256": "6acff579b51e8374fa45d2236eb5852d20139906730aa03e634c02b8d9ca890f",
+          "sha256": "8c453b227a428f36ed0993a6517b76316d9acb6d00666d640c608f648747b0be",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/uranus/uranus-surface-methane.webp",
-          "bytes": 87046,
-          "sha256": "843484ae2d8ca70e4401a0601fdfc93c96fbcda791325be479e2905120d52fb8",
+          "bytes": 84292,
+          "sha256": "41291dfd165c7e6684d110076a115ef2ac186a116d6ebf78f8964dc6af859f88",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/uranus/uranus-surface-methane@2x.webp",
-          "bytes": 236338,
-          "sha256": "f370d177ca3ed38e6d75459e1a5dcd9388784c904a8bf80e29b8bff577b86894",
+          "bytes": 213528,
+          "sha256": "45f9d4b41cf5f1326174e027815b9082fce375cce833ec9b9402e029706df8d8",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/uranus/uranus-poles-methane.webp",
-          "bytes": 2862,
-          "sha256": "d6c671a0104ced0bb5b967442e829f80831465b689570d84bceef0a087bb986f",
+          "bytes": 2802,
+          "sha256": "88b2097f66dbffc07e25dbd40bc20969893a12360174babe88fa15a2c245fb45",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/uranus/uranus-poles-methane@2x.webp",
-          "bytes": 6136,
-          "sha256": "da085c5f53a5dbe5af82afa82cc383df7c968d7eaa8c89af975ed221bee826e8",
+          "bytes": 6018,
+          "sha256": "c14017892b28dd5fe5fb55682929bcc60edcbf3215c0181e2ff7264c095eff1d",
           "verification": "bytes-verified"
         }
       ],
@@ -1541,32 +1544,32 @@
       "outputs": [
         {
           "url": "/scenes/uranus/uranus-lens-near-infrared.webp",
-          "bytes": 196,
-          "sha256": "91ed8eb8bee1cdbc5371042f0706ad893935d1981c6007160b8eceddc29bb9d8",
+          "bytes": 210,
+          "sha256": "42fc7f50196d89871a9abbcf0986bac68604c19657acf099dc7946ec24544df2",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/uranus/uranus-surface-near-infrared.webp",
-          "bytes": 47430,
-          "sha256": "95f3fbdad0f5dc20af6446784b7442cce95d63bde26b05abaea01c418444a404",
+          "bytes": 47242,
+          "sha256": "090bfc86f7965c2f0bc56bfd3298aec851272b6f566437517f221454f47dd159",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/uranus/uranus-surface-near-infrared@2x.webp",
-          "bytes": 131270,
-          "sha256": "261508daf78f199006a63becbfc0ff47db16d245c8c54e9fa9bd4ace30ea7cc4",
+          "bytes": 131884,
+          "sha256": "7f873ded9574c8b7bb639fe8bbb7593e249349513162e7d8f9e2acbda606e9de",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/uranus/uranus-poles-near-infrared.webp",
-          "bytes": 2054,
-          "sha256": "881e5d5079e8f07dcffd97b2d727af0b0d1a053f2063799df19a3e7097560322",
+          "bytes": 2050,
+          "sha256": "6292d1e2e459d5d24b4b3765c9eb4e4fe2c3c411330342bd55d3caf3e8c402f0",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/uranus/uranus-poles-near-infrared@2x.webp",
-          "bytes": 4472,
-          "sha256": "81a5a9a346e2bbc55885819fba94a3c447f81541cb075eb5855589808a9e6294",
+          "bytes": 4478,
+          "sha256": "1bc0d9225f81abbd6a44f94abc855e1d5106a15efc1de5d74a7b4e8368a21047",
           "verification": "bytes-verified"
         }
       ],
@@ -1703,8 +1706,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 3934,
-          "sha256": "eef9b90756ec811fe05095e67ab42697f20ea82a8fa70dd4e15666a0b415a658",
+          "bytes": 3972,
+          "sha256": "860d3af617ad640db7f5639333da02f092e991979ccb89ee4a9a9cd8bbf9d2cf",
           "verification": "bytes-verified"
         }
       ]
@@ -1728,8 +1731,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/methane.webp",
-          "bytes": 10110,
-          "sha256": "48ca44bdd728d1746a8868800a9d908e4a22613eb313b758ce74ee347d246811",
+          "bytes": 9790,
+          "sha256": "668f06391a0756df28f5922f235bf5949ffafb85ae5c9a951a5fced5dbb0780b",
           "verification": "bytes-verified"
         }
       ]
@@ -1753,8 +1756,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/near-infrared.webp",
-          "bytes": 4148,
-          "sha256": "fe08d2bb679bfc8d2085f9629acbb534e688b1da7a5b07c61e506bcf469c1f3e",
+          "bytes": 4184,
+          "sha256": "528b37712073fbcef70ecb6cd15de835691081fbf96219b634923cffcd7b7a58",
           "verification": "bytes-verified"
         }
       ]
@@ -1766,7 +1769,7 @@
   },
   "lastPreparation": {
     "objectId": "uranus",
-    "materialSha256": "948c871a20cd28082c4ffdd8f6ebdb9bdde8326af364e5128ad6c5bc6b0b52e0",
+    "materialSha256": "4bf6df3a3cea29c63b6da81f1cb955a8e9913bafc20de5b87b2a0fca1345a48b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

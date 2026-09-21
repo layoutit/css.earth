@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Hanuš2017 confirms the pole family using disk-resolved AO imaging, light curves and occultations. Section on129 describes eight AO images while TableA.1 lists nine; this discrepancy is retained. Archive D126±3 km is retained; local shape accuracy is not the diameter uncertainty.
+Hanuš 2017 confirms the pole family using disk-resolved AO imaging, light curves and occultations. Section on 129 describes eight AO images while TableA.1 lists nine; this discrepancy is retained. Archive D126±3 km is retained; local shape accuracy is not the diameter uncertainty.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

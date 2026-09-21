@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Gaia DR2 plus Lowell inversion; publication table gives334 Lowell and20 Gaia points. Both poles remain; model3844 is representative. This is a coarse convex inverse model with an approximate thermal size. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
+Gaia DR2 plus Lowell inversion; publication table gives 334 Lowell and 20 Gaia points. Both poles remain; model 3844 is representative. This is a coarse convex inverse model with an approximate thermal size. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

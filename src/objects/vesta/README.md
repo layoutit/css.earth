@@ -136,7 +136,7 @@ on the existing terrain. Missing coverage uses the common gray grid.
 JPL Horizons solution JPL#36 supplies mean radius 261.385 km, GM 17.28828
 km³/s², and the asteroid's heliocentric elements. `generate-asteroids.mjs`
 records reproducible Horizons queries and independent vector fixtures.
-The geometry epoch is the shared 2026-09-04T00:00:00 TT. The osculating ellipse
+The geometry epoch is the shared 2026-09-03T00:00:00 TT. The osculating ellipse
 does not claim accurate long-term perturbed motion. Horizons TDB epochs are
 approximated as TT, differing by less than 2 ms.
 

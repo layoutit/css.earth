@@ -51,14 +51,14 @@
       {
         "id": "orbital-period",
         "label": "Orbit around Jupiter",
-        "value": "16.69 days",
+        "value": "16.69 days · sidereal",
         "source": {
-          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-          "label": "JPL Planetary Satellite Mean Orbital Parameters",
-          "checked": "2026-09-16",
+          "url": "https://doi.org/10.1007/s10569-017-9805-5",
+          "label": "IAU WGCCRE 2015 sidereal rate",
+          "checked": "2026-09-21",
           "path": "source/editorial/factsheet-review.json",
-          "catalogueId": "jpl-satellite-mean-elements",
-          "locator": "/references/2; P (days)"
+          "catalogueId": "iau-wgccre-2015",
+          "locator": "/references/4; orbital-period"
         }
       }
     ],

@@ -1,0 +1,45 @@
+{
+  "id": "doi-10-3847-psj-acdd5f",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bernstein et al. (2023): Synchronous Rotation in the (136199) Eris-Dysnomia System",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/PSJ/acdd5f"
+    },
+    {
+      "type": "arXiv",
+      "value": "2303.13445"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/PSJ/acdd5f",
+      "label": "Published article"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2303.13445",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2303.13445",
+      "checkedOn": "2026-09-21",
+      "locator": "Abstract: definitive period 15.771 ± 0.008 days"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Planetary Science Journal 4, 115",
+  "creators": [
+    "G. M. Bernstein",
+    "B. J. Holler",
+    "R. Navarro-Escamilla",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

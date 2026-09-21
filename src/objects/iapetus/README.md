@@ -44,7 +44,7 @@ Feature notes: 11 of the labelled names carry a caption note, the lead summary o
 - The independent USGS comparison supports gross VIMS framing; precise local absolute registration remains unqualified.
 - VIMS has no photometric correction or cross-observation level matching. Illumination, viewing angle, grain size, noise and archive filtering remain in the signal; neither view measures ice abundance.
 - The enhanced-color mosaic has no independent validity mask. Real dark terrain is retained, along with coarse polar imagery, seams and residual photographed shading.
-- Geometry is a 734.5 km mean-radius sphere, without the oblate figure or equatorial ridge. No qualified downloadable height raster was found in the 2026-09-06 source search; this does not establish that terrain models do not exist.
+- Geometry is a 734.3 km mean-radius sphere, without the oblate figure or equatorial ridge. No qualified downloadable height raster was found in the 2026-09-06 source search; this does not establish that terrain models do not exist.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
@@ -74,7 +74,7 @@ No qualified downloadable height raster was found: the [current PDS SPC archive]
 
 The shared 8192 × 4096 latitude-band layout remains fixed and adds no detail to the 5760 × 2880 monochrome mosaic. The normal and enhanced photographic polar sprites instead sample their pinned source grids directly with a 2 × 2 footprint and retain lossless WebP encoding. Shared curvature lighting and the Shadows control apply to both lenses. No atmosphere, fake elevation, synthetic gap filling or displaced ridge geometry is introduced.
 
-Iapetus is NAIF 608. Physical facts are from [NASA](https://science.nasa.gov/saturn/moons/iapetus/); the astronomy package supplies the Iapetus orbit and IAU rotation. NASA rounds the mean radius to 736 km, while the renderer uses the package value 734.5 km. The Inter title font retains its pinned provenance.
+Iapetus is NAIF 608. Physical facts are from [NASA](https://science.nasa.gov/saturn/moons/iapetus/); the astronomy package supplies the Iapetus orbit and IAU rotation. NASA rounds the mean radius to 736 km; the recipe sphere and the astronomy package use the [JPL satellite table](https://ssd.jpl.nasa.gov/sats/phys_par/sep.html) mean radius of 734.30 km. The Inter title font retains its pinned provenance.
 
 </details>
 
@@ -98,6 +98,6 @@ The [body registration record](source/cassini-ice/evidence/registration.md), [pr
 <details>
 <summary>Shape, rotation and camera on the shared raster lane</summary>
 
-The recipe declares a sphere of 734.5 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 79.3359-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera).
+The recipe declares a sphere of 734.3 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 79.3359-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera).
 
 </details>

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "70d263c9d1349e1fa70c06d8852576faa48f84a78e9ab73a3fbd7b5e162fcf9b"
+    "sha256": "f8eabbcc5ebc1000da1979d3a0487344322fd6fefc59b213246d0699da8814af"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -530,7 +530,7 @@
       "credit": "Philip Stooke; NASA/JPL; USGS/PDS",
       "license": "Public-domain NASA mission data and published PDS cartographic product; cite Stooke.",
       "licenseEvidence": [
-        "observations/map-guide.html",
+        "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html",
         "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m"
       ],
       "acquisition": "Download the pinned original mosaic.",

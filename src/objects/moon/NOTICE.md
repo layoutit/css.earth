@@ -3,6 +3,8 @@
 - Moon surface: LROC WAC Global Morphologic Map v1.3, NASA/GSFC/Arizona State University. PDS archive data are public domain under [LROC terms](https://lroc.im-ldi.com/about/terms). The app resamples the map and adjusts brightness; see README.md.
 - Moon navigation sprite: NASA SVS CGI Moon Kit, LRO/LROC and LOLA. NASA media usage guidelines.
 - Physical and orbital facts: NASA JPL Solar System Dynamics.
+- Elevation lens: LRO LOLA LDEM16 numeric grid, David E. Smith and NASA GSFC LRO LOLA team; NASA PDS Geosciences Node.
+- Crustal thickness lens: NASA GSFC Scientific Visualization Studio; GRAIL. NASA media usage guidelines.
 - Lighting model formulation adapted from the OpenSpace globe shader (MIT,
   OpenSpace Team); implemented and documented in this repository.
 

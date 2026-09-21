@@ -247,7 +247,7 @@
             },
             {
               "label": "Mantle",
-              "description": "Solid rock",
+              "description": "Hot, viscous rock",
               "color": "#cf5d35"
             },
             {
@@ -268,7 +268,7 @@
           "id": "surface-observation",
           "url": "https://science.nasa.gov/earth/facts/"
         },
-        "notes": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging."
+        "notes": "Schematic interior based on NASA Science. NASA gives rounded sizes (1,221 km inner core, 2,300 km outer core, 2,900 km mantle, 30 km crust); here they are fitted to a 6,378 km radius as 1,221, 2,257, 2,870 and 30 km. Colors are illustrative; this is not direct interior imaging."
       },
       {
         "id": "mantle-tomography",

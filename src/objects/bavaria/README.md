@@ -13,7 +13,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 Checked 2026-09-09. Selected DAMIT model **3090**, version **2019-06-24**. DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2019); model 3090, version 2019-06-24.
 
-Convex light-curve reconstruction with archive equivalent-volume size55 km (published thermal-size3-sigma interval53–57 km). The vertical shape is poorly constrained. Both pole solutions remain possible. Neutral gray marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction with archive equivalent-volume size 55 km (published thermal-size 3-sigma interval 53–57 km). The vertical shape is poorly constrained. Both pole solutions remain possible. Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -23,9 +23,9 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Marciniak2019 §4.4 fits36 thermal measurements from IRAS, AKARI and WISE. Both mirror poles fit; the selected second pole, AM 2 at (226°, +70°), is representative, not unique. High pole latitude makes the vertical extent poorly constrained.
+Marciniak 2019 §4.4 fits 36 thermal measurements from IRAS, AKARI and WISE. Both mirror poles fit; the selected second pole, AM 2 at (226°, +70°), is representative, not unique. High pole latitude makes the vertical extent poorly constrained.
 
-The archived physical mesh has equivalent-volume diameter55 km and Table2 reports thermal size55±2 km at3σ. The paper calls D a shape scaling value without an explicit volume definition, so the archive volume and paper thermal uncertainty are distinguished.
+The archived physical mesh has equivalent-volume diameter 55 km and Table 2 reports thermal size 55±2 km at 3σ. The paper calls D a shape scaling value without an explicit volume definition, so the archive volume and paper thermal uncertainty are distinguished.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

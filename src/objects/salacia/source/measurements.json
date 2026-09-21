@@ -58,7 +58,7 @@
       "value": 5.49403,
       "unit": "days",
       "uncertainty": "±0.00016 days",
-      "location": "Collyer et al. 2025 section5.2; descriptive only, display phase arbitrary"
+      "location": "Collyer et al. 2025 section 5.2; descriptive only, display phase arbitrary"
     }
   ],
   "sourceSurvey": [
@@ -75,7 +75,7 @@
     {
       "url": "https://arxiv.org/abs/2508.17101",
       "status": "excluded-from-surface",
-      "adds": "JWST Salacia-Actaea spectrum is spatially blended; its901 km discussion concerns the system and cannot set this primary’s axes."
+      "adds": "JWST Salacia-Actaea spectrum is spatially blended; its 901 km discussion concerns the system and cannot set this primary’s axes."
     },
     {
       "url": "https://doi.org/10.3847/1538-3881/aa6346",
@@ -111,7 +111,7 @@
   "survey": [
     "Included: New ALMA observations separate Salacia and Actaea, with distinct diameters and albedos. Conference abstract status retained.  https://doi.org/10.5194/epsc-dps2025-905",
     "Included-context: 16 years of photometry favor albedo variation and a 5.494-day synchronous rotation, rather than a triaxial explanation of the lightcurve.  https://arxiv.org/abs/2509.02734",
-    "Excluded-from-surface: JWST Salacia-Actaea spectrum is spatially blended; its901 km discussion concerns the system and cannot set this primary’s axes.  https://arxiv.org/abs/2508.17101",
+    "Excluded-from-surface: JWST Salacia-Actaea spectrum is spatially blended; its 901 km discussion concerns the system and cannot set this primary’s axes.  https://arxiv.org/abs/2508.17101",
     "Superseded-size: Older 866 ±37 km estimate used equal-albedo binary partitioning; newer resolved-component result selected.  https://doi.org/10.3847/1538-3881/aa6346"
   ]
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "80b1b0653174c49a6afccff8d5ed94101157dcc9a06f3e845e5f61458ee4e22f"
+    "sha256": "ccf3b0187f573b5a9dfec606bd3305172bb9e299a96bad56e3a7495df7660b1f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -400,7 +400,7 @@
     {
       "id": "observations",
       "path": "source/preparation/observations.json",
-      "sha256": "d8a911e3846681784e60075353af9b8763044210fc75846087c50c41c6733894",
+      "sha256": "1776c1f4044846198d516054ef59c3d4ca8819035337cc52d1b65809f867bc24",
       "parameters": {
         "schema": "cssearth-observed-polar-surfaces@1",
         "namespace": "jupiter",
@@ -573,7 +573,8 @@
               "alphaOpaqueRadius": 0.43,
               "alphaTransparentRadius": 0.93,
               "edgeLatitudeDegrees": 64
-            }
+            },
+            "planetographicAxisRatio": 1.0693750560923803
           },
           {
             "id": "ultraviolet",
@@ -626,7 +627,8 @@
               "alphaOpaqueRadius": 0.43,
               "alphaTransparentRadius": 0.96,
               "boundaryLatitudeDegrees": 64
-            }
+            },
+            "planetographicAxisRatio": 1.0693750560923803
           },
           {
             "id": "methane",
@@ -679,7 +681,8 @@
               "alphaOpaqueRadius": 0.43,
               "alphaTransparentRadius": 0.96,
               "boundaryLatitudeDegrees": 64
-            }
+            },
+            "planetographicAxisRatio": 1.0693750560923803
           }
         ],
         "sourcePins": [
@@ -1676,7 +1679,7 @@
   },
   "lastPreparation": {
     "objectId": "jupiter",
-    "materialSha256": "f5890d04903690f08eadfb1d141249005ae89164659c360567d404d467292f44",
+    "materialSha256": "3282e1807c37993e181b12eb2dc2290ce397bac1ae7ca572864cc803ca2e0fc5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

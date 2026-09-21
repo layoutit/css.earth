@@ -6,9 +6,9 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 | View or property | Source and interpretation |
 | --- | --- |
-| Color | [NASA/JHUAPL/SwRI MVIC mosaic](https://science.nasa.gov/resource/pluto-global-color-map/), published 20 January 2017. Published color, not calibrated true-color reflectance. |
+| Color | [NASA/JHUAPL/SwRI MVIC mosaic](https://science.nasa.gov/resource/pluto-global-color-map/), published 20 January 2017. Enhanced color from MVIC's blue, red and near-infrared filters, not natural color or calibrated reflectance. |
 | Monochrome | [USGS LORRI/MVIC mosaic](https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_mosaic_300m), July 2017; 24,888 × 12,444, east-positive longitude. |
-| Elevation | [USGS stereo DEM](https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m): signed metres above a 1,188.3 km sphere; −32,768 means missing. False-color scale −8 to +8 km. |
+| Elevation | [USGS stereo DEM](https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m): signed metres above a 1,188.3 km sphere; −32,768 means missing. Data run −4.10 to +6.49 km; false-color scale −8 to +8 km. |
 | Methane, nitrogen and water ice | [Drozdov & Emelyanov (2026), Zenodo 18825240](https://zenodo.org/records/18825240), CC BY 4.0. Modeled surface fractions from five New Horizons LEISA scans on 14 July 2015. All three use the same 0–100% scale; they are infrared spectral fits, not photographs. |
 | Physical facts | Pinned [JPL](https://ssd.jpl.nasa.gov/planets/phys_par.html) and [NASA](https://science.nasa.gov/dwarf-planets/pluto/facts/) records; Inter title sources. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/PLUTO/target) Pluto centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels depend on their size on screen, and a selected feature stays labelled. Available in all six views. |
@@ -180,7 +180,8 @@ Terrain shading is derived from that same signed DEM using latitude-corrected sp
 
 - **Color:** NASA/JHUAPL/SwRI, New Horizons Ralph/MVIC three-filter global mosaic,
   published January 20, 2017. North is up; Sputnik Planitia is near the center.
-  This is the published color product, not calibrated true-color reflectance.
+  It is enhanced color from MVIC's blue, red and near-infrared filters, not natural
+  color or calibrated reflectance.
   <https://science.nasa.gov/resource/pluto-global-color-map/>
 - **Monochrome:** NASA/JHUAPL/SwRI/LPI through USGS, LORRI/MVIC July 2017 mosaic,
   24,888 × 12,444 pixels, equirectangular, positive-east 0–360° longitude.
@@ -194,7 +195,7 @@ Terrain shading is derived from that same signed DEM using latitude-corrected sp
 - **Physical facts:** the [selected JPL Pluto row values](source/orbit/jpl-physical.json)
   and NASA's Pluto facts record. Preparation checks their identities and values. The
   radius is 1,188.3 km; density 1.853 g/cm³; sidereal rotation −6.3872 days; orbital
-  period 247.92065 years. NASA supplies the rounded mean solar distance of 39 AU.
+  period 247.92065 years. The 39.482 AU solar semimajor axis is the Pluto row of JPL's approximate-positions Table 1 (J2000, a = 39.48211675 AU); JPL's current page has dropped Pluto, so it is checked against the [archived table](https://web.archive.org/web/20190803153746/https://ssd.jpl.nasa.gov/txt/p_elem_t1.txt).
   <https://ssd.jpl.nasa.gov/planets/phys_par.html>
   <https://science.nasa.gov/dwarf-planets/pluto/facts/>
 - **Title:** pinned Inter outlines (SIL OFL 1.1), prepared with the existing shared

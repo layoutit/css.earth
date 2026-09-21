@@ -6,10 +6,10 @@
     "name": "Deimos",
     "horizonsCode": "402",
     "meanRadiusKm": 6.2,
-    "gravitationalParameterKm3PerS2": 0.0001201374,
+    "gravitationalParameterKm3PerS2": 0.0000962,
     "parent": "mars"
   },
-  "physicalNotes": "Horizons publishes Phobos and Deimos as masses, not GM; these are\nmass x G with G = 6.67430e-20 km^3 kg^-1 s^-2 (CODATA 2018).",
+  "physicalNotes": "GM is 0.0000962 +/- 0.0000028 km^3/s^2 from the JPL Planetary Satellite Physical\nParameters table (ssd.jpl.nasa.gov/sats/phys_par/, MAR097), checked 2026-09-21.",
   "satellite": {
     "parent": "mars",
     "horizonsCode": "402",

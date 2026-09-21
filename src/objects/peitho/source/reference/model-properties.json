@@ -11,7 +11,7 @@
     "reportedUncertaintyKm": 0.75,
     "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
     "systematicUncertaintyFraction": null,
-    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "additionalSystematics": "Usui 2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about 10% in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
     "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
     "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
     "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
@@ -23,7 +23,7 @@
       "detections": 5,
       "originalRow": "118    Peitho                         9.14  0.15  5   43.99  0.75 0.217 0.010"
     },
-    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Selected2020 archive update4397 states this pole agrees with occultation. It closely matches published ATLAS model4475/pole(176,59), but the update links no publication itself; it is credited to the archive. The prior opposite pole4474 remains listed as a comparison, not an equally supported orientation.",
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Selected 2020 archive update 4397 states this pole agrees with occultation. It closely matches published ATLAS model4475/pole(176,59), but the update links no publication itself; it is credited to the archive. The prior opposite pole 4474 remains listed as a comparison, not an equally supported orientation.",
     "scaleKmPerSourceUnit": 35.45576501027756,
     "metersPerSourceUnit": 35455.76501027756,
     "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
@@ -34,7 +34,7 @@
     179,
     60
   ],
-  "modelLimitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Selected2020 archive update4397 states this pole agrees with occultation. It closely matches published ATLAS model4475/pole(176,59), but the update links no publication itself; it is credited to the archive. The prior opposite pole4474 remains listed as a comparison, not an equally supported orientation.",
+  "modelLimitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Selected 2020 archive update 4397 states this pole agrees with occultation. It closely matches published ATLAS model4475/pole(176,59), but the update links no publication itself; it is credited to the archive. The prior opposite pole 4474 remains listed as a comparison, not an equally supported orientation.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/51247/shape.txt",
     "vertices": 1009,

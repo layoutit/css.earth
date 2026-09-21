@@ -11,7 +11,7 @@
     "reportedUncertaintyKm": 1.04,
     "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
     "systematicUncertaintyFraction": null,
-    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "additionalSystematics": "Usui 2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about 10% in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
     "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
     "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
     "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
@@ -23,7 +23,7 @@
       "detections": 7,
       "originalRow": "103    Hera                           7.66  0.15  7   83.23  1.04 0.222 0.007"
     },
-    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2016 Table2 reports 29 dense light curves across three apparitions plus 516 sparse measurements. Both poles remain; the first archived solution is selected as a reproducible representative, not a proven unique orientation.",
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš 2016 Table 2 reports 29 dense light curves across three apparitions plus 516 sparse measurements. Both poles remain; the first archived solution is selected as a reproducible representative, not a proven unique orientation.",
     "scaleKmPerSourceUnit": 67.08304030143461,
     "metersPerSourceUnit": 67083.04030143461,
     "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
@@ -34,7 +34,7 @@
     85,
     24
   ],
-  "modelLimitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2016 Table2 reports 29 dense light curves across three apparitions plus 516 sparse measurements. Both poles remain; the first archived solution is selected as a reproducible representative, not a proven unique orientation.",
+  "modelLimitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš 2016 Table 2 reports 29 dense light curves across three apparitions plus 516 sparse measurements. Both poles remain; the first archived solution is selected as a reproducible representative, not a proven unique orientation.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/3470/shape.txt",
     "vertices": 1022,

@@ -549,8 +549,8 @@
     {
       "id": "callisto-object-content",
       "path": "content/object.json",
-      "expectedBytes": 11073,
-      "expectedSha256": "1610ab2dbb1d320847a5c1d152d7c51eb41174cc3e398f70e986f46a2bacc839",
+      "expectedBytes": 11067,
+      "expectedSha256": "823c46ae52a74f7774225a9aa0121ee144ed076dce440bb2578bd811700efe3e",
       "origin": "Repository-authored Callisto object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -572,8 +572,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2348,
-      "expectedSha256": "a626a165c9550a40ffb4fe6567ba42292d7dde6319c1fb44241973b657719707"
+      "expectedBytes": 2826,
+      "expectedSha256": "9cbcd586c535d6649e6441bdbc12a18a60a85bb6728268f0da872f38c089613c"
     },
     {
       "path": "observations/C0605271600R.LBL",

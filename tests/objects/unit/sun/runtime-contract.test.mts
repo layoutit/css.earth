@@ -24,7 +24,7 @@ import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runt
 import { projectRoot } from "../../fixtures.mts";
 import { resolve } from "node:path";
 
-const LENS_IDS = ["photosphere", "magnetic", "chromosphere", "corona"];
+const LENS_IDS = ["photosphere", "magnetic", "chromosphere", "corona", "cor1-density"];
 const LAYERS = ["surface", "poles", "corona", "limb"] as const;
 
 objectRuntimePackageTests(runtimeDefinition);
@@ -32,7 +32,7 @@ objectRuntimePackageTests(runtimeDefinition);
 test("binds the exact Sun source and runtime closures", async () => {
   const source = await createSourceManifest({ planetId: "sun", planetName: "Sun", sourceRoot: resolve(projectRoot, "src/objects/sun/source") });
   // 38 retired-lane inputs + 7 authored records that moved from documents to local inputs (the navigation recipe included); 3 documents remain.
-  assert.deepEqual(await source.verify(), { inputCount: 48, generatedIntermediateCount: 0, documentCount: 3 });
+  assert.deepEqual(await source.verify(), { inputCount: 50, generatedIntermediateCount: 0, documentCount: 4 });
   const runtime = JSON.parse(await readFile(new URL("../../../../src/objects/sun/runtime-assets.json", import.meta.url), "utf8"));
   assert.equal(validateRuntimeAssetManifest("sun", runtime), true);
   // 4 lenses x (surface, poles, corona, limb) at the one prepared density + 4 thumbnails.
@@ -66,7 +66,8 @@ test("Sun is prepared by the generic raster lane as an emissive sphere with flat
   assert.equal(Object.hasOwn(assets, "atmosphere"), false);
   assert.equal(assets.emission.offLimbContext.logicalSize, 768);
   assert.equal(assets.emission.limbMaterial.logicalSize, 496);
-  assert.deepEqual(Object.keys(assets.surfaces), LENS_IDS);
+  // The COR1 density lens is an off-limb corona view with no surface map of its own.
+  assert.deepEqual(Object.keys(assets.surfaces), LENS_IDS.filter(id => id !== "cor1-density"));
   assert.deepEqual(lenses.controls.map(({ id }) => id), LENS_IDS);
   assert.equal(lenses.defaultLens, "photosphere");
   assert.deepEqual(controls.settings.controls.map(control => control.name), ["speed"]);
@@ -82,8 +83,8 @@ test("Sun is prepared by the generic raster lane as an emissive sphere with flat
   assert.deepEqual(scene.camera.projection, context.camera.presentation.projection);
 });
 
-test("publishes the NASA facts with their citations and the four lens legends", () => {
-  assert.equal(panel.facts.length, 4);
+test("publishes the NASA facts with their citations and every lens legend", () => {
+  assert.equal(panel.facts.length + panel.moreFacts.length, 3);
   const facts = [...panel.facts, ...panel.moreFacts];
   for (const [id, value, url] of [
     ["rotation-period", "About 25 days", "https://science.nasa.gov/sun/facts/"],
@@ -126,11 +127,15 @@ test("FITS decoding rejects incomplete data and preserves signed floating observ
   [-250, 250, 0, NaN].forEach((value, index) => bytes.writeFloatBE(value, 2880 + index * 4));
   assert.deepEqual([...readFitsPrimary(bytes).values], [-250, 250, 0, NaN]);
   assert.throws(() => readFitsPrimary(bytes.subarray(0, 2884)), /truncated/i);
-  const recipe: Parameters<typeof prepareFitsMap>[3] = { bitpix: -32, width: 2, height: 2, latitude: "sine-latitude", reverseLongitude: true, nearestLatitudeLimit: 1, positiveOnly: false, color: { kind: "signed-asinh", softening: 8, maximum: 250, palette: [[28, 95, 190], [95, 32, 11], [255, 224, 110]] } };
+  const recipe: Parameters<typeof prepareFitsMap>[3] = { bitpix: -32, width: 2, height: 2, latitude: "sine-latitude", nearestLatitudeLimit: 1, positiveOnly: false, color: { kind: "signed-asinh", softening: 8, maximum: 250, palette: [[28, 95, 190], [95, 32, 11], [255, 224, 110]] } };
   const map = prepareFitsMap(bytes, 2, 2, recipe);
   assert.equal(map.length, 16);
   assert.deepEqual([map[3], map[7], map[11], map[15]], [255, 255, 255, 255]);
   assert.throws(() => prepareFitsMap(bytes, 2, 2, { ...recipe, width: 4 }), /geometry/);
+  // Longitude grows to the right, as the mesh places every atlas: the first source column (the lowest Carrington longitude, in
+  // the direction the Sun turns) lands at the left edge. The bottom row of this 2x2 map is -250 then 250.
+  assert.deepEqual([...map.subarray(8, 11)], [...scientificFalseColor(-250, recipe.color)]);
+  assert.deepEqual([...map.subarray(12, 15)], [...scientificFalseColor(250, recipe.color)]);
 });
 
 test("preserves both HMI magnetic polarities in the prepared magnetic lens", async () => {

@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš2021 TableA.2 reports303 ASAS-SN observations and both poles(155,-59)/(348,-52). Convex and ellipsoidal searches recover the period; this is not resolved imaging.
+AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš 2021 TableA.2 reports 303 ASAS-SN observations and both poles(155,-59)/(348,-52). Convex and ellipsoidal searches recover the period; this is not resolved imaging.
 
 The selected archive second pole remains one of two solutions.
 

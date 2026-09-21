@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "70d13f484363317f2f6560be088503ed7d4c073c996f46844c3140e7d3b4183d"
+    "sha256": "038923bf74ee199f2a16ec4cfbadfc6fbab9d76ea865f1d00f48003658893029"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1367,7 +1367,7 @@
         {
           "url": "/scenes/iapetus/iapetus-features.json",
           "bytes": 123442,
-          "sha256": "0936853dac1097686522b786692a32675db79cd186101019e34f3ca63d303f07",
+          "sha256": "745ac883331a15fcd2612e341a2505ee88ebed1c16fbd6a4ae6898c7d4bced49",
           "verification": "bytes-verified"
         }
       ],
@@ -1480,7 +1480,7 @@
   },
   "lastPreparation": {
     "objectId": "iapetus",
-    "materialSha256": "4e17aa989a0fd25e8f7405bd7235d5aa6d047939d3105be584fd41c6720baaaa",
+    "materialSha256": "e2881622a4243c5ac7a3eeb0d3767305aab6e66f5857cb41ce61dffa9db23de1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

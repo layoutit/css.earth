@@ -1914,8 +1914,8 @@
     {
       "id": "europa-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 15040,
-      "expectedSha256": "6d992ff91e83327d1502c9344849b24e8cd447bbc9f0dbefbcd04ca5fe65eb67",
+      "expectedBytes": 10414,
+      "expectedSha256": "b75399611c1d2059194904191e0e704af58f7ad80f10aae5f035c4975f6c0824",
       "origin": "Repository-authored Europa raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2027,8 +2027,8 @@
     {
       "id": "europa-object-content",
       "path": "content/object.json",
-      "expectedBytes": 20400,
-      "expectedSha256": "ac5fab975fe53569cd2f647746b4aafe4f945934eb59bdcf361a9b9410d9284f",
+      "expectedBytes": 14877,
+      "expectedSha256": "3a1b5253bc33b4062974f7dbf69233992277ee2dcdc9f314aa2bb2ed39699eec",
       "origin": "Repository-authored Europa object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2084,11 +2084,8 @@
       "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
-        "coarse-ice"
+        "composition-source"
       ],
-      "lensId": "coarse-ice",
-      "label": "Coarse ice",
-      "falseColor": true,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2141,11 +2138,8 @@
       "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
-        "fine-ice"
+        "composition-source"
       ],
-      "lensId": "fine-ice",
-      "label": "Fine ice",
-      "falseColor": true,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2198,11 +2192,8 @@
       "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
-        "ice-signature"
+        "composition-source"
       ],
-      "lensId": "ice-signature",
-      "label": "Ice signature",
-      "falseColor": true,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -20593,8 +20584,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2664,
-      "expectedSha256": "4965f62821ebc7bbb397a3a2c417bd282e54a1e4380f02f961824a289aec6d00"
+      "expectedBytes": 2811,
+      "expectedSha256": "e2d4bebd12079767fccaf60c513db25cd705cc8236048947e13034fdb333e206"
     },
     {
       "id": "usgs-europa-yelland-ridges-yelland-ridges-tif",
