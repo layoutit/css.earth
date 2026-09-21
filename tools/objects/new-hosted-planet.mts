@@ -68,7 +68,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json', sha256: '0'.repeat(64) } });
 
   put(`${o}/source/preparation/raster.json`, { schema: 'cssearth-raster-recipe@1', publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512,
-    latitudeBands: 16, polarTile: 256, densities: [1, 2], resample: 'density-before-pack', polarProjection: 'orthographic-bilinear', polesCombined: false,
+    latitudeBands: 16, polarTile: 256, resample: 'density-before-pack', polarProjection: 'orthographic-bilinear', polesCombined: false,
     polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` }, thumbnail: { size: 64, quality: 88, centerLongitudeDegrees: 0 },
     surfaces: [{ id: 'shape', output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-lens-{id}.webp`, source: 'measurements.json', falseColor: false,
       science: { kind: 'neutral-shape', qualification: 'Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star.' } }],
@@ -84,8 +84,8 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
 
   put(`${o}/source/preparation/geometry.json`, { schema: 'cssearth-css-geometry-profile@1', namespace: id,
     surface: { radius: BODY_RADIUS_UNITS, polarRadius: BODY_RADIUS_UNITS, latitudeSegments: 16, longitudeSegments: 32,
-      surface: { url: `/scenes/${id}/${id}-surface-shape.webp`, width: 1024, height: 768 }, surfaceLatitudeHeight: 512, packedBandGutter: 8,
-      poles: { url: `/scenes/${id}/${id}-poles-shape.webp`, width: 512, height: 256 }, polarTileSize: 256, polarRadiusScale: 1.035, polarOffset: 0.1, uv: 'cell', color },
+      surface: { url: `/scenes/${id}/${id}-surface-shape@2x.webp`, width: 1024, height: 768 }, surfaceLatitudeHeight: 512, packedBandGutter: 8,
+      poles: { url: `/scenes/${id}/${id}-poles-shape@2x.webp`, width: 512, height: 256 }, polarTileSize: 256, polarRadiusScale: 1.035, polarOffset: 0.1, uv: 'cell', color },
     projection: { tileSize: 50, layerElevation: 50, seamBleed: 24, interiorSeamBleed: 8, overlap: 0.008, fitToSource: false, rasterScale: 2, rasterGutter: 8, rasterOverscan: 0,
       positionVariables: false, projectivePoles: false, lightColor: '#ffffff', ambientIntensity: 0.05 },
     bodyRotationDegrees: 0, output: { schema: `css${id}-prepared-runtime-scene@1`, materialSchema: `css${id}-prepared-lighting@1`, layout: 'body-container',
@@ -117,7 +117,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       { id: 'period', label: 'Year', value: `${TODO}: the orbital period in days`,
         source: { catalogueId: `${TODO}-period-source`, url: spec.paper, label: spec.paperCredit, checked: TODO, path: 'source/measurements.json', locator: 'orbitalPeriodDays; orbitalPeriodSource' } }], moreFacts: [] },
     lenses: { titleKey: 'lenses', defaultLens: 'shape', controls: [{ id: 'shape', label: 'Shape', qualification: `A sphere of the published radius, lit by ${spec.system.replace(' system', '')}; the neutral gray is a display convention, not a measured colour.`,
-      thumbnail: `${id}-lens-shape.webp`, surface: `${id}-surface-shape.webp`, poles: `${id}-poles-shape.webp`,
+      thumbnail: `${id}-lens-shape.webp`, surface: `${id}-surface-shape@2x.webp`, poles: `${id}-poles-shape@2x.webp`,
       source: { id: `${id}-observational-measurements`, path: '../manifest.json', url: spec.paper }, falseColor: false,
       notes: `No image or colour of this planet exists (${TODO}: say why, and point at the ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit.` }] },
     // A lit body's prepared variants bind the shared shadows toggle.

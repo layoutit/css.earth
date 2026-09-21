@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "k2-18b",
+  "radiusKm": 15116.2,
+  "radiusSource": "Radius 2.37 +/- 0.22 Earth radii from Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830, Table 2), at 6378.137 km per Earth radius. No gravitational parameter is adopted. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 32.939614,
+  "orbitalPeriodSource": "Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830), Table 2: 32.939614 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of K2-18 b is measured; only its size, mass and orbit are."
+  }
+}

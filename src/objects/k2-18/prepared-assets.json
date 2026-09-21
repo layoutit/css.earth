@@ -1,0 +1,16 @@
+{
+  "schema": "cssk2-18-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 349577,
+      "sha256": "d66f1228d997b889621adff8d4524017f6c11fcac36b86539803e7e96f829774"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 340185,
+      "sha256": "10d9c807650426e7c76599f845f046eecdcce5ebdaf9ed50db1ca0254d103edd"
+    }
+  ]
+}

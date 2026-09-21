@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "k2-18b",
+  "displayName": "K2-18 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.37 Earth radii",
+        "source": {
+          "catalogueId": "arxiv-1805-00830",
+          "url": "https://arxiv.org/abs/1805.00830",
+          "label": "Sarkis, Henning, Kürster et al., AJ 155, 257 (2018), arXiv:1805.00830",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "32.94 days",
+        "source": {
+          "catalogueId": "arxiv-1805-00830",
+          "url": "https://arxiv.org/abs/1805.00830",
+          "label": "Sarkis, Henning, Kürster et al., AJ 155, 257 (2018), arXiv:1805.00830",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by K2-18; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "k2-18b-lens-shape.webp",
+        "surface": "k2-18b-surface-shape@2x.webp",
+        "poles": "k2-18b-poles-shape@2x.webp",
+        "source": {
+          "id": "k2-18b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1805.00830"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of this planet exists (it has never been resolved: only its transit depth and orbit are measured; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Sarkis, Henning, Kürster et al., AJ 155, 257 (2018), arXiv:1805.00830",
+      "href": "https://arxiv.org/abs/1805.00830"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1805.00830",
+      "credit": "Sarkis, Henning, Kürster et al., AJ 155, 257 (2018), arXiv:1805.00830"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/k2-18b.json",
+      "credit": "Published radius and transit-fitted orbit; Sarkis et al. (2018), AJ 155, 257, arXiv:1805.00830"
+    }
+  }
+}
