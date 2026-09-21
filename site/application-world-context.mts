@@ -30,6 +30,15 @@ const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'as
 const ordinaryAsteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !isDefaultContextFeature(object)).map(object => object.id);
 const ASTRONOMICAL_UNIT_M = 149_597_870_700;
 const minorMoonIds = minorMoonOrbitIds(applicationContext.bodies);
+const orbitCenters = new Map(applicationContext.bodies.flatMap(body => 'orbit' in body && body.orbit ? [[body.id, body.orbit.centerBodyId] as const] : []));
+const placedStarIds = new Set(SCENE_OBJECTS.filter(object => object.classification === 'star' && object.id !== applicationContext.focus.id).map(object => object.id));
+/** The placed star an object belongs to, with every body orbiting that star; empty inside the Solar System. */
+function placedSystemOf(id: string): ReadonlySet<string> {
+  const rootOf = (start: string) => { let current = start; for (let steps = 0; steps <= orbitCenters.size; steps++) { const center = orbitCenters.get(current); if (!center) return current; current = center; } return current; };
+  const root = rootOf(id);
+  if (!placedStarIds.has(root)) return new Set();
+  return new Set([root, ...[...orbitCenters.keys()].filter(member => rootOf(member) === root)]);
+}
 const hiddenOrbitIds = [
   ...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id),
   ...minorMoonIds,
@@ -174,9 +183,13 @@ export function createApplicationWorldContext() {
         let heliosphereEnabled = false, shellsMounted = false, destroyed = false;
         let illustrationModelsEnabled = false;
         let highlightedClassification: string | null = null;
+        // Opening a placed star's system, or any member of it, shows that whole system: its star, planets, names and orbits.
+        // Discovery keeps a system without imagery off the default map, not out of its own view.
+        let openSystem: ReadonlySet<string> = new Set();
         const updateDiscoveryVisibility = () => {
-          const { hiddenBodies, hiddenLabels, highlightedBodies } = discoveryVisibility(SCENE_OBJECTS, { illustrations: illustrationModelsEnabled,
-            highlighted: highlightedClassification });
+          const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations: illustrationModelsEnabled, highlighted: highlightedClassification });
+          const hiddenBodies = visibility.hiddenBodies.filter(id => !openSystem.has(id)), hiddenLabels = visibility.hiddenLabels.filter(id => !openSystem.has(id));
+          const { highlightedBodies } = visibility;
           layer.setHiddenBodies(hiddenBodies);
           layer.setHiddenLabels(hiddenLabels);
           layer.setHighlighted(highlightedBodies);
@@ -279,6 +292,8 @@ export function createApplicationWorldContext() {
             layer.previewSelection(id);
           },
           selectObject(id: string, frame: PreparedWorldCameraFrame) {
+            const system = placedSystemOf(id);
+            if (system.size !== openSystem.size || [...system].some(member => !openSystem.has(member))) { openSystem = system; updateDiscoveryVisibility(); }
             layer.selectObject(id, frame);
             minimap.selectObject(frame);
             moonLabels.selectObject(id);
