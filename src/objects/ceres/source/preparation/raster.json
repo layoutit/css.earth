@@ -178,44 +178,44 @@
       "id": "ammonium-band",
       "output": "ceres-{id}{suffix}.webp",
       "thumbnail": "ceres-lens-{id}.webp",
-      "source": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.IMG",
+      "source": "science/vir-reduction/ceres-vir-bd31.IMG.gz",
       "falseColor": true,
       "science": {
         "kind": "terrestrial-scientific",
         "id": "ammonium-band",
         "label": "Ammonium band",
         "format": "pds3-float-map",
-        "path": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.IMG",
-        "labelPath": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.LBL",
+        "path": "science/vir-reduction/ceres-vir-bd31.IMG.gz",
+        "labelPath": "science/vir-reduction/ceres-vir-bd31.LBL",
         "grid": {
-          "productId": "CMT_MOSAIC-BII_DEPTH",
-          "dataSetId": "DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0",
+          "productId": "CERES_VIR_BD_3_1",
+          "dataSetId": "CSSEARTH-CERES-VIR-BAND-DEPTH-V1",
           "targetName": "1 CERES",
-          "width": 4102,
-          "height": 1367,
-          "pixelsPerDegree": 11.393121506074,
+          "width": 5760,
+          "height": 1920,
+          "pixelsPerDegree": 16,
           "referenceRadiusMeters": 470000,
           "centerLongitudeEastDegrees": 180,
           "longitudeRangeEast": [
             0,
             360
           ],
-          "sampleProjectionOffset": 2050.2618710933,
-          "lineProjectionOffset": 682.88093554667,
+          "sampleProjectionOffset": 2879.5,
+          "lineProjectionOffset": 959.5,
           "projectionRotation": "0.0 <degree>",
           "missingValue": -1e+32,
-          "sampleType": "IEEE_REAL",
+          "sampleType": "PC_REAL",
           "coordinateSystem": "PLANETOCENTRIC",
           "latitudeRange": [
-            -60.002788883527,
-            59.981887771699
+            -60,
+            60
           ]
         },
-        "description": "Dawn VIR 3.1 µm band depth · scale from its own range",
-        "title": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, from the archived Dawn VIR global mosaic (Survey phase, public V2 calibration). The color scale spans this map's own 2nd to 98th percentile, 0.047 to 0.089, with the rainbow core of the Frigeri et al. (2019), Figure 7 bar (its colors between the dark blue and dark red ends). The archived values are shallower than that paper's (median 0.064 against its peak near 0.09): the paper used an artifact correction and instrument response (Carrozzo et al. 2016) that were never released, and a different continuum. Scan stripes remain for the same reason. Gray grid: beyond 60° latitude and other unmeasured pixels.",
-        "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
-        "minimum": 0.047,
-        "maximum": 0.089,
+        "description": "Dawn VIR 3.1 µm band depth · our reduction · scale from its own range",
+        "title": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, reduced here from Dawn VIR calibrated cubes with the continuum of Frigeri et al. (2019): column stripes and spikes removed, each cube brought to 30° phase, each pixel footprint mapped, overlaps averaged and seams blended as ISIS3 noseam does. Survey and HAMO cubes set every cell they saw; LAMO, then Approach cubes fill the rest. The color scale spans this map’s own 2nd to 98th percentile, 0.106 to 0.151, with the rainbow core of the Frigeri et al. (2019), Figure 7 bar. Values run deeper than the paper’s (median 0.121 against its peak near 0.09) because its response correction (Carrozzo et al. 2016) was never released; the pattern ranks close to its map (Spearman 0.89). Gray grid: beyond 60° latitude and the 1.3% no cube saw under 70° incidence and emission.",
+        "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/",
+        "minimum": 0.106,
+        "maximum": 0.151,
         "colors": [
           "#0101e0",
           "#0006e7",
@@ -239,9 +239,9 @@
           "#e30001"
         ],
         "labels": [
-          "0.047",
-          "0.068",
-          "0.089"
+          "0.106",
+          "0.128",
+          "0.151"
         ],
         "units": "band depth",
         "consumer": "ammonium-band",

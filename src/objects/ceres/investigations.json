@@ -241,20 +241,21 @@
     },
     {
       "id": "frigeri-2019-reproduction",
-      "subject": "Our own reduction of the Survey and HAMO VIR cubes with Frigeri et al. (2019) processing",
-      "status": "deferred",
-      "finding": "One HAMO cube was reduced end to end (SPICE geometry per line with the scan-mirror CK, I/F with the archived solar spectrum, three-channel boxcar, Frigeri continuum). Geometry matches the label centre and incidence. The values match the archive, not the paper, because the Carrozzo et al. (2016) response correction the paper used was never released.",
+      "subject": "Our own reduction of the Dawn VIR IR cubes with Frigeri et al. (2019) processing, for the Ammonium band",
+      "status": "included",
+      "finding": "Reduced 1,657 calibrated IR cubes with tools/objects/dawn/vir-mosaic.mts: SPICE cameras per line, I/F, stripe and spike removal, phase correction to 30°, footprint mapping, ISIS3 noseam blending. Survey and HAMO set every cell they saw; LAMO, then Approach cubes no coarser than the coarsest Survey cube, fill the gaps; set-aside outlier cubes are levelled by their measured offset and used last. Against Frigeri et al. Figure 7 read back into ranks on 2° cells, the 3.1 µm map scores Spearman 0.89 (archive 0.76) at 98.7% coverage. Averaging LAMO into every cell (0.83) and one flat offset per cube (0.77) scored lower and were dropped. At 2.7 µm ours scores 0.65 against the archive 0.75, so the Clay band keeps the archive. Values stay deeper than the paper because the Carrozzo et al. (2016) response correction was never released.",
       "evidence": [
+        "https://doi.org/10.1016/j.icarus.2018.04.019",
         "https://doi.org/10.1063/1.4972256",
-        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/"
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/",
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCAVIR_I1B/"
       ],
       "checked": [
         {
           "date": "2026-09-21",
-          "commit": "e80b240ec4162f6765c8bf39d6692eedc9d9d27a"
+          "commit": "48d4206bee09d28b04f28dc517c9a2296dcb9389"
         }
-      ],
-      "revisitWhen": "The Carrozzo et al. (2016) artifact matrix or a corrected VIR calibration is released, or a sharper HAMO-resolution lens is wanted on the archive's own scale."
+      ]
     }
   ]
 }

@@ -1,0 +1,35 @@
+{
+  "id": "source-dawn-spice-kernels",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Dawn SPICE kernels",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/",
+      "label": "NAIF Dawn kernels"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/GEOMETRY/DAWN_CSH_R01.TM",
+      "checkedOn": "2026-09-21",
+      "locator": "The VIR team's HAMO metakernel, which names the kernels this bank pins"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL NAIF; Dawn project SPICE kernels",
+      "scope": "Dawn kernels in the shared SPICE kernel bank.",
+      "evidence": "Kernel bank manifest credit field."
+    }
+  ]
+}

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0a061f8bd28e86db4b41bb2a7f0543607f8b532e867d4d8355fa61d8a8aa0fb1"
+    "sha256": "2b00474547e48abcdf7a8d514342245bdf509ed06b883e0ee13dd3d9db8851cf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "786ffcfe3ed51d9f68de70f405d65b83509163c0ea11efcb5c79499e04c53663"
+    "bindingsSha256": "d2d0316c3e5c2bc64eaf1d8bfa1890eb43ad4ac2a9db0323a59fa05fe11bb19d"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "e1093e81637b591a6a3e063519a56794b483a03c77a4690a34a6ef7a0477f515",
+      "sha256": "ccb9827ed9f5a18bc5527e38acb598521e2547b3c12049791f2f2008e2ce05b2",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/ceres/",
@@ -196,44 +196,44 @@
             "id": "ammonium-band",
             "output": "ceres-{id}{suffix}.webp",
             "thumbnail": "ceres-lens-{id}.webp",
-            "source": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.IMG",
+            "source": "science/vir-reduction/ceres-vir-bd31.IMG.gz",
             "falseColor": true,
             "science": {
               "kind": "terrestrial-scientific",
               "id": "ammonium-band",
               "label": "Ammonium band",
               "format": "pds3-float-map",
-              "path": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.IMG",
-              "labelPath": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.LBL",
+              "path": "science/vir-reduction/ceres-vir-bd31.IMG.gz",
+              "labelPath": "science/vir-reduction/ceres-vir-bd31.LBL",
               "grid": {
-                "productId": "CMT_MOSAIC-BII_DEPTH",
-                "dataSetId": "DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0",
+                "productId": "CERES_VIR_BD_3_1",
+                "dataSetId": "CSSEARTH-CERES-VIR-BAND-DEPTH-V1",
                 "targetName": "1 CERES",
-                "width": 4102,
-                "height": 1367,
-                "pixelsPerDegree": 11.393121506074,
+                "width": 5760,
+                "height": 1920,
+                "pixelsPerDegree": 16,
                 "referenceRadiusMeters": 470000,
                 "centerLongitudeEastDegrees": 180,
                 "longitudeRangeEast": [
                   0,
                   360
                 ],
-                "sampleProjectionOffset": 2050.2618710933,
-                "lineProjectionOffset": 682.88093554667,
+                "sampleProjectionOffset": 2879.5,
+                "lineProjectionOffset": 959.5,
                 "projectionRotation": "0.0 <degree>",
                 "missingValue": -1e+32,
-                "sampleType": "IEEE_REAL",
+                "sampleType": "PC_REAL",
                 "coordinateSystem": "PLANETOCENTRIC",
                 "latitudeRange": [
-                  -60.002788883527,
-                  59.981887771699
+                  -60,
+                  60
                 ]
               },
-              "description": "Dawn VIR 3.1 µm band depth · scale from its own range",
-              "title": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, from the archived Dawn VIR global mosaic (Survey phase, public V2 calibration). The color scale spans this map's own 2nd to 98th percentile, 0.047 to 0.089, with the rainbow core of the Frigeri et al. (2019), Figure 7 bar (its colors between the dark blue and dark red ends). The archived values are shallower than that paper's (median 0.064 against its peak near 0.09): the paper used an artifact correction and instrument response (Carrozzo et al. 2016) that were never released, and a different continuum. Scan stripes remain for the same reason. Gray grid: beyond 60° latitude and other unmeasured pixels.",
-              "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
-              "minimum": 0.047,
-              "maximum": 0.089,
+              "description": "Dawn VIR 3.1 µm band depth · our reduction · scale from its own range",
+              "title": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, reduced here from Dawn VIR calibrated cubes with the continuum of Frigeri et al. (2019): column stripes and spikes removed, each cube brought to 30° phase, each pixel footprint mapped, overlaps averaged and seams blended as ISIS3 noseam does. Survey and HAMO cubes set every cell they saw; LAMO, then Approach cubes fill the rest. The color scale spans this map’s own 2nd to 98th percentile, 0.106 to 0.151, with the rainbow core of the Frigeri et al. (2019), Figure 7 bar. Values run deeper than the paper’s (median 0.121 against its peak near 0.09) because its response correction (Carrozzo et al. 2016) was never released; the pattern ranks close to its map (Spearman 0.89). Gray grid: beyond 60° latitude and the 1.3% no cube saw under 70° incidence and emission.",
+              "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/",
+              "minimum": 0.106,
+              "maximum": 0.151,
               "colors": [
                 "#0101e0",
                 "#0006e7",
@@ -257,9 +257,9 @@
                 "#e30001"
               ],
               "labels": [
-                "0.047",
-                "0.068",
-                "0.089"
+                "0.106",
+                "0.128",
+                "0.151"
               ],
               "units": "band depth",
               "consumer": "ammonium-band",
@@ -314,7 +314,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "02c77f79a836241410b58466ba9be9c5ddacb09578e44e832ad3b2dd7e520220",
+      "sha256": "3aaaf3519c12098ea1caa42f19fc0f31abcbe28de7f54439a9a2f9b920550879",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -632,12 +632,12 @@
                 "kind": "scale",
                 "title": "3.1 µm band depth",
                 "labels": [
-                  "0.047",
-                  "0.068",
-                  "0.089"
+                  "0.105",
+                  "0.125",
+                  "0.145"
                 ],
                 "meta": "band depth",
-                "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
+                "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/",
                 "recipe": {
                   "palette": [
                     [
@@ -742,16 +742,16 @@
                     ]
                   ],
                   "labels": [
-                    "0.047",
-                    "0.068",
-                    "0.089"
+                    "0.105",
+                    "0.125",
+                    "0.145"
                   ]
                 }
               },
               "source": {
-                "id": "dawn-vir-ceres-bii-depth-img",
+                "id": "ceres-vir-bd31-img",
                 "path": "../manifest.json",
-                "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+                "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/"
               },
               "facts": [
                 {
@@ -762,7 +762,7 @@
                 {
                   "id": "coverage",
                   "label": "Coverage",
-                  "value": "60°S to 60°N; poles unmeasured"
+                  "value": "60°S to 60°N, 99% seen; VIR cubes, 2015"
                 },
                 {
                   "id": "scale",
@@ -770,7 +770,7 @@
                   "value": "2nd to 98th percentile of this map; rainbow core of Frigeri et al. (2019), Fig. 7"
                 }
               ],
-              "notes": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, from the archived Dawn VIR global mosaic (Survey phase, public V2 calibration). The color scale spans this map's own 2nd to 98th percentile, 0.047 to 0.089, with the rainbow core of the Frigeri et al. (2019), Figure 7 bar. The archived values are shallower than that paper's (median 0.064 against its peak near 0.09): the paper used an artifact correction and instrument response (Carrozzo et al. 2016) that were never released, and a different continuum. Scan stripes remain for the same reason. Gray grid: beyond 60° latitude and other unmeasured pixels.",
+              "notes": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, reduced here from Dawn VIR calibrated cubes with the continuum of Frigeri et al. (2019): column stripes and spikes removed, each cube brought to 30° phase, each pixel footprint mapped, overlaps averaged and seams blended as ISIS3 noseam does. Survey and HAMO cubes set every cell they saw; LAMO, then Approach cubes fill the rest. The color scale spans this map’s own 2nd to 98th percentile, 0.106 to 0.151, with the rainbow core of the Frigeri et al. (2019), Figure 7 bar. Values run deeper than the paper’s (median 0.121 against its peak near 0.09) because its response correction (Carrozzo et al. 2016) was never released; the pattern ranks close to its map (Spearman 0.89). Gray grid: beyond 60° latitude and the 1.3% no cube saw under 70° incidence and emission.",
               "noData": true
             }
           ]
@@ -1181,17 +1181,17 @@
     },
     {
       "kind": "source-input",
-      "id": "dawn-vir-ceres-bii-depth-img",
-      "path": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.IMG",
-      "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_DEPTH.IMG",
-      "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
+      "id": "ceres-vir-bd31-img",
+      "path": "science/vir-reduction/ceres-vir-bd31.IMG.gz",
+      "origin": "https://earth-assets.lowpoly.cc/source-assets/6c911bbace4ea77ce85cfe2e11fbdbca94f3b8f08a3d44e15a63a0617966797b/ceres-vir-bd31.IMG.gz",
+      "credit": "Dawn VIR team (De Sanctis et al.), NASA PDS Small Bodies Node calibrated IR spectra DAWN-A-VIR-3-RDR-IR-CERES-SPECTRA-V1.0; reduced by cssEarth contributors",
       "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
       "licenseEvidence": [
         "https://pds.nasa.gov/datastandards/documents/policy/",
-        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/"
       ],
-      "acquisition": "Retrieve the exact archived file from the PDS Small Bodies Node volume DWNCVIR_2, pinned 2026-09-21. No source substitution or automatic hash refresh.",
-      "redistribution": "Original binary is reacquired locally and excluded from Git; derived maps retain attribution.",
+      "acquisition": "Generated by node tools/objects/dawn/vir-mosaic.mts (reduce, stripes, mosaic) from science/vir-reduction/recipe.json; restore the byte-preserving gzip mirror using preparation/acquisition.json.",
+      "redistribution": "Our own reduction of public NASA data, mirrored on the project's asset host; excluded from Git.",
       "lensId": "ammonium-band",
       "label": "Ammonium band",
       "falseColor": true,
@@ -1203,20 +1203,20 @@
           360
         ],
         "latitudeDegrees": [
-          59.981887771699,
-          -60.002788883527
+          60,
+          -60
         ],
         "longitudeDirection": "east-positive",
         "latitudeType": "planetocentric",
         "referenceRadiusMeters": 470000
       },
-      "coverage": "3.1 µm NH4 (ammonium) band depth, 1 - Rc/Rb (Clark et al. 1984), from Survey and HAMO VIR spectra, photometrically corrected as in Ammannito et al. (2016), overlaps averaged after projection. The archive's artifact removal was not applied, so scan stripes and checkerboard patterns remain. Coverage is 60°S to 60°N; unmeasured pixels hold -1.0E+32 and stay missing.",
+      "coverage": "3.1 µm NH4 (ammonium) band depth, 1 - Rc/Rb (Clark and Roush), with the continuum of Frigeri et al. (2019): from the maximum in 2.91-3.01 µm to the maximum in 3.19-3.24 µm. Reduced here from Dawn VIR calibrated cubes: per-line SPICE cameras, I/F with the archive solar spectrum, three-channel boxcar, column stripes and spikes removed, cubes brought to 30° phase, pixel footprints mapped, seams blended as ISIS3 noseam does, incidence and emission below 70° (Ciarniello et al. 2017), overlaps averaged. Survey and HAMO cubes set every cell they saw; LAMO, then Approach cubes no coarser than the coarsest Survey cube, fill only cells those missed; cubes that disagree with all neighbours are levelled by their measured offset and used last. 16 pixels per degree, 60°S to 60°N, 98.7% covered; unmeasured cells hold -1.0E+32.",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "dawn",
-            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_DEPTH.LBL",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/",
             "missionId": "dawn"
           }
         ]
@@ -1225,14 +1225,15 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "dawn-vir-ceres-global-mosaics-v1",
+            "catalogueId": "pds-dawn-vir-ceres-ir-rdr",
             "role": "material",
-            "evidence": "PDS3 data set DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0, volume DWNCVIR_2, file listed under DATA/"
+            "evidence": "1,657 calibrated IR cubes (672 Survey and HAMO, 875 LAMO, 110 Approach) listed in science/vir-reduction/recipe.json and pinned by SHA-256 in science/vir-reduction/receipt.json."
           }
         ]
       },
-      "sha256": "4c802cb5811f379f887fcf95e42db8ee8064ef6fab7d2bf84d8d2c2adeb83d54",
-      "bytes": 22429736,
+      "mirror": "https://earth-assets.lowpoly.cc/source-assets/6c911bbace4ea77ce85cfe2e11fbdbca94f3b8f08a3d44e15a63a0617966797b/ceres-vir-bd31.IMG.gz",
+      "sha256": "6c911bbace4ea77ce85cfe2e11fbdbca94f3b8f08a3d44e15a63a0617966797b",
+      "bytes": 36834007,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1240,47 +1241,35 @@
         "groups": [
           "refresh"
         ],
-        "path": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.IMG",
-        "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_DEPTH.IMG"
+        "path": "science/vir-reduction/ceres-vir-bd31.IMG.gz",
+        "url": "https://earth-assets.lowpoly.cc/source-assets/6c911bbace4ea77ce85cfe2e11fbdbca94f3b8f08a3d44e15a63a0617966797b/ceres-vir-bd31.IMG.gz"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "dawn-vir-ceres-bii-depth-lbl",
-      "path": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.LBL",
-      "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_DEPTH.LBL",
-      "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
+      "id": "ceres-vir-bd31-lbl",
+      "path": "science/vir-reduction/ceres-vir-bd31.LBL",
+      "origin": "Repository-generated PDS3 label written by tools/objects/dawn/vir-mosaic.mts",
+      "credit": "Dawn VIR team (De Sanctis et al.), NASA PDS Small Bodies Node calibrated IR spectra DAWN-A-VIR-3-RDR-IR-CERES-SPECTRA-V1.0; reduced by cssEarth contributors",
       "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
-      "licenseEvidence": [
-        "https://pds.nasa.gov/datastandards/documents/policy/",
-        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
-      ],
-      "acquisition": "Retrieve the exact archived file from the PDS Small Bodies Node volume DWNCVIR_2, pinned 2026-09-21. No source substitution or automatic hash refresh.",
-      "redistribution": "Small native PDS3 label retained in Git byte for byte.",
-      "purpose": "Detached PDS3 label: identity, 32-bit big-endian IEEE_REAL layout, planetocentric east-positive equirectangular projection, latitude extent and missing constant, all checked against the lens recipe.",
+      "acquisition": "Written with the map by tools/objects/dawn/vir-mosaic.mts mosaic.",
+      "redistribution": "Small text label kept in Git.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "dawn-vir-ceres-global-mosaics-v1",
+            "catalogueId": "pds-dawn-vir-ceres-ir-rdr",
             "role": "material",
-            "evidence": "PDS3 data set DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0, volume DWNCVIR_2, file listed under DATA/"
+            "evidence": "1,657 calibrated IR cubes (672 Survey and HAMO, 875 LAMO, 110 Approach) listed in science/vir-reduction/recipe.json and pinned by SHA-256 in science/vir-reduction/receipt.json."
           }
         ]
       },
-      "sha256": "d4e830ba6854ec5a6ce38a708d9d94572467f12cf63783404b84322d90bb9860",
-      "bytes": 5520,
+      "sha256": "d3e2e5f24b44eb1f7250e9990e85f5949abc8a621bd2e93f39d0b10a88836a96",
+      "bytes": 1197,
       "dependencies": [],
       "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.LBL",
-        "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_DEPTH.LBL"
-      },
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -1296,8 +1285,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "02c77f79a836241410b58466ba9be9c5ddacb09578e44e832ad3b2dd7e520220",
-      "bytes": 17947,
+      "sha256": "3aaaf3519c12098ea1caa42f19fc0f31abcbe28de7f54439a9a2f9b920550879",
+      "bytes": 18169,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1633,20 +1622,20 @@
         "falseColor": true
       },
       "inputs": [
-        "dawn-vir-ceres-bii-depth-img",
-        "dawn-vir-ceres-bii-depth-lbl"
+        "ceres-vir-bd31-img",
+        "ceres-vir-bd31-lbl"
       ],
       "outputs": [
         {
           "url": "/scenes/ceres/ceres-ammonium-band@2x.webp",
-          "bytes": 3649714,
-          "sha256": "432930bbbb4d4cb4876ddabafef36160e2fdcccfabe86a074426abe966863623",
+          "bytes": 13112390,
+          "sha256": "b2c5e4a08f5efe1b4d2b9bf77e22dc38a8cc44db21d77664111b5d765108c77b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ceres/ceres-lens-ammonium-band.webp",
-          "bytes": 3044,
-          "sha256": "db394e292ae450b61a2716544d444dac56c47a6abe493c168b620f91ddd9f80b",
+          "bytes": 7150,
+          "sha256": "3dfb61dba89c86f31995c683e23cd4dcf114826efa6766e787227ce01859619d",
           "verification": "bytes-verified"
         },
         {
@@ -1658,7 +1647,7 @@
       ],
       "inputEvidence": [
         {
-          "sourceId": "dawn-vir-ceres-bii-depth-img",
+          "sourceId": "ceres-vir-bd31-img",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/4/source."
         }
@@ -2064,8 +2053,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/ammonium-band.webp",
-          "bytes": 91760,
-          "sha256": "44c37cf599199dd1a4ea8a6ea690ba6d33369e043109c40229b9742e52c944b5",
+          "bytes": 176508,
+          "sha256": "f5b93d76c19b9114441bdcc6ee48de216fde3952a8d9e39bd216f7b38cad3a6e",
           "verification": "bytes-verified"
         }
       ]
@@ -2077,11 +2066,11 @@
   },
   "lastPreparation": {
     "objectId": "ceres",
-    "materialSha256": "6d7e8645d2c4907ea8201beba9422b67ef7aaccad764286314a3da8147d75747",
+    "materialSha256": "849b9dde30db873ea4560d49d158d2335f756f419e560eab61355ca61194ee54",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "786ffcfe3ed51d9f68de70f405d65b83509163c0ea11efcb5c79499e04c53663"
+      "bindingsSha256": "d2d0316c3e5c2bc64eaf1d8bfa1890eb43ad4ac2a9db0323a59fa05fe11bb19d"
     }
   }
 }

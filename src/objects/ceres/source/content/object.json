@@ -315,12 +315,12 @@
           "kind": "scale",
           "title": "3.1 µm band depth",
           "labels": [
-            "0.047",
-            "0.068",
-            "0.089"
+            "0.105",
+            "0.125",
+            "0.145"
           ],
           "meta": "band depth",
-          "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/",
           "recipe": {
             "palette": [
               [
@@ -425,16 +425,16 @@
               ]
             ],
             "labels": [
-              "0.047",
-              "0.068",
-              "0.089"
+              "0.105",
+              "0.125",
+              "0.145"
             ]
           }
         },
         "source": {
-          "id": "dawn-vir-ceres-bii-depth-img",
+          "id": "ceres-vir-bd31-img",
           "path": "../manifest.json",
-          "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+          "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/"
         },
         "facts": [
           {
@@ -445,7 +445,7 @@
           {
             "id": "coverage",
             "label": "Coverage",
-            "value": "60°S to 60°N; poles unmeasured"
+            "value": "60°S to 60°N, 99% seen; VIR cubes, 2015"
           },
           {
             "id": "scale",
@@ -453,7 +453,7 @@
             "value": "2nd to 98th percentile of this map; rainbow core of Frigeri et al. (2019), Fig. 7"
           }
         ],
-        "notes": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, from the archived Dawn VIR global mosaic (Survey phase, public V2 calibration). The color scale spans this map's own 2nd to 98th percentile, 0.047 to 0.089, with the rainbow core of the Frigeri et al. (2019), Figure 7 bar. The archived values are shallower than that paper's (median 0.064 against its peak near 0.09): the paper used an artifact correction and instrument response (Carrozzo et al. 2016) that were never released, and a different continuum. Scan stripes remain for the same reason. Gray grid: beyond 60° latitude and other unmeasured pixels.",
+        "notes": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, reduced here from Dawn VIR calibrated cubes with the continuum of Frigeri et al. (2019): column stripes and spikes removed, each cube brought to 30° phase, each pixel footprint mapped, overlaps averaged and seams blended as ISIS3 noseam does. Survey and HAMO cubes set every cell they saw; LAMO, then Approach cubes fill the rest. The color scale spans this map’s own 2nd to 98th percentile, 0.106 to 0.151, with the rainbow core of the Frigeri et al. (2019), Figure 7 bar. Values run deeper than the paper’s (median 0.121 against its peak near 0.09) because its response correction (Carrozzo et al. 2016) was never released; the pattern ranks close to its map (Spearman 0.89). Gray grid: beyond 60° latitude and the 1.3% no cube saw under 70° incidence and emission.",
         "noData": true
       }
     ]
