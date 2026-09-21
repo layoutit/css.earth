@@ -9,7 +9,6 @@ import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe
 import { sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { publishSourceBytes } from '../src/platform/source-acquisition.mts';
 import { sourceArray, sourceDigest, sourceObject, sourcePath, sourceText } from '../src/platform/source-catalog.mts';
-import { setupObjectIds } from "./runtime-assets.mts";
 import { fetchWithRetry, RUNTIME_ASSET_ORIGIN, sourceCacheUrl } from './source-mirror.mts';
 
 const projectRoot = resolve(import.meta.dirname, "..");
@@ -76,7 +75,10 @@ async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Pr
   return true;
 }
 
-const ids = repositoryVolumeMode ? await repositoryVolumeObjectIds() : setupObjectIds(argumentsList);
+// Repository-volume restoration runs before the generated site catalogue exists in the nebula CI lane.
+// Keep the body registry lazy: that mode discovers its packages directly from src/objects instead.
+const ids = repositoryVolumeMode ? await repositoryVolumeObjectIds() :
+  (await import('./runtime-assets.mts')).setupObjectIds(argumentsList);
 for (const id of ids) {
   const volumeSource = resolve(projectRoot, 'src/objects', id, 'source');
   if (repositoryVolumeMode) {

@@ -143,6 +143,7 @@ test('repository volume package restores a pinned input from the content-address
   await json(resolve(root, 'src/objects/nebula/source/presentation.json'), {
     schema: 'cssearth-volume-presentation-source@1',
   });
+  await rm(resolve(root, 'site/objects.mts'));
   await run(root, ['tools/restore-source-inputs.mts', '--repository-volumes']);
   assert.deepEqual(requests, [`/source-cache/${expectedSha256}/source.bin`]);
   assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/source.bin')), bytes);
