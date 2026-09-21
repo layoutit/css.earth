@@ -10,7 +10,7 @@ const choice = { pick:1,key:'fixture-choice',state:'qualify' as const,target:'er
   display:{instrument:'Fixture camera',observationTime:{startIso:'2025-01-02T03:04:05.000Z',endIso:null},productKind:'image',wavelengthsMicrometres:[[2.2,2.4]] as const,advertisedKilobytes:null,metadataBasis:'indexed' as const},
   reason:'Exact source product can be qualified.',limitations:['Resolution is not established.'] };
 const answer = {schema:'cssearth-telescope-exploration@1' as const,request:{target:'eris'},target:'eris',targetResolution:{status:'resolved' as const,requested:'Eris',canonical:{id:'eris',name:'Eris'},matchedBy:'name' as const},
-  choices:[choice],unsupported:[{scope:'observation' as const,code:'unsupported-observation' as const,identity:'Other / row',reason:'No supported exact access operation.'}],
+  choices:[choice],unresolved:[{scope:'observation' as const,code:'filter-unresolved' as const,identity:'Maybe / row',reason:'Advertised product family is unknown.'}],unsupported:[{scope:'observation' as const,code:'unsupported-observation' as const,identity:'Other / row',reason:'No supported exact access operation.'}],
   issues:[{scope:'provider' as const,code:'provider-overflow' as const,identity:'Archive',reason:'Bounded result overflowed.'}],services:[],coverage:[]};
 const exploration=(directory:string):ExplorationSession&{readonly directory:string}=>({schema:'cssearth-telescope-exploration@1',createdAt:'2026-09-20T12:00:00.000Z',arguments:['eris'],target:'eris',choices:[choice],answer,directory});
 const context={kind:'exploration' as const,target:'eris',discovery:{schema:'cssearth-telescope-exploration@1' as const,reference:{kind:'indexed-observation',observation:'obs-1'}},assessment:{status:'not-requested' as const}};
@@ -65,7 +65,7 @@ test('explore parses optional filters without inventing strict scientific criter
 
 test('human exploration and artifact screens retain unknowns, blockers, context and reproducible commands',()=>{
   const directory='/tmp/run with spaces',screen=formatExploration(exploration(directory));
-  assert.match(screen,/Eris/u);assert.match(screen,/size unknown/u);assert.match(screen,/Resolution is not established/u);assert.match(screen,/Unsupported discoveries/u);assert.match(screen,/Bounded result overflowed/u);assert.match(screen,/telescope get '\/tmp\/run with spaces' --pick N/u);
+  assert.match(screen,/Eris/u);assert.match(screen,/size unknown/u);assert.match(screen,/Resolution is not established/u);assert.match(screen,/Unresolved discoveries/u);assert.match(screen,/Unsupported discoveries/u);assert.match(screen,/Bounded result overflowed/u);assert.match(screen,/telescope get '\/tmp\/run with spaces' --pick N/u);
   const artifact=formatArtifact(inspection);
   assert.match(artifact,/delivery/u);assert.match(artifact,/No scientific acceptance criteria requested/u);assert.match(artifact,/sphere: unavailable/u);assert.match(artifact,/A sphere requires a registered body map/u);assert.match(artifact,/Unit: MJy\/sr/u);assert.match(artifact,/--output image --hdu 1 --structure SCI --plane N --out DIRECTORY/u);
   assert.equal(outputCommand(inspection.source,inspection.outputs[0]!),"telescope export /tmp/run/pick-1/result.json --output image --hdu 1 --structure SCI --plane N --out DIRECTORY");

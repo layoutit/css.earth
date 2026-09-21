@@ -40,3 +40,9 @@ test('unknown targets return suggestions without exposing provider results', () 
     vo: { records: [], services: [{ service: 'should-not-leak', state: 'sampled', scope: 'fixture', reason: 'fixture' }] } });
   assert.equal(answer.targetResolution.status, 'unknown'); assert.deepEqual(answer.services, []); assert.equal(answer.issues[0]!.code, 'unknown-target');
 });
+
+test('explicit family filters separate known mismatches from selectable choices',()=>{
+  const source={id:'image',target:'sun',telescope:'Fixture',mode:'camera',kind:'image' as const,archiveProductId:'archive-image',decoder:'fits-image' as const,files:[],identity:{OBJECT:'SUN'},units:'counts',meaning:'fixture',citation:'https://example.test/',limitations:[],qualified:false};
+  const answer=explorationAnswer({target:'sun',family:'F16'},{ledgers:[],capabilities:[],targetCatalogue:[{id:'sun',name:'Sun',aliases:[]}],targetAssociations:[],bodyMaps:[],sourceProducts:[source],qualifiedProducts:[]});
+  assert.deepEqual(answer.choices,[]);assert.deepEqual(answer.unresolved,[]);assert.equal(answer.unsupported.length,1);assert.match(answer.unsupported[0]!.reason,/F01 do not match F16/u);
+});
