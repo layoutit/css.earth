@@ -1,9 +1,14 @@
 {
   "id": "doi-10-1051-0004-6361-202346749",
-  "kind": "data-product",
+  "kind": "publication",
   "identityLevel": "work",
-  "title": "Chiron · published shape",
-  "identifiers": [],
+  "title": "Research publication · DOI 10.1051/0004-6361/202346749",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202346749"
+    }
+  ],
   "links": [
     {
       "role": "landing",
@@ -14,8 +19,8 @@
   "evidence": [
     {
       "path": "src/objects/chiron/source/manifest.json",
-      "revision": "0000000000000000000000000000000000000000",
-      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "revision": "4525c1bbaeef3c27692602376c546ce7770e7f3b",
+      "sha256": "69a7f45c4a6cab425e7449c70e50e7af0acbb68425980152a4533c82539b712d",
       "locator": "/inputs/1"
     }
   ],
