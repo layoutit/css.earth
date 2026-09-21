@@ -3,7 +3,9 @@ import type { BrowserWindow } from './browser-types.mts';
 import type { CatalogueIndexEntry } from './catalogue-index.mts';
 import { markerStyle } from '../src/navigation/marker-presentation.mts';
 
-const ROW_PITCH = 28;
+/** A search result row is 48 px (a 40 px preview beside a name and a subtitle) with an 8 px gap. */
+const ROW_PITCH = 56;
+const PREVIEW_PIXELS = 40;
 const OVERSCAN_ROWS = 6;
 const MAX_WINDOW_ROWS = 28;
 const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS)
@@ -11,7 +13,24 @@ const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKE
 
 interface RowView { readonly item: HTMLLIElement; readonly anchor: HTMLAnchorElement; index: number; }
 
+/** The prepared search thumbnail of a scene object with a context sprite (`tools/prepare-search-thumbnails.mts`). */
+export function searchPreviewUrl(objectId: string): string | null {
+  return PREPARED_NAVIGATION_MARKERS[objectId]?.context ? `/navigation/search/${objectId}@2x.webp` : null;
+}
+
 function renderMarker(documentTarget: Document, entry: CatalogueIndexEntry) {
+  const preview = entry.marker.kind === 'scene' ? searchPreviewUrl(entry.marker.id) : null;
+  if (preview) {
+    const image = documentTarget.createElement('img');
+    image.className = 'planet-search-preview';
+    image.src = preview;
+    image.width = PREVIEW_PIXELS;
+    image.height = PREVIEW_PIXELS;
+    image.alt = '';
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    return image;
+  }
   const marker = documentTarget.createElement('span');
   if (entry.marker.kind === 'focus') {
     marker.className = `planet-navigation-marker ${entry.marker.thumbnail ? 'context-navigation-thumbnail' : 'catalog-navigation-marker'}`;
@@ -19,8 +38,8 @@ function renderMarker(documentTarget: Document, entry: CatalogueIndexEntry) {
     if (entry.marker.thumbnail) {
       const image = documentTarget.createElement('img');
       image.src = entry.marker.thumbnail;
-      image.width = 16;
-      image.height = 16;
+      image.width = PREVIEW_PIXELS;
+      image.height = PREVIEW_PIXELS;
       image.alt = '';
       image.loading = 'lazy';
       image.decoding = 'async';
@@ -102,6 +121,10 @@ function bindRow(documentTarget: Document, view: RowView, entry: CatalogueIndexE
   const detail = anchor.children[2] as HTMLElement;
   detail.title = entry.detail.title;
   detail.ariaLabel = entry.detail.ariaLabel;
+  // The subtitle: what the object is, then how far it is.
+  const kind = documentTarget.createElement('span');
+  kind.className = 'planet-object-kind';
+  kind.textContent = `${entry.classificationName.charAt(0).toLocaleUpperCase('en')}${entry.classificationName.slice(1)} · `;
   if (entry.detail.value && entry.detail.unit) {
     const value = documentTarget.createElement('span');
     value.className = 'planet-object-distance-value';
@@ -109,9 +132,9 @@ function bindRow(documentTarget: Document, view: RowView, entry: CatalogueIndexE
     const unit = documentTarget.createElement('span');
     unit.className = 'planet-object-distance-unit';
     unit.textContent = entry.detail.unit;
-    detail.replaceChildren(value, ' ', unit);
+    detail.replaceChildren(kind, value, ' ', unit);
   } else {
-    detail.textContent = entry.detail.text;
+    detail.replaceChildren(kind, entry.detail.text);
   }
 }
 

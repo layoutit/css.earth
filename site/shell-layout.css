@@ -318,7 +318,6 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 }
 
 .planet-sidebar .planet-object-browser[data-navigation-filtered] .planet-object-tabs { display: none; }
-.planet-sidebar .planet-object-browser[data-navigation-filtered] #object-category-results > .planet-object-list { display: none; }
 .planet-sidebar .planet-object-browser[data-navigation-filtered] #object-category-results {
   padding-block-start: 0;
 }
