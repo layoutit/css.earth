@@ -35,6 +35,8 @@ export interface PaperReport {
   readonly authors: readonly string[]; readonly moreAuthors: boolean; readonly licence: string | null;
   readonly openAccessUrl: string | null; readonly openAlex: string; readonly access: FullTextAccess;
   readonly captionsScanned?: number; readonly captions?: readonly PaperCaption[]; readonly savedFullText?: string;
+  /** evidenceScore of the fetched paper; the report is sorted by it. */
+  readonly evidence?: number;
 }
 export interface PaperSearch {
   readonly schema: typeof PAPERS_SCHEMA; readonly target: { readonly id: string; readonly name: string };
@@ -97,7 +99,7 @@ export function mentions(work: Pick<OpenAlexWork, 'title' | 'abstract'>, phrases
   return phrases.every(phrase => text.includes(words(phrase)));
 }
 
-/** Open access first, then OpenAlex relevance, then the most recent year. */
+/** Open access first, then OpenAlex relevance, then the most recent year: the order in which copies are fetched. */
 export function rankWorks(works: readonly OpenAlexWork[], limit = MAX_WORKS): OpenAlexWork[] {
   const order = (value: number | null): number => value ?? Number.NEGATIVE_INFINITY;
   return [...works].sort((left, right) => Number(right.isOpenAccess) - Number(left.isOpenAccess)
@@ -191,10 +193,24 @@ export function relevantCaptions(captions: readonly PaperCaption[]): PaperCaptio
   return captions.filter(caption => CAPTION_TOPIC.test(caption.text));
 }
 
+const MAP_CAPTION = /\bmaps?\b|\bmapped\b|\bmosaics?\b|\bcolou?r[ -]?bars?\b|\bcolou?r scales?\b/iu;
+const OBSERVATION_TABLE = /\borbits?\b|\bperijoves?\b|\bobservations?\b|\bdistances?\b|\bresolution\b/iu;
+/** What a fetched paper shows it did: 3 per map or colour-scale caption, 2 per table listing observations, 2 when the
+ * title names the instrument, and 1 when it names the target. Papers that made the product rise above ones that cite it. */
+export function evidenceScore(report: Pick<PaperReport, 'title' | 'captions'>, target: string, instrument: string | null): number {
+  const captions = report.captions ?? [];
+  return 3 * captions.filter(caption => MAP_CAPTION.test(caption.text)).length
+    + 2 * captions.filter(caption => caption.kind === 'table' && OBSERVATION_TABLE.test(caption.text)).length
+    + (instrument && mentions({ title: report.title, abstract: '' }, [instrument]) ? 2 : 0)
+    + (mentions({ title: report.title, abstract: '' }, [target]) ? 1 : 0);
+}
+
 const CHALLENGE_TITLE = /<title[^>]*>[^<]*(just a moment|client challenge|captcha|attention required|verify you are human|access denied|bot manager|are you a robot)/iu;
 const CHALLENGE_BODY = /challenge-platform|cf-chl-|perfdrive\.com|_Incapsula_Resource|px-captcha/iu;
+/** A challenge page is small and says so in its title or by Cloudflare's header. Full articles often embed the same
+ * bot-management scripts (Nature does), so script names alone only count on a short page. */
 export function isChallenge(headers: Pick<Headers, 'get'>, body: string): boolean {
-  return headers.get('cf-mitigated') === 'challenge' || CHALLENGE_TITLE.test(body) || CHALLENGE_BODY.test(body.slice(0, 20_000));
+  return headers.get('cf-mitigated') === 'challenge' || CHALLENGE_TITLE.test(body) || (body.length < 30_000 && CHALLENGE_BODY.test(body));
 }
 
 interface Budget { used: number }
@@ -253,10 +269,14 @@ export async function searchPapers(root: string, options: PaperSearchOptions): P
     if (fetched.html === undefined) { works.push({ ...base, access: fetched.access }); continue; }
     const extracted = extractCaptions(fetched.html);
     let savedFullText: string | undefined;
-    if (options.directory) { savedFullText = resolve(options.directory, 'fulltext', `${rank}.html`); await writeFile(savedFullText, fetched.html); }
+    if (options.directory) { savedFullText = resolve(options.directory, 'fulltext', `${index + 1}.html`); await writeFile(savedFullText, fetched.html); }
     works.push({ ...base, access: fetched.access, captionsScanned: extracted.scanned, captions: relevantCaptions(extracted.captions), ...(savedFullText ? { savedFullText } : {}) });
   }
-  const result: PaperSearch = { schema: PAPERS_SCHEMA, target, instrument, query, candidates: candidates.length, requests: budget.used, works };
+  // Fetch order was the catalogue's guess; report order is what the papers turned out to contain.
+  const scored = works.map((work, index) => ({ work, index, score: evidenceScore(work, target.name, instrument) }))
+    .sort((left, right) => right.score - left.score || left.index - right.index)
+    .map(({ work, score }, index) => ({ ...work, rank: index + 1, evidence: score }));
+  const result: PaperSearch = { schema: PAPERS_SCHEMA, target, instrument, query, candidates: candidates.length, requests: budget.used, works: scored };
   if (options.directory) await writeFile(resolve(options.directory, 'papers.json'), `${JSON.stringify(result, null, 2)}\n`);
   return result;
 }
@@ -265,7 +285,7 @@ export function formatPapers(result: PaperSearch, directory?: string): string {
   const lines = [`${result.target.name}${result.instrument ? ` · ${result.instrument}` : ''} · ${result.works.length} of ${result.candidates} matching works · ${result.requests} requests`, ''];
   for (const work of result.works) {
     const authors = `${work.authors.join(', ')}${work.moreAuthors ? ' et al.' : ''}`;
-    lines.push(`${work.rank}. ${work.title} (${work.year ?? 'year unknown'})`, `   ${authors}`,
+    lines.push(`${work.rank}. ${work.title} (${work.year ?? 'year unknown'})${work.evidence ? ` · evidence ${work.evidence}` : ''}`, `   ${authors}`,
       `   DOI: ${work.doi ?? 'none'} · licence: ${work.licence ?? 'unknown'}`,
       `   Open access: ${work.openAccessUrl ?? 'none'}`,
       `   Full text: ${work.access.status}${work.access.format ? ` (${work.access.format})` : ''} · ${work.access.reason}`);
