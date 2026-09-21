@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "013bd573dba264ae00b2e38b2c9b19518793aaea",
+  "note": "Repository-completeness debt: registered bodies with no browser-profile fixture. Absent fixtures do not change what the application ships, so they are ratcheted, not gated. This list may shrink, never grow; remove an entry in the same change that supplies its file.",
+  "missingPackageFiles": [
+    "tests/objects/browser/aldebaran/browser-profile.mts",
+    "tests/objects/browser/alpha-centauri-a/browser-profile.mts",
+    "tests/objects/browser/alpha-centauri-b/browser-profile.mts",
+    "tests/objects/browser/altair/browser-profile.mts",
+    "tests/objects/browser/arcturus/browser-profile.mts",
+    "tests/objects/browser/deneb/browser-profile.mts",
+    "tests/objects/browser/fomalhaut/browser-profile.mts",
+    "tests/objects/browser/hd-209458/browser-profile.mts",
+    "tests/objects/browser/hd-209458b/browser-profile.mts",
+    "tests/objects/browser/k2-18/browser-profile.mts",
+    "tests/objects/browser/k2-18b/browser-profile.mts",
+    "tests/objects/browser/kepler-186/browser-profile.mts",
+    "tests/objects/browser/kepler-186f/browser-profile.mts",
+    "tests/objects/browser/kepler-452/browser-profile.mts",
+    "tests/objects/browser/kepler-452b/browser-profile.mts",
+    "tests/objects/browser/proxima-centauri/browser-profile.mts",
+    "tests/objects/browser/rigel/browser-profile.mts",
+    "tests/objects/browser/sirius/browser-profile.mts",
+    "tests/objects/browser/vega/browser-profile.mts",
+    "tests/objects/browser/wasp-39/browser-profile.mts",
+    "tests/objects/browser/wasp-39b/browser-profile.mts"
+  ]
+}

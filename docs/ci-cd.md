@@ -11,7 +11,7 @@ timings before claiming it is met. Report cold and warm-cache runs separately.
 
 | Workflow | Trigger and responsibility |
 | --- | --- |
-| [Shared universe](../.github/workflows/universe.yml) | PRs always run classification and contract lint. Changed ownership selects application/test types, source/runtime/shell/renderer, preparation/publication and nebula checks. Main runs every lane. |
+| [Shared universe](../.github/workflows/universe.yml) | PRs always run classification, contract lint and the advisory repository audit. Changed ownership selects application/test types, runtime/shell/renderer, preparation/publication and nebula checks, and — inside the advisory audit — the source-catalogue and bake-reproduction checks. Main runs every lane. |
 | [Object-scope gate](../.github/workflows/object-scope.yml) | Every PR: more than 12 changed object directories needs the `pipeline-change` label. Labels re-evaluate this gate. |
 | [Nightly asset sweep](../.github/workflows/nightly.yml) | Scheduled/manual runs check all published keys and test types. A separately selected production build/browser check also runs on relevant PRs; it does not publish the site. Keep it outside the merge-required set unless it fits the total PR budget. |
 | [Deploy](../.github/workflows/deploy.yml) | A successful Shared universe run on main automatically builds and deploys that exact revision. Manual dispatch also deploys. Merging is therefore not deployment-neutral. |
@@ -27,9 +27,49 @@ group and can supersede an older deployment.
 - Put a check with the code it protects. Use the shared
   [affected-path map](../.github/ci-areas.json); unknown paths deliberately select
   all shared lanes. Do not add a second ownership map in workflow scripts.
-- Keep correctness, source integrity, changed-key publication and relevant type
-  checks blocking. Exhaustive remote sweeps and broad release qualification have
-  scheduled/manual homes. Moving a check requires naming where its proof remains.
+- Keep correctness, source integrity and relevant type checks blocking. Exhaustive
+  remote sweeps and broad release qualification have scheduled/manual homes. Moving
+  a check requires naming where its proof remains.
+- **No pull-request job contacts R2.** The merge gate is compile, build and behave;
+  it takes no network dependency that can be slow or flaky. Publication proof lives
+  at the two boundaries that can act on it: `pnpm check:deploy-assets` in
+  [Deploy](../.github/workflows/deploy.yml), which refuses to ship a build whose
+  runtime assets are not inventoried, and the full key sweep in the
+  [nightly workflow](../.github/workflows/nightly.yml). A contributor publishing an
+  object runs `node tools/check-assets-published.mts --object=<id>` themselves; see
+  [the publishing instructions](../CONTRIBUTING.md#publishing-prepared-assets-maintainers).
+- Gate on what ships; report what is merely incomplete. A merge-required check may
+  only assert something whose failure means the shipped application is broken, wrong
+  or unverifiable as shipped: it does not compile, it does not build, it does not
+  behave, or an asset it serves is missing. Repository completeness — a package file
+  nobody has written yet, a source input that cannot be re-downloaded, a stale link,
+  a misplaced file — is backlog. It stays visible and still turns a job red, but it
+  may not veto an unrelated change.
+- `Repository and provenance audit (advisory)` is where that backlog runs. It is
+  deliberately absent from the repository's required status checks, so its result is
+  reported without blocking a merge. This is not `continue-on-error`, a skip, a wider
+  tolerance or a longer timeout: every check in it runs on every commit, fails the
+  job, and is named in the run summary. Do not move a check there to silence it —
+  move it only when its failure cannot make the deployed site broken or wrong, and
+  say in the pull request where the shipped-side proof remains. The provenance *pins*
+  behind published assets are shipped-side proof: they stay in `Contract lint`
+  (physical frame receipts and document pins), which verifies by SHA-256 the bytes the
+  site actually serves.
+- Two whole lanes live in that advisory job rather than on the gate, and run there in
+  full with the same commands and arguments: the source-catalogue reconciliation that
+  was `Universe / sources`, and the bake reproduction that was `Preparation / world`.
+  Both assert that the *repository's* records reconcile and that a bake replays
+  byte-for-byte. The site bakes nothing — it serves the already-published,
+  SHA-256-pinned bank — so a reconciliation or reproduction gap is a stale recipe or a
+  drifted toolchain, not a broken page. They keep the same path-based selection they
+  had as job conditions, so an unrelated change still runs neither.
+- `tools/object-package-backlog.json` is the ratcheted inventory for the object
+  package contract: `tools/object-package-contract.mts` reports a missing
+  `backlogFiles` entry instead of throwing, and `tools/restore-source-inputs.test.mts`
+  prints the outstanding list and fails only when it *grows*, or when an entry is
+  stale because its file now exists. Shrink the list in the change that supplies the
+  file. This is not a tolerance, a skip or a `continue-on-error`: every entry is still
+  named on every run, and new debt is still blocked at the moment it is introduced.
 - Restore only inputs the selected tests consume. Compiler jobs need pinned JSON
   and generated shell data, not the global texture bank. Image-consuming tests
   must restore their real pinned inputs; missing data is not a pass.
@@ -43,6 +83,26 @@ group and can supersede an older deployment.
   declarations needed by a later typecheck.
 - Do not hide a failing check with `continue-on-error`, a wider tolerance, skipped
   cases or a larger timeout. Fix the owning defect and retain a regression test.
+- Narrowing a checkout does not buy latency here, and it is not free. HEAD's tracked
+  source-media bank under `src/objects/*/source/` is 737 MB of the 1.14 GB working tree,
+  so it looks like the obvious target. It is not: measured on run 35621432602, a non-cone
+  `sparse-checkout` that dropped that media took the tree to 533 MB and moved checkout by
+  nothing—22.4 s mean across the narrowed jobs against 25.8 s for the untouched jobs in
+  the same run, inside the ordinary 20-36 s spread. `filter: blob:none` does not help
+  either: Contract lint already sets it and checks out in the same time as jobs that set
+  no options. Checkout on these runners is dominated by fixed per-job cost, not by bytes.
+  Two hazards make it worse than neutral. Small non-JSON evidence under `source/` is read
+  by more steps than it looks: `tools/prepare-facilities.mts --catalog-only` reads roughly
+  350 such files and re-downloads or fails when one is absent, and the shell lane's
+  `pnpm test:sbmt --unit` still reads Eros `.SUM` and `.INFO` observations because
+  `SBMT_TEST_UNIT` narrows the case list without skipping those tests. Enumerating the
+  wanted extensions is an allowlist over a data-driven citation set, so a new body citing
+  a new extension fails later with a confusing network error. Separately,
+  `tools/ci-cache-key.mts` digests the Git index, so paths
+  left out of the worktree hash as `deleted`—a different cache identity from the
+  unnarrowed jobs, and one that no longer reflects the real bytes. Spend effort on the
+  steps that actually dominate a lane instead: building shared packages and restoring
+  prepared assets, each 30-75 s against roughly 10 s of tests.
 
 ## Adding tests
 

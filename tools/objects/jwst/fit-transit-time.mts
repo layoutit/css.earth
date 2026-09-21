@@ -1,15 +1,20 @@
 import { readFileSync } from 'node:fs';
-/** Mid-transit time of HD 209458 b from a JWST Level 3 white-light curve (MAST *_whtlt.ecsv; columns MJD_UTC, BJD_TDB, whitelight_flux).
+/** Mid-transit time of a planet from a JWST Level 3 white-light curve (MAST *_whtlt.ecsv; columns MJD_UTC, BJD_TDB, whitelight_flux).
  *
- *   node tools/objects/source-authoring/hd-209458/fit-transit-time.mts <whtlt.ecsv>
+ *   node tools/objects/jwst/fit-transit-time.mts <whtlt.ecsv> [--depth <fraction>] [--duration <days>] [--clip <fraction>]
  *
- * A trapezoid with a linear baseline, least squares by Nelder-Mead; the error is the spread of 200 block bootstraps of the residuals. */
-const file = process.argv[2]!;
+ * A trapezoid with a linear baseline, least squares by Nelder-Mead; the error is the spread of 200 block bootstraps of the residuals.
+ * --depth and --duration are the starting guesses for the transit depth and total duration, and --clip the largest departure from a
+ * running median kept; the defaults are HD 209458 b's (0.0146, 0.128 d, 0.002), for which the tool was written. */
+const [file, ...flags] = process.argv.slice(2);
+const flag = (name: string, fallback: number) => { const at = flags.indexOf(`--${name}`); const value = at < 0 ? fallback : Number(flags[at + 1]); if (!Number.isFinite(value) || value <= 0) throw new TypeError(`--${name} takes a positive number.`); return value; };
+if (!file) throw new TypeError('Usage: fit-transit-time <whtlt.ecsv> [--depth <fraction>] [--duration <days>] [--clip <fraction>]');
+const DEPTH = flag('depth', 0.0146), DURATION = flag('duration', 0.128), CLIP = flag('clip', 0.002);
 const rows = readFileSync(file, 'utf8').split('\n').filter(l => l && !l.startsWith('#')).slice(1).map(l => l.split(/\s+/).map(Number)).filter(r => r.every(Number.isFinite));
 let t = rows.map(r => r[1]!), f = rows.map(r => r[2]!);
 const med = [...f].sort((a, b) => a - b)[f.length >> 1]!; f = f.map(v => v / med);
 // 5-sigma clip against a running median
-const keep = f.map((v, i) => { const w = f.slice(Math.max(0, i - 15), i + 16).sort((a, b) => a - b); const m = w[w.length >> 1]!; return Math.abs(v - m) < 0.002; });
+const keep = f.map((v, i) => { const w = f.slice(Math.max(0, i - 15), i + 16).sort((a, b) => a - b); const m = w[w.length >> 1]!; return Math.abs(v - m) < CLIP; });
 t = t.filter((_, i) => keep[i]); f = f.filter((_, i) => keep[i]);
 const t00 = t[0]!; const x = t.map(v => v - t00);
 const model = (p: number[], xi: number) => { const [t0, d, T14, T12, a, b] = p as [number, number, number, number, number, number]; const u = Math.abs(xi - t0); const half = T14 / 2, flat = half - T12;
@@ -22,7 +27,7 @@ function nm(p0: number[], step: number[], y: number[]) { const n = p0.length; le
     else if (fr < val[n - 1]!) { sim[n] = r; val[n] = fr; } else { const k = at(0.5), fk = chi(k, y); if (fk < val[n]!) { sim[n] = k; val[n] = fk; } else { sim = sim.map(p => p.map((v, j) => sim[0]![j]! + 0.5 * (v - sim[0]![j]!))); val = sim.map(p => chi(p, y)); } } }
   return sim[0]!; }
 const span = x[x.length - 1]!;
-const guess = [span / 2, 0.0146, 0.128, 0.018, 1.003, 0];
+const guess = [span / 2, DEPTH, DURATION, 0.018, 1.003, 0];
 const best = nm(guess, [0.01, 0.002, 0.01, 0.004, 0.001, 0.001], f);
 const res = f.map((v, i) => v - model(best, x[i]!)); const rms = Math.sqrt(res.reduce((s, r) => s + r * r, 0) / res.length);
 let seed = 12345; const rand = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32;

@@ -4,8 +4,8 @@
     {
       "id": "k2-18-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1121,
-      "expectedSha256": "6c9db22890adbdd37dcef78d8134b17edf38c49d698978fcf57ee1f29a5b7493",
+      "expectedBytes": 1174,
+      "expectedSha256": "46492526431b50bafa517a16cfb20a8e3e94d9511b9c30df8ad54c124614072e",
       "origin": "https://arxiv.org/abs/1805.00830",
       "credit": "Sarkis, Henning, Kürster et al., \"The CARMENES search for exoplanets around M dwarfs: A low-mass planet in the temperate zone of the nearby K2-18\", AJ 155, 257 (2018), arXiv:1805.00830",
       "license": "Factual numerical measurements; source attribution retained",
@@ -198,6 +198,15 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 2588,
       "expectedSha256": "d2c68ed58dcff719c734906316bb7ac94c51a2477518ef9723a677e66c5b2211"
+    },
+    {
+      "path": "reference/rendered-system.png",
+      "expectedBytes": 536071,
+      "expectedSha256": "26d03b850a0974cefd18f1caf07ab408ab9b784e635adb8c2aa955634dcc1707",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture of the system view in the app, committed with the package in 38da64e3fb; the capture's settings were not recorded."
+      }
     }
   ]
 }

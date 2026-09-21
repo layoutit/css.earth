@@ -4,7 +4,7 @@ import { required } from '../../../../tools/test-values.mts';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { expect, test, vi } from 'vitest';
-import { mountPreparedWorldContext, parsePreparedWorldContext, preparedVolumeOpacity } from './prepared-world-context.js';
+import { mountPreparedWorldContext, parsePreparedWorldContext, parsePreparedWorldContextSummary, preparedVolumeOpacity } from './prepared-world-context.js';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import { createWorldContextFrameEncoder } from './world-context-frame.js';
@@ -202,7 +202,7 @@ test('open world trajectories validate their epoch vertex and never accept a clo
     bodyVertexIndex: 3, displayExtentAu: 600, trailModel: 'finite-open-trajectory-constant-weight',
     trail: Array(7).fill(1), activeChords: [0, 1, 2, 3, 4, 5, 6], extentChords: [0, 3, 1, 5, 2, 4, 6] };
   const input = { ...original, bodies: [{ ...body, orbit }, original.bodies[1]] };
-  expect(parsePreparedWorldContext(input).bodies[0]!.orbit).toEqual(orbit);
+  expect(parsePreparedWorldContext(input).bodies[0]!.orbit).toEqual({ ...orbit, vertexCount: 8, fullTrail: true });
   for (const invalid of [{ closed: true }, { bodyVertexIndex: undefined }, { bodyVertexIndex: 0 }, { bodyVertexIndex: 8 },
     { trail: Array(8).fill(1) }, { trail: [0, 1, 1, 1, 1, 1, 1] }, { displayExtentAu: 0 },
     { activeChords: [0, 1, 2, 3, 4, 5, 7] }]) {
@@ -2188,6 +2188,40 @@ test('opacity-only ticks do not reproject, republish picking or measure retained
   layer.destroy();
 });
 
+
+test('the main thread draws worker frames from the orbit summary exactly as from the full context', () => {
+  const full = plan(1);
+  const summaryInput = { ...full, schema: 'cssearth-world-context-summary@1', bodies: full.bodies.map(({ orbit, ...body }) => !orbit ? body : { ...body,
+    orbit: { centerBodyId: orbit.centerBodyId, centerPositionM: orbit.centerPositionM, vertexCount: orbit.verticesM.length, fullTrail: orbit.fullTrail,
+      ...(orbit.bounds ? { bounds: orbit.bounds } : {}), ...(orbit.lod ? { lod: { bounds: orbit.lod.bounds } } : {}) } }) };
+  const summary = parsePreparedWorldContextSummary(summaryInput);
+  expect(() => parsePreparedWorldContextSummary(structuredClone(full))).toThrow(/Unsupported/);
+  expect(() => parsePreparedWorldContext(summaryInput)).toThrow(/Unsupported/);
+  expect(() => parsePreparedWorldContextSummary({ ...summaryInput, bodies: summaryInput.bodies.map(body =>
+    'orbit' in body ? { ...body, orbit: { ...body.orbit, verticesM: [] } } : body) })).toThrow(/verticesM/);
+  const layers = [full, summary].map(prepared => {
+    const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+    host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+    const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+      plan: prepared, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+    return { layer, root: layer.root as unknown as FakeElement };
+  });
+  const calculate = createWorldContextPlanner(full);
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000] as [number, number, number], orientationXyzw: [0, 0, 0, 1] as const } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const, widthPixels: 800, heightPixels: 600 };
+  const drawing = (node: FakeElement) => all(node).map(node => ({ style: { ...node.style }, dataset: { ...node.dataset } }));
+  for (const distance of [1000, 500, 50]) {
+    world.pose.positionM[2] = distance;
+    for (const { layer, root } of layers) {
+      layer.publish(world, viewport, structuredClone(calculate(layer.captureFrame(world, viewport).view)));
+      root.ownerDocument.defaultView.advance(50);
+    }
+    expect(JSON.stringify(drawing(layers[1]!.root))).toBe(JSON.stringify(drawing(layers[0]!.root)));
+  }
+  // Without a worker frame the layer would have to project paths the summary does not carry.
+  expect(() => layers[1]!.layer.publish({ ...world, pose: { ...world.pose, positionM: [0, 0, 700] } }, viewport)).toThrow(/full prepared world context/);
+});
 
 test('delta publication matches full frames through navigation, hover, fades and orbit retirement', () => {
   const root = mount(1, () => true), deltaRoot = mount(1, () => true);

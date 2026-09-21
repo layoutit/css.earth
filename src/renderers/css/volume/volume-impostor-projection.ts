@@ -23,19 +23,30 @@ export function projectVolumeImpostors(publication: VolumeCameraPublication, fra
   const right: VolumeVector = [rotation[0]!, rotation[3]!, rotation[6]!];
   const down: VolumeVector = [rotation[1]!, rotation[4]!, rotation[7]!];
   const back: VolumeVector = [rotation[2]!, rotation[5]!, rotation[8]!];
-  const depth = dot(back, local.positionUnits), radius = bank.radiusUnits;
+  const depth = dot(back, local.positionUnits), radius = bank.radiusUnits, distance = Math.hypot(...local.positionUnits);
   const scale = viewport.focalPixels / Math.max(Number.MIN_VALUE, depth);
   const x = viewport.principalOffsetPixels[0] - dot(right, local.positionUnits) * scale;
   const y = viewport.principalOffsetPixels[1] - dot(down, local.positionUnits) * scale;
-  const diameterPixels = depth > radius ? 2 * radius * scale : Number.POSITIVE_INFINITY;
+  // Inside the bounding sphere the full volume draws and its physical leaf frustum does the culling. Whether the
+  // camera is inside is its true distance, not its depth along the view axis: a distant cloud beside the camera has
+  // near-zero depth and must not pass for a near one.
+  const inside = distance <= radius;
+  // In front of the sphere the projected size is unchanged; beside or behind it the tangent-cone size replaces the
+  // old infinite answer, so an off-axis cloud never switches to its full volume.
+  const diameterPixels = inside ? Number.POSITIVE_INFINITY
+    : 2 * radius * viewport.focalPixels / (depth > radius ? depth : Math.sqrt(distance * distance - radius * radius));
   const volumeMix = smooth((diameterPixels - bank.fullBelowDiameterPixels) / (bank.volumeAboveDiameterPixels - bank.fullBelowDiameterPixels));
-  // Near the sphere, let the full volume's physical leaf frustum do the culling.
+  // Outside, the sphere is visible when its angular radius reaches into the field of view (the viewport's half
+  // diagonal), and, in front of the camera, when its projected footprint overlaps the viewport.
+  const halfWidth = (viewport.widthPixels ?? Infinity) / 2, halfHeight = (viewport.heightPixels ?? Infinity) / 2;
+  const fieldRadius = Math.atan(Math.hypot(halfWidth, halfHeight) / viewport.focalPixels);
+  const offAxis = Math.acos(Math.max(-1, Math.min(1, depth / Math.max(Number.MIN_VALUE, distance))));
+  const reachesField = offAxis - Math.asin(Math.min(1, radius / Math.max(Number.MIN_VALUE, distance))) < fieldRadius;
   const extent = viewport.focalPixels * radius / Math.max(Number.MIN_VALUE, depth - radius);
-  const visible = depth + radius > 0 && (depth <= radius ||
-    (Math.abs(x) <= (viewport.widthPixels ?? Infinity) / 2 + extent && Math.abs(y) <= (viewport.heightPixels ?? Infinity) / 2 + extent));
+  const visible = inside || (reachesField && (depth <= radius ||
+    (Math.abs(x) <= halfWidth + extent && Math.abs(y) <= halfHeight + extent)));
   // A baked view shows the volume from a direction, so the view follows where the camera is, not where it looks:
   // turning in place keeps the same views and only rotates their images.
-  const distance = Math.hypot(...local.positionUnits);
   const toViewer: VolumeVector = distance > 0
     ? [local.positionUnits[0] / distance, local.positionUnits[1] / distance, local.positionUnits[2] / distance] : back;
   return { x, y, diameterPixels, volumeMix, visible,

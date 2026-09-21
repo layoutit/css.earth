@@ -5,7 +5,7 @@
       "id": "trappist-1-observational-measurements",
       "path": "measurements.json",
       "expectedBytes": 1343,
-      "expectedSha256": "f43297ac4e308fdfa938b2eef522d9304580e65567efe34f9ebe1d6db7ed6d25",
+      "expectedSha256": "59ad0b7f0cd29d219d48f3a54a3d6650c208d2853ac85e9576f3ece2fbe0d08a",
       "origin": "https://doi.org/10.3847/PSJ/abd022",
       "credit": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1",
       "license": "Factual numerical measurements; source attribution retained",
@@ -288,6 +288,24 @@
         "kind": "local",
         "reason": "Project-authored chart layout, scales and labels; each chart names its numerical input."
       }
+    },
+    {
+      "id": "trappist-1-agol-2024-transit-forecast",
+      "path": "science/agol-2024/forecast-2025-2027.csv",
+      "expectedBytes": 110262,
+      "expectedSha256": "cbd826a53a6357673bb8e5a6e803773909693579e0e30e474650a6a8afb8fb83",
+      "origin": "https://arxiv.org/e-print/2409.11620",
+      "credit": "E. Agol, N. H. Allen, B. Benneke, L. Delrez et al. (2024), Updated forecast for TRAPPIST-1 times of transit for all seven exoplanets incorporating JWST data, arXiv:2409.11620",
+      "license": "Data behind the paper's Figure 1, published with the arXiv e-print; factual forecast times, source attribution retained",
+      "acquisition": "The rows of T1_forecast_JWST_chi_19Aug2024.csv in the arXiv e-print whose forecast time lies within 365 days of the scene epoch 2026-09-03 (BJD_TDB 2461286.5), unchanged, under a header naming the columns: planet (1-7 = b-h), transit number, forecast BJD_TDB - 2450000, the Agol et al. (2021) forecast, their difference in days, and the forecast uncertainty in days. Column meanings read from the paper's Figure 1 caption; the first time column agrees with this project's JWST transit of b to 2 s.",
+      "redistribution": "Factual forecast times, a subset of the paper's published data file",
+      "consumers": [
+        "hosted-orbits"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Subset of a published data file, pinned in this package; the full file is in the arXiv e-print."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -342,8 +360,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3899,
-      "expectedSha256": "1d185fe2436aeb0805ca678f0293cd3844a1701ec992b81d89777e35ff55ac86",
+      "expectedBytes": 3929,
+      "expectedSha256": "48d549414aea559390972a792711f5cce3ed7a5fd6dca412f5b6f00061c4ebcc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
