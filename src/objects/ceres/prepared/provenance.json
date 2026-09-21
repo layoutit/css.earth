@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2b00474547e48abcdf7a8d514342245bdf509ed06b883e0ee13dd3d9db8851cf"
+    "sha256": "4eb27a87f5c5b343bd56a7a92d73a86fc3a98e4a67777a3c834a4f26548a34b5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -314,7 +314,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3aaaf3519c12098ea1caa42f19fc0f31abcbe28de7f54439a9a2f9b920550879",
+      "sha256": "912eb181e8aeaf20e274ef75d2e2b7b52981ef1b98a4e28d53d5eae465838ec3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -632,9 +632,9 @@
                 "kind": "scale",
                 "title": "3.1 µm band depth",
                 "labels": [
-                  "0.105",
-                  "0.125",
-                  "0.145"
+                  "0.106",
+                  "0.128",
+                  "0.151"
                 ],
                 "meta": "band depth",
                 "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/",
@@ -742,9 +742,9 @@
                     ]
                   ],
                   "labels": [
-                    "0.105",
-                    "0.125",
-                    "0.145"
+                    "0.106",
+                    "0.128",
+                    "0.151"
                   ]
                 }
               },
@@ -1285,7 +1285,7 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "3aaaf3519c12098ea1caa42f19fc0f31abcbe28de7f54439a9a2f9b920550879",
+      "sha256": "912eb181e8aeaf20e274ef75d2e2b7b52981ef1b98a4e28d53d5eae465838ec3",
       "bytes": 18169,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -2066,7 +2066,7 @@
   },
   "lastPreparation": {
     "objectId": "ceres",
-    "materialSha256": "849b9dde30db873ea4560d49d158d2335f756f419e560eab61355ca61194ee54",
+    "materialSha256": "12360c6694167cb295ed6c1f07d4f5e39a5dae4445b417f6c60eeeaddebb1c84",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
