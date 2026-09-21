@@ -56,7 +56,6 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     }
   }
   const entries = [
-    { key: "weather", url: `/scenes/${namespace}/${namespace}-weather.webp`, pool: "warm" },
     { key: "ring-shadow", url: `/scenes/${namespace}/${namespace}-ring-shadow.webp`, pool: "warm" },
     ...plan.ringMotionPlates.map((plate, index) => ({ key: `ring-motion:${index}`, url: canonicalPreparedAsset(plate.textureUrl, plate.texture2xUrl), pool: "warm" })),
     ...interior,

@@ -105,7 +105,7 @@ test('all source rows survive, with exact HIP matches reconciled to the detailed
   for (const star of data.stars) {
     const index = Number(star.id.split(':').at(-1));
     if (!matches.has(hip[index]!)) continue;
-    const original = mag[index]! + 5 * Math.log10(Math.hypot(...p.slice(index * 3, index * 3 + 3))) - 5;
+    const original: number = mag[index]! + 5 * Math.log10(Math.hypot(...p.slice(index * 3, index * 3 + 3))) - 5;
     const prepared = star.absoluteMagnitude + 5 * Math.log10(Math.hypot(...star.positionUnits)) - 5;
     assert.ok(Math.abs(prepared - original) < 0.00051, 'distance correction must preserve apparent photometry');
   }

@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { globSync, readFileSync } from 'node:fs';
 import { chromium } from 'playwright';
+import { parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { TEXT_BUDGETS, parsePreparedText } from '../object-text.mts';
 import { requireArray, requireRecord, requireString } from '../../tools/source-values.mts';
@@ -26,6 +28,9 @@ const bodies = await Promise.all(SCENE_OBJECTS.map(async ({ id }) => {
     })),
   };
 }));
+const nebulae = globSync('*/source/nebula.json', { cwd: new URL('../../src/objects/', import.meta.url) }).flatMap(path =>
+  parsePreparedNebulaCatalog(JSON.parse(readFileSync(new URL(`../../src/objects/${path}`, import.meta.url), 'utf8'))).objects
+    .map(object => ({ id: object.id, introduction: object.introduction.text })));
 const limits = { card: TEXT_BUDGETS.card.lines, introduction: TEXT_BUDGETS.introduction.lines, title: TEXT_BUDGETS.title.lines,
   summary: TEXT_BUDGETS.summary.lines, chooser: TEXT_BUDGETS.detail.lines };
 
@@ -37,7 +42,7 @@ try {
     await page.goto(`${base}/saturn/`, { waitUntil: 'load' });
     await page.waitForSelector('[data-lens-details]:not([hidden]) .planet-lens-details-copy', { state: 'visible', timeout: 60_000 });
     await page.evaluate(() => document.fonts.ready.then(() => undefined));
-    const measured = await page.evaluate(({ bodies, limits }) => {
+    const measured = await page.evaluate(({ bodies, nebulae, limits }) => {
       const shown = (selector: string) => [...document.querySelectorAll<HTMLElement>(selector)].find(element => element.getBoundingClientRect().width > 0);
       const templates = {
         introduction: shown('.planet-information-panel .planet-introduction'),
@@ -83,8 +88,9 @@ try {
           });
         }
       }
+      for (const nebula of nebulae) check(nebula.id, 'introduction', templates.introduction!, nebula.introduction);
       return found;
-    }, { bodies, limits });
+    }, { bodies, nebulae, limits });
     overflows.push(...measured.map(({ id, slot, lines, limit, text }) => `${viewport.name} ${id} ${slot}: ${lines} lines, limit ${limit} — ${text}`));
     await page.close();
   }

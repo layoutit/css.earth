@@ -86,7 +86,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
   const elements: Element[] = [];
   for (const selector of [".planet-drawer-content", ".planet-sidebar", ".planet-sidebar-collapse",
     ".planet-sidebar-search", ".planet-sidebar-search-card", ".planet-sidebar-view-all",
-    ".planet-information-panel", ".planet-object-browser", ".planet-object-empty",
+    ".planet-information-panel", ".planet-object-browser", ".planet-object-context", ".planet-object-empty", ".planet-selected-content",
     ".planet-sheet-handle", ".planet-settings-panel", ".planet-settings-action",
     ".explorer-rail-explore", ".explorer-rail-about", ".explorer-about-panel",
     ".planet-motion-setting", ".planet-surface-labels-setting", ".planet-heliosphere-setting", ".planet-illustration-models-setting", ".planet-minimap-setting", ".planet-three-d-stars-setting"]) {
@@ -98,7 +98,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
   drawer.selectors.set(".planet-information-panel", selectors.element(".planet-information-panel"));
   const item = new Element();
   selectors.element(".planet-object-browser").selectors.set(".planet-object-item", [item]);
-  const tabs = ['all', 'planet', 'satellite', 'asteroid'].map(type => {
+  const tabs = ['all', 'planet', 'satellite', 'nebula', 'galaxy', 'asteroid'].map(type => {
     const tab = new Element(); tab.dataset.objectTab = type; tab.id = `object-tab-${type}`;
     tab.selectors.set('.planet-object-tab-count', new Element()); elements.push(tab);
     return tab;
@@ -164,12 +164,14 @@ test('retained catalogue groups follow filters and release their visibility obse
   assert.deepEqual(groups.map(group => group.hidden), [true, false]);
   assert.deepEqual(groups.map(group => group.style.containIntrinsicBlockSize), ['0px', '20px']);
   assert.equal(browser.inert, false);
-  assert.equal(f.selectors.element('.planet-information-panel').inert, true);
+  assert.equal(f.selectors.element('.planet-selected-content').hidden, true);
+  assert.equal(f.selectors.element('.planet-selected-content').inert, true);
   search.value = 'Solar System'; search.dispatchEvent(new Event('input'));
   assert.deepEqual(groups.map(group => group.hidden), [false, false]);
   search.dispatchEvent(Object.assign(new Event('keydown'), { key: 'Escape' }));
   assert.equal(browser.inert, true);
-  assert.equal(f.selectors.element('.planet-information-panel').inert, false);
+  assert.equal(f.selectors.element('.planet-selected-content').hidden, false);
+  assert.equal(f.selectors.element('.planet-selected-content').inert, false);
   shell.destroy();
   assert.equal(getObserver().disconnected, true);
 });
@@ -397,21 +399,17 @@ test('destination card stays fixed across flight poses and camera handoff, then 
   shell.destroy();
 });
 
-test('camera scale keeps the overview, while search hides and dismissal restores its Atlas navigation', () => {
-  const f = fixture(), browser = f.selectors.element('.planet-object-browser');
+test('camera scale keeps the overview while the separate Atlas browser filters and dismisses', () => {
+  const f = fixture(), browser = f.selectors.element('.planet-object-browser'), contextPanel = f.selectors.element('.planet-object-context');
   const galaxy = new Element(), system = new Element(), introduction = new Element();
   system.selectors.set('.planet-introduction', introduction);
-  browser.selectors.set('[data-galactic-overview]', galaxy);
-  browser.selectors.set('[data-system-results]', system);
-  const categoryTabs = new Element();
+  contextPanel.selectors.set('[data-galactic-overview]', galaxy);
+  contextPanel.selectors.set('[data-system-results]', system);
   const navigationTree = new Element();
   const solarSystemBranch = new Element(), planetBranch = new Element(), earthBranch = new Element();
   solarSystemBranch.open = false; planetBranch.open = true; earthBranch.open = true;
   navigationTree.selectors.set('details[data-atlas-depth]:not([data-atlas-depth="0"])', [planetBranch, earthBranch]);
   navigationTree.selectors.set('details[data-atlas-depth="0"][data-atlas-key="solar-system"]', solarSystemBranch);
-  system.selectors.set('[data-object-navigation-tree]', navigationTree);
-  browser.selectors.set('[data-system-results] > .planet-selected-panel', introduction);
-  browser.selectors.set('[data-system-results] > .planet-object-tabs', categoryTabs);
   browser.selectors.set('[data-object-navigation-tree]', navigationTree);
   const items = ['planet', 'satellite'].map(type => {
     const item = new Element();
@@ -437,9 +435,8 @@ test('camera scale keeps the overview, while search hides and dismissal restores
   assert.equal(planetBranch.open, false, 'Second-level groups collapse when Solar System auto-selects');
   assert.equal(earthBranch.open, false, 'Deeper body branches collapse with their second-level group');
   search.value = 'moon'; search.dispatchEvent(new Event('input'));
-  assert.equal(introduction.hidden, true, 'Search hides the card heading and introduction');
-  assert.equal(categoryTabs.hidden, true);
-  assert.equal(navigationTree.hidden, true);
+  assert.equal(f.selectors.element('.planet-selected-content').hidden, true, 'Search replaces the selected content as one unit');
+  assert.equal(navigationTree.hidden, false, 'Search filters the retained Atlas navigation');
   assert.equal(browser.requireSelector('#object-category-results').hidden, false);
   assert.equal(items[0].hidden, true); assert.equal(items[1].hidden, false);
   assert.equal(tabs[2].getAttribute('aria-selected'), 'true');
@@ -447,15 +444,12 @@ test('camera scale keeps the overview, while search hides and dismissal restores
   assert.equal(tabs[0].getAttribute('aria-selected'), 'true', 'Text search includes every matching category');
   assert.equal(browser.requireSelector('#object-category-results').getAttribute('aria-labelledby'), null);
   search.dispatchEvent(Object.assign(new Event('keydown'), { key: 'Escape' }));
-  assert.equal(introduction.hidden, false);
-  assert.equal(categoryTabs.hidden, true);
+  assert.equal(f.selectors.element('.planet-selected-content').hidden, false);
   assert.equal(navigationTree.hidden, false);
-  assert.equal(browser.requireSelector('#object-category-results').hidden, true);
+  assert.equal(browser.hidden, true);
+  assert.equal(browser.requireSelector('#object-category-results').hidden, false, 'The retained results stay ready inside the closed browser');
   assert.equal(items[0].hidden, false); assert.equal(items[1].hidden, false);
   assert.equal(tabs[0].requireSelector('.planet-object-tab-count').textContent, '(2)');
-  tabs[2].dispatchEvent(new Event('click'));
-  assert.equal(items[1].hidden, false);
-  assert.equal(browser.requireSelector('#object-category-results').getAttribute('aria-labelledby'), tabs[2].id);
   shell.destroy(); assert.equal(listeners.size, 0);
 });
 
@@ -487,12 +481,12 @@ test('the planet lens controller ignores an earlier retained galaxy bank and bin
 });
 
 test('a prepared galaxy takes precedence over the retained Milky Way card and clears cleanly on planet return', () => {
-  const f = fixture(), browser = f.selectors.element('.planet-object-browser'), drawer = f.selectors.element('.planet-drawer-content');
+  const f = fixture(), browser = f.selectors.element('.planet-object-browser'), contextPanel = f.selectors.element('.planet-object-context'), drawer = f.selectors.element('.planet-drawer-content');
   const galaxy = new Element(), system = new Element(), card = new Element();
-  browser.selectors.set('[data-galactic-overview]', galaxy);
-  browser.selectors.set('[data-system-results]', system);
-  browser.selectors.set('[data-prepared-focus-card]', card); drawer.selectors.set('[data-prepared-focus-card]', card);
-  const names = ['name','aliases','status','distance','uncertainty','membership','association','basis','reference'];
+  contextPanel.selectors.set('[data-galactic-overview]', galaxy);
+  contextPanel.selectors.set('[data-system-results]', system);
+  contextPanel.selectors.set('[data-prepared-focus-card]', card); drawer.selectors.set('[data-prepared-focus-card]', card);
+  const names = ['name','aliases','introduction','status','distance','uncertainty','membership','association'];
   for (const name of names) card.selectors.set(`[data-focus-${name}]`, new Element());
   card.selectors.set('[data-focus-fact-label=distance]', new Element());
   const links = [new Element(), new Element(), new Element()];
@@ -516,7 +510,7 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   const retained = [...card.selectors.values()], source = required(catalogue.sources.find(value => value.id === 'lvdb-v1.1.1'));
   const record = required(catalogue.objects.find(value => value.detailedObjectId === 'm31'));
   const searchAction = f.selectors.element('.planet-sidebar-view-all');
-  searchAction.textContent = 'Search'; searchAction.ariaLabel = 'Search objects';
+  searchAction.textContent = 'Search'; searchAction.ariaLabel = 'Browse celestial objects';
   const listeners: CameraNotifications = new Set();
   const shell = f.mount(), search = f.selectors.element('.planet-sidebar-search');
   shell.setOverview(true);
@@ -539,7 +533,6 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   assert.equal(card.requireSelector('[data-focus-name]').textContent, record.name);
   assert.match(card.requireSelector('[data-focus-aliases]').textContent, /Andromeda/u);
   assert.match(card.requireSelector('[data-focus-status]').textContent, /Confirmed galaxy/u);
-  assert.equal(card.requireSelector('[data-focus-basis]').textContent, record.membership.basis);
   assert.equal(links[0].href, source.url);
   assert.equal(readout.requireSelector('[data-view-distance-label]').textContent, `Distance to ${record.name}:`);
   assert.equal(readout.requireSelector('[data-view-altitude]').textContent, '105.7 ly');
@@ -559,15 +552,14 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   assert.equal(card.requireSelector('[data-focus-status]').textContent, 'X-ray selected galaxy cluster');
   assert.equal(card.requireSelector('[data-focus-fact-label=distance]').textContent, 'Comoving distance');
   assert.match(card.requireSelector('[data-focus-distance]').textContent, /^\d+(?:\.\d+)? Mpc$/u);
-  assert.match(card.requireSelector('[data-focus-basis]').textContent, /R500.*not the cluster boundary.*peculiar velocities are not corrected/u);
   assert.equal(links[0].href, clusters.sources[0].url);
   assert.deepEqual([...card.selectors.values()], retained, 'Selection updates the same retained card nodes');
   assert.equal(searchAction.textContent, 'Search', 'Focus updates preserve the explorer search action');
-  assert.equal(searchAction.ariaLabel, 'Search objects');
+  assert.equal(searchAction.ariaLabel, 'Browse celestial objects');
   search.value = 'moon'; search.dispatchEvent(new Event('input'));
   shell.setPreparedFocus(candidate);
   assert.equal(search.value, 'moon', 'A focus handoff preserves a newer active search');
-  assert.equal(card.hidden, true);
+  assert.equal(card.hidden, false, 'Search does not replace the retained focus card');
   search.value = '   '; search.dispatchEvent(new Event('input'));
   assert.equal(search.value, '   ', 'Clearing search restores the current focus without refilling the input');
   assert.equal(card.hidden, false); assert.equal(galaxy.hidden, true); assert.equal(system.hidden, true);
@@ -584,7 +576,7 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   const restoreObject = shell.beginObjectSelection(objectFixture('fixture', cameraFrame(), { name: 'Fixture' }));
   assert.equal(browser.hidden, true);
   restoreObject();
-  assert.equal(browser.hidden, false); assert.equal(card.hidden, false);
+  assert.equal(browser.hidden, true); assert.equal(card.hidden, false);
   assert.equal(search.value, '   ', 'Cancelled selection restores focus without changing search');
   shell.setPreparedFocus(null);
   renderReadout();
@@ -599,13 +591,13 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   assert.equal(listeners.size, 0);
 });
 test('clearing search keeps the current object or overview card and permits another search', () => {
-  const f = fixture(), browser = f.selectors.element('.planet-object-browser');
+  const f = fixture(), browser = f.selectors.element('.planet-object-browser'), contextPanel = f.selectors.element('.planet-object-context');
   const information = f.selectors.element('.planet-information-panel');
   const galaxy = new Element(), system = new Element(), item = new Element();
   item.dataset = { objectName: 'moon', objectSystemName: 'solar system',
     objectClassification: 'satellite', objectClassificationName: 'moon' };
-  browser.selectors.set('[data-galactic-overview]', galaxy);
-  browser.selectors.set('[data-system-results]', system);
+  contextPanel.selectors.set('[data-galactic-overview]', galaxy);
+  contextPanel.selectors.set('[data-system-results]', system);
   browser.selectors.set('.planet-object-item', [item]);
   const shell = f.mount(), search = f.selectors.element('.planet-sidebar-search');
   shell.setObject({ id: 'earth', name: 'Earth', apply() {}, dispose() {} });
@@ -613,11 +605,11 @@ test('clearing search keeps the current object or overview card and permits anot
   const checkClear = (scope: string, value = '') => {
     input('moon');
     assert.equal(browser.hidden, false);
-    assert.equal(information.hidden, true);
+    assert.equal(f.selectors.element('.planet-selected-content').hidden, true);
     input(value);
     assert.equal(search.value, value, 'The cleared input is not refilled');
     assert.equal(information.hidden, scope !== 'object');
-    assert.equal(browser.hidden, scope === 'object');
+    assert.equal(browser.hidden, false, 'An open empty query shows the Atlas navigation');
     assert.equal(f.selectors.element('.planet-object-empty').hidden, true);
     if (scope !== 'object') {
       assert.equal(galaxy.hidden, scope !== 'milky-way');
@@ -646,7 +638,7 @@ test('flight completion and overview handoff preserve a newer active search', ()
   search.value = 'second'; search.dispatchEvent(new Event('input'));
   shell.setObject({ id: 'first', name: 'First', apply() {}, dispose() {} });
   assert.equal(search.value, 'second');
-  assert.equal(f.selectors.element('.planet-information-panel').hidden, true);
+  assert.equal(f.selectors.element('.planet-selected-content').hidden, true);
   shell.setOverview(true);
   assert.equal(search.value, 'second');
   f.documentTarget.activeElement = null;
@@ -655,7 +647,7 @@ test('flight completion and overview handoff preserve a newer active search', ()
   f.selectors.element('.planet-sidebar-view-all').dispatchEvent(new Event('click'));
   assert.equal(search.value, 'second', 'Search button preserves the active query');
   assert.equal(f.documentTarget.activeElement, search);
-  assert.equal(f.selectors.element('.planet-information-panel').hidden, true);
+  assert.equal(f.selectors.element('.planet-selected-content').hidden, false, 'The browse button toggles: collapsing results restores the selected content');
   f.selectors.element('.planet-sidebar-view-all').dispatchEvent(new Event('click'));
   assert.equal(search.value, 'second', 'Repeating search does not dismiss results');
   search.dispatchEvent(Object.assign(new Event('keydown', { cancelable: true }), { key: 'Escape' }));
@@ -672,6 +664,9 @@ test('category pills toggle shared results without camera navigation or opening 
     { label: 'Moons', type: 'satellite', name: 'moon', singular: 'moon' },
     { label: 'Comets', type: 'comet', name: 'halley', singular: 'comet' },
     { label: 'Asteroids', type: 'asteroid', name: 'eros', singular: 'asteroid' },
+    { label: 'Stars', type: 'star', name: 'sun', singular: 'star' },
+    { label: 'Nebulae', type: 'nebula', name: 'm42', singular: 'nebula' },
+    { label: 'Galaxies', type: 'galaxy', name: 'm31', singular: 'galaxy' },
   ];
   const buttons = categories.map(category => {
     const button = new Element();
@@ -714,13 +709,13 @@ test('category pills toggle shared results without camera navigation or opening 
     assert.equal(search.value, categories[index].label);
     assert.equal(introduction.hidden, true, 'Category searches also use the plain results card');
     assert.equal(browser.hidden, false);
-    assert.equal(f.selectors.element('.planet-information-panel').hidden, true);
+    assert.equal(f.selectors.element('.planet-selected-content').hidden, true);
     assert.deepEqual(items.map(item => item.hidden), items.map((item, i) =>
       i !== index && !(index === 0 && item === dwarf)));
     assert.deepEqual(buttons.map(item => item.ariaPressed), buttons.map((_, i) => String(i === index)));
   }
   assert.deepEqual(navigations, [], 'pills never request camera navigation');
-  buttons[3].dispatchEvent(new Event('click'));
+  buttons[6].dispatchEvent(new Event('click'));
   await Promise.resolve();
   assert.equal(search.value, '');
   assert.equal(browser.hidden, true);
@@ -729,11 +724,11 @@ test('category pills toggle shared results without camera navigation or opening 
   assert.equal(f.selectors.element('.planet-sheet-handle').checked, false);
   for (const query of ['planet', 'planets']) {
     search.value = query; search.dispatchEvent(new Event('input'));
-    assert.deepEqual(items.map(item => item.hidden), [false, true, true, true, false]);
+    assert.deepEqual(items.map(item => item.hidden), [false, true, true, true, true, true, true, false]);
     assert.equal(buttons[0].ariaPressed, 'true');
   }
   search.value = 'dwarf planets'; search.dispatchEvent(new Event('input'));
-  assert.deepEqual(items.map(item => item.hidden), [true, true, true, true, false], 'Specific dwarf planet search stays specific');
+  assert.deepEqual(items.map(item => item.hidden), [true, true, true, true, true, true, true, false], 'Specific dwarf planet search stays specific');
   buttons[3].dispatchEvent(new Event('click'));
   shell.setObject({ id: 'mars', name: 'Mars', apply() {}, dispose() {} });
   assert.equal(search.value, 'Asteroids');
@@ -795,7 +790,8 @@ test('an empty search survives dismissal, overview resets, and object commits', 
   assert.equal(search.value, '', 'Empty-scene selection leaves search empty');
   shell.setOverview(true); restore();
   assert.equal(search.value, '');
-  assert.equal(f.selectors.element('.planet-object-browser').hidden, false, 'The overview card remains visible');
+  assert.equal(f.selectors.element('.planet-object-browser').hidden, true, 'The dismissed Atlas browser stays closed');
+  assert.equal(f.selectors.element('.planet-object-context').hidden, false, 'The overview card remains visible');
   shell.setObject({ id: 'jupiter', name: 'Jupiter', apply() {}, dispose() {} });
   assert.equal(search.value, '', 'An object commit cannot auto-search Jupiter');
   assert.equal(f.selectors.element('.planet-information-panel').hidden, false);
@@ -812,7 +808,7 @@ test('choosing the current body from search shows its card without editing the q
   const f = fixture(), shell = f.mount(), search = f.selectors.element('.planet-sidebar-search');
   shell.setObject({ id: 'sun', name: 'Sun', apply() {}, dispose() {} });
   search.value = 'Sun'; search.dispatchEvent(new Event('input'));
-  assert.equal(f.selectors.element('.planet-information-panel').hidden, true);
+  assert.equal(f.selectors.element('.planet-information-panel').hidden, false);
   const cancel = shell.beginObjectSelection(objectFixture('sun', cameraFrame(), { name: 'Sun' }));
   assert.equal(f.selectors.element('.planet-information-panel').hidden, false);
   assert.equal(search.value, 'Sun');
@@ -841,8 +837,9 @@ test('camera handoffs retain filtered results and reset only a scrolled results 
   for (const tab of browser.querySelectorAll('[data-object-tab]')) {
     Object.defineProperty(tab.requireSelector('.planet-object-tab-count'), 'textContent', { get: () => '', set() { countWrites++; } });
   }
-  const shell = f.mount(), listeners: CameraNotifications = new Set();
+  const shell = f.mount(), listeners: CameraNotifications = new Set(), trigger = f.selectors.element('.planet-sidebar-view-all');
   shell.setOverview(true);
+  trigger.dispatchEvent(new Event('click'));
   const publishedCounts = countWrites;
   shell.setCamera(shellCamera(() => worldAt(context.volume.fadeStartDistanceM * .9), listeners));
   shell.setOverview(true);
@@ -850,10 +847,10 @@ test('camera handoffs retain filtered results and reset only a scrolled results 
   assert.equal(scrollWrites, 0, 'An unscrolled catalogue never triggers a synchronous scroll reset');
   scrollTop = 120;
   results.dispatchEvent(new Event('scroll'));
-  shell.setOverview(false);
+  trigger.dispatchEvent(new Event('click'));
   assert.equal(scrollTop, 0, 'Closing a scrolled catalogue restores its next opening position');
   assert.equal(scrollWrites, 1);
-  shell.setOverview(true);
+  trigger.dispatchEvent(new Event('click'));
   assert.equal(browser.hidden, false, 'Cached results reopen without another filter');
   assert.equal(countWrites, publishedCounts);
   shell.destroy();

@@ -471,15 +471,31 @@ export function createSceneRouter({
       requests.finish(request, scenes.state.kind === 'failed' ? 'failed' : 'cancelled');
       return result === true;
     } catch (error) {
+      const interruptedSelection = objectId === object.id && !request.options.url && record(error) &&
+        error.name === 'AbortError' && error.preserveView === true;
       if (!requests.finish(request, error instanceof Error && error.name === 'AbortError' ? 'cancelled' : 'failed')) return false;
       centeredObjectId = null;
       publishSceneState();
       if (scenes.current === source && source) {
         source.shell?.setDatasetNotice?.(errorMessage(error));
-        // The source still owns the last drawn camera when destination loading
-        // fails. Rebinding its URL writer must not replay the departure pose.
-        const url = captureUrl();
-        if (url) historyOwner?.commit(url, { history: 'replace' });
+        // Input can take over a same-owner selection flight before arrival. The
+        // selected destination still owns that camera: keep only the drawn view
+        // from the departed URL, otherwise its old prepared focus is restored
+        // and pulls the camera back to the object the user just left.
+        const captured = captureUrl();
+        if (captured && interruptedSelection) {
+          const drawn = new URL(captured, windowTarget.location.href);
+          const selected = new URL(request.url, windowTarget.location.href);
+          const view = drawn.searchParams.get('v');
+          if (view) selected.searchParams.set('v', view); else selected.searchParams.delete('v');
+          source.url = selected.href;
+          historyOwner?.commit(selected.href, request.options);
+          setOverview(Boolean(overviewScopeFromUrl(selected.href)));
+        } else if (captured) {
+          // The source still owns the last drawn camera when destination loading
+          // fails. Rebinding its URL writer must not replay the departure pose.
+          historyOwner?.commit(captured, { history: 'replace' });
+        }
         await bindSessionView(source, { restore: false });
         source.viewUrl?.flush(); syncPlayback();
         if (!record(error) || error.preserveView !== true) report(error);

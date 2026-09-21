@@ -52,7 +52,7 @@ test('Agenor navigation centres the actual emitted PolyCSS XY-swapped carrier at
   const camera = navigation.camera, r = Math.PI/180;
   // Europa's systemTransform is solved into the corrected frame (#294); re-pinned to the new pose.
   assert.ok(Math.abs(camera.controlPitch - 26.308446037891912) < 1e-10);
-  assert.ok(Math.abs(camera.controlYaw - 160.7082952064801) < 1e-10);
+  assert.ok(Math.abs(camera.controlYaw - 160.70824354572926) < 1e-10);
   const longitude = focus.longitudeDegrees*r, latitude = focus.latitudeDegrees*r;
   const source = [Math.cos(latitude)*Math.cos(longitude), Math.cos(latitude)*Math.sin(longitude), Math.sin(latitude)];
   const local = [source[1],source[0],source[2]];

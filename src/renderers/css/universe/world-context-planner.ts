@@ -467,7 +467,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       // at the zoom levels where their normal alpha policy names them. Admit
       // each independently so minor-body labels cannot make one blink.
       const landmarks = candidates.filter(candidate => candidate.projected.entry.body.id === plan.focus.id ||
-        candidate.projected.entry.orbit !== null && systemFade.isSystemStar(candidate.projected.entry.orbit.centerBodyId) &&
+        (rotationActive || preserveCommittedAnnotations) && candidate.projected.entry.orbit !== null && systemFade.isSystemStar(candidate.projected.entry.orbit.centerBodyId) &&
         (candidate.tier ?? 0) >= 3);
       const acceptedLandmarks = landmarks.flatMap(candidate => admitStableLabels([candidate], worldLabelBudget()));
       for (const { candidate, rect } of acceptedLandmarks) labelBudget.admit(rect, candidate.anchor);

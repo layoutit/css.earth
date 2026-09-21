@@ -318,38 +318,22 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   height: var(--explorer-search-height);
 }
 
-.explorer-shell-header .planet-object-browser:not([hidden]) { display: block; }
-.planet-search-browser-shell > .planet-object-browser {
-  position: absolute;
-  z-index: 4;
-  top: calc(100% + var(--explorer-header-panel-gap));
-  left: 0;
-  box-sizing: border-box;
-  width: 100%;
-  max-height: min(620px, calc(100dvh - var(--explorer-controls-top) - var(--explorer-panel-bottom-gap)));
-  overflow: hidden auto;
-  border-radius: var(--explorer-card-radius);
-  background: var(--explorer-panel-background);
-  box-shadow: 0 12px 32px rgb(0 0 0 / 48%);
-  pointer-events: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: none;
-}
-.planet-search-browser-shell > .planet-object-browser::-webkit-scrollbar { display: none; }
-.planet-search-browser-shell .atlas-tree-card { max-height: inherit; border-radius: inherit; }
-.planet-search-browser-shell .planet-object-browser[data-navigation-filtered] .planet-object-tabs { display: none; }
-.planet-search-browser-shell .planet-object-browser[data-navigation-filtered] #object-category-results > .planet-object-list { display: none; }
-.planet-search-browser-shell .planet-object-browser[data-navigation-filtered] #object-category-results {
+.planet-sidebar .planet-object-browser[data-navigation-filtered] .planet-object-tabs { display: none; }
+.planet-sidebar .planet-object-browser[data-navigation-filtered] #object-category-results > .planet-object-list { display: none; }
+.planet-sidebar .planet-object-browser[data-navigation-filtered] #object-category-results {
   padding-block-start: 0;
 }
 
 .planet-object-context { display: contents; }
 .planet-object-context[hidden] { display: none; }
+.planet-selected-content { display: contents; }
+.planet-selected-content[hidden],
+.planet-object-browser:not([hidden]) ~ .planet-selected-content { display: none; }
 
 .planet-search-categories {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   min-width: 0;
   overflow-x: auto;
   scrollbar-width: none;
@@ -435,7 +419,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 .planet-header-link {
   box-sizing: border-box;
   height: var(--explorer-category-height);
-  padding-inline: 12px 16px;
+  padding-inline: 10px 12px;
   border: 0;
   border-radius: var(--explorer-control-radius);
   background: var(--explorer-header-control-background);
@@ -741,15 +725,6 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
     font-size: 16px;
   }
   .explorer-shell-header .planet-sidebar-search-clear { right: 38px; }
-
-  .planet-search-browser-shell > .planet-object-browser {
-    position: fixed;
-    top: calc(var(--explorer-header-top) + var(--explorer-search-height) + 8px);
-    right: var(--explorer-panel-left);
-    left: var(--explorer-panel-left);
-    width: auto;
-    max-height: calc(100dvh - var(--explorer-header-top) - var(--explorer-search-height) - 16px);
-  }
 
   /* Settings takes the avatar slot at the end of the search pill; the version
      link below already leads to GitHub. */
