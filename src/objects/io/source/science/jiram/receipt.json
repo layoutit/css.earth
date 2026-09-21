@@ -1,0 +1,1025 @@
+{
+  "schema": "cssearth-jiram-mosaic-receipt@1",
+  "recipe": "IO_JIRAM_M_NIGHT_MOSAIC",
+  "side": "night",
+  "kernels": {
+    "src/spice/juno/lsk/naif0012.tls": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
+    "src/spice/juno/pck/pck00011.tpc": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+    "src/spice/juno/sclk/JNO_SCLKSCET.00211.tsc": "8bbb70ddb8cd9d81d63834cab39f146ad485b048eb0bf454054d72b268b2642f",
+    "src/spice/juno/fk/juno_v12.tf": "12a30da08609c1cd1b631b93910b4b6f4114380a761aafabbef077368860ef02",
+    "src/spice/juno/ik/juno_jiram_v02.ti": "814c98849618c1f497960d2babf91152bee02de47dec06981fb90d6d8985185a",
+    "src/spice/juno/spk/spk_rec_220319_220502_220510.bsp": "43be7235fcd178392dc94ff857e47c198e96191e57223fde7cd137e0e3155bc2",
+    "src/spice/juno/spk/jup363.bsp": "9f09603885e191ad5f4a0edcd6334116df616e125610a38a3891bdfb6ac27dad",
+    "src/spice/juno/ck/juno_sc_rec_220403_220409_v01.bc": "b3388586ed14ada83ec28db7834abe131d8d412993cfe5e7f924bcc674038524",
+    "src/spice/juno/spk/spk_rec_220614_220728_220805.bsp": "9dcc5a463d34de819f598641707a47c72d0b93926296ffbd3556de6faa563fd5",
+    "src/spice/juno/ck/juno_sc_rec_220703_220709_v01.bc": "77072f25ab6f17e9b3a9841a7742d1d7a867e0eb34eeb5a8f8c5a723f6bc79a6",
+    "src/spice/juno/spk/spk_rec_221127_230104_230111.bsp": "00a12656ab7b3aadb7ccf0390aae1d5fc8ba800f75734c0d299490299f855ae8",
+    "src/spice/juno/ck/juno_sc_rec_221210_221215_v01.bc": "00998ffc7e9e38da39bb81c7b67c14c8aa7cb0e80e584adb168af6f7e7968668",
+    "src/spice/juno/spk/spk_rec_230211_230321_230327.bsp": "22ab39db2294b7f2e7dc15121ed759b12d1e256ad373a3560c6a1e0821119944",
+    "src/spice/juno/ck/juno_sc_rec_230226_230304_v01.bc": "63f0737e7c1826a2b8baff17151ef32f653b002879635a8d8686bac8cd5ad9fe"
+  },
+  "radiiKm": [
+    1829.4,
+    1819.4,
+    1815.7
+  ],
+  "ifovRadians": 0.000237767,
+  "coverage": {
+    "cells": 259200,
+    "nightCells": 57224,
+    "fraction": 0.2207716049382716
+  },
+  "visits": [
+    {
+      "id": "2022-04-09T11",
+      "frames": 20,
+      "winningCells": 2724
+    },
+    {
+      "id": "2022-07-05T04",
+      "frames": 19,
+      "winningCells": 6265
+    },
+    {
+      "id": "2022-12-14T23",
+      "frames": 10,
+      "winningCells": 29098
+    },
+    {
+      "id": "2023-03-01T01",
+      "frames": 10,
+      "winningCells": 19137
+    }
+  ],
+  "frames": [
+    {
+      "productId": "JIR_IMG_RDR_2022099T115524_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T11:55:22.120",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 109779,
+      "phaseDegrees": 92.61,
+      "litPixels": 0,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 0,
+        "dy": 0,
+        "correlation": null,
+        "reason": "too little sunlit disc in the search window"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115555_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T11:55:52.644",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 109966,
+      "phaseDegrees": 92.18,
+      "litPixels": 0,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 0,
+        "dy": 0,
+        "correlation": null,
+        "reason": "too little sunlit disc in the search window"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115625_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T11:56:23.168",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 110161,
+      "phaseDegrees": 91.76,
+      "litPixels": 2014,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 24,
+        "dy": 135.77,
+        "correlation": 0.0503,
+        "reason": "best offset at the search edge"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115656_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T11:56:53.692",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 110364,
+      "phaseDegrees": 91.33,
+      "litPixels": 5771,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 6.13,
+        "dy": 185.23,
+        "correlation": 0.6009,
+        "reason": "offset 6, 185 disagrees with the visit's 2, -5"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115726_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T11:57:24.217",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 110574,
+      "phaseDegrees": 90.91,
+      "litPixels": 7576,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 4.97,
+        "dy": 160.23,
+        "correlation": 0.8237,
+        "reason": "offset 5, 160 disagrees with the visit's 2, -5"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115757_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T11:57:54.742",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 110791,
+      "phaseDegrees": 90.49,
+      "litPixels": 7599,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 3.73,
+        "dy": 143.38,
+        "correlation": 0.773,
+        "reason": "offset 4, 143 disagrees with the visit's 2, -5"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115827_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T11:58:25.267",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 111017,
+      "phaseDegrees": 90.07,
+      "litPixels": 7602,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 4.95,
+        "dy": 112.82,
+        "correlation": 0.5894,
+        "reason": "offset 5, 113 disagrees with the visit's 2, -5"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115858_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T11:58:55.790",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 111249,
+      "phaseDegrees": 89.66,
+      "litPixels": 7634,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 4,
+        "dy": -4.99,
+        "correlation": 0.9177
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115928_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T11:59:26.316",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 111489,
+      "phaseDegrees": 89.24,
+      "litPixels": 7645,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.54,
+        "dy": -5.54,
+        "correlation": 0.9463
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115959_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T11:59:56.839",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 111736,
+      "phaseDegrees": 88.83,
+      "litPixels": 7666,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 1.98,
+        "dy": -6.61,
+        "correlation": 0.956
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120029_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T12:00:27.364",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 111990,
+      "phaseDegrees": 88.41,
+      "litPixels": 7683,
+      "sunlitRadiance": 0.02342,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.11,
+        "dy": -5.74,
+        "correlation": 0.9499
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120100_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T12:00:57.888",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 112252,
+      "phaseDegrees": 88.01,
+      "litPixels": 7697,
+      "sunlitRadiance": 0.02198,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.32,
+        "dy": -5.46,
+        "correlation": 0.9494
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120130_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T12:01:28.413",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 112521,
+      "phaseDegrees": 87.6,
+      "litPixels": 7706,
+      "sunlitRadiance": 0.0224,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.23,
+        "dy": -5.36,
+        "correlation": 0.9482
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120201_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T12:01:58.937",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 112796,
+      "phaseDegrees": 87.19,
+      "litPixels": 7733,
+      "sunlitRadiance": 0.02276,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.12,
+        "dy": -5.42,
+        "correlation": 0.948
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120231_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T12:02:29.462",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 113079,
+      "phaseDegrees": 86.79,
+      "litPixels": 7741,
+      "sunlitRadiance": 0.02237,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.03,
+        "dy": -5.39,
+        "correlation": 0.9472
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120302_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T12:02:59.986",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 113369,
+      "phaseDegrees": 86.39,
+      "litPixels": 7762,
+      "sunlitRadiance": 0.0226,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 1.95,
+        "dy": -5.27,
+        "correlation": 0.9498
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120332_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T12:03:30.511",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 113666,
+      "phaseDegrees": 85.99,
+      "litPixels": 7777,
+      "sunlitRadiance": 0.02275,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2,
+        "dy": -5.08,
+        "correlation": 0.9678
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120403_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T12:04:01.035",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 113970,
+      "phaseDegrees": 85.59,
+      "litPixels": 7798,
+      "sunlitRadiance": 0.02268,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.18,
+        "dy": -4.73,
+        "correlation": 0.9715
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120433_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T12:04:31.560",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 114281,
+      "phaseDegrees": 85.19,
+      "litPixels": 7650,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 1.76,
+        "dy": -4.4,
+        "correlation": 0.9811
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120504_V01",
+      "visit": "2022-04-09T11",
+      "utc": "2022-04-09T12:05:02.084",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 114598,
+      "phaseDegrees": 84.8,
+      "litPixels": 4171,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": -7.2,
+        "dy": -51.73,
+        "correlation": 0.7719,
+        "reason": "offset -7, -52 disagrees with the visit's 2, -5"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045116_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:51:14.632",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 88349,
+      "phaseDegrees": 97.3,
+      "litPixels": 0,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 0,
+        "dy": 0,
+        "correlation": null,
+        "reason": "too little sunlit disc in the search window"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045147_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:51:44.910",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 88270,
+      "phaseDegrees": 96.83,
+      "litPixels": 1,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 0,
+        "dy": 0,
+        "correlation": null,
+        "reason": "too little sunlit disc in the search window"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045217_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:52:15.186",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 88199,
+      "phaseDegrees": 96.36,
+      "litPixels": 1402,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 7.68,
+        "dy": 192,
+        "correlation": 0.0579,
+        "reason": "correlation below the policy"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045247_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:52:45.462",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 88138,
+      "phaseDegrees": 95.89,
+      "litPixels": 6098,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 13.04,
+        "dy": 256.45,
+        "correlation": 0.0944,
+        "reason": "correlation below the policy"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045318_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:53:15.739",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 88086,
+      "phaseDegrees": 95.42,
+      "litPixels": 9991,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 10.91,
+        "dy": 230.82,
+        "correlation": 0.3802,
+        "reason": "correlation below the policy"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045348_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:53:46.014",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 88042,
+      "phaseDegrees": 94.95,
+      "litPixels": 11064,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 6.6,
+        "dy": 187.85,
+        "correlation": 0.4655,
+        "reason": "correlation below the policy"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045418_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:54:16.291",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 88008,
+      "phaseDegrees": 94.47,
+      "litPixels": 11161,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 9.94,
+        "dy": 151.36,
+        "correlation": 0.4189,
+        "reason": "correlation below the policy"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045448_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:54:46.568",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 87982,
+      "phaseDegrees": 94,
+      "litPixels": 11259,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.11,
+        "dy": -6.97,
+        "correlation": 0.9001
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045519_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:55:16.843",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 87966,
+      "phaseDegrees": 93.53,
+      "litPixels": 11366,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.05,
+        "dy": -5.98,
+        "correlation": 0.9383
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045549_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:55:47.120",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 87958,
+      "phaseDegrees": 93.05,
+      "litPixels": 11460,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.19,
+        "dy": -6,
+        "correlation": 0.9379
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045619_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:56:17.396",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 87960,
+      "phaseDegrees": 92.58,
+      "litPixels": 11554,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.26,
+        "dy": -5.74,
+        "correlation": 0.9339
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045650_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:56:47.672",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 87970,
+      "phaseDegrees": 92.11,
+      "litPixels": 11650,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.37,
+        "dy": -5.45,
+        "correlation": 0.9333
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045720_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:57:17.948",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 87990,
+      "phaseDegrees": 91.63,
+      "litPixels": 11744,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.17,
+        "dy": -5.13,
+        "correlation": 0.913
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045750_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:57:48.225",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 88018,
+      "phaseDegrees": 91.16,
+      "litPixels": 11843,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.39,
+        "dy": -5.71,
+        "correlation": 0.9229
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045820_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:58:18.501",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 88055,
+      "phaseDegrees": 90.69,
+      "litPixels": 11938,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.9,
+        "dy": -7.09,
+        "correlation": 0.9227
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045851_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:58:48.777",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 88101,
+      "phaseDegrees": 90.22,
+      "litPixels": 12046,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.79,
+        "dy": -6.46,
+        "correlation": 0.9167
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045921_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:59:19.054",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 88156,
+      "phaseDegrees": 89.74,
+      "litPixels": 12144,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.73,
+        "dy": -7.3,
+        "correlation": 0.8272
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045951_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T04:59:49.330",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 88220,
+      "phaseDegrees": 89.27,
+      "litPixels": 12236,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 12.02,
+        "dy": -79.98,
+        "correlation": 0.2936,
+        "reason": "correlation below the policy"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T050021_V01",
+      "visit": "2022-07-05T04",
+      "utc": "2022-07-05T05:00:19.606",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 88293,
+      "phaseDegrees": 88.8,
+      "litPixels": 11314,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 13.17,
+        "dy": -72.8,
+        "correlation": 0.2104,
+        "reason": "correlation below the policy"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232208_V01",
+      "visit": "2022-12-14T23",
+      "utc": "2022-12-14T23:22:06.444",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 66474,
+      "phaseDegrees": 94.22,
+      "litPixels": 0,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 0,
+        "dy": 0,
+        "correlation": null,
+        "reason": "too little sunlit disc in the search window"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232239_V01",
+      "visit": "2022-12-14T23",
+      "utc": "2022-12-14T23:22:36.703",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 66628,
+      "phaseDegrees": 93.69,
+      "litPixels": 88,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 0,
+        "dy": 0,
+        "correlation": null,
+        "reason": "too little sunlit disc in the search window"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232309_V01",
+      "visit": "2022-12-14T23",
+      "utc": "2022-12-14T23:23:06.962",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 66794,
+      "phaseDegrees": 93.16,
+      "litPixels": 6160,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 24,
+        "dy": -262.62,
+        "correlation": 0.1318,
+        "reason": "best offset at the search edge"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232339_V01",
+      "visit": "2022-12-14T23",
+      "utc": "2022-12-14T23:23:37.222",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 66972,
+      "phaseDegrees": 92.63,
+      "litPixels": 15678,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 6.06,
+        "dy": -335.29,
+        "correlation": 0.6556,
+        "reason": "offset 6, -335 disagrees with the visit's 4, -528"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232409_V01",
+      "visit": "2022-12-14T23",
+      "utc": "2022-12-14T23:24:07.481",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 67162,
+      "phaseDegrees": 92.11,
+      "litPixels": 20224,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 2.24,
+        "dy": -392.05,
+        "correlation": 0.7705,
+        "reason": "offset 2, -392 disagrees with the visit's 4, -528"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232440_V01",
+      "visit": "2022-12-14T23",
+      "utc": "2022-12-14T23:24:37.740",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 67364,
+      "phaseDegrees": 91.59,
+      "litPixels": 20319,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.69,
+        "dy": -529.64,
+        "correlation": 0.8571
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232510_V01",
+      "visit": "2022-12-14T23",
+      "utc": "2022-12-14T23:25:07.999",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 67578,
+      "phaseDegrees": 91.07,
+      "litPixels": 20402,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 4.13,
+        "dy": -529.27,
+        "correlation": 0.8362
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232540_V01",
+      "visit": "2022-12-14T23",
+      "utc": "2022-12-14T23:25:38.259",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 67803,
+      "phaseDegrees": 90.56,
+      "litPixels": 20499,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.87,
+        "dy": -527.98,
+        "correlation": 0.8298
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232610_V01",
+      "visit": "2022-12-14T23",
+      "utc": "2022-12-14T23:26:08.518",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 68039,
+      "phaseDegrees": 90.04,
+      "litPixels": 20594,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.31,
+        "dy": -528.42,
+        "correlation": 0.804
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232641_V01",
+      "visit": "2022-12-14T23",
+      "utc": "2022-12-14T23:26:38.778",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 68287,
+      "phaseDegrees": 89.54,
+      "litPixels": 20698,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.05,
+        "dy": -529.72,
+        "correlation": 0.8643
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011643_V01",
+      "visit": "2023-03-01T01",
+      "utc": "2023-03-01T01:16:41.263",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 59796,
+      "phaseDegrees": 89.1,
+      "litPixels": 0,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 0,
+        "dy": 0,
+        "correlation": null,
+        "reason": "too little sunlit disc in the search window"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011714_V01",
+      "visit": "2023-03-01T01",
+      "utc": "2023-03-01T01:17:11.795",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 59401,
+      "phaseDegrees": 88.58,
+      "litPixels": 0,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 0,
+        "dy": 0,
+        "correlation": null,
+        "reason": "too little sunlit disc in the search window"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011744_V01",
+      "visit": "2023-03-01T01",
+      "utc": "2023-03-01T01:17:42.326",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 59016,
+      "phaseDegrees": 88.04,
+      "litPixels": 6585,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "rejected",
+        "dx": 24,
+        "dy": -399.64,
+        "correlation": 0.1687,
+        "reason": "best offset at the search edge"
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011815_V01",
+      "visit": "2023-03-01T01",
+      "utc": "2023-03-01T01:18:12.858",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 58643,
+      "phaseDegrees": 87.5,
+      "litPixels": 17453,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 5.02,
+        "dy": -534.68,
+        "correlation": 0.736
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011845_V01",
+      "visit": "2023-03-01T01",
+      "utc": "2023-03-01T01:18:43.389",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 58281,
+      "phaseDegrees": 86.96,
+      "litPixels": 26551,
+      "sunlitRadiance": null,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.99,
+        "dy": -535.06,
+        "correlation": 0.8919
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011916_V01",
+      "visit": "2023-03-01T01",
+      "utc": "2023-03-01T01:19:13.922",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 57930,
+      "phaseDegrees": 86.41,
+      "litPixels": 30048,
+      "sunlitRadiance": 0.02292,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 4.89,
+        "dy": -534.99,
+        "correlation": 0.915
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011946_V01",
+      "visit": "2023-03-01T01",
+      "utc": "2023-03-01T01:19:44.453",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 57591,
+      "phaseDegrees": 85.85,
+      "litPixels": 30731,
+      "sunlitRadiance": 0.02149,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 5.28,
+        "dy": -535.02,
+        "correlation": 0.8262
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T012017_V01",
+      "visit": "2023-03-01T01",
+      "utc": "2023-03-01T01:20:14.985",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 57263,
+      "phaseDegrees": 85.28,
+      "litPixels": 31472,
+      "sunlitRadiance": 0.02117,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 4.99,
+        "dy": -534.16,
+        "correlation": 0.7969
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T012047_V01",
+      "visit": "2023-03-01T01",
+      "utc": "2023-03-01T01:20:45.517",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 56948,
+      "phaseDegrees": 84.71,
+      "litPixels": 32201,
+      "sunlitRadiance": 0.02159,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 4.35,
+        "dy": -535.62,
+        "correlation": 0.7311
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T012118_V01",
+      "visit": "2023-03-01T01",
+      "utc": "2023-03-01T01:21:16.049",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 56645,
+      "phaseDegrees": 84.13,
+      "litPixels": 32273,
+      "sunlitRadiance": 0.01988,
+      "registration": {
+        "method": "lit-disc",
+        "dx": 4.24,
+        "dy": -536.56,
+        "correlation": 0.7206
+      }
+    }
+  ]
+}

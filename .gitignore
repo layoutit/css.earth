@@ -105,6 +105,8 @@ src/objects/*/.prepared/
 
 # Pinned PDS raster and vertex-facet source products.
 src/objects/*/source/**/*.IMG
+# Io's night-side JIRAM map is this repository's own reduction (tools/objects/juno/jiram-mosaic.mts), 1 MB.
+!src/objects/io/source/science/jiram/io-jiram-m-night.IMG
 src/objects/*/source/**/*.tab
 src/objects/*/source/**/*.obj
 src/objects/*/source/**/*.bds

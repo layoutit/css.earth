@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "915e3f0f979c6384d1107c6c5b7704c2e928bf5fac7944f89ad57bef31c8e5f7"
+    "sha256": "960ff8c59d178c4cf40227dc57b3029530aeac8e6e6105f9a763699ae728ba64"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "174147cacbe6d11f288faa1ff625be50214b3bb6e7ff3bbad3659b8ea55a128c"
+    "bindingsSha256": "786ffcfe3ed51d9f68de70f405d65b83509163c0ea11efcb5c79499e04c53663"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "56a14ebb2d3804a4c6e1b9b07dde4d2bb2d2f4126ea218c4a6f0f5919fc380ac",
+      "sha256": "23f7415b3490b47e495fe0ee19ee2337f2ab83413d50b81c98686c7b2c7fa146",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/ceres/",
@@ -124,6 +124,319 @@
                 "ambient": 0.25
               }
             }
+          },
+          {
+            "id": "clay-band",
+            "output": "ceres-{id}{suffix}.webp",
+            "thumbnail": "ceres-lens-{id}.webp",
+            "source": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.IMG",
+            "falseColor": true,
+            "science": {
+              "kind": "terrestrial-scientific",
+              "id": "clay-band",
+              "label": "Clay band",
+              "format": "pds3-float-map",
+              "path": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.IMG",
+              "labelPath": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.LBL",
+              "grid": {
+                "productId": "CMT_MOSAIC-BI_DEPTH",
+                "dataSetId": "DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0",
+                "targetName": "1 CERES",
+                "width": 4102,
+                "height": 1367,
+                "pixelsPerDegree": 11.393121506074,
+                "referenceRadiusMeters": 470000,
+                "centerLongitudeEastDegrees": 180,
+                "longitudeRangeEast": [
+                  0,
+                  360
+                ],
+                "sampleProjectionOffset": 2050.2618710933,
+                "lineProjectionOffset": 682.88093554667,
+                "projectionRotation": "0.0 <degree>",
+                "missingValue": -1e+32,
+                "sampleType": "IEEE_REAL",
+                "coordinateSystem": "PLANETOCENTRIC",
+                "latitudeRange": [
+                  -60.002788883527,
+                  59.981887771699
+                ]
+              },
+              "description": "Dawn VIR 2.7 µm band depth · Frigeri et al. 2019 scale",
+              "title": "Depth of the 2.7 µm absorption of OH in Mg-rich clays (phyllosilicates), from the archived Dawn VIR global mosaic, on the color scale of Frigeri et al. (2019), Figure 7. The archived values run higher than the paper's (median 0.255 against its peak near 0.20), so most of Ceres falls in the red end. Scan stripes remain because the archive's artifact removal was not applied. Gray grid: beyond 60° latitude and other unmeasured pixels.",
+              "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
+              "minimum": 0.1,
+              "maximum": 0.3,
+              "colors": [
+                "#000180",
+                "#010081",
+                "#000083",
+                "#000083",
+                "#000188",
+                "#00008a",
+                "#00008b",
+                "#00008d",
+                "#000190",
+                "#000192",
+                "#000093",
+                "#000096",
+                "#000098",
+                "#00019b",
+                "#00009d",
+                "#00009f",
+                "#0101a2",
+                "#0001a5",
+                "#0001a5",
+                "#0000a7",
+                "#0001ac",
+                "#0000ad",
+                "#0000af",
+                "#0000b1",
+                "#0001b4",
+                "#0001b5",
+                "#0000b7",
+                "#0000bb",
+                "#0100bd",
+                "#0001bf",
+                "#0000c1",
+                "#0000c3",
+                "#0001c6",
+                "#0000c7",
+                "#0001c9",
+                "#0000cd",
+                "#0001cf",
+                "#0000d1",
+                "#0000d3",
+                "#0000d5",
+                "#0001d7",
+                "#0001d9",
+                "#0000db",
+                "#0101df",
+                "#0100e1",
+                "#0001e3",
+                "#000ce9",
+                "#013ef8",
+                "#028afc",
+                "#0fdff0",
+                "#59ffa2",
+                "#caff37",
+                "#f9ce0d",
+                "#fd7a00",
+                "#f63400",
+                "#e50201",
+                "#e30001",
+                "#df0000",
+                "#de0100",
+                "#db0100",
+                "#d90000",
+                "#d80101",
+                "#d40100",
+                "#d10100",
+                "#cf0000",
+                "#ce0100",
+                "#cb0100",
+                "#c90000",
+                "#c70100",
+                "#c40101",
+                "#c10000",
+                "#c00100",
+                "#be0100",
+                "#bc0100",
+                "#ba0101",
+                "#b70000",
+                "#b40100",
+                "#b40001",
+                "#b00100",
+                "#ad0100",
+                "#ac0000",
+                "#aa0100",
+                "#a70000",
+                "#a40100",
+                "#a20100",
+                "#a00000",
+                "#9e0100",
+                "#9c0101",
+                "#990000",
+                "#970000",
+                "#960001",
+                "#920100",
+                "#8f0000",
+                "#8e0100",
+                "#8c0100",
+                "#890101",
+                "#880100",
+                "#850000",
+                "#830000",
+                "#800100",
+                "#7e0101"
+              ],
+              "labels": [
+                "0.10",
+                "0.20",
+                "0.30"
+              ],
+              "units": "band depth",
+              "consumer": "clay-band",
+              "sampling": "nearest",
+              "displaySampling": "nearest"
+            }
+          },
+          {
+            "id": "ammonium-band",
+            "output": "ceres-{id}{suffix}.webp",
+            "thumbnail": "ceres-lens-{id}.webp",
+            "source": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.IMG",
+            "falseColor": true,
+            "science": {
+              "kind": "terrestrial-scientific",
+              "id": "ammonium-band",
+              "label": "Ammonium band",
+              "format": "pds3-float-map",
+              "path": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.IMG",
+              "labelPath": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.LBL",
+              "grid": {
+                "productId": "CMT_MOSAIC-BII_DEPTH",
+                "dataSetId": "DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0",
+                "targetName": "1 CERES",
+                "width": 4102,
+                "height": 1367,
+                "pixelsPerDegree": 11.393121506074,
+                "referenceRadiusMeters": 470000,
+                "centerLongitudeEastDegrees": 180,
+                "longitudeRangeEast": [
+                  0,
+                  360
+                ],
+                "sampleProjectionOffset": 2050.2618710933,
+                "lineProjectionOffset": 682.88093554667,
+                "projectionRotation": "0.0 <degree>",
+                "missingValue": -1e+32,
+                "sampleType": "IEEE_REAL",
+                "coordinateSystem": "PLANETOCENTRIC",
+                "latitudeRange": [
+                  -60.002788883527,
+                  59.981887771699
+                ]
+              },
+              "description": "Dawn VIR 3.1 µm band depth · Frigeri et al. 2019 scale",
+              "title": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, from the archived Dawn VIR global mosaic, on the color scale of Frigeri et al. (2019), Figure 7. The archived values run lower than the paper's (median 0.064 against its peak near 0.087), so most of Ceres falls in the blue end. Scan stripes remain because the archive's artifact removal was not applied. Gray grid: beyond 60° latitude and other unmeasured pixels.",
+              "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
+              "minimum": 0.05,
+              "maximum": 0.2,
+              "colors": [
+                "#000182",
+                "#000284",
+                "#000188",
+                "#00008e",
+                "#000093",
+                "#000097",
+                "#00009d",
+                "#0000a2",
+                "#0000a7",
+                "#0001ac",
+                "#0000b1",
+                "#0001b6",
+                "#0000bc",
+                "#0000c1",
+                "#0001c6",
+                "#0000cb",
+                "#0000d1",
+                "#0100d7",
+                "#0001d9",
+                "#0101e0",
+                "#0006e7",
+                "#001ff0",
+                "#003bf8",
+                "#005cfd",
+                "#008cfe",
+                "#03b6fe",
+                "#11e1ef",
+                "#2effcf",
+                "#6cff93",
+                "#a8ff58",
+                "#e2ff1e",
+                "#f5d40c",
+                "#ffad01",
+                "#ff7e00",
+                "#ff4c02",
+                "#f43100",
+                "#ec1701",
+                "#e40000",
+                "#e30001",
+                "#e20101",
+                "#df0000",
+                "#de0100",
+                "#db0100",
+                "#d90000",
+                "#d90000",
+                "#d80101",
+                "#d50000",
+                "#d40100",
+                "#d10100",
+                "#d10001",
+                "#cf0000",
+                "#ce0100",
+                "#cb0100",
+                "#cb0001",
+                "#c90000",
+                "#c70100",
+                "#c50000",
+                "#c40101",
+                "#c10000",
+                "#c10000",
+                "#bf0000",
+                "#be0100",
+                "#bb0000",
+                "#ba0100",
+                "#b70000",
+                "#b70000",
+                "#b50000",
+                "#b40100",
+                "#b20101",
+                "#b00100",
+                "#b00100",
+                "#ad0001",
+                "#ab0000",
+                "#aa0100",
+                "#a80100",
+                "#a60100",
+                "#a60100",
+                "#a30000",
+                "#a10100",
+                "#a00000",
+                "#a00000",
+                "#9d0000",
+                "#9c0101",
+                "#990000",
+                "#980100",
+                "#960001",
+                "#960001",
+                "#930000",
+                "#920100",
+                "#8f0000",
+                "#8f0000",
+                "#8d0000",
+                "#8c0100",
+                "#890000",
+                "#880100",
+                "#850000",
+                "#840101",
+                "#830000",
+                "#820000",
+                "#7f0100",
+                "#7f0101"
+              ],
+              "labels": [
+                "0.05",
+                "0.10",
+                "0.15",
+                "0.20"
+              ],
+              "units": "band depth",
+              "consumer": "ammonium-band",
+              "sampling": "nearest",
+              "displaySampling": "nearest"
+            }
           }
         ],
         "lighting": {
@@ -172,7 +485,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bb6798ff662ad30b701128b368c8f79c95e2eb87a30a24cb3274092d489c7753",
+      "sha256": "f5eacd3e0fab26e0f2d5cd377ff38769c43f3f437578c4e186855cbb8bd53d6e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -366,6 +679,1122 @@
               },
               "notes": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
               "noData": true
+            },
+            {
+              "id": "clay-band",
+              "label": "Clay band",
+              "thumbnail": "ceres-lens-clay-band.webp",
+              "surface": "ceres-clay-band@2x.webp",
+              "poles": "ceres-poles-clay-band@2x.webp",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "2.7 µm band depth",
+                "labels": [
+                  "0.10",
+                  "0.20",
+                  "0.30"
+                ],
+                "meta": "band depth",
+                "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
+                "recipe": {
+                  "palette": [
+                    [
+                      0,
+                      1,
+                      128
+                    ],
+                    [
+                      1,
+                      0,
+                      129
+                    ],
+                    [
+                      0,
+                      0,
+                      131
+                    ],
+                    [
+                      0,
+                      0,
+                      131
+                    ],
+                    [
+                      0,
+                      1,
+                      136
+                    ],
+                    [
+                      0,
+                      0,
+                      138
+                    ],
+                    [
+                      0,
+                      0,
+                      139
+                    ],
+                    [
+                      0,
+                      0,
+                      141
+                    ],
+                    [
+                      0,
+                      1,
+                      144
+                    ],
+                    [
+                      0,
+                      1,
+                      146
+                    ],
+                    [
+                      0,
+                      0,
+                      147
+                    ],
+                    [
+                      0,
+                      0,
+                      150
+                    ],
+                    [
+                      0,
+                      0,
+                      152
+                    ],
+                    [
+                      0,
+                      1,
+                      155
+                    ],
+                    [
+                      0,
+                      0,
+                      157
+                    ],
+                    [
+                      0,
+                      0,
+                      159
+                    ],
+                    [
+                      1,
+                      1,
+                      162
+                    ],
+                    [
+                      0,
+                      1,
+                      165
+                    ],
+                    [
+                      0,
+                      1,
+                      165
+                    ],
+                    [
+                      0,
+                      0,
+                      167
+                    ],
+                    [
+                      0,
+                      1,
+                      172
+                    ],
+                    [
+                      0,
+                      0,
+                      173
+                    ],
+                    [
+                      0,
+                      0,
+                      175
+                    ],
+                    [
+                      0,
+                      0,
+                      177
+                    ],
+                    [
+                      0,
+                      1,
+                      180
+                    ],
+                    [
+                      0,
+                      1,
+                      181
+                    ],
+                    [
+                      0,
+                      0,
+                      183
+                    ],
+                    [
+                      0,
+                      0,
+                      187
+                    ],
+                    [
+                      1,
+                      0,
+                      189
+                    ],
+                    [
+                      0,
+                      1,
+                      191
+                    ],
+                    [
+                      0,
+                      0,
+                      193
+                    ],
+                    [
+                      0,
+                      0,
+                      195
+                    ],
+                    [
+                      0,
+                      1,
+                      198
+                    ],
+                    [
+                      0,
+                      0,
+                      199
+                    ],
+                    [
+                      0,
+                      1,
+                      201
+                    ],
+                    [
+                      0,
+                      0,
+                      205
+                    ],
+                    [
+                      0,
+                      1,
+                      207
+                    ],
+                    [
+                      0,
+                      0,
+                      209
+                    ],
+                    [
+                      0,
+                      0,
+                      211
+                    ],
+                    [
+                      0,
+                      0,
+                      213
+                    ],
+                    [
+                      0,
+                      1,
+                      215
+                    ],
+                    [
+                      0,
+                      1,
+                      217
+                    ],
+                    [
+                      0,
+                      0,
+                      219
+                    ],
+                    [
+                      1,
+                      1,
+                      223
+                    ],
+                    [
+                      1,
+                      0,
+                      225
+                    ],
+                    [
+                      0,
+                      1,
+                      227
+                    ],
+                    [
+                      0,
+                      12,
+                      233
+                    ],
+                    [
+                      1,
+                      62,
+                      248
+                    ],
+                    [
+                      2,
+                      138,
+                      252
+                    ],
+                    [
+                      15,
+                      223,
+                      240
+                    ],
+                    [
+                      89,
+                      255,
+                      162
+                    ],
+                    [
+                      202,
+                      255,
+                      55
+                    ],
+                    [
+                      249,
+                      206,
+                      13
+                    ],
+                    [
+                      253,
+                      122,
+                      0
+                    ],
+                    [
+                      246,
+                      52,
+                      0
+                    ],
+                    [
+                      229,
+                      2,
+                      1
+                    ],
+                    [
+                      227,
+                      0,
+                      1
+                    ],
+                    [
+                      223,
+                      0,
+                      0
+                    ],
+                    [
+                      222,
+                      1,
+                      0
+                    ],
+                    [
+                      219,
+                      1,
+                      0
+                    ],
+                    [
+                      217,
+                      0,
+                      0
+                    ],
+                    [
+                      216,
+                      1,
+                      1
+                    ],
+                    [
+                      212,
+                      1,
+                      0
+                    ],
+                    [
+                      209,
+                      1,
+                      0
+                    ],
+                    [
+                      207,
+                      0,
+                      0
+                    ],
+                    [
+                      206,
+                      1,
+                      0
+                    ],
+                    [
+                      203,
+                      1,
+                      0
+                    ],
+                    [
+                      201,
+                      0,
+                      0
+                    ],
+                    [
+                      199,
+                      1,
+                      0
+                    ],
+                    [
+                      196,
+                      1,
+                      1
+                    ],
+                    [
+                      193,
+                      0,
+                      0
+                    ],
+                    [
+                      192,
+                      1,
+                      0
+                    ],
+                    [
+                      190,
+                      1,
+                      0
+                    ],
+                    [
+                      188,
+                      1,
+                      0
+                    ],
+                    [
+                      186,
+                      1,
+                      1
+                    ],
+                    [
+                      183,
+                      0,
+                      0
+                    ],
+                    [
+                      180,
+                      1,
+                      0
+                    ],
+                    [
+                      180,
+                      0,
+                      1
+                    ],
+                    [
+                      176,
+                      1,
+                      0
+                    ],
+                    [
+                      173,
+                      1,
+                      0
+                    ],
+                    [
+                      172,
+                      0,
+                      0
+                    ],
+                    [
+                      170,
+                      1,
+                      0
+                    ],
+                    [
+                      167,
+                      0,
+                      0
+                    ],
+                    [
+                      164,
+                      1,
+                      0
+                    ],
+                    [
+                      162,
+                      1,
+                      0
+                    ],
+                    [
+                      160,
+                      0,
+                      0
+                    ],
+                    [
+                      158,
+                      1,
+                      0
+                    ],
+                    [
+                      156,
+                      1,
+                      1
+                    ],
+                    [
+                      153,
+                      0,
+                      0
+                    ],
+                    [
+                      151,
+                      0,
+                      0
+                    ],
+                    [
+                      150,
+                      0,
+                      1
+                    ],
+                    [
+                      146,
+                      1,
+                      0
+                    ],
+                    [
+                      143,
+                      0,
+                      0
+                    ],
+                    [
+                      142,
+                      1,
+                      0
+                    ],
+                    [
+                      140,
+                      1,
+                      0
+                    ],
+                    [
+                      137,
+                      1,
+                      1
+                    ],
+                    [
+                      136,
+                      1,
+                      0
+                    ],
+                    [
+                      133,
+                      0,
+                      0
+                    ],
+                    [
+                      131,
+                      0,
+                      0
+                    ],
+                    [
+                      128,
+                      1,
+                      0
+                    ],
+                    [
+                      126,
+                      1,
+                      1
+                    ]
+                  ],
+                  "labels": [
+                    "0.10",
+                    "0.20",
+                    "0.30"
+                  ]
+                }
+              },
+              "source": {
+                "id": "dawn-vir-ceres-bi-depth-img",
+                "path": "../manifest.json",
+                "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+              },
+              "facts": [
+                {
+                  "id": "classification",
+                  "label": "Quantity",
+                  "value": "Measured infrared band depth, 1 − Rc/Rb"
+                },
+                {
+                  "id": "coverage",
+                  "label": "Coverage",
+                  "value": "60°S to 60°N; poles unmeasured"
+                },
+                {
+                  "id": "scale",
+                  "label": "Color scale",
+                  "value": "Frigeri et al. (2019), Icarus 318, Fig. 7"
+                }
+              ],
+              "notes": "Depth of the 2.7 µm absorption of OH in Mg-rich clays (phyllosilicates), from the archived Dawn VIR global mosaic, on the color scale of Frigeri et al. (2019), Figure 7. The archived values run higher than the paper's (median 0.255 against its peak near 0.20), so most of Ceres falls in the red end. Scan stripes remain because the archive's artifact removal was not applied. Gray grid: beyond 60° latitude and other unmeasured pixels.",
+              "noData": true
+            },
+            {
+              "id": "ammonium-band",
+              "label": "Ammonium band",
+              "thumbnail": "ceres-lens-ammonium-band.webp",
+              "surface": "ceres-ammonium-band@2x.webp",
+              "poles": "ceres-poles-ammonium-band@2x.webp",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "3.1 µm band depth",
+                "labels": [
+                  "0.05",
+                  "0.10",
+                  "0.15",
+                  "0.20"
+                ],
+                "meta": "band depth",
+                "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
+                "recipe": {
+                  "palette": [
+                    [
+                      0,
+                      1,
+                      130
+                    ],
+                    [
+                      0,
+                      2,
+                      132
+                    ],
+                    [
+                      0,
+                      1,
+                      136
+                    ],
+                    [
+                      0,
+                      0,
+                      142
+                    ],
+                    [
+                      0,
+                      0,
+                      147
+                    ],
+                    [
+                      0,
+                      0,
+                      151
+                    ],
+                    [
+                      0,
+                      0,
+                      157
+                    ],
+                    [
+                      0,
+                      0,
+                      162
+                    ],
+                    [
+                      0,
+                      0,
+                      167
+                    ],
+                    [
+                      0,
+                      1,
+                      172
+                    ],
+                    [
+                      0,
+                      0,
+                      177
+                    ],
+                    [
+                      0,
+                      1,
+                      182
+                    ],
+                    [
+                      0,
+                      0,
+                      188
+                    ],
+                    [
+                      0,
+                      0,
+                      193
+                    ],
+                    [
+                      0,
+                      1,
+                      198
+                    ],
+                    [
+                      0,
+                      0,
+                      203
+                    ],
+                    [
+                      0,
+                      0,
+                      209
+                    ],
+                    [
+                      1,
+                      0,
+                      215
+                    ],
+                    [
+                      0,
+                      1,
+                      217
+                    ],
+                    [
+                      1,
+                      1,
+                      224
+                    ],
+                    [
+                      0,
+                      6,
+                      231
+                    ],
+                    [
+                      0,
+                      31,
+                      240
+                    ],
+                    [
+                      0,
+                      59,
+                      248
+                    ],
+                    [
+                      0,
+                      92,
+                      253
+                    ],
+                    [
+                      0,
+                      140,
+                      254
+                    ],
+                    [
+                      3,
+                      182,
+                      254
+                    ],
+                    [
+                      17,
+                      225,
+                      239
+                    ],
+                    [
+                      46,
+                      255,
+                      207
+                    ],
+                    [
+                      108,
+                      255,
+                      147
+                    ],
+                    [
+                      168,
+                      255,
+                      88
+                    ],
+                    [
+                      226,
+                      255,
+                      30
+                    ],
+                    [
+                      245,
+                      212,
+                      12
+                    ],
+                    [
+                      255,
+                      173,
+                      1
+                    ],
+                    [
+                      255,
+                      126,
+                      0
+                    ],
+                    [
+                      255,
+                      76,
+                      2
+                    ],
+                    [
+                      244,
+                      49,
+                      0
+                    ],
+                    [
+                      236,
+                      23,
+                      1
+                    ],
+                    [
+                      228,
+                      0,
+                      0
+                    ],
+                    [
+                      227,
+                      0,
+                      1
+                    ],
+                    [
+                      226,
+                      1,
+                      1
+                    ],
+                    [
+                      223,
+                      0,
+                      0
+                    ],
+                    [
+                      222,
+                      1,
+                      0
+                    ],
+                    [
+                      219,
+                      1,
+                      0
+                    ],
+                    [
+                      217,
+                      0,
+                      0
+                    ],
+                    [
+                      217,
+                      0,
+                      0
+                    ],
+                    [
+                      216,
+                      1,
+                      1
+                    ],
+                    [
+                      213,
+                      0,
+                      0
+                    ],
+                    [
+                      212,
+                      1,
+                      0
+                    ],
+                    [
+                      209,
+                      1,
+                      0
+                    ],
+                    [
+                      209,
+                      0,
+                      1
+                    ],
+                    [
+                      207,
+                      0,
+                      0
+                    ],
+                    [
+                      206,
+                      1,
+                      0
+                    ],
+                    [
+                      203,
+                      1,
+                      0
+                    ],
+                    [
+                      203,
+                      0,
+                      1
+                    ],
+                    [
+                      201,
+                      0,
+                      0
+                    ],
+                    [
+                      199,
+                      1,
+                      0
+                    ],
+                    [
+                      197,
+                      0,
+                      0
+                    ],
+                    [
+                      196,
+                      1,
+                      1
+                    ],
+                    [
+                      193,
+                      0,
+                      0
+                    ],
+                    [
+                      193,
+                      0,
+                      0
+                    ],
+                    [
+                      191,
+                      0,
+                      0
+                    ],
+                    [
+                      190,
+                      1,
+                      0
+                    ],
+                    [
+                      187,
+                      0,
+                      0
+                    ],
+                    [
+                      186,
+                      1,
+                      0
+                    ],
+                    [
+                      183,
+                      0,
+                      0
+                    ],
+                    [
+                      183,
+                      0,
+                      0
+                    ],
+                    [
+                      181,
+                      0,
+                      0
+                    ],
+                    [
+                      180,
+                      1,
+                      0
+                    ],
+                    [
+                      178,
+                      1,
+                      1
+                    ],
+                    [
+                      176,
+                      1,
+                      0
+                    ],
+                    [
+                      176,
+                      1,
+                      0
+                    ],
+                    [
+                      173,
+                      0,
+                      1
+                    ],
+                    [
+                      171,
+                      0,
+                      0
+                    ],
+                    [
+                      170,
+                      1,
+                      0
+                    ],
+                    [
+                      168,
+                      1,
+                      0
+                    ],
+                    [
+                      166,
+                      1,
+                      0
+                    ],
+                    [
+                      166,
+                      1,
+                      0
+                    ],
+                    [
+                      163,
+                      0,
+                      0
+                    ],
+                    [
+                      161,
+                      1,
+                      0
+                    ],
+                    [
+                      160,
+                      0,
+                      0
+                    ],
+                    [
+                      160,
+                      0,
+                      0
+                    ],
+                    [
+                      157,
+                      0,
+                      0
+                    ],
+                    [
+                      156,
+                      1,
+                      1
+                    ],
+                    [
+                      153,
+                      0,
+                      0
+                    ],
+                    [
+                      152,
+                      1,
+                      0
+                    ],
+                    [
+                      150,
+                      0,
+                      1
+                    ],
+                    [
+                      150,
+                      0,
+                      1
+                    ],
+                    [
+                      147,
+                      0,
+                      0
+                    ],
+                    [
+                      146,
+                      1,
+                      0
+                    ],
+                    [
+                      143,
+                      0,
+                      0
+                    ],
+                    [
+                      143,
+                      0,
+                      0
+                    ],
+                    [
+                      141,
+                      0,
+                      0
+                    ],
+                    [
+                      140,
+                      1,
+                      0
+                    ],
+                    [
+                      137,
+                      0,
+                      0
+                    ],
+                    [
+                      136,
+                      1,
+                      0
+                    ],
+                    [
+                      133,
+                      0,
+                      0
+                    ],
+                    [
+                      132,
+                      1,
+                      1
+                    ],
+                    [
+                      131,
+                      0,
+                      0
+                    ],
+                    [
+                      130,
+                      0,
+                      0
+                    ],
+                    [
+                      127,
+                      1,
+                      0
+                    ],
+                    [
+                      127,
+                      1,
+                      1
+                    ]
+                  ],
+                  "labels": [
+                    "0.05",
+                    "0.10",
+                    "0.15",
+                    "0.20"
+                  ]
+                }
+              },
+              "source": {
+                "id": "dawn-vir-ceres-bii-depth-img",
+                "path": "../manifest.json",
+                "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+              },
+              "facts": [
+                {
+                  "id": "classification",
+                  "label": "Quantity",
+                  "value": "Measured infrared band depth, 1 − Rc/Rb"
+                },
+                {
+                  "id": "coverage",
+                  "label": "Coverage",
+                  "value": "60°S to 60°N; poles unmeasured"
+                },
+                {
+                  "id": "scale",
+                  "label": "Color scale",
+                  "value": "Frigeri et al. (2019), Icarus 318, Fig. 7"
+                }
+              ],
+              "notes": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, from the archived Dawn VIR global mosaic, on the color scale of Frigeri et al. (2019), Figure 7. The archived values run lower than the paper's (median 0.064 against its peak near 0.087), so most of Ceres falls in the blue end. Scan stripes remain because the archive's artifact removal was not applied. Gray grid: beyond 60° latitude and other unmeasured pixels.",
+              "noData": true
             }
           ]
         },
@@ -431,7 +1860,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "de1cd7df66c04340d820b43e07597238868e66c31101bdfebbbc612e2b63ea05",
+      "sha256": "b2fbf156d93eda48891a38d3a8834c651661a85d20d3aebc19cc94cdaab37f18",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -450,7 +1879,9 @@
         "lensIds": [
           "normal",
           "enhanced",
-          "elevation"
+          "elevation",
+          "clay-band",
+          "ammonium-band"
         ],
         "kinds": {
           "point": [
@@ -668,6 +2099,214 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "dawn-vir-ceres-bi-depth-img",
+      "path": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.IMG",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_DEPTH.IMG",
+      "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+      ],
+      "acquisition": "Retrieve the exact archived file from the PDS Small Bodies Node volume DWNCVIR_2, pinned 2026-09-21. No source substitution or automatic hash refresh.",
+      "redistribution": "Original binary is reacquired locally and excluded from Git; derived maps retain attribution.",
+      "lensId": "clay-band",
+      "label": "Clay band",
+      "falseColor": true,
+      "format": "pds3-float-map",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          59.981887771699,
+          -60.002788883527
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 470000
+      },
+      "coverage": "2.7 µm OH (phyllosilicate) band depth, 1 - Rc/Rb (Clark et al. 1984), from Survey and HAMO VIR spectra, photometrically corrected as in Ammannito et al. (2016), overlaps averaged after projection. The archive's artifact removal was not applied, so scan stripes and checkerboard patterns remain. Coverage is 60°S to 60°N; unmeasured pixels hold -1.0E+32 and stay missing.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_DEPTH.LBL",
+            "missionId": "dawn"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-vir-ceres-global-mosaics-v1",
+            "role": "material",
+            "evidence": "PDS3 data set DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0, volume DWNCVIR_2, file listed under DATA/"
+          }
+        ]
+      },
+      "sha256": "8a080640b296808d87a897827adfc4cae8de08adf0a21b3e9738bd983765d70a",
+      "bytes": 22429736,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.IMG",
+        "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_DEPTH.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "dawn-vir-ceres-bi-depth-lbl",
+      "path": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_DEPTH.LBL",
+      "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+      ],
+      "acquisition": "Retrieve the exact archived file from the PDS Small Bodies Node volume DWNCVIR_2, pinned 2026-09-21. No source substitution or automatic hash refresh.",
+      "redistribution": "Small native PDS3 label retained in Git byte for byte.",
+      "purpose": "Detached PDS3 label: identity, 32-bit big-endian IEEE_REAL layout, planetocentric east-positive equirectangular projection, latitude extent and missing constant, all checked against the lens recipe.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-vir-ceres-global-mosaics-v1",
+            "role": "material",
+            "evidence": "PDS3 data set DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0, volume DWNCVIR_2, file listed under DATA/"
+          }
+        ]
+      },
+      "sha256": "838718711fffbbf35717e17e6e57889f47348868cf8aaffdbed7ca70c214e963",
+      "bytes": 5520,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.LBL",
+        "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_DEPTH.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "dawn-vir-ceres-bii-depth-img",
+      "path": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.IMG",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_DEPTH.IMG",
+      "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+      ],
+      "acquisition": "Retrieve the exact archived file from the PDS Small Bodies Node volume DWNCVIR_2, pinned 2026-09-21. No source substitution or automatic hash refresh.",
+      "redistribution": "Original binary is reacquired locally and excluded from Git; derived maps retain attribution.",
+      "lensId": "ammonium-band",
+      "label": "Ammonium band",
+      "falseColor": true,
+      "format": "pds3-float-map",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          59.981887771699,
+          -60.002788883527
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 470000
+      },
+      "coverage": "3.1 µm NH4 (ammonium) band depth, 1 - Rc/Rb (Clark et al. 1984), from Survey and HAMO VIR spectra, photometrically corrected as in Ammannito et al. (2016), overlaps averaged after projection. The archive's artifact removal was not applied, so scan stripes and checkerboard patterns remain. Coverage is 60°S to 60°N; unmeasured pixels hold -1.0E+32 and stay missing.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_DEPTH.LBL",
+            "missionId": "dawn"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-vir-ceres-global-mosaics-v1",
+            "role": "material",
+            "evidence": "PDS3 data set DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0, volume DWNCVIR_2, file listed under DATA/"
+          }
+        ]
+      },
+      "sha256": "4c802cb5811f379f887fcf95e42db8ee8064ef6fab7d2bf84d8d2c2adeb83d54",
+      "bytes": 22429736,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.IMG",
+        "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_DEPTH.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "dawn-vir-ceres-bii-depth-lbl",
+      "path": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_DEPTH.LBL",
+      "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+      ],
+      "acquisition": "Retrieve the exact archived file from the PDS Small Bodies Node volume DWNCVIR_2, pinned 2026-09-21. No source substitution or automatic hash refresh.",
+      "redistribution": "Small native PDS3 label retained in Git byte for byte.",
+      "purpose": "Detached PDS3 label: identity, 32-bit big-endian IEEE_REAL layout, planetocentric east-positive equirectangular projection, latitude extent and missing constant, all checked against the lens recipe.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-vir-ceres-global-mosaics-v1",
+            "role": "material",
+            "evidence": "PDS3 data set DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0, volume DWNCVIR_2, file listed under DATA/"
+          }
+        ]
+      },
+      "sha256": "d4e830ba6854ec5a6ce38a708d9d94572467f12cf63783404b84322d90bb9860",
+      "bytes": 5520,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.LBL",
+        "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_DEPTH.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
       "kind": "authored-content",
       "id": "ceres-object-content",
       "path": "content/object.json",
@@ -680,8 +2319,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "bb6798ff662ad30b701128b368c8f79c95e2eb87a30a24cb3274092d489c7753",
-      "bytes": 10739,
+      "sha256": "f5eacd3e0fab26e0f2d5cd377ff38769c43f3f437578c4e186855cbb8bd53d6e",
+      "bytes": 32983,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -943,6 +2582,108 @@
           "sourceId": "dawn-elevation",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/2/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "clay-band",
+      "label": "Clay band",
+      "recipe": "raster",
+      "selector": "/surfaces/3",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [],
+      "lensIds": [
+        "clay-band"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "dawn-vir-ceres-bi-depth-img",
+        "dawn-vir-ceres-bi-depth-lbl"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ceres/ceres-clay-band@2x.webp",
+          "bytes": 3462586,
+          "sha256": "5cd4ad5f82270f71ca716c1943e465b470956cc730589104a4d3e4cdeffed483",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ceres/ceres-lens-clay-band.webp",
+          "bytes": 2708,
+          "sha256": "449cce086cbebba9c671a6b8a897f14fa811e44abaca7332ed39a9aac84b873d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ceres/ceres-poles-clay-band@2x.webp",
+          "bytes": 9464,
+          "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "dawn-vir-ceres-bi-depth-img",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/3/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "ammonium-band",
+      "label": "Ammonium band",
+      "recipe": "raster",
+      "selector": "/surfaces/4",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [],
+      "lensIds": [
+        "ammonium-band"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "dawn-vir-ceres-bii-depth-img",
+        "dawn-vir-ceres-bii-depth-lbl"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ceres/ceres-ammonium-band@2x.webp",
+          "bytes": 3530718,
+          "sha256": "6f45272855f44c8e6525f83dc0c8257b1cc4b16b3312c1840ea05cea35425c3d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ceres/ceres-lens-ammonium-band.webp",
+          "bytes": 2892,
+          "sha256": "240bd51f8cb7658dfce108ec0f4a6bcfa9b785fe1ce3ae89101e7f584ddb12ef",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ceres/ceres-poles-ammonium-band@2x.webp",
+          "bytes": 9464,
+          "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "dawn-vir-ceres-bii-depth-img",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/4/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1301,6 +3042,56 @@
           "verification": "bytes-verified"
         }
       ]
+    },
+    {
+      "id": "preview:clay-band",
+      "label": "Clay band preview",
+      "recipe": "raster",
+      "selector": "/surfaces/3",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "clay-band"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/clay-band.webp",
+          "bytes": 84552,
+          "sha256": "9981e8e9822dd41a24eebac4e6ef81d6490bd1bebbff90e8d0409b69bd430dd0",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:ammonium-band",
+      "label": "Ammonium band preview",
+      "recipe": "raster",
+      "selector": "/surfaces/4",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "ammonium-band"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/ammonium-band.webp",
+          "bytes": 87194,
+          "sha256": "ca253c0c67aacbfbf79f14a60535b399c46d6304d8bc4635f976d47eeb7d3e1f",
+          "verification": "bytes-verified"
+        }
+      ]
     }
   ],
   "coverage": {
@@ -1309,11 +3100,11 @@
   },
   "lastPreparation": {
     "objectId": "ceres",
-    "materialSha256": "8a5c119064abe64f5282ac0e1e0637709d70623d2b3c3a306fa01f64e6813c5a",
+    "materialSha256": "8068df2b786f6cee0b00db8017c61ad70aa1faeeccd52625b06b4ac746edf4c8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "174147cacbe6d11f288faa1ff625be50214b3bb6e7ff3bbad3659b8ea55a128c"
+      "bindingsSha256": "786ffcfe3ed51d9f68de70f405d65b83509163c0ea11efcb5c79499e04c53663"
     }
   }
 }
