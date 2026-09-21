@@ -26,7 +26,7 @@ test("the plan anchors labels to the single body mesh for every surface lens", (
   const node = runtimeDefinition.tree.nodes[plan.target];
   assert.match(node.className ?? "", /(^|\s)io-body(\s|$)/u);
   assert.equal(runtimeDefinition.tree.nodes.filter(n => /(^|\s)io-body(\s|$)/u.test(n.className ?? "")).length, 1);
-  assert.deepEqual(plan.lensIds, ["normal","enhanced","geology","spectral-slope","visible-absorption"]);
+  assert.deepEqual(plan.lensIds, ["normal","enhanced","geology","spectral-slope","visible-absorption","volcanic-heat"]);
   assert.equal(plan.meshRadiusUnits, runtimeDefinition.camera.logicalBodyDiameter / 2 / runtimeDefinition.camera.sceneScale);
   assert.deepEqual(plan.outline, { pieces: 256 });
   assert.equal(plan.policy.minimumZoomShare, 0, "labels are not zoom-gated since the default label policy");

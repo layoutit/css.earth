@@ -390,6 +390,94 @@
           }
         ]
       }
+    },
+    {
+      "id": "volcanic-heat",
+      "output": "io-{id}{suffix}.webp",
+      "thumbnail": "io-lens-{id}.webp",
+      "source": "science/jiram/io-jiram-m-night.IMG",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "volcanic-heat",
+        "label": "Volcanic heat",
+        "format": "pds3-float-map",
+        "path": "science/jiram/io-jiram-m-night.IMG",
+        "labelPath": "science/jiram/io-jiram-m-night.LBL",
+        "grid": {
+          "productId": "IO_JIRAM_M_NIGHT_MOSAIC",
+          "dataSetId": "CSSEARTH-IO-JIRAM-M-NIGHT-MOSAIC-V1",
+          "targetName": "IO",
+          "width": 720,
+          "height": 360,
+          "pixelsPerDegree": 2,
+          "referenceRadiusMeters": 1821490,
+          "centerLongitudeEastDegrees": 180,
+          "longitudeRangeEast": [
+            0,
+            360
+          ],
+          "sampleProjectionOffset": 359.5,
+          "lineProjectionOffset": 179.5,
+          "projectionRotation": "0.0 <degree>",
+          "missingValue": -1e+32,
+          "sampleType": "PC_REAL",
+          "coordinateSystem": "PLANETOCENTRIC",
+          "latitudeRange": [
+            -90,
+            90
+          ]
+        },
+        "description": "Juno JIRAM 4.8 µm night side · Mura et al. 2024 scale",
+        "title": "Heat from Io's volcanoes at 4.8 µm, seen by Juno's JIRAM camera on the night side, where no sunlight is reflected. Each spot is a hot spot's glow; the rest of the night side is too cold to register. Color follows the linear scale of Mura et al. (2024), Figure 2. Gray grid: never seen at night by the frames used.",
+        "sourceUrl": "https://atmos.nmsu.edu/PDS/data/PDS4/",
+        "minimum": 0,
+        "maximum": 0.15,
+        "colors": [
+          "#4020b0",
+          "#4328c5",
+          "#4633dc",
+          "#453dea",
+          "#3f4bf5",
+          "#3658fb",
+          "#1d66fd",
+          "#0271fc",
+          "#017efb",
+          "#0189f8",
+          "#0193ec",
+          "#029de7",
+          "#02a6e1",
+          "#03b1d9",
+          "#02b6cd",
+          "#01bcbf",
+          "#03bfb0",
+          "#01c69e",
+          "#01ca8d",
+          "#02cc76",
+          "#04ce5c",
+          "#5ec942",
+          "#9ac71d",
+          "#c0c504",
+          "#e6bc02",
+          "#fbbb13",
+          "#fdbf21",
+          "#fec912",
+          "#fdd703",
+          "#fae402",
+          "#f8f001",
+          "#fafb03"
+        ],
+        "labels": [
+          "0",
+          "0.05",
+          "0.10",
+          "0.15"
+        ],
+        "units": "band radiance, W m⁻² sr⁻¹",
+        "consumer": "volcanic-heat",
+        "sampling": "nearest",
+        "displaySampling": "nearest"
+      }
     }
   ],
   "lighting": {
