@@ -27,83 +27,29 @@ import { encodeDensityKtx2 } from '../../../src/preparation/volume/acquisition.t
 import { gainForTopAlpha, spreadColumns } from '../../../src/preparation/volume/column-depth.ts';
 import { readFitsFileHdus } from '../../fits.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
-import { CHANNELS, reflectanceChannels, stretchOf } from './fit-figure-stretch.mts';
+import { depositUrl, lensChannels, stretchOf } from './fit-figure-stretch.mts';
+import { CHANNELS, parseCircumstellarRecipe, type CircumstellarLens, type CircumstellarRecipe } from './recipe.mts';
+
+export { parseCircumstellarRecipe, type CircumstellarLens, type CircumstellarRecipe };
 import { mastDownloadUrl, mastFile } from '../astronomy-packages/mast.mts';
 import { readImagingProgram } from '../jwst/imaging/image3.mts';
 import { JWST_BANDS } from '../jwst/imaging/bands.mts';
-import { DEFAULT_SEARCH, discDensity, fitDiscEnvelope, profileDiscDensity, scoreEnvelope, readSkyPlane, ringGeometry, type SkyPlane } from './disc-envelope.mts';
+import { DEFAULT_SEARCH, discDensity, fitDiscEnvelope, profileDiscDensity, publishedRingGeometry, scoreEnvelope, readSkyPlane, ringGeometry, type SkyPlane } from './disc-envelope.mts';
 
 const METERS_PER_PARSEC = 3.085677581491367e16;
 
-export interface CircumstellarLens {
-  readonly id: string; readonly label: string; readonly title: string; readonly summary: string; readonly description: string;
-  readonly program: string;
-  /** The coronagraph bands each display channel averages, longest wavelengths red. */
-  readonly channels: Readonly<Record<(typeof CHANNELS)[number], readonly string[]>>;
-  /** The star's flux in each band, which each band is divided by to give reflectance; and where it is published. */
-  readonly stellarFluxJy: Readonly<Record<string, number>>; readonly stellarFluxSource: string;
-  /** The display stretch, log(1 + a u) / log(1 + a) with u = reflectance / top, fitted to the publisher's panel. */
-  readonly stretch: { readonly a: number; readonly top: number; readonly source: string; readonly fit: Record<string, unknown> };
-  /** Inside this radius the coronagraph mask holds the star and the image is not data; the source of the number. */
-  readonly innerMaskArcsec: number; readonly innerMaskSource: string;
-  /** The ring's annulus, in units, scored out to `outerUnits`. The image is drawn to the grid edge, tapering from where its
-   * deprojected median brightness falls to the per-pixel noise, which the author measures. */
-  readonly outerUnits: number;
-  readonly backgroundAnnulusArcsec: readonly [number, number];
-  /** Conventions, stated: which end of the minor axis is nearer the observer, and the ring's vertical height as a fraction of its radius. */
-  readonly nearSidePositionAngleDeg: number; readonly nearSideSource: string; readonly heightOfRadius: number;
-  /** The alpha the brightest column reaches. */
-  readonly topAlpha: number;
-  /** The published geometry the measured ring is checked against. */
-  readonly published: { readonly citation: string; readonly url: string; readonly radiusUnits: number; readonly inclinationDeg: number; readonly positionAngleDeg: number; readonly toleranceDeg: number; readonly radiusTolerance: number };
-}
-export interface CircumstellarRecipe {
-  readonly schema: 'cssearth-circumstellar-volume@1';
-  readonly id: string; readonly host: string; readonly name: string; readonly description: string; readonly sourceUrl: string;
-  readonly credit: string; readonly license: { readonly spdx: string; readonly note: string; readonly url: string };
-  readonly grid: { readonly size: number; readonly halfUnits: number; readonly slabs: number };
-  readonly defaultLens: string;
-  readonly lenses: readonly CircumstellarLens[];
-}
-export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
-  const row = requireRecord(value, 'circumstellar recipe');
-  if (row.schema !== 'cssearth-circumstellar-volume@1') throw new TypeError('Unsupported circumstellar recipe.');
-  const grid = requireRecord(row.grid, 'grid'), license = requireRecord(row.license, 'license');
-  const lenses = requireArray(row.lenses).map(raw => {
-    const lens = requireRecord(raw, 'lens'), published = requireRecord(lens.published, 'published geometry'), annulus = requireArray(lens.backgroundAnnulusArcsec);
-    const number = (key: string, from: Record<string, unknown> = lens) => requireFiniteNumber(from[key], key);
-    const channelRecord = requireRecord(lens.channels, 'channels'), fluxRecord = requireRecord(lens.stellarFluxJy, 'stellar fluxes');
-    const channels = Object.fromEntries(CHANNELS.map(channel => {
-      const bands = requireArray(channelRecord[channel]).map(band => requireString(band));
-      if (!bands.length) throw new TypeError(`The ${channel} channel names no band.`);
-      for (const band of bands) {
-        if (!Object.hasOwn(JWST_BANDS, band) || !JWST_BANDS[band]!.coronagraph) throw new TypeError(`${band} is not a coronagraph band.`);
-        if (!(requireFiniteNumber(fluxRecord[band], `${band} stellar flux`) > 0)) throw new TypeError(`${band}: the stellar flux is positive.`);
-      }
-      return [channel, bands];
-    })) as unknown as CircumstellarLens['channels'];
-    const stretchRecord = requireRecord(lens.stretch, 'stretch');
-    const stretch = { a: number('a', stretchRecord), top: number('top', stretchRecord), source: requireString(stretchRecord.source), fit: requireRecord(stretchRecord.fit, 'stretch fit') };
-    if (!(stretch.a > 0 && stretch.top > 0)) throw new TypeError('Invalid display stretch.');
-    return { id: requireString(lens.id, 'lens id'), label: requireString(lens.label), title: requireString(lens.title), summary: requireString(lens.summary), description: requireString(lens.description),
-      program: requireString(lens.program), channels, stellarFluxJy: fluxRecord as Record<string, number>, stellarFluxSource: requireString(lens.stellarFluxSource), stretch,
-      innerMaskArcsec: number('innerMaskArcsec'), innerMaskSource: requireString(lens.innerMaskSource),
-      outerUnits: number('outerUnits'), backgroundAnnulusArcsec: [requireFiniteNumber(annulus[0]), requireFiniteNumber(annulus[1])] as const,
-      nearSidePositionAngleDeg: number('nearSidePositionAngleDeg'), nearSideSource: requireString(lens.nearSideSource), heightOfRadius: number('heightOfRadius'),
-      topAlpha: number('topAlpha'),
-      published: { citation: requireString(published.citation), url: requireString(published.url), radiusUnits: number('radiusUnits', published), inclinationDeg: number('inclinationDeg', published),
-        positionAngleDeg: number('positionAngleDeg', published), toleranceDeg: number('toleranceDeg', published), radiusTolerance: number('radiusTolerance', published) } };
-  });
-  if (!lenses.length || new Set(lenses.map(lens => lens.id)).size !== lenses.length) throw new TypeError('Lenses need distinct ids.');
-  const defaultLens = requireString(row.defaultLens);
-  if (!lenses.some(lens => lens.id === defaultLens)) throw new TypeError('The default lens is not one of the lenses.');
-  for (const lens of lenses) if (!(lens.outerUnits <= requireFiniteNumber(grid.halfUnits) && lens.topAlpha > 0 && lens.topAlpha < 1 && lens.heightOfRadius > 0))
-    throw new TypeError(`${lens.id}: scoring ends inside the grid, and the top alpha lies in (0, 1).`);
-  return { schema: row.schema, id: requireString(row.id), host: requireString(row.host), name: requireString(row.name), description: requireString(row.description), sourceUrl: requireString(row.sourceUrl),
-    credit: requireString(row.credit), license: { spdx: requireString(license.spdx), note: requireString(license.note), url: requireString(license.url) },
-    grid: { size: requireFiniteNumber(grid.size), halfUnits: requireFiniteNumber(grid.halfUnits), slabs: requireFiniteNumber(grid.slabs) }, defaultLens, lenses };
+/** One band as a lens read it, from either source, with what the provenance and manifest say about it. */
+interface BandSource {
+  readonly band: string; readonly sky: SkyPlane; readonly primary: Record<string, unknown>; readonly sha256: string; readonly bytes: number; readonly name: string; readonly url: string;
+  readonly path: string; readonly observed: string; readonly starRaDecDeg: readonly unknown[]; readonly title: string; readonly displayCredit: string; readonly role: string; readonly acquisition: string;
 }
 
+/** A printed colorbar as a function: brightness to red, green and blue in [0, 1], interpolated in log brightness. */
+const colorbarOf = (bar: NonNullable<CircumstellarLens['colorbar']>) => (value: number): readonly number[] => {
+  const t = Math.max(0, Math.min(1, Math.log(Math.max(value, bar.minimum) / bar.minimum) / Math.log(bar.maximum / bar.minimum))) * (bar.colours.length - 1);
+  const k = Math.min(bar.colours.length - 2, Math.floor(t)), f = t - k, lo = bar.colours[k]!, hi = bar.colours[k + 1]!;
+  return [0, 1, 2].map(c => (lo[c]! + (hi[c]! - lo[c]!) * f) / 255);
+};
 const compass = (positionAngleDeg: number) => ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'][Math.round(((positionAngleDeg % 360) + 360) % 360 / 45) % 8]!;
 const smoothstep = (a: number, b: number, t: number) => { const u = Math.max(0, Math.min(1, (t - a) / (b - a))); return u * u * (3 - 2 * u); };
 const filterOf = (band: string): string => {
@@ -118,20 +64,42 @@ const inputIdOf = (lens: CircumstellarLens, band: string) => `${lens.id}-${filte
  * along it. */
 async function buildLens(recipe: CircumstellarRecipe, lens: CircumstellarLens, distancePc: number, downloads: string, sources: readonly string[]) {
   const { size, halfUnits } = recipe.grid, count = size * size, step = 2 * halfUnits / size, innerMaskUnits = lens.innerMaskArcsec * distancePc;
-  const read = await reflectanceChannels({ program: lens.program, channels: lens.channels, stellarFluxJy: lens.stellarFluxJy, distancePc, halfUnits, size,
-    backgroundAnnulusArcsec: lens.backgroundAnnulusArcsec, downloads, sources });
-  const { program } = await readImagingProgram(lens.program), bands = [];
-  for (const { band, entry, mosaic, primary } of read.entries) bands.push({ band, entry, mosaic, primary, program, sky: read.planes.get(band)!, mosaicSha256: (await sha256File(mosaic)).sha256 });
+  const scoredFromUnits = Math.max(innerMaskUnits, lens.ringScoredFromUnits ?? innerMaskUnits);
+  const read = await lensChannels({ ...(lens.program ? { program: lens.program } : {}), ...(lens.deposit ? { deposit: lens.deposit } : {}), quantity: lens.quantity, channels: lens.channels,
+    ...(lens.stellarFluxJy ? { stellarFluxJy: lens.stellarFluxJy } : {}), distancePc, halfUnits, size, backgroundAnnulusArcsec: lens.backgroundAnnulusArcsec, downloads, sources });
+  const program = lens.program ? (await readImagingProgram(lens.program)).program : undefined, bands: BandSource[] = [];
+  for (const read1 of read.entries) {
+    const sky = read.planes.get(read1.band)!, filter = filterOf(read1.band);
+    if ('entry' in read1 && read1.entry) {
+      const { entry, mosaic, primary } = read1;
+      bands.push({ band: read1.band, sky, primary, sha256: (await sha256File(mosaic)).sha256, bytes: entry.level3.bytes, name: entry.level3.name, url: mastDownloadUrl(entry.level3.uri),
+        path: `observations/${entry.level3.name}`, observed: String(primary['DATE-OBS']), starRaDecDeg: [primary.TARG_RA, primary.TARG_DEC],
+        title: `MAST JWST programme ${program!.programme} · ${entry.observation} level-3 coronagraph mosaic`, displayCredit: 'NASA/ESA/CSA JWST, MAST',
+        role: `MAST level-3 coronagraph mosaic ${entry.level3.name} (calwebb_coron3), the ${filter} band of the ${lens.id} leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/${lens.program}.${read1.band}.reproduction.json`,
+        acquisition: `Downloaded unchanged from MAST by its URI ${entry.level3.uri} (tools/objects/astronomy-packages/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/${lens.program}.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).` });
+    } else if ('file' in read1 && read1.file) {
+      const deposit = lens.deposit!, { file, image, primary } = read1;
+      const observed = typeof primary['MJD-AVG'] === 'number' ? new Date((primary['MJD-AVG'] - 40587) * 86_400_000).toISOString().slice(0, 10) : 'unstated';
+      bands.push({ band: read1.band, sky, primary, sha256: (await sha256File(image)).sha256, bytes: file.bytes, name: file.path, url: depositUrl(deposit, file.path),
+        path: `deposit/${file.path.replaceAll('/', '__')}`, observed, starRaDecDeg: [deposit.starRaDeg, deposit.starDecDeg],
+        title: `${deposit.citation}: reduced ${filter} image ${file.path}`, displayCredit: `NASA/ESA/CSA JWST; ${deposit.citation}`,
+        role: `The authors' final reduced ${filter} image ${file.path} (github.com/${deposit.repository} at ${deposit.commit}), the ${filter} band of the ${lens.id} lens`,
+        acquisition: `Downloaded unchanged from the authors' repository github.com/${deposit.repository} at commit ${deposit.commit} (tools/objects/circumstellar/fit-figure-stretch.mts depositFile), checked against its pinned bytes and sha256. The star's position is not in its header: ${deposit.starSource}.` });
+    }
+  }
   // The ring is measured on the mean reflectance of the three channels; its noise is the bands' combined, in reflectance.
   const mean = Float32Array.from({ length: count }, (_, p) => (read.channels[0]![p]! + read.channels[1]![p]! + read.channels[2]![p]!) / 3);
-  const noise = Math.sqrt(CHANNELS.reduce((total, channel) => total + lens.channels[channel].reduce((sum, band) => sum + (read.planes.get(band)!.noise / lens.stellarFluxJy[band]!) ** 2, 0) / lens.channels[channel].length ** 2, 0)) / 3;
-  const sky: SkyPlane = { ...bands[0]!.sky, plane: mean, background: 0, noise, unit: 'reflectance (MJy/sr per Jy of starlight)' };
-  const geometry = ringGeometry(sky, { innerMaskUnits, outerUnits: lens.outerUnits });
+  const noise = Math.sqrt(CHANNELS.reduce((total, channel) => total + lens.channels[channel].reduce((sum, band) => sum + (read.planes.get(band)!.noise / read.divisors.get(band)!) ** 2, 0) / lens.channels[channel].length ** 2, 0)) / 3;
+  const sky: SkyPlane = { ...bands[0]!.sky, plane: mean, background: 0, noise, unit: lens.quantity === 'reflectance' ? 'reflectance (MJy/sr per Jy of starlight)' : bands[0]!.sky.unit };
   const { published } = lens, angle = (a: number, b: number) => Math.abs(((a - b) % 180 + 270) % 180 - 90);
+  // An adopted geometry is the publication's own fit; the envelope below still has to project to the image better than the alternatives.
+  const geometry = lens.geometry === 'published'
+    ? publishedRingGeometry({ semiMajorUnits: published.radiusUnits, inclinationDeg: published.inclinationDeg, positionAngleDeg: published.positionAngleDeg, centreOffsetEastNorthUnits: published.centreOffsetEastNorthUnits! })
+    : ringGeometry(sky, { innerMaskUnits: scoredFromUnits, outerUnits: lens.outerUnits });
   const differences = { radius: Math.abs(geometry.semiMajorUnits / published.radiusUnits - 1), inclinationDeg: Math.abs(geometry.inclinationDeg - published.inclinationDeg), positionAngleDeg: angle(geometry.positionAngleDeg, published.positionAngleDeg) };
   if (differences.radius > published.radiusTolerance || differences.inclinationDeg > published.toleranceDeg || differences.positionAngleDeg > published.toleranceDeg)
     throw new Error(`${lens.id}: the measured ring (radius ${geometry.semiMajorUnits.toFixed(1)}, inclination ${geometry.inclinationDeg.toFixed(1)}, position angle ${geometry.positionAngleDeg.toFixed(1)}) does not match ${published.citation} (${published.radiusUnits}, ${published.inclinationDeg}, ${published.positionAngleDeg}).`);
-  const fit = fitDiscEnvelope(sky, geometry, { innerMaskUnits, outerUnits: lens.outerUnits, nearSidePositionAngleDeg: lens.nearSidePositionAngleDeg, heightOfRadius: lens.heightOfRadius });
+  const fit = fitDiscEnvelope(sky, geometry, { innerMaskUnits: scoredFromUnits, outerUnits: lens.outerUnits, nearSidePositionAngleDeg: lens.nearSidePositionAngleDeg, heightOfRadius: lens.heightOfRadius });
   // Where the light ends: the median brightness in rings of the disc plane, deprojected with the geometry just measured,
   // falls to the per-pixel noise. The taper starts there, and a grid that would cut light above the noise is refused.
   const cosI = Math.cos(geometry.inclinationDeg * Math.PI / 180), phi = geometry.positionAngleDeg * Math.PI / 180, ringWidth = 2 * step;
@@ -143,7 +111,9 @@ async function buildLens(recipe: CircumstellarRecipe, lens: CircumstellarLens, d
     const k = Math.floor(inPlane / ringWidth); (rings.get(k) ?? rings.set(k, []).get(k)!).push(v);
   }
   const radialProfile = [...rings].sort((p, q) => p[0] - q[0]).map(([k, values]) => { values.sort((p, q) => p - q); return { radiusUnits: (k + 0.5) * ringWidth, median: values[values.length >> 1]!, samples: values.length }; });
-  const lightEndsUnits = radialProfile.find(ring => ring.radiusUnits > geometry.semiMajorUnits && ring.median <= sky.noise)?.radiusUnits;
+  // A printed colorbar shows nothing below its minimum, so the light ends at whichever is higher: the noise or that black point.
+  const lightFloor = Math.max(sky.noise, lens.colorbar?.minimum ?? 0);
+  const lightEndsUnits = radialProfile.find(ring => ring.radiusUnits > geometry.semiMajorUnits && ring.median <= lightFloor)?.radiusUnits;
   if (lightEndsUnits === undefined || lightEndsUnits * 1.25 > halfUnits)
     throw new Error(`${lens.id}: the light reaches the noise at ${lightEndsUnits?.toFixed(0) ?? 'no radius inside the grid'}; the grid (${halfUnits} au) must reach 1.25 times that.`);
   const taperFromUnits = lightEndsUnits;
@@ -153,7 +123,7 @@ async function buildLens(recipe: CircumstellarRecipe, lens: CircumstellarLens, d
   const planeProfile = radialProfile.filter(ring => ring.radiusUnits >= innerMaskUnits).map(ring => ({ radiusUnits: ring.radiusUnits, value: Math.max(0, ring.median) }));
   const drawnModel = { ...fit.ring };
   const density = profileDiscDensity(drawnModel, planeProfile);
-  const profileScore = scoreEnvelope(sky, density, { innerMaskUnits, outerUnits: lens.outerUnits });
+  const profileScore = scoreEnvelope(sky, density, { innerMaskUnits: scoredFromUnits, outerUnits: lens.outerUnits });
   if (!(profileScore.residualRms < fit.ring.residualRms && profileScore.residualRms < fit.shell.residualRms && profileScore.residualRms < fit.constantDepthResidualRms))
     throw new Error(`${lens.id}: the measured-profile disc (${profileScore.residualRms.toExponential(3)}) does not beat the ring (${fit.ring.residualRms.toExponential(3)}), the shell (${fit.shell.residualRms.toExponential(3)}) and constant depth (${fit.constantDepthResidualRms.toExponential(3)}).`);
   // How much light each envelope would put on the cube's front and back faces: the share of every drawn column's depth
@@ -172,12 +142,15 @@ async function buildLens(recipe: CircumstellarRecipe, lens: CircumstellarLens, d
   const cubeFaceShare = { gaussianRing: faceShare(discDensity(fit.ring)), measuredProfileDisc: faceShare(density) };
   // Each channel goes through the stretch fitted to the publisher's panel; under the drawn inner edge is not data, and beyond
   // the light's end it tapers to the grid edge.
-  const display = stretchOf(lens.stretch.a, lens.stretch.top), shown = [0, 1, 2].map(() => new Float32Array(count).fill(NaN));
+  // A fitted stretch maps each channel alone; a printed colorbar maps the lens's one brightness to a colour.
+  const display = lens.stretch ? stretchOf(lens.stretch.a, lens.stretch.top) : undefined, colour = lens.colorbar ? colorbarOf(lens.colorbar) : undefined;
+  const shown = [0, 1, 2].map(() => new Float32Array(count).fill(NaN));
   for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
     const p = j * size + i, r = Math.hypot(-halfUnits + (i + 0.5) * step, -halfUnits + (j + 0.5) * step);
     if (r < innerMaskUnits || !read.channels.every(channel => Number.isFinite(channel[p]!))) continue;
     const taper = 1 - smoothstep(taperFromUnits, halfUnits, r);
-    for (let c = 0; c < 3; c++) shown[c]![p] = display(read.channels[c]![p]!) * taper;
+    const rgb = colour?.((read.channels[0]![p]! + read.channels[1]![p]! + read.channels[2]![p]!) / 3);
+    for (let c = 0; c < 3; c++) shown[c]![p] = (rgb ? rgb[c]! : display!(read.channels[c]![p]!)) * taper;
   }
   const channels = shown;
   const zs = Array.from({ length: size }, (_, k) => -halfUnits + (k + 0.5) * step);
@@ -204,6 +177,21 @@ async function buildLens(recipe: CircumstellarRecipe, lens: CircumstellarLens, d
   return { lens, bands, geometry, fit, profileScore, cubeFaceShare, innerMaskUnits, taperFromUnits, radialProfile, spread, ktx2, exposureGain, opacity, previewPng, differences };
 }
 
+/** How one lens was made, in words, for its provenance. */
+function modelText(b: Awaited<ReturnType<typeof buildLens>>, halfUnits: number, heightSpread: string): string {
+  const reading = b.lens.quantity === 'reflectance'
+    ? `Fitted ring, in the reflectance colour the publisher shows. Each of the ${b.bands.length} mosaics is read about the star through its own WCS onto a sky plane in astronomical units; the star's position is the observation's target position (TARG_RA, TARG_DEC). Each band's background, the median in the ${b.lens.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted, and the band is divided by the star's own flux in it (${b.lens.stellarFluxSource}), which leaves how the dust reflects starlight at that wavelength.`
+    : `${b.lens.geometry === 'published' ? 'Published' : 'Fitted'} ring, in the dust's own thermal emission. Each of the ${b.bands.length} images is ${b.lens.deposit ? `the authors' final reduced image (${b.lens.deposit.citation}; github.com/${b.lens.deposit.repository} at ${b.lens.deposit.commit}), star-subtracted and flux-calibrated by them,` : 'a MAST level-3 mosaic'} read about the star through its own WCS onto a sky plane in astronomical units; the star's position: ${b.lens.deposit?.starSource ?? 'the observation\'s target position (TARG_RA, TARG_DEC)'}. Each band's background, the median in the ${b.lens.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted; the brightness stays surface brightness in ${b.bands[0]!.sky.unit}.`;
+  const channels = `The channels average them: ${CHANNELS.map(channel => `${channel} ${b.lens.channels[channel].map(filterOf).join(' + ')}`).join(', ')}.`;
+  const ring = b.lens.geometry === 'published'
+    ? `The ring's geometry is adopted from ${b.lens.published.citation}, not measured here: semi-major axis ${b.lens.published.radiusUnits} au, inclination ${b.lens.published.inclinationDeg}°, line of nodes at position angle ${b.lens.published.positionAngleDeg}°, centre ${Math.hypot(...b.lens.published.centreOffsetEastNorthUnits!).toFixed(1)} au from the star (${b.lens.published.centreSource}).`
+    : `The ring is measured on the mean of the channels: its ridge, the radius of peak brightness in each azimuth under nine binnings, traces an ellipse of semi-major axis ${b.geometry.semiMajorUnits.toFixed(1)} au, axis ratio ${(b.geometry.semiMinorUnits / b.geometry.semiMajorUnits).toFixed(3)} (inclination ${b.geometry.inclinationDeg.toFixed(1)}°), line of nodes at position angle ${b.geometry.positionAngleDeg.toFixed(1)}°, centre ${Math.hypot(...b.geometry.centreUnits).toFixed(1)} au from the star; the single binnings scatter by ${b.geometry.binningSpread.semiMajorUnits.toFixed(1)} au, ${b.geometry.binningSpread.inclinationDeg.toFixed(1)}° and ${b.geometry.binningSpread.positionAngleDeg.toFixed(1)}°. This stands against ${b.lens.published.citation}'s ${b.lens.published.radiusUnits} au, ${b.lens.published.inclinationDeg}° and ${b.lens.published.positionAngleDeg}°.`;
+  // A reflectance lens keeps the wording its checked-in provenance was authored with, byte for byte.
+  if (b.lens.quantity === 'reflectance') return `Fitted ring, in the reflectance colour the publisher shows. Each of the ${b.bands.length} mosaics is read about the star through its own WCS onto a sky plane in astronomical units; the star's position is the observation's target position (TARG_RA, TARG_DEC). Each band's background, the median in the ${b.lens.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted, and the band is divided by the star's own flux in it (${b.lens.stellarFluxSource}), which leaves how the dust reflects starlight at that wavelength. The channels average them in pairs: ${CHANNELS.map(channel => `${channel} ${b.lens.channels[channel].map(filterOf).join(' + ')}`).join(', ')}. The ring is measured on the mean of the channels: its ridge, the radius of peak brightness in each azimuth under nine binnings, traces an ellipse of semi-major axis ${b.geometry.semiMajorUnits.toFixed(1)} au, axis ratio ${(b.geometry.semiMinorUnits / b.geometry.semiMajorUnits).toFixed(3)} (inclination ${b.geometry.inclinationDeg.toFixed(1)}°), line of nodes at position angle ${b.geometry.positionAngleDeg.toFixed(1)}°, centre ${Math.hypot(...b.geometry.centreUnits).toFixed(1)} au from the star; the single binnings scatter by ${b.geometry.binningSpread.semiMajorUnits.toFixed(1)} au, ${b.geometry.binningSpread.inclinationDeg.toFixed(1)}° and ${b.geometry.binningSpread.positionAngleDeg.toFixed(1)}°. This stands against ${b.lens.published.citation}'s ${b.lens.published.radiusUnits} au, ${b.lens.published.inclinationDeg}° and ${b.lens.published.positionAngleDeg}°. Depth is not the image pushed backwards: a disc of that geometry whose surface density follows the image's own deprojected radial profile, halo included, projects to the mean image with a residual of ${b.profileScore.residualRms.toExponential(2)} against a signal of ${b.fit.signalRms.toExponential(2)}, where a single gaussian ring of radial width ${b.fit.ring.gaussianWidthUnits.toFixed(1)} au leaves ${b.fit.ring.residualRms.toExponential(2)}, a spherical shell ${b.fit.shell.residualRms.toExponential(2)} and constant depth, what an extrusion assumes, ${b.fit.constantDepthResidualRms.toExponential(2)}. A narrow ring would also put the light of sight lines through the halo on the cube's faces, where its density along them peaks; the profile disc puts every column where it crosses the disc plane. The ring's vertical height is a stated ${b.lens.heightOfRadius} of its radius (the projection changes by ${heightSpread}% across the heights tried), and which side is nearer is a convention: ${b.lens.nearSideSource}. Each channel is shown as log(1 + a u) / log(1 + a) with u = reflectance / ${b.lens.stretch!.top} and a = ${b.lens.stretch!.a}; ${b.lens.stretch!.source}. Every channel shares one depth profile, so each column is spread along the ring and keeps its colour. The top of the stretch reaches an alpha of ${b.lens.topAlpha}, the renderer's convention for a volume; the median drawn line of sight reaches ${b.opacity.median.toFixed(2)}. The image is drawn from ${b.innerMaskUnits.toFixed(0)} au to the grid edge at ${halfUnits} au, tapering from ${b.taperFromUnits.toFixed(0)} au, where the mean reflectance in the disc plane falls to its per-pixel noise.`;
+  const unit = 'surface brightness';
+  return `${reading} ${channels} ${ring} Depth is not the image pushed backwards: a disc of that geometry whose surface density follows the image's own deprojected radial profile, halo included, projects to the mean image with a residual of ${b.profileScore.residualRms.toExponential(2)} against a signal of ${b.fit.signalRms.toExponential(2)}, where a single gaussian ring of radial width ${b.fit.ring.gaussianWidthUnits.toFixed(1)} au leaves ${b.fit.ring.residualRms.toExponential(2)}, a spherical shell ${b.fit.shell.residualRms.toExponential(2)} and constant depth, what an extrusion assumes, ${b.fit.constantDepthResidualRms.toExponential(2)}. The ring's vertical height is a stated ${b.lens.heightOfRadius} of its radius (the projection changes by ${heightSpread}% across the heights tried), and which side is nearer is a convention: ${b.lens.nearSideSource}. ${b.lens.colorbar ? `Brightness is shown through the publisher's own printed colour scale, logarithmic from ${b.lens.colorbar.minimum} to ${b.lens.colorbar.maximum} ${b.bands[0]!.sky.unit}: ${b.lens.colorbar.source}.` : `Each channel is shown as log(1 + a u) / log(1 + a) with u = ${unit} / ${b.lens.stretch!.top} and a = ${b.lens.stretch!.a}; ${b.lens.stretch!.source}.`} Every channel shares one depth profile, so each column keeps its colour. The top of the stretch reaches an alpha of ${b.lens.topAlpha}, the renderer's convention for a volume; the median drawn line of sight reaches ${b.opacity.median.toFixed(2)}. The image is drawn from ${b.innerMaskUnits.toFixed(0)} au to the grid edge at ${halfUnits} au, tapering from ${b.taperFromUnits.toFixed(0)} au, where the mean ${unit} in the disc plane falls to its per-pixel noise.`;
+}
+
 export async function author(id: string, options: { sources?: readonly string[] } = {}) {
   const repository = resolve(import.meta.dirname, '../../..'), packageBase = `src/objects/${id}/source`, root = resolve(repository, packageBase);
   const recipe = parseCircumstellarRecipe(JSON.parse(await readFile(resolve(root, 'circumstellar.json'), 'utf8')));
@@ -217,9 +205,9 @@ export async function author(id: string, options: { sources?: readonly string[] 
   const { size, halfUnits, slabs } = recipe.grid;
   const heightSpread = (b: typeof built[number]) => ((Math.max(...b.fit.heightResiduals.map(h => h.residualRms)) / Math.min(...b.fit.heightResiduals.map(h => h.residualRms)) - 1) * 100).toFixed(1);
   const measured = Object.fromEntries(built.map(b => [b.lens.id, {
-    bands: b.bands.map(band => ({ band: band.band, mosaic: band.entry.level3.name, sha256: band.mosaicSha256, observed: band.primary['DATE-OBS'], starRaDecDeg: [band.primary.TARG_RA, band.primary.TARG_DEC],
+    bands: b.bands.map(band => ({ band: band.band, mosaic: band.name, sha256: band.sha256, observed: band.observed, starRaDecDeg: band.starRaDecDeg,
       starPixel: band.sky.starPixel, mosaicArcsecPerPixel: band.sky.mosaicArcsecPerPixel, background: band.sky.background, noise: band.sky.noise, backgroundPixels: band.sky.backgroundPixels, unit: band.sky.unit })),
-    channels: b.lens.channels, stellarFluxJy: b.lens.stellarFluxJy, stellarFluxSource: b.lens.stellarFluxSource, stretch: b.lens.stretch,
+    ...(b.lens.quantity === 'reflectance' ? {} : { quantity: b.lens.quantity }), ...(b.lens.geometry === 'measured' ? {} : { geometrySource: b.lens.geometry }), channels: b.lens.channels, ...(b.lens.stellarFluxJy ? { stellarFluxJy: b.lens.stellarFluxJy, stellarFluxSource: b.lens.stellarFluxSource } : {}), stretch: b.lens.stretch,
     innerMaskUnits: b.innerMaskUnits, lightEndsUnits: b.taperFromUnits, radialProfile: b.radialProfile.filter(ring => ring.radiusUnits <= halfUnits), ridgeSamples: b.geometry.ridge.length, ringCentreUnits: b.geometry.centreUnits, semiMajorUnits: b.geometry.semiMajorUnits, semiMinorUnits: b.geometry.semiMinorUnits,
     inclinationDeg: b.geometry.inclinationDeg, positionAngleDeg: b.geometry.positionAngleDeg, ridgeResidualUnits: b.geometry.ridgeResidualUnits, binningSpread: b.geometry.binningSpread,
     published: b.lens.published, differences: b.differences,
@@ -229,15 +217,14 @@ export async function author(id: string, options: { sources?: readonly string[] 
     exposureGain: b.exposureGain, topAlpha: b.lens.topAlpha, faceOnOpacity: b.opacity, droppedShare: b.spread.droppedShare, filledVoxels: b.spread.filledVoxels,
   }]));
   const provenance = {
-    schema: 'cssearth-volume-provenance@1', title: `${recipe.name}: JWST coronagraph imaging given the depth of the fitted ring`, kind: 'observed-sky-image-on-fitted-envelope',
+    schema: 'cssearth-volume-provenance@1', title: built.every(b => b.lens.quantity === 'reflectance' && b.lens.geometry === 'measured') ? `${recipe.name}: JWST coronagraph imaging given the depth of the fitted ring` : `${recipe.name}: JWST imaging given the depth of the ${built.some(b => b.lens.geometry === 'published') ? 'published' : 'fitted'} ring`, kind: 'observed-sky-image-on-fitted-envelope',
     authors: [], organizations: ['NASA/ESA/CSA JWST; MAST (STScI)'],
     license: { spdx: recipe.license.spdx, dataLicenseDeclaration: recipe.license.url, note: recipe.license.note },
-    sources: built.flatMap(b => b.bands.map(band => ({ id: inputIdOf(b.lens, band.band), url: mastDownloadUrl(band.entry.level3.uri), landing: recipe.sourceUrl, sha256: band.mosaicSha256, bytes: band.entry.level3.bytes,
-      role: `MAST level-3 coronagraph mosaic ${band.entry.level3.name} (calwebb_coron3), the ${filterOf(band.band)} band of the ${b.lens.id} leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/${b.lens.program}.${band.band}.reproduction.json` }))),
+    sources: built.flatMap(b => b.bands.map(band => ({ id: inputIdOf(b.lens, band.band), url: band.url, landing: recipe.sourceUrl, sha256: band.sha256, bytes: band.bytes, role: band.role }))),
     paper: built.map(b => ({ lens: b.lens.id, citation: b.lens.published.citation, url: b.lens.published.url })),
     measured: { sceneOriginRaDecDeg: [raDeg, decDeg], distancePc, arcsecPerUnit: 1 / distancePc, grid: recipe.grid, lenses: measured },
-    models: Object.fromEntries(built.map(b => [b.lens.id, `Fitted ring, in the reflectance colour the publisher shows. Each of the ${b.bands.length} mosaics is read about the star through its own WCS onto a sky plane in astronomical units; the star's position is the observation's target position (TARG_RA, TARG_DEC). Each band's background, the median in the ${b.lens.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted, and the band is divided by the star's own flux in it (${b.lens.stellarFluxSource}), which leaves how the dust reflects starlight at that wavelength. The channels average them in pairs: ${CHANNELS.map(channel => `${channel} ${b.lens.channels[channel].map(filterOf).join(' + ')}`).join(', ')}. The ring is measured on the mean of the channels: its ridge, the radius of peak brightness in each azimuth under nine binnings, traces an ellipse of semi-major axis ${b.geometry.semiMajorUnits.toFixed(1)} au, axis ratio ${(b.geometry.semiMinorUnits / b.geometry.semiMajorUnits).toFixed(3)} (inclination ${b.geometry.inclinationDeg.toFixed(1)}°), line of nodes at position angle ${b.geometry.positionAngleDeg.toFixed(1)}°, centre ${Math.hypot(...b.geometry.centreUnits).toFixed(1)} au from the star; the single binnings scatter by ${b.geometry.binningSpread.semiMajorUnits.toFixed(1)} au, ${b.geometry.binningSpread.inclinationDeg.toFixed(1)}° and ${b.geometry.binningSpread.positionAngleDeg.toFixed(1)}°. This stands against ${b.lens.published.citation}'s ${b.lens.published.radiusUnits} au, ${b.lens.published.inclinationDeg}° and ${b.lens.published.positionAngleDeg}°. Depth is not the image pushed backwards: a disc of that geometry whose surface density follows the image's own deprojected radial profile, halo included, projects to the mean image with a residual of ${b.profileScore.residualRms.toExponential(2)} against a signal of ${b.fit.signalRms.toExponential(2)}, where a single gaussian ring of radial width ${b.fit.ring.gaussianWidthUnits.toFixed(1)} au leaves ${b.fit.ring.residualRms.toExponential(2)}, a spherical shell ${b.fit.shell.residualRms.toExponential(2)} and constant depth, what an extrusion assumes, ${b.fit.constantDepthResidualRms.toExponential(2)}. A narrow ring would also put the light of sight lines through the halo on the cube's faces, where its density along them peaks; the profile disc puts every column where it crosses the disc plane. The ring's vertical height is a stated ${b.lens.heightOfRadius} of its radius (the projection changes by ${heightSpread(b)}% across the heights tried), and which side is nearer is a convention: ${b.lens.nearSideSource}. Each channel is shown as log(1 + a u) / log(1 + a) with u = reflectance / ${b.lens.stretch.top} and a = ${b.lens.stretch.a}; ${b.lens.stretch.source}. Every channel shares one depth profile, so each column is spread along the ring and keeps its colour. The top of the stretch reaches an alpha of ${b.lens.topAlpha}, the renderer's convention for a volume; the median drawn line of sight reaches ${b.opacity.median.toFixed(2)}. The image is drawn from ${b.innerMaskUnits.toFixed(0)} au to the grid edge at ${halfUnits} au, tapering from ${b.taperFromUnits.toFixed(0)} au, where the mean reflectance in the disc plane falls to its per-pixel noise.`])),
-    limitations: [
+    models: Object.fromEntries(built.map(b => [b.lens.id, modelText(b, halfUnits, heightSpread(b))])),
+    limitations: built.every(b => b.lens.quantity === 'reflectance') ? [
       'One image, one epoch, one filter: no third axis was observed. The depth is the ring that best projects to the image, an inference from that projection, not a measurement.',
       'Which side of the inclined ring is nearer the observer is a stated convention; the image alone cannot tell.',
       'The ring’s vertical thickness is a stated convention; at this inclination the projection barely changes with it.',
@@ -246,6 +233,15 @@ export async function author(id: string, options: { sources?: readonly string[] 
       'The colours are the dust\u2019s reflectance across 1.8 to 4.4 micrometres, the publisher\u2019s recipe, mapped to blue, green and red by wavelength: infrared colours, not what an eye would see. The stretch was fitted to the publisher\u2019s panel, which prints no scale; this is MAST\u2019s pipeline product drawn on it.',
       'Opacity is the renderer\u2019s convention, not the dust\u2019s: brightness and blocking are one number in its emission model, and the real ring blocks a small fraction of a percent of what is behind it.',
       'Nothing finer than the mosaic\u2019s pixels or the grid\u2019s cells is in the drawn volume.',
+    ] : [
+      'Images at a few wavelengths, one epoch: no third axis was observed. The depth is the ring that best projects to the images, an inference from that projection, not a measurement.',
+      'Which side of the inclined ring is nearer the observer is a stated convention, taken from the literature and disputed there; thermal emission alone cannot tell.',
+      'The ring\u2019s vertical thickness is a stated convention; at this inclination the projection barely changes with it.',
+      'Brightness differences around the ring, from its eccentric orbit about the star and from real structure, are kept as the images show them; the ring model supplies only the depth.',
+      'Inside the drawn inner edge the star\u2019s residual light and the saturated or masked core are not data and are not drawn; the star is the host body\u2019s own sphere.',
+      'The colours are thermal-infrared brightness mapped to blue and red by wavelength, as the authors\u2019 own colour image does: not what an eye would see.',
+      'Opacity is the renderer\u2019s convention, not the dust\u2019s: brightness and blocking are one number in its emission model.',
+      'Nothing finer than the images\u2019 pixels or the grid\u2019s cells is in the drawn volume.',
     ],
   };
   const provenanceBytes = Buffer.from(JSON.stringify(provenance, null, 2) + '\n'), provenanceSha = sha256(provenanceBytes);
@@ -278,11 +274,17 @@ export async function author(id: string, options: { sources?: readonly string[] 
     recipes: deliveryGrids.map(grid => ({ id: grid.id, path: grid.recipe.path, sha256: grid.recipe.sha256, bytes: outputs.find(([name]) => `${packageBase}/${name}` === grid.recipe.path)![1].length })),
     sharedInputs: [], inputEvidence: [],
     lenses: built.map(b => ({ id: b.lens.id, label: b.lens.label, title: b.lens.title, description: b.lens.description, summary: b.lens.summary,
-      detail: `${String(b.bands[0]!.primary['DATE-OBS'])}, ${(b.bands[0]!.sky.mosaicArcsecPerPixel * 1000).toFixed(1)} mas pixels`,
+      detail: `${b.bands[0]!.observed}, ${(b.bands[0]!.sky.mosaicArcsecPerPixel * 1000).toFixed(1)} mas pixels`,
       facts: [
-        { id: 'instrument', label: 'Instrument', value: `JWST/NIRCam behind the ${JWST_BANDS[b.bands[0]!.band]!.coronagraph} coronagraph, ${String(b.bands[0]!.primary['DATE-OBS'])}: ${b.bands.map(band => filterOf(band.band)).join(', ')}` },
-        { id: 'colour', label: 'Colour', value: `Reflectance: each filter over the star's own flux, ${CHANNELS.map(channel => `${channel} ${b.lens.channels[channel].map(filterOf).join(' + ')}`).join(', ')}` },
-        { id: 'ring', label: 'Ring measured here', value: `${b.geometry.semiMajorUnits.toFixed(0)} au, tilted ${b.geometry.inclinationDeg.toFixed(0)}°, nodes at position angle ${b.geometry.positionAngleDeg.toFixed(0)}°; published ${b.lens.published.radiusUnits} au, ${b.lens.published.inclinationDeg}°, ${b.lens.published.positionAngleDeg}°` },
+        b.lens.quantity === 'reflectance'
+          ? { id: 'instrument', label: 'Instrument', value: `JWST/NIRCam behind the ${JWST_BANDS[b.bands[0]!.band]!.coronagraph} coronagraph, ${b.bands[0]!.observed}: ${b.bands.map(band => filterOf(band.band)).join(', ')}` }
+          : { id: 'instrument', label: 'Instrument', value: `JWST/${JWST_BANDS[b.bands[0]!.band]!.instrument}, ${b.bands[0]!.observed}: ${b.bands.map(band => filterOf(band.band)).join(', ')}${b.lens.deposit ? `, as reduced by ${b.lens.deposit.citation}` : ''}` },
+        b.lens.quantity === 'reflectance'
+          ? { id: 'colour', label: 'Colour', value: `Reflectance: each filter over the star's own flux, ${CHANNELS.map(channel => `${channel} ${b.lens.channels[channel].map(filterOf).join(' + ')}`).join(', ')}` }
+          : { id: 'colour', label: 'Colour', value: `Thermal emission, surface brightness: ${CHANNELS.map(channel => `${channel} ${b.lens.channels[channel].map(filterOf).join(' + ')}`).join(', ')}` },
+        b.lens.geometry === 'published'
+          ? { id: 'ring', label: 'Ring, as published', value: `${b.lens.published.radiusUnits} au, tilted ${b.lens.published.inclinationDeg}°, nodes at position angle ${b.lens.published.positionAngleDeg}° (${b.lens.published.citation})` }
+          : { id: 'ring', label: 'Ring measured here', value: `${b.geometry.semiMajorUnits.toFixed(0)} au, tilted ${b.geometry.inclinationDeg.toFixed(0)}°, nodes at position angle ${b.geometry.positionAngleDeg.toFixed(0)}°; published ${b.lens.published.radiusUnits} au, ${b.lens.published.inclinationDeg}°, ${b.lens.published.positionAngleDeg}°` },
         { id: 'extent', label: 'Drawn extent', value: `${b.innerMaskUnits.toFixed(0)} to ${halfUnits} au; the light reaches the noise at ${b.taperFromUnits.toFixed(0)} au` },
         { id: 'depth', label: 'Depth', value: `Not measured; the inclined ring that best projects to the images, with its ${compass(b.lens.nearSidePositionAngleDeg)} side nearer by convention` },
       ],
@@ -301,10 +303,10 @@ export async function author(id: string, options: { sources?: readonly string[] 
     const inputId = inputIdOf(lens, band.band), catalogueId = `source-${id}-${inputId}`;
     const evidence = pinnedEvidence.get(`${inputId}/${catalogueId}`) ?? `${packageBase}/manifest.json@${'0'.repeat(40)}#/inputs/${index}`;
     return { id: inputId, dependencies: [], sourceBinding: { kind: 'catalogued', references: [{ catalogueId, role: 'material', evidence }] },
-      path: `${downloadsBase}/observations/${band.entry.level3.name}`, origin: mastDownloadUrl(band.entry.level3.uri), sourceUrl: recipe.sourceUrl,
-      title: `MAST JWST programme ${band.program.programme} · ${band.entry.observation} level-3 coronagraph mosaic`, credit: recipe.credit, displayCredit: 'NASA/ESA/CSA JWST, MAST',
-      acquisition: `Downloaded unchanged from MAST by its URI ${band.entry.level3.uri} (tools/objects/astronomy-packages/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/${lens.program}.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).`,
-      license: recipe.license.note, lensId: lens.id, expectedSha256: band.mosaicSha256, expectedBytes: band.entry.level3.bytes };
+      path: `${downloadsBase}/${band.path}`, origin: band.url, sourceUrl: recipe.sourceUrl,
+      title: band.title, credit: recipe.credit, displayCredit: band.displayCredit,
+      acquisition: band.acquisition,
+      license: recipe.license.note, lensId: lens.id, expectedSha256: band.sha256, expectedBytes: band.bytes };
   });
   const produced = new Map(outputs.map(([name, bytes]) => [name, bytes]));
   const local = (path: string, reason: string) => ({ id: path.replace(/[^a-z0-9-]+/gu, '-').toLowerCase(), path: `${packageBase}/${path}`, expectedSha256: sha256(produced.get(path) ?? recipeBytes), expectedBytes: (produced.get(path) ?? recipeBytes).length, sourceBinding: { kind: 'local', reason } });

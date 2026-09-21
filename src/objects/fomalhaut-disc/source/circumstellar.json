@@ -1,0 +1,413 @@
+{
+ "schema": "cssearth-circumstellar-volume@1",
+ "id": "fomalhaut-disc",
+ "host": "fomalhaut",
+ "name": "Fomalhaut debris disc",
+ "description": "The debris disc around Fomalhaut as JWST/MIRI imaged it at 25.5 micrometres in October 2022 (programme 1193), in the authors’ own reduction and colour scale: the outer belt 134 au out, an intermediate belt and a warm inner disc, all dust glowing with its own heat. One unit is one astronomical unit; the depth is the tilted ring the paper fits, not a measurement.",
+ "sourceUrl": "https://github.com/merope82/Fomalhaut",
+ "credit": "NASA/ESA/CSA JWST, MIRI GTO programme 1193 (PI G. Rieke); Gáspár et al. 2023, Nature Astronomy 7, 790 (arXiv:2305.03789), reduced images from github.com/merope82/Fomalhaut",
+ "license": {
+  "spdx": "LicenseRef-author-deposit",
+  "url": "https://github.com/merope82/Fomalhaut",
+  "note": "The authors publish their reduced images for download with the paper (its Data Availability statement) and state no licence; they derive from JWST data that carry no copyright. The files are fetched at preparation time, pinned by sha256, and not redistributed; the rendered volume credits the authors and the mission."
+ },
+ "grid": {
+  "size": 252,
+  "halfUnits": 420,
+  "slabs": 126
+ },
+ "defaultLens": "f2550w",
+ "lenses": [
+  {
+   "id": "f2550w",
+   "label": "JWST/MIRI · debris disc at 25.5 µm",
+   "title": "The Fomalhaut debris disc in its own warmth at 25.5 micrometres",
+   "summary": "Fomalhaut’s dust belts glowing at 25.5 micrometres, in the authors’ own reduction and colour scale.",
+   "description": "JWST/MIRI imaged Fomalhaut at 25.5 micrometres on 22 October 2022. At this wavelength the dust glows with its own heat rather than reflecting starlight. This is the authors’ own final image, with the star subtracted and the brightness calibrated as their paper describes, shown in the colour scale their figure prints, logarithmic from 1 to 1000 MJy per steradian. The wide outer belt 134 au out, the intermediate belt and the warm inner disc all show. The image has no third axis, so the depth is inferred: the tilted, off-centre outer ring the paper fits projects to it better than a spherical shell or a constant depth, and each line of sight is placed on that plane. Which side is nearer to us is taken from the literature, where it is disputed. Nothing is drawn within 2.4 arcseconds of the star, where the image is saturated; the star itself is the sphere at the centre.",
+   "deposit": {
+    "repository": "merope82/Fomalhaut",
+    "commit": "3566f5976f8a029703b05550004c347d58aa0a85",
+    "citation": "Gáspár et al. (2023), Nature Astronomy 7, 790",
+    "files": {
+     "MIRI-F2550W": {
+      "path": "F2550W_finalsc_DC.fits",
+      "bytes": 4204800,
+      "sha256": "32af92fb9a51e14a35778d1d783b621b7e3e209a96d7b88d95d7681f34ab30df",
+      "blankValue": 0
+     }
+    },
+    "starRaDeg": 344.41509022372077,
+    "starDecDeg": -29.62327933979751,
+    "starSource": "TARG_RA and TARG_DEC of MAST’s level-3 product of the same F2550W visit, jw01193-o013_t015_miri_f2550w-brightsky_i2d.fits (2022-10-22), the target position with its proper motion to that date",
+    "backgroundSubtracted": true
+   },
+   "quantity": "surface-brightness",
+   "geometry": "published",
+   "innerMaskArcsec": 2.4,
+   "innerMaskSource": "Gáspár et al. (2023) saturate the 25.5 micrometre core within about 1.2 arcsec and lose the Lyot coronagraph’s field inside its 2.4 arcsec inner working angle at 23 micrometres (Supplementary Information 1.2, citing Boccaletti et al. 2015); the larger is kept so both lenses share one inner edge.",
+   "outerUnits": 200,
+   "backgroundAnnulusArcsec": [
+    26,
+    34
+   ],
+   "nearSidePositionAngleDeg": 66.28,
+   "nearSideSource": "the east end of the minor axis (position angle 66.28°) is drawn nearer: Kalas et al. (2013, arXiv:1305.2222) find the eastern half of the main belt brighter in scattered light because it lies out of the sky plane in the forward-scattering direction. Le Bouquin et al. (2009) suggested the opposite from the star’s spin axis, a sign their own data could not secure; the question is disputed",
+   "heightOfRadius": 0.05,
+   "topAlpha": 0.5,
+   "published": {
+    "citation": "Gáspár et al. (2023), Nature Astronomy 7, 790; arXiv:2305.03789, Supplementary Table 3 (KBA inner gap)",
+    "url": "https://arxiv.org/abs/2305.03789",
+    "radiusUnits": 133.79,
+    "inclinationDeg": 67.52,
+    "positionAngleDeg": 156.28,
+    "toleranceDeg": 0,
+    "radiusTolerance": 0,
+    "centreOffsetEastNorthUnits": [
+     0,
+     0
+    ],
+    "centreSource": "centred on the star, as Gáspár et al. (2023) de-project their images with this position angle and inclination (Figure 2, bottom row). The belt’s own centre lies about 15 au from the star (Kalas et al. 2005, 2013; the paper’s eccentricity 0.132), but which way is not read off the paper’s orbit elements without a sign convention it does not state, and on this image the north-west reading, the one Kalas’s description favours, projects worse than a centred ring (residual 3.54 against 3.46 for the gaussian ring); so no offset is modelled, a shift of at most 2 arcsec"
+   },
+   "channels": {
+    "red": [
+     "MIRI-F2550W"
+    ],
+    "green": [
+     "MIRI-F2550W"
+    ],
+    "blue": [
+     "MIRI-F2550W"
+    ]
+   },
+   "colorbar": {
+    "minimum": 1,
+    "maximum": 1000,
+    "colours": [
+     [
+      2,
+      1,
+      0
+     ],
+     [
+      3,
+      2,
+      1
+     ],
+     [
+      4,
+      2,
+      1
+     ],
+     [
+      5,
+      2,
+      1
+     ],
+     [
+      6,
+      4,
+      1
+     ],
+     [
+      7,
+      4,
+      2
+     ],
+     [
+      9,
+      5,
+      2
+     ],
+     [
+      11,
+      5,
+      2
+     ],
+     [
+      14,
+      5,
+      2
+     ],
+     [
+      17,
+      7,
+      3
+     ],
+     [
+      20,
+      8,
+      3
+     ],
+     [
+      26,
+      9,
+      3
+     ],
+     [
+      34,
+      10,
+      4
+     ],
+     [
+      44,
+      11,
+      4
+     ],
+     [
+      57,
+      13,
+      4
+     ],
+     [
+      66,
+      15,
+      4
+     ],
+     [
+      77,
+      17,
+      5
+     ],
+     [
+      90,
+      20,
+      5
+     ],
+     [
+      99,
+      21,
+      5
+     ],
+     [
+      107,
+      26,
+      6
+     ],
+     [
+      117,
+      29,
+      7
+     ],
+     [
+      127,
+      36,
+      7
+     ],
+     [
+      140,
+      41,
+      8
+     ],
+     [
+      147,
+      50,
+      9
+     ],
+     [
+      156,
+      56,
+      9
+     ],
+     [
+      166,
+      65,
+      9
+     ],
+     [
+      172,
+      71,
+      10
+     ],
+     [
+      178,
+      76,
+      11
+     ],
+     [
+      185,
+      84,
+      12
+     ],
+     [
+      191,
+      93,
+      14
+     ],
+     [
+      196,
+      96,
+      15
+     ],
+     [
+      204,
+      105,
+      16
+     ],
+     [
+      207,
+      107,
+      18
+     ],
+     [
+      213,
+      117,
+      21
+     ],
+     [
+      219,
+      120,
+      22
+     ],
+     [
+      221,
+      127,
+      25
+     ],
+     [
+      225,
+      136,
+      29
+     ],
+     [
+      229,
+      144,
+      32
+     ],
+     [
+      232,
+      147,
+      35
+     ],
+     [
+      234,
+      153,
+      42
+     ],
+     [
+      238,
+      158,
+      45
+     ],
+     [
+      240,
+      161,
+      50
+     ],
+     [
+      243,
+      168,
+      54
+     ],
+     [
+      246,
+      176,
+      59
+     ],
+     [
+      249,
+      179,
+      63
+     ],
+     [
+      251,
+      182,
+      67
+     ],
+     [
+      253,
+      185,
+      72
+     ],
+     [
+      255,
+      190,
+      77
+     ],
+     [
+      255,
+      194,
+      84
+     ],
+     [
+      255,
+      196,
+      89
+     ],
+     [
+      255,
+      198,
+      95
+     ],
+     [
+      255,
+      202,
+      98
+     ],
+     [
+      255,
+      205,
+      101
+     ],
+     [
+      255,
+      208,
+      105
+     ],
+     [
+      255,
+      210,
+      109
+     ],
+     [
+      255,
+      214,
+      111
+     ],
+     [
+      255,
+      218,
+      115
+     ],
+     [
+      255,
+      219,
+      119
+     ],
+     [
+      255,
+      221,
+      123
+     ],
+     [
+      255,
+      223,
+      127
+     ],
+     [
+      255,
+      224,
+      132
+     ],
+     [
+      255,
+      228,
+      136
+     ],
+     [
+      255,
+      229,
+      138
+     ],
+     [
+      255,
+      229,
+      138
+     ]
+    ],
+    "source": "the colorbar printed on the authors’ F2550W figure (github.com/merope82/Fomalhaut 08_F2550W.png at commit 3566f59), sampled in 64 steps evenly in log brightness between its 1 and 1000 MJy sr⁻¹ ends (image rows 374 and 37; its printed 10 and 100 fall at rows 262 and 150, where a log scale puts them)"
+   },
+   "ringScoredFromUnits": 96,
+   "ringScoredFromSource": "Gáspár et al. (2023) find the inner disc extending outward to 10 to 12.5 arcsec (77 au to 96 au, periapsis and apoapsis), inside the outer belt; the ring is scored beyond it, and the inner disc is drawn in the same plane from the image’s own radial profile"
+  }
+ ]
+}

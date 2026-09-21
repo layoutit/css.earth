@@ -32,6 +32,10 @@ export interface SkyPlaneRequest {
   readonly halfUnits: number; readonly size: number;
   /** Where the sky is empty: the annulus about the star, in arcseconds, whose median is the background and whose scatter is the noise. */
   readonly backgroundAnnulusArcsec: readonly [number, number];
+  /** A value the image uses for "no data" (an author's deposit may pad with exact zeros), read as missing. */
+  readonly blankValue?: number;
+  /** False when the image is already background-subtracted: the annulus then only measures the noise. */
+  readonly subtractBackground?: boolean;
 }
 export interface SkyPlane {
   readonly size: number; readonly halfUnits: number; readonly step: number;
@@ -48,10 +52,12 @@ const quantile = (sorted: ArrayLike<number>, q: number) => sorted[Math.min(sorte
 export async function readSkyPlane(mosaic: string, request: SkyPlaneRequest): Promise<SkyPlane> {
   const { size, halfUnits, arcsecPerUnit } = request;
   if (!(size >= 16 && Number.isInteger(size)) || !(halfUnits > 0) || !(arcsecPerUnit > 0)) throw new RangeError('Invalid sky plane request.');
-  const hdus = await readFitsFileHdus(mosaic), sci = hdus.find(hdu => hdu.header.EXTNAME === 'SCI');
-  if (!sci) throw new Error(`${mosaic} has no SCI extension.`);
+  // A pipeline product keeps its image in the SCI extension; an author's single-image deposit, in the primary HDU.
+  const hdus = await readFitsFileHdus(mosaic), sci = hdus.find(hdu => hdu.header.EXTNAME === 'SCI') ?? (hdus.length === 1 && hdus[0]!.dimensions.length === 2 ? hdus[0] : undefined);
+  if (!sci) throw new Error(`${mosaic} has no SCI extension and is not a single image.`);
   const [width, height] = sci.dimensions as [number, number];
   const { values } = await readFitsFileRegion(mosaic, sci, { x0: 0, y0: 0, width, height }, 1024 ** 3);
+  if (request.blankValue !== undefined) for (let p = 0; p < values.length; p++) if (values[p] === request.blankValue) values[p] = NaN;
   const projection = skyProjection(sci.header), star = projection.pixelOf(request.starRaDeg, request.starDecDeg);
   if (!star) throw new Error('The star is on the far side of the tangent plane.');
   const arcsecPerPixel = projection.scaleArcsec;
@@ -63,7 +69,7 @@ export async function readSkyPlane(mosaic: string, request: SkyPlaneRequest): Pr
   }
   if (samples.length < 100) throw new Error(`Only ${samples.length} mosaic pixels lie in the background annulus.`);
   samples.sort((a, b) => a - b);
-  const background = quantile(samples, 0.5);
+  const background = request.subtractBackground === false ? 0 : quantile(samples, 0.5);
   const deviations = samples.map(v => Math.abs(v - background)).sort((a, b) => a - b), noise = 1.4826 * quantile(deviations, 0.5);
   const bilinear = (x: number, y: number) => {
     const ix = Math.floor(x), iy = Math.floor(y);
@@ -97,6 +103,15 @@ export interface RingGeometry {
   readonly ridgeResidualUnits: number;
   /** Root-mean-square departure of the single-binning fits from this one: what the choice of bins moves. */
   readonly binningSpread: { readonly semiMajorUnits: number; readonly inclinationDeg: number; readonly positionAngleDeg: number };
+}
+
+/** A ring geometry adopted from a publication instead of measured on the image: the published semi-major axis, inclination and
+ * position angle of the line of nodes, and the ring centre's projected offset from the star (east, north), with no ridge. */
+export function publishedRingGeometry(published: { semiMajorUnits: number; inclinationDeg: number; positionAngleDeg: number; centreOffsetEastNorthUnits: readonly [number, number] }): RingGeometry {
+  const { semiMajorUnits, inclinationDeg, positionAngleDeg, centreOffsetEastNorthUnits: [east, north] } = published;
+  if (!(semiMajorUnits > 0 && inclinationDeg >= 0 && inclinationDeg < 90 && Number.isFinite(positionAngleDeg) && Number.isFinite(east) && Number.isFinite(north))) throw new RangeError('Invalid published ring geometry.');
+  return { ridge: [], centreUnits: [-east, north], semiMajorUnits, semiMinorUnits: semiMajorUnits * Math.cos(inclinationDeg * DEG), positionAngleDeg: ((positionAngleDeg % 180) + 180) % 180,
+    inclinationDeg, ridgeResidualUnits: NaN, binningSpread: { semiMajorUnits: 0, inclinationDeg: 0, positionAngleDeg: 0 } };
 }
 
 /** Position angle east of north of a sky-plane vector (x west, y north). */
@@ -327,7 +342,7 @@ export function fitDiscEnvelope(sky: SkyPlane, geometry: RingGeometry, options: 
     heightResiduals.push({ heightOfRadius, residualRms: bestForHeight!.residualRms });
     if (heightOfRadius === options.heightOfRadius) ring = bestForHeight;
   }
-  const ridgeMean = geometry.ridge.reduce((total, point) => total + point.radiusUnits, 0) / geometry.ridge.length;
+  const ridgeMean = geometry.ridge.length ? geometry.ridge.reduce((total, point) => total + point.radiusUnits, 0) / geometry.ridge.length : geometry.semiMajorUnits;
   let shell = { radiusUnits: 0, gaussianWidthUnits: 0, residualRms: Infinity };
   for (const radiusOfRidge of range(search.shellRadiusOfRidge)) for (const widthOfRadius of range(search.shellWidthOfRadius)) {
     const radius = radiusOfRidge * ridgeMean, width = widthOfRadius * radius;

@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "fomalhaut-disc",
+  "type": "volume-lens-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        199045626482598600,
+        -55516511646735820,
+        -117501372727668160
+      ],
+      "localToReferenceXyzw": [
+        0.6884320627488635,
+        0.5226951248630944,
+        0.304072604537562,
+        0.40048839258265956
+      ],
+      "metersPerUnit": 149597870700,
+      "boundsUnits": {
+        "min": [
+          -420,
+          -420,
+          -420
+        ],
+        "max": [
+          420,
+          420,
+          420
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json",
+      "sha256": "208359b2f215babdf388916c55eead15f067c1f3437e63f6c4a79a3414148750"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-volume-lenses@1",
+    "url": "prepared/lenses.json",
+    "sha256": "7b700ea417de978f6af23094d4d03cbb1319a7c8974aad0f62cc23b44c55d7e0"
+  }
+}
