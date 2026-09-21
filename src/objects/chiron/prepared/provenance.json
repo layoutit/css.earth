@@ -1,0 +1,437 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "chiron",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "98f414d869c07255ea99977ef49c18f7fa31b5015cbec94cb0b764f9f63b589b"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "b6e261961cdf0674845d2ff57d6b6a43c12235be24f566619f99d5af4c51479c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "a6a1c09cf9c2991748b5613310e9d447ed84aaea9c244d361b1626874922ae31",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "chiron",
+        "displayName": "Chiron",
+        "publicBase": "/scenes/chiron/",
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "model",
+              "consumer": "model-surface",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": 160,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "Shape model",
+                "modeled": true,
+                "coverage": "Published triaxial figure from the 2019 September 8 multi-chord stellar occultation: semiaxes 126 ± 22, 109 ± 19 and 68 ± 13 km, volume-equivalent radius 98 ± 17 km (Braga-Ribas et al. 2023, A&A 676, A72). Only the apparent limb ellipse is fitted from the chords. The third axis follows from three stated assumptions: a Jacobi fluid-equilibrium figure at the 5.917813 h rotation period, the true light-curve amplitude 0.16 ± 0.03 mag of Groussin et al. 2004, and a body pole assumed equal to the Ortiz et al. 2015 ring pole. The area-equivalent radius was held fixed at 105 (+6/-7) km, the radiometric value of Lellouch et al. 2017, so the scale is radiometric, not occultation-measured. This is a model figure, not resolved terrain. Illustrative ICRF north pole (right ascension 0 degrees, declination +90 degrees), arbitrary prime meridian and phase. Chiron has no measured spin pole. The published ring or disk pole near ecliptic longitude 151 degrees, latitude +20 degrees is a pole of the surrounding material; the shape paper assumes the body shares it, and this display does not adopt that assumption as an orientation. The grid marks unmapped terrain."
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 97.74667322530202,
+          "camera": {
+            "framingScale": 0.7757672478198573
+          },
+          "mapUrl": "/scenes/chiron/chiron-model-surface@2x.webp",
+          "polesUrl": "/scenes/chiron/chiron-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/ellipsoid.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 2000,
+            "texelsPerFace": 4096,
+            "simplification": {
+              "targetFaces": 480,
+              "maximumErrorMeters": 2443.6668306325505,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Illustrative ICRF north pole (right ascension 0 degrees, declination +90 degrees), arbitrary prime meridian and phase. Chiron has no measured spin pole. The published ring or disk pole near ecliptic longitude 151 degrees, latitude +20 degrees is a pole of the surrounding material; the shape paper assumes the body shares it, and this display does not adopt that assumption as an orientation."
+        },
+        "presentation": {
+          "defaultLens": "model"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "6d57dda14c6a7201935cb7c8dd7df0861e9db755a3c9b2ed1671065e96fd6780",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "chiron",
+        "displayName": "Chiron",
+        "panel": {
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Display model extents",
+              "value": "252 × 218 × 136 km",
+              "source": {
+                "url": "https://doi.org/10.1051/0004-6361/202346749",
+                "label": "Research publication · DOI 10.1051/0004-6361/202346749",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1051-0004-6361-202346749",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation",
+              "value": "5.917813 ± 0.000007 h",
+              "source": {
+                "url": "https://doi.org/10.1051/0004-6361/202346749",
+                "label": "Research publication · DOI 10.1051/0004-6361/202346749",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1051-0004-6361-202346749",
+                "locator": "/periodText"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape model"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape model",
+              "thumbnail": "/scenes/chiron/chiron-model-thumbnail.webp",
+              "surface": "chiron-model-surface@2x.webp",
+              "poles": "chiron-model-poles@2x.webp",
+              "source": {
+                "id": "published-shape",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.1051/0004-6361/202346749"
+              },
+              "notes": "Published Jacobi-ellipsoid interpretation, with semiaxes 470 ±20, 383 ±10 and 245 ±8 km. It assumes hydrostatic equilibrium and a 6.75-hour rotation; the smooth shape is inferred from occultations, not imaged terrain. Illustrative pole RA 0°, declination 90° and arbitrary meridian. The paper’s local projected-limb and opening angles do not provide a unique absolute surface attitude for this display. The grid marks unmapped terrain.",
+              "noData": true
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Shape source",
+            "role": "surface",
+            "description": "Braga-Ribas et al. (2023), Astronomy & Astrophysics 676, A72; 2019 September 8 multi-chord stellar occultation",
+            "href": "https://doi.org/10.1051/0004-6361/202346749"
+          },
+          {
+            "label": "Scientific source",
+            "role": "facts",
+            "description": "Published observations and interpretation",
+            "href": "https://arxiv.org/abs/2308.10042"
+          },
+          {
+            "label": "Scientific source",
+            "role": "facts",
+            "description": "Published observations and interpretation",
+            "href": "https://doi.org/10.1051/0004-6361/201731676"
+          },
+          {
+            "label": "Scientific source",
+            "role": "facts",
+            "description": "Published observations and interpretation",
+            "href": "https://doi.org/10.1006/icar.1993.1098"
+          },
+          {
+            "label": "Scientific source",
+            "role": "facts",
+            "description": "Published observations and interpretation",
+            "href": "https://doi.org/10.1051/0004-6361/201219566"
+          },
+          {
+            "label": "Scientific source",
+            "role": "facts",
+            "description": "Published observations and interpretation",
+            "href": "https://doi.org/10.1051/0004-6361/202346998"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://doi.org/10.1051/0004-6361/202346749",
+            "credit": "Braga-Ribas et al. (2023), Astronomy & Astrophysics 676, A72; 2019 September 8 multi-chord stellar occultation"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Braga-Ribas et al. (2023), Astronomy & Astrophysics 676, A72; 2019 September 8 multi-chord stellar occultation"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored grid marking unavailable surface imagery."
+      },
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 97746.67322530202
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/centaurs/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1051-0004-6361-202346749",
+            "role": "material",
+            "evidence": "src/objects/chiron/source/manifest.json@4525c1bbaeef3c27692602376c546ce7770e7f3b#/inputs/1"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1051/0004-6361/202346749",
+      "credit": "Braga-Ribas et al. (2023), Astronomy & Astrophysics 676, A72; 2019 September 8 multi-chord stellar occultation",
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://doi.org/10.1051/0004-6361/202346749"
+      ],
+      "coverage": "Published triaxial figure from the 2019 September 8 multi-chord stellar occultation: semiaxes 126 ± 22, 109 ± 19 and 68 ± 13 km, volume-equivalent radius 98 ± 17 km (Braga-Ribas et al. 2023, A&A 676, A72). Only the apparent limb ellipse is fitted from the chords. The third axis follows from three stated assumptions: a Jacobi fluid-equilibrium figure at the 5.917813 h rotation period, the true light-curve amplitude 0.16 ± 0.03 mag of Groussin et al. 2004, and a body pole assumed equal to the Ortiz et al. 2015 ring pole. The area-equivalent radius was held fixed at 105 (+6/-7) km, the radiometric value of Lellouch et al. 2017, so the scale is radiometric, not occultation-measured. This is a model figure, not resolved terrain. Illustrative ICRF north pole (right ascension 0 degrees, declination +90 degrees), arbitrary prime meridian and phase. Chiron has no measured spin pole. The published ring or disk pole near ecliptic longitude 151 degrees, latitude +20 degrees is a pole of the surrounding material; the shape paper assumes the body shares it, and this display does not adopt that assumption as an orientation. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 97746.67322530202
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/centaurs/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sha256": "8eff35068959c66f31d5bf148a9274e1d6a5ab946fad2626307773eaf981c884",
+      "bytes": 63139,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "6d57dda14c6a7201935cb7c8dd7df0861e9db755a3c9b2ed1671065e96fd6780",
+      "bytes": 4142,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape model",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "model-surface",
+        "published-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/chiron/chiron-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/chiron/chiron-model-surface@2x.webp",
+          "bytes": 49684,
+          "sha256": "0c867705a78f4c70869e7427d5ee94f0deb9382b27a441736e77dd63a4b43745",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "published-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5281,
+          "sha256": "9a4f6e9f5a32dedc40ade600a4ecbcb3667308a4523b996eb734c4099e46488d",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:model",
+      "label": "Shape model preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "model"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/model.webp",
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "chiron",
+    "materialSha256": "9b71bb9cff1d066d9380c2427302acc668b8b36de511ede437360c0d1e3585d0",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "b6e261961cdf0674845d2ff57d6b6a43c12235be24f566619f99d5af4c51479c"
+    }
+  }
+}

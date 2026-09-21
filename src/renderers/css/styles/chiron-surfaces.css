@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.example-stage:where([data-object-id="chiron"]) > :is(.chiron-sun-camera, .chiron-camera, .chiron-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="chiron"]) .chiron-sun-camera, :where(.planet-stage[data-object-id="chiron"]) .chiron-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="chiron"]) .chiron-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="chiron"]) .chiron-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.planet-stage[data-object-id="chiron"]) .chiron-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--chiron-surface-image); background-repeat: no-repeat;
+}
+:where(.planet-stage[data-object-id="chiron"]) .chiron-body > .chiron-polar { background-image: var(--chiron-poles-image); }
+:where(.planet-stage[data-object-id="chiron"]) .chiron-material-root { z-index: 3; --chiron-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="chiron"]) .chiron-material, :where(.planet-stage[data-object-id="chiron"]) .chiron-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="chiron"]) .chiron-material { background-repeat: no-repeat; transform: rotate(var(--chiron-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="chiron"]) .chiron-billboard { border-radius: 50%; background-color: var(--chiron-billboard-color); opacity: var(--chiron-billboard-opacity); }
+.planet-stage:where([data-object-id="chiron"])[data-lod="billboard"] .chiron-scene, .planet-stage:where([data-object-id="chiron"])[data-lod="marker"] .chiron-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="chiron"])[data-lod="marker"] .chiron-billboard { opacity: 0; }
+

@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "dysnomia",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Dysnomia",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 307.5
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        12730269580645.398,
+        6472981018301.679,
+        -9555323911.194057
+      ],
+      "presentationToReference": [
+        0.9063399382585743,
+        2.4356826039297786e-17,
+        0.42254930637434895,
+        0.38768140893824016,
+        0.3977771559319137,
+        -0.8315506354891317,
+        0.16808046133059137,
+        -0.9174820620691818,
+        -0.36052132294800193
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1336.9565217391305,
+      "bodyRadiusM": 307500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/dysnomia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2240891d1d2612eb2327112518726dd0b04b56183ea41b529185cd287d90af8f"
+      }
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "Dysnomia",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 95.46542935905964,
+      "description": "Eris's only known moon.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "150b58dc4f5e658e40d1860d965e90c324fef70ccfcb93b804f27a1c1ee06704"
+  }
+}

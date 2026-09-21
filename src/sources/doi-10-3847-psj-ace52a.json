@@ -1,0 +1,42 @@
+{
+  "id": "doi-10-3847-psj-ace52a",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · DOI 10.3847/PSJ/ace52a",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/PSJ/ace52a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/PSJ/ace52a",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/dysnomia/source/manifest.json",
+      "revision": "b0539bf1a0cd83049528c0330af05d52e4541f8d",
+      "sha256": "18ef3d5ab8e6bc1eaa080a3398a22ef69e9f5430ce492a55a18c4df507f578d0",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Brown and Butler (2023), The Planetary Science Journal 4, 193; ALMA Band 6 and Band 7 thermal detection of Dysnomia",
+      "scope": "The published shape input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "MIT numeric extraction of published scientific facts",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
