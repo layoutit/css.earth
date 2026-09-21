@@ -148,6 +148,10 @@ jobs:
     # commit and still turns this job red. What moved here asserts repository *completeness* (a package file that
     # has not been written yet, a source input that cannot be re-downloaded, a stale link, a misplaced file);
     # none of it can make the deployed site broken, wrong or unverifiable. See docs/ci-cd.md, "Gate on what ships".
+    # Not on pull requests. Nothing here can block a merge, so running it per pull request spends CI
+    # minutes on a report nobody can act on in that context. It runs on every push to main, where the
+    # backlog it tracks is actually reconciled, and in the nightly sweep.
+    if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
     # Also covers the two relocated bookkeeping lanes, which run here in series where the gate ran them in
     # parallel. This job reports, so its latency sits outside the required-path budget in docs/ci-cd.md.
