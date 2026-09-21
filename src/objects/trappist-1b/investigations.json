@@ -20,12 +20,17 @@
       "finding": "The lens. Ten MIRI/F1500W visits (program 3077's phase curve, 1177 observations 7-11, 2304 observations 1-4) reduced from raw on Bell's settings with a fractional-pixel aperture, fitted jointly with his model; the joint fit gives a dayside of 859 ppm against Bell's 797 +/- 77. On b's emission, a bare rock (T cos(z)^(1/4), nothing at night; Cowan & Agol 2011, eq. 3) fits better than the free smooth map this lens used to be: chi-squared 7002.2 against 7016.0 over 6737 samples with one parameter fewer, BIC 7099 against 7122. 497 K under the star, 485 to 510 K at one standard deviation. The smooth map spread heat onto the night side and poles, which the data do not measure. The hot-spot offset is not measured (free, 28 deg west, but only 1 in log-likelihood better than centred), so the rock is centred; north-south structure is the model's.",
       "evidence": [
         "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077",
-        "https://zenodo.org/records/17710453"
+        "https://zenodo.org/records/17710453",
+        "https://github.com/layoutit/css.earth/blob/e311ca95a4584ebdda7dea4df9c5cbb266b21920/tests/objects/unit/trappist-1b/lens-fits.test.mts"
       ],
       "checked": [
         {
           "date": "2026-09-18",
           "commit": "cd06eda64580b25d4c60e7bd6cd5cd1b07732976"
+        },
+        {
+          "date": "2026-09-21",
+          "commit": "e311ca95a4584ebdda7dea4df9c5cbb266b21920"
         }
       ]
     }
