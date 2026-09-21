@@ -9,6 +9,7 @@ HD 189733b is a hot Jupiter that orbits the K dwarf [HD 189733 A](../hd-189733/R
 | Quantity | Value | Source |
 | --- | --- | --- |
 | Map | brightness temperature, 12 × 24 cells of 15° | `tmap` in `output_E.npy`, Zenodo deposit |
+| Deposited run | 12 × 24 cells, degree 5, 3 eigencurves (`hd189-eureka-spitzer+MIRI-share.cfg`) | the paper describes its final fit on 48 × 96 cells searching up to degree 10; which run the deposit is, is not stated |
 | Hottest cell | 1,334.9 K at longitude +37.5°, latitude +7.5° | computed here from the deposited map |
 | Paper's hot spot | 33.0 +0.7/−0.9° east; 32.5 +3.0/−10.6° across the models they combine | Lally et al. (2025), abstract |
 | Area-weighted dayside mean | 1,142 K | computed here from the deposited map |
@@ -36,7 +37,7 @@ Run of 2026-09-17 (this version): `node tools/prepare-object.mts hd-189733b` pre
 ## Known problems
 
 - **Eclipse maps of this planet depend on timing.** Its eclipse-only map moves about 0.5° to 1° of longitude per second of eclipse timing ([eclipse mapping](../../../docs/eclipse-mapping.md#timing-and-the-ramp-on-other-planets)). ThERESA models no light travel time across the orbit; with the 31 s it adds, the same data put the offset about 16° further west. The paper's 33° and the deposited map are shown unchanged; the lens notes say the hot spot's longitude depends on timing.
-- **The transit time's scale.** Table 1 labels the transit time UTC. The scene uses it as TDB, 69 s later, which moves the planet 0.04% of an orbit and does not touch the map, which is shown as fitted.
+- **The transit time's scale.** Table 1 labels the transit time UTC; the scene reads it as TDB. The data side with TDB: this project's TESS fit of the star (see [HD 189733](../hd-189733/README.md)) puts the transit 6.4 ± 0.9 s before this ephemeris, where a UTC time would be 69 s off. Either way the difference is 0.1% of an orbit and does not touch the map, which is shown as fitted.
 - **Latitude.** The best model has no freedom in latitude; a 3-component model the paper does not prefer puts the hot spot 6.1 ± 1.6° from the equator. The deposited map's hottest cell is at +7.5°, one cell from the equator, and the map is nearly symmetric north to south.
 - **North and south cannot be told apart.** An eclipse light curve cannot tell which side of the star the planet crosses; the orbit's construction fixes the map's north.
 - **Only large patterns are real.** The 15° cells are the deposit's resolution; the bilinear sampling is display, not detail.

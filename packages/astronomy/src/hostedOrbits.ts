@@ -15,7 +15,8 @@ export interface HostedOrbit {
   readonly inclinationDegrees: number
   /** Elliptic eccentricity in [0, 1). */
   readonly eccentricity: number
-  /** Planet-centric argument of periapsis in the orbital plane. It is not a position angle on the sky. */
+  /** Argument of periapsis in the orbital plane, in the convention where the transit falls at true anomaly f = pi/2 - omega:
+   * RadVel's, which reports the star's omega (a planet-centric omega differs by 180 degrees). It is not a position angle on the sky. */
   readonly argumentOfPeriapsisDegrees?: number
   /**
    * Meaning assigned to `transitTimeBmjdTdb`. Required for an eccentric orbit so its epoch is never silently

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ec9ac8d45c3a080fa2638059fed08e4e442f7779fe4e33c20b254a2c3386591f"
+    "sha256": "df05caf599a9f1031c83cd1f731a2f7ddd64e35e2fd4f0fdc3f97ea9c604d301"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -96,7 +96,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d3af7465f29c8c056e5469ed378bc8d3396abdbbb905d0425eee8707c9328298",
+      "sha256": "c5f71363d4bfeca70e83af1e4f90e73ce0ba3b681fb988cb5db55a2e0c485b40",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -150,7 +150,7 @@
                 "url": "https://arxiv.org/abs/0801.1841"
               },
               "falseColor": false,
-              "notes": "No image or colour of this planet exists (it has never been resolved: only its transit depth and orbit are measured; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit."
+              "notes": "No image or colour of this planet exists (it has never been resolved: its size, orbit and transmission spectrum are measured, not its surface; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit."
             }
           ]
         },
@@ -204,8 +204,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "4c5cfb29fd728a8d6d0b02c37ff750b0956596d7ad8f8db0a329d86fd0d010cb",
-      "bytes": 738,
+      "sha256": "b87c1d4772110094eda4c9594e0146a3f484c4bc1abd9ffe9f5adee2a2294d2e",
+      "bytes": 716,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -224,8 +224,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d3af7465f29c8c056e5469ed378bc8d3396abdbbb905d0425eee8707c9328298",
-      "bytes": 3164,
+      "sha256": "c5f71363d4bfeca70e83af1e4f90e73ce0ba3b681fb988cb5db55a2e0c485b40",
+      "bytes": 3190,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -562,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "hd-209458b",
-    "materialSha256": "bf199f196393395b2c5a0344ce5e4407f90b323eab3e8e9bb30f744ab9633e1c",
+    "materialSha256": "2b0665a51ec7571fcfe65c5526d6981fcd434c1f1b8195fae3ccdf18dee3b414",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

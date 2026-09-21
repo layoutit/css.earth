@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bde23295049e1a390daf887c3ce612f069a3acf535189209d193c344da182d94"
+    "sha256": "70c20f2e4b158522d3f3ef5631c506c75340885cde899d6761e7c097951333e0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -223,7 +223,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fe4ecc2c6c0984ec3948842b3ba14743ffa69b9e54b653396ba390f8989f8f6f",
+      "sha256": "0f1cc1130b33b3fe6ff363d91f5b9f19469ecfeb4c47c76a75d5bb5589ebfdf6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -408,7 +408,7 @@
                 "meta": "K",
                 "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
               },
-              "notes": "Dayside and nightside agree with Bell et al. (2024). The hot spot sits about 6° east of noon; published analyses of the same data place it up to 7.5° east."
+              "notes": "Dayside and nightside agree with Bell et al. (2024). The hot spot sits about 6° east of noon; Hammond et al. (2024) place it 7.75 ± 0.36° east in the same data."
             }
           ]
         },
@@ -599,8 +599,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fe4ecc2c6c0984ec3948842b3ba14743ffa69b9e54b653396ba390f8989f8f6f",
-      "bytes": 6213,
+      "sha256": "0f1cc1130b33b3fe6ff363d91f5b9f19469ecfeb4c47c76a75d5bb5589ebfdf6",
+      "bytes": 6219,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -700,20 +700,20 @@
       "outputs": [
         {
           "url": "/scenes/wasp-43b/wasp-43b-surface-miri@2x.webp",
-          "bytes": 39806,
-          "sha256": "d5dd846a4229e32fde7de0a6366e278995b66cfb5d55795fe3ea03d1049cabee",
+          "bytes": 39840,
+          "sha256": "414badb1da1b1b3c525f08fcb8948737ee2c28ecf6b48466af9664dc9afbbfe9",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-lens-miri.webp",
-          "bytes": 286,
-          "sha256": "13ed50da2a4dc35cac548f75bc9c2669947d6663ed0d1e033d680a1e1651acc6",
+          "bytes": 296,
+          "sha256": "361469330104238e7c38c0004d47dfa03cb902ce56c3eb6658d106d1a07cb0c0",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-poles-miri@2x.webp",
-          "bytes": 46914,
-          "sha256": "717963158b8994bbc0b275188105d7d6be2af8bd1d07d8386bf431eba5c2982c",
+          "bytes": 46816,
+          "sha256": "471542fbdcba376e620cb9560e451759ce3a096cb81cceba511545171341b916",
           "verification": "bytes-verified"
         },
         {
@@ -808,8 +808,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/miri.webp",
-          "bytes": 5120,
-          "sha256": "36f751e37aadeda06b8801c447e659aeb29efe4744d5f29afea208b69e40260b",
+          "bytes": 5090,
+          "sha256": "39c66603225e3a93a71bae8417239729f453f6f4d8fe2e13204b20cf26197a1b",
           "verification": "bytes-verified"
         }
       ]
@@ -821,7 +821,7 @@
   },
   "lastPreparation": {
     "objectId": "wasp-43b",
-    "materialSha256": "0415f937f3d002aa7049b5af0bfd027aa15cacb3407af85e5fb280817a60ede9",
+    "materialSha256": "1facdefff206e5a09dec8b9671b7bc872d693ec8888dd64da001aa9c79ed88a0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
