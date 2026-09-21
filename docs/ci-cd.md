@@ -83,6 +83,26 @@ group and can supersede an older deployment.
   declarations needed by a later typecheck.
 - Do not hide a failing check with `continue-on-error`, a wider tolerance, skipped
   cases or a larger timeout. Fix the owning defect and retain a regression test.
+- Narrowing a checkout does not buy latency here, and it is not free. HEAD's tracked
+  source-media bank under `src/objects/*/source/` is 737 MB of the 1.14 GB working tree,
+  so it looks like the obvious target. It is not: measured on run 35621432602, a non-cone
+  `sparse-checkout` that dropped that media took the tree to 533 MB and moved checkout by
+  nothing—22.4 s mean across the narrowed jobs against 25.8 s for the untouched jobs in
+  the same run, inside the ordinary 20-36 s spread. `filter: blob:none` does not help
+  either: Contract lint already sets it and checks out in the same time as jobs that set
+  no options. Checkout on these runners is dominated by fixed per-job cost, not by bytes.
+  Two hazards make it worse than neutral. Small non-JSON evidence under `source/` is read
+  by more steps than it looks: `tools/prepare-facilities.mts --catalog-only` reads roughly
+  350 such files and re-downloads or fails when one is absent, and the shell lane's
+  `pnpm test:sbmt --unit` still reads Eros `.SUM` and `.INFO` observations because
+  `SBMT_TEST_UNIT` narrows the case list without skipping those tests. Enumerating the
+  wanted extensions is an allowlist over a data-driven citation set, so a new body citing
+  a new extension fails later with a confusing network error. Separately,
+  `tools/ci-cache-key.mts` digests the Git index, so paths
+  left out of the worktree hash as `deleted`—a different cache identity from the
+  unnarrowed jobs, and one that no longer reflects the real bytes. Spend effort on the
+  steps that actually dominate a lane instead: building shared packages and restoring
+  prepared assets, each 30-75 s against roughly 10 s of tests.
 
 ## Adding tests
 

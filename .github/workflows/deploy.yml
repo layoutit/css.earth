@@ -1,6 +1,6 @@
 name: Deploy
 
-# Deployment follows green main automatically; merging is not validation-only.
+# Deployment is manual. Merging to main validates the gate; it does not ship.
 # PR timing and publication/metadata rules: docs/ci-cd.md.
 
 on:
@@ -10,11 +10,6 @@ on:
         description: Bundle public/scenes into the deploy instead of serving it from R2 (rollback switch)
         type: boolean
         default: false
-  # Every green "Shared universe" run on main deploys itself; a red main never reaches production.
-  workflow_run:
-    workflows: ["Shared universe"]
-    types: [completed]
-    branches: [main]
 
 permissions:
   contents: read
