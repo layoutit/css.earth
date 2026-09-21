@@ -1,0 +1,30 @@
+{
+ "id": "alderamin",
+ "classification": "star",
+ "order": 1212,
+ "physical": {
+  "name": "Alderamin",
+  "horizonsCode": null,
+  "meanRadiusKm": 1761466,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null
+ },
+ "physicalNotes": "Radius: Alderamin is a rapid rotator: Zhao et al. (2009), ApJ 701, 209 measure an equatorial radius of 2.74 and a polar radius of 2.162 solar radii with CHARA/MIRC. The record's radius is the volume-equivalent sphere of those two, 2.53 solar radii; the scene draws the measured flattening, with the equatorial radius on the outline. Adopted 1,761,466 km, 2.5319 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis, the measured rotation pole, is up.",
+ "star": {
+  "rightAscensionDegrees": 319.6448846972256,
+  "declinationDegrees": 62.5855744637194,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 15.0376,
+  "properMotionRaMasPerYear": 150.55,
+  "properMotionDecMasPerYear": 49.09,
+  "radialVelocityKmPerS": -15.8,
+  "sources": {
+   "position": "SIMBAD basic record for * alf Cep (HIP 105199), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Cep",
+   "distance": "Inverse of the Hipparcos new-reduction parallax 66.50 \u00b1 0.11 mas (van Leeuwen 2007) via SIMBAD",
+   "properMotion": "SIMBAD: 150.55, 49.09 mas/yr, reference 2007A&A...474..653V",
+   "radialVelocity": "SIMBAD: -15.8 km/s, reference 2006AstL...32..759G."
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 105199
+ }
+}

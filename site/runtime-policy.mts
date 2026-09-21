@@ -205,3 +205,8 @@ export const isOrbitDragStart: RuntimePolicy["isOrbitDragStart"] = ({ isPrimary,
 function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
+
+/** Any lens bank (nebula, cluster, galaxy, or a cloud around a body) is fetched and drawn only once its framing
+ * sphere is this large on screen (radius, CSS px): hidden below 64 and full from 128, where impostors hand over to
+ * the volume. Smaller, it is a few pixels of decoration and not worth megabytes of lenses on a phone. */
+export const LENS_VISIBILITY = Object.freeze({ hiddenBelowRadiusPixels: 64, fullAboveRadiusPixels: 128 });

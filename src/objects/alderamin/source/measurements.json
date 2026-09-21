@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "alderamin",
+  "angularDiameterMas": 1.57,
+  "angularDiameterSource": "Computed: the volume-equivalent radius of Zhao et al. 2009's polar and equatorial radii at the Hipparcos distance; the paper fits the radii, not a single diameter.",
+  "distanceParsecs": 15.0376,
+  "distanceSource": "Inverse of the Hipparcos new-reduction parallax 66.50 ± 0.11 mas (van Leeuwen 2007) via SIMBAD",
+  "radiusKm": 1761466,
+  "radiusSource": "Radius: the volume-equivalent sphere of the polar radius 2.162 ± 0.036 and equatorial radius 2.740 ± 0.044 solar radii of Zhao et al. 2009 (https://arxiv.org/abs/0906.2241), Table 3, non-standard model (beta free), adopted as the final model; the scene draws the flattening. presentationUp: the measured rotation pole is up.",
+  "effectiveTemperatureK": 7510,
+  "effectiveTemperatureSource": "Effective temperature 7510 ± 160 K, the true effective temperature of the beta-free model of Zhao et al. 2009 (ApJ 701, 209; https://arxiv.org/abs/0906.2241), Table 3.",
+  "surfaceGravityLogg": 3.91,
+  "surfaceGravitySource": "log g from the mass 1.92 ± 0.04 solar masses of Zhao et al. 2009 (ApJ 701, 209; https://arxiv.org/abs/0906.2241), Table 3, and the volume-equivalent radius, log10(GM/R^2) in cgs",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp."
+  }
+}

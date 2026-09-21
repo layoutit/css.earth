@@ -64,18 +64,36 @@ export interface PreparedContextBody extends PreparedContextPoint {
   readonly systemView?: { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
     readonly candidates: readonly { readonly cameraToReference: readonly number[];
       readonly minimumM: PositionM; readonly maximumM: PositionM; readonly memberPositionsM: readonly PositionM[] }[] };
-  readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: PositionM; readonly verticesM: readonly PositionM[]; readonly trail: readonly number[];
-    readonly bounds?: { readonly centerM: PositionM; readonly radiusM: number }; readonly activeChords?: readonly number[];
-    readonly extentChords?: readonly number[]; readonly lod?: PreparedOrbitLod;
-    readonly closed?: false; readonly bodyVertexIndex?: number; readonly displayExtentAu?: number;
-    readonly trailModel?: 'finite-open-trajectory-constant-weight'; readonly strokes?: PreparedOrbitStrokes };
+  readonly orbit?: PreparedContextOrbit;
+}
+/** What the main thread knows about an orbit: its parent, extent and size. The
+ * planner worker alone reads the path itself (`PreparedContextOrbitGeometry`). */
+export interface PreparedContextOrbit {
+  readonly centerBodyId: string; readonly centerPositionM: PositionM;
+  /** Path vertex count; the retained stroke pool holds two segments per vertex. */
+  readonly vertexCount: number;
+  /** Every trail weight is 1: the whole path draws at full strength. */
+  readonly fullTrail: boolean;
+  readonly bounds?: { readonly centerM: PositionM; readonly radiusM: number };
+  readonly lod?: { readonly bounds: { readonly centerM: PositionM; readonly radiusM: number } };
+  readonly closed?: false; readonly displayExtentAu?: number;
+}
+/** An orbit's path as typed arrays: the planner worker reads them straight from the binary orbit bank. */
+export interface PreparedContextOrbitGeometry extends PreparedContextOrbit {
+  /** Vertices as consecutive x, y, z metres. */
+  readonly verticesM: Float64Array; readonly trail: Float64Array;
+  readonly activeChords?: Uint32Array; readonly extentChords?: Uint32Array; readonly lod?: PreparedOrbitLod;
+  readonly bodyVertexIndex?: number; readonly trailModel?: 'finite-open-trajectory-constant-weight'; readonly strokes?: PreparedOrbitStrokes;
+}
+export interface PreparedContextGeometryBody extends PreparedContextBody {
+  readonly orbit?: PreparedContextOrbitGeometry;
 }
 /** Prepared coarser chord banks: vertex selections of the full path, each with
  * its own trail weights and its largest distance from the full path. */
 export interface PreparedOrbitLod {
   readonly bounds: { readonly centerM: PositionM; readonly radiusM: number };
-  readonly levels: readonly { readonly vertexIndices: readonly number[]; readonly trail: readonly number[];
-    readonly activeChords: readonly number[]; readonly deviationM: number }[];
+  readonly levels: readonly { readonly vertexIndices: Uint32Array; readonly trail: Float64Array;
+    readonly activeChords: Uint32Array; readonly deviationM: number }[];
 }
 export interface PreparedContextCameraPresentation {
   readonly projection: { readonly model: 'css-perspective-shared-with-sky'; readonly cssPerspective: string };
@@ -91,14 +109,16 @@ export interface PreparedVolumeOpacityProfile {
   readonly fadeStartDistanceM: number;
   readonly fullDistanceM: number;
 }
+/** The world context the main thread holds: every body, placement and camera
+ * fact, with each orbit reduced to `PreparedContextOrbit`. */
 export interface PreparedWorldContext {
-  readonly schema: 'cssearth-world-context@1';
+  readonly schema: 'cssearth-world-context@1' | 'cssearth-world-context-summary@1';
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: PreparedContextFocus;
   readonly bodies: readonly PreparedContextBody[];
   readonly orbitCenters?: Readonly<Record<string, PreparedOrbitCenter>>;
-  /** Each classification framed by its members' prepared positions. */
-  readonly classificationViews?: Readonly<Record<string, NonNullable<PreparedContextBody['systemView']>>>;
+  /** The summary pins the binary orbit bank that holds its orbits' paths (`decodeWorldOrbits`). */
+  readonly orbitBank?: { readonly byteLength: number; readonly sha256: string };
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
     readonly presentation: PreparedContextCameraPresentation };
   readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
@@ -108,6 +128,13 @@ export interface PreparedWorldContext {
   readonly stars: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number };
   readonly system: { readonly fadeOutStartDistanceM: number; readonly hiddenDistanceM: number };
   readonly sky: { readonly sceneRegistration: string };
+}
+/** The full prepared file: orbit paths and detail levels for the planner worker and build tools. */
+export interface PreparedWorldContextGeometry extends PreparedWorldContext {
+  readonly schema: 'cssearth-world-context@1';
+  readonly bodies: readonly PreparedContextGeometryBody[];
+  /** Each classification framed by its members' prepared positions. */
+  readonly classificationViews?: Readonly<Record<string, NonNullable<PreparedContextBody['systemView']>>>;
 }
 
 function vector(value: unknown, label: string): PositionM {
@@ -220,16 +247,220 @@ function parsePresentation(value: unknown): PreparedContextCameraPresentation {
 // Only our immutable validated outputs are reusable. Mutable transport inputs
 // always cross validation, including callers that modify and submit them again.
 const validatedContexts = new WeakSet<object>();
-export function parsePreparedWorldContext(value: unknown): PreparedWorldContext {
-  if (value && typeof value === 'object' && validatedContexts.has(value)) return value as PreparedWorldContext;
-  const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'classificationViews', 'camera', 'volume', 'stars', 'system', 'sky']);
-  if (input.schema !== 'cssearth-world-context@1') throw new TypeError('Unsupported prepared world context.');
+/** The full prepared file, orbit paths included: the planner worker and build tools read this. */
+export function parsePreparedWorldContext(value: unknown): PreparedWorldContextGeometry {
+  return parseContext(value, true) as PreparedWorldContextGeometry;
+}
+/** The main thread's copy: `world-context-summary.json`, whose orbits carry no paths. */
+export function parsePreparedWorldContextSummary(value: unknown): PreparedWorldContext {
+  return parseContext(value, false);
+}
+/** Either file, by its schema: runtimes that hold the plan accept the summary or the full context. */
+export function parsePreparedWorldContextPlan(value: unknown): PreparedWorldContext {
+  const schema = value && typeof value === 'object' ? (value as { schema?: unknown }).schema : undefined;
+  return parseContext(value, schema === 'cssearth-world-context@1');
+}
+/** A plan whose orbits carry their paths, for the synchronous planner. */
+export function worldContextGeometry(plan: PreparedWorldContext): PreparedWorldContextGeometry {
+  if (plan.schema !== 'cssearth-world-context@1') throw new TypeError('Planning orbits requires the full prepared world context.');
+  return plan as PreparedWorldContextGeometry;
+}
+type OrbitGeometryCandidate = Omit<PreparedContextOrbitGeometry, 'vertexCount' | 'fullTrail' | 'trailModel'> & { readonly trailModel?: unknown };
+// A parsed plan carries typed arrays; a structured clone of it (the worker transport) keeps them typed.
+const numberList = (value: unknown, label: string) => ArrayBuffer.isView(value) && !(value instanceof DataView)
+  ? numbers(Array.from(value as unknown as ArrayLike<number>), label) : numbers(value, label);
+const indices = (value: unknown, label: string) => {
+  const values = numberList(value, label);
+  if (values.some(index => !Number.isSafeInteger(index) || index < 0 || index > 0xffffffff)) throw new TypeError(`${label} must be unsigned 32-bit integers.`);
+  return Uint32Array.from(values);
+};
+const sphere = (input: unknown, label: string) => {
+  const bounds = record(input, label, ['centerM', 'radiusM']);
+  return Object.freeze({ centerM: vector(bounds.centerM, `${label} centre`), radiusM: positive(bounds.radiusM, `${label} radius`) });
+};
+/** A JSON orbit (the full prepared file, read by build tools and tests) packed into the typed arrays the planner uses. */
+function jsonOrbitGeometry(value: unknown): OrbitGeometryCandidate {
+  const orbit = record(value, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords', 'extentChords',
+    'closed', 'bodyVertexIndex', 'displayExtentAu', 'trailModel', 'strokes', 'lod',
+    // A parsed copy carries these; both are derived again from the path.
+    'vertexCount', 'fullTrail']);
+  let strokes: PreparedOrbitStrokes | undefined;
+  if (orbit.strokes !== undefined) {
+    const input = record(orbit.strokes, 'orbit stroke bank', ['weights', 'segmentCapacity']);
+    strokes = Object.freeze({ weights: Object.freeze(numbers(input.weights, 'orbit stroke materials')), segmentCapacity: finite(input.segmentCapacity, 'orbit stroke capacity') });
+  }
+  const lod = orbit.lod === undefined ? undefined : (() => {
+    const input = record(orbit.lod, 'orbit detail levels', ['bounds', 'levels']);
+    return { bounds: sphere(input.bounds, 'orbit detail bounds'), levels: array(input.levels, 'orbit detail levels').map(value => {
+      const level = record(value, 'orbit detail level', ['vertexIndices', 'trail', 'activeChords', 'deviationM']);
+      return { vertexIndices: indices(level.vertexIndices, 'orbit detail vertices'), trail: Float64Array.from(numberList(level.trail, 'orbit detail trail')),
+        activeChords: indices(level.activeChords, 'orbit detail active chords'), deviationM: finite(level.deviationM, 'orbit detail deviation') };
+    }) };
+  })();
+  return { centerBodyId: text(orbit.centerBodyId, 'orbit parent identity'), centerPositionM: vector(orbit.centerPositionM, 'orbit centre position'),
+    verticesM: orbit.verticesM instanceof Float64Array ? Float64Array.from(numberList(orbit.verticesM, 'orbit vertices'))
+      : Float64Array.from(array(orbit.verticesM, 'orbit vertices').flatMap(value => vector(value, 'orbit vertex'))),
+    trail: Float64Array.from(numberList(orbit.trail, 'orbit trail')),
+    ...(orbit.bounds === undefined ? {} : { bounds: sphere(orbit.bounds, 'orbit bounds') }),
+    ...(orbit.activeChords === undefined ? {} : { activeChords: indices(orbit.activeChords, 'active orbit chords') }),
+    ...(orbit.extentChords === undefined ? {} : { extentChords: indices(orbit.extentChords, 'extent orbit chords') }),
+    ...(orbit.closed === undefined ? {} : { closed: orbit.closed as false }),
+    ...(orbit.bodyVertexIndex === undefined ? {} : { bodyVertexIndex: finite(orbit.bodyVertexIndex, 'orbit epoch vertex') }),
+    ...(orbit.displayExtentAu === undefined ? {} : { displayExtentAu: finite(orbit.displayExtentAu, 'Open trajectory display extent') }),
+    ...(orbit.trailModel === undefined ? {} : { trailModel: orbit.trailModel }),
+    ...(strokes ? { strokes } : {}), ...(lod ? { lod } : {}) };
+}
+/** Every prepared orbit path, whether it came from JSON or the binary bank, passes the same checks. */
+function validateOrbitGeometry(orbit: OrbitGeometryCandidate, bodyPositionM: PositionM, focusId: string, renderedIds: ReadonlySet<string>): PreparedContextOrbitGeometry {
+  const { centerBodyId, verticesM, trail } = orbit;
+  const count = verticesM.length / 3;
+  const distance = (index: number, centerM: PositionM) =>
+    Math.hypot(verticesM[index * 3]! - centerM[0], verticesM[index * 3 + 1]! - centerM[1], verticesM[index * 3 + 2]! - centerM[2]);
+  const open = orbit.closed === false;
+  if (orbit.closed !== undefined && !open) throw new TypeError('Open trajectory metadata requires closed: false.');
+  if (open) {
+    const bodyVertexIndex = orbit.bodyVertexIndex;
+    if (typeof bodyVertexIndex !== 'number' || !Number.isSafeInteger(bodyVertexIndex) || bodyVertexIndex < 0 || bodyVertexIndex >= count ||
+        orbit.trailModel !== 'finite-open-trajectory-constant-weight' || trail.some(weight => weight !== 1)) {
+      throw new TypeError('Open context trajectory must identify its epoch vertex and constant finite-path weights.');
+    }
+    positive(orbit.displayExtentAu, 'Open trajectory display extent');
+  } else if ([orbit.bodyVertexIndex, orbit.displayExtentAu, orbit.trailModel].some(value => value !== undefined)) {
+    throw new TypeError('Open trajectory metadata requires closed: false.');
+  }
+  const pinned = open ? orbit.bodyVertexIndex! : 0;
+  if (!Number.isInteger(count) || count < 8 || trail.length !== count - (open ? 1 : 0) || trail.some(value => !(value >= 0 && value <= 1)) ||
+      !equalPosition(bodyPositionM, [verticesM[pinned * 3]!, verticesM[pinned * 3 + 1]!, verticesM[pinned * 3 + 2]!]) || !verticesM.every(Number.isFinite)) {
+    throw new TypeError('Context orbit must align with its body and carry matching prepared trail weights.');
+  }
+  const drawnChords = trail.reduce((sum, weight) => sum + (weight > 0 ? 1 : 0), 0);
+  if (orbit.activeChords) {
+    let ordinal = 0;
+    for (let index = 0; index < trail.length; index++) if (trail[index]! > 0 && orbit.activeChords[ordinal++] !== index) ordinal = -Infinity;
+    if (ordinal !== orbit.activeChords.length) throw new TypeError('Prepared active chords must match every positive trail weight in order.');
+  }
+  if (orbit.extentChords && (orbit.extentChords.length !== drawnChords || new Set(orbit.extentChords).size !== orbit.extentChords.length ||
+      orbit.extentChords.some(index => !(trail[index]! > 0)))) {
+    throw new TypeError('Prepared extent chords must visit every positive trail weight exactly once.');
+  }
+  if (orbit.bounds) {
+    for (let index = 0; index < count; index++) {
+      const drawn = trail[index]! > 0 || (index > 0 ? trail[index - 1]! : open ? 0 : trail[trail.length - 1]!) > 0;
+      if (drawn && distance(index, orbit.bounds.centerM) > orbit.bounds.radiusM) throw new TypeError('Prepared orbit bounds must contain every active chord endpoint.');
+    }
+  }
+  if (orbit.strokes) {
+    const drawn = [...new Set([...trail].filter(weight => weight > 0))];
+    const expected = centerBodyId !== focusId && renderedIds.has(centerBodyId) ? [1] : [...new Set([...drawn, 1])];
+    if (orbit.strokes.segmentCapacity !== count * 2 || orbit.strokes.weights.length !== expected.length || orbit.strokes.weights.some((weight, index) => weight !== expected[index])) {
+      throw new TypeError('Prepared orbit strokes must cover every authored trail material and full-orbit hover.');
+    }
+  }
+  if (orbit.lod) {
+    for (let index = 0; index < count; index++) {
+      if (distance(index, orbit.lod.bounds.centerM) > orbit.lod.bounds.radiusM) throw new TypeError('Prepared orbit detail bounds must contain every vertex.');
+    }
+    for (const level of orbit.lod.levels) {
+      const { vertexIndices, trail: levelTrail, activeChords: levelActive } = level;
+      let ordinal = 0;
+      for (let index = 0; index < levelTrail.length; index++) if (levelTrail[index]! > 0 && levelActive[ordinal++] !== index) ordinal = -Infinity;
+      if (vertexIndices.length < 3 || vertexIndices[0] !== 0 || !vertexIndices.includes(pinned) || (open && vertexIndices.at(-1) !== count - 1) ||
+          vertexIndices.some((index, position) => index >= count || (position > 0 && index <= vertexIndices[position - 1]!)) ||
+          levelTrail.length !== vertexIndices.length - (open ? 1 : 0) || levelTrail.some(weight => !(weight >= 0 && weight <= 1)) ||
+          ordinal !== levelActive.length || !(level.deviationM >= 0)) {
+        throw new TypeError('Prepared orbit detail levels must keep the body vertex and carry matching trail weights.');
+      }
+    }
+  }
+  const lod = orbit.lod && Object.freeze({ bounds: orbit.lod.bounds, levels: Object.freeze(orbit.lod.levels.map(level => Object.freeze({ ...level }))) });
+  // The open-trajectory checks above admit only the one trail model.
+  return Object.freeze({ ...orbit, ...(lod ? { lod } : {}), vertexCount: count, fullTrail: trail.every(weight => weight === 1) }) as PreparedContextOrbitGeometry;
+}
+/** An orbit's vertices as points, for build tools and tests that walk the path. */
+export function orbitVertices(orbit: Pick<PreparedContextOrbitGeometry, 'verticesM'>): PositionM[] {
+  return Array.from({ length: orbit.verticesM.length / 3 }, (_, index) =>
+    [orbit.verticesM[index * 3]!, orbit.verticesM[index * 3 + 1]!, orbit.verticesM[index * 3 + 2]!] as PositionM);
+}
+const WORLD_ORBITS_MAGIC = 0x4f575343, WORLD_ORBITS_VERSION = 1;
+/** The planner's full context from the summary plan and its pinned binary orbit bank. The bank's sections become
+ * typed-array views over the transferred bytes; each orbit passes the same checks as the JSON file. The caller
+ * verifies the bank's sha256 against `plan.orbitBank` before decoding. */
+export function decodeWorldOrbits(plan: PreparedWorldContext, bytes: ArrayBuffer): PreparedWorldContextGeometry {
+  if (!plan.orbitBank || bytes.byteLength !== plan.orbitBank.byteLength) throw new TypeError('Orbit bank differs from its summary pin.');
+  const view = new DataView(bytes);
+  if (view.getUint32(0, true) !== WORLD_ORBITS_MAGIC || view.getUint32(4, true) !== WORLD_ORBITS_VERSION) throw new TypeError('Unsupported orbit bank.');
+  const headerLength = view.getUint32(8, true), dataStart = 12 + headerLength + (8 - (12 + headerLength) % 8) % 8;
+  const header = record(JSON.parse(new TextDecoder().decode(new Uint8Array(bytes, 12, headerLength))), 'orbit bank header', ['schema', 'bodies']);
+  if (header.schema !== 'cssearth-world-orbits@1') throw new TypeError('Unsupported orbit bank.');
+  const section = <T extends Float64Array | Uint32Array>(value: unknown, type: { new(buffer: ArrayBuffer, offset: number, length: number): T; BYTES_PER_ELEMENT: number }, label: string): T => {
+    const [offset, length] = numbers(value, label, 2);
+    if (!Number.isSafeInteger(offset) || !Number.isSafeInteger(length) || offset < 0 || length < 0 || offset % 8 !== 0 ||
+        dataStart + offset + length * type.BYTES_PER_ELEMENT > bytes.byteLength) throw new TypeError(`${label} lies outside the orbit bank.`);
+    return new type(bytes, dataStart + offset, length);
+  };
+  const paths = new Map(array(header.bodies, 'orbit bank bodies').map(value => {
+    const body = record(value, 'orbit bank body', ['id', 'vertices', 'trail', 'activeChords', 'extentChords', 'bodyVertexIndex', 'trailModel', 'levels']);
+    return [text(body.id, 'orbit bank body id'), body] as const;
+  }));
+  const renderedIds = new Set(plan.bodies.map(body => body.id));
+  const bodies = plan.bodies.map<PreparedContextGeometryBody>(body => {
+    if (!body.orbit) return body as PreparedContextGeometryBody;
+    const path = paths.get(body.id);
+    if (!path) throw new TypeError(`${body.id}: orbit bank lacks its path.`);
+    paths.delete(body.id);
+    const { orbit } = body;
+    const geometry = validateOrbitGeometry({ centerBodyId: orbit.centerBodyId, centerPositionM: orbit.centerPositionM,
+      verticesM: section(path.vertices, Float64Array, `${body.id} vertices`), trail: section(path.trail, Float64Array, `${body.id} trail`),
+      activeChords: section(path.activeChords, Uint32Array, `${body.id} active chords`), extentChords: section(path.extentChords, Uint32Array, `${body.id} extent chords`),
+      ...(orbit.bounds ? { bounds: orbit.bounds } : {}),
+      ...(orbit.closed === false ? { closed: false as const, displayExtentAu: orbit.displayExtentAu,
+        bodyVertexIndex: finite(path.bodyVertexIndex, `${body.id} epoch vertex`), trailModel: path.trailModel } : {}),
+      ...(orbit.lod ? { lod: { bounds: orbit.lod.bounds, levels: array(path.levels, `${body.id} detail levels`).map(value => {
+        const level = record(value, 'orbit bank level', ['vertexIndices', 'trail', 'activeChords', 'deviationM']);
+        return { vertexIndices: section(level.vertexIndices, Uint32Array, `${body.id} level vertices`), trail: section(level.trail, Float64Array, `${body.id} level trail`),
+          activeChords: section(level.activeChords, Uint32Array, `${body.id} level chords`), deviationM: finite(level.deviationM, `${body.id} level deviation`) };
+      }) } } : {}) }, body.positionM, plan.focus.id, renderedIds);
+    if (geometry.vertexCount !== orbit.vertexCount || geometry.fullTrail !== orbit.fullTrail) throw new TypeError(`${body.id}: orbit bank differs from its summary.`);
+    return Object.freeze({ ...body, orbit: geometry });
+  });
+  if (paths.size) throw new TypeError('Orbit bank carries paths for bodies without orbits.');
+  const { orbitBank: _pin, ...rest } = plan;
+  return Object.freeze({ ...rest, schema: 'cssearth-world-context@1', bodies: Object.freeze(bodies) });
+}
+function parseSummaryOrbit(value: unknown): PreparedContextOrbit {
+  const orbit = record(value, 'body orbit', ['centerBodyId', 'centerPositionM', 'vertexCount', 'fullTrail', 'bounds', 'lod', 'closed', 'displayExtentAu']);
+  const vertexCount = finite(orbit.vertexCount, 'orbit vertex count');
+  if (!Number.isSafeInteger(vertexCount) || vertexCount < 8) throw new TypeError('Context orbit must carry at least eight prepared vertices.');
+  if (typeof orbit.fullTrail !== 'boolean') throw new TypeError('Context orbit must state whether its trail is full.');
+  if (orbit.closed === undefined ? orbit.displayExtentAu !== undefined : orbit.closed !== false) {
+    throw new TypeError('Open trajectory metadata requires closed: false.');
+  }
+  return Object.freeze({ centerBodyId: text(orbit.centerBodyId, 'orbit parent identity'), centerPositionM: vector(orbit.centerPositionM, 'orbit centre position'),
+    vertexCount, fullTrail: orbit.fullTrail,
+    ...(orbit.bounds === undefined ? {} : { bounds: sphere(orbit.bounds, 'orbit bounds') }),
+    ...(orbit.lod === undefined ? {} : { lod: Object.freeze({ bounds: sphere(record(orbit.lod, 'orbit detail levels', ['bounds']).bounds, 'orbit detail bounds') }) }),
+    ...(orbit.closed === false ? { closed: false as const, displayExtentAu: positive(orbit.displayExtentAu, 'Open trajectory display extent') } : {}) });
+}
+function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
+  if (value && typeof value === 'object' && validatedContexts.has(value) &&
+      (!geometry || (value as PreparedWorldContext).schema === 'cssearth-world-context@1')) return value as PreparedWorldContext;
+  const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'classificationViews', 'orbitBank', 'camera', 'volume', 'stars', 'system', 'sky']);
+  const schema = geometry ? 'cssearth-world-context@1' : 'cssearth-world-context-summary@1';
+  if (input.schema !== schema) throw new TypeError('Unsupported prepared world context.');
+  if (!geometry && input.classificationViews !== undefined) throw new TypeError('The world context summary carries no classification views.');
+  if (geometry && input.orbitBank !== undefined) throw new TypeError('The full world context carries its orbit paths, not a bank pin.');
+  const orbitBank = input.orbitBank === undefined ? undefined : (() => {
+    const pin = record(input.orbitBank, 'orbit bank pin', ['byteLength', 'sha256']);
+    const byteLength = positive(pin.byteLength, 'orbit bank byte length'), sha256 = text(pin.sha256, 'orbit bank sha256');
+    if (!Number.isSafeInteger(byteLength) || !/^[a-f0-9]{64}$/.test(sha256)) throw new TypeError('Orbit bank pin is invalid.');
+    return Object.freeze({ byteLength, sha256 });
+  })();
   const frame = parsePreparedWorldCameraFrame(input.frame);
   if (!frame) throw new TypeError('World context requires its prepared frame.');
   const focus = focusPoint(input.focus);
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const renderedIds = new Set(array(input.bodies, 'context bodies').map(value => text(record(value, 'context body').id, 'context body id')));
-  const bodies = array(input.bodies, 'context bodies').map<PreparedContextBody>(value => {
+  const bodies = array(input.bodies, 'context bodies').map<PreparedContextGeometryBody | PreparedContextBody>(value => {
     const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo'];
     const input = record(value, 'context body', fields);
     const rawBody = point(input, fields);
@@ -243,92 +474,8 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     const body = { ...rawBody, ...(systemView ? { systemView } : {}), ...(bound ? { boundTo: bound } : {}),
       ...(input.placement === 'approximate' ? { placement: 'approximate' as const } : {}) };
     if (input.orbit === undefined) return Object.freeze(body);
-    const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords', 'extentChords',
-      'closed', 'bodyVertexIndex', 'displayExtentAu', 'trailModel', 'strokes', 'lod']);
-    const centerBodyId = text(orbit.centerBodyId, 'orbit parent identity'), centerPositionM = vector(orbit.centerPositionM, 'orbit centre position');
-    const verticesM = array(orbit.verticesM, 'orbit vertices').map(value => vector(value, 'orbit vertex'));
-    const trail = numbers(orbit.trail, 'orbit trail');
-    const open = orbit.closed === false;
-    let openMetadata: { readonly closed: false; readonly bodyVertexIndex: number; readonly displayExtentAu: number;
-      readonly trailModel: 'finite-open-trajectory-constant-weight' } | undefined;
-    if (open) {
-      const bodyVertexIndex = orbit.bodyVertexIndex;
-      if (typeof bodyVertexIndex !== 'number' || !Number.isSafeInteger(bodyVertexIndex) || bodyVertexIndex < 0 || bodyVertexIndex >= verticesM.length ||
-          orbit.trailModel !== 'finite-open-trajectory-constant-weight' || trail.some(weight => weight !== 1)) {
-        throw new TypeError('Open context trajectory must identify its epoch vertex and constant finite-path weights.');
-      }
-      openMetadata = { closed: false, bodyVertexIndex, displayExtentAu: positive(orbit.displayExtentAu, 'Open trajectory display extent'),
-        trailModel: orbit.trailModel };
-    } else if (['closed', 'bodyVertexIndex', 'displayExtentAu', 'trailModel'].some(key => orbit[key] !== undefined)) {
-      throw new TypeError('Open trajectory metadata requires closed: false.');
-    }
-    if (verticesM.length < 8 || trail.length !== verticesM.length - (open ? 1 : 0) || trail.some(value => value < 0 || value > 1) ||
-        !equalPosition(body.positionM, verticesM[openMetadata?.bodyVertexIndex ?? 0]!)) {
-      throw new TypeError('Context orbit must align with its body and carry matching prepared trail weights.');
-    }
-    const activeChords = orbit.activeChords === undefined ? undefined : numbers(orbit.activeChords, 'active orbit chords');
-    if (activeChords) {
-      const expected = trail.flatMap((weight, index) => weight > 0 ? [index] : []);
-      if (activeChords.length !== expected.length || activeChords.some((index, ordinal) => index !== expected[ordinal])) {
-        throw new TypeError('Prepared active chords must match every positive trail weight in order.');
-      }
-    }
-    const extentChords = orbit.extentChords === undefined ? undefined : numbers(orbit.extentChords, 'extent orbit chords');
-    if (extentChords && (extentChords.length !== trail.filter(weight => weight > 0).length ||
-        new Set(extentChords).size !== extentChords.length ||
-        extentChords.some(index => !Number.isSafeInteger(index) || !(trail[index] > 0)))) {
-      throw new TypeError('Prepared extent chords must visit every positive trail weight exactly once.');
-    }
-    let bounds: { readonly centerM: PositionM; readonly radiusM: number } | undefined;
-    if (orbit.bounds !== undefined) {
-      const input = record(orbit.bounds, 'orbit bounds', ['centerM', 'radiusM']);
-      const centerM = vector(input.centerM, 'orbit bounds centre'), radiusM = positive(input.radiusM, 'orbit bounds radius');
-      if (verticesM.some((vertex, index) => (trail[index] > 0 || (index > 0 ? trail[index - 1] : open ? 0 : trail[trail.length - 1]) > 0) &&
-        Math.hypot(...vertex.map((value, axis) => value - centerM[axis])) > radiusM)) {
-        throw new TypeError('Prepared orbit bounds must contain every active chord endpoint.');
-      }
-      bounds = Object.freeze({ centerM, radiusM });
-    }
-    let strokes: PreparedOrbitStrokes | undefined;
-    if (orbit.strokes !== undefined) {
-      const input = record(orbit.strokes, 'orbit stroke bank', ['weights', 'segmentCapacity']);
-      const weights = numbers(input.weights, 'orbit stroke materials');
-      const expected = centerBodyId !== focus.id && renderedIds.has(centerBodyId) ? [1] : [...new Set([...trail.filter(weight => weight > 0), 1])];
-      const segmentCapacity = finite(input.segmentCapacity, 'orbit stroke capacity');
-      if (segmentCapacity !== verticesM.length * 2 || weights.length !== expected.length || weights.some((weight, index) => weight !== expected[index])) {
-        throw new TypeError('Prepared orbit strokes must cover every authored trail material and full-orbit hover.');
-      }
-      strokes = Object.freeze({ weights: Object.freeze(weights), segmentCapacity });
-    }
-    let lod: PreparedOrbitLod | undefined;
-    if (orbit.lod !== undefined) {
-      const input = record(orbit.lod, 'orbit detail levels', ['bounds', 'levels']);
-      const lodBounds = record(input.bounds, 'orbit detail bounds', ['centerM', 'radiusM']);
-      const centerM = vector(lodBounds.centerM, 'orbit detail bounds centre'), radiusM = positive(lodBounds.radiusM, 'orbit detail bounds radius');
-      if (verticesM.some(vertex => Math.hypot(...vertex.map((value, axis) => value - centerM[axis])) > radiusM)) {
-        throw new TypeError('Prepared orbit detail bounds must contain every vertex.');
-      }
-      const pinned = openMetadata?.bodyVertexIndex ?? 0;
-      const levels = array(input.levels, 'orbit detail levels').map(value => {
-        const level = record(value, 'orbit detail level', ['vertexIndices', 'trail', 'activeChords', 'deviationM']);
-        const vertexIndices = numbers(level.vertexIndices, 'orbit detail vertices'), levelTrail = numbers(level.trail, 'orbit detail trail');
-        const levelActive = numbers(level.activeChords, 'orbit detail active chords'), deviationM = finite(level.deviationM, 'orbit detail deviation');
-        const expected = levelTrail.flatMap((weight, index) => weight > 0 ? [index] : []);
-        if (vertexIndices.length < 3 || vertexIndices[0] !== 0 || !vertexIndices.includes(pinned) || (open && vertexIndices.at(-1) !== verticesM.length - 1) ||
-            vertexIndices.some((index, ordinal) => !Number.isSafeInteger(index) || index >= verticesM.length || (ordinal > 0 && index <= vertexIndices[ordinal - 1]!)) ||
-            levelTrail.length !== vertexIndices.length - (open ? 1 : 0) || levelTrail.some(weight => weight < 0 || weight > 1) ||
-            levelActive.length !== expected.length || levelActive.some((index, ordinal) => index !== expected[ordinal]) || !(deviationM >= 0)) {
-          throw new TypeError('Prepared orbit detail levels must keep the body vertex and carry matching trail weights.');
-        }
-        return Object.freeze({ vertexIndices: Object.freeze(vertexIndices), trail: Object.freeze(levelTrail),
-          activeChords: Object.freeze(levelActive), deviationM });
-      });
-      lod = Object.freeze({ bounds: Object.freeze({ centerM, radiusM }), levels: Object.freeze(levels) });
-    }
-    // Older prepared banks retain their exact bar representation; no runtime bake.
-    return Object.freeze({ ...body, orbit: Object.freeze({ centerBodyId, centerPositionM, verticesM: Object.freeze(verticesM), trail: Object.freeze(trail),
-      ...openMetadata, ...(bounds ? { bounds } : {}), ...(activeChords ? { activeChords: Object.freeze(activeChords) } : {}),
-      ...(extentChords ? { extentChords: Object.freeze(extentChords) } : {}), ...(strokes ? { strokes } : {}), ...(lod ? { lod } : {}) }) });
+    if (!geometry) return Object.freeze({ ...body, orbit: parseSummaryOrbit(input.orbit) });
+    return Object.freeze({ ...body, orbit: validateOrbitGeometry(jsonOrbitGeometry(input.orbit), body.positionM, focus.id, renderedIds) });
   });
   if (bodies.length === 0) throw new TypeError('World context requires bodies.');
   unique([focus.id, ...bodies.map(body => body.id)], 'context body identities');
@@ -340,7 +487,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     if (moon.radiusM !== body.systemView!.memberRadiiM[index]) throw new TypeError('System view radii must match their prepared members.');
   }
   const orbitCenters = parsePreparedOrbitCenters(input.orbitCenters, focus, bodies);
-  const classificationViews = parseClassificationViews(input.classificationViews, bodies);
+  const classificationViews = geometry ? parseClassificationViews(input.classificationViews, bodies) : undefined;
   const camera = record(input.camera, 'context camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
   const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile', 'brightnessProfile']);
   const stars = record(input.stars, 'context stars', ['objectId', 'fadeStartDistanceM', 'fullDistanceM']);
@@ -365,9 +512,9 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   }
   const objectId = text(volume.objectId, 'volume identity');
   if (!/^[a-z][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid context volume identity.');
-  const result: PreparedWorldContext = Object.freeze({ schema: 'cssearth-world-context@1', frame, focus, bodies: Object.freeze(bodies),
+  const result: PreparedWorldContext = Object.freeze({ schema, frame, focus, bodies: Object.freeze(bodies),
     ...(input.orbitCenters === undefined ? {} : { orbitCenters }),
-    ...(classificationViews ? { classificationViews } : {}),
+    ...(classificationViews ? { classificationViews } : {}), ...(orbitBank ? { orbitBank } : {}),
     camera: Object.freeze({ minimumDistanceM, maximumDistanceM, framingReferenceZoom, presentation }),
     volume: Object.freeze({ objectId, fadeStartDistanceM, fullDistanceM,
       ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }),
@@ -449,8 +596,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     marker.style.margin = '0';
     marker.style.marginLeft = marker.style.marginTop = '0';
     const baseAlpha = annotationOpacities[body.id] ?? { line: .65, label: .65 };
-    marker.dataset.contextLineAlpha = String(baseAlpha.line);
-    marker.dataset.contextLabelAlpha = String(baseAlpha.label);
+    marker.style.setProperty('--context-line-alpha', String(baseAlpha.line));
+    marker.style.setProperty('--context-label-alpha', String(baseAlpha.label));
     // A bare mover carries the per-frame transform and paint order. The marker,
     // with its ring and caption pseudo-elements and attribute rules, keeps a
     // stable style, so motion restyles one plain leaf instead of three nodes.
@@ -470,14 +617,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     orbitRoot.style.cssText = orbitRenderer === 'bars' ? 'position:absolute;inset:0;width:0;height:0;pointer-events:none' : 'pointer-events:none';
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
     if (orbit) root.insertBefore(orbitRoot, mover);
-    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.verticesM.length ?? 0), id: body.id });
+    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
     const navigation = bindObjectNavigationTarget(marker, host, { pointerTarget: false });
     const orbitNavigation = orbit ? bindObjectNavigationTarget(orbitRoot, host, { pointerTarget: false }) : null;
     return { index, body, sprite, marker, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, navigation, orbitNavigation,
-      closedOrbit: orbit?.trail.every(weight => weight === 1) === true,
+      closedOrbit: orbit?.fullTrail === true,
       indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
       indicatorHovered: false,
       orbitPick: null as ScreenPickTarget | null,
@@ -515,7 +662,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   flightCircle.style.visibility = 'hidden';
   flightCircle.setAttribute('aria-hidden', 'true');
   root.appendChild(flightCircle);
-  const planWorld = createWorldContextPlanner(plan, annotationPriorities);
+  // The app plans every frame in the worker. Only a caller that publishes without a
+  // prepared frame plans here, and that needs the full context with its orbit paths.
+  let syncPlanner: ReturnType<typeof createWorldContextPlanner> | undefined;
+  const planWorld = (view: WorldContextView) => (syncPlanner ??= createWorldContextPlanner(worldContextGeometry(plan), annotationPriorities))(view);
   const systemFade = createSystemFade(plan);
   const windowTarget = host.ownerDocument.defaultView!;
   const ownClock = opacityClock ?? createOpacityClock(windowTarget);
@@ -950,7 +1100,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           }
           const inverseScale = BILLBOARD_SIZE / markerDiameter;
           if (entry.inverseScale !== inverseScale) {
-            marker.dataset.contextInverseScale = String(inverseScale);
+            marker.style.setProperty('--context-inverse-scale', String(inverseScale));
             entry.inverseScale = inverseScale;
           }
           entry.center = [x, y];
@@ -1022,8 +1172,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             const offset = `translate(${Math.round((labelPosition[0] - x) * 1e6) / 1e6}px,${Math.round((labelPosition[1] - y) * 1e6) / 1e6}px)`;
             if (entry.labelOffset !== offset) {
               const [labelX, labelY] = offset.match(/-?[\d.]+/g)!.map(Number);
-              marker.dataset.contextLabelX = `${labelX}px`;
-              marker.dataset.contextLabelY = `${labelY}px`;
+              marker.style.setProperty('--context-label-x', `${labelX}px`);
+              marker.style.setProperty('--context-label-y', `${labelY}px`);
               entry.labelOffset = offset;
             }
             const rect = entry.labelRectTarget ??= { left: 0, top: 0, right: 0, bottom: 0 };

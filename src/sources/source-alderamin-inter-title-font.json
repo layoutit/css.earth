@@ -1,0 +1,37 @@
+{
+  "id": "source-alderamin-inter-title-font",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Alderamin · inter title font",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/alderamin/source/manifest.json",
+      "revision": "7060c0ee3451d1e61c8db9a88fe71ef5d1d2e696",
+      "sha256": "8eeab1b4b93ca30a659c471ec9e7411377c1288045bd927496fbb4bb4522c3b9",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Inter Project Authors / Rasmus Andersson",
+      "scope": "The inter title font input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "SIL Open Font License 1.1",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

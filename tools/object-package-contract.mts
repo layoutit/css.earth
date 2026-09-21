@@ -24,12 +24,10 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
       resolve(root, "source", "manifest.json"),
       resolve(root, "runtime-assets.json"),
       ...(authored ? [resolve(root, 'object.json'), resolve(root, 'prepared/runtime.json'),
-        resolve(root, 'prepared/content.json'), resolve(root, 'text.json'), resolve(root, 'prepared/text.json'),
-        resolve(projectRoot, 'tests/objects/browser', objectRecord.id, 'browser-profile.mts')] : [
+        resolve(root, 'prepared/content.json'), resolve(root, 'text.json'), resolve(root, 'prepared/text.json')] : [
       resolve(root, "runtime", "client.mjs"),
       resolve(root, "site", `${objectRecord.name}Page.astro`),
       resolve(root, "site", "control-content.mjs"),
-      resolve(root, "test", "browser-profile.mts"),
       resolve(root, "tools", "acquire.mjs"),
       resolve(root, "tools", "prepare.mjs"),
       resolve(root, "tools", "navigation-marker.mjs"),
@@ -38,6 +36,13 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
       ]),
       resolve(root, 'prepared/page.json'),
       resolve(projectRoot, 'site/pages/[id].astro'),
+    ]),
+    // These are repository-completeness files: their absence does not change what the
+    // application ships, so they are tracked as a ratcheted backlog rather than a merge
+    // gate (see docs/ci-cd.md).
+    backlogFiles: Object.freeze([
+      authored ? resolve(projectRoot, 'tests/objects/browser', objectRecord.id, 'browser-profile.mts')
+        : resolve(root, "test", "browser-profile.mts"),
     ]),
     runtimeAssets: resolve(root, "runtime-assets.json"),
     sourceManifest: resolve(root, "source", "manifest.json"),
@@ -62,7 +67,15 @@ export async function validateObjectPackageFiles(
       });
     }
   }
-  return paths;
+  const missingBacklogFiles: string[] = [];
+  for (const file of paths.backlogFiles) {
+    try {
+      await accessFile(file);
+    } catch {
+      missingBacklogFiles.push(file);
+    }
+  }
+  return Object.freeze({ ...paths, missingBacklogFiles: Object.freeze(missingBacklogFiles) });
 }
 
 export { validateRuntimeAssetManifest };

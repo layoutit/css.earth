@@ -19,6 +19,8 @@ test('HD 189733 B retains its pins; its acquisitions are the font, the Gaia row 
   const { color, limbDarkening, range } = await loadStellarPhotometricColor(path => readFile(resolve(root, path)), science, 'photometry/stellar-color.json');
   assert.deepEqual(color.srgb, [255, 201, 123]);
   assert.equal(limbDarkening, null);
+  // The record is a Gaia XP sampled spectrum, so the loader always reports the one-sigma fainter and brighter colours.
+  assert.ok(range, 'the XP spectrum reports a colour range');
   for (const bound of range) for (let channel = 0; channel < 3; channel++) assert.ok(Math.abs(bound.srgb[channel]! - color.srgb[channel]!) <= 3);
 });
 

@@ -12,11 +12,14 @@ Radius: Limb-darkened angular diameter 20.922 ± 0.036 mas (quadratic limb-darke
 
 Rotation: no rotation axis or period is adopted here; see Known problems for what the cited paper measures The display axis is celestial north at the star, a convention.
 
-Shape lens: a sphere of the measured radius in neutral gray. No image of the surface is shown.
+Colour lens: The colour of Arcturus's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.mts](../../../tools/objects/observation/stellar-photometric-color.mts)): **#ffd8a5**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). The disc is darkened toward its edge by the quadratic V-band law that Claret & Bloemen (2011, A&A 529, A75) compute from ATLAS model atmospheres, read at 4295 K and log g 1.66: the edge is 18% as bright as the centre. That law is a model, not a measurement of this star. Gravity: log g 1.66 +/- 0.05 measured by Ramirez & Allende Prieto 2011 (ApJ 743, 135; https://arxiv.org/abs/1109.4425), abstract. The catalogue swatch, the minimap and the navigation marker use the same colour. [stellar-spectra/author.mts](../../../tools/objects/source-authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them. Cross-check: Kiehling (1987), HR 5340: an independent ground-based scan gives #ffdab0, 11 levels from the lens colour in its most different channel (the threshold for agreement is 12).
+
 
 ## Evidence
 
-No dated test report exists for this body yet.
+Run of 2026-09-21 (this version):
+
+- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffd8a5 is the colour lens's prepared colour and that the limb-darkening law is read at the recorded temperature and gravity; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour and marker from the pinned spectrum.
 
 ## Known problems
 

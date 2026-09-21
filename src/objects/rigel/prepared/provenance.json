@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "372fabc83dc2e4c496ecab8957af59ad103f0a7a1b82d2846a0371b1b88b2568"
+    "sha256": "d58ae95df4a7c0a559a18de946fff1890e6af3aeb80cab61b6cb933026f5c1b1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "c03c5c77256c53c3f6a72b9c4c69467fbebf43f60357b03b5423180c88a85b6e"
+    "bindingsSha256": "a0654130491d75334d1fab835ee99202b30d50a095f98ed51c1c8cb91abd5777"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "d349e0a4b11a912a09fdaf2ddcf631b1b435bd682df18928bbc2ec56e29ce99d",
+      "sha256": "0296dbe5cf35db4b5ba614d04ec471fc3e28b4d35d5cc12f9245efe959d2971e",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/rigel/",
@@ -39,14 +39,15 @@
         },
         "surfaces": [
           {
-            "id": "shape",
+            "id": "color",
             "output": "rigel-surface-{id}{suffix}.webp",
             "thumbnail": "rigel-lens-{id}.webp",
-            "source": "measurements.json",
+            "source": "photometry/stellar-color.json",
             "falseColor": false,
             "science": {
-              "kind": "neutral-shape",
-              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+              "kind": "stellar-photometric-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "qualification": "Uniform photosphere colour from the star's ground-based spectrophotometry (Pulkovo catalogue). The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
             }
           }
         ],
@@ -82,7 +83,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4c5b5c709d64c00b29a71b96029870719500c2d03ed516eaf8b1ca5111ad4a7c",
+      "sha256": "942f06c0e678817195f5fd78326ff8f3ec304c41f5c4c77d6ba852bcc4d75967",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,22 +122,22 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "color",
           "controls": [
             {
-              "id": "shape",
-              "label": "Shape",
-              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-              "thumbnail": "rigel-lens-shape.webp",
-              "surface": "rigel-surface-shape@2x.webp",
-              "poles": "rigel-poles-shape@2x.webp",
+              "id": "color",
+              "label": "Color",
+              "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The disc is unresolved, and no darkening toward the edge is measured.",
+              "thumbnail": "rigel-lens-color.webp",
+              "surface": "rigel-surface-color@2x.webp",
+              "poles": "rigel-poles-color@2x.webp",
               "source": {
-                "id": "rigel-observational-measurements",
+                "id": "rigel-stellar-color",
                 "path": "../manifest.json",
-                "url": "https://arxiv.org/abs/1201.0843"
+                "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
               },
               "falseColor": false,
-              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+              "notes": "The colour of Rigel's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. No resolved image of the surface is cast; the display axis is celestial north, a convention."
             }
           ]
         },
@@ -151,6 +152,12 @@
             "role": "facts",
             "description": "Moravveji, Guinan, Shultz et al., \"Asteroseismology of the nearby SN-II progenitor Rigel. Part I\", ApJ 747, 108 (2012), arXiv:1201.0843",
             "href": "https://arxiv.org/abs/1201.0843"
+          },
+          {
+            "label": "Spectrum",
+            "role": "facts",
+            "description": "Pulkovo spectrophotometric catalogue, HR 1713 (VizieR III/201)",
+            "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
           }
         ],
         "provenance": {
@@ -172,19 +179,59 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "rigel-observational-measurements",
-      "path": "measurements.json",
-      "origin": "https://arxiv.org/abs/1201.0843",
-      "credit": "Moravveji, Guinan, Shultz et al., \"Asteroseismology of the nearby SN-II progenitor Rigel. Part I\", ApJ 747, 108 (2012), arXiv:1201.0843",
+      "id": "rigel-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
+      "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed published measurements with their sources",
-      "redistribution": "Factual parameter transcription only; no paper figures",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-201-pulkovo-spectrophotometry",
+            "role": "material",
+            "evidence": "src/objects/rigel/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
       },
-      "sha256": "63ad077f4b0fe0b5543d08a995118f848946509f6e1eedeee1df673dc86c0dc7",
-      "bytes": 1102,
+      "sha256": "900a353f8d2c694405bb3b7a34ff02ca44f509d53d7a29399faa9a30cb1fa43f",
+      "bytes": 1647,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "rigel-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -203,8 +250,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4c5b5c709d64c00b29a71b96029870719500c2d03ed516eaf8b1ca5111ad4a7c",
-      "bytes": 2856,
+      "sha256": "942f06c0e678817195f5fd78326ff8f3ec304c41f5c4c77d6ba852bcc4d75967",
+      "bytes": 3075,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -213,18 +260,18 @@
   ],
   "products": [
     {
-      "id": "shape",
-      "label": "Shape",
+      "id": "color",
+      "label": "Color",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+        "Colour from a measured spectrum of the star (Pulkovo catalogue). The disc is unresolved, and no darkening toward the edge is measured."
       ],
       "lensIds": [
-        "shape"
+        "color"
       ],
       "recipeDependencies": [
         "raster"
@@ -233,35 +280,36 @@
         "falseColor": false
       },
       "inputs": [
-        "rigel-observational-measurements"
+        "rigel-stellar-color",
+        "rigel-cie-1931-2deg-cmf"
       ],
       "outputs": [
         {
-          "url": "/scenes/rigel/rigel-surface-shape@2x.webp",
+          "url": "/scenes/rigel/rigel-surface-color@2x.webp",
           "bytes": 178,
-          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "sha256": "6f4f63bd1f8eb1d75330e1fd9eff761c509a3994fb3f82ea0d876c57d265ee6b",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/rigel/rigel-lens-shape.webp",
+          "url": "/scenes/rigel/rigel-lens-color.webp",
           "bytes": 44,
-          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "sha256": "b0543e2c79d5e6bfe142682640510af7b037eac09fe6be524e7545d43532a28e",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/rigel/rigel-poles-shape@2x.webp",
+          "url": "/scenes/rigel/rigel-poles-color@2x.webp",
           "bytes": 1340,
-          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "sha256": "1ee1af012facf6383b0841b1e643a944c9e4c0d8f2315ab4d8b61e54bda93637",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/rigel/rigel-context-shape@2x.webp",
+          "url": "/scenes/rigel/rigel-context-color@2x.webp",
           "bytes": 100,
           "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/rigel/rigel-limb-shape@2x.webp",
+          "url": "/scenes/rigel/rigel-limb-color@2x.webp",
           "bytes": 84,
           "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
           "verification": "bytes-verified"
@@ -269,7 +317,7 @@
       ],
       "inputEvidence": [
         {
-          "sourceId": "rigel-observational-measurements",
+          "sourceId": "rigel-stellar-color",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
@@ -295,16 +343,16 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4272,
-          "sha256": "871428ab4866be8798c775ab5fc79883a7ae0864f6c016f3a6ca529aa7978e2a",
+          "bytes": 4446,
+          "sha256": "bf55b5d86a0706459c460e6b701820fdc5a63c6fcd4e253363aaa86e82072159",
           "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:shape",
-      "label": "Shape preview",
+      "id": "preview:color",
+      "label": "Color preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -313,16 +361,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "shape"
+        "color"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 422,
-          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 442,
+          "sha256": "ecebad6356e880496468f47098f18b9c4fe2b4922ff4be8234447e559f026efc",
           "verification": "bytes-verified"
         }
       ]
@@ -334,11 +382,11 @@
   },
   "lastPreparation": {
     "objectId": "rigel",
-    "materialSha256": "249000b1ce6d4928e11bac054585c47aad0a1b7a35b3962a1871ab571c3c998c",
+    "materialSha256": "851305b1255f0cc2e38be0b5e09b586fae118b9f49bc75938495602b75a6a188",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "c03c5c77256c53c3f6a72b9c4c69467fbebf43f60357b03b5423180c88a85b6e"
+      "bindingsSha256": "a0654130491d75334d1fab835ee99202b30d50a095f98ed51c1c8cb91abd5777"
     }
   }
 }

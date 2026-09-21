@@ -1,0 +1,30 @@
+{
+ "id": "caph",
+ "classification": "star",
+ "order": 1214,
+ "physical": {
+  "name": "Caph",
+  "horizonsCode": null,
+  "meanRadiusKm": 2455210,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null
+ },
+ "physicalNotes": "Radius: Caph is a rapid rotator: Che et al. (2011), ApJ 732, 68 measure an equatorial radius of 3.79 and a polar radius of 3.06 solar radii with CHARA/MIRC. The record's radius is the volume-equivalent sphere of those two, 3.53 solar radii; the scene draws the measured flattening, with the equatorial radius on the outline. Adopted 2,455,210 km, 3.5291 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis, the measured rotation pole, is up.",
+ "star": {
+  "rightAscensionDegrees": 2.2945215777878776,
+  "declinationDegrees": 59.14978109800713,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 16.7842,
+  "properMotionRaMasPerYear": 523.5,
+  "properMotionDecMasPerYear": -179.77,
+  "radialVelocityKmPerS": 4.3,
+  "sources": {
+   "position": "SIMBAD basic record for * bet Cas (HIP 746), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=bet+Cas",
+   "distance": "Inverse of the Hipparcos new-reduction parallax 59.58 \u00b1 0.38 mas (van Leeuwen 2007) via SIMBAD",
+   "properMotion": "SIMBAD: 523.5, -179.77 mas/yr, reference 2007A&A...474..653V",
+   "radialVelocity": "SIMBAD: 4.3 km/s, reference 2006AstL...32..759G."
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 746
+ }
+}

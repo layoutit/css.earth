@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "835815184b7daf1db06377dd694deae638d21716c71ef52580478b6d44efc336"
+    "sha256": "d429b12ca2a1ea115aefed00ac1f84999171783942860133c80982a50cd9d919"
   },
   "id": "io",
   "properties": {
@@ -83,6 +83,11 @@
               "id": "visible-absorption",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "volcanic-heat",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -152,7 +157,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "42fee676863e082e3b01f5c4816307789390d38dd0e6f09d4c91cdc9edcf7d78"
+        "sha256": "bc35be59645130780018e89eee7f3ea1db8fe963c5379b03c1b2082b62071884"
       }
     },
     "catalog": {

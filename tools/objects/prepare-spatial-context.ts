@@ -1,10 +1,11 @@
+import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, relative, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, M_PER_KM, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { parseWorldContextSource, prepareWorldContext } from '../../src/preparation/spatial-context.js';
+import { encodeWorldOrbits, parseWorldContextSource, prepareWorldContext, summarizeWorldContext } from '../../src/preparation/spatial-context.js';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '../../src/preparation/spatial-context.js';
 
 interface Orbit { readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly heliocentricDistanceAu: number; readonly perihelionDirection: Vector3; readonly trueAnomalyDegrees: number; readonly centerBodyId?: string; readonly centerPositionAu?: Vector3; }
@@ -132,11 +133,31 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   const prepared = prepareWorldContext(source, facts, states, orbitCenters, {
     minimumRadiusShare: SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, ...SYSTEM_FRAMING_ANGLES });
   // Browser payload: compact JSON. Indentation was 60% of the fetched bytes.
-  const text = `${JSON.stringify(prepared)}\n`;
-  try { if (await readFile(options.outputPath, 'utf8') === text) return; }
+  await writeIfChanged(options.outputPath, `${JSON.stringify(prepared)}\n`);
+  // The browser reads the summary; the planner worker adds the binary orbit bank the summary pins.
+  // The full JSON above remains for build-time tools.
+  const orbits = encodeWorldOrbits(prepared);
+  await writeIfChanged(worldOrbitsPath(options.outputPath), orbits);
+  await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify(summarizeWorldContext(prepared,
+    { byteLength: orbits.byteLength, sha256: createHash('sha256').update(orbits).digest('hex') }))}\n`);
+}
+
+/** `world-context.json` → `world-orbits.bin`, beside it. */
+export function worldOrbitsPath(outputPath: string): string {
+  return resolve(dirname(outputPath), 'world-orbits.bin');
+}
+
+/** `world-context.json` → `world-context-summary.json`, beside it. */
+export function worldContextSummaryPath(outputPath: string): string {
+  return outputPath.replace(/\.json$/, '-summary.json');
+}
+
+async function writeIfChanged(path: string, contents: string | Uint8Array): Promise<void> {
+  const bytes = typeof contents === 'string' ? Buffer.from(contents) : Buffer.from(contents.buffer, contents.byteOffset, contents.byteLength);
+  try { if (Buffer.compare(await readFile(path), bytes) === 0) return; }
   catch (error: unknown) { if (!isMissingFile(error)) throw error; }
-  await mkdir(dirname(options.outputPath), { recursive: true });
-  await writeFile(options.outputPath, text);
+  await mkdir(dirname(path), { recursive: true });
+  await writeFile(path, bytes);
 }
 
 /** A migrated object's prepared frame is authoritative when it names this exact physical epoch and centre. */

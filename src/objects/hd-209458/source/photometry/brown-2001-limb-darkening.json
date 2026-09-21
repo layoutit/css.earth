@@ -1,0 +1,30 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "hd-209458",
+  "source": "Brown et al. (2001), Hubble Space Telescope Time-Series Photometry of the Transiting Planet of HD 209458, ApJ 552, 699 (https://arxiv.org/abs/astro-ph/0101336), Table 1",
+  "band": "HST/STIS G750M, 581.3-638.2 nm",
+  "law": "I(mu)/I(1) = 1 - u1 (1 - mu) - u2 (1 - mu)^2",
+  "published": {
+    "u1PlusU2": {
+      "value": 0.64,
+      "uncertainty": 0.03,
+      "cell": "0.640 ± 0.030"
+    },
+    "u1MinusU2": {
+      "value": -0.055,
+      "uncertainty": 0.1,
+      "cell": "-0.055 ± 0.100"
+    }
+  },
+  "u1": {
+    "value": 0.2925,
+    "uncertainty": 0.052,
+    "cell": "(0.640 + (-0.055)) / 2, from the two published combinations"
+  },
+  "u2": {
+    "value": 0.3475,
+    "uncertainty": 0.052,
+    "cell": "(0.640 - (-0.055)) / 2, from the two published combinations"
+  },
+  "note": "Both coefficients fitted freely to Hubble transits of HD 209458b, published as their sum and difference; u1 and u2 are those combinations solved, with each uncertainty half the quadrature sum of the two. The paper notes that u1 - u2 is poorly constrained; the sum, which sets the edge brightness (1 - u1 - u2 = 0.36), is well measured."
+}

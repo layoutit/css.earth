@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
-import { parsePreparedWorldContext, mountPreparedWorldContext } from '../../../src/renderers/css/universe/prepared-world-context.js';
+import { orbitVertices, parsePreparedWorldContext, mountPreparedWorldContext } from '../../../src/renderers/css/universe/prepared-world-context.js';
 import { mountPreparedOrbitLines } from '../../../src/renderers/css/solar-system/prepared-orbit-lines.js';
 import { mountPreparedCssSky, preparedSkyCameraTransform } from '../../../src/renderers/css/sky/prepared-sky-runtime.js';
 import { loadPreparedCssVolume } from '../../../src/renderers/css/volume/loader.js';
@@ -103,7 +103,7 @@ export function addNativeSolarContext(document: Document, frame: PreparedWorldCa
     marker.removeAttribute('role'); marker.removeAttribute('aria-disabled'); marker.removeAttribute('tabindex');
     marker.style.visibility = 'inherit'; marker.style.opacity = '1';
     marker.dataset.contextIndicatorVisible = 'true'; marker.dataset.contextLabelVisible = 'true';
-    marker.dataset.contextInverseScale = '1';
+    marker.style.setProperty('--context-inverse-scale', '1');
     marker.dataset.contextBodyVisible = 'false';
     marker.dataset.contextSelected = String(entry.id === selectedId);
     marker.style.inset = '14px';
@@ -123,12 +123,12 @@ export function addNativeSolarContext(document: Document, frame: PreparedWorldCa
     link.style.setProperty('animation-range-end', boundary);
 
     if (orbitRoot && 'orbit' in point && point.orbit) {
-      const orbit = point.orbit;
-      const segments: OrbitSegment[] = orbit.verticesM.map((_, i) => [0, 0, 1, 0, orbit.trail[i] ?? 1]);
+      const orbit = point.orbit, vertices = orbitVertices(orbit);
+      const segments: OrbitSegment[] = vertices.map((_, i) => [0, 0, 1, 0, orbit.trail[i] ?? 1]);
       const paint = mountPreparedOrbitLines(orbitRoot, { renderer: 'bars', capacity: segments.length });
       paint.publish(segments);
       orbitRoot.style.width = orbitRoot.style.height = '100%'; orbitRoot.style.opacity = 'calc(.65 * var(--native-orbit-alpha))';
-      const prepared = orbit.verticesM.map(position => eye(position));
+      const prepared = vertices.map(position => eye(position));
       for (const [i, node] of paint.elements.entries()) {
         if (!node || i >= prepared.length) continue;
         const a = prepared[i], b = prepared[(i + 1) % prepared.length];
@@ -141,7 +141,7 @@ export function addNativeSolarContext(document: Document, frame: PreparedWorldCa
         }
         node.style.setProperty('--native-trail',String(orbit.trail[i]??1));
       }
-      rules.push(prepareNativeOrbitCulling(orbitRoot,orbit.verticesM,paint.elements,orbit.lod?.levels??[],orbit.lod?.bounds,eye,nativeCamera));
+      rules.push(prepareNativeOrbitCulling(orbitRoot,vertices,paint.elements,(orbit.lod?.levels??[]).map(level=>({...level,vertexIndices:[...level.vertexIndices],trail:[...level.trail],activeChords:[...level.activeChords]})),orbit.lod?.bounds,eye,nativeCamera));
     }
   }
   // A segment hidden by its orbit's level of detail skips the projection: these initial values win the

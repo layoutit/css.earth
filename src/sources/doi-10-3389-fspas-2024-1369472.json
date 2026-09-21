@@ -1,0 +1,66 @@
+{
+  "id": "doi-10-3389-fspas-2024-1369472",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The temporal variability of Io's hotspots",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3389/fspas.2024.1369472"
+    }
+  ],
+  "creators": [
+    "Mura A.",
+    "Zambon F.",
+    "Tosi F.",
+    "Lopes R.",
+    "Rathbun J.",
+    "Pettine M.",
+    "Adriani A.",
+    "Altieri F.",
+    "Ciarniello M.",
+    "Cicchetti A.",
+    "Filacchione G.",
+    "Grassi D.",
+    "Noschese R.",
+    "Migliorini A.",
+    "Piccioni G.",
+    "Plainaki C.",
+    "Sordini R.",
+    "Sindoni G.",
+    "Turrini D."
+  ],
+  "publisher": "Frontiers in Astronomy and Space Sciences",
+  "publicationDate": "2024-05-20",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3389/fspas.2024.1369472",
+      "label": "Publication"
+    },
+    {
+      "role": "original",
+      "url": "https://www.frontiersin.org/files/Articles/1369472/fspas-11-1369472-HTML-r4/image_m/fspas-11-1369472-g002.jpg",
+      "label": "Figure 2, M- and L-band radiance maps and color scale"
+    },
+    {
+      "role": "rights",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "label": "CC BY 4.0"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.frontiersin.org/journals/astronomy-and-space-sciences/articles/10.3389/fspas.2024.1369472/full",
+      "checkedOn": "2026-09-21",
+      "locator": "Methods (super-images, SPICE geometry, Lambertian limb fit) and Figure 2 caption and color bar, 0 to 0.15 W sr-1 m-2"
+    },
+    {
+      "url": "https://api.crossref.org/works/10.3389/fspas.2024.1369472",
+      "checkedOn": "2026-09-21",
+      "locator": "Title, authors, date and CC BY 4.0 licence"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

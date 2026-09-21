@@ -1,13 +1,13 @@
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { PlannedWorldContext, WorldContextView } from './world-context-planner.js';
-import { parsePreparedWorldContext } from './prepared-world-context.js';
-import type { PreparedWorldContext } from './prepared-world-context.js';
+import { decodeWorldOrbits, parsePreparedWorldContextSummary } from './prepared-world-context.js';
+import type { PreparedWorldContextGeometry } from './prepared-world-context.js';
 import type { WorldPlannerSource } from './world-context-planner-client.js';
 import { createWorldContextFrameEncoder, contextFrameTransfers } from './world-context-frame.js';
 import { unpackWorldBodies } from './world-context-view-transport.js';
 
 type Initialise = { annotationPriorities?: Readonly<Record<string, number>> } &
-  ({ plan: PreparedWorldContext } | { source: WorldPlannerSource });
+  ({ plan: PreparedWorldContextGeometry } | { source: WorldPlannerSource });
 const scope = globalThis as unknown as {
   onmessage: (event: MessageEvent<Initialise | { id: number; view: Omit<WorldContextView, 'bodies'>; bodies: Float64Array }>) => void;
   postMessage(value: unknown, transfer?: Transferable[]): void;
@@ -21,11 +21,15 @@ async function read(url: string): Promise<ArrayBuffer> {
   if (!response.ok) throw new Error(`Prepared planner resource request failed: ${response.status}.`);
   return response.arrayBuffer();
 }
-// The same validation the main thread runs, on the worker's own copy.
+// The summary, then the binary orbit bank it pins: verified, and read as typed-array views, never parsed as JSON.
 async function load(source: WorldPlannerSource) {
-  return parsePreparedWorldContext(JSON.parse(new TextDecoder().decode(await read(source.contextUrl))));
+  const [summary, orbits] = await Promise.all([read(source.summaryUrl), read(source.orbitsUrl)]);
+  const plan = parsePreparedWorldContextSummary(JSON.parse(new TextDecoder().decode(summary)));
+  const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', orbits))].map(byte => byte.toString(16).padStart(2, '0')).join('');
+  if (digest !== plan.orbitBank?.sha256) throw new Error('Prepared orbit bank differs from its summary pin.');
+  return decodeWorldOrbits(plan, orbits);
 }
-function initialise(plan: PreparedWorldContext, annotationPriorities?: Readonly<Record<string, number>>) {
+function initialise(plan: PreparedWorldContextGeometry, annotationPriorities?: Readonly<Record<string, number>>) {
   encode = createWorldContextFrameEncoder();
   calculate = createWorldContextPlanner(plan, annotationPriorities);
   scope.postMessage({ ready: true });

@@ -36,22 +36,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "color",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-        "thumbnail": "polaris-lens-shape.webp",
-        "surface": "polaris-surface-shape@2x.webp",
-        "poles": "polaris-poles-shape@2x.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from a measured spectrum of the star (HST/STIS). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+        "thumbnail": "polaris-lens-color.webp",
+        "surface": "polaris-surface-color@2x.webp",
+        "poles": "polaris-poles-color@2x.webp",
         "source": {
-          "id": "polaris-observational-measurements",
+          "id": "polaris-stellar-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/2407.09641"
+          "url": "https://archive.stsci.edu/prepds/stisngsl/"
         },
         "falseColor": false,
-        "notes": "No image of the photosphere is cast here. The public CHARA/MIRC-X visibilities of April 2021 resolve the disc only about six beams across, and a reconstruction from them shows the same spots as one from a spotless disc sampled the same way (see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+        "notes": "The colour of Polaris's HST/STIS spectrum. Hubble observed it on 20 September 2001; Polaris pulsates slightly over four days, so this is one moment of that cycle. No resolved image of the surface is cast here."
       }
     ]
   },
@@ -66,6 +66,12 @@
       "role": "facts",
       "description": "Evans et al. (2024), The Orbit and Dynamical Mass of Polaris: Observations with the CHARA Array, ApJ 971, 190",
       "href": "https://arxiv.org/abs/2407.09641"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "STIS Next Generation Spectral Library v2: HD 8890 (Polaris)",
+      "href": "https://archive.stsci.edu/prepds/stisngsl/"
     }
   ],
   "provenance": {

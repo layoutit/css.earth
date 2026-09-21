@@ -8,16 +8,16 @@ import { SCENE_OBJECTS } from '../objects.mts';
 import { browserObjects } from './browser-objects.mts';
 import { wheelWithReceipt } from './wheel-zoom-distance.mts';
 
-import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js';
+import { orbitVertices, parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js';
 import { parse, object as schemaObject, optional, array, string } from '../../tools/objects/material-composition/data-schema.mts';
 import type { ObjectEntry } from '../object-schema.mts';
 import type { ObjectRuntimeDiagnostics } from '../env.d.ts';
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.ts';
-import type { PreparedWorldContext } from '../../src/renderers/css/universe/prepared-world-context.ts';
+import type { PreparedWorldContextGeometry } from '../../src/renderers/css/universe/prepared-world-context.ts';
 type Resources = ReturnType<ObjectRuntimeDiagnostics['runtime']['resources']>;
 type Residency = { painted: string[]; missing: string[] };
 type ExpectedObject = { frame: PreparedWorldCameraFrame; materialTracks: string[]; assetUrls: Record<string, string>;
-  point: PreparedWorldContext['bodies'][number]; lenses: string[]; defaultLens: string | null };
+  point: PreparedWorldContextGeometry['bodies'][number]; orbitPoints: number[][] | null; lenses: string[]; defaultLens: string | null };
 type FrameSample = { time: number; id: string | undefined; roots: number; world: WorldCameraPose | undefined;
   pending: number | undefined; residency: Residency | null; materialReady: boolean | undefined; retained: boolean };
 interface AllObjectWorldProbe {
@@ -71,7 +71,8 @@ const expected: Record<string, ExpectedObject> = Object.fromEntries(SCENE_OBJECT
   const point = points.find(point => point.id === id);
   assert.ok(worldFrame); assert.ok(point);
   return [id, {
-  frame: worldFrame, ...presentations[id], point,
+  // Typed orbit arrays do not survive the page transport; the probe carries the path as points.
+  frame: worldFrame, ...presentations[id], point, orbitPoints: 'orbit' in point && point.orbit ? orbitVertices(point.orbit).map(vertex => [...vertex]) : null,
   lenses: controls[id].lenses?.controls.map(lens => lens.id) ?? [], defaultLens: controls[id].lenses?.defaultLens ?? null,
 } ] as const; }));
 // The flight walk covers the representative sample; CSSEARTH_TEST_OBJECTS=all flies every object.
@@ -335,9 +336,9 @@ async function orbitProjection() {
       return [offset[0] + camera.focal * eye[0] / -eye[2], offset[1] + camera.focal * eye[1] / -eye[2]];
     };
     let pieces = 0, maximumErrorPixels = 0;
-    for (const { point } of Object.values(probe.expected)) {
-      if (!point.orbit) continue;
-      const vertices = point.orbit.verticesM.map(project);
+    for (const { point, orbitPoints } of Object.values(probe.expected)) {
+      if (!orbitPoints) continue;
+      const vertices = orbitPoints.map(project);
       for (const node of window.__cssearthTest.required(window.__cssearthTest.universe().inspect().bodies.find(body => body.id === point.id), `orbit ${point.id}`).orbit as HTMLElement[]) {
         if (getComputedStyle(node).visibility === 'hidden' || !(Number(node.style.opacity) > 0)) continue;
         const m = new DOMMatrix(node.style.transform), p = [m.e, m.f], q = [m.e + m.a, m.f + m.b];

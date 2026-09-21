@@ -1,0 +1,51 @@
+{
+  "id": "dawn-vir-ceres-global-mosaics-v1",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Dawn VIR derived Ceres global mosaics",
+  "version": "1.0",
+  "identifiers": [
+    {
+      "type": "PDS3 data set",
+      "value": "DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0"
+    }
+  ],
+  "creators": [
+    "M. C. De Sanctis",
+    "M. T. Capria",
+    "E. Ammannito",
+    "A. Frigeri",
+    "F. Tosi",
+    "M. Giardino",
+    "S. Fonte",
+    "F. Zambon"
+  ],
+  "publisher": "NASA Planetary Data System",
+  "publicationDate": "2018-03-19",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
+      "label": "Archive volume DWNCVIR_2"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1016/j.icarus.2018.04.019",
+      "label": "Frigeri et al. (2019), the maps and their color scales"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1126/science.aaf4279",
+      "label": "Ammannito et al. (2016), Distribution of phyllosilicates on the surface of Ceres"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/CATALOG/VIR_DDR_CERES_MOSAICS_DS.CAT",
+      "checkedOn": "2026-09-21",
+      "locator": "DATA_SET_ID, DATA_SET_NAME, CITATION_DESC and DATA_SET_RELEASE_DATE"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

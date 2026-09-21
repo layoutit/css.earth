@@ -20,9 +20,12 @@ export const dimensions = {width:number,height:number};
 export const parseDimensions = shape(dimensions);
 export const parseTransform = shape({scale:number,offset:number});
 export const parseFloatMapGrid = shape({...dimensions,productId:text,dataSetId:text,targetName:text,pixelsPerDegree:number,
-  referenceRadiusMeters:number,centerLongitudeWestDegrees:number,sampleProjectionOffset:number,lineProjectionOffset:number,
-  projectionRotation:text,missingBits:text,longitudeRangeWest:array(number)});
-export const parseFloatMapLens = shape({path:text,grid:parseFloatMapGrid,sampling:optional(text),valueTransform:optional(parseTransform)});
+  referenceRadiusMeters:number,sampleProjectionOffset:number,lineProjectionOffset:number,projectionRotation:text,
+  centerLongitudeWestDegrees:optional(number),longitudeRangeWest:optional(array(number)),
+  centerLongitudeEastDegrees:optional(number),longitudeRangeEast:optional(array(number)),
+  missingBits:optional(text),missingValue:optional(number),sampleType:optional(text),coordinateSystem:optional(text),
+  latitudeRange:optional(array(number))});
+export const parseFloatMapLens = shape({path:text,labelPath:optional(text),grid:parseFloatMapGrid,sampling:optional(text),valueTransform:optional(parseTransform)});
 export const parseBytePolicy = shape({noData:optional(number),connectedEdge:optional(text)});
 export const parseImageEntry = shape({...dimensions,id:optional(text),path:text,projection:shape({referenceRadiusMeters:number})});
 export const parseRadialTableProfile = shape({latitudeStepDegrees:number,longitudeStepDegrees:number,metersPerUnit:number,

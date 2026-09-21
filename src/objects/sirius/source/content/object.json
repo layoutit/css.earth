@@ -36,22 +36,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "color",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-        "thumbnail": "sirius-lens-shape.webp",
-        "surface": "sirius-surface-shape@2x.webp",
-        "poles": "sirius-poles-shape@2x.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Hubble's spectrum of the star. The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+        "thumbnail": "sirius-lens-color.webp",
+        "surface": "sirius-surface-color@2x.webp",
+        "poles": "sirius-poles-color@2x.webp",
         "source": {
-          "id": "sirius-observational-measurements",
+          "id": "sirius-stellar-color",
           "path": "../manifest.json",
-          "url": "https://doi.org/10.1051/0004-6361:20030994"
+          "url": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
         },
         "falseColor": false,
-        "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+        "notes": "The colour of the Hubble Space Telescope's calibrated STIS spectrum of Sirius A, the CALSPEC flux standard. No resolved image of the surface is cast; the display axis is celestial north, a convention."
       }
     ]
   },
@@ -66,6 +66,12 @@
       "role": "facts",
       "description": "Kervella et al. (2003), Astronomy & Astrophysics 408, 681; VLTI/VINCI limb-darkened angular diameter of Sirius A",
       "href": "https://doi.org/10.1051/0004-6361:20030994"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "HST CALSPEC sirius_stis_005 (Bohlin et al. 2020 flux scale)",
+      "href": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
     }
   ],
   "provenance": {

@@ -18,6 +18,8 @@ WASP-43 is a K7 dwarf in Sextans, the host star of the hot Jupiter [WASP-43b](..
 
 **Activity.** Esposito et al. (2017) find enhanced chromospheric Ca II H and K emission, possibly driven by the planet. An active K dwarf has starspots, but no map of them exists: the disc cannot be imaged, the star rotates too slowly for Doppler imaging, and a spot crossed during one transit is a single strip at a single moment.
 
+**Catalogue colour.** the swatch that search, the catalogue and the minimap show is this lens's prepared colour, #ffdcb8.
+
 ## Evidence
 
 Run of 2026-09-16 (this version): `node tools/prepare-object.mts wasp-43` prepared the package.
@@ -28,6 +30,7 @@ Run of 2026-09-16 (this version): `node tools/prepare-object.mts wasp-43` prepar
 - [`object-discovery.test.mts`](../../../site/test/object-discovery.test.mts) checks that WASP-43 and WASP-43b stay on the map under every discovery setting while Antares and Polaris stay hidden.
 - [`default-view.test.mts`](../../../tests/objects/unit/wasp-43/default-view.test.mts) derives the default camera from the runtime's camera math: the sub-camera point one degree from the sub-Earth point, and the pole, identical to WASP-43b's orbit normal, up.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/wasp-43/` with the default camera, no console errors.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffdcb8 is the colour lens's prepared colour.
 
 ## Known problems
 

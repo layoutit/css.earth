@@ -1,0 +1,36 @@
+{
+  "id": "hst-lowlib-gj551",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "HST Low Resolution Stellar Library: GJ 551 (Proxima Centauri)",
+  "identifiers": [
+    {
+      "type": "MAST HLSP file",
+      "value": "hlsp_lowlib_hst_stis_gj551_g230lb-g430l-g750l_v1.0_spect.fits"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.17909/kmdt-pw63",
+      "label": "LowLib HLSP"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/lowlib/hlsp_lowlib_hst_stis_gj551_g230lb-g430l-g750l_v1.0_spect.fits",
+      "checkedOn": "2026-09-21",
+      "locator": "FLUX TABLE binary table: Wavelength (Angstrom), 'Scattered Light & Slit Offcenter Corrected' flux (erg/s/cm2/A); PROPOSID 13776; REF 2019ApJ...878..134K"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/STScI; HST Low Resolution Stellar Library (LowLib, Worthey), programme 13776",
+      "scope": "citation",
+      "evidence": "https://archive.stsci.edu/publishing/data-use"
+    }
+  ],
+  "publisher": "Space Telescope Science Institute"
+}

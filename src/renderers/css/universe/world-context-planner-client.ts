@@ -1,4 +1,5 @@
 import type { PreparedWorldContext } from './prepared-world-context.js';
+import { worldContextGeometry } from './prepared-world-context.js';
 import type { WorldContextView } from './world-context-planner.js';
 import type { WorldContextFrame } from './world-context-frame.js';
 import { packWorldBodies } from './world-context-view-transport.js';
@@ -12,12 +13,15 @@ export interface WorldPlannerWorker {
 
 /** Prepared files the planner worker loads and validates itself, off the main thread. */
 export interface WorldPlannerSource {
-  readonly contextUrl: string;
+  /** The same summary the main thread holds. */
+  readonly summaryUrl: string;
+  /** The binary orbit bank the summary pins: the only copy of the orbit paths in the browser. */
+  readonly orbitsUrl: string;
 }
 
 /** The publication queue owns admission; this transport owns one persistent prepared bank.
- * With a `source`, the worker reads its own copy of the bank instead of receiving
- * a structured clone of the main thread's context. */
+ * With a `source`, the worker reads the full file itself; the main thread may hold only
+ * the summary. Without one, `plan` must be the full context and is cloned to the worker. */
 export function createWorldContextPlannerClient(plan: PreparedWorldContext,
   createWorker: () => WorldPlannerWorker = () => new Worker(new URL('./world-context-planner-worker.js', import.meta.url),
     { type: 'module', name: 'cssearth-world-planner' }),
@@ -44,7 +48,7 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
   };
   worker.onerror = event => destroy(new Error(event.message));
   if (source) worker.postMessage({ source, annotationPriorities });
-  else worker.postMessage({ plan, annotationPriorities });
+  else worker.postMessage({ plan: worldContextGeometry(plan), annotationPriorities });
   return { async plan(view: WorldContextView): Promise<WorldContextFrame> {
     await ready;
     if (destroyed) throw new Error('World frame planner was destroyed.');

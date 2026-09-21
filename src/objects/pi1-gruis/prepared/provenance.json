@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a38b17fd97e756c0f60f5b971089179a1408a34a909297440df92f8e04efe989"
+    "sha256": "d9faa1ef0fc725c7e7f0394e38de7f8474271cc9b8e48922c9faf4083bb7528b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "a4420d3a5d47d692f98ee9739137f94c339fe00fe6a8d280e5153bd249d71d4e"
+    "bindingsSha256": "34987669d5868a15c480f0d18f1b06040530a780fd58e54f602542be038105d2"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "705525ebc5b314155b354c8fc4460ad77627199a16e65ad871d29f5ae1e9a3b8",
+      "sha256": "2d5f202433a2200dc4b1696d1d0e501b52d88be60ab02156ad644371ea936326",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/pi1-gruis/",
@@ -126,6 +126,18 @@
               },
               "offLimb": {}
             }
+          },
+          {
+            "id": "color",
+            "output": "pi1-gruis-surface-{id}{suffix}.webp",
+            "thumbnail": "pi1-gruis-lens-{id}.webp",
+            "source": "photometry/stellar-color.json",
+            "falseColor": false,
+            "science": {
+              "kind": "stellar-photometric-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "qualification": "Uniform photosphere colour from the star's Gaia DR3 BP/RP spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
+            }
           }
         ],
         "emission": {
@@ -160,7 +172,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cdf02e6d556f2d4e153081d4d5e593f2c4c87f135886549e3f5de17d8dd8e1f3",
+      "sha256": "53374eabc116c5e78e02a7be7432775a079052a71ed9cd7d95f4d045879696c4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -277,6 +289,21 @@
                 "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
                 "sourceUrl": "https://doi.org/10.1038/nature25001"
               }
+            },
+            {
+              "id": "color",
+              "label": "Color",
+              "qualification": "Colour from Gaia's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured.",
+              "thumbnail": "pi1-gruis-lens-color.webp",
+              "surface": "pi1-gruis-surface-color@2x.webp",
+              "poles": "pi1-gruis-poles-color@2x.webp",
+              "source": {
+                "id": "pi1-gruis-stellar-color",
+                "path": "../manifest.json",
+                "url": "https://gea.esac.esa.int/archive/"
+              },
+              "falseColor": false,
+              "notes": "The colour of Gaia DR3's measured spectrum of π¹ Gruis. At G = 3.6 the star is brighter than the G of about 5 below which Gaia XP photometry can saturate, blue first (Montegriffo et al. 2023, A&A 674, A33), and its RUWE of 2.9 is high, so the blue end of this colour is uncertain. No resolved image of the surface is cast; the display axis is celestial north, a convention."
             }
           ]
         },
@@ -309,6 +336,12 @@
             "role": "facts",
             "description": "SIMBAD record for pi1 Gru: Gaia DR3 position, parallax and proper motion",
             "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru"
+          },
+          {
+            "label": "Spectrum",
+            "role": "facts",
+            "description": "Gaia DR3 6518817665843312000",
+            "href": "https://gea.esac.esa.int/archive/"
           }
         ],
         "provenance": {
@@ -456,6 +489,66 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "pi1-gruis-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://gea.esac.esa.int/archive/",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3; CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-xp-pi1-gruis",
+            "role": "material",
+            "evidence": "src/objects/pi1-gruis/source/photometry/stellar-color.json#/sampledSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "d8048427c6d6d03ae725200a6fe12b97e0772812ad592e45a5e74ab233a27a05",
+      "bytes": 1369,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "pi1-gruis-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -468,8 +561,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cdf02e6d556f2d4e153081d4d5e593f2c4c87f135886549e3f5de17d8dd8e1f3",
-      "bytes": 5375,
+      "sha256": "53374eabc116c5e78e02a7be7432775a079052a71ed9cd7d95f4d045879696c4",
+      "bytes": 6489,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -590,6 +683,71 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "color",
+      "label": "Color",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Colour from Gaia's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured."
+      ],
+      "lensIds": [
+        "color"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": false
+      },
+      "inputs": [
+        "pi1-gruis-stellar-color",
+        "pi1-gruis-cie-1931-2deg-cmf"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-surface-color@2x.webp",
+          "bytes": 178,
+          "sha256": "6233dfa70b055d5012df6651d5e53bff852bf8b2196e75a2d0a339d06e65dcb4",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-lens-color.webp",
+          "bytes": 44,
+          "sha256": "78c1e549d35063e280d064e872f8197afe37fd3825fd0a3f5315b837168609a6",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-poles-color@2x.webp",
+          "bytes": 1340,
+          "sha256": "b1d02864db013118b678229d40ebe065ffd9414d39644d2050781cece14b57ad",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-context-color@2x.webp",
+          "bytes": 368,
+          "sha256": "92b8cf08fcfc520aea7e34f9d92cad2bc8fc9eedddf84a7628ce637d8e1ee43d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-limb-color@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "pi1-gruis-stellar-color",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -608,8 +766,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5726,
-          "sha256": "9b8b53c692af419dabbb457e8c8402a35aac7bb57bf5b86b71ef2ee317bb367a",
+          "bytes": 5850,
+          "sha256": "dd2496b81455920586f60de7133e4bbc1185f2ac4742c9ad123a89f766f45735",
           "verification": "bytes-verified"
         }
       ],
@@ -639,6 +797,31 @@
           "verification": "bytes-verified"
         }
       ]
+    },
+    {
+      "id": "preview:color",
+      "label": "Color preview",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "color"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 450,
+          "sha256": "270bf2ab02bfea44378e88332d05850afb198e710ed0eb88a64ccc752c4fca6f",
+          "verification": "bytes-verified"
+        }
+      ]
     }
   ],
   "coverage": {
@@ -647,11 +830,11 @@
   },
   "lastPreparation": {
     "objectId": "pi1-gruis",
-    "materialSha256": "6e3035c480f16a31398eff3e42ac86e299f4c489c46fdf7cd653dcff1bfd0aa7",
+    "materialSha256": "588b86a2f1f904d752e311f873c3b54e10e82fa208c6aef9822b7b1705c14c24",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "a4420d3a5d47d692f98ee9739137f94c339fe00fe6a8d280e5153bd249d71d4e"
+      "bindingsSha256": "34987669d5868a15c480f0d18f1b06040530a780fd58e54f602542be038105d2"
     }
   }
 }

@@ -29,3 +29,5 @@ Feature names, centres, diameters, extents and name origins are from the Gazette
 Lighting: the shared prepared Lambert row bank follows the OpenSpace globebrowsing shading model (MIT, snapshot 56e29b54) as recorded in `source/preparation/raster.json`; no OpenSpace pixels are shipped.
 
 Feature caption notes: 31 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.
+
+Clay band and Ammonium band: Dawn VIR derived Ceres global mosaics V1.0, DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0 (De Sanctis, M.C., M.T. Capria, E. Ammannito, A. Frigeri, F. Tosi, M. Giardino, S. Fonte, F. Zambon, NASA Planetary Data System, 2018). Public NASA PDS scientific data; retain this credit with the derived maps. The color scales are sampled from Frigeri et al. (2019), Icarus 318, 14–21, Figure 7 (doi:10.1016/j.icarus.2018.04.019); only the sampled colors are used, not the figure. The ammonium result is Ammannito et al. (2016), Science 353, aaf4279.

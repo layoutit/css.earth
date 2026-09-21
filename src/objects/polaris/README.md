@@ -10,7 +10,8 @@ Polaris is the North Star, a supergiant Cepheid in Ursa Minor. Its package holds
 
 **Rotation: none measured.** No publication measures the rotation axis of Polaris. Lee et al. (2008) find a radial-velocity period of about 120 days and read it as rotation, but a period does not orient the sphere. The rotation record is the `cssearth-display-orientation@1` convention used for the other stars without an axis: the display axis is celestial north at the star, in the plane of the sky, and the display meridian faces the Earth at the scene epoch. The star record sets `presentationUp: display-axis`, so the camera orbit lies in that axis's equator.
 
-**Shape lens.** The surface is the `neutral-shape` science kind: a gray display convention for an unresolved surface, not a colour or a brightness. The star is drawn by the emissive route like the other stars, with transparent off-limb and limb plates. The navigation marker is the flat gray disc `tools/objects/new-star.mts` writes.
+**Colour lens.** The colour of Polaris's HST/STIS spectrum. Hubble observed it on 20 September 2001; Polaris pulsates slightly over four days, so this is one moment of that cycle. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.mts](../../../tools/objects/observation/stellar-photometric-color.mts)): **#fff9fa**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). The disc is darkened toward its edge by the quadratic V-band law that Claret & Bloemen (2011, A&A 529, A75) compute from ATLAS model atmospheres, read at 6015 K and log g 1.82: the edge is 31% as bright as the centre. That law is a model, not a measurement of this star. Gravity: log g from the astronomy record's GM and radius (physicalNotes), log10(GM/R^2) in cgs. The catalogue swatch, the minimap and the navigation marker use the same colour. [stellar-spectra/author.mts](../../../tools/objects/source-authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them. Cross-check: Kharitonov et al. (1988), record 74: Alma-Ata scans gives #fff7f7, 3 levels from the lens colour in its most different channel (the threshold for agreement is 12).
+
 
 ## Evidence
 
@@ -30,6 +31,7 @@ Polaris is the North Star, a supergiant Cepheid in Ursa Minor. Its package holds
 - `tests/objects/unit/polaris/default-view.test.mts` derives the default camera from the runtime's camera math: the sub-camera point one degree from the sub-Earth point, the display axis and celestial north straight up.
 - `site/test/object-discovery.test.mts` checks that Polaris is hidden from the map under every discovery setting.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/polaris/` with the default camera.
+- Run of 2026-09-21 (this version): [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #fff9fa is the colour lens's prepared colour and that the limb-darkening law is read at the recorded temperature and gravity; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour and marker from the pinned spectrum.
 
 ## Known problems
 

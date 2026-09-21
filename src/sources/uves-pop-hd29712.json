@@ -1,0 +1,36 @@
+{
+  "id": "uves-pop-hd29712",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "UVES POP merged spectrum of HD 29712 (R Doradus)",
+  "identifiers": [
+    {
+      "type": "UVES POP file",
+      "value": "hd29712.tfits"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/sci/observing/tools/uvespop.html",
+      "label": "UVES POP"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/sci/php/tools/uvespop/DATA/merged/hd29712.tfits.gz",
+      "checkedOn": "2026-09-21",
+      "locator": "HDU 1 binary table: Wave (Angstrom), Flux (relative), Sigm; zero flux in the chip gaps; INS ADC MODE OFF"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO UVES Paranal Observatory Project (Bagnulo et al.)",
+      "scope": "citation",
+      "evidence": "https://www.eso.org/sci/observing/tools/uvespop.html"
+    }
+  ],
+  "publisher": "European Southern Observatory"
+}

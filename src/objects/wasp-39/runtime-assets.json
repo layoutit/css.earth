@@ -2,29 +2,29 @@
   "schema": "csswasp-39-runtime-assets@1",
   "assets": [
     {
-      "filename": "wasp-39-context-shape@2x.webp",
+      "filename": "wasp-39-context-color@2x.webp",
       "bytes": 100,
       "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
     },
     {
-      "filename": "wasp-39-lens-shape.webp",
+      "filename": "wasp-39-lens-color.webp",
       "bytes": 44,
-      "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
+      "sha256": "a34b28e82e39a00df9d45890184d28aa0e13daed0287450075b57214d8c1ae8e"
     },
     {
-      "filename": "wasp-39-limb-shape@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+      "filename": "wasp-39-limb-color@2x.webp",
+      "bytes": 93352,
+      "sha256": "7e3b96d456839ffa080a844cf1963b012393d7c6ae4a17ea84646c43e81ce67f"
     },
     {
-      "filename": "wasp-39-poles-shape@2x.webp",
+      "filename": "wasp-39-poles-color@2x.webp",
       "bytes": 1340,
-      "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875"
+      "sha256": "5d7ed3c5029664db17e8cd194b7aa1d1a943c95bdfb87532dba1f00cf583f54c"
     },
     {
-      "filename": "wasp-39-surface-shape@2x.webp",
+      "filename": "wasp-39-surface-color@2x.webp",
       "bytes": 178,
-      "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+      "sha256": "e359cdc115118f71b9c2cc3b9c7b437ec94495bf4d9c9d41ec5e6f7110f88180"
     }
   ]
 }

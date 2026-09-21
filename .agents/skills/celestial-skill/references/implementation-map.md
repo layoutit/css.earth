@@ -423,7 +423,7 @@ purposes; run those needed for the task, not every preparation step by default.
 | Set up a VLT/SPHERE survey body's photograph lens and measure it against the survey figure | `node tools/objects/sphere-survey/setup.mts <id>` in scratch, then `node tools/objects/sphere-survey/install.mts <id>` into the package; see [SPHERE survey photographs](sphere-survey-photographs.md) |
 | Write a ground-based lens's two Horizons tables | `node tools/objects/sphere-horizons.mts <id> [--write]`: Paranal rows at each frame's exposure start and heliocentric vectors one light time earlier, asked in batches of 25 and pinned in the manifest; a table the manifest does not name yet is declared for `pnpm author:sources` |
 | Measure a ground-based lens against its paper's comparison figure | `node tools/objects/published-comparison.mts <id> [--write]`: reads the figure from the pinned PDF (`tools/pdf-image.mts`), writes `evidence/published-comparison.json` and its image; a new record's zero pixel digest is adopted on the first `--write` |
-| Scaffold a placed star from its astronomy record | `node tools/objects/new-star.mts <id> --name ... --paper ...`: every number derived, prose marked `TODO(new-star)`, then `prepare-object` |
+| Scaffold a placed star from its astronomy record | `node tools/objects/new-star.mts <id> --name ... --temperature <K> --temperature-source <citation with URL> --paper ...`: every number derived, the catalogue colour from the cited effective temperature through the star field's colour fit, prose marked `TODO(new-star)`, then `prepare-object` |
 | Restore sources before root preparation | `pnpm prepare:checkout` |
 | Build the site and assemble declared runtime files | `pnpm build` |
 

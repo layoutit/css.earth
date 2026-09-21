@@ -1,0 +1,36 @@
+{
+  "id": "vizier-iii-202-kharitonov-989",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Kharitonov, Tereshchenko & Knyazeva (1988) spectrophotometry, record 989: Alderamin",
+  "identifiers": [
+    {
+      "type": "VizieR III/202 record",
+      "value": "989"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/202",
+      "label": "VizieR III/202"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+      "checkedOn": "2026-09-21",
+      "locator": "catalog.dat line 989: bytes 80-695, 88 fluxes (I7) from 322.5 to 757.5 nm in 5 nm steps, 10^-5 erg cm^-2 s^-1 cm^-1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars, Alma-Ata; VizieR III/202 (CDS)",
+      "scope": "citation",
+      "evidence": "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}
