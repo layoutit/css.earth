@@ -81,7 +81,7 @@
           "kind": "scale",
           "title": "Brightness temperature",
           "labels": [
-            "50",
+            "≤ 50",
             "300",
             "550"
           ],
@@ -114,7 +114,7 @@
               ]
             ],
             "labels": [
-              "50",
+              "≤ 50",
               "300",
               "550"
             ]
@@ -122,7 +122,7 @@
           "meta": "K",
           "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
         },
-        "notes": "About 520 K where the star is overhead, near zero on the night side: no sign of an atmosphere carrying heat around. The map is centred on the star-facing point because the hot spot's offset is not measured; north-south detail is not measured either."
+        "notes": "A bare rock with no atmosphere to carry heat, fitted to the light curve: 497 ± 12 K where the star is overhead, cooling toward the terminator and cold at night. It fits the ten visits better than a free smooth map. The data measure the day-to-night pattern; the shape across the disc comes from the rock model."
       }
     ]
   },

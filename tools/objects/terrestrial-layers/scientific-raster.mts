@@ -22,7 +22,7 @@ import { loadObjUvFits } from './obj-uv-fits.mts';
 import { loadFitsImageMap } from './fits-image-map.mts';
 import { loadNpyDictionaryMap } from './npy-dictionary-map.mts';
 import { loadNpyLonLatGrid } from './npy-lonlat-grid.mts';
-import { loadEclipseMapFit } from './eclipse-map-fit.mts';
+import { loadBareRockFit, loadEclipseMapFit } from './eclipse-map-fit.mts';
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
 export function colorForValue(value: number, recipe: SciencePalette) {
@@ -149,6 +149,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
   if (lens.format === 'npy-dictionary-map') return loadNpyDictionaryMap(root, lens);
   if (lens.format === 'npy-lonlat-grid') return loadNpyLonLatGrid(root, value);
   if (lens.format === 'eclipse-map-fit') return loadEclipseMapFit(root, value);
+  if (lens.format === 'bare-rock-fit') return loadBareRockFit(root, value);
   if (lens.format === 'isis3') {
     const grid = parseScienceGrid(lens.grid);
     const {data, origin, resolution} = await loadIsis3Raster(resolve(root, lens.path), grid);

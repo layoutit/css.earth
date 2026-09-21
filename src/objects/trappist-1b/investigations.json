@@ -15,13 +15,12 @@
     },
     {
       "id": "jwst-miri-15um-map",
-      "subject": "Temperature map at 15 um from ten JWST MIRI visits",
+      "subject": "Temperature at 15 um from ten JWST MIRI visits",
       "status": "included",
-      "finding": "The lens. Ten MIRI/F1500W visits (program 3077's phase curve, 1177 observations 7-11, 2304 observations 1-4) reduced from raw on Bell's settings with a fractional-pixel aperture, fitted jointly with his model, and b's emission mapped with the repository's eigenmap fit. The joint fit gives a dayside of 859 ppm against Bell's 797 +/- 77. The hot-spot offset is not measured: free it goes to 28 deg west, but a centred map is 1 in log-likelihood worse and the offset trades against the Gaussian process for the star, so the map is symmetric about the star-facing point (degree 2, one eigencurve by BIC): 519 K there, 463 K and 243 K day and night hemisphere averages. North-south structure is not measured.",
+      "finding": "The lens. Ten MIRI/F1500W visits (program 3077's phase curve, 1177 observations 7-11, 2304 observations 1-4) reduced from raw on Bell's settings with a fractional-pixel aperture, fitted jointly with his model; the joint fit gives a dayside of 859 ppm against Bell's 797 +/- 77. On b's emission, a bare rock (T cos(z)^(1/4), nothing at night; Cowan & Agol 2011, eq. 3) fits better than the free smooth map this lens used to be: chi-squared 7002.2 against 7016.0 over 6737 samples with one parameter fewer, BIC 7099 against 7122. 497 K under the star, 485 to 510 K at one standard deviation. The smooth map spread heat onto the night side and poles, which the data do not measure. The hot-spot offset is not measured (free, 28 deg west, but only 1 in log-likelihood better than centred), so the rock is centred; north-south structure is the model's.",
       "evidence": [
         "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077",
-        "https://zenodo.org/records/17710453",
-        "https://github.com/layoutit/css.earth/blob/cd06eda64580b25d4c60e7bd6cd5cd1b07732976/tests/objects/unit/trappist-1b/lens-fits.test.mts"
+        "https://zenodo.org/records/17710453"
       ],
       "checked": [
         {

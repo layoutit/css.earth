@@ -30,7 +30,7 @@
         "kind": "terrestrial-scientific",
         "id": "temperature",
         "label": "MIRI 15 µm",
-        "format": "eclipse-map-fit",
+        "format": "bare-rock-fit",
         "path": "science/jwst-trappist-1/b-emission-15um.csv",
         "consumer": "trappist-1b-miri-map",
         "sampling": "bilinear",
@@ -59,17 +59,6 @@
           ]
         },
         "fit": {
-          "degrees": [
-            1,
-            2
-          ],
-          "eigencurves": [
-            1,
-            2,
-            3,
-            4
-          ],
-          "positive": true,
           "transitExclusionPhase": 0.02,
           "gridHeight": 45,
           "systematics": [
@@ -110,8 +99,7 @@
               "column": "visit9"
             }
           ],
-          "transitFromLightCurve": false,
-          "longitudeSymmetric": true
+          "transitFromLightCurve": false
         },
         "band": {
           "encoding": "svo-filter",
@@ -131,12 +119,12 @@
           "#f0f921"
         ],
         "labels": [
-          "50",
+          "≤ 50",
           "300",
           "550"
         ],
-        "description": "Brightness temperature at 15 µm, fitted in this project to ten JWST MIRI visits it reduced from raw exposures. Only the day-to-night pattern is measured.",
-        "title": "JWST MIRI · our map from raw data",
+        "description": "Temperature of a bare rock, with no atmosphere to carry heat, fitted in this project to ten JWST MIRI 15 µm visits it reduced from raw exposures: about 500 K under the star, falling to nothing at night. The data measure the day-to-night pattern; the rock model gives the shape.",
+        "title": "JWST MIRI · bare rock fitted to our data",
         "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
       }
     }
