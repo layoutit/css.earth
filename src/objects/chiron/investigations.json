@@ -1,0 +1,228 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "chiron",
+  "entries": [
+    {
+      "id": "selected-shape",
+      "subject": "Braga-Ribas et al. (2023), A&A 676, A72",
+      "status": "included",
+      "finding": "The 2019 September 8 multi-chord occultation gives an apparent limb ellipse; the paper's three-dimensional figure has semiaxes 126 +/- 22, 109 +/- 19 and 68 +/- 13 km and volume-equivalent radius 98 +/- 17 km. The package adopts those semiaxes unchanged. Only the apparent ellipse is measured: the third axis follows from a Jacobi fluid-equilibrium assumption at the 5.917813 h period, the 0.16 +/- 0.03 mag intrinsic light-curve amplitude of Groussin et al. (2004), and a body pole assumed equal to the Ortiz et al. (2015) ring pole. The derived density 1119 kg/m3 and mass 4.8e18 kg are consequences of that assumption and are not carried.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202346749",
+        "https://arxiv.org/abs/2308.10042"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "4525c1bbaeef3c27692602376c546ce7770e7f3b"
+        }
+      ]
+    },
+    {
+      "id": "scale-reference",
+      "subject": "Lellouch et al. (2017), A&A 608, A45",
+      "status": "included",
+      "finding": "The occultation fit holds the area-equivalent radius fixed at 105 (+6/-7) km, which is this paper's radiometric result from ALMA 1.29 mm plus mid- and far-infrared data under a spherical NEATM (diameter 210 (+11/-14) km, geometric albedo 0.172). The scale of the adopted shape is therefore radiometric, not occultation-measured. The paper also reports an elliptical NEATM using the Ortiz pole, axes 114 x 98 x 62 km, and finds a ring-corrected model does not reconcile the diameters, calling the ring case doubtful.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201731676",
+        "https://arxiv.org/abs/1709.06747"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "4525c1bbaeef3c27692602376c546ce7770e7f3b"
+        }
+      ]
+    },
+    {
+      "id": "rotation-period",
+      "subject": "Marcialis and Buratti (1993), Icarus 104, 234",
+      "status": "included",
+      "finding": "Synodic rotation period 5.917813 +/- 0.000007 h, the value used by the adopted shape paper. The light-curve amplitude is not stable: it falls when Chiron is bright, which Luu and Jewitt (1990) attributed to dilution by an optically thin coma. The period is measured; the intrinsic amplitude that every axial ratio descends from is not.",
+      "evidence": [
+        "https://doi.org/10.1006/icar.1993.1098"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "4525c1bbaeef3c27692602376c546ce7770e7f3b"
+        }
+      ]
+    },
+    {
+      "id": "whole-disc-colour",
+      "subject": "MBOSS-2, Hainaut, Boehnhardt and Protopapa (2012), A&A 546, A115",
+      "status": "included",
+      "finding": "Weighted means over 34 epochs: spectral gradient 0.114 +/- 0.996 percent per 100 nm, B-V 0.700 +/- 0.020, V-R 0.361 +/- 0.017, R-I 0.325 +/- 0.023. The gradient is measured against the solar spectrum, so Chiron is solar-coloured within its errors. The shared neutral material is used rather than a derived display colour: a colour from these indices would be indistinguishable from neutral, and the indices mix nucleus and coma across epochs of varying activity. The B-V agrees with the independent PDS value 0.704 +/- 0.024.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201219566",
+        "https://www.eso.org/~ohainaut/MBOSS/MBOSS2.dat"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "4525c1bbaeef3c27692602376c546ce7770e7f3b"
+        }
+      ]
+    },
+    {
+      "id": "thermophysical-diameter",
+      "subject": "Fornasier et al. (2013), A&A 555, A15",
+      "status": "excluded",
+      "finding": "The widely quoted 218 +/- 20 km is this paper's thermophysical result, but its own authors bracket Chiron at 196 to 225 km with a geometric albedo between about 5 and 17 percent, because every value is conditional on an adopted nucleus magnitude HV = 5.92 +/- 0.20 for an active body. It is not used as the size; the adopted volume-equivalent diameter 196 +/- 34 km sits inside that bracket.",
+      "revisitWhen": "A size determination independent of an adopted absolute magnitude, such as a measured limb fit, supersedes both.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201321329",
+        "https://arxiv.org/abs/1305.0449"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "4525c1bbaeef3c27692602376c546ce7770e7f3b"
+        }
+      ]
+    },
+    {
+      "id": "sbdb-diameter",
+      "subject": "JPL SBDB effective diameter 166 km",
+      "status": "excluded",
+      "finding": "SBDB serves diameter 166 km with no stated uncertainty, referenced to a 1990s occultation-chord list (\"Dunham occultation list: Duham 1998\", note \"Yeomans E-mail 2001-Apr-04\"). It is superseded by the radiometric and occultation work above and is not used. SBDB is retained for identity, alternate designations, discovery circumstances and orbit only.",
+      "evidence": [
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2060"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "4525c1bbaeef3c27692602376c546ce7770e7f3b"
+        }
+      ],
+      "revisitWhen": "SBDB replaces the 1990s occultation-list entry with a referenced diameter carrying a stated uncertainty."
+    },
+    {
+      "id": "absolute-magnitude",
+      "subject": "SBDB absolute magnitude H = 5.54",
+      "status": "excluded",
+      "finding": "SBDB's H has no stated uncertainty and is fitted to total magnitudes that include coma. Chiron's total brightness has moved by of order 1.5 mag over decades and it had not returned to its pre-2021 level by 2023. Fornasier et al. (2013) state the choice of HV is delicate for an active body and separate a nucleus HV = 5.92 +/- 0.20 from the historical minimum HV = 7.26. No absolute magnitude is presented as a body fact.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201321329",
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2060"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "4525c1bbaeef3c27692602376c546ce7770e7f3b"
+        }
+      ],
+      "revisitWhen": "A published nucleus absolute magnitude is tied to a stated epoch and a coma correction that covers the post-2021 brightening."
+    },
+    {
+      "id": "spin-pole",
+      "subject": "Body spin pole",
+      "status": "unresolved",
+      "finding": "There is no spin-pole solution for Chiron from light-curve inversion or shape modelling. What exists is a ring or disk pole, consistent across three events at roughly ecliptic longitude 150 deg, latitude +20 deg: Ortiz et al. (2015) preferred solution 144 +/- 10, 24 +/- 10; Ortiz et al. (2023) 151 +/- 8, 18 +/- 11; Pereira et al. (2025) 151 +/- 4, 20 +/- 6. The shape paper assumes the body shares that pole. This display does not adopt that assumption and uses the illustrative ICRF north pole with an arbitrary meridian and phase. The rejected Ortiz 2015 branch at 352 deg, 37 deg is not carried forward.",
+      "revisitWhen": "A published spin-pole solution from light-curve inversion, a measured limb fit or a shape model supplies a body pole independent of the ring plane.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201424461",
+        "https://doi.org/10.1051/0004-6361/202347025",
+        "https://doi.org/10.3847/2041-8213/ae0b6d"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "4525c1bbaeef3c27692602376c546ce7770e7f3b"
+        }
+      ]
+    },
+    {
+      "id": "ring-or-shell-dispute",
+      "subject": "Confined material around Chiron",
+      "status": "excluded",
+      "finding": "No rings or shells are drawn. Ruprecht et al. (2015) read the 2011 event as symmetric jets; Ortiz et al. (2015) reinterpreted the historical events as a ring at 324 +/- 10 km; Sickafoose et al. (2020) argued for planar rings over a shell from sharp dips at 280 to 360 km; Braga-Ribas et al. (2023) found no unambiguous ring in their own 2018 data and ruled out a permanent Chariklo-like ring; Sickafoose et al. (2023) concluded the material evolved between 2011, 2018 and 2022; Ortiz et al. (2023) found a broad 580 km disk; Pereira et al. (2025) fit three confined coplanar rings at 273, 325 and 438 km from the 2023 September 10 event and report the equatorial disk model fits where a multi-shell model does not. The discoverers themselves describe the structures as not permanent. A Crossref check of update-to and updated-by on every DOI above returned null in both directions, so nothing here is retracted; this is a live disagreement. A static scene cannot honestly show a structure its own sources date to single epochs.",
+      "revisitWhen": "A published result establishes material that is stable across epochs, with a geometry the shared scene can carry and date honestly.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2015.01.015",
+        "https://doi.org/10.1051/0004-6361/201424461",
+        "https://doi.org/10.1093/mnras/stz3079",
+        "https://doi.org/10.3847/PSJ/ad0632",
+        "https://doi.org/10.1051/0004-6361/202347025",
+        "https://doi.org/10.3847/2041-8213/ae0b6d"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "4525c1bbaeef3c27692602376c546ce7770e7f3b"
+        }
+      ]
+    },
+    {
+      "id": "pending-limb-fit",
+      "subject": "Lucky Star limb fit from the 2023 September 10 occultation",
+      "status": "unresolved",
+      "finding": "Pereira et al. (2025) adopt the Braga-Ribas radius and mass and state that the limb fit from their own six body chords will be presented in a separate study. That would be the first shape of Chiron measured rather than assumed, and it is the single most valuable pending input for this package.",
+      "revisitWhen": "The separate limb-fit paper appears, or the Lucky Star collaboration releases the chord solution.",
+      "evidence": [
+        "https://doi.org/10.3847/2041-8213/ae0b6d",
+        "https://arxiv.org/abs/2510.12388",
+        "https://lesia.obspm.fr/lucky-star/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "4525c1bbaeef3c27692602376c546ce7770e7f3b"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "No resolved image of Chiron exists and none is possible from Earth or from JWST: at its current distance it subtends about 0.015 arcsec. The grid marks unmapped terrain. JWST NIRSpec has measured surface and coma composition (Pinilla-Alonso et al. 2024 detect CO2, CO, C2H6, C3H8, C2H2 and amorphous water ice with non-LTE CH4 fluorescence at 61 K; a 2024 January IFU programme measures CH4 and CO2 production rates), which could support composition facts but cannot supply a surface map.",
+      "revisitWhen": "A dataset supplies per-pixel surface geometry, which for an unresolvable body means a spacecraft encounter.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202450124",
+        "https://arxiv.org/abs/2407.07761",
+        "https://www.stsci.edu/jwst-program-info/program/?program=1273"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "4525c1bbaeef3c27692602376c546ce7770e7f3b"
+        }
+      ]
+    },
+    {
+      "id": "albedo-refinement",
+      "subject": "Herschel and Spitzer archives",
+      "status": "deferred",
+      "finding": "The geometric albedo is the loosest physical parameter, between about 5 and 17 percent depending on the adopted absolute magnitude. The Herschel PACS and SPIRE fluxes behind Fornasier et al. (2013) and the Spitzer MIPS data are archived and could be re-derived against a measured shape and pole, which would tighten it. No albedo is presented as a body fact today.",
+      "revisitWhen": "A measured limb fit or spin pole is published, making a re-derivation meaningful.",
+      "evidence": [
+        "https://archives.esac.esa.int/hsa/whsa/",
+        "https://sha.ipac.caltech.edu",
+        "https://doi.org/10.1051/0004-6361/201321329"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "4525c1bbaeef3c27692602376c546ce7770e7f3b"
+        }
+      ]
+    },
+    {
+      "id": "occultation-archive",
+      "subject": "PDS Small Bodies Node occultation bundle",
+      "status": "deferred",
+      "finding": "The Small Bodies Occultations bundle V4.0 (Herald et al. 2024) holds reported chord timings and derived occultation axes complete through June 2023. It would supply archival chords and cross-checks but not a modern limb fit on its own.",
+      "revisitWhen": "A limb fit needs archival chords for a cross-check, or the bundle adds the 2023 event solutions.",
+      "evidence": [
+        "https://sbn.psi.edu/pds/resource/occ.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "4525c1bbaeef3c27692602376c546ce7770e7f3b"
+        }
+      ]
+    }
+  ]
+}
