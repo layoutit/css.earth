@@ -1,0 +1,186 @@
+{
+  "schema": "csshungaria-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "hungaria-shape",
+      "path": "shape/model-1151.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/4194/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Hungaria model 1151; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore original uncalibrated counted triangle table through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "uncalibrated source coordinates",
+        "metersPerUnit": 7200.76859036996,
+        "referenceRadiusMeters": 4467
+      },
+      "coverage": "Published convex light-curve model 1151. NEOWISE thermal diameter, applied approximately to the mesh volume: 8.9 ± 0.7 km. The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+      "expectedBytes": 82708,
+      "expectedSha256": "431a00b9e363abeb8f02473cf904de1d5a2957b71a29da8d65072bf8ed721784",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-4194",
+            "role": "material",
+            "evidence": "src/objects/hungaria/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/objects/hungaria/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/4194/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Hungaria model 1151; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 31363,
+      "expectedSha256": "feae66668f1636bb22bbc563b14476f6c1fef4d269cc05304530df507834151e",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "inputs": [
+          "hungaria-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 5794,
+      "expectedSha256": "97123ac5d4a9c5eab12102a0939fbd9d0566f33684ec76a9855896a268d0c66b",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 549,
+      "expectedSha256": "f9cc58d352687b887c748ae538211ce0cefef8c1e5873f2bdfc198122f4e590f"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 445,
+      "expectedSha256": "13257be5015758cc6a3ed7221059d5d6f718836ffe5fe7855a24488811051689"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 646,
+      "expectedSha256": "a9b86aa196c89872f4ae81e7359561ff7cba2cdda97844521cf4f2e591c1af88"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2918,
+      "expectedSha256": "12f432b9fbb139f4c0b0140af9fadacfb310cd0d8cd90ca8ab446afd06f5b104"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4960,
+      "expectedSha256": "44f9e737f802a4b8c98925eefcc59114fd28e19864b67d0f4d60a76bc87d5b40"
+    },
+    {
+      "path": "reference/1151-IAUspin.txt",
+      "expectedBytes": 34,
+      "expectedSha256": "f40a931528e2f076d85fef9e3fcd658cc03c77ca255a97d6c8d566bb9b0edd20"
+    },
+    {
+      "path": "reference/calibration.json",
+      "expectedBytes": 1964,
+      "expectedSha256": "63428f7ecc2226e35a6312b6bcd6fbc190aee042e441a2dcd7b8983b1d145287"
+    },
+    {
+      "path": "reference/damit-model.json",
+      "expectedBytes": 971,
+      "expectedSha256": "133aad33608245f5bb452ab6a7aa619e577ba2a4898c3e882a4921b708191d4d"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "expectedBytes": 7354,
+      "expectedSha256": "7a888be6e29312f9f499e8c327a0b953f01c14d2eb5ac4bbe556033601ad78d1"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "expectedBytes": 1393,
+      "expectedSha256": "5b4a1409411c1ae3f7f80a64b8389bfebe01fa762c88b55f0cc15fd08951dd2a"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "expectedBytes": 6644,
+      "expectedSha256": "e1131bae5920d0009b81603f7b87d009a249237c8c668969e77d0f2e349f640a"
+    },
+    {
+      "path": "reference/model-properties.json",
+      "expectedBytes": 3826,
+      "expectedSha256": "e51560839d87641275a31d4ade78bf5ed727f4944de731f2493b8da73b0a8319"
+    },
+    {
+      "path": "reference/neowise-query.txt",
+      "expectedBytes": 142,
+      "expectedSha256": "5d82d75442921280dac65f0bab5325199316522f2526491b3564832b0cc44ca8"
+    },
+    {
+      "path": "reference/neowise-selected.csv",
+      "expectedBytes": 421,
+      "expectedSha256": "b7196fb1cfd66d073c5e18286ab2a4bcb17fb4075c42201b33cf4ded52b09208"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4780,
+      "expectedSha256": "1b745c0a8ebe0d74eee88e54facfa3b2ea9987ce27fec271ac27565d5c25bd1c"
+    }
+  ]
+}

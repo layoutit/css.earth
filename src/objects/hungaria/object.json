@@ -1,0 +1,130 @@
+{
+  "id": "hungaria",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Hungaria",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 4.467
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        115680922383.2823,
+        280100849758.2932,
+        1243311839.1499238
+      ],
+      "presentationToReference": [
+        0.4098166127186998,
+        1.3877787807814457e-17,
+        0.9121679362594208,
+        0.8368977191126836,
+        0.3977771559319137,
+        -0.37599939090735995,
+        0.3628395674175556,
+        -0.9174820620691817,
+        -0.163015686660895
+      ],
+      "orbitUpReference": [
+        -1.3877787807814457e-17,
+        -0.3977771559319137,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 19.421739130434784,
+      "bodyRadiusM": 4467
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hungaria-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "555dab29738a5dea8f9c6e3fe99abcc6541e68f4cf681a66a38363c0d4d0756f"
+      }
+    },
+    "catalog": {
+      "name": "Hungaria",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.9441039346957218,
+      "description": "Inner-belt asteroid that names the Hungaria group.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "89c2ae32a878be0441387948529113dbdd00a6580146e52e4a6ce6c4c8ff6470"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/167",
+  "modelId": 167,
+  "modelVersion": "2011-03-28",
+  "diameterKm": 38,
+  "diameterInterpretation": "Occultation-calibrated volume-equivalent diameter: 38 ± 5 km.",
+  "calibration": {
+    "method": "occultation-scaled-mesh",
+    "diameterKm": 38,
+    "uncertaintyKm": 5,
+    "quantity": "occultation-constrained volume-equivalent diameter",
+    "reference": "DAMIT model 167 calibrated size, Ďurech et al. (2011), Icarus 214, 652",
+    "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/167",
+    "notes": "DAMIT marks model 167 as size-calibrated (D = 38 km, σ = 5 km) and archives the 2005-12-13 occultation fit to this mesh. DAMIT labels the model 'preliminary'. NEOWISE lists 39.025 ± 0.462 km (Masiero et al. 2014), consistent within the quoted error.",
+    "scaleKmPerSourceUnit": 1.0000000140344165,
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/167",
+    "sourceLabel": "DAMIT model 167 calibrated size, Ďurech et al. (2011), Icarus 214, 652",
+    "diameterSemantics": "occultation-constrained volume-equivalent diameter",
+    "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. DAMIT marks model 167 as size-calibrated (D = 38 km, σ = 5 km) and archives the 2005-12-13 occultation fit to this mesh. DAMIT labels the model 'preliminary'. NEOWISE lists 39.025 ± 0.462 km (Masiero et al. 2014), consistent within the quoted error.",
+    "visibleDescription": "Occultation-calibrated volume-equivalent diameter: 38 ± 5 km."
+  },
+  "periodHours": 14.20569,
+  "poleEclipticJ2000Degrees": [
+    30,
+    -64
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/448/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 1000.0000140344165,
+    "firstVertexKm": [
+      -0.7323730102784278,
+      4.154332058303626,
+      14.73655720681898
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      46.11720764722809,
+      52.24179673318312,
+      28.884724405380247
+    ],
+    "volumeCubicKm": 28730.912014629863,
+    "volumeEquivalentRadiusKm": 19,
+    "radialRangeKm": [
+      14.113705915089866,
+      27.954446362816974
+    ]
+  },
+  "elevation": [
+    -5,
+    10
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 380,
+    "estimatedErrorMeters": 171.04019165039062,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 28679444947212.17
+    }
+  }
+}

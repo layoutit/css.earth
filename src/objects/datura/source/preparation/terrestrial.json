@@ -1,0 +1,117 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "datura",
+  "displayName": "Datura",
+  "publicBase": "/scenes/datura/",
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/model-266.txt",
+        "format": "pds-plate-model",
+        "grid": {
+          "metersPerUnit": 6611.585103845111,
+          "expectedVertices": 1022,
+          "expectedFaces": 2040,
+          "indexBase": 1
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -4.1015
+        },
+        "minimum": -2,
+        "maximum": 2.5,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 4101.5,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 82.03
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceQuality": 90,
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 4.1015,
+    "mapUrl": "/scenes/datura/datura-shape-surface@2x.webp",
+    "polesUrl": "/scenes/datura/datura-shape-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/model-266.txt",
+      "format": "pds-plate-model",
+      "grid": {
+        "metersPerUnit": 6611.585103845111,
+        "expectedVertices": 1022,
+        "expectedFaces": 2040,
+        "indexBase": 1
+      },
+      "latitudeSegments": 90,
+      "longitudeSegments": 180,
+      "faceBudget": 800,
+      "texelsPerFace": 16384,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 82.03,
+        "regularize": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
+  },
+  "presentation": {
+    "defaultLens": "shape"
+  }
+}

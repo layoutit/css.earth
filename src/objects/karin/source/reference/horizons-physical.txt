@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27832%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 832 Karin (A916 SE)           2026-Sep-21 14:41:28
+Rec #:     832 (+COV) Soln.date: 2026-Jun-05_04:07:03   # obs: 6634 (1902-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458194.5 ! 2018-Mar-17.00 (TDB)         Residual RMS= .24051
+   EC= .08055314844612613  QR= 2.633171291803629   TP= 2458386.1390307848
+   OM= 253.9216694192517   W=  122.324656233893    IN= 1.005486926385656
+   A= 2.863864602237252    MA= 321.0274056322655   ADIST= 3.094557912670876
+   PER= 4.8466             N= .203364598           ANGMOM= .029016436
+   DAN= 2.97335            DDN= 2.72779            L= 16.2503125
+   B= .849656              MOID= 1.63212001        TP= 2018-Sep-24.6390307848
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 7.906              ROTPER= 18.348
+   H= 11.2                 G= .150                 B-V= .830
+                           ALBEDO= .221            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#108, OCC=0
+2: source=ORB
+*******************************************************************************

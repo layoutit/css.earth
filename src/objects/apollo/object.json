@@ -1,0 +1,130 @@
+{
+  "id": "apollo",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Apollo",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 0.84
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -274724146629.61493,
+        1528191092.2449253,
+        20982882243.073936
+      ],
+      "presentationToReference": [
+        -0.999370999695224,
+        -2.7755575615628914e-17,
+        0.035462726462700524,
+        0.03253641540159384,
+        0.39777715593191365,
+        0.9169049655725139,
+        0.014106262473924408,
+        -0.9174820620691819,
+        0.3975269539795996
+      ],
+      "orbitUpReference": [
+        2.7755575615628914e-17,
+        -0.39777715593191365,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 3.652173913043478,
+      "bodyRadiusM": 840
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/apollo-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ad40da1292223a981ca44ff5478a08d10ee02b04d6b1a90f5c3351ab7410a01e"
+      }
+    },
+    "catalog": {
+      "name": "Apollo",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.4706013076383802,
+      "description": "Near-Earth asteroid that names the Apollo group.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "28bc5dd56239cf0724ecbcc74f0290ddf1eec51f62b726d87b7e6f4484ade63c"
+  }
+}
