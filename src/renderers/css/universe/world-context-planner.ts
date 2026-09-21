@@ -3,7 +3,7 @@ import type { PreparedWorldContext, PreparedWorldContextGeometry } from './prepa
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation, rotateWorldPosition } from '../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
-import { contextOrbitOpacity, selectedOrbitDepthFade } from './context-presentation-policy.js';
+import { contextOrbitOpacity, focusOwnOrbitOpacity, selectedOrbitDepthFade } from './context-presentation-policy.js';
 import { rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
 import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter, orbitProjectionCapacity } from '../solar-system/prepared-ring-projection.js';
 import type { OrbitSegment } from '../solar-system/types.js';
@@ -231,7 +231,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
       const focusInView = selectedEye[2] < -selected.radiusM &&
         Math.abs(selectedX) < width / 2 + focusDiameter / 2 &&
         Math.abs(selectedY) < height / 2 + focusDiameter / 2;
-      const orbitOpacity = contextOrbitOpacity(plan.camera.presentation.orbitLineFade, focusInView ? focusDiameter / height : 0);
+      const focusShare = focusInView ? focusDiameter / height : 0;
+      const orbitOpacity = contextOrbitOpacity(plan.camera.presentation.orbitLineFade, focusShare);
+      const ownOrbitOpacity = focusOwnOrbitOpacity(plan.camera.presentation.orbitLineFade, focusShare);
       const near = opacity > 0 && orbitOpacity > 0
         ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...frame.eye(entry.body)))) * 0.01) : 1;
       // The coarsest prepared chord bank within 0.1 px of the full path, bounded at
@@ -264,6 +266,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
       for (const entry of publishingBodies) {
         const { body } = entry;
         const isSelected = !overview && body.id === selectedId;
+        const bodyOrbitOpacity = isSelected ? ownOrbitOpacity : orbitOpacity;
         const systemOpacity = systemFade.of(entry.index);
         // Category visibility never removes the object the user is inspecting.
         if (entry.bodyHidden && !isSelected) {
@@ -313,7 +316,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         const bounds = fullOrbit ? entry.orbit?.lod?.bounds : entry.orbit?.bounds;
         const boundsEye = bounds ? toEye(bounds.centerM) : null;
         let segments: readonly OrbitSegment[] = [], measuredExtent: number | null = null;
-        if (entry.orbit && systemOpacity > 0 && orbitOpacity > 0 &&
+        if (entry.orbit && systemOpacity > 0 && bodyOrbitOpacity > 0 &&
             (!bounds || orbitBoundsMayContribute(boundsEye!, bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS))) {
           const projector = createPreparedRingProjector({ toEye, project, hidden: occlusion.hidden,
             mayOcclude: occlusion.mayOcclude,
@@ -348,7 +351,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         const flightDestination = navigationInFlight && body.id === emphasizedId;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : isSelected ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (isSelected || flightDestination ? 1 : proxyOpacity));
-        const orbitVisibility = skipped ? 0 : appearance.opacity * orbitOpacity * systemOpacity;
+        const orbitVisibility = skipped ? 0 : appearance.opacity * bodyOrbitOpacity * systemOpacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         // A flight destination keeps its circle until the preview hands off to detail.
         const circle = (flightDestination ? systemOpacity * bodyLod.proxyOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN) :
