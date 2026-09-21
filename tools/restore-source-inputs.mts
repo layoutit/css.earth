@@ -1,18 +1,89 @@
 #!/usr/bin/env node
 import { hasErrorCode } from './source-values.mts';
-import { lstat, mkdtemp, readFile, rm } from 'node:fs/promises';
+import { lstat, mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 
-import { resolve } from "node:path";
+import { basename, resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
 import { sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { publishSourceBytes } from '../src/platform/source-acquisition.mts';
+import { sourceArray, sourceDigest, sourceObject, sourcePath, sourceText } from '../src/platform/source-catalog.mts';
 import { setupObjectIds } from "./runtime-assets.mts";
+import { fetchWithRetry, RUNTIME_ASSET_ORIGIN, sourceCacheUrl } from './source-mirror.mts';
 
 const projectRoot = resolve(import.meta.dirname, "..");
-const ids = setupObjectIds(process.argv.slice(2));
+const argumentsList = process.argv.slice(2);
+const repositoryVolumeMode = argumentsList.length === 1 && argumentsList[0] === '--repository-volumes';
+
+async function repositoryVolumeObjectIds(): Promise<string[]> {
+  const ids = [];
+  for (const entry of await readdir(resolve(projectRoot, 'src/objects'), { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const sourceRoot = resolve(projectRoot, 'src/objects', entry.name, 'source');
+    const manifest = await readFile(resolve(sourceRoot, 'manifest.json')).catch(error => {
+      if (hasErrorCode(error, 'ENOENT')) return undefined;
+      throw error;
+    });
+    const presentation = await readFile(resolve(sourceRoot, 'presentation.json')).catch(error => {
+      if (hasErrorCode(error, 'ENOENT')) return undefined;
+      throw error;
+    });
+    if (!manifest || !presentation) continue;
+    if (sourceObject(JSON.parse(manifest.toString('utf8'))).schema === 'cssearth-volume-source-manifest@1' &&
+        sourceObject(JSON.parse(presentation.toString('utf8'))).schema === 'cssearth-volume-presentation-source@1') ids.push(entry.name);
+  }
+  return ids.sort((left, right) => left.localeCompare(right));
+}
+
+async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Promise<boolean> {
+  const manifestBytes = await readFile(resolve(sourceRoot, 'manifest.json'));
+  const manifest = sourceObject(JSON.parse(manifestBytes.toString('utf8')));
+  if (manifest.schema !== 'cssearth-volume-source-manifest@1') return false;
+  if (manifest.pathBase !== 'repository') throw new TypeError(`Invalid repository volume source manifest: ${id}.`);
+  for (const raw of sourceArray(manifest.inputs, sourceObject)) {
+    const path = sourcePath(raw.path);
+    if (path.startsWith('.local/')) continue;
+    const expectedSha256 = sourceDigest(raw.expectedSha256);
+    const expectedBytes = raw.expectedBytes;
+    if (typeof expectedBytes !== 'number' || !Number.isSafeInteger(expectedBytes) || expectedBytes <= 0) {
+      throw new TypeError(`Invalid repository volume source size: ${id}/${path}.`);
+    }
+    const destination = resolve(projectRoot, path);
+    const existing = await readFile(destination).catch(error => {
+      if (hasErrorCode(error, 'ENOENT')) return undefined;
+      throw error;
+    });
+    if (existing) {
+      if (existing.length !== expectedBytes || sha256(existing) !== expectedSha256) {
+        throw new Error(`Repository volume source drifted: ${id}/${path}.`);
+      }
+      continue;
+    }
+    const origin = sourceText(raw.origin);
+    let lastError: unknown;
+    for (const url of [sourceCacheUrl(RUNTIME_ASSET_ORIGIN, expectedSha256, basename(path)), origin]) {
+      try {
+        const bytes = await fetchWithRetry(fetch, url);
+        await publishSourceBytes({ destination, bytes, planetName: id,
+          entry: { path, expectedBytes, expectedSha256 } });
+        lastError = undefined;
+        break;
+      } catch (error) { lastError = error; }
+    }
+    if (lastError) throw lastError;
+  }
+  return true;
+}
+
+const ids = repositoryVolumeMode ? await repositoryVolumeObjectIds() : setupObjectIds(argumentsList);
 for (const id of ids) {
   const volumeSource = resolve(projectRoot, 'src/objects', id, 'source');
+  if (repositoryVolumeMode) {
+    await restoreRepositoryVolumeInputs(id, volumeSource);
+    console.log(`${id}: repository volume source inputs restored and verified`);
+    continue;
+  }
   const volumeRecipeBytes = await readFile(resolve(volumeSource, 'volume.json')).catch(error => {
     if (hasErrorCode(error, 'ENOENT')) return undefined;
     throw error;
@@ -50,6 +121,10 @@ for (const id of ids) {
       console.log(`${id}: pinned volume source restored and verified`);
       continue;
     }
+  }
+  if (await restoreRepositoryVolumeInputs(id, volumeSource)) {
+    console.log(`${id}: repository volume source inputs restored and verified`);
+    continue;
   }
   if (id === "earth") {
     const scienceDirectory = resolve(projectRoot, "src/objects/earth/source/science");

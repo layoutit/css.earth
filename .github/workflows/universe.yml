@@ -585,6 +585,8 @@ jobs:
             tsbuildinfo-nebula-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
       - name: Build shared TypeScript dependencies
         run: pnpm -r --filter "./packages/**" build
+      - name: Restore repository volume inputs used by provenance closure
+        run: node tools/restore-source-inputs.mts --repository-volumes
       - name: Test the object registry and adapter packages
         # 802 tests, ~6 s local; never ran in CI before (output/TEST_AUDIT.md section 1.5). Needs only the build
         # above, so it runs here rather than adding another checkout+install in Contract lint.

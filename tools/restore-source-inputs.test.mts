@@ -27,6 +27,7 @@ async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   await copyFile(resolve(project, 'tools/runtime-assets.mts'), resolve(root, 'tools/runtime-assets.mts'));
   // `runtime-assets.mts` imports `RUNTIME_ASSET_ORIGIN` from here; without it the fixture root cannot resolve.
   await copyFile(resolve(project, 'tools/asset-origin.mts'), resolve(root, 'tools/asset-origin.mts'));
+  await copyFile(resolve(project, 'tools/source-mirror.mts'), resolve(root, 'tools/source-mirror.mts'));
   await copyFile(resolve(project, 'tools/source-values.mts'), resolve(root, 'tools/source-values.mts'));
   await copyFile(resolve(project, 'tools/objects/dist/operations.js'), resolve(root, 'tools/objects/dist/operations.js'));
   await symlink(resolve(project, 'src/platform'), resolve(root, 'src/platform'));
@@ -120,6 +121,31 @@ test('checkout restores a missing compressed observation without refreshing exis
   await json(manifestPath, manifest);
   await assert.rejects(run(root, ['tools/restore-source-inputs.mts', '--object=titan']),
     /No authored acquisition restores: presentation\/context\.png/);
+});
+
+test('repository volume package restores a pinned input from the content-addressed source mirror', async t => {
+  const root = await fixture(t, 'nebula'), bytes = Buffer.from('pinned repository volume');
+  const expectedSha256 = createHash('sha256').update(bytes).digest('hex');
+  const requests: (string | undefined)[] = [];
+  const server = createServer((req, res) => { requests.push(req.url); res.end(bytes); });
+  await new Promise<void>(accept => server.listen(0, '127.0.0.1', accept));
+  t.after(() => new Promise<void>(accept => server.close(() => accept())));
+  const address = server.address();
+  assert.ok(address && typeof address !== 'string');
+  const origin = `http://127.0.0.1:${address.port}`;
+  await writeFile(resolve(root, 'tools/asset-origin.mts'), `export const RUNTIME_ASSET_ORIGIN = ${JSON.stringify(origin)};\n`);
+  await json(resolve(root, 'src/objects/nebula/source/manifest.json'), {
+    schema: 'cssearth-volume-source-manifest@1', pathBase: 'repository', inputs: [{
+      id: 'volume', path: 'src/objects/nebula/source.bin', origin: `${origin}/publisher.bin`,
+      expectedBytes: bytes.length, expectedSha256,
+    }], documents: [], generatedIntermediates: [],
+  });
+  await json(resolve(root, 'src/objects/nebula/source/presentation.json'), {
+    schema: 'cssearth-volume-presentation-source@1',
+  });
+  await run(root, ['tools/restore-source-inputs.mts', '--repository-volumes']);
+  assert.deepEqual(requests, [`/source-cache/${expectedSha256}/source.bin`]);
+  assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/source.bin')), bytes);
 });
 
 test('Earth restores a missing MUR mosaic before verification and preserves existing files', async t => {
