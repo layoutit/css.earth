@@ -5,7 +5,7 @@ import { mountPreparedCssVolume } from '../volume/prepared-volume-runtime.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import type { PreparedCssVolume, VolumeCameraPublication } from '../volume/types.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
-import { logarithmicFade, mountPreparedWorldContext, parsePreparedWorldContext, preparedVolumeOpacity } from './prepared-world-context.js';
+import { logarithmicFade, mountPreparedWorldContext, parsePreparedWorldContextPlan, preparedVolumeOpacity } from './prepared-world-context.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { PreparedPointAppearance } from '../stars/types.js';
 import { mountWorldContextPointSource } from './world-context-point-source.js';
@@ -72,7 +72,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
     clusters?: Omit<NonNullable<PreparedCatalogBank['clusters']>, 'payload'> };
   loadCatalog?(): Promise<PreparedCatalogBank>;
 }) {
-  const plan = parsePreparedWorldContext(context), payload = validatePreparedCssVolume(volume);
+  const plan = parsePreparedWorldContextPlan(context), payload = validatePreparedCssVolume(volume);
   if (!Number.isSafeInteger(warmVolumeLensDomNodeBudget) || warmVolumeLensDomNodeBudget < 0) {
     throw new TypeError('Warm volume lens DOM node budget must be a non-negative integer.');
   }

@@ -13,11 +13,11 @@ import { parse, object as schemaObject, optional, array, string } from '../../to
 import type { ObjectEntry } from '../object-schema.mts';
 import type { ObjectRuntimeDiagnostics } from '../env.d.ts';
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.ts';
-import type { PreparedWorldContext } from '../../src/renderers/css/universe/prepared-world-context.ts';
+import type { PreparedWorldContextGeometry } from '../../src/renderers/css/universe/prepared-world-context.ts';
 type Resources = ReturnType<ObjectRuntimeDiagnostics['runtime']['resources']>;
 type Residency = { painted: string[]; missing: string[] };
 type ExpectedObject = { frame: PreparedWorldCameraFrame; materialTracks: string[]; assetUrls: Record<string, string>;
-  point: PreparedWorldContext['bodies'][number]; lenses: string[]; defaultLens: string | null };
+  point: PreparedWorldContextGeometry['bodies'][number]; lenses: string[]; defaultLens: string | null };
 type FrameSample = { time: number; id: string | undefined; roots: number; world: WorldCameraPose | undefined;
   pending: number | undefined; residency: Residency | null; materialReady: boolean | undefined; retained: boolean };
 interface AllObjectWorldProbe {
