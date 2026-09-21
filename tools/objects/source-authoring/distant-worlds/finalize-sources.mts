@@ -53,7 +53,9 @@ for (const b of bodies) {
     const navigation=await read('src/objects/annefrank/source/preparation/navigation.json');
     const navigationPath=requireString(requireRecord(navigation.source).path);
     await write(resolve(src,'preparation/navigation.json'),{...navigation,planetId:b.id,source:{path:navigationPath}});
-    manifest.generatedIntermediates=[refreshSourceRecord(records(manifest.generatedIntermediates),{id:'prepared-source-context',path:navigationPath,origin:b.source,credit:b.credit,expectedBytes:context.length,expectedSha256:sha256(context),recipe})];
+    // A first run has no previous record to merge, so name the generator, licence and consumers here; the
+    // source-manifest validator requires all three on a generated intermediate.
+    manifest.generatedIntermediates=[refreshSourceRecord(records(manifest.generatedIntermediates),{id:'prepared-source-context',path:navigationPath,origin:b.source,credit:b.credit,license:'Authored display of scientific model; source attribution retained.',consumers:['navigation'],expectedBytes:context.length,expectedSha256:sha256(context),recipe,generator:recipe.generator})];
     console.log(JSON.stringify({id:b.id,sourceFaces:requireTerrainMesh(radial.grid).indices.length,faces:radial.faces.length,contextBytes:context.length}));
   }
   const declared=new Set([...records(manifest.inputs),...records(manifest.generatedIntermediates)].map(e=>requireString(e.path)));
@@ -64,10 +66,18 @@ for (const b of bodies) {
     const rel=relative(src,path);
     if(rel==='manifest.json'||declared.has(rel))continue;
     const bytes=await readFile(path);
-    documents.push(refreshSourceRecord(previousDocuments,{path:rel,expectedBytes:bytes.length,expectedSha256:sha256(bytes)}));
+    const document=refreshSourceRecord(previousDocuments,{path:rel,expectedBytes:bytes.length,expectedSha256:sha256(bytes)});
+    // The factsheet is cited by the body's content, so the source catalogue requires a binding for it. On a first run
+    // there is no previous record to carry one; every existing package declares the same project-authored binding.
+    if(rel==='content/object.json'&&document.sourceBinding===undefined){
+      document.sourceBinding={kind:'local',reason:'Project-authored factsheet, dataset recipes and legends.'};
+    }
+    documents.push(document);
   }
   await write(resolve(src,'manifest.json'),manifest);
+  // A recipe source carries only its id and path; the authored-object parser rejects any other field, and the
+  // source manifest above already pins each file's bytes, so a hash here would be a second owner of the same fact.
   const descriptor=await read(resolve(pkg,'object.json'));
-  for(const ref of records(requireRecord(requireRecord(descriptor.properties).recipe).sources))ref.sha256=sha256(await readFile(resolve(pkg,requireString(ref.path))));
+  for(const ref of records(requireRecord(requireRecord(descriptor.properties).recipe).sources))delete ref.sha256;
   await write(resolve(pkg,'object.json'),descriptor);
 }

@@ -1,0 +1,193 @@
+{
+  "schema": "csschiron-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/objects/chiron/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 63139,
+      "expectedSha256": "8eff35068959c66f31d5bf148a9274e1d6a5ab946fad2626307773eaf981c884",
+      "consumers": [
+        "shape"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1051-0004-6361-202346749",
+            "role": "material",
+            "evidence": "src/objects/chiron/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1051/0004-6361/202346749",
+      "credit": "Braga-Ribas et al. (2023), Astronomy & Astrophysics 676, A72; 2019 September 8 multi-chord stellar occultation",
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://doi.org/10.1051/0004-6361/202346749"
+      ],
+      "coverage": "Published triaxial figure from the 2019 September 8 multi-chord stellar occultation: semiaxes 126 ± 22, 109 ± 19 and 68 ± 13 km, volume-equivalent radius 98 ± 17 km (Braga-Ribas et al. 2023, A&A 676, A72). Only the apparent limb ellipse is fitted from the chords. The third axis follows from three stated assumptions: a Jacobi fluid-equilibrium figure at the 5.917813 h rotation period, the true light-curve amplitude 0.16 ± 0.03 mag of Groussin et al. 2004, and a body pole assumed equal to the Ortiz et al. 2015 ring pole. The area-equivalent radius was held fixed at 105 (+6/-7) km, the radiometric value of Lellouch et al. 2017, so the scale is radiometric, not occultation-measured. This is a model figure, not resolved terrain. Illustrative ICRF north pole (right ascension 0 degrees, declination +90 degrees), arbitrary prime meridian and phase. Chiron has no measured spin pole. The published ring or disk pole near ecliptic longitude 151 degrees, latitude +20 degrees is a pole of the surrounding material; the shape paper assumes the body shares it, and this display does not adopt that assumption as an orientation. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 97746.67322530202
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/centaurs/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "consumers": [
+        "surfaces"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored grid marking unavailable surface imagery."
+      },
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 97746.67322530202
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/centaurs/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4142,
+      "expectedSha256": "6d57dda14c6a7201935cb7c8dd7df0861e9db755a3c9b2ed1671065e96fd6780",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 5478,
+      "expectedSha256": "09a1199ac74a4575b651e2c41129bc959c432d9d329bf693be25e4c5d35a83db"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 790,
+      "expectedSha256": "65fcc5a75b6c28bf48f77be1ead949cfa9fbb9aa50e9b90bea13cced8e93a715"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 443,
+      "expectedSha256": "e0fac8fa565f4696b0b081bb7e62c4dcfde3ad141d54826129ba5ecb3d7022d8"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 650,
+      "expectedSha256": "64fc5c1aa25a8856b87a3e9a2b659ee350e4cfbef505d7a73b1023318226a08f"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3500,
+      "expectedSha256": "a6a1c09cf9c2991748b5613310e9d447ed84aaea9c244d361b1626874922ae31"
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3040,
+      "expectedSha256": "85a86cfc9cc3cd75ad01f2c5267e6c1a457a8d98557ea89d7ef0732cdbe31d13"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "expectedBytes": 7355,
+      "expectedSha256": "2d67b2f437654b21de0936f58256386710a13b58ec4e4dba69d272d601cc07ee"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "expectedBytes": 6645,
+      "expectedSha256": "202cb0e8851104b7f08b6a0cf50af79099015335f8a9dd65f34ecfad3bf659f4"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4347,
+      "expectedSha256": "b046ad2dd6a7a01fbb85a0c151036f666972e96f3c9d4338511a0d930ef373f4",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for (2060) Chiron: identity, orbit elements, discovery circumstances and physical parameters."
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-source-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1051/0004-6361/202346749",
+      "credit": "Braga-Ribas et al. (2023), Astronomy & Astrophysics 676, A72; 2019 September 8 multi-chord stellar occultation",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 61421,
+      "expectedSha256": "ae1333d2b485f2be914de45c8b59c128aa16c919b7dcc18c1c9929e7aa140b65",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "inputs": [
+          "published-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+    }
+  ]
+}
