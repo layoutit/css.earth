@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7f275f2f7b8ee1d2e2bdd229ee2982c7b89e2c29c7b9e0ed4d6e229d9305e6e3"
+    "sha256": "bda06baa2d8db206d7780825ffedfd7deb951c80476e62c66d1c6bf3c8bc2758"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -214,8 +214,8 @@
           }
         ]
       },
-      "sha256": "7a4da76292257fb316333f2f4521f473df9b5e38b372c55f5aad5affaed65b3a",
-      "bytes": 1329,
+      "sha256": "e137b3d3707f8fa427aea36eda5fec8213bc7c93d2f1c13a75b074fb5624d1f8",
+      "bytes": 1609,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -365,7 +365,7 @@
   },
   "lastPreparation": {
     "objectId": "antares",
-    "materialSha256": "92601e93c467f9e62f3222ce41aac5f0bb0f1e8224e494f853873bf4e892dae5",
+    "materialSha256": "c12364746109e0a35f8ff89a2d9ee7121d48bf5691a15c7b61712e60569b2e0b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -20,6 +20,8 @@ HD 189733 A is a K2 dwarf in Vulpecula, 19.8 parsecs away. It hosts the hot Jupi
 
 **Its system.** The HD 189733 system holds the planet, on its measured orbit, and the companion B, which is measured to be bound to this star but has no measured orbit, so none is drawn (see [B's README](../hd-189733-companion/README.md)). The system view frames the planet's orbit, 7,000 times smaller than the companion's separation; once the camera is farther out than the two stars are apart, it turns onto the pair's centre of mass instead of this star.
 
+**Catalogue colour.** the swatch that search, the catalogue and the minimap show is this lens's prepared colour, #ffe2cf.
+
 ## Evidence
 
 Run of 2026-09-17 (this version): `node tools/prepare-object.mts hd-189733` prepared the package.
@@ -29,6 +31,7 @@ Run of 2026-09-17 (this version): `node tools/prepare-object.mts hd-189733` prep
 - [`authored-rotation.test.mts`](../../../tools/objects/authored-rotation.test.mts) checks that λ −1.00° and i★ 71.87° with Cristo et al.'s own orbit inclination (85.508°) give ψ 13.68°, and that an aligned axis falls on the orbit normal. The source test checks that the prepared pole is 13.9° from HD 189733b's orbit normal.
 - [`object-discovery.test.mts`](../../../site/test/object-discovery.test.mts) checks that the three HD 189733 bodies stay on the map under every discovery setting while Antares and Polaris stay hidden.
 - [`rendered-default-view.png`](source/reference/rendered-default-view.png) and [`rendered-system-view.png`](source/reference/rendered-system-view.png) are the branch's dev server at `/hd-189733/` and `?overview=system` in headless Chrome, no console errors: the limb plate fitted to the sphere, and the planet's orbit around the star.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffe2cf is the colour lens's prepared colour.
 
 ## Known problems
 

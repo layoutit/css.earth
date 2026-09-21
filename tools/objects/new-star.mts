@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /** Scaffold a placed-star object package from its astronomy record, instead of cloning another star by find-and-replace.
  *
- *   node tools/objects/new-star.mts <id> --name <display name> --system <constellation> --color <#rrggbb>
- *     --description <catalogue line> --paper <url> --paper-credit <credit>
+ *   node tools/objects/new-star.mts <id> --name <display name> --system <constellation> --temperature <K>
+ *     --temperature-source <citation with URL> --description <catalogue line> --paper <url> --paper-credit <credit>
  *
  * Requires packages/astronomy/data/bodies/<id>.json with a `star` block and `physical.meanRadiusKm`. Every number here is
  * derived from that record: the world-frame origin, the catalogue distance, the radius facts and the sky-north display axis
- * (skyPlaneOrientation). The package starts with the shape lens and stays off the map until a surface image is added.
+ * (skyPlaneOrientation). The catalogue colour is the cited effective temperature through the star field's colour fit
+ * (star-catalogue-color.mts). The package starts with the shape lens and stays off the map until a surface image is added.
  * Prose the scaffold cannot know (reader text, README, credits, ledger) is written with the marker TODO(new-star), which
  * tools/object-package-consistency.test.mts refuses. Then run: node tools/prepare-object.mts <id> */
 import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
@@ -14,13 +15,14 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '../source-values.mts';
+import { readStarTemperature, temperatureCatalogueColor } from './star-catalogue-color.mts';
 
 export const TODO = 'TODO(new-star)';
 const AU_M = 149597870700, PARSEC_M = 3.085677581491367e16, SOLAR_RADIUS_KM = 695700, MAS_RAD = Math.PI / 180 / 3.6e6;
 const BODY_RADIUS_UNITS = 248, BODY_DIAMETER_PX = 496;
 const INTER = { url: 'https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf', bytes: 862936, sha256: '746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c' };
 
-export interface StarScaffold { readonly id: string; readonly name: string; readonly system: string; readonly color: string; readonly description: string; readonly paper: string; readonly paperCredit: string; readonly order?: number }
+export interface StarScaffold { readonly id: string; readonly name: string; readonly system: string; readonly temperatureK: number; readonly temperatureSource: string; readonly description: string; readonly paper: string; readonly paperCredit: string; readonly order?: number }
 
 /** The star stylesheet: the Sun's emissive presentation scoped to one object id, with its off-limb plate size. */
 export function starStylesheet(id: string, name: string, offLimbSize: number, plateNote: string, spinNote = 'No spin: the rotation axis and period are unmeasured.') {
@@ -134,7 +136,9 @@ ${s} .polycss-scene s {
 
 /** Every file of a new shape-only placed star, keyed by repository path. Pure: the caller writes them. */
 export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epochJdTt: number): Map<string, string> {
-  if (!/^[a-z][a-z0-9-]*$/u.test(spec.id) || !/^#[0-9a-f]{6}$/u.test(spec.color)) throw new TypeError('A star needs a lowercase id and a #rrggbb colour.');
+  if (!/^[a-z][a-z0-9-]*$/u.test(spec.id)) throw new TypeError('A star needs a lowercase id.');
+  const temperature = readStarTemperature({ effectiveTemperatureK: spec.temperatureK, effectiveTemperatureSource: spec.temperatureSource });
+  const color = temperatureCatalogueColor(temperature.kelvin);
   const body = requireRecord(bodyRecord, 'astronomy record'), star = requireRecord(body.star, 'star astrometry'), physical = requireRecord(body.physical, 'physical');
   if (body.id !== spec.id) throw new TypeError(`The astronomy record is for ${String(body.id)}, not ${spec.id}.`);
   const astrometry = { rightAscensionDegrees: requireFiniteNumber(star.rightAscensionDegrees), declinationDegrees: requireFiniteNumber(star.declinationDegrees),
@@ -157,7 +161,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
         { id: 'title', path: 'source/presentation/title-mark.json' }, { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
       emission: { source: 'raster', material: 'emission' } },
     page: { stylesheets: ['src/renderers/css/styles/planet-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json', sha256: '0'.repeat(64) } },
-    catalog: { name, classification: 'star', color: spec.color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10, description: spec.description, systemName: spec.system, order: spec.order ?? 1100, context: { order: (spec.order ?? 1100) - 3 } },
+    catalog: { name, classification: 'star', color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10, description: spec.description, systemName: spec.system, order: spec.order ?? 1100, context: { order: (spec.order ?? 1100) - 3 } },
     // A first frame for the catalogue; preparation replaces it with the prepared presentation frame.
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1], metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
     prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json', sha256: '0'.repeat(64) } });
@@ -173,7 +177,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
       lighting: false, shadows: false, runtimeLighting: false } } });
   put(`${o}/source/preparation/geometry.json`, { schema: 'cssearth-css-geometry-profile@1', namespace: id, surface: { radius: BODY_RADIUS_UNITS, polarRadius: BODY_RADIUS_UNITS, latitudeSegments: 16, longitudeSegments: 32,
     surface: { url: `/scenes/${id}/${id}-surface-shape@2x.webp`, width: 1024, height: 768 }, surfaceLatitudeHeight: 512, packedBandGutter: 8,
-    poles: { url: `/scenes/${id}/${id}-poles-shape@2x.webp`, width: 512, height: 256 }, polarTileSize: 256, polarRadiusScale: 1.035, polarOffset: 0.1, uv: 'cell', color: spec.color },
+    poles: { url: `/scenes/${id}/${id}-poles-shape@2x.webp`, width: 512, height: 256 }, polarTileSize: 256, polarRadiusScale: 1.035, polarOffset: 0.1, uv: 'cell', color },
     projection: { tileSize: 50, layerElevation: 50, seamBleed: 24, interiorSeamBleed: 8, overlap: 0.008, fitToSource: false, rasterScale: 2, rasterGutter: 8, rasterOverscan: 0, positionVariables: false, projectivePoles: false, lightColor: '#ffffff', ambientIntensity: 1 },
     bodyRotationDegrees: 0, output: { schema: `css${id}-prepared-runtime-scene@1`, materialSchema: `css${id}-prepared-emission@1`, layout: 'body-container', body: { axialTiltDegrees: 0, rotationDirection: 'prograde', rotationPeriodEarthDays: 36525,
       sourceProjection: 'no observation: the shared neutral gray of an unresolved surface on the reference sphere', polarPreparation: 'the same gray on the polar tiles',
@@ -192,6 +196,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   put(`${o}/source/measurements.json`, { schema: 'cssearth-uniform-disc-star@1', id, angularDiameterMas: Math.round(angularDiameterMas * 100) / 100,
     angularDiameterSource: `${TODO}: the published angular diameter and its source; this value is the record's radius at its distance.`, distanceParsecs: astrometry.distanceParsecs,
     distanceSource: requireString(requireRecord(star.sources).distance), radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
+    effectiveTemperatureK: temperature.kelvin, effectiveTemperatureSource: temperature.source,
     shape: { kind: 'uniform-disc-sphere', qualification: 'A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp.' } });
   put(`${o}/source/content/object.json`, { schema: 'cssearth-object-content@1', version: 1, id, displayName: name,
     // A published fact names its source: the author replaces each TODO catalogue id with the entry the measurement record cites.
@@ -266,10 +271,10 @@ export async function scaffoldStar(spec: StarScaffold, root = process.cwd()) {
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), id = args.find(argument => !argument.startsWith('--') && !args[args.indexOf(argument) - 1]?.startsWith('--'));
   const option = (name: string) => { const index = args.indexOf(`--${name}`); return index >= 0 ? args[index + 1] : undefined; };
-  const required = ['name', 'system', 'color', 'description', 'paper', 'paper-credit'] as const;
+  const required = ['name', 'system', 'temperature', 'temperature-source', 'description', 'paper', 'paper-credit'] as const;
   const missing = required.filter(name => option(name) === undefined);
   if (!id || missing.length) throw new TypeError(`Usage: new-star <id> ${required.map(name => `--${name} <value>`).join(' ')} [--order <n>]; missing ${missing.join(', ') || 'id'}.`);
   const order = option('order');
-  const written = await scaffoldStar({ id, name: option('name')!, system: option('system')!, color: option('color')!, description: option('description')!, paper: option('paper')!, paperCredit: option('paper-credit')!, ...(order ? { order: Number(order) } : {}) });
+  const written = await scaffoldStar({ id, name: option('name')!, system: option('system')!, temperatureK: Number(option('temperature')), temperatureSource: option('temperature-source')!, description: option('description')!, paper: option('paper')!, paperCredit: option('paper-credit')!, ...(order ? { order: Number(order) } : {}) });
   console.log(`${written.length} files written. Replace every ${TODO}, then: node tools/prepare-object.mts ${id}`);
 }

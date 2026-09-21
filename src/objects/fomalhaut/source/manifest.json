@@ -4,8 +4,8 @@
     {
       "id": "fomalhaut-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 981,
-      "expectedSha256": "0f5b028fcc6fe3ef78965f09bca6cd1d770740fc491330204ebcb35a2cd7f4f5",
+      "expectedBytes": 1267,
+      "expectedSha256": "18e3af5fca66c752650e8cb023614073f20035f7ee2728b3b4020884826fc81a",
       "origin": "https://arxiv.org/abs/1206.6353",
       "credit": "Mamajek, \"On the Age and Binarity of Fomalhaut\", ApJ 754, L20 (2012), arXiv:1206.6353",
       "license": "Factual numerical measurements; source attribution retained",
@@ -69,7 +69,7 @@
       "id": "fomalhaut-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1704,
-      "expectedSha256": "37e3265bb35d7e0f1d5e9c4a6af27e1fed6bda3059c4f8b084f6c52155370dc5",
+      "expectedSha256": "97b716b25ecf0ac0fad462fa35e25c044400fdead5332f855f1a3a84a1fd0ad6",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",

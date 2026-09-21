@@ -14,9 +14,13 @@ Rotation: no rotation axis or period is adopted here; see Known problems for wha
 
 Shape lens: a sphere of the measured radius in neutral gray. No image of the surface is shown.
 
+Catalogue colour: #bfd3ff, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 12100 ± 150 K from Przybilla et al. 2010 (A&A 517, A38; <https://doi.org/10.1051/0004-6361/201014164>), Table 1, HD 34085: a non-LTE spectroscopic analysis. The radius source, Moravveji et al. 2012, adopts this value in its Table 1. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
+
 ## Evidence
 
-No dated test report exists for this body yet.
+Run of 2026-09-21:
+
+- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #bfd3ff is the star field's colour at the cited 12100 K.
 
 ## Known problems
 

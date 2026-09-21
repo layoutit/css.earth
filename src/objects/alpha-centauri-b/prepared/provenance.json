@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d85d65d005b26217ba7098bf27ed8ed93075f9abfa74dcb9c6c96e0da5763dfc"
+    "sha256": "055e1dc849a184c6c7f49e67914405d9b0167cefade22173512fec00569bdb5f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -183,8 +183,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "2065f8c7231277694f4051190f5dd9b943c27dfa5ca21e836b6b502fcd77ed38",
-      "bytes": 1114,
+      "sha256": "4716b600232ad88a3439bf0c11fdc94c4d56004ae4c732a016e07c9ad7d3b09c",
+      "bytes": 1399,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -334,7 +334,7 @@
   },
   "lastPreparation": {
     "objectId": "alpha-centauri-b",
-    "materialSha256": "f4dd7831a56722e00ec9bba291b47a68affb986d9dc8364c2bb87db55f4b9c34",
+    "materialSha256": "a5348123bd85bab856e869a7ffa9e0a5045a34b764891decfb0abb597b0be5be",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

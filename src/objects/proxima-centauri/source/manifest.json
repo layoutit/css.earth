@@ -4,8 +4,8 @@
     {
       "id": "proxima-centauri-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1147,
-      "expectedSha256": "314a64b9a32983c39526b1976f466c1017ca7ff08ff967b6f36ed507d592403c",
+      "expectedBytes": 1425,
+      "expectedSha256": "1e99bdac138d876328048414dee1ef048f96ef2dda1635ac45fd590820086bcd",
       "origin": "https://arxiv.org/abs/0906.0602",
       "credit": "Demory, Ségransan, Forveille et al., \"Mass-radius relation of low and very low-mass stars revisited with the VLTI\", A&A 505, 205 (2009), arXiv:0906.0602",
       "license": "Factual numerical measurements; source attribution retained",
@@ -69,7 +69,7 @@
       "id": "proxima-centauri-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1753,
-      "expectedSha256": "8ff01f840c815bbf578a73e286597acac758814ffbcdf2fef32e5b8af47669a3",
+      "expectedSha256": "7b88bd842e5fd7d4a2f97cc6690e4d1db6d371b6c8865b9c9689606811925b61",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",

@@ -1144,7 +1144,7 @@
       "id": "betelgeuse-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1840,
-      "expectedSha256": "59f7cb18034cd74455733bdf8bf3f82476e70c0b9559b30f44b70521819923a2",
+      "expectedSha256": "f407cdf29c1a610eab181fa08c2ba119f869c92f6ae07dbd367e57e7cf3d9523",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -1317,8 +1317,8 @@
     },
     {
       "path": "measurements.json",
-      "expectedBytes": 1061,
-      "expectedSha256": "af14c5432a249e338bbbc7ec37101db8fc1578aabcb45cca9bb460deafb32080",
+      "expectedBytes": 1432,
+      "expectedSha256": "356ddf7ba328309109ad6021d267f315cc1f4eab72c5475df751f5b04b64da8a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Adopted angular diameter, distance and radius with their sources."

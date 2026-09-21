@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "870b5d041a97a21c858577c273e6efc94a09fa125cb28b5192abf4d865d37d72"
+    "sha256": "11913b43856acef3cac3cacc1ea0de417a53fdf83de879960a69fefcb55fe1ee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -183,8 +183,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "6feb3d0639961f07343678b7cae0e8229197d69108a75a0cdf3a592e275a9801",
-      "bytes": 1078,
+      "sha256": "a718a9ce4d72b42205e32375868411d68eccbc08e86578897db1000c03ec6460",
+      "bytes": 1372,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -334,7 +334,7 @@
   },
   "lastPreparation": {
     "objectId": "kepler-186",
-    "materialSha256": "e3bd19b911c3022ac29a69b7296265b5ce49be064f1699a7f2a5f34ba1659d09",
+    "materialSha256": "475898114f87c4da7e6f8f45b431a06ada7caf94c6d57394130989db782a27c0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

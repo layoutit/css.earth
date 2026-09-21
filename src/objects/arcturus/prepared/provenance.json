@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3e1bf59ff81f18b2eeb921f16df15df4b462c47bc521bf5d60274229ac11fc5c"
+    "sha256": "34beb4af0c5d0bf5b2d985457a9302449e5c2059c6b8fee2f472a7a78d98bcb4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -183,8 +183,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "13e0ec659497b490a92ed49aaadb432f2c486ab575d4474ec4e02e6ae9a9154e",
-      "bytes": 1120,
+      "sha256": "07a86d14a8c7ea65cfa778cf31951510b9a2d0d3399500db03f139ff50440f7a",
+      "bytes": 1396,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -334,7 +334,7 @@
   },
   "lastPreparation": {
     "objectId": "arcturus",
-    "materialSha256": "ff237e3bc6c47fb01fd8a744a0f2d27a72da7a94f1fa361ad1cc42a1c8e0d1c0",
+    "materialSha256": "96d34bcd493bd6db1e566e607017dcc6ba2820a6b25e478912747718a007076f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

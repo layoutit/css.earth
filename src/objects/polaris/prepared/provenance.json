@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "74df873f089a0c434556292c80581f8623076a16a38abbd3769857b2cdc82763"
+    "sha256": "062725b3d82e67687f968030611ce8bc59f682f5ea28a87bf4ca969a75481800"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -175,7 +175,7 @@
       "id": "polaris-observational-measurements",
       "path": "measurements.json",
       "origin": "https://arxiv.org/abs/2407.09641",
-      "credit": "Evans et al. (2024), The Orbit and Dynamical Mass of Polaris: Observations with the CHARA Array, ApJ 971, 190",
+      "credit": "Evans et al. (2024), The Orbit and Dynamical Mass of Polaris: Observations with the CHARA Array, ApJ 971, 190; effective temperature: Usenko et al. (2005), MNRAS 362, 1219",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
@@ -189,8 +189,8 @@
           }
         ]
       },
-      "sha256": "3fbd45b669bfac6993a32a9ea852200ee787efa8861001806da5ed7d1b729544",
-      "bytes": 1315,
+      "sha256": "03c59c115497746f7fe5a503dc456656161f204d1d964b120c1edf9ad81f50f6",
+      "bytes": 1677,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -340,7 +340,7 @@
   },
   "lastPreparation": {
     "objectId": "polaris",
-    "materialSha256": "0cec5ced666fdab5d91eca34932c8d686c9a0d62039b9da093d66d7d12d6f229",
+    "materialSha256": "8cf3d2561b64d41bcc87a429d6aa6a10062fdbe205e0fbef8a1498939bbcdcfd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

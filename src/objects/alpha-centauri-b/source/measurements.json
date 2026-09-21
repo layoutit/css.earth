@@ -7,6 +7,8 @@
   "distanceSource": "Inverse of the parallax 747.17 ± 0.61 mas that Kervella et al. (2017) adopt from Kervella et al. (2016)",
   "radiusKm": 600528,
   "radiusSource": "Radius: Limb-darkened angular diameter 5.999 ± 0.025 mas measured with VLTI/PIONIER by Kervella et al. (2017), A&A 597, A137, who derive 0.8632 ± 0.0037 solar radii with the parallax 747.17 ± 0.61 mas. Adopted 600,528 km, 0.8632 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
+  "effectiveTemperatureK": 5231,
+  "effectiveTemperatureSource": "Effective temperature 5231 ± 21 K from Kervella et al. 2017 (A&A 597, A137; https://doi.org/10.1051/0004-6361/201629505), Section 4.3, Eq. 17: the VLTI/PIONIER diameter with the Boyajian et al. 2013 bolometric flux.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

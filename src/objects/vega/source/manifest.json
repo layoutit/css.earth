@@ -4,8 +4,8 @@
     {
       "id": "vega-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1320,
-      "expectedSha256": "6760c5a77ea82c9a50a1a7d908fd674eeaf134cd47cfef8c03f3d1d495429c3e",
+      "expectedBytes": 1696,
+      "expectedSha256": "bfa9a9b43f59e70b0d063e5abfac70ed3e728e72f62e69f3c564ebc2f64c86bf",
       "origin": "https://arxiv.org/abs/1211.6055",
       "credit": "Monnier, Che, Zhao et al., \"Resolving Vega and the inclination controversy with CHARA/MIRC\", ApJ 761, L3 (2012), arXiv:1211.6055",
       "license": "Factual numerical measurements; source attribution retained",
@@ -69,7 +69,7 @@
       "id": "vega-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1669,
-      "expectedSha256": "1eb97c1ab56401490091d6b075b74c2bcceeb1c1c5469aa926e0cb45eed5cbf2",
+      "expectedSha256": "2efb8c266194fdc6917f9e24ba7ab9dd2383a50d8d2447865af704af39f9402e",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",

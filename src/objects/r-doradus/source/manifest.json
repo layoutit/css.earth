@@ -97,10 +97,10 @@
     {
       "id": "r-doradus-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1693,
-      "expectedSha256": "21cdbf09a05a185bfc5278ef838e85031a4be5c41309b4c1b60a236bf28549bb",
+      "expectedBytes": 2071,
+      "expectedSha256": "b248f723bb482c3d5a0a630d2e54325e6c677652c14f98b2be80a8000abd09e7",
       "origin": "https://doi.org/10.1038/s41586-024-07836-9",
-      "credit": "Vlemmings et al. (2024), ALMA 2022.1.01071.S",
+      "credit": "Vlemmings et al. (2024), ALMA 2022.1.01071.S; effective temperature: Ohnaka, Weigelt & Hofmann (2019), ApJ 883, 89",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
@@ -168,7 +168,7 @@
       "id": "r-doradus-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1704,
-      "expectedSha256": "ba9ea69c012d28f1e3587deef8e23c0b4cedae87fb59d17df17c96e31bf20bd6",
+      "expectedSha256": "398392c72571d9aa60b274909f55a37d4d6e14bc73ea74bb15a6d8b6ae6cb9dc",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",

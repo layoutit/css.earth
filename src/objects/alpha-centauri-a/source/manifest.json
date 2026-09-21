@@ -4,8 +4,8 @@
     {
       "id": "alpha-centauri-a-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1116,
-      "expectedSha256": "fc29a056e2299fa6710ff19a1bb8bf17f02566482f91989495cda10368a8e630",
+      "expectedBytes": 1401,
+      "expectedSha256": "7ba2a399ab904b3ee44f4af9972e2b439e1ec0182e2fe104abacb9105135aa2d",
       "origin": "https://arxiv.org/abs/1610.06185",
       "credit": "Kervella, Bigot, Gallenne and Thévenin, \"The radii and limb darkenings of α Centauri A and B\", A&A 597, A137 (2017), arXiv:1610.06185",
       "license": "Factual numerical measurements; source attribution retained",
@@ -69,7 +69,7 @@
       "id": "alpha-centauri-a-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1753,
-      "expectedSha256": "e9e78cc1cb757494ab14e4747ec9e3f318dac164b98e49e647597a29efc1ba03",
+      "expectedSha256": "56d15a66cd2ed57d56c67c9fe21ac2b4224aa75c4964d1d1dc7a5ce3a93480c4",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",

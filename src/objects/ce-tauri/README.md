@@ -12,6 +12,8 @@ CE Tauri (119 Tau) is a red supergiant in Taurus and the fourth star placed here
 
 **PIONIER images.** The CDS catalogue [J/A+A/614/A12](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/614/A12) holds the mean SQUEEZE images of the November 2016 and December 2016 datasets and their standard-deviation maps: 32 by 32 pixels of 0.5 mas, north up, east left. The paper merges all six H-band channels and reports reduced chi-squared 1.53 and 2.08 against its own reduction. Each image is one lens, cast by the surface-observation route with the same palette as the other stars; the December image is the default and the navigation marker.
 
+**Catalogue colour.** #ffc99d, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 3801 ± 134 K from Montargès et al. 2018 (A&A 614, A12; <https://doi.org/10.1051/0004-6361/201731471>), Section 4.1: the PIONIER limb-darkened diameter of December 2016, the epoch of the package's diameter, with the bolometric flux. The paper gives 3820 ± 135 K for November 2016. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
+
 ## Evidence
 
 - `tests/objects/unit/ce-tauri/reconstruction.test.mts` fits the published images to the public calibrated PIONIER files in the OiDB, channel by channel, without the code that made them. The November image fits the November nights at reduced chi-squared 17.8 on squared visibilities and 35 on closure phases. The December image fits 23 December at 14.4 and 3.0. Mirroring or turning the November image makes the fit several times worse, which pins its orientation. A uniform disc of the published diameter fits worse still.
@@ -20,6 +22,7 @@ CE Tauri (119 Tau) is a red supergiant in Taurus and the fourth star placed here
 - `tests/objects/unit/ce-tauri/default-view.test.mts` derives the default camera from the runtime's camera math.
 - Preparation accepted 293 of 325 pixels with geometry in each image; 2.3 and 2.6 percent of the flux lies outside the disc and is drawn on the off-limb plate.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/ce-tauri/` with the default camera.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffc99d is the star field's colour at the cited 3801 K.
 
 ## Known problems
 

@@ -4,8 +4,8 @@
     {
       "id": "hd-209458-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1093,
-      "expectedSha256": "8e4e1ee7ea1ee193faef6ae34937398a78488c0ea35b64ea86ec899f7f73cec6",
+      "expectedBytes": 1359,
+      "expectedSha256": "461206c2ae0853401942b21df92794b40b7247896969c54a2a21a79412b59edd",
       "origin": "https://arxiv.org/abs/0801.1841",
       "credit": "G. Torres et al., \"Improved parameters for extrasolar transiting planets\", ApJ 677, 1324 (2008), arXiv:0801.1841",
       "license": "Factual numerical measurements; source attribution retained",
@@ -69,7 +69,7 @@
       "id": "hd-209458-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1704,
-      "expectedSha256": "3eb7717b02af1d769523cdac8d4ef601111b8c3b425cbf20b70a139dadb478f4",
+      "expectedSha256": "60a308acd1b4c9aa7b99ab4be27490bc8cd3fa024ff101ea29dc8975e461308b",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",

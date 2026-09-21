@@ -4,8 +4,8 @@
     {
       "id": "deneb-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1251,
-      "expectedSha256": "687d6ebe71008f7385bee8f16eaa329fe2a062df281d3d98d7008f989c3d461e",
+      "expectedBytes": 1529,
+      "expectedSha256": "d59f86f1a7f7b9c03bc773546b78a09a40e8f81d1d1480464b4fce5ddeaf69d7",
       "origin": "https://arxiv.org/abs/astro-ph/0201218",
       "credit": "Aufdenberg, Hauschildt, Baron et al., \"The Spectral Energy Distribution and Mass-loss Rate of the A-Type Supergiant Deneb\", ApJ 570, 344 (2002), arXiv:astro-ph/0201218",
       "license": "Factual numerical measurements; source attribution retained",
@@ -69,7 +69,7 @@
       "id": "deneb-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1676,
-      "expectedSha256": "129e61ff4d958a42da20021ec83dc9aff839649d72ab841322b4e31baaca79f8",
+      "expectedSha256": "6d5f5897eefa227253ab9ed7539c56d4f2f24bdc48a26f7e78d4ad896bc47971",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "83acab0d085eb976856d71b88e9e69416709f97e254aa98edaa53b5e53131d65"
+    "sha256": "49792dd4a8c9c01d5834cc2a5cfb5f8bdef0d5da14f9e9d7162af4ee2d95b277"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -183,8 +183,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "8e4e1ee7ea1ee193faef6ae34937398a78488c0ea35b64ea86ec899f7f73cec6",
-      "bytes": 1093,
+      "sha256": "461206c2ae0853401942b21df92794b40b7247896969c54a2a21a79412b59edd",
+      "bytes": 1359,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -334,7 +334,7 @@
   },
   "lastPreparation": {
     "objectId": "hd-209458",
-    "materialSha256": "d4270fb1b8568d045df7efe2ee2225ab9b959847c4984ea4df5c7a995c8cc1d4",
+    "materialSha256": "2d857062fa1db60781a0f15adda235c80e4d4043f3fee058953e133145aad67e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,8 +4,8 @@
     {
       "id": "arcturus-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1120,
-      "expectedSha256": "13e0ec659497b490a92ed49aaadb432f2c486ab575d4474ec4e02e6ae9a9154e",
+      "expectedBytes": 1396,
+      "expectedSha256": "07a86d14a8c7ea65cfa778cf31951510b9a2d0d3399500db03f139ff50440f7a",
       "origin": "https://arxiv.org/abs/0804.0192",
       "credit": "Lacour, Meimon, Thiébaut et al., \"The limb-darkened Arcturus: imaging with the IOTA/IONIC interferometer\", A&A 485, 561 (2008), arXiv:0804.0192",
       "license": "Factual numerical measurements; source attribution retained",
@@ -69,7 +69,7 @@
       "id": "arcturus-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1697,
-      "expectedSha256": "fbc645f4b7f0a0f3bfa596e0c76408cdc2e29f02c4fae692e9ffbb6c8da59a3c",
+      "expectedSha256": "da5cdbb5e8f22acdb849d597aaa6f9389ead630a828f99fa38604cabfa99525a",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",

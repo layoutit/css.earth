@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7a16d74e6226a1d8f771d0f4632a7a72759e85c9d9fa7d469ae1785dfa4df374"
+    "sha256": "cbb5086c07bda44665cd84f6123e14a74f8049e82f377de5aeb52dea792eea0f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -183,8 +183,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "51596c8b032c8af0d883f7a0bd72b6cebbf02408fe4a4b12a07effb75f574bc0",
-      "bytes": 1053,
+      "sha256": "03dedbe6ea559a789fcde407336682da05f6789fb6fd2298c78e9751fb2aeeff",
+      "bytes": 1334,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -334,7 +334,7 @@
   },
   "lastPreparation": {
     "objectId": "aldebaran",
-    "materialSha256": "031386ade61a599d62a77a55878e965d9978f70ec1a1c605990384355706ada6",
+    "materialSha256": "cde95b89fb9b8ed6b736b67448ef1d9b7dbd100b593c52ee10bd084fe95eb34d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

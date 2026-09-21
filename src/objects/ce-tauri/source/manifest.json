@@ -800,7 +800,7 @@
     },
     {
       "expectedBytes": 1905,
-      "expectedSha256": "b33cf56f247b68bfbab967e5d76aca48682d92828569af0182024f7101594608",
+      "expectedSha256": "5cdddc1231584db63af386774a2d5fc65a7e7035d8975c26b2113d38b0203136",
       "id": "ce-tauri-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
@@ -933,8 +933,8 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "expectedBytes": 1231,
-      "expectedSha256": "81364289ebf422266edfad5a59634ac57e28c6ee82f2a0e4d425ed3a849f65b4",
+      "expectedBytes": 1602,
+      "expectedSha256": "f17d2606647e3536cbeb8cce0baba824ef01abccc9b6798e2a1b23a9c3d38b79",
       "path": "measurements.json",
       "sourceBinding": {
         "kind": "local",

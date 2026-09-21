@@ -12,6 +12,8 @@ Polaris is the North Star, a supergiant Cepheid in Ursa Minor. Its package holds
 
 **Shape lens.** The surface is the `neutral-shape` science kind: a gray display convention for an unresolved surface, not a colour or a brightness. The star is drawn by the emissive route like the other stars, with transparent off-limb and limb plates. The navigation marker is the flat gray disc `tools/objects/new-star.mts` writes.
 
+**Catalogue colour.** #fff6ed, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 6015 ± 170 K from Usenko et al. 2005 (MNRAS 362, 1219; <https://doi.org/10.1111/j.1365-2966.2005.09353.x>), abstract: the mean spectroscopic temperature from 30 spectra of 2001-2004. Polaris is a low-amplitude Cepheid; the ± may be the spread over its 3.97-day pulsation. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
+
 ## Evidence
 
 - [`investigations.json`](investigations.json) records the April 2021 image route and why it was excluded, the companion check and the published surface maps, with the measured numbers.
@@ -30,6 +32,7 @@ Polaris is the North Star, a supergiant Cepheid in Ursa Minor. Its package holds
 - `tests/objects/unit/polaris/default-view.test.mts` derives the default camera from the runtime's camera math: the sub-camera point one degree from the sub-Earth point, the display axis and celestial north straight up.
 - `site/test/object-discovery.test.mts` checks that Polaris is hidden from the map under every discovery setting.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/polaris/` with the default camera.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #fff6ed is the star field's colour at the cited 6015 K.
 
 ## Known problems
 

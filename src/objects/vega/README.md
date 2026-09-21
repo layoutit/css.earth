@@ -14,9 +14,13 @@ Rotation: no rotation axis or period is adopted here; see Known problems for wha
 
 Shape lens: a sphere of the measured radius in neutral gray. No image of the surface is shown.
 
+Catalogue colour: #ceddff, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 9360 ± 90 K, the surface-averaged value of the concordance model in Monnier et al. 2012 (ApJL 761, L3; <https://doi.org/10.1088/2041-8205/761/1/L3>), Table 2, the same model as the radius. The star is gravity-darkened: the same table gives 10070 K at the pole and 8910 K at the equator. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
+
 ## Evidence
 
-No dated test report exists for this body yet.
+Run of 2026-09-21:
+
+- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ceddff is the star field's colour at the cited 9360 K.
 
 ## Known problems
 

@@ -4,10 +4,10 @@
     {
       "id": "rigel-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1102,
-      "expectedSha256": "63ad077f4b0fe0b5543d08a995118f848946509f6e1eedeee1df673dc86c0dc7",
+      "expectedBytes": 1425,
+      "expectedSha256": "3198b45153590b062e948c558490d2363d1dfeac7e20ebb04eaf32d0ee33883c",
       "origin": "https://arxiv.org/abs/1201.0843",
-      "credit": "Moravveji, Guinan, Shultz et al., \"Asteroseismology of the nearby SN-II progenitor Rigel. Part I\", ApJ 747, 108 (2012), arXiv:1201.0843",
+      "credit": "Moravveji, Guinan, Shultz et al., \"Asteroseismology of the nearby SN-II progenitor Rigel. Part I\", ApJ 747, 108 (2012), arXiv:1201.0843; effective temperature: Przybilla et al. (2010), A&A 517, A38",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
@@ -69,7 +69,7 @@
       "id": "rigel-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1676,
-      "expectedSha256": "40e4cc16f8203234c0bed46d4dba479c2ce4965b824794eb2be33e3c43e69c06",
+      "expectedSha256": "f8554feb89c8ee7f5e40cc1ed544ef2a615e76c2814f50951d911b445a52e09f",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",

@@ -6,7 +6,7 @@ HD 209458 is a Sun-like star 48 parsecs away in Pegasus, 1.16 times the Sun’s 
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
-Placement: the SIMBAD position, proper motion and radial velocity with the references SIMBAD gives, and the distance from the Gaia EDR3 parallax 20.7694 ± 0.0266 mas via SIMBAD. The package binds to the star the shared star field already draws through its Hipparcos number, so there is one HD 209458, not two.
+Placement: the SIMBAD position, proper motion and radial velocity with the references SIMBAD gives, and the distance from the Gaia EDR3 parallax 20.7694 ± 0.0266 mas via SIMBAD. The shared star field (HYG) also has a row for this star, HIP 108859, but the astronomy record carries no Hipparcos number, so the two are not reconciled (see Known problems).
 
 Radius: Stellar radius 1.155 +0.014 −0.016 solar radii from Torres et al. 2008, ApJ 677, 1324 (2008). It is a radius from stellar characterisation, not an interferometric diameter; the angular diameter in the record is that radius at the Gaia distance.
 
@@ -14,11 +14,17 @@ Rotation: no spin axis or rotation period is adopted The display axis is celesti
 
 Shape lens: a sphere of the measured radius in neutral gray. No image of the surface is shown.
 
+Catalogue colour: #fff7ef, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 6065 ± 50 K from Torres, Winn & Holman 2008 (ApJ 677, 1324; <https://arxiv.org/abs/0801.1841>), Table 1, the radius source: the weighted mean of ten independent determinations. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
+
 ## Evidence
 
-No dated test report exists for this body yet.
+Run of 2026-09-21:
+
+- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #fff7ef is the star field's colour at the cited 6065 K.
 
 ## Known problems
+
+**The star field draws a second HD 209458.** Its HYG row, HIP 108859, is not bound to this package because the astronomy record has no Hipparcos number, so the field keeps its own point at the HYG position.
 
 The radius comes from stellar characterisation, not from a resolved disc. No image of the surface exists. The star is drawn as a neutral sphere.
 
