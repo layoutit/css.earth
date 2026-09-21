@@ -43,5 +43,6 @@ test('descriptor retains planetary depth meaning and refuses unsupported convers
   assert.throws(()=>parseProductDescriptor({...value,components:[{...component,support:{...component.support,domain:{...component.support.domain,memberIds:['missing']}}}]}),/support references missing member/u);
   assert.throws(()=>parseProductDescriptor({...value,components:[{...component,inference:undefined}]}),/requires inference method/u);
   assert.throws(()=>parseProductDescriptor({...value,components:[{...component,resolution:{...component.resolution,elements:[{axisId:'missing',value:1,unit:'m',description:'bad'}]}}]}),/resolution references missing axis/u);
-  assert.throws(()=>parseProductDescriptor({...value,components:[{...component,placement:{kind:'cartesian',xAxisId:'x',yAxisId:'y',zAxisId:'delay',basis:'bad role mapping'}}]}),/placement axis x does not carry required role body-fixed-x/u);
+  assert.throws(()=>parseProductDescriptor({...value,components:[{...component,placement:{kind:'cartesian',xAxisId:'x',yAxisId:'y',zAxisId:'delay',basis:'bad role mapping'}}]}),/placement axis x does not carry required body-fixed-x length/u);
+  assert.throws(()=>parseProductDescriptor({...value,components:[{...component,placement:{kind:'located-profile',verticalAxisId:'delay',anchor:{kind:'body-fixed-cartesian',x:0,y:0,z:0,unit:'us'},basis:'bad anchor unit'}}]}),/Astropy-valid length unit/u);
 });

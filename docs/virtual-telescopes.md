@@ -719,7 +719,10 @@ eligible component. Requested observation bounds or measured-resolution threshol
 unresolved when the descriptor does not carry those facts. Criteria that do not apply to the
 selected family are not inherited from the legacy query shape. Every requested scientific
 criterion must hold for one selected component; facts from different components cannot be
-assembled into a match without an explicit combining operation.
+assembled into a match without an explicit combining operation. A membership request may inspect
+an explicitly declared dependency bundle, such as the Stokes components retained from one FITS
+member. That bundle establishes which components are present; it does not lend one component the
+quantity, support, resolution or depth facts of another.
 
 Planetary depth products use the same F16 descriptor instead of a separate workflow. Their axes
 name delay, geometric depth, pressure, altitude, radius, projected coordinates, body-fixed
@@ -734,7 +737,10 @@ normalize only separable linear coordinates into the descriptor's zero-based ind
 uses Astropy units to verify their dimensions. Coupled matrices, nonlinear WCS, and contradictory
 units are refused. Body attachment additionally requires an explicit Cartesian, spherical,
 projected-and-vertical, located-profile, or symmetry placement; a depth axis and named frame alone
-do not establish a location.
+do not establish a location. Placement axes must be distinct and carry the required spatial roles
+and physical dimensions; projected vertical placement binds its qualified depth coordinate.
+Astropy validates Cartesian anchor units as lengths and longitude/latitude anchor units as
+angles before a source constructor can publish the placement.
 
 Output availability follows those retained facts. Native export preserves every qualified product.
 Slices require a fully supported grid whose validity is handled by the operation, profiles require
