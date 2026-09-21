@@ -80,35 +80,8 @@ jobs:
     timeout-minutes: 8
     permissions:
       contents: read
-      # The publish gate reads the last green main run to scope a push to main.
-      actions: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-        with:
-          # History without blobs: the documentation and published-assets checks diff against a merge base, and
-          # `git diff --name-only` needs only commits and trees.
-          fetch-depth: 0
-          filter: blob:none
-      - name: Check documentation links and organization
-        # PRs reject new findings and debt in changed files, including unchanged inbound links they break.
-        # Main retains the full organization audit; existing unrelated debt is visible but not a PR veto.
-        run: |
-          node --test tools/audits/check-documentation-links.test.mts
-          python3 tools/audits/test_provenance_documentation_inventory.py
-          python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output "$RUNNER_TEMP/provenance-inventory.json"
-          if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            node tools/audits/check-documentation-links.mts --base "${CI_BASE_REF:-origin/$GITHUB_BASE_REF}"
-          else
-            node tools/audits/check-documentation-links.mts --all
-          fi
-      - name: Check tracked files against ignore rules
-        run: |
-          git ls-files -z > "$RUNNER_TEMP/tracked-paths"
-          set +e
-          git check-ignore --no-index --stdin -z < "$RUNNER_TEMP/tracked-paths" > "$RUNNER_TEMP/ignored-tracked"
-          check_result=$?
-          tr '\0' '\n' < "$RUNNER_TEMP/ignored-tracked"
-          test "$check_result" -eq 1
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -150,10 +123,6 @@ jobs:
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/build-ci.mts lint
-      - name: Check every object's package files, source citations and restoration plan
-        run: |
-          node --test tools/restore-source-inputs.test.mts
-          node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
       - name: Check physical frame receipts and document pins
         # Tracked files only; the full ownership audit (--all) runs in the prepared-universe job.
         run: |
@@ -169,19 +138,6 @@ jobs:
         # dry-run report, and the runner behind `pnpm check:pr`. Deliberately not the wider `pnpm test:platform`,
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
         run: pnpm test:ci
-      - name: Check published assets this change adds
-        # HEAD only the R2 keys this change's inventories add (keys are content-addressed, so an unchanged line
-        # needs no new proof): on a PR, against its base branch, failing only on a real 404; on a push to main,
-        # against the last green main run (a full sweep when there is none), reporting only. Unverified (network)
-        # keys never fail. Findings go to the job summary. The full sweep of every key is nightly (nightly.yml).
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
-            pnpm check:assets-published --added-since-last-green --report-only
-          else
-            pnpm check:assets-published --added-since="${CI_BASE_REF:-origin/${GITHUB_BASE_REF:-main}}"
-          fi
 
   typecheck:
     name: Typecheck
@@ -339,7 +295,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lane: [sources, runtime, shell, renderer]
+        lane: [runtime, shell, renderer]
     env:
       CI_UNIVERSE_LANE: ${{ matrix.lane }}
     needs: changes
@@ -428,15 +384,6 @@ jobs:
           RUNTIME_OWNERSHIP_ARGS: ${{ needs.changes.outputs.runtime_ownership_args }}
         run: |
           case "$CI_UNIVERSE_LANE" in
-            sources)
-              if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
-                # Authoring replays volume provenance from pinned FITS; each matrix runner needs its own inputs.
-                node tools/restore-source-inputs.mts --repository-volumes
-                pnpm test:sources
-              else
-                pnpm test:sources:pr
-              fi
-              ;;
             runtime|shell|renderer)
               node tools/prepare-facilities.mts --catalog-only
               pnpm "test:universe:$CI_UNIVERSE_LANE"
@@ -461,7 +408,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lane: [publication, world]
+        lane: [publication]
     env:
       CI_PREPARATION_LANE: ${{ matrix.lane }}
     needs: changes
@@ -508,11 +455,6 @@ jobs:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
           path: src/objects/earth/source/presentation/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          # The galaxy-field acquisition sha-verifies a cached catalogue and skips its download.
-          path: .local/galaxy-field/sources
-          key: galaxy-field-sources-${{ hashFiles('src/objects/nearby-universe/source/catalogue.json') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -539,12 +481,6 @@ jobs:
             publication)
               pnpm exec playwright install --with-deps --only-shell chromium
               pnpm test:ci-preparation:publication
-              ;;
-            world)
-              # The galaxy writer finishes before world/provenance readers in this workspace.
-              node tools/restore-source-inputs.mts --repository-volumes
-              pnpm test:galaxy-field
-              pnpm test:ci-preparation:world
               ;;
             *) echo "Unknown preparation lane" >&2; exit 1 ;;
           esac

@@ -85,6 +85,8 @@ src/objects/venus/source/akatsuki/*.nc
 !src/objects/trappist-1b/source/science/jwst-trappist-1/b-emission-15um.csv
 !src/objects/trappist-1/source/photometry/gaia-dr3-xp-sampled.csv
 !src/objects/trappist-1/source/science/jwst-3077/white-15um.csv
+!src/objects/trappist-1/source/science/agol-2024/forecast-2025-2027.csv
+!src/objects/wasp-39b/source/science/jwst-transits/transit-times.csv
 
 src/objects/*/.prepared/
 
@@ -252,6 +254,7 @@ src/objects/*/source/**/*.bpc
 /site/prepared-navigation-markers.mjs
 /src/platform/solar-geometry.mts
 /src/objects/sun/prepared/world-context.json
+/src/objects/sun/prepared/world-context-summary.json
 /site/minimap/prepared.json
 /site/moon-labels.prepared.json
 

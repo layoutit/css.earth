@@ -4,8 +4,8 @@
     {
       "id": "kepler-452-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1074,
-      "expectedSha256": "068c9dc3da7dac8307a5b82064abfba64da9f2718f9c8ae9afd9a44d768afd78",
+      "expectedBytes": 1090,
+      "expectedSha256": "5293095c88f1a557c8a982e793dc7b18f50ff68dd05b8ace0d65f65ffd19d3f5",
       "origin": "https://arxiv.org/abs/1507.06723",
       "credit": "J. M. Jenkins et al., \"Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star\", AJ 150, 56 (2015), arXiv:1507.06723",
       "license": "Factual numerical measurements; source attribution retained",
@@ -198,6 +198,15 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 4666,
       "expectedSha256": "a4ca04840d0cf4eaa6c421b36f958684003ef4647d895c69d7e228df384d8faa"
+    },
+    {
+      "path": "reference/rendered-system.png",
+      "expectedBytes": 462276,
+      "expectedSha256": "da9beb83517172c12b79d4ea4db3899cc09166ec4247c4d45802a219a55d054e",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture of the system view in the app, committed with the package in 38da64e3fb; the capture's settings were not recorded."
+      }
     }
   ]
 }

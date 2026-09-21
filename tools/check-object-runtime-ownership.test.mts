@@ -416,14 +416,23 @@ test('descriptor context binding pins both prepared contexts to the shared facto
   }) };
   assert.equal((await audit({ [contextFile]: JSON.stringify(orbitless) })).complete, true,
     'An orbitless physical point does not require fabricated orbital geometry');
+  // The main thread's summary carries no orbit paths.
+  const summaryFile = 'src/objects/sun/prepared/world-context-summary.json';
+  const summary = requireRecord(JSON.parse(await readFile(summaryFile, 'utf8')), 'world context summary');
+  const withPath = { ...summary, bodies: requireArray(summary.bodies, 'summary bodies').map(value => {
+    const body = requireRecord(value, 'summary body');
+    return body.orbit === undefined ? body : { ...body, orbit: { ...requireRecord(body.orbit, 'summary orbit'), verticesM: [] } };
+  }) };
   const contextMutations: [SourceOverlay, RegExp][] = [
     [{ [planFile]: plan.replace("'../tools/prepared-world-context-node-source.mts'", "'../tools/other-context-plan.mts'") }, /world context plan|Computed dynamic imports/],
     [{ [planFile]: plan.replace("type: 'json'", "type: 'javascript'") }, /world context plan|Computed dynamic imports/],
-    [{ [planFile]: plan.replace("'src/objects/sun/prepared/world-context.json'", "'src/objects/sun/prepared/other-context.json'") }, /world context plan|Computed dynamic imports/],
+    [{ [planFile]: plan.replace("'src/objects/sun/prepared/world-context-summary.json'", "'src/objects/sun/prepared/other-context.json'") }, /world context plan|Computed dynamic imports/],
     [{ [planFile]: plan.replace("if (source.protocol === 'file:') {", "if (source.protocol !== 'https:') {") }, /world context plan|Computed dynamic imports/],
     // The Node-side path helper is followed and scanned: it cannot construct code or hide an import.
     [{ [nodeReaderFile]: nodeReader.replace('return pathToFileURL(', "eval('0');\n  return pathToFileURL(") }, /Runtime code construction/],
     [{ [nodeReaderFile]: `${nodeReader}\nexport const hidden = () => import(['./load', 'er.mts'].join(''));\n` }, /Computed dynamic imports/],
+    [{ [summaryFile]: JSON.stringify(withPath) }, /orbit summary is invalid/],
+    [{ [summaryFile]: JSON.stringify({ ...summary, frame: { ...requireRecord(summary.frame, 'summary frame'), originM: [1, 0, 0] } }) }, /physical frame/],
     [{ [contextFile]: JSON.stringify({ ...context, volume: { ...context.volume, objectId: '../milky-way' } }) }, /volume identity is not pinned/],
     [{ [contextFile]: JSON.stringify({ ...context, frame: { ...context.frame, originM: [1, 0, 0] } }) }, /physical frame/],
     [{ [contextFile]: JSON.stringify({ ...context, bodies: [] }) }, /body inventory/],

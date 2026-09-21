@@ -1,10 +1,10 @@
 #!/bin/sh
 # Opt-in (pnpm hooks:install; undo with git config --unset core.hooksPath): run the Contract lint subset before a
-# push. Skip once with git push --no-verify, or set CSSEARTH_SKIP_HOOKS=1.
+# push, plus the advisory repository audit. Skip once with git push --no-verify, or set CSSEARTH_SKIP_HOOKS=1.
 [ -n "${CSSEARTH_SKIP_HOOKS:-}" ] && exit 0
 # A docs-only contributor on a bare clone has nothing to run.
 command -v pnpm >/dev/null 2>&1 || exit 0
 [ -d node_modules ] || exit 0
 started=$(date +%s)
-pnpm --silent check:pr --job=lint --quick || exit 1
-echo "pre-push: Contract lint passed in $(( $(date +%s) - started ))s (skipped: documentation audits, published-assets check)."
+pnpm --silent check:pr --quick || exit 1
+echo "pre-push: Contract lint and the repository audit passed in $(( $(date +%s) - started ))s (skipped: documentation audits, published-assets check)."
