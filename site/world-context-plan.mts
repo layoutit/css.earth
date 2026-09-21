@@ -1,4 +1,4 @@
-import { parsePreparedWorldContext } from '../src/renderers/css/dist/index.js';
+import { parsePreparedWorldContextSummary } from '../src/renderers/css/dist/index.js';
 
 // The application's prepared world context, validated once. Startup, framing and
 // every detail mount share this immutable plan. The browser fetches the prepared
@@ -18,17 +18,20 @@ import { parsePreparedWorldContext } from '../src/renderers/css/dist/index.js';
 // runtime. The dynamic import keeps that module's `node:` imports out of the
 // client's static graph; Vite still emits it as a small chunk nothing loads.
 // The JSON-attributed import stays here, so the Node read can only yield data.
-const source = new URL('../src/objects/sun/prepared/world-context.json', import.meta.url);
-/** The same prepared file, for the world planner worker to read its own copy. */
-export const APPLICATION_WORLD_CONTEXT_URL = source.href;
+// The main thread reads the summary: every body and camera fact, with each orbit
+// reduced to its parent, bounds and size. Orbit paths are 7 MB of the full file and
+// only the planner worker projects them, so only the worker reads the full file.
+const source = new URL('../src/objects/sun/prepared/world-context-summary.json', import.meta.url);
+/** The full prepared file, orbit paths included, for the world planner worker to read. */
+export const APPLICATION_WORLD_CONTEXT_URL = new URL('../src/objects/sun/prepared/world-context.json', import.meta.url).href;
 async function readPreparedWorldContext(): Promise<unknown> {
   // Node tools, tests and the prerender build read the checked-in file directly.
   if (source.protocol === 'file:') {
     const { nodeProjectFileUrl } = await import('../tools/prepared-world-context-node-source.mts');
-    return (await import(/* @vite-ignore */ nodeProjectFileUrl(import.meta.url, 'src/objects/sun/prepared/world-context.json'), { with: { type: 'json' } })).default;
+    return (await import(/* @vite-ignore */ nodeProjectFileUrl(import.meta.url, 'src/objects/sun/prepared/world-context-summary.json'), { with: { type: 'json' } })).default;
   }
   const response = await fetch(source);
   if (!response.ok) throw new Error(`Prepared world context request failed: ${response.status}.`);
   return response.json();
 }
-export const APPLICATION_WORLD_CONTEXT = parsePreparedWorldContext(await readPreparedWorldContext());
+export const APPLICATION_WORLD_CONTEXT = parsePreparedWorldContextSummary(await readPreparedWorldContext());
