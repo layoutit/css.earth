@@ -1,0 +1,84 @@
+PDS_VERSION_ID                 = PDS3
+
+/* File characteristics */
+RECORD_TYPE                    = FIXED_LENGTH
+RECORD_BYTES                   = 14400
+FILE_RECORDS                   = 1817600
+
+/* Pointers to objects in file */
+^ARRAY                         = "EAST_DEUTERONILUS_MENSAE_3D_V2_TIME.DAT"
+
+/* Identification data elements */
+DATA_SET_ID                    = "MRO-M-SHARAD-5-3D-V1.0"
+DATA_SET_NAME                  = "MRO MARS SHARAD 5 3D V1.0"
+PRODUCT_ID                     = "EAST_DEUTERONILUS_MENSAE_3D_V2_TIME"
+PRODUCT_VERSION_ID             = "2"
+PRODUCT_CREATION_TIME          = 2025-07-09T16:32:08
+INSTRUMENT_HOST_ID             = "MRO"
+INSTRUMENT_HOST_NAME           = "MARS RECONNAISSANCE ORBITER"
+INSTRUMENT_ID                  = "SHARAD"
+INSTRUMENT_NAME                = "SHALLOW RADAR"
+TARGET_NAME                    = "MARS"
+START_TIME                     = 2007-083T13:17:45.086
+STOP_TIME                      = 2020-144T05:08:23.939
+SPACECRAFT_CLOCK_START_COUNT   = "2/859209465.05644"
+SPACECRAFT_CLOCK_STOP_COUNT    = "17/1274677755.094"
+PRODUCER_FULL_NAME             = "NATHANIEL EDWARD PUTZIG"
+PRODUCER_INSTITUTION_NAME      = "PLANETARY SCIENCE INSTITUTE"
+/* Array information */
+OBJECT                         = ARRAY
+ NAME                          = "3D RADAR VOLUME"
+ DESCRIPTION                   = "
+  The first and second (X and Y) axes are projected distances corresponding
+  to LINE and SAMPLE pixel directions. The third axis, DELAY_TIME, is
+  referenced to the areoid + 10.125 km. A FRAME consists of all values
+  along the third axis for a given X and Y location.
+  BACKSCATTER STRENGTH is the square root of backscatter power."
+ AXES                          = 3
+ /* AXIS_NAME                  = (X,Y,DELAY_TIME) */
+ AXIS_ITEMS                    = (1280,1420,3600)
+ AXIS_UNIT                     = (METER,METER,MICROSECOND)
+ AXIS_INTERVAL                 = (475,475,0.0375)
+ AXIS_START                    = (-303762.50,-337012.50,0.00000)
+ INTERCHANGE_FORMAT            = BINARY
+ OBJECT                        = ELEMENT
+  DATA_TYPE                    = PC_REAL
+  BYTES                        = 4
+  NAME                         = "BACKSCATTER STRENGTH RELATIVE TO FRAME MEAN"
+  MAXIMUM                      = 0.218038
+  MINIMUM                      = -0.0979370
+ END_OBJECT                    = ELEMENT
+END_OBJECT                     = ARRAY
+
+/* Map projection information */
+OBJECT                         = IMAGE_MAP_PROJECTION
+ ^DATA_SET_MAP_PROJECTION      = "DSMAP.CAT"
+ MAP_PROJECTION_TYPE           = "TRANSVERSE MERCATOR"
+ A_AXIS_RADIUS                 = 3396. <km>
+ B_AXIS_RADIUS                 = 3396. <km>
+ C_AXIS_RADIUS                 = 3376. <km>
+ FIRST_STANDARD_PARALLEL       = "N/A"
+ SECOND_STANDARD_PARALLEL      = "N/A"
+ POSITIVE_LONGITUDE_DIRECTION  = "EAST"
+ WESTERNMOST_LONGITUDE         = 35
+ EASTERNMOST_LONGITUDE         = 45
+ MINIMUM_LATITUDE              = 37
+ MAXIMUM_LATITUDE              = 47
+ CENTER_LONGITUDE              = 30
+ CENTER_LATITUDE               = 42
+ REFERENCE_LONGITUDE           = "N/A"
+ REFERENCE_LATITUDE            = "N/A"
+ LINE_FIRST_PIXEL              = 1
+ LINE_LAST_PIXEL               = 1280
+ SAMPLE_FIRST_PIXEL            = 1
+ SAMPLE_LAST_PIXEL             = 1420
+ MAP_PROJECTION_ROTATION       = 0
+ MAP_SCALE                     = 475 <m/pix>
+ MAP_RESOLUTION                = 125 <pix/deg>
+ LINE_PROJECTION_OFFSET        = 639
+ SAMPLE_PROJECTION_OFFSET      = 709
+ COORDINATE_SYSTEM_TYPE        = "BODY-FIXED ROTATING"
+ COORDINATE_SYSTEM_NAME        = "PLANETOCENTRIC"
+END_OBJECT                     = IMAGE_MAP_PROJECTION
+
+END
