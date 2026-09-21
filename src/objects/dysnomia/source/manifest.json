@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/objects/dysnomia/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+            "evidence": "src/objects/dysnomia/source/manifest.json@b0539bf1a0cd83049528c0330af05d52e4541f8d#/inputs/0"
           }
         ]
       }
@@ -42,7 +42,7 @@
           {
             "catalogueId": "doi-10-3847-psj-ace52a",
             "role": "material",
-            "evidence": "src/objects/dysnomia/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "src/objects/dysnomia/source/manifest.json@b0539bf1a0cd83049528c0330af05d52e4541f8d#/inputs/1"
           }
         ]
       },
@@ -95,7 +95,11 @@
     {
       "path": "content/object.json",
       "expectedBytes": 3197,
-      "expectedSha256": "d8388c32e3f28854d51326b3847ad7d69a78891d4fbd0147faf53d0137321637"
+      "expectedSha256": "d8388c32e3f28854d51326b3847ad7d69a78891d4fbd0147faf53d0137321637",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
     },
     {
       "path": "measurements.json",
