@@ -1,5 +1,6 @@
 import { expect, test } from 'vitest';
 import { projectVolumeImpostors, selectImpostorViews } from './volume-impostor-projection.js';
+import { projectedVolumeOpacity, projectVolumeSphere } from './projected-volume-visibility.js';
 import { validateVolumeImpostors } from './volume-impostor-validation.js';
 import type { PreparedVolumeImpostors, VolumeCameraPublication, VolumeVector } from './types.js';
 
@@ -87,4 +88,18 @@ test('a distant cloud beside or behind the camera is neither near nor visible', 
   // Just off the edge of the field of view but large enough to reach into it: visible.
   const edge = projectVolumeImpostors({ ...p, world: { ...p.world, pose: { positionM: [0, 0, 3], orientationXyzw: [0, Math.sin(Math.PI * 40 / 360), 0, Math.cos(Math.PI * 40 / 360)] } } }, frame, bank);
   expect(edge.visible).toBe(true);
+});
+
+test('a volume far behind the camera is out of view however large it would project, so its lenses are not fetched', () => {
+  const ahead = publication();
+  // Camera at +10 looking down -z sees the origin; turned half a turn about y, it faces away.
+  const behind = { ...ahead, world: { ...ahead.world, pose: { ...ahead.world.pose, orientationXyzw: [0, 1, 0, 0] as const } } };
+  // The lens fetch gate: big enough to resolve, and the bounding sphere reaches the viewport.
+  const fetches = (p: VolumeCameraPublication) => projectedVolumeOpacity(p.world, p.viewport, frame, 1) > 0 && projectVolumeSphere(p.world, p.viewport, frame, 1).visible;
+  expect(projectedVolumeOpacity(behind.world, behind.viewport, frame, 1)).toBe(projectedVolumeOpacity(ahead.world, ahead.viewport, frame, 1));
+  expect(fetches(ahead)).toBe(true);
+  expect(fetches(behind)).toBe(false);
+  // Inside the sphere it is always in view, whichever way the camera turns.
+  const inside = { ...behind, world: { ...behind.world, pose: { ...behind.world.pose, positionM: [0, 0, 0.5] as const } } };
+  expect(projectVolumeSphere(inside.world, inside.viewport, frame, 1).visible).toBe(true);
 });
