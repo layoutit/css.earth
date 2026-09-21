@@ -33,9 +33,14 @@ export function projectVolumeImpostors(publication: VolumeCameraPublication, fra
   const extent = viewport.focalPixels * radius / Math.max(Number.MIN_VALUE, depth - radius);
   const visible = depth + radius > 0 && (depth <= radius ||
     (Math.abs(x) <= (viewport.widthPixels ?? Infinity) / 2 + extent && Math.abs(y) <= (viewport.heightPixels ?? Infinity) / 2 + extent));
+  // A baked view shows the volume from a direction, so the view follows where the camera is, not where it looks:
+  // turning in place keeps the same views and only rotates their images.
+  const distance = Math.hypot(...local.positionUnits);
+  const toViewer: VolumeVector = distance > 0
+    ? [local.positionUnits[0] / distance, local.positionUnits[1] / distance, local.positionUnits[2] / distance] : back;
   return { x, y, diameterPixels, volumeMix, visible,
-    views: visible && (volumeMix < 1 || includeFullViews) ? selectImpostorViews(bank.views, back).map(({ view, weight }) => {
-      const imageRight = transport(view.right, view.back, back), imageDown = transport(view.down, view.back, back);
+    views: visible && (volumeMix < 1 || includeFullViews) ? selectImpostorViews(bank.views, toViewer).map(({ view, weight }) => {
+      const imageRight = transport(view.right, view.back, toViewer), imageDown = transport(view.down, view.back, toViewer);
       return { id: view.id, weight, matrix: [dot(imageRight, right), dot(imageRight, down), dot(imageDown, right), dot(imageDown, down)] };
     }) : [] };
 }
