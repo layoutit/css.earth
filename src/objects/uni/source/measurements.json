@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-21",
+  "id": "uni",
+  "name": "Uni",
+  "titleLabel": "Uni",
+  "horizons": "55637;",
+  "aliases": [
+    "55637 Uni",
+    "2002 UX25"
+  ],
+  "classification": "asteroid",
+  "population": "Trans-Neptunian object",
+  "fullAxesKm": [
+    692.0,
+    692.0,
+    692.0
+  ],
+  "radiusKm": 346.0,
+  "axesStatus": "Illustrative equal axes at the radiometric diameter; not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 14.382,
+  "periodText": "14.382 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at the measured diameter",
+  "source": "https://doi.org/10.1051/0004-6361/201321329",
+  "credit": "Fornasier et al. (2013), Astronomy & Astrophysics 555, A15; Herschel PACS and SPIRE thermal radiometry",
+  "papers": [
+    "https://doi.org/10.1051/0004-6361/201321329",
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 692 ± 23 km diameter measured from thermal emission. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Uni is a large icy body in the Kuiper belt beyond Neptune, first catalogued as 2002 UX25.",
+  "card": "A large icy body in the Kuiper belt.",
+  "datasetSummary": "A sphere at the 692 km diameter measured from its heat. Shape and pole are not measured.",
+  "distanceAu": 42.9,
+  "textCitations": [
+    {
+      "catalogueId": "jpl-small-body-database",
+      "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "label": "JPL Small-Body Database",
+      "checked": "2026-09-21",
+      "locator": "Record for 55637 Uni (2002 UX25): orbit class and physical parameters"
+    }
+  ]
+}

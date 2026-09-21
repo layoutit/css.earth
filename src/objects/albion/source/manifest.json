@@ -1,0 +1,168 @@
+{
+  "schema": "cssalbion-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/objects/albion/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://doi.org/10.1051/0004-6361/201322416",
+      "credit": "JPL Small-Body Database absolute magnitude H = 7.18 for 15760 Albion (1992 QB1); diameter estimated by cssEarth with the 0.14 median albedo of cold classical objects from Vilenius et al. (2014), Astronomy & Astrophysics 564, A35",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1051-0004-6361-201322416",
+            "role": "material",
+            "evidence": "src/objects/albion/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "expectedBytes": 62404,
+      "expectedSha256": "74d10d0e7fdbdafb7e95da47d5dd366aa0b7de5bbdf04a9c504f8248896e7a75",
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://doi.org/10.1051/0004-6361/201322416"
+      ],
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Illustrative sphere at 130.2 km, estimated from JPL's absolute magnitude H = 7.18 with an assumed albedo of 0.14, the median Vilenius et al. (2014) report for cold classical objects. The size is not measured. Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 65099.99999999999
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/trans-neptunian/batch-2026-09-21.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored grid marking unavailable surface imagery."
+      },
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "consumers": [
+        "surfaces"
+      ],
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 65099.99999999999
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/trans-neptunian/batch-2026-09-21.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3657,
+      "expectedSha256": "2834666ec95fe64b76555a37b7014cdf83a9105b8c61023e86859e19db7eedca",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2256,
+      "expectedSha256": "33258fa69b9b091016332d237f83c81fa50d8f780e5422f980db60bc36d42f6e"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 790,
+      "expectedSha256": "65fcc5a75b6c28bf48f77be1ead949cfa9fbb9aa50e9b90bea13cced8e93a715"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 443,
+      "expectedSha256": "1c29505dc8c673c6f50329b8cb7fd00b7e1664c7ae96fffee773cdafc442c544"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 350,
+      "expectedSha256": "8b015df63d7719e821ceb9f7a3ace65967aa8095bcc154581b15d7ba7af45726"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2340,
+      "expectedSha256": "01a23933ebcc23845800d7eadc912ed31574e8f0eb5725dce47b18ec1e2fcc78"
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2665,
+      "expectedSha256": "2516666052e41bea8470a4579cb5c765fa1155004e935b6a29a4e456853dec3c"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-source-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1051/0004-6361/201322416",
+      "credit": "JPL Small-Body Database absolute magnitude H = 7.18 for 15760 Albion (1992 QB1); diameter estimated by cssEarth with the 0.14 median albedo of cold classical objects from Vilenius et al. (2014), Astronomy & Astrophysics 564, A35",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 91846,
+      "expectedSha256": "51c7d7018f8e918b510d7f80a2d287298f85079df89ff906376d9607421036ab",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "inputs": [
+          "published-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+    }
+  ]
+}
