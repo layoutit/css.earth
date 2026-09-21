@@ -80,7 +80,9 @@ export function pixelModel(pool: KernelPool, instrument: number, keys: PixelMode
   if (pitchValues.length > 2) throw new Error(`Instrument ${instrument} states an unsupported pixel pitch.`);
   const pitch = pitchValues[0]!;
   const pixelPitchMm = keys.pixelPitch.unit === 'micrometre' ? pitch / 1000 : pitch;
-  const center = read(keys.center), boresight = read(keys.boresight), samples = read(keys.samples), lines = read(keys.lines);
+  const center = read(keys.center), samples = read(keys.samples), lines = read(keys.lines);
+  // Some instrument kernels state the boresight as a vector in millimetres (Dawn VIR: 0, 0, 152); only its direction matters.
+  const stated = read(keys.boresight), length = Math.hypot(...stated), boresight = stated.length === 3 && length > 0 ? stated.map(v => v / length) : stated;
   const frame = string(pool, key(keys.frame));
   if (keys.focalLength.unit !== 'mm' || !(focalLengthMm > 0) || !(pixelPitchMm > 0) || center.length !== 2 || boresight.length !== 3 || Math.abs(Math.hypot(...boresight) - 1) > 1e-9 ||
       samples.length !== 1 || lines.length !== 1 || !Number.isInteger(samples[0]) || !Number.isInteger(lines[0]) || ![0, 1].includes(keys.origin) ||
