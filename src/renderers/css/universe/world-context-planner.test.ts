@@ -59,8 +59,9 @@ test('viewport edges constrain captions without retiring an in-frame circle', ()
   });
   current.bodies.forEach((body, index) => { body.labelHidden = index !== targetIndex; });
   const width = current.viewport.widthPixels!, [offsetX, offsetY] = current.viewport.principalOffsetPixels!;
-  current.viewport.principalOffsetPixels = [offsetX + width / 2 - 1 - targetX, offsetY];
-  const edge = planner(current).projectedBodies.find(body => body.index === targetIndex)!;
+  const shifted = { ...current, viewport: { ...current.viewport,
+    principalOffsetPixels: [offsetX + width / 2 - 1 - targetX, offsetY] as const } };
+  const edge = planner(shifted).projectedBodies.find(body => body.index === targetIndex)!;
   expect(edge.visible).toBe(true);
   expect(edge.labelShown).toBe(true);
   expect(edge.indicatorShown).toBe(true);
