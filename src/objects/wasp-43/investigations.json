@@ -52,7 +52,7 @@
       "id": "stellar-rotation-axis",
       "subject": "Spin axis of WASP-43",
       "status": "included",
-      "finding": "Esposito et al. (2017, A&A 601, A53) measured the Rossiter-McLaughlin effect of WASP-43b with HARPS-N: sky-projected obliquity 3.5 +/- 6.8 degrees, aligned. The rotation record takes the pole from WASP-43b's orbit normal (cssearth-orbit-aligned-pole@1) with longitude 0 facing the Sun. No rotation period is measured (only some evidence of modulation longer than 15 days, Hellier et al. 2011), so no spin is shown.",
+      "finding": "Esposito et al. (2017, A&A 601, A53) measured the Rossiter-McLaughlin effect of WASP-43b with HARPS-N: sky-projected obliquity 3.5 +/- 6.8 degrees, aligned. The rotation record takes the pole from WASP-43b's orbit normal (cssearth-orbit-aligned-pole@1) with longitude 0 facing the Sun. The rotation period is measured, 15.6 +/- 0.4 days (Hellier et al. 2011), but with no prime meridian no spin is shown.",
       "evidence": [
         "https://arxiv.org/abs/1702.03136",
         "https://arxiv.org/abs/2406.10207"
@@ -103,16 +103,20 @@
     {
       "id": "stellar-inclination",
       "subject": "Tilt of WASP-43's spin axis along the line of sight",
-      "status": "unresolved",
-      "finding": "The Rossiter-McLaughlin effect fixes the spin axis's angle on the sky, not its inclination toward the observer. The pole is assumed to share the orbit's 82 degree inclination; measuring it needs the rotation period with v sin i, or asteroseismology, neither published. The orbit's own position angle on the sky is a display convention, which the axis inherits.",
-      "revisitWhen": "A measured stellar inclination or rotation period with v sin i for WASP-43.",
+      "status": "included",
+      "finding": "The Rossiter-McLaughlin effect fixes the spin axis's angle on the sky, not its inclination toward the observer. The pole is taken to share the orbit's 82 degree inclination, and that is supported: Esposito et al. (2017) combine the measured rotation period, 15.6 +/- 0.4 days (Hellier et al. 2011), with the star's radius and v sin i to get sin I = 1.08 +/- 0.25, an inclination above 72 degrees at 68% confidence. The orbit's own position angle on the sky is a display convention, which the axis inherits.",
       "evidence": [
+        "https://arxiv.org/abs/1104.2823",
         "https://arxiv.org/abs/1702.03136"
       ],
       "checked": [
         {
           "date": "2026-09-17",
           "commit": "1613af45edc3c34cef4fcdae748f0311d00a6746"
+        },
+        {
+          "date": "2026-09-21",
+          "commit": "3f7319c1db"
         }
       ]
     },

@@ -4,8 +4,8 @@
     {
       "id": "wasp-39b-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 759,
-      "expectedSha256": "244d1b0463348b329ae25d342afc62abea3c5df5e8ff38e5314b48e2e0646708",
+      "expectedBytes": 834,
+      "expectedSha256": "4bb9bfa2e06e76836e0155fbafb4b0b3e35db8c50ab8c60d14c82e91de188bcc",
       "origin": "https://arxiv.org/abs/1802.03859",
       "credit": "L. Mancini et al., \"The GAPS programme with HARPS-N at TNG XVI: Measurement of the Rossiter-McLaughlin effect of transiting planetary systems HAT-P-3, HAT-P-12, HAT-P-22, WASP-39 and WASP-60\", A&A 613, A41 (2018), arXiv:1802.03859",
       "license": "Factual numerical measurements; source attribution retained",
@@ -138,6 +138,24 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "wasp-39b-jwst-transit-times",
+      "path": "science/jwst-transits/transit-times.csv",
+      "expectedBytes": 638,
+      "expectedSha256": "32e9fcd3aeee11430fa81bbc8c7584f1a032085842d3047914c617bc2dd278e5",
+      "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?target_name=WASP-39",
+      "credit": "JWST programmes 1366, 2783 and 8017; MAST Level 3 white-light curves; transit times measured in this project",
+      "license": "JWST data are public; the transit times are this project's measurement",
+      "acquisition": "Each MAST product named in the table was fitted with node tools/objects/jwst/fit-transit-time.mts <product> --depth 0.0205 --duration 0.117 --clip 0.004 (a trapezoid with a linear baseline; uncertainty from 200 block bootstraps). The 1366 NIRSpec G395H curve (jw01366-o003) did not converge on the transit (fitted depth near zero) and is left out.",
+      "redistribution": "A table of measured times authored in this repository",
+      "consumers": [
+        "hosted-orbits"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurement record authored in this package from public MAST products; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -168,8 +186,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3745,
-      "expectedSha256": "0c2174d96d6e88b38e3fdd2056a7f1841d5c851c62fd5a719f951db40974c82a",
+      "expectedBytes": 3771,
+      "expectedSha256": "38efd80957974fa2f23ccfec4d06e8e31afd24ad4a3d199f32e025eaa058afb4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
