@@ -141,6 +141,10 @@ test('the volume publisher restores every pinned preparation dependency before b
   const bake = workflow.jobs.bake.steps.find(step => step.name === 'Bake');
   assert.equal(restore?.if, undefined);
   assert.match(restore?.run ?? '', /restore-source-inputs/u);
+  assert.match(bake?.run ?? '', /case "\$object_type" in/u);
   assert.match(bake?.run ?? '', /prepare:volume "src\/objects\/\$OBJECT"/u);
+  assert.match(bake?.run ?? '', /node tools\/nebula\/prepare\.mts "--object=\$OBJECT"/u);
+  assert.match(bake?.run ?? '', /cssearth-density-volume-lens-bank-source@1/u);
+  assert.match(bake?.run ?? '', /publish it from its producing checkout/u);
   assert.doesNotMatch(bake?.run ?? '', /--acquire-source/u);
 });
