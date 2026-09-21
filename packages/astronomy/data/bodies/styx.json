@@ -6,7 +6,7 @@
     "name": "Styx",
     "horizonsCode": "905",
     "meanRadiusKm": 3.5,
-    "gravitationalParameterKm3PerS2": 4.05e-05,
+    "gravitationalParameterKm3PerS2": 0.0000405,
     "parent": "pluto"
   },
   "physicalNotes": "PLU060 Horizons GMs (2024); radii match the sourced display shapes.\nNix/Hydra: Porter released meshes. Kerberos/Styx: Porter2025 fitted volumes.",

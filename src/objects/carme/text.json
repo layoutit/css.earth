@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "carme",
+  "card": {
+    "text": "An outer, irregular moon of Jupiter.",
+    "sources": [
+      {
+        "catalogueId": "jpl-horizons",
+        "url": "https://ssd.jpl.nasa.gov/horizons/",
+        "label": "JPL Horizons",
+        "checked": "2026-09-21",
+        "locator": "Object data page for 511 (Carme), revised 2025-May-12"
+      },
+      {
+        "catalogueId": "jpl-horizons",
+        "url": "https://ssd.jpl.nasa.gov/horizons/",
+        "label": "JPL Horizons object data for Carme (Jupiter XI), revised 2025-May-12",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Carme is an outer, irregular moon of Jupiter, discovered in 1938. It follows a wide, tilted orbit far beyond the large moons.",
+    "sources": [
+      {
+        "catalogueId": "jpl-horizons",
+        "url": "https://ssd.jpl.nasa.gov/horizons/",
+        "label": "JPL Horizons",
+        "checked": "2026-09-21",
+        "locator": "Object data page for 511 (Carme), revised 2025-May-12"
+      },
+      {
+        "catalogueId": "jpl-horizons",
+        "url": "https://ssd.jpl.nasa.gov/horizons/",
+        "label": "JPL Horizons object data for Carme (Jupiter XI), revised 2025-May-12",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Sphere at the JPL radius",
+      "detail": "Inferred shape",
+      "summary": "A sphere at the 15 km radius JPL lists. Its shape, pole and rotation are not measured.",
+      "sources": [
+        {
+          "catalogueId": "jpl-horizons",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "label": "JPL Horizons object data for Carme (Jupiter XI), revised 2025-May-12",
+          "checked": "2026-09-21"
+        }
+      ]
+    }
+  }
+}
