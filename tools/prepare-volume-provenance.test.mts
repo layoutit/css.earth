@@ -15,7 +15,7 @@ test('all installed volume lenses retain real source-to-product edges', async ()
   const closure = new Set<string>();
   const entries = await prepareVolumeProvenance({ root, input: async path => { closure.add(path); return readFile(resolve(root, path)); } });
   assert.deepEqual(entries.map(entry => [entry.id, entry.controls.length]), [
-    ['betelgeuse-shell', 4], ['hd-181327-disc', 1], ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m31', 1], ['m33', 1], ['m42', 2], ['m45', 5], ['m8', 3], ['smc', 5],
+    ['betelgeuse-shell', 4], ['hd-181327-disc', 1], ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m31', 1], ['m33', 1], ['m42', 2], ['m45', 5], ['m8', 3], ['smc', 5], ['sun-cor1-density', 2],
   ]);
   assert.equal(entries.find(entry => entry.id === 'm45')?.defaultLens, 'optical-composite');
   assert.ok([...closure].every(path => !path.startsWith('.local/') && !path.endsWith('/prepared/lenses.json')));
@@ -60,6 +60,9 @@ test('all installed volume lenses retain real source-to-product edges', async ()
   const sio = entries.find(entry => entry.id === 'betelgeuse-shell')!.provenance.products.find(p => p.id === 'sio-2023')!;
   assert.deepEqual(sio.inputEvidence?.map(e => [e.sourceId, e.role]), [['alma-sio-v0-5-4-2023-08', 'appearance'], ['alma-continuum-2023-08', 'registration']]);
   assert.ok(sio.inputs.includes('alma-continuum-2023-08'));
+  const cor1 = entries.find(entry => entry.id === 'sun-cor1-density')!;
+  assert.deepEqual(Object.fromEntries(Object.entries(cor1.hostedBy!.datasets).map(([lens, dataset]) => [lens, dataset.lensId])),
+    { 'electron-density-mu10': 'cor1-density', 'electron-density-mu1': 'cor1-density-mu1' });
   // A volume attached to a body is no place: each lens is reached through the body's dataset that shows it.
   const shell = entries.find(entry => entry.id === 'betelgeuse-shell')!;
   assert.deepEqual(Object.fromEntries(Object.entries(shell.hostedBy!.datasets).map(([lens, dataset]) => [lens, dataset.lensId])),

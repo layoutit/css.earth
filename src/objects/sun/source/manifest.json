@@ -1562,8 +1562,8 @@
     {
       "id": "sun-object-content",
       "path": "content/object.json",
-      "expectedBytes": 10922,
-      "expectedSha256": "41a9918afb9b3c8e35be8e99bb2bddc8759e1c5940cbdc0fb2c6d1322dbfae65",
+      "expectedBytes": 14706,
+      "expectedSha256": "ea06afcc974f5302c4a924e404f61114de67dba23e746327162bb086f3f19e14",
       "origin": "Repository-authored object content: NASA Science facts with citations, four lens descriptions, legends as palette recipes, resources",
       "sourceBinding": {
         "kind": "local",
@@ -1622,6 +1622,60 @@
           }
         ]
       }
+    },
+    {
+      "id": "stereo-cor1b-n3d-cr2053p1-m10",
+      "path": "stereo/cor1/cor1b-n3d_CR2053P1_m10.fits",
+      "origin": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1B/fits/n3d_CR2053P1_m10.fits",
+      "credit": "NASA STEREO Science Center; Wang, Arge, and Jones (2025)",
+      "license": "NASA scientific data; the archive requests citation of Wang, Arge, and Jones (2025), Solar Physics 300:46",
+      "licenseEvidence": [
+        "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
+      ],
+      "acquisition": "Exact COR1-B 3D electron-density reconstruction for Carrington rotation 2053, first half, regularization μ=10",
+      "redistribution": "Exact archive FITS retained locally with NASA/STEREO/SECCHI credit and the requested paper citation",
+      "consumers": [
+        "telescopes"
+      ],
+      "expectedBytes": 13337280,
+      "expectedSha256": "16b2cb6894f9a72bfb13cfbb43d8c0f4f056b8f6311cc924c6bba04242a4a7ca",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-stereo-cor1-tomography-2025",
+            "role": "material",
+            "evidence": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1B/fits/n3d_CR2053P1_m10.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "stereo-cor1b-n3d-cr2053p1-m1",
+      "path": "stereo/cor1/cor1b-n3d_CR2053P1_m1.0.fits",
+      "origin": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1B/fits/n3d_CR2053P1_m1.0.fits",
+      "credit": "NASA STEREO Science Center; Wang, Arge, and Jones (2025)",
+      "license": "NASA scientific data; the archive requests citation of Wang, Arge, and Jones (2025), Solar Physics 300:46",
+      "licenseEvidence": [
+        "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
+      ],
+      "acquisition": "Exact COR1-B 3D electron-density reconstruction for Carrington rotation 2053, first half, regularization μ=1",
+      "redistribution": "Exact archive FITS retained locally with NASA/STEREO/SECCHI credit and the requested paper citation",
+      "consumers": [
+        "telescopes"
+      ],
+      "expectedBytes": 13337280,
+      "expectedSha256": "1402dfe09bc702a02bc60d9101e8960f0e0f05f40a66e09ad437815077cbec38",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-stereo-cor1-tomography-2025",
+            "role": "material",
+            "evidence": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1B/fits/n3d_CR2053P1_m1.0.fits"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -1649,6 +1703,16 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence figure: one 180 by 70 degree patch of the interpreted 720 by 360 maps: the browse-JPEG photosphere on main at 11ac994699 (top), this branch's JSOC photosphere (middle) and the unchanged HMI radial field (bottom)."
+      }
+    },
+    {
+      "path": "observations.json",
+      "purpose": "Telescope API observation descriptors derived from the pinned Sun archive inputs and their native metadata; scientific limitations remain explicit per observation.",
+      "expectedBytes": 43544,
+      "expectedSha256": "800dfdc2401f282190268acf6bb2fa277ca24a402bdfeead8f7647224144baea",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored normalized observation records derived only from the exact inputs pinned by this manifest."
       }
     }
   ]

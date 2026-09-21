@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "sun-cor1-density",
+  "name": "Solar-corona electron density",
+  "defaultLens": "electron-density-mu10",
+  "bank": {
+    "path": "src/objects/sun-cor1-density/prepared/lenses.json",
+    "sha256": "5f1aeaab1a97e286dbf9a1aac35ee9782f02014cb9e0ba03169d084272d31142",
+    "bytes": 263691
+  },
+  "recipes": [],
+  "sharedInputs": [],
+  "inputEvidence": [],
+  "lenses": [
+    {
+      "id": "electron-density-mu10",
+      "label": "STEREO COR1-B · μ=10",
+      "title": "COR1-B electron-density tomography CR2053 · μ=10",
+      "description": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. SciPy resamples the spherical grid to Cartesian display voxels. A separately recorded radial weight softens display emission at 1.5–1.7 and 3.7–4.0 solar radii; the float density cube is unchanged.",
+      "summary": "STEREO-B reconstruction from 4–18 February 2007, using the archive μ=10 regularization and a display-only radial taper.",
+      "detail": "51 radial × 181 latitude × 361 longitude samples · 1.5–4.0 R☉",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "STEREO-B/SECCHI COR1"
+        },
+        {
+          "id": "interval",
+          "label": "Observation interval",
+          "value": "4–18 February 2007"
+        },
+        {
+          "id": "regularization",
+          "label": "Archive realization",
+          "value": "μ=10"
+        },
+        {
+          "id": "grid",
+          "label": "Archive grid",
+          "value": "Carrington longitude, latitude and heliocentric radius"
+        },
+        {
+          "id": "quantity",
+          "label": "Quantity",
+          "value": "Electron number density in cm⁻³"
+        },
+        {
+          "id": "display-boundary",
+          "label": "Display boundary",
+          "value": "Emission taper at 1.5–1.7 and 3.7–4.0 R☉; float density unchanged"
+        },
+        {
+          "id": "uncertainty",
+          "label": "Uncertainty",
+          "value": "No uncertainty array supplied by the archive"
+        }
+      ],
+      "input": "stereo-cor1b-n3d-cr2053p1-m10",
+      "inputEvidence": [],
+      "preview": {
+        "path": "src/objects/sun-cor1-density/source/previews/cor1-density.png",
+        "sha256": "0a06851301a77ca8774d10cf580fe39f30fddea7eca34667e5f13c65d276bf0c",
+        "bytes": 2239,
+        "authoredFrom": "stereo-cor1b-n3d-cr2053p1-m10"
+      }
+    },
+    {
+      "id": "electron-density-mu1",
+      "label": "STEREO COR1-B · μ=1",
+      "title": "COR1-B electron-density tomography CR2053 · μ=1",
+      "description": "The STEREO-B/SECCHI COR1 Carrington Rotation 2053 P1 reconstruction with the archive μ=1 regularization. It remains separate from μ=10: their difference is sensitivity evidence, not statistical uncertainty, and the app never averages them. The same display-only radial weight softens the finite reconstruction boundary without changing the float density cube.",
+      "summary": "The same STEREO-B interval with the archive μ=1 regularization, retained as a separate comparison solution.",
+      "detail": "51 radial × 181 latitude × 361 longitude samples · 1.5–4.0 R☉",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "STEREO-B/SECCHI COR1"
+        },
+        {
+          "id": "interval",
+          "label": "Observation interval",
+          "value": "4–18 February 2007"
+        },
+        {
+          "id": "regularization",
+          "label": "Archive realization",
+          "value": "μ=1"
+        },
+        {
+          "id": "grid",
+          "label": "Archive grid",
+          "value": "Carrington longitude, latitude and heliocentric radius"
+        },
+        {
+          "id": "quantity",
+          "label": "Quantity",
+          "value": "Electron number density in cm⁻³"
+        },
+        {
+          "id": "display-boundary",
+          "label": "Display boundary",
+          "value": "Emission taper at 1.5–1.7 and 3.7–4.0 R☉; float density unchanged"
+        },
+        {
+          "id": "uncertainty",
+          "label": "Uncertainty",
+          "value": "No uncertainty array supplied by the archive"
+        }
+      ],
+      "input": "stereo-cor1b-n3d-cr2053p1-m1",
+      "inputEvidence": [],
+      "preview": {
+        "path": "src/objects/sun-cor1-density/source/previews/cor1-density-mu1.png",
+        "sha256": "5090c31ed479267a26a134c7de62c30e450507b606e0f17f2f914181c7b71a3b",
+        "bytes": 2580,
+        "authoredFrom": "stereo-cor1b-n3d-cr2053p1-m1"
+      }
+    }
+  ]
+}
