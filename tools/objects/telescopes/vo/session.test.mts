@@ -88,7 +88,7 @@ test('two saved SODA subsets of one parent keep separate acquisition, qualificat
     await writeFile(localLinksFile, originalLinks.replaceAll('https://dataportal.eso.org/dataPortal/soda/sync', endpoint).replace('ucd="meta.id;meta.dataset"', 'ucd="meta.ref.url;meta.curation"'));
     const localLinks = (await astroquery({ operation: 'vo-parse', file: localLinksFile, url: endpoint, byteLimit: 1e6 })).vo!;
     const plans = new Map<string, Awaited<ReturnType<typeof planAccess>>>();
-    const planFor = async (request: ReturnType<typeof sessionRequest>) => {
+    const planFor = async (request: Parameters<typeof planAccess>[3]) => {
       const key = JSON.stringify(request), existing = plans.get(key);
       if (existing) return existing;
       const plan = await planAccess(root, observation, { ...snapshot, request: jsonValue(request) }, request, async () => localLinks);

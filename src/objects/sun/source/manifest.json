@@ -1430,8 +1430,8 @@
     {
       "id": "sun-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 21016,
-      "expectedSha256": "385a75cdef7d8c18a43e7c74104af7002b090e1ad360f90711e3ea414f1648ff",
+      "expectedBytes": 21508,
+      "expectedSha256": "f39542ce12fa1dfd698224ba1a3c5fe174456681f2f956ec19ed9816a6fa913f",
       "origin": "Checked source acquisition recipe retaining the accepted institutional inputs and numerical semantics",
       "credit": "cssEarth and the institutional sources identified in this recipe",
       "license": "Project-authored acquisition specification; referenced observations retain their source terms",
@@ -1456,8 +1456,8 @@
       "consumers": [
         "world-context"
       ],
-      "expectedBytes": 3396,
-      "expectedSha256": "02a2fc7561bf3402bdda66f88d21108bc0fca01308eaf864ad108321039b4195",
+      "expectedBytes": 3395,
+      "expectedSha256": "84f7b26c703371a694ef560f80bff255ab81585b3d60756e72037f36af8a81af",
       "sha256": "8095f6b133b30988cc6908bc5287130a1567b5c6806ad1343ff9b1eb117e0f78",
       "sourceBinding": {
         "kind": "local",
