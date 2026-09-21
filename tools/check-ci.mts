@@ -187,9 +187,12 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
   const scope=evaluateObjectScopeGate(changed,args.includes('--pipeline-change')?[{name:'pipeline-change'}]:[]);
   if(!scope.ok)throw new Error(`Object-scope gate: ${scope.count} objects exceed ${scope.limit}; split the PR or use --pipeline-change with the matching PR label.`);
  }
- const workflow=await readFile(resolve(root,`.github/workflows/${jobName==='asset-origin-build'?'nightly':'universe'}.yml`),'utf8');
+ // `audit` lives in its own workflow so its completeness findings cannot turn the gate run red.
+ const workflowFile=jobName==='asset-origin-build'?'nightly':jobName==='audit'?'audit':'universe';
+ const workflow=await readFile(resolve(root,`.github/workflows/${workflowFile}.yml`),'utf8');
  const substitutions={'${{ needs.changes.outputs.runtime_ownership_args }}':args.includes('--all')?'--all':selectRuntimeOwnershipArgs(changed).join(' ')};
- let steps=jobNames.flatMap(jobName=>readCiSteps(workflow,jobName,substitutions));
+ const auditWorkflow=await readFile(resolve(root,'.github/workflows/audit.yml'),'utf8');
+ let steps=jobNames.flatMap(name=>readCiSteps(name==='audit'?auditWorkflow:workflow,name,substitutions));
  if(production)steps.push(...readCiSteps(await readFile(resolve(root,'.github/workflows/nightly.yml'),'utf8'),'asset-origin-build'));
  // Select the same PR documentation/publish diff locally, including uncommitted changes in the documentation audit.
  // Pass through env, never interpolate an arbitrary ref into shell source.

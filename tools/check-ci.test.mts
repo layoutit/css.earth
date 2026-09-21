@@ -11,7 +11,8 @@ import {ALWAYS_JOBS} from './ci-affected.mts';
 
 test('local CI reads the actual workflow jobs in order, including strict TypeScript and renderer gates',async()=>{
  const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
- const lint=readCiSteps(workflow,'lint'),audit=readCiSteps(workflow,'audit'),typecheck=readCiSteps(workflow,'typecheck'),universe=readCiSteps(workflow);
+ const auditWorkflow=await readFile(new URL('../.github/workflows/audit.yml',import.meta.url),'utf8');
+ const lint=readCiSteps(workflow,'lint'),audit=readCiSteps(auditWorkflow,'audit'),typecheck=readCiSteps(workflow,'typecheck'),universe=readCiSteps(workflow);
  // The merge gate asserts only what the deployed site needs; repository completeness reports beside it without
  // gating (docs/ci-cd.md, "Gate on what ships"). Proving the split here keeps a bookkeeping check from drifting
  // back into the required job.
@@ -118,7 +119,8 @@ test('--quick skips only the network and documentation steps, and refuses a job 
  const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
  // `--quick` covers both always-run jobs: the documentation audit moved to `audit` while the published-assets
  // check stayed on `lint`, so neither job alone still carries both skipped names.
- const always=ALWAYS_JOBS.flatMap(job=>readCiSteps(workflow,job));
+ const auditYml=await readFile(new URL('../.github/workflows/audit.yml',import.meta.url),'utf8');
+ const always=ALWAYS_JOBS.flatMap(job=>readCiSteps(job==='audit'?auditYml:workflow,job));
  const quick=quickSteps(always);
  assert.deepEqual(always.filter(step=>!quick.includes(step)).map(step=>step.name),QUICK_SKIPPED_STEPS);
  assert.throws(()=>quickSteps(always.filter(step=>step.name!==QUICK_SKIPPED_STEPS[0])),/--quick expects a step/);
@@ -265,7 +267,8 @@ test('the actual workflow dispatches every native lane command locally and retai
 // the gate. Asserting the dispatch (not merely the presence of a string) is what proves nothing was dropped, and
 // that an unselected change skips them by the same path-based selection the gate lane applied as a job condition.
 test('the advisory audit dispatches the relocated source and reproduction commands in full',async()=>{
- const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
+ // The audit lives in its own workflow so its findings cannot turn the gate run red.
+ const workflow=await readFile(new URL('../.github/workflows/audit.yml',import.meta.url),'utf8');
  const audit=readCiSteps(workflow,'audit');
  const relocated=['Reconcile the source catalogue, facility records and provenance receipts',
   'Reproduce the prepared bank and the galaxy field from their pinned inputs'].map(name=>{
