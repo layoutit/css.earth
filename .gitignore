@@ -249,12 +249,15 @@ src/objects/*/source/**/*.bpc
 /site/prepared-object-discovery.json
 /site/prepared-context-objects.mts
 /site/prepared-feature-index.json
+/site/prepared-lens-billboards.json
+/site/prepared-lens-billboards.webp
 /public/features/
 /packages/astronomy/src/data/generated/
 /site/prepared-navigation-markers.mjs
 /src/platform/solar-geometry.mts
 /src/objects/sun/prepared/world-context.json
 /src/objects/sun/prepared/world-context-summary.json
+/src/objects/sun/prepared/world-orbits.bin
 /site/minimap/prepared.json
 /site/moon-labels.prepared.json
 
