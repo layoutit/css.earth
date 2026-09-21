@@ -287,6 +287,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       };
       const trimWarmLensResidency = () => {
         const warm = lensBanks.flatMap((bank, index) => bank && !lensVisible[index] && lensSubscribers[index] === 0 ? [index] : []);
+        // A bank builds its slice leaves when first seen up close; weigh it as it is now, not as it loaded.
+        for (const index of warm) updateLensWeight(index);
         let nodes = warm.reduce((total, index) => total + lensResidentNodes[index]!, 0);
         for (const index of warm.sort((left, right) => lensLastUsed[left]! - lensLastUsed[right]!)) {
           if (nodes <= warmVolumeLensDomNodeBudget) break;

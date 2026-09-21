@@ -4,8 +4,8 @@
     {
       "id": "kepler-452b-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 707,
-      "expectedSha256": "b91167767a6f33de50c2b4592702adecc5485f5c9bc09cfd6f3b7137881bdc47",
+      "expectedBytes": 701,
+      "expectedSha256": "9b66ebcf82e91d6104ae989307a21521731f55189f1cd22bf5a82a4cd7ec4bb4",
       "origin": "https://arxiv.org/abs/1507.06723",
       "credit": "J. M. Jenkins et al., \"Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star\", AJ 150, 56 (2015), arXiv:1507.06723",
       "license": "Factual numerical measurements; source attribution retained",
@@ -168,8 +168,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3463,
-      "expectedSha256": "67541aad3f606b6d6c0a079f519214aaba4ab01efd8e0438ae06c93785500d7b",
+      "expectedBytes": 3637,
+      "expectedSha256": "a23b8b77a187a1023a0222ba3ad26990c6cd4c12d984bbf03cdcff1de4cea37c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."

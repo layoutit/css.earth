@@ -106,7 +106,7 @@
     },
     "physical": {
       "path": "../../../../../packages/astronomy/data/bodies/trappist-1.json",
-      "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+      "credit": "Published radius at the catalogue distance; Gaia DR3 astrometry, radial velocity via SIMBAD; no measured rotation axis (display convention)"
     }
   }
 }

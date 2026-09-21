@@ -67,6 +67,9 @@ test('explore parses optional filters without inventing strict scientific criter
 test('human exploration and artifact screens retain unknowns, blockers, context and reproducible commands',()=>{
   const directory='/tmp/run with spaces',screen=formatExploration(exploration(directory));
   assert.match(screen,/Eris/u);assert.match(screen,/size unknown/u);assert.match(screen,/Resolution is not established/u);assert.match(screen,/Unresolved discoveries/u);assert.match(screen,/Unsupported discoveries/u);assert.match(screen,/Bounded result overflowed/u);assert.match(screen,/telescope get '\/tmp\/run with spaces' --pick N/u);
+  const session=exploration(directory),opus={service:'https://opus.pds-rings.seti.org/api/' as const,state:'sampled' as const,scope:'OPUS fixture',reason:'fixture',opusTarget:'Kerberos',images:2292,meanRadiusKm:4.75,
+    sharpest:[{instrument:'New Horizons LORRI',instrumentImages:2292,opusId:'nh-lorri-lor_0299153805',startTime:'2015-07-14T04:24:46.755',centreResolutionKmPerPixel:1.96379,pixelsAcross:4.8}]};
+  assert.match(formatExploration({...session,answer:{...session.answer,services:[opus]}}),/Spacecraft images in OPUS \(2292 of Kerberos.*\n  New Horizons LORRI · 2015-07-14T04:24:46\.755 · 1\.96379 km\/px at body centre · 4\.8 px across/u);
   const artifact=formatArtifact(inspection);
   assert.match(artifact,/delivery/u);assert.match(artifact,/No scientific acceptance criteria requested/u);assert.match(artifact,/sphere: unavailable/u);assert.match(artifact,/A sphere requires a registered body map/u);assert.match(artifact,/Unit: MJy\/sr/u);assert.match(artifact,/--output image --hdu 1 --structure SCI --plane N --out DIRECTORY/u);
   assert.equal(outputCommand(inspection.source,inspection.outputs[0]!),"telescope export /tmp/run/pick-1/result.json --output image --hdu 1 --structure SCI --plane N --out DIRECTORY");

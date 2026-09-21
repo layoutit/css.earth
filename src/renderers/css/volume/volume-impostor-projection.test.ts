@@ -59,3 +59,32 @@ test('directional views have bounded continuous weights and declared orthonormal
   expect(() => validateVolumeImpostors(bank, new Set())).toThrow('declared');
   expect(() => validateVolumeImpostors({ ...bank, views: [{ ...bank.views[0], right: [2, 0, 0] }, ...bank.views.slice(1)] }, resources)).toThrow('orthonormal');
 });
+test('turning in place keeps the same views; moving around the volume selects new ones', () => {
+  const p = publication();
+  const turned = (yawDegrees: number) => {
+    const half = yawDegrees * Math.PI / 360;
+    return projectVolumeImpostors({ ...p, world: { ...p.world, pose: { ...p.world.pose, orientationXyzw: [0, Math.sin(half), 0, Math.cos(half)] } } }, frame, bank);
+  };
+  // A small turn keeps the sphere on screen; the chosen views and weights must not change with it.
+  const ahead = turned(0), aside = turned(4);
+  expect(aside.visible).toBe(true);
+  expect(aside.views.map(view => [view.id, view.weight])).toEqual(ahead.views.map(view => [view.id, view.weight]));
+  const moved = projectVolumeImpostors({ ...p, world: { ...p.world, pose: { positionM: [10, 0, 0], orientationXyzw: [0, Math.sin(Math.PI / 4), 0, Math.cos(Math.PI / 4)] } } }, frame, bank);
+  expect(moved.views.map(view => view.id)).toEqual(['right']);
+});
+test('a distant cloud beside or behind the camera is neither near nor visible', () => {
+  const p = publication(100);
+  // Turned to face along +x, the cloud at the origin sits 90° off-axis at distance 100: depth is zero.
+  const beside = projectVolumeImpostors({ ...p, world: { ...p.world, pose: { ...p.world.pose, orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2] } } }, frame, bank);
+  expect(beside.visible).toBe(false); expect(Number.isFinite(beside.diameterPixels)).toBe(true); expect(beside.volumeMix).toBe(0);
+  expect(beside.views).toEqual([]);
+  // Facing away from it.
+  const behind = projectVolumeImpostors({ ...p, world: { ...p.world, pose: { ...p.world.pose, orientationXyzw: [0, 1, 0, 0] } } }, frame, bank);
+  expect(behind.visible).toBe(false); expect(behind.volumeMix).toBe(0);
+  // Inside the sphere is still inside, whatever the view direction.
+  const within = projectVolumeImpostors({ ...p, world: { ...p.world, pose: { ...p.world.pose, positionM: [0, 0, .5], orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2] } } }, frame, bank);
+  expect(within).toMatchObject({ visible: true, volumeMix: 1, diameterPixels: Number.POSITIVE_INFINITY });
+  // Just off the edge of the field of view but large enough to reach into it: visible.
+  const edge = projectVolumeImpostors({ ...p, world: { ...p.world, pose: { positionM: [0, 0, 3], orientationXyzw: [0, Math.sin(Math.PI * 40 / 360), 0, Math.cos(Math.PI * 40 / 360)] } } }, frame, bank);
+  expect(edge.visible).toBe(true);
+});

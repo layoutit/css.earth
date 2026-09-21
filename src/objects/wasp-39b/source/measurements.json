@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-hosted-planet@1",
   "id": "wasp-39b",
-  "radiusKm": 91462.5,
-  "radiusSource": "Radius 1.279 ± 0.037 ± 0.014 Jupiter radii (at 71492 km per Jupiter radius) from Mancini et al. 2018 (A&A 613, A41 (2018); arXiv:1802.03859), at 6378.137 km per Earth radius. No gravitational parameter is adopted. A sphere: no oblateness is measured.",
-  "orbitalPeriodDays": 4.0552941,
-  "orbitalPeriodSource": "Mancini et al. 2018 (A&A 613, A41 (2018); arXiv:1802.03859), Table of photometric results, row WASP-39: 4.0552941 d",
+  "radiusKm": 91438,
+  "radiusSource": "Radius 1.279 ± 0.037 ± 0.014 Jupiter radii (at 71492 km per Jupiter radius) from Mancini et al. 2018 (A&A 613, A41 (2018); arXiv:1802.03859): 91,438 km. No gravitational parameter is adopted. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.0552802,
+  "orbitalPeriodSource": "A straight line through six JWST transits of 2022 to 2026 measured in this project (science/jwst-transits/transit-times.csv): 4.0552802 d. Mancini et al. 2018 (A&A 613, A41; arXiv:1802.03859), Table 1: 4.0552941 d.",
   "shape": {
     "kind": "sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of WASP-39 b is measured; only its size, mass and orbit are."

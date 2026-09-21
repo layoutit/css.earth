@@ -106,9 +106,8 @@
     {
       "id": "transit-time-scale",
       "subject": "Time scale of the configuration's transit time",
-      "status": "unresolved",
-      "finding": "Lally et al. (2025) Table 1 labels t0 59838.6863112 UTC; the scene uses it as TDB, 69 s later, 0.04 percent of an orbit. The map is shown as fitted, so this changes only the planet's displayed phase.",
-      "revisitWhen": "The deposit or paper states the scale of the light-curve times.",
+      "status": "included",
+      "finding": "Lally et al. (2025) Table 1 labels t0 59838.6863112 UTC; the scene reads it as TDB. This project's TESS fit of HD 189733 puts the transit 6.4 +/- 0.9 s before that ephemeris, consistent with TDB and not with UTC, which would put it 69 s away. The difference is 0.1 percent of an orbit and the map is shown as fitted, so only the planet's displayed phase could move.",
       "evidence": [
         "https://arxiv.org/abs/2503.20895"
       ],
@@ -116,6 +115,10 @@
         {
           "date": "2026-09-17",
           "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        },
+        {
+          "date": "2026-09-21",
+          "commit": "3f7319c1db"
         }
       ]
     },
@@ -163,6 +166,24 @@
         {
           "date": "2026-09-17",
           "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "jwst-eclipses-not-used",
+      "subject": "JWST eclipses of HD 189733b not in the shown map",
+      "status": "unresolved",
+      "finding": "MAST holds three eclipse visits the deposited map does not use: NIRCam F322W2 (GTO 1274, 26 Aug 2022, 5.8 h) and NIRCam F444W (GTO 1185, 28 Sep 2022, 6.1 h) at 2.4 to 5 microns, and a third MIRI eclipse in GO 2021 (24 Sep 2022, 4.7 h, phase 0.455 to 0.543) besides the two Lally et al. (2025) used. Whether they are good enough for a map is not checked.",
+      "evidence": [
+        "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1274",
+        "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1185",
+        "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2021"
+      ],
+      "revisitWhen": "A reduction of these visits from raw, or a published map that uses them.",
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "3f7319c1db"
         }
       ]
     }
