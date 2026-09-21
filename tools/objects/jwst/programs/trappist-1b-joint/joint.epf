@@ -79,7 +79,8 @@ w_pl1           90					'fixed'
 # ---------------------------------
 # TRAPPIST-1g phasecurve parameters
 # ---------------------------------
-rp_pl2          0.08590				'shared'			0.08590			0.01		N
+# g's own Agol et al. (2021) Table 5 radius ratio; the recorded 2026-09-18 run seeded it with b's 0.08590 by a slip.
+rp_pl2          0.08692				'shared'			0.08692			0.01		N
 fp_pl2          0					'fixed'
 quasi_gamma_pl2 0					'fixed'
 # ------------------------------

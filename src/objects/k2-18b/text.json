@@ -2,28 +2,28 @@
   "schema": "cssearth-object-text@1",
   "objectId": "k2-18b",
   "card": {
-    "text": "Sub-Neptune 2.4 times Earth’s radius, in the temperate zone of a red dwarf.",
+    "text": "Sub-Neptune 2.6 times Earth’s radius, in the habitable zone of a red dwarf.",
     "sources": [
       {
-        "catalogueId": "arxiv-1805-00830",
-        "url": "https://arxiv.org/abs/1805.00830",
-        "label": "Sarkis et al. 2018",
+        "catalogueId": "arxiv-1909-04642",
+        "url": "https://arxiv.org/abs/1909.04642",
+        "label": "Benneke et al. 2019",
         "checked": "2026-09-21",
-        "locator": "Table 2",
-        "quote": "Rb [R⊕] b 2.37±0.22"
+        "locator": "Table 1",
+        "quote": "R_p R_⊕ 2.610±0.087; S_p S_⊕ 1.005"
       }
     ]
   },
   "introduction": {
-    "text": "K2-18 b is 2.4 times as wide as Earth and circles its red dwarf every 33 days. Only its size and orbit are measured; here it is a plain gray sphere.",
+    "text": "K2-18 b is 2.6 times as wide as Earth and circles its red dwarf every 33 days. Its size, mass, orbit and atmosphere are observed; here it is a plain gray sphere.",
     "sources": [
       {
-        "catalogueId": "arxiv-1805-00830",
-        "url": "https://arxiv.org/abs/1805.00830",
-        "label": "Sarkis et al. 2018",
+        "catalogueId": "arxiv-1909-04642",
+        "url": "https://arxiv.org/abs/1909.04642",
+        "label": "Benneke et al. 2019",
         "checked": "2026-09-21",
-        "locator": "Table 2",
-        "quote": "Pb [d]a 32.939614"
+        "locator": "Table 1",
+        "quote": "R_p R_⊕ 2.610±0.087; P days 32.940045"
       }
     ]
   },
@@ -31,7 +31,7 @@
     "shape": {
       "title": "Shape only",
       "detail": "Published radius",
-      "summary": "A gray sphere of the measured radius. No colour, surface or atmosphere of this planet is observed."
+      "summary": "A gray sphere of the measured radius. No colour or surface is observed; its atmosphere is observed in transmission."
     }
   }
 }

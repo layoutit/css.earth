@@ -2,7 +2,7 @@
 
 ## Sources
 
-TRAPPIST-1e is the planet whose starlight is nearest Earth's own, of the seven planets of [TRAPPIST-1](../trappist-1/README.md), an ultracool dwarf 12.47 parsecs away. Every number in this
+TRAPPIST-1e is the fourth of the seven planets of [TRAPPIST-1](../trappist-1/README.md), an ultracool dwarf 12.47 parsecs away. Every number in this
 package comes from Agol et al. (2021, PSJ 2, 1), who fitted the seven planets' transit times and the Spitzer and ground-based photometry together: the
 planets perturb each other enough for their masses to be read from the timing of their transits.
 
@@ -10,9 +10,12 @@ planets perturb each other enough for their masses to be read from the timing of
 surface gravity of 0.817 Earth's. The radius comes from the transit depth against the star's own radius; the mass from the
 transit-timing variations, scaled by the stellar mass Mann et al. (2019) give.
 
-**Orbit.** 6.101013 days at 0.02925 au, 0.646 times the starlight Earth receives (Agol et al. (2021, PSJ 2, 1), Tables 2, 5 and 6). The
-scene draws a circle: the paper's eccentricity for this planet is under 0.01, which moves it by less than its own radius. The
-transit time is the paper's, and transit-timing variations of up to about half an hour are not modelled. The orbit's position
+**Orbit.** 6.0996 days at 0.02925 au, 0.646 times the starlight Earth receives (Agol et al. (2021, PSJ 2, 1), Tables 2, 5 and 6). The
+scene draws a circle: the paper's eccentricity for this planet, 0.00632, moves it by up to 4.7 of its own radii, and is not drawn. The
+period and transit time are the ones the Agol et al. (2024, arXiv:2409.11620) forecast gives around the scene epoch
+(2026-09-03), which adds JWST timings to the Agol et al. (2021) model; their Table 2 period, 6.101013 d, is an osculating value at
+the start of their simulation and drifts hours off by 2026. Transit-timing variations of -11.5 to +45.6 minutes about that
+line are not modelled. The orbit's position
 angle on the sky is not measured, so the ascending node is drawn at celestial north, a stated convention.
 
 **Rotation.** Assumed synchronous: this close to its star the planet is expected to be tidally locked, and no rotation period of
@@ -31,6 +34,8 @@ surface, lit by its own star at the measured orbit, and the page says so.
   lit sphere of the measured radius.
 
 ## Known problems
+
+**No heat of this planet has been detected.** Cartigny et al. (2026, [arXiv:2608.18626](https://arxiv.org/abs/2608.18626)) searched the archival JWST MIRI data of TRAPPIST-1 for the outer planets' combined emission and could not reach the precision to detect it.
 
 **No observation of the planet itself is shown.** Size, mass and orbit are measured; the surface is not. JWST has measured the
 mid-infrared dayside brightness of TRAPPIST-1b and c (shown with those planets); this project has reduced no JWST observation of this planet.

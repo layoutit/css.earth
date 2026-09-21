@@ -2,7 +2,7 @@
   "schema": "cssearth-object-text@1",
   "objectId": "trappist-1h",
   "card": {
-    "text": "Smaller than earth planet of TRAPPIST-1, one year every 18.77 days.",
+    "text": "Planet smaller than Earth of TRAPPIST-1, one year every 18.77 days.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-psj-abd022",
@@ -24,6 +24,14 @@
         "checked": "2026-09-17",
         "locator": "Table 6",
         "quote": "R [R_earth]: 0.755; M [M_earth]: 0.326"
+      },
+      {
+        "catalogueId": "doi-10-3847-psj-abd022",
+        "url": "https://doi.org/10.3847/PSJ/abd022",
+        "label": "Agol et al. 2021",
+        "checked": "2026-09-17",
+        "locator": "Table 2",
+        "quote": "P [day]: 18.772866"
       }
     ]
   },

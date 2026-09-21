@@ -6,7 +6,7 @@
       "id": "jwst-1274-transit-time",
       "subject": "Mid-transit time measured from the JWST NIRCam white-light curves (programme 1274)",
       "status": "included",
-      "finding": "Torres et al. (2008) give period, a/R*, inclination and radii but no transit time. MAST holds the pipeline's Level 3 white-light curves of two NIRCam grism transits. tools/objects/source-authoring/hd-209458/fit-transit-time.mts fits a trapezoid with a linear baseline (Nelder-Mead, points over 2000 ppm from a 31-point running median removed) and takes the error from 200 block bootstraps of the residuals. F322W2, 2022-11-11: BJD_TDB 2459893.75120 +/- 0.00005 (4.2 s), depth 1.488%, duration 0.1247 d, residual 503 ppm. F444W, 2022-11-07: 2459890.22649 +/- 0.00005 (4.3 s), depth 1.480%, duration 0.1249 d, residual 646 ppm. The two differ by 3.524706 d, 3.5 s from the published period 3.524746 d and inside their combined error. The F322W2 time is the hosted orbit's phase. A trapezoid has no limb darkening; it is symmetric, so the mid-time does not depend on it, but the depth does and is not used.",
+      "finding": "Torres et al. (2008) give period, a/R*, inclination and radii but no transit time. MAST holds the pipeline's Level 3 white-light curves of two NIRCam grism transits. tools/objects/jwst/fit-transit-time.mts fits a trapezoid with a linear baseline (Nelder-Mead, points over 2000 ppm from a 31-point running median removed) and takes the error from 200 block bootstraps of the residuals. F322W2, 2022-11-11: BJD_TDB 2459893.75120 +/- 0.00005 (4.2 s), depth 1.488%, duration 0.1247 d, residual 503 ppm. F444W, 2022-11-07: 2459890.22649 +/- 0.00005 (4.3 s), depth 1.480%, duration 0.1249 d, residual 646 ppm. The two differ by 3.524706 d, 3.5 s from the published period 3.524746 d and inside their combined error. The F322W2 time is the hosted orbit's phase. A trapezoid has no limb darkening; it is symmetric, so the mid-time does not depend on it, but the depth does and is not used.",
       "evidence": [
         "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw01274-o002_t002_nircam_f322w2-grismr-subgrism64_whtlt.ecsv",
         "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw01274-o003_t002_nircam_f444w-grismr-subgrism64_whtlt.ecsv",
@@ -23,7 +23,7 @@
       "id": "jwst-hst-atmosphere",
       "subject": "Transmission and emission spectra from Hubble and JWST",
       "status": "unresolved",
-      "finding": "The planet's atmosphere has been measured in transit by Hubble and JWST. No spectrum gives a surface or a colour, and none is shown. A reduction of the programme 1274 time series has not been attempted.",
+      "finding": "The planet's atmosphere has been measured in transit by Hubble and JWST. No spectrum gives a surface or a colour, and none is shown. JWST programme 2667 adds a partial MIRI LRS transit (2023). A reduction of the programme 1274 time series has not been attempted.",
       "evidence": [
         "https://arxiv.org/abs/0801.1841"
       ],
