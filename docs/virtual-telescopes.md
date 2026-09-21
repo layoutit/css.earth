@@ -738,7 +738,9 @@ uses Astropy units to verify their dimensions. Coupled matrices, nonlinear WCS, 
 units are refused. Body attachment additionally requires an explicit Cartesian, spherical,
 projected-and-vertical, located-profile, or symmetry placement; a depth axis and named frame alone
 do not establish a location. Placement axes must be distinct and carry the required spatial roles
-and physical dimensions; projected vertical placement binds its qualified depth coordinate.
+and physical dimensions. A complete body-fixed Cartesian grid needs no separate scalar depth axis.
+Projected vertical and located-profile placements bind their qualified physical-depth coordinate;
+the located profile cannot leave additional planetary axes unmapped.
 Astropy validates Cartesian anchor units as lengths and longitude/latitude anchor units as
 angles before a source constructor can publish the placement.
 
