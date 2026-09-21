@@ -135,11 +135,14 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   document.querySelector('.planet-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
   const browser = requiredElement<HTMLElement>(document, '.planet-object-browser');
   const information = requiredElement<HTMLElement>(document, '.planet-information-panel');
+  const selectedContent = requiredElement<HTMLElement>(document, '.planet-selected-content');
   const context = document.querySelector<HTMLElement>('.planet-object-context') ?? browser;
   const sharedLegacyContext = context === browser;
   const selectedOverview = overviewScopeFromUrl(url);
   const showingContext = Boolean(focusCard || selectedOverview);
   browser.toggleAttribute('hidden', !searching);
+  selectedContent.toggleAttribute('hidden', searching);
+  selectedContent.toggleAttribute('inert', searching);
   information.toggleAttribute('hidden', showingContext);
   if (!sharedLegacyContext) context.toggleAttribute('hidden', !showingContext);
   if (focusCard) focusCard.removeAttribute('hidden');

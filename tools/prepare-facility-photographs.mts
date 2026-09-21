@@ -5,8 +5,8 @@ import sharp from 'sharp';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from './source-values.mts';
 
 /**
- * Prepares the published photographs that stand in for ground facilities, which
- * have no 3D model to render. Acquisition and preparation are explicit
+ * Prepares the published imagery that stands in for facilities which have no
+ * 3D model to render. Acquisition and preparation are explicit
  * maintenance operations; normal builds reuse the committed WebP files.
  */
 const root = path.resolve(import.meta.dirname, '..');
@@ -18,13 +18,21 @@ const WIDTH = 592, HEIGHT = 296, BACKGROUND = '#0d0d0d';
 interface Pinned {
   readonly id: string; readonly url: string; readonly sourcePage: string;
   readonly credit: string; readonly license: string;
+  readonly kind: string; readonly flipX: boolean;
   readonly sha256: string; readonly bytes: number;
 }
+const optionalBoolean = (value: unknown, label: string): boolean => {
+  if (value === undefined) return false;
+  if (typeof value !== 'boolean') throw new TypeError(`${label} must be a boolean.`);
+  return value;
+};
 const pinned: readonly Pinned[] = requireArray(JSON.parse(await fs.readFile(records, 'utf8')))
   .map(value => {
     const entry = requireRecord(value);
     return { id: requireString(entry.id), url: requireString(entry.url), sourcePage: requireString(entry.sourcePage),
       credit: requireString(entry.credit), license: requireString(entry.license),
+      kind: entry.kind === undefined ? 'published-photograph' : requireString(entry.kind),
+      flipX: optionalBoolean(entry.flipX, 'flipX'),
       sha256: requireString(entry.sha256), bytes: requireFiniteNumber(entry.bytes) };
   });
 
@@ -51,7 +59,8 @@ for (const entry of pinned) {
   if (!probe.width || !probe.height || probe.width < WIDTH || probe.height < HEIGHT) throw new Error(`Photograph is smaller than the frame: ${entry.id}`);
   // Cover the frame from the centre. A photograph has no transparent margin to
   // trim, so it is never upscaled and never letterboxed onto the sidebar.
-  const webp = await sharp(source).resize(WIDTH, HEIGHT, { fit: 'cover', position: 'centre' })
+  const resized = sharp(source).resize(WIDTH, HEIGHT, { fit: 'cover', position: 'centre' });
+  const webp = await (entry.flipX ? resized.flop() : resized)
     .flatten({ background: BACKGROUND }).webp({ quality: 90 }).toBuffer();
   const check = await sharp(webp).metadata();
   if (check.width !== WIDTH || check.height !== HEIGHT) throw new Error(`Prepared photograph is the wrong size: ${entry.id}`);
@@ -62,8 +71,8 @@ for (const entry of pinned) {
     sourceBinding: { kind: 'catalogued', references: [{ catalogueId: `artwork-photo-${entry.id}`, role: 'artwork',
       evidence: `site/source/facilities/photograph-records.json#/${pinned.indexOf(entry)}` }] },
     source: { id: entry.id, url: entry.url, sourcePage: entry.sourcePage, credit: entry.credit,
-      license: entry.license, sha256: entry.sha256, bytes: entry.bytes, kind: 'published-photograph',
-      preparation: `Centre-cover to ${WIDTH}x${HEIGHT} without upscaling, flatten onto sidebar ${BACKGROUND}, encode WebP quality 90.` } });
+      license: entry.license, sha256: entry.sha256, bytes: entry.bytes, kind: entry.kind,
+      preparation: `Centre-cover to ${WIDTH}x${HEIGHT} without upscaling${entry.flipX ? ', mirror horizontally' : ''}, flatten onto sidebar ${BACKGROUND}, encode WebP quality 90.` } });
   console.log(entry.id, webp.length, 'bytes');
 }
 if (entries.length !== pinned.length) throw new Error('Expected one prepared photograph per pinned record.');

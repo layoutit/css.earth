@@ -181,9 +181,7 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
       const frontEnd = frontRoot ? create('span') : null;
       if (frontRoot && frontEnd) { frontEnd.hidden = true; frontRoot.append(frontEnd); }
       let selected = data.lenses.some(lens => lens.id === selectedNative) ? selectedNative! : data.defaultLens, destroyed = false, latest: VolumeCameraPublication | null = null;
-      const nativeStars = existing ? [...document.querySelectorAll<HTMLInputElement>('[data-focus-lens-bank] [data-focus-stars]')]
-        .find(input => input.closest<HTMLElement>('[data-focus-lens-bank]')?.dataset.focusLensBank === data.id) : null;
-      let starsVisible = nativeStars?.checked ?? data.starsEnabled ?? true;
+      let starsVisible = data.starsEnabled ?? true;
       const listeners = new Set<(state: PreparedVolumeLensState) => void>();
       const lensContent = Object.freeze(data.lenses.map(({ id, label, title, description, sourceUrl }) =>
         Object.freeze({ id, label, title, description, sourceUrl })));

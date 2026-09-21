@@ -236,8 +236,10 @@ try {
       const before = await page.evaluate(() => JSON.stringify(window.__cssearthTest.object('sun').camera.state()));
       const button = controls.locator(`[data-focus-lens][value="${lens.id}"]`);
       const presentationLens = presentation.controls.find(control => control.id === lens.id); assert.ok(presentationLens);
-      assert.equal((await button.innerText()).trim(), presentationLens.label, 'Dataset rows contain only their image names.');
-      assert.doesNotMatch(await button.innerText(), /\d+\s*[×x]\s*\d+\s*px/u, 'Pixel dimensions belong in Factsheet.');
+      assert.equal((await button.locator('.planet-lens-label').innerText()).trim(), presentationLens.label, 'Dataset rows retain their image names.');
+      const datasetDetail = (await button.locator('.planet-lens-detail').innerText()).trim();
+      assert.ok(datasetDetail, 'Dataset rows name their instrument or facility.');
+      assert.doesNotMatch(datasetDetail, /\d+\s*[×x]\s*\d+\s*px/u, 'Pixel dimensions belong in Factsheet.');
       await button.click();
       await page.waitForFunction(({ id, lens }) => document.querySelector(`[data-volume-lens-object="${id}"]`)?.getAttribute('data-selected-lens') === lens, { id, lens: lens.id });
       assert.equal(await page.evaluate(() => JSON.stringify(window.__cssearthTest.object('sun').camera.state())), before, 'A lens switch moved the world camera.');
@@ -309,9 +311,9 @@ try {
       sideCaptures.push({ name, angleRadians: angle, lens: payload.defaultLens, textures: sideTextures });
     }
     await apply(frontDistance);
-    const stars = controls.locator('[data-focus-stars]');
-    assert.equal(await stars.count(), count ? 1 : 0, 'A nonempty prepared compact-light bank retains its shared toggle.');
-    const starToggle = controls.locator('label:has([data-focus-stars])');
+    assert.equal(await controls.locator('[data-focus-stars]').count(), 0, 'The selected-object card does not duplicate the shell-level 3D-stars setting.');
+    const stars = page.locator('.planet-three-d-stars-setting');
+    const starToggle = page.locator('label:has(.planet-three-d-stars-setting)');
     if (count && !await stars.isChecked()) await starToggle.click();
     const pointRoot = bank.locator('.prepared-catalogue-points');
     assert.equal(await pointRoot.evaluate(element => getComputedStyle(element).display), 'block');

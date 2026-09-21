@@ -237,7 +237,7 @@
         "ringUrl": "/scenes/saturn/saturn-rings.webp",
         "ring2xUrl": "/scenes/saturn/saturn-rings@2x.webp",
         "materialUrl": "/scenes/saturn/saturn-orbit-material.webp",
-        "qualification": "visible-color reference"
+        "qualification": "Composite visible presentation: Hubble OPAL 2025A body, Cassini PIA21611 north pole and Cassini UVIS 2006 ring opacity; unobserved OPAL rows are filled by linear interpolation."
       },
       {
         "id": "cross-section",
@@ -253,14 +253,14 @@
     "provenance": {
       "bodyAuthority": "Hubble OPAL Cycle 32 Saturn global maps",
       "bodySourceUrl": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32",
-      "bodyDetailAuthority": "OpenSpace synchronized visible-light Saturn surface",
+      "bodyDetailAuthority": "Hubble OPAL Cycle 32 2025A visible-light map",
       "ringAuthority": "Hubble WFC3 program 17843, 2025-08-29",
       "ringProducts": [
         "ifcu37ccq",
         "ifcu37cdq",
         "ifcu37ceq"
       ],
-      "ringMethod": "broad source-derived spectral response over unchanged prepared OpenSpace radial morphology",
+      "ringMethod": "broad source-derived spectral response over the prepared Cassini UVIS radial opacity morphology",
       "fineRingQualification": "D, G, E and unresolved ringlets retain the visible-light morphology because the Hubble frames do not resolve a complete replacement profile",
       "thermalAuthority": "Illustration inspired by Cassini infrared imagery; not Cassini measurement data",
       "thermalMethod": "Authored morphology-based illustration; color does not measure infrared brightness or temperature"
