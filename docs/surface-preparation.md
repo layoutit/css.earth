@@ -426,6 +426,23 @@ source pixel footprints before applying display gain/gamma. Source special value
 are masked before sampling; observed black is retained. It reads one row strip
 at a time and supplies the same interpretation to the globe and sidebar map.
 
+A scientific lens with format `pds3-float-map` (for example Titan's heights and
+Ceres's Dawn VIR band depths) reads 32-bit float maps through
+[pds-float-map.mts](../tools/objects/terrestrial-layers/pds-float-map.mts). The
+label may be attached or detached (`labelPath`); byte order, west- or
+east-positive longitude, latitude extent and missing value come from the label
+and must equal the recipe's grid. Pixels outside the label's latitude limits
+and missing pixels stay missing.
+
+A published point catalogue in the AAS machine-readable table layout uses
+format `mrt-point-table`
+([mrt-point-table.mts](../tools/objects/terrestrial-layers/mrt-point-table.mts)),
+as in Io's volcanic hot spots. The recipe repeats the table's column
+description, which must match; each row becomes a circle on the sphere sized and
+colored by its class, as a published figure legend draws it. A lens that names a
+`monochromeBase` observation shows that observation outside the symbols instead
+of the no-data grid.
+
 ## Seam repair and the globe interior disc
 
 Spherical and ellipsoidal objects share one retained interior disc behind their

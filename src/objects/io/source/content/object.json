@@ -345,6 +345,69 @@
         },
         "notes": "Published mean absorption around 560 nm after continuum removal. The 578–605 nm instrument gap is omitted. Sulfur-bearing materials can contribute, but the absorbing species is not uniquely identified. July 2019 observing nights retain seams and residual differences. Native two-degree samples, missing areas and withheld edges remain; this is not abundance.",
         "noData": true
+      },
+      {
+        "id": "volcanic-heat",
+        "label": "Volcanic heat",
+        "thumbnail": "io-lens-volcanic-heat.webp",
+        "surface": "io-volcanic-heat@2x.webp",
+        "poles": "io-poles-volcanic-heat@2x.webp",
+        "source": {
+          "id": "davies-2024-io-thermal-sources",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/PSJ/ad4346"
+        },
+        "falseColor": true,
+        "facts": [
+          {
+            "id": "classification",
+            "label": "Quantity",
+            "value": "Thermal power of each hot spot, GW"
+          },
+          {
+            "id": "sources",
+            "label": "Hot spots",
+            "value": "343, through Juno orbit PJ49"
+          },
+          {
+            "id": "symbols",
+            "label": "Symbols",
+            "value": "Davies et al. (2024), Fig. 1 classes; size is not physical"
+          }
+        ],
+        "legend": {
+          "kind": "categories",
+          "title": "Thermal power",
+          "meta": "Symbol size marks the class, not the hot spot's size.",
+          "sourceUrl": "https://doi.org/10.3847/PSJ/ad4346",
+          "items": [
+            {
+              "label": "<1 GW",
+              "description": "Smallest dot",
+              "color": "#2a00f7"
+            },
+            {
+              "label": ">1 to 10 GW",
+              "color": "#84ff2b"
+            },
+            {
+              "label": ">10 to 100 GW",
+              "color": "#cb181b"
+            },
+            {
+              "label": ">100 to 1000 GW",
+              "description": "Black outline",
+              "color": "#e3b229"
+            },
+            {
+              "label": ">1000 to 10000 GW",
+              "description": "Largest dot, black outline",
+              "color": "#f3ff31"
+            }
+          ]
+        },
+        "notes": "343 volcanic hot spots from Davies et al. (2024), Table A1, drawn over the Monochrome mosaic with the symbol classes, sizes and colors of the paper's Figure 1. Symbol size shows the power class, not the size of the hot spot; most are far smaller than one symbol.",
+        "noData": true
       }
     ],
     "labels": {

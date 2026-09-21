@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a2ff3dbe7c0fe9b4e7081e71673171783145600cbfd19d53c29375515e8b80b9"
+    "sha256": "f31d3bfea6561abc235d1b7185a84646467a7c43a6ca938c7e6eb69743c31d36"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "ff10a89ff7d290915e8c1209d597dcfb45537c5135283c1466e31267260705ed"
+    "bindingsSha256": "4d4fb7a8dbda3e996127f9e4c1f4f1e0dbf6783050be20d0f01f2238dc49b8b7"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "827d36dbc224e8ac71ddf5b84d1a6275289a9715b63c7e0286df6332089ad0b4",
+      "sha256": "a6839e4126794b7d0603e5655c10eaf36f29199176d62eb20b908d756182e6fe",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/io/",
@@ -408,6 +408,137 @@
                 }
               ]
             }
+          },
+          {
+            "id": "volcanic-heat",
+            "output": "io-{id}{suffix}.webp",
+            "thumbnail": "io-lens-{id}.webp",
+            "source": "science/davies-2024/psjad4346t10_mrt.txt",
+            "falseColor": true,
+            "science": {
+              "kind": "terrestrial-scientific",
+              "id": "volcanic-heat",
+              "label": "Volcanic heat",
+              "format": "mrt-point-table",
+              "path": "science/davies-2024/psjad4346t10_mrt.txt",
+              "consumer": "volcanic-heat",
+              "sampling": "nearest",
+              "monochromeBase": "normal",
+              "description": "Davies et al. 2024 thermal sources · power classes",
+              "title": "343 volcanic hot spots from Davies et al. (2024), Table A1, drawn over the Monochrome mosaic with the symbol classes, sizes and colors of the paper's Figure 1. Symbol size shows the power class, not the size of the hot spot; most are far smaller than one symbol.",
+              "sourceUrl": "https://doi.org/10.3847/PSJ/ad4346",
+              "grid": {
+                "title": "New Global Map of Io’s Volcanic Thermal Emission and Discovery of Hemispherical Dichotomies",
+                "expectedRows": 343,
+                "longitudeDirection": "west-positive",
+                "rank": {
+                  "label": "Rank",
+                  "bytes": [
+                    1,
+                    3
+                  ],
+                  "format": "I3",
+                  "units": "---",
+                  "explanation": "Rank by power"
+                },
+                "latitude": {
+                  "label": "Lat",
+                  "bytes": [
+                    38,
+                    42
+                  ],
+                  "format": "F5.1",
+                  "units": "deg",
+                  "explanation": "Degrees North latitude"
+                },
+                "longitude": {
+                  "label": "Long",
+                  "bytes": [
+                    44,
+                    48
+                  ],
+                  "format": "F5.1",
+                  "units": "deg",
+                  "explanation": "Degrees West longitude"
+                },
+                "value": {
+                  "label": "Power",
+                  "bytes": [
+                    66,
+                    72
+                  ],
+                  "format": "F7.2",
+                  "units": "GW",
+                  "explanation": "Hot spot thermal emission (4)"
+                }
+              },
+              "classes": [
+                {
+                  "category": "under-1-gw",
+                  "below": 1,
+                  "diameterDegrees": 3.01
+                },
+                {
+                  "category": "1-to-10-gw",
+                  "minimum": 1,
+                  "below": 10,
+                  "diameterDegrees": 4.07
+                },
+                {
+                  "category": "10-to-100-gw",
+                  "minimum": 10,
+                  "below": 100,
+                  "diameterDegrees": 4.43
+                },
+                {
+                  "category": "100-to-1000-gw",
+                  "minimum": 100,
+                  "below": 1000,
+                  "diameterDegrees": 4.78,
+                  "outlineDegrees": 0.53
+                },
+                {
+                  "category": "1000-to-10000-gw",
+                  "minimum": 1000,
+                  "below": 10000,
+                  "diameterDegrees": 7.08,
+                  "outlineDegrees": 0.53
+                }
+              ],
+              "outlineCategory": "outline",
+              "categories": [
+                {
+                  "value": "under-1-gw",
+                  "label": "<1 GW",
+                  "color": "#2a00f7"
+                },
+                {
+                  "value": "1-to-10-gw",
+                  "label": ">1 to 10 GW",
+                  "color": "#84ff2b"
+                },
+                {
+                  "value": "10-to-100-gw",
+                  "label": ">10 to 100 GW",
+                  "color": "#cb181b"
+                },
+                {
+                  "value": "100-to-1000-gw",
+                  "label": ">100 to 1000 GW",
+                  "color": "#e3b229"
+                },
+                {
+                  "value": "1000-to-10000-gw",
+                  "label": ">1000 to 10000 GW",
+                  "color": "#f3ff31"
+                },
+                {
+                  "value": "outline",
+                  "label": "Symbol outline",
+                  "color": "#010101"
+                }
+              ]
+            }
           }
         ],
         "lighting": {
@@ -456,7 +587,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6b6fe98a7f64556d6375b34b68d0e30a86619dc0020d304ebd674fb22f9c7812",
+      "sha256": "c9f42fcd6b9e9e5071389cd9395f9493008473f8bec83408474ba10460f6ebbc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -804,6 +935,69 @@
               },
               "notes": "Published mean absorption around 560 nm after continuum removal. The 578–605 nm instrument gap is omitted. Sulfur-bearing materials can contribute, but the absorbing species is not uniquely identified. July 2019 observing nights retain seams and residual differences. Native two-degree samples, missing areas and withheld edges remain; this is not abundance.",
               "noData": true
+            },
+            {
+              "id": "volcanic-heat",
+              "label": "Volcanic heat",
+              "thumbnail": "io-lens-volcanic-heat.webp",
+              "surface": "io-volcanic-heat@2x.webp",
+              "poles": "io-poles-volcanic-heat@2x.webp",
+              "source": {
+                "id": "davies-2024-io-thermal-sources",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.3847/PSJ/ad4346"
+              },
+              "falseColor": true,
+              "facts": [
+                {
+                  "id": "classification",
+                  "label": "Quantity",
+                  "value": "Thermal power of each hot spot, GW"
+                },
+                {
+                  "id": "sources",
+                  "label": "Hot spots",
+                  "value": "343, through Juno orbit PJ49"
+                },
+                {
+                  "id": "symbols",
+                  "label": "Symbols",
+                  "value": "Davies et al. (2024), Fig. 1 classes; size is not physical"
+                }
+              ],
+              "legend": {
+                "kind": "categories",
+                "title": "Thermal power",
+                "meta": "Symbol size marks the class, not the hot spot's size.",
+                "sourceUrl": "https://doi.org/10.3847/PSJ/ad4346",
+                "items": [
+                  {
+                    "label": "<1 GW",
+                    "description": "Smallest dot",
+                    "color": "#2a00f7"
+                  },
+                  {
+                    "label": ">1 to 10 GW",
+                    "color": "#84ff2b"
+                  },
+                  {
+                    "label": ">10 to 100 GW",
+                    "color": "#cb181b"
+                  },
+                  {
+                    "label": ">100 to 1000 GW",
+                    "description": "Black outline",
+                    "color": "#e3b229"
+                  },
+                  {
+                    "label": ">1000 to 10000 GW",
+                    "description": "Largest dot, black outline",
+                    "color": "#f3ff31"
+                  }
+                ]
+              },
+              "notes": "343 volcanic hot spots from Davies et al. (2024), Table A1, drawn over the Monochrome mosaic with the symbol classes, sizes and colors of the paper's Figure 1. Symbol size shows the power class, not the size of the hot spot; most are far smaller than one symbol.",
+              "noData": true
             }
           ],
           "labels": {
@@ -873,7 +1067,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "21927345b6204d7414b49f365c46ff33e6ccfdf175fc2219adb387782038c8fc",
+      "sha256": "30ee803bc616c989f623fae0df92f81f94ba07cd2f4100cb3e1d5325dcfa3338",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -894,7 +1088,8 @@
           "enhanced",
           "geology",
           "spectral-slope",
-          "visible-absorption"
+          "visible-absorption",
+          "volcanic-heat"
         ],
         "kinds": {
           "point": [
@@ -1557,6 +1752,76 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "davies-2024-io-thermal-sources",
+      "path": "science/davies-2024/psjad4346t10_mrt.txt",
+      "origin": "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt",
+      "credit": "Davies, Perry, Williams, Veeder and Nelson (2024), Planetary Science Journal 5, 121, Table A1 (machine-readable)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.3847/PSJ/ad4346",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Retrieve the exact machine-readable Table A1 file from the IOP Publishing article supplement, pinned 2026-09-21. No source substitution or automatic hash refresh.",
+      "redistribution": "Small published table retained in Git byte for byte under CC BY 4.0 with attribution.",
+      "lensId": "volcanic-heat",
+      "label": "Volcanic heat",
+      "falseColor": true,
+      "format": "mrt-point-table",
+      "projection": {
+        "type": "geographic-points",
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "longitudeDirection": "west-positive"
+      },
+      "coverage": "343 thermal sources ranked by thermal emission (GW): the estimates of Veeder et al. (2015), Keck and Gemini detections, and new Juno JIRAM detections up to orbit PJ49 (Table A1 notes). Each source is a point position; the symbol drawn around it is the size of the paper's Figure 1 marker for its power class, not the size of the hot spot.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "galileo",
+            "evidence": "Davies et al. (2024), Table A1: sources without a status flag come from Veeder et al. (2015), built on Galileo observations",
+            "missionId": "galileo"
+          },
+          {
+            "kind": "facility",
+            "facilityId": "juno",
+            "evidence": "Davies et al. (2024), Table A1 status 1: new Juno JIRAM detections through PJ49",
+            "missionId": "juno"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-3847-psj-ad4346",
+            "role": "material",
+            "evidence": "Table A1, machine-readable file psjad4346t10_mrt.txt"
+          }
+        ]
+      },
+      "sha256": "d5fdc71614ec7fe1059eed1344521212193550a2f41d697ea78d4b78fd812cf5",
+      "bytes": 27553,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/davies-2024/psjad4346t10_mrt.txt",
+        "url": "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt"
+      },
+      "verificationOperations": []
+    },
+    {
       "kind": "authored-content",
       "id": "io-object-content",
       "path": "content/object.json",
@@ -1569,8 +1834,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "6b6fe98a7f64556d6375b34b68d0e30a86619dc0020d304ebd674fb22f9c7812",
-      "bytes": 14002,
+      "sha256": "c9f42fcd6b9e9e5071389cd9395f9493008473f8bec83408474ba10460f6ebbc",
+      "bytes": 16152,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1741,7 +2006,9 @@
       "recipe": "raster",
       "selector": "/surfaces/1",
       "observationAttribution": "source-lineage",
-      "parents": [],
+      "parents": [
+        "normal"
+      ],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [],
       "lensIds": [
@@ -1938,6 +2205,58 @@
           "sourceId": "io-muse-visible-absorption-night-1",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/4/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "volcanic-heat",
+      "label": "Volcanic heat",
+      "recipe": "raster",
+      "selector": "/surfaces/5",
+      "observationAttribution": "source-lineage",
+      "parents": [
+        "normal"
+      ],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [],
+      "lensIds": [
+        "volcanic-heat"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "davies-2024-io-thermal-sources"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/io/io-volcanic-heat@2x.webp",
+          "bytes": 3520096,
+          "sha256": "58c5e045c3b5e9eb4e58c65ae4a124dcfaa5c4f8bf883b98d7f7cbb9cef56cfb",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/io/io-lens-volcanic-heat.webp",
+          "bytes": 3038,
+          "sha256": "959ce2a538490e3107fb1d4548e8b707f066918f3ef6d6a2d3449aa8712a5094",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/io/io-poles-volcanic-heat@2x.webp",
+          "bytes": 97652,
+          "sha256": "83ed74398f6acb8a3b3d29b9622ff46dbce9b7b3bbf94903078b9ec195908ce9",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "davies-2024-io-thermal-sources",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/5/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2346,6 +2665,31 @@
           "verification": "bytes-verified"
         }
       ]
+    },
+    {
+      "id": "preview:volcanic-heat",
+      "label": "Volcanic heat preview",
+      "recipe": "raster",
+      "selector": "/surfaces/5",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "volcanic-heat"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/volcanic-heat.webp",
+          "bytes": 109476,
+          "sha256": "a3d18e327fd849e143c455054a7601fb38e7d9e172dc49fb3e51477a5cdb7d4d",
+          "verification": "bytes-verified"
+        }
+      ]
     }
   ],
   "coverage": {
@@ -2354,11 +2698,11 @@
   },
   "lastPreparation": {
     "objectId": "io",
-    "materialSha256": "a8d8a529465e4a2a0e33930e8827a5e130f153bef4ba832c0c3d8bbd420d744c",
+    "materialSha256": "9f2577673d5d3e9edd55f8062a49b50f86a5128ed21d550c0db8e297cbd731a2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "ff10a89ff7d290915e8c1209d597dcfb45537c5135283c1466e31267260705ed"
+      "bindingsSha256": "4d4fb7a8dbda3e996127f9e4c1f4f1e0dbf6783050be20d0f01f2238dc49b8b7"
     }
   }
 }

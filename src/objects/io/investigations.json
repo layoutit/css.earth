@@ -104,6 +104,23 @@
           "commit": "65b64105aefbc30658164868ba85e905f030950a"
         }
       ]
+    },
+    {
+      "id": "davies-2024-thermal-sources",
+      "subject": "Davies et al. (2024) global map of Io's volcanic thermal emission, Table A1 and Figure 1",
+      "status": "included",
+      "finding": "The open-access (CC BY 4.0) machine-readable Table A1 lists 343 thermal sources with latitude, west longitude and power, through Juno orbit PJ49. It is drawn as the Volcanic heat lens with Figure 1's five power classes, colors and symbol sizes measured from the published figure, over the Monochrome mosaic. West longitudes land within 2 degrees of the IAU Gazetteer east longitudes for Loki Patera, Pele, Janus Patera and Pillan. Symbol sizes are display classes, not hot-spot sizes.",
+      "evidence": [
+        "https://doi.org/10.3847/PSJ/ad4346",
+        "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt",
+        "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision3/psjad4346f1_hr.jpg"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "622c6a9d4478d736bda431a6eee56f27a20dec2e"
+        }
+      ]
     }
   ]
 }

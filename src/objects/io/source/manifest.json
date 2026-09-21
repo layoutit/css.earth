@@ -916,8 +916,8 @@
     {
       "id": "io-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1145,
-      "expectedSha256": "21927345b6204d7414b49f365c46ff33e6ccfdf175fc2219adb387782038c8fc",
+      "expectedBytes": 1166,
+      "expectedSha256": "30ee803bc616c989f623fae0df92f81f94ba07cd2f4100cb3e1d5325dcfa3338",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -982,8 +982,8 @@
     {
       "id": "io-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 12594,
-      "expectedSha256": "827d36dbc224e8ac71ddf5b84d1a6275289a9715b63c7e0286df6332089ad0b4",
+      "expectedBytes": 16465,
+      "expectedSha256": "a6839e4126794b7d0603e5655c10eaf36f29199176d62eb20b908d756182e6fe",
       "origin": "Repository-authored Io raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1076,8 +1076,8 @@
     {
       "id": "io-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3220,
-      "expectedSha256": "14b8655d0acafc7c0801a3f7885b44989579f48b7d39cefea6c17ffa81c2a35d",
+      "expectedBytes": 3463,
+      "expectedSha256": "0395c10d5c5eff84e3210ec0f0e7aad0ea80d6c2c4733b2b47f7b05e7a3b3997",
       "origin": "Repository-authored Io acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1095,8 +1095,8 @@
     {
       "id": "io-object-content",
       "path": "content/object.json",
-      "expectedBytes": 14002,
-      "expectedSha256": "6b6fe98a7f64556d6375b34b68d0e30a86619dc0020d304ebd674fb22f9c7812",
+      "expectedBytes": 16152,
+      "expectedSha256": "c9f42fcd6b9e9e5071389cd9395f9493008473f8bec83408474ba10460f6ebbc",
       "origin": "Repository-authored Io object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1109,6 +1109,67 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "davies-2024-io-thermal-sources",
+      "path": "science/davies-2024/psjad4346t10_mrt.txt",
+      "expectedBytes": 27553,
+      "expectedSha256": "d5fdc71614ec7fe1059eed1344521212193550a2f41d697ea78d4b78fd812cf5",
+      "origin": "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt",
+      "credit": "Davies, Perry, Williams, Veeder and Nelson (2024), Planetary Science Journal 5, 121, Table A1 (machine-readable)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.3847/PSJ/ad4346",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Retrieve the exact machine-readable Table A1 file from the IOP Publishing article supplement, pinned 2026-09-21. No source substitution or automatic hash refresh.",
+      "redistribution": "Small published table retained in Git byte for byte under CC BY 4.0 with attribution.",
+      "consumers": [
+        "volcanic-heat"
+      ],
+      "lensId": "volcanic-heat",
+      "label": "Volcanic heat",
+      "falseColor": true,
+      "format": "mrt-point-table",
+      "projection": {
+        "type": "geographic-points",
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "longitudeDirection": "west-positive"
+      },
+      "coverage": "343 thermal sources ranked by thermal emission (GW): the estimates of Veeder et al. (2015), Keck and Gemini detections, and new Juno JIRAM detections up to orbit PJ49 (Table A1 notes). Each source is a point position; the symbol drawn around it is the size of the paper's Figure 1 marker for its power class, not the size of the hot spot.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "galileo",
+            "missionId": "galileo",
+            "evidence": "Davies et al. (2024), Table A1: sources without a status flag come from Veeder et al. (2015), built on Galileo observations"
+          },
+          {
+            "kind": "facility",
+            "facilityId": "juno",
+            "missionId": "juno",
+            "evidence": "Davies et al. (2024), Table A1 status 1: new Juno JIRAM detections through PJ49"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-3847-psj-ad4346",
+            "role": "material",
+            "evidence": "Table A1, machine-readable file psjad4346t10_mrt.txt"
+          }
+        ]
       }
     }
   ],

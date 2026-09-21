@@ -25,3 +25,5 @@ Feature names, centres, diameters, extents and name origins are from the Gazette
 Lighting: the shared prepared Lambert row bank follows the OpenSpace globebrowsing shading model (MIT, snapshot 56e29b54) as recorded in `source/preparation/raster.json`; no OpenSpace pixels are shipped.
 
 Feature caption notes: 44 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.
+
+Volcanic heat: hot-spot positions and thermal power from Davies, A.G., Perry, P., Williams, D.A., Veeder, G.J. and Nelson, D.M. (2024), "New Global Map of Io's Volcanic Thermal Emission and Discovery of Hemispherical Dichotomies", Planetary Science Journal 5, 121, [doi:10.3847/PSJ/ad4346](https://doi.org/10.3847/PSJ/ad4346), Table A1, under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The machine-readable table is kept unchanged in `source/science/davies-2024/`. The symbol classes, colors and sizes follow the paper's Figure 1; cssEarth draws them as circles on the sphere over the Monochrome mosaic.

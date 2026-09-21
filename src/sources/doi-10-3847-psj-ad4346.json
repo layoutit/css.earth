@@ -1,0 +1,52 @@
+{
+  "id": "doi-10-3847-psj-ad4346",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "New Global Map of Io's Volcanic Thermal Emission and Discovery of Hemispherical Dichotomies",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/PSJ/ad4346"
+    }
+  ],
+  "creators": [
+    "Davies A.G.",
+    "Perry P.",
+    "Williams D.A.",
+    "Veeder G.J.",
+    "Nelson D.M."
+  ],
+  "publisher": "IOP Publishing / American Astronomical Society",
+  "publicationDate": "2024",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/PSJ/ad4346",
+      "label": "Publication"
+    },
+    {
+      "role": "original",
+      "url": "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt",
+      "label": "Table A1, machine-readable"
+    },
+    {
+      "role": "rights",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "label": "CC BY 4.0"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://iopscience.iop.org/article/10.3847/PSJ/ad4346",
+      "checkedOn": "2026-09-21",
+      "locator": "Title, authors, open-access CC BY 4.0 licence, Figure 1 and Table A1"
+    },
+    {
+      "url": "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt",
+      "checkedOn": "2026-09-21",
+      "locator": "Title and Authors header lines"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
