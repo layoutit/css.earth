@@ -5,6 +5,9 @@ import { preparedCameraZoomScale } from "../rendering/prepared-camera-runtime.js
 import { BASE_TILE } from "@layoutit/polycss";
 import { isTrackballMetrics, smoothstep, clamp } from "@cssearth/engine";
 
+/** Share of a phone's open scene area (width, and height between header and drawer) the focus body spans on arrival. */
+export const MOBILE_OPEN_AREA_SHARE = .5;
+
 export function selectPreparedResponsiveZoom({
   stage,
   cameraElement,
@@ -65,11 +68,16 @@ export function selectPreparedResponsiveZoom({
   const maximumMobileDiameter = mobile && mobilePreviewBounds && mobilePreviewBounds.top > 0
     ? mobilePreviewBounds.top * fit.maximumMobilePreviewShare
     : Number.POSITIVE_INFINITY;
-  const targetDiameter = Math.min(
-    stageBounds.width * widthShare,
-    stageBounds.height * fit.maximumHeightShare,
-    maximumMobileDiameter,
-  );
+  // A phone frames the body in the area its header and drawer leave open, a step larger than the
+  // authored portrait share: the open area is what the viewer actually sees.
+  const openHeight = mobile && measured?.openArea ? measured.openArea.bottom - measured.openArea.top : null;
+  const targetDiameter = openHeight !== null
+    ? Math.min(stageBounds.width * Math.max(widthShare, MOBILE_OPEN_AREA_SHARE), openHeight * MOBILE_OPEN_AREA_SHARE)
+    : Math.min(
+      stageBounds.width * widthShare,
+      stageBounds.height * fit.maximumHeightShare,
+      maximumMobileDiameter,
+    );
   const framingRatio = targetDiameter / (plan.logicalBodyDiameter * shellScale);
   // A physical dolly names zoom relative to the authored default framing;
   // its distance bounds own the physical limits. The legacy scale bounds
