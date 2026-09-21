@@ -9,6 +9,7 @@ import test, { type TestContext } from 'node:test';
 import type { AddressInfo } from 'node:net';
 import { setupObjectIds } from './runtime-assets.mts';
 import { validateObjectPackageFiles } from './object-package-contract.mts';
+import { compareObjectPackageBacklog, loadObjectPackageBacklog } from './object-package-backlog.mts';
 import { requireArray, requireRecord, requireString } from './source-values.mts';
 import { parseAcquisitionPlan } from './objects/dist/operations.js';
 import { requirePreparedAssetManifest } from '../src/platform/runtime-asset-closure.mts';
@@ -47,17 +48,21 @@ async function run(root: string, args: readonly string[]): Promise<void> {
   });
 }
 
-test('every registered body has its package files and tracked or restorable sources', async () => {
+type Scan = { missingSources: string[]; missingBacklog: string[] };
+let scan: Promise<Scan> | undefined;
+const scanPackages = () => scan ??= runScan();
+
+async function runScan(): Promise<Scan> {
   const tracked = new Set(execFileSync('git', ['ls-files', '--cached', '-z'], {
     cwd: project, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
   }).split('\0'));
-  const missing = [];
+  const missingSources: string[] = [], missingBacklog: string[] = [];
   for (const id of setupObjectIds([])) {
     // prepared/runtime.json is no longer git-tracked for any body; a clean checkout restores it from R2 via
     // the object's prepared-assets.json inventory instead. Every other required file keeps the original
     // "must be tracked" proof.
     const preparedRuntimePath = relative(project, resolve(project, 'src/objects', id, 'prepared/runtime.json'));
-    await validateObjectPackageFiles({ id, name: id }, { projectRoot: project,
+    const paths = await validateObjectPackageFiles({ id, name: id }, { projectRoot: project,
       accessFile: async path => {
         if (typeof path !== 'string') throw new TypeError('Fixture access must receive a string path.');
         const relativePath = relative(project, path);
@@ -69,6 +74,7 @@ test('every registered body has its package files and tracked or restorable sour
         }
         assert.ok(tracked.has(relativePath), path);
       } });
+    for (const file of paths.missingBacklogFiles) missingBacklog.push(relative(project, file));
     const source = `src/objects/${id}/source`;
     const inputs: unknown[] = await Promise.all(['manifest.json', 'preparation/acquisition.json']
       .map(async path => JSON.parse(await readFile(resolve(project, source, path), 'utf8'))));
@@ -81,10 +87,25 @@ test('every registered body has its package files and tracked or restorable sour
       // The archive-backed Earth restore runs before acquisition; exercised below.
       if (id === 'earth' && entryPath === 'science/mur-gibs.png') continue;
       const path = `${source}/${entryPath}`;
-      if (!tracked.has(path) && !restored.has(entryPath)) missing.push(path);
+      if (!tracked.has(path) && !restored.has(entryPath)) missingSources.push(path);
     }
   }
-  assert.deepEqual(missing, [], 'Required source files must be tracked or have an acquisition operation.');
+  return { missingSources: missingSources.sort(), missingBacklog: missingBacklog.sort() };
+}
+
+test('every registered body has a complete shipped closure with tracked or restorable sources', async () => {
+  const { missingSources } = await scanPackages();
+  assert.deepEqual(missingSources, [], 'Required source files must be tracked or have an acquisition operation.');
+});
+
+test('the object package backlog does not grow', async () => {
+  const { missingBacklog } = await scanPackages();
+  const backlog = await loadObjectPackageBacklog(project);
+  const { added, resolved } = compareObjectPackageBacklog(backlog.missingPackageFiles, missingBacklog);
+  console.log(`# object package backlog: ${missingBacklog.length} outstanding, baseline ${backlog.missingPackageFiles.length}`);
+  for (const path of missingBacklog) console.log(`# backlog: ${path}`);
+  assert.deepEqual(added, [], 'A new package file may not be left missing; supply it or it is new blocking debt.');
+  assert.deepEqual(resolved, [], 'Remove entries from tools/object-package-backlog.json in the change that supplies their files.');
 });
 
 test('checkout restores a missing compressed observation without refreshing existing inputs', async t => {
