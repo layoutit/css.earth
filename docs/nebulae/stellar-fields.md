@@ -100,7 +100,7 @@ lens, including cores detected beyond that image’s coverage. Front and oblique
 views of all three lenses retain their geometry and source appearance. Their
 roughly one-pixel cores are intentionally subtle; existing coarse halos remain.
 
-[`site/test/nebula-datasets-browser.mts`](../../site/test/nebula-datasets-browser.mts)
+[`site/test/rendered-page.test.mts`](../../site/test/rendered-page.test.mts)
 walks each object's dataset context rail across every lens and checks that
 switching lenses keeps its own attribution visible in the rail, keeps the same
 document and stage, retains the shared camera, and updates the `focusLens` URL

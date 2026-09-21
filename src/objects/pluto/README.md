@@ -27,7 +27,7 @@ authors' spectral inversion.
 
 The [LEISA validation record](evidence/leisa/validation.json) identifies the
 tested inputs and code. All six views passed dataset interaction checks at
-DPR 1 and 2. A [focused browser check](../../../tests/objects/browser/pluto/ice-surfaces-browser.mts)
+DPR 1 and 2. A the shared browser conformance harness
 verifies the actual latitude and pole texture bindings on desktop and mobile,
 450 retained surface pieces, and shadows off at startup. The original FITS
 files restored from Zenodo into an empty directory; all 125 runtime files
@@ -47,7 +47,7 @@ These download sizes refer only to the polar sprites. Decoded dimensions are unc
 Pluto uses the shared raster lane used by Mercury, Venus and Mars. Photographs,
 elevation and composition share the existing geometry, camera and lighting bank.
 
-The retained notes point to [unit checks](../../../tests/objects/unit/pluto) and [browser checks](../../../tests/objects/browser/pluto), and mentions separate capture/Saturn reports. They do not identify a dated report here; test definitions are not passing-run evidence.
+The retained notes point to [unit checks](../../../tests/objects/unit/pluto) and the shared browser conformance harness, and mentions separate capture/Saturn reports. They do not identify a dated report here; test definitions are not passing-run evidence.
 
 Pinned inputs are checked by the shared [source closure test](../../../tests/objects/source-closure.test.mts).
 

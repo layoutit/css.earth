@@ -69,7 +69,7 @@ Photosphere and longitude review (this PR, measured on `main` at 11ac994699):
   same places. The [oracle table](../../../tools/oracles/README.md) lists the
   committed fixture.
 - [Unit tests](../../../tests/objects/unit/sun) and the
-  [browser profile](../../../tests/objects/browser/sun/browser-profile.mts)
+  the shared browser conformance harness
   define the package checks. The [four-lens render](source/reference/rendered-lenses.png)
   of this version was inspected after the scene reported ready: active regions
   sit in the same places in every lens.
