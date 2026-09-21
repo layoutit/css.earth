@@ -1,4 +1,4 @@
-import { LENS_VISIBILITY } from './runtime-policy.mts';
+import { LENS_VISIBILITY, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
 // Generated after the prepared lens payloads are restored, so typechecks never need it: text now, validated below.
 import lensBillboardText from './prepared-lens-billboards.json?raw';
 import lensBillboardAtlasUrl from './prepared-lens-billboards.webp?url';
@@ -31,6 +31,8 @@ import { createInFlightLoader } from './in-flight-loader.mts';
 
 const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
 const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
+// Phones get a lighter scene: no celestial sky cube, and no ordinary asteroid markers (see discoveryVisibility).
+const phone = globalThis.matchMedia?.(MOBILE_VIEWPORT_QUERY).matches === true;
 const ordinaryAsteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !isDefaultContextFeature(object)).map(object => object.id);
 const ASTRONOMICAL_UNIT_M = 149_597_870_700;
 const minorMoonIds = minorMoonOrbitIds(applicationContext.bodies);
@@ -131,6 +133,8 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: backgroundPointSet.resolve('prepared/points.json'), backgroundPointCloud: backgroundPointSet.resolve('prepared/cloud.webp'), annotationPriorities, annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
       lensVisibility: LENS_VISIBILITY, lensBillboards,
+      // Phones draw no celestial sky cube: about 60 MB of layers and 27 MB of decoded faces behind the body.
+      sky: !phone,
       loadCatalog: async () => {
         const { galaxies, clusters, nebulae } = await loadCatalogs();
         return { payload: galaxies, galaxySample: galaxyDisplaySample, nebulae, ...catalogBank,
@@ -195,7 +199,7 @@ export function createApplicationWorldContext() {
         // Discovery keeps a system without imagery off the default map, not out of its own view.
         let openSystem: ReadonlySet<string> = new Set();
         const updateDiscoveryVisibility = () => {
-          const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations: illustrationModelsEnabled, highlighted: highlightedClassification });
+          const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations: illustrationModelsEnabled, highlighted: highlightedClassification, compact: phone });
           const hiddenBodies = visibility.hiddenBodies.filter(id => !openSystem.has(id)), hiddenLabels = visibility.hiddenLabels.filter(id => !openSystem.has(id));
           const { highlightedBodies } = visibility;
           layer.setHiddenBodies(hiddenBodies);

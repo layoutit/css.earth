@@ -158,8 +158,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   display: block;
 }
 
-/* The version shares the wordmark's baseline. */
-/* Only the phone layout shows the footer copy. */
+/* The version shares the wordmark's baseline; the readout copy stays hidden. */
 .planet-view-readout .explorer-brand-version { display: none; }
 
 .explorer-brand-version {
@@ -705,8 +704,8 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
     position: fixed;
     inset: var(--explorer-header-top) 0 auto;
     display: grid;
-    grid-template-columns:
-      max-content minmax(0, 1fr) var(--explorer-search-height) var(--explorer-search-height);
+    /* Phones carry the wordmark and search only; search takes the rest of the row. */
+    grid-template-columns: max-content minmax(0, 1fr);
     grid-template-rows: var(--explorer-search-height);
     column-gap: 8px;
     gap: var(--explorer-header-row-gap);
@@ -726,38 +725,14 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
   }
   .explorer-shell-header .planet-sidebar-search-clear { right: 38px; }
 
-  /* Settings takes the avatar slot at the end of the search pill; the version
-     link below already leads to GitHub. */
-  .planet-header-actions { display: contents; }
-  .planet-header-link { display: none; }
-  /* Settings ends the header row, matching the search field's height. */
-  .planet-settings-action {
-    grid-row: 1;
-    grid-column: 4;
-    align-self: center;
-    justify-self: end;
-    width: var(--explorer-search-height);
-    height: var(--explorer-search-height);
-    background: var(--explorer-panel-background);
-    box-shadow: var(--explorer-float-shadow);
-  }
+  /* For now phones show no app actions (GitHub, Settings, Machines): the search field gets the room. */
+  .planet-header-actions { display: none; }
 
   /* Filters scroll edge to edge; the padding keeps their shadows unclipped. */
   /* Phones carry one header row: search reaches every classification, so the filter pills
      stay out of the scene. */
   .planet-search-categories { display: none; }
 
-  /* Spacecraft sits beside Settings, at the same size. */
-  .planet-facility-action {
-    grid-row: 1;
-    grid-column: 3;
-    align-self: center;
-    justify-self: end;
-    width: var(--explorer-search-height);
-    height: var(--explorer-search-height);
-    box-shadow: var(--explorer-float-shadow);
-  }
-  .planet-facility-action:disabled { visibility: hidden; }
 
   /* The wordmark comes first, stacked in two lines, with the search field beside it. */
   .explorer-brand-row {
@@ -771,17 +746,8 @@ body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px;
   .explorer-shell-header .planet-wordmark-one-line { display: none; }
   .explorer-shell-header .planet-wordmark-two-line { display: flex; gap: 2px; }
   .explorer-shell-header :is(.planet-wordmark-two-line-css, .planet-wordmark-two-line-earth) { font-size: 22px; }
-  /* The version belongs with the other readouts at the foot of the view. */
+  /* Phones show no version: not in the header, not in the readout at the foot of the view. */
   .explorer-brand-row .explorer-brand-version { display: none; }
-  .planet-view-readout .explorer-brand-version { display: inline; }
-
-  .planet-facility-action { transition: opacity 160ms ease, visibility 0s; }
-  .planet-ui-layer:has(.planet-sheet-handle:checked) .planet-facility-action,
-  body[data-sheet="full"] .planet-facility-action {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 160ms ease, visibility 0s 160ms;
-  }
 
   .planet-sidebar {
     position: fixed;
