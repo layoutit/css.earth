@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-nebula-delivery@1",
+  "id": "fomalhaut-disc",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/fomalhaut-disc/source/volume-f2550w.json",
+    "sha256": "446a78596970fa201a809a2b97864679ff1735566e1b57165ee35d59657c3f2a"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/fomalhaut-disc/source/provenance.json",
+      "sha256": "dac6a3ced6704ae7cbcfe7fc6f6d69b388ce3b1aeeb8d5860e7880ff9530bf81"
+    },
+    {
+      "path": "src/objects/fomalhaut-disc/source/density-f2550w.ktx2",
+      "sha256": "8ba827c50739b0eded3ab1ec04c7b2e18d1f27913181e47375744afec36400d5"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      344.4154961336604,
+      -29.623456941471378
+    ],
+    "distancePc": 7.703777306123596,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.12980645211604414
+  },
+  "sourceUrl": "https://github.com/merope82/Fomalhaut",
+  "description": "The debris disc around Fomalhaut as JWST/MIRI imaged it at 25.5 micrometres in October 2022 (programme 1193), in the authors’ own reduction and colour scale: the outer belt 134 au out, an intermediate belt and a warm inner disc, all dust glowing with its own heat. One unit is one astronomical unit; the depth is the tilted ring the paper fits, not a measurement.",
+  "defaultLens": "f2550w",
+  "framingRadiusUnits": 420,
+  "attachedTo": "fomalhaut",
+  "acceptedLabResult": "fomalhaut-disc-density-grids",
+  "compactInputs": {
+    "path": "src/objects/fomalhaut-disc/source/volume-f2550w.json",
+    "sha256": "446a78596970fa201a809a2b97864679ff1735566e1b57165ee35d59657c3f2a"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "f2550w",
+      "label": "JWST/MIRI · debris disc at 25.5 µm",
+      "sourceUrl": "https://github.com/merope82/Fomalhaut",
+      "recipe": {
+        "path": "src/objects/fomalhaut-disc/source/volume-f2550w.json",
+        "sha256": "446a78596970fa201a809a2b97864679ff1735566e1b57165ee35d59657c3f2a"
+      }
+    }
+  ]
+}

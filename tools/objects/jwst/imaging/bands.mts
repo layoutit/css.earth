@@ -86,6 +86,11 @@ export const JWST_BANDS: Readonly<Record<string, JwstBand>> = Object.freeze(Obje
   band('MIRI-F1130W', 'JWST MIRI F1130W 11.3 µm', 'MIRI', 'F1130W'),
   band('MIRI-F1280W', 'JWST MIRI F1280W 12.8 µm', 'MIRI', 'F1280W'),
   band('MIRI-F1800W', 'JWST MIRI F1800W 18 µm', 'MIRI', 'F1800W'),
+  band('MIRI-F2100W', 'JWST MIRI F2100W 21 µm', 'MIRI', 'F2100W'),
+  band('MIRI-F2550W', 'JWST MIRI F2550W 25.5 µm', 'MIRI', 'F2550W'),
+  // MIRI's coronagraphs each have their own filter, and the level-3 header names the mask (CORONMSK).
+  band('MIRI-F1550C-4QPM', 'JWST MIRI F1550C 15.5 µm behind the four-quadrant phase mask', 'MIRI', 'F1550C', undefined, '4QPM_1550'),
+  band('MIRI-F2300C-LYOT', 'JWST MIRI F2300C 23 µm behind the Lyot coronagraph', 'MIRI', 'F2300C', undefined, 'LYOT_2300'),
   ...coronagraphBands(),
   ...cubeBands(),
   ...mrsBands(),

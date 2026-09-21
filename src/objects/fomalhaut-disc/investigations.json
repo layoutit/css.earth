@@ -1,0 +1,102 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "fomalhaut-disc",
+  "entries": [
+    {
+      "id": "author-deposit-f2550w",
+      "subject": "Gáspár et al. (2023) reduced 25.5 µm image, from the authors’ deposit",
+      "status": "included",
+      "finding": "The paper’s Data Availability statement points to github.com/merope82/Fomalhaut, which holds the final reduced images: F2550W_finalsc_DC.fits (1024 by 1024, 0.11 arcsec pixels, MJy/sr, distortion corrected, reference-PSF subtracted with 19 PsA and multiplied by 1.11 for absolute calibration, as their Supplementary Information 1.1 describes). Pinned at commit 3566f59 by bytes and sha256. It is the image the paper shows; MAST’s level-3 product still holds the saturated star and its diffraction pattern.",
+      "evidence": [
+        "https://github.com/merope82/Fomalhaut/tree/3566f5976f8a029703b05550004c347d58aa0a85",
+        "https://arxiv.org/abs/2305.03789"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "82291abb9199963cbc75294ca9733d4d77d252b9"
+        }
+      ]
+    },
+    {
+      "id": "mast-f2550w-reproduction",
+      "subject": "MAST F2550W level-3 mosaic, reproduced with calwebb_image3",
+      "status": "excluded",
+      "finding": "tools/objects/jwst/imaging/image3.mts reproduces jw01193-o013_t015_miri_f2550w-brightsky_i2d.fits on MAST’s own grid: 51% of pixels identical, median difference 0, RMS difference 3.9e-6 of the RMS above the median, correlation 0.9999, but 19 of 429,982 pixels differ by more than 1e-5 (worst 0.42%, 27 arcsec from the star), so compare.mts establishes no archive agreement under its strict policy. Not drawn: this product is not star-subtracted.",
+      "evidence": [
+        "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "82291abb9199963cbc75294ca9733d4d77d252b9"
+        }
+      ],
+      "revisitWhen": "When a lens needs MAST’s own product, or a reference-PSF subtraction of this visit is added to the toolkit."
+    },
+    {
+      "id": "ring-geometry-adopted",
+      "subject": "Outer belt geometry: adopted from the paper, not measured",
+      "status": "included",
+      "finding": "Supplementary Table 3 of Gáspár et al. (2023): the KBA inner gap has a = 133.79 au, e = 0.132, position angle 336.28°, inclination 67.52°, the orientation they de-project with. The circumstellar author’s own ring measurement finds the ridge in only 10 of 24 azimuths on this image, because the warm inner disc outshines the inclined outer belt along its minor axis; the paper itself fitted 51 points chosen by eye. Adopted as published; the envelope built on it still has to project to the image better than a spherical shell and a constant depth, and does (residual 2.84 against 6.39 and 7.16).",
+      "evidence": [
+        "https://arxiv.org/abs/2305.03789"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "82291abb9199963cbc75294ca9733d4d77d252b9"
+        }
+      ]
+    },
+    {
+      "id": "ring-centre-offset",
+      "subject": "The outer belt’s offset from the star",
+      "status": "unresolved",
+      "finding": "The belt’s centre lies about 15 au from the star (Kalas et al. 2005, 2013, north-west; the paper’s e = 0.132 gives a e = 17.7 au). Projecting the paper’s orbit elements needs a node and sign convention it does not state; of the four readings, the north-west one (14.5 au at position angle 320°) matches Kalas. On this image the measured-profile disc with that offset projects worse (3.54) than the gaussian ring (3.46), while a centred ring passes (2.84), so the drawn disc is centred on the star, as the paper’s Figure 2 de-projection is.",
+      "evidence": [
+        "https://arxiv.org/abs/2305.03789",
+        "https://arxiv.org/abs/1305.2222"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "82291abb9199963cbc75294ca9733d4d77d252b9"
+        }
+      ],
+      "revisitWhen": "When a publication states the belt’s projected centre on the sky, or the envelope model is extended to an eccentric ellipse."
+    },
+    {
+      "id": "near-side",
+      "subject": "Which side of the belt is nearer the observer",
+      "status": "unresolved",
+      "finding": "Drawn with the east end of the minor axis nearer: Kalas et al. (2013) find the eastern half brighter in scattered light because it lies out of the sky plane in the forward-scattering direction. Le Bouquin et al. (2009) suggested the opposite from the star’s spin axis, a sign their own data could not secure. Disputed, and stated as such in the lens.",
+      "evidence": [
+        "https://arxiv.org/abs/1305.2222"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "82291abb9199963cbc75294ca9733d4d77d252b9"
+        }
+      ],
+      "revisitWhen": "When a measurement settles the belt’s near side."
+    },
+    {
+      "id": "colour-23-25",
+      "subject": "The authors’ 23 / 25.5 µm colour image as a second lens",
+      "status": "deferred",
+      "finding": "The deposit’s 04_Color_labels.png combines F2300C (blue) and F2550W (red). The F2300C image covers the belt only partly: its data end near 21 arcsec and cover 20 to 80% of the pixels between 14 and 18 arcsec, so a colour lens would show a cut belt, as the authors’ own colour image does. The new MIRI bands and deposit reading support it; not built in this change.",
+      "evidence": [
+        "https://github.com/merope82/Fomalhaut/tree/3566f5976f8a029703b05550004c347d58aa0a85"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "82291abb9199963cbc75294ca9733d4d77d252b9"
+        }
+      ],
+      "revisitWhen": "When a second lens for this disc is wanted."
+    }
+  ]
+}

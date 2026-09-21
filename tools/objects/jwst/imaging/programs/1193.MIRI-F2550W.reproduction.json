@@ -1,0 +1,153 @@
+{
+  "schema": "cssearth-jwst-image3-reproduction@2",
+  "program": "1193",
+  "band": "MIRI-F2550W",
+  "observation": "jw01193-o013_t015_miri_f2550w-brightsky",
+  "toolchain": "tools/objects/jwst/toolchain.json",
+  "crdsContext": "jwst_1535.pmap",
+  "mast": {
+    "name": "jw01193-o013_t015_miri_f2550w-brightsky_i2d.fits",
+    "uri": "mast:JWST/product/jw01193-o013_t015_miri_f2550w-brightsky_i2d.fits",
+    "bytes": 12513600,
+    "sha256": "5a2c14273eb4584750ec97fa26b8a55a697649992892f33965a479e0b23894b1",
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "local": {
+    "name": "jw01193-o013_t015_miri_f2550w-brightsky_i2d.fits",
+    "sha256": "28ff4f6e04ce52d7fdcdc2e7ac3d9dc208cea9ce017f2bfdeab1330b268677fc",
+    "bytes": 12516480,
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "acceptance": {
+    "policy": "jwst-image-samples@1",
+    "tolerance": 0.00001,
+    "normalization": "max(abs(archive sample), archive median absolute brightness)",
+    "accepted": false
+  },
+  "samples": {
+    "both": 429982,
+    "onlyOurs": 0,
+    "onlyMast": 0,
+    "maximumNormalizedDifference": 0.004170141504425951
+  },
+  "wcs": {
+    "NAXIS1": {
+      "ours": 662,
+      "mast": 662
+    },
+    "NAXIS2": {
+      "ours": 664,
+      "mast": 664
+    },
+    "CTYPE1": {
+      "ours": "RA---TAN",
+      "mast": "RA---TAN"
+    },
+    "CTYPE2": {
+      "ours": "DEC--TAN",
+      "mast": "DEC--TAN"
+    },
+    "CRPIX1": {
+      "ours": 317.3020182133126,
+      "mast": 317.3020182133281
+    },
+    "CRPIX2": {
+      "ours": 330.9911637572278,
+      "mast": 330.9911637572101
+    },
+    "CRVAL1": {
+      "ours": 344.4146841386727,
+      "mast": 344.4146841386727
+    },
+    "CRVAL2": {
+      "ours": -29.62377570740921,
+      "mast": -29.62377570740921
+    },
+    "CDELT1": {
+      "ours": 0.000030783717315246,
+      "mast": 0.000030783717315246
+    },
+    "CDELT2": {
+      "ours": 0.000030783717315246,
+      "mast": 0.000030783717315246
+    },
+    "PC1_1": {
+      "ours": -0.49039488280168647,
+      "mast": -0.49039488280168647
+    },
+    "PC1_2": {
+      "ours": 0.8715003493527241,
+      "mast": 0.8715003493527241
+    },
+    "PC2_1": {
+      "ours": 0.8715003493527241,
+      "mast": 0.8715003493527241
+    },
+    "PC2_2": {
+      "ours": 0.49039488280168647,
+      "mast": 0.49039488280168647
+    },
+    "BUNIT": {
+      "ours": "MJy/sr",
+      "mast": "MJy/sr"
+    }
+  },
+  "differentWcs": [],
+  "pixels": {
+    "both": 429982,
+    "onlyOurs": 0,
+    "onlyMast": 0,
+    "identicalShare": 0.5107283560707192,
+    "comparedOn": "pixels",
+    "medianAbsoluteDifferenceOverMedian": 0,
+    "aboveMedian": {
+      "pixels": 214991,
+      "rmsDifferenceOverRms": 0.00000389190645252231,
+      "correlation": 0.9999999999427509
+    },
+    "ratioBins": [
+      {
+        "mastMJyPerSr": [
+          907.7390747070312,
+          921.3280639648438
+        ],
+        "pixels": 171993,
+        "medianRatio": 1
+      },
+      {
+        "mastMJyPerSr": [
+          921.3280639648438,
+          1066.1856689453125
+        ],
+        "pixels": 38699,
+        "medianRatio": 1
+      },
+      {
+        "mastMJyPerSr": [
+          1066.1856689453125,
+          3849.6806640625
+        ],
+        "pixels": 3870,
+        "medianRatio": 1
+      },
+      {
+        "mastMJyPerSr": [
+          3849.6806640625,
+          15321.44140625
+        ],
+        "pixels": 387,
+        "medianRatio": 1
+      },
+      {
+        "mastMJyPerSr": [
+          15321.44140625,
+          27062.5625
+        ],
+        "pixels": 44,
+        "medianRatio": 1
+      }
+    ]
+  }
+}

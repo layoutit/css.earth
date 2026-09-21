@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "fomalhaut-disc",
+  "name": "Fomalhaut debris disc",
+  "defaultLens": "f2550w",
+  "bank": {
+    "path": "src/objects/fomalhaut-disc/prepared/lenses.json",
+    "sha256": "7b700ea417de978f6af23094d4d03cbb1319a7c8974aad0f62cc23b44c55d7e0",
+    "bytes": 432684
+  },
+  "recipes": [
+    {
+      "id": "f2550w",
+      "path": "src/objects/fomalhaut-disc/source/volume-f2550w.json",
+      "sha256": "446a78596970fa201a809a2b97864679ff1735566e1b57165ee35d59657c3f2a",
+      "bytes": 1678
+    }
+  ],
+  "sharedInputs": [],
+  "inputEvidence": [],
+  "lenses": [
+    {
+      "id": "f2550w",
+      "label": "JWST/MIRI · debris disc at 25.5 µm",
+      "title": "The Fomalhaut debris disc in its own warmth at 25.5 micrometres",
+      "description": "JWST/MIRI imaged Fomalhaut at 25.5 micrometres on 22 October 2022. At this wavelength the dust glows with its own heat rather than reflecting starlight. This is the authors’ own final image, with the star subtracted and the brightness calibrated as their paper describes, shown in the colour scale their figure prints, logarithmic from 1 to 1000 MJy per steradian. The wide outer belt 134 au out, the intermediate belt and the warm inner disc all show. The image has no third axis, so the depth is inferred: the tilted, off-centre outer ring the paper fits projects to it better than a spherical shell or a constant depth, and each line of sight is placed on that plane. Which side is nearer to us is taken from the literature, where it is disputed. Nothing is drawn within 2.4 arcseconds of the star, where the image is saturated; the star itself is the sphere at the centre.",
+      "summary": "Fomalhaut’s dust belts glowing at 25.5 micrometres, in the authors’ own reduction and colour scale.",
+      "detail": "2022-10-21, 110.8 mas pixels",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "JWST/MIRI, 2022-10-21: F2550W, as reduced by Gáspár et al. (2023), Nature Astronomy 7, 790"
+        },
+        {
+          "id": "colour",
+          "label": "Colour",
+          "value": "Thermal emission, surface brightness: red F2550W, green F2550W, blue F2550W"
+        },
+        {
+          "id": "ring",
+          "label": "Ring, as published",
+          "value": "133.79 au, tilted 67.52°, nodes at position angle 156.28° (Gáspár et al. (2023), Nature Astronomy 7, 790; arXiv:2305.03789, Supplementary Table 3 (KBA inner gap))"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "18 to 420 au; the light reaches the noise at 330 au"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; the inclined ring that best projects to the images, with its north-east side nearer by convention"
+        }
+      ],
+      "input": "f2550w-f2550w",
+      "preview": {
+        "path": "src/objects/fomalhaut-disc/source/previews/f2550w.png",
+        "sha256": "b1f3805d79fb396ecbe807646ecfa81e86068ca9ac09f38942667ac9661b5435",
+        "bytes": 36849,
+        "authoredFrom": "f2550w-f2550w"
+      }
+    }
+  ]
+}

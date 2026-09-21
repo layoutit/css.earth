@@ -119,6 +119,12 @@ export const bandOfFilters = (instrument: string, filters: string, observation =
     if (!found) throw new Error(`No JWST band for ${instrument} ${filters} behind MASK${occulter}.`);
     return found;
   }
+  // A MIRI coronagraph has a filter of its own, and the archive lists it with its mask as "FILTER;MASK" (F1550C;4QPM_1550).
+  if (instrument === 'MIRI' && parts.length === 2 && /C$/u.test(parts[0]!)) {
+    const coronagraphs = Object.values(JWST_BANDS).filter(entry => entry.instrument === 'MIRI' && entry.filter === parts[0] && entry.coronagraph === parts[1]);
+    if (coronagraphs.length !== 1) throw new Error(`${coronagraphs.length ? 'More than one' : 'No'} JWST band for MIRI coronagraph filter ${filters}.`);
+    return coronagraphs[0]!;
+  }
   const found = Object.values(JWST_BANDS).filter(entry => !entry.coronagraph && entry.filter !== undefined && entry.instrument === instrument &&
     (entry.instrument === 'MIRI' ? parts.length === 1 && parts[0] === entry.filter
       : parts.includes(entry.filter) && parts.includes(entry.pupil ?? 'CLEAR') || entry.pupil === 'CLEAR' && parts.length === 1 && parts[0] === entry.filter));

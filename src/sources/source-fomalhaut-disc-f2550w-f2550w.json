@@ -1,0 +1,37 @@
+{
+  "id": "source-fomalhaut-disc-f2550w-f2550w",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Fomalhaut Disc · f2550w f2550w",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://raw.githubusercontent.com/merope82/Fomalhaut/3566f5976f8a029703b05550004c347d58aa0a85/F2550W_finalsc_DC.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/fomalhaut-disc/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/ESA/CSA JWST, MIRI GTO programme 1193 (PI G. Rieke); Gáspár et al. 2023, Nature Astronomy 7, 790 (arXiv:2305.03789), reduced images from github.com/merope82/Fomalhaut",
+      "scope": "The f2550w f2550w input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "The authors publish their reduced images for download with the paper (its Data Availability statement) and state no licence; they derive from JWST data that carry no copyright. The files are fetched at preparation time, pinned by sha256, and not redistributed; the rendered volume credits the authors and the mission.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "schema": "cssearth-jwst-imaging-program@1",
+  "id": "1193",
+  "programme": "1193",
+  "target": "FOMALHAUT",
+  "crdsContext": "jwst_1535.pmap",
+  "bands": [
+    {
+      "band": "MIRI-F2550W",
+      "observation": "jw01193-o013_t015_miri_f2550w-brightsky",
+      "level3": {
+        "name": "jw01193-o013_t015_miri_f2550w-brightsky_i2d.fits",
+        "uri": "mast:JWST/product/jw01193-o013_t015_miri_f2550w-brightsky_i2d.fits",
+        "bytes": 12513600
+      },
+      "association": {
+        "name": "jw01193-o013_20260801t001828_image3_00001_asn.json",
+        "uri": "mast:JWST/product/jw01193-o013_20260801t001828_image3_00001_asn.json",
+        "bytes": 3108
+      },
+      "members": [
+        {
+          "name": "jw01193013001_02101_00001_mirimage_cal.fits",
+          "uri": "mast:JWST/product/jw01193013001_02101_00001_mirimage_cal.fits",
+          "bytes": 7485120
+        },
+        {
+          "name": "jw01193013001_02101_00002_mirimage_cal.fits",
+          "uri": "mast:JWST/product/jw01193013001_02101_00002_mirimage_cal.fits",
+          "bytes": 7485120
+        },
+        {
+          "name": "jw01193013001_02101_00003_mirimage_cal.fits",
+          "uri": "mast:JWST/product/jw01193013001_02101_00003_mirimage_cal.fits",
+          "bytes": 7485120
+        },
+        {
+          "name": "jw01193013001_02101_00004_mirimage_cal.fits",
+          "uri": "mast:JWST/product/jw01193013001_02101_00004_mirimage_cal.fits",
+          "bytes": 7485120
+        }
+      ]
+    },
+    {
+      "band": "MIRI-F1550C-4QPM",
+      "observation": "jw01193-c1016_t016_miri_f1550c-mask1550",
+      "level3": {
+        "name": "jw01193-c1016_t016_miri_f1550c-mask1550_i2d.fits",
+        "uri": "mast:JWST/product/jw01193-c1016_t016_miri_f1550c-mask1550_i2d.fits",
+        "bytes": 2989440
+      },
+      "association": {
+        "name": "jw01193-c1016_20260801t001828_coron3_00001_asn.json",
+        "uri": "mast:JWST/product/jw01193-c1016_20260801t001828_coron3_00001_asn.json",
+        "bytes": 6351
+      },
+      "stage": "coron3",
+      "members": [
+        {
+          "name": "jw01193009001_04101_00001_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193009001_04101_00001_mirimage_calints.fits",
+          "bytes": 27999360,
+          "sha256": "bc156c61ec9b6b85052e1b892864782d368960af9705e2beaa449278c8f2cb6a"
+        },
+        {
+          "name": "jw01193011001_04101_00001_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193011001_04101_00001_mirimage_calints.fits",
+          "bytes": 27999360,
+          "sha256": "cc2ab82998f3ad6f269eaaaac5331789e4c34c1a780ffe914badd7f564bd4868"
+        }
+      ],
+      "references": [
+        {
+          "name": "jw01193004001_04101_00001_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193004001_04101_00001_mirimage_calints.fits",
+          "bytes": 7868160,
+          "sha256": "40591ba27ece186945f978430d6819de137a337135ed1f4445407c872389135e"
+        },
+        {
+          "name": "jw01193004001_04101_00002_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193004001_04101_00002_mirimage_calints.fits",
+          "bytes": 7868160,
+          "sha256": "8e7c902bce535f2d0fed6f71644c0755323611c1f003ae1bbd2ce003dfdffc9f"
+        },
+        {
+          "name": "jw01193004001_04101_00003_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193004001_04101_00003_mirimage_calints.fits",
+          "bytes": 7868160,
+          "sha256": "4eccb307afa448f881da7dac85ea4e0797eb6fc67e565488a9e61217f169d418"
+        },
+        {
+          "name": "jw01193004001_04101_00004_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193004001_04101_00004_mirimage_calints.fits",
+          "bytes": 7868160,
+          "sha256": "d6b5f7d15fd2bba5f51a5197f277bd1e2022988a26e4a5d82be27f591f6cdc94"
+        },
+        {
+          "name": "jw01193004001_04101_00005_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193004001_04101_00005_mirimage_calints.fits",
+          "bytes": 7868160,
+          "sha256": "70fdc9c9f0695342f79dfc160aa1f68b521d1e9b53737f202d23e394abe0d25d"
+        },
+        {
+          "name": "jw01193004001_04101_00006_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193004001_04101_00006_mirimage_calints.fits",
+          "bytes": 7868160,
+          "sha256": "8d1ac75ea59f0926db6bcd95af7cf2d861f6ee9f2206c38f483fd1c45c90969f"
+        },
+        {
+          "name": "jw01193004001_04101_00007_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193004001_04101_00007_mirimage_calints.fits",
+          "bytes": 7868160,
+          "sha256": "3731b3261260874e715faf0dba255a3fd922ce49c2a4f7e2cf3797a9794f378b"
+        },
+        {
+          "name": "jw01193004001_04101_00008_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193004001_04101_00008_mirimage_calints.fits",
+          "bytes": 7868160,
+          "sha256": "f863ec11d615c2c41b2f4ff4828683bd068ad985cd7079b0181b00cc07c6d311"
+        },
+        {
+          "name": "jw01193004001_04101_00009_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193004001_04101_00009_mirimage_calints.fits",
+          "bytes": 7868160,
+          "sha256": "eab2959c38802affc676f5119dbba7de18fabbe9bbbe461d313417ba7d43a0b4"
+        }
+      ]
+    },
+    {
+      "band": "MIRI-F2300C-LYOT",
+      "observation": "jw01193-c1015_t016_miri_f2300c-masklyot",
+      "level3": {
+        "name": "jw01193-c1015_t016_miri_f2300c-masklyot_i2d.fits",
+        "uri": "mast:JWST/product/jw01193-c1015_t016_miri_f2300c-masklyot_i2d.fits",
+        "bytes": 4400640
+      },
+      "association": {
+        "name": "jw01193-c1015_20260801t001828_coron3_00001_asn.json",
+        "uri": "mast:JWST/product/jw01193-c1015_20260801t001828_coron3_00001_asn.json",
+        "bytes": 6351
+      },
+      "stage": "coron3",
+      "members": [
+        {
+          "name": "jw01193007001_04101_00001_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193007001_04101_00001_mirimage_calints.fits",
+          "bytes": 67847040,
+          "sha256": "48dcfccfb8ffacc017c9d59fcd2af8c8d77277279b7e890a2c560edcb2543d10"
+        },
+        {
+          "name": "jw01193012001_04101_00001_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193012001_04101_00001_mirimage_calints.fits",
+          "bytes": 67847040,
+          "sha256": "7a7fe0e140202a0ab43fd4d549e9a084562af87230d2bdb6256f6744b71a5657"
+        }
+      ],
+      "references": [
+        {
+          "name": "jw01193002001_04101_00001_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193002001_04101_00001_mirimage_calints.fits",
+          "bytes": 16473600,
+          "sha256": "67d214828af887187c27f73e19aa995d1c2d4c18c2c5dad539ee786f728efa5d"
+        },
+        {
+          "name": "jw01193002001_04101_00002_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193002001_04101_00002_mirimage_calints.fits",
+          "bytes": 16473600,
+          "sha256": "d2739b676039702c15552db0c52fdc5141d69797731d5b83fd479c93a1fac991"
+        },
+        {
+          "name": "jw01193002001_04101_00003_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193002001_04101_00003_mirimage_calints.fits",
+          "bytes": 16473600,
+          "sha256": "eb500e34fc3e881ebb48c0c229a950b064fee0379899e6f89412d69aebead573"
+        },
+        {
+          "name": "jw01193002001_04101_00004_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193002001_04101_00004_mirimage_calints.fits",
+          "bytes": 16473600,
+          "sha256": "dcd11165423c369f6be7a1aa745cd424e0ace9c0f185f6da604dbb6d39b59a72"
+        },
+        {
+          "name": "jw01193002001_04101_00005_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193002001_04101_00005_mirimage_calints.fits",
+          "bytes": 16473600,
+          "sha256": "a43a1cbb2df311a7bed0da6565ccbe360121d17a6588b11532efeb1cdfcc7d5d"
+        },
+        {
+          "name": "jw01193002001_04101_00006_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193002001_04101_00006_mirimage_calints.fits",
+          "bytes": 16473600,
+          "sha256": "2245692d227816028d73ca65fc0db7224febcf019c8b9dd92c3d9c486269fc2b"
+        },
+        {
+          "name": "jw01193002001_04101_00007_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193002001_04101_00007_mirimage_calints.fits",
+          "bytes": 16473600,
+          "sha256": "c6148bc6c976923e1f39b399230a51d0ef87397c132793834e8931bde209a825"
+        },
+        {
+          "name": "jw01193002001_04101_00008_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193002001_04101_00008_mirimage_calints.fits",
+          "bytes": 16473600,
+          "sha256": "fb5d3d2c4425d7131c4a2df57759187c041c092745ce73360954d7e876d7d243"
+        },
+        {
+          "name": "jw01193002001_04101_00009_mirimage_calints.fits",
+          "uri": "mast:JWST/product/jw01193002001_04101_00009_mirimage_calints.fits",
+          "bytes": 16473600,
+          "sha256": "764c3b616864d0e2ccb6a9e7672ba6cec314f61b432f2facbb03fae7b5469aa7"
+        }
+      ]
+    }
+  ]
+}
