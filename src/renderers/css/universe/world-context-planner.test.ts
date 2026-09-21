@@ -330,6 +330,33 @@ test('an active camera drag preserves the committed inner-system annotations', (
   }
 });
 
+test('major planets remain identified through a full active-drag rotation', () => {
+  const points = [plan.focus, ...plan.bodies], input = view();
+  const majorIds = new Set(['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']);
+  const priorities = Object.fromEntries(points.map(body => [body.id,
+    body.id === 'sun' ? 5 : majorIds.has(body.id) ? 3 : 0]));
+  const calculate = createWorldContextPlanner(plan, priorities);
+  input.world.pose.positionM = [0, 0, 37.31 * 149597870700];
+  input.rotationActive = true;
+  for (let step = 0; step <= 72; step++) {
+    const angle = step * 5 * Math.PI / 180, distance = 37.31 * 149597870700;
+    Object.assign(input.world.pose, {
+      positionM: [distance * Math.sin(angle), 0, distance * Math.cos(angle)],
+      orientationXyzw: [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)],
+    });
+    const frame = calculate(input);
+    for (const id of ['mars', 'uranus', 'neptune']) {
+      const body = frame.projectedBodies.find(body => points[body.index]!.id === id)!;
+      expect(body.labelShown, `${id} stays named at rotation step ${step}`).toBe(true);
+      expect(body.indicatorShown, `${id} keeps its circle at rotation step ${step}`).toBe(true);
+    }
+    for (const body of frame.projectedBodies) {
+      Object.assign(input.bodies[body.index], { labelShown: body.labelShown, labelPlacement: body.labelPlacement,
+        indicatorShown: body.indicatorShown });
+    }
+  }
+});
+
 test('an off-screen body keeps an orbit path that crosses the viewport', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   // Closing in on the Sun takes body after body out of the frame while their rings
