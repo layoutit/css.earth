@@ -1,5 +1,4 @@
 ---
-import { discoveryDescription, isDiscoveryAnchor } from '../object-discovery.mts';
 import type { ObjectEntry } from '../object-schema.mts';
 interface Props { object: ObjectEntry; activeObjectId?: string; hidden?: boolean; }
 import { objectClassificationLabel } from "../planet-search-objects.mts";
@@ -11,7 +10,6 @@ import { searchPreviewUrl } from '../catalogue-window.mts';
 
 const { object, activeObjectId, hidden = false } = Astro.props;
 const source = sourceDocumentation(object.id, object.name);
-const contentDescription = isDiscoveryAnchor(object) ? null : discoveryDescription(object.discovery);
 // Fit the disks together so relative sizes survive without rings shrinking them.
 const thumbnailScale = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS).map(
   ({ presentation }) => presentation.size,
@@ -35,12 +33,10 @@ const classification = objectClassificationLabel(object.classification);
           : <PlanetNavigationMarker planetId={object.id} color={object.color} scale={thumbnailScale} />}
       </span>
       <span class="planet-object-name planet-lens-label">{object.name}</span>
-      <span class="planet-object-distance planet-lens-detail" title={distanceDescription(object.distance)} aria-label={contentDescription ?? `${Number(object.distance.value.toFixed(3))} ${object.distance.unit}. ${distanceDescription(object.distance)}`}>
+      <span class="planet-object-distance planet-lens-detail" title={distanceDescription(object.distance)} aria-label={`${Number(object.distance.value.toFixed(3))} ${object.distance.unit}. ${distanceDescription(object.distance)}`}>
         <span class="planet-object-kind">{classification.charAt(0).toLocaleUpperCase('en') + classification.slice(1)} · </span>
-        {contentDescription ? <span>{contentDescription}</span> : <>
         <span class="planet-object-distance-value">{Number(object.distance.value.toFixed(3))}</span>{" "}
         <span class="planet-object-distance-unit">{object.distance.unit}</span>
-        </>}
       </span>
     </a>
 </li>

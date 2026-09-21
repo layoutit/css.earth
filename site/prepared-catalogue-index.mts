@@ -1,4 +1,3 @@
-import { discoveryDescription, isDiscoveryAnchor } from './object-discovery.mts';
 import { distanceDescription } from './navigation-distance.mts';
 import { FOCUS_SOURCE_DOCUMENTS } from './focus-catalog-data.mts';
 import { isSceneObject } from './prepared-focus-object.mts';
@@ -16,7 +15,6 @@ export function preparedCatalogueIndex(): CatalogueIndex {
       const title = distanceDescription(object.distance);
       if (isSceneObject(object)) {
         const source = sourceDocumentation(object.id, object.name);
-        const content = isDiscoveryAnchor(object) ? null : discoveryDescription(object.discovery);
         const value = String(Number(object.distance.value.toFixed(3)));
         return Object.freeze({
           kind: object.kind,
@@ -29,10 +27,9 @@ export function preparedCatalogueIndex(): CatalogueIndex {
           route: object.route,
           illustration: object.discovery.illustration,
           distanceMeters: object.distance.meters,
-          detail: Object.freeze(content
-            ? { text: content, title, ariaLabel: content }
-            : { text: `${value} ${object.distance.unit}`, value, unit: object.distance.unit,
-              title, ariaLabel: `${value} ${object.distance.unit}. ${title}` }),
+          // A search row always states the distance; what kind of model draws it is the object page's business.
+          detail: Object.freeze({ text: `${value} ${object.distance.unit}`, value, unit: object.distance.unit,
+            title, ariaLabel: `${value} ${object.distance.unit}. ${title}` }),
           source: Object.freeze({ subject: `object:${object.name}`, document: source.href, label: source.label }),
           marker: Object.freeze({ kind: 'scene' as const, id: object.id, color: object.color }),
         });
