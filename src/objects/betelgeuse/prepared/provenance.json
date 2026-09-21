@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e3759a9d508ff44377003c72cde90678c574014adc8e666d94d8f469ae3e0cdd"
+    "sha256": "d1c7f5b1476e4da0707451ec2aa8defe78d3d06a7d01345bdf9942ec32f5535e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -979,7 +979,7 @@
           {
             "catalogueId": "source-betelgeuse-betelgeuse-matisse-2018-12-continuum",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/200"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@7060c0ee3451d1e61c8db9a88fe71ef5d1d2e696#/inputs/200"
           }
         ]
       },
@@ -1172,7 +1172,7 @@
           {
             "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-12-continuum",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/201"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@7060c0ee3451d1e61c8db9a88fe71ef5d1d2e696#/inputs/201"
           }
         ]
       },
