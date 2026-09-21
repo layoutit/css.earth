@@ -492,7 +492,7 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   browser.selectors.set('[data-galactic-overview]', galaxy);
   browser.selectors.set('[data-system-results]', system);
   browser.selectors.set('[data-prepared-focus-card]', card); drawer.selectors.set('[data-prepared-focus-card]', card);
-  const names = ['name','aliases','introduction','status','distance','uncertainty','membership','association','basis','reference'];
+  const names = ['name','aliases','introduction','status','distance','uncertainty','membership','association'];
   for (const name of names) card.selectors.set(`[data-focus-${name}]`, new Element());
   card.selectors.set('[data-focus-fact-label=distance]', new Element());
   const links = [new Element(), new Element(), new Element()];
@@ -539,7 +539,6 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   assert.equal(card.requireSelector('[data-focus-name]').textContent, record.name);
   assert.match(card.requireSelector('[data-focus-aliases]').textContent, /Andromeda/u);
   assert.match(card.requireSelector('[data-focus-status]').textContent, /Confirmed galaxy/u);
-  assert.equal(card.requireSelector('[data-focus-basis]').textContent, record.membership.basis);
   assert.equal(links[0].href, source.url);
   assert.equal(readout.requireSelector('[data-view-distance-label]').textContent, `Distance to ${record.name}:`);
   assert.equal(readout.requireSelector('[data-view-altitude]').textContent, '105.7 ly');
@@ -559,7 +558,6 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   assert.equal(card.requireSelector('[data-focus-status]').textContent, 'X-ray selected galaxy cluster');
   assert.equal(card.requireSelector('[data-focus-fact-label=distance]').textContent, 'Comoving distance');
   assert.match(card.requireSelector('[data-focus-distance]').textContent, /^\d+(?:\.\d+)? Mpc$/u);
-  assert.match(card.requireSelector('[data-focus-basis]').textContent, /R500.*not the cluster boundary.*peculiar velocities are not corrected/u);
   assert.equal(links[0].href, clusters.sources[0].url);
   assert.deepEqual([...card.selectors.values()], retained, 'Selection updates the same retained card nodes');
   assert.equal(searchAction.textContent, 'Search', 'Focus updates preserve the explorer search action');

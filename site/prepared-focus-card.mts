@@ -14,7 +14,7 @@ const words = (value: string) => value.replaceAll('-', ' ').replace(/^./u, lette
 /** One retained card transports the selected prepared record; no catalogue is imported here. */
 export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: string) => void = () => {}): PreparedFocusCard {
   if (!root) return { set() {}, destroy() {} };
-  const fields = Object.fromEntries(['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association', 'basis', 'reference']
+  const fields = Object.fromEntries(['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association']
     .map(name => [name, requiredElement(root, `[data-focus-${name}]`)]));
   const aliasesRow = root.querySelector<HTMLElement>('[data-focus-aliases-row]');
   const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-focus-source]')];
@@ -92,8 +92,6 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     if (fields.membership.parentElement) fields.membership.parentElement.hidden = cluster;
     write('membership', cluster ? 'Galaxy cluster' : nebula ? 'Milky Way' : words(record.membership.group));
     write('association', cluster ? `${record.redshift.value}` : nebula ? 'Galactic nebula' : words(record.membership.subgroup));
-    write('basis', cluster || nebula ? `${record.classification.basis} ${record.distance.method}` : record.membership.basis);
-    write('reference', `Distance reference: ${record.distance.sourceRef}`);
     for (const [index, link] of links.entries()) {
       const source = sources[index];
       link.hidden = !source;

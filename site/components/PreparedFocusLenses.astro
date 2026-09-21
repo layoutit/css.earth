@@ -41,8 +41,10 @@ const banks = await Promise.all(Object.entries(descriptors).filter(([, descripto
 ---
 {banks.map(({ bank, presentation, directSourceIdsByLens, descriptor, resources }) => factsOnly ? <div data-focus-facts-bank={bank.id} hidden>
   {presentation.controls.map(lens => <div data-focus-lens-details={lens.id} hidden={lens.id !== presentation.defaultLens}>
-    <h3 class="planet-lens-details-title">{lens.label}</h3>
-    <PlanetFactsheet id={`focus-${bank.id}-${lens.id}`} facts={lens.facts} embedded />
+    <PlanetFactsheet id={`focus-${bank.id}-${lens.id}`} facts={[
+      { id: 'dataset', label: 'Dataset', value: lens.label },
+      ...(lens.facts ?? []),
+    ]} embedded />
   </div>)}
 </div> : <div class="planet-dataset-content" data-focus-lens-bank={bank.id} hidden>
   <script is:inline type="application/json" data-focus-resources set:html={JSON.stringify({ descriptor, resources }).replace(/</g, '\\u003c')}></script>

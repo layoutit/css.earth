@@ -28,7 +28,7 @@ function fixture(unavailableObjects = '') {
   const facts = ids.map(id => Object.assign(new Element(), { dataset: { focusLensDetails: id }, textContent: 'Source pixels 2048 × 4096' }));
   factsBank.selectors.set('[data-focus-lens-details]', facts);
   root.selectors.set('[data-focus-lens-bank], [data-focus-facts-bank]', [bank, factsBank]);
-  for (const name of ['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association', 'basis', 'reference']) {
+  for (const name of ['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association']) {
     root.selectors.set(`[data-focus-${name}]`, new Element());
   }
   root.selectors.set('[data-focus-aliases-row]', new Element());
