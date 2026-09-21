@@ -1,0 +1,276 @@
+PDS_VERSION_ID        = PDS3 
+LABEL_REVISION_NOTE   = "2018-11-22, IPAG, version 1.0"
+
+/* FILE CHARACTERISTIC */
+RECORD_TYPE           = FIXED_LENGTH
+RECORD_BYTES          = 370
+FILE_RECORDS          = 11
+FILE_NAME             = "CN_G_O_FSSRNG_F.TAB"
+
+/* DATA OBJECT POINTERS  */
+^GEOMETRY_TABLE            = ("CN_G_O_FSSRNG_F.TAB",1 <BYTES>)
+
+/* IDENTIFICATION KEYWORDS */
+DATA_SET_ID    = "RO/RL-C-CONSERT-4-FSS-V1.0"
+DATA_SET_NAME  = "ROSETTA-ORBITER/ROSETTA-LANDER 67P CONSERT 4 FSS V1.0"
+
+PRODUCT_ID            = "CN_G_O_FSSRNG_F"
+PRODUCT_CREATION_TIME = 2018-11-22T09:04:41
+PRODUCT_TYPE          = REFDR
+PROCESSING_LEVEL_ID   = "4"
+
+MISSION_ID            = ROSETTA
+MISSION_NAME          = "INTERNATIONAL ROSETTA MISSION"
+MISSION_PHASE_NAME    = "FIRST SCIENCE SEQUENCE"
+
+INSTRUMENT_HOST_ID    = "RO"
+INSTRUMENT_HOST_NAME  = "ROSETTA-ORBITER"
+INSTRUMENT_ID         = CONSERT
+INSTRUMENT_NAME       = "COMET NUCLEUS SOUNDING EXPERIMENT BY RADIOWAVE
+                        TRANSMISSION"
+INSTRUMENT_TYPE       = "RADAR"
+INSTRUMENT_MODE_ID    = "PINGPONG"
+INSTRUMENT_MODE_DESC  = "CONSERT PERFORMS SOUNDING MEASUREMENTS AS A
+  TRANSPONDER. CONSERT ORBITER AND CONSERT LANDER UNITS ARE SYNCHRONIZED."
+
+TARGET_NAME           = "67P/CHURYUMOV-GERASIMENKO 1 (1969 R1)"
+TARGET_TYPE           = "COMET"
+
+START_TIME            = 2014-11-14T23:45:52
+STOP_TIME             = 2014-11-14T23:46:00
+
+PRODUCER_ID                  = "CONSERT TEAM"
+PRODUCER_FULL_NAME           = "INSTITUT DE PLANETOLOGIE
+                               ET D ASTROPHYSIQUE DE GRENOBLE"
+PRODUCER_INSTITUTION_NAME    = "IPAG/OSUG/UGA/CNRS"
+
+DATA_QUALITY_ID              = "N/A"
+DATA_QUALITY_DESC            = "N/A"
+
+SPACECRAFT_CLOCK_START_COUNT = "1/0374629481.36659"
+SPACECRAFT_CLOCK_STOP_COUNT  = "1/0374629488.59156"
+
+/* GEOMETRY PARAMETERS */
+/* SPACECRAFT LOCATION: Position <km> */
+SC_SUN_POSITION_VECTOR    = (-3.39239e+008,-1.06225e+008,2.67627e+008)
+
+/* TARGET PARAMETERS: Position <km>, Velocity <km/s> */
+SC_TARGET_POSITION_VECTOR = (26.4004,-32.5647,20.4819)
+SC_TARGET_VELOCITY_VECTOR = (-0.00452283,-0.00352866,0.00015615)
+
+/* SPACECRAFT POSITION WITH RESPECT TO CENTRAL BODY */
+SPACECRAFT_ALTITUDE       = 46.6578
+SUB_SPACECRAFT_LATITUDE   = 26.039
+SUB_SPACECRAFT_LONGITUDE  = -50.9681
+SPICE_FILE_NAME           = {"ROS_RO_RL_162909_STEP.TSC",
+                             "ROS_V27.TF",
+                             "ROS_STRUCT_V5.BSP",
+                             "ROS_CONSERT_V11.TI",
+                             "LORB_DV_145_01___T19_00216.BSP",
+                             "LORB_DV_223_01___T19_00302.BSP",
+                             "LORB_DV_236_01___T19_00318.BSP",
+                             "LATT_ROS2LDR_SDL_V1_0_ROMAP.BC",
+                             "ORHR___________T19_00122.BSP",
+                             "RORB_DV_145_01___T19_00216.BSP",
+                             "RORB_DV_223_01___T19_00302.BSP",
+                             "RORB_DV_257_02___T19_00344.BSP",
+                             "ROS_ORBITER_EXTENSION_V1.BSP",
+                             "RATT_DV_145_01_01_T6_00216.BC",
+                             "RATT_DV_223_01_01_T6_00302.BC",
+                             "RATT_DV_257_02_01_T6_00344.BC",
+                             "ROS_ORBITER_EXTENSION_V1.BC",
+                             "ROS_SA_2004_V0001.BC",
+                             "ROS_SA_2005_V0001.BC",
+                             "ROS_SA_2006_V0001.BC",
+                             "ROS_SA_2007_V0001.BC",
+                             "ROS_SA_2008_V0038.BC",
+                             "ROS_SA_2009_V0054.BC",
+                             "ROS_SA_2010_V0052.BC",
+                             "ROS_SA_2011_V0020.BC",
+                             "ROS_SA_2014_V0047.BC",
+                             "ROS_SA_2015_V0042.BC",
+                             "ROS_SA_2016_V0041.BC",
+                             "ROS_HGA_2004_V0001.BC",
+                             "ROS_HGA_2005_V0001.BC",
+                             "ROS_HGA_2006_V0001.BC",
+                             "ROS_HGA_2007_V0001.BC",
+                             "ROS_HGA_2008_V0019.BC",
+                             "ROS_HGA_2009_V0052.BC",
+                             "ROS_HGA_2010_V0046.BC",
+                             "ROS_HGA_2011_V0018.BC",
+                             "ROS_HGA_2014_V0044.BC",
+                             "ROS_HGA_2015_V0053.BC",
+                             "ROS_HGA_2016_V0042.BC"}
+
+/* NOTE ABOUT RANGING */
+NOTE = "FSS RANGING WAS PERFORMED FOR PHILAE LOCALIZATION
+        AT THE END OF FSS (CF. EAICD_CONSERT).
+        INSTRUMENT SIGNAL DATA IS AVAILABLE IN THREE
+        OPERATIONS FOLLOWING THE NOMINAL CONSERT FSS:
+            - FSS BLOCK 6.1 [2014-11-13T18:00:00]
+              (CF. RO-OCN-TN-3866, 3.3.2)
+            - FSS BLOCK 6.2 [2014-11-14T08:00:00]
+              (CF. RO-OCN-TN-3866, 3.3.3)
+            - FSS BLOCK FINAL [2014-11-14T22:00:00]
+              (CF. RO-OCN-TN-3866, 3.3.4)
+        CONSERT WAS IN SAVE MODE (CF. RO-OCN-TN-3825)."
+
+/* DATA OBJECT DEFINITIONS  */
+OBJECT               = GEOMETRY_TABLE
+  ROWS               = 11
+  COLUMNS            = 16
+  ROW_BYTES          = 370
+  INTERCHANGE_FORMAT = ASCII
+  DESCRIPTION        = "THIS TABLE CONTAINS THE GEOMETRY DATA"
+  OBJECT      = COLUMN
+    NAME             = "UTC"
+    COLUMN_NUMBER    = 1
+    DATA_TYPE        = TIME
+    START_BYTE       = 1
+    BYTES            = 23
+    DESCRIPTION      = "START TIME"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "SC_POS_X"
+    COLUMN_NUMBER    = 2
+    DATA_TYPE        = ASCII_REAL
+    UNIT             = "KILOMETER"
+    START_BYTE       = 24
+    BYTES            = 23
+    DESCRIPTION      = "S/C POSITION X"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "SC_POS_Y"
+    COLUMN_NUMBER    = 3
+    DATA_TYPE        = ASCII_REAL
+    UNIT             = "KILOMETER"
+    START_BYTE       = 47
+    BYTES            = 23
+    DESCRIPTION      = "S/C POSITION Y"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "SC_POS_Z"
+    COLUMN_NUMBER    = 4
+    DATA_TYPE        = ASCII_REAL
+    UNIT             = "KILOMETER"
+    START_BYTE       = 70
+    BYTES            = 23
+    DESCRIPTION      = "S/C POSITION Z"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "SUN_POS_X"
+    COLUMN_NUMBER    = 5
+    DATA_TYPE        = ASCII_REAL
+    UNIT             = "KILOMETER"
+    START_BYTE       = 93
+    BYTES            = 23
+    DESCRIPTION      = "SUN POSITION X"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "SUN_POS_Y"
+    COLUMN_NUMBER    = 6
+    DATA_TYPE        = ASCII_REAL
+    UNIT             = "KILOMETER"
+    START_BYTE       = 116
+    BYTES            = 23
+    DESCRIPTION      = "SUN POSITION Y"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "SUN_POS_Z"
+    COLUMN_NUMBER    = 7
+    DATA_TYPE        = ASCII_REAL
+    UNIT             = "KILOMETER"
+    START_BYTE       = 139
+    BYTES            = 23
+    DESCRIPTION      = "SUN POSITION Z"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "BORESIGHT_X"
+    COLUMN_NUMBER    = 8
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 162
+    BYTES            = 23
+    DESCRIPTION      = "BORESIGHT X"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "BORESIGHT_Y"
+    COLUMN_NUMBER    = 9
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 185
+    BYTES            = 23
+    DESCRIPTION      = "BORESIGHT Y"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "BORESIGHT_Z"
+    COLUMN_NUMBER    = 10
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 208
+    BYTES            = 23
+    DESCRIPTION      = "BORESIGHT Z"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "FOV_1_X"
+    COLUMN_NUMBER    = 11
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 231
+    BYTES            = 23
+    DESCRIPTION      = "FOV CORNER 1 X"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "FOV_1_Y"
+    COLUMN_NUMBER    = 12
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 254
+    BYTES            = 23
+    DESCRIPTION      = "FOV CORNER 1 Y"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "FOV_1_Z"
+    COLUMN_NUMBER    = 13
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 277
+    BYTES            = 23
+    DESCRIPTION      = "FOV CORNER 1 Z"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "FOV_2_X"
+    COLUMN_NUMBER    = 14
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 300
+    BYTES            = 23
+    DESCRIPTION      = "FOV CORNER 2 X"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "FOV_2_Y"
+    COLUMN_NUMBER    = 15
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 323
+    BYTES            = 23
+    DESCRIPTION      = "FOV CORNER 2 Y"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "FOV_2_Z"
+    COLUMN_NUMBER    = 16
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 346
+    BYTES            = 23
+    DESCRIPTION      = "FOV CORNER 2 Z"
+  END_OBJECT  = COLUMN
+
+END_OBJECT           = GEOMETRY_TABLE
+END

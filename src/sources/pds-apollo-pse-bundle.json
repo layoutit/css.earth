@@ -1,0 +1,86 @@
+{
+  "id": "pds-apollo-pse-bundle",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Apollo Passive Seismic Experiment archive bundle",
+  "identifiers": [
+    {
+      "type": "pds4-lid",
+      "value": "urn:nasa:pds:apollo_pse"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:apollo_pse:data_table:stationxml.xa.0::1.0"
+    },
+    {
+      "type": "fdsn-network-doi",
+      "value": "10.7914/SN/XA_1969"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_pse/",
+      "label": "NASA PDS Geosciences Node bundle"
+    },
+    {
+      "role": "archive",
+      "url": "https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_pse/data/xa/metadata/stationxml.xa.0.sxml",
+      "label": "Apollo PSE station metadata in FDSN StationXML"
+    },
+    {
+      "role": "original",
+      "url": "https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_pse/document/apollo_pse_description.pdf",
+      "label": "Apollo PSE archive description, including section 3.3.4 Coordinate Systems"
+    },
+    {
+      "role": "rights",
+      "url": "https://pds.nasa.gov/datastandards/citing/",
+      "label": "PDS citation guidance"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/34"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA PDS Geosciences Node; Apollo Passive Seismic Experiment archive. Processing reference: Nunn, Weber and Bahia (2022), Planetary Science Journal 3, 219.",
+      "scope": "Every Apollo PSE input.",
+      "evidence": "document/apollo_pse_description.pdf and https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_pse/"
+    },
+    {
+      "kind": "rights",
+      "text": "No licence text is published with the bundle. PDS asks that the most granular product used be cited.",
+      "scope": "Redistributed records and retained station geometry.",
+      "evidence": "https://pds.nasa.gov/datastandards/citing/"
+    },
+    {
+      "kind": "limitation",
+      "text": "The StationXML itself names no reference frame. The archive description states it: 'The coordinates of the stations on the Moon were redefined using high-resolution images from the Lunar Reconnaissance Orbiter Camera Narrow Angle Camera, and are provided in the DE421 Mean Earth / Rotation Axis Reference Frame.'",
+      "scope": "Every ALSEP station longitude and latitude taken from this product.",
+      "evidence": "document/apollo_pse_description.pdf, section 3.3.4 Coordinate Systems, citing Wagner et al. (2017), Icarus 283, 92-103."
+    },
+    {
+      "kind": "limitation",
+      "text": "The bundle covers the five passive-seismic stations S11, S12, S14, S15 and S16 only. The Apollo active seismic and lunar seismic profiling experiments are not in it.",
+      "scope": "Any claim about Apollo-era subsurface station coverage.",
+      "evidence": "data/xa/metadata/stationxml.xa.0.sxml, network XA, five Station elements."
+    },
+    {
+      "kind": "limitation",
+      "text": "FDSN StationXML gives Elevation in metres; the element carries no unit attribute, so the unit comes from the schema rather than the archived file.",
+      "scope": "The elevation retained as each station's native coordinate.",
+      "evidence": "http://www.fdsn.org/xml/station/, cited by the product's own PDS4 label description."
+    }
+  ],
+  "publisher": "NASA Planetary Data System Geosciences Node",
+  "publicationDate": "2022-08-13",
+  "version": "1.0"
+}

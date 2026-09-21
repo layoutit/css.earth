@@ -1,0 +1,72 @@
+{
+  "id": "pds-consert-4-fss-v1-0",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Rosetta/Philae CONSERT level 4, First Science Sequence, 67P/Churyumov-Gerasimenko",
+  "identifiers": [
+    {
+      "type": "pds3-data-set-id",
+      "value": "RO/RL-C-CONSERT-4-FSS-V1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/dataset.shtml",
+      "label": "NASA PDS Small Bodies Node dataset page"
+    },
+    {
+      "role": "archive",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/",
+      "label": "GEOMETRY directory: orbiter and lander position tables"
+    },
+    {
+      "role": "mirror",
+      "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/CONSERT/RO-RL-C-CONSERT-4-FSS-V1.0/",
+      "label": "ESA Planetary Science Archive legacy tree"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.cosmos.esa.int/web/psa/psa-acknowledgement",
+      "label": "ESA PSA acknowledgement terms"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/comet-67p/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/43"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "A. Herique, Y. Rogez, M. Roudaud, W. Kofman, ROSETTA-ORBITER/ROSETTA-LANDER 67P CONSERT 4 FSS V1.0, RO/RL-C-CONSERT-4-FSS-V1.0, ESA Planetary Science Archive and NASA Planetary Data System, 2019.",
+      "scope": "Every CONSERT level-4 First Science Sequence input.",
+      "evidence": "Dataset citation in catalog/dataset.cat of the archived volume."
+    },
+    {
+      "kind": "rights",
+      "text": "No licence is asserted. The archive asks that the instrument team and the archive be acknowledged.",
+      "scope": "Redistributed records and retained geometry.",
+      "evidence": "https://www.cosmos.esa.int/web/psa/psa-acknowledgement"
+    },
+    {
+      "kind": "limitation",
+      "text": "The GEOMETRY tables are in the Comet Fixed Frame. The SC_TARGET_POSITION_VECTOR and SC_SUN_POSITION_VECTOR keywords in the product labels are a different frame, and the level-2 ERRATA.TXT states the label geometry keywords must not be used.",
+      "scope": "Any use of CONSERT positions.",
+      "evidence": "catalog/dataset.cat, Coordinate System: 'The geometric data, composed of Rosetta and Philae position, velocity and attitude, are provided in the Comet Fixed Frame coordinate system.'"
+    },
+    {
+      "kind": "limitation",
+      "text": "The archived Philae position is the one known at delivery and is not revised when the localisation improves. Kofman et al. (2020, MNRAS 497, 2616) work from a position about 13 m from the archived value.",
+      "scope": "The lander end of every retained sounding path.",
+      "evidence": "https://doi.org/10.1093/mnras/staa2001 and document/ro-ocn-tn-3870.pdf, the CONSERT Archive User Guide."
+    }
+  ],
+  "publisher": "ESA Planetary Science Archive and NASA Planetary Data System Small Bodies Node",
+  "publicationDate": "2019-02-19",
+  "version": "1.0"
+}
