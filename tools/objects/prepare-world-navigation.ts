@@ -185,12 +185,21 @@ function matrixCss(m: Matrix3): string {
 export async function writeWorldNavigationArtifacts(outputDirectory: string, result: Awaited<ReturnType<typeof prepareWorldNavigationDefinition>>, scene?: Input): Promise<Input | undefined> {
   await mkdir(outputDirectory, { recursive: true });
   const oriented = scene ? replaceSystemTransform(scene, result.systemTransform ?? { from: '', to: '' }) : undefined;
-  const nextScene = oriented ? { ...(result.defaultCamera ? poseSceneDocument(oriented, result.definition.camera, result.definition.sun ?? null, result.defaultCamera.transform) : oriented), worldFrame: result.frame } : undefined;
-  // A lane's standalone Sun document follows the same pose.
-  const sunPath = resolve(outputDirectory, 'sun.json');
-  if (result.defaultCamera && result.definition.sun) {
-    const sun = await readFile(sunPath, 'utf8').then(JSON.parse, () => null);
-    if (sun && Array.isArray(sun.referenceViewDirection)) await writeFile(sunPath, `${JSON.stringify({ ...sun, localDirection: result.definition.sun.localDirection, referenceViewDirection: result.definition.sun.referenceViewDirection })}\n`);
+  const nextScene: Record<string, unknown> | undefined = oriented ? { ...(result.defaultCamera ? poseSceneDocument(oriented, result.definition.camera, result.definition.sun ?? null, result.defaultCamera.transform) : oriented), worldFrame: result.frame } : undefined;
+  // These documents are consumed again by later preparation. Keep their numeric
+  // registration and light vectors aligned with the runtime even for typed lanes
+  // that retain their authored default camera (for example Jupiter and Saturn).
+  for (const name of ['sky', 'sun'] as const) {
+    const canonical = result.definition[name];
+    if (!canonical) continue;
+    const keys = name === 'sky' ? ['sceneRegistration', 'sceneRegistrationModel', 'sceneRegistrationEpoch', 'cameraContract']
+      : ['localDirection', 'referenceViewDirection'];
+    const registration = Object.fromEntries(keys.filter(key => canonical[key] !== undefined).map(key => [key, canonical[key]]));
+    const existing = nextScene?.[name];
+    if (nextScene && existing && typeof existing === 'object' && !Array.isArray(existing)) nextScene[name] = { ...existing, ...registration };
+    const path = resolve(outputDirectory, `${name}.json`);
+    const document = await readFile(path, 'utf8').then(JSON.parse, () => null);
+    if (document) await writeFile(path, `${JSON.stringify({ ...document, ...registration })}\n`);
   }
   // The scene carries the same frame the descriptor does, so a re-derived frame rewrites it too.
   const outputs = { runtime: result.definition, 'world-navigation': result.receipt, ...(nextScene ? { scene: nextScene } : {}) };

@@ -20,10 +20,11 @@
     "radialVelocityKmPerS": 23.75,
     "presentationUp": "display-axis",
     "sources": {
-      "position": "SIMBAD basic record for * 119 Tau (CE Tau, HD 36389, HIP 25945), ICRS J2000 position from Gaia EDR3/DR3 (Gaia Collaboration 2020, yCat I/350; bibcode 2020yCat.1350....0G), retrieved 2026-09-16",
+      "position": "SIMBAD basic record for * 119 Tau (CE Tau, HD 36389, HIP 25945), ICRS J2000 position from Gaia EDR3/DR3 (Gaia Collaboration 2020, yCat I/350; bibcode 2020yCat.1350....0G), retrieved 2026-09-16; cross-identification HIP 25945: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2025945",
       "distance": "Gaia DR3 parallax 1.5207 +/- 0.2661 mas via SIMBAD: 658 pc. Hipparcos (van Leeuwen 2007) gives 1.82 +/- 0.26 mas, the 549 pc Montargès et al. (2018) adopt.",
       "properMotion": "Gaia DR3 via SIMBAD: 0.957, -4.511 mas/yr",
       "radialVelocity": "Famaey et al. (2005, A&A 430, 165; bibcode 2005A&A...430..165F) via SIMBAD: 23.75 +/- 0.44 km/s"
-    }
+    },
+    "hipparcosId": 25945
   }
 }

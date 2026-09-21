@@ -4,7 +4,7 @@ API SOURCE: NASA/JPL Horizons API
 
 
 *******************************************************************************
-Ephemeris / API_USER Tue Sep  8 03:34:39 2026 Pasadena, USA      / Horizons
+Ephemeris / API_USER Sun Sep 20 19:12:59 2026 Pasadena, USA      / Horizons
 *******************************************************************************
 Target body name: Phobos (401)                    {source: mar099}
 Center body name: Mars (499)                      {source: mar099}
@@ -21,8 +21,8 @@ Output units    : KM-D
 Calendar mode   : Mixed Julian/Gregorian
 Output type     : GEOMETRIC cartesian states
 Output format   : 2 (position and velocity)
-EOP file        : eop.260907.p261204
-EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-SEP-07. PREDICTS-> 2026-DEC-03
+EOP file        : eop.260918.p261215
+EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-SEP-18. PREDICTS-> 2026-DEC-14
 Reference frame : ICRF
 *******************************************************************************
             JDUT ,            Calendar Date (UT ),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,
