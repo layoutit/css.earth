@@ -1,0 +1,204 @@
+{
+  "schema": "csskepler-452b-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "kepler-452b-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 701,
+      "expectedSha256": "9b66ebcf82e91d6104ae989307a21521731f55189f1cd22bf5a82a4cd7ec4bb4",
+      "origin": "https://arxiv.org/abs/1507.06723",
+      "credit": "J. M. Jenkins et al., \"Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star\", AJ 150, 56 (2015), arXiv:1507.06723",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kepler-452b-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/kepler-452b/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-452b-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2390,
+      "expectedSha256": "433368b56bf4cca3e60d8a6d44ef45f49347f1ba98a3284e036858800779342f",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "kepler-452b-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1664,
+      "expectedSha256": "df480355ef46965ea3f44d709167753322c70fbc493934f95dd9af68197cba21",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "kepler-452b-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration and the host star as the light",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield",
+        "sky-sun"
+      ]
+    },
+    {
+      "id": "kepler-452b-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 107,
+      "expectedSha256": "4a246e191e524e2f05337ba229cbf9e404894fe7c1eed62f67329bc51d271250",
+      "origin": "Repository-authored presentation profile: composite mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "kepler-452b-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 223,
+      "expectedSha256": "1bc9fb4b2c1032b9c2821dd39c42af9cfb4544d1da8d1cb24d5270d347bed049",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "neutral-disc-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 6339,
+      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
+      "origin": "https://arxiv.org/abs/1507.06723",
+      "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/new-hosted-planet.mts",
+        "inputs": [
+          "kepler-452b-observational-measurements"
+        ]
+      },
+      "generator": "tools/objects/new-hosted-planet.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3637,
+      "expectedSha256": "a23b8b77a187a1023a0222ba3ad26990c6cd4c12d984bbf03cdcff1de4cea37c",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 448,
+      "expectedSha256": "4ee8844c6f88236e37699a9696870480dbc7ab520cc183bf5b3ac687d804a033"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 697,
+      "expectedSha256": "47a4619fba6a4da67b5be095175c10447382bafafb63ff8ec1c6abece0cdb7f4"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 5375,
+      "expectedSha256": "1260e859b1327c060201f5f10b0ab29077966e178f4bc67fea2a7412a74670cc"
+    }
+  ]
+}

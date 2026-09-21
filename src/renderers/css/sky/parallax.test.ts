@@ -97,3 +97,17 @@ test('invalid camera positions, displacement overflow and unvalidated finite sca
   expect(() => preparedSkyCameraTransform(world([Number.MAX_VALUE, 0, 0]), viewport,
     { originM: [-Number.MAX_VALUE, 0, 0], metersPerCssPixel: 1 })).toThrow(/displacement/);
 });
+
+test('faces are built at half their texture size and still land on the same cube corners', () => {
+  // Corners of every face as compiled at full texture size (before the density change): the leaf must shrink, the cube must not move.
+  const corners: Record<string, number[][]> = {"px": [[50.6, 50, 50.6], [-50.6, 50, 50.6], [-50.6, 50, -50.6], [50.6, 50, -50.6]], "nx": [[-50.6, -50, 50.6], [50.6, -50, 50.6], [50.6, -50, -50.6], [-50.6, -50, -50.6]], "py": [[50, -50.6, 50.6], [50, 50.6, 50.6], [50, 50.6, -50.6], [50, -50.6, -50.6]], "ny": [[-50, 50.6, 50.6], [-50, -50.6, 50.6], [-50, -50.6, -50.6], [-50, 50.6, -50.6]], "pz": [[50.6, -50.6, 50], [-50.6, -50.6, 50], [-50.6, 50.6, 50], [50.6, 50.6, 50]], "nz": [[50.6, 50.6, -50], [-50.6, 50.6, -50], [-50.6, -50.6, -50], [50.6, -50.6, -50]]};
+  const baked = bakedFixture(), { sky } = compileCssSky(baked, frame);
+  for (const face of sky.faces) {
+    const m = face.style.transform.match(/matrix3d\(([^)]+)\)/)![1].split(',').map(Number);
+    const w = Number.parseFloat(face.style.width), h = Number.parseFloat(face.style.height);
+    expect([w, h]).toEqual([face.widthPx / 2, face.heightPx / 2]);
+    expect(face.style.backgroundSize).toBe(`${w}px ${h}px`);
+    const map = (x: number, y: number) => [0, 1, 2].map(row => m[row]! * x + m[4 + row]! * y + m[12 + row]!);
+    [map(0, 0), map(w, 0), map(w, h), map(0, h)].forEach((point, i) => point.forEach((n, axis) => expect(n).toBeCloseTo(corners[face.id]![i]![axis]!, 9)));
+  }
+});

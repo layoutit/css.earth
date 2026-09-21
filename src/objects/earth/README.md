@@ -141,7 +141,9 @@ One retained surface displays the selected image bank.
 
 With Shadows off, Earth uses a white limb overlay at one quarter of the original
 shading alpha. This display adjustment brightens the edge without modifying the
-source imagery. The directional Shadows bank and atmosphere are unchanged.
+source imagery. The directional Shadows bank is unchanged. The atmosphere shows its
+full-phase frame, the evenly lit limb, instead of following the Sun, so turning the globe
+keeps one prepared atmosphere image loaded instead of decoding a new one for each phase.
 Other bodies retain their existing lighting.
 
 The [cloud-free comparison](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth/cloud-free-default/README.md) considered

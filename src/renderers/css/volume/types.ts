@@ -74,6 +74,9 @@ export interface PreparedVolumeMountOptions {
   readonly unitScale?: number;
   readonly createElement?: (tag: string) => HTMLElement;
   readonly nativeFocalCss?: string;
+  /** Build the full slice renderer on the first publication that needs it instead of at mount. Only for a mount that
+   * adopts no server-rendered DOM: adoption requires the same nodes, created in the same order, as the server's render. */
+  readonly lazyDetail?: boolean;
 }
 
 export interface PreparedVolumeRuntime {

@@ -97,7 +97,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6fb4d8b77dafca7b38cffe6a41fb433b74454aaa9a552f06ca746d8a4449a1f7"
+        "sha256": "ce81ac92ee86bfd97cdf16bb1079f6527e76006b33540f10f354440bd1b6d878"
       }
     },
     "catalog": {
@@ -105,7 +105,7 @@
       "classification": "exoplanet",
       "color": "#9a9a9a",
       "distanceAu": 2571368.4,
-      "description": "Smaller than earth planet of TRAPPIST-1, one year every 18.77 days.",
+      "description": "Planet smaller than Earth of TRAPPIST-1, one year every 18.77 days.",
       "systemName": "TRAPPIST-1 system",
       "order": 917,
       "context": {
@@ -117,25 +117,25 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        372794605612516200,
-        -88610825849253760,
-        -33826918990273770
+        372794607362613760,
+        -88610826260018370,
+        -33826915891965572
       ],
       "presentationToReference": [
-        0.9698956992012213,
+        0.9698956999227915,
         -0.22799797503636696,
-        0.08555265074964422,
-        -0.22708911777987403,
+        0.08555264256932515,
+        -0.22708911795142267,
         -0.9736615602243531,
-        -0.02033958523266491,
-        -0.08793671165635489,
-        -0.00029920025823198463,
-        0.9961260187457572
+        -0.020339583317343826,
+        -0.08793670325480335,
+        -0.0002992002582317626,
+        0.9961260194874352
       ],
       "orbitUpReference": [
         0.22799797503636696,
         0.9736615602243531,
-        0.00029920025823198463
+        0.0002992002582317626
       ],
       "metersPerUnit": 15538.709677419354,
       "bodyRadiusM": 4817000
@@ -144,6 +144,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e85f7f5cd5f96d24a919b063b411af410296b455f917ccde8435af788780d9ec"
+    "sha256": "9c1b48d7800309b3da0de239ebd24ccb13260ee358010e0bad7c18ff6a2cc414"
   }
 }

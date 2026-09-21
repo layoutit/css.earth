@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-452",
+  "card": {
+    "text": "Sun-like star about 554 parsecs away that hosts Kepler-452 b.",
+    "sources": [
+      {
+        "catalogueId": "simbad-kepler-452",
+        "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Kepler-452",
+        "label": "SIMBAD",
+        "checked": "2026-09-21",
+        "locator": "Basic data: spectral type",
+        "quote": "G4V"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Kepler-452 is a Sun-like star about 554 parsecs away, 1.11 times the Sun’s radius. Its planet Kepler-452 b circles it every 385 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1507-06723",
+        "url": "https://arxiv.org/abs/1507.06723",
+        "label": "Jenkins et al. 2015",
+        "checked": "2026-09-21",
+        "locator": "Table of stellar parameters",
+        "quote": "Radius (R⊙) 1.11 +0.15 −0.09"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Sphere of the measured radius",
+      "detail": "No image",
+      "summary": "A sphere at the published size in neutral gray. No picture of the surface is cast here."
+    }
+  }
+}

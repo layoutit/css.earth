@@ -1,5 +1,23 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "altair",
-  "entries": []
+  "entries": [
+    {
+      "id": "jwst-archive-observations",
+      "subject": "JWST observations of ALTAIR (programmes 4534, 8507)",
+      "status": "unresolved",
+      "finding": "JWST observed ALTAIR in programmes 4534, 8507 (NIRCam coronagraphy), a coronagraphic image of its surroundings. The star itself is not resolved and is masked or saturated, so these give no stellar surface. Not reduced here.",
+      "evidence": [
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=4534",
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=8507"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ],
+      "revisitWhen": "When these observations are reduced for this body, or a resolved image or map derived from them is published."
+    }
+  ]
 }

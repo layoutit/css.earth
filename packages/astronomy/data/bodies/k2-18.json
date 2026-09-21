@@ -5,11 +5,11 @@
  "physical": {
   "name": "K2-18",
   "horizonsCode": null,
-  "meanRadiusKm": 285933,
-  "gravitationalParameterKm3PerS2": 47643765975.05624,
+  "meanRadiusKm": 309239,
+  "gravitationalParameterKm3PerS2": 65705929064.76418,
   "parent": null
  },
- "physicalNotes": "Radius: 0.411 +/- 0.038 solar radii at 695700 km per solar radius, the stellar radius in Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830, Table 2). GM from their stellar mass 0.359 +/- 0.047 solar masses times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: no spin axis is measured, so the display axis (celestial north at the star) is up.",
+ "physicalNotes": "Radius: 0.4445 +/- 0.0148 solar radii at 695700 km per solar radius, from Benneke et al. (2019, ApJL 887, L14; arXiv:1909.04642), Table 1. GM from the stellar mass there, 0.4951 +/- 0.0043 solar masses (Cloutier et al. 2019), times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: no spin axis is measured, so the display axis (celestial north at the star) is up.",
  "star": {
   "rightAscensionDegrees": 172.56049060233,
   "declinationDegrees": 7.588404263470001,

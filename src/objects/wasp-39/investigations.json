@@ -1,5 +1,22 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "wasp-39",
-  "entries": []
+  "entries": [
+    {
+      "id": "selected-published-values",
+      "subject": "Radius adopted from the published record",
+      "status": "included",
+      "finding": "Radius: 0.939 ± 0.019 ± 0.011 solar radii at 695700 km per solar radius, from Mancini et al. 2018 (A&A 613, A41 (2018); arXiv:1802.03859). GM from their stellar mass 0.913 solar masses times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: no spin axis is measured, so the display axis (celestial north at the star) is up. Placement: SIMBAD basic record for WASP-39, ICRS J2000 position, reference 2020yCat.1350....0G, retrieved 2026-09-21; Gaia EDR3 parallax 4.6435 +/- 0.0144 mas via SIMBAD (2020yCat.1350....0G): 215.35 pc, no zero-point correction.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-39",
+        "https://arxiv.org/abs/1802.03859"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ]
+    }
+  ]
 }

@@ -22,7 +22,7 @@
       "id": "surface-imagery",
       "subject": "Imagery of the photosphere",
       "status": "excluded",
-      "finding": "No image of this star's disc exists or is expected: at 12.47 pc it is about 0.07 milliarcseconds across, far below any interferometer's reach. The colour lens is its own measured spectrum.",
+      "finding": "No image of this star's disc exists or is expected: at 12.47 pc it is about 0.09 milliarcseconds across, far below any interferometer's reach. The colour lens is its own measured spectrum.",
       "evidence": [
         "https://gea.esac.esa.int/archive/"
       ],
@@ -54,7 +54,7 @@
       "id": "jwst-15um-transits",
       "subject": "Planet sizes and transit times at 15 um from the joint fit",
       "status": "excluded",
-      "finding": "The joint least-squares fit also measures the transits in the phase curve: radius ratios 0.0824 (b), 0.0839 (c) and 0.0875 (g), against Agol et al. (2021)'s 0.08590, 0.08440 and 0.08590 that seed it, and transit times 60271.25436 (b), 60273.23314 (c) and 60271.47930 (g) BMJD. They are not used for the packages' facts: the least-squares fit gives no uncertainties, and the 6,000-step MCMC of the same model did not converge (123 free parameters, acceptance 0.12).",
+      "finding": "The joint least-squares fit also measures the transits in the phase curve: radius ratios 0.0824 (b), 0.0839 (c) and 0.0875 (g), against Agol et al. (2021)'s 0.08590 and 0.08440 that seed b and c; g was seeded, by a slip, with b's 0.08590 instead of its own 0.08692, inside a prior 0.01 wide, ten times the difference, and transit times 60271.25436 (b), 60273.23314 (c) and 60271.47930 (g) BMJD. They are not used for the packages' facts: the least-squares fit gives no uncertainties, and the 6,000-step MCMC of the same model did not converge (123 free parameters, acceptance 0.12).",
       "evidence": [
         "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077",
         "https://doi.org/10.3847/PSJ/abd022"

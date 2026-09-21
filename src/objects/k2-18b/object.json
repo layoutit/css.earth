@@ -97,7 +97,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9eadc6875346b51c430ac7929f96c5081a69215c70e4ceb46087c0cbce21b7c0"
+        "sha256": "aaf00faeafc457f3099de3f471f4445f34d9194a6ae1d29395369f7ffe992b3c"
       }
     },
     "catalog": {
@@ -105,7 +105,7 @@
       "classification": "exoplanet",
       "color": "#9a9a9a",
       "distanceAu": 7858629,
-      "description": "Sub-Neptune 2.4 times Earth’s radius, in the temperate zone of a red dwarf.",
+      "description": "Sub-Neptune 2.6 times Earth’s radius, in the habitable zone of a red dwarf.",
       "systemName": "K2-18 system",
       "order": 1100,
       "context": {
@@ -116,25 +116,25 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -1155529669446377200,
-        150899769871702980,
-        155229259208046270
+        -1155529664440161000,
+        150899769275644100,
+        155229259975074020
       ],
       "presentationToReference": [
-        -0.9838262896264249,
-        0.12224520150393928,
-        0.13092724143264894,
-        0.12104769887812893,
-        0.9924994543874595,
-        -0.017096421757346027,
-        0.13203517120908242,
-        0.0009714678875348572,
-        0.9912445560072105
+        -0.9839446650498122,
+        0.1212887209302807,
+        0.13092724046244142,
+        0.12008278506247726,
+        0.9926166614172969,
+        -0.017096438471746682,
+        0.13203416547110958,
+        0.001099841750352888,
+        0.9912445558470786
       ],
       "orbitUpReference": [
-        -0.12224520150393928,
-        -0.9924994543874595,
-        -0.0009714678875348572
+        -0.1212887209302807,
+        -0.9926166614172969,
+        -0.001099841750352888
       ],
       "metersPerUnit": 48761.93548387097,
       "bodyRadiusM": 15116200
@@ -143,6 +143,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f8122f033d8464da1f603038672c1dfa8c3f65b7702e4d2c44a9500a3aaa7c0e"
+    "sha256": "34fb52ad17b33fe8bc9b2a41b1bfd1948ebf9875d0947e56f8e1fdd141f2f595"
   }
 }
