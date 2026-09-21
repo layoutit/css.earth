@@ -23,7 +23,7 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
   const frame = parseDensityVolumeFrame(properties.frame);
   if (frame.referenceFrame !== 'sun-icrf' || frame.metersPerUnit !== M_PER_PC || frame.originM.some(v=>v!==0) || frame.localToReferenceXyzw.some((v,i)=>v!==(i===3?1:0))) throw new TypeError('HYG Cartesian columns require the Sun-origin ICRS parsec frame.');
   const sourceDirectory=dirname(containedPath(objectDirectory,sourcePath));
-  const colors = palette(recipe.colors), source = await loadStarSource(sourceDirectory,recipe,colors);
+  const colors = palette(recipe.colors), source = await loadStarSource(sourceDirectory,recipe,colors,frame.epochJdTt);
   const hierarchy = prepareStarHierarchy(source.stars,colors,recipe.tree.leafSize,recipe.tree.maximumDepth);
   if (JSON.stringify(hierarchy.boundsUnits)!==JSON.stringify(frame.boundsUnits)) throw new TypeError('Authored point-field frame bounds disagree with the prepared hierarchy.');
   await mkdir(outputDirectory,{recursive:true});
@@ -40,7 +40,7 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
     photometry,policy:recipe.policy,labels:recipe.labels,
     ...(recipe.diffuseSky ? {diffuseSky:diffuse.diffuseSky} : {}),
     resources:[{path:atlasPath,sha256:sha256(atlas),bytes:atlas.length,width:colors.length*recipe.atlas.tileSize,height:recipe.atlas.tileSize},...diffuse.resources],
-    provenance:{source:source.provenance,catalogueMetadata:source.catalogueMetadata,qualification:'All catalogue rows retained at their recorded astrometry; no proper-motion propagation to the navigation epoch. Internal nodes approximate unresolved luminosity and position; no fixed pixel-error guarantee when the point pool is saturated.'} };
+    provenance:{source:source.provenance,catalogueMetadata:source.catalogueMetadata,reconciliation:source.reconciliation,qualification:'All catalogue rows retained; explicitly cross-identified detailed stars use body astrometry at the navigation epoch, with HYG apparent brightness preserved. Remaining rows retain HYG J2000.0 positions. Internal nodes approximate unresolved luminosity and position; no fixed pixel-error guarantee when the point pool is saturated.'} };
   const envelope = {schema:'cssearth-prepared-object@1',id,type:'point-field',format:'cssearth-css-point-field-bank@1',data};
   const bytes = Buffer.from(JSON.stringify(envelope)+'\n'), outputPath = resolve(outputDirectory,'stars.json');
   await writeFile(outputPath,bytes);

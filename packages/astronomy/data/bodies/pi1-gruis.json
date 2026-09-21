@@ -19,11 +19,12 @@
     "properMotionDecMasPerYear": -10.338,
     "radialVelocityKmPerS": 0,
     "sources": {
-      "position": "SIMBAD basic record for * pi.01 Gru (HD 212087, HIP 110478), ICRS J2000 position from Gaia EDR3/DR3 (Gaia Collaboration 2020, yCat I/350; bibcode 2020yCat.1350....0G), retrieved 2026-09-16",
+      "position": "SIMBAD basic record for * pi.01 Gru (HD 212087, HIP 110478), ICRS J2000 position from Gaia EDR3/DR3 (Gaia Collaboration 2020, yCat I/350; bibcode 2020yCat.1350....0G), retrieved 2026-09-16; cross-identification HIP 110478: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%20110478",
       "distance": "Gaia DR3 parallax 6.1858 +/- 0.4466 mas (RUWE 2.9; the star is a wide binary) via SIMBAD: 161.7 pc. Hipparcos (van Leeuwen 2007, A&A 474, 653) gives 6.13 +/- 0.76 mas, the 163 pc Paladini et al. (2018, Nature 553, 310) adopt.",
       "properMotion": "Gaia DR3 via SIMBAD: 31.106, -10.338 mas/yr",
       "radialVelocity": "No catalogued radial velocity: SIMBAD lists none, and the Pulkovo (III/252), GCRV (III/21) and Kharchenko (III/254) compilations have no entry for HIP 110478 (checked 2026-09-16). Zero is assumed; a 30 km/s error moves the scene position by one part in a million of the distance over the 26 years since J2000."
     },
-    "presentationUp": "display-axis"
+    "presentationUp": "display-axis",
+    "hipparcosId": 110478
   }
 }

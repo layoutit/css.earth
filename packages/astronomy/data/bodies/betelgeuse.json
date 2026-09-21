@@ -19,11 +19,12 @@
     "properMotionDecMasPerYear": 11.3,
     "radialVelocityKmPerS": 21.91,
     "sources": {
-      "position": "SIMBAD basic record for * alf Ori, ICRS J2000 position from van Leeuwen (2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-16",
+      "position": "SIMBAD basic record for * alf Ori, ICRS J2000 position from van Leeuwen (2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-16; cross-identification HIP 27989: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2027989",
       "distance": "Joyce et al. (2020, ApJ 902, 63; arXiv:2006.09837): 168 (+27/-15) pc, parallax 5.95 (+0.58/-0.85) mas. Hipparcos (van Leeuwen 2007) gives 6.55 +/- 0.83 mas (153 pc); Harper et al. (2017, AJ 154, 11) give 4.51 +/- 0.80 mas (222 pc).",
       "properMotion": "van Leeuwen (2007, A&A 474, 653) via SIMBAD: 27.54, 11.30 mas/yr, error 1.03 mas/yr",
       "radialVelocity": "Famaey et al. (2005, A&A 430, 165; bibcode 2005A&A...430..165F) via SIMBAD: 21.91 +/- 0.51 km/s"
     },
-    "presentationUp": "display-axis"
+    "presentationUp": "display-axis",
+    "hipparcosId": 27989
   }
 }

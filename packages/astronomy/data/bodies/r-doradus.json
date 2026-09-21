@@ -19,11 +19,12 @@
     "properMotionDecMasPerYear": -75.78,
     "radialVelocityKmPerS": 26.1,
     "sources": {
-      "position": "SIMBAD basic record for V* R Dor (HD 29712, HIP 21479), ICRS J2000 position from the revised Hipparcos reduction (van Leeuwen 2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-17",
+      "position": "SIMBAD basic record for V* R Dor (HD 29712, HIP 21479), ICRS J2000 position from the revised Hipparcos reduction (van Leeuwen 2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-17; cross-identification HIP 21479: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2021479",
       "distance": "Hipparcos parallax 18.31 +/- 0.99 mas (van Leeuwen 2007) via SIMBAD: 54.615 pc. Vlemmings et al. (2024, Nature 633, 323) adopt the same measurement as 55 +/- 3 pc and state that there is no useable Gaia parallax for this star.",
       "properMotion": "van Leeuwen (2007) via SIMBAD: -69.36, -75.78 mas/yr. The ALMA image confirms it: the star sits 1.63 arcsec west and 1.78 arcsec south of this J2000 position, which is 23.5 years of this proper motion.",
       "radialVelocity": "General Catalogue of Stellar Radial Velocities (Wilson 1953, bibcode 1953GCRV..C......0W) via SIMBAD: 26.1 +/- 2.0 km/s."
     },
-    "presentationUp": "display-axis"
+    "presentationUp": "display-axis",
+    "hipparcosId": 21479
   }
 }

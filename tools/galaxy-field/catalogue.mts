@@ -2,6 +2,14 @@ import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
 import { requireRecord, requireString } from '../source-values.mts';
 export interface Point { x:number; y:number; z:number; absoluteMagnitude:number|null; morphology:string }
+export type CataloguePoint = Point & { pgc: number; distance: {
+  valueMpc: number; method: 'cosmicflows-4-distance-modulus' | 'hyperleda-hi-hubble-law';
+  modulus: number | null; modulusUncertainty: number | null; intervalMpc: readonly [number, number] | null;
+} };
+export function distanceModulusIntervalMpc(dm: number, sigma: number): readonly [number, number] {
+  if (!Number.isFinite(sigma) || sigma < 0) throw new TypeError('Invalid distance modulus uncertainty.');
+  return [distanceModulusMpc(dm - sigma), distanceModulusMpc(dm + sigma)];
+}
 const numeric=(value:string|undefined)=>value?.trim() ? Number(value) : NaN;
 export function positionMpc(raDeg:number,decDeg:number,distanceMpc:number):[number,number,number] {
   if(![raDeg,decDeg,distanceMpc].every(Number.isFinite)||raDeg<0||raDeg>=360||Math.abs(decDeg)>90||distanceMpc<=0)throw new TypeError('Invalid catalogue position.');
@@ -34,7 +42,7 @@ export async function loadScientificCatalogue(radiusMpc:number, minimumDistanceM
   const pgc=new Map(required('hyperleda-pgc').map(row=>[row.PGC,row]));
   const cf4=new Map(required('cosmicflows-4').map(row=>[row.PGC,row]));
   if(cf4.size!==required('cosmicflows-4').length)throw new TypeError('Duplicate CF4 identity.');
-  const ids=new Set([...pgc.keys(),...cf4.keys()]),points:Point[]=[];
+  const ids=new Set([...pgc.keys(),...cf4.keys()]),points:CataloguePoint[]=[];
   let invalid=0,outside=0,local=0,measured=0,hubble=0;
   for(const id of ids){
     const measuredRow=cf4.get(id),row=measuredRow??pgc.get(id)!;
@@ -44,13 +52,21 @@ export async function loadScientificCatalogue(radiusMpc:number, minimumDistanceM
     if(distance<=minimumDistanceMpc){local++;continue;}
     if(distance>radiusMpc){outside++;continue;}
     const [x,y,z]=positionMpc(ra,dec,distance);
-    points.push({x,y,z,absoluteMagnitude:null,morphology:pgc.get(id)?.MType??''});
+    const sigma = measuredRow ? numeric(measuredRow.e_DM) : NaN;
+    const modulusUncertainty = Number.isFinite(sigma) && sigma >= 0 ? sigma : null;
+    const identity = Number(id);
+    if (!Number.isSafeInteger(identity) || identity <= 0) throw new TypeError('Invalid PGC identity.');
+    points.push({x,y,z,absoluteMagnitude:null,morphology:pgc.get(id)?.MType??'', pgc: identity,
+      distance: { valueMpc: distance, method: measuredRow ? 'cosmicflows-4-distance-modulus' : 'hyperleda-hi-hubble-law',
+        modulus: measuredRow ? dm : null, modulusUncertainty,
+        intervalMpc: modulusUncertainty === null ? null : distanceModulusIntervalMpc(dm, modulusUncertainty) } });
     if(measuredRow)measured++;else hubble++;
   }
   return {points,count:ids.size,invalid,outside,local,lineage:{sources:manifest.sources,
     frame:'Heliocentric equatorial J2000 coordinates, converted to Cartesian Mpc.',
     distancePolicy:`CF4 individual distance modulus takes precedence. Positive HyperLEDA VHI/${hubbleKmSPerMpc} supplies a Hubble-law estimate otherwise; peculiar velocities are not corrected.`,
     selection:`Union of CF4 and the 50,000 largest angular-diameter PGC rows, exact PGC join. Field is limited to ${minimumDistanceMpc}–${radiusMpc} Mpc; the Local Group is rendered separately.`,
+    uncertainty:'CF4 e_DM is retained as the reported distance-modulus uncertainty, transformed to asymmetric distance bounds using DM +/- e_DM. Hubble-law estimates have no imported uncertainty; null does not mean exact.',
     photometry:'No optical luminosity measurements imported. Point brightness and morphology tints are authored display values.',
     measuredDistanceRows:measured,hubbleDistanceRows:hubble}};
 }

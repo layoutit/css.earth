@@ -3,7 +3,7 @@ import type { VectorRow } from './horizons.mts';
 
 export interface ElementRecord { query: string; elements: KeplerianElements }
 export interface VectorFixture { query: string; rows: VectorRow[] }
-export interface StarRecord { rightAscensionDegrees: number; declinationDegrees: number; positionEpochJulianYear: number; distanceParsecs: number;
+export interface StarRecord { hipparcosId?: number; rightAscensionDegrees: number; declinationDegrees: number; positionEpochJulianYear: number; distanceParsecs: number;
   properMotionRaMasPerYear: number; properMotionDecMasPerYear: number; radialVelocityKmPerS: number;
   /** The star this one is measured to be bound to, with no measured orbit: a wide binary companion. */
   boundTo?: string;
@@ -56,7 +56,7 @@ export function recordMap<T>(value: unknown, parse: (record: unknown) => T): Rec
 }
 export function readStarRecord(value: unknown): StarRecord {
   const record = objectValue(value), sources = objectValue(record.sources, 'star sources');
-  const star = { rightAscensionDegrees: numberValue(record.rightAscensionDegrees), declinationDegrees: numberValue(record.declinationDegrees),
+  const star = { ...(record.hipparcosId === undefined ? {} : { hipparcosId: numberValue(record.hipparcosId) }), rightAscensionDegrees: numberValue(record.rightAscensionDegrees), declinationDegrees: numberValue(record.declinationDegrees),
     positionEpochJulianYear: numberValue(record.positionEpochJulianYear), distanceParsecs: numberValue(record.distanceParsecs),
     properMotionRaMasPerYear: numberValue(record.properMotionRaMasPerYear), properMotionDecMasPerYear: numberValue(record.properMotionDecMasPerYear),
     radialVelocityKmPerS: numberValue(record.radialVelocityKmPerS),
@@ -64,6 +64,7 @@ export function readStarRecord(value: unknown): StarRecord {
     ...(record.boundTo === undefined ? {} : { boundTo: stringValue(record.boundTo) }),
     sources: { position: stringValue(sources.position), distance: stringValue(sources.distance), properMotion: stringValue(sources.properMotion), radialVelocity: stringValue(sources.radialVelocity),
       ...(sources.binary === undefined ? {} : { binary: stringValue(sources.binary) }) } };
+  if (star.hipparcosId !== undefined && (!Number.isSafeInteger(star.hipparcosId) || star.hipparcosId <= 0)) throw new TypeError('Hipparcos identity must be a positive integer.');
   // A bound companion states the measurement that binds it; nothing else may claim one.
   if ((star.boundTo === undefined) !== (star.sources.binary === undefined)) throw new TypeError('A bound star names its companion and the measurement that binds it.');
   if (star.rightAscensionDegrees < 0 || star.rightAscensionDegrees >= 360 || Math.abs(star.declinationDegrees) > 90 || !(star.distanceParsecs > 0) ||
