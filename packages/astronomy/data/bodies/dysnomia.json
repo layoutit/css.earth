@@ -1,0 +1,87 @@
+{
+  "id": "dysnomia",
+  "classification": "satellite",
+  "physical": {
+    "name": "Dysnomia",
+    "horizonsCode": "120136199",
+    "meanRadiusKm": 307.5,
+    "gravitationalParameterKm3PerS2": 9.56,
+    "parent": "eris"
+  },
+  "physicalNotes": "Mean radius is half the radiometric diameter 615 (+60/-50) km of Brown and Butler (2023), PSJ 4, 193. Horizons still carries the superseded 2018 value RAD = 350 +/- 57.5 km. The gravitational parameter is the Horizons satellite-solution header value and is the low end of a stated range; see src/objects/dysnomia/source/validation/epoch-state.json for its limitations and the unresolved conflict with Brown and Butler (2023).",
+  "acquisition": {
+    "sceneSatellite": {
+      "parent": "eris",
+      "target": 120136199,
+      "center": 920136199
+    }
+  },
+  "sceneSatellite": {
+    "epochJdTt": 2461286.5,
+    "positionKm": [
+      -7846.22539235866,
+      33898.53718318183,
+      -13912.69604973232
+    ],
+    "velocityKmPerDay": [
+      -11668.71691528979,
+      1029.617951209897,
+      8973.508786309341
+    ],
+    "centerBodyId": "eris",
+    "gravitationalParametersKm3PerS2": {
+      "body": 9.56,
+      "parent": 1069.1,
+      "combined": 1078.6599999999999
+    },
+    "systemGmKm3PerS2": 1078.6599999999999,
+    "parentHeliocentricState": {
+      "positionKm": [
+        12730277426.87079,
+        6472947119.764496,
+        -9541411.215144325
+      ],
+      "velocityKmPerDay": [
+        -72469.5263854017,
+        61074.70922233314,
+        179565.9983638829
+      ],
+      "provenance": {
+        "model": "Horizons geometric state at prepared epoch",
+        "epochJdTt": 2461286.5,
+        "referenceFrame": "ICRF",
+        "target": 920136199,
+        "center": 10,
+        "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920136199&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+        "sourcePath": "src/objects/dysnomia/source/orbit/eris-epoch.txt",
+        "sha256": "6bc7dd7b63f721b641b5006fedaa3126a846f69e025fe15bff90ee3ec0c2e41d",
+        "solution": "tnosat_v001_20136199_jpl",
+        "limitations": [
+          "The Horizons satellite solution tnosat_v001_20136199_jpl uses 19 observations from 2005-2018 and states a 110 km position uncertainty with respect to the primary on 2025-Jan-01. That is the solution's own statement at that date, not a measured uncertainty at this 2026 scene epoch.",
+          "Horizons states a range for the satellite's gravitational parameter, GM = 9.56 to 29.7 km^3/s^2, and for the primary, GM = 1069.1 to 1089.3 km^3/s^2. The retained values are the low end of each stated range, read from the response headers. They are parameters of this orbit solution, not measured masses, and they differ from the literature GM carried in the Eris body record.",
+          "The parent state is the Eris system barycentre (Horizons 920136199), not the centre of figure of Eris. With GM_rat 0.0087 to 0.0270 the barycentre lies a few hundred kilometres from Eris along the separation; the scene places the moon relative to that barycentre.",
+          "The osculating geometric state is a snapshot at one epoch. It is never propagated at runtime."
+        ],
+        "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+      }
+    },
+    "provenance": {
+      "model": "Horizons geometric state at prepared epoch",
+      "epochJdTt": 2461286.5,
+      "referenceFrame": "ICRF",
+      "target": 120136199,
+      "center": 920136199,
+      "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120136199&CENTER=500%40920136199&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sourcePath": "src/objects/dysnomia/source/orbit/dysnomia-epoch.txt",
+      "sha256": "8ccf871c0b53cdae17b51d2eb459998cc8be76fc206335feb0fbafefa6516941",
+      "solution": "tnosat_v001_20136199_jpl",
+      "limitations": [
+        "The Horizons satellite solution tnosat_v001_20136199_jpl uses 19 observations from 2005-2018 and states a 110 km position uncertainty with respect to the primary on 2025-Jan-01. That is the solution's own statement at that date, not a measured uncertainty at this 2026 scene epoch.",
+        "Horizons states a range for the satellite's gravitational parameter, GM = 9.56 to 29.7 km^3/s^2, and for the primary, GM = 1069.1 to 1089.3 km^3/s^2. The retained values are the low end of each stated range, read from the response headers. They are parameters of this orbit solution, not measured masses, and they differ from the literature GM carried in the Eris body record.",
+        "The parent state is the Eris system barycentre (Horizons 920136199), not the centre of figure of Eris. With GM_rat 0.0087 to 0.0270 the barycentre lies a few hundred kilometres from Eris along the separation; the scene places the moon relative to that barycentre.",
+        "The osculating geometric state is a snapshot at one epoch. It is never propagated at runtime."
+      ],
+      "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+    }
+  }
+}

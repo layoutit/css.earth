@@ -1,0 +1,75 @@
+{
+  "id": "chiron",
+  "classification": "asteroid",
+  "physical": {
+    "name": "Chiron",
+    "horizonsCode": "2060;",
+    "meanRadiusKm": 97.74667322530202,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "Mean radius is the geometric mean of the adopted model semiaxes 126, 109 and 68 km (Braga-Ribas et al. 2023, A&A 676, A72); it agrees with that paper's volume-equivalent radius 98 +/- 17 km. Horizons carries no GM for Chiron.",
+  "acquisition": {
+    "heliocentric": {
+      "target": "2060;",
+      "model": "asteroid"
+    }
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272060%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 2046704729.930973,
+      "eccentricity": 0.3800270628986859,
+      "inclinationRad": 0.30897781821714626,
+      "ascendingNodeRad": 6.087725421340125,
+      "argumentOfPeriapsisRad": 3.475005351349756,
+      "meanAnomalyAtEpochRad": 3.811438960773191,
+      "meanMotionRadPerDay": 0.0003399278674612594
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272060%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          2429285400.684052,
+          1149303777.163259,
+          510475252.42958
+        ],
+        "velocity": [
+          -301142.8273318278,
+          374076.0651623973,
+          98467.50762135116
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          2420198410.010443,
+          1160500463.78762,
+          513417921.4806795
+        ],
+        "velocity": [
+          -304656.165760762,
+          372366.0594123766,
+          97709.28812995998
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          2411006024.530989,
+          1171645514.269922,
+          516337742.8251978
+        ],
+        "velocity": [
+          -308169.5616161177,
+          370633.0347942006,
+          96944.1193363186
+        ]
+      }
+    ]
+  }
+}

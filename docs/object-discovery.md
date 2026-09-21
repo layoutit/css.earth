@@ -70,7 +70,7 @@ approximations without being resolved terrain meshes.
 - [Pallas](../src/objects/pallas/README.md) uses the released MPCD reconstruction;
   its neutral surface and shape-derived elevation do not make it an illustration.
 
-The current package declarations identify 104 approximate-only destinations.
+The current package declarations identify 106 approximate-only destinations.
 Their result rows and selected cards say **Illustration only**. Body-specific
 meshes without observation imagery say **Shape only**. These labels describe
 available content, not an uncertainty estimate or a qualification verdict.

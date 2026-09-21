@@ -1,0 +1,63 @@
+{
+  "checkedOn": "2026-09-21",
+  "base": "dcdba9eb9b",
+  "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/companions/inputs.json.",
+  "referenceDirectory": "output/companions/references",
+  "bodies": [
+    {
+      "id": "dysnomia",
+      "name": "Dysnomia",
+      "titleLabel": "Dysnomia",
+      "horizons": "120136199",
+      "aliases": [
+        "Eris I",
+        "Eris I Dysnomia",
+        "S/2005 (2003 UB313) 1",
+        "(136199) Eris I Dysnomia"
+      ],
+      "classification": "satellite",
+      "population": "Trans-Neptunian satellite",
+      "parent": "eris",
+      "fullAxesKm": [
+        615.0,
+        615.0,
+        615.0
+      ],
+      "radiusKm": 307.5,
+      "axesStatus": "Illustrative equal axes at the radius Horizons carries for this satellite solution; these are not three independently measured axes.",
+      "poleIcrfDegrees": [
+        0,
+        90
+      ],
+      "periodHours": null,
+      "periodText": "Not measured; likely synchronous with the 15.785899 +/- 0.000050 d orbit",
+      "rotationFact": false,
+      "shapeLabel": "Sphere at the measured diameter",
+      "source": "https://doi.org/10.3847/PSJ/ace52a",
+      "credit": "Brown and Butler (2023), The Planetary Science Journal 4, 193; ALMA Band 6 and Band 7 thermal detection of Dysnomia",
+      "papers": [
+        "https://arxiv.org/abs/2307.04848",
+        "https://doi.org/10.3847/1538-3881/aad9f2",
+        "https://doi.org/10.1016/j.icarus.2020.114130",
+        "https://doi.org/10.3847/PSJ/acdd5f"
+      ],
+      "shapeMeaning": "Illustrative sphere at the radiometric diameter 615 (+60/-50) km measured by Brown and Butler (2023) from ALMA Band 6 and Band 7 thermal flux in which Dysnomia is detected separately from Eris (45 +/- 7 microjansky at 1280 micrometres). The thermal flux gives the size and the geometric albedo 0.05 +/- 0.01 follows from it, which is the right direction of inference. It rests on a fixed 850 micrometre emissivity of 0.685 and on emissivity and phase-integral priors typical of Kuiper-belt objects. One diameter is measured, so the three axes are equal by construction and are not three measured axes. No stellar occultation by Dysnomia has been published and it has never been resolved as a disc.",
+      "orientationMeaning": "Illustrative ICRF north pole (right ascension 0 degrees, declination +90 degrees), arbitrary prime meridian and phase. Dysnomia has no measured rotation pole. Its own brightness varies by about 0.3 magnitudes in HST imaging (Bernstein et al. 2023), and Eris is measured to rotate synchronously with Dysnomia's 15.79 day orbit, so Dysnomia is likely tidally locked; that is an inference, and the well-measured orbit pole is not a body pole.",
+      "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+      "introduction": "Dysnomia is the only known moon of Eris, and its orbit gave Eris a measured mass. It circles Eris every 15.8 days at about 37,000 km.",
+      "card": "Eris's only known moon.",
+      "datasetSummary": "A sphere at the 615 km diameter ALMA measured. Its shape, pole and rotation are not.",
+      "distanceAu": 95.46542935905964,
+      "textCitations": [
+        {
+          "catalogueId": "jpl-horizons",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "label": "JPL Horizons",
+          "checked": "2026-09-21",
+          "locator": "Satellite solution tnosat_v001_20136199_jpl",
+          "quote": "(136199) Eris I Dysnomia # obs: 19 (2005-2018); Position uncertainty wrt primary on 2025-Jan-1: 110 km"
+        }
+      ]
+    }
+  ]
+}
