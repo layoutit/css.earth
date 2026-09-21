@@ -1,0 +1,16 @@
+{
+  "schema": "csselara-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 456992,
+      "sha256": "05071b7c30ea17c71576f646b5760a0387bad2dd0240cdbb6c7ab4ef35332e87"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 368669,
+      "sha256": "370d52012fa5fce7eb93c5d55dd047801eb8d25dadf5f8a9ec0f14dc3e5b3b2b"
+    }
+  ]
+}

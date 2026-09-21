@@ -1,0 +1,32 @@
+{
+  "id": "simbad-alf-aql",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for * alf Aql (Altair)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Aql",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/altair/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "f634c706c8f551eab0947c8876d50d64eb659e279ec30692877353db06448e0f",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; astrometry and radial velocity with the references SIMBAD lists",
+      "scope": "citation",
+      "evidence": "src/objects/altair/text.json#/card/sources/0"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

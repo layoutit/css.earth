@@ -1,0 +1,30 @@
+{
+ "id": "vega",
+ "classification": "star",
+ "order": 1203,
+ "physical": {
+  "name": "Vega",
+  "horizonsCode": null,
+  "meanRadiusKm": 1822180,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null
+ },
+ "physicalNotes": "Radius: Vega is a rapid rotator seen nearly pole-on: Monnier et al. (2012), ApJ 761, L3, measure an equatorial radius of 2.726 \u00b1 0.006 and a polar radius of 2.418 \u00b1 0.012 solar radii with CHARA/MIRC. The record's radius is the volume-equivalent sphere of those two, 2.62 solar radii; the flattening is not drawn. Adopted 1,822,180 km, 2.6192 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
+ "star": {
+  "rightAscensionDegrees": 279.234734787025,
+  "declinationDegrees": 38.783688956244,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 7.6787,
+  "properMotionRaMasPerYear": 200.94,
+  "properMotionDecMasPerYear": 286.23,
+  "radialVelocityKmPerS": -13.5,
+  "sources": {
+   "position": "SIMBAD basic record for * alf Lyr (HIP 91262), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Lyr",
+   "distance": "Inverse of the Hipparcos new-reduction parallax 130.23 \u00b1 0.36 mas (van Leeuwen 2007) via SIMBAD",
+   "properMotion": "SIMBAD: 200.94, 286.23 mas/yr, reference 2007A&A...474..653V",
+   "radialVelocity": "SIMBAD: -13.5 km/s, reference 2004A&A...420..183A"
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 91262
+ }
+}

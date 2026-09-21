@@ -12,6 +12,16 @@ credits when the data are used or displayed. cssEarth averages the radiance
 offline and creates its own logarithmic false-color textures; it does not copy
 the publisher's rendered map or sky-brightness model. No endorsement is implied.
 
+## Blue Marble deep ocean
+
+The deep ocean of the visible colour and cloud views is taken from NASA Earth
+Observatory's Blue Marble Next Generation topography and bathymetry edition for
+July 2004, `source/blue-marble-july-bathymetry.jpg`, on the same grid as the
+plain July mosaic. Only its ocean is used, where the plain edition carries the
+arbitrary deep-ocean reflectance described in Stöckli et al. (2005), section
+2.4. Its relief-shaded land is not used. NASA image with credit and no
+endorsement claim.
+
 NASA and JPL material is credited to the named missions and institutions. NASA imagery is used under NASA's media usage guidelines; no NASA endorsement is implied. JPL data is factual United States government information, with Caltech/JPL attribution retained.
 
 The atmosphere parameter values in `source/atmosphere/model.json` are adapted from the OpenSpace Team's RenderableAtmosphere tuning (MIT) and cited there; no OpenSpace file is read.

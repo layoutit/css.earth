@@ -1,0 +1,598 @@
+{
+ "checkedOn": "2026-09-21",
+ "base": "main",
+ "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/centaurs/batch.json.",
+ "referenceDirectory": "output/centaurs/references",
+ "bodies": [
+  {
+   "id": "pholus",
+   "name": "Pholus",
+   "titleLabel": "Pholus",
+   "horizons": "5145;",
+   "aliases": [
+    "5145 Pholus",
+    "1992 AD"
+   ],
+   "classification": "asteroid",
+   "population": "Centaur",
+   "fullAxesKm": [
+    190.0,
+    190.0,
+    190.0
+   ],
+   "radiusKm": 95.0,
+   "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": 9.98,
+   "periodText": "9.98 h",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": true,
+   "shapeLabel": "Sphere at the JPL diameter",
+   "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "credit": "JPL Small-Body Database, physical parameters for 5145 Pholus (1992 AD): diameter 190 km; JPL's stated reference: Earth, Moon, and Planets, v. 89, Issue 1, p. 117-134 (2002)",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 190 km diameter the JPL Small-Body Database lists for Pholus. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Pholus is a centaur, a small icy body orbiting the Sun among the giant planets.",
+   "card": "A centaur orbiting among the giant planets.",
+   "datasetSummary": "A sphere at the 190 km diameter JPL lists. Its shape and pole are not measured.",
+   "distanceAu": 20.3,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 5145 Pholus (1992 AD): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "nessus",
+   "name": "Nessus",
+   "titleLabel": "Nessus",
+   "horizons": "7066;",
+   "aliases": [
+    "7066 Nessus",
+    "1993 HA2"
+   ],
+   "classification": "asteroid",
+   "population": "Centaur",
+   "fullAxesKm": [
+    66.7,
+    66.7,
+    66.7
+   ],
+   "radiusKm": 33.35,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.059; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "credit": "JPL Small-Body Database, absolute magnitude H = 9.57 for 7066 Nessus (1993 HA2); diameter estimated by cssEarth with an assumed albedo of 0.059",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at 66.7 km, estimated from JPL's absolute magnitude H = 9.57 with an assumed albedo of 0.059, the median of the seven centaurs in this batch that have a JPL-cited albedo. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Nessus is a centaur, a small icy body orbiting the Sun among the giant planets.",
+   "card": "A centaur orbiting among the giant planets.",
+   "datasetSummary": "A sphere at about 66.7 km, estimated from brightness with an assumed albedo.",
+   "distanceAu": 24.5,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 7066 Nessus (1993 HA2): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "asbolus",
+   "name": "Asbolus",
+   "titleLabel": "Asbolus",
+   "horizons": "8405;",
+   "aliases": [
+    "8405 Asbolus",
+    "1995 GO"
+   ],
+   "classification": "asteroid",
+   "population": "Centaur",
+   "fullAxesKm": [
+    66.0,
+    66.0,
+    66.0
+   ],
+   "radiusKm": 33.0,
+   "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": 8.9351,
+   "periodText": "8.9351 h",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": true,
+   "shapeLabel": "Sphere at the JPL diameter",
+   "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "credit": "JPL Small-Body Database, physical parameters for 8405 Asbolus (1995 GO): diameter 66 km; JPL's stated reference: Earth, Moon, and Planets, v. 89, Issue 1, p. 117-134 (2002)",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 66 km diameter the JPL Small-Body Database lists for Asbolus. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Asbolus is a centaur, a small icy body orbiting the Sun among the giant planets.",
+   "card": "A centaur orbiting among the giant planets.",
+   "datasetSummary": "A sphere at the 66 km diameter JPL lists. Its shape and pole are not measured.",
+   "distanceAu": 18.1,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 8405 Asbolus (1995 GO): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "echeclus",
+   "name": "Echeclus",
+   "titleLabel": "Echeclus",
+   "horizons": "60558;",
+   "aliases": [
+    "60558 Echeclus",
+    "2000 EC98",
+    "174P/Echeclus",
+    "174P"
+   ],
+   "classification": "asteroid",
+   "population": "Centaur",
+   "fullAxesKm": [
+    59.0,
+    59.0,
+    59.0
+   ],
+   "radiusKm": 29.5,
+   "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": 26.802,
+   "periodText": "26.802 h",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": true,
+   "shapeLabel": "Sphere at the JPL diameter",
+   "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "credit": "JPL Small-Body Database, physical parameters for 60558 Echeclus (2000 EC98): diameter 59 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 59 km diameter the JPL Small-Body Database lists for Echeclus. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Echeclus is a centaur, a small icy body orbiting the Sun among the giant planets. It has also shown comet activity and carries the comet name 174P.",
+   "card": "A centaur orbiting among the giant planets.",
+   "datasetSummary": "A sphere at the 59 km diameter JPL lists. Its shape and pole are not measured.",
+   "distanceAu": 10.8,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 60558 Echeclus (2000 EC98): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "thereus",
+   "name": "Thereus",
+   "titleLabel": "Thereus",
+   "horizons": "32532;",
+   "aliases": [
+    "32532 Thereus",
+    "2001 PT13"
+   ],
+   "classification": "asteroid",
+   "population": "Centaur",
+   "fullAxesKm": [
+    86.5,
+    86.5,
+    86.5
+   ],
+   "radiusKm": 43.25,
+   "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": 8.335,
+   "periodText": "8.335 h",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": true,
+   "shapeLabel": "Sphere at the JPL diameter",
+   "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "credit": "JPL Small-Body Database, physical parameters for 32532 Thereus (2001 PT13): diameter 86.5 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 86.5 km diameter the JPL Small-Body Database lists for Thereus. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Thereus is a centaur, a small icy body orbiting the Sun among the giant planets.",
+   "card": "A centaur orbiting among the giant planets.",
+   "datasetSummary": "A sphere at the 86.5 km diameter JPL lists. Its shape and pole are not measured.",
+   "distanceAu": 10.6,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 32532 Thereus (2001 PT13): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "hylonome",
+   "name": "Hylonome",
+   "titleLabel": "Hylonome",
+   "horizons": "10370;",
+   "aliases": [
+    "10370 Hylonome",
+    "1995 DW2"
+   ],
+   "classification": "asteroid",
+   "population": "Centaur",
+   "fullAxesKm": [
+    125.3,
+    125.3,
+    125.3
+   ],
+   "radiusKm": 62.65,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.059; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "credit": "JPL Small-Body Database, absolute magnitude H = 8.2 for 10370 Hylonome (1995 DW2); diameter estimated by cssEarth with an assumed albedo of 0.059",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at 125.3 km, estimated from JPL's absolute magnitude H = 8.2 with an assumed albedo of 0.059, the median of the seven centaurs in this batch that have a JPL-cited albedo. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Hylonome is a centaur, a small icy body orbiting the Sun among the giant planets.",
+   "card": "A centaur orbiting among the giant planets.",
+   "datasetSummary": "A sphere at about 125.3 km, estimated from brightness with an assumed albedo.",
+   "distanceAu": 24.9,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 10370 Hylonome (1995 DW2): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "amycus",
+   "name": "Amycus",
+   "titleLabel": "Amycus",
+   "horizons": "55576;",
+   "aliases": [
+    "55576 Amycus",
+    "2002 GB10"
+   ],
+   "classification": "asteroid",
+   "population": "Centaur",
+   "fullAxesKm": [
+    100.9,
+    100.9,
+    100.9
+   ],
+   "radiusKm": 50.45,
+   "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": 9.76,
+   "periodText": "9.76 h",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": true,
+   "shapeLabel": "Sphere at the JPL diameter",
+   "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "credit": "JPL Small-Body Database, physical parameters for 55576 Amycus (2002 GB10): diameter 100.9 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 100.9 km diameter the JPL Small-Body Database lists for Amycus. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Amycus is a centaur, a small icy body orbiting the Sun among the giant planets.",
+   "card": "A centaur orbiting among the giant planets.",
+   "datasetSummary": "A sphere at the 100.9 km diameter JPL lists. Its shape and pole are not measured.",
+   "distanceAu": 24.9,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 55576 Amycus (2002 GB10): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "crantor",
+   "name": "Crantor",
+   "titleLabel": "Crantor",
+   "horizons": "83982;",
+   "aliases": [
+    "83982 Crantor",
+    "2002 GO9"
+   ],
+   "classification": "asteroid",
+   "population": "Centaur",
+   "fullAxesKm": [
+    91.2,
+    91.2,
+    91.2
+   ],
+   "radiusKm": 45.6,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.059; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": 13.94,
+   "periodText": "13.94 h",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": true,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "credit": "JPL Small-Body Database, absolute magnitude H = 8.89 for 83982 Crantor (2002 GO9); diameter estimated by cssEarth with an assumed albedo of 0.059",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at 91.2 km, estimated from JPL's absolute magnitude H = 8.89 with an assumed albedo of 0.059, the median of the seven centaurs in this batch that have a JPL-cited albedo. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Crantor is a centaur, a small icy body orbiting the Sun among the giant planets.",
+   "card": "A centaur orbiting among the giant planets.",
+   "datasetSummary": "A sphere at about 91.2 km, estimated from brightness with an assumed albedo.",
+   "distanceAu": 19.4,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 83982 Crantor (2002 GO9): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "elatus",
+   "name": "Elatus",
+   "titleLabel": "Elatus",
+   "horizons": "31824;",
+   "aliases": [
+    "31824 Elatus",
+    "1999 UG5"
+   ],
+   "classification": "asteroid",
+   "population": "Centaur",
+   "fullAxesKm": [
+    57.0,
+    57.0,
+    57.0
+   ],
+   "radiusKm": 28.5,
+   "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": 26.82,
+   "periodText": "26.82 h",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": true,
+   "shapeLabel": "Sphere at the JPL diameter",
+   "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "credit": "JPL Small-Body Database, physical parameters for 31824 Elatus (1999 UG5): diameter 57 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 57 km diameter the JPL Small-Body Database lists for Elatus. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Elatus is a centaur, a small icy body orbiting the Sun among the giant planets.",
+   "card": "A centaur orbiting among the giant planets.",
+   "datasetSummary": "A sphere at the 57 km diameter JPL lists. Its shape and pole are not measured.",
+   "distanceAu": 11.8,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 31824 Elatus (1999 UG5): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "pelion",
+   "name": "Pelion",
+   "titleLabel": "Pelion",
+   "horizons": "49036;",
+   "aliases": [
+    "49036 Pelion",
+    "1998 QM107"
+   ],
+   "classification": "asteroid",
+   "population": "Centaur",
+   "fullAxesKm": [
+    45.9,
+    45.9,
+    45.9
+   ],
+   "radiusKm": 22.95,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.059; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "credit": "JPL Small-Body Database, absolute magnitude H = 10.38 for 49036 Pelion (1998 QM107); diameter estimated by cssEarth with an assumed albedo of 0.059",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at 45.9 km, estimated from JPL's absolute magnitude H = 10.38 with an assumed albedo of 0.059, the median of the seven centaurs in this batch that have a JPL-cited albedo. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Pelion is a centaur, a small icy body orbiting the Sun among the giant planets.",
+   "card": "A centaur orbiting among the giant planets.",
+   "datasetSummary": "A sphere at about 45.9 km, estimated from brightness with an assumed albedo.",
+   "distanceAu": 20.0,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 49036 Pelion (1998 QM107): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "okyrhoe",
+   "name": "Okyrhoe",
+   "titleLabel": "Okyrhoe",
+   "horizons": "52872;",
+   "aliases": [
+    "52872 Okyrhoe",
+    "1998 SG35"
+   ],
+   "classification": "asteroid",
+   "population": "Centaur",
+   "fullAxesKm": [
+    36.0,
+    36.0,
+    36.0
+   ],
+   "radiusKm": 18.0,
+   "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": 9.72,
+   "periodText": "9.72 h",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": true,
+   "shapeLabel": "Sphere at the JPL diameter",
+   "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "credit": "JPL Small-Body Database, physical parameters for 52872 Okyrhoe (1998 SG35): diameter 36 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 36 km diameter the JPL Small-Body Database lists for Okyrhoe. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Okyrhoe is a centaur, a small icy body orbiting the Sun among the giant planets.",
+   "card": "A centaur orbiting among the giant planets.",
+   "datasetSummary": "A sphere at the 36 km diameter JPL lists. Its shape and pole are not measured.",
+   "distanceAu": 8.35,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 52872 Okyrhoe (1998 SG35): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "damocles",
+   "name": "Damocles",
+   "titleLabel": "Damocles",
+   "horizons": "5335;",
+   "aliases": [
+    "5335 Damocles",
+    "1991 DA"
+   ],
+   "classification": "asteroid",
+   "population": "Centaur",
+   "fullAxesKm": [
+    12.4,
+    12.4,
+    12.4
+   ],
+   "radiusKm": 6.2,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.059; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "credit": "JPL Small-Body Database, absolute magnitude H = 13.23 for 5335 Damocles (1991 DA); diameter estimated by cssEarth with an assumed albedo of 0.059",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at 12.4 km, estimated from JPL's absolute magnitude H = 13.23 with an assumed albedo of 0.059, the median of the seven centaurs in this batch that have a JPL-cited albedo. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Damocles is a centaur, a small icy body orbiting the Sun among the giant planets.",
+   "card": "A centaur orbiting among the giant planets.",
+   "datasetSummary": "A sphere at about 12.4 km, estimated from brightness with an assumed albedo.",
+   "distanceAu": 11.9,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 5335 Damocles (1991 DA): orbit class and physical parameters"
+    }
+   ]
+  }
+ ]
+}

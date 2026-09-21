@@ -1,0 +1,83 @@
+{
+  "id": "vanth",
+  "classification": "satellite",
+  "physical": {
+    "name": "Vanth",
+    "horizonsCode": "120090482",
+    "meanRadiusKm": 221.5,
+    "gravitationalParameterKm3PerS2": 3.470366973,
+    "parent": "orcus"
+  },
+  "physicalNotes": "Mean radius is the approximate value in the Horizons satellite-solution header (RAD~ 221.5 km). The gravitational parameter is that header's value and defines the orbit calculation only.",
+  "acquisition": {
+    "sceneSatellite": {
+      "parent": "orcus",
+      "target": 120090482,
+      "center": 920090482
+    }
+  },
+  "sceneSatellite": {
+    "epochJdTt": 2461286.5,
+    "positionKm": [
+      2543.00896511077,
+      -256.068205248115,
+      8617.998351222503
+    ],
+    "velocityKmPerDay": [
+      -3314.834724050154,
+      -4812.87975565343,
+      835.6809818789701
+    ],
+    "centerBodyId": "orcus",
+    "gravitationalParametersKm3PerS2": {
+      "body": 3.470366973,
+      "parent": 38.55963303,
+      "combined": 42.030000003
+    },
+    "systemGmKm3PerS2": 42.030000003,
+    "parentHeliocentricState": {
+      "positionKm": [
+        -6575561489.74566,
+        2326097021.356966,
+        -1694799979.495996
+      ],
+      "velocityKmPerDay": [
+        -54397.46842453675,
+        -290037.8019504105,
+        -144320.8979661686
+      ],
+      "provenance": {
+        "model": "Horizons geometric state at prepared epoch",
+        "epochJdTt": 2461286.5,
+        "referenceFrame": "ICRF",
+        "target": 920090482,
+        "center": 10,
+        "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920090482&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+        "sourcePath": "src/objects/vanth/source/orbit/orcus-epoch.txt",
+        "sha256": "f7c9c8e3501f220dc4df48e096d4917123a072e47c94615b87eec44c84c0d20d",
+        "solution": "tnosat_v001_20090482_jpl043_20220908",
+        "limitations": [
+          "The Horizons satellite solution tnosat_v001_20090482_jpl043_20220908 uses 12 observations from 2005 to 2015 and states a 67 km position uncertainty with respect to the primary on 2025-Jan-01. That is the solution's own statement at that date, not a measured uncertainty at this 2026 scene epoch.",
+          "The gravitational parameters are the values in the retained Horizons response headers; they define this orbit calculation and are not adopted as independent body facts."
+        ],
+        "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+      }
+    },
+    "provenance": {
+      "model": "Horizons geometric state at prepared epoch",
+      "epochJdTt": 2461286.5,
+      "referenceFrame": "ICRF",
+      "target": 120090482,
+      "center": 920090482,
+      "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120090482&CENTER=500%40920090482&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sourcePath": "src/objects/vanth/source/orbit/vanth-epoch.txt",
+      "sha256": "c4a216452a805fd18c3d3b5a3f77286074cdb3d89b7e835af84673ff16e0a1d5",
+      "solution": "tnosat_v001_20090482_jpl043_20220908",
+      "limitations": [
+        "The Horizons satellite solution tnosat_v001_20090482_jpl043_20220908 uses 12 observations from 2005 to 2015 and states a 67 km position uncertainty with respect to the primary on 2025-Jan-01. That is the solution's own statement at that date, not a measured uncertainty at this 2026 scene epoch.",
+        "The gravitational parameters are the values in the retained Horizons response headers; they define this orbit calculation and are not adopted as independent body facts."
+      ],
+      "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+    }
+  }
+}

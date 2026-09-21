@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "aldebaran",
+  "card": {
+    "text": "Red giant 20.43 parsecs away; its photosphere is not imaged here.",
+    "sources": [
+      {
+        "catalogueId": "simbad-alf-tau",
+        "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Tau",
+        "label": "SIMBAD",
+        "checked": "2026-09-21",
+        "locator": "Basic data: spectral type",
+        "quote": "K5+III"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Aldebaran is a red giant 20.43 parsecs away and 44 times the Sun’s radius, measured as the Moon passed in front of it. Here its surface is a plain sphere.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-astro-ph-0502181",
+        "url": "https://arxiv.org/abs/astro-ph/0502181",
+        "label": "Richichi & Roccatagliata 2005",
+        "checked": "2026-09-21",
+        "locator": "Abstract",
+        "quote": "20.58 ±0.03 milliarcsec, or 44.2 ±0.9 R⊙"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Sphere of the measured radius",
+      "detail": "No image",
+      "summary": "A sphere at the published size in neutral gray. No picture of the surface is cast here."
+    }
+  }
+}

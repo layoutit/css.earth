@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "neso",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Neso",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 30
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4414128128649.901,
+        284432678554.9234,
+        -44763170819.03587
+      ],
+      "presentationToReference": [
+        0.9984862174037061,
+        2.4356826039297786e-17,
+        0.055002487714999077,
+        0.05046379584769219,
+        0.3977771559319137,
+        -0.9160931936912097,
+        0.02187873313245235,
+        -0.9174820620691818,
+        -0.3971750077960607
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 130.43478260869566,
+      "bodyRadiusM": 30000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/neso-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "a3f6c168a8dfb00356aa571af120d5507094084d4157dd796acaf1f1af32eb26"
+      }
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "Neso",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 30.05,
+      "description": "A distant, irregular moon of Neptune.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "fa6d3c00076bc18c37918695e376c0863fe8669ec5d376b3c5ffccc6070b2518"
+  }
+}

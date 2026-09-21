@@ -1,0 +1,851 @@
+{
+ "checkedOn": "2026-09-21",
+ "base": "main",
+ "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/irregular-moons/inputs.json.",
+ "referenceDirectory": "output/irregular-moons/references",
+ "bodies": [
+  {
+   "id": "elara",
+   "name": "Elara",
+   "titleLabel": "Elara",
+   "horizons": "507",
+   "aliases": [
+    "Jupiter VII",
+    "JVII"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    80.0,
+    80.0,
+    80.0
+   ],
+   "radiusKm": 40.0,
+   "axesStatus": "Illustrative equal axes at the radius JPL Horizons lists; these are not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at the JPL radius",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons object data for Elara (Jupiter VII), revised 2025-May-12",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 40 km radius JPL Horizons lists for Elara. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Elara is an outer, irregular moon of Jupiter, discovered in 1905. It follows a wide, tilted orbit far beyond the large moons.",
+   "card": "An outer, irregular moon of Jupiter.",
+   "datasetSummary": "A sphere at the 40 km radius JPL lists. Its shape, pole and rotation are not measured.",
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 507 (Elara), revised 2025-May-12"
+    }
+   ],
+   "distanceAu": 5.2
+  },
+  {
+   "id": "pasiphae",
+   "name": "Pasiphae",
+   "titleLabel": "Pasiphae",
+   "horizons": "508",
+   "aliases": [
+    "Jupiter VIII",
+    "JVIII"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    36.0,
+    36.0,
+    36.0
+   ],
+   "radiusKm": 18.0,
+   "axesStatus": "Illustrative equal axes at the radius JPL Horizons lists; these are not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at the JPL radius",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons object data for Pasiphae (Jupiter VIII), revised 2025-May-12",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 18 km radius JPL Horizons lists for Pasiphae. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Pasiphae is an outer, irregular moon of Jupiter, discovered in 1908. It follows a wide, tilted orbit far beyond the large moons.",
+   "card": "An outer, irregular moon of Jupiter.",
+   "datasetSummary": "A sphere at the 18 km radius JPL lists. Its shape, pole and rotation are not measured.",
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 508 (Pasiphae), revised 2025-May-12"
+    }
+   ],
+   "distanceAu": 5.2
+  },
+  {
+   "id": "sinope",
+   "name": "Sinope",
+   "titleLabel": "Sinope",
+   "horizons": "509",
+   "aliases": [
+    "Jupiter IX",
+    "JIX"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    28.0,
+    28.0,
+    28.0
+   ],
+   "radiusKm": 14.0,
+   "axesStatus": "Illustrative equal axes at the radius JPL Horizons lists; these are not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at the JPL radius",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons object data for Sinope (Jupiter IX), revised 2025-May-12",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 14 km radius JPL Horizons lists for Sinope. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Sinope is an outer, irregular moon of Jupiter, discovered in 1914. It follows a wide, tilted orbit far beyond the large moons.",
+   "card": "An outer, irregular moon of Jupiter.",
+   "datasetSummary": "A sphere at the 14 km radius JPL lists. Its shape, pole and rotation are not measured.",
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 509 (Sinope), revised 2025-May-12"
+    }
+   ],
+   "distanceAu": 5.2
+  },
+  {
+   "id": "lysithea",
+   "name": "Lysithea",
+   "titleLabel": "Lysithea",
+   "horizons": "510",
+   "aliases": [
+    "Jupiter X",
+    "JX"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    24.0,
+    24.0,
+    24.0
+   ],
+   "radiusKm": 12.0,
+   "axesStatus": "Illustrative equal axes at the radius JPL Horizons lists; these are not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at the JPL radius",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons object data for Lysithea (Jupiter X), revised 2025-May-12",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 12 km radius JPL Horizons lists for Lysithea. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Lysithea is an outer, irregular moon of Jupiter, discovered in 1938. It follows a wide, tilted orbit far beyond the large moons.",
+   "card": "An outer, irregular moon of Jupiter.",
+   "datasetSummary": "A sphere at the 12 km radius JPL lists. Its shape, pole and rotation are not measured.",
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 510 (Lysithea), revised 2025-May-12"
+    }
+   ],
+   "distanceAu": 5.2
+  },
+  {
+   "id": "carme",
+   "name": "Carme",
+   "titleLabel": "Carme",
+   "horizons": "511",
+   "aliases": [
+    "Jupiter XI",
+    "JXI"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    30.0,
+    30.0,
+    30.0
+   ],
+   "radiusKm": 15.0,
+   "axesStatus": "Illustrative equal axes at the radius JPL Horizons lists; these are not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at the JPL radius",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons object data for Carme (Jupiter XI), revised 2025-May-12",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 15 km radius JPL Horizons lists for Carme. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Carme is an outer, irregular moon of Jupiter, discovered in 1938. It follows a wide, tilted orbit far beyond the large moons.",
+   "card": "An outer, irregular moon of Jupiter.",
+   "datasetSummary": "A sphere at the 15 km radius JPL lists. Its shape, pole and rotation are not measured.",
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 511 (Carme), revised 2025-May-12"
+    }
+   ],
+   "distanceAu": 5.2
+  },
+  {
+   "id": "ananke",
+   "name": "Ananke",
+   "titleLabel": "Ananke",
+   "horizons": "512",
+   "aliases": [
+    "Jupiter XII",
+    "JXII"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    20.0,
+    20.0,
+    20.0
+   ],
+   "radiusKm": 10.0,
+   "axesStatus": "Illustrative equal axes at the radius JPL Horizons lists; these are not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at the JPL radius",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons object data for Ananke (Jupiter XII), revised 2025-May-12",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 10 km radius JPL Horizons lists for Ananke. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Ananke is an outer, irregular moon of Jupiter, discovered in 1951. It follows a wide, tilted orbit far beyond the large moons.",
+   "card": "An outer, irregular moon of Jupiter.",
+   "datasetSummary": "A sphere at the 10 km radius JPL lists. Its shape, pole and rotation are not measured.",
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 512 (Ananke), revised 2025-May-12"
+    }
+   ],
+   "distanceAu": 5.2
+  },
+  {
+   "id": "leda",
+   "name": "Leda",
+   "titleLabel": "Leda",
+   "horizons": "513",
+   "aliases": [
+    "Jupiter XIII",
+    "JXIII"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    10.0,
+    10.0,
+    10.0
+   ],
+   "radiusKm": 5.0,
+   "axesStatus": "Illustrative equal axes at the radius JPL Horizons lists; these are not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at the JPL radius",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons object data for Leda (Jupiter XIII), revised 2025-May-12",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 5 km radius JPL Horizons lists for Leda. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Leda is an outer, irregular moon of Jupiter, discovered in 1974. It follows a wide, tilted orbit far beyond the large moons.",
+   "card": "An outer, irregular moon of Jupiter.",
+   "datasetSummary": "A sphere at the 5 km radius JPL lists. Its shape, pole and rotation are not measured.",
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 513 (Leda), revised 2025-May-12"
+    }
+   ],
+   "distanceAu": 5.2
+  },
+  {
+   "id": "halimede",
+   "name": "Halimede",
+   "titleLabel": "Halimede",
+   "horizons": "809",
+   "aliases": [
+    "Neptune IX",
+    "S/2002 N1"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Neptune",
+   "parent": "neptune",
+   "fullAxesKm": [
+    62.0,
+    62.0,
+    62.0
+   ],
+   "radiusKm": 31.0,
+   "axesStatus": "Illustrative equal axes at a radius estimated from brightness with an assumed albedo of 0.04; not measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo radius",
+   "source": "https://doi.org/10.1086/504799",
+   "credit": "Sheppard, Jewitt and Kleyna (2006), The Astronomical Journal 132, 171; Table 3, radius for an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://arxiv.org/abs/astro-ph/0604552",
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 31 km radius Sheppard, Jewitt and Kleyna (2006) estimate for S/2002 N1 from its brightness, assuming a geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Halimede is a distant, irregular moon of Neptune, found in 2002 as S/2002 N1. Its size is estimated from its brightness.",
+   "card": "A distant, irregular moon of Neptune.",
+   "datasetSummary": "A sphere at 31 km radius, estimated from brightness with an assumed 4% albedo.",
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 809 (Halimede) and the JPL satellite discovery table"
+    }
+   ],
+   "distanceAu": 30.05
+  },
+  {
+   "id": "psamathe",
+   "name": "Psamathe",
+   "titleLabel": "Psamathe",
+   "horizons": "810",
+   "aliases": [
+    "Neptune X",
+    "S/2003 N1"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Neptune",
+   "parent": "neptune",
+   "fullAxesKm": [
+    40.0,
+    40.0,
+    40.0
+   ],
+   "radiusKm": 20.0,
+   "axesStatus": "Illustrative equal axes at a radius estimated from brightness with an assumed albedo of 0.04; not measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo radius",
+   "source": "https://doi.org/10.1086/504799",
+   "credit": "Sheppard, Jewitt and Kleyna (2006), The Astronomical Journal 132, 171; Table 3, radius for an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://arxiv.org/abs/astro-ph/0604552",
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 20 km radius Sheppard, Jewitt and Kleyna (2006) estimate for S/2003 N1 from its brightness, assuming a geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Psamathe is a distant, irregular moon of Neptune, found in 2003 as S/2003 N1. Its size is estimated from its brightness.",
+   "card": "A distant, irregular moon of Neptune.",
+   "datasetSummary": "A sphere at 20 km radius, estimated from brightness with an assumed 4% albedo.",
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 810 (Psamathe) and the JPL satellite discovery table"
+    }
+   ],
+   "distanceAu": 30.05
+  },
+  {
+   "id": "sao",
+   "name": "Sao",
+   "titleLabel": "Sao",
+   "horizons": "811",
+   "aliases": [
+    "Neptune XI",
+    "S/2002 N2"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Neptune",
+   "parent": "neptune",
+   "fullAxesKm": [
+    44.0,
+    44.0,
+    44.0
+   ],
+   "radiusKm": 22.0,
+   "axesStatus": "Illustrative equal axes at a radius estimated from brightness with an assumed albedo of 0.04; not measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo radius",
+   "source": "https://doi.org/10.1086/504799",
+   "credit": "Sheppard, Jewitt and Kleyna (2006), The Astronomical Journal 132, 171; Table 3, radius for an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://arxiv.org/abs/astro-ph/0604552",
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 22 km radius Sheppard, Jewitt and Kleyna (2006) estimate for S/2002 N2 from its brightness, assuming a geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Sao is a distant, irregular moon of Neptune, found in 2002 as S/2002 N2. Its size is estimated from its brightness.",
+   "card": "A distant, irregular moon of Neptune.",
+   "datasetSummary": "A sphere at 22 km radius, estimated from brightness with an assumed 4% albedo.",
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 811 (Sao) and the JPL satellite discovery table"
+    }
+   ],
+   "distanceAu": 30.05
+  },
+  {
+   "id": "laomedeia",
+   "name": "Laomedeia",
+   "titleLabel": "Laomedeia",
+   "horizons": "812",
+   "aliases": [
+    "Neptune XII",
+    "S/2002 N3"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Neptune",
+   "parent": "neptune",
+   "fullAxesKm": [
+    42.0,
+    42.0,
+    42.0
+   ],
+   "radiusKm": 21.0,
+   "axesStatus": "Illustrative equal axes at a radius estimated from brightness with an assumed albedo of 0.04; not measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo radius",
+   "source": "https://doi.org/10.1086/504799",
+   "credit": "Sheppard, Jewitt and Kleyna (2006), The Astronomical Journal 132, 171; Table 3, radius for an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://arxiv.org/abs/astro-ph/0604552",
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 21 km radius Sheppard, Jewitt and Kleyna (2006) estimate for S/2002 N3 from its brightness, assuming a geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Laomedeia is a distant, irregular moon of Neptune, found in 2002 as S/2002 N3. Its size is estimated from its brightness.",
+   "card": "A distant, irregular moon of Neptune.",
+   "datasetSummary": "A sphere at 21 km radius, estimated from brightness with an assumed 4% albedo.",
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 812 (Laomedeia) and the JPL satellite discovery table"
+    }
+   ],
+   "distanceAu": 30.05
+  },
+  {
+   "id": "neso",
+   "name": "Neso",
+   "titleLabel": "Neso",
+   "horizons": "813",
+   "aliases": [
+    "Neptune XIII",
+    "S/2002 N4"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Neptune",
+   "parent": "neptune",
+   "fullAxesKm": [
+    60.0,
+    60.0,
+    60.0
+   ],
+   "radiusKm": 30.0,
+   "axesStatus": "Illustrative equal axes at a radius estimated from brightness with an assumed albedo of 0.04; not measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo radius",
+   "source": "https://doi.org/10.1086/504799",
+   "credit": "Sheppard, Jewitt and Kleyna (2006), The Astronomical Journal 132, 171; Table 3, radius for an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://arxiv.org/abs/astro-ph/0604552",
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 30 km radius Sheppard, Jewitt and Kleyna (2006) estimate for S/2002 N4 from its brightness, assuming a geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Neso is a distant, irregular moon of Neptune, found in 2002 as S/2002 N4. Its size is estimated from its brightness.",
+   "card": "A distant, irregular moon of Neptune.",
+   "datasetSummary": "A sphere at 30 km radius, estimated from brightness with an assumed 4% albedo.",
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 813 (Neso) and the JPL satellite discovery table"
+    }
+   ],
+   "distanceAu": 30.05
+  },
+  {
+   "id": "stephano",
+   "name": "Stephano",
+   "titleLabel": "Stephano",
+   "horizons": "720",
+   "aliases": [
+    "Uranus XX",
+    "S/1999 U2"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Uranus",
+   "parent": "uranus",
+   "fullAxesKm": [
+    32.0,
+    32.0,
+    32.0
+   ],
+   "radiusKm": 16.0,
+   "axesStatus": "Illustrative equal axes at a radius estimated from brightness with an assumed albedo of 0.04; not measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo radius",
+   "source": "https://doi.org/10.1086/426329",
+   "credit": "Sheppard, Jewitt and Kleyna (2005), The Astronomical Journal 129, 518; Table 3, radius for an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://arxiv.org/abs/astro-ph/0410059",
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 16 km radius Sheppard, Jewitt and Kleyna (2005) estimate for S/1999 U2 from its brightness, assuming a geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Stephano is a small, irregular outer moon of Uranus, found in 1999 as S/1999 U2. Its size is estimated from its brightness.",
+   "card": "A small, irregular outer moon of Uranus.",
+   "datasetSummary": "A sphere at 16 km radius, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 19.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 720 (Stephano) and the JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "trinculo",
+   "name": "Trinculo",
+   "titleLabel": "Trinculo",
+   "horizons": "721",
+   "aliases": [
+    "Uranus XXI",
+    "S/2001 U1"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Uranus",
+   "parent": "uranus",
+   "fullAxesKm": [
+    18.0,
+    18.0,
+    18.0
+   ],
+   "radiusKm": 9.0,
+   "axesStatus": "Illustrative equal axes at a radius estimated from brightness with an assumed albedo of 0.04; not measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo radius",
+   "source": "https://doi.org/10.1086/426329",
+   "credit": "Sheppard, Jewitt and Kleyna (2005), The Astronomical Journal 129, 518; Table 3, radius for an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://arxiv.org/abs/astro-ph/0410059",
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 9 km radius Sheppard, Jewitt and Kleyna (2005) estimate for S/2001 U1 from its brightness, assuming a geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Trinculo is a small, irregular outer moon of Uranus, found in 2001 as S/2001 U1. Its size is estimated from its brightness.",
+   "card": "A small, irregular outer moon of Uranus.",
+   "datasetSummary": "A sphere at 9 km radius, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 19.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 721 (Trinculo) and the JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "francisco",
+   "name": "Francisco",
+   "titleLabel": "Francisco",
+   "horizons": "722",
+   "aliases": [
+    "Uranus XXII",
+    "S/2001 U3"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Uranus",
+   "parent": "uranus",
+   "fullAxesKm": [
+    22.0,
+    22.0,
+    22.0
+   ],
+   "radiusKm": 11.0,
+   "axesStatus": "Illustrative equal axes at a radius estimated from brightness with an assumed albedo of 0.04; not measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo radius",
+   "source": "https://doi.org/10.1086/426329",
+   "credit": "Sheppard, Jewitt and Kleyna (2005), The Astronomical Journal 129, 518; Table 3, radius for an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://arxiv.org/abs/astro-ph/0410059",
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 11 km radius Sheppard, Jewitt and Kleyna (2005) estimate for S/2001 U3 from its brightness, assuming a geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Francisco is a small, irregular outer moon of Uranus, found in 2001 as S/2001 U3. Its size is estimated from its brightness.",
+   "card": "A small, irregular outer moon of Uranus.",
+   "datasetSummary": "A sphere at 11 km radius, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 19.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 722 (Francisco) and the JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "margaret",
+   "name": "Margaret",
+   "titleLabel": "Margaret",
+   "horizons": "723",
+   "aliases": [
+    "Uranus XXIII",
+    "S/2003 U3"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Uranus",
+   "parent": "uranus",
+   "fullAxesKm": [
+    20.0,
+    20.0,
+    20.0
+   ],
+   "radiusKm": 10.0,
+   "axesStatus": "Illustrative equal axes at a radius estimated from brightness with an assumed albedo of 0.04; not measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo radius",
+   "source": "https://doi.org/10.1086/426329",
+   "credit": "Sheppard, Jewitt and Kleyna (2005), The Astronomical Journal 129, 518; Table 3, radius for an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://arxiv.org/abs/astro-ph/0410059",
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 10 km radius Sheppard, Jewitt and Kleyna (2005) estimate for S/2003 U3 from its brightness, assuming a geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Margaret is a small, irregular outer moon of Uranus, found in 2003 as S/2003 U3. Its size is estimated from its brightness.",
+   "card": "A small, irregular outer moon of Uranus.",
+   "datasetSummary": "A sphere at 10 km radius, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 19.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 723 (Margaret) and the JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "ferdinand",
+   "name": "Ferdinand",
+   "titleLabel": "Ferdinand",
+   "horizons": "724",
+   "aliases": [
+    "Uranus XXIV",
+    "S/2001 U2"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Uranus",
+   "parent": "uranus",
+   "fullAxesKm": [
+    20.0,
+    20.0,
+    20.0
+   ],
+   "radiusKm": 10.0,
+   "axesStatus": "Illustrative equal axes at a radius estimated from brightness with an assumed albedo of 0.04; not measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo radius",
+   "source": "https://doi.org/10.1086/426329",
+   "credit": "Sheppard, Jewitt and Kleyna (2005), The Astronomical Journal 129, 518; Table 3, radius for an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://arxiv.org/abs/astro-ph/0410059",
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 10 km radius Sheppard, Jewitt and Kleyna (2005) estimate for S/2001 U2 from its brightness, assuming a geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Ferdinand is a small, irregular outer moon of Uranus, found in 2001 as S/2001 U2. Its size is estimated from its brightness.",
+   "card": "A small, irregular outer moon of Uranus.",
+   "datasetSummary": "A sphere at 10 km radius, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 19.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-21",
+     "locator": "Object data page for 724 (Ferdinand) and the JPL satellite discovery table"
+    }
+   ]
+  }
+ ]
+}

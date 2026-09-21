@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.example-stage:where([data-object-id="pasiphae"]) > :is(.pasiphae-sun-camera, .pasiphae-camera, .pasiphae-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="pasiphae"]) .pasiphae-sun-camera, :where(.planet-stage[data-object-id="pasiphae"]) .pasiphae-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="pasiphae"]) .pasiphae-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="pasiphae"]) .pasiphae-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.planet-stage[data-object-id="pasiphae"]) .pasiphae-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--pasiphae-surface-image); background-repeat: no-repeat;
+}
+:where(.planet-stage[data-object-id="pasiphae"]) .pasiphae-body > .pasiphae-polar { background-image: var(--pasiphae-poles-image); }
+:where(.planet-stage[data-object-id="pasiphae"]) .pasiphae-material-root { z-index: 3; --pasiphae-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="pasiphae"]) .pasiphae-material, :where(.planet-stage[data-object-id="pasiphae"]) .pasiphae-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="pasiphae"]) .pasiphae-material { background-repeat: no-repeat; transform: rotate(var(--pasiphae-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="pasiphae"]) .pasiphae-billboard { border-radius: 50%; background-color: var(--pasiphae-billboard-color); opacity: var(--pasiphae-billboard-opacity); }
+.planet-stage:where([data-object-id="pasiphae"])[data-lod="billboard"] .pasiphae-scene, .planet-stage:where([data-object-id="pasiphae"])[data-lod="marker"] .pasiphae-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="pasiphae"])[data-lod="marker"] .pasiphae-billboard { opacity: 0; }
+

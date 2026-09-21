@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "damocles",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Damocles",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 6.2
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/damocles-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "40a3940f55c45715abceb5c828870151304b3cf7296b66194e749d805219b9fb"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1400686062682.124,
+        -1002618940503.3164,
+        702698118241.398
+      ],
+      "presentationToReference": [
+        0.9094612160402084,
+        2.4356826039297786e-17,
+        -0.41578876430065465,
+        -0.3814787328557617,
+        0.3977771559319137,
+        -0.834414351864516,
+        -0.16539127213195914,
+        -0.9174820620691818,
+        -0.3617628959468538
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 26.956521739130434,
+      "bodyRadiusM": 6200
+    },
+    "catalog": {
+      "name": "Damocles",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 11.9,
+      "description": "A centaur orbiting among the giant planets.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "4fd6153207ec86996117e51b4be07d614363c288390d50bedd70fe092d3bfaab"
+  }
+}

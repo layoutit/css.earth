@@ -1,0 +1,344 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "altair",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "6694530730d96a307bcd14abe46d3f2cbe192bbe2b41f8292cbfd535b709d140"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "3ad6f44cefa9524639c1616690f145bfcdbc316fb1e87da70dbdca319d029f2d"
+  },
+  "recipes": [
+    {
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "18c782fea3b01a38d6e423ebeb3210605d922ca842dd27d0bd1718f0816fcf08",
+      "parameters": {
+        "schema": "cssearth-raster-recipe@1",
+        "publicBase": "/scenes/altair/",
+        "sourceWidth": 1024,
+        "sourceHeight": 512,
+        "width": 1024,
+        "height": 512,
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "altair-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "cssaltair-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88,
+          "centerLongitudeDegrees": 0
+        },
+        "surfaces": [
+          {
+            "id": "shape",
+            "output": "altair-surface-{id}{suffix}.webp",
+            "thumbnail": "altair-lens-{id}.webp",
+            "source": "measurements.json",
+            "falseColor": false,
+            "science": {
+              "kind": "neutral-shape",
+              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+            }
+          }
+        ],
+        "emission": {
+          "offLimbSize": 600,
+          "limbSize": 512,
+          "bodyDiameter": 496,
+          "offLimbOutput": "altair-context-{id}{suffix}.webp",
+          "limbOutput": "altair-limb-{id}{suffix}.webp",
+          "metadata": {
+            "schema": "cssaltair-prepared-emission@1",
+            "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+            "offLimbContext": {
+              "logicalSize": 600,
+              "source": "none: no observation, a transparent plate",
+              "composition": "transparent",
+              "rotation": "none",
+              "runtimeAlphaProcessing": false
+            },
+            "limbMaterial": {
+              "logicalSize": 496,
+              "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+              "surfaceReplacement": false,
+              "runtimeAlphaProcessing": false
+            },
+            "lighting": false,
+            "shadows": false,
+            "runtimeLighting": false
+          }
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "612a411133ab7fbcbf637b8a397a794f75846de2a8f9e188766e4ae894127b73",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "altair",
+        "displayName": "Altair",
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Radius",
+              "value": "1.89 solar radii",
+              "source": {
+                "catalogueId": "arxiv-0706-0867",
+                "url": "https://arxiv.org/abs/0706.0867",
+                "label": "Monnier et al. 2007",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "locator": "radiusKm; radiusSource"
+              }
+            },
+            {
+              "id": "distance",
+              "label": "Distance from the Sun",
+              "value": "5.13 parsecs",
+              "source": {
+                "catalogueId": "simbad-alf-aql",
+                "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Aql",
+                "label": "SIMBAD parallax",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "locator": "distanceParsecs; distanceSource"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+              "thumbnail": "altair-lens-shape.webp",
+              "surface": "altair-surface-shape@2x.webp",
+              "poles": "altair-poles-shape@2x.webp",
+              "source": {
+                "id": "altair-observational-measurements",
+                "path": "../manifest.json",
+                "url": "https://arxiv.org/abs/0706.0867"
+              },
+              "falseColor": false,
+              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": []
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "Monnier, Zhao, Pedretti et al., \"Imaging the Surface of Altair\", Science 317, 342 (2007), arXiv:0706.0867",
+            "href": "https://arxiv.org/abs/0706.0867"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://arxiv.org/abs/0706.0867",
+            "credit": "Monnier, Zhao, Pedretti et al., \"Imaging the Surface of Altair\", Science 317, 342 (2007), arXiv:0706.0867"
+          },
+          "physical": {
+            "path": "../../../../../packages/astronomy/data/bodies/altair.json",
+            "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "altair-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://arxiv.org/abs/0706.0867",
+      "credit": "Monnier, Zhao, Pedretti et al., \"Imaging the Surface of Altair\", Science 317, 342 (2007), arXiv:0706.0867",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      },
+      "sha256": "b3aa7ac94d1606a17cc7c18f1602139f31fd9f567c722d01a8f00e8215debdd9",
+      "bytes": 1296,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "612a411133ab7fbcbf637b8a397a794f75846de2a8f9e188766e4ae894127b73",
+      "bytes": 2798,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": false
+      },
+      "inputs": [
+        "altair-observational-measurements"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/altair/altair-surface-shape@2x.webp",
+          "bytes": 178,
+          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/altair/altair-lens-shape.webp",
+          "bytes": 44,
+          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/altair/altair-poles-shape@2x.webp",
+          "bytes": 1340,
+          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/altair/altair-context-shape@2x.webp",
+          "bytes": 100,
+          "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/altair/altair-limb-shape@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "altair-observational-measurements",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4016,
+          "sha256": "f2a2e4042d98d415cebb55912b918bc4791f323a627cb99a3c62272057dda890",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "altair",
+    "materialSha256": "b3b99ffda4be59582b7de6ed972dc3327a7e70b603325ac56dbd613ea7603d98",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "3ad6f44cefa9524639c1616690f145bfcdbc316fb1e87da70dbdca319d029f2d"
+    }
+  }
+}

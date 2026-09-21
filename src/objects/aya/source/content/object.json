@@ -1,0 +1,111 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "aya",
+  "displayName": "Aya",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "768 × 768 × 768 km",
+        "source": {
+          "url": "https://doi.org/10.1051/0004-6361/201322416",
+          "label": "Research publication · DOI 10.1051/0004-6361/201322416",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1051-0004-6361-201322416",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "8.86 h",
+        "source": {
+          "url": "https://doi.org/10.1051/0004-6361/201322416",
+          "label": "Research publication · DOI 10.1051/0004-6361/201322416",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1051-0004-6361-201322416",
+          "locator": "/periodText"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "thumbnail": "/scenes/aya/aya-model-thumbnail.webp",
+        "surface": "aya-model-surface@2x.webp",
+        "poles": "aya-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/201322416"
+        },
+        "notes": "Published Jacobi-ellipsoid interpretation, with semiaxes 470 ±20, 383 ±10 and 245 ±8 km. It assumes hydrostatic equilibrium and a 6.75-hour rotation; the smooth shape is inferred from occultations, not imaged terrain. Illustrative pole RA 0°, declination 90° and arbitrary meridian. The paper’s local projected-limb and opening angles do not provide a unique absolute surface attitude for this display. The grid marks unmapped terrain.",
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Vilenius et al. (2014), Astronomy & Astrophysics 564, A35; Herschel PACS and Spitzer MIPS thermal radiometry",
+      "href": "https://doi.org/10.1051/0004-6361/201322416"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.1051/0004-6361/201322416"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.1051/0004-6361/202346998"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1051/0004-6361/201322416",
+      "credit": "Vilenius et al. (2014), Astronomy & Astrophysics 564, A35; Herschel PACS and Spitzer MIPS thermal radiometry"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Vilenius et al. (2014), Astronomy & Astrophysics 564, A35; Herschel PACS and Spitzer MIPS thermal radiometry"
+    }
+  }
+}

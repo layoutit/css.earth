@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "aldebaran",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Aldebaran",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 30749940
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/aldebaran-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d40c7164095b9c06e25c544ec56e39b5b6536c24fde6bade86c32ff050b0230f"
+      }
+    },
+    "catalog": {
+      "name": "Aldebaran",
+      "classification": "star",
+      "color": "#ffc890",
+      "distanceAu": 4214956.1,
+      "description": "Red giant 20.43 parsecs away; its photosphere is not imaged here.",
+      "systemName": "Taurus",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        216844635240946600,
+        564329950327711600,
+        179168824289357300
+      ],
+      "presentationToReference": [
+        0.3438959574258337,
+        0.101929628864707,
+        0.93345911599045,
+        0.8949762044714168,
+        0.26526121967042937,
+        -0.35868381447856407,
+        0.284171011709685,
+        -0.9587736104516328,
+        0.000002331258008961917
+      ],
+      "orbitUpReference": [
+        -0.101929628864707,
+        -0.26526121967042937,
+        0.9587736104516328
+      ],
+      "metersPerUnit": 99193354.83870968,
+      "bodyRadiusM": 30749940000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "8403a6f0a0ab00cee587742dec8647e4872c9c66a51c787e9ffe73e8dd3e009d"
+  }
+}

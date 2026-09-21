@@ -1,0 +1,203 @@
+{
+  "schema": "cssdeneb-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "deneb-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 1251,
+      "expectedSha256": "687d6ebe71008f7385bee8f16eaa329fe2a062df281d3d98d7008f989c3d461e",
+      "origin": "https://arxiv.org/abs/astro-ph/0201218",
+      "credit": "Aufdenberg, Hauschildt, Baron et al., \"The Spectral Energy Distribution and Mass-loss Rate of the A-Type Supergiant Deneb\", ApJ 570, 344 (2002), arXiv:astro-ph/0201218",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-deneb-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/deneb/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "deneb-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 1920,
+      "expectedSha256": "7bf0e88e3fd2b634c113cebaf6c6d5e3e6ce4f4a57e416f372383dc37cc0e6e9",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "deneb-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1676,
+      "expectedSha256": "129e61ff4d958a42da20021ec83dc9aff839649d72ab841322b4e31baaca79f8",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "deneb-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "deneb-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 100,
+      "expectedSha256": "52480991bea1a78e402c4901519991a5d5df42430bf037cfd9314ffeae93a8ca",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "deneb-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 211,
+      "expectedSha256": "60cae88811dcee68039760e777a1b2b8bcd1c299a18bcccd47dfc01cb3f8099b",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "neutral-disc-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 6339,
+      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
+      "origin": "https://arxiv.org/abs/astro-ph/0201218",
+      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/new-star.mts",
+        "inputs": [
+          "deneb-observational-measurements"
+        ]
+      },
+      "generator": "tools/objects/new-star.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 2957,
+      "expectedSha256": "3f9194629b724d217f210218b7635b0925d01425005bdd5782d705e3208d1d50",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 442,
+      "expectedSha256": "70657d9ed3b5d5647083c912d51af84a8bdbcf5287325c3fc84f4172e1b3ee3a"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 976,
+      "expectedSha256": "e5a6eb645424e32175b9e45f6ee94bf7baaa49e469318fce13bdd99f718e1a3c"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3318,
+      "expectedSha256": "24f1f33b7c4637910e013abe0193befd2d648b8e17c893224237d8aba5790c33"
+    }
+  ]
+}

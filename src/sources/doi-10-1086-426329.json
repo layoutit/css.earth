@@ -1,0 +1,42 @@
+{
+  "id": "doi-10-1086-426329",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · DOI 10.1086/426329",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/426329"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/426329",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/stephano/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "4c4d73042449b68a22f610fa09a8c1d792d65828d03444b26588d622c1eb0022",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Sheppard, Jewitt and Kleyna (2005), The Astronomical Journal 129, 518; Table 3, radius for an assumed geometric albedo of 0.04",
+      "scope": "The published shape input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "MIT numeric extraction of published scientific facts",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

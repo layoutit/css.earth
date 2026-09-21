@@ -1,0 +1,168 @@
+{
+  "schema": "cssananke-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/objects/ananke/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://ssd.jpl.nasa.gov/horizons/",
+      "credit": "JPL Horizons object data for Ananke (Jupiter XII), revised 2025-May-12",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "src/objects/ananke/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "expectedBytes": 62404,
+      "expectedSha256": "3e75cdaf982b16d2348958bb4f12539ad0cce12c9b3f04c1a1b19c2f7fac1fcb",
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/horizons/"
+      ],
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Illustrative sphere at the 10 km radius JPL Horizons lists for Ananke. No shape model is published. Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 10000
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/irregular-moons/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored grid marking unavailable surface imagery."
+      },
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "consumers": [
+        "surfaces"
+      ],
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 10000
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/irregular-moons/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 2560,
+      "expectedSha256": "5be4b31b46b7a47da19ac95e5ab124017656247f91450d7295d2c20b0ff487c0",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 1829,
+      "expectedSha256": "c71eea9c13a22107879d1c88a069361083885df10d18a5e21a1ef550753a50b8"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 443,
+      "expectedSha256": "ea4d5d837ea82199accb5bfe80b05fa4caea3ca3d6c18fbd5b66852391da8232"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 352,
+      "expectedSha256": "9cb6567d73269408ecc2201b25b2cd77c22323dd20c087b8063905778a7a81ca"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2240,
+      "expectedSha256": "8b65a171fbf9c3b706aff4e976407e1ad4085d30037df3183a8988403c854c12"
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3357,
+      "expectedSha256": "7ee04f0cfb163a660ff395713378c9b92ae1d52e2967d99a03e7dc374786b93c"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-source-context",
+      "path": "presentation/context.png",
+      "origin": "https://ssd.jpl.nasa.gov/horizons/",
+      "credit": "JPL Horizons object data for Ananke (Jupiter XII), revised 2025-May-12",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 91740,
+      "expectedSha256": "ef4049cfc2b121e82381df042f184cefc2df4d1cd2a212f87c01c0cc4b6c36b6",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "inputs": [
+          "published-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+    }
+  ]
+}

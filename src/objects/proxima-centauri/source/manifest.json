@@ -1,0 +1,203 @@
+{
+  "schema": "cssproxima-centauri-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "proxima-centauri-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 1147,
+      "expectedSha256": "314a64b9a32983c39526b1976f466c1017ca7ff08ff967b6f36ed507d592403c",
+      "origin": "https://arxiv.org/abs/0906.0602",
+      "credit": "Demory, Ségransan, Forveille et al., \"Mass-radius relation of low and very low-mass stars revisited with the VLTI\", A&A 505, 205 (2009), arXiv:0906.0602",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/proxima-centauri/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2008,
+      "expectedSha256": "dc484f644ca1d929869df61715b11d917ceda5a85297291aaa4af8e53fecbdf7",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "proxima-centauri-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1753,
+      "expectedSha256": "8ff01f840c815bbf578a73e286597acac758814ffbcdf2fef32e5b8af47669a3",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "proxima-centauri-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "proxima-centauri-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 111,
+      "expectedSha256": "c91c1d18a9a0a475e9ac4e78b5b456d7bd303fb0fe590e04e80ff2856b6338fc",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "proxima-centauri-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 230,
+      "expectedSha256": "f912dabc395d2bd4985f9b82caec2db80ef2af1108a2796cdcbff7ec4608608d",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "neutral-disc-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 6339,
+      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
+      "origin": "https://arxiv.org/abs/0906.0602",
+      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/new-star.mts",
+        "inputs": [
+          "proxima-centauri-observational-measurements"
+        ]
+      },
+      "generator": "tools/objects/new-star.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 2976,
+      "expectedSha256": "da83256dc5e85ef1c129425815e78066d57be310b2898573bf0c9fa0cc7e9c10",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 453,
+      "expectedSha256": "ded892f1850f0e6915da0e2cd2a8f815937f81e637e974ccc9677b73bff6e021"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 985,
+      "expectedSha256": "76eb275fb0d5a6ff6459227f4a2355b0a682a09fdf0d626c4babb173207781f7"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 8301,
+      "expectedSha256": "1e296d01e9955cfed5d04818249e255a26e8f612342719f5b77490c132c16f6c"
+    }
+  ]
+}

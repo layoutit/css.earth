@@ -1,0 +1,168 @@
+{
+  "schema": "csssao-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/objects/sao/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://doi.org/10.1086/504799",
+      "credit": "Sheppard, Jewitt and Kleyna (2006), The Astronomical Journal 132, 171; Table 3, radius for an assumed geometric albedo of 0.04",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1086-504799",
+            "role": "material",
+            "evidence": "src/objects/sao/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "expectedBytes": 62404,
+      "expectedSha256": "99d837312fcf568d1db8b6addfca2fe6c375ee9e69eb28af73b170d2cc42acba",
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://doi.org/10.1086/504799"
+      ],
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Illustrative sphere at the 22 km radius Sheppard, Jewitt and Kleyna (2006) estimate for S/2002 N2 from its brightness, assuming a geometric albedo of 0.04. The size is not measured. Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 22000
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/irregular-moons/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored grid marking unavailable surface imagery."
+      },
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "consumers": [
+        "surfaces"
+      ],
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 22000
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/irregular-moons/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 2865,
+      "expectedSha256": "f0126e8c95da4126c66d872577f905222acc6cbd1f4e11f2e217ba4f07f5836b",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2032,
+      "expectedSha256": "d27a5cb600e0a9e50cf984fc594fb67292216ae116d56875c86555ddee852e20"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 440,
+      "expectedSha256": "f92822a76a1df065685f6821361054d793aa0663ba11dc60e05c706ba5c44f41"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 348,
+      "expectedSha256": "423c0bca88eb4f9d8be15d1472486a17f1c14807f3cdf3796b7f95f6e47c4d70"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2301,
+      "expectedSha256": "b1b290f8712c88e55293e442bdd1ffe381744e9d58caa032971312902cb06cc5"
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3034,
+      "expectedSha256": "bbfe1f9d89ccaf7596375dce9c13ad59fa930b4187d78677e1bdeaa1379b209c"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-source-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1086/504799",
+      "credit": "Sheppard, Jewitt and Kleyna (2006), The Astronomical Journal 132, 171; Table 3, radius for an assumed geometric albedo of 0.04",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 91431,
+      "expectedSha256": "89c739b15ae8fcb58e1e62ac01e70dc10d90d541a96279d574e9ff64649c576e",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "inputs": [
+          "published-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+    }
+  ]
+}

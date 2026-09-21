@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-21",
+  "id": "stephano",
+  "name": "Stephano",
+  "titleLabel": "Stephano",
+  "horizons": "720",
+  "aliases": [
+    "Uranus XX",
+    "S/1999 U2"
+  ],
+  "classification": "satellite",
+  "population": "Irregular satellite of Uranus",
+  "parent": "uranus",
+  "fullAxesKm": [
+    32.0,
+    32.0,
+    32.0
+  ],
+  "radiusKm": 16.0,
+  "axesStatus": "Illustrative equal axes at a radius estimated from brightness with an assumed albedo of 0.04; not measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": null,
+  "periodText": "Not adopted",
+  "rotationFact": false,
+  "shapeLabel": "Sphere at an assumed-albedo radius",
+  "source": "https://doi.org/10.1086/426329",
+  "credit": "Sheppard, Jewitt and Kleyna (2005), The Astronomical Journal 129, 518; Table 3, radius for an assumed geometric albedo of 0.04",
+  "papers": [
+    "https://arxiv.org/abs/astro-ph/0410059",
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 16 km radius Sheppard, Jewitt and Kleyna (2005) estimate for S/1999 U2 from its brightness, assuming a geometric albedo of 0.04. The size is not measured.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Stephano is a small, irregular outer moon of Uranus, found in 1999 as S/1999 U2. Its size is estimated from its brightness.",
+  "card": "A small, irregular outer moon of Uranus.",
+  "datasetSummary": "A sphere at 16 km radius, estimated from brightness with an assumed 4% albedo.",
+  "distanceAu": 19.2,
+  "textCitations": [
+    {
+      "catalogueId": "jpl-horizons",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "label": "JPL Horizons",
+      "checked": "2026-09-21",
+      "locator": "Object data page for 720 (Stephano) and the JPL satellite discovery table"
+    }
+  ]
+}

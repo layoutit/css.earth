@@ -1,0 +1,20 @@
+{
+  "schema": "cssamycus-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "amycus-model-shadow@2x.webp",
+      "bytes": 43340,
+      "sha256": "46bd4f2e64574974da8e1690b58330ba378893e66740184447997c148546fe44"
+    },
+    {
+      "filename": "amycus-model-surface@2x.webp",
+      "bytes": 53574,
+      "sha256": "dfd1f4298a50b3db1a749b8a2dc3b6cee66e0d37de35c6924b303f821562c9e3"
+    },
+    {
+      "filename": "amycus-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

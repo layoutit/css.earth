@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-21",
+  "id": "echeclus",
+  "name": "Echeclus",
+  "titleLabel": "Echeclus",
+  "horizons": "60558;",
+  "aliases": [
+    "60558 Echeclus",
+    "2000 EC98",
+    "174P/Echeclus",
+    "174P"
+  ],
+  "classification": "asteroid",
+  "population": "Centaur",
+  "fullAxesKm": [
+    59.0,
+    59.0,
+    59.0
+  ],
+  "radiusKm": 29.5,
+  "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 26.802,
+  "periodText": "26.802 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at the JPL diameter",
+  "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+  "credit": "JPL Small-Body Database, physical parameters for 60558 Echeclus (2000 EC98): diameter 59 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 59 km diameter the JPL Small-Body Database lists for Echeclus. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Echeclus is a centaur, a small icy body orbiting the Sun among the giant planets. It has also shown comet activity and carries the comet name 174P.",
+  "card": "A centaur orbiting among the giant planets.",
+  "datasetSummary": "A sphere at the 59 km diameter JPL lists. Its shape and pole are not measured.",
+  "distanceAu": 10.8,
+  "textCitations": [
+    {
+      "catalogueId": "jpl-small-body-database",
+      "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "label": "JPL Small-Body Database",
+      "checked": "2026-09-21",
+      "locator": "Record for 60558 Echeclus (2000 EC98): orbit class and physical parameters"
+    }
+  ]
+}

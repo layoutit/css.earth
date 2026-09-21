@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "vega",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Vega",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1822180
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/vega-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "dfe53e837e92f82a2faacab35a05e5d4bae4d7225e573adad62b91d0c46c6f77"
+      }
+    },
+    "catalog": {
+      "name": "Vega",
+      "classification": "star",
+      "color": "#d6e4ff",
+      "distanceAu": 1583769.6,
+      "description": "Rapidly rotating A-type star 7.68 parsecs away; its photosphere is not imaged here.",
+      "systemName": "Lyra",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        29644120170396630,
+        -182289536278880580,
+        148414604038353180
+      ],
+      "presentationToReference": [
+        0.12512211029269993,
+        0.10052151806621042,
+        -0.9870359071085338,
+        -0.7694089578341932,
+        -0.6182634857331963,
+        -0.16049958820364302,
+        0.6263819227279813,
+        -0.7795163158104533,
+        0.000016275596624120248
+      ],
+      "orbitUpReference": [
+        -0.10052151806621042,
+        0.6182634857331963,
+        0.7795163158104533
+      ],
+      "metersPerUnit": 5878000,
+      "bodyRadiusM": 1822180000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "883573b5cb28186cc752dae42e9f0ad1cddf546cec2a313c89ade536def42bbc"
+  }
+}
