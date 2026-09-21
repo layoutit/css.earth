@@ -9,10 +9,10 @@ import { sha256 } from '../../../src/platform/sha256.mts';
 import { writeProductRecord,type ProductInput } from '../product-record.mts';
 
 export type SpatialKind='points'|'volume'|'volume-lens-bank';
-type SpatialPayload=
-  |{kind:'points';payload:Awaited<ReturnType<typeof import('../../../src/renderers/css/stars/loader.ts').loadPreparedCssPointField>>}
-  |{kind:'volume';payload:Awaited<ReturnType<typeof import('../../../src/renderers/css/volume/loader.ts').loadPreparedCssVolume>>}
-  |{kind:'volume-lens-bank';payload:Awaited<ReturnType<typeof import('../../../src/renderers/css/volume/prepared-volume-lenses.ts').loadPreparedVolumeLenses>>};
+type SpatialPayload =
+  | {kind:'points';payload:Awaited<ReturnType<typeof import('../../../src/renderers/css/stars/loader.ts').loadPreparedCssPointField>>}
+  | {kind:'volume';payload:Awaited<ReturnType<typeof import('../../../src/renderers/css/volume/loader.ts').loadPreparedCssVolume>>}
+  | {kind:'volume-lens-bank';payload:Awaited<ReturnType<typeof import('../../../src/renderers/css/volume/prepared-volume-lenses.ts').loadPreparedVolumeLenses>>};
 const workspaceRoot=resolve(import.meta.dirname,'../../..');
 
 async function validateSpatialObject(objectPath:string,expected:SpatialKind|undefined){
@@ -49,25 +49,30 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
   try{
     const loader: {loadPreparedCssPointField?:typeof import('../../../src/renderers/css/stars/loader.ts').loadPreparedCssPointField;loadPreparedCssVolume?:typeof import('../../../src/renderers/css/volume/loader.ts').loadPreparedCssVolume;loadPreparedVolumeLenses?:typeof import('../../../src/renderers/css/volume/prepared-volume-lenses.ts').loadPreparedVolumeLenses}=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);
     const transport={read:async(path:string)=>Uint8Array.from(await read(path)).buffer};
-    const loaded:SpatialPayload=kind==='points'?{kind,payload:await loader.loadPreparedCssPointField!(descriptor,transport)}:kind==='volume'?{kind,payload:await loader.loadPreparedCssVolume!(descriptor,transport)}:{kind,payload:await loader.loadPreparedVolumeLenses!(descriptor,transport)};
+    const value:SpatialPayload=kind==='points'?{kind,payload:await loader.loadPreparedCssPointField!(descriptor,transport)}
+      :kind==='volume'?{kind,payload:await loader.loadPreparedCssVolume!(descriptor,transport)}
+      :{kind,payload:await loader.loadPreparedVolumeLenses!(descriptor,transport)};
     const manifestPath=requireString(prepared.url);
-    const resources=loaded.kind==='volume-lens-bank'?loaded.payload.lenses.flatMap(lens=>lens.volume.resources):loaded.payload.resources;
+    const resources=value.kind==='volume-lens-bank'?value.payload.lenses.flatMap(lens=>lens.volume.resources):value.payload.resources;
     for(const resource of resources){const path=relative(root,resolve(root,dirname(manifestPath),resource.path)),content=await read(path);if(content.length!==resource.bytes||sha256(content)!==resource.sha256)throw new Error(`Spatial resource pin mismatch: ${resource.path}`);}
-    return {source,root,bytes,descriptor,checked,compiled,...loaded};
+    return {source,root,bytes,descriptor,checked,compiled,...value};
   }finally{await rm(scratch,{recursive:true,force:true});}
 }
 
 export async function inspectSpatialObject(objectPath:string){
-  const value=await validateSpatialObject(objectPath,undefined),common={target:value.descriptor.id,provenance:value.payload.provenance,inputs:value.checked.size+1};
-  if(value.kind==='volume-lens-bank')return {...common,kind:value.kind,frame:requireRecord(requireRecord(value.descriptor.properties).frame,'physical frame'),attachedTo:value.payload.attachedTo??null,defaultLens:value.payload.defaultLens,lenses:value.payload.lenses.map(lens=>lens.id)};
-  return {...common,kind:value.kind,frame:value.payload.frame};
+  const value=await validateSpatialObject(objectPath,undefined);
+  if(value.kind==='volume-lens-bank')return {kind:value.kind,target:value.descriptor.id,
+    frame:requireRecord(requireRecord(value.descriptor.properties).frame,'physical frame'),provenance:value.payload.provenance,inputs:value.checked.size+1,
+    attachedTo:value.payload.attachedTo??null,defaultLens:value.payload.defaultLens,lenses:value.payload.lenses.map(lens=>lens.id)};
+  return {kind:value.kind,target:value.descriptor.id,frame:value.payload.frame,provenance:value.payload.provenance,inputs:value.checked.size+1};
 }
 
 export async function exportSpatialObject(objectPath:string,kind:SpatialKind,outputDirectory:string){
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;
   await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
   try{
-    const value=await validateSpatialObject(objectPath,kind),{source,bytes,descriptor,checked,payload,compiled}=value;
+    const value=await validateSpatialObject(objectPath,kind);
+    const {source,bytes,descriptor,checked,payload,compiled}=value;
     const outputs=[{path:'object.json',file:resolve(staging,'object.json')}];await writeFile(outputs[0].file,bytes);
     for(const [path,item] of checked){const file=resolve(staging,path);await mkdir(dirname(file),{recursive:true});await writeFile(file,item.bytes);outputs.push({path,file});}
     for(const item of checked.values())if(sha256(await readFile(item.pin.identity))!==item.pin.sha256)throw new Error('Spatial source changed during export');

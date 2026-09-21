@@ -1,0 +1,73 @@
+{
+  "id": "59ae6e1a336d5a7b0d946197decfbbc093beb39f0181fac2ef88300314c08b8e",
+  "base": "http://127.0.0.1:4340",
+  "errors": [],
+  "blocked": [],
+  "states": [
+    {
+      "stage": "initial",
+      "elements": 462,
+      "planes": 447,
+      "lens": "eso1119b",
+      "material": "textured",
+      "pose": "0,0",
+      "stars": "true"
+    },
+    {
+      "stage": "lens eso1119b",
+      "elements": 462,
+      "planes": 447,
+      "lens": "eso1119b",
+      "material": "textured",
+      "pose": "0,0",
+      "stars": "true"
+    },
+    {
+      "stage": "lens eso0844a",
+      "elements": 462,
+      "planes": 447,
+      "lens": "eso0844a",
+      "material": "textured",
+      "pose": "0,0",
+      "stars": "true"
+    },
+    {
+      "stage": "before orbit",
+      "elements": 462,
+      "planes": 447,
+      "lens": "eso0844a",
+      "material": "textured",
+      "pose": "0,0",
+      "stars": "true"
+    },
+    {
+      "stage": "after orbit",
+      "elements": 462,
+      "planes": 447,
+      "lens": "eso0844a",
+      "material": "textured",
+      "pose": "35,-17.5",
+      "stars": "true"
+    },
+    {
+      "stage": "zoom",
+      "elements": 462,
+      "planes": 447,
+      "lens": "eso0844a",
+      "material": "textured",
+      "pose": "35,-17.5",
+      "stars": "true"
+    },
+    {
+      "stage": "refresh retained",
+      "elements": 462,
+      "planes": 447,
+      "lens": "eso0844a",
+      "material": "textured",
+      "pose": "35,-17.5",
+      "stars": "true"
+    }
+  ],
+  "result": "passed",
+  "browser": "148.0.7778.96"
+}

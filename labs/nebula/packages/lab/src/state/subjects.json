@@ -409,6 +409,25 @@
     }
   },
   {
+    "id": "omega-centauri",
+    "name": "Omega Centauri",
+    "menuLabel": "Omega Centauri",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/omega-centauri",
+    "hasDetail": false,
+    "modelNote": "Published oblate starlight prior; finite feature depths remain conditional, not measured star positions.",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/omega-centauri/observations.json",
+      "recipe": "labs/nebula/models/omega-centauri/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": ".local/nebula-lab/observations/omega-centauri/structures/catalogue.json",
+      "compilerSource": "labs/nebula/models/omega-centauri/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/omega-centauri.json",
+      "statusNote": "Published oblate prior with conditional finite feature depths; integrated stellar light is preserved."
+    }
+  },
+  {
     "id": "m1",
     "name": "M1 · Crab",
     "menuLabel": "M1 · Crab",

@@ -103,14 +103,16 @@ function buildComponents(bases: Basis[], input: EmissionFitInput, controls: Comp
 }
 /** Fit only the supplied target. Image colors, source selection and stellar overlays never enter this field. */
 export function fitEmissionField(input: EmissionFitInput, requested: unknown = defaultCompilerControls,
-  options: { signal?: AbortSignal; onProgress?(message: string): void; depthRecipe?: DepthRecipe; externalDepthAssignment?: boolean } = {}): EmissionFitResult {
+  options: { signal?: AbortSignal; onProgress?(message: string): void; depthRecipe?: DepthRecipe; externalDepthAssignment?: boolean; maximumComponents?: number } = {}): EmissionFitResult {
   validateInput(input); const controls = readCompilerControls(requested), grid = fitGrid(input, controls.detail);
   const depthRecipe = options.depthRecipe && readDepthRecipe(options.depthRecipe);
   if (depthRecipe && input.scaffold) throw new TypeError('Choose a surface depth model or a joint velocity scaffold; do not silently combine incompatible depth methods.');
   if (options.externalDepthAssignment && (depthRecipe || input.scaffold)) throw new TypeError('External density conditioning cannot combine with a surface or velocity scaffold.');
   const externallyConditioned = Boolean(depthRecipe || options.externalDepthAssignment);
   const residual = Float64Array.from(grid.target), bases: Basis[] = [], blocked = new Uint8Array(grid.target.length);
-  const componentBudget = Math.round(144 + 336 * controls.detail), cutoff = grid.target.reduce((a, b) => Math.max(a, b), 0) * (.004 + .056 * (1 - controls.faint));
+  if (options.maximumComponents !== undefined && (!Number.isInteger(options.maximumComponents) || options.maximumComponents < 16 || options.maximumComponents > 8192))
+    throw new TypeError('Finite component budget must be an integer between 16 and 8192.');
+  const componentBudget = options.maximumComponents ?? Math.round(144 + 336 * controls.detail), cutoff = grid.target.reduce((a, b) => Math.max(a, b), 0) * (.004 + .056 * (1 - controls.faint));
   let outerRadius = 0;
   for (let p = 0; p < grid.target.length; p++) if (grid.coverage[p] && grid.target[p] > cutoff) {
     const x = input.bounds.min[0] + (p % grid.width + .5) * grid.dx, y = input.bounds.max[1] - (Math.floor(p / grid.width) + .5) * grid.dy;

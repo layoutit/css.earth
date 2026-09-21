@@ -3,7 +3,7 @@
  *
  * Opens the native `/sun/?focus=<id>` route, so the server fragment must retain the object's complete
  * physical-host chain before the lens bank mounts, then captures the Earth view, an oblique
- * view, both exact 90-degree side views, every lens switch and stars on and off, and writes them with a
+ * view, both exact 90-degree side axes, every lens switch and stars on and off when present, and writes them with a
  * machine-readable record. Object packages call it through their own inspection entry.
  */
 import assert from 'node:assert/strict';
@@ -31,7 +31,9 @@ export async function inspectVolumeLensBank(OBJECT_ID: string, base: string, dir
     inputPins.push({ path, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') });
     return JSON.parse(bytes.toString('utf8'));
   }
-  const context = parsePreparedWorldContext(JSON.parse(await readFile('src/objects/sun/prepared/world-context.json', 'utf8')));
+  const contextPath = 'src/objects/sun/prepared/world-context.json', contextBytes = await readFile(contextPath);
+  inputPins.push({ path: contextPath, bytes: contextBytes.length, sha256: createHash('sha256').update(contextBytes).digest('hex') });
+  const context = parsePreparedWorldContext(JSON.parse(contextBytes.toString('utf8')));
   const payload = validatePreparedVolumeLenses(requireRecord(await readPrepared('lenses')).data);
   const provenance = validateObjectProvenance(await readPrepared('provenance'), OBJECT_ID);
   const presentation = parsePreparedVolumePresentation(await readPrepared('presentation'), payload, provenance);
@@ -45,7 +47,7 @@ export async function inspectVolumeLensBank(OBJECT_ID: string, base: string, dir
   page.on('pageerror', error => errors.push(error.message.split('\n')[0]!));
   page.on('response', response => { if (response.status() >= 400) failed.push(`${response.status()} ${response.url()}`); });
 
-  interface Capture { name: string; path: string; url: string; view: string; lens: string; textures?: number }
+  interface Capture { name: string; path: string; bytes: number; sha256: string; camera: string; url: string; view: string; lens: string; textures?: number }
   const report: {
     objectId: string; base: string; browser: string; viewport: typeof viewport; deviceScaleFactor: number;
     revision: string; dirtyFiles: string[]; inputPins: typeof inputPins; navigation: string;
@@ -67,7 +69,9 @@ export async function inspectVolumeLensBank(OBJECT_ID: string, base: string, dir
     await settle();
     const path = resolve(directory, `${name}.png`);
     await page.screenshot({ path });
-    report.captures.push({ name, path: relative(process.cwd(), path), url: page.url(), view, lens, ...(textures === undefined ? {} : { textures }) });
+    const bytes = await readFile(path);
+    report.captures.push({ name, path: relative(process.cwd(), path), bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'),
+      camera: await cameraState(), url: page.url(), view, lens, ...(textures === undefined ? {} : { textures }) });
     await write();
     console.log(`${LOG}_INSPECTION_CAPTURE ${name} ${view}`);
   }
@@ -88,16 +92,20 @@ export async function inspectVolumeLensBank(OBJECT_ID: string, base: string, dir
   const focal = () => page.evaluate(() => window.__cssearthTest.physicalCamera('sun').focal);
   const extent = [0, 1, 2].map(axis => Math.max(Math.abs(frame.boundsUnits.min[axis]!), Math.abs(frame.boundsUnits.max[axis]!)));
   /** Same framing rule as the shared nebula delivery run, so the views are comparable. */
-  function framingDistance(angle: number, focalPixels: number) {
-    const horizontal = extent[0]! * Math.abs(Math.cos(angle)) + extent[2]! * Math.abs(Math.sin(angle));
-    const depth = extent[0]! * Math.abs(Math.sin(angle)) + extent[2]! * Math.abs(Math.cos(angle));
-    return Math.max(payload.framingRadiusUnits * 4, depth + focalPixels * Math.max(horizontal / 330, extent[1]! / 400));
+  function framingDistance(angle: number, focalPixels: number, axis: 'x' | 'y' = 'y') {
+    const cosine = Math.abs(Math.cos(angle)), sine = Math.abs(Math.sin(angle));
+    const horizontal = axis === 'y' ? extent[0]! * cosine + extent[2]! * sine : extent[0]!;
+    const vertical = axis === 'x' ? extent[1]! * cosine + extent[2]! * sine : extent[1]!;
+    const depth = extent[axis === 'y' ? 0 : 1]! * sine + extent[2]! * cosine;
+    return Math.max(payload.framingRadiusUnits * 4, depth + focalPixels * Math.max(horizontal / 330, vertical / 400));
   }
-  /** Orbit about the model's local Y axis, keeping its origin centered. */
-  async function apply(distance: number, angle = 0) {
+  /** Orbit about either local axis, keeping the model origin centered. */
+  async function apply(distance: number, angle = 0, axis: 'x' | 'y' = 'y') {
     const pose = cameraPoseToReferenceFrame({
-      positionM: [-Math.sin(angle) * distance * frame.metersPerUnit, 0, -Math.cos(angle) * distance * frame.metersPerUnit],
-      orientationXyzw: [Math.cos(angle / 2), 0, -Math.sin(angle / 2), 0],
+      positionM: axis === 'y'
+        ? [-Math.sin(angle) * distance * frame.metersPerUnit, 0, -Math.cos(angle) * distance * frame.metersPerUnit]
+        : [0, Math.sin(angle) * distance * frame.metersPerUnit, -Math.cos(angle) * distance * frame.metersPerUnit],
+      orientationXyzw: axis === 'y' ? [Math.cos(angle / 2), 0, -Math.sin(angle / 2), 0] : [Math.cos(angle / 2), 0, 0, -Math.sin(angle / 2)],
     }, frame);
     await page.evaluate(({ world, reference }) => window.__cssearthTest.object('sun').camera.applyWorldCamera(world, reference),
       { world: { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt, pose }, reference: context.frame });
@@ -116,7 +124,15 @@ export async function inspectVolumeLensBank(OBJECT_ID: string, base: string, dir
     const controls = page.locator(`[data-focus-lens-bank="${OBJECT_ID}"]`);
     await controls.waitFor({ state: 'visible' });
     const bank = page.locator(`[data-volume-lens-object="${OBJECT_ID}"]`);
+    await page.waitForFunction(id => {
+      const element = document.querySelector(`[data-volume-lens-object="${id}"]`);
+      return element !== null && getComputedStyle(element).display === 'block';
+    }, OBJECT_ID, { timeout: 60_000 });
     assert.equal(await bank.evaluate(element => getComputedStyle(element).display), 'block');
+    assert.equal(await page.evaluate(() => window.__cssEarth?.mountedObjectCount), 1, 'Exactly one object scene is mounted.');
+    assert.equal(await page.locator('.planet-stage').count(), 1, 'The shared stage is unique.');
+    assert.equal(await page.locator('.planet-stage .polycss-camera').count(), 1, 'The shared world camera is unique.');
+    assert.equal(await page.locator('canvas').count(), 0, 'The volume is rendered without canvas.');
     assert.equal(await controls.locator('[data-focus-lens]').count(), payload.lenses.length, 'Every prepared lens is offered.');
 
     const focalPixels = await focal();
@@ -155,6 +171,8 @@ export async function inspectVolumeLensBank(OBJECT_ID: string, base: string, dir
       const textures = await decodeCssImages(cloud);
       await capture(`view-${name}`, view, defaultLens, textures);
     }
+    await apply(framingDistance(Math.PI / 2, focalPixels, 'x'), Math.PI / 2, 'x');
+    await capture('view-side-y', 'exact local Y-axis side (90° about X)', defaultLens, await decodeCssImages(cloud));
 
     // Stars are a shared toggle over the same geometry: on, then off, at the Earth view.
     await apply(front);
@@ -162,23 +180,25 @@ export async function inspectVolumeLensBank(OBJECT_ID: string, base: string, dir
     assert.equal(total, payload.lenses[0]!.stars.points.length, 'The prepared catalogue field is mounted in full.');
     report.stars.total = total;
     const stars = controls.locator('[data-focus-stars]');
-    assert.equal(await stars.count(), 1, 'A nonempty compact-light bank retains its shared toggle.');
-    const toggle = controls.locator('label:has([data-focus-stars])');
-    if (!await stars.isChecked()) await toggle.click();
-    const pointRoot = bank.locator('.prepared-catalogue-points');
-    report.stars.rootDisplayOn = await pointRoot.evaluate(element => getComputedStyle(element).display);
-    assert.equal(report.stars.rootDisplayOn, 'block');
-    report.stars.visibleWithStarsOn = await bank.locator('[data-catalogue-source]')
-      .evaluateAll(nodes => nodes.filter(node => getComputedStyle(node).visibility === 'visible').length);
-    assert.ok(report.stars.visibleWithStarsOn > 0, 'The prepared stellar field must be visible.');
-    await capture('stars-on', 'earth, stars on', defaultLens);
-    await toggle.click();
-    assert.equal(await stars.isChecked(), false);
-    report.stars.rootDisplayOff = await pointRoot.evaluate(element => getComputedStyle(element).display);
-    assert.equal(report.stars.rootDisplayOff, 'none');
-    await capture('stars-off', 'earth, stars off', defaultLens);
-    await toggle.click();
+    assert.equal(await stars.count(), total > 0 ? 1 : 0, 'Only a nonempty compact-light bank offers a stars toggle.');
+    if (total > 0) {
+      const toggle = controls.locator('label:has([data-focus-stars])');
+      if (!await stars.isChecked()) await toggle.click();
+      const pointRoot = bank.locator('.prepared-catalogue-points');
+      report.stars.rootDisplayOn = await pointRoot.evaluate(element => getComputedStyle(element).display);
+      assert.equal(report.stars.rootDisplayOn, 'block');
+      report.stars.visibleWithStarsOn = await bank.locator('[data-catalogue-source]')
+        .evaluateAll(nodes => nodes.filter(node => getComputedStyle(node).visibility === 'visible').length);
+      assert.ok(report.stars.visibleWithStarsOn > 0, 'The prepared stellar field must be visible.');
+      await capture('stars-on', 'earth, stars on', defaultLens);
+      await toggle.click();
+      assert.equal(await stars.isChecked(), false);
+      report.stars.rootDisplayOff = await pointRoot.evaluate(element => getComputedStyle(element).display);
+      assert.equal(report.stars.rootDisplayOff, 'none');
+      await capture('stars-off', 'earth, stars off', defaultLens);
+      await toggle.click();
 
+    }
     assert.deepEqual(errors, [], 'The inspected route must raise no page error.');
     assert.deepEqual(failed, [], 'The inspected route must issue no failing request.');
     report.result = 'passed';

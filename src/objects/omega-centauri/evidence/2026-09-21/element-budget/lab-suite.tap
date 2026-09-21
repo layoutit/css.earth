@@ -1,0 +1,4225 @@
+NEBULA_TEST_DISCOVERY 195 test files
+TAP version 13
+# Subtest: public camera helper drives pointer rotation and Earth restoration without preset controls
+ok 1 - public camera helper drives pointer rotation and Earth restoration without preset controls
+  ---
+  duration_ms: 1378.218167
+  type: 'test'
+  ...
+# Subtest: display guard blocks real writes before the server receives them; explicit disposal restores transport
+ok 2 - display guard blocks real writes before the server receives them; explicit disposal restores transport
+  ---
+  duration_ms: 207.892
+  type: 'test'
+  ...
+# Subtest: retention probe rejects same-count node replacement and complete scene remounts
+ok 3 - retention probe rejects same-count node replacement and complete scene remounts
+  ---
+  duration_ms: 290.318791
+  type: 'test'
+  ...
+# Subtest: decode probe holds a real bitmap until release and restores the original browser decoder
+ok 4 - decode probe holds a real bitmap until release and restores the original browser decoder
+  ---
+  duration_ms: 660.647833
+  type: 'test'
+  ...
+# Subtest: posterior median distances produce physical fore/background, independently of image bounds
+ok 5 - posterior median distances produce physical fore/background, independently of image bounds
+  ---
+  duration_ms: 45.426167
+  type: 'test'
+  ...
+# Subtest: world-to-local transform uses the actual rotated, recentered frame without a second image reflection
+ok 6 - world-to-local transform uses the actual rotated, recentered frame without a second image reflection
+  ---
+  duration_ms: 7.235333
+  type: 'test'
+  ...
+# Subtest: proper motion uses Gaia cos-dec tangent components at the pole and the frame epoch
+ok 7 - proper motion uses Gaia cos-dec tangent components at the pole and the frame epoch
+  ---
+  duration_ms: 9.489958
+  type: 'test'
+  ...
+# Subtest: the outer boundary is a smooth sphere with faint taper, not a rectangular image footprint
+ok 8 - the outer boundary is a smooth sphere with faint taper, not a rectangular image footprint
+  ---
+  duration_ms: 3.771375
+  type: 'test'
+  ...
+# Subtest: measured G determines display area and the physical footprint scales with source distance
+ok 9 - measured G determines display area and the physical footprint scales with source distance
+  ---
+  duration_ms: 5.465166
+  type: 'test'
+  ...
+# Subtest: Cardiel coefficients yield independently calculated zero-color fluxes and neutral out-of-domain fallback
+ok 10 - Cardiel coefficients yield independently calculated zero-color fluxes and neutral out-of-domain fallback
+  ---
+  duration_ms: 3.997042
+  type: 'test'
+  ...
+# Subtest: brightness budget is deterministic, includes explicit retained stars, and discards old image fields
+ok 11 - brightness budget is deterministic, includes explicit retained stars, and discards old image fields
+  ---
+  duration_ms: 42.128584
+  type: 'test'
+  ...
+# Subtest: angular deduplication uses retained world directions and preserves their original depth
+ok 12 - angular deduplication uses retained world directions and preserves their original depth
+  ---
+  duration_ms: 15.65175
+  type: 'test'
+  ...
+# Subtest: a retained core outside the selected image keeps its detecting-source light without moving
+ok 13 - a retained core outside the selected image keeps its detecting-source light without moving
+  ---
+  duration_ms: 5.235792
+  type: 'test'
+  ...
+# Subtest: source pins reject content drift, traversal and escaping symlinks
+ok 14 - source pins reject content drift, traversal and escaping symlinks
+  ---
+  duration_ms: 3.126458
+  type: 'test'
+  ...
+# Subtest: runtime validation rejects lossy identifiers, malformed uncertainty, duplicate identities and unsupported frames
+ok 15 - runtime validation rejects lossy identifiers, malformed uncertainty, duplicate identities and unsupported frames
+  ---
+  duration_ms: 18.975291
+  type: 'test'
+  ...
+# Subtest: the acquired Crab catalogue prepares a nonempty physical volume with pinned uncertainty and no image stars
+ok 16 - the acquired Crab catalogue prepares a nonempty physical volume with pinned uncertainty and no image stars
+  ---
+  duration_ms: 3.108208
+  type: 'test'
+  ...
+# Subtest: the checked-in Helix selection retains wide-image cores and its central star across the budget and lenses
+ok 17 - the checked-in Helix selection retains wide-image cores and its central star across the budget and lenses
+  ---
+  duration_ms: 158.569042
+  type: 'test'
+  ...
+# Subtest: catalogue refresh preserves the existing Helix core identities, matching tolerance and evidence
+ok 18 - catalogue refresh preserves the existing Helix core identities, matching tolerance and evidence
+  ---
+  duration_ms: 99.089833
+  type: 'test'
+  ...
+# Subtest: cold parity rejects independent field, frame, star, lens and alpha mutations
+ok 19 - cold parity rejects independent field, frame, star, lens and alpha mutations
+  ---
+  duration_ms: 73.736791
+  type: 'test'
+  ...
+# Subtest: compact compiler validates the accepted field, material correspondence and sampling
+ok 20 - compact compiler validates the accepted field, material correspondence and sampling
+  ---
+  duration_ms: 64.998541
+  type: 'test'
+  ...
+# Subtest: compact replay cannot silently omit a retained density envelope or its colors
+ok 21 - compact replay cannot silently omit a retained density envelope or its colors
+  ---
+  duration_ms: 41.230667
+  type: 'test'
+  ...
+# Subtest: compact sampling keeps historical omission and rejects a grouped plan that differs from saved output counts
+ok 22 - compact sampling keeps historical omission and rejects a grouped plan that differs from saved output counts
+  ---
+  duration_ms: 81.06675
+  type: 'test'
+  ...
+# Subtest: compact sampled replay rejects changed measured particles before any reconstruction
+ok 23 - compact sampled replay rejects changed measured particles before any reconstruction
+  ---
+  duration_ms: 25.550291
+  type: 'test'
+  ...
+# Subtest: sampled planning preserves features unique to any lens without changing its emission
+ok 24 - sampled planning preserves features unique to any lens without changing its emission
+  ---
+  duration_ms: 0.6755
+  type: 'test'
+  ...
+# Subtest: retained sampled loader rejects a renamed scene before reading particles or writing outputs
+ok 25 - retained sampled loader rejects a renamed scene before reading particles or writing outputs
+  ---
+  duration_ms: 40.595667
+  type: 'test'
+  ...
+# PHOTO_MASTER_MASTER 4/144 X-3 192px
+# PHOTO_MASTER_MASTER 8/144 X-7 192px
+# PHOTO_MASTER_MASTER 12/144 X-11 192px
+# PHOTO_MASTER_MASTER 16/144 X-15 192px
+# PHOTO_MASTER_MASTER 20/144 X-19 192px
+# PHOTO_MASTER_MASTER 24/144 X-23 192px
+# PHOTO_MASTER_MASTER 28/144 X-27 192px
+# PHOTO_MASTER_MASTER 32/144 X-31 192px
+# PHOTO_MASTER_MASTER 36/144 X-35 192px
+# PHOTO_MASTER_MASTER 40/144 X-39 192px
+# PHOTO_MASTER_MASTER 44/144 X-43 192px
+# PHOTO_MASTER_MASTER 48/144 X-47 192px
+# PHOTO_MASTER_MASTER 52/144 Y-3 192px
+# PHOTO_MASTER_MASTER 56/144 Y-7 192px
+# PHOTO_MASTER_MASTER 60/144 Y-11 192px
+# PHOTO_MASTER_MASTER 64/144 Y-15 192px
+# PHOTO_MASTER_MASTER 68/144 Y-19 192px
+# PHOTO_MASTER_MASTER 72/144 Y-23 192px
+# PHOTO_MASTER_MASTER 76/144 Y-27 192px
+# PHOTO_MASTER_MASTER 80/144 Y-31 192px
+# PHOTO_MASTER_MASTER 84/144 Y-35 192px
+# PHOTO_MASTER_MASTER 88/144 Y-39 192px
+# PHOTO_MASTER_MASTER 92/144 Y-43 192px
+# PHOTO_MASTER_MASTER 96/144 Y-47 192px
+# PHOTO_MASTER_MASTER 100/144 Z-3 192px
+# PHOTO_MASTER_MASTER 104/144 Z-7 192px
+# PHOTO_MASTER_MASTER 108/144 Z-11 192px
+# PHOTO_MASTER_MASTER 112/144 Z-15 192px
+# PHOTO_MASTER_MASTER 116/144 Z-19 192px
+# PHOTO_MASTER_MASTER 120/144 Z-23 192px
+# PHOTO_MASTER_MASTER 124/144 Z-27 192px
+# PHOTO_MASTER_MASTER 128/144 Z-31 192px
+# PHOTO_MASTER_MASTER 132/144 Z-35 192px
+# PHOTO_MASTER_MASTER 136/144 Z-39 192px
+# PHOTO_MASTER_MASTER 140/144 Z-43 192px
+# PHOTO_MASTER_MASTER 144/144 Z-47 192px
+# Subtest: retained symmetry fields replay accepted slices without source photographs
+ok 26 - retained symmetry fields replay accepted slices without source photographs
+  ---
+  duration_ms: 2964.984083
+  type: 'test'
+  ...
+# Subtest: source west/north/away lands in ICRS without mirroring measured sky offsets or depth
+ok 27 - source west/north/away lands in ICRS without mirroring measured sky offsets or depth
+  ---
+  duration_ms: 0.9215
+  type: 'test'
+  ...
+# Subtest: prepared CSS reflection follows PolyCSS physical XY permutation and leaves image bytes intact
+ok 28 - prepared CSS reflection follows PolyCSS physical XY permutation and leaves image bytes intact
+  ---
+  duration_ms: 1.053583
+  type: 'test'
+  ...
+# Subtest: invalid physical frames cannot silently assign units or a sky direction
+ok 29 - invalid physical frames cannot silently assign units or a sky direction
+  ---
+  duration_ms: 0.217875
+  type: 'test'
+  ...
+# Subtest: new physical compiler transport and historical source transport produce identical app sky geometry
+ok 30 - new physical compiler transport and historical source transport produce identical app sky geometry
+  ---
+  duration_ms: 4.802167
+  type: 'test'
+  ...
+# Subtest: a pinned optical composite is a compiler delivery stage, never a symmetry fallback
+ok 31 - a pinned optical composite is a compiler delivery stage, never a symmetry fallback
+  ---
+  duration_ms: 4.021541
+  type: 'test'
+  ...
+# Subtest: delivery restores missing impostors, rejects drift and rebuilds when their generator changes
+not ok 32 - delivery restores missing impostors, rejects drift and rebuilds when their generator changes
+  ---
+  duration_ms: 180.614917
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/adapters/application/delivery/nebula-objects.test.mjs:15374:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Cannot find module '@cssearth/volume-bake/package.json'
+    Require stack:
+    - /var/folders/hr/wf3y2_yx3xxdgk_j_0lfgt6r0000gn/T/nebula-impostor-delivery-4P7j0T/package.json
+  code: 'MODULE_NOT_FOUND'
+  stack: |-
+    Function._resolveFilename (node:internal/modules/cjs/loader:1430:15)
+    Function.resolve (node:internal/modules/helpers:157:19)
+    packageImplementationPins (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/adapters/application/delivery/nebula-objects.test.mjs:3897:35)
+    prepareNebulaObject (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/adapters/application/delivery/nebula-objects.test.mjs:8627:29)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/adapters/application/delivery/nebula-objects.test.mjs:15378:20)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: cutoff zero preserves every kept alpha and smooth cutoff distinguishes centre from edge
+ok 33 - cutoff zero preserves every kept alpha and smooth cutoff distinguishes centre from edge
+  ---
+  duration_ms: 0.493875
+  type: 'test'
+  ...
+# Subtest: non-square texture texels retain each prepared X/Y/Z leaf plane and centre
+ok 34 - non-square texture texels retain each prepared X/Y/Z leaf plane and centre
+  ---
+  duration_ms: 0.310334
+  type: 'test'
+  ...
+# Subtest: integrated signal is globally normalized, brighter at centre, and invariant along an Earth ray
+ok 35 - integrated signal is globally normalized, brighter at centre, and invariant along an Earth ray
+  ---
+  duration_ms: 0.25225
+  type: 'test'
+  ...
+# Subtest: kept and removed optical weights partition a nonzero source alpha
+ok 36 - kept and removed optical weights partition a nonzero source alpha
+  ---
+  duration_ms: 0.071667
+  type: 'test'
+  ...
+# Subtest: RGBA filtering preserves geometry-sized RGB and partitions alpha without invented glow
+ok 37 - RGBA filtering preserves geometry-sized RGB and partitions alpha without invented glow
+  ---
+  duration_ms: 0.451917
+  type: 'test'
+  ...
+# Subtest: tangent photo mapping matches independent Astropy rays and holds those rays across physical depths
+ok 38 - tangent photo mapping matches independent Astropy rays and holds those rays across physical depths
+  ---
+  duration_ms: 5.907125
+  type: 'test'
+  ...
+# Subtest: prior samples perspective rays, decodes after interpolation, retains full depth and never mutates source
+ok 39 - prior samples perspective rays, decodes after interpolation, retains full depth and never mutates source
+  ---
+  duration_ms: 0.860167
+  type: 'test'
+  ...
+# Subtest: every prepared image maps its full raster edges to the calibrated provenance corners without bleed
+ok 40 - every prepared image maps its full raster edges to the calibrated provenance corners without bleed
+  ---
+  duration_ms: 16.731625
+  type: 'test'
+  ...
+# Subtest: full-precision TAN projective interior maps independently calculated Astropy ICRS rays
+ok 41 - full-precision TAN projective interior maps independently calculated Astropy ICRS rays
+  ---
+  duration_ms: 14.196041
+  type: 'test'
+  ...
+# Subtest: old real Tarantula leaf fails calibrated edges even with atlas seamBleed zero
+ok 42 - old real Tarantula leaf fails calibrated edges even with atlas seamBleed zero
+  ---
+  duration_ms: 3.72475
+  type: 'test'
+  ...
+# Subtest: sky compiler rejects invalid dimensions, non-coplanar, degenerate and crossed quads
+ok 43 - sky compiler rejects invalid dimensions, non-coplanar, degenerate and crossed quads
+  ---
+  duration_ms: 0.291375
+  type: 'test'
+  ...
+# Subtest: horizontal orbit keeps one sign at every pose, including the Earth-view pose (eastLeft true)
+ok 44 - horizontal orbit keeps one sign at every pose, including the Earth-view pose (eastLeft true)
+  ---
+  duration_ms: 6.461125
+  type: 'test'
+  ...
+# Subtest: horizontal orbit keeps one sign at every pose, including the Earth-view pose (eastLeft false)
+ok 45 - horizontal orbit keeps one sign at every pose, including the Earth-view pose (eastLeft false)
+  ---
+  duration_ms: 0.898709
+  type: 'test'
+  ...
+# Subtest: Earth projection matches the source pixel edges, handedness, pan, zoom and resized fit
+ok 46 - Earth projection matches the source pixel edges, handedness, pan, zoom and resized fit
+  ---
+  duration_ms: 5.464375
+  type: 'test'
+  ...
+# Subtest: posed cloud stays centered, camera orientation is proper, and ordinary-depth parallax is below 0.05 pixels
+ok 47 - posed cloud stays centered, camera orientation is proper, and ordinary-depth parallax is below 0.05 pixels
+  ---
+  duration_ms: 0.627708
+  type: 'test'
+  ...
+# Subtest: prepared compact lights and slab geometry share the same physical camera projection
+ok 48 - prepared compact lights and slab geometry share the same physical camera projection
+  ---
+  duration_ms: 0.284416
+  type: 'test'
+  ...
+# Subtest: true orthographic CSS transport keeps exact image projection at every depth without large CSS translations
+ok 49 - true orthographic CSS transport keeps exact image projection at every depth without large CSS translations
+  ---
+  duration_ms: 0.432083
+  type: 'test'
+  ...
+# Subtest: negative source-away depth is nearer and magnifies more than positive source-away depth
+ok 50 - negative source-away depth is nearer and magnifies more than positive source-away depth
+  ---
+  duration_ms: 0.114292
+  type: 'test'
+  ...
+# Subtest: historical compiler banks transport retained source depth once and agree with their stars
+ok 51 - historical compiler banks transport retained source depth once and agree with their stars
+  ---
+  duration_ms: 0.825625
+  type: 'test'
+  ...
+# Subtest: legacy Shapes and Joint-fit share the angular-to-physical mount and camera boundary
+ok 52 - legacy Shapes and Joint-fit share the angular-to-physical mount and camera boundary
+  ---
+  duration_ms: 1.697625
+  type: 'test'
+  ...
+# Subtest: tone bank swaps only after every prepared image decodes, without replacing leaves
+ok 53 - tone bank swaps only after every prepared image decodes, without replacing leaves
+  ---
+  duration_ms: 0.60025
+  type: 'test'
+  ...
+# Subtest: stale tone decode cannot overwrite a newer selection or a new mount
+ok 54 - stale tone decode cannot overwrite a newer selection or a new mount
+  ---
+  duration_ms: 0.114792
+  type: 'test'
+  ...
+# Subtest: prepared tone selected before an overlay mounts reaches its later retained nodes
+ok 55 - prepared tone selected before an overlay mounts reaches its later retained nodes
+  ---
+  duration_ms: 1.662167
+  type: 'test'
+  ...
+# Subtest: a retained leaf rebound to another image layer is no longer changed by its old tone resource
+ok 56 - a retained leaf rebound to another image layer is no longer changed by its old tone resource
+  ---
+  duration_ms: 0.379542
+  type: 'test'
+  ...
+# Subtest: bundles preserve imported source URLs and text while only the real entry runs its guard
+ok 57 - bundles preserve imported source URLs and text while only the real entry runs its guard
+  ---
+  duration_ms: 129.6475
+  type: 'test'
+  ...
+# Subtest: DataLink preserves matching identity, units and compound science links
+ok 58 - DataLink preserves matching identity, units and compound science links
+  ---
+  duration_ms: 2.221416
+  type: 'test'
+  ...
+# Subtest: enrichment never GETs science pixels; validates preview and records original discovery
+ok 59 - enrichment never GETs science pixels; validates preview and records original discovery
+  ---
+  duration_ms: 29.034542
+  type: 'test'
+  ...
+# Subtest: compound datasets and unverified previews remain unresolved rather than selecting arbitrary files
+ok 60 - compound datasets and unverified previews remain unresolved rather than selecting arbitrary files
+  ---
+  duration_ms: 0.575875
+  type: 'test'
+  ...
+# Subtest: MAST uses returned jpegURI, keeps file identity and measures this file with HEAD
+ok 61 - MAST uses returned jpegURI, keeps file identity and measures this file with HEAD
+  ---
+  duration_ms: 0.781833
+  type: 'test'
+  ...
+# Subtest: metadata MIME/length limits cannot fall through to a science download
+ok 62 - metadata MIME/length limits cannot fall through to a science download
+  ---
+  duration_ms: 0.351166
+  type: 'test'
+  ...
+# Subtest: selection covers distinct bands before repeats, caps at 12 and excludes association/catalogue products
+ok 63 - selection covers distinct bands before repeats, caps at 12 and excludes association/catalogue products
+  ---
+  duration_ms: 5.851708
+  type: 'test'
+  ...
+# Subtest: overlap copies keep their own identity and metadata while shared access updates avoid double counting
+ok 64 - overlap copies keep their own identity and metadata while shared access updates avoid double counting
+  ---
+  duration_ms: 0.282833
+  type: 'test'
+  ...
+# Subtest: finite XYZ material repaint preserves geometry and every decoded alpha byte across all banks
+ok 65 - finite XYZ material repaint preserves geometry and every decoded alpha byte across all banks
+  ---
+  duration_ms: 32.985666
+  type: 'test'
+  ...
+# Subtest: explicit settings validation and cached artifact corruption fail closed
+ok 66 - explicit settings validation and cached artifact corruption fail closed
+  ---
+  duration_ms: 6.409584
+  type: 'test'
+  ...
+# Subtest: source unpacking retains physical weights and rejects malformed points
+ok 67 - source unpacking retains physical weights and rejects malformed points
+  ---
+  duration_ms: 1.386708
+  type: 'test'
+  ...
+# Subtest: comparison hypothesis and bounded sampling are deterministic and independent of observations
+ok 68 - comparison hypothesis and bounded sampling are deterministic and independent of observations
+  ---
+  duration_ms: 0.486792
+  type: 'test'
+  ...
+# Subtest: monotone pooling never lets a bright bin map below a fainter one
+ok 69 - monotone pooling never lets a bright bin map below a fainter one
+  ---
+  duration_ms: 0.662042
+  type: 'test'
+  ...
+# Subtest: the footprint splits into two disjoint checkerboard halves
+ok 70 - the footprint splits into two disjoint checkerboard halves
+  ---
+  duration_ms: 0.505166
+  type: 'test'
+  ...
+# Subtest: one fit step from paired pixels moves a mid-tone bend back onto the target and held-out follows
+ok 71 - one fit step from paired pixels moves a mid-tone bend back onto the target and held-out follows
+  ---
+  duration_ms: 22.509916
+  type: 'test'
+  ...
+# Subtest: the objective sees a core that plateaus even when p50 and p90 match
+ok 72 - the objective sees a core that plateaus even when p50 and p90 match
+  ---
+  duration_ms: 69.979
+  type: 'test'
+  ...
+# Subtest: re-exposure from the byte recovers the projection at another exposure
+ok 73 - re-exposure from the byte recovers the projection at another exposure
+  ---
+  duration_ms: 5.516416
+  type: 'test'
+  ...
+# Subtest: exposure is solved jointly with the curve when the core rides the opacity shoulder
+ok 74 - exposure is solved jointly with the curve when the core rides the opacity shoulder
+  ---
+  duration_ms: 2092.599833
+  type: 'test'
+  ...
+# Subtest: full-particle transform preserves every record and grid planning pads beyond smoothing support
+ok 75 - full-particle transform preserves every record and grid planning pads beyond smoothing support
+  ---
+  duration_ms: 0.748416
+  type: 'test'
+  ...
+# Subtest: delivery rejects failed proof, changed registration and changed prepared geometry before writing variants
+ok 76 - delivery rejects failed proof, changed registration and changed prepared geometry before writing variants
+  ---
+  duration_ms: 15.02225
+  type: 'test'
+  ...
+# Subtest: an omitted normalization block keeps the accepted display levels exactly
+ok 77 - an omitted normalization block keeps the accepted display levels exactly
+  ---
+  duration_ms: 0.595792
+  type: 'test'
+  ...
+# Subtest: authored display levels are validated, ordered and closed
+ok 78 - authored display levels are validated, ordered and closed
+  ---
+  duration_ms: 0.375875
+  type: 'test'
+  ...
+# Subtest: a grid transfer needs a passing catalogue gate on the reference and an identical grid and WCS
+ok 79 - a grid transfer needs a passing catalogue gate on the reference and an identical grid and WCS
+  ---
+  duration_ms: 0.505
+  type: 'test'
+  ...
+# Subtest: recipes and candidates are validated at runtime
+ok 80 - recipes and candidates are validated at runtime
+  ---
+  duration_ms: 0.433959
+  type: 'test'
+  ...
+# Subtest: saved overlay state round-trips independently for each catalogue
+ok 81 - saved overlay state round-trips independently for each catalogue
+  ---
+  duration_ms: 0.935125
+  type: 'test'
+  ...
+# Subtest: bad records and missing placement properties are isolated from valid saved images
+ok 82 - bad records and missing placement properties are isolated from valid saved images
+  ---
+  duration_ms: 0.293833
+  type: 'test'
+  ...
+# Subtest: denied reads and quota-failed writes degrade safely
+ok 83 - denied reads and quota-failed writes degrade safely
+  ---
+  duration_ms: 0.725083
+  type: 'test'
+  ...
+# Subtest: corrected alignment replaces an untouched old default without erasing manual fits
+ok 84 - corrected alignment replaces an untouched old default without erasing manual fits
+  ---
+  duration_ms: 0.212041
+  type: 'test'
+  ...
+# Subtest: historical catalogue locations keep saved alignment after model folders move
+ok 85 - historical catalogue locations keep saved alignment after model folders move
+  ---
+  duration_ms: 0.090375
+  type: 'test'
+  ...
+# Subtest: TAN and ordinary SIN rays match independent Astropy WCS fixtures
+ok 86 - TAN and ordinary SIN rays match independent Astropy WCS fixtures
+  ---
+  duration_ms: 17.014167
+  type: 'test'
+  ...
+# Subtest: full image planes retain publisher angular footprints in each existing density frame
+ok 87 - full image planes retain publisher angular footprints in each existing density frame
+  ---
+  duration_ms: 2.154417
+  type: 'test'
+  ...
+# Subtest: the discovery catalogue has all 110 identities and preserves unknown extents
+ok 88 - the discovery catalogue has all 110 identities and preserves unknown extents
+  ---
+  duration_ms: 0.706959
+  type: 'test'
+  ...
+# Subtest: MAST ambiguous size units stay unknown and published file URLs distinguish one observation’s products
+ok 89 - MAST ambiguous size units stay unknown and published file URLs distinguish one observation’s products
+  ---
+  duration_ms: 1.316584
+  type: 'test'
+  ...
+# Subtest: a high-resolution partial field remains a detail candidate
+ok 90 - a high-resolution partial field remains a detail candidate
+  ---
+  duration_ms: 0.085167
+  type: 'test'
+  ...
+# Subtest: archive tables validate shape, failed responses and explicit overflow across JSON formats
+ok 91 - archive tables validate shape, failed responses and explicit overflow across JSON formats
+  ---
+  duration_ms: 0.182375
+  type: 'test'
+  ...
+# Subtest: unknown counts, duplicate file hits, and partial searches cannot produce a complete total
+ok 92 - unknown counts, duplicate file hits, and partial searches cannot produce a complete total
+  ---
+  duration_ms: 2.8265
+  type: 'test'
+  ...
+# Subtest: MAST discovery box wraps at RA zero; query scopes keep detailed partial images
+ok 93 - MAST discovery box wraps at RA zero; query scopes keep detailed partial images
+  ---
+  duration_ms: 0.175458
+  type: 'test'
+  ...
+# Subtest: largest-first uses apparent object extent and puts unknown sizes last
+ok 94 - largest-first uses apparent object extent and puts unknown sizes last
+  ---
+  duration_ms: 0.786958
+  type: 'test'
+  ...
+# Subtest: a sourced nebula extent can supersede its associated cluster, never the survey preview field
+ok 95 - a sourced nebula extent can supersede its associated cluster, never the survey preview field
+  ---
+  duration_ms: 0.156958
+  type: 'test'
+  ...
+# Subtest: canonical padded SIMBAD IDs are retained; duplicate/missing Messier identities fail
+ok 96 - canonical padded SIMBAD IDs are retained; duplicate/missing Messier identities fail
+  ---
+  duration_ms: 1.163708
+  type: 'test'
+  ...
+# Subtest: source metadata remains intact and missing abstracts stay missing
+ok 97 - source metadata remains intact and missing abstracts stay missing
+  ---
+  duration_ms: 0.45275
+  type: 'test'
+  ...
+# Subtest: object title priority is distinct from incidental bibliography membership and keyword topics
+ok 98 - object title priority is distinct from incidental bibliography membership and keyword topics
+  ---
+  duration_ms: 1.279958
+  type: 'test'
+  ...
+# Subtest: external links encode identifiers and never infer an available PDF
+ok 99 - external links encode identifiers and never infer an available PDF
+  ---
+  duration_ms: 0.198584
+  type: 'test'
+  ...
+# Subtest: loaded compressed pages must pass hash, byte count and object identity before display
+ok 100 - loaded compressed pages must pass hash, byte count and object identity before display
+  ---
+  duration_ms: 34.838875
+  type: 'test'
+  ...
+# Subtest: complete presentation pins real cutouts independently of object extents
+ok 101 - complete presentation pins real cutouts independently of object extents
+  ---
+  duration_ms: 3.988875
+  type: 'test'
+  ...
+# Subtest: missing pins, unsafe paths and duplicate objects fail validation
+ok 102 - missing pins, unsafe paths and duplicate objects fail validation
+  ---
+  duration_ms: 3.092334
+  type: 'test'
+  ...
+# Subtest: thumbnail decoder rejects changed pixels and incorrect dimensions
+ok 103 - thumbnail decoder rejects changed pixels and incorrect dimensions
+  ---
+  duration_ms: 6.445875
+  type: 'test'
+  ...
+# Subtest: every survey uses the object center, same north-up scale and rendered JPEG, without archive-product substitution
+ok 104 - every survey uses the object center, same north-up scale and rendered JPEG, without archive-product substitution
+  ---
+  duration_ms: 0.689583
+  type: 'test'
+  ...
+# Subtest: published compiler receipt requires a unique complete configured input set
+ok 105 - published compiler receipt requires a unique complete configured input set
+  ---
+  duration_ms: 18.325416
+  type: 'test'
+  ...
+# Subtest: changed current input bytes prevent displaying the old cloud
+ok 106 - changed current input bytes prevent displaying the old cloud
+  ---
+  duration_ms: 3.221583
+  type: 'test'
+  ...
+# Subtest: absent CLI publication is an empty workspace, not an implicit processing request
+ok 107 - absent CLI publication is an empty workspace, not an implicit processing request
+  ---
+  duration_ms: 0.227208
+  type: 'test'
+  ...
+# Subtest: saved clouds remain inspectable after producer code changes without rewriting its historical hash
+ok 108 - saved clouds remain inspectable after producer code changes without rewriting its historical hash
+  ---
+  duration_ms: 5.915666
+  type: 'test'
+  ...
+# Subtest: legacy and fully pinned depth receipts both restore without processing
+ok 109 - legacy and fully pinned depth receipts both restore without processing
+  ---
+  duration_ms: 5.282333
+  type: 'test'
+  ...
+# Subtest: photometric publication requires the exact model and evidence used for the saved volume
+ok 110 - photometric publication requires the exact model and evidence used for the saved volume
+  ---
+  duration_ms: 13.939417
+  type: 'test'
+  ...
+# Subtest: a current publication can replace a saved result only for the same controls, evidence and registration
+ok 111 - a current publication can replace a saved result only for the same controls, evidence and registration
+  ---
+  duration_ms: 6.349125
+  type: 'test'
+  ...
+# Subtest: publication cannot omit its configured depth recipe or declared evidence ledger
+ok 112 - publication cannot omit its configured depth recipe or declared evidence ledger
+  ---
+  duration_ms: 9.25575
+  type: 'test'
+  ...
+# Subtest: depth and evidence inputs cannot drift or change object identity
+ok 113 - depth and evidence inputs cannot drift or change object identity
+  ---
+  duration_ms: 7.441458
+  type: 'test'
+  ...
+# Subtest: current depth pins cannot relabel a historical bake with missing or different depth snapshots
+ok 114 - current depth pins cannot relabel a historical bake with missing or different depth snapshots
+  ---
+  duration_ms: 12.558875
+  type: 'test'
+  ...
+# Subtest: relocated producer closures restore without fetching current code or changing historical hashes
+ok 115 - relocated producer closures restore without fetching current code or changing historical hashes
+  ---
+  duration_ms: 138.608375
+  type: 'test'
+  ...
+# Subtest: combined evidence boundary rejects escaped paths, singular registrations and unbounded settings
+ok 116 - combined evidence boundary rejects escaped paths, singular registrations and unbounded settings
+  ---
+  duration_ms: 0.65025
+  type: 'test'
+  ...
+# Subtest: prepared evidence requires finite dimensions, source ownership and hashed local assets
+ok 117 - prepared evidence requires finite dimensions, source ownership and hashed local assets
+  ---
+  duration_ms: 0.399416
+  type: 'test'
+  ...
+# Subtest: detector requests and proposal receipts require bounded settings and exact source pins
+ok 118 - detector requests and proposal receipts require bounded settings and exact source pins
+  ---
+  duration_ms: 0.821292
+  type: 'test'
+  ...
+# Subtest: a clean lab offers originals until valid extracted previews exist
+ok 119 - a clean lab offers originals until valid extracted previews exist
+  ---
+  duration_ms: 16.229875
+  type: 'test'
+  ...
+# Subtest: legacy view links retain object and saved reconstruction state
+ok 120 - legacy view links retain object and saved reconstruction state
+  ---
+  duration_ms: 0.424709
+  type: 'test'
+  ...
+# Subtest: explicit paths take precedence and switching changes only the view
+ok 121 - explicit paths take precedence and switching changes only the view
+  ---
+  duration_ms: 0.1335
+  type: 'test'
+  ...
+# Subtest: all pages share object context while old catalogue bookmarks remain readable
+ok 122 - all pages share object context while old catalogue bookmarks remain readable
+  ---
+  duration_ms: 0.543542
+  type: 'test'
+  ...
+# Subtest: choosing another lens repaints the retained leaves without changing geometry identities
+ok 123 - choosing another lens repaints the retained leaves without changing geometry identities
+  ---
+  duration_ms: 1.196708
+  type: 'test'
+  ...
+# Subtest: only saved results naming the same model geometry and star layer may swap in place
+ok 124 - only saved results naming the same model geometry and star layer may swap in place
+  ---
+  duration_ms: 0.125041
+  type: 'test'
+  ...
+# Subtest: material toggles, lens swaps and density cutoffs share one texture-slot generation
+ok 125 - material toggles, lens swaps and density cutoffs share one texture-slot generation
+  ---
+  duration_ms: 0.828125
+  type: 'test'
+  ...
+# Subtest: replaced slots resynchronize star support with the displayed selection
+ok 126 - replaced slots resynchronize star support with the displayed selection
+  ---
+  duration_ms: 0.226
+  type: 'test'
+  ...
+# Subtest: the viewer routes every texture writer through the shared slots and resyncs stars on commit
+ok 127 - the viewer routes every texture writer through the shared slots and resyncs stars on commit
+  ---
+  duration_ms: 1.600542
+  type: 'test'
+  ...
+# Subtest: image layers reject changed source bindings, cropped grids, unsafe paths and duplicate identities
+ok 128 - image layers reject changed source bindings, cropped grids, unsafe paths and duplicate identities
+  ---
+  duration_ms: 1.132958
+  type: 'test'
+  ...
+# Subtest: prepared geometry is bound to the exact source, map and working image grid
+ok 129 - prepared geometry is bound to the exact source, map and working image grid
+  ---
+  duration_ms: 0.836959
+  type: 'test'
+  ...
+# Subtest: geometry boundary rejects invalid radii, support, scores and symmetry membership
+ok 130 - geometry boundary rejects invalid radii, support, scores and symmetry membership
+  ---
+  duration_ms: 0.237292
+  type: 'test'
+  ...
+# Subtest: optional geometry references use a relative path and immutable content hash
+ok 131 - optional geometry references use a relative path and immutable content hash
+  ---
+  duration_ms: 0.991917
+  type: 'test'
+  ...
+# Subtest: complete ellipse support decodes into two non-degenerate SVG arcs
+ok 132 - complete ellipse support decodes into two non-degenerate SVG arcs
+  ---
+  duration_ms: 0.182333
+  type: 'test'
+  ...
+# Subtest: alignment uses native image edges regardless of preview resolution
+ok 133 - alignment uses native image edges regardless of preview resolution
+  ---
+  duration_ms: 1.063292
+  type: 'test'
+  ...
+# Subtest: manual fit rotates around registered center and leaves original registration intact
+ok 134 - manual fit rotates around registered center and leaves original registration intact
+  ---
+  duration_ms: 0.19025
+  type: 'test'
+  ...
+# Subtest: invalid sky registration and unsafe source paths fail at JSON boundary
+ok 135 - invalid sky registration and unsafe source paths fail at JSON boundary
+  ---
+  duration_ms: 0.360083
+  type: 'test'
+  ...
+# Subtest: every new candidate has a source dossier and primary-paper context
+ok 136 - every new candidate has a source dossier and primary-paper context
+  ---
+  duration_ms: 9.681958
+  type: 'test'
+  ...
+# Subtest: curation preserves useful publisher-registered comparisons without upgrading their evidence
+ok 137 - curation preserves useful publisher-registered comparisons without upgrading their evidence
+  ---
+  duration_ms: 3.908458
+  type: 'test'
+  ...
+# Subtest: publisher-only images carry no invented stellar measurements
+ok 138 - publisher-only images carry no invented stellar measurements
+  ---
+  duration_ms: 0.6355
+  type: 'test'
+  ...
+# Subtest: wide optical intake accepts a ten-degree TAN footprint without relaxing registration
+ok 139 - wide optical intake accepts a ten-degree TAN footprint without relaxing registration
+  ---
+  duration_ms: 1.345792
+  type: 'test'
+  ...
+# Subtest: review maps reject changed native registration or source even at the same working size
+ok 140 - review maps reject changed native registration or source even at the same working size
+  ---
+  duration_ms: 1.095459
+  type: 'test'
+  ...
+# Subtest: review sprites must fit both their image bounds and prepared atlas support extent
+ok 141 - review sprites must fit both their image bounds and prepared atlas support extent
+  ---
+  duration_ms: 0.250833
+  type: 'test'
+  ...
+# Subtest: review identity is isolated by source and exact output; missing decisions remain unreviewed
+ok 142 - review identity is isolated by source and exact output; missing decisions remain unreviewed
+  ---
+  duration_ms: 1.254459
+  type: 'test'
+  ...
+# Subtest: wide-source registration retains explicit native discovery settings without changing other sources
+ok 143 - wide-source registration retains explicit native discovery settings without changing other sources
+  ---
+  duration_ms: 1.492542
+  type: 'test'
+  ...
+# Subtest: registration detector settings reject unbounded, noninteger and incompatible discovery
+ok 144 - registration detector settings reject unbounded, noninteger and incompatible discovery
+  ---
+  duration_ms: 1.221042
+  type: 'test'
+  ...
+# Subtest: composed sky band sources cache under their hash; publisher sources keep their downloaded name
+ok 145 - composed sky band sources cache under their hash; publisher sources keep their downloaded name
+  ---
+  duration_ms: 0.181042
+  type: 'test'
+  ...
+# Subtest: png recolors real-reference quads while preserving all geometry and every alpha byte
+ok 146 - png recolors real-reference quads while preserving all geometry and every alpha byte
+  ---
+  duration_ms: 26.337792
+  type: 'test'
+  ...
+# Subtest: webp recolors real-reference quads while preserving all geometry and every alpha byte
+ok 147 - webp recolors real-reference quads while preserving all geometry and every alpha byte
+  ---
+  duration_ms: 66.434625
+  type: 'test'
+  ...
+# Subtest: missing image or black chromaticity retains reference color/support, with explicit coverage accounting
+ok 148 - missing image or black chromaticity retains reference color/support, with explicit coverage accounting
+  ---
+  duration_ms: 22.3145
+  type: 'test'
+  ...
+# Subtest: image brightness cannot redefine opacity or reference support
+ok 149 - image brightness cannot redefine opacity or reference support
+  ---
+  duration_ms: 37.876917
+  type: 'test'
+  ...
+# Subtest: changed reference bytes fail before recoloring
+ok 150 - changed reference bytes fail before recoloring
+  ---
+  duration_ms: 4.564792
+  type: 'test'
+  ...
+# Subtest: saturation and registered detail change only RGB, including identical dark lanes on all slice axes
+ok 151 - saturation and registered detail change only RGB, including identical dark lanes on all slice axes
+  ---
+  duration_ms: 98.962375
+  type: 'test'
+  ...
+# Subtest: material brightness and gamma affect real midtone pixels while opacity stays exact
+ok 152 - material brightness and gamma affect real midtone pixels while opacity stays exact
+  ---
+  duration_ms: 85.819416
+  type: 'test'
+  ...
+# Subtest: whole-cloud tone also reaches uncovered and black-image neutral material
+ok 153 - whole-cloud tone also reaches uncovered and black-image neutral material
+  ---
+  duration_ms: 14.417
+  type: 'test'
+  ...
+# Subtest: prepared 3D component mixtures preserve their intensity and valid black material without changing alpha
+ok 154 - prepared 3D component mixtures preserve their intensity and valid black material without changing alpha
+  ---
+  duration_ms: 65.920958
+  type: 'test'
+  ...
+# Subtest: radial panel plots dark bins and replaces the measurement when the lens changes
+ok 155 - radial panel plots dark bins and replaces the measurement when the lens changes
+  ---
+  duration_ms: 379.77725
+  type: 'test'
+  ...
+# Subtest: finite emission and unknown saved methods cannot invoke density repaint
+ok 156 - finite emission and unknown saved methods cannot invoke density repaint
+  ---
+  duration_ms: 0.468875
+  type: 'test'
+  ...
+# Subtest: saved-result processing and resumed jobs guard the actual callbacks
+ok 157 - saved-result processing and resumed jobs guard the actual callbacks
+  ---
+  duration_ms: 0.291792
+  type: 'test'
+  ...
+# Subtest: Preview follows the selected image and its owning finite model, not the displayed result
+ok 158 - Preview follows the selected image and its owning finite model, not the displayed result
+  ---
+  duration_ms: 0.410791
+  type: 'test'
+  ...
+# Subtest: a linked or remembered result is ignored unless the current finite model baked it
+ok 159 - a linked or remembered result is ignored unless the current finite model baked it
+  ---
+  duration_ms: 0.125
+  type: 'test'
+  ...
+# Subtest: the controls use these rules for links, restored display and every Preview gate
+ok 160 - the controls use these rules for links, restored display and every Preview gate
+  ---
+  duration_ms: 0.642542
+  type: 'test'
+  ...
+# Subtest: a sampled publication cannot silently drop or relabel its qualified source and implementation pins
+ok 161 - a sampled publication cannot silently drop or relabel its qualified source and implementation pins
+  ---
+  duration_ms: 0.891417
+  type: 'test'
+  ...
+# Subtest: the shared FITS decoder is a pinned preparation owner, not an arbitrary tools path
+ok 162 - the shared FITS decoder is a pinned preparation owner, not an arbitrary tools path
+  ---
+  duration_ms: 0.129583
+  type: 'test'
+  ...
+# Subtest: relocated sampled owners and historical receipts remain readable without allowing unrelated package code
+ok 163 - relocated sampled owners and historical receipts remain readable without allowing unrelated package code
+  ---
+  duration_ms: 0.972708
+  type: 'test'
+  ...
+# Subtest: flat photo corners follow the actual cloud camera through compound yaw and pitch
+ok 164 - flat photo corners follow the actual cloud camera through compound yaw and pitch
+  ---
+  duration_ms: 1.893375
+  type: 'test'
+  ...
+# Subtest: triad uses source axes, registered screen orientation and the correct Earth-facing depth sign
+ok 165 - triad uses source axes, registered screen orientation and the correct Earth-facing depth sign
+  ---
+  duration_ms: 0.673916
+  type: 'test'
+  ...
+# Subtest: continuous drag displays bounded drafts and coalesces to latest while one job runs
+ok 166 - continuous drag displays bounded drafts and coalesces to latest while one job runs
+  ---
+  duration_ms: 0.994958
+  type: 'test'
+  ...
+# Subtest: resuming input cancels one obsolete final and rejects its late result
+ok 167 - resuming input cancels one obsolete final and rejects its late result
+  ---
+  duration_ms: 0.777709
+  type: 'test'
+  ...
+# Subtest: keyboard idle refines, cached final does not bake, and disconnect never cancels server work
+ok 168 - keyboard idle refines, cached final does not bake, and disconnect never cancels server work
+  ---
+  duration_ms: 0.263667
+  type: 'test'
+  ...
+# Subtest: failed processing stops automatic retries until a user retry or new edit
+ok 169 - failed processing stops automatic retries until a user retry or new edit
+  ---
+  duration_ms: 0.1325
+  type: 'test'
+  ...
+# Subtest: bulk shape edits preserve relative centers, angles, and size ratios
+ok 170 - bulk shape edits preserve relative centers, angles, and size ratios
+  ---
+  duration_ms: 0.716
+  type: 'test'
+  ...
+# Subtest: scope uses actual group membership and emission edits share a value
+ok 171 - scope uses actual group membership and emission edits share a value
+  ---
+  duration_ms: 0.174583
+  type: 'test'
+  ...
+# Subtest: removal strength defaults to 100 and survives reload independently for each original source
+ok 172 - removal strength defaults to 100 and survives reload independently for each original source
+  ---
+  duration_ms: 0.598167
+  type: 'test'
+  ...
+# Subtest: malformed records cannot suppress valid source preferences and unavailable storage keeps session values
+ok 173 - malformed records cannot suppress valid source preferences and unavailable storage keeps session values
+  ---
+  duration_ms: 0.101458
+  type: 'test'
+  ...
+# Subtest: image choice survives a late or replaced shell destination without resetting selection
+ok 174 - image choice survives a late or replaced shell destination without resetting selection
+  ---
+  duration_ms: 311.816458
+  type: 'test'
+  ...
+# Subtest: workspace portals keep navigation visibility, selected credit and accessible help in one retained scene
+ok 175 - workspace portals keep navigation visibility, selected credit and accessible help in one retained scene
+  ---
+  duration_ms: 465.726292
+  type: 'test'
+  ...
+# Subtest: floating tools toggle one panel above the buttons, close on Escape and hide without a source image
+ok 176 - floating tools toggle one panel above the buttons, close on Escape and hide without a source image
+  ---
+  duration_ms: 534.676208
+  type: 'test'
+  ...
+# Subtest: all workspaces show the same ordered sections regardless of available capabilities
+ok 177 - all workspaces show the same ordered sections regardless of available capabilities
+  ---
+  duration_ms: 9.485542
+  type: 'test'
+  ...
+# Subtest: configured tools stay enabled and unavailable velocity keeps its explanatory reason
+ok 178 - configured tools stay enabled and unavailable velocity keeps its explanatory reason
+  ---
+  duration_ms: 3.65075
+  type: 'test'
+  ...
+# Subtest: the curated lab retains the selected LMC images, SMC comparisons and verified density banks
+not ok 179 - the curated lab retains the selected LMC images, SMC comparisons and verified density banks
+  ---
+  duration_ms: 11.37475
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/resources/model-catalogue.test.mjs:32:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/private/tmp/cssearth-pr390/labs/nebula/models/lmc/candidates/prepared/vista-infrared.webp'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1252:14)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/resources/model-catalogue.test.mjs:54:19)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: historical model locations resolve without changing unrelated paths or caller JSON bytes
+ok 180 - historical model locations resolve without changing unrelated paths or caller JSON bytes
+  ---
+  duration_ms: 0.474208
+  type: 'test'
+  ...
+# Subtest: moved native volume recipe keeps sibling grid and provenance bytes under their original pins
+ok 181 - moved native volume recipe keeps sibling grid and provenance bytes under their original pins
+  ---
+  duration_ms: 6.68475
+  type: 'test'
+  ...
+# Subtest: Apply survives a discarded HTTP response and fresh observers; persisted request identity starts exactly one real child
+ok 182 - Apply survives a discarded HTTP response and fresh observers; persisted request identity starts exactly one real child
+  ---
+  duration_ms: 765.73625
+  type: 'test'
+  ...
+# Subtest: GET of a completed job with unavailable artifacts returns a persisted terminal state without launching work
+ok 183 - GET of a completed job with unavailable artifacts returns a persisted terminal state without launching work
+  ---
+  duration_ms: 7.197916
+  type: 'test'
+  ...
+# Subtest: only explicit Cancel stops the child; cancellation persists and neither polling nor repeated start retries it
+ok 184 - only explicit Cancel stops the child; cancellation persists and neither polling nor repeated start retries it
+  ---
+  duration_ms: 53.597875
+  type: 'test'
+  ...
+# Subtest: unfinished jobs become honestly interrupted on restart and shutdown, without automatic work
+ok 185 - unfinished jobs become honestly interrupted on restart and shutdown, without automatic work
+  ---
+  duration_ms: 53.570333
+  type: 'test'
+  ...
+# Subtest: legacy manual job records cannot block the automatic NOX job namespace
+ok 186 - legacy manual job records cannot block the automatic NOX job namespace
+  ---
+  duration_ms: 7.716667
+  type: 'test'
+  ...
+# Subtest: opt-in preview history crosses 512 real jobs while retaining active, recent and preferred receipts and all artifacts
+ok 187 - opt-in preview history crosses 512 real jobs while retaining active, recent and preferred receipts and all artifacts
+  ---
+  duration_ms: 1814.395958
+  type: 'test'
+  ...
+# Subtest: default processing history remains non-archiving at its existing limit
+ok 188 - default processing history remains non-archiving at its existing limit
+  ---
+  duration_ms: 90.319958
+  type: 'test'
+  ...
+# Subtest: durable jobs accept validated operation scopes without star-removal request fields
+ok 189 - durable jobs accept validated operation scopes without star-removal request fields
+  ---
+  duration_ms: 16.256167
+  type: 'test'
+  ...
+# Subtest: constructing plugin configuration does not initialize or recover job storage
+ok 190 - constructing plugin configuration does not initialize or recover job storage
+  ---
+  duration_ms: 63.107917
+  type: 'test'
+  ...
+# Subtest: shape preview request validates its actual image grid and explicit settings
+ok 191 - shape preview request validates its actual image grid and explicit settings
+  ---
+  duration_ms: 1.196166
+  type: 'test'
+  ...
+# Subtest: completed shape result requires both material pins, finite registration and exact settings
+ok 192 - completed shape result requires both material pins, finite registration and exact settings
+  ---
+  duration_ms: 1.762167
+  type: 'test'
+  ...
+# Subtest: the catalogue restores the newest completed placement, independent of hash ordering
+ok 193 - the catalogue restores the newest completed placement, independent of hash ordering
+  ---
+  duration_ms: 123.040875
+  type: 'test'
+  ...
+# Subtest: reconstruction requires an explicit operation, a completed removal identity and finite alignment
+ok 194 - reconstruction requires an explicit operation, a completed removal identity and finite alignment
+  ---
+  duration_ms: 0.825208
+  type: 'test'
+  ...
+# Subtest: reconstruction jobs survive observers independently of the star-removal job namespace
+ok 195 - reconstruction jobs survive observers independently of the star-removal job namespace
+  ---
+  duration_ms: 31.940167
+  type: 'test'
+  ...
+# Subtest: lenses are discovered from the newest fitted model bundle, never from fixed identities
+ok 196 - lenses are discovered from the newest fitted model bundle, never from fixed identities
+  ---
+  duration_ms: 132.784083
+  type: 'test'
+  ...
+# Subtest: a bundle whose lens belongs to another model or lacks its model result is not selectable
+ok 197 - a bundle whose lens belongs to another model or lacks its model result is not selectable
+  ---
+  duration_ms: 52.157833
+  type: 'test'
+  ...
+# Subtest: a saved lens cannot claim a shared model its pinned provenance does not name
+ok 198 - a saved lens cannot claim a shared model its pinned provenance does not name
+  ---
+  duration_ms: 20.308917
+  type: 'test'
+  ...
+# Subtest: the catalogue keeps every candidate, marks images without a lens unavailable and reports rejected newer models
+ok 199 - the catalogue keeps every candidate, marks images without a lens unavailable and reports rejected newer models
+  ---
+  duration_ms: 70.313958
+  type: 'test'
+  ...
+# Subtest: one prepared star layer of a model is referenced by every lens, and stale or foreign stars reject the bundle
+ok 200 - one prepared star layer of a model is referenced by every lens, and stale or foreign stars reject the bundle
+  ---
+  duration_ms: 44.083042
+  type: 'test'
+  ...
+# Subtest: cache identity includes transitive numerical owners and leaves no build output
+ok 201 - cache identity includes transitive numerical owners and leaves no build output
+  ---
+  duration_ms: 69.9005
+  type: 'test'
+  ...
+# Subtest: relocated preparation entry points pin their live package owners
+ok 202 - relocated preparation entry points pin their live package owners
+  ---
+  duration_ms: 106.955292
+  type: 'test'
+  ...
+# Subtest: sampled supplementary owner allowlist points at existing implementation files
+ok 203 - sampled supplementary owner allowlist points at existing implementation files
+  ---
+  duration_ms: 1.332292
+  type: 'test'
+  ...
+# Subtest: the delivery factor is divided out: an analytic render exactly that much brighter reads as agreement
+ok 204 - the delivery factor is divided out: an analytic render exactly that much brighter reads as agreement
+  ---
+  duration_ms: 1.143833
+  type: 'test'
+  ...
+# Subtest: the tolerance is the stated one: 5 levels off stays clear, 8 levels off is coloured with its sign
+ok 205 - the tolerance is the stated one: 5 levels off stays clear, 8 levels off is coloured with its sign
+  ---
+  duration_ms: 3.828625
+  type: 'test'
+  ...
+# Subtest: pixels outside the footprint stay transparent however far off they are
+ok 206 - pixels outside the footprint stay transparent however far off they are
+  ---
+  duration_ms: 0.265625
+  type: 'test'
+  ...
+# Subtest: the route answers a transparent PNG for a lens that matches once delivery is divided out, and its legend JSON
+ok 207 - the route answers a transparent PNG for a lens that matches once delivery is divided out, and its legend JSON
+  ---
+  duration_ms: 124.52475
+  type: 'test'
+  ...
+# Subtest: the route refuses writes, bad identities and non-lens results
+ok 208 - the route refuses writes, bad identities and non-lens results
+  ---
+  duration_ms: 18.132583
+  type: 'test'
+  ...
+# Subtest: the map is written in the lens image frame, the frame the original-image overlay covers
+ok 209 - the map is written in the lens image frame, the frame the original-image overlay covers
+  ---
+  duration_ms: 15.186333
+  type: 'test'
+  ...
+# Subtest: the Horálek lenses tell the truth: the bar reads too dark, and tone fitting removes most of the red
+ok 210 - the Horálek lenses tell the truth: the bar reads too dark, and tone fitting removes most of the red # SKIP The Horálek lenses are not baked in this checkout.
+  ---
+  duration_ms: 1.063458
+  type: 'test'
+  ...
+# Subtest: a projection that matches its own image reports unit ratios, a zero delta and an identity transfer
+ok 211 - a projection that matches its own image reports unit ratios, a zero delta and an identity transfer
+  ---
+  duration_ms: 4.783208
+  type: 'test'
+  ...
+# Subtest: a brighter projection lifts the ratios, the delta and the transfer above the diagonal by the same factor
+ok 212 - a brighter projection lifts the ratios, the delta and the transfer above the diagonal by the same factor
+  ---
+  duration_ms: 6.153125
+  type: 'test'
+  ...
+# Subtest: only the overlay footprint is measured, and dropping the mask would change every number
+ok 213 - only the overlay footprint is measured, and dropping the mask would change every number
+  ---
+  duration_ms: 8.374542
+  type: 'test'
+  ...
+# Subtest: the photograph’s sky pedestal is removed from the source and never from the render
+ok 214 - the photograph’s sky pedestal is removed from the source and never from the render
+  ---
+  duration_ms: 3.542625
+  type: 'test'
+  ...
+# Subtest: the lens raster is placed through its own tangent bounds, never stretched onto the projection grid
+ok 215 - the lens raster is placed through its own tangent bounds, never stretched onto the projection grid
+  ---
+  duration_ms: 2.825542
+  type: 'test'
+  ...
+# Subtest: one saved lens is measured from its own pinned rasters, and only from them
+ok 216 - one saved lens is measured from its own pinned rasters, and only from them
+  ---
+  duration_ms: 79.403625
+  type: 'test'
+  ...
+# Subtest: a lens raster that no longer matches its manifest pin is refused, and a non-lens result is refused
+ok 217 - a lens raster that no longer matches its manifest pin is refused, and a non-lens result is refused
+  ---
+  duration_ms: 38.644792
+  type: 'test'
+  ...
+# Subtest: a lens registered on half the model field covers half the footprint
+ok 218 - a lens registered on half the model field covers half the footprint
+  ---
+  duration_ms: 15.810584
+  type: 'test'
+  ...
+# Subtest: the route’s own accepted LMC lenses are measured, when they are present in this checkout
+ok 219 - the route’s own accepted LMC lenses are measured, when they are present in this checkout # SKIP The accepted Horálek lens is not baked in this checkout.
+  ---
+  duration_ms: 1.129791
+  type: 'test'
+  ...
+# Subtest: a render that matches its source at every radius reports agreement, not just an overall match
+ok 220 - a render that matches its source at every radius reports agreement, not just an overall match
+  ---
+  duration_ms: 4.621959
+  type: 'test'
+  ...
+# Subtest: a centre <-> annulus brightness swap conserves the histogram exactly, and levels cannot see it, but the radial profile flags it
+ok 221 - a centre <-> annulus brightness swap conserves the histogram exactly, and levels cannot see it, but the radial profile flags it
+  ---
+  duration_ms: 7.977167
+  type: 'test'
+  ...
+# Subtest: a radially compressed render is caught by the half-light radius even though no single bin is wildly wrong
+ok 222 - a radially compressed render is caught by the half-light radius even though no single bin is wildly wrong
+  ---
+  duration_ms: 3.4635
+  type: 'test'
+  ...
+# Subtest: a missing bright core remains the worst radial defect even when its render is exactly zero
+ok 223 - a missing bright core remains the worst radial defect even when its render is exactly zero
+  ---
+  duration_ms: 2.868833
+  type: 'test'
+  ...
+# Subtest: the footprint mask is respected, and empty or degenerate bins report null rather than NaN
+ok 224 - the footprint mask is respected, and empty or degenerate bins report null rather than NaN
+  ---
+  duration_ms: 1.039542
+  type: 'test'
+  ...
+# Subtest: the route answers the radial profile JSON for a saved lens whose render matches its own source
+ok 225 - the route answers the radial profile JSON for a saved lens whose render matches its own source
+  ---
+  duration_ms: 67.223459
+  type: 'test'
+  ...
+# Subtest: the route refuses writes, bad identities and non-lens results
+ok 226 - the route refuses writes, bad identities and non-lens results
+  ---
+  duration_ms: 10.3725
+  type: 'test'
+  ...
+# Subtest: automatic requests accept only image identity and overview, preview or apply
+ok 227 - automatic requests accept only image identity and overview, preview or apply
+  ---
+  duration_ms: 1.1955
+  type: 'test'
+  ...
+# Subtest: original overview runs no inference; native previews deduplicate, report progress, cache and preserve approved input
+ok 228 - original overview runs no inference; native previews deduplicate, report progress, cache and preserve approved input
+  ---
+  duration_ms: 178.267917
+  type: 'test'
+  ...
+# Subtest: Apply needs no calibration and its verified cache restores after moving the checkout root
+ok 229 - Apply needs no calibration and its verified cache restores after moving the checkout root
+  ---
+  duration_ms: 152.714292
+  type: 'test'
+  ...
+# Subtest: fresh NOX Apply works without legacy detections, separated files or variant catalogue
+ok 230 - fresh NOX Apply works without legacy detections, separated files or variant catalogue
+  ---
+  duration_ms: 78.1225
+  type: 'test'
+  ...
+# Subtest: an imported candidate needs no trial selection, alignment gate, recipe or existing star layers
+ok 231 - an imported candidate needs no trial selection, alignment gate, recipe or existing star layers
+  ---
+  duration_ms: 76.00975
+  type: 'test'
+  ...
+# Subtest: a candidate outside the saved selection processes without changing earlier result identities
+ok 232 - a candidate outside the saved selection processes without changing earlier result identities
+  ---
+  duration_ms: 147.720542
+  type: 'test'
+  ...
+# Subtest: relocating catalogue metadata preserves saved native output but changed native inputs still fail
+ok 233 - relocating catalogue metadata preserves saved native output but changed native inputs still fail
+  ---
+  duration_ms: 160.501917
+  type: 'test'
+  ...
+# Subtest: 16-bit imported images get a separate full-size RGB8 input while their original is preserved
+ok 234 - 16-bit imported images get a separate full-size RGB8 input while their original is preserved
+  ---
+  duration_ms: 111.35725
+  type: 'test'
+  ...
+# Subtest: output pins, native crop bounds and exact accounting are required before atomic publication
+ok 235 - output pins, native crop bounds and exact accounting are required before atomic publication
+  ---
+  duration_ms: 118.526208
+  type: 'test'
+  ...
+# Subtest: cancelling one observer keeps shared inference; cancelling the final observer removes incomplete output
+ok 236 - cancelling one observer keeps shared inference; cancelling the final observer removes incomplete output
+  ---
+  duration_ms: 58.460875
+  type: 'test'
+  ...
+# Subtest: native discovery restores verified completed images without launching removal and rejects changed model/source outputs
+ok 237 - native discovery restores verified completed images without launching removal and rejects changed model/source outputs
+  ---
+  duration_ms: 114.057375
+  type: 'test'
+  ...
+# Subtest: a configured preserve treatment keeps every native pixel, runs no inference and refuses a tampered identity
+ok 238 - a configured preserve treatment keeps every native pixel, runs no inference and refuses a tampered identity
+  ---
+  duration_ms: 88.6235
+  type: 'test'
+  ...
+# Subtest: tone formula applies ordered levels, gamma, gain; photograph alpha and density RGB stay unchanged
+ok 239 - tone formula applies ordered levels, gamma, gain; photograph alpha and density RGB stay unchanged
+  ---
+  duration_ms: 1.097375
+  type: 'test'
+  ...
+# Subtest: tone requests reject arbitrary paths, unrecognized/missing fields and non-finite or invalid levels
+ok 240 - tone requests reject arbitrary paths, unrecognized/missing fields and non-finite or invalid levels
+  ---
+  duration_ms: 1.190375
+  type: 'test'
+  ...
+# Subtest: removal requests are bounded and image-only; endpoint interpolation precedes tone and preserves alpha
+ok 241 - removal requests are bounded and image-only; endpoint interpolation precedes tone and preserves alpha
+  ---
+  duration_ms: 0.345
+  type: 'test'
+  ...
+# Subtest: saved reconstructions retain inherited Alignment image and density tone targets
+ok 242 - saved reconstructions retain inherited Alignment image and density tone targets
+  ---
+  duration_ms: 56.255084
+  type: 'test'
+  ...
+# Subtest: local preparation writes verifiable pixels, deduplicates concurrent cache work and returns original neutral resources
+ok 243 - local preparation writes verifiable pixels, deduplicates concurrent cache work and returns original neutral resources
+  ---
+  duration_ms: 71.742834
+  type: 'test'
+  ...
+# Subtest: image tone targets the selected prepared layer and rejects a mismatched original
+ok 244 - image tone targets the selected prepared layer and rejects a mismatched original
+  ---
+  duration_ms: 21.006584
+  type: 'test'
+  ...
+# Subtest: strength uses the selected full-size grid, preserves endpoints, scales residual before tone and caches original pairing
+ok 245 - strength uses the selected full-size grid, preserves endpoints, scales residual before tone and caches original pairing
+  ---
+  duration_ms: 69.885208
+  type: 'test'
+  ...
+# Subtest: actual prepared candidate matrices preserve Alignment CSS axes, pivot, all rotations and observer depth
+ok 246 - actual prepared candidate matrices preserve Alignment CSS axes, pivot, all rotations and observer depth
+  ---
+  duration_ms: 5.560917
+  type: 'test'
+  ...
+# Subtest: saved Alignment scale and orientation are preserved instead of stripping its fit
+ok 247 - saved Alignment scale and orientation are preserved instead of stripping its fit
+  ---
+  duration_ms: 1.71925
+  type: 'test'
+  ...
+# Subtest: tiny offline bake uses shared density support and writes pinned XYZ resources and cloud inspection
+not ok 248 - tiny offline bake uses shared density support and writes pinned XYZ resources and cloud inspection
+  ---
+  duration_ms: 1075.678208
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workers/density-reconstruction.test.mjs:2753:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/private/tmp/cssearth-pr390/labs/nebula/models/lmc/full-density/prepared/slices/x/00.webp'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1252:14)
+    async recolorCloudSlices (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workers/density-reconstruction.test.mjs:725:31)
+    async prepareReconstruction (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workers/density-reconstruction.test.mjs:2547:19)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workers/density-reconstruction.test.mjs:2793:20)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: worker completion must validate and exit successfully
+ok 249 - worker completion must validate and exit successfully
+  ---
+  duration_ms: 304.872875
+  type: 'test'
+  ...
+# Subtest: explicit cancellation terminates the actual worker before resolving
+ok 250 - explicit cancellation terminates the actual worker before resolving
+  ---
+  duration_ms: 71.494584
+  type: 'test'
+  ...
+# Subtest: compiler frame centers absolute west/north/away coordinates without changing their span
+ok 251 - compiler frame centers absolute west/north/away coordinates without changing their span
+  ---
+  duration_ms: 1.179667
+  type: 'test'
+  ...
+# Subtest: prepared compiler transport reflects source depth exactly once without changing image bytes or UVs
+ok 252 - prepared compiler transport reflects source depth exactly once without changing image bytes or UVs
+  ---
+  duration_ms: 1.116125
+  type: 'test'
+  ...
+# Subtest: default compiler bake refuses projected-image-only lenses before creating output
+ok 253 - default compiler bake refuses projected-image-only lenses before creating output
+  ---
+  duration_ms: 0.553875
+  type: 'test'
+  ...
+# Subtest: the actual CSS compiler backend rejects an oversized explicit plan before sampling or writing
+ok 254 - the actual CSS compiler backend rejects an oversized explicit plan before sampling or writing
+  ---
+  duration_ms: 0.386666
+  type: 'test'
+  ...
+# Subtest: thin supported features receive finer equally spaced banks without an unbounded slice count
+ok 255 - thin supported features receive finer equally spaced banks without an unbounded slice count
+  ---
+  duration_ms: 0.196167
+  type: 'test'
+  ...
+# Subtest: compiler alpha handoff checks decoded bytes, including transparent texels
+ok 256 - compiler alpha handoff checks decoded bytes, including transparent texels
+  ---
+  duration_ms: 22.195625
+  type: 'test'
+  ...
+# Subtest: standard RGB lenses still require exact neutral alpha when no component pin exists
+ok 257 - standard RGB lenses still require exact neutral alpha when no component pin exists
+  ---
+  duration_ms: 0.9905
+  type: 'test'
+  ...
+# Subtest: a stellar-only result retains the explicitly pinned cloud identity and rejects unrelated banks
+ok 258 - a stellar-only result retains the explicitly pinned cloud identity and rejects unrelated banks
+  ---
+  duration_ms: 0.229958
+  type: 'test'
+  ...
+# Subtest: sampled spectral alpha must equal its explicit pin, not merely be different from neutral
+ok 259 - sampled spectral alpha must equal its explicit pin, not merely be different from neutral
+  ---
+  duration_ms: 1.47
+  type: 'test'
+  ...
+# Subtest: spectral alpha never relaxes result, frame or field identity
+ok 260 - spectral alpha never relaxes result, frame or field identity
+  ---
+  duration_ms: 0.25075
+  type: 'test'
+  ...
+# Subtest: spectral alpha never relaxes shared slab count, position, dimensions or style
+ok 261 - spectral alpha never relaxes shared slab count, position, dimensions or style
+  ---
+  duration_ms: 0.204625
+  type: 'test'
+  ...
+# Subtest: apparent V magnitude ranks bright stars first, with measured color and neutral unknown color
+ok 262 - apparent V magnitude ranks bright stars first, with measured color and neutral unknown color
+  ---
+  duration_ms: 4.121458
+  type: 'test'
+  ...
+# Subtest: disk area and opacity jointly preserve V light ratios across colors with no faint floor
+ok 263 - disk area and opacity jointly preserve V light ratios across colors with no faint floor
+  ---
+  duration_ms: 1.474292
+  type: 'test'
+  ...
+# Subtest: TAN astrometry matches a known off-axis projection and rejects the linear RA approximation
+ok 264 - TAN astrometry matches a known off-axis projection and rejects the linear RA approximation
+  ---
+  duration_ms: 0.917292
+  type: 'test'
+  ...
+# Subtest: dust support never erases a measured star; all image lenses preserve the optical overlay
+ok 265 - dust support never erases a measured star; all image lenses preserve the optical overlay
+  ---
+  duration_ms: 1.048292
+  type: 'test'
+  ...
+# Subtest: malformed catalogue fields, epoch, duplicate identities and invalid limits fail before rendering
+ok 266 - malformed catalogue fields, epoch, duplicate identities and invalid limits fail before rendering
+  ---
+  duration_ms: 1.298958
+  type: 'test'
+  ...
+# Subtest: recipe defaults reach unsaved controls while explicit user choices win
+ok 267 - recipe defaults reach unsaved controls while explicit user choices win
+  ---
+  duration_ms: 1.037916
+  type: 'test'
+  ...
+# Subtest: photometric recipes cannot configure the hidden depth control away from their pinned prior
+ok 268 - photometric recipes cannot configure the hidden depth control away from their pinned prior
+  ---
+  duration_ms: 0.287791
+  type: 'test'
+  ...
+# Subtest: named source weights follow source IDs and explicit diagnostic weights override
+ok 269 - named source weights follow source IDs and explicit diagnostic weights override
+  ---
+  duration_ms: 0.311
+  type: 'test'
+  ...
+# Subtest: invalid authored controls, weights and source IDs are rejected
+ok 270 - invalid authored controls, weights and source IDs are rejected
+  ---
+  duration_ms: 0.367541
+  type: 'test'
+  ...
+# Subtest: the saved emission window is explicit, validated and unavailable for sampled volumes
+ok 271 - the saved emission window is explicit, validated and unavailable for sampled volumes
+  ---
+  duration_ms: 0.474292
+  type: 'test'
+  ...
+# Subtest: known quadratic surface conditions center, local slope and thickness with declared evidence attribution
+ok 272 - known quadratic surface conditions center, local slope and thickness with declared evidence attribution
+  ---
+  duration_ms: 1.326083
+  type: 'test'
+  ...
+# Subtest: scoped features match their centers and join the background continuously without duplicated surfaces
+ok 273 - scoped features match their centers and join the background continuously without duplicated surfaces
+  ---
+  duration_ms: 1.702625
+  type: 'test'
+  ...
+# Subtest: a requested minimum thickness cannot extrude sub-resolution details into a global rod floor
+ok 274 - a requested minimum thickness cannot extrude sub-resolution details into a global rod floor
+  ---
+  duration_ms: 2.52475
+  type: 'test'
+  ...
+# Subtest: conditioning preserves numerical z-integrated projected light at multiple rays
+ok 275 - conditioning preserves numerical z-integrated projected light at multiple rays
+  ---
+  duration_ms: 11.767792
+  type: 'test'
+  ...
+# Subtest: physical ledger rejects wrong subjects, missing evidence/methods and broken source attribution
+ok 276 - physical ledger rejects wrong subjects, missing evidence/methods and broken source attribution
+  ---
+  duration_ms: 0.543333
+  type: 'test'
+  ...
+# Subtest: invalid depth frames, surfaces, pin paths and conditioning scales are rejected
+ok 277 - invalid depth frames, surfaces, pin paths and conditioning scales are rejected
+  ---
+  duration_ms: 0.312
+  type: 'test'
+  ...
+# Subtest: source-owned depth inputs load with a content pin and reject changes or escaping symlinks
+ok 278 - source-owned depth inputs load with a content pin and reject changes or escaping symlinks
+  ---
+  duration_ms: 16.531417
+  type: 'test'
+  ...
+# Subtest: fit keeps its legacy default path and the conditioned field integrates to its published projection
+ok 279 - fit keeps its legacy default path and the conditioned field integrates to its published projection
+  ---
+  duration_ms: 22.215125
+  type: 'test'
+  ...
+# Subtest: a fitted optical window has the same clipped projection and numerical XYZ integral after serialization
+ok 280 - a fitted optical window has the same clipped projection and numerical XYZ integral after serialization
+  ---
+  duration_ms: 41.0095
+  type: 'test'
+  ...
+# Subtest: finite smooth neutral field retains XYZ support and its actual z integral matches the analytic projection
+ok 281 - finite smooth neutral field retains XYZ support and its actual z integral matches the analytic projection
+  ---
+  duration_ms: 6.108375
+  type: 'test'
+  ...
+# Subtest: positive multiscale fit improves an independent irregular target and retains all unassigned and excess signal
+ok 282 - positive multiscale fit improves an independent irregular target and retains all unassigned and excess signal
+  ---
+  duration_ms: 110.91475
+  type: 'test'
+  ...
+# Subtest: depth control changes only conditional depth and thickness while preserving integrated projection and deterministic shared geometry
+ok 283 - depth control changes only conditional depth and thickness while preserving integrated projection and deterministic shared geometry
+  ---
+  duration_ms: 146.70375
+  type: 'test'
+  ...
+# Subtest: unconstrained emission stays diffuse around zero depth without a footprint-sized shell and retains its integrated light
+ok 284 - unconstrained emission stays diffuse around zero depth without a footprint-sized shell and retains its integrated light
+  ---
+  duration_ms: 81.216792
+  type: 'test'
+  ...
+# Subtest: unobserved values cannot fit components and blank targets never become a slab or stellar plane
+ok 285 - unobserved values cannot fit components and blank targets never become a slab or stellar plane
+  ---
+  duration_ms: 36.125958
+  type: 'test'
+  ...
+# Subtest: pinned image layers use native rotation, scale, translation and sky offset for every working resolution
+ok 286 - pinned image layers use native rotation, scale, translation and sky offset for every working resolution
+  ---
+  duration_ms: 32.218416
+  type: 'test'
+  ...
+# Subtest: target retains missing coverage separately from observed zero and maps complete footprint bounds without mutating inputs
+ok 287 - target retains missing coverage separately from observed zero and maps complete footprint bounds without mutating inputs
+  ---
+  duration_ms: 1.088208
+  type: 'test'
+  ...
+# Subtest: excluded sources supply neither emission nor coverage and unavailable RGB cannot influence a live source target
+ok 288 - excluded sources supply neither emission nor coverage and unavailable RGB cannot influence a live source target
+  ---
+  duration_ms: 0.616375
+  type: 'test'
+  ...
+# Subtest: delivery composites a supplied result with no historical caches and retains geometry, alpha and stars
+ok 289 - delivery composites a supplied result with no historical caches and retains geometry, alpha and stars
+  ---
+  duration_ms: 2700.842458
+  type: 'test'
+  ...
+# Subtest: composite source readiness distinguishes missing native input from changed evidence and restores through the source owner
+ok 290 - composite source readiness distinguishes missing native input from changed evidence and restores through the source owner
+  ---
+  duration_ms: 224.656625
+  type: 'test'
+  ...
+# Subtest: native rotated and scaled overlap recovers channel gains and applies them across the wide footprint
+ok 291 - native rotated and scaled overlap recovers channel gains and applies them across the wide footprint
+  ---
+  duration_ms: 28.0525
+  type: 'test'
+  ...
+# Subtest: clipped and star-dominated samples are excluded and remaining diffuse outliers cannot set the fit
+ok 292 - clipped and star-dominated samples are excluded and remaining diffuse outliers cannot set the fit
+  ---
+  duration_ms: 14.541375
+  type: 'test'
+  ...
+# Subtest: feathering uses arcseconds after rotation and preserves interior detail and original sampling
+ok 293 - feathering uses arcseconds after rotation and preserves interior detail and original sampling
+  ---
+  duration_ms: 5.545916
+  type: 'test'
+  ...
+# Subtest: source coverage, interior holes and observed black remain separate without extrapolation
+ok 294 - source coverage, interior holes and observed black remain separate without extrapolation
+  ---
+  duration_ms: 2.537417
+  type: 'test'
+  ...
+# Subtest: fit limits bound attempted display corrections and sparse or constant overlap never invents calibration
+ok 295 - fit limits bound attempted display corrections and sparse or constant overlap never invents calibration
+  ---
+  duration_ms: 23.994416
+  type: 'test'
+  ...
+# Subtest: held-out disagreement rejects a misleading fit instead of applying invented calibration
+ok 296 - held-out disagreement rejects a misleading fit instead of applying invented calibration
+  ---
+  duration_ms: 0.792958
+  type: 'test'
+  ...
+# Subtest: default overlap correction preserves exact wide outskirts and blends continuously across a tilted footprint
+ok 297 - default overlap correction preserves exact wide outskirts and blends continuously across a tilted footprint
+  ---
+  duration_ms: 32.169875
+  type: 'test'
+  ...
+# Subtest: detail fusion preserves different broad backgrounds and colors without a rectangular reference patch
+ok 298 - detail fusion preserves different broad backgrounds and colors without a rectangular reference patch
+  ---
+  duration_ms: 0.344958
+  type: 'test'
+  ...
+# Subtest: Gaussian-separated fine ridges replace wide detail while preserving its broad illumination and chromaticity
+ok 299 - Gaussian-separated fine ridges replace wide detail while preserving its broad illumination and chromaticity
+  ---
+  duration_ms: 0.47675
+  type: 'test'
+  ...
+# Subtest: detail fusion requires prepared low-pass inputs, bounds extreme detail, and keeps black distinct from missing coverage
+ok 300 - detail fusion requires prepared low-pass inputs, bounds extreme detail, and keeps black distinct from missing coverage
+  ---
+  duration_ms: 11.109625
+  type: 'test'
+  ...
+# Subtest: photometric evidence validation rejects cross-subject or repinned source snapshots
+ok 301 - photometric evidence validation rejects cross-subject or repinned source snapshots
+  ---
+  duration_ms: 3.521375
+  type: 'test'
+  ...
+# Subtest: two-scale fit retains smooth light and finite residuals, including after JSON replay
+ok 302 - two-scale fit retains smooth light and finite residuals, including after JSON replay
+  ---
+  duration_ms: 50.331875
+  type: 'test'
+  ...
+# Subtest: authored residual budget bounds the fit and omitted budgets preserve historical defaults
+ok 303 - authored residual budget bounds the fit and omitted budgets preserve historical defaults
+  ---
+  duration_ms: 14.547666
+  type: 'test'
+  ...
+# Subtest: validated envelope chroma bounds the exact round2 green-channel roundoff without accepting nonfinite colors
+ok 304 - validated envelope chroma bounds the exact round2 green-channel roundoff without accepting nonfinite colors
+  ---
+  duration_ms: 1.478375
+  type: 'test'
+  ...
+# Subtest: compiler restores missing derived layers but refuses modified evidence
+ok 305 - compiler restores missing derived layers but refuses modified evidence
+  ---
+  duration_ms: 17.915458
+  type: 'test'
+  ...
+# Subtest: retained material prepares RGB through the existing slab/compiler path with exact geometry and alpha
+ok 306 - retained material prepares RGB through the existing slab/compiler path with exact geometry and alpha
+  ---
+  duration_ms: 82.158209
+  type: 'test'
+  ...
+# Subtest: retained nonuniform material preserves intervals and rejects missing replay metadata
+ok 307 - retained nonuniform material preserves intervals and rejects missing replay metadata
+  ---
+  duration_ms: 84.564875
+  type: 'test'
+  ...
+# Subtest: retained material rejects changed pinned alpha, positions and slab metadata
+ok 308 - retained material rejects changed pinned alpha, positions and slab metadata
+  ---
+  duration_ms: 49.503541
+  type: 'test'
+  ...
+# Subtest: retained material rejects missing XYZ and nonfinite sampler results
+ok 309 - retained material rejects missing XYZ and nonfinite sampler results
+  ---
+  duration_ms: 53.66825
+  type: 'test'
+  ...
+# Subtest: real prepared site profile replaces disks with a soft core/halo and conserves every color-channel light
+ok 310 - real prepared site profile replaces disks with a soft core/halo and conserves every color-channel light
+  ---
+  duration_ms: 19.836209
+  type: 'test'
+  ...
+# Subtest: sprite contract rejects missing colors, invalid atlas pins and fake photometric compensation
+ok 311 - sprite contract rejects missing colors, invalid atlas pins and fake photometric compensation
+  ---
+  duration_ms: 13.544709
+  type: 'test'
+  ...
+# Subtest: registered union adds a real infrared-only star, retains the optical anchor and deduplicates the shared source
+ok 312 - registered union adds a real infrared-only star, retains the optical anchor and deduplicates the shared source
+  ---
+  duration_ms: 25.249416
+  type: 'test'
+  ...
+# Subtest: source exposure normalization changes selection scores only and preserves actual per-lens measured light
+ok 313 - source exposure normalization changes selection scores only and preserves actual per-lens measured light
+  ---
+  duration_ms: 15.793708
+  type: 'test'
+  ...
+# Subtest: union configuration rejects missing sources, invalid tolerances and unsupported route instead of silently falling back
+ok 314 - union configuration rejects missing sources, invalid tolerances and unsupported route instead of silently falling back
+  ---
+  duration_ms: 1.049042
+  type: 'test'
+  ...
+# Subtest: prepared star display energy matches the observed residual without opacity or color floors
+ok 315 - prepared star display energy matches the observed residual without opacity or color floors
+  ---
+  duration_ms: 1.904458
+  type: 'test'
+  ...
+# Subtest: source intensity and angular image scale independently control light and footprint
+ok 316 - source intensity and angular image scale independently control light and footprint
+  ---
+  duration_ms: 2.111166
+  type: 'test'
+  ...
+# Subtest: local smooth residual background is excluded and neighboring apertures do not claim the same pixels
+ok 317 - local smooth residual background is excluded and neighboring apertures do not claim the same pixels
+  ---
+  duration_ms: 2.236292
+  type: 'test'
+  ...
+# Subtest: new angular footprints and historical screen footprints stay unambiguous
+ok 318 - new angular footprints and historical screen footprints stay unambiguous
+  ---
+  duration_ms: 0.190167
+  type: 'test'
+  ...
+# Subtest: registered infrared photometry changes appearance while the reference catalogue and XYZ remain fixed
+ok 319 - registered infrared photometry changes appearance while the reference catalogue and XYZ remain fixed
+  ---
+  duration_ms: 12.905583
+  type: 'test'
+  ...
+# Subtest: lens materials require complete known coverage and cannot carry geometry; historical stars remain readable
+ok 320 - lens materials require complete known coverage and cannot carry geometry; historical stars remain readable
+  ---
+  duration_ms: 0.177875
+  type: 'test'
+  ...
+# Subtest: the bounded catalogue favors broad bright residual energy over sharper faint peaks without changing stellar light or depth
+ok 321 - the bounded catalogue favors broad bright residual energy over sharper faint peaks without changing stellar light or depth
+  ---
+  duration_ms: 12.168875
+  type: 'test'
+  ...
+# Subtest: equal measured light keeps stable source identity order and weak positive columns retain field lights while zero columns do not
+ok 322 - equal measured light keeps stable source identity order and weak positive columns retain field lights while zero columns do not
+  ---
+  duration_ms: 15.774167
+  type: 'test'
+  ...
+# Subtest: more than 6000 sharper faint peaks cannot preempt a bright broad star before aperture ranking
+ok 323 - more than 6000 sharper faint peaks cannot preempt a bright broad star before aperture ranking
+  ---
+  duration_ms: 574.035542
+  type: 'test'
+  ...
+# Subtest: lower background subtraction recovers observed faint emission without elevating measured dark pixels
+ok 324 - lower background subtraction recovers observed faint emission without elevating measured dark pixels
+  ---
+  duration_ms: 30.525
+  type: 'test'
+  ...
+# Subtest: angular footprint reliability suppresses a source edge while retaining internal emission and no-data
+ok 325 - angular footprint reliability suppresses a source edge while retaining internal emission and no-data
+  ---
+  duration_ms: 17.912875
+  type: 'test'
+  ...
+# Subtest: the saved Lagoon recipe fades every source boundary and the common outer window while retaining interior light
+ok 326 - the saved Lagoon recipe fades every source boundary and the common outer window while retaining interior light
+  ---
+  duration_ms: 66.656667
+  type: 'test'
+  ...
+# Subtest: target controls reject unknown sources, malformed values and unsupported switches
+ok 327 - target controls reject unknown sources, malformed values and unsupported switches
+  ---
+  duration_ms: 0.322167
+  type: 'test'
+  ...
+# Subtest: an explicitly downweighted isolated footprint has no hidden normalized-mean brightness floor
+ok 328 - an explicitly downweighted isolated footprint has no hidden normalized-mean brightness floor
+  ---
+  duration_ms: 21.285583
+  type: 'test'
+  ...
+# Subtest: an authored rotated optical window trims all source contributions without cropping observed rasters
+ok 329 - an authored rotated optical window trims all source contributions without cropping observed rasters
+  ---
+  duration_ms: 16.741959
+  type: 'test'
+  ...
+# Subtest: bake arguments reject misspelled stages rather than unexpectedly running all processing
+ok 330 - bake arguments reject misspelled stages rather than unexpectedly running all processing
+  ---
+  duration_ms: 0.636
+  type: 'test'
+  ...
+# Subtest: image-filtered bakes require explicit research opt-in
+ok 331 - image-filtered bakes require explicit research opt-in
+  ---
+  duration_ms: 0.245833
+  type: 'test'
+  ...
+# Subtest: acquisition rejects altered local sources without downloading or overwriting them
+ok 332 - acquisition rejects altered local sources without downloading or overwriting them
+  ---
+  duration_ms: 7.577167
+  type: 'test'
+  ...
+# Subtest: the saved bake closes its inputs and preserves all three accepted material treatments
+ok 333 - the saved bake closes its inputs and preserves all three accepted material treatments
+  ---
+  duration_ms: 46.719625
+  type: 'test'
+  ...
+# Subtest: benchmark image loading rejects a changed source before decoding products
+ok 334 - benchmark image loading rejects a changed source before decoding products
+  ---
+  duration_ms: 6.909583
+  type: 'test'
+  ...
+# Subtest: product writer rejects a component-map reconstruction defect
+ok 335 - product writer rejects a component-map reconstruction defect
+  ---
+  duration_ms: 0.938667
+  type: 'test'
+  ...
+# Subtest: positive component over source black stays visible with declared neutral hue
+ok 336 - positive component over source black stays visible with declared neutral hue
+  ---
+  duration_ms: 9.70275
+  type: 'test'
+  ...
+# Subtest: neutral appearance is exact and a partial constant image gains no false photographic edge
+ok 337 - neutral appearance is exact and a partial constant image gains no false photographic edge
+  ---
+  duration_ms: 5.729125
+  type: 'test'
+  ...
+# Subtest: strength deepens a real dark feature, scale selects its surroundings, and no point is brightened
+ok 338 - strength deepens a real dark feature, scale selects its surroundings, and no point is brightened
+  ---
+  duration_ms: 2.968
+  type: 'test'
+  ...
+# Subtest: the real source-column gate rejects unresolved thin emission and admits converged integration
+ok 339 - the real source-column gate rejects unresolved thin emission and admits converged integration
+  ---
+  duration_ms: 8.096
+  type: 'test'
+  ...
+# Subtest: axis validation detects aliasing that a converged front column would not catch
+ok 340 - axis validation detects aliasing that a converged front column would not catch
+  ---
+  duration_ms: 1.841792
+  type: 'test'
+  ...
+# Subtest: every reference pixel keeps the photo-master RGBA optical column inside finite Z bounds
+ok 341 - every reference pixel keeps the photo-master RGBA optical column inside finite Z bounds
+  ---
+  duration_ms: 21.114125
+  type: 'test'
+  ...
+# Subtest: overlapping scales form one coherent family with one bounded depth support
+ok 342 - overlapping scales form one coherent family with one bounded depth support
+  ---
+  duration_ms: 0.421125
+  type: 'test'
+  ...
+# Subtest: stellar placement chooses a mode and does not average separated peaks into their empty gap
+ok 343 - stellar placement chooses a mode and does not average separated peaks into their empty gap
+  ---
+  duration_ms: 0.564125
+  type: 'test'
+  ...
+# Subtest: an edge mode that cannot contain the declared support is not shifted and claimed as prior placement
+ok 344 - an edge mode that cannot contain the declared support is not shifted and claimed as prior placement
+  ---
+  duration_ms: 0.6625
+  type: 'test'
+  ...
+# Subtest: declared parents must overlap in raster support
+ok 345 - declared parents must overlap in raster support
+  ---
+  duration_ms: 0.410875
+  type: 'test'
+  ...
+# Subtest: a full 512-square connected support reports its span without argument-spread overflow
+ok 346 - a full 512-square connected support reports its span without argument-spread overflow
+  ---
+  duration_ms: 46.054917
+  type: 'test'
+  ...
+# Subtest: an empty prior falls back to one deterministic common mode without per-pixel randomness
+ok 347 - an empty prior falls back to one deterministic common mode without per-pixel randomness
+  ---
+  duration_ms: 1.242875
+  type: 'test'
+  ...
+# Subtest: physical sample axes map left-to-right and max-Y-to-first-raster-row
+ok 348 - physical sample axes map left-to-right and max-Y-to-first-raster-row
+  ---
+  duration_ms: 0.135917
+  type: 'test'
+  ...
+# Subtest: RGB plus luminance follows the same shared-opacity column contract
+ok 349 - RGB plus luminance follows the same shared-opacity column contract
+  ---
+  duration_ms: 6.633042
+  type: 'test'
+  ...
+# Subtest: app preparation rebuilds missing prepared/test/slices/x/00.webp and rejects changed textures or reference metadata
+ok 350 - app preparation rebuilds missing prepared/test/slices/x/00.webp and rejects changed textures or reference metadata
+  ---
+  duration_ms: 81.9095
+  type: 'test'
+  ...
+# Subtest: app preparation rebuilds missing prepared/test/atlases/x.webp and rejects changed textures or reference metadata
+ok 351 - app preparation rebuilds missing prepared/test/atlases/x.webp and rejects changed textures or reference metadata
+  ---
+  duration_ms: 20.944167
+  type: 'test'
+  ...
+# Subtest: placed density projection samples original voxels through the inverse model transform
+ok 352 - placed density projection samples original voxels through the inverse model transform
+  ---
+  duration_ms: 2.067166
+  type: 'test'
+  ...
+# Subtest: morphology support rejects isolated field points and retains connected extended emission
+ok 353 - morphology support rejects isolated field points and retains connected extended emission
+  ---
+  duration_ms: 90.599833
+  type: 'test'
+  ...
+# Subtest: native extraction preserves resolution, alpha signal and source pins while omitting unwanted banks
+ok 354 - native extraction preserves resolution, alpha signal and source pins while omitting unwanted banks
+  ---
+  duration_ms: 161.252209
+  type: 'test'
+  ...
+# Subtest: every source pixel is retained by compact, extended, or diffuse output
+ok 355 - every source pixel is retained by compact, extended, or diffuse output
+  ---
+  duration_ms: 5.583833
+  type: 'test'
+  ...
+# Subtest: separated extended sources receive filled connected ownership instead of sparse peaks
+ok 356 - separated extended sources receive filled connected ownership instead of sparse peaks
+  ---
+  duration_ms: 1.073292
+  type: 'test'
+  ...
+# Subtest: reconstruction preserves an asymmetric source contour and its attached thin appendage
+ok 357 - reconstruction preserves an asymmetric source contour and its attached thin appendage
+  ---
+  duration_ms: 1.256125
+  type: 'test'
+  ...
+# Subtest: point sources remain explicit compact candidates beside extended emission
+ok 358 - point sources remain explicit compact candidates beside extended emission
+  ---
+  duration_ms: 0.759083
+  type: 'test'
+  ...
+# Subtest: reconstruction revisits an earlier thin contour after the initial raster queue drains
+ok 359 - reconstruction revisits an earlier thin contour after the initial raster queue drains
+  ---
+  duration_ms: 2.043167
+  type: 'test'
+  ...
+# Subtest: explicit analysis budgets stop oversized work without partial output
+ok 360 - explicit analysis budgets stop oversized work without partial output
+  ---
+  duration_ms: 0.229291
+  type: 'test'
+  ...
+# Subtest: extended contribution parts sum pointwise to the unchanged reference sampler
+ok 361 - extended contribution parts sum pointwise to the unchanged reference sampler
+  ---
+  duration_ms: 8.281792
+  type: 'test'
+  ...
+# Subtest: extended contribution optical columns sum exactly to the reference target
+ok 362 - extended contribution optical columns sum exactly to the reference target
+  ---
+  duration_ms: 1.0215
+  type: 'test'
+  ...
+# Subtest: compact and diffuse remain separately calibrated frozen-plane inspection channels
+ok 363 - compact and diffuse remain separately calibrated frozen-plane inspection channels
+  ---
+  duration_ms: 20.763625
+  type: 'test'
+  ...
+# Subtest: part preparation refuses a basis that would refit or renormalize the reference
+ok 364 - part preparation refuses a basis that would refit or renormalize the reference
+  ---
+  duration_ms: 0.227333
+  type: 'test'
+  ...
+# Subtest: native observation resampling retains color, orientation and uncovered sky
+ok 365 - native observation resampling retains color, orientation and uncovered sky
+  ---
+  duration_ms: 9.563458
+  type: 'test'
+  ...
+# Subtest: a source that declares no coverage keeps it through resampling and into the original overlay alpha
+ok 366 - a source that declares no coverage keeps it through resampling and into the original overlay alpha
+  ---
+  duration_ms: 21.348833
+  type: 'test'
+  ...
+# Subtest: projection gate detects a missing physical ray-length correction
+ok 367 - projection gate detects a missing physical ray-length correction
+  ---
+  duration_ms: 33.916709
+  type: 'test'
+  ...
+# Subtest: selected channels map to optical space after selection and retain their exact projected colour
+ok 368 - selected channels map to optical space after selection and retain their exact projected colour
+  ---
+  duration_ms: 13.370542
+  type: 'test'
+  ...
+# Subtest: broad mode follows distinct normalized prior columns without filling their empty middle
+ok 369 - broad mode follows distinct normalized prior columns without filling their empty middle
+  ---
+  duration_ms: 16.291334
+  type: 'test'
+  ...
+# Subtest: prior Y ascends in tangent space while photograph raster rows descend
+ok 370 - prior Y ascends in tangent space while photograph raster rows descend
+  ---
+  duration_ms: 0.223
+  type: 'test'
+  ...
+# Subtest: coherent families use separated prior modes through one bounded continuous depth field
+ok 371 - coherent families use separated prior modes through one bounded continuous depth field
+  ---
+  duration_ms: 0.567083
+  type: 'test'
+  ...
+# Subtest: extended supports are finite, continuous at their C1 boundary, and thicker inside a footprint
+ok 372 - extended supports are finite, continuous at their C1 boundary, and thicker inside a footprint
+  ---
+  duration_ms: 0.498125
+  type: 'test'
+  ...
+# Subtest: invalid pointwise decomposition accounting is rejected
+ok 373 - invalid pointwise decomposition accounting is rejected
+  ---
+  duration_ms: 0.243875
+  type: 'test'
+  ...
+# Subtest: coherent local profiles report conservative cropped support for an asymmetric depth plane
+ok 374 - coherent local profiles report conservative cropped support for an asymmetric depth plane
+  ---
+  duration_ms: 0.625834
+  type: 'test'
+  ...
+# Subtest: broad mode and coherent raw-prior diffuse light retain the full model support bounds
+ok 375 - broad mode and coherent raw-prior diffuse light retain the full model support bounds
+  ---
+  duration_ms: 0.2055
+  type: 'test'
+  ...
+# Subtest: one connected component inherits a continuous inclination fitted from supported prior columns
+ok 376 - one connected component inherits a continuous inclination fitted from supported prior columns
+  ---
+  duration_ms: 0.370417
+  type: 'test'
+  ...
+# Subtest: raw prior interpolation is continuous between cell centres and keeps a unit depth integral
+ok 377 - raw prior interpolation is continuous between cell centres and keeps a unit depth integral
+  ---
+  duration_ms: 7.344417
+  type: 'test'
+  ...
+# Subtest: FITS transport reverses DOM rows exactly once and preserves signed samples
+ok 378 - FITS transport reverses DOM rows exactly once and preserves signed samples
+  ---
+  duration_ms: 5.2705
+  type: 'test'
+  ...
+# Subtest: transport rejects missing pixels, float32 overflow and structural metadata overrides
+ok 379 - transport rejects missing pixels, float32 overflow and structural metadata overrides
+  ---
+  duration_ms: 0.607
+  type: 'test'
+  ...
+# Subtest: getsf input uses shared luminance, native pixel scale and complete official header/config contract
+ok 380 - getsf input uses shared luminance, native pixel scale and complete official header/config contract
+  ---
+  duration_ms: 12.816834
+  type: 'test'
+  ...
+# Subtest: signed official getsf maps reject default import and remain unchanged with explicit preview policy
+ok 381 - signed official getsf maps reject default import and remain unchanged with explicit preview policy
+  ---
+  duration_ms: 24.417917
+  type: 'test'
+  ...
+# Subtest: direct masters retain 64 slabs per axis, physical units, fine sampler detail and shared-opacity columns
+ok 382 - direct masters retain 64 slabs per axis, physical units, fine sampler detail and shared-opacity columns
+  ---
+  duration_ms: 683.172708
+  type: 'test'
+  ...
+# Subtest: delivery reads pinned PNG masters, averages premultiplied color and maps cropped pixel edges into physical quads
+ok 383 - delivery reads pinned PNG masters, averages premultiplied color and maps cropped pixel edges into physical quads
+  ---
+  duration_ms: 64.627333
+  type: 'test'
+  ...
+# Subtest: delivery height uses physical aspect before rounding and invalid field samples are rejected
+ok 384 - delivery height uses physical aspect before rounding and invalid field samples are rejected
+  ---
+  duration_ms: 15.385041
+  type: 'test'
+  ...
+# Subtest: faint optical light survives 48/96 slab quantization with the same integrated brightness and hue
+ok 385 - faint optical light survives 48/96 slab quantization with the same integrated brightness and hue
+  ---
+  duration_ms: 469.4575
+  type: 'test'
+  ...
+# Subtest: RGB error carry preserves faint colored layers and never deposits residuals in empty support
+ok 386 - RGB error carry preserves faint colored layers and never deposits residuals in empty support
+  ---
+  duration_ms: 309.514916
+  type: 'test'
+  ...
+# Subtest: photo emission preserves column signal while particles determine depth
+ok 387 - photo emission preserves column signal while particles determine depth
+  ---
+  duration_ms: 1.11475
+  type: 'test'
+  ...
+# Subtest: optional local contrast narrows detail without changing column emission
+ok 388 - optional local contrast narrows detail without changing column emission
+  ---
+  duration_ms: 0.716042
+  type: 'test'
+  ...
+# Subtest: photo emission softly gates image edges and low-density tails
+ok 389 - photo emission softly gates image edges and low-density tails
+  ---
+  duration_ms: 0.196709
+  type: 'test'
+  ...
+# Subtest: photo emission rejects invalid density instead of producing non-finite output
+ok 390 - photo emission rejects invalid density instead of producing non-finite output
+  ---
+  duration_ms: 0.296
+  type: 'test'
+  ...
+# Subtest: master sampler retains photo frequencies finer than its depth grid
+ok 391 - master sampler retains photo frequencies finer than its depth grid
+  ---
+  duration_ms: 1.201708
+  type: 'test'
+  ...
+# Subtest: master sampler conserves optical columns and gates empty density
+ok 392 - master sampler conserves optical columns and gates empty density
+  ---
+  duration_ms: 0.194083
+  type: 'test'
+  ...
+# Subtest: compact model placement reuses exact density/alpha bytes and restores missing generated resources
+ok 393 - compact model placement reuses exact density/alpha bytes and restores missing generated resources
+  ---
+  duration_ms: 31.700625
+  type: 'test'
+  ...
+# Subtest: processing setup reads the canonical package and NOX pins without object asset dependencies
+ok 394 - processing setup reads the canonical package and NOX pins without object asset dependencies
+  ---
+  duration_ms: 3.178375
+  type: 'test'
+  ...
+# Subtest: processing setup rejects missing pins, unsupported Python and unpinned package specifications
+ok 395 - processing setup rejects missing pins, unsupported Python and unpinned package specifications
+  ---
+  duration_ms: 0.199625
+  type: 'test'
+  ...
+# Subtest: all 943 stars follow the fixed reference-image fit and occupy the unchanged source density
+ok 396 - all 943 stars follow the fixed reference-image fit and occupy the unchanged source density
+  ---
+  duration_ms: 1249.604417
+  type: 'test'
+  ...
+# Subtest: wrong reference/density, unsupported model rays and candidate-image inputs reject instead of placing or filtering stars
+ok 397 - wrong reference/density, unsupported model rays and candidate-image inputs reject instead of placing or filtering stars
+  ---
+  duration_ms: 196.985875
+  type: 'test'
+  ...
+# Subtest: the common density signal and all-light membership retain star toggle and cutoff behavior
+ok 398 - the common density signal and all-light membership retain star toggle and cutoff behavior
+  ---
+  duration_ms: 121.88625
+  type: 'test'
+  ...
+# Subtest: verification fails for missing or changed outputs and never repairs them
+ok 399 - verification fails for missing or changed outputs and never repairs them
+  ---
+  duration_ms: 40.854584
+  type: 'test'
+  ...
+# Subtest: structure input cannot silently rerun star removal when a native receipt is absent
+ok 400 - structure input cannot silently rerun star removal when a native receipt is absent
+  ---
+  duration_ms: 9.528625
+  type: 'test'
+  ...
+# Subtest: structure recipe bounds the analysis without changing source footprint
+ok 401 - structure recipe bounds the analysis without changing source footprint
+  ---
+  duration_ms: 0.270875
+  type: 'test'
+  ...
+# Subtest: highlight sprites contain actual disconnected support, never filled bounding rectangles
+ok 402 - highlight sprites contain actual disconnected support, never filled bounding rectangles
+  ---
+  duration_ms: 0.733416
+  type: 'test'
+  ...
+# Subtest: resized support preserves the exact full native image edges and registration
+ok 403 - resized support preserves the exact full native image edges and registration
+  ---
+  duration_ms: 0.111333
+  type: 'test'
+  ...
+# Subtest: atlas packing rejects support outside the real source footprint
+ok 404 - atlas packing rejects support outside the real source footprint
+  ---
+  duration_ms: 0.159834
+  type: 'test'
+  ...
+# Subtest: registration preserves asymmetric landmarks under native resampling, rotation and translation
+ok 405 - registration preserves asymmetric landmarks under native resampling, rotation and translation
+  ---
+  duration_ms: 0.826541
+  type: 'test'
+  ...
+# Subtest: registered grid retains adjusted footprints outside the original common frame
+ok 406 - registered grid retains adjusted footprints outside the original common frame
+  ---
+  duration_ms: 0.116417
+  type: 'test'
+  ...
+# Subtest: different working resolutions retain the same angular ridge location after registration and common-scale smoothing
+ok 407 - different working resolutions retain the same angular ridge location after registration and common-scale smoothing
+  ---
+  duration_ms: 66.342291
+  type: 'test'
+  ...
+# Subtest: crop boundaries and internal no-data holes do not create ridges or compact structures
+ok 408 - crop boundaries and internal no-data holes do not create ridges or compact structures
+  ---
+  duration_ms: 14.0715
+  type: 'test'
+  ...
+# Subtest: source-local normalization is stable under fixed brightness and additive background differences
+ok 409 - source-local normalization is stable under fixed brightness and additive background differences
+  ---
+  duration_ms: 110.702292
+  type: 'test'
+  ...
+# Subtest: single-band structures survive blank or uncovered other bands; repeat evidence has separate agreement
+ok 410 - single-band structures survive blank or uncovered other bands; repeat evidence has separate agreement
+  ---
+  duration_ms: 67.622375
+  type: 'test'
+  ...
+# Subtest: crossed ridge tangents are not repeated compatible evidence
+ok 411 - crossed ridge tangents are not repeated compatible evidence
+  ---
+  duration_ms: 42.01175
+  type: 'test'
+  ...
+# Subtest: all-channel agreement cannot pair different morphology channels
+ok 412 - all-channel agreement cannot pair different morphology channels
+  ---
+  duration_ms: 105.246625
+  type: 'test'
+  ...
+# Subtest: channel and source controls change fields without manufacturing coverage
+ok 413 - channel and source controls change fields without manufacturing coverage
+  ---
+  duration_ms: 83.106583
+  type: 'test'
+  ...
+# Subtest: real pinned Helix inputs produce finite reproducible registered evidence with cached reuse
+ok 414 - real pinned Helix inputs produce finite reproducible registered evidence with cached reuse # SKIP
+  ---
+  duration_ms: 0.303875
+  type: 'test'
+  ...
+# Subtest: real three-source ridge graph preserves every sampled footprint and projects onto the registered source
+ok 415 - real three-source ridge graph preserves every sampled footprint and projects onto the registered source # SKIP
+  ---
+  duration_ms: 0.245
+  type: 'test'
+  ...
+# Subtest: joint volume samples caller arcseconds and prepares nonempty retained XYZ stacks
+ok 416 - joint volume samples caller arcseconds and prepares nonempty retained XYZ stacks
+  ---
+  duration_ms: 913.002542
+  type: 'test'
+  ...
+# Subtest: joint volume rejects invalid bounds and an already-cancelled bake before sampling
+ok 417 - joint volume rejects invalid bounds and an already-cancelled bake before sampling
+  ---
+  duration_ms: 1.110208
+  type: 'test'
+  ...
+# Subtest: sphere sightlines satisfy the analytic chord, tangent and outside cases regardless of orientation
+ok 418 - sphere sightlines satisfy the analytic chord, tangent and outside cases regardless of orientation
+  ---
+  duration_ms: 0.89075
+  type: 'test'
+  ...
+# Subtest: sky position angle uses west/north axes and positive depth produces redshift in known homologous expansion
+ok 419 - sky position angle uses west/north axes and positive depth produces redshift in known homologous expansion
+  ---
+  duration_ms: 2.682625
+  type: 'test'
+  ...
+# Subtest: bipolar polar ray includes both exact outer endpoints and reflection preserves all four resolved crossings
+ok 420 - bipolar polar ray includes both exact outer endpoints and reflection preserves all four resolved crossings
+  ---
+  duration_ms: 0.571708
+  type: 'test'
+  ...
+# Subtest: fit objective ignores held-out dependent values while their diagnostic residuals change
+ok 421 - fit objective ignores held-out dependent values while their diagnostic residuals change
+  ---
+  duration_ms: 0.718791
+  type: 'test'
+  ...
+# Subtest: held-out velocities cannot change bounded-fit parameters, objective or family ranking
+ok 422 - held-out velocities cannot change bounded-fit parameters, objective or family ranking
+  ---
+  duration_ms: 126.099333
+  type: 'test'
+  ...
+# Subtest: missing modeled training rays incur the configured penalty instead of disappearing from the objective
+ok 423 - missing modeled training rays incur the configured penalty instead of disappearing from the objective
+  ---
+  duration_ms: 0.673375
+  type: 'test'
+  ...
+# Subtest: ellipsoid outline matches the independent projected ellipse and tangent rays at every image angle
+ok 424 - ellipsoid outline matches the independent projected ellipse and tangent rays at every image angle
+  ---
+  duration_ms: 0.417333
+  type: 'test'
+  ...
+# Subtest: bipolar outline is a surface envelope with line-of-sight tangency, including competing lobe maxima
+ok 425 - bipolar outline is a surface envelope with line-of-sight tangency, including competing lobe maxima
+  ---
+  duration_ms: 10.234209
+  type: 'test'
+  ...
+# Subtest: runtime controls reject both objectives disabled and nonfinite values while either objective may be disabled alone
+ok 426 - runtime controls reject both objectives disabled and nonfinite values while either objective may be disabled alone
+  ---
+  duration_ms: 0.579584
+  type: 'test'
+  ...
+# Subtest: a sphere gives the analytical position-velocity ellipse and no emission beyond its boundary
+ok 427 - a sphere gives the analytical position-velocity ellipse and no emission beyond its boundary
+  ---
+  duration_ms: 0.555584
+  type: 'test'
+  ...
+# Subtest: spherical inclination is unidentifiable; nonspherical inclination changes the asymmetric slit tilt
+ok 428 - spherical inclination is unidentifiable; nonspherical inclination changes the asymmetric slit tilt
+  ---
+  duration_ms: 0.173333
+  type: 'test'
+  ...
+# Subtest: projected extent stays fixed under depth and inclination; speed scales physical predictions
+ok 429 - projected extent stays fixed under depth and inclination; speed scales physical predictions
+  ---
+  duration_ms: 0.070167
+  type: 'test'
+  ...
+# Subtest: real source pixels calibrate to heliocentric velocities and systemic velocity is subtracted exactly once
+ok 430 - real source pixels calibrate to heliocentric velocities and systemic velocity is subtracted exactly once
+  ---
+  duration_ms: 1.785916
+  type: 'test'
+  ...
+# Subtest: readout uncertainty is separate from systemic uncertainty and not instrumental slit width
+ok 431 - readout uncertainty is separate from systemic uncertainty and not instrumental slit width
+  ---
+  duration_ms: 0.870125
+  type: 'test'
+  ...
+# Subtest: external values reject corrupt calibration, unknown frames, missing observations, and nonfinite assumptions
+ok 432 - external values reject corrupt calibration, unknown frames, missing observations, and nonfinite assumptions
+  ---
+  duration_ms: 1.483209
+  type: 'test'
+  ...
+# Subtest: source identity follows actual recipe bytes and model routes refuse non-model input
+ok 433 - source identity follows actual recipe bytes and model routes refuse non-model input
+  ---
+  duration_ms: 3.695542
+  type: 'test'
+  ...
+# Subtest: a real HTTP handoff returns validated measured points, recomputes slider predictions and preserves observed velocities
+ok 434 - a real HTTP handoff returns validated measured points, recomputes slider predictions and preserves observed velocities
+  ---
+  duration_ms: 24.3265
+  type: 'test'
+  ...
+# Subtest: publisher ASCII85 decoding preserves exact JPEG bytes and rejects incomplete source streams
+ok 435 - publisher ASCII85 decoding preserves exact JPEG bytes and rejects incomplete source streams
+  ---
+  duration_ms: 0.490083
+  type: 'test'
+  ...
+# Subtest: published offset signs and exact origin are retained without a second cosine factor or hidden recentering
+ok 436 - published offset signs and exact origin are retained without a second cosine factor or hidden recentering
+  ---
+  duration_ms: 1.700875
+  type: 'test'
+  ...
+# Subtest: published LSR centroids remain untouched despite the available source-specific heliocentric conversion
+ok 437 - published LSR centroids remain untouched despite the available source-specific heliocentric conversion
+  ---
+  duration_ms: 0.361959
+  type: 'test'
+  ...
+# Subtest: multiple components preserve the common pointing key and their own measured widths and velocities
+ok 438 - multiple components preserve the common pointing key and their own measured widths and velocities
+  ---
+  duration_ms: 0.3995
+  type: 'test'
+  ...
+# Subtest: upper limits remain intensity constraints with null velocity, width, errors, and inferred chemistry
+ok 439 - upper limits remain intensity constraints with null velocity, width, errors, and inferred chemistry
+  ---
+  duration_ms: 0.266833
+  type: 'test'
+  ...
+# Subtest: chemistry stays a separate inferred quantity and broad lines are marked without dropping observations
+ok 440 - chemistry stays a separate inferred quantity and broad lines are marked without dropping observations
+  ---
+  duration_ms: 0.366083
+  type: 'test'
+  ...
+# Subtest: malformed fields, incompatible frames, double-applied conversion and contradictory counts fail validation
+ok 441 - malformed fields, incompatible frames, double-applied conversion and contradictory counts fail validation
+  ---
+  duration_ms: 0.624459
+  type: 'test'
+  ...
+# Subtest: explicit acquisition verifies actual side effects, then replay uses the source cache without any fetch
+ok 442 - explicit acquisition verifies actual side effects, then replay uses the source cache without any fetch
+  ---
+  duration_ms: 38.06525
+  type: 'test'
+  ...
+# Subtest: HTTP 200 without the pinned bytes does not establish source acquisition
+ok 443 - HTTP 200 without the pinned bytes does not establish source acquisition
+  ---
+  duration_ms: 7.827333
+  type: 'test'
+  ...
+# Subtest: actual inspected native identities pass unchanged affine gates and reject shift, parity and scale corruption
+ok 444 - actual inspected native identities pass unchanged affine gates and reject shift, parity and scale corruption
+  ---
+  duration_ms: 33.714208
+  type: 'test'
+  ...
+# Subtest: full published native grids receive a larger bounded work budget than small previews
+ok 445 - full published native grids receive a larger bounded work budget than small previews
+  ---
+  duration_ms: 0.339834
+  type: 'test'
+  ...
+# Subtest: alignment-only missing or invalid receipt cannot launch NOX or create a worker request
+ok 446 - alignment-only missing or invalid receipt cannot launch NOX or create a worker request
+  ---
+  duration_ms: 10.793
+  type: 'test'
+  ...
+# Subtest: preservation keeps compact emission exactly and needs no NOX model or worker
+ok 447 - preservation keeps compact emission exactly and needs no NOX model or worker
+  ---
+  duration_ms: 17.447167
+  type: 'test'
+  ...
+# Subtest: the mixed M45 intake explicitly reuses exactly its four completed native sources
+ok 448 - the mixed M45 intake explicitly reuses exactly its four completed native sources
+  ---
+  duration_ms: 3.998375
+  type: 'test'
+  ...
+# Subtest: reuse rejects changed source bytes, grids, treatment and model/script signatures
+ok 449 - reuse rejects changed source bytes, grids, treatment and model/script signatures
+  ---
+  duration_ms: 1.668375
+  type: 'test'
+  ...
+# Subtest: cache recipes require immutable pins and bounded repository paths
+ok 450 - cache recipes require immutable pins and bounded repository paths
+  ---
+  duration_ms: 1.253791
+  type: 'test'
+  ...
+# Subtest: real common-grid transfer pins both originals and cannot impersonate stellar verification
+ok 451 - real common-grid transfer pins both originals and cannot impersonate stellar verification
+  ---
+  duration_ms: 4.3095
+  type: 'test'
+  ...
+# Subtest: transfer graph rejects cycles, missing references, and singular transforms
+ok 452 - transfer graph rejects cycles, missing references, and singular transforms
+  ---
+  duration_ms: 1.41075
+  type: 'test'
+  ...
+# Subtest: native AVM reference pixel, not raster centre, anchors the sky coordinates
+ok 453 - native AVM reference pixel, not raster centre, anchors the sky coordinates
+  ---
+  duration_ms: 0.619833
+  type: 'test'
+  ...
+# Subtest: Omega Centauri native stars reject the former centred AVM reference pixels
+ok 454 - Omega Centauri native stars reject the former centred AVM reference pixels
+  ---
+  duration_ms: 16.472875
+  type: 'test'
+  ...
+# Subtest: Gaussian high-pass keeps channels aligned and finds actual compact sources
+ok 455 - Gaussian high-pass keeps channels aligned and finds actual compact sources
+  ---
+  duration_ms: 6.780583
+  type: 'test'
+  ...
+# Subtest: spatially held-out stars pass a correct affine and retain an incorrect held-out identity
+ok 456 - spatially held-out stars pass a correct affine and retain an incorrect held-out identity
+  ---
+  duration_ms: 6.787458
+  type: 'test'
+  ...
+# Subtest: observation recipe rejects unpinned and malformed sky inputs
+ok 457 - observation recipe rejects unpinned and malformed sky inputs
+  ---
+  duration_ms: 1.336917
+  type: 'test'
+  ...
+# Subtest: registration measures coverage over the actual shared footprint, preserving held-out error gates
+ok 458 - registration measures coverage over the actual shared footprint, preserving held-out error gates
+  ---
+  duration_ms: 11.045458
+  type: 'test'
+  ...
+# Subtest: sampled final scene prepares every spectral star color after merging materials and retains the neutral atlas
+ok 459 - sampled final scene prepares every spectral star color after merging materials and retains the neutral atlas
+  ---
+  duration_ms: 31.397667
+  type: 'test'
+  ...
+# Subtest: registration preserves the full planned partition until compilation prunes truly empty slabs
+ok 460 - registration preserves the full planned partition until compilation prunes truly empty slabs
+  ---
+  duration_ms: 70.255458
+  type: 'test'
+  ...
+# Subtest: component registration rejects catalogue intervals that disagree with the actual retained plan
+ok 461 - component registration rejects catalogue intervals that disagree with the actual retained plan
+  ---
+  duration_ms: 54.455666
+  type: 'test'
+  ...
+# Subtest: an allegedly pruned slab with real opacity cannot be reintroduced as transparent metadata
+ok 462 - an allegedly pruned slab with real opacity cannot be reintroduced as transparent metadata
+  ---
+  duration_ms: 53.913916
+  type: 'test'
+  ...
+# Subtest: finite 3D atom projects to its numerically integrated emission and tapers in depth
+ok 463 - finite 3D atom projects to its numerically integrated emission and tapers in depth
+  ---
+  duration_ms: 3.549875
+  type: 'test'
+  ...
+# Subtest: fixed 3D supports stay inside the field and gridding adds finite nonnegative emission
+ok 464 - fixed 3D supports stay inside the field and gridding adds finite nonnegative emission
+  ---
+  duration_ms: 33.2665
+  type: 'test'
+  ...
+# Subtest: image fitting improves withheld and independently sampled pixels without moving measured or inferred geometry
+ok 465 - image fitting improves withheld and independently sampled pixels without moving measured or inferred geometry
+  ---
+  duration_ms: 144.331125
+  type: 'test'
+  ...
+# Subtest: sampled recipe rejects malformed fitting controls and unowned source/evidence identities
+ok 466 - sampled recipe rejects malformed fitting controls and unowned source/evidence identities
+  ---
+  duration_ms: 0.967458
+  type: 'test'
+  ...
+# Subtest: insufficient image coverage and malformed covered pixels fail before publishing fitted material
+ok 467 - insufficient image coverage and malformed covered pixels fail before publishing fitted material
+  ---
+  duration_ms: 30.23925
+  type: 'test'
+  ...
+# Subtest: shifted spectral crops preserve every RGBA byte on all three oriented planes
+ok 468 - shifted spectral crops preserve every RGBA byte on all three oriented planes
+  ---
+  duration_ms: 1.286875
+  type: 'test'
+  ...
+# Subtest: same-size component is copied exactly and missing or transparent planes remain transparent
+ok 469 - same-size component is copied exactly and missing or transparent planes remain transparent
+  ---
+  duration_ms: 0.159292
+  type: 'test'
+  ...
+# Subtest: nonempty pixels outside any crop edge fail instead of being clipped
+ok 470 - nonempty pixels outside any crop edge fail instead of being clipped
+  ---
+  duration_ms: 0.24725
+  type: 'test'
+  ...
+# Subtest: padding rejects resampling, reversed rows, noninteger offsets and another physical plane
+ok 471 - padding rejects resampling, reversed rows, noninteger offsets and another physical plane
+  ---
+  duration_ms: 0.104166
+  type: 'test'
+  ...
+# Subtest: plane identities and decoded raster dimensions must match
+ok 472 - plane identities and decoded raster dimensions must match
+  ---
+  duration_ms: 0.1725
+  type: 'test'
+  ...
+# Subtest: actual footprint union expands every edge on each oriented pixel grid without modifying inputs
+ok 473 - actual footprint union expands every edge on each oriented pixel grid without modifying inputs
+  ---
+  duration_ms: 0.728791
+  type: 'test'
+  ...
+# Subtest: a quantized component row beyond neutral survives in the merged layout
+ok 474 - a quantized component row beyond neutral survives in the merged layout
+  ---
+  duration_ms: 0.154583
+  type: 'test'
+  ...
+# Subtest: footprint union cannot merge different slabs, resampled pixels or offsets outside the shared grid
+ok 475 - footprint union cannot merge different slabs, resampled pixels or offsets outside the shared grid
+  ---
+  duration_ms: 0.10375
+  type: 'test'
+  ...
+# Subtest: registered footprint union retains physical slab intervals and rejects mismatched integration support
+ok 476 - registered footprint union retains physical slab intervals and rejects mismatched integration support
+  ---
+  duration_ms: 0.334375
+  type: 'test'
+  ...
+# Subtest: qualified point colors remain at finite source depths where sky footprints overlap; XY extrusion fails
+ok 477 - qualified point colors remain at finite source depths where sky footprints overlap; XY extrusion fails
+  ---
+  duration_ms: 11.541459
+  type: 'test'
+  ...
+# Subtest: uncovered finite emitters retain neutral contributions and explicit coverage
+ok 478 - uncovered finite emitters retain neutral contributions and explicit coverage
+  ---
+  duration_ms: 9.426584
+  type: 'test'
+  ...
+# Subtest: a finite diffuse atom owns one footprint color instead of repeating an image feature through its depth
+ok 479 - a finite diffuse atom owns one footprint color instead of repeating an image feature through its depth
+  ---
+  duration_ms: 8.725583
+  type: 'test'
+  ...
+# Subtest: invalid material fit lengths and invalid observed color fail before transport
+ok 480 - invalid material fit lengths and invalid observed color fail before transport
+  ---
+  duration_ms: 4.771708
+  type: 'test'
+  ...
+# Subtest: compact emitter colors regenerate the identical material without source images
+ok 481 - compact emitter colors regenerate the identical material without source images
+  ---
+  duration_ms: 6.273375
+  type: 'test'
+  ...
+# Subtest: comparison projects actual 3D RGB, not the photograph used as its target
+ok 482 - comparison projects actual 3D RGB, not the photograph used as its target
+  ---
+  duration_ms: 9.778375
+  type: 'test'
+  ...
+# Subtest: sampled bank progress never reverses when baker phase counters restart
+ok 483 - sampled bank progress never reverses when baker phase counters restart
+  ---
+  duration_ms: 0.616084
+  type: 'test'
+  ...
+# Subtest: qualified affine transform retains parity, anisotropic scales, offsets and away direction
+ok 484 - qualified affine transform retains parity, anisotropic scales, offsets and away direction
+  ---
+  duration_ms: 1.745
+  type: 'test'
+  ...
+# Subtest: source and evidence byte pins, dimensions and physical term identities are mandatory
+ok 485 - source and evidence byte pins, dimensions and physical term identities are mandatory
+  ---
+  duration_ms: 0.534709
+  type: 'test'
+  ...
+# Subtest: analytic terms and the named pulsar must reference evidence for this object
+ok 486 - analytic terms and the named pulsar must reference evidence for this object
+  ---
+  duration_ms: 0.238042
+  type: 'test'
+  ...
+# Subtest: sampled evidence rejects invalid classifications and unresolvable source attribution
+ok 487 - sampled evidence rejects invalid classifications and unresolvable source attribution
+  ---
+  duration_ms: 0.191125
+  type: 'test'
+  ...
+# Subtest: torus emission follows its declared plane and finite tube, not a spherical shell
+ok 488 - torus emission follows its declared plane and finite tube, not a spherical shell
+  ---
+  duration_ms: 0.241542
+  type: 'test'
+  ...
+# Subtest: jet orientation follows both endpoints with finite end caps
+ok 489 - jet orientation follows both endpoints with finite end caps
+  ---
+  duration_ms: 0.150958
+  type: 'test'
+  ...
+# Subtest: decoded FITS point splats preserve all positive extent and normalized mass support
+ok 490 - decoded FITS point splats preserve all positive extent and normalized mass support
+  ---
+  duration_ms: 6.509541
+  type: 'test'
+  ...
+# Subtest: two clouds on one sightline keep their empty intervening depth instead of photo extrusion
+ok 491 - two clouds on one sightline keep their empty intervening depth instead of photo extrusion
+  ---
+  duration_ms: 0.7555
+  type: 'test'
+  ...
+# Subtest: independent wind terms never alter the ejecta array and spectral mixtures remain separate
+ok 492 - independent wind terms never alter the ejecta array and spectral mixtures remain separate
+  ---
+  duration_ms: 15.916917
+  type: 'test'
+  ...
+# Subtest: nonfinite point flux cannot contaminate an otherwise valid qualified field
+ok 493 - nonfinite point flux cannot contaminate an otherwise valid qualified field
+  ---
+  duration_ms: 0.371542
+  type: 'test'
+  ...
+# Subtest: sampled cache verifies its shared FITS decoder without admitting arbitrary tools
+ok 494 - sampled cache verifies its shared FITS decoder without admitting arbitrary tools
+  ---
+  duration_ms: 6.9515
+  type: 'test'
+  ...
+# Subtest: partial ring preserves supported emission, softens its ends and removes the unobserved opposite side
+ok 495 - partial ring preserves supported emission, softens its ends and removes the unobserved opposite side
+  ---
+  duration_ms: 0.7355
+  type: 'test'
+  ...
+# Subtest: complete rings retain legacy behavior and clockwise sectors wrap at the image angle seam
+ok 496 - complete rings retain legacy behavior and clockwise sectors wrap at the image angle seam
+  ---
+  duration_ms: 1.097834
+  type: 'test'
+  ...
+# Subtest: source registration maps the complete baked neutral projection with the original Y direction
+ok 497 - source registration maps the complete baked neutral projection with the original Y direction
+  ---
+  duration_ms: 2.726958
+  type: 'test'
+  ...
+# Subtest: comparison fits only one global brightness factor and detects a moved shape
+ok 498 - comparison fits only one global brightness factor and detects a moved shape
+  ---
+  duration_ms: 7.011
+  type: 'test'
+  ...
+# Subtest: faint outer source signal remains in the residual beyond every modeled component
+ok 499 - faint outer source signal remains in the residual beyond every modeled component
+  ---
+  duration_ms: 1.768083
+  type: 'test'
+  ...
+# Subtest: empty models retain the whole missing signal and black inputs do not manufacture a fit
+ok 500 - empty models retain the whole missing signal and black inputs do not manufacture a fit
+  ---
+  duration_ms: 1.414459
+  type: 'test'
+  ...
+# Subtest: canonical expression roundtrips signed weights without changing geometry, grouping or exposure
+ok 501 - canonical expression roundtrips signed weights without changing geometry, grouping or exposure
+  ---
+  duration_ms: 1.232042
+  type: 'test'
+  ...
+# Subtest: aliases stay stable across disabled shapes, zero clears all, and a negative first term is valid
+ok 502 - aliases stay stable across disabled shapes, zero clears all, and a negative first term is valid
+  ---
+  duration_ms: 0.264375
+  type: 'test'
+  ...
+# Subtest: duplicate aliases combine before net bounds are checked, cancellation disables, small finite coefficients survive
+ok 503 - duplicate aliases combine before net bounds are checked, cancellation disables, small finite coefficients survive
+  ---
+  duration_ms: 0.755583
+  type: 'test'
+  ...
+# Subtest: unknown aliases, malformed expressions, executable text and nonfinite/out-of-range coefficients are rejected
+ok 504 - unknown aliases, malformed expressions, executable text and nonfinite/out-of-range coefficients are rejected
+  ---
+  duration_ms: 0.231917
+  type: 'test'
+  ...
+# Subtest: saved fits keep their authored values but cannot attach to different source evidence
+ok 505 - saved fits keep their authored values but cannot attach to different source evidence
+  ---
+  duration_ms: 1.055667
+  type: 'test'
+  ...
+# Subtest: invalid fit settings and unsafe paths fail before a fit enters the viewer
+ok 506 - invalid fit settings and unsafe paths fail before a fit enters the viewer
+  ---
+  duration_ms: 0.39325
+  type: 'test'
+  ...
+# Subtest: near duplicate boundaries seed one shell without multiplying its weight; distinct nested/off-center shapes remain
+ok 507 - near duplicate boundaries seed one shell without multiplying its weight; distinct nested/off-center shapes remain
+  ---
+  duration_ms: 6.57325
+  type: 'test'
+  ...
+# Subtest: shape control parser rejects nonfinite values, duplicate ownership, unknown controls and out-of-range dimensions
+ok 508 - shape control parser rejects nonfinite values, duplicate ownership, unknown controls and out-of-range dimensions
+  ---
+  duration_ms: 0.697209
+  type: 'test'
+  ...
+# Subtest: raster rotations, asymmetric placement and source pixel centers share one x-right/y-up projection
+ok 509 - raster rotations, asymmetric placement and source pixel centers share one x-right/y-up projection
+  ---
+  duration_ms: 1.349625
+  type: 'test'
+  ...
+# Subtest: weight, thickness, softness and depth alter the field while baking bounds retain complete emission without empty photo margins
+ok 510 - weight, thickness, softness and depth alter the field while baking bounds retain complete emission without empty photo margins
+  ---
+  duration_ms: 0.45175
+  type: 'test'
+  ...
+# Subtest: anisotropic clouds use one physical slice spacing rather than the same slab count on each axis
+ok 511 - anisotropic clouds use one physical slice spacing rather than the same slab count on each axis
+  ---
+  duration_ms: 0.126917
+  type: 'test'
+  ...
+# Subtest: 3D rings keep their opening through depth; signed terms carve soft cavities without negative emission
+ok 512 - 3D rings keep their opening through depth; signed terms carve soft cavities without negative emission
+  ---
+  duration_ms: 0.338292
+  type: 'test'
+  ...
+# Subtest: actual XYZ bake paints the exact neutral alpha and geometry, records pins, responds to exposure and handles empty controls
+ok 513 - actual XYZ bake paints the exact neutral alpha and geometry, records pins, responds to exposure and handles empty controls
+  ---
+  duration_ms: 12258.064625
+  type: 'test'
+  ...
+# Subtest: measured bright HIP survives missing Tycho astrometry, wins identity, and keeps blue-white measured color
+ok 514 - measured bright HIP survives missing Tycho astrometry, wins identity, and keeps blue-white measured color
+  ---
+  duration_ms: 1.498708
+  type: 'test'
+  ...
+# Subtest: scientific pin survives changed response timestamp but rejects changed photometry
+ok 515 - scientific pin survives changed response timestamp but rejects changed photometry
+  ---
+  duration_ms: 0.152416
+  type: 'test'
+  ...
+# Subtest: error responses, missing columns, invalid numbers and duplicate HIP IDs fail
+ok 516 - error responses, missing columns, invalid numbers and duplicate HIP IDs fail
+  ---
+  duration_ms: 0.205
+  type: 'test'
+  ...
+# Subtest: the shared placement replays the prepared LMC envelope layer deterministically in the model frame
+ok 517 - the shared placement replays the prepared LMC envelope layer deterministically in the model frame # SKIP The local finite LMC model named by the prepared envelope stars is not present.
+  ---
+  duration_ms: 0.373166
+  type: 'test'
+  ...
+# Subtest: selection is finite V <= 16 on covered fit pixels, and the footprint predicate is load-bearing
+ok 518 - selection is finite V <= 16 on covered fit pixels, and the footprint predicate is load-bearing # SKIP The local finite LMC model named by the prepared envelope stars is not present.
+  ---
+  duration_ms: 0.054292
+  type: 'test'
+  ...
+# Subtest: every prepared LMC star sits on positive model emission, positive envelope density and inside the baked box
+ok 519 - every prepared LMC star sits on positive model emission, positive envelope density and inside the baked box # SKIP The local finite LMC model named by the prepared envelope stars is not present.
+  ---
+  duration_ms: 0.0425
+  type: 'test'
+  ...
+# Subtest: the joint CDF guards reject rays without emission or density and never bridge a zero-support gap
+ok 520 - the joint CDF guards reject rays without emission or density and never bridge a zero-support gap # SKIP The local finite LMC model named by the prepared envelope stars is not present.
+  ---
+  duration_ms: 0.036125
+  type: 'test'
+  ...
+# Subtest: the model-owned index is what lens discovery attaches, and it is pinned to these bytes and this subject
+ok 521 - the model-owned index is what lens discovery attaches, and it is pinned to these bytes and this subject # SKIP The local finite LMC model named by the prepared envelope stars is not present.
+  ---
+  duration_ms: 0.0975
+  type: 'test'
+  ...
+# Subtest: one owner serves both bodies, and each body keeps its own catalogue columns and layer paths
+ok 522 - one owner serves both bodies, and each body keeps its own catalogue columns and layer paths # SKIP The local finite LMC model named by the prepared envelope stars is not present.
+  ---
+  duration_ms: 0.029959
+  type: 'test'
+  ...
+# Subtest: every finite star layer places its catalogue on a model whose image sits at its registered sky scale
+ok 523 - every finite star layer places its catalogue on a model whose image sits at its registered sky scale # SKIP The local finite LMC model named by the prepared envelope stars is not present.
+  ---
+  duration_ms: 0.074958
+  type: 'test'
+  ...
+# Subtest: all 943 prepared stars come from pinned measured V rows and preserve independent sky rays and native footprint
+not ok 524 - all 943 prepared stars come from pinned measured V rows and preserve independent sky rays and native footprint
+  ---
+  duration_ms: 8.79775
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4766:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open 'labs/nebula/models/lmc/clouds-observation/source/target.png'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1252:14)
+    async pinned (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4570:17)
+    async file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4587:111
+    async Promise.all (index 7)
+    async loadStarCloudModel (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4587:38)
+  ...
+# Subtest: joint CDF preserves solid-angle weighting and rejects missing cloud/density and true support gaps
+not ok 525 - joint CDF preserves solid-angle weighting and rejects missing cloud/density and true support gaps
+  ---
+  duration_ms: 0.670416
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4830:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open 'labs/nebula/models/lmc/clouds-observation/source/target.png'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1252:14)
+    async pinned (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4570:17)
+    async file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4587:111
+    async Promise.all (index 7)
+    async loadStarCloudModel (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4587:38)
+  ...
+# (node:87934) PromiseRejectionHandledWarning: Promise rejection was handled asynchronously (rejection id: 3)
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: parser rejects mismatched frames, nonfinite geometry, duplicate identifiers and invalid display values
+ok 526 - parser rejects mismatched frames, nonfinite geometry, duplicate identifiers and invalid display values
+  ---
+  duration_ms: 16.787041
+  type: 'test'
+  ...
+# Subtest: published magnitude drives a visible diameter and light hierarchy in the prepared catalogue
+ok 527 - published magnitude drives a visible diameter and light hierarchy in the prepared catalogue
+  ---
+  duration_ms: 6.066291
+  type: 'test'
+  ...
+# Subtest: actual catalogue projects through shared camera as retained CSS points, with no second east-left reflection
+ok 528 - actual catalogue projects through shared camera as retained CSS points, with no second east-left reflection
+  ---
+  duration_ms: 16.621417
+  type: 'test'
+  ...
+# Subtest: prepared stars land exactly where the prepared volume camera puts the same XYZ, at every orbit pose
+ok 529 - prepared stars land exactly where the prepared volume camera puts the same XYZ, at every orbit pose
+  ---
+  duration_ms: 33.409042
+  type: 'test'
+  ...
+# Subtest: actual prepared cloud signal and part membership govern retained star support
+ok 530 - actual prepared cloud signal and part membership govern retained star support
+  ---
+  duration_ms: 19.15675
+  type: 'test'
+  ...
+# Error: A resource generated asynchronous activity after the test ended. This activity created the error "Error: ENOENT: no such file or directory, open 'labs/nebula/models/lmc/clouds-observation/source/target.png'" which triggered an unhandledRejection event, caught by the test runner.
+# Subtest: CIC volume retains bounded mass, varies on every axis and applies one fixed color projection
+ok 531 - CIC volume retains bounded mass, varies on every axis and applies one fixed color projection
+  ---
+  duration_ms: 15.251875
+  type: 'test'
+  ...
+# Subtest: photo-constrained conversion writes source brightness independent of column mass
+ok 532 - photo-constrained conversion writes source brightness independent of column mass
+  ---
+  duration_ms: 5.211625
+  type: 'test'
+  ...
+# Subtest: pinned Bonanos (2010) rows replay deterministically into the prepared SMC stars and the model frame
+ok 533 - pinned Bonanos (2010) rows replay deterministically into the prepared SMC stars and the model frame # SKIP The local finite SMC model named by the prepared stars is not present.
+  ---
+  duration_ms: 0.337042
+  type: 'test'
+  ...
+# Subtest: footprint selection is finite V <= 16 on covered fit pixels, with nothing silently dropped
+ok 534 - footprint selection is finite V <= 16 on covered fit pixels, with nothing silently dropped # SKIP The local finite SMC model named by the prepared stars is not present.
+  ---
+  duration_ms: 0.0535
+  type: 'test'
+  ...
+# Subtest: every prepared star has positive joint emission and density support and model cutoff membership
+ok 535 - every prepared star has positive joint emission and density support and model cutoff membership # SKIP The local finite SMC model named by the prepared stars is not present.
+  ---
+  duration_ms: 0.038917
+  type: 'test'
+  ...
+# Subtest: the joint CDF guards reject rays without emission or density and never bridge a zero-support gap
+ok 536 - the joint CDF guards reject rays without emission or density and never bridge a zero-support gap # SKIP The local finite SMC model named by the prepared stars is not present.
+  ---
+  duration_ms: 0.033583
+  type: 'test'
+  ...
+# Subtest: bright catalogue stars coincide with point sources in the registered original of the model and of every lens
+ok 537 - bright catalogue stars coincide with point sources in the registered original of the model and of every lens # SKIP The local finite SMC model named by the prepared stars is not present.
+  ---
+  duration_ms: 0.0335
+  type: 'test'
+  ...
+# Subtest: each prepared layer belongs to its own model and uses the depth density that model's envelope pins
+ok 538 - each prepared layer belongs to its own model and uses the depth density that model's envelope pins # SKIP The local finite SMC model named by the prepared stars is not present.
+  ---
+  duration_ms: 0.027792
+  type: 'test'
+  ...
+# Subtest: five magnitudes carry 100 times less point light without an opacity floor
+ok 539 - five magnitudes carry 100 times less point light without an opacity floor
+  ---
+  duration_ms: 0.582625
+  type: 'test'
+  ...
+# Subtest: the same magnitude carries the same light across display colors within the available range
+ok 540 - the same magnitude carries the same light across display colors within the available range
+  ---
+  duration_ms: 0.233875
+  type: 'test'
+  ...
+# Subtest: invalid inputs reject and out-of-range bright points stay bounded
+ok 541 - invalid inputs reject and out-of-range bright points stay bounded
+  ---
+  duration_ms: 0.424792
+  type: 'test'
+  ...
+# Subtest: extracts exact xyz/mass after gas and dark records (LE)
+ok 542 - extracts exact xyz/mass after gas and dark records (LE)
+  ---
+  duration_ms: 7.839792
+  type: 'test'
+  ...
+# Subtest: extracts exact xyz/mass after gas and dark records (BE)
+ok 543 - extracts exact xyz/mass after gas and dark records (BE)
+  ---
+  duration_ms: 3.351292
+  type: 'test'
+  ...
+# Subtest: median centering reports the exact offset and preserves source order/mass
+ok 544 - median centering reports the exact offset and preserves source order/mass
+  ---
+  duration_ms: 3.791167
+  type: 'test'
+  ...
+# Subtest: header rejects unsupported precision, dimensions, extended counts and corrupt lengths
+ok 545 - header rejects unsupported precision, dimensions, extended counts and corrupt lengths
+  ---
+  duration_ms: 0.679375
+  type: 'test'
+  ...
+# Subtest: invalid ranges, source pins and selected positions fail without replacing prior output
+ok 546 - invalid ranges, source pins and selected positions fail without replacing prior output
+  ---
+  duration_ms: 5.343917
+  type: 'test'
+  ...
+# Subtest: density reconstruction follows capabilities and the exact model owner
+ok 547 - density reconstruction follows capabilities and the exact model owner
+  ---
+  duration_ms: 0.294541
+  type: 'test'
+  ...
+# Subtest: workflow state selects alignment controls, reconstruction controls and observation workspaces without DOM reads
+ok 548 - workflow state selects alignment controls, reconstruction controls and observation workspaces without DOM reads
+  ---
+  duration_ms: 0.37825
+  type: 'test'
+  ...
+# Subtest: standalone workspaces remain selectable when a historical base is absent
+ok 549 - standalone workspaces remain selectable when a historical base is absent
+  ---
+  duration_ms: 0.533708
+  type: 'test'
+  ...
+# Subtest: all camera capabilities use the same ordered controls and Model owner without pose presets
+ok 550 - all camera capabilities use the same ordered controls and Model owner without pose presets
+  ---
+  duration_ms: 7.493083
+  type: 'test'
+  ...
+# Subtest: fixed models explain missing capabilities while preserving supplied model controls
+ok 551 - fixed models explain missing capabilities while preserving supplied model controls
+  ---
+  duration_ms: 1.452458
+  type: 'test'
+  ...
+# Subtest: legacy and method-specific panels all use the shared camera and Model owner
+ok 552 - legacy and method-specific panels all use the shared camera and Model owner
+  ---
+  duration_ms: 8.335667
+  type: 'test'
+  ...
+# Subtest: only the application entrypoint may create a React root
+ok 553 - only the application entrypoint may create a React root
+  ---
+  duration_ms: 178.401542
+  type: 'test'
+  ...
+# Subtest: control portals inherit app context, preserve component state and detach through the same root
+ok 554 - control portals inherit app context, preserve component state and detach through the same root
+  ---
+  duration_ms: 332.654833
+  type: 'test'
+  ...
+# Subtest: shared appearance preserves selection callbacks and guards unsupported actions without extra controls
+ok 555 - shared appearance preserves selection callbacks and guards unsupported actions without extra controls
+  ---
+  duration_ms: 360.406417
+  type: 'test'
+  ...
+# Subtest: five-point fit recovers an offset rotated ellipse, rejects a line
+ok 556 - five-point fit recovers an offset rotated ellipse, rejects a line
+  ---
+  duration_ms: 1.461583
+  type: 'test'
+  ...
+# Subtest: automatic detection recovers an interrupted offset ellipse amid stars without a supplied center or radius
+ok 557 - automatic detection recovers an interrupted offset ellipse amid stars without a supplied center or radius
+  ---
+  duration_ms: 735.446792
+  type: 'test'
+  ...
+# Subtest: empty image and isolated stars do not manufacture nebular ellipse detections
+ok 558 - empty image and isolated stars do not manufacture nebular ellipse detections
+  ---
+  duration_ms: 49.266667
+  type: 'test'
+  ...
+# Subtest: nested ellipses are detected and grouped from pixels rather than supplied geometry
+ok 559 - nested ellipses are detected and grouped from pixels rather than supplied geometry
+  ---
+  duration_ms: 632.894334
+  type: 'test'
+  ...
+# Subtest: detected shared centers group nested projections without forcing equal orientations
+ok 560 - detected shared centers group nested projections without forcing equal orientations
+  ---
+  duration_ms: 0.204083
+  type: 'test'
+  ...
+# Subtest: geometry boundary rejects mismatched input and unbounded work settings
+ok 561 - geometry boundary rejects mismatched input and unbounded work settings
+  ---
+  duration_ms: 0.150708
+  type: 'test'
+  ...
+# Subtest: sensitivity reveals faint contours while defaults and explicit 100 percent are identical
+ok 562 - sensitivity reveals faint contours while defaults and explicit 100 percent are identical
+  ---
+  duration_ms: 252.260542
+  type: 'test'
+  ...
+# Subtest: minimum size and maximum shapes control actual proposals; settings reject invalid input
+ok 563 - minimum size and maximum shapes control actual proposals; settings reject invalid input
+  ---
+  duration_ms: 643.319042
+  type: 'test'
+  ...
+# Subtest: crossing ridges split into four supported branches and retain independent source tangents
+ok 564 - crossing ridges split into four supported branches and retain independent source tangents
+  ---
+  duration_ms: 11.296375
+  type: 'test'
+  ...
+# Subtest: unsupported gaps and no-data strips remain disconnected, including misleading unmasked scores
+ok 565 - unsupported gaps and no-data strips remain disconnected, including misleading unmasked scores
+  ---
+  duration_ms: 2.865375
+  type: 'test'
+  ...
+# Subtest: single-band ridge remains while unavailable versus eligible zero support stays distinct
+ok 566 - single-band ridge remains while unavailable versus eligible zero support stays distinct
+  ---
+  duration_ms: 2.470042
+  type: 'test'
+  ...
+# Subtest: thick supports become connected pixel-center traces and closed rings retain their loops
+ok 567 - thick supports become connected pixel-center traces and closed rings retain their loops
+  ---
+  duration_ms: 7.73825
+  type: 'test'
+  ...
+# Subtest: angular component pruning keeps short crossing branches and never creates polyline shortcuts
+ok 568 - angular component pruning keeps short crossing branches and never creates polyline shortcuts
+  ---
+  duration_ms: 3.549292
+  type: 'test'
+  ...
+# Subtest: graph rejects non-ridge combinations and invalid controls
+ok 569 - graph rejects non-ridge combinations and invalid controls
+  ---
+  duration_ms: 5.290375
+  type: 'test'
+  ...
+# Subtest: full-frame structure partition preserves faint edge emission in every RGB band
+ok 570 - full-frame structure partition preserves faint edge emission in every RGB band
+  ---
+  duration_ms: 15.538375
+  type: 'test'
+  ...
+# Subtest: directional evidence distinguishes a curved ridge from a round knot
+ok 571 - directional evidence distinguishes a curved ridge from a round knot
+  ---
+  duration_ms: 1.229791
+  type: 'test'
+  ...
+# Subtest: uncertain detail stays in the unassigned map and does not vanish
+ok 572 - uncertain detail stays in the unassigned map and does not vanish
+  ---
+  duration_ms: 1.606708
+  type: 'test'
+  ...
+# Subtest: starlet analysis and conservative assignments reconstruct nonnegative luminance
+ok 573 - starlet analysis and conservative assignments reconstruct nonnegative luminance
+  ---
+  duration_ms: 5.188625
+  type: 'test'
+  ...
+# Subtest: automatic regions distinguish a compact knot and an elongated filament deterministically
+ok 574 - automatic regions distinguish a compact knot and an elongated filament deterministically
+  ---
+  duration_ms: 6.661083
+  type: 'test'
+  ...
+# Subtest: reflection keeps boundary structure local and translated features retain coordinates
+ok 575 - reflection keeps boundary structure local and translated features retain coordinates
+  ---
+  duration_ms: 1.891083
+  type: 'test'
+  ...
+# Subtest: parent links require actual support overlap rather than bounding-box containment
+ok 576 - parent links require actual support overlap rather than bounding-box containment
+  ---
+  duration_ms: 0.11425
+  type: 'test'
+  ...
+# Subtest: deprojection integrates back to the published projected ellipse at different inclinations
+ok 577 - deprojection integrates back to the published projected ellipse at different inclinations
+  ---
+  duration_ms: 6.250792
+  type: 'test'
+  ...
+# Subtest: line-of-sight mirror is an explicit degeneracy and source pins participate in identity
+ok 578 - line-of-sight mirror is an explicit degeneracy and source pins participate in identity
+  ---
+  duration_ms: 0.32475
+  type: 'test'
+  ...
+# Subtest: conditional finite features fill the prior depth distribution instead of collapsing into its modal plane
+ok 579 - conditional finite features fill the prior depth distribution instead of collapsing into its modal plane
+  ---
+  duration_ms: 793.022833
+  type: 'test'
+  ...
+# Subtest: conditional draws reject unsupported light and thick boundary kernels instead of making midplane clumps
+ok 580 - conditional draws reject unsupported light and thick boundary kernels instead of making midplane clumps
+  ---
+  duration_ms: 0.434584
+  type: 'test'
+  ...
+# Subtest: envelope depth follows the simulation, never the image
+ok 581 - envelope depth follows the simulation, never the image
+  ---
+  duration_ms: 27.399584
+  type: 'test'
+  ...
+# Subtest: envelope projection matches the smoothed image scaled by fraction and floor adds only where the simulation exists
+ok 582 - envelope projection matches the smoothed image scaled by fraction and floor adds only where the simulation exists
+  ---
+  duration_ms: 24.793958
+  type: 'test'
+  ...
+# Subtest: chromaticity is peak-normalized, smoothed and neutral outside coverage
+ok 583 - chromaticity is peak-normalized, smoothed and neutral outside coverage
+  ---
+  duration_ms: 4.335875
+  type: 'test'
+  ...
+# Subtest: the chroma trust ramp is an authored envelope setting whose default reproduces the accepted bytes
+ok 584 - the chroma trust ramp is an authored envelope setting whose default reproduces the accepted bytes
+  ---
+  duration_ms: 3.52075
+  type: 'test'
+  ...
+# Subtest: an authored sky quantile and footprint-edge taper fix what the trust ramp alone could only trade off
+ok 585 - an authored sky quantile and footprint-edge taper fix what the trust ramp alone could only trade off
+  ---
+  duration_ms: 5.211792
+  type: 'test'
+  ...
+# Subtest: prior modes condition finite depth without changing fitted projected light or source input
+ok 586 - prior modes condition finite depth without changing fitted projected light or source input
+  ---
+  duration_ms: 3.748917
+  type: 'test'
+  ...
+# Subtest: unsupported image structures remain finite and explicit rather than silently discarded
+ok 587 - unsupported image structures remain finite and explicit rather than silently discarded
+  ---
+  duration_ms: 1.873208
+  type: 'test'
+  ...
+# Subtest: adapter projection agrees with conditioned field; default image-only fitting remains unchanged
+ok 588 - adapter projection agrees with conditioned field; default image-only fitting remains unchanged
+  ---
+  duration_ms: 24.496084
+  type: 'test'
+  ...
+# Subtest: compact XYZ regions preserve partition and distinguish overlapping near/far material; XY extrusion fails
+ok 589 - compact XYZ regions preserve partition and distinguish overlapping near/far material; XY extrusion fails
+  ---
+  duration_ms: 11.540917
+  type: 'test'
+  ...
+# Subtest: fixed overlapping depth-transmission columns recover RGB and improve independent withheld pixels
+ok 590 - fixed overlapping depth-transmission columns recover RGB and improve independent withheld pixels
+  ---
+  duration_ms: 26.075375
+  type: 'test'
+  ...
+# Subtest: holdout pixels never enter gradients and repeated columns retain their unresolved ambiguity
+ok 591 - holdout pixels never enter gradients and repeated columns retain their unresolved ambiguity
+  ---
+  duration_ms: 10.971208
+  type: 'test'
+  ...
+# Subtest: solver validates shapes, positive operator, bounded options, RGB ranges and training/validation coverage
+ok 592 - solver validates shapes, positive operator, bounded options, RGB ranges and training/validation coverage
+  ---
+  duration_ms: 2.806333
+  type: 'test'
+  ...
+# Subtest: emission processing preserves channel order, black subtraction and voxel-centre normalization
+ok 593 - emission processing preserves channel order, black subtraction and voxel-centre normalization
+  ---
+  duration_ms: 0.751958
+  type: 'test'
+  ...
+# Subtest: a ring prior retains its empty center and never paints unsupported image pixels
+ok 594 - a ring prior retains its empty center and never paints unsupported image pixels
+  ---
+  duration_ms: 6.091041
+  type: 'test'
+  ...
+# Subtest: changing the image changes emission but not the supplied depth distribution
+ok 595 - changing the image changes emission but not the supplied depth distribution
+  ---
+  duration_ms: 1.430209
+  type: 'test'
+  ...
+# Subtest: positive group prox clips peaks together, rather than averaging or independent soft thresholding
+ok 596 - positive group prox clips peaks together, rather than averaging or independent soft thresholding
+  ---
+  duration_ms: 0.5755
+  type: 'test'
+  ...
+# Subtest: all voxels belong to exactly one cylindrical group
+ok 597 - all voxels belong to exactly one cylindrical group
+  ---
+  duration_ms: 0.655834
+  type: 'test'
+  ...
+# Subtest: a projected hollow cylindrical shell recovers radial depth instead of a photograph extrusion
+ok 598 - a projected hollow cylindrical shell recovers radial depth instead of a photograph extrusion
+  ---
+  duration_ms: 27.291875
+  type: 'test'
+  ...
+# Subtest: compact matching preserves reciprocal constellation identities under frame translation
+ok 599 - compact matching preserves reciprocal constellation identities under frame translation
+  ---
+  duration_ms: 0.949542
+  type: 'test'
+  ...
+# Subtest: compact detector rejects grid mismatch and does not manufacture stars on a blank image
+ok 600 - compact detector rejects grid mismatch and does not manufacture stars on a blank image
+  ---
+  duration_ms: 9.889833
+  type: 'test'
+  ...
+# Subtest: model-only similarity recovers asymmetric structure without changing particles or target
+ok 601 - model-only similarity recovers asymmetric structure without changing particles or target
+  ---
+  duration_ms: 25.647416
+  type: 'test'
+  ...
+# Subtest: Fixed catalogue TAN inverts native publisher pixel rays
+ok 602 - Fixed catalogue TAN inverts native publisher pixel rays
+  ---
+  duration_ms: 0.679875
+  type: 'test'
+  ...
+# Subtest: Fixed catalogue SIN inverts native publisher pixel rays
+ok 603 - Fixed catalogue SIN inverts native publisher pixel rays
+  ---
+  duration_ms: 0.09525
+  type: 'test'
+  ...
+# Subtest: the chance control scales with detection density and still refuses every known-bad fixed WCS
+ok 604 - the chance control scales with detection density and still refuses every known-bad fixed WCS
+  ---
+  duration_ms: 0.214375
+  type: 'test'
+  ...
+# Subtest: physical transform order, independent axis scales and perspective use consistent dimensions
+ok 605 - physical transform order, independent axis scales and perspective use consistent dimensions
+  ---
+  duration_ms: 0.932625
+  type: 'test'
+  ...
+# Subtest: magnitude uncertainty broadens observable histogram without modifying latent particles
+ok 606 - magnitude uncertainty broadens observable histogram without modifying latent particles
+  ---
+  duration_ms: 4.668459
+  type: 'test'
+  ...
+# Subtest: uncertainty scatters sources just outside magnitude selection into observed bins
+ok 607 - uncertainty scatters sources just outside magnitude selection into observed bins
+  ---
+  duration_ms: 0.694292
+  type: 'test'
+  ...
+# Subtest: heldout counts never select parameters, amplitude or starts; empty observed cells contribute
+ok 608 - heldout counts never select parameters, amplitude or starts; empty observed cells contribute
+  ---
+  duration_ms: 17.335625
+  type: 'test'
+  ...
+# Subtest: missing footprint cells are excluded, and invalid dimensions, scales or budgets fail
+ok 609 - missing footprint cells are excluded, and invalid dimensions, scales or budgets fail
+  ---
+  duration_ms: 1.43825
+  type: 'test'
+  ...
+# Subtest: explicit reference and negative reddening floor preserve published calculation
+ok 610 - explicit reference and negative reddening floor preserve published calculation
+  ---
+  duration_ms: 0.449833
+  type: 'test'
+  ...
+# Subtest: calibration is required, validated and controls the reference distance
+ok 611 - calibration is required, validated and controls the reference distance
+  ---
+  duration_ms: 0.126458
+  type: 'test'
+  ...
+# Subtest: reject invalid photometry and ambiguous/outside matches
+ok 612 - reject invalid photometry and ambiguous/outside matches
+  ---
+  duration_ms: 0.11325
+  type: 'test'
+  ...
+# Subtest: smooth basis is an additive partition and cached projections reproduce weighted projection
+ok 613 - smooth basis is an additive partition and cached projections reproduce weighted projection
+  ---
+  duration_ms: 6.388459
+  type: 'test'
+  ...
+# Subtest: bounded weights fit training only, with geometry frozen and explicit prior
+ok 614 - bounded weights fit training only, with geometry frozen and explicit prior
+  ---
+  duration_ms: 18.509792
+  type: 'test'
+  ...
+# Subtest: unsupported octants retain unit weights; invalid options and histograms fail
+ok 615 - unsupported octants retain unit weights; invalid options and histograms fail
+  ---
+  duration_ms: 0.889625
+  type: 'test'
+  ...
+# Subtest: joint depth keeps its fixed identifier quantile in a uniform neutral source
+ok 616 - joint depth keeps its fixed identifier quantile in a uniform neutral source
+  ---
+  duration_ms: 2.369041
+  type: 'test'
+  ...
+# Subtest: archive acquisition uses injected endpoint, angular window and transport without a catalogue owner
+ok 617 - archive acquisition uses injected endpoint, angular window and transport without a catalogue owner
+  ---
+  duration_ms: 11.673042
+  type: 'test'
+  ...
+# Subtest: a marginal archive overlap cannot be promoted as a wide-field M31 image
+ok 618 - a marginal archive overlap cannot be promoted as a wide-field M31 image
+  ---
+  duration_ms: 1.288333
+  type: 'test'
+  ...
+# Subtest: rotated and RA-wrapped footprints retain partial versus complete reference extent
+ok 619 - rotated and RA-wrapped footprints retain partial versus complete reference extent
+  ---
+  duration_ms: 0.420833
+  type: 'test'
+  ...
+# Subtest: the reported ESO e0941 field also misses M24 despite its large FOV
+ok 620 - the reported ESO e0941 field also misses M24 despite its large FOV
+  ---
+  duration_ms: 0.08625
+  type: 'test'
+  ...
+# Subtest: cached FITS Source links view the exact file instead of opening the download endpoint
+ok 621 - cached FITS Source links view the exact file instead of opening the download endpoint
+  ---
+  duration_ms: 0.600542
+  type: 'test'
+  ...
+# Subtest: real source pages remain source pages; direct preview and FITS download remain independent
+ok 622 - real source pages remain source pages; direct preview and FITS download remain independent
+  ---
+  duration_ms: 0.134667
+  type: 'test'
+  ...
+# Subtest: DataLink metadata opens as browser records and cannot masquerade as an image or FITS download
+ok 623 - DataLink metadata opens as browser records and cannot masquerade as an image or FITS download
+  ---
+  duration_ms: 0.179709
+  type: 'test'
+  ...
+# Subtest: a detailed wide mosaic beats a sharper tiny crop and an unreported frame across archives
+ok 624 - a detailed wide mosaic beats a sharper tiny crop and an unreported frame across archives
+  ---
+  duration_ms: 1.022
+  type: 'test'
+  ...
+# Subtest: mask products and clearly disjoint fields cannot win with their size or sharpness
+ok 625 - mask products and clearly disjoint fields cannot win with their size or sharpness
+  ---
+  duration_ms: 0.168375
+  type: 'test'
+  ...
+# Subtest: field size and pixel sampling cap detail; missing metadata remains unreported
+ok 626 - field size and pixel sampling cap detail; missing metadata remains unreported
+  ---
+  duration_ms: 0.077084
+  type: 'test'
+  ...
+# Subtest: native image helpers preserve source pixels and positive accounting without a model
+ok 627 - native image helpers preserve source pixels and positive accounting without a model
+  ---
+  duration_ms: 6.194917
+  type: 'test'
+  ...
+# Subtest: configured worker gets its exact request and reports process failure without running NOX
+ok 628 - configured worker gets its exact request and reports process failure without running NOX
+  ---
+  duration_ms: 94.793667
+  type: 'test'
+  ...
+# Subtest: density windows preserve little-endian cells and translate only their coordinate bounds
+ok 629 - density windows preserve little-endian cells and translate only their coordinate bounds
+  ---
+  duration_ms: 1.453042
+  type: 'test'
+  ...
+# Subtest: the actual compiler default creates a bounded plan without an opt-in sampling override
+ok 630 - the actual compiler default creates a bounded plan without an opt-in sampling override
+  ---
+  duration_ms: 965.068958
+  type: 'test'
+  ...
+# Subtest: actual accepted M42 sampling bypasses optimization with its historical omission unchanged
+ok 631 - actual accepted M42 sampling bypasses optimization with its historical omission unchanged
+  ---
+  duration_ms: 13.42875
+  type: 'test'
+  ...
+# Subtest: saved planned sampling is replayed exactly and rejects a mismatching retained count
+ok 632 - saved planned sampling is replayed exactly and rejects a mismatching retained count
+  ---
+  duration_ms: 0.3305
+  type: 'test'
+  ...
+# Subtest: new authoring reserves stars before probing and cannot use explicit old sampling as a budget bypass
+ok 633 - new authoring reserves stars before probing and cannot use explicit old sampling as a budget bypass
+  ---
+  duration_ms: 0.130125
+  type: 'test'
+  ...
+# Subtest: the optimizer receives the remaining budget after retained stars, not a declaration-only 500 limit
+ok 634 - the optimizer receives the remaining budget after retained stars, not a declaration-only 500 limit
+  ---
+  duration_ms: 930.708625
+  type: 'test'
+  ...
+# Subtest: a small historical compiler replay keeps unreflected source geometry, sampling and physical intervals absent
+ok 635 - a small historical compiler replay keeps unreflected source geometry, sampling and physical intervals absent
+  ---
+  duration_ms: 415.092291
+  type: 'test'
+  ...
+# Subtest: omitted layer layout preserves the original uniform manifest and PNG bytes
+ok 636 - omitted layer layout preserves the original uniform manifest and PNG bytes
+  ---
+  duration_ms: 34.194875
+  type: 'test'
+  ...
+# Subtest: nonuniform intervals retain every reference midpoint and paint the actual integrated color
+ok 637 - nonuniform intervals retain every reference midpoint and paint the actual integrated color
+  ---
+  duration_ms: 37.772875
+  type: 'test'
+  ...
+# Subtest: layer plans reject gaps, overlaps, nonfinite values, excess layers and excessive sample counts
+ok 638 - layer plans reject gaps, overlaps, nonfinite values, excess layers and excessive sample counts
+  ---
+  duration_ms: 1.678334
+  type: 'test'
+  ...
+# Subtest: all retained stars, optical copies and wrappers consume the same element budget
+ok 639 - all retained stars, optical copies and wrappers consume the same element budget
+  ---
+  duration_ms: 0.564333
+  type: 'test'
+  ...
+# Subtest: a saved budget rejects changed geometry, hidden-point omissions and forged counters
+ok 640 - a saved budget rejects changed geometry, hidden-point omissions and forged counters
+  ---
+  duration_ms: 0.400125
+  type: 'test'
+  ...
+# Subtest: measured distance and sky direction determine physical positions without rescaling
+ok 641 - measured distance and sky direction determine physical positions without rescaling
+  ---
+  duration_ms: 0.815625
+  type: 'test'
+  ...
+# Subtest: inverse frame orientation preserves distance and handedness
+ok 642 - inverse frame orientation preserves distance and handedness
+  ---
+  duration_ms: 0.085833
+  type: 'test'
+  ...
+# Subtest: rejects missing distances, invalid sky coordinates and non-unit frames
+ok 643 - rejects missing distances, invalid sky coordinates and non-unit frames
+  ---
+  duration_ms: 0.135125
+  type: 'test'
+  ...
+# Subtest: observed angular scale follows distance, not the chosen image dimensions
+ok 644 - observed angular scale follows distance, not the chosen image dimensions
+  ---
+  duration_ms: 0.067625
+  type: 'test'
+  ...
+# Subtest: prepared reflection keeps planned intervals, sample counts and logical indices valid in the reflected frame
+ok 645 - prepared reflection keeps planned intervals, sample counts and logical indices valid in the reflected frame
+  ---
+  duration_ms: 1.844458
+  type: 'test'
+  ...
+# Subtest: model placement transports full support with invertible points and rotated normals
+ok 646 - model placement transports full support with invertible points and rotated normals
+  ---
+  duration_ms: 0.954708
+  type: 'test'
+  ...
+# Subtest: authored placement changes coordinates only, retaining every texture pin, pixel grid, UV and alpha statistic
+ok 647 - authored placement changes coordinates only, retaining every texture pin, pixel grid, UV and alpha statistic
+  ---
+  duration_ms: 0.241917
+  type: 'test'
+  ...
+# Subtest: one Earth ray retains its image coordinate at different physical depths
+ok 648 - one Earth ray retains its image coordinate at different physical depths
+  ---
+  duration_ms: 0.417583
+  type: 'test'
+  ...
+# Subtest: physical bake bounds retain every finite field corner and interior sample
+ok 649 - physical bake bounds retain every finite field corner and interior sample
+  ---
+  duration_ms: 0.681958
+  type: 'test'
+  ...
+# Subtest: emission per angular depth converts to emission per kpc without changing projected light
+ok 650 - emission per angular depth converts to emission per kpc without changing projected light
+  ---
+  duration_ms: 1.954667
+  type: 'test'
+  ...
+# Subtest: invalid observer, singular rays and reversed bounds are rejected
+ok 651 - invalid observer, singular rays and reversed bounds are rejected
+  ---
+  duration_ms: 0.224208
+  type: 'test'
+  ...
+# Subtest: one affine alignment maps the same sky point identically around different image pivots
+ok 652 - one affine alignment maps the same sky point identically around different image pivots
+  ---
+  duration_ms: 0.679333
+  type: 'test'
+  ...
+# Subtest: alignment rejects a placement missing any affine property
+ok 653 - alignment rejects a placement missing any affine property
+  ---
+  duration_ms: 0.249584
+  type: 'test'
+  ...
+# Subtest: manual placement rejects invalid controls without changing accepted state
+ok 654 - manual placement rejects invalid controls without changing accepted state
+  ---
+  duration_ms: 0.918959
+  type: 'test'
+  ...
+# Subtest: reset restores the exact prepared projective transform
+ok 655 - reset restores the exact prepared projective transform
+  ---
+  duration_ms: 0.16825
+  type: 'test'
+  ...
+# Subtest: identity registration preserves the publisher WCS footprint
+ok 656 - identity registration preserves the publisher WCS footprint
+  ---
+  duration_ms: 0.720916
+  type: 'test'
+  ...
+# Subtest: a nontrivial projective registration maps all four image corners through H
+ok 657 - a nontrivial projective registration maps all four image corners through H
+  ---
+  duration_ms: 0.2125
+  type: 'test'
+  ...
+# Subtest: rotated negative-coordinate footprint accepts either winding and tapers inward only
+ok 658 - rotated negative-coordinate footprint accepts either winding and tapers inward only
+  ---
+  duration_ms: 0.818208
+  type: 'test'
+  ...
+# Subtest: external window decoder rejects nonfinite, concave, crossing, degenerate and unknown data
+ok 659 - external window decoder rejects nonfinite, concave, crossing, degenerate and unknown data
+  ---
+  duration_ms: 0.495167
+  type: 'test'
+  ...
+# Subtest: window acts on the actual XYZ field, preserves interior material, and limits integrated projection
+ok 660 - window acts on the actual XYZ field, preserves interior material, and limits integrated projection
+  ---
+  duration_ms: 17.670834
+  type: 'test'
+  ...
+# Subtest: absent window preserves exact historical emission and retained model validation keeps the selection
+ok 661 - absent window preserves exact historical emission and retained model validation keeps the selection
+  ---
+  duration_ms: 2.921333
+  type: 'test'
+  ...
+# Subtest: tilted finite patches retain their analytic z-integrated light at independent rays
+ok 662 - tilted finite patches retain their analytic z-integrated light at independent rays
+  ---
+  duration_ms: 14.933459
+  type: 'test'
+  ...
+# Subtest: sheared support bounds and spatial buckets contain every transformed interior sample
+ok 663 - sheared support bounds and spatial buckets contain every transformed interior sample
+  ---
+  duration_ms: 2.0515
+  type: 'test'
+  ...
+# Subtest: a side projection follows a continuous tilted patch instead of unchanged vertical columns
+ok 664 - a side projection follows a continuous tilted patch instead of unchanged vertical columns
+  ---
+  duration_ms: 12.062917
+  type: 'test'
+  ...
+# Subtest: historical zero gradients preserve values while malformed and unbounded gradients are rejected
+ok 665 - historical zero gradients preserve values while malformed and unbounded gradients are rejected
+  ---
+  duration_ms: 1.683375
+  type: 'test'
+  ...
+# Subtest: finite component material retains distinct depth colors where sky footprints overlap; XY extrusion fails
+ok 666 - finite component material retains distinct depth colors where sky footprints overlap; XY extrusion fails
+  ---
+  duration_ms: 3.716666
+  type: 'test'
+  ...
+# Subtest: indexed material shares exact neutral weights and reports incomplete/black coverage
+ok 667 - indexed material shares exact neutral weights and reports incomplete/black coverage
+  ---
+  duration_ms: 3.291584
+  type: 'test'
+  ...
+# Subtest: colors stay attached to existing emitters when depth changes; coincident projections remain explicitly ambiguous
+ok 668 - colors stay attached to existing emitters when depth changes; coincident projections remain explicitly ambiguous
+  ---
+  duration_ms: 3.021458
+  type: 'test'
+  ...
+# Subtest: explicit slab offsets and quadrature spacing govern chroma and alpha-limited color
+ok 669 - explicit slab offsets and quadrature spacing govern chroma and alpha-limited color
+  ---
+  duration_ms: 1.476917
+  type: 'test'
+  ...
+# Subtest: thin displaced emission takes its own image color rather than the empty slice center
+ok 670 - thin displaced emission takes its own image color rather than the empty slice center
+  ---
+  duration_ms: 0.184792
+  type: 'test'
+  ...
+# Subtest: constant source color stays constant through every bank and missing coverage stays explicit
+ok 671 - constant source color stays constant through every bank and missing coverage stays explicit
+  ---
+  duration_ms: 0.645667
+  type: 'test'
+  ...
+# Subtest: weighted full-intensity channels remain inside the RGB transport range after floating-point division
+ok 672 - weighted full-intensity channels remain inside the RGB transport range after floating-point division
+  ---
+  duration_ms: 0.486709
+  type: 'test'
+  ...
+# Subtest: XYZ slab materials sample identical emitting coordinates and preserve component mixtures
+ok 673 - XYZ slab materials sample identical emitting coordinates and preserve component mixtures
+  ---
+  duration_ms: 0.75975
+  type: 'test'
+  ...
+# Subtest: alpha-limited slab material keeps chroma in dense slabs and neutralizes thin ones
+ok 674 - alpha-limited slab material keeps chroma in dense slabs and neutralizes thin ones
+  ---
+  duration_ms: 0.15925
+  type: 'test'
+  ...
+# Subtest: a lens channel gain scales its own chromaticity and never tints the zone the alpha limit neutralized
+ok 675 - a lens channel gain scales its own chromaticity and never tints the zone the alpha limit neutralized
+  ---
+  duration_ms: 0.518667
+  type: 'test'
+  ...
+# Subtest: a lens tone curve moves the render onto its curve, stays neutral in the faint zone, and is absent-exact
+ok 676 - a lens tone curve moves the render onto its curve, stays neutral in the faint zone, and is absent-exact
+  ---
+  duration_ms: 0.443792
+  type: 'test'
+  ...
+# Subtest: default planner deterministically caps the combined XYZ layers at 500 without dropping cells
+ok 677 - default planner deterministically caps the combined XYZ layers at 500 without dropping cells
+  ---
+  duration_ms: 399.536292
+  type: 'test'
+  ...
+# Subtest: an off-center concentrated feature receives finer groups than faint outer support
+ok 678 - an off-center concentrated feature receives finer groups than faint outer support
+  ---
+  duration_ms: 118.335208
+  type: 'test'
+  ...
+# Subtest: small complete partitions and the combined budget match an independent exhaustive displacement oracle
+ok 679 - small complete partitions and the combined budget match an independent exhaustive displacement oracle
+  ---
+  duration_ms: 1.604417
+  type: 'test'
+  ...
+# Subtest: planner rejects invalid or empty emission and responds to cancellation before and during probes
+ok 680 - planner rejects invalid or empty emission and responds to cancellation before and during probes
+  ---
+  duration_ms: 7.970166
+  type: 'test'
+  ...
+# Subtest: compiler Earth fit matches Alignment full-footprint bounds and 18px inset
+ok 681 - compiler Earth fit matches Alignment full-footprint bounds and 18px inset
+  ---
+  duration_ms: 0.786
+  type: 'test'
+  ...
+# Subtest: inspection center remains the orbit pivot without changing the user pan
+ok 682 - inspection center remains the orbit pivot without changing the user pan
+  ---
+  duration_ms: 0.098292
+  type: 'test'
+  ...
+# Subtest: prepared lab stars preserve camera-relative depth, orientation and principal offset
+ok 683 - prepared lab stars preserve camera-relative depth, orientation and principal offset
+  ---
+  duration_ms: 0.703
+  type: 'test'
+  ...
+# Subtest: default uses exact reference; subsets select owned prepared leaves and empty means empty
+ok 684 - default uses exact reference; subsets select owned prepared leaves and empty means empty
+  ---
+  duration_ms: 0.983833
+  type: 'test'
+  ...
+# Subtest: catalogue rejects ambiguous, missing, duplicated or unrelated contributions
+ok 685 - catalogue rejects ambiguous, missing, duplicated or unrelated contributions
+  ---
+  duration_ms: 0.225792
+  type: 'test'
+  ...
+# Subtest: brightness uses effective source-over contributions through axis handoffs
+ok 686 - brightness uses effective source-over contributions through axis handoffs
+  ---
+  duration_ms: 0.693458
+  type: 'test'
+  ...
+1..686
+# tests 686
+# suites 0
+# pass 664
+# fail 5
+# cancelled 0
+# skipped 17
+# todo 0
+# duration_ms 14359.153166

@@ -9,6 +9,7 @@ import type { PreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
 import { worldRotationCss } from '../navigation/world-camera-math.js';
+import type { PreparedNavigationFocus } from '../navigation/prepared-focus.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import { createPreparedUniverse } from '../universe/prepared-universe-runtime.js';
 import { logarithmicFade } from '../universe/prepared-world-context.js';
@@ -411,7 +412,7 @@ test('selecting a nebula loads its bank on demand even while it is out of view',
     resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })),
     provenance: {}, approximation: {} };
   const bank: PreparedVolumeLenses = { schema: 'cssearth-volume-lenses@1', id: 'far-nebula', defaultLens: 'optical',
-    framingRadiusUnits: 1, contextVisibility: 'independent', lenses: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
+    framingRadiusUnits: .25, contextVisibility: 'independent', lenses: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
       description: 'Prepared far nebula', sourceUrl: 'https://example.org/nebula', volume: nebula,
       brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } }] };
   const document = new FakeDocument(), stage = document.createElement();
@@ -426,11 +427,24 @@ test('selecting a nebula loads its bank on demand even while it is out of view',
     mounted.publish(far, viewport);
     expect(loadVolumeLens).not.toHaveBeenCalled();
     expect(mounted.volumeLensState(bank.id)).toBeNull();
-    // Selecting it, e.g. from the catalogue, must trigger the load without waiting for proximity.
+    expect(mounted.volumeLensFrames[bank.id]!.framingRadiusUnits).toBe(Math.hypot(1, 1, 1));
+    // Focus readiness and dataset selection share the same real loader work.
+    const readiness = mounted.ensureVolumeLens(bank.id);
     mounted.selectVolumeLens(bank.id, 'optical');
     expect(loadVolumeLens).toHaveBeenCalledExactlyOnceWith(bank.id);
-    await vi.waitFor(() => expect(mounted.volumeLensState(bank.id)).not.toBeNull());
+    await readiness;
+    expect(mounted.volumeLensState(bank.id)).not.toBeNull();
+    expect(mounted.volumeLensFrames[bank.id]!.framingRadiusUnits).toBe(.25);
     expect(mounted.volumeLensState(bank.id)!.selectedLens).toBe('optical');
+    const failure = new Error('Bank download failed');
+    const failed = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
+      resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
+      volumeLensBanks: [{ id: bank.id, frame }], loadVolumeLens: () => Promise.reject(failure) }).mount(document.createElement() as unknown as HTMLElement);
+    try {
+      await expect(failed.ensureVolumeLens(bank.id)).rejects.toBe(failure);
+      expect(failed.volumeLensState(bank.id)).toBeNull();
+      await expect(failed.ensureVolumeLens('unknown')).rejects.toThrow('Unknown prepared volume lens bank');
+    } finally { failed.destroy(); }
   } finally { mounted.destroy(); }
 });
 
@@ -539,4 +553,92 @@ test("baked stars hand the background to the plain Milky Way beyond the Sun's ne
   expect([plain.style.display, stars.style.display, stars.style.opacity]).toEqual(['none', '', '']);
   expect(leaves(stars)[0]!.parentNode!.style.transform).toBe(preparedSkyCameraTransform(world([0,0,0], [0,Math.SQRT1_2,0,Math.SQRT1_2]), viewport));
   expect(document.count).toBe(count);
+});
+
+
+test('authoritative detailed close-up gates background fetch, painting and publication without changing the NASA sky weight', async () => {
+  vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
+  const base = new URL('../../../', import.meta.url), parsecM = 3.085677581491367e16;
+  const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
+  context.volume.opacityProfile = { model: 'logarithmic-distance', fadeStartDistanceM: 1e20, fullDistanceM: 1e22, nearOpacity: 0, fullOpacity: 1 };
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
+    originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 5000 * parsecM],
+    localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: .1 * parsecM, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };
+  const small: PreparedCssVolume = { schema: 'cssearth-css-volume@1', id: 'small', frame, anchors: [],
+    stacks: (['x', 'y', 'z'] as const).map(axis => ({ axis, leaves: [{ id: `${axis}-0`, centerUnits: [0, 0, 0],
+      texturePath: `${axis}.webp`, widthPx: 1, heightPx: 1,
+      style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
+        backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
+    resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })), provenance: {}, approximation: {} };
+  const bank = (id: string): PreparedVolumeLenses => ({ schema: 'cssearth-volume-lenses@1', id, defaultLens: 'optical',
+    framingRadiusUnits: 1, contextVisibility: 'independent', lenses: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
+      description: 'Prepared fixture', sourceUrl: 'https://example.org/nebula', volume: { ...small, id },
+      brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } }] });
+  const banks = ['focus-bank', 'warm-bank', 'cold-bank'].map(bank);
+  const image: PreparedCssImageLayers = { ...small, id: 'image-bank', bankViews: small.stacks.map(stack => ({ axis: stack.axis,
+    normalUnits: stack.axis === 'x' ? [1, 0, 0] : stack.axis === 'y' ? [0, 1, 0] : [0, 0, 1], samplingStepUnits: 1 })) };
+  const loadVolumeLens = vi.fn(async (id: string) => ({ payload: banks.find(bank => bank.id === id)!, resolveResource: (path: string) => `/bank/${id}/${path}` }));
+  const loadImageLayer = vi.fn(async () => ({ payload: image, resolveResource: (path: string) => `/image/${path}` }));
+  catalogMount.mockReturnValue({ destroy() {}, select() {}, resolve: (id: string) => ({ id, detailedObjectId: id === 'catalogue-only' ? undefined : id.replace('catalogue:', '') }), publish() {}, inspect() {} });
+  const document = new FakeDocument(), stage = document.createElement();
+  const fetchResource = vi.fn<typeof fetch>(async () => new Response(new Uint8Array([1])));
+  Object.assign(document.defaultView, { fetch: fetchResource });
+  const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
+    resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
+    volumeLensBanks: banks.map(bank => ({ id: bank.id, frame })), loadVolumeLens,
+    imageLayerBanks: [{ id: image.id, frame }], loadImageLayer, catalog: { payload: {}, fadeStartDistanceM: 10, fullDistanceM: 20 },
+  }).mount(stage as unknown as HTMLElement);
+  const root = mounted.root as unknown as FakeElement;
+  const findBank = (id: string) => root.children.find(node => node.dataset.volumeLensObject === id)!;
+  const mw = root.children.find(node => node.className === 'prepared-volume-context')!;
+  const sky = root.children.find(node => node.className === 'prepared-celestial-sky')!;
+  const stellar = root.children.find(node => node.className === 'stellar-direct-points')!;
+  const focus = (id = 'catalogue:focus-bank'): PreparedNavigationFocus => ({ id, positionM: frame.originM, framingRadiusM: frame.metersPerUnit,
+    limits: { minimumDistanceM: .01 * frame.metersPerUnit, maximumDistanceM: 1e25 } });
+  const camera = (radii: number): WorldCameraPose => ({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
+    pose: { positionM: [frame.originM[0], frame.originM[1], frame.originM[2] + radii * frame.metersPerUnit], orientationXyzw: [0, 0, 0, 1] } });
+  try {
+    await mounted.ensureVolumeLens('focus-bank'); await mounted.ensureVolumeLens('warm-bank');
+    mounted.selectGalaxy('catalogue:focus-bank', focus());
+    const near = camera(6.1), savedPose = structuredClone(near);
+    mounted.publish(near, viewport);
+    expect(loadVolumeLens.mock.calls.map(([id]) => id)).toEqual(['focus-bank', 'warm-bank']);
+    expect(loadImageLayer).not.toHaveBeenCalled(); expect(fetchResource).not.toHaveBeenCalled();
+    expect(findBank('focus-bank').style.display).toBe('block');
+    expect(findBank('warm-bank').style.display).toBe('none'); expect(mw.style.display).toBe('none');
+    expect(near).toEqual(savedPose);
+    const all = (node: FakeElement): FakeElement[] => [node, ...node.children.flatMap(all)];
+    expect(all(findBank('warm-bank')).some(node => node.style.backgroundImage)).toBe(false);
+    for (const [radii, multiplier] of [[6.1, 0], [20, .5], [32, 1]] as const) {
+      mounted.publish(camera(radii), viewport);
+      if (radii > 8) { await mounted.ensureVolumeLens('cold-bank'); await mounted.ensureImageLayer(image.id); mounted.publish(camera(radii), viewport); }
+      const originalOpacity = Number(mw.dataset.volumeOpacity), alpha = Number(mw.style.opacity);
+      expect(originalOpacity).toBeGreaterThan(0); expect(originalOpacity).toBeLessThan(1);
+      const completedContribution = originalOpacity * Number(mw.children[0]!.dataset.volumeBrightness);
+      expect(alpha).toBeCloseTo(completedContribution * multiplier, 12);
+      expect((1 - alpha) * Number(sky.style.opacity)).toBeCloseTo(1 - completedContribution, 12);
+      expect(Number(sky.dataset.skyContribution)).toBeCloseTo(1 - completedContribution, 12);
+      expect(Number(stellar.style.opacity)).toBeCloseTo(STELLAR_POINTS_MAX_OPACITY * (1 - completedContribution) * multiplier, 12);
+      expect(stellar.style.display).toBe(multiplier > 0 ? 'block' : 'none');
+      mounted.setStellarPointsEnabled(false); mounted.setStellarPointsEnabled(true);
+      expect(stellar.style.display).toBe(multiplier > 0 ? 'block' : 'none');
+      const selectedOpacity = Number(findBank('focus-bank').style.opacity);
+      expect(selectedOpacity).toBeGreaterThan(0);
+      expect(Number(findBank('warm-bank').style.opacity)).toBeCloseTo(multiplier * selectedOpacity, 12);
+    }
+    const imageRoot = root.children.find(node => node.dataset.imageLayerObject === image.id)!;
+    mounted.publish(near, viewport);
+    expect(imageRoot.style.display).toBe('none');
+    const before = all(findBank('warm-bank')).map(node => ({ ...node.style }));
+    mounted.publish({ ...near, pose: { ...near.pose, orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2] } }, viewport);
+    expect(all(findBank('warm-bank')).map(node => ({ ...node.style }))).toEqual(before);
+    mounted.selectGalaxy('catalogue:image-bank', focus('catalogue:image-bank')); mounted.publish(near, viewport);
+    expect(imageRoot.style.display).toBe(''); expect(findBank('focus-bank').style.display).toBe('none');
+    mounted.selectGalaxy(null); mounted.publish(near, viewport);
+    expect(mw.style.display).toBe(''); expect(findBank('focus-bank').style.display).toBe('block');
+    mounted.selectGalaxy('catalogue-only', focus('catalogue-only')); mounted.publish(near, viewport);
+    expect(mw.style.display).toBe('');
+    expect(() => mounted.selectGalaxy('catalogue:focus-bank', focus('mismatch'))).toThrow('focus');
+  } finally { mounted.destroy(); }
 });

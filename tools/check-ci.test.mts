@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {mkdtemp,readFile,rm} from 'node:fs/promises';
+import {mkdtemp,readFile,rm,mkdir,writeFile,symlink} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {parse} from 'yaml';
@@ -17,7 +17,7 @@ test('local CI reads the actual workflow jobs in order, including strict TypeScr
  assert.equal(gate?.env.GH_TOKEN,undefined,'the workflow token is dropped locally');
  assert.match(gate?.run??'',/--added-since-last-green --report-only/,'a push to main never fails on assets');
  assert.ok(typecheck.some(step=>step.run.includes('pnpm typecheck:pr')&&step.env.NODE_OPTIONS==='--max-old-space-size=4096'));
- assert.ok(!typecheck.some(step=>step.run.includes('typecheck:tests')),'PRs skip the test-file typecheck');
+ assert.ok(!typecheck.some(step=>step.run.includes('typecheck:tests')),'test files have their own parallel compiler lane');
  assert.equal(readCiSteps(workflow,'typecheck-tests').at(-1)?.run.trim(),'pnpm typecheck:tests --extendedDiagnostics');
  assert.ok(universe.some(step=>step.run.includes('prepare-ci-inputs.mts universe')));
  assert.deepEqual([...new Set(universe.map(step=>step.env.CI_UNIVERSE_LANE))],['sources','runtime','shell','renderer']);
@@ -49,6 +49,31 @@ test('the deploy consumes installed assets, rebuilds only catalogues and rejects
  assert.match(packageFile.scripts['setup:assets']??'',/pnpm setup:asset-data/);
  assert.match(packageFile.scripts['setup:asset-data']??'',/node tools\/setup-volume-metadata\.mts/);
  assert.doesNotMatch(packageFile.scripts['prepare:deploy']??'',/prepare:(?:facilities|provenance|nebulae)(?:\s|$)/);
+});
+test('nebula application discovery runs new test filenames in place and propagates failures',async t=>{
+ const root=await mkdtemp(join(tmpdir(),'ci-native-discovery-'));
+ t.after(()=>rm(root,{recursive:true,force:true}));
+ const scripts=requireRecord(requireRecord(JSON.parse(await readFile(new URL('../package.json',import.meta.url),'utf8'))).scripts);
+ const command=requireString(scripts['test:nebula-application']);
+ await mkdir(join(root,'tools/nebula/application'),{recursive:true});
+ await symlink(new URL('../node_modules',import.meta.url).pathname,join(root,'node_modules'),'dir');
+ await writeFile(join(root,'package.json'),'{"type":"module"}');
+ for(const path of ['tools/nebula/future-boundaries.test.mts','tools/nebula-provenance-source-closure.test.mts'])
+  await writeFile(join(root,path),'import test from "node:test"; test("discovered boundary",()=>{});');
+ await writeFile(join(root,'tools/nebula/application/typed-owner.ts'),'export const value: number = 7;');
+ const future=join(root,'tools/nebula/application/future-owner.test.ts');
+ const fixture=(expected:number)=>`import test from 'node:test'; import assert from 'node:assert/strict'; import {value} from './typed-owner.js'; test('new owner discovery sentinel',()=>assert.equal(value,${expected}));`;
+ await writeFile(future,fixture(7));
+ const env={...process.env};
+ delete env.NODE_TEST_CONTEXT;
+ const run=()=>spawnSync('bash',['--noprofile','--norc','-e','-o','pipefail','-c',command],{cwd:root,encoding:'utf8',env});
+ const passed=run();
+ assert.equal(passed.status,0,passed.stdout+passed.stderr);
+ assert.match(passed.stdout,/new owner discovery sentinel/);
+ await writeFile(future,fixture(8));
+ const failed=run();
+ assert.equal(failed.status,1,failed.stdout+failed.stderr);
+ assert.match(failed.stdout,/not ok[^\n]*new owner discovery sentinel/);
 });
 test('the PR asset-origin check exercises the exact deploy build path',async()=>{
  const workflow=await readFile(new URL('../.github/workflows/nightly.yml',import.meta.url),'utf8');

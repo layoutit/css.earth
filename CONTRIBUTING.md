@@ -108,6 +108,9 @@ Both scripts need an authenticated `wrangler`. Neither ever deletes a key.
 
 ## Check your change
 
+The [CI/CD maintenance guide](docs/ci-cd.md) sets the shared **2-minute target,
+3-minute maximum** for required PR feedback and the rules for changing the pipeline.
+
 `pnpm check:pr` and `pnpm check:ci` use the same changed-path plan as GitHub,
 including test types, nebula and the production-build smoke when selected.
 The default base is `origin/main`; `--base=<ref>` changes it. Local selection
@@ -178,6 +181,11 @@ an unavailable Helix view does not qualify Helix's rendering or interaction.
 Record the missing bank and any 404s, and restore the pinned assets before
 claiming that object's interaction check. The installed-bank tamper test likewise
 requires its referenced bank to be present.
+
+Telescope family/import integration tests require the pinned astronomy toolchain
+described in [Astronomy package ownership](docs/astronomy-package-ownership.md).
+Without it, content qualification and Python-backed operations fail; that is an
+environment limitation, not a passing integration result.
 
 ## Where things live
 

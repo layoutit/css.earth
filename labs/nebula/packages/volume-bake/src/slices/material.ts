@@ -5,7 +5,8 @@ import sharp from 'sharp';
 import { encodeVolumeRaster } from './raster.ts';
 import { containedPath, sha256 } from '../compact-inputs/density-grid.ts';
 import type { VolumeImageEncoding, Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
-import type { VolumeSlices, VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
+import { validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
+import type { SlabMaterialSampling } from '@cssearth/volume-core/materials/slab-material';
 import { parseCloudAppearance, type CloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
 
 export const CLOUD_MATERIAL_METHOD = 'density-opacity-image-material@2';
@@ -20,7 +21,7 @@ export interface CloudMaterialOptions {
   slices: VolumeSlices;
   loadResource(path: string): Promise<Uint8Array>;
   /** Physical coordinates in the unchanged quad units. RGB is [0,255]; false means outside image coverage. */
-  sampleImageRgb(x: number, y: number, z: number, out: Vector3, slab: { axis: 'x' | 'y' | 'z'; pitch: number; samples: number }): boolean;
+  sampleImageRgb(x: number, y: number, z: number, out: Vector3, slab: SlabMaterialSampling): boolean;
   appearance?: CloudAppearance;
   /** A mixture of normalized 3D component colors already has a physical RGB weight; do not boost its peak again. */
   preserveMaterialIntensity?: boolean;
@@ -48,10 +49,25 @@ export async function recolorCloudSlices(options: CloudMaterialOptions): Promise
       (!Number.isInteger(encoding.quality) || encoding.quality < 1 || encoding.quality > 100)))
     throw new TypeError('Cloud material requires PNG or valid-quality WebP.');
   if (!options.slices.quads.length) throw new TypeError('Cloud material requires an accepted slice bank.');
+  const layerPlan = validateVolumeLayerSlices(options.slices);
   const coverage: CloudMaterialCoverage = { positiveAlphaTexels: 0, recoloredTexels: 0,
     outsideImageTexels: 0, blackImageTexels: 0, preservedReferenceTexels: 0 };
   const quads: VolumeSliceQuad[] = [], outputPaths = new Set<string>(), rgb: Vector3 = [0, 0, 0];
   for (const quad of options.slices.quads) {
+    const slab: SlabMaterialSampling = { axis: quad.axis, pitch: options.slices.approximation.slabPitchUnits[quad.axis],
+      samples: options.slices.approximation.samplesPerSlab };
+    if (layerPlan) {
+      const interval = quad.slab!, axial = quad.axis === 'x' ? 0 : quad.axis === 'y' ? 1 : 2;
+      const min = options.slices.boundsUnits.min[axial]!, max = options.slices.boundsUnits.max[axial]!;
+      const referencePitch = (max - min) / layerPlan.referenceSliceCounts[quad.axis], samples = layerPlan.referenceSamplesPerSlab;
+      slab.pitch = interval.end - interval.start;
+      slab.samples = interval.samples;
+      slab.sampleSpacing = referencePitch / samples;
+      slab.sampleOffsets = Array.from({ length: interval.samples }, (_, i) => {
+        const cell = interval.startCell + Math.floor(i / samples), sub = i % samples;
+        return min + (cell + .5) * referencePitch + referencePitch * ((sub + .5) / samples - .5) - quad.center[axial]!;
+      });
+    }
     const input = Buffer.from(await options.loadResource(quad.texturePath));
     if (input.length !== quad.bytes || sha256(input) !== quad.sha256) throw new TypeError(`Accepted cloud texture changed: ${quad.texturePath}.`);
     const { data: source, info } = await sharp(input).ensureAlpha().raw({ depth: 'uchar' }).toBuffer({ resolveWithObject: true });
@@ -71,8 +87,7 @@ export async function recolorCloudSlices(options: CloudMaterialOptions): Promise
       const y = origin[1] + u * (horizontal[1] - origin[1]) + v * (vertical[1] - origin[1]);
       const z = origin[2] + u * (horizontal[2] - origin[2]) + v * (vertical[2] - origin[2]);
       rgb[0] = rgb[1] = rgb[2] = 0;
-      if (!options.sampleImageRgb(x, y, z, rgb, { axis: quad.axis, pitch: options.slices.approximation.slabPitchUnits[quad.axis],
-        samples: options.slices.approximation.samplesPerSlab })) { coverage.outsideImageTexels++; continue; }
+      if (!options.sampleImageRgb(x, y, z, rgb, slab)) { coverage.outsideImageTexels++; continue; }
       if (rgb.some(value => !Number.isFinite(value) || value < 0 || value > 255))
         throw new TypeError('Cloud image samples must be finite RGB in [0,255].');
       const peak = Math.max(...rgb);

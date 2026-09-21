@@ -9,7 +9,7 @@ export interface PreparedFocusObject {
   readonly focusId: string;
   readonly name: string;
   readonly searchNames: readonly string[];
-  readonly classification: 'galaxy' | 'galaxy-cluster' | 'nebula';
+  readonly classification: 'galaxy' | 'galaxy-cluster' | 'nebula' | 'globular-cluster';
   readonly systemName: string;
   readonly route: string;
   readonly sceneHostId: string;
@@ -25,7 +25,7 @@ export function definePreparedFocus(input: unknown): PreparedFocusObject {
       typeof input.sceneHostId !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(input.sceneHostId) ||
       input.route !== `/${input.sceneHostId}/?focus=${encodeURIComponent(input.id)}` ||
       typeof input.name !== 'string' || !input.name || typeof input.systemName !== 'string' || !input.systemName ||
-      (input.classification !== 'galaxy' && input.classification !== 'galaxy-cluster' && input.classification !== 'nebula') ||
+      (input.classification !== 'galaxy' && input.classification !== 'galaxy-cluster' && input.classification !== 'nebula' && input.classification !== 'globular-cluster') ||
       !Array.isArray(input.searchNames) || !input.searchNames.length || !input.searchNames.every(name => typeof name === 'string' && name)) {
     throw new TypeError('Invalid prepared focus destination.');
   }

@@ -1,0 +1,971 @@
+{
+  "elapsedSeconds": 4.09,
+  "method": "Fixed full 800x700 canvas and all-pixel mask. RGB L1; unchanged source-total normalization before/after. Bilinear similarity, no gain fit. Bounded coordinate search at stride4; final RGB L1 evaluated over every pixel. Translation seeds: full +/-24px grid at4px intervals, stride8 objective, best3 seeds plus zero refined at stride4. Bounds +/-24px, scale .98..1.02, rotation +/-5deg; best sampled/local solution, not guaranteed global optimum.",
+  "syntheticControl": {
+    "appliedShift": [
+      3,
+      -2
+    ],
+    "before": 0.18041813155996742,
+    "recovered": {
+      "parameters": [
+        -3,
+        2,
+        1,
+        0
+      ],
+      "coarseL1": 0,
+      "normalizedL1": 0.000018555444647663342
+    }
+  },
+  "results": [
+    {
+      "version": "old",
+      "lens": "neutral",
+      "seam": "xz",
+      "dimensions": [
+        800,
+        700
+      ],
+      "a": {
+        "centroid": [
+          350.0064266846449,
+          355.77001760745884
+        ],
+        "sigmaMajor": 95.03931091269595,
+        "sigmaMinor": 85.08985207205704,
+        "angleDegrees": -49.13066179906404,
+        "mass": 5286396
+      },
+      "b": {
+        "centroid": [
+          365.96897015545807,
+          355.46853287210484
+        ],
+        "sigmaMajor": 93.85082727018796,
+        "sigmaMinor": 84.03475232316816,
+        "angleDegrees": -49.96585334983239,
+        "mass": 5326066
+      },
+      "centroidDifference": [
+        15.96254347081316,
+        -0.3014847353539949
+      ],
+      "majorScaleRatio": 0.9874948205001218,
+      "minorScaleRatio": 0.9876001694303642,
+      "angleDifferenceDegrees": -0.835191550768343,
+      "centroidCorrectionL1": 0.2360383458126251,
+      "before": 0.10579373570430688,
+      "translation": {
+        "parameters": [
+          -0.25,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.10039465863927553,
+        "normalizedL1": 0.10049603711184078
+      },
+      "similarity": {
+        "parameters": [
+          -0.25,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.10039465863927553,
+        "normalizedL1": 0.10049603711184078
+      },
+      "uncertainty": {
+        "criterion": "conditional one-parameter cost <= optimum + 0.00100; not a statistical confidence interval",
+        "ranges": [
+          [
+            -0.25,
+            -0.25
+          ],
+          [
+            -0.25,
+            -0.25
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "version": "old",
+      "lens": "neutral",
+      "seam": "yz",
+      "dimensions": [
+        800,
+        700
+      ],
+      "a": {
+        "centroid": [
+          397.6263259381392,
+          401.8625538624582
+        ],
+        "sigmaMajor": 93.46189701109002,
+        "sigmaMinor": 89.45292106956612,
+        "angleDegrees": -6.470208775133606,
+        "mass": 5582274
+      },
+      "b": {
+        "centroid": [
+          398.0670329250462,
+          385.759743974307
+        ],
+        "sigmaMajor": 93.17063280546337,
+        "sigmaMinor": 88.00766392314706,
+        "angleDegrees": -2.3133329166680996,
+        "mass": 5574753
+      },
+      "centroidDifference": [
+        0.44070698690700283,
+        -16.10280988815117
+      ],
+      "majorScaleRatio": 0.9968836048171364,
+      "minorScaleRatio": 0.9838433767266795,
+      "angleDifferenceDegrees": 4.156875858465526,
+      "centroidCorrectionL1": 0.2159553706922375,
+      "before": 0.09407192435762682,
+      "translation": {
+        "parameters": [
+          0,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.0903434776196129,
+        "normalizedL1": 0.09131007749645134
+      },
+      "similarity": {
+        "parameters": [
+          0,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.0903434776196129,
+        "normalizedL1": 0.09131007749645134
+      },
+      "uncertainty": {
+        "criterion": "conditional one-parameter cost <= optimum + 0.00100; not a statistical confidence interval",
+        "ranges": [
+          [
+            0,
+            0
+          ],
+          [
+            -0.25,
+            0.25
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "version": "old",
+      "lens": "eso1119b",
+      "seam": "xz",
+      "dimensions": [
+        800,
+        700
+      ],
+      "a": {
+        "centroid": [
+          349.6579603922409,
+          355.9975415625327
+        ],
+        "sigmaMajor": 92.83735052601119,
+        "sigmaMinor": 82.95231080126369,
+        "angleDegrees": -47.18861973337692,
+        "mass": 5179924.617399923
+      },
+      "b": {
+        "centroid": [
+          365.9382902285517,
+          355.681207741813
+        ],
+        "sigmaMajor": 91.64621130634593,
+        "sigmaMinor": 81.86899224156288,
+        "angleDegrees": -47.8909024819492,
+        "mass": 5219909.103199873
+      },
+      "centroidDifference": [
+        16.280329836310784,
+        -0.3163338207197057
+      ],
+      "majorScaleRatio": 0.9871696120912937,
+      "minorScaleRatio": 0.9869404655610352,
+      "angleDifferenceDegrees": -0.7022827485722587,
+      "centroidCorrectionL1": 0.22106274205576107,
+      "before": 0.10335238699683513,
+      "translation": {
+        "parameters": [
+          -0.25,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.09817370148743199,
+        "normalizedL1": 0.0982866508433419
+      },
+      "similarity": {
+        "parameters": [
+          -0.25,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.09817370148743199,
+        "normalizedL1": 0.0982866508433419
+      },
+      "uncertainty": {
+        "criterion": "conditional one-parameter cost <= optimum + 0.00100; not a statistical confidence interval",
+        "ranges": [
+          [
+            -0.25,
+            -0.25
+          ],
+          [
+            -0.25,
+            -0.25
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "version": "old",
+      "lens": "eso1119b",
+      "seam": "yz",
+      "dimensions": [
+        800,
+        700
+      ],
+      "a": {
+        "centroid": [
+          397.45965795753074,
+          402.3557215217105
+        ],
+        "sigmaMajor": 91.34570467038505,
+        "sigmaMinor": 87.7182351448285,
+        "angleDegrees": -6.68938330459356,
+        "mass": 5477879.9439999135
+      },
+      "b": {
+        "centroid": [
+          397.89556064471844,
+          385.9369599603437
+        ],
+        "sigmaMajor": 91.03717999217143,
+        "sigmaMinor": 86.27358360005815,
+        "angleDegrees": -2.222860490476753,
+        "mass": 5470527.823199811
+      },
+      "centroidDifference": [
+        0.4359026871877063,
+        -16.418761561366807
+      ],
+      "majorScaleRatio": 0.9966224500722075,
+      "minorScaleRatio": 0.9835307727933065,
+      "angleDifferenceDegrees": 4.466522814116786,
+      "centroidCorrectionL1": 0.20138040610872904,
+      "before": 0.09204724768477665,
+      "translation": {
+        "parameters": [
+          0,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.08868853908693972,
+        "normalizedL1": 0.0896051809063681
+      },
+      "similarity": {
+        "parameters": [
+          0,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.08868853908693972,
+        "normalizedL1": 0.0896051809063681
+      },
+      "uncertainty": {
+        "criterion": "conditional one-parameter cost <= optimum + 0.00100; not a statistical confidence interval",
+        "ranges": [
+          [
+            0,
+            0
+          ],
+          [
+            -0.25,
+            0.25
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "version": "old",
+      "lens": "eso0844a",
+      "seam": "xz",
+      "dimensions": [
+        800,
+        700
+      ],
+      "a": {
+        "centroid": [
+          349.61037451321914,
+          355.54182945265217
+        ],
+        "sigmaMajor": 94.68134119726498,
+        "sigmaMinor": 84.61778784028618,
+        "angleDegrees": -49.43266501919921,
+        "mass": 5178017.786799854
+      },
+      "b": {
+        "centroid": [
+          365.92153688301556,
+          355.23212867373866
+        ],
+        "sigmaMajor": 93.4789893229741,
+        "sigmaMinor": 83.59166417112729,
+        "angleDegrees": -50.17179399392732,
+        "mass": 5217067.940599813
+      },
+      "centroidDifference": [
+        16.31116236979642,
+        -0.3097007789135091
+      ],
+      "majorScaleRatio": 0.9873010684144637,
+      "minorScaleRatio": 0.9878734283257833,
+      "angleDifferenceDegrees": -0.7391289747280894,
+      "centroidCorrectionL1": 0.22806954301194038,
+      "before": 0.10509154123884833,
+      "translation": {
+        "parameters": [
+          -0.25,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.09977830850583706,
+        "normalizedL1": 0.09989175625476641
+      },
+      "similarity": {
+        "parameters": [
+          -0.25,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.09977830850583706,
+        "normalizedL1": 0.09989175625476641
+      },
+      "uncertainty": {
+        "criterion": "conditional one-parameter cost <= optimum + 0.00100; not a statistical confidence interval",
+        "ranges": [
+          [
+            -0.25,
+            -0.25
+          ],
+          [
+            -0.25,
+            -0.25
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "version": "old",
+      "lens": "eso0844a",
+      "seam": "yz",
+      "dimensions": [
+        800,
+        700
+      ],
+      "a": {
+        "centroid": [
+          397.30549349144434,
+          401.8976439882904
+        ],
+        "sigmaMajor": 93.04669263646544,
+        "sigmaMinor": 88.92915431085648,
+        "angleDegrees": -7.063430785311585,
+        "mass": 5475537.176799839
+      },
+      "b": {
+        "centroid": [
+          397.7515575402513,
+          385.4760918111895
+        ],
+        "sigmaMajor": 92.74870129014046,
+        "sigmaMinor": 87.42422249163049,
+        "angleDegrees": -3.1271862542095747,
+        "mass": 5468177.438199765
+      },
+      "centroidDifference": [
+        0.44606404880698847,
+        -16.421552177100864
+      ],
+      "majorScaleRatio": 0.996797399908783,
+      "minorScaleRatio": 0.9830771828329165,
+      "angleDifferenceDegrees": 3.9362445311020338,
+      "centroidCorrectionL1": 0.20801594722105282,
+      "before": 0.0933923526990095,
+      "translation": {
+        "parameters": [
+          0,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.08987258031063923,
+        "normalizedL1": 0.09085101652838905
+      },
+      "similarity": {
+        "parameters": [
+          0,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.08987258031063923,
+        "normalizedL1": 0.09085101652838905
+      },
+      "uncertainty": {
+        "criterion": "conditional one-parameter cost <= optimum + 0.00100; not a statistical confidence interval",
+        "ranges": [
+          [
+            0,
+            0
+          ],
+          [
+            -0.25,
+            0.25
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "version": "optimized",
+      "lens": "neutral",
+      "seam": "xz",
+      "dimensions": [
+        800,
+        700
+      ],
+      "a": {
+        "centroid": [
+          349.20568841566853,
+          355.8665634667417
+        ],
+        "sigmaMajor": 95.86688695680532,
+        "sigmaMinor": 86.1219703785479,
+        "angleDegrees": -46.32806453745209,
+        "mass": 5362407
+      },
+      "b": {
+        "centroid": [
+          366.3211416002387,
+          355.84109150648
+        ],
+        "sigmaMajor": 94.89264066554335,
+        "sigmaMinor": 85.31350767773863,
+        "angleDegrees": -47.566546227363844,
+        "mass": 5388296
+      },
+      "centroidDifference": [
+        17.115453184570185,
+        -0.0254719602617115
+      ],
+      "majorScaleRatio": 0.9898375098828345,
+      "minorScaleRatio": 0.9906125847184443,
+      "angleDifferenceDegrees": -1.2384816899117368,
+      "centroidCorrectionL1": 0.24168684072871796,
+      "before": 0.12498652413707272,
+      "translation": {
+        "parameters": [
+          -0.375,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.11905000328198519,
+        "normalizedL1": 0.11946323417175603
+      },
+      "similarity": {
+        "parameters": [
+          -0.375,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.11905000328198519,
+        "normalizedL1": 0.11946323417175603
+      },
+      "uncertainty": {
+        "criterion": "conditional one-parameter cost <= optimum + 0.00119; not a statistical confidence interval",
+        "ranges": [
+          [
+            -0.375,
+            -0.125
+          ],
+          [
+            -0.25,
+            -0.25
+          ],
+          [
+            0.999,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "version": "optimized",
+      "lens": "neutral",
+      "seam": "yz",
+      "dimensions": [
+        800,
+        700
+      ],
+      "a": {
+        "centroid": [
+          397.593091066362,
+          402.96972849996547
+        ],
+        "sigmaMajor": 94.12165459748606,
+        "sigmaMinor": 90.80739516665696,
+        "angleDegrees": -7.997224192515963,
+        "mass": 5657863
+      },
+      "b": {
+        "centroid": [
+          397.87827266566774,
+          385.54498284225355
+        ],
+        "sigmaMajor": 93.80367743434813,
+        "sigmaMinor": 89.5135194248101,
+        "angleDegrees": -4.50644955800141,
+        "mass": 5638561
+      },
+      "centroidDifference": [
+        0.2851815993057585,
+        -17.424745657711924
+      ],
+      "majorScaleRatio": 0.9966216364927097,
+      "minorScaleRatio": 0.9857514276290797,
+      "angleDifferenceDegrees": 3.490774634514537,
+      "centroidCorrectionL1": 0.2175045113566766,
+      "before": 0.1146546907233652,
+      "translation": {
+        "parameters": [
+          0,
+          0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.11068049330845652,
+        "normalizedL1": 0.11165856557792095
+      },
+      "similarity": {
+        "parameters": [
+          0,
+          0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.11068049330845652,
+        "normalizedL1": 0.11165856557792095
+      },
+      "uncertainty": {
+        "criterion": "conditional one-parameter cost <= optimum + 0.00111; not a statistical confidence interval",
+        "ranges": [
+          [
+            0,
+            0
+          ],
+          [
+            -0.25,
+            0.25
+          ],
+          [
+            0.999,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "version": "optimized",
+      "lens": "eso1119b",
+      "seam": "xz",
+      "dimensions": [
+        800,
+        700
+      ],
+      "a": {
+        "centroid": [
+          348.8404264555682,
+          356.10333499582697
+        ],
+        "sigmaMajor": 93.75723106576999,
+        "sigmaMinor": 84.00601905091592,
+        "angleDegrees": -44.27316541086564,
+        "mass": 5255504.852999933
+      },
+      "b": {
+        "centroid": [
+          366.30404691009835,
+          356.05381611125966
+        ],
+        "sigmaMajor": 92.76745790081176,
+        "sigmaMinor": 83.20223999951726,
+        "angleDegrees": -45.40976432409586,
+        "mass": 5281926.687399859
+      },
+      "centroidDifference": [
+        17.463620454530144,
+        -0.04951888456730558
+      ],
+      "majorScaleRatio": 0.9894432338315974,
+      "minorScaleRatio": 0.9904318873756951,
+      "angleDifferenceDegrees": -1.1365989132302161,
+      "centroidCorrectionL1": 0.2271038495502499,
+      "before": 0.12007917840015177,
+      "translation": {
+        "parameters": [
+          -0.375,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.1143281767983957,
+        "normalizedL1": 0.11472831153466405
+      },
+      "similarity": {
+        "parameters": [
+          -0.375,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.1143281767983957,
+        "normalizedL1": 0.11472831153466405
+      },
+      "uncertainty": {
+        "criterion": "conditional one-parameter cost <= optimum + 0.00114; not a statistical confidence interval",
+        "ranges": [
+          [
+            -0.375,
+            -0.125
+          ],
+          [
+            -0.5,
+            -0.25
+          ],
+          [
+            0.999,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "version": "optimized",
+      "lens": "eso1119b",
+      "seam": "yz",
+      "dimensions": [
+        800,
+        700
+      ],
+      "a": {
+        "centroid": [
+          397.4228859654032,
+          403.47034023025765
+        ],
+        "sigmaMajor": 92.06082180564914,
+        "sigmaMinor": 89.1278788451523,
+        "angleDegrees": -8.631044334871223,
+        "mass": 5552954.807999948
+      },
+      "b": {
+        "centroid": [
+          397.7072989000036,
+          385.7109977699769
+        ],
+        "sigmaMajor": 91.72455513916269,
+        "sigmaMinor": 87.84865242187685,
+        "angleDegrees": -4.666154201828294,
+        "mass": 5534213.131799823
+      },
+      "centroidDifference": [
+        0.2844129346003683,
+        -17.75934246028072
+      ],
+      "majorScaleRatio": 0.9963473423342195,
+      "minorScaleRatio": 0.9856472919601517,
+      "angleDifferenceDegrees": 3.9648901330429567,
+      "centroidCorrectionL1": 0.20529843801663494,
+      "before": 0.11017354402412256,
+      "translation": {
+        "parameters": [
+          0,
+          0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.10635553793655905,
+        "normalizedL1": 0.10727774901039394
+      },
+      "similarity": {
+        "parameters": [
+          0,
+          0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.10635553793655905,
+        "normalizedL1": 0.10727774901039394
+      },
+      "uncertainty": {
+        "criterion": "conditional one-parameter cost <= optimum + 0.00106; not a statistical confidence interval",
+        "ranges": [
+          [
+            -0.25,
+            0
+          ],
+          [
+            -0.25,
+            0.5
+          ],
+          [
+            0.999,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "version": "optimized",
+      "lens": "eso0844a",
+      "seam": "xz",
+      "dimensions": [
+        800,
+        700
+      ],
+      "a": {
+        "centroid": [
+          348.79878913082865,
+          355.64151066550767
+        ],
+        "sigmaMajor": 95.52900388040025,
+        "sigmaMinor": 85.68414938489464,
+        "angleDegrees": -46.607260649380784,
+        "mass": 5253982.726199868
+      },
+      "b": {
+        "centroid": [
+          366.28982358738483,
+          355.611838394766
+        ],
+        "sigmaMajor": 94.5379945326683,
+        "sigmaMinor": 84.911656929135,
+        "angleDegrees": -47.7641435349224,
+        "mass": 5279093.931799817
+      },
+      "centroidDifference": [
+        17.49103445655618,
+        -0.02967227074168477
+      ],
+      "majorScaleRatio": 0.9896260893814756,
+      "minorScaleRatio": 0.9909844182231466,
+      "angleDifferenceDegrees": -1.15688288554162,
+      "centroidCorrectionL1": 0.23421718262299918,
+      "before": 0.1238774224552733,
+      "translation": {
+        "parameters": [
+          -0.375,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.1179593119169893,
+        "normalizedL1": 0.11840639066505237
+      },
+      "similarity": {
+        "parameters": [
+          -0.375,
+          -0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.1179593119169893,
+        "normalizedL1": 0.11840639066505237
+      },
+      "uncertainty": {
+        "criterion": "conditional one-parameter cost <= optimum + 0.00118; not a statistical confidence interval",
+        "ranges": [
+          [
+            -0.375,
+            -0.125
+          ],
+          [
+            -0.5,
+            -0.25
+          ],
+          [
+            0.999,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "version": "optimized",
+      "lens": "eso0844a",
+      "seam": "yz",
+      "dimensions": [
+        800,
+        700
+      ],
+      "a": {
+        "centroid": [
+          397.2740654720268,
+          403.0263849456587
+        ],
+        "sigmaMajor": 93.72698785562304,
+        "sigmaMinor": 90.32004154546686,
+        "angleDegrees": -8.668017335961613,
+        "mass": 5551236.546599844
+      },
+      "b": {
+        "centroid": [
+          397.56666618733203,
+          385.2579220114578
+        ],
+        "sigmaMajor": 93.40694523774904,
+        "sigmaMinor": 88.96565536222752,
+        "angleDegrees": -5.419780461398684,
+        "mass": 5531989.493999747
+      },
+      "centroidDifference": [
+        0.292600715305241,
+        -17.768462934200898
+      ],
+      "majorScaleRatio": 0.9965853739120798,
+      "minorScaleRatio": 0.9850045885712138,
+      "angleDifferenceDegrees": 3.248236874562906,
+      "centroidCorrectionL1": 0.2118471151705653,
+      "before": 0.11369655642048106,
+      "translation": {
+        "parameters": [
+          0,
+          0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.10979998550202132,
+        "normalizedL1": 0.1107583061021469
+      },
+      "similarity": {
+        "parameters": [
+          0,
+          0.25,
+          1,
+          0
+        ],
+        "coarseL1": 0.10979998550202132,
+        "normalizedL1": 0.1107583061021469
+      },
+      "uncertainty": {
+        "criterion": "conditional one-parameter cost <= optimum + 0.00110; not a statistical confidence interval",
+        "ranges": [
+          [
+            -0.25,
+            0
+          ],
+          [
+            -0.25,
+            0.5
+          ],
+          [
+            0.999,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    }
+  ]
+}

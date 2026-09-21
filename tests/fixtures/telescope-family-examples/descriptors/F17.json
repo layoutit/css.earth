@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-telescope-product-descriptor@1",
+  "dataset": {
+    "id": "mathilde-near-msi-42826360",
+    "target": "253-mathilde",
+    "acquisition": {
+      "kind": "repository",
+      "identity": "src/objects/mathilde/source/observations/near-msi/42826360-camera.json"
+    },
+    "producingRecord": "src/objects/mathilde/source/observations/near-msi/42826360-camera.json",
+    "sourceClassifications": [
+      {
+        "term": "calibration bundle",
+        "vocabulary": "cssEarth product record",
+        "version": "1",
+        "status": "mapped"
+      }
+    ],
+    "families": [
+      "F17"
+    ],
+    "profiles": [
+      {
+        "handlerId": "f17-calibration",
+        "profileId": "near-msi-camera@1"
+      }
+    ]
+  },
+  "members": [
+    {
+      "id": "raw",
+      "path": "../../telescope-families/f17-mathilde-near-msi/m0042826360f0_2p.fit",
+      "role": "science",
+      "bytes": 273600,
+      "sha256": "c0c16f2c972f1a2b0b12acc2a22244a5ba054cf50768fb1bade203d62d04a29c",
+      "mediaType": "application/fits"
+    },
+    {
+      "id": "calibrated",
+      "path": "../../telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.fit",
+      "role": "science",
+      "bytes": 535680,
+      "sha256": "c852aeb4858a579821e724419c4cdebfb895749423c039e54e75b72986a8de8d",
+      "mediaType": "application/fits"
+    },
+    {
+      "id": "label",
+      "path": "../../telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.xml",
+      "role": "label",
+      "bytes": 15271,
+      "sha256": "399ced8980cad90e87bb692aedeac32759d8a1ebea5c9ba4ece579d7d467d52d",
+      "mediaType": "application/xml"
+    }
+  ],
+  "components": [
+    {
+      "id": "raw",
+      "name": "raw inputs",
+      "families": [
+        "F17"
+      ],
+      "locations": [
+        {
+          "memberId": "raw"
+        }
+      ],
+      "representation": {
+        "kind": "table",
+        "rows": null
+      },
+      "axes": [],
+      "columns": [],
+      "quantity": {
+        "name": "raw instrument inputs",
+        "semantics": "Exact native raw inputs; scientific interpretation stays with the reducer."
+      },
+      "calibration": {
+        "state": "raw",
+        "basis": [
+          "Pinned archive or repository inputs."
+        ]
+      },
+      "flags": [],
+      "dependencyIds": [
+        "calibration-closure"
+      ]
+    },
+    {
+      "id": "calibrated",
+      "name": "calibrated product",
+      "families": [
+        "F17"
+      ],
+      "locations": [
+        {
+          "memberId": "calibrated"
+        }
+      ],
+      "representation": {
+        "kind": "table",
+        "rows": null
+      },
+      "axes": [],
+      "columns": [],
+      "quantity": {
+        "name": "calibrated owner product",
+        "semantics": "Owner-specific output; no cross-instrument calibration equivalence is claimed."
+      },
+      "calibration": {
+        "state": "archive-calibrated",
+        "basis": [
+          "Pinned archive calibrated product."
+        ]
+      },
+      "flags": [],
+      "dependencyIds": [
+        "calibration-closure"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "calibration-closure",
+      "role": "raw/support/calibration closure",
+      "memberIds": [
+        "raw",
+        "label",
+        "calibrated"
+      ],
+      "componentIds": [
+        "raw",
+        "calibrated"
+      ],
+      "requiredFor": [
+        "inspect-components",
+        "export-bundle",
+        "run-reducer"
+      ],
+      "evidence": "Every member remains pinned; the reducer owns how calibration members apply."
+    }
+  ],
+  "issues": []
+}

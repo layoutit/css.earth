@@ -1,0 +1,42 @@
+[
+  {
+    "packet": "renderer-accounting",
+    "durationMs": 83452,
+    "turns": 1,
+    "successful": true,
+    "completeSentinel": true,
+    "emptyTools": true,
+    "emptyMcp": true,
+    "sourceDrift": []
+  },
+  {
+    "packet": "authoring-replay",
+    "durationMs": 57587,
+    "turns": 1,
+    "successful": true,
+    "completeSentinel": true,
+    "emptyTools": true,
+    "emptyMcp": true,
+    "sourceDrift": []
+  },
+  {
+    "packet": "delivery-guard",
+    "durationMs": 63241,
+    "turns": 1,
+    "successful": true,
+    "completeSentinel": true,
+    "emptyTools": true,
+    "emptyMcp": true,
+    "sourceDrift": []
+  },
+  {
+    "packet": "ci-transport",
+    "durationMs": 63657,
+    "turns": 1,
+    "successful": true,
+    "completeSentinel": true,
+    "emptyTools": true,
+    "emptyMcp": true,
+    "sourceDrift": []
+  }
+]

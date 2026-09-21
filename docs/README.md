@@ -9,6 +9,7 @@ For a body's sources, processing, evidence and known problems, read its
 
 | Topic | Guide |
 | --- | --- |
+| PR feedback budget, check selection, failure recovery and deployment | [CI/CD maintenance](ci-cd.md) |
 | Galaxies, LMC image lenses and extragalactic datasets | [Galaxies and the nearby universe](galaxies/README.md) |
 | Nebula reconstruction, spectral lenses and reproducible delivery | [Prepared nebulae](nebulae/README.md) |
 | Recording sources and evidence | [Provenance contract](provenance/CONTRACT.md) |
@@ -21,6 +22,7 @@ For a body's sources, processing, evidence and known problems, read its
 | Querying VO archives, selecting bounded science products and retaining acquisition evidence | [VO observation access](vo-observation-access.md) |
 | Which upstream packages own a mechanical boundary here, and which contracts stay ours | [Astronomy package ownership](astronomy-package-ownership.md) |
 | One example picture per telescope, each made from a product that telescope's toolkit produced here | [Telescope examples](telescope-examples.md) |
+| Pinned sources, public commands and retained outputs for the 18 telescope data families | [Telescope family examples](telescope-family-examples/README.md) |
 | Exoplanet light curves to maps: eigencurve fitting and its checks | [Eclipse mapping](eclipse-mapping.md) |
 | JWST images to sky band composites: MAST programs, the re-run level-3 stage, its oracle and depth from a model | [JWST imaging](jwst-imaging.md) |
 | What JWST's public archive holds by observing mode, what this project can already reduce, and which shipped objects JWST has observed | [JWST ledger](jwst-ledger.md) |

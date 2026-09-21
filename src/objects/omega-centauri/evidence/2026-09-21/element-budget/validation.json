@@ -1,0 +1,1319 @@
+{
+  "schema": "cssearth-omega-element-budget-evidence@1",
+  "recordedAt": "2026-09-20T23:05:13.168Z",
+  "baseRevision": "0e22ec624e42986944cd914c7ddb88c84e3ef958",
+  "testedState": "Base revision plus sourcePins; tests and captures precede the commit that retains this report. Original field fit is reused; new bank qualification is recorded separately.",
+  "sourcePins": [
+    {
+      "path": ".github/workflows/universe.yml",
+      "bytes": 36948,
+      "sha256": "80927298ee9103f682640c41e6dab4052a839f43a6516f2293fdf8c577ecf5f1"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/application/delivery/compact-compiler.ts",
+      "bytes": 1362,
+      "sha256": "ceae17acf80fe487e1a5e5923d38a5671e5409ae986a5b80b2319aa62a002067"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/application/delivery/compact-sampled.ts",
+      "bytes": 7348,
+      "sha256": "efa3fa10cac440fe2a4dd8a38283315a7fe58410e498c2a98c22f659385c56ee"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/preparation/css-volume.ts",
+      "bytes": 407,
+      "sha256": "ff2e403521e695afd4b1ced22b177e888c8220024e30c4a8ff3117fe2c4a3616"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/compiler/bake.test.ts",
+      "bytes": 6532,
+      "sha256": "ce026d64be3724ec2af7c3e18d0385084aa84d425f3da9f677e71ab26c5b652c"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/compiler/bake.ts",
+      "bytes": 824,
+      "sha256": "1b7a185027c89f8f3bd529e6c791eec551b047881ed2995d468b313b6323da12"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compact-inputs/compiler.ts",
+      "bytes": 8788,
+      "sha256": "2b788e4cb4f2b7b85ac6e9134457f540db4940d7f929e06beef82546a4c8be20"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compact-inputs/sampled.ts",
+      "bytes": 12102,
+      "sha256": "c5c733bcc6225cef08279c6a876bd8391181951b598069a2834ca6b88cefc745"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compiler/bake.ts",
+      "bytes": 21310,
+      "sha256": "004bbf282306ea47aa37abed065f5118663d4de18783c51b5ecaa6c3aea24579"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compiler/compiler-sampling.test.ts",
+      "bytes": 7824,
+      "sha256": "9c93e885ec7096aa60dedd3444af2e97887811b50fa85b9fb06bcbd26e521c21"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/package.json",
+      "bytes": 4100,
+      "sha256": "767f04fabfceab60608e9ee5fedf637392ee026b3ec5066ff9e59dbdb01a35af"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/contracts/compiler-bake.ts",
+      "bytes": 12864,
+      "sha256": "f85da67f5a3ea68a529ae0b449c9a83e991a9b37a926ec54604991a71cd1a4b8"
+    },
+    {
+      "path": "src/objects/omega-centauri/object.json",
+      "bytes": 1116,
+      "sha256": "e709e55c5ec0ad4f4846303cffec0d6c34c235554a69e5a8481535e9465e4255"
+    },
+    {
+      "path": "src/objects/omega-centauri/prepared-assets.json",
+      "bytes": 10592,
+      "sha256": "ac43536da6c0b558e221253a673b14c30dcecd61d5a504c38936ef307351a448"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/bake-inputs.json.gz",
+      "bytes": 2229420,
+      "sha256": "c9f2535b13f4b4745179ec53b63240df1207ef7f38a4ea34dff76cba50a74d68"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/delivery.json",
+      "bytes": 2428,
+      "sha256": "d1e34564e98eae6ebe9d8d59b8cfd4ebe19c20e0c14f8279c72444f96faf36a5"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/manifest.json",
+      "bytes": 11285,
+      "sha256": "4f77c2b73967a4ef7f164842b0b46ea5156ab690851a3bcd7047b5f3f49bdacd"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/presentation.json",
+      "bytes": 6277,
+      "sha256": "3096d25d13618cb24f18e731c8d8980ed424b9acb13792ff1439d090ccea85f8"
+    },
+    {
+      "path": "src/renderers/css/volume/prepared-volume-lenses.test.ts",
+      "bytes": 27841,
+      "sha256": "1890c38e736381678d411c69a111bc628d6f06c008cd72786e1cca656543e759"
+    },
+    {
+      "path": "tests/objects/browser/omega-centauri/native-focus-browser.mts",
+      "bytes": 10829,
+      "sha256": "97554907fc6fb9519ba76eda26527a09187bdf8d7c0c37157aab3fe79710c009"
+    },
+    {
+      "path": "tools/nebula/application/backend.ts",
+      "bytes": 974,
+      "sha256": "b70550d2f3db3d5a41125425cbf0556f50468c68fd765cc7b06f2dcb5e925d4f"
+    },
+    {
+      "path": "tools/nebula/application/objects.test.ts",
+      "bytes": 1696,
+      "sha256": "cfe387a0db16c48988f29a95ad32914638cc667fb03a02b227386aba52cc63c5"
+    },
+    {
+      "path": "tools/nebula/application/objects.ts",
+      "bytes": 23232,
+      "sha256": "3af766116ebc0436162b13db781b851b69b4060f470ff79e36a1cd3912bb04d6"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/contracts/render-element-budget.test.ts",
+      "bytes": 2042,
+      "sha256": "e4cade4f12c2f7e43c310be74c9b95a42f83d773ab46a7df2440d4eb8040282d"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/contracts/render-element-budget.ts",
+      "bytes": 4298,
+      "sha256": "ebde15faebea147d751ae75cfe62be549e1b81392a0982915dea8efc982cdc58"
+    },
+    {
+      "path": "src/renderers/css/volume/compiler-render-budget.ts",
+      "bytes": 595,
+      "sha256": "68acdb48f890c5624a819a5a215d242284c8e9603d61aa8a5ca75306015c7b63"
+    },
+    {
+      "path": "tools/nebula/application/element-budget.cases.ts",
+      "bytes": 6506,
+      "sha256": "435af09c9f369ccbc579006fb20fd0ef0bc18f6a5a466729175977e830ab223c"
+    },
+    {
+      "path": "tools/nebula/application/element-budget.test.ts",
+      "bytes": 1717,
+      "sha256": "500c59b9e5ce79dd9912a21be84c400f501c9222ad54fa3296bb6634bb43256b"
+    },
+    {
+      "path": "tools/nebula/application/element-budget.ts",
+      "bytes": 3096,
+      "sha256": "9d0678bee9988b51b2afbefe874ce92feabecc369a63403a58f03946af592a28"
+    },
+    {
+      "path": "tools/nebula/application/objects.cases.ts",
+      "bytes": 11547,
+      "sha256": "80ee489ed7724993d14aafa766e77b8fa3723af22cea00626011ee45f51e4fdb"
+    }
+  ],
+  "runtimePins": [
+    {
+      "path": "src/renderers/css/volume/prepared-volume-runtime.ts",
+      "bytes": 15387,
+      "sha256": "0612a2aa83bb116a133c9c0178e685f741d038fb8e6f6e599470c9ad7f70fd48"
+    },
+    {
+      "path": "src/renderers/css/volume/prepared-volume-lod.ts",
+      "bytes": 9536,
+      "sha256": "92ffeb184347248935e31602ad7cab49122767aa45837a041ca009d79285ce39"
+    },
+    {
+      "path": "src/renderers/css/volume/prepared-volume-lenses.ts",
+      "bytes": 21480,
+      "sha256": "1d20679ab004583ee1107ec07a09a62e5f7f5bed5438ba8062fe42c1783b09fa"
+    },
+    {
+      "path": "src/renderers/css/styles/volume.css",
+      "bytes": 1047,
+      "sha256": "cb09de8ee75df62aeb3775d6d435a955586d04d34ce19e009c2a43c4758d58cd"
+    },
+    {
+      "path": "site/prepared-context-navigation.mts",
+      "bytes": 13264,
+      "sha256": "67286a0589f42d990d467d5c1e199661bc8b98b7102d152c527f34fc095e4a36"
+    },
+    {
+      "path": "src/renderers/css/universe/detailed-focus-context.ts",
+      "bytes": 873,
+      "sha256": "12a727775a8277fede7cd743642b960a30c10a7334f2e47186d97b6e8d5413f4"
+    }
+  ],
+  "bake": {
+    "id": "59ae6e1a336d5a7b0d946197decfbbc093beb39f0181fac2ef88300314c08b8e",
+    "elapsedSeconds": 287.174715917,
+    "derivation": {
+      "previousCompactSha256": "869e9ab24b644c4ea7d04cf2d4e2c719445c205b879eaebf13a420c7d7d75eac",
+      "originalResult": {
+        "path": ".local/nebula-lab/compiler/5d934218dcc59475e632d503bea59dfeb3bb156431d8d88d3616830808b23df9/result.json",
+        "sha256": "0839b8149a37b7ca2b4d54434fd5881a8e2e27eb0da451e5d028e3a0637b0f4a"
+      },
+      "originalModel": {
+        "path": ".local/nebula-lab/compiler/5d934218dcc59475e632d503bea59dfeb3bb156431d8d88d3616830808b23df9/field.json",
+        "sha256": "2f688583e71134410d5362c10068a7e51dc90db03b284592bdd28207f8a9bc94"
+      },
+      "originalMethod": {
+        "path": ".local/nebula-lab/compiler/5d934218dcc59475e632d503bea59dfeb3bb156431d8d88d3616830808b23df9/method.json",
+        "sha256": "27ce9c6cc38b7e33aeccccd31640aa8a073c9a6bf67ed7757f13bddad15797d5"
+      },
+      "implementation": [
+        {
+          "path": "labs/nebula/packages/lab/src/adapters/application/star-sprites.ts",
+          "sha256": "c1e028918e7006e4a975570fc44f3e54ebf1e254132448f8bae91462ac8f4eda"
+        },
+        {
+          "path": "labs/nebula/packages/lab/src/adapters/preparation/css-volume.ts",
+          "sha256": "ff2e403521e695afd4b1ced22b177e888c8220024e30c4a8ff3117fe2c4a3616"
+        },
+        {
+          "path": "labs/nebula/packages/lab/src/adapters/renderer/volume-validation.ts",
+          "sha256": "d91593c0401885cc46fa28f83b3895c282d6575ab76f062d8ca7b849e761c221"
+        },
+        {
+          "path": "labs/nebula/packages/lab/src/server/workflows/compiler/bake.ts",
+          "sha256": "1b7a185027c89f8f3bd529e6c791eec551b047881ed2995d468b313b6323da12"
+        },
+        {
+          "path": "labs/nebula/packages/volume-bake/package.json",
+          "sha256": "efc05f933727bd17e5cc84a3a3e2d7f94c3d7da66f7571715eaf8e2df63e8c3d"
+        },
+        {
+          "path": "labs/nebula/packages/volume-bake/src/compact-inputs/density-grid.ts",
+          "sha256": "3c76d8505d9937ca57a68c03f49b2d7dc368171890a52762e0d005837136dd1a"
+        },
+        {
+          "path": "labs/nebula/packages/volume-bake/src/compiler/bake.ts",
+          "sha256": "004bbf282306ea47aa37abed065f5118663d4de18783c51b5ecaa6c3aea24579"
+        },
+        {
+          "path": "labs/nebula/packages/volume-bake/src/slices/emission.ts",
+          "sha256": "febe3fc0821a0ca82a4c04d19c0771744cec20fa078bb75a82de3fef043869d7"
+        },
+        {
+          "path": "labs/nebula/packages/volume-bake/src/slices/material.ts",
+          "sha256": "dcb0c1b4524eb77ed9547a369ce5a24ede9e298af1ed507e3cfb1e504f5aff96"
+        },
+        {
+          "path": "labs/nebula/packages/volume-bake/src/slices/raster.ts",
+          "sha256": "e10a2774a3613b9700a3f7d8212f24f73438e5df798a6af23f94d102319051d4"
+        },
+        {
+          "path": "labs/nebula/packages/volume-core/package.json",
+          "sha256": "767f04fabfceab60608e9ee5fedf637392ee026b3ec5066ff9e59dbdb01a35af"
+        },
+        {
+          "path": "labs/nebula/packages/volume-core/src/contracts/compiler-bake.ts",
+          "sha256": "f85da67f5a3ea68a529ae0b449c9a83e991a9b37a926ec54604991a71cd1a4b8"
+        },
+        {
+          "path": "labs/nebula/packages/volume-core/src/contracts/render-element-budget.ts",
+          "sha256": "ebde15faebea147d751ae75cfe62be549e1b81392a0982915dea8efc982cdc58"
+        },
+        {
+          "path": "labs/nebula/packages/volume-core/src/contracts/volume-slices.ts",
+          "sha256": "5965a3ac2d6acef6d13ea625df2456960b9197fd4dcfccf7ea8b5b2ec452fda3"
+        },
+        {
+          "path": "labs/nebula/packages/volume-core/src/coordinates/compiler-frame.ts",
+          "sha256": "e340a3eb8f6a374556aa4277cb3ee2064a1ebedd906a012e94f7921d2f4b4d3b"
+        },
+        {
+          "path": "labs/nebula/packages/volume-core/src/materials/cloud-appearance.ts",
+          "sha256": "702cde2ff38ccce2096eb3562681f0ab8c8a9dec424ef8195c84034f4a856930"
+        },
+        {
+          "path": "labs/nebula/packages/volume-core/src/materials/slab-material.ts",
+          "sha256": "f5aebe26a52df5e7fde3fbf404e2505d30f990cfaa4e0a2ecbfcdac0cdfbcda1"
+        },
+        {
+          "path": "labs/nebula/packages/volume-core/src/sampling/layer-optimization.ts",
+          "sha256": "98c9ac63b39b4f1e8ff2fab6b3d6beb5423033fa4a5a9fe5048b54c862b4918b"
+        },
+        {
+          "path": "src/preparation/stars/config.ts",
+          "sha256": "e496a8ec1be2377bfaa536324e8483a8c5a81c41f8bb0678dba30756e4f25209"
+        },
+        {
+          "path": "src/renderers/css/preparation/leaf-bounds.ts",
+          "sha256": "7f090519561a4d13dcecd87e523490429cfbc5aff8f8b902e51019d98db8569c"
+        },
+        {
+          "path": "src/renderers/css/preparation/stars/material.ts",
+          "sha256": "d99ae7dfa75204fb1410f17578bfd0e1b3fa7aa3fd49c13008323f38656990ab"
+        },
+        {
+          "path": "src/renderers/css/preparation/volume-order.ts",
+          "sha256": "491bc4d90a13f23cd5a9d60c55416fef63e5960cdbe33a286777b9438b9f19ea"
+        },
+        {
+          "path": "src/renderers/css/preparation/volume.ts",
+          "sha256": "bc32629f7a0a2e54b8064ccc3285e09a5520fa27b76df4a2e3d3d70ca1d5326b"
+        },
+        {
+          "path": "src/renderers/css/rendering/prepared-leaf-frustum.ts",
+          "sha256": "f38d4e0ad7127c7007e1944318bdd5df18afa6838e5dc1c9bb990f7b208b63bd"
+        },
+        {
+          "path": "src/renderers/css/sky/validation.ts",
+          "sha256": "894958cad5cbafb039bd7393a096c4b28f383dfa73f3fc19f7cb10e21cda4b6b"
+        },
+        {
+          "path": "src/renderers/css/volume/compiler-render-budget.ts",
+          "sha256": "68acdb48f890c5624a819a5a215d242284c8e9603d61aa8a5ca75306015c7b63"
+        },
+        {
+          "path": "src/renderers/css/volume/validation.ts",
+          "sha256": "63a930d5e9b1e6f314204bd35a295bee950cb8859209526b5f5c9632b9917f65"
+        },
+        {
+          "path": "src/renderers/css/volume/volume-impostor-validation.ts",
+          "sha256": "50801a940a417e364824c7b31d329614732cef34dc92f94943c38c5cb711b996"
+        },
+        {
+          "path": "tools/nebula/application/star-sprites.ts",
+          "sha256": "66306b28248a9a19dab50dc42717a7a6b10996cc1c305834eeeffb17412a6f59"
+        }
+      ],
+      "renderProfile": {
+        "schema": "cssearth-render-element-profile@1",
+        "id": "css-volume-single-topology@1",
+        "maximumElements": 500,
+        "elementsPerSlab": 3,
+        "elementsPerStar": 1,
+        "reservedElements": 47
+      },
+      "interpretation": "Only the saved field sampling allocation changes. Scientific field, source registration, material colors and zero separate stars are reused unchanged. Earlier fit metrics describe that unchanged field, not the smaller delivered bank."
+    },
+    "sampling": {
+      "sliceCounts": {
+        "x": 49,
+        "y": 46,
+        "z": 56
+      },
+      "imageWidth": 512,
+      "samplesPerSlab": 4,
+      "layerPlan": {
+        "schema": "cssearth-volume-layer-plan@1",
+        "referenceSliceCounts": {
+          "x": 264,
+          "y": 264,
+          "z": 512
+        },
+        "referenceSamplesPerSlab": 4,
+        "axes": {
+          "x": [
+            {
+              "startCell": 0,
+              "endCell": 39
+            },
+            {
+              "startCell": 39,
+              "endCell": 46
+            },
+            {
+              "startCell": 46,
+              "endCell": 49
+            },
+            {
+              "startCell": 49,
+              "endCell": 56
+            },
+            {
+              "startCell": 56,
+              "endCell": 63
+            },
+            {
+              "startCell": 63,
+              "endCell": 70
+            },
+            {
+              "startCell": 70,
+              "endCell": 75
+            },
+            {
+              "startCell": 75,
+              "endCell": 80
+            },
+            {
+              "startCell": 80,
+              "endCell": 83
+            },
+            {
+              "startCell": 83,
+              "endCell": 86
+            },
+            {
+              "startCell": 86,
+              "endCell": 91
+            },
+            {
+              "startCell": 91,
+              "endCell": 95
+            },
+            {
+              "startCell": 95,
+              "endCell": 98
+            },
+            {
+              "startCell": 98,
+              "endCell": 101
+            },
+            {
+              "startCell": 101,
+              "endCell": 104
+            },
+            {
+              "startCell": 104,
+              "endCell": 107
+            },
+            {
+              "startCell": 107,
+              "endCell": 110
+            },
+            {
+              "startCell": 110,
+              "endCell": 113
+            },
+            {
+              "startCell": 113,
+              "endCell": 115
+            },
+            {
+              "startCell": 115,
+              "endCell": 118
+            },
+            {
+              "startCell": 118,
+              "endCell": 121
+            },
+            {
+              "startCell": 121,
+              "endCell": 124
+            },
+            {
+              "startCell": 124,
+              "endCell": 127
+            },
+            {
+              "startCell": 127,
+              "endCell": 130
+            },
+            {
+              "startCell": 130,
+              "endCell": 133
+            },
+            {
+              "startCell": 133,
+              "endCell": 135
+            },
+            {
+              "startCell": 135,
+              "endCell": 138
+            },
+            {
+              "startCell": 138,
+              "endCell": 141
+            },
+            {
+              "startCell": 141,
+              "endCell": 144
+            },
+            {
+              "startCell": 144,
+              "endCell": 147
+            },
+            {
+              "startCell": 147,
+              "endCell": 150
+            },
+            {
+              "startCell": 150,
+              "endCell": 153
+            },
+            {
+              "startCell": 153,
+              "endCell": 156
+            },
+            {
+              "startCell": 156,
+              "endCell": 159
+            },
+            {
+              "startCell": 159,
+              "endCell": 162
+            },
+            {
+              "startCell": 162,
+              "endCell": 165
+            },
+            {
+              "startCell": 165,
+              "endCell": 168
+            },
+            {
+              "startCell": 168,
+              "endCell": 171
+            },
+            {
+              "startCell": 171,
+              "endCell": 174
+            },
+            {
+              "startCell": 174,
+              "endCell": 178
+            },
+            {
+              "startCell": 178,
+              "endCell": 181
+            },
+            {
+              "startCell": 181,
+              "endCell": 186
+            },
+            {
+              "startCell": 186,
+              "endCell": 193
+            },
+            {
+              "startCell": 193,
+              "endCell": 200
+            },
+            {
+              "startCell": 200,
+              "endCell": 205
+            },
+            {
+              "startCell": 205,
+              "endCell": 211
+            },
+            {
+              "startCell": 211,
+              "endCell": 218
+            },
+            {
+              "startCell": 218,
+              "endCell": 225
+            },
+            {
+              "startCell": 225,
+              "endCell": 264
+            }
+          ],
+          "y": [
+            {
+              "startCell": 0,
+              "endCell": 39
+            },
+            {
+              "startCell": 39,
+              "endCell": 46
+            },
+            {
+              "startCell": 46,
+              "endCell": 51
+            },
+            {
+              "startCell": 51,
+              "endCell": 54
+            },
+            {
+              "startCell": 54,
+              "endCell": 59
+            },
+            {
+              "startCell": 59,
+              "endCell": 66
+            },
+            {
+              "startCell": 66,
+              "endCell": 73
+            },
+            {
+              "startCell": 73,
+              "endCell": 78
+            },
+            {
+              "startCell": 78,
+              "endCell": 83
+            },
+            {
+              "startCell": 83,
+              "endCell": 86
+            },
+            {
+              "startCell": 86,
+              "endCell": 91
+            },
+            {
+              "startCell": 91,
+              "endCell": 96
+            },
+            {
+              "startCell": 96,
+              "endCell": 101
+            },
+            {
+              "startCell": 101,
+              "endCell": 104
+            },
+            {
+              "startCell": 104,
+              "endCell": 107
+            },
+            {
+              "startCell": 107,
+              "endCell": 110
+            },
+            {
+              "startCell": 110,
+              "endCell": 113
+            },
+            {
+              "startCell": 113,
+              "endCell": 116
+            },
+            {
+              "startCell": 116,
+              "endCell": 119
+            },
+            {
+              "startCell": 119,
+              "endCell": 122
+            },
+            {
+              "startCell": 122,
+              "endCell": 125
+            },
+            {
+              "startCell": 125,
+              "endCell": 128
+            },
+            {
+              "startCell": 128,
+              "endCell": 131
+            },
+            {
+              "startCell": 131,
+              "endCell": 134
+            },
+            {
+              "startCell": 134,
+              "endCell": 137
+            },
+            {
+              "startCell": 137,
+              "endCell": 140
+            },
+            {
+              "startCell": 140,
+              "endCell": 143
+            },
+            {
+              "startCell": 143,
+              "endCell": 146
+            },
+            {
+              "startCell": 146,
+              "endCell": 149
+            },
+            {
+              "startCell": 149,
+              "endCell": 152
+            },
+            {
+              "startCell": 152,
+              "endCell": 155
+            },
+            {
+              "startCell": 155,
+              "endCell": 158
+            },
+            {
+              "startCell": 158,
+              "endCell": 161
+            },
+            {
+              "startCell": 161,
+              "endCell": 164
+            },
+            {
+              "startCell": 164,
+              "endCell": 169
+            },
+            {
+              "startCell": 169,
+              "endCell": 172
+            },
+            {
+              "startCell": 172,
+              "endCell": 175
+            },
+            {
+              "startCell": 175,
+              "endCell": 180
+            },
+            {
+              "startCell": 180,
+              "endCell": 187
+            },
+            {
+              "startCell": 187,
+              "endCell": 190
+            },
+            {
+              "startCell": 190,
+              "endCell": 195
+            },
+            {
+              "startCell": 195,
+              "endCell": 202
+            },
+            {
+              "startCell": 202,
+              "endCell": 209
+            },
+            {
+              "startCell": 209,
+              "endCell": 219
+            },
+            {
+              "startCell": 219,
+              "endCell": 228
+            },
+            {
+              "startCell": 228,
+              "endCell": 264
+            }
+          ],
+          "z": [
+            {
+              "startCell": 0,
+              "endCell": 102
+            },
+            {
+              "startCell": 102,
+              "endCell": 105
+            },
+            {
+              "startCell": 105,
+              "endCell": 138
+            },
+            {
+              "startCell": 138,
+              "endCell": 162
+            },
+            {
+              "startCell": 162,
+              "endCell": 177
+            },
+            {
+              "startCell": 177,
+              "endCell": 187
+            },
+            {
+              "startCell": 187,
+              "endCell": 192
+            },
+            {
+              "startCell": 192,
+              "endCell": 201
+            },
+            {
+              "startCell": 201,
+              "endCell": 210
+            },
+            {
+              "startCell": 210,
+              "endCell": 215
+            },
+            {
+              "startCell": 215,
+              "endCell": 219
+            },
+            {
+              "startCell": 219,
+              "endCell": 224
+            },
+            {
+              "startCell": 224,
+              "endCell": 229
+            },
+            {
+              "startCell": 229,
+              "endCell": 232
+            },
+            {
+              "startCell": 232,
+              "endCell": 237
+            },
+            {
+              "startCell": 237,
+              "endCell": 240
+            },
+            {
+              "startCell": 240,
+              "endCell": 243
+            },
+            {
+              "startCell": 243,
+              "endCell": 246
+            },
+            {
+              "startCell": 246,
+              "endCell": 249
+            },
+            {
+              "startCell": 249,
+              "endCell": 252
+            },
+            {
+              "startCell": 252,
+              "endCell": 255
+            },
+            {
+              "startCell": 255,
+              "endCell": 258
+            },
+            {
+              "startCell": 258,
+              "endCell": 261
+            },
+            {
+              "startCell": 261,
+              "endCell": 262
+            },
+            {
+              "startCell": 262,
+              "endCell": 265
+            },
+            {
+              "startCell": 265,
+              "endCell": 268
+            },
+            {
+              "startCell": 268,
+              "endCell": 271
+            },
+            {
+              "startCell": 271,
+              "endCell": 274
+            },
+            {
+              "startCell": 274,
+              "endCell": 275
+            },
+            {
+              "startCell": 275,
+              "endCell": 278
+            },
+            {
+              "startCell": 278,
+              "endCell": 279
+            },
+            {
+              "startCell": 279,
+              "endCell": 281
+            },
+            {
+              "startCell": 281,
+              "endCell": 284
+            },
+            {
+              "startCell": 284,
+              "endCell": 287
+            },
+            {
+              "startCell": 287,
+              "endCell": 290
+            },
+            {
+              "startCell": 290,
+              "endCell": 293
+            },
+            {
+              "startCell": 293,
+              "endCell": 296
+            },
+            {
+              "startCell": 296,
+              "endCell": 299
+            },
+            {
+              "startCell": 299,
+              "endCell": 302
+            },
+            {
+              "startCell": 302,
+              "endCell": 306
+            },
+            {
+              "startCell": 306,
+              "endCell": 309
+            },
+            {
+              "startCell": 309,
+              "endCell": 312
+            },
+            {
+              "startCell": 312,
+              "endCell": 317
+            },
+            {
+              "startCell": 317,
+              "endCell": 322
+            },
+            {
+              "startCell": 322,
+              "endCell": 329
+            },
+            {
+              "startCell": 329,
+              "endCell": 335
+            },
+            {
+              "startCell": 335,
+              "endCell": 342
+            },
+            {
+              "startCell": 342,
+              "endCell": 353
+            },
+            {
+              "startCell": 353,
+              "endCell": 361
+            },
+            {
+              "startCell": 361,
+              "endCell": 368
+            },
+            {
+              "startCell": 368,
+              "endCell": 381
+            },
+            {
+              "startCell": 381,
+              "endCell": 384
+            },
+            {
+              "startCell": 384,
+              "endCell": 405
+            },
+            {
+              "startCell": 405,
+              "endCell": 424
+            },
+            {
+              "startCell": 424,
+              "endCell": 473
+            },
+            {
+              "startCell": 473,
+              "endCell": 512
+            }
+          ]
+        }
+      },
+      "layerOptimization": {
+        "schema": "cssearth-layer-optimization@1",
+        "method": "gradient-weighted-depth-displacement@1",
+        "maximumLayers": 151,
+        "referenceLayers": 1040,
+        "plannedLayers": 151,
+        "probeWidth": 64,
+        "probeSubpixels": 2,
+        "targetNormalizedL1": 0.01,
+        "estimatedNormalizedL1": {
+          "x": 0.1065752005761363,
+          "y": 0.1046658764904314,
+          "z": 0.10729931793886195
+        },
+        "status": "budget-limited"
+      },
+      "renderBudget": {
+        "schema": "cssearth-render-element-budget@1",
+        "profile": {
+          "schema": "cssearth-render-element-profile@1",
+          "id": "css-volume-single-topology@1",
+          "maximumElements": 500,
+          "elementsPerSlab": 3,
+          "elementsPerStar": 1,
+          "reservedElements": 47
+        },
+        "starCount": 0,
+        "slabCount": 151,
+        "maximumSlabs": 151,
+        "totalElements": 500
+      }
+    },
+    "banks": [
+      {
+        "id": "neutral",
+        "counts": [
+          {
+            "axis": "x",
+            "retained": 48
+          },
+          {
+            "axis": "y",
+            "retained": 45
+          },
+          {
+            "axis": "z",
+            "retained": 56
+          }
+        ],
+        "resources": 149,
+        "bytes": 2668542
+      },
+      {
+        "id": "eso1119b",
+        "counts": [
+          {
+            "axis": "x",
+            "retained": 48
+          },
+          {
+            "axis": "y",
+            "retained": 45
+          },
+          {
+            "axis": "z",
+            "retained": 56
+          }
+        ],
+        "resources": 149,
+        "bytes": 7347226
+      },
+      {
+        "id": "eso0844a",
+        "counts": [
+          {
+            "axis": "x",
+            "retained": 48
+          },
+          {
+            "axis": "y",
+            "retained": 45
+          },
+          {
+            "axis": "z",
+            "retained": 56
+          }
+        ],
+        "resources": 149,
+        "bytes": 6476494
+      }
+    ],
+    "compact": {
+      "path": "output/pr390-audit/element-budget/bake-inputs.json.gz",
+      "sha256": "c9f2535b13f4b4745179ec53b63240df1207ef7f38a4ea34dff76cba50a74d68",
+      "bytes": 2229420
+    }
+  },
+  "actualElements": {
+    "limit": 500,
+    "application": [
+      {
+        "stage": "cold arrival",
+        "elements": 493,
+        "planes": 447,
+        "stars": 0
+      },
+      {
+        "stage": "warm reselection",
+        "elements": 493,
+        "planes": 447,
+        "stars": 0
+      },
+      {
+        "stage": "orbit",
+        "elements": 493,
+        "planes": 447,
+        "stars": 0
+      },
+      {
+        "stage": "close zoom",
+        "elements": 493,
+        "planes": 447,
+        "stars": 0
+      },
+      {
+        "stage": "return from galaxy context",
+        "elements": 493,
+        "planes": 447,
+        "stars": 0
+      },
+      {
+        "stage": "lens eso1119b",
+        "elements": 493,
+        "planes": 447,
+        "stars": 0
+      },
+      {
+        "stage": "lens eso0844a",
+        "elements": 493,
+        "planes": 447,
+        "stars": 0
+      }
+    ],
+    "lab": [
+      {
+        "stage": "initial",
+        "elements": 462,
+        "planes": 447,
+        "lens": "eso1119b",
+        "material": "textured",
+        "pose": "0,0",
+        "stars": "true"
+      },
+      {
+        "stage": "lens eso1119b",
+        "elements": 462,
+        "planes": 447,
+        "lens": "eso1119b",
+        "material": "textured",
+        "pose": "0,0",
+        "stars": "true"
+      },
+      {
+        "stage": "lens eso0844a",
+        "elements": 462,
+        "planes": 447,
+        "lens": "eso0844a",
+        "material": "textured",
+        "pose": "0,0",
+        "stars": "true"
+      },
+      {
+        "stage": "before orbit",
+        "elements": 462,
+        "planes": 447,
+        "lens": "eso0844a",
+        "material": "textured",
+        "pose": "0,0",
+        "stars": "true"
+      },
+      {
+        "stage": "after orbit",
+        "elements": 462,
+        "planes": 447,
+        "lens": "eso0844a",
+        "material": "textured",
+        "pose": "35,-17.5",
+        "stars": "true"
+      },
+      {
+        "stage": "zoom",
+        "elements": 462,
+        "planes": 447,
+        "lens": "eso0844a",
+        "material": "textured",
+        "pose": "35,-17.5",
+        "stars": "true"
+      },
+      {
+        "stage": "refresh retained",
+        "elements": 462,
+        "planes": 447,
+        "lens": "eso0844a",
+        "material": "textured",
+        "pose": "35,-17.5",
+        "stars": "true"
+      }
+    ],
+    "baselineApplication": 1423,
+    "reductionFraction": 0.6535488404778637
+  },
+  "checks": [
+    {
+      "command": "pnpm build",
+      "result": "passed",
+      "builtPages": 995
+    },
+    {
+      "command": "pnpm test:renderer",
+      "result": "passed",
+      "tests": 596
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm typecheck:tests",
+      "result": "passed",
+      "files": 1759
+    },
+    {
+      "command": "pnpm check:typescript-ownership",
+      "result": "passed"
+    },
+    {
+      "command": "Exact maintained nebula/source CI command",
+      "result": "passed",
+      "outerTests": 22,
+      "typedGuardCases": 9,
+      "typedInstallerCases": 6,
+      "receipt": "delivery-guard.json"
+    },
+    {
+      "command": "Source/provenance/object-package tests",
+      "result": "passed",
+      "tests": 29
+    },
+    {
+      "command": "Targeted compiler/core/compact/component tests",
+      "result": "passed",
+      "tests": 31,
+      "receipt": "implementation.json"
+    },
+    {
+      "command": "node labs/nebula/run.mts test",
+      "result": "failed",
+      "tests": 686,
+      "passed": 664,
+      "skipped": 17,
+      "failed": 5,
+      "receipt": "lab-suite.tap",
+      "limits": "Four missing LMC research assets and one temporary fixture package-resolution failure. Same failure categories as prior recorded run; not independently reproduced on current main. No native LMC setup or rerun claimed."
+    },
+    {
+      "command": "Actual Lab browser",
+      "result": "passed",
+      "receipt": "lab-browser.json"
+    },
+    {
+      "command": "Actual native app browser",
+      "result": "passed",
+      "receipt": "native-focus.json"
+    },
+    {
+      "command": "Controlled main-app views",
+      "result": "passed",
+      "captures": 7,
+      "receipt": "app-inspection.json"
+    },
+    {
+      "command": "Isolated compact application replay",
+      "result": "passed",
+      "seconds": 232.932,
+      "receipt": "cold-replay.json"
+    },
+    {
+      "command": "R2 cold restore and network-forbidden warm reuse",
+      "result": "passed",
+      "files": 64,
+      "receipt": "r2-restore.json"
+    },
+    {
+      "command": "Cross-vendor scoped review and mutations",
+      "result": "passed",
+      "receipt": "review/verified.md"
+    }
+  ],
+  "logs": [
+    {
+      "path": "output/pr390-audit/element-budget/renderer-tests.log",
+      "bytes": 8087,
+      "sha256": "aeb58bd5a8bc023cfc7473c9792137fb6f8821f7b1967b72f0917eae5000b4d4"
+    },
+    {
+      "path": "output/pr390-audit/element-budget/typecheck-final.log",
+      "bytes": 7774,
+      "sha256": "669f4b7c8a8a2deb84b026942ad985f87fa6e888bc37d5bb7cc33975cf3c665e"
+    },
+    {
+      "path": "output/pr390-audit/element-budget/test-types-final.log",
+      "bytes": 162,
+      "sha256": "167f55fe51b2568f30e8c9b04735774271794eb932652bbac319e4778ec1f187"
+    },
+    {
+      "path": "output/pr390-audit/element-budget/ownership-final.log",
+      "bytes": 287,
+      "sha256": "3876711c2a3211867d7e33acda2459d45f6d8245ddc42560113231183956cf9e"
+    },
+    {
+      "path": "output/pr390-audit/element-budget/provenance-tests.log",
+      "bytes": 6880,
+      "sha256": "28adfa5567956f72fde8a9cdbf53e136e6648dbb02cd8b158f7d3b344916140e"
+    },
+    {
+      "path": "output/pr390-audit/element-budget/exact-ci-tests-final.log",
+      "bytes": 9426,
+      "sha256": "360b2ca048c447d238b71cf23216dcabd9fb56a83c7ba597bb3c052c5576b36e"
+    },
+    {
+      "path": "output/pr390-audit/element-budget/typecheck-stable.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "output/pr390-audit/element-budget/build.log",
+      "bytes": 1007739,
+      "sha256": "bce6de47350b79708c1ce635176755a87a5104d85730479ee5931c7cf8dafbf4"
+    }
+  ],
+  "publication": {
+    "inventoryPins": {
+      "object.json": "e709e55c5ec0ad4f4846303cffec0d6c34c235554a69e5a8481535e9465e4255",
+      "runtime-assets.json": "e30940cfcec240029ada2ddd666379804e57d863087d97a7ad91be598cb0f5bf",
+      "prepared-assets.json": "ac43536da6c0b558e221253a673b14c30dcecd61d5a504c38936ef307351a448"
+    }
+  },
+  "visual": {
+    "status": "failed",
+    "handoffs": "handoffs.json",
+    "matchedFronts": "pixelmatch.json",
+    "interpretation": "Reducing retained nodes improves the element allocation, not scientific or visual qualification. All nine handoffs exceed normalizedL1 0.04; smaller-bank front brightness is23-25% higher. No tolerance was loosened and no physical field or star positions were refitted."
+  },
+  "validationRecovery": "Early native checks failed while metadata pins were being refreshed; later attempts collided with development-module rebuilds and were cancelled. Final browser passes above ran against a restarted task preview after the completed build. They are not passes from a merely started process.",
+  "mergeStatus": "draft; visual qualification remains blocked"
+}

@@ -5,6 +5,7 @@ name: Shared universe
 # Keep affected correctness checks blocking; keep exhaustive sweeps and release
 # qualification outside the routine PR path. Measure added work against this budget.
 # Job timeouts below are safety limits, not the agreed feedback budget.
+# Maintenance rules and failure recovery: docs/ci-cd.md.
 
 on:
   pull_request:
@@ -606,7 +607,7 @@ jobs:
         run: |
           pnpm typecheck:nebula
           pnpm check:nebula-boundaries
-          node --test tools/nebula/package-boundaries.test.mts tools/nebula/inbound-boundaries.test.mts tools/nebula/application/*.test.mts tools/nebula/application/*.test.ts tools/nebula-provenance-source-closure.test.mts
+          pnpm test:nebula-application
       - name: Test numerical owners, durable jobs and isolated React controls
         # Explicit cache-independent selection. Do not substitute test:lab:nebula:
         # that command restores real source assets before running the wider suite.
@@ -615,7 +616,8 @@ jobs:
           node labs/nebula/run.mts test
           overlay-placement overlay-registration overlay-alignment
           field-tilt emission-window component-material material
-          point-projection cloud-inspection compact
+          point-projection cloud-inspection compact shape-cloud-camera
+          nebula-frame bake compiler-sampling render-element-budget retained-material-bank optical-composite-preparation
           detect-shapes structure-wavelets structure-map ridge-graph
           material-solver shape-prior solver
           acquisition footprint image-links image-ranking
@@ -625,6 +627,8 @@ jobs:
           workspace-sections workspace-portals workspace-objects camera-model-panel image-appearance-panel
           catalogue object-browser papers survey-images
           geometry-model observation-alignment structures-model
+          build lens-levels lens-difference lens-radial lens-radial-panel
+          registration photometric-mge photometric-prior compiler-defaults simulation-guided compiler-published
 
   ci-guard:
     name: Report the first CI failure
