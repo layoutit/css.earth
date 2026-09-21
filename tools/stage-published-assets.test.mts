@@ -132,3 +132,13 @@ test('the real resolve step rejects unsafe dispatch inputs before invoking GitHu
     assert.ok(!result.stdout.includes('GITHUB_WAS_CALLED'));
   }
 });
+
+test('the volume publisher uses the pinned volume acquisition instead of body restoration', async () => {
+  const workflow = parseDocument(await readFile(new URL('../.github/workflows/publish-assets.yml', import.meta.url), 'utf8')).toJS() as {
+    jobs:{bake:{steps:{name?:string;if?:string;run?:string}[]}}
+  };
+  const restore = workflow.jobs.bake.steps.find(step => step.name === 'Restore the pinned source downloads');
+  const bake = workflow.jobs.bake.steps.find(step => step.name === 'Bake');
+  assert.equal(restore?.if, "env.KIND != 'volume'");
+  assert.match(bake?.run ?? '', /prepare:volume .* --acquire-source "\$RUNNER_TEMP\/volume-source-cache"/u);
+});

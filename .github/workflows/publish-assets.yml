@@ -97,6 +97,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Restore the pinned source downloads
+        if: env.KIND != 'volume'
         run: node tools/restore-source-inputs.mts "--object=$OBJECT"
       - name: Bake
         env:
@@ -105,7 +106,7 @@ jobs:
           set -euo pipefail
           if [ "$KIND" = volume ]; then
             pnpm build:tools
-            pnpm prepare:volume "src/objects/$OBJECT"
+            pnpm prepare:volume "src/objects/$OBJECT" --acquire-source "$RUNNER_TEMP/volume-source-cache"
           else
             pnpm prepare:planets "--object=$OBJECT"
           fi
