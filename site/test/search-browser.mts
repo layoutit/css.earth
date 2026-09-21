@@ -28,7 +28,7 @@ try {
     assert.deepEqual(await results.locator('.planet-object-item:not([hidden]) .planet-object-name').allTextContents(), ['Titan', 'Titania']);
     assert.equal(await page.locator('.planet-stage').innerHTML(), scene);
     assert.equal(await page.locator('.polycss-scene').count(), 1);
-    assert.equal(await page.locator('.planet-information-panel').isVisible(), true);
+    assert.equal(await page.locator('.planet-information-panel').isVisible(), false);
     await page.screenshot({ path: `${output}/native-${viewport.width}.png` });
     await page.getByRole('link', { name: 'Clear search', exact: true }).click();
     await page.waitForURL(`${origin}/saturn/`);

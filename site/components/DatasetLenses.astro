@@ -26,7 +26,6 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
 <section id={`${objectId}-lenses`} class="planet-lenses">
   <form id={`${objectId}-datasets`} action={route} method="get" data-dataset-form data-focus-form={focus || undefined} hidden>
     {['v', 'overview', 'focus', focus ? 'dataset' : 'focusLens', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
-    {focus && <input type="hidden" name="focusControls" value="1" />}
   </form>
   <div id={`${objectId}-layers-menu`} class="planet-layers-menu">
     <nav class="planet-observation-controls" aria-label="Datasets">
@@ -103,11 +102,6 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
             </li>)}
           </ul>
         </details>}
-        {lens.texture?.attribution && <p class="planet-lens-source">
-          Source: {lens.texture.attribution.url
-            ? <a href={lens.texture.attribution.url} target="_blank" rel="noreferrer">{lens.texture.attribution.label}</a>
-            : lens.texture.attribution.label}
-        </p>}
       </div>
     ))}
   </div>

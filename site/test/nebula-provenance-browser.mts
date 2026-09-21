@@ -115,7 +115,7 @@ try {
       const summary = (await detail.locator('.planet-lens-details-copy').innerText()).trim();
       const description = await detail.locator('.planet-lens-details-copy').getAttribute('title');
       assert.equal(summary, lens.summary ?? lens.description);
-      assert.equal(description, lens.description);
+      assert.equal(description, null, 'Nebula datasets use the same visible summary treatment as bodies.');
       assert.match(summary, /model|conditional|inferred|reconstruct|illustrative|simulated|assumed|relative emission/iu,
         `${id}/${lens.id}: visible copy must disclose the interpreted model, beyond a hover title.`);
       const preview = await detail.locator('.planet-lens-texture').evaluate(async node => {
@@ -150,6 +150,9 @@ try {
       await card.getByRole('tab', { name: 'Factsheet', exact: true }).click();
       const facts = card.locator(`[data-focus-facts-bank="${id}"] [data-focus-lens-details="${lens.id}"]`);
       await facts.waitFor({ state: 'visible' });
+      assert.equal((await facts.locator('[data-fact-id="dataset"] .planet-fact-value').innerText()).trim(), lens.label);
+      assert.equal(await facts.locator('.planet-lens-details-title').count(), 0, 'Dataset identity belongs in a standard fact row.');
+      assert.equal(await card.getByText('Model and measurement notes', { exact: true }).count(), 0, 'README-only methodology must not appear in the Factsheet.');
       const sourcePixels = lens.facts?.find(fact => fact.id === 'source-pixels'); assert.ok(sourcePixels);
       assert.equal((await facts.locator('[data-fact-id="source-pixels"] .planet-fact-value').innerText()).trim(), sourcePixels.value);
       await card.getByRole('tab', { name: 'Datasets', exact: true }).click();

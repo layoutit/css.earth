@@ -430,6 +430,8 @@ jobs:
           case "$CI_UNIVERSE_LANE" in
             sources)
               if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
+                # Authoring replays volume provenance from pinned FITS; each matrix runner needs its own inputs.
+                node tools/restore-source-inputs.mts --repository-volumes
                 pnpm test:sources
               else
                 pnpm test:sources:pr

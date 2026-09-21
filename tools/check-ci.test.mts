@@ -234,7 +234,9 @@ test('the actual workflow dispatches every native lane command locally and retai
   ].join('\n'));
   const source=commands[0]!;
   await runCiSteps([{...source,env:{...source.env,GITHUB_EVENT_NAME:'push'}}],root,root);
-  assert.ok((await readFile(join(root,'dispatch'),'utf8')).endsWith('pnpm test:sources\n'));
+  assert.ok((await readFile(join(root,'dispatch'),'utf8')).endsWith(
+   'node tools/restore-source-inputs.mts --repository-volumes\npnpm test:sources\n',
+  ),'main must restore pinned repository volume inputs before authoring checks');
  }finally{await rm(root,{recursive:true,force:true});}
 });
 
