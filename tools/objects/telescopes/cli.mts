@@ -159,6 +159,10 @@ export function formatExploration(session:ExplorationSession & {readonly directo
     for(const limitation of choice.limitations)lines.push(`   Limitation: ${limitation}`);
   }
   if(!session.choices.length)lines.push('No actionable observation is available in this bounded exploration.');
+  for(const service of answer.services)if('sharpest' in service&&service.sharpest?.length){
+    lines.push('',`Spacecraft images in OPUS (${service.images} of ${service.opusTarget}; sharpest per instrument, not retrievable from here):`);
+    for(const image of service.sharpest)lines.push(`  ${image.instrument} · ${image.startTime} · ${image.centreResolutionKmPerPixel??'unknown'} km/px at body centre${image.pixelsAcross===null?'':` · ${image.pixelsAcross} px across`} · ${image.instrumentImages} images · ${image.opusId}`);
+  }
   if(answer.unresolved.length){lines.push('','Unresolved discoveries:');for(const issue of answer.unresolved)lines.push(`  ${issue.identity??issue.scope}: ${issue.reason}`);}
   if(answer.unsupported.length){lines.push('','Unsupported discoveries:');for(const issue of answer.unsupported)lines.push(`  ${issue.identity??issue.scope}: ${issue.reason}`);}
   if(answer.issues.length){lines.push('','Search limits and provider status:');for(const issue of answer.issues)lines.push(`  ${issue.identity??issue.scope}: ${issue.reason}`);}
