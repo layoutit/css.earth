@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-body-epoch-ephemeris@1",
+  "id": "dysnomia",
+  "centerBodyId": "eris",
+  "epochJdTt": 2461286.5,
+  "requestEpochJdUtc": 2461286.499199259,
+  "ttMinusUtcSeconds": 69.184,
+  "referenceFrame": "ICRF",
+  "units": "KM-D",
+  "correction": "NONE",
+  "solution": "tnosat_v001_20136199_jpl",
+  "positionKm": [
+    -7846.22539235866,
+    33898.53718318183,
+    -13912.69604973232
+  ],
+  "velocityKmPerDay": [
+    -11668.71691528979,
+    1029.617951209897,
+    8973.508786309341
+  ],
+  "parentHeliocentricState": {
+    "positionKm": [
+      12730277426.87079,
+      6472947119.764496,
+      -9541411.215144325
+    ],
+    "velocityKmPerDay": [
+      -72469.5263854017,
+      61074.70922233314,
+      179565.9983638829
+    ]
+  },
+  "gravitationalParametersKm3PerS2": {
+    "body": 9.56,
+    "parent": 1069.1,
+    "combined": 1078.6599999999999
+  },
+  "sources": {
+    "relative": {
+      "path": "source/orbit/dysnomia-epoch.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120136199&CENTER=500%40920136199&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sha256": "8ccf871c0b53cdae17b51d2eb459998cc8be76fc206335feb0fbafefa6516941",
+      "bytes": 6833,
+      "target": 120136199,
+      "center": 920136199
+    },
+    "parent": {
+      "path": "source/orbit/eris-epoch.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920136199&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sha256": "6bc7dd7b63f721b641b5006fedaa3126a846f69e025fe15bff90ee3ec0c2e41d",
+      "bytes": 6756,
+      "target": 920136199,
+      "center": 10
+    },
+    "heliocentricCheck": {
+      "path": "source/orbit/dysnomia-heliocentric-check.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120136199&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sha256": "eeed16021c50c402d03c1c4cecc850a86cf1fd437abf13ccd7e61a329e68900b",
+      "bytes": 6814,
+      "target": 120136199,
+      "center": 10
+    }
+  },
+  "validation": {
+    "model": "independent Horizons heliocentric query minus primary heliocentric query agrees with direct primary-relative query",
+    "positionResidualKm": [
+      -8.56602218846092e-06,
+      -3.739041858352721e-07,
+      -7.676135282963514e-10
+    ],
+    "velocityResidualKmPerDay": [
+      -9.094947017729282e-12,
+      0.0,
+      5.275069270282984e-11
+    ],
+    "maxPositionResidualKm": 8.56602218846092e-06,
+    "maxVelocityResidualKmPerDay": 5.275069270282984e-11,
+    "positionToleranceKm": 1e-05,
+    "velocityToleranceKmPerDay": 1e-08,
+    "qualification": "This validates coordinate composition and parser wiring, not the scientific accuracy of the source orbit."
+  },
+  "limitations": [
+    "The Horizons satellite solution tnosat_v001_20136199_jpl uses 19 observations from 2005-2018 and states a 110 km position uncertainty with respect to the primary on 2025-Jan-01. That is the solution's own statement at that date, not a measured uncertainty at this 2026 scene epoch. For scale it is 0.30 percent of the 37,273 km semi-major axis of Holler et al. (2021).",
+    "Horizons states a range for the satellite's gravitational parameter, GM = 9.56 to 29.7 km^3/s^2 (mass ratio 0.0087 to 0.0270), and for the primary, GM = 1069.1 to 1089.3 km^3/s^2. The retained values 9.56 and 1069.1 are the low end of each stated range, read from the response headers, and they are the parameters this orbit calculation uses. They are not measured masses. Brown and Butler (2023), PSJ 4, 193, measure a Dysnomia/Eris mass ratio of 0.0050 +/- 0.0035 with a 1-sigma upper limit of 0.0085, which is below the whole Horizons range; that conflict is unresolved and is recorded in the investigation ledger.",
+    "Holler et al. (2021) exclude a purely Keplerian fit at the 5.8 to 6.3 sigma level without identifying the cause. The deviation is a few milliarcseconds of HST astrometry, which is why Horizons still states 110 km; it is a statistical exclusion, not an accuracy problem at this scene's scale.",
+    "The centre of this state is Horizons object 920136199, which the retained responses name 'Eris (primary body)'. It is the primary, not the system barycentre, which Horizons carries separately as 20136199.",
+    "The osculating geometric state is a snapshot at one epoch. It is never propagated at runtime."
+  ],
+  "runtimeExtrapolation": false
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 0,
+  "declinationDegrees": 90,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "source": "https://doi.org/10.3847/PSJ/ace52a",
+  "qualification": "Illustrative ICRF north pole (right ascension 0 degrees, declination +90 degrees), arbitrary prime meridian and phase. Dysnomia has no measured rotation pole. Its own brightness varies by about 0.3 magnitudes in HST imaging (Bernstein et al. 2023), and Eris is measured to rotate synchronously with Dysnomia's 15.79 day orbit, so Dysnomia is likely tidally locked; that is an inference, and the well-measured orbit pole is not a body pole."
+}

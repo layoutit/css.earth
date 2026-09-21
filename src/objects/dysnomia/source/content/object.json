@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "dysnomia",
+  "displayName": "Dysnomia",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "615 × 615 × 615 km",
+        "source": {
+          "url": "https://doi.org/10.3847/PSJ/ace52a",
+          "label": "Research publication · DOI 10.3847/PSJ/ace52a",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-3847-psj-ace52a",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "thumbnail": "/scenes/dysnomia/dysnomia-model-thumbnail.webp",
+        "surface": "dysnomia-model-surface@2x.webp",
+        "poles": "dysnomia-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/PSJ/ace52a"
+        },
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Brown and Butler (2023), The Planetary Science Journal 4, 193; ALMA Band 6 and Band 7 thermal detection of Dysnomia",
+      "href": "https://doi.org/10.3847/PSJ/ace52a"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/2307.04848"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.3847/1538-3881/aad9f2"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.1016/j.icarus.2020.114130"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.3847/PSJ/acdd5f"
+    },
+    {
+      "label": "Non-Keplerian Haumea satellite orbits",
+      "role": "facts",
+      "description": "Source measurements and model interpretation",
+      "href": "https://doi.org/10.3847/PSJ/ad26e9"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.3847/PSJ/ace52a",
+      "credit": "Brown and Butler (2023), The Planetary Science Journal 4, 193; ALMA Band 6 and Band 7 thermal detection of Dysnomia"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Brown and Butler (2023), The Planetary Science Journal 4, 193; ALMA Band 6 and Band 7 thermal detection of Dysnomia"
+    }
+  }
+}
