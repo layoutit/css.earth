@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hd-209458b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 209458 b",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 97139
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ddd2b8edf1095e06711bf94dbd079486f4b3cd2e7ea90f3353d8b973ed50a109"
+      }
+    },
+    "catalog": {
+      "name": "HD 209458 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 9931113.7,
+      "description": "The first planet seen crossing its star: a hot giant 1.36 Jupiter radii wide on a 3.5-day orbit.",
+      "systemName": "HD 209458",
+      "order": 1100,
+      "context": {
+        "order": 1100
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1227013969465693700,
+        -685892099234607500,
+        480847552288313700
+      ],
+      "presentationToReference": [
+        0.8525370370197846,
+        -0.4397354373339206,
+        -0.28251255841514733,
+        -0.4108189730543119,
+        -0.8979352571590721,
+        0.15792417588599852,
+        0.3231228433400012,
+        0.018574689860583388,
+        0.9461747243551035
+      ],
+      "orbitUpReference": [
+        0.4397354373339206,
+        0.8979352571590721,
+        -0.018574689860583388
+      ],
+      "metersPerUnit": 313351.6129032258,
+      "bodyRadiusM": 97139000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "77b1142a2b60175632877f885b8bc037f580f4b6c3e61e5f9c00e2554c1b9516"
+  }
+}

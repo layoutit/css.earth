@@ -1,0 +1,84 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-209458",
+  "displayName": "HD 209458",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.155 solar radii",
+        "source": {
+          "catalogueId": "arxiv-0801-1841",
+          "url": "https://arxiv.org/abs/0801.1841",
+          "label": "Torres et al. 2008",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "48 parsecs",
+        "source": {
+          "catalogueId": "simbad-hd-209458",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD+209458",
+          "label": "SIMBAD parallax",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+        "thumbnail": "hd-209458-lens-shape.webp",
+        "surface": "hd-209458-surface-shape@2x.webp",
+        "poles": "hd-209458-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-209458-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/0801.1841"
+        },
+        "falseColor": false,
+        "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "G. Torres et al., \"Improved parameters for extrasolar transiting planets\", ApJ 677, 1324 (2008), arXiv:0801.1841",
+      "href": "https://arxiv.org/abs/0801.1841"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/0801.1841",
+      "credit": "G. Torres et al., \"Improved parameters for extrasolar transiting planets\", ApJ 677, 1324 (2008), arXiv:0801.1841"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-209458.json",
+      "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}
