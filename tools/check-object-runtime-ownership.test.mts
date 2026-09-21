@@ -419,7 +419,7 @@ test('descriptor context binding pins both prepared contexts to the shared facto
   const contextMutations: [SourceOverlay, RegExp][] = [
     [{ [planFile]: plan.replace("'../tools/prepared-world-context-node-source.mts'", "'../tools/other-context-plan.mts'") }, /world context plan|Computed dynamic imports/],
     [{ [planFile]: plan.replace("type: 'json'", "type: 'javascript'") }, /world context plan|Computed dynamic imports/],
-    [{ [planFile]: plan.replace("'src/objects/sun/prepared/world-context.json'", "'src/objects/sun/prepared/other-context.json'") }, /world context plan|Computed dynamic imports/],
+    [{ [planFile]: plan.replace("'src/objects/sun/prepared/world-context-summary.json'", "'src/objects/sun/prepared/other-context.json'") }, /world context plan|Computed dynamic imports/],
     [{ [planFile]: plan.replace("if (source.protocol === 'file:') {", "if (source.protocol !== 'https:') {") }, /world context plan|Computed dynamic imports/],
     // The Node-side path helper is followed and scanned: it cannot construct code or hide an import.
     [{ [nodeReaderFile]: nodeReader.replace('return pathToFileURL(', "eval('0');\n  return pathToFileURL(") }, /Runtime code construction/],
