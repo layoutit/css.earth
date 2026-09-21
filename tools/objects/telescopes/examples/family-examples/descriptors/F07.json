@@ -28,7 +28,7 @@
   "members": [
     {
       "id": "cdf",
-      "path": "../../../tests/fixtures/telescope-families/wind-rad1/wi_l2_wav_rad1_20200101_v01.cdf",
+      "path": "../../../../../../tests/fixtures/telescope-families/wind-rad1/wi_l2_wav_rad1_20200101_v01.cdf",
       "role": "science",
       "bytes": 423932,
       "sha256": "a1fd0d0c2487592cd0a43672f50aede256dcdc2fed8bc4c3a87fb0799b20647b",

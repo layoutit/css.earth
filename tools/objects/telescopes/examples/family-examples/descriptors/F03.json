@@ -5,7 +5,7 @@
     "target": "mercury",
     "acquisition": {
       "kind": "repository",
-      "identity": "../../../src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json"
+      "identity": "../../../../../../src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json"
     },
     "producingRecord": "src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json",
     "sourceClassifications": [
@@ -29,7 +29,7 @@
   "members": [
     {
       "id": "mascs",
-      "path": "../../../src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json",
+      "path": "../../../../../../src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json",
       "role": "science",
       "bytes": 13609,
       "sha256": "b1aaec4f4361318c40d4f4cbc10c798baca0dbfb309cdab41152d6f83925d756",

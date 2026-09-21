@@ -5,7 +5,7 @@
     "target": "polaris",
     "acquisition": {
       "kind": "repository",
-      "identity": "../../../tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz"
+      "identity": "../../../../../../tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz"
     },
     "producingRecord": "tools/objects/chandra/programs/polaris-vfaint.acisf06431N003_evt2.reproduction.json",
     "sourceClassifications": [
@@ -29,7 +29,7 @@
   "members": [
     {
       "id": "events",
-      "path": "../../../tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz",
+      "path": "../../../../../../tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz",
       "role": "science",
       "bytes": 2486220,
       "sha256": "14d5d8da4fcf108a7ec6d3d5ee8db31ed7e641ba8f66a52f7671322b928ce0e5",
