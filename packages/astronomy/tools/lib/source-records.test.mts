@@ -1,10 +1,17 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { parseElements, parseVectors } from './horizons.mts';
-import { objectValue, readElementRecord, readVectorFixture, readHostedOrbitRecord } from './generator-records.mts';
+import { objectValue, readElementRecord, readVectorFixture, readHostedOrbitRecord, readStarRecord } from './generator-records.mts';
 import { parseBodyEpochRecord, parseSceneManifest } from './ephemeris-records.mts';
 
 describe('astronomy source decoding', () => {
+  it('retains explicit Hipparcos identities and rejects invalid cross-identifications', () => {
+    const source = JSON.parse(readFileSync(new URL('../../data/bodies/betelgeuse.json', import.meta.url), 'utf8')).star;
+    expect(readStarRecord(source).hipparcosId).toBe(27989);
+    for (const hipparcosId of [0, -1, 27989.5, '27989', NaN]) expect(() => readStarRecord({ ...source, hipparcosId })).toThrow();
+    const { hipparcosId: _id, ...unmatched } = source;
+    expect(readStarRecord(unmatched).hipparcosId).toBeUndefined();
+  });
   it('retains sourced eccentric hosted orbits and refuses missing conventions or unbound geometry', () => {
     const circular = { periodDays: 3, semiMajorAxisStellarRadii: 9, inclinationDegrees: 88, eccentricity: 0,
       transitTimeBmjdTdb: 59000, ascendingNodePositionAngleDegrees: 0,

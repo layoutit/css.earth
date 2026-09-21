@@ -1,10 +1,12 @@
 # Choosing destinations to explore
 
 The Solar System's default captions guide visitors toward useful content.
-The Sun and major planets remain orientation anchors. Prepared observation
-imagery promotes a destination automatically; `properties.catalog.featured`
-can also recommend a reviewed package. These are discovery choices, not a
-scientific ranking. Name searches and direct links retain all registered objects.
+The Sun, planets and all five dwarf planets remain orientation anchors. Prepared observation
+imagery promotes most destinations automatically; `properties.catalog.featured`
+can also recommend a reviewed package. Asteroids are the exception: their
+default labels, circles and orbits come from JPL's spacecraft-mission target
+catalogue, not from which cssEarth packages happen to contain imagery. Name
+searches and direct links retain all registered objects.
 
 ## Search results
 
@@ -28,6 +30,19 @@ highlights bypass the fade tied to orbit size, so moons remain identifiable
 at Solar System scale; their tiny orbits need not be drawn. Orbit visibility
 continues to follow Settings.
 
+## Sourced asteroid context
+
+The default asteroid context is the intersection of registered cssEarth objects
+and JPL Solar System Dynamics' [Small-Body Targets of Spacecraft Missions](https://ssd.jpl.nasa.gov/sb/targets.html).
+[`site/source/jpl-small-body-mission-targets.json`](../site/source/jpl-small-body-mission-targets.json)
+preserves the checked source identifiers and mission names. The accompanying
+module binds JPL SBDB identifiers to cssEarth object identifiers; it does not
+add an editorial score, size threshold or hand-picked fallback.
+
+This selection means "spacecraft mission targets", not that other asteroids are
+scientifically unimportant. Category browsing, name search, direct links,
+selection and hover still expose every eligible registered object.
+
 ## Illustration models
 
 **Illustration models** starts off in Settings. It excludes approximate
@@ -39,8 +54,8 @@ The preference survives navigation within the app; a new session starts off.
 This setting concerns the representation of the body, not whether it has a
 photographic texture. Body-specific measured or reconstructed meshes remain
 eligible without imagery: Pallas, Psyche, Kleopatra, Squannit and the 2001 SN263
-radar meshes are examples. The separate asteroid settings still control
-unfeatured asteroid crowding.
+radar meshes are examples. The JPL mission-target source separately controls
+default asteroid label, circle and orbit crowding.
 
 Approximate stand-ins include analytic spheres and ellipsoids that illustrate
 size or axis constraints, approximate envelopes in place of an original shape
@@ -77,8 +92,9 @@ registry. Runtime reads this prepared metadata; it does not inspect source image
 generate assets.
 
 A prepared observation lens makes the destination visible and featured without
-changing a second promotion flag. Downloaded candidates absent from the prepared
-controls do not count. Modeled observation textures, declared illustration
+changing a second promotion flag. For asteroids, that discovery metadata does
+not decide default context prominence. Downloaded candidates absent from the
+prepared controls do not count. Modeled observation textures, declared illustration
 lenses, GLB base-color illustrations, shape views and shape-derived elevation
 do not count as imagery. Partial photographic coverage does count; its gaps and
 interpretation remain the dataset panel's responsibility. Removing the prepared
@@ -123,8 +139,8 @@ that pitch also re-bakes those five.
 ## Stable priority
 
 Selected, hovered and explicitly highlighted labels retain priority. Other
-labels use fixed tiers: Sun, Earth, other orientation anchors, featured
-destinations/major moons, then ordinary objects. Earth keeps the normal distance
+labels use fixed tiers: Sun, Earth, other orientation anchors, dwarf planets/JPL
+mission-target asteroids/featured destinations/major moons, then ordinary objects. Earth keeps the normal distance
 eligibility, so the Sun remains the reference at outer-space scales.
 Clear placements survive within a tier through drag,
 inertia and rest. A lower-tier survivor cannot reserve a slot ahead of a newly

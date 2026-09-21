@@ -28,7 +28,7 @@ try {
     assert.deepEqual(await results.locator('.planet-object-item:not([hidden]) .planet-object-name').allTextContents(), ['Titan', 'Titania']);
     assert.equal(await page.locator('.planet-stage').innerHTML(), scene);
     assert.equal(await page.locator('.polycss-scene').count(), 1);
-    assert.equal(await page.locator('.planet-information-panel').isVisible(), false);
+    assert.equal(await page.locator('.planet-information-panel').isVisible(), true);
     await page.screenshot({ path: `${output}/native-${viewport.width}.png` });
     await page.getByRole('link', { name: 'Clear search', exact: true }).click();
     await page.waitForURL(`${origin}/saturn/`);
@@ -37,15 +37,12 @@ try {
     assert.equal(await search.inputValue(), 'Moons');
     assert.ok(await results.locator('.planet-object-item:not([hidden])').count() > 20);
     await search.fill('');
-    await page.getByRole('button', { name: 'Search', exact: true }).click();
+    await page.getByRole('button', { name: 'Browse celestial objects', exact: true }).click();
     await page.waitForURL(url => url.searchParams.get('q') === '' && !url.searchParams.has('browse'));
     assert.ok(await results.locator('.planet-object-item:not([hidden])').count() > 450);
-    await page.getByRole('tab', { name: /^Moons/ }).click();
-    await page.waitForURL(url => url.searchParams.get('category') === 'satellite');
-    assert.equal(await results.locator('.planet-object-item:not([hidden]):not([data-object-classification="satellite"])').count(), 0);
-    await search.fill('orion');
+    await search.fill('m42');
     await search.press('Enter');
-    await page.waitForURL(url => url.searchParams.get('q') === 'orion');
+    await page.waitForURL(url => url.searchParams.get('q') === 'm42');
     assert.equal(await results.locator('a[data-prepared-focus-id="m42"]').isVisible(), true);
     await search.fill('Tycho');
     await search.press('Enter');
@@ -103,7 +100,7 @@ try {
   await jupiter.waitFor({ state: 'visible' });
   assert.equal(await titan.isVisible(), false);
   assert.equal(navigations, 0);
-  await page.getByRole('button', { name: 'Search', exact: true }).click();
+  await page.getByRole('button', { name: 'Collapse celestial objects', exact: true }).click();
   assert.equal(navigations, 0);
   await page.screenshot({ path: `${output}/enhanced.png` });
   cases.push('Delayed JS retains the same scene, form and rows, preserves the query/styles, then filters without navigation');

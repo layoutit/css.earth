@@ -20,10 +20,11 @@
     "radialVelocityKmPerS": -2.531722,
     "presentationUp": "display-axis",
     "sources": {
-      "position": "Gaia DR3 source 1827242816201846144 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-189733/source/photometry/gaia-dr3-source.csv",
+      "position": "Gaia DR3 source 1827242816201846144 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-189733/source/photometry/gaia-dr3-source.csv; cross-identification HIP 98505: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2098505",
       "distance": "Gaia DR3 parallax 50.567 +/- 0.016 mas (same row): 1000/50.567 = 19.776 pc, no zero-point correction",
       "properMotion": "Gaia DR3 (same row): -3.208, -250.323 mas/yr",
       "radialVelocity": "Gaia DR3 (same row): -2.53 +/- 0.12 km/s"
-    }
+    },
+    "hipparcosId": 98505
   }
 }

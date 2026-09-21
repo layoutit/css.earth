@@ -10,6 +10,7 @@ import type { ProductKind } from './query.mts';
 import { parseProductFacts, type QualifiedObservation } from './qualified-observations.mts';
 import { verifyCalibrationDependencies, type CalibrationDependency } from './calibration-dependencies.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
+import { archiveProfileFamilyEvidence, productKindFamilyEvidence, type ObservationFamilyEvidence } from './observation-families.mts';
 
 export const SOURCE_PRODUCTS_SCHEMA = 'cssearth-source-observations@1';
 export interface SourceFile { readonly role: string; readonly path: string; readonly origin: string; readonly bytes: number; readonly sha256: string }
@@ -17,6 +18,7 @@ export interface SourceProduct {
   readonly id: string; readonly target: string; readonly telescope: string; readonly mode: string; readonly kind: ProductKind;
   readonly archiveProductId: string; readonly decoder: 'fits-image' | 'pds-image' | 'pds-product' | 'isis3'; readonly labelPath?: string; readonly files: readonly SourceFile[];
   readonly identity: Readonly<Record<string, string | number | boolean>>;
+  readonly familyEvidence?: ObservationFamilyEvidence;
   readonly startIso?: string; readonly endIso?: string;
   readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
   readonly centralWavelengthMicrometres?: number;
@@ -77,6 +79,10 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
       return [key, value as string | number | boolean];
     }));
     if (!Object.keys(identity).length) throw new TypeError(`${id} requires header or label identity assertions.`);
+    const telescope = requireString(row.telescope, 'telescope'), mode = requireString(row.mode, 'mode'), familyOwner = { kind: 'source-product' as const, id, evidence: requireString(row.citation, 'citation') };
+    const familyEvidence = row.familyProfile === undefined
+      ? productKindFamilyEvidence(kind, familyOwner)
+      : archiveProfileFamilyEvidence(requireString(row.familyProfile, 'archive family profile'), { kind: kind as ProductKind, decoder, identity, owner: familyOwner });
     const intervals = row.wavelengthIntervalsMicrometres === undefined ? undefined : requireArray(row.wavelengthIntervalsMicrometres, 'wavelength intervals').map(rawRange => {
       const range = requireArray(rawRange, 'wavelength interval'), a = requireFiniteNumber(range[0], 'wavelength start'), b = requireFiniteNumber(range[1], 'wavelength end');
       if (range.length !== 2 || a <= 0 || b <= a) throw new TypeError('Wavelength intervals must have two increasing positive bounds.');
@@ -90,7 +96,7 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
       const value = requireFiniteNumber(row[key], key); if (!(value > 0)) throw new TypeError(`${key} must be positive.`); resolution[key] = value;
     }
     if (Object.keys(resolution).length) resolution.resolutionBasis = requireString(row.resolutionBasis, 'achieved resolution basis');
-    return { ...resolution, id, target, telescope: requireString(row.telescope, 'telescope'), mode: requireString(row.mode, 'mode'), kind: kind as ProductKind,
+    return { ...resolution, id, target, telescope, mode, kind: kind as ProductKind, familyEvidence,
       archiveProductId: requireString(row.archiveProductId, 'archive identity'), decoder, files, identity, ...(labelPath ? { labelPath } : {}),
       ...(startIso ? { startIso } : {}), ...(endIso ? { endIso } : {}), ...(intervals ? { wavelengthIntervalsMicrometres: intervals } : {}),
       ...(row.centralWavelengthMicrometres === undefined ? {} : { centralWavelengthMicrometres: requireFiniteNumber(row.centralWavelengthMicrometres, 'central wavelength') }),
@@ -101,7 +107,7 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
 export const sourceReceipt = (product: SourceProduct) => `output/telescopes/${product.target}/${product.id}/qualification.product.json`;
 export async function sourceRun(product: SourceProduct, dependencies: readonly CalibrationDependency[] = []): Promise<ProductRun> {
   assertPinnedLabel(product);
-  const sources = ['source-intake.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', 'native-metadata.mts', 'product-science.mts', 'calibration-dependencies.mts', '../astronomy-packages/science.mts', '../astronomy-packages/requirements.lock', 'qualified-observations.mts', 'request-satisfaction.mts', '../../fits.mts', '../../fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'];
+  const sources = ['source-intake.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', 'observation-families.mts', 'product-descriptor.mts', 'families/common.mts', 'families/f16-spherical-grid.mts', 'native-metadata.mts', 'product-science.mts', 'calibration-dependencies.mts', '../astronomy-packages/science.mts', '../astronomy-packages/requirements.lock', 'qualified-observations.mts', 'request-satisfaction.mts', '../../fits.mts', '../../fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'];
   const digest = createHash('sha256');
   for (const path of sources) digest.update(path).update(await readFile(resolve(import.meta.dirname, path)));
   return { telescope: product.telescope, stage: 'source-qualification', inputs: product.files.map(file => ({ role: file.role, identity: file.origin, bytes: file.bytes, sha256: file.sha256 })).concat(dependencies.filter(d=>d.status==='pinned').map(d=>({role:'calibration dependency',identity:d.origin!,bytes:d.bytes!,sha256:d.sha256!}))),
@@ -149,6 +155,7 @@ export function sourceRecordComplete(record: ProductRecord, product: SourceProdu
   const science = product.files.find(file => file.role === 'science')!;
   return product.files.every(file => record.outputs.some(output => output.path === file.path && output.bytes === file.bytes && output.sha256 === file.sha256))
     && record.outputs.some(output => output.path === sourceReceipt(product).replace('qualification.product.json', 'decoded.json'))
+    && (product.familyEvidence?.profileId === undefined || record.outputs.some(output => output.path === sourceReceipt(product).replace('qualification.product.json', 'descriptor.json')))
     && record.evidence.some(entry => entry.kind === 'archive-origin' && entry.product === science.path && entry.receipt === sourceReceipt(product));
 }
 

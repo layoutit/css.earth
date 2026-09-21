@@ -1,0 +1,64 @@
+{
+  "id": "nasa-stereo-cor1-tomography-2025",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "STEREO/SECCHI COR1 tomographic electron-density reconstructions, second release",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1007/s11207-025-02454-8"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml",
+      "label": "STEREO Science Center tomography release"
+    },
+    {
+      "role": "archive",
+      "url": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1A/fits/",
+      "label": "COR1-A FITS products"
+    },
+    {
+      "role": "original",
+      "url": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1A/fits/n3d_CR2053P1_m1.0.fits",
+      "label": "n3d_CR2053P1_m1.0.fits"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1A/Readem.txt",
+      "checkedOn": "2026-09-20",
+      "locator": "Second-release format description and 361 by 181 by 51 spherical grid"
+    },
+    {
+      "url": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml",
+      "checkedOn": "2026-09-20",
+      "locator": "Archive ownership, product description, and citation request"
+    }
+  ],
+  "creators": [
+    "T. Wang",
+    "C. N. Arge",
+    "S. Jones"
+  ],
+  "publisher": "NASA STEREO Science Center",
+  "publicationDate": "2025-05-06",
+  "version": "second release",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Credit NASA STEREO Science Center and cite Wang, Arge, and Jones (2025).",
+      "scope": "Use of the reconstruction",
+      "evidence": "Archive acknowledgement section"
+    },
+    {
+      "kind": "limitation",
+      "text": "The release is a tomography reconstruction on a spherical grid from COR1 polarized-brightness image series.",
+      "scope": "Scientific interpretation",
+      "evidence": "Archive README"
+    }
+  ]
+}

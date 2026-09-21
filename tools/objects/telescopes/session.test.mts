@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
-import { loadSourceProducts, parseSourceProducts, sourceQualifiedObservations, sourceRun, SOURCE_PRODUCTS_SCHEMA } from './source-products.mts';
+import { loadSourceProducts, parseSourceProducts, sourceRun, SOURCE_PRODUCTS_SCHEMA } from './source-products.mts';
 import { qualifySourceProduct } from './qualify-source.mts';
 import { queryCapabilities, selectObservation, type QueryInputs } from './query.mts';
 import { selectedProductInput } from './selected-product.mts';
@@ -143,10 +143,7 @@ test('a saved number never silently follows reordered or removed observations', 
 
 test('exploration is immutable, revalidates its exact choice, and delivers with not-requested context', async () => {
   const f = await fixture(); try {
-    const api: SessionServices = { ...f.api, explore: async (_root, request) => {
-      const inputs = await f.load();
-      return explorationAnswer(request, { ...inputs, qualifiedProducts: sourceQualifiedObservations(inputs.sourceProducts ?? []) });
-    } };
+    const api: SessionServices = { ...f.api, explore: async (_root, request) => explorationAnswer(request, await f.load()) };
     const out = resolve(f.root, 'explore'), saved = await saveExploration(f.root, ['test-body'], out, api);
     assert.equal(saved.choices.length, 1); assert.equal(saved.choices[0]!.state, 'qualify');
     const altered = { ...saved, choices: saved.choices.map(choice => ({ ...choice, configuration: { kind: 'untrusted' } })) };

@@ -427,7 +427,7 @@
         "path": "src/objects/stellar-neighbourhood/object.json",
         "url": "https://codeberg.org/astronexus/hyg",
         "bytes": 906,
-        "sha256": "fa4dbdb551af2ecfa85dc4964218f8708bbab60401f8d452a7a5230776c376e1"
+        "sha256": "8234b27bdc8ebe458af8dc29ea8dbbf4fdfabc925497c78068eeb9c421ddcd7e"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F16.json spatial-inspect --out example-output/F16",
       "artifact": {

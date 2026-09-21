@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-jpl-small-body-mission-targets@1",
+  "source": {
+    "url": "https://ssd.jpl.nasa.gov/sb/targets.html",
+    "label": "JPL Solar System Dynamics: Small-Body Targets of Spacecraft Missions",
+    "checked": "2026-09-20",
+    "locator": "Unique asteroid and minor-planet target rows",
+    "sha256": "8ae3e7afad84d6a7ae4daeea8c80a8cd06a49548e7378f0476ac0bd1fc32186d"
+  },
+  "targets": [
+    { "sbdbId": "a0000016", "name": "16 Psyche", "missions": ["Psyche"] },
+    { "sbdbId": "a0065803", "name": "65803 Didymos (1996 GT)", "missions": ["Hera", "DART"] },
+    { "sbdbId": "a0152830", "name": "152830 Dinkinesh (1999 VD57)", "missions": ["Lucy"] },
+    { "sbdbId": "a0052246", "name": "52246 Donaldjohanson (1981 EQ5)", "missions": ["Lucy"] },
+    { "sbdbId": "a0021900", "name": "21900 Orus (1999 VQ10)", "missions": ["Lucy"] },
+    { "sbdbId": "a0015094", "name": "15094 Polymele (1999 WB2)", "missions": ["Lucy"] },
+    { "sbdbId": "a0011351", "name": "11351 Leucus (1997 TS25)", "missions": ["Lucy"] },
+    { "sbdbId": "a0003548", "name": "3548 Eurybates (1973 SO)", "missions": ["Lucy"] },
+    { "sbdbId": "a0000617", "name": "617 Patroclus (A906 UL)", "missions": ["Lucy"] },
+    { "sbdbId": "a0486958", "name": "486958 Arrokoth (2014 MU69)", "missions": ["New Horizons"] },
+    { "sbdbId": "a0004179", "name": "4179 Toutatis (1989 AC)", "missions": ["Chang'e 2"] },
+    { "sbdbId": "a0099942", "name": "99942 Apophis (2004 MN4)", "missions": ["OSIRIS-APEX"] },
+    { "sbdbId": "a0101955", "name": "101955 Bennu (1999 RQ36)", "missions": ["OSIRIS-REx"] },
+    { "sbdbId": "bJ98K26Y", "name": "1998 KY26", "missions": ["Hayabusa2 Extended Mission"] },
+    { "sbdbId": "a0098943", "name": "98943 Torifune (2001 CC21)", "missions": ["Hayabusa2 Extended Mission"] },
+    { "sbdbId": "a0469219", "name": "469219 Kamo'oalewa (2016 HO3)", "missions": ["Tianwen 2"] },
+    { "sbdbId": "a0162173", "name": "162173 Ryugu (1999 JU3)", "missions": ["Hayabusa2"] },
+    { "sbdbId": "a0000001", "name": "1 Ceres", "missions": ["Dawn"] },
+    { "sbdbId": "a0000004", "name": "4 Vesta", "missions": ["Dawn"] },
+    { "sbdbId": "a0000021", "name": "21 Lutetia", "missions": ["Rosetta"] },
+    { "sbdbId": "a0002867", "name": "2867 Steins (1969 VC)", "missions": ["Rosetta"] },
+    { "sbdbId": "a0025143", "name": "25143 Itokawa (1998 SF36)", "missions": ["Hayabusa (MUSES-C)"] },
+    { "sbdbId": "a0005535", "name": "5535 Annefrank (1942 EM)", "missions": ["Stardust"] },
+    { "sbdbId": "a0009969", "name": "9969 Braille (1992 KD)", "missions": ["Deep Space 1"] },
+    { "sbdbId": "a0000443", "name": "433 Eros (A898 PA)", "missions": ["NEAR"] },
+    { "sbdbId": "a0000253", "name": "253 Mathilde", "missions": ["NEAR"] },
+    { "sbdbId": "a0000243", "name": "243 Ida", "missions": ["Galileo"] },
+    { "sbdbId": "a0000951", "name": "951 Gaspra (A916 OJ)", "missions": ["Galileo"] }
+  ]
+}

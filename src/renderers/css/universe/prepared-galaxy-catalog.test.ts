@@ -170,7 +170,7 @@ test('only labels that show or are still fading out follow the camera', () => {
   runtime.destroy();
 });
 
-test('catalogue-only labels remain noninteractive while saved catalogue links still resolve', () => {
+test('catalogue-only rows remain dots without marker captions while saved catalogue links still resolve', () => {
   const payload = read('local-group/prepared/catalogue.json');
   const unsupported = payload.objects.find((row: {membership:{group:string};detailedObjectId?:string}) => row.membership.group === 'local-group' && !row.detailedObjectId);
   const supported = payload.objects.find((row: {detailedObjectId?:string}) => row.detailedObjectId);
@@ -190,7 +190,11 @@ test('catalogue-only labels remain noninteractive while saved catalogue links st
   const dots = root.children.filter(node => node.dataset.galaxyDot && Number(node.style.opacity) > 0);
   expect(dots.length).toBeGreaterThan(10);
   expect(Number(root.dataset.visibleLabels)).toBeLessThanOrEqual(12);
-  expect(runtime.inspect().labels[unsupported.id]!.style.pointerEvents).toBe('none');
+  const unsupportedLabel = runtime.inspect().labels[unsupported.id]!;
+  const unsupportedMarker = root.children.find(node => node.dataset.galaxyMarker === unsupported.id)!;
+  expect(unsupportedLabel.style.pointerEvents).toBe('none');
+  expect(Number(unsupportedLabel.style.opacity)).toBe(0);
+  expect(Number(unsupportedMarker.style.opacity)).toBe(0);
   runtime.publish(world, viewport, 0); document.defaultView.advance(600);
   expect(dots.every(dot => Number(dot.style.opacity) === 0)).toBe(true);
   runtime.destroy();
@@ -223,7 +227,7 @@ test('baked sparse sample shows dots before names without enabling unsupported n
   expect(onSelect).not.toHaveBeenCalled(); runtime.destroy();
 });
 
-test('a focused catalogue row outside the display sample still shows its marker and caption', () => {
+test('a focused catalogue-only row outside the display sample does not fabricate a marker and caption', () => {
   const payload = read('local-group/prepared/catalogue.json');
   const galaxySample = read('local-group/prepared/display-sample.json');
   const object = payload.objects.find((row: { id: string }) => row.id === 'draco_2');
@@ -238,7 +242,7 @@ test('a focused catalogue row outside the display sample still shows its marker 
   expect(shown()).toBe(false);
   runtime.select('draco_2');
   runtime.publish(world, viewport, 1); document.defaultView.advance(800);
-  expect(shown()).toBe(true);
+  expect(shown()).toBe(false);
   runtime.select(null);
   runtime.publish(world, viewport, 1); document.defaultView.advance(900); document.defaultView.advance(1400);
   expect(shown()).toBe(false);

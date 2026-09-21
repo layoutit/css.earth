@@ -45,6 +45,7 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
           >
             <img class="planet-lens-icon" src={sidebarThumbnail(thumbnailObjectId, lens.id)?.url2x ?? lens.thumbnailUrl} width="14" height="14" alt="" />
             <span class="planet-lens-label">{lens.label}</span>
+            {lens.detail && <span class="planet-lens-detail">{lens.detail}</span>}
           </button>
         </div>
       ))}

@@ -13,6 +13,7 @@ import type { PreparedNavigationFocus } from '../navigation/prepared-focus.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import { createPreparedUniverse } from '../universe/prepared-universe-runtime.js';
 import { logarithmicFade } from '../universe/prepared-world-context.js';
+import { STELLAR_POINTS_MAX_OPACITY } from '../universe/stellar-points.js';
 import { readCanonicalPointField } from '../preparation/stars/canonical-point-field-fixture.js';
 
 const spatialPublish = vi.hoisted(() => vi.fn());
@@ -146,6 +147,18 @@ test('optional sky is validated as part of the existing volume capability and sh
   const { sky: _sky, ...legacy } = withSky; expect(validatePreparedCssVolume(legacy).sky).toBeUndefined();
 });
 
+test('near star cube is fully handed off before solar-system parallax produces duplicate stars', () => {
+  const source = JSON.parse(readFileSync(new URL('../../../objects/sun/source/navigation/universe.json', import.meta.url), 'utf8'));
+  const astronomicalUnitM = 149_597_870_700;
+  expect(source.stars.fadeStartDistanceM).toBe(100 * astronomicalUnitM);
+  expect(source.stars.fullDistanceM).toBe(200 * astronomicalUnitM);
+  expect(logarithmicFade(591.27 * astronomicalUnitM, source.stars.fadeStartDistanceM, source.stars.fullDistanceM)).toBe(1);
+});
+
+test('direct stars peak at half opacity', () => {
+  expect(STELLAR_POINTS_MAX_OPACITY).toBe(.5);
+});
+
 test.each([
   { withSky: true, withBrightness: true }, { withSky: true, withBrightness: false },
   { withSky: false, withBrightness: true }, { withSky: false, withBrightness: false },
@@ -168,7 +181,7 @@ test.each([
   expect(skyAssets).toHaveLength(withSky ? 6 : 0);
   for (const asset of skyAssets) expect(universe.assets.startup).toContain(asset.key);
   const mounted = universe.mount(stage as unknown as HTMLElement), root = mounted.root as unknown as FakeElement;
-  const skyRoot = root.children.find(node => node.className === 'prepared-celestial-sky')!, volumeRoot = root.children.find(node => node.className === 'prepared-volume-context')!;
+  const skyRoot = root.children.find(node => node.className === 'prepared-celestial-sky')!, stellarRoot = root.children.find(node => node.className === 'stellar-direct-points')!, volumeRoot = root.children.find(node => node.className === 'prepared-volume-context')!;
   const volumeImage = volumeRoot.children.find(node => node.className === 'prepared-volume-image')!;
   expect(volumeRoot.style.background).toBe('#000');
   expect(volumeRoot.style.transformStyle).toBe('flat');
@@ -180,8 +193,9 @@ test.each([
     expect(axis.children[0]!.children[0]!.style.opacity).toBeUndefined();
   }
   const count = document.count, originalNodes = [...root.children];
-  if (withSky) expect(root.children.indexOf(skyRoot)).toBeLessThan(root.children.indexOf(volumeRoot));
+  if (withSky) expect(root.children.indexOf(skyRoot)).toBeLessThan(root.children.indexOf(stellarRoot));
   else expect(skyRoot).toBeUndefined();
+  expect(root.children.indexOf(stellarRoot)).toBeLessThan(root.children.indexOf(volumeRoot));
   const profile = context.volume.opacityProfile;
   const nearGain = brightness.nearOpacity;
   const regressionDistance = 98 * 3.085677581491367e16;
@@ -198,6 +212,10 @@ test.each([
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distance], orientationXyzw: [0, 0, 0, 1] } };
     mounted.publish(camera, viewport);
     const expectedGain = withBrightness ? gain : 1;
+    const expectedSkyContribution = 1 - expected * expectedGain;
+    const starHandoff = logarithmicFade(distance, context.stars.fadeStartDistanceM, context.stars.fullDistanceM);
+    const completedVolumeContribution = expected * (withSky ? expectedGain : 1);
+    expect(Number(stellarRoot.style.opacity)).toBeCloseTo(STELLAR_POINTS_MAX_OPACITY * starHandoff * (1 - completedVolumeContribution), 12);
     expect(Number(volumeRoot.dataset.volumeOpacity)).toBeCloseTo(expected, 12);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? expectedGain : 1), 12);
     if (withBrightness && distance === gradedDistance) {
@@ -207,14 +225,12 @@ test.each([
     expect(volumeImage.style.opacity).toBe(withSky ? '' : String(expectedGain));
     expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
     if (withSky) {
-      expect(skyRoot.style.visibility).toBe(expected < 1 ? 'visible' : 'hidden');
-      expect((1 - Number(volumeRoot.style.opacity)) * Number(skyRoot.style.opacity)).toBeCloseTo(1 - expected, 12);
+      expect(skyRoot.style.visibility).toBe(expectedSkyContribution > 0 ? 'visible' : 'hidden');
+      expect((1 - Number(volumeRoot.style.opacity)) * Number(skyRoot.style.opacity)).toBeCloseTo(expectedSkyContribution, 12);
       const skyWeight = Number(skyRoot.dataset.skyContribution);
-      expect(skyWeight).toBeCloseTo(1 - expected, 12);
-      expect(Number(volumeRoot.dataset.volumeOpacity) + skyWeight).toBeCloseTo(1, 12);
+      expect(skyWeight).toBeCloseTo(expectedSkyContribution, 12);
       // Test the actual DOM source-over equation, not just reported weights.
-      // Regrouping must not turn exposure into extra NASA contribution.
-      expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBeCloseTo(.4 * (expected * expectedGain + 1 - expected), 12);
+      expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBeCloseTo(.4 * (expected * expectedGain + expectedSkyContribution), 12);
       if (distance === regressionDistance) {
         expect(expected).toBe(0);
         expect(skyWeight).toBe(1);
@@ -223,18 +239,15 @@ test.each([
         expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBe(.4);
       }
     } else expect(completedPixel(volumeRoot, volumeImage, undefined, .4)).toBeCloseTo(.4 * expected * expectedGain, 12);
-    for (const high of [true, false]) {
-      mounted.setHighContrastSky(high);
-      const effectiveGain = high ? 1 : expectedGain;
-      expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? effectiveGain : 1), 12);
-      expect(completedPixel(volumeRoot, volumeImage, skyRoot, .2, .7)).toBeCloseTo(
-        .2 * expected * effectiveGain + (withSky ? .7 * (1 - expected) : 0), 12);
-      expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
-    }
     mounted.publish({ ...camera, pose: { ...camera.pose, orientationXyzw: [0, 1, 0, 0] } }, viewport);
     expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? expectedGain : 1), 12);
   }
+  expect(stellarRoot.style.display).toBe('block');
+  mounted.setStellarPointsEnabled(false);
+  expect(stellarRoot.style.display).toBe('none');
+  mounted.setStellarPointsEnabled(true);
+  expect(stellarRoot.style.display).toBe('block');
   expect(document.count).toBe(count); expect(root.children).toEqual(originalNodes);
   mounted.destroy(); expect(stage.children).toEqual([detail]); expect(document.defaultView.pending.size).toBe(0);
 });
@@ -509,7 +522,7 @@ function completedPixel(host: FakeElement, image: FakeElement, sky: FakeElement 
   return t * g * volumeValue + (1 - foregroundAlpha) * underlay;
 }
 
-test("baked stars paint one cube through the Sun's neighbourhood and hand the background to the plain Milky Way beyond it", () => {
+test("baked stars hand the background to the plain Milky Way beyond the Sun's neighbourhood", () => {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
   const nearFaces = fixture().faces.map(face => ({ ...face, texturePath: `sky-near/${face.id}.webp` }));
   const payload: PreparedCssSky = { ...fixture(), nearFaces, stars: { objectId: 'stellar-neighbourhood', cssPixelsPerDegree: 21.8 } };
@@ -580,6 +593,7 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   const findBank = (id: string) => root.children.find(node => node.dataset.volumeLensObject === id)!;
   const mw = root.children.find(node => node.className === 'prepared-volume-context')!;
   const sky = root.children.find(node => node.className === 'prepared-celestial-sky')!;
+  const stellar = root.children.find(node => node.className === 'stellar-direct-points')!;
   const focus = (id = 'catalogue:focus-bank'): PreparedNavigationFocus => ({ id, positionM: frame.originM, framingRadiusM: frame.metersPerUnit,
     limits: { minimumDistanceM: .01 * frame.metersPerUnit, maximumDistanceM: 1e25 } });
   const camera = (radii: number): WorldCameraPose => ({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
@@ -601,8 +615,14 @@ test('authoritative detailed close-up gates background fetch, painting and publi
       if (radii > 8) { await mounted.ensureVolumeLens('cold-bank'); await mounted.ensureImageLayer(image.id); mounted.publish(camera(radii), viewport); }
       const originalOpacity = Number(mw.dataset.volumeOpacity), alpha = Number(mw.style.opacity);
       expect(originalOpacity).toBeGreaterThan(0); expect(originalOpacity).toBeLessThan(1);
-      expect(alpha).toBeCloseTo(originalOpacity * Number(mw.children[0]!.dataset.volumeBrightness) * multiplier, 12);
-      expect((1 - alpha) * Number(sky.style.opacity)).toBeCloseTo(1 - originalOpacity, 12);
+      const completedContribution = originalOpacity * Number(mw.children[0]!.dataset.volumeBrightness);
+      expect(alpha).toBeCloseTo(completedContribution * multiplier, 12);
+      expect((1 - alpha) * Number(sky.style.opacity)).toBeCloseTo(1 - completedContribution, 12);
+      expect(Number(sky.dataset.skyContribution)).toBeCloseTo(1 - completedContribution, 12);
+      expect(Number(stellar.style.opacity)).toBeCloseTo(STELLAR_POINTS_MAX_OPACITY * (1 - completedContribution) * multiplier, 12);
+      expect(stellar.style.display).toBe(multiplier > 0 ? 'block' : 'none');
+      mounted.setStellarPointsEnabled(false); mounted.setStellarPointsEnabled(true);
+      expect(stellar.style.display).toBe(multiplier > 0 ? 'block' : 'none');
       const selectedOpacity = Number(findBank('focus-bank').style.opacity);
       expect(selectedOpacity).toBeGreaterThan(0);
       expect(Number(findBank('warm-bank').style.opacity)).toBeCloseTo(multiplier * selectedOpacity, 12);
