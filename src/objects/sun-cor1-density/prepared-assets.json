@@ -3,924 +3,389 @@
   "resourceRoot": "prepared",
   "assets": [
     {
-      "filename": "electron-density-mu1/slices/x/00.png",
-      "bytes": 91,
-      "sha256": "33a1093903b4ff7dc379abc3541930f71bd33f2aeb9d042f61b0d36cabbb6479"
+      "filename": "electron-density/slices/x/03.png",
+      "bytes": 175,
+      "sha256": "7867080ff2bf6fa0ea927ef2a4262490b80194896612bf83a7ee3eee7440b541"
     },
     {
-      "filename": "electron-density-mu1/slices/x/01.png",
-      "bytes": 290,
-      "sha256": "eebecdce05810f694b79947f1f213f9908cb732bde1e6c569c2c280a621de970"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/02.png",
-      "bytes": 431,
-      "sha256": "6ce1e91eabbdb2a94675c0c3afb85ff862f5b96628a59f082c1e7f2457f5f8ca"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/03.png",
-      "bytes": 520,
-      "sha256": "e58b31e26d7f2df89733d03618d5b33b8be9730556d9d6dc34a4411a8071c111"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/04.png",
-      "bytes": 628,
-      "sha256": "3d8ac99ebc58fd96b6e2d95829a31bdabd9363c4991cd8c152acd93c6863f8c2"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/05.png",
-      "bytes": 792,
-      "sha256": "383072ce38feb1f634dec8ed440c6b660f16536717c74bcb17f1d6f973379828"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/06.png",
-      "bytes": 962,
-      "sha256": "f37d969a6118629ffe2ce13a26109002d7e64e3fb07006ab5c4ea7e3800ce488"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/07.png",
-      "bytes": 1181,
-      "sha256": "d427100b29644035a5a4250957b309b889196fd7433fe2261c86210780da8470"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/08.png",
-      "bytes": 1499,
-      "sha256": "3ba918e7717b212a58193e31d8eea375a28402640efa5603fe850c55f3fd5eed"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/09.png",
-      "bytes": 1961,
-      "sha256": "f4e1126078b34be965c20a57f8ad9741d2dda2b3be0d16bd09687d1388e66c51"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/10.png",
-      "bytes": 2134,
-      "sha256": "11e7fb32d20902cdc47dfb2e6bb04f5e2a119e97df90bd0ca6e10f190bdccb05"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/11.png",
-      "bytes": 2083,
-      "sha256": "eb6459b323e54b6233d364fb441fa6c1819f28c88befdad011e4b71ce85bda36"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/12.png",
-      "bytes": 1971,
-      "sha256": "10d71b6d77b1f2f374df0dc161cecb4c8d965de2701115825a68195770bed910"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/13.png",
-      "bytes": 1881,
-      "sha256": "5864c3495d413d941ed0c04fc091cfcb0cd281d0e35f26f469bb2be5766cd97c"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/14.png",
-      "bytes": 1740,
-      "sha256": "5d1a7fe691ea19a28e6356ae942acf5b58e55d04de79c9d6380db174b32cda23"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/15.png",
-      "bytes": 1633,
-      "sha256": "5bead4d37d066c2ed0d06446047d3a4b975b114979d015702b65e43ea5fcbb0f"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/16.png",
-      "bytes": 1548,
-      "sha256": "fc3f77208b7d8706c9f28bacb303ecdc2d68add99d061e8b81ebc7b4d24b8291"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/17.png",
-      "bytes": 1691,
-      "sha256": "0cbda499640690a9f04990003c736b04695182a447609c0d07558d61288a5d5f"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/18.png",
-      "bytes": 1844,
-      "sha256": "1ca6738219f1cdb591f3d8fb60b5723b5867f38f0df9045419edd074639f7f88"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/19.png",
-      "bytes": 1934,
-      "sha256": "9ed9618b28d1718db24fbfdbcb87b19bdbab52229a6dabc294f3c1a5c1bff807"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/20.png",
-      "bytes": 2063,
-      "sha256": "d89765cc9ab8aab5fc23535dd81ca573acb29287645bcb19cef476f491cea6de"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/21.png",
-      "bytes": 1970,
-      "sha256": "d21cdc4c3c4a147515d2c2f531629a47ec75b1eacff41046ae13654cfd5e435f"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/22.png",
-      "bytes": 1836,
-      "sha256": "e23914a4ebf30d8a7d7a02b5bac216670ee262c6cfd4649e1b850490e7f2c50e"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/23.png",
-      "bytes": 1481,
-      "sha256": "a390498fbf46a2820278cc8ec621a2fb32b9dbb2efcd39804b77351742bf307b"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/24.png",
-      "bytes": 1112,
-      "sha256": "c2a5ade621fecf085edfb7e6477b703f579933b7bc0a96e643844be7b8d56d03"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/25.png",
-      "bytes": 871,
-      "sha256": "6e18b518b2a2a3b868c242803a030657f0626f1d9a1be399f3d373fcf98f5dda"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/26.png",
-      "bytes": 696,
-      "sha256": "c9398ebd2151f86e213b9cd7189dc33ca75570e20912f7d16250fc7bb56a279d"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/27.png",
-      "bytes": 608,
-      "sha256": "46bfbe86d6470b7bcf4e7c58e6d3766287a5dd9e0fccf1285e81dffac103b614"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/28.png",
-      "bytes": 491,
-      "sha256": "56fbe190834f90812fc095624d3f7bb13f47acd13406c42fbfe92e46005f6bd9"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/29.png",
-      "bytes": 384,
-      "sha256": "dbf9746a3f2459863357d73df4b21df70c8c51a693e4f54e101647e3e4cd3b67"
-    },
-    {
-      "filename": "electron-density-mu1/slices/x/30.png",
-      "bytes": 267,
-      "sha256": "51dc6daceb168d7019f35d3ec8b1ac993d5fbfecd72d0986d0a506a905918165"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/01.png",
-      "bytes": 256,
-      "sha256": "f52d7086b4456481231ae172c2f26271bcf134fafc6981d67ea0d3f21637679e"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/02.png",
-      "bytes": 374,
-      "sha256": "fd9a689275502c2eb466f54ecf1c573d49a7cb7340322e52243100c6e7a0e5f5"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/03.png",
-      "bytes": 472,
-      "sha256": "437f5e692af38a145306fc42afaf7ee708e1b62e2cdd509a2dd35e80144d4c16"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/04.png",
-      "bytes": 620,
-      "sha256": "01934222e0143d25d358fcc9383b43fdd2c28e0cacf6332f8c44e9b6f8652345"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/05.png",
-      "bytes": 681,
-      "sha256": "9b5f52266acf97056c4e9030d1b6823cd46139c487f097b65d2ca93dc52a5ba9"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/06.png",
-      "bytes": 810,
-      "sha256": "1610b3a01cdeede05fd798f09efa8e2119d36dd66bb7ecd1e1b40b9035e1ddc9"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/07.png",
-      "bytes": 1019,
-      "sha256": "66240d7cceab86866ae894e0955070c640634dd48bf5e97d152e62b8bd3e49a9"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/08.png",
-      "bytes": 1337,
-      "sha256": "eefaf8a69f02472e5538cd819c20619df7cb911bc5241cbcd8326bebd62cc672"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/09.png",
-      "bytes": 1742,
-      "sha256": "de610f4c7b087cc2fcad51c0c564a8e82e9e7897a95347a340b4aa65f1979a99"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/10.png",
-      "bytes": 1987,
-      "sha256": "10383900bcb466904c24e407595939b098493d29c73dfb43d8bf23920e6ac2b3"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/11.png",
-      "bytes": 1996,
-      "sha256": "7c95d18dcfe53637390cb133189bc23992478fbac074974f316e334af901d9cb"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/12.png",
-      "bytes": 1984,
-      "sha256": "c34b4845fcec1bc8f98021600012c564b3f11e1360a40ecfe1674d1b5d3dec7e"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/13.png",
-      "bytes": 1964,
-      "sha256": "71309a988e0d8d70a53a6564566c4b6302aa8738201fca64642e3bb4dc772c22"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/14.png",
-      "bytes": 1919,
-      "sha256": "ee69ad8cf1a9e91741840587273e5c3d308b21b30d909dd7e9d78b7f4e06a758"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/15.png",
-      "bytes": 1813,
-      "sha256": "58def3aae31d7e2872837600082a13f63566c02adbf71bfdd8ada9f819da7915"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/16.png",
-      "bytes": 1825,
-      "sha256": "5e2bea7ad369a424faa658e5a2f3f6c7ce85bcc5670cf8d077aa9a052f0cd54e"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/17.png",
-      "bytes": 1984,
-      "sha256": "382a96cd3379c1c377573a0e0b89d0fe9ca3a22bbb0eb63234a0b6d520f21605"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/18.png",
-      "bytes": 1982,
-      "sha256": "3b887fdaafa0d5a29c9f172ef3f3c118abdd7b26eea3cc3b492947961a772e4c"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/19.png",
-      "bytes": 2094,
-      "sha256": "ebf2219f5e88a92c9c8a33f0b3f753abeb81aa233eeb5e7e3381bba533938af2"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/20.png",
-      "bytes": 2143,
-      "sha256": "573351c0df723cae35abedb32935e2775be3fdea8ea9c2a7ee0e632a1cf9570c"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/21.png",
-      "bytes": 2097,
-      "sha256": "919bdd38b465912124039071e2eea26b8f04573cd30c8c0beadc0b69ff0f0964"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/22.png",
-      "bytes": 1930,
-      "sha256": "88568258b0691e2e2b3c800548997cd0067a825ce50dfa1822bafd629d13e498"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/23.png",
-      "bytes": 1559,
-      "sha256": "d6152f9a5eaa51e6dcd490631f71bb711f35ef2d234bdbeaf945a5c6be6f4a5d"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/24.png",
-      "bytes": 1188,
-      "sha256": "0ce520491e67e395093b11defe363dc51b65d0dabbc06d028b4bd7271a030d46"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/25.png",
-      "bytes": 968,
-      "sha256": "7509a16c2542b9e47c444c5977b261d3b21c95674ef812fba3452bff74215cc5"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/26.png",
-      "bytes": 814,
-      "sha256": "42b6d43591a764b7378e6ae3bab07217885fa0bc2b4323a394aeee3092dd7b24"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/27.png",
-      "bytes": 638,
-      "sha256": "e66b90965dce8cf543d6b830d8557f6ac24bd08bac5b989f99aedf18edb75dd8"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/28.png",
-      "bytes": 472,
-      "sha256": "af12935d89d5477fa7f61b4d867d6fb09dade6fd812c8d2bcb394f54d06646ee"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/29.png",
-      "bytes": 366,
-      "sha256": "e0821a498e209b0ee8ca4544cfa96e8edb484b977d98b0b964bc9273d51ecd26"
-    },
-    {
-      "filename": "electron-density-mu1/slices/y/30.png",
-      "bytes": 271,
-      "sha256": "555da878b0e939ed1c8a52c6cdad0ad4ff611728e2b67903709e3bad261134da"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/01.png",
-      "bytes": 202,
-      "sha256": "565345655bb0ca0fb4fa952d9db916d32499f4dfa7298f89d148785fe14e5176"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/02.png",
-      "bytes": 277,
-      "sha256": "a1ae38efe874b9d1b310404eb7759fb66a85a6a4357a80be15348aa2c20b5592"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/03.png",
-      "bytes": 372,
-      "sha256": "14b362da991d86a0184c319b3b21de4b2a58649a93f1e5d33ca5f2c54b7b4c24"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/04.png",
-      "bytes": 406,
-      "sha256": "36688c7c0e556fea75c4bbbeb6a7cfba73c7dd2a919212034d07f04ae8b68d8e"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/05.png",
-      "bytes": 507,
-      "sha256": "911264020f25410e599daee11d89537357a86a0a35aea5cab92e9527932f6cce"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/06.png",
-      "bytes": 581,
-      "sha256": "b83825d217779e901d41148c39a1d663639856162dc8dbba465f6f4d0232b077"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/07.png",
-      "bytes": 757,
-      "sha256": "cf88276e013b9a80dfadd411bab1aad1ce042cfe1cb8205f0c6fe340f3a52184"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/08.png",
-      "bytes": 901,
-      "sha256": "956e9c185a96e0295f73e7c1720687480e7cfc7db8cc1aeb88800630f178826e"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/09.png",
-      "bytes": 1381,
-      "sha256": "541cd7bfda42051b9e49d301360dbf1c25647c7d6c3b98c71940d415631155dc"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/10.png",
-      "bytes": 1963,
-      "sha256": "de22faccc1fe3e6afd1fbea2a92e982b0d237cf4b7eb5db3baba16d48df85109"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/11.png",
-      "bytes": 2304,
-      "sha256": "e7c49a9d44911646fbd14648a28a92538c22abf212244689bb510e1ec8669b92"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/12.png",
-      "bytes": 2380,
-      "sha256": "743283d95513ebce9d6f1dcf8d8e8fcb9c99294e3cfb9242ad93194047323fd3"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/13.png",
-      "bytes": 2453,
-      "sha256": "1825ec0dfbb087265a6776dfc10a2b4962301cdc5252d0a3c8bc8ec3869da41b"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/14.png",
-      "bytes": 2428,
-      "sha256": "8e71c833473c7d4da9f3ef5be264866d0dcadb12f0c220bc5e561c319f3364c7"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/15.png",
-      "bytes": 2502,
-      "sha256": "7828258fb45368fc7cac94cd741c5ea6a2ac96dbf6007ae0de61b59b705a9f7f"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/16.png",
-      "bytes": 2486,
-      "sha256": "b30a22c5b58029657b6ac437166e9dbdd2bfb26162dd297ff0e290f8b97bc5ee"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/17.png",
-      "bytes": 2672,
-      "sha256": "47847c0fe0b6fd270e04cff089959d6cbd16c144f0c7049759627a6e158c705e"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/18.png",
-      "bytes": 2562,
-      "sha256": "d9d6ad7af8224b0f10b2ed8f51196acd17801b85e9d06e8d30355449745e9844"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/19.png",
-      "bytes": 2447,
-      "sha256": "83a0524d2f862919d02f9c9b12462688599bafd6abb02d32367f6296a123f96a"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/20.png",
-      "bytes": 1968,
-      "sha256": "8b758155a2a543e3ed9a236aeed137ad42f06c47dac2383a25164298a3995ea7"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/21.png",
-      "bytes": 1479,
-      "sha256": "614120e821235c8a85031ee8c623a0cde26c35b0843d36faa52b0e75056a167c"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/22.png",
-      "bytes": 1019,
-      "sha256": "cccb46964b9176fee1fd84d83674da58003f62dd31e491ee0967213f71b0daea"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/23.png",
-      "bytes": 704,
-      "sha256": "1a734589680830c4a1800d7eee223b9de5cfdbfaf65ae4da12889cee1e75e9d7"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/24.png",
-      "bytes": 605,
-      "sha256": "8968d93700cde78afee49e0b2251b3c7c1a9c351727f9b46cb3a0caa8888a878"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/25.png",
-      "bytes": 560,
-      "sha256": "ac1a8f52c0e79866112845ffe816605da578743b72008786f34b163cbc754374"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/26.png",
-      "bytes": 483,
-      "sha256": "4b1abf9fdfc7eed7068debc4b0159fb8c5bb2de235348eb53c7a56a2f7c8f5dd"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/27.png",
-      "bytes": 439,
-      "sha256": "3d97a801fc3033c1e999623f149da9310ef17c81ef364f117b417c7b02ba535e"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/28.png",
-      "bytes": 382,
-      "sha256": "619fc6aea110f98b19525e8e8535a4e6732ff66b2ed78456b702912809b029e8"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/29.png",
-      "bytes": 268,
-      "sha256": "1b9b85927497b2aaf4145c9089b982703a776ccd5932b432873cff2e9f644a11"
-    },
-    {
-      "filename": "electron-density-mu1/slices/z/30.png",
-      "bytes": 195,
-      "sha256": "e57f394d5ab10f05436341eee4c48e1f069bb4340537299f40db85119e8d7ebc"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/01.png",
-      "bytes": 291,
-      "sha256": "ed885c74d787acf722bc6ffaa0293003b68876f9218983c9575d4fb17aad6ac3"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/02.png",
-      "bytes": 348,
-      "sha256": "151a60ed9181b1bf17b6826b040bc685552cbff7469110f23d74f3cee54add2b"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/03.png",
-      "bytes": 497,
-      "sha256": "6321b18c9b725846764f48053986e6dd851b51e1ee685216cb10a6871509295b"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/04.png",
-      "bytes": 583,
-      "sha256": "f9ad2e254cb257d8a1606919d1ca19676e63f8e112f814f4e93c6b19d8996e70"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/05.png",
-      "bytes": 691,
-      "sha256": "89a75e9652df34bd785a4153ab6bae718975e4653d44149701e2a68522bba9e0"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/06.png",
-      "bytes": 803,
-      "sha256": "1ae1fca644d98605d5333c6ad7477567634b9c3d4bff8d5050ca2d10b566fb3d"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/07.png",
-      "bytes": 1024,
-      "sha256": "4088e24ff55c79bceec73bbb882fed20a242c99f69ae15800ec9d1d7a533d52a"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/08.png",
-      "bytes": 1249,
-      "sha256": "ba93ceb2729ebfea30bb0587c2adbf20296863d02ad51a0c204c0e0fbf44242c"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/09.png",
-      "bytes": 1543,
-      "sha256": "451bfdffaae3d3f2aa374e799bb3ac7af15ad0b790a1e67532a9c3bb1628ad9f"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/10.png",
-      "bytes": 1801,
-      "sha256": "b97b821dee5c23d6b8156859e4128b51f7b73bad9275afe99913c8b51c059928"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/11.png",
-      "bytes": 1809,
-      "sha256": "bf443e412402faec82ed578de20af140735ff6287a37a6bf9a2ab449d24f9681"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/12.png",
-      "bytes": 1762,
-      "sha256": "615c1e442c930b0af7ed6d9b41dfb256a8b0b9b57a70042cb85d08312c897703"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/13.png",
-      "bytes": 1703,
-      "sha256": "b824a330cf144246150a4a2f47be353fadd49bee871f3d95836a0149d462cf9e"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/14.png",
-      "bytes": 1655,
-      "sha256": "70b80ca64f5f9f4c154f20d65cdb970d52ad8d3f6e09681782553fc29e41eedb"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/15.png",
-      "bytes": 1534,
-      "sha256": "2c86c73e83df84d6f8ae66c857e29bf1803d41377fc344763ef31b3d3891618a"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/16.png",
-      "bytes": 1588,
-      "sha256": "ece8083e786b876ae931113d43cca75714a0a0a1feac9626c52434ede6c58d76"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/17.png",
-      "bytes": 1618,
-      "sha256": "1984841e80f2cb3df781b334c25377cc1d7cf624000c52e7046760950c1a2c74"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/18.png",
-      "bytes": 1707,
-      "sha256": "3865fb4b68659f5729bad4f807154f316bd15394f3f18c2c1443eb5aed57d8cf"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/19.png",
-      "bytes": 1790,
-      "sha256": "5b66f5b55e45e9df784e9e5a779c73f23cf92d1a18602fa1c611fcd46373b9b3"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/20.png",
-      "bytes": 1822,
-      "sha256": "1c117bdc01a69a075a2f0d44e417b57dc9f519ee6f0a036d65059ae98c21b7b6"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/21.png",
-      "bytes": 1786,
-      "sha256": "925a6f920876ffb48bb451d4df9c7ea1107be918ed4f98aab6cab4d9b46e952c"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/22.png",
-      "bytes": 1625,
-      "sha256": "f4e5ffb650453b5dadb47a4d2680b2f23337aa1c6e031f1cbb5fe7e78249aff7"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/23.png",
-      "bytes": 1302,
-      "sha256": "034721351e1fa0cfb07e828bb36c9d066d1930fc81447248b2e8f3f265daad5d"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/24.png",
-      "bytes": 999,
-      "sha256": "112c086383893ddcf8f63a1e15a210fde086f3c6e0f9448a9b9fe4b370deae5c"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/25.png",
-      "bytes": 810,
-      "sha256": "3705d9cf81c41a698228a87f4c158fe9b7a1f71ec2197f5052cfcf84577ff749"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/26.png",
-      "bytes": 653,
-      "sha256": "d4f5d48eefdf6d958cf0f7758f69f22bd998990b4c876e4ff7d08ceb9679c666"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/27.png",
-      "bytes": 568,
-      "sha256": "d8887c82573bf429d37991b54d4d0b88931217a97f9b2e3b54374dff66fbbe0d"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/28.png",
-      "bytes": 449,
-      "sha256": "031f271d43b827d4aab9201d207dc1dca50080d15e179ec0320d0a879a048dad"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/29.png",
-      "bytes": 388,
-      "sha256": "280a8d8fcf10eefabdccde22a65b054b7fc4e5e21e430cb3a5c207568c69a1a9"
-    },
-    {
-      "filename": "electron-density-mu10/slices/x/30.png",
+      "filename": "electron-density/slices/x/04.png",
       "bytes": 254,
-      "sha256": "2167715c7099fad8fd46ffe068f842f4e2b74d79e9f243056edacb4409fbfac0"
+      "sha256": "b1f39928acfb3d38b07f01a57d7d8491329ddfed92cd0e3b7452ac014832bd08"
     },
     {
-      "filename": "electron-density-mu10/slices/y/01.png",
-      "bytes": 256,
-      "sha256": "89cc15067337cb5b3286384743095ded342dad9dd0a8e30b7b8f84d5d91f568a"
+      "filename": "electron-density/slices/x/05.png",
+      "bytes": 347,
+      "sha256": "9e5284fbd39d6095922c66443ddfb8a57c2a427cc534d257dfc58d41f0233bd8"
     },
     {
-      "filename": "electron-density-mu10/slices/y/02.png",
-      "bytes": 353,
-      "sha256": "8bac386e72065583e8e5cf5fd4011eb2cedce09ba52a43e5ecda0f80294c6c12"
+      "filename": "electron-density/slices/x/06.png",
+      "bytes": 458,
+      "sha256": "fff7e759e1e5d23070cad70d3eaba2e35c51b2e72ba8a7992c8bff2d34846b08"
     },
     {
-      "filename": "electron-density-mu10/slices/y/03.png",
-      "bytes": 475,
-      "sha256": "70616018b9cbcde6a7c734fee90ad09a2a0abbfe8226e7da484af2c7b6d3afa0"
+      "filename": "electron-density/slices/x/07.png",
+      "bytes": 614,
+      "sha256": "327173191dbb33f0943ebb5de0c02b550b00edf369918f0a5d76e5033c89eb3d"
     },
     {
-      "filename": "electron-density-mu10/slices/y/04.png",
-      "bytes": 547,
-      "sha256": "ff76450973b6f26b6e529a1b9fc25522adbcd65eabb88b82ff816284d4945483"
+      "filename": "electron-density/slices/x/08.png",
+      "bytes": 838,
+      "sha256": "36d2b1afd4a6614b98d292149658df6416c6145b5044bac3257a6247337b0fa8"
     },
     {
-      "filename": "electron-density-mu10/slices/y/05.png",
-      "bytes": 636,
-      "sha256": "030cb797611397886f025d123f126fa46af07f7995f4f79d56598fae424b5167"
+      "filename": "electron-density/slices/x/09.png",
+      "bytes": 1108,
+      "sha256": "f23e9dd1e4b145e389e1b77495ef089532db1df3820a71649f1bab2e873b34bd"
     },
     {
-      "filename": "electron-density-mu10/slices/y/06.png",
-      "bytes": 750,
-      "sha256": "b7ddbefb15ba221e1915f552c83394fe0c4a9e4063062f66f7a04f78cbce4274"
+      "filename": "electron-density/slices/x/10.png",
+      "bytes": 1368,
+      "sha256": "3a46220d045e2f9c4b067bd595a5751f164ae388799beb8449097508fe40abaf"
     },
     {
-      "filename": "electron-density-mu10/slices/y/07.png",
-      "bytes": 902,
-      "sha256": "7c823085a3cedbd8ee16fa90d29be7a1d0fb35ca91c12ca0192574e74365fafc"
+      "filename": "electron-density/slices/x/11.png",
+      "bytes": 1370,
+      "sha256": "592f1ff2083fd26a1716d721dd5b3e2ba292b0009a64d20da8d30bc7308db97f"
     },
     {
-      "filename": "electron-density-mu10/slices/y/08.png",
-      "bytes": 1180,
-      "sha256": "c589b235fadfdd0b70a1bb470c2eee6f0ec9144466963d55cb605fffe2b904cf"
+      "filename": "electron-density/slices/x/12.png",
+      "bytes": 1349,
+      "sha256": "859d90978c4da1641e0b55db17cac3ad2a76a52d67c3ef63439ab9a544683af9"
     },
     {
-      "filename": "electron-density-mu10/slices/y/09.png",
-      "bytes": 1528,
-      "sha256": "2b3e56599043060bf0886a66e6f1eb16574f9ce8fa60d56df5b34f5c4a4e8dd8"
+      "filename": "electron-density/slices/x/13.png",
+      "bytes": 1325,
+      "sha256": "5912f0f63640d14baf4f64207f53beb96f56213686eff89e18429024604c7f9a"
     },
     {
-      "filename": "electron-density-mu10/slices/y/10.png",
-      "bytes": 1725,
-      "sha256": "69e0a6c897d20dea4d9820613c2b21939b855072613d9002c4341f8b5fdd9f93"
+      "filename": "electron-density/slices/x/14.png",
+      "bytes": 1235,
+      "sha256": "429a3b05afed5ff0b8b89b9f3239493c2e8e6fcdb0bdd34506a13a6e40a4ed9c"
     },
     {
-      "filename": "electron-density-mu10/slices/y/11.png",
-      "bytes": 1771,
-      "sha256": "430f9f295a0d55d31c0c8c2469ca77b02a888c15899c180f9e9302c77ffdff8c"
+      "filename": "electron-density/slices/x/15.png",
+      "bytes": 1163,
+      "sha256": "859cbed5c643ce30bac4f43b048798ce024800fb774418bc30f2c0ef11e066d1"
     },
     {
-      "filename": "electron-density-mu10/slices/y/12.png",
-      "bytes": 1715,
-      "sha256": "ec183cf4dea01d7ad9d4af519aeca83da50c4edeed7953be264cd624f8dd8843"
+      "filename": "electron-density/slices/x/16.png",
+      "bytes": 1214,
+      "sha256": "fdb58c8092c9a70689b0200b695a10b8c93002a91cc6d6b221aeb2440821f17b"
     },
     {
-      "filename": "electron-density-mu10/slices/y/13.png",
-      "bytes": 1712,
-      "sha256": "e845da506601d52a62299e1afa0184309d5e693cb1254c016a92065cc6723077"
+      "filename": "electron-density/slices/x/17.png",
+      "bytes": 1286,
+      "sha256": "6e8369b0d998fcbe80a3ebff6276c8cbbea946d9b38b7f8d3bba1cb4efc6c3e8"
     },
     {
-      "filename": "electron-density-mu10/slices/y/14.png",
-      "bytes": 1686,
-      "sha256": "600ab7f6016c56a9adffd7c598ac7263ef55e77e330d65652c30adaf4882323c"
+      "filename": "electron-density/slices/x/18.png",
+      "bytes": 1330,
+      "sha256": "8fb6f53b9b30c0682b0683a3a24046a86093bc24826e98b94c097a3f9a137b1d"
     },
     {
-      "filename": "electron-density-mu10/slices/y/15.png",
-      "bytes": 1652,
-      "sha256": "f34cd115554bd80271d5a7563ec5bf19905f205f2b896c433e5112f2b190af05"
+      "filename": "electron-density/slices/x/19.png",
+      "bytes": 1405,
+      "sha256": "62dd2297501df46b08f727c824bb82de9a91a96627e4e7dd48d764f39e2af5a9"
     },
     {
-      "filename": "electron-density-mu10/slices/y/16.png",
-      "bytes": 1721,
-      "sha256": "0297126faeebdc38a74b464dec9fd8b15c4478be7e77d7b3696747aa565a298c"
+      "filename": "electron-density/slices/x/20.png",
+      "bytes": 1458,
+      "sha256": "032be24ee84eb8e39a492dba023fc18757f433be7269b1e47f125145c61ac98c"
     },
     {
-      "filename": "electron-density-mu10/slices/y/17.png",
-      "bytes": 1764,
-      "sha256": "3fd126f8cc97e0dfcc71c492ee88d2a58aa61d1710ff00070b35016f30039271"
+      "filename": "electron-density/slices/x/21.png",
+      "bytes": 1396,
+      "sha256": "f518bdb69325a7f0ec375c92f5c1813a0d2600b4078c59d7371a09adf9b98e61"
     },
     {
-      "filename": "electron-density-mu10/slices/y/18.png",
-      "bytes": 1813,
-      "sha256": "6805ea6b4e7cdb6a6160656b5d6e451cfd489c72947d576673d8b68771030f7a"
+      "filename": "electron-density/slices/x/22.png",
+      "bytes": 1229,
+      "sha256": "ba2d27a341336803398fed6558eac28258f097f2ee4f36c8d5120473b36b1889"
     },
     {
-      "filename": "electron-density-mu10/slices/y/19.png",
-      "bytes": 1902,
-      "sha256": "722da090f413d1f841ab4f9b84975cb892a7bd0004dc1181dc8eb163164f69af"
+      "filename": "electron-density/slices/x/23.png",
+      "bytes": 927,
+      "sha256": "6c1b81c5e9a8ef7ab41df714309311f3aed49b62e4b28f7ec70b205a39e8d9bf"
     },
     {
-      "filename": "electron-density-mu10/slices/y/20.png",
-      "bytes": 1931,
-      "sha256": "6a6523ca1a836adb804f86889d5467b6dae2c89efe9f27c59d8ee3d8c16698d6"
+      "filename": "electron-density/slices/x/24.png",
+      "bytes": 660,
+      "sha256": "8d4ba1378ff58636211b55fa66e1450ab32e566b0f6e58b99b2b861db8cfc4bd"
     },
     {
-      "filename": "electron-density-mu10/slices/y/21.png",
-      "bytes": 1905,
-      "sha256": "a5e4790a68c82694ef2b4b3c8d1058eb783bb8e5f48e92bd911e7d730d5be11f"
+      "filename": "electron-density/slices/x/25.png",
+      "bytes": 493,
+      "sha256": "0f39a6ee065abd7c002498692e87b80859c699d74efcee695044dfa440b4677d"
     },
     {
-      "filename": "electron-density-mu10/slices/y/22.png",
-      "bytes": 1697,
-      "sha256": "0f66a21575f286547ac30c2bfa3279e3e274a5a6bbf109452444e538d87c5114"
+      "filename": "electron-density/slices/x/26.png",
+      "bytes": 350,
+      "sha256": "b1adc5b7eb513d06afaf6bf03e1059c92be0b70a3ace558cd3e39e527053d5f3"
     },
     {
-      "filename": "electron-density-mu10/slices/y/23.png",
-      "bytes": 1297,
-      "sha256": "9b3e6b2f27fb534489d75b092ee6e6ccf852e0cb4747c6bb97187b7090202673"
+      "filename": "electron-density/slices/x/27.png",
+      "bytes": 234,
+      "sha256": "d150cdf26a1fa6cee8e463a72aa9a6e192b8e99e92979610c7aa47a57f9622b8"
     },
     {
-      "filename": "electron-density-mu10/slices/y/24.png",
-      "bytes": 1007,
-      "sha256": "09f78bf1abefe5947eb2df85c430919af12787b73079cedb01c74414b48c4e0a"
+      "filename": "electron-density/slices/x/28.png",
+      "bytes": 140,
+      "sha256": "f06547bfc5a4eb28788e1c65fbc90ce0799d0f157d1b62aacc92b56969372541"
     },
     {
-      "filename": "electron-density-mu10/slices/y/25.png",
-      "bytes": 813,
-      "sha256": "700f2d4897a02dc11084b81b9cc70518e4ff9d2a469c97920799f887d3df9543"
+      "filename": "electron-density/slices/y/03.png",
+      "bytes": 92,
+      "sha256": "beec4fcb143c816e6c4e3de9ecbe0585700b8a3f3969c3865bc3eb838ba7b828"
     },
     {
-      "filename": "electron-density-mu10/slices/y/26.png",
-      "bytes": 700,
-      "sha256": "cbdd906c1ef9c5eb436e558c3f827da86edc8d560216b07b1a3712a385b9f63f"
+      "filename": "electron-density/slices/y/04.png",
+      "bytes": 200,
+      "sha256": "8c436adbbf7506d13842ff51f52d52bcb24eb6ee20b11d30e904d23a2febc4e2"
     },
     {
-      "filename": "electron-density-mu10/slices/y/27.png",
-      "bytes": 572,
-      "sha256": "a2db5ba91475b2863cb864b80c139c7b1e8ed05e6786f190ee813a2d66d3dd39"
+      "filename": "electron-density/slices/y/05.png",
+      "bytes": 296,
+      "sha256": "891f46148433a68901c5fdd01719c0c2af88682a59920624aec54af93575ff98"
     },
     {
-      "filename": "electron-density-mu10/slices/y/28.png",
-      "bytes": 436,
-      "sha256": "e81beda54454640cdbfc1222566cbd950b0d226124cb262c92aea882d562e881"
+      "filename": "electron-density/slices/y/06.png",
+      "bytes": 439,
+      "sha256": "67d9856cc0c6d27e6bd1577e85356bd972292a36e62cfffbf475acde27b90008"
     },
     {
-      "filename": "electron-density-mu10/slices/y/29.png",
-      "bytes": 375,
-      "sha256": "6e960016568f9bed89c5080f17f4dd74d7c322dbe3a028f820f2299de928cabd"
+      "filename": "electron-density/slices/y/07.png",
+      "bytes": 615,
+      "sha256": "f98b27359db2758d7ffcae3769f8bccfdbcd61f0f5173d24a5782e35b234fc27"
     },
     {
-      "filename": "electron-density-mu10/slices/y/30.png",
-      "bytes": 262,
-      "sha256": "9ab8b673ea1ddbdfff17fd66e26587e97fe8af4aeede56722672eec84a32d91a"
+      "filename": "electron-density/slices/y/08.png",
+      "bytes": 863,
+      "sha256": "3f0f9b67717d80c6d0781b403726d1ae8f04d5a225817685e1193a117ecd3016"
     },
     {
-      "filename": "electron-density-mu10/slices/z/01.png",
-      "bytes": 203,
-      "sha256": "a456a2d1b648501c26dae81cdbc77eccab17dd71cf626e127226f9139f7b5fe5"
+      "filename": "electron-density/slices/y/09.png",
+      "bytes": 1188,
+      "sha256": "c5dd485c9177d05531407b447902b7d959406930db8bd04828ea5682ab9056f3"
     },
     {
-      "filename": "electron-density-mu10/slices/z/02.png",
-      "bytes": 269,
-      "sha256": "f55594a2c5f32e8d55d84b201c51f879ba163f335368139f60caa3ee70ef55fa"
+      "filename": "electron-density/slices/y/10.png",
+      "bytes": 1399,
+      "sha256": "9e4752b9e49edbc0a84ed0a4aae8f51d33e0c7c125a74cfb54c030516fda4042"
     },
     {
-      "filename": "electron-density-mu10/slices/z/03.png",
-      "bytes": 317,
-      "sha256": "a4b6adeb88d9c4f3c50eef09d012f120e425c28fe1e5ceddcdb4e776bee4d18c"
+      "filename": "electron-density/slices/y/11.png",
+      "bytes": 1437,
+      "sha256": "de2554438d0bac4b2146441d76201e4ddf211519c768473aa674158c2ccec7a1"
     },
     {
-      "filename": "electron-density-mu10/slices/z/04.png",
-      "bytes": 414,
-      "sha256": "c38c00907935e2cbaa10e480ef61ee579302a811919d1daf3de6ca7d2160d50f"
+      "filename": "electron-density/slices/y/12.png",
+      "bytes": 1337,
+      "sha256": "13eb73f35bdb733e468eb55338f0f303547e0ca7270b1e2153df69de7ebe6056"
     },
     {
-      "filename": "electron-density-mu10/slices/z/05.png",
-      "bytes": 499,
-      "sha256": "b0e773634dbb8827f49e7fe93980d5df1b5f470bc720f151a500c3f8913dacb4"
+      "filename": "electron-density/slices/y/13.png",
+      "bytes": 1353,
+      "sha256": "360e753adae6a31f2153548888714771bb15556530ea5e0be9035eb588a2e08d"
     },
     {
-      "filename": "electron-density-mu10/slices/z/06.png",
-      "bytes": 570,
-      "sha256": "35d7c84e8c15b779badbbc38a83e10248e5c36f07bc89fdde02ee0b457e547ad"
+      "filename": "electron-density/slices/y/14.png",
+      "bytes": 1331,
+      "sha256": "7fd18db51df210c7d0e6d07d13d75a59bf4581a54b694c57e8fd4c6b9588a29e"
     },
     {
-      "filename": "electron-density-mu10/slices/z/07.png",
-      "bytes": 722,
-      "sha256": "b57a96a8910dc2436cb75c0e198d74594c1306ad70b1922e4d488ecef7aa40fb"
+      "filename": "electron-density/slices/y/15.png",
+      "bytes": 1278,
+      "sha256": "0330d5305099a9c34acb5d223bd200ce2af0eb2cb7ad2df8764bbdf1048c1439"
     },
     {
-      "filename": "electron-density-mu10/slices/z/08.png",
+      "filename": "electron-density/slices/y/16.png",
+      "bytes": 1345,
+      "sha256": "48e1023743771fa71606c091382d936e40be9c95c71f0b1ba22ad37e865d9146"
+    },
+    {
+      "filename": "electron-density/slices/y/17.png",
+      "bytes": 1368,
+      "sha256": "41bc1716bea1ae2f35a89945a02c9f3c7870aef0f255b05c6b99e34a2d72795b"
+    },
+    {
+      "filename": "electron-density/slices/y/18.png",
+      "bytes": 1404,
+      "sha256": "3b0868be9bf93058e2471cf930f7b0c2d4fa15739b0c222483459b9f05bb85ee"
+    },
+    {
+      "filename": "electron-density/slices/y/19.png",
+      "bytes": 1482,
+      "sha256": "fbfc269fda44da56da72a908b67c4e910775f406193f69635a0b1bacc85c5bb2"
+    },
+    {
+      "filename": "electron-density/slices/y/20.png",
+      "bytes": 1544,
+      "sha256": "31a872c7608c42e58753543cdb57c68a91338ba99d150ecc09e89d1bab7c885c"
+    },
+    {
+      "filename": "electron-density/slices/y/21.png",
+      "bytes": 1522,
+      "sha256": "b345febc81074507f4d78167d3f6cbf6a4384ebb49d18ff6b00abf72396bd88e"
+    },
+    {
+      "filename": "electron-density/slices/y/22.png",
+      "bytes": 1357,
+      "sha256": "b15738e288960b822b59d9c9180e3b25a94bb579a65c3870161f8eaca27b5c0c"
+    },
+    {
+      "filename": "electron-density/slices/y/23.png",
+      "bytes": 944,
+      "sha256": "3745dcaadb58313b94c861c14e3a3a9fe8f0c3651432fd7ae6c7d7ade42470c7"
+    },
+    {
+      "filename": "electron-density/slices/y/24.png",
+      "bytes": 646,
+      "sha256": "adadd5ced8d35c1e74a552f52851e43e926d5645513b598c0aa028d5b9be1c62"
+    },
+    {
+      "filename": "electron-density/slices/y/25.png",
+      "bytes": 461,
+      "sha256": "461c96ba7dbb3cdde5a07f2027cacaa801537fc4be3a1458c521534d2c6e2752"
+    },
+    {
+      "filename": "electron-density/slices/y/26.png",
+      "bytes": 319,
+      "sha256": "b5d94f0b0d175823eba0f5ee2a78adb4a1819765d21adda55440da8f9faa20c5"
+    },
+    {
+      "filename": "electron-density/slices/y/27.png",
+      "bytes": 212,
+      "sha256": "d2fd9eb13076a57316d96306e03e61e2a3b8cb3a12a46b39f275a04a9f13b368"
+    },
+    {
+      "filename": "electron-density/slices/y/28.png",
+      "bytes": 142,
+      "sha256": "edef3b4ae156c25d19f98d71b8bf18326069226c170c00eb887bfb0f636f4cb3"
+    },
+    {
+      "filename": "electron-density/slices/z/05.png",
+      "bytes": 126,
+      "sha256": "ad573a48b767cbf2d6fdd941e015ea702c2a9467d63d7002b29a7ae4cc8106aa"
+    },
+    {
+      "filename": "electron-density/slices/z/06.png",
+      "bytes": 223,
+      "sha256": "ea855b166e5b99295473b33f2586b75d61b45f1e06556c3afa94010e524195a7"
+    },
+    {
+      "filename": "electron-density/slices/z/07.png",
+      "bytes": 320,
+      "sha256": "fb08a19eaf17cb69caabdf8d7bce728d50b4c92d32197beb7fc4358e90c4b600"
+    },
+    {
+      "filename": "electron-density/slices/z/08.png",
+      "bytes": 472,
+      "sha256": "f38833aaed072f405e17894c8cc1999611fbcea4e17231f35d8003b5ba560a9e"
+    },
+    {
+      "filename": "electron-density/slices/z/09.png",
+      "bytes": 768,
+      "sha256": "4f9e91a360a310d1325a57acb703a74a96f72609052667433f5d02cd802e52cd"
+    },
+    {
+      "filename": "electron-density/slices/z/10.png",
+      "bytes": 1300,
+      "sha256": "2e82dfb7f1a6f4444774d4606a9059656ab4907cd6da8a65b141379ace4a8141"
+    },
+    {
+      "filename": "electron-density/slices/z/11.png",
+      "bytes": 1656,
+      "sha256": "ef5c77910926633a4c4dc625daac7b199c21ea755ba4f572cb3b6b3db43dbfa4"
+    },
+    {
+      "filename": "electron-density/slices/z/12.png",
+      "bytes": 1684,
+      "sha256": "09bb777da6b28d5ba87ab650adbb5318c24e79e452e5ee8b21ed00f07c49b0ee"
+    },
+    {
+      "filename": "electron-density/slices/z/13.png",
+      "bytes": 1774,
+      "sha256": "45478f6c8600b49f3d618e3b7391cb4e3172a4c6cc25d7c8ffb4093325e5ebe6"
+    },
+    {
+      "filename": "electron-density/slices/z/14.png",
+      "bytes": 1734,
+      "sha256": "c077c8920f195b91131a6f6e81d159261bb13cbed66120f4a1d88b92699845d1"
+    },
+    {
+      "filename": "electron-density/slices/z/15.png",
+      "bytes": 1855,
+      "sha256": "d376b16f3d24cabf75e32e782ad2a77f358cddb7e32c94681254e34c9dc246af"
+    },
+    {
+      "filename": "electron-density/slices/z/16.png",
+      "bytes": 1908,
+      "sha256": "b6216281839b473d82fe77c66e57aa0297d4fd834db85be089d8d6c865f27f51"
+    },
+    {
+      "filename": "electron-density/slices/z/17.png",
+      "bytes": 1890,
+      "sha256": "df96e1b610b374541f69ce965252c2a1de10b5571517272f23007165bb03fa11"
+    },
+    {
+      "filename": "electron-density/slices/z/18.png",
+      "bytes": 1948,
+      "sha256": "684be9b78a9fbc8d16467b5baabe42db957238a75fa0df9fc8450ac075bce9ea"
+    },
+    {
+      "filename": "electron-density/slices/z/19.png",
+      "bytes": 1730,
+      "sha256": "54afc9f5c670b3f5f01c6d7feb4ef405aad4579710740cb46239f7a4861c0aad"
+    },
+    {
+      "filename": "electron-density/slices/z/20.png",
+      "bytes": 1317,
+      "sha256": "6525db8514a7ef307c32309e9469854f212e067058640779a1adcfc1eabe3ece"
+    },
+    {
+      "filename": "electron-density/slices/z/21.png",
       "bytes": 842,
-      "sha256": "82ff5b95b7a28b386bf67cee944e47be729f82b215c50165e4035687e966357c"
+      "sha256": "bb146ca263ee0b827f0008624c38bc5ef38aa12e9d08c5f5ccbaf336d07084dc"
     },
     {
-      "filename": "electron-density-mu10/slices/z/09.png",
-      "bytes": 1097,
-      "sha256": "dee3210c915b812cf431fa604c5edc7023b8d79540bbdccf06c02e730b5a7c40"
+      "filename": "electron-density/slices/z/22.png",
+      "bytes": 538,
+      "sha256": "9304d803c5c437aacc09568d0726a6357254957fffd27872921574800c87a0c8"
     },
     {
-      "filename": "electron-density-mu10/slices/z/10.png",
-      "bytes": 1651,
-      "sha256": "786e203ff432ddc2e0f019707079d243cfa9a1ff23403fa09b54d8d9e82ec5d5"
+      "filename": "electron-density/slices/z/23.png",
+      "bytes": 347,
+      "sha256": "3cb1e754685bca9d5668de47f9cf94b679fb145bba3ff5368017e9cc7ee29e11"
     },
     {
-      "filename": "electron-density-mu10/slices/z/11.png",
-      "bytes": 2001,
-      "sha256": "295dca114d8532199026c3560c7faa3fe0f1df33280ce3cc18df9e8d5627f4f5"
+      "filename": "electron-density/slices/z/24.png",
+      "bytes": 282,
+      "sha256": "4749d31562dd591601be81bd407dcb01956c60b17bdded12c6859e85d589bd5c"
     },
     {
-      "filename": "electron-density-mu10/slices/z/12.png",
-      "bytes": 2050,
-      "sha256": "534c20c4e520a0a65df52826d17e50adb27ffceb3dfb11e321d86966543e3b27"
+      "filename": "electron-density/slices/z/25.png",
+      "bytes": 219,
+      "sha256": "417cb05b6021ebafb89a1716a539bc0b1605c6776ef3c286d64d71bdf8971464"
     },
     {
-      "filename": "electron-density-mu10/slices/z/13.png",
-      "bytes": 2118,
-      "sha256": "9e9b7dfd2ebfc5e76f3900f3b1a5238eb832dbaeab6d126c33c75fb75052643e"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/14.png",
-      "bytes": 2061,
-      "sha256": "d18207cfc7e52fc453f1cabd3fc32fe1bf400ea62d73c38759e22f27f70ac93f"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/15.png",
-      "bytes": 2180,
-      "sha256": "ad038551b9043050c649b5b6be7a1798c98d5e6d9ab25b31e2ecd4b6bc5b6d82"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/16.png",
-      "bytes": 2247,
-      "sha256": "0642ef10bfba1dd692dcc9a2444a843b408ec8673b118b005497ee4febcc598d"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/17.png",
-      "bytes": 2291,
-      "sha256": "064df69ab35f995eafd7a9a0c7b8650d8bb11b0a6baa8676a926d250253b4646"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/18.png",
-      "bytes": 2288,
-      "sha256": "a909be31c5c1c99b4f51c157dd07dbf960c51a8f4e0f0321e0a81aa1d6a64001"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/19.png",
-      "bytes": 2005,
-      "sha256": "d7bde604758d5914b526d5fefc776cf542fda43cae55a9b56036e7ec2114e088"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/20.png",
-      "bytes": 1554,
-      "sha256": "7a6c69c2572216ca900098c5a7dbe72310b2885b8d1c74c62903b939fcc3fdba"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/21.png",
-      "bytes": 1198,
-      "sha256": "994f1f29660bd3649fde9509b284723af41cfd248565f5b2596a39cbcd9d21b5"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/22.png",
-      "bytes": 948,
-      "sha256": "cd973a83e29c54b6f13acfbe58a7e01822fdd7dd248e95a0360624cd8968ea7b"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/23.png",
-      "bytes": 682,
-      "sha256": "dfb9610de9c6da7bc474c9dbcea1e93ca124666563c969d0e19bc901868a9b38"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/24.png",
-      "bytes": 598,
-      "sha256": "5c91c24baff92729de961b39ce809b263ba0b7ffe5f7f08dc437501b62bbb2cf"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/25.png",
-      "bytes": 569,
-      "sha256": "c753970be1254e47c33d4dc691291234adeb22ce6ee5261f7b29c4c4d0049b5c"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/26.png",
-      "bytes": 489,
-      "sha256": "0ecbdc147897ec6c21bb8e46851e0742076b2ad4bc8e83181338aa8b5775c528"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/27.png",
-      "bytes": 419,
-      "sha256": "dd186a8e3d3ab1fbf4fe8407d7bead95db7da114ba5db8568168519eb2864dea"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/28.png",
-      "bytes": 317,
-      "sha256": "f3622570553260485928cf35bd3854d8dbabe7ddf2efa470383010c8e2f69aac"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/29.png",
-      "bytes": 264,
-      "sha256": "1b0a453cd09a22d6ada3de930fda6d9a4d547f956689eace9e1cb6d7bce452ae"
-    },
-    {
-      "filename": "electron-density-mu10/slices/z/30.png",
-      "bytes": 201,
-      "sha256": "5265c1b2926ec0f2b028befa237a97a88b1ba3ffe1cc71d9960ec9089cc93830"
+      "filename": "electron-density/slices/z/26.png",
+      "bytes": 113,
+      "sha256": "fb71447f2205a4884ae6dfeefd9de6c6e59c0bf0abf1486434ebb05ef8e8d122"
     },
     {
       "filename": "lenses.json",
-      "bytes": 263691,
-      "sha256": "5f1aeaab1a97e286dbf9a1aac35ee9782f02014cb9e0ba03169d084272d31142"
+      "bytes": 109995,
+      "sha256": "6cdb2d98b3716102dd7a02225532ae6a607e3b2ebe5dd438e5e2f985298a92ca"
     },
     {
       "filename": "presentation.json",
-      "bytes": 4786,
-      "sha256": "d02186f4c6a42481383463ed60f0e4d3052db27943b669543b8955ed9477a8f5"
+      "bytes": 2469,
+      "sha256": "561f1014c550c6ce66c1073c1fae43408ab7ce9d55de0539d4b45737b62d36f9"
     },
     {
       "filename": "provenance.json",
-      "bytes": 13291,
-      "sha256": "1c293766d178cd71bdc83453f985eeb87d5d6adbcfc1ef651f7eab6b40973b1d"
+      "bytes": 7418,
+      "sha256": "9c2944d5d02bbfea3eb75601acfdbe4465141608d8e5a40ccf0f427ddcf8dcc2"
     }
   ]
 }

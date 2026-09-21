@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a6ace1a79de898710e8052e5583ef25104e25c45f77353b131c4e50bddbec8f0"
+    "sha256": "abfd05500f77f3335514d7481b1df0b7e0d7b22e24502b778712e8d7b13453f0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "5f45fefaef88ba8e5e870ddd58e9a2f5d1985797b449ca13077ab9464064e2ef"
+    "bindingsSha256": "b56e6cdecf4b8d156f6e3fd34ec2ba7af77ca8fef0ee2e7a5f5c48f41ea7e7c5"
   },
   "recipes": [
     {
@@ -438,7 +438,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ea06afcc974f5302c4a924e404f61114de67dba23e746327162bb086f3f19e14",
+      "sha256": "5a68df4e8ace73f7b95952ee994753baaae9cb77625e3442f71b9071122d2443",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -680,7 +680,7 @@
               "qualification": "STEREO-B/SECCHI COR1 tomographic electron-density reconstruction with the archive μ=10 regularization, resampled to a Cartesian display volume",
               "volume": {
                 "objectId": "sun-cor1-density",
-                "lensId": "electron-density-mu10",
+                "lensId": "electron-density",
                 "surface": "photosphere"
               },
               "legend": {
@@ -718,56 +718,7 @@
                 "meta": "electrons cm⁻³ · square-root display scale",
                 "sourceUrl": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
               },
-              "notes": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. SciPy resamples the spherical grid to Cartesian display voxels. A separately recorded radial weight softens display emission at 1.5–1.7 and 3.7–4.0 solar radii; the float density cube is unchanged."
-            },
-            {
-              "id": "cor1-density-mu1",
-              "label": "COR1-B density · μ=1",
-              "shortLabel": "COR1-B μ=1",
-              "thumbnail": "sun-lens-corona.webp",
-              "falseColor": true,
-              "qualification": "STEREO-B/SECCHI COR1 tomographic electron-density reconstruction with the archive μ=1 regularization, resampled to a Cartesian display volume",
-              "volume": {
-                "objectId": "sun-cor1-density",
-                "lensId": "electron-density-mu1",
-                "surface": "photosphere"
-              },
-              "legend": {
-                "kind": "scale",
-                "title": "Electron number density",
-                "labels": [
-                  "0",
-                  "3.25 × 10⁶",
-                  "6.5 × 10⁶"
-                ],
-                "recipe": {
-                  "palette": [
-                    [
-                      0,
-                      0,
-                      0
-                    ],
-                    [
-                      184,
-                      110,
-                      50
-                    ],
-                    [
-                      255,
-                      184,
-                      97
-                    ]
-                  ],
-                  "labels": [
-                    "0",
-                    "3.25 × 10⁶",
-                    "6.5 × 10⁶"
-                  ]
-                },
-                "meta": "electrons cm⁻³ · square-root display scale",
-                "sourceUrl": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
-              },
-              "notes": "The STEREO-B/SECCHI COR1 Carrington Rotation 2053 P1 reconstruction with the archive μ=1 regularization. It remains separate from μ=10: their difference is sensitivity evidence, not statistical uncertainty, and the app never averages them. The same display-only radial weight softens the finite reconstruction boundary without changing the float density cube."
+              "notes": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. SciPy resamples the spherical grid to Cartesian display voxels. A separately recorded radial weight softens display emission at 1.5–1.7 and 2.5–4.0 solar radii; the float density cube is unchanged."
             }
           ]
         },
@@ -829,8 +780,7 @@
             "magnetic": "NASA SDO/HMI and JSOC hmi.mrsynop_small_720s Carrington Rotation 2311",
             "chromosphere": "NASA SDO AIA 304 angstrom Carrington Rotation 2311",
             "corona": "NASA SDO AIA 171 angstrom Carrington Rotation 2311",
-            "cor1-density": "NASA STEREO-B/SECCHI COR1 CR2053 P1 electron-density reconstruction, archive μ=10 regularization",
-            "cor1-density-mu1": "NASA STEREO-B/SECCHI COR1 CR2053 P1 electron-density reconstruction, archive μ=1 regularization"
+            "cor1-density": "NASA STEREO-B/SECCHI COR1 CR2053 P1 electron-density reconstruction, archive μ=10 regularization"
           }
         }
       }
@@ -2511,8 +2461,8 @@
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
-      "sha256": "ea06afcc974f5302c4a924e404f61114de67dba23e746327162bb086f3f19e14",
-      "bytes": 14706,
+      "sha256": "5a68df4e8ace73f7b95952ee994753baaae9cb77625e3442f71b9071122d2443",
+      "bytes": 12812,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2989,43 +2939,7 @@
       "interpretation": {
         "kind": "companion-volume",
         "objectId": "sun-cor1-density",
-        "lensId": "electron-density-mu10",
-        "surface": "photosphere"
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "url": "/scenes/sun/sun-lens-corona.webp",
-          "bytes": 2226,
-          "sha256": "cc1c65146e61eb76f1daaadd6d3500bce510f97f465589e0130dbe5d9c316a2f",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "cor1-density-mu1",
-      "label": "COR1-B density · μ=1",
-      "recipe": "content",
-      "selector": "",
-      "observationAttribution": "source-lineage",
-      "parents": [
-        "photosphere"
-      ],
-      "process": "Keep the borrowed lens's prepared plates and enable the companion volume this dataset names.",
-      "limitations": [
-        "STEREO-B/SECCHI COR1 tomographic electron-density reconstruction with the archive μ=1 regularization, resampled to a Cartesian display volume"
-      ],
-      "lensIds": [
-        "cor1-density-mu1"
-      ],
-      "recipeDependencies": [
-        "content"
-      ],
-      "interpretation": {
-        "kind": "companion-volume",
-        "objectId": "sun-cor1-density",
-        "lensId": "electron-density-mu1",
+        "lensId": "electron-density",
         "surface": "photosphere"
       },
       "inputs": [],
@@ -3058,8 +2972,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4790,
-          "sha256": "a794b9e8ec2642e04e8ab454bbebf042b074dc5c1f9f9cdee77bd04a6b895f0b",
+          "bytes": 4672,
+          "sha256": "6f0d20b2bd6a73bfe150d5badd223e2c7a5172c4cdf022b39bb6ec947b4ba07c",
           "verification": "bytes-verified"
         }
       ],
@@ -3172,11 +3086,11 @@
   },
   "lastPreparation": {
     "objectId": "sun",
-    "materialSha256": "f631988a3df55746d99f4d0a0829cd8a1e70b4269284692be054670d5525ac78",
+    "materialSha256": "31a029ba7ee5476cfd0040c7d8ab7e2e70f04e93ee265c521ae949bc4e8ac828",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "5f45fefaef88ba8e5e870ddd58e9a2f5d1985797b449ca13077ab9464064e2ef"
+      "bindingsSha256": "b56e6cdecf4b8d156f6e3fd34ec2ba7af77ca8fef0ee2e7a5f5c48f41ea7e7c5"
     }
   }
 }

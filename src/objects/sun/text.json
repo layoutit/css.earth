@@ -58,19 +58,6 @@
           "checked": "2026-09-20"
         }
       ]
-    },
-    "cor1-density-mu1": {
-      "title": "COR1-B density CR2053 · μ=1",
-      "detail": "Electron density · μ=1",
-      "summary": "The same STEREO-B interval with the archive μ=1 regularization, retained as a separate comparison solution.",
-      "sources": [
-        {
-          "catalogueId": "nasa-stereo-cor1-tomography-2025",
-          "url": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml",
-          "label": "NASA STEREO Science Center · COR1 tomography release",
-          "checked": "2026-09-20"
-        }
-      ]
     }
   }
 }

@@ -239,7 +239,7 @@
         "qualification": "STEREO-B/SECCHI COR1 tomographic electron-density reconstruction with the archive μ=10 regularization, resampled to a Cartesian display volume",
         "volume": {
           "objectId": "sun-cor1-density",
-          "lensId": "electron-density-mu10",
+          "lensId": "electron-density",
           "surface": "photosphere"
         },
         "legend": {
@@ -277,56 +277,7 @@
           "meta": "electrons cm⁻³ · square-root display scale",
           "sourceUrl": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
         },
-        "notes": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. SciPy resamples the spherical grid to Cartesian display voxels. A separately recorded radial weight softens display emission at 1.5–1.7 and 3.7–4.0 solar radii; the float density cube is unchanged."
-      },
-      {
-        "id": "cor1-density-mu1",
-        "label": "COR1-B density · μ=1",
-        "shortLabel": "COR1-B μ=1",
-        "thumbnail": "sun-lens-corona.webp",
-        "falseColor": true,
-        "qualification": "STEREO-B/SECCHI COR1 tomographic electron-density reconstruction with the archive μ=1 regularization, resampled to a Cartesian display volume",
-        "volume": {
-          "objectId": "sun-cor1-density",
-          "lensId": "electron-density-mu1",
-          "surface": "photosphere"
-        },
-        "legend": {
-          "kind": "scale",
-          "title": "Electron number density",
-          "labels": [
-            "0",
-            "3.25 × 10⁶",
-            "6.5 × 10⁶"
-          ],
-          "recipe": {
-            "palette": [
-              [
-                0,
-                0,
-                0
-              ],
-              [
-                184,
-                110,
-                50
-              ],
-              [
-                255,
-                184,
-                97
-              ]
-            ],
-            "labels": [
-              "0",
-              "3.25 × 10⁶",
-              "6.5 × 10⁶"
-            ]
-          },
-          "meta": "electrons cm⁻³ · square-root display scale",
-          "sourceUrl": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
-        },
-        "notes": "The STEREO-B/SECCHI COR1 Carrington Rotation 2053 P1 reconstruction with the archive μ=1 regularization. It remains separate from μ=10: their difference is sensitivity evidence, not statistical uncertainty, and the app never averages them. The same display-only radial weight softens the finite reconstruction boundary without changing the float density cube."
+        "notes": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. SciPy resamples the spherical grid to Cartesian display voxels. A separately recorded radial weight softens display emission at 1.5–1.7 and 2.5–4.0 solar radii; the float density cube is unchanged."
       }
     ]
   },
@@ -388,8 +339,7 @@
       "magnetic": "NASA SDO/HMI and JSOC hmi.mrsynop_small_720s Carrington Rotation 2311",
       "chromosphere": "NASA SDO AIA 304 angstrom Carrington Rotation 2311",
       "corona": "NASA SDO AIA 171 angstrom Carrington Rotation 2311",
-      "cor1-density": "NASA STEREO-B/SECCHI COR1 CR2053 P1 electron-density reconstruction, archive μ=10 regularization",
-      "cor1-density-mu1": "NASA STEREO-B/SECCHI COR1 CR2053 P1 electron-density reconstruction, archive μ=1 regularization"
+      "cor1-density": "NASA STEREO-B/SECCHI COR1 CR2053 P1 electron-density reconstruction, archive μ=10 regularization"
     }
   }
 }
