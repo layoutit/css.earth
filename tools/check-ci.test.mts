@@ -7,29 +7,53 @@ import {parse} from 'yaml';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {requireArray,requireRecord,requireString} from './source-values.mts';
 import {CI_ONLY_CONDITIONS,QUICK_SKIPPED_STEPS,SHARED_TYPECHECK_STEP,quickSteps,readCiSteps,reuseLocalPreparation,runCiSteps,sharedCodeChanged} from './check-ci.mts';
+import {ALWAYS_JOBS} from './ci-affected.mts';
 
 test('local CI reads the actual workflow jobs in order, including strict TypeScript and renderer gates',async()=>{
  const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
- const lint=readCiSteps(workflow,'lint'),typecheck=readCiSteps(workflow,'typecheck'),universe=readCiSteps(workflow);
- assert.equal(lint[0]?.name,'Check documentation links and organization');
+ const lint=readCiSteps(workflow,'lint'),audit=readCiSteps(workflow,'audit'),typecheck=readCiSteps(workflow,'typecheck'),universe=readCiSteps(workflow);
+ // The merge gate asserts only what the deployed site needs; repository completeness reports beside it without
+ // gating (docs/ci-cd.md, "Gate on what ships"). Proving the split here keeps a bookkeeping check from drifting
+ // back into the required job.
+ assert.equal(audit[0]?.name,'Check documentation links and organization');
+ assert.ok(!lint.some(step=>step.name==='Check documentation links and organization'),'documentation audits do not gate a merge');
+ assert.ok(!lint.some(step=>step.run.includes('restore-source-inputs.test.mts')),'source restorability does not gate a merge');
+ assert.ok(audit.some(step=>step.run.includes('restore-source-inputs.test.mts')));
+ assert.ok(audit.some(step=>step.run.includes('source-closure.test.mts')));
+ // The pins behind published assets stay on the gate: they are part of what this project ships.
  assert.ok(lint.some(step=>step.run.includes('check-object-runtime-ownership.mts --receipts')));
- const gate=lint.find(step=>step.run.includes('check:assets-published'));
- assert.equal(gate?.env.GH_TOKEN,undefined,'the workflow token is dropped locally');
- assert.match(gate?.run??'',/--added-since-last-green --report-only/,'a push to main never fails on assets');
+ assert.ok(lint.some(step=>step.run.includes('pnpm test:ci')),'published-asset closure and inventory stay blocking');
+ // No pull-request job may contact R2: the merge gate is compile, build and behave, with no network dependency
+ // to be slow or flaky. Publication proof lives at deploy time and in the nightly sweep instead.
+ const workflowJobs=requireRecord(requireRecord(parse(workflow)).jobs);
+ for(const [name,job] of Object.entries(workflowJobs))
+  for(const step of requireArray(requireRecord(job).steps??[]))
+   assert.ok(!String(requireRecord(step).run??'').includes('check:assets-published'),
+    `${name} must not check published assets on a pull request`);
+ const nightly=await readFile(new URL('../.github/workflows/nightly.yml',import.meta.url),'utf8');
+ assert.match(nightly,/pnpm check:assets-published --concurrency=8/,'the nightly sweep still checks every key');
+ const deploy=await readFile(new URL('../.github/workflows/deploy.yml',import.meta.url),'utf8');
+ assert.match(deploy,/pnpm check:deploy-assets/,'the deploy still rejects uninventoried runtime assets');
  assert.ok(typecheck.some(step=>step.run.includes('pnpm typecheck:pr')&&step.env.NODE_OPTIONS==='--max-old-space-size=4096'));
  assert.ok(!typecheck.some(step=>step.run.includes('typecheck:tests')),'test files have their own parallel compiler lane');
  assert.equal(readCiSteps(workflow,'typecheck-tests').at(-1)?.run.trim(),'pnpm typecheck:tests --extendedDiagnostics');
  assert.ok(universe.some(step=>step.run.includes('prepare-ci-inputs.mts universe')));
- assert.deepEqual([...new Set(universe.map(step=>step.env.CI_UNIVERSE_LANE))],['sources','runtime','shell','renderer']);
- for(const lane of ['sources','runtime','shell','renderer']){
+ // The gate matrices carry only the behaviour lanes. Source-catalogue reconciliation and bake reproduction are
+ // repository bookkeeping, so they moved into the advisory `audit` job (docs/ci-cd.md, "Gate on what ships").
+ assert.deepEqual([...new Set(universe.map(step=>step.env.CI_UNIVERSE_LANE))],['runtime','shell','renderer']);
+ for(const lane of ['runtime','shell','renderer']){
   const last=universe.filter(step=>step.env.CI_UNIVERSE_LANE===lane).at(-1);
   assert.match(last?.run??'',/pnpm "test:universe:\$CI_UNIVERSE_LANE"/);
-  assert.match(last?.run??'',/pnpm test:sources:pr/);
  }
  const universePreparation=readCiSteps(workflow,'universe-preparation');
- assert.deepEqual([...new Set(universePreparation.map(step=>step.env.CI_PREPARATION_LANE))],['publication','world']);
- assert.ok(universePreparation.some(step=>step.run.includes('pnpm test:galaxy-field')));
- assert.ok(universePreparation.some(step=>step.run.includes('pnpm test:ci-preparation')));
+ assert.deepEqual([...new Set(universePreparation.map(step=>step.env.CI_PREPARATION_LANE))],['publication']);
+ assert.ok(universePreparation.some(step=>step.run.includes('pnpm test:ci-preparation:publication')));
+ // Relocated, not deleted: each command still runs, in the advisory job and nowhere on the gate.
+ for(const command of ['pnpm test:sources:pr','pnpm test:galaxy-field','pnpm test:ci-preparation:world']){
+  assert.ok(audit.some(step=>step.run.includes(command)),`${command} still runs, in the advisory audit`);
+  assert.ok(!universe.some(step=>step.run.includes(command))&&!universePreparation.some(step=>step.run.includes(command)),
+   `${command} no longer gates the merge`);
+ }
  // A local run has no PR diff to scope the ownership check to, so it substitutes the always-correct --all rather
  // than failing on an expression only a real GitHub run (the `changes` job's output) can evaluate.
  const ownership=universe.find(step=>step.env.RUNTIME_OWNERSHIP_ARGS!==undefined);
@@ -91,10 +115,13 @@ test('trusted body publication prepares only the requested object',async()=>{
  assert.doesNotMatch(command,/prepare-feature-index/,'publishing one object must not require every feature catalogue');
 });
 test('--quick skips only the network and documentation steps, and refuses a job without them',async()=>{
- const lint=readCiSteps(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8'),'lint');
- const quick=quickSteps(lint);
- assert.deepEqual(lint.filter(step=>!quick.includes(step)).map(step=>step.name),QUICK_SKIPPED_STEPS);
- assert.throws(()=>quickSteps(lint.filter(step=>step.name!==QUICK_SKIPPED_STEPS[1])),/--quick expects a step/);
+ const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
+ // `--quick` covers both always-run jobs: the documentation audit moved to `audit` while the published-assets
+ // check stayed on `lint`, so neither job alone still carries both skipped names.
+ const always=ALWAYS_JOBS.flatMap(job=>readCiSteps(workflow,job));
+ const quick=quickSteps(always);
+ assert.deepEqual(always.filter(step=>!quick.includes(step)).map(step=>step.name),QUICK_SKIPPED_STEPS);
+ assert.throws(()=>quickSteps(always.filter(step=>step.name!==QUICK_SKIPPED_STEPS[0])),/--quick expects a step/);
 });
 test('--typecheck appends the typecheck only when shared code changed',()=>{
  assert.equal(sharedCodeChanged(['src/objects/ceres/README.md','docs/README.md']),false);
@@ -216,7 +243,7 @@ test('the maintained aggregate command accepts success only, never failed, cance
 
 test('the actual workflow dispatches every native lane command locally and retains main authoring',async()=>{
  const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
- const expanded=readCiSteps(workflow),lanes=['sources','runtime','shell','renderer'];
+ const expanded=readCiSteps(workflow),lanes=['runtime','shell','renderer'];
  const commands=lanes.map(lane=>{
   const step=expanded.filter(step=>step.env.CI_UNIVERSE_LANE===lane).at(-1);
   assert.ok(step,`${lane}: local commands must exist`);
@@ -229,21 +256,53 @@ test('the actual workflow dispatches every native lane command locally and retai
  try{
   await runCiSteps(commands,root,root);
   assert.equal(await readFile(join(root,'dispatch'),'utf8'),[
-   'pnpm test:sources:pr',
-   ...['runtime','shell','renderer'].flatMap(lane=>['node tools/prepare-facilities.mts --catalog-only',`pnpm test:universe:${lane}`]),'',
+   ...lanes.flatMap(lane=>['node tools/prepare-facilities.mts --catalog-only',`pnpm test:universe:${lane}`]),'',
   ].join('\n'));
-  const source=commands[0]!;
-  await runCiSteps([{...source,env:{...source.env,GITHUB_EVENT_NAME:'push'}}],root,root);
-  assert.ok((await readFile(join(root,'dispatch'),'utf8')).endsWith(
-   'node tools/restore-source-inputs.mts --repository-volumes\npnpm test:sources\n',
-  ),'main must restore pinned repository volume inputs before authoring checks');
  }finally{await rm(root,{recursive:true,force:true});}
 });
 
-test('preparation dispatch keeps the browser with publication and the galaxy writer before world checks',async()=>{
+// The relocated lanes are the same commands with the same arguments, dispatched from the advisory job instead of
+// the gate. Asserting the dispatch (not merely the presence of a string) is what proves nothing was dropped, and
+// that an unselected change skips them by the same path-based selection the gate lane applied as a job condition.
+test('the advisory audit dispatches the relocated source and reproduction commands in full',async()=>{
+ const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
+ const audit=readCiSteps(workflow,'audit');
+ const relocated=['Reconcile the source catalogue, facility records and provenance receipts',
+  'Reproduce the prepared bank and the galaxy field from their pinned inputs'].map(name=>{
+  const step=audit.find(step=>step.name===name);
+  assert.ok(step,`${name}: the relocated step must exist`);
+  return {...step,run:[
+   'pnpm() { printf "pnpm %s\n" "$*" >> "$RUNNER_TEMP/dispatch"; }',
+   'node() { printf "node %s\n" "$*" >> "$RUNNER_TEMP/dispatch"; }',step.run,
+  ].join('\n')};
+ });
+ const run=async(env:Record<string,string>)=>{
+  const root=await mkdtemp(join(tmpdir(),'ci-audit-relocated-'));
+  try{
+   await runCiSteps(relocated.map(step=>({...step,env:{...step.env,...env}})),root,root);
+   return await readFile(join(root,'dispatch'),'utf8').catch(()=>'');
+  }finally{await rm(root,{recursive:true,force:true});}
+ };
+ assert.equal(await run({GITHUB_EVENT_NAME:'pull_request'}),[
+  'node tools/prepare-ci-inputs.mts universe','node tools/restore-object-json.mts','node tools/prepare-feature-index.mts',
+  'node site/minimap/prepare.mts --data-only','pnpm test:sources:pr',
+  'node tools/prepare-ci-inputs.mts universe-preparation','node tools/restore-source-inputs.mts --repository-volumes',
+  'pnpm test:galaxy-field','pnpm test:ci-preparation:world','',
+ ].join('\n'));
+ assert.equal(await run({GITHUB_EVENT_NAME:'push'}),[
+  'pnpm setup:asset-data','node tools/restore-object-json.mts','node tools/prepare-feature-index.mts',
+  'node site/minimap/prepare.mts --data-only','node tools/restore-source-inputs.mts --repository-volumes','pnpm test:sources',
+  'node tools/prepare-ci-inputs.mts universe-preparation','node tools/restore-source-inputs.mts --repository-volumes',
+  'pnpm test:galaxy-field','pnpm test:ci-preparation:world','',
+ ].join('\n'),'main authors the catalogue from pinned repository volumes, as the gate lane did');
+ assert.equal(await run({GITHUB_EVENT_NAME:'pull_request',CI_AUDIT_UNIVERSE:'false',CI_AUDIT_PREPARATION:'false'}),'',
+  'a change selecting neither area runs neither, exactly as the gate lanes were selected');
+});
+
+test('preparation dispatch keeps the browser with the publication lane it gates',async()=>{
  const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
  const expanded=readCiSteps(workflow,'universe-preparation');
- const commands=['publication','world'].map(lane=>{
+ const commands=['publication'].map(lane=>{
   const step=expanded.filter(step=>step.env.CI_PREPARATION_LANE===lane).at(-1);
   assert.ok(step,`${lane}: preparation commands must exist`);
   return {...step,run:[
@@ -256,9 +315,7 @@ test('preparation dispatch keeps the browser with publication and the galaxy wri
   await runCiSteps(commands,root,root);
   assert.equal(await readFile(join(root,'dispatch'),'utf8'),[
    'publication pnpm exec playwright install --with-deps --only-shell chromium',
-   'publication pnpm test:ci-preparation:publication',
-   'world node tools/restore-source-inputs.mts --repository-volumes',
-   'world pnpm test:galaxy-field','world pnpm test:ci-preparation:world','',
+   'publication pnpm test:ci-preparation:publication','',
   ].join('\n'));
  }finally{await rm(root,{recursive:true,force:true});}
 });

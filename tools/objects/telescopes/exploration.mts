@@ -10,6 +10,7 @@ import type { DiscoveryRequest } from './vo/discovery.mts';
 import type { VoInputs } from './vo/bridge.mts';
 import { FAMILY_IDS, type FamilyId } from './product-descriptor.mts';
 import type { ObservationFamilyEvidence } from './observation-families.mts';
+import { searchOpus, type OpusService } from './opus.mts';
 
 export const EXPLORATION_SCHEMA = 'cssearth-telescope-exploration@1';
 export interface ExplorationRequest extends DiscoveryRequest {}
@@ -34,15 +35,15 @@ export interface ExplorationChoice {
 }
 export interface ExplorationIssue {
   readonly scope: 'target' | 'provider' | 'observation' | 'indexed-source';
-  readonly code: 'unknown-target' | 'ambiguous-target' | 'provider-unavailable' | 'provider-overflow' | 'unsupported-observation' | 'filter-unresolved' | 'coverage';
+  readonly code: 'unknown-target' | 'ambiguous-target' | 'provider-unavailable' | 'provider-overflow' | 'provider-target-unknown' | 'unsupported-observation' | 'filter-unresolved' | 'coverage';
   readonly reason: string; readonly identity?: string;
 }
-export interface ExplorationInputs extends QueryInputs { readonly vo?: VoInputs }
+export interface ExplorationInputs extends QueryInputs { readonly vo?: VoInputs; readonly opus?: OpusService }
 export interface ExplorationAnswer {
   readonly schema: typeof EXPLORATION_SCHEMA; readonly request: ExplorationRequest;
   readonly target: string; readonly targetResolution: TargetResolution;
   readonly choices: readonly ExplorationChoice[]; readonly unresolved: readonly ExplorationIssue[]; readonly unsupported: readonly ExplorationIssue[];
-  readonly issues: readonly ExplorationIssue[]; readonly services: VoInputs['services']; readonly coverage: readonly TargetCoverage[];
+  readonly issues: readonly ExplorationIssue[]; readonly services: readonly (VoInputs['services'][number] | OpusService)[]; readonly coverage: readonly TargetCoverage[];
 }
 
 const numberFlag = (args: readonly string[], flag: string): number | undefined => {
@@ -151,10 +152,11 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
     }
   }
   choices.sort((a, b) => (a.state === 'ready' ? 0 : 1) - (b.state === 'ready' ? 0 : 1) || a.key.localeCompare(b.key));
-  const services = inputs.vo?.services ?? [], issues: ExplorationIssue[] = [];
+  const services = [...inputs.vo?.services ?? [], ...inputs.opus ? [inputs.opus] : []], issues: ExplorationIssue[] = [];
   for (const service of services) {
     if (service.state === 'unavailable') issues.push({ scope: 'provider', code: 'provider-unavailable', identity: service.service, reason: `${service.scope}. ${service.reason}` });
     else if (service.state === 'overflow') issues.push({ scope: 'provider', code: 'provider-overflow', identity: service.service, reason: `${service.scope}. ${service.reason}` });
+    else if (service.state === 'unknown-target') issues.push({ scope: 'provider', code: 'provider-target-unknown', identity: service.service, reason: service.reason });
   }
   for (const item of indexed.coverage) if (item.state !== 'observed') issues.push({ scope: 'indexed-source', code: 'coverage', identity: item.telescope, reason: item.reason });
   return { schema: EXPLORATION_SCHEMA, request: canonicalRequest, target, targetResolution, choices: choices.map((choice, index) => ({ ...choice, pick: index + 1 })), unresolved, unsupported, issues, services, coverage: indexed.coverage };
@@ -163,7 +165,8 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
 export async function loadExplorationInputs(root: string, request: ExplorationRequest, selectedObservation?: string): Promise<ExplorationInputs> {
   const targetCatalogue = await loadTargetCatalogue(root), resolution = resolveTarget(request.target, targetCatalogue);
   if (resolution.status !== 'resolved') return { ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], qualifiedProducts: [] };
-  return loadQueryInputs(root, { ...request, target: resolution.canonical.id }, selectedObservation);
+  const [inputs, opus] = await Promise.all([loadQueryInputs(root, { ...request, target: resolution.canonical.id }, selectedObservation), searchOpus(targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] })]);
+  return { ...inputs, opus };
 }
 
 export async function exploreTarget(root: string, request: ExplorationRequest, selectedObservation?: string): Promise<ExplorationAnswer> {

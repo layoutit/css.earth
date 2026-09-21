@@ -198,6 +198,24 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 5267,
       "expectedSha256": "ccdf086fabd90d1c9ae5491e0fe735cce63c3e2935f7c5dace33491aea0b64ca"
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 529003,
+      "expectedSha256": "861e633a3fa755a7b1f78be9ff5af7845fc66b7ee3e22dc03eaac02f7147aeff",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture of the default camera view in the app, committed with the package in 7e71ba192e; the capture's settings were not recorded."
+      }
+    },
+    {
+      "path": "reference/rendered-system.png",
+      "expectedBytes": 694034,
+      "expectedSha256": "f2a0121c23ccc48a3639057ecbaad27c8f9828d3340cecccda3d6cf03cec9763",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture of the system view in the app, committed with the package in 1bc60345b8; the capture's settings were not recorded."
+      }
     }
   ]
 }

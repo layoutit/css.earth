@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "17f60b33111c10f1d298c4fbaaf39f30914246867bfca63dc6be6409dd68de28"
+    "sha256": "6392e9f065370a6cfa7a966378b57b6a66ffcedc3b0984d17ccf75c6727b120a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -83,7 +83,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1d185fe2436aeb0805ca678f0293cd3844a1701ec992b81d89777e35ff55ac86",
+      "sha256": "48d549414aea559390972a792711f5cce3ed7a5fd6dca412f5b6f00061c4ebcc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -192,7 +192,7 @@
           },
           "physical": {
             "path": "../../../../../packages/astronomy/data/bodies/trappist-1.json",
-            "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+            "credit": "Published radius at the catalogue distance; Gaia DR3 astrometry, radial velocity via SIMBAD; no measured rotation axis (display convention)"
           }
         }
       }
@@ -325,8 +325,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1d185fe2436aeb0805ca678f0293cd3844a1701ec992b81d89777e35ff55ac86",
-      "bytes": 3899,
+      "sha256": "48d549414aea559390972a792711f5cce3ed7a5fd6dca412f5b6f00061c4ebcc",
+      "bytes": 3929,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -445,8 +445,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5462,
-          "sha256": "6eeba785792a2f9f1798c4cbbed9074d9a7294da884d0bf77b9a5dd1292e3ba4",
+          "bytes": 5492,
+          "sha256": "a021d971205dede6aa648234008017b8d1a95c655739df948268ac924dc9eccf",
           "verification": "bytes-verified"
         }
       ],
@@ -513,7 +513,7 @@
   },
   "lastPreparation": {
     "objectId": "trappist-1",
-    "materialSha256": "0a7aea48219710a477b76df164fc5e0bd454a001ac366ea9c476a397b7229cc0",
+    "materialSha256": "03ce1951631802a85daf7b99ea38c276b435eb02b5e2376f63480b89f9c37836",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

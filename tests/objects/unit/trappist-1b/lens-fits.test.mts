@@ -52,11 +52,12 @@ test('the MIRI 15 µm lens is a bare rock fitted to ten visits this project redu
   near(rock.sample(0, 0)!, rock.fit.substellarK, 1e-9, 'substellar point');
   near(rock.sample(60, 0)!, rock.fit.substellarK * 0.5 ** 0.25, 1e-9, '60 degrees from the star');
   assert.equal(rock.sample(90.5, 0), 0); assert.equal(rock.sample(180, 0), 0); near(rock.sample(0, 90)!, 0, 1, 'pole, on the terminator');
-  // With the package orbit's 2015 timing instead, the eclipses fall two hours early and the fit is far worse: 7002.2 over 6737
-  // samples (its transit exclusion falls elsewhere), 1.039 per sample against 0.985.
+  // With the package orbit's timing instead (the Agol et al. 2024 forecast line around the 2026 scene epoch, carried back to
+  // 2022-2023) the eclipses fall about 17 minutes late and the fit is worse: 7017.3 over 6904 samples, 1.016 per sample against
+  // 0.985. (Agol et al. 2021's osculating elements, which the package carried before, gave 1.039.)
   const { ephemeris: _ephemeris, ...packageTiming } = science;
   const early = await loadBareRockFit(source, packageTiming);
-  assert.ok(early.fit.chiSquared / early.fit.samples - rock.fit.chiSquared / rock.fit.samples > 0.05, `package timing chi2 ${early.fit.chiSquared} over ${early.fit.samples}`);
+  assert.ok(early.fit.chiSquared / early.fit.samples - rock.fit.chiSquared / rock.fit.samples > 0.02, `package timing chi2 ${early.fit.chiSquared} over ${early.fit.samples}`);
 });
 
 test('a smooth map fits the same data no better than the rock, and puts its hot spot where the star is overhead', async () => {

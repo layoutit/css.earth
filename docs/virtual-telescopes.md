@@ -36,6 +36,29 @@ and redirected input or output never prompt. Without `--out`, the command create
 under `./telescope-runs/`. An exploration delivery retains “no scientific acceptance criteria
 requested” through later outputs.
 
+`explore` also asks the PDS Ring-Moon Systems Node's
+[OPUS search](https://opus.pds-rings.seti.org/api/) which spacecraft images exist of the body.
+This covers Voyager, Galileo, Cassini, New Horizons and the other missions OPUS indexes. OPUS
+only answers for the 101 bodies it computes surface geometry for, mostly planets and moons from
+Jupiter outward. The command matches the object's catalogue name and aliases against that list.
+If the body is not on it, the OPUS entry says `unknown-target`: OPUS cannot tell us whether
+images exist, which is different from finding none. For a known body the entry gives the total
+image count and the sharpest image from each instrument: its OPUS id, start time and resolution
+at the body centre in km per pixel, as OPUS returns them. It also gives pixels across, which is
+the body's mean diameter from `@cssearth/astronomy` divided by that resolution. For elongated
+bodies such as Kerberos, the mean diameter gives fewer pixels than the long axis would. The
+explore filters (kind, wavelength, time) are not sent to OPUS, and these images are listed for
+reading only; they do not become numbered choices for `get`. A failed request, including the
+HTML error page OPUS returns for an invalid query, is reported as `unavailable`, never as an
+empty result. The entry sits in `services` with the ESO, ALMA and PSA searches:
+
+```sh
+pnpm -s telescope explore kerberos --json
+# "service": "https://opus.pds-rings.seti.org/api/", "state": "sampled", "images": 2292,
+# "sharpest": [{ "instrument": "New Horizons LORRI", "centreResolutionKmPerPixel": 1.96379,
+#   "pixelsAcross": 4.8, ... }]
+```
+
 `telescope outputs ARTIFACT.json` is the second human entry point. It identifies the artifact and
 its source context, keeps unavailable operations and blockers visible, and prints the parameters and
 explicit command template for each available next operation. In a terminal it asks which available
