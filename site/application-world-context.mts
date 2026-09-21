@@ -189,7 +189,11 @@ export function createApplicationWorldContext() {
         const restoreMoonOrbitPaint = suppressMinorMoonOrbitPaint(presentationHost, minorMoonIds);
         const framePlanner = prepared.createFramePlanner();
         pendingPlanner = framePlanner;
-        const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector<HTMLElement>('.planet-sidebar'));
+        // On phones the header floats over the top of the scene and the readout rides on the drawer; the camera centres
+        // the focus between them. Wider layouts measure these as uncovering nothing of note.
+        const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector<HTMLElement>('.planet-sidebar'), phone ? {
+          above: stage.ownerDocument.querySelector<HTMLElement>('.explorer-shell-header'),
+          below: stage.ownerDocument.querySelector<HTMLElement>('.planet-view-readout') } : null);
         const minimap = createSpaceMinimapSetting(stage.ownerDocument, error => target.reportError(error));
         const moonLabels = mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock);
         let heliosphereEnabled = false, shellsMounted = false, destroyed = false;
