@@ -45,5 +45,5 @@ const banks = await Promise.all(Object.entries(descriptors).filter(([, descripto
     </label>}
   <DatasetContextPanels objectId={bank.id} lenses={presentation} />
   {/* Follow the shell's direct children so each moving catalogue does not search all sidebar descendants. */}
-  <style is:inline set:html={`.planet-ui-layer:has(> .planet-sidebar-frame > .planet-sidebar > .planet-drawer-content > .planet-object-browser > [data-prepared-focus-card] > #prepared-focus-dataset-content > [data-focus-lens-bank="${bank.id}"] > .planet-setting-control > [data-focus-stars]:not(:checked)) ~ .planet-viewport .prepared-volume-lenses[data-volume-lens-object="${bank.id}"] .prepared-catalogue-points { display:none !important; }`}></style>
+  <style is:inline set:html={`.planet-ui-layer:has(> .planet-sidebar-frame > .planet-sidebar > .planet-drawer-content > .planet-object-context > [data-prepared-focus-card] > #prepared-focus-dataset-content > [data-focus-lens-bank="${bank.id}"] > .planet-setting-control > [data-focus-stars]:not(:checked)) ~ .planet-viewport .prepared-volume-lenses[data-volume-lens-object="${bank.id}"] .prepared-catalogue-points { display:none !important; }`}></style>
 </div>)}

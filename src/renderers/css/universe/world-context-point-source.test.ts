@@ -55,9 +55,9 @@ test('point source uses the prepared star photometry, nearest atlas color, and s
   expect(worldContextPointAppearance(plan,field,world(10*parsec),viewport,{occluder:{positionM:[0,0,5*parsec],radiusM:1}})).toBeNull();
 });
 
-test('the prepared Sun glare strengthens the five-AU view and recedes smoothly without changing its physical disc', async () => {
+test('the prepared Sun landmark grows smoothly from the light-year handoff without changing its physical disc', async () => {
   const source = JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8'));
-  const solarPlan = parsePreparedWorldContext(source), au = 149597870700;
+  const solarPlan = parsePreparedWorldContext(source), au = 149597870700, lightYearM = 299792458 * 31557600;
   const sample = (distanceAu: number, context = solarPlan) => worldContextPointAppearance(context, field,
     { ...world(distanceAu * au), epochJdTt: context.frame.epochJdTt }, { ...viewport, focalPixels: 1280 * Math.sqrt(3) / 2 }, { selectedDetail: true })!;
   const unenhanced = { ...solarPlan, focus: { ...solarPlan.focus, pointSource: {
@@ -68,13 +68,14 @@ test('the prepared Sun glare strengthens the five-AU view and recedes smoothly w
   expect(near.radiusPx).toBeGreaterThan(plain.radiusPx * 1.7);
   expect(near.radiusPx * 2 * field.atlas.haloRadii).toBeLessThan(16);
   let previous = sample(1).radiusPx;
-  for (const distanceAu of [2, 5, 10, 20, 50, 100, 300, 1000]) {
+  for (const distanceAu of [2, 5, 10, 20, 50, 100, 300, 1000, 10_000, 30_000, lightYearM / au]) {
     const appearance = sample(distanceAu);
     expect(appearance.radiusPx).toBeLessThan(previous);
     expect(sample(distanceAu * 1.001).radiusPx / appearance.radiusPx).toBeGreaterThan(.995);
     previous = appearance.radiusPx;
   }
-  expect(sample(1000).radiusPx).toBe(sample(1000, unenhanced).radiusPx);
+  expect(sample(30_000).radiusPx).toBeGreaterThan(sample(30_000, unenhanced).radiusPx);
+  expect(sample(lightYearM / au).radiusPx).toBe(sample(lightYearM / au, unenhanced).radiusPx);
 });
 
 test('mount retains one PSF node, activates the actual point hit target, and removes it on destroy', () => {

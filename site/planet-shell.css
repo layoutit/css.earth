@@ -1796,6 +1796,12 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   transition: color 120ms ease;
 }
 
+/* Surface labels default to hidden before the shell binds so prepared
+   nomenclature never flashes on first paint. */
+body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-label] {
+  visibility: hidden !important;
+}
+
 .prepared-surface-features [data-feature-kind="point"]::before {
   position: absolute;
   top: 50%;

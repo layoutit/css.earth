@@ -220,7 +220,8 @@ try {
         `${config.name}: clear appears only with a query`);
       await search.fill('Neptune');
       assert.equal(await page.locator('.planet-object-browser').isVisible(), true);
-      assert.equal(await page.locator('.planet-information-panel').isVisible(), false);
+      assert.equal(await page.locator('.planet-information-panel').isVisible(), true,
+        `${config.name}: searching does not replace the selected object card`);
       assert.equal(await page.locator('.planet-sidebar-search-clear').isVisible(), true,
         `${config.name}: a query offers to clear itself`);
       if (sheetLayout) {

@@ -767,6 +767,9 @@ async function proveSurfaceFeatures(browser: Browser, planet: ObjectEntry, profi
           return { id: element.dataset.featureLabel ?? "", kind: element.dataset.featureKind ?? "", text: element.textContent ?? "", transform: element.style.transform,
             left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom }; }) };
     });
+    assert.equal(await page.locator('.planet-surface-labels-setting').isChecked(), false, `${planet.id}: Surface labels defaults off`);
+    assert.equal((await read()).visible.length, 0, `${planet.id}: prepared surface labels stay hidden by default`);
+    await page.locator('.planet-surface-labels-setting').check();
     const labels = await read();
     assert.equal(labels.total, plan.catalog.count, `${planet.id}: one retained span per prepared feature`);
     assert.ok(labels.visible.length > 0 && labels.visible.length <= plan.policy.maximumVisible, `${planet.id}: visible labels stay within the prepared cap`);

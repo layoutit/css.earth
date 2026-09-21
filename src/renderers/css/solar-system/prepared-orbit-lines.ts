@@ -3,13 +3,12 @@ import { formatLineNumber, orbitSegmentTransform } from './orbit-segment-present
 import type { OrbitSegment } from './types.js';
 import type { FadeTarget } from '../stars/opacity-fader.js';
 
-/** Two paint owners for the same planned chords, switchable at runtime so traces
- * compare them on one build. `strokes` (the shipped one) retains one SVG polyline per
+/** Two paint owners for the same planned chords, selectable at mount for focused
+ * comparison. `strokes` (the shipped one) retains one SVG polyline per
  * trail opacity level for every orbit inside one shared `<svg>` per world context:
  * one paint chunk, a handful of `points` writes per frame. `bars` retains one CSS
  * unit-line per chord. Neither reconstructs geometry. */
 export type OrbitRenderer = 'strokes' | 'bars';
-export const ORBIT_RENDERERS: readonly OrbitRenderer[] = Object.freeze(['strokes', 'bars']);
 /** Largest deviation of the planned chord bank from the full path, in screen pixels.
  * Under a 1.5 px antialiased stroke half a pixel is invisible, and halves the chords
  * the worker projects, the strings the page parses and the shapes the SVG lays out. */

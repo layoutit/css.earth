@@ -371,13 +371,13 @@ try {
         `${config.label}: disabled Speed row remains dimmed`);
       assert.equal(await speedControl.evaluate((node) => {
         const next = node.nextElementSibling;
-        const contrast = next?.matches(".planet-sky-contrast-setting-control")
-          ? next
-          : next?.nextElementSibling;
+        const minimap = next?.querySelector('input[name="shadows"]')
+          ? next.nextElementSibling
+          : next;
         return node.previousElementSibling?.matches(".planet-motion-setting-control") === true &&
-          contrast?.matches(".planet-sky-contrast-setting-control") === true &&
-          (!next?.querySelector('input[name="shadows"]') || contrast === next.nextElementSibling);
-      }), true, `${config.label}: Motion and Speed are consecutive; Shadows precedes High contrast when supported`);
+          minimap?.matches(".planet-minimap-setting-control") === true &&
+          minimap.nextElementSibling?.matches(".planet-surface-labels-setting-control") === true;
+      }), true, `${config.label}: Motion and Speed are consecutive; Minimap precedes Surface labels`);
       assert.equal(await speed.isDisabled(), !(await motion.isChecked()),
         `${config.label}: Motion controls Speed availability`);
       await settingsPanel.locator(".planet-motion-setting-control").click();
@@ -396,20 +396,21 @@ try {
     }
     await settings.click();
     assert.equal(await settingsPanel.isVisible(), true, "clicking the selected rail item keeps its panel open");
-    const contrast = settingsPanel.locator(".planet-sky-contrast-setting");
-    const contrastSwitch = settingsPanel.locator(".planet-sky-contrast-setting-control .planet-setting-switch");
-    const offThumbTransform = await contrastSwitch.evaluate((node) => getComputedStyle(node, "::before").transform);
-    await settingsPanel.locator(".planet-sky-contrast-setting-control").click();
-    assert.equal(await contrast.isChecked(), true);
-    assert.notEqual(await contrastSwitch.evaluate((node) => getComputedStyle(node, "::before").transform), offThumbTransform,
+    const surfaceLabels = settingsPanel.locator(".planet-surface-labels-setting");
+    const surfaceLabelsSwitch = settingsPanel.locator(".planet-surface-labels-setting-control .planet-setting-switch");
+    assert.equal(await surfaceLabels.isChecked(), false, "Surface labels starts off");
+    const offThumbTransform = await surfaceLabelsSwitch.evaluate((node) => getComputedStyle(node, "::before").transform);
+    await settingsPanel.locator(".planet-surface-labels-setting-control").click();
+    assert.equal(await surfaceLabels.isChecked(), true);
+    assert.notEqual(await surfaceLabelsSwitch.evaluate((node) => getComputedStyle(node, "::before").transform), offThumbTransform,
       `${config.label}: checked switch moves its thumb`);
     await about.click();
     assert.equal(await settingsPanel.isVisible(), false);
     assert.equal(await settings.getAttribute("aria-pressed"), "false");
     await settings.focus();
     await page.keyboard.press("Enter");
-    assert.equal(await contrast.isChecked(), true, "switching panels retains settings values");
-    await settingsPanel.locator(".planet-sky-contrast-setting-control").click();
+    assert.equal(await surfaceLabels.isChecked(), true, "switching panels retains settings values");
+    await settingsPanel.locator(".planet-surface-labels-setting-control").click();
     if (output && ["jupiter-desktop", "saturn-desktop", "phone-dpr2", "small-phone"].includes(config.label)) {
       await page.screenshot({ path: `${output}/${config.label}-settings.png` });
     }
