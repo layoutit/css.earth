@@ -1,0 +1,20 @@
+{
+  "schema": "csselatus-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "elatus-model-shadow@2x.webp",
+      "bytes": 42166,
+      "sha256": "968d1b4e064ec8ddf3990403996d360f52b79b1a80e913ed83e456bb2e961bc1"
+    },
+    {
+      "filename": "elatus-model-surface@2x.webp",
+      "bytes": 51662,
+      "sha256": "468e68bfd5592bc0bebce725d28f495a049ee20ba9bd951bf8fd4901c125c8dc"
+    },
+    {
+      "filename": "elatus-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

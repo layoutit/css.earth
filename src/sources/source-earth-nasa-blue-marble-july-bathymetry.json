@@ -1,0 +1,37 @@
+{
+  "id": "source-earth-nasa-blue-marble-july-bathymetry",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Earth · nasa blue marble july bathymetry",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-topography-bathymetry/july/world.topo.bathy.200407.3x21600x10800.jpg",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/earth/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA Earth Observatory",
+      "scope": "The nasa blue marble july bathymetry input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA media usage guidelines",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

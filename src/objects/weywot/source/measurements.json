@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-21",
+  "id": "weywot",
+  "name": "Weywot",
+  "titleLabel": "Weywot",
+  "horizons": "120050000",
+  "aliases": [
+    "Quaoar I",
+    "Quaoar I Weywot",
+    "S/2006 (50000) 1"
+  ],
+  "classification": "satellite",
+  "population": "Trans-Neptunian satellite",
+  "parent": "quaoar",
+  "fullAxesKm": [
+    170.0,
+    170.0,
+    170.0
+  ],
+  "radiusKm": 85.0,
+  "axesStatus": "Illustrative equal axes at the approximate radius Horizons carries for this satellite solution; these are not measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": null,
+  "periodText": "Not adopted",
+  "rotationFact": false,
+  "shapeLabel": "Sphere at the JPL radius",
+  "source": "https://ssd.jpl.nasa.gov/horizons/",
+  "credit": "JPL Horizons TNO satellite solution tnosat_v001_20050000_jpl043_20220908: header radius RAD~ 85 km for Weywot",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/horizons/"
+  ],
+  "shapeMeaning": "Illustrative sphere at the approximate 85 km radius in the header of JPL Horizons' satellite solution for Weywot. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Weywot is a moon of Quaoar, found in 2006. JPL's orbit for it rests on 9 observations from 2006 to 2011.",
+  "card": "A moon of Quaoar.",
+  "datasetSummary": "A sphere at the roughly 85 km radius JPL lists. Shape, pole and rotation are not measured.",
+  "distanceAu": 43.7,
+  "textCitations": [
+    {
+      "catalogueId": "jpl-horizons",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "label": "JPL Horizons",
+      "checked": "2026-09-21",
+      "locator": "Satellite solution tnosat_v001_20050000_jpl043_20220908: header and observation span"
+    }
+  ]
+}

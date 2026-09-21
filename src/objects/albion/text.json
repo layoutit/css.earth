@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "albion",
+  "card": {
+    "text": "The first Kuiper belt object found after Pluto.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Record for 15760 Albion (1992 QB1): orbit class and physical parameters"
+      },
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201322416",
+        "url": "https://doi.org/10.1051/0004-6361/201322416",
+        "label": "JPL Small-Body Database absolute magnitude H = 7.18 for 15760 Albion (1992 QB1); diameter estimated by cssEarth with the 0.14 median albedo of cold classical objects from Vilenius et al. (2014), Astronomy & Astrophysics 564, A35",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Albion, found in 1992 as 1992 QB1, was the first Kuiper belt object discovered after Pluto and Charon.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Record for 15760 Albion (1992 QB1): orbit class and physical parameters"
+      },
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201322416",
+        "url": "https://doi.org/10.1051/0004-6361/201322416",
+        "label": "JPL Small-Body Database absolute magnitude H = 7.18 for 15760 Albion (1992 QB1); diameter estimated by cssEarth with the 0.14 median albedo of cold classical objects from Vilenius et al. (2014), Astronomy & Astrophysics 564, A35",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Sphere at an assumed-albedo diameter",
+      "detail": "Inferred shape",
+      "summary": "A sphere at about 130.2 km, estimated from brightness with an assumed albedo.",
+      "sources": [
+        {
+          "catalogueId": "doi-10-1051-0004-6361-201322416",
+          "url": "https://doi.org/10.1051/0004-6361/201322416",
+          "label": "JPL Small-Body Database absolute magnitude H = 7.18 for 15760 Albion (1992 QB1); diameter estimated by cssEarth with the 0.14 median albedo of cold classical objects from Vilenius et al. (2014), Astronomy & Astrophysics 564, A35",
+          "checked": "2026-09-21"
+        }
+      ]
+    }
+  }
+}

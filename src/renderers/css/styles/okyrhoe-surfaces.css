@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.example-stage:where([data-object-id="okyrhoe"]) > :is(.okyrhoe-sun-camera, .okyrhoe-camera, .okyrhoe-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="okyrhoe"]) .okyrhoe-sun-camera, :where(.planet-stage[data-object-id="okyrhoe"]) .okyrhoe-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="okyrhoe"]) .okyrhoe-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="okyrhoe"]) .okyrhoe-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.planet-stage[data-object-id="okyrhoe"]) .okyrhoe-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--okyrhoe-surface-image); background-repeat: no-repeat;
+}
+:where(.planet-stage[data-object-id="okyrhoe"]) .okyrhoe-body > .okyrhoe-polar { background-image: var(--okyrhoe-poles-image); }
+:where(.planet-stage[data-object-id="okyrhoe"]) .okyrhoe-material-root { z-index: 3; --okyrhoe-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="okyrhoe"]) .okyrhoe-material, :where(.planet-stage[data-object-id="okyrhoe"]) .okyrhoe-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="okyrhoe"]) .okyrhoe-material { background-repeat: no-repeat; transform: rotate(var(--okyrhoe-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="okyrhoe"]) .okyrhoe-billboard { border-radius: 50%; background-color: var(--okyrhoe-billboard-color); opacity: var(--okyrhoe-billboard-opacity); }
+.planet-stage:where([data-object-id="okyrhoe"])[data-lod="billboard"] .okyrhoe-scene, .planet-stage:where([data-object-id="okyrhoe"])[data-lod="marker"] .okyrhoe-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="okyrhoe"])[data-lod="marker"] .okyrhoe-billboard { opacity: 0; }
+

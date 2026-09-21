@@ -1,0 +1,16 @@
+{
+  "schema": "cssamycus-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 458272,
+      "sha256": "320dfb281449ed823f21071a90c7ce8f83c8e9e34c928562b936c39b4c6f4cb5"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 369886,
+      "sha256": "40649201d510b85c81e72f9a9c44b01519612dbecc2c4ed64eee4366f420c972"
+    }
+  ]
+}

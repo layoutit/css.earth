@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ritona",
+  "card": {
+    "text": "A large icy body in the Kuiper belt.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Record for 145452 Ritona (2005 RN43): orbit class and physical parameters"
+      },
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201118743",
+        "url": "https://doi.org/10.1051/0004-6361/201118743",
+        "label": "Vilenius et al. (2012), Astronomy & Astrophysics 541, A94; Herschel PACS and Spitzer MIPS thermal radiometry",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Ritona is a large icy body in the Kuiper belt beyond Neptune, first catalogued as 2005 RN43.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Record for 145452 Ritona (2005 RN43): orbit class and physical parameters"
+      },
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201118743",
+        "url": "https://doi.org/10.1051/0004-6361/201118743",
+        "label": "Vilenius et al. (2012), Astronomy & Astrophysics 541, A94; Herschel PACS and Spitzer MIPS thermal radiometry",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Sphere at the measured diameter",
+      "detail": "Inferred shape",
+      "summary": "A sphere at the 679 km diameter measured from its heat. Shape and pole are not measured.",
+      "sources": [
+        {
+          "catalogueId": "doi-10-1051-0004-6361-201118743",
+          "url": "https://doi.org/10.1051/0004-6361/201118743",
+          "label": "Vilenius et al. (2012), Astronomy & Astrophysics 541, A94; Herschel PACS and Spitzer MIPS thermal radiometry",
+          "checked": "2026-09-21"
+        }
+      ]
+    }
+  }
+}

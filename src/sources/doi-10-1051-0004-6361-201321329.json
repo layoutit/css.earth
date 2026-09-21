@@ -1,0 +1,42 @@
+{
+  "id": "doi-10-1051-0004-6361-201321329",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · DOI 10.1051/0004-6361/201321329",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201321329"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201321329",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/uni/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "d1d9a8d2d486eff05042be6b6d77bb2fc7a3941e42bc4fd1eb253c912fca2b3b",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Fornasier et al. (2013), Astronomy & Astrophysics 555, A15; Herschel PACS and SPIRE thermal radiometry",
+      "scope": "The published shape input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "MIT numeric extraction of published scientific facts",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

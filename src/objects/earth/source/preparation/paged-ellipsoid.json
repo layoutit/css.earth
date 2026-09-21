@@ -111,7 +111,17 @@
         "compositeClouds": false,
         "thumbnail": "earth-lens-normal.webp",
         "displayGamma": 1.25,
-        "nativePhotographicSampling": true
+        "nativePhotographicSampling": true,
+        "deepOceanFill": {
+          "path": "blue-marble-july-bathymetry.jpg",
+          "replacedColor": [
+            2,
+            5,
+            20
+          ],
+          "tolerance": 2,
+          "blendSourcePixels": 40
+        }
       },
       {
         "path": "blue-marble-july.jpg",
@@ -125,7 +135,17 @@
         },
         "primarySource": "blue-marble-clouds.tif",
         "displayGamma": 1.25,
-        "nativePhotographicSampling": true
+        "nativePhotographicSampling": true,
+        "deepOceanFill": {
+          "path": "blue-marble-july-bathymetry.jpg",
+          "replacedColor": [
+            2,
+            5,
+            20
+          ],
+          "tolerance": 2,
+          "blendSourcePixels": 40
+        }
       },
       {
         "path": "science/gebco-2026/latitude-00.dods.gz",

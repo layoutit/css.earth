@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.example-stage:where([data-object-id="albion"]) > :is(.albion-sun-camera, .albion-camera, .albion-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="albion"]) .albion-sun-camera, :where(.planet-stage[data-object-id="albion"]) .albion-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="albion"]) .albion-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="albion"]) .albion-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.planet-stage[data-object-id="albion"]) .albion-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--albion-surface-image); background-repeat: no-repeat;
+}
+:where(.planet-stage[data-object-id="albion"]) .albion-body > .albion-polar { background-image: var(--albion-poles-image); }
+:where(.planet-stage[data-object-id="albion"]) .albion-material-root { z-index: 3; --albion-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="albion"]) .albion-material, :where(.planet-stage[data-object-id="albion"]) .albion-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="albion"]) .albion-material { background-repeat: no-repeat; transform: rotate(var(--albion-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="albion"]) .albion-billboard { border-radius: 50%; background-color: var(--albion-billboard-color); opacity: var(--albion-billboard-opacity); }
+.planet-stage:where([data-object-id="albion"])[data-lod="billboard"] .albion-scene, .planet-stage:where([data-object-id="albion"])[data-lod="marker"] .albion-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="albion"])[data-lod="marker"] .albion-billboard { opacity: 0; }
+

@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "goibniu",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Goibniu",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 340
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/goibniu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "854e92d363b1a9fd57f22da5af6bde63601c2cd62b01002e7b23aa5d1c3e7218"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2927570983770.608,
+        -4611932667537.238,
+        -2453646780347.6235
+      ],
+      "presentationToReference": [
+        -0.4900609848489459,
+        2.4356826039297786e-17,
+        -0.8716881501597239,
+        -0.7997582414898141,
+        0.3977771559319137,
+        0.4496221629188649,
+        -0.3467376332300859,
+        -0.9174820620691818,
+        0.19493506478640635
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1478.2608695652175,
+      "bodyRadiusM": 340000
+    },
+    "catalog": {
+      "name": "Goibniu",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 41.9,
+      "description": "A large icy body in the Kuiper belt.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "2fa33a35713e99113505eddef17df021a35d1e92ec8c323da3acc4be548d44d3"
+  }
+}

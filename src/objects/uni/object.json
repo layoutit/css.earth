@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "uni",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Uni",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 346
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/uni-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d035985326ee0ecf4eff33728c11388c78e8f5c5790c5f44483356cfa33c42a5"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3301577179820.2837,
+        4802838482382.374,
+        940470103660.5693
+      ],
+      "presentationToReference": [
+        0.5682694902052104,
+        2.4356826039297786e-17,
+        0.822842504068616,
+        0.754943237391043,
+        0.3977771559319137,
+        -0.5213770636844792,
+        0.3273079510483082,
+        -0.9174820620691818,
+        -0.22604462161670713
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1504.3478260869565,
+      "bodyRadiusM": 346000
+    },
+    "catalog": {
+      "name": "Uni",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 42.9,
+      "description": "A large icy body in the Kuiper belt.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "d4daa9fba7f1a4c6256cf2240d4732e29527b6522cef78886d4aa24dad50ce21"
+  }
+}

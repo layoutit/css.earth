@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "albion",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Albion",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 65.1
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/albion-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "39e39b266ccb3c29cb78965b07a5da9cb99a26c713ad9e66e22171d149d15e06"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4201974155091.3433,
+        4155657396459.314,
+        1995028494322.6577
+      ],
+      "presentationToReference": [
+        0.6739374117077396,
+        2.4356826039297786e-17,
+        0.7387884440762948,
+        0.6778251451040014,
+        0.3977771559319137,
+        -0.618325486199184,
+        0.2938731661200322,
+        -0.9174820620691818,
+        -0.26807690690521985
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 283.0434782608695,
+      "bodyRadiusM": 65099.99999999999
+    },
+    "catalog": {
+      "name": "Albion",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 44.1,
+      "description": "The first Kuiper belt object found after Pluto.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "5fffc357b8ca3956379c6d933cd77dc46fe77b9f0df361bd3b4311b8300f39ca"
+  }
+}

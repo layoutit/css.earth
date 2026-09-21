@@ -1,0 +1,20 @@
+{
+  "schema": "cssthereus-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "thereus-model-shadow@2x.webp",
+      "bytes": 42264,
+      "sha256": "595bba792b1bd0b10715f2418a0e1a417231f3f33f0e2360c6349085915e46dc"
+    },
+    {
+      "filename": "thereus-model-surface@2x.webp",
+      "bytes": 51136,
+      "sha256": "8cfb5d2c6e68f35874f35827280172090f24cb6bae7330db272973370615d996"
+    },
+    {
+      "filename": "thereus-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

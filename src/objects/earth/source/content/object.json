@@ -129,7 +129,7 @@
           "id": "nasa-blue-marble-july",
           "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
         },
-        "notes": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic with brighter display midtones."
+        "notes": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic with brighter display midtones. Deep ocean is shaded from depth by NASA's bathymetry edition of the same month; the plain edition puts an arbitrary constant there. Shallow and coastal water stays observed."
       },
       {
         "id": "clouds",
@@ -139,7 +139,7 @@
           "id": "nasa-blue-marble-clouds",
           "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif"
         },
-        "notes": "Archival NASA cloud imagery over the July 2004 surface mosaic with brighter display midtones. Clouds and surface are from different observation periods; this is not live weather."
+        "notes": "Archival NASA cloud imagery over the July 2004 surface mosaic with brighter display midtones. Clouds and surface are from different observation periods; this is not live weather. Deep ocean is shaded from depth, not observed water colour."
       },
       {
         "id": "topography",

@@ -1,0 +1,20 @@
+{
+  "schema": "csscarme-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "carme-model-shadow@2x.webp",
+      "bytes": 41828,
+      "sha256": "f01450b149a4f882246b810031853c1148c02433a6f04d49744d30d50779065a"
+    },
+    {
+      "filename": "carme-model-surface@2x.webp",
+      "bytes": 51106,
+      "sha256": "b03c50ee689546b04fe19bf76b20fe9ef63185e1412acc210e87190bec8bf3a3"
+    },
+    {
+      "filename": "carme-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}
