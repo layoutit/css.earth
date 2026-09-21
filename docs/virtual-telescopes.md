@@ -717,7 +717,9 @@ archive origin or scientific fitness.
 the target and selected family, delegates spectral-unit conversion to Astropy, and considers every
 eligible component. Requested observation bounds or measured-resolution thresholds remain
 unresolved when the descriptor does not carry those facts. Criteria that do not apply to the
-selected family are not inherited from the legacy query shape.
+selected family are not inherited from the legacy query shape. Every requested scientific
+criterion must hold for one selected component; facts from different components cannot be
+assembled into a match without an explicit combining operation.
 
 Planetary depth products use the same F16 descriptor instead of a separate workflow. Their axes
 name delay, geometric depth, pressure, altitude, radius, projected coordinates, body-fixed
@@ -727,12 +729,20 @@ interval is sampling only; it cannot satisfy a requested resolution maximum. Der
 conversion requires a named method and explicit parameters. Published reconstructions and model
 ensembles require their inference evidence and source members.
 
+Axis roles also retain a qualified physical dimension. The F16 FITS owner asks Astropy WCS to
+normalize only separable linear coordinates into the descriptor's zero-based index convention and
+uses Astropy units to verify their dimensions. Coupled matrices, nonlinear WCS, and contradictory
+units are refused. Body attachment additionally requires an explicit Cartesian, spherical,
+projected-and-vertical, located-profile, or symmetry placement; a depth axis and named frame alone
+do not establish a location.
+
 Output availability follows those retained facts. Native export preserves every qualified product.
-Slices require a grid, profiles require an explicit depth-like axis, and coverage views require the
-exact tracks, rays, stations, channels or profiles. Delay and pressure coordinates cannot be
+Slices require a fully supported grid whose validity is handled by the operation, profiles require
+an explicit depth-like axis, and coverage views require the exact tracks, rays, stations, channels
+or profiles. Unhandled masks and support geometry refuse extraction. Delay and pressure coordinates cannot be
 attached to a body as geometric depth. Sparse rays cannot become a measured volume. Gravity and
 magnetic fields retain non-unique localization; a posterior model may be rendered only with an
-inference label. The generic FITS profile validates one- to three-dimensional linear grids through
+inference label on every visual output. The generic FITS profile validates one- to three-dimensional linear grids through
 Astropy, but archive adapters must supply the source-backed semantic qualification. Local user
 declarations cannot admit a planetary product. This architecture change includes no planetary
 dataset.
