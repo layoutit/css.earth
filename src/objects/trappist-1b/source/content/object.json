@@ -82,8 +82,8 @@
           "title": "Brightness temperature",
           "labels": [
             "≤ 50",
-            "300",
-            "550"
+            "325",
+            "600"
           ],
           "recipe": {
             "palette": [
@@ -115,14 +115,14 @@
             ],
             "labels": [
               "≤ 50",
-              "300",
-              "550"
+              "325",
+              "600"
             ]
           },
           "meta": "K",
           "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
         },
-        "notes": "A bare rock with no atmosphere to carry heat, fitted to the light curve: 497 ± 12 K where the star is overhead, cooling toward the terminator and cold at night. It fits the ten visits better than a free smooth map. The data measure the day-to-night pattern; the shape across the disc comes from the rock model."
+        "notes": "A bare rock with no atmosphere to carry heat, fitted to the light curve: 575 ± 10 K where the star is overhead, the limit for a perfectly dark surface, cooling toward the terminator and cold at night. It fits the ten visits as well as a free smooth map, whose hot spot also sits under the star. The data measure the day-to-night pattern; the shape across the disc comes from the rock model."
       }
     ]
   },

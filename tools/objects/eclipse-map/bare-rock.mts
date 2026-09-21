@@ -94,3 +94,23 @@ export function fitBareRock(samples: BareRockSamples, table: BandTable, orbit: H
   return { substellarK, lowerK: lower, upperK: upper, chiSquared: fit.chiSquared, stellarCorrection: fit.stellarCorrection, systematics: fit.systematics,
     samples: n, parameters: 1 + columns.length, bic: fit.chiSquared + (1 + columns.length) * Math.log(n) };
 }
+
+/** The planet-to-star flux a bare rock shows with its day side full on (at secondary eclipse, for an orbit seen edge-on): the rock's
+ * band ratio over the hemisphere, weighted by cos z, times rp^2 / pi; a midpoint rule in z on `steps` rings. */
+export function bareRockDaysideFlux(substellarK: number, table: BandTable, planetRadiusStellarRadii: number, steps = 2000) {
+  let integral = 0;
+  for (let i = 0; i < steps; i++) {
+    const z = (i + 0.5) / steps * Math.PI / 2, mu = Math.cos(z);
+    integral += table.ratio(substellarK * mu ** 0.25) * mu * Math.sin(z) * (Math.PI / 2 / steps);
+  }
+  return 2 * integral * planetRadiusStellarRadii ** 2;
+}
+
+/** The substellar temperature whose bare rock shows `depth` (planet-to-star flux at secondary eclipse), by bisection to 0.001 K. */
+export function bareRockFromEclipseDepth(depth: number, table: BandTable, planetRadiusStellarRadii: number, { minimumK = 50, maximumK = 2000 } = {}) {
+  if (!(depth > 0)) throw new RangeError('An eclipse depth must be positive.');
+  let low = minimumK, high = maximumK;
+  if (!(bareRockDaysideFlux(low, table, planetRadiusStellarRadii) < depth && bareRockDaysideFlux(high, table, planetRadiusStellarRadii) > depth)) throw new RangeError(`No bare rock between ${minimumK} and ${maximumK} K shows that depth.`);
+  while (high - low > 0.001) { const middle = (low + high) / 2; if (bareRockDaysideFlux(middle, table, planetRadiusStellarRadii) < depth) low = middle; else high = middle; }
+  return (low + high) / 2;
+}

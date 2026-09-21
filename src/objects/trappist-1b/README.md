@@ -12,7 +12,8 @@ transit-timing variations, scaled by the stellar mass Mann et al. (2019) give.
 
 **Orbit.** 1.510826 days at 0.01154 au, 4.153 times the starlight Earth receives (Agol et al. (2021, PSJ 2, 1), Tables 2, 5 and 6). The
 scene draws a circle: the paper's eccentricity for this planet is under 0.01, which moves it by less than its own radius. The
-transit time is the paper's, and transit-timing variations of up to about half an hour are not modelled. The orbit's position
+transit time is the paper's, and transit-timing variations of up to about half an hour are not modelled; carried forward
+to 2022 and 2023 its reference transit falls 2.0 to 2.5 hours early, so the lens uses the timing of its own observations (see Timing). The orbit's position
 angle on the sky is not measured, so the ascending node is drawn at celestial north, a stated convention.
 
 **Rotation.** Assumed synchronous: this close to its star the planet is expected to be tidally locked, and no rotation period of
@@ -34,23 +35,31 @@ Checked against the published result: with Bell's own phase-curve shape the join
 797 ± 77 ppm, and a shape exponent of 2.71 against 2.64. Single-visit eclipse depths of b come out between 731 and 880 ppm, against
 the 861 ppm of Greene et al. (2023) that Bell's fit starts from.
 
+**Timing.** The package orbit carries Agol's 2015 osculating elements, which put these eclipses 2.0 to 2.4 hours before they
+happen: the eclipse visits are centred on dips of 850 to 950 ppm that the old fits placed outside the eclipse. The lens therefore uses
+the linear ephemeris of these observations (transit at 60271.25431 BMJD, period 1.5108699 days), from the joint fit's transit of b
+and the five 2022 eclipse centres, which it places within 1.3 minutes. With that timing the fit improves from 1.039 to 0.985 in
+chi-squared per sample.
+
 **Why a bare rock.** A bare rock has no atmosphere to carry heat, so each patch of ground re-radiates the starlight it absorbs: the
 temperature is T cos(z)^(1/4) at an angle z from the point under the star, and there is none on the night side (the equilibrium
-temperature of [Cowan & Agol 2011](https://doi.org/10.1088/0004-637X/726/2/82), eq. 3). That leaves one number to fit, T, the temperature under the star. The lens used to be a free smooth map
-(spherical harmonics up to degree 2, centred on the star-facing point). On the same light curve the rock fits better with one parameter
-fewer: chi-squared 7002.2 against 7016.0 over 6,737 samples, and BIC 7099 against 7122. A smooth map of that degree cannot draw the
-sharp edge at the terminator, so it spread heat onto the night side and the poles, which the data do not measure.
+temperature of [Cowan & Agol 2011](https://doi.org/10.1088/0004-637X/726/2/82), eq. 3). That leaves one number to fit, T, the
+temperature under the star. A free smooth map (spherical harmonics up to degree 2, centred on the star-facing point) fits the same
+6,905 samples no better: chi-squared 6796.6 against the rock's 6803.0 with one parameter more, BIC 6903 against 6900. A smooth map of
+that degree cannot draw the sharp edge at the terminator, so it spreads heat onto the night side and the poles, which the data do not
+measure; the rock is the physical model the data allow.
 
-**What the lens says.** 497 K where the star is overhead, 485 to 510 K at one standard deviation, cooling to about 320 K 10° from
-the terminator and cold beyond it. A perfectly black rock would reach 562 K (Agol's 2566 K star at 20.843 stellar radii). No sign of
-an atmosphere carrying heat around the planet, as Greene et al. and Gillon, Ducrot et al. concluded. The hot spot is drawn on the
-point under the star: left free in the smooth map, it went 28° west of noon, but that fit was only 1 in log-likelihood better than a
-centred one, and the offset traded against the Gaussian process that models the star.
+**What the lens says.** 575 K where the star is overhead, 565 to 586 K at one standard deviation, cooling to about 370 K 10° from the
+terminator and cold beyond it. At eclipse that rock shows 865 ppm, as Greene et al. (2023) measured 861. A perfectly black rock would
+reach 562 K (Agol's 2566 K star at 20.843 stellar radii): the fit sits at that limit, 1.3 standard deviations above it, as a dark
+surface with no atmosphere would. The hot spot is drawn on the point under the star, and that is now measured: left free in
+longitude, the smooth map puts it 1.6° from noon. The 28° west offset an earlier fit found was the timing error above.
 
 ## Evidence
 
 - [`lens-fits.test.mts`](../../../tests/objects/unit/trappist-1b/lens-fits.test.mts) runs the shipped recipe and holds it to the
-  temperature and fit it was measured to give, and refits the old smooth map on the same data to check the rock fits better.
+  temperature and fit it was measured to give, checks the ephemeris against every eclipse in the light curve, and refits the old
+  smooth map on the same data to compare the fit and find the hot spot.
 - The rendered [day side](source/reference/rendered-thermal-day.png), [terminator](source/reference/rendered-thermal-terminator.png)
   and [night side](source/reference/rendered-thermal-night.png), captured from the prepared lens, show the sharp edge at the terminator
   and a night side at the bottom of the scale.
@@ -61,8 +70,7 @@ centred one, and the offset traded against the Gaussian process that models the 
 ## Known problems
 
 **Only the day-to-night pattern is measured.** The orbit is seen almost exactly edge-on, so the light curve separates longitudes
-but not latitudes. The lens's shape across the disc, north-south included, is the bare-rock model's, not a measurement. The hot
-spot's east-west offset is not measured either (see above), so the rock is drawn centred.
+but not latitudes. The lens's shape across the disc, north-south included, is the bare-rock model's, not a measurement.
 
 **The star's variability is modelled, not removed.** The Gaussian process in the joint fit carries about 580 ppm of slow variation,
 mostly the detector's settling over the first hours of the phase curve. The map is fitted to the light curve with that model taken

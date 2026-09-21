@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BODIES, HOSTED_PLANET_IDS, STAR_IDS, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
 import { binAverage, bandTemperatureTable, fitLightCurveMap, lightCurveSamples, temperatureGrid, type LightCurve, type Systematic } from '../eclipse-map/light-curve-map.mts';
-import { bareRockTemperature, fitBareRock } from '../eclipse-map/bare-rock.mts';
+import { bareRockFromEclipseDepth, bareRockTemperature, fitBareRock } from '../eclipse-map/bare-rock.mts';
 import { measureTransitShift } from '../eclipse-map/transit-timing.mts';
 import { readTarMember } from './tar-member.mts';
 import { array, boolean, number, optional, shape, text } from './source-records.mts';
@@ -15,7 +15,8 @@ const systematic = (value: unknown): Systematic => {
   if (kind === 'column') return { kind, column: shape({ column: text })(value).column };
   throw new TypeError(`Unknown systematics kind ${kind}.`);
 };
-const inputs = { path: text, sampling: text, units: text, planet: text, host: text, lightCurve: shape({ encoding: text }), band: shape({ encoding: text, path: text }), star: shape({ encoding: text, path: text }) };
+const ephemeris = shape({ transitTimeBmjdTdb: number, periodDays: number, source: text });
+const inputs = { path: text, sampling: text, units: text, planet: text, host: text, lightCurve: shape({ encoding: text }), band: shape({ encoding: text, path: text }), star: shape({ encoding: text, path: text }), ephemeris: optional(ephemeris) };
 const profile = shape({
   ...inputs,
   fit: shape({ degrees: array(number), eigencurves: array(number), positive: boolean, transitExclusionPhase: number, gridHeight: number, systematics: array(systematic), transitFromLightCurve: boolean, longitudeSymmetric: optional(boolean) }),
@@ -63,27 +64,8 @@ export function readSvoFilter(bytes: Uint8Array) {
   return readSvoTable(bytes, ['Angstrom', second.toLowerCase() === 'ephot' ? 'ephot' : '']);
 }
 
-/** What a light-curve fit reads: the light curve, the band it summed against a stellar model spectrum, and the planet's orbit, with
- * the transit time optionally taken from the light curve itself. */
-async function loadLightCurveInputs(root: string, recipe: ReturnType<typeof bareRockProfile>) {
-  if (recipe.sampling !== 'bilinear') throw new TypeError('A light-curve map samples bilinearly.');
-  if (recipe.units !== 'K') throw new TypeError('A light-curve map is a brightness temperature in K.');
-  const read = async (path: string) => readFile(resolve(root, inside(path)));
-  const source = await read(recipe.path);
-  let curve: LightCurve;
-  if (recipe.lightCurve.encoding === 'tar-text-columns') {
-    const members = shape({ time: text, flux: text, error: text })(recipe.lightCurve);
-    curve = { time: numbers(readTarMember(source, members.time)), flux: numbers(readTarMember(source, members.flux)), error: numbers(readTarMember(source, members.error)), columns: new Map() };
-  } else if (recipe.lightCurve.encoding === 'csv') {
-    const spec = shape({ time: text, flux: text, error: text, mask: text, skipLeading: number, columns: array(text) })(recipe.lightCurve);
-    const table = readCsvColumns(source), column = (name: string) => { const values = table.get(name); if (!values) throw new TypeError(`The light curve has no ${name} column.`); return values; };
-    if (!Number.isSafeInteger(spec.skipLeading) || spec.skipLeading < 0) throw new TypeError('skipLeading must be a whole number of integrations.');
-    // Integrations flagged by the reduction, and the leading ones the recipe drops, are removed before the fit.
-    const mask = column(spec.mask), keep = Array.from(mask.keys()).filter(i => i >= spec.skipLeading && mask[i] === 0);
-    const pick = (values: Float64Array) => Float64Array.from(keep, i => values[i]!);
-    curve = { time: pick(column(spec.time)), flux: pick(column(spec.flux)), error: pick(column(spec.error)), columns: new Map(spec.columns.map(name => [name, pick(column(name))])) };
-  } else throw new TypeError(`Unknown light-curve encoding ${recipe.lightCurve.encoding}.`);
-
+/** The instrument band a light curve or eclipse depth summed, weighted by a stellar model spectrum. */
+async function loadBand(read: (path: string) => Promise<Buffer>, recipe: { band: { encoding: string; path: string }; star: { encoding: string; path: string } }) {
   if (recipe.star.encoding !== 'svo-model-spectrum') throw new TypeError(`Unknown stellar spectrum encoding ${recipe.star.encoding}.`);
   // Model surface flux, erg s^-1 cm^-2 A^-1, to the disc-averaged intensity in W m^-3 sr^-1: times 1e7, over pi.
   const model = readSvoTable(await read(recipe.star.path), ['ANGSTROM', 'ERG/CM2/S/A']);
@@ -105,13 +87,45 @@ async function loadLightCurveInputs(root: string, recipe: ReturnType<typeof bare
     const centres = Float64Array.from(rows, i => wavelength[i]!);
     band = { wavelengthMicrons: centres, stellarIntensity: binAverage(stellar, centres), counts: Float64Array.from(rows, i => Math.max(0, counts[i]!)) };
   } else throw new TypeError(`Unknown band encoding ${recipe.band.encoding}.`);
+  return band;
+}
+
+/** What a light-curve fit reads: the light curve, the band it summed against a stellar model spectrum, and the planet's orbit, with
+ * the transit time optionally taken from the light curve itself. */
+async function loadLightCurveInputs(root: string, recipe: ReturnType<typeof bareRockProfile>) {
+  if (recipe.sampling !== 'bilinear') throw new TypeError('A light-curve map samples bilinearly.');
+  if (recipe.units !== 'K') throw new TypeError('A light-curve map is a brightness temperature in K.');
+  const read = async (path: string) => readFile(resolve(root, inside(path)));
+  const source = await read(recipe.path);
+  let curve: LightCurve;
+  if (recipe.lightCurve.encoding === 'tar-text-columns') {
+    const members = shape({ time: text, flux: text, error: text })(recipe.lightCurve);
+    curve = { time: numbers(readTarMember(source, members.time)), flux: numbers(readTarMember(source, members.flux)), error: numbers(readTarMember(source, members.error)), columns: new Map() };
+  } else if (recipe.lightCurve.encoding === 'csv') {
+    const spec = shape({ time: text, flux: text, error: text, mask: text, skipLeading: number, columns: array(text) })(recipe.lightCurve);
+    const table = readCsvColumns(source), column = (name: string) => { const values = table.get(name); if (!values) throw new TypeError(`The light curve has no ${name} column.`); return values; };
+    if (!Number.isSafeInteger(spec.skipLeading) || spec.skipLeading < 0) throw new TypeError('skipLeading must be a whole number of integrations.');
+    // Integrations flagged by the reduction, and the leading ones the recipe drops, are removed before the fit.
+    const mask = column(spec.mask), keep = Array.from(mask.keys()).filter(i => i >= spec.skipLeading && mask[i] === 0);
+    const pick = (values: Float64Array) => Float64Array.from(keep, i => values[i]!);
+    curve = { time: pick(column(spec.time)), flux: pick(column(spec.flux)), error: pick(column(spec.error)), columns: new Map(spec.columns.map(name => [name, pick(column(name))])) };
+  } else throw new TypeError(`Unknown light-curve encoding ${recipe.lightCurve.encoding}.`);
+
+  const band = await loadBand(read, recipe);
 
   const planetId = HOSTED_PLANET_IDS.find(id => id === recipe.planet), hostId = STAR_IDS.find(id => id === recipe.host);
   if (!planetId || !hostId) throw new TypeError(`${recipe.planet} is not a hosted planet or ${recipe.host} is not a placed star.`);
   const radiusRatio = BODIES[planetId].meanRadiusKm / BODIES[hostId].meanRadiusKm;
   // Eclipse timing moves longitude (about 0.04 degrees per second for WASP-43b, 0.5 for HD 189733b), so a recipe can take the transit
   // time from its own light curve instead of an ephemeris propagated to the visit; light time across the orbit is always modelled.
+  // A package orbit carries one reference transit and period; transit-timing variations move a planet's events by hours over the
+  // years since (TRAPPIST-1b's osculating elements of 2015 put its 2022 eclipses two hours early). A recipe can give the linear
+  // ephemeris of its own observations instead; the shape of the orbit stays the package's.
   let orbit = hostedOrbit(planetId), transitShiftSeconds = 0, transitFit: ReturnType<typeof measureTransitShift> | null = null;
+  if (recipe.ephemeris) {
+    if (!(recipe.ephemeris.periodDays > 0) || !Number.isFinite(recipe.ephemeris.transitTimeBmjdTdb)) throw new TypeError('An ephemeris needs a transit time and a positive period.');
+    orbit = { ...orbit, transitTimeBmjdTdb: recipe.ephemeris.transitTimeBmjdTdb, periodDays: recipe.ephemeris.periodDays };
+  }
   if (recipe.fit.transitFromLightCurve) {
     transitFit = measureTransitShift(curve, orbit, starAstrometry(hostId), radiusRatio);
     transitShiftSeconds = transitFit.shiftSeconds;
@@ -168,5 +182,35 @@ export async function loadBareRockFit(root: string, value: unknown) {
     },
     report: { format: 'bare-rock-fit', units: 'K', transitShiftSeconds, ...transitReport(transitFit), substellarK: fit.substellarK, substellarRangeK: [fit.lowerK, fit.upperK],
       samples: fit.samples, chiSquared: fit.chiSquared, bic: fit.bic, stellarCorrection: fit.stellarCorrection },
+  };
+}
+
+const depthRecord = shape({ schema: text, planet: text, eclipseDepthPpm: shape({ low: number, high: number }), source: text });
+const bareRockEclipseProfile = shape({ path: text, sampling: text, units: text, planet: text, host: text, band: shape({ encoding: text, path: text }), star: shape({ encoding: text, path: text }) });
+
+/** A bare rock drawn from a measured eclipse depth, for a planet whose day-night pattern is not measured: the substellar temperature
+ * whose rock shows the depth at secondary eclipse (see `tools/objects/eclipse-map/bare-rock.mts`). The record gives the depth as a
+ * range; the rock is drawn at its middle and the range is reported. */
+export async function loadBareRockEclipse(root: string, value: unknown) {
+  const recipe = bareRockEclipseProfile(value);
+  if (recipe.sampling !== 'bilinear') throw new TypeError('A bare rock samples bilinearly.');
+  if (recipe.units !== 'K') throw new TypeError('A bare rock is a brightness temperature in K.');
+  const read = async (path: string) => readFile(resolve(root, inside(path)));
+  const record = depthRecord(JSON.parse((await read(recipe.path)).toString('utf8')));
+  if (record.schema !== 'cssearth-eclipse-depth@1' || record.planet !== recipe.planet) throw new TypeError(`${recipe.path} is not an eclipse depth of ${recipe.planet}.`);
+  const { low, high } = record.eclipseDepthPpm;
+  if (!(low > 0 && high >= low)) throw new TypeError('An eclipse depth range needs 0 < low <= high.');
+  const planetId = HOSTED_PLANET_IDS.find(id => id === recipe.planet), hostId = STAR_IDS.find(id => id === recipe.host);
+  if (!planetId || !hostId) throw new TypeError(`${recipe.planet} is not a hosted planet or ${recipe.host} is not a placed star.`);
+  const radiusRatio = BODIES[planetId].meanRadiusKm / BODIES[hostId].meanRadiusKm, band = await loadBand(read, recipe), table = bandTemperatureTable(band, { minimumK: 20 });
+  const at = (ppm: number) => bareRockFromEclipseDepth(ppm * 1e-6, table, radiusRatio);
+  const substellarK = at((low + high) / 2), lowerK = at(low), upperK = at(high);
+  return {
+    substellarK, lowerK, upperK, radiusRatio, band,
+    sample(longitude: number, latitude: number) {
+      if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
+      return bareRockTemperature(substellarK, longitude, latitude);
+    },
+    report: { format: 'bare-rock-eclipse', units: 'K', eclipseDepthPpm: [low, high], substellarK, substellarRangeK: [lowerK, upperK] },
   };
 }
