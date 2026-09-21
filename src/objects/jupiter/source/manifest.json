@@ -680,6 +680,150 @@
         "kind": "local",
         "reason": "Project-authored source restoration commands and verification settings."
       }
+    },
+    {
+      "id": "pds-juno-mwr-nh3-abundance-csv",
+      "path": "telescopes/juno-mwr/MWRNH3A2016240070004_R00548_V01.CSV",
+      "expectedSha256": "f2b8fbd40c0b7e97b7c23273e4ef8a4bdeb050e759ba3b754c862218997f8315",
+      "origin": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/DATA/NH3-DISTRIBUTION/MWRNH3A2016240070004_R00548_V01.CSV",
+      "credit": "NASA/JPL Juno MWR team and NASA Planetary Data System Atmospheres Node",
+      "license": "NASA scientific data; archive acknowledgement and citation requested",
+      "acquisition": "Telescope source qualification downloads and verifies the exact archive bytes",
+      "redistribution": "Archive-native PDS label, table, and format definition retained with credit",
+      "consumers": [
+        "telescope-api"
+      ],
+      "expectedBytes": 228528,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-mwr-nh3-distribution-v1",
+            "role": "material",
+            "evidence": "Abundance spreadsheet MWRNH3A2016240070004_R00548_V01.CSV of PDS3 dataset JNO-J-MWR-5-NH3-DISTRIBUTION-V1.0, volume JNOMWR_2100; its label MD5_CHECKSUM matches these bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "pds-juno-mwr-nh3-abundance-label",
+      "path": "telescopes/juno-mwr/MWRNH3A2016240070004_R00548_V01.LBL",
+      "expectedSha256": "6b27ffe810bf47a01ee092b2bdda063ed3729fc5facf9b4ba588421143829eac",
+      "origin": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/DATA/NH3-DISTRIBUTION/MWRNH3A2016240070004_R00548_V01.LBL",
+      "credit": "NASA/JPL Juno MWR team and NASA Planetary Data System Atmospheres Node",
+      "license": "NASA scientific data; archive acknowledgement and citation requested",
+      "acquisition": "Telescope source qualification downloads and verifies the exact archive bytes",
+      "redistribution": "Archive-native PDS label, table, and format definition retained with credit",
+      "consumers": [
+        "telescope-api"
+      ],
+      "expectedBytes": 2099,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-mwr-nh3-distribution-v1",
+            "role": "material",
+            "evidence": "PDS3 label for the abundance spreadsheet; it declares DATA_SET_ID, PRODUCT_TYPE NH3A, ROWS, FIELDS, the ^STRUCTURE format file, and the MD5_CHECKSUM verified against the table."
+          }
+        ]
+      }
+    },
+    {
+      "id": "pds-juno-mwr-nh3-uncertainty-csv",
+      "path": "telescopes/juno-mwr/MWRNH3U2016240070004_R00548_V01.CSV",
+      "expectedSha256": "807162536547a559507c484f83b4cc4bf80bdc07893a74e30531ec2256e0aabd",
+      "origin": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/DATA/NH3-DISTRIBUTION/MWRNH3U2016240070004_R00548_V01.CSV",
+      "credit": "NASA/JPL Juno MWR team and NASA Planetary Data System Atmospheres Node",
+      "license": "NASA scientific data; archive acknowledgement and citation requested",
+      "acquisition": "Telescope source qualification downloads and verifies the exact archive bytes",
+      "redistribution": "Archive-native PDS label, table, and format definition retained with credit",
+      "consumers": [
+        "telescope-api"
+      ],
+      "expectedBytes": 228528,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-mwr-nh3-distribution-v1",
+            "role": "material",
+            "evidence": "1-sigma uncertainty spreadsheet MWRNH3U2016240070004_R00548_V01.CSV of the same dataset, on the same pressure and planetocentric-latitude coordinates."
+          }
+        ]
+      }
+    },
+    {
+      "id": "pds-juno-mwr-nh3-uncertainty-label",
+      "path": "telescopes/juno-mwr/MWRNH3U2016240070004_R00548_V01.LBL",
+      "expectedSha256": "f01fa34fd2e50037debd5b69d96849633db1cc5b153e1cc64dcb8ea005d8b3e4",
+      "origin": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/DATA/NH3-DISTRIBUTION/MWRNH3U2016240070004_R00548_V01.LBL",
+      "credit": "NASA/JPL Juno MWR team and NASA Planetary Data System Atmospheres Node",
+      "license": "NASA scientific data; archive acknowledgement and citation requested",
+      "acquisition": "Telescope source qualification downloads and verifies the exact archive bytes",
+      "redistribution": "Archive-native PDS label, table, and format definition retained with credit",
+      "consumers": [
+        "telescope-api"
+      ],
+      "expectedBytes": 2099,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-mwr-nh3-distribution-v1",
+            "role": "material",
+            "evidence": "PDS3 label for the uncertainty spreadsheet; it declares PRODUCT_TYPE NH3U and the same dataset, interval and spacecraft clock counts as the abundance label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "pds-juno-mwr-nh3-abundance-format",
+      "path": "telescopes/juno-mwr/MWR_J_NH3A_V01.FMT",
+      "expectedSha256": "c08c82f452226d54f12d3f1aae1f5678d50ee9630c946d2e49ad405e1d3675ea",
+      "origin": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/LABEL/MWR_J_NH3A_V01.FMT",
+      "credit": "NASA/JPL Juno MWR team and NASA Planetary Data System Atmospheres Node",
+      "license": "NASA scientific data; archive acknowledgement and citation requested",
+      "acquisition": "Telescope source qualification downloads and verifies the exact archive bytes",
+      "redistribution": "Archive-native PDS label, table, and format definition retained with credit",
+      "consumers": [
+        "telescope-api"
+      ],
+      "expectedBytes": 10846,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-mwr-nh3-distribution-v1",
+            "role": "material",
+            "evidence": "^STRUCTURE format file for the abundance spreadsheet; it names the pressure unit and the planetocentric latitude of every column."
+          }
+        ]
+      }
+    },
+    {
+      "id": "pds-juno-mwr-nh3-uncertainty-format",
+      "path": "telescopes/juno-mwr/MWR_J_NH3U_V01.FMT",
+      "expectedSha256": "d92987a2333e00f9628e2e470770302402a721c4393da654945623a9640dc41b",
+      "origin": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/LABEL/MWR_J_NH3U_V01.FMT",
+      "credit": "NASA/JPL Juno MWR team and NASA Planetary Data System Atmospheres Node",
+      "license": "NASA scientific data; archive acknowledgement and citation requested",
+      "acquisition": "Telescope source qualification downloads and verifies the exact archive bytes",
+      "redistribution": "Archive-native PDS label, table, and format definition retained with credit",
+      "consumers": [
+        "telescope-api"
+      ],
+      "expectedBytes": 11586,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-mwr-nh3-distribution-v1",
+            "role": "material",
+            "evidence": "^STRUCTURE format file for the uncertainty spreadsheet; its field descriptions state that every column is the 1 sigma uncertainty of the matching abundance column."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
