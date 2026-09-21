@@ -62,22 +62,67 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "temperature",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by TRAPPIST-1; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "trappist-1c-lens-shape.webp",
-        "surface": "trappist-1c-surface-shape@2x.webp",
-        "poles": "trappist-1c-poles-shape@2x.webp",
+        "id": "temperature",
+        "label": "Rock model",
+        "qualification": "A model set by one measurement: the 15 µm eclipse depth this project measured in raw JWST MIRI visits, 2022–2023",
+        "thumbnail": "trappist-1c-lens-temperature.webp",
+        "surface": "trappist-1c-surface-temperature@2x.webp",
+        "poles": "trappist-1c-poles-temperature@2x.webp",
         "source": {
-          "id": "trappist-1c-observational-measurements",
+          "id": "trappist-1c-miri-dayside",
           "path": "../manifest.json",
-          "url": "https://doi.org/10.3847/PSJ/abd022"
+          "url": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304"
         },
-        "falseColor": false,
-        "notes": "No image or colour of TRAPPIST-1c exists: it is known from the dips it makes in its star's light and from the way the seven planets pull on each other. The gray marks an unresolved surface; the lighting is TRAPPIST-1's, at the measured orbit."
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "≤ 50",
+            "325",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "≤ 50",
+              "325",
+              "600"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304"
+        },
+        "notes": "A model, not a map. Only c's dayside brightness is measured: an eclipse depth of 318 to 389 ppm at 15 µm. A bare rock with that depth is 392 to 421 K under the star and dark at night; whether c's night is dark is not measured, and a thin atmosphere would also fit."
       }
     ]
   },

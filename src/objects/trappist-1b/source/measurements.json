@@ -7,10 +7,10 @@
   "orbitalPeriodSource": "Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 2 (transit-timing analysis): 1.510826 d",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TRAPPIST-1b is measured; only its size, mass and orbit are."
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, visible colour or oblateness of TRAPPIST-1b is measured. Its 15 µm temperature lens is a bare-rock model this project fitted to JWST light curves (see the README)."
   },
   "massEarths": 1.374,
-  "massSource": "1.374 +/- Earth masses from E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1, Table 6: the transit-timing mass ratio times the Mann et al. (2019) stellar mass.",
+  "massSource": "1.374 +/- 0.069 Earth masses from E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1, Table 6: the transit-timing mass ratio times the Mann et al. (2019) stellar mass.",
   "insolationEarths": 4.153,
   "insolationSource": "4.153 times Earth's insolation, E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1, Table 6.",
   "semiMajorAxisAu": 0.01154,
