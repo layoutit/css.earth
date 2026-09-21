@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "abfd05500f77f3335514d7481b1df0b7e0d7b22e24502b778712e8d7b13453f0"
+    "sha256": "527b3329fe35f82b4fb9579cf703c80c4b8e7cc046efda2f755476f402dbd07b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -438,7 +438,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5a68df4e8ace73f7b95952ee994753baaae9cb77625e3442f71b9071122d2443",
+      "sha256": "7e7e81bf2f658187ba4c6db37f289bdfac1f6fbf01635b7a9ea52809252ec2ca",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -687,8 +687,8 @@
                 "kind": "scale",
                 "title": "Electron number density",
                 "labels": [
-                  "0",
-                  "3.25 × 10⁶",
+                  "10⁵",
+                  "8.1 × 10⁵",
                   "6.5 × 10⁶"
                 ],
                 "recipe": {
@@ -710,15 +710,15 @@
                     ]
                   ],
                   "labels": [
-                    "0",
-                    "3.25 × 10⁶",
+                    "10⁵",
+                    "8.1 × 10⁵",
                     "6.5 × 10⁶"
                   ]
                 },
-                "meta": "electrons cm⁻³ · square-root display scale",
+                "meta": "electrons cm⁻³ · logarithmic display scale",
                 "sourceUrl": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
               },
-              "notes": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. SciPy resamples the spherical grid to Cartesian display voxels. A separately recorded radial weight softens display emission at 1.5–1.7 and 2.5–4.0 solar radii; the float density cube is unchanged."
+              "notes": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. The logarithmic display preserves density structure across the measured shell. A recorded display-only bridge copies the nearest measured 1.5 R☉ shell through the coronagraph blind zone; the native float cube remains unfilled."
             }
           ]
         },
@@ -2461,8 +2461,8 @@
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
-      "sha256": "5a68df4e8ace73f7b95952ee994753baaae9cb77625e3442f71b9071122d2443",
-      "bytes": 12812,
+      "sha256": "7e7e81bf2f658187ba4c6db37f289bdfac1f6fbf01635b7a9ea52809252ec2ca",
+      "bytes": 12845,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3086,7 +3086,7 @@
   },
   "lastPreparation": {
     "objectId": "sun",
-    "materialSha256": "31a029ba7ee5476cfd0040c7d8ab7e2e70f04e93ee265c521ae949bc4e8ac828",
+    "materialSha256": "4141937b3c93f00a65eb637321ecc08c742154d24163e9da33b174003f955650",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

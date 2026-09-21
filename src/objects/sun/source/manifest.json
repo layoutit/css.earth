@@ -1562,8 +1562,8 @@
     {
       "id": "sun-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12812,
-      "expectedSha256": "5a68df4e8ace73f7b95952ee994753baaae9cb77625e3442f71b9071122d2443",
+      "expectedBytes": 12845,
+      "expectedSha256": "7e7e81bf2f658187ba4c6db37f289bdfac1f6fbf01635b7a9ea52809252ec2ca",
       "origin": "Repository-authored object content: NASA Science facts with citations, four lens descriptions, legends as palette recipes, resources",
       "sourceBinding": {
         "kind": "local",

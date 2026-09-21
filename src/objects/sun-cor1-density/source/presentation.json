@@ -5,8 +5,8 @@
   "defaultLens": "electron-density",
   "bank": {
     "path": "src/objects/sun-cor1-density/prepared/lenses.json",
-    "sha256": "6cdb2d98b3716102dd7a02225532ae6a607e3b2ebe5dd438e5e2f985298a92ca",
-    "bytes": 109995
+    "sha256": "b148cf5e7c21cedfec4c92c99de21c48ba0b879729710329bb0951614200b123",
+    "bytes": 137511
   },
   "recipes": [],
   "sharedInputs": [],
@@ -16,8 +16,8 @@
       "id": "electron-density",
       "label": "STEREO COR1-B · μ=10",
       "title": "COR1-B electron-density tomography CR2053 · μ=10",
-      "description": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. SciPy resamples the spherical grid to Cartesian display voxels. A separately recorded radial weight softens display emission at 1.5–1.7 and 2.5–4.0 solar radii; the float density cube is unchanged.",
-      "summary": "STEREO-B reconstruction from 4–18 February 2007, using the archive μ=10 regularization and a display-only radial taper.",
+      "description": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. The logarithmic display preserves density structure across the measured shell. A recorded display-only bridge copies the nearest measured 1.5 R☉ shell through the coronagraph blind zone; the native float cube remains unfilled.",
+      "summary": "STEREO-B reconstruction from 4–18 February 2007, shown with a logarithmic density transfer.",
       "detail": "51 radial × 181 latitude × 361 longitude samples · 1.5–4.0 R☉",
       "facts": [
         {
@@ -46,9 +46,14 @@
           "value": "Electron number density in cm⁻³"
         },
         {
-          "id": "display-boundary",
-          "label": "Display boundary",
-          "value": "Emission taper at 1.5–1.7 and 2.5–4.0 R☉; float density unchanged"
+          "id": "display-transfer",
+          "label": "Display transfer",
+          "value": "log₁₀ density; 10⁵–6.5 × 10⁶ cm⁻³"
+        },
+        {
+          "id": "display-bridge",
+          "label": "Blind-zone display",
+          "value": "Nearest 1.5 R☉ shell copied inward to 1.0 R☉; native cube unchanged"
         },
         {
           "id": "uncertainty",

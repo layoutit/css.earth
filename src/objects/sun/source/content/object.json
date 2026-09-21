@@ -246,8 +246,8 @@
           "kind": "scale",
           "title": "Electron number density",
           "labels": [
-            "0",
-            "3.25 × 10⁶",
+            "10⁵",
+            "8.1 × 10⁵",
             "6.5 × 10⁶"
           ],
           "recipe": {
@@ -269,15 +269,15 @@
               ]
             ],
             "labels": [
-              "0",
-              "3.25 × 10⁶",
+              "10⁵",
+              "8.1 × 10⁵",
               "6.5 × 10⁶"
             ]
           },
-          "meta": "electrons cm⁻³ · square-root display scale",
+          "meta": "electrons cm⁻³ · logarithmic display scale",
           "sourceUrl": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
         },
-        "notes": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. SciPy resamples the spherical grid to Cartesian display voxels. A separately recorded radial weight softens display emission at 1.5–1.7 and 2.5–4.0 solar radii; the float density cube is unchanged."
+        "notes": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. The logarithmic display preserves density structure across the measured shell. A recorded display-only bridge copies the nearest measured 1.5 R☉ shell through the coronagraph blind zone; the native float cube remains unfilled."
       }
     ]
   },
