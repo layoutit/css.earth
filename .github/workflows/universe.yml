@@ -85,30 +85,10 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          # History without blobs: the documentation and published-assets checks diff against a merge base, and
+          # History without blobs: the published-assets check diffs against a merge base, and
           # `git diff --name-only` needs only commits and trees.
           fetch-depth: 0
           filter: blob:none
-      - name: Check documentation links and organization
-        # PRs reject new findings and debt in changed files, including unchanged inbound links they break.
-        # Main retains the full organization audit; existing unrelated debt is visible but not a PR veto.
-        run: |
-          node --test tools/audits/check-documentation-links.test.mts
-          python3 tools/audits/test_provenance_documentation_inventory.py
-          python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output "$RUNNER_TEMP/provenance-inventory.json"
-          if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            node tools/audits/check-documentation-links.mts --base "${CI_BASE_REF:-origin/$GITHUB_BASE_REF}"
-          else
-            node tools/audits/check-documentation-links.mts --all
-          fi
-      - name: Check tracked files against ignore rules
-        run: |
-          git ls-files -z > "$RUNNER_TEMP/tracked-paths"
-          set +e
-          git check-ignore --no-index --stdin -z < "$RUNNER_TEMP/tracked-paths" > "$RUNNER_TEMP/ignored-tracked"
-          check_result=$?
-          tr '\0' '\n' < "$RUNNER_TEMP/ignored-tracked"
-          test "$check_result" -eq 1
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -150,10 +130,6 @@ jobs:
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/build-ci.mts lint
-      - name: Check every object's package files, source citations and restoration plan
-        run: |
-          node --test tools/restore-source-inputs.test.mts
-          node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
       - name: Check physical frame receipts and document pins
         # Tracked files only; the full ownership audit (--all) runs in the prepared-universe job.
         run: |
@@ -182,6 +158,107 @@ jobs:
           else
             pnpm check:assets-published --added-since="${CI_BASE_REF:-origin/${GITHUB_BASE_REF:-main}}"
           fi
+
+  audit:
+    name: Repository and provenance audit (advisory)
+    # Advisory by construction: this job is deliberately NOT in the repository's required status checks, so a
+    # failure here is reported on the pull request and in the run summary without vetoing an unrelated change.
+    # Nothing is skipped, tolerated or wrapped in `continue-on-error` — every check below still runs on every
+    # commit and still turns this job red. What moved here asserts repository *completeness* (a package file that
+    # has not been written yet, a source input that cannot be re-downloaded, a stale link, a misplaced file);
+    # none of it can make the deployed site broken, wrong or unverifiable. See docs/ci-cd.md, "Gate on what ships".
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # History without blobs: the documentation audit diffs against a merge base, and
+          # `git diff --name-only` needs only commits and trees.
+          fetch-depth: 0
+          filter: blob:none
+      - name: Check documentation links and organization
+        # PRs reject new findings and debt in changed files, including unchanged inbound links they break.
+        # Main retains the full organization audit; existing unrelated debt is visible but not a PR veto.
+        run: |
+          node --test tools/audits/check-documentation-links.test.mts
+          python3 tools/audits/test_provenance_documentation_inventory.py
+          python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output "$RUNNER_TEMP/provenance-inventory.json"
+          if [ -n "${GITHUB_BASE_REF:-}" ]; then
+            node tools/audits/check-documentation-links.mts --base "${CI_BASE_REF:-origin/$GITHUB_BASE_REF}"
+          else
+            node tools/audits/check-documentation-links.mts --all
+          fi
+      - name: Check tracked files against ignore rules
+        run: |
+          git ls-files -z > "$RUNNER_TEMP/tracked-paths"
+          set +e
+          git check-ignore --no-index --stdin -z < "$RUNNER_TEMP/tracked-paths" > "$RUNNER_TEMP/ignored-tracked"
+          check_result=$?
+          tr '\0' '\n' < "$RUNNER_TEMP/ignored-tracked"
+          test "$check_result" -eq 1
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # Restore-only: `Contract lint` owns the save for every key below, so the two jobs never race to
+          # write the same cache entry.
+          path: node_modules
+          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: node-modules-
+      - name: Install dependencies and prove the lockfile
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: package-cache
+        with:
+          path: packages/*/dist
+          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: renderer-cache
+        with:
+          path: src/renderers/css/dist
+          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          path: tools/objects/dist
+          key: compiled-preparation-js-v3-${{ steps.ci-cache-key.outputs.build_digest }}
+      - name: Generate the registry, renderer and preparation bundle
+        env:
+          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
+          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
+          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
+          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
+          CI_PREPARATION_DTS: "false"
+          CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
+          CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
+        run: node tools/build-ci.mts lint
+      - name: Check every object's package files and source restoration plan
+        # Package-file completeness (a body without its browser profile or ledger) and source *restorability*
+        # (a declared input with neither a tracked copy nor an acquisition operation). Neither reaches the
+        # deployed site: it serves the already-baked, sha256-pinned prepared bank from R2. The pins themselves
+        # stay blocking in `Contract lint` (physical frame receipts) and in the `Universe / sources` lane.
+        run: node --test tools/restore-source-inputs.test.mts
+      - name: Check authored object directory layout
+        run: node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
+      - name: Explain that this job does not gate the merge
+        if: failure()
+        run: |
+          {
+            echo "### Repository and provenance audit failed (advisory)"
+            echo
+            echo "This job reports repository completeness and provenance backlog. It is **not** a required"
+            echo "status check: it does not block this pull request. Fix it in the change that owns the gap,"
+            echo "or file it as backlog. Merge-blocking proof lives in \`Contract lint\`, \`Typecheck\`, the"
+            echo "universe/preparation lanes and the published-asset checks."
+          } >> "$GITHUB_STEP_SUMMARY"
 
   typecheck:
     name: Typecheck

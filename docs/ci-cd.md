@@ -11,7 +11,7 @@ timings before claiming it is met. Report cold and warm-cache runs separately.
 
 | Workflow | Trigger and responsibility |
 | --- | --- |
-| [Shared universe](../.github/workflows/universe.yml) | PRs always run classification and contract lint. Changed ownership selects application/test types, source/runtime/shell/renderer, preparation/publication and nebula checks. Main runs every lane. |
+| [Shared universe](../.github/workflows/universe.yml) | PRs always run classification, contract lint and the advisory repository audit. Changed ownership selects application/test types, source/runtime/shell/renderer, preparation/publication and nebula checks. Main runs every lane. |
 | [Object-scope gate](../.github/workflows/object-scope.yml) | Every PR: more than 12 changed object directories needs the `pipeline-change` label. Labels re-evaluate this gate. |
 | [Nightly asset sweep](../.github/workflows/nightly.yml) | Scheduled/manual runs check all published keys and test types. A separately selected production build/browser check also runs on relevant PRs; it does not publish the site. Keep it outside the merge-required set unless it fits the total PR budget. |
 | [Deploy](../.github/workflows/deploy.yml) | A successful Shared universe run on main automatically builds and deploys that exact revision. Manual dispatch also deploys. Merging is therefore not deployment-neutral. |
@@ -30,6 +30,22 @@ group and can supersede an older deployment.
 - Keep correctness, source integrity, changed-key publication and relevant type
   checks blocking. Exhaustive remote sweeps and broad release qualification have
   scheduled/manual homes. Moving a check requires naming where its proof remains.
+- Gate on what ships; report what is merely incomplete. A merge-required check may
+  only assert something whose failure means the shipped application is broken, wrong
+  or unverifiable as shipped: it does not compile, it does not build, it does not
+  behave, or an asset it serves is missing. Repository completeness — a package file
+  nobody has written yet, a source input that cannot be re-downloaded, a stale link,
+  a misplaced file — is backlog. It stays visible and still turns a job red, but it
+  may not veto an unrelated change.
+- `Repository and provenance audit (advisory)` is where that backlog runs. It is
+  deliberately absent from the repository's required status checks, so its result is
+  reported without blocking a merge. This is not `continue-on-error`, a skip, a wider
+  tolerance or a longer timeout: every check in it runs on every commit, fails the
+  job, and is named in the run summary. Do not move a check there to silence it —
+  move it only when its failure cannot make the deployed site broken or wrong, and
+  say in the pull request where the shipped-side proof remains. The provenance *pins*
+  behind published assets are shipped-side proof: they stay in `Contract lint`
+  (physical frame receipts and document pins) and in the `Universe / sources` lane.
 - Restore only inputs the selected tests consume. Compiler jobs need pinned JSON
   and generated shell data, not the global texture bank. Image-consuming tests
   must restore their real pinned inputs; missing data is not a pass.

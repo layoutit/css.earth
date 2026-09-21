@@ -5,7 +5,7 @@ import {pathToFileURL} from 'node:url';
 import {spawn} from 'node:child_process';
 import {parse} from 'yaml';
 import {requireArray, requireRecord, requireString} from './source-values.mts';
-import {affectedJobNames, classifyAffectedPaths, HEAVY_JOBS, loadCiAreasConfig, localChangedPaths, needsProductionBuild} from './ci-affected.mts';
+import {affectedJobNames, ALWAYS_JOBS, classifyAffectedPaths, HEAVY_JOBS, loadCiAreasConfig, localChangedPaths, needsProductionBuild} from './ci-affected.mts';
 import {evaluateObjectScopeGate} from './object-scope-gate.mts';
 import {selectRuntimeOwnershipArgs} from './scope-runtime-ownership-check.mts';
 
@@ -109,8 +109,10 @@ function readJobSteps(workflow:Record<string,unknown>,job:Record<string,unknown>
  });
 }
 
-/** `--quick` (the pre-push hook) skips the steps that need the network or take longest; nothing else. */
-export const QUICK_SKIPPED_STEPS=['Check documentation links and organization','Check published assets this change adds'];
+/** `--quick` (the pre-push hook) runs both always-run jobs — the `lint` merge gate and the advisory `audit` —
+ * and skips only the steps that need the network or take longest; nothing else. The documentation audit lives in
+ * `audit` and the published-assets check in `lint`, so both job lists are needed for the names below to resolve. */
+export const QUICK_SKIPPED_STEPS=['Check published assets this change adds','Check documentation links and organization'];
 export function quickSteps(steps:readonly CiStep[]):CiStep[] {
  for(const name of QUICK_SKIPPED_STEPS)if(!steps.some(step=>step.name===name))throw new Error(`--quick expects a step named "${name}".`);
  return steps.filter(step=>!QUICK_SKIPPED_STEPS.includes(step.name));
@@ -163,10 +165,12 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
   throw new Error('Usage: pnpm check:pr [--base=origin/main] [--all | --job=<id>] [--pipeline-change] [--quick] [--typecheck] [--list]');
  const jobName=args.find(arg=>arg.startsWith('--job='))?.slice(6),base=args.find(arg=>arg.startsWith('--base='))?.slice(7)??'origin/main';
  if(jobName&&args.includes('--all'))throw new Error('Choose --all or --job, not both.');
- if(args.includes('--quick')&&jobName!=='lint')throw new Error('--quick is an explicit lint subset: use --job=lint --quick.');
+ if(args.includes('--quick')&&jobName!==undefined)throw new Error('--quick is the explicit always-run subset (contract lint and the advisory audit): drop --job.');
  const config=await loadCiAreasConfig(),changed=await localChangedPaths(base,root),affected=classifyAffectedPaths(changed,config);
- const jobNames=jobName?[jobName]:affectedJobNames(args.includes('--all')?{...affected,jobs:new Set(HEAVY_JOBS)}:affected);
- const production=!jobName&&(args.includes('--all')||needsProductionBuild(changed,config));
+ const jobNames=jobName?[jobName]:args.includes('--quick')?[...ALWAYS_JOBS]
+  :affectedJobNames(args.includes('--all')?{...affected,jobs:new Set(HEAVY_JOBS)}:affected);
+ // `--quick` is the pre-push subset of the two always-run jobs; the production build is never part of it.
+ const production=!jobName&&!args.includes('--quick')&&(args.includes('--all')||needsProductionBuild(changed,config));
  console.log(`[ci plan] ${changed.length} changed paths against ${base} (including working tree); ${jobNames.join(', ')}${production?', production-build':''}.`);
  if(jobName)console.log(`[ci subset] Only ${jobName}; this is not a complete PR verdict (lint, scope and other selected jobs may be omitted).`);
  if(!jobName){

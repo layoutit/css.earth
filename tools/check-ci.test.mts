@@ -7,12 +7,22 @@ import {parse} from 'yaml';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {requireArray,requireRecord,requireString} from './source-values.mts';
 import {CI_ONLY_CONDITIONS,QUICK_SKIPPED_STEPS,SHARED_TYPECHECK_STEP,quickSteps,readCiSteps,reuseLocalPreparation,runCiSteps,sharedCodeChanged} from './check-ci.mts';
+import {ALWAYS_JOBS} from './ci-affected.mts';
 
 test('local CI reads the actual workflow jobs in order, including strict TypeScript and renderer gates',async()=>{
  const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
- const lint=readCiSteps(workflow,'lint'),typecheck=readCiSteps(workflow,'typecheck'),universe=readCiSteps(workflow);
- assert.equal(lint[0]?.name,'Check documentation links and organization');
+ const lint=readCiSteps(workflow,'lint'),audit=readCiSteps(workflow,'audit'),typecheck=readCiSteps(workflow,'typecheck'),universe=readCiSteps(workflow);
+ // The merge gate asserts only what the deployed site needs; repository completeness reports beside it without
+ // gating (docs/ci-cd.md, "Gate on what ships"). Proving the split here keeps a bookkeeping check from drifting
+ // back into the required job.
+ assert.equal(audit[0]?.name,'Check documentation links and organization');
+ assert.ok(!lint.some(step=>step.name==='Check documentation links and organization'),'documentation audits do not gate a merge');
+ assert.ok(!lint.some(step=>step.run.includes('restore-source-inputs.test.mts')),'source restorability does not gate a merge');
+ assert.ok(audit.some(step=>step.run.includes('restore-source-inputs.test.mts')));
+ assert.ok(audit.some(step=>step.run.includes('source-closure.test.mts')));
+ // The pins behind published assets stay on the gate: they are part of what this project ships.
  assert.ok(lint.some(step=>step.run.includes('check-object-runtime-ownership.mts --receipts')));
+ assert.ok(lint.some(step=>step.run.includes('pnpm test:ci')),'published-asset closure and inventory stay blocking');
  const gate=lint.find(step=>step.run.includes('check:assets-published'));
  assert.equal(gate?.env.GH_TOKEN,undefined,'the workflow token is dropped locally');
  assert.match(gate?.run??'',/--added-since-last-green --report-only/,'a push to main never fails on assets');
@@ -91,10 +101,13 @@ test('trusted body publication prepares only the requested object',async()=>{
  assert.doesNotMatch(command,/prepare-feature-index/,'publishing one object must not require every feature catalogue');
 });
 test('--quick skips only the network and documentation steps, and refuses a job without them',async()=>{
- const lint=readCiSteps(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8'),'lint');
- const quick=quickSteps(lint);
- assert.deepEqual(lint.filter(step=>!quick.includes(step)).map(step=>step.name),QUICK_SKIPPED_STEPS);
- assert.throws(()=>quickSteps(lint.filter(step=>step.name!==QUICK_SKIPPED_STEPS[1])),/--quick expects a step/);
+ const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
+ // `--quick` covers both always-run jobs: the documentation audit moved to `audit` while the published-assets
+ // check stayed on `lint`, so neither job alone still carries both skipped names.
+ const always=ALWAYS_JOBS.flatMap(job=>readCiSteps(workflow,job));
+ const quick=quickSteps(always);
+ assert.deepEqual(always.filter(step=>!quick.includes(step)).map(step=>step.name),QUICK_SKIPPED_STEPS);
+ assert.throws(()=>quickSteps(always.filter(step=>step.name!==QUICK_SKIPPED_STEPS[1])),/--quick expects a step/);
 });
 test('--typecheck appends the typecheck only when shared code changed',()=>{
  assert.equal(sharedCodeChanged(['src/objects/ceres/README.md','docs/README.md']),false);
