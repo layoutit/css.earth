@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "sirius",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "HST CALSPEC spectrum sirius_stis_005.fits: HST/STIS spectrophotometry of Sirius A on the CALSPEC flux scale of Bohlin et al. (2020), AJ 160, 21 (FITS SOURCE keyword)",
+    "path": "photometry/sirius_stis_005.fits",
+    "service": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/sirius_stis_005.fits",
+    "checked": "2026-09-21",
+    "format": "fits-table",
+    "extension": "SCI",
+    "wavelength": {
+      "column": "WAVELENGTH",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "FLUX",
+      "kind": "flux"
+    },
+    "quality": {
+      "column": "DATAQUAL",
+      "good": 1
+    },
+    "gaps": [],
+    "note": "Space spectrophotometry, the CALSPEC flux standard for Sirius. Between 380 and 780 nm every sample is STIS measurement; models are used only outside it. Rows with DATAQUAL 0 are left out."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

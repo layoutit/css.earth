@@ -19,13 +19,13 @@ import { readStarTemperature, temperatureCatalogueColor } from './star-catalogue
 
 export const TODO = 'TODO(new-star)';
 const AU_M = 149597870700, PARSEC_M = 3.085677581491367e16, SOLAR_RADIUS_KM = 695700, MAS_RAD = Math.PI / 180 / 3.6e6;
-const BODY_RADIUS_UNITS = 248, BODY_DIAMETER_PX = 496;
+const BODY_RADIUS_UNITS = 248, BODY_DIAMETER_PX = 496, GEOMETRY_SCALE = 1.25;
 const INTER = { url: 'https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf', bytes: 862936, sha256: '746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c' };
 
 export interface StarScaffold { readonly id: string; readonly name: string; readonly system: string; readonly temperatureK: number; readonly temperatureSource: string; readonly description: string; readonly paper: string; readonly paperCredit: string; readonly order?: number }
 
 /** The star stylesheet: the Sun's emissive presentation scoped to one object id, with its off-limb plate size. */
-export function starStylesheet(id: string, name: string, offLimbSize: number, plateNote: string, spinNote = 'No spin: the rotation axis and period are unmeasured.') {
+export function starStylesheet(id: string, name: string, offLimbSize: number, plateNote: string, spinNote = 'No spin: the rotation axis and period are unmeasured.', geometryScale = GEOMETRY_SCALE) {
   const s = `.planet-stage[data-object-id="${id}"]`;
   return `/* ${name}: the Sun's emissive presentation (planet-surfaces.css, SUN block) scoped to this object, loaded after the shared
    planet-surfaces.css base rules. ${spinNote} ${plateNote} */
@@ -92,24 +92,26 @@ ${s} .polycss-scene s.${id}-polar {
   background-image: var(--${id}-poles-image) !important;
 }
 
-/* Off-limb context: ${offLimbSize} px = raster.json emission.offLimbSize, drawn at the disc's ${BODY_DIAMETER_PX} px. */
+/* Off-limb context: ${offLimbSize} px = raster.json emission.offLimbSize, drawn at the disc's ${BODY_DIAMETER_PX} px, times the sphere's
+   solar-system.json geometryScale (${geometryScale}) so the plate stays registered to the enlarged sphere. */
 ${s} .${id}-corona-layer {
   background-image: var(--${id}-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(${offLimbSize}px * var(--${id}-camera-zoom, 1))
-    calc(${offLimbSize}px * var(--${id}-camera-zoom, 1));
+    calc(${offLimbSize}px * ${geometryScale} * var(--${id}-camera-zoom, 1))
+    calc(${offLimbSize}px * ${geometryScale} * var(--${id}-camera-zoom, 1));
 }
 
-/* Limb plate: ${BODY_DIAMETER_PX} px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+/* Limb plate: ${BODY_DIAMETER_PX} px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
+   sphere is drawn at, so the plate's edge is the sphere's outline. */
 ${s} .${id}-limb-layer {
   background-image: var(--${id}-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(${BODY_DIAMETER_PX}px * var(--${id}-camera-zoom, 1))
-    calc(${BODY_DIAMETER_PX}px * var(--${id}-camera-zoom, 1));
+    calc(${BODY_DIAMETER_PX}px * ${geometryScale} * var(--${id}-camera-zoom, 1))
+    calc(${BODY_DIAMETER_PX}px * ${geometryScale} * var(--${id}-camera-zoom, 1));
 }
 
 ${s} .polycss-camera {
@@ -192,7 +194,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     qualification: `Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of ${name} are unmeasured; the axis shown is where celestial north lies on the sky.` });
   put(`${o}/source/preparation/acquisition.json`, { schema: 'cssearth-acquisition-plan@1', operations: [{ kind: 'download', groups: ['restore', 'refresh'], path: 'presentation/InterVariable.ttf', url: INTER.url }] });
   put(`${o}/source/presentation/solar-system.json`, { schema: 'cssearth-solar-system-preparation@1', bodyId: id, displayName: name, bodyRadiusUnits: BODY_RADIUS_UNITS, bodyRadiusKilometers: radiusKm,
-    defaultZoom: 1.25, geometryScale: 1.25 });
+    defaultZoom: 1.25, geometryScale: GEOMETRY_SCALE });
   put(`${o}/source/measurements.json`, { schema: 'cssearth-uniform-disc-star@1', id, angularDiameterMas: Math.round(angularDiameterMas * 100) / 100,
     angularDiameterSource: `${TODO}: the published angular diameter and its source; this value is the record's radius at its distance.`, distanceParsecs: astrometry.distanceParsecs,
     distanceSource: requireString(requireRecord(star.sources).distance), radiusKm, radiusSource: String(body.physicalNotes ?? TODO),

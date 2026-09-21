@@ -36,22 +36,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "color",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-        "thumbnail": "vega-lens-shape.webp",
-        "surface": "vega-surface-shape@2x.webp",
-        "poles": "vega-poles-shape@2x.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Hubble's spectrum of the star. The poles are hotter and brighter than the equator, from a fit to interferometric images; the disc is unresolved in colour, and its darker edge follows a model limb-darkening law, not a measurement.",
+        "thumbnail": "vega-lens-color.webp",
+        "surface": "vega-surface-color@2x.webp",
+        "poles": "vega-poles-color@2x.webp",
         "source": {
-          "id": "vega-observational-measurements",
+          "id": "vega-stellar-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/1211.6055"
+          "url": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
         },
         "falseColor": false,
-        "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+        "notes": "The colour of the Hubble Space Telescope's calibrated STIS spectrum of Vega, a CALSPEC flux standard. No resolved image of the surface is cast; the display axis is celestial north, a convention."
       }
     ]
   },
@@ -66,6 +66,12 @@
       "role": "facts",
       "description": "Monnier, Che, Zhao et al., \"Resolving Vega and the inclination controversy with CHARA/MIRC\", ApJ 761, L3 (2012), arXiv:1211.6055",
       "href": "https://arxiv.org/abs/1211.6055"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "HST CALSPEC alpha_lyr_stis_012 (Bohlin et al. (2020), AJ 160, 21 flux scale)",
+      "href": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
     }
   ],
   "provenance": {

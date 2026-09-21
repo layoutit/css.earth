@@ -189,6 +189,15 @@
       ],
       "path": "observations/oifits/PIONI.2017-02-25T01:04:36.863_oidataCalibrated.fits",
       "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2017-02-25T01:04:36.863_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
+      "path": "photometry/III_126_part2.dat.gz"
     }
   ]
 }

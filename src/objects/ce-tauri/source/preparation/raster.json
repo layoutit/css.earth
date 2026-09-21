@@ -56,7 +56,7 @@
               "id": "pionier-2016-11",
               "path": "observations/nov_avg.fit",
               "encoding": "fits-oi-reconstruction",
-              "backgroundMaximum": 1e-9,
+              "backgroundMaximum": 1e-09,
               "observerLatitude": 0,
               "observerWestLongitude": 0,
               "sunLatitude": 0,
@@ -144,7 +144,7 @@
               "id": "pionier-2016-12",
               "path": "observations/dec_avg.fit",
               "encoding": "fits-oi-reconstruction",
-              "backgroundMaximum": 1e-9,
+              "backgroundMaximum": 1e-09,
               "observerLatitude": 0,
               "observerWestLongitude": 0,
               "sunLatitude": 0,
@@ -195,6 +195,18 @@
           "consumer": "photograph-pionier-2016-12"
         },
         "offLimb": {}
+      }
+    },
+    {
+      "id": "color",
+      "output": "ce-tauri-surface-{id}{suffix}.webp",
+      "thumbnail": "ce-tauri-lens-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+        "qualification": "Uniform photosphere colour from the star's Crimean photoelectric spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
       }
     }
   ],

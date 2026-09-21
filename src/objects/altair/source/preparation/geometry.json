@@ -3,18 +3,18 @@
   "namespace": "altair",
   "surface": {
     "radius": 248,
-    "polarRadius": 248,
+    "polarRadius": 199.7201,
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/altair/altair-surface-shape@2x.webp",
+      "url": "/scenes/altair/altair-surface-color@2x.webp",
       "width": 1024,
       "height": 768
     },
     "surfaceLatitudeHeight": 512,
     "packedBandGutter": 8,
     "poles": {
-      "url": "/scenes/altair/altair-poles-shape@2x.webp",
+      "url": "/scenes/altair/altair-poles-color@2x.webp",
       "width": 512,
       "height": 256
     },
@@ -22,7 +22,7 @@
     "polarRadiusScale": 1.035,
     "polarOffset": 0.1,
     "uv": "cell",
-    "color": "#e2e9ff"
+    "color": "#d4dfff"
   },
   "projection": {
     "tileSize": 50,

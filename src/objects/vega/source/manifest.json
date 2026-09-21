@@ -4,8 +4,8 @@
     {
       "id": "vega-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1696,
-      "expectedSha256": "bfa9a9b43f59e70b0d063e5abfac70ed3e728e72f62e69f3c564ebc2f64c86bf",
+      "expectedBytes": 1994,
+      "expectedSha256": "b8f8c4257ef3bc061660664fbfad420b24e2aa18dacab90988ae05ed4878bf28",
       "origin": "https://arxiv.org/abs/1211.6055",
       "credit": "Monnier, Che, Zhao et al., \"Resolving Vega and the inclination controversy with CHARA/MIRC\", ApJ 761, L3 (2012), arXiv:1211.6055",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +49,8 @@
     {
       "id": "vega-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 1912,
-      "expectedSha256": "dbf4214eb4a80b98786427dfe6d33849ffe730e97f93da2731a1056535ed3d64",
+      "expectedBytes": 2923,
+      "expectedSha256": "6a7c084080cc52e7b083f60a246f2d740e1e313ebd6f3638284e3068ee26e818",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +68,8 @@
     {
       "id": "vega-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1669,
-      "expectedSha256": "2efb8c266194fdc6917f9e24ba7ab9dd2383a50d8d2447865af704af39f9402e",
+      "expectedBytes": 1674,
+      "expectedSha256": "f0e4a5c37a58ec86a2bd29ccecf5b939bed9f36fdf672a8f5f6a997489f4ee34",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -124,7 +124,7 @@
       "id": "vega-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
       "expectedBytes": 208,
-      "expectedSha256": "ab263a9f97293d89c0577be719ed99f65440cd5384001a3cddee1a6567d34d9c",
+      "expectedSha256": "227fc73b9ab5845cf0676a5280289bdd5ea0cde8729607f3c002336b3fc39d89",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -137,38 +137,176 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "vega-calspec-stis",
+      "path": "photometry/alpha_lyr_stis_012.fits",
+      "expectedBytes": 288000,
+      "expectedSha256": "7201cd8566d53d384430c3d5fd2ae8d8122e9a7f765711748b49336f63237672",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/alpha_lyr_stis_012.fits",
+      "credit": "NASA/STScI HST CALSPEC; flux scale Bohlin et al. (2020), AJ 160, 21",
+      "license": "HST archive data: public, with acknowledgement",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "CALSPEC FITS file downloaded unchanged on 2026-09-21; restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum, unchanged, with acknowledgement",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "calspec-alpha-lyr-stis-012",
+            "role": "material",
+            "evidence": "src/objects/vega/source/photometry/alpha_lyr_stis_012.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vega-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1028,
+      "expectedSha256": "10d7157ca73cb272f2b8a0d2cb35d004bf12704e43c965733f436d5733851cb7",
+      "origin": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
+      "credit": "NASA/STScI HST CALSPEC; flux scale Bohlin et al. (2020), AJ 160, 21; CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "calspec-alpha-lyr-stis-012",
+            "role": "material",
+            "evidence": "src/objects/vega/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vega-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vega-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "expectedBytes": 844,
+      "expectedSha256": "de6a63dfd66cea6eac15656b598f390568a6df70c8a71eea342643198ed4c0b6",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/vega/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vega-roche-von-zeipel",
+      "path": "photometry/gravity-darkening.json",
+      "expectedBytes": 1827,
+      "expectedSha256": "4cb2283a1953c1b01dc50cdf48947534c51d411820479646c9468b0dd8b14af3",
+      "origin": "https://arxiv.org/abs/1211.6055",
+      "credit": "Monnier et al. (2012), ApJL 761, L3",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper's table in the authors' LaTeX source, with each cell quoted",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "lenses",
+        "rotation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published model parameters transcribed in this package with their table cells; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
-      "origin": "https://arxiv.org/abs/1211.6055",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "expectedBytes": 37877,
+      "expectedSha256": "ec9740b9d26d76c497566e9ef3351df68161a2efd80860fb9bba61198352a21b",
+      "origin": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
+      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
         "inputs": [
-          "vega-observational-measurements"
+          "vega-stellar-color",
+          "vega-calspec-stis",
+          "vega-cie-1931-2deg-cmf",
+          "vega-preparation-raster",
+          "vega-claret-2011-v-quadratic"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2830,
-      "expectedSha256": "ae11d4d15eaab02bbc759be4f072f66907a8778c3f95ff16d46b8f1107efb187",
+      "expectedBytes": 3261,
+      "expectedSha256": "d0cfdabff33fb592eab0d964b1d59981feca480aa9233d637f716bcb59a5ae64",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -176,8 +314,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "expectedBytes": 1420,
+      "expectedSha256": "7014348e3402ba41d478789013a6f80c4bdd9089eaf37f94e62840049b6da3dd"
     },
     {
       "path": "preparation/navigation.json",
@@ -186,8 +324,8 @@
     },
     {
       "path": "preparation/rotation.json",
-      "expectedBytes": 971,
-      "expectedSha256": "64040f1ddb7a2560e69fa96b311e9e7f12fc6a32805cb051f725f18fa63fb7a1"
+      "expectedBytes": 1064,
+      "expectedSha256": "a4d4a74cdb1cb047fae5ead3c54631f9b805ecb985a9376eb4b0176e93e99480"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

@@ -9,6 +9,8 @@
   "radiusSource": "Radius: Altair is a rapid rotator: Monnier et al. (2007), Science 317, 342, measure an equatorial radius of 2.029 ± 0.007 and a polar radius of 1.634 ± 0.011 solar radii with CHARA/MIRC. The record's radius is the volume-equivalent sphere of those two, 1.89 solar radii; the flattening is not drawn. Adopted 1,313,290 km, 1.8877 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
   "effectiveTemperatureK": 7680,
   "effectiveTemperatureSource": "Effective temperature 7680 ± 90 K from van Belle et al. 2001 (ApJ 559, 1155; https://doi.org/10.1086/322340), Section 3.3: the PTI mean Rosseland diameter with the Alonso et al. 1994 bolometric flux. The authors call this single value a geometric construct: the rapidly rotating surface ranges from about 7100 to 9300 K.",
+  "surfaceGravityLogg": 4.13,
+  "surfaceGravitySource": "log g from the mass 1.74 +/- 0.49 solar masses that van Belle et al. 2001 (ApJ 559, 1155; https://doi.org/10.1086/322340), Section 5, measure from the oblateness and v sin i, and the package radius, log10(GM/R^2) in cgs; a mean over the rapidly rotating surface",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

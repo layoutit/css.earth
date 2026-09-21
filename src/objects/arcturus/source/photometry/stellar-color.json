@@ -1,0 +1,24 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "arcturus",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Arcturus is HR 5340.",
+    "path": "photometry/pulkovo-table5.dat",
+    "service": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
+    "checked": "2026-09-21",
+    "format": "pulkovo-blocks",
+    "wavelength": {
+      "column": "lambda",
+      "unit": "nm"
+    },
+    "flux": {
+      "column": "5340",
+      "kind": "flux"
+    },
+    "gaps": [],
+    "note": "Ground-based photoelectric scans by Pulkovo astronomers, combined into one absolute energy distribution per star with a stated accuracy of 1.5-2%. The catalogue gives no observation dates. HR 5340's column is read from the raw flux file, which lists seven stars per block."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

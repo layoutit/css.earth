@@ -128,6 +128,21 @@
         },
         "falseColor": false,
         "notes": "A sphere of the published radius with no image cast on it, for comparison with the ALMA lens. Neutral gray is a display convention, not a measured colour; the display axis is celestial north at the star, also a convention."
+      },
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from a measured spectrum of the star (VLT/UVES). The disc is unresolved, and no darkening toward the edge is measured.",
+        "thumbnail": "r-doradus-lens-color.webp",
+        "surface": "r-doradus-surface-color@2x.webp",
+        "poles": "r-doradus-poles-color@2x.webp",
+        "source": {
+          "id": "r-doradus-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://www.eso.org/sci/observing/tools/uvespop.html"
+        },
+        "falseColor": false,
+        "notes": "The colour of R Doradus's VLT/UVES spectrum. It was taken on 27 December 2002 through a narrow slit with the atmospheric dispersion corrector off, so the colour is uncertain; R Doradus also varies. No resolved image of the surface is cast here."
       }
     ]
   },
@@ -142,6 +157,12 @@
       "role": "facts",
       "description": "Vlemmings et al. (2024), ALMA 2022.1.01071.S",
       "href": "https://doi.org/10.1038/s41586-024-07836-9"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "UVES POP merged spectrum of HD 29712 (R Doradus)",
+      "href": "https://www.eso.org/sci/observing/tools/uvespop.html"
     }
   ],
   "provenance": {

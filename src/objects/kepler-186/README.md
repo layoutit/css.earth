@@ -12,15 +12,14 @@ Radius: Stellar radius 0.523 (+0.023) solar radii from Torres et al. 2015, ApJ 8
 
 Rotation: no spin axis or rotation period is adopted The display axis is celestial north at the star, a convention.
 
-Shape lens: a sphere of the measured radius in neutral gray. No image of the surface is shown.
+Colour lens: The colour of Gaia DR3's measured spectrum of Kepler-186. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.mts](../../../tools/objects/observation/stellar-photometric-color.mts)): **#ffbd89**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). The disc is darkened toward its edge by the quadratic V-band law that Claret & Bloemen (2011, A&A 529, A75) compute from ATLAS model atmospheres, read at 3755 K and log g 4.74: the edge is 25% as bright as the centre. That law is a model, not a measurement of this star. Gravity: log g from the astronomy record's GM and radius (physicalNotes), log10(GM/R^2) in cgs. The catalogue swatch, the minimap and the navigation marker use the same colour. [stellar-spectra/author.mts](../../../tools/objects/source-authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them.
 
-Catalogue colour: #ffc89a, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 3755 ± 90 K from Torres et al. 2015 (ApJ 800, 99; <https://arxiv.org/abs/1501.01101>), Table 5, KOI-0571, the radius source: a spectroscopic value it adopts from Mann et al. 2013 and Muirhead et al. 2014. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
 
 ## Evidence
 
-Run of 2026-09-21:
+Run of 2026-09-21 (this version):
 
-- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffc89a is the star field's colour at the cited 3755 K.
+- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffbd89 is the colour lens's prepared colour and that the limb-darkening law is read at the recorded temperature and gravity; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour and marker from the pinned spectrum.
 
 ## Known problems
 

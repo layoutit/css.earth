@@ -36,22 +36,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "color",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-        "thumbnail": "altair-lens-shape.webp",
-        "surface": "altair-surface-shape@2x.webp",
-        "poles": "altair-poles-shape@2x.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The poles are hotter and brighter than the equator, from a fit to interferometric images; the disc is unresolved in colour, and its darker edge follows a model limb-darkening law, not a measurement.",
+        "thumbnail": "altair-lens-color.webp",
+        "surface": "altair-surface-color@2x.webp",
+        "poles": "altair-poles-color@2x.webp",
         "source": {
-          "id": "altair-observational-measurements",
+          "id": "altair-stellar-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/0706.0867"
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
         },
         "falseColor": false,
-        "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+        "notes": "The colour of Altair's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. No resolved image of the surface is cast; the display axis is celestial north, a convention."
       }
     ]
   },
@@ -66,6 +66,12 @@
       "role": "facts",
       "description": "Monnier, Zhao, Pedretti et al., \"Imaging the Surface of Altair\", Science 317, 342 (2007), arXiv:0706.0867",
       "href": "https://arxiv.org/abs/0706.0867"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "Pulkovo spectrophotometric catalogue, HR 7557 (VizieR III/201)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
     }
   ],
   "provenance": {

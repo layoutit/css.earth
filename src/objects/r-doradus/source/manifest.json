@@ -148,8 +148,8 @@
     {
       "id": "r-doradus-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 6193,
-      "expectedSha256": "b6a1e71358b52920f7133b5634a865d680abc1cc217803d83fef8f4ea7a9d0f9",
+      "expectedBytes": 6739,
+      "expectedSha256": "74eec4b29c4602939dd68916ca405cc21719a0e943a01d61409adc21af408e40",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -168,7 +168,7 @@
       "id": "r-doradus-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1704,
-      "expectedSha256": "398392c72571d9aa60b274909f55a37d4d6e14bc73ea74bb15a6d8b6ae6cb9dc",
+      "expectedSha256": "065c8a2c71438c40a2b4d40b82f176966e3d27ceb646f559d4fe372f29a9946d",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -236,6 +236,92 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "r-doradus-uves-pop",
+      "path": "photometry/hd29712.tfits.gz",
+      "expectedBytes": 8807521,
+      "expectedSha256": "0d79bfcee0ab3bce23d76ffa16ee99bbee7bcfd022d285ad6f9c8ed8a38a22f9",
+      "origin": "https://www.eso.org/sci/php/tools/uvespop/DATA/merged/hd29712.tfits.gz",
+      "credit": "ESO UVES Paranal Observatory Project (Bagnulo et al.)",
+      "license": "ESO archive data: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.eso.org/sci/observing/tools/uvespop.html"
+      ],
+      "acquisition": "Archive file downloaded unchanged on 2026-09-21; restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum, unchanged, with acknowledgement",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "uves-pop-hd29712",
+            "role": "material",
+            "evidence": "src/objects/r-doradus/source/photometry/hd29712.tfits.gz"
+          }
+        ]
+      }
+    },
+    {
+      "id": "r-doradus-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1273,
+      "expectedSha256": "51b2f7a43f20dfce6ea15c1a099b398f7adf4eddbb10986cd3a080747fbbfb36",
+      "origin": "https://www.eso.org/sci/observing/tools/uvespop.html",
+      "credit": "ESO UVES Paranal Observatory Project (Bagnulo et al.); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "uves-pop-hd29712",
+            "role": "material",
+            "evidence": "src/objects/r-doradus/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "r-doradus-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -266,8 +352,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5592,
-      "expectedSha256": "3d1c859899590960b5e45595fbc0da2571db71c44fec7ea66bad488169e25d59",
+      "expectedBytes": 6648,
+      "expectedSha256": "d5c6577bc1ec0a6144bbb529597faf514293820bd3dec951165d0a1d23bc32d4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -275,8 +361,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 654,
-      "expectedSha256": "320d852bd9bbc4252b321e81a40836815c30d6814083900bfead711e2ea2a3d2"
+      "expectedBytes": 888,
+      "expectedSha256": "d97ca67efce86036697804897c0141d9599964195dd1c30b7c0374eacfd8d3f3"
     },
     {
       "path": "preparation/navigation.json",

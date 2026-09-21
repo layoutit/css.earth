@@ -12,15 +12,14 @@ Radius: Stellar radius 1.155 +0.014 −0.016 solar radii from Torres et al. 2008
 
 Rotation: no spin axis or rotation period is adopted The display axis is celestial north at the star, a convention.
 
-Shape lens: a sphere of the measured radius in neutral gray. No image of the surface is shown.
+**Colour lens.** The colour of the Hubble Space Telescope's calibrated STIS spectrum of HD 209458, a CALSPEC flux standard. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.mts](../../../tools/objects/observation/stellar-photometric-color.mts)): **#fef9ff**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). The disc is darkened toward its edge by the quadratic law Brown et al. (2001, ApJ 552, 699, Table 1) fitted to Hubble STIS transits of HD 209458b at 581-638 nm: u1 = 0.29 and u2 = 0.35, each ± 0.05, solved from the published sum 0.640 ± 0.030 and difference -0.055 ± 0.100 ([brown-2001-limb-darkening.json](source/photometry/brown-2001-limb-darkening.json)). The edge is 36% as bright as the centre, a measurement of this star. The catalogue swatch, the minimap and the navigation marker use the same colour. [stellar-spectra/author.mts](../../../tools/objects/source-authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them.
 
-Catalogue colour: #fff7ef, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 6065 ± 50 K from Torres, Winn & Holman 2008 (ApJ 677, 1324; <https://arxiv.org/abs/0801.1841>), Table 1, the radius source: the weighted mean of ten independent determinations. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
 
 ## Evidence
 
-Run of 2026-09-21:
+Run of 2026-09-21 (this version):
 
-- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #fff7ef is the star field's colour at the cited 6065 K.
+- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #fef9ff is the colour lens's prepared colour; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour and marker from the pinned spectrum.
 
 ## Known problems
 

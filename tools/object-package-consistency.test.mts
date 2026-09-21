@@ -100,13 +100,22 @@ test('every placed star states its catalogue distance, colour and stylesheet fro
       const lenses = requireRecord(JSON.parse(await readFile(resolve(directory, 'prepared/lenses.json'), 'utf8')) as unknown);
       const control = requireArray(lenses.controls).map(value => requireRecord(value)).find(value => value.id === measured.id);
       assert.equal(catalog.color, control?.billboardColor, `${id}: the catalogue colour is the prepared colour of its measured ${String(measured.id)} lens`);
+      // A model limb-darkening law is read at the temperature and gravity the measurement record cites.
+      const limb = requireRecord(measured.science).limbDarkening;
+      if (isRecord(limb) && isRecord(limb.grid) && limb.path === 'photometry/claret-2011-v-quadratic.tsv') {
+        const measurements = requireRecord(JSON.parse(await readFile(resolve(directory, 'source/measurements.json'), 'utf8')) as unknown);
+        assert.equal(limb.grid.teffK, readStarTemperature(measurements).kelvin, `${id}: the limb-darkening grid is read at the cited temperature`);
+        assert.equal(limb.grid.logg, requireFiniteNumber(measurements.surfaceGravityLogg), `${id}: the limb-darkening grid is read at the recorded gravity`);
+        requireString(measurements.surfaceGravitySource);
+      }
     } else {
       const temperature = readStarTemperature(JSON.parse(await readFile(resolve(directory, 'source/measurements.json'), 'utf8')) as unknown);
       assert.equal(catalog.color, temperatureCatalogueColor(temperature.kelvin), `${id}: the catalogue colour is the star field's colour at its cited ${temperature.kelvin} K`);
     }
     const stylesheet = await readFile(resolve(root, 'src/renderers/css/styles', `${id}-surfaces.css`), 'utf8');
     const stripComments = (css: string) => css.replace(/\/\*[\s\S]*?\*\//gu, '').replace(/\n{2,}/gu, '\n');
-    assert.equal(stripComments(stylesheet), stripComments(starStylesheet(id, id, requireFiniteNumber(requireRecord(raster.emission).offLimbSize), '')),
+    assert.equal(stripComments(stylesheet), stripComments(starStylesheet(id, id, requireFiniteNumber(requireRecord(raster.emission).offLimbSize), '', undefined,
+      requireFiniteNumber(requireRecord(JSON.parse(await readFile(resolve(directory, 'source/presentation/solar-system.json'), 'utf8')) as unknown).geometryScale))),
       `${id}: ${relative(root, resolve(root, 'src/renderers/css/styles', `${id}-surfaces.css`))} is the star stylesheet template`);
     stars.push(id);
   }

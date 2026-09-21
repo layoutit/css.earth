@@ -9,6 +9,8 @@
   "radiusSource": "Radius: Vega is a rapid rotator seen nearly pole-on: Monnier et al. (2012), ApJ 761, L3, measure an equatorial radius of 2.726 ± 0.006 and a polar radius of 2.418 ± 0.012 solar radii with CHARA/MIRC. The record's radius is the volume-equivalent sphere of those two, 2.62 solar radii; the flattening is not drawn. Adopted 1,822,180 km, 2.6192 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
   "effectiveTemperatureK": 9360,
   "effectiveTemperatureSource": "Effective temperature 9360 ± 90 K, the surface-averaged value of the concordance model in Monnier et al. 2012 (ApJL 761, L3; https://doi.org/10.1088/2041-8205/761/1/L3), Table 2, the same model as the radius. The star is gravity-darkened: the same table gives 10070 K at the pole and 8910 K at the equator.",
+  "surfaceGravityLogg": 3.93,
+  "surfaceGravitySource": "log g from the model mass 2.15 (+0.10/-0.15) solar masses of Monnier et al. 2012 (ApJL 761, L3; https://arxiv.org/abs/1211.6055), abstract and Table 2, and the package radius, log10(GM/R^2) in cgs; a mean over the gravity-darkened surface",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

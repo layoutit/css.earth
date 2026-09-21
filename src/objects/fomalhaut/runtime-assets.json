@@ -2,29 +2,29 @@
   "schema": "cssfomalhaut-runtime-assets@1",
   "assets": [
     {
-      "filename": "fomalhaut-context-shape@2x.webp",
+      "filename": "fomalhaut-context-color@2x.webp",
       "bytes": 100,
       "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
     },
     {
-      "filename": "fomalhaut-lens-shape.webp",
+      "filename": "fomalhaut-lens-color.webp",
       "bytes": 44,
-      "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
+      "sha256": "e5ed762d929ff45ae5b4854bff9b4d5fb13f54382b89a53c758cff412173c042"
     },
     {
-      "filename": "fomalhaut-limb-shape@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+      "filename": "fomalhaut-limb-color@2x.webp",
+      "bytes": 94496,
+      "sha256": "ec47151bb22d0a54b5dfd1f61ab0eb87f5cf644e622689adf65c3e5b91aba12f"
     },
     {
-      "filename": "fomalhaut-poles-shape@2x.webp",
+      "filename": "fomalhaut-poles-color@2x.webp",
       "bytes": 1340,
-      "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875"
+      "sha256": "09564704df05b93c7b1bafeb854a6ceef37da2bbe47747bfe3858aa98362c971"
     },
     {
-      "filename": "fomalhaut-surface-shape@2x.webp",
+      "filename": "fomalhaut-surface-color@2x.webp",
       "bytes": 178,
-      "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+      "sha256": "0d90fd381c7fc1c72c9e094e65628bdf230aeec9e75a9d9ced0fcedb0f706497"
     }
   ]
 }

@@ -69,18 +69,19 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(780px * var(--ce-tauri-camera-zoom, 1))
-    calc(780px * var(--ce-tauri-camera-zoom, 1));
+    calc(780px * 1.25 * var(--ce-tauri-camera-zoom, 1))
+    calc(780px * 1.25 * var(--ce-tauri-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
+   sphere is drawn at, so the plate's edge is the sphere's outline. */
 .planet-stage[data-object-id="ce-tauri"] .ce-tauri-limb-layer {
   background-image: var(--ce-tauri-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * var(--ce-tauri-camera-zoom, 1))
-    calc(496px * var(--ce-tauri-camera-zoom, 1));
+    calc(496px * 1.25 * var(--ce-tauri-camera-zoom, 1))
+    calc(496px * 1.25 * var(--ce-tauri-camera-zoom, 1));
 }
 
 .planet-stage[data-object-id="ce-tauri"] .polycss-camera {

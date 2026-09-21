@@ -12,15 +12,14 @@ Radius: Stellar radius 0.939 ± 0.019 ± 0.011 solar radii from Mancini et al. 2
 
 Rotation: no spin axis or rotation period is adopted The display axis is celestial north at the star, a convention.
 
-Shape lens: a sphere of the measured radius in neutral gray. No image of the surface is shown.
+Colour lens: The colour of Gaia DR3's measured spectrum of WASP-39. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.mts](../../../tools/objects/observation/stellar-photometric-color.mts)): **#ffebdf**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). The disc is darkened toward its edge by the quadratic law Kirk et al. (2019, AJ 158, 144, Table 1) fitted to WHT/ACAM transits of WASP-39b at 400-900 nm: u1 = 0.49 ± 0.06 measured, with u2 = 0.08 held at a model atmosphere value in their fit, so the law is half measured ([kirk-2019-limb-darkening.json](source/photometry/kirk-2019-limb-darkening.json)). The edge is 43% as bright as the centre. The catalogue swatch, the minimap and the navigation marker use the same colour. [stellar-spectra/author.mts](../../../tools/objects/source-authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them.
 
-Catalogue colour: #ffedde, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 5485 ± 50 K from Mancini et al. 2018 (A&A 613, A41; <https://arxiv.org/abs/1802.03859>), Table 2, the radius source: iron-line equivalent widths in co-added HARPS-N spectra. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
 
 ## Evidence
 
-Run of 2026-09-21:
+Run of 2026-09-21 (this version):
 
-- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffedde is the star field's colour at the cited 5485 K.
+- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffebdf is the colour lens's prepared colour; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour and marker from the pinned spectrum.
 
 ## Known problems
 

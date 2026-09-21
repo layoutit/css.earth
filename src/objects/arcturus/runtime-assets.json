@@ -2,29 +2,29 @@
   "schema": "cssarcturus-runtime-assets@1",
   "assets": [
     {
-      "filename": "arcturus-context-shape@2x.webp",
+      "filename": "arcturus-context-color@2x.webp",
       "bytes": 100,
       "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
     },
     {
-      "filename": "arcturus-lens-shape.webp",
+      "filename": "arcturus-lens-color.webp",
       "bytes": 44,
-      "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
+      "sha256": "c6416430ee4813245c354ce3a92bc9fc7171ce08a6ec05138c2221fef130981e"
     },
     {
-      "filename": "arcturus-limb-shape@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+      "filename": "arcturus-limb-color@2x.webp",
+      "bytes": 102886,
+      "sha256": "7b5d2a70fd4a6859841bdefeaa0ba643da047a3dd4d9cfbbbc605c1b2aa01876"
     },
     {
-      "filename": "arcturus-poles-shape@2x.webp",
+      "filename": "arcturus-poles-color@2x.webp",
       "bytes": 1340,
-      "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875"
+      "sha256": "2b5ef9cb09928e55e1db0ab4b3ebc7043c07a2969e2e7cb4b10e57f5049d36ed"
     },
     {
-      "filename": "arcturus-surface-shape@2x.webp",
+      "filename": "arcturus-surface-color@2x.webp",
       "bytes": 178,
-      "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+      "sha256": "0cacc0ca45a0203d3fcec0b847b93d14ca36e97fa4d42e63ce1ff88cc1d3ae6b"
     }
   ]
 }

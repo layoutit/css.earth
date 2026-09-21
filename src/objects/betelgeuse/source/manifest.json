@@ -1124,8 +1124,8 @@
     {
       "id": "betelgeuse-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 6160,
-      "expectedSha256": "e97986e9ffaa5d8c9b5fdecd0b2c7187632c10a697af61451a913fce4fcfeebb",
+      "expectedBytes": 6713,
+      "expectedSha256": "8795abb3695afd458fc9adae65fbd31f9224efe87752c6bf15449b7268039e89",
       "origin": "Repository-authored raster recipe: the MATISSE reconstruction cast onto the reference sphere by the surface-observation route, polar bands, transparent off-limb and limb plates",
       "sourceBinding": {
         "kind": "local",
@@ -1144,7 +1144,7 @@
       "id": "betelgeuse-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1840,
-      "expectedSha256": "f407cdf29c1a610eab181fa08c2ba119f869c92f6ae07dbd367e57e7cf3d9523",
+      "expectedSha256": "2ba61f394c3860f8ebc7ee7ac2d08f90c516b238acd45ff9ffdaf6f080778d2c",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -1212,6 +1212,92 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "betelgeuse-xsl-dr3",
+      "path": "photometry/xsl_spectrum_X0036_merged_ncl_ncge.fits",
+      "expectedBytes": 717120,
+      "expectedSha256": "88d53fadca75bca108f5c97ae03e0b085c2e954f252bee2602ceaa34b923d193",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/660/A34/fits/xsl_spectrum_X0036_merged_ncl_ncge.fits",
+      "credit": "Verro et al. (2022), A&A 660, A34 (X-Shooter Spectral Library DR3); VizieR J/A+A/660/A34",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Archive file downloaded unchanged on 2026-09-21; restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum, unchanged, with acknowledgement",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "xsl-dr3-x0036",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/photometry/xsl_spectrum_X0036_merged_ncl_ncge.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "betelgeuse-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1064,
+      "expectedSha256": "efd81efb5dbcea9c51af1d75b809dea005ef26a245240e8447eb65d8bc0f4f99",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34",
+      "credit": "Verro et al. (2022), A&A 660, A34 (X-Shooter Spectral Library DR3); VizieR J/A+A/660/A34; CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "xsl-dr3-x0036",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "betelgeuse-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -1308,8 +1394,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 12068,
-      "expectedSha256": "3c81f2304881920c3bede2ca4b0de8475514bad91d36bff1d4bd79fdd8663f83",
+      "expectedBytes": 13129,
+      "expectedSha256": "7c6fbe7d2985c83a9b7c122c7cc45f482e2adf6717a2e2d5b4ed7456540279c4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -1326,8 +1412,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 12958,
-      "expectedSha256": "1cab8465f78a07103120dd480f8af2ec7336a428f63da2ead0ae342d6ebc256b"
+      "expectedBytes": 13237,
+      "expectedSha256": "ecb81f56efe1e0e231a8b51ebf46a7e1b6aa379f8d43258fbc86f9eab4dacf24"
     },
     {
       "path": "preparation/navigation.json",

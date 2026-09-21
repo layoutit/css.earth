@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/alpha-centauri-a/alpha-centauri-a-surface-shape@2x.webp",
+      "url": "/scenes/alpha-centauri-a/alpha-centauri-a-surface-color@2x.webp",
       "width": 1024,
       "height": 768
     },
     "surfaceLatitudeHeight": 512,
     "packedBandGutter": 8,
     "poles": {
-      "url": "/scenes/alpha-centauri-a/alpha-centauri-a-poles-shape@2x.webp",
+      "url": "/scenes/alpha-centauri-a/alpha-centauri-a-poles-color@2x.webp",
       "width": 512,
       "height": 256
     },
@@ -22,7 +22,7 @@
     "polarRadiusScale": 1.035,
     "polarOffset": 0.1,
     "uv": "cell",
-    "color": "#fff3e7"
+    "color": "#fff5f4"
   },
   "projection": {
     "tileSize": 50,

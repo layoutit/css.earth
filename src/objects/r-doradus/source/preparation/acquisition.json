@@ -18,6 +18,15 @@
       ],
       "path": "observations/member.uid___A001_X35f5_Xaea.R_Dor_sci.spw25_27_29_31.cont.I.pbcor.fits",
       "url": "https://almascience.eso.org/dataPortal/member.uid___A001_X35f5_Xaea.R_Dor_sci.spw25_27_29_31.cont.I.pbcor.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://www.eso.org/sci/php/tools/uvespop/DATA/merged/hd29712.tfits.gz",
+      "path": "photometry/hd29712.tfits.gz"
     }
   ]
 }

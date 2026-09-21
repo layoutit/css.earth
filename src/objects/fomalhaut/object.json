@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f010e8ffb32f9604fad67a2f07073b402bc7cf9b5173329caa51536a5cc2f7d5"
+        "sha256": "e2f5cd9a7736b83086dfa3f3b8084db255ae424af1f72b7eb946a9b4630c38d7"
       }
     },
     "catalog": {
       "name": "Fomalhaut",
       "classification": "star",
-      "color": "#d6e1ff",
+      "color": "#c2d4ff",
       "distanceAu": 1589018.1,
       "description": "A-type star 7.70 parsecs away; its photosphere is not imaged here.",
       "systemName": "Piscis Austrinus",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "bfb1193491c01786088a5ea79a72af443bee04d7c58430652770eb787af2a9ba"
+    "sha256": "da8c04ebb3500e3e6bc3ab94b189003eb4a2abc4dcc5cec1e9e3024ad40aa609"
   }
 }

@@ -4,8 +4,8 @@
     {
       "id": "kepler-452-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1323,
-      "expectedSha256": "4b6b3f0f997664d00e5dfa7322ad46869bbf9b29e4e56f4fa09493c1045603cc",
+      "expectedBytes": 1468,
+      "expectedSha256": "2d250ec5384a99141d4766de26cc493dec049f4e697a6d32e3113fc21d4b82bd",
       "origin": "https://arxiv.org/abs/1507.06723",
       "credit": "J. M. Jenkins et al., \"Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star\", AJ 150, 56 (2015), arXiv:1507.06723",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +49,8 @@
     {
       "id": "kepler-452-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 1960,
-      "expectedSha256": "14a4a25cbd3a6a182d41ccea109e9a4d07563a8c52b27d4deb8ab6f3a126dc89",
+      "expectedBytes": 2716,
+      "expectedSha256": "027d81568ceac73b310850cdcae749643d2d97b41515b0887117df0e1af940b7",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -69,7 +69,7 @@
       "id": "kepler-452-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1711,
-      "expectedSha256": "92c525a072f6602f3e5157a2209a806755866acee0056c63e0b48bd7996d0315",
+      "expectedSha256": "a56d0000d3f9436b4c61e5146d4f592b51e7f85d55cb35d77f1986f3b0e6ba53",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -137,38 +137,156 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "kepler-452-gaia-dr3-xp-sampled",
+      "path": "photometry/gaia-dr3-xp-sampled.csv",
+      "expectedBytes": 10152,
+      "expectedSha256": "1b47bc9321956d8904ecb395e76031ff302bddb7c0b31afe745ccfa3e53bb47a",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2079597124345617280&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Gaia DataLink XP_SAMPLED CSV for the source, saved unchanged on 2026-09-21; restored through source/preparation/acquisition.json",
+      "redistribution": "One sampled spectrum, unchanged, with acknowledgement",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-xp-kepler-452",
+            "role": "material",
+            "evidence": "src/objects/kepler-452/source/photometry/gaia-dr3-xp-sampled.csv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-452-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1145,
+      "expectedSha256": "77ce0bd1915f6bdc59c7ce55f9124033e968bbb4d59a375bbe97547f2190a81f",
+      "origin": "https://gea.esac.esa.int/archive/",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3; CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-xp-kepler-452",
+            "role": "material",
+            "evidence": "src/objects/kepler-452/source/photometry/stellar-color.json#/sampledSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-452-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-452-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "expectedBytes": 844,
+      "expectedSha256": "0d6ec7a16b39786eee1ad47808ac8676182d48fed23a68aca952bb3432418bcd",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/kepler-452/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
-      "origin": "https://arxiv.org/abs/1507.06723",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "expectedBytes": 48368,
+      "expectedSha256": "b57c7776c890bcf2f60f74543d34dd2d4a6d153be77aed3bc219af61c6809b30",
+      "origin": "https://gea.esac.esa.int/archive/",
+      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
         "inputs": [
-          "kepler-452-observational-measurements"
+          "kepler-452-stellar-color",
+          "kepler-452-gaia-dr3-xp-sampled",
+          "kepler-452-cie-1931-2deg-cmf",
+          "kepler-452-preparation-raster",
+          "kepler-452-claret-2011-v-quadratic"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2964,
-      "expectedSha256": "2f7d2369ba76ab458da58b562462f5b3dd0ef5949833c9cfbb61ddcb5d603264",
+      "expectedBytes": 3038,
+      "expectedSha256": "d560a91619e937e716a8f77827171d3c83c22266fdb866e4089cdc78c0c879f9",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -176,8 +294,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "expectedBytes": 1463,
+      "expectedSha256": "944501d83a17b9098262c5cad8a377d62006f5f635db34c3bd041896f8189d40"
     },
     {
       "path": "preparation/navigation.json",
@@ -198,6 +316,15 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 4666,
       "expectedSha256": "a4ca04840d0cf4eaa6c421b36f958684003ef4647d895c69d7e228df384d8faa"
+    },
+    {
+      "path": "reference/rendered-system.png",
+      "expectedBytes": 462276,
+      "expectedSha256": "da9beb83517172c12b79d4ea4db3899cc09166ec4247c4d45802a219a55d054e",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture of the opened planetary system, cited by the README; declared now that the reference folder holds a pinned input."
+      }
     }
   ]
 }

@@ -1,2 +1,6 @@
 # The published images and the calibrated visibilities are restored from the CDS and the JMMC OiDB; nothing is committed.
 /source/observations/*.fit
+# The archived spectrum behind the colour lens is restored from its archive by pinned URL and digest
+# (source/preparation/acquisition.json), so it is not committed.
+/source/photometry/*.dat
+/source/photometry/*.gz

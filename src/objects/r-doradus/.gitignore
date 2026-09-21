@@ -2,3 +2,7 @@
 # so it is not committed. The window cut from it is produced here and no archive serves it, so it is.
 /source/observations/*
 !/source/observations/r-doradus-alma-338ghz-0p625mas.fits
+# The archived spectrum behind the colour lens is restored from its archive by pinned URL and digest
+# (source/preparation/acquisition.json), so it is not committed.
+/source/photometry/*.dat
+/source/photometry/*.gz

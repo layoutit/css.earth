@@ -49,8 +49,8 @@
     {
       "id": "wasp-39-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 1936,
-      "expectedSha256": "0b7dac513d83b84e898837278c8ba29d6ae3a7c5d82208be1d56d8f2b65570be",
+      "expectedBytes": 2330,
+      "expectedSha256": "6fb5d31a305b9cb0e186e15081cf4f97d2b271746574a79f5490a29f07d1158d",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -69,7 +69,7 @@
       "id": "wasp-39-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1690,
-      "expectedSha256": "a64932266c7fcdb33c22c3a43b775b16797a81593c66652ad32109cee4d31a2e",
+      "expectedSha256": "54f8587480c84298251bbb06e84eb6464e5514cd6f017ef1466e406fed495191",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -137,38 +137,147 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "wasp-39-gaia-dr3-xp-sampled",
+      "path": "photometry/gaia-dr3-xp-sampled.csv",
+      "expectedBytes": 10169,
+      "expectedSha256": "d326b910dee0379f6e181db987679347a0b2b5d1829106a47ca9f3499d6f13b7",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3643098875168270592&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Gaia DataLink XP_SAMPLED CSV for the source, saved unchanged on 2026-09-21; restored through source/preparation/acquisition.json",
+      "redistribution": "One sampled spectrum, unchanged, with acknowledgement",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-xp-wasp-39",
+            "role": "material",
+            "evidence": "src/objects/wasp-39/source/photometry/gaia-dr3-xp-sampled.csv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-39-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1142,
+      "expectedSha256": "90b4877d964baa526ffeb3fb6df67339f56ca7a80bf6179c94936d6431053807",
+      "origin": "https://gea.esac.esa.int/archive/",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3; CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-xp-wasp-39",
+            "role": "material",
+            "evidence": "src/objects/wasp-39/source/photometry/stellar-color.json#/sampledSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-39-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-39-published-limb-darkening",
+      "path": "photometry/kirk-2019-limb-darkening.json",
+      "expectedBytes": 681,
+      "expectedSha256": "92430e81265e7ede96c3f5be157180dabe93997f07851880937c63dfc5e3c6b0",
+      "origin": "https://arxiv.org/abs/1908.02358",
+      "credit": "Kirk et al. (2019), LRG-BEASTS: Transmission Spectroscopy and Retrieval Analysis of the Highly Inflated Saturn-mass Planet WASP-39b, AJ 158, 144",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper's table, with each cell quoted",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published coefficients transcribed in this package with their table cells; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
-      "origin": "https://arxiv.org/abs/1802.03859",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "expectedBytes": 41735,
+      "expectedSha256": "d9481dcc452ba6514f62128f0d2127266ee753b8fd3e56868af1bb47f6412198",
+      "origin": "https://gea.esac.esa.int/archive/",
+      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
         "inputs": [
-          "wasp-39-observational-measurements"
+          "wasp-39-stellar-color",
+          "wasp-39-gaia-dr3-xp-sampled",
+          "wasp-39-cie-1931-2deg-cmf",
+          "wasp-39-preparation-raster",
+          "wasp-39-published-limb-darkening"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3060,
-      "expectedSha256": "0bb998bf8ee705bb24fd41a6cc7baabfdec6082ff9dc8be3bfecf7d04e3096ac",
+      "expectedBytes": 3122,
+      "expectedSha256": "bc40e939e457b495ebfeb77f05fae830ec8084bd63ef38d43837de48e9671c7a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -176,8 +285,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "expectedBytes": 631,
+      "expectedSha256": "606aeeb71b18c53af501666e5abade0422cc7fad9060540dc49336466decd459"
     },
     {
       "path": "preparation/navigation.json",

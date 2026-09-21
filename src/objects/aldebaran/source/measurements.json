@@ -9,6 +9,8 @@
   "radiusSource": "Radius: Limb-darkened angular diameter 20.58 ± 0.03 mas, or 44.2 ± 0.9 solar radii, from lunar occultations and VLTI/VINCI by Richichi and Roccatagliata (2005), A&A 433, 305. Adopted 30,749,940 km, 44.2000 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
   "effectiveTemperatureK": 3934,
   "effectiveTemperatureSource": "Effective temperature 3934 ± 41 K from Richichi & Roccatagliata 2005 (A&A 433, 305; https://doi.org/10.1051/0004-6361:20041765), Section 4: the lunar-occultation and VLTI/VINCI diameter with the bolometric flux.",
+  "surfaceGravityLogg": 1.21,
+  "surfaceGravitySource": "log g from the asteroseismic mass 1.16 +/- 0.07 solar masses of Farr et al. 2018 (ApJL 865, L20; https://arxiv.org/abs/1802.09812), abstract, and the package radius, log10(GM/R^2) in cgs",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

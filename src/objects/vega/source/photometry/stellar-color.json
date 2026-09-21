@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "vega",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "HST CALSPEC spectrum alpha_lyr_stis_012.fits: HST/STIS spectrophotometry of Vega on the CALSPEC flux scale (Bohlin et al. (2020), AJ 160, 21; FITS SOURCE keyword)",
+    "path": "photometry/alpha_lyr_stis_012.fits",
+    "service": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/alpha_lyr_stis_012.fits",
+    "checked": "2026-09-21",
+    "format": "fits-table",
+    "extension": "SCI",
+    "wavelength": {
+      "column": "WAVELENGTH",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "FLUX",
+      "kind": "flux"
+    },
+    "quality": {
+      "column": "DATAQUAL",
+      "good": 1
+    },
+    "gaps": [],
+    "note": "Space spectrophotometry, a CALSPEC flux standard. Between 380 and 780 nm every sample is STIS measurement. Rows with DATAQUAL 0 are left out."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

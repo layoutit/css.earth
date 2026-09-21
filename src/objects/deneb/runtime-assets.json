@@ -2,29 +2,29 @@
   "schema": "cssdeneb-runtime-assets@1",
   "assets": [
     {
-      "filename": "deneb-context-shape@2x.webp",
+      "filename": "deneb-context-color@2x.webp",
       "bytes": 100,
       "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
     },
     {
-      "filename": "deneb-lens-shape.webp",
+      "filename": "deneb-lens-color.webp",
       "bytes": 44,
-      "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
+      "sha256": "47617d3f045247caad225b39c8b6872b668f0cbe1b012ba3903eb766eb9bd015"
     },
     {
-      "filename": "deneb-limb-shape@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+      "filename": "deneb-limb-color@2x.webp",
+      "bytes": 94794,
+      "sha256": "874d021c3904dee7bdfa885cff5897b599f5c3dad94c862a3495bd1a06df6fdf"
     },
     {
-      "filename": "deneb-poles-shape@2x.webp",
+      "filename": "deneb-poles-color@2x.webp",
       "bytes": 1340,
-      "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875"
+      "sha256": "7c587f5b3e498d9e4d86957ec9e6293694850a3f92e5bebba7097f9dbfd00ad7"
     },
     {
-      "filename": "deneb-surface-shape@2x.webp",
+      "filename": "deneb-surface-color@2x.webp",
       "bytes": 178,
-      "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+      "sha256": "97efb5db938ddeb2c0a41545aadc95d262bfed8a6999d3aa378ff5b8ed9631d2"
     }
   ]
 }

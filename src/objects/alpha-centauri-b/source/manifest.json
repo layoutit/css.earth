@@ -4,8 +4,8 @@
     {
       "id": "alpha-centauri-b-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1399,
-      "expectedSha256": "4716b600232ad88a3439bf0c11fdc94c4d56004ae4c732a016e07c9ad7d3b09c",
+      "expectedBytes": 1616,
+      "expectedSha256": "b463e783ebbc71a38e66f43b3e17f06d53f4f8f6341e3e75c615b91bfe6735bb",
       "origin": "https://arxiv.org/abs/1610.06185",
       "credit": "Kervella, Bigot, Gallenne and Thévenin, \"The radii and limb darkenings of α Centauri A and B\", A&A 597, A137 (2017), arXiv:1610.06185",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +49,8 @@
     {
       "id": "alpha-centauri-b-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2008,
-      "expectedSha256": "250aafb808c5cfabec364a4f7b39a0975cecf605f805c8e2d3a8fde1cf43cc80",
+      "expectedBytes": 2787,
+      "expectedSha256": "dd3aa263437b9f3ef1947121be7dbfd79c9ef00559032e36c64c960fc15cc912",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -69,7 +69,7 @@
       "id": "alpha-centauri-b-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1753,
-      "expectedSha256": "b0c5c0b06def7ef16e047ad0ef86fb6c45c84b3960d72b3f34264730f296e1ea",
+      "expectedSha256": "197060f2fe73f416e84b511006e7eaa560b6134ee0b519bb81f13e9f18546176",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -137,38 +137,156 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "alpha-centauri-b-kiehling-1987",
+      "path": "photometry/kiehling-1987.tsv",
+      "expectedBytes": 6146,
+      "expectedSha256": "6850c96c874c723d879fc51ab587bdffed14d0bae2fa38abdb59893d88f0a971",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for III/124/spectra, columns lambda and m(HR5460), with the response's dated comment lines and blank lines removed so the bytes are stable; saved 2026-09-21; restored through source/preparation/acquisition.json.",
+      "redistribution": "One catalogue column, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-124-kiehling-hr5460",
+            "role": "material",
+            "evidence": "src/objects/alpha-centauri-b/source/photometry/kiehling-1987.tsv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alpha-centauri-b-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1058,
+      "expectedSha256": "2eed57aa91ced34880a0d01981d5df9e601fb6454f2938511033aa427be70eba",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124",
+      "credit": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-124-kiehling-hr5460",
+            "role": "material",
+            "evidence": "src/objects/alpha-centauri-b/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alpha-centauri-b-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alpha-centauri-b-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "expectedBytes": 844,
+      "expectedSha256": "1ee5f6833081215db08b7bcfe274da0043bc0f775497b35a24fc863d3e1f71f0",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/alpha-centauri-b/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
-      "origin": "https://arxiv.org/abs/1610.06185",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "expectedBytes": 50794,
+      "expectedSha256": "cc8062ec30117c6b65a886278fcd9873766fb8d5bedacc57cb34e558ad58c705",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124",
+      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
         "inputs": [
-          "alpha-centauri-b-observational-measurements"
+          "alpha-centauri-b-stellar-color",
+          "alpha-centauri-b-kiehling-1987",
+          "alpha-centauri-b-cie-1931-2deg-cmf",
+          "alpha-centauri-b-preparation-raster",
+          "alpha-centauri-b-claret-2011-v-quadratic"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2938,
-      "expectedSha256": "f9f6c3094854fd6d88a2184ffb7b22c4d07b44125c6fbfe5286e089a7f469749",
+      "expectedBytes": 3228,
+      "expectedSha256": "fe771ea8bef3f2b93ca474e291d757dded692ba81c3c66e02b9a92d73de13ae5",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -176,8 +294,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "expectedBytes": 1797,
+      "expectedSha256": "be2e75170ed51cdf98a8bff17b15653093de98259b246365fa27c0f164c9fec9"
     },
     {
       "path": "preparation/navigation.json",

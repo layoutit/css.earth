@@ -1,14 +1,17 @@
-// A uniform photosphere colour for a star with no image: its measured Gaia XP spectrum where one is published, otherwise a Planck
-// spectrum at its catalogued photometric effective temperature, through the CIE 1931 2° observer into sRGB (D65 white), scaled so
-// the brightest linear channel is 1. A self-luminous disc shows chromaticity only; its brightness is not modelled. Limb darkening is
-// drawn only where a measurement gives it (below).
+// A photosphere colour for a star with no image: its measured spectrum (Gaia XP, or an archived spectrophotometric file) where one
+// is published, otherwise a Planck spectrum at its catalogued photometric effective temperature, through the CIE 1931 2° observer
+// into sRGB (D65 white), scaled so the brightest linear channel is 1. A self-luminous disc shows chromaticity only; its brightness
+// is not modelled. Limb darkening is drawn where a measurement gives it, or from a named model grid (below).
 import { requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { linearToSrgb } from '../color-transfer.mts';
+import { gunzipSync } from 'node:zlib';
+import { binaryTable, numbers, readFitsHdus, tableColumn } from '../interferometry/fits-table.mts';
 
 export type StellarColorRecord = {
   readonly spectrum: 'planck'; readonly temperaturePath: string; readonly sourceId: string;
   readonly columns: { readonly value: string; readonly lower: string; readonly upper: string };
-} | { readonly spectrum: 'gaia-xp-sampled'; readonly spectrumPath: string; readonly sourceId: string };
+} | { readonly spectrum: 'gaia-xp-sampled'; readonly spectrumPath: string; readonly sourceId: string }
+  | { readonly spectrum: 'measured'; readonly measured: MeasuredSpectrumRecord };
 export interface StellarTemperature { readonly kelvin: number; readonly lowerKelvin: number; readonly upperKelvin: number }
 export interface StellarColor { readonly linear: readonly [number, number, number]; readonly srgb: readonly [number, number, number] }
 
@@ -16,6 +19,10 @@ export function parseStellarColorRecord(value: unknown): StellarColorRecord {
   const input = requireRecord(value, 'stellar colour record');
   if (input.schema !== 'cssearth-stellar-photometric-color@1') throw new TypeError('The stellar colour record must use cssearth-stellar-photometric-color@1.');
   const integer = (id: string) => { if (!/^\d+$/u.test(id)) throw new TypeError('The catalogue source id must be an integer string.'); return id; };
+  if (input.spectrum === 'measured') {
+    if (input.temperature !== undefined) throw new TypeError('A colour from a measured spectrum takes no temperature.');
+    return { spectrum: 'measured', measured: parseMeasuredSpectrumRecord(input.measuredSpectrum) };
+  }
   if (input.spectrum === 'gaia-xp-sampled') {
     if (input.temperature !== undefined) throw new TypeError('A colour from a measured spectrum takes no temperature.');
     const spectrum = requireRecord(input.sampledSpectrum, 'sampledSpectrum');
@@ -48,8 +55,8 @@ export function readStellarTemperature(csv: string, record: Extract<StellarColor
 const XYZ_TO_LINEAR_SRGB = [[3.2404542, -1.5371385, -0.4985314], [-0.969266, 1.8760108, 0.041556], [0.0556434, -0.2040259, 1.0572252]] as const;
 const PLANCK_H = 6.62607015e-34, LIGHT_C = 299792458, BOLTZMANN_K = 1.380649e-23;
 
-/** Spectral power at each wavelength (nm) through the observer into sRGB, brightest linear channel 1. */
-function spectrumColor(wavelengths: readonly number[], power: (wavelength: number) => number, colorMatching: Map<number, readonly number[]>, label: string): StellarColor {
+/** Linear sRGB of a spectrum before any normalisation: absolute, so two spectra keep their relative brightness. */
+export function spectrumLinearSrgb(wavelengths: readonly number[], power: (wavelength: number) => number, colorMatching: Map<number, readonly number[]>): [number, number, number] {
   const xyz = [0, 0, 0];
   for (const wavelength of wavelengths) {
     const observer = colorMatching.get(wavelength);
@@ -57,7 +64,18 @@ function spectrumColor(wavelengths: readonly number[], power: (wavelength: numbe
     const value = power(wavelength);
     for (let channel = 0; channel < 3; channel++) xyz[channel] += value * observer[channel]!;
   }
-  const raw = XYZ_TO_LINEAR_SRGB.map(row => row[0] * xyz[0]! + row[1] * xyz[1]! + row[2] * xyz[2]!);
+  return XYZ_TO_LINEAR_SRGB.map(row => row[0] * xyz[0]! + row[1] * xyz[1]! + row[2] * xyz[2]!) as [number, number, number];
+}
+
+/** The Planck spectrum's absolute linear sRGB at a temperature (the visible range at 1 nm), for brightness ratios between temperatures. */
+export function planckLinearSrgb(kelvin: number, colorMatching: Map<number, readonly number[]>): [number, number, number] {
+  return spectrumLinearSrgb(Array.from({ length: 401 }, (_, i) => 380 + i), wavelength => {
+    const metres = wavelength * 1e-9; return 1 / (metres ** 5 * Math.expm1(PLANCK_H * LIGHT_C / (metres * BOLTZMANN_K * kelvin))); }, colorMatching);
+}
+
+/** Spectral power at each wavelength (nm) through the observer into sRGB, brightest linear channel 1. */
+function spectrumColor(wavelengths: readonly number[], power: (wavelength: number) => number, colorMatching: Map<number, readonly number[]>, label: string): StellarColor {
+  const raw = spectrumLinearSrgb(wavelengths, power, colorMatching);
   const peak = Math.max(...raw);
   const linear = raw.map(value => value / peak) as [number, number, number];
   if (linear.some(value => value < 0)) throw new TypeError(`${label} falls outside the sRGB gamut: ${linear.join(', ')}.`);
@@ -122,6 +140,7 @@ export async function loadStellarPhotometricColor(read: (path: string) => Promis
     const recipe = parseLimbDarkeningRecipe(science.limbDarkening);
     if (recipe.source === 'table') return { recipe, coefficients: readQuadraticLimbDarkening((await read(recipe.path)).toString('utf8'), recipe) };
     if (recipe.source === 'grid') return { recipe, coefficients: interpolateQuadraticLimbDarkening((await read(recipe.path)).toString('utf8'), recipe) };
+    if (recipe.source === 'published') return { recipe, coefficients: readPublishedLimbDarkening(JSON.parse((await read(recipe.path)).toString('utf8'))) };
     const [{ readTessLightCurve, fitTransitLimbDarkening }, { BODIES, HOSTED_PLANET_IDS, STAR_IDS, hostedOrbit, starAstrometry }] =
       await Promise.all([import('../eclipse-map/transit-limb-darkening.mts'), import('@cssearth/astronomy')]);
     if (!(HOSTED_PLANET_IDS as readonly string[]).includes(recipe.planet)) throw new TypeError(`Limb darkening from transits needs a hosted planet: ${recipe.planet}.`);
@@ -142,9 +161,157 @@ export async function loadStellarPhotometricColor(read: (path: string) => Promis
       range: [xpSampledColor(spectrum.flux.map((value, i) => Math.max(Number.MIN_VALUE, value - spectrum.fluxError[i]!)), colorMatching),
         xpSampledColor(spectrum.flux.map((value, i) => Math.max(Number.MIN_VALUE, value + spectrum.fluxError[i]!)), colorMatching)] as const };
   }
+  if (record.spectrum === 'measured') {
+    const spectrum = readMeasuredSpectrum(await read(record.measured.path), record.measured);
+    return { temperature: null, spectrum: { samples: spectrum.wavelengthsNm.length }, color: measuredSpectrumColor(spectrum, colorMatching, record.measured.gaps), limbDarkening,
+      range: null };
+  }
   const temperature = readStellarTemperature((await read(record.temperaturePath)).toString('utf8'), record);
   return { temperature, spectrum: null, color: planckColor(temperature.kelvin, colorMatching), limbDarkening,
     range: [planckColor(temperature.lowerKelvin, colorMatching), planckColor(temperature.upperKelvin, colorMatching)] as const };
+}
+
+// A measured, flux-calibrated spectrum from an archive or a published catalogue, read in the file's own layout. Only its shape
+// matters: the colour is normalised to its brightest channel, so relative calibration is enough.
+// - fits-table: a FITS binary table with one sample per row (CALSPEC, the STIS Next Generation Spectral Library).
+// - fits-table-array: a FITS binary table whose one row holds every sample in array cells (X-shooter Spectral Library, LAMOST).
+// - tsv-columns: a VizieR ASU tab-separated response with one row per wavelength; the column names come first and any unit or
+//   dash rows under them are skipped (Kiehling 1987, Burnashev 1985).
+// - pulkovo-blocks: the Pulkovo catalogue's raw flux file (VizieR III/201 table5.dat), blocks of seven stars introduced by their HR
+//   numbers, each line a wavelength in nm and the seven fluxes; `flux.column` names the HR number.
+// - burnashev-records: the raw file of Burnashev's spectrophotometric compilation (VizieR III/126 part2.dat), one scan per line: a
+//   name in bytes 1-19, then from byte 59 pairs of a wavelength in tenths of a nanometre (I4) and log10 of the flux (F9.6), with
+//   -9.999999 for no data; `flux.column` is the record number, which is the line number.
+// A file stored gzip-compressed, as the archive serves it, is read through gunzip. Photometric scans published as magnitudes are
+// read as flux 10^(-0.4 m), and logarithmic fluxes as 10^value. Samples inside 380-780 nm are averaged into 1 nm bins; a
+// bin with no sample takes the straight line between neighbours within 5 nm. A longer stretch with no data inside the visible
+// range must be declared as a gap, with the reason, or the record fails.
+export interface MeasuredSpectrumRecord {
+  readonly path: string;
+  readonly format: 'fits-table' | 'fits-table-array' | 'tsv-columns' | 'pulkovo-blocks' | 'burnashev-records';
+  /** FITS: the extension name, or its HDU number when it has none. */
+  readonly extension?: string;
+  readonly wavelength: { readonly column: string; readonly unit: 'angstrom' | 'nm' | 'um' };
+  readonly flux: { readonly column: string; readonly kind: 'flux' | 'magnitude' | 'log10'; readonly missing?: number };
+  /** FITS rows (or array samples) whose quality value differs from `good` are left out. */
+  readonly quality?: { readonly column: string; readonly good: number };
+  readonly gaps: readonly { readonly fromNm: number; readonly toNm: number; readonly reason: string }[];
+}
+
+const FORMATS = ['fits-table', 'fits-table-array', 'tsv-columns', 'pulkovo-blocks', 'burnashev-records'] as const;
+export function parseMeasuredSpectrumRecord(value: unknown): MeasuredSpectrumRecord {
+  const input = requireRecord(value, 'measuredSpectrum');
+  const format = requireString(input.format, 'measuredSpectrum.format');
+  if (!(FORMATS as readonly string[]).includes(format)) throw new TypeError(`Unknown measured spectrum format ${format}.`);
+  const wavelength = requireRecord(input.wavelength, 'measuredSpectrum.wavelength'), flux = requireRecord(input.flux, 'measuredSpectrum.flux');
+  const unit = requireString(wavelength.unit, 'measuredSpectrum.wavelength.unit'), kind = requireString(flux.kind, 'measuredSpectrum.flux.kind');
+  if (!['angstrom', 'nm', 'um'].includes(unit)) throw new TypeError(`Unknown wavelength unit ${unit}.`);
+  if (!['flux', 'magnitude', 'log10'].includes(kind)) throw new TypeError(`Unknown flux kind ${kind}.`);
+  const gaps = (input.gaps === undefined ? [] : input.gaps as unknown[]).map(gap => {
+    const record = requireRecord(gap, 'gap'), fromNm = requireFiniteNumber(record.fromNm, 'gap.fromNm'), toNm = requireFiniteNumber(record.toNm, 'gap.toNm');
+    if (!(fromNm < toNm)) throw new TypeError('A gap runs from a shorter to a longer wavelength.');
+    return { fromNm, toNm, reason: requireString(record.reason, 'gap.reason') };
+  });
+  const quality = input.quality === undefined ? undefined : requireRecord(input.quality, 'measuredSpectrum.quality');
+  if (format.startsWith('fits') && input.extension === undefined) throw new TypeError('A FITS spectrum names its extension.');
+  return { path: requireString(input.path, 'measuredSpectrum.path'), format: format as MeasuredSpectrumRecord['format'],
+    ...(input.extension === undefined ? {} : { extension: requireString(input.extension, 'measuredSpectrum.extension') }),
+    wavelength: { column: requireString(wavelength.column, 'wavelength.column'), unit: unit as MeasuredSpectrumRecord['wavelength']['unit'] },
+    flux: { column: requireString(flux.column, 'flux.column'), kind: kind as MeasuredSpectrumRecord['flux']['kind'],
+      ...(flux.missing === undefined ? {} : { missing: requireFiniteNumber(flux.missing, 'flux.missing') }) },
+    ...(quality ? { quality: { column: requireString(quality.column, 'quality.column'), good: requireFiniteNumber(quality.good, 'quality.good') } } : {}), gaps };
+}
+
+const NM_PER_UNIT = { angstrom: 0.1, nm: 1, um: 1000 } as const;
+
+/** Wavelengths (nm, ascending) and flux of the spectrum, in the file's own layout. */
+export function readMeasuredSpectrum(stored: Buffer, record: MeasuredSpectrumRecord): { wavelengthsNm: number[]; flux: number[] } {
+  const bytes = stored[0] === 0x1f && stored[1] === 0x8b ? gunzipSync(stored) : stored;
+  const samples: [number, number][] = [];
+  const toFlux = (value: number) => record.flux.kind === 'magnitude' ? 10 ** (-0.4 * value) : record.flux.kind === 'log10' ? 10 ** value : value;
+  const add = (wavelength: number, value: number) => {
+    if (record.flux.missing !== undefined && value === record.flux.missing) return;
+    samples.push([wavelength * NM_PER_UNIT[record.wavelength.unit], toFlux(value)]);
+  };
+  if (record.format === 'tsv-columns') {
+    const lines = bytes.toString('utf8').split(/\r?\n/u).filter(line => line.trim() && !line.startsWith('#'));
+    const header = lines[0]!.split('\t').map(name => name.trim());
+    const w = header.indexOf(record.wavelength.column), f = header.indexOf(record.flux.column);
+    if (w < 0 || f < 0) throw new TypeError(`The table lacks ${record.wavelength.column} or ${record.flux.column}.`);
+    for (const line of lines.slice(1)) {
+      const cells = line.split('\t'), wavelength = Number(cells[w]), value = Number(cells[f]);
+      if (cells[w]!.trim() === '' || !Number.isFinite(wavelength)) continue; // unit and dash rows
+      if (cells[f]!.trim() === '') continue;
+      add(wavelength, requireFiniteNumber(value, record.flux.column));
+    }
+  } else if (record.format === 'burnashev-records') {
+    const line = bytes.toString('latin1').split(/\r?\n/u)[Number(record.flux.column) - 1];
+    if (!line) throw new TypeError(`The Burnashev file has no record ${record.flux.column}.`);
+    for (let offset = 58; offset + 13 <= line.length; offset += 13) {
+      const wavelength = line.slice(offset, offset + 4).trim(), value = line.slice(offset + 4, offset + 13).trim();
+      if (!wavelength) continue;
+      add(requireFiniteNumber(Number(wavelength), 'Burnashev wavelength'), requireFiniteNumber(Number(value), 'Burnashev flux'));
+    }
+  } else if (record.format === 'pulkovo-blocks') {
+    let column = -1;
+    for (const line of bytes.toString('latin1').split(/\r?\n/u)) {
+      const fields = line.trim().split(/\s+/u).filter(Boolean);
+      if (!fields.length) continue;
+      if (/^ {8}/u.test(line)) { column = fields.indexOf(record.flux.column); continue; }
+      if (column < 0) continue;
+      if (fields.length < column + 2) throw new TypeError(`A Pulkovo flux line is short: ${line}`);
+      add(requireFiniteNumber(Number(fields[0]), 'Pulkovo wavelength'), requireFiniteNumber(Number(fields[column + 1]), 'Pulkovo flux'));
+    }
+  } else {
+    // An unnamed extension is named by its HDU number (the primary HDU is 0).
+    const hdus = readFitsHdus(bytes), hdu = /^\d+$/u.test(record.extension!) ? hdus[Number(record.extension)] : hdus.find(item => item.extname === record.extension);
+    if (!hdu) throw new TypeError(`The FITS file has no ${record.extension ?? '(unnamed)'} extension.`);
+    const table = binaryTable(hdu), wavelength = tableColumn(table, record.wavelength.column), flux = tableColumn(table, record.flux.column);
+    const quality = record.quality ? tableColumn(table, record.quality.column) : undefined;
+    if (record.format === 'fits-table-array') {
+      if (table.rows !== 1) throw new TypeError('An array spectrum holds its samples in one row.');
+      const w = numbers(bytes, table, 0, wavelength), f = numbers(bytes, table, 0, flux), q = quality ? numbers(bytes, table, 0, quality) : undefined;
+      if (w.length !== f.length) throw new TypeError('The wavelength and flux arrays differ in length.');
+      w.forEach((value, i) => { if (!q || q[i] === record.quality!.good) add(value, f[i]!); });
+    } else {
+      for (let row = 0; row < table.rows; row++) {
+        if (quality && numbers(bytes, table, row, quality)[0] !== record.quality!.good) continue;
+        add(numbers(bytes, table, row, wavelength)[0]!, numbers(bytes, table, row, flux)[0]!);
+      }
+    }
+  }
+  const finite = samples.filter(([w, f]) => Number.isFinite(w) && Number.isFinite(f)).sort((a, b) => a[0] - b[0]);
+  if (finite.length < 2) throw new TypeError('The spectrum has fewer than two samples.');
+  return { wavelengthsNm: finite.map(sample => sample[0]), flux: finite.map(sample => sample[1]) };
+}
+
+/** Samples averaged into 1 nm bins from 380 to 780 nm; a bin without samples is interpolated from its neighbours, which must lie
+ * within 5 nm unless the bin is inside a declared gap. The ends extend only through a declared gap. */
+export function binMeasuredSpectrum(spectrum: { wavelengthsNm: readonly number[]; flux: readonly number[] }, gaps: MeasuredSpectrumRecord['gaps'] = []) {
+  const wavelengths = Array.from({ length: 401 }, (_, i) => 380 + i), inGap = (w: number) => gaps.some(gap => w >= gap.fromNm && w <= gap.toNm);
+  const { wavelengthsNm: w, flux: f } = spectrum, binned = new Map<number, number>();
+  for (const centre of wavelengths) {
+    let sum = 0, count = 0;
+    for (let i = 0; i < w.length; i++) if (w[i]! >= centre - 0.5 && w[i]! < centre + 0.5) { sum += f[i]!; count++; }
+    if (count) binned.set(centre, sum / count);
+  }
+  return wavelengths.map(centre => {
+    const value = binned.get(centre);
+    if (value !== undefined) return value;
+    const after = w.findIndex(value => value >= centre), before = after - 1;
+    const near = (index: number) => index >= 0 && index < w.length && Math.abs(w[index]! - centre) <= 5;
+    if (near(before) && near(after)) return f[before]! + (f[after]! - f[before]!) * (centre - w[before]!) / (w[after]! - w[before]!);
+    if (!inGap(centre)) throw new TypeError(`The spectrum has no sample near ${centre} nm and no declared gap there.`);
+    if (before >= 0 && after >= 0 && after < w.length) return f[before]! + (f[after]! - f[before]!) * (centre - w[before]!) / (w[after]! - w[before]!);
+    return after < 0 || after >= w.length ? f[w.length - 1]! : f[0]!;
+  });
+}
+
+export function measuredSpectrumColor(spectrum: { wavelengthsNm: readonly number[]; flux: readonly number[] }, colorMatching: Map<number, readonly number[]>,
+  gaps: MeasuredSpectrumRecord['gaps'] = []): StellarColor {
+  const binned = binMeasuredSpectrum(spectrum, gaps);
+  if (binned.some(value => !(value > 0))) throw new TypeError('The measured spectrum must be positive across the visible range.');
+  return spectrumColor(binned.map((_, i) => 380 + i), wavelength => binned[wavelength - 380]!, colorMatching, 'The measured spectrum colour');
 }
 
 // Limb darkening measured from a transiting planet: the planet crosses the disc and the depth of the transit at each point measures
@@ -158,6 +325,10 @@ export type LimbDarkeningRecipe = {
 } | {
   /** Fitted here to the planet's transits in pinned TESS light curves (tools/objects/eclipse-map/transit-limb-darkening.mts). */
   readonly law: 'quadratic'; readonly source: 'tess-transits'; readonly planet: string; readonly lightCurves: readonly string[];
+} | {
+  /** Coefficients a paper fitted to its own data but published only in its text (no machine-readable table): a transcription
+   * record at `path` holds each value with its uncertainty and the quoted table cell. */
+  readonly law: 'quadratic'; readonly source: 'published'; readonly path: string;
 } | {
   /** A theoretical grid by effective temperature and surface gravity (a VizieR table of model-atmosphere coefficients), for a
    * star no measurement covers: bilinear between the four grid nodes around the star's own temperature and gravity, among the
@@ -177,6 +348,10 @@ export function parseLimbDarkeningRecipe(value: unknown): LimbDarkeningRecipe {
     }
     return { law: 'quadratic', source: 'tess-transits', planet: requireString(transits.planet, 'limbDarkening.transits.planet'),
       lightCurves: transits.lightCurves.map((path, i) => requireString(path, `limbDarkening.transits.lightCurves.${i}`)) };
+  }
+  if (input.published !== undefined) {
+    if (input.published !== true || input.columns !== undefined) throw new TypeError('Published limb darkening names its transcription record and no table columns.');
+    return { law: 'quadratic', source: 'published', path: requireString(input.path, 'limbDarkening.path') };
   }
   const columns = requireRecord(input.columns, 'limbDarkening.columns');
   const column = (name: string) => requireString(columns[name], `limbDarkening.columns.${name}`);
@@ -215,7 +390,12 @@ export function interpolateQuadraticLimbDarkening(tsv: string, recipe: Extract<L
   const nodes = rows.filter(row => Object.entries(recipe.models).every(([key, value]) => row[index(key)] === value))
     .map(row => ({ teff: Number(row[index(recipe.columns.teff)]), logg: Number(row[index(recipe.columns.logg)]), u1: Number(row[index(recipe.columns.u1)]), u2: Number(row[index(recipe.columns.u2)]) }));
   const teffs = [...new Set(nodes.map(node => node.teff))].sort((a, b) => a - b), loggs = [...new Set(nodes.map(node => node.logg))].sort((a, b) => a - b);
-  const bracket = (values: number[], value: number) => { const hi = values.findIndex(v => v >= value); if (hi <= 0) throw new RangeError(`${value} is outside the grid ${values.join(', ')}.`); return [values[hi - 1]!, values[hi]!] as const; };
+  // The two nodes around the value; a value on a node, the first one included, is inside the grid.
+  const bracket = (values: number[], value: number) => {
+    const lo = values.findIndex((v, i) => v <= value && i + 1 < values.length && values[i + 1]! >= value);
+    if (lo < 0) throw new RangeError(`${value} is outside the grid ${values.join(', ')}.`);
+    return [values[lo]!, values[lo + 1]!] as const;
+  };
   const [t0, t1] = bracket(teffs, recipe.teffK), [g0, g1] = bracket(loggs, recipe.logg), ft = (recipe.teffK - t0) / (t1 - t0), fg = (recipe.logg - g0) / (g1 - g0);
   const node = (t: number, g: number) => { const found = nodes.filter(n => n.teff === t && n.logg === g); if (found.length !== 1) throw new TypeError(`The grid must hold exactly one node at ${t} K, log g ${g}.`); return found[0]!; };
   const corners = [node(t0, g0), node(t1, g0), node(t0, g1), node(t1, g1)], weights = [(1 - ft) * (1 - fg), ft * (1 - fg), (1 - ft) * fg, ft * fg];
@@ -224,6 +404,23 @@ export function interpolateQuadraticLimbDarkening(tsv: string, recipe: Extract<L
   checkLimb(u1, u2);
   return { u1, u2, u1Bounds: [Math.min(...corners.map(c => c.u1)), Math.max(...corners.map(c => c.u1))], u2Bounds: [Math.min(...corners.map(c => c.u2)), Math.max(...corners.map(c => c.u2))] };
 }
+/** A transcription record (cssearth-published-limb-darkening@1): u1 and u2 with their one-sigma uncertainties, the band, the
+ * source and the quoted cells. A coefficient the paper fixed to a model says so in `fixed`, and carries no uncertainty. */
+export function readPublishedLimbDarkening(value: unknown): QuadraticLimbDarkening {
+  const record = requireRecord(value, 'published limb darkening');
+  if (record.schema !== 'cssearth-published-limb-darkening@1') throw new TypeError('Published limb darkening must use cssearth-published-limb-darkening@1.');
+  requireString(record.source, 'source'); requireString(record.band, 'band');
+  const coefficient = (key: 'u1' | 'u2') => {
+    const entry = requireRecord(record[key], key), value = requireFiniteNumber(entry.value, `${key}.value`);
+    if (entry.fixed !== undefined) { requireString(entry.fixed, `${key}.fixed`); return { value, bounds: [value, value] as const }; }
+    const sigma = requireFiniteNumber(entry.uncertainty, `${key}.uncertainty`); requireString(entry.cell, `${key}.cell`);
+    return { value, bounds: [value - sigma, value + sigma] as const };
+  };
+  const u1 = coefficient('u1'), u2 = coefficient('u2');
+  checkLimb(u1.value, u2.value);
+  return { u1: u1.value, u2: u2.value, u1Bounds: u1.bounds, u2Bounds: u2.bounds };
+}
+
 function checkLimb(u1: number, u2: number) {
   if (!(quadraticIntensity(0, u1, u2) >= 0 && quadraticIntensity(0, u1, u2) <= 1)) throw new TypeError('The limb-darkening law must keep the limb between dark and the centre brightness.');
 }
