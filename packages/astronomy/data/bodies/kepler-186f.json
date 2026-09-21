@@ -9,7 +9,7 @@
   "gravitationalParameterKm3PerS2": 0,
   "parent": "kepler-186"
  },
- "physicalNotes": "Radius 1.17 (+0.08) Earth radii from Torres et al. 2015 (ApJ 800, 99 (2015); arXiv:1501.01101), at 6378.137 km per Earth radius. No mass is measured, so no gravitational parameter is adopted. A sphere: no oblateness is measured.",
+ "physicalNotes": "Radius 1.17 ± 0.08 Earth radii from Torres et al. 2015 (ApJ 800, 99 (2015); arXiv:1501.01101), at 6378.137 km per Earth radius. No mass is measured, so no gravitational parameter is adopted. A sphere: no oblateness is measured.",
  "hostedOrbit": {
   "periodDays": 129.9441,
   "semiMajorAxisStellarRadii": 178.0,

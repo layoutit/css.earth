@@ -9,8 +9,16 @@
         "url": "https://arxiv.org/abs/0801.1841",
         "label": "Torres et al. 2008",
         "checked": "2026-09-21",
-        "locator": "Table 2, row 3 HD 209458",
-        "quote": "3.524746"
+        "locator": "Table 5, row HD 209458",
+        "quote": "1.359_{-0.019}^{+0.016}"
+      },
+      {
+        "catalogueId": "arxiv-astro-ph-9911436",
+        "url": "https://arxiv.org/abs/astro-ph/9911436",
+        "label": "Charbonneau et al. 2000",
+        "checked": "2026-09-21",
+        "locator": "Abstract",
+        "quote": "We detect two separate transit events"
       }
     ]
   },
@@ -22,8 +30,16 @@
         "url": "https://arxiv.org/abs/0801.1841",
         "label": "Torres et al. 2008",
         "checked": "2026-09-21",
-        "locator": "Table 2, row 3 HD 209458",
-        "quote": "3.524746"
+        "locator": "Table 5, row HD 209458",
+        "quote": "1.359_{-0.019}^{+0.016}"
+      },
+      {
+        "catalogueId": "arxiv-astro-ph-9911436",
+        "url": "https://arxiv.org/abs/astro-ph/9911436",
+        "label": "Charbonneau et al. 2000",
+        "checked": "2026-09-21",
+        "locator": "Abstract",
+        "quote": "We detect two separate transit events"
       }
     ]
   },
@@ -31,7 +47,7 @@
     "shape": {
       "title": "Shape only",
       "detail": "Published radius",
-      "summary": "A gray sphere of the measured radius. No colour, surface or atmosphere of this planet is observed."
+      "summary": "A gray sphere of the measured radius. No colour or surface is observed; its atmosphere is measured in transmission."
     }
   }
 }

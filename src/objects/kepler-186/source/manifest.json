@@ -4,8 +4,8 @@
     {
       "id": "kepler-186-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1517,
-      "expectedSha256": "b4ec62bb037f3c6237d7bfebd2ce625486b0941fca13c639906ab9c1a50c3e5e",
+      "expectedBytes": 1535,
+      "expectedSha256": "2c7c4d337a30c9642636bda292a208627eebff954d28408473cfe0523150a7ad",
       "origin": "https://arxiv.org/abs/1501.01101",
       "credit": "G. Torres et al., \"Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone\", ApJ 800, 99 (2015), arXiv:1501.01101",
       "license": "Factual numerical measurements; source attribution retained",
@@ -304,8 +304,8 @@
     },
     {
       "path": "preparation/rotation.json",
-      "expectedBytes": 927,
-      "expectedSha256": "facdb3feb2f7b271891a543dc1132f25021d36dc8d6eeef0b47f0993d484dcf7"
+      "expectedBytes": 1067,
+      "expectedSha256": "71a2a67005fc39a952f5961f5fcd952b223395dec9b9176c13cd592d0c63fe46"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

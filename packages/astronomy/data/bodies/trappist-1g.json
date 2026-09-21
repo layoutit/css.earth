@@ -11,16 +11,16 @@
   },
   "physicalNotes": "Radius 7.204e8 cm and mass 7.890e27 g from Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 6, which combines their transit-timing masses with the photodynamic radius ratios and the Mann et al. (2019) stellar mass. GM from that mass and the CODATA gravitational constant 6.67430e-20 km^3 kg^-1 s^-2. A sphere: no oblateness of these planets is measured.",
   "hostedOrbit": {
-    "periodDays": 12.352446,
+    "periodDays": 12.3528773,
     "semiMajorAxisStellarRadii": 84.591,
     "inclinationDegrees": 89.742,
     "eccentricity": 0,
-    "transitTimeBmjdTdb": 57257.21462,
+    "transitTimeBmjdTdb": 61284.39496,
     "ascendingNodePositionAngleDegrees": 0,
     "sources": {
-      "period": "Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 2 (transit-timing analysis): 12.352446 d",
+      "period": "Agol et al. (2024, arXiv:2409.11620), the forecast transit times in the data behind their Figure 1 (T1_forecast_JWST_chi_19Aug2024.csv), which add 23 JWST timings to the Agol et al. (2021) transit-timing model: the least-squares slope of its 56 forecast transits within a year of the scene epoch (2026-09-03) is 12.3528773 d; drawn through the transit nearest that epoch, the line departs from the forecast transits by -37.5 to +17.8 min (transit-timing variations, not drawn).",
       "shape": "Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 5 (photodynamic model): a/R* 84.591, inclination 89.742 degrees. Eccentricity is set to 0: their Table 2 gives |e| = 0.00401 for this planet. This record retains a circular display approximation; it is not an eccentric orbital solution or an error bound on the planet position.",
-      "phase": "Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 2: t0 = BJD_TDB 2457257.71462, the transit time of the osculating elements at the start of their photodynamic model, here BMJD_TDB 57257.21462. Transit-timing variations of up to about half an hour are not modelled.",
+      "phase": "Agol et al. (2024, arXiv:2409.11620), the forecast transit times in the data behind their Figure 1 (T1_forecast_JWST_chi_19Aug2024.csv), which add 23 JWST timings to the Agol et al. (2021) transit-timing model: forecast transit 326 at BJD_TDB 2461284.89496 (± 134 s), here BMJD_TDB 61284.39496, the transit nearest the scene epoch. The 2021 osculating elements carried forward put this planet 6.8 h early at that epoch.",
       "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
     }
   }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "34b18b4c788577b5572096c6bd27cce8fb0be261707dc58f4bb862f049d4a27d"
+    "sha256": "3659909072c35f582c3ba34f037394443c57a147e38aaf996e8af1bff77ed087"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "a49a0204607f8a00958f0fddd2c85eb805bc03273b264e52046f6bf141dadc07",
+      "sha256": "ff654210e1ef4279f653a407267d35f6ea8f4f64499ffe51e9e7415fb6e92fa0",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/k2-18/",
@@ -53,7 +53,7 @@
                 "path": "photometry/claret-2011-v-quadratic.tsv",
                 "grid": {
                   "teffK": 3457,
-                  "logg": 4.77,
+                  "logg": 4.84,
                   "models": {
                     "Filt": "V",
                     "Met": "L",
@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/k2-18/k2-18-limb-color@2x.webp",
-          "bytes": 102554,
-          "sha256": "9440ce35843781b375a69a8bee798b4003509c082f05f96e45cec02480fe08e6",
+          "bytes": 102250,
+          "sha256": "10fa1e4c81dacf8c61f30c1d95a57ad6a61477163d90066d895997862ce25c23",
           "verification": "bytes-verified"
         }
       ],
@@ -466,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "k2-18",
-    "materialSha256": "bd8be277430e776683b12970023e4bd5d56ab2ef2f3f8646f856e57a035233ab",
+    "materialSha256": "078341c0f7fe916034e313a53dc80d3c1f1a86057fdb2044cdb04ed21902cae4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

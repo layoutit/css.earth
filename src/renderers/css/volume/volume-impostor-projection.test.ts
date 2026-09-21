@@ -72,3 +72,19 @@ test('turning in place keeps the same views; moving around the volume selects ne
   const moved = projectVolumeImpostors({ ...p, world: { ...p.world, pose: { positionM: [10, 0, 0], orientationXyzw: [0, Math.sin(Math.PI / 4), 0, Math.cos(Math.PI / 4)] } } }, frame, bank);
   expect(moved.views.map(view => view.id)).toEqual(['right']);
 });
+test('a distant cloud beside or behind the camera is neither near nor visible', () => {
+  const p = publication(100);
+  // Turned to face along +x, the cloud at the origin sits 90° off-axis at distance 100: depth is zero.
+  const beside = projectVolumeImpostors({ ...p, world: { ...p.world, pose: { ...p.world.pose, orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2] } } }, frame, bank);
+  expect(beside.visible).toBe(false); expect(Number.isFinite(beside.diameterPixels)).toBe(true); expect(beside.volumeMix).toBe(0);
+  expect(beside.views).toEqual([]);
+  // Facing away from it.
+  const behind = projectVolumeImpostors({ ...p, world: { ...p.world, pose: { ...p.world.pose, orientationXyzw: [0, 1, 0, 0] } } }, frame, bank);
+  expect(behind.visible).toBe(false); expect(behind.volumeMix).toBe(0);
+  // Inside the sphere is still inside, whatever the view direction.
+  const within = projectVolumeImpostors({ ...p, world: { ...p.world, pose: { ...p.world.pose, positionM: [0, 0, .5], orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2] } } }, frame, bank);
+  expect(within).toMatchObject({ visible: true, volumeMix: 1, diameterPixels: Number.POSITIVE_INFINITY });
+  // Just off the edge of the field of view but large enough to reach into it: visible.
+  const edge = projectVolumeImpostors({ ...p, world: { ...p.world, pose: { positionM: [0, 0, 3], orientationXyzw: [0, Math.sin(Math.PI * 40 / 360), 0, Math.cos(Math.PI * 40 / 360)] } } }, frame, bank);
+  expect(edge.visible).toBe(true);
+});

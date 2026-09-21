@@ -4,8 +4,8 @@
     {
       "id": "k2-18-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1512,
-      "expectedSha256": "a9d0711a5befb6bc771b636faecb6134fac4a4974d034fd2c30ec27484f6f4d1",
+      "expectedBytes": 1546,
+      "expectedSha256": "273d5db1b6e0a1df96e2d1d62ad4d09aa70733f7805cc839845b7a7ef4c14cbc",
       "origin": "https://arxiv.org/abs/1805.00830",
       "credit": "Sarkis, Henning, Kürster et al., \"The CARMENES search for exoplanets around M dwarfs: A low-mass planet in the temperate zone of the nearby K2-18\", AJ 155, 257 (2018), arXiv:1805.00830",
       "license": "Factual numerical measurements; source attribution retained",
@@ -50,7 +50,7 @@
       "id": "k2-18-preparation-raster",
       "path": "preparation/raster.json",
       "expectedBytes": 2670,
-      "expectedSha256": "a49a0204607f8a00958f0fddd2c85eb805bc03273b264e52046f6bf141dadc07",
+      "expectedSha256": "ff654210e1ef4279f653a407267d35f6ea8f4f64499ffe51e9e7415fb6e92fa0",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -257,8 +257,8 @@
     {
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 50250,
-      "expectedSha256": "e52c1f649d4f8c877b6da4dddad52f3c1a964cc94e818c8caa15abd6d7bbbb4c",
+      "expectedBytes": 49802,
+      "expectedSha256": "122eee080f3061577b5e25d8e00673d0d184e24d49586b0434e7d8aebe62b302",
       "origin": "https://www.lamost.org/dr11/v2.0/",
       "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",

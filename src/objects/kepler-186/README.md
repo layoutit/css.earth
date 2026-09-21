@@ -6,9 +6,9 @@ Kepler-186 is a red dwarf 178 parsecs away, about half the Sun’s radius. Its o
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
-Placement: the SIMBAD position, proper motion and radial velocity with the references SIMBAD gives, and the distance from the Gaia EDR3 parallax 5.6336 ± 0.0169 mas via SIMBAD. The star is too faint for the Hipparcos catalogue, so the shared star field (HYG) has no row for it and this package is its only point.
+Placement: the SIMBAD position, proper motion and radial velocity with the references SIMBAD gives, and the distance from the Gaia EDR3 parallax 5.6336 ± 0.0169 mas via SIMBAD. Kepler-186 has no Hipparcos number, so it matches no entry of the shared star field; the package places it from the astrometry above.
 
-Radius: Stellar radius 0.523 (+0.023) solar radii from Torres et al. 2015, ApJ 800, 99 (2015). It is a radius from stellar characterisation, not an interferometric diameter; the angular diameter in the record is that radius at the Gaia distance.
+Radius: Stellar radius 0.523 (+0.023/−0.021) solar radii from Torres et al. 2015, ApJ 800, 99 (2015). It is a radius from stellar characterisation, not an interferometric diameter; the angular diameter in the record is that radius at the Gaia distance.
 
 Rotation: no spin axis or rotation period is adopted The display axis is celestial north at the star, a convention.
 

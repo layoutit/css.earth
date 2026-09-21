@@ -15,15 +15,15 @@
     ]
   },
   "introduction": {
-    "text": "K2-18 is a red dwarf 38 parsecs away, about four tenths of the Sun’s radius. Its planet K2-18 b circles it every 33 days.",
+    "text": "K2-18 is a red dwarf 38 parsecs away, about 0.44 of the Sun’s radius. Its planet K2-18 b circles it every 33 days.",
     "sources": [
       {
-        "catalogueId": "arxiv-1805-00830",
-        "url": "https://arxiv.org/abs/1805.00830",
-        "label": "Sarkis et al. 2018",
+        "catalogueId": "arxiv-1909-04642",
+        "url": "https://arxiv.org/abs/1909.04642",
+        "label": "Benneke et al. 2019",
         "checked": "2026-09-21",
-        "locator": "Table 2",
-        "quote": "R∗ [R⊙]a 0.411 ±0.038"
+        "locator": "Table 1",
+        "quote": "R_⋆ R_⊙ 0.4445±0.0148"
       }
     ]
   },

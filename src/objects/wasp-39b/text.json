@@ -9,7 +9,7 @@
         "url": "https://arxiv.org/abs/1802.03859",
         "label": "Mancini et al. 2018",
         "checked": "2026-09-21",
-        "locator": "Table of photometric results, row WASP-39",
+        "locator": "Table 1, row WASP-39",
         "quote": "4.0552941 (34)"
       }
     ]
@@ -22,7 +22,7 @@
         "url": "https://arxiv.org/abs/1802.03859",
         "label": "Mancini et al. 2018",
         "checked": "2026-09-21",
-        "locator": "Table of photometric results, row WASP-39",
+        "locator": "Table 1, row WASP-39",
         "quote": "4.0552941 (34)"
       }
     ]
@@ -31,7 +31,7 @@
     "shape": {
       "title": "Shape only",
       "detail": "Published radius",
-      "summary": "A gray sphere of the measured radius. No colour, surface or atmosphere of this planet is observed."
+      "summary": "A gray sphere of the measured radius. No colour or surface is observed; its atmosphere is measured in transmission."
     }
   }
 }
