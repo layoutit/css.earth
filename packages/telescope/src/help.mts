@@ -2,6 +2,7 @@ export const HELP = `Telescope — explore observations or continue from an exis
 
 Human entry points:
   telescope explore TARGET [--family F01..F18] [--kind KIND] [--wavelength MIN,MAX] [--out DIRECTORY]
+  telescope papers TARGET [--instrument NAME] [--json] [--out DIRECTORY]
   telescope import SPEC.json --out DIRECTORY
   telescope families [--json]
   telescope family-assess REQUEST.json DESCRIPTOR.json --out DIRECTORY [--json]
@@ -16,6 +17,9 @@ explore.json as well as a strict query.json. Exploration does not state scientif
 In a terminal, outputs asks which available operation to run, then asks only for that operation's
 reported inputs and a new output directory. Press Enter at any prompt to cancel before an export
 starts. With --json or redirected input/output it never prompts; the listed command templates remain.
+Papers lists up to 20 OpenAlex works that name the target (and instrument) in their title or abstract,
+open access first. It tries one plain GET per open copy, marks browser challenges as blocked, and prints
+HTML figure captions and table titles about maps or observation lists. Nothing is saved without --out.
 Family-run executes one operation from a verified product descriptor through the static owner allowlist.
 Its params file is optional only when that operation has no required parameters. The output directory
 must be new; reusable data and a pinned product record are reopened before success is reported.
