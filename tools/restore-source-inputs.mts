@@ -6,8 +6,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
-import { verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
-import { acquireVolumeSource } from '../src/preparation/volume/acquisition.ts';
+import { sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { setupObjectIds } from "./runtime-assets.mts";
 
 const projectRoot = resolve(import.meta.dirname, "..");
@@ -26,8 +25,27 @@ for (const id of ids) {
       } catch (error) {
         if (!hasErrorCode(error, 'ENOENT')) throw error;
         const cache = await mkdtemp(resolve(tmpdir(), `cssearth-${id}-volume-`));
-        try { await acquireVolumeSource(volumeSource, recipe, cache); }
+        try {
+          const { acquireVolumeSource } = await import('../src/preparation/volume/acquisition.ts');
+          await acquireVolumeSource(volumeSource, recipe, cache);
+        }
         finally { await rm(cache, { recursive:true, force:true }); }
+      }
+      if (recipe.sky) {
+        const [{ parseSkyRecipe }, { installRuntimeAssets }, { preparedAssets }] = await Promise.all([
+          import('../src/preparation/sky/config.ts'), import('./setup.mts'), import('./runtime-assets.mts'),
+        ]);
+        const skyRecipe = parseSkyRecipe(JSON.parse((await verifiedBytes(volumeSource, recipe.sky)).toString('utf8')) as unknown);
+        if (skyRecipe.stars) {
+          const starDirectory = resolve(projectRoot, 'src/objects', skyRecipe.stars.object);
+          const descriptorBytes = await readFile(resolve(starDirectory, 'object.json'));
+          if (sha256(descriptorBytes) !== skyRecipe.stars.sha256) {
+            throw new TypeError(`Sky stars descriptor digest mismatch: ${skyRecipe.stars.object}`);
+          }
+          const assets = await preparedAssets(projectRoot, [skyRecipe.stars.object]);
+          const result = await installRuntimeAssets(assets);
+          console.log(`${id}: ${skyRecipe.stars.object} prepared dependency restored (${result.installed} downloaded, ${result.reused} reused)`);
+        }
       }
       console.log(`${id}: pinned volume source restored and verified`);
       continue;

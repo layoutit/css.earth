@@ -133,12 +133,14 @@ test('the real resolve step rejects unsafe dispatch inputs before invoking GitHu
   }
 });
 
-test('the volume publisher uses the pinned volume acquisition instead of body restoration', async () => {
+test('the volume publisher restores every pinned preparation dependency before baking', async () => {
   const workflow = parseDocument(await readFile(new URL('../.github/workflows/publish-assets.yml', import.meta.url), 'utf8')).toJS() as {
     jobs:{bake:{steps:{name?:string;if?:string;run?:string}[]}}
   };
-  const restore = workflow.jobs.bake.steps.find(step => step.name === 'Restore the pinned source downloads');
+  const restore = workflow.jobs.bake.steps.find(step => step.name === 'Restore the pinned preparation inputs');
   const bake = workflow.jobs.bake.steps.find(step => step.name === 'Bake');
-  assert.equal(restore?.if, "env.KIND != 'volume'");
-  assert.match(bake?.run ?? '', /prepare:volume .* --acquire-source "\$RUNNER_TEMP\/volume-source-cache"/u);
+  assert.equal(restore?.if, undefined);
+  assert.match(restore?.run ?? '', /restore-source-inputs/u);
+  assert.match(bake?.run ?? '', /prepare:volume "src\/objects\/\$OBJECT"/u);
+  assert.doesNotMatch(bake?.run ?? '', /--acquire-source/u);
 });
