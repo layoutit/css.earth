@@ -2,29 +2,29 @@
   "schema": "cssvega-runtime-assets@1",
   "assets": [
     {
-      "filename": "vega-context-shape@2x.webp",
+      "filename": "vega-context-color@2x.webp",
       "bytes": 100,
       "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
     },
     {
-      "filename": "vega-lens-shape.webp",
-      "bytes": 44,
-      "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
+      "filename": "vega-lens-color.webp",
+      "bytes": 162,
+      "sha256": "1965309f57089dfcb20d526b3888e949d1c901108e0046a26088279679392317"
     },
     {
-      "filename": "vega-limb-shape@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+      "filename": "vega-limb-color@2x.webp",
+      "bytes": 93026,
+      "sha256": "10343d3ee670bf2e99938442525096e299596c98df2bab2bd686296750adac1d"
     },
     {
-      "filename": "vega-poles-shape@2x.webp",
-      "bytes": 1340,
-      "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875"
+      "filename": "vega-poles-color@2x.webp",
+      "bytes": 2834,
+      "sha256": "1d63065904feaa732db5bc8e978fa0fdf10b5eab4b5871df24a5289a7e516021"
     },
     {
-      "filename": "vega-surface-shape@2x.webp",
-      "bytes": 178,
-      "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+      "filename": "vega-surface-color@2x.webp",
+      "bytes": 1830,
+      "sha256": "65018073fe6546dd617d0544eeb5951b3c285910d7319d3ceb24e4e5f8a27242"
     }
   ]
 }

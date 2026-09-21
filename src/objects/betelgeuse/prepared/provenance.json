@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4b627e321e3f24057ffee5f2481863a605966bcc9c624ee352193404a6374978"
+    "sha256": "48e0fea22571b319ce4f2045230ef64ea7ea1d1c8767814781f96adae6bb8506"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "d203bc86a96caf451b8eb1f792be504e6b15a5fc3fc9af59cbd299e818ddebaf"
+    "bindingsSha256": "95db5198f23dce6163b53065615a8bb2d6c7ea803d869194543377288ea321c7"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "e97986e9ffaa5d8c9b5fdecd0b2c7187632c10a697af61451a913fce4fcfeebb",
+      "sha256": "8795abb3695afd458fc9adae65fbd31f9224efe87752c6bf15449b7268039e89",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/betelgeuse/",
@@ -125,6 +125,18 @@
                 "consumer": "sphere-photograph"
               }
             }
+          },
+          {
+            "id": "color",
+            "output": "betelgeuse-surface-{id}{suffix}.webp",
+            "thumbnail": "betelgeuse-lens-{id}.webp",
+            "source": "photometry/stellar-color.json",
+            "falseColor": false,
+            "science": {
+              "kind": "stellar-photometric-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "qualification": "Uniform photosphere colour from the star's VLT/X-shooter spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
+            }
           }
         ],
         "emission": {
@@ -159,7 +171,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3c81f2304881920c3bede2ca4b0de8475514bad91d36bff1d4bd79fdd8663f83",
+      "sha256": "7c6fbe7d2985c83a9b7c122c7cc45f482e2adf6717a2e2d5b4ed7456540279c4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -411,6 +423,21 @@
                 "meta": "fraction of the peak · ALMA band 6, 217.105 GHz · viridis, false colour",
                 "sourceUrl": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S"
               }
+            },
+            {
+              "id": "color",
+              "label": "Color",
+              "qualification": "Colour from a measured spectrum of the star (VLT/X-shooter). The disc is unresolved, and no darkening toward the edge is measured.",
+              "thumbnail": "betelgeuse-lens-color.webp",
+              "surface": "betelgeuse-surface-color@2x.webp",
+              "poles": "betelgeuse-poles-color@2x.webp",
+              "source": {
+                "id": "betelgeuse-stellar-color",
+                "path": "../manifest.json",
+                "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34"
+              },
+              "falseColor": false,
+              "notes": "The colour of Betelgeuse's VLT/X-shooter spectrum. It was taken on 12 October 2009, before the Great Dimming, and is not corrected for light lost at the slit, which can tilt the colour. No resolved image of the surface is cast here."
             }
           ]
         },
@@ -443,6 +470,12 @@
             "role": "facts",
             "description": "SQUEEZE, GPL-3.0",
             "href": "https://github.com/fabienbaron/squeeze"
+          },
+          {
+            "label": "Spectrum",
+            "role": "facts",
+            "description": "X-Shooter Spectral Library DR3: X0036 (Betelgeuse)",
+            "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34"
           }
         ],
         "provenance": {
@@ -615,6 +648,66 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "betelgeuse-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34",
+      "credit": "Verro et al. (2022), A&A 660, A34 (X-Shooter Spectral Library DR3); VizieR J/A+A/660/A34; CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "xsl-dr3-x0036",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "df22a40b869425218e40af61058aec096acf06c483135d9b6b97ac7d271136a8",
+      "bytes": 1483,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "betelgeuse-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -627,8 +720,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3c81f2304881920c3bede2ca4b0de8475514bad91d36bff1d4bd79fdd8663f83",
-      "bytes": 12068,
+      "sha256": "7c6fbe7d2985c83a9b7c122c7cc45f482e2adf6717a2e2d5b4ed7456540279c4",
+      "bytes": 13129,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -744,6 +837,71 @@
           "sourceId": "betelgeuse-matisse-2020-02-continuum",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "color",
+      "label": "Color",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Colour from a measured spectrum of the star (VLT/X-shooter). The disc is unresolved, and no darkening toward the edge is measured."
+      ],
+      "lensIds": [
+        "color"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": false
+      },
+      "inputs": [
+        "betelgeuse-stellar-color",
+        "betelgeuse-cie-1931-2deg-cmf"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-surface-color@2x.webp",
+          "bytes": 178,
+          "sha256": "6dd35131b7f60d17386ef2ecb44a691b5780a2a10be97bfdc4fad8ed15b40153",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-lens-color.webp",
+          "bytes": 44,
+          "sha256": "17430313f949072e8dfbdf575297839d80b4eeed87054219e2901cbc2b14aece",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-poles-color@2x.webp",
+          "bytes": 1340,
+          "sha256": "5504c9d8cfc98ba9df0e17bbb3712207436261576beaa87c1816a29b3df0ec7d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-context-color@2x.webp",
+          "bytes": 270,
+          "sha256": "53d6c7b278aef94232785f0472ea9a1c7182c6e74b78ecf54f17e7b7df4e21a8",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-limb-color@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "betelgeuse-stellar-color",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -869,8 +1027,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8499,
-          "sha256": "d46b7e8183763640513eae5a728b505fe6d3b875a2aa2280861338f4a514d1b3",
+          "bytes": 8667,
+          "sha256": "ee473fd8438cf4ea18632ac23fcff07031aa08075c14f1e91d65a025c22c2bad",
           "verification": "bytes-verified"
         }
       ],
@@ -900,6 +1058,31 @@
           "verification": "bytes-verified"
         }
       ]
+    },
+    {
+      "id": "preview:color",
+      "label": "Color preview",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "color"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 450,
+          "sha256": "0e4d998a81a14e4ec8c5d4271991ddad273f818d60259ece5784daaa54624836",
+          "verification": "bytes-verified"
+        }
+      ]
     }
   ],
   "coverage": {
@@ -908,11 +1091,11 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "1d63e8d4e3c849d8b5d2930a27ab4a684a4425abb2fc6ae57218865449510a19",
+    "materialSha256": "25f43b7a29f74603626554cf69284bded38a14201b442d622cc56bd43f0f8f83",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "d203bc86a96caf451b8eb1f792be504e6b15a5fc3fc9af59cbd299e818ddebaf"
+      "bindingsSha256": "95db5198f23dce6163b53065615a8bb2d6c7ea803d869194543377288ea321c7"
     }
   }
 }

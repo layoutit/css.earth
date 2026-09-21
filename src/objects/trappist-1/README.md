@@ -37,6 +37,8 @@ the shallow eclipse of b and c together, the star's own flares, and the detector
 the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](../trappist-1b/README.md)'s temperature map and
 [TRAPPIST-1c](../trappist-1c/README.md)'s measured dayside come from the same data.
 
+**Catalogue colour.** the swatch that search, the catalogue and the minimap show is this lens's prepared colour, #ffcd6a.
+
 ## Evidence
 
 - [`stellar-photometric-color.test.mts`](../../../tools/objects/observation/stellar-photometric-color.test.mts) covers the colour
@@ -47,6 +49,7 @@ the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](..
 - Driven in a real browser: the system view draws the seven orbits, markers and labels around the star. The orbits are inclined
   89.7 to 89.9 degrees with the node at celestial north, so from the default angle they project onto a single line — the geometry
   that makes these planets transit.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffcd6a is the colour lens's prepared colour.
 
 ## Known problems
 

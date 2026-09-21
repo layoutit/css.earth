@@ -249,6 +249,21 @@
           "meta": "fraction of the peak · ALMA band 6, 217.105 GHz · viridis, false colour",
           "sourceUrl": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S"
         }
+      },
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from a measured spectrum of the star (VLT/X-shooter). The disc is unresolved, and no darkening toward the edge is measured.",
+        "thumbnail": "betelgeuse-lens-color.webp",
+        "surface": "betelgeuse-surface-color@2x.webp",
+        "poles": "betelgeuse-poles-color@2x.webp",
+        "source": {
+          "id": "betelgeuse-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34"
+        },
+        "falseColor": false,
+        "notes": "The colour of Betelgeuse's VLT/X-shooter spectrum. It was taken on 12 October 2009, before the Great Dimming, and is not corrected for light lost at the slit, which can tilt the colour. No resolved image of the surface is cast here."
       }
     ]
   },
@@ -281,6 +296,12 @@
       "role": "facts",
       "description": "SQUEEZE, GPL-3.0",
       "href": "https://github.com/fabienbaron/squeeze"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "X-Shooter Spectral Library DR3: X0036 (Betelgeuse)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34"
     }
   ],
   "provenance": {

@@ -7,6 +7,8 @@
   "distanceSource": "Gaia DR3 parallax 6.186 +/- 0.447 mas (Gaia Collaboration 2020, yCat I/350, via SIMBAD), RUWE 2.9; Hipparcos (van Leeuwen 2007) gives 6.13 +/- 0.76 mas, the 163 pc Paladini et al. (2018) use.",
   "radiusKm": 219710723,
   "radiusSource": "The fitted angular diameter at the Gaia distance: 18.17 mas at 161.7 pc is 219,710,723 km, 316 solar radii at 695700 km. Mayer et al. (2014, A&A 570, A113) list 370 solar radii from the bolometric luminosity.",
+  "effectiveTemperatureK": 3200,
+  "effectiveTemperatureSource": "Effective temperature 3200 K from Paladini et al. 2018 (Nature 553, 310; https://doi.org/10.1038/nature25001), Methods, Stellar parameters: the best-fitting S-type MARCS model to the photometry, on a 2000-3200 K grid in 200 K steps. No uncertainty is stated, and 3200 K is the top of the grid.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "path": "shape/uniform-disc.tab",

@@ -4,8 +4,8 @@
     {
       "id": "hd-209458-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1093,
-      "expectedSha256": "8e4e1ee7ea1ee193faef6ae34937398a78488c0ea35b64ea86ec899f7f73cec6",
+      "expectedBytes": 1359,
+      "expectedSha256": "461206c2ae0853401942b21df92794b40b7247896969c54a2a21a79412b59edd",
       "origin": "https://arxiv.org/abs/0801.1841",
       "credit": "G. Torres et al., \"Improved parameters for extrasolar transiting planets\", ApJ 677, 1324 (2008), arXiv:0801.1841",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +49,8 @@
     {
       "id": "hd-209458-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 1952,
-      "expectedSha256": "239b34ecfb4e598aebdc4c4a2d3e79253f8596b5b5617c9186dad29f93e3c211",
+      "expectedBytes": 2350,
+      "expectedSha256": "f99ea64580a9e065ce3e1e024d5f165fe8869f2d31f42cd5dba800a4e0dd294d",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -69,7 +69,7 @@
       "id": "hd-209458-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1704,
-      "expectedSha256": "3eb7717b02af1d769523cdac8d4ef601111b8c3b425cbf20b70a139dadb478f4",
+      "expectedSha256": "59adce5227a6ed82473004c9946e14284d7eec6f9fbee184efac3b6841c8c201",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -137,38 +137,175 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "hd-209458-calspec-stis",
+      "path": "photometry/hd209458_stisnic_008.fits",
+      "expectedBytes": 224640,
+      "expectedSha256": "c36c285356eccf25260e07b9fa096556056e1416cb8c5e80a670645557d6e348",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/hd209458_stisnic_008.fits",
+      "credit": "NASA/STScI HST CALSPEC; flux scale Bohlin et al. (2020), AJ 160, 21",
+      "license": "HST archive data: public, with acknowledgement",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "CALSPEC FITS file downloaded unchanged on 2026-09-21; restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum, unchanged, with acknowledgement",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "calspec-hd209458-stisnic-008",
+            "role": "material",
+            "evidence": "src/objects/hd-209458/source/photometry/hd209458_stisnic_008.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-209458-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1841,
+      "expectedSha256": "21d649f199b4d76961470e7ff6a77e08382632e243dadc57945749fa1b8e051e",
+      "origin": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
+      "credit": "NASA/STScI HST CALSPEC; flux scale Bohlin et al. (2020), AJ 160, 21; CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "calspec-hd209458-stisnic-008",
+            "role": "material",
+            "evidence": "src/objects/hd-209458/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-209458-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-209458-published-limb-darkening",
+      "path": "photometry/brown-2001-limb-darkening.json",
+      "expectedBytes": 1219,
+      "expectedSha256": "6aa06ac6203aa1fd97ecd1391d438ed84d00171036f724b566f30a3bdccf61cb",
+      "origin": "https://arxiv.org/abs/astro-ph/0101336",
+      "credit": "Brown et al. (2001), Hubble Space Telescope Time-Series Photometry of the Transiting Planet of HD 209458, ApJ 552, 699",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper's table, with each cell quoted",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published coefficients transcribed in this package with their table cells; repinned when edited."
+      }
+    },
+    {
+      "id": "hd-209458-crosscheck-spectrum",
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled-crosscheck.csv",
+      "expectedBytes": 10240,
+      "expectedSha256": "377be5b7e0799eddff95a3472d8b8b618ce670af6146a6353820640d25153e18",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1779546757669063552&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-xp-1779546757669063552",
+            "role": "material",
+            "evidence": "src/objects/hd-209458/source/photometry/crosscheck-gaia-dr3-xp-sampled-crosscheck.csv"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
-      "origin": "https://arxiv.org/abs/0801.1841",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "expectedBytes": 45456,
+      "expectedSha256": "bdb2a4b59d71cd41495869b58b2995677195c8421502ea9206abd52fb837379c",
+      "origin": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
+      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
         "inputs": [
-          "hd-209458-observational-measurements"
+          "hd-209458-stellar-color",
+          "hd-209458-calspec-stis",
+          "hd-209458-cie-1931-2deg-cmf",
+          "hd-209458-preparation-raster",
+          "hd-209458-published-limb-darkening"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2835,
-      "expectedSha256": "89790b0ebf4c10a5a12f5b913e9ce0f184058c1f3e983dd6ccc72a99e37fe65f",
+      "expectedBytes": 3155,
+      "expectedSha256": "1df6cfc0c1a2e6c6668127d1082d60aa385353d6d8ad78bfc7660031579841e4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -176,8 +313,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "expectedBytes": 922,
+      "expectedSha256": "dcb617377866cdb4d8bb98bd08ba40bf583cbe1663ce2a1ece71e9d5ffcc8b41"
     },
     {
       "path": "preparation/navigation.json",
@@ -205,7 +342,7 @@
       "expectedSha256": "861e633a3fa755a7b1f78be9ff5af7845fc66b7ee3e22dc03eaac02f7147aeff",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence capture of the default camera view in the app, committed with the package in 7e71ba192e; the capture's settings were not recorded."
+        "reason": "Evidence capture of the default view, cited by the README; declared now that the reference folder holds a pinned input."
       }
     },
     {
@@ -214,7 +351,7 @@
       "expectedSha256": "f2a0121c23ccc48a3639057ecbaad27c8f9828d3340cecccda3d6cf03cec9763",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence capture of the system view in the app, committed with the package in 1bc60345b8; the capture's settings were not recorded."
+        "reason": "Evidence capture of the opened planetary system, cited by the README; declared now that the reference folder holds a pinned input."
       }
     }
   ]

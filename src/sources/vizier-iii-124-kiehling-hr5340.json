@@ -1,0 +1,36 @@
+{
+  "id": "vizier-iii-124-kiehling-hr5340",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Kiehling (1987) spectrophotometry of HR 5340 (VizieR III/124)",
+  "identifiers": [
+    {
+      "type": "VizieR III/124 column",
+      "value": "m(HR5340)"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124",
+      "label": "VizieR III/124"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "checkedOn": "2026-09-21",
+      "locator": "III/124/spectra: lambda (nm) and m(HR5340), normalised magnitude, 99.999 = no data (ReadMe)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS)",
+      "scope": "citation",
+      "evidence": "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

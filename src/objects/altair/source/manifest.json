@@ -4,10 +4,10 @@
     {
       "id": "altair-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1296,
-      "expectedSha256": "b3aa7ac94d1606a17cc7c18f1602139f31fd9f567c722d01a8f00e8215debdd9",
+      "expectedBytes": 2007,
+      "expectedSha256": "2287c4b1fb45d02cdf7347dc570cc4fb39c2d36d0b7035d41e685771b6c91372",
       "origin": "https://arxiv.org/abs/0706.0867",
-      "credit": "Monnier, Zhao, Pedretti et al., \"Imaging the Surface of Altair\", Science 317, 342 (2007), arXiv:0706.0867",
+      "credit": "Monnier, Zhao, Pedretti et al., \"Imaging the Surface of Altair\", Science 317, 342 (2007), arXiv:0706.0867; effective temperature: van Belle et al. (2001), ApJ 559, 1155",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
@@ -49,8 +49,8 @@
     {
       "id": "altair-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 1928,
-      "expectedSha256": "18c782fea3b01a38d6e423ebeb3210605d922ca842dd27d0bd1718f0816fcf08",
+      "expectedBytes": 2966,
+      "expectedSha256": "245b05b3774979af858fc77e36593870c8be6cdaa6fb91de50f478fc45e18235",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +68,8 @@
     {
       "id": "altair-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1683,
-      "expectedSha256": "62658cb05f0ee20b4beed9f728cc5c589d895f42cca5f49a7363ca90527d59fc",
+      "expectedBytes": 1688,
+      "expectedSha256": "849a780e1ac40a9d630147b7cef8e471042376d4611469894d902f57bebe1c56",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -124,7 +124,7 @@
       "id": "altair-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
       "expectedBytes": 212,
-      "expectedSha256": "b6747faddd73e4f46c9c5d7aa63209a7930f14c295a13e24a9745f581f4c1912",
+      "expectedSha256": "989d0c2091420093a90e9ae4d30c7d96f1cfe89cb2b7cc15ac43060845abdc7a",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -137,38 +137,204 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "altair-pulkovo-spectrophotometry",
+      "path": "photometry/pulkovo-table5.dat",
+      "expectedBytes": 935951,
+      "expectedSha256": "9deaea527750d81f89d9f61476ae3fd6a40166da8f401071ff6b2d5c9aea6e88",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
+      "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Raw catalogue flux file table5.dat downloaded unchanged from the CDS archive on 2026-09-21; restored through source/preparation/acquisition.json",
+      "redistribution": "One catalogue file, unchanged, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-201-pulkovo-spectrophotometry",
+            "role": "material",
+            "evidence": "src/objects/altair/source/photometry/pulkovo-table5.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "altair-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1688,
+      "expectedSha256": "24e7fafdc73268b218460da72a85e454e4c3592e55f41181b3d903cc52a9e683",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
+      "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-201-pulkovo-spectrophotometry",
+            "role": "material",
+            "evidence": "src/objects/altair/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "altair-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "altair-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "expectedBytes": 844,
+      "expectedSha256": "3c625a2a7b9ee43a148522708944ec81dc52546f8f30fe396fba229fc64ed60a",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/altair/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "altair-roche-von-zeipel",
+      "path": "photometry/gravity-darkening.json",
+      "expectedBytes": 1971,
+      "expectedSha256": "b972b38b1ac0c2b5fd57e3143fc40883f96616488ce240d66ddea241337a4511",
+      "origin": "https://arxiv.org/abs/0706.0867",
+      "credit": "Monnier et al. (2007), Science 317, 342",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper's table in the authors' LaTeX source, with each cell quoted",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "lenses",
+        "rotation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published model parameters transcribed in this package with their table cells; repinned when edited."
+      }
+    },
+    {
+      "id": "altair-crosscheck-spectrum",
+      "path": "photometry/crosscheck-III_126_part2.dat.gz",
+      "expectedBytes": 506596,
+      "expectedSha256": "b031729b448d64e34a2801e208e7f22254cfe03a32ea8b9b5dc1dfac329d4d10",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
+      "credit": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-126-burnashev-593",
+            "role": "material",
+            "evidence": "src/objects/altair/source/photometry/crosscheck-III_126_part2.dat.gz"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
-      "origin": "https://arxiv.org/abs/0706.0867",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "expectedBytes": 41620,
+      "expectedSha256": "eb50619c5da96fca9a414d1252dc190084e6b43dc14c99f98d82f67471455c90",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
+      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
         "inputs": [
-          "altair-observational-measurements"
+          "altair-stellar-color",
+          "altair-pulkovo-spectrophotometry",
+          "altair-cie-1931-2deg-cmf",
+          "altair-preparation-raster",
+          "altair-claret-2011-v-quadratic"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2798,
-      "expectedSha256": "612a411133ab7fbcbf637b8a397a794f75846de2a8f9e188766e4ae894127b73",
+      "expectedBytes": 3147,
+      "expectedSha256": "2fc56922e5b59d44d5cac1ce9027195264dfc95b8d59d2ef1eee7749b806ac14",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -176,8 +342,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "expectedBytes": 1606,
+      "expectedSha256": "a0c1293fca90bb2580b7850d58c4efbaf83597f4d18fb307a23b5cbce5b65684"
     },
     {
       "path": "preparation/navigation.json",
@@ -186,8 +352,8 @@
     },
     {
       "path": "preparation/rotation.json",
-      "expectedBytes": 976,
-      "expectedSha256": "735d78f7efa4c08268655ac0f4116099dd37495da7688c365e7bb6f9b2739805"
+      "expectedBytes": 1077,
+      "expectedSha256": "3c218ee80cd9c211b91917f96ce06d6f94135cac28ea633a36888215bcf224c4"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

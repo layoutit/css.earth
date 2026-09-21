@@ -1,0 +1,32 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "r-doradus",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "UVES Paranal Observatory Project (Bagnulo et al., ESO), merged spectrum of HD 29712 (R Doradus)",
+    "path": "photometry/hd29712.tfits.gz",
+    "service": "https://www.eso.org/sci/php/tools/uvespop/DATA/merged/hd29712.tfits.gz",
+    "checked": "2026-09-21",
+    "format": "fits-table",
+    "extension": "1",
+    "wavelength": {
+      "column": "Wave",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "Flux",
+      "kind": "flux",
+      "missing": 0
+    },
+    "gaps": [
+      {
+        "fromNm": 575.5,
+        "toNm": 585.5,
+        "reason": "UVES chip gap: the merged spectrum stores zero flux from about 576 to 585 nm"
+      }
+    ],
+    "note": "VLT/UVES echelle spectrum taken 2002-12-27, with a relative calibration from the pipeline response curve. The atmospheric dispersion corrector was off and the slit was 0.5 arcseconds wide, so light was lost unevenly with wavelength: the overall colour is uncertain. Zero-flux samples are the chip gaps and are left out; the 576-585 nm gap is bridged by a straight line."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

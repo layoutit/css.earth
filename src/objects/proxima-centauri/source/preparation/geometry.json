@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/proxima-centauri/proxima-centauri-surface-shape@2x.webp",
+      "url": "/scenes/proxima-centauri/proxima-centauri-surface-color@2x.webp",
       "width": 1024,
       "height": 768
     },
     "surfaceLatitudeHeight": 512,
     "packedBandGutter": 8,
     "poles": {
-      "url": "/scenes/proxima-centauri/proxima-centauri-poles-shape@2x.webp",
+      "url": "/scenes/proxima-centauri/proxima-centauri-poles-color@2x.webp",
       "width": 512,
       "height": 256
     },
@@ -22,7 +22,7 @@
     "polarRadiusScale": 1.035,
     "polarOffset": 0.1,
     "uv": "cell",
-    "color": "#ffb070"
+    "color": "#ffd06e"
   },
   "projection": {
     "tileSize": 50,

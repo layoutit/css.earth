@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "da22245a63636263adcdea879829aa203bee6e029dbeb8b2fecd352032ea60ce"
+        "sha256": "777b44ad0b79155be813894a3766579740ebd0c1974ea8326136b87993d2e528"
       }
     },
     "catalog": {
       "name": "Rigel",
       "classification": "star",
-      "color": "#cfdcff",
+      "color": "#bdcfff",
       "distanceAu": 54567516.5,
       "description": "Blue supergiant about 265 parsecs away; its photosphere is not imaged here.",
       "systemName": "Orion",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e7d8e832dd8ce68d06ad11d07914a46ee09519385024545d10997a319276210a"
+    "sha256": "c268225cd290468964d2aac8225c9f0309b2acab47e2a6146acbf48a13cc5aee"
   }
 }

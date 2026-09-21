@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "169fd41c58143f857b63e4f230c7652fdcdca0954f9bc5f8d156e6c3b0398172"
+    "sha256": "f42d0d64f69cda55dd050b868ecf316615e87f40e0b5008e6e5331d3eda7fa43"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "e64bcdcb65fecc3316f55d97a9ec648cee210a3a005ff889666ce18fbe3ed93d"
+    "bindingsSha256": "a571f348fde184da6557c3929b793989a4f604b7cf71a95cb19aebbff000fd55"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "83d9bbafcd160ac46bd7d8ff6e0f9b40dba8fbdaf86f2ed13d4c2f50d9d1769f",
+      "sha256": "b46d80c31125d366e2b9a7e8658531bf1225c264b36c05920424a51979b755ff",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/alpha-centauri-a/",
@@ -39,14 +39,34 @@
         },
         "surfaces": [
           {
-            "id": "shape",
+            "id": "color",
             "output": "alpha-centauri-a-surface-{id}{suffix}.webp",
             "thumbnail": "alpha-centauri-a-lens-{id}.webp",
-            "source": "measurements.json",
+            "source": "photometry/stellar-color.json",
             "falseColor": false,
             "science": {
-              "kind": "neutral-shape",
-              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+              "kind": "stellar-photometric-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "qualification": "Uniform photosphere colour from the star's ground-based spectrophotometry (Kiehling 1987). The disc is unresolved: it is darkened toward the limb by the quadratic V-band law Claret & Bloemen (2011) compute from ATLAS model atmospheres at the star's temperature and gravity, a model rather than a measurement; no map or absolute brightness is implied. Self-luminous, so no lighting.",
+              "limbDarkening": {
+                "law": "quadratic",
+                "path": "photometry/claret-2011-v-quadratic.tsv",
+                "grid": {
+                  "teffK": 5795,
+                  "logg": 4.31,
+                  "models": {
+                    "Filt": "V",
+                    "Met": "L",
+                    "Mod": "A"
+                  }
+                },
+                "columns": {
+                  "teff": "Teff",
+                  "logg": "logg",
+                  "u1": "a",
+                  "u2": "b"
+                }
+              }
             }
           }
         ],
@@ -82,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c415c71cae11917680c993a40b38e2aafdcb3e3afd24cc432c6f245697ea1ffe",
+      "sha256": "ded2642f490cd2d738f278691a02e47a3e1a733f0354f70c542fa922b51e2954",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,22 +141,22 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "color",
           "controls": [
             {
-              "id": "shape",
-              "label": "Shape",
-              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-              "thumbnail": "alpha-centauri-a-lens-shape.webp",
-              "surface": "alpha-centauri-a-surface-shape@2x.webp",
-              "poles": "alpha-centauri-a-poles-shape@2x.webp",
+              "id": "color",
+              "label": "Color",
+              "qualification": "Colour from a measured spectrum of the star (Kiehling 1987, relative calibration). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+              "thumbnail": "alpha-centauri-a-lens-color.webp",
+              "surface": "alpha-centauri-a-surface-color@2x.webp",
+              "poles": "alpha-centauri-a-poles-color@2x.webp",
               "source": {
-                "id": "alpha-centauri-a-observational-measurements",
+                "id": "alpha-centauri-a-stellar-color",
                 "path": "../manifest.json",
-                "url": "https://arxiv.org/abs/1610.06185"
+                "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124"
               },
               "falseColor": false,
-              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+              "notes": "The colour of Alpha Centauri A's spectrum as Kiehling (1987) measured it from the ground, 320-880 nm with a relative calibration; the observation date is not published. No resolved image of the surface is cast; the display axis is celestial north, a convention."
             }
           ]
         },
@@ -151,6 +171,12 @@
             "role": "facts",
             "description": "Kervella, Bigot, Gallenne and Thévenin, \"The radii and limb darkenings of α Centauri A and B\", A&A 597, A137 (2017), arXiv:1610.06185",
             "href": "https://arxiv.org/abs/1610.06185"
+          },
+          {
+            "label": "Spectrum",
+            "role": "facts",
+            "description": "Kiehling (1987) spectrophotometry, HR 5459 (VizieR III/124)",
+            "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124"
           }
         ],
         "provenance": {
@@ -172,22 +198,126 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "alpha-centauri-a-observational-measurements",
-      "path": "measurements.json",
-      "origin": "https://arxiv.org/abs/1610.06185",
-      "credit": "Kervella, Bigot, Gallenne and Thévenin, \"The radii and limb darkenings of α Centauri A and B\", A&A 597, A137 (2017), arXiv:1610.06185",
+      "id": "alpha-centauri-a-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124",
+      "credit": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed published measurements with their sources",
-      "redistribution": "Factual parameter transcription only; no paper figures",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-124-kiehling-hr5459",
+            "role": "material",
+            "evidence": "src/objects/alpha-centauri-a/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
       },
-      "sha256": "fc29a056e2299fa6710ff19a1bb8bf17f02566482f91989495cda10368a8e630",
-      "bytes": 1116,
+      "sha256": "016761794d8c74d23af36b7e60e5da052d404fc8b99aca22ae88555f096fb9a9",
+      "bytes": 1599,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "alpha-centauri-a-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "alpha-centauri-a-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/alpha-centauri-a/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      },
+      "sha256": "0d6ec7a16b39786eee1ad47808ac8676182d48fed23a68aca952bb3432418bcd",
+      "bytes": 844,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "request-download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "photometry/claret-2011-v-quadratic.tsv",
+        "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+        "form": {
+          "-source": "J/A+A/529/A75/table-af",
+          "-out.max": "500",
+          "Teff": "5500..6250",
+          "logg": "4.0..4.5",
+          "Z": "=0",
+          "xi": "=2",
+          "Filt": "V",
+          "Met": "L",
+          "Mod": "A",
+          "-out": "logg,Teff,Z,xi,a,b,Filt,Met,Mod"
+        },
+        "requiredText": [
+          "logg\tTeff"
+        ],
+        "replacements": [
+          {
+            "pattern": "^#.*\\n",
+            "flags": "gm",
+            "replacement": ""
+          },
+          {
+            "pattern": "^\\s*\\n",
+            "flags": "gm",
+            "replacement": ""
+          }
+        ]
+      },
       "verificationOperations": []
     },
     {
@@ -203,8 +333,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c415c71cae11917680c993a40b38e2aafdcb3e3afd24cc432c6f245697ea1ffe",
-      "bytes": 2938,
+      "sha256": "ded2642f490cd2d738f278691a02e47a3e1a733f0354f70c542fa922b51e2954",
+      "bytes": 3228,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -213,18 +343,18 @@
   ],
   "products": [
     {
-      "id": "shape",
-      "label": "Shape",
+      "id": "color",
+      "label": "Color",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+        "Colour from a measured spectrum of the star (Kiehling 1987, relative calibration). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement."
       ],
       "lensIds": [
-        "shape"
+        "color"
       ],
       "recipeDependencies": [
         "raster"
@@ -233,43 +363,45 @@
         "falseColor": false
       },
       "inputs": [
-        "alpha-centauri-a-observational-measurements"
+        "alpha-centauri-a-stellar-color",
+        "alpha-centauri-a-cie-1931-2deg-cmf",
+        "alpha-centauri-a-claret-2011-v-quadratic"
       ],
       "outputs": [
         {
-          "url": "/scenes/alpha-centauri-a/alpha-centauri-a-surface-shape@2x.webp",
+          "url": "/scenes/alpha-centauri-a/alpha-centauri-a-surface-color@2x.webp",
           "bytes": 178,
-          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "sha256": "a61b2212bcf3ea23b405aad087ca4231f77e4d63dc866e181c102d25f877ba65",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/alpha-centauri-a/alpha-centauri-a-lens-shape.webp",
+          "url": "/scenes/alpha-centauri-a/alpha-centauri-a-lens-color.webp",
           "bytes": 44,
-          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "sha256": "0daca9cebcce063b950bea4ba5abceea636203f7cbcc49a76c180d4e8bbd1bed",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/alpha-centauri-a/alpha-centauri-a-poles-shape@2x.webp",
+          "url": "/scenes/alpha-centauri-a/alpha-centauri-a-poles-color@2x.webp",
           "bytes": 1340,
-          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "sha256": "e0e96b3312a054bcafd76a4d9e782e1e5fee50887175f281685304a46b13659d",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/alpha-centauri-a/alpha-centauri-a-context-shape@2x.webp",
+          "url": "/scenes/alpha-centauri-a/alpha-centauri-a-context-color@2x.webp",
           "bytes": 100,
           "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/alpha-centauri-a/alpha-centauri-a-limb-shape@2x.webp",
-          "bytes": 84,
-          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "url": "/scenes/alpha-centauri-a/alpha-centauri-a-limb-color@2x.webp",
+          "bytes": 98616,
+          "sha256": "cab81bb9794d01788179dce5c137386161d71ed80394e1b31273541e7751f049",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "alpha-centauri-a-observational-measurements",
+          "sourceId": "alpha-centauri-a-stellar-color",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
@@ -295,16 +427,16 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8721,
-          "sha256": "5c7b7a608a011a35bcc9d50ac972479859216675e7f907205ebc4a5ac191545b",
+          "bytes": 8892,
+          "sha256": "b0451415491c1c03a39b5d2d2b2da202b05c7b1d79098c75b06ec9e91abadb9e",
           "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:shape",
-      "label": "Shape preview",
+      "id": "preview:color",
+      "label": "Color preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -313,16 +445,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "shape"
+        "color"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 422,
-          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 432,
+          "sha256": "bb95e6b73fdc062c42bc1bb7e7569745bd685258a8e637ad3ada51b01b887248",
           "verification": "bytes-verified"
         }
       ]
@@ -334,11 +466,11 @@
   },
   "lastPreparation": {
     "objectId": "alpha-centauri-a",
-    "materialSha256": "d7693dc901ecbedcbecb67eae7a4384c3efb148d5f1303472b0ead7bad0fba4e",
+    "materialSha256": "33ef98dda88e3ca20bb2f5f06642c4360bdcb0b648b8f5dff8377d2ce3e8d2e4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "e64bcdcb65fecc3316f55d97a9ec648cee210a3a005ff889666ce18fbe3ed93d"
+      "bindingsSha256": "a571f348fde184da6557c3929b793989a4f604b7cf71a95cb19aebbff000fd55"
     }
   }
 }

@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "aldebaran",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "Kiehling (1987), spectrophotometry of 60 bright F, G, K and M stars, 320-880 nm in 1 nm steps as normalised magnitudes: Kiehling (1987), A&AS 69, 465; VizieR III/124. Aldebaran is HR 1457.",
+    "path": "photometry/kiehling-1987.tsv",
+    "service": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+    "checked": "2026-09-21",
+    "format": "tsv-columns",
+    "wavelength": {
+      "column": "lambda",
+      "unit": "nm"
+    },
+    "flux": {
+      "column": "m(HR1457)",
+      "kind": "magnitude",
+      "missing": 99.999
+    },
+    "gaps": [],
+    "note": "Ground-based photoelectric spectrophotometry, published as magnitudes normalised to the star's own flux near 555 nm; read here as flux 10^(-0.4 m). The calibration is relative, which is all a colour needs. The catalogue gives no observation dates."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Burnashev (1985), record 456: a Crimean scan of 1977",
+    "spectrum": {
+      "path": "photometry/crosscheck-III_126_part2.dat.gz",
+      "format": "burnashev-records",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "angstrom"
+      },
+      "flux": {
+        "column": "456",
+        "kind": "log10",
+        "missing": -9.999999
+      },
+      "gaps": [
+        {
+          "fromNm": 750,
+          "toNm": 780,
+          "reason": "the scan ends near 755 nm; the last value is held to 780 nm, where the observer adds little"
+        }
+      ]
+    }
+  }
+}

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "188941f357bc831b7d6e7e77425183a2075f22b274ce85da53a7340b702acdd2"
+    "sha256": "e85e37c9a3526ae1bcb4b268fd971e8277167dab09e76fa9253929bc21dbcb0d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "b1fa67247313096a8844f2d22d216515234df87831e1a7a053271362465fffed"
+    "bindingsSha256": "e43d5f9a1a870ce7851b6faeb6d4ab03f822531e7a23f9aa8cc1c813dd5dec59"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "0b7dac513d83b84e898837278c8ba29d6ae3a7c5d82208be1d56d8f2b65570be",
+      "sha256": "6fb5d31a305b9cb0e186e15081cf4f97d2b271746574a79f5490a29f07d1158d",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/wasp-39/",
@@ -39,14 +39,20 @@
         },
         "surfaces": [
           {
-            "id": "shape",
+            "id": "color",
             "output": "wasp-39-surface-{id}{suffix}.webp",
             "thumbnail": "wasp-39-lens-{id}.webp",
-            "source": "measurements.json",
+            "source": "photometry/stellar-color.json",
             "falseColor": false,
             "science": {
-              "kind": "neutral-shape",
-              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+              "kind": "stellar-photometric-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "qualification": "Uniform photosphere colour from the star's Gaia DR3 BP/RP spectrum. The disc is unresolved: it is darkened toward the limb by the quadratic law Kirk et al. (2019) fitted to transits of its planet (WHT/ACAM white light, 400-900 nm); no map or absolute brightness is implied. Self-luminous, so no lighting.",
+              "limbDarkening": {
+                "law": "quadratic",
+                "published": true,
+                "path": "photometry/kirk-2019-limb-darkening.json"
+              }
             }
           }
         ],
@@ -82,7 +88,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0bb998bf8ee705bb24fd41a6cc7baabfdec6082ff9dc8be3bfecf7d04e3096ac",
+      "sha256": "bc40e939e457b495ebfeb77f05fae830ec8084bd63ef38d43837de48e9671c7a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,22 +127,22 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "color",
           "controls": [
             {
-              "id": "shape",
-              "label": "Shape",
-              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-              "thumbnail": "wasp-39-lens-shape.webp",
-              "surface": "wasp-39-surface-shape@2x.webp",
-              "poles": "wasp-39-poles-shape@2x.webp",
+              "id": "color",
+              "label": "Color",
+              "qualification": "Colour from Gaia's spectrum of the star. The disc is unresolved; its darker edge is half measured from transits of its planet.",
+              "thumbnail": "wasp-39-lens-color.webp",
+              "surface": "wasp-39-surface-color@2x.webp",
+              "poles": "wasp-39-poles-color@2x.webp",
               "source": {
-                "id": "wasp-39-observational-measurements",
+                "id": "wasp-39-stellar-color",
                 "path": "../manifest.json",
-                "url": "https://arxiv.org/abs/1802.03859"
+                "url": "https://gea.esac.esa.int/archive/"
               },
               "falseColor": false,
-              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+              "notes": "The colour of Gaia DR3's measured spectrum of WASP-39. No resolved image of the surface is cast; the display axis is celestial north, a convention."
             }
           ]
         },
@@ -151,6 +157,12 @@
             "role": "facts",
             "description": "L. Mancini et al., \"The GAPS programme with HARPS-N at TNG XVI: Measurement of the Rossiter-McLaughlin effect of transiting planetary systems HAT-P-3, HAT-P-12, HAT-P-22, WASP-39 and WASP-60\", A&A 613, A41 (2018), arXiv:1802.03859",
             "href": "https://arxiv.org/abs/1802.03859"
+          },
+          {
+            "label": "Spectrum",
+            "role": "facts",
+            "description": "Gaia DR3 3643098875168270592",
+            "href": "https://gea.esac.esa.int/archive/"
           }
         ],
         "provenance": {
@@ -172,19 +184,79 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "wasp-39-observational-measurements",
-      "path": "measurements.json",
-      "origin": "https://arxiv.org/abs/1802.03859",
-      "credit": "L. Mancini et al., \"The GAPS programme with HARPS-N at TNG XVI: Measurement of the Rossiter-McLaughlin effect of transiting planetary systems HAT-P-3, HAT-P-12, HAT-P-22, WASP-39 and WASP-60\", A&A 613, A41 (2018), arXiv:1802.03859",
+      "id": "wasp-39-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://gea.esac.esa.int/archive/",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed published measurements with their sources",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-xp-wasp-39",
+            "role": "material",
+            "evidence": "src/objects/wasp-39/source/photometry/stellar-color.json#/sampledSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "90b4877d964baa526ffeb3fb6df67339f56ca7a80bf6179c94936d6431053807",
+      "bytes": 1142,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "wasp-39-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "wasp-39-published-limb-darkening",
+      "path": "photometry/kirk-2019-limb-darkening.json",
+      "origin": "https://arxiv.org/abs/1908.02358",
+      "credit": "Kirk et al. (2019), LRG-BEASTS: Transmission Spectroscopy and Retrieval Analysis of the Highly Inflated Saturn-mass Planet WASP-39b, AJ 158, 144",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper's table, with each cell quoted",
       "redistribution": "Factual parameter transcription only; no paper figures",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "reason": "Published coefficients transcribed in this package with their table cells; repinned when edited."
       },
-      "sha256": "89cebab0b008a3a9231fa97795b4c030ba4a6e137ce6b58a8396c1b57b3dbdd0",
-      "bytes": 1097,
+      "sha256": "92430e81265e7ede96c3f5be157180dabe93997f07851880937c63dfc5e3c6b0",
+      "bytes": 681,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -203,8 +275,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0bb998bf8ee705bb24fd41a6cc7baabfdec6082ff9dc8be3bfecf7d04e3096ac",
-      "bytes": 3060,
+      "sha256": "bc40e939e457b495ebfeb77f05fae830ec8084bd63ef38d43837de48e9671c7a",
+      "bytes": 3122,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -213,18 +285,18 @@
   ],
   "products": [
     {
-      "id": "shape",
-      "label": "Shape",
+      "id": "color",
+      "label": "Color",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+        "Colour from Gaia's spectrum of the star. The disc is unresolved; its darker edge is half measured from transits of its planet."
       ],
       "lensIds": [
-        "shape"
+        "color"
       ],
       "recipeDependencies": [
         "raster"
@@ -233,43 +305,45 @@
         "falseColor": false
       },
       "inputs": [
-        "wasp-39-observational-measurements"
+        "wasp-39-stellar-color",
+        "wasp-39-cie-1931-2deg-cmf",
+        "wasp-39-published-limb-darkening"
       ],
       "outputs": [
         {
-          "url": "/scenes/wasp-39/wasp-39-surface-shape@2x.webp",
+          "url": "/scenes/wasp-39/wasp-39-surface-color@2x.webp",
           "bytes": 178,
-          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "sha256": "e359cdc115118f71b9c2cc3b9c7b437ec94495bf4d9c9d41ec5e6f7110f88180",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/wasp-39/wasp-39-lens-shape.webp",
+          "url": "/scenes/wasp-39/wasp-39-lens-color.webp",
           "bytes": 44,
-          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "sha256": "a34b28e82e39a00df9d45890184d28aa0e13daed0287450075b57214d8c1ae8e",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/wasp-39/wasp-39-poles-shape@2x.webp",
+          "url": "/scenes/wasp-39/wasp-39-poles-color@2x.webp",
           "bytes": 1340,
-          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "sha256": "5d7ed3c5029664db17e8cd194b7aa1d1a943c95bdfb87532dba1f00cf583f54c",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/wasp-39/wasp-39-context-shape@2x.webp",
+          "url": "/scenes/wasp-39/wasp-39-context-color@2x.webp",
           "bytes": 100,
           "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/wasp-39/wasp-39-limb-shape@2x.webp",
-          "bytes": 84,
-          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "url": "/scenes/wasp-39/wasp-39-limb-color@2x.webp",
+          "bytes": 93352,
+          "sha256": "7e3b96d456839ffa080a844cf1963b012393d7c6ae4a17ea84646c43e81ce67f",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "wasp-39-observational-measurements",
+          "sourceId": "wasp-39-stellar-color",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
@@ -295,16 +369,16 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6208,
-          "sha256": "fb636c221e875607be4960cac0966e0b60c54d8c2e020550059dcd14157e01cd",
+          "bytes": 6332,
+          "sha256": "6863adede791f525f4b0474566673347c3f5627be185d38f9d6ee0366654bb1a",
           "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:shape",
-      "label": "Shape preview",
+      "id": "preview:color",
+      "label": "Color preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -313,16 +387,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "shape"
+        "color"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 422,
-          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 438,
+          "sha256": "b75ce8bbbc88c6d6fefa228294edbda9dec2b5e6f7700f200b9275ee1d8c7365",
           "verification": "bytes-verified"
         }
       ]
@@ -334,11 +408,11 @@
   },
   "lastPreparation": {
     "objectId": "wasp-39",
-    "materialSha256": "a46412dcddf443bcf246697bcd3ca794dbf954ff11b23cf5afdc045a16e39007",
+    "materialSha256": "17cf6a76d34364029c58a3639a089442dc4853c99dee4f2b3cdeb67330406cc7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "b1fa67247313096a8844f2d22d216515234df87831e1a7a053271362465fffed"
+      "bindingsSha256": "e43d5f9a1a870ce7851b6faeb6d4ab03f822531e7a23f9aa8cc1c813dd5dec59"
     }
   }
 }

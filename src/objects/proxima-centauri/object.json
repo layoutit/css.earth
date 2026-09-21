@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "44ff3462f44ed74471625b0afe3848b1c9d67c15966809856810a7b694216811"
+        "sha256": "379a67dced4f921a88f34bc4d50853cb3631fdd459622c72ab89d9a4309f5441"
       }
     },
     "catalog": {
       "name": "Proxima Centauri",
       "classification": "star",
-      "color": "#ffb070",
+      "color": "#ffd06e",
       "distanceAu": 268441,
       "description": "Red dwarf 1.30 parsecs away, the nearest star to the Sun; its photosphere is not imaged here.",
       "systemName": "Centaurus",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "0c7fce60d422c5d5e9d29de5e789d3a58e697f8bc1224eff5543207ab924b067"
+    "sha256": "1e227dffc3d506dc67c09e253738ee61aa7c1e8cc4de922c783e6bb39fa13927"
   }
 }

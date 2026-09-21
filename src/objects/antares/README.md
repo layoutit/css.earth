@@ -12,6 +12,8 @@ Antares is the nearest red supergiant. Its package holds the placement, the publ
 
 **Shape lens.** The surface is the `neutral-shape` science kind, the gray Eris and Makemake use: a display convention for an unresolved surface, not a colour or a brightness. The star is drawn by the emissive route like the other stars, with transparent off-limb and limb plates because there is no light to put on them. The navigation marker is a flat gray disc written by `tools/objects/source-authoring/antares/author.mts`.
 
+**Catalogue colour.** #ffc595, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 3660 ± 120 K from Ohnaka et al. 2013 (A&A 555, A24; <https://arxiv.org/abs/1304.4800>), abstract: the bolometric flux with the VLTI/AMBER limb-darkened diameter 37.38 mas, the radius source. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
+
 ## Evidence
 
 - [`investigations.json`](investigations.json) records the two image routes that were checked and excluded, with the measured numbers.
@@ -19,6 +21,7 @@ Antares is the nearest red supergiant. Its package holds the placement, the publ
 - `tests/objects/unit/antares/default-view.test.mts` derives the default camera from the runtime's camera math: the sub-camera point one degree from the sub-Earth point, the display axis and celestial north straight up.
 - `site/test/object-discovery.test.mts` checks that Antares is hidden from the map under every discovery setting while the imaged stars stay visible.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/antares/` with the default camera.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffc595 is the star field's colour at the cited 3660 K.
 
 ## Known problems
 

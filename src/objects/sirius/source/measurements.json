@@ -7,6 +7,10 @@
   "distanceSource": "Inverse of the Hipparcos new-reduction parallax 379.21 +/- 1.58 mas (van Leeuwen 2007, A&A 474, 653; 2007A&A...474..653V) via SIMBAD",
   "radiusKm": 1191189,
   "radiusSource": "Radius: the limb-darkened angular diameter 6.039 +/- 0.019 mas that Kervella et al. (2003, A&A 408, 681) measure on Sirius A with VLTI/VINCI, at the Hipparcos new-reduction parallax 379.21 +/- 1.58 mas (2.6371 pc): 1,191,189 km, 1.712 solar radii at 695700 km per solar radius (the paper gives 1.711 +/- 0.013). No gravitational parameter is adopted. presentationUp: no rotation axis is measured, so the presentation frame puts the display axis (celestial north at the star) up.",
+  "effectiveTemperatureK": 9845,
+  "effectiveTemperatureSource": "Effective temperature 9845 ± 64 K from Davis et al. 2011 (PASA 28, 58; https://doi.org/10.1071/AS10010), abstract: the SUSI and VLTI limb-darkened diameter 6.041 ± 0.017 mas with the bolometric flux. The radius source, Kervella et al. 2003, adopts a temperature rather than measuring one.",
+  "surfaceGravityLogg": 4.29,
+  "surfaceGravitySource": "log g from the dynamical mass 2.063 +/- 0.023 solar masses of Bond et al. 2017 (arXiv:1703.10625, abstract; https://arxiv.org/abs/1703.10625) and the package radius, log10(GM/R^2) in cgs",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

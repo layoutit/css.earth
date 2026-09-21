@@ -32,6 +32,11 @@
       "title": "Photosphere at 1.65 µm",
       "detail": "September 2014, one side",
       "summary": "An image rebuilt from interference fringes measured by four telescopes, cast onto a sphere. Colour is infrared brightness."
+    },
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its spectrum",
+      "summary": "The colour of Gaia's spectrum of the star. No surface picture, edge darkening or axis is measured."
     }
   }
 }

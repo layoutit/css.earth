@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -36,8 +36,9 @@
         }
       ],
       "shape": {
-        "kind": "sphere",
-        "radiusKm": 1313290
+        "kind": "ellipsoid",
+        "radiusKm": 1411575,
+        "polarRadiusKm": 1136774
       },
       "materials": [
         {
@@ -100,13 +101,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "93a6e1222d1a86ddceb03de400995792df37236efb1ef37c4cd637a251557875"
+        "sha256": "110c5525115d129efbdf4f693509072d8002e3fa07e2b9ff569ab462656ad740"
       }
     },
     "catalog": {
       "name": "Altair",
       "classification": "star",
-      "color": "#f4f0ff",
+      "color": "#d4dfff",
       "distanceAu": 1057885.7,
       "description": "Rapidly rotating A-type star 5.13 parsecs away; its photosphere is not imaged here.",
       "systemName": "Aquila",
@@ -124,28 +125,28 @@
         24405410641064576
       ],
       "presentationToReference": [
-        0.4592826658373359,
-        0.07165202419280914,
-        -0.8853956292474136,
-        -0.8748101834151678,
-        -0.13650114797259097,
-        -0.46483822948987924,
-        0.15416411986733788,
-        -0.9880452540401365,
-        0.000010690704528830076
+        -0.05501467260967978,
+        0.9331444415492959,
+        -0.3552672754466738,
+        -0.9222792459961763,
+        -0.1838244476060193,
+        -0.3400140656900339,
+        0.3825890461087125,
+        -0.3089498724194507,
+        -0.8707327937603079
       ],
       "orbitUpReference": [
-        -0.07165202419280914,
-        0.13650114797259097,
-        0.9880452540401365
+        -0.9331444415492959,
+        0.1838244476060193,
+        0.3089498724194507
       ],
-      "metersPerUnit": 4236419.354838709,
-      "bodyRadiusM": 1313290000
+      "metersPerUnit": 4553467.741935484,
+      "bodyRadiusM": 1411575000
     }
   },
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2572065436bd559d222180842b2dda691491f7ea1d64ed46646626b9bfde0d61"
+    "sha256": "8e6b30219ef2b5814ec3bde6cfaa0c167ed672963b0d8b463c305355c0fb9427"
   }
 }

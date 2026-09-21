@@ -7,6 +7,10 @@
   "distanceSource": "Inverse of the Hipparcos new-reduction parallax 88.83 ± 0.54 mas (van Leeuwen 2007) via SIMBAD",
   "radiusKm": 17617284,
   "radiusSource": "Radius: Limb-darkened angular diameter 20.922 ± 0.036 mas (quadratic limb-darkening fit) measured with IOTA/IONIC by Lacour et al. (2008), A&A 485, 561; at the Hipparcos distance this is the record’s radius. Adopted 17,617,284 km, 25.3231 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
+  "effectiveTemperatureK": 4295,
+  "effectiveTemperatureSource": "Effective temperature 4295 ± 26 K from Lacour et al. 2008 (A&A 485, 561; https://doi.org/10.1051/0004-6361:200809611), abstract: the IOTA/IONIC Rosseland diameter 21.05 ± 0.21 mas with the bolometric flux.",
+  "surfaceGravityLogg": 1.66,
+  "surfaceGravitySource": "log g 1.66 +/- 0.05 measured by Ramirez & Allende Prieto 2011 (ApJ 743, 135; https://arxiv.org/abs/1109.4425), abstract",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

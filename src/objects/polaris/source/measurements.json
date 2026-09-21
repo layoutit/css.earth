@@ -7,6 +7,10 @@
   "distanceSource": "136.90 +/- 0.34 pc, the distance Evans et al. (2024, ApJ 971, 190) adopt: the Gaia DR3 parallax of the wide companion Polaris B (7.2869 +/- 0.0178 mas via SIMBAD) with the Lindegren zero-point offset. Polaris Aa itself is too bright for a reliable Gaia parallax; Hipparcos gives 7.54 mas (133 pc).",
   "radiusKm": 32184239,
   "radiusSource": "The Evans et al. (2024) diameter at their adopted distance: 3.143 mas at 136.90 pc is 32,184,239 km, 46.26 solar radii at 695700 km; the paper gives 46.27 +/- 0.42 solar radii.",
+  "effectiveTemperatureK": 6015,
+  "effectiveTemperatureSource": "Effective temperature 6015 ± 170 K from Usenko et al. 2005 (MNRAS 362, 1219; https://doi.org/10.1111/j.1365-2966.2005.09353.x), abstract: the mean spectroscopic temperature from 30 spectra of 2001-2004. Polaris is a low-amplitude Cepheid; the ± may be the spread over its 3.97-day pulsation.",
+  "surfaceGravityLogg": 1.82,
+  "surfaceGravitySource": "log g from the astronomy record's GM and radius (physicalNotes), log10(GM/R^2) in cgs",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, shown in the shared neutral gray because no image of the photosphere is cast here (see investigations.json). The photosphere of a pulsating supergiant is not a solid surface and its limb is not sharp."

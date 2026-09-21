@@ -114,6 +114,21 @@
           "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
           "sourceUrl": "https://doi.org/10.1038/nature25001"
         }
+      },
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured.",
+        "thumbnail": "pi1-gruis-lens-color.webp",
+        "surface": "pi1-gruis-surface-color@2x.webp",
+        "poles": "pi1-gruis-poles-color@2x.webp",
+        "source": {
+          "id": "pi1-gruis-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "notes": "The colour of Gaia DR3's measured spectrum of π¹ Gruis. At G = 3.6 the star is brighter than the G of about 5 below which Gaia XP photometry can saturate, blue first (Montegriffo et al. 2023, A&A 674, A33), and its RUWE of 2.9 is high, so the blue end of this colour is uncertain. No resolved image of the surface is cast; the display axis is celestial north, a convention."
       }
     ]
   },
@@ -146,6 +161,12 @@
       "role": "facts",
       "description": "SIMBAD record for pi1 Gru: Gaia DR3 position, parallax and proper motion",
       "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "Gaia DR3 6518817665843312000",
+      "href": "https://gea.esac.esa.int/archive/"
     }
   ],
   "provenance": {
