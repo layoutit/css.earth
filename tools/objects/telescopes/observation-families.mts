@@ -17,6 +17,8 @@ export interface ObservationFamilyEvidence {
 
 export interface FamilyEvidenceOwner { readonly kind: ObservationFamilyEvidence['owner']['kind']; readonly id: string; readonly evidence: string }
 export const STEREO_COR1_F16_PROFILE = 'stereo-secchi-cor1-electron-density@2025-05-06' as const;
+export const JUNO_MWR_NH3_F16_PROFILE = 'juno-mwr-nh3-distribution@2024-10-22' as const;
+export const CONSERT_FSS_GEOMETRY_F16_PROFILE = 'consert-fss-body-fixed-geometry@2019-02-19' as const;
 
 export function productTypeFamilyEvidence(mapping: ProductTypeMapping | null, owner: FamilyEvidenceOwner): ObservationFamilyEvidence {
   return { schema: OBSERVATION_FAMILY_EVIDENCE_SCHEMA, families: mapping?.families ?? [], status: mapping?.status ?? 'unmapped',
@@ -40,6 +42,18 @@ const ARCHIVE_FAMILY_PROFILES: Readonly<Record<string, ArchiveFamilyProfile>> = 
     vocabulary: 'STEREO/SECCHI COR1 N3D FITS', vocabularyVersion: '2025-05-06',
     documentation: 'https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml', kind: 'cube', decoder: 'fits-image',
     requiredIdentity: { NAXIS: 3, NAXIS1: 361, NAXIS2: 181, NAXIS3: 51, CTYPE1: 'CRLN', CRPIX1: 1, CRVAL1: 0, CDELT1: 1, CUNIT1: 'deg', CTYPE2: 'CRLT', CRPIX2: 91, CRVAL2: 0, CDELT2: 1, CUNIT2: 'deg', CTYPE3: 'HECR', CRPIX3: 1, CRVAL3: 1.5, CDELT3: 0.05, CUNIT3: 'solRad', BUNIT: 'cm^-3', INSTRUME: 'SECCHI' },
+  },
+  [JUNO_MWR_NH3_F16_PROFILE]: {
+    id: JUNO_MWR_NH3_F16_PROFILE, families: ['F16'], sourceTerm: 'Juno MWR Level-5 ammonia distribution and uncertainty on pressure and planetocentric-latitude coordinates',
+    vocabulary: 'NASA PDS JNOMWR_2100 NH3A/NH3U', vocabularyVersion: '2024-10-22',
+    documentation: 'https://atmos.nmsu.edu/PDS/data/jnomwr_2100/AAREADME.TXT', kind: 'table', decoder: 'pds-product',
+    requiredIdentity: { DATA_SET_ID: 'JNO-J-MWR-5-NH3-DISTRIBUTION-V1.0', PRODUCT_ID: 'MWRNH3A2016240070004_R00548_V01.CSV', TARGET_NAME: 'JUPITER', INSTRUMENT_ID: 'MWR' },
+  },
+  [CONSERT_FSS_GEOMETRY_F16_PROFILE]: {
+    id: CONSERT_FSS_GEOMETRY_F16_PROFILE, families: ['F16'], sourceTerm: 'CONSERT level-4 orbiter and lander positions at each sounding in the 67P Comet Fixed Frame',
+    vocabulary: 'ESA PSA / NASA PDS RO/RL-C-CONSERT-4-FSS-V1.0 GEOMETRY', vocabularyVersion: '2019-02-19',
+    documentation: 'https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/catalog/dataset.cat', kind: 'table', decoder: 'pds-product',
+    requiredIdentity: { DATA_SET_ID: 'RO/RL-C-CONSERT-4-FSS-V1.0', TARGET_NAME: '67P/CHURYUMOV-GERASIMENKO 1 (1969 R1)', INSTRUMENT_ID: 'CONSERT', PROCESSING_LEVEL_ID: '4' },
   },
 });
 
