@@ -1,0 +1,37 @@
+{
+  "id": "damit-shape-448",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Koronis · koronis shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/448/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/koronis/source/manifest.json",
+      "revision": "5c4324b3c3cacb15a5ba75debc2cee87cd2b6111",
+      "sha256": "331da30156982e457496207c803eb38d568070809c60e4621c396135cd7cbfc2",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "DAMIT, Astronomical Institute of Charles University; Koronis model 167; original model authors identified in its pinned reference records.",
+      "scope": "The koronis shape input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

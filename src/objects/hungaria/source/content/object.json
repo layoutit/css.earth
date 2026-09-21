@@ -1,0 +1,154 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hungaria",
+  "displayName": "Hungaria",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Display reference radius",
+        "value": "4.467 km (size-calibrated model)",
+        "source": {
+          "url": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
+          "label": "Masiero et al. (2012), NEOWISE v2 row Mas12",
+          "checked": "2026-09-21",
+          "path": "source/reference/calibration.json",
+          "catalogueId": "masiero-2012-neowise",
+          "locator": "/diameterKm; radius = diameterKm / 2"
+        }
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "Solar semimajor axis",
+        "value": "1.944 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27434%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-21",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; A (km) / 149597870.7"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "2.71 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27434%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-21",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; PR (days) / 365.25"
+        }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Model rotation period",
+        "value": "26.4879 hours",
+        "source": {
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1151",
+          "label": "DAMIT model 1151",
+          "checked": "2026-09-21",
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 1151; /periodHours"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "thumbnail": "/scenes/hungaria/hungaria-shape-thumbnail.webp",
+        "surface": "hungaria-shape-surface@2x.webp",
+        "poles": "hungaria-shape-surface@2x.webp",
+        "source": {
+          "id": "hungaria-shape",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "notes": "NEOWISE thermal diameter, applied approximately to the mesh volume: 8.9 ± 0.7 km. The convex model shows broad shape; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
+        "noData": true
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "/scenes/hungaria/hungaria-elevation-thumbnail.webp",
+        "surface": "hungaria-elevation-surface@2x.webp",
+        "poles": "hungaria-elevation-surface@2x.webp",
+        "source": {
+          "id": "hungaria-shape",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-2",
+            "0.25",
+            "2.5"
+          ],
+          "meta": "km · 4.467 km reference sphere",
+          "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1151",
+          "image": "/scenes/hungaria/hungaria-elevation-legend.webp"
+        },
+        "notes": "Radius on the shape model minus a 4.467 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Model record",
+      "role": "terrain",
+      "description": "DAMIT model 1151, version 2016-01-04",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1151"
+    },
+    {
+      "label": "Size calibration",
+      "role": "facts",
+      "description": "Masiero et al. (2012), NEOWISE v2 row Mas12",
+      "href": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html"
+    },
+    {
+      "label": "Rotation",
+      "role": "rotation",
+      "description": "Published pole and period; arbitrary display phase",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1151"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1151",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Hungaria model 1151; original model authors identified in its pinned reference records."
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hungaria.json",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

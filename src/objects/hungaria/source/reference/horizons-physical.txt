@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27434%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               434 Hungaria (A898 RB)          2026-Sep-21 14:41:55
+Rec #:     434 (+COV) Soln.date: 2026-Mar-11_21:47:53  # obs: 11050 (1898-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458447.5 ! 2018-Nov-25.00 (TDB)         Residual RMS= .21722
+   EC= .07363534784899585  QR= 1.801128162531624   TP= 2457983.1338226604
+   OM= 175.3228795230465   W=  124.0273679160293   IN= 22.50792704067365
+   A= 1.944297160248324    MA= 168.818754163032    ADIST= 2.087466157965024
+   PER= 2.71114            N= .36354662            ANGMOM= .023921155
+   DAN= 2.01686            DDN= 1.85723            L= 301.4850948
+   B= 18.4974604           MOID= .834867           TP= 2017-Aug-17.6338226604
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 4.467              ROTPER= 26.521
+   H= 11.2                 G= .150                 B-V= .717
+                           ALBEDO= .726            STYP= Xe
+
+ASTEROID comments: 
+1: soln ref.= JPL#112, OCC=0
+2: source=ORB
+*******************************************************************************

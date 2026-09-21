@@ -1,0 +1,33 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271862%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                1862 Apollo (1932 HA)          2026-Sep-21 14:39:12
+Rec #:    1862 (+COV) Soln.date: 2026-Aug-31_06:24:24   # obs: 3701 (1930-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458331.5 ! 2018-Aug-01.00 (TDB)         Residual RMS= .29181
+   EC= .5597127875299026   QR= .6472852808104665   TP= 2458189.2899165475
+   OM= 35.63583348274464   W=  285.9689044314958   IN= 6.355064024289297
+   A= 1.470143266662389    MA= 78.6312131980863    ADIST= 2.293001252514312
+   PER= 1.78257            N= .55292291            ANGMOM= .017284293
+   DAN= .87486             DDN= 1.19334            L= 321.6983948
+   B= -6.1088769           MOID= .0257728          TP= 2018-Mar-11.7899165475
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= .750               ROTPER= 3.065
+   H= 16.09                G= .090                 B-V= .819
+                           ALBEDO= .250            STYP= Q
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= -3.656897433757E-15 A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#579, PHA  OCC=0       radar( 8 delay, 9 Dop.)
+2: source=ORB; Nongravitational accels. using nonstandard g(r) = (1 au/ r)^2
+*******************************************************************************

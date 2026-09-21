@@ -1,0 +1,16 @@
+{
+  "schema": "csskarin-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 749542,
+      "sha256": "937c05ff0564324e23755a2bb8970e539bfd962ee5e351601544977873b54483"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 619697,
+      "sha256": "26ee7f74f456d0769bcbf8b5ea8bcb559eaf5412b677fcbab4ddf5bac9b8ebd0"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27158%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                158 Koronis (A876 AA)          2026-Sep-21 14:41:21
+Rec #:     158 (+COV) Soln.date: 2026-Jun-05_03:13:01  # obs: 10436 (1893-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457961.5 ! 2017-Jul-27.00 (TDB)         Residual RMS= .25332
+   EC= .05195665130547355  QR= 2.71954575267908    TP= 2457525.4021170284
+   OM= 277.9572947164364   W=  142.51428249043     IN= 1.001514474061723
+   A= 2.868587977990612    MA= 88.46791486079437   ADIST= 3.017630203302144
+   PER= 4.85859            N= .202862519           ANGMOM= .029095682
+   DAN= 2.98386            DDN= 2.74757            L= 60.4758042
+   B= .6094657999999999    MOID= 1.73093998        TP= 2016-May-16.9021170284
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 19.5125            ROTPER= 14.218
+   H= 9.32                 G= .150                 B-V= .859
+                           ALBEDO= .213            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#77, OCC=0
+2: source=ORB
+*******************************************************************************

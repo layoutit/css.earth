@@ -1,0 +1,64 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "datura",
+  "card": {
+    "text": "Largest body of the Datura family.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1509-00975",
+        "url": "https://arxiv.org/abs/1509.00975",
+        "label": "Rosaev & Plávalová (2015), New members of Datura family",
+        "checked": "2026-09-21",
+        "locator": "Abstract",
+        "quote": "A group of minor asteroids associated with the largest body Datura(1270) is of particular interest because it has enough known members and resides in the inner part of the main asteroid belt and is easy to observe."
+      },
+      {
+        "catalogueId": "damit-shape-895",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/895/shape.txt",
+        "label": "DAMIT shape 895 · Datura",
+        "checked": "2026-09-21",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "G. Van Biesbroeck found Datura at Williams Bay in 1930. It is the largest body of the Datura family in the inner main belt.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1270",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "1270 Datura (1930 YE); Discovered 1930-Dec-17 by Van Biesbroeck, G. at Williams Bay; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "arxiv-1509-00975",
+        "url": "https://arxiv.org/abs/1509.00975",
+        "label": "Rosaev & Plávalová (2015), New members of Datura family",
+        "checked": "2026-09-21",
+        "locator": "Abstract",
+        "quote": "A group of minor asteroids associated with the largest body Datura(1270) is of particular interest because it has enough known members and resides in the inner part of the main asteroid belt and is easy to observe."
+      },
+      {
+        "catalogueId": "damit-shape-895",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/895/shape.txt",
+        "label": "DAMIT shape 895 · Datura",
+        "checked": "2026-09-21",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Light-curve shape model",
+      "detail": "Published shape",
+      "summary": "Shape from brightness changes as it spins, sized by an infrared survey. The spin angle shown is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 4.101 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

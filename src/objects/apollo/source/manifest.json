@@ -1,0 +1,171 @@
+{
+  "schema": "cssapollo-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "apollo-shape",
+      "path": "shape/model-273.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/920/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Apollo model 273; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore original uncalibrated counted triangle table through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "uncalibrated source coordinates",
+        "metersPerUnit": 1354.0733504357095,
+        "referenceRadiusMeters": 840
+      },
+      "coverage": "Published convex light-curve model 273. Thermophysical effective diameter fitted to this mesh: 1.68 ± 0.09 km. The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+      "expectedBytes": 82708,
+      "expectedSha256": "7e423301f23bb0c1ce9fbca3155b67844af784a4a755b8ccaf399fbe0ee37a56",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-920",
+            "role": "material",
+            "evidence": "src/objects/apollo/source/manifest.json@5c4324b3c3cacb15a5ba75debc2cee87cd2b6111#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/objects/apollo/source/manifest.json@5c4324b3c3cacb15a5ba75debc2cee87cd2b6111#/inputs/1"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/920/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Apollo model 273; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 28877,
+      "expectedSha256": "a34a09420397d00356b8bb53db26e9596c621508bd463f10aefdd5ae3c62ba36",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "inputs": [
+          "apollo-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 5663,
+      "expectedSha256": "bce0d689b55c29b6985578e87ede4a23bcffd2fbb6861d635d43019039288e4b",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 547,
+      "expectedSha256": "db87211a26ef659816422b75fe0f91bec03b83dc90f3cbbf6b3c174cba34cffe"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 443,
+      "expectedSha256": "6d6a1ff221a7ce718bf998372dd4e13c8ebb7610acde9b53b17c2d7b1d36a3ba"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 647,
+      "expectedSha256": "1b27e724827a27b61bccde64de70cb067a8eec20c16654b51b27c6a726cbeb8e"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2901,
+      "expectedSha256": "fe5dd580635cbe05c2cba60a6971920df7e31ffab98551bd232408f3a10a344a"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2699,
+      "expectedSha256": "84e3e18c4164a80ef8c7212d5be3ec09e2a7e765b1522271c70145c239b490dd"
+    },
+    {
+      "path": "reference/calibration.json",
+      "expectedBytes": 1743,
+      "expectedSha256": "0ccd155801dabe7fe0bd13f7466904630ee1d04ab88fb0cb1c64184add00b81f"
+    },
+    {
+      "path": "reference/damit-model.json",
+      "expectedBytes": 982,
+      "expectedSha256": "cee21c4683e8ee52d0a55547b496c4b8bf800488b20517ab2d6151a591018220"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "expectedBytes": 7755,
+      "expectedSha256": "3143320d3d3d93b8f5def3c2cd421133448f0913b54b6a9fd07589dfd78c5010"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "expectedBytes": 1754,
+      "expectedSha256": "2c3b1913a6576d508cf3afaf0cebded1b26b33e90450033b0bd68a7da9953215"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "expectedBytes": 7045,
+      "expectedSha256": "58499e0a761c3f6fda3b31101937d1a333fdbbd6bade35bcb949907c3eec249f"
+    },
+    {
+      "path": "reference/model-properties.json",
+      "expectedBytes": 3541,
+      "expectedSha256": "106dfd2cd2e415686efafda75fff0a2a5e0e00da3efee90b4ccde283b59dcfb7"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6088,
+      "expectedSha256": "1b7a0099951ee931d0615b57b4cdadfd2d5d770d6545f9af9165ebe31217ab5d"
+    }
+  ]
+}

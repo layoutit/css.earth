@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "datura",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 266: selected shape and spin",
+      "status": "included",
+      "finding": "DAMIT model 266, version 2009-06-15, pole (60°, 76°), period 3.3581 h, taken unchanged from the archive. Mirror solution 267 recorded as an alternative.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/266",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "5c4324b3c3cacb15a5ba75debc2cee87cd2b6111"
+        }
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "8.203 ± 0.152 km, NEOWISE best-fit effective spherical diameter, transferred approximately to mesh volume diameter. The NEOWISE v2 table holds one row for 1270, fit code DVBI (diameter, visible albedo, beaming and infrared albedo fitted). A thermal sphere diameter is an approximate mesh-volume scale.",
+      "evidence": [
+        "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "5c4324b3c3cacb15a5ba75debc2cee87cd2b6111"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Resolved surface imagery",
+      "status": "unresolved",
+      "finding": "No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.",
+      "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/266"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "5c4324b3c3cacb15a5ba75debc2cee87cd2b6111"
+        }
+      ]
+    }
+  ]
+}
