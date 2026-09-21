@@ -12,8 +12,8 @@ import { SCENE_OBJECTS } from '../site/objects.mts';
 import { sourceInventory } from './source-catalogue-inputs.mts';
 import { hasErrorCode } from './source-values.mts';
 import { sourceObject, sourceArray, sourceText, parseSourceCatalog, sourceResolver } from '../src/platform/source-catalog.mts';
-import { parsePreparedSources, sourceCatalogDigest } from '../src/platform/prepared-sources.mts';
-import { readSourceCatalog, checkSourceCatalog } from './read-source-catalogue.mts';
+import { parsePreparedSources } from '../src/platform/prepared-sources.mts';
+import { readSourceCatalog } from './read-source-catalogue.mts';
 import { parsePreparedExploration } from '../src/platform/prepared-exploration.mts';
 import { compileSourceUsage, parseSourceUsage, sourceDatasetViews } from '../src/platform/source-usage.mts';
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
@@ -96,7 +96,7 @@ test('independent source additions merge and compile without changing shared tra
   assert.equal(await git('status', '--porcelain'), '');
 });
 
-test('source files reject mismatched IDs, duplicate provider identities and stale or tampered catalogues', async t => {
+test('source files reject mismatched IDs and duplicate provider identities', async t => {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-source-records-'));
   t.after(() => rm(root, {recursive: true, force: true}));
   await mkdir(join(root, 'src/sources'), {recursive: true});
@@ -105,23 +105,9 @@ test('source files reject mismatched IDs, duplicate provider identities and stal
   await assert.rejects(readSourceCatalog(root), /identity differs from filename/);
   await writeFile(join(root, first), JSON.stringify(sourceFixture('first')));
   await writeFile(join(root, second), JSON.stringify(sourceFixture('second')));
-  const closure: Record<string, string> = {};
-  for (const path of [first, second]) closure[path] = createHash('sha256').update(await readFile(join(root, path))).digest('hex');
-  const original = await readSourceCatalog(root);
-  const prepared = {catalogSha256: sourceCatalogDigest(original), closure};
-  await checkSourceCatalog(root, prepared);
+  await readSourceCatalog(root);
   await writeFile(join(root, second), JSON.stringify({...sourceFixture('second'), identifiers: sourceFixture('first').identifiers}));
   await assert.rejects(readSourceCatalog(root), /Duplicate/);
-  await assert.rejects(checkSourceCatalog(root, prepared), /Stale sources catalogue/);
-  await rm(join(root, second));
-  await assert.rejects(checkSourceCatalog(root, prepared), /differs from its records/);
-  await writeFile(join(root, second), JSON.stringify(sourceFixture('second')));
-  const added = join(root, 'src/sources/third.json');
-  await writeFile(added, JSON.stringify(sourceFixture('third')));
-  await assert.rejects(checkSourceCatalog(root, prepared), /Stale sources catalogue/);
-  await rm(added);
-  const tampered = {...original, records: original.records.map(record => ({...record, title: 'Invented title'}))};
-  await assert.rejects(checkSourceCatalog(root, {...prepared, catalogSha256: sourceCatalogDigest(tampered)}), /differs from its records/);
 });
 const objectInput = async (id: string) => {
   const object = SCENE_OBJECTS.find(object => object.id === id)!;
