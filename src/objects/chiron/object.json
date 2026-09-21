@@ -1,0 +1,130 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "chiron",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Chiron",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 97.74667322530202
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/chiron-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5ed69bd3da8517f424cc517b9340397df863367ece52435dcc9913e31e73071e"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2420198410010.443,
+        1160500463787.6196,
+        513417921480.679
+      ],
+      "presentationToReference": [
+        0.885644756020104,
+        2.4356826039297786e-17,
+        0.4643633987881586,
+        0.42604508866961355,
+        0.3977771559319137,
+        -0.8125631770140824,
+        0.1847131520888308,
+        -0.9174820620691818,
+        -0.3522892522156906
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 424.9855357621827,
+      "bodyRadiusM": 97746.67322530202
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "Chiron (95P)",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 18.267057262719682,
+      "description": "The first known Centaur, and a comet as well.",
+      "systemName": "Solar System",
+      "context": {
+        "name": "Chiron"
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "fc8a6b28da174fc7d129df147cd94c9d40f347e87e78af1f56c3cf81c8c05fb9"
+  }
+}

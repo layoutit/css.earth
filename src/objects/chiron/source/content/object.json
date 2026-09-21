@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "chiron",
+  "displayName": "Chiron",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "252 × 218 × 136 km",
+        "source": {
+          "url": "https://doi.org/10.1051/0004-6361/202346749",
+          "label": "Research publication · DOI 10.1051/0004-6361/202346749",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1051-0004-6361-202346749",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "5.917813 ± 0.000007 h",
+        "source": {
+          "url": "https://doi.org/10.1051/0004-6361/202346749",
+          "label": "Research publication · DOI 10.1051/0004-6361/202346749",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1051-0004-6361-202346749",
+          "locator": "/periodText"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "thumbnail": "/scenes/chiron/chiron-model-thumbnail.webp",
+        "surface": "chiron-model-surface@2x.webp",
+        "poles": "chiron-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202346749"
+        },
+        "notes": "Published Jacobi-ellipsoid interpretation, with semiaxes 470 ±20, 383 ±10 and 245 ±8 km. It assumes hydrostatic equilibrium and a 6.75-hour rotation; the smooth shape is inferred from occultations, not imaged terrain. Illustrative pole RA 0°, declination 90° and arbitrary meridian. The paper’s local projected-limb and opening angles do not provide a unique absolute surface attitude for this display. The grid marks unmapped terrain.",
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Braga-Ribas et al. (2023), Astronomy & Astrophysics 676, A72; 2019 September 8 multi-chord stellar occultation",
+      "href": "https://doi.org/10.1051/0004-6361/202346749"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/2308.10042"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.1051/0004-6361/201731676"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.1006/icar.1993.1098"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.1051/0004-6361/201219566"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.1051/0004-6361/202346998"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1051/0004-6361/202346749",
+      "credit": "Braga-Ribas et al. (2023), Astronomy & Astrophysics 676, A72; 2019 September 8 multi-chord stellar occultation"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Braga-Ribas et al. (2023), Astronomy & Astrophysics 676, A72; 2019 September 8 multi-chord stellar occultation"
+    }
+  }
+}

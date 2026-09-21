@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-21",
+  "id": "chiron",
+  "name": "Chiron",
+  "titleLabel": "Chiron",
+  "horizons": "2060;",
+  "aliases": [
+    "2060 Chiron",
+    "1977 UB",
+    "95P/Chiron",
+    "95P",
+    "(2060) Chiron"
+  ],
+  "identity": "One physical body with two catalogue identities. JPL SBDB returns the same record for sstr=2060 and sstr=95P: des 2060, spkid 20002060, fullname '2060 Chiron (1977 UB)', kind 'an' (numbered asteroid), des_alt [{pri: 1977 UB}, {com: 95P}], orbit class CEN (Centaur). cssEarth registers one scene.",
+  "classification": "asteroid",
+  "population": "Centaur",
+  "fullAxesKm": [
+    252.0,
+    218.0,
+    136.0
+  ],
+  "axisUncertaintyKm": [
+    44.0,
+    38.0,
+    26.0
+  ],
+  "axisUncertaintyNote": "Full-axis uncertainties are the published semiaxis uncertainties 22, 19 and 13 km doubled. They are not independent.",
+  "radiusKm": 97.74667322530202,
+  "axesStatus": "Three semiaxes from one published model fit, not three independently measured axes. The reference radius is the geometric mean of the model semiaxes; it is the rendering scale and it agrees with the paper's volume-equivalent radius 98 ± 17 km.",
+  "areaEquivalentRadiusKm": {
+    "value": 105,
+    "uncertaintyPlus": 6,
+    "uncertaintyMinus": 7,
+    "meaning": "Apparent area-equivalent radius, held fixed in the occultation fit; taken from the radiometric diameter of Lellouch et al. 2017 (A&A 608, A45).",
+    "source": "https://doi.org/10.1051/0004-6361/201731676"
+  },
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "poleSource": "https://doi.org/10.1051/0004-6361/202346749",
+  "periodHours": 5.917813,
+  "periodText": "5.917813 ± 0.000007 h",
+  "periodSource": "https://doi.org/10.1006/icar.1993.1098",
+  "rotationFact": true,
+  "shapeLabel": "Occultation and equilibrium shape model",
+  "source": "https://doi.org/10.1051/0004-6361/202346749",
+  "credit": "Braga-Ribas et al. (2023), Astronomy & Astrophysics 676, A72; 2019 September 8 multi-chord stellar occultation",
+  "papers": [
+    "https://arxiv.org/abs/2308.10042",
+    "https://doi.org/10.1051/0004-6361/201731676",
+    "https://doi.org/10.1006/icar.1993.1098",
+    "https://doi.org/10.1051/0004-6361/201219566"
+  ],
+  "shapeMeaning": "Published triaxial figure from the 2019 September 8 multi-chord stellar occultation: semiaxes 126 ± 22, 109 ± 19 and 68 ± 13 km, volume-equivalent radius 98 ± 17 km (Braga-Ribas et al. 2023, A&A 676, A72). Only the apparent limb ellipse is fitted from the chords. The third axis follows from three stated assumptions: a Jacobi fluid-equilibrium figure at the 5.917813 h rotation period, the true light-curve amplitude 0.16 ± 0.03 mag of Groussin et al. 2004, and a body pole assumed equal to the Ortiz et al. 2015 ring pole. The area-equivalent radius was held fixed at 105 (+6/-7) km, the radiometric value of Lellouch et al. 2017, so the scale is radiometric, not occultation-measured. This is a model figure, not resolved terrain.",
+  "orientationMeaning": "Illustrative ICRF north pole (right ascension 0 degrees, declination +90 degrees), arbitrary prime meridian and phase. Chiron has no measured spin pole. The published ring or disk pole near ecliptic longitude 151 degrees, latitude +20 degrees is a pole of the surrounding material; the shape paper assumes the body shares it, and this display does not adopt that assumption as an orientation.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain. Chiron is about 0.015 arcsec across at its current distance and has never been resolved.",
+  "colour": {
+    "spectralGradientPercentPer100nm": {
+      "value": 0.114,
+      "uncertainty": 0.996
+    },
+    "bMinusV": {
+      "value": 0.7,
+      "uncertainty": 0.02
+    },
+    "vMinusR": {
+      "value": 0.361,
+      "uncertainty": 0.017
+    },
+    "rMinusI": {
+      "value": 0.325,
+      "uncertainty": 0.023
+    },
+    "epochs": 34,
+    "source": "https://doi.org/10.1051/0004-6361/201219566",
+    "meaning": "MBOSS-2 weighted means. The spectral gradient is measured against the solar spectrum, so 0.1 ± 1.0 percent per 100 nm means Chiron's reflectance is solar-coloured within its errors. The shared neutral material is used rather than a derived display colour, because a colour derived from these indices would be indistinguishable from neutral and the indices mix nucleus and coma across 34 epochs of varying activity."
+  },
+  "introduction": "Kowal found Chiron in 1977 beyond Saturn, and it was the first Centaur known. It later grew a coma and was given a comet designation too, so one body carries both names. A 2019 stellar occultation fixed its apparent outline; its three-dimensional figure follows from assuming an equilibrium shape.",
+  "card": "The first known Centaur, and a comet as well.",
+  "datasetSummary": "A 252 × 218 × 136 km figure from one occultation outline plus an assumed equilibrium shape. Its pole and rotational position are not measured.",
+  "textCitations": [
+    {
+      "catalogueId": "jpl-small-body-database",
+      "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2060",
+      "label": "JPL Small-Body Database",
+      "checked": "2026-09-21",
+      "locator": "Object, discovery circumstances and orbit",
+      "quote": "2060 Chiron (1977 UB); des_alt 1977 UB, 95P; Discovered 1977-10-18 by Kowal, C. at Palomar; orbit class: Centaur; q: 8.49 au"
+    }
+  ],
+  "distanceAu": 18.267057262719682
+}
