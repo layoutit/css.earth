@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "earth",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "24f680e3727b91bacff6e327dc7fb0c1f8e392efc22be198b7079842af6d18a3"
+    "sha256": "1110aab6f980f86cbc741884895b72e8445f39abb30da1604a7a9693b1e595f2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "72061a1f128f03f2673f555c65aa4976378edd8fcf42540fed36d451ed459321"
+    "bindingsSha256": "5b25d28c61c4650fc7c28a460c3c91a1db72399cec5542e5896c76ac01d8652f"
   },
   "recipes": [
     {
       "id": "paged-ellipsoid",
       "path": "source/preparation/paged-ellipsoid.json",
-      "sha256": "081e3b12dc0dfaa42d8d4701fb64ab96cdc29c75f7d36e36f13f0547fbe591c3",
+      "sha256": "7b38f6519ddaa24974a5977d0c7ec39a21d0ba6111a11c09dac5670cd8471106",
       "parameters": {
         "schema": "cssearth-paged-ellipsoid@1",
         "namespace": "earth",
@@ -129,7 +129,17 @@
               "compositeClouds": false,
               "thumbnail": "earth-lens-normal.webp",
               "displayGamma": 1.25,
-              "nativePhotographicSampling": true
+              "nativePhotographicSampling": true,
+              "deepOceanFill": {
+                "path": "blue-marble-july-bathymetry.jpg",
+                "replacedColor": [
+                  2,
+                  5,
+                  20
+                ],
+                "tolerance": 2,
+                "blendSourcePixels": 40
+              }
             },
             {
               "path": "blue-marble-july.jpg",
@@ -143,7 +153,17 @@
               },
               "primarySource": "blue-marble-clouds.tif",
               "displayGamma": 1.25,
-              "nativePhotographicSampling": true
+              "nativePhotographicSampling": true,
+              "deepOceanFill": {
+                "path": "blue-marble-july-bathymetry.jpg",
+                "replacedColor": [
+                  2,
+                  5,
+                  20
+                ],
+                "tolerance": 2,
+                "blendSourcePixels": 40
+              }
             },
             {
               "path": "science/gebco-2026/latitude-00.dods.gz",
@@ -520,7 +540,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cd31ba6a97a01a826fc34fcca433a9a20450f223802fa6e4a4a262c4f0904112",
+      "sha256": "86896f31c1a5c7bf77c2c4a973bda2cb31890dd3ae0235cad40c70386f7480c3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -652,7 +672,7 @@
                 "id": "nasa-blue-marble-july",
                 "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
               },
-              "notes": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic with brighter display midtones."
+              "notes": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic with brighter display midtones. Deep ocean is shaded from depth by NASA's bathymetry edition of the same month; the plain edition puts an arbitrary constant there. Shallow and coastal water stays observed."
             },
             {
               "id": "clouds",
@@ -662,7 +682,7 @@
                 "id": "nasa-blue-marble-clouds",
                 "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif"
               },
-              "notes": "Archival NASA cloud imagery over the July 2004 surface mosaic with brighter display midtones. Clouds and surface are from different observation periods; this is not live weather."
+              "notes": "Archival NASA cloud imagery over the July 2004 surface mosaic with brighter display midtones. Clouds and surface are from different observation periods; this is not live weather. Deep ocean is shaded from depth, not observed water colour."
             },
             {
               "id": "topography",
@@ -1645,7 +1665,7 @@
       "sha256": "dea8b4dc8a4f93f5f8bce0c8c85a508a178e7901e9ed8e6bf86e6ce7ef6d61e2",
       "bytes": 21125326,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1658,6 +1678,45 @@
           "user-agent": "cssEarth Earth source acquisition"
         }
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nasa-blue-marble-july-bathymetry",
+      "path": "blue-marble-july-bathymetry.jpg",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-topography-bathymetry/july/world.topo.bathy.200407.3x21600x10800.jpg",
+      "credit": "NASA Earth Observatory",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "NASA Blue Marble Next Generation July 2004 topography and bathymetry edition; same month and same 21600 x 10800 equirectangular grid as the plain edition, downloaded 2026-09-21. Only its ocean is used: preparation reads it where the plain edition carries NASA arbitrary deep-ocean fill. Its land carries baked relief shading and is not used.",
+      "redistribution": "NASA image with credit and no endorsement claim",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "terra",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-topography-bathymetry/july/world.topo.bathy.200407.3x21600x10800.jpg",
+            "missionId": "terra"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-blue-marble-july-bathymetry",
+            "role": "material",
+            "evidence": "src/objects/earth/source/manifest.json@0000000000000000000000000000000000000000#/inputs/7"
+          }
+        ]
+      },
+      "sha256": "d225f1f35a6448a4d1d8f6de6e48f3433e470085b70a35800e64f384f269a7b0",
+      "bytes": 27201049,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -1685,7 +1744,7 @@
       "sha256": "d137775d8966ab8d443fd5126dc6e7ad72072bc1ed50555c5818d221735daf0f",
       "bytes": 35870468,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1725,7 +1784,7 @@
       "sha256": "ce96440870f7e94a0506dac9c0e7decf160e133831432caee60f0cbefc5028d2",
       "bytes": 2045075,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1763,7 +1822,7 @@
       "sha256": "5aa6408d05f1c5847058b91a2f71ac6f654d12bca07bbefb3c513ef69a3ac174",
       "bytes": 4880,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1800,7 +1859,7 @@
       "sha256": "af6343bfe558feade9782bf84d93c8e7ed8bc911ef2fe28a7ea2d9cc6dc1433c",
       "bytes": 3291078,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1838,7 +1897,7 @@
       "sha256": "b340d57f622fa36f59c88178e75b1dc62762d5c6c91073775afdbd6ad1bd3735",
       "bytes": 3635991,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1876,7 +1935,7 @@
       "sha256": "7ec4e202995fa4f7517c92cfaa1d4f1fd24a202d812c46138b07a0b77c240f71",
       "bytes": 3761066,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1914,7 +1973,7 @@
       "sha256": "7439d8d3702937040f8975d9df00815de66bb916f2f02e696bedea401ae10633",
       "bytes": 3875732,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1952,7 +2011,7 @@
       "sha256": "22f159007cfcf694b88a7069b0ba52d0f8993a6076b6d4b2358aa1539868db30",
       "bytes": 3959519,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1990,7 +2049,7 @@
       "sha256": "adf191d03ff1979207e8be77c994ba2df7c5e4f2b5278143ca0c625fc2c0adb1",
       "bytes": 4098728,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2028,7 +2087,7 @@
       "sha256": "38a9ab5b65a6d7f0b1a2228cb6a6a3ba1d573049009b20240f84cb118ab15ae9",
       "bytes": 4118826,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2066,7 +2125,7 @@
       "sha256": "a83f8a67b524c5fc5302ed7fb4a7d008b410c7dc9fc8d0c86438faefd8abdaef",
       "bytes": 4021765,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2104,7 +2163,7 @@
       "sha256": "3f62c2aaeab8ee15b66f2014f44ccbfdc67a5adb06b71dee91e936c5376f9c40",
       "bytes": 3983376,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2142,7 +2201,7 @@
       "sha256": "426544acdd9797e1b51c2cc0764a75b8b162908befb93c6da77cadf15b648015",
       "bytes": 4037856,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2180,7 +2239,7 @@
       "sha256": "f422cce8de12d254175b3a6ce8433a0d21a0a85591b06f0460a397b7e9508441",
       "bytes": 4050768,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2218,7 +2277,7 @@
       "sha256": "0da9842f6463cd0f5cf7e7bc82cff279c155e46190302ed9b906f768968eb81f",
       "bytes": 4237876,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2256,7 +2315,7 @@
       "sha256": "74bce9b863f2fa88b06f25adcca51bf192d89b940f2973349e8f73294f958948",
       "bytes": 4033216,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2294,7 +2353,7 @@
       "sha256": "389e187690513bfa6286c222e392f4c7d053ef9fc4ea7d6fb68cce63a5c976e0",
       "bytes": 1932517,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2332,7 +2391,7 @@
       "sha256": "75ee477526af4ee4073fa687924756d3158dc119e09b0ea7ae8ec0abe6edae8b",
       "bytes": 1805120,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2370,7 +2429,7 @@
       "sha256": "e7feed36ae4b67e8ef797df29d473690c9ce69fb426097cd2e6f4795e9023e4f",
       "bytes": 3543843,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2408,7 +2467,7 @@
       "sha256": "ef93bb9cc2287914f05516da163ea7a505124628d2358cee50fed4a73501bdc9",
       "bytes": 3281192,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2446,7 +2505,7 @@
       "sha256": "d63d360e180427ce132e8df74f3373ec45f20a9ac9e89da1c1e6f23af8ae18b7",
       "bytes": 1710509,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2484,7 +2543,7 @@
       "sha256": "7138d3b113a94a2eb77ba0c9f53eb9bc3eddf9b7669e389e38304ce4f80f16e4",
       "bytes": 1312150,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2523,7 +2582,7 @@
       "sha256": "c5a2778bb9438f92d06f61b02e387c11b425f68b3eba1e28fbb9860b8ec8d480",
       "bytes": 973526576,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2551,7 +2610,7 @@
       "sha256": "e6a1704233f77c3721264de924a5b6e14a291ef78fd4d52db034a89ad32fc5a0",
       "bytes": 3060,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "json-document",
         "groups": [
@@ -2696,7 +2755,7 @@
       "sha256": "eb4f6ee98ea4293de369acd709110f8970f503dcc5b523a6a9124a6f39f5a3f0",
       "bytes": 22564700,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2717,7 +2776,7 @@
       "sha256": "26c32ab22618b14d98c582dcf2e924e5a52d20f8715447a6bd1a60475d7d1c4a",
       "bytes": 1106,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2747,7 +2806,7 @@
       "sha256": "a38404997298e3dbee95035e7125d7cc09586fe32dbce0550012653f97042fcb",
       "bytes": 520307,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2764,10 +2823,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cd31ba6a97a01a826fc34fcca433a9a20450f223802fa6e4a4a262c4f0904112",
-      "bytes": 16197,
+      "sha256": "86896f31c1a5c7bf77c2c4a973bda2cb31890dd3ae0235cad40c70386f7480c3",
+      "bytes": 16431,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2793,7 +2852,7 @@
       "sha256": "f658cc3471595caddbe04ae5fbfde6523f3ef160ec0bd5ba3074635f3561834e",
       "bytes": 27346,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "request-download",
         "groups": [
@@ -2850,7 +2909,7 @@
       "dependencies": [
         "nasa-psg-earth-configuration"
       ],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "request-download",
         "groups": [
@@ -2904,7 +2963,7 @@
       "sha256": "5af7f2ad08a7306a46aa29df8c7d125a2563f2ecce7b0998fa66d6f33204f384",
       "bytes": 3083,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2926,7 +2985,7 @@
       "sha256": "4019d8783f0b712d5182e46db58c5516e4b69ce2e309a9164ee4f15334b2acd6",
       "bytes": 209,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2949,7 +3008,7 @@
       "sha256": "646efc2ea52249c099c264ad961f4fe8339b468afbd3467368b46b27c56b2794",
       "bytes": 28537,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -2962,9 +3021,9 @@
       "selector": "/surface/maps/0",
       "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Sample the original photographic grids at each retained atlas footprint, apply the declared display transfer and cloud composite, and encode the existing texture layout.",
+      "process": "Sample the original photographic grids at each retained atlas footprint, apply the declared display transfer and cloud composite, and encode the existing texture layout. Where the plain source carries its declared arbitrary deep-ocean fill, take the ocean sample from the declared second edition instead, without the display transfer, fading the replacement to nothing at the edge of that region.",
       "limitations": [
-        "NASA Blue Marble Next Generation July 2004, cloud-free global surface mosaic"
+        "NASA Blue Marble Next Generation July 2004, cloud-free global surface mosaic. Deep ocean is shaded from depth, taken from NASA's bathymetry edition of the same month where the plain edition carries its arbitrary constant fill; shallow and coastal water stays observed."
       ],
       "lensIds": [
         "normal"
@@ -2972,63 +3031,75 @@
       "recipeDependencies": [
         "paged-ellipsoid"
       ],
+      "interpretation": {
+        "kind": "observed-colour-with-depth-shaded-deep-ocean",
+        "replacedColor": [
+          2,
+          5,
+          20
+        ],
+        "tolerance": 2,
+        "blendSourcePixels": 40,
+        "limitations": "Deep ocean colour is shaded from depth, not observed water colour. The plain edition replaces those pixels with one arbitrary reflectance, so they carry no measurement. This is not a calibrated depth scale. Shallow and coastal water remains observed imagery."
+      },
       "inputs": [
-        "nasa-blue-marble-july"
+        "nasa-blue-marble-july",
+        "nasa-blue-marble-july-bathymetry"
       ],
       "outputs": [
         {
           "url": "/scenes/earth/earth-lens-normal.webp",
-          "bytes": 1872,
-          "sha256": "aec3a978f92703e9ada87eb38351351e3d8d867572d0b1f60912030d751460c9",
-          "verification": "asset-manifest-pin"
+          "bytes": 2044,
+          "sha256": "616b83ae1e4c9b47b72bd8aef350c178630ade712c88a12839a4990913565a11",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface.webp",
-          "bytes": 373038,
-          "sha256": "688f79e35702cafff851fb93a31bb0f44e990adacf4dce054f398223e3af6c37",
-          "verification": "asset-manifest-pin"
+          "bytes": 435998,
+          "sha256": "329449b22b7deb3a50c10f5e1c335f74c2de2c059477636a881ce6e37d4bea84",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-poles.webp",
-          "bytes": 63828,
-          "sha256": "4e008228ae97f8395cb08b87bf27dd18062b0fef55e134891bd1e27ea66dd059",
-          "verification": "asset-manifest-pin"
+          "bytes": 85488,
+          "sha256": "84580c26b19d4fee29ca4e56489fe9bbca487b3808d603209b85060b650ccc4d",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-1.webp",
-          "bytes": 245396,
-          "sha256": "1a9f994418c5b8ff8c1b65e99e5cfbe42763c8a231e3f70b3bd61106f01ab3c9",
-          "verification": "asset-manifest-pin"
+          "bytes": 398618,
+          "sha256": "703af9df4aefa3cea575fffa2da83221ed9a97b0fae6caefb298a5f6d97f9b26",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-2.webp",
-          "bytes": 371544,
-          "sha256": "0eaf3c20f766fb9714dbcd1758e4d6477c3f7a2c414b521c84e5c1f2c8079e78",
-          "verification": "asset-manifest-pin"
+          "bytes": 673264,
+          "sha256": "e441956b2dafdf37996fe6bd5ab6849f8b7eeeb6902245bf3ab4dd6bbe069fe7",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-3.webp",
-          "bytes": 822220,
-          "sha256": "4d7971337f14b17347c2d12c3e12e77d72a2cc2f370da7ce6844a830dd036b06",
-          "verification": "asset-manifest-pin"
+          "bytes": 1122008,
+          "sha256": "71944a0c5fc2eb620bd59235fae4aff2b45cb0d2f8781d62b0ea9e49b7e01a27",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-4.webp",
-          "bytes": 1100580,
-          "sha256": "5ed2fe5d6df5432e448be0632aa49047c813f7ce0d6786799dc5756441c9e12c",
-          "verification": "asset-manifest-pin"
+          "bytes": 1198356,
+          "sha256": "96e14661940cbd53ab3542b87545553e068af2583df5e00b8b74a395d59f1467",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-5.webp",
-          "bytes": 683174,
-          "sha256": "1292f31dc7e982034bc2ce404efc44b5023302a4fb264c355284b7fa7cfb9514",
-          "verification": "asset-manifest-pin"
+          "bytes": 743654,
+          "sha256": "c8919c9a9a840c320912653dfe0b7d619bd2ce0b787f2c1b31021f6cd45b8fcc",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-6.webp",
-          "bytes": 118358,
-          "sha256": "e3b1a53692df7f82284659308924e44f12b33a2f264360b35b84acfe85df8bff",
-          "verification": "asset-manifest-pin"
+          "bytes": 121238,
+          "sha256": "31361813e737cfbc5c26c77a6d01409b01fbcab2e1983ae12281b445efadaed4",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -3040,9 +3111,9 @@
       "selector": "/surface/maps/1",
       "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Sample the original photographic grids at each retained atlas footprint, apply the declared display transfer and cloud composite, and encode the existing texture layout.",
+      "process": "Sample the original photographic grids at each retained atlas footprint, apply the declared display transfer and cloud composite, and encode the existing texture layout. Where the plain source carries its declared arbitrary deep-ocean fill, take the ocean sample from the declared second edition instead, without the display transfer, fading the replacement to nothing at the edge of that region.",
       "limitations": [
-        "Archival NASA Blue Marble cloud composite over July 2004 surface imagery; not live weather"
+        "Archival NASA Blue Marble cloud composite over July 2004 surface imagery; not live weather. Deep ocean is shaded from depth, taken from NASA's bathymetry edition of the same month where the plain edition carries its arbitrary constant fill."
       ],
       "lensIds": [
         "clouds"
@@ -3050,64 +3121,76 @@
       "recipeDependencies": [
         "paged-ellipsoid"
       ],
+      "interpretation": {
+        "kind": "observed-colour-with-depth-shaded-deep-ocean",
+        "replacedColor": [
+          2,
+          5,
+          20
+        ],
+        "tolerance": 2,
+        "blendSourcePixels": 40,
+        "limitations": "Deep ocean colour is shaded from depth, not observed water colour. The plain edition replaces those pixels with one arbitrary reflectance, so they carry no measurement. This is not a calibrated depth scale. Shallow and coastal water remains observed imagery."
+      },
       "inputs": [
         "nasa-blue-marble-july",
-        "nasa-blue-marble-clouds"
+        "nasa-blue-marble-clouds",
+        "nasa-blue-marble-july-bathymetry"
       ],
       "outputs": [
         {
           "url": "/scenes/earth/earth-lens-clouds.webp",
-          "bytes": 3182,
-          "sha256": "df6fe108c154436e32e958eda3949376579b6ad1598817e5a252ab4c316c3e75",
-          "verification": "asset-manifest-pin"
+          "bytes": 3194,
+          "sha256": "9f13e33b23a1d9cc0ceffb8f9c983c69b98c1445bedaea74ddcaf9ac462f659c",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds.webp",
-          "bytes": 418704,
-          "sha256": "680a003e9b9fd7cacdaf48b6ff89b6f5da71b38e9dac1872b89821939fec476b",
-          "verification": "asset-manifest-pin"
+          "bytes": 447984,
+          "sha256": "12e459cdf85da2d07b76165d919a1db9fa9187e5b1edc624dd0fe8644e104835",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-poles.webp",
-          "bytes": 84560,
-          "sha256": "96b1a5681a71a4dda1212d51ca23a4fd551895b6d0e85bde5538f2ee8db87afb",
-          "verification": "asset-manifest-pin"
+          "bytes": 92172,
+          "sha256": "711fe40c51e943cae79599e24c8ffafa412785a68a8779d7b6fbc3370353f04d",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-1.webp",
-          "bytes": 807746,
-          "sha256": "e5b9cbe23944581b4486522e557b5b80895e61acb65f473304af78b8f6e27012",
-          "verification": "asset-manifest-pin"
+          "bytes": 855462,
+          "sha256": "1209c828f8065ef8bc4f74fce56ee5a7ccdeb15a114bbd1d3cb5adb0e3074ec8",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-2.webp",
-          "bytes": 1722816,
-          "sha256": "0c234fc40ed2c2e74081d64cc6bd5b4d36070822c33caabf30d747e421035055",
-          "verification": "asset-manifest-pin"
+          "bytes": 1838070,
+          "sha256": "cee988ec8e057f04a4a98469621154bc5854e3cbe5b0e2e16dae1f3ca96ea7a9",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-3.webp",
-          "bytes": 1823764,
-          "sha256": "8daaa65052c0bd4873be7ea56cc4f8387d58939195e23a9684b58903cb8756ca",
-          "verification": "asset-manifest-pin"
+          "bytes": 1977766,
+          "sha256": "5c8e3bb74a7772d1ddfbd35a68bf82c47ceb389cf90179c38cba2b675aaf2836",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-4.webp",
-          "bytes": 1426102,
-          "sha256": "8326e8957d07b405e56f5621aa5858d1ba7b453ff6a9d96aa61a4df3a6e783e7",
-          "verification": "asset-manifest-pin"
+          "bytes": 1453434,
+          "sha256": "da6e2a261649f2c89ea56aa8d8ea2dc704e6cab08c8eb61c9fb86abab7dd7558",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-5.webp",
-          "bytes": 749248,
-          "sha256": "9ea4bf9033e43529d0b05690d6277b0d7c291fc9b199d603c82b591f59220fee",
-          "verification": "asset-manifest-pin"
+          "bytes": 768428,
+          "sha256": "32efa6ff42fb1424375cae14f35713e7b1c0d12f4c5e038a09df94d759c52e79",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-6.webp",
-          "bytes": 109840,
-          "sha256": "04511284eee1152a94d8f9f819a3bef8df983b083c71abde746e9f98c0773e46",
-          "verification": "asset-manifest-pin"
+          "bytes": 111714,
+          "sha256": "d5c2332a6c217311e53c983d99782c0cfc7013efe226cf24113a5e61bbcdb0c9",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -3237,55 +3320,55 @@
           "url": "/scenes/earth/earth-lens-topography.webp",
           "bytes": 1950,
           "sha256": "b9fa0fc3c2238ce31009358bebda5b48092cb64c4249df278aa6c66a99bcba86",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography.webp",
           "bytes": 167768,
           "sha256": "640f30496491fd0fccb23e1167e6d3d6d57477c7ee98a11b321dbce5332f1ae2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-poles.webp",
           "bytes": 43138,
           "sha256": "90cbe1e58001cb8ca23f06e5221de6c9590cd1c03ac78f9aa1a74a16dbc26734",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-page-1.webp",
           "bytes": 302048,
           "sha256": "ca09f9accba30e928e5a37e5b01f29621c1ea7d0534f48a36649994265d29856",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-page-2.webp",
           "bytes": 543574,
           "sha256": "e6f70903bfa6863b793b4f9e0ec767b28d96eda71f6ad078a1d68fb9bec0153d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-page-3.webp",
           "bytes": 680668,
           "sha256": "d0331556d5df01d0f3d67db3d1d86ef24c73c502bd4a85129b695d3a37cbb5c7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-page-4.webp",
           "bytes": 442992,
           "sha256": "0e3cb36a67754a860592717e1921fa1ec36c305e7f496eb2f1020654cb2f8aa3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-page-5.webp",
           "bytes": 291264,
           "sha256": "b9b8b0006bb10e04b6ecb9990de54c11b5c87da32c9299e11383ee893154a2a5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-page-6.webp",
           "bytes": 34268,
           "sha256": "2f0088b9f88190fea9d76cbad1dcef2b4589aa1a959445927ab6828d5b3785dc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -3345,55 +3428,55 @@
           "url": "/scenes/earth/earth-lens-night-lights.webp",
           "bytes": 2836,
           "sha256": "d88f52b66ae3f501ebbd6c4ef0a5fa6c20ba2b669eefd97110c342f451431db0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights.webp",
           "bytes": 44720,
           "sha256": "3fd2bb8eb21b55ab7f0eddec4cd8ac5cec15e7f4be0a32b1a448c5ac82a70e09",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-poles.webp",
           "bytes": 7234,
           "sha256": "1bca79f43bab7a97e661f5b85ab3e5c8047fd82715a232a8473fab6924b4a4b4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-1.webp",
           "bytes": 235660,
           "sha256": "570b8cc6bf0b8de8a92b40c43be383cfdc1952f79f2595b6fea95531af4967ac",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-2.webp",
           "bytes": 320088,
           "sha256": "9bc313a895b2edbd10c31f64cbbdf9f19dcaf0bee98533b94023c857441c23b2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-3.webp",
           "bytes": 839652,
           "sha256": "04361dcd38276409544e1b10aa86bc9ffbb8d16a36855c8828f32c4f7e5b0adb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-4.webp",
           "bytes": 841832,
           "sha256": "d7dcbd074c785b3cb0c494867fc98b2defe971f6d445261e21b90af7ed094b8c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-5.webp",
           "bytes": 601666,
           "sha256": "ff4da52d9ec0ab50929b9b70667f266a349196664e3fe3d4fabb162adc3416d6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-6.webp",
           "bytes": 113498,
           "sha256": "c99599a1b3b1d013829b1c531d64c6b31ccfd671d47b53b4701fd245a69b45a1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -3423,55 +3506,55 @@
           "url": "/scenes/earth/earth-lens-enso.webp",
           "bytes": 4414,
           "sha256": "354f1bf436b4791fb792020a931a79d2d504e33e982c2ddb9fa820bc70afa8de",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-enso.webp",
           "bytes": 40376,
           "sha256": "bb7b6f6f3ea628e00c87a130674881b0bf1e527e531ac9ef362b6babfdf4e725",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-enso-poles.webp",
           "bytes": 24716,
           "sha256": "3b53c8ba2e3abe4cf07905acc4731c71073120b06691104c58d7b214bc6e92f6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-enso-page-1.webp",
           "bytes": 379154,
           "sha256": "220cfbcdf0677be0bbc81cccac11944ba98bc26abd9409acda3be37381e35eed",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-enso-page-2.webp",
           "bytes": 1161284,
           "sha256": "29e0278606eb9433ecca0f5ac6f30482480d65c56fe6ac4f0459799741a89045",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-enso-page-3.webp",
           "bytes": 1150010,
           "sha256": "8d55ce81ee52c407de6bc6914e9d617c119ecf03a286c33ca683ef51494eac0c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-enso-page-4.webp",
           "bytes": 598496,
           "sha256": "4465a38042a9883f1558388429157e9a2029195bd29a8f8b3b03837e464c5c4d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-enso-page-5.webp",
           "bytes": 347406,
           "sha256": "d770c0d989e034fca8412d8dcf434d47c73d1ff839f25eb800af1c5204647913",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-enso-page-6.webp",
           "bytes": 60254,
           "sha256": "de645f8970fe365e3c8fb2aed8f2f90006416dabf3126ddb41ee4afd3f0aadd3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -3506,397 +3589,397 @@
           "url": "/scenes/earth/earth-interior-inner-core-poles@2x.webp",
           "bytes": 20260,
           "sha256": "798ca53f64696c3f65dfdf17057bd9fcdf6ca2501d1c993596f6fec10ecae793",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-inner-core@2x.webp",
           "bytes": 107008,
           "sha256": "25b334494dfbb0959d04d53f8a3a2242682eea641a4d56dc738086c3b48d27e3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-mantle-poles@2x.webp",
           "bytes": 15634,
           "sha256": "9263d70f1b5f2049b384ce4dc1930d59338e25bed814255b96d672c96eadb232",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-mantle@2x.webp",
           "bytes": 73622,
           "sha256": "03ab4b119a46a88af51e2ce17585dcbbe6dcec1acb6636c0af0aefbcab07cbb9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-core-poles@2x.webp",
           "bytes": 17562,
           "sha256": "ae4297773c515c0a3c6531b0121480f88bb0798fc5e9f7ebb6bf044f649f91e4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-core@2x.webp",
           "bytes": 88492,
           "sha256": "59abf483313abb0d00cb05d2e66897f9b7418e3d20df301a387bd411d78f1dc9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-1@2x-level-1024.webp",
-          "bytes": 586568,
-          "sha256": "8c327ae91382eb8d9d401c3ce869bbbc0f0341e560545881a9a46ab9499f0f23",
-          "verification": "asset-manifest-pin"
+          "bytes": 661562,
+          "sha256": "a242ee281d0908cb1fc3e4658e092b176075ed5a7fac1a3fedcf92c37655f6af",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-1@2x-level-256.webp",
-          "bytes": 69312,
-          "sha256": "afebff170aba1271fd1efc325977294391780cea00eee5d6ba4222c0f1accbf0",
-          "verification": "asset-manifest-pin"
+          "bytes": 71514,
+          "sha256": "18d6f2b6ee5feefcd5923ae63a1ce6feb3ef952c8a5b38a82679a4112326c5f1",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-1@2x-level-512.webp",
-          "bytes": 202012,
-          "sha256": "6d83958c9f5c1af610b32f2630e19de90cc5e0ae015f152092f20d6351b45ec3",
-          "verification": "asset-manifest-pin"
+          "bytes": 218924,
+          "sha256": "4bbe3262a7c0009b013897a4929b8763eabcff4116a0f7c802ed80edf650dbe3",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-1@2x.webp",
-          "bytes": 185788,
-          "sha256": "a581a2593c31cc39f90391824a84d801726eec8a767eb0c1e201fc6a08d8fb4c",
-          "verification": "asset-manifest-pin"
+          "bytes": 215042,
+          "sha256": "cfb9f492caea13bf321d619ccbd4805e66e3e533608ae3b07ece97e85b5f8e54",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-2@2x-level-1024.webp",
-          "bytes": 973816,
-          "sha256": "f4310809fa3baddc1c4dcb7d452468295f57c5d8f7b42131b12af71060f9a0ef",
-          "verification": "asset-manifest-pin"
+          "bytes": 1060760,
+          "sha256": "e0b6897f976878c66bf4fff8a360dd9ab0beb8e9cc4b3b5e0d53098a084a3ffb",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-2@2x-level-256.webp",
-          "bytes": 93634,
-          "sha256": "525cbd20f7c6792884519d90fb749ea353260749fde3d644bcff74d34772379f",
-          "verification": "asset-manifest-pin"
+          "bytes": 96264,
+          "sha256": "3bfead1d163ea948e3d4967d12f18ac4210f8c6fa17147c38669eaecc6161bcf",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-2@2x-level-512.webp",
-          "bytes": 307004,
-          "sha256": "9753112befbcdea98dd5b3a1e7203f23158851d95fc22c6163e414841320afe5",
-          "verification": "asset-manifest-pin"
+          "bytes": 330670,
+          "sha256": "dcad772249f4403b65ff2b78559ce05650a16550ef412f7ccc1e454a9da06bdd",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-2@2x.webp",
-          "bytes": 416306,
-          "sha256": "364873fae53f1be6d08ff72c9112f20e90a41368be38a6bae9f7ffde72fdf01e",
-          "verification": "asset-manifest-pin"
+          "bytes": 472180,
+          "sha256": "ea44d5f3827c8ad3a062d15f88b263cd60ac7e49e0d31f329a20b56384e55857",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-3@2x-level-1024.webp",
-          "bytes": 1035070,
-          "sha256": "d39902124d0372b4afb70e39abbe54c09c5721816962fcf808b4363caf998566",
-          "verification": "asset-manifest-pin"
+          "bytes": 1087128,
+          "sha256": "4ef70aa99e274459ee74dd2bdb8504273ea93ba94ae5e7b5e94b58129692d26d",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-3@2x-level-256.webp",
-          "bytes": 101602,
-          "sha256": "91c5726dd5e526e827269799a6129773bcc48dcaf20f8b9204d2465b9bdf043e",
-          "verification": "asset-manifest-pin"
+          "bytes": 103306,
+          "sha256": "f682efb28096055a3aa8438c8c0a542651c22c6ced73305cbc3ee3b500b0b099",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-3@2x-level-512.webp",
-          "bytes": 331390,
-          "sha256": "9b2c2d522a90d9797b212998b979084e953f0039b0bb7d1476d89f4d661f1df9",
-          "verification": "asset-manifest-pin"
+          "bytes": 344106,
+          "sha256": "d6b8dc7811272494eeb07f5400dcdfe5ad6ef6fb34ba7e63ed371c597bc7249a",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-3@2x.webp",
-          "bytes": 436874,
-          "sha256": "4445e78409937ca00d6cf667e62075018fb5dea85c250a7c52c6a14df72445e7",
-          "verification": "asset-manifest-pin"
+          "bytes": 465278,
+          "sha256": "440f763a59d61ef5051ffcd0f9ec9cc6c3b72baf45d8dc6db04e594fb6d8e374",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-4@2x-level-1024.webp",
-          "bytes": 894052,
-          "sha256": "43cd2d57b951a2cbb3f6350e53e472b05718e9c266eea720ea3708802ea2bd5e",
-          "verification": "asset-manifest-pin"
+          "bytes": 953614,
+          "sha256": "e81c0b36a66265b6fb9c7f1387afce84ef62eb22ed04f0abcdbe6ba614958f7d",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-4@2x-level-256.webp",
-          "bytes": 89582,
-          "sha256": "a2f07e53b5e11b3e643ad79e5889f75fc372f7b81fae499003549cd5a5683019",
-          "verification": "asset-manifest-pin"
+          "bytes": 91920,
+          "sha256": "383b14e92c2846cbd06c3d859f43fca9782bc702e930239e3ee71895769d4aca",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-4@2x-level-512.webp",
-          "bytes": 282868,
-          "sha256": "0f2ce8b760c7f42d52d88de68f6bb15d30aa46937a7061f713b272b70d51dced",
-          "verification": "asset-manifest-pin"
+          "bytes": 298010,
+          "sha256": "21066d819a33360e8e55dc85d9a552ef63ed504f0ab54a12ad2cc31599600a3b",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-4@2x.webp",
-          "bytes": 313546,
-          "sha256": "d724a650a727e62e7425a114dc9396485abd73f66415d956685348df55ab7845",
-          "verification": "asset-manifest-pin"
+          "bytes": 360282,
+          "sha256": "63b0a9838c71d0d1518433e37af67fc085ab258b6a709e0a6bdb7447b0b08edd",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-5@2x-level-1024.webp",
-          "bytes": 528250,
-          "sha256": "a7bc6c8d232ff30758838885f6b9c3d6333b7b9268a40c5eb0ea9c10e7657255",
-          "verification": "asset-manifest-pin"
+          "bytes": 573204,
+          "sha256": "4de0b24077e46b75100adb02f77933304eba0ba1b5566124faf4a26ea025f24b",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-5@2x-level-256.webp",
-          "bytes": 61364,
-          "sha256": "7e9cef76c2b693d5e6e3bcfd2796be124c2ef538253c6789eb6e8bcc7cf70f45",
-          "verification": "asset-manifest-pin"
+          "bytes": 64450,
+          "sha256": "4e50556fba0f71417659d44593668e5237721989642adfab5502c0854258c4c3",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-5@2x-level-512.webp",
-          "bytes": 180624,
-          "sha256": "9734e3923a20a8f6c3d4241acc5156c8f5d63bfe74508a3dac92dcec5b167f62",
-          "verification": "asset-manifest-pin"
+          "bytes": 191744,
+          "sha256": "d584f58a7b707649d1e3c1b29610f91241e429b7c45a41bd9dbc059c25ab0e55",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-5@2x.webp",
-          "bytes": 154450,
-          "sha256": "0d49af1ac186e417e4326f17471f1b1358312563330db38fe09854a079a3c15e",
-          "verification": "asset-manifest-pin"
+          "bytes": 169860,
+          "sha256": "feadcf745759463554d51fb539da8269bbee0f26ff7284b189894d52694d7f2b",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-6@2x-level-1024.webp",
-          "bytes": 100390,
-          "sha256": "89c065a2c4e6baa4c7034b735d04b07abb57d2558f6436d5d5f43086dfc0c350",
-          "verification": "asset-manifest-pin"
+          "bytes": 109832,
+          "sha256": "d28f326a1af48889bb32ee3bed082e049bda72748946623d7d6405b83cb2b148",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-6@2x-level-256.webp",
-          "bytes": 11158,
-          "sha256": "0ebbf71deac4d9ce06336c2aeb9bb2213511edb02c1e1ca077228a2d3227aa97",
-          "verification": "asset-manifest-pin"
+          "bytes": 11728,
+          "sha256": "6373cc0ee5783c91afb946fd1dbba0fb105f4c4ac50acd1d6a282650ec7dd71f",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-6@2x-level-512.webp",
-          "bytes": 32512,
-          "sha256": "b28225ea2fd1793e2b7597c6a739769e7526d6c7517cba0e806f2bedb62f4664",
-          "verification": "asset-manifest-pin"
+          "bytes": 34236,
+          "sha256": "0744461108c912deb31d86bc8a8c87f9f5469a53b989018785d7002645548d9e",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-6@2x.webp",
-          "bytes": 29458,
-          "sha256": "285017b0de6ee20fb783b08be1f110d5b1828aa7b8e4a6c5444a8ea2289e66ca",
-          "verification": "asset-manifest-pin"
+          "bytes": 32358,
+          "sha256": "1f1aeed2ffead26b4b86880804c539ef0f8d6e0645a71cee79c806205affc49e",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-poles@2x.webp",
-          "bytes": 115900,
-          "sha256": "6b77d427cbc0020d343941026126ba0534c8b20fe36aa88ef83e03a2dd02f5cd",
-          "verification": "asset-manifest-pin"
+          "bytes": 134078,
+          "sha256": "6ee23c4ba18e0526c2f54d9361c84d160e643fefef0292aae179fd3f6230f16b",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit@2x-level-1024.webp",
-          "bytes": 292624,
-          "sha256": "6dfb127ead5f715deefbba5541aac9736c23efee6bc5b0b2e2b5051de5de1014",
-          "verification": "asset-manifest-pin"
+          "bytes": 366922,
+          "sha256": "408fc8037744d28d8a969fafc4cf1ea2ee9bb769e5c201b229ba86e061b84767",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit@2x-level-256.webp",
-          "bytes": 44598,
-          "sha256": "e8f599f2ddb786d4a3144530dbf7939612fe20352bc28c9b7378869cf441e84a",
-          "verification": "asset-manifest-pin"
+          "bytes": 48880,
+          "sha256": "455abb4567edb524aab75712e1ad4e8c93f3601334b1f37559757279540daa7f",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit@2x-level-512.webp",
-          "bytes": 113840,
-          "sha256": "1bb5ea265560cb4f3c12219131f73c37116f26111b4fa26b7d83d1a68d041306",
-          "verification": "asset-manifest-pin"
+          "bytes": 136360,
+          "sha256": "5052d4fa9171d7afbeec42a24937e9c476ea94fdd81e247db2c23e125a0b3983",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit@2x.webp",
-          "bytes": 81102,
-          "sha256": "9334b6dfbd6e5543734649d5c384d7d9ec87e3c5d4acebf3f0d277810fae0e9b",
-          "verification": "asset-manifest-pin"
+          "bytes": 103400,
+          "sha256": "50b29ae7c01d620f072bc745d5308f60c52db8af34d61955ae530fbe29e3184a",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-1@2x-level-1024.webp",
-          "bytes": 722522,
-          "sha256": "8a84550da9a7bb92d0d2b1adc74960b8257d6027a37bb3fe6c4853ad28e26567",
-          "verification": "asset-manifest-pin"
+          "bytes": 810956,
+          "sha256": "e9adf6615d1d95edf6f63f37b85ccae3b3c93a5977c85c4793a4baff590adb76",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-1@2x-level-256.webp",
-          "bytes": 76838,
-          "sha256": "c9caf8c14ed1af14d1282d01ec05fbfece9170011e919ca623d51b63b637dcfe",
-          "verification": "asset-manifest-pin"
+          "bytes": 81426,
+          "sha256": "87cffe570e27c5f7b0ea2f0f4518be2844485e69afaf51ea488ad209f63303e6",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-1@2x-level-512.webp",
-          "bytes": 239272,
-          "sha256": "8a149e52e20724bd72ba93cf3abf9d471ea079f07ecf4d3a33de69a332d5feb6",
-          "verification": "asset-manifest-pin"
+          "bytes": 257982,
+          "sha256": "ecc4948b80306af02bfc87dbf79d76950827e6bcff6d6befe5e34ae9700b1b1d",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-1@2x.webp",
-          "bytes": 290868,
-          "sha256": "20c09a13dc37613baa24a6cac7ec27ebbbea7090883c377f4848606b3d9a1ecb",
-          "verification": "asset-manifest-pin"
+          "bytes": 343446,
+          "sha256": "162f735893e21102cb01dd92e5f039cd0b06a14d77c7f41781b90e938e63ab22",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-2@2x-level-1024.webp",
-          "bytes": 1127556,
-          "sha256": "f8758555cb2fe5c7045c3603f372f2a0ab9f2eeab94f3da697fc9c9521c40304",
-          "verification": "asset-manifest-pin"
+          "bytes": 1233310,
+          "sha256": "a967559289f3beb3c5fabc74f20a1bbb9f02df9a5701244601c0db32faf2753a",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-2@2x-level-256.webp",
-          "bytes": 101978,
-          "sha256": "c08cd4af27a23d2c103dfc145c867c99ef1dd229b3a6618e0e95bdd125afcffe",
-          "verification": "asset-manifest-pin"
+          "bytes": 106564,
+          "sha256": "f2b93fa903b457bee0e024dc14660746ba0e6777a722776d1fb02385dd1901bc",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-2@2x-level-512.webp",
-          "bytes": 343540,
-          "sha256": "412c5476a804e2682bc08ed6239fe56bb7e3adb30e7e3aed90d8fff1f016256b",
-          "verification": "asset-manifest-pin"
+          "bytes": 372822,
+          "sha256": "0b034701399aaa6e4c3f56fb624948b54ccfd7f2ba71207a4a4ea94e117c28eb",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-2@2x.webp",
-          "bytes": 648908,
-          "sha256": "123172ce5f52967d362905c7a22d60806cef239f80c3f0efb6190437d3ebe442",
-          "verification": "asset-manifest-pin"
+          "bytes": 740810,
+          "sha256": "4976c2af080cdac3f0ebd0846c4c88d4db388d97c385e8150d65560dffa59b3c",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-3@2x-level-1024.webp",
-          "bytes": 1254054,
-          "sha256": "dd7694b47e27c48216d4051503088c25ff4e07781b478c6478922f9e136139ec",
-          "verification": "asset-manifest-pin"
+          "bytes": 1301644,
+          "sha256": "faa5c680fd4ae2ec98c38be133fd29d37822e239ac2e63067a931762c11b966e",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-3@2x-level-256.webp",
-          "bytes": 114436,
-          "sha256": "b017fe5fb447ee9abbf9cfd47a4339c027c57dbe6007af5ce9721df7ce2e0462",
-          "verification": "asset-manifest-pin"
+          "bytes": 116228,
+          "sha256": "c0613bfc679bfe1e8f8da609147269d71a92a0c74c0e92e020c0a274980ff619",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-3@2x-level-512.webp",
-          "bytes": 387552,
-          "sha256": "43d365d8080dfee00a27def25ab7ff4e949ca3870f623e88843caf1ce5718126",
-          "verification": "asset-manifest-pin"
+          "bytes": 396996,
+          "sha256": "086e58615c2bb1625b4a0c7505ef110095426e9a3c362eae5f2d93dafb9b9043",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-3@2x.webp",
-          "bytes": 672126,
-          "sha256": "45c056e1fdc00bbe3fe918565c576b12bf22f9569ab4a6fc21d29375d58054a7",
-          "verification": "asset-manifest-pin"
+          "bytes": 718064,
+          "sha256": "f60c898806faae85d0df7d3ddf01f57429a2584dd9a4282f8d9dc7fa5beb273d",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-4@2x-level-1024.webp",
-          "bytes": 1054388,
-          "sha256": "bb7408fbfa3e6d0b43b9a703088dd59f42a45f2c0f24599ffc2002495d020f8a",
-          "verification": "asset-manifest-pin"
+          "bytes": 1113834,
+          "sha256": "34b29201f1c2bae13be6efeb38e1d28180f419c19f89f82f455defb674b4aa7d",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-4@2x-level-256.webp",
-          "bytes": 101510,
-          "sha256": "80114d155cd4d1806ad48e3baf9d642119bfc52cf4403874c8ff49fd0487f9db",
-          "verification": "asset-manifest-pin"
+          "bytes": 104174,
+          "sha256": "f68b2012dfab6202e3453d2fdccc054755e482e693e9aacfd6e1bf04796803cd",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-4@2x-level-512.webp",
-          "bytes": 332462,
-          "sha256": "1f9de7ca68d1ae99520ec4a1d463ba8b1b6a7421130805b5c9cc886222988c46",
-          "verification": "asset-manifest-pin"
+          "bytes": 341238,
+          "sha256": "70f05f745e8d7ddbe6b9cf567a04a922f6e4fb3fccf1a373837dbc42efaf9c14",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-4@2x.webp",
-          "bytes": 464204,
-          "sha256": "68ac32a56435249df0c4467e20c80a128accd01344ebe3ee5461f228c4949ec7",
-          "verification": "asset-manifest-pin"
+          "bytes": 530738,
+          "sha256": "849154680dc1a71d4114ba74acbc8953c749b4df8ae54a12c76c2b88be648a23",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-5@2x-level-1024.webp",
-          "bytes": 696442,
-          "sha256": "a250a45bd59ca7655cf8e060fbfbd450a96ec473efd716b95feb1b971e9eede0",
-          "verification": "asset-manifest-pin"
+          "bytes": 714952,
+          "sha256": "63161eec795a368911539d100d691c20d04e108516ab4cfaf6b1a5008a5eb735",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-5@2x-level-256.webp",
-          "bytes": 71302,
-          "sha256": "c694cd6364b51e7c28f2bb2b42e2cd53887a21658a224305cc557e6b8fe09f7e",
-          "verification": "asset-manifest-pin"
+          "bytes": 74480,
+          "sha256": "5f71207a844159493b1cf5ff9d85793a8950976c83de34752a213fa209d32c3f",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-5@2x-level-512.webp",
-          "bytes": 218850,
-          "sha256": "f4f6680b1e5363cd3deb3c78be68273b5264e045d224dbc3eec477c6ccf92e2e",
-          "verification": "asset-manifest-pin"
+          "bytes": 231400,
+          "sha256": "515857af58890807915fc22feee497b5f366b9bf46e0350c51f5494a9009ca4f",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-5@2x.webp",
-          "bytes": 244738,
-          "sha256": "b73f73c4b66b3b3c2088c6d76a53a5f0da852a74e4a5e6afe4f48212e4617c9c",
-          "verification": "asset-manifest-pin"
+          "bytes": 263850,
+          "sha256": "68a69b309617f29cfd11b53232956104210a1fae04c928542573e138dd2026e0",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-6@2x-level-1024.webp",
-          "bytes": 113892,
-          "sha256": "1346074d5ea503f4c13e46e1a3bedf5cac0d7dea6dd013952d865ab28acce0c9",
-          "verification": "asset-manifest-pin"
+          "bytes": 121268,
+          "sha256": "6ee5268684aca7270319d2fe65373d56dda7f7ce4a907aa703476cc66344c9ff",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-6@2x-level-256.webp",
-          "bytes": 12206,
-          "sha256": "d136ddfed4e3feabb3a9983d8f7644287629354b26715294f949ef5af2d447e9",
-          "verification": "asset-manifest-pin"
+          "bytes": 12794,
+          "sha256": "c5f754e446b230761c91a86950c735ba66ddeb1c79b4b527b515d8efffe5b755",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-6@2x-level-512.webp",
-          "bytes": 35218,
-          "sha256": "0289cd8e6fa42d5ee82a88b54ee15e8f00e834fe6f3bd0552f3ad60d7eeda10f",
-          "verification": "asset-manifest-pin"
+          "bytes": 38304,
+          "sha256": "5389994c90505c4d1bac5da097ccaec63dc33d38fc5f045b4b011b2df291b4fe",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-6@2x.webp",
-          "bytes": 35972,
-          "sha256": "b9e39ed39e1039de9af2df16e90e8231912e01e1a04711a02da32d606685370b",
-          "verification": "asset-manifest-pin"
+          "bytes": 40084,
+          "sha256": "7c2b9d4e2b86f09ae6caa765f81c85ab1be3130e17aef1d3e2f487f3209fc6a8",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-poles@2x.webp",
-          "bytes": 146964,
-          "sha256": "6bfb0fc63a904f74219c4888e517f9d25f329eb00ea7ffb7da169030006e356e",
-          "verification": "asset-manifest-pin"
+          "bytes": 169106,
+          "sha256": "11aa2bf3b9b5cca64d98c9fae59a49351bb1a5c9db89206d3f181adbc1676ca3",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer@2x-level-1024.webp",
-          "bytes": 429450,
-          "sha256": "178e1e8ae7a2e4297e4c032e1ef8c3e1897d7639d06c9cffd84b62d71b214d57",
-          "verification": "asset-manifest-pin"
+          "bytes": 530958,
+          "sha256": "28d9767480e8d964da7ed19e1f1d836638d801fee38f5053e716db0777f1d6aa",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer@2x-level-256.webp",
-          "bytes": 54582,
-          "sha256": "b5edf6806c4daff8230d8805e9ca6864d89e4b31adc99bf2341c6111ded1af66",
-          "verification": "asset-manifest-pin"
+          "bytes": 60712,
+          "sha256": "391d54ae9d863813435ff684661e829dbd68de1d7f156a32703731bc1c8a35fb",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer@2x-level-512.webp",
-          "bytes": 151490,
-          "sha256": "9a08fe46aab54f2247655c1524c765888db2f1b5d706eb54c84b01aa53e63aee",
-          "verification": "asset-manifest-pin"
+          "bytes": 184318,
+          "sha256": "032d67848534150e351a09cc6d067e5215d9044043d7210517d311b9d697fa3e",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer@2x.webp",
-          "bytes": 135000,
-          "sha256": "eeccd324773baba5162b73ebfd1210db870d4276a775f55b8e399023783e5ed9",
-          "verification": "asset-manifest-pin"
+          "bytes": 172186,
+          "sha256": "8f032c1d5e357ad0d80c2cba20f4721b9584f3b6ee89128048e69bbe877fbc38",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-section@2x.webp",
           "bytes": 56838,
           "sha256": "403f1f7c445fe7d56e2232d71155734bc04dc052a94268cf56a7577f575f08ed",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-view-interior.webp",
           "bytes": 1152,
           "sha256": "3d7bc0d6a342734fcb496bc3c275e3df6043de5304a967f736f7b52ea2d465dc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -3953,405 +4036,405 @@
       "outputs": [
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-1@2x-level-1024.webp",
-          "bytes": 586568,
-          "sha256": "8c327ae91382eb8d9d401c3ce869bbbc0f0341e560545881a9a46ab9499f0f23",
-          "verification": "asset-manifest-pin"
+          "bytes": 661562,
+          "sha256": "a242ee281d0908cb1fc3e4658e092b176075ed5a7fac1a3fedcf92c37655f6af",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-1@2x-level-256.webp",
-          "bytes": 69312,
-          "sha256": "afebff170aba1271fd1efc325977294391780cea00eee5d6ba4222c0f1accbf0",
-          "verification": "asset-manifest-pin"
+          "bytes": 71514,
+          "sha256": "18d6f2b6ee5feefcd5923ae63a1ce6feb3ef952c8a5b38a82679a4112326c5f1",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-1@2x-level-512.webp",
-          "bytes": 202012,
-          "sha256": "6d83958c9f5c1af610b32f2630e19de90cc5e0ae015f152092f20d6351b45ec3",
-          "verification": "asset-manifest-pin"
+          "bytes": 218924,
+          "sha256": "4bbe3262a7c0009b013897a4929b8763eabcff4116a0f7c802ed80edf650dbe3",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-1@2x.webp",
-          "bytes": 185788,
-          "sha256": "a581a2593c31cc39f90391824a84d801726eec8a767eb0c1e201fc6a08d8fb4c",
-          "verification": "asset-manifest-pin"
+          "bytes": 215042,
+          "sha256": "cfb9f492caea13bf321d619ccbd4805e66e3e533608ae3b07ece97e85b5f8e54",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-2@2x-level-1024.webp",
-          "bytes": 973816,
-          "sha256": "f4310809fa3baddc1c4dcb7d452468295f57c5d8f7b42131b12af71060f9a0ef",
-          "verification": "asset-manifest-pin"
+          "bytes": 1060760,
+          "sha256": "e0b6897f976878c66bf4fff8a360dd9ab0beb8e9cc4b3b5e0d53098a084a3ffb",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-2@2x-level-256.webp",
-          "bytes": 93634,
-          "sha256": "525cbd20f7c6792884519d90fb749ea353260749fde3d644bcff74d34772379f",
-          "verification": "asset-manifest-pin"
+          "bytes": 96264,
+          "sha256": "3bfead1d163ea948e3d4967d12f18ac4210f8c6fa17147c38669eaecc6161bcf",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-2@2x-level-512.webp",
-          "bytes": 307004,
-          "sha256": "9753112befbcdea98dd5b3a1e7203f23158851d95fc22c6163e414841320afe5",
-          "verification": "asset-manifest-pin"
+          "bytes": 330670,
+          "sha256": "dcad772249f4403b65ff2b78559ce05650a16550ef412f7ccc1e454a9da06bdd",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-2@2x.webp",
-          "bytes": 416306,
-          "sha256": "364873fae53f1be6d08ff72c9112f20e90a41368be38a6bae9f7ffde72fdf01e",
-          "verification": "asset-manifest-pin"
+          "bytes": 472180,
+          "sha256": "ea44d5f3827c8ad3a062d15f88b263cd60ac7e49e0d31f329a20b56384e55857",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-3@2x-level-1024.webp",
-          "bytes": 1035070,
-          "sha256": "d39902124d0372b4afb70e39abbe54c09c5721816962fcf808b4363caf998566",
-          "verification": "asset-manifest-pin"
+          "bytes": 1087128,
+          "sha256": "4ef70aa99e274459ee74dd2bdb8504273ea93ba94ae5e7b5e94b58129692d26d",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-3@2x-level-256.webp",
-          "bytes": 101602,
-          "sha256": "91c5726dd5e526e827269799a6129773bcc48dcaf20f8b9204d2465b9bdf043e",
-          "verification": "asset-manifest-pin"
+          "bytes": 103306,
+          "sha256": "f682efb28096055a3aa8438c8c0a542651c22c6ced73305cbc3ee3b500b0b099",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-3@2x-level-512.webp",
-          "bytes": 331390,
-          "sha256": "9b2c2d522a90d9797b212998b979084e953f0039b0bb7d1476d89f4d661f1df9",
-          "verification": "asset-manifest-pin"
+          "bytes": 344106,
+          "sha256": "d6b8dc7811272494eeb07f5400dcdfe5ad6ef6fb34ba7e63ed371c597bc7249a",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-3@2x.webp",
-          "bytes": 436874,
-          "sha256": "4445e78409937ca00d6cf667e62075018fb5dea85c250a7c52c6a14df72445e7",
-          "verification": "asset-manifest-pin"
+          "bytes": 465278,
+          "sha256": "440f763a59d61ef5051ffcd0f9ec9cc6c3b72baf45d8dc6db04e594fb6d8e374",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-4@2x-level-1024.webp",
-          "bytes": 894052,
-          "sha256": "43cd2d57b951a2cbb3f6350e53e472b05718e9c266eea720ea3708802ea2bd5e",
-          "verification": "asset-manifest-pin"
+          "bytes": 953614,
+          "sha256": "e81c0b36a66265b6fb9c7f1387afce84ef62eb22ed04f0abcdbe6ba614958f7d",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-4@2x-level-256.webp",
-          "bytes": 89582,
-          "sha256": "a2f07e53b5e11b3e643ad79e5889f75fc372f7b81fae499003549cd5a5683019",
-          "verification": "asset-manifest-pin"
+          "bytes": 91920,
+          "sha256": "383b14e92c2846cbd06c3d859f43fca9782bc702e930239e3ee71895769d4aca",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-4@2x-level-512.webp",
-          "bytes": 282868,
-          "sha256": "0f2ce8b760c7f42d52d88de68f6bb15d30aa46937a7061f713b272b70d51dced",
-          "verification": "asset-manifest-pin"
+          "bytes": 298010,
+          "sha256": "21066d819a33360e8e55dc85d9a552ef63ed504f0ab54a12ad2cc31599600a3b",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-4@2x.webp",
-          "bytes": 313546,
-          "sha256": "d724a650a727e62e7425a114dc9396485abd73f66415d956685348df55ab7845",
-          "verification": "asset-manifest-pin"
+          "bytes": 360282,
+          "sha256": "63b0a9838c71d0d1518433e37af67fc085ab258b6a709e0a6bdb7447b0b08edd",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-5@2x-level-1024.webp",
-          "bytes": 528250,
-          "sha256": "a7bc6c8d232ff30758838885f6b9c3d6333b7b9268a40c5eb0ea9c10e7657255",
-          "verification": "asset-manifest-pin"
+          "bytes": 573204,
+          "sha256": "4de0b24077e46b75100adb02f77933304eba0ba1b5566124faf4a26ea025f24b",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-5@2x-level-256.webp",
-          "bytes": 61364,
-          "sha256": "7e9cef76c2b693d5e6e3bcfd2796be124c2ef538253c6789eb6e8bcc7cf70f45",
-          "verification": "asset-manifest-pin"
+          "bytes": 64450,
+          "sha256": "4e50556fba0f71417659d44593668e5237721989642adfab5502c0854258c4c3",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-5@2x-level-512.webp",
-          "bytes": 180624,
-          "sha256": "9734e3923a20a8f6c3d4241acc5156c8f5d63bfe74508a3dac92dcec5b167f62",
-          "verification": "asset-manifest-pin"
+          "bytes": 191744,
+          "sha256": "d584f58a7b707649d1e3c1b29610f91241e429b7c45a41bd9dbc059c25ab0e55",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-5@2x.webp",
-          "bytes": 154450,
-          "sha256": "0d49af1ac186e417e4326f17471f1b1358312563330db38fe09854a079a3c15e",
-          "verification": "asset-manifest-pin"
+          "bytes": 169860,
+          "sha256": "feadcf745759463554d51fb539da8269bbee0f26ff7284b189894d52694d7f2b",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-6@2x-level-1024.webp",
-          "bytes": 100390,
-          "sha256": "89c065a2c4e6baa4c7034b735d04b07abb57d2558f6436d5d5f43086dfc0c350",
-          "verification": "asset-manifest-pin"
+          "bytes": 109832,
+          "sha256": "d28f326a1af48889bb32ee3bed082e049bda72748946623d7d6405b83cb2b148",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-6@2x-level-256.webp",
-          "bytes": 11158,
-          "sha256": "0ebbf71deac4d9ce06336c2aeb9bb2213511edb02c1e1ca077228a2d3227aa97",
-          "verification": "asset-manifest-pin"
+          "bytes": 11728,
+          "sha256": "6373cc0ee5783c91afb946fd1dbba0fb105f4c4ac50acd1d6a282650ec7dd71f",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-6@2x-level-512.webp",
-          "bytes": 32512,
-          "sha256": "b28225ea2fd1793e2b7597c6a739769e7526d6c7517cba0e806f2bedb62f4664",
-          "verification": "asset-manifest-pin"
+          "bytes": 34236,
+          "sha256": "0744461108c912deb31d86bc8a8c87f9f5469a53b989018785d7002645548d9e",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-6@2x.webp",
-          "bytes": 29458,
-          "sha256": "285017b0de6ee20fb783b08be1f110d5b1828aa7b8e4a6c5444a8ea2289e66ca",
-          "verification": "asset-manifest-pin"
+          "bytes": 32358,
+          "sha256": "1f1aeed2ffead26b4b86880804c539ef0f8d6e0645a71cee79c806205affc49e",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-poles@2x.webp",
-          "bytes": 115900,
-          "sha256": "6b77d427cbc0020d343941026126ba0534c8b20fe36aa88ef83e03a2dd02f5cd",
-          "verification": "asset-manifest-pin"
+          "bytes": 134078,
+          "sha256": "6ee23c4ba18e0526c2f54d9361c84d160e643fefef0292aae179fd3f6230f16b",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit@2x-level-1024.webp",
-          "bytes": 292624,
-          "sha256": "6dfb127ead5f715deefbba5541aac9736c23efee6bc5b0b2e2b5051de5de1014",
-          "verification": "asset-manifest-pin"
+          "bytes": 366922,
+          "sha256": "408fc8037744d28d8a969fafc4cf1ea2ee9bb769e5c201b229ba86e061b84767",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit@2x-level-256.webp",
-          "bytes": 44598,
-          "sha256": "e8f599f2ddb786d4a3144530dbf7939612fe20352bc28c9b7378869cf441e84a",
-          "verification": "asset-manifest-pin"
+          "bytes": 48880,
+          "sha256": "455abb4567edb524aab75712e1ad4e8c93f3601334b1f37559757279540daa7f",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit@2x-level-512.webp",
-          "bytes": 113840,
-          "sha256": "1bb5ea265560cb4f3c12219131f73c37116f26111b4fa26b7d83d1a68d041306",
-          "verification": "asset-manifest-pin"
+          "bytes": 136360,
+          "sha256": "5052d4fa9171d7afbeec42a24937e9c476ea94fdd81e247db2c23e125a0b3983",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit@2x.webp",
-          "bytes": 81102,
-          "sha256": "9334b6dfbd6e5543734649d5c384d7d9ec87e3c5d4acebf3f0d277810fae0e9b",
-          "verification": "asset-manifest-pin"
+          "bytes": 103400,
+          "sha256": "50b29ae7c01d620f072bc745d5308f60c52db8af34d61955ae530fbe29e3184a",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-1@2x-level-1024.webp",
-          "bytes": 722522,
-          "sha256": "8a84550da9a7bb92d0d2b1adc74960b8257d6027a37bb3fe6c4853ad28e26567",
-          "verification": "asset-manifest-pin"
+          "bytes": 810956,
+          "sha256": "e9adf6615d1d95edf6f63f37b85ccae3b3c93a5977c85c4793a4baff590adb76",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-1@2x-level-256.webp",
-          "bytes": 76838,
-          "sha256": "c9caf8c14ed1af14d1282d01ec05fbfece9170011e919ca623d51b63b637dcfe",
-          "verification": "asset-manifest-pin"
+          "bytes": 81426,
+          "sha256": "87cffe570e27c5f7b0ea2f0f4518be2844485e69afaf51ea488ad209f63303e6",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-1@2x-level-512.webp",
-          "bytes": 239272,
-          "sha256": "8a149e52e20724bd72ba93cf3abf9d471ea079f07ecf4d3a33de69a332d5feb6",
-          "verification": "asset-manifest-pin"
+          "bytes": 257982,
+          "sha256": "ecc4948b80306af02bfc87dbf79d76950827e6bcff6d6befe5e34ae9700b1b1d",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-1@2x.webp",
-          "bytes": 290868,
-          "sha256": "20c09a13dc37613baa24a6cac7ec27ebbbea7090883c377f4848606b3d9a1ecb",
-          "verification": "asset-manifest-pin"
+          "bytes": 343446,
+          "sha256": "162f735893e21102cb01dd92e5f039cd0b06a14d77c7f41781b90e938e63ab22",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-2@2x-level-1024.webp",
-          "bytes": 1127556,
-          "sha256": "f8758555cb2fe5c7045c3603f372f2a0ab9f2eeab94f3da697fc9c9521c40304",
-          "verification": "asset-manifest-pin"
+          "bytes": 1233310,
+          "sha256": "a967559289f3beb3c5fabc74f20a1bbb9f02df9a5701244601c0db32faf2753a",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-2@2x-level-256.webp",
-          "bytes": 101978,
-          "sha256": "c08cd4af27a23d2c103dfc145c867c99ef1dd229b3a6618e0e95bdd125afcffe",
-          "verification": "asset-manifest-pin"
+          "bytes": 106564,
+          "sha256": "f2b93fa903b457bee0e024dc14660746ba0e6777a722776d1fb02385dd1901bc",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-2@2x-level-512.webp",
-          "bytes": 343540,
-          "sha256": "412c5476a804e2682bc08ed6239fe56bb7e3adb30e7e3aed90d8fff1f016256b",
-          "verification": "asset-manifest-pin"
+          "bytes": 372822,
+          "sha256": "0b034701399aaa6e4c3f56fb624948b54ccfd7f2ba71207a4a4ea94e117c28eb",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-2@2x.webp",
-          "bytes": 648908,
-          "sha256": "123172ce5f52967d362905c7a22d60806cef239f80c3f0efb6190437d3ebe442",
-          "verification": "asset-manifest-pin"
+          "bytes": 740810,
+          "sha256": "4976c2af080cdac3f0ebd0846c4c88d4db388d97c385e8150d65560dffa59b3c",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-3@2x-level-1024.webp",
-          "bytes": 1254054,
-          "sha256": "dd7694b47e27c48216d4051503088c25ff4e07781b478c6478922f9e136139ec",
-          "verification": "asset-manifest-pin"
+          "bytes": 1301644,
+          "sha256": "faa5c680fd4ae2ec98c38be133fd29d37822e239ac2e63067a931762c11b966e",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-3@2x-level-256.webp",
-          "bytes": 114436,
-          "sha256": "b017fe5fb447ee9abbf9cfd47a4339c027c57dbe6007af5ce9721df7ce2e0462",
-          "verification": "asset-manifest-pin"
+          "bytes": 116228,
+          "sha256": "c0613bfc679bfe1e8f8da609147269d71a92a0c74c0e92e020c0a274980ff619",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-3@2x-level-512.webp",
-          "bytes": 387552,
-          "sha256": "43d365d8080dfee00a27def25ab7ff4e949ca3870f623e88843caf1ce5718126",
-          "verification": "asset-manifest-pin"
+          "bytes": 396996,
+          "sha256": "086e58615c2bb1625b4a0c7505ef110095426e9a3c362eae5f2d93dafb9b9043",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-3@2x.webp",
-          "bytes": 672126,
-          "sha256": "45c056e1fdc00bbe3fe918565c576b12bf22f9569ab4a6fc21d29375d58054a7",
-          "verification": "asset-manifest-pin"
+          "bytes": 718064,
+          "sha256": "f60c898806faae85d0df7d3ddf01f57429a2584dd9a4282f8d9dc7fa5beb273d",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-4@2x-level-1024.webp",
-          "bytes": 1054388,
-          "sha256": "bb7408fbfa3e6d0b43b9a703088dd59f42a45f2c0f24599ffc2002495d020f8a",
-          "verification": "asset-manifest-pin"
+          "bytes": 1113834,
+          "sha256": "34b29201f1c2bae13be6efeb38e1d28180f419c19f89f82f455defb674b4aa7d",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-4@2x-level-256.webp",
-          "bytes": 101510,
-          "sha256": "80114d155cd4d1806ad48e3baf9d642119bfc52cf4403874c8ff49fd0487f9db",
-          "verification": "asset-manifest-pin"
+          "bytes": 104174,
+          "sha256": "f68b2012dfab6202e3453d2fdccc054755e482e693e9aacfd6e1bf04796803cd",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-4@2x-level-512.webp",
-          "bytes": 332462,
-          "sha256": "1f9de7ca68d1ae99520ec4a1d463ba8b1b6a7421130805b5c9cc886222988c46",
-          "verification": "asset-manifest-pin"
+          "bytes": 341238,
+          "sha256": "70f05f745e8d7ddbe6b9cf567a04a922f6e4fb3fccf1a373837dbc42efaf9c14",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-4@2x.webp",
-          "bytes": 464204,
-          "sha256": "68ac32a56435249df0c4467e20c80a128accd01344ebe3ee5461f228c4949ec7",
-          "verification": "asset-manifest-pin"
+          "bytes": 530738,
+          "sha256": "849154680dc1a71d4114ba74acbc8953c749b4df8ae54a12c76c2b88be648a23",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-5@2x-level-1024.webp",
-          "bytes": 696442,
-          "sha256": "a250a45bd59ca7655cf8e060fbfbd450a96ec473efd716b95feb1b971e9eede0",
-          "verification": "asset-manifest-pin"
+          "bytes": 714952,
+          "sha256": "63161eec795a368911539d100d691c20d04e108516ab4cfaf6b1a5008a5eb735",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-5@2x-level-256.webp",
-          "bytes": 71302,
-          "sha256": "c694cd6364b51e7c28f2bb2b42e2cd53887a21658a224305cc557e6b8fe09f7e",
-          "verification": "asset-manifest-pin"
+          "bytes": 74480,
+          "sha256": "5f71207a844159493b1cf5ff9d85793a8950976c83de34752a213fa209d32c3f",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-5@2x-level-512.webp",
-          "bytes": 218850,
-          "sha256": "f4f6680b1e5363cd3deb3c78be68273b5264e045d224dbc3eec477c6ccf92e2e",
-          "verification": "asset-manifest-pin"
+          "bytes": 231400,
+          "sha256": "515857af58890807915fc22feee497b5f366b9bf46e0350c51f5494a9009ca4f",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-5@2x.webp",
-          "bytes": 244738,
-          "sha256": "b73f73c4b66b3b3c2088c6d76a53a5f0da852a74e4a5e6afe4f48212e4617c9c",
-          "verification": "asset-manifest-pin"
+          "bytes": 263850,
+          "sha256": "68a69b309617f29cfd11b53232956104210a1fae04c928542573e138dd2026e0",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-6@2x-level-1024.webp",
-          "bytes": 113892,
-          "sha256": "1346074d5ea503f4c13e46e1a3bedf5cac0d7dea6dd013952d865ab28acce0c9",
-          "verification": "asset-manifest-pin"
+          "bytes": 121268,
+          "sha256": "6ee5268684aca7270319d2fe65373d56dda7f7ce4a907aa703476cc66344c9ff",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-6@2x-level-256.webp",
-          "bytes": 12206,
-          "sha256": "d136ddfed4e3feabb3a9983d8f7644287629354b26715294f949ef5af2d447e9",
-          "verification": "asset-manifest-pin"
+          "bytes": 12794,
+          "sha256": "c5f754e446b230761c91a86950c735ba66ddeb1c79b4b527b515d8efffe5b755",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-6@2x-level-512.webp",
-          "bytes": 35218,
-          "sha256": "0289cd8e6fa42d5ee82a88b54ee15e8f00e834fe6f3bd0552f3ad60d7eeda10f",
-          "verification": "asset-manifest-pin"
+          "bytes": 38304,
+          "sha256": "5389994c90505c4d1bac5da097ccaec63dc33d38fc5f045b4b011b2df291b4fe",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-6@2x.webp",
-          "bytes": 35972,
-          "sha256": "b9e39ed39e1039de9af2df16e90e8231912e01e1a04711a02da32d606685370b",
-          "verification": "asset-manifest-pin"
+          "bytes": 40084,
+          "sha256": "7c2b9d4e2b86f09ae6caa765f81c85ab1be3130e17aef1d3e2f487f3209fc6a8",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-poles@2x.webp",
-          "bytes": 146964,
-          "sha256": "6bfb0fc63a904f74219c4888e517f9d25f329eb00ea7ffb7da169030006e356e",
-          "verification": "asset-manifest-pin"
+          "bytes": 169106,
+          "sha256": "11aa2bf3b9b5cca64d98c9fae59a49351bb1a5c9db89206d3f181adbc1676ca3",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer@2x-level-1024.webp",
-          "bytes": 429450,
-          "sha256": "178e1e8ae7a2e4297e4c032e1ef8c3e1897d7639d06c9cffd84b62d71b214d57",
-          "verification": "asset-manifest-pin"
+          "bytes": 530958,
+          "sha256": "28d9767480e8d964da7ed19e1f1d836638d801fee38f5053e716db0777f1d6aa",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer@2x-level-256.webp",
-          "bytes": 54582,
-          "sha256": "b5edf6806c4daff8230d8805e9ca6864d89e4b31adc99bf2341c6111ded1af66",
-          "verification": "asset-manifest-pin"
+          "bytes": 60712,
+          "sha256": "391d54ae9d863813435ff684661e829dbd68de1d7f156a32703731bc1c8a35fb",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer@2x-level-512.webp",
-          "bytes": 151490,
-          "sha256": "9a08fe46aab54f2247655c1524c765888db2f1b5d706eb54c84b01aa53e63aee",
-          "verification": "asset-manifest-pin"
+          "bytes": 184318,
+          "sha256": "032d67848534150e351a09cc6d067e5215d9044043d7210517d311b9d697fa3e",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer@2x.webp",
-          "bytes": 135000,
-          "sha256": "eeccd324773baba5162b73ebfd1210db870d4276a775f55b8e399023783e5ed9",
-          "verification": "asset-manifest-pin"
+          "bytes": 172186,
+          "sha256": "8f032c1d5e357ad0d80c2cba20f4721b9584f3b6ee89128048e69bbe877fbc38",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-tomography-section@2x.webp",
           "bytes": 110362,
           "sha256": "db5505965d3bfdb697a79cf4aaaed0983708f0211fd9267291a34ac5deab8735",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-tomography-mantle@2x.webp",
           "bytes": 117986,
           "sha256": "39525d3f990540d0ed27cf3d3b98deca0568be58a3fb89b79ce4541e612e5d6b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-tomography-mantle-poles@2x.webp",
           "bytes": 65172,
           "sha256": "2d8a1988e6ca41cfea2c2c218b0edb94ff779e1ac80bea09e16158347bc85bab",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-tomography-outer-core@2x.webp",
           "bytes": 86368,
           "sha256": "59671a6f82f756b1c8e74ef44429e5daccd1c33b0c59b856b05a95f72b2c8e99",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-tomography-outer-core-poles@2x.webp",
           "bytes": 17316,
           "sha256": "6163fc9c55f0bca18e5a07c1ec3e88c621a1b6dc844dda9f1bddc663252539ca",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-tomography-inner-core@2x.webp",
           "bytes": 115800,
           "sha256": "e585328ba89004929bda4e9ff1d5932679c37e95cdb91968f355b55d46aed0d6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-tomography-inner-core-poles@2x.webp",
           "bytes": 21366,
           "sha256": "fa091a821de0d19607604b93266353511e4a32eb089e7e445a14eb442a0cdc1c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-view-tomography.webp",
           "bytes": 2094,
           "sha256": "dbbf6668d7688e11815e304c7d056c027871c4876b188618b7574e32766b115f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-tomography-legend.png",
           "bytes": 2083,
           "sha256": "c1ba3f0d75a8a3d897168a575acd0568ce0ebe0f98fdb7be8c92e690fc176286",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -4406,7 +4489,7 @@
           "url": "/scenes/earth/earth-atmosphere-spectrum.svg",
           "bytes": 4019,
           "sha256": "618392880a079fe55e93904b4f6648d1c15f737e79b3d4b7aa46ce44994d6a80",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -4435,7 +4518,7 @@
           "url": "/scenes/earth/earth-temperature-pressure-profile.svg",
           "bytes": 2530,
           "sha256": "24b5c28e0c8ae1a9c82787d345ad27d391e2a3b0289263388fdaf583b73b829d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -4463,7 +4546,7 @@
           "url": "/scenes/earth/earth-photometric-phase-curve.svg",
           "bytes": 4360,
           "sha256": "f2c02091dcfe4343299fff3bd96b6fd8d542fc2ef4d6aeb1fbe7acef77ff2b98",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "authored-recipe"
@@ -4495,7 +4578,7 @@
           "url": "/scenes/earth/earth-features.json",
           "bytes": 386121,
           "sha256": "f9c9f28bf2bec27d2df18266346498d2b9d2f47cd717dfca1cfb17d99fc1926b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -4519,8 +4602,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 29758,
-          "sha256": "79d650f381a604a953d506e151f60ffc80b99736f7b2a8c6fb371dd36acb1612",
+          "bytes": 37820,
+          "sha256": "a008aa6d7156cf9f71e3cc28a62509955bfe14c0ac5ad94d3802eb858cdd0eb8",
           "verification": "bytes-verified"
         }
       ]
@@ -4544,8 +4627,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/clouds.webp",
-          "bytes": 29758,
-          "sha256": "79d650f381a604a953d506e151f60ffc80b99736f7b2a8c6fb371dd36acb1612",
+          "bytes": 76452,
+          "sha256": "4ffb7d18c2b8ec18c001b700bd1203943ec34f99c3a0449cf78d1c96af5f37bc",
           "verification": "bytes-verified"
         }
       ]
@@ -4632,11 +4715,11 @@
   },
   "lastPreparation": {
     "objectId": "earth",
-    "materialSha256": "2799a3cdf04e389652db5ee915685bf26ba96f423fd4c1435fc757b9dcded55b",
+    "materialSha256": "7f49e139093788eb3d12aa663ab184af6f97c78b7560409cffe1309f4309ac01",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "72061a1f128f03f2673f555c65aa4976378edd8fcf42540fed36d451ed459321"
+      "bindingsSha256": "5b25d28c61c4650fc7c28a460c3c91a1db72399cec5542e5896c76ac01d8652f"
     }
   }
 }

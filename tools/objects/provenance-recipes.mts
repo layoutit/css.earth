@@ -200,15 +200,21 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
     maps.forEach((map, index) => {
       const lens = controls.find(lens => lens.surfaceUrl === prefix + map.name + '.webp');
       if (lens) add(lens.id, 'paged-ellipsoid', `/surface/maps/${index}`,
-        [text(map.path), ...paths(map.scientific), ...(map.compositeClouds ? [text(record(planSurface.clouds).path)] : [])],
+        [text(map.path), ...paths(map.scientific), ...(map.compositeClouds ? [text(record(planSurface.clouds).path)] : []),
+          ...(maybeRecord(map.deepOceanFill) ? [text(record(map.deepOceanFill).path)] : [])],
         maybeRecord(map.scientific)?.kind === 'gebco-elevation'
           ? 'Decode signed terrain heights and coordinate axes, interpolate elevations, apply the authored palette and cartographic relief, and prepare the globe, minimap and unshaded legend.'
           : maybeRecord(map.scientific)?.kind === 'black-marble-radiance'
             ? 'Decode pinned annual snow-free radiance, average native cells by spherical area before applying logarithmic false color, and prepare the globe, poles, minimap, thumbnail and legend. Preserve missing coverage separately from valid zero radiance.'
           : map.nativePhotographicSampling
-            ? 'Sample the original photographic grids at each retained atlas footprint, apply the declared display transfer and cloud composite, and encode the existing texture layout.'
+            ? `Sample the original photographic grids at each retained atlas footprint, apply the declared display transfer and cloud composite, and encode the existing texture layout.${maybeRecord(map.deepOceanFill) ? ' Where the plain source carries its declared arbitrary deep-ocean fill, take the ocean sample from the declared second edition instead, without the display transfer, fading the replacement to nothing at the edge of that region.' : ''}`
             : 'Prepare the global reference map and its declared cloud composite.',
-        maybeRecord(map.scientific)?.kind === 'gebco-elevation' ? {
+        maybeRecord(map.deepOceanFill) ? {
+          interpretation: { kind: 'observed-colour-with-depth-shaded-deep-ocean',
+            replacedColor: record(map.deepOceanFill).replacedColor, tolerance: record(map.deepOceanFill).tolerance,
+            blendSourcePixels: record(map.deepOceanFill).blendSourcePixels,
+            limitations: 'Deep ocean colour is shaded from depth, not observed water colour. The plain edition replaces those pixels with one arbitrary reflectance, so they carry no measurement. This is not a calibrated depth scale. Shallow and coastal water remains observed imagery.' },
+        } : maybeRecord(map.scientific)?.kind === 'gebco-elevation' ? {
           interpretation: { kind: 'modeled-elevation', units: 'm', datum: 'mean sea level',
             grid: record(map.scientific).grid, palette: record(map.scientific).palette, relief: record(map.scientific).relief },
         } : maybeRecord(map.scientific)?.kind === 'black-marble-radiance' ? {

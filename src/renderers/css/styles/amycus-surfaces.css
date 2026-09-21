@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.example-stage:where([data-object-id="amycus"]) > :is(.amycus-sun-camera, .amycus-camera, .amycus-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="amycus"]) .amycus-sun-camera, :where(.planet-stage[data-object-id="amycus"]) .amycus-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="amycus"]) .amycus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="amycus"]) .amycus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.planet-stage[data-object-id="amycus"]) .amycus-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--amycus-surface-image); background-repeat: no-repeat;
+}
+:where(.planet-stage[data-object-id="amycus"]) .amycus-body > .amycus-polar { background-image: var(--amycus-poles-image); }
+:where(.planet-stage[data-object-id="amycus"]) .amycus-material-root { z-index: 3; --amycus-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="amycus"]) .amycus-material, :where(.planet-stage[data-object-id="amycus"]) .amycus-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="amycus"]) .amycus-material { background-repeat: no-repeat; transform: rotate(var(--amycus-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="amycus"]) .amycus-billboard { border-radius: 50%; background-color: var(--amycus-billboard-color); opacity: var(--amycus-billboard-opacity); }
+.planet-stage:where([data-object-id="amycus"])[data-lod="billboard"] .amycus-scene, .planet-stage:where([data-object-id="amycus"])[data-lod="marker"] .amycus-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="amycus"])[data-lod="marker"] .amycus-billboard { opacity: 0; }
+

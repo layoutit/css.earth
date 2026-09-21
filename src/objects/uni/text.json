@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "uni",
+  "card": {
+    "text": "A large icy body in the Kuiper belt.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Record for 55637 Uni (2002 UX25): orbit class and physical parameters"
+      },
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201321329",
+        "url": "https://doi.org/10.1051/0004-6361/201321329",
+        "label": "Fornasier et al. (2013), Astronomy & Astrophysics 555, A15; Herschel PACS and SPIRE thermal radiometry",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Uni is a large icy body in the Kuiper belt beyond Neptune, first catalogued as 2002 UX25.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Record for 55637 Uni (2002 UX25): orbit class and physical parameters"
+      },
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201321329",
+        "url": "https://doi.org/10.1051/0004-6361/201321329",
+        "label": "Fornasier et al. (2013), Astronomy & Astrophysics 555, A15; Herschel PACS and SPIRE thermal radiometry",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Sphere at the measured diameter",
+      "detail": "Inferred shape",
+      "summary": "A sphere at the 692 km diameter measured from its heat. Shape and pole are not measured.",
+      "sources": [
+        {
+          "catalogueId": "doi-10-1051-0004-6361-201321329",
+          "url": "https://doi.org/10.1051/0004-6361/201321329",
+          "label": "Fornasier et al. (2013), Astronomy & Astrophysics 555, A15; Herschel PACS and SPIRE thermal radiometry",
+          "checked": "2026-09-21"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "vanth",
+  "displayName": "Vanth",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "443 × 443 × 443 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "label": "JPL Horizons TNO satellite solution tnosat_v001_20090482_jpl043_20220908: header radius RAD~ 221.5 km for Vanth",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "catalogueId": "jpl-horizons",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "thumbnail": "/scenes/vanth/vanth-model-thumbnail.webp",
+        "surface": "vanth-model-surface@2x.webp",
+        "poles": "vanth-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://ssd.jpl.nasa.gov/horizons/"
+        },
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "JPL Horizons TNO satellite solution tnosat_v001_20090482_jpl043_20220908: header radius RAD~ 221.5 km for Vanth",
+      "href": "https://ssd.jpl.nasa.gov/horizons/"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://ssd.jpl.nasa.gov/horizons/"
+    },
+    {
+      "label": "Non-Keplerian Haumea satellite orbits",
+      "role": "facts",
+      "description": "Source measurements and model interpretation",
+      "href": "https://doi.org/10.3847/PSJ/ad26e9"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "credit": "JPL Horizons TNO satellite solution tnosat_v001_20090482_jpl043_20220908: header radius RAD~ 221.5 km for Vanth"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "JPL Horizons TNO satellite solution tnosat_v001_20090482_jpl043_20220908: header radius RAD~ 221.5 km for Vanth"
+    }
+  }
+}
