@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "taygete",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Taygete",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 2.3
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -515229192641.0687,
+        540661935110.0722,
+        243955645179.49542
+      ],
+      "presentationToReference": [
+        -0.6558168424081611,
+        2.4356826039297786e-17,
+        0.754920041602943,
+        0.6926255964672207,
+        0.3977771559319137,
+        0.6017001889123392,
+        0.30028994710482065,
+        -0.9174820620691818,
+        0.2608689583853664
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 10,
+      "bodyRadiusM": 2300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/taygete-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0cd6f83073118c2fd297900758e2528797b5a4b9adb0feca733a05c21a8ec606"
+      }
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "Taygete",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 5.2,
+      "description": "A small, distant irregular moon of Jupiter.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "1eaa56c1794324f21d9b0136af8917f7a24b684964bf60cc9c35fcf1e4e40e68"
+  }
+}

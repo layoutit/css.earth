@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.example-stage:where([data-object-id="themisto"]) > :is(.themisto-sun-camera, .themisto-camera, .themisto-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="themisto"]) .themisto-sun-camera, :where(.planet-stage[data-object-id="themisto"]) .themisto-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="themisto"]) .themisto-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="themisto"]) .themisto-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.planet-stage[data-object-id="themisto"]) .themisto-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--themisto-surface-image); background-repeat: no-repeat;
+}
+:where(.planet-stage[data-object-id="themisto"]) .themisto-body > .themisto-polar { background-image: var(--themisto-poles-image); }
+:where(.planet-stage[data-object-id="themisto"]) .themisto-material-root { z-index: 3; --themisto-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="themisto"]) .themisto-material, :where(.planet-stage[data-object-id="themisto"]) .themisto-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="themisto"]) .themisto-material { background-repeat: no-repeat; transform: rotate(var(--themisto-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="themisto"]) .themisto-billboard { border-radius: 50%; background-color: var(--themisto-billboard-color); opacity: var(--themisto-billboard-opacity); }
+.planet-stage:where([data-object-id="themisto"])[data-lod="billboard"] .themisto-scene, .planet-stage:where([data-object-id="themisto"])[data-lod="marker"] .themisto-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="themisto"])[data-lod="marker"] .themisto-billboard { opacity: 0; }
+

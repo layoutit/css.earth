@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "praxidike",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Praxidike",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 2.3
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -510599009872.2721,
+        571644745715.7827,
+        251380425946.7292
+      ],
+      "presentationToReference": [
+        -0.6329936730860448,
+        2.4356826039297786e-17,
+        0.7741569671798074,
+        0.7102751306133536,
+        0.3977771559319137,
+        0.5807603404597299,
+        0.3079419566496597,
+        -0.9174820620691818,
+        0.2517904230030625
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 10,
+      "bodyRadiusM": 2300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/praxidike-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "39d1b08fbb41260d3abeb0fa43c71c65f5dcbcecfe09651ca178684deb845730"
+      }
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "Praxidike",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 5.2,
+      "description": "A small, distant irregular moon of Jupiter.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "a64a6b128b000be08b4a20c5b0486453a7dec487c23553ae0b06d23734e495d3"
+  }
+}

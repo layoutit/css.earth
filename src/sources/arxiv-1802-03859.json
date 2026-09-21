@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-1802-03859",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The GAPS programme with HARPS-N at TNG XVI: Measurement of the Rossiter-McLaughlin effect of transiting planetary systems HAT-P-3, HAT-P-12, HAT-P-22, WASP-39 and WASP-60",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1802.03859"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1802.03859",
+      "label": "Mancini et al. 2018"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-39/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "d422e2712ec28a8b5f9b2e4704d805f5f386e4b8c8c4b84bfa77e2336cc4787e",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "L. Mancini, M. Esposito, E. Covino et al.",
+      "scope": "citation",
+      "evidence": "src/objects/wasp-39/text.json#/introduction/sources/0"
+    }
+  ]
+}

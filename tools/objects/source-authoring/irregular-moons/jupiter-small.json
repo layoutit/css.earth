@@ -1,0 +1,596 @@
+{
+ "checkedOn": "2026-09-22",
+ "base": "main",
+ "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/irregular-moons/jupiter-small.json.",
+ "referenceDirectory": "output/irregular-moons/references",
+ "bodies": [
+  {
+   "id": "callirrhoe",
+   "name": "Callirrhoe",
+   "titleLabel": "Callirrhoe",
+   "horizons": "517",
+   "aliases": [
+    "Jupiter moon Callirrhoe",
+    "JPL 517"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    10.5,
+    10.5,
+    10.5
+   ],
+   "radiusKm": 5.25,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.04; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons apparent magnitude for Callirrhoe (body 517); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at about 10.5 km, estimated from the apparent magnitude JPL Horizons gives for Callirrhoe (21.659 on 2026-Sep-03, H = 14.0 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Callirrhoe is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+   "card": "A small, distant irregular moon of Jupiter.",
+   "datasetSummary": "A sphere about 10.5 km across, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 5.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-22",
+     "locator": "Object data page and observer ephemeris for 517 (Callirrhoe); JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "themisto",
+   "name": "Themisto",
+   "titleLabel": "Themisto",
+   "horizons": "518",
+   "aliases": [
+    "Jupiter moon Themisto",
+    "JPL 518"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    9.2,
+    9.2,
+    9.2
+   ],
+   "radiusKm": 4.6,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.04; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons apparent magnitude for Themisto (body 518); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at about 9.2 km, estimated from the apparent magnitude JPL Horizons gives for Themisto (21.843 on 2026-Sep-03, H = 14.3 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Themisto is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+   "card": "A small, distant irregular moon of Jupiter.",
+   "datasetSummary": "A sphere about 9.2 km across, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 5.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-22",
+     "locator": "Object data page and observer ephemeris for 518 (Themisto); JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "megaclite",
+   "name": "Megaclite",
+   "titleLabel": "Megaclite",
+   "horizons": "519",
+   "aliases": [
+    "Jupiter moon Megaclite",
+    "JPL 519"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    6.3,
+    6.3,
+    6.3
+   ],
+   "radiusKm": 3.15,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.04; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons apparent magnitude for Megaclite (body 519); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at about 6.3 km, estimated from the apparent magnitude JPL Horizons gives for Megaclite (22.729 on 2026-Sep-03, H = 15.1 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Megaclite is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+   "card": "A small, distant irregular moon of Jupiter.",
+   "datasetSummary": "A sphere about 6.3 km across, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 5.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-22",
+     "locator": "Object data page and observer ephemeris for 519 (Megaclite); JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "taygete",
+   "name": "Taygete",
+   "titleLabel": "Taygete",
+   "horizons": "520",
+   "aliases": [
+    "Jupiter moon Taygete",
+    "JPL 520"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    4.6,
+    4.6,
+    4.6
+   ],
+   "radiusKm": 2.3,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.04; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons apparent magnitude for Taygete (body 520); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at about 4.6 km, estimated from the apparent magnitude JPL Horizons gives for Taygete (23.347 on 2026-Sep-03, H = 15.8 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Taygete is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+   "card": "A small, distant irregular moon of Jupiter.",
+   "datasetSummary": "A sphere about 4.6 km across, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 5.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-22",
+     "locator": "Object data page and observer ephemeris for 520 (Taygete); JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "chaldene",
+   "name": "Chaldene",
+   "titleLabel": "Chaldene",
+   "horizons": "521",
+   "aliases": [
+    "Jupiter moon Chaldene",
+    "JPL 521"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    4.0,
+    4.0,
+    4.0
+   ],
+   "radiusKm": 2.0,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.04; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons apparent magnitude for Chaldene (body 521); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at about 4.0 km, estimated from the apparent magnitude JPL Horizons gives for Chaldene (23.769 on 2026-Sep-03, H = 16.1 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Chaldene is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+   "card": "A small, distant irregular moon of Jupiter.",
+   "datasetSummary": "A sphere about 4.0 km across, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 5.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-22",
+     "locator": "Object data page and observer ephemeris for 521 (Chaldene); JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "harpalyke",
+   "name": "Harpalyke",
+   "titleLabel": "Harpalyke",
+   "horizons": "522",
+   "aliases": [
+    "Jupiter moon Harpalyke",
+    "JPL 522"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    5.3,
+    5.3,
+    5.3
+   ],
+   "radiusKm": 2.65,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.04; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons apparent magnitude for Harpalyke (body 522); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at about 5.3 km, estimated from the apparent magnitude JPL Horizons gives for Harpalyke (23.167 on 2026-Sep-03, H = 15.5 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Harpalyke is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+   "card": "A small, distant irregular moon of Jupiter.",
+   "datasetSummary": "A sphere about 5.3 km across, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 5.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-22",
+     "locator": "Object data page and observer ephemeris for 522 (Harpalyke); JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "kalyke",
+   "name": "Kalyke",
+   "titleLabel": "Kalyke",
+   "horizons": "523",
+   "aliases": [
+    "Jupiter moon Kalyke",
+    "JPL 523"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    4.6,
+    4.6,
+    4.6
+   ],
+   "radiusKm": 2.3,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.04; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons apparent magnitude for Kalyke (body 523); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at about 4.6 km, estimated from the apparent magnitude JPL Horizons gives for Kalyke (23.299 on 2026-Sep-03, H = 15.8 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Kalyke is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+   "card": "A small, distant irregular moon of Jupiter.",
+   "datasetSummary": "A sphere about 4.6 km across, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 5.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-22",
+     "locator": "Object data page and observer ephemeris for 523 (Kalyke); JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "iocaste",
+   "name": "Iocaste",
+   "titleLabel": "Iocaste",
+   "horizons": "524",
+   "aliases": [
+    "Jupiter moon Iocaste",
+    "JPL 524"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    8.4,
+    8.4,
+    8.4
+   ],
+   "radiusKm": 4.2,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.04; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons apparent magnitude for Iocaste (body 524); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at about 8.4 km, estimated from the apparent magnitude JPL Horizons gives for Iocaste (22.14 on 2026-Sep-03, H = 14.5 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Iocaste is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+   "card": "A small, distant irregular moon of Jupiter.",
+   "datasetSummary": "A sphere about 8.4 km across, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 5.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-22",
+     "locator": "Object data page and observer ephemeris for 524 (Iocaste); JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "erinome",
+   "name": "Erinome",
+   "titleLabel": "Erinome",
+   "horizons": "525",
+   "aliases": [
+    "Jupiter moon Erinome",
+    "JPL 525"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    6.6,
+    6.6,
+    6.6
+   ],
+   "radiusKm": 3.3,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.04; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons apparent magnitude for Erinome (body 525); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at about 6.6 km, estimated from the apparent magnitude JPL Horizons gives for Erinome (22.527 on 2026-Sep-03, H = 15.0 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Erinome is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+   "card": "A small, distant irregular moon of Jupiter.",
+   "datasetSummary": "A sphere about 6.6 km across, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 5.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-22",
+     "locator": "Object data page and observer ephemeris for 525 (Erinome); JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "isonoe",
+   "name": "Isonoe",
+   "titleLabel": "Isonoe",
+   "horizons": "526",
+   "aliases": [
+    "Jupiter moon Isonoe",
+    "JPL 526"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    6.1,
+    6.1,
+    6.1
+   ],
+   "radiusKm": 3.05,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.04; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons apparent magnitude for Isonoe (body 526); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at about 6.1 km, estimated from the apparent magnitude JPL Horizons gives for Isonoe (22.894 on 2026-Sep-03, H = 15.2 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Isonoe is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+   "card": "A small, distant irregular moon of Jupiter.",
+   "datasetSummary": "A sphere about 6.1 km across, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 5.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-22",
+     "locator": "Object data page and observer ephemeris for 526 (Isonoe); JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "praxidike",
+   "name": "Praxidike",
+   "titleLabel": "Praxidike",
+   "horizons": "527",
+   "aliases": [
+    "Jupiter moon Praxidike",
+    "JPL 527"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    4.6,
+    4.6,
+    4.6
+   ],
+   "radiusKm": 2.3,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.04; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons apparent magnitude for Praxidike (body 527); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at about 4.6 km, estimated from the apparent magnitude JPL Horizons gives for Praxidike (23.448 on 2026-Sep-03, H = 15.8 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Praxidike is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+   "card": "A small, distant irregular moon of Jupiter.",
+   "datasetSummary": "A sphere about 4.6 km across, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 5.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-22",
+     "locator": "Object data page and observer ephemeris for 527 (Praxidike); JPL satellite discovery table"
+    }
+   ]
+  },
+  {
+   "id": "autonoe",
+   "name": "Autonoe",
+   "titleLabel": "Autonoe",
+   "horizons": "528",
+   "aliases": [
+    "Jupiter moon Autonoe",
+    "JPL 528"
+   ],
+   "classification": "satellite",
+   "population": "Irregular satellite of Jupiter",
+   "parent": "jupiter",
+   "fullAxesKm": [
+    4.8,
+    4.8,
+    4.8
+   ],
+   "radiusKm": 2.4,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.04; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://ssd.jpl.nasa.gov/horizons/",
+   "credit": "JPL Horizons apparent magnitude for Autonoe (body 528); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+   "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at about 4.8 km, estimated from the apparent magnitude JPL Horizons gives for Autonoe (23.377 on 2026-Sep-03, H = 15.7 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Autonoe is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+   "card": "A small, distant irregular moon of Jupiter.",
+   "datasetSummary": "A sphere about 4.8 km across, estimated from brightness with an assumed 4% albedo.",
+   "distanceAu": 5.2,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-horizons",
+     "url": "https://ssd.jpl.nasa.gov/horizons/",
+     "label": "JPL Horizons",
+     "checked": "2026-09-22",
+     "locator": "Object data page and observer ephemeris for 528 (Autonoe); JPL satellite discovery table"
+    }
+   ]
+  }
+ ]
+}
