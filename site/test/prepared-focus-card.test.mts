@@ -99,15 +99,18 @@ test('departed or unsupported galaxy focus hides its retained lens bank and disa
   f.card.destroy();
 });
 
-test('a nebula focus displays its actual classification and preserves the shared lens controls', () => {
+test('a nebula focus keeps classification out of the title and preserves the shared lens controls', () => {
   const f = fixture();
   const { membership: _membership, ...common } = f.record;
   f.card.set({ ...common, kind: 'nebula', detailedObjectId: 'prepared-galaxy',
     classification: { name: 'Emission nebula', basis: 'Conditional image reconstruction.', sourceRef: 'observations' } }, [], f.presentation);
-  assert.equal(f.root.querySelector('[data-focus-status]')?.textContent, 'Emission nebula');
+  assert.equal(f.root.querySelector('[data-focus-status]')?.textContent, '');
+  assert.equal(f.root.querySelector('[data-focus-status]')?.hidden, true);
   assert.equal(f.root.querySelector('[data-focus-membership]')?.textContent, 'Milky Way');
   assert.equal(f.root.querySelector('[data-focus-association]')?.textContent, 'Galactic nebula');
   assert.equal(f.bank.hidden, false);
+  f.card.set(f.record, [], f.presentation);
+  assert.equal(f.root.querySelector('[data-focus-status]')?.hidden, false, 'A later galaxy restores its status tag');
   f.card.destroy();
 });
 
