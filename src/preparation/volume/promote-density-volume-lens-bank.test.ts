@@ -5,11 +5,17 @@ import { resolve } from 'node:path';
 import { test } from 'node:test';
 import { sha256 } from '../../platform/sha256.mts';
 import { loadPreparedVolumeLenses } from '../../renderers/css/volume/prepared-volume-lenses.js';
+import type { DensityVolumeFrame } from '@cssearth/objects';
 import { promoteDensityVolumeLensBank } from './promote-density-volume-lens-bank.ts';
 
-const frame = { referenceFrame: 'fixture-icrf', epochJdTt: 2461286.5, originM: [11, 22, 33], localToReferenceXyzw: [0, 0, 0, 1],
+const frame: DensityVolumeFrame = { referenceFrame: 'fixture-icrf', epochJdTt: 2461286.5, originM: [11, 22, 33], localToReferenceXyzw: [0, 0, 0, 1],
   metersPerUnit: 4, boundsUnits: { min: [-7, -3, -1], max: [5, 9, 11] } };
 const json = (value: unknown) => Buffer.from(`${JSON.stringify(value, null, 2)}\n`);
+const readArrayBuffer = async (path: string): Promise<ArrayBuffer> => Uint8Array.from(await readFile(path)).buffer;
+const record = (value: unknown): Record<string, unknown> => {
+  assert.ok(value && typeof value === 'object' && !Array.isArray(value));
+  return value as Record<string, unknown>;
+};
 
 async function fixture() {
   const root = await mkdtemp(resolve(tmpdir(), 'density-volume-bank-')), source = resolve(root, 'source'), destination = resolve(root, 'bank');
@@ -37,7 +43,7 @@ test('promotes an authenticated physical density volume into one exact selectabl
       framingRadiusUnits: 18, attachedTo: 'fixture-body' });
     assert.equal(result.resourceCount, 3);
     const descriptor = JSON.parse(await readFile(result.descriptorPath, 'utf8'));
-    const payload = await loadPreparedVolumeLenses(descriptor, { read: path => readFile(resolve(f.destination, path)) });
+    const payload = await loadPreparedVolumeLenses(descriptor, { read: path => readArrayBuffer(resolve(f.destination, path)) });
     assert.equal(payload.attachedTo, 'fixture-body');
     assert.equal(payload.defaultLens, 'mean');
     assert.deepEqual(payload.lenses[0]!.brightness, { overall: 1, x: 1, y: 1, z: 1 });
@@ -69,18 +75,19 @@ test('refuses a source resource whose bytes no longer match the density-volume c
 
 test('re-anchors only the scene presentation while retaining the measurement frame', async () => {
   const f = await fixture();
-  const presentationFrame = { ...frame, referenceFrame: 'sun-icrf', epochJdTt: 2461286.5,
+  const presentationFrame: DensityVolumeFrame = { ...frame, referenceFrame: 'sun-icrf', epochJdTt: 2461286.5,
     originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1] };
   try {
     const result = await promoteDensityVolumeLensBank({ sourceDirectory: f.source, destinationDirectory: f.destination, id: 'corona-bank', lensId: 'density',
       label: 'Electron density', title: 'Coronal electron density', description: 'Measured tomographic grid.', sourceUrl: 'https://example.org/source',
       framingRadiusUnits: 4, attachedTo: 'sun', presentationFrame });
     const descriptor = JSON.parse(await readFile(result.descriptorPath, 'utf8'));
-    const payload = await loadPreparedVolumeLenses(descriptor, { read: path => readFile(resolve(f.destination, path)) });
+    const payload = await loadPreparedVolumeLenses(descriptor, { read: path => readArrayBuffer(resolve(f.destination, path)) });
     assert.deepEqual(payload.lenses[0]!.volume.frame, presentationFrame);
     assert.deepEqual(payload.lenses[0]!.stars.frame, presentationFrame);
-    assert.deepEqual(payload.provenance.measurementFrame, frame);
-    assert.deepEqual(payload.provenance.presentationFrame, presentationFrame);
+    const provenance = record(payload.provenance);
+    assert.deepEqual(provenance.measurementFrame, frame);
+    assert.deepEqual(provenance.presentationFrame, presentationFrame);
     const receipt = JSON.parse(await readFile(result.deliveryPath, 'utf8'));
     assert.deepEqual(receipt.source.frame, frame);
     assert.deepEqual(receipt.promotion.presentationFrame, presentationFrame);
@@ -101,7 +108,7 @@ test('promotes independently authenticated density grids into selectable namespa
       ] });
     assert.equal(result.resourceCount, 6);
     const descriptor = JSON.parse(await readFile(result.descriptorPath, 'utf8'));
-    const payload = await loadPreparedVolumeLenses(descriptor, { read: path => readFile(resolve(first.destination, path)) });
+    const payload = await loadPreparedVolumeLenses(descriptor, { read: path => readArrayBuffer(resolve(first.destination, path)) });
     assert.equal(payload.defaultLens, 'regularized');
     assert.deepEqual(payload.lenses.map(lens => lens.id), ['regularized', 'comparison']);
     assert.deepEqual(payload.lenses.map(lens => lens.volume.resources.map(resource => resource.path)), [

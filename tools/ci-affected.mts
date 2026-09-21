@@ -1,11 +1,5 @@
-// Affected-only CI routing: Contract lint and the object-scope gate always run (they are cheap and prove the
-// contract on every pull request), but the four heavy jobs (Typecheck, Prepared universe and shared renderer,
-// Prepared universe preparation and galaxy field, Internal nebula packages) cost minutes each. Most pull requests
-// touch one narrow area — a single body, the renderer, the site shell, or the tooling packages — and only need the
-// heavy jobs that area's own tests and typechecks live in. `.github/ci-areas.json` is the map from changed paths to
-// areas, and from areas to the heavy jobs they need; this module applies it to a diff. Extends the existing
-// docs-only classification in tools/classify-changes.mts (still the source of truth for "is this a doc path", kept
-// as its own tested unit) with the fuller area routing the `changes` job now computes.
+// One affected-path plan for GitHub and local checks. Unknown ownership runs every shared lane;
+// known owners select the jobs containing their checks. Lint and object-scope always run.
 import { execFile } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { appendFileSync } from 'node:fs';
@@ -33,6 +27,7 @@ export interface CiArea {
 export interface CiAreasConfig {
   readonly shared: readonly string[];
   readonly areas: readonly CiArea[];
+  readonly production?: readonly string[];
 }
 
 /** Parses and validates `.github/ci-areas.json`. Every job id an area declares must be one of the four heavy jobs —
@@ -51,7 +46,9 @@ export function parseCiAreasConfig(raw: unknown): CiAreasConfig {
     });
     return { id, patterns, jobs };
   });
-  return { shared, areas };
+  const production = root.production === undefined ? [] : requireArray(root.production, 'ci-areas.json production')
+    .map((value, index) => requireString(value, `ci-areas.json production[${index}]`));
+  return { shared, areas, production };
 }
 
 export async function loadCiAreasConfig(path = resolve(import.meta.dirname, '..', '.github', 'ci-areas.json')): Promise<CiAreasConfig> {
@@ -86,6 +83,17 @@ function matchesAny(path: string, patterns: readonly string[]): boolean {
   return patterns.some(pattern => patternToRegExp(pattern).test(path));
 }
 
+/** The production smoke is selected by the same map for local runs and the PR workflow. */
+export function needsProductionBuild(paths: readonly string[], config: CiAreasConfig): boolean {
+  return classifyAffectedPaths(paths, config).shared || paths.some(path => matchesAny(path, config.production ?? []));
+}
+
+export function affectedJobNames(result: AffectedAreas): string[] {
+  return ['lint', ...HEAVY_JOBS.flatMap(job => !result.jobs.has(job) ? [] :
+    job === 'typecheck' ? ['typecheck', 'typecheck-tests'] :
+      job === 'universePreparation' ? ['universe-preparation'] : [job])];
+}
+
 export interface AffectedAreas {
   readonly paths: readonly string[];
   /** True when at least one changed path matched a shared pattern, or a path matched no area at all ("unsure means
@@ -117,10 +125,18 @@ async function gitChangedPaths(mode: ChangeMode, ref: string, root: string): Pro
   const UNKNOWN_PUSH_BASE = /^0+$/u;
   if (mode === 'push' && (!ref || UNKNOWN_PUSH_BASE.test(ref))) return undefined;
   const args = mode === 'pr'
-    ? ['diff', '--no-renames', '--name-only', `${ref}...HEAD`]
-    : ['diff', '--no-renames', '--name-only', ref, 'HEAD'];
+    ? ['diff', '--no-renames', '--name-only', '-z', `${ref}...HEAD`]
+    : ['diff', '--no-renames', '--name-only', '-z', ref, 'HEAD'];
   const { stdout } = await execFileAsync('git', args, { cwd: root, maxBuffer: 1024 * 1024 * 64 });
-  return stdout.split('\n').map(line => line.trim()).filter(Boolean);
+  return stdout.split('\0').filter(Boolean);
+}
+
+/** Include uncommitted work locally; GitHub uses the committed merge-base diff above. */
+export async function localChangedPaths(ref: string, root: string): Promise<string[]> {
+  const committed = await gitChangedPaths('pr', ref, root) ?? [];
+  const commands = [['diff', '--no-renames', '--name-only', '-z', 'HEAD'], ['ls-files', '--others', '--exclude-standard', '-z']];
+  const local = await Promise.all(commands.map(args => execFileAsync('git', args, { cwd: root, maxBuffer: 64 * 1024 * 1024 })));
+  return [...new Set([...committed, ...local.flatMap(result => result.stdout.split('\0').filter(Boolean))])];
 }
 
 /** Same decision, computing `paths` itself from git and `config` itself from `.github/ci-areas.json`. An unresolved
@@ -143,6 +159,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (mode !== 'pr' && mode !== 'push') throw new Error('Usage: ci-affected.mts <pr|push> <ref>');
   if (!ref) throw new Error('Usage: ci-affected.mts <pr|push> <ref>');
   const result = await classifyAffectedChanges(mode, ref);
+  const production = needsProductionBuild(result.paths, await loadCiAreasConfig());
   console.log(`Touched ${result.paths.length} file(s).`);
   console.log(result.shared
     ? 'Classified as shared: every heavy job runs.'
@@ -151,5 +168,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (outputPath) {
     for (const job of HEAVY_JOBS) appendFileSync(outputPath, `run_${job.replace(/[A-Z]/gu, letter => `_${letter.toLowerCase()}`)}=${result.jobs.has(job)}\n`);
     appendFileSync(outputPath, `docs_only=${!result.shared && result.areaIds.length > 0 && result.areaIds.every(id => id === 'docs')}\n`);
+    appendFileSync(outputPath, `run_production=${production}\n`);
   }
 }

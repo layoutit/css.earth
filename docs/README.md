@@ -9,6 +9,7 @@ For a body's sources, processing, evidence and known problems, read its
 
 | Topic | Guide |
 | --- | --- |
+| PR feedback budget, check selection, failure recovery and deployment | [CI/CD maintenance](ci-cd.md) |
 | Galaxies, LMC image lenses and extragalactic datasets | [Galaxies and the nearby universe](galaxies/README.md) |
 | Nebula reconstruction, spectral lenses and reproducible delivery | [Prepared nebulae](nebulae/README.md) |
 | Recording sources and evidence | [Provenance contract](provenance/CONTRACT.md) |
@@ -82,7 +83,7 @@ CI checks local Markdown, reference and HTML links, heading anchors, file placem
 and links from this index.
 It also rejects duplicate body `SOURCE.md`, `EVIDENCE.md` and `USAGE.md` accounts.
 Run the same check with
-`python3 tools/audits/check-documentation-links.py --all`.
+`node tools/audits/check-documentation-links.mts --all`.
 
 For a Git snapshot inventory of body records, retained HTML and duplicate bytes,
 run `python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output /tmp/provenance-inventory.json`.

@@ -6,6 +6,7 @@ import test from 'node:test';
 import { sourceArray, sourceObject, sourceText, parseSourceBinding } from '../src/platform/source-catalog.mts';
 import { evidenceLink, parseInvestigationLedger } from './investigation-ledger.mts';
 import { readInvestigationSurveys } from './investigation-survey.mts';
+import { applicationDeliveryKind } from './nebula/application/delivery-identity.ts';
 
 const root = resolve(import.meta.dirname, '..');
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, path), 'utf8'));
@@ -19,7 +20,12 @@ async function presentedBanks() {
     const names = await readdir(resolve(root, base));
     if (!names.includes('object.json')) continue;
     const descriptor = sourceObject(await read(`${base}/object.json`));
-    if (descriptor.type === 'volume-lens-bank') entries.push({ id: sourceText(descriptor.id), base });
+    if (descriptor.type === 'volume-lens-bank' && names.includes('source')) {
+      const sourceFiles = await readdir(resolve(root, base, 'source'));
+      const filename = sourceFiles.includes('compact-delivery.json') ? 'compact-delivery.json'
+        : sourceFiles.includes('delivery.json') ? 'delivery.json' : null;
+      if (filename && applicationDeliveryKind(filename, await read(`${base}/source/${filename}`))) entries.push({ id: sourceText(descriptor.id), base });
+    }
     else if (descriptor.type === 'image-layer-bank' && names.includes('source')) {
       const sourceFiles = await readdir(resolve(root, base, 'source'));
       if (sourceFiles.includes('presentation.json')) entries.push({ id: sourceText(descriptor.id), base });
