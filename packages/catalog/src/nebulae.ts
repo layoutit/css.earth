@@ -1,10 +1,11 @@
 import { validateSpatialPosition } from './spatial-relations.ts';
 import type { PreparedGalaxyRecord, SpatialCatalogSource } from './spatial.js';
 
-/** A sourced centre and display model; reconstructed depth is not a measured density. */
+/** A sourced Galactic volume. The legacy nebula transport also carries stellar clusters;
+ * the row kind preserves their scientific identity independently of the shared renderer. */
 export interface PreparedNebulaRecord extends Pick<PreparedGalaxyRecord,
   'id' | 'name' | 'aliases' | 'positionM' | 'skyPosition' | 'distance' | 'status' | 'presentation'> {
-  readonly kind: 'nebula';
+  readonly kind: 'nebula' | 'globular-cluster';
   readonly detailedObjectId: string;
   readonly introduction: { readonly text: string; readonly sourceRefs: readonly string[] };
   readonly classification: { readonly name: string; readonly basis: string; readonly sourceRef: string };
@@ -16,7 +17,7 @@ export interface PreparedNebulaCatalog {
   readonly objects: readonly PreparedNebulaRecord[];
 }
 export function isPreparedNebula(object: object): object is PreparedNebulaRecord {
-  return 'kind' in object && object.kind === 'nebula';
+  return 'kind' in object && (object.kind === 'nebula' || object.kind === 'globular-cluster');
 }
 const record = (v: unknown): Record<string, unknown> => {
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Expected nebula catalogue object.');
@@ -27,7 +28,7 @@ const finite = (v: unknown): number => { if (typeof v !== 'number' || !Number.is
 const positive = (v: unknown): number => { const n = finite(v); if (n <= 0) throw new TypeError('Expected positive nebula value.'); return n; };
 const array = (v: unknown): readonly unknown[] => { if (!Array.isArray(v)) throw new TypeError('Expected nebula array.'); return v; };
 
-/** A separate catalogue avoids misclassifying Galactic nebulae as Local Group galaxies. */
+/** A separate catalogue avoids misclassifying Galactic volumes as Local Group galaxies. */
 export function parsePreparedNebulaCatalog(input: unknown): PreparedNebulaCatalog {
   const v = record(input), frame = record(v.frame), sources = array(v.sources), objects = array(v.objects);
   if (v.schema !== 'cssearth-nebula-catalog@1' || objects.length > 10000) throw new TypeError('Invalid nebula catalogue.');
@@ -42,7 +43,7 @@ export function parsePreparedNebulaCatalog(input: unknown): PreparedNebulaCatalo
   const reference = (v: unknown) => { const id = text(v); if (![...sourceIds].some(source => id === source || id.startsWith(`${source}:`))) throw new TypeError('Unknown nebula source reference.'); };
   for (const value of objects) {
     const row = record(value), id = text(row.id), detail = text(row.detailedObjectId);
-    if (row.kind !== 'nebula' || row.status !== 'confirmed' || ids.has(id) || details.has(detail) ||
+    if (!isPreparedNebula(row) || row.status !== 'confirmed' || ids.has(id) || details.has(detail) ||
         !/^[a-z][a-z0-9-]*$/.test(id) || !/^[a-z][a-z0-9-]*$/.test(detail)) throw new TypeError('Invalid nebula identity.');
     ids.add(id); details.add(detail); text(row.name); array(row.aliases).forEach(text);
     const introduction = record(row.introduction), introductionText = text(introduction.text);

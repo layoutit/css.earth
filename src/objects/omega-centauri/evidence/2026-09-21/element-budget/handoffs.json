@@ -1,0 +1,176 @@
+{
+  "oldId": "7a4f8781a7d19fafa57f11e65eae6ee24975082d3fcae0c1644cbdd68a5ac549",
+  "optimizedId": "59ae6e1a336d5a7b0d946197decfbbc093beb39f0181fac2ef88300314c08b8e",
+  "thresholds": {
+    "relativeLuminanceDifference": 0.05,
+    "normalizedL1": 0.04
+  },
+  "measurements": [
+    {
+      "version": "old",
+      "lens": "neutral",
+      "seam": "xz",
+      "relativeLuminanceDifference": 0.004804672942986058,
+      "normalizedL1": 0.12498652413707272,
+      "passed": false
+    },
+    {
+      "version": "old",
+      "lens": "neutral",
+      "seam": "yz",
+      "relativeLuminanceDifference": 0.003411535415403307,
+      "normalizedL1": 0.1146546907233652,
+      "passed": false
+    },
+    {
+      "version": "old",
+      "lens": "neutral",
+      "seam": "xy",
+      "relativeLuminanceDifference": 0.01257513269393465,
+      "normalizedL1": 0.12922000336543588,
+      "passed": false
+    },
+    {
+      "version": "old",
+      "lens": "eso1119b",
+      "seam": "xz",
+      "relativeLuminanceDifference": 0.005002309945527142,
+      "normalizedL1": 0.12007917840015177,
+      "passed": false
+    },
+    {
+      "version": "old",
+      "lens": "eso1119b",
+      "seam": "yz",
+      "relativeLuminanceDifference": 0.0033750817084131296,
+      "normalizedL1": 0.11017354402412256,
+      "passed": false
+    },
+    {
+      "version": "old",
+      "lens": "eso1119b",
+      "seam": "xy",
+      "relativeLuminanceDifference": 0.0128238570542583,
+      "normalizedL1": 0.1240519478966761,
+      "passed": false
+    },
+    {
+      "version": "old",
+      "lens": "eso0844a",
+      "seam": "xz",
+      "relativeLuminanceDifference": 0.004756726423958046,
+      "normalizedL1": 0.1238774224552733,
+      "passed": false
+    },
+    {
+      "version": "old",
+      "lens": "eso0844a",
+      "seam": "yz",
+      "relativeLuminanceDifference": 0.0034671649169563516,
+      "normalizedL1": 0.11369655642048106,
+      "passed": false
+    },
+    {
+      "version": "old",
+      "lens": "eso0844a",
+      "seam": "xy",
+      "relativeLuminanceDifference": 0.013644155316165174,
+      "normalizedL1": 0.13234144636273965,
+      "passed": false
+    },
+    {
+      "version": "optimized",
+      "lens": "neutral",
+      "seam": "xz",
+      "relativeLuminanceDifference": 0.008694965476756213,
+      "normalizedL1": 0.13188125127614667,
+      "passed": false
+    },
+    {
+      "version": "optimized",
+      "lens": "neutral",
+      "seam": "yz",
+      "relativeLuminanceDifference": 0.019974440390013257,
+      "normalizedL1": 0.12519230604523487,
+      "passed": false
+    },
+    {
+      "version": "optimized",
+      "lens": "neutral",
+      "seam": "xy",
+      "relativeLuminanceDifference": 0.016257896200268997,
+      "normalizedL1": 0.13483752492242546,
+      "passed": false
+    },
+    {
+      "version": "optimized",
+      "lens": "eso1119b",
+      "seam": "xz",
+      "relativeLuminanceDifference": 0.008700856353693595,
+      "normalizedL1": 0.12227853298617221,
+      "passed": false
+    },
+    {
+      "version": "optimized",
+      "lens": "eso1119b",
+      "seam": "yz",
+      "relativeLuminanceDifference": 0.020184772799704816,
+      "normalizedL1": 0.11574691531941868,
+      "passed": false
+    },
+    {
+      "version": "optimized",
+      "lens": "eso1119b",
+      "seam": "xy",
+      "relativeLuminanceDifference": 0.01650064620759065,
+      "normalizedL1": 0.12534467725283968,
+      "passed": false
+    },
+    {
+      "version": "optimized",
+      "lens": "eso0844a",
+      "seam": "xz",
+      "relativeLuminanceDifference": 0.006908970740758142,
+      "normalizedL1": 0.1291989641066443,
+      "passed": false
+    },
+    {
+      "version": "optimized",
+      "lens": "eso0844a",
+      "seam": "yz",
+      "relativeLuminanceDifference": 0.01816507596202499,
+      "normalizedL1": 0.12207841477480044,
+      "passed": false
+    },
+    {
+      "version": "optimized",
+      "lens": "eso0844a",
+      "seam": "xy",
+      "relativeLuminanceDifference": 0.01630403321974954,
+      "normalizedL1": 0.1321377573141277,
+      "passed": false
+    }
+  ],
+  "frontChanges": [
+    {
+      "lens": "neutral",
+      "relativeLuminanceDifference": 0.19799067933951509,
+      "normalizedL1": 0.1116585069926175,
+      "passed": false
+    },
+    {
+      "lens": "eso1119b",
+      "relativeLuminanceDifference": 0.20024573870026677,
+      "normalizedL1": 0.11332034626392762,
+      "passed": false
+    },
+    {
+      "lens": "eso0844a",
+      "relativeLuminanceDifference": 0.1899583282996675,
+      "normalizedL1": 0.10968339408730671,
+      "passed": false
+    }
+  ],
+  "errors": [],
+  "failed": []
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-image-alignment-report@1",
+  "pass": false,
+  "catalogue": "labs/nebula/models/omega-centauri/observations.json",
+  "sources": [
+    {
+      "id": "eso1119b",
+      "pass": false,
+      "sourcePath": ".local/nebula-lab/source-originals/eso1119b.tif",
+      "sourceSha256": "8df2e2ad462b9dc5b7437320fb2c6fd247c11746b4b2ffd3da95846b9083cad6",
+      "geometry": {
+        "kind": "matched-star-homography",
+        "registration": null
+      },
+      "evidence": {
+        "status": "publisher",
+        "matchedStars": 0,
+        "interpretation": "Fewer than 45 matched pairs against the DSS2 reference."
+      }
+    },
+    {
+      "id": "eso0844a",
+      "pass": false,
+      "sourcePath": ".local/nebula-lab/source-originals/eso0844a.tif",
+      "sourceSha256": "384d1cfc31e6a2b78e5c7018f9eaecfe49a1014630bcb1bd8dceb563d69e6429",
+      "geometry": {
+        "kind": "matched-star-homography",
+        "registration": null
+      },
+      "evidence": {
+        "status": "publisher",
+        "matchedStars": 0,
+        "interpretation": "Fewer than 45 matched pairs against the DSS2 reference."
+      }
+    }
+  ]
+}

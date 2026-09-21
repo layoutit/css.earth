@@ -21,7 +21,8 @@ export function setupObjectIds(args: readonly string[], root = resolve(import.me
   const selected = ids.length ? ids : SCENE_OBJECTS.map(({ id }) => id);
   if (new Set(selected).size !== selected.length ||
       selected.some(id => !/^[a-z][a-z0-9-]*$/u.test(id) || (!SCENE_OBJECTS.some(object => object.id === id) &&
-        !existsSync(resolve(root, `src/objects/${id}/runtime-assets.json`))))) {
+        !existsSync(resolve(root, `src/objects/${id}/runtime-assets.json`)) &&
+        !existsSync(resolve(root, `src/objects/${id}/prepared-assets.json`))))) {
     throw new Error("Choose an existing scene or an explicitly inventoried context resource with --object=<id>.");
   }
   return selected;

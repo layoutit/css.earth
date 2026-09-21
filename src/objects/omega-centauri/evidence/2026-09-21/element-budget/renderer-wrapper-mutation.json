@@ -1,0 +1,7 @@
+{
+  "mutation": "add one wrapper to app bank root in isolated renderer copy",
+  "exitCode": 1,
+  "failedBudgetCases": 2,
+  "observed": "expected500 to be499 in both cases",
+  "conclusion": "The exact inclusive overhead assertion does lock current overhead, including the one-element reserved margin. No producer/test source fix needed."
+}

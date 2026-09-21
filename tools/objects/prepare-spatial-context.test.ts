@@ -132,18 +132,20 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     assert.deepEqual(result.bodies.filter((body: { placement?: string }) => body.placement === 'approximate')
       .map((body: { id: string }) => body.id).sort(), ['dactyl', 'selam'], 'Catalogue preparation must preserve the source records’ phase qualification.');
     // Independently parse the retained Horizons output, bypassing the snapshot
-    // loader, solar-geometry.mts and descriptor frames. Other bodies retain
-    // their compact astronomy models; Earth adds its source-owned EMB offset.
+    // loader, solar-geometry.mts and descriptor frames. Retained Sun-centered
+    // records own the primary positions; other bodies retain their compact models.
     const manifestPath = resolve(root, 'packages/astronomy/source/scene-epoch');
     const manifest = JSON.parse(await readFile(resolve(manifestPath, 'manifest.json'), 'utf8'));
     assert.equal(manifest.epochJdTt, source.frame.epochJdTt);
     const sourcePositions = new Map<string, number[]>();
+    const sourcePrimaries = new Map<string, number[]>();
     for (const record of manifest.records) {
       const response = await readFile(resolve(manifestPath, record.path), 'utf8');
       const row = response.split('$$SOE')[1]!.split('$$EOE')[0]!.trim().split(',');
-      sourcePositions.set(record.id, row.slice(2, 5).map(Number));
+      const positionKm = row.slice(2, 5).map(Number);
+      sourcePositions.set(record.id, positionKm);
+      if (record.centerBodyId === 'sun') sourcePrimaries.set(record.id, positionKm);
     }
-    const sourcePrimaries = new Map<string, number[]>();
     for (const id of SCENE_SATELLITE_IDS) {
       const record = JSON.parse(await readFile(resolve(root, `src/objects/${id}/source/validation/epoch-state.json`), 'utf8'));
       sourcePositions.set(id, record.positionKm);

@@ -1,28 +1,52 @@
 name: Nightly asset sweep
 
+# PR feedback budget: target 2 minutes, maximum 3 minutes end to end for all
+# merge-required checks. Exhaustive sweeps stay scheduled/manual. The production
+# build/browser probe below is separate, change-selected qualification; do not
+# make it merge-required without bringing it inside that same total budget.
+# Maintenance rules and failure recovery: docs/ci-cd.md.
+
 on:
   schedule:
     - cron: '23 4 * * *'
   workflow_dispatch:
   pull_request:
-    # Only the deploy-build job below runs from this trigger (each other job's `if:` stays schedule/dispatch-only):
-    # a full `pnpm build:deploy` is too slow to run on every PR, but a PR touching the code this specific path resolves
-    # through gets it anyway, instead of waiting for the nightly schedule to notice a break.
-    paths:
-      - '.github/workflows/nightly.yml'
-      - 'package.json'
-      - 'pnpm-lock.yaml'
-      - 'site/**'
-      - 'astro.config.mts'
-      - 'src/renderers/css/rendering/**'
-      - '.github/workflows/deploy.yml'
-      - 'tools/prepare-*.mts'
-      - 'tools/setup*.mts'
 
 permissions:
   contents: read
 
+concurrency:
+  group: nightly-${{ github.event_name == 'pull_request' && github.ref || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
+  changes:
+    name: Select production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      run_production: ${{ steps.classify.outputs.run_production }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /tools/*.mts
+            /.github/ci-areas.json
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Use the shared PR plan
+        id: classify
+        run: |
+          if [ -n "${GITHUB_BASE_REF:-}" ]; then
+            node tools/ci-affected.mts pr "origin/$GITHUB_BASE_REF"
+          else
+            echo "run_production=true" >> "$GITHUB_OUTPUT"
+          fi
+
   assets:
     name: Every published asset
     if: github.event_name != 'pull_request'
@@ -50,7 +74,7 @@ jobs:
         run: pnpm check:assets-published --concurrency=8
 
   typecheck-tests:
-    # PRs skip typecheck:tests (most of the typecheck time); it runs here and on every push to main.
+    # The full test program also runs on owning PRs and main; this catches ambient dependency drift.
     name: Typecheck test files
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
@@ -64,32 +88,18 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
-      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          # The same paths and key as universe.yml, which saves this cache on main pushes.
-          path: |
-            public/scenes
-            src/objects/*/prepared/runtime.json
-            src/objects/*/prepared/scene.json
-          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
-          restore-keys: prepared-assets-v1-
       - name: Build shared packages and affected entry points
         run: pnpm build:tools
-      - name: Restore prepared assets and object JSON
-        run: |
-          pnpm setup:assets
-          pnpm prepare:object-json
-      - name: Prepare the minimap and source records the tests import
-        run: |
-          pnpm prepare:environment-images
-          pnpm prepare:minimap
-          pnpm prepare:sources
+      - name: Restore only compiler inputs and generate real shell data
+        run: pnpm prepare:typecheck
       - name: Typecheck test, fixture and capture files
         env:
           NODE_OPTIONS: --max-old-space-size=4096
         run: pnpm typecheck:tests
 
   asset-origin-build:
+    needs: changes
+    if: needs.changes.outputs.run_production == 'true'
     # Exercises the one path that has broken two real deploys and that no other CI job builds at all: a full
     # `pnpm build:deploy` with `ASSET_ORIGIN` set, the same as .github/workflows/deploy.yml's production path. The static
     # scan catches emitted same-origin addresses; the production browser test also exercises the client loader,
@@ -108,7 +118,7 @@ jobs:
           node-version: '24'
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # The same paths and key as universe.yml/deploy.yml. setup:assets sha-verifies every restored file and
@@ -119,10 +129,6 @@ jobs:
             src/objects/*/prepared/scene.json
           key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
           restore-keys: prepared-assets-v1-
-      - name: Restore prepared assets and textures from R2
-        env:
-          CSSEARTH_ALLOW_MISSING_ASSETS: "1"
-        run: pnpm setup:assets
       - name: Build the site with the production asset origin and reject metadata drift
         env:
           NODE_OPTIONS: --max-old-space-size=6144

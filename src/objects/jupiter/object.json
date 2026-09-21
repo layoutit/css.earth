@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "fb19911b9f4f547ac9c0ff69f3c4208738ab83566b2c7de802f72bc938c41f08"
+    "sha256": "53954b129cd1afeafead8d654abd3385704f4f34c271adbdda82bb678e48f1c2"
   },
   "id": "jupiter",
   "properties": {
@@ -165,9 +165,9 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -497567591648.3631,
-        562510993077.0295,
-        253219020779.19708
+        -497567147248.2968,
+        562511442005.565,
+        253219459105.8407
       ],
       "presentationToReference": [
         0.8226442516224385,
@@ -194,7 +194,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9d09b4702ce6ec2e9fa67e0a336406f56daa0ff6afbf2a8bd0c228baef839d8a"
+        "sha256": "420d918e3fb7a5692b9d6240faf701e6342f23feb4b234f378aa60f8942f44ba"
       }
     },
     "catalog": {

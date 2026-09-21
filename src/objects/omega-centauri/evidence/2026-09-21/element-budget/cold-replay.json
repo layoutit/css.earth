@@ -1,0 +1,1100 @@
+{
+  "status": "verified",
+  "verifiedAt": "2026-09-20T22:57:19.902Z",
+  "sandbox": "/private/tmp/cssearth-omega-budget-cold-yIxk9O",
+  "execution": {
+    "startedAt": "2026-09-20T22:53:14.121Z",
+    "endedAt": "2026-09-20T22:57:07.053Z",
+    "durationSeconds": 232.932,
+    "code": 0,
+    "reason": "",
+    "success": true,
+    "guardActive": true,
+    "sharp": {
+      "aom": "3.14.1",
+      "archive": "3.8.8",
+      "cairo": "1.18.4",
+      "cgif": "0.5.3",
+      "exif": "0.6.26",
+      "expat": "2.8.2",
+      "ffi": "3.6.0",
+      "fontconfig": "2.18.1",
+      "freetype": "2.14.3",
+      "fribidi": "1.0.16",
+      "glib": "2.89.1",
+      "harfbuzz": "14.2.1",
+      "heif": "1.23.1",
+      "highway": "1.4.0",
+      "imagequant": "2.4.1",
+      "lcms": "2.19.1",
+      "mozjpeg": "0826579",
+      "pango": "1.58.0",
+      "pixman": "0.46.4",
+      "png": "1.6.58",
+      "proxy-libintl": "0.5",
+      "rsvg": "2.62.90",
+      "tiff": "d01a94b",
+      "uhdr": "1acdbed",
+      "vips": "8.18.3",
+      "webp": "1.6.0",
+      "xml2": "2.15.3",
+      "zlib-ng": "2.3.3",
+      "sharp": "0.35.3"
+    }
+  },
+  "compactSha256": "c9f2535b13f4b4745179ec53b63240df1207ef7f38a4ea34dff76cba50a74d68",
+  "resultId": "59ae6e1a336d5a7b0d946197decfbbc093beb39f0181fac2ef88300314c08b8e",
+  "sampling": {
+    "sliceCounts": {
+      "x": 49,
+      "y": 46,
+      "z": 56
+    },
+    "imageWidth": 512,
+    "samplesPerSlab": 4,
+    "layerPlan": {
+      "schema": "cssearth-volume-layer-plan@1",
+      "referenceSliceCounts": {
+        "x": 264,
+        "y": 264,
+        "z": 512
+      },
+      "referenceSamplesPerSlab": 4,
+      "axes": {
+        "x": [
+          {
+            "startCell": 0,
+            "endCell": 39
+          },
+          {
+            "startCell": 39,
+            "endCell": 46
+          },
+          {
+            "startCell": 46,
+            "endCell": 49
+          },
+          {
+            "startCell": 49,
+            "endCell": 56
+          },
+          {
+            "startCell": 56,
+            "endCell": 63
+          },
+          {
+            "startCell": 63,
+            "endCell": 70
+          },
+          {
+            "startCell": 70,
+            "endCell": 75
+          },
+          {
+            "startCell": 75,
+            "endCell": 80
+          },
+          {
+            "startCell": 80,
+            "endCell": 83
+          },
+          {
+            "startCell": 83,
+            "endCell": 86
+          },
+          {
+            "startCell": 86,
+            "endCell": 91
+          },
+          {
+            "startCell": 91,
+            "endCell": 95
+          },
+          {
+            "startCell": 95,
+            "endCell": 98
+          },
+          {
+            "startCell": 98,
+            "endCell": 101
+          },
+          {
+            "startCell": 101,
+            "endCell": 104
+          },
+          {
+            "startCell": 104,
+            "endCell": 107
+          },
+          {
+            "startCell": 107,
+            "endCell": 110
+          },
+          {
+            "startCell": 110,
+            "endCell": 113
+          },
+          {
+            "startCell": 113,
+            "endCell": 115
+          },
+          {
+            "startCell": 115,
+            "endCell": 118
+          },
+          {
+            "startCell": 118,
+            "endCell": 121
+          },
+          {
+            "startCell": 121,
+            "endCell": 124
+          },
+          {
+            "startCell": 124,
+            "endCell": 127
+          },
+          {
+            "startCell": 127,
+            "endCell": 130
+          },
+          {
+            "startCell": 130,
+            "endCell": 133
+          },
+          {
+            "startCell": 133,
+            "endCell": 135
+          },
+          {
+            "startCell": 135,
+            "endCell": 138
+          },
+          {
+            "startCell": 138,
+            "endCell": 141
+          },
+          {
+            "startCell": 141,
+            "endCell": 144
+          },
+          {
+            "startCell": 144,
+            "endCell": 147
+          },
+          {
+            "startCell": 147,
+            "endCell": 150
+          },
+          {
+            "startCell": 150,
+            "endCell": 153
+          },
+          {
+            "startCell": 153,
+            "endCell": 156
+          },
+          {
+            "startCell": 156,
+            "endCell": 159
+          },
+          {
+            "startCell": 159,
+            "endCell": 162
+          },
+          {
+            "startCell": 162,
+            "endCell": 165
+          },
+          {
+            "startCell": 165,
+            "endCell": 168
+          },
+          {
+            "startCell": 168,
+            "endCell": 171
+          },
+          {
+            "startCell": 171,
+            "endCell": 174
+          },
+          {
+            "startCell": 174,
+            "endCell": 178
+          },
+          {
+            "startCell": 178,
+            "endCell": 181
+          },
+          {
+            "startCell": 181,
+            "endCell": 186
+          },
+          {
+            "startCell": 186,
+            "endCell": 193
+          },
+          {
+            "startCell": 193,
+            "endCell": 200
+          },
+          {
+            "startCell": 200,
+            "endCell": 205
+          },
+          {
+            "startCell": 205,
+            "endCell": 211
+          },
+          {
+            "startCell": 211,
+            "endCell": 218
+          },
+          {
+            "startCell": 218,
+            "endCell": 225
+          },
+          {
+            "startCell": 225,
+            "endCell": 264
+          }
+        ],
+        "y": [
+          {
+            "startCell": 0,
+            "endCell": 39
+          },
+          {
+            "startCell": 39,
+            "endCell": 46
+          },
+          {
+            "startCell": 46,
+            "endCell": 51
+          },
+          {
+            "startCell": 51,
+            "endCell": 54
+          },
+          {
+            "startCell": 54,
+            "endCell": 59
+          },
+          {
+            "startCell": 59,
+            "endCell": 66
+          },
+          {
+            "startCell": 66,
+            "endCell": 73
+          },
+          {
+            "startCell": 73,
+            "endCell": 78
+          },
+          {
+            "startCell": 78,
+            "endCell": 83
+          },
+          {
+            "startCell": 83,
+            "endCell": 86
+          },
+          {
+            "startCell": 86,
+            "endCell": 91
+          },
+          {
+            "startCell": 91,
+            "endCell": 96
+          },
+          {
+            "startCell": 96,
+            "endCell": 101
+          },
+          {
+            "startCell": 101,
+            "endCell": 104
+          },
+          {
+            "startCell": 104,
+            "endCell": 107
+          },
+          {
+            "startCell": 107,
+            "endCell": 110
+          },
+          {
+            "startCell": 110,
+            "endCell": 113
+          },
+          {
+            "startCell": 113,
+            "endCell": 116
+          },
+          {
+            "startCell": 116,
+            "endCell": 119
+          },
+          {
+            "startCell": 119,
+            "endCell": 122
+          },
+          {
+            "startCell": 122,
+            "endCell": 125
+          },
+          {
+            "startCell": 125,
+            "endCell": 128
+          },
+          {
+            "startCell": 128,
+            "endCell": 131
+          },
+          {
+            "startCell": 131,
+            "endCell": 134
+          },
+          {
+            "startCell": 134,
+            "endCell": 137
+          },
+          {
+            "startCell": 137,
+            "endCell": 140
+          },
+          {
+            "startCell": 140,
+            "endCell": 143
+          },
+          {
+            "startCell": 143,
+            "endCell": 146
+          },
+          {
+            "startCell": 146,
+            "endCell": 149
+          },
+          {
+            "startCell": 149,
+            "endCell": 152
+          },
+          {
+            "startCell": 152,
+            "endCell": 155
+          },
+          {
+            "startCell": 155,
+            "endCell": 158
+          },
+          {
+            "startCell": 158,
+            "endCell": 161
+          },
+          {
+            "startCell": 161,
+            "endCell": 164
+          },
+          {
+            "startCell": 164,
+            "endCell": 169
+          },
+          {
+            "startCell": 169,
+            "endCell": 172
+          },
+          {
+            "startCell": 172,
+            "endCell": 175
+          },
+          {
+            "startCell": 175,
+            "endCell": 180
+          },
+          {
+            "startCell": 180,
+            "endCell": 187
+          },
+          {
+            "startCell": 187,
+            "endCell": 190
+          },
+          {
+            "startCell": 190,
+            "endCell": 195
+          },
+          {
+            "startCell": 195,
+            "endCell": 202
+          },
+          {
+            "startCell": 202,
+            "endCell": 209
+          },
+          {
+            "startCell": 209,
+            "endCell": 219
+          },
+          {
+            "startCell": 219,
+            "endCell": 228
+          },
+          {
+            "startCell": 228,
+            "endCell": 264
+          }
+        ],
+        "z": [
+          {
+            "startCell": 0,
+            "endCell": 102
+          },
+          {
+            "startCell": 102,
+            "endCell": 105
+          },
+          {
+            "startCell": 105,
+            "endCell": 138
+          },
+          {
+            "startCell": 138,
+            "endCell": 162
+          },
+          {
+            "startCell": 162,
+            "endCell": 177
+          },
+          {
+            "startCell": 177,
+            "endCell": 187
+          },
+          {
+            "startCell": 187,
+            "endCell": 192
+          },
+          {
+            "startCell": 192,
+            "endCell": 201
+          },
+          {
+            "startCell": 201,
+            "endCell": 210
+          },
+          {
+            "startCell": 210,
+            "endCell": 215
+          },
+          {
+            "startCell": 215,
+            "endCell": 219
+          },
+          {
+            "startCell": 219,
+            "endCell": 224
+          },
+          {
+            "startCell": 224,
+            "endCell": 229
+          },
+          {
+            "startCell": 229,
+            "endCell": 232
+          },
+          {
+            "startCell": 232,
+            "endCell": 237
+          },
+          {
+            "startCell": 237,
+            "endCell": 240
+          },
+          {
+            "startCell": 240,
+            "endCell": 243
+          },
+          {
+            "startCell": 243,
+            "endCell": 246
+          },
+          {
+            "startCell": 246,
+            "endCell": 249
+          },
+          {
+            "startCell": 249,
+            "endCell": 252
+          },
+          {
+            "startCell": 252,
+            "endCell": 255
+          },
+          {
+            "startCell": 255,
+            "endCell": 258
+          },
+          {
+            "startCell": 258,
+            "endCell": 261
+          },
+          {
+            "startCell": 261,
+            "endCell": 262
+          },
+          {
+            "startCell": 262,
+            "endCell": 265
+          },
+          {
+            "startCell": 265,
+            "endCell": 268
+          },
+          {
+            "startCell": 268,
+            "endCell": 271
+          },
+          {
+            "startCell": 271,
+            "endCell": 274
+          },
+          {
+            "startCell": 274,
+            "endCell": 275
+          },
+          {
+            "startCell": 275,
+            "endCell": 278
+          },
+          {
+            "startCell": 278,
+            "endCell": 279
+          },
+          {
+            "startCell": 279,
+            "endCell": 281
+          },
+          {
+            "startCell": 281,
+            "endCell": 284
+          },
+          {
+            "startCell": 284,
+            "endCell": 287
+          },
+          {
+            "startCell": 287,
+            "endCell": 290
+          },
+          {
+            "startCell": 290,
+            "endCell": 293
+          },
+          {
+            "startCell": 293,
+            "endCell": 296
+          },
+          {
+            "startCell": 296,
+            "endCell": 299
+          },
+          {
+            "startCell": 299,
+            "endCell": 302
+          },
+          {
+            "startCell": 302,
+            "endCell": 306
+          },
+          {
+            "startCell": 306,
+            "endCell": 309
+          },
+          {
+            "startCell": 309,
+            "endCell": 312
+          },
+          {
+            "startCell": 312,
+            "endCell": 317
+          },
+          {
+            "startCell": 317,
+            "endCell": 322
+          },
+          {
+            "startCell": 322,
+            "endCell": 329
+          },
+          {
+            "startCell": 329,
+            "endCell": 335
+          },
+          {
+            "startCell": 335,
+            "endCell": 342
+          },
+          {
+            "startCell": 342,
+            "endCell": 353
+          },
+          {
+            "startCell": 353,
+            "endCell": 361
+          },
+          {
+            "startCell": 361,
+            "endCell": 368
+          },
+          {
+            "startCell": 368,
+            "endCell": 381
+          },
+          {
+            "startCell": 381,
+            "endCell": 384
+          },
+          {
+            "startCell": 384,
+            "endCell": 405
+          },
+          {
+            "startCell": 405,
+            "endCell": 424
+          },
+          {
+            "startCell": 424,
+            "endCell": 473
+          },
+          {
+            "startCell": 473,
+            "endCell": 512
+          }
+        ]
+      }
+    },
+    "layerOptimization": {
+      "schema": "cssearth-layer-optimization@1",
+      "method": "gradient-weighted-depth-displacement@1",
+      "maximumLayers": 151,
+      "referenceLayers": 1040,
+      "plannedLayers": 151,
+      "probeWidth": 64,
+      "probeSubpixels": 2,
+      "targetNormalizedL1": 0.01,
+      "estimatedNormalizedL1": {
+        "x": 0.1065752005761363,
+        "y": 0.1046658764904314,
+        "z": 0.10729931793886195
+      },
+      "status": "budget-limited"
+    },
+    "renderBudget": {
+      "schema": "cssearth-render-element-budget@1",
+      "profile": {
+        "schema": "cssearth-render-element-profile@1",
+        "id": "css-volume-single-topology@1",
+        "maximumElements": 500,
+        "elementsPerSlab": 3,
+        "elementsPerStar": 1,
+        "reservedElements": 47
+      },
+      "starCount": 0,
+      "slabCount": 151,
+      "maximumSlabs": 151,
+      "totalElements": 500
+    }
+  },
+  "admission": {
+    "starCount": 0,
+    "slabCount": 149,
+    "impostorCount": 26,
+    "totalElements": 493
+  },
+  "lensCounts": [
+    {
+      "id": "eso1119b",
+      "axes": {
+        "x": 48,
+        "y": 45,
+        "z": 56
+      },
+      "stars": 0,
+      "resources": 29,
+      "impostors": 26
+    },
+    {
+      "id": "eso0844a",
+      "axes": {
+        "x": 48,
+        "y": 45,
+        "z": 56
+      },
+      "stars": 0,
+      "resources": 29,
+      "impostors": 26
+    }
+  ],
+  "banks": [
+    {
+      "id": "neutral",
+      "resources": 149,
+      "bytes": 2668542
+    },
+    {
+      "id": "eso1119b",
+      "resources": 149,
+      "bytes": 7347226
+    },
+    {
+      "id": "eso0844a",
+      "resources": 149,
+      "bytes": 6476494
+    }
+  ],
+  "verifiedExpectedSlabResources": 447,
+  "verifiedArtifacts": 59,
+  "artifacts": [
+    {
+      "filename": "eso0844a/atlases/x.webp",
+      "bytes": 630850,
+      "sha256": "2be14d24b7b8c9207982a44d0257d2d33e9e2f4c6f1a20e11e8e83a2d419ff3e"
+    },
+    {
+      "filename": "eso0844a/atlases/y.webp",
+      "bytes": 588746,
+      "sha256": "f378d5167d5c82e2779c3507a67f5f3cc7d3cd67e8396a70a5e8d47d0bca3247"
+    },
+    {
+      "filename": "eso0844a/atlases/z.webp",
+      "bytes": 619926,
+      "sha256": "f2cfe0f147d8dd07d66be1acb6442c9898e52a37426ed332818e704111ba2a6a"
+    },
+    {
+      "filename": "eso0844a/impostors/view-00n.png",
+      "bytes": 12813,
+      "sha256": "4156c57dd44f146b3de1b146f31da37f676ef5ca97c388fc03d3442064c3fcae"
+    },
+    {
+      "filename": "eso0844a/impostors/view-00p.png",
+      "bytes": 12843,
+      "sha256": "7827406e40fef2a444bf1da7c92dbb73aea22132dc4da142cbddaa1c3038b954"
+    },
+    {
+      "filename": "eso0844a/impostors/view-0n0.png",
+      "bytes": 14310,
+      "sha256": "e9d6d2605bd483e58d3ff86bb49f010a0dbb3e88bd19a7529f56623288d5bb90"
+    },
+    {
+      "filename": "eso0844a/impostors/view-0nn.png",
+      "bytes": 16252,
+      "sha256": "26161006830d714bee7e57dc84aa2bde9a22fb2d375d32188231d5b9fe6ca1d0"
+    },
+    {
+      "filename": "eso0844a/impostors/view-0np.png",
+      "bytes": 16701,
+      "sha256": "089d623a473e4fa400428e882ed675afdfe55fa15d05c0dc05879dc5279f234c"
+    },
+    {
+      "filename": "eso0844a/impostors/view-0p0.png",
+      "bytes": 14252,
+      "sha256": "3612a4bb86230a87d514ae5417aa57300768b1a10d61f482414dfae1d4806da9"
+    },
+    {
+      "filename": "eso0844a/impostors/view-0pn.png",
+      "bytes": 16654,
+      "sha256": "c8621057e346b5167a188ece82721e947bc5d06d358edc6883ab2ec933925309"
+    },
+    {
+      "filename": "eso0844a/impostors/view-0pp.png",
+      "bytes": 16266,
+      "sha256": "efbc1796cbeb321201318f8be76bf2f4bcb45491d99710180e1fc4566b271963"
+    },
+    {
+      "filename": "eso0844a/impostors/view-n00.png",
+      "bytes": 13873,
+      "sha256": "aff1a64e71cdca04cbe72170feaa11e5284c57f2479703250981c7cd3510f1af"
+    },
+    {
+      "filename": "eso0844a/impostors/view-n0n.png",
+      "bytes": 16245,
+      "sha256": "1413954ca8edc01593679686edf534a55785207dd56ecbdbdd2a1f81bf1c6889"
+    },
+    {
+      "filename": "eso0844a/impostors/view-n0p.png",
+      "bytes": 16103,
+      "sha256": "aa614dd95fa6c33dc9650e91599b75a2ba7b634e884e43fc95f076dd198a850c"
+    },
+    {
+      "filename": "eso0844a/impostors/view-nn0.png",
+      "bytes": 17181,
+      "sha256": "8211b8045e0eddd5d15ba737cde7ccf4373cd19cd322b71c227e9db9ac29b85c"
+    },
+    {
+      "filename": "eso0844a/impostors/view-nnn.png",
+      "bytes": 18333,
+      "sha256": "fd456e584c2d55ba70bb82c31ebdae54bd6050c52a1a5d77a1ae5a4e30be0d15"
+    },
+    {
+      "filename": "eso0844a/impostors/view-nnp.png",
+      "bytes": 18205,
+      "sha256": "4ac7ba2ab1c61280585304de0b1b343b2ce6d26177b2c830e4cca903d941dd21"
+    },
+    {
+      "filename": "eso0844a/impostors/view-np0.png",
+      "bytes": 16566,
+      "sha256": "f08f763fa3b91d78b5471c4c92f9c9eee005f730d0f135dd2ed3c946a3103072"
+    },
+    {
+      "filename": "eso0844a/impostors/view-npn.png",
+      "bytes": 18179,
+      "sha256": "d4777b2ba664846faca602046e708e817d3e620617b3708029444f37520a979d"
+    },
+    {
+      "filename": "eso0844a/impostors/view-npp.png",
+      "bytes": 17882,
+      "sha256": "1555e695cd4472ef5c8040e42f5af64b7adb30d5d48d9fd1640bd7611f490e0b"
+    },
+    {
+      "filename": "eso0844a/impostors/view-p00.png",
+      "bytes": 13926,
+      "sha256": "4b3d0c279484f7fd46295037a60e41e081dd952ee23dfc4da54b2b3ea95c60c5"
+    },
+    {
+      "filename": "eso0844a/impostors/view-p0n.png",
+      "bytes": 16082,
+      "sha256": "4a8d2219e7753680c2a62ac94540737d38dace55b010179413c586a4d32a6dc9"
+    },
+    {
+      "filename": "eso0844a/impostors/view-p0p.png",
+      "bytes": 16222,
+      "sha256": "42b8d608f6fce88844edebdc71820eb00a78bdb759eece0234be531ec242e189"
+    },
+    {
+      "filename": "eso0844a/impostors/view-pn0.png",
+      "bytes": 16602,
+      "sha256": "05407bb1fe5bcafe2d1657f39c930055183bfd7aea3e7ec29cf1a4b6864f08e8"
+    },
+    {
+      "filename": "eso0844a/impostors/view-pnn.png",
+      "bytes": 17957,
+      "sha256": "5d3dff6ed46bdd9d02b524036cf15e54cb3235377e87f1092a9001425e5bac71"
+    },
+    {
+      "filename": "eso0844a/impostors/view-pnp.png",
+      "bytes": 18142,
+      "sha256": "04cc74f6a9e2120398b8c0d3804f175378e2dd50ca8e9e2c6c19f115a9bc81f4"
+    },
+    {
+      "filename": "eso0844a/impostors/view-pp0.png",
+      "bytes": 17201,
+      "sha256": "e852ac472d7d640d6fbb134873e7cdd30d3ffbbc6a1560672c3c5d5ce9276fa9"
+    },
+    {
+      "filename": "eso0844a/impostors/view-ppn.png",
+      "bytes": 18148,
+      "sha256": "394139a551defd9c14085f8e9177a1d106ec12de61724a855551462df3088259"
+    },
+    {
+      "filename": "eso0844a/impostors/view-ppp.png",
+      "bytes": 18310,
+      "sha256": "6e54542765e0daf109a7a93de5013efc0407eadd3c66139b7598598cff165349"
+    },
+    {
+      "filename": "eso1119b/atlases/x.webp",
+      "bytes": 717392,
+      "sha256": "7c140e5355dae4ee747b5033fbebbeb1e3065a60fbfab907c9a497c195c36ca8"
+    },
+    {
+      "filename": "eso1119b/atlases/y.webp",
+      "bytes": 665178,
+      "sha256": "b4303f0b696ebe2dcacc4d29cd16c076963e64ce9b83e6baaccc6d799c3d24d5"
+    },
+    {
+      "filename": "eso1119b/atlases/z.webp",
+      "bytes": 744376,
+      "sha256": "48cabfce2c49e49af9c1dcfc909279bda7c29e93e4c3dcee52bc4a1621281e62"
+    },
+    {
+      "filename": "eso1119b/impostors/view-00n.png",
+      "bytes": 17819,
+      "sha256": "fc4b123e3af4cfd234ce5c9f0d0152f15332a11d856dc39b64d6b2ec99e33cff"
+    },
+    {
+      "filename": "eso1119b/impostors/view-00p.png",
+      "bytes": 17808,
+      "sha256": "b3c41a3bc5e4b2e455a46a5f9b45a55f73818c9dd81492c0bf13f5c470a1c1cc"
+    },
+    {
+      "filename": "eso1119b/impostors/view-0n0.png",
+      "bytes": 18194,
+      "sha256": "98795bd3eb6fff2b6725005a2d27ed77e956c314d0f5fbf8c49be78ffa42d1b6"
+    },
+    {
+      "filename": "eso1119b/impostors/view-0nn.png",
+      "bytes": 20855,
+      "sha256": "3d3492f4abe86ed315bef89b4eed6ea12dde6e42a21127dde8dbd472afa4c09f"
+    },
+    {
+      "filename": "eso1119b/impostors/view-0np.png",
+      "bytes": 21992,
+      "sha256": "d9becac304218245c0a81feb451e4938fa2738cee115795999110a1f3496608c"
+    },
+    {
+      "filename": "eso1119b/impostors/view-0p0.png",
+      "bytes": 18135,
+      "sha256": "5c1c63b173cc7d66476ddb33bff80542a66b0ff5ae550aa54e1ce34c281fc2a3"
+    },
+    {
+      "filename": "eso1119b/impostors/view-0pn.png",
+      "bytes": 22003,
+      "sha256": "6b049f9dfddf5fcfa7b588776192479ff9e5f3dec6eba7e8b55729bcbcf11a77"
+    },
+    {
+      "filename": "eso1119b/impostors/view-0pp.png",
+      "bytes": 20827,
+      "sha256": "60e6c04a4bd0a75528ba788d6dfd0b765cf016d64eb317a30c277c329e0479fe"
+    },
+    {
+      "filename": "eso1119b/impostors/view-n00.png",
+      "bytes": 18428,
+      "sha256": "bdbb5b335df7562f066a9b783f34af007123779136f787a6fe1e48d876df3f81"
+    },
+    {
+      "filename": "eso1119b/impostors/view-n0n.png",
+      "bytes": 21672,
+      "sha256": "b8374e6d60df50e5dfbd74b93e7afc720637052021a2c39498d7f679f0acc741"
+    },
+    {
+      "filename": "eso1119b/impostors/view-n0p.png",
+      "bytes": 21114,
+      "sha256": "17bafffbcf235dc9467ac0bc466d5190b43b376dda6a617fa83733d8ff52264d"
+    },
+    {
+      "filename": "eso1119b/impostors/view-nn0.png",
+      "bytes": 20813,
+      "sha256": "04574df58cc0371bcd9cbc504802abb32602736aca5ed78723c31e229c0fe3d2"
+    },
+    {
+      "filename": "eso1119b/impostors/view-nnn.png",
+      "bytes": 23385,
+      "sha256": "ba8db676f74fc73640634e80224852b89120b7458847d11e58ef6b4c6b58bb74"
+    },
+    {
+      "filename": "eso1119b/impostors/view-nnp.png",
+      "bytes": 23516,
+      "sha256": "59b45a749a76bc20b941251a563ab8f1ea41f6b25f6bb0d674308b09d597f729"
+    },
+    {
+      "filename": "eso1119b/impostors/view-np0.png",
+      "bytes": 20729,
+      "sha256": "644dc71d5c613fdbd1faf5ad662cc88572d8251308b5c62b0f9d8bc93c17d4fd"
+    },
+    {
+      "filename": "eso1119b/impostors/view-npn.png",
+      "bytes": 24083,
+      "sha256": "2f256ea4a133442ce5dfdb564999c92e22825d3ecb4aa7964ebc120c4450c64c"
+    },
+    {
+      "filename": "eso1119b/impostors/view-npp.png",
+      "bytes": 22900,
+      "sha256": "810e0f41aec1f714a15292a78560e1b8af8e21e4b6830b31ad5278d4092541a5"
+    },
+    {
+      "filename": "eso1119b/impostors/view-p00.png",
+      "bytes": 18397,
+      "sha256": "eafbf2d83cf5d90187c429b8f2691aee84b8e8e1707f007398e6b38819982285"
+    },
+    {
+      "filename": "eso1119b/impostors/view-p0n.png",
+      "bytes": 21097,
+      "sha256": "50cef00922fc06c8b371031eb49d0b649b30973132272a2c1825cbe5a58536d8"
+    },
+    {
+      "filename": "eso1119b/impostors/view-p0p.png",
+      "bytes": 21643,
+      "sha256": "36898320964881289e223386a14a96f03c496db91828a226e2bee0f108c521a8"
+    },
+    {
+      "filename": "eso1119b/impostors/view-pn0.png",
+      "bytes": 20712,
+      "sha256": "fc48f7402e52da24ceb72e20835c5f3721f2121d5cb346b1e9f57bd34258af7e"
+    },
+    {
+      "filename": "eso1119b/impostors/view-pnn.png",
+      "bytes": 22866,
+      "sha256": "b32298d848102bc899c2db9254ff43fb0d5716aaf074b7a3a003580ab6638610"
+    },
+    {
+      "filename": "eso1119b/impostors/view-pnp.png",
+      "bytes": 24053,
+      "sha256": "97fd71da3b4379b327435b54360bd950128998a28969d91576f19d64fb150b19"
+    },
+    {
+      "filename": "eso1119b/impostors/view-pp0.png",
+      "bytes": 20832,
+      "sha256": "d155d4807b4efe66de898bc8863be49d9763c03629bbbf47a6b04c0fe82e29ed"
+    },
+    {
+      "filename": "eso1119b/impostors/view-ppn.png",
+      "bytes": 23507,
+      "sha256": "b16791ed70b6ca22bbd84ce8d9a295711c1b55cc8e1dd28dab6e968d535b9788"
+    },
+    {
+      "filename": "eso1119b/impostors/view-ppp.png",
+      "bytes": 23343,
+      "sha256": "cd8a0f7a94149a386a8b98ec8a47257539193ef9f612701309e32cc6def08212"
+    },
+    {
+      "filename": "lenses.json",
+      "bytes": 433153,
+      "sha256": "42121aa3e3a35d16034954fb982b43a693d35d8724165e388f2a5f7d6087495c"
+    }
+  ],
+  "excludedSeparateMetadata": [
+    "delivery.json",
+    "presentation.json",
+    "provenance.json"
+  ],
+  "knownMetadataDifferences": {
+    "objectPreparationSha256": {
+      "previous": "d922a8f326a20a02c40b2807de5c06a3d1179f502de439838716b722cf99d3b0",
+      "current": "d1e34564e98eae6ebe9d8d59b8cfd4ebe19c20e0c14f8279c72444f96faf36a5"
+    },
+    "implementationSha256": {
+      "previous": "0c77264e17c447f8e6ea2f38e7dcfef7c535b49e6981933e26d79f2a95a51927",
+      "current": "ce5b9ec3f018452fba8d1d56cb6f43552afbdfdb76b1435494900507c7261935"
+    },
+    "recipeSha256": {
+      "previous": "d922a8f326a20a02c40b2807de5c06a3d1179f502de439838716b722cf99d3b0",
+      "current": "d1e34564e98eae6ebe9d8d59b8cfd4ebe19c20e0c14f8279c72444f96faf36a5"
+    }
+  },
+  "sourceInputsUnchanged": true,
+  "deliveryReceipt": {
+    "schema": "cssearth-nebula-delivery-receipt@1",
+    "recipeSha256": "d1e34564e98eae6ebe9d8d59b8cfd4ebe19c20e0c14f8279c72444f96faf36a5",
+    "implementationSha256": "ce5b9ec3f018452fba8d1d56cb6f43552afbdfdb76b1435494900507c7261935",
+    "sourceResult": "59ae6e1a336d5a7b0d946197decfbbc093beb39f0181fac2ef88300314c08b8e",
+    "acceptedLabResult": "59ae6e1a336d5a7b0d946197decfbbc093beb39f0181fac2ef88300314c08b8e",
+    "renderElements": {
+      "starCount": 0,
+      "slabCount": 149,
+      "impostorCount": 26,
+      "totalElements": 493
+    },
+    "lenses": [
+      {
+        "id": "eso1119b",
+        "stars": 0,
+        "leaves": 29
+      },
+      {
+        "id": "eso0844a",
+        "stars": 0,
+        "leaves": 29
+      }
+    ]
+  },
+  "claim": "Ordinary isolated application replay verified compact resource digests/sizes and exact sampling in its immutable replay owner, then all generated app inventory bytes and final admission. This does not assert scientific or visual handoff acceptance."
+}

@@ -119,6 +119,23 @@ test('a nebula focus keeps classification out of the title and preserves the sha
   f.card.destroy();
 });
 
+test('a globular-cluster focus keeps its stellar classification and the shared lens controls', () => {
+  const f = fixture();
+  const { membership: _membership, ...common } = f.record;
+  f.card.set({ ...common, kind: 'globular-cluster', detailedObjectId: 'prepared-galaxy',
+    introduction: { text: 'A source-backed introduction to this cluster.', sourceRefs: ['observations'] },
+    classification: { name: 'Globular cluster', basis: 'Integrated stellar light.', sourceRef: 'observations' } }, [], f.presentation);
+  assert.equal(f.root.querySelector('[data-focus-introduction]')?.textContent, 'A source-backed introduction to this cluster.');
+  assert.equal(f.root.querySelector('[data-focus-status]')?.textContent, '');
+  assert.equal(f.root.querySelector('[data-focus-status]')?.hidden, true, 'Galactic volumes keep classification out of the title');
+  assert.equal(f.root.querySelector('[data-focus-membership]')?.textContent, 'Milky Way');
+  assert.equal(f.root.querySelector('[data-focus-association]')?.textContent, 'Galactic globular cluster');
+  assert.equal(f.root.querySelector('[data-focus-basis]'), null, 'Model and measurement notes stay out of the standard Factsheet rows');
+  assert.equal(f.bank.hidden, false);
+  assert.equal(f.datasetTab.hidden, false);
+  f.card.destroy();
+});
+
 test('focus uses shared dataset tabs only when a prepared presentation is available', () => {
   const f = fixture();
   f.card.set(f.record);

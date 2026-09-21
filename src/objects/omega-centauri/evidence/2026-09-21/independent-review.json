@@ -1,0 +1,369 @@
+{
+  "scope": "Main merge and inherited typing repair; provenance/catalogue reviews used the staged pre-authoring binding. Final regenerated asset identities are independently verified in dependent-r2-restore.json.",
+  "verifiedReceipts": [
+    {
+      "packet": "provenance-merge",
+      "durationMs": 69034,
+      "turns": 1,
+      "completeSentinel": true,
+      "successful": true,
+      "emptyTools": true,
+      "emptyMcp": true,
+      "stagedSourceChanges": []
+    },
+    {
+      "packet": "catalogue-focus-merge",
+      "durationMs": 46318,
+      "turns": 1,
+      "completeSentinel": true,
+      "successful": true,
+      "emptyTools": true,
+      "emptyMcp": true,
+      "stagedSourceChanges": []
+    },
+    {
+      "packet": "types-cleanup",
+      "durationMs": 24374,
+      "turns": 1,
+      "completeSentinel": true,
+      "successful": true,
+      "emptyTools": true,
+      "emptyMcp": true,
+      "worktreeSourceChanges": []
+    }
+  ],
+  "reports": [
+    {
+      "name": "provenance-merge",
+      "report": "**Yes.** Object-scoped authoring and prepared-reader deploy compose: `--object` only narrows `prepareVolumeProvenance`; default remains all volumes; `--catalog-only` reads installed prepared identities and writes catalogues only; Omega stays in the volume set with the same limitation fields; Nearby-Universe stays a context/field bind, not a volume authoring target.\n\n## P0 / P1 / borderline P2\n\nNone observed in the staged merge interaction.\n\n## Composition (observed)\n\n**Authoring scope does not change the default.** `objectId` is optional. Unset, the folder filter is still every directory (`tools/prepare-volume-provenance.mts:247`). Set, `sourceId` runs first (`:242`) and the loop keeps only that folder; missing/non-volume ids fail after the loop (`:362`). CLI allows zero args or one `--object=<id>` and only then passes `objectId` (`:375-381`). `writeVolumeProvenance` still writes whatever `prepareVolumeProvenance` returned (`:366-372`), so scoped CLI writes that object only; unscoped CLI still prepares every volume.\n\n**Deploy does not generate or overwrite object packages.** `prepareFacilities` on `publish === 'catalogues'` uses `readPreparedVolumeProvenance` + `readPreparedContextProvenance` (`tools/prepare-facilities.mts:145-148`). The reader always sets `outputs: []` (`tools/prepare-volume-provenance.mts:173`). Writes are `writePreparedSet(catalogueOutputs)` only (`tools/prepare-facilities.mts:177`). CLI `--catalog-only` is the only extra flag (`:182-186`). `prepare:deploy` now ends at `prepare:deploy-catalogues` (`node tools/prepare-facilities.mts --catalog-only`), not galaxy-field generation.\n\n**Reader vs author stay on separate Options.** `readPreparedVolumeProvenance` has no `objectId` (`:143-145`) and always walks all volume presentations. Facilities never pass `objectId` into `prepareVolumeProvenance` (`:148`). Scoped authoring cannot leak into catalog-only deploy.\n\n**Omega remains a volume candidate with original limitation wiring.** All-object authoring still expects `omega-centauri` with 2 lenses (`tools/prepare-volume-provenance.test.mts:31`). Scoped authoring is tested on that id (`:16-24`). Product `limitations` are still `[lens.description, lens.detail]` (`tools/prepare-volume-provenance.mts:319`). Default route remains `/sun/?focus=…` when unhosted (`:359`, test `:23`).\n\n**Nearby-Universe is not a volume and is not `--object`-prepared.** Volume authoring continues only on `cssearth-volume-presentation-source@1` (`:250`). Nearby `object.json` is `galaxy-point-field` with prepared `points.json` (`src/objects/nearby-universe/object.json:4-14`). Setup metadata treats it as context (`provenance` + `runtime-assets.json`), not a volume schema (`tools/setup-volume-metadata.mts:25-27`). The metadata test includes `nearby-universe` and restores only `presentation.json` / `provenance.json` (`tools/setup-volume-metadata.test.mts:55-58,70`). Deploy volume-reader ignores source-only context presentations (`tools/prepare-volume-provenance.mts:156-158`; `tools/prepare-context-availability.test.mts:85-90`).\n\n**Nearby pins are internally consistent in the staged bind.** `object.json` prepared sha256 `c70262ba…` matches `prepared/manifest.json` `points.json` and `runtime-assets.json` `points.json`. `cloud.webp` sha256 `ddfc2751…` matches manifest and runtime-assets. Manifest still pins `source/presentation.json` and `src/objects/sun/source/navigation/universe.json` (`src/objects/nearby-universe/source/manifest.json:104-130`). `prepare-points.mts` still reads that manifest, presentation, and universe frame (`tools/galaxy-field/prepare-points.mts:13-22`). That generator is not on `prepare:deploy`.\n\n**No new publication in this interaction.** Catalog-only writes site catalogues only. Volume reader contributes no package outputs.\n\n## Ordinary P2\n\n**Authoring self-fingerprint will move; deploy receipts will not.** Adding `objectId` changes `prepare-volume-provenance.mts`, which is hashed as the generator (`:244, :325`). Later `prepareVolumeProvenance` / unscoped CLI output is a new recovered document. Catalog-only deploy still binds whatever `prepared/provenance.json` setup restored. Old R2 authoring receipts do not prove a post-merge authoring run.\n\n## Uncertainty (not treated as defects)\n\n`readPreparedContextProvenance` body is not in this packet. Nearby catalogue inclusion on deploy is inferred from `prepareFacilities` concatenating that reader (`tools/prepare-facilities.mts:146-147`) and from metadata restore (`tools/setup-volume-metadata.mts:26-29`). Empty `outputs` is observed only on the volume reader (`:173`).\n\n=== REPORT COMPLETE ===\n",
+      "scope": [
+        {
+          "path": "tools/prepare-volume-provenance.mts",
+          "sha256": "d923c49fa343ce93d64590dd10b4e40b1f843e306d5e7014144a587815f4518d",
+          "bytes": 31380,
+          "ranges": [
+            [
+              116,
+              188
+            ],
+            [
+              238,
+              259
+            ],
+            [
+              319,
+              385
+            ]
+          ]
+        },
+        {
+          "path": "tools/prepare-facilities.mts",
+          "sha256": "48f02c955fc982e8b3175a95c561016c7bb87742d259a406647f84cb19028697",
+          "bytes": 16849,
+          "ranges": [
+            [
+              132,
+              191
+            ]
+          ]
+        },
+        {
+          "path": "tools/setup-volume-metadata.mts",
+          "sha256": "da5b0d15e8b966794c344ab9e746c6d4657633b76da62f9afd242f26a13358f9",
+          "bytes": 3276,
+          "ranges": null
+        },
+        {
+          "path": "site/volume-presentation.mts",
+          "sha256": "4bfb6270a8ec2e62152060f73472d35905950cb7bb4b9aed69d61e2c5f43e117",
+          "bytes": 1936,
+          "ranges": null
+        },
+        {
+          "path": "tools/prepare-context-availability.test.mts",
+          "sha256": "3acb3627f83563abc35ca43bfb37227f4594b6ce4b242dac6eeab69f783a58b8",
+          "bytes": 6431,
+          "ranges": [
+            [
+              73,
+              100
+            ]
+          ]
+        },
+        {
+          "path": "tools/prepare-volume-provenance.test.mts",
+          "sha256": "0050fec1efc5e7d2ac17d39794023bc8655ecb2648e7e6ea9e213f4de9c31f7c",
+          "bytes": 26438,
+          "ranges": [
+            [
+              1,
+              44
+            ]
+          ]
+        },
+        {
+          "path": "tools/setup-volume-metadata.test.mts",
+          "sha256": "634fa68b9298bad26fcbbd7ab1aaf81d66863ed63cb47491580f0fbf748749ba",
+          "bytes": 4880,
+          "ranges": null
+        },
+        {
+          "path": "tools/galaxy-field/prepare-points.mts",
+          "sha256": "419ad3ffff3886232cb2d13a5c36ad58759611a98ca6ab64ed04d8b073683688",
+          "bytes": 5856,
+          "ranges": [
+            [
+              1,
+              27
+            ]
+          ]
+        },
+        {
+          "path": "src/objects/nearby-universe/source/manifest.json",
+          "sha256": "5e3e105e4b1b4f70b4abae418d077c274f23686dec5fbc37e7b8045bed3df924",
+          "bytes": 6599,
+          "ranges": [
+            [
+              100,
+              140
+            ]
+          ]
+        },
+        {
+          "path": "src/objects/nearby-universe/object.json",
+          "sha256": "ab70c155a8adf2a8286aefd161b1dd5871859e58abdd01a769791fa4e1584ad4",
+          "bytes": 456,
+          "ranges": null
+        },
+        {
+          "path": "src/objects/nearby-universe/prepared/manifest.json",
+          "sha256": "866e8cd54f11bf54c7842ef63bf187e45d8a29287c48144d497bae1735aadda8",
+          "bytes": 355,
+          "ranges": null
+        },
+        {
+          "path": "src/objects/nearby-universe/runtime-assets.json",
+          "sha256": "7ef6d9e20e1e80ce1f73473243b5d035c757bec2bee5d656f0690084fa6ccf7e",
+          "bytes": 713,
+          "ranges": null
+        }
+      ]
+    },
+    {
+      "name": "catalogue-focus-merge",
+      "report": "No P0, P1, or borderline P2 merge interaction. Native scene routes, prepared-focus identity, selection owner, and background asset mapping still compose.\n\n**P0 / P1 / borderline P2**\n\nNone observed.\n\nNative scene vs prepared-focus identity is split on the row, not collapsed into one owner key: scene rows keep `objectId` and drop `preparedFocusId`; prepared-focus rows set `preparedFocusId` from the catalogue `id` (`object.focusId`) and drop `objectId` (`site/catalogue-window.mts:87-93`, `site/prepared-catalogue-index.mts:22-23,46`). Fragment prefetch still keys native entry by pathname and ignores prepared-focus anchors (`site/navigation-fragments.mts:146-147`).\n\nSelection still lands on the same navigation owner: window selection is `selectedObjectName` plus `preparedFocus?.id` (`site/planet-shell-client.mts:1077-1079`); restore still `owner.setPreparedFocus` then `layer.selectGalaxy` (`site/prepared-context-navigation.mts:169-171`). Close-up suppression is unchanged in runtime: detailed focus is only installed when the selected record’s `detailedObjectId` is a declared image-layer or volume-lens bank (`src/renderers/css/universe/prepared-universe-runtime.ts:412-423`).\n\nFocus-only restore still waits on `prepareFocus` then flies; `v` still skips flight (`site/prepared-context-navigation.mts:185-179`). Catalogue records still carry classification, aliases (`searchNames`), source document, and `preparedFocusId` (`site/prepared-catalogue-index.mts:26-27,48-50,36,56`, `site/planet-shell-client.mts:690-707`, `site/catalogue-window.mts:77-78,84-92`).\n\nBackground points now resolve through the same asset-origin `resourceSet` as other context objects (`site/application-world-context.mts:68,113`). That does not touch focus identity or the detailed-focus gate.\n\n**Ordinary P2**\n\n`markSelection` both calls `catalogueWindow.setSelection` and re-walks every `.planet-object-link`, including virtual rows (`site/planet-shell-client.mts:1079-1086`). Observed: redundant class/`aria-current` writes. Not a second owner.\n\n**Uncertainty (not a finding)**\n\n`object.route` / `object.kind` on `PLANET_SEARCH_OBJECTS` are not in this packet; identity here is only as materialized in the index and row binder. Prepared-context navigation and detailed-focus runtime were given as byte-unchanged vs `bb7cab3`.\n\n=== REPORT COMPLETE ===\n",
+      "scope": [
+        {
+          "path": "site/prepared-catalogue-index.mts",
+          "sha256": "a179e9299d1a8c3c9cca6ebfb0de908a01ae3ea733e9a1bc5eb84e7dd61df08b",
+          "bytes": 3903,
+          "ranges": null
+        },
+        {
+          "path": "site/catalogue-index.mts",
+          "sha256": "e6f0d6e96312e88ead636ce3ca36fb19eb7a83a12d220f18bd2936336d9a6ed5",
+          "bytes": 4096,
+          "ranges": null
+        },
+        {
+          "path": "site/catalogue-window.mts",
+          "sha256": "8cace8dfc4766a634a7130904ff55a36d07177f4fbc63e15c2f0f2bf7988e380",
+          "bytes": 9261,
+          "ranges": [
+            [
+              52,
+              116
+            ],
+            [
+              178,
+              215
+            ]
+          ]
+        },
+        {
+          "path": "site/planet-shell-client.mts",
+          "sha256": "3ad1ee46c0b086b4e901c16c6e45bd619372d2c2b73eada60c0d2498629f74b2",
+          "bytes": 81490,
+          "ranges": [
+            [
+              679,
+              738
+            ],
+            [
+              747,
+              785
+            ],
+            [
+              1028,
+              1100
+            ]
+          ]
+        },
+        {
+          "path": "site/prepared-context-navigation.mts",
+          "sha256": "67286a0589f42d990d467d5c1e199661bc8b98b7102d152c527f34fc095e4a36",
+          "bytes": 13264,
+          "ranges": [
+            [
+              96,
+              131
+            ],
+            [
+              144,
+              188
+            ]
+          ]
+        },
+        {
+          "path": "src/renderers/css/universe/prepared-universe-runtime.ts",
+          "sha256": "fd0d735b8f44cd639e3c9cf5333a4f4fbef1a2c9dbbbf8d288cf59a4441dae2f",
+          "bytes": 48720,
+          "ranges": [
+            [
+              409,
+              438
+            ]
+          ]
+        },
+        {
+          "path": "site/navigation-fragments.mts",
+          "sha256": "11ff995039d6cef0c2fed9f4aa29d8faa4bb928ec6b5de32b518caf33b9a3343",
+          "bytes": 8492,
+          "ranges": [
+            [
+              132,
+              160
+            ]
+          ]
+        },
+        {
+          "path": "site/application-world-context.mts",
+          "sha256": "a641d9783889974b90c46e8e64a0745f72e26a8aa1d1b1e14dbdd7765b2e666e",
+          "bytes": 24520,
+          "ranges": [
+            [
+              43,
+              122
+            ]
+          ]
+        },
+        {
+          "path": "site/test/prepared-context-navigation.test.mts",
+          "sha256": "bc80889dedb3c2b7906dd4792c7be68119442856bae95e4562bbf83c2c2713ba",
+          "bytes": 23828,
+          "ranges": [
+            [
+              289,
+              365
+            ]
+          ]
+        },
+        {
+          "path": "site/test/catalogue-window.test.mts",
+          "sha256": "ce4bf379d55e307e7ce1b95620cb716ff6c776e4342cdafb31f710e3def77d2f",
+          "bytes": 3301,
+          "ranges": null
+        }
+      ]
+    },
+    {
+      "name": "types-cleanup",
+      "report": "**Accept.** No introduced P0, P1, or borderline P2 in these seven paths.\n\nThe edits are TypeScript 6 narrowing and union cleanup. Runtime producer behavior, F16 operation order/values, and VO plan inputs stay the same. Test changes tighten discriminants; they do not skip assertions or invent fixture facts.\n\n### Findings\n\nNone at P0 / P1 / borderline P2.\n\n### Change class\n\n| Path | Class | Check |\n|---|---|---|\n| `family-request.mts` | erased type | `Partial<Record<…, ConstraintVerdict>>` matches `assessFamilyRequest`, which only writes present keys (`out` at L46–56). Absent criteria stay omitted, not `undefined` slots. |\n| `family-operation.mts` | erased type | `dynamic-spectrum-inspect` is a separate no-payload arm (L50) vs select/export/spectrum/time-series (L56–58). `ALLOWED` / `NEEDS_PARAMETERS` / `customOutput` (L84–85, L161) still treat inspect as parameter-free. |\n| `f16-spatial-physical.mts` | runtime-equivalent expression | Same three defs, same order, same `fixed` (`{}` / `{kind}`), same `map` (L4). |\n| `f14-healpix.test.mts` | test | Extra `kind === 'native'` then `convention` (L3). Stronger, not weaker. |\n| `local-import.test.mts` | test | `'familyOperations' in inspected && …some(healpix-select && available)` (L60). Missing key fails; empty list fails. |\n| `session.test.mts` | test | `'satisfaction' in result` then `status === 'unresolved'` (L120–121). |\n| `vo/session.test.mts` | test | Clone is `{ ...request, wavelengthMicrometres: request.wavelengthMicrometres }` after asserting the field (L105–107). Actual wavelengths and remaining plan fields are kept. |\n\n### Uncertainties / verification\n\nTool and test-graph TypeScript passed (1758 files). Narrow: 23/29 pass; the other 6 need the pinned astronomy Python env — not treated as a code defect, and not claimed as native-boundary success. Parent app merge builds do not prove telescope native deps.\n\n=== REPORT COMPLETE ===\n",
+      "scope": {
+        "tools/objects/telescopes/families/f16-spatial-physical.mts": {
+          "sha256": "635e1b6e6bea9e3753267aebee52c1a30e5d66f08a12caf2fd7600a727508fb0",
+          "bytes": 5507,
+          "lines": [
+            [
+              1,
+              5
+            ]
+          ]
+        },
+        "tools/objects/telescopes/family-operation.mts": {
+          "sha256": "b4ef99f14b55d6f43dcd032fa45bd5cb3ef0ac29162d00e0370ac10dc8c7d06b",
+          "bytes": 56027,
+          "lines": [
+            [
+              33,
+              86
+            ],
+            [
+              145,
+              150
+            ],
+            [
+              161,
+              161
+            ],
+            [
+              255,
+              268
+            ]
+          ]
+        },
+        "tools/objects/telescopes/family-request.mts": {
+          "sha256": "7a030a9ea8013200647bffba2410947a02d22c9653abb1acb9837add41f7a9dd",
+          "bytes": 8835,
+          "lines": [
+            [
+              1,
+              57
+            ]
+          ]
+        },
+        "tools/objects/telescopes/families/f14-healpix.test.mts": {
+          "sha256": "bb9bd4a6a1b9f939e1190c9eee7d0cf20a59a54c186a3c4362c869790ec4c521",
+          "bytes": 3768,
+          "lines": [
+            [
+              1,
+              5
+            ]
+          ]
+        },
+        "tools/objects/telescopes/local-import.test.mts": {
+          "sha256": "e7991ab4b9984a618ed782be45f2fb93512f53c4ef5d580041e0b80e956009c0",
+          "bytes": 6659,
+          "lines": [
+            [
+              50,
+              65
+            ]
+          ]
+        },
+        "tools/objects/telescopes/session.test.mts": {
+          "sha256": "482ea175375730473543d4dbb35fda7711a5d4d90bf3608dbb806578e16f365a",
+          "bytes": 12789,
+          "lines": [
+            [
+              109,
+              134
+            ]
+          ]
+        },
+        "tools/objects/telescopes/vo/session.test.mts": {
+          "sha256": "f11ab27f7c321e6db1acc5f8e7c4f03569b219184ec1c9bf99348744944fabd9",
+          "bytes": 11819,
+          "lines": [
+            [
+              70,
+              134
+            ]
+          ]
+        },
+        "tools/objects/telescopes/family-handlers.mts": {
+          "sha256": "a2be2f33c776aedc45372e13a86583dfdb81787834a98a2f5b3b17e7377fb4ba",
+          "bytes": 15080,
+          "lines": [
+            [
+              23,
+              38
+            ]
+          ]
+        }
+      }
+    }
+  ],
+  "disposition": "No introduced P0/P1/borderline P2 or actionable cleanup finding. Compiler identity consequence is resolved by final asset publication; incoming redundant selection writes are not a new integration defect. Context reader returns no outputs. No scientific acceptance inferred."
+}

@@ -1,0 +1,181 @@
+{
+  "schema": "cssearth-telescope-product-descriptor@1",
+  "dataset": {
+    "id": "polaris-6431-events",
+    "target": "polaris",
+    "acquisition": {
+      "kind": "repository",
+      "identity": "../../telescope-families/chandra-events/acisf06431N003_evt2.fits.gz"
+    },
+    "producingRecord": "tools/objects/chandra/programs/polaris-vfaint.acisf06431N003_evt2.reproduction.json",
+    "sourceClassifications": [
+      {
+        "term": "event-list",
+        "vocabulary": "Chandra ACIS EVENTS+GTI",
+        "version": "FITS",
+        "status": "source"
+      }
+    ],
+    "families": [
+      "F10"
+    ],
+    "profiles": [
+      {
+        "handlerId": "f10-events",
+        "profileId": "chandra-acis-events-gti@1"
+      }
+    ]
+  },
+  "members": [
+    {
+      "id": "events",
+      "path": "../../telescope-families/chandra-events/acisf06431N003_evt2.fits.gz",
+      "role": "science",
+      "bytes": 2486220,
+      "sha256": "14d5d8da4fcf108a7ec6d3d5ee8db31ed7e641ba8f66a52f7671322b928ce0e5",
+      "mediaType": "application/gzip"
+    }
+  ],
+  "components": [
+    {
+      "id": "events",
+      "name": "Chandra ACIS EVENTS",
+      "families": [
+        "F10"
+      ],
+      "locations": [
+        {
+          "memberId": "events",
+          "structure": "EVENTS"
+        }
+      ],
+      "representation": {
+        "kind": "events",
+        "rows": 62471
+      },
+      "axes": [],
+      "columns": [
+        {
+          "id": "source-row",
+          "name": "source_row",
+          "role": "source-row-lineage",
+          "datatype": "integer",
+          "nullable": false,
+          "variableLength": false
+        },
+        {
+          "id": "time",
+          "name": "time",
+          "role": "event-time",
+          "datatype": "float64",
+          "nullable": false,
+          "variableLength": false,
+          "unit": "s"
+        },
+        {
+          "id": "x",
+          "name": "x",
+          "role": "native-x",
+          "datatype": "float64",
+          "nullable": false,
+          "variableLength": false
+        },
+        {
+          "id": "y",
+          "name": "y",
+          "role": "native-y",
+          "datatype": "float64",
+          "nullable": false,
+          "variableLength": false
+        },
+        {
+          "id": "energy",
+          "name": "energy_ev",
+          "role": "pulse-height-energy-coordinate",
+          "datatype": "float64",
+          "nullable": false,
+          "variableLength": false,
+          "unit": "eV"
+        },
+        {
+          "id": "pi",
+          "name": "pi",
+          "role": "pulse-invariant-channel",
+          "datatype": "integer",
+          "nullable": false,
+          "variableLength": false
+        },
+        {
+          "id": "ccd-id",
+          "name": "ccd_id",
+          "role": "detector-identity",
+          "datatype": "integer",
+          "nullable": false,
+          "variableLength": false
+        },
+        {
+          "id": "status",
+          "name": "status",
+          "role": "status-bit-field",
+          "datatype": "uint32",
+          "nullable": false,
+          "variableLength": false
+        }
+      ],
+      "quantity": {
+        "name": "detected events",
+        "semantics": "One retained source row per detected event. Images, histograms and light curves are explicit count aggregations."
+      },
+      "calibration": {
+        "state": "archive-calibrated",
+        "basis": [
+          "Chandra archive level-2 event product. No response correction is applied."
+        ]
+      },
+      "flags": [
+        {
+          "id": "status",
+          "meaning": "Native Chandra EVENTS status bits.",
+          "columnId": "status",
+          "usableWhen": "Selection must state an exact status value."
+        }
+      ],
+      "time": {
+        "scale": "TT",
+        "format": "mission elapsed seconds",
+        "exposure": "GTI union 9954.501021891832 s"
+      },
+      "dependencyIds": [
+        "good-time-intervals"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "good-time-intervals",
+      "role": "GTI gates time selection and exposure",
+      "memberIds": [
+        "events"
+      ],
+      "componentIds": [
+        "events"
+      ],
+      "requiredFor": [
+        "event-inspect",
+        "selected-events",
+        "count-image",
+        "energy-histogram",
+        "light-curve"
+      ],
+      "evidence": "EVENTS and per-CCD GTI extensions are pinned in the same archive member."
+    }
+  ],
+  "issues": [
+    {
+      "scope": "dataset",
+      "identity": "response",
+      "state": "missing",
+      "reason": "No ARF/RMF response is pinned; outputs are counts and native event coordinates, never flux or response-corrected energy."
+    }
+  ]
+}

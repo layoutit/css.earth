@@ -1,9 +1,10 @@
 /** Application preparation entrypoint. Scientific regeneration remains an explicit research command. */
-import { readdir, access } from 'node:fs/promises';
+import { readdir, access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { prepareNebulaObject } from './objects.ts';
 import { prepareCompactDensityObject } from './density-object.ts';
 import { preparePreparedAssetManifest } from '../../../src/platform/runtime-asset-closure.mts';
+import { applicationDeliveryKind } from './delivery-identity.ts';
 const args = process.argv.slice(2);
 if (args.some(arg=>arg !== '--if-missing' && arg !== '--allow-missing' && !/^--object=[a-z][a-z0-9-]*$/.test(arg)) || args.filter(arg=>arg.startsWith('--object=')).length > 1)
   throw new TypeError('Usage: tools/nebula/prepare.mts [--if-missing] [--allow-missing] [--object=<id>]. Research: pnpm lab:nebula:bake --research.');
@@ -19,10 +20,16 @@ async function exists(path: string) {
 for (const entry of (await readdir(objects,{withFileTypes:true})).filter(entry=>entry.isDirectory()).sort((a,b)=>a.name.localeCompare(b.name))) {
   if (selected && entry.name !== selected) continue;
   const directory = resolve(objects,entry.name);
+  const compactPath = resolve(directory,'source/compact-delivery.json'), deliveryPath = resolve(directory,'source/delivery.json');
   let result;
-  if (await exists(resolve(directory,'source/compact-delivery.json'))) result = await prepareCompactDensityObject(root,directory,args.includes('--if-missing'),allowMissing);
-  else if (await exists(resolve(directory,'source/delivery.json'))) result = await prepareNebulaObject(root,directory,args.includes('--if-missing'),undefined,allowMissing);
-  else continue;
+  if (await exists(compactPath)) {
+    applicationDeliveryKind('compact-delivery.json',JSON.parse((await readFile(compactPath)).toString()));
+    result = await prepareCompactDensityObject(root,directory,args.includes('--if-missing'),allowMissing);
+  } else if (await exists(deliveryPath)) {
+    const kind = applicationDeliveryKind('delivery.json',JSON.parse((await readFile(deliveryPath)).toString()));
+    if (kind !== 'nebula') continue;
+    result = await prepareNebulaObject(root,directory,args.includes('--if-missing'),undefined,allowMissing);
+  } else continue;
   results.push(result);
   // An unavailable object's `prepared/` output is incomplete by definition: no manifest to write, and the
   // shared context-availability check (astro.config.mts) is what reports it, not this inventory.

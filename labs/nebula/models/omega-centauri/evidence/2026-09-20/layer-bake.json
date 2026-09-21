@@ -1,0 +1,1951 @@
+{
+  "id": "7a4f8781a7d19fafa57f11e65eae6ee24975082d3fcae0c1644cbdd68a5ac549",
+  "outputDirectory": "output/pr390-audit/layer-optimization/omega-7a4f8781a7d19fafa57f11e65eae6ee24975082d3fcae0c1644cbdd68a5ac549",
+  "elapsedSeconds": 230.938560959,
+  "sampling": {
+    "sliceCounts": {
+      "x": 147,
+      "y": 143,
+      "z": 171
+    },
+    "imageWidth": 512,
+    "samplesPerSlab": 4,
+    "layerPlan": {
+      "schema": "cssearth-volume-layer-plan@1",
+      "referenceSliceCounts": {
+        "x": 264,
+        "y": 264,
+        "z": 512
+      },
+      "referenceSamplesPerSlab": 4,
+      "axes": {
+        "x": [
+          {
+            "startCell": 0,
+            "endCell": 34
+          },
+          {
+            "startCell": 34,
+            "endCell": 41
+          },
+          {
+            "startCell": 41,
+            "endCell": 46
+          },
+          {
+            "startCell": 46,
+            "endCell": 49
+          },
+          {
+            "startCell": 49,
+            "endCell": 51
+          },
+          {
+            "startCell": 51,
+            "endCell": 54
+          },
+          {
+            "startCell": 54,
+            "endCell": 58
+          },
+          {
+            "startCell": 58,
+            "endCell": 61
+          },
+          {
+            "startCell": 61,
+            "endCell": 63
+          },
+          {
+            "startCell": 63,
+            "endCell": 66
+          },
+          {
+            "startCell": 66,
+            "endCell": 67
+          },
+          {
+            "startCell": 67,
+            "endCell": 68
+          },
+          {
+            "startCell": 68,
+            "endCell": 69
+          },
+          {
+            "startCell": 69,
+            "endCell": 71
+          },
+          {
+            "startCell": 71,
+            "endCell": 72
+          },
+          {
+            "startCell": 72,
+            "endCell": 73
+          },
+          {
+            "startCell": 73,
+            "endCell": 74
+          },
+          {
+            "startCell": 74,
+            "endCell": 77
+          },
+          {
+            "startCell": 77,
+            "endCell": 78
+          },
+          {
+            "startCell": 78,
+            "endCell": 79
+          },
+          {
+            "startCell": 79,
+            "endCell": 81
+          },
+          {
+            "startCell": 81,
+            "endCell": 82
+          },
+          {
+            "startCell": 82,
+            "endCell": 83
+          },
+          {
+            "startCell": 83,
+            "endCell": 84
+          },
+          {
+            "startCell": 84,
+            "endCell": 85
+          },
+          {
+            "startCell": 85,
+            "endCell": 86
+          },
+          {
+            "startCell": 86,
+            "endCell": 87
+          },
+          {
+            "startCell": 87,
+            "endCell": 88
+          },
+          {
+            "startCell": 88,
+            "endCell": 89
+          },
+          {
+            "startCell": 89,
+            "endCell": 90
+          },
+          {
+            "startCell": 90,
+            "endCell": 91
+          },
+          {
+            "startCell": 91,
+            "endCell": 92
+          },
+          {
+            "startCell": 92,
+            "endCell": 93
+          },
+          {
+            "startCell": 93,
+            "endCell": 94
+          },
+          {
+            "startCell": 94,
+            "endCell": 95
+          },
+          {
+            "startCell": 95,
+            "endCell": 96
+          },
+          {
+            "startCell": 96,
+            "endCell": 97
+          },
+          {
+            "startCell": 97,
+            "endCell": 98
+          },
+          {
+            "startCell": 98,
+            "endCell": 99
+          },
+          {
+            "startCell": 99,
+            "endCell": 100
+          },
+          {
+            "startCell": 100,
+            "endCell": 101
+          },
+          {
+            "startCell": 101,
+            "endCell": 102
+          },
+          {
+            "startCell": 102,
+            "endCell": 103
+          },
+          {
+            "startCell": 103,
+            "endCell": 104
+          },
+          {
+            "startCell": 104,
+            "endCell": 105
+          },
+          {
+            "startCell": 105,
+            "endCell": 106
+          },
+          {
+            "startCell": 106,
+            "endCell": 107
+          },
+          {
+            "startCell": 107,
+            "endCell": 108
+          },
+          {
+            "startCell": 108,
+            "endCell": 109
+          },
+          {
+            "startCell": 109,
+            "endCell": 110
+          },
+          {
+            "startCell": 110,
+            "endCell": 111
+          },
+          {
+            "startCell": 111,
+            "endCell": 112
+          },
+          {
+            "startCell": 112,
+            "endCell": 113
+          },
+          {
+            "startCell": 113,
+            "endCell": 114
+          },
+          {
+            "startCell": 114,
+            "endCell": 115
+          },
+          {
+            "startCell": 115,
+            "endCell": 116
+          },
+          {
+            "startCell": 116,
+            "endCell": 117
+          },
+          {
+            "startCell": 117,
+            "endCell": 118
+          },
+          {
+            "startCell": 118,
+            "endCell": 119
+          },
+          {
+            "startCell": 119,
+            "endCell": 120
+          },
+          {
+            "startCell": 120,
+            "endCell": 121
+          },
+          {
+            "startCell": 121,
+            "endCell": 122
+          },
+          {
+            "startCell": 122,
+            "endCell": 123
+          },
+          {
+            "startCell": 123,
+            "endCell": 124
+          },
+          {
+            "startCell": 124,
+            "endCell": 125
+          },
+          {
+            "startCell": 125,
+            "endCell": 126
+          },
+          {
+            "startCell": 126,
+            "endCell": 127
+          },
+          {
+            "startCell": 127,
+            "endCell": 128
+          },
+          {
+            "startCell": 128,
+            "endCell": 129
+          },
+          {
+            "startCell": 129,
+            "endCell": 130
+          },
+          {
+            "startCell": 130,
+            "endCell": 131
+          },
+          {
+            "startCell": 131,
+            "endCell": 132
+          },
+          {
+            "startCell": 132,
+            "endCell": 133
+          },
+          {
+            "startCell": 133,
+            "endCell": 134
+          },
+          {
+            "startCell": 134,
+            "endCell": 135
+          },
+          {
+            "startCell": 135,
+            "endCell": 136
+          },
+          {
+            "startCell": 136,
+            "endCell": 137
+          },
+          {
+            "startCell": 137,
+            "endCell": 138
+          },
+          {
+            "startCell": 138,
+            "endCell": 139
+          },
+          {
+            "startCell": 139,
+            "endCell": 140
+          },
+          {
+            "startCell": 140,
+            "endCell": 141
+          },
+          {
+            "startCell": 141,
+            "endCell": 142
+          },
+          {
+            "startCell": 142,
+            "endCell": 143
+          },
+          {
+            "startCell": 143,
+            "endCell": 144
+          },
+          {
+            "startCell": 144,
+            "endCell": 145
+          },
+          {
+            "startCell": 145,
+            "endCell": 146
+          },
+          {
+            "startCell": 146,
+            "endCell": 147
+          },
+          {
+            "startCell": 147,
+            "endCell": 148
+          },
+          {
+            "startCell": 148,
+            "endCell": 149
+          },
+          {
+            "startCell": 149,
+            "endCell": 150
+          },
+          {
+            "startCell": 150,
+            "endCell": 151
+          },
+          {
+            "startCell": 151,
+            "endCell": 152
+          },
+          {
+            "startCell": 152,
+            "endCell": 153
+          },
+          {
+            "startCell": 153,
+            "endCell": 154
+          },
+          {
+            "startCell": 154,
+            "endCell": 155
+          },
+          {
+            "startCell": 155,
+            "endCell": 156
+          },
+          {
+            "startCell": 156,
+            "endCell": 157
+          },
+          {
+            "startCell": 157,
+            "endCell": 158
+          },
+          {
+            "startCell": 158,
+            "endCell": 159
+          },
+          {
+            "startCell": 159,
+            "endCell": 160
+          },
+          {
+            "startCell": 160,
+            "endCell": 161
+          },
+          {
+            "startCell": 161,
+            "endCell": 162
+          },
+          {
+            "startCell": 162,
+            "endCell": 163
+          },
+          {
+            "startCell": 163,
+            "endCell": 164
+          },
+          {
+            "startCell": 164,
+            "endCell": 165
+          },
+          {
+            "startCell": 165,
+            "endCell": 166
+          },
+          {
+            "startCell": 166,
+            "endCell": 167
+          },
+          {
+            "startCell": 167,
+            "endCell": 168
+          },
+          {
+            "startCell": 168,
+            "endCell": 169
+          },
+          {
+            "startCell": 169,
+            "endCell": 170
+          },
+          {
+            "startCell": 170,
+            "endCell": 171
+          },
+          {
+            "startCell": 171,
+            "endCell": 172
+          },
+          {
+            "startCell": 172,
+            "endCell": 173
+          },
+          {
+            "startCell": 173,
+            "endCell": 174
+          },
+          {
+            "startCell": 174,
+            "endCell": 175
+          },
+          {
+            "startCell": 175,
+            "endCell": 176
+          },
+          {
+            "startCell": 176,
+            "endCell": 177
+          },
+          {
+            "startCell": 177,
+            "endCell": 178
+          },
+          {
+            "startCell": 178,
+            "endCell": 179
+          },
+          {
+            "startCell": 179,
+            "endCell": 180
+          },
+          {
+            "startCell": 180,
+            "endCell": 181
+          },
+          {
+            "startCell": 181,
+            "endCell": 182
+          },
+          {
+            "startCell": 182,
+            "endCell": 183
+          },
+          {
+            "startCell": 183,
+            "endCell": 184
+          },
+          {
+            "startCell": 184,
+            "endCell": 187
+          },
+          {
+            "startCell": 187,
+            "endCell": 189
+          },
+          {
+            "startCell": 189,
+            "endCell": 190
+          },
+          {
+            "startCell": 190,
+            "endCell": 191
+          },
+          {
+            "startCell": 191,
+            "endCell": 192
+          },
+          {
+            "startCell": 192,
+            "endCell": 195
+          },
+          {
+            "startCell": 195,
+            "endCell": 196
+          },
+          {
+            "startCell": 196,
+            "endCell": 197
+          },
+          {
+            "startCell": 197,
+            "endCell": 198
+          },
+          {
+            "startCell": 198,
+            "endCell": 199
+          },
+          {
+            "startCell": 199,
+            "endCell": 201
+          },
+          {
+            "startCell": 201,
+            "endCell": 204
+          },
+          {
+            "startCell": 204,
+            "endCell": 206
+          },
+          {
+            "startCell": 206,
+            "endCell": 207
+          },
+          {
+            "startCell": 207,
+            "endCell": 208
+          },
+          {
+            "startCell": 208,
+            "endCell": 210
+          },
+          {
+            "startCell": 210,
+            "endCell": 213
+          },
+          {
+            "startCell": 213,
+            "endCell": 216
+          },
+          {
+            "startCell": 216,
+            "endCell": 217
+          },
+          {
+            "startCell": 217,
+            "endCell": 219
+          },
+          {
+            "startCell": 219,
+            "endCell": 222
+          },
+          {
+            "startCell": 222,
+            "endCell": 225
+          },
+          {
+            "startCell": 225,
+            "endCell": 264
+          }
+        ],
+        "y": [
+          {
+            "startCell": 0,
+            "endCell": 39
+          },
+          {
+            "startCell": 39,
+            "endCell": 46
+          },
+          {
+            "startCell": 46,
+            "endCell": 48
+          },
+          {
+            "startCell": 48,
+            "endCell": 49
+          },
+          {
+            "startCell": 49,
+            "endCell": 51
+          },
+          {
+            "startCell": 51,
+            "endCell": 52
+          },
+          {
+            "startCell": 52,
+            "endCell": 53
+          },
+          {
+            "startCell": 53,
+            "endCell": 54
+          },
+          {
+            "startCell": 54,
+            "endCell": 55
+          },
+          {
+            "startCell": 55,
+            "endCell": 56
+          },
+          {
+            "startCell": 56,
+            "endCell": 57
+          },
+          {
+            "startCell": 57,
+            "endCell": 60
+          },
+          {
+            "startCell": 60,
+            "endCell": 63
+          },
+          {
+            "startCell": 63,
+            "endCell": 66
+          },
+          {
+            "startCell": 66,
+            "endCell": 69
+          },
+          {
+            "startCell": 69,
+            "endCell": 70
+          },
+          {
+            "startCell": 70,
+            "endCell": 73
+          },
+          {
+            "startCell": 73,
+            "endCell": 74
+          },
+          {
+            "startCell": 74,
+            "endCell": 75
+          },
+          {
+            "startCell": 75,
+            "endCell": 76
+          },
+          {
+            "startCell": 76,
+            "endCell": 77
+          },
+          {
+            "startCell": 77,
+            "endCell": 78
+          },
+          {
+            "startCell": 78,
+            "endCell": 79
+          },
+          {
+            "startCell": 79,
+            "endCell": 80
+          },
+          {
+            "startCell": 80,
+            "endCell": 81
+          },
+          {
+            "startCell": 81,
+            "endCell": 82
+          },
+          {
+            "startCell": 82,
+            "endCell": 83
+          },
+          {
+            "startCell": 83,
+            "endCell": 84
+          },
+          {
+            "startCell": 84,
+            "endCell": 87
+          },
+          {
+            "startCell": 87,
+            "endCell": 88
+          },
+          {
+            "startCell": 88,
+            "endCell": 89
+          },
+          {
+            "startCell": 89,
+            "endCell": 90
+          },
+          {
+            "startCell": 90,
+            "endCell": 91
+          },
+          {
+            "startCell": 91,
+            "endCell": 92
+          },
+          {
+            "startCell": 92,
+            "endCell": 93
+          },
+          {
+            "startCell": 93,
+            "endCell": 94
+          },
+          {
+            "startCell": 94,
+            "endCell": 95
+          },
+          {
+            "startCell": 95,
+            "endCell": 96
+          },
+          {
+            "startCell": 96,
+            "endCell": 97
+          },
+          {
+            "startCell": 97,
+            "endCell": 98
+          },
+          {
+            "startCell": 98,
+            "endCell": 99
+          },
+          {
+            "startCell": 99,
+            "endCell": 100
+          },
+          {
+            "startCell": 100,
+            "endCell": 101
+          },
+          {
+            "startCell": 101,
+            "endCell": 102
+          },
+          {
+            "startCell": 102,
+            "endCell": 103
+          },
+          {
+            "startCell": 103,
+            "endCell": 104
+          },
+          {
+            "startCell": 104,
+            "endCell": 105
+          },
+          {
+            "startCell": 105,
+            "endCell": 106
+          },
+          {
+            "startCell": 106,
+            "endCell": 107
+          },
+          {
+            "startCell": 107,
+            "endCell": 108
+          },
+          {
+            "startCell": 108,
+            "endCell": 109
+          },
+          {
+            "startCell": 109,
+            "endCell": 110
+          },
+          {
+            "startCell": 110,
+            "endCell": 111
+          },
+          {
+            "startCell": 111,
+            "endCell": 112
+          },
+          {
+            "startCell": 112,
+            "endCell": 113
+          },
+          {
+            "startCell": 113,
+            "endCell": 114
+          },
+          {
+            "startCell": 114,
+            "endCell": 115
+          },
+          {
+            "startCell": 115,
+            "endCell": 116
+          },
+          {
+            "startCell": 116,
+            "endCell": 117
+          },
+          {
+            "startCell": 117,
+            "endCell": 118
+          },
+          {
+            "startCell": 118,
+            "endCell": 119
+          },
+          {
+            "startCell": 119,
+            "endCell": 120
+          },
+          {
+            "startCell": 120,
+            "endCell": 121
+          },
+          {
+            "startCell": 121,
+            "endCell": 122
+          },
+          {
+            "startCell": 122,
+            "endCell": 123
+          },
+          {
+            "startCell": 123,
+            "endCell": 124
+          },
+          {
+            "startCell": 124,
+            "endCell": 125
+          },
+          {
+            "startCell": 125,
+            "endCell": 126
+          },
+          {
+            "startCell": 126,
+            "endCell": 127
+          },
+          {
+            "startCell": 127,
+            "endCell": 128
+          },
+          {
+            "startCell": 128,
+            "endCell": 129
+          },
+          {
+            "startCell": 129,
+            "endCell": 130
+          },
+          {
+            "startCell": 130,
+            "endCell": 131
+          },
+          {
+            "startCell": 131,
+            "endCell": 132
+          },
+          {
+            "startCell": 132,
+            "endCell": 133
+          },
+          {
+            "startCell": 133,
+            "endCell": 134
+          },
+          {
+            "startCell": 134,
+            "endCell": 135
+          },
+          {
+            "startCell": 135,
+            "endCell": 136
+          },
+          {
+            "startCell": 136,
+            "endCell": 137
+          },
+          {
+            "startCell": 137,
+            "endCell": 138
+          },
+          {
+            "startCell": 138,
+            "endCell": 139
+          },
+          {
+            "startCell": 139,
+            "endCell": 140
+          },
+          {
+            "startCell": 140,
+            "endCell": 141
+          },
+          {
+            "startCell": 141,
+            "endCell": 142
+          },
+          {
+            "startCell": 142,
+            "endCell": 143
+          },
+          {
+            "startCell": 143,
+            "endCell": 144
+          },
+          {
+            "startCell": 144,
+            "endCell": 145
+          },
+          {
+            "startCell": 145,
+            "endCell": 146
+          },
+          {
+            "startCell": 146,
+            "endCell": 147
+          },
+          {
+            "startCell": 147,
+            "endCell": 148
+          },
+          {
+            "startCell": 148,
+            "endCell": 149
+          },
+          {
+            "startCell": 149,
+            "endCell": 150
+          },
+          {
+            "startCell": 150,
+            "endCell": 151
+          },
+          {
+            "startCell": 151,
+            "endCell": 152
+          },
+          {
+            "startCell": 152,
+            "endCell": 153
+          },
+          {
+            "startCell": 153,
+            "endCell": 154
+          },
+          {
+            "startCell": 154,
+            "endCell": 155
+          },
+          {
+            "startCell": 155,
+            "endCell": 156
+          },
+          {
+            "startCell": 156,
+            "endCell": 157
+          },
+          {
+            "startCell": 157,
+            "endCell": 158
+          },
+          {
+            "startCell": 158,
+            "endCell": 159
+          },
+          {
+            "startCell": 159,
+            "endCell": 160
+          },
+          {
+            "startCell": 160,
+            "endCell": 161
+          },
+          {
+            "startCell": 161,
+            "endCell": 162
+          },
+          {
+            "startCell": 162,
+            "endCell": 163
+          },
+          {
+            "startCell": 163,
+            "endCell": 164
+          },
+          {
+            "startCell": 164,
+            "endCell": 165
+          },
+          {
+            "startCell": 165,
+            "endCell": 166
+          },
+          {
+            "startCell": 166,
+            "endCell": 167
+          },
+          {
+            "startCell": 167,
+            "endCell": 168
+          },
+          {
+            "startCell": 168,
+            "endCell": 169
+          },
+          {
+            "startCell": 169,
+            "endCell": 170
+          },
+          {
+            "startCell": 170,
+            "endCell": 171
+          },
+          {
+            "startCell": 171,
+            "endCell": 172
+          },
+          {
+            "startCell": 172,
+            "endCell": 173
+          },
+          {
+            "startCell": 173,
+            "endCell": 174
+          },
+          {
+            "startCell": 174,
+            "endCell": 175
+          },
+          {
+            "startCell": 175,
+            "endCell": 176
+          },
+          {
+            "startCell": 176,
+            "endCell": 177
+          },
+          {
+            "startCell": 177,
+            "endCell": 178
+          },
+          {
+            "startCell": 178,
+            "endCell": 179
+          },
+          {
+            "startCell": 179,
+            "endCell": 180
+          },
+          {
+            "startCell": 180,
+            "endCell": 182
+          },
+          {
+            "startCell": 182,
+            "endCell": 183
+          },
+          {
+            "startCell": 183,
+            "endCell": 184
+          },
+          {
+            "startCell": 184,
+            "endCell": 185
+          },
+          {
+            "startCell": 185,
+            "endCell": 187
+          },
+          {
+            "startCell": 187,
+            "endCell": 190
+          },
+          {
+            "startCell": 190,
+            "endCell": 191
+          },
+          {
+            "startCell": 191,
+            "endCell": 194
+          },
+          {
+            "startCell": 194,
+            "endCell": 197
+          },
+          {
+            "startCell": 197,
+            "endCell": 200
+          },
+          {
+            "startCell": 200,
+            "endCell": 203
+          },
+          {
+            "startCell": 203,
+            "endCell": 204
+          },
+          {
+            "startCell": 204,
+            "endCell": 207
+          },
+          {
+            "startCell": 207,
+            "endCell": 210
+          },
+          {
+            "startCell": 210,
+            "endCell": 213
+          },
+          {
+            "startCell": 213,
+            "endCell": 216
+          },
+          {
+            "startCell": 216,
+            "endCell": 219
+          },
+          {
+            "startCell": 219,
+            "endCell": 222
+          },
+          {
+            "startCell": 222,
+            "endCell": 225
+          },
+          {
+            "startCell": 225,
+            "endCell": 234
+          },
+          {
+            "startCell": 234,
+            "endCell": 264
+          }
+        ],
+        "z": [
+          {
+            "startCell": 0,
+            "endCell": 74
+          },
+          {
+            "startCell": 74,
+            "endCell": 95
+          },
+          {
+            "startCell": 95,
+            "endCell": 112
+          },
+          {
+            "startCell": 112,
+            "endCell": 117
+          },
+          {
+            "startCell": 117,
+            "endCell": 126
+          },
+          {
+            "startCell": 126,
+            "endCell": 134
+          },
+          {
+            "startCell": 134,
+            "endCell": 145
+          },
+          {
+            "startCell": 145,
+            "endCell": 156
+          },
+          {
+            "startCell": 156,
+            "endCell": 162
+          },
+          {
+            "startCell": 162,
+            "endCell": 169
+          },
+          {
+            "startCell": 169,
+            "endCell": 172
+          },
+          {
+            "startCell": 172,
+            "endCell": 177
+          },
+          {
+            "startCell": 177,
+            "endCell": 180
+          },
+          {
+            "startCell": 180,
+            "endCell": 181
+          },
+          {
+            "startCell": 181,
+            "endCell": 184
+          },
+          {
+            "startCell": 184,
+            "endCell": 187
+          },
+          {
+            "startCell": 187,
+            "endCell": 192
+          },
+          {
+            "startCell": 192,
+            "endCell": 195
+          },
+          {
+            "startCell": 195,
+            "endCell": 196
+          },
+          {
+            "startCell": 196,
+            "endCell": 197
+          },
+          {
+            "startCell": 197,
+            "endCell": 200
+          },
+          {
+            "startCell": 200,
+            "endCell": 203
+          },
+          {
+            "startCell": 203,
+            "endCell": 206
+          },
+          {
+            "startCell": 206,
+            "endCell": 209
+          },
+          {
+            "startCell": 209,
+            "endCell": 212
+          },
+          {
+            "startCell": 212,
+            "endCell": 213
+          },
+          {
+            "startCell": 213,
+            "endCell": 214
+          },
+          {
+            "startCell": 214,
+            "endCell": 216
+          },
+          {
+            "startCell": 216,
+            "endCell": 217
+          },
+          {
+            "startCell": 217,
+            "endCell": 218
+          },
+          {
+            "startCell": 218,
+            "endCell": 220
+          },
+          {
+            "startCell": 220,
+            "endCell": 221
+          },
+          {
+            "startCell": 221,
+            "endCell": 222
+          },
+          {
+            "startCell": 222,
+            "endCell": 223
+          },
+          {
+            "startCell": 223,
+            "endCell": 224
+          },
+          {
+            "startCell": 224,
+            "endCell": 225
+          },
+          {
+            "startCell": 225,
+            "endCell": 226
+          },
+          {
+            "startCell": 226,
+            "endCell": 227
+          },
+          {
+            "startCell": 227,
+            "endCell": 228
+          },
+          {
+            "startCell": 228,
+            "endCell": 229
+          },
+          {
+            "startCell": 229,
+            "endCell": 230
+          },
+          {
+            "startCell": 230,
+            "endCell": 231
+          },
+          {
+            "startCell": 231,
+            "endCell": 232
+          },
+          {
+            "startCell": 232,
+            "endCell": 233
+          },
+          {
+            "startCell": 233,
+            "endCell": 234
+          },
+          {
+            "startCell": 234,
+            "endCell": 235
+          },
+          {
+            "startCell": 235,
+            "endCell": 236
+          },
+          {
+            "startCell": 236,
+            "endCell": 237
+          },
+          {
+            "startCell": 237,
+            "endCell": 238
+          },
+          {
+            "startCell": 238,
+            "endCell": 239
+          },
+          {
+            "startCell": 239,
+            "endCell": 240
+          },
+          {
+            "startCell": 240,
+            "endCell": 241
+          },
+          {
+            "startCell": 241,
+            "endCell": 242
+          },
+          {
+            "startCell": 242,
+            "endCell": 243
+          },
+          {
+            "startCell": 243,
+            "endCell": 244
+          },
+          {
+            "startCell": 244,
+            "endCell": 245
+          },
+          {
+            "startCell": 245,
+            "endCell": 246
+          },
+          {
+            "startCell": 246,
+            "endCell": 247
+          },
+          {
+            "startCell": 247,
+            "endCell": 248
+          },
+          {
+            "startCell": 248,
+            "endCell": 249
+          },
+          {
+            "startCell": 249,
+            "endCell": 250
+          },
+          {
+            "startCell": 250,
+            "endCell": 251
+          },
+          {
+            "startCell": 251,
+            "endCell": 252
+          },
+          {
+            "startCell": 252,
+            "endCell": 253
+          },
+          {
+            "startCell": 253,
+            "endCell": 254
+          },
+          {
+            "startCell": 254,
+            "endCell": 255
+          },
+          {
+            "startCell": 255,
+            "endCell": 256
+          },
+          {
+            "startCell": 256,
+            "endCell": 257
+          },
+          {
+            "startCell": 257,
+            "endCell": 258
+          },
+          {
+            "startCell": 258,
+            "endCell": 259
+          },
+          {
+            "startCell": 259,
+            "endCell": 260
+          },
+          {
+            "startCell": 260,
+            "endCell": 261
+          },
+          {
+            "startCell": 261,
+            "endCell": 262
+          },
+          {
+            "startCell": 262,
+            "endCell": 263
+          },
+          {
+            "startCell": 263,
+            "endCell": 264
+          },
+          {
+            "startCell": 264,
+            "endCell": 265
+          },
+          {
+            "startCell": 265,
+            "endCell": 266
+          },
+          {
+            "startCell": 266,
+            "endCell": 267
+          },
+          {
+            "startCell": 267,
+            "endCell": 268
+          },
+          {
+            "startCell": 268,
+            "endCell": 269
+          },
+          {
+            "startCell": 269,
+            "endCell": 270
+          },
+          {
+            "startCell": 270,
+            "endCell": 271
+          },
+          {
+            "startCell": 271,
+            "endCell": 272
+          },
+          {
+            "startCell": 272,
+            "endCell": 273
+          },
+          {
+            "startCell": 273,
+            "endCell": 274
+          },
+          {
+            "startCell": 274,
+            "endCell": 275
+          },
+          {
+            "startCell": 275,
+            "endCell": 276
+          },
+          {
+            "startCell": 276,
+            "endCell": 277
+          },
+          {
+            "startCell": 277,
+            "endCell": 278
+          },
+          {
+            "startCell": 278,
+            "endCell": 279
+          },
+          {
+            "startCell": 279,
+            "endCell": 280
+          },
+          {
+            "startCell": 280,
+            "endCell": 281
+          },
+          {
+            "startCell": 281,
+            "endCell": 282
+          },
+          {
+            "startCell": 282,
+            "endCell": 283
+          },
+          {
+            "startCell": 283,
+            "endCell": 284
+          },
+          {
+            "startCell": 284,
+            "endCell": 285
+          },
+          {
+            "startCell": 285,
+            "endCell": 286
+          },
+          {
+            "startCell": 286,
+            "endCell": 287
+          },
+          {
+            "startCell": 287,
+            "endCell": 288
+          },
+          {
+            "startCell": 288,
+            "endCell": 289
+          },
+          {
+            "startCell": 289,
+            "endCell": 290
+          },
+          {
+            "startCell": 290,
+            "endCell": 291
+          },
+          {
+            "startCell": 291,
+            "endCell": 292
+          },
+          {
+            "startCell": 292,
+            "endCell": 293
+          },
+          {
+            "startCell": 293,
+            "endCell": 294
+          },
+          {
+            "startCell": 294,
+            "endCell": 295
+          },
+          {
+            "startCell": 295,
+            "endCell": 296
+          },
+          {
+            "startCell": 296,
+            "endCell": 297
+          },
+          {
+            "startCell": 297,
+            "endCell": 298
+          },
+          {
+            "startCell": 298,
+            "endCell": 299
+          },
+          {
+            "startCell": 299,
+            "endCell": 300
+          },
+          {
+            "startCell": 300,
+            "endCell": 301
+          },
+          {
+            "startCell": 301,
+            "endCell": 302
+          },
+          {
+            "startCell": 302,
+            "endCell": 303
+          },
+          {
+            "startCell": 303,
+            "endCell": 304
+          },
+          {
+            "startCell": 304,
+            "endCell": 305
+          },
+          {
+            "startCell": 305,
+            "endCell": 306
+          },
+          {
+            "startCell": 306,
+            "endCell": 307
+          },
+          {
+            "startCell": 307,
+            "endCell": 308
+          },
+          {
+            "startCell": 308,
+            "endCell": 309
+          },
+          {
+            "startCell": 309,
+            "endCell": 310
+          },
+          {
+            "startCell": 310,
+            "endCell": 311
+          },
+          {
+            "startCell": 311,
+            "endCell": 312
+          },
+          {
+            "startCell": 312,
+            "endCell": 313
+          },
+          {
+            "startCell": 313,
+            "endCell": 314
+          },
+          {
+            "startCell": 314,
+            "endCell": 315
+          },
+          {
+            "startCell": 315,
+            "endCell": 316
+          },
+          {
+            "startCell": 316,
+            "endCell": 317
+          },
+          {
+            "startCell": 317,
+            "endCell": 318
+          },
+          {
+            "startCell": 318,
+            "endCell": 319
+          },
+          {
+            "startCell": 319,
+            "endCell": 320
+          },
+          {
+            "startCell": 320,
+            "endCell": 321
+          },
+          {
+            "startCell": 321,
+            "endCell": 323
+          },
+          {
+            "startCell": 323,
+            "endCell": 324
+          },
+          {
+            "startCell": 324,
+            "endCell": 325
+          },
+          {
+            "startCell": 325,
+            "endCell": 326
+          },
+          {
+            "startCell": 326,
+            "endCell": 327
+          },
+          {
+            "startCell": 327,
+            "endCell": 330
+          },
+          {
+            "startCell": 330,
+            "endCell": 331
+          },
+          {
+            "startCell": 331,
+            "endCell": 334
+          },
+          {
+            "startCell": 334,
+            "endCell": 335
+          },
+          {
+            "startCell": 335,
+            "endCell": 338
+          },
+          {
+            "startCell": 338,
+            "endCell": 339
+          },
+          {
+            "startCell": 339,
+            "endCell": 340
+          },
+          {
+            "startCell": 340,
+            "endCell": 343
+          },
+          {
+            "startCell": 343,
+            "endCell": 345
+          },
+          {
+            "startCell": 345,
+            "endCell": 348
+          },
+          {
+            "startCell": 348,
+            "endCell": 351
+          },
+          {
+            "startCell": 351,
+            "endCell": 354
+          },
+          {
+            "startCell": 354,
+            "endCell": 357
+          },
+          {
+            "startCell": 357,
+            "endCell": 358
+          },
+          {
+            "startCell": 358,
+            "endCell": 360
+          },
+          {
+            "startCell": 360,
+            "endCell": 363
+          },
+          {
+            "startCell": 363,
+            "endCell": 366
+          },
+          {
+            "startCell": 366,
+            "endCell": 369
+          },
+          {
+            "startCell": 369,
+            "endCell": 373
+          },
+          {
+            "startCell": 373,
+            "endCell": 374
+          },
+          {
+            "startCell": 374,
+            "endCell": 375
+          },
+          {
+            "startCell": 375,
+            "endCell": 376
+          },
+          {
+            "startCell": 376,
+            "endCell": 380
+          },
+          {
+            "startCell": 380,
+            "endCell": 385
+          },
+          {
+            "startCell": 385,
+            "endCell": 390
+          },
+          {
+            "startCell": 390,
+            "endCell": 401
+          },
+          {
+            "startCell": 401,
+            "endCell": 409
+          },
+          {
+            "startCell": 409,
+            "endCell": 411
+          },
+          {
+            "startCell": 411,
+            "endCell": 420
+          },
+          {
+            "startCell": 420,
+            "endCell": 447
+          },
+          {
+            "startCell": 447,
+            "endCell": 450
+          },
+          {
+            "startCell": 450,
+            "endCell": 455
+          },
+          {
+            "startCell": 455,
+            "endCell": 458
+          },
+          {
+            "startCell": 458,
+            "endCell": 512
+          }
+        ]
+      }
+    },
+    "layerOptimization": {
+      "schema": "cssearth-layer-optimization@1",
+      "method": "gradient-weighted-depth-displacement@1",
+      "maximumLayers": 500,
+      "referenceLayers": 1040,
+      "plannedLayers": 461,
+      "probeWidth": 64,
+      "probeSubpixels": 2,
+      "targetNormalizedL1": 0.01,
+      "estimatedNormalizedL1": {
+        "x": 0.0098247993518533,
+        "y": 0.00981228328179792,
+        "z": 0.009852407570529206
+      },
+      "status": "target-met"
+    }
+  },
+  "banks": [
+    {
+      "id": "neutral",
+      "counts": [
+        {
+          "axis": "x",
+          "retained": 146
+        },
+        {
+          "axis": "y",
+          "retained": 142
+        },
+        {
+          "axis": "z",
+          "retained": 171
+        }
+      ],
+      "resources": 459,
+      "bytes": 5954296
+    },
+    {
+      "id": "eso1119b",
+      "counts": [
+        {
+          "axis": "x",
+          "retained": 146
+        },
+        {
+          "axis": "y",
+          "retained": 142
+        },
+        {
+          "axis": "z",
+          "retained": 171
+        }
+      ],
+      "resources": 459,
+      "bytes": 13866551
+    },
+    {
+      "id": "eso0844a",
+      "counts": [
+        {
+          "axis": "x",
+          "retained": 146
+        },
+        {
+          "axis": "y",
+          "retained": 142
+        },
+        {
+          "axis": "z",
+          "retained": 171
+        }
+      ],
+      "resources": 459,
+      "bytes": 13158283
+    }
+  ],
+  "status": "inspection-only-unaccepted"
+}

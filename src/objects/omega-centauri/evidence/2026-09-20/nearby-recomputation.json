@@ -1,0 +1,71 @@
+{
+  "points.json": {
+    "oldHash": "c70262ba6e3ae288da6acd29971d1b8da0eeb33ae8a924fcfa39ff9b2eceb8d3",
+    "newHash": "595fac1eade3b55da32fe3a8047a751ec992e5eb850d39ab5a15f64dddca2aee",
+    "oldBytes": 345401,
+    "newBytes": 345406,
+    "count": 1454,
+    "numericCount": 1454,
+    "counts": {
+      "clouds": 1062,
+      "points": 392
+    },
+    "maxAbsolute": {
+      "path": "/clouds/151/covariance/4",
+      "old": 320.49881983457976,
+      "new": 320.4988198345795,
+      "delta": -2.8421709430404007e-13,
+      "relative": -8.867960713575609e-16
+    },
+    "maxRelative": {
+      "path": "/clouds/73/covariance/3",
+      "old": 0.08007690965625668,
+      "new": 0.08007690965629367,
+      "delta": 3.699818229563334e-14,
+      "relative": 4.620330936153022e-13
+    },
+    "sourceIdentical": true,
+    "frameIdentical": true
+  },
+  "provenance.json": {
+    "oldHash": "ee12abfd6a352def90493a13ade2c8297f6b75694240690980816e3482b582ea",
+    "newHash": "25fd338e082b947f3071dd635f47ba133067a9a091550e61521b7527e95a107f",
+    "oldBytes": 10363,
+    "newBytes": 10363,
+    "count": 2,
+    "numericCount": 1,
+    "counts": {
+      "products": 2
+    },
+    "maxAbsolute": {
+      "path": "/products/0/outputs/0/bytes",
+      "old": 345401,
+      "new": 345406,
+      "delta": 5,
+      "relative": 0.000014475927979363118
+    },
+    "maxRelative": {
+      "path": "/products/0/outputs/0/bytes",
+      "old": 345401,
+      "new": 345406,
+      "delta": 5,
+      "relative": 0.000014475927979363118
+    },
+    "differences": [
+      {
+        "path": "/products/0/outputs/0/sha256",
+        "old": "c70262ba6e3ae288da6acd29971d1b8da0eeb33ae8a924fcfa39ff9b2eceb8d3",
+        "new": "595fac1eade3b55da32fe3a8047a751ec992e5eb850d39ab5a15f64dddca2aee"
+      },
+      {
+        "path": "/products/0/outputs/0/bytes",
+        "old": 345401,
+        "new": 345406,
+        "delta": 5,
+        "relative": 0.000014475927979363118
+      }
+    ],
+    "sourceIdentical": true,
+    "frameIdentical": true
+  }
+}

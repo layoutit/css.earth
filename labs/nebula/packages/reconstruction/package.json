@@ -20,6 +20,7 @@
     "./methods/sampled/emission-detail": "./src/methods/sampled/emission-detail.ts",
     "./methods/sampled/emission-fit": "./src/methods/sampled/emission-fit.ts",
     "./methods/inference/depth-model": "./src/methods/inference/depth-model.ts",
+    "./methods/inference/photometric-mge": "./src/methods/inference/photometric-mge.ts",
     "./methods/inference/fit": "./src/methods/inference/fit.ts",
     "./evidence/model": "./src/evidence/model.ts",
     "./methods/inference/target": "./src/methods/inference/target.ts",

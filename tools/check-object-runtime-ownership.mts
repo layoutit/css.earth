@@ -185,7 +185,7 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
   if ((!shared || shellContent) && preparedData(source)) return { imports: [], violations: [], factoryCalls: 0, cameraFactories: [], dataOnly: true };
   let ast: unknown;
   try {
-    if (shellContent && file.endsWith('.json')) {
+    if (file.endsWith('.json')) {
       JSON.parse(source);
       return { imports: [], violations: [], factoryCalls: 0, cameraFactories: [], dataOnly: true };
     }

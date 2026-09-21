@@ -1,5 +1,12 @@
 name: Shared universe
 
+# PR feedback budget: target 2 minutes, maximum 3 minutes from the PR update until
+# all merge-required checks finish, including queue/setup time (not per job).
+# Keep affected correctness checks blocking; keep exhaustive sweeps and release
+# qualification outside the routine PR path. Measure added work against this budget.
+# Job timeouts below are safety limits, not the agreed feedback budget.
+# Maintenance rules and failure recovery: docs/ci-cd.md.
+
 on:
   pull_request:
   push:
@@ -14,10 +21,9 @@ concurrency:
   group: universe-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
-# Contract lint needs no build or restored asset and answers within about two minutes; `pnpm check:pr` runs its
-# steps locally. The heavy jobs start after it, in parallel, and any of them failing cancels the run. A docs-only
-# pull request (tools/classify-changes.mts) skips the heavy jobs entirely; Contract lint alone (doc links and
-# placement) still runs, and a push to main always runs everything.
+# Independent checks start after classification, not after lint. Classification and lint are themselves
+# required checks: a failure there blocks merging without manufacturing failures in five unrelated jobs.
+# Main runs every lane; PRs and the local runner use the same affected-path map.
 jobs:
   changes:
     name: Classify changes
@@ -37,6 +43,12 @@ jobs:
           # `git diff --name-only` reads only commits and trees either way.
           fetch-depth: 0
           filter: blob:none
+          # Classification reads Git trees, not object bytes. Keep the complete diff/history without
+          # transferring the source-media bank before any validation job can start.
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /tools/*.mts
+            /.github/ci-areas.json
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
@@ -78,15 +90,16 @@ jobs:
           fetch-depth: 0
           filter: blob:none
       - name: Check documentation links and organization
-        # A PR checks the Markdown it changes (and links into what it deletes); main and local runs check all.
+        # PRs reject new findings and debt in changed files, including unchanged inbound links they break.
+        # Main retains the full organization audit; existing unrelated debt is visible but not a PR veto.
         run: |
-          python3 tools/audits/test_documentation_links.py
+          node --test tools/audits/check-documentation-links.test.mts
           python3 tools/audits/test_provenance_documentation_inventory.py
           python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output "$RUNNER_TEMP/provenance-inventory.json"
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            python3 tools/audits/check-documentation-links.py --base "origin/$GITHUB_BASE_REF"
+            node tools/audits/check-documentation-links.mts --base "${CI_BASE_REF:-origin/$GITHUB_BASE_REF}"
           else
-            python3 tools/audits/check-documentation-links.py --all
+            node tools/audits/check-documentation-links.mts --all
           fi
       - name: Check tracked files against ignore rules
         run: |
@@ -108,37 +121,35 @@ jobs:
           restore-keys: node-modules-
       - name: Install dependencies and prove the lockfile
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: lint-bundle-cache
+        id: package-cache
         with:
-          # Everything the next step writes: packages/renderer/tools-objects builds, and prepare:catalog's,
-          # prepare-solar-geometry's and prepare:titles' generated (gitignored) files. Keyed on their own inputs, so
-          # a change under any of them (or to an object's own object.json) invalidates it; anything else reuses it.
-          path: |
-            packages/*/dist
-            src/renderers/css/dist
-            tools/objects/dist
-            site/prepared-object-catalog.mts
-            site/prepared-object-discovery.json
-            site/prepared-context-objects.mts
-            site/prepared-object-distances.json
-            site/prepared-focus-objects.json
-            src/platform/solar-geometry.mts
-            site/prepared-shell-titles.mjs
-          key: lint-bundle-v1-${{ hashFiles('tools/**', 'packages/**', 'src/renderers/**', 'site/*.mts', 'site/source/titles/**', 'src/objects/*/object.json') }}
+          path: packages/*/dist
+          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: renderer-cache
+        with:
+          path: src/renderers/css/dist
+          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Preparation still uses the conservative whole-tree key; generated data is never cached here.
+          path: tools/objects/dist
+          key: compiled-preparation-js-v3-${{ steps.ci-cache-key.outputs.build_digest }}
       - name: Generate the registry, renderer and preparation bundle
-        # Only what these checks import: SCENE_OBJECTS (site/objects.mts), the renderer the prepared-object reader
-        # imports, and tools/objects/dist/operations.js with the solar geometry and shell titles it bundles. The
-        # rest of build:tools (navigation, world context, shell assets) and every restored asset are left out.
-        # Skipped outright on a cache hit (see lint-bundle-cache above); tools/check-ci.mts always runs it locally.
-        if: steps.lint-bundle-cache.outputs.cache-hit != 'true'
-        run: |
-          pnpm build:packages
-          pnpm build:renderer
-          pnpm prepare:catalog
-          node tools/prepare-solar-geometry.mts > "$RUNNER_TEMP/solar-geometry.log"
-          pnpm prepare:titles
-          pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts
+        env:
+          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
+          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
+          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
+          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
+          CI_PREPARATION_DTS: "false"
+          CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
+          CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
+        run: node tools/build-ci.mts lint
       - name: Check every object's package files, source citations and restoration plan
         run: |
           node --test tools/restore-source-inputs.test.mts
@@ -156,19 +167,8 @@ jobs:
         # workflow, object-scope.yml), the docs-only classifier (the `changes` job above), the deploy allow-missing
         # path (tools/setup.test.mts — the only place it ran before was the non-CI test:platform), the prune
         # dry-run report, and the runner behind `pnpm check:pr`. Deliberately not the wider `pnpm test:platform`,
-        # which this workflow does not run and which has known unrelated failures.
-        run: >-
-          node --test tools/runtime-assets.test.mts
-          tools/stage-published-assets.test.mts
-          tools/publish-verification.test.mts
-          tools/check-assets-published.test.mts
-          src/platform/runtime-asset-closure.test.mts
-          tools/object-scope-gate.test.mts
-          tools/classify-changes.test.mts
-          tools/scope-runtime-ownership-check.test.mts
-          tools/setup.test.mts
-          tools/prune-runtime-assets.test.mts
-          tools/check-ci.test.mts
+        # which this workflow does not run. Native filename families include newly added CI/asset checks.
+        run: pnpm test:ci
       - name: Check published assets this change adds
         # HEAD only the R2 keys this change's inventories add (keys are content-addressed, so an unchanged line
         # needs no new proof): on a PR, against its base branch, failing only on a real 404; on a push to main,
@@ -180,28 +180,18 @@ jobs:
           if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
             pnpm check:assets-published --added-since-last-green --report-only
           else
-            pnpm check:assets-published --added-since="origin/${GITHUB_BASE_REF:-main}"
+            pnpm check:assets-published --added-since="${CI_BASE_REF:-origin/${GITHUB_BASE_REF:-main}}"
           fi
 
   typecheck:
     name: Typecheck
-    needs: [lint, changes]
-    # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
-    # failed `needs` reports "skipped", which a ruleset counts as passing. A pull request whose changed areas do not
-    # need Typecheck (.github/ci-areas.json, computed by the `changes` job) skips it, reporting success, not
-    # failure — unless lint itself did not pass, which must still run and fail here, never skip. A push to main
-    # never skips.
-    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.run_typecheck == 'true') }}
+    needs: changes
+    if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_typecheck == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
       contents: read
     steps:
-      - name: Stop when Contract lint did not pass
-        if: needs.lint.result != 'success'
-        run: |
-          echo "::error::Contract lint did not pass, so this job stops here."
-          exit 1
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -215,75 +205,71 @@ jobs:
           path: node_modules
           key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: node-modules-
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: package-cache
+        with:
+          path: packages/*/dist
+          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: renderer-cache
+        with:
+          path: src/renderers/css/dist
+          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Preparation still uses the conservative whole-tree key; generated data is never cached here.
+          path: tools/objects/dist
+          key: compiled-preparation-dts-v3-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Every tsc invocation in typecheck:pr writes its own .tsbuildinfo (never astro check, which never reads
           # this cache) under output/tsbuildinfo/; tsc's own file-hash bookkeeping recompiles only what changed
           # since the restored state, so a stale entry only costs a slower, still-correct run, never a wrong one.
-          # This step runs before `pnpm install` so the hash below never matches a vendored tsconfig.json.
+          # The tracked-only digest never traverses installed dependency trees.
           path: output/tsbuildinfo
-          key: tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
+          key: tsbuildinfo-app-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
           restore-keys: |
-            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-
-            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-main-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
+            tsbuildinfo-app-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-
+            tsbuildinfo-app-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
           path: src/objects/earth/source/presentation/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
-      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          # setup:assets sha-verifies every restored file and downloads only what is missing or changed.
-          path: |
-            public/scenes
-            src/objects/*/prepared/runtime.json
-            src/objects/*/prepared/scene.json
-          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
-          restore-keys: prepared-assets-v1-
       - name: Build shared packages and affected entry points
-        run: pnpm build:tools
-      - name: Restore prepared assets and object JSON
-        run: |
-          pnpm setup:assets
-          pnpm prepare:object-json
-      - name: Prepare the minimap and source records the shell imports
-        run: |
-          pnpm prepare:environment-images
-          pnpm prepare:minimap
-          pnpm prepare:sources
+        env:
+          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
+          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
+          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
+          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
+          CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
+          CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
+        run: node tools/build-ci.mts full
+      - name: Restore only compiler inputs and generate real shell data
+        run: pnpm prepare:typecheck
       - name: Typecheck shared code and enforce TypeScript ownership
-        # typecheck:pr is `pnpm typecheck` without typecheck:tests (main-only: the "Typecheck test files" job and the
-        # nightly workflow; it is most of the typecheck time) and typecheck:nebula (the nebula job runs it).
+        # Application types here; the parallel test-file and nebula jobs own their compiler programs.
         env:
           NODE_OPTIONS: --max-old-space-size=4096
         run: |
           pnpm typecheck:pr
-          pnpm check:typescript-ownership
-          pnpm test:typescript-ownership
 
   typecheck-tests:
     name: Typecheck test files
-    needs: [lint, changes]
-    # Type-checking test files is most of the typecheck time, so a pull request runs it only when it touches the
-    # source those files reference (the same `run_typecheck` classification the Typecheck job uses); a one-body or
-    # docs pull request still skips it and stays at ~1.2 min. Gating on "the pull request changed a test file"
-    # would not work: a signature change in ordinary source breaks a test stub the pull request never opened,
-    # which is exactly how #373 reddened main and blocked its own deploy. Costs no wall clock on the pull requests
-    # that do run it — 3.5-4.5 min in parallel inside a run that already takes ~8.3 min. A push to main and the
-    # nightly workflow still always run it. Not a required check.
-    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.run_typecheck == 'true') }}
+    needs: changes
+    # Source signatures can break unchanged tests, so use the same owner selection as application types.
+    if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_typecheck == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
       contents: read
     steps:
-      - name: Stop when Contract lint did not pass
-        if: needs.lint.result != 'success'
-        run: |
-          echo "::error::Contract lint did not pass, so this job stops here."
-          exit 1
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -295,68 +281,74 @@ jobs:
           path: node_modules
           key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: node-modules-
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          # See the Typecheck job: one .tsbuildinfo per tsc program, keyed the same way, so a warm cache here
-          # recompiles only the test/fixture/capture files that changed since the last run on this branch.
-          path: output/tsbuildinfo
-          key: tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
-          restore-keys: |
-            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-
-            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-main-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: package-cache
+        with:
+          path: packages/*/dist
+          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: renderer-cache
+        with:
+          path: src/renderers/css/dist
+          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Preparation still uses the conservative whole-tree key; generated data is never cached here.
+          path: tools/objects/dist
+          key: compiled-preparation-dts-v3-${{ steps.ci-cache-key.outputs.build_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # Keep this lane separate: caches are immutable, so sharing the application's key lets the
+          # faster test job prevent the application from saving its own compiler state.
+          path: output/tsbuildinfo
+          key: tsbuildinfo-tests-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            tsbuildinfo-tests-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-
+            tsbuildinfo-tests-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
           path: src/objects/earth/source/presentation/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
-      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          # setup:assets sha-verifies every restored file and downloads only what is missing or changed.
-          path: |
-            public/scenes
-            src/objects/*/prepared/runtime.json
-            src/objects/*/prepared/scene.json
-          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
-          restore-keys: prepared-assets-v1-
       - name: Build shared packages and affected entry points
-        run: pnpm build:tools
-      - name: Restore prepared assets and object JSON
-        run: |
-          pnpm setup:assets
-          pnpm prepare:object-json
-      - name: Prepare the minimap and source records the shell imports
-        run: |
-          pnpm prepare:environment-images
-          pnpm prepare:minimap
-          pnpm prepare:sources
+        env:
+          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
+          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
+          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
+          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
+          CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
+          CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
+        run: node tools/build-ci.mts full
+      - name: Restore only compiler inputs and generate real shell data
+        run: pnpm prepare:typecheck
       - name: Typecheck test, fixture and capture files
-        # One unbatched program over the whole tests/tsconfig.json closure (tools/typecheck-tests.mts); a 6 GB heap
+        # Native tsc checks the whole tests/tsconfig.json closure in one program; a 6 GB heap
         # covers the 3.9 GB the audit measured, well inside the runner's 16 GB.
         env:
           NODE_OPTIONS: --max-old-space-size=6144
-        run: pnpm typecheck:tests
+        run: pnpm typecheck:tests --extendedDiagnostics
 
-  universe:
-    name: Prepared universe and shared renderer
-    needs: [lint, changes]
-    # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
-    # failed `needs` reports "skipped", which a ruleset counts as passing. A pull request whose changed areas do not
-    # need this job (.github/ci-areas.json, computed by the `changes` job) skips it, reporting success, not
-    # failure — unless lint itself did not pass, which must still run and fail here, never skip. A push to main
-    # never skips.
-    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true') }}
+  universe-checks:
+    name: Universe / ${{ matrix.lane }}
+    strategy:
+      fail-fast: false
+      matrix:
+        lane: [sources, runtime, shell, renderer]
+    env:
+      CI_UNIVERSE_LANE: ${{ matrix.lane }}
+    needs: changes
+    if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
       contents: read
     steps:
-      - name: Stop when Contract lint did not pass
-        if: needs.lint.result != 'success'
-        run: |
-          echo "::error::Contract lint did not pass, so this job stops here."
-          exit 1
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -370,116 +362,113 @@ jobs:
           restore-keys: node-modules-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: package-cache
+        with:
+          path: packages/*/dist
+          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: renderer-cache
+        with:
+          path: src/renderers/css/dist
+          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Preparation still uses the conservative whole-tree key; generated data is never cached here.
+          path: tools/objects/dist
+          key: compiled-preparation-${{ matrix.lane == 'shell' && 'dts' || 'js' }}-v3-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
           path: src/objects/earth/source/presentation/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
-      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: prepared-assets
-        with:
-          # setup:assets sha-verifies every restored file and downloads only what is missing or changed.
-          path: |
-            public/scenes
-            src/objects/*/prepared/runtime.json
-            src/objects/*/prepared/scene.json
-          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
-          restore-keys: prepared-assets-v1-
       - name: Build shared packages and affected entry points
-        run: pnpm build:tools
-      - name: Restore prepared assets and object JSON
-        # setup:assets restores public/scenes AND each object's prepared-assets.json inventory (prepared/runtime.json
-        # + prepared/scene.json, or a context/nebula object's whole prepared/ output) — git no longer tracks those
-        # files, and prepare:object-json reads them.
+        env:
+          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
+          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
+          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
+          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
+          CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
+          CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: |
-          pnpm setup:assets
-          pnpm prepare:object-json
-      - uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        # Main only: a 2.3 GB save costs a minute or more, and PR-scoped entries would crowd the 10 GB cache. This
-        # is the only one of the two prepared-universe jobs that saves; the other only restores (same pattern as
-        # the Typecheck job), so the two parallel jobs never race to write the same cache key.
-        if: github.event_name == 'push' && steps.prepared-assets.outputs.cache-hit != 'true'
+          if [ "$CI_UNIVERSE_LANE" = shell ]; then
+            node tools/build-ci.mts full
+          else
+            CI_PREPARATION_DTS=false node tools/build-ci.mts full
+          fi
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
+          # Only the baked JSON payloads, not texture banks. The following installer revalidates every pin.
           path: |
-            public/scenes
             src/objects/*/prepared/runtime.json
             src/objects/*/prepared/scene.json
-          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
-      - name: Test unavailable prepared packages and focus controls
-        run: >-
-          node --test tools/prepare-context-availability.test.mts
-          site/test/prepared-context-navigation.test.mts
-          site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts
-      - name: Restore environment images and prepare minimap
+          key: prepared-json-v1-${{ hashFiles('src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-json-v1-
+      - name: Restore prepared assets and object JSON
+        # Every object's JSON remains SHA-verified. Only tests that consume real prepared images restore them;
+        # application texture banks are not inputs to these runtime and renderer assertions.
         run: |
-          pnpm prepare:environment-images
-          pnpm prepare:minimap
-      - name: Test source records, provenance and scientific credits
-        run: pnpm test:sources
-      - name: Test pinned JSON transport restoration
-        run: node --test tools/restore-object-json.test.mts
-      - name: Test FITS decoding and offline reference comparisons
-        # Small independent FITS inputs are checked in; no archive downloads or Python needed.
-        run: pnpm test:fits --unit
-      - name: Test SBMT oracle contract and offline projection cases
-        # Native SBMT and real-body archive restoration are opt-in local checks.
+          if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
+            pnpm setup:asset-data
+          else
+            node tools/prepare-ci-inputs.mts universe
+          fi
+          node tools/restore-object-json.mts
+          node tools/prepare-feature-index.mts
+      - name: Prepare minimap data
         run: |
-          pnpm typecheck:oracles
-          pnpm test:sbmt --unit
-      - name: Test selected dataset textures and bounded residency
-        run: |
-          node --test src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts tests/objects/unit/earth/dataset-selection.test.mts tests/objects/unit/earth/surface-image-banks.test.mts
-      - name: Test the minimap setting and prepared minimap point ownership, range and coverage
-        run: node --test site/test/asset-origin.test.mts site/test/minimap-setting.test.mts site/test/minimap-point-range.test.mts site/test/minimap-point-coverage.test.mts
-      - name: Test shared shell and search ownership
-        run: >-
-          node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts
-          --test site/test/shell-lifetime.test.mts
-          site/test/navigation-router.test.mts site/test/planet-shell.test.mts
-          site/test/router-runtime.test.mts
-          site/test/object-page-data.test.mts
-          site/test/search-response.test.mts
-          site/test/dataset-response.test.mts
-          site/test/dataset-url.test.mts
-          site/test/browser-node-imports.test.mts
-          site/test/navigation-tree-data.test.mts
-          tools/serialize-prepared-scene.test.mts
-      - name: Enforce activation preparation for every registered object
-        # Reads every object's restored prepared/runtime.json, so it stays after the restore, not in Contract lint.
-        run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts
-      - name: Check every object's runtime ownership and physical frame receipt
-        # Scoped to the objects this PR touched (tools/scope-runtime-ownership-check.mts, computed in the `changes`
-        # job above); --receipts in Contract lint already covers a scoped run's only real failure mode, and --all
-        # still runs whenever this PR also touched shared code, or on every push to main.
+          node site/minimap/prepare.mts --data-only
+      - name: Test the selected universe lane
+        # Each runner owns its writers and CPU budget. Native runner discovery is unchanged.
         env:
           RUNTIME_OWNERSHIP_ARGS: ${{ needs.changes.outputs.runtime_ownership_args }}
         run: |
-          # shellcheck disable=SC2086 # intentional word-splitting: one or more "--object <id>" pairs, or "--all"
-          node tools/check-object-runtime-ownership.mts $RUNTIME_OWNERSHIP_ARGS
-      - name: Test complete shared renderer and camera
-        # Reads restored prepared volumes and the generated world context and catalog, so it stays after the restore.
-        run: pnpm test:renderer
+          case "$CI_UNIVERSE_LANE" in
+            sources)
+              if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
+                pnpm test:sources
+              else
+                pnpm test:sources:pr
+              fi
+              ;;
+            runtime|shell|renderer)
+              node tools/prepare-facilities.mts --catalog-only
+              pnpm "test:universe:$CI_UNIVERSE_LANE"
+              ;;
+            *) echo "Unknown universe lane" >&2; exit 1 ;;
+          esac
 
-  universe-preparation:
-    name: Prepared universe preparation and galaxy field
-    needs: [lint, changes]
-    # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
-    # failed `needs` reports "skipped", which a ruleset counts as passing. Split out of the `universe` job so the
-    # two halves of "Prepared universe and shared renderer" run in parallel at roughly equal length; see
-    # output/CI_OPTIMIZATION.md section 6, item 3. A pull request whose changed areas do not need this job
-    # (.github/ci-areas.json, computed by the `changes` job) skips it, reporting success, not failure; a push to
-    # main never skips, and a failed lint still fails here, not skip.
-    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.run_universe_preparation == 'true') }}
+  universe:
+    name: Prepared universe and shared renderer
+    needs: [changes, universe-checks]
+    if: ${{ always() && (github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require every universe lane to pass
+        env:
+          RESULT: ${{ needs.universe-checks.result }}
+        run: test "$RESULT" = success
+
+  universe-preparation-checks:
+    name: Preparation / ${{ matrix.lane }}
+    strategy:
+      fail-fast: false
+      matrix:
+        lane: [publication, world]
+    env:
+      CI_PREPARATION_LANE: ${{ matrix.lane }}
+    needs: changes
+    if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_universe_preparation == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
       contents: read
     steps:
-      - name: Stop when Contract lint did not pass
-        if: needs.lint.result != 'success'
-        run: |
-          echo "::error::Contract lint did not pass, so this job stops here."
-          exit 1
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -493,6 +482,25 @@ jobs:
           restore-keys: node-modules-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: package-cache
+        with:
+          path: packages/*/dist
+          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: renderer-cache
+        with:
+          path: src/renderers/css/dist
+          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: build-tools-cache
+        with:
+          # Preparation still uses the conservative whole-tree key; generated data is never cached here.
+          path: tools/objects/dist
+          key: compiled-preparation-js-v3-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
@@ -503,58 +511,63 @@ jobs:
           # The galaxy-field acquisition sha-verifies a cached catalogue and skips its download.
           path: .local/galaxy-field/sources
           key: galaxy-field-sources-${{ hashFiles('src/objects/nearby-universe/source/catalogue.json') }}
-      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - name: Build shared packages and affected entry points
+        env:
+          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
+          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
+          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
+          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
+          CI_PREPARATION_DTS: "false"
+          CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
+          CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
+        run: node tools/build-ci.mts full
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
-          # setup:assets sha-verifies every restored file and downloads only what is missing or changed. This job
-          # only restores (like Typecheck); the `universe` job above owns the conditional save.
+          # Only the baked JSON payloads, not texture banks. The following installer revalidates every pin.
           path: |
-            public/scenes
             src/objects/*/prepared/runtime.json
             src/objects/*/prepared/scene.json
-          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
-          restore-keys: prepared-assets-v1-
-      - name: Build shared packages and affected entry points
-        run: pnpm build:tools
-      - name: Restore prepared assets and object JSON
+          key: prepared-json-v1-${{ hashFiles('src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-json-v1-
+      - name: Restore only the inputs consumed by preparation tests
+        run: node tools/prepare-ci-inputs.mts universe-preparation
+      - name: Test the selected preparation lane
         run: |
-          pnpm setup:assets
-          pnpm prepare:object-json
-      - name: Test authored preparation publication and cache
-        # Finalization renders through headless Chromium, so the browser stays installed here.
-        run: |
-          pnpm exec playwright install --with-deps chromium
-          node --test --test-concurrency=1 \
-            tests/objects/prepared-finalization.test.mts \
-            tests/objects/publication.test.mts \
-            tools/write-prepared-set.test.mts \
-            tools/preparation-cache.test.mts \
-            tools/prepare-planets.test.mts
-      - name: Bake and test the scientific galaxy field
-        run: pnpm test:galaxy-field
-      - name: Test prepared source, materials and world context
-        run: |
-          pnpm test:preparation --universe
-          node --test tools/objects/material-composition/coplanar-raster.test.mts
+          case "$CI_PREPARATION_LANE" in
+            publication)
+              pnpm exec playwright install --with-deps --only-shell chromium
+              pnpm test:ci-preparation:publication
+              ;;
+            world)
+              # The galaxy writer finishes before world/provenance readers in this workspace.
+              node tools/restore-source-inputs.mts --repository-volumes
+              pnpm test:galaxy-field
+              pnpm test:ci-preparation:world
+              ;;
+            *) echo "Unknown preparation lane" >&2; exit 1 ;;
+          esac
+
+  universe-preparation:
+    name: Prepared universe preparation and galaxy field
+    needs: [changes, universe-preparation-checks]
+    if: ${{ always() && (github.event_name != 'pull_request' || needs.changes.outputs.run_universe_preparation == 'true') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require every preparation lane to pass
+        env:
+          RESULT: ${{ needs.universe-preparation-checks.result }}
+        run: test "$RESULT" = success
 
   nebula:
     name: Internal nebula packages and isolated controls
-    needs: [lint, changes]
-    # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
-    # failed `needs` reports "skipped", which a ruleset counts as passing. A pull request whose changed areas do not
-    # need this job (.github/ci-areas.json, computed by the `changes` job) skips it, reporting success, not
-    # failure — unless lint itself did not pass, which must still run and fail here, never skip. A push to main
-    # never skips.
-    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.run_nebula == 'true') }}
+    needs: changes
+    if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_nebula == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
       contents: read
     steps:
-      - name: Stop when Contract lint did not pass
-        if: needs.lint.result != 'success'
-        run: |
-          echo "::error::Contract lint did not pass, so this job stops here."
-          exit 1
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -568,21 +581,33 @@ jobs:
           restore-keys: node-modules-
       - name: Install dependencies without preparing application assets
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Hash tracked build and compiler inputs
+        id: ci-cache-key
+        run: node tools/ci-cache-key.mts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: output/tsbuildinfo/nebula-*.tsbuildinfo
+          key: tsbuildinfo-nebula-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            tsbuildinfo-nebula-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-
+            tsbuildinfo-nebula-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
       - name: Build shared TypeScript dependencies
         run: pnpm -r --filter "./packages/**" build
+      - name: Restore repository volume inputs used by provenance closure
+        run: node tools/restore-source-inputs.mts --repository-volumes
       - name: Test the object registry and adapter packages
         # 802 tests, ~6 s local; never ran in CI before (output/TEST_AUDIT.md section 1.5). Needs only the build
         # above, so it runs here rather than adding another checkout+install in Contract lint.
         run: pnpm test:packages
       - name: Install the browser used by isolated control tests
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps --only-shell chromium
       - name: Check all nebula packages, tests and dependency boundaries
         env:
           NODE_OPTIONS: --max-old-space-size=4096
         run: |
           pnpm typecheck:nebula
           pnpm check:nebula-boundaries
-          node --test tools/nebula/package-boundaries.test.mts tools/nebula/inbound-boundaries.test.mts tools/nebula/application/*.test.mts tools/nebula/application/*.test.ts tools/nebula-provenance-source-closure.test.mts
+          pnpm test:nebula-application
       - name: Test numerical owners, durable jobs and isolated React controls
         # Explicit cache-independent selection. Do not substitute test:lab:nebula:
         # that command restores real source assets before running the wider suite.
@@ -591,7 +616,8 @@ jobs:
           node labs/nebula/run.mts test
           overlay-placement overlay-registration overlay-alignment
           field-tilt emission-window component-material material
-          point-projection cloud-inspection compact
+          point-projection cloud-inspection compact shape-cloud-camera
+          nebula-frame bake compiler-sampling render-element-budget retained-material-bank optical-composite-preparation
           detect-shapes structure-wavelets structure-map ridge-graph
           material-solver shape-prior solver
           acquisition footprint image-links image-ranking
@@ -601,6 +627,8 @@ jobs:
           workspace-sections workspace-portals workspace-objects camera-model-panel image-appearance-panel
           catalogue object-browser papers survey-images
           geometry-model observation-alignment structures-model
+          build lens-levels lens-difference lens-radial lens-radial-panel
+          registration photometric-mge photometric-prior compiler-defaults simulation-guided compiler-published
 
   ci-guard:
     name: Report the first CI failure

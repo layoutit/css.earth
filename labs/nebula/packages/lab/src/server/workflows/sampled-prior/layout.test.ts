@@ -106,3 +106,13 @@ test('footprint union cannot merge different slabs, resampled pixels or offsets 
     quad('z-7', 2, 3, [11, 21, 30.1], u, v),
   ]) assert.throws(() => mergeSliceLayout(reference, [component]), /registered pixel grid/);
 });
+
+test('registered footprint union retains physical slab intervals and rejects mismatched integration support', () => {
+  const reference = quad('z-7', 6, 5, origin, [1, 0, 0], [0, 1, 0]);
+  reference.slab = { start: 29, end: 31, samples: 8, startCell: 2, endCell: 4 };
+  assert.deepEqual(mergeSliceLayout(reference, [structuredClone(reference)]).slab, reference.slab);
+  const changed = structuredClone(reference); changed.slab!.samples = 4;
+  assert.throws(() => mergeSliceLayout(reference, [changed]), /different physical integration/);
+  delete changed.slab;
+  assert.throws(() => mergeSliceLayout(reference, [changed]), /different physical integration/);
+});

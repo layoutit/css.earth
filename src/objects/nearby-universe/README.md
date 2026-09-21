@@ -65,3 +65,9 @@ and source usage. Production builds use the same preparation. Generated images
 and source downloads are ignored. No additional scene or camera is mounted.
 
 </details>
+
+Each sampled point retains its PGC identity and distance method. Cosmicflows-4
+points also retain DM and the reported e_DM uncertainty, including the asymmetric
+distance interval obtained from DM +/- e_DM. Missing errors and Hubble-law
+errors are null, not zero. These uncertainties are metadata; the current scene
+still draws a single position and does not visualize the interval.
