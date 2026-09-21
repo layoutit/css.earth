@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.example-stage:where([data-object-id="dysnomia"]) > :is(.dysnomia-sun-camera, .dysnomia-camera, .dysnomia-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="dysnomia"]) .dysnomia-sun-camera, :where(.planet-stage[data-object-id="dysnomia"]) .dysnomia-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="dysnomia"]) .dysnomia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="dysnomia"]) .dysnomia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.planet-stage[data-object-id="dysnomia"]) .dysnomia-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--dysnomia-surface-image); background-repeat: no-repeat;
+}
+:where(.planet-stage[data-object-id="dysnomia"]) .dysnomia-body > .dysnomia-polar { background-image: var(--dysnomia-poles-image); }
+:where(.planet-stage[data-object-id="dysnomia"]) .dysnomia-material-root { z-index: 3; --dysnomia-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="dysnomia"]) .dysnomia-material, :where(.planet-stage[data-object-id="dysnomia"]) .dysnomia-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="dysnomia"]) .dysnomia-material { background-repeat: no-repeat; transform: rotate(var(--dysnomia-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="dysnomia"]) .dysnomia-billboard { border-radius: 50%; background-color: var(--dysnomia-billboard-color); opacity: var(--dysnomia-billboard-opacity); }
+.planet-stage:where([data-object-id="dysnomia"])[data-lod="billboard"] .dysnomia-scene, .planet-stage:where([data-object-id="dysnomia"])[data-lod="marker"] .dysnomia-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="dysnomia"])[data-lod="marker"] .dysnomia-billboard { opacity: 0; }
+

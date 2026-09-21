@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "dysnomia",
+  "displayName": "Dysnomia",
+  "publicBase": "/scenes/dysnomia/",
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "model",
+        "consumer": "model-surface",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Shape model",
+          "modeled": true,
+          "coverage": "Illustrative sphere at the radiometric diameter 615 (+60/-50) km measured by Brown and Butler (2023) from ALMA Band 6 and Band 7 thermal flux in which Dysnomia is detected separately from Eris (45 +/- 7 microjansky at 1280 micrometres). The thermal flux gives the size and the geometric albedo 0.05 +/- 0.01 follows from it, which is the right direction of inference. It rests on a fixed 850 micrometre emissivity of 0.685 and on emissivity and phase-integral priors typical of Kuiper-belt objects. One diameter is measured, so the three axes are equal by construction and are not three measured axes. No stellar occultation by Dysnomia has been published and it has never been resolved as a disc. Illustrative ICRF north pole (right ascension 0 degrees, declination +90 degrees), arbitrary prime meridian and phase. Dysnomia has no measured rotation pole. Its own brightness varies by about 0.3 magnitudes in HST imaging (Bernstein et al. 2023), and Eris is measured to rotate synchronously with Dysnomia's 15.79 day orbit, so Dysnomia is likely tidally locked; that is an inference, and the well-measured orbit pole is not a body pole. The grid marks unmapped terrain."
+        }
+      }
+    ],
+    "scientific": [],
+    "observedColors": [],
+    "mosaics": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 307.5,
+    "camera": {
+      "framingScale": 1
+    },
+    "mapUrl": "/scenes/dysnomia/dysnomia-model-surface@2x.webp",
+    "polesUrl": "/scenes/dysnomia/dysnomia-model-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/ellipsoid.tab",
+      "format": "pds-radius-table",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 2522,
+        "expectedFaces": 5040,
+        "stepDegrees": 5,
+        "longitudeDirection": "east-positive"
+      },
+      "faceBudget": 2000,
+      "texelsPerFace": 4096,
+      "simplification": {
+        "targetFaces": 480,
+        "maximumErrorMeters": 7687.5,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u"
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Illustrative ICRF north pole (right ascension 0 degrees, declination +90 degrees), arbitrary prime meridian and phase. Dysnomia has no measured rotation pole. Its own brightness varies by about 0.3 magnitudes in HST imaging (Bernstein et al. 2023), and Eris is measured to rotate synchronously with Dysnomia's 15.79 day orbit, so Dysnomia is likely tidally locked; that is an inference, and the well-measured orbit pole is not a body pole."
+  },
+  "presentation": {
+    "defaultLens": "model"
+  }
+}
