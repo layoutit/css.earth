@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "k2-18",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "K2-18",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 285933
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/k2-18-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "75697b15e363a175a4a453b382c3c930e1e6a92084d751e177ef22089297223b"
+      }
+    },
+    "catalog": {
+      "name": "K2-18",
+      "classification": "star",
+      "color": "#ffb98a",
+      "distanceAu": 7858629.1,
+      "description": "Red dwarf 38 parsecs away that hosts the planet K2-18 b.",
+      "systemName": "Leo",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1155529687749567500,
+        150899772136679260,
+        155229248388803070
+      ],
+      "presentationToReference": [
+        -0.982896773654451,
+        -0.13094415097402737,
+        0.1294896199135734,
+        0.12835576686478276,
+        0.017098502267849966,
+        0.9915807775127298,
+        0.13205578159332562,
+        -0.9912422865000703,
+        -0.000001374201336123386
+      ],
+      "orbitUpReference": [
+        0.13094415097402737,
+        -0.017098502267849966,
+        0.9912422865000703
+      ],
+      "metersPerUnit": 922364.5161290322,
+      "bodyRadiusM": 285933000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "862efffd561b66ac7aae988c47711a27a54537145777f252435d00c5b79e8705"
+  }
+}

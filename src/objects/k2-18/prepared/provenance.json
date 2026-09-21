@@ -1,0 +1,344 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "k2-18",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "8baaf07a00412287993697fa9c58e863311e4b20823070a7efb42b978d9ef8e0"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "c2c00f7dc3ed5e6f149aeff97a01501a425e294174a4e7ed17d12096b3c8e32e"
+  },
+  "recipes": [
+    {
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "d16b3c57a8e00dab7720c52192f396cb961a3af18dd0b097a20b24f0056882ac",
+      "parameters": {
+        "schema": "cssearth-raster-recipe@1",
+        "publicBase": "/scenes/k2-18/",
+        "sourceWidth": 1024,
+        "sourceHeight": 512,
+        "width": 1024,
+        "height": 512,
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "k2-18-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "cssk2-18-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88,
+          "centerLongitudeDegrees": 0
+        },
+        "surfaces": [
+          {
+            "id": "shape",
+            "output": "k2-18-surface-{id}{suffix}.webp",
+            "thumbnail": "k2-18-lens-{id}.webp",
+            "source": "measurements.json",
+            "falseColor": false,
+            "science": {
+              "kind": "neutral-shape",
+              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+            }
+          }
+        ],
+        "emission": {
+          "offLimbSize": 600,
+          "limbSize": 512,
+          "bodyDiameter": 496,
+          "offLimbOutput": "k2-18-context-{id}{suffix}.webp",
+          "limbOutput": "k2-18-limb-{id}{suffix}.webp",
+          "metadata": {
+            "schema": "cssk2-18-prepared-emission@1",
+            "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+            "offLimbContext": {
+              "logicalSize": 600,
+              "source": "none: no observation, a transparent plate",
+              "composition": "transparent",
+              "rotation": "none",
+              "runtimeAlphaProcessing": false
+            },
+            "limbMaterial": {
+              "logicalSize": 496,
+              "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+              "surfaceReplacement": false,
+              "runtimeAlphaProcessing": false
+            },
+            "lighting": false,
+            "shadows": false,
+            "runtimeLighting": false
+          }
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "d0acbce6844c145bac0bc5fe1aac15c3a467dec5ab150d70703d76f3c124fd16",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "k2-18",
+        "displayName": "K2-18",
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Radius",
+              "value": "0.41 solar radii",
+              "source": {
+                "catalogueId": "arxiv-1805-00830",
+                "url": "https://arxiv.org/abs/1805.00830",
+                "label": "Sarkis et al. 2018",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "locator": "radiusKm; radiusSource"
+              }
+            },
+            {
+              "id": "distance",
+              "label": "Distance from the Sun",
+              "value": "38.1 parsecs",
+              "source": {
+                "catalogueId": "simbad-k2-18",
+                "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=K2-18",
+                "label": "SIMBAD parallax",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "locator": "distanceParsecs; distanceSource"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+              "thumbnail": "k2-18-lens-shape.webp",
+              "surface": "k2-18-surface-shape@2x.webp",
+              "poles": "k2-18-poles-shape@2x.webp",
+              "source": {
+                "id": "k2-18-observational-measurements",
+                "path": "../manifest.json",
+                "url": "https://arxiv.org/abs/1805.00830"
+              },
+              "falseColor": false,
+              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": []
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "Sarkis, Henning, Kürster et al., \"The CARMENES search for exoplanets around M dwarfs: A low-mass planet in the temperate zone of the nearby K2-18\", AJ 155, 257 (2018), arXiv:1805.00830",
+            "href": "https://arxiv.org/abs/1805.00830"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://arxiv.org/abs/1805.00830",
+            "credit": "Sarkis, Henning, Kürster et al., \"The CARMENES search for exoplanets around M dwarfs: A low-mass planet in the temperate zone of the nearby K2-18\", AJ 155, 257 (2018), arXiv:1805.00830"
+          },
+          "physical": {
+            "path": "../../../../../packages/astronomy/data/bodies/k2-18.json",
+            "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "k2-18-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://arxiv.org/abs/1805.00830",
+      "credit": "Sarkis, Henning, Kürster et al., \"The CARMENES search for exoplanets around M dwarfs: A low-mass planet in the temperate zone of the nearby K2-18\", AJ 155, 257 (2018), arXiv:1805.00830",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      },
+      "sha256": "6c9db22890adbdd37dcef78d8134b17edf38c49d698978fcf57ee1f29a5b7493",
+      "bytes": 1121,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "d0acbce6844c145bac0bc5fe1aac15c3a467dec5ab150d70703d76f3c124fd16",
+      "bytes": 2951,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": false
+      },
+      "inputs": [
+        "k2-18-observational-measurements"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/k2-18/k2-18-surface-shape@2x.webp",
+          "bytes": 178,
+          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/k2-18/k2-18-lens-shape.webp",
+          "bytes": 44,
+          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/k2-18/k2-18-poles-shape@2x.webp",
+          "bytes": 1340,
+          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/k2-18/k2-18-context-shape@2x.webp",
+          "bytes": 100,
+          "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/k2-18/k2-18-limb-shape@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "k2-18-observational-measurements",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4093,
+          "sha256": "a6cd4c3b2b9143072a92b8f43e29f6f767974cc13241604ea8ed5b4637584c32",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "k2-18",
+    "materialSha256": "85818eb71a440d002bc74929060c5d0c602174ec786470c55e8337ba236a7f76",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "c2c00f7dc3ed5e6f149aeff97a01501a425e294174a4e7ed17d12096b3c8e32e"
+    }
+  }
+}

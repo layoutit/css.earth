@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-18",
+  "card": {
+    "text": "Red dwarf 38 parsecs away that hosts the planet K2-18 b.",
+    "sources": [
+      {
+        "catalogueId": "simbad-k2-18",
+        "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=K2-18",
+        "label": "SIMBAD",
+        "checked": "2026-09-21",
+        "locator": "Basic data: spectral type",
+        "quote": "dM2.5"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "K2-18 is a red dwarf 38 parsecs away, about four tenths of the Sun’s radius. Its planet K2-18 b circles it every 33 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1805-00830",
+        "url": "https://arxiv.org/abs/1805.00830",
+        "label": "Sarkis et al. 2018",
+        "checked": "2026-09-21",
+        "locator": "Table 2",
+        "quote": "R∗ [R⊙]a 0.411 ±0.038"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Sphere of the measured radius",
+      "detail": "No image",
+      "summary": "A sphere at the published size in neutral gray. No picture of the surface is cast here."
+    }
+  }
+}
