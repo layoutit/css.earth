@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "stephano",
+  "displayName": "Stephano",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "32 × 32 × 32 km",
+        "source": {
+          "url": "https://doi.org/10.1086/426329",
+          "label": "Research publication · DOI 10.1086/426329",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1086-426329",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "thumbnail": "/scenes/stephano/stephano-model-thumbnail.webp",
+        "surface": "stephano-model-surface@2x.webp",
+        "poles": "stephano-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1086/426329"
+        },
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Sheppard, Jewitt and Kleyna (2005), The Astronomical Journal 129, 518; Table 3, radius for an assumed geometric albedo of 0.04",
+      "href": "https://doi.org/10.1086/426329"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/astro-ph/0410059"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://ssd.jpl.nasa.gov/sats/discovery.html"
+    },
+    {
+      "label": "Uranian irregular satellites physical summary and occultation prospects",
+      "role": "facts",
+      "description": "Source measurements and model interpretation",
+      "href": "https://www.hou.usra.edu/meetings/uranusflagship2023/eposter/8187.pdf"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1086/426329",
+      "credit": "Sheppard, Jewitt and Kleyna (2005), The Astronomical Journal 129, 518; Table 3, radius for an assumed geometric albedo of 0.04"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Sheppard, Jewitt and Kleyna (2005), The Astronomical Journal 129, 518; Table 3, radius for an assumed geometric albedo of 0.04"
+    }
+  }
+}

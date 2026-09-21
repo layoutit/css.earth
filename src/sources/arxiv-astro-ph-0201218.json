@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-astro-ph-0201218",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Spectral Energy Distribution and Mass-loss Rate of the A-Type Supergiant Deneb",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0201218"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0201218",
+      "label": "Aufdenberg et al. 2002"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/deneb/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0a42af256ead58a1bbaec777af067379bb750232fa10134a9f8032be3fca6bde",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "J. P. Aufdenberg, P. H. Hauschildt, E. Baron et al.",
+      "scope": "citation",
+      "evidence": "src/objects/deneb/text.json#/introduction/sources/0"
+    }
+  ]
+}

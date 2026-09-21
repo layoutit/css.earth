@@ -1,0 +1,168 @@
+{
+  "schema": "cssamycus-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/objects/amycus/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "credit": "JPL Small-Body Database, physical parameters for 55576 Amycus (2002 GB10): diameter 100.9 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "material",
+            "evidence": "src/objects/amycus/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "expectedBytes": 62404,
+      "expectedSha256": "c4fac91658b0af539a42a12d113c98b048a0a83e9a875864f8206aad3642c03e",
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+      ],
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Illustrative sphere at the 100.9 km diameter the JPL Small-Body Database lists for Amycus. No shape model is published. Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 50450
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/centaurs/batch.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored grid marking unavailable surface imagery."
+      },
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "consumers": [
+        "surfaces"
+      ],
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 50450
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/centaurs/batch.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4231,
+      "expectedSha256": "388de0e4f5e004a616b50f069ef607af6d2767c8ae9339902ca00507fb936df3",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2030,
+      "expectedSha256": "b2f9acb941245c94a54c0626740a5ac3f7e62c37a0d227614fae558b6fd2bc58"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 790,
+      "expectedSha256": "65fcc5a75b6c28bf48f77be1ead949cfa9fbb9aa50e9b90bea13cced8e93a715"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 443,
+      "expectedSha256": "034cd70d30ff32d24ca6d41ef8252e32c67d9bd8e2554e00e194c38b1896a844"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 354,
+      "expectedSha256": "b4a06bfcc7c7f7dbef7087a0ca11b562706a4a4639473a28d05741d2e9132045"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2241,
+      "expectedSha256": "175bc7afb93bfeb25144e334524b53e686fe8c8954d3dac78705df75587dcc58"
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3603,
+      "expectedSha256": "c5630b5ff69736fc24b408dad29bd2503579c43fd8ed73a49c5f338e94aa1a17"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-source-context",
+      "path": "presentation/context.png",
+      "origin": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "credit": "JPL Small-Body Database, physical parameters for 55576 Amycus (2002 GB10): diameter 100.9 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 92446,
+      "expectedSha256": "801cb9f585eef679c14dd718a708bba7cebb5807d83f957b96fd9fe8d2b73356",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "inputs": [
+          "published-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssleda-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 456414,
+      "sha256": "30725ab6add0bec24ed4a883c580c4c51461b19a82382aab1c970318e2a735c2"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 368196,
+      "sha256": "420db9e564a611474b3e262aaff6edf8ed24e70c750f0792c95c8ac86235ea68"
+    }
+  ]
+}

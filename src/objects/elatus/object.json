@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "elatus",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Elatus",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 28.5
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/elatus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "89f266112f5e266a0beb6788478c56784b86f0f1b1101a4ee12b23ce4e54d469"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1505959761991.9885,
+        -1476030858215.8958,
+        -497332030414.8541
+      ],
+      "presentationToReference": [
+        -0.6963680807497252,
+        2.4356826039297786e-17,
+        -0.7176848166938913,
+        -0.6584629455360541,
+        0.3977771559319137,
+        0.6389052226854164,
+        -0.28547862524001294,
+        -0.9174820620691818,
+        0.2769993146423909
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 123.91304347826087,
+      "bodyRadiusM": 28500
+    },
+    "catalog": {
+      "name": "Elatus",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 11.8,
+      "description": "A centaur orbiting among the giant planets.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "2f83be29095f752990333d110267e2c06f030f75ab300df03ebe3fc072d2b759"
+  }
+}

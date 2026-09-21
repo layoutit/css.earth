@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-21",
+  "id": "pelion",
+  "name": "Pelion",
+  "titleLabel": "Pelion",
+  "horizons": "49036;",
+  "aliases": [
+    "49036 Pelion",
+    "1998 QM107"
+  ],
+  "classification": "asteroid",
+  "population": "Centaur",
+  "fullAxesKm": [
+    45.9,
+    45.9,
+    45.9
+  ],
+  "radiusKm": 22.95,
+  "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.059; not measured.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": null,
+  "periodText": "Not adopted",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+  "rotationFact": false,
+  "shapeLabel": "Sphere at an assumed-albedo diameter",
+  "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+  "credit": "JPL Small-Body Database, absolute magnitude H = 10.38 for 49036 Pelion (1998 QM107); diameter estimated by cssEarth with an assumed albedo of 0.059",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+  ],
+  "shapeMeaning": "Illustrative sphere at 45.9 km, estimated from JPL's absolute magnitude H = 10.38 with an assumed albedo of 0.059, the median of the seven centaurs in this batch that have a JPL-cited albedo. The size is not measured.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Pelion is a centaur, a small icy body orbiting the Sun among the giant planets.",
+  "card": "A centaur orbiting among the giant planets.",
+  "datasetSummary": "A sphere at about 45.9 km, estimated from brightness with an assumed albedo.",
+  "distanceAu": 20.0,
+  "textCitations": [
+    {
+      "catalogueId": "jpl-small-body-database",
+      "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "label": "JPL Small-Body Database",
+      "checked": "2026-09-21",
+      "locator": "Record for 49036 Pelion (1998 QM107): orbit class and physical parameters"
+    }
+  ]
+}

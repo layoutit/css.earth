@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/alpha-centauri-b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "alpha-centauri-b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssalpha-centauri-b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "shape",
+      "output": "alpha-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "alpha-centauri-b-lens-{id}.webp",
+      "source": "measurements.json",
+      "falseColor": false,
+      "science": {
+        "kind": "neutral-shape",
+        "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "alpha-centauri-b-context-{id}{suffix}.webp",
+    "limbOutput": "alpha-centauri-b-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssalpha-centauri-b-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

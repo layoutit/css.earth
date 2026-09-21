@@ -1,0 +1,344 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "aldebaran",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "7a16d74e6226a1d8f771d0f4632a7a72759e85c9d9fa7d469ae1785dfa4df374"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "f34b65340d6696473fc0835a181bfb1bd38ee686a3d64734905bc3643e6a7f65"
+  },
+  "recipes": [
+    {
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "0a712799d4236d3bcca7f116e66a481a69e930eb77277f0872136e12eea1b2f3",
+      "parameters": {
+        "schema": "cssearth-raster-recipe@1",
+        "publicBase": "/scenes/aldebaran/",
+        "sourceWidth": 1024,
+        "sourceHeight": 512,
+        "width": 1024,
+        "height": 512,
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "aldebaran-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "cssaldebaran-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88,
+          "centerLongitudeDegrees": 0
+        },
+        "surfaces": [
+          {
+            "id": "shape",
+            "output": "aldebaran-surface-{id}{suffix}.webp",
+            "thumbnail": "aldebaran-lens-{id}.webp",
+            "source": "measurements.json",
+            "falseColor": false,
+            "science": {
+              "kind": "neutral-shape",
+              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+            }
+          }
+        ],
+        "emission": {
+          "offLimbSize": 600,
+          "limbSize": 512,
+          "bodyDiameter": 496,
+          "offLimbOutput": "aldebaran-context-{id}{suffix}.webp",
+          "limbOutput": "aldebaran-limb-{id}{suffix}.webp",
+          "metadata": {
+            "schema": "cssaldebaran-prepared-emission@1",
+            "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+            "offLimbContext": {
+              "logicalSize": 600,
+              "source": "none: no observation, a transparent plate",
+              "composition": "transparent",
+              "rotation": "none",
+              "runtimeAlphaProcessing": false
+            },
+            "limbMaterial": {
+              "logicalSize": 496,
+              "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+              "surfaceReplacement": false,
+              "runtimeAlphaProcessing": false
+            },
+            "lighting": false,
+            "shadows": false,
+            "runtimeLighting": false
+          }
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "424859b91401986a2d80d4ed519bf77cd30357bda67a5c3985e17712257ffcbd",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "aldebaran",
+        "displayName": "Aldebaran",
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Radius",
+              "value": "44.20 solar radii",
+              "source": {
+                "catalogueId": "arxiv-astro-ph-0502181",
+                "url": "https://arxiv.org/abs/astro-ph/0502181",
+                "label": "Richichi & Roccatagliata 2005",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "locator": "radiusKm; radiusSource"
+              }
+            },
+            {
+              "id": "distance",
+              "label": "Distance from the Sun",
+              "value": "20.43 parsecs",
+              "source": {
+                "catalogueId": "simbad-alf-tau",
+                "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Tau",
+                "label": "SIMBAD parallax",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "locator": "distanceParsecs; distanceSource"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+              "thumbnail": "aldebaran-lens-shape.webp",
+              "surface": "aldebaran-surface-shape@2x.webp",
+              "poles": "aldebaran-poles-shape@2x.webp",
+              "source": {
+                "id": "aldebaran-observational-measurements",
+                "path": "../manifest.json",
+                "url": "https://arxiv.org/abs/astro-ph/0502181"
+              },
+              "falseColor": false,
+              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": []
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "Richichi and Roccatagliata, \"Aldebaran’s angular diameter: How well do we know it?\", A&A 433, 305 (2005), arXiv:astro-ph/0502181",
+            "href": "https://arxiv.org/abs/astro-ph/0502181"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://arxiv.org/abs/astro-ph/0502181",
+            "credit": "Richichi and Roccatagliata, \"Aldebaran’s angular diameter: How well do we know it?\", A&A 433, 305 (2005), arXiv:astro-ph/0502181"
+          },
+          "physical": {
+            "path": "../../../../../packages/astronomy/data/bodies/aldebaran.json",
+            "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "aldebaran-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://arxiv.org/abs/astro-ph/0502181",
+      "credit": "Richichi and Roccatagliata, \"Aldebaran’s angular diameter: How well do we know it?\", A&A 433, 305 (2005), arXiv:astro-ph/0502181",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      },
+      "sha256": "51596c8b032c8af0d883f7a0bd72b6cebbf02408fe4a4b12a07effb75f574bc0",
+      "bytes": 1053,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "424859b91401986a2d80d4ed519bf77cd30357bda67a5c3985e17712257ffcbd",
+      "bytes": 2916,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": false
+      },
+      "inputs": [
+        "aldebaran-observational-measurements"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/aldebaran/aldebaran-surface-shape@2x.webp",
+          "bytes": 178,
+          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/aldebaran/aldebaran-lens-shape.webp",
+          "bytes": 44,
+          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/aldebaran/aldebaran-poles-shape@2x.webp",
+          "bytes": 1340,
+          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/aldebaran/aldebaran-context-shape@2x.webp",
+          "bytes": 100,
+          "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/aldebaran/aldebaran-limb-shape@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "aldebaran-observational-measurements",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 7054,
+          "sha256": "6e9f906284d5ac4098cc359c44e2bffdfd31d87cb6b8a506accaa63fc8e412e8",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "aldebaran",
+    "materialSha256": "031386ade61a599d62a77a55878e965d9978f70ec1a1c605990384355706ada6",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "f34b65340d6696473fc0835a181bfb1bd38ee686a3d64734905bc3643e6a7f65"
+    }
+  }
+}

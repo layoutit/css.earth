@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "vanth",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Vanth",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 221.5
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -6575558946736.695,
+        2326096765288.7607,
+        -1694791361497.6448
+      ],
+      "presentationToReference": [
+        -0.9762257950431823,
+        2.4356826039297786e-17,
+        0.2167560774057017,
+        0.1988698128642104,
+        0.3977771559319137,
+        0.8956696554813454,
+        0.08622061600139777,
+        -0.9174820620691818,
+        0.38832032029964836
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 963.0434782608696,
+      "bodyRadiusM": 221500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/vanth-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "67e162ea828e1dca8b6be6c90d4d0618b111c4043294cdf37d8d688cacf72a14"
+      }
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "Vanth",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 39.2,
+      "description": "A moon of Orcus.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "86cac5aaf06032336da9cd798787574b4cdc182c754fdeda4a67362ab4044160"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "crantor",
+  "card": {
+    "text": "A centaur orbiting among the giant planets.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Record for 83982 Crantor (2002 GO9): orbit class and physical parameters"
+      },
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database, absolute magnitude H = 8.89 for 83982 Crantor (2002 GO9); diameter estimated by cssEarth with an assumed albedo of 0.059",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Crantor is a centaur, a small icy body orbiting the Sun among the giant planets.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Record for 83982 Crantor (2002 GO9): orbit class and physical parameters"
+      },
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database, absolute magnitude H = 8.89 for 83982 Crantor (2002 GO9); diameter estimated by cssEarth with an assumed albedo of 0.059",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Sphere at an assumed-albedo diameter",
+      "detail": "Inferred shape",
+      "summary": "A sphere at about 91.2 km, estimated from brightness with an assumed albedo.",
+      "sources": [
+        {
+          "catalogueId": "jpl-small-body-database",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Small-Body Database, absolute magnitude H = 8.89 for 83982 Crantor (2002 GO9); diameter estimated by cssEarth with an assumed albedo of 0.059",
+          "checked": "2026-09-21"
+        }
+      ]
+    }
+  }
+}

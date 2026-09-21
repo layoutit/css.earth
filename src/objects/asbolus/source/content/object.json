@@ -1,0 +1,105 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "asbolus",
+  "displayName": "Asbolus",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "66 × 66 × 66 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Small-Body Database, physical parameters for 8405 Asbolus (1995 GO): diameter 66 km; JPL's stated reference: Earth, Moon, and Planets, v. 89, Issue 1, p. 117-134 (2002)",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "8.9351 h",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Small-Body Database, physical parameters for 8405 Asbolus (1995 GO): diameter 66 km; JPL's stated reference: Earth, Moon, and Planets, v. 89, Issue 1, p. 117-134 (2002)",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "/periodText"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "thumbnail": "/scenes/asbolus/asbolus-model-thumbnail.webp",
+        "surface": "asbolus-model-surface@2x.webp",
+        "poles": "asbolus-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+        },
+        "notes": "Published Jacobi-ellipsoid interpretation, with semiaxes 470 ±20, 383 ±10 and 245 ±8 km. It assumes hydrostatic equilibrium and a 6.75-hour rotation; the smooth shape is inferred from occultations, not imaged terrain. Illustrative pole RA 0°, declination 90° and arbitrary meridian. The paper’s local projected-limb and opening angles do not provide a unique absolute surface attitude for this display. The grid marks unmapped terrain.",
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "JPL Small-Body Database, physical parameters for 8405 Asbolus (1995 GO): diameter 66 km; JPL's stated reference: Earth, Moon, and Planets, v. 89, Issue 1, p. 117-134 (2002)",
+      "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.1051/0004-6361/202346998"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "credit": "JPL Small-Body Database, physical parameters for 8405 Asbolus (1995 GO): diameter 66 km; JPL's stated reference: Earth, Moon, and Planets, v. 89, Issue 1, p. 117-134 (2002)"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "JPL Small-Body Database, physical parameters for 8405 Asbolus (1995 GO): diameter 66 km; JPL's stated reference: Earth, Moon, and Planets, v. 89, Issue 1, p. 117-134 (2002)"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-1211-6055",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Resolving Vega and the inclination controversy with CHARA/MIRC",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1211.6055"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1211.6055",
+      "label": "Monnier et al. 2012"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/vega/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "f12b5b78caaf4673a8c4f5bf4e420ce9356e73deb8926caab1024d306a18dfaa",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "J. D. Monnier, X. Che, M. Zhao et al.",
+      "scope": "citation",
+      "evidence": "src/objects/vega/text.json#/introduction/sources/0"
+    }
+  ]
+}

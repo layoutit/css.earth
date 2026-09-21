@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "okyrhoe",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Okyrhoe",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 18
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/okyrhoe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "43abd6caae4d9c30183839c894bb2a717f4753b3c1c1665e56c4257b2218bd30"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1080138015427.2739,
+        739887551978.5461,
+        66995834854.65307
+      ],
+      "presentationToReference": [
+        0.837239731776537,
+        2.4356826039297786e-17,
+        0.5468360188710617,
+        0.5017122382075238,
+        0.3977771559319137,
+        -0.7681524355565859,
+        0.2175188763476612,
+        -0.9174820620691818,
+        -0.33303483933926914
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 78.26086956521739,
+      "bodyRadiusM": 18000
+    },
+    "catalog": {
+      "name": "Okyrhoe",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 8.35,
+      "description": "A centaur orbiting among the giant planets.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "8895d2c786ca2dc0e386e5b9bb37feddf654c6a3aa8970e653966df6ddd6fdd1"
+  }
+}

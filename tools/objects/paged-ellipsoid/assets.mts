@@ -6,13 +6,14 @@ import type {PagedAssetConfiguration, SurfaceAssetsConfiguration, SurfaceMapInpu
 import type {Cutaway} from './contracts.mts';
 import type {InteriorSource} from './scene-contract.mts';
 import type {createAtmospherePreparation} from './atmosphere.mts';
-import type {createPagedSurfaceRaster, NativePhotographicCloudComposite, PagedSurfaceRasterPlan} from './surface-raster.mts';
+import type {createPagedSurfaceRaster, NativeDeepOceanFill, NativePhotographicCloudComposite, PagedSurfaceRasterPlan} from './surface-raster.mts';
+import {applyDeepOceanFill, clearDeepOceanFillCache, readDeepOceanFill, resizeDeepOceanFill} from './deep-ocean-fill.mts';
 import {readJsonSource, requireFiniteNumber, requireString} from '../../source-values.mts';
 import {parseInteriorSource, parseMapFocusBindings} from './source-contract.mts';
 type AtmospherePreparation = ReturnType<typeof createAtmospherePreparation>;
 type AtmosphereModel = Awaited<ReturnType<AtmospherePreparation['readAtmosphereModel']>>;
 type Tomography = Awaited<ReturnType<typeof readMantleTomography>>;
-interface SphereAssetInput extends RasterInfo {data: Buffer; density: number; canonical?: boolean; outputRoot?: string; name: string; bandCount: number; polarCapBandSpan?: number; projectiveSurface?: boolean; longitudeOffsetDegrees: number; webp?: WebpOptions; cutaway?: Cutaway; nativePhotographicClouds?: NativePhotographicCloudComposite; nativePhotographicSampling?: boolean; nativePhotographicDisplayGamma?: number;}
+interface SphereAssetInput extends RasterInfo {data: Buffer; density: number; canonical?: boolean; outputRoot?: string; name: string; bandCount: number; polarCapBandSpan?: number; projectiveSurface?: boolean; longitudeOffsetDegrees: number; webp?: WebpOptions; cutaway?: Cutaway; nativePhotographicClouds?: NativePhotographicCloudComposite; nativePhotographicSampling?: boolean; nativePhotographicDisplayGamma?: number; nativeDeepOceanFill?: NativeDeepOceanFill;}
 interface MaterialFrameInput {size: number; scenePitchDegrees: number; role: string; atmosphereModel: AtmosphereModel; shadowless?: boolean; phaseFrame?: number;}
 import { mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -84,7 +85,7 @@ if (mode !== 'materials') {
       } else throw new TypeError("Unknown scientific surface source");
     }
     inputs.set(map.name, input);
-    if (mode !== 'thumbnails') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,displayGamma:map.displayGamma,nativePhotographicSampling:map.nativePhotographicSampling,kernel:map.scientific?"nearest":undefined,webp:map.webp});
+    if (mode !== 'thumbnails') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,displayGamma:map.displayGamma,nativePhotographicSampling:map.nativePhotographicSampling,deepOceanFill:map.deepOceanFill,kernel:map.scientific?"nearest":undefined,webp:map.webp});
   }
   if (mode === 'thumbnails') await prepareInteriorAssets({ exterior: false, thumbnailsOnly: true });
   else if (mode !== 'maps') await prepareInteriorAssets();
@@ -99,16 +100,19 @@ if (mode !== 'materials') {
   }
 }
 if (mode !== 'surfaces' && mode !== 'thumbnails' && mode !== 'maps') await prepareMaterialBanks();
+clearDeepOceanFillCache();
 return { assets: [...produced].sort() };
 async function prepareMap(input: string | Buffer, name: string, {
-  compositeClouds = false, displayGamma, nativePhotographicSampling = false, kernel = "lanczos3", webp = {},
-}: {compositeClouds?: boolean; displayGamma?: number; nativePhotographicSampling?: boolean; kernel?: ResizeKernel; webp?: WebpOptions} = {}) {
+  compositeClouds = false, displayGamma, nativePhotographicSampling = false, deepOceanFill, kernel = "lanczos3", webp = {},
+}: {compositeClouds?: boolean; displayGamma?: number; nativePhotographicSampling?: boolean; deepOceanFill?: SurfaceMapInput['deepOceanFill']; kernel?: ResizeKernel; webp?: WebpOptions} = {}) {
   const prepared = await preparePagedSurfaceMap({
-    config, sourceDirectory, map: { path: input, compositeClouds, displayGamma, nativePhotographicSampling }, kernel,
+    config, sourceDirectory, map: { path: input, compositeClouds, displayGamma, nativePhotographicSampling, deepOceanFill }, kernel,
   });
   const { data: preparedData, info } = prepared;
   const nativePhotographicClouds = 'nativePhotographicClouds' in prepared
     ? prepared.nativePhotographicClouds : undefined;
+  const nativeDeepOceanFill = 'nativeDeepOceanFill' in prepared
+    ? prepared.nativeDeepOceanFill : undefined;
   const { width, height } = info;
   await writeSphereAssets({
     data: preparedData,
@@ -125,6 +129,7 @@ async function prepareMap(input: string | Buffer, name: string, {
     longitudeOffsetDegrees: 0,
     nativePhotographicSampling,
     nativePhotographicClouds,
+    nativeDeepOceanFill,
     nativePhotographicDisplayGamma: displayGamma,
     webp: { quality: surfaceQuality, smartSubsample: true, ...webp },
   });
@@ -134,7 +139,7 @@ async function prepareMap(input: string | Buffer, name: string, {
 async function writeSphereAssets({ data, width, height, channels, density,
   canonical = false, outputRoot = PUBLIC_ROOT, name, bandCount,
   polarCapBandSpan = 1, projectiveSurface = false,
-  longitudeOffsetDegrees, webp, cutaway, nativePhotographicClouds,
+  longitudeOffsetDegrees, webp, cutaway, nativePhotographicClouds, nativeDeepOceanFill,
   nativePhotographicSampling = false, nativePhotographicDisplayGamma = 1 }: SphereAssetInput) {
   const suffix = canonical ? "" : density === 2 ? "@2x" : "";
   let surfaceData = data;
@@ -155,7 +160,7 @@ async function writeSphereAssets({ data, width, height, channels, density,
     for (const [page, url] of urls.entries()) {
       const raster = bakeSurfaceRaster(surfaceData, {
         width: surfaceWidth, height: surfaceHeight, channels,
-      }, surfaceRasterPlan.cells, density * 2, page, nativePhotographicClouds, nativePhotographicDisplayGamma);
+      }, surfaceRasterPlan.cells, density * 2, page, nativePhotographicClouds, nativePhotographicDisplayGamma, nativeDeepOceanFill);
       await sharp(raster.data, { raw: raster })
         .webp({ ...webp, alphaQuality: 100 })
         .toFile(output(basename(url)));
@@ -175,7 +180,7 @@ async function writeSphereAssets({ data, width, height, channels, density,
     boundaryLatitudeRadians: Math.PI / 2 -
       Math.PI / bandCount * polarCapBandSpan,
     longitudeOffsetRadians: longitudeOffsetDegrees * Math.PI / 180,
-  }, nativePhotographicClouds, nativePhotographicDisplayGamma);
+  }, nativePhotographicClouds, nativePhotographicDisplayGamma, nativeDeepOceanFill);
   if (cutaway) cutInteriorPoles(poles, polarTileSize, cutaway);
   await sharp(poles, { raw: {
       width: polarTileSize * 4,
@@ -205,7 +210,7 @@ function orientLatitudeBands(data: Buffer, { width, height, channels }: RasterIn
 }
 
 function preparePolarAtlas(data: Uint8Array, { width, height, channels, tileSize, boundaryLatitudeRadians, longitudeOffsetRadians }: RasterInfo & {tileSize: number; boundaryLatitudeRadians: number; longitudeOffsetRadians: number},
-  nativeClouds?: NativePhotographicCloudComposite, nativeDisplayGamma = 1) {
+  nativeClouds?: NativePhotographicCloudComposite, nativeDisplayGamma = 1, nativeOcean?: NativeDeepOceanFill) {
   const output = Buffer.alloc(tileSize * 4 * tileSize * 4);
   const supersampling = 2;
   const sampleCount = supersampling ** 2;
@@ -236,7 +241,7 @@ function preparePolarAtlas(data: Uint8Array, { width, height, channels, tileSize
             longitude = ((longitude % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
             const sourceX = longitude / (Math.PI * 2) * width - 0.5;
             const sourceY = (Math.PI / 2 - latitude) / Math.PI * height - 0.5;
-            const rgba = sampleBilinear(data, { width, height, channels }, sourceX, sourceY, nativeClouds, false, nativeDisplayGamma);
+            const rgba = sampleBilinear(data, { width, height, channels }, sourceX, sourceY, nativeClouds, false, nativeDisplayGamma, nativeOcean);
             const alpha = rgba[3] / 255;
             for (let channel = 0; channel < 3; channel += 1) premultiplied[channel] += rgba[channel] * alpha;
             alphaTotal += alpha;
@@ -254,7 +259,7 @@ function preparePolarAtlas(data: Uint8Array, { width, height, channels, tileSize
 }
 
 function sampleBilinear(data: Uint8Array, { width, height, channels }: RasterInfo, x: number, y: number,
-  nativeClouds?: NativePhotographicCloudComposite, preservePrecision = false, nativeDisplayGamma = 1) {
+  nativeClouds?: NativePhotographicCloudComposite, preservePrecision = false, nativeDisplayGamma = 1, nativeOcean?: NativeDeepOceanFill) {
   const x0 = Math.floor(x);
   const y0 = Math.max(0, Math.min(height - 1, Math.floor(y)));
   const x1 = x0 + 1;
@@ -273,6 +278,19 @@ function sampleBilinear(data: Uint8Array, { width, height, channels }: RasterInf
     const sampled = top * (1 - ty) + bottom * ty;
     const adjusted = nativeDisplayGamma === 1 ? sampled : Math.round(255 * (Math.round(sampled) / 255) ** (1 / nativeDisplayGamma));
     rgba[channel] = nativeClouds || preservePrecision ? adjusted : Math.round(adjusted);
+  }
+  if (nativeOcean) {
+    if (nativeOcean.width !== width || nativeOcean.height !== height) {
+      throw new Error("Paged ellipsoid deep ocean fill replacement does not share the plain source grid.");
+    }
+    const weight = sampleBilinear(nativeOcean.weight, { width, height, channels: 1 }, x, y, undefined, true)[0] / 255;
+    if (weight > 0) {
+      const replacement = sampleBilinear(nativeOcean.data, { width, height, channels: 3 }, x, y, undefined, true);
+      for (let channel = 0; channel < 3; channel += 1) {
+        const mixed = rgba[channel] * (1 - weight) + replacement[channel] * weight;
+        rgba[channel] = nativeClouds || preservePrecision ? mixed : Math.round(mixed);
+      }
+    }
   }
   if (nativeClouds) {
     const cloudX = (x + .5) / width * nativeClouds.width - .5;
@@ -601,6 +619,11 @@ async function prepareInteriorOuterPoles() {
       .raw()
       .toBuffer({ resolveWithObject: true });
     applyDisplayGamma(base, config.surface.maps[0].displayGamma);
+    const oceanFill = config.surface.maps[0].deepOceanFill;
+    if (oceanFill) {
+      const fill = await readDeepOceanFill(sourceDirectory, oceanFill, config.surface.maps[0].path);
+      applyDeepOceanFill(base, await resizeDeepOceanFill(fill, width, height), { width, height, channels: info.channels });
+    }
     const clouded = await prepareCloudComposite(base, {
       width,
       height,
@@ -828,6 +851,10 @@ export async function preparePagedSurfaceMap({ config, sourceDirectory, map, ker
     if (!Number.isFinite(nativeDisplayGamma) || nativeDisplayGamma < 1 || nativeDisplayGamma > 2) {
       throw new TypeError('Display gamma must be a finite number between 1 and 2.');
     }
+    const nativeDeepOceanFill = map.deepOceanFill && typeof map.path === 'string'
+      ? await readDeepOceanFill(sourceDirectory, map.deepOceanFill, map.path, { data, width: info.width, height: info.height, channels: 3 })
+      : undefined;
+    if (map.deepOceanFill && !nativeDeepOceanFill) throw new Error('A deep ocean fill replacement requires its plain source path.');
     let nativePhotographicClouds: NativePhotographicCloudComposite | undefined;
     if (map.compositeClouds) {
       const clouds = await sharp(resolve(sourceDirectory, config.surface.clouds.path))
@@ -842,7 +869,7 @@ export async function preparePagedSurfaceMap({ config, sourceDirectory, map, ker
       nativePhotographicClouds = { data: clouds.data, width: clouds.info.width, height: clouds.info.height,
         channels: cloudChannels, ...config.surface.clouds };
     }
-    return { data, info, nativePhotographicClouds };
+    return { data, info, nativePhotographicClouds, nativeDeepOceanFill };
   }
   const { data, info } = await input
     .resize(width, height, { fit: "fill", kernel })
@@ -850,6 +877,11 @@ export async function preparePagedSurfaceMap({ config, sourceDirectory, map, ker
     .raw()
     .toBuffer({ resolveWithObject: true });
   applyDisplayGamma(data, map.displayGamma);
+  if (map.deepOceanFill) {
+    if (typeof map.path !== 'string') throw new Error('A deep ocean fill replacement requires its plain source path.');
+    const fill = await readDeepOceanFill(sourceDirectory, map.deepOceanFill, map.path);
+    applyDeepOceanFill(data, await resizeDeepOceanFill(fill, width, height), { width, height, channels: info.channels });
+  }
   const preparedData = map.compositeClouds
     ? await prepareCloudComposite(data, {
       width,

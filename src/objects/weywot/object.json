@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "weywot",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Weywot",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 85
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1261601201089.1804,
+        -6026300952144.09,
+        -1647891232189.227
+      ],
+      "presentationToReference": [
+        0.199877114717809,
+        2.4356826039297786e-17,
+        -0.9798209729394874,
+        -0.898968166711153,
+        0.3977771559319137,
+        -0.1833836673717338,
+        -0.38975039993830995,
+        -0.9174820620691818,
+        -0.07950655022832691
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 369.5652173913044,
+      "bodyRadiusM": 85000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/weywot-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4073ab485d6d8a26bef08fc400661b150ad89297e150a8899c0aa2d74c4bd66a"
+      }
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "Weywot",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 43.7,
+      "description": "A moon of Quaoar.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "4cd2784294a95b7c09fb8c0dc03b121d42c8f33e83e59cb44212c1f62ef73ba7"
+  }
+}

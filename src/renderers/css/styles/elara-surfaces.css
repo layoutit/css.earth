@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.example-stage:where([data-object-id="elara"]) > :is(.elara-sun-camera, .elara-camera, .elara-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="elara"]) .elara-sun-camera, :where(.planet-stage[data-object-id="elara"]) .elara-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="elara"]) .elara-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="elara"]) .elara-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.planet-stage[data-object-id="elara"]) .elara-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--elara-surface-image); background-repeat: no-repeat;
+}
+:where(.planet-stage[data-object-id="elara"]) .elara-body > .elara-polar { background-image: var(--elara-poles-image); }
+:where(.planet-stage[data-object-id="elara"]) .elara-material-root { z-index: 3; --elara-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="elara"]) .elara-material, :where(.planet-stage[data-object-id="elara"]) .elara-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="elara"]) .elara-material { background-repeat: no-repeat; transform: rotate(var(--elara-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="elara"]) .elara-billboard { border-radius: 50%; background-color: var(--elara-billboard-color); opacity: var(--elara-billboard-opacity); }
+.planet-stage:where([data-object-id="elara"])[data-lod="billboard"] .elara-scene, .planet-stage:where([data-object-id="elara"])[data-lod="marker"] .elara-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="elara"])[data-lod="marker"] .elara-billboard { opacity: 0; }
+

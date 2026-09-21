@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "deneb",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Deneb",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 89370157
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/deneb-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9506dd1c11343ac4706660ffba3449184519690254c09fbdf09d101052d6cb50"
+      }
+    },
+    "catalog": {
+      "name": "Deneb",
+      "classification": "star",
+      "color": "#eef2ff",
+      "distanceAu": 89292089.6,
+      "description": "White supergiant about 433 parsecs away; its photosphere is not imaged here.",
+      "systemName": "Cygnus",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        6086518622942531000,
+        -7162265591459743000,
+        9491570359000932000
+      ],
+      "presentationToReference": [
+        0.45564925218116187,
+        0.460129845119354,
+        -0.7620133100000206,
+        -0.5361818738828333,
+        -0.5414547836493044,
+        -0.6475613603225401,
+        0.71055806033444,
+        -0.7036385740518525,
+        1.8467420530594076e-7
+      ],
+      "orbitUpReference": [
+        -0.460129845119354,
+        0.5414547836493044,
+        0.7036385740518525
+      ],
+      "metersPerUnit": 288290829.0322581,
+      "bodyRadiusM": 89370157000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "44ebbea5ccd35618a54096fc7f6fb01c77c2ad8bd4561d86d26ac58188b4a90e"
+  }
+}

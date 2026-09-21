@@ -18,6 +18,14 @@ export interface PagedSurfaceRasterPlan {
   cells: readonly PagedSurfaceRasterBakeCell[];
   pages: readonly {width: number; height: number}[];
 }
+export interface NativeDeepOceanFill {
+  data: Uint8Array;
+  /** Replacement weight, 0 to 255, on the same grid as the plain source. */
+  weight: Uint8Array;
+  width: number;
+  height: number;
+  channels: 3;
+}
 export interface NativePhotographicCloudComposite {
   data: Uint8Array;
   width: number;
@@ -147,12 +155,17 @@ function createSurfaceRasterPlan() {
 // positions an affine rectangle. Pixels outside the trapezoid stay transparent
 // instead of relying on Chrome to flatten a perspective-warped child.
 function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: RasterInfo, cells: readonly PagedSurfaceRasterBakeCell[], density = 8, page = 0,
-  nativeClouds?: NativePhotographicCloudComposite, nativeDisplayGamma = 1) {
+  nativeClouds?: NativePhotographicCloudComposite, nativeDisplayGamma = 1, nativeOcean?: NativeDeepOceanFill) {
   if (channels !== 3 || !(height > 0) || data.length !== width * height * channels ||
       ![2, 4, 8].includes(density) || width !== height * 2 ||
       (nativeClouds && (nativeClouds.channels !== 3 || nativeClouds.width !== nativeClouds.height * 2 ||
         nativeClouds.data.length !== nativeClouds.width * nativeClouds.height * nativeClouds.channels))) {
     throw new Error("Paged ellipsoid surface source dimensions do not match the prepared density.");
+  }
+  // The replacement is read on the plain grid, so it shares that grid exactly.
+  if (nativeOcean && (nativeOcean.width !== width || nativeOcean.height !== height ||
+      nativeOcean.data.length !== width * height * 3 || nativeOcean.weight.length !== width * height)) {
+    throw new Error("Paged ellipsoid deep ocean fill replacement does not share the plain source grid.");
   }
   if (!isArray(cells)) throw new Error("Paged ellipsoid raster cells are invalid.");
   const pageCells = cells.filter(cell => cell?.page === page);
@@ -207,6 +220,16 @@ function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: Raster
         // Sample continuous original north-to-south rows, including adjacent
         // latitudes at boundaries. Do not reverse or clamp individual bands.
         const sy = (cell.source.southY - v / 32 * cell.source.height) * scale - 0.5;
+        // Replace only what the plain edition invented, with a weight that is
+        // already nothing at the edge of that region, then compose clouds.
+        const oceanWeight = nativeOcean
+          ? sourceSample(nativeOcean.weight, width, height, 1, sx, sy, 0) / 255 : 0;
+        const baseSample = (channel: number) => {
+          const plain = displaySample(sourceSample(data, width, height, channels, sx, sy, channel));
+          if (oceanWeight <= 0) return plain;
+          const replacement = sourceSample(nativeOcean!.data, width, height, 3, sx, sy, channel);
+          return plain * (1 - oceanWeight) + replacement * oceanWeight;
+        };
         if (nativeClouds) {
           const cloudX = (sx + .5) / width * nativeClouds.width - .5;
           const cloudY = (sy + .5) / height * nativeClouds.height - .5;
@@ -217,8 +240,8 @@ function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: Raster
           const alpha = Math.max(0, Math.min(nativeClouds.maximumAlpha,
             (luminance - nativeClouds.threshold) / 255 * nativeClouds.scale));
           for (let channel = 0; channel < 3; channel++) rgb[channel] +=
-            displaySample(sourceSample(data, width, height, channels, sx, sy, channel)) * (1 - alpha) + nativeClouds.color[channel] * alpha;
-        } else for (let channel = 0; channel < 3; channel++) rgb[channel] += displaySample(sourceSample(data, width, height, channels, sx, sy, channel));
+            baseSample(channel) * (1 - alpha) + nativeClouds.color[channel] * alpha;
+        } else for (let channel = 0; channel < 3; channel++) rgb[channel] += baseSample(channel);
         count++;
       }
       if (!count) continue;

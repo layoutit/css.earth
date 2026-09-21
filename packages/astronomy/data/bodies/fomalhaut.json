@@ -1,0 +1,30 @@
+{
+ "id": "fomalhaut",
+ "classification": "star",
+ "order": 1208,
+ "physical": {
+  "name": "Fomalhaut",
+  "horizonsCode": null,
+  "meanRadiusKm": 1281479,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null
+ },
+ "physicalNotes": "Radius: Radius 1.842 \u00b1 0.019 solar radii from Mamajek (2012), ApJ 754, L20, using the VLTI limb-darkened angular diameter 2.223 \u00b1 0.022 mas. Adopted 1,281,479 km, 1.8420 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
+ "star": {
+  "rightAscensionDegrees": 344.4126927211701,
+  "declinationDegrees": -29.622237033389442,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 7.7036,
+  "properMotionRaMasPerYear": 328.95,
+  "properMotionDecMasPerYear": -164.67,
+  "radialVelocityKmPerS": 6.5,
+  "sources": {
+   "position": "SIMBAD basic record for * alf PsA (HIP 113368), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+PsA",
+   "distance": "Inverse of the Hipparcos new-reduction parallax 129.81 \u00b1 0.47 mas (van Leeuwen 2007) via SIMBAD",
+   "properMotion": "SIMBAD: 328.95, -164.67 mas/yr, reference 2007A&A...474..653V",
+   "radialVelocity": "SIMBAD: 6.5 km/s, reference 2006AstL...32..759G"
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 113368
+ }
+}

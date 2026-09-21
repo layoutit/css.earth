@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "pasiphae",
+  "displayName": "Pasiphae",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "36 × 36 × 36 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "label": "JPL Horizons object data for Pasiphae (Jupiter VIII), revised 2025-May-12",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "catalogueId": "jpl-horizons",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "thumbnail": "/scenes/pasiphae/pasiphae-model-thumbnail.webp",
+        "surface": "pasiphae-model-surface@2x.webp",
+        "poles": "pasiphae-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://ssd.jpl.nasa.gov/horizons/"
+        },
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "JPL Horizons object data for Pasiphae (Jupiter VIII), revised 2025-May-12",
+      "href": "https://ssd.jpl.nasa.gov/horizons/"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://ssd.jpl.nasa.gov/sats/discovery.html"
+    },
+    {
+      "label": "Uranian irregular satellites physical summary and occultation prospects",
+      "role": "facts",
+      "description": "Source measurements and model interpretation",
+      "href": "https://www.hou.usra.edu/meetings/jupiterflagship2023/eposter/8187.pdf"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "credit": "JPL Horizons object data for Pasiphae (Jupiter VIII), revised 2025-May-12"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "JPL Horizons object data for Pasiphae (Jupiter VIII), revised 2025-May-12"
+    }
+  }
+}

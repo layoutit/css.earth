@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "namaka",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Namaka",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 85
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5487486895403.823,
+        -4698315405031.643,
+        1797343574488.2468
+      ],
+      "presentationToReference": [
+        -0.8364312331430896,
+        2.4356826039297786e-17,
+        -0.5480718859992094,
+        -0.5028461241287002,
+        0.3977771559319137,
+        0.7674106525631904,
+        -0.21801047605900553,
+        -0.9174820620691818,
+        0.3327132370522816
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 369.5652173913044,
+      "bodyRadiusM": 85000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/namaka-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "efcd82d804708f9dbc32c0bf1f3e2a4295b22ea4f925f060122f6335e9a5873b"
+      }
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "Namaka",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 43,
+      "description": "A moon of Haumea.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "06882cc3cdc01e9f267a2dc139bd27bbad435743b960c487456fae21fa02c749"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-0906-0602",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mass-radius relation of low and very low-mass stars revisited with the VLTI",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0906.0602"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/0906.0602",
+      "label": "Demory et al. 2009"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/proxima-centauri/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "9eb38fc3aed93f5d0cd49a2fd78d30968cc1d2b2eed896a2e2a2f4bdf3b05cb6",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "B.-O. Demory, D. Ségransan, T. Forveille et al.",
+      "scope": "citation",
+      "evidence": "src/objects/proxima-centauri/text.json#/introduction/sources/0"
+    }
+  ]
+}
