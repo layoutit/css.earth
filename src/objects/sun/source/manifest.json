@@ -1430,8 +1430,8 @@
     {
       "id": "sun-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 21016,
-      "expectedSha256": "385a75cdef7d8c18a43e7c74104af7002b090e1ad360f90711e3ea414f1648ff",
+      "expectedBytes": 21260,
+      "expectedSha256": "a3da9a48df9442c29cd85a56ee40863fbf49c91d1c57d1369eaa47fc9d29027e",
       "origin": "Checked source acquisition recipe retaining the accepted institutional inputs and numerical semantics",
       "credit": "cssEarth and the institutional sources identified in this recipe",
       "license": "Project-authored acquisition specification; referenced observations retain their source terms",

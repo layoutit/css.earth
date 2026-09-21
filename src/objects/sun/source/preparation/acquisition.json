@@ -298,6 +298,14 @@
       "url": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0171/CR2311.fits"
     },
     {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "stereo/cor1/n3d_CR2053P1_m1.0.fits",
+      "url": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1A/fits/n3d_CR2053P1_m1.0.fits"
+    },
+    {
       "kind": "json-document",
       "groups": [
         "refresh"
