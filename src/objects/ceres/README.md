@@ -12,6 +12,9 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - The [DLR/USGS Dawn HAMO DTM](https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m) contains 21,600 × 10,800 signed 16-bit samples at 60 pixels/degree.
 
+- **Clay band and Ammonium band:** the Dawn VIR band-depth maps `CMT_MOSAIC-BI_DEPTH` (2.7 µm, OH in Mg-rich clays) and `CMT_MOSAIC-BII_DEPTH` (3.1 µm, ammonium) from the PDS3 data set [DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0](https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/) (De Sanctis, Capria, Ammannito et al., 2018; volume `DWNCVIR_2`). Each is 4102 × 1367 big-endian 32-bit floats at 11.39 pixels/degree (0.72 km), planetocentric, east-positive, 60°S to 60°N. Band depth is 1 − Rc/Rb (Clark et al. 1984), measured on Survey and HAMO spectra. The widespread ammonium absorption is the result of [Ammannito et al. (2016), Science 353, aaf4279](https://doi.org/10.1126/science.aaf4279).
+- **Color scales for those two lenses** are the ones printed in [Frigeri et al. (2019), Icarus 318, 14–21](https://doi.org/10.1016/j.icarus.2018.04.019), Figure 7: 0.10 to 0.30 for the 2.7 µm band and 0.05 to 0.20 for the 3.1 µm band, with the rainbow bar under each histogram. The bar is not linear in color; it spends most of its colors near the paper's histogram peak. How it was sampled is under [Band-depth lenses](#band-depth-lenses).
+
 ## Evidence
 
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite is 1024 × 512 pixels, the one prepared density; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
@@ -34,6 +37,13 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 - [source/manifest.json](source/manifest.json) pins acquisition URLs, byte counts, checksums, credits, and consumers.
 
 - Focused checks are defined in the [unit tests](../../../tests/objects/unit/ceres) and [browser profile](../../../tests/objects/browser/ceres/browser-profile.mts).
+
+### Clay band and Ammonium band (September 2026)
+
+- **Decoding.** `tools/objects/terrestrial-layers/pds-float-map.mts` reads both maps through their detached labels and checks every layout and projection field against the recipe. Six values per map at the label's pixel centres match an independent Python read of the archive bytes, and the painted colors match the scale ([unit tests](../../../tests/objects/unit/ceres/science-surfaces.test.mts)).
+- **Handedness and registration.** Frigeri et al. (2019) note that Haulani crater has a low 2.7 µm band depth; the archived map also dips at Cerealia Facula in Occator. Within 3° of their [IAU Gazetteer](https://planetarynames.wr.usgs.gov/Page/CERES/target) centres (10.77°E 5.80°N; 239.6°E 19.7°N) the median 2.7 µm band depth is 0.232 and 0.235, against 0.259 and 0.255 at the mirrored longitudes. The lowest 1% of pixels near Cerealia sit at 240.5°E 19.4°N, 0.9° from the Gazetteer centre. Dantu, high in the 3.1 µm band in the paper's figure, has its highest 1% at 138.3°E 26.1°N (Gazetteer 138.2°E 24.3°N).
+- **Values against the paper.** The archived 2.7 µm map has median 0.255 (1st to 99th percentile 0.2245 to 0.2859); the paper's histogram peaks near 0.20. The archived 3.1 µm map has median 0.064 (0.0432 to 0.0925); the paper peaks near 0.087. On the paper's scales most of Ceres is therefore red in the Clay band lens and blue in the Ammonium band lens. We show the archived values on the paper's scale, as chosen for this lens, rather than stretch the scale to fit.
+- **In the browser.** [Clay band](evidence/band-depth/clay-band.png) and [Ammonium band](evidence/band-depth/ammonium-band.png) at the default camera, headless Chromium 148, 1440 × 900, DPR 1, Shadows off; the page loaded each lens's own surface and pole images with no console errors. Surface rules for both lenses are in `src/renderers/css/styles/planet-surfaces.css`.
 
 ## Registration and coverage
 
@@ -67,6 +77,9 @@ Feature notes: 31 of the labelled names carry a caption note, the lead summary o
 
 - **Elevation:** The publisher describes approximately 98% surface coverage and interpolation in permanently shadowed polar areas, but supplies no validity mask separating interpolation from stereo samples. To avoid showing that fill as observed terrain, the lens withholds both caps at |latitude| ≥60°. This is our conservative display boundary, not the source's observation boundary.
 
+- **Clay band and Ammonium band are not the paper's maps.** The archived maps are a different processing from Frigeri et al. (2019), Figure 7. The data set catalog says the artifact-removal procedure "was not applied to these data", so scan stripes and checkerboard patterns show, and the values are offset from the paper's histograms (see Evidence). The paper's figure also lays shaded relief under the colors; these lenses show the band depth alone.
+- **Band-depth coverage.** The maps stop at 60°S and 60°N, as in the paper; the poles and pixels VIR did not measure (value −1.0E+32) show the gray grid. Occator's centre (239.3°E 19.8°N) is one of them.
+- **Band-depth label errors.** The `CMT_MOSAIC-BII_DEPTH.LBL` description reads "band I (3.1 micron) center"; its product id and the data set catalog identify it as the 3.1 µm (band II) depth. Both labels give `FILE_RECORDS = 1368` while the image files hold 1367 lines of 16,408 bytes; the reader checks the byte count against `LINES` × `LINE_SAMPLES`. The catalog calls the projection simple cylindrical and gives 2015-04-25 to 2015-06-27, while the labels say equirectangular (the same projection at 0° standard parallel) and 2015-06-05 to 2015-10-21.
 - **Lighting:** The optional Shadows setting adds approximate directional illumination of the spherical model. With Shadows off, a fixed curvature overlay gives the globe depth. Neither mode reconstructs unlit albedo or physically relights the photographed crater shadows.
 - The last two columns of the PIA19977 enhanced-color source map are brighter than their neighbours (mean brightness 173 and 193 against about 135). A thin light line can show along 0° at close zoom.
 
@@ -112,6 +125,19 @@ Delivery keeps the prepared HD texture dimensions. The photographic normal and e
 Preparing elevation requires the original 466.6 MB DTM. The runtime asset installer downloads prepared maps only and does not require that source file. Raw binaries and prepared images are excluded from Git; runtime assets use the existing publisher.
 
 See [NOTICE.md](NOTICE.md) for credits.
+
+</details>
+
+<details>
+<summary>Band-depth lenses</summary>
+
+<a id="band-depth-lenses"></a>
+
+Preparation samples each archived pixel as it is (nearest pixel, no smoothing or filling) and colors it on the paper's scale. Values outside the scale take its end colors. Missing pixels keep the shared gray grid.
+
+The palettes are 101 colors evenly spaced across each stated range, sampled from Figure 7 of Frigeri et al. (2019) on journal page 19 (PDF page 6), rendered at 6× (432 dpi) with macOS PDFKit. For each color we averaged 17 rows through the middle of the printed bar. The bar's ends are the plot frame at the 0.10 and 0.30 (or 0.05 and 0.20) ticks, 985.5 rendered pixels apart; the intermediate ticks fall at even spacing, 49.3 pixels per 0.01. Colors within 5 pixels of the frame, where the frame line blends into the bar, take the nearest clean column. The same palette drives the map and the legend. The paper's PDF is not redistributed; the sampled colors are in [the raster recipe](source/preparation/raster.json).
+
+The archive's labels are checked field by field before any pixel is read: product and data set ids, target, 32-bit `IEEE_REAL`, planetocentric east-positive equirectangular projection, the 470 km sphere, 11.393121506074 pixels/degree, the projection offsets, the latitude extent and the `-1.0E+32` missing constant. The first column starts exactly at 0°E and the first and last rows at the label's latitude limits.
 
 </details>
 
