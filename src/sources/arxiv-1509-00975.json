@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-1509-00975",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Rosaev & Plávalová (2015), New members of Datura family",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1509.00975"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1509.00975",
+      "label": "Rosaev & Plávalová (2015), New members of Datura family"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/datura/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "e52d6eeaba678ca0813549600e7d60f1cf96332f128d0225373e406710690040",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "A. Rosaev, E. Plávalová",
+      "scope": "citation",
+      "evidence": "src/objects/datura/text.json#/card/sources/0"
+    }
+  ]
+}

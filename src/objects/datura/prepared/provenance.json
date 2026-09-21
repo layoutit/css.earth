@@ -1,0 +1,548 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "datura",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "e578aba2f6fa99108f0247ecde0bc15949144bb427618222ffed232f17cbe3fc"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "aa947619bff746ad5908eabbcea6448928c04191d6126f0867bd5b3982599bc1"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "08d78ecc5e11811d2865ca3236cfe50afcc2a659ffc8372796f412287f8271e4",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "datura",
+        "displayName": "Datura",
+        "publicBase": "/scenes/datura/",
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/model-266.txt",
+              "format": "pds-plate-model",
+              "grid": {
+                "metersPerUnit": 6611.585103845111,
+                "expectedVertices": 1022,
+                "expectedFaces": 2040,
+                "indexBase": 1
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -4.1015
+              },
+              "minimum": -2,
+              "maximum": 2.5,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 4101.5,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 82.03
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 4.1015,
+          "mapUrl": "/scenes/datura/datura-shape-surface@2x.webp",
+          "polesUrl": "/scenes/datura/datura-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model-266.txt",
+            "format": "pds-plate-model",
+            "grid": {
+              "metersPerUnit": 6611.585103845111,
+              "expectedVertices": 1022,
+              "expectedFaces": 2040,
+              "indexBase": 1
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "texelsPerFace": 16384,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 82.03,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
+        },
+        "presentation": {
+          "defaultLens": "shape"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "16e68a292ca7cec9532536a7d3721d9a2eb1e29dbad93e3cdcd7d0663e040182",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "datura",
+        "displayName": "Datura",
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Display reference radius",
+              "value": "4.101 km (size-calibrated model)",
+              "source": {
+                "url": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
+                "label": "Masiero et al. (2012), NEOWISE v2 row Mas12",
+                "checked": "2026-09-21",
+                "path": "source/reference/calibration.json",
+                "catalogueId": "masiero-2012-neowise",
+                "locator": "/diameterKm; radius = diameterKm / 2"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.235 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271270%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-21",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "3.34 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271270%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-21",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Model rotation period",
+              "value": "3.3581 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/266",
+                "label": "DAMIT model 266",
+                "checked": "2026-09-21",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "Model 266; /periodHours"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "thumbnail": "/scenes/datura/datura-shape-thumbnail.webp",
+              "surface": "datura-shape-surface@2x.webp",
+              "poles": "datura-shape-surface@2x.webp",
+              "source": {
+                "id": "datura-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "notes": "NEOWISE thermal diameter, applied approximately to the mesh volume: 8.20 ± 0.15 km. The convex model shows broad shape; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
+              "noData": true
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "thumbnail": "/scenes/datura/datura-elevation-thumbnail.webp",
+              "surface": "datura-elevation-surface@2x.webp",
+              "poles": "datura-elevation-surface@2x.webp",
+              "source": {
+                "id": "datura-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-2",
+                  "0.25",
+                  "2.5"
+                ],
+                "meta": "km · 4.101 km reference sphere",
+                "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/266",
+                "image": "/scenes/datura/datura-elevation-legend.webp"
+              },
+              "notes": "Radius on the shape model minus a 4.101 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Model record",
+            "role": "terrain",
+            "description": "DAMIT model 266, version 2009-06-15",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/266"
+          },
+          {
+            "label": "Size calibration",
+            "role": "facts",
+            "description": "Masiero et al. (2012), NEOWISE v2 row Mas12",
+            "href": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Published pole and period; arbitrary display phase",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/266"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/266",
+            "credit": "DAMIT, Astronomical Institute of Charles University; Datura model 266; original model authors identified in its pinned reference records."
+          },
+          "physical": {
+            "path": "../../../../../packages/astronomy/data/bodies/datura.json",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "datura-shape",
+      "path": "shape/model-266.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/895/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Datura model 266; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore original uncalibrated counted triangle table through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "uncalibrated source coordinates",
+        "metersPerUnit": 6611.585103845111,
+        "referenceRadiusMeters": 4101.5
+      },
+      "coverage": "Published convex light-curve model 266. NEOWISE thermal diameter, applied approximately to the mesh volume: 8.20 ± 0.15 km. The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-895",
+            "role": "material",
+            "evidence": "src/objects/datura/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      },
+      "sha256": "bba0f118cbb8702ee0b70b073fa5141cae3a5911fb74b2b9013b5adedaf2a7fa",
+      "bytes": 82708,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/model-266.txt",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/895/shape.txt"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "16e68a292ca7cec9532536a7d3721d9a2eb1e29dbad93e3cdcd7d0663e040182",
+      "bytes": 5756,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "datura-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/datura/datura-elevation-thumbnail.webp",
+          "bytes": 4868,
+          "sha256": "4c66212db230b231f975ebaf44267686067e3bbea3d38a95946a5849d4fae80a",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/datura/datura-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/datura/datura-elevation-surface@2x.webp",
+          "bytes": 285724,
+          "sha256": "ac8ae937c86cbdc664de608080058423ef48b9ec2f4dd70bd4fff54e2db21396",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "datura-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "datura-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/datura/datura-shape-thumbnail.webp",
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/datura/datura-shape-surface@2x.webp",
+          "bytes": 69784,
+          "sha256": "9aa38ad5f02eef61b5f7531a9ae464f4d874349638be28127bcd06bfee53474a",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "datura-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6937,
+          "sha256": "923926683e1df42343c815da006fd95e7ec76d1926f7eacba355c3676aa45ffd",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 9130,
+          "sha256": "6b3faf689955992a4f3f4073213f070b1a6f43a1598cb85c1a70b647592f4310",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "datura",
+    "materialSha256": "fdd991d666d08e751101532c5063ba25f2fef301016850e6fce4dc51f1e989f9",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "aa947619bff746ad5908eabbcea6448928c04191d6126f0867bd5b3982599bc1"
+    }
+  }
+}

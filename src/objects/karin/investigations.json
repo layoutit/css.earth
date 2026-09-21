@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "karin",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 390: selected shape and spin",
+      "status": "included",
+      "finding": "DAMIT model 390, version 2016-04-19, pole (242°, 46°), period 18.35123 h, taken unchanged from the archive. Mirror solution 391 recorded as an alternative.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/390",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21"
+        }
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "16.4 ± 1.3 km, thermophysical volume-equivalent diameter fitted with this shape model. DAMIT marks model 390 as size-calibrated by the thermophysical fit of Hanuš et al. (2015): D = 16.4 ± 1.3 km, thermal inertia 170 (90–260), geometric albedo 0.21 ± 0.04. The mirror pole, model 391, fits D = 16.8 ± 1.5 km. NEOWISE lists 15.812 ± 0.111 km (Masiero et al. 2014) and 17.739 ± 0.894 km (Masiero et al. 2012).",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/390"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Resolved surface imagery",
+      "status": "unresolved",
+      "finding": "No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.",
+      "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/390"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21"
+        }
+      ]
+    }
+  ]
+}

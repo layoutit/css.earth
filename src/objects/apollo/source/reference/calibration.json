@@ -1,0 +1,15 @@
+{
+  "method": "thermophysical-fit-to-this-mesh",
+  "diameterKm": 1.68,
+  "uncertaintyKm": 0.09,
+  "quantity": "thermophysical effective diameter fitted with this shape model",
+  "reference": "Rozitis et al. (2013), A&A 555, A20, Table 3 ('Original' shape variant)",
+  "referenceUrl": "https://arxiv.org/abs/1305.3109",
+  "notes": "Table 2 lists the fitted shape as 1022 vertices and 2040 facets with pole (48°, −72°) and period 3.065448 h from Ďurech et al. (2008a), the same counts, pole and period as DAMIT model 273. Table 3 gives 1.68 ± 0.09 km for this 'Original' shape. The paper notes that this size overestimates the radar maximum equatorial diameter (2.07 ± 0.07 km) by a factor of 1.17 and prefers a reshaped variant at 1.55 ± 0.07 km; that variant mesh is not archived.",
+  "scaleKmPerSourceUnit": 1.3540733504357094,
+  "sourceUrl": "https://arxiv.org/abs/1305.3109",
+  "sourceLabel": "Rozitis et al. (2013), A&A 555, A20, Table 3 ('Original' shape variant)",
+  "diameterSemantics": "thermophysical effective diameter fitted with this shape model",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. Table 2 lists the fitted shape as 1022 vertices and 2040 facets with pole (48°, −72°) and period 3.065448 h from Ďurech et al. (2008a), the same counts, pole and period as DAMIT model 273. Table 3 gives 1.68 ± 0.09 km for this 'Original' shape. The paper notes that this size overestimates the radar maximum equatorial diameter (2.07 ± 0.07 km) by a factor of 1.17 and prefers a reshaped variant at 1.55 ± 0.07 km; that variant mesh is not archived.",
+  "visibleDescription": "Thermophysical effective diameter fitted to this mesh: 1.68 ± 0.09 km."
+}

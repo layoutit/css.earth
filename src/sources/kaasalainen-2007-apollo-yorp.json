@@ -1,0 +1,36 @@
+{
+  "id": "kaasalainen-2007-apollo-yorp",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Acceleration of the rotation of asteroid 1862 Apollo by radiation torques",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1038/nature05614"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2007Natur.446..420K/abstract",
+      "label": "Kaasalainen et al. (2007), Nature 446, 420"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/apollo/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "b08114c76743e1d4ecbcc2f29a4254ad3196b410b66676e182d567caab1cbd25",
+      "locator": "/introduction/sources/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "M. Kaasalainen, J. Ďurech, B. D. Warner, Y. N. Krugly, N. M. Gaftonyuk",
+      "scope": "citation",
+      "evidence": "src/objects/apollo/text.json#/introduction/sources/1"
+    }
+  ]
+}

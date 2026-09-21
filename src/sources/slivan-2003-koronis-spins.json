@@ -1,0 +1,36 @@
+{
+  "id": "slivan-2003-koronis-spins",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Spin vectors in the Koronis family: Comprehensive results from two independent analyses of 213 rotation lightcurves",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/S0019-1035(03)00029-0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2003Icar..162..285S/abstract",
+      "label": "Slivan et al. (2003), Icarus 162, 285"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/koronis/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "267889cdec628f3cb61af3613c998e58131d900a19c2bf1def9e58cb53484b7b",
+      "locator": "/introduction/sources/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "S. M. Slivan, R. P. Binzel, L. D. Crespo da Silva, M. Kaasalainen, M. M. Lyndaker, M. Krčo",
+      "scope": "citation",
+      "evidence": "src/objects/koronis/text.json#/introduction/sources/1"
+    }
+  ]
+}

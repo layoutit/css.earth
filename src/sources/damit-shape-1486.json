@@ -1,0 +1,37 @@
+{
+  "id": "damit-shape-1486",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Karin · karin shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1486/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/karin/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "DAMIT, Astronomical Institute of Charles University; Karin model 390; original model authors identified in its pinned reference records.",
+      "scope": "The karin shape input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
