@@ -38,8 +38,9 @@ interface HarnessOptions {
   onTicket?: (ticket: PreparedResidencyTicket) => void;
   onChange?: (state: Readonly<ObjectSelectionState>) => void;
   deferTextureRefinement?: boolean;
+  shadows?: boolean;
 }
-function harness({ onTicket, onChange, deferTextureRefinement, initialLens }: HarnessOptions = {}) {
+function harness({ onTicket, onChange, deferTextureRefinement, initialLens, shadows }: HarnessOptions = {}) {
   const definition = earthDefinition, f = retainedPresentationFixture(definition);
   const jobs: ImageJob[] = [], commits: { selection: ObjectSelection; plan: PreparedPresentationPlan }[] = [], changes: Readonly<ObjectSelectionState>[] = [], fatal: unknown[] = [], materialErrors: unknown[] = [], created: ReturnType<typeof f.document.createElement>[] = [];
   const createElement = f.document.createElement;
@@ -71,6 +72,8 @@ function harness({ onTicket, onChange, deferTextureRefinement, initialLens }: Ha
       sunViewDirection: direction, reference: currentView?.reference, };
     next.reference = currentView?.reference ?? next; currentView = next; coordinator.setView(next); return next;
   }
+  // Dispatched before start so the first pass is planned under directional light, not flood lighting.
+  if (shadows) coordinator.dispatch({ kind: "toggle", name: "shadows", value: true });
   view(0); const initialReady = coordinator.start();
   async function resolveJobs({ exclude = [] }: { exclude?: readonly ImageJob[] } = {}) {
     for (let wave = 0; wave < 45; wave++) {
@@ -124,7 +127,9 @@ test('URL restoration admits no default-camera detail before the router releases
 });
 
 test("camera movement cancels the old resource pass while startup waits for its current atmosphere row", async t => {
-  const h = harness(); t.after(h.restore); await flush();
+  // Only a directional light turns the atmosphere with the view; Earth's flood lighting pins it to
+  // its full-phase frame, so this pass needs shadows on to have a per-view atmosphere row at all.
+  const h = harness({ shadows: true }); t.after(h.restore); await flush();
   const obsolete = h.jobs.find(job => job.url.includes("atmosphere")); assert.ok(obsolete);
   let settled = false; h.initialReady.then(() => { settled = true; });
   h.view(1); await flush(); assert.equal(settled, false);
