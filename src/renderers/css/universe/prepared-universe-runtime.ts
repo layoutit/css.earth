@@ -22,7 +22,7 @@ import { detailedFocusContextOpacity } from './detailed-focus-context.js';
 import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 import { createPreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
 import type { PreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
-import { DEFAULT_POINT_VISIBILITY, projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
+import { DEFAULT_POINT_VISIBILITY, projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import type { PreparedPointVisibility } from '../volume/projected-volume-visibility.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldPlannerSource } from './world-context-planner-client.js';
@@ -611,8 +611,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 // future bank baked with contextVisibility 'independent' otherwise would never be fetched by
                 // proximity at all, only by explicit selection. Fetching a 'galactic' bank a little earlier
                 // than its fade would have shown it is cheap; never fetching an 'independent' one is a blank
-                // nebula.
-                const visible = lensEnabled[index] && presentationOpacity > 0 && projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) > 0;
+                // nebula. Big enough is not enough, though: its bounding sphere must also reach the viewport, or
+                // every nebula large enough to resolve anywhere in the sky is fetched behind the camera.
+                const visible = lensEnabled[index] && presentationOpacity > 0 && projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) > 0 &&
+                  projectVolumeSphere(world, viewport, frame, radiusUnits).visible;
                 if (visible !== lensVisible[index]) {
                   lensVisible[index] = visible; lensLastUsed[index] = ++lensUseClock; lensResidencyChanged = true;
                 }
