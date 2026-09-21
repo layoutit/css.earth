@@ -3,7 +3,7 @@
   "modelId": 3090,
   "modelVersion": "2019-06-24",
   "diameterKm": 55,
-  "diameterInterpretation": "Convex light-curve reconstruction with archive equivalent-volume size55 km (published thermal-size3-sigma interval53–57 km). The vertical shape is poorly constrained. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "diameterInterpretation": "Convex light-curve reconstruction with archive equivalent-volume size 55 km (published thermal-size 3-sigma interval 53–57 km). The vertical shape is poorly constrained. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
   "calibration": {
     "method": "published-volume-equivalent-size-transfer",
     "diameterKm": 55,
@@ -13,8 +13,8 @@
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3090",
     "sourceLabel": "DAMIT model 3090",
     "reference": "DAMIT model 3090",
-    "limitations": "Marciniak2019 §4.4 fits36 thermal measurements from IRAS, AKARI and WISE. Both mirror poles fit; the selected second pole, AM 2 at (226°, +70°), is representative, not unique. High pole latitude makes the vertical extent poorly constrained. The archived physical mesh has equivalent-volume diameter55 km and Table2 reports thermal size55±2 km at3σ. The paper calls D a shape scaling value without an explicit volume definition, so the archive volume and paper thermal uncertainty are distinguished.",
-    "visibleDescription": "Convex light-curve reconstruction with archive equivalent-volume size55 km (published thermal-size3-sigma interval53–57 km). The vertical shape is poorly constrained. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "limitations": "Marciniak 2019 §4.4 fits 36 thermal measurements from IRAS, AKARI and WISE. Both mirror poles fit; the selected second pole, AM 2 at (226°, +70°), is representative, not unique. High pole latitude makes the vertical extent poorly constrained. The archived physical mesh has equivalent-volume diameter 55 km and Table 2 reports thermal size 55±2 km at 3σ. The paper calls D a shape scaling value without an explicit volume definition, so the archive volume and paper thermal uncertainty are distinguished.",
+    "visibleDescription": "Convex light-curve reconstruction with archive equivalent-volume size 55 km (published thermal-size 3-sigma interval 53–57 km). The vertical shape is poorly constrained. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
     "publishedUncertainty": {
       "lowerKm": 2,
       "upperKm": 2,
@@ -29,7 +29,7 @@
     226,
     70
   ],
-  "modelLimitations": "Marciniak2019 §4.4 fits36 thermal measurements from IRAS, AKARI and WISE. Both mirror poles fit; the selected second pole, AM 2 at (226°, +70°), is representative, not unique. High pole latitude makes the vertical extent poorly constrained. The archived physical mesh has equivalent-volume diameter55 km and Table2 reports thermal size55±2 km at3σ. The paper calls D a shape scaling value without an explicit volume definition, so the archive volume and paper thermal uncertainty are distinguished.",
+  "modelLimitations": "Marciniak 2019 §4.4 fits 36 thermal measurements from IRAS, AKARI and WISE. Both mirror poles fit; the selected second pole, AM 2 at (226°, +70°), is representative, not unique. High pole latitude makes the vertical extent poorly constrained. The archived physical mesh has equivalent-volume diameter 55 km and Table 2 reports thermal size 55±2 km at 3σ. The paper calls D a shape scaling value without an explicit volume definition, so the archive volume and paper thermal uncertainty are distinguished.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/9793/shape.txt",
     "vertices": 1010,

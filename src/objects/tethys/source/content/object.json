@@ -275,9 +275,9 @@
           "width": 256,
           "height": 16,
           "labels": [
-            "0.55",
+            "≤ 0.55",
             "0.65",
-            "0.75"
+            "≥ 0.75"
           ],
           "meta": "band-depth fraction",
           "sourceUrl": "https://vims.univ-nantes.fr/cube/1719616836_1",

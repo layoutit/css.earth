@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a5c9a37b34dbc348e7964f0ec21a8d9b2645e10850695a5c75ae69bdedc7337"
+    "sha256": "2ff058dc92b90cb21331e264a82450506550f0fbee31b9a851f96ce6dd08a904"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -108,7 +108,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0859ffeca6e2458fd1fecb8a80998e2c0fb06666f217be9a6b53fa069e547c82",
+      "sha256": "63a5f14f0e85899f07b20ff053f448bd0e3baefbd1519c7f81a46f6ec3998193",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -149,13 +149,13 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "About 22.5 hours",
+              "value": "About 22.83 hours",
               "source": {
-                "url": "https://science.nasa.gov/dwarf-planets/makemake/",
-                "label": "Makemake · nasa makemake size",
-                "checked": "2026-09-16",
+                "url": "https://doi.org/10.1051/0004-6361/201935274",
+                "label": "Hromakina et al. (2019) · A&A 625, A46",
+                "checked": "2026-09-21",
                 "path": "source/measurements.json",
-                "catalogueId": "source-makemake-nasa-makemake-size",
+                "catalogueId": "hromakina-2019-makemake",
                 "locator": "/rotationPeriodHours"
               }
             },
@@ -412,8 +412,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "0859ffeca6e2458fd1fecb8a80998e2c0fb06666f217be9a6b53fa069e547c82",
-      "bytes": 10454,
+      "sha256": "63a5f14f0e85899f07b20ff053f448bd0e3baefbd1519c7f81a46f6ec3998193",
+      "bytes": 10448,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -767,8 +767,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7916,
-          "sha256": "8d45def374ecc33b9947b140626fe8dac8002176aded22ea8fbe5a9f9805468a",
+          "bytes": 7910,
+          "sha256": "1c5279bde2a03ce0d806a39deb3916c7dedc4d5cf92e4f73f2d9aa3f7cf24fb0",
           "verification": "bytes-verified"
         }
       ],
@@ -831,7 +831,7 @@
   },
   "lastPreparation": {
     "objectId": "makemake",
-    "materialSha256": "221e7b5e50fc9da49972b44f5a4b8c028bf441754ffcabbd82700f5da44051f0",
+    "materialSha256": "b51d2d8d8a227b5ef8d40a93eb44df837f07b3b4588d83b7b6c5e6efe001064a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

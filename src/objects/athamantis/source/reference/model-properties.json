@@ -14,7 +14,7 @@
     "sourceUrl": "https://arxiv.org/pdf/1308.0446",
     "reference": "Hanuš et al. (2013), Icarus 226, 1045–1057",
     "sourceLabel": "Hanuš et al. (2013), Icarus 226, 1045–1057",
-    "limitations": "Hanuš2013 Keck study Table3 independently confirms115±12 km for the first pole and116±12 km for the mirror, based on one adaptive-optics image. DAMIT comment slightly prefers pole(74,+27), selected here. The geometry remains a convex lightcurve model; AO constrains scale and silhouette, not a global photographic surface.",
+    "limitations": "Hanuš 2013 Keck study Table 3 independently confirms 115±12 km for the first pole and 116±12 km for the mirror, based on one adaptive-optics image. DAMIT comment slightly prefers pole(74,+27), selected here. The geometry remains a convex lightcurve model; AO constrains scale and silhouette, not a global photographic surface.",
     "visibleDescription": "Convex light-curve reconstruction; 115 km volume-equivalent diameter (±12 km). The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 1.0000000315374733,
     "metersPerSourceUnit": 1000.0000315374733,
@@ -32,7 +32,7 @@
     74,
     27
   ],
-  "modelLimitations": "Hanuš2013 Keck study Table3 independently confirms115±12 km for the first pole and116±12 km for the mirror, based on one adaptive-optics image. DAMIT comment slightly prefers pole(74,+27), selected here. The geometry remains a convex lightcurve model; AO constrains scale and silhouette, not a global photographic surface.",
+  "modelLimitations": "Hanuš 2013 Keck study Table 3 independently confirms 115±12 km for the first pole and 116±12 km for the mirror, based on one adaptive-optics image. DAMIT comment slightly prefers pole(74,+27), selected here. The geometry remains a convex lightcurve model; AO constrains scale and silhouette, not a global photographic surface.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/519/shape.txt",
     "vertices": 1022,

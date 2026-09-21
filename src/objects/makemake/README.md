@@ -4,7 +4,7 @@
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
-[NASA Science](https://science.nasa.gov/dwarf-planets/makemake/) supplies the approximate 715 km radius, 22.5-hour rotation, 305-year orbital period and 45.8 AU average distance. The display uses a sphere at that approximate radius. [Ortiz et al. (2012)](https://doi.org/10.1038/nature11597) measured projected occultation axes of 1,430 ± 9 and 1,502 ± 45 km. Those sky-plane measurements do not uniquely define a three-dimensional shape or spin pole; this package does not claim otherwise. The astronomy library retains its independently documented oblate approximation for orbital/capture metadata.
+[NASA Science](https://science.nasa.gov/dwarf-planets/makemake/) supplies the approximate 715 km radius, 305-year orbital period and 45.8 AU average distance. The 22.83-hour rotation period is the 22.8266 ± 0.0001 h double-peaked lightcurve period that [Hromakina et al. (2019)](https://doi.org/10.1051/0004-6361/201935274) conclude; a single-peaked 11.4133 h solution also fits their data. The display uses a sphere at that approximate radius. [Ortiz et al. (2012)](https://doi.org/10.1038/nature11597) measured projected occultation axes of 1,430 ± 9 and 1,502 ± 45 km. Those sky-plane measurements do not uniquely define a three-dimensional shape or spin pole; this package does not claim otherwise. The astronomy library uses a 738.8 km size scale from those two projected axes for orbital and capture metadata only, and says so. Its mass is the combined Makemake and satellite mass from the satellite's preliminary orbit ([Bamberger 2025](https://arxiv.org/abs/2509.05880)).
 
 No image resolves Makemake's surface. The Color lens shows one colour for the whole body, computed from photometry of the unresolved disc:
 
@@ -34,7 +34,7 @@ Measured sensitivity, with the same method: each published colour uncertainty mo
 - Hromakina et al. note the albedo would be about 10% lower if an undetected satellite adds light. The published 0.82 is used unchanged.
 - A uniform colour hides any albedo pattern. Hromakina et al. mention that thermal modelling has needed two albedo terrains; no map of them exists.
 - The Illustration lens is far darker and redder than the measured whole-disc colour (see Evidence). The illustration is shown as NASA published it; no colour is corrected.
-- Display pole and meridian are arbitrary, explicitly recorded as such. The reported rotation period is content only and does not drive an invented ephemeris. Orbital placement uses the existing pinned JPL elements at the shared 2026-09-04 epoch.
+- Display pole and meridian are arbitrary, explicitly recorded as such. The reported rotation period is content only and does not drive an invented ephemeris. Orbital placement uses the existing pinned JPL elements at the shared 2026-09-03 TT epoch.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
@@ -50,6 +50,6 @@ The `disc-integrated-color` science kind ([disc-integrated-color.mts](../../../t
 <details>
 <summary>Shape, rotation and camera on the shared raster lane</summary>
 
-The recipe declares a sphere of 715 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 0.9375-day prograde rotation (NASA 22.5 h from measurements.json; display orientation arbitrary) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 20.00° initial pitch, -50.00° yaw, taken from the retired lane's camera). 
+The recipe declares a sphere of 715 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 0.951108-day prograde rotation (Hromakina et al. 22.8266 h from measurements.json; display orientation arbitrary) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 20.00° initial pitch, -50.00° yaw, taken from the retired lane's camera). 
 
 </details>

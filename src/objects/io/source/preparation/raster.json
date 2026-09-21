@@ -58,7 +58,7 @@
       "output": "io-{id}{suffix}.webp",
       "thumbnail": "io-lens-{id}.webp",
       "source": "io-color-1km.tif",
-      "falseColor": false,
+      "falseColor": true,
       "science": {
         "kind": "terrestrial-observation",
         "input": "usgs-enhanced-global-1km",

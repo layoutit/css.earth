@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fc9ab98016bfdc917408b5264d25340914aae8548e3a2c64cf2ec5f11a7ed16a"
+    "sha256": "8ddb430e1a50fdb5be94e0a37919d654933d2cabc7fc27c2b64632a3b1d75977"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -108,7 +108,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b3c9673f4b8054affebed85e42ea78b1478b9be6fbc3eadf9026de3e627f31c3",
+      "sha256": "e8312c8ab70c00ed1b35d58d43a7889b21784c2828057e3d4c65f5028e56916d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -151,11 +151,11 @@
               "label": "Rotation period",
               "value": "About 15.8 days",
               "source": {
-                "url": "https://doi.org/10.1038/nature10550",
-                "label": "Research publication · DOI 10.1038/nature10550",
-                "checked": "2026-09-16",
+                "url": "https://doi.org/10.3847/PSJ/acdd5f",
+                "label": "Bernstein et al. (2023) · PSJ 4, 115",
+                "checked": "2026-09-21",
                 "path": "source/measurements.json",
-                "catalogueId": "doi-10-1038-nature10550",
+                "catalogueId": "doi-10-3847-psj-acdd5f",
                 "locator": "/rotationPeriodDays"
               }
             }
@@ -396,8 +396,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "b3c9673f4b8054affebed85e42ea78b1478b9be6fbc3eadf9026de3e627f31c3",
-      "bytes": 5855,
+      "sha256": "e8312c8ab70c00ed1b35d58d43a7889b21784c2828057e3d4c65f5028e56916d",
+      "bytes": 5843,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -751,8 +751,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3596,
-          "sha256": "379af6a53a59a46baea10a835854864a131da18cb3e3fd8c52eb1bbdadefa707",
+          "bytes": 3584,
+          "sha256": "b6e48baf570f3d70bbe86eda8bbdc90b90fccc7f278c444eafab69326a2d2aa5",
           "verification": "bytes-verified"
         }
       ],
@@ -815,7 +815,7 @@
   },
   "lastPreparation": {
     "objectId": "eris",
-    "materialSha256": "3ae997ceb9fa1994f2f667f519e9551e24be3752649a0f300c507a264a322ce6",
+    "materialSha256": "cf639580c7c8d1b604ba284abb4add63f0a89ec4c9955dc5bedfa3f44f4ea48d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

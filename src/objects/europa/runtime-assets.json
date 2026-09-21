@@ -2,11 +2,6 @@
   "schema": "csseuropa-runtime-assets@1",
   "assets": [
     {
-      "filename": "europa-coarse-ice@2x.webp",
-      "bytes": 40214,
-      "sha256": "3445290322e40e6b3f5bf745b69757e140bc89366377d989bf63137491a16e30"
-    },
-    {
       "filename": "europa-elevation@2x.webp",
       "bytes": 47256,
       "sha256": "e5407450266e800dfafade50ddceae75756150685d9fcc25b7f6694fefc57e08"
@@ -22,29 +17,14 @@
       "sha256": "d1354e460f8f51451224b448eee0dd1d20456edb33773912b094c041a417b6e8"
     },
     {
-      "filename": "europa-fine-ice@2x.webp",
-      "bytes": 37256,
-      "sha256": "8249b8c3fbcc7deec23cf39a11680b84d575abded14da051ca77c7d5670382b0"
-    },
-    {
       "filename": "europa-geology@2x.webp",
       "bytes": 77748,
       "sha256": "a3fd7b9f836f9d4c5e19c5f35da3da1b73fb7cd9974879ca81dae14dc99113a7"
     },
     {
-      "filename": "europa-ice-signature@2x.webp",
-      "bytes": 38392,
-      "sha256": "1cb04424881acf1fe3b1bf442ad8fdcb13dedde0320ed372a2a56dba09b2e11e"
-    },
-    {
       "filename": "europa-infrared@2x.webp",
       "bytes": 218316,
       "sha256": "36f9d2a251ae888cec5020aeb38a39235152d78d09c64b13f591c5819a1f6c37"
-    },
-    {
-      "filename": "europa-lens-coarse-ice.webp",
-      "bytes": 4454,
-      "sha256": "78eef448eb826f1a50fc56756ad375c28dcd0713a37e38f7f305a4f8cf5ddf8d"
     },
     {
       "filename": "europa-lens-elevation.webp",
@@ -57,19 +37,9 @@
       "sha256": "a63aa6f1354bfc04c6147d9a0146bab661a0ab3ba97ae2933203a1c4bdf96c02"
     },
     {
-      "filename": "europa-lens-fine-ice.webp",
-      "bytes": 4488,
-      "sha256": "e98011c7da839a2ba0093aa5c7a9b2819624cebf513fbb17f0d1aa8e0af2c46b"
-    },
-    {
       "filename": "europa-lens-geology.webp",
       "bytes": 470,
       "sha256": "697a5fbba5af0d0a2ea39cd3e0bc2ce3d82c4fd5176e7990a810713767d1558e"
-    },
-    {
-      "filename": "europa-lens-ice-signature.webp",
-      "bytes": 4320,
-      "sha256": "1d3747071e6b6dc8d776e686907651eb07c17c66322e899d3541488bef28be53"
     },
     {
       "filename": "europa-lens-infrared.webp",
@@ -252,11 +222,6 @@
       "sha256": "5e1f982d5483762ec96f269d88d9e4cd2645a06e4def0b1ba27d4d67179a87c9"
     },
     {
-      "filename": "europa-poles-coarse-ice@2x.webp",
-      "bytes": 8182,
-      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
-    },
-    {
       "filename": "europa-poles-elevation@2x.webp",
       "bytes": 9464,
       "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
@@ -267,19 +232,9 @@
       "sha256": "ac1f6fcc6023daabb208d8f491b2cb8c56a8d156707debdaeffac329e8a5520a"
     },
     {
-      "filename": "europa-poles-fine-ice@2x.webp",
-      "bytes": 8182,
-      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
-    },
-    {
       "filename": "europa-poles-geology@2x.webp",
       "bytes": 12962,
       "sha256": "88cb0181282a36a3cc302af263ce148031dde2b24c824535233995645a64723d"
-    },
-    {
-      "filename": "europa-poles-ice-signature@2x.webp",
-      "bytes": 8182,
-      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
     },
     {
       "filename": "europa-poles-infrared@2x.webp",

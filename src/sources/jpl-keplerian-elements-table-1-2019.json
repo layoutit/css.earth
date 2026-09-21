@@ -1,0 +1,24 @@
+{
+  "id": "jpl-keplerian-elements-table-1-2019",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "JPL Keplerian elements for approximate positions, Table 1 (2019 archive, with Pluto)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://web.archive.org/web/20190803153746/https://ssd.jpl.nasa.gov/txt/p_elem_t1.txt",
+      "label": "Internet Archive copy, 2019-08-03"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://web.archive.org/web/20190803153746/https://ssd.jpl.nasa.gov/txt/p_elem_t1.txt",
+      "checkedOn": "2026-09-21",
+      "locator": "Pluto row, J2000, valid 1800-2050: a = 39.48211675 AU. JPL's current approximate-positions page states Pluto has been removed."
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA/JPL Solar System Dynamics"
+}

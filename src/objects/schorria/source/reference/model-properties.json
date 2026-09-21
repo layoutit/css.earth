@@ -8,10 +8,10 @@
     "diameterKm": 5.55,
     "uncertaintyKm": 1.11,
     "reportedUncertaintyKm": null,
-    "uncertaintyMeaning": "Derived minimum20% diameter error prescribed by the source publication for its assumed-beaming fits; not an individually estimated statistical error.",
+    "uncertaintyMeaning": "Derived minimum 20% diameter error prescribed by the source publication for its assumed-beaming fits; not an individually estimated statistical error.",
     "systematicUncertaintyFraction": 0.2,
-    "systematicMeaning": "At least20% total relative diameter uncertainty under the fixed-beaming fit; further shape/aspect effects can remain.",
-    "quantity": "NEATM effective spherical diameter from W2 data with assumed beaming1.20",
+    "systematicMeaning": "At least 20% total relative diameter uncertainty under the fixed-beaming fit; further shape/aspect effects can remain.",
+    "quantity": "NEATM effective spherical diameter from W2 data with assumed beaming 1.20",
     "sourceUrl": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/603/A55/table1.dat",
     "reference": "Alí-Lagoa & Delbo (2017), A&A603,A55",
     "referenceUrl": "https://doi.org/10.1051/0004-6361/201629917",
@@ -49,7 +49,7 @@
     "approximate": true,
     "limitations": [
       "The thermal effective spherical diameter is used as an approximate volume-equivalent display scale; no joint shape/thermal inversion or independently measured volume is implied.",
-      "The5.55 km W2-only diameter has an assumed beaming parameter and at least20% uncertainty; the exceptionally slow spin makes full rotation coverage especially incomplete."
+      "The 5.55 km W2-only diameter has an assumed beaming parameter and at least 20% uncertainty; the exceptionally slow spin makes full rotation coverage especially incomplete."
     ],
     "sourceLabel": "Alí-Lagoa & Delbo (2017), A&A603,A55",
     "visibleDescription": "Approximate scale from a single-band thermal diameter of 5.55 km, with at least 20% uncertainty (1.11 km)."

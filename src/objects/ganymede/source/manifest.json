@@ -87,7 +87,7 @@
         "surfaces"
       ],
       "lensId": "enhanced",
-      "label": "Enhanced color",
+      "label": "False color",
       "falseColor": true,
       "width": 11520,
       "height": 5760,
@@ -692,8 +692,8 @@
     {
       "id": "ganymede-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 14003,
-      "expectedSha256": "078b431d900f4e56696bdef15001c93a96c8b35f5d5ff0faa38287c6c4195962",
+      "expectedBytes": 10988,
+      "expectedSha256": "e27869b3bb82ed1abe6b13f58cf11dd7d6308866130f072ddea21183bc2ced9d",
       "origin": "Repository-authored Ganymede raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -805,8 +805,8 @@
     {
       "id": "ganymede-object-content",
       "path": "content/object.json",
-      "expectedBytes": 21413,
-      "expectedSha256": "baf635c08383909e568fa7829ea06967b05300aed4a8755cd243c11f2afb63e8",
+      "expectedBytes": 17872,
+      "expectedSha256": "115e59f56a30b7a4947fc915d0db704046957ea24bd105531ebd06bdfe208880",
       "origin": "Repository-authored Ganymede object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -835,11 +835,8 @@
       "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
-        "dark-material"
+        "composition-source"
       ],
-      "lensId": "dark-material",
-      "label": "Dark material",
-      "falseColor": true,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -919,11 +916,8 @@
       "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
-        "ice-fraction"
+        "composition-source"
       ],
-      "lensId": "ice-fraction",
-      "label": "Ice fraction",
-      "falseColor": true,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -993,8 +987,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2348,
-      "expectedSha256": "f058d12830f361e850686508a73b90d5a3d12ed776e571eb736d61f594e0b3e9"
+      "expectedBytes": 2825,
+      "expectedSha256": "6a71d3a818b0ef3d5cb6616d44ed98692196808c497949112038c20651169174"
     },
     {
       "id": "usgs-sim3237-geologyunitpoints-dbf",

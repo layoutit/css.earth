@@ -25,7 +25,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 A publication scale is transferred uniformly to the archived mesh of the same nominal pole family. Identity of every vertex with the publication fit is not established. No local topographic or material accuracy follows from the diameter uncertainty.
 
-An alternative pole remains possible. Select Hanuš (2011) nominal pole1 model327 (32,48), with328 (198,25) retained. Hanuš et al. (2018), TableA.3, explicitly gives VS-TPM volume-equivalent35.3 ±0.9 km for this nominal pole and period11.9765 h; use this shape-aware calibration instead of AKARI39.33 ±0.44 km.
+An alternative pole remains possible. Select Hanuš (2011) nominal pole 1 model 327 (32,48), with 328 (198,25) retained. Hanuš et al. (2018), TableA.3, explicitly gives VS-TPM volume-equivalent 35.3 ±0.9 km for this nominal pole and period 11.9765 h; use this shape-aware calibration instead of AKARI39.33 ±0.44 km.
 
 The varied-shape ensemble does not establish identical mesh bytes or local shape accuracy, and its alternative pole remains possible.
 

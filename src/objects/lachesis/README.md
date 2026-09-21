@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš2016 reports35 dense curves across four apparitions and467 sparse measurements. Hanuš2021 sparse-data result has period46.541 h versus archive46.55076 h, so the later survey is a comparison, not silently substituted geometry.
+AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš 2016 reports 35 dense curves across four apparitions and 467 sparse measurements. Hanuš 2021 sparse-data result has period 46.541 h versus archive 46.55076 h, so the later survey is a comparison, not silently substituted geometry.
 
 The scene rotation is illustrative; no precision phase claim is made.
 

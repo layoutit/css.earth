@@ -7,12 +7,15 @@ Source selections, recorded trials and open questions are in the [investigation 
 The visible-color surface is the rotation-A global map from
 [Hubble OPAL Uranus Cycle 33](https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33),
 observed in October 2025. The checked composite combines F467M, F547M, and
-F657N. FQ727N and F845M FITS maps supply two separately prepared false-color
+F657N; the OPAL readme says its color maps carry "slight contrast
+enhancement". FQ727N and F845M FITS maps supply two separately prepared false-color
 observation lenses. Their palettes and percentile stretches are declared in
 `source/preparation/observations.json`; no browser filtering is used.
 
 Ring radii, widths, and normal optical depths come from the
 [PDS Rings Node Uranus table](https://pds-rings.seti.org/uranus/uranus_rings_table.html).
+The table gives the Epsilon ring's optical depth as "0.5 to 2.3"; the recipe's
+1.4 is the midpoint of that range, chosen for display.
 Preparation verifies the table labels and measurements before drawing the
 rings straight from the recipe as 16 wedges in one atlas at the canonical
 density. Each wedge starts outside the planet, so the planet hides the rings'

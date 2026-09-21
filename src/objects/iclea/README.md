@@ -13,7 +13,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 Checked 2026-09-09. Selected DAMIT model **5017**, version **2023-10-03**. DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2023); model 5017, version 2023-10-03.
 
-Convex light-curve reconstruction scaled by stellar occultations: 86 km volume-equivalent diameter (model range79–99 km). Neutral gray marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction scaled by stellar occultations: 86 km volume-equivalent diameter (model range 79–99 km). Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -23,9 +23,9 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Marciniak2023 §5.3 prefers pole1(31,13) based on the only available three-chord occultation, agreement with independent period/pole recovery, and inconsistent smaller size for pole2. Table1 gives volume-equivalent86 km with asymmetric interval79–99 km; these limits reflect model vertical-stretch variation, not Gaussian local surface error.
+Marciniak 2023 §5.3 prefers pole 1(31,13) based on the only available three-chord occultation, agreement with independent period/pole recovery, and inconsistent smaller size for pole 2. Table 1 gives volume-equivalent 86 km with asymmetric interval 79–99 km; these limits reflect model vertical-stretch variation, not Gaussian local surface error.
 
-The archive keeps the larger13 km side as a symmetric error field; the actual asymmetric range is preserved here.
+The archive keeps the larger 13 km side as a symmetric error field; the actual asymmetric range is preserved here.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

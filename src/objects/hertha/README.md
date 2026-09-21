@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Hanuš2017 fits optical light curves, two disk-resolved AO images and one18-chord occultation. Archive D79±2 km is retained rather than paper ensemble D80±2 km. No resolved albedo or regolith map is supplied.
+Hanuš 2017 fits optical light curves, two disk-resolved AO images and one 18-chord occultation. Archive D79±2 km is retained rather than paper ensemble D80±2 km. No resolved albedo or regolith map is supplied.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

@@ -3,7 +3,7 @@
   "modelId": 1152,
   "modelVersion": "2016-01-04",
   "diameterKm": 44.2,
-  "diameterInterpretation": "Convex light-curve shape with published thermophysical size calibration: 44.2 ± 1 km volume-equivalent diameter. The nominal archived pole differs by1°from the varied-model fit. Grid marks unavailable imagery; rotational phase is illustrative.",
+  "diameterInterpretation": "Convex light-curve shape with published thermophysical size calibration: 44.2 ± 1 km volume-equivalent diameter. The nominal archived pole differs by 1° from the varied-model fit. Grid marks unavailable imagery; rotational phase is illustrative.",
   "calibration": {
     "method": "published-volume-equivalent-size-transfer",
     "diameterKm": 44.2,
@@ -12,17 +12,17 @@
     "uncertaintyKind": "Reported VS-TPM spread accounting for shape/pole variation; physical mesh realization remains a nominal archived solution, not exact ensemble geometry",
     "diameterSemantics": "Volume-equivalent diameter explicitly defined in Hanuš et al.2018TableA.3 using the same published convex shape/pole family.",
     "sourceUrl": "https://arxiv.org/pdf/1803.06116",
-    "reference": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus309,297–337, TableA.3; doi:10.1016/j.icarus.2018.03.016",
+    "reference": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus 309,297–337, TableA.3; doi:10.1016/j.icarus.2018.03.016",
     "publishedPoleEclipticDegrees": [
       280,
       61
     ],
     "publishedPeriodHours": 11.79214,
-    "limitations": "Petrina nominal DAMIT1152 lambda281°differs by1°from the reported varied-shape fit280°; beta61°and period11.79214h agree. Alternative model1153 is not used. This is a uniform size transfer within the same shape/pole family, not a claim of identical ensemble mesh bytes.",
+    "limitations": "Petrina nominal DAMIT1152 lambda 281° differs by 1° from the reported varied-shape fit 280°; beta 61° and period 11.79214h agree. Alternative model 1153 is not used. This is a uniform size transfer within the same shape/pole family, not a claim of identical ensemble mesh bytes.",
     "scaleKmPerSourceUnit": 35.625022316728035,
     "metersPerSourceUnit": 35625.022316728035,
-    "sourceLabel": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus309,297–337, TableA.3; doi:10.1016/j.icarus.2018.03.016",
-    "visibleDescription": "Convex light-curve shape with published thermophysical size calibration: 44.2 ± 1 km volume-equivalent diameter. The nominal archived pole differs by1°from the varied-model fit. Grid marks unavailable imagery; rotational phase is illustrative."
+    "sourceLabel": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus 309,297–337, TableA.3; doi:10.1016/j.icarus.2018.03.016",
+    "visibleDescription": "Convex light-curve shape with published thermophysical size calibration: 44.2 ± 1 km volume-equivalent diameter. The nominal archived pole differs by 1° from the varied-model fit. Grid marks unavailable imagery; rotational phase is illustrative."
   },
   "periodHours": 11.79214,
   "poleEclipticJ2000Degrees": [

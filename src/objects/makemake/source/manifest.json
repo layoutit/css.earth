@@ -3,11 +3,11 @@
   "inputs": [
     {
       "path": "measurements.json",
-      "expectedBytes": 585,
-      "expectedSha256": "664a8deafff78a4db0ccd77181ec563b0dc2d01c7f7ddd73a3d20a2786d11925",
+      "expectedBytes": 916,
+      "expectedSha256": "6f90191be7ed33e7a2f5a84f5b1b9cb36ab971219c8831b2236af69b4f651dfa",
       "id": "nasa-makemake-size",
       "origin": "https://science.nasa.gov/dwarf-planets/makemake/",
-      "credit": "NASA Science; projected size comparison Ortiz et al. (2012)",
+      "credit": "NASA Science; rotation period Hromakina et al. (2019); projected size comparison Ortiz et al. (2012)",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Transcribed approximate radius and reported periods; spherical display approximation",
       "redistribution": "Factual parameter transcription only; no article figures",
@@ -21,6 +21,11 @@
             "catalogueId": "source-makemake-nasa-makemake-size",
             "role": "material",
             "evidence": "src/planets/makemake/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          },
+          {
+            "catalogueId": "hromakina-2019-makemake",
+            "role": "material",
+            "evidence": "src/objects/makemake/source/measurements.json#/rotationPeriodHours"
           }
         ]
       }
@@ -211,8 +216,8 @@
     {
       "id": "makemake-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1609,
-      "expectedSha256": "523a92dbc0e89c24022aff1bd6cb5a6cb85bb9cbd5643546be5c99e5c4ef8152",
+      "expectedBytes": 1611,
+      "expectedSha256": "0619cf2990aba74e2af6bd3ca12693e8a7391bcfec5ab025dd22a0a03af790ed",
       "origin": "Repository-authored Makemake geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -323,8 +328,8 @@
     {
       "id": "makemake-object-content",
       "path": "content/object.json",
-      "expectedBytes": 10454,
-      "expectedSha256": "0859ffeca6e2458fd1fecb8a80998e2c0fb06666f217be9a6b53fa069e547c82",
+      "expectedBytes": 10448,
+      "expectedSha256": "63a5f14f0e85899f07b20ff053f448bd0e3baefbd1519c7f81a46f6ec3998193",
       "origin": "Repository-authored Makemake object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš2021 TableA.2 reports316 ASAS-SN observations and both poles(173,-7)/(355,13). Its catalog diameter128.7 km differs from AKARI143.77 km; neither number is established as this mesh physical volume.
+AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš 2021 TableA.2 reports 316 ASAS-SN observations and both poles(173,-7)/(355,13). Its catalog diameter 128.7 km differs from AKARI143.77 km; neither number is established as this mesh physical volume.
 
 The pinned AKARI effective diameter is used only as a stated scale approximation.
 

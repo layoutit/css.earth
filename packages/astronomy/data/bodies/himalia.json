@@ -9,7 +9,7 @@
     "gravitationalParameterKm3PerS2": 0.15155,
     "parent": "jupiter"
   },
-  "physicalNotes": "Buie et al. (2015) primary axes; JPL primary GM. Physical primary, not binary barycenter.",
+  "physicalNotes": "Radius 85 km and GM 0.15155 km^3/s^2 from the JPL Planetary Satellite Physical Parameters table (JUP344; https://ssd.jpl.nasa.gov/sats/phys_par/).",
   "satellite": {
     "parent": "jupiter",
     "horizonsCode": "506",

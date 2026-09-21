@@ -53,7 +53,8 @@ test("Pluto science lenses keep their prepared legends and false-colour declarat
   for (const control of lenses.controls) {
     const shell = required(byId.get(control.id));
     assert.equal(typeof Object.getOwnPropertyDescriptor(text.datasets, control.id)?.value?.summary, "string");
-    if (control.falseColor) assert.ok(shell.legend, `${control.id} declares a false-colour scale without a legend`);
+    // The enhanced-colour surface is a three-filter composite, false colour without a scale; science lenses carry one.
+    if (control.falseColor && control.id !== "surface") assert.ok(shell.legend, `${control.id} declares a false-colour scale without a legend`);
     if (shell.legend?.kind === "scale") assert.ok((shell.legend.colors?.length ?? 0) >= 2 && (shell.legend.labels?.length ?? 0) >= 2);
   }
 });

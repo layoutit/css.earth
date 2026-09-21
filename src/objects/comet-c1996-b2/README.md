@@ -4,13 +4,13 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 Hyakutake passed just 0.10 AU from Earth in March 1996. Its close approach made it a striking sight despite its much smaller nucleus than Hale–Bopp’s.
 
-One **Shape approximation** dataset shows an ellipsoid at the published effective nucleus radius of 1.25 km (Harmon et al. (1997), Science 278, 1921). The whole surface carries the missing-imagery grid. Shadows defaults off.
+One **Shape approximation** dataset shows a sphere of radius 1.25 km, the midpoint of Harmon et al.'s 2-3 km diameter range (Harmon et al. (1997), Science 278, 1921). The whole surface carries the missing-imagery grid. Shadows defaults off.
 
 ## Sources
 
 | Source | What it supplies |
 | --- | --- |
-| [Shape parameters](source/shape/model.json) | Published effective nucleus radius and shape statement from [Harmon et al. (1997), Science 278, 1921](https://doi.org/10.1126/science.278.5345.1921), tessellated as a smooth ellipsoid. |
+| [Shape parameters](source/shape/model.json) | Radar nucleus diameter range (2-3 km) from [Harmon et al. (1997), Science 278, 1921](https://doi.org/10.1126/science.278.5345.1921), tessellated as a smooth ellipsoid. |
 | [JPL elements](source/reference/horizons-elements.txt) and [independent vectors](source/reference/horizons-vectors.txt) | Heliocentric ICRF position at JD2461286.5, 3 September 2026 TT. |
 
 [Selection, alternatives and assumptions](source/reference/source-record.json) explain the sources and factsheet derivations. [Credits and reuse terms](NOTICE.md) accompany the pinned inputs.
@@ -23,13 +23,13 @@ Run of 2026-09-16 (this version): `node tools/objects/dist/prepare-authored.js c
 
 ## Known problems
 
-The ellipsoid is a smooth approximation at a published effective radius, not a measured nucleus reconstruction. Unresolved; the midpoint of the radar diameter range is displayed as a sphere. No surface imagery, measured pole, rotation period, current phase, tail or coma is represented. The fixed attitude is illustrative.
+The ellipsoid is a smooth approximation at the midpoint of Harmon et al.'s 2-3 km diameter range, not a measured nucleus reconstruction. Unresolved; the midpoint of the radar diameter range is displayed as a sphere. No surface imagery, measured pole, rotation period, current phase, tail or coma is represented. The fixed attitude is illustrative.
 
 Position is fixed at the explorer's epoch; nearby conics are placement approximations, not long-term ephemerides or outgassing predictions. Horizons TDB differs from the stated TT epoch by less than 2 ms.
 
 <details>
 <summary>Shape preparation</summary>
 
-The published effective radius scales a subdivided octahedron with the stated axis ratios as a volume-equivalent ellipsoid, in metres, reduced offline to 800 display triangles. The camera uses the same radius. Geometry, grid texels, optional shadows and lighting are prepared once; the browser performs no runtime mesh work.
+The 1.25 km midpoint radius scales a subdivided octahedron with the stated axis ratios as a volume-equivalent ellipsoid, in metres, reduced offline to 800 display triangles. The camera uses the same radius. Geometry, grid texels, optional shadows and lighting are prepared once; the browser performs no runtime mesh work.
 
 </details>

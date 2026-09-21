@@ -13,7 +13,7 @@
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1810",
     "reference": "DAMIT model 1810",
     "sourceLabel": "DAMIT model 1810",
-    "limitations": "Hanuš2017 confirms the pole family using disk-resolved AO imaging, light curves and occultations. Section on129 describes eight AO images while TableA.1 lists nine; this discrepancy is retained. Archive D126±3 km is retained; local shape accuracy is not the diameter uncertainty.",
+    "limitations": "Hanuš 2017 confirms the pole family using disk-resolved AO imaging, light curves and occultations. Section on 129 describes eight AO images while TableA.1 lists nine; this discrepancy is retained. Archive D126±3 km is retained; local shape accuracy is not the diameter uncertainty.",
     "visibleDescription": "Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations. The selected archive gives 126 ± 3 km equivalent-volume size; its size error is not local shape accuracy. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 0.9984514137134876,
     "metersPerSourceUnit": 998.4514137134876
@@ -23,7 +23,7 @@
     205,
     63
   ],
-  "modelLimitations": "Hanuš2017 confirms the pole family using disk-resolved AO imaging, light curves and occultations. Section on129 describes eight AO images while TableA.1 lists nine; this discrepancy is retained. Archive D126±3 km is retained; local shape accuracy is not the diameter uncertainty.",
+  "modelLimitations": "Hanuš 2017 confirms the pole family using disk-resolved AO imaging, light curves and occultations. Section on 129 describes eight AO images while TableA.1 lists nine; this discrepancy is retained. Archive D126±3 km is retained; local shape accuracy is not the diameter uncertainty.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/401/shape.txt",
     "vertices": 402,

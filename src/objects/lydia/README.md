@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Delbo and Tanga (2009) supplementary section on Lydia explicitly choose pole1 (149.3,-55), matching model152, because it fits slightly better (reduced chi-square0.7 versus0.76). The second pole remains possible. Its IRAS thermophysical diameter range is90–92 km versus94–97 km for pole2; the archive stores91±1 km.
+Delbo and Tanga (2009) supplementary section on Lydia explicitly choose pole 1 (149.3,-55), matching model 152, because it fits slightly better (reduced chi-square 0.7 versus 0.76). The second pole remains possible. Its IRAS thermophysical diameter range is 90–92 km versus 94–97 km for pole 2; the archive stores 91±1 km.
 
 DAMIT represents the published 90–92 km thermophysical fit range as 91±1 km. This is a fit range, not an independently stated one-sigma Gaussian confidence interval or a local shape-accuracy bound.
 

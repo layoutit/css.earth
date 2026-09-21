@@ -13,7 +13,7 @@
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1799",
     "reference": "DAMIT model 1799",
     "sourceLabel": "DAMIT model 1799",
-    "limitations": "Hanuš2017 fits optical light curves, two disk-resolved AO images and one18-chord occultation. Archive D79±2 km is retained rather than paper ensemble D80±2 km. No resolved albedo or regolith map is supplied.",
+    "limitations": "Hanuš 2017 fits optical light curves, two disk-resolved AO images and one 18-chord occultation. Archive D79±2 km is retained rather than paper ensemble D80±2 km. No resolved albedo or regolith map is supplied.",
     "visibleDescription": "Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations, 79 ± 2 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 0.9984548643441234,
     "metersPerSourceUnit": 998.4548643441234
@@ -23,7 +23,7 @@
     276,
     53
   ],
-  "modelLimitations": "Hanuš2017 fits optical light curves, two disk-resolved AO images and one18-chord occultation. Archive D79±2 km is retained rather than paper ensemble D80±2 km. No resolved albedo or regolith map is supplied.",
+  "modelLimitations": "Hanuš 2017 fits optical light curves, two disk-resolved AO images and one 18-chord occultation. Archive D79±2 km is retained rather than paper ensemble D80±2 km. No resolved albedo or regolith map is supplied.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/427/shape.txt",
     "vertices": 402,

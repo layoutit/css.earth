@@ -326,8 +326,8 @@
     {
       "id": "pluto-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "26d513a6a1e78783eb3f8c5891f34f493ea4b735d3947464527b966d84b6d34f",
-      "expectedBytes": 14682,
+      "expectedSha256": "13e4cb36e7f93b98cd0f734012e0c77776fbb44e1d64bd836ac54cee361bbcf9",
+      "expectedBytes": 14681,
       "origin": "Repository-authored Pluto raster preparation recipe (generic sphere lane) carrying the science interpretation blocks of the retired static recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -439,8 +439,8 @@
     {
       "id": "pluto-object-content",
       "path": "content/object.json",
-      "expectedSha256": "3185975cf2058f46d3407ddebece117d125f8cadd839cb051376d17c763aca9a",
-      "expectedBytes": 15343,
+      "expectedSha256": "c79481e15b286e098344f470cfbf26d6cf4e085dd959beaae45f5fc215117326",
+      "expectedBytes": 15500,
       "origin": "Repository-authored Pluto panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -548,8 +548,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1493,
-      "expectedSha256": "e77b24e9c776e0d0b32e570fdc1c91489666b8f6e134c5751c03df2a9d59cb81"
+      "expectedBytes": 1665,
+      "expectedSha256": "50a49b41120574d94c80f2f073a5e86ca8e40ceeb0644cac6c774f8d7fad73c8"
     },
     {
       "id": "pluto-surface-feature-notes",

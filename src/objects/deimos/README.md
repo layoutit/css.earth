@@ -14,13 +14,13 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
 
-| View | Original grid | Both lighting images, before → current |
+| View | Original grid | Both lighting images (surface + shadow) |
 | --- | --- | --- |
-| normal | 7200 × 3600 | 2.29 → 2.23 MB |
+| normal | 7200 × 3600 | 2.35 MB (1,605,298 + 742,076 bytes) |
 
-Each atlas remains 2048 × 12800 pixels, with 1600 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/deimos/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
+Each atlas is 5019 × 5222 pixels, with 1600 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/deimos/prepared). WebP quality is 95. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
 
-- Stooke's map guide identifies the added HiRISE observations ESP_012065_9000 and ESP_012068_9000 and revised control near 60°E.
+- [Stooke's map guide](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html) identifies the added HiRISE observations ESP_012065_9000 and ESP_012068_9000 and revised control near 60°E.
 
 - Four barycentric samples per retained face gave a maximum distance of 69.40 m for Deimos; these are sampled rendering errors, not source measurement uncertainty or an exhaustive bound.
 
@@ -59,7 +59,7 @@ The [SBMT March 2025 release](https://sbmt.jhuapl.edu/shared-files/) supplies ve
 
 The vendored astronomy package supplies Mars-relative orbit, size and IAU orientation at the shared scene date. The newer shape and older mosaic have separate control histories, so geographic registration and shape extremities require visual inspection.
 
-Exact originals and acquisition URLs are pinned in `source/manifest.json`. The map guide and SBMT label remain beside the package. Prepared textures, minimaps and shape-correct navigation images share the same source interpretation. No private controller or body-specific shell is introduced.
+Exact originals and acquisition URLs are pinned in `source/manifest.json`. The [map guide](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html) is cited, not retained; it states that the maps are in the public domain but should not be used without proper credit. The SBMT label remains beside the package. Prepared textures, minimaps and shape-correct navigation images share the same source interpretation. No private controller or body-specific shell is introduced.
 
 ## B2 facet science and terrain
 

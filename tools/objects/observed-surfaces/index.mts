@@ -7,6 +7,7 @@ import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';
 import { readFitsPrimary } from '../observation/fits.mts';
+import { planetographicRowsToMeshLatitude } from '../material-composition/ellipsoid.mts';
 import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-surface-raster.mts';
 
 
@@ -240,6 +241,8 @@ export async function prepareObservedSurfaces({sourceDirectory,publicDirectory,c
       if(!baseline || !baseline.provenance)throw new TypeError('Observation baseline is undefined.');map=completeUniformCoverage(map,{color:baseline.color,provenance:baseline.provenance},lens.coverage);
     }
     if(calibration){const data=Buffer.allocUnsafe(map.data.length);for(let offset=0;offset<data.length;offset+=3)for(let c=0;c<3;c++)data[offset+c]=Math.round(clamp(map.data[offset+c]*calibration.scale[c]+calibration.offset[c],0,255));map={...map,data,calibration};}
+    // Maps indexed by planetographic latitude move to the parametric rows of the drawn ellipsoid.
+    if(lens.planetographicAxisRatio!==undefined)map={...map,data:planetographicRowsToMeshLatitude(map.data,map.width,map.height,map.channels,lens.planetographicAxisRatio)};
     const nativePoleMap=map,transformedMap=await transformMap(map,lens.transforms);
     if(lens.atmosphereColor)transformedMap.atmosphereColor=brightTailColor(transformedMap.data,lens.atmosphereColor);maps.set(lens.id,transformedMap);
     for(const product of productKinds?lens.products.filter(product=>productKinds.includes(product.kind)):lens.products){

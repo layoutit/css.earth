@@ -39,7 +39,7 @@ The source workbook has a 2023-04-16 label despite event/year fields saying 2021
 
 **Selected geometry**
 
-Directly adopt published inferred semiaxes; do not renormalize to 370km volume-equivalent diameter.
+Directly adopt published inferred semiaxes; do not renormalize to 370 km volume-equivalent diameter.
 
 **Orbit and orientation**
 
