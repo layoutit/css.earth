@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createPreparedContextNavigation } from '../prepared-context-navigation.mts';
+import { overviewScopeFromUrl, preparedFocusFromUrl } from '../navigation-scope.mts';
 import { isPreparedCluster } from '@cssearth/catalog';
 import type { PreparedFocusPresentation } from '../prepared-context-navigation.mts';
 import type { PreparedCatalogObject, PreparedGalaxyRecord, PreparedClusterRecord, SpatialCatalogSource, SpatialCitation } from '@cssearth/catalog';
@@ -419,5 +420,23 @@ test('shared context receives the exact authoritative focus on restore, switch a
   f.owner.setPreparedFocus(null);
   assert.equal(f.presentationFocuses.at(-1), null);
   f.controller.suspend(); await selecting;
+  f.controller.destroy();
+});
+
+test('a focus waiting for its lazy bank still owns the URL, and resolves to one state', async () => {
+  const bank = volumeBank();
+  const f = fixture({ volumeLensFrames, deferredVolumeBank: bank, object: { detailedObjectId: bank.objectId } });
+  f.windowTarget.location = new URL('https://example.test/sun/?overview=system&focus=catalogue:a');
+  const restoring = f.controller.restore(f.windowTarget.location.href);
+  // The runtime cannot report this focus yet, but the URL names it, so nothing
+  // may treat the selection as absent and write an overview over it.
+  assert.equal(f.owner.preparedFocus(), null);
+  assert.equal(preparedFocusFromUrl(f.windowTarget.location.href), 'catalogue:a');
+  assert.equal(overviewScopeFromUrl(f.windowTarget.location.href), null, 'a pending focus leaves no overview to resolve');
+  f.resolveDeferredVolumeBank(); await restoring;
+  assert.equal(f.owner.preparedFocus()?.id, 'catalogue:a');
+  assert.equal(f.windowTarget.location.searchParams.get('focus'), 'catalogue:a');
+  assert.equal(f.windowTarget.location.searchParams.has('overview'), false, 'exactly one state survives');
+  assert.deepEqual(f.errors, []);
   f.controller.destroy();
 });

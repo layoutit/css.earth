@@ -797,12 +797,15 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const renderSelectionContext = () => {
     const focused = Boolean(preparedFocus);
     const focusId = preparedFocus?.id ?? '';
-    const galactic = overview && overviewScope === 'milky-way';
+    // A focus and an overview select the same camera, so one card answers for the
+    // selection. The focus wins, including while an overview the incoming URL
+    // still carries has not been resolved away yet.
+    const galactic = !focused && overview && overviewScope === 'milky-way';
     const neighborCard = largeScaleCards.find(card => card.dataset.largeScaleOverview === 'local-group');
     const galaxySelected = focused && neighborCard
       && [...neighborCard.querySelectorAll<HTMLElement>('[data-neighbor-id]')]
         .some(row => row.dataset.neighborId === focusId);
-    const largeScale = galaxySelected ? neighborCard : overview
+    const largeScale = galaxySelected ? neighborCard : !focused && overview
       ? largeScaleCards.find(card => card.dataset.largeScaleOverview === overviewScope) : undefined;
     if (neighborCard && (galaxySelected || galactic || largeScale === neighborCard)) {
       selectGalaxyNeighbor(neighborCard, galaxySelected ? focusId : 'milky-way');
@@ -810,7 +813,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     for (const card of largeScaleCards) setPanelHidden(card, card !== largeScale);
     if (focusCard) setPanelHidden(focusCard, !focused);
     if (galaxy) setPanelHidden(galaxy, !galactic);
-    const systemSelected = overview && overviewScope === 'system';
+    const systemSelected = !focused && overview && overviewScope === 'system';
     if (system) setPanelHidden(system, !systemSelected);
     const showContext = focused || galactic || Boolean(largeScale) || systemSelected;
     setPanelHidden(information, showContext);
