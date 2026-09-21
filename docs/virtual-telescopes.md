@@ -778,6 +778,8 @@ explicit caller choice. The native source and resampled float FITS remain availa
 RGBA8/KTX2 display approximation; transparent voxels outside the measured 1.5–4.0 solar-radius
 shell do not become zero-density measurements.
 
+![The prepared COR1-B electron-density display rotating around the Sun; this is a visual approximation of the measured shell, not a native FITS rendering](images/telescopes/sun-cor1-density-rotation.gif)
+
 ```sh
 pnpm telescope explore sun --family F16 --out work/sun-f16
 pnpm telescope get work/sun-f16 --pick 1
