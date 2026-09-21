@@ -19,6 +19,7 @@ export interface FamilyEvidenceOwner { readonly kind: ObservationFamilyEvidence[
 export const STEREO_COR1_F16_PROFILE = 'stereo-secchi-cor1-electron-density@2025-05-06' as const;
 export const JUNO_MWR_NH3_F16_PROFILE = 'juno-mwr-nh3-distribution@2024-10-22' as const;
 export const CONSERT_FSS_GEOMETRY_F16_PROFILE = 'consert-fss-body-fixed-geometry@2019-02-19' as const;
+export const MRO_SHARAD_3D_F16_PROFILE = 'mro-sharad-3d-array@2025-10-22' as const;
 
 export function productTypeFamilyEvidence(mapping: ProductTypeMapping | null, owner: FamilyEvidenceOwner): ObservationFamilyEvidence {
   return { schema: OBSERVATION_FAMILY_EVIDENCE_SCHEMA, families: mapping?.families ?? [], status: mapping?.status ?? 'unmapped',
@@ -48,6 +49,12 @@ const ARCHIVE_FAMILY_PROFILES: Readonly<Record<string, ArchiveFamilyProfile>> = 
     vocabulary: 'NASA PDS JNOMWR_2100 NH3A/NH3U', vocabularyVersion: '2024-10-22',
     documentation: 'https://atmos.nmsu.edu/PDS/data/jnomwr_2100/AAREADME.TXT', kind: 'table', decoder: 'pds-product',
     requiredIdentity: { DATA_SET_ID: 'JNO-J-MWR-5-NH3-DISTRIBUTION-V1.0', PRODUCT_ID: 'MWRNH3A2016240070004_R00548_V01.CSV', TARGET_NAME: 'JUPITER', INSTRUMENT_ID: 'MWR' },
+  },
+  [MRO_SHARAD_3D_F16_PROFILE]: {
+    id: MRO_SHARAD_3D_F16_PROFILE, families: ['F16'], sourceTerm: 'Byte ranges of an MRO SHARAD three-dimensional delay-time radargram on projected X, projected Y and two-way delay axes',
+    vocabulary: 'NASA PDS mro_sharad_3d Array_3D', vocabularyVersion: '2025-10-22',
+    documentation: 'https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/readme.txt', kind: 'table', decoder: 'pds-product',
+    requiredIdentity: { DATA_SET_ID: 'MRO-M-SHARAD-5-3D-V1.0', TARGET_NAME: 'MARS', INSTRUMENT_ID: 'SHARAD' },
   },
   [CONSERT_FSS_GEOMETRY_F16_PROFILE]: {
     id: CONSERT_FSS_GEOMETRY_F16_PROFILE, families: ['F16'], sourceTerm: 'CONSERT level-4 orbiter and lander positions at each sounding in the 67P Comet Fixed Frame',

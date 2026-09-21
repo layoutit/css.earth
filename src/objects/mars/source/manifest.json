@@ -536,6 +536,70 @@
       }
     },
     {
+      "id": "pds-mro-sharad-3d-east-deuteronilus-frame-x0640-y0710",
+      "path": "telescopes/mro-sharad-3d/slices/frame-x0640-y0710.dat",
+      "expectedBytes": 14400,
+      "expectedSha256": "0174c70a5c27553816b6fb84c73d131c47314ce7d8960916551a3cdd2ffbbe67",
+      "range": {
+        "offset": 13096944000,
+        "length": 14400
+      },
+      "origin": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/data/east_deuteronilus_mensae_3d_v2_time.dat",
+      "credit": "NASA/JPL MRO SHARAD team, Planetary Science Institute, and the NASA PDS Geosciences Node",
+      "license": "NASA scientific data; archive citation requested",
+      "licenseEvidence": [
+        "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/readme.txt"
+      ],
+      "acquisition": "One range request for the delay frame at X index 640 and Y index 710, restored 2026-09-21. The label's axis arithmetic places that frame at this offset, and the 26,173,440,000-byte member is never fetched whole.",
+      "redistribution": "Exact archive bytes of one fixed-length record, retained with credit",
+      "consumers": [
+        "telescope-api"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-mro-sharad-3d-radargram-bundle",
+            "role": "material",
+            "evidence": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/data/east_deuteronilus_mensae_3d_v2_time.dat",
+            "locator": "bytes 13096944000-13096958399; record 909511 of 1817600"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pds-mro-sharad-3d-east-deuteronilus-plane-x0640",
+      "path": "telescopes/mro-sharad-3d/slices/plane-x0640.dat",
+      "expectedBytes": 20448000,
+      "expectedSha256": "ac87f803be52929e80e32595df5c0a18d4852fe78a01cfb3e3a9119acecf49c1",
+      "range": {
+        "offset": 13086720000,
+        "length": 20448000
+      },
+      "origin": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/data/east_deuteronilus_mensae_3d_v2_time.dat",
+      "credit": "NASA/JPL MRO SHARAD team, Planetary Science Institute, and the NASA PDS Geosciences Node",
+      "license": "NASA scientific data; archive citation requested",
+      "licenseEvidence": [
+        "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/readme.txt"
+      ],
+      "acquisition": "One range request for every frame at X index 640, restored 2026-09-21: 1420 consecutive fixed-length records, the contiguous radargram plane the label's axis order implies.",
+      "redistribution": "Exact archive bytes of one contiguous radargram plane, retained with credit",
+      "consumers": [
+        "telescope-api"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-mro-sharad-3d-radargram-bundle",
+            "role": "material",
+            "evidence": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/data/east_deuteronilus_mensae_3d_v2_time.dat",
+            "locator": "bytes 13086720000-13107167999; records 908801 to 910220 of 1817600"
+          }
+        ]
+      }
+    },
+    {
       "id": "pds-mro-sharad-3d-east-deuteronilus-label",
       "path": "telescopes/mro-sharad-3d/east_deuteronilus_mensae_3d_v2_time.xml",
       "expectedBytes": 11270,
@@ -762,25 +826,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
-      }
-    },
-    {
-      "id": "mars-mro-sharad-3d-bounded-product",
-      "path": "telescopes/mro-sharad-3d/bounded-product.json",
-      "expectedBytes": 3983,
-      "expectedSha256": "500332f9f181f5543c7365dc49a8ecc858be8908154829ec55b95d4d4202b058",
-      "origin": "Repository-authored record of the MRO SHARAD 3-D product read by bounded byte ranges; every fact in it is taken from the pinned labels, the bundle readme and release notes, or a measured HTTP HEAD of 2026-09-21",
-      "purpose": "Names the product this package reads, its archive origin and advertised length, the pinned members that close it, and the limits that stay with it. The 26,173,440,000-byte science member is never downloaded whole and the archive publishes no digest for it, so it is recorded here instead of pinned in this manifest. tools/objects/telescopes/families/f16-sharad-pds4.mts parses this file and refuses it when it disagrees with the pinned label.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-mro-sharad-3d-radargram-bundle",
-            "role": "reference",
-            "evidence": "Identity, origin, citation and limits transcribed from the pinned PDS4 and PDS3 labels, readme.txt and release_notes.txt of the bundle.",
-            "locator": "urn:nasa:pds:mro_sharad_3d:data:east_deuteronilus_mensae_3d_v2_time::1.0"
-          }
-        ]
       }
     }
   ]
