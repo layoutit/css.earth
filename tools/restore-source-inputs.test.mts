@@ -148,6 +148,13 @@ test('repository volume package restores a pinned input from the content-address
   assert.deepEqual(requests, [`/source-cache/${expectedSha256}/source.bin`, `/source-cache/${expectedSha256}/preview.png`]);
   assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/source.bin')), bytes);
   assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/preview.png')), bytes);
+
+  const drifted = Buffer.from('wrong repository volume');
+  await writeFile(resolve(root, 'src/objects/nebula/preview.png'), drifted);
+  await assert.rejects(run(root, ['tools/restore-source-inputs.mts', '--repository-volumes']),
+    /Repository volume source drifted: nebula\/src\/objects\/nebula\/preview.png/);
+  assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/preview.png')), drifted);
+  assert.equal(requests.length, 2, 'a stale document receipt must fail, not silently replace the local input');
 });
 
 test('Earth restores a missing MUR mosaic before verification and preserves existing files', async t => {

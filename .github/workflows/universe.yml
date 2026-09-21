@@ -1,5 +1,11 @@
 name: Shared universe
 
+# PR feedback budget: target 2 minutes, maximum 3 minutes from the PR update until
+# all merge-required checks finish, including queue/setup time (not per job).
+# Keep affected correctness checks blocking; keep exhaustive sweeps and release
+# qualification outside the routine PR path. Measure added work against this budget.
+# Job timeouts below are safety limits, not the agreed feedback budget.
+
 on:
   pull_request:
   push:
