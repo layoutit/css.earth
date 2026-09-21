@@ -465,7 +465,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     orbitRoot.className = 'context-orbit';
     orbitRoot.dataset.contextOrbit = body.id;
     // The orbit is an independent retained paint owner, beside the billboard.
-    orbitRoot.style.cssText = 'position:absolute;inset:0;width:0;height:0;pointer-events:none';
+    // Bars draw inside the root, which places and orders them. Strokes draw in the shared SVG; a positioned,
+    // transformed root would paint nothing yet become its own WebKit layer over the composited sky and globe.
+    orbitRoot.style.cssText = orbitRenderer === 'bars' ? 'position:absolute;inset:0;width:0;height:0;pointer-events:none' : 'pointer-events:none';
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
     if (orbit) root.insertBefore(orbitRoot, mover);
     const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.verticesM.length ?? 0), id: body.id });
@@ -878,7 +880,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const relativeDepth = (rank - selectedRank) / 4;
         const zIndex = String(relativeDepth > 0 ? relativeDepth + 3 : relativeDepth);
         if (entry.billboardShown && entry.mover.style.zIndex !== zIndex) entry.mover.style.zIndex = zIndex;
-        if (entry.previousCount > 0 && entry.orbitRoot.style.zIndex !== zIndex) entry.orbitRoot.style.zIndex = zIndex;
+        if (orbitRenderer === 'bars' && entry.previousCount > 0 && entry.orbitRoot.style.zIndex !== zIndex) entry.orbitRoot.style.zIndex = zIndex;
       }
       for (const { projected, entry, mask } of projectedBodies) {
         const { x, y, diameter, markerOpacity, visible, annotationVisible,
@@ -910,7 +912,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         if (marker.dataset.contextAnnotationsAnimate !== animateAnnotations) marker.dataset.contextAnnotationsAnimate = animateAnnotations;
         if (!billboardShown && !entry.hovered) entry.indicatorRadius = BODY_INDICATOR_DIAMETER / 2;
         fader.visible(marker, billboardShown);
-        if (entry.billboardShown !== billboardShown) marker.style.visibility = billboardShown ? '' : 'hidden';
+        // The mover is hidden with its marker: a visible, transformed mover with nothing to draw still becomes a layer.
+        if (entry.billboardShown !== billboardShown) marker.style.visibility = entry.mover.style.visibility = billboardShown ? '' : 'hidden';
         entry.billboardShown = billboardShown;
         if (entry.markerShown !== markerShown) marker.dataset.contextBodyVisible = String(markerShown);
         entry.markerShown = markerShown; entry.markerDiameter = markerDiameter;
@@ -977,13 +980,13 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         // The paint owner names the node that carries the orbit's presentation.
         const orbitPaint = entry.piecePool.presentation;
         if (entry.orbit && orbitShown) {
-          if (entry.orbitRoot.style.zIndex !== zIndex) entry.orbitRoot.style.zIndex = zIndex;
+          if (orbitRenderer === 'bars' && entry.orbitRoot.style.zIndex !== zIndex) entry.orbitRoot.style.zIndex = zIndex;
           if (orbitPaint.dataset.contextSelected !== selection) orbitPaint.dataset.contextSelected = selection;
           fader.multiply(orbitPaint, entry.hovered ? 1 : entry.baseAlpha.line * emphasis, animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
         }
         if (entry.orbit && (mask & ContextChange.orbit)) {
           const orbitTransform = `translate(${width / 2}px,${height / 2}px)`;
-          if (entry.orbitTransform !== orbitTransform) {
+          if (orbitRenderer === 'bars' && entry.orbitTransform !== orbitTransform) {
             entry.orbitRoot.style.transform = orbitTransform; entry.orbitTransform = orbitTransform;
           }
           entry.orbitBounds = systemFade.isSystemStar(entry.orbit.centerBodyId) && orbitVisibility > .1
