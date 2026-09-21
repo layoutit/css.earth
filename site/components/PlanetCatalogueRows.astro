@@ -32,14 +32,14 @@ const rows = Array.from({ length: Math.ceil(searchObjects.length / 16) },
 ---
 
 <ul class="planet-object-list">
-  {systems.map(({ system, star, source }) => <li data-search-overview={SYSTEM_TITLES[system.id]!.label.toLocaleLowerCase('en')} hidden>
+  {systems.map(({ system, star, source }) => <li data-search-overview={SYSTEM_TITLES[system.id]!.label.toLocaleLowerCase('en')} data-navigation-object-id={system.id} hidden>
     <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${system.route}?overview=system`}
       data-source-subject={`overview:system:${system.id}`} data-source-document={source.href} data-source-label={source.label}>
       <span class="planet-lens-icon"><PlanetNavigationMarker planetId={star.id} color={star.color} /></span>
       <span class="planet-object-name planet-lens-label">{system.name}</span>
     </a>
   </li>)}
-  {Object.entries(OVERVIEW_TITLES).map(([scope, title]) => <li data-search-overview={title.label.toLocaleLowerCase('en')} hidden>
+  {Object.entries(OVERVIEW_TITLES).map(([scope, title]) => <li data-search-overview={title.label.toLocaleLowerCase('en')} data-navigation-object-id={scope} hidden>
     <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${galacticRoute}?overview=${scope}`}
       data-source-subject={`overview:${scope}`} data-source-document={overviewSourceDocumentation(scope, title.label).href}
       data-source-label={overviewSourceDocumentation(scope, title.label).label}>

@@ -1,6 +1,6 @@
 /** Reuse document links prepared on the retained navigation rows. */
 export function sourceDocuments(document: Document) {
-  return new Map([...document.querySelectorAll<HTMLElement>('.planet-object-browser [data-source-subject]')]
+  return new Map([...document.querySelectorAll<HTMLElement>(':is(.planet-object-browser, .planet-object-context) [data-source-subject]')]
     .map(node => [node.dataset.sourceSubject!, node]));
 }
 

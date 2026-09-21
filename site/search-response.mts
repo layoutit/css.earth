@@ -132,17 +132,30 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   document.querySelector('.planet-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
   const browser = requiredElement<HTMLElement>(document, '.planet-object-browser');
   const information = requiredElement<HTMLElement>(document, '.planet-information-panel');
-  browser.hidden = !searching && !focusCard;
-  information.hidden = searching || !!focusCard;
-  if (focusCard) focusCard.hidden = searching;
+  const context = document.querySelector<HTMLElement>('.planet-object-context') ?? browser;
+  const sharedLegacyContext = context === browser;
+  const selectedOverview = url.searchParams.get('overview');
+  const showingContext = Boolean(focusCard || selectedOverview);
+  browser.toggleAttribute('hidden', !searching);
+  information.toggleAttribute('hidden', showingContext);
+  if (!sharedLegacyContext) context.toggleAttribute('hidden', !showingContext);
+  if (focusCard) focusCard.removeAttribute('hidden');
   if (searching) requiredElement(document, '.planet-sheet-handle').setAttribute('checked', '');
   form.toggleAttribute('data-search-submitted', searching);
   browser.setAttribute('aria-label', searching ? 'Search results' : 'Celestial objects');
-  const galaxy = browser.querySelector<HTMLElement>('[data-galactic-overview]');
-  const system = browser.querySelector<HTMLElement>('[data-system-results]');
-  if (galaxy) galaxy.hidden = true;
-  for (const card of browser.querySelectorAll<HTMLElement>('[data-large-scale-overview]')) card.hidden = true;
-  if (system) system.hidden = !searching && !!focusCard;
+  const galaxy = context.querySelector<HTMLElement>('[data-galactic-overview]');
+  const system = context.querySelector<HTMLElement>('[data-system-results]');
+  if (galaxy) galaxy.toggleAttribute('hidden', selectedOverview !== 'milky-way');
+  for (const card of context.querySelectorAll<HTMLElement>('[data-large-scale-overview]')) {
+    card.toggleAttribute('hidden', card.dataset.largeScaleOverview !== selectedOverview);
+  }
+  if (system) system.toggleAttribute('hidden', selectedOverview !== 'system');
+  // Legacy/unit fixtures still combine navigation and context in one panel.
+  if (sharedLegacyContext && searching) {
+    if (galaxy) galaxy.setAttribute('hidden', '');
+    for (const card of context.querySelectorAll<HTMLElement>('[data-large-scale-overview]')) card.setAttribute('hidden', '');
+    if (system) system.removeAttribute('hidden');
+  }
   if (searching) {
     const catalogueLoaded = await ensureCatalogueRows(document, browser, url.origin, fetcher);
     const items = [...browser.querySelectorAll<HTMLElement>('.planet-object-item')];

@@ -62,3 +62,36 @@ test('selecting an object keeps only its top-level scale branch open', async () 
   assert.equal(milkyWay.open, false);
   controller.destroy();
 });
+
+test('filtering retains matching objects inside their hierarchy and restores the selected path', async () => {
+  const payload: NavigationTreePayload = {
+    schema: NAVIGATION_TREE_SCHEMA,
+    roots: ['root'],
+    nodes: {
+      root: { label: 'Root', objectId: null, place: true, count: 3, marker: null, children: ['planets', 'stars'] },
+      planets: { label: 'Planets', objectId: null, place: true, count: 1, marker: null, children: ['earth'] },
+      earth: { label: 'Earth', objectId: 'earth', place: false, count: 1, marker: null, children: [] },
+      stars: { label: 'Stars', objectId: null, place: true, count: 1, marker: null, children: ['sirius'] },
+      sirius: { label: 'Sirius', objectId: 'sirius', place: false, count: 1, marker: null, children: [] },
+    },
+  };
+  const text = JSON.stringify(payload), sha256 = createHash('sha256').update(text).digest('hex');
+  const { document, window } = parseHTML(`<div data-object-navigation-tree data-atlas-current="earth"
+    data-atlas-tree-src="/navigation-tree/${sha256}.json" data-atlas-tree-sha256="${sha256}" data-atlas-tree-bytes="${Buffer.byteLength(text)}">
+    <ul class="atlas-tree"><li data-atlas-item-key="root"><details data-atlas-depth="0" data-atlas-key="root" data-atlas-lazy><summary><span>Root (3)</span></summary></details></li></ul>
+  </div>`);
+  window.fetch = async () => new Response(text);
+  const root = document.querySelector<HTMLElement>('[data-object-navigation-tree]')!;
+  const controller = createNavigationTreeController(root, window as unknown as BrowserWindow);
+
+  await controller.filter(['sirius']);
+  assert.equal(root.querySelector<HTMLElement>('li[data-atlas-item-key="planets"]')?.hidden, true);
+  assert.equal(root.querySelector<HTMLElement>('li[data-atlas-item-key="stars"]')?.hidden, false);
+  assert.equal(root.querySelector<HTMLDetailsElement>('details[data-atlas-key="stars"]')?.open, true);
+
+  await controller.filter(null);
+  assert.equal(root.querySelector<HTMLElement>('li[data-atlas-item-key="planets"]')?.hidden, false);
+  assert.equal(root.querySelector<HTMLElement>('li[data-atlas-item-key="stars"]')?.hidden, false);
+  assert.equal(root.querySelector<HTMLAnchorElement>('a[data-atlas-object="earth"]')?.getAttribute('aria-current'), 'page');
+  controller.destroy();
+});

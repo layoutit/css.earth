@@ -489,11 +489,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const information = documentTarget.querySelector(".planet-information-panel");
   const browser = documentTarget.querySelector(".planet-object-browser");
   const empty = documentTarget.querySelector(".planet-object-empty");
-  const galaxy = browser?.querySelector<HTMLElement>('[data-galactic-overview]');
-  const largeScaleCards = [...(browser?.querySelectorAll<HTMLElement>('[data-large-scale-overview]') ?? [])];
-  const focusCard = browser?.querySelector<HTMLElement>('[data-prepared-focus-card]');
-  const system = browser?.querySelector<HTMLElement>('[data-system-results]');
-  const systemHeaders = [...(system?.querySelectorAll<HTMLElement>('[data-system-header]') ?? [])];
   if (!(search instanceof windowTarget.HTMLInputElement) ||
       !(searchCard instanceof windowTarget.HTMLElement) ||
       !(trigger instanceof windowTarget.HTMLButtonElement) ||
@@ -502,16 +497,22 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       !(empty instanceof windowTarget.HTMLElement)) {
     throw new Error("Planet shell object browser is incomplete.");
   }
+  // Search/navigation owns the header dropdown. The selected object or overview
+  // owns the sidebar card; neither surface moves into the other at runtime.
+  const context = documentTarget.querySelector<HTMLElement>('.planet-object-context') ?? browser;
+  const sharedLegacyContext = context === browser;
+  const galaxy = context.querySelector<HTMLElement>('[data-galactic-overview]');
+  const largeScaleCards = [...context.querySelectorAll<HTMLElement>('[data-large-scale-overview]')];
+  const focusCard = context.querySelector<HTMLElement>('[data-prepared-focus-card]');
+  const system = context.querySelector<HTMLElement>('[data-system-results]');
+  const systemHeaders = [...(system?.querySelectorAll<HTMLElement>('[data-system-header]') ?? [])];
+  const solarSystemFacts = system?.querySelector<HTMLElement>('[data-solar-system-facts]');
   const navigationRoot = browser.querySelector<HTMLElement>('[data-object-navigation-tree]');
   const navigation = navigationRoot ? createNavigationTreeController(navigationRoot, windowTarget) : null;
   lifetime.onDispose(() => navigation?.destroy());
-  const placeNavigation = (card: HTMLElement | null | undefined, current: string) => {
+  const selectNavigation = (current: string) => {
     if (!navigationRoot) return;
-    const slot = card?.querySelector<HTMLElement>('[data-object-navigation-slot]')
-      ?? (card?.querySelector<HTMLElement>('[data-object-navigation-tree]') === navigationRoot ? card : null);
-    if (!slot) { navigationRoot.hidden = true; return; }
-    if (navigationRoot.parentElement !== slot) slot.append(navigationRoot);
-    navigationRoot.hidden = showingSearchResults;
+    navigationRoot.hidden = false;
     void navigation?.select(current);
   };
   const tabs = [...browser.querySelectorAll<HTMLElement>('[data-object-tab]')];
@@ -713,7 +714,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   lifetime.onDispose(() => features?.destroy());
   let open = searchCard.hasAttribute('data-search-submitted');
   let browsing = open;
-  let browseAll = open && search.value.trim().length === 0;
   const categoryButtons = [...documentTarget.querySelectorAll<HTMLElement>('.planet-search-category')];
   // A pill's classification highlights its bodies in the scene; other searches clear it.
   // Filtering resets then re-marks the category, so report only the settled value.
@@ -739,17 +739,43 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     renderSourceLink(documentTarget, preparedFocus ? `focus:${preparedFocus.id}`
       : overview ? `overview:${overviewScope === 'system' ? `system:${overviewSystemId}` : overviewScope}` : `object:${selectedObjectName}`, sourceLinks);
   };
+  const renderSelectionContext = () => {
+    const focused = Boolean(preparedFocus);
+    const focusId = preparedFocus?.id ?? '';
+    const galactic = overview && overviewScope === 'milky-way';
+    const neighborCard = largeScaleCards.find(card => card.dataset.largeScaleOverview === 'local-group');
+    const galaxySelected = focused && neighborCard
+      && [...neighborCard.querySelectorAll<HTMLElement>('[data-neighbor-id]')]
+        .some(row => row.dataset.neighborId === focusId);
+    const largeScale = galaxySelected ? neighborCard : overview
+      ? largeScaleCards.find(card => card.dataset.largeScaleOverview === overviewScope) : undefined;
+    if (neighborCard && (galaxySelected || galactic || largeScale === neighborCard)) {
+      selectGalaxyNeighbor(neighborCard, galaxySelected ? focusId : 'milky-way');
+    }
+    for (const card of largeScaleCards) setPanelHidden(card, card !== largeScale);
+    if (focusCard) setPanelHidden(focusCard, !focused);
+    if (galaxy) setPanelHidden(galaxy, !galactic);
+    const systemSelected = overview && overviewScope === 'system';
+    if (system) setPanelHidden(system, !systemSelected);
+    const showContext = focused || galactic || Boolean(largeScale) || systemSelected;
+    setPanelHidden(information, showContext);
+    if (!sharedLegacyContext) setPanelHidden(context, !showContext);
+    const headerSystemId = systemSelected ? overviewSystemId : SOLAR_SYSTEM_ID;
+    for (const header of systemHeaders) header.toggleAttribute('data-system-current', header.dataset.systemHeader === headerSystemId);
+    if (solarSystemFacts) solarSystemFacts.hidden = headerSystemId !== SOLAR_SYSTEM_ID;
+    const selectedObjectId = SCENE_OBJECTS.find(object => object.name === selectedObjectName)?.id ?? objectId;
+    const navigationSelection = preparedFocus?.id ?? (galactic ? 'milky-way'
+      : largeScale?.dataset.largeScaleOverview ?? (systemSelected ? overviewSystemId : selectedObjectId));
+    selectNavigation(navigationSelection);
+    context.ariaLabel = preparedFocus?.name ?? (galactic ? 'Milky Way'
+      : largeScale?.dataset.largeScaleName ?? (systemSelected ? overviewName() : selectedObjectName || 'Selected object'));
+  };
   const filter = (resetScroll = true) => {
-    const searching = browsing && (search.value.trim().length > 0 || browseAll);
-    // Search text belongs to the user; the card context is only a fallback.
-    const query = (browsing ? search.value.trim().toLocaleLowerCase("en") || (browseAll ? "all objects" : "") : "")
-      || (preparedFocus ? preparedFocus.name.toLocaleLowerCase('en')
-        : overview ? overviewName().toLocaleLowerCase("en") : "");
-    setPanelHidden(information, query.length > 0);
-    // A camera handoff republishes the same card context. Its results, counts
-    // and chips are already current; only a closed browser needs reopening.
+    renderSelectionContext();
+    const searching = browsing && search.value.trim().length > 0;
+    const query = searching ? search.value.trim().toLocaleLowerCase("en") : "";
     if (query === filteredQuery && searching === showingSearchResults) {
-      setPanelHidden(browser, query.length === 0);
+      setPanelHidden(browser, false);
       markCategory(filteredClassification);
       return;
     }
@@ -757,38 +783,17 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     showingSearchResults = searching;
     visibleOverviews = presentOverviewResults(browser, searching ? query : '');
     presentSearchResults(browser, searching, activeCategory);
+    browser.toggleAttribute('data-navigation-filtered', searching);
     filteredClassification = null;
     if (resetScroll) resetResultsScroll();
     markCategory();
-    destinations?.setOpen(query.length > 0);
-    const focused = !searching && preparedFocus && query === preparedFocus.name.toLocaleLowerCase('en');
-    const galactic = !searching && !focused && query === 'milky way';
-    const neighborCard = largeScaleCards.find(card => card.dataset.largeScaleOverview === 'local-group');
-    const galaxySelected = focused && preparedFocus && neighborCard && [...neighborCard.querySelectorAll<HTMLElement>('[data-neighbor-id]')].some(row => row.dataset.neighborId === preparedFocus!.id);
-    const largeScale = galaxySelected ? neighborCard : !searching && !focused ? largeScaleCards.find(card => card.dataset.largeScaleName?.toLocaleLowerCase('en') === query) : undefined;
-    if (neighborCard && (galaxySelected || galactic || largeScale === neighborCard)) selectGalaxyNeighbor(neighborCard, galaxySelected ? preparedFocus!.id : 'milky-way');
-    for (const card of largeScaleCards) setPanelHidden(card, card !== largeScale);
-    if (focusCard) setPanelHidden(focusCard, !focused);
-    if (galaxy) setPanelHidden(galaxy, !galactic);
-    if (system) setPanelHidden(system, galactic || Boolean(focused) || Boolean(largeScale));
-    const selectedObjectId = SCENE_OBJECTS.find(object => object.name === selectedObjectName)?.id ?? objectId;
-    if (focused) placeNavigation(null, '');
-    else if (galactic) placeNavigation(galaxy, 'milky-way');
-    else if (largeScale) placeNavigation(largeScale, largeScale.dataset.largeScaleOverview ?? '');
-    else placeNavigation(system, selectedObjectId);
-    // The results card introduces the system the overview shows; searches and object cards keep the Solar System's.
-    const headerSystemId = overview && overviewScope === 'system' ? overviewSystemId : SOLAR_SYSTEM_ID;
-    for (const header of systemHeaders) header.toggleAttribute('data-system-current', header.dataset.systemHeader === headerSystemId);
-    if (focused && preparedFocus) {
-      browser.ariaLabel = preparedFocus.name;
-      setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
-      void destinations?.search(''); void features?.search('');
-      return;
-    }
-    browser.ariaLabel = searching ? 'Search results' : galactic ? 'Milky Way' : 'Celestial objects';
-    if (galactic || largeScale) {
-      if (largeScale) browser.ariaLabel = largeScale.dataset.largeScaleName!;
-      setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
+    destinations?.setOpen(true);
+    browser.ariaLabel = searching ? 'Search results' : 'Celestial objects';
+    setPanelHidden(browser, false);
+    if (!searching) {
+      visibleObjects = 1;
+      empty.hidden = true;
+      void navigation?.filter(null);
       void destinations?.search(''); void features?.search('');
       return;
     }
@@ -799,13 +804,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     visibleObjects = 0;
     void destinations?.search(classification || systemName || showAll ? "" : query);
     void features?.search(classification || systemName || showAll ? "" : query);
-    if (query.length === 0) {
-      for (const item of items) item.hidden = true;
-      empty.hidden = true;
-      setPanelHidden(browser, true);
-      return;
-    }
-    setPanelHidden(browser, false);
     const matches = new Set(result.matches.map(match => match.item));
     for (const item of items) item.dataset.objectMatch = String(matches.has(item));
     const classifications = result.matches.map(match => match.classification);
@@ -815,15 +813,23 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     const nextCategory = searching ? (classification ? result.category : 'all') : initialCategory ?? result.category;
     initialCategory = null;
     selectTab(nextCategory, { resetScroll: false });
+    const navigationIds = [
+      ...result.matches.map(match => match.item.dataset.navigationObjectId),
+      ...[...browser.querySelectorAll<HTMLElement>('[data-search-overview]:not([hidden])')]
+        .map(row => row.dataset.navigationObjectId),
+    ].filter((id): id is string => Boolean(id));
+    void navigation?.filter(navigationIds);
     setEmptyHidden(visibleObjects !== 0 || Boolean((destinations || features) && !classification && !showAll));
   };
   const render = (next: boolean, { resetQuery = false } = {}) => {
     publishSourceContext();
     if (!next) browsing = false;
-    if ((preparedFocus || overview) && !next) next = true;
     // Only an actual open/close transition may reset a scrolled result list.
     if (open !== next) resetResultsScroll();
     open = next;
+    trigger.ariaExpanded = String(next);
+    search.ariaExpanded = String(next);
+    trigger.title = trigger.ariaLabel = next ? 'Collapse celestial objects' : 'Browse celestial objects';
     const currentUrl = new URL(windowTarget.location.href);
     for (const input of documentTarget.querySelectorAll<HTMLInputElement>('[data-search-context], [data-dataset-context]')) {
       input.value = currentUrl.searchParams.get(input.name) ?? '';
@@ -834,16 +840,18 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     destinations?.setOpen(next);
     if (next) filter();
     else {
-      setPanelHidden(information, false);
+      renderSelectionContext();
       setPanelHidden(browser, true);
+      browser.removeAttribute('data-navigation-filtered');
+      void navigation?.filter(null);
       markCategory();
     }
   };
 
   trigger.addEventListener("click", event => {
     event.preventDefault();
+    if (open) { render(false); search.focus(); return; }
     browsing = true;
-    browseAll = search.value.trim().length === 0;
     render(true);
     search.focus();
   }, {
@@ -852,7 +860,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   searchCard.addEventListener('submit', event => {
     event.preventDefault();
     browsing = true;
-    browseAll = search.value.trim().length === 0;
     render(true);
   }, { signal: events.signal });
   // Clearing empties the query and returns to the selected card, like Escape.
@@ -872,7 +879,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       }
       search.value = button.dataset.searchQuery ?? "";
       browsing = true;
-      browseAll = false;
       render(true);
       requiredElement(documentTarget, '.planet-sidebar').scrollTop = 0;
     }, { signal: events.signal });
@@ -896,7 +902,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     }, { signal: events.signal });
   }
   search.addEventListener("input", () => {
-    browseAll = false;
     browsing = true;
     if (!open) render(true);
     else if (open) filter();

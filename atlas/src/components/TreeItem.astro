@@ -22,7 +22,7 @@ const deferred = bounded && node.children.length > 0 && !open;
         ? <a class:list={['atlas-tree-body', marker?.className]} style={marker?.style} href={`/${node.object.id}/`} data-atlas-object={node.object.id} aria-current={node.object.id === current ? 'page' : undefined}>{node.label}</a>
         : <span class={nameClass}>{label}</span>}</summary>
       {!deferred && <ul>
-        {node.children.map(child => <li><Astro.self node={child} current={current} depth={depth + 1} {bounded} {assetOrigin} /></li>)}
+        {node.children.map(child => <li data-atlas-item-key={child.key}><Astro.self node={child} current={current} depth={depth + 1} {bounded} {assetOrigin} /></li>)}
       </ul>}
     </details>
   : node.object && <a class:list={['atlas-row', marker?.className]} style={marker?.style} href={`/${node.object.id}/`} data-atlas-object={node.object.id} aria-current={node.object.id === current ? 'page' : undefined}>
