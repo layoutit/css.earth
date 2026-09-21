@@ -3,11 +3,12 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative } from 'node:path';
 import type { Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
 import { containedPath, sha256, verifiedBytes } from '../compact-inputs/density-grid.ts';
-import type { VolumeSlices, VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
+import { readVolumeLayerPlan, readVolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
 import { recolorCloudSlices } from '../slices/material.ts';
 import { verifyCompilerAlphaIdentity, type BakeCompilerOptions, type CompilerLensInput } from './bake.ts';
 import { readCompilerBakeResult, type CompilerBakeResult, type CompilerLensVolume, type CompilerPin } from '@cssearth/volume-core/contracts/compiler-bake';
 import { compilerSlabMaterial } from '@cssearth/volume-core/materials/slab-material';
+import { COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices } from '@cssearth/volume-core/coordinates/compiler-frame';
 
 export interface RetainedMaterialBankOptions {
   root: string; outputDirectory: string; scene: CompilerBakeResult; neutralSlicesPin: CompilerPin;
@@ -44,6 +45,9 @@ function readSlices(v: unknown, scene: CompilerBakeResult): VolumeSlices {
       a.displayColorMatrix !== undefined || (a.emissionTransfer !== undefined && a.emissionTransfer !== 'shared-opacity'))
     throw new TypeError('Invalid retained compiler slab sampling.');
   const counts = a.sliceCounts, pitches = a.slabPitchUnits;
+  const layerPlan = a.layerPlan === undefined ? undefined : readVolumeLayerPlan(a.layerPlan);
+  if (JSON.stringify(layerPlan) !== JSON.stringify(scene.sampling.layerPlan))
+    throw new TypeError('Retained compiler layer plan differs from the scene sampling.');
   for (const [index, axis] of (['x', 'y', 'z'] as const).entries()) {
     const count = counts[axis], pitch = pitches[axis];
     if (count !== scene.sampling.sliceCounts[axis] || !integer(count) || !positive(pitch) ||
@@ -53,12 +57,16 @@ function readSlices(v: unknown, scene: CompilerBakeResult): VolumeSlices {
         v.quads.some(q => q.axis === axis && q.sliceIndex >= count)) throw new TypeError('Invalid retained compiler axis sampling.');
   }
   // Each runtime-owned property has been checked above; optional noncompiler transport modes are rejected.
-  return { quads: v.quads, boundsUnits: { min: v.boundsUnits.min, max: v.boundsUnits.max }, provenance: v.provenance,
+  const slices: VolumeSlices = { quads: v.quads.map(q => ({ ...q, ...(q.slab === undefined ? {} : { slab: readVolumeSlabInterval(q.slab) }) })),
+    boundsUnits: { min: v.boundsUnits.min, max: v.boundsUnits.max }, provenance: v.provenance,
     approximation: { method: a.method, radialEmission: a.radialEmission, limitations: a.limitations,
       samplesPerSlab: a.samplesPerSlab, opticalWeight: a.opticalWeight, exposureGain: a.exposureGain,
       ...(a.emissionTransfer === 'shared-opacity' ? { emissionTransfer: a.emissionTransfer } : {}),
+      ...(layerPlan ? { layerPlan } : {}),
       sliceCounts: { ...scene.sampling.sliceCounts }, slabPitchUnits: {
         x: Number(pitches.x), y: Number(pitches.y), z: Number(pitches.z) } } };
+  validateVolumeLayerSlices(slices);
+  return slices;
 }
 const geometry = (s: VolumeSlices) => s.quads.map(({ texturePath: _p, sha256: _h, bytes: _b, ...q }) => q);
 
@@ -84,7 +92,7 @@ export async function prepareRetainedMaterialBank<Volume>(options: RetainedMater
   backend.assertBankIdentity(neutral, scene);
   const slices = readSlices(JSON.parse((await verifiedBytes(root, neutralSlicesPin)).toString('utf8')), scene);
   const compile = (bank: VolumeSlices) => backend.compileVolume({ id: `compiler-${scene.volumeId ?? scene.id}`,
-    frame: scene.frame, slices: bank });
+    frame: scene.frame, slices: scene.frame.referenceFrame === COMPILER_PHYSICAL_REFERENCE ? compilerPreparedSlices(bank) : bank });
   backend.assertLensGeometry(neutral, compile(slices), scene, {});
   await verifyCompilerAlphaIdentity(scene.alphaSha256, sourceDirectory, slices);
   const origin = scene.coordinates.localOriginArcsec;

@@ -64,7 +64,7 @@ export async function loadIsis3Raster(path: string, grid: unknown) {
 }
 
 /** Native numeric core shared by mapped rasters and telescope qualification. No projection is inferred. */
-export function isis3CoreHeader(bytes: Buffer) {
+export function isis3CoreHeader(bytes: Buffer, requireTarget = true) {
   const label=bytes.subarray(0,128*1024).toString('latin1');
   if(!/^Object\s*=\s*IsisCube/mu.test(label)) throw new Error('Not an ISIS3 cube.');
   const core=/Object\s*=\s*Core\s+([\s\S]*?)End_Object/u.exec(label)?.[1];
@@ -78,11 +78,11 @@ export function isis3CoreHeader(bytes: Buffer) {
   const order=field(core,'ByteOrder');
   if(!['Tile','BandSequential'].includes(format??'')||field(core,'Type')!=='Real'||!['Lsb','Msb'].includes(order??''))throw new Error('Unsupported ISIS3 core encoding.');
   const identity:Record<string,string>=Object.fromEntries(['TargetName','SpacecraftName','InstrumentId','ProductId'].flatMap(key=>{const v=field(label,key);return v===undefined?[]:[[key,v]];}));
-  if(!identity.TargetName)throw new Error('ISIS3 target identity is absent.');
+  if(requireTarget&&!identity.TargetName)throw new Error('ISIS3 target identity is absent.');
   return {coreFile:field(core,'\\^Core'),width,height,bands,start,tileWidth,tileHeight,base,multiplier,littleEndian:order==='Lsb',identity};
 }
-export function decodeIsis3Core(bytes: Buffer, label: Buffer = bytes) {
-  const h=isis3CoreHeader(label),columns=Math.ceil(h.width/h.tileWidth),rows=Math.ceil(h.height/h.tileHeight),plane=columns*rows*h.tileWidth*h.tileHeight;
+export function decodeIsis3Core(bytes: Buffer, label: Buffer = bytes, requireTarget = true) {
+  const h=isis3CoreHeader(label,requireTarget),columns=Math.ceil(h.width/h.tileWidth),rows=Math.ceil(h.height/h.tileHeight),plane=columns*rows*h.tileWidth*h.tileHeight;
   if(!Number.isSafeInteger(plane*h.bands*4)||h.start+plane*h.bands*4>bytes.length)throw new Error('Truncated ISIS3 raster.');
   const data=new Float32Array(h.width*h.height*h.bands),threshold=Buffer.from('faff7fff','hex').readFloatLE();
   for(let b=0;b<h.bands;b++)for(let y=0;y<h.height;y++)for(let x=0;x<h.width;x++){

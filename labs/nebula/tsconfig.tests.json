@@ -1,6 +1,8 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "incremental": true,
+    "tsBuildInfoFile": "../../output/tsbuildinfo/nebula-tests.tsbuildinfo",
     "jsx": "react-jsx",
     "lib": [
       "ES2023",

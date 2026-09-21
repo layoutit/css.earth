@@ -6,7 +6,6 @@ import PreparedFocusLenses from "./PreparedFocusLenses.astro";
 import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
 import type { Props } from "../planet-shell-types";
 import { SCENE_OBJECTS } from "../objects.mts";
-import { objectClassificationLabel } from "../planet-search-objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "../scene-contract.mts";
 import SourcesLink from './SourcesLink.astro';
@@ -72,10 +71,15 @@ const unavailableSystems = planetarySystems.unavailable.map(system => ({
 const searchPlaceholder = 'Search celestial objects...';
 const searchFormId = `${objectId}-search`;
 // Each pill types the plural classification query the search already understands.
-const searchCategories = ([
-  ['planet', 'public'], ['satellite', 'moon_stars'], ['comet', 'motion_blur'], ['asteroid', 'grain'],
-] as const).map(([classification, icon]) =>
-  ({ classification, icon, label: `${objectClassificationLabel(classification)}s` }));
+const searchCategories = [
+  { classification: 'planet', icon: 'public', label: 'Planets' },
+  { classification: 'satellite', icon: 'moon_stars', label: 'Moons' },
+  { classification: 'comet', icon: 'motion_blur', label: 'Comets' },
+  { classification: 'asteroid', icon: 'grain', label: 'Asteroids' },
+  { classification: 'star', icon: 'asterisk', label: 'Stars' },
+  { classification: 'nebula', icon: 'grain', label: 'Nebulae' },
+  { classification: 'galaxy', icon: 'public', label: 'Galaxies' },
+] as const;
 ---
 
 <header class="explorer-shell-header">
@@ -87,33 +91,39 @@ const searchCategories = ([
   </div>
   <div class="planet-search-toolbar">
     <ExplorerRail objectId={objectId} />
-    <form id={searchFormId} class="planet-sidebar-search-card" role="search" aria-label="Object search"
-      action={activeObject?.route} method="get" data-search-object={objectId} data-search-prompt={searchPlaceholder}>
-      {['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-search-context disabled />)}
-      <input
-        class="planet-sidebar-search"
-        type="search"
-        name="q"
-        maxlength={SEARCH_QUERY_LIMIT}
-        placeholder={searchPlaceholder}
-        aria-label={searchPlaceholder}
-        autocomplete="off"
-      />
-      <button
-        class="planet-sidebar-view-all"
-        type="submit"
-        aria-controls={`${objectId}-object-browser`}
-        aria-label="Search"
-        title="Search"
-      >
+    <div class="planet-search-browser-shell">
+      <form id={searchFormId} class="planet-sidebar-search-card" role="search" aria-label="Object search"
+        action={activeObject?.route} method="get" data-search-object={objectId} data-search-prompt={searchPlaceholder}>
+        {['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-search-context disabled />)}
         <span class="planet-sidebar-search-icon" aria-hidden="true">
           <MaterialSymbol name="search" />
         </span>
-      </button>
-      <a class="planet-sidebar-search-clear" href={activeObject?.route} aria-label="Clear search" title="Clear search">
-        <MaterialSymbol name="close" />
-      </a>
-    </form>
+        <input
+          class="planet-sidebar-search"
+          type="search"
+          name="q"
+          maxlength={SEARCH_QUERY_LIMIT}
+          placeholder={searchPlaceholder}
+          aria-label={searchPlaceholder}
+          aria-controls={`${objectId}-object-browser`}
+          aria-expanded="false"
+          autocomplete="off"
+        />
+        <a class="planet-sidebar-search-clear" href={activeObject?.route} aria-label="Clear search" title="Clear search">
+          <MaterialSymbol name="close" />
+        </a>
+        <button
+          class="planet-sidebar-view-all"
+          type="submit"
+          aria-controls={`${objectId}-object-browser`}
+          aria-expanded="false"
+          aria-label="Browse celestial objects"
+          title="Browse celestial objects"
+        >
+          <span class="planet-search-browser-caret" aria-hidden="true"></span>
+        </button>
+      </form>
+    </div>
   </div>
   <div class="planet-search-categories" role="group" aria-label="Browse by type">
     {searchCategories.map(category => <button
@@ -182,19 +192,19 @@ const searchCategories = ([
       <span class="planet-setting-text">{shadowSetting.label}</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>}
-    <label class="planet-setting-control planet-sky-contrast-setting-control">
-      <input
-        class="planet-sky-contrast-setting"
-        type="checkbox"
-        name="skyContrast"
-        form={`${objectId}-settings-form`}
-      />
-      <span class="planet-setting-text">High contrast</span>
-      <span class="planet-setting-switch" aria-hidden="true"></span>
-    </label>
     <label class="planet-setting-control planet-minimap-setting-control">
       <input class="planet-minimap-setting" type="checkbox" name="minimap" disabled />
       <span class="planet-setting-text">Minimap</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>
+    <label class="planet-setting-control planet-surface-labels-setting-control">
+      <input class="planet-surface-labels-setting" type="checkbox" name="surfaceLabels" disabled />
+      <span class="planet-setting-text">Surface labels</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>
+    <label class="planet-setting-control planet-three-d-stars-setting-control">
+      <input class="planet-three-d-stars-setting" type="checkbox" name="threeDStars" disabled />
+      <span class="planet-setting-text">3D stars</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <label class="planet-setting-control">
@@ -208,28 +218,6 @@ const searchCategories = ([
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <p id={`${objectId}-illustration-models-description`} class="planet-motion-description">Approximate stand-ins only. Body-specific meshes remain available without imagery.</p>
-    <label class="planet-setting-control">
-      <input class="planet-asteroid-bodies-setting" type="checkbox" name="asteroidBodies" disabled />
-      <span class="planet-setting-text">Asteroids</span>
-      <span class="planet-setting-switch" aria-hidden="true"></span>
-    </label>
-    <label class="planet-setting-control">
-      <input class="planet-asteroid-orbits-setting" type="checkbox" name="asteroidOrbits" disabled />
-      <span class="planet-setting-text">Asteroid orbits</span>
-      <span class="planet-setting-switch" aria-hidden="true"></span>
-    </label>
-    <label class="planet-setting-control">
-      <input class="planet-asteroid-labels-setting" type="checkbox" name="asteroidLabels" disabled />
-      <span class="planet-setting-text">Asteroid labels</span>
-      <span class="planet-setting-switch" aria-hidden="true"></span>
-    </label>
-    <label class="planet-setting-control">
-      <span class="planet-setting-text">Orbit lines</span>
-      <select class="planet-orbit-renderer-setting planet-setting-select" name="orbitRenderer" disabled>
-        <option value="strokes">SVG strokes</option>
-        <option value="bars">CSS chords</option>
-      </select>
-    </label>
     {remainingSettings.map((setting) => setting.kind === "cycle" ? (
       <button class="planet-setting-control" type="button" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`}>
         <span class="planet-setting-text">{setting.label}</span>
@@ -272,13 +260,40 @@ const searchCategories = ([
   </section>
   <div class="planet-drawer-content" id={`${objectId}-information`}>
     <input class="planet-sheet-handle" type="checkbox" aria-label="Expand information sheet" aria-controls={`${objectId}-information`} />
-    <nav
+    {!navigation && <nav
       id={`${objectId}-object-browser`}
       class="planet-object-browser maps-object-results"
-      aria-label="Planets"
+      aria-label="Celestial objects"
       hidden
     >
-      {!navigation && <><PlanetCard class="planet-prepared-information-panel" data-prepared-focus-card hidden>
+      <PlanetObjectResults activeObjectId={objectId} formId={searchFormId}>
+        <PlanetAccordion title="Named features" count={0} class="planet-feature-results"
+          aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
+          <p class="planet-feature-hint planet-destination-hint" role="status"></p>
+          <ul class="planet-destination-list">
+            {Array.from({ length: 8 }, () => <li hidden>
+              <a class="planet-destination-result">
+                <span class="planet-destination-result-name"></span>
+                <span class="planet-destination-result-context"></span>
+              </a>
+            </li>)}
+          </ul>
+        </PlanetAccordion>
+        {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
+          <p class="planet-destination-hint" role="status"></p>
+          <ul class="planet-destination-list">
+            {Array.from({ length: 8 }, () => <li hidden>
+              <button class="planet-destination-result" type="button">
+                <span class="planet-destination-result-name"></span>
+                <span class="planet-destination-result-context"></span>
+              </button>
+            </li>)}
+          </ul>
+        </section>}
+      </PlanetObjectResults>
+    </nav>}
+    <div class="planet-selected-content">
+    {!navigation && <div class="planet-object-context" hidden><PlanetCard class="planet-prepared-information-panel" data-prepared-focus-card hidden>
         <section class="planet-selected-panel">
           {(['milky-way', 'local-group', 'nearby-universe'] as const).map(scope =>
             <PlanetBreadcrumbs {scope} currentPage={false} data-focus-breadcrumb-scope={scope} hidden />)}
@@ -286,7 +301,7 @@ const searchCategories = ([
             <p class="planet-title planet-title-text" data-focus-name></p>
             <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-focus-status></span></div>
           </div>
-          <p class="planet-introduction" data-focus-aliases hidden></p>
+          <p class="planet-introduction" data-focus-introduction hidden></p>
           <p class="planet-introduction" data-focus-unavailable role="status" hidden
             data-unavailable-objects={Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id).join(' ')}></p>
         </section>
@@ -298,15 +313,12 @@ const searchCategories = ([
         <div class="planet-card-tabpanel" id="prepared-focus-factsheet-content" data-information-panel="factsheet"
           data-information-group="prepared-focus" role="region" aria-label="Factsheet">
           <div class="planet-factsheet-body"><div class="planet-facts"><ul class="planet-primary-facts">
+            <li data-focus-aliases-row hidden><span class="planet-fact-label">Also known as</span><span class="planet-fact-value" data-focus-aliases></span></li>
             {[['distance', 'Observer distance'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
               <li><span class="planet-fact-label" data-focus-fact-label={id}>{label}</span><span class="planet-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
           </ul></div></div>
           <PreparedFocusLenses {objectId} factsOnly />
           <PreparedClusterFacts />
-          <PlanetAccordion title="Model and measurement notes">
-            <p class="planet-introduction" data-focus-basis></p>
-            <p class="planet-introduction" data-focus-reference></p>
-          </PlanetAccordion>
         </div>
       </PlanetCard>
       <PlanetCard class="planet-galactic-overview planet-overview-card" data-galactic-overview hidden>
@@ -314,7 +326,6 @@ const searchCategories = ([
           introduction="Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.">
           <PlanetBreadcrumbs scope="milky-way" />
         </PlanetCardHeader>
-        <div data-object-navigation-slot data-navigation-current="milky-way"></div>
         <InformationTabs idPrefix={`${objectId}-milky-way`} group="milky-way" label="Milky Way information" hidden
           tabs={[{ id: 'systems', label: 'Systems', count: 1 + hostedSystems.length + unavailableSystems.length },
             { id: 'factsheet', label: 'Factsheet' }]} />
@@ -361,33 +372,16 @@ const searchCategories = ([
           introduction={system.id === SOLAR_SYSTEM_ID ? "The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets." : star.description}>
           <PlanetBreadcrumbs scope="system" systemId={system.id} />
         </PlanetCardHeader>)}
-        <PlanetObjectResults activeObjectId={objectId} formId={searchFormId}>
-          <PlanetAccordion title="Named features" count={0} class="planet-feature-results"
-            aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
-            <p class="planet-feature-hint planet-destination-hint" role="status"></p>
-            <ul class="planet-destination-list">
-              {Array.from({ length: 8 }, () => <li hidden>
-                <a class="planet-destination-result">
-                  <span class="planet-destination-result-name"></span>
-                  <span class="planet-destination-result-context"></span>
-                </a>
-              </li>)}
-            </ul>
-          </PlanetAccordion>
-          {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
-            <p class="planet-destination-hint" role="status"></p>
-            <ul class="planet-destination-list">
-              {Array.from({ length: 8 }, () => <li hidden>
-                <button class="planet-destination-result" type="button">
-                  <span class="planet-destination-result-name"></span>
-                  <span class="planet-destination-result-context"></span>
-                </button>
-              </li>)}
-            </ul>
-          </section>}
-        </PlanetObjectResults>
-      </PlanetCard></>}
-    </nav>
+        <div data-solar-system-facts>
+          <InformationTabs idPrefix={`${objectId}-solar-system`} group="solar-system"
+            label="Solar System information" tabs={[{ id: 'factsheet', label: 'Factsheet' }]} />
+          <div class="planet-object-results-scroll planet-card-tabpanel"
+            id={`${objectId}-solar-system-factsheet-content`} data-information-panel="factsheet"
+            data-information-group="solar-system" role="region" aria-label="Factsheet">
+            <PlanetFactsheet id={`${objectId}-solar-system`} facts={overviewFacts['solar-system'].facts} embedded />
+          </div>
+        </div>
+      </PlanetCard></div>}
     {destinations && <section class="planet-destination-panel" aria-label="Selected city" hidden>
       <button class="planet-destination-back" type="button">← Back to {activeObject?.name}</button>
       <h2 class="planet-destination-name"></h2>
@@ -404,6 +398,7 @@ const searchCategories = ([
         <p class="planet-introduction" data-card-preview-description></p>
       </section>
     </template>}
+    </div>
   </div>
 </aside>
 </div>

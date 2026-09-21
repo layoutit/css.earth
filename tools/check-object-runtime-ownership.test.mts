@@ -468,3 +468,11 @@ test('shell-only JSON is parsed as data and malformed or executable content is r
     assert.equal(inspect(invalid).violations.length, 1);
   }
 });
+
+test('shared JSON imports are parsed as data rather than runtime JavaScript', () => {
+  const valid = inspectObjectRuntimeModule('{"targets":[]}', 'site/source/example.json', { shared: true });
+  assert.equal(valid.dataOnly, true);
+  assert.deepEqual(valid.violations, []);
+  assert.match(inspectObjectRuntimeModule('{broken', 'site/source/example.json', { shared: true }).violations[0]!.reason,
+    /Invalid runtime source/u);
+});

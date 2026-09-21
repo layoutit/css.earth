@@ -3,13 +3,13 @@ import type { PreparedCatalogObject, SpatialCatalogSource, SpatialCitation } fro
 import type { createPreparedUniverse } from '../src/renderers/css/universe/prepared-universe-runtime.js';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
 import type { PreparedNavigationFocus } from '../src/renderers/css/navigation/prepared-focus.js';
+import { presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 import { record } from './browser-types.mts';
 
 type PreparedContextLayer = ReturnType<ReturnType<typeof createPreparedUniverse>['mount']>;
 type VolumeLensState = NonNullable<ReturnType<PreparedContextLayer['volumeLensState']>>;
 export type PreparedFocusPresentation = VolumeLensState & {
   selectLens(lensId: string): void;
-  setStarsVisible?(enabled: boolean): void;
 };
 export interface FocusCallbacks {
   onFocusChange?(url: string): void;
@@ -23,6 +23,26 @@ interface ContextNavigationOptions {
   windowTarget: Window;
   onError?(error: unknown): void;
   unavailableObjectIds?: readonly string[];
+}
+
+/** A saved focus camera is authoritative only while its named subject still intersects the stage. */
+function savedCameraShowsFocus(navigation: ObjectWorldNavigation, focus: PreparedNavigationFocus) {
+  const optics = navigation.optics();
+  const view = presentWorldCamera(navigation.capture(), { ...navigation.frame,
+    originM: focus.positionM, bodyRadiusM: focus.framingRadiusM }, optics);
+  // A camera inside a prepared volume can validly look away from its centre while the volume surrounds it.
+  if (view.distanceM <= focus.framingRadiusM) return true;
+  const ellipse = view.silhouette;
+  if (!ellipse) return false;
+  const width = optics.widthPixels ?? optics.framingRadiusPixels * 2;
+  const height = optics.heightPixels ?? optics.framingRadiusPixels * 2;
+  const rect = optics.visibleRect ?? { left: -width / 2, right: width / 2, top: -height / 2, bottom: height / 2 };
+  // The ellipse can be rotated. Its largest semi-axis is a conservative intersection bound:
+  // false means certainly off-screen, while an edge-on saved composition remains untouched.
+  const radius = Math.max(ellipse.radialSemiAxis, ellipse.tangentialSemiAxis);
+  const [x, y] = ellipse.centre;
+  return x + radius >= rect.left && x - radius <= rect.right &&
+    y + radius >= rect.top && y - radius <= rect.bottom;
 }
 
 /** Catalogue focus on the current detailed scene's shared camera owner. */
@@ -51,6 +71,13 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     windowTarget.history.replaceState(windowTarget.history.state, '', url.pathname + url.search + url.hash);
     notify(url.href);
   };
+  const clearSavedCameraUrl = () => {
+    const url = new URL(windowTarget.location.href);
+    if (!url.searchParams.has('v')) return;
+    url.searchParams.delete('v');
+    windowTarget.history.replaceState(windowTarget.history.state, '', url.pathname + url.search + url.hash);
+    notify(url.href);
+  };
   const publishContent = (id: string | null) => {
     const record = id ? layer.resolveGalaxy(id) : null;
     const references = record ? [record.skyPosition.sourceRef, record.distance.sourceRef, (isPreparedCluster(record) || isPreparedNebula(record) ? record.classification.sourceRef : record.membership.sourceRef)].filter((reference): reference is string => Boolean(reference)) : [];
@@ -66,11 +93,6 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         layer.selectVolumeLens(state.objectId, lensId);
         if (!unsubscribeLens) publishLens();
       },
-      ...(!layer.imageLayerFrames?.[state?.objectId ?? ''] && layer.setVolumeStarsVisible ? { setStarsVisible(enabled: boolean) {
-        if (!canSelect()) return;
-        layer.setVolumeStarsVisible(state.objectId, enabled);
-        if (!unsubscribeLens) publishLens();
-      } } : {}),
     } : null;
     const citations = references.map(reference => {
       const citation = resolveSpatialCitation(reference, currentSources());
@@ -96,6 +118,19 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     unsubscribeLens?.(); unsubscribeLens = null; lensObjectId = objectId;
     if (objectId && !layer.imageLayerFrames?.[objectId]) unsubscribeLens = layer.subscribeVolumeLens?.(objectId, publishLens) ?? null;
   };
+  const prepareFocus = (id: string | null): Promise<void> | undefined => {
+    const object = id ? layer.resolveGalaxy(id) : null;
+    if (id && !object) throw new TypeError(`Unknown prepared galaxy focus: ${id}`);
+    const objectId = object && !isPreparedCluster(object) ? object.detailedObjectId : undefined;
+    if (!objectId || unavailableObjectIds.includes(objectId) || layer.imageLayerFrames?.[objectId] ||
+        !layer.volumeLensFrames?.[objectId] || layer.volumeLensState(objectId)) return;
+    // The subscription pins the bank while loading; otherwise warm-residency trimming could evict it
+    // before the focus consumer reads its authored radius. Await the same load, including its errors.
+    observeLens(id);
+    return layer.ensureVolumeLens(objectId).then(() => {
+      if (!layer.volumeLensState(objectId)) throw new TypeError(`Prepared volume lens bank did not become ready: ${objectId}`);
+    });
+  };
   const resolve = (id: string): PreparedNavigationFocus => {
     const object = layer.resolveGalaxy(id);
     if (!object) throw new TypeError(`Unknown prepared galaxy focus: ${id}`);
@@ -110,8 +145,8 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
   };
   const publishSelection = () => {
     if (!ready || !navigation) return;
-    const next = navigation.preparedFocus?.()?.id ?? null;
-    layer.selectGalaxy(next);
+    const focus = navigation.preparedFocus?.() ?? null, next = focus?.id ?? null;
+    layer.selectGalaxy(next, focus);
     if (next === selected) return;
     selected = next; observeLens(next);
     publishContent(next);
@@ -130,54 +165,81 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     },
     suspend() { ready = false; flight?.abort(); },
     restore(url: string | URL) {
-      if (!navigation?.setPreparedFocus) return;
+      const owner = navigation;
+      if (!owner?.setPreparedFocus) return;
+      flight?.abort(); const controller = new AbortController(); flight = controller;
+      const current = () => navigation === owner && flight === controller && !controller.signal.aborted;
       ready = false;
       const query = new URL(url, windowTarget.location.href).searchParams;
-      try {
-        if (query.getAll('focus').length > 1) throw new TypeError('A saved view may have only one prepared focus.');
-        if (query.getAll('focusLens').length > 1) throw new TypeError('A saved view may have only one prepared focus lens.');
+      const finish = () => { if (current()) { ready = true; flight = null; } };
+      const fail = (error: unknown) => {
+        if (!current()) return;
+        selected = owner.preparedFocus?.()?.id ?? null;
+        layer.selectGalaxy(selected, owner.preparedFocus?.() ?? null); observeLens(selected);
+        publishContent(selected);
+        onError(error);
+      };
+      const apply = () => {
+        if (!current()) return;
         const id = query.get('focus'), focus = id ? resolve(id) : null, state = lensState(id);
         const lensId = query.get('focusLens') ?? state?.defaultLens;
         const object = id ? layer.resolveGalaxy(id) : null;
+        const detailedObjectId = object && !isPreparedCluster(object) ? object.detailedObjectId : undefined;
+        const declaredVolume = detailedObjectId ? layer.volumeLensFrames?.[detailedObjectId] : undefined;
+        const selectableVolumeId = declaredVolume && detailedObjectId ? detailedObjectId
+          : state && !layer.imageLayerFrames?.[state.objectId] ? state.objectId : null;
         const unavailable = object && !isPreparedCluster(object) && object.detailedObjectId && unavailableObjectIds.includes(object.detailedObjectId);
-        if (id && !unavailable && lensId !== undefined && (!state || !state.lenses.some(lens => lens.id === lensId))) {
+        if (id && !unavailable && lensId !== undefined && state && !state.lenses.some(lens => lens.id === lensId)) {
           throw new TypeError(`Unknown prepared focus lens: ${lensId}`);
         }
-        navigation.setPreparedFocus(focus);
-        if (state && lensId !== undefined && !layer.imageLayerFrames?.[state.objectId]) layer.selectVolumeLens(state.objectId, lensId);
-        selected = id; layer.selectGalaxy(id); observeLens(id);
+        owner.setPreparedFocus!(focus);
+        if (!unavailable && lensId !== undefined && selectableVolumeId) layer.selectVolumeLens(selectableVolumeId, lensId);
+        selected = id; layer.selectGalaxy(id, focus); observeLens(id);
         publishContent(id);
         if (!id || (state && !query.has('focusLens'))) writeSelectionUrl(id);
-        // A focus-only link is a destination. Saved camera links retain their
-        // exact observer pose; changing the pivot alone must not reframe them.
-        if (focus && !query.has('v')) {
-          flight?.abort();
-          const controller = new AbortController(); flight = controller;
+        ready = true;
+        // A focus-only link is a destination. A saved camera remains exact while it still shows
+        // the named focus; a stale focus+camera pairing must not strand the user in empty space.
+        const savedCameraIsCompatible = focus && query.has('v') ? savedCameraShowsFocus(owner, focus) : false;
+        if (focus && (!query.has('v') || !savedCameraIsCompatible)) {
+          if (query.has('v')) clearSavedCameraUrl();
           beforeFlight();
-          void navigation.flyToPreparedFocus(focus, { signal: controller.signal, reducedMotion: true })
-            .catch(error => { if (!controller.signal.aborted) onError(error); })
-            .finally(() => { if (flight === controller) flight = null; });
+          if (current()) return owner.flyToPreparedFocus(focus, { signal: controller.signal, reducedMotion: true });
         }
-      } catch (error) {
-        selected = navigation.preparedFocus?.()?.id ?? null;
-        layer.selectGalaxy(selected); observeLens(selected);
-        publishContent(selected);
-        onError(error);
-      }
-      finally { ready = true; }
+      };
+      try {
+        if (query.getAll('focus').length > 1) throw new TypeError('A saved view may have only one prepared focus.');
+        if (query.getAll('focusLens').length > 1) throw new TypeError('A saved view may have only one prepared focus lens.');
+        const loading = prepareFocus(query.get('focus'));
+        if (loading) return loading.then(apply).catch(fail).finally(finish);
+        const flying = apply();
+        if (flying) return flying.catch(fail).finally(finish);
+      } catch (error) { fail(error); }
+      finish();
     },
     async select(object: Pick<PreparedCatalogObject, 'id'>) {
-      if (!navigation?.flyToPreparedFocus) return;
+      const owner = navigation;
+      if (!owner?.flyToPreparedFocus) return;
       flight?.abort(); const controller = new AbortController(); flight = controller;
+      const current = () => navigation === owner && flight === controller && !controller.signal.aborted;
       try {
+        ready = false;
+        const loading = prepareFocus(object.id);
+        if (loading) await loading;
+        if (!current()) return;
         const focus = resolve(object.id);
         beforeFlight();
+        if (!current()) return;
         ready = true;
-        await navigation.flyToPreparedFocus(focus, { signal: controller.signal,
+        await owner.flyToPreparedFocus(focus, { signal: controller.signal,
           reducedMotion: windowTarget.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true });
-        publishSelection();
-      } catch (error) { if (!record(error) || error.name !== 'AbortError') onError(error); }
-      finally { if (flight === controller) flight = null; }
+        if (current()) publishSelection();
+      } catch (error) {
+        if (current()) {
+          observeLens(owner.preparedFocus?.()?.id ?? null);
+          if (!record(error) || error.name !== 'AbortError') onError(error);
+        }
+      } finally { if (current()) { ready = true; flight = null; } }
     },
     destroy() { flight?.abort(); unsubscribe?.(); unsubscribeLens?.(); unsubscribeLens = null; lensObjectId = null; navigation = null; ready = false; },
   });

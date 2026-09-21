@@ -1,3 +1,4 @@
+import { CSS_COMPILER_RENDER_BUDGET } from '../../../../../../../../src/renderers/css/volume/compiler-render-budget.ts';
 /** cssEarth representation adapter; compact replay does not depend on research processing. */
 import { replayCompactCompiler as replay, type CompactCompilerBackend } from '@cssearth/volume-bake/compact-inputs/compiler';
 import type { CompilerBakeProgress } from '@cssearth/volume-bake/compiler/bake';
@@ -10,6 +11,7 @@ export { readCompactCompiler } from '@cssearth/volume-bake/compact-inputs/compil
 export function replayCompactCompiler(root: string, pin: Pin, outputDirectory: string,
   progress?: (progress: CompilerBakeProgress) => void) {
   const backend: CompactCompilerBackend = {
+    renderBudget: CSS_COMPILER_RENDER_BUDGET,
     compileVolume: input => validatePreparedCssVolume(compileCssVolume({ ...input, recipe: { anchors: [] } })),
     readVolume: validatePreparedCssVolume,
     prepareStarSprites: prepareCompilerStarSprites,

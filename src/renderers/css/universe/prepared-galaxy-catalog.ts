@@ -192,7 +192,9 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
           const previousRect = [labelRect, ...alternateLabelRects][entry.placement] ?? labelRect;
           // A rejected label keeps following the same side throughout its fade.
           entry.labelX = (previousRect.left + previousRect.right) / 2; entry.labelY = previousRect.bottom;
-          if (objectAlpha > 0) candidates.push({ object: entry.object, navigable: entry.navigable, shown: entry.shown, placement: entry.placement,
+          // A marker and caption promise an available destination. Catalogue-only
+          // rows remain as unobtrusive dots, but never enter the annotation layout.
+          if (objectAlpha > 0 && entry.navigable) candidates.push({ object: entry.object, navigable: true, shown: entry.shown, placement: entry.placement,
             ...point, labelRect, alternateLabelRects });
         }
       }

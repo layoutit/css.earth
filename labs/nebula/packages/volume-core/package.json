@@ -15,6 +15,7 @@
     "./contracts/observation-mapping": "./src/contracts/observation-mapping.ts",
     "./contracts/observation-photo": "./src/contracts/observation-photo.ts",
     "./contracts/prepared-catalogue-stars": "./src/contracts/prepared-catalogue-stars.ts",
+    "./contracts/render-element-budget": "./src/contracts/render-element-budget.ts",
     "./contracts/sampled-emission-fit": "./src/contracts/sampled-emission-fit.ts",
     "./contracts/sampled-recipe": "./src/contracts/sampled-recipe.ts",
     "./contracts/shape-scene": "./src/contracts/shape-scene.ts",
@@ -50,7 +51,10 @@
     "./materials/slab-material": "./src/materials/slab-material.ts",
     "./materials/star-photometry": "./src/materials/star-photometry.ts",
     "./package.json": "./package.json",
-    "./sampling/registered-raster": "./src/sampling/registered-raster.ts"
+    "./sampling/registered-raster": "./src/sampling/registered-raster.ts",
+    "./sampling/layer-optimization": "./src/sampling/layer-optimization.ts",
+    "./fields/photometric-mge": "./src/fields/photometric-mge.ts",
+    "./fields/photometric-emission": "./src/fields/photometric-emission.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json"

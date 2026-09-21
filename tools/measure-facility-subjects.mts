@@ -19,8 +19,8 @@ const TOLERANCE = 8, PADDING = 6;
 const entries = requireArray(library.entries).map(value => requireRecord(value));
 for (const entry of entries) {
   const source = requireRecord(entry.source);
-  // A photograph already fills its frame; only composited renders have a field.
-  if (source.kind === 'published-photograph') { delete entry.subject; continue; }
+  // Published imagery already fills its frame; only composited renders have a field.
+  if (requireString(source.kind).startsWith('published-')) { delete entry.subject; continue; }
   const file = path.join(root, 'public', requireString(entry.url));
   const { data, info } = await sharp(file).raw().toBuffer({ resolveWithObject: true });
   let left = info.width, right = -1, top = info.height, bottom = -1;

@@ -22,6 +22,31 @@ existing css.earth science workspace for the catalogue, archive clients and inst
 pipelines. See [package setup](../packages/telescope/README.md). It does not bundle
 Python environments or download the repository during installation.
 
+Start with only a target to preserve the difference between discovery and a scientific request:
+
+```sh
+pnpm telescope explore eris
+pnpm telescope explore eris --kind cube --wavelength 2.2,2.4 --out output/eris-exploration
+```
+
+The terminal flow saves `explore.json`, shows bounded archive and package observations with their
+advertised or verified basis, and retrieves only the identity the person selects. Omitted filters
+remain omitted; no wavelength, time, product kind or resolution requirement is invented. `--json`
+and redirected input or output never prompt. Without `--out`, the command creates a unique directory
+under `./telescope-runs/`. An exploration delivery retains “no scientific acceptance criteria
+requested” through later outputs.
+
+`telescope outputs ARTIFACT.json` is the second human entry point. It identifies the artifact and
+its source context, keeps unavailable operations and blockers visible, and prints the parameters and
+explicit command template for each available next operation. In a terminal it asks which available
+operation to run, then prompts only for that operation's reported inputs and output directory. The
+same explicit-command parser validates the answers before the existing export owner runs. Enter
+cancels without starting that output; JSON and redirected execution never prompt. It accepts
+supported delivery records, derived product records and prepared point/volume object packages,
+not arbitrary raw science files.
+
+Use `query` when the wavelength, time, product kind and resolution are actual acceptance criteria:
+
 ```sh
 pnpm telescope query eris --wavelength 2.2,2.4 --kind cube \
   --any-time --min-arcsec 1 --out output/eris-query
@@ -50,6 +75,34 @@ lock because current reducers update shared archive records.
 Current source-qualified products also use the common selected-artifact interface.
 Their existing receipt and decoded facts supply the reference, without copying
 unverified wavelength or resolution declarations into the verified facts.
+
+### Telescope API v1 boundary
+
+The public chain has four supported transitions:
+
+| Current artifact | Supported next operation | Required addition |
+| --- | --- | --- |
+| Qualified native delivery | Supported image, spectrum, band, aperture or feature export | The selectors listed by `outputs` |
+| Exported 2D measurement | Registered body map | Explicit pinned navigation |
+| Registered body map | Standalone interactive sphere | An embeddable standard body package |
+| Existing prepared point field or density volume | Renderer handoff | None |
+
+The command coordinates the existing archive, qualification, Astropy, PlanetMapper and renderer
+owners. It does not imply that every observation can traverse every transition. Discovery is
+limited to configured archive routes and bounded profiles, so an empty target-name search is not
+a universal absence claim. A product-kind declaration also does not establish a decoder,
+scientific operation or exporter for those bytes. `outputs` checks the current artifact through
+the same prerequisite validators used by export and reports the routes it can actually support.
+
+Native deliveries retain their recorded files. Intermediate image and map records may retain
+absolute references to their verified workspace sources; relocation does not make those
+dependencies portable. Sphere HTML and physical renderer handoffs are self-contained within
+their published artifact. Missing sources are reported rather than searched for, rebased or
+reconstructed. Export always checks again, because an earlier inspection is only a snapshot.
+
+Query success means retrievable choices exist. Export success means the selected transformation
+completed. Neither means the original scientific request was fulfilled: its fulfilled,
+unresolved or refused verdict remains in every derived product record.
 
 ## Package-owned observations through the same API
 
@@ -152,40 +205,65 @@ Astropy owns the [weighted fitting](https://docs.astropy.org/en/stable/api/astro
 The wavelength-by-wavelength assessment accommodates the spatial PSF variation
 described in [STScI's IFU guidance](https://jwst-docs.stsci.edu/methods-and-roadmaps/jwst-integral-field-spectroscopy).
 
-Source-package descriptions remain declarations. Native source qualification also reads
-`facts.nativeMetadata` from the pinned product: the selected science structure, supported
-data units, wavelength centers, recorded calibration references and remaining limitations.
-It never copies the package description or instrument catalogue into verified facts.
+Source descriptions remain declarations. Source qualification and reducer qualification now
+use one `product-science.mts` readback owner. `facts.nativeMetadata` records each science array,
+units, wavelength coordinates, usable samples, uncertainty association and remaining limitations.
+Instrument catalogue values never become verified product facts.
 
-- FITS images: one unambiguous science HDU; separable linear `WAVE` or `FREQ` WCS,
-  converted to micrometres. Coordinate-bin intervals exclude planes without finite samples.
-  These intervals describe the sampled grid, not optical passbands or spectral resolving power.
-  Coupled, tabular, velocity and air-wavelength WCS remain unsupported and explicit.
-- ISIS3 cubes: `BandBin.Center` must match the core band count and be strictly monotonic.
-  Units must be stated or established by a supported recorded calibration convention.
-  For [VIMS RC19](https://isis.astrogeology.usgs.gov/8.1.0/Application/presentation/Tabbed/vimscal/vimscal.html),
-  the time-dependent `Center` is used, never `MissionAverage`. `RadiometricCalibration.OutputUnits`
-  records the data unit. Calibration filenames are retained as references; their presence does
-  not qualify the external calibration files. Centers alone do not establish continuous coverage;
-  explicit widths are needed, and empty bands remain gaps.
-- PDS products: pdr exposes units and band coordinates from the decoded object's own label
-  block. A PDS4 optical filter must explicitly reference the selected array. Metadata from another
-  array or an ambiguous set of science arrays cannot satisfy the request.
+Astropy (the existing pinned Python environment) owns unit parsing and FITS WCS transforms.
+Linear, nonlinear and table-backed separable wavelength/frequency coordinates are supported;
+velocity coordinates require a recorded rest wavelength or frequency. Tabulated centers do not
+invent bin edges. Spatially coupled spectral coordinates and air wavelengths remain explicit
+limitations. Multiple science HDUs retain separate metadata: aggregate wavelength coverage is
+their intersection, never a mosaic. A companion ERR/VAR/IVAR or DQ/MASK must match exactly one
+science array by EXTVER and shape. Uncertainty dimensions must agree with the science unit.
 
-Data-unit validation currently recognizes `I/F`, dimensionless values, counts/DN, electrons,
-`Jy`, `mJy`, `MJy/sr`, `Jy/beam`, `K` and `W m-2 sr-1 um-1`. Other units are retained in an
-explicit limitation instead of guessed. Product metadata validation is not an independent
-validation of radiometric accuracy, quality flags or uncertainty.
+The conservative usable-sample policy requires finite science, zero supplied DQ/MASK and valid
+supplied uncertainty. Negative unmasked errors are refused; missing uncertainty units remain
+unknown and cannot justify usable coverage. No uncertainty array is explicitly recorded as
+unknown. Fully masked wavelength planes do not establish coverage. Numeric validity does not
+independently establish radiometric accuracy or correctness of the observatory's error model.
 
-Applicable FITS `BMAJ` and `BMIN` headers in `Jy/beam` images establish the recorded
-restoring beam; its major-axis FWHM answers angular-resolution requirements and its evidence
-points to the exact product hash. A missing beam axis, multiple per-plane beams, or incompatible
-units cannot establish that resolution. This does not independently validate deconvolution or
-residual emission. Pixel spacing, map scale and nominal instrument optics never become a PSF.
+ISIS BandBin coordinates are count-checked and strictly monotonic, with explicit units or the
+recorded VIMS RC19 convention. Named geometry backplanes are ancillary data, not spectra.
+Singleton ancillary FITS axes do not turn a two-dimensional image into a spectral cube.
+PDS ordinal UTC timestamps and absent optional processing-level labels are handled directly.
+Centers alone do not establish passband widths. pdr owns PDS scaling and special-value masks;
+PDS4 special constants are scoped to their own array. Ambiguous PDS science arrays remain
+unresolved. Extracted PDS labels whose attached pointers lie outside the pinned file are not
+advertised as complete observations.
 
-The metadata reader is part of the qualification implementation digest. Product, label,
-calibration input, reader or output changes invalidate reuse. A source-qualified product can
-still remain an unresolved answer when its files do not establish the requested science facts.
+Recorded CRDS and ISIS calibration references resolve to exact official archive files. Each
+retrieved file is hashed, checked on reuse, and included in delivery. Retrieval is bounded to
+16 MB per file and 64 MB per qualification; missing, timed-out or oversized references remain
+explicitly unresolved. Instrument/configuration selectors are compared where available. VIMS
+band-center references can additionally be checked against recorded original-band indices.
+A pin proves which bytes were used; selector agreement does not independently prove calibration
+accuracy. The product's recorded calibration is not a new raw-data recalibration.
+
+Applicable FITS BMAJ/BMIN or a complete channel-indexed BEAMS table establishes the recorded
+restoring beam for Jy/beam-equivalent units. Per-plane resolution uses the worst usable major
+axis. Missing or ambiguous beam identities remain unknown. Pixel spacing and nominal optics
+never become a measured PSF.
+
+Product, label, calibration dependency, reader, package lock or output mutations invalidate
+qualification reuse. Unknown science requirements remain unknown in request satisfaction,
+even when the delivered bytes are fully verified.
+
+For reproducible empirical delivery checks:
+
+```sh
+node tools/objects/telescopes/survey-delivery.mts output/survey --random 20
+# Repeat with the seed written in output/survey/survey.json:
+node tools/objects/telescopes/survey-delivery.mts output/replay --random 20 SEED
+```
+
+The pool comprises body packages with a locally available numeric product under 256 MB,
+without filtering on prior success. Bodies and eligible observations are sampled separately.
+If fewer bodies are locally available, the survey tests the whole pool and records both counts.
+The report retains the seed, complete pool, chosen targets, failures, blocked cases and delivered
+request-satisfaction results. It exercises saved query → qualification → delivery with existing
+local observations; it is not a fresh all-archive discovery survey or raw pipeline rerun.
 
 Source observations and explicit selections expose `requestSatisfaction` and `satisfaction`,
 respectively. Published body-map descriptors also carry `satisfaction`. Its status is `fulfilled`,
@@ -599,3 +677,478 @@ the previous zero-excluding policy do not establish agreement under the new poli
 recompare existing cubes to renew them. No pipeline rerun is needed for unchanged
 products and inputs. The scope states the actual compared archive planes, including
 aligned subsets supplied without a request interval.
+
+## Observational families and local products
+
+The artifact contract no longer assumes that every observation is a spatial raster. A versioned
+product descriptor names pinned members, components, axes or columns, quantity and calibration
+semantics, dependencies, uncertainty, flags, time and frames. Static handlers cover F01–F18:
+images, cubes, spectra, slit profiles, photometry, time series, dynamic spectra, tables,
+astrometry, events, radio and optical interferometry, polarimetry, maps, radar, physical fields,
+raw/calibration products and compound closures. One descriptor may name several families.
+
+Run `telescope families` for the derived coverage ledger. Every F01–F18 family now has one
+complete, evidence-backed baseline reachable from the public workflow. Coverage is bounded to
+those declared profiles: additional formats and operations may still report `partial` or remain
+unavailable, and missing dependencies stay visible.
+
+Local files use the same bounded intake boundary:
+
+```sh
+telescope import import-spec.json --out imported-observation
+telescope outputs imported-observation/import.json
+```
+
+The data-only specification names files/directories, roles and byte/member limits. Import copies
+regular files without following symlinks, pins every byte and proposes handlers from bounded
+content inspection. When one declared family selects an existing content validator, import also
+writes a pinned `descriptor.json`; `outputs` exposes that descriptor's package-owned family
+operations only after reopening every member pin. A family operation that applies to several
+components requires an explicit `componentId`; its receipt names exactly the component used and
+hashes the dispatcher, registry, selected scientific owner and pinned Python toolchain. The
+operation record is itself inspectable as a terminal artifact. Ambiguous inputs stay pinned and say which family choice is missing. Recognized
+profiles that still lack the metadata or dependency closure their handler needs remain explicitly
+unsupported. Target, origin, units, frame, calibration and family hints supplied by the
+user remain declarations until a handler validates them. A content hash proves integrity, not
+archive origin or scientific fitness.
+
+`telescope family-assess` reports descriptor compatibility as `matched`, `unresolved` or
+`refused`; it never calls that structural result fulfillment of the original request. It compares
+the target and selected family, delegates spectral-unit conversion to Astropy, and considers every
+eligible component. Requested observation bounds or measured-resolution thresholds remain
+unresolved when the descriptor does not carry those facts. Criteria that do not apply to the
+selected family are not inherited from the legacy query shape. Every requested scientific
+criterion must hold for one selected component; facts from different components cannot be
+assembled into a match without an explicit combining operation. A membership request may inspect
+an explicitly declared dependency bundle, such as the Stokes components retained from one FITS
+member. That bundle establishes which components are present; it does not lend one component the
+quantity, support, resolution or depth facts of another.
+
+Planetary depth products use the same F16 descriptor instead of a separate workflow. Their axes
+name delay, geometric depth, pressure, altitude, radius, projected coordinates, body-fixed
+coordinates or path distance. Every admitted component separately retains its supported domain,
+sampling, resolution evidence, uncertainty, measurement operator and inference method. A FITS
+interval is sampling only; it cannot satisfy a requested resolution maximum. Derived depth
+conversion requires a named method and explicit parameters. Published reconstructions and model
+ensembles require their inference evidence and source members.
+
+Axis roles also retain a qualified physical dimension. The F16 FITS owner asks Astropy WCS to
+normalize only separable linear coordinates into the descriptor's zero-based index convention and
+uses Astropy units to verify their dimensions. Coupled matrices, nonlinear WCS, and contradictory
+units are refused. Body attachment additionally requires an explicit Cartesian, spherical,
+projected-and-vertical, located-profile, or symmetry placement; a depth axis and named frame alone
+do not establish a location. Placement axes must be distinct and carry the required spatial roles
+and physical dimensions. A complete body-fixed Cartesian grid needs no separate scalar depth axis.
+Projected vertical and located-profile placements bind their qualified physical-depth coordinate;
+the located profile cannot leave additional planetary axes unmapped.
+Astropy validates Cartesian anchor units as lengths and longitude/latitude anchor units as
+angles before a source constructor can publish the placement.
+
+Output availability follows those retained facts. Native export preserves every qualified product.
+Slices require a fully supported grid whose validity is handled by the operation, profiles require
+an explicit depth-like axis, and coverage views require the exact tracks, rays, stations, channels
+or profiles. Unhandled masks and support geometry refuse extraction. Delay and pressure coordinates cannot be
+attached to a body as geometric depth. Sparse rays cannot become a measured volume. Gravity and
+magnetic fields retain non-unique localization; a posterior model may be rendered only with an
+inference label on every visual output. The generic FITS profile validates one- to three-dimensional linear grids through
+Astropy, but archive adapters must supply the source-backed semantic qualification. Local user
+declarations cannot admit a planetary product. This architecture change includes no planetary
+dataset.
+
+Archive product terms retain the source label and map against the dated IVOA product-type
+vocabulary. This proposes a family route; product bytes and metadata must still confirm the
+handler profile. Preliminary and unknown vocabulary terms remain marked as such.
+
+Archive and package observations carry that classification as
+`cssearth-observation-family-evidence@1`. It names the family, source term, vocabulary version,
+responsible adapter or source product, and supporting evidence. Exploration filters consume this
+record directly; they do not reconstruct a family from a bare product kind. Format-specific
+profiles may make a narrower claim only after their declared archive identity matches. The first
+such profile is the NASA STEREO/SECCHI COR1 electron-density reconstruction: its FITS axes
+(`CRLN`, `CRLT`, `HECR`), units and instrument identity establish an F16 spherical physical grid.
+The profile classifies the observation; it does not certify the tomography or invent a rendering
+route.
+
+The qualified COR1 profile now also writes a pinned F16 descriptor. `telescope outputs` exposes
+`spherical-grid-inspect` and `spherical-grid-prepare-volume` from that delivered observation. The
+latter uses Astropy to validate the archive FITS and its default-UTC time convention, SciPy to
+resample the longitude/latitude/radius field into explicitly sized Cartesian voxels, and the
+existing cssEarth density-volume preparer and loader for the result. The transfer remains an
+explicit caller choice. The native source and resampled float FITS remain available beside the
+RGBA8/KTX2 display approximation; transparent voxels outside the measured 1.5–4.0 solar-radius
+shell do not become zero-density measurements.
+
+![The prepared COR1-B electron-density display rotating around the Sun; this is a visual approximation of the measured shell, not a native FITS rendering](images/telescopes/sun-cor1-density-rotation.gif)
+
+```sh
+pnpm telescope explore sun --family F16 --out work/sun-f16
+pnpm telescope get work/sun-f16 --pick 1
+pnpm telescope outputs work/sun-f16/pick-1/result.json
+pnpm telescope family-run work/sun-f16/pick-1/files/output/telescopes/sun/stereo-cor1a-n3d-cr2053p1-m1/descriptor.json \
+  spherical-grid-prepare-volume --params TRANSFER.json --out work/sun-cor1-volume
+pnpm telescope outputs work/sun-cor1-volume/physical-grid-volume.json
+```
+
+Family-operation receipts identify the complete local TypeScript module closure discovered by the
+build graph, plus the pinned scientific toolchain. Changing a helper imported by the selected
+operation therefore invalidates reuse even when its public owner module is unchanged.
+
+## From a delivered product to an output
+
+`tools/objects/telescopes/outputs.mts` is the final boundary after `session.mts` delivery.
+The CLI exposes `telescope outputs RESULT_JSON` and `telescope export RESULT_JSON`.
+[The command guide](../packages/telescope/README.md#outputs) covers selectors and files.
+
+Executable outputs include a native FITS plane, a pixel spectrum, a wavelength-weighted
+band image, a background-subtracted region mean spectrum and a continuum-subtracted feature map. Astropy owns coordinates and units; the shared scientific reader applies the
+same uncertainty and quality policy used by qualification; Astropy NDData owns aggregate
+arithmetic and uncertainty propagation. Astropy WCSAxes owns sky-coordinate axes,
+ImageNormalize owns display scaling, and quantity_support owns spectral unit conversion.
+Matplotlib renders PNG/SVG, tightly bounded around the chart, labels and legend
+with a 0.12-inch gutter. PNG backgrounds are transparent; the light labels suit
+dark backgrounds. Astropy also writes reusable FITS images or ECSV spectra;
+CSV and a product record accompany every export. The record pins the original delivery,
+its files, the chosen HDU/plane/pixel, the implementation, package versions and derived bytes.
+No plotting stage upgrades the original scientific request's satisfaction.
+
+There is no embedded viewer or viewer service. The command returns ordinary files; Jdaviz
+is neither installed nor launched. It can be used separately to explore the original cube.
+Static export does not depend on a browser or notebook.
+
+Image FITS files retain the source's separable celestial WCS on the unchanged pixel grid,
+physical BUNIT, a MASK extension (1 = missing), and ERR when uncertainties are available.
+Absent or coupled celestial coordinates produce explicit pixel axes and a recorded reason;
+malformed WCS is refused. Spectral ECSV files retain wavelength and value units, missing-value
+masks, standard deviations, selection and uncertainty policy. Both formats refer to the pinned
+receipt. CSV remains a simple numeric convenience, with semantics in that receipt.
+
+Display scaling is linear over the finite range; feature maps use a range symmetric around
+zero. The receipt records limits, colormap, coordinate frame and WCS warnings. No reprojection,
+smoothing or change to the exported measurements is performed. These are recorded sky
+coordinates, not a new astrometric calibration or body registration.
+
+The package APIs are documented by [Astropy visualization](https://docs.astropy.org/en/stable/visualization/index.html).
+css.earth retains the measurement definition, explicit selection, missing-sample policy and
+provenance. This is a thin file export boundary, not another plotting toolkit.
+
+### Example exports: Eris, JWST NIRSpec IFU
+
+These figures come from the local level-3 cube
+`jw01191-o019_t002_nirspec_g235m-f170lp_s3d.fits`, SCI HDU 1, with shape
+191 wavelengths × 55 rows × 51 columns. Its SHA-256 is
+`fbeeb9737ecf46c2b1aad5e27cb55a50e6e8f83fc8e7e347c3aa80d3e07f4bab`.
+These figures use the product's MJy/sr units and quality mask. Pixel and plane selectors
+are zero-based. Astropy 8.0.1 reads the product; Matplotlib 3.11.2 renders the figures.
+
+![Eris NIRSpec image plane at 2.2997 micrometres, with source sky-coordinate axes and a surface-brightness colour bar](images/telescopes/eris-native-plane.png)
+
+**Image:** plane 95 at 2.2997 µm, shown on the native image grid with source ICRS sky coordinates. The diamond-shaped
+footprint is the cube's sampled field, not Eris's surface. Masked samples are omitted.
+
+![Eris spectrum at image pixel 25,27, with wavelength and surface-brightness axes and recorded uncertainty](images/telescopes/eris-pixel-spectrum.png)
+
+**Spectrum:** one selected pixel, `(25, 27)`, across the cube's approximately
+2.2–2.4 µm interval. Shading shows the recorded ±1σ uncertainty. This is not an
+aperture-integrated spectrum or a claim about the significance of spectral features.
+
+Given this cube's delivered `result.json`, reproduce the selections with:
+
+```sh
+telescope export result.json --output image --hdu 1 --plane 95 --out eris-image
+telescope export result.json --output spectrum --hdu 1 --pixel 25,27 --out eris-spectrum
+```
+
+The delivery still reports unresolved angular resolution because the caller has not
+accepted its profile-model assumptions. Exporting these figures does not change that verdict.
+
+![Eris mean image over 2.2–2.4 micrometres](images/telescopes/eris-band-image.png)
+
+**Band image:** mean surface brightness over 2.2–2.4 µm, weighted by the overlap of each
+qualified wavelength bin with that interval. Each visible pixel has every selected sample.
+The image retains its native grid; this is not a registered body map.
+
+![Eris aperture spectrum with a separate background region subtracted](images/telescopes/eris-aperture-spectrum.png)
+
+**Aperture spectrum:** mean over the fixed box `[19,24,25,30]`, minus the mean over
+background box `[29,24,35,30]`. Coordinates are zero-based, upper bounds exclusive;
+these are two disjoint 6 × 6 pixel regions. The result remains mean surface brightness
+in MJy/sr, without a total-flux or aperture-correction claim. A missing sample in either
+region masks that channel instead of changing the measured area.
+
+![Eris continuum-subtracted feature integral over 2.30–2.34 micrometres](images/telescopes/eris-feature-map.png)
+
+**Feature map:** the wavelength integral over 2.30–2.34 µm after subtracting a linear
+continuum anchored by weighted means over 2.26–2.29 and 2.35–2.38 µm. The colour scale
+is symmetric around zero: blue is negative (absorption relative to this continuum), red
+is positive. Values are MJy µm/sr, not total flux. This selected-window example does not
+establish a chemical identification or detection significance; field-edge residuals remain.
+
+```sh
+telescope export result.json --output band-image --hdu 1 --band 2.2,2.4 --out eris-band
+telescope export result.json --output aperture-spectrum --hdu 1 --aperture 19,24,25,30 --background 29,24,35,30 --out eris-aperture
+telescope export result.json --output feature-map --hdu 1 --band 2.30,2.34 --continuum 2.26,2.29,2.35,2.38 --out eris-feature
+```
+
+All three examples use the same pinned cube above and the default `--uncertainty omit`:
+spatial/spectral covariance has not been supplied. The API can propagate sample variances
+with `--uncertainty independent`, including background and continuum errors, but its receipt
+and spectrum legend identify that assumption explicitly. No smoothing, PSF matching or
+resampling is applied. FITS/ECSV data, PNG, SVG, CSV and a pinned product record accompany each export.
+
+
+### Independent numerical references
+
+The new output arithmetic uses Astropy NDData. A separate reference tool reads the original
+FITS cube and computes spectra with Photutils aperture sums and spectral integrals with
+specutils. It does not call the production reducer. These comparisons cover all finite output
+samples; units and missing-sample masks match exactly. Reproduction commands are in the
+[CLI guide](../packages/telescope/README.md#independent-output-checks).
+
+| Eris output | Independent reference | Valid samples | Maximum absolute difference |
+| --- | --- | ---: | ---: |
+| Band image | specutils 2.4.0 `line_flux`, divided by wavelength width | 1,309 | 4.45e-15 MJy/sr |
+| Aperture spectrum | Photutils 3.0.0 rectangular aperture sums divided by area | 191 | 4.45e-16 MJy/sr |
+| Feature map | specutils 2.4.0 integration after explicit continuum subtraction | 1,312 | 1.12e-16 MJy µm/sr |
+
+![Eris band image, independent specutils reference, and their numerical difference](images/telescopes/eris-band-image-oracle.png)
+
+![Eris aperture spectrum overlaid with the Photutils reference, with residuals below](images/telescopes/eris-aperture-spectrum-oracle.png)
+
+![Eris feature map, independent specutils reference, and their numerical difference](images/telescopes/eris-feature-map-oracle.png)
+
+The residual colour scales are in the stated physical units, at floating-point roundoff levels.
+They are not science signal. Known-answer fixtures separately verify uncertainty propagation,
+including continuum and background contributions. These checks validate the extraction
+arithmetic; they share Astropy FITS/WCS decoding and do not establish calibration accuracy,
+unknown error covariance, molecular identity or detection significance.
+
+Output ownership and remaining adapters:
+
+| Output | Required scientific input | Existing owner / remaining adapter |
+| --- | --- | --- |
+| Native image | Qualified pixel array and mask | Astropy FITS/WCSAxes output adapter; native sky or pixel coordinates, not body coordinates |
+| Spectral chart | Qualified wavelength axis and explicit pixel or fixed region | Executable FITS output adapter; optional background subtraction and explicitly conditional uncertainty |
+| Band image | Qualified units and wavelength bin edges | Executable wavelength-weighted mean; partial boundary bins included |
+| Feature map | Qualified bins plus feature and bracketing continuum windows | Executable continuum-subtracted wavelength integral; signed residual, no detection claim |
+| Surface map | Measurement definition, viewing geometry, rotation/frame and resolution evidence | PlanetMapper-backed `telescope export --output body-map`; scientific publication remains `body-map-publication.mts` |
+| Body sphere | Qualified surface map plus a prepared layer | Standalone HTML from `telescope export --output sphere`, using the existing PolyCSS renderer |
+| 3D scatter/volume | Explicit coordinate frame, units and measured or explicitly modeled depth | Existing point-field and density-volume owners; `--output points` or `volume` packages a physical `object.json` |
+
+`telescope outputs ARTIFACT.json` validates current telescope artifact pins and exposes this table as an
+executable transition: delivery to scientific output, image output to registered body map,
+body map to standard sphere, or an existing physical object to its point/volume handoff.
+It does not advertise a later stage when the exact prerequisite outputs are absent, and terminal
+sphere and spatial records have no further output. The original request satisfaction travels in
+the derived records; rendering or projection does not upgrade it.
+The point/volume export performs the full object-package, resource, provenance and licence
+validation before it writes a handoff.
+
+A wavelength axis, radial velocity or image intensity cannot silently become physical depth.
+PDS arrays pass through `pdr`; ISIS3 cores use the existing shared reader. Both feed
+Astropy and Matplotlib through temporary file-backed arrays. `--structure NAME`
+selects an ambiguous PDS array, with `--hdu 0` addressing its normalized FITS array.
+The original labels, input hashes, decoding versions and limitations remain in the receipt.
+The recognized IMAGE / SIGMA_MAP_IMAGE / QUALITY_MAP_IMAGE convention preserves
+standard deviations and conservatively accepts only zero quality flags. This is the
+[OSIRIS documented all-science-cases criterion](https://rosetta-osiris.eu/documents/SCIENCE_USER_GUIDE.PDF),
+not an assertion that every flagged pixel is useless for every analysis.
+
+There is no one-million-pixel CLI cap. Extraction writes NumPy files instead of
+serializing pixel arrays through JSON. PNG/SVG previews use a recorded nearest-sample
+stride when an axis exceeds 1600 pixels; FITS and CSV keep the entire native grid.
+Format readers and serialization still need memory and disk space proportional to their inputs.
+
+### Native examples and physical handoffs
+
+```sh
+telescope export enceladus/pick-1/result.json --output spectrum --hdu 0 --pixel 10,10 --out enceladus-spectrum
+telescope export comet-67p/pick-10/result.json --output image --structure IMAGE --hdu 0 --out comet-image
+telescope export src/objects/stellar-neighbourhood/object.json --output points --out stars-handoff
+telescope export src/objects/milky-way/object.json --output volume --out volume-handoff
+```
+
+![Enceladus spectrum from the delivered ISIS3 cube](images/telescopes/enceladus-isis-spectrum.png)
+
+Enceladus: Cassini VIMS cube C1487299582_1_ir.cub, pixel (10,10), recorded spectral
+centres and dimensionless I/F. No spectral bin edges or uncertainty are invented.
+The source request remains unresolved; a figure does not upgrade qualification.
+
+![Moon native PDS4 radius grid](images/telescopes/moon-pds-radius.png)
+
+Moon: LOLA LDEM_16, 5760 × 2880 (16,588,800 cells). `pdr.get_scaled` applies
+both the label's factor 0.5 and offset 1,737,400 metres. Values span
+1,728,418.5–1,748,085.5 m; the figure's native pixel axes do not assert a new
+planetary projection. Its preview samples every fourth pixel; FITS and CSV retain
+all samples. Supplied uncertainty is unavailable and remains unknown.
+
+The 2048 × 2048 OSIRIS image n20151026t125938783id40f22.img also exported, retaining
+its sigma map and all 4,194,304 grid cells. Only 26,917 cells pass the conservative
+zero-flag criterion. Its mostly masked preview is not a useful picture of the comet;
+the flags remain in the pinned original product for a measurement-specific policy.
+
+The physical handoffs copy the existing prepared object, point bank or volume slices,
+textures, frame, source recipe and credits. The application's loaders validate them;
+a second renderer is not added. HYG's 109,389 stars retain the source astrometry and
+its stated epoch limitations. The Milky Way retains its model interpretation.
+The exports reproduce every renderer file byte-for-byte and reject changed textures.
+Raw source catalogues/grids are referenced, not bundled: this is a renderer handoff.
+An ordinary RA/Dec/wavelength cube still needs a justified physical reconstruction
+before it can enter either 3D owner; this command does not supply one.
+
+### Projection and sphere
+
+```sh
+telescope export europa/pick-1/result.json --output band-image --hdu 1 \
+  --band 4.2,4.3 --uncertainty independent --out europa-band
+telescope outputs europa-band/output.product.json
+telescope export europa-band/output.product.json --output body-map --geometry navigation.json --out europa-map
+telescope outputs europa-map/map.fits.product.json
+telescope export europa-map/map.fits.product.json --output sphere --out europa-sphere
+```
+
+The body-map export uses PlanetMapper 1.14.0 for image navigation and nearest-neighbour
+surface resampling. PlanetMapper owns its SPICE geometry through SpiceyPy;
+its projection dependency is pyproj/PROJ. Astropy owns the numerical FITS
+output and Matplotlib the figure. The sphere is one standalone HTML file,
+using the target's existing standard sphere—the same lane as Mercury. The
+prepared mesh, camera, facing/depth bindings and physical frame are reused;
+the shared raster lane packs the measurement into a surface lens. The exporter
+serializes the scene and compiles the existing native CSS camera ahead of time.
+CSS and base64 images are embedded; the document contains no script elements
+and prohibits both scripts and network
+requests. Inactive image bindings (including Mercury’s unused interior images) are
+cleared without changing the prepared geometry or camera. There is no export-owned mesh or camera. A target without the existing
+standard sphere package is refused. The export also embeds the prepared world
+context for provenance and publishes the application's physical-camera view at export time. Prepare that context
+with `pnpm prepare:world-context` before exporting.
+
+The projection uses the pinned navigation ellipsoid. The display keeps the
+body package's standard reference sphere and physical scale; both are recorded.
+Quantitative colours are unlit. The output contains no PlanetMapper GUI, remote
+scripts, canvas or WebGL.
+
+Native resize handles store drag displacement in element dimensions. CSS view
+timelines read those dimensions to rotate the camera; a separate native scroll
+surface controls zoom. Dragging does not change zoom, and releasing the pointer
+holds the view. No JavaScript executes in the exported file. Preparation tools
+still run on Node.js.
+
+This portable view stays on the detailed sphere: zoom spans 0.7–3 times the
+initial camera distance, with a minimum viewport of 240px. Rotation uses two
+axes with roughly 3.4 turns of travel in each direction; reloading resets it.
+It does not provide the application's unbounded trackball, keyboard rotation,
+interior views or Solar System navigation. The enlarged resize handle requires
+Chromium's scrollbar/resizer styling and CSS view timelines. Firefox and real
+mobile hardware are not qualified. Unsupported prepared camera bindings are
+refused instead of producing an incomplete view.
+
+Check real exported documents with scripting disabled:
+
+```sh
+node tests/experiments/native-scroll/sphere-browser.mts europa-sphere/sphere.html mercury-sphere/sphere.html
+```
+
+The browser check compares the CSS rotation with native DOMMatrix arithmetic,
+checks repeated drags, release and independent zoom, and rejects script elements
+or external resource requests. It retains screenshots and a numerical report
+under `output/playwright/telescope-no-js/`.
+
+![Europa after native drag and zoom, with JavaScript disabled](images/telescopes/europa-sphere-no-js.png)
+
+The script-free export was checked in Chromium 153.0.8010.48 with Europa's
+457 prepared nodes and Mercury's 910. Rotation differed from DOMMatrix by at
+most `8.3e-8` per matrix component (budget `1e-6`); first-drag radius and zoom
+were unchanged. These are camera and interaction checks, not new scientific
+measurement qualification or a cross-browser guarantee.
+
+Navigation is an explicit scientific input. `navigation.json` contains:
+
+```json
+{
+  "schema": "cssearth-navigation-input@1",
+  "observer": "JWST",
+  "kernels": [
+    {"file": "pck00011.tpc", "role": "rotation", "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc", "bytes": 131226, "sha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"}
+  ],
+  "registration": {"method": "wcs", "explanation": "Header WCS; no independently fitted centre"},
+  "width": 360,
+  "height": 180,
+  "maximumEmissionDegrees": 65
+}
+```
+
+The example shows the rotation pin; supply the complete ordered kernel set
+(leapseconds, shape/rotation, target ephemeris and observer ephemeris) for the
+observation. Paths are relative to the navigation file. No kernels are found
+implicitly in a home directory or downloaded by the projection command.
+A fitted registration uses `method: "disc"`, `parameters: [x, y, radius, rotation]`
+in PlanetMapper's zero-based native-image convention, an explanation, and an
+`evidence` file with its `file`, `bytes` and `sha256`. WCS must still be valid;
+there is no silent image-centre fallback. WCS registration establishes a
+coordinate model, not an independently measured pointing accuracy.
+
+The current route accepts bounded two-dimensional intensive measurements
+(dimensionless or per steradian) with supplied uncertainty, a celestial WCS,
+a matching target/telescope header and `DATE-BEG`/`DATE-END`. Flux per pixel,
+missing uncertainty, unresolved discs and unsupported WCS distortion are
+refused. This bounded route does not yet cover every instrument's metadata
+conventions or target-in-field associations.
+
+`map.fits` contains VALUE, SIGMA and EMISSION planes. Its existing body-map
+sidecar records east-positive longitude, planetocentric latitude, the frame,
+measurement and mask. Nearest sampling preserves the original value/error
+pair; repeated cells are correlated. Navigation uncertainty, beam smearing
+and rotation during the exposure are not propagated. No missing hemisphere
+is synthesized. Source request satisfaction is retained separately; projection
+**does not qualify surface publication or turn pixel sampling into a PSF**.
+
+The HTML preserves the target's prepared reference sphere and physical camera
+frame. It opens directly at the measurement with no startup flight; shared
+controls own drag and zoom. Colour is not relit. Grey is unobserved.
+
+#### Europa projection, standalone sphere and independent checks
+
+The example uses the archive cube
+`jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits`, SHA256
+`838c59a8b0ddcb8e7f464324e1a1515dcfe8f4a42c7c79b7d10e8f23f5ffe64a`,
+already pinned by the Europa 1250 reproduction record. This run checks those
+archive bytes; it does not claim a new Spec3 reproduction. Its 4.2–4.3 µm
+brightness image uses the explicit independent-sample uncertainty assumption.
+The disc registration reuses the [previous Europa fit](https://github.com/layoutit/css.earth/blob/4ac4a4a9eb076d63760768e9f4ca3408882f2bcc/src/objects/europa/evidence/jwst-band-maps.json), converted from top-row-first
+coordinates to native FITS coordinates; the map excludes emission angles above 65°.
+
+![Europa projected brightness](images/telescopes/europa-projected-brightness.png)
+
+The actual standalone HTML export, rotated through the shared drag controls
+(61 browser frames, resized from 1280 × 720 to 960 × 540 and played at 12.5 fps):
+
+![Europa measurement in the standalone HTML sphere](images/telescopes/europa-sphere-html.png)
+
+![Europa measurement rotating in the standard css.earth sphere](images/telescopes/europa-sphere-rotation.gif)
+
+The independent reference traces orthographic rays through the pinned triaxial
+ellipsoid using NumPy and draws their sampled values using Matplotlib. It checks
+the emission mask and exact preservation of measurement/error pairs. Separately,
+the export oracle compares the HTML's prepared tree, camera, facing/depth bindings,
+surface-hit geometry and sky against the hash-pinned original body runtime.
+Those records must be identical. The reference image below checks the projected
+measurement; it is not a screenshot or a second rendering implementation.
+
+![Independent Europa sphere reference](images/telescopes/europa-sphere-reference.png)
+
+The preceding reference is separate from the HTML rotation preview above. The standalone
+Europa HTML was inspected through a local HTTP preview: initial rendering, drag
+rotation and wheel zoom remained visible with no browser errors. There is no
+startup flight; the first drag preserves camera distance. Screenshot
+comparison has not been performed; the draft does not claim pixel parity.
+The [navigation recipe](../tests/fixtures/telescope-projection/europa-navigation.json),
+[registration evidence](../tests/fixtures/telescope-projection/europa-registration.json) and
+[numerical report](../tests/fixtures/telescope-projection/europa-oracle.json) pin this example.
+Place each downloaded kernel under the recipe's `kernels/` directory; changed archive bytes
+are refused. The executable oracle is:
+
+```sh
+node tools/objects/telescopes/sphere-oracle.mts \
+  europa-map/map.fits.product.json europa-sphere/sphere.product.json \
+  europa-band/image.fits output/sphere-oracle
+```

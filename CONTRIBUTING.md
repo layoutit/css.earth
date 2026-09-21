@@ -108,17 +108,50 @@ Both scripts need an authenticated `wrangler`. Neither ever deletes a key.
 
 ## Check your change
 
-`pnpm check:pr` runs the steps of the "Contract lint" CI job (lockfile, package
-files and source citations, physical frame receipts and pins, published assets
-your branch adds, documentation links) in about a minute and stops at the first
-failure. `pnpm check:ci` runs the lint, typecheck and prepared-universe jobs'
-command steps in order and takes far longer; `--job=<id>` picks one job and
-`--list` shows the exact commands. Choose checks by what changed, and say in the
-PR which ones you ran and which you did not. Test files are type-checked nightly
-and on main; run `pnpm typecheck` locally for the full check.
+The [CI/CD maintenance guide](docs/ci-cd.md) sets the shared **2-minute target,
+3-minute maximum** for required PR feedback and the rules for changing the pipeline.
+
+`pnpm check:pr` and `pnpm check:ci` use the same changed-path plan as GitHub,
+including test types, nebula and the production-build smoke when selected.
+The default base is `origin/main`; `--base=<ref>` changes it. Local selection
+also includes staged, unstaged and untracked files. `--list` prints the selected
+jobs and exact workflow commands without running them; `--job=<id>` selects one
+lane; `--all` runs every lane. Local jobs run serially and stop on failure;
+GitHub runs independent jobs in parallel. More than 12 changed object packages
+requires `--pipeline-change` locally and the matching label on the PR.
+
+Unknown ownership selects all shared lanes. Changed object data selects package
+integrity tests; documentation-only changes keep lint. New documentation defects
+and defects in changed files block PRs, including broken unchanged inbound links.
+Unrelated baseline documentation debt is counted but does not block that PR;
+main retains the complete audit. The compiler lanes restore their actual pinned
+JSON inputs and generate real shell data, without downloading body texture banks.
+Full-universe integrity and production-build checks remain distinct and can
+still expose unrelated package defects. Report those failures; do not bypass pins.
+
+Test selection belongs in the native `package.json` scripts, not workflow file
+inventories or a separate runner. `test:ci`, `test:sources:checks` and the
+`test:universe:*` suites use quoted Node filename/folder globs; Vitest retains its
+package and renderer discovery. Matching new tests run automatically without a
+workflow edit. Existing filenames with different setup requirements remain explicit
+exceptions; do not broaden a glob to include asset-authoring tests in a read-only
+runtime suite. Tests stay beside their current owners.
+
+PR source checks validate published package records; main additionally regenerates
+authored provenance. A native Actions matrix gives source, runtime, shell and
+renderer checks separate CPU budgets; the required universe status passes only
+when all four pass. Locally, `test:universe` runs its groups sequentially.
+Preparation uses separate publication/browser and galaxy/world lanes; its required
+status also needs both to pass. The galaxy writer finishes before world readers.
+Compiled artifacts use exact-input caches; these never cache a test verdict.
+Package and renderer caches follow compiler inputs; preparation retains a
+conservative whole-tree key. Runtime-only jobs omit preparation declarations;
+compiler jobs and shell checks keep them, with separate cache identities. Cached
+baked JSON remains subject to the installer's byte and SHA-256 checks on every run.
+Cold and cached CI timings must be reported separately.
 
 To run the fast subset before every push, opt in with `pnpm hooks:install`: the
-pre-push hook runs `pnpm check:pr --quick`, which skips the network check and the
+pre-push hook runs `pnpm check:pr --job=lint --quick`, which skips the network check and the
 documentation audits. Skip it once with `git push --no-verify` or
 `CSSEARTH_SKIP_HOOKS=1`; remove it with `git config --unset core.hooksPath`.
 
@@ -148,6 +181,11 @@ an unavailable Helix view does not qualify Helix's rendering or interaction.
 Record the missing bank and any 404s, and restore the pinned assets before
 claiming that object's interaction check. The installed-bank tamper test likewise
 requires its referenced bank to be present.
+
+Telescope family/import integration tests require the pinned astronomy toolchain
+described in [Astronomy package ownership](docs/astronomy-package-ownership.md).
+Without it, content qualification and Python-backed operations fail; that is an
+environment limitation, not a passing integration result.
 
 ## Where things live
 

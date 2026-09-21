@@ -96,10 +96,11 @@ try {
     await scrollTo(page, distance);
     snapshots[name] = await read(page);
     assert.ok(Math.abs(snapshots[name].volumeOpacity - opacity) < 1e-6, `${name}: actual volume opacity follows prepared profile`);
-    assert.equal(snapshots[name].skyVisibility, opacity < 1 ? 'visible' : 'hidden');
+    const skyContribution = 1 - snapshots[name].volumeCompositeOpacity;
+    assert.equal(snapshots[name].skyVisibility, skyContribution > 0 ? 'visible' : 'hidden');
     assert.ok(Math.abs(snapshots[name].volumeCompositeOpacity - opacity * snapshots[name].volumeBrightness) < 1e-6);
-    assert.ok(Math.abs((1 - snapshots[name].volumeCompositeOpacity) * snapshots[name].skyOpacity - (1 - opacity)) < 1e-6,
-      'actual background composition preserves the prepared sky contribution');
+    assert.ok(Math.abs((1 - snapshots[name].volumeCompositeOpacity) * snapshots[name].skyOpacity - skyContribution) < 1e-6,
+      'actual background composition stays continuous through the Milky Way handoff');
     assert.equal(snapshots[name].volumeImageOpacity, 1, 'exposure no longer nests inside the handoff');
     await page.screenshot({ path: resolve(output, `${name}.png`) });
   }

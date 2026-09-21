@@ -8,7 +8,7 @@ import { inventoriedAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN } from '.
 const execFileAsync = promisify(execFile);
 const textExtensions = new Set(['.css', '.html', '.js', '.json', '.map', '.svg', '.txt', '.xml']);
 const escapedOrigin = RUNTIME_ASSET_ORIGIN.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
-const runtimeAssetPattern = new RegExp(`${escapedOrigin}/runtime-assets/[a-f0-9]{64}/[a-zA-Z0-9._/-]+`, 'gu');
+const runtimeAssetPattern = new RegExp(`${escapedOrigin}/runtime-assets/[a-f0-9]{64}/[a-zA-Z0-9._@/-]+`, 'gu');
 
 export function runtimeAssetUrls(text: string): string[] {
   return [...new Set(text.match(runtimeAssetPattern) ?? [])].sort();

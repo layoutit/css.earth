@@ -110,19 +110,6 @@
 .planet-surface-minimap[data-dragging="true"] { cursor: grabbing; }
 .planet-surface-minimap:focus { outline: none; }
 
-.planet-lens-source {
-  margin: 8px 4px 0 0;
-  color: var(--shell-text-muted);
-  font: 400 12px/16px var(--shell-ui-font);
-}
-.planet-lens-source a {
-  color: var(--shell-text-secondary);
-  text-decoration: underline;
-  text-decoration-color: var(--shell-text-muted);
-  text-underline-offset: 2px;
-}
-.planet-lens-source a:hover { color: var(--shell-text); }
-
 .planet-surface-minimap[data-ready="true"] > .planet-lens-texture { opacity: .35; }
 
 .planet-minimap-viewport {
@@ -1794,6 +1781,12 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   letter-spacing: 0.01em;
   text-shadow: 0 0 2px rgb(0 0 0 / 95%), 0 1px 3px rgb(0 0 0 / 80%);
   transition: color 120ms ease;
+}
+
+/* Surface labels default to hidden before the shell binds so prepared
+   nomenclature never flashes on first paint. */
+body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-label] {
+  visibility: hidden !important;
 }
 
 .prepared-surface-features [data-feature-kind="point"]::before {

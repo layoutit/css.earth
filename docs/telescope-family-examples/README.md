@@ -1,0 +1,28 @@
+# Telescope family examples
+
+The [test fixtures](../../tests/fixtures/telescope-family-examples/) pin one compact, reviewable public-path example for every F01–F18 family. The [manifest](../../tests/fixtures/telescope-family-examples/manifest.json) is the source of truth: every row records the real source URL and byte pin, exact CLI command, committed output pin, product-record/readback proof, owner, independent check, and scientific limit.
+
+Each row carries `exampleProven: true` and `proposalBaseline.status: "complete"` because its family baseline is now executable through a public owner. The examples remain deliberately bounded: completeness applies to the recorded format profile and operations, not every format that could belong to the family.
+
+| Family | Review artifact | Public path | What it proves |
+| --- | --- | --- | --- |
+| F01 | [F01.csv](../../tests/fixtures/telescope-family-examples/artifacts/F01.csv) | `telescope export` | Native 2D image values |
+| F02 | [F02.json](../../tests/fixtures/telescope-family-examples/artifacts/F02.json) | `telescope family-run` | Mixed time, Stokes and spectral slicing with FITS/WCS context |
+| F03 | [F03.csv](../../tests/fixtures/telescope-family-examples/artifacts/F03.csv) | `telescope family-run` | Standalone spectrum export |
+| F04 | [F04.json](../../tests/fixtures/telescope-family-examples/artifacts/F04.json) | `telescope family-run` | Pinned slit-scan inspection |
+| F05 | [F05.csv](../../tests/fixtures/telescope-family-examples/artifacts/F05.csv) | `telescope family-run` | Discrete photometry export |
+| F06 | [F06.csv](../../tests/fixtures/telescope-family-examples/artifacts/F06.csv) | `telescope family-run` | Explicit time selection |
+| F07 | [F07.csv](../../tests/fixtures/telescope-family-examples/artifacts/F07.csv) | `telescope family-run` | Native dynamic-spectrum window |
+| F08 | [F08.json](../../tests/fixtures/telescope-family-examples/artifacts/F08.json) | `telescope family-run` | Typed table inspection |
+| F09 | [F09.csv](../../tests/fixtures/telescope-family-examples/artifacts/F09.csv) | `telescope family-run` | Astrometry export |
+| F10 | [F10.csv](../../tests/fixtures/telescope-family-examples/artifacts/F10.csv) | `telescope family-run` | Selected event rows with lineage |
+| F11 | [F11.json](../../tests/fixtures/telescope-family-examples/artifacts/F11.json) | `telescope family-run` | Selected UVFITS visibilities with package-owned UV preview |
+| F12 | [F12.json](../../tests/fixtures/telescope-family-examples/artifacts/F12.json) | `telescope family-run` | OIFITS V2 diagnostics |
+| F13 | [F13.json](../../tests/fixtures/telescope-family-examples/artifacts/F13.json) | `telescope family-run` | Declared Stokes spectrum and explicit polarization policy |
+| F14 | [F14.json](../../tests/fixtures/telescope-family-examples/artifacts/F14.json) | `telescope family-run` | Native HEALPix NESTED pixel selection |
+| F15 | [F15.json](../../tests/fixtures/telescope-family-examples/artifacts/F15.json) | `telescope family-run` | Native delay-Doppler profile |
+| F16 | [F16.json](../../tests/fixtures/telescope-family-examples/artifacts/F16.json) | `telescope family-run` | Existing physical point-field inspection |
+| F17 | [F17.json](../../tests/fixtures/telescope-family-examples/artifacts/F17.json) | `telescope family-run` | Pinned NEAR MSI raw/calibrated/label closure |
+| F18 | [F18.json](../../tests/fixtures/telescope-family-examples/artifacts/F18.json) | `telescope family-run` | Exact compound-member enumeration |
+
+Descriptor member paths are relative to each descriptor, so the examples contain no checkout-specific absolute paths. Runtime `output.product.json` receipts are deliberately not copied here; the manifest points at focused tests that reopen and verify those records.

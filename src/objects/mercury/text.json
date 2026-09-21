@@ -28,22 +28,22 @@
   "datasets": {
     "normal": {
       "title": "MDIS Global Basemap BDR",
-      "detail": "750 nm",
+      "detail": "MESSENGER MDIS",
       "summary": "Grayscale brightness at 750 nm, which changes with the surface and the lighting of each image."
     },
     "enhanced": {
       "title": "MDIS Enhanced Color Mosaic",
-      "detail": "False color",
+      "detail": "MESSENGER MDIS",
       "summary": "Colors separate surface materials; missing polar color is filled from nearby imagery."
     },
     "topography": {
       "title": "MDIS Color Shaded Relief",
-      "detail": "Shaded relief",
+      "detail": "USGS / MESSENGER",
       "summary": "Colors show elevation and shading shows slopes, not the planet's visible color."
     },
     "interior": {
       "title": "Interior structure model",
-      "detail": "Structure",
+      "detail": "NASA Science",
       "summary": "A large metallic core inside a rocky shell, sized by the structural model."
     }
   }

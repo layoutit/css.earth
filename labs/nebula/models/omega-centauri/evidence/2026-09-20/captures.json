@@ -1,0 +1,96 @@
+{
+  "capturedAt": "2026-09-20T20:13:54.133Z",
+  "browser": "148.0.7778.96",
+  "platform": "darwin",
+  "viewport": {
+    "width": 1100,
+    "height": 820
+  },
+  "deviceScaleFactor": 1,
+  "url": "http://127.0.0.1:4339/@fs/private/tmp/cssearth-pr390/output/pr390-audit/layer-optimization/omega-preview.html",
+  "resultId": "7a4f8781a7d19fafa57f11e65eae6ee24975082d3fcae0c1644cbdd68a5ac549",
+  "logicalLayers": 459,
+  "domLeaves": 1377,
+  "stars": 0,
+  "source": "ESO/INAF-VST/OmegaCAM eso1119b photographic color on modeled integrated-starlight geometry",
+  "meaning": "Actual retained-DOM compiler viewer in a local inspection wrapper. This is not the main application or a promoted Lab delivery. Captures illustrate four camera poses, not matched before/after comparisons. No Pixelmatch comparison is claimed.",
+  "sideYLimit": "The interactive pitch clamp is 89 degrees, so this is a near-side view.",
+  "ignoredInputPins": [
+    {
+      "path": "output/pr390-audit/layer-optimization/omega-preview.html",
+      "bytes": 1907,
+      "sha256": "867d1a6e11ceffc7f3dcb0f75e68ac92913fd03e839b8be71c05c49f134c9432"
+    },
+    {
+      "path": "output/pr390-audit/layer-optimization/omega-preview.ts",
+      "bytes": 3699,
+      "sha256": "09ea277a99d21ae375a9ff9dacce952146e05a6eb8b6171eeead08efb6c9429d"
+    },
+    {
+      "path": "output/pr390-audit/layer-optimization/omega-7a4f8781a7d19fafa57f11e65eae6ee24975082d3fcae0c1644cbdd68a5ac549/scene.json",
+      "bytes": 17276,
+      "sha256": "250bccd18011bd0fafd5b5d17c756b393b17f886206ad1383b3fb47aab492fc8"
+    },
+    {
+      "path": ".local/nebula-lab/compiler/5d934218dcc59475e632d503bea59dfeb3bb156431d8d88d3616830808b23df9/field.json",
+      "bytes": 4970176,
+      "sha256": "2f688583e71134410d5362c10068a7e51dc90db03b284592bdd28207f8a9bc94"
+    }
+  ],
+  "captures": [
+    {
+      "file": "front.png",
+      "bytes": 210440,
+      "sha256": "8aced76277035d66135f7b6afc130a8fc72613ed67b0ef1e712889b777684c6f",
+      "yawDegrees": 0,
+      "pitchDegrees": 0,
+      "framing": {
+        "zoom": 1,
+        "panX": 0,
+        "panY": 0
+      },
+      "lens": "eso1119b"
+    },
+    {
+      "file": "oblique.png",
+      "bytes": 213943,
+      "sha256": "4d57deb3c2b8baded9b54703fc69895842bf5b4f77cd31573d793fe2c03bbffd",
+      "yawDegrees": 35,
+      "pitchDegrees": 25,
+      "framing": {
+        "zoom": 1,
+        "panX": 0,
+        "panY": 0
+      },
+      "lens": "eso1119b"
+    },
+    {
+      "file": "side-x.png",
+      "bytes": 210233,
+      "sha256": "f31ffa91c300ef717eaeefc3fc208f953a4ca0ffdcf15efe3ea9be77149ebfef",
+      "yawDegrees": 90,
+      "pitchDegrees": 0,
+      "framing": {
+        "zoom": 1,
+        "panX": 0,
+        "panY": 0
+      },
+      "lens": "eso1119b"
+    },
+    {
+      "file": "side-y.png",
+      "bytes": 214418,
+      "sha256": "5e8b3a91fbd411056326a4ea8e6757ba1bdb2d2b5a6152d87734fca9b59997b8",
+      "yawDegrees": 0,
+      "pitchDegrees": 89,
+      "framing": {
+        "zoom": 1,
+        "panX": 0,
+        "panY": 0
+      },
+      "lens": "eso1119b"
+    }
+  ],
+  "errors": [],
+  "failures": []
+}

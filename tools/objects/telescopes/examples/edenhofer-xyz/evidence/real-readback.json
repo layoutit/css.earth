@@ -1,0 +1,136 @@
+{
+  "source": "work/edenhofer-xyz-run/mean_and_std_xyz.crop-400-496-450-546-500-596.fits",
+  "sourceSha256": "c4338d130262e349b41951edbdf18b5fcb064ae9f6d0b1ba0d688c20627abd33",
+  "shapeZYX": [
+    96,
+    96,
+    96
+  ],
+  "allFinite": true,
+  "firstCentrePc": [
+    -450.0,
+    -350.0,
+    -250.0
+  ],
+  "slices": {
+    "x": {
+      "meanEqual": true,
+      "stdEqual": true,
+      "unit": "E of Zhang, Green, and Rix (2023)",
+      "fixedIndex": 48,
+      "retainedPlaneMapping": {
+        "worldAtPixelZero": [
+          -450,
+          -350,
+          -250
+        ],
+        "matrix": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            2
+          ]
+        ],
+        "fixedAxis": "x",
+        "fixedIndex": 48
+      }
+    },
+    "y": {
+      "meanEqual": true,
+      "stdEqual": true,
+      "unit": "E of Zhang, Green, and Rix (2023)",
+      "fixedIndex": 48,
+      "retainedPlaneMapping": {
+        "worldAtPixelZero": [
+          -450,
+          -350,
+          -250
+        ],
+        "matrix": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            2
+          ]
+        ],
+        "fixedAxis": "y",
+        "fixedIndex": 48
+      }
+    },
+    "z": {
+      "meanEqual": true,
+      "stdEqual": true,
+      "unit": "E of Zhang, Green, and Rix (2023)",
+      "fixedIndex": 48,
+      "retainedPlaneMapping": {
+        "worldAtPixelZero": [
+          -450,
+          -350,
+          -250
+        ],
+        "matrix": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            2
+          ]
+        ],
+        "fixedAxis": "z",
+        "fixedIndex": 48
+      }
+    }
+  },
+  "preparedNativeMeanEqual": true,
+  "preparedNativeStdEqual": true,
+  "rgbaScalarBytesEqual": true,
+  "validAlphaOpaque": true,
+  "placementOriginRelativeError": 9.035320796576674E-16,
+  "voxelEdgeBounds": {
+    "min": [
+      -1,
+      -1,
+      -1
+    ],
+    "max": [
+      191,
+      191,
+      191
+    ]
+  },
+  "nativeExportByteIdentical": true,
+  "verification": "Independent Astropy reopen of real Telescope API outputs; no preparation code shared with the assertions.",
+  "profileCommits": [
+    "b73cf67071",
+    "111075f98c"
+  ]
+}

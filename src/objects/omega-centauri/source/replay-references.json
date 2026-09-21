@@ -1,0 +1,30 @@
+{
+  "schema": "cssearth-replay-references@1",
+  "references": [
+    {
+      "originalPath": "labs/nebula/models/omega-centauri/compiler.json",
+      "path": "source/bake-inputs/references/01-compiler.json",
+      "sha256": "37c12a3be28a8dfbebb8931cd5f528673b63018c34aea8a4a07b23b26b6a1f3f"
+    },
+    {
+      "originalPath": "labs/nebula/models/omega-centauri/photometric-mge.json",
+      "path": "source/bake-inputs/references/02-photometric-mge.json",
+      "sha256": "4e28dac4271eeafd77f77582cfd69105ca02677e6bbe6c88e583f412c7b27914"
+    },
+    {
+      "originalPath": "labs/nebula/models/omega-centauri/observation-structures.json",
+      "path": "source/bake-inputs/references/03-observation-structures.json",
+      "sha256": "dc8dd69f0a7f1c15d8b6376e43147e3e2cd2c52ab802d7fc5651d23c28ae8c0e"
+    },
+    {
+      "originalPath": "labs/nebula/models/omega-centauri/physical-evidence.json",
+      "path": "source/bake-inputs/references/04-physical-evidence.json",
+      "sha256": "6e88b6abe042cb66a104931cf1039fb3e6d685dd308b303226bdb6e530ac5b51"
+    },
+    {
+      "originalPath": "labs/nebula/models/omega-centauri/observations.json",
+      "path": "source/bake-inputs/references/05-observations.json",
+      "sha256": "5954f0098ffe25ad48ff22b581f6d47cbc67e7d902e5d1f5ac19822c0612b9c2"
+    }
+  ]
+}

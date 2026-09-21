@@ -59,7 +59,7 @@ test('prepared volume opacity preserves authored grading and validates bounded l
 
 test('stellar handoff survives preparation and rejects missing or out-of-order ranges', async () => {
   const raw = await readSource() as Record<string, unknown>;
-  const expected = { objectId:'stellar-neighbourhood',fadeStartDistanceM:1.495978707e13,fullDistanceM:3.085677581491367e15 };
+  const expected = { objectId:'stellar-neighbourhood',fadeStartDistanceM:100 * M_PER_AU,fullDistanceM:200 * M_PER_AU };
   const source = parseWorldContextSource(raw);
   const prepared = prepareWorldContext({...source,bodies:[]},{},{}) as unknown as Record<string,unknown>;
   assert.deepEqual(prepared.stars,expected,'prepared world must retain the authored stellar handoff');
@@ -73,11 +73,12 @@ test('Sun context source derives its physical scale from the prepared visible ra
   const source = parseWorldContextSource(raw);
   assert.equal(source.frame.bodyRadiusM / source.frame.metersPerUnit, 310);
   assert.equal(source.system.fadeOutStartDistanceM, 1e14);
-  assert.equal(source.system.hiddenDistanceM, 1e15);
-  assert(source.system.hiddenDistanceM < source.stars.fullDistanceM);
+  assert.equal(source.system.hiddenDistanceM, 9460730472580800);
+  assert(source.stars.fullDistanceM < source.system.hiddenDistanceM,
+    'nearby stars finish appearing before the Solar System context retires at one light-year');
   assert.equal(source.camera.framingReferenceZoom, 1);
   assert.deepEqual(source.focus.pointSource,{absoluteMagnitude:4.832125665882298,color:'#fff5e0',
-    proximityEnhancement:{fullDistanceM:1e12,fadeOutDistanceM:1e14,radiusMultiplier:2.4,brightnessMultiplier:1.5}});
+    proximityEnhancement:{fullDistanceM:1e12,fadeOutDistanceM:9460730472580800,radiusMultiplier:2.4,brightnessMultiplier:1.5}});
   const prepared = prepareWorldContext({ ...source, bodies: [] }, {}, {});
   assert.deepEqual(prepared.focus.pointSource,source.focus.pointSource,'prepared focus must preserve authored far-point photometry');
   assert.equal(source.camera.presentation.dolly.maximumDistanceOverOrbitExtent, 1);

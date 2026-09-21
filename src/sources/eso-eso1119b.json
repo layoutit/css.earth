@@ -1,0 +1,59 @@
+{
+  "id": "eso-eso1119b",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Omega Centauri: VST/OmegaCAM optical composite",
+  "identifiers": [
+    {
+      "type": "ESO image",
+      "value": "eso1119b"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1119b/",
+      "label": "Publisher image and instrument metadata"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/original/eso1119b.tif",
+      "label": "Original publisher TIFF"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.eso.org/public/outreach/copyright/",
+      "label": "ESO image use and full-credit terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/eso1119b/",
+      "checkedOn": "2026-09-20",
+      "locator": "About the image, coordinates, filters, credit and original download"
+    }
+  ],
+  "publisher": "European Southern Observatory",
+  "publicationDate": "2011-06-08",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/INAF-VST/OmegaCAM. Acknowledgement: A. Grado, L. Limatola/INAF-Capodimonte Observatory",
+      "scope": "Published image and derived views",
+      "evidence": "https://www.eso.org/public/images/eso1119b/"
+    },
+    {
+      "kind": "rights",
+      "text": "ESO public images use CC BY 4.0 unless otherwise noted; retain the complete visible credit and do not imply endorsement.",
+      "scope": "Selected published image",
+      "evidence": "https://www.eso.org/public/outreach/copyright/"
+    },
+    {
+      "kind": "limitation",
+      "text": "Published G/R/I display composite. Sampling and display stretch are not calibrated stellar flux or measured depth.",
+      "scope": "Scientific interpretation",
+      "evidence": "https://www.eso.org/public/images/eso1119b/"
+    }
+  ]
+}

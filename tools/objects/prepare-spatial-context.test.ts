@@ -8,13 +8,25 @@ import { SCENE_SATELLITE_IDS, SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, com
   systemBarycentreHeliocentricAu, M_PER_AU, STAR_IDS, starStateKm, HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm } from '@cssearth/astronomy';
 import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey, StarId, HostedPlanetId } from '@cssearth/astronomy';
 import { readCatalog } from '../prepare-catalog.mts';
-import { prepareSpatialContext } from './prepare-spatial-context.js';
+import { parseSpatialContextCommand, prepareSpatialContext } from './prepare-spatial-context.js';
 
 const root = process.cwd();
 const sourcePath = resolve(root, 'src/objects/sun/source/navigation/universe.json');
 const solarGeometryPath = resolve(root, 'src/platform/solar-geometry.mts');
 const contextEntries = (await readCatalog()).filter(body => body.context && body.id !== 'sun')
   .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
+
+test('deploy generation never repins source manifests unless authoring requests it', () => {
+  const generated = parseSpatialContextCommand(['source.json', 'prepared.json'], '/repo');
+  assert.equal(generated.pinReferences, false);
+  assert.equal(generated.sourcePath, '/repo/source.json');
+  assert.equal(generated.outputPath, '/repo/prepared.json');
+  assert.equal(generated.solarGeometryPath, '/repo/src/platform/solar-geometry.mts');
+
+  const authored = parseSpatialContextCommand(['source.json', 'prepared.json', '--pin-references'], '/repo');
+  assert.equal(authored.pinReferences, true);
+  assert.throws(() => parseSpatialContextCommand(['source.json', 'prepared.json', '--unknown'], '/repo'), /Usage:/);
+});
 
 
 test('migrated world-frame radii override astronomy only at the same position and epoch', async () => {
@@ -120,18 +132,20 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     assert.deepEqual(result.bodies.filter((body: { placement?: string }) => body.placement === 'approximate')
       .map((body: { id: string }) => body.id).sort(), ['dactyl', 'selam'], 'Catalogue preparation must preserve the source records’ phase qualification.');
     // Independently parse the retained Horizons output, bypassing the snapshot
-    // loader, solar-geometry.mts and descriptor frames. Other bodies retain
-    // their compact astronomy models; Earth adds its source-owned EMB offset.
+    // loader, solar-geometry.mts and descriptor frames. Retained Sun-centered
+    // records own the primary positions; other bodies retain their compact models.
     const manifestPath = resolve(root, 'packages/astronomy/source/scene-epoch');
     const manifest = JSON.parse(await readFile(resolve(manifestPath, 'manifest.json'), 'utf8'));
     assert.equal(manifest.epochJdTt, source.frame.epochJdTt);
     const sourcePositions = new Map<string, number[]>();
+    const sourcePrimaries = new Map<string, number[]>();
     for (const record of manifest.records) {
       const response = await readFile(resolve(manifestPath, record.path), 'utf8');
       const row = response.split('$$SOE')[1]!.split('$$EOE')[0]!.trim().split(',');
-      sourcePositions.set(record.id, row.slice(2, 5).map(Number));
+      const positionKm = row.slice(2, 5).map(Number);
+      sourcePositions.set(record.id, positionKm);
+      if (record.centerBodyId === 'sun') sourcePrimaries.set(record.id, positionKm);
     }
-    const sourcePrimaries = new Map<string, number[]>();
     for (const id of SCENE_SATELLITE_IDS) {
       const record = JSON.parse(await readFile(resolve(root, `src/objects/${id}/source/validation/epoch-state.json`), 'utf8'));
       sourcePositions.set(id, record.positionKm);

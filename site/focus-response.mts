@@ -62,10 +62,7 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
       const runtime = createPreparedVolumeLenses({ payload, resolveResource: path => resolve(`prepared/${path}`) }).mount({ host: stage, before: end, nativeFocalCss: focalCss });
       runtime.selectLens(lensId); runtime.publish({ world, viewport });
       end.remove();
-      // The same native checkbox hides the point layer in CSS without a request.
-      const stars = bank.querySelector<HTMLInputElement>('[data-focus-stars]');
-      if (stars && url.searchParams.get('focusControls') === '1') stars.toggleAttribute('checked', url.searchParams.get('focusStars') === 'on');
-      presentation = { ...runtime.state(), starsVisible: stars?.hasAttribute('checked') ?? false, selectLens() {}, setStarsVisible() {} };
+      presentation = { ...runtime.state(), selectLens() {} };
       for (const context of bank.querySelectorAll<HTMLElement>('[data-dataset-context]')) context.hidden = context.dataset.datasetContext !== lensId;
     }
   } else if (lensIds.length) throw new RangeError('Prepared focus datasets are unavailable.');
@@ -78,7 +75,6 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
   card.destroy(); root.hidden = false;
   const initial = shell.createElement('script'); initial.type = 'application/json'; initial.dataset.initialFocus = selected.id;
   initial.textContent = JSON.stringify(initialFocusCatalog(catalog, selected)).replace(/</gu, '\\u003c'); root.append(initial);
-  requiredElement<HTMLInputElement>(shell, '.planet-sidebar-search').setAttribute('value', selected.name);
   requiredElement(shell, '.planet-sheet-handle').setAttribute('checked', '');
   return saved;
 }

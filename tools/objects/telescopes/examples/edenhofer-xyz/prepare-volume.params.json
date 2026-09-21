@@ -1,0 +1,5 @@
+{
+  "crop":{"start":[0,0,0],"shape":[96,96,96]},
+  "transfer":{"kind":"sqrt","range":[0,0.007061],"color":[1,0.62,0.25],"strength":0.01,"clipping":"clamp","invalid":"transparent"},
+  "placement":{"referenceFrame":"sun-icrf","epochJdTt":2461286.5,"sourceOriginM":[0,0,0],"sourceToReferenceXyzw":[-0.48321068123112726,0.1962537406025645,0.699229789236555,-0.4889474498224255]}
+}

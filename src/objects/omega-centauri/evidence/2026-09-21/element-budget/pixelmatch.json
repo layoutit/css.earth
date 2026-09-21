@@ -1,0 +1,84 @@
+{
+  "method": "Matched 800x700 Lab renderer front views, fixed camera and unchanged emission/materials; only sampling allocation changes. Pixelmatch0.1, antialiasing excluded. Differences document the approximation and do not establish improved visual or scientific quality.",
+  "oldScene": "7a4f8781a7d19fafa57f11e65eae6ee24975082d3fcae0c1644cbdd68a5ac549",
+  "newScene": "59ae6e1a336d5a7b0d946197decfbbc093beb39f0181fac2ef88300314c08b8e",
+  "threshold": 0.1,
+  "includeAA": false,
+  "comparisons": [
+    {
+      "lens": "neutral",
+      "width": 800,
+      "height": 700,
+      "changedPixels": 1702,
+      "fraction": 0.0030392857142857144,
+      "brightnessAfterOverBefore": 1.2468683021993587,
+      "inputs": [
+        {
+          "path": "neutral-front-before.png",
+          "bytes": 202666,
+          "sha256": "f8c7f2cd102f2d7e60da2bc6164c1da62f419bca83a8c8df98820ddf939ae25e"
+        },
+        {
+          "path": "neutral-front-after.png",
+          "bytes": 214480,
+          "sha256": "7590c17ff355bf771c2a208d7d454ecbc2037cbef5289c65354ce6669810732c"
+        }
+      ],
+      "diff": {
+        "path": "neutral-front-diff.png",
+        "bytes": 83691,
+        "sha256": "072dc8f4ac0857c36396c4e1e21b05b6cefd5b868e77090adc1e878ae7938a78"
+      }
+    },
+    {
+      "lens": "eso1119b",
+      "width": 800,
+      "height": 700,
+      "changedPixels": 1695,
+      "fraction": 0.0030267857142857145,
+      "brightnessAfterOverBefore": 1.2503840846997605,
+      "inputs": [
+        {
+          "path": "eso1119b-front-before.png",
+          "bytes": 274760,
+          "sha256": "1b296b5a7a27c029f94c79bb8a907b1447e34f6c71ef94336fc9a66114630d12"
+        },
+        {
+          "path": "eso1119b-front-after.png",
+          "bytes": 287698,
+          "sha256": "270c13642ff003eedbd273d3bf7e081e0d6cefd03e26a88d899b431c214dbc9c"
+        }
+      ],
+      "diff": {
+        "path": "eso1119b-front-diff.png",
+        "bytes": 79886,
+        "sha256": "0128a11e61a7586089e8fc949de2aec6221ff6adeacc7098f7927e5088461ca8"
+      }
+    },
+    {
+      "lens": "eso0844a",
+      "width": 800,
+      "height": 700,
+      "changedPixels": 1699,
+      "fraction": 0.0030339285714285715,
+      "brightnessAfterOverBefore": 1.2345043902506054,
+      "inputs": [
+        {
+          "path": "eso0844a-front-before.png",
+          "bytes": 251489,
+          "sha256": "f6425d7082bc122195dc111cfccae07a4ed8da6f0f0575e7304e6e250da695e6"
+        },
+        {
+          "path": "eso0844a-front-after.png",
+          "bytes": 270964,
+          "sha256": "d4a6a7a4c1b0cce6121b5c03f20afb43c4f75adcf64ed86339a1a0ffe5cf5e45"
+        }
+      ],
+      "diff": {
+        "path": "eso0844a-front-diff.png",
+        "bytes": 81649,
+        "sha256": "05657ca3536050daaa7b656039f5085e5107ac8e62dcd63b49523c39b40b8989"
+      }
+    }
+  ]
+}

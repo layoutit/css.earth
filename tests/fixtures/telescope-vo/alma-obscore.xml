@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VOTABLE xmlns="http://www.ivoa.net/xml/VOTable/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.4">
+  <RESOURCE type="results">
+    <INFO name="QUERY_STATUS" value="OK" />
+    <INFO name="QUERY_TIMESTAMP" value="2026-09-20T13:14:00.284" />
+    <INFO name="QUERY" value="SELECT TOP 2 obs_publisher_did,obs_id,target_name,s_ra,s_dec,t_min,t_max,em_min,em_max,access_url,access_format,calib_level,dataproduct_type FROM ivoa.obscore WHERE member_ous_uid='uid://A001/X360d/Xae'" />
+    <TABLE>
+      <FIELD name="obs_publisher_did" datatype="char" arraysize="33*" ucd="meta.ref.ivoid" utype="obscore:Curation.PublisherDID">
+        <DESCRIPTION>publisher dataset identifier</DESCRIPTION>
+      </FIELD>
+      <FIELD name="obs_id" datatype="char" arraysize="64*" ucd="meta.id" utype="obscore:DataID.observationID">
+        <DESCRIPTION>internal dataset identifier</DESCRIPTION>
+      </FIELD>
+      <FIELD name="target_name" datatype="char" arraysize="256*" ucd="meta.id;src" utype="obscore:Target.Name">
+        <DESCRIPTION>name of intended target</DESCRIPTION>
+      </FIELD>
+      <FIELD name="s_ra" datatype="double" ucd="pos.eq.ra" unit="deg" utype="obscore:Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C1" xtype="adql:DOUBLE">
+        <DESCRIPTION>RA of central coordinates</DESCRIPTION>
+      </FIELD>
+      <FIELD name="s_dec" datatype="double" ucd="pos.eq.dec" unit="deg" utype="obscore:Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C2" xtype="adql:DOUBLE">
+        <DESCRIPTION>DEC of central coordinates</DESCRIPTION>
+      </FIELD>
+      <FIELD name="t_min" datatype="double" ucd="time.start;obs.exposure" unit="d" utype="obscore:Char.TimeAxis.Coverage.Bounds.Limits.StartTime" xtype="adql:DOUBLE">
+        <DESCRIPTION>start time of observation (MJD)</DESCRIPTION>
+      </FIELD>
+      <FIELD name="t_max" datatype="double" ucd="time.end;obs.exposure" unit="d" utype="obscore:Char.TimeAxis.Coverage.Bounds.Limits.StopTime" xtype="adql:DOUBLE">
+        <DESCRIPTION>end time of observation (MJD)</DESCRIPTION>
+      </FIELD>
+      <FIELD name="em_min" datatype="double" ucd="em.wl;stat.min" unit="m" utype="obscore:Char.SpectralAxis.Coverage.Bounds.Limits.LoLimit" xtype="adql:DOUBLE">
+        <DESCRIPTION>start spectral coordinate value</DESCRIPTION>
+      </FIELD>
+      <FIELD name="em_max" datatype="double" ucd="em.wl;stat.max" unit="m" utype="obscore:Char.SpectralAxis.Coverage.Bounds.Limits.HiLimit" xtype="adql:DOUBLE">
+        <DESCRIPTION>stop spectral coordinate value</DESCRIPTION>
+      </FIELD>
+      <FIELD name="access_url" datatype="char" arraysize="72*" ucd="meta.ref.url" utype="obscore:Access.Reference">
+        <DESCRIPTION>URL to download the data</DESCRIPTION>
+      </FIELD>
+      <FIELD name="access_format" datatype="char" arraysize="9" ucd="meta.code.mime" utype="obscore:Access.Format">
+        <DESCRIPTION>Content format of the data</DESCRIPTION>
+      </FIELD>
+      <FIELD name="calib_level" datatype="int" ucd="meta.code;obs.calib" utype="obscore:ObsDataset.calibLevel">
+        <DESCRIPTION>calibration level (2 or 3). 2 if product_type = MOUS, 3 if product_type = GOUS</DESCRIPTION>
+      </FIELD>
+      <FIELD name="dataproduct_type" datatype="char" arraysize="5*" ucd="meta.code.class" utype="obscore:ObsDataset.dataProductType">
+        <DESCRIPTION>type of product</DESCRIPTION>
+      </FIELD>
+      <DATA>
+        <TABLEDATA>
+          <TR>
+            <TD>ADS/JAO.ALMA#2022.A.00026.S</TD>
+            <TD>uid://A001/X360d/Xae.source.Betelgeuse.spw.25</TD>
+            <TD>Betelgeuse</TD>
+            <TD>88.7931226390107</TD>
+            <TD>7.407138449255908</TD>
+            <TD>60159.467009</TD>
+            <TD>60183.438593</TD>
+            <TD>0.0013896479045031977</TD>
+            <TD>0.0014018251227735255</TD>
+            <TD>https://almascience.org/datalink/sync?ID=uid://A001/X360d/Xae</TD>
+            <TD>application/x-votable+xml; content=datalink</TD>
+            <TD>2</TD>
+            <TD>cube</TD>
+          </TR>
+          <TR>
+            <TD>ADS/JAO.ALMA#2022.A.00026.S</TD>
+            <TD>uid://A001/X360d/Xae.source.Betelgeuse.spw.27</TD>
+            <TD>Betelgeuse</TD>
+            <TD>88.7931226390107</TD>
+            <TD>7.407138449255908</TD>
+            <TD>60159.467009</TD>
+            <TD>60183.438593</TD>
+            <TD>0.0013749575667483273</TD>
+            <TD>0.0013868775844155475</TD>
+            <TD>https://almascience.org/datalink/sync?ID=uid://A001/X360d/Xae</TD>
+            <TD>application/x-votable+xml; content=datalink</TD>
+            <TD>2</TD>
+            <TD>cube</TD>
+          </TR>
+        </TABLEDATA>
+      </DATA>
+    </TABLE>
+    <INFO name="placeholder" value="ignore" />
+  </RESOURCE>
+</VOTABLE>

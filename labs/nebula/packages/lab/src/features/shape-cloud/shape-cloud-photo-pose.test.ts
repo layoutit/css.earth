@@ -5,7 +5,7 @@ import { shapeCloudCamera } from '../../adapters/viewer/shape-cloud-camera';
 import { preparedVolumeCameraTransform } from '../../adapters/viewer/camera-reference';
 import type { PreparedCssVolume } from '../../adapters/viewer/camera-reference';
 
-const frame: PreparedCssVolume['frame'] = { referenceFrame: 'lab', epochJdTt: 2451545, originM: [0, 0, 0],
+const frame: PreparedCssVolume['frame'] = { referenceFrame: 'lab-sky-west-north-toward', epochJdTt: 2451545, originM: [0, 0, 0],
   localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: { min: [-5, -5, -5], max: [5, 5, 5] } };
 const image = { width: 768, height: 534, unitsPerPixel: 10 / 768 };
 test('flat photo corners follow the actual cloud camera through compound yaw and pitch', () => {
@@ -29,8 +29,16 @@ test('triad uses source axes, registered screen orientation and the correct Eart
   assert.deepEqual(earth[0]!.screen, [1, 0]); assert.deepEqual(earth[1]!.screen, [0, 1]);
   assert.equal(Math.hypot(...earth[2]!.screen), 0); assert.equal(earth[2]!.towardEye, 1);
   const camera = shapeCloudCamera(frame, image, image, { zoom: 1, panX: 0, panY: 0 }, 0, 0);
-  assert.ok(camera.world.pose.positionM[2] < 0, 'Earth-view camera must lie on physical −Z.');
+  assert.ok(camera.world.pose.positionM[2] > 0, 'Earth-view camera must lie on prepared physical +Z (toward).');
   const back = shapeCloudImageAxes(180, 0, [1, 0, 0, 1, 0, 0]); assert.equal(back[2]!.towardEye, -1);
   const registered = shapeCloudImageAxes(0, 0, [0, 2, -2, 0, 100, 60]);
   assert.deepEqual(registered[0]!.screen, [0, 1]); assert.deepEqual(registered[1]!.screen, [-1, 0]);
+  for (const [yaw, pitch] of [[0, 0], [35, 27], [90, -30], [-52, -48]]) {
+    const axes = shapeCloudImageAxes(yaw!, pitch!, [1, 0, 0, 1, 0, 0]);
+    const posed = shapeCloudCamera(frame, image, image, { zoom: 1, panX: 0, panY: 0 }, yaw!, pitch!);
+    const { rotation: r } = preparedVolumeCameraTransform(posed, frame);
+    // Physical [X, -Y, +Z] maps to the retained renderer's swapped [Y, X, Z] basis.
+    const actual = [[r[1]!, r[4]!, r[7]!], [-r[0]!, -r[3]!, -r[6]!], [r[2]!, r[5]!, r[8]!]];
+    for (let i = 0; i < 3; i++) assert.ok(Math.hypot(...[...axes[i]!.screen, axes[i]!.towardEye].map((n, j) => n - actual[i]![j]!)) < 1e-10);
+  }
 });

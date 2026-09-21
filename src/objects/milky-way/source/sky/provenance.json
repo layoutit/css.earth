@@ -49,8 +49,8 @@
       0
     ],
     "radiusM": 6.171355162982735e+20,
-    "handoffCompleteDistanceM": 1.5428387907456837e+20,
-    "meaning": "Visual depth approximation for continuous camera-relative parallax. NASA supplies angular radiance, not measured depths. One closed six-face shell reuses the prepared image bank; the volume replaces it by the time the observer reaches one quarter of the shell radius."
+    "handoffCompleteDistanceM": 3085677581491367,
+    "meaning": "NASA supplies angular radiance observed from the Sun, not measured depths. The prepared Solar sky begins retiring at 100 AU and is absent by 0.1 pc so the same angular image is not presented from another stellar location."
   },
   "sourceBinding": {
     "kind": "catalogued",

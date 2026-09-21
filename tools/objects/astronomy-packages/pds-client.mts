@@ -7,7 +7,7 @@ export type PdsPackageRequest =
   | { readonly operation: 'resolve-target'; readonly names: readonly string[] }
   | { readonly operation: 'discover-target'; readonly targetLid: string }
   | { readonly operation: 'discover-product'; readonly targetLid: string; readonly lidvid: string }
-  | { readonly operation: 'decode-product'; readonly labelPath: string };
+  | { readonly operation: 'decode-product'; readonly labelPath: string; readonly arrayDirectory?: string };
 
 export interface PdsPackageAnswer {
   readonly schema: 'cssearth-pds-package-answer@1'; readonly peppi: string; readonly pdr: string;
@@ -27,6 +27,15 @@ import pds.peppi as pep
 
 request = json.load(sys.stdin)
 operation = request['operation']
+def export_array(array):
+    if not request.get('arrayDirectory'):return {}
+    directory=Path(request['arrayDirectory']);directory.mkdir(parents=True,exist_ok=True)
+    name='native-'+str(len(structures))+'.npy'
+    array=np.ma.asarray(array)
+    values=np.asarray(array) if not np.ma.getmaskarray(array).any() else np.ma.filled(array.astype(float),np.nan)
+    np.save(directory/name,values)
+    return {'arrayFile':name}
+
 answer = {'schema':'cssearth-pds-package-answer@1','peppi':version('pds.peppi'),'pdr':version('pdr'),'operation':operation}
 
 def value(item):
@@ -102,34 +111,36 @@ elif operation == 'decode-product':
             valid = np.asarray(array.compressed())
             valid = valid[np.isfinite(valid)]
             if not valid.size: raise ValueError(f'{key} has no finite samples')
-            structures.append({'name':key,'nativeMetadata':native_metadata(key),'shape':list(array.shape),'dtype':str(array.dtype),'elements':int(array.size),'finite':int(valid.size),'minimum':float(valid.min()),'maximum':float(valid.max())})
+            structures.append({**export_array(array),'name':key,'nativeMetadata':native_metadata(key),'shape':list(array.shape),'dtype':str(array.dtype),'elements':int(array.size),'finite':int(valid.size),'minimum':float(valid.min()),'maximum':float(valid.max())})
         if not structures: raise ValueError('PDS3 product has no supported numeric structure')
         answer['decoded'] = {'standard':'PDS3','metadata':{'scaling':'pdr get_scaled with special-value masking for arrays; tables as decoded by pdr','excludedNonScienceObjects':[key for key in data.keys() if 'HEADER' in key or key == 'HISTORY']},'structures':structures}
         json.dump(answer, sys.stdout, allow_nan=False, separators=(',',':'))
         sys.exit(0)
     root = ET.parse(label).getroot()
     def local(tag): return tag.rsplit('}',1)[-1]
-    special_constants = [(local(child.tag),(child.text or '').strip()) for node in root.iter() if local(node.tag) == 'Special_Constants' for child in node if child.text]
+    all_special_constants = [(local(child.tag),(child.text or '').strip()) for node in root.iter() if local(node.tag) == 'Special_Constants' for child in node if child.text]
     structures = []
     for key in data.keys():
         if key == 'label' or key.endswith('_HEADER') or key.startswith('HEADER_'): continue
-        array = np.asanyarray(data[key])
+        native = np.asanyarray(data[key])
+        numeric = np.issubdtype(native.dtype, np.number)
+        array = np.ma.asarray(data.get_scaled(key)) if numeric else native
         mask = np.ma.getmaskarray(array)
-        values = np.asarray(np.ma.filled(array, np.nan))
-        numeric = np.issubdtype(values.dtype, np.number)
+        values = np.asarray(array)
         finite = np.isfinite(values) if numeric else None
+        matching = [node for node in root.iter() if local(node.tag).startswith('Array_') and
+            any(local(child.tag) == 'local_identifier' and (child.text or '').strip() == key for child in node)]
+        special_constants = [] if len(matching)!=1 else [(local(child.tag),(child.text or '').strip()) for node in matching[0].iter() if local(node.tag)=='Special_Constants' for child in node if child.text]
         special = np.zeros(array.shape, dtype=bool)
         if numeric:
             for _, text in special_constants:
                 try:
-                    constant = np.array([int(text,16)], dtype=np.uint32).view(np.float32)[0] if text.lower().startswith('0x') and values.dtype.itemsize == 4 else float(text)
-                    special |= values == constant
+                    constant = np.array([int(text,16)], dtype=np.uint32).view(np.float32)[0] if text.lower().startswith('0x') and native.dtype.itemsize == 4 else float(text)
+                    special |= np.asarray(native) == constant
                 except (ValueError, OverflowError): pass
-        valid = finite & ~special if numeric else None
-        matching = [node for node in root.iter() if local(node.tag).startswith('Array_') and
-            any(local(child.tag) == 'local_identifier' and (child.text or '').strip() == key for child in node)]
+        valid = finite & ~special & ~mask if numeric else None
         units = [] if len(matching) != 1 else [(child.text or '').strip() for element in matching[0] if local(element.tag) == 'Element_Array' for child in element if local(child.tag) == 'unit']
-        structures.append({'name':key,'nativeMetadata':{'unit':units[0] if len(units) == 1 else None},'shape':list(array.shape),'dtype':str(array.dtype),'elements':int(array.size),'masked':int(mask.sum()),'special':int(special.sum()),
+        structures.append({**(export_array(np.ma.array(values,mask=~valid)) if numeric else {}),'name':key,'nativeMetadata':{'unit':units[0] if len(units) == 1 else None},'shape':list(array.shape),'dtype':str(array.dtype),'elements':int(array.size),'masked':int(mask.sum()),'special':int(special.sum()),
           **({'finite':int(valid.sum()),'minimum':float(values[valid].min()),'maximum':float(values[valid].max())} if numeric and valid.any() else {})})
     def first(name):
         node = next((node for node in root.iter() if local(node.tag) == name), None)
@@ -184,7 +195,7 @@ elif operation == 'decode-product':
       'centerFilterWavelength':first('center_filter_wavelength'),'bandwidth':first('bandwidth'),'spectralBins':spectral_bins(),'opticalFilters':optical_filters(),
       'mapProjection':first('map_projection_name'),'longitudeDirection':first('longitude_direction'),
       'pixelResolutionX':field_with_unit('pixel_resolution_x'),'pixelResolutionY':field_with_unit('pixel_resolution_y'),
-      'specialConstants':[{'kind':kind,'value':text} for kind,text in special_constants],'references':refs},'structures':structures}
+      'specialConstants':[{'kind':kind,'value':text} for kind,text in all_special_constants],'references':refs},'structures':structures}
 else: raise ValueError(f'Unsupported PDS package operation: {operation}')
 
 json.dump(answer, sys.stdout, allow_nan=False, separators=(',',':'))

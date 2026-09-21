@@ -6,6 +6,6 @@ import SelectedContent from "./SelectedContent.astro";
 const { lens } = Astro.props;
 const { title } = validateDatasetText(lens);
 ---
-<SelectedContent {title} description={lens.summary} descriptionDetail={lens.description}>
+<SelectedContent {title} description={lens.summary}>
   <slot />
 </SelectedContent>

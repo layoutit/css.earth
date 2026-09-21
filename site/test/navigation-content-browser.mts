@@ -31,10 +31,12 @@ try {
     navigationFragments(window).prefetch('venus');
     const fragment = await navigationFragments(window).get('venus');
     try {
-      if (fragment.document.querySelector('template[data-object-card], [data-system-results]')) throw new Error('Fragment repeats resident cards/catalog');
+      if (fragment.document.querySelector('template[data-object-card], [data-system-results], .planet-object-browser')) {
+        throw new Error('Fragment repeats retained cards or object browser');
+      }
     } finally { fragment.release(); }
     const expectedMetadata = headMetadata(new DOMParser().parseFromString(await fetch('/venus/').then(response => response.text()), 'text/html'));
-    const selectors = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content', '.planet-input-surface'];
+    const selectors = ['.planet-sidebar', '.planet-sidebar-search', '.planet-object-browser', '.planet-drawer-content', '.planet-input-surface'];
     const retained = selectors.map(selector => document.querySelector(selector));
     const sharedStyles = [...document.head.querySelectorAll('style[data-vite-dev-id]')]
       .filter(style => !window.__cssearthTest.required(window.__cssearthTest.htmlElement(style).dataset.viteDevId, 'Vite stylesheet id').includes('/src/objects/'));
@@ -73,6 +75,8 @@ try {
       selectedSurface: getComputedStyle(window.__cssearthTest.required(leaf, 'computed style element')).backgroundImage,
       selectedSearch: window.__cssearthTest.input('.planet-sidebar-search').value,
       activeBrowser: window.__cssearthTest.html('.planet-object-link.is-active').dataset.objectId,
+      browserId: window.__cssearthTest.html('.planet-object-browser').id,
+      browserControl: window.__cssearthTest.input('.planet-sidebar-search').getAttribute('aria-controls'),
       selectedTitle: window.__cssearthTest.element('.planet-information-panel .planet-title').getAttribute('aria-label'),
       aboutLabelBound: Boolean(document.getElementById(window.__cssearthTest.required(window.__cssearthTest.element('.explorer-about-panel').getAttribute('aria-labelledby'), 'about label reference'))),
       breadcrumbs: breadcrumbs(),
@@ -108,6 +112,8 @@ try {
     'Committing Venus content must activate its scoped surface image.');
   assert.equal(proof.first.selectedSearch, '', 'Selection closes browsing and clears the search query');
   assert.equal(proof.first.activeBrowser, 'venus');
+  assert.equal(proof.first.browserId, 'venus-object-browser');
+  assert.equal(proof.first.browserControl, proof.first.browserId);
   assert.equal(proof.first.selectedTitle, 'Venus');
   assert.equal(proof.first.aboutLabelBound, true);
   assert.equal(proof.first.fragmentRequests, 1, 'The destination load reuses the intent-fetched fragment');

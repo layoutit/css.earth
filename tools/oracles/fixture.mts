@@ -31,6 +31,10 @@ export async function pinnedOracleVersions() {
 /** Every input matches a body manifest, checked-in FITS fixture or test-only archive record. */
 export async function assertPinnedInputs(inputs: readonly { path: string; sha256: string; bytes: number }[]) {
   for (const input of inputs) {
+    if (/^tests\/fixtures\/hosted-orbits\/[a-z0-9-]+\/qualification\.json$/u.test(input.path)) {
+      verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
+      continue;
+    }
     if (/^tests\/fixtures\/sbmt\/[a-z0-9-]+\.(json|tab|sum|info)$/u.test(input.path)) {
       verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
       continue;

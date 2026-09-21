@@ -33,7 +33,7 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'page', purpose: 'pin the prepared page data into the descriptor', commands: async id => [node('tools/prepare-object-json.mts', id)] },
   { name: 'text', purpose: 'prepare the reader text within its budgets', commands: async id => [node('tools/prepare-text.mts', id)] },
   { name: 'markers', purpose: 'draw the navigation markers', commands: async id => [node('tools/prepare-navigation.mts', id)] },
-  { name: 'world', purpose: 'place the object in the world context; manifests that pin it follow', commands: async () => [['pnpm', 'prepare:world-context']] },
+  { name: 'world', purpose: 'place the object in the world context; manifests that pin it follow', commands: async () => [['pnpm', 'prepare:world-context:author']] },
   { name: 'provenance', purpose: 'record provenance for this object and rebuild the shared sources catalogue', commands: async id => [node('tools/prepare-provenance.mts', id)] },
 ]);
 

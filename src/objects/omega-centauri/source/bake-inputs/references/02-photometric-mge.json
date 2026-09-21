@@ -1,0 +1,76 @@
+{
+  "schema": "cssearth-photometric-mge@1",
+  "id": "omega-centauri",
+  "centerIcrsDegrees": [
+    201.696958,
+    -47.479539
+  ],
+  "distancePc": 5426,
+  "positionAngleEastOfNorthDegrees": 100,
+  "inclinationDegrees": 50,
+  "lineOfSightTiltSign": 1,
+  "cutoffSigma": 6,
+  "gaussians": [
+    {
+      "centralAmplitude": 1290.195,
+      "sigmaArcsec": 28.5342,
+      "projectedAxisRatio": 1
+    },
+    {
+      "centralAmplitude": 4662.587,
+      "sigmaArcsec": 115.88586,
+      "projectedAxisRatio": 0.9991714
+    },
+    {
+      "centralAmplitude": 2637.784,
+      "sigmaArcsec": 150.8031,
+      "projectedAxisRatio": 0.7799464
+    },
+    {
+      "centralAmplitude": 759.8591,
+      "sigmaArcsec": 212.20356,
+      "projectedAxisRatio": 0.724126
+    },
+    {
+      "centralAmplitude": 976.0853,
+      "sigmaArcsec": 324.22368,
+      "projectedAxisRatio": 0.8556435
+    },
+    {
+      "centralAmplitude": 195.4156,
+      "sigmaArcsec": 538.98336,
+      "projectedAxisRatio": 0.9392021
+    },
+    {
+      "centralAmplitude": 38.40327,
+      "sigmaArcsec": 836.175,
+      "projectedAxisRatio": 0.9555874
+    },
+    {
+      "centralAmplitude": 8.387379,
+      "sigmaArcsec": 1258.9254,
+      "projectedAxisRatio": 1
+    }
+  ],
+  "evidence": {
+    "path": "labs/nebula/models/omega-centauri/physical-evidence.json",
+    "sha256": "6e88b6abe042cb66a104931cf1039fb3e6d685dd308b303226bdb6e530ac5b51"
+  },
+  "source": {
+    "url": "https://wwwmpa.mpa-garching.mpg.de/mpa/publications/preprints/pp2013/MPA3537.pdf",
+    "sha256": "5701eed16944eb96e0d3e8dea258f909e99a1fa4a5a0305581e878909e70db92",
+    "locator": "D\u2019Souza & Rix2013, Table1, manuscript page12 (PDF page12), eight projected MGE components; arcmin dispersions multiplied by60."
+  },
+  "interpretation": "Published oblate MGE conditioned integrated starlight, interpreted as relative display light. Inclination50 degrees and PA100 degrees follow the selected literature model; the near/far tilt sign and six-sigma cutoff are authored. Gaussian widths retain their published angular scale at adopted distance5426pc and the common observation center. This is not measured star-by-star depth, calibrated luminosity, an N-body simulation or a completed bake/registration acceptance.",
+  "envelope": {
+    "scalePixels": 8,
+    "fraction": 0.95,
+    "floor": 0,
+    "depthSamples": 512,
+    "depthTrim": 0.002,
+    "chromaHalfSaturationQuantile": 0.5,
+    "chromaSkyQuantile": 0.1,
+    "chromaCoverageTaper": 0.5
+  },
+  "residualMaximumComponents": 4096
+}

@@ -1,8 +1,5 @@
-import { createLabelOcclusionController } from './label-occlusion-controller.mts';
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
-import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
-const isOrbitRenderer = (value: string): value is OrbitRenderer => ['strokes', 'bars'].includes(value);
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
 import { readInitialFocus } from './focus-catalog.mts';
 import type { PreparedFocusPresentation } from './prepared-context-navigation.mts';
@@ -15,7 +12,7 @@ import type { OverviewScope } from './overview-context.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { createNavigationContent } from './navigation-content.mts';
 export type NavigationContent = Awaited<ReturnType<ReturnType<typeof createNavigationContent>['load']>>;
-export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; illustrationModelsEnabled?: boolean; onIllustrationModelsChange?(enabled: boolean): void; asteroidBodiesEnabled?: boolean; onAsteroidBodiesChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; minimapEnabled?: boolean; onMinimapChange?(enabled: boolean): void; orbitRenderer?: OrbitRenderer; onOrbitRendererChange?(renderer: OrbitRenderer): void; onCategoryChange?(classification: string | null): void; }
+export interface ShellOptions { objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; illustrationModelsEnabled?: boolean; onIllustrationModelsChange?(enabled: boolean): void; surfaceLabelsEnabled?: boolean; onSurfaceLabelsChange?(enabled: boolean): void; minimapEnabled?: boolean; onMinimapChange?(enabled: boolean): void; threeDStarsEnabled?: boolean; onThreeDStarsChange?(enabled: boolean): void; onCategoryChange?(classification: string | null): void; }
 interface SelectionPreview { id: string | null; frame?: PreparedWorldCameraFrame | null; commit?(): void; restore(): void; }
 type Panel = readonly [string, HTMLDetailsElement];
 import { matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
@@ -25,7 +22,7 @@ import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createChartPixelAlignmentController } from "./chart-pixel-alignment.mts";
 import { createDestinationBrowser } from "./destination-browser.mts";
 import { createFeatureBrowser } from "./feature-browser.mts";
-import { objectSearchLabels, searchObjects } from './object-search.mts';
+import { objectSearchLabels, searchObjects, type ObjectSearchLabels } from './object-search.mts';
 import { presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
 import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { createSceneLifetime } from "@cssearth/engine";
@@ -36,7 +33,9 @@ import { createSurfaceMapReader } from "./surface-map-context.mts";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mts';
 import { bindNavigationIntent, navigationFragments } from './navigation-fragments.mts';
-import { loadCatalogueFragment, readCatalogueFragmentPin } from './catalogue-fragment-loader.mts';
+import { loadCatalogueFragment, loadCatalogueIndex, readCatalogueFragmentPin, readCatalogueIndexPin } from './catalogue-fragment-loader.mts';
+import type { CatalogueIndexEntry } from './catalogue-index.mts';
+import { createCatalogueWindow } from './catalogue-window.mts';
 import { createNavigationTreeController } from './navigation-tree-client.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
@@ -49,22 +48,16 @@ export function mountPlanetShell({
   windowTarget = window,
   motionEnabled = false,
   onMotionChange = () => {},
-  highContrastSky = false,
-  onSkyContrastChange = () => {},
   heliosphereEnabled = false,
   onHeliosphereChange = () => {},
   illustrationModelsEnabled = false,
   onIllustrationModelsChange = () => {},
-  asteroidBodiesEnabled = false,
-  onAsteroidBodiesChange = () => {},
-  asteroidOrbitsEnabled = false,
-  onAsteroidOrbitsChange = () => {},
-  asteroidLabelsEnabled = false,
-  onAsteroidLabelsChange = () => {},
+  surfaceLabelsEnabled = false,
+  onSurfaceLabelsChange = () => {},
   minimapEnabled = false,
   onMinimapChange = () => {},
-  orbitRenderer = 'strokes',
-  onOrbitRendererChange = () => {},
+  threeDStarsEnabled = false,
+  onThreeDStarsChange = () => {},
   onCategoryChange = () => {},
 }: ShellOptions) {
   const drawer = requiredElement(documentTarget, ".planet-drawer-content");
@@ -116,13 +109,12 @@ export function mountPlanetShell({
     // Hover, focus or press on another body fetches its card before the click.
     own(bindNavigationIntent({ documentTarget, windowTarget, objects: SCENE_OBJECTS, fragments, skip: id => id === cardObjectId }));
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime));
-    own(createLabelOcclusionController(documentTarget));
     own(createExplorerRailController(documentTarget, windowTarget, {
       onOpenSolarSystem: () => objectBrowser.showSystem(SOLAR_SYSTEM_ID),
     }));
     lifetime.onDispose(() => disposeContent());
     lifetime.onDispose(() => selectionPreview?.restore());
-    mountContent(objectId, motionEnabled, highContrastSky);
+    mountContent(objectId, motionEnabled);
   } catch (error) {
     const cleanupErrors = lifetime.destroy();
     if (cleanupErrors.length) {
@@ -236,14 +228,13 @@ export function mountPlanetShell({
       if (preserveSidebar) selectionPreview?.commit?.();
       else selectionPreview?.restore();
       const motion = requiredElement<HTMLInputElement>(documentTarget, '.planet-motion-setting').checked;
-      const contrast = requiredElement<HTMLInputElement>(documentTarget, '.planet-sky-contrast-setting').checked;
       disposeContent();
       content.apply({ preserveSidebar });
       cardObjectId = content.id;
       overview = false; overviewScope = 'system';
       preparedFocus = null; focusCard.set(null);
       objectBrowser.setObject(content.name);
-      mountContent(content.id, motion, contrast);
+      mountContent(content.id, motion);
     },
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
     setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setFeatures(provider); },
@@ -287,7 +278,7 @@ export function mountPlanetShell({
     contentLifetime = null;
     if (errors.length) throw new AggregateError(errors, 'Object shell content cleanup failed.');
   }
-  function mountContent(id: string, motionEnabled: boolean, highContrastSky: boolean) {
+  function mountContent(id: string, motionEnabled: boolean) {
     const owner = contentLifetime = createSceneLifetime();
     const retain = <T extends { destroy(): void }>(controller: T): T => { owner.onDispose(() => controller.destroy()); return controller; };
     informationTabs = retain(createInformationTabsController(drawer, owner));
@@ -296,18 +287,16 @@ export function mountPlanetShell({
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
-      { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, illustrationModelsEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, minimapEnabled, orbitRenderer,
-        onOrbitRendererChange(renderer) { orbitRenderer = renderer; onOrbitRendererChange(renderer); },
+      { motionEnabled, onMotionChange, heliosphereEnabled, illustrationModelsEnabled, surfaceLabelsEnabled, minimapEnabled, threeDStarsEnabled,
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
         onIllustrationModelsChange(enabled) {
           illustrationModelsEnabled = enabled;
           objectBrowser.setIllustrationModelsEnabled(enabled);
           onIllustrationModelsChange(enabled);
         },
-        onAsteroidBodiesChange(enabled) { asteroidBodiesEnabled = enabled; onAsteroidBodiesChange(enabled); },
-        onAsteroidOrbitsChange(enabled) { asteroidOrbitsEnabled = enabled; onAsteroidOrbitsChange(enabled); },
-        onAsteroidLabelsChange(enabled) { asteroidLabelsEnabled = enabled; onAsteroidLabelsChange(enabled); },
+        onSurfaceLabelsChange(enabled) { surfaceLabelsEnabled = enabled; onSurfaceLabelsChange(enabled); },
         onMinimapChange(enabled) { minimapEnabled = enabled; onMinimapChange(enabled); },
+        onThreeDStarsChange(enabled) { threeDStarsEnabled = enabled; onThreeDStarsChange(enabled); },
       }, owner));
     const surfaceReader = retain(createSurfaceMapReader({ documentTarget, windowTarget }));
     minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget, surfaceReader,
@@ -389,8 +378,9 @@ function createLensBrowserController(drawer: HTMLElement, windowTarget: BrowserW
 function createSettingsController(
   documentTarget: Document,
   windowTarget: BrowserWindow,
-  { motionEnabled, onMotionChange, highContrastSky = false, onSkyContrastChange = () => {}, heliosphereEnabled, onHeliosphereChange,
-    illustrationModelsEnabled, onIllustrationModelsChange, asteroidBodiesEnabled, onAsteroidBodiesChange, asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange, minimapEnabled, onMinimapChange, orbitRenderer, onOrbitRendererChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'illustrationModelsEnabled' | 'onIllustrationModelsChange' | 'asteroidBodiesEnabled' | 'onAsteroidBodiesChange' | 'asteroidOrbitsEnabled' | 'onAsteroidOrbitsChange' | 'asteroidLabelsEnabled' | 'onAsteroidLabelsChange' | 'minimapEnabled' | 'onMinimapChange' | 'orbitRenderer' | 'onOrbitRendererChange'>> & { highContrastSky?: boolean; onSkyContrastChange?: (enabled: boolean) => void },
+  { motionEnabled, onMotionChange, heliosphereEnabled, onHeliosphereChange,
+    illustrationModelsEnabled, onIllustrationModelsChange, surfaceLabelsEnabled, onSurfaceLabelsChange,
+    minimapEnabled, onMinimapChange, threeDStarsEnabled, onThreeDStarsChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'illustrationModelsEnabled' | 'onIllustrationModelsChange' | 'surfaceLabelsEnabled' | 'onSurfaceLabelsChange' | 'minimapEnabled' | 'onMinimapChange' | 'threeDStarsEnabled' | 'onThreeDStarsChange'>>,
   lifetime: SceneLifetime,
 ) {
   if (typeof onMotionChange !== "function") {
@@ -399,53 +389,34 @@ function createSettingsController(
   const motion = documentTarget.querySelector(".planet-motion-setting");
   const heliosphere = documentTarget.querySelector(".planet-heliosphere-setting");
   const illustrationModels = documentTarget.querySelector(".planet-illustration-models-setting");
-  const asteroidBodies = documentTarget.querySelector(".planet-asteroid-bodies-setting");
-  const asteroidOrbits = documentTarget.querySelector(".planet-asteroid-orbits-setting");
-  const asteroidLabels = documentTarget.querySelector(".planet-asteroid-labels-setting");
+  const surfaceLabels = documentTarget.querySelector(".planet-surface-labels-setting");
   const minimap = documentTarget.querySelector(".planet-minimap-setting");
-  const orbitRendererSelect = documentTarget.querySelector(".planet-orbit-renderer-setting");
-  const skyContrast = documentTarget.querySelector(
-    ".planet-sky-contrast-setting",
-  );
+  const threeDStars = documentTarget.querySelector(".planet-three-d-stars-setting");
   const speed = documentTarget.querySelector(
     '.planet-speed-setting[type="range"][name="speed"]',
   );
   if (!(motion instanceof windowTarget.HTMLInputElement) ||
       !(heliosphere instanceof windowTarget.HTMLInputElement) ||
       !(illustrationModels instanceof windowTarget.HTMLInputElement) ||
-      !(asteroidBodies instanceof windowTarget.HTMLInputElement) ||
-      !(asteroidOrbits instanceof windowTarget.HTMLInputElement) ||
-      !(asteroidLabels instanceof windowTarget.HTMLInputElement) ||
+      !(surfaceLabels instanceof windowTarget.HTMLInputElement) ||
       !(minimap instanceof windowTarget.HTMLInputElement) ||
-      !(orbitRendererSelect instanceof windowTarget.HTMLSelectElement) ||
-      (speed !== null && !(speed instanceof windowTarget.HTMLInputElement)) ||
-      !(skyContrast instanceof windowTarget.HTMLInputElement)) {
+      !(threeDStars instanceof windowTarget.HTMLInputElement) ||
+      (speed !== null && !(speed instanceof windowTarget.HTMLInputElement))) {
     throw new Error("Planet shell settings controls are incomplete.");
   }
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let motionOn = motionEnabled === true;
-  for (const input of [motion, heliosphere, illustrationModels, asteroidBodies, asteroidOrbits, asteroidLabels, minimap, orbitRendererSelect]) input.disabled = false;
+  for (const input of [motion, heliosphere, illustrationModels, surfaceLabels, minimap, threeDStars]) input.disabled = false;
 
   const renderMotion = () => {
     motion.checked = motionOn;
     if (speed) speed.disabled = !motionOn || speed.dataset?.runtimeReady === "false";
   };
-  const renderSkyContrast = () => {
-    skyContrast.checked = highContrastSky;
-    documentTarget.body.dataset.skyContrast = highContrastSky
-      ? "high"
-      : "standard";
-  };
   motion.addEventListener("change", () => {
     motionOn = motion.checked;
     renderMotion();
     onMotionChange(motionOn);
-  }, { signal: events.signal });
-  skyContrast.addEventListener("change", () => {
-    highContrastSky = skyContrast.checked;
-    renderSkyContrast();
-    onSkyContrastChange(highContrastSky);
   }, { signal: events.signal });
   heliosphere.checked = heliosphereEnabled === true;
   heliosphere.addEventListener("change", () => onHeliosphereChange(heliosphere.checked), { signal: events.signal });
@@ -459,36 +430,16 @@ function createSettingsController(
     onIllustrationModelsChange(illustrationModelsEnabled);
   }, { signal: events.signal });
   renderIllustrationModels();
-  const renderAsteroidBodies = () => {
-    asteroidBodies.checked = asteroidBodiesEnabled === true;
-    documentTarget.body.dataset.asteroidBodies = asteroidBodies.checked ? 'on' : 'off';
+  const renderSurfaceLabels = () => {
+    surfaceLabels.checked = surfaceLabelsEnabled === true;
+    documentTarget.body.dataset.surfaceLabels = surfaceLabels.checked ? 'on' : 'off';
   };
-  asteroidBodies.addEventListener("change", () => {
-    asteroidBodiesEnabled = asteroidBodies.checked;
-    renderAsteroidBodies();
-    onAsteroidBodiesChange(asteroidBodiesEnabled);
+  surfaceLabels.addEventListener("change", () => {
+    surfaceLabelsEnabled = surfaceLabels.checked;
+    renderSurfaceLabels();
+    onSurfaceLabelsChange(surfaceLabelsEnabled);
   }, { signal: events.signal });
-  renderAsteroidBodies();
-  const renderAsteroidOrbits = () => {
-    asteroidOrbits.checked = asteroidOrbitsEnabled === true;
-    documentTarget.body.dataset.asteroidOrbits = asteroidOrbits.checked ? 'on' : 'off';
-  };
-  asteroidOrbits.addEventListener("change", () => {
-    asteroidOrbitsEnabled = asteroidOrbits.checked;
-    renderAsteroidOrbits();
-    onAsteroidOrbitsChange(asteroidOrbitsEnabled);
-  }, { signal: events.signal });
-  renderAsteroidOrbits();
-  const renderAsteroidLabels = () => {
-    asteroidLabels.checked = asteroidLabelsEnabled === true;
-    documentTarget.body.dataset.asteroidLabels = asteroidLabels.checked ? 'on' : 'off';
-  };
-  asteroidLabels.addEventListener("change", () => {
-    asteroidLabelsEnabled = asteroidLabels.checked;
-    renderAsteroidLabels();
-    onAsteroidLabelsChange(asteroidLabelsEnabled);
-  }, { signal: events.signal });
-  renderAsteroidLabels();
+  renderSurfaceLabels();
   // The stylesheet reads this flag: off hides the minimap and frees its corner.
   const renderMinimap = () => {
     minimap.checked = minimapEnabled === true;
@@ -500,15 +451,12 @@ function createSettingsController(
     onMinimapChange(minimapEnabled);
   }, { signal: events.signal });
   renderMinimap();
-  orbitRendererSelect.value = orbitRenderer;
-  orbitRendererSelect.addEventListener("change", () => {
-    const next = orbitRendererSelect.value;
-    if (!isOrbitRenderer(next)) { orbitRendererSelect.value = orbitRenderer; return; }
-    orbitRenderer = next;
-    onOrbitRendererChange(orbitRenderer);
+  threeDStars.checked = threeDStarsEnabled === true;
+  threeDStars.addEventListener("change", () => {
+    threeDStarsEnabled = threeDStars.checked;
+    onThreeDStarsChange(threeDStarsEnabled);
   }, { signal: events.signal });
   renderMotion();
-  renderSkyContrast();
 
   return Object.freeze({
     setMotionEnabled(next: boolean) {
@@ -532,8 +480,8 @@ function createSettingsController(
     },
     destroy() {
       events.abort();
-      for (const input of [motion, heliosphere, illustrationModels, asteroidBodies, asteroidOrbits, asteroidLabels, minimap, orbitRendererSelect]) input.disabled = true;
-      delete documentTarget.body.dataset.skyContrast;
+      for (const input of [motion, heliosphere, illustrationModels, surfaceLabels, minimap, threeDStars]) input.disabled = true;
+      delete documentTarget.body.dataset.surfaceLabels;
     },
   });
 }
@@ -550,47 +498,61 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const trigger = documentTarget.querySelector(".planet-sidebar-view-all");
   const information = documentTarget.querySelector(".planet-information-panel");
   const browser = documentTarget.querySelector(".planet-object-browser");
+  const selectedContent = documentTarget.querySelector(".planet-selected-content");
   const empty = documentTarget.querySelector(".planet-object-empty");
-  const galaxy = browser?.querySelector<HTMLElement>('[data-galactic-overview]');
-  const largeScaleCards = [...(browser?.querySelectorAll<HTMLElement>('[data-large-scale-overview]') ?? [])];
-  const focusCard = browser?.querySelector<HTMLElement>('[data-prepared-focus-card]');
-  const system = browser?.querySelector<HTMLElement>('[data-system-results]');
-  const systemHeaders = [...(system?.querySelectorAll<HTMLElement>('[data-system-header]') ?? [])];
   if (!(search instanceof windowTarget.HTMLInputElement) ||
       !(searchCard instanceof windowTarget.HTMLElement) ||
       !(trigger instanceof windowTarget.HTMLButtonElement) ||
       !(information instanceof windowTarget.HTMLElement) ||
       !(browser instanceof windowTarget.HTMLElement) ||
+      !(selectedContent instanceof windowTarget.HTMLElement) ||
       !(empty instanceof windowTarget.HTMLElement)) {
     throw new Error("Planet shell object browser is incomplete.");
   }
+  // Search/navigation and the selection share one sidebar content owner. The
+  // selected content stays retained while the browser temporarily replaces it.
+  const context = documentTarget.querySelector<HTMLElement>('.planet-object-context') ?? browser;
+  const sharedLegacyContext = context === browser;
+  const galaxy = context.querySelector<HTMLElement>('[data-galactic-overview]');
+  const largeScaleCards = [...context.querySelectorAll<HTMLElement>('[data-large-scale-overview]')];
+  const focusCard = context.querySelector<HTMLElement>('[data-prepared-focus-card]');
+  const system = context.querySelector<HTMLElement>('[data-system-results]');
+  const systemHeaders = [...(system?.querySelectorAll<HTMLElement>('[data-system-header]') ?? [])];
+  const solarSystemFacts = system?.querySelector<HTMLElement>('[data-solar-system-facts]');
   const navigationRoot = browser.querySelector<HTMLElement>('[data-object-navigation-tree]');
   const navigation = navigationRoot ? createNavigationTreeController(navigationRoot, windowTarget) : null;
   lifetime.onDispose(() => navigation?.destroy());
-  const placeNavigation = (card: HTMLElement | null | undefined, current: string) => {
+  const selectNavigation = (current: string) => {
     if (!navigationRoot) return;
-    const slot = card?.querySelector<HTMLElement>('[data-object-navigation-slot]')
-      ?? (card?.querySelector<HTMLElement>('[data-object-navigation-tree]') === navigationRoot ? card : null);
-    if (!slot) { navigationRoot.hidden = true; return; }
-    if (navigationRoot.parentElement !== slot) slot.append(navigationRoot);
-    navigationRoot.hidden = showingSearchResults;
+    navigationRoot.hidden = false;
     void navigation?.select(current);
   };
   const tabs = [...browser.querySelectorAll<HTMLElement>('[data-object-tab]')];
   const resultsPanel = requiredElement(browser, '#object-category-results');
   let items = [...browser.querySelectorAll<HTMLElement>(".planet-object-item")]
     .filter((item) => item instanceof windowTarget.HTMLLIElement);
-  // Production pages ship the catalogue rows empty and reference the shared,
-  // content-addressed fragment instead (`catalogue-fragment-pin.mts`). A page
-  // or fixture without that pin must still ship its rows inline.
+  // Production pages ship the catalogue rows empty and reference shared,
+  // content-addressed JSON and HTML transports (`catalogue-fragment-pin.mts`).
+  // A page or fixture without either pin must still ship its rows inline.
   const cataloguePin = items.length === 0 ? readCatalogueFragmentPin(resultsPanel) : null;
-  if (items.length === 0 && !cataloguePin) {
+  const catalogueIndexPin = items.length === 0 ? readCatalogueIndexPin(resultsPanel) : null;
+  if (items.length === 0 && !catalogueIndexPin && !cataloguePin) {
     throw new Error("Planet shell object browser has no objects.");
   }
-  const catalogueLoading = cataloguePin ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-loading]') : null;
-  const catalogueError = cataloguePin ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-error]') : null;
+  const remoteCatalogue = catalogueIndexPin ?? cataloguePin;
+  const catalogueLoading = remoteCatalogue ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-loading]') : null;
+  const catalogueError = remoteCatalogue ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-error]') : null;
   const catalogueRetry = catalogueError?.querySelector<HTMLButtonElement>('[data-catalogue-retry]') ?? null;
-  let searchLabels = items.map(item => ({ ...objectSearchLabels(item), item }));
+  type SearchLabel = ObjectSearchLabels & { readonly item?: HTMLElement; readonly entry?: CatalogueIndexEntry };
+  let searchLabels: SearchLabel[] = items.map(item => ({ ...objectSearchLabels(item), item }));
+  let catalogueEntries: readonly CatalogueIndexEntry[] = [];
+  let matchedEntries = new Set<CatalogueIndexEntry>();
+  let distanceEntries: readonly CatalogueIndexEntry[] = [];
+  let planetEntries: readonly CatalogueIndexEntry[] = [];
+  const catalogueList = resultsPanel.querySelector<HTMLUListElement>('[data-catalogue-list]');
+  const catalogueWindow = catalogueIndexPin && catalogueList
+    ? createCatalogueWindow({ documentTarget, windowTarget, list: catalogueList, scrollTarget: resultsPanel }) : null;
+  lifetime.onDispose(() => catalogueWindow?.destroy());
   let sourceLinks = sourceDocuments(documentTarget);
   const collapseSolarSystemBranches = () => {
     if (!navigationRoot) return;
@@ -653,7 +615,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     ];
     refreshChunks();
   };
-  // Fetches the shared catalogue fragment at most once, when the browser panel
+  // Fetches the shared catalogue transport at most once, when the browser panel
   // first opens. `filter` and
   // `markSelection` are declared further down this closure but only run once
   // this promise settles, well after the whole controller has been built.
@@ -661,22 +623,46 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   // Suppresses "No matching results" until the shared fragment has actually
   // arrived: an empty, not-yet-loaded catalogue must never be mistaken for a
   // catalogue that loaded and found nothing.
-  let catalogueLoaded = !cataloguePin;
+  let catalogueLoaded = !remoteCatalogue;
   const setEmptyHidden = (hidden: boolean) => { empty.hidden = hidden || !catalogueLoaded; };
   const showCatalogueError = (show: boolean) => {
     if (catalogueLoading) catalogueLoading.hidden = show || catalogueLoaded;
     if (catalogueError) catalogueError.hidden = !show;
   };
   const ensureCatalogueLoaded = (): Promise<void> => {
-    if (!cataloguePin) return Promise.resolve();
+    if (!remoteCatalogue) return Promise.resolve();
     if (catalogueLoad) return catalogueLoad;
     showCatalogueError(false);
-    catalogueLoad = loadCatalogueFragment(cataloguePin, { windowTarget }).then(rows => {
+    const load = catalogueIndexPin
+      ? loadCatalogueIndex(catalogueIndexPin, { windowTarget }).then(index => {
+          catalogueEntries = index.entries;
+          searchLabels = catalogueEntries.map(entry => ({
+            name: entry.name.toLocaleLowerCase('en'),
+            names: entry.searchNames,
+            classification: entry.classification,
+            classificationName: entry.classificationName,
+            systemName: entry.systemName,
+            illustration: entry.illustration,
+            entry,
+          }));
+          distanceEntries = catalogueEntries.toSorted((left, right) => left.distanceMeters - right.distanceMeters);
+          planetEntries = [
+            ...distanceEntries.filter(entry => entry.classification === 'planet'),
+            ...distanceEntries.filter(entry => entry.classification !== 'planet'),
+          ];
+          sourceLinks = new Map(sourceLinks);
+          for (const entry of catalogueEntries) sourceLinks.set(entry.source.subject, { dataset: {
+            sourceDocument: entry.source.document, sourceLabel: entry.source.label,
+          } });
+        })
+      : loadCatalogueFragment(cataloguePin!, { windowTarget }).then(rows => {
+          requiredElement(resultsPanel, '[data-catalogue-list]').replaceWith(rows);
+          attachCatalogueRows();
+        });
+    catalogueLoad = load.then(() => {
       if (lifetime.disposed) return;
-      requiredElement(resultsPanel, '[data-catalogue-list]').replaceWith(rows);
       catalogueLoaded = true;
       if (catalogueLoading) catalogueLoading.hidden = true;
-      attachCatalogueRows();
       backfillCurrentSelection();
       markSelection();
       publishSourceContext();
@@ -708,9 +694,9 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   };
   const selectTab = (classification: string, { focus = false, resetScroll = true } = {}) => {
     if (resetScroll) resetResultsScroll();
-    if (classification !== activeCategory) {
+    if (!catalogueWindow && classification !== activeCategory) {
       // Reorder the retained rows inside their existing layout groups.
-      const order = classification === 'planet' ? planetOrder : distanceOrder;
+      const order = classification === 'planet' || classification === 'all' ? planetOrder : distanceOrder;
       for (const [index, chunk] of chunks.entries()) {
         chunk.items = order.slice(index * 16, (index + 1) * 16);
         requiredElement(chunk.node,'.planet-object-chunk-list').append(...chunk.items);
@@ -726,10 +712,18 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
         if (focus) tab.focus();
       }
     }
-    for (const item of items) item.hidden = item.dataset.objectMatch !== 'true'
-      || !matchesObjectCategory(item.dataset.objectClassification, classification);
-    refreshChunks();
-    visibleObjects = items.filter(item => !item.hidden).length + visibleOverviews;
+    if (catalogueWindow) {
+      const order = classification === 'planet' || classification === 'all' ? planetEntries : distanceEntries;
+      const visible = order.filter(entry => matchedEntries.has(entry)
+        && matchesObjectCategory(entry.classification, classification));
+      catalogueWindow.setEntries(visible);
+      visibleObjects = visible.length + visibleOverviews;
+    } else {
+      for (const item of items) item.hidden = item.dataset.objectMatch !== 'true'
+        || !matchesObjectCategory(item.dataset.objectClassification, classification);
+      refreshChunks();
+      visibleObjects = items.filter(item => !item.hidden).length + visibleOverviews;
+    }
     setEmptyHidden(visibleObjects > 0);
     presentSearchResults(browser, showingSearchResults, classification);
   };
@@ -775,7 +769,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   lifetime.onDispose(() => features?.destroy());
   let open = searchCard.hasAttribute('data-search-submitted');
   let browsing = open;
-  let browseAll = open && search.value.trim().length === 0;
   const categoryButtons = [...documentTarget.querySelectorAll<HTMLElement>('.planet-search-category')];
   // A pill's classification highlights its bodies in the scene; other searches clear it.
   // Filtering resets then re-marks the category, so report only the settled value.
@@ -801,17 +794,43 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     renderSourceLink(documentTarget, preparedFocus ? `focus:${preparedFocus.id}`
       : overview ? `overview:${overviewScope === 'system' ? `system:${overviewSystemId}` : overviewScope}` : `object:${selectedObjectName}`, sourceLinks);
   };
+  const renderSelectionContext = () => {
+    const focused = Boolean(preparedFocus);
+    const focusId = preparedFocus?.id ?? '';
+    const galactic = overview && overviewScope === 'milky-way';
+    const neighborCard = largeScaleCards.find(card => card.dataset.largeScaleOverview === 'local-group');
+    const galaxySelected = focused && neighborCard
+      && [...neighborCard.querySelectorAll<HTMLElement>('[data-neighbor-id]')]
+        .some(row => row.dataset.neighborId === focusId);
+    const largeScale = galaxySelected ? neighborCard : overview
+      ? largeScaleCards.find(card => card.dataset.largeScaleOverview === overviewScope) : undefined;
+    if (neighborCard && (galaxySelected || galactic || largeScale === neighborCard)) {
+      selectGalaxyNeighbor(neighborCard, galaxySelected ? focusId : 'milky-way');
+    }
+    for (const card of largeScaleCards) setPanelHidden(card, card !== largeScale);
+    if (focusCard) setPanelHidden(focusCard, !focused);
+    if (galaxy) setPanelHidden(galaxy, !galactic);
+    const systemSelected = overview && overviewScope === 'system';
+    if (system) setPanelHidden(system, !systemSelected);
+    const showContext = focused || galactic || Boolean(largeScale) || systemSelected;
+    setPanelHidden(information, showContext);
+    if (!sharedLegacyContext) setPanelHidden(context, !showContext);
+    const headerSystemId = systemSelected ? overviewSystemId : SOLAR_SYSTEM_ID;
+    for (const header of systemHeaders) header.toggleAttribute('data-system-current', header.dataset.systemHeader === headerSystemId);
+    if (solarSystemFacts) solarSystemFacts.hidden = headerSystemId !== SOLAR_SYSTEM_ID;
+    const selectedObjectId = SCENE_OBJECTS.find(object => object.name === selectedObjectName)?.id ?? objectId;
+    const navigationSelection = preparedFocus?.id ?? (galactic ? 'milky-way'
+      : largeScale?.dataset.largeScaleOverview ?? (systemSelected ? overviewSystemId : selectedObjectId));
+    selectNavigation(navigationSelection);
+    context.ariaLabel = preparedFocus?.name ?? (galactic ? 'Milky Way'
+      : largeScale?.dataset.largeScaleName ?? (systemSelected ? overviewName() : selectedObjectName || 'Selected object'));
+  };
   const filter = (resetScroll = true) => {
-    const searching = browsing && (search.value.trim().length > 0 || browseAll);
-    // Search text belongs to the user; the card context is only a fallback.
-    const query = (browsing ? search.value.trim().toLocaleLowerCase("en") || (browseAll ? "all objects" : "") : "")
-      || (preparedFocus ? preparedFocus.name.toLocaleLowerCase('en')
-        : overview ? overviewName().toLocaleLowerCase("en") : "");
-    setPanelHidden(information, query.length > 0);
-    // A camera handoff republishes the same card context. Its results, counts
-    // and chips are already current; only a closed browser needs reopening.
+    renderSelectionContext();
+    const searching = browsing && search.value.trim().length > 0;
+    const query = searching ? search.value.trim().toLocaleLowerCase("en") : "";
     if (query === filteredQuery && searching === showingSearchResults) {
-      setPanelHidden(browser, query.length === 0);
+      setPanelHidden(browser, false);
       markCategory(filteredClassification);
       return;
     }
@@ -819,38 +838,18 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     showingSearchResults = searching;
     visibleOverviews = presentOverviewResults(browser, searching ? query : '');
     presentSearchResults(browser, searching, activeCategory);
+    if (searching) browser.setAttribute('data-navigation-filtered', '');
+    else browser.removeAttribute('data-navigation-filtered');
     filteredClassification = null;
     if (resetScroll) resetResultsScroll();
     markCategory();
-    destinations?.setOpen(query.length > 0);
-    const focused = !searching && preparedFocus && query === preparedFocus.name.toLocaleLowerCase('en');
-    const galactic = !searching && !focused && query === 'milky way';
-    const neighborCard = largeScaleCards.find(card => card.dataset.largeScaleOverview === 'local-group');
-    const galaxySelected = focused && preparedFocus && neighborCard && [...neighborCard.querySelectorAll<HTMLElement>('[data-neighbor-id]')].some(row => row.dataset.neighborId === preparedFocus!.id);
-    const largeScale = galaxySelected ? neighborCard : !searching && !focused ? largeScaleCards.find(card => card.dataset.largeScaleName?.toLocaleLowerCase('en') === query) : undefined;
-    if (neighborCard && (galaxySelected || galactic || largeScale === neighborCard)) selectGalaxyNeighbor(neighborCard, galaxySelected ? preparedFocus!.id : 'milky-way');
-    for (const card of largeScaleCards) setPanelHidden(card, card !== largeScale);
-    if (focusCard) setPanelHidden(focusCard, !focused);
-    if (galaxy) setPanelHidden(galaxy, !galactic);
-    if (system) setPanelHidden(system, galactic || Boolean(focused) || Boolean(largeScale));
-    const selectedObjectId = SCENE_OBJECTS.find(object => object.name === selectedObjectName)?.id ?? objectId;
-    if (focused) placeNavigation(null, '');
-    else if (galactic) placeNavigation(galaxy, 'milky-way');
-    else if (largeScale) placeNavigation(largeScale, largeScale.dataset.largeScaleOverview ?? '');
-    else placeNavigation(system, selectedObjectId);
-    // The results card introduces the system the overview shows; searches and object cards keep the Solar System's.
-    const headerSystemId = overview && overviewScope === 'system' ? overviewSystemId : SOLAR_SYSTEM_ID;
-    for (const header of systemHeaders) header.toggleAttribute('data-system-current', header.dataset.systemHeader === headerSystemId);
-    if (focused && preparedFocus) {
-      browser.ariaLabel = preparedFocus.name;
-      setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
-      void destinations?.search(''); void features?.search('');
-      return;
-    }
-    browser.ariaLabel = searching ? 'Search results' : galactic ? 'Milky Way' : 'Celestial objects';
-    if (galactic || largeScale) {
-      if (largeScale) browser.ariaLabel = largeScale.dataset.largeScaleName!;
-      setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
+    destinations?.setOpen(true);
+    browser.ariaLabel = searching ? 'Search results' : 'Celestial objects';
+    setPanelHidden(browser, false);
+    if (!searching) {
+      visibleObjects = 1;
+      empty.hidden = true;
+      void navigation?.filter(null);
       void destinations?.search(''); void features?.search('');
       return;
     }
@@ -863,13 +862,18 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     void features?.search(classification || systemName || showAll ? "" : query);
     if (query.length === 0) {
       for (const item of items) item.hidden = true;
+      catalogueWindow?.clear();
       empty.hidden = true;
       setPanelHidden(browser, true);
       return;
     }
     setPanelHidden(browser, false);
-    const matches = new Set(result.matches.map(match => match.item));
-    for (const item of items) item.dataset.objectMatch = String(matches.has(item));
+    if (catalogueWindow) {
+      matchedEntries = new Set(result.matches.flatMap(match => match.entry ? [match.entry] : []));
+    } else {
+      const matches = new Set(result.matches.flatMap(match => match.item ? [match.item] : []));
+      for (const item of items) item.dataset.objectMatch = String(matches.has(item));
+    }
     const classifications = result.matches.map(match => match.classification);
     for (const tab of tabs) {
       requiredElement(tab, '.planet-object-tab-count').textContent = `(${objectCategoryCount(classifications, tab.dataset.objectTab)})`;
@@ -877,15 +881,27 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     const nextCategory = searching ? (classification ? result.category : 'all') : initialCategory ?? result.category;
     initialCategory = null;
     selectTab(nextCategory, { resetScroll: false });
+    const navigationIds = [
+      ...result.matches.flatMap(match => {
+        const id = match.item?.dataset.navigationObjectId ?? match.entry?.id;
+        return id ? [id] : [];
+      }),
+      ...[...browser.querySelectorAll<HTMLElement>('[data-search-overview]:not([hidden])')]
+        .map(row => row.dataset.navigationObjectId),
+    ].filter((id): id is string => Boolean(id));
+    void navigation?.filter(navigationIds);
     setEmptyHidden(visibleObjects !== 0 || Boolean((destinations || features) && !classification && !showAll));
   };
   const render = (next: boolean, { resetQuery = false } = {}) => {
     publishSourceContext();
     if (!next) browsing = false;
-    if ((preparedFocus || overview) && !next) next = true;
     // Only an actual open/close transition may reset a scrolled result list.
     if (open !== next) resetResultsScroll();
     open = next;
+    trigger.ariaExpanded = String(next);
+    search.ariaExpanded = String(next);
+    setPanelHidden(selectedContent, next);
+    trigger.title = trigger.ariaLabel = next ? 'Collapse celestial objects' : 'Browse celestial objects';
     const currentUrl = new URL(windowTarget.location.href);
     for (const input of documentTarget.querySelectorAll<HTMLInputElement>('[data-search-context], [data-dataset-context]')) {
       input.value = currentUrl.searchParams.get(input.name) ?? '';
@@ -896,16 +912,19 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     destinations?.setOpen(next);
     if (next) filter();
     else {
-      setPanelHidden(information, false);
+      renderSelectionContext();
       setPanelHidden(browser, true);
+      browser.removeAttribute('data-navigation-filtered');
+      void navigation?.filter(null);
+      catalogueWindow?.clear();
       markCategory();
     }
   };
 
   trigger.addEventListener("click", event => {
     event.preventDefault();
+    if (open) { render(false); search.focus(); return; }
     browsing = true;
-    browseAll = search.value.trim().length === 0;
     render(true);
     search.focus();
   }, {
@@ -914,7 +933,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   searchCard.addEventListener('submit', event => {
     event.preventDefault();
     browsing = true;
-    browseAll = search.value.trim().length === 0;
     render(true);
   }, { signal: events.signal });
   // Clearing empties the query and returns to the selected card, like Escape.
@@ -934,7 +952,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       }
       search.value = button.dataset.searchQuery ?? "";
       browsing = true;
-      browseAll = false;
       render(true);
       requiredElement(documentTarget, '.planet-sidebar').scrollTop = 0;
     }, { signal: events.signal });
@@ -958,7 +975,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     }, { signal: events.signal });
   }
   search.addEventListener("input", () => {
-    browseAll = false;
     browsing = true;
     if (!open) render(true);
     else if (open) filter();
@@ -986,6 +1002,16 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   browser.addEventListener("keydown", (event) => {
     if ((event.key === 'ArrowDown' || event.key === 'ArrowUp') &&
         event.target instanceof windowTarget.HTMLInputElement && event.target.hasAttribute('data-information-tab')) return;
+    const windowedRow = event.target instanceof windowTarget.Element
+      ? event.target.closest<HTMLElement>('[data-catalogue-index]') : null;
+    if (catalogueWindow && windowedRow && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+      event.preventDefault();
+      const current = Number(windowedRow.dataset.catalogueIndex);
+      const next = current + (event.key === 'ArrowDown' ? 1 : -1);
+      if (next < 0) search.focus();
+      else catalogueWindow.focus(next);
+      return;
+    }
     const controls = [...browser.querySelectorAll<HTMLElement>("summary, a, button")].filter(visibleControl);
     const index = controls.findIndex(control => control === documentTarget.activeElement);
     if (event.key === "Escape") { render(false); search.focus(); }
@@ -1015,6 +1041,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
 
   const markSelection = () => {
     documentTarget.documentElement.dataset.selection = preparedFocus ? 'prepared-focus' : overview ? overviewScope : 'object';
+    catalogueWindow?.setSelection(selectedObjectName, preparedFocus?.id ?? '');
     for (const anchor of browser.querySelectorAll<HTMLElement>('.planet-object-link')) {
       const selected = preparedFocus ? anchor.dataset.preparedFocusId === preparedFocus.id
         : !overview && !anchor.dataset.preparedFocusId && anchor.querySelector('.planet-object-name')?.textContent === selectedObjectName;
