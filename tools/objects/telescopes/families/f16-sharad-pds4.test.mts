@@ -4,10 +4,13 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import {
-  assertSharadRecordMatchesLabel, openSharadPds4Volume, parseSharadPds4Label, parseSharadProductRecords, readSharadDelayFrame, readSharadPlane,
-  sharadExpectedBytes, sharadFileSource, sharadFrameRange, sharadPlanetaryGridQualification, sharadPlaneCost,
+  openSharadPds4Slice, openSharadPds4Volume, parseSharadPds4Label, parseSharadQualificationSource, parseSharadSliceClaim,
+  readSharadDelayFrame, readSharadPlane, sharadExpectedBytes, sharadFileSource, sharadFrameRange, sharadPlanetaryGridQualification,
+  sharadPlaneCost, sharadSliceWindow, F16_SHARAD_PDS4_HANDLER, SHARAD_PDS4_PROFILE,
   type SharadByteSource, type SharadPds4Label,
 } from './f16-sharad-pds4.mts';
+import { parseSourceProducts } from '../source-products.mts';
+import { familyProfile } from '../family-handlers.mts';
 
 /** The fixture mirrors the published label element for element, including both `description` elements and the cartography block. */
 const label = ({ shape = [2, 3, 4], extra = '' }: { shape?: readonly [number, number, number]; extra?: string } = {}) => `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -67,16 +70,9 @@ const bytes = () => {
   for (let x = 0; x < 2; x++) for (let y = 0; y < 3; y++) for (let z = 0; z < 4; z++) data.writeFloatLE(x === 1 && y === 0 && z === 0 ? Number.NaN : 100 * x + 10 * y + z, ((x * 3 + y) * 4 + z) * 4);
   return data;
 };
-const record = (overrides: Record<string, unknown> = {}) => ({
-  schema: 'cssearth-bounded-archive-product@1', target: 'mars',
-  products: [{
-    id: 'mro-sharad-3d-synthetic-time', telescope: 'Mars Reconnaissance Orbiter', mode: 'SHARAD/3-D delay-time radargram',
-    lidvid: 'urn:nasa:pds:mro_sharad_3d:data:synthetic_time::1.0', reader: 'mro-sharad-3d-array@1',
-    boundedMember: { role: 'science', origin: 'https://example.invalid/data/synthetic_time.dat', advertisedBytes: 2 * 3 * 4 * 4, advertisedBytesCheckedOn: '2026-09-21', digest: 'none-published', acquisition: 'Range reads of label-defined offsets only.' },
-    pinnedInputs: [{ input: 'fixture-label', role: 'label' }, { input: 'fixture-observations', role: 'response' }],
-    units: 'dimensionless ratio to the frame mean', meaning: 'Fixture record.', citation: 'Fixture citation.', license: 'Fixture license.', credit: 'Fixture credit.',
-    limitations: ['Fixture limitation.'], ...overrides,
-  }],
+const qualificationSource = (overrides: Record<string, unknown> = {}) => ({
+  sourceUrl: 'https://example.invalid/data/synthetic_time.dat', telescope: 'Mars Reconnaissance Orbiter', mode: 'SHARAD/3-D delay-time radargram',
+  citation: 'Fixture citation.', license: 'Fixture license.', limitations: ['Fixture limitation.'], ...overrides,
 });
 const counting = (label: SharadPds4Label): SharadByteSource & { reads: number } => ({
   identity: 'counting', size: sharadExpectedBytes(label), reads: 0,
@@ -166,59 +162,84 @@ test('SHARAD reader refuses changed scalar encoding, axis order, missing semanti
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('the bounded product record must agree with its label before any read, and publishes the F16 qualification', () => {
-  const parsed = parseSharadPds4Label(label()), product = parseSharadProductRecords(record()).products[0]!;
-  assert.equal(product.boundedMember.digest, 'none-published');
-  assert.doesNotThrow(() => assertSharadRecordMatchesLabel(product, parsed));
-  assert.throws(() => assertSharadRecordMatchesLabel(parseSharadProductRecords(record({ lidvid: 'urn:nasa:pds:mro_sharad_3d:data:synthetic_time::2.0' })).products[0]!, parsed), /LIDVID/u);
-  assert.throws(() => assertSharadRecordMatchesLabel(parseSharadProductRecords(record({ boundedMember: { ...record().products[0]!.boundedMember, advertisedBytes: 97 } })).products[0]!, parsed), /advertised length 97 disagrees with the label length 96/u);
-  assert.throws(() => assertSharadRecordMatchesLabel(parseSharadProductRecords(record({ boundedMember: { ...record().products[0]!.boundedMember, origin: 'https://example.invalid/data/other_time.dat' } })).products[0]!, parsed), /does not name the labelled science member/u);
-  assert.throws(() => parseSharadProductRecords(record({ boundedMember: { ...record().products[0]!.boundedMember, digest: 'a'.repeat(64) } })), /publishes no digest/u);
-  assert.throws(() => parseSharadProductRecords(record({ pinnedInputs: [{ input: 'fixture-observations', role: 'response' }] })), /pinned PDS4 label/u);
-  const qualification = sharadPlanetaryGridQualification(parsed, product);
-  assert.equal(qualification.source.archiveIdentity, parsed.lidvid);
-  assert.deepEqual(qualification.axes.map(axis => [axis.fitsAxis, axis.role, axis.physicalType, axis.unit]), [[1, 'projected-x', 'length', 'm'], [2, 'projected-y', 'length', 'm'], [3, 'delay', 'time', 'us']]);
-  assert.equal(qualification.quantity.name, 'BACKSCATTER STRENGTH RELATIVE TO FRAME MEAN');
-  assert.equal(qualification.depth.coordinate, 'delay');
-  assert.equal(qualification.depth.conversion.state, 'unavailable');
-  assert.equal(qualification.depth.conversion.parameters.length, 0);
-  assert.equal(qualification.resolution.state, 'unknown');
-  assert.deepEqual(qualification.resolution.elements, []);
-  assert.equal(qualification.placement, undefined);
-  assert.equal(qualification.observability.measurementOperator, 'radar-propagation');
-  assert.equal(qualification.observability.localization, 'inversion-dependent');
-  assert.equal(qualification.uncertainty.form, 'none-supplied');
-  assert.equal(qualification.inference?.kind, 'archive-published');
-  assert.deepEqual(qualification.inference?.assumptions, ['Fixture limitation.']);
-  assert.match(qualification.resolution.basis, /Sampling is not resolution/u);
+
+test('a pinned slice is read as the window of the volume it claims to be, and never outside it', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'sharad-pds4-slice-'));
+  try {
+    const parsed = parseSharadPds4Label(label()), whole = bytes();
+    const frame = sharadSliceWindow(parsed, { kind: 'delay-frame', x: 1, y: 2 });
+    assert.deepEqual(frame, { position: 80, length: 16 });
+    assert.deepEqual(sharadSliceWindow(parsed, { kind: 'x-plane', x: 1 }), { position: 48, length: 48 });
+    const framePath = resolve(root, 'frame.dat'), planePath = resolve(root, 'plane.dat');
+    await writeFile(framePath, whole.subarray(frame.position, frame.position + frame.length));
+    await writeFile(planePath, whole.subarray(48, 96));
+    const sliced = await openSharadPds4Slice(framePath, parsed, { kind: 'delay-frame', x: 1, y: 2 }, frame);
+    try {
+      // The label arithmetic is unchanged: the same call on the whole member and on its pinned slice agree.
+      assert.deepEqual((await readSharadDelayFrame(sliced, 1, 2)).values, [120, 121, 122, 123]);
+      await assert.rejects(readSharadDelayFrame(sliced, 0, 0), /leaves the pinned slice at 80 of 16 bytes/u);
+    } finally { await sliced.source.close(); }
+    const plane = await openSharadPds4Slice(planePath, parsed, { kind: 'x-plane', x: 1 });
+    try {
+      assert.deepEqual((await readSharadPlane(plane, 'projected-x', 1)).values, [null, 101, 102, 103, 110, 111, 112, 113, 120, 121, 122, 123]);
+      assert.deepEqual((await readSharadDelayFrame(plane, 1, 2)).values, [120, 121, 122, 123]);
+      await assert.rejects(readSharadPlane(plane, 'projected-x', 0), /leaves the pinned slice/u);
+    } finally { await plane.source.close(); }
+    // A pin that is not where the label puts that slice is refused before the file is even sized.
+    await assert.rejects(openSharadPds4Slice(framePath, parsed, { kind: 'delay-frame', x: 1, y: 2 }, { position: 64, length: 16 }),
+      /pinned slice at 64 of 16 bytes is not the delay-frame the label places at 80 of 16 bytes/u);
+    await assert.rejects(openSharadPds4Slice(framePath, parsed, { kind: 'x-plane', x: 1 }), /slice file length 16 disagrees with the x-plane length 48/u);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('the pinned Mars record and the pinned archive label agree on the published 26 GB product', async () => {
-  const source = resolve(import.meta.dirname, '../../../../src/objects/mars/source/telescopes/mro-sharad-3d');
-  const parsed = parseSharadPds4Label(await readFile(resolve(source, 'east_deuteronilus_mensae_3d_v2_time.xml'), 'utf8'));
-  const records = parseSharadProductRecords(JSON.parse(await readFile(resolve(source, 'bounded-product.json'), 'utf8')));
-  const product = records.products.find(entry => entry.lidvid === parsed.lidvid)!;
-  assert.equal(records.target, 'mars');
+test('the Mars source observations name real slices of the pinned label and publish the F16 qualification', async () => {
+  const root = resolve(import.meta.dirname, '../../../..'), source = resolve(root, 'src/objects/mars/source');
+  const parsed = parseSharadPds4Label(await readFile(resolve(source, 'telescopes/mro-sharad-3d/east_deuteronilus_mensae_3d_v2_time.xml'), 'utf8'));
   assert.equal(parsed.lidvid, 'urn:nasa:pds:mro_sharad_3d:data:east_deuteronilus_mensae_3d_v2_time::1.0');
   assert.deepEqual(parsed.shape, [1280, 1420, 3600]);
   assert.equal(sharadExpectedBytes(parsed), 26_173_440_000);
-  assert.doesNotThrow(() => assertSharadRecordMatchesLabel(product, parsed));
-  // The PDS3 label states the same layout a second way: one fixed-length record is one contiguous delay frame.
-  const pds3 = await readFile(resolve(source, 'east_deuteronilus_mensae_3d_v2_time.lbl'), 'utf8');
-  assert.match(pds3, /RECORD_BYTES\s+= 14400/u);
-  assert.match(pds3, /FILE_RECORDS\s+= 1817600/u);
-  assert.match(pds3, /DATA_TYPE\s+= PC_REAL/u);
-  assert.equal(14_400, parsed.shape[2] * 4);
-  assert.equal(1_817_600, parsed.shape[0] * parsed.shape[1]);
-  // The reconstruction closure is the bundle's own list of contributing observations. That table is restored rather than
-  // committed, so the tracked label carries its record count here.
-  const observations = await readFile(resolve(source, 'east_deuteronilus_mensae_3d_v2_observations.xml'), 'utf8');
-  assert.match(observations, /<logical_identifier>urn:nasa:pds:mro_sharad_3d:miscellaneous_index:east_deuteronilus_mensae_3d_v2_observations<\/logical_identifier>/u);
-  assert.match(observations, /<records>466<\/records>/u);
-  assert.ok(product.pinnedInputs.some(pin => pin.input === 'pds-mro-sharad-3d-east-deuteronilus-observations' && pin.role === 'response'));
-  const qualification = sharadPlanetaryGridQualification(parsed, product);
-  assert.equal(qualification.depth.conversion.state, 'unavailable');
-  assert.equal(qualification.support.class, 'published-reconstruction');
-  assert.equal(qualification.resolution.state, 'unknown');
-  assert.equal(qualification.placement, undefined);
+  const products = parseSourceProducts(
+    JSON.parse(await readFile(resolve(source, 'observations.json'), 'utf8')),
+    JSON.parse(await readFile(resolve(source, 'manifest.json'), 'utf8')),
+    'mars',
+  ).filter(product => product.familyEvidence?.profileId === SHARAD_PDS4_PROFILE);
+  assert.equal(products.length, 2);
+  for (const product of products) {
+    const science = product.files.find(file => file.role === 'science')!;
+    const { claim, window } = parseSharadSliceClaim(product.identity, parsed);
+    // The observation's claimed slice, the label's arithmetic and the manifest pin are the same bytes.
+    assert.equal(science.bytes, window.length);
+    assert.equal(science.origin, `https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/data/${parsed.dataFile}`);
+    assert.equal(product.archiveProductId, `${parsed.lidvid}#bytes=${window.position}-${window.position + window.length - 1}`);
+    assert.deepEqual(sharadSliceWindow(parsed, claim), window);
+    assert.equal(product.familyEvidence?.families.join(), 'F16');
+    const qualification = sharadPlanetaryGridQualification(parsed, parseSharadQualificationSource({ ...product, sourceUrl: science.origin, license: 'NASA scientific data; archive citation requested' }, parsed));
+    assert.equal(qualification.source.archiveIdentity, parsed.lidvid);
+    assert.equal(qualification.depth.conversion.state, 'unavailable');
+    assert.equal(qualification.support.class, 'published-reconstruction');
+    assert.equal(qualification.resolution.state, 'unknown');
+    assert.equal(qualification.placement, undefined);
+  }
+  const frame = products.find(product => product.identity.SLICE_KIND === 'delay-frame')!;
+  assert.deepEqual([frame.identity.BYTE_OFFSET, frame.identity.BYTE_LENGTH], [13_096_944_000, 14_400]);
+  assert.throws(() => parseSharadSliceClaim({ ...frame.identity, BYTE_OFFSET: 0 }, parsed), /the label places that delay-frame at 13096944000/u);
+  assert.throws(() => parseSharadSliceClaim({ ...frame.identity, LIDVID: 'urn:nasa:pds:mro_sharad_3d:data:east_deuteronilus_mensae_3d_v2_time::2.0' }, parsed), /LIDVID/u);
+  assert.throws(() => parseSharadSliceClaim({ ...frame.identity, SLICE_KIND: 'y-plane' }, parsed), /unsupported slice kind/u);
+  // The committed delay frame is the only radar evidence a clean checkout has, so the reader is held to it here.
+  const sliced = await openSharadPds4Slice(resolve(source, 'telescopes/mro-sharad-3d/slices/frame-x0640-y0710.dat'), parsed, { kind: 'delay-frame', x: 640, y: 710 }, sharadFrameRange(parsed, 640, 710));
+  try {
+    const trace = await readSharadDelayFrame(sliced, 640, 710);
+    assert.equal(trace.values.length, 3600);
+    assert.ok(trace.values.every(value => value !== null && value >= parsed.statistics.minimum && value <= parsed.statistics.maximum));
+    await assert.rejects(readSharadDelayFrame(sliced, 640, 711), /leaves the pinned slice/u);
+  } finally { await sliced.source.close(); }
+});
+
+test('the SHARAD format is registered with its evidence and claims no operation yet', () => {
+  const { handler, profile } = familyProfile(SHARAD_PDS4_PROFILE);
+  assert.equal(handler.id, 'f16-sharad-pds4');
+  assert.deepEqual(profile.families, ['F16']);
+  assert.equal(profile.evidence[0]?.status, 'partial');
+  assert.deepEqual(F16_SHARAD_PDS4_HANDLER.recognizes([{ path: 'east_deuteronilus_mensae_3d_v2_time.xml', prefix: new TextEncoder().encode('<logical_identifier>urn:nasa:pds:mro_sharad_3d:data:east_deuteronilus_mensae_3d_v2_time</logical_identifier>') }]), [SHARAD_PDS4_PROFILE]);
+  assert.deepEqual(F16_SHARAD_PDS4_HANDLER.recognizes([{ path: 'other.xml', prefix: new TextEncoder().encode('<logical_identifier>urn:nasa:pds:other</logical_identifier>') }]), []);
 });

@@ -2,9 +2,11 @@
 import { open, stat } from 'node:fs/promises';
 import { parsePlanetaryGridQualification, type PlanetaryGridQualification } from './f16-planetary-depth.mts';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../../source-values.mts';
+import { MRO_SHARAD_3D_F16_PROFILE } from '../observation-families.mts';
+import type { FamilyHandler } from '../family-handlers.mts';
 
-export const SHARAD_PDS4_PROFILE = 'mro-sharad-3d-array@1' as const;
-export const SHARAD_PRODUCT_RECORD_SCHEMA = 'cssearth-bounded-archive-product@1' as const;
+/** One profile id for this archive format: the same one the source observations name. */
+export const SHARAD_PDS4_PROFILE = MRO_SHARAD_3D_F16_PROFILE;
 export type SharadAxis = 'projected-x' | 'projected-y' | 'delay';
 export type SharadAxisName = 'X' | 'Y' | 'DELAY_TIME';
 
@@ -210,6 +212,58 @@ export function openSharadPds4Volume(source: SharadByteSource, label: SharadPds4
   return { source, label };
 }
 
+/** The two slices of this layout that are one contiguous byte range: one delay frame, or every frame at one X index. */
+export type SharadSliceClaim =
+  | { readonly kind: 'delay-frame'; readonly x: number; readonly y: number }
+  | { readonly kind: 'x-plane'; readonly x: number };
+
+/** Where the label says a claimed slice must live. A pin that disagrees is not the slice it claims to be. */
+export function sharadSliceWindow(label: SharadPds4Label, claim: SharadSliceClaim): SharadByteRange {
+  if (claim.kind === 'delay-frame') return sharadFrameRange(label, claim.x, claim.y);
+  inBounds(claim.x, label.shape[0], 'X');
+  return { position: byteOffset(label, claim.x, 0, 0), length: label.shape[1] * sharadFrameBytes(label) };
+}
+
+/** Read a claimed slice of the archive member as the volume window it claims to be; reads outside it are refused. */
+export async function openSharadPds4Slice(path: string, label: SharadPds4Label, claim: SharadSliceClaim, pin?: SharadByteRange): Promise<SharadPds4Volume> {
+  const window = sharadSliceWindow(label, claim), size = (await stat(path)).size;
+  if (pin && (pin.position !== window.position || pin.length !== window.length))
+    throw new TypeError(`SHARAD pinned slice at ${pin.position} of ${pin.length} bytes is not the ${claim.kind} the label places at ${window.position} of ${window.length} bytes.`);
+  if (size !== window.length) throw new TypeError(`SHARAD slice file length ${size} disagrees with the ${claim.kind} length ${window.length} the label implies.`);
+  const handle = await open(path, 'r');
+  const source: SharadByteSource = {
+    identity: path, size: sharadExpectedBytes(label),
+    async read(position: number, length: number) {
+      if (position < window.position || position + length > window.position + window.length)
+        throw new RangeError(`SHARAD read of ${length} bytes at ${position} leaves the pinned slice at ${window.position} of ${window.length} bytes.`);
+      const buffer = Buffer.allocUnsafe(length), result = await handle.read(buffer, 0, length, position - window.position);
+      if (result.bytesRead !== length) throw new Error('SHARAD bounded read ended before its declared data range.');
+      return buffer;
+    },
+    close: () => handle.close(),
+  };
+  return openSharadPds4Volume(source, label);
+}
+
+const wholeNumber = (value: unknown, name: string) => {
+  const parsed = requireFiniteNumber(value, name);
+  if (!Number.isSafeInteger(parsed) || parsed < 0) throw new TypeError(`SHARAD ${name} must be a whole number.`);
+  return parsed;
+};
+
+/** Read the slice a source observation claims to be, from the identity it asserts, and hold it to the label. */
+export function parseSharadSliceClaim(identity: Readonly<Record<string, string | number | boolean>>, label: SharadPds4Label): { readonly claim: SharadSliceClaim; readonly window: SharadByteRange } {
+  if (identity.LIDVID !== label.lidvid) throw new TypeError(`SHARAD observation identity LIDVID ${String(identity.LIDVID)} disagrees with the label's ${label.lidvid}.`);
+  const kind = identity.SLICE_KIND, x = wholeNumber(identity.X_INDEX, 'X_INDEX');
+  if (kind !== 'delay-frame' && kind !== 'x-plane') throw new TypeError(`SHARAD observation names an unsupported slice kind ${String(kind)}.`);
+  if (kind === 'x-plane' && identity.Y_INDEX !== undefined) throw new TypeError('A SHARAD X plane spans every Y index and cannot name one.');
+  const claim: SharadSliceClaim = kind === 'delay-frame' ? { kind, x, y: wholeNumber(identity.Y_INDEX, 'Y_INDEX') } : { kind, x };
+  const window = sharadSliceWindow(label, claim);
+  if (wholeNumber(identity.BYTE_OFFSET, 'BYTE_OFFSET') !== window.position || wholeNumber(identity.BYTE_LENGTH, 'BYTE_LENGTH') !== window.length)
+    throw new TypeError(`SHARAD observation claims ${String(identity.BYTE_LENGTH)} bytes at ${String(identity.BYTE_OFFSET)}, but the label places that ${kind} at ${window.position} of ${window.length} bytes.`);
+  return { claim, window };
+}
+
 async function ranged(volume: SharadPds4Volume, range: SharadByteRange) {
   if (range.position < volume.label.dataOffset || range.position + range.length > volume.source.size) throw new RangeError('SHARAD bounded read leaves the labelled array.');
   const bytes = await volume.source.read(range.position, range.length);
@@ -248,61 +302,22 @@ export async function readSharadDelayFrame(volume: SharadPds4Volume, x: number, 
   return { x, y, range, delayStartMicroseconds: label.axes[2].start, delayIncrementMicroseconds: label.axes[2].increment, values: Array.from({ length: label.shape[2] }, (_, z) => value(bytes, z * 4)) };
 }
 
-export interface SharadBoundedMember {
-  readonly role: string; readonly origin: string; readonly advertisedBytes: number; readonly advertisedBytesCheckedOn: string;
-  readonly digest: 'none-published'; readonly acquisition: string;
+/**
+ * What the qualification needs from outside the label: the observation that names the product and the pin that carries
+ * its licence. Both are already owned elsewhere, so nothing here is a second copy of a label fact.
+ */
+export interface SharadQualificationSource {
+  readonly sourceUrl: string; readonly telescope: string; readonly mode: string;
+  readonly citation: string; readonly license: string; readonly limitations: readonly string[];
 }
-export interface SharadProductRecord {
-  readonly id: string; readonly telescope: string; readonly mode: string; readonly lidvid: string; readonly reader: typeof SHARAD_PDS4_PROFILE;
-  readonly boundedMember: SharadBoundedMember; readonly pinnedInputs: readonly { readonly input: string; readonly role: string }[];
-  readonly units: string; readonly meaning: string; readonly citation: string; readonly license: string; readonly credit: string;
-  readonly limitations: readonly string[];
-}
-export interface SharadProductRecords { readonly schema: typeof SHARAD_PRODUCT_RECORD_SCHEMA; readonly target: string; readonly products: readonly SharadProductRecord[] }
-
-const date = (value: unknown, label: string) => {
-  const parsed = requireString(value, label);
-  if (!/^\d{4}-\d{2}-\d{2}$/u.test(parsed) || !Number.isFinite(Date.parse(`${parsed}T00:00:00Z`))) throw new TypeError(`${label} must be a calendar date.`);
-  return parsed;
-};
-
-/** The 26 GB science member is read by range, so the record states its advertised length and that no digest is published. */
-export function parseSharadProductRecords(value: unknown): SharadProductRecords {
-  const root = requireRecord(value, 'SHARAD product records');
-  if (root.schema !== SHARAD_PRODUCT_RECORD_SCHEMA) throw new TypeError('Unsupported SHARAD product record schema.');
-  const target = requireString(root.target, 'record target');
-  if (!/^[a-z][a-z0-9-]*$/u.test(target)) throw new TypeError('SHARAD record target must be an object id.');
-  const products = requireArray(root.products, 'SHARAD products').map(raw => {
-    const row = requireRecord(raw, 'SHARAD product'), member = requireRecord(row.boundedMember, 'bounded member');
-    if (row.reader !== SHARAD_PDS4_PROFILE) throw new TypeError('SHARAD record must name this reader profile.');
-    const origin = requireString(member.origin, 'bounded member origin');
-    if (new URL(origin).protocol !== 'https:') throw new TypeError('SHARAD bounded member needs an HTTPS archive origin.');
-    if (member.digest !== 'none-published') throw new TypeError('SHARAD bounded member must state that the archive publishes no digest.');
-    const advertisedBytes = requireFiniteNumber(member.advertisedBytes, 'bounded member advertised bytes');
-    if (!Number.isSafeInteger(advertisedBytes) || advertisedBytes <= 0) throw new TypeError('SHARAD bounded member length must be a whole positive byte count.');
-    const pinnedInputs = requireArray(row.pinnedInputs, 'pinned inputs').map(entry => {
-      const pin = requireRecord(entry, 'pinned input');
-      return { input: requireString(pin.input, 'pinned input id'), role: requireString(pin.role, 'pinned input role') };
-    });
-    if (!pinnedInputs.some(pin => pin.role === 'label')) throw new TypeError('SHARAD record needs its pinned PDS4 label.');
-    const limitations = requireArray(row.limitations, 'limitations').map(entry => requireString(entry, 'limitation'));
-    if (!limitations.length) throw new TypeError('SHARAD record must retain its published limitations.');
-    return { id: requireString(row.id, 'product id'), telescope: requireString(row.telescope, 'telescope'), mode: requireString(row.mode, 'mode'),
-      lidvid: requireString(row.lidvid, 'product LIDVID'), reader: SHARAD_PDS4_PROFILE,
-      boundedMember: { role: requireString(member.role, 'bounded member role'), origin, advertisedBytes, advertisedBytesCheckedOn: date(member.advertisedBytesCheckedOn, 'bounded member check date'), digest: 'none-published' as const, acquisition: requireString(member.acquisition, 'bounded member acquisition') },
-      pinnedInputs, units: requireString(row.units, 'units'), meaning: requireString(row.meaning, 'meaning'), citation: requireString(row.citation, 'citation'),
-      license: requireString(row.license, 'license'), credit: requireString(row.credit, 'credit'), limitations };
-  });
-  if (!products.length) throw new TypeError('SHARAD product records are empty.');
-  if (new Set(products.map(product => product.id)).size !== products.length) throw new TypeError('Duplicate SHARAD product id.');
-  return { schema: SHARAD_PRODUCT_RECORD_SCHEMA, target, products };
-}
-
-/** The record and the label must agree on identity, member name, and length before any byte is read. */
-export function assertSharadRecordMatchesLabel(product: SharadProductRecord, label: SharadPds4Label): void {
-  if (product.lidvid !== label.lidvid) throw new TypeError(`SHARAD record LIDVID ${product.lidvid} disagrees with the label's ${label.lidvid}.`);
-  if (!product.boundedMember.origin.endsWith(`/${label.dataFile}`)) throw new TypeError('SHARAD record origin does not name the labelled science member.');
-  if (product.boundedMember.advertisedBytes !== sharadExpectedBytes(label)) throw new TypeError(`SHARAD advertised length ${product.boundedMember.advertisedBytes} disagrees with the label length ${sharadExpectedBytes(label)}.`);
+export function parseSharadQualificationSource(value: unknown, label: SharadPds4Label): SharadQualificationSource {
+  const row = requireRecord(value, 'SHARAD qualification source'), sourceUrl = requireString(row.sourceUrl, 'archive member URL');
+  if (new URL(sourceUrl).protocol !== 'https:') throw new TypeError('The SHARAD archive member needs an HTTPS origin.');
+  if (!sourceUrl.endsWith(`/${label.dataFile}`)) throw new TypeError('The named archive member is not the one this label describes.');
+  const limitations = requireArray(row.limitations, 'limitations').map(entry => requireString(entry, 'limitation'));
+  if (!limitations.length) throw new TypeError('The SHARAD observation must retain its published limitations.');
+  return { sourceUrl, telescope: requireString(row.telescope, 'telescope'), mode: requireString(row.mode, 'mode'),
+    citation: requireString(row.citation, 'citation'), license: requireString(row.license, 'license'), limitations };
 }
 
 export interface SharadQualificationMembers { readonly science: string; readonly coverage: string; readonly method: string }
@@ -312,17 +327,16 @@ const DEFAULT_MEMBERS: SharadQualificationMembers = { science: 'role:science', c
  * Publish the F16 planetary-grid qualification straight from the label and the source record. Delay stays delay: the
  * archive supplies no dielectric model or datum for a metric depth, so the conversion is unavailable.
  */
-export function sharadPlanetaryGridQualification(label: SharadPds4Label, product: SharadProductRecord, members: SharadQualificationMembers = DEFAULT_MEMBERS): PlanetaryGridQualification {
-  assertSharadRecordMatchesLabel(product, label);
+export function sharadPlanetaryGridQualification(label: SharadPds4Label, source: SharadQualificationSource, members: SharadQualificationMembers = DEFAULT_MEMBERS): PlanetaryGridQualification {
   const cartography = label.cartography, frame = `${cartography.projection} on the ${cartography.spheroidName} ${cartography.latitudeType.toLowerCase()} spheroid (a ${cartography.radiiKm[0]} km, b ${cartography.radiiKm[1]} km, c ${cartography.radiiKm[2]} km), central meridian ${cartography.centralMeridianDegrees} degrees east, projection origin latitude ${cartography.projectionOriginLatitudeDegrees} degrees`;
   const projected = `${cartography.projection} projected distance from the label's X and Y axis start values`;
   return parsePlanetaryGridQualification({
     schema: 'cssearth-planetary-grid-qualification@1',
-    source: { archiveIdentity: label.lidvid, sourceUrl: product.boundedMember.origin, citation: product.citation, license: product.license },
+    source: { archiveIdentity: label.lidvid, sourceUrl: source.sourceUrl, citation: source.citation, license: source.license },
     sourceClassification: { term: 'three-dimensional delay-time radargram', vocabulary: 'MRO SHARAD 3-D radargram bundle', version: label.lidvid.split('::')[1]!, status: 'source' },
     frame: { kind: 'projected-body-fixed', name: frame },
     quantity: { name: label.statistics.quantity, semantics: `${label.arrayDescription} The archive states no unit for the samples; the quantity is a ratio to the frame mean and is retained as dimensionless.`, unit: '1' },
-    calibration: { state: 'reconstructed', basis: [`Archive-published three-dimensional reconstruction from ${product.telescope} ${product.mode} observations.`, product.citation] },
+    calibration: { state: 'reconstructed', basis: [`Archive-published three-dimensional reconstruction from ${source.telescope} ${source.mode} observations.`, source.citation] },
     uncertainty: { form: 'none-supplied', basis: 'The bundle supplies no per-sample uncertainty array for this product.' },
     axes: label.axes.map((axis, index) => ({ fitsAxis: index + 1, role: axis.role, physicalType: axis.role === 'delay' ? 'time' : 'length', unit: axis.unit,
       reference: axis.role === 'delay' ? label.arrayDescription : projected,
@@ -331,6 +345,22 @@ export function sharadPlanetaryGridQualification(label: SharadPds4Label, product
     depth: { coordinate: 'delay', positiveDirection: 'down', datum: label.arrayDescription, conversion: { state: 'unavailable', parameters: [], uncertainty: 'The archive supplies no dielectric model, so no metric depth conversion is qualified.' } },
     observability: { measurementOperator: 'radar-propagation', coverage: { kind: 'tracks', description: 'The bundle indexes the contributing SHARAD observations for this product in its own source-observation table.', memberIds: [members.coverage] }, localization: 'inversion-dependent' },
     resolution: { state: 'unknown', elements: [], basis: `The label states ${cartography.pixelSpacingMetres[0]} m and ${cartography.pixelSpacingMetres[1]} m grid sampling and a ${label.axes[2].increment} ${label.axes[2].unit} delay interval. Sampling is not resolution, and no achieved response width is transcribed here.`, memberIds: [] },
-    inference: { kind: 'archive-published', method: `Archive-published synthetic-aperture three-dimensional reconstruction delivered as ${label.lidvid}.`, assumptions: product.limitations, validation: 'The reader validates the label contract and reads the archive bytes by label-defined range; the reconstruction itself is the archive\'s published result.', memberIds: [members.method] },
+    inference: { kind: 'archive-published', method: `Archive-published synthetic-aperture three-dimensional reconstruction delivered as ${label.lidvid}.`, assumptions: source.limitations, validation: 'The reader validates the label contract and reads the archive bytes by label-defined range; the reconstruction itself is the archive\'s published result.', memberIds: [members.method] },
   });
 }
+
+/**
+ * The format is registered so the coverage ledger names it and its evidence. No operation is published yet: the shared
+ * F16 route inspects a FITS array through Astropy, and these are native PDS4 byte ranges.
+ */
+export const F16_SHARAD_PDS4_HANDLER: FamilyHandler = {
+  id: 'f16-sharad-pds4', families: ['F16'],
+  profiles: [{
+    id: SHARAD_PDS4_PROFILE, format: 'Pinned byte ranges of a PDS4 MRO SHARAD 3-D radargram Array_3D, read through its detached label',
+    version: '2025-10-22', families: ['F16'],
+    evidence: [{ path: 'tools/objects/telescopes/families/f16-sharad-pds4.test.mts',
+      establishes: 'Label contract on archive-shaped bytes, bounded and refused read costs, pinned-slice windows held to the label, and the published F16 qualification. No descriptor or operation is claimed.', status: 'partial' }],
+  }],
+  recognizes: members => members.some(member => Buffer.from(member.prefix).toString('latin1').includes('urn:nasa:pds:mro_sharad_3d:data:')) ? [SHARAD_PDS4_PROFILE] : [],
+  operations: () => [],
+};
