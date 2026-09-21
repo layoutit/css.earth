@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "megaclite",
+  "card": {
+    "text": "A small, distant irregular moon of Jupiter.",
+    "sources": [
+      {
+        "catalogueId": "jpl-horizons",
+        "url": "https://ssd.jpl.nasa.gov/horizons/",
+        "label": "JPL Horizons",
+        "checked": "2026-09-22",
+        "locator": "Object data page and observer ephemeris for 519 (Megaclite); JPL satellite discovery table"
+      },
+      {
+        "catalogueId": "jpl-horizons",
+        "url": "https://ssd.jpl.nasa.gov/horizons/",
+        "label": "JPL Horizons apparent magnitude for Megaclite (body 519); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+        "checked": "2026-09-22"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Megaclite is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+    "sources": [
+      {
+        "catalogueId": "jpl-horizons",
+        "url": "https://ssd.jpl.nasa.gov/horizons/",
+        "label": "JPL Horizons",
+        "checked": "2026-09-22",
+        "locator": "Object data page and observer ephemeris for 519 (Megaclite); JPL satellite discovery table"
+      },
+      {
+        "catalogueId": "jpl-horizons",
+        "url": "https://ssd.jpl.nasa.gov/horizons/",
+        "label": "JPL Horizons apparent magnitude for Megaclite (body 519); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+        "checked": "2026-09-22"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Sphere at an assumed-albedo diameter",
+      "detail": "Inferred shape",
+      "summary": "A sphere about 6.3 km across, estimated from brightness with an assumed 4% albedo.",
+      "sources": [
+        {
+          "catalogueId": "jpl-horizons",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "label": "JPL Horizons apparent magnitude for Megaclite (body 519); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+          "checked": "2026-09-22"
+        }
+      ]
+    }
+  }
+}

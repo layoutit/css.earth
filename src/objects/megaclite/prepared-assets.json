@@ -1,0 +1,16 @@
+{
+  "schema": "cssmegaclite-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 459252,
+      "sha256": "5101ef1a8835e80b5fc6f5da98aac210f372f87e40084429f1fba9d63259c498"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 370628,
+      "sha256": "2283a0e5803fd1000ed5ecd1fbdea75f3a014c26bf28f9735a40f6314e247bc0"
+    }
+  ]
+}

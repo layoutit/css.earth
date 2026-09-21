@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "megaclite",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Megaclite",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 3.15
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -525918708025.2339,
+        552223976492.5736,
+        247812060676.15637
+      ],
+      "presentationToReference": [
+        -0.6559174175685406,
+        2.4356826039297786e-17,
+        0.7548326578323282,
+        0.6925454234251657,
+        0.3977771559319137,
+        0.6017924648178772,
+        0.3002551878370709,
+        -0.9174820620691818,
+        0.2609089648866195
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 13.695652173913043,
+      "bodyRadiusM": 3150
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/megaclite-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d3b10a84c1d4f60a4c9294b4cf1520d0effdae6ac51a3f590136600f47eca3bf"
+      }
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "Megaclite",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 5.2,
+      "description": "A small, distant irregular moon of Jupiter.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "5c3be94447c067f668eb8f8d749515675859bdc38cda64d274099442da7117bb"
+  }
+}

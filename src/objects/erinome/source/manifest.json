@@ -1,0 +1,168 @@
+{
+  "schema": "csserinome-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/objects/erinome/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://ssd.jpl.nasa.gov/horizons/",
+      "credit": "JPL Horizons apparent magnitude for Erinome (body 525); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "src/objects/erinome/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "expectedBytes": 59703,
+      "expectedSha256": "0df0f4e0b62c588781d39e9ee65d547b8188742f2872e1ae7ef17e474bf6a9a5",
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/horizons/"
+      ],
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Illustrative sphere at about 6.6 km, estimated from the apparent magnitude JPL Horizons gives for Erinome (22.527 on 2026-Sep-03, H = 15.0 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured. Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 3300
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/irregular-moons/jupiter-small.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored grid marking unavailable surface imagery."
+      },
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "consumers": [
+        "surfaces"
+      ],
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 3300
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/irregular-moons/jupiter-small.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 2800,
+      "expectedSha256": "000c3439b56ca632aa813ec544b00f60187ff3c5579c9413e0f51ad8e3e2b210",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2090,
+      "expectedSha256": "17279bd4db89c80e6e1ea3cdb4a0911aceeef4abfc34d295efbfb1b9f62b09a1"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 444,
+      "expectedSha256": "64bacaeed29b1f14a6087407b1299dfe580c22d2154bb151b7539380c769333a"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 352,
+      "expectedSha256": "9cb6567d73269408ecc2201b25b2cd77c22323dd20c087b8063905778a7a81ca"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2371,
+      "expectedSha256": "fddeddf76e270a5a1e3522e226d00e82985dac3f9c9484e17d25e9214f9fe448"
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3488,
+      "expectedSha256": "1f2103004b0a0b8e535308f5a729d1cba83bc544fe4bc6f36fac2b56ac446753"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-source-context",
+      "path": "presentation/context.png",
+      "origin": "https://ssd.jpl.nasa.gov/horizons/",
+      "credit": "JPL Horizons apparent magnitude for Erinome (body 525); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 92420,
+      "expectedSha256": "f09710c99dd13fbeb9b61c6977b606b3984f4984e0ec42ba572842e1c0fc4aa1",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "inputs": [
+          "published-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+    }
+  ]
+}

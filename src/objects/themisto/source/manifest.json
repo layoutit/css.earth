@@ -1,0 +1,168 @@
+{
+  "schema": "cssthemisto-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/objects/themisto/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://ssd.jpl.nasa.gov/horizons/",
+      "credit": "JPL Horizons apparent magnitude for Themisto (body 518); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "src/objects/themisto/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "expectedBytes": 59703,
+      "expectedSha256": "f91ce3a563b6a16c934f780b4c2d79c2c7f360649cb8ca2c1aef68408fd86ba1",
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/horizons/"
+      ],
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Illustrative sphere at about 9.2 km, estimated from the apparent magnitude JPL Horizons gives for Themisto (21.843 on 2026-Sep-03, H = 14.3 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured. Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 4600
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/irregular-moons/jupiter-small.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored grid marking unavailable surface imagery."
+      },
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "consumers": [
+        "surfaces"
+      ],
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 4600
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/irregular-moons/jupiter-small.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 2810,
+      "expectedSha256": "ae96916dfcc85e0ed911afc7dce201371288786fc1d14aa6b2f07b4c511c35df",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2098,
+      "expectedSha256": "2d762ccf038436f1b6c0b16bd58f6a2c59631dfb98daeb440f3b4ebfaec862a1"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 445,
+      "expectedSha256": "cf5dc899780af611d707e9f0e6f4ce0278dc74cb38496b334358a90d067368c1"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 352,
+      "expectedSha256": "9cb6567d73269408ecc2201b25b2cd77c22323dd20c087b8063905778a7a81ca"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2393,
+      "expectedSha256": "8e5dae850d99dc40936a9c623d179ecc2e2ebc8dc27261789a25acf51417f7d0"
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4189,
+      "expectedSha256": "84f5e350b329ffe1fce12d805dc5c3808a01472e510b9cf21b733d88c1b1a9fc"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-source-context",
+      "path": "presentation/context.png",
+      "origin": "https://ssd.jpl.nasa.gov/horizons/",
+      "credit": "JPL Horizons apparent magnitude for Themisto (body 518); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 91388,
+      "expectedSha256": "8a4260ad50999a0494090e48f14b4dc1f5543ce1b247451266a462c5b3e57b9d",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "inputs": [
+          "published-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+    }
+  ]
+}

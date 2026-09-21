@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.example-stage:where([data-object-id="erinome"]) > :is(.erinome-sun-camera, .erinome-camera, .erinome-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="erinome"]) .erinome-sun-camera, :where(.planet-stage[data-object-id="erinome"]) .erinome-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="erinome"]) .erinome-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="erinome"]) .erinome-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.planet-stage[data-object-id="erinome"]) .erinome-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--erinome-surface-image); background-repeat: no-repeat;
+}
+:where(.planet-stage[data-object-id="erinome"]) .erinome-body > .erinome-polar { background-image: var(--erinome-poles-image); }
+:where(.planet-stage[data-object-id="erinome"]) .erinome-material-root { z-index: 3; --erinome-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="erinome"]) .erinome-material, :where(.planet-stage[data-object-id="erinome"]) .erinome-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="erinome"]) .erinome-material { background-repeat: no-repeat; transform: rotate(var(--erinome-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="erinome"]) .erinome-billboard { border-radius: 50%; background-color: var(--erinome-billboard-color); opacity: var(--erinome-billboard-opacity); }
+.planet-stage:where([data-object-id="erinome"])[data-lod="billboard"] .erinome-scene, .planet-stage:where([data-object-id="erinome"])[data-lod="marker"] .erinome-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="erinome"])[data-lod="marker"] .erinome-billboard { opacity: 0; }
+

@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-39b",
+  "displayName": "WASP-39 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.279 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-1802-03859",
+          "url": "https://arxiv.org/abs/1802.03859",
+          "label": "L. Mancini et al., \"The GAPS programme with HARPS-N at TNG XVI: Measurement of the Rossiter-McLaughlin effect of transiting planetary systems HAT-P-3, HAT-P-12, HAT-P-22, WASP-39 and WASP-60\", A&A 613, A41 (2018), arXiv:1802.03859",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.06 days",
+        "source": {
+          "catalogueId": "arxiv-1802-03859",
+          "url": "https://arxiv.org/abs/1802.03859",
+          "label": "L. Mancini et al., \"The GAPS programme with HARPS-N at TNG XVI: Measurement of the Rossiter-McLaughlin effect of transiting planetary systems HAT-P-3, HAT-P-12, HAT-P-22, WASP-39 and WASP-60\", A&A 613, A41 (2018), arXiv:1802.03859",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by WASP-39; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "wasp-39b-lens-shape.webp",
+        "surface": "wasp-39b-surface-shape@2x.webp",
+        "poles": "wasp-39b-poles-shape@2x.webp",
+        "source": {
+          "id": "wasp-39b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1802.03859"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of this planet exists (it has never been resolved: only its transit depth and orbit are measured; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "L. Mancini et al., \"The GAPS programme with HARPS-N at TNG XVI: Measurement of the Rossiter-McLaughlin effect of transiting planetary systems HAT-P-3, HAT-P-12, HAT-P-22, WASP-39 and WASP-60\", A&A 613, A41 (2018), arXiv:1802.03859",
+      "href": "https://arxiv.org/abs/1802.03859"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1802.03859",
+      "credit": "L. Mancini et al., \"The GAPS programme with HARPS-N at TNG XVI: Measurement of the Rossiter-McLaughlin effect of transiting planetary systems HAT-P-3, HAT-P-12, HAT-P-22, WASP-39 and WASP-60\", A&A 613, A41 (2018), arXiv:1802.03859"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-39b.json",
+      "credit": "Published radius and transit-fitted orbit; L. Mancini et al., \"The GAPS programme with HARPS-N at TNG XVI: Measurement of the Rossiter-McLaughlin effect of transiting planetary systems HAT-P-3, HAT-P-12, HAT-P-22, WASP-39 and WASP-60\", A&A 613, A41 (2018), arXiv:1802.03859"
+    }
+  }
+}
