@@ -1,0 +1,24 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "neso",
+  "entries": [
+    {
+      "id": "telescope-archive-sweep",
+      "subject": "Telescope archive sweep for a resolved image or shape",
+      "status": "unresolved",
+      "finding": "pnpm telescope explore neso on 2026-09-21: exact name and alias searches of the ESO, ALMA and ESA PSA archives returned no observation filed under this body (archive.eso.org empty-in-scope, almascience.eso.org empty-in-scope, psa.esa.int empty-in-scope; bounded name searches, not archive inventories, and observations filed under a parent or a field are not covered). The JWST, HST, Spitzer, NACO, Chandra, Gemini, Keck, Juno and PDS ledgers hold no completed search for it, so their silence is not a no. No resolved image or shape source is known; the size stays as the package states it.",
+      "evidence": [
+        "https://archive.eso.org/tap_obs",
+        "https://almascience.eso.org/tap",
+        "https://psa.esa.int/psa-tap/tap"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ],
+      "revisitWhen": "When a resolved image, an occultation shape or a thermal diameter of this body is published, or a telescope ledger records a completed search for it."
+    }
+  ]
+}

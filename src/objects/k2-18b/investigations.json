@@ -1,5 +1,23 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "k2-18b",
-  "entries": []
+  "entries": [
+    {
+      "id": "jwst-archive-observations",
+      "subject": "JWST observations of K2-18 (programmes 2372, 2722)",
+      "status": "unresolved",
+      "finding": "JWST observed K2-18 in programmes 2372, 2722 (NIRISS SOSS, NIRSpec and MIRI slitless time series). These measure the planet's atmosphere in transmission against its star; the planet is never resolved, so they give no surface image, map or colour. Not reduced here.",
+      "evidence": [
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=2372",
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=2722"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ],
+      "revisitWhen": "When these observations are reduced for this body, or a resolved image or map derived from them is published."
+    }
+  ]
 }

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kepler-452b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kepler-452 b",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 10396.4
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d7814a78389c0eadfe7c7f508d57be7a6262b259b9f716e8c1f704be7dc20e8d"
+      }
+    },
+    "catalog": {
+      "name": "Kepler-452 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 114254910.2,
+      "description": "Planet 1.6 times Earth’s radius on a 385 day orbit around a Sun-like star.",
+      "systemName": "Kepler-452 system",
+      "order": 1100,
+      "context": {
+        "order": 1100
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5365291927506246000,
+        -10998629488484246000,
+        11932737046556780000
+      ],
+      "presentationToReference": [
+        0.3169414692539391,
+        -0.8976977994206365,
+        -0.30608293971160994,
+        -0.641997177426999,
+        -0.4406053485713232,
+        0.6274603979424592,
+        0.6981315987999118,
+        0.0023638370691325,
+        0.7159655599478161
+      ],
+      "orbitUpReference": [
+        0.8976977994206365,
+        0.4406053485713232,
+        -0.0023638370691325
+      ],
+      "metersPerUnit": 33536.77419354839,
+      "bodyRadiusM": 10396400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "4165363931d0eaf44a2711a7ba60744eeadd7054268182049b51f63eedc9e694"
+  }
+}

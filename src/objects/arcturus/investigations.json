@@ -1,5 +1,22 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "arcturus",
-  "entries": []
+  "entries": [
+    {
+      "id": "selected-published-values",
+      "subject": "Radius adopted from the published record",
+      "status": "included",
+      "finding": "Radius: Limb-darkened angular diameter 20.922 ± 0.036 mas (quadratic limb-darkening fit) measured with IOTA/IONIC by Lacour et al. (2008), A&A 485, 561; at the Hipparcos distance this is the record’s radius. Adopted 17,617,284 km, 25.3231 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted. Placement: SIMBAD basic record for * alf Boo (HIP 69673), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Boo; Inverse of the Hipparcos new-reduction parallax 88.83 ± 0.54 mas (van Leeuwen 2007) via SIMBAD.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Boo",
+        "https://arxiv.org/abs/0804.0192"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ]
+    }
+  ]
 }

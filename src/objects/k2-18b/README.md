@@ -6,7 +6,7 @@ K2-18 b is a sub-Neptune that transits the red dwarf K2-18, 38 parsecs away.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
-Measured, all from Sarkis et al. (2018), AJ 155, 257, arXiv:1805.00830, Table 2: radius 2.37 ± 0.22 Earth radii, period 32.939614 days, transit time BJD 2457264.39144 and inclination 89.5785 degrees. Derived here, not quoted: the scaled distance a/R* = 74.78, from Kepler's third law with their period, stellar mass (0.359 solar masses) and stellar radius (0.411 solar radii). The orbit is drawn circular. The position angle of the orbit on the sky is not measured; the ascending node at celestial north is a display convention.
+Measured, all from Sarkis et al. (2018), AJ 155, 257, arXiv:1805.00830, Table 2: radius 2.37 ± 0.22 Earth radii, period 32.939614 days, transit time BJD 2457264.39144 and inclination 89.5785 degrees. Derived here, not quoted: the scaled distance a/R* = 74.78, from Kepler's third law with their period, stellar mass (0.359 solar masses) and stellar radius (0.411 solar radii). From their Table 3 (joint radial-velocity fit): eccentricity 0.20 ± 0.08 and argument of periastron −0.10 (+0.81/−0.59) rad, drawn as an ellipse; the angle is loosely constrained. The position angle of the orbit on the sky is not measured; the ascending node at celestial north is a display convention.
 
 Not measured and not shown: colour, albedo, surface or clouds, rotation. The rotation is assumed synchronous. No mass is adopted.
 

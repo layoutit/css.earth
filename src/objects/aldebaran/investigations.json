@@ -1,5 +1,22 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "aldebaran",
-  "entries": []
+  "entries": [
+    {
+      "id": "selected-published-values",
+      "subject": "Radius adopted from the published record",
+      "status": "included",
+      "finding": "Radius: Limb-darkened angular diameter 20.58 ± 0.03 mas, or 44.2 ± 0.9 solar radii, from lunar occultations and VLTI/VINCI by Richichi and Roccatagliata (2005), A&A 433, 305. Adopted 30,749,940 km, 44.2000 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted. Placement: SIMBAD basic record for * alf Tau (HIP 21421), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Tau; Inverse of the Hipparcos new-reduction parallax 48.94 ± 0.77 mas (van Leeuwen 2007) via SIMBAD.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Tau",
+        "https://arxiv.org/abs/astro-ph/0502181"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ]
+    }
+  ]
 }

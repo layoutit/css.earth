@@ -1,5 +1,22 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "sirius",
-  "entries": []
+  "entries": [
+    {
+      "id": "selected-published-values",
+      "subject": "Radius adopted from the published record",
+      "status": "included",
+      "finding": "Radius: the limb-darkened angular diameter 6.039 +/- 0.019 mas that Kervella et al. (2003, A&A 408, 681) measure on Sirius A with VLTI/VINCI, at the Hipparcos new-reduction parallax 379.21 +/- 1.58 mas (2.6371 pc): 1,191,189 km, 1.712 solar radii at 695700 km per solar radius (the paper gives 1.711 +/- 0.013). No gravitational parameter is adopted. presentationUp: no rotation axis is measured, so the presentation frame puts the display axis (celestial north at the star) up. Placement: SIMBAD basic record for * alf CMa (HIP 32349), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2032349; Inverse of the Hipparcos new-reduction parallax 379.21 +/- 1.58 mas (van Leeuwen 2007, A&A 474, 653; 2007A&A...474..653V) via SIMBAD.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+CMa",
+        "https://arxiv.org/abs/astro-ph/0306604"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ]
+    }
+  ]
 }

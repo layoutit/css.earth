@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-452b",
+  "radiusKm": 10396.4,
+  "radiusSource": "Radius 1.63 (+0.23/-0.20) Earth radii from Jenkins et al. 2015 (AJ 150, 56 (2015); arXiv:1507.06723), at 6378.137 km per Earth radius. No mass is measured, so no gravitational parameter is adopted. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 384.843,
+  "orbitalPeriodSource": "Jenkins et al. 2015 (AJ 150, 56 (2015); arXiv:1507.06723), Table 3: 384.843 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Kepler-452 b is measured; only its size, mass and orbit are."
+  }
+}

@@ -1,5 +1,22 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "proxima-centauri",
-  "entries": []
+  "entries": [
+    {
+      "id": "selected-published-values",
+      "subject": "Radius adopted from the published record",
+      "status": "included",
+      "finding": "Radius: Radius 0.141 ± 0.007 solar radii measured with VLTI/AMBER by Demory et al. (2009), A&A 505, 205. Kervella, Thévenin and Lovis (2017) give 0.1542 ± 0.0045 from a radius to magnitude relation; the interferometric value is adopted. Adopted 98,094 km, 0.1410 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted. Placement: SIMBAD basic record for NAME Proxima Centauri (HIP 70890), ICRS J2000 position, reference 2020yCat.1350....0G, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Proxima+Centauri; Inverse of the Gaia EDR3 parallax 768.0665 ± 0.0499 mas via SIMBAD.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Proxima+Centauri",
+        "https://arxiv.org/abs/0906.0602"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ]
+    }
+  ]
 }
