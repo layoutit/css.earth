@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a5b3056cba14ffaa85654eba484324fa4fa46c0a15d4e20eb25e738b0f870d91"
+    "sha256": "33169b4c380dd400d74a973455de8a41f15aa01a71aab21873907171818044a3"
   },
   "id": "ganymede",
   "properties": {
@@ -78,16 +78,6 @@
               "id": "oxygen-signature",
               "source": "content",
               "material": "lighting"
-            },
-            {
-              "id": "ice-fraction",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "dark-material",
-              "source": "content",
-              "material": "lighting"
             }
           ]
         }
@@ -158,7 +148,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "de86aecec0d659c79e2c6f7a624fa3afda3231977d681b71a4b0b6d82df4b477"
+        "sha256": "403647f182363478d5c52f1234b59ad98d3b8cec88304fc5623af0cdeac159e1"
       }
     },
     "catalog": {

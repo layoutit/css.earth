@@ -1,0 +1,37 @@
+{
+  "id": "doi-10-1126-science-1151524",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Dust Halo of Saturn's Largest Icy Moon, Rhea",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1126/science.1151524"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1126/science.1151524",
+      "label": "Science"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/rhea/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/introduction/sources/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "G. H. Jones, E. Roussos, N. Krupp et al. (2008), Science 319, 1380-1384",
+      "scope": "citation",
+      "evidence": "src/objects/rhea/text.json#/introduction/sources/1"
+    }
+  ],
+  "publisher": "American Association for the Advancement of Science"
+}

@@ -79,8 +79,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3755,
-      "expectedSha256": "739bba54588f22739a35fc415e8048029db9e3a619e5ef59cfa2b9aa387e2966",
+      "expectedBytes": 3786,
+      "expectedSha256": "850fd3876988791e914577272ce09d9c43893240138f403a2a9353adbf0fc81c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -122,14 +122,19 @@
       "expectedSha256": "ce73f7a41349a22565e8a02cd1d61294ab31e49e7b21080b67cf523936e15bbe"
     },
     {
+      "path": "reference/horizons-elements-1997.txt",
+      "expectedBytes": 7294,
+      "expectedSha256": "89f0e6de663797b6a725043d7feee30688db6fe8dfea89c32cc0a610c0ef28da"
+    },
+    {
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6584,
       "expectedSha256": "959e556e70f4beef5f26a84b9b4014baf53c7ed24797ea00e7aa3293e5b5099b"
     },
     {
       "path": "reference/source-record.json",
-      "expectedBytes": 2745,
-      "expectedSha256": "c48f989d3c29f80257fe20a9fee03a37490fc445aeea10f5fbe757f9ee393e7e"
+      "expectedBytes": 2747,
+      "expectedSha256": "68d096c106155c17c5ad3355f984e0b17cc8f968438d313d1a2173ea13fb80c8"
     },
     {
       "path": "reference/sbdb.json",

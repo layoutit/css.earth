@@ -13,7 +13,7 @@
     "sourceUrl": "https://arxiv.org/pdf/1308.0446",
     "sourceLabel": "Hanuš et al. (2013), Icarus 226, 1045–1057",
     "reference": "Hanuš et al. (2013), Icarus 226, 1045–1057",
-    "limitations": "The selected convex pole(9,−4) remains one of two possible orientations. Ďurech2011 fits three occultation chords (two close together) at125±15 km and cannot distinguish the poles. Hanuš2013 Table3 obtains volume-equivalent104±11 km for this pole from one Keck AO observation, matching the later archive comment. This newer resolved-image scale is explicitly transferred to the original mesh, rather than treating the archived125 km coordinates as final physical kilometers. One-image size and local morphology remain uncertain.",
+    "limitations": "The selected convex pole(9,−4) remains one of two possible orientations. Ďurech 2011 fits three occultation chords (two close together) at 125±15 km and cannot distinguish the poles. Hanuš 2013 Table 3 obtains volume-equivalent 104±11 km for this pole from one Keck AO observation, matching the later archive comment. This newer resolved-image scale is explicitly transferred to the original mesh, rather than treating the archived 125 km coordinates as final physical kilometers. One-image size and local morphology remain uncertain.",
     "visibleDescription": "Convex light-curve reconstruction, 104 ± 11 km volume-equivalent diameter. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 0.8320000018585997,
     "metersPerSourceUnit": 832.0000018585997
@@ -23,7 +23,7 @@
     9,
     -4
   ],
-  "modelLimitations": "The selected convex pole(9,−4) remains one of two possible orientations. Ďurech2011 fits three occultation chords (two close together) at125±15 km and cannot distinguish the poles. Hanuš2013 Table3 obtains volume-equivalent104±11 km for this pole from one Keck AO observation, matching the later archive comment. This newer resolved-image scale is explicitly transferred to the original mesh, rather than treating the archived125 km coordinates as final physical kilometers. One-image size and local morphology remain uncertain.",
+  "modelLimitations": "The selected convex pole(9,−4) remains one of two possible orientations. Ďurech 2011 fits three occultation chords (two close together) at 125±15 km and cannot distinguish the poles. Hanuš 2013 Table 3 obtains volume-equivalent 104±11 km for this pole from one Keck AO observation, matching the later archive comment. This newer resolved-image scale is explicitly transferred to the original mesh, rather than treating the archived 125 km coordinates as final physical kilometers. One-image size and local morphology remain uncertain.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/540/shape.txt",
     "vertices": 1598,

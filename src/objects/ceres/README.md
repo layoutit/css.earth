@@ -97,7 +97,7 @@ Originals are acquired from their publishers, not other objects.
 | Input | Source and use |
 | --- | --- |
 | Title | Pinned Inter variable font; shared title outline preparation. |
-| Physical/orbit data | Vendored `@cssearth/astronomy` JPL body data, Kepler state vectors and IAU rotation. Mean radius 469.7 km; fixed geometry epoch 2026-09-04T00:00:00 TT. |
+| Physical/orbit data | Vendored `@cssearth/astronomy` JPL body data, Kepler state vectors and IAU rotation. Mean radius 469.7 km; fixed geometry epoch 2026-09-03T00:00:00 TT. |
 | Facts | [NASA Ceres facts](https://science.nasa.gov/dwarf-planets/ceres/facts/), summarized in `tools/prepare-content.mjs`: asteroid-belt location, Dawn observations, about nine hours per rotation, no moons. |
 
 The maps share a global equirectangular grid. As with Pluto, exactly black pixels connected to the southern source border are identified before interpolation. The shared preparation helper marks those gaps with a neutral gray grid; it does not infer terrain. Enclosed black terrain and nonzero JPEG edge pixels remain untouched, so a dark edge fringe can remain.
@@ -144,6 +144,6 @@ The archive's labels are checked field by field before any pixel is read: produc
 <details>
 <summary>Shape, rotation and camera on the shared raster lane</summary>
 
-The recipe declares a sphere of 469.7 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 0.3781-day prograde rotation (JPL/NASA 9.074 h rotation and 4° obliquity (factsheet-review)) and 4.03° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera). 
+The recipe declares a sphere of 469.7 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 0.3781-day prograde rotation (JPL/NASA 9.074 h rotation (factsheet-review)) and a 4.04° tilt to its orbit. The tilt is computed here, not transcribed: the angle between the Dawn pole the astronomy package uses (RA 291.418°, Dec 66.764°, NAIF `dawn_ceres_v05.tpc`) and the normal of the pinned JPL Horizons ICRF orbit at JD 2461041.5 (i = 0.4745853864 rad, node = 0.4074666524 rad). Both serve the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera). 
 
 </details>

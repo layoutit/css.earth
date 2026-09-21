@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš2016 reports17 dense curves over six apparitions and553 sparse measurements. Both poles remain. Hanuš2021 sparse-data comparison has nearby pole families and a different catalog diameter, not a new calibration of this exact mesh.
+AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš 2016 reports 17 dense curves over six apparitions and 553 sparse measurements. Both poles remain. Hanuš 2021 sparse-data comparison has nearby pole families and a different catalog diameter, not a new calibration of this exact mesh.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

@@ -165,12 +165,16 @@ display approximation measurements, not source uncertainty.
 <details>
 <summary>Physical references and image preparation</summary>
 
-The astronomy package supplies Rhea's Saturn-relative orbit, IAU orientation and 764.5 km
-display scale reference. [NASA](https://science.nasa.gov/saturn/moons/rhea/) rounds the radius
+The astronomy package supplies Rhea's Saturn-relative orbit, IAU orientation and the
+[JPL satellite table](https://ssd.jpl.nasa.gov/sats/phys_par/sep.html) mean radius of 763.50 km;
+the recipe display scale reference uses the same value. [NASA](https://science.nasa.gov/saturn/moons/rhea/) rounds the radius
 to 764 km. Keep that physical value separate from the 764.1 km monochrome projection sphere and
 763.5 km elevation datum.
 
-The very tenuous exosphere does not justify a visible halo; proposed rings are not rendered.
+The very tenuous exosphere does not justify a visible halo. Rings are not rendered: the
+debris disk inferred by [Jones et al. 2008](https://doi.org/10.1126/science.1151524) was not
+found by the Cassini imaging search of [Tiscareno et al. 2010](https://doi.org/10.1029/2010GL043663),
+and the reader text states both results.
 
 Map preparation retains the shared 8192 × 4096 latitude-band layout and 1024-pixel pole products.
 The normal and enhanced photographic atlases sample their pinned original grids directly with a

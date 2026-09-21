@@ -32,9 +32,9 @@
       "summary": "Detail ranges from 400 m to 20 km per pixel; shadows in the photographs remain."
     },
     "enhanced": {
-      "title": "Color mosaic",
+      "title": "False-color mosaic",
       "detail": "Infrared color",
-      "summary": "Infrared, green and violet bands color the monochrome detail; missing color stays gray."
+      "summary": "Near-infrared, green and violet bands color the monochrome detail; monochrome remains where color is missing."
     },
     "geology": {
       "title": "Global geologic map",
@@ -45,34 +45,6 @@
       "title": "Oxygen-sensitive reflectance ratio",
       "detail": "2019 MUSE",
       "summary": "A 565/577.3 nm ratio sensitive to oxygen in surface ice, from 2019 VLT data. It is not an oxygen concentration."
-    },
-    "ice-fraction": {
-      "title": "SPHERE water-ice mixture",
-      "detail": "Model estimate",
-      "summary": "Modeled water-ice fraction, 2015/2021 SPHERE data. Roughly 100–150 km detail; gray areas lack observations.",
-      "sources": [
-        {
-          "catalogueId": "ganymede-sphere-composition-2022",
-          "url": "https://doi.org/10.5281/zenodo.6390469",
-          "label": "Oliver King et al. · SPHERE",
-          "checked": "2026-09-13",
-          "locator": "Native mapped numerical grids; methods paper"
-        }
-      ]
-    },
-    "dark-material": {
-      "title": "SPHERE darkening component",
-      "detail": "Model estimate",
-      "summary": "Modeled fraction of unidentified darkening material, 2015/2021 SPHERE data. Roughly 100–150 km detail.",
-      "sources": [
-        {
-          "catalogueId": "ganymede-sphere-composition-2022",
-          "url": "https://doi.org/10.5281/zenodo.6390469",
-          "label": "Oliver King et al. · SPHERE",
-          "checked": "2026-09-13",
-          "locator": "Native mapped numerical grids; methods paper"
-        }
-      ]
     }
   }
 }

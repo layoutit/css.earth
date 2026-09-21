@@ -51,14 +51,14 @@
       {
         "id": "orbital-period",
         "label": "Orbit around Jupiter",
-        "value": "7.16 days",
+        "value": "7.15 days · sidereal",
         "source": {
-          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-          "label": "JPL Planetary Satellite Mean Orbital Parameters",
-          "checked": "2026-09-16",
+          "url": "https://doi.org/10.1007/s10569-017-9805-5",
+          "label": "IAU WGCCRE 2015 sidereal rate",
+          "checked": "2026-09-21",
           "path": "source/editorial/factsheet-review.json",
-          "catalogueId": "jpl-satellite-mean-elements",
-          "locator": "/references/2; P (days)"
+          "catalogueId": "iau-wgccre-2015",
+          "locator": "/references/4; orbital-period"
         }
       }
     ],
@@ -97,7 +97,7 @@
       },
       {
         "id": "enhanced",
-        "label": "Enhanced color",
+        "label": "False color",
         "thumbnail": "ganymede-lens-enhanced.webp",
         "surface": "ganymede-enhanced@2x.webp",
         "poles": "ganymede-poles-enhanced@2x.webp",
@@ -105,7 +105,8 @@
           "id": "usgs-voyager-galileo-color",
           "path": "../manifest.json"
         },
-        "notes": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary."
+        "falseColor": true,
+        "notes": "USGS color mosaic combines near-infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is false color, not natural color; source resolution and seams vary."
       },
       {
         "id": "geology",
@@ -325,126 +326,6 @@
           }
         },
         "notes": "Published reflectance ratio sensitive to the 577.3 nm molecular-oxygen feature in surface ice. This is neither oxygen concentration nor atmospheric density. Spectral slope, the adjacent instrument gap and residual night-to-night differences affect contrasts. Values below one are retained. Two-degree samples and seams remain visible; gray grid marks missing or withheld edges. Absolute subpixel registration is unresolved.",
-        "noData": true
-      },
-      {
-        "id": "ice-fraction",
-        "label": "Ice fraction",
-        "thumbnail": "ganymede-lens-ice-fraction.webp",
-        "surface": "ganymede-ice-fraction@2x.webp",
-        "poles": "ganymede-poles-ice-fraction@2x.webp",
-        "source": {
-          "id": "ganymede-composition-ice-fraction",
-          "path": "../manifest.json",
-          "url": "https://doi.org/10.5281/zenodo.6390469"
-        },
-        "falseColor": true,
-        "legend": {
-          "kind": "scale",
-          "title": "Ice fraction",
-          "labels": [
-            "0%",
-            "30%",
-            "60%"
-          ],
-          "meta": "modeled fraction",
-          "sourceUrl": "https://doi.org/10.5281/zenodo.6390469",
-          "recipe": {
-            "palette": [
-              [
-                8,
-                29,
-                88
-              ],
-              [
-                34,
-                94,
-                168
-              ],
-              [
-                65,
-                182,
-                196
-              ],
-              [
-                161,
-                218,
-                180
-              ],
-              [
-                255,
-                255,
-                204
-              ]
-            ],
-            "labels": [
-              "0%",
-              "30%",
-              "60%"
-            ]
-          }
-        },
-        "notes": "Published posterior median of total water-ice abundance; this is a spectral mixture estimate, not a direct measurement of ice purity. Native one-degree nodes do not represent independent one-degree detail. Gray grid marks absent observations; the colors are a scientific display scale. Local preview: numerical-data reuse terms remain unresolved.",
-        "noData": true
-      },
-      {
-        "id": "dark-material",
-        "label": "Dark material",
-        "thumbnail": "ganymede-lens-dark-material.webp",
-        "surface": "ganymede-dark-material@2x.webp",
-        "poles": "ganymede-poles-dark-material@2x.webp",
-        "source": {
-          "id": "ganymede-composition-dark-material",
-          "path": "../manifest.json",
-          "url": "https://doi.org/10.5281/zenodo.6390469"
-        },
-        "falseColor": true,
-        "legend": {
-          "kind": "scale",
-          "title": "Dark material",
-          "labels": [
-            "0%",
-            "35%",
-            "70%"
-          ],
-          "meta": "modeled fraction",
-          "sourceUrl": "https://doi.org/10.5281/zenodo.6390469",
-          "recipe": {
-            "palette": [
-              [
-                8,
-                29,
-                88
-              ],
-              [
-                34,
-                94,
-                168
-              ],
-              [
-                65,
-                182,
-                196
-              ],
-              [
-                161,
-                218,
-                180
-              ],
-              [
-                255,
-                255,
-                204
-              ]
-            ],
-            "labels": [
-              "0%",
-              "35%",
-              "70%"
-            ]
-          }
-        },
-        "notes": "Published posterior median of the model’s combined synthetic darkening components. This is an unidentified spectral component, not a detected mineral. Native one-degree nodes do not represent independent one-degree detail. Gray grid marks absent observations; the colors are a scientific display scale. Local preview: numerical-data reuse terms remain unresolved.",
         "noData": true
       }
     ],

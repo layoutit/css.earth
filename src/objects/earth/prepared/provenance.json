@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1110aab6f980f86cbc741884895b72e8445f39abb30da1604a7a9693b1e595f2"
+    "sha256": "71a7502105b9c7e2b6852235cde517a378dba6c84316f04335a95ef49d27e77f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "5b25d28c61c4650fc7c28a460c3c91a1db72399cec5542e5896c76ac01d8652f"
+    "bindingsSha256": "014a4fff8673acd78441c5762a382e0b4571a4bf350208ae571ff5660400943f"
   },
   "recipes": [
     {
@@ -540,7 +540,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "86896f31c1a5c7bf77c2c4a973bda2cb31890dd3ae0235cad40c70386f7480c3",
+      "sha256": "2bad651780b1ecf521a53c733a4165f0b464479c5154cb49425ddaae1a50e69b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -790,7 +790,7 @@
                   },
                   {
                     "label": "Mantle",
-                    "description": "Solid rock",
+                    "description": "Hot, viscous rock",
                     "color": "#cf5d35"
                   },
                   {
@@ -811,7 +811,7 @@
                 "id": "surface-observation",
                 "url": "https://science.nasa.gov/earth/facts/"
               },
-              "notes": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging."
+              "notes": "Schematic interior based on NASA Science. NASA gives rounded sizes (1,221 km inner core, 2,300 km outer core, 2,900 km mantle, 30 km crust); here they are fitted to a 6,378 km radius as 1,221, 2,257, 2,870 and 30 km. Colors are illustrative; this is not direct interior imaging."
             },
             {
               "id": "mantle-tomography",
@@ -2823,8 +2823,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "86896f31c1a5c7bf77c2c4a973bda2cb31890dd3ae0235cad40c70386f7480c3",
-      "bytes": 16431,
+      "sha256": "2bad651780b1ecf521a53c733a4165f0b464479c5154cb49425ddaae1a50e69b",
+      "bytes": 16588,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3016,7 +3016,7 @@
   "products": [
     {
       "id": "normal",
-      "label": "Normal",
+      "label": "Visible color",
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/0",
       "observationAttribution": "source-lineage",
@@ -3197,7 +3197,7 @@
     },
     {
       "id": "topography",
-      "label": "Topography",
+      "label": "Elevation",
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/2",
       "observationAttribution": "source-lineage",
@@ -4585,7 +4585,7 @@
     },
     {
       "id": "preview:normal",
-      "label": "Normal preview",
+      "label": "Visible color preview",
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/0",
       "recipeDependencies": [
@@ -4635,7 +4635,7 @@
     },
     {
       "id": "preview:topography",
-      "label": "Topography preview",
+      "label": "Elevation preview",
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/2",
       "recipeDependencies": [
@@ -4715,11 +4715,11 @@
   },
   "lastPreparation": {
     "objectId": "earth",
-    "materialSha256": "7f49e139093788eb3d12aa663ab184af6f97c78b7560409cffe1309f4309ac01",
+    "materialSha256": "7088ce4e9a0506c171e643ae29ae21fba46d5a3f7f86cf374a15acba95701b14",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "5b25d28c61c4650fc7c28a460c3c91a1db72399cec5542e5896c76ac01d8652f"
+      "bindingsSha256": "014a4fff8673acd78441c5762a382e0b4571a4bf350208ae571ff5660400943f"
     }
   }
 }

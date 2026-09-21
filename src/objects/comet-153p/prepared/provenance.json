@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3b22be026445711580f0d1a45ad689f1e5f7ee3e198be5fe8ddb5785d6a6ba3e"
+    "sha256": "56aa33a0ba1d44e1600f34766d6152d28b25dca38a4b3245ffff78d70d665a6a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -131,7 +131,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7eaca75ea637d76eb553b71234c2caed1121df88712b4e593d9541ef80a7bc13",
+      "sha256": "d69b1b7bb3b30169297c1561557f3ac20aef1ee636c4d1245b69aa1d70600faf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -142,14 +142,14 @@
             {
               "id": "perihelion",
               "label": "Closest to Sun",
-              "value": "0.494 AU",
+              "value": "0.507 AU",
               "source": {
-                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D153P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
-                "label": "JPL Horizons, 2026-09-03 epoch",
-                "checked": "2026-09-16",
-                "path": "source/reference/horizons-elements.txt",
-                "catalogueId": "jpl-horizons",
-                "locator": "$$SOE first epoch; QR (km) / 149597870.7"
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=153P",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-21",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.q (au)"
               }
             }
           ],
@@ -182,7 +182,7 @@
                 {
                   "id": "perihelion",
                   "label": "Closest to Sun",
-                  "value": "0.494 AU"
+                  "value": "0.507 AU"
                 }
               ],
               "notes": "A sphere at an assumed display radius; no published nucleus size exists. No published nucleus size was found; the displayed radius is an assumption carried from the earlier catalogue estimate and is not a measurement. Neutral gray marks missing surface imagery; the attitude is an arbitrary display orientation.",
@@ -272,8 +272,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7eaca75ea637d76eb553b71234c2caed1121df88712b4e593d9541ef80a7bc13",
-      "bytes": 3332,
+      "sha256": "d69b1b7bb3b30169297c1561557f3ac20aef1ee636c4d1245b69aa1d70600faf",
+      "bytes": 3056,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -344,8 +344,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7594,
-          "sha256": "e6649af5c461231478d49e0543e6bda851d095b9bcd09aaa98d94db89714bf07",
+          "bytes": 7318,
+          "sha256": "b7476a59d1449b98d81d94b4fcd3b009373d3e096c731b276257051e5dcf7507",
           "verification": "bytes-verified"
         }
       ],
@@ -358,7 +358,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-153p",
-    "materialSha256": "cbcc2f89d025c8f62da48eb6d3db3ef70e86cc9778b75de0d06c14ccbc92eaac",
+    "materialSha256": "5f332d2f41ced2ba48bd24491d02ff9a37abe127cb1c911dea757f6c7916ee67",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

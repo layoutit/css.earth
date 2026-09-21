@@ -315,7 +315,12 @@ its checked `content.rendered` field.
 
 The shared editorial tool and contract are unchanged.
 
-`source/interior/earth-interior.json` supplies schematic layer geometry based on NASA Science.
+`source/interior/earth-interior.json` supplies schematic layer geometry based on NASA Science's
+[Earth facts](https://science.nasa.gov/earth/facts/). NASA gives rounded sizes (1,221 km inner-core
+radius, about 2,300 km outer core, 2,900 km mantle, 30 km crust on land), which sum to more
+than Earth's radius. The package keeps the inner core and crust and fits the outer core and mantle
+to a 6,378 km equatorial radius: 2,257 km and 2,870 km. NASA calls the mantle a hot, viscous
+layer; the legend uses that wording.
 The separate Mantle tomography dataset samples **GLAD-M35 r0.1 (2024)**, a seismic inverse
 model by Cui et al., distributed through EarthScope EMC. The model is not a photograph, a
 temperature measurement, or evidence for detailed core imagery.

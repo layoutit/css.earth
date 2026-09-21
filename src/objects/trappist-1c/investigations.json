@@ -17,7 +17,7 @@
       "id": "jwst-miri-15um-dayside",
       "subject": "Temperature at 15 um from the same ten JWST MIRI visits",
       "status": "included",
-      "finding": "The lens, as a labelled model. c's dayside is measured and its day-night pattern is not: its eclipse depth in the joint fit is 318 to 389 ppm (Bell's shape, a symmetric sinusoid, a free one), a 15 um brightness temperature of 353 to 379 K; its four eclipse visits alone give 331 to 463 ppm. The phase curve does not constrain c (freed, the sinusoid runs to its bound; held symmetric, its amplitude fits to zero), so no map is fitted. The lens draws a bare rock (T cos(z)^(1/4), nothing at night; Cowan & Agol 2011, eq. 3), the model b's light curve supports, set to show the middle of the depth range: 407 K under the star, 392 to 421 K across it, below the 480 K of a black rock. A dark night is the model's assumption.",
+      "finding": "The lens, as a labelled model. c's dayside is measured and its day-night pattern is not: its eclipse depth in the joint fit is 318 to 389 ppm (Bell's shape, a symmetric sinusoid, a free one), a 15 um brightness temperature of 353 to 379 K; its four eclipse visits alone give 331 to 463 ppm. The phase curve does not constrain c (freed, the sinusoid runs to its bound; held symmetric, its amplitude fits to zero), so no map is fitted. The lens draws a bare rock (T cos(z)^(1/4), nothing at night; Cowan & Agol 2011, eq. 3), the model b's light curve supports, set to show the middle of the depth range: 407 K under the star, 392 to 421 K across it, below the 480 K of a black rock. A dark night is the model's assumption. A phase curve that constrains c's day-night contrast, or a published map of c, would replace the model with a fit.",
       "evidence": [
         "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304",
         "https://zenodo.org/records/17710453",
@@ -32,8 +32,7 @@
           "date": "2026-09-21",
           "commit": "1502e2ce330631977d6db34faad022c21bc1ce95"
         }
-      ],
-      "revisitWhen": "A phase curve of c that constrains its day-night contrast (a second visit, or a joint fit whose uncertainties converge), or a published map of c: then fit the rock, or a map, to the light curve as b's is."
+      ]
     }
   ]
 }

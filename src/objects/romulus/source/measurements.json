@@ -25,7 +25,7 @@
     ],
     "referenceRadiusKm": 9.787866191310176,
     "axisConvention": "a,b,c are semiaxes; full axes = 2a,2b,2c",
-    "scale": "Published2013 projected area-equivalent diameter23.1±0.7km and ellipse ratio2.7±0.3.",
+    "scale": "Published 2013 projected area-equivalent diameter 23.1±0.7 km and ellipse ratio 2.7±0.3.",
     "qualification": "One published projected-limb family member with assumed equal depth;2020 reanalysis allows different correlated ellipse shapes.",
     "projectedDiameterKm": {
       "value": 23.1,
@@ -48,9 +48,9 @@
       7.029106154649631
     ],
     "assumptions": [
-      "Select2014 reported projected ellipse as one admissible illustrative member.",
+      "Select 2014 reported projected ellipse as one admissible illustrative member.",
       "Choose unseen c=b; viewing along assumed c reproduces adopted projected ellipse.",
-      "Do not call2.7:1 a unique measured3D shape."
+      "Do not call2.7:1 a unique measured 3D shape."
     ],
     "qualification": "One published projected-limb family member with assumed equal depth;2020 reanalysis allows different correlated ellipse shapes."
   },
@@ -69,7 +69,7 @@
     "meaning": "Illustrative pole and phase; no uniquely measured spin attitude."
   },
   "unresolved": [
-    "Herald2020 shows strong covariance between ellipse axes and orientation; preserve this in visible lens description."
+    "Herald 2020 shows strong covariance between ellipse axes and orientation; preserve this in visible lens description."
   ],
   "orbit": {
     "source": "source/validation/epoch-state.json",

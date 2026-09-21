@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "goibniu",
+  "entries": [
+    {
+      "id": "thermal-diameter",
+      "subject": "Size: Herschel and Spitzer thermal diameter (Vilenius et al. 2012)",
+      "status": "included",
+      "finding": "Goibniu is drawn as a sphere at the 680 +/- 34 km diameter measured from thermal emission by Vilenius et al. (2012), A&A 541, A94, using Herschel PACS and Spitzer MIPS radiometry. No shape model is published, so the sphere is illustrative.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201118743"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "44bf8eac22a856a14d6ea0b3537a86ecaab33e78"
+        }
+      ]
+    }
+  ]
+}

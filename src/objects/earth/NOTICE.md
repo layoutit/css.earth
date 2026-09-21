@@ -30,6 +30,21 @@ Inter is redistributed under the SIL Open Font License 1.1 in `source/presentati
 
 The Earth adapter's prepared HTML, CSS, modules, charts, textures, and scientific presentation specifications are project-authored derivatives. Source credits remain embedded in this record and in the prepared chart metadata.
 
+## ENSO sea-surface temperature anomaly
+
+NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS: MUR v4.1
+sea-surface temperature anomaly imagery for 7 September 2026, read from
+the GIBS `GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies` layer. NASA open
+Earth science imagery with attribution. cssEarth assembles the tiles into its
+own mosaic. The NOAA Climate Prediction Center ENSO advisory is cited for
+context. No NASA or NOAA endorsement is implied.
+
+## Spectrum
+
+NASA GSFC Planetary Spectrum Generator: Earth configuration of
+30 August 2026, `source/atmosphere/psg-earth-20260830.cfg`, a United States
+government scientific model response kept with NASA attribution.
+
 ## GLAD-M35 mantle model
 
 Congyue Cui et al. (2024), *GLAD-M35: a joint P and S global tomographic model

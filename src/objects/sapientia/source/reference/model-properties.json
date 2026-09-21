@@ -3,7 +3,7 @@
   "modelId": 16284,
   "modelVersion": "2023-10-03",
   "diameterKm": 103,
-  "diameterInterpretation": "Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range96–109 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+  "diameterInterpretation": "Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range 96–109 km). The grid marks unavailable imagery; rotational phase is illustrative.",
   "calibration": {
     "method": "published-volume-equivalent-size-transfer",
     "diameterKm": 103,
@@ -13,8 +13,8 @@
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16284",
     "sourceLabel": "DAMIT model 16284",
     "reference": "DAMIT model 16284",
-    "limitations": "The selected convex pole2 is preferred by nine occultation epochs in Marciniak2023 §5.2. Table1 gives103 km with asymmetric size interval96–109 km, accounting for acceptable vertical-shape variations. The archive latitude is −2°, differing by 1° from the paper value −1° (published latitude uncertainty ±20°); the cause of the difference is not established. The archive period 14.93046 h also differs slightly from the paper 14.93045 ± 0.00005 h; the archived spin is retained. The paper also reports a stronger nonconvex ADAM pole2 shape at100±1 km; DAMIT lists only the two convex solutions and the targeted ISAM release page returned no model rows, so that improved mesh remains unresolved. It is not substituted by an invented shape.",
-    "visibleDescription": "Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range96–109 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+    "limitations": "The selected convex pole 2 is preferred by nine occultation epochs in Marciniak 2023 §5.2. Table 1 gives 103 km with asymmetric size interval 96–109 km, accounting for acceptable vertical-shape variations. The archive latitude is −2°, differing by 1° from the paper value −1° (published latitude uncertainty ±20°); the cause of the difference is not established. The archive period 14.93046 h also differs slightly from the paper 14.93045 ± 0.00005 h; the archived spin is retained. The paper also reports a stronger nonconvex ADAM pole 2 shape at 100±1 km; DAMIT lists only the two convex solutions and the targeted ISAM release page returned no model rows, so that improved mesh remains unresolved. It is not substituted by an invented shape.",
+    "visibleDescription": "Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range 96–109 km). The grid marks unavailable imagery; rotational phase is illustrative.",
     "publishedUncertainty": {
       "lowerKm": 7,
       "upperKm": 6,
@@ -29,7 +29,7 @@
     264,
     -2
   ],
-  "modelLimitations": "The selected convex pole2 is preferred by nine occultation epochs in Marciniak2023 §5.2. Table1 gives103 km with asymmetric size interval96–109 km, accounting for acceptable vertical-shape variations. The archive latitude is −2°, differing by 1° from the paper value −1° (published latitude uncertainty ±20°); the cause of the difference is not established. The archive period 14.93046 h also differs slightly from the paper 14.93045 ± 0.00005 h; the archived spin is retained. The paper also reports a stronger nonconvex ADAM pole2 shape at100±1 km; DAMIT lists only the two convex solutions and the targeted ISAM release page returned no model rows, so that improved mesh remains unresolved. It is not substituted by an invented shape.",
+  "modelLimitations": "The selected convex pole 2 is preferred by nine occultation epochs in Marciniak 2023 §5.2. Table 1 gives 103 km with asymmetric size interval 96–109 km, accounting for acceptable vertical-shape variations. The archive latitude is −2°, differing by 1° from the paper value −1° (published latitude uncertainty ±20°); the cause of the difference is not established. The archive period 14.93046 h also differs slightly from the paper 14.93045 ± 0.00005 h; the archived spin is retained. The paper also reports a stronger nonconvex ADAM pole 2 shape at 100±1 km; DAMIT lists only the two convex solutions and the targeted ISAM release page returned no model rows, so that improved mesh remains unresolved. It is not substituted by an invented shape.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/126589/shape.txt",
     "vertices": 1020,

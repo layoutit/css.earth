@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2fd4d4d7d0b696bd142e26e4030377ac553397e6aa4ceed05d08f08062625578"
+    "sha256": "ba61c77c3e165b9f9c860c537f6a25b07f4276946b3583e3166cf9336f6db81e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "77fcd93ab17e8b90ca742337426ab3d4d81995778ece6e42e770b4f3c244ec9a",
+      "sha256": "08ed578a4a4e7ce914735cfe0ae711c9d94d45a669e6da4fb1f5f22131084cb0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -319,9 +319,9 @@
                 "#edf8b1"
               ],
               "labels": [
-                "0.55",
+                "≤ 0.55",
                 "0.65",
-                "0.75"
+                "≥ 0.75"
               ],
               "units": "band-depth fraction",
               "sourceUrl": "https://vims.univ-nantes.fr/cube/1807469104_1",
@@ -475,7 +475,7 @@
         },
         "geometry": {
           "radius": 230,
-          "radiusKm": 536.3,
+          "radiusKm": 531.1,
           "mapUrl": "/scenes/tethys/tethys-normal-surface@2x.webp",
           "polesUrl": "/scenes/tethys/tethys-normal-poles@2x.webp",
           "radialTerrain": {
@@ -508,7 +508,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "53ec6282d61e9533ef495172f1246572b3685c148804b909c1da744f3af0c066",
+      "sha256": "a3a02e069edf40770ba89ec9d552c72d75dfb97fadafdb898b62f3134ab60fb3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -786,9 +786,9 @@
                 "width": 256,
                 "height": 16,
                 "labels": [
-                  "0.55",
+                  "≤ 0.55",
                   "0.65",
-                  "0.75"
+                  "≥ 0.75"
                 ],
                 "meta": "band-depth fraction",
                 "sourceUrl": "https://vims.univ-nantes.fr/cube/1719616836_1",
@@ -1668,8 +1668,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "53ec6282d61e9533ef495172f1246572b3685c148804b909c1da744f3af0c066",
-      "bytes": 16589,
+      "sha256": "a3a02e069edf40770ba89ec9d552c72d75dfb97fadafdb898b62f3134ab60fb3",
+      "bytes": 16597,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1819,8 +1819,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-normal-surface@2x.webp",
-          "bytes": 8923858,
-          "sha256": "0379c132fa3a7cfd0f6454d610b2a9e46fd01607820090d2a8e6b83cf93dfaf8",
+          "bytes": 8927580,
+          "sha256": "e579bf947d66bcf8538a41e6e12e3b71d45dee93a22dc6b66085a88587103e06",
           "verification": "bytes-verified"
         }
       ],
@@ -1877,8 +1877,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-enhanced-surface@2x.webp",
-          "bytes": 12580006,
-          "sha256": "43480088622c9c5af7ad534a10509aba748d7da436031e2af864dbd42cdb58af",
+          "bytes": 12588694,
+          "sha256": "57b4e527c64b628d5b90e22ad9c84baa524dbf57dee3d1d5d642f90a8ac4263a",
           "verification": "bytes-verified"
         }
       ],
@@ -1948,8 +1948,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-infrared-surface@2x.webp",
-          "bytes": 65280,
-          "sha256": "f41065ddaf0046693b685e44469a4a52c978c6a7f290fbef17b2bad8d59d5397",
+          "bytes": 65474,
+          "sha256": "eea070db477f5a51e8b0b763c7fac88387ff49ec5d817a86919ceff24d44dbc4",
           "verification": "bytes-verified"
         }
       ],
@@ -2010,8 +2010,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-elevation-surface@2x.webp",
-          "bytes": 1935542,
-          "sha256": "0c8101e0254fcb3ab2b1ca08d84ecb75bb012cbaf0f98ef6cc2df63741d65522",
+          "bytes": 1933864,
+          "sha256": "6c59a1b5f58b92b343642f9143fed971dfb23c8328d1c3e17dff47e6318b824e",
           "verification": "bytes-verified"
         }
       ],
@@ -2067,8 +2067,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-relative-albedo-surface@2x.webp",
-          "bytes": 11708378,
-          "sha256": "543b510dd365ede0ca853474e655ca3636467189e0250bf53858c78de6046dbb",
+          "bytes": 11706144,
+          "sha256": "6327de89b962b0a84a47f1f808a21d144c02dd68919c2851fa2896fbd170fde8",
           "verification": "bytes-verified"
         }
       ],
@@ -2119,8 +2119,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-ice-absorption-surface@2x.webp",
-          "bytes": 58602,
-          "sha256": "5fd749fde0c689fbb2e56b2618378df94c15565ce6006ca22fcda18c9301b8bc",
+          "bytes": 58560,
+          "sha256": "7b8c0c5c398a5fb620c9665c7481417e77005f7d71d8735d942cad2e5d22584e",
           "verification": "bytes-verified"
         }
       ],
@@ -2163,8 +2163,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-shape-surface@2x.webp",
-          "bytes": 129756,
-          "sha256": "a48b0279d795692148b6fa597a92a5d638a6542774f3335199042a1f7e2f7a5f",
+          "bytes": 129724,
+          "sha256": "6e3b197822f07877388047d1b9011c4167a324ff581c465841518c6a9211c97f",
           "verification": "bytes-verified"
         }
       ],
@@ -2209,8 +2209,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-iss-surface@2x.webp",
-          "bytes": 799758,
-          "sha256": "e160d4f49c8562743b107be5193a26237ea475b4ff6fec0bbba20e5a6e540cf7",
+          "bytes": 799428,
+          "sha256": "02646aaf31d2bb2aca9cbf8a1dd629bc6f0d82516d8fbd3f8f1102e2709763e8",
           "verification": "bytes-verified"
         }
       ],
@@ -2277,8 +2277,8 @@
       "outputs": [
         {
           "url": "/scenes/tethys/tethys-features.json",
-          "bytes": 59142,
-          "sha256": "7d89f5ef4468721f31efa6b421ac16ba68a31f19946526c579df390bde445184",
+          "bytes": 59179,
+          "sha256": "7734cb2d2bfbb2760310667b70a0ea802476490b6c9420f26612bf031b12c375",
           "verification": "bytes-verified"
         }
       ],
@@ -2491,7 +2491,7 @@
   },
   "lastPreparation": {
     "objectId": "tethys",
-    "materialSha256": "a72a8003fc2434a4e7be115880d7b43c081a834d832a83e2af4501b2e3631c9f",
+    "materialSha256": "147bf58b16c9dee0bd94d853879e31bf3e9e675ed255ca89305858a095f90e7c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

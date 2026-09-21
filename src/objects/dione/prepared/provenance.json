@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "86cb2395db7aa81f3c5dc155856242bc7d268f30e78c66d8d69939f73ab44f0e"
+    "sha256": "0989243c507c1770489c51b673809397e6ce03b1948832c5609da0f7b61005ba"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8e48728dbbf657a611a5fb65f64fcb70b5afa9c994551ae166ba122443426d92",
+      "sha256": "0b94f9661ade83283462d548991792ad1e1b9260399932526086f547600903c2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -359,7 +359,7 @@
         },
         "geometry": {
           "radius": 230,
-          "radiusKm": 562.5,
+          "radiusKm": 561.4,
           "mapUrl": "/scenes/dione/dione-normal-surface@2x.webp",
           "polesUrl": "/scenes/dione/dione-normal-poles@2x.webp",
           "radialTerrain": {
@@ -1564,8 +1564,8 @@
         },
         {
           "url": "/scenes/dione/dione-normal-surface@2x.webp",
-          "bytes": 11325774,
-          "sha256": "ca493eb22078269654717e1dcb9c7d89ba970d949c9190934cc3e8402c79c77e",
+          "bytes": 11325294,
+          "sha256": "5cd9c0e0b08c18796f32224c9dc9f58a1b3f5e67eaf135235d741e3ae6d5107d",
           "verification": "bytes-verified"
         }
       ],
@@ -1622,8 +1622,8 @@
         },
         {
           "url": "/scenes/dione/dione-enhanced-surface@2x.webp",
-          "bytes": 11024240,
-          "sha256": "9bcb7cefb92dc01a09e018954441b9eb11a8561cd8a56ad82dafb6e5e1b66a03",
+          "bytes": 11021550,
+          "sha256": "efb2f5ae5b19aefa8a3406015c18e4883cb42f48bad1cf36c9f57b93454776f4",
           "verification": "bytes-verified"
         }
       ],
@@ -1679,8 +1679,8 @@
         },
         {
           "url": "/scenes/dione/dione-infrared-surface@2x.webp",
-          "bytes": 257576,
-          "sha256": "b3ecca22b59e783abc11f4d76b621cb1a84ab0a9135f37429b5478b739296700",
+          "bytes": 256740,
+          "sha256": "a70a8845f1ac836083d601ae093e3a2879b3ea961ece544396c257f1f6a62068",
           "verification": "bytes-verified"
         }
       ],
@@ -1741,8 +1741,8 @@
         },
         {
           "url": "/scenes/dione/dione-elevation-surface@2x.webp",
-          "bytes": 2101990,
-          "sha256": "9fcb98be859aaba0904712cd2eb882046a2cc589d4573fd653024208f80917ed",
+          "bytes": 2054294,
+          "sha256": "f48efed988bbf1b9bf72c4b7d0065848ccae12e54d71c9269844eddf11cd09cf",
           "verification": "bytes-verified"
         }
       ],
@@ -1798,8 +1798,8 @@
         },
         {
           "url": "/scenes/dione/dione-relative-albedo-surface@2x.webp",
-          "bytes": 14141952,
-          "sha256": "ba99714ec79ea15022b9850f118d386af99cb894ac0c6c20070ac7b10349f2ea",
+          "bytes": 14142908,
+          "sha256": "97d22b03c30c1029482b686210646d3ccf7a42d67e2900dbab75f1cbfce9596d",
           "verification": "bytes-verified"
         }
       ],
@@ -1850,8 +1850,8 @@
         },
         {
           "url": "/scenes/dione/dione-ice-absorption-surface@2x.webp",
-          "bytes": 176576,
-          "sha256": "b9547d80d655901ff672a2cf7c2a59a5e4fa7c9a709a1af50b369ca29d579a0c",
+          "bytes": 176488,
+          "sha256": "e65806a301e6c294333e894000c3c1466e1f45589fcaf720451ac3ab02b77e65",
           "verification": "bytes-verified"
         }
       ],
@@ -1894,8 +1894,8 @@
         },
         {
           "url": "/scenes/dione/dione-shape-surface@2x.webp",
-          "bytes": 130764,
-          "sha256": "1bbfac3b7ecdf013dd84197a399b922f2084eb3c3e45827de9e7df77c42437b7",
+          "bytes": 130846,
+          "sha256": "f1d66fe915d73f4afb66dd953fc0976fb3932a1627e198dd7b97fdbe188590fd",
           "verification": "bytes-verified"
         }
       ],
@@ -1962,8 +1962,8 @@
       "outputs": [
         {
           "url": "/scenes/dione/dione-features.json",
-          "bytes": 213580,
-          "sha256": "ef592df5869dd87b5539dbe22ef0a060baf0dc541721dc504afdc95fa303ec98",
+          "bytes": 213600,
+          "sha256": "b45ba3cdcdfd680af13f55c263805cacf624dac93462d1b775507e1242b45c50",
           "verification": "bytes-verified"
         }
       ],
@@ -2151,7 +2151,7 @@
   },
   "lastPreparation": {
     "objectId": "dione",
-    "materialSha256": "820178838f84436342dae97b73066f3fba0743a143b8cc9eaa654e7f54ca0727",
+    "materialSha256": "a31d6212973b079631ba4ff48fc903f4c9521f6def18915b1d96eed858c0bff2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -605,8 +605,8 @@
     {
       "id": "jupiter-authored-observations",
       "path": "preparation/observations.json",
-      "expectedBytes": 9094,
-      "expectedSha256": "d8a911e3846681784e60075353af9b8763044210fc75846087c50c41c6733894",
+      "expectedBytes": 9253,
+      "expectedSha256": "1776c1f4044846198d516054ef59c3d4ca8819035337cc52d1b65809f867bc24",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and NASA/ESA Hubble, NASA Juno source authorities identified in the recipe",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -840,6 +840,16 @@
       "expectedBytes": 39,
       "expectedSha256": "0abc410dea696938b08a69e03dc325d7fb484e190148ced3e6b65e8c94ad945a",
       "purpose": "Repository-authored classification label consumed by the shared body overview during site preparation."
+    },
+    {
+      "path": "observations.json",
+      "purpose": "Telescope API observation descriptors derived from the pinned Juno MWR inputs and their native metadata; scientific limitations remain explicit per observation.",
+      "expectedBytes": 3851,
+      "expectedSha256": "d086adb78a21571801cee1d55ee3b0e4fa3d9782d2c3f0005d141a30382b8e97",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored normalized observation records derived only from the exact inputs pinned by this manifest."
+      }
     }
   ]
 }

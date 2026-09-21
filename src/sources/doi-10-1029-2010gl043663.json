@@ -1,0 +1,37 @@
+{
+  "id": "doi-10-1029-2010gl043663",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Cassini imaging search rules out rings around Rhea",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1029/2010GL043663"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1029/2010GL043663",
+      "label": "Geophysical Research Letters"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/rhea/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/introduction/sources/2"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "M. S. Tiscareno, J. A. Burns, J. N. Cuzzi and M. M. Hedman (2010), Geophysical Research Letters 37(14)",
+      "scope": "citation",
+      "evidence": "src/objects/rhea/text.json#/introduction/sources/2"
+    }
+  ],
+  "publisher": "American Geophysical Union"
+}

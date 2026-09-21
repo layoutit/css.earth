@@ -338,8 +338,8 @@
     {
       "id": "saturn-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 12566,
-      "expectedSha256": "3bcf4c15e41de801e4f7e24c7b95c2373bdd6d049199c2175ab1205ada3f8329",
+      "expectedBytes": 12659,
+      "expectedSha256": "6b965d6af892866e95867646fe95e531bdfe801137d969db1137848c4c1ea7da",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -417,8 +417,8 @@
     {
       "id": "saturn-authored-content",
       "path": "content/object.json",
-      "expectedBytes": 17317,
-      "expectedSha256": "0f2a377ee017750153b34e11c673a0cb92de21700b206a783913d81a03351e72",
+      "expectedBytes": 17313,
+      "expectedSha256": "b7c6d3095961b13e21af3be948f4769012838aa1d87b506a70c2c42fdf7c80a0",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -453,8 +453,8 @@
     {
       "id": "saturn-authored-surface",
       "path": "preparation/surface.json",
-      "expectedBytes": 8651,
-      "expectedSha256": "6e79578dc8aa6505826e634d387bffb27ca64a0dc1a815d2b9d48b87ff3b8091",
+      "expectedBytes": 8724,
+      "expectedSha256": "9c0b080a543fc951e563931749e4842ce92396f7c81c6574c2a81e63a876c318",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -661,7 +661,7 @@
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1335,
-      "expectedSha256": "072e1ad9dd392f84fd8fd08676761a2bae5588ce4af076d3138913066bc51759"
+      "expectedSha256": "78270ebbc5095e4cee987070872a88ab7f70dbcd55bf08e285e5190995a34b2f"
     },
     {
       "path": "presentation/overview.json",

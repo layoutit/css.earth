@@ -21,7 +21,7 @@ Title outlines derive from Inter by **Rasmus Andersson**, SIL Open Font License 
 Prepared surface textures preserve photographed terrain. Gray grids are
 cartographic indicators of absent data; spherical lighting is approximate.
 
-Enhanced color: NASA/JPL/USGS, Michael T. Bland, Lynn A. Weller and colleagues
+False color: NASA/JPL/USGS, Michael T. Bland, Lynn A. Weller and colleagues
 (2021), [controlled Galileo image products](https://doi.org/10.1029/2021EA001935).
 The [USGS collection](https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations)
 licenses these products under CC0-1.0; its captured record is

@@ -80,7 +80,7 @@
         "value": "0.034°",
         "source": {
           "url": "https://pgda.gsfc.nasa.gov/products/105",
-          "label": "NASA/JPL reference",
+          "label": "NASA Goddard PGDA, Bertone et al. 2021",
           "checked": "2026-09-08",
           "path": "source/editorial/factsheet-review.json",
           "catalogueId": "mercury-rotation-model-stark-2015",
@@ -193,7 +193,7 @@
         "surface": "mercury-surface-topography@2x.jpg",
         "source": {
           "id": "messenger-topography",
-          "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"
+          "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m"
         },
         "poles": "mercury-poles@2x.webp",
         "legend": {
@@ -226,10 +226,11 @@
           ],
           "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"
         },
+        "legendNote": "Scale from the USGS legend for the older 2 km color shaded relief. It is not confirmed for the 665 m v2 DEM drawn here.",
         "falseColor": true,
-        "filter": "USGS MESSENGER global color shaded relief",
+        "filter": "NASA Trek color hillshade of the USGS MESSENGER global DEM 665 m v2",
         "view": "exterior",
-        "notes": "MESSENGER shaded relief"
+        "notes": "NASA Trek color hillshade of the USGS MESSENGER global DEM 665 m v2. The elevation legend comes from the older USGS 2 km color shaded relief product; its color bins are not confirmed for v2."
       },
       {
         "id": "interior",

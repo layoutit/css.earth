@@ -70,7 +70,7 @@ The 2222 × 679 equatorial map spans 55° S–55° N; two 444 × 444 polar stere
 
 **Geometry and delivery**
 
-The astronomy package supplies the Saturn-relative orbit, IAU orientation and 562.5 km display scale reference. [NASA](https://science.nasa.gov/saturn/moons/dione/) rounds the mean radius to 562 km. Keep this physical radius distinct from the monochrome map's 563 km projection sphere and elevation's 561.4 km datum. The elevation colors and source-mesh silhouette are separate products with distinct resolutions. No visible atmosphere or cutaway is added.
+The astronomy package supplies the Saturn-relative orbit, IAU orientation and the [JPL satellite table](https://ssd.jpl.nasa.gov/sats/phys_par/sep.html) mean radius of 561.40 km; the recipe display scale reference uses the same value. [NASA](https://science.nasa.gov/saturn/moons/dione/) rounds the mean radius to 562 km. Keep this physical radius distinct from the monochrome map's 563 km projection sphere and elevation's 561.4 km datum. The elevation colors and source-mesh silhouette are separate products with distinct resolutions. No visible atmosphere or cutaway is added.
 
 Map preparation retains the shared 8192 × 4096 intermediate layout and 1024-pixel
 pole products for their existing consumers. The final photographic source-mesh

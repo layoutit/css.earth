@@ -11,7 +11,7 @@
     "reportedUncertaintyKm": 1.55,
     "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
     "systematicUncertaintyFraction": null,
-    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "additionalSystematics": "Usui 2011 section 2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about 10% in size, especially for few detections; no invented total error bar is assigned.",
     "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
     "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
     "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
@@ -24,7 +24,7 @@
       "detections": 11,
       "originalRow": "238    Hypatia                        8.18  0.15 11  143.97  1.55 0.046 0.001"
     },
-    "limitations": "Gaia DR2 plus Lowell inversion; publication table gives334 Lowell and20 Gaia points. Both poles remain; model3844 is representative. This is a coarse convex inverse model with an approximate thermal size. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "limitations": "Gaia DR2 plus Lowell inversion; publication table gives 334 Lowell and 20 Gaia points. Both poles remain; model 3844 is representative. This is a coarse convex inverse model with an approximate thermal size. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
     "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 143.97 km effective diameter (catalog ±1.55 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 116.03925226942087,
     "metersPerSourceUnit": 116039.25226942087,
@@ -42,7 +42,7 @@
     261,
     45
   ],
-  "modelLimitations": "Gaia DR2 plus Lowell inversion; publication table gives334 Lowell and20 Gaia points. Both poles remain; model3844 is representative. This is a coarse convex inverse model with an approximate thermal size. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+  "modelLimitations": "Gaia DR2 plus Lowell inversion; publication table gives 334 Lowell and 20 Gaia points. Both poles remain; model 3844 is representative. This is a coarse convex inverse model with an approximate thermal size. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/12046/shape.txt",
     "vertices": 574,

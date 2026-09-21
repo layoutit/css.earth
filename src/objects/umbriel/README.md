@@ -48,7 +48,7 @@ The 919 × 460 floating-point mosaic has a 4,000 m grid, a 584,700 m spherical r
 
 The embedded history records ISIS `photomet` on 2020-02-15 with ellipsoid angles, maximum emission 79° and incidence 89.7°, followed by filtering/mosaic processing.
 
-Preparation samples at 5760 × 2880 with 64-pixel atlas gutters and 1024-pixel pole tiles to avoid projective face-edge undersampling. This does not add observational detail. WebP q95 encodes the final surface only. Missing observations use the shared neutral grid. Surface, pole, thumbnail, small minimap and 160-pixel context marker (capped by the native crop) derive from the same interpretation. Shared flood and directional lighting remain available. The spherical 452-face scene is a display approximation within the 2000-face budget, not a measured shape mesh.
+Preparation samples at 5760 × 2880 with 64-pixel atlas gutters and 1024-pixel pole tiles to avoid projective face-edge undersampling. This does not add observational detail. WebP q95 encodes the final surface only. Missing observations use the shared neutral grid. Surface, pole, thumbnail, small minimap and 160-pixel context marker (capped by the native crop) derive from the same interpretation. Shared flood and directional lighting remain available. The spherical 450-face scene is a display approximation within the 2000-face budget, not a measured shape mesh.
 
 The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 

@@ -827,6 +827,16 @@
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
       }
+    },
+    {
+      "path": "observations.json",
+      "purpose": "Telescope API observation descriptors derived from the pinned Mars archive inputs and their native metadata; scientific limitations remain explicit per observation.",
+      "expectedBytes": 9074,
+      "expectedSha256": "092ce1153244f4727a62d0e8112a437e63bd5fec8f8173477a366edf819330d2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored normalized observation records derived only from the exact inputs pinned by this manifest."
+      }
     }
   ]
 }

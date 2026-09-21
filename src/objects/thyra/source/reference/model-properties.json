@@ -13,7 +13,7 @@
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/154",
     "reference": "DAMIT model 154",
     "sourceLabel": "DAMIT model 154",
-    "limitations": "The archive warns that unusual Hapke parameters were needed to keep the shape from becoming too high. This limits confidence in the vertical dimension. Delbo and Tanga2009 give a90–94 km thermophysical size range for this pole family, represented in DAMIT as92±2 km. The material roughness is not constrained; no Hapke-derived texture is synthesized.",
+    "limitations": "The archive warns that unusual Hapke parameters were needed to keep the shape from becoming too high. This limits confidence in the vertical dimension. Delbo and Tanga 2009 give a90–94 km thermophysical size range for this pole family, represented in DAMIT as 92±2 km. The material roughness is not constrained; no Hapke-derived texture is synthesized.",
     "visibleDescription": "Convex light-curve reconstruction with a published 90–94 km diameter fit range; the archive mesh uses 92 km. Unusual scattering parameters make its vertical shape uncertain. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 1.0000000265320557,
     "metersPerSourceUnit": 1000.0000265320557,
@@ -29,7 +29,7 @@
     35,
     33
   ],
-  "modelLimitations": "The archive warns that unusual Hapke parameters were needed to keep the shape from becoming too high. This limits confidence in the vertical dimension. Delbo and Tanga2009 give a90–94 km thermophysical size range for this pole family, represented in DAMIT as92±2 km. The material roughness is not constrained; no Hapke-derived texture is synthesized.",
+  "modelLimitations": "The archive warns that unusual Hapke parameters were needed to keep the shape from becoming too high. This limits confidence in the vertical dimension. Delbo and Tanga 2009 give a90–94 km thermophysical size range for this pole family, represented in DAMIT as 92±2 km. The material roughness is not constrained; no Hapke-derived texture is synthesized.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/369/shape.txt",
     "vertices": 1021,

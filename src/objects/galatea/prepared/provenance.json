@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8051073a926fa47bc7795a494eb5b0be715fa3c4aaee19c3a2c7ba1dab0cd854"
+    "sha256": "73552ec0554a33d09b8062b13ae221a6805f8279d0db82ea17a4ffa23f931041"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -97,7 +97,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "76f585b17c32dc9426faefb38c5ebe2a77b0e80d220134c28eb6ac3ceab41b42",
+      "sha256": "a738dc69518b464500399fbbadd7208356686ed53b4762bd09910173210fa61c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -107,7 +107,7 @@
           "facts": [
             {
               "id": "radius",
-              "label": "Mean radius",
+              "label": "JPL mean radius",
               "value": "79 ± 12 km",
               "source": {
                 "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
@@ -320,8 +320,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "76f585b17c32dc9426faefb38c5ebe2a77b0e80d220134c28eb6ac3ceab41b42",
-      "bytes": 4124,
+      "sha256": "a738dc69518b464500399fbbadd7208356686ed53b4762bd09910173210fa61c",
+      "bytes": 4128,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -402,8 +402,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7498,
-          "sha256": "49ff91fbd1e86ec703bf257bd122d100d24a01f917b78c913a9604faf3a63e1a",
+          "bytes": 7502,
+          "sha256": "909825da6ea2a8b77a5368cfb4d86cb88cb0b3d927a391299a92310ddaeb9eeb",
           "verification": "bytes-verified"
         }
       ],
@@ -441,7 +441,7 @@
   },
   "lastPreparation": {
     "objectId": "galatea",
-    "materialSha256": "86c5041a5e97a586521b268421ee5e549a0da16a6c755a5d0de1ad6f160679d5",
+    "materialSha256": "3697f12f4c065f80af1f154b60f9055761ecc1c83793ecd727a2e2d2e0fb3508",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

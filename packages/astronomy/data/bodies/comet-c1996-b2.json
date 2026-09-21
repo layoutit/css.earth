@@ -10,7 +10,7 @@
     "gravitationalParameterKm3PerS2": 0,
     "parent": "sun"
   },
-  "physicalNotes": "Effective nucleus radius, Harmon et al. (1997), Science 278, 1921 (https://doi.org/10.1126/science.278.5345.1921), used as the volume-equivalent radius of the displayed ellipsoid.",
+  "physicalNotes": "Radius 1.25 km, the midpoint of Harmon et al.'s 2-3 km diameter range, Harmon et al. (1997), Science 278, 1921 (https://doi.org/10.1126/science.278.5345.1921), used as the volume-equivalent radius of the displayed ellipsoid.",
   "comet": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F1996+B2%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": {
