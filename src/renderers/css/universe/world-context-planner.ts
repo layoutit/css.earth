@@ -10,7 +10,7 @@ import type { OrbitSegment } from '../solar-system/types.js';
 import { createWorldFrameProjection } from './world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../labels/stable-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
-import { createLabelBudget, labelExtentOpacity } from '../labels/universe-label-policy.js';
+import { createLabelBudget, labelExtentOpacity, labelLimit, UNIVERSE_LABEL_POLICY } from '../labels/universe-label-policy.js';
 
 export const BODY_INDICATOR_DIAMETER = 16;
 export const CONTEXT_LINE_WIDTH = 1;
@@ -89,7 +89,11 @@ export interface WorldContextView {
   overview: boolean;
   selectionPreview?: string | null;
   navigationInFlight: boolean;
-  /** Shell occlusion bounds in the same screen coordinates as annotations. */
+  /** Preserve the committed annotation membership and placement during a camera drag. */
+  rotationActive?: boolean;
+  /** Preserve the last moving frame through the first settled publication. */
+  preserveCommittedAnnotations?: boolean;
+  /** External exclusion data retained for transport compatibility; world annotations ignore shell footprints. */
   labelBlockers?: readonly LabelScreenRect[];
   /** Largest chord-bank deviation, in screen pixels, the paint owner accepts; default 0.1. */
   orbitLodPixels?: number;
@@ -180,7 +184,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
   // Only the selected path fades with depth; one shared scratch pool serves it.
   const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.verticesM.length ?? 0))));
   return (view: WorldContextView) => {
-    const { world, viewport, selectedId, overview, selectionPreview, navigationInFlight } = view;
+    const { world, viewport, selectedId, overview, selectionPreview, navigationInFlight,
+      rotationActive = false, preserveCommittedAnnotations = false } = view;
     if (world.referenceFrame !== plan.frame.referenceFrame || world.epochJdTt !== plan.frame.epochJdTt ||
         view.bodies.length !== prepared.length || !(viewport.widthPixels! > 0 && viewport.heightPixels! > 0)) {
       throw new TypeError('World context planning requires a matching frame, body state and measured viewport.');
@@ -195,6 +200,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
     // Once the system retires, the anchor and every placed orbitless body (a star) stay as galactic locators.
     const publishingBodies = view.anchorOnly ? bodies.filter(entry => entry.index === 0 || entry.orbit === null) : bodies;
     const opacity = systemFade.update(world.pose.positionM);
+    const focusDistanceM = Math.hypot(
+      world.pose.positionM[0] - plan.focus.positionM[0],
+      world.pose.positionM[1] - plan.focus.positionM[1],
+      world.pose.positionM[2] - plan.focus.positionM[2],
+    );
     const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
       const toEye = (position: readonly number[]): PositionM => rotateWorldPosition(rotation, [
         position[0] - world.pose.positionM[0], position[1] - world.pose.positionM[1], position[2] - world.pose.positionM[2]]);
@@ -245,7 +255,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         if (center) activeSystems.add(center);
       }
       let anchorLineWidth = CONTEXT_LINE_WIDTH;
-      // Declutter annotations without changing physical bodies or projected orbits.
+      // Declutter annotations without changing physical bodies. Orbit geometry is
+      // projected first, then retired when an on-screen body loses annotation admission.
       type Entry = (typeof bodies)[number];
       const projectedBodies: ProjectedBody<Entry>[] = [];
       for (const entry of publishingBodies) {
@@ -282,7 +293,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const satellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id);
         const fullOrbit = satellite || hovered;
         const inactiveMoon = satellite && !hovered && !activeSystems.has(entry.parent!.id);
-        let skipped = !hovered && entry.orbitHidden;
+        // Open trajectories have no physical apoapsis and read as unbounded
+        // guide lines at system scale. Keep them quiet until the body itself
+        // is hovered; closed orbits retain their normal category policy.
+        let skipped = !hovered && (entry.orbitHidden || entry.orbit?.closed === false);
         // Prepared trail bounds enclose the faded trail; a complete orbit uses the
         // prepared sphere around every vertex. Either way a path that cannot reach
         // the fade's first visible extent inside the viewport is not projected.
@@ -333,19 +347,27 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const primary = !entry.orbit || systemFade.isSystemStar(entry.orbit.centerBodyId);
         const priority = (isAnchor ? 1000 : isLocator ? 500 : 0) + (primary ? 100 : 0) + body.radiusM / plan.focus.radiusM;
         const projected = (prepared[entry.index]!.projected ??= { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false, visible: false,
-          annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false, lineWidth: 0, orbitVisibility: 0, segments: [] }) as ProjectedBody<Entry>;
+          annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false,
+          lineWidth: 0, orbitVisibility: 0, segments: [] }) as ProjectedBody<Entry>;
         projected.entry = entry; projected.x = x; projected.y = y; projected.depth = depth; projected.diameter = diameter; projected.markerOpacity = markerOpacity;
         projected.circle = circle; projected.visible = visible; projected.annotationVisible = annotationVisible; projected.hovered = hovered;
-        projected.inFrame = inFrame; projected.priority = priority; projected.lineWidth = appearance.width; projected.orbitVisibility = orbitVisibility;
+        projected.inFrame = inFrame; projected.priority = priority;
+        projected.lineWidth = appearance.width; projected.orbitVisibility = orbitVisibility;
         projected.segments = segments; projected.labelPosition = undefined;
         projectedBodies.push(projected);
       }
       // Orbitless locators use the same stroke as the visible system, then thin as they recede.
       for (const projected of projectedBodies) if (projected.entry.orbit === null && (projected === projectedBodies[0] || !projected.entry.bodyHidden)) projected.lineWidth = anchorLineWidth;
-      const labelBudget = createLabelBudget(width, height, [], view.labelBlockers);
+      // Shell chrome never decides whether a world annotation exists. An
+      // in-frame anchor is already the visibility boundary; captions are kept
+      // inside the viewport below, while partially clipped circles are left to
+      // normal browser clipping. The viewport width still owns density only.
+      const worldLabelBudget = () => createLabelBudget(Infinity, Infinity, [], [], labelLimit(width));
+      const labelBudget = worldLabelBudget();
       const candidates: (StableLabelCandidate & { projected: ProjectedBody<Entry> })[] = [];
       for (const projected of projectedBodies) {
-        const { entry, x, y, diameter, markerOpacity, annotationVisible, hovered, priority, circle } = projected;
+        const { entry, x, y, diameter, markerOpacity, annotationVisible, hovered, priority } = projected;
+        let { circle } = projected;
         const { body, labelSize: size } = entry;
         const satellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id);
         const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
@@ -357,37 +379,82 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const foregroundSystem = !systemFade.isSystemStar(selectedId) && !overview;
         const unrelatedMinor = !satellite && body.id !== plan.focus.id && foregroundSystem && (annotationPriorities[body.id] ?? 2) < 2;
         const flightDestination = navigationInFlight && body.id === emphasizedId;
+        // Prepared orientation references (the Sun, then Earth) remain usable
+        // landmarks while the Solar System is still the active scale. Camera
+        // altitude is much larger than the orbital radius framed on screen, so
+        // the prepared system handoff—not a literal 50 AU camera distance—owns
+        // this lifetime. The annotation stands alone once its orbit is subpixel.
+        const referenceAnnotationOnly = focusDistanceM <= plan.system.fadeOutStartDistanceM &&
+          (annotationPriorities[body.id] ?? 0) >= 4 && !resolvedDisc &&
+          labelExtentOpacity(localExtent) <= .5 + ANNOTATION_ENTRY_MARGIN;
+        // The retained DOM leaf shares this opacity between its sprite and both
+        // annotation pseudos. A reference whose physical marker has faded must
+        // still publish non-zero leaf opacity; `visible` keeps the sprite itself
+        // suppressed while the circle and caption remain paintable.
+        if (referenceAnnotationOnly) projected.markerOpacity = 1;
+        // Never force two locator circles to overlap. At a safe projected
+        // separation Earth keeps circle + label; once its orbit collapses into
+        // the Sun's locator, retain the truthful caption but retire the circle.
+        if (referenceAnnotationOnly && localExtent < BODY_INDICATOR_DIAMETER + UNIVERSE_LABEL_POLICY.spacingPixels) {
+          circle = projected.circle = false;
+        }
         // The destination stays named through the whole flight, across its preview fade.
-        const alpha = flightDestination ? 1 : targeted ? markerOpacity : Math.min(markerOpacity, resolvedDisc ? 1 : labelExtentOpacity(localExtent));
+        const alpha = flightDestination || referenceAnnotationOnly ? 1 : targeted ? markerOpacity : Math.min(markerOpacity, resolvedDisc ? 1 : labelExtentOpacity(localExtent));
         // Naming policy, decided before any slot is contested: suppressed, unresolved, too faint
         // or out of context here, and the body is not one this camera names at all.
         projected.nameable = !(entry.labelSuppressed || !annotationVisible || size.width === 0 ||
             alpha <= (entry.labelShown ? .5 : .5 + ANNOTATION_ENTRY_MARGIN) ||
-            (!targeted && (entry.labelHidden || !resolvedDisc && (!inContext || unrelatedMinor))));
-        if (!projected.nameable) continue;
-        const gap = Math.max(5, diameter / 2, circle ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
+            (!targeted && !resolvedDisc && (!inContext || unrelatedMinor)));
+        if (referenceAnnotationOnly) { projected.orbitVisibility = 0; projected.segments = []; }
+        // A presentation setting removes the body from annotation admission;
+        // final admission below retires an on-screen context orbit with the caption.
+        // Selection/hover can still reveal the complete annotation.
+        if (!projected.nameable || (!targeted && entry.labelHidden)) continue;
+        const gap = Math.max(5, diameter / 2, circle || referenceAnnotationOnly ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
           [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];
-        const sides = body.id === plan.focus.id ? [3] : !flightDestination && (resolvedDisc || body.id === emphasizedId) ? [3, 2, 0, 1] : [0, 1, 2, 3];
+        const primary = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId);
+        const radialSide = primary && entry.parent ? (() => {
+          const [parentX, parentY] = project(frame.eye(entry.parent!));
+          const dx = x - parentX, dy = y - parentY;
+          return Math.abs(dx) >= Math.abs(dy) ? dx >= 0 ? 0 : 1 : dy >= 0 ? 3 : 2;
+        })() : 0;
+        const radialSides = [radialSide, ...[0, 1, 2, 3].filter(side => side !== radialSide)];
+        const sides = body.id === plan.focus.id ? [3] : flightDestination ? [0, 1, 2, 3]
+          : resolvedDisc || body.id === emphasizedId ? [3, 2, 0, 1] : primary ? radialSides : [0, 1, 2, 3];
         const placements = sides.map(slot => {
           let [left, top] = positions[slot];
-          if (hovered) {
-            left = Math.max(-width / 2 + 4, Math.min(left, width / 2 - size.width - 4));
-            top = Math.max(-height / 2 + 4, Math.min(top, height / 2 - size.height - 4));
-          }
+          left = Math.max(-width / 2 + 4, Math.min(left, width / 2 - size.width - 4));
+          top = Math.max(-height / 2 + 4, Math.min(top, height / 2 - size.height - 4));
           return { slot, rect: { left, top, right: left + size.width, bottom: top + size.height } };
         });
         const radius = BODY_INDICATOR_DIAMETER / 2;
+        // At the outer reference range Earth's honest projected position falls
+        // inside the Sun's 16 px locator. Keep the outward caption collision-safe,
+        // but do not let the two reference circles suppress one another.
+        const anchor = circle && !referenceAnnotationOnly
+          ? { left: x - radius, right: x + radius, top: y - radius, bottom: y + radius }
+          : undefined;
         candidates.push({ id: body.id, projected, navigable: true,
           pinned: hovered ? 3 : highlighted ? 2 : body.id === emphasizedId ? 1 : 0,
           priority, tier: annotationPriorities[body.id] ?? 0, shown: entry.labelShown,
           previousPlacement: entry.labelShown ? entry.labelPlacement : sides[0], placements,
-          ...(circle ? { anchor: { left: x - radius, right: x + radius, top: y - radius, bottom: y + radius } } : {}),
+          ...(anchor ? { anchor } : {}),
         });
       }
       // Circle and caption reserve space together. A rejected candidate owns no
       // annotation or context orbit; physical sprites remain independent.
-      const accepted = admitStableLabels(candidates, labelBudget);
+      // A drag moves every candidate on every frame. Re-running collision admission
+      // during that motion made adjacent bodies trade the same slot, so their circles
+      // and captions blinked while the physical markers remained visible. Keep the
+      // committed membership and side until release. A caption is constrained
+      // rather than retired when its committed side reaches the viewport edge.
+      const accepted = rotationActive || preserveCommittedAnnotations ? candidates.flatMap(candidate => {
+        if (!candidate.shown) return [];
+        const previous = candidate.placements.find(item => item.slot === candidate.previousPlacement);
+        if (!previous || !worldLabelBudget().accepts(previous.rect, candidate.anchor)) return [];
+        return [{ candidate, placement: previous.slot, rect: previous.rect }];
+      }) : admitStableLabels(candidates, labelBudget);
       for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; }
       for (const { candidate, placement, rect } of accepted) {
         const { projected } = candidate;
@@ -398,12 +465,17 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       for (const projected of projectedBodies) {
         const { entry, x, y } = projected;
         if (!entry.orbit) continue;
-        // A path belongs to a body this camera names: one too faint, suppressed or out of context
-        // here draws no unidentified ring beside the named ones. Losing a caption slot to a
-        // neighbour or a panel is not that judgement, and neither is leaving the frame, so a
-        // contested or off-screen name keeps the ring the camera crosses instead of blinking it
-        // out while the view turns.
-        if (!projected.nameable && projected.inFrame && (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
+        // A minor body's path cannot identify itself when its caption is absent:
+        // highly eccentric comet trails otherwise cross the stage as anonymous
+        // near-straight rays while their bodies are off screen. Major bodies retain
+        // the useful orbit field, and hover/highlight/selection reveal a minor path.
+        const anonymousMinor = (annotationPriorities[entry.body.id] ?? 2) < 2 && !entry.labelShown &&
+          !projected.hovered && entry.highlighted !== true && entry.body.id !== emphasizedId;
+        // An on-screen context path belongs to the annotation that identifies its body
+        // when that annotation lost ordinary decluttering. The selected object's own
+        // path remains available.
+        if (anonymousMinor || projected.inFrame && !entry.labelShown &&
+            (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout
           ? orbitOutsideMarker(projected.segments, x, y, entry.indicatorRadius) : projected.segments;

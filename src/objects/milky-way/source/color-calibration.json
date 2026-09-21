@@ -135,12 +135,12 @@
       "sky": 0.0326785,
       "volume": 0.0327704
     },
-    "reason": "Keep the dim NASA background in the Solar System, then blend into the completed volume image over 100 pc to 5 kpc. Preserve the accepted volume display gain: 0.094 through 1 kpc, rising to 1 at 25 kpc.",
+    "reason": "Keep the dim NASA background in the Solar System while preserving the accepted volume display gain: 0.094 through 1 kpc, rising to 1 at 25 kpc.",
     "measurement": "The displayedMeans values are historical standalone matched-band measurements, not the luminance of the combined transition. Original NASA preview at 512x256; shadow smoothstep applied per pixel before the original paired Galactic-band patch average. Volume uses actual re-encoded central-ray composite.",
-    "composition": "Complementary completed-image blend t*(B*volume)+(1-t)*NASA. The independent handoff t runs from 100 pc to 5 kpc; B preserves the accepted volume brightness profile. NASA remains opaque underneath.",
-    "handoff": {
-      "fadeStartDistanceM": 3.0856775814913674e+18,
-      "fullDistanceM": 1.5428387907456837e+20
+    "composition": "The NASA angular map is source-faithful only at its Solar origin. It remains opaque nearby, fades over the existing 100 AU to 0.1 pc star-validity range, and is absent from more distant viewpoints. The independently graded volume begins its separate entrance at 100 pc.",
+    "skyValidity": {
+      "fadeStartDistanceM": 14959787070000,
+      "fullDistanceM": 3085677581491367
     }
   }
 }

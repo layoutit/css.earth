@@ -106,8 +106,8 @@ export function contextMarkerSprite(marker: PreparedNavigationMarker) {
 // Existing scene annotation weights, supplied once from the object registry.
 export function contextAnnotationOpacity(classification: string): { line: number; label: number } {
   return {
-    line: classification === 'asteroid' ? .35
-      : ['satellite', 'dwarf-planet', 'trans-neptunian', 'comet', 'interstellar'].includes(classification) ? .5 : .65,
+    line: ['asteroid', 'comet'].includes(classification) ? .2
+      : ['satellite', 'dwarf-planet', 'trans-neptunian', 'interstellar'].includes(classification) ? .5 : .65,
     label: ['dwarf-planet', 'comet', 'trans-neptunian', 'interstellar'].includes(classification) ? .5 : DEFAULT_CONTEXT_LABEL_OPACITY,
   };
 }

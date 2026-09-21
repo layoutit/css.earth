@@ -54,8 +54,9 @@ try {
     const beforeHandoff = worldFromState(await page.evaluate(distanceKilometers =>
       window.__cssearthTest.object('ceres').camera.setState({ distanceKilometers }), exitKm * 1.05), ceres);
     await page.waitForFunction(() => window.__cssEarth?.ready && window.__cssearthTest.scene().overview && window.__cssearthTest.scene().activeObjectId === 'sun', null, { timeout: 20000 });
-    await page.locator('.planet-object-browser').waitFor({ state: 'visible' });
-    assert.equal(await page.locator('.planet-sidebar-search').inputValue(), 'Solar System');
+    await page.locator('[data-system-results]').waitFor({ state: 'visible' });
+    assert.equal(await page.locator('.planet-object-browser').isVisible(), false);
+    assert.equal(await page.locator('.planet-sidebar-search').inputValue(), '');
     assert.equal(await page.locator('.planet-object-link[aria-current]').count(), 0);
     assert.equal(await page.locator('.planet-information-panel').isVisible(), false);
     assert.equal(await page.evaluate(() => window.__overviewDocument), true, 'No document navigation');
@@ -89,7 +90,7 @@ try {
       'Overview links carry the same prepared date as the shared world camera');
     await page.reload();
     await page.waitForFunction(() => window.__cssEarth?.ready && window.__cssearthTest.scene().overview);
-    assert.equal(await page.locator('.planet-sidebar-search').inputValue(), 'Solar System');
+    assert.equal(await page.locator('.planet-sidebar-search').inputValue(), '');
     await page.locator('.planet-sidebar-search').focus();
     await page.keyboard.press('Escape');
     assert.equal(await page.locator('.planet-information-panel').isVisible(), false, 'Escape cannot reveal a deselected card');
@@ -108,7 +109,7 @@ try {
     await page.mouse.move(810, 400);
     await page.mouse.wheel(0, -240);
     await page.waitForFunction(() => window.__cssearthTest.scene().selectedObjectId === 'sun' && !window.__cssearthTest.scene().overview);
-    assert.equal(await page.locator('.planet-sidebar-search').inputValue(), 'Sun');
+    assert.equal(await page.locator('.planet-sidebar-search').inputValue(), '');
     assert.equal(await page.locator('.planet-information-panel').isVisible(), true);
     assert.equal(await page.evaluate(() => window.__retainedSun === window.__sun), true, 'Showing the Sun card retains its scene');
     await page.screenshot({ path: `${output}/sun-card-dpr-${dpr}.png` });
@@ -129,6 +130,7 @@ try {
 
     await page.goto(overviewUrl);
     await page.waitForFunction(() => window.__cssEarth?.ready && window.__cssearthTest.scene().overview);
+    await page.getByRole('button', { name: 'Browse celestial objects' }).click();
     await page.locator('[data-object-type-group="dwarf-planet"] > summary').click();
     await page.locator('.planet-object-link[data-object-id="ceres"]').click();
     await page.waitForFunction(() => window.__cssEarth?.ready && window.__cssearthTest.scene().selectedObjectId === 'ceres', null, { timeout: 30000 });
@@ -139,7 +141,7 @@ try {
         camera: window.__sun?.camera.state(), search: window.__cssearthTest.input('.planet-sidebar-search').value })));
       throw error;
     });
-    assert.equal(await page.locator('.planet-sidebar-search').inputValue(), 'Solar System', 'Back restores the overview');
+    assert.equal(await page.locator('.planet-sidebar-search').inputValue(), '', 'Back restores the overview without turning selection into a query');
     await page.evaluate(distanceKilometers => window.__cssearthTest.object('sun').camera.setState({ distanceKilometers }), context.camera.maximumDistanceM / 1000);
     await page.waitForFunction(() => window.__cssearthTest.input('.planet-sidebar-search').value === 'Milky Way');
     const galaxy = page.locator('[data-galactic-overview]');
@@ -147,7 +149,8 @@ try {
       labels.map(label => label.replace('»', '').trim())), ['Nearby Universe', 'Local Group', 'Milky Way']);
     assert.equal(await galaxy.getByRole('region', { name: 'Planetary systems', exact: true }).isVisible(), true);
     assert.equal(await galaxy.locator('.planet-factsheet-section').isVisible(), false);
-    assert.equal(await page.locator('[data-system-results] .planet-factsheet-section').count(), 0);
+    assert.equal(await page.locator('[data-system-results] .planet-factsheet-section').count(), 1);
+    assert.equal(await page.locator('[data-system-results] [data-solar-system-facts]').isVisible(), false);
     assert.equal(await page.locator('[data-object-type-group="asteroid"]').count(), 0);
     const disabled = galaxy.locator('.planet-object-link[aria-disabled="true"]');
     assert.equal(await disabled.count(), 4);

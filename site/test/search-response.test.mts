@@ -91,13 +91,13 @@ test('a page that already inlines its catalogue never fetches the fragment', asy
   assert.deepEqual(seen, [`${origin}/features/index.json`]);
 });
 
-test('native search uses shared matching, retains every row, and preserves the scene/head bytes', async () => {
+test('native search preserves the selected card, retains every row, and preserves the scene/head bytes', async () => {
   for (const [query, names] of [['saturn', ['Saturn']], ['orion', ['M42']], ['planets', ['Saturn']], ['unknown', []]] as const) {
     const response = await renderSearchResponse(html, new URL(`/?q=${query}`, origin), fetchIndex);
     const { document } = parseHTML(response);
     assert.deepEqual(visibleNames(document), names);
     assert.equal(document.querySelectorAll('.planet-object-item').length, 3);
-    assert.equal(document.querySelector<HTMLElement>('.planet-information-panel')?.hidden, true);
+    assert.equal(document.querySelector<HTMLElement>('.planet-information-panel')?.hidden, false);
     assert.equal(document.querySelector<HTMLElement>('.planet-object-browser')?.hidden, false);
     assert.equal(response.slice(0, response.indexOf('<!--search-shell:start-->')), html.slice(0, html.indexOf('<!--search-shell:start-->')));
     assert.equal(response.slice(response.indexOf('<!--search-shell:end-->')), html.slice(html.indexOf('<!--search-shell:end-->')));
@@ -130,13 +130,13 @@ test('features are pinned, rendered into existing rows and have ordinary destina
   assert.equal(failure.querySelector('.planet-destination-result')?.hasAttribute('href'), false);
 });
 
-test('search is a flat list across categories, including queries that name an overview', async () => {
+test('search keeps the shared navigation tree alongside matches, including queries that name an overview', async () => {
   for (const query of ['t', 'Milky Way']) {
     const document = parseHTML(await renderSearchResponse(html, new URL(`/saturn/?q=${encodeURIComponent(query)}`, origin), fetchIndex)).document;
     assert.equal(document.querySelector<HTMLElement>('[data-galactic-overview]')?.hidden, true);
     assert.equal(document.querySelector<HTMLElement>('[data-system-results] > .planet-selected-panel')?.hidden, true);
     assert.equal(document.querySelector<HTMLElement>('.planet-object-tabs')?.hidden, true);
-    assert.equal(document.querySelector<HTMLElement>('[data-object-navigation-tree]')?.hidden, true);
+    assert.equal(document.querySelector<HTMLElement>('[data-object-navigation-tree]')?.hidden, false);
     assert.equal(document.querySelector('.planet-object-browser')?.getAttribute('aria-label'), 'Search results');
     assert.equal(document.querySelector('#object-category-results')?.getAttribute('aria-labelledby'), null);
     if (query === 't') assert.deepEqual(visibleNames(document), ['Saturn', 'Titan']);

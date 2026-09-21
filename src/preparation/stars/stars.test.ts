@@ -115,6 +115,18 @@ test('all source rows survive, with exact HIP matches reconciled to the detailed
   const best = Array.from({length:6*recipe.coverage.faceDivisions**2},()=>({index:-1,magnitude:Infinity}));
   for(let index=0;index<catalogue.count;index++){const x=expectedPosition[index*3]!,y=expectedPosition[index*3+1]!,z=expectedPosition[index*3+2]!,cell=coverageCell(x,y,z,recipe.coverage.faceDivisions), apparent=expectedMagnitude[index]!+5*Math.log10(Math.hypot(x,y,z))-5; if(apparent<best[cell]!.magnitude)best[cell]={index,magnitude:apparent};}
   assert.deepEqual(new Set(anchors.map(star=>star.id)),new Set(best.map(entry=>`${recipe.catalogue.idPrefix}:${entry.index}`)),'anchors retain the real brightest apparent row for every cube cell');
+  assert(data.directPoints); assert.equal(data.directPoints.catalogueCount,catalogue.count); assert.equal(data.directPoints.points.length,data.policy.activeSlots);
+  const directRows=new Set(data.directPoints.points.map(point=>point.sourceRow)); assert.equal(directRows.size,data.policy.activeSlots);
+  const anchorRows=new Set(anchors.map(star=>Number(star.id.split(':').at(-1))));
+  assert([...anchorRows].every(row=>directRows.has(row)),'the bounded direct field must retain every all-sky coverage anchor');
+  const expectedRows=Array.from({length:catalogue.count},(_,index)=>({index,anchor:anchorRows.has(index),
+    apparent:expectedMagnitude[index]!+5*Math.log10(Math.hypot(expectedPosition[index*3]!,expectedPosition[index*3+1]!,expectedPosition[index*3+2]!))-5}))
+    .sort((left,right)=>Number(right.anchor)-Number(left.anchor)||left.apparent-right.apparent||left.index-right.index)
+    .slice(0,data.policy.activeSlots).map(entry=>entry.index);
+  assert.deepEqual([...directRows].sort((a,b)=>a-b),expectedRows.sort((a,b)=>a-b),'direct stars are the reproducible coverage plus apparent-brightness sample');
+  // Direct display rows retain source magnitudes; the binary bank has millimagnitude quantization.
+  const decodedByRow=new Map(data.stars.map(star=>[Number(star.id.split(':').at(-1)),star]));
+  for(const point of data.directPoints.points){const star=decodedByRow.get(point.sourceRow);assert(star);assert.deepEqual(point.positionUnits,star.positionUnits);assert.equal(point.absoluteMagnitude,expectedMagnitude[point.sourceRow]);assert(Math.abs(point.absoluteMagnitude-star.absoluteMagnitude)<=POINT_FIELD_MAGNITUDE_BOUND);assert.equal(point.colorIndex,star.colorIndex);assert.equal(point.coverageAnchor,star.coverageAnchor);}
   assertTree(data,sourceMagnitude);
   assert.throws(()=>assertTree({...data,stars:data.stars.slice(1)},sourceMagnitude));
   const firstChild = data.nodes[0]!.children[0]!;

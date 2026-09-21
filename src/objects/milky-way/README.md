@@ -102,15 +102,14 @@ additive HDR raymarching, stochastic sampling or camera-dependent fade.
 The renderer transports the prepared images and geometry. Background stars are
 baked into the sky cube from the independently prepared star catalogue.
 
-The shared display blends two completed images with complementary weights:
-`t * (B * volume) + (1 - t) * NASA`. The handoff `t` rises smoothly from zero
-at 100 pc to one at 5 kpc. The independent volume brightness `B` preserves its
-accepted grade: 0.094 through 1 kpc, rising to one at 25 kpc. Keeping the NASA
-clouds present while the incoming image remains faint prevents the previous
-black gap. NASA remains opaque underneath until the handoff completes.
-Without a prepared sky the backdrop remains black. This is a display blend,
-not HDR exposure or photometric calibration; slab transfer, optical correction,
-and labels retain their separate behavior.
+The NASA map is an angular observation from the Sun, not a texture that remains
+correct after interstellar travel. It stays opaque nearby, starts retiring at
+100 AU, and is absent by 0.1 pc. The independently graded volume begins its
+separate entrance at 100 pc and reaches full opacity at 5 kpc; its display gain
+is 0.094 through 1 kpc, rising to one at 25 kpc. The intervening black backdrop
+is intentional: reusing the Solar sky there would assert a viewpoint the source
+does not provide. This is display presentation, not photometric calibration;
+slab transfer, optical correction, and labels retain their separate behavior.
 
 Each retained slab has three coincident CSS image elements sharing one texture.
 Their optical contribution compensates for oblique viewing before isolated axis
@@ -156,16 +155,16 @@ of each face: about 17,500 sprites in total, drawn with the same atlas tile,
 photometry table and source-over blend the browser uses, supersampled three times
 per axis. The result is `prepared/sky-near/`, a second complete cube.
 
-The runtime mounts only these six baked faces. They remain the background until
-its existing handoff to the Milky Way volume completes. There is no 100 AU
-handoff to individual DOM stars, star-slot pool, catalogue-selection worker, or
-per-star frame transport. The catalogue stays as a preparation input; the
-application reads only its small appearance manifest and atlas for the Sun's
+The runtime mounts the two six-face cubes. The baked-star cube gives way to the
+plain NASA cube while the complete Solar sky fades from 100 AU to 0.1 pc. There
+is no handoff to individual DOM stars, star-slot pool, catalogue-selection
+worker, or per-star frame transport. The catalogue stays as a preparation input;
+the application reads only its small appearance manifest and atlas for the Sun's
 single navigation marker, without fetching or decoding the binary star bank.
 
-Individual stellar parallax is no longer rendered when travelling through the
-neighbourhood: stars stay part of the shared cube image. Its existing shared
-camera projection and sky-to-volume blend are preserved.
+Individual stellar parallax is not rendered when travelling through the
+neighbourhood. Instead of retaining a misplaced Solar panorama, the complete
+cube retires before the observer reaches another stellar location.
 
 The baked faces are 1536 px across, so a star's disc is about three times softer
 than the browser's own sprite at device pixel ratio 2, and the sprite radius is
@@ -175,10 +174,10 @@ deliberate visual difference, not a reproduction of the DOM starfield.
 The cube's authored bases are ICRF directions, independent of the volume's
 Galactic local frame. Its six prepared PolyCSS planes form one closed shell
 with a 20 kpc half-extent, centered on the Sun. At the Sun it reproduces the
-original angular projection. Shared camera translation then produces parallax
-and shrinking; there is no separate camera or screen-fixed background. The
-handoff finishes by one quarter of the shell radius, before the observer can
-reach a cube face. The images, geometry and decoded bank remain unchanged.
+original angular projection. Shared camera translation produces a small prepared
+motion during the nearby fade; there is no separate camera or screen-fixed
+background. The fade completes at 0.1 pc, long before the observer can approach
+a cube face. The images, geometry and decoded bank remain unchanged.
 
 The shell depth is an authored visual approximation: NASA supplies angular
 radiance, not measured cloud depths. It does not align the two sources' different

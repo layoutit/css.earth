@@ -9,7 +9,7 @@ const { object, hidden = false } = Astro.props;
 const source = FOCUS_SOURCE_DOCUMENTS.get(object.id);
 if (!source) throw new Error(`Missing focus source document: ${object.id}`);
 ---
-<li class="planet-object-item" role="listitem" hidden={hidden}
+<li class="planet-object-item" role="listitem" hidden={hidden} data-navigation-object-id={object.id}
   data-object-name={object.name.toLocaleLowerCase('en')}
   data-object-search-names={JSON.stringify(object.searchNames)}
   data-object-distance-m={object.distance.meters}
