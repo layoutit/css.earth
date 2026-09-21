@@ -23,15 +23,15 @@
       "tests": 2
     },
     "site/components": {
-      "implementations": 39,
+      "implementations": 36,
       "tests": 0
     },
     "site/test": {
-      "implementations": 20,
+      "implementations": 19,
       "tests": 152
     },
     "src/platform": {
-      "implementations": 62,
+      "implementations": 55,
       "tests": 48
     },
     "src/renderers/css/navigation": {
@@ -47,11 +47,11 @@
       "tests": 15
     },
     "tools": {
-      "implementations": 151,
+      "implementations": 148,
       "tests": 109
     },
     "tools/objects": {
-      "implementations": 57,
+      "implementations": 56,
       "tests": 28
     },
     "tools/objects/geographic-pages/operations": {
@@ -75,7 +75,7 @@
       "tests": 24
     },
     "tools/objects/terrestrial-layers": {
-      "implementations": 90,
+      "implementations": 89,
       "tests": 79
     }
   }
