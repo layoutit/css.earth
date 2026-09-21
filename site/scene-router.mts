@@ -27,7 +27,7 @@ import * as applicationWorldContext from './application-world-context.mts';
 import { watchOverviewSelection } from './overview-selection.mts';
 import { systemById } from './object-systems.mts';
 import { SYSTEM_CENTERS } from './system-framing.mts';
-import { overviewScopeFromUrl } from './navigation-scope.mts';
+import { overviewScopeFromUrl, preparedFocusFromUrl, withOverviewScope, withPreparedFocus } from './navigation-scope.mts';
 import { createNavigationTiming } from './navigation-timing.mts';
 import { isFocusDatasetUrl, readDatasetUrl, withDataset } from './dataset-url.mts';
 import { retainInitialScene } from './initial-scene.mts';
@@ -356,9 +356,9 @@ export function createSceneRouter({
     scenes.current?.setViewUrl(null);
     let url = new URL(options.url ?? windowTarget.location?.href ?? object.route, windowTarget.location?.href);
     if (!options.url) {
-      url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('overview'); url.searchParams.delete('focus'); url.searchParams.delete('focusLens');
-      url = withDataset(url, null);
-      if (options.overview) url.searchParams.set('overview', options.overviewScope ?? 'system');
+      url.pathname = object.route; url.searchParams.delete('v');
+      url = withDataset(withPreparedFocus(url, null, null), null);
+      withOverviewScope(url, options.overview ? options.overviewScope ?? 'system' : null);
       if (options.feature) url.searchParams.set('feature', options.feature);
     }
     const request = requests.begin({ id, cancelledFlight,
@@ -699,16 +699,18 @@ export function createSceneRouter({
       getOverview: () => overview,
       // The pending flight owns the camera; repeat-click bookkeeping must not
       // suppress zoom-out deselection after that flight has finished.
-      isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current && !owner.preparedFocus?.(),
+      // A focus the URL names is a selection from the moment it is named, before
+      // its prepared bank has loaded and the runtime can report it. The camera
+      // scale must not deselect it during that window.
+      isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current
+        && !owner.preparedFocus?.() && !preparedFocusFromUrl(windowTarget.location.href),
       windowTarget,
       onChange(next) {
         if (!next.overview || next.objectId === objectId) {
           // A mounted star and its system overview share the same camera, detail and
           // subscriptions. Change their selection in place in either direction.
           setOverview(next.overview);
-          const url = withDataset(new URL(windowTarget.location.href), null);
-          if (next.overview) url.searchParams.set('overview', 'system');
-          else url.searchParams.delete('overview');
+          const url = withOverviewScope(withDataset(new URL(windowTarget.location.href), null), next.overview ? 'system' : null);
           session.url = url.href;
           historyOwner?.commit(url.href, { history: 'replace' });
           session.viewUrl?.flush();

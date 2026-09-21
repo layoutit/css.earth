@@ -1,8 +1,10 @@
 import type { APIRoute } from 'astro';
 import { atlasTree, readObjects } from '../../../atlas/src/objects.mts';
 import { navigationTreeArtifact } from '../../../atlas/src/navigation-tree-data.mts';
+import { applicationTreeDestination } from '../../navigation-tree-destination.mts';
 
-const artifact = navigationTreeArtifact(atlasTree(readObjects()));
+// The application's own tree, so the pin the shell renders addresses this file.
+const artifact = navigationTreeArtifact(atlasTree(readObjects(), applicationTreeDestination));
 
 export function getStaticPaths() {
   return [{ params: { sha256: artifact.sha256 }, props: { text: artifact.text } }];

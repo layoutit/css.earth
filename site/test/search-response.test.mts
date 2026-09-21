@@ -145,6 +145,34 @@ test('search keeps the shared navigation tree alongside matches, including queri
   }
 });
 
+// The shipped shell keeps navigation and the selected context in separate panels,
+// so a URL that names both a focus and an overview can show two cards at once.
+const contextHtml = html
+  .replace('</form>', '<a class="planet-sidebar-search-clear" href="/saturn/">Clear search</a></form>')
+  .replace('</nav>', `</nav><div class="planet-object-context" hidden>
+  <div data-prepared-focus-card data-prepared-focus-id="m42" hidden>Orion Nebula</div>
+  <div data-galactic-overview hidden>Milky Way</div>
+  <div data-system-results hidden><section class="planet-selected-panel">Solar System introduction</section></div>
+  </div>`);
+
+test('a URL that names both a focus and an overview resolves to the focus alone', async () => {
+  const card = (query: string) => renderSearchResponse(contextHtml, new URL(`/saturn/${query}`, origin), fetchIndex)
+    .then(response => parseHTML(response).document);
+  const overview = await card('?overview=system');
+  assert.equal(overview.querySelector<HTMLElement>('.planet-object-context [data-system-results]')?.hidden, false);
+  assert.equal(overview.querySelector<HTMLElement>('.planet-object-context')?.hidden, false);
+  for (const query of ['?overview=system&focus=m42', '?focus=m42&overview=system']) {
+    const both = await card(query);
+    assert.equal(both.querySelector<HTMLElement>('[data-prepared-focus-card]')?.hidden, false, query);
+    assert.equal(both.querySelector<HTMLElement>('.planet-object-context [data-system-results]')?.hidden, true, query);
+    assert.equal(both.querySelector<HTMLElement>('.planet-object-context [data-galactic-overview]')?.hidden, true, query);
+    // Clearing a search keeps the view context, normalized the same way.
+    const clear = new URL(both.querySelector('.planet-sidebar-search-clear')?.getAttribute('href') ?? '/', origin);
+    assert.equal(clear.searchParams.get('focus'), 'm42', query);
+    assert.equal(clear.searchParams.has('overview'), false, query);
+  }
+});
+
 test('named features share the results panel, start collapsed, and disappear when there are no matches', async () => {
   const document = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=tycho', origin), fetchIndex)).document;
   const features = document.querySelector<HTMLElement>('#object-category-results > .planet-feature-results');

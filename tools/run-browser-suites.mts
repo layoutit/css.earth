@@ -53,6 +53,29 @@ export async function listBrowserSuites(): Promise<string[]> {
   return (await readdir(resolve(root, suiteDirectory))).filter(name => name.endsWith('-browser.mts')).sort();
 }
 
+/** A prepared input the suites read through the running site. It is generated, not checked in,
+ * and a missing one does not fail the site: it serves an empty placeholder instead. Feature and
+ * city search then return nothing, and a suite looking for a named feature waits out its timeout
+ * on a row that was never going to appear. Say so before the first browser starts. */
+export function preparedInputProblem(name: string, value: unknown): string | null {
+  const count: unknown = value && typeof value === 'object' && !Array.isArray(value) ? (value as Record<string, unknown>).count : undefined;
+  if (typeof count === 'number' && Number.isSafeInteger(count) && count > 0) return null;
+  return `${name} holds no rows (count ${JSON.stringify(count) ?? 'missing'}). Feature and city search will return `
+    + 'nothing, so every suite that looks for a named feature fails on a row that cannot appear. Restore this '
+    + 'generated file from another checkout, or run node tools/prepare-feature-index.mts.';
+}
+
+/** Checks the prepared inputs the suites depend on, before any browser starts. */
+export async function requirePreparedInputs(): Promise<void> {
+  const { readFile } = await import('node:fs/promises');
+  const name = 'site/prepared-feature-index.json';
+  let value: unknown;
+  try { value = JSON.parse(await readFile(resolve(root, name), 'utf8')); }
+  catch (error) { throw new Error(`${name} could not be read. Run node tools/prepare-feature-index.mts.`, { cause: error }); }
+  const problem = preparedInputProblem(name, value);
+  if (problem) throw new Error(problem);
+}
+
 async function waitForServer(origin: string, timeoutMs: number): Promise<void> {
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
@@ -77,6 +100,7 @@ export function runSuite(suite: string, origin: string, { timeoutMs = 20 * 60 * 
 
 export async function runBrowserSuites({ origin, port = 4230, only, includeOptIn = false, objects }: { origin?: string; port?: number; only?: string; includeOptIn?: boolean; objects?: string }): Promise<SuiteResult[]> {
   if (objects) process.env.CSSEARTH_TEST_OBJECTS = objects;
+  await requirePreparedInputs();
   const suites = (await listBrowserSuites()).filter(suite => !only || suite.includes(only));
   let server: ReturnType<typeof spawn> | null = null;
   let target = origin;
