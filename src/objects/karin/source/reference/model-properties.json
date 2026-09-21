@@ -1,0 +1,84 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/390",
+  "modelId": 390,
+  "modelVersion": "2016-04-19",
+  "diameterKm": 16.4,
+  "diameterInterpretation": "Thermophysical diameter fitted to this mesh: 16.4 ± 1.3 km.",
+  "calibration": {
+    "method": "thermophysical-fit-to-this-mesh",
+    "diameterKm": 16.4,
+    "uncertaintyKm": 1.3,
+    "quantity": "thermophysical volume-equivalent diameter fitted with this shape model",
+    "reference": "DAMIT model 390 calibrated size, Hanuš et al. (2015), Icarus 256, 101",
+    "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/390",
+    "notes": "DAMIT marks model 390 as size-calibrated by the thermophysical fit of Hanuš et al. (2015): D = 16.4 ± 1.3 km, thermal inertia 170 (90–260), geometric albedo 0.21 ± 0.04. The mirror pole, model 391, fits D = 16.8 ± 1.5 km. NEOWISE lists 15.812 ± 0.111 km (Masiero et al. 2014) and 17.739 ± 0.894 km (Masiero et al. 2012).",
+    "scaleKmPerSourceUnit": 0.9999999577096391,
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/390",
+    "sourceLabel": "DAMIT model 390 calibrated size, Hanuš et al. (2015), Icarus 256, 101",
+    "diameterSemantics": "thermophysical volume-equivalent diameter fitted with this shape model",
+    "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. DAMIT marks model 390 as size-calibrated by the thermophysical fit of Hanuš et al. (2015): D = 16.4 ± 1.3 km, thermal inertia 170 (90–260), geometric albedo 0.21 ± 0.04. The mirror pole, model 391, fits D = 16.8 ± 1.5 km. NEOWISE lists 15.812 ± 0.111 km (Masiero et al. 2014) and 17.739 ± 0.894 km (Masiero et al. 2012).",
+    "visibleDescription": "Thermophysical diameter fitted to this mesh: 16.4 ± 1.3 km."
+  },
+  "periodHours": 18.35123,
+  "poleEclipticJ2000Degrees": [
+    242,
+    46
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/1486/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 999.9999577096391,
+    "firstVertexKm": [
+      2.5649908915256048,
+      1.487180937106579,
+      6.3437027317225105
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      18.20413023014073,
+      20.954376113831835,
+      13.574316425937235
+    ],
+    "volumeCubicKm": 2309.564877632663,
+    "volumeEquivalentRadiusKm": 8.2,
+    "radialRangeKm": [
+      6.336011068471522,
+      12.698990719309814
+    ]
+  },
+  "elevation": [
+    -2,
+    5
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 164,
+    "estimatedErrorMeters": 64.36172485351562,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 2305665941391.995
+    }
+  }
+}

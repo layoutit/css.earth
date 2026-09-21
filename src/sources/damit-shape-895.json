@@ -1,0 +1,37 @@
+{
+  "id": "damit-shape-895",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Datura · datura shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/895/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/datura/source/manifest.json",
+      "revision": "5c4324b3c3cacb15a5ba75debc2cee87cd2b6111",
+      "sha256": "e578aba2f6fa99108f0247ecde0bc15949144bb427618222ffed232f17cbe3fc",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "DAMIT, Astronomical Institute of Charles University; Datura model 266; original model authors identified in its pinned reference records.",
+      "scope": "The datura shape input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

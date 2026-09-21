@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-1406-0825",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ćuk et al. (2014), Hungaria asteroid family as the source of aubrite meteorites",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1406.0825"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1406.0825",
+      "label": "Ćuk et al. (2014), Hungaria asteroid family as the source of aubrite meteorites"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hungaria/text.json",
+      "revision": "5c4324b3c3cacb15a5ba75debc2cee87cd2b6111",
+      "sha256": "0fb97a9c896190e375f80abf50d079c1870f03b2f96510af31a3e0b8247eb92b",
+      "locator": "/introduction/sources/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "M. Ćuk, B. Gladman, D. Nesvorný",
+      "scope": "citation",
+      "evidence": "src/objects/hungaria/text.json#/introduction/sources/1"
+    }
+  ]
+}

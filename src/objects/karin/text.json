@@ -1,0 +1,64 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "karin",
+  "card": {
+    "text": "Largest piece of a family that broke up 5.8 million years ago.",
+    "sources": [
+      {
+        "catalogueId": "nesvorny-2002-karin",
+        "url": "https://www2.boulder.swri.edu/~bottke/Reprints/Nesvorny-Bottke-Levison-Dones_2003_Nature_Karin_Breakup.pdf",
+        "label": "Nesvorný et al. (2002), Nature 417, 720",
+        "checked": "2026-09-21",
+        "locator": "Abstract and page 721",
+        "quote": "As (832) Karin is the largest body in the observed population, we adopt the name ‘Karin cluster’."
+      },
+      {
+        "catalogueId": "damit-shape-1486",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1486/shape.txt",
+        "label": "DAMIT shape 1486 · Karin",
+        "checked": "2026-09-21",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M. Wolf found Karin at Heidelberg in 1916. It is the largest body of the Karin cluster, which formed in one break-up 5.8 million years ago.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=832",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "832 Karin (A916 SE); Discovered 1916-Sep-20 by Wolf, M. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "nesvorny-2002-karin",
+        "url": "https://www2.boulder.swri.edu/~bottke/Reprints/Nesvorny-Bottke-Levison-Dones_2003_Nature_Karin_Breakup.pdf",
+        "label": "Nesvorný et al. (2002), Nature 417, 720",
+        "checked": "2026-09-21",
+        "locator": "Abstract and page 721",
+        "quote": "As (832) Karin is the largest body in the observed population, we adopt the name ‘Karin cluster’."
+      },
+      {
+        "catalogueId": "damit-shape-1486",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1486/shape.txt",
+        "label": "DAMIT shape 1486 · Karin",
+        "checked": "2026-09-21",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Light-curve shape model",
+      "detail": "Published shape",
+      "summary": "Shape from brightness changes as it spins, sized by a heat fit to this shape. The spin angle shown is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 8.2 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

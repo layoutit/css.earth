@@ -1,0 +1,36 @@
+{
+  "id": "nesvorny-2002-karin",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Nesvorný et al. (2002), Nature 417, 720",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1038/nature00789"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www2.boulder.swri.edu/~bottke/Reprints/Nesvorny-Bottke-Levison-Dones_2003_Nature_Karin_Breakup.pdf",
+      "label": "Nesvorný et al. (2002), Nature 417, 720"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/karin/text.json",
+      "revision": "5c4324b3c3cacb15a5ba75debc2cee87cd2b6111",
+      "sha256": "d05af60f0df41bcda31c67a0542f3281b2ad67a51b0e49641b91cbab3f738a74",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "D. Nesvorný, W. F. Bottke Jr, L. Dones, H. F. Levison",
+      "scope": "citation",
+      "evidence": "src/objects/karin/text.json#/card/sources/0"
+    }
+  ]
+}

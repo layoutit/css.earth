@@ -1,0 +1,377 @@
+{
+  "checked": "2026-09-21",
+  "bodies": [
+    {
+      "id": "apollo",
+      "name": "Apollo",
+      "number": 1862,
+      "model": {
+        "id": 273,
+        "version": "2007-08-29",
+        "shapeFile": 920,
+        "lambda": 48,
+        "beta": -72,
+        "periodHours": 3.065448,
+        "yorpRadPerDay2": 5.5e-08,
+        "references": [
+          {
+            "id": 114,
+            "label": "Kaasalainen et al. (2007), Nature 446, 420",
+            "title": "Acceleration of the rotation of asteroid 1862 Apollo by radiation torques"
+          },
+          {
+            "id": 118,
+            "label": "Ďurech et al. (2008), A&A 488, 345",
+            "title": "New photometric observations of asteroids (1862) Apollo and (25143) Itokawa - an analysis of YORP effect"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "thermophysical-fit-to-this-mesh",
+        "diameterKm": 1.68,
+        "uncertaintyKm": 0.09,
+        "quantity": "thermophysical effective diameter fitted with this shape model",
+        "reference": "Rozitis et al. (2013), A&A 555, A20, Table 3 ('Original' shape variant)",
+        "referenceUrl": "https://arxiv.org/abs/1305.3109",
+        "notes": "Table 2 lists the fitted shape as 1022 vertices and 2040 facets with pole (48°, −72°) and period 3.065448 h from Ďurech et al. (2008a), the same counts, pole and period as DAMIT model 273. Table 3 gives 1.68 ± 0.09 km for this 'Original' shape. The paper notes that this size overestimates the radar maximum equatorial diameter (2.07 ± 0.07 km) by a factor of 1.17 and prefers a reshaped variant at 1.55 ± 0.07 km; that variant mesh is not archived.",
+        "visibleDescription": "Thermophysical effective diameter fitted to this mesh: 1.68 ± 0.09 km.",
+        "catalogueId": "arxiv-1305-3109",
+        "record": {
+          "catalogueId": "arxiv-1305-3109",
+          "kind": "publication",
+          "identifier": {
+            "type": "arXiv",
+            "value": "1305.3109"
+          },
+          "title": "A thermophysical analysis of the (1862) Apollo Yarkovsky and YORP effects",
+          "credit": "B. Rozitis, S. R. Duddy, S. F. Green, S. C. Lowry"
+        }
+      },
+      "text": {
+        "card": "Near-Earth asteroid that names the Apollo group.",
+        "cardSources": [
+          "cneos-neo-groups",
+          "sbdb"
+        ],
+        "introduction": "K. Reinmuth found Apollo at Heidelberg in 1932. Sunlight is slowly speeding up its spin.",
+        "introductionSources": [
+          "sbdb",
+          "kaasalainen-2007"
+        ],
+        "shapeSummary": "Shape from brightness changes as it spins, sized by a heat fit to this shape. The spin angle shown is arbitrary."
+      },
+      "papers": {
+        "kaasalainen-2007": {
+          "url": "https://ui.adsabs.harvard.edu/abs/2007Natur.446..420K/abstract",
+          "label": "Kaasalainen et al. (2007), Nature 446, 420",
+          "locator": "Title",
+          "quote": "Acceleration of the rotation of asteroid 1862 Apollo by radiation torques",
+          "catalogueId": "kaasalainen-2007-apollo-yorp",
+          "kind": "publication",
+          "credit": "M. Kaasalainen, J. Ďurech, B. D. Warner, Y. N. Krugly, N. M. Gaftonyuk",
+          "identifier": {
+            "type": "DOI",
+            "value": "10.1038/nature05614"
+          }
+        },
+        "cneos-neo-groups": {
+          "url": "https://cneos.jpl.nasa.gov/about/neo_groups.html",
+          "label": "CNEOS NEO groups",
+          "locator": "Apollos row",
+          "quote": "Earth-crossing NEAs with semi-major axes larger than Earth's (named after asteroid 1862 Apollo).",
+          "catalogueId": "cneos-neo-groups",
+          "kind": "reference-page",
+          "credit": "NASA/JPL Center for Near-Earth Object Studies"
+        }
+      }
+    },
+    {
+      "id": "koronis",
+      "name": "Koronis",
+      "number": 158,
+      "model": {
+        "id": 167,
+        "version": "2011-03-28",
+        "shapeFile": 448,
+        "spinFile": 445,
+        "lambda": 30,
+        "beta": -64,
+        "periodHours": 14.20569,
+        "comment": "preliminary model",
+        "references": [
+          {
+            "id": 105,
+            "label": "Slivan et al. (2003), Icarus 162, 285",
+            "title": "Spin vectors in the Koronis family: Comprehensive results from two independent analyses of 213 rotation lightcurves"
+          },
+          {
+            "id": 139,
+            "label": "Ďurech et al. (2011), Icarus 214, 652",
+            "title": "Combining asteroid models derived by lightcurve inversion with asteroidal occultation silhouettes"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "occultation-scaled-mesh",
+        "diameterKm": 38,
+        "uncertaintyKm": 5,
+        "quantity": "occultation-constrained volume-equivalent diameter",
+        "reference": "DAMIT model 167 calibrated size, Ďurech et al. (2011), Icarus 214, 652",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/167",
+        "notes": "DAMIT marks model 167 as size-calibrated (D = 38 km, σ = 5 km) and archives the 2005-12-13 occultation fit to this mesh. DAMIT labels the model 'preliminary'. NEOWISE lists 39.025 ± 0.462 km (Masiero et al. 2014), consistent within the quoted error.",
+        "visibleDescription": "Occultation-calibrated volume-equivalent diameter: 38 ± 5 km.",
+        "catalogueId": "damit-models"
+      },
+      "occultation": {
+        "file": 446,
+        "name": "occ_2005-12-13.pdf"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1876.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "V. Knorre found Koronis at Berlin in 1876. It lends its name to a family whose spins were measured from 213 light curves.",
+        "introductionSources": [
+          "sbdb",
+          "slivan-2003"
+        ],
+        "shapeSummary": "Shape from brightness changes as it spins, sized by a stellar occultation. The spin angle shown is arbitrary."
+      },
+      "papers": {
+        "slivan-2003": {
+          "url": "https://ui.adsabs.harvard.edu/abs/2003Icar..162..285S/abstract",
+          "label": "Slivan et al. (2003), Icarus 162, 285",
+          "locator": "Title",
+          "quote": "Spin vectors in the Koronis family: Comprehensive results from two independent analyses of 213 rotation lightcurves",
+          "catalogueId": "slivan-2003-koronis-spins",
+          "kind": "publication",
+          "credit": "S. M. Slivan, R. P. Binzel, L. D. Crespo da Silva, M. Kaasalainen, M. M. Lyndaker, M. Krčo",
+          "identifier": {
+            "type": "DOI",
+            "value": "10.1016/S0019-1035(03)00029-0"
+          }
+        }
+      }
+    },
+    {
+      "id": "karin",
+      "name": "Karin",
+      "number": 832,
+      "model": {
+        "id": 390,
+        "version": "2016-04-19",
+        "shapeFile": 1486,
+        "spinFile": 1484,
+        "lambda": 242,
+        "beta": 46,
+        "periodHours": 18.35123,
+        "references": [
+          {
+            "id": 141,
+            "label": "Hanuš et al. (2011), A&A 530, A134",
+            "title": "A study of asteroid pole-latitude distribution based on an extended set of shape models derived by the lightcurve inversion method"
+          },
+          {
+            "id": 163,
+            "label": "Hanuš et al. (2015), Icarus 256, 101",
+            "title": "Thermophysical modeling of asteroids from WISE thermal infrared data - Significance of the shape model and the pole orientation uncertainties"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 391,
+          "lambda": 59,
+          "beta": 44,
+          "periodHours": 18.35121,
+          "diameterKm": 16.8,
+          "uncertaintyKm": 1.5
+        }
+      ],
+      "calibration": {
+        "method": "thermophysical-fit-to-this-mesh",
+        "diameterKm": 16.4,
+        "uncertaintyKm": 1.3,
+        "quantity": "thermophysical volume-equivalent diameter fitted with this shape model",
+        "reference": "DAMIT model 390 calibrated size, Hanuš et al. (2015), Icarus 256, 101",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/390",
+        "notes": "DAMIT marks model 390 as size-calibrated by the thermophysical fit of Hanuš et al. (2015): D = 16.4 ± 1.3 km, thermal inertia 170 (90–260), geometric albedo 0.21 ± 0.04. The mirror pole, model 391, fits D = 16.8 ± 1.5 km. NEOWISE lists 15.812 ± 0.111 km (Masiero et al. 2014) and 17.739 ± 0.894 km (Masiero et al. 2012).",
+        "visibleDescription": "Thermophysical diameter fitted to this mesh: 16.4 ± 1.3 km.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Largest piece of a family that broke up 5.8 million years ago.",
+        "cardSources": [
+          "nesvorny-2002"
+        ],
+        "introduction": "M. Wolf found Karin at Heidelberg in 1916. It is the largest body of the Karin cluster, which formed in one break-up 5.8 million years ago.",
+        "introductionSources": [
+          "sbdb",
+          "nesvorny-2002"
+        ],
+        "shapeSummary": "Shape from brightness changes as it spins, sized by a heat fit to this shape. The spin angle shown is arbitrary."
+      },
+      "papers": {
+        "nesvorny-2002": {
+          "url": "https://www2.boulder.swri.edu/~bottke/Reprints/Nesvorny-Bottke-Levison-Dones_2003_Nature_Karin_Breakup.pdf",
+          "label": "Nesvorný et al. (2002), Nature 417, 720",
+          "locator": "Abstract and page 721",
+          "quote": "As (832) Karin is the largest body in the observed population, we adopt the name ‘Karin cluster’.",
+          "catalogueId": "nesvorny-2002-karin",
+          "kind": "publication",
+          "credit": "D. Nesvorný, W. F. Bottke Jr, L. Dones, H. F. Levison",
+          "identifier": {
+            "type": "DOI",
+            "value": "10.1038/nature00789"
+          }
+        }
+      }
+    },
+    {
+      "id": "datura",
+      "name": "Datura",
+      "number": 1270,
+      "model": {
+        "id": 266,
+        "version": "2009-06-15",
+        "shapeFile": 895,
+        "spinFile": 893,
+        "lambda": 60,
+        "beta": 76,
+        "periodHours": 3.3581,
+        "comment": "preferred solution",
+        "references": [
+          {
+            "id": 130,
+            "label": "Vokrouhlický et al. (2009), A&A 507, 495",
+            "title": "Datura family: the 2009 update"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 267,
+          "lambda": 264,
+          "beta": 76,
+          "periodHours": 3.358101
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 8.203,
+        "uncertaintyKm": 0.152,
+        "quantity": "NEOWISE best-fit effective spherical diameter, transferred approximately to mesh volume diameter",
+        "reference": "Masiero et al. (2012), NEOWISE v2 row Mas12",
+        "referenceUrl": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
+        "neowiseReference": "Mas12",
+        "notes": "The NEOWISE v2 table holds one row for 1270, fit code DVBI (diameter, visible albedo, beaming and infrared albedo fitted). A thermal sphere diameter is an approximate mesh-volume scale.",
+        "visibleDescription": "NEOWISE thermal diameter, applied approximately to the mesh volume: 8.20 ± 0.15 km.",
+        "catalogueId": "masiero-2012-neowise"
+      },
+      "text": {
+        "card": "Largest body of the Datura family.",
+        "cardSources": [
+          "datura-family"
+        ],
+        "introduction": "G. Van Biesbroeck found Datura at Williams Bay in 1930. It is the largest body of the Datura family in the inner main belt.",
+        "introductionSources": [
+          "sbdb",
+          "datura-family"
+        ],
+        "shapeSummary": "Shape from brightness changes as it spins, sized by an infrared survey. The spin angle shown is arbitrary."
+      },
+      "papers": {
+        "datura-family": {
+          "url": "https://arxiv.org/abs/1509.00975",
+          "label": "Rosaev & Plávalová (2015), New members of Datura family",
+          "locator": "Abstract",
+          "quote": "A group of minor asteroids associated with the largest body Datura(1270) is of particular interest because it has enough known members and resides in the inner part of the main asteroid belt and is easy to observe.",
+          "catalogueId": "arxiv-1509-00975",
+          "kind": "publication",
+          "credit": "A. Rosaev, E. Plávalová",
+          "identifier": {
+            "type": "arXiv",
+            "value": "1509.00975"
+          }
+        }
+      }
+    },
+    {
+      "id": "hungaria",
+      "name": "Hungaria",
+      "number": 434,
+      "model": {
+        "id": 1151,
+        "version": "2016-01-04",
+        "shapeFile": 4194,
+        "spinFile": 4192,
+        "lambda": 109,
+        "beta": 67,
+        "periodHours": 26.4879,
+        "references": [
+          {
+            "id": 161,
+            "label": "Hanuš et al. (2016), A&A 586, A108",
+            "title": "New and updated convex shape models of asteroids based on optical data from a large collaboration network"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 8.934,
+        "uncertaintyKm": 0.748,
+        "quantity": "NEOWISE best-fit effective spherical diameter, transferred approximately to mesh volume diameter",
+        "reference": "Masiero et al. (2012), NEOWISE v2 row Mas12",
+        "referenceUrl": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
+        "neowiseReference": "Mas12",
+        "notes": "The NEOWISE v2 table holds one row for 434, fit code DV-I (beaming fixed). A thermal sphere diameter is an approximate mesh-volume scale.",
+        "visibleDescription": "NEOWISE thermal diameter, applied approximately to the mesh volume: 8.9 ± 0.7 km.",
+        "catalogueId": "masiero-2012-neowise"
+      },
+      "text": {
+        "card": "Inner-belt asteroid that names the Hungaria group.",
+        "cardSources": [
+          "hungaria-group"
+        ],
+        "introduction": "M. Wolf found Hungaria at Heidelberg in 1898. It may be where the aubrite meteorites come from.",
+        "introductionSources": [
+          "sbdb",
+          "hungaria-aubrites"
+        ],
+        "shapeSummary": "Shape from brightness changes as it spins, sized by an infrared survey. The spin angle shown is arbitrary."
+      },
+      "papers": {
+        "hungaria-group": {
+          "url": "https://arxiv.org/abs/1210.1418",
+          "label": "Galiazzo et al. (2013), Fugitives from the Hungaria region",
+          "locator": "Abstract",
+          "quote": "Named after (434) Hungaria these asteroids are relatively small",
+          "catalogueId": "arxiv-1210-1418",
+          "kind": "publication",
+          "credit": "M. A. Galiazzo, Á. Bazsó, R. Dvorak",
+          "identifier": {
+            "type": "arXiv",
+            "value": "1210.1418"
+          }
+        },
+        "hungaria-aubrites": {
+          "url": "https://arxiv.org/abs/1406.0825",
+          "label": "Ćuk et al. (2014), Hungaria asteroid family as the source of aubrite meteorites",
+          "locator": "Abstract",
+          "quote": "We find that, after Vesta, (434) Hungaria is the best candidate for an asteroidal source of an achondrite group.",
+          "catalogueId": "arxiv-1406-0825",
+          "kind": "publication",
+          "credit": "M. Ćuk, B. Gladman, D. Nesvorný",
+          "identifier": {
+            "type": "arXiv",
+            "value": "1406.0825"
+          }
+        }
+      }
+    }
+  ]
+}

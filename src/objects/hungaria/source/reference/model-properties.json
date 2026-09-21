@@ -1,0 +1,112 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1151",
+  "modelId": 1151,
+  "modelVersion": "2016-01-04",
+  "diameterKm": 8.934,
+  "diameterInterpretation": "NEOWISE thermal diameter, applied approximately to the mesh volume: 8.9 ± 0.7 km.",
+  "calibration": {
+    "method": "radiometric-effective-diameter-transfer",
+    "diameterKm": 8.934,
+    "uncertaintyKm": 0.748,
+    "quantity": "NEOWISE best-fit effective spherical diameter, transferred approximately to mesh volume diameter",
+    "reference": "Masiero et al. (2012), NEOWISE v2 row Mas12",
+    "referenceUrl": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
+    "notes": "The NEOWISE v2 table holds one row for 434, fit code DV-I (beaming fixed). A thermal sphere diameter is an approximate mesh-volume scale.",
+    "scaleKmPerSourceUnit": 7.20076859036996,
+    "sourceUrl": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
+    "sourceLabel": "Masiero et al. (2012), NEOWISE v2 row Mas12",
+    "diameterSemantics": "NEOWISE best-fit effective spherical diameter, transferred approximately to mesh volume diameter",
+    "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. The NEOWISE v2 table holds one row for 434, fit code DV-I (beaming fixed). A thermal sphere diameter is an approximate mesh-volume scale.",
+    "visibleDescription": "NEOWISE thermal diameter, applied approximately to the mesh volume: 8.9 ± 0.7 km.",
+    "catalog": {
+      "asteroid_number": "434",
+      "prov_desig": "",
+      "comet_desig": "",
+      "mpc_packed_name": "00434",
+      "absolute_mag": "11.2100",
+      "slope_param": "0.1500",
+      "mean_jd": "2455533.0497450",
+      "n_w1": "11",
+      "n_w2": "11",
+      "n_w3": "0",
+      "n_w4": "0",
+      "fit_code": "DV-I",
+      "diameter": "8.9340",
+      "diameter_err": "0.7480",
+      "v_albedo": "0.7260",
+      "v_albedo_err": "0.1340",
+      "ir_albedo": "0.8630",
+      "ir_albedo_err": "0.1790",
+      "beaming_param": "1.0000",
+      "beaming_param_err": "0.2000",
+      "stacked_flag": "",
+      "reference": "Mas12",
+      "notes": "",
+      "reference2": "MASIEROETAL2012",
+      "type": "mainbelt",
+      "cntr": "142714"
+    }
+  },
+  "periodHours": 26.4879,
+  "poleEclipticJ2000Degrees": [
+    109,
+    67
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/4194/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 7200.76859036996,
+    "firstVertexKm": [
+      0.804801102271289,
+      -0.4086724205778567,
+      3.775053338881584
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      11.610404062815078,
+      11.250034397941423,
+      6.6113928820167684
+    ],
+    "volumeCubicKm": 373.3674612147565,
+    "volumeEquivalentRadiusKm": 4.467,
+    "radialRangeKm": [
+      2.869533630928431,
+      6.7338124548458005
+    ]
+  },
+  "elevation": [
+    -2,
+    2.5
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 89.34,
+    "estimatedErrorMeters": 33.907691955566406,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 372721536288.6097
+    }
+  }
+}

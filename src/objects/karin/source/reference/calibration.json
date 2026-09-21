@@ -1,0 +1,15 @@
+{
+  "method": "thermophysical-fit-to-this-mesh",
+  "diameterKm": 16.4,
+  "uncertaintyKm": 1.3,
+  "quantity": "thermophysical volume-equivalent diameter fitted with this shape model",
+  "reference": "DAMIT model 390 calibrated size, Hanuš et al. (2015), Icarus 256, 101",
+  "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/390",
+  "notes": "DAMIT marks model 390 as size-calibrated by the thermophysical fit of Hanuš et al. (2015): D = 16.4 ± 1.3 km, thermal inertia 170 (90–260), geometric albedo 0.21 ± 0.04. The mirror pole, model 391, fits D = 16.8 ± 1.5 km. NEOWISE lists 15.812 ± 0.111 km (Masiero et al. 2014) and 17.739 ± 0.894 km (Masiero et al. 2012).",
+  "scaleKmPerSourceUnit": 0.9999999577096391,
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/390",
+  "sourceLabel": "DAMIT model 390 calibrated size, Hanuš et al. (2015), Icarus 256, 101",
+  "diameterSemantics": "thermophysical volume-equivalent diameter fitted with this shape model",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. DAMIT marks model 390 as size-calibrated by the thermophysical fit of Hanuš et al. (2015): D = 16.4 ± 1.3 km, thermal inertia 170 (90–260), geometric albedo 0.21 ± 0.04. The mirror pole, model 391, fits D = 16.8 ± 1.5 km. NEOWISE lists 15.812 ± 0.111 km (Masiero et al. 2014) and 17.739 ± 0.894 km (Masiero et al. 2012).",
+  "visibleDescription": "Thermophysical diameter fitted to this mesh: 16.4 ± 1.3 km."
+}
