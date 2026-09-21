@@ -1,5 +1,6 @@
 import { LENS_VISIBILITY } from './runtime-policy.mts';
-import lensBillboardData from './prepared-lens-billboards.json' with { type: 'json' };
+// Generated after the prepared lens payloads are restored, so typechecks never need it: text now, validated below.
+import lensBillboardText from './prepared-lens-billboards.json?raw';
 import lensBillboardAtlasUrl from './prepared-lens-billboards.webp?url';
 import { labelOcclusionFor } from '../src/renderers/css/dist/index.js';
 import galaxyFieldDescriptor from '../src/objects/nearby-universe/object.json' with { type: 'json' };
@@ -115,7 +116,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const volumeLensBanks = volumeLensDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame),
       sha256: descriptor.prepared?.sha256 ?? (() => { throw new TypeError(`${descriptor.id}: volume lens bank is not pinned.`); })() }));
     // Every bank's context visibility and Sun-facing billboard, prepared from those same pinned payloads.
-    const lensBillboards = { plan: parseLensBillboards(lensBillboardData), atlasUrl: lensBillboardAtlasUrl };
+    const lensBillboards = { plan: parseLensBillboards(JSON.parse(lensBillboardText)), atlasUrl: lensBillboardAtlasUrl };
     const loadVolumeLens = createInFlightLoader(async (id: string) => {
       const descriptor = volumeLensDescriptors.find(candidate => candidate.id === id);
       if (!descriptor) throw new TypeError(`Unknown prepared volume lens bank: ${id}.`);
