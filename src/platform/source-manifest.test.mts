@@ -7,6 +7,8 @@ import test from "node:test";
 import { parseSourceManifest } from '../../tools/objects/dist/operations.js';
 
 import {
+  assertRangeResponse,
+  rangeRequestHeader,
   validateSourceManifest,
   verifySourceManifest,
 } from "./source-manifest.mts";
@@ -179,4 +181,38 @@ test("streamed verification detects late corruption and truncation across file c
   await assert.rejects(verify(), /hash drifted/);
   await writeFile(join(root, "input/source.txt"), bytes.subarray(0, -1));
   await assert.rejects(verify(), /size drifted/);
+});
+
+test("a pinned byte range names a real slice of a remote member and is asked for exactly", () => {
+  const files = { "input/source.txt": Buffer.from("input") };
+  const ranged = (range: unknown, input: Record<string, unknown> = {}) =>
+    validateSourceManifest("fixture", sourceManifest(files, { input: { range, ...input } }));
+  const range = { offset: 13096944000, length: 5 };
+  assert.deepEqual(ranged(range).inputs[0].range, range);
+  assert.equal(rangeRequestHeader(range), "bytes=13096944000-13096944004");
+  // The pin still covers exactly the kept bytes, so the range length is the pinned length.
+  assert.throws(() => ranged({ offset: 0, length: 4 }), /invalid byte range/);
+  assert.throws(() => ranged({ offset: -1, length: 5 }), /invalid byte range/);
+  assert.throws(() => ranged({ offset: 0.5, length: 5 }), /invalid byte range/);
+  assert.throws(() => ranged({ offset: 0, length: 0, expectedBytes: 0 }), /invalid byte range/);
+  assert.throws(() => ranged({ offset: 0, length: 5, unit: "bytes" }), /invalid byte range/);
+  assert.throws(() => ranged(range, { origin: "Repository-authored record" }), /no remote origin/);
+  // A generated intermediate has no publisher to ask, so it can never carry a range.
+  assert.throws(
+    () => validateSourceManifest("fixture", sourceManifest(files, { generated: { range: { offset: 0, length: "generated".length } } })),
+    /no remote origin/,
+  );
+});
+
+test("a ranged request is answered only by a matching 206", () => {
+  const range = { offset: 100, length: 10 };
+  const response = (status: number, headers: Record<string, string>) =>
+    ({ status, headers: new Headers(headers) });
+  const url = "https://example.test/large.dat";
+  assert.doesNotThrow(() => assertRangeResponse(response(206, { "content-range": "bytes 100-109/26173440000", "content-length": "10" }), range, url));
+  assert.doesNotThrow(() => assertRangeResponse(response(206, { "content-range": "bytes 100-109/*" }), range, url));
+  assert.throws(() => assertRangeResponse(response(200, { "content-length": "26173440000" }), range, url), /answered 200 instead of 206/);
+  assert.throws(() => assertRangeResponse(response(206, { "content-range": "bytes 0-109/26173440000" }), range, url), /content range bytes 0-109/);
+  assert.throws(() => assertRangeResponse(response(206, {}), range, url), /content range \(none\)/);
+  assert.throws(() => assertRangeResponse(response(206, { "content-range": "bytes 100-109/26173440000", "content-length": "9" }), range, url), /returned 9 bytes instead of 10/);
 });
