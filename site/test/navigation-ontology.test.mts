@@ -8,6 +8,9 @@ import { readPreparedFocusObjects, prepareSceneDistance, prepareFocusObject } fr
 import { normalizeDestinationQuery } from '../destination-search.mts';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
 import { parseNavigationDistance, distanceDescription } from '../navigation-distance.mts';
+import { atlasTree, readObjects, type TreeNode } from '../../atlas/src/objects.mts';
+import { applicationTreeDestination } from '../navigation-tree-destination.mts';
+import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
 import { resolve } from 'node:path';
 
 test('every prepared spatial subject and every scene has exactly one searchable destination', async () => {
@@ -76,4 +79,37 @@ test('physical hosts remain distinct from scene hosts and M45 retains its measur
   assert.equal(m45.distance.subject?.id, 'm45-stellar-cluster');
   assert.match(distanceDescription(m45.distance), /Pleiades stellar cluster/);
   assert.match(distanceDescription(m45.distance), /dust-filament distances are not measured/);
+});
+
+
+test('every row of the application navigation tree opens a route the application serves', () => {
+  const rows: TreeNode[] = [];
+  const walk = (node: TreeNode) => { if (node.object) rows.push(node); node.children.forEach(walk); };
+  atlasTree(readObjects(), applicationTreeDestination).forEach(walk);
+  const pages = new Set(objectAdapter.routes());
+  const focuses = new Map(OBJECTS.filter(object => object.kind === 'prepared-focus').map(object => [object.id, object.route]));
+  const overviews = new Set(Object.keys(OVERVIEW_TITLES));
+  assert.ok(rows.length > 400, 'the tree still names every prepared destination');
+  for (const row of rows) {
+    const id = row.object!.id;
+    if (row.href === null) {
+      assert.equal(row.focusId, null, id);
+      // A package with no destination is a label. Anything the application can open must link to it.
+      assert.equal(pages.has(`/${id}/`), false, id);
+      assert.equal(focuses.has(id), false, id);
+      continue;
+    }
+    const url = new URL(row.href, 'https://example.test');
+    assert.ok(pages.has(url.pathname), `${id} leads to an unserved page: ${row.href}`);
+    const focus = url.searchParams.get('focus'), overview = url.searchParams.get('overview');
+    assert.equal(focus, row.focusId, `${id} must name the subject it selects in place`);
+    if (focus !== null) assert.equal(focuses.get(focus), row.href, `${id} must use the registered focus route`);
+    else if (overview !== null) assert.ok(overviews.has(overview), `${id} names an unknown overview: ${overview}`);
+    else assert.equal(row.href, `/${id}/`, `${id} must open its own page`);
+  }
+  // The Atlas site keeps its own route space: one documentation page per package.
+  const atlas = new Map<string, string | null>();
+  const collect = (node: TreeNode) => { if (node.object) atlas.set(node.object.id, node.href); node.children.forEach(collect); };
+  atlasTree(readObjects()).forEach(collect);
+  for (const [id, href] of atlas) assert.equal(href, `/${id}/`, id);
 });

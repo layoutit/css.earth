@@ -24,30 +24,37 @@ const SCENE_CLASSIFICATIONS: Record<string, string> = {
 const classificationLabel = (classification: string) => LABELS[classification] ??
   classification[0].toLocaleUpperCase('en') + classification.slice(1).replaceAll('-', ' ');
 
-/** The Local Group catalogue names the packages it details; each nebula package carries its own classified record. */
-function catalogueClassifications(): Map<string, string> {
+/** The Local Group catalogue names the packages it details; each nebula package carries its own classified record.
+ * The same rows say which catalogue subject a package details, which is how the application reaches a package
+ * that owns no scene of its own: the subject's id, not the package's, names the focus. */
+function catalogueSubjects(): { classifications: Map<string, string>; focusIds: Map<string, string> } {
   const classifications = new Map<string, string>(Object.entries(SCENE_CLASSIFICATIONS));
+  const focusIds = new Map<string, string>();
+  // Every catalogue row that details a package names the subject the application focuses;
+  // only some of them also decide the package's classification.
+  const detail = (object: Record<string, unknown>, classification: string | null) => {
+    const id = text(object.detailedObjectId), subject = text(object.id);
+    if (!id) return;
+    if (classification) classifications.set(id, classification);
+    if (subject) focusIds.set(id, subject);
+  };
   const galaxies = readJson(resolve(OBJECTS_DIRECTORY, 'local-group/prepared/catalogue.json'));
-  for (const object of list(isRecord(galaxies) ? galaxies.objects : null).filter(isRecord)) {
-    const id = text(object.detailedObjectId);
-    if (id) classifications.set(id, 'galaxy');
-  }
+  for (const object of list(isRecord(galaxies) ? galaxies.objects : null).filter(isRecord)) detail(object, 'galaxy');
   for (const entry of readdirSync(OBJECTS_DIRECTORY, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
     const nebulae = readJson(resolve(OBJECTS_DIRECTORY, entry.name, 'source/nebula.json'));
     if (!isRecord(nebulae) || nebulae.schema !== 'cssearth-nebula-catalog@1') continue;
-    for (const object of list(nebulae.objects).filter(isRecord)) {
-      const id = text(object.detailedObjectId);
-      if (id && object.kind === 'nebula') classifications.set(id, 'nebula');
-    }
+    for (const object of list(nebulae.objects).filter(isRecord)) detail(object, object.kind === 'nebula' ? 'nebula' : null);
   }
-  return classifications;
+  return { classifications, focusIds };
 }
 const DISTANCE_ORDERED = new Set(['star', 'planet', 'dwarf-planet']);
 
 export interface ObjectRecord {
   id: string; title: string; group: string; groupLabel: string; system: string | null; distanceAu: number | null;
   catalogued: boolean; readmePath: string; readme: string;
+  /** The catalogue subject this package details, when a catalogue names one. */
+  focusId: string | null;
 }
 
 export const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -62,7 +69,7 @@ export function readJson(path: string): unknown {
 
 /** Every package with both a descriptor and a README, in sidebar order. */
 export function readObjects(): ObjectRecord[] {
-  const objects: ObjectRecord[] = [], catalogued = catalogueClassifications();
+  const objects: ObjectRecord[] = [], { classifications: catalogued, focusIds } = catalogueSubjects();
   for (const entry of readdirSync(OBJECTS_DIRECTORY, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
     const directory = resolve(OBJECTS_DIRECTORY, entry.name), readmePath = resolve(directory, 'README.md');
@@ -74,6 +81,7 @@ export function readObjects(): ObjectRecord[] {
     const group = text(catalog?.classification) ?? catalogued.get(entry.name) ?? 'context';
     objects.push({
       id: entry.name, readmePath, readme, catalogued: catalog !== null, group,
+      focusId: focusIds.get(entry.name) ?? null,
       title: text(catalog?.name) ?? /^#\s+(.+)$/mu.exec(readme)?.[1]?.trim() ?? entry.name,
       groupLabel: classificationLabel(group),
       system: text(catalog?.systemName), distanceAu: typeof catalog?.distanceAu === 'number' ? catalog.distanceAu : null,
@@ -134,8 +142,11 @@ export const objectColors = (): ReadonlyMap<string, string> => worldContext().co
 /** Packages the prepared orbits do not place, but that belong to one body: the Sun's heliopause surface. */
 const HOSTS: Record<string, string> = { heliosphere: 'sun' };
 // Prepared helper surfaces can have their own documentation without becoming
-// destinations in the Atlas/application navigation.
-const NAVIGATION_HIDDEN = new Set(['heliosphere']);
+// destinations in the Atlas/application navigation. Each one is a prepared
+// volume or surface that belongs to a body already in the tree: the Sun's
+// heliopause and coronal density, Betelgeuse's circumstellar shells, and the
+// HD 181327 debris ring.
+const NAVIGATION_HIDDEN = new Set(['heliosphere', 'sun-cor1-density', 'betelgeuse-shell', 'hd-181327-disc']);
 
 /** One object and the satellites that orbit it. */
 export interface SystemEntry { object: ObjectRecord; satellites: SystemEntry[] }
@@ -212,27 +223,40 @@ const PLACE_LABELS: Record<string, string> = {
   'galaxy-clusters': 'Galaxy clusters', 'stellar-neighbourhood': 'Stellar neighbourhood',
 };
 
-/** One node of the shared Atlas tree: a place or group that contains others, optionally with its own page. */
-export interface TreeNode { key: string; label: string; object: ObjectRecord | null; children: TreeNode[] }
+/** One node of the shared Atlas tree: a place or group that contains others, optionally with its own page.
+ * The node carries the destination it opens, because the same tree is drawn on two sites whose routes
+ * differ: the Atlas has a page per package, the application opens scenes, focuses and overviews. A node
+ * with no destination is a label, never a link. */
+export interface TreeNode { key: string; label: string; object: ObjectRecord | null; children: TreeNode[]; href: string | null; focusId: string | null }
+
+/** Resolves the destination a tree node opens, or null when the site cannot open it. */
+export type TreeDestination = (object: ObjectRecord) => { href: string; focusId: string | null } | null;
+
+/** The Atlas site's own routes: one documentation page per object package. */
+export const atlasPageDestination: TreeDestination = object => ({ href: `/${object.id}/`, focusId: null });
 
 /** Where things are, read from here outward: Solar System, Stars, Milky Way, Local Group, Beyond. */
-export function atlasTree(objects: readonly ObjectRecord[]): TreeNode[] {
+export function atlasTree(objects: readonly ObjectRecord[], destination: TreeDestination = atlasPageDestination): TreeNode[] {
   const visibleObjects = objects.filter(object => !NAVIGATION_HIDDEN.has(object.id));
+  const node = (key: string, label: string, object: ObjectRecord | null, children: TreeNode[]): TreeNode => {
+    const opens = object ? destination(object) : null;
+    return { key, label, object, children, href: opens?.href ?? null, focusId: opens?.focusId ?? null };
+  };
   const systems = systemGroups(visibleObjects), byId = new Map(visibleObjects.map(object => [object.id, object]));
   // The home system is the one the prepared world context focuses on, so no object id is written here.
   const { focus: homeSystem } = worldContext();
   const placed = new Set<string>();
   const body = (entry: SystemEntry): TreeNode => {
     placed.add(entry.object.id);
-    return { key: entry.object.id, label: entry.object.title, object: entry.object, children: entry.satellites.map(body) };
+    return node(entry.object.id, entry.object.title, entry.object, entry.satellites.map(body));
   };
   const place = (id: string): TreeNode[] => {
     const object = byId.get(id);
     if (!object) return [];
     placed.add(id);
-    return [{ key: id, label: PLACE_LABELS[id] ?? object.title, object, children: [] }];
+    return [node(id, PLACE_LABELS[id] ?? object.title, object, [])];
   };
-  const group = (key: string, label: string, children: TreeNode[]): TreeNode[] => children.length ? [{ key, label, object: null, children }] : [];
+  const group = (key: string, label: string, children: TreeNode[]): TreeNode[] => children.length ? [node(key, label, null, children)] : [];
   const entriesOf = (groupId: string) => systems.find(system => system.id === groupId)?.groups.flatMap(item => item.entries) ?? [];
   const loneStars = entriesOf('star').filter(entry => entry.object.id !== 'stellar-neighbourhood');
   const members = (item: SystemGroup): TreeNode[] => {
@@ -249,7 +273,7 @@ export function atlasTree(objects: readonly ObjectRecord[]): TreeNode[] {
   const milkyWay = group('milky-way-section', 'Milky Way', [...place('milky-way'), ...place('stellar-neighbourhood'), ...entriesOf('nebula').map(body), ...place('lmc'), ...place('smc')]);
   const localGroup = group('local-group-section', 'Local Group', [...place('local-group'), ...place('m31'), ...place('m33')]);
   const beyond = group('beyond', 'Beyond', [...place('nearby-universe'), ...place('galaxy-clusters')]);
-  const rest = visibleObjects.filter(object => !placed.has(object.id)).map(object => ({ key: object.id, label: object.title, object, children: [] }));
+  const rest = visibleObjects.filter(object => !placed.has(object.id)).map(object => node(object.id, object.title, object, []));
   return [...solarSystem, ...stars, ...milkyWay, ...localGroup, ...beyond, ...group('other', 'Other', rest)];
 }
 

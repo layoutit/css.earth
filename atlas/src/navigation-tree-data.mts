@@ -22,6 +22,8 @@ export function navigationTreeArtifact(tree: readonly TreeNode[]): NavigationTre
       count: treeCount(node),
       marker: node.object ? treeMarker(node.object.id, '') : null,
       children: node.children.map(child => child.key),
+      href: node.href,
+      focusId: node.focusId,
     };
     for (const child of node.children) visit(child);
   };
