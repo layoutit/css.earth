@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "nessus",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Nessus",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 33.35
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/nessus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8d005b3758e6ddb840cab4adfe518ccdd1a6353cd68b58eb6acb33dff41d4367"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4667492930243.684,
+        -330835650578.5103,
+        -1073952886033.6857
+      ],
+      "presentationToReference": [
+        0.9879656947205748,
+        2.4356826039297786e-17,
+        -0.15467315880685914,
+        -0.14190984868887116,
+        0.3977771559319137,
+        -0.9064408028458447,
+        -0.0615254492091977,
+        -0.9174820620691818,
+        -0.39299018420424753
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 145,
+      "bodyRadiusM": 33350
+    },
+    "catalog": {
+      "name": "Nessus",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 24.5,
+      "description": "A centaur orbiting among the giant planets.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "81ae9ef0616f8782c0aa9e2af110f7c3573c3bb3b7a6806cebd35b989974be10"
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "crantor",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Crantor",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 45.6
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/crantor-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "1ec05722ea2629031b8d494b052799aa2004da190193bff5b8a0bfc8eccb14c7"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3020279743696.0776,
+        -835852661773.0714,
+        -896970296165.3127
+      ],
+      "presentationToReference": [
+        0.9372371553527472,
+        2.4356826039297786e-17,
+        -0.3486925789664739,
+        -0.31991918637838146,
+        0.3977771559319137,
+        -0.8598982779408926,
+        -0.13870194235584823,
+        -0.9174820620691818,
+        -0.37281153008993295
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 198.2608695652174,
+      "bodyRadiusM": 45600
+    },
+    "catalog": {
+      "name": "Crantor",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 19.4,
+      "description": "A centaur orbiting among the giant planets.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "2ae7f59e2665cefa75014c66893161fd5ce778f7c9694e2d7d501bc45264de04"
+  }
+}

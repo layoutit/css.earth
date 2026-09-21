@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "echeclus",
+  "displayName": "Echeclus",
+  "publicBase": "/scenes/echeclus/",
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "model",
+        "consumer": "model-surface",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Shape model",
+          "modeled": true,
+          "coverage": "Illustrative sphere at the 59 km diameter the JPL Small-Body Database lists for Echeclus. No shape model is published. Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published. The grid marks unmapped terrain."
+        }
+      }
+    ],
+    "scientific": [],
+    "observedColors": [],
+    "mosaics": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 29.5,
+    "camera": {
+      "framingScale": 1
+    },
+    "mapUrl": "/scenes/echeclus/echeclus-model-surface@2x.webp",
+    "polesUrl": "/scenes/echeclus/echeclus-model-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/ellipsoid.tab",
+      "format": "pds-radius-table",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 2522,
+        "expectedFaces": 5040,
+        "stepDegrees": 5,
+        "longitudeDirection": "east-positive"
+      },
+      "faceBudget": 2000,
+      "texelsPerFace": 4096,
+      "simplification": {
+        "targetFaces": 480,
+        "maximumErrorMeters": 737.5,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u"
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published."
+  },
+  "presentation": {
+    "defaultLens": "model"
+  }
+}

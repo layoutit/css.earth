@@ -1,0 +1,419 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "amycus",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "ff288dc7a57c59a71ea19e24596f6679024f92edb6fea66a50c3a6ad9aff9379"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "2d5e6523f7fece1203537e764b4af2bc605908da80d54ee8b5acafe0cc6797a1"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "175bc7afb93bfeb25144e334524b53e686fe8c8954d3dac78705df75587dcc58",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "amycus",
+        "displayName": "Amycus",
+        "publicBase": "/scenes/amycus/",
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "model",
+              "consumer": "model-surface",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": 160,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "Shape model",
+                "modeled": true,
+                "coverage": "Illustrative sphere at the 100.9 km diameter the JPL Small-Body Database lists for Amycus. No shape model is published. Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published. The grid marks unmapped terrain."
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 50.45,
+          "camera": {
+            "framingScale": 1
+          },
+          "mapUrl": "/scenes/amycus/amycus-model-surface@2x.webp",
+          "polesUrl": "/scenes/amycus/amycus-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/ellipsoid.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 2000,
+            "texelsPerFace": 4096,
+            "simplification": {
+              "targetFaces": 480,
+              "maximumErrorMeters": 1261.25,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published."
+        },
+        "presentation": {
+          "defaultLens": "model"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "388de0e4f5e004a616b50f069ef607af6d2767c8ae9339902ca00507fb936df3",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "amycus",
+        "displayName": "Amycus",
+        "panel": {
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Display model extents",
+              "value": "101 × 101 × 101 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Small-Body Database, physical parameters for 55576 Amycus (2002 GB10): diameter 100.9 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation",
+              "value": "9.76 h",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Small-Body Database, physical parameters for 55576 Amycus (2002 GB10): diameter 100.9 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "/periodText"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape model"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape model",
+              "thumbnail": "/scenes/amycus/amycus-model-thumbnail.webp",
+              "surface": "amycus-model-surface@2x.webp",
+              "poles": "amycus-model-poles@2x.webp",
+              "source": {
+                "id": "published-shape",
+                "path": "../manifest.json",
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+              },
+              "notes": "Published Jacobi-ellipsoid interpretation, with semiaxes 470 ±20, 383 ±10 and 245 ±8 km. It assumes hydrostatic equilibrium and a 6.75-hour rotation; the smooth shape is inferred from occultations, not imaged terrain. Illustrative pole RA 0°, declination 90° and arbitrary meridian. The paper’s local projected-limb and opening angles do not provide a unique absolute surface attitude for this display. The grid marks unmapped terrain.",
+              "noData": true
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Shape source",
+            "role": "surface",
+            "description": "JPL Small-Body Database, physical parameters for 55576 Amycus (2002 GB10): diameter 100.9 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+            "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+          },
+          {
+            "label": "Scientific source",
+            "role": "facts",
+            "description": "Published observations and interpretation",
+            "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+          },
+          {
+            "label": "Scientific source",
+            "role": "facts",
+            "description": "Published observations and interpretation",
+            "href": "https://doi.org/10.1051/0004-6361/202346998"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+            "credit": "JPL Small-Body Database, physical parameters for 55576 Amycus (2002 GB10): diameter 100.9 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "JPL Small-Body Database, physical parameters for 55576 Amycus (2002 GB10): diameter 100.9 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored grid marking unavailable surface imagery."
+      },
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 50450
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/centaurs/batch.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "credit": "JPL Small-Body Database, physical parameters for 55576 Amycus (2002 GB10): diameter 100.9 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "material",
+            "evidence": "src/objects/amycus/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+      ],
+      "coverage": "Illustrative sphere at the 100.9 km diameter the JPL Small-Body Database lists for Amycus. No shape model is published. Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 50450
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/centaurs/batch.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sha256": "c4fac91658b0af539a42a12d113c98b048a0a83e9a875864f8206aad3642c03e",
+      "bytes": 62404,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "388de0e4f5e004a616b50f069ef607af6d2767c8ae9339902ca00507fb936df3",
+      "bytes": 4231,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape model",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "model-surface",
+        "published-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/amycus/amycus-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/amycus/amycus-model-surface@2x.webp",
+          "bytes": 53574,
+          "sha256": "dfd1f4298a50b3db1a749b8a2dc3b6cee66e0d37de35c6924b303f821562c9e3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "published-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6056,
+          "sha256": "b6dfa7ee7e342b9c1767db9e7cee3598e998073940e42eb0668db06de394705e",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:model",
+      "label": "Shape model preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "model"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/model.webp",
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "amycus",
+    "materialSha256": "6cc307a1f4f52ffbe1be62af5b0e03d117b83781bfae8218d511fe9d4bb83a64",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "2d5e6523f7fece1203537e764b4af2bc605908da80d54ee8b5acafe0cc6797a1"
+    }
+  }
+}
