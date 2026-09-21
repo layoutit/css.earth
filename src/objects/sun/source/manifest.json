@@ -1595,6 +1595,33 @@
         "kind": "local",
         "reason": "Project-authored marker, caption and camera settings."
       }
+    },
+    {
+      "id": "stereo-secchi-cor1a-n3d-cr2053p1-m1",
+      "path": "stereo/cor1/n3d_CR2053P1_m1.0.fits",
+      "origin": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1A/fits/n3d_CR2053P1_m1.0.fits",
+      "credit": "NASA STEREO Science Center; Wang, Arge, and Jones (2025)",
+      "license": "NASA scientific data; the archive requests citation of Wang, Arge, and Jones (2025), Solar Physics 300:46",
+      "licenseEvidence": [
+        "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
+      ],
+      "acquisition": "Exact COR1-A 3D electron-density reconstruction for Carrington rotation 2053, first half, regularization mu=1.0",
+      "redistribution": "Exact archive FITS retained with NASA/STEREO/SECCHI credit and the requested paper citation",
+      "consumers": [
+        "telescopes"
+      ],
+      "expectedBytes": 13337280,
+      "expectedSha256": "678bab1ad71303b14f2797baa2c4be4bebd6d761082fe035fd542b63b9011eb7",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-stereo-cor1-tomography-2025",
+            "role": "material",
+            "evidence": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1A/fits/n3d_CR2053P1_m1.0.fits"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],

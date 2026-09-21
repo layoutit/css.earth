@@ -4,6 +4,12 @@ import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
 import { mapBasisCurves, mapPhaseCurve, mirrorGrid } from './phase-curve.mts';
 import { equalAngleGrid } from './eigenmap-fit.mts';
 
+test('an eccentric map cannot silently use instantaneous star-facing rotation', () => {
+  const orbit = { ...hostedOrbit('wasp-43b'), eccentricity: 0.1, argumentOfPeriapsisDegrees: 90, epochDefinition: 'inferior-conjunction' as const };
+  const grid = equalAngleGrid(4, 8), values = new Float64Array(grid.latitudes.length).fill(1);
+  assert.throws(() => mapBasisCurves([values], grid, orbit, starAstrometry('wasp-43'), 0.1, [orbit.transitTimeBmjdTdb]), /explicit rotation model/);
+});
+
 test('light time leaves the transit where it is and delays the eclipse by 2a sin(i)/c', () => {
   const orbit = hostedOrbit('wasp-43b'), host = starAstrometry('wasp-43'), stellarRadiusKm = BODIES['wasp-43'].meanRadiusKm, rp = BODIES['wasp-43b'].meanRadiusKm / stellarRadiusKm;
   const grid = equalAngleGrid(45, 90), uniform = new Float64Array(grid.latitudes.length).fill(1 / Math.PI);

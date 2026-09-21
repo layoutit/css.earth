@@ -9,11 +9,11 @@ const label=(pointer:string)=>`PDS_VERSION_ID = PDS3\nPRODUCT_ID = "TEST"\nDATA_
 test('attached labels and detached tables become complete pinned products; unpinned dependencies remain explicit',async()=>{
  const root=await mkdtemp(resolve(tmpdir(),'source-intake-')),source=resolve(root,'src/objects/test/source');await mkdir(source,{recursive:true});
  try{
-  const files=[['image.img',label('^IMAGE = 32\n^SIGMA_MAP_IMAGE = 64\n^QUALITY_MAP_IMAGE = 96')],['table.lbl',label('^TABLE = "data.tab"')],['data.tab','1,2\n'],['bad.lbl',label('^TABLE = "missing.tab"')]];
+  const files=[['image.img',label('^IMAGE = 32\n^SIGMA_MAP_IMAGE = 64\n^QUALITY_MAP_IMAGE = 96')],['table.lbl',label('^TABLE = "data.tab"')],['data.tab','1,2\n'],['bad.lbl',label('^TABLE = "missing.tab"')],['extract.lbl',label('RECORD_BYTES = 512\n^IMAGE = 54')]];
   const inputs=[];for(const [path,bytes] of files){await writeFile(resolve(source,path!),bytes!);inputs.push({id:path!.replace('.','-'),path,origin:`https://example.org/${path}`,expectedBytes:Buffer.byteLength(bytes!),expectedSha256:sha256(bytes!)});}
   await writeFile(resolve(source,'manifest.json'),JSON.stringify({inputs}));const issues:SourceIntakeIssue[]=[],products=await intakeSources(root,'test',[],issues);
   assert.equal(products.length,2);assert.equal(products.find(p=>p.kind==='image')!.labelPath,'src/objects/test/source/image.img');assert.equal(products.find(p=>p.kind==='image')!.files.length,1);
-  assert.equal(products.find(p=>p.kind==='table')!.kind,'table');assert.equal(products.find(p=>p.kind==='table')!.files.length,2);assert.match(issues[0]!.reason,/Unpinned/);
+  assert.equal(products.find(p=>p.kind==='table')!.kind,'table');assert.equal(products.find(p=>p.kind==='table')!.files.length,2);assert.ok(issues.some(i=>/Unpinned/.test(i.reason)));assert.ok(issues.some(i=>/outside the pinned/.test(i.reason)));
  }finally{await rm(root,{recursive:true,force:true});}
 });
 

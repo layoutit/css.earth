@@ -162,7 +162,9 @@ test('prepared lens transitions require bounded duration and an explicit zoom po
     transition: { durationMilliseconds: 650, preserveZoom: true } as unknown };
   item(input.variants).navigation = { maximumZoom: camera.maximumZoom, camera: destination };
   assert.equal(parsePreparedObjectRuntime(input), input);
-  for (const transition of [null, {}, { durationMilliseconds: 0, preserveZoom: true },
+  destination.transition = { durationMilliseconds: 0, preserveZoom: true };
+  assert.equal(parsePreparedObjectRuntime(input), input);
+  for (const transition of [null, {}, { durationMilliseconds: -1, preserveZoom: true },
     { durationMilliseconds: 10001, preserveZoom: true }, { durationMilliseconds: 650, preserveZoom: 'true' }]) {
     destination.transition = transition;
     assert.throws(() => parsePreparedObjectRuntime(input), /camera transition/);

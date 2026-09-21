@@ -1,4 +1,7 @@
 import { inputWavelengths } from './recipe-request.mts';
+import { parseLimits, parseRegion } from './vo/contracts.mts';
+import { loadVoInputs, voCandidates, type VoInputs, type VoProductCandidate } from './vo/bridge.mts';
+import type { DiscoveryRequest } from './vo/discovery.mts';
 import { loadQualifiedObservations, matchingProduct, type QualifiedObservation } from './qualified-observations.mts';
 import { assessInput, assessRequest, type RequestSatisfaction } from './request-satisfaction.mts';
 import { parseAcceptedAssumptions, type ResolutionAssumption } from '../resolution-evidence.mts';
@@ -35,6 +38,7 @@ import { loadSourceProducts, sourceQualifiedObservations, type LoadedSourceProdu
 import { qualificationActionsFor, type QualificationAction } from './qualification-routes.mts';
 import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociation } from './target-associations.mts';
 import { resolveTarget, type TargetCatalogueEntry, type TargetResolution } from './targets.mts';
+import { productKindFamilyEvidence, type ObservationFamilyEvidence } from './observation-families.mts';
 
 const ARCSEC_PER_RADIAN = 206_264.806_247;
 const TARGET_ASSOCIATIONS_PATH = 'data/telescopes/target-associations.json';
@@ -147,6 +151,9 @@ export interface Candidate {
 }
 
 export interface CapabilityRequest {
+  readonly region?: import('./vo/contracts.mts').IcrsCircle;
+  readonly spectralFrame?: 'barycentric';
+  readonly transferLimits?: import('./vo/contracts.mts').TransferLimits;
   readonly continuumMicrometres?: readonly [readonly [number,number],readonly [number,number]];
   readonly acceptedAssumptions?: readonly ResolutionAssumption[];
   readonly target: string;
@@ -167,6 +174,7 @@ export interface CapabilityRequest {
 
 /** Everything the query reads, already loaded: it does no input or output of its own. */
 export interface QueryInputs {
+  readonly vo?: VoInputs;
   readonly sourceIntakeIssues?: readonly SourceIntakeIssue[];
   readonly ledgers: readonly { readonly telescope: string; readonly path: string; readonly value: unknown }[];
   readonly capabilities: readonly ModeCapability[];
@@ -180,6 +188,8 @@ export interface QueryInputs {
 }
 
 export interface CapabilityAnswer {
+  readonly archiveProducts?: readonly VoProductCandidate[];
+  readonly archiveAccess?: VoInputs;
   readonly sourceIntakeIssues?: readonly SourceIntakeIssue[];
   readonly target: string;
   readonly request: CapabilityRequest;
@@ -212,7 +222,7 @@ export interface ObservationSelection {
 
 export type SelectionBlockerCode = 'incomplete-request' | 'candidate' | 'constraint' | 'toolkit' | 'body-map' | 'programme';
 export interface SelectionBlocker { readonly code: SelectionBlockerCode; readonly reason: string; readonly constraint?: string }
-export interface SelectionAssessment { readonly candidate?: Candidate; readonly blockers: readonly SelectionBlocker[] }
+export interface SelectionAssessment { readonly candidate?: Candidate; readonly archiveProduct?: VoProductCandidate; readonly blockers: readonly SelectionBlocker[] }
 
 export class ObservationSelectionError extends Error {
   readonly blockers: readonly SelectionBlocker[];
@@ -249,6 +259,9 @@ const missingRequestFields = (request: CapabilityRequest): string[] => [...(requ
   ...(request.kind ? [] : ['product kind (--kind)']), ...(request.result ? [] : ['requested result (--result telescope-product|body-map)'])];
 
 const requestArguments = (request: CapabilityRequest): string[] => ['--target', request.target, '--wavelength', request.wavelengthMicrometres.join(','),
+  ...(request.region ? ['--icrs-circle', [request.region.raDegrees, request.region.decDegrees, request.region.radiusDegrees].join(',')] : []),
+  ...(request.spectralFrame ? ['--spectral-frame', request.spectralFrame] : []),
+  ...(request.transferLimits ? ['--max-science-bytes', String(request.transferLimits.scienceBytes), '--max-metadata-bytes', String(request.transferLimits.metadataBytes), '--max-link-depth', String(request.transferLimits.nestedEdges), '--max-link-requests', String(request.transferLimits.metadataRequests), '--max-expanded-bytes', String(request.transferLimits.expandedBytes), '--max-package-members', String(request.transferLimits.packageMembers)] : []),
   ...(request.continuumMicrometres ? ['--continuum', request.continuumMicrometres.flat().join(',')] : []),
   ...(request.acceptedAssumptions?.length ? ['--accept-assumptions', request.acceptedAssumptions.join(',')] : []),
   ...(!request.time ? [] : 'any' in request.time ? ['--any-time'] : ['--from', request.time.fromIso, '--to', request.time.toIso]),
@@ -675,6 +688,52 @@ function targetCoverage(telescope: string, adapter: ArchiveAdapter, ledgerPath: 
   return (adapter.missingCoverage ?? ordinaryMissing(telescope))(ledgerPath, value, target);
 }
 
+export interface IndexedObservation {
+  readonly source: 'ledger' | 'package';
+  readonly telescope: string; readonly mode: string; readonly archiveDate: string;
+  readonly observation: string; readonly programme?: string; readonly title?: string;
+  readonly startIso: string | null; readonly endIso: string | null;
+  readonly kind?: ProductKind; readonly instrument?: string; readonly filter?: string;
+  readonly familyEvidence: ObservationFamilyEvidence;
+  readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
+  readonly sourceProductId?: string;
+  readonly qualification?: { readonly verified: boolean; readonly receipt: string; readonly problem?: string; readonly limitations: readonly string[] };
+  readonly qualifiedProducts: readonly QualifiedObservation[];
+  readonly routeObservation: import('./qualification-routes.mts').QualificationObservation;
+}
+
+/** Expose exact indexed observation identities without running scientific-request assessment. */
+export function indexedTargetObservations(inputs: QueryInputs, target: string): { readonly observations: readonly IndexedObservation[]; readonly coverage: readonly TargetCoverage[] } {
+  const rows = new Map<string, IndexedObservation>(), coverage: TargetCoverage[] = [];
+  const qualifiedIndex = [...inputs.qualifiedProducts ?? [], ...sourceQualifiedObservations(inputs.sourceProducts ?? [])];
+  const add = (row: Omit<IndexedObservation, 'qualifiedProducts'>) => {
+    const key = JSON.stringify([row.telescope, row.mode, row.observation]);
+    const qualifiedProducts = qualifiedIndex.filter(product => product.target === target && product.telescope === row.telescope && product.mode === row.mode && product.observation === row.observation);
+    const previous = rows.get(key);
+    rows.set(key, { ...(previous ?? row), ...row, qualifiedProducts });
+  };
+  for (const ledger of inputs.ledgers) {
+    const adapter = ADAPTERS[ledger.telescope];
+    if (!adapter) throw new TypeError(`No adapter reads the ${ledger.telescope} ledger.`);
+    const modes = adapter.modes(ledger.value, target, inputs.targetAssociations);
+    coverage.push(targetCoverage(ledger.telescope, adapter, ledger.path, ledger.value, target, modes));
+    for (const mode of modes) for (const record of mode.observations?.records ?? []) add({ source: 'ledger', telescope: mode.telescope, mode: mode.mode, archiveDate: mode.archiveDate,
+      observation: record.id, ...(record.programme ? { programme: record.programme } : {}), ...(record.title ? { title: record.title } : {}),
+      startIso: record.startIso || null, endIso: record.endIso ?? null, ...(record.kind ? { kind: record.kind } : {}),
+      familyEvidence: productKindFamilyEvidence(record.kind, { kind: 'archive-adapter', id: ledger.telescope, evidence: ledger.path }),
+      ...(record.instrument ? { instrument: record.instrument } : {}), ...(record.filter ? { filter: record.filter } : {}),
+      ...(record.wavelengthIntervalsMicrometres ? { wavelengthIntervalsMicrometres: record.wavelengthIntervalsMicrometres } : record.wavelengthIntervalMicrometres ? { wavelengthIntervalsMicrometres: [record.wavelengthIntervalMicrometres] } : {}),
+      ...(record.sourceProductId ? { sourceProductId: record.sourceProductId } : {}), ...(record.qualification ? { qualification: record.qualification } : {}), routeObservation: record });
+  }
+  for (const product of inputs.sourceProducts ?? []) add({ source: 'package', telescope: product.telescope, mode: product.mode, archiveDate: 'package-owned pins', observation: product.id,
+    programme: product.id, startIso: product.startIso ?? null, endIso: product.endIso ?? null, kind: product.kind,
+    familyEvidence: product.familyEvidence ?? productKindFamilyEvidence(product.kind, { kind: 'source-product', id: product.id, evidence: product.citation }), wavelengthIntervalsMicrometres: product.wavelengthIntervalsMicrometres,
+    sourceProductId: product.id, qualification: { verified: product.qualified, receipt: product.receipt, problem: product.receiptProblem, limitations: product.limitations },
+    routeObservation: { id: product.id, programme: product.id, startIso: product.startIso ?? '', ...(product.endIso ? { endIso: product.endIso } : {}), sourceProductId: product.id,
+      kind: product.kind, wavelengthIntervalsMicrometres: product.wavelengthIntervalsMicrometres } });
+  return { observations: [...rows.values()], coverage };
+}
+
 /** Every mode key the ledgers use, so `modes.json` can be tied to them and cannot drift. */
 export function ledgerModeKeys(ledgers: QueryInputs['ledgers']): { readonly telescope: string; readonly mode: string }[] {
   const keys = new Map<string, { telescope: string; mode: string }>();
@@ -875,6 +934,11 @@ const UNKNOWN_UNTIL_READ = (target: string, mode: TargetMode): string[] => [
   `Whether ${target} was resolved at all in a given exposure, and how much of it the field of view held.`];
 
 export function queryCapabilities(request: CapabilityRequest, inputs: QueryInputs): CapabilityAnswer {
+  const requestFields = new Set(['target','wavelengthMicrometres','continuumMicrometres','acceptedAssumptions','time','angularResolutionArcsec','surfaceResolutionKm','resolutionElements','rangeKm','bodyRadiusKm','kind','result','region','spectralFrame','transferLimits']);
+  for (const key of Object.keys(request)) if (!requestFields.has(key)) throw new TypeError(`Unsupported scientific request constraint ${key}.`);
+  if (request.region !== undefined) parseRegion(request.region);
+  if (request.transferLimits !== undefined) parseLimits(request.transferLimits);
+  if (request.spectralFrame !== undefined && request.spectralFrame !== 'barycentric') throw new TypeError('Only an explicit barycentric spectral frame is supported.');
   if (request.wavelengthMicrometres.length !== 2 || !request.wavelengthMicrometres.every(Number.isFinite) || !(request.wavelengthMicrometres[0] > 0 && request.wavelengthMicrometres[1] >= request.wavelengthMicrometres[0])) throw new RangeError('A request states its wavelengths in micrometres, shortest first.');
   for (const key of ['angularResolutionArcsec', 'surfaceResolutionKm', 'resolutionElements', 'rangeKm', 'bodyRadiusKm'] as const) {
     const value = request[key];
@@ -889,7 +953,7 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
   if (request.result && !(REQUESTED_RESULTS as readonly string[]).includes(request.result)) throw new TypeError(`Unknown requested result ${request.result}.`);
   inputWavelengths(request);
   const targetResolution = resolveTarget(request.target, inputs.targetCatalogue);
-  if (targetResolution.status === 'unknown') return { target: request.target, request, targetResolution, candidates: [], unassignedEvidence: [], targetCoverage: [], withoutTheTarget: [],
+  if (targetResolution.status !== 'resolved') return { target: request.target, request, targetResolution, candidates: [], unassignedEvidence: [], targetCoverage: [], withoutTheTarget: [],
     endpoint: { status: 'unknown-target', selectableCandidates: 0, blockerCodes: ['unknown-target'] } };
   const target = targetResolution.canonical.id, canonicalRequest: CapabilityRequest = { ...request, target };
   const capabilities = new Map(inputs.capabilities.map(entry => [`${entry.telescope} :: ${entry.mode}`, entry] as const));
@@ -933,14 +997,15 @@ export function queryCapabilities(request: CapabilityRequest, inputs: QueryInput
   const rank = (candidate: Candidate) => candidate.meetsConstraints.wavelength?.answer === 'yes' ? 0 : candidate.meetsConstraints.wavelength?.answer === 'partial' ? 1 : 2;
   const assessed: Candidate[] = candidates.map(candidate => ({ ...candidate, selectionAssessment: workflowAssessment(canonicalRequest, target, candidate) }));
   assessed.sort((a, b) => rank(a) - rank(b) || (`${a.telescope}${a.mode}` < `${b.telescope}${b.mode}` ? -1 : 1));
-  const selectableCandidates = assessed.filter(candidate => candidate.selectionAssessment.selectable).length;
+  const archiveProducts = voCandidates(canonicalRequest, inputs.vo, inputs.qualifiedProducts ?? []);
+  const selectableCandidates = assessed.filter(candidate => candidate.selectionAssessment.selectable).length + archiveProducts.filter(p => p.product && p.satisfaction.status !== 'refused').length;
   const incompleteIndex = !assessed.length && targetCoverageResults.some(entry => entry.state === 'not-searched' || entry.state === 'unanswered');
   const status = missingRequestFields(canonicalRequest).length ? 'request-incomplete' : selectableCandidates ? 'selectable-candidates' : incompleteIndex ? 'index-incomplete' : 'no-selectable-candidate';
   const coverageBlockers = !assessed.length ? targetCoverageResults.flatMap(entry => entry.state === 'not-searched' ? ['target-index-unavailable' as const]
     : entry.state === 'unanswered' ? ['archive-query-unanswered' as const]
     : entry.state === 'unsupported-products' ? ['archive-products-unsupported' as const] : []) : [];
   const withoutTheTarget = targetCoverageResults.filter(entry => entry.state === 'searched-empty').map(({ telescope, ledger, reason }) => ({ telescope, ledger, reason }));
-  return { sourceIntakeIssues: inputs.sourceIntakeIssues, target, request: canonicalRequest, targetResolution, unassignedEvidence: unassigned, targetCoverage: targetCoverageResults, withoutTheTarget, candidates: assessed,
+  return { ...(inputs.vo ? { archiveAccess: inputs.vo, archiveProducts } : {}), sourceIntakeIssues: inputs.sourceIntakeIssues, target, request: canonicalRequest, targetResolution, unassignedEvidence: unassigned, targetCoverage: targetCoverageResults, withoutTheTarget, candidates: assessed,
     endpoint: { status, selectableCandidates, blockerCodes: [...new Set([...coverageBlockers, ...assessed.flatMap(candidate => candidate.selectionAssessment.blockers.map(blocker => blocker.code))])] } };
 }
 
@@ -951,6 +1016,12 @@ export function assessObservationSelection(answer: CapabilityAnswer, telescope: 
   const missing = missingRequestFields(request);
   const matches = answer.candidates.filter(candidate => candidate.telescope === telescope && candidate.mode === mode);
   const blockers: SelectionBlocker[] = missing.map(reason => ({ code: 'incomplete-request', reason: `The request is missing ${reason}.` }));
+  const archive = answer.archiveProducts?.find(p => p.acquisitionKey === programme && p.observation.service === telescope && `native-${p.observation.kind}` === mode);
+  if (archive) {
+    if (!archive.product) blockers.push({ code: 'programme', reason: 'The exact archive product has not been qualified.' });
+    for (const [constraint, verdict] of Object.entries(archive.satisfaction.constraints)) if (verdict.answer === 'no') blockers.push({ code: 'constraint', constraint, reason: verdict.reason });
+    return { archiveProduct: archive, blockers };
+  }
   if (matches.length !== 1) return { blockers: [...blockers, { code: 'candidate', reason: matches.length ? `${telescope} ${mode} is ambiguous.` : `${telescope} ${mode} is not a candidate for ${answer.target}.` }] };
   const candidate = matches[0]!;
   for (const [constraint, verdict_] of Object.entries(candidate.meetsConstraints)) if (verdict_.answer === 'no')
@@ -971,6 +1042,13 @@ export function assessObservationSelection(answer: CapabilityAnswer, telescope: 
 export function selectObservation(answer: CapabilityAnswer, telescope: string, mode: string, programme: string): ObservationSelection {
   const assessment = assessObservationSelection(answer, telescope, mode, programme);
   if (assessment.blockers.length) throw new ObservationSelectionError(telescope, mode, programme, assessment.blockers);
+  if (assessment.archiveProduct) {
+    const archive = assessment.archiveProduct, snapshot = answer.archiveAccess?.records.find(r => r.observation.key === archive.observation.key)?.snapshot;
+    return { schema: OBSERVATION_SELECTION_SCHEMA, request: answer.request, telescope, mode, programme, product: archive.product!, satisfaction: archive.satisfaction,
+      toolkitLevel: 'source-qualified', constraints: archive.satisfaction.constraints, bodyMapSupport: { answer: 'no', reason: 'Native archive qualification does not establish a body-map author.' },
+      unresolved: Object.entries(archive.satisfaction.constraints).flatMap(([constraint, verdict]) => verdict.answer === 'partial' || verdict.answer === 'unknown' ? [{ constraint, answer: verdict.answer, reason: verdict.reason }] : []),
+      evidence: { ledger: snapshot?.response.raw.path ?? archive.observation.snapshot, archiveDate: snapshot?.response.fetchedAt ?? 'unknown', receipts: [archive.product!.receipt], targetAssociations: [], bodyMaps: [], investigations: [] } };
+  }
   const request = answer.request, candidate = assessment.candidate!;
   const product = matchingProduct(candidate.qualifiedProducts ?? [], request, programme);
   const source = candidate.observations?.records?.find(record => record.programme === programme);
@@ -988,8 +1066,8 @@ export function selectObservation(answer: CapabilityAnswer, telescope: string, m
 
 export const LEDGER_TELESCOPES: readonly string[] = Object.keys(ADAPTERS);
 
-/** Read everything the query needs from the repository. The query itself reads nothing. */
-export async function loadQueryInputs(root: string, target: string): Promise<QueryInputs> {
+/** Load only the shipped target catalogue, so human entry points can resolve ambiguity before archive access. */
+export async function loadTargetCatalogue(root: string): Promise<TargetCatalogueEntry[]> {
   // These package descriptors are the source of the application's generated catalogue. Reading them keeps this CLI usable
   // in a clean checkout, before `prepare` has emitted site/prepared-object-catalog.mts.
   const objectRoot = resolve(root, 'src/objects'), targetCatalogue: TargetCatalogueEntry[] = [];
@@ -999,8 +1077,9 @@ export async function loadQueryInputs(root: string, target: string): Promise<Que
     const descriptor = requireRecord(value, `${directory} object descriptor`), properties = requireRecord(descriptor.properties, `${directory} properties`);
     if (properties.catalog === undefined) continue;
     const catalog = requireRecord(properties.catalog, `${directory} catalogue entry`);
-    const id = requireString(descriptor.id, `${directory} id`), name = requireString(catalog.name, `${directory} name`), systemName = requireString(catalog.systemName, `${directory} system name`);
-    targetCatalogue.push({ id, name, aliases: systemName === name ? [] : [systemName] });
+    const id = requireString(descriptor.id, `${directory} id`), name = requireString(catalog.name, `${directory} name`);
+    targetCatalogue.push({ id, name, aliases: catalog.aliases === undefined ? [] : stringList(catalog.aliases, `${directory} aliases`),
+      ...(typeof catalog.classification === 'string' ? { archiveClass: catalog.classification, classificationSource: `src/objects/${directory}/object.json#properties.catalog.classification` } : {}) });
   }
   const focusPaths = [...(await readdir(objectRoot, { recursive: true })).filter(name => name.endsWith('/source/nebula.json')).map(name => resolve(objectRoot, name)),
     resolve(objectRoot, 'local-group/prepared/catalogue.json'), resolve(objectRoot, 'galaxy-clusters/prepared/catalogue.json')];
@@ -1013,6 +1092,14 @@ export async function loadQueryInputs(root: string, target: string): Promise<Que
       targetCatalogue.push({ id, name: requireString(entry.name, `${id} name`), aliases: entry.aliases === undefined ? [] : stringList(entry.aliases, `${id} aliases`) });
     }
   }
+  return targetCatalogue;
+}
+
+/** Read everything the query needs from the repository. The query itself reads nothing. */
+/** The string overload retains legacy archive loading; an explicit request also searches bounded VO services. */
+export async function loadQueryInputs(root: string, targetOrRequest: string | CapabilityRequest | DiscoveryRequest, selectedObservation?: string): Promise<QueryInputs> {
+  const target = typeof targetOrRequest === 'string' ? targetOrRequest : targetOrRequest.target;
+  const objectRoot = resolve(root, 'src/objects'), targetCatalogue = await loadTargetCatalogue(root);
   const resolution = resolveTarget(target, targetCatalogue), canonicalTarget = resolution.status === 'resolved' ? resolution.canonical.id : target;
   const ledgers: { telescope: string; path: string; value: unknown }[] = [], dynamicCapabilities: ModeCapability[] = [];
   for (const telescope of LEDGER_TELESCOPES) {
@@ -1036,7 +1123,8 @@ export async function loadQueryInputs(root: string, target: string): Promise<Que
   const investigations = await readJsonSource(resolve(root, investigationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return undefined; throw error; });
   const sourceIntakeIssues: SourceIntakeIssue[] = [];
   const sourceProducts = resolution.status === 'resolved' ? await loadSourceProducts(root, canonicalTarget, sourceIntakeIssues) : [];
-  return { sourceIntakeIssues, ledgers, capabilities, targetCatalogue, targetAssociations, associationFailures, bodyMaps, qualifiedProducts: resolution.status === 'resolved' ? await loadQualifiedObservations(root, canonicalTarget) : [], sourceProducts, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
+  const vo = typeof targetOrRequest !== 'string' && resolution.status === 'resolved' ? await loadVoInputs(root, { ...targetOrRequest, target: canonicalTarget }, targetCatalogue, selectedObservation) : undefined;
+  return { ...(vo ? { vo } : {}), sourceIntakeIssues, ledgers, capabilities, targetCatalogue, targetAssociations, associationFailures, bodyMaps, qualifiedProducts: resolution.status === 'resolved' ? await loadQualifiedObservations(root, canonicalTarget) : [], sourceProducts, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
 }
 
 const LEVEL_WORDS: Readonly<Record<ToolkitLevel, string>> = Object.freeze({ none: 'no toolkit',
@@ -1045,6 +1133,7 @@ const LEVEL_WORDS: Readonly<Record<ToolkitLevel, string>> = Object.freeze({ none
   proven: 'locally produced with accepted evidence' });
 
 export function formatAnswer(answer: CapabilityAnswer): string {
+  if (answer.targetResolution.status === 'ambiguous') return `workflow: unknown-target\nblocker codes: unknown-target\n\nAmbiguous target ${answer.targetResolution.requested}: ${answer.targetResolution.candidates.map(entry => `${entry.name} (${entry.id})`).join(', ')}. Use a canonical id.\n`;
   if (answer.targetResolution.status === 'unknown') return `workflow: unknown-target\nblocker codes: unknown-target\n\nNo shipped object matches ${answer.targetResolution.requested}.${answer.targetResolution.suggestions.length
     ? ` Did you mean ${answer.targetResolution.suggestions.map(entry => `${entry.name} (${entry.id})`).join(', ')}?` : ''}\n`;
   const lines = [`workflow: ${answer.endpoint.status}; ${answer.endpoint.selectableCandidates} of ${answer.candidates.length} candidate mode(s) can proceed to explicit selection.`,
@@ -1112,6 +1201,11 @@ When qualification is the only blocker, the answer may provide a telescope:quali
 Use --json for JSON. With the package script, use pnpm --silent telescope:query ... --json for JSON-only stdout.`;
 
 export function requestFromArguments(args: readonly string[]): CapabilityRequest {
+  const circle = flagValue(args, '--icrs-circle')?.split(',').map(Number), spectralFrame = flagValue(args, '--spectral-frame');
+  if (circle && circle.length !== 3) throw new TypeError('--icrs-circle requires RA,DEC,RADIUS in degrees.');
+  if (spectralFrame !== undefined && spectralFrame !== 'barycentric') throw new TypeError('--spectral-frame requires barycentric.');
+  const limitFlags = { scienceBytes: '--max-science-bytes', metadataBytes: '--max-metadata-bytes', nestedEdges: '--max-link-depth', metadataRequests: '--max-link-requests', expandedBytes: '--max-expanded-bytes', packageMembers: '--max-package-members' };
+  const limits = Object.fromEntries(Object.entries(limitFlags).flatMap(([key, flag]) => flagValue(args, flag) === undefined ? [] : [[key, Number(flagValue(args, flag))]]));
   const target = flagValue(args, '--target'), wavelength = flagValue(args, '--wavelength');
   if (!target || !wavelength) throw new Error(QUERY_HELP);
   const range = wavelength.split(',').map(Number);
@@ -1124,7 +1218,9 @@ export function requestFromArguments(args: readonly string[]): CapabilityRequest
   const assumptions = flagValue(args, '--accept-assumptions');
   const continuum = flagValue(args, '--continuum')?.split(',').map(Number);
   if (continuum && (continuum.length !== 4 || !continuum.every(Number.isFinite))) throw new TypeError('--continuum requires four finite wavelength bounds.');
-  return { target, ...(continuum ? { continuumMicrometres: [[continuum[0]!, continuum[1]!], [continuum[2]!, continuum[3]!]] as const } : {}), ...(assumptions === undefined ? {} : { acceptedAssumptions: parseAcceptedAssumptions(assumptions.split(',')) }),
+  return { target, ...(circle ? { region: parseRegion({ frame: 'icrs', shape: 'circle', raDegrees: circle[0], decDegrees: circle[1], radiusDegrees: circle[2] }) } : {}),
+    ...(spectralFrame ? { spectralFrame } : {}), ...(Object.keys(limits).length ? { transferLimits: parseLimits(limits) } : {}),
+    ...(continuum ? { continuumMicrometres: [[continuum[0]!, continuum[1]!], [continuum[2]!, continuum[3]!]] as const } : {}), ...(assumptions === undefined ? {} : { acceptedAssumptions: parseAcceptedAssumptions(assumptions.split(',')) }),
     wavelengthMicrometres: [range[0]!, range[1]!], ...(anyTime ? { time: { any: true as const } } : from && to ? { time: { fromIso: from, toIso: to } } : {}),
     ...(numberFlag(args, '--min-arcsec') === undefined ? {} : { angularResolutionArcsec: numberFlag(args, '--min-arcsec')! }),
     ...(numberFlag(args, '--min-km') === undefined ? {} : { surfaceResolutionKm: numberFlag(args, '--min-km')! }),
@@ -1139,7 +1235,7 @@ if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split('/').at(-1
   if (args.includes('--help') || args.includes('-h')) { process.stdout.write(`${QUERY_HELP}\n`); process.exitCode = 0; }
   else {
   const request = requestFromArguments(args);
-  const answer = queryCapabilities(request, await loadQueryInputs(resolve(import.meta.dirname, '../../..'), request.target));
+  const answer = queryCapabilities(request, await loadQueryInputs(resolve(import.meta.dirname, '../../..'), request));
   const telescope = flagValue(args, '--select-telescope'), mode = flagValue(args, '--select-mode'), programme = flagValue(args, '--program');
   if ([telescope, mode, programme].some(Boolean) && ![telescope, mode, programme].every(Boolean)) throw new TypeError('--select-telescope, --select-mode and --program are given together.');
   process.stdout.write(telescope && mode && programme ? `${JSON.stringify(selectObservation(answer, telescope, mode, programme), null, 2)}\n`

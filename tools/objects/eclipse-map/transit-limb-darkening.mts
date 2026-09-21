@@ -12,7 +12,10 @@ import { measureTransitShift } from './transit-timing.mts';
 const BTJD_TO_BMJD = 2457000 - 2400000.5;
 const HALF_WINDOW_DAYS = 0.2, OUT_OF_TRANSIT_DAYS = 0.06, IN_TRANSIT_DAYS = 0.05, MIN_OUTSIDE = 150, MIN_INSIDE = 60;
 
-export interface TessLightCurve { readonly sector: number; readonly ticId: number; readonly time: Float64Array; readonly flux: Float64Array; readonly error: Float64Array }
+export interface TessLightCurve {
+  readonly sector: number; readonly ticId: number; readonly exposureSeconds: number;
+  readonly time: Float64Array; readonly flux: Float64Array; readonly error: Float64Array;
+}
 
 /** The good-quality (QUALITY 0) PDCSAP samples of a SPOC light-curve file, on the BMJD_TDB scale. The header must state the TDB
  * barycentric time system TESS uses, or the file is refused. */
@@ -23,13 +26,16 @@ export function readTessLightCurve(bytes: Buffer): TessLightCurve {
   if (TIMESYS !== 'TDB' || BJDREFI !== 2457000 || BJDREFF !== 0 || TIMEUNIT !== 'd') throw new TypeError('The light curve must be in BJD_TDB - 2457000 days.');
   const sector = Number(primary.header.SECTOR), ticId = Number(primary.header.TICID);
   if (!Number.isInteger(sector) || !Number.isInteger(ticId)) throw new TypeError('The light curve must state its sector and TIC id.');
+  const integrationSeconds = Number(table.header.INT_TIME) * Number(table.header.NUM_FRM);
+  if (!(Number.isFinite(integrationSeconds) && integrationSeconds > 0 && Number(table.header.TIMEPIXR) === .5))
+    throw new TypeError('The light curve must state its centered photon-accumulation duration.');
   const rows = binaryTable(table), columns = ['TIME', 'PDCSAP_FLUX', 'PDCSAP_FLUX_ERR', 'QUALITY'].map(name => tableColumn(rows, name));
   const time: number[] = [], flux: number[] = [], error: number[] = [];
   for (let row = 0; row < rows.rows; row++) {
     const [t, f, e, quality] = columns.map(column => numbers(bytes, rows, row, column)[0]!);
     if (quality === 0 && [t, f, e].every(Number.isFinite)) { time.push(t! + BTJD_TO_BMJD); flux.push(f!); error.push(e!); }
   }
-  return { sector, ticId, time: Float64Array.from(time), flux: Float64Array.from(flux), error: Float64Array.from(error) };
+  return { sector, ticId, exposureSeconds: integrationSeconds, time: Float64Array.from(time), flux: Float64Array.from(flux), error: Float64Array.from(error) };
 }
 
 /** Every transit in the light curves with at least `MIN_OUTSIDE` samples beyond 0.06 d and `MIN_INSIDE` within 0.05 d of mid-transit
@@ -57,10 +63,12 @@ export function foldTransits(curves: readonly TessLightCurve[], orbit: Pick<Host
 
 export function fitTransitLimbDarkening(curves: readonly TessLightCurve[], orbit: HostedOrbit, host: { rightAscensionDegrees: number; declinationDegrees: number }, radiusRatio: number) {
   const fit = (subset: readonly TessLightCurve[]) => {
+    const exposures = new Set(subset.map(curve => curve.exposureSeconds));
+    if (exposures.size !== 1) throw new TypeError('Folded transit light curves must share one recorded exposure duration.');
     const folded = foldTransits(subset, orbit);
-    const result = measureTransitShift(folded, orbit, host, radiusRatio, { windowDays: HALF_WINDOW_DAYS, rangeSeconds: 60 });
+    const result = measureTransitShift(folded, orbit, host, radiusRatio, { windowDays: HALF_WINDOW_DAYS, rangeSeconds: 60, exposureSeconds: subset[0]!.exposureSeconds });
     return { transits: folded.transits, samples: result.samples, radiusRatio: result.radiusRatio, shiftSeconds: result.shiftSeconds, reducedChiSquared: result.reducedChiSquared,
-      u1: result.limbDarkening[0], u2: result.limbDarkening[1] };
+      shiftUncertaintySeconds: result.uncertaintySeconds, exposureSeconds: subset[0]!.exposureSeconds, u1: result.limbDarkening[0], u2: result.limbDarkening[1], software: result.fit.software };
   };
   const all = fit(curves), sectors = curves.length > 1 ? curves.map(curve => ({ sector: curve.sector, ...fit([curve]) })) : [];
   const bounds = (key: 'u1' | 'u2') => (sectors.length ? [Math.min(...sectors.map(s => s[key])), Math.max(...sectors.map(s => s[key]))] : [all[key], all[key]]) as [number, number];

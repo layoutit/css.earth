@@ -416,3 +416,45 @@ plus 15%, rounded upward in kilometres (largest 3209 km). These measurements
 do not bound intervening dates or establish a long-term perturbation theory.
 The new bodies' physical radii are source-owned volume reference radii; the
 thermal sphere-to-volume approximations are disclosed beside each model.
+
+## Hosted exoplanet orbits
+
+`HostedOrbit` supports bound eccentric orbits (`0 ≤ e < 1`) through the shared
+Kepler solver. The body-record compiler retains the published eccentricity;
+it never replaces it with zero. An eccentric record must supply
+`argumentOfPeriapsisDegrees`, `epochDefinition: "inferior-conjunction"`, and
+nonempty `sources.eccentricity` and `sources.argumentOfPeriapsis` citations.
+Periapsis is planet-centric and independent of the sky-plane node position
+angle. Stellar radial-velocity arguments of periapsis and other observer
+conventions require an explicit source conversion before intake.
+
+The conjunction epoch uses `f = π/2 − ω`, as in batman's transit convention.
+It is not generally the exact minimum projected separation for an inclined
+eccentric orbit. `transitTimeBmjdTdb` retains its historical name but must be
+interpreted with `epochDefinition`. The scientific state and phase APIs are
+`hostedOrbitStateRelativeBmjdTdb` and `hostedOrbitPhaseBmjdTdb`; they consume
+barycentric modified Julian dates in TDB directly. They do not perform a
+barycentric light-time correction. The existing JD_TT functions remain display
+approximations and must not be used to relabel observational times.
+
+`hostedOrbitApoapsisKm` supplies the full `a(1+e)` radius bound. Position and
+velocity vary around an eccentric orbit, and opposition need not occur half a
+period after conjunction. Independent CSPICE propagation checks the numerical
+convention alongside the existing Astropy circular/sky-frame oracle.
+The CSPICE comparison covers 24 states at eccentricities 0.0084, 0.05, 0.5
+and 0.9 with a float64 budget of `1e-11` times semi-major axis for position
+and circular speed for velocity. This checks implementation agreement, not
+the uncertainty of a measured orbit. The [TRAPPIST-1f source fixture](../../tests/fixtures/hosted-orbits/trappist-1f-agol2021/README.md)
+retains the published parameters, their convention conversion and limitations.
+
+Existing shipped body records retain their declared circular approximations.
+Supporting an eccentric orbit does not establish a planetary spin law: the
+current always-star-facing emission-map and synchronous-rotation recipes refuse
+eccentric inputs. Supply a qualified rotation model before publishing such a
+map. Static Kepler propagation does not reproduce TRAPPIST-1's interacting
+N-body dynamics or transit-timing variations.
+
+Orbital solutions belong in the astronomy source-record path. Telescope image
+or cube acquisition is not evidence for a fitted eccentricity or periapsis;
+this change adds no synthetic orbital product to the archive query. The batman
+light-curve fitter migration remains separate.

@@ -1,10 +1,27 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { parseElements, parseVectors } from './horizons.mts';
-import { objectValue, readElementRecord, readVectorFixture } from './generator-records.mts';
+import { objectValue, readElementRecord, readVectorFixture, readHostedOrbitRecord } from './generator-records.mts';
 import { parseBodyEpochRecord, parseSceneManifest } from './ephemeris-records.mts';
 
 describe('astronomy source decoding', () => {
+  it('retains sourced eccentric hosted orbits and refuses missing conventions or unbound geometry', () => {
+    const circular = { periodDays: 3, semiMajorAxisStellarRadii: 9, inclinationDegrees: 88, eccentricity: 0,
+      transitTimeBmjdTdb: 59000, ascendingNodePositionAngleDegrees: 0,
+      sources: { period: 'fixture', shape: 'fixture', phase: 'fixture BMJD_TDB', orientation: 'display convention' } };
+    expect(readHostedOrbitRecord(circular)).toEqual(circular);
+    const eccentric = { ...circular, eccentricity: 0.3, argumentOfPeriapsisDegrees: 135, epochDefinition: 'inferior-conjunction',
+      sources: { ...circular.sources, eccentricity: 'selected fit table, e', argumentOfPeriapsis: 'same fit, planet-centric omega' } };
+    expect(readHostedOrbitRecord(eccentric)).toEqual(eccentric);
+    for (const field of ['argumentOfPeriapsisDegrees', 'epochDefinition'] as const) {
+      expect(() => readHostedOrbitRecord({ ...eccentric, [field]: undefined })).toThrow(/eccentric hosted orbit/);
+    }
+    expect(() => readHostedOrbitRecord({ ...eccentric, sources: circular.sources })).toThrow(/sources/);
+    expect(() => readHostedOrbitRecord({ ...eccentric, epochDefinition: 'UTC-midpoint' })).toThrow(/epoch definition/);
+    for (const eccentricity of [-0.1, 1, 2, NaN]) expect(() => readHostedOrbitRecord({ ...eccentric, eccentricity })).toThrow();
+    expect(() => readHostedOrbitRecord({ ...eccentric, argumentOfPeriapsisDegrees: 360 })).toThrow(/Invalid hosted orbit/);
+    expect(() => readHostedOrbitRecord({ ...eccentric, semiMajorAxisStellarRadii: 1.1 })).toThrow(/Invalid hosted orbit/);
+  });
   it('retains float64 Horizons components and rejects malformed numeric CSV cells', () => {
     const text = '$$SOE\n2461286.5, date,1.234567890123456,-2,3,4,5,6\n$$EOE';
     expect(parseVectors(text)[0].position).toEqual([1.234567890123456, -2, 3]);
