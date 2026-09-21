@@ -16,7 +16,6 @@ export const BODY_INDICATOR_DIAMETER = 16;
 export const CONTEXT_LINE_WIDTH = 1;
 const ORBIT_FADE_START_PIXELS = 12, ORBIT_FULL_PIXELS = 48;
 const ORBIT_LOD_PIXELS = 0.1;
-const ORIENTATION_REFERENCE_MAX_DISTANCE_M = 50 * 149_597_870_700;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
 // camera sample. This uses committed visibility, never worker-local history.
@@ -374,12 +373,18 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const unrelatedMinor = !satellite && body.id !== plan.focus.id && foregroundSystem && (annotationPriorities[body.id] ?? 2) < 2;
         const flightDestination = navigationInFlight && body.id === emphasizedId;
         // Prepared orientation references (the Sun, then Earth) remain usable
-        // landmarks when their orbit is too compact to read. At that scale the
-        // annotation stands alone; revealing a dense subpixel orbit would add
-        // clutter without helping identify the body.
-        const referenceAnnotationOnly = focusDistanceM <= ORIENTATION_REFERENCE_MAX_DISTANCE_M &&
+        // landmarks while the Solar System is still the active scale. Camera
+        // altitude is much larger than the orbital radius framed on screen, so
+        // the prepared system handoff—not a literal 50 AU camera distance—owns
+        // this lifetime. The annotation stands alone once its orbit is subpixel.
+        const referenceAnnotationOnly = focusDistanceM <= plan.system.fadeOutStartDistanceM &&
           (annotationPriorities[body.id] ?? 0) >= 4 && !targeted && !resolvedDisc &&
           labelExtentOpacity(localExtent) <= .5 + ANNOTATION_ENTRY_MARGIN;
+        // The retained DOM leaf shares this opacity between its sprite and both
+        // annotation pseudos. A reference whose physical marker has faded must
+        // still publish non-zero leaf opacity; `visible` keeps the sprite itself
+        // suppressed while the circle and caption remain paintable.
+        if (referenceAnnotationOnly) projected.markerOpacity = 1;
         // The destination stays named through the whole flight, across its preview fade.
         const alpha = flightDestination || referenceAnnotationOnly ? 1 : targeted ? markerOpacity : Math.min(markerOpacity, resolvedDisc ? 1 : labelExtentOpacity(localExtent));
         // Naming policy, decided before any slot is contested: suppressed, unresolved, too faint

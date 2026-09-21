@@ -589,6 +589,28 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
   }
 });
 
+test('the Earth reference remains painted when its physical marker has faded at outer-system scale', async () => {
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])),
+    annotationPriorities: Object.fromEntries(SCENE_OBJECTS.map(object => [object.id,
+      labelImportance(object.classification, object.discovery.featured, object.discovery.orientationReference ?? 0)])),
+  });
+  layer.setOverview(true);
+  layer.publish({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
+    pose: { positionM: [0, 0, 233.27 * 149_597_870_700], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 1100, principalOffsetPixels: [0, 0], widthPixels: 1280, heightPixels: 720 });
+  const earth = layer.inspect().find(body => body.id === 'earth')!;
+  expect(annotationVisibility(earth.billboard, 'indicator')).toBe('');
+  expect(annotationVisibility(earth.billboard, 'label')).toBe('');
+  expect(earth.billboard.style.visibility).toBe('');
+  expect(Number(earth.billboard.style.opacity)).toBeGreaterThan(0);
+  expect(earth.orbit.some(paintedOrbitLeaf)).toBe(false);
+  layer.destroy();
+});
+
 test('prepared planetary systems retain identified moon paths and retire offscreen context annotations', async () => {
   const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
