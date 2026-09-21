@@ -1,0 +1,36 @@
+{
+  "id": "gaia-dr3-xp-3400796031719045632",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gaia DR3 XP sampled spectrum, source_id 3400796031719045632",
+  "identifiers": [
+    {
+      "type": "Gaia DR3 XP source_id",
+      "value": "3400796031719045632"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://gea.esac.esa.int/archive/",
+      "label": "Gaia Archive"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3400796031719045632&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "checkedOn": "2026-09-21",
+      "locator": "XP sampled mean spectrum: 343 fluxes from 336 to 1020 nm in 2 nm steps, W m^-2 nm^-1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "scope": "citation",
+      "evidence": "https://www.cosmos.esa.int/web/gaia-users/credits"
+    }
+  ],
+  "publisher": "European Space Agency, Gaia Data Processing and Analysis Consortium"
+}

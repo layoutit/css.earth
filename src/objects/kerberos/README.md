@@ -33,7 +33,7 @@
 
 The radius table samples the analytic ellipsoid every 5°. `measurements.json` records the exact formula, units and axes. The reference radius is 4.75 km, a scene-unit convention consistent with the reported equivalent diameter; the semi-axes remain 7.25, 4.1 and 3.6 km without rescaling. This is a three-axis shape fit, not a local elevation map. The existing radial preparation is applicable because this chosen ellipsoid has exactly one positive surface intersection per direction. No claim is made that an unconstrained contact-binary reconstruction has that property.
 
-The shared astronomical frame uses an illustrative historical pole from the New Horizons flyby solution from [Weaver et al. (2016), Table 2](https://arxiv.org/abs/1604.05366): 5.31 ± 0.10 days, pole RA222°, Dec72°. Shared world navigation uses JPL orbits independently of the shape interpretation.
+The shared astronomical frame uses an illustrative historical pole from the New Horizons flyby solution from [Weaver et al. (2016), Table 2](https://arxiv.org/abs/1604.05366): 5.31 ± 0.10 days, pole RA222°, Dec 72°. Shared world navigation uses JPL orbits independently of the shape interpretation.
 
 Surface, minimap, thumbnail and context portrait use the same no-coverage interpretation. Flood lighting and optional Shadows use the retained irregular-body geometry. No photographed terminator is attached to the mesh; no albedo detail, color, atmosphere or terrain is invented.
 

@@ -29,11 +29,11 @@
         "label": "Solar semimajor axis",
         "value": "39.482 AU",
         "source": {
-          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
-          "label": "NASA/JPL reference",
-          "checked": "2026-09-08",
+          "url": "https://web.archive.org/web/20190803153746/https://ssd.jpl.nasa.gov/txt/p_elem_t1.txt",
+          "label": "NASA/JPL reference (archived)",
+          "checked": "2026-09-21",
           "path": "source/editorial/factsheet-review.json",
-          "catalogueId": "jpl-approximate-planetary-positions",
+          "catalogueId": "jpl-keplerian-elements-table-1-2019",
           "locator": "/references/0; distance-from-sun"
         }
       },
@@ -132,7 +132,7 @@
     "controls": [
       {
         "id": "surface",
-        "label": "Visible color",
+        "label": "Enhanced color",
         "thumbnail": "pluto-lens-surface.webp",
         "surface": "pluto-surface@2x.webp",
         "poles": "pluto-poles-surface@2x.webp",
@@ -140,9 +140,9 @@
           "id": "surface-pluto-color-mosaic-jpg",
           "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/l/pluto_color_mapmosaic.jpg?crop=faces%2Cfocalpoint&fit=clip&h=2963&w=5926"
         },
-        "falseColor": false,
-        "qualification": "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
-        "notes": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
+        "falseColor": true,
+        "qualification": "New Horizons MVIC three-filter color mosaic, not natural color; gray grid: no imagery in this dataset",
+        "notes": "Enhanced color: MVIC's color filters are blue, red and near-infrared (780 to 975 nm), so this is not what an eye would see. Gray grid: no imagery in this dataset",
         "noData": true
       },
       {

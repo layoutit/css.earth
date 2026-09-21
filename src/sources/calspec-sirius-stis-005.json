@@ -1,0 +1,41 @@
+{
+  "id": "calspec-sirius-stis-005",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "HST CALSPEC spectrum of Sirius A (sirius_stis_005.fits)",
+  "identifiers": [
+    {
+      "type": "CALSPEC file",
+      "value": "sirius_stis_005.fits"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/",
+      "label": "CALSPEC current files"
+    },
+    {
+      "role": "landing",
+      "url": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
+      "label": "CALSPEC"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/sirius_stis_005.fits",
+      "checkedOn": "2026-09-21",
+      "locator": "SCI binary table: WAVELENGTH (Angstrom), FLUX (FLAM), DATAQUAL; 8970 rows from 1150 Angstrom; SOURCE keyword: Flux scale of Bohlin et al. 2020, AJ 160, 21"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/STScI HST CALSPEC; flux scale Bohlin et al. (2020), AJ 160, 21",
+      "scope": "citation",
+      "evidence": "https://archive.stsci.edu/publishing/data-use"
+    }
+  ],
+  "publisher": "Space Telescope Science Institute"
+}

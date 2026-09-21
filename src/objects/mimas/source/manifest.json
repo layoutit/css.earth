@@ -331,12 +331,12 @@
     {
       "path": "observations/catalog.json",
       "expectedBytes": 2827,
-      "expectedSha256": "165862a1ff169a69b9ed5a0ebfa74a2a3b3993996cd7b608f8f3a3fb1397b4aa"
+      "expectedSha256": "366487e3f887ca4c9080a6727400197dd46143cfeb620d03581c36e1abc38eab"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 3829,
-      "expectedSha256": "2515a25d0ed1f5bb26a722a3586e627eeac4f6a4dae45135a8342936bf757f39"
+      "expectedSha256": "84e46dff3cc71dd031ac27914f446903ed96a2ce983385392c2c75cccf2b2108"
     },
     {
       "path": "preparation/navigation.json",

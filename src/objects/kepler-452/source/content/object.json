@@ -36,22 +36,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "color",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-        "thumbnail": "kepler-452-lens-shape.webp",
-        "surface": "kepler-452-surface-shape@2x.webp",
-        "poles": "kepler-452-poles-shape@2x.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star. The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+        "thumbnail": "kepler-452-lens-color.webp",
+        "surface": "kepler-452-surface-color@2x.webp",
+        "poles": "kepler-452-poles-color@2x.webp",
         "source": {
-          "id": "kepler-452-observational-measurements",
+          "id": "kepler-452-stellar-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/1507.06723"
+          "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+        "notes": "The colour of Gaia DR3's measured spectrum of Kepler-452. No resolved image of the surface is cast; the display axis is celestial north, a convention."
       }
     ]
   },
@@ -66,6 +66,12 @@
       "role": "facts",
       "description": "J. M. Jenkins et al., \"Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star\", AJ 150, 56 (2015), arXiv:1507.06723",
       "href": "https://arxiv.org/abs/1507.06723"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "Gaia DR3 2079597124345617280",
+      "href": "https://gea.esac.esa.int/archive/"
     }
   ],
   "provenance": {

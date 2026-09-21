@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "rasalhague",
+  "angularDiameterMas": 1.68,
+  "angularDiameterSource": "Computed: the volume-equivalent radius of Monnier et al. 2010's polar and equatorial radii at the Hipparcos distance; the paper fits the radii, not a single diameter.",
+  "distanceParsecs": 14.8965,
+  "distanceSource": "Inverse of the Hipparcos new-reduction parallax 67.13 ± 1.06 mas (van Leeuwen 2007) via SIMBAD",
+  "radiusKm": 1872729,
+  "radiusSource": "Radius: the volume-equivalent sphere of the polar radius 2.388 ± 0.013 and equatorial radius 2.858 ± 0.015 solar radii of Monnier et al. 2010 (https://arxiv.org/abs/1012.0787), Table 1; the scene draws the flattening. presentationUp: the measured rotation pole is up.",
+  "effectiveTemperatureK": 8336,
+  "effectiveTemperatureSource": "Effective temperature 8336 ± 39 K, the true effective temperature of Monnier et al. 2010 (ApJ 725, 1192; https://arxiv.org/abs/1012.0787), Table 1.",
+  "surfaceGravityLogg": 3.92,
+  "surfaceGravitySource": "log g from the dynamical mass 2.20 ± 0.06 solar masses of Gardner et al. 2021 (https://doi.org/10.3847/1538-4357/ac1172) and the volume-equivalent radius, log10(GM/R^2) in cgs",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp."
+  }
+}

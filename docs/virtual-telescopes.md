@@ -68,6 +68,36 @@ cancels without starting that output; JSON and redirected execution never prompt
 supported delivery records, derived product records and prepared point/volume object packages,
 not arbitrary raw science files.
 
+### Papers that already used the data
+
+Before reducing archive frames yourself, check whether a paper already did it:
+
+```sh
+pnpm -s telescope papers io --instrument JIRAM
+pnpm -s telescope papers io --instrument JIRAM --json --out output/io-papers
+```
+
+`papers` resolves the target name the same way as `explore`, then asks OpenAlex for articles,
+reviews, letters and preprints whose title or abstract names the target and, if given, the
+instrument. It keeps up to 20, open access first, then by OpenAlex relevance, then newest first.
+Each work shows its title, year, DOI, first three authors, licence and open-access link.
+
+For each open copy the command makes one plain request and reports the result:
+
+- `fetchable`: the text downloaded (HTML or PDF).
+- `blocked`: the publisher answered with a browser check (Wiley and AGU usually do). The command
+  does not try to get past it. Open the link in a browser instead.
+- `failed`, `closed` or `skipped`: an error, no open copy, or the request limit was reached.
+
+For HTML texts it prints figure captions and table titles that mention a map, mosaic, radiance,
+scale or colour bar, or that list orbits, times or distances. They are quoted as written, cut at
+300 characters. That is usually enough to see whether the paper made the map you want and which
+frames it used. For Io with JIRAM, Mura et al. (2024) shows up as fetchable with its list of
+observations (Table 1) and radiance maps (Figure 2).
+
+Requests run one at a time, with a 20 second timeout and at most 25 per run. Nothing is written to
+disk unless you pass `--out`. Then the command saves `papers.json` and the downloaded HTML texts.
+
 Use `query` when the wavelength, time, product kind and resolution are actual acceptance criteria:
 
 ```sh

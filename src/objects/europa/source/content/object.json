@@ -53,11 +53,11 @@
         "label": "Orbit around Jupiter",
         "value": "3.55 days · sidereal",
         "source": {
-          "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
-          "label": "PDS/IAU sidereal rate",
-          "checked": "2026-09-08",
+          "url": "https://doi.org/10.1007/s10569-017-9805-5",
+          "label": "IAU WGCCRE 2015 sidereal rate",
+          "checked": "2026-09-21",
           "path": "source/editorial/factsheet-review.json",
-          "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
+          "catalogueId": "iau-wgccre-2015",
           "locator": "/references/2; orbital-period"
         }
       },
@@ -66,11 +66,11 @@
         "label": "Rotation period",
         "value": "3.55 days · synchronous",
         "source": {
-          "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
-          "label": "PDS/IAU sidereal rate",
-          "checked": "2026-09-08",
+          "url": "https://doi.org/10.1007/s10569-017-9805-5",
+          "label": "IAU WGCCRE 2015 sidereal rate",
+          "checked": "2026-09-21",
           "path": "source/editorial/factsheet-review.json",
-          "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
+          "catalogueId": "iau-wgccre-2015",
           "locator": "/references/2; rotation-period"
         }
       }
@@ -289,186 +289,6 @@
         },
         "falseColor": true,
         "notes": "Galileo NIMS observations assign red, green and blue to 1.50, 1.34 and 0.73–0.74 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
-        "noData": true
-      },
-      {
-        "id": "ice-signature",
-        "label": "Ice signature",
-        "thumbnail": "europa-lens-ice-signature.webp",
-        "surface": "europa-ice-signature@2x.webp",
-        "poles": "europa-poles-ice-signature@2x.webp",
-        "source": {
-          "id": "europa-composition-ice-signature",
-          "path": "../manifest.json",
-          "url": "https://doi.org/10.5281/zenodo.6034904"
-        },
-        "falseColor": true,
-        "legend": {
-          "kind": "scale",
-          "title": "Ice signature",
-          "labels": [
-            "1.7",
-            "2.45",
-            "3.2"
-          ],
-          "meta": "reflectance ratio",
-          "sourceUrl": "https://doi.org/10.5281/zenodo.6034904",
-          "recipe": {
-            "palette": [
-              [
-                8,
-                29,
-                88
-              ],
-              [
-                34,
-                94,
-                168
-              ],
-              [
-                65,
-                182,
-                196
-              ],
-              [
-                161,
-                218,
-                180
-              ],
-              [
-                255,
-                255,
-                204
-              ]
-            ],
-            "labels": [
-              "1.7",
-              "2.45",
-              "3.2"
-            ]
-          }
-        },
-        "notes": "Ratio of photometrically corrected measured reflectances at the exact released wavelengths. A stronger ratio indicates deeper absorption near 1.5 µm, with composition and grain-size effects. Native one-degree nodes do not represent independent one-degree detail. Gray grid marks absent observations; the colors are a scientific display scale. Local preview: numerical-data reuse terms remain unresolved.",
-        "noData": true
-      },
-      {
-        "id": "fine-ice",
-        "label": "Fine ice",
-        "thumbnail": "europa-lens-fine-ice.webp",
-        "surface": "europa-fine-ice@2x.webp",
-        "poles": "europa-poles-fine-ice@2x.webp",
-        "source": {
-          "id": "europa-composition-fine-ice",
-          "path": "../manifest.json",
-          "url": "https://doi.org/10.5281/zenodo.6034904"
-        },
-        "falseColor": true,
-        "legend": {
-          "kind": "scale",
-          "title": "Fine ice",
-          "labels": [
-            "0%",
-            "30%",
-            "60%"
-          ],
-          "meta": "modeled fraction",
-          "sourceUrl": "https://doi.org/10.5281/zenodo.6034904",
-          "recipe": {
-            "palette": [
-              [
-                8,
-                29,
-                88
-              ],
-              [
-                34,
-                94,
-                168
-              ],
-              [
-                65,
-                182,
-                196
-              ],
-              [
-                161,
-                218,
-                180
-              ],
-              [
-                255,
-                255,
-                204
-              ]
-            ],
-            "labels": [
-              "0%",
-              "30%",
-              "60%"
-            ]
-          }
-        },
-        "notes": "Posterior median for the published 100–300 µm crystalline-ice endmember at 110 K. The laboratory temperature describes the reference spectrum, not a surface-temperature measurement. Native one-degree nodes do not represent independent one-degree detail. Gray grid marks absent observations; the colors are a scientific display scale. Local preview: numerical-data reuse terms remain unresolved.",
-        "noData": true
-      },
-      {
-        "id": "coarse-ice",
-        "label": "Coarse ice",
-        "thumbnail": "europa-lens-coarse-ice.webp",
-        "surface": "europa-coarse-ice@2x.webp",
-        "poles": "europa-poles-coarse-ice@2x.webp",
-        "source": {
-          "id": "europa-composition-coarse-ice",
-          "path": "../manifest.json",
-          "url": "https://doi.org/10.5281/zenodo.6034904"
-        },
-        "falseColor": true,
-        "legend": {
-          "kind": "scale",
-          "title": "Coarse ice",
-          "labels": [
-            "0%",
-            "30%",
-            "60%"
-          ],
-          "meta": "modeled fraction",
-          "sourceUrl": "https://doi.org/10.5281/zenodo.6034904",
-          "recipe": {
-            "palette": [
-              [
-                8,
-                29,
-                88
-              ],
-              [
-                34,
-                94,
-                168
-              ],
-              [
-                65,
-                182,
-                196
-              ],
-              [
-                161,
-                218,
-                180
-              ],
-              [
-                255,
-                255,
-                204
-              ]
-            ],
-            "labels": [
-              "0%",
-              "30%",
-              "60%"
-            ]
-          }
-        },
-        "notes": "Posterior median for the published 300 µm–1 mm crystalline-ice endmember at 110 K. The laboratory temperature describes the reference spectrum, not a surface-temperature measurement. Native one-degree nodes do not represent independent one-degree detail. Gray grid marks absent observations; the colors are a scientific display scale. Local preview: numerical-data reuse terms remain unresolved.",
         "noData": true
       }
     ]

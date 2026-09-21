@@ -14,7 +14,7 @@
     ]
   },
   "introduction": {
-    "text": "Cassini found a thin exosphere of oxygen and carbon dioxide around Rhea, and signs of material orbiting it.",
+    "text": "Cassini found a thin exosphere of oxygen and carbon dioxide around Rhea. A 2008 study inferred an orbiting debris disk; a 2010 Cassini imaging search found no rings.",
     "sources": [
       {
         "catalogueId": "nasa-saturn-moons",
@@ -22,6 +22,22 @@
         "label": "NASA Science · Saturn’s moons",
         "checked": "2026-09-13",
         "locator": "Page text"
+      },
+      {
+        "catalogueId": "doi-10-1126-science-1151524",
+        "url": "https://doi.org/10.1126/science.1151524",
+        "label": "Jones et al. 2008",
+        "checked": "2026-09-21",
+        "locator": "Abstract",
+        "quote": "this material is in the form of grains and boulders up to several decimetres in size and orbits Rhea as an equatorial debris disk"
+      },
+      {
+        "catalogueId": "doi-10-1029-2010gl043663",
+        "url": "https://doi.org/10.1029/2010GL043663",
+        "label": "Tiscareno et al. 2010",
+        "checked": "2026-09-21",
+        "locator": "Abstract",
+        "quote": "Our results contradict an earlier and surprising inference that Rhea, the second-largest moon of Saturn, possesses a system of narrow rings embedded in a broad circum-satellite disk or cloud."
       }
     ]
   },

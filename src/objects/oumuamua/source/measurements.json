@@ -26,7 +26,7 @@
   "classification": "interstellar",
   "shapeLabel": "Published light-curve interpretation",
   "source": "https://doi.org/10.1093/mnras/stz2378",
-  "credit": "Mashchenko (2019), MNRAS489,3003–3021, §4 and Table1",
+  "credit": "Mashchenko (2019), MNRAS489,3003–3021, §4 and Table 1",
   "papers": [
     "https://www.nature.com/articles/s41550-018-0398-z",
     "https://science.nasa.gov/solar-system/what-we-knowand-dont-knowabout-oumuamua/"
@@ -35,10 +35,10 @@
   "orientationMeaning": "Arbitrary display pole and meridian. The object tumbles; this static view does not reconstruct its 2017 attitude or claim a current spin phase.",
   "introduction": "The first confirmed interstellar visitor crossed the Solar System in 2017. Its changing brightness supports competing shape interpretations; this view shows one published disc-like fit, with size set by an assumed reflectivity.",
   "survey": [
-    "Included: Mashchenko2019 light-curve fits; selected DISC solution with the paper’s stated0.1 geometric albedo.",
+    "Included: Mashchenko 2019 light-curve fits; selected DISC solution with the paper’s stated 0.1 geometric albedo.",
     "Alternative: same paper’s CIGAR324 ×42 ×42 m solution remains viable; a familiar artist impression is not measured geometry.",
     "Excluded: NASA/ESO artist impressions as surface textures; telescopes measured only unresolved light.",
-    "Included: Horizons2026-09-03 heliocentric osculating trajectory and independent vectors; not a simulation of non-gravitational acceleration or reconstruction of unknown origin."
+    "Included: Horizons 2026-09-03 heliocentric osculating trajectory and independent vectors; not a simulation of non-gravitational acceleration or reconstruction of unknown origin."
   ],
   "references": [
     {

@@ -229,7 +229,7 @@
       "id": "jpl-and-nasa-physical-facts",
       "subject": "Pinned JPL physical parameters and NASA Pluto facts",
       "status": "included",
-      "finding": "Physical facts come from the selected JPL row values and NASA's facts record, checked during preparation: radius 1,188.3 km, density 1.853 g/cm3, sidereal rotation -6.3872 days and orbital period 247.92065 years, with NASA's rounded 39 AU mean solar distance; the body record carries the NSSDC obliquity of 119.51 degrees while pole, prime meridian and Sun direction come from the IAU/WGCCRE rotation model.",
+      "finding": "Physical facts come from the selected JPL row values and NASA's facts record, checked during preparation: radius 1,188.3 km, density 1.853 g/cm3, sidereal rotation -6.3872 days and orbital period 247.92065 years, with the 39.482 AU solar semimajor axis from the Pluto row of JPL's approximate-positions Table 1 (since dropped from JPL's page; checked against the archived table); the body record carries the NSSDC obliquity of 119.51 degrees while pole, prime meridian and Sun direction come from the IAU/WGCCRE rotation model.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L11",
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L75",

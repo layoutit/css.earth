@@ -68,7 +68,7 @@
       ],
       "shape": {
         "kind": "sphere",
-        "radiusKm": 2575.5
+        "radiusKm": 2574.76
       },
       "surfaces": [
         {
@@ -145,8 +145,8 @@
         -0.39777715593191365,
         0.9174820620691818
       ],
-      "metersPerUnit": 11197.826086956522,
-      "bodyRadiusM": 2575500
+      "metersPerUnit": 11194.608695652174,
+      "bodyRadiusM": 2574760
     },
     "page": {
       "stylesheets": [
@@ -154,7 +154,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "25861ea880f3274237c9c67a3011f04a23719ab36fcf28201f7c72c1f7aa70be"
+        "sha256": "a46908a68b173739cf81e35070b0b3ffa52463d6a0bbef2cecc228511e16f73d"
       }
     },
     "catalog": {
@@ -174,6 +174,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "806c08e9cff8b8a2dac0dfc4824e9694ec870841e9dd046aa9abfcfbd933d01b"
+    "sha256": "2b9dc26f623523ada03feb9c7feb1e817dda0cafda9fb59246a015e01a0c35b8"
   }
 }

@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "alderamin",
+  "entries": [
+    {
+      "id": "surface-image",
+      "subject": "CHARA/MIRC reconstructed surface image",
+      "status": "excluded",
+      "finding": "Zhao et al. 2009 reconstructs an image of the gravity-darkened surface, published as a figure; no image file or calibrated OIFITS release was found in the OiDB at level 3 on 2026-09-21. The package draws the paper's Roche-von Zeipel fit instead.",
+      "revisitWhen": "A calibrated OIFITS release of the CHARA/MIRC data, which the repository could image with SQUEEZE.",
+      "evidence": [
+        "https://arxiv.org/abs/0906.2241"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "dda50b5c7343aaf451d4fdbfc92b25a0460b05c8"
+        }
+      ]
+    }
+  ]
+}

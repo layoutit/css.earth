@@ -24,12 +24,9 @@ import { DAYS_PER_JULIAN_CENTURY } from './time.js'
  *             between the two, not an error here.
  *   moon      Horizons uses the DE441 integrated libration angles; the IAU
  *             series is an approximation to them, good to about 0.003 degrees.
- *   phobos    Horizons uses the MAR097/MAR099 rotation, refit after the IAU
- *   deimos    2015 report. Phobos's prime meridian drifts 10 degrees apart from
- *             the report's model by 2100.
  *   miranda   URA182 (Jacobson & Park 2025) moved the Uranian satellite poles.
  *   triton    NEP097 likewise for Triton.
- *   ceres     Same shape as Phobos: `pck00011.tpc`/`dawn_ceres_v05.tpc` publish
+ *   ceres     `pck00011.tpc`/`dawn_ceres_v05.tpc` publish
  *             the spin rate to four decimal places (952.1532 deg/day), and
  *             Ceres spins fast enough (9.07 h) that this fixture's 200-year
  *             span turns the prime meridian about 7e7 degrees — enough for
@@ -40,7 +37,10 @@ import { DAYS_PER_JULIAN_CENTURY } from './time.js'
  * to build the fixture at all: Ganymede's and Callisto's prime-meridian
  * periodic terms had the wrong sign (the residual was exactly twice the term),
  * and Neptune's prime meridian was the older 253.18 + 536.3128492 d rather than
- * the 249.978 + 541.1397757 d that Horizons uses.
+ * the 249.978 + 541.1397757 d that Horizons uses. Phobos and Deimos later
+ * showed 10.4 and 0.82 degree prime-meridian gaps because they still carried
+ * the 2009 report's models; with the 2015 models from `pck00011.tpc` they match
+ * Horizons to under 1e-6 degrees.
  *
  * Umbriel's remaining 0.14 degrees is NOT explained. Its pole matches exactly,
  * so the two periodic terms in its W are either mistranscribed here or a
@@ -52,8 +52,6 @@ const KNOWN_DIVERGENCE_DEG: Record<string, { readonly pole: number; readonly pri
   mercury: { pole: EXACT_TOLERANCE_DEG, primeMeridian: 0.005 },
   earth: { pole: 0.005, primeMeridian: 0.3 },
   moon: { pole: 0.005, primeMeridian: 0.005 },
-  phobos: { pole: 0.4, primeMeridian: 12 },
-  deimos: { pole: 0.1, primeMeridian: 1 },
   miranda: { pole: 4, primeMeridian: 3 },
   triton: { pole: 5, primeMeridian: 4.5 },
   umbriel: { pole: EXACT_TOLERANCE_DEG, primeMeridian: 0.2 },

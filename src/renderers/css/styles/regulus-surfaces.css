@@ -1,0 +1,106 @@
+/* Regulus: the Sun's emissive presentation (planet-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   planet-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
+.planet-stage[data-object-id="regulus"] > :is(.polycss-camera, .regulus-corona-layer, .regulus-limb-layer) {
+  --regulus-scene-side-padding: 16px;
+  --regulus-reference-width: 1920px;
+  --regulus-reference-height: 1080px;
+  --regulus-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--regulus-scene-side-padding) - var(--regulus-scene-side-padding)) /
+        var(--regulus-reference-width)
+    ),
+    calc(100cqh / var(--regulus-reference-height))
+  );
+}
+
+/* The shared stage rule (planet-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+.planet-stage[data-object-id="regulus"] > :is(.regulus-corona-layer, .regulus-limb-layer) {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* Paint order: off-limb context behind the sphere, limb plate above it. */
+.planet-stage[data-object-id="regulus"] .regulus-corona-layer {
+  z-index: 0;
+}
+
+.planet-stage[data-object-id="regulus"] .polycss-camera {
+  z-index: 1;
+}
+
+.planet-stage[data-object-id="regulus"] .regulus-limb-layer {
+  z-index: 2;
+}
+
+.planet-stage[data-object-id="regulus"] .regulus-body {
+  transform-style: preserve-3d;
+}
+
+.planet-stage[data-object-id="regulus"] .polycss-scene s {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* Emissive leaves: full-band leaves stay visible from behind so the overlapped seams never open; polar cap leaves
+   hide their back faces. */
+.planet-stage[data-object-id="regulus"] .polycss-scene s:not(.regulus-polar) {
+  backface-visibility: visible;
+  background-image: var(--regulus-surface-image) !important;
+}
+
+.planet-stage[data-object-id="regulus"] .polycss-scene s.regulus-polar {
+  backface-visibility: hidden;
+  background-image: var(--regulus-poles-image) !important;
+}
+
+/* Off-limb context: 600 px = raster.json emission.offLimbSize, drawn at the disc's 496 px, times the sphere's
+   solar-system.json geometryScale (1.25) so the plate stays registered to the enlarged sphere. */
+.planet-stage[data-object-id="regulus"] .regulus-corona-layer {
+  background-image: var(--regulus-corona-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    calc(600px * 1.25 * var(--regulus-camera-zoom, 1))
+    calc(600px * 1.25 * var(--regulus-camera-zoom, 1));
+}
+
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
+   sphere is drawn at, so the plate's edge is the sphere's outline. */
+.planet-stage[data-object-id="regulus"] .regulus-limb-layer {
+  background-image: var(--regulus-limb-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    calc(496px * 1.25 * var(--regulus-camera-zoom, 1))
+    calc(496px * 1.25 * var(--regulus-camera-zoom, 1));
+}
+
+.planet-stage[data-object-id="regulus"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.planet-stage[data-object-id="regulus"] .polycss-scene {
+  will-change: transform;
+}
+
+.planet-stage[data-object-id="regulus"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}

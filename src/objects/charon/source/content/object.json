@@ -23,11 +23,11 @@
         "label": "System solar semimajor axis",
         "value": "39.482 AU",
         "source": {
-          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
-          "label": "NASA/JPL reference",
-          "checked": "2026-09-08",
+          "url": "https://web.archive.org/web/20190803153746/https://ssd.jpl.nasa.gov/txt/p_elem_t1.txt",
+          "label": "NASA/JPL reference (archived)",
+          "checked": "2026-09-21",
           "path": "source/editorial/factsheet-review.json",
-          "catalogueId": "jpl-approximate-planetary-positions",
+          "catalogueId": "jpl-keplerian-elements-table-1-2019",
           "locator": "/references/1; distance-from-sun"
         }
       },
@@ -75,14 +75,14 @@
       {
         "id": "density",
         "label": "Mean density",
-        "value": "1.853 ± 0.004 g/cm³",
+        "value": "1.705 g/cm³",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-          "label": "NASA/JPL reference",
-          "checked": "2026-09-08",
+          "label": "Derived from JPL GM 106.1 km³/s² and radius 606.0 km; the table's density cell repeats Pluto's 1.853",
+          "checked": "2026-09-21",
           "path": "source/editorial/factsheet-review.json",
           "catalogueId": "jpl-satellite-physical-parameters",
-          "locator": "/references/0; density"
+          "locator": "/references/0; GMKm3PerSec2, meanRadiusKm"
         }
       }
     ]

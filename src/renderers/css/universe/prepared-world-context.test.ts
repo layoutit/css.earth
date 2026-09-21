@@ -4,7 +4,7 @@ import { required } from '../../../../tools/test-values.mts';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { expect, test, vi } from 'vitest';
-import { mountPreparedWorldContext, parsePreparedWorldContext, parsePreparedWorldContextSummary, preparedVolumeOpacity } from './prepared-world-context.js';
+import { decodeWorldOrbits, mountPreparedWorldContext, orbitVertices, parsePreparedWorldContext, parsePreparedWorldContextSummary, preparedVolumeOpacity } from './prepared-world-context.js';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import { createWorldContextFrameEncoder } from './world-context-frame.js';
@@ -147,12 +147,13 @@ function captionName(element: { dataset: { contextName?: string } }): string {
 test('validated immutable context is shared, while modified transport still gets validated', () => {
   const prepared = plan(1);
   expect(parsePreparedWorldContext(prepared)).toBe(prepared);
-  expect(() => { Object.assign(prepared.bodies[0]!.orbit!.verticesM[0]!, { 0: 0 }); }).toThrow();
+  // Orbit paths are typed arrays (views over the orbit bank), which cannot be frozen; the records around them are.
+  expect(() => { Object.assign(prepared.bodies[0]!.orbit!, { centerBodyId: 'moved' }); }).toThrow();
   const transport = structuredClone(prepared);
   const validated = parsePreparedWorldContext(transport);
   expect(validated).not.toBe(transport);
   expect(validated).toEqual(prepared);
-  Object.assign(transport.bodies[0]!.orbit!.verticesM[0]!, { 0: 0 });
+  transport.bodies[0]!.orbit!.verticesM[0] = 0;
   expect(() => parsePreparedWorldContext(transport)).toThrow('align');
   expect(parsePreparedWorldContext(validated)).toBe(validated);
 });
@@ -178,8 +179,8 @@ function billboardCenter(element: HTMLElement | FakeElement): number[] {
 }
 function captionPosition(element: HTMLElement | FakeElement): number[] {
   const [x, y] = billboardCenter(element);
-  const dx = Number(element.dataset.contextLabelX?.replace('px', ''));
-  const dy = Number(element.dataset.contextLabelY?.replace('px', ''));
+  const dx = Number(element.style.getPropertyValue('--context-label-x').replace('px', ''));
+  const dy = Number(element.style.getPropertyValue('--context-label-y').replace('px', ''));
   return [x + dx, y + dy];
 }
 const paintedOrbitLeaf = (piece: HTMLElement | SVGElement) => piece.getAttribute('stroke-opacity') !== null
@@ -202,7 +203,8 @@ test('open world trajectories validate their epoch vertex and never accept a clo
     bodyVertexIndex: 3, displayExtentAu: 600, trailModel: 'finite-open-trajectory-constant-weight',
     trail: Array(7).fill(1), activeChords: [0, 1, 2, 3, 4, 5, 6], extentChords: [0, 3, 1, 5, 2, 4, 6] };
   const input = { ...original, bodies: [{ ...body, orbit }, original.bodies[1]] };
-  expect(parsePreparedWorldContext(input).bodies[0]!.orbit).toEqual({ ...orbit, vertexCount: 8, fullTrail: true });
+  expect(parsePreparedWorldContext(input).bodies[0]!.orbit).toEqual({ ...orbit, verticesM: Float64Array.from(verticesM.flat()), trail: Float64Array.from(orbit.trail),
+    activeChords: Uint32Array.from(orbit.activeChords), extentChords: Uint32Array.from(orbit.extentChords), vertexCount: 8, fullTrail: true });
   for (const invalid of [{ closed: true }, { bodyVertexIndex: undefined }, { bodyVertexIndex: 0 }, { bodyVertexIndex: 8 },
     { trail: Array(8).fill(1) }, { trail: [0, 1, 1, 1, 1, 1, 1] }, { displayExtentAu: 0 },
     { activeChords: [0, 1, 2, 3, 4, 5, 7] }]) {
@@ -610,8 +612,8 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
     // A placed star has no orbit in the Sun's context; every orbiting body's orbit facts are prepared.
     if (!body.orbit) { expect(SCENE_OBJECTS.find(object => object.id === body.id)!.classification).toBe('star'); continue; }
     expect(body.orbit.bounds, `${body.id} orbit bounds are owned by preparation`).toBeDefined();
-    expect(body.orbit.activeChords).toEqual(body.orbit.trail.flatMap((weight, index) => weight > 0 ? [index] : []));
-    expect([...(body.orbit.extentChords ?? [])].sort((a, b) => a - b)).toEqual(body.orbit.activeChords);
+    expect([...body.orbit.activeChords!]).toEqual([...body.orbit.trail].flatMap((weight, index) => weight > 0 ? [index] : []));
+    expect([...(body.orbit.extentChords ?? [])].sort((a, b) => a - b)).toEqual([...body.orbit.activeChords!]);
   }
   expect(() => parsePreparedWorldContext({ ...source, focus: { ...(source.focus as Record<string, unknown>), positionM: [1, 0, 0] } })).toThrow('frame origin');
   const camera = source.camera as Record<string, unknown>, presentation = camera.presentation as Record<string, unknown>;
@@ -850,7 +852,7 @@ test('satellite markers remain occluded by their parent when another detail obje
   const positionM = [100, 0, -20];
   const context = parsePreparedWorldContext({ ...source, bodies: [parent, { ...child, positionM,
     orbit: { ...child.orbit, centerBodyId: parent.id, centerPositionM: parent.positionM,
-      verticesM: [positionM, ...child.orbit!.verticesM.slice(1)] } }] });
+      verticesM: [positionM, ...orbitVertices(child.orbit!).slice(1)] } }] });
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [100, 0, 20], orientationXyzw: [0, 0, 0, 1] } },
@@ -2412,4 +2414,21 @@ test('CSSOM transform serialization cannot turn an unchanged publication into an
   layer.publish(world, viewport);
   expect(writes).toBe(2);
   layer.destroy();
+});
+
+test('the binary orbit bank decodes to exactly the orbits of the full prepared file', async () => {
+  const prepared = new URL('../../../objects/sun/prepared/', import.meta.url);
+  const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('world-context.json', prepared), 'utf8')));
+  const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
+  const bytes = await readFile(new URL('world-orbits.bin', prepared));
+  const bank = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+  const decoded = decodeWorldOrbits(summary, bank);
+  expect(decoded.bodies.map(body => body.id)).toEqual(full.bodies.map(body => body.id));
+  for (const [index, body] of decoded.bodies.entries()) {
+    expect(body.orbit, body.id).toEqual(full.bodies[index]!.orbit);
+  }
+  // The pin guards the transport: a bank of another size, or one missing an orbit's path, never decodes.
+  expect(() => decodeWorldOrbits(summary, bank.slice(0, bank.byteLength - 8))).toThrow(/summary pin/);
+  const orbiting = summary.bodies.find(body => body.orbit)!;
+  expect(() => decodeWorldOrbits({ ...summary, bodies: summary.bodies.map(body => body === orbiting ? { ...body, id: 'unknown-body' } : body) }, bank)).toThrow(/lacks its path/);
 });

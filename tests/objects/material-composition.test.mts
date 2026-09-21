@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {intersectViewRayWithEllipsoid,rotateSequence,convexHull2d,prepareProjectedEllipsoidSilhouetteCoverage} from '../../tools/objects/material-composition/ellipsoid.mts';
+import {intersectViewRayWithEllipsoid,rotateSequence,convexHull2d,prepareProjectedEllipsoidSilhouetteCoverage,planetographicRowsToMeshLatitude} from '../../tools/objects/material-composition/ellipsoid.mts';
 import {fitTextureGeometry,polarQuad} from '../../tools/objects/material-composition/texture-geometry.mts';
 import {writeMaterialAtlasTile,sampleRgbaBilinear,sampleAlphaBilinear} from '../../tools/objects/material-composition/raster.mts';
 import {validateMaterialRecipe,validateRelativePath} from '../../tools/objects/material-composition/recipe.mts';
@@ -76,4 +76,15 @@ test('full entry rejects canonical comparison output before any raster writes',a
  const geometry=JSON.parse(await readFile(new URL('../../src/objects/saturn/source/preparation/geometry.json',import.meta.url),'utf8'));
  assert.equal(isLayeredOblateRecipe(geometry),true);assert.equal(isLayeredOblateRecipe({schema:'unknown'}),false);
  await assert.rejects(prepareLayeredOblateObject({objectDirectory,publicDirectory:new URL('../../public/scenes/saturn/',import.meta.url).pathname,outputDirectory:'/unused',prepareContent:async()=>{throw Error('must not execute');}}),/canonical public/);
+});
+
+test('planetographic map rows move to the parametric latitude of the mesh',()=>{
+ const height=180,axisRatio=60268/54364,rows=Uint8Array.from({length:height},(_,y)=>y);
+ const mesh=planetographicRowsToMeshLatitude(rows,1,height,1,axisRatio);
+ // Mesh row 45 sits at parametric latitude 44.5 deg; its planetographic latitude is atan(a/b tan 44.5) = 47.4 deg, source row 42.1.
+ const beta=44.5*Math.PI/180,expected=90-Math.atan(axisRatio*Math.tan(beta))*180/Math.PI-0.5;
+ assert.equal(mesh[45],Math.round(expected));
+ assert.equal(mesh[89],89);assert.equal(mesh[90],90);assert.ok(mesh[0]===0&&mesh[179]===179);
+ assert.deepEqual([...planetographicRowsToMeshLatitude(rows,1,height,1,1)],[...rows]);
+ assert.throws(()=>planetographicRowsToMeshLatitude(rows,1,height,1,0.9),/axis ratio/);
 });

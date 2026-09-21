@@ -15,7 +15,7 @@
     "reference": "DAMIT model 6205, version 2022-07-13",
     "scaleKmPerSourceUnit": 1.0000000100385358,
     "metersPerSourceUnit": 1000.0000100385358,
-    "limitations": "The prograde radar/optical model6205 is selected because Rożek et al.2022 find it more consistent with WISE size determination than retrograde6204. The alternative pole remains unresolved. The convex-only model6203 is not substituted. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred.",
+    "limitations": "The prograde radar/optical model 6205 is selected because Rożek et al.2022 find it more consistent with WISE size determination than retrograde 6204. The alternative pole remains unresolved. The convex-only model 6203 is not substituted. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred.",
     "visibleDescription": "Radar and optical shape reconstruction. Radar-calibrated diameter: 1.45 ± 0.2 km. Grid marks unavailable mapped imagery; rotational phase is illustrative."
   },
   "periodHours": 2.39006,
@@ -23,7 +23,7 @@
     36,
     30
   ],
-  "modelLimitations": "The prograde radar/optical model6205 is selected because Rożek et al.2022 find it more consistent with WISE size determination than retrograde6204. The alternative pole remains unresolved. The convex-only model6203 is not substituted. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred.",
+  "modelLimitations": "The prograde radar/optical model 6205 is selected because Rożek et al.2022 find it more consistent with WISE size determination than retrograde 6204. The alternative pole remains unresolved. The convex-only model 6203 is not substituted. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/66623/shape.txt",
     "vertices": 1000,

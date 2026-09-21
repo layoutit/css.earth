@@ -270,6 +270,1475 @@
       ],
       "path": "observations/oifits/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
       "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/660/A34/fits/xsl_spectrum_X0036_merged_ncl_ncge.fits",
+      "path": "photometry/xsl_spectrum_X0036_merged_ncl_ncge.fits"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/crosscheck-kiehling-2061.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "form": {
+        "-source": "III/124/spectra",
+        "-out": "lambda,m(HR2061)",
+        "-out.max": "1000"
+      },
+      "requiredText": [
+        "m(HR2061)"
+      ],
+      "replacements": [
+        {
+          "pattern": "^#.*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^\\s*\\n",
+          "flags": "gm",
+          "replacement": ""
+        }
+      ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-03T063648_Alfori_A0B2J2C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-03T063648_Alfori_A0B2J2C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-03T063648_Alfori_A0B2J2C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-03T063648_Alfori_A0B2J2C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-03T063648_Alfori_A0B2J2C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-03T063648_Alfori_A0B2J2C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-03T063648_Alfori_A0B2J2C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-03T063648_Alfori_A0B2J2C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-03T063648_Alfori_A0B2J2C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-03T063648_Alfori_A0B2J2C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-03T063648_Alfori_A0B2J2C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-03T063648_Alfori_A0B2J2C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-03T072818_Alfori_A0B2J2C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-03T072818_Alfori_A0B2J2C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-03T072818_Alfori_A0B2J2C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-03T072818_Alfori_A0B2J2C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-03T072818_Alfori_A0B2J2C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-03T072818_Alfori_A0B2J2C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-03T072818_Alfori_A0B2J2C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-03T072818_Alfori_A0B2J2C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-03T072818_Alfori_A0B2J2C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-03T072818_Alfori_A0B2J2C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-03T072818_Alfori_A0B2J2C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-03T072818_Alfori_A0B2J2C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-05T041457_Alfori_A0B2J2C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-05T041457_Alfori_A0B2J2C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-05T041457_Alfori_A0B2J2C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-05T041457_Alfori_A0B2J2C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-05T041457_Alfori_A0B2J2C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-05T041457_Alfori_A0B2J2C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-05T041457_Alfori_A0B2J2C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-05T041457_Alfori_A0B2J2C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-05T041457_Alfori_A0B2J2C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-05T041457_Alfori_A0B2J2C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-05T041457_Alfori_A0B2J2C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-05T041457_Alfori_A0B2J2C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T020746_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T020746_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T020746_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T020746_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T020746_Alfori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T020746_Alfori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T020746_Alfori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T020746_Alfori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T020746_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T020746_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T020746_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T020746_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T030127_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T030127_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T030127_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T030127_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T030127_Alfori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T030127_Alfori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T030127_Alfori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T030127_Alfori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T030127_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T030127_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T030127_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T030127_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T053711_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T053711_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T053711_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T053711_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T053711_Alfori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T053711_Alfori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T053711_Alfori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T053711_Alfori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T053711_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T053711_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T053711_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T053711_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T062719_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T062719_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T062719_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T062719_Alfori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T062719_Alfori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T062719_Alfori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T062719_Alfori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T062719_Alfori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T062719_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T062719_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-08T062719_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-08T062719_Alfori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T053818_Alfori_K0B2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T053818_Alfori_K0B2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T053818_Alfori_K0B2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T053818_Alfori_K0B2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T053818_Alfori_K0B2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T053818_Alfori_K0B2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T053818_Alfori_K0B2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T053818_Alfori_K0B2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T053818_Alfori_K0B2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T053818_Alfori_K0B2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T053818_Alfori_K0B2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T053818_Alfori_K0B2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T065440_Alfori_K0B2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T065440_Alfori_K0B2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T065440_Alfori_K0B2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T065440_Alfori_K0B2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T065440_Alfori_K0B2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T065440_Alfori_K0B2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T065440_Alfori_K0B2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T065440_Alfori_K0B2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T065440_Alfori_K0B2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T065440_Alfori_K0B2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T070732_Alfori_K0B2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T070732_Alfori_K0B2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T070732_Alfori_K0B2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T070732_Alfori_K0B2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T070732_Alfori_K0B2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T070732_Alfori_K0B2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T070732_Alfori_K0B2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T070732_Alfori_K0B2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T070732_Alfori_K0B2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T070732_Alfori_K0B2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-09T070732_Alfori_K0B2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-09T070732_Alfori_K0B2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T043020_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T043020_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T043020_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T043020_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T043020_Alfori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T043020_Alfori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T043020_Alfori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T043020_Alfori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T043020_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T043020_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T043020_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T043020_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T051859_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T051859_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T051859_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T051859_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T051859_Alfori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T051859_Alfori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T051859_Alfori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T051859_Alfori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T051859_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T051859_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T051859_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T051859_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T060826_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T060826_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T060826_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T060826_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T060826_Alfori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T060826_Alfori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T060826_Alfori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T060826_Alfori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T060826_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T060826_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T060826_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T060826_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T063312_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T063312_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T063312_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T063312_Alfori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T063312_Alfori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T063312_Alfori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T063312_Alfori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T063312_Alfori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T063312_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T063312_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-11T063312_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-11T063312_Alfori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-12T043055_Alfori_A0G1D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-12T043055_Alfori_A0G1D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-12T043055_Alfori_A0G1D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-12T043055_Alfori_A0G1D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-12T043055_Alfori_A0G1D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-12T043055_Alfori_A0G1D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-12T043055_Alfori_A0G1D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-12T043055_Alfori_A0G1D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-12T061658_Alfori_A0G1D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-12T061658_Alfori_A0G1D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-12T061658_Alfori_A0G1D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-12T061658_Alfori_A0G1D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-12T061658_Alfori_A0G1D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-12T061658_Alfori_A0G1D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-12T061658_Alfori_A0G1D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-12T061658_Alfori_A0G1D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-14T054836_Alfori_A0G1J2J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-14T054836_Alfori_A0G1J2J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-14T054836_Alfori_A0G1J2J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-14T054836_Alfori_A0G1J2J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-14T054836_Alfori_A0G1J2J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-14T054836_Alfori_A0G1J2J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-14T054836_Alfori_A0G1J2J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-14T054836_Alfori_A0G1J2J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-14T072315_Alfori_A0G1J2J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-14T072315_Alfori_A0G1J2J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-14T072315_Alfori_A0G1J2J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-14T072315_Alfori_A0G1J2J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-14T072315_Alfori_A0G1J2J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-14T072315_Alfori_A0G1J2J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-14T072315_Alfori_A0G1J2J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-14T072315_Alfori_A0G1J2J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-15T041713_Alfori_A0G1J2K0_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-15T041713_Alfori_A0G1J2K0_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-15T041713_Alfori_A0G1J2K0_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-15T041713_Alfori_A0G1J2K0_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-15T041713_Alfori_A0G1J2K0_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-15T041713_Alfori_A0G1J2K0_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-15T041713_Alfori_A0G1J2K0_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-15T041713_Alfori_A0G1J2K0_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-15T041713_Alfori_A0G1J2K0_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-15T041713_Alfori_A0G1J2K0_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-15T041713_Alfori_A0G1J2K0_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-15T041713_Alfori_A0G1J2K0_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-15T055049_Alfori_A0G1J2K0_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-15T055049_Alfori_A0G1J2K0_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-15T055049_Alfori_A0G1J2K0_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-15T055049_Alfori_A0G1J2K0_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-15T055049_Alfori_A0G1J2K0_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-15T055049_Alfori_A0G1J2K0_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-15T055049_Alfori_A0G1J2K0_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-15T055049_Alfori_A0G1J2K0_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-15T055049_Alfori_A0G1J2K0_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-15T055049_Alfori_A0G1J2K0_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2018-12-15T055049_Alfori_A0G1J2K0_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2018-12-15T055049_Alfori_A0G1J2K0_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-14T062642_alfOri_A0G1J2J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-14T062642_alfOri_A0G1J2J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-14T062642_alfOri_A0G1J2J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-14T062642_alfOri_A0G1J2J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-14T062642_alfOri_A0G1J2J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-14T062642_alfOri_A0G1J2J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-14T062642_alfOri_A0G1J2J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-14T062642_alfOri_A0G1J2J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-14T062642_alfOri_A0G1J2J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-14T062642_alfOri_A0G1J2J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-14T062642_alfOri_A0G1J2J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-14T062642_alfOri_A0G1J2J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-14T072146_alfOri_A0G1J2J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-14T072146_alfOri_A0G1J2J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-14T072146_alfOri_A0G1J2J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-14T072146_alfOri_A0G1J2J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-14T072146_alfOri_A0G1J2J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-14T072146_alfOri_A0G1J2J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-14T072146_alfOri_A0G1J2J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-14T072146_alfOri_A0G1J2J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-14T072146_alfOri_A0G1J2J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-14T072146_alfOri_A0G1J2J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-14T072146_alfOri_A0G1J2J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-14T072146_alfOri_A0G1J2J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T042644_alf_Ori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T042644_alf_Ori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T042644_alf_Ori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T042644_alf_Ori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T042644_alf_Ori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T042644_alf_Ori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T042644_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T042644_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T042644_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T042644_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T042644_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T042644_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T051714_alf_Ori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T051714_alf_Ori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T051714_alf_Ori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T051714_alf_Ori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T051714_alf_Ori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T051714_alf_Ori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T051714_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T051714_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T051714_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T051714_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T051714_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T051714_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T053735_alf_Ori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T053735_alf_Ori_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T053735_alf_Ori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T053735_alf_Ori_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T053735_alf_Ori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T053735_alf_Ori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T053735_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T053735_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T053735_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T053735_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-18T053735_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T053735_alf_Ori_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T015650_alf_Ori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T015650_alf_Ori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T015650_alf_Ori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T015650_alf_Ori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T015650_alf_Ori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T015650_alf_Ori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T015650_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T015650_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T015650_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T015650_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T015650_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T015650_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T024353_alf_Ori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T024353_alf_Ori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T024353_alf_Ori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T024353_alf_Ori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T024353_alf_Ori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T024353_alf_Ori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T024353_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T024353_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T024353_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T024353_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T024353_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T024353_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
     }
   ]
 }

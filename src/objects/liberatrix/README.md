@@ -23,9 +23,9 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Ďurech2007 is the actual published collaboration-network shape source. Hanuš2018 TableA.3 uses its pole(95,68), period3.96820 h, QF3 and VS-TPM volume-equivalent diameter51.1±2.1 km. Only this uniform size transfer is applied to nominal DAMIT157. The alternative pole(280,74) has its own50.1±1.3 km fit and remains possible; the varied-model ensemble does not establish byte-identical local terrain.
+Ďurech 2007 is the actual published collaboration-network shape source. Hanuš 2018 TableA.3 uses its pole(95,68), period 3.96820 h, QF3 and VS-TPM volume-equivalent diameter 51.1±2.1 km. Only this uniform size transfer is applied to nominal DAMIT157. The alternative pole(280,74) has its own 50.1±1.3 km fit and remains possible; the varied-model ensemble does not establish byte-identical local terrain.
 
-Empirical VS-TPM interval formed from the smallest range of14 best-fit varied-shape solutions out of20 (approximately68% of models), as defined in Hanuš2018 section3. It is not an independent Gaussian confidence interval or a local surface accuracy bound.
+Empirical VS-TPM interval formed from the smallest range of 14 best-fit varied-shape solutions out of 20 (approximately 68% of models), as defined in Hanuš 2018 section 3. It is not an independent Gaussian confidence interval or a local surface accuracy bound.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

@@ -3,25 +3,25 @@
   "modelId": 3102,
   "modelVersion": "2019-06-24",
   "diameterKm": 87,
-  "diameterInterpretation": "Convex light-curve reconstruction; 87 km volume-equivalent diameter (published 3-sigma range78–98 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+  "diameterInterpretation": "Convex light-curve reconstruction; 87 km volume-equivalent diameter (published 3-sigma range 78–98 km). The grid marks unavailable imagery; rotational phase is illustrative.",
   "calibration": {
     "method": "published-volume-equivalent-size-transfer",
     "diameterKm": 87,
     "uncertaintyKm": 11,
     "reportedUncertaintyKm": 11,
-    "uncertaintyKind": "The publication has asymmetric3-sigma errors -9/+11 km. uncertaintyKm=11 is a conservative envelope for consumers requiring one symmetric field; the visible description retains the published78–98 km range.",
+    "uncertaintyKind": "The publication has asymmetric 3-sigma errors -9/+11 km. uncertaintyKm=11 is a conservative envelope for consumers requiring one symmetric field; the visible description retains the published 78–98 km range.",
     "diameterSemantics": "Published volume-equivalent diameter of the selected shape solution; isotropic transfer retains source shape and connectivity.",
     "sourceUrl": "https://arxiv.org/pdf/1905.06056",
     "reference": "Marciniak et al. (2019), A&A 625, A139",
     "sourceLabel": "Marciniak et al. (2019), A&A 625, A139",
-    "limitations": "Marciniak2019 Table1 gives 51 dense lightcurves over seven apparitions. AM1 (101,+71) gives slightly better thermal chi-square than AM2 (0.51 vs 0.60), but neither pole is decisively rejected. Section4.3 adopts 87 km with asymmetric 3-sigma range 78–98 km because WISE W4 fluxes lie systematically below the fitted model. This published uncertainty supersedes the archive ±6 km simplification.",
+    "limitations": "Marciniak 2019 Table 1 gives 51 dense lightcurves over seven apparitions. AM1 (101,+71) gives slightly better thermal chi-square than AM2 (0.51 vs 0.60), but neither pole is decisively rejected. Section 4.3 adopts 87 km with asymmetric 3-sigma range 78–98 km because WISE W4 fluxes lie systematically below the fitted model. This published uncertainty supersedes the archive ±6 km simplification.",
     "publishedUncertainty": {
       "lowerKm": 9,
       "upperKm": 11,
       "confidence": "3 sigma",
       "source": "Marciniak2019 section4.3 and Table2"
     },
-    "visibleDescription": "Convex light-curve reconstruction; 87 km volume-equivalent diameter (published 3-sigma range78–98 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+    "visibleDescription": "Convex light-curve reconstruction; 87 km volume-equivalent diameter (published 3-sigma range 78–98 km). The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 0.9999999655730225,
     "metersPerSourceUnit": 999.9999655730226,
     "sourceSignedVolume": 344791.40013818286,
@@ -38,7 +38,7 @@
     101,
     71
   ],
-  "modelLimitations": "Marciniak2019 Table1 gives 51 dense lightcurves over seven apparitions. AM1 (101,+71) gives slightly better thermal chi-square than AM2 (0.51 vs 0.60), but neither pole is decisively rejected. Section4.3 adopts 87 km with asymmetric 3-sigma range 78–98 km because WISE W4 fluxes lie systematically below the fitted model. This published uncertainty supersedes the archive ±6 km simplification.",
+  "modelLimitations": "Marciniak 2019 Table 1 gives 51 dense lightcurves over seven apparitions. AM1 (101,+71) gives slightly better thermal chi-square than AM2 (0.51 vs 0.60), but neither pole is decisively rejected. Section 4.3 adopts 87 km with asymmetric 3-sigma range 78–98 km because WISE W4 fluxes lie systematically below the fitted model. This published uncertainty supersedes the archive ±6 km simplification.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/9829/shape.txt",
     "vertices": 1018,

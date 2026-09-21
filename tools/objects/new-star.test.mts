@@ -4,10 +4,11 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { skyPlaneOrientation } from '@cssearth/astronomy';
 import { TODO, scaffoldStarFiles } from './new-star.mts';
+import { temperatureCatalogueColor } from './star-catalogue-color.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 const EPOCH = 2461286.5;
-const spec = { id: 'antares', name: 'Antares', system: 'Scorpius', color: '#ff8a5a', description: 'Red supergiant in Scorpius.', paper: 'https://arxiv.org/abs/1304.4800', paperCredit: 'Ohnaka et al. (2013)' };
+const spec = { id: 'antares', name: 'Antares', system: 'Scorpius', temperatureK: 3660, temperatureSource: 'Effective temperature 3660 ± 120 K from Ohnaka et al. 2013 (https://arxiv.org/abs/1304.4800), abstract.', description: 'Red supergiant in Scorpius.', paper: 'https://arxiv.org/abs/1304.4800', paperCredit: 'Ohnaka et al. (2013)' };
 
 test('a scaffold derives every number from the astronomy record and writes names unescaped', async () => {
   const record = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies/antares.json'), 'utf8')) as { star: { rightAscensionDegrees: number; declinationDegrees: number }; physical: { meanRadiusKm: number } };
@@ -21,7 +22,11 @@ test('a scaffold derives every number from the astronomy record and writes names
   assert.ok(Math.abs(au(descriptor.properties.worldFrame) - au(prepared.properties.worldFrame)) / au(prepared.properties.worldFrame) < 1e-9, 'the first frame is placed where preparation places the star');
   assert.equal(descriptor.properties.catalog.distanceAu, Math.round(au(descriptor.properties.worldFrame) * 10) / 10);
   assert.equal(descriptor.properties.recipe.shape.radiusKm, record.physical.meanRadiusKm);
-  assert.equal(json('source/preparation/geometry.json').surface.color, spec.color);
+  const color = temperatureCatalogueColor(spec.temperatureK);
+  assert.equal(descriptor.properties.catalog.color, color, 'the catalogue colour is the star field colour at the cited temperature');
+  assert.equal(json('source/preparation/geometry.json').surface.color, color);
+  assert.equal(json('source/measurements.json').effectiveTemperatureK, spec.temperatureK);
+  assert.equal(json('source/measurements.json').effectiveTemperatureSource, spec.temperatureSource);
   assert.equal(json('source/content/object.json').provenance.editorial.url, spec.paper);
   const manifest = json('source/manifest.json');
   assert.equal(manifest.documents.find((document: { path: string }) => document.path === 'content/object.json').sourceBinding.kind, 'local', 'provenance needs the content record bound');
@@ -38,6 +43,8 @@ test('prose the scaffold cannot know is marked, and the package it writes matche
     assert.equal(files.get(`src/objects/antares/${path}`), await readFile(resolve(root, 'src/objects/antares', path), 'utf8'), path);
   }
   assert.deepEqual(JSON.parse(files.get('src/objects/antares/source/presentation/solar-system.json')!), JSON.parse(await readFile(resolve(root, 'src/objects/antares/source/presentation/solar-system.json'), 'utf8')));
-  assert.throws(() => scaffoldStarFiles({ ...spec, color: 'orange' }, record, EPOCH), /colour/u);
+  assert.throws(() => scaffoldStarFiles({ ...spec, temperatureK: Number.NaN }, record, EPOCH), /effectiveTemperatureK/u);
+  assert.throws(() => scaffoldStarFiles({ ...spec, temperatureK: 100 }, record, EPOCH), /1,000 and 40,000 K/u);
+  assert.throws(() => scaffoldStarFiles({ ...spec, temperatureSource: 'Ohnaka et al. 2013' }, record, EPOCH), /URL/u);
   assert.throws(() => scaffoldStarFiles(spec, { ...record, star: { ...record.star, presentationUp: undefined } }, EPOCH), /presentationUp/u);
 });

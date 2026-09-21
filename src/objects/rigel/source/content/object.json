@@ -36,22 +36,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "color",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-        "thumbnail": "rigel-lens-shape.webp",
-        "surface": "rigel-surface-shape@2x.webp",
-        "poles": "rigel-poles-shape@2x.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The disc is unresolved, and no darkening toward the edge is measured.",
+        "thumbnail": "rigel-lens-color.webp",
+        "surface": "rigel-surface-color@2x.webp",
+        "poles": "rigel-poles-color@2x.webp",
         "source": {
-          "id": "rigel-observational-measurements",
+          "id": "rigel-stellar-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/1201.0843"
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
         },
         "falseColor": false,
-        "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+        "notes": "The colour of Rigel's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. No resolved image of the surface is cast; the display axis is celestial north, a convention."
       }
     ]
   },
@@ -66,6 +66,12 @@
       "role": "facts",
       "description": "Moravveji, Guinan, Shultz et al., \"Asteroseismology of the nearby SN-II progenitor Rigel. Part I\", ApJ 747, 108 (2012), arXiv:1201.0843",
       "href": "https://arxiv.org/abs/1201.0843"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "Pulkovo spectrophotometric catalogue, HR 1713 (VizieR III/201)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
     }
   ],
   "provenance": {

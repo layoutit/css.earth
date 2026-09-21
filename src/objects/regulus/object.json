@@ -1,0 +1,152 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "regulus",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Regulus",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "ellipsoid",
+        "radiusKm": 2928897,
+        "polarRadiusKm": 2240154
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/regulus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d989a61136157738fb1f7a76c1bd6e877a068a722214a2590233e2342f4e9975"
+      }
+    },
+    "catalog": {
+      "name": "Regulus",
+      "classification": "star",
+      "color": "#b0c7ff",
+      "distanceAu": 5014961.5,
+      "description": "Blue-white star in Leo that spins so fast its equator bulges.",
+      "systemName": "Leo",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -648561852807674200,
+        343525129524147900,
+        155561603396336600
+      ],
+      "presentationToReference": [
+        -0.8356129556991586,
+        -0.4746266393348234,
+        -0.2765511553066583,
+        0.5139961459841823,
+        -0.853183592564448,
+        -0.08880157257745622,
+        0.1938013162522979,
+        0.21634997252727695,
+        -0.9568875269363287
+      ],
+      "orbitUpReference": [
+        0.4746266393348234,
+        0.853183592564448,
+        -0.21634997252727695
+      ],
+      "metersPerUnit": 9448054.838709677,
+      "bodyRadiusM": 2928897000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "82618e69d6a3992cc7012e48e66a1a8558baef9ebb7793d8df3e46507cd05981"
+  }
+}

@@ -23,9 +23,9 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-The selected convex pole(9,−4) remains one of two possible orientations. Ďurech2011 fits three occultation chords (two close together) at125±15 km and cannot distinguish the poles. Hanuš2013 Table3 obtains volume-equivalent104±11 km for this pole from one Keck AO observation, matching the later archive comment.
+The selected convex pole(9,−4) remains one of two possible orientations. Ďurech 2011 fits three occultation chords (two close together) at 125±15 km and cannot distinguish the poles. Hanuš 2013 Table 3 obtains volume-equivalent 104±11 km for this pole from one Keck AO observation, matching the later archive comment.
 
-This newer resolved-image scale is explicitly transferred to the original mesh, rather than treating the archived125 km coordinates as final physical kilometers. One-image size and local morphology remain uncertain.
+This newer resolved-image scale is explicitly transferred to the original mesh, rather than treating the archived 125 km coordinates as final physical kilometers. One-image size and local morphology remain uncertain.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

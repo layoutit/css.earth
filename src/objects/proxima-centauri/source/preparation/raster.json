@@ -21,14 +21,15 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "color",
       "output": "proxima-centauri-surface-{id}{suffix}.webp",
       "thumbnail": "proxima-centauri-lens-{id}.webp",
-      "source": "measurements.json",
+      "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+        "kind": "stellar-photometric-color",
+        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+        "qualification": "Uniform photosphere colour from the star's HST/STIS spectrum (LowLib). The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
       }
     }
   ],

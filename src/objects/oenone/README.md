@@ -23,9 +23,9 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Choukroun2025 Table4 explicitly defines D as the equivalent-volume sphere diameter, and the unchanged CITPM mesh independently yields 37 km. Its pole (45,+85) identifies Table4 pole1. The 46±1 km occultation comment belongs to the paper’s separate lightcurve-only shape (section4.2); that shape is explicitly less smooth and is not interchangeable with this CITPM mesh.
+Choukroun 2025 Table 4 explicitly defines D as the equivalent-volume sphere diameter, and the unchanged CITPM mesh independently yields 37 km. Its pole (45,+85) identifies Table 4 pole 1. The 46±1 km occultation comment belongs to the paper’s separate lightcurve-only shape (section 4.2); that shape is explicitly less smooth and is not interchangeable with this CITPM mesh.
 
-Both mirror poles fit the occultation similarly; select model16312 as pole1 without rejecting4825. The thermal/occultation size discrepancy remains visible rather than transferring the other mesh’s diameter.
+Both mirror poles fit the occultation similarly; select model 16312 as pole 1 without rejecting 4825. The thermal/occultation size discrepancy remains visible rather than transferring the other mesh’s diameter.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

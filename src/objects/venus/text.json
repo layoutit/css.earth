@@ -38,8 +38,8 @@
     },
     "elevation": {
       "title": "C3-MDIR colorized topography",
-      "detail": "Shaded relief",
-      "summary": "Colors show elevation and shading shows slopes, for terrain beneath the clouds."
+      "detail": "Topography on radar",
+      "summary": "Colors show elevation over the radar mosaic. The scale wraps, so the highest peaks look purple again."
     },
     "ultraviolet": {
       "title": "Akatsuki ultraviolet photograph",

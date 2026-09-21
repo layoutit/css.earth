@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "autonoe",
+  "entries": [
+    {
+      "id": "magnitude-size-estimate",
+      "subject": "Size: estimate from the JPL Horizons magnitude and an assumed albedo",
+      "status": "included",
+      "finding": "Autonoe is drawn as a sphere of about 4.8 km diameter (radius 2.4 km), estimated from the apparent magnitude JPL Horizons gives for body 528 (23.377 on 2026-Sep-03, H = 15.7 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured, and ignoring the phase term slightly understates it.",
+      "evidence": [
+        "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27528%27&OBJ_DATA=YES&MAKE_EPHEM=NO"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "44bf8eac22a856a14d6ea0b3537a86ecaab33e78"
+        }
+      ]
+    }
+  ]
+}

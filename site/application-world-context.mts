@@ -1,3 +1,7 @@
+import { LENS_VISIBILITY, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
+// Generated after the prepared lens payloads are restored, so typechecks never need it: text now, validated below.
+import lensBillboardText from './prepared-lens-billboards.json?raw';
+import lensBillboardAtlasUrl from './prepared-lens-billboards.webp?url';
 import { labelOcclusionFor } from '../src/renderers/css/dist/index.js';
 import galaxyFieldDescriptor from '../src/objects/nearby-universe/object.json' with { type: 'json' };
 import galaxyDisplaySample from '../src/objects/local-group/prepared/display-sample.json' with { type: 'json' };
@@ -7,8 +11,8 @@ import { loadFocusCatalogs } from './focus-catalog.mts';
 import { parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { createSpaceMinimapSetting } from './minimap/minimap-setting.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
-import { createPreparedUniverse, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses, createRetainedGeometrySnapshot } from '../src/renderers/css/dist/universe.js';
-import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_CONTEXT_URL } from './world-context-plan.mts';
+import { createPreparedUniverse, parseLensBillboards, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses, createRetainedGeometrySnapshot } from '../src/renderers/css/dist/universe.js';
+import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE } from './world-context-plan.mts';
 import { contextMarkerSprite, contextAnnotationOpacity } from '../src/navigation/marker-presentation.mts';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
@@ -27,6 +31,8 @@ import { createInFlightLoader } from './in-flight-loader.mts';
 
 const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
 const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
+// Phones get a lighter scene: no celestial sky cube, and no ordinary asteroid markers (see discoveryVisibility).
+const phone = globalThis.matchMedia?.(MOBILE_VIEWPORT_QUERY).matches === true;
 const ordinaryAsteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !isDefaultContextFeature(object)).map(object => object.id);
 const ASTRONOMICAL_UNIT_M = 149_597_870_700;
 const minorMoonIds = minorMoonOrbitIds(applicationContext.bodies);
@@ -109,7 +115,10 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // selected or comes into view. This mirrors loadShells' deferral, one bank at a time.
     const volumeLensDescriptors = Object.values(descriptors).map(parseObjectDescriptor)
       .filter(descriptor => descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available);
-    const volumeLensBanks = volumeLensDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame) }));
+    const volumeLensBanks = volumeLensDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame),
+      sha256: descriptor.prepared?.sha256 ?? (() => { throw new TypeError(`${descriptor.id}: volume lens bank is not pinned.`); })() }));
+    // Every bank's context visibility and Sun-facing billboard, prepared from those same pinned payloads.
+    const lensBillboards = { plan: parseLensBillboards(JSON.parse(lensBillboardText)), atlasUrl: lensBillboardAtlasUrl };
     const loadVolumeLens = createInFlightLoader(async (id: string) => {
       const descriptor = volumeLensDescriptors.find(candidate => candidate.id === id);
       if (!descriptor) throw new TypeError(`Unknown prepared volume lens bank: ${id}.`);
@@ -118,11 +127,14 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     });
     // The worker reads its own prepared context. The bounded spatial-star sample is
     // already inside pointAppearance; the complete binary catalogue stays out of the app.
-    const plannerSource = { contextUrl: APPLICATION_WORLD_CONTEXT_URL };
+    const plannerSource = APPLICATION_WORLD_PLANNER_SOURCE;
     const catalogBank = { fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM, fullDistanceM: galaxyPresentation.fullDistanceM,
       clusters: { fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } };
     const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: backgroundPointSet.resolve('prepared/points.json'), backgroundPointCloud: backgroundPointSet.resolve('prepared/cloud.webp'), annotationPriorities, annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
+      lensVisibility: LENS_VISIBILITY, lensBillboards,
+      // Phones draw no celestial sky cube: about 60 MB of layers and 27 MB of decoded faces behind the body.
+      sky: !phone,
       loadCatalog: async () => {
         const { galaxies, clusters, nebulae } = await loadCatalogs();
         return { payload: galaxies, galaxySample: galaxyDisplaySample, nebulae, ...catalogBank,
@@ -187,7 +199,7 @@ export function createApplicationWorldContext() {
         // Discovery keeps a system without imagery off the default map, not out of its own view.
         let openSystem: ReadonlySet<string> = new Set();
         const updateDiscoveryVisibility = () => {
-          const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations: illustrationModelsEnabled, highlighted: highlightedClassification });
+          const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations: illustrationModelsEnabled, highlighted: highlightedClassification, compact: phone });
           const hiddenBodies = visibility.hiddenBodies.filter(id => !openSystem.has(id)), hiddenLabels = visibility.hiddenLabels.filter(id => !openSystem.has(id));
           const { highlightedBodies } = visibility;
           layer.setHiddenBodies(hiddenBodies);

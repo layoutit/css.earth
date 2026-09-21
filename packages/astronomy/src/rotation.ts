@@ -181,24 +181,76 @@ const MODELS: Record<string, Model> = {
     spinRateDegPerDay: 350.891982443297,
   }),
 
+  // Phobos and Deimos: the 2015 report as corrected by Archinal et al. (2019),
+  // transcribed from NAIF `pck00011.tpc` (BODY401_*, BODY402_*). The angles
+  // M1 to M10 are the first ten BODY4_NUT_PREC_ANGLES, in degrees with T in
+  // Julian centuries; M5 alone has a quadratic term (BODY4_MAX_PHASE_DEGREE = 2).
   phobos: (d, T) => {
-    const m1 = 169.51 - 0.436264 * d
-    const m2 = 192.93 + 1128.40967 * d + 8.864 * T * T
+    const m1 = 190.72646643 + 15917.10818695 * T
+    const m2 = 21.4689247 + 31834.27934054 * T
+    const m3 = 332.86082793 + 19139.89694742 * T
+    const m4 = 394.93256437 + 38280.79631835 * T
+    const m5 = 189.6327156 + 41215158.1842005 * T + 12.711923222 * T * T
     return {
-      rightAscensionDeg: 317.68 - 0.108 * T + 1.79 * sinDeg(m1),
-      declinationDeg: 52.9 - 0.061 * T - 1.08 * cosDeg(m1),
-      primeMeridianDeg: 35.06 + 1128.844585 * d + 8.864 * T * T - 1.42 * sinDeg(m1) - 0.78 * sinDeg(m2),
-      spinRateDegPerDay: 1128.844585,
+      rightAscensionDeg:
+        317.67071657 -
+        0.10844326 * T -
+        1.78428399 * sinDeg(m1) +
+        0.02212824 * sinDeg(m2) -
+        0.01028251 * sinDeg(m3) -
+        0.00475595 * sinDeg(m4),
+      declinationDeg:
+        52.88627266 -
+        0.06134706 * T -
+        1.07516537 * cosDeg(m1) +
+        0.00668626 * cosDeg(m2) -
+        0.0064874 * cosDeg(m3) +
+        0.00281576 * cosDeg(m4),
+      primeMeridianDeg:
+        35.1877444 +
+        1128.84475928 * d +
+        12.72192797 * T * T +
+        1.42421769 * sinDeg(m1) -
+        0.02273783 * sinDeg(m2) +
+        0.00410711 * sinDeg(m3) +
+        0.00631964 * sinDeg(m4) -
+        1.143 * sinDeg(m5),
+      spinRateDegPerDay: 1128.84475928,
     }
   },
 
   deimos: (d, T) => {
-    const m3 = 53.47 - 0.018151 * d
+    const m6 = 121.46893664 + 660.22803474 * T
+    const m7 = 231.05028581 + 660.9912354 * T
+    const m8 = 251.37314025 + 1320.50145245 * T
+    const m9 = 217.98635955 + 38279.9612555 * T
+    const m10 = 196.19729402 + 19139.83628608 * T
     return {
-      rightAscensionDeg: 316.65 - 0.108 * T + 2.98 * sinDeg(m3),
-      declinationDeg: 53.52 - 0.061 * T - 1.78 * cosDeg(m3),
-      primeMeridianDeg: 79.41 + 285.161897 * d - 0.52 * T * T - 2.58 * sinDeg(m3) + 0.19 * cosDeg(m3),
-      spinRateDegPerDay: 285.161897,
+      rightAscensionDeg:
+        316.65705808 -
+        0.10518014 * T +
+        3.09217726 * sinDeg(m6) +
+        0.22980637 * sinDeg(m7) +
+        0.06418655 * sinDeg(m8) +
+        0.02533537 * sinDeg(m9) +
+        0.00778695 * sinDeg(m10),
+      declinationDeg:
+        53.50992033 -
+        0.05979094 * T +
+        1.83936004 * cosDeg(m6) +
+        0.1432532 * cosDeg(m7) +
+        0.01911409 * cosDeg(m8) -
+        0.0148259 * cosDeg(m9) +
+        0.0019243 * cosDeg(m10),
+      primeMeridianDeg:
+        79.39932954 +
+        285.16188899 * d -
+        2.73954829 * sinDeg(m6) -
+        0.39968606 * sinDeg(m7) -
+        0.06563259 * sinDeg(m8) -
+        0.0291294 * sinDeg(m9) +
+        0.0169916 * sinDeg(m10),
+      spinRateDegPerDay: 285.16188899,
     }
   },
 

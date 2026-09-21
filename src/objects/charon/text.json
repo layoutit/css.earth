@@ -14,7 +14,7 @@
     ]
   },
   "introduction": {
-    "text": "Charon and Pluto always keep the same faces turned toward each other. James Christy and Robert Harrington found it in 1978.",
+    "text": "Charon and Pluto always keep the same faces turned toward each other. James Christy spotted it in 1978, working with Robert Harrington.",
     "sources": [
       {
         "catalogueId": "nasa-pluto-moons",
@@ -44,7 +44,7 @@
     "albedo": {
       "title": "New Horizons modeled Bond albedo",
       "detail": "Photometric model",
-      "summary": "Estimated share of sunlight Charon reflects, from 0.1 to 0.5, modeled from LORRI brightness."
+      "summary": "Modeled share of sunlight Charon reflects, 0.02 to 0.53; the legend ends at 0.1 and 0.5 saturate."
     },
     "water-ice": {
       "title": "Water-ice absorption",

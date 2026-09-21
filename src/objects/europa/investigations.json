@@ -70,7 +70,7 @@
       "id": "controlled-galileo-color",
       "subject": "USGS controlled Galileo SSI color sequences",
       "status": "included",
-      "finding": "G1ESGLOBAL01, 12ESGLOCOL01 and 14ESGLOCOL01 supply Enhanced color only where registered three-band support is present.",
+      "finding": "G1ESGLOBAL01, 12ESGLOCOL01 and 14ESGLOCOL01 supply False color only where registered three-band support is present.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/README.md",
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/source/manifest.json",

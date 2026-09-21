@@ -14,11 +14,11 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
 
-| View | Original grid | Both lighting images, before → current |
+| View | Original grid | Both lighting images (surface + shadow) |
 | --- | --- | --- |
-| normal | 14400 × 7200 | 10.16 → 10.84 MB |
+| normal | 14400 × 7200 | 10.93 MB (7,680,016 + 3,252,062 bytes) |
 
-Each atlas remains 2048 × 12800 pixels, with 1600 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/phobos/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
+Each atlas is 5010 × 5217 pixels, with 1600 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/phobos/prepared). WebP quality is 95. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
 
 - Exact GeoTIFF origin, scale and missing value are checked by the recipe.
 
@@ -59,7 +59,7 @@ The [Ernst et al. (2023) SPC shape](https://doi.org/10.1186/s40623-023-01814-7) 
 
 Physical size, orbit and IAU rotation use the vendored astronomy package at the shared scene epoch. Shape and cartographic products have different source histories; their registration must be inspected at Stickney and the opposite hemisphere. A display mesh cannot remove the source mosaic's residual control errors.
 
-Inputs, original URLs, byte lengths and SHA-256 pins are recorded in `source/manifest.json`. `source/observations/map-guide.html` is the upstream Stooke map documentation; the SBMT label accompanies the mesh. Prepared surface, lighting, minimap and navigation imagery must be generated from this same interpretation. Shared controls, camera and shell remain generic.
+Inputs, original URLs, byte lengths and SHA-256 pins are recorded in `source/manifest.json`. The [Stooke map guide](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html) (Stooke Small Bodies Maps V3.0, MULTI-SA-MULTI-6-STOOKEMAPS-V3.0) states that the maps are in the public domain but should not be used without proper credit; the SBMT label accompanies the mesh. Prepared surface, lighting, minimap and navigation imagery must be generated from this same interpretation. Shared controls, camera and shell remain generic.
 
 ## B2 facet science and terrain
 

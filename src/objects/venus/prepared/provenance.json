@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a083b4acedfd7feb5c8b2e532160836ab584b7405bf7ae60703720981f131a21"
+    "sha256": "f3b49e9d6569f749e0d4e00971dffe33c839bf5b0b528c9a6454f2f23243018f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -129,7 +129,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "38d5c7e99558f8b8405cde64ad7389b90547f144375d65ecfe6f07b745521044",
+      "sha256": "402317e1c1a6db45acea375770e2bd17f0e7140e77d0e40bee90199997034770",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -209,11 +209,11 @@
             {
               "id": "axial-tilt",
               "label": "Axial tilt",
-              "value": "177.3°",
+              "value": "177.4°",
               "source": {
-                "url": "https://solarsystem.nasa.gov/internal_resources/1028/",
-                "label": "NASA/JPL reference",
-                "checked": "2026-09-08",
+                "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html",
+                "label": "NASA NSSDCA Venus Fact Sheet",
+                "checked": "2026-09-21",
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "nasa-venus-factsheet",
                 "locator": "/references/2; axial-tilt"
@@ -277,7 +277,7 @@
               },
               "poles": "venus-poles-clouds@2x.webp",
               "material": "venus-material@2x.webp",
-              "shortLabel": "VIS",
+              "shortLabel": "Illustration",
               "qualification": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
               "falseColor": false,
               "notes": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck."
@@ -311,51 +311,174 @@
               "material": "venus-observation-material@2x.webp",
               "legend": {
                 "kind": "scale",
-                "title": "Relative elevation",
+                "title": "Elevation",
+                "labels": [
+                  "−3",
+                  "4",
+                  "11"
+                ],
+                "meta": "km relative to a 6,051 km radius",
+                "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m",
                 "recipe": {
                   "palette": [
                     [
-                      52,
-                      24,
-                      111
+                      98,
+                      68,
+                      134
                     ],
                     [
-                      41,
-                      85,
+                      108,
+                      63,
                       151
                     ],
                     [
-                      40,
-                      152,
-                      132
+                      108,
+                      63,
+                      151
                     ],
                     [
-                      104,
-                      173,
+                      108,
+                      63,
+                      151
+                    ],
+                    [
+                      108,
+                      63,
+                      153
+                    ],
+                    [
+                      89,
+                      62,
+                      153
+                    ],
+                    [
+                      67,
+                      92,
+                      164
+                    ],
+                    [
+                      70,
+                      168,
+                      105
+                    ],
+                    [
+                      111,
+                      167,
                       69
                     ],
                     [
-                      205,
-                      105,
-                      82
+                      165,
+                      136,
+                      58
                     ],
                     [
-                      231,
-                      202,
-                      190
+                      163,
+                      98,
+                      61
+                    ],
+                    [
+                      166,
+                      82,
+                      62
+                    ],
+                    [
+                      171,
+                      72,
+                      64
+                    ],
+                    [
+                      173,
+                      64,
+                      63
+                    ],
+                    [
+                      179,
+                      57,
+                      64
+                    ],
+                    [
+                      178,
+                      56,
+                      76
+                    ],
+                    [
+                      174,
+                      55,
+                      89
+                    ],
+                    [
+                      172,
+                      57,
+                      107
+                    ],
+                    [
+                      170,
+                      58,
+                      127
+                    ],
+                    [
+                      172,
+                      56,
+                      148
+                    ],
+                    [
+                      161,
+                      58,
+                      153
+                    ],
+                    [
+                      145,
+                      63,
+                      153
+                    ],
+                    [
+                      136,
+                      62,
+                      157
+                    ],
+                    [
+                      124,
+                      61,
+                      154
+                    ],
+                    [
+                      113,
+                      62,
+                      152
+                    ],
+                    [
+                      104,
+                      64,
+                      154
+                    ],
+                    [
+                      102,
+                      62,
+                      152
+                    ],
+                    [
+                      102,
+                      62,
+                      152
+                    ],
+                    [
+                      102,
+                      62,
+                      152
                     ]
                   ],
                   "labels": [
-                    "Lower",
-                    "Higher"
+                    "−3",
+                    "4",
+                    "11"
                   ]
-                },
-                "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m"
+                }
               },
+              "legendNote": "From the USGS legend. Colors wrap: peaks above about 8 km turn purple again, like lowlands below 0 km. Shading is radar, not height.",
               "shortLabel": "DEM",
               "qualification": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic",
               "falseColor": true,
-              "notes": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic with shaded relief. This archival scientific visualization is not visible surface color."
+              "notes": "USGS/NASA Magellan C3-MIDR radar mosaic overlain with colorized topography. Hue shows elevation from −3 to 11 km on a 6,051 km reference radius and wraps back to purple above about 8 km; brightness is the radar image. This archival scientific visualization is not visible surface color."
             },
             {
               "id": "ultraviolet",
@@ -939,8 +1062,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "38d5c7e99558f8b8405cde64ad7389b90547f144375d65ecfe6f07b745521044",
-      "bytes": 16685,
+      "sha256": "402317e1c1a6db45acea375770e2bd17f0e7140e77d0e40bee90199997034770",
+      "bytes": 19316,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1431,8 +1554,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 11303,
-          "sha256": "75bde1bc0518636ed858fff3f9288b436c3211617c6a8f701724e658ad891229",
+          "bytes": 11322,
+          "sha256": "d149ed012d6efba317a149dc855f3ca589a2e9cbb612e8d74dda3f6489c37362",
           "verification": "bytes-verified"
         }
       ],
@@ -1667,7 +1790,7 @@
   },
   "lastPreparation": {
     "objectId": "venus",
-    "materialSha256": "07f4ccc047063e16a66be2abd411996f0ea8ce42fc92ad97a58b9b8b76b9d80a",
+    "materialSha256": "ab4f63ef180cb9f7f5ca58c1c268312e2e3608bc950d585c035e9e37affe0593",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

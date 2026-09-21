@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ff18bc3b511f464e13727a9bd564ad0b2b243682bbb2352dd5da8f007bfb27d7"
+    "sha256": "8af3008c8fd1e3a4b0546e7413ff4f3ae5525b3745d89b1242eb24484107fdba"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "e0f3b1f541f5efee4049a29c3615cd60d4cd746e0e76300e113c9e5121570471"
+    "bindingsSha256": "2dbd5a4e6ab7a939343f355e83bfd127608dc0631efdfa10be38ac12613523da"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "e9191bef4e52b9e66726e5a8fb675a73c9bc43e9b020bde5f723808bd8bbe1a8",
+      "sha256": "c8cb672ee9273569da8721100cf7404eebf8ff22b07317aa056a28e0a2efb46b",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/io/",
@@ -76,7 +76,7 @@
             "output": "io-{id}{suffix}.webp",
             "thumbnail": "io-lens-{id}.webp",
             "source": "io-color-1km.tif",
-            "falseColor": false,
+            "falseColor": true,
             "science": {
               "kind": "terrestrial-observation",
               "input": "usgs-enhanced-global-1km",
@@ -544,7 +544,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a97f0afa9de013afac8addaf5b08c47392fd5cceb4639a32f5c8730bc377f984",
+      "sha256": "d1ca5b545c97d55c37a301091e89e9ecce973d45f852325e0b4f453d39c78e60",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -600,11 +600,11 @@
               "label": "Orbit around Jupiter",
               "value": "1.77 days · sidereal",
               "source": {
-                "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
-                "label": "PDS/IAU sidereal rate",
-                "checked": "2026-09-08",
+                "url": "https://doi.org/10.1007/s10569-017-9805-5",
+                "label": "IAU WGCCRE 2015 sidereal rate",
+                "checked": "2026-09-21",
                 "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
+                "catalogueId": "iau-wgccre-2015",
                 "locator": "/references/2; orbital-period"
               }
             },
@@ -613,11 +613,11 @@
               "label": "Rotation period",
               "value": "1.77 days · synchronous",
               "source": {
-                "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
-                "label": "PDS/IAU sidereal rate",
-                "checked": "2026-09-08",
+                "url": "https://doi.org/10.1007/s10569-017-9805-5",
+                "label": "IAU WGCCRE 2015 sidereal rate",
+                "checked": "2026-09-21",
                 "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
+                "catalogueId": "iau-wgccre-2015",
                 "locator": "/references/2; rotation-period"
               }
             }
@@ -657,7 +657,7 @@
             },
             {
               "id": "enhanced",
-              "label": "Enhanced color",
+              "label": "False color",
               "thumbnail": "io-lens-enhanced.webp",
               "surface": "io-enhanced@2x.webp",
               "poles": "io-poles-enhanced@2x.webp",
@@ -665,7 +665,8 @@
                 "id": "usgs-enhanced-global-1km",
                 "path": "../manifest.json"
               },
-              "notes": "USGS enhanced-color mosaic: near-infrared, green and violet color ratios combined with observed monochrome detail. USGS corrected broad limb darkening and matched image seams. Source color detail varies from 1.3 to 21 km per pixel. Interpolated polar color is withheld; observed monochrome remains where available. Gray grid marks missing imagery. Acquisition shading, seams and changes between mission dates can remain; globe lighting is approximate.",
+              "falseColor": true,
+              "notes": "USGS false-color mosaic: near-infrared, green and violet color ratios combined with observed monochrome detail. USGS corrected broad limb darkening and matched image seams. Source color detail varies from 1.3 to 21 km per pixel. Interpolated polar color is withheld; observed monochrome remains where available. Gray grid marks missing imagery. Acquisition shading, seams and changes between mission dates can remain; globe lighting is approximate.",
               "noData": true
             },
             {
@@ -1326,7 +1327,7 @@
       "acquisition": "Download the published GeoTIFF and verify pinned bytes before preparation.",
       "redistribution": "Reacquirable source binary excluded from Git; prepared textures retain credits.",
       "lensId": "enhanced",
-      "label": "Enhanced color",
+      "label": "False color",
       "falseColor": true,
       "width": 11445,
       "height": 5723,
@@ -1940,8 +1941,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "a97f0afa9de013afac8addaf5b08c47392fd5cceb4639a32f5c8730bc377f984",
-      "bytes": 19010,
+      "sha256": "d1ca5b545c97d55c37a301091e89e9ecce973d45f852325e0b4f453d39c78e60",
+      "bytes": 18920,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2108,7 +2109,7 @@
     },
     {
       "id": "enhanced",
-      "label": "Enhanced color",
+      "label": "False color",
       "recipe": "raster",
       "selector": "/surfaces/1",
       "observationAttribution": "source-lineage",
@@ -2122,7 +2123,7 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false,
+        "falseColor": true,
         "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
@@ -2602,8 +2603,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4244,
-          "sha256": "b1c7f3d32a74b9c70df8e0c81e1e0d30a1f861f1c62391fe838f96d075687ae1",
+          "bytes": 4132,
+          "sha256": "18faf9e92f87ccf170ebebc2c3a67db8e7e480ebf63589babcca5db09d22584b",
           "verification": "bytes-verified"
         }
       ],
@@ -2671,7 +2672,7 @@
     },
     {
       "id": "preview:enhanced",
-      "label": "Enhanced color preview",
+      "label": "False color preview",
       "recipe": "raster",
       "selector": "/surfaces/1",
       "recipeDependencies": [
@@ -2801,11 +2802,11 @@
   },
   "lastPreparation": {
     "objectId": "io",
-    "materialSha256": "26e7d8646de983cf3ba694b3ebbb5f504c5a2511cabd88837b3b8a7d9d2e7e57",
+    "materialSha256": "b9296c800c94385e57aeca0e8507d3bec2f47708f46ad8c6c17aec66ec200d43",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "e0f3b1f541f5efee4049a29c3615cd60d4cd746e0e76300e113c9e5121570471"
+      "bindingsSha256": "2dbd5a4e6ab7a939343f355e83bfd127608dc0631efdfa10be38ac12613523da"
     }
   }
 }

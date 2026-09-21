@@ -34,6 +34,8 @@ the 25 × 25 pixel window around the star and resamples it eight times finer to 
 beam is 20.7 × 16.8 mas, four native pixels wide. The lens palette is the heat scale used for Betelgeuse and π¹ Gruis; the
 legend reads relative brightness at 338 GHz, not colour or temperature.
 
+**Colour lens.** The colour of R Doradus's VLT/UVES spectrum. It was taken on 27 December 2002 through a narrow slit with the atmospheric dispersion corrector off, so the colour is uncertain; R Doradus also varies. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.mts](../../../tools/objects/observation/stellar-photometric-color.mts)): **#ff6725**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). No model limb darkening is added: the giant's gravity is below the Claret & Bloemen (2011) grid, and the ALMA lens shows its measured disc. The catalogue swatch and the minimap use the same colour; the navigation marker stays the image. [stellar-spectra/author.mts](../../../tools/objects/source-authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them. No second, independent spectrum was found: the ESO UVES files are this same night, and the star is too bright for Gaia XP and absent from the spectral libraries.
+
 ## Evidence
 
 **The disc agrees with the published fit.** Measured here on the archive image: half-power diameter 60 mas, against the
@@ -49,6 +51,7 @@ sub-pixel: rounding it to the 5 mas archive grid inflates the residual from 3.1%
 
 **Independent of ours,** the authors conclude the structures are intrinsic to the star from their correspondence across
 epochs, including band 6 observations at 225 GHz fifteen days later, and measure a typical lifetime of at least three weeks.
+- Run of 2026-09-21 (this version): [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ff6725 is the colour lens's prepared colour; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour from the pinned spectrum.
 
 ## Known problems
 

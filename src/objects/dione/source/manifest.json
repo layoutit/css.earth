@@ -951,7 +951,7 @@
     {
       "path": "observations/catalog.json",
       "expectedBytes": 2333,
-      "expectedSha256": "d0f1338ced2baf599b5f94ab627bfc41755ee7704a7060b47f8771621a0e7627"
+      "expectedSha256": "0d5fec841a6bb7032121de1762fd50b323cff19292212f85d3646e03510bc56e"
     },
     {
       "path": "observations/productdescription.pdf",
@@ -976,7 +976,7 @@
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 10688,
-      "expectedSha256": "8e48728dbbf657a611a5fb65f64fcb70b5afa9c994551ae166ba122443426d92"
+      "expectedSha256": "0b94f9661ade83283462d548991792ad1e1b9260399932526086f547600903c2"
     },
     {
       "path": "preparation/navigation.json",

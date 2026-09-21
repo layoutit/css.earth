@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "ce-tauri",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 617 (BS 1845, CE Tau, Crimean scan of 1982-10-24)",
+    "path": "photometry/III_126_part2.dat.gz",
+    "service": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
+    "checked": "2026-09-21",
+    "format": "burnashev-records",
+    "wavelength": {
+      "column": "lambda",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "617",
+      "kind": "log10",
+      "missing": -9.999999
+    },
+    "gaps": [
+      {
+        "fromNm": 772.4,
+        "toNm": 780,
+        "reason": "the Crimean scan ends at 772.5 nm; the last value is held to 780 nm, where the observer adds almost nothing"
+      }
+    ],
+    "note": "Ground-based photoelectric scan of 1982-10-24, 327.5-772.5 nm in 2.5 nm steps, published as log10 flux. The second Crimean scan, record 647 of 1983-02-02, gives a paler colour (#ffb859); CE Tau is a semi-regular variable."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Gaia DR3 XP spectrum, source 3400796031719045632 (G = 3.1, likely saturated)",
+    "spectrum": {
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled.csv",
+      "format": "gaia-xp-sampled",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "3400796031719045632",
+        "kind": "flux"
+      },
+      "gaps": []
+    },
+    "disagreement": "Gaia XP gives a paler colour (#ffbe5f), and so does the second Crimean night (record 647, #ffb859); CE Tau is a semi-regular variable and Gaia XP is unreliable this bright, so which colour is typical is not settled."
+  }
+}

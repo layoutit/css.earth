@@ -1,0 +1,36 @@
+{
+  "id": "xsl-dr3-x0036",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "X-Shooter Spectral Library DR3: X0036 (Betelgeuse)",
+  "identifiers": [
+    {
+      "type": "XSL DR3 file",
+      "value": "xsl_spectrum_X0036_merged_ncl_ncge.fits"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34",
+      "label": "VizieR J/A+A/660/A34"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/660/A34/fits/xsl_spectrum_X0036_merged_ncl_ncge.fits",
+      "checkedOn": "2026-09-21",
+      "locator": "SPECTRUM binary table: WAVE (nm), FLUX (erg cm^-2 s^-1 A^-1); FLUXCAL ABSOLUTE; MJD-OBS 55116.34"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Verro et al. (2022), A&A 660, A34 (X-Shooter Spectral Library DR3); VizieR J/A+A/660/A34",
+      "scope": "citation",
+      "evidence": "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

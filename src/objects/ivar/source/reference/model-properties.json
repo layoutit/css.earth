@@ -15,7 +15,7 @@
     "reference": "DAMIT model 271, version 2016-04-22",
     "scaleKmPerSourceUnit": 1.0000000508665032,
     "metersPerSourceUnit": 1000.0000508665032,
-    "limitations": "The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanuš et al.2015 Table4 distinguishes this fixed revised shape fit from the varied-shape ensemble, which gives a wider size range (8.0 km, -0.9/+0.3 km). The archive7.4 km scale is used consistently with its mesh; the narrow archived error is not total physical uncertainty.",
+    "limitations": "The calibrated 2016 convex solution is selected; the older nonconvex model 272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanuš et al.2015 Table 4 distinguishes this fixed revised shape fit from the varied-shape ensemble, which gives a wider size range (8.0 km, -0.9/+0.3 km). The archive 7.4 km scale is used consistently with its mesh; the narrow archived error is not total physical uncertainty.",
     "visibleDescription": "Convex lightcurve model at the archive fixed-shape scale of 7.4 km (archived ±0.2 km; additional shape-model uncertainty). Grid marks unavailable imagery."
   },
   "periodHours": 4.795168,
@@ -23,7 +23,7 @@
     334,
     39
   ],
-  "modelLimitations": "The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanuš et al.2015 Table4 distinguishes this fixed revised shape fit from the varied-shape ensemble, which gives a wider size range (8.0 km, -0.9/+0.3 km). The archive7.4 km scale is used consistently with its mesh; the narrow archived error is not total physical uncertainty.",
+  "modelLimitations": "The calibrated 2016 convex solution is selected; the older nonconvex model 272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanuš et al.2015 Table 4 distinguishes this fixed revised shape fit from the varied-shape ensemble, which gives a wider size range (8.0 km, -0.9/+0.3 km). The archive 7.4 km scale is used consistently with its mesh; the narrow archived error is not total physical uncertainty.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/913/shape.txt",
     "vertices": 1020,

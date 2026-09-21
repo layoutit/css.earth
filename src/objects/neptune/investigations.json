@@ -72,19 +72,24 @@
     },
     {
       "id": "high-latitude-coverage",
-      "subject": "OPAL coverage north of about +30 degrees latitude",
+      "subject": "OPAL coverage near Neptune's north pole",
       "status": "unresolved",
-      "finding": "The OPAL global maps contain no observed samples north of approximately +30 degrees for this observing geometry; preparation extends the checked +30-degree boundary row toward that row's longitudinal mean at the pole, which supplies no new storm or cloud detail and recovers no unobserved polar features.",
+      "finding": "Measured on the pinned 2025 OPAL maps: coverage ends near 71 degrees north and thins toward it. At 619 and 845 nm the rows from 60 to 57 degrees north still hold dark swath seams (darkest pixel 0.37 to 0.77 of the row median, settling at about 0.80 from row 67), and the colour map keeps near-black swath edges down to 42 degrees north (ratio 0.87 from row 98), so preparation starts the fill at 57 degrees north for the two bands and 41 degrees north for colour and extends that row toward its longitudinal mean at the pole, which recovers no polar detail. An earlier recipe continued from 30 degrees north, overwriting observed cloud bands between 30 and 60 degrees north, and flipped the two narrow-band maps upside down; both are fixed.",
       "revisitWhen": "An OPAL or other global release observes Neptune's high northern latitudes.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/neptune/README.md#L41",
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/neptune/README.md#L44",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/neptune/README.md#L53"
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/neptune/README.md#L53",
+        "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits"
       ],
       "checked": [
         {
           "date": "2026-09-16",
           "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        },
+        {
+          "date": "2026-09-21",
+          "commit": "44bf8eac22a856a14d6ea0b3537a86ecaab33e78"
         }
       ]
     },
@@ -92,7 +97,7 @@
       "id": "iau-2015-radii",
       "subject": "IAU 2015 report radii",
       "status": "included",
-      "finding": "The prepared scene uses the 24,764 km equatorial and 24,314 km polar radii from the IAU 2015 report values.",
+      "finding": "The prepared scene uses the 24,764 km equatorial and 24,341 km polar radii from the IAU 2015 report values.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/neptune/README.md#L19"
       ],

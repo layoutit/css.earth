@@ -2,3 +2,7 @@
 # no archive serves it, so it is committed. The PIONIER file itself is restored from the OiDB.
 !/source/observations/pi1-gruis-pionier-2014-09-squeeze.fits
 !/source/observations/pi1-gruis-pionier-2014-09-2.1mas.fits
+# The archived spectrum behind the colour lens is restored from its archive by pinned URL and digest
+# (source/preparation/acquisition.json), so it is not committed.
+/source/photometry/*.dat
+/source/photometry/*.gz

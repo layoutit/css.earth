@@ -13,7 +13,7 @@
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3097",
     "reference": "DAMIT model 3097",
     "sourceLabel": "DAMIT model 3097",
-    "limitations": "Marciniak2019 section4.2 and TableB.2 prefer AM1 (77,-26), matching model3097: reduced chi-square1.1 versus2.0 for AM2/model3096. The latter is a bad thermal fit. The published diameter is85 km with asymmetric3-sigma interval80–92 km; DAMIT rounds its equivalent-diameter error to6 km. WISE W3/W4 residual offsets remain and roughness is unconstrained. Marciniak2019 section4 calls D a scaling value for the published spin/shape solution and points to DAMIT for its release, but does not explicitly define volume-equivalent D. Equivalent-volume semantics here describe the selected DAMIT mesh and its declared size; they are not quoted as a separate physical-volume definition from that paper.",
+    "limitations": "Marciniak 2019 section 4.2 and TableB.2 prefer AM1 (77,-26), matching model3097: reduced chi-square 1.1 versus 2.0 for AM2/model3096. The latter is a bad thermal fit. The published diameter is 85 km with asymmetric 3-sigma interval 80–92 km; DAMIT rounds its equivalent-diameter error to 6 km. WISE W3/W4 residual offsets remain and roughness is unconstrained. Marciniak 2019 section 4 calls D a scaling value for the published spin/shape solution and points to DAMIT for its release, but does not explicitly define volume-equivalent D. Equivalent-volume semantics here describe the selected DAMIT mesh and its declared size; they are not quoted as a separate physical-volume definition from that paper.",
     "visibleDescription": "Convex light-curve reconstruction with the thermally preferred pole. The selected archive mesh has an 85 km equivalent-volume size; the paper reports a thermal-size 3-sigma interval of 80–92 km. The grid marks unavailable imagery; rotational phase is illustrative.",
     "publishedUncertainty": {
       "lowerKm": 5,
@@ -29,7 +29,7 @@
     77,
     -26
   ],
-  "modelLimitations": "Marciniak2019 section4.2 and TableB.2 prefer AM1 (77,-26), matching model3097: reduced chi-square1.1 versus2.0 for AM2/model3096. The latter is a bad thermal fit. The published diameter is85 km with asymmetric3-sigma interval80–92 km; DAMIT rounds its equivalent-diameter error to6 km. WISE W3/W4 residual offsets remain and roughness is unconstrained. Marciniak2019 section4 calls D a scaling value for the published spin/shape solution and points to DAMIT for its release, but does not explicitly define volume-equivalent D. Equivalent-volume semantics here describe the selected DAMIT mesh and its declared size; they are not quoted as a separate physical-volume definition from that paper.",
+  "modelLimitations": "Marciniak 2019 section 4.2 and TableB.2 prefer AM1 (77,-26), matching model3097: reduced chi-square 1.1 versus 2.0 for AM2/model3096. The latter is a bad thermal fit. The published diameter is 85 km with asymmetric 3-sigma interval 80–92 km; DAMIT rounds its equivalent-diameter error to 6 km. WISE W3/W4 residual offsets remain and roughness is unconstrained. Marciniak 2019 section 4 calls D a scaling value for the published spin/shape solution and points to DAMIT for its release, but does not explicitly define volume-equivalent D. Equivalent-volume semantics here describe the selected DAMIT mesh and its declared size; they are not quoted as a separate physical-volume definition from that paper.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/9814/shape.txt",
     "vertices": 988,

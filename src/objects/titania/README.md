@@ -98,12 +98,12 @@ cosine-weighted source-row estimates recorded in
 those fractions at boundaries. Gray grid marks real gaps. No missing north or
 unmeasured height is filled from neighboring observations or another body.
 
-The shared 452-face sphere uses the astronomy package's 788.9 km mean radius.
+The shared 450-face sphere uses the astronomy package's 788.9 km mean radius.
 Elevation is a scientific color-and-relief view, not displaced geometry. A fixed
 6400 × 3200 sampling atlas, 64-pixel gutters, and 1024-pixel pole tiles support
 projective texture registration on the retained mesh; the oversized sampling
 grid adds no source detail. The same canonical assets are selected independent
-of DPR. Both lenses retain shared flood curvature and optional directional
+of DPR. All three lenses retain shared flood curvature and optional directional
 Shadows. Their minimaps and thumbnails use the same prepared interpretation.
 The navigation/context marker is an observed terrain crop with prepared
 full-phase curvature, not a new full-disc observation.

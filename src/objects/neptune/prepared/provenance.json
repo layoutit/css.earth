@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "45a73af958679f111d34adb89164e71fcc61a8fae51396703540a459e7270093"
+    "sha256": "98837d87a357dfa04846de75f4a0017608592f77b70773637fbd747646485d32"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "02915ac43bc41de32e92b279a275328de2d5487fde632d8ba71eba9b010b999e",
+      "sha256": "60a7ad73652c2636c65193e29903dd1ac5e070580143dfd8146a4a272e053b12",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,7 +163,7 @@
                 "id": "normal",
                 "url": "https://science.nasa.gov/neptune/"
               },
-              "notes": "Color-adjusted Hubble OPAL composite from 2025, with approximate visible-color calibration. North of about 30° N, missing observations are continued from the boundary and faded to a uniform pole; that cap is illustrative."
+              "notes": "Color-adjusted Hubble OPAL composite from 2025, with approximate visible-color calibration. North of about 41° N, where the map is not fully observed, missing observations are continued from the boundary and faded to a uniform pole; that cap is illustrative."
             },
             {
               "id": "methane",
@@ -205,7 +205,7 @@
                 "id": "methane",
                 "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
               },
-              "notes": "Hubble OPAL 619 nm reflectance from 2025, in false color. North of about 30° N, boundary continuation supplies an illustrative cap, not measured spectral coverage."
+              "notes": "Hubble OPAL 619 nm reflectance from 2025, in false color. North of about 57° N, where the map is not fully observed, boundary continuation supplies an illustrative cap, not measured spectral coverage."
             },
             {
               "id": "near-infrared",
@@ -247,7 +247,7 @@
                 "id": "near-infrared",
                 "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
               },
-              "notes": "Hubble OPAL 845 nm reflectance from 2025, in false color. North of about 30° N, boundary continuation supplies an illustrative cap, not measured spectral coverage."
+              "notes": "Hubble OPAL 845 nm reflectance from 2025, in false color. North of about 57° N, where the map is not fully observed, boundary continuation supplies an illustrative cap, not measured spectral coverage."
             }
           ]
         },
@@ -367,7 +367,7 @@
     {
       "id": "observations",
       "path": "source/preparation/observations.json",
-      "sha256": "07663ddafe19626090ff139ee2c0e49ef36eb8361b5eb8eb3861e6e3943e1798",
+      "sha256": "242cecc0bc8c07d5032204faaba3205008b41e4bda11013fe54dc2a304879304",
       "parameters": {
         "schema": "cssearth-observed-surfaces@1",
         "sources": [
@@ -528,7 +528,7 @@
             ],
             "coverage": {
               "kind": "boundary-mean",
-              "boundaryFraction": 0.3333333333333333,
+              "boundaryFraction": 0.2722222222222222,
               "exponent": 3,
               "minimumBoundarySum": 18
             },
@@ -568,7 +568,8 @@
                 0.7152,
                 0.0722
               ]
-            }
+            },
+            "planetographicAxisRatio": 1.0173780863563535
           },
           {
             "id": "methane",
@@ -607,7 +608,7 @@
                 ]
               },
               "continuation": {
-                "boundaryFraction": 0.3333333333333333,
+                "boundaryFraction": 0.18559556786703602,
                 "exponent": 3,
                 "minimumBoundarySum": 0
               }
@@ -718,9 +719,6 @@
             ],
             "transforms": [
               {
-                "kind": "flip"
-              },
-              {
                 "kind": "crop",
                 "region": {
                   "left": 0,
@@ -749,7 +747,8 @@
                 0.7152,
                 0.0722
               ]
-            }
+            },
+            "planetographicAxisRatio": 1.0173780863563535
           },
           {
             "id": "near-infrared",
@@ -788,7 +787,7 @@
                 ]
               },
               "continuation": {
-                "boundaryFraction": 0.3333333333333333,
+                "boundaryFraction": 0.18559556786703602,
                 "exponent": 3,
                 "minimumBoundarySum": 0
               }
@@ -899,9 +898,6 @@
             ],
             "transforms": [
               {
-                "kind": "flip"
-              },
-              {
                 "kind": "crop",
                 "region": {
                   "left": 0,
@@ -930,7 +926,8 @@
                 0.7152,
                 0.0722
               ]
-            }
+            },
+            "planetographicAxisRatio": 1.0173780863563535
           }
         ]
       }
@@ -1317,8 +1314,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "02915ac43bc41de32e92b279a275328de2d5487fde632d8ba71eba9b010b999e",
-      "bytes": 14300,
+      "sha256": "60a7ad73652c2636c65193e29903dd1ac5e070580143dfd8146a4a272e053b12",
+      "bytes": 14376,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1563,31 +1560,31 @@
         {
           "url": "/scenes/neptune/neptune-lens-normal.webp",
           "bytes": 238,
-          "sha256": "3ed7c32964f2a5a56de2bb2a9f5774ea3831947d3c1fc1927ae935285f311739",
+          "sha256": "574b0aef12b199bc5d4cd5ad9a13afbc6a02620ecddccea2ea036a197d75624e",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/neptune/neptune-surface-normal.webp",
-          "bytes": 104812,
-          "sha256": "b0cac21dfcc32a73767696908bacbfc95394cb078fecd650e92e2d9bb6f95135",
+          "bytes": 111618,
+          "sha256": "49f01365db977c4088a9bb04d8123372046629b8c7da396ae56ea229af5b7c22",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/neptune/neptune-surface-normal@2x.webp",
-          "bytes": 188994,
-          "sha256": "c48aa9bbc66893cb65dd6521dd7649f52b34bce1aa12e440aa34aebfda731c12",
+          "bytes": 199780,
+          "sha256": "5db9b69f56e71e421b64753719529d13a73bdd170116e42375269cabbdc82c94",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/neptune/neptune-poles-normal.webp",
-          "bytes": 4524,
-          "sha256": "e0779d1a7c0457e2a0ed1ece5ff8fc8c1b3d74c3148221a75884595240f128d2",
+          "bytes": 4696,
+          "sha256": "f247b419bd43de2d40449a22a2baca078cf3ec90bb82f3bff3e809887c17ef61",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/neptune/neptune-poles-normal@2x.webp",
-          "bytes": 11348,
-          "sha256": "63315b36fe09ae420cb4cf992fee540a8b4af8d9f2e186217b410289641037e4",
+          "bytes": 11216,
+          "sha256": "616af689c9eaaca767a0328a8412ea5dfe9f49ff3532578cdb696270d0ffdaf9",
           "verification": "bytes-verified"
         }
       ],
@@ -1615,32 +1612,32 @@
       "outputs": [
         {
           "url": "/scenes/neptune/neptune-lens-methane.webp",
-          "bytes": 490,
-          "sha256": "87340f2be6071a4195e2bd522bb6b6b56ce0d21a186f371889883ea21ac6f681",
+          "bytes": 446,
+          "sha256": "46479ce7a25d26e4fb9218b04a7010169f4ceefe3a6beda525dccf008f5542e1",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/neptune/neptune-surface-methane.webp",
-          "bytes": 161114,
-          "sha256": "c247caadd3db25d77c40c51f8ff430b08e6e40db2d3bb65f6e23c2ca9a20d916",
+          "bytes": 179540,
+          "sha256": "e5099a1615fdb7d7126a9090c60baba150027244d6a43bf8655dd3a6c8661718",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/neptune/neptune-surface-methane@2x.webp",
-          "bytes": 288044,
-          "sha256": "509fe52e07466fbae77b4170056761ca946231350b2853bf8245221910d91818",
+          "bytes": 303280,
+          "sha256": "670afdf8840ba1701a28a0a8761b024df7b6487bb00b97696a65c79635af00b3",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/neptune/neptune-poles-methane.webp",
-          "bytes": 4868,
-          "sha256": "601a631e22c98f39fac791ed9378624ee111671d6632f30751e1817549fb1840",
+          "bytes": 5198,
+          "sha256": "cb5dc00b74104c1954a3f5bd777d67ede122071fb5ed344054a182f05a77d723",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/neptune/neptune-poles-methane@2x.webp",
-          "bytes": 11594,
-          "sha256": "bf786cddaefed053c7adf936c4f680e0f00df6efa351cd110ca7078b914e0068",
+          "bytes": 12648,
+          "sha256": "bbfed7d7a87c81d9915adb57814b3badfab7c553d7b1d6f4e3113c730c461fc2",
           "verification": "bytes-verified"
         }
       ],
@@ -1668,32 +1665,32 @@
       "outputs": [
         {
           "url": "/scenes/neptune/neptune-lens-near-infrared.webp",
-          "bytes": 352,
-          "sha256": "d1cc245defcacb3fc251f26f804bdba1b424311af177b12bdf255c1e573c9ff4",
+          "bytes": 286,
+          "sha256": "7fe99543082395893d81a987e52bd88a799d3708f872c381783591053e847d42",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/neptune/neptune-surface-near-infrared.webp",
-          "bytes": 128466,
-          "sha256": "c8c466d8ef412fd16bdf3db7daf0cdd50dcd7f2f0910c261dcb64c4ad865d792",
+          "bytes": 135440,
+          "sha256": "1e99aea64c9f55f77b92c11ad218ff569e779c02b807f737ae6dbc83977ca85e",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/neptune/neptune-surface-near-infrared@2x.webp",
-          "bytes": 235582,
-          "sha256": "a31fa4f8160f21034bd2df0535409b209196a1450d9f1853e9c7bde1bb116781",
+          "bytes": 246530,
+          "sha256": "982afb594b8d2260dddbde4e2617636ff63152bfdb3f9fd74f81e93232f9e145",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/neptune/neptune-poles-near-infrared.webp",
-          "bytes": 4298,
-          "sha256": "be95fcd06421f806fe0514b6548ab5d142845c49bc4dc3b5b287b1dbdd42643b",
+          "bytes": 4148,
+          "sha256": "1745ae1343e4d7aeab75c84fc8e506fb4f9c4d4bf12ae9a9e815f63266d01284",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/neptune/neptune-poles-near-infrared@2x.webp",
-          "bytes": 10202,
-          "sha256": "f18ae95fcd51f0374dd5cda5c42229b8a56dbb81f2fe1c32bb00f40d27ac3357",
+          "bytes": 9956,
+          "sha256": "2454934e57e9bbd5c4c6e02c8a9957ec301ac8505f857b298522accd23404f87",
           "verification": "bytes-verified"
         }
       ],
@@ -1830,8 +1827,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 6996,
-          "sha256": "82fb37c64a92dd05b5daab7d0617e8b06d91f640406534057b7dd67613f629a2",
+          "bytes": 6958,
+          "sha256": "59828574c6054c14d1413872d65fb562c384b997e675b69f3430d151c7900011",
           "verification": "bytes-verified"
         }
       ]
@@ -1855,8 +1852,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/methane.webp",
-          "bytes": 13858,
-          "sha256": "02e2495ff71cde688b51ba02301c489f2c0128121d3a662333a5b375b1445143",
+          "bytes": 15676,
+          "sha256": "bacfe0216106ddf2476d7721f87c8f32cc17b2979fa34a292ac615f4303eeef7",
           "verification": "bytes-verified"
         }
       ]
@@ -1880,8 +1877,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/near-infrared.webp",
-          "bytes": 11670,
-          "sha256": "ce5dd46a93599c0ed87ba3ee9716e32bba76e891a275f690e1c72f6c82f47d8d",
+          "bytes": 11338,
+          "sha256": "44c502117608669b85b7263ae6d39e02df307a12e6390fce61a5c142d75b833b",
           "verification": "bytes-verified"
         }
       ]
@@ -1893,7 +1890,7 @@
   },
   "lastPreparation": {
     "objectId": "neptune",
-    "materialSha256": "ed31e4cdfadb5a5bdbb91b662b134c024732f61b7117f5b5ed66d064a8e71ad2",
+    "materialSha256": "b971fec54bb771e035a6405f9215dc105caefd0dd2910bdf96953102f77aa0aa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

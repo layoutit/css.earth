@@ -36,22 +36,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "color",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-        "thumbnail": "fomalhaut-lens-shape.webp",
-        "surface": "fomalhaut-surface-shape@2x.webp",
-        "poles": "fomalhaut-poles-shape@2x.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+        "thumbnail": "fomalhaut-lens-color.webp",
+        "surface": "fomalhaut-surface-color@2x.webp",
+        "poles": "fomalhaut-poles-color@2x.webp",
         "source": {
-          "id": "fomalhaut-observational-measurements",
+          "id": "fomalhaut-stellar-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/1206.6353"
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
         },
         "falseColor": false,
-        "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+        "notes": "The colour of Fomalhaut's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. No resolved image of the surface is cast; the display axis is celestial north, a convention."
       }
     ]
   },
@@ -66,6 +66,12 @@
       "role": "facts",
       "description": "Mamajek, \"On the Age and Binarity of Fomalhaut\", ApJ 754, L20 (2012), arXiv:1206.6353",
       "href": "https://arxiv.org/abs/1206.6353"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "Pulkovo spectrophotometric catalogue, HR 8728 (VizieR III/201)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
     }
   ],
   "provenance": {

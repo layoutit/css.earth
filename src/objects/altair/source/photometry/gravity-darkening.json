@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-roche-von-zeipel@1",
+  "objectId": "altair",
+  "source": "Monnier et al. (2007), Imaging the Surface of Altair, Science 317, 342 (https://arxiv.org/abs/0706.0867), Table 1, the \"beta Free\" column, read from the authors' LaTeX source",
+  "caption": "Best-fit parameters for Roche - von Zeipel models of Altair. Inclination (0° is pole-on, 90° is edge-on) & Position Angle (degrees East of North) describe our viewing angle; ω is the angular rotation rate as a fraction of critical breakup rate, β is the gravity-darkening coefficient. Models assumed stellar mass 1.791 M☉.",
+  "model": {
+    "omega": {
+      "value": 0.923,
+      "uncertainty": 0.006,
+      "cell": "0.923 ± 0.006"
+    },
+    "beta": {
+      "value": 0.19,
+      "uncertainty": 0.012,
+      "cell": "0.190 ± 0.012"
+    },
+    "poleTemperatureK": {
+      "value": 8450,
+      "uncertainty": 140,
+      "cell": "8450 ± 140"
+    },
+    "equatorTemperatureK": {
+      "value": 6860,
+      "uncertainty": 150,
+      "cell": "6860 ± 150"
+    },
+    "polarRadiusSolar": {
+      "value": 1.634,
+      "uncertainty": 0.011,
+      "cell": "1.634 ± 0.011"
+    },
+    "equatorialRadiusSolar": {
+      "value": 2.029,
+      "uncertainty": 0.007,
+      "cell": "2.029 ± 0.007"
+    }
+  },
+  "view": {
+    "inclinationDegrees": {
+      "value": 57.2,
+      "uncertainty": 1.9,
+      "cell": "57.2 ± 1.9"
+    },
+    "polePositionAngleDegrees": {
+      "value": -61.8,
+      "uncertainty": 0.8,
+      "cell": "-61.8 ± 0.8"
+    }
+  },
+  "note": "The paper states neither which pole the position angle names nor which pole faces us. Its image shows the bright polar region in the northwest quadrant, toward the position angle, so that pole is taken as the one tilted toward us; gravity darkening is the same at both poles. The Roche shape equation is not printed; the one used here reproduces the table's equatorial radius and temperature from its polar values, ω and β (tests)."
+}

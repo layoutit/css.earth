@@ -1,9 +1,10 @@
 /** SDO/HMI continuum frames as a Carrington-rotation map. Each frame is a JSOC `hmi.Ic_noLimbDark_720s` segment (limb
  * darkening removed by JSOC) whose geometry comes from its pinned DRMS record, not from the image: the disc centre
  * (CRPIX), plate scale (CDELT), roll (CROTA2, AIPS convention: Greisen & Calabretta 2002), angular radius (RSUN_OBS) and
- * the observer's Carrington longitude and latitude (CRLN_OBS, CRLT_OBS). Carrington longitude increases toward the west
- * limb, so the east-positive map runs from L = 360° at its left edge to 0° at its right, as JSOC's own synoptic charts
- * do once their longitude axis is reversed. */
+ * the observer's Carrington longitude and latitude (CRLN_OBS, CRLT_OBS). Carrington longitude increases in the direction the
+ * Sun turns (toward the west limb on the sky, as the sub-Earth longitude falls from day to day), which is the east-positive
+ * sense the mesh places every atlas in: the map runs from L = 0° at its left edge to 360° at its right, as JSOC's synoptic
+ * FITS columns do. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readRiceCompressedImage } from '../../fits-rice.mts';
@@ -122,7 +123,7 @@ export function createHmiContinuum(sourceDirectory: string, source: HmiContinuum
     const ordered = await load(), output = Buffer.alloc(width * height * 4);
     const limit = source.maximumLatitudeDegrees * DEGREE;
     for (let x = 0; x < width; x++) {
-      const longitude = 360 * (1 - (x + 0.5) / width);
+      const longitude = 360 * (x + 0.5) / width;
       // Nearest central meridian on each side, measured around the circle.
       let east: Frame | undefined, west: Frame | undefined, eastGap = Infinity, westGap = Infinity;
       for (const frame of ordered) {
