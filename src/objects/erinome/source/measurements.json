@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-22",
+  "id": "erinome",
+  "name": "Erinome",
+  "titleLabel": "Erinome",
+  "horizons": "525",
+  "aliases": [
+    "Jupiter moon Erinome",
+    "JPL 525"
+  ],
+  "classification": "satellite",
+  "population": "Irregular satellite of Jupiter",
+  "parent": "jupiter",
+  "fullAxesKm": [
+    6.6,
+    6.6,
+    6.6
+  ],
+  "radiusKm": 3.3,
+  "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.04; not measured.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": null,
+  "periodText": "Not adopted",
+  "rotationFact": false,
+  "shapeLabel": "Sphere at an assumed-albedo diameter",
+  "source": "https://ssd.jpl.nasa.gov/horizons/",
+  "credit": "JPL Horizons apparent magnitude for Erinome (body 525); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+  ],
+  "shapeMeaning": "Illustrative sphere at about 6.6 km, estimated from the apparent magnitude JPL Horizons gives for Erinome (22.527 on 2026-Sep-03, H = 15.0 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Erinome is a small, distant irregular moon of Jupiter, only a few kilometres across. Its size is estimated from its brightness.",
+  "card": "A small, distant irregular moon of Jupiter.",
+  "datasetSummary": "A sphere about 6.6 km across, estimated from brightness with an assumed 4% albedo.",
+  "distanceAu": 5.2,
+  "textCitations": [
+    {
+      "catalogueId": "jpl-horizons",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "label": "JPL Horizons",
+      "checked": "2026-09-22",
+      "locator": "Object data page and observer ephemeris for 525 (Erinome); JPL satellite discovery table"
+    }
+  ]
+}

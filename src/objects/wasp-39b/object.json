@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "wasp-39b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WASP-39 b",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 91462.5
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c9b7b6bb8ff9ee0e9e0bc23c70f9047bd5e1df112e525aaaa7a7838e6068ba52"
+      }
+    },
+    "catalog": {
+      "name": "WASP-39 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 44419786.7,
+      "description": "Hot Saturn-mass giant, 1.28 Jupiter radii, that circles its star every 4 days.",
+      "systemName": "WASP-39",
+      "order": 1100,
+      "context": {
+        "order": 1100
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5274589982503092000,
+        -4022030355882413600,
+        -399248744507063040
+      ],
+      "presentationToReference": [
+        -0.7645339702795599,
+        -0.6428104141729212,
+        -0.04777635104746364,
+        -0.6417833735614322,
+        0.7660201559660381,
+        -0.03643105919231432,
+        -0.060015912129036175,
+        -0.00280928542590679,
+        0.9981934673232016
+      ],
+      "orbitUpReference": [
+        0.6428104141729212,
+        -0.7660201559660381,
+        0.00280928542590679
+      ],
+      "metersPerUnit": 295040.32258064515,
+      "bodyRadiusM": 91462500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "ea862098f6d3199874f6c8289ad9db86e7cae3c74cccd659a86a17eaef3c59bc"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "csschaldene-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 460052,
+      "sha256": "d671e759468736bd6a6b18b336027635a012fb9a88bf2c865f5cd6f8d0cddfc7"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 371534,
+      "sha256": "420c5948e9331f83eef789fa6395d407b4a2d6e6ee9fb5280936317264fb8682"
+    }
+  ]
+}

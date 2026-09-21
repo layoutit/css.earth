@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-39b",
+  "card": {
+    "text": "Hot Saturn-mass giant, 1.28 Jupiter radii, that circles its star every 4 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1802-03859",
+        "url": "https://arxiv.org/abs/1802.03859",
+        "label": "Mancini et al. 2018",
+        "checked": "2026-09-21",
+        "locator": "Table of photometric results, row WASP-39",
+        "quote": "4.0552941 (34)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "WASP-39 b is a puffy gas giant 1.28 times as wide as Jupiter, circling a Sun-like star every four days. Here it is a plain gray sphere of that size.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1802-03859",
+        "url": "https://arxiv.org/abs/1802.03859",
+        "label": "Mancini et al. 2018",
+        "checked": "2026-09-21",
+        "locator": "Table of photometric results, row WASP-39",
+        "quote": "4.0552941 (34)"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A gray sphere of the measured radius. No colour, surface or atmosphere of this planet is observed."
+    }
+  }
+}

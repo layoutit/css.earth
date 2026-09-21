@@ -1,0 +1,29 @@
+{
+ "id": "wasp-39",
+ "classification": "star",
+ "order": 1240,
+ "physical": {
+  "name": "WASP-39",
+  "horizonsCode": null,
+  "meanRadiusKm": 653262,
+  "gravitationalParameterKm3PerS2": 121166457758.29065,
+  "parent": null
+ },
+ "physicalNotes": "Radius: 0.939 \u00b1 0.019 \u00b1 0.011 solar radii at 695700 km per solar radius, from Mancini et al. 2018 (A&A 613, A41 (2018); arXiv:1802.03859). GM from their stellar mass 0.913 solar masses times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: no spin axis is measured, so the display axis (celestial north at the star) is up.",
+ "star": {
+  "rightAscensionDegrees": 217.32672987069,
+  "declinationDegrees": -3.4445012445499996,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 215.3548,
+  "properMotionRaMasPerYear": -19.041,
+  "properMotionDecMasPerYear": 0.437,
+  "radialVelocityKmPerS": -58.551,
+  "sources": {
+   "position": "SIMBAD basic record for WASP-39, ICRS J2000 position, reference 2020yCat.1350....0G, retrieved 2026-09-21",
+   "distance": "Gaia EDR3 parallax 4.6435 +/- 0.0144 mas via SIMBAD (2020yCat.1350....0G): 215.35 pc, no zero-point correction",
+   "properMotion": "SIMBAD: -19.041, 0.437 mas/yr, reference 2020yCat.1350....0G",
+   "radialVelocity": "SIMBAD: -58.551 km/s, reference 2018A&A...616A...7S"
+  },
+  "presentationUp": "display-axis"
+ }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "simbad-wasp-39",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for WASP-39 (WASP-39)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-39",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-39/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "d422e2712ec28a8b5f9b2e4704d805f5f386e4b8c8c4b84bfa77e2336cc4787e",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; astrometry and radial velocity with the references SIMBAD lists",
+      "scope": "citation",
+      "evidence": "src/objects/wasp-39/text.json#/card/sources/0"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

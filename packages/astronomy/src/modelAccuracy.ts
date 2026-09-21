@@ -171,6 +171,18 @@ const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
   francisco: 102.70912469149125,
   margaret: 15315.040854708555,
   ferdinand: 736.7189408631319,
+  callirrhoe: 103234.3574684297,
+  themisto: 83130.12075855436,
+  megaclite: 55366.55678712171,
+  taygete: 23117.765947574226,
+  chaldene: 27003.37433152101,
+  harpalyke: 13210.055090795882,
+  kalyke: 25769.132815801888,
+  iocaste: 35448.87432874531,
+  erinome: 23470.47783432536,
+  isonoe: 12978.029249716941,
+  praxidike: 61744.20677041964,
+  autonoe: 53748.37410767448,
 }
 
 const AU_KM = M_PER_AU / M_PER_KM
