@@ -1,0 +1,41 @@
+{
+  "id": "mast-jwst-1274-hd-209458-white-light",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "JWST NIRCam grism time-series white-light curves of HD 209458, programme 1274 observations 2 and 3",
+  "identifiers": [
+    {
+      "type": "JWST programme",
+      "value": "1274"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "label": "MAST"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw01274-o002_t002_nircam_f322w2-grismr-subgrism64_whtlt.ecsv",
+      "checkedOn": "2026-09-21",
+      "locator": "Level 3 white-light curve, 521217 bytes: columns MJD_UTC, BJD_TDB (as BJD - 2400000.5), whitelight_flux; F322W2 visit of 2022-11-11"
+    },
+    {
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw01274-o003_t002_nircam_f444w-grismr-subgrism64_whtlt.ecsv",
+      "checkedOn": "2026-09-21",
+      "locator": "Level 3 white-light curve, 385391 bytes: same columns; F444W visit of 2022-11-07"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Based on observations made with the NASA/ESA/CSA James Webb Space Telescope, obtained from the Mikulski Archive for Space Telescopes at STScI; programme 1274",
+      "scope": "citation",
+      "evidence": "https://archive.stsci.edu/publishing/mission-acknowledgements"
+    }
+  ],
+  "publisher": "Mikulski Archive for Space Telescopes (STScI)"
+}

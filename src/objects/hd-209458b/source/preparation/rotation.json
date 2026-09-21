@@ -1,0 +1,7 @@
+{
+  "schema": "cssearth-synchronous-rotation@1",
+  "host": "hd-209458",
+  "source": "Synchronous rotation is ASSUMED as a display convention: no rotation period of HD 209458 b is measured. Pole, prime meridian and rate are computed from the hosted orbit in packages/astronomy/data/bodies/hd-209458b.json.",
+  "coordinateSystem": "ICRF/J2000. +Z is the orbit normal (prograde spin); +X points at the host star at each instant, so longitude 0 is the substellar point; east longitude, the direction of rotation.",
+  "qualification": "Tidal locking and a spin axis on the orbit normal are assumptions, not measurements: neither the rotation period nor the obliquity of HD 209458 b is measured."
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-209458b",
+  "radiusKm": 97139,
+  "radiusSource": "Radius 1.359 +0.016 −0.019 Jupiter radii (at 71492 km per Jupiter radius) from Torres et al. 2008 (ApJ 677, 1324 (2008); arXiv:0801.1841), at 6378.137 km per Earth radius. No gravitational parameter is adopted. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 3.524746,
+  "orbitalPeriodSource": "Torres et al. 2008 (ApJ 677, 1324 (2008); arXiv:0801.1841), Table 2, row 3 HD 209458: 3.524746 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 209458 b is measured; only its size, mass and orbit are."
+  }
+}
