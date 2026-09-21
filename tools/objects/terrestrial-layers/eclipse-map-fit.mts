@@ -1,7 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BODIES, HOSTED_PLANET_IDS, STAR_IDS, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
-import { binAverage, bandTemperatureTable, fitLightCurveMap, temperatureGrid, type LightCurve, type Systematic } from '../eclipse-map/light-curve-map.mts';
+import { binAverage, bandTemperatureTable, fitLightCurveMap, lightCurveSamples, temperatureGrid, type LightCurve, type Systematic } from '../eclipse-map/light-curve-map.mts';
+import { bareRockTemperature, fitBareRock } from '../eclipse-map/bare-rock.mts';
 import { measureTransitShift } from '../eclipse-map/transit-timing.mts';
 import { readTarMember } from './tar-member.mts';
 import { array, boolean, number, optional, shape, text } from './source-records.mts';
@@ -14,13 +15,12 @@ const systematic = (value: unknown): Systematic => {
   if (kind === 'column') return { kind, column: shape({ column: text })(value).column };
   throw new TypeError(`Unknown systematics kind ${kind}.`);
 };
+const inputs = { path: text, sampling: text, units: text, planet: text, host: text, lightCurve: shape({ encoding: text }), band: shape({ encoding: text, path: text }), star: shape({ encoding: text, path: text }) };
 const profile = shape({
-  path: text, sampling: text, units: text, planet: text, host: text,
-  lightCurve: shape({ encoding: text }),
+  ...inputs,
   fit: shape({ degrees: array(number), eigencurves: array(number), positive: boolean, transitExclusionPhase: number, gridHeight: number, systematics: array(systematic), transitFromLightCurve: boolean, longitudeSymmetric: optional(boolean) }),
-  band: shape({ encoding: text, path: text }),
-  star: shape({ encoding: text, path: text }),
 });
+const bareRockProfile = shape({ ...inputs, fit: shape({ transitExclusionPhase: number, gridHeight: number, systematics: array(systematic), transitFromLightCurve: boolean }) });
 
 /** Whitespace-separated numbers, one per line (a deposit's single-column text files). */
 const numbers = (bytes: Uint8Array) => Float64Array.from(Buffer.from(bytes).toString('utf8').trim().split(/\s+/u), Number);
@@ -63,12 +63,11 @@ export function readSvoFilter(bytes: Uint8Array) {
   return readSvoTable(bytes, ['Angstrom', second.toLowerCase() === 'ephot' ? 'ephot' : '']);
 }
 
-/** A map of brightness temperature fitted from a light curve at preparation time: the eigencurve fit on the package's own orbit,
- * then the band conversion against a stellar model spectrum (see `tools/objects/eclipse-map/light-curve-map.mts`). */
-export async function loadEclipseMapFit(root: string, value: unknown) {
-  const recipe = profile(value);
-  if (recipe.sampling !== 'bilinear') throw new TypeError('An eclipse-map fit samples bilinearly.');
-  if (recipe.units !== 'K') throw new TypeError('An eclipse-map fit is a brightness temperature in K.');
+/** What a light-curve fit reads: the light curve, the band it summed against a stellar model spectrum, and the planet's orbit, with
+ * the transit time optionally taken from the light curve itself. */
+async function loadLightCurveInputs(root: string, recipe: ReturnType<typeof bareRockProfile>) {
+  if (recipe.sampling !== 'bilinear') throw new TypeError('A light-curve map samples bilinearly.');
+  if (recipe.units !== 'K') throw new TypeError('A light-curve map is a brightness temperature in K.');
   const read = async (path: string) => readFile(resolve(root, inside(path)));
   const source = await read(recipe.path);
   let curve: LightCurve;
@@ -118,7 +117,18 @@ export async function loadEclipseMapFit(root: string, value: unknown) {
     transitShiftSeconds = transitFit.shiftSeconds;
     orbit = { ...orbit, transitTimeBmjdTdb: orbit.transitTimeBmjdTdb + transitShiftSeconds / 86400 };
   }
-  const result = fitLightCurveMap(curve, recipe.fit, orbit, starAstrometry(hostId), radiusRatio, { stellarRadiusKm: BODIES[hostId].meanRadiusKm });
+  return { curve, band, orbit, host: starAstrometry(hostId), stellarRadiusKm: BODIES[hostId].meanRadiusKm, radiusRatio, transitShiftSeconds, transitFit };
+}
+
+const transitReport = (transitFit: ReturnType<typeof measureTransitShift> | null) => transitFit ? { transitFit: { shiftUncertaintySeconds: transitFit.uncertaintySeconds,
+  radiusRatio: transitFit.radiusRatio, limbDarkening: transitFit.limbDarkening, reducedChiSquared: transitFit.reducedChiSquared,
+  samples: transitFit.samples, model: transitFit.fit.model, software: transitFit.fit.software } } : {};
+
+/** A map of brightness temperature fitted from a light curve at preparation time: the eigencurve fit on the package's own orbit,
+ * then the band conversion against a stellar model spectrum (see `tools/objects/eclipse-map/light-curve-map.mts`). */
+export async function loadEclipseMapFit(root: string, value: unknown) {
+  const recipe = profile(value), { curve, band, orbit, host, stellarRadiusKm, radiusRatio, transitShiftSeconds, transitFit } = await loadLightCurveInputs(root, recipe);
+  const result = fitLightCurveMap(curve, recipe.fit, orbit, host, radiusRatio, { stellarRadiusKm });
   // Temperatures are taken on the fit's own grid, the cells positivity was enforced on; a finer grid can dip below zero between them.
   const table = bandTemperatureTable(band, { minimumK: 20 }), height = recipe.fit.gridHeight, width = 2 * height;
   if (!Number.isSafeInteger(height) || height < 2) throw new TypeError('The fit grid needs a whole height of at least 2.');
@@ -136,10 +146,27 @@ export async function loadEclipseMapFit(root: string, value: unknown) {
       const [a, b, c, d] = corners as number[];
       return a! * (1 - dx) * (1 - dy) + b! * dx * (1 - dy) + c! * (1 - dx) * dy + d! * dx * dy;
     },
-    report: { format: 'eclipse-map-fit', units: 'K', transitShiftSeconds, ...(transitFit ? { transitFit: { shiftUncertaintySeconds: transitFit.uncertaintySeconds,
-      radiusRatio: transitFit.radiusRatio, limbDarkening: transitFit.limbDarkening, reducedChiSquared: transitFit.reducedChiSquared,
-      samples: transitFit.samples, model: transitFit.fit.model, software: transitFit.fit.software } } : {}),
+    report: { format: 'eclipse-map-fit', units: 'K', transitShiftSeconds, ...transitReport(transitFit),
       degree: result.basis.lmax, eigencurves: result.fit.ncurves, candidates: result.candidates, samples: result.samples, chiSquared: result.fit.chiSquared,
       bic: result.fit.bic, rampTimeConstantDays: result.rampTimeConstantDays, stellarCorrection: result.fit.stellarCorrection, hotspot: result.hotspot },
+  };
+}
+
+/** A bare rock fitted to a light curve at preparation time (see `tools/objects/eclipse-map/bare-rock.mts`): one substellar
+ * temperature, drawn as the planet's temperature, with nothing on the night side. */
+export async function loadBareRockFit(root: string, value: unknown) {
+  const recipe = bareRockProfile(value), { curve, band, orbit, host, stellarRadiusKm, radiusRatio, transitShiftSeconds, transitFit } = await loadLightCurveInputs(root, recipe);
+  if (recipe.fit.systematics.some(entry => entry.kind === 'exponential-ramp')) throw new TypeError('A bare-rock fit takes linear systematics only.');
+  const samples = lightCurveSamples(curve, recipe.fit, orbit);
+  const fit = fitBareRock({ time: samples.time, flux: samples.flux, error: samples.error, systematics: samples.columns(null) }, bandTemperatureTable(band, { minimumK: 20 }),
+    orbit, host, radiusRatio, { gridHeight: recipe.fit.gridHeight, lightTravel: { stellarRadiusKm } });
+  return {
+    fit, band, radiusRatio, orbit, transitShiftSeconds,
+    sample(longitude: number, latitude: number) {
+      if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
+      return bareRockTemperature(fit.substellarK, longitude, latitude);
+    },
+    report: { format: 'bare-rock-fit', units: 'K', transitShiftSeconds, ...transitReport(transitFit), substellarK: fit.substellarK, substellarRangeK: [fit.lowerK, fit.upperK],
+      samples: fit.samples, chiSquared: fit.chiSquared, bic: fit.bic, stellarCorrection: fit.stellarCorrection },
   };
 }
