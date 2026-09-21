@@ -11,6 +11,8 @@ import { createHash } from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import { containedPath, publishPinnedSource, publishPinnedSourceStream } from './operations.js';
 import type { SourceManifest } from './operations.js';
+import { assertRangeResponse, rangeRequestHeader } from '../../src/platform/source-manifest.mts';
+import type { SourceEntry } from './operations.js';
 import { sourceCacheUrl, withIdleTimeout } from '../source-mirror.mts';
 import {prepareSatelliteCatalog,validateSatelliteCatalogRecipe} from './acquisition/satellite-catalog.mts';
 import {prepareDskMesh,validateDskMeshRecipe} from './acquisition/dsk-mesh.mts';
@@ -67,6 +69,8 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
 // The mirror is opt-in (default null): a caller must name RUNTIME_ASSET_ORIGIN explicitly to use it. Defaulting to
 // it here would make every caller — including a test that only wired up its own `transport` — silently also try a
 // real request to the production mirror URL, which a narrowly-scoped mock's URL assertion then rejects.
+const rangeHeaders=(entry:SourceEntry,headers?:Record<string,string>)=>entry.range?{...headers,Range:rangeRequestHeader(entry.range)}:headers;
+const rangedEntry=(manifest:SourceManifest,path:string)=>[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].some(entry=>entry.path===path&&entry.range!==undefined);
 export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport={fetch},mirrorOrigin=null}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport;mirrorOrigin?:string|null}) {
  const selected=plan.operations.filter(step=>step.groups.includes(group));if(!selected.length)throw new Error(`Acquisition group ${group} is undeclared.`);
  const request=async(url:string,init?:RequestInit)=>{const response=await transport.fetch(url,init);if(!response.ok)throw new Error(`Source request failed ${response.status}: ${url}.`);return response;};
@@ -100,11 +104,13 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
      }catch{/* fall through to the publisher below */}
     }
     if(!usedMirror){
-     const response=await request(step.url,{headers:step.headers});if(!response.body)throw new Error(`Source download has no body: ${step.url}.`);
+     const response=await request(step.url,{headers:rangeHeaders(entry,step.headers)});if(!response.body)throw new Error(`Source download has no body: ${step.url}.`);
+     if(entry.range)assertRangeResponse(response,entry.range,step.url);
      await publishPinnedSourceStream({sourceRoot,entry,stream:withIdleTimeout(Readable.fromWeb(response.body as never),120000)});
     }
     continue;
    }
+   if(rangedEntry(manifest,step.path))throw new Error(`A ranged source cannot be re-encoded on acquisition: ${step.path}.`);
    let data=new Uint8Array(await(await request(step.url,{headers:step.headers})).arrayBuffer());
    if(step.encoding==='gzip')data=gzipSync(data,{level:9});
    if(step.encoding==='pretty-json'){const value=JSON.parse(new TextDecoder().decode(data)) as unknown;for(const[key,expected]of Object.entries(step.expectedJsonFields??{})){let actual=value;for(const part of key.split('.'))actual=record(actual)[part];if(actual!==expected)throw new Error(`Source JSON identity ${key} drifted.`);}data=new TextEncoder().encode(JSON.stringify(value,null,2)+'\n');}

@@ -1,6 +1,8 @@
 import { sha256 } from '../../src/platform/sha256.mts';
 import { parseSourceBinding } from '../../src/platform/source-catalog.mts';
 import type { SourceBinding } from '../../src/platform/source-catalog.mts';
+import { assertRangeResponse, assertSourceRange, rangeRequestHeader } from '../../src/platform/source-manifest.mts';
+import type { SourceRange } from '../../src/platform/source-manifest.mts';
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, type AcquisitionPlan, type AcquisitionTransport } from './operations-acquisition.js';
 export { executeAcquisition, parseAcquisitionPlan };
@@ -13,7 +15,7 @@ import { createReadStream, createWriteStream } from 'node:fs';
 import { Readable, Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { dirname, posix, resolve, relative, win32, basename } from 'node:path';
-export interface SourceEntry { path:string;expectedBytes:number;expectedSha256:string;id?:string;origin?:string;consumers?:string[];sourceBinding?:SourceBinding; }
+export interface SourceEntry { path:string;expectedBytes:number;expectedSha256:string;id?:string;origin?:string;consumers?:string[];range?:SourceRange;sourceBinding?:SourceBinding; }
 export interface SourceManifest { schema:string;inputs:SourceEntry[];generatedIntermediates:SourceEntry[];documents:SourceEntry[]; }
 export interface RuntimeAsset { filename:string;bytes:number;sha256:string; }
 export interface RuntimeManifest { schema:string;assets:RuntimeAsset[]; }
@@ -33,6 +35,7 @@ export function parseSourceManifest(value:unknown,id?:string):SourceManifest {
   for(const value of entries){const entry=object(value);if(typeof entry.path!=='string')throw new TypeError('Source path is missing.');containedPath('.',entry.path);
    if(paths.has(entry.path))throw new TypeError(`Duplicate source path ${entry.path}.`);paths.add(entry.path);
    if(typeof entry.expectedBytes!=='number'||!Number.isSafeInteger(entry.expectedBytes)||entry.expectedBytes<=0||typeof entry.expectedSha256!=='string'||!/^[0-9a-f]{64}$/.test(entry.expectedSha256))throw new TypeError(`Invalid source integrity record: ${entry.path}.`);
+   if(entry.range!==undefined)assertSourceRange(entry as unknown as SourceEntry,`Source ${entry.path}`);
    if(collection==='inputs'||entry.sourceBinding!==undefined)parseSourceBinding(entry.sourceBinding);
    if(collection==='inputs'){
     for(const field of ['id','origin','credit','license','acquisition','redistribution'])if(!nonempty(entry[field]))throw new TypeError(`Source ${entry.path} lacks ${field}.`);
@@ -98,9 +101,10 @@ export async function publishPinnedSourceStream({sourceRoot,entry,stream}:{sourc
 export async function acquirePinnedDownloads({sourceRoot,manifest,paths,fetchBytes}:{sourceRoot:string;manifest:SourceManifest;paths:readonly string[];fetchBytes?:(url:string)=>Promise<Uint8Array>}) {
  const entries=[...manifest.inputs,...manifest.documents];
  for(const path of paths){const entry=entries.find(entry=>entry.path===path);if(!entry||!entry.origin||!/^https?:\/\//.test(entry.origin))throw new TypeError(`No declared direct acquisition URL for ${path}.`);
-  if(fetchBytes)await publishPinnedSource({sourceRoot,entry,bytes:await fetchBytes(entry.origin)});
+  if(fetchBytes){if(entry.range)throw new TypeError(`A ranged source needs a ranged request: ${path}.`);await publishPinnedSource({sourceRoot,entry,bytes:await fetchBytes(entry.origin)});}
   else{
-   const response=await fetch(entry.origin);if(!response.ok)throw new Error(`Acquisition failed ${response.status}: ${entry.origin}.`);
+   const response=await fetch(entry.origin,entry.range?{headers:{Range:rangeRequestHeader(entry.range)}}:undefined);if(!response.ok)throw new Error(`Acquisition failed ${response.status}: ${entry.origin}.`);
+   if(entry.range)assertRangeResponse(response,entry.range,entry.origin);
    if(!response.body)throw new Error(`Source download has no body: ${entry.origin}.`);
    await publishPinnedSourceStream({sourceRoot,entry,stream:Readable.fromWeb(response.body as never)});
   }
