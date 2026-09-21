@@ -35,7 +35,7 @@
 .shape-cloud-source-slot[hidden] { display: none; }
 .shape-cloud-pane { position: relative; width: 100%; height: 100%; overflow: hidden; }
 .shape-cloud-pane-label { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 2; color: #b5bac1; font-size: 11px; white-space: nowrap; pointer-events: none; }
-.shape-cloud-viewport { position: absolute; inset: 38px 0 0; overflow: hidden; touch-action: none; cursor: grab; }
+.shape-cloud-viewport { position: absolute; inset: 38px 0 0; overflow: hidden; transform: translateZ(0); touch-action: none; cursor: grab; }
 .shape-cloud-viewport:active { cursor: grabbing; }
 .shape-cloud-frame, .shape-cloud-image-plane { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
 .shape-cloud-source, .shape-cloud-render-host, .shape-cloud-guides { position: absolute; top: 0; left: 0; }

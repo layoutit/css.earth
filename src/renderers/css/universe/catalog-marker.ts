@@ -1,12 +1,13 @@
 import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 
-export type CatalogMarkerKind = 'galaxy' | 'nebula' | 'planetary-nebula' | 'open-cluster' | 'galaxy-group' | 'galaxy-cluster';
+export type CatalogMarkerKind = 'galaxy' | 'nebula' | 'planetary-nebula' | 'open-cluster' | 'globular-cluster' | 'galaxy-group' | 'galaxy-cluster';
 
 /** Presentation follows the catalogue classification, never a list of object IDs. */
 export function catalogMarkerKind(object: PreparedCatalogObject): CatalogMarkerKind {
   if (isPreparedCluster(object)) return 'galaxy-cluster';
   if (!isPreparedNebula(object)) return 'galaxy';
+  if (object.kind === 'globular-cluster') return 'globular-cluster';
   if (/open cluster/iu.test(object.classification.name)) return 'open-cluster';
   if (/planetary nebula/iu.test(object.classification.name)) return 'planetary-nebula';
   return 'nebula';
@@ -18,6 +19,7 @@ const shapes: Record<CatalogMarkerKind, string> = {
   nebula: cloud,
   'planetary-nebula': cloud + '<circle cx="11" cy="12" r="1.3" fill="currentColor" stroke="none"/>',
   'open-cluster': '<circle cx="12" cy="12" r="8" stroke-dasharray="0.1 4.09" stroke-linecap="round"/>',
+  'globular-cluster': '<circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4v16"/>',
   'galaxy-group': '<path d="M12 3 20 7.5v9L12 21l-8-4.5v-9Z"/>',
   'galaxy-cluster': '<path d="M12 3 20 7.5v9L12 21l-8-4.5v-9Z" fill="currentColor"/>',
 };

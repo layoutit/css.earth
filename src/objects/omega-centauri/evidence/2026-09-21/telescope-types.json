@@ -1,0 +1,155 @@
+{
+  "task": "Incoming-main telescope typing cleanup",
+  "round": 1,
+  "maximumCleanupRounds": 2,
+  "head": "bb7cab3c2e5be0b58a63e2cbeca33ca94a7b3b5a",
+  "incoming": "3aebc31094dff8332755b394b88c708b7c3f1062",
+  "files": [
+    {
+      "path": "tools/objects/telescopes/families/f16-spatial-physical.mts",
+      "incomingSha256": "d217fdf190150c814c0a214ebd868a939cf0db04385ab0ee49485d17b0564427",
+      "stagedEqualsIncoming": true,
+      "modifiedSha256": "635e1b6e6bea9e3753267aebee52c1a30e5d66f08a12caf2fd7600a727508fb0",
+      "bytes": 5507
+    },
+    {
+      "path": "tools/objects/telescopes/family-operation.mts",
+      "incomingSha256": "1955b11e7df9a97452e5e74b44ab6200e1b7e9e7ca639b5c1abe8946ce47d05f",
+      "stagedEqualsIncoming": true,
+      "modifiedSha256": "b4ef99f14b55d6f43dcd032fa45bd5cb3ef0ac29162d00e0370ac10dc8c7d06b",
+      "bytes": 56027
+    },
+    {
+      "path": "tools/objects/telescopes/family-request.mts",
+      "incomingSha256": "102b894f46a4af05f3c7365d27c24af740d64b6ed99c28b8385281649af7fadb",
+      "stagedEqualsIncoming": true,
+      "modifiedSha256": "7a030a9ea8013200647bffba2410947a02d22c9653abb1acb9837add41f7a9dd",
+      "bytes": 8835
+    },
+    {
+      "path": "tools/objects/telescopes/families/f14-healpix.test.mts",
+      "incomingSha256": "c7e1bbcad9a69cbf98ed1ad24370f389025a1345af032ec1018880c76696f012",
+      "stagedEqualsIncoming": true,
+      "modifiedSha256": "bb9bd4a6a1b9f939e1190c9eee7d0cf20a59a54c186a3c4362c869790ec4c521",
+      "bytes": 3768
+    },
+    {
+      "path": "tools/objects/telescopes/local-import.test.mts",
+      "incomingSha256": "744d26a31d0545e83fe1165a347650e8b912ed1d8a1a3f68bd873fe64ef41139",
+      "stagedEqualsIncoming": true,
+      "modifiedSha256": "e7991ab4b9984a618ed782be45f2fb93512f53c4ef5d580041e0b80e956009c0",
+      "bytes": 6659
+    },
+    {
+      "path": "tools/objects/telescopes/session.test.mts",
+      "incomingSha256": "3084e630527243cf9ba37216ff3e8fdcfc78c00dfd14694d46d738dcbf8e9992",
+      "stagedEqualsIncoming": true,
+      "modifiedSha256": "482ea175375730473543d4dbb35fda7711a5d4d90bf3608dbb806578e16f365a",
+      "bytes": 12789
+    },
+    {
+      "path": "tools/objects/telescopes/vo/session.test.mts",
+      "incomingSha256": "666e2a00fb5d02c5e7759111d58072a517736ecb420a0601ccc2455d622e6008",
+      "stagedEqualsIncoming": true,
+      "modifiedSha256": "f11ab27f7c321e6db1acc5f8e7c4f03569b219184ec1c9bf99348744944fabd9",
+      "bytes": 11819
+    }
+  ],
+  "changeSummary": "Three source type fixes; four existing test narrowings. No new casts or validation bypasses. F16 array const extraction preserves existing operation values. No runtime source algorithm change.",
+  "checks": [
+    {
+      "command": "pnpm typecheck:tools",
+      "exitCode": 0,
+      "status": "pass"
+    },
+    {
+      "command": "pnpm typecheck:tests",
+      "exitCode": 0,
+      "status": "pass",
+      "typedFiles": 1758
+    },
+    {
+      "command": "node --test tools/objects/telescopes/families/f16-spatial-physical.test.mts tools/objects/telescopes/families/f14-healpix.test.mts tools/objects/telescopes/family-request.test.mts tools/objects/telescopes/family-request-session.test.mts tools/objects/telescopes/local-import.test.mts tools/objects/telescopes/session.test.mts tools/objects/telescopes/vo/session.test.mts",
+      "exitCode": 1,
+      "tests": 26,
+      "passed": 21,
+      "failed": 5,
+      "skipped": 0
+    },
+    {
+      "command": "node --test --test-name-pattern='F07 public selection|F12 diagnostics and F16|public execution view' tools/objects/telescopes/family-operation.test.mts",
+      "exitCode": 1,
+      "tests": 3,
+      "passed": 2,
+      "failed": 1,
+      "skipped": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "status": "pass"
+    }
+  ],
+  "behaviorTotal": {
+    "tests": 29,
+    "passed": 23,
+    "environmentBlocked": 6,
+    "otherFailures": 0
+  },
+  "blockedTests": [
+    {
+      "name": "F14 runs the pinned Bayestar IMPLICIT vector column through public selection and product readback",
+      "observedError": "The astronomy packages are not installed: node tools/objects/astronomy-packages/toolchain.mts install"
+    },
+    {
+      "name": "a real supported local FITS crosses import, outputs, family export and product readback without a hand-authored descriptor",
+      "observedError": "AssertionError: actual undefined; expected '/var/folders/hr/wf3y2_yx3xxdgk_j_0lfgt6r0000gn/T/telescope-import-family-WhGv4D/imported/descriptor.json'",
+      "attribution": "Actual repeat of the same fixture records astropy-mixed-nd-fits@1 validator refusal with the missing astronomy packages error; descriptor is omitted."
+    },
+    {
+      "name": "local HEALPix import reuses its Astropy-owned descriptor and operations",
+      "observedError": "AssertionError: actual undefined; expected 'descriptor.json'",
+      "attribution": "Actual repeat of the same fixture records astropy-healpix-fits@1 validator refusal with the missing astronomy packages error; descriptor is omitted."
+    },
+    {
+      "name": "saved VO choice acquires, qualifies, exports through existing owners, and refuses tampered evidence",
+      "observedError": "The astronomy packages are not installed: node tools/objects/astronomy-packages/toolchain.mts install"
+    },
+    {
+      "name": "two saved SODA subsets of one parent keep separate acquisition, qualification, and delivery records",
+      "observedError": "The astronomy packages are not installed: node tools/objects/astronomy-packages/toolchain.mts install"
+    },
+    {
+      "name": "F07 public selection runs the pinned cdflib owner and writes native coordinates",
+      "observedError": "The astronomy packages are not installed: node tools/objects/astronomy-packages/toolchain.mts install"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "output/pr390-audit/ci-head-bb7cab3/telescope-cleanup-round1-tools-types.log",
+      "bytes": 92,
+      "sha256": "544f8b5e19255449ca30882644aead090d6d3493015fc6c6452d6e35b998d32d"
+    },
+    {
+      "path": "output/pr390-audit/ci-head-bb7cab3/telescope-cleanup-round1-test-types.log",
+      "bytes": 162,
+      "sha256": "de92610b441d6a18f51972d19d9f736c3951f906e91ca4163fd24faa87e52502"
+    },
+    {
+      "path": "output/pr390-audit/ci-head-bb7cab3/telescope-cleanup-round1-behavior.log",
+      "bytes": 10618,
+      "sha256": "6498565db66098a58e06bbeb777e660c258bf33551e3dbc0c27f40997f08284d"
+    },
+    {
+      "path": "output/pr390-audit/ci-head-bb7cab3/telescope-cleanup-round1-dispatch.log",
+      "bytes": 1939,
+      "sha256": "242fa8b1a61d2956e9a08c7cc058dae120cd3fd7b11740057825bae2de279ead"
+    },
+    {
+      "path": "output/pr390-audit/ci-head-bb7cab3/telescope-cleanup-round1-environment-attribution.json",
+      "bytes": 971,
+      "sha256": "0accaba4f244d4b668fccb3cf8a81b8fa872eb5db1070fad176afeb41c452c79"
+    }
+  ],
+  "limitations": "The six tests did not complete their native assertions; none is reported passing. No astronomy toolchain installed, no mock substitution, no waived gates. Independent final review belongs to pr380/root."
+}

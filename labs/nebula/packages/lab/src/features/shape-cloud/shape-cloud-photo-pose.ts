@@ -9,7 +9,7 @@ export function shapeCloudPhotoPose(width: number, height: number, yawDegrees: n
   return [a, b, 0, d, width / 2 * (1 - a), height / 2 * (1 - d) - b * width / 2];
 }
 export interface ImageAxis { id: 'x' | 'y' | 'earth'; label: string; color: string; screen: [number, number]; towardEye: number }
-/** Image X is physical +X, Image Y is physical −Y, and toward Earth is physical −Z at the Earth pose. */
+/** Image X is physical +X, Image Y is physical −Y, and toward Earth is prepared physical +Z. */
 export function shapeCloudImageAxes(yawDegrees: number, pitchDegrees: number, registration: Matrix): ImageAxis[] {
   const yaw = yawDegrees * Math.PI / 180, pitch = pitchDegrees * Math.PI / 180;
   const cy = Math.cos(yaw), sy = Math.sin(yaw), cx = Math.cos(pitch), sx = Math.sin(pitch);

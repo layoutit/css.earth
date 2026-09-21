@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-nebula-candidate-run@1",
+  "startedAt": "2026-09-20T09:23:03.906Z",
+  "updatedAt": "2026-09-20T09:26:09.633Z",
+  "catalogue": {
+    "path": "labs/nebula/models/omega-centauri/candidates.json",
+    "sha256": "be78206e67c31d36698c69818a383e922c48603cb157bbd31e8bcf824bb24240"
+  },
+  "mode": "compile",
+  "selected": [
+    "omega-centauri"
+  ],
+  "results": [
+    {
+      "id": "omega-centauri",
+      "status": "failed",
+      "error": "Compiler 3D material must return finite RGB chromaticity in 0..255.",
+      "seconds": 185.725669875
+    }
+  ]
+}

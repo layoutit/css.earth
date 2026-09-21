@@ -176,6 +176,8 @@ export async function readPreparedVolumeProvenance({ root = process.cwd(), input
 }
 interface Options {
   root?: string;
+  /** Prepare one volume without acquiring unrelated objects' preview sources. */
+  objectId?: string;
   /** Repository-relative, tracked compiler inputs only. Downloads never enter source closure. */
   input?: (path: string) => Promise<Buffer>;
   /** Opt-in (default null/off): the real content-addressed mirror origin, named explicitly by a production caller.
@@ -236,12 +238,13 @@ export async function preparePreview(root: string, pin: Preview, input: (path: s
 }
 
 /** Recover portable lineage from source-owned byte pins without replaying the cloud compiler. */
-export async function prepareVolumeProvenance({ root = process.cwd(), input = path => readFile(resolve(root, path)), mirrorOrigin = null }: Options = {}): Promise<PreparedVolumeProvenance[]> {
+export async function prepareVolumeProvenance({ root = process.cwd(), objectId, input = path => readFile(resolve(root, path)), mirrorOrigin = null }: Options = {}): Promise<PreparedVolumeProvenance[]> {
+  if (objectId !== undefined) sourceId(objectId);
   const results: PreparedVolumeProvenance[] = [];
   const generatorBytes = await input(volumeProvenanceCompilerClosure[0]);
   for (const path of volumeProvenanceCompilerClosure.slice(1)) await input(path);
   const folders = await readdir(resolve(root, 'src/objects'), { withFileTypes: true });
-  for (const folder of folders.filter(folder => folder.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
+  for (const folder of folders.filter(folder => folder.isDirectory() && (objectId === undefined || folder.name === objectId)).sort((a, b) => a.name.localeCompare(b.name))) {
     const base = `src/objects/${folder.name}`, presentationPath = `${base}/source/presentation.json`;
     const presentationBytes = await readFile(resolve(root, presentationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
     if (presentationBytes === null || sourceObject(json(presentationBytes)).schema !== 'cssearth-volume-presentation-source@1') continue;
@@ -356,6 +359,7 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
     results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/sun/?focus=${record.objectId}`, base, controls, defaultLens: record.defaultLens, provenance, outputs,
       ...(hostedBy === undefined ? {} : { hostedBy }) });
   }
+  if (objectId !== undefined && results.length !== 1) throw new TypeError(`No volume presentation for ${objectId}.`);
   return results;
 }
 
@@ -369,7 +373,11 @@ export async function writeVolumeProvenance(options: Options = {}) {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const args = process.argv.slice(2);
+  if (args.length > 1 || args.some(arg => !/^--object=[a-z][a-z0-9-]*$/.test(arg)))
+    throw new TypeError('Usage: prepare-volume-provenance [--object=<id>].');
   // The real CLI entry point: opts into the mirror explicitly (library code above defaults it off).
-  const results = await writeVolumeProvenance({ mirrorOrigin: RUNTIME_ASSET_ORIGIN });
+  const results = await writeVolumeProvenance({ mirrorOrigin: RUNTIME_ASSET_ORIGIN,
+    ...(args[0] === undefined ? {} : { objectId: args[0].slice(9) }) });
   console.log(`Prepared volume presentation and provenance: ${results.length} objects, ${results.reduce((sum, result) => sum + result.controls.length, 0)} lenses.`);
 }

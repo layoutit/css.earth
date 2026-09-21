@@ -11,6 +11,7 @@ import { COMPILER_STAR_PROFILE_PATH, prepareCompilerStarSprites } from '../../..
 import { validateCompilerResult } from './compile.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { readRetainedEmissionField } from '@cssearth/volume-core/fields/retained-emission';
+import { COMPILER_PHYSICAL_REFERENCE } from '@cssearth/volume-core/coordinates/compiler-frame';
 
 export async function refreshCompilerStars(root: string, recipePath: string, previousResultPath: string) {
   const started = performance.now();
@@ -34,8 +35,9 @@ export async function refreshCompilerStars(root: string, recipePath: string, pre
   if (sourceBytes && geometrySha(sourceBytes) !== recipe.observedStars!.sha256) throw new TypeError('Observed stellar source changed.');
   const model = readRetainedEmissionField(JSON.parse((await readGeometryPin(root, base.model)).toString()));
   const origin = base.scene.coordinates.localOriginArcsec;
+  const depthSign = base.scene.frame.referenceFrame === COMPILER_PHYSICAL_REFERENCE ? -1 : 1;
   const prepared = sourceBytes ? prepareCatalogueStars(JSON.parse(sourceBytes.toString()), model, observations.frame.centerIcrsDegrees, recipe.maximumStars, base.sources.map(source => source.id)) :
-    { stars: base.scene.stars.map(({ positionUnits, ...star }) => ({ ...star, positionArcsec: [positionUnits[0] + origin[0], positionUnits[1] + origin[1], positionUnits[2] + origin[2]] as [number, number, number] })),
+    { stars: base.scene.stars.map(({ positionUnits, ...star }) => ({ ...star, positionArcsec: [positionUnits[0] + origin[0], positionUnits[1] + origin[1], positionUnits[2] * depthSign + origin[2]] as [number, number, number] })),
       receipt: { method: 'retained-stellar-photometry@1', selectedCount: base.scene.stars.length, interpretation: 'Existing residual-derived positions and per-lens light retained exactly; only the prepared point profile changes. Not a newly measured catalogue.' } };
   const implementation = await implementationPins(root, ['labs/nebula/packages/lab/src/server/workflows/compiler/refresh-stars.ts']);
   const id = geometrySha(JSON.stringify({ method: 'retained-cloud-stellar-refresh@1', base: geometrySha(bytes), recipe: geometrySha(recipeBytes), implementation,
@@ -57,7 +59,7 @@ export async function refreshCompilerStars(root: string, recipePath: string, pre
     retainedCloud: { result: { path: previousResultPath, sha256: geometrySha(bytes) }, method: base.method, volumeId: base.scene.volumeId ?? base.id } }, null, 2)));
   const starSprites = await prepareCompilerStarSprites(root, directory, prepared.stars);
   const stars = prepared.stars.map(({ positionArcsec, ...star }) => ({ ...star,
-    positionUnits: [positionArcsec[0] - origin[0], positionArcsec[1] - origin[1], positionArcsec[2] - origin[2]] }));
+    positionUnits: [positionArcsec[0] - origin[0], positionArcsec[1] - origin[1], (positionArcsec[2] - origin[2]) * depthSign] }));
   const result = readCompilerResult({ ...base, id, method, scene: { ...base.scene, id, volumeId: base.scene.volumeId ?? base.id, stars, ...starSprites },
     metrics: { ...base.metrics, stars: stars.length }, pipeline: [...base.pipeline.filter(stage => stage.id !== 'stars'),
       { id: 'stars', label: recipe.observedStars ? 'Prepare measured catalogue lights · retained cloud' : 'Prepare soft stellar profiles · retained cloud', state: 'complete', seconds: (performance.now() - started) / 1000 }] });

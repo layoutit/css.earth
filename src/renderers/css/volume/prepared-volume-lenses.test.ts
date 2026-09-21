@@ -10,6 +10,8 @@ import type { PreparedCataloguePoints } from '../stars/prepared-catalogue-points
 import { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
 import { createPreparedResidency } from '../rendering/prepared-residency.js';
 import { cloudCompositeOpacity } from '@cssearth/volume-viewer/scene/cloud-inspection';
+import { CSS_COMPILER_RENDER_BUDGET } from './compiler-render-budget.js';
+import { createRenderElementBudget } from '@cssearth/volume-core/contracts/render-element-budget';
 
 class FakeElement {
   readonly nodeType = 1;
@@ -67,6 +69,64 @@ function dom() {
 }
 const descendants = (root: FakeElement): FakeElement[] => [root, ...root.children.flatMap(descendants)];
 afterEach(() => vi.unstubAllGlobals());
+
+/** A complete retained topology, including the 26 camera directions used by app preparation. */
+function budgetPayload(slabCount: number, starCount: number): PreparedVolumeLenses {
+  const normalize = (v: VolumeVector): VolumeVector => {
+    const length = Math.hypot(...v); return [v[0] / length, v[1] / length, v[2] / length];
+  };
+  const cross = (a: VolumeVector, b: VolumeVector): VolumeVector =>
+    [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const directions: { id: string; back: VolumeVector; right: VolumeVector; down: VolumeVector }[] = [];
+  for (const x of [-1, 0, 1]) for (const y of [-1, 0, 1]) for (const z of [-1, 0, 1]) {
+    if (!x && !y && !z) continue;
+    const back = normalize([x, y, z]), right = normalize(cross(Math.abs(back[1]) > .99 ? [0, 0, 1] : [0, 1, 0], back));
+    directions.push({ id: `view-${directions.length}`, back, right, down: cross(right, back) });
+  }
+  const original = payload();
+  return { ...original, starsEnabled: false, lenses: original.lenses.map(lens => {
+    const source = lens.volume;
+    const views = directions.map(view => ({ ...view, texturePath: `${lens.id}/${view.id}.png` }));
+    return { ...lens, stars: { frame, points: points().points.slice(0, starCount) }, volume: { ...source,
+      stacks: source.stacks.map((stack, axis) => ({ ...stack,
+        leaves: Array.from({ length: Math.floor(slabCount / 3) + (axis < slabCount % 3 ? 1 : 0) }, (_, index) =>
+          ({ ...stack.leaves[0]!, id: `${stack.axis}-${index}` })) })),
+      impostors: { schema: 'cssearth-volume-impostors@1', radiusUnits: 1,
+        fullBelowDiameterPixels: 16, volumeAboveDiameterPixels: 32, views },
+      resources: [...source.resources, ...views.map(view => ({ path: view.texturePath, sha256: 'b'.repeat(64), bytes: 1, width: 1, height: 1 }))],
+    } };
+  }) };
+}
+
+test.each([[151, 0], [150, 3]])('the compiler DOM quota includes every retained XYZ copy, star and impostor (%i slabs, %i stars)', (slabCount, starCount) => {
+  const f = dom(), data = budgetPayload(slabCount, starCount);
+  const runtime = createPreparedVolumeLenses({ payload: data, resolveResource: path => `/prepared/${path}` }).mount(f.options);
+  const root = runtime.root as unknown as FakeElement, initial = descendants(root);
+  const predicted = createRenderElementBudget(CSS_COMPILER_RENDER_BUDGET, starCount, slabCount).totalElements;
+  expect(data.lenses[0]!.volume.stacks.map(stack => stack.leaves.length).reduce((a, b) => a + b, 0)).toBe(slabCount);
+  expect(initial.filter(node => node.parentNode?.className === 'css-volume-mesh').length).toBe(slabCount * 3);
+  expect(initial.filter(node => node.dataset.volumeImpostor !== undefined).length).toBe(26);
+  expect(initial.filter(node => node.dataset.catalogueSource !== undefined).length).toBe(starCount);
+  expect(initial.length).toBe(499); // Includes the bank root, markers, empty star wrapper and hidden nodes.
+  expect(initial.length - slabCount * 3 - starCount).toBe(46);
+  expect(predicted).toBe(CSS_COMPILER_RENDER_BUDGET.maximumElements);
+  expect(initial.length).toBeLessThanOrEqual(predicted);
+  expect(Number(root.dataset.volumeResidentDomNodes)).toBe(initial.length);
+  for (const id of ['second', 'third', 'first']) for (const distance of [4, 100]) {
+    runtime.selectLens(id);
+    for (const direction of [[0, 0, 1], [1, 0, 0], [0, 1, 0], [1, 1, 1], [1, 1, .4], [0, 0, -1]] as const) {
+      runtime.publish(publication(distance, direction));
+      runtime.setStarsVisible(true); runtime.setStarsVisible(false);
+      const current = descendants(root);
+      expect(current.length).toBeLessThanOrEqual(CSS_COMPILER_RENDER_BUDGET.maximumElements);
+      expect(current.every((node, index) => node === initial[index])).toBe(true);
+      expect(current.length).toBe(initial.length);
+      expect(root.dataset.volumeResidentTopologyCount).toBe('1');
+    }
+  }
+  expect(initial.some(node => node.style.display === 'none' || node.style.visibility === 'hidden' || node.hidden)).toBe(true);
+  runtime.destroy(); expect(f.host.children).toEqual([f.before]);
+});
 
 test('catalogue points project prepared positions, cull hidden support and keep nodes when presentation changes', () => {
   const f = dom(), initial = points();
@@ -142,13 +202,17 @@ test('a distinct topology is allocated only on first selection and then retained
   const root = runtime.root as unknown as FakeElement;
   expect(root.children.filter(node => node.className === 'prepared-volume-lens-cloud')).toHaveLength(1);
   expect(root.dataset).toMatchObject({ volumeTopologyCount: '2', volumeResidentTopologyCount: '1' });
+  expect(descendants(root)).toHaveLength(29); // Three shared stars and one three-slab topology, all optical copies retained.
   runtime.selectLens('second');
   const families = root.children.filter(node => node.className === 'prepared-volume-lens-cloud');
   expect(families).toHaveLength(2); expect(root.dataset.volumeResidentTopologyCount).toBe('2');
+  expect(descendants(root)).toHaveLength(52); // A second topology costs its wrappers and leaves even when hidden.
+  expect(root.dataset.volumeResidentDomNodes).toBe('52');
   expect(families.filter(node => node.style.display !== 'none').map(node => node.dataset.volumeLens)).toEqual(['second']);
   runtime.selectLens('third');
   expect(root.children.filter(node => node.className === 'prepared-volume-lens-cloud')).toEqual(families);
   expect(families.filter(node => node.style.display !== 'none').map(node => node.dataset.volumeLens)).toEqual(['third']);
+  expect(descendants(root)).toHaveLength(52);
   runtime.destroy();
 });
 

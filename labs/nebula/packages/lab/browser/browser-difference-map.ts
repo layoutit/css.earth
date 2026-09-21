@@ -66,9 +66,9 @@ try {
       document.querySelector('.reconstruction-controls')?.getAttribute('data-reconstruction-result') === value, id, { timeout: 120000 });
     await page.locator('#reference-view').click(); await settle(page);
 
-    // The second round button, directly under Levels.
+    // The second of three round buttons, directly under Levels (Radial profile sits third, under Difference map).
     const order = await page.locator('.workspace-tool-buttons [data-workspace-tool]').evaluateAll(nodes => nodes.map(node => (node as HTMLElement).dataset.workspaceTool));
-    assert.deepEqual(order, ['levels', 'difference'], `tool order ${order.join(',')}`);
+    assert.deepEqual(order, ['levels', 'difference', 'radial'], `tool order ${order.join(',')}`);
     const [levelsBox, differenceBox] = await Promise.all(['levels', 'difference'].map(tool => page.locator(`[data-workspace-tool="${tool}"]`).boundingBox()));
     assert.ok(levelsBox && differenceBox && differenceBox.y > levelsBox.y + levelsBox.height - 1 && Math.abs(differenceBox.x - levelsBox.x) < .5, 'not under Levels');
 
