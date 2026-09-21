@@ -276,7 +276,9 @@ Keep geometry and lighting fixed, prepare one body at a time, and compare actual
 close-ups and image delivery size before accepting the larger texture.
 
 For an authored object, `node tools/prepare-object.mts <id>` runs the whole preparation chain in order for that object only and
-names the step that failed; resume with `--from <step>`. A placed star starts with
+names the step that failed; resume with `--from <step>`. When a change touches only how a paged-ellipsoid body (Earth) is
+presented, add `--presentation-only`: it reuses the published imagery, pages, places and texture levels, prepares the
+presentation in seconds, and refuses when the recipe sources, the recomputed plan or the published image set differ. A placed star starts with
 `node tools/objects/star-candidates.mts "<SIMBAD identifier>"` and `node tools/objects/new-star.mts <id>`. Before imagery work on
 a moon or small body, `node tools/objects/imagery-candidates.mts [<id> ...]` says whether OPUS holds finer frames than the body ships, and
 `--archives <id> ...` searches ALMA, ESO, MAST and DataCite deposits for bodies seen from the ground or Earth orbit; see the
