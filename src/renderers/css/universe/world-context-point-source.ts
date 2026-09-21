@@ -112,7 +112,8 @@ export function mountWorldContextPointSource({ host, before, plan, field, resolv
       target = alpha > .1 ? [{ element, rank: -1, shape: { kind: 'rect', left: appearance.x - size / 2,
         top: appearance.y - size / 2, right: appearance.x + size / 2, bottom: appearance.y + size / 2 } }] : [];
       picking.publish(element, navigationEnabled ? target : []);
-      element.dataset.pointSourceDiameter = String(appearance.diameterPx);
+      const diameterHook = String(Math.round(appearance.diameterPx * 10) / 10);
+      if (element.dataset.pointSourceDiameter !== diameterHook) element.dataset.pointSourceDiameter = diameterHook;
     },
     destroy() { if (!destroyed) { destroyed = true; picking.remove(element); navigation.destroy(); element.remove(); } },
   });

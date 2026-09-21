@@ -260,7 +260,10 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         stars!.root.style.display = showPoints ? 'block' : 'none';
         // Hidden points leave layout; projecting them only wrote styles nobody draws.
         if (showPoints) stars!.publish(publication);
-        root.dataset.pointOpacity = String(pointOpacity); root.dataset.cloudOpacity = String(opacity);
+        // Test hooks: rounded and written only on change, so a steady frame writes no attributes.
+        const pointHook = String(Math.round(pointOpacity * 1000) / 1000), cloudHook = String(Math.round(opacity * 1000) / 1000);
+        if (root.dataset.pointOpacity !== pointHook) root.dataset.pointOpacity = pointHook;
+        if (root.dataset.cloudOpacity !== cloudHook) root.dataset.cloudOpacity = cloudHook;
       };
       try {
         const selectedLens = lensById.get(selected)!;
