@@ -580,7 +580,7 @@
 :is(.planet-card-tabpanel, .planet-object-results-scroll) :is(.planet-observation-control, .planet-lens-label, .planet-facts, .planet-lens-details-title, .planet-lens-details-copy) {
   font: var(--shell-font-content);
 }
-.planet-card-tabpanel :is(.planet-lens-source, .planet-lens-legend-labels, .planet-lens-legend-categories) {
+.planet-card-tabpanel :is(.planet-lens-legend-labels, .planet-lens-legend-categories) {
   font: var(--shell-font-caption);
 }
 .planet-card-tabpanel > .planet-factsheet-section,

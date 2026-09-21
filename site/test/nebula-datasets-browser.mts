@@ -66,6 +66,7 @@ try {
     await bank.locator('[data-focus-lens][aria-pressed="true"]').click();
     assert.equal(new URL(page.url()).searchParams.get('v'), camera, 'Reselecting a dataset preserves the camera');
     assert.equal(await bank.locator('[data-focus-stars]').count(), 0, 'Dataset cards do not duplicate the shell-level 3D-stars setting.');
+    assert.equal(await bank.locator('.planet-lens-source').count(), 0, 'Dataset cards leave source attribution to the footer.');
     await card.getByRole('radio', { name: 'Factsheet', exact: true }).press('Space');
     await rail.waitFor({ state: 'hidden' });
     await card.getByRole('radio', { name: 'Datasets', exact: true }).press('Space');
