@@ -2,7 +2,7 @@ import { sourceTestContexts as prepareContextProvenance, sourceTestVolumes as pr
   prepareTestFacilities as prepareFacilities, sourceTestGeneratedPaths, sourceCheckMode } from './source-test-inputs.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFile, mkdtemp, mkdir, copyFile, writeFile, rm } from 'node:fs/promises';
+import { readFile, mkdtemp, mkdir, copyFile, writeFile, rm, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { execFile } from 'node:child_process';
@@ -30,6 +30,26 @@ const volumePreviewInputs = async () => {
   for (const id of ids) {
     const presentation = sourceObject(await read(`src/objects/${id}/source/presentation.json`));
     for (const lens of sourceArray(presentation.lenses, sourceObject)) paths.add(sourceText(sourceObject(lens.preview).path));
+  }
+  return [...paths];
+};
+const volumeSourceInputs = async () => {
+  if (sourceCheckMode() === 'published') return [];
+  const paths = new Set<string>();
+  for (const entry of await readdir('src/objects', { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    let manifestValue: unknown;
+    try {
+      manifestValue = await read(`src/objects/${entry.name}/source/manifest.json`);
+    } catch (error) {
+      if (hasErrorCode(error, 'ENOENT')) continue;
+      throw error;
+    }
+    const manifest = sourceObject(manifestValue);
+    if (manifest.schema !== 'cssearth-volume-source-manifest@1') continue;
+    if (manifest.pathBase !== 'repository') throw new TypeError(`Invalid repository volume source manifest: ${entry.name}.`);
+    for (const section of ['inputs', 'documents', 'generatedIntermediates'])
+      for (const source of sourceArray(manifest[section] ?? [], sourceObject)) paths.add(sourceText(source.path));
   }
   return [...paths];
 };
@@ -201,9 +221,10 @@ test('changed fact evidence and stale displayed facts leave both published catal
   const outputs = ['site/prepared-sources.json', 'site/prepared-facilities.json'];
   // Declared metadata and bounded preview inputs suffice; no baked body/volume assets or downloads.
   const records = new Set((await promisify(execFile)('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], { maxBuffer: 16 * 1024 * 1024 })).stdout.split('\0'));
-  const generated = new Set(['site/prepared-object-catalog.mts', 'site/prepared-object-distances.json', 'site/prepared-focus-objects.json', ...await sourceTestGeneratedPaths()]);
-  assert.deepEqual(Object.keys(prepared.closure).filter(path => !records.has(path) && !generated.has(path)), [],
-    'Sources use tracked records plus declared generated or inventoried metadata, never undeclared downloads');
+  const declared = new Set(['site/prepared-object-catalog.mts', 'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
+    ...await sourceTestGeneratedPaths(), ...await volumeSourceInputs()]);
+  assert.deepEqual(Object.keys(prepared.closure).filter(path => !records.has(path) && !declared.has(path)), [],
+    'Sources use tracked records plus declared generated or volume-source metadata, never undeclared downloads');
   for (const path of [...Object.keys(prepared.closure), ...outputs, ...await volumePreviewInputs()]) {
     const target = join(root, path);
     await mkdir(join(target, '..'), { recursive: true });
