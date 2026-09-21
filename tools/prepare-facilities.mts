@@ -21,6 +21,7 @@ import { compileContributions } from '../src/platform/exploration-contributions.
 import { parsePreparedExploration, parseExplorationImage } from '../src/platform/prepared-exploration.mts';
 import type { ExplorationImage } from '../src/platform/prepared-exploration.mts';
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
+import { prepareObjectProvenance } from './objects/provenance.mts';
 import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
 import { restoreFactsheetEvidence } from './restore-factsheet-evidence.mts';
@@ -137,11 +138,9 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     const lenses = controls.lenses === null ? [] : explorationArray(explorationRecord(controls.lenses).controls, raw => {
       const control = explorationRecord(raw); return { id: explorationText(control.id), label: explorationText(control.label) };
     });
-    const path = `${base}/prepared/provenance.json`;
-    let document = provenance.get(object.id);
-    if (document) closure[path] = sha256(JSON.stringify(document, null, 2) + '\n');
-    else document = validateObjectProvenance(await json(path), object.id);
-    if (document.manifest.sha256 !== closure[`${base}/source/manifest.json`]) throw new Error(`Provenance for ${object.id} does not match its source manifest; run node tools/prepare-provenance.mts ${object.id}, or prepare the body where its sources are.`);
+    // The record is a view of this package's manifest and recipes, so it is built here rather than read back and compared.
+    const document = provenance.get(object.id) ?? validateObjectProvenance(await prepareObjectProvenance({ objectDirectory,
+      publicDirectory: resolve(root, 'public/scenes', object.id), basis: 'recovered', verify: false, write: false }), object.id);
     inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path))));
     objects.push({ id: object.id, name: object.name, route: object.route, base, controls: lenses, provenance: document });
   }
