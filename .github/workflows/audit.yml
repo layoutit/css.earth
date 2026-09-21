@@ -55,6 +55,11 @@ jobs:
           else
             node tools/audits/check-documentation-links.mts --all
           fi
+      - name: Check that no directory grew past its baseline
+        # Convention, not correctness: a flat directory cannot break the shipped site, so this
+        # reports rather than gates (docs/ci-cd.md, "Gate on what ships"). Ratcheted, so existing
+        # flatness is visible without blocking work and the tree cannot get flatter while it is fixed.
+        run: pnpm check:directory-growth
       - name: Check tracked files against ignore rules
         run: |
           git ls-files -z > "$RUNNER_TEMP/tracked-paths"

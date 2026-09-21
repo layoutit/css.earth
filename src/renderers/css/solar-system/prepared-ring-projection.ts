@@ -76,14 +76,15 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
     depthFade.start * (depthFade.end / depthFade.start) ** (i / DISTANCE_FADE_STEPS)) : [];
   // Painting and presentation measurement share the exact clipping path. A
   // measurement may stop once its consumer's existing fade is fully saturated.
-  const visit = (vertices: readonly Vector3[], trail: readonly number[], activeChords: readonly number[] | undefined,
+  const visit = (vertices: Float64Array, trail: ArrayLike<number>, activeChords: ArrayLike<number> | undefined,
     segment: (x0: number, y0: number, x1: number, y1: number, weight: number) => boolean, fullOrbit = false, closed = true) => {
     // Hover reveals every prepared chord, but cannot close an open trajectory.
     const chords = fullOrbit ? undefined : activeChords;
-    const chordCount = closed ? vertices.length : vertices.length - 1;
+    const vertexCount = vertices.length / 3;
+    const chordCount = closed ? vertexCount : vertexCount - 1;
     const eyes: (Vector3 | undefined)[] = [];
     const screens: (readonly number[] | undefined)[] = [];
-    const eyeAt = (index: number) => eyes[index] ??= toEye(vertices[index]);
+    const eyeAt = (index: number) => eyes[index] ??= toEye([vertices[index * 3]!, vertices[index * 3 + 1]!, vertices[index * 3 + 2]!]);
     // A prepared polyline shares vertices between neighbouring chords. Project
     // each endpoint once for this camera; only clipped/occluded endpoints need
     // new projections. These caches belong to one visit, never a stale view.
@@ -92,9 +93,9 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
     for (let ordinal = 0; ordinal < (chords?.length ?? chordCount); ordinal++) {
       const index = chords?.[ordinal] ?? ordinal;
       if (index >= chordCount) continue;
-      const weight = fullOrbit ? 1 : trail[index];
+      const weight = fullOrbit ? 1 : trail[index]!;
       if (!(weight > 0)) continue;
-      const next = (index + 1) % vertices.length;
+      const next = (index + 1) % vertexCount;
       let start = eyeAt(index), end = eyeAt(next);
       let startDepth = -start[2], endDepth = -end[2];
       if (startDepth <= near && endDepth <= near) continue;
@@ -155,7 +156,8 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
       }
     }
   };
-  const projectRing = (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[], fullOrbit = false,
+  /** `vertices` holds consecutive x, y, z coordinates, as the prepared orbit bank stores them. */
+  const projectRing = (vertices: Float64Array, trail: ArrayLike<number>, activeChords?: ArrayLike<number>, fullOrbit = false,
     retained?: ReturnType<typeof createRetainedRingProjection>, closed = true): readonly OrbitSegment[] => {
     if (retained) {
       retained.reset();
@@ -172,7 +174,7 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
   return Object.assign(projectRing, {
     /** Exact projected extent, capped only at the caller's saturation point.
      * No partial geometry escapes this measurement-only operation. */
-    measureExtent(vertices: readonly Vector3[], trail: readonly number[], saturation: number, activeChords?: readonly number[], closed = true): number {
+    measureExtent(vertices: Float64Array, trail: ArrayLike<number>, saturation: number, activeChords?: ArrayLike<number>, closed = true): number {
       if (!(saturation >= 1) || !Number.isFinite(saturation)) throw new TypeError('Orbit extent saturation must be finite and at least one pixel.');
       let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
       let extent = 1;

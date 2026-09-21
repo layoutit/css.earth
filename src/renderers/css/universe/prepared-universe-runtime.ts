@@ -23,6 +23,8 @@ import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 import { createPreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
 import type { PreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
 import { DEFAULT_POINT_VISIBILITY, projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
+import { mountLensBillboards } from './lens-billboards.js';
+import type { LensBillboards } from './lens-billboards.js';
 import type { PreparedPointVisibility } from '../volume/projected-volume-visibility.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldPlannerSource } from './world-context-planner-client.js';
@@ -43,7 +45,7 @@ type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource
 type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
   clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationOpacities, plannerSource, distantNavigation }: {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationOpacities, plannerSource, distantNavigation, lensVisibility = DEFAULT_POINT_VISIBILITY, lensBillboards }: {
   backgroundPointManifest?: string; backgroundPointCloud?: string; backgroundPointSha256?: string;
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;
   /** The same prepared context as files the planner worker reads itself. */
@@ -53,6 +55,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   annotationPriorities?: Readonly<Record<string, number>>;
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
   distantNavigation?: { readonly afterDistanceM: number; readonly nonNavigableIds: readonly string[] };
+  /** Projected size at which any lens bank (nebula, cluster, galaxy or accompanying cloud) is fetched and drawn.
+   * It may only raise the prepared thresholds: a small cloud is decoration, not worth its lens payload. */
+  lensVisibility?: PreparedPointVisibility;
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
   environmentLinks?: Readonly<Record<string, string>>;
   imageLayers?: readonly PreparedImageLayerBank[];
@@ -62,7 +67,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   /** Volume lens banks are identified and framed from their descriptor alone; their heavy prepared
    * payload (all lenses, plus catalogue points) is fetched only through {@link loadVolumeLens}, the
    * first time a bank is selected or comes into view. Nothing here downloads at construction time. */
-  volumeLensBanks?: readonly { id: string; frame: DensityVolumeFrame }[];
+  volumeLensBanks?: readonly { id: string; frame: DensityVolumeFrame; sha256: string }[];
+  /** Prepared before any lens is fetched: each bank's context visibility and, where it has one, its Sun-facing
+   * billboard in a shared atlas. A small or distant bank draws its billboard; its lenses load only once large. */
+  lensBillboards?: { readonly plan: LensBillboards; readonly atlasUrl: string };
   loadVolumeLens?(id: string): Promise<Parameters<typeof createPreparedVolumeLenses>[0]>;
   /** Testable cap for hidden banks with no active navigation subscriber. */
   warmVolumeLensDomNodeBudget?: number;
@@ -73,6 +81,12 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   loadCatalog?(): Promise<PreparedCatalogBank>;
 }) {
   const plan = parsePreparedWorldContextPlan(context), payload = validatePreparedCssVolume(volume);
+  if (volumeLensBanks.length && !lensBillboards) throw new TypeError('Volume lens banks require their prepared billboards.');
+  const lensFacts = volumeLensBanks.map(bank => {
+    const facts = lensBillboards!.plan.banks.get(bank.id);
+    if (!facts || facts.payloadSha256 !== bank.sha256) throw new TypeError(`${bank.id}: lens billboards are stale; run pnpm prepare:lens-billboards.`);
+    return facts;
+  });
   if (!Number.isSafeInteger(warmVolumeLensDomNodeBudget) || warmVolumeLensDomNodeBudget < 0) {
     throw new TypeError('Warm volume lens DOM node budget must be a non-negative integer.');
   }
@@ -156,6 +170,15 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       presentationHost.appendChild(frontRoot);
       const frontEnd = document.createElement('span'); frontEnd.hidden = true; frontRoot.appendChild(frontEnd);
       const end = document.createElement('span'); end.hidden = true; root.appendChild(end);
+      const billboardIndex = volumeLensBanks.map(() => -1);
+      const billboardEntries = volumeLensBanks.flatMap((bank, index) => {
+        const billboard = lensFacts[index]!.billboard;
+        if (!billboard) return [];
+        billboardIndex[index] = billboardIndex.filter(value => value >= 0).length;
+        return [{ id: bank.id, frame: bank.frame, billboard }];
+      });
+      const billboards = billboardEntries.length ? mountLensBillboards({ host: root, before: end, atlasUrl: lensBillboards!.atlasUrl,
+        atlas: lensBillboards!.plan.atlas, entries: billboardEntries }) : null;
       const volumeHost = document.createElement('div');
       volumeHost.className = 'prepared-volume-context';
       // A transparent volume still lays out and composites every 3D slice; an
@@ -201,7 +224,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const lensPendingSelection: (string | undefined)[] = volumeLensBanks.map(() => undefined);
       const lensPendingStarsVisible: (boolean | undefined)[] = volumeLensBanks.map(() => undefined);
       const lensFraming: { frame: DensityVolumeFrame; radiusUnits: number; visibility: PreparedPointVisibility }[] =
-        volumeLensBanks.map(bank => ({ frame: bank.frame, radiusUnits: volumeFramingRadiusUnits(bank.frame), visibility: DEFAULT_POINT_VISIBILITY }));
+        volumeLensBanks.map(bank => ({ frame: bank.frame, radiusUnits: volumeFramingRadiusUnits(bank.frame), visibility: lensVisibility }));
       const publishedBankOpacity = declaredImageLayers.map(() => NaN), publishedLensOpacity = volumeLensBanks.map(() => NaN);
       const lensResidentNodes = volumeLensBanks.map(() => 0), lensVisible = volumeLensBanks.map(() => false);
       const lensLastUsed = volumeLensBanks.map(() => 0), lensSubscribers = volumeLensBanks.map(() => 0);
@@ -209,7 +232,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       // A cloud that accompanies a body waits for one of that body's datasets to ask for it; every other bank is
       // drawn whenever it is in view, as it always was. Unloaded banks default to "drawn when in view";
       // an accompanying cloud corrects this to disabled the moment its payload identifies it as one.
-      const lensEnabled = volumeLensBanks.map(() => true);
+      const lensEnabled = lensFacts.map(facts => !facts.attached);
       const publishBootstrapResidency = () => {
         root.dataset.imageLayerDeclaredBankCount = String(declaredImageLayers.length);
         root.dataset.imageLayerResidentBankCount = String(imageBanks.filter(Boolean).length);
@@ -323,7 +346,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           } catch (error) { mounted.destroy(); throw error; }
           if (destroyed || generation !== lensGeneration[index]) { mounted.destroy(); return; }
           lensBanks[index] = mounted; lensPayload[index] = bank.payload;
-          lensFraming[index] = { frame, radiusUnits: bank.payload.framingRadiusUnits, visibility: bank.payload.pointVisibility! };
+          const prepared = bank.payload.pointVisibility!;
+          lensFraming[index] = { frame, radiusUnits: bank.payload.framingRadiusUnits, visibility: {
+            hiddenBelowRadiusPixels: Math.max(prepared.hiddenBelowRadiusPixels, lensVisibility.hiddenBelowRadiusPixels),
+            fullAboveRadiusPixels: Math.max(prepared.fullAboveRadiusPixels, lensVisibility.fullAboveRadiusPixels) } };
           lensEnabled[index] = lensExplicitEnabled[index] ?? bank.payload.attachedTo === undefined;
           lensLastUsed[index] = ++lensUseClock; publishedLensOpacity[index] = NaN;
           updateLensWeight(index); trimWarmLensResidency();
@@ -378,6 +404,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         for (const shell of shellLayers) shell.destroy();
         for (const bank of imageBanks) bank?.destroy(); galaxyCatalog?.destroy();
         for (const bank of lensBanks) bank?.destroy();
+        billboards?.destroy();
         additionalPoints.destroy();
         opacityClock.destroy();
         root.remove(); frontRoot.remove();
@@ -464,15 +491,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             if (destroyed || typeof enabled !== 'boolean') return;
             const index = volumeLensBanks.findIndex(bank => bank.id === id);
             if (index < 0) return;
-            const payload = lensPayload[index];
-            if (!payload) {
-              // Unknown until loaded whether this bank even accepts the toggle; remember the request and
-              // apply it only if the fetched bank turns out to be an accompanying cloud.
-              lensExplicitEnabled[index] = enabled;
-              void ensureLensLoaded(index).catch(() => {});
-              return;
-            }
-            if (payload.attachedTo === undefined || lensEnabled[index] === enabled) return;
+            // Only an accompanying cloud takes the toggle, and that is prepared: nothing is fetched to find out.
+            // An enabled cloud loads through the size gate like any other bank.
+            if (!lensFacts[index]!.attached || lensEnabled[index] === enabled) return;
+            lensExplicitEnabled[index] = enabled;
             lensEnabled[index] = enabled;
             requestPublication?.();
           },
@@ -603,18 +625,20 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             for (const [index, bank] of lensBanks.entries()) {
               const { frame, radiusUnits, visibility } = lensFraming[index]!;
               const presentationOpacity = volumeLensBanks[index]!.id === detailedFocus?.objectId ? 1 : detailContextOpacity;
+              // Context visibility is prepared beside the billboards, so it gates the fetch as well as the paint:
+              // a bank that fades with the galaxy is not fetched while the galaxy is faded out.
+              const contextOpacity = lensFacts[index]!.contextVisibility === 'independent' ? 1 : volumeOpacity;
+              const shown = lensEnabled[index] ? presentationOpacity * contextOpacity : 0;
+              // Large on screen: the bank itself. It draws only once its bounding sphere reaches the viewport.
+              const bankOpacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
+              // Smaller, or until the bank has loaded: the prepared billboard, fading out as the bank fades in.
+              const billboard = lensFacts[index]!.billboard;
+              if (billboards && billboard) {
+                const billboardOpacity = shown * projectedVolumeOpacity(world, viewport, frame, billboard.radiusUnits) * (bank ? 1 - bankOpacity / Math.max(shown, Number.MIN_VALUE) : 1);
+                billboards.publish(billboardIndex[index]!, billboardOpacity, world, viewport);
+              }
               if (!bank) {
-                // The fetch gate and the render gate are deliberately different. Rendering multiplies by
-                // contextOpacity (the general galactic fade, 'galactic' by default) below, once the payload
-                // is known to declare it; fetching never does. A bank close enough on screen to matter is
-                // reason enough to go get it, even while the galaxy itself is still fully faded out — a
-                // future bank baked with contextVisibility 'independent' otherwise would never be fetched by
-                // proximity at all, only by explicit selection. Fetching a 'galactic' bank a little earlier
-                // than its fade would have shown it is cheap; never fetching an 'independent' one is a blank
-                // nebula. Big enough is not enough, though: its bounding sphere must also reach the viewport, or
-                // every nebula large enough to resolve anywhere in the sky is fetched behind the camera.
-                const visible = lensEnabled[index] && presentationOpacity > 0 && projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) > 0 &&
-                  projectVolumeSphere(world, viewport, frame, radiusUnits).visible;
+                const visible = bankOpacity > 0 && projectVolumeSphere(world, viewport, frame, radiusUnits).visible;
                 if (visible !== lensVisible[index]) {
                   lensVisible[index] = visible; lensLastUsed[index] = ++lensUseClock; lensResidencyChanged = true;
                 }
@@ -623,8 +647,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 }
                 continue;
               }
-              const contextOpacity = lensPayload[index]!.contextVisibility === 'independent' ? 1 : volumeOpacity;
-              const opacity = lensEnabled[index] ? presentationOpacity * contextOpacity * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) : 0;
+              const opacity = bankOpacity;
               const visible = opacity > 0;
               if (visible !== lensVisible[index]) {
                 lensVisible[index] = visible; lensLastUsed[index] = ++lensUseClock; lensResidencyChanged = true;

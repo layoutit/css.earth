@@ -41,8 +41,9 @@ export function projectVolumeImpostors(publication: VolumeCameraPublication, fra
 export function selectImpostorViews(views: readonly View[], back: VolumeVector): readonly { view: View; weight: number }[] {
   const nearest = views.map(view => ({ view, distance: Math.max(0, 1 - dot(view.back, back)) }))
     .sort((a, b) => a.distance - b.distance || a.view.id.localeCompare(b.view.id)).slice(0, 4);
-  if (nearest[0]!.distance < 1e-10) return [{ view: nearest[0]!.view, weight: 1 }];
-  const cutoff = nearest[3]!.distance;
+  // A single view (a distant billboard) is the whole image from every direction.
+  if (nearest.length === 1 || nearest[0]!.distance < 1e-10) return [{ view: nearest[0]!.view, weight: 1 }];
+  const cutoff = nearest[3]?.distance ?? Number.POSITIVE_INFINITY;
   const weighted = nearest.slice(0, 3).map(({ view, distance }) => ({ view, weight: Math.max(0, 1 / Math.max(1e-10, distance) - 1 / Math.max(1e-10, cutoff)) ** 2 }));
   const total = weighted.reduce((sum, entry) => sum + entry.weight, 0);
   // Exact equal-distance directions are rare with the prepared 26-view lattice.
