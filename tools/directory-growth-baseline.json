@@ -1,0 +1,82 @@
+{
+  "schema": "cssearth-directory-growth@1",
+  "allowance": 20,
+  "directories": {
+    "labs/nebula/packages/lab/browser": {
+      "implementations": 46,
+      "tests": 2
+    },
+    "labs/nebula/packages/lab/src/cli/commands": {
+      "implementations": 53,
+      "tests": 7
+    },
+    "labs/nebula/packages/lab/src/server/workflows/density": {
+      "implementations": 18,
+      "tests": 21
+    },
+    "packages/astronomy/src": {
+      "implementations": 24,
+      "tests": 19
+    },
+    "site": {
+      "implementations": 100,
+      "tests": 2
+    },
+    "site/components": {
+      "implementations": 39,
+      "tests": 0
+    },
+    "site/test": {
+      "implementations": 20,
+      "tests": 152
+    },
+    "src/platform": {
+      "implementations": 63,
+      "tests": 48
+    },
+    "src/renderers/css/navigation": {
+      "implementations": 31,
+      "tests": 15
+    },
+    "src/renderers/css/rendering": {
+      "implementations": 29,
+      "tests": 17
+    },
+    "src/renderers/css/universe": {
+      "implementations": 24,
+      "tests": 15
+    },
+    "tools": {
+      "implementations": 151,
+      "tests": 108
+    },
+    "tools/objects": {
+      "implementations": 57,
+      "tests": 28
+    },
+    "tools/objects/geographic-pages/operations": {
+      "implementations": 32,
+      "tests": 1
+    },
+    "tools/objects/interferometry": {
+      "implementations": 35,
+      "tests": 22
+    },
+    "tools/objects/paged-ellipsoid": {
+      "implementations": 26,
+      "tests": 2
+    },
+    "tools/objects/telescopes": {
+      "implementations": 44,
+      "tests": 31
+    },
+    "tools/objects/telescopes/families": {
+      "implementations": 26,
+      "tests": 24
+    },
+    "tools/objects/terrestrial-layers": {
+      "implementations": 90,
+      "tests": 79
+    }
+  }
+}
