@@ -68,6 +68,10 @@ body {
   container-type: size;
   isolation: isolate;
   pointer-events: none;
+  /* WebKit paints scaled textures at low quality while they move, then repaints every one of them 500 ms
+     after motion stops, a single 1-1.5 s frame on the globe. optimizeQuality keeps its normal quality
+     throughout; other engines treat it as auto. */
+  image-rendering: optimizeQuality;
 }
 
 .planet-stage {
