@@ -306,6 +306,14 @@
       "url": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1A/fits/n3d_CR2053P1_m1.0.fits"
     },
     {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "stereo/cor1/cor1b-n3d_CR2053P1_m10.fits",
+      "url": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1B/fits/n3d_CR2053P1_m10.fits"
+    },
+    {
       "kind": "json-document",
       "groups": [
         "refresh"

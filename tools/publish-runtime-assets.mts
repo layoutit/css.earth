@@ -67,8 +67,8 @@ async function isPublished(key: string, expectedBytes: number): Promise<boolean>
   return contentLength === null || Number(contentLength) === expectedBytes;
 }
 
-async function findMisses(assets: readonly PublishAsset[], concurrency = 32): Promise<PublishAsset[]> {
-  const misses: PublishAsset[] = [];
+async function findMisses<T extends PublishAsset>(assets: readonly T[], concurrency = 32): Promise<T[]> {
+  const misses: T[] = [];
   let next = 0;
   await Promise.all(Array.from({ length: Math.min(concurrency, assets.length) }, async () => {
     while (next < assets.length) {
@@ -90,15 +90,17 @@ async function findMisses(assets: readonly PublishAsset[], concurrency = 32): Pr
 export async function publishRuntimeAssets(objectIds: readonly string[]): Promise<void> {
   const root = resolve(import.meta.dirname, "..");
   const assets = await inventoriedAssets(root, inventoriedObjectIds(objectIds, root));
-  for (const asset of assets) {
+  const totalBytes = assets.reduce((sum, a) => sum + a.bytes, 0);
+  console.log(`Checking ${assets.length} inventoried file(s) (${(totalBytes / 1e6).toFixed(1)} MB) against ${RUNTIME_ASSET_ORIGIN}.`);
+  const misses = await findMisses(assets);
+  // A partial maintainer checkout only needs the bytes that R2 is actually missing. Content-addressed keys
+  // already verified live do not need to be materialized locally just to publish a newly generated subset.
+  for (const asset of misses) {
     const bytes = await readFile(asset.file);
     if (bytes.length !== asset.bytes || sha256(bytes) !== asset.sha256) {
       throw new Error(`Prepare ${asset.id}/${asset.filename} before publishing it.`);
     }
   }
-  const totalBytes = assets.reduce((sum, a) => sum + a.bytes, 0);
-  console.log(`Checking ${assets.length} inventoried file(s) (${(totalBytes / 1e6).toFixed(1)} MB) against ${RUNTIME_ASSET_ORIGIN}.`);
-  const misses = await findMisses(assets);
   console.log(`${assets.length - misses.length} already published; uploading ${misses.length} miss(es).`);
   await bulkPut(misses.filter(a => a.key.endsWith(".json")), "application/json");
   await bulkPut(misses.filter(a => !a.key.endsWith(".json")), "application/octet-stream");
