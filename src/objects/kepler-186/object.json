@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kepler-186",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kepler-186",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 363851
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/kepler-186-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "99d270004bca46f9e5147eec1fe91117a6c2c6773920bc2a93f6055f3da2f8ff"
+      }
+    },
+    "catalog": {
+      "name": "Kepler-186",
+      "classification": "star",
+      "color": "#ffb58a",
+      "distanceAu": 36612974.2,
+      "description": "Red dwarf 178 parsecs away that hosts Kepler-186 f.",
+      "systemName": "Cygnus",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1890655298376854300,
+        -3460124330612159500,
+        3801701436103602700
+      ],
+      "presentationToReference": [
+        0.34518482713556686,
+        0.33281742578971923,
+        -0.8775420196241851,
+        -0.6317293374179387,
+        -0.6090960847449471,
+        -0.47949974326778166,
+        0.694093278573479,
+        -0.719885074605024,
+        1.948463517936463e-7
+      ],
+      "orbitUpReference": [
+        -0.33281742578971923,
+        0.6090960847449471,
+        0.719885074605024
+      ],
+      "metersPerUnit": 1173712.9032258065,
+      "bodyRadiusM": 363851000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "c0dc0918f3857a5a27978811cec421d2f0761f4d61cde64fdfc7006072f97f2f"
+  }
+}

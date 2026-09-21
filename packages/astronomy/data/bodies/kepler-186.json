@@ -1,0 +1,29 @@
+{
+ "id": "kepler-186",
+ "classification": "star",
+ "order": 1230,
+ "physical": {
+  "name": "Kepler-186",
+  "horizonsCode": null,
+  "meanRadiusKm": 363851,
+  "gravitationalParameterKm3PerS2": 72195567382.81503,
+  "parent": null
+ },
+ "physicalNotes": "Radius: 0.523 (+0.023) solar radii at 695700 km per solar radius, from Torres et al. 2015 (ApJ 800, 99 (2015); arXiv:1501.01101). GM from their stellar mass 0.544 solar masses times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: no spin axis is measured, so the display axis (celestial north at the star) is up.",
+ "star": {
+  "rightAscensionDegrees": 298.65272297812,
+  "declinationDegrees": 43.95500720009,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 177.5064,
+  "properMotionRaMasPerYear": 2.171,
+  "properMotionDecMasPerYear": -4.363,
+  "radialVelocityKmPerS": -62.023998,
+  "sources": {
+   "position": "SIMBAD basic record for Kepler-186, ICRS J2000 position, reference 2020yCat.1350....0G, retrieved 2026-09-21",
+   "distance": "Gaia EDR3 parallax 5.6336 +/- 0.0169 mas via SIMBAD (2020yCat.1350....0G): 177.51 pc, no zero-point correction",
+   "properMotion": "SIMBAD: 2.171, -4.363 mas/yr, reference 2020yCat.1350....0G",
+   "radialVelocity": "SIMBAD: -62.023998 km/s, reference 2020AJ....160..120J"
+  },
+  "presentationUp": "display-axis"
+ }
+}
