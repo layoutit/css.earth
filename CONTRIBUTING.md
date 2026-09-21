@@ -151,7 +151,8 @@ baked JSON remains subject to the installer's byte and SHA-256 checks on every r
 Cold and cached CI timings must be reported separately.
 
 To run the fast subset before every push, opt in with `pnpm hooks:install`: the
-pre-push hook runs `pnpm check:pr --job=lint --quick`, which skips the network check and the
+pre-push hook runs `pnpm check:pr --quick`, which runs the `Contract lint` merge
+gate and the advisory repository audit, skipping the network check and the
 documentation audits. Skip it once with `git push --no-verify` or
 `CSSEARTH_SKIP_HOOKS=1`; remove it with `git config --unset core.hooksPath`.
 

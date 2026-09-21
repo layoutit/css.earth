@@ -152,7 +152,9 @@ test('real owner map routes defects to their test lane, not the unrelated lab', 
 test('one plan includes test types and nebula locally, and selects production with the same paths', async () => {
   const config = await loadCiAreasConfig();
   const jobs = affectedJobNames(classifyAffectedPaths(['package.json'], config));
-  assert.deepEqual(jobs, ['lint', 'typecheck', 'typecheck-tests', 'universe', 'universe-preparation', 'nebula']);
+  // `audit` is the advisory repository-completeness job: it runs on every change beside `lint`, and reports
+  // rather than gates (docs/ci-cd.md, "Gate on what ships").
+  assert.deepEqual(jobs, ['lint', 'audit', 'typecheck', 'typecheck-tests', 'universe', 'universe-preparation', 'nebula']);
   assert.equal(needsProductionBuild(['site/router.mts'], config), true);
   assert.equal(needsProductionBuild(['README.md'], config), false);
   assert.equal(needsProductionBuild([], config), true);
