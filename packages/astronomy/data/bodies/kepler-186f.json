@@ -1,0 +1,27 @@
+{
+ "id": "kepler-186f",
+ "classification": "exoplanet",
+ "order": 1231,
+ "physical": {
+  "name": "Kepler-186 f",
+  "horizonsCode": null,
+  "meanRadiusKm": 7462.4,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "kepler-186"
+ },
+ "physicalNotes": "Radius 1.17 (+0.08) Earth radii from Torres et al. 2015 (ApJ 800, 99 (2015); arXiv:1501.01101), at 6378.137 km per Earth radius. No mass is measured, so no gravitational parameter is adopted. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 129.9441,
+  "semiMajorAxisStellarRadii": 178.0,
+  "inclinationDegrees": 89.96,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 55788.994,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Torres et al. 2015 (ApJ 800, 99 (2015); arXiv:1501.01101), Table 8, column KOI-0571.05: 129.9441 d",
+   "shape": "Inclination 89.96 degrees and a/R* = 178 (+65/-21) from Torres et al. (2015), Table 8. Eccentricity is set to 0: a circular display approximation, not an orbital solution.",
+   "phase": "Torres et al. 2015, Table 8, column KOI-0571.05: tau = BJD_UTC 2455789.4940 (the paper gives the time in UTC, not TDB; the difference of about a minute is not applied).",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

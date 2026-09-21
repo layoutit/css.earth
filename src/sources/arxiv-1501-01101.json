@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-1501-01101",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1501.01101"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1501.01101",
+      "label": "Torres et al. 2015"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/kepler-186/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "64b354a11c32c18d8dab3af40447fddc586d17d67023eb49fefa8e9c157c239b",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "G. Torres, D. M. Kipping, F. Fressin et al.",
+      "scope": "citation",
+      "evidence": "src/objects/kepler-186/text.json#/introduction/sources/0"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-186f",
+  "displayName": "Kepler-186 f",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.17 Earth radii",
+        "source": {
+          "catalogueId": "arxiv-1501-01101",
+          "url": "https://arxiv.org/abs/1501.01101",
+          "label": "G. Torres et al., \"Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone\", ApJ 800, 99 (2015), arXiv:1501.01101",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "129.94 days",
+        "source": {
+          "catalogueId": "arxiv-1501-01101",
+          "url": "https://arxiv.org/abs/1501.01101",
+          "label": "G. Torres et al., \"Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone\", ApJ 800, 99 (2015), arXiv:1501.01101",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-186; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "kepler-186f-lens-shape.webp",
+        "surface": "kepler-186f-surface-shape@2x.webp",
+        "poles": "kepler-186f-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-186f-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1501.01101"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of this planet exists (it has never been resolved: only its transit depth and orbit are measured; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "G. Torres et al., \"Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone\", ApJ 800, 99 (2015), arXiv:1501.01101",
+      "href": "https://arxiv.org/abs/1501.01101"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1501.01101",
+      "credit": "G. Torres et al., \"Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone\", ApJ 800, 99 (2015), arXiv:1501.01101"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-186f.json",
+      "credit": "Published radius and transit-fitted orbit; G. Torres et al., \"Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone\", ApJ 800, 99 (2015), arXiv:1501.01101"
+    }
+  }
+}

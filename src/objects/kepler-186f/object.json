@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kepler-186f",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kepler-186 f",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7462.4
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3ec54cf50a9ca47b6e53ccfdfd5517e41f0e7d1de803cfaba742f943e8816e2e"
+      }
+    },
+    "catalog": {
+      "name": "Kepler-186 f",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 36612974.4,
+      "description": "Earth-sized planet in the temperate zone of a red dwarf, 178 parsecs away.",
+      "systemName": "Kepler-186",
+      "order": 1100,
+      "context": {
+        "order": 1100
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1890655285300564700,
+        -3460124306650231300,
+        3801701494835227000
+      ],
+      "presentationToReference": [
+        0.3457973206333274,
+        -0.8773009183940921,
+        -0.3328172345713098,
+        -0.6313949010713833,
+        -0.4799404794120506,
+        0.609095735597278,
+        0.6940927113461646,
+        0.0004845684817208576,
+        0.7198854584234333
+      ],
+      "orbitUpReference": [
+        0.8773009183940921,
+        0.4799404794120506,
+        -0.0004845684817208576
+      ],
+      "metersPerUnit": 24072.25806451613,
+      "bodyRadiusM": 7462400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "99c625cc8c4d37eb9e0afd1e98a95ad32f1ade98e30b104083d1a8f25d1072d3"
+  }
+}
