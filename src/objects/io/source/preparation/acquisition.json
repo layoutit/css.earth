@@ -98,6 +98,14 @@
       ],
       "path": "features/IO_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IO_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/davies-2024/psjad4346t10_mrt.txt",
+      "url": "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt"
     }
   ]
 }

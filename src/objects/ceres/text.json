@@ -40,6 +40,16 @@
       "title": "HAMO digital terrain model",
       "detail": "Shaded relief",
       "summary": "Height above or below a 470 km sphere. Terrain beyond 60° latitude is withheld."
+    },
+    "clay-band": {
+      "title": "Dawn VIR 2.7 µm band depth",
+      "detail": "Clay absorption",
+      "summary": "Clay band depth on Frigeri et al.'s color scale. Archived values run higher than the paper's, and scan stripes remain."
+    },
+    "ammonium-band": {
+      "title": "Dawn VIR 3.1 µm band depth",
+      "detail": "Ammonium absorption",
+      "summary": "Ammonium band depth on Frigeri et al.'s color scale. Archived values run lower than the paper's; scan stripes remain."
     }
   }
 }

@@ -94,3 +94,38 @@ test("readAllowMissingFlag reads the CLI flag or the deploy-only env var", () =>
     else process.env.CSSEARTH_ALLOW_MISSING_ASSETS = originalEnv;
   }
 });
+
+test("a dropped connection and a 5xx are retried; a 404 is a verdict and is not", async () => {
+  const root = await mkdtemp(join(tmpdir(), "cssearth-setup-retry-"));
+  const bytes = Buffer.from("prepared image");
+  const asset = { id: "earth", key: "earth/image.webp", filename: "image.webp", file: join(root, "image.webp"),
+    url: "https://example.invalid/image.webp", bytes: bytes.length,
+    sha256: createHash("sha256").update(bytes).digest("hex") };
+  try {
+    // Two transient failures — one network, one 5xx — then success. Across thousands of files a
+    // single dropped connection must not fail the run.
+    let requests = 0;
+    const flaky = async () => {
+      requests++;
+      if (requests === 1) throw new TypeError("fetch failed");
+      if (requests === 2) return new Response("upstream", { status: 503 });
+      return new Response(bytes);
+    };
+    assert.deepEqual(await installRuntimeAssets([asset], { fetcher: flaky }), { installed: 1, reused: 0, skipped: 0 });
+    assert.equal(requests, 3);
+    assert.deepEqual(await readFile(asset.file), bytes);
+
+    // A 404 means the object is not published. That is a fact, not a blip: one request, no retry.
+    await rm(asset.file);
+    let missing = 0;
+    const absent = async () => { missing++; return new Response("nope", { status: 404 }); };
+    await assert.rejects(installRuntimeAssets([asset], { fetcher: absent }), /HTTP 404/);
+    assert.equal(missing, 1);
+
+    // Retries are bounded: a permanently broken network still fails rather than hanging forever.
+    let attempts = 0;
+    const broken = async () => { attempts++; throw new TypeError("fetch failed"); };
+    await assert.rejects(installRuntimeAssets([asset], { fetcher: broken }), /fetch failed/);
+    assert.equal(attempts, 4);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

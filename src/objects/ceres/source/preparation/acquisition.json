@@ -40,6 +40,46 @@
       ],
       "path": "features/CERES_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CERES_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.IMG",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_DEPTH.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.LBL",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_DEPTH.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.IMG",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_DEPTH.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/vir-mosaic/CMT_MOSAIC-BII_DEPTH.LBL",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_DEPTH.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/vir-mosaic/VIR_DDR_CERES_MOSAICS_DS.CAT",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/CATALOG/VIR_DDR_CERES_MOSAICS_DS.CAT"
     }
   ]
 }
