@@ -61,22 +61,31 @@ export async function readAuthoredRotation(directory: string, reference: { path:
     spinRateRadPerDay: observed ? 2 * Math.PI * 24 / periodHours : 0 };
 }
 
-/** A planet on a circular hosted orbit that keeps one face toward its star: the pole is the orbit normal (prograde spin),
- * longitude 0 is the sub-host point at the epoch, and the uniform spin rate is the orbital rate. An eccentric orbit needs an
- * explicitly authored rotation law because a uniform spin cannot keep one face toward its star throughout the orbit. */
+/** A planet that keeps one face toward its star: the pole is the orbit normal (prograde spin) and the uniform spin rate is the
+ * orbital rate. On a circular orbit longitude 0 is the sub-host point at every instant. On an eccentric orbit this is the Moon's
+ * 1:1 spin-orbit lock: longitude 0 faces the star at periapsis, and the sub-host point librates about it as the orbital speed
+ * varies, by up to about 2e radians in longitude. */
 async function synchronousRotation(directory: string, source: Record<string, unknown>, epochJdTt: number): Promise<RotationElements> {
   const { id } = requireRecord(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')), 'Object descriptor');
   if (typeof id !== 'string' || typeof source.source !== 'string' || !source.source.trim() || typeof source.qualification !== 'string' || !source.qualification.trim() ||
       typeof source.coordinateSystem !== 'string' || !source.coordinateSystem.trim()) throw new TypeError('Invalid synchronous rotation source.');
-  const { HOSTED_PLANET_IDS, hostedOrbit, hostedPlanetStateRelativeKm } = await import('@cssearth/astronomy');
+  const { HOSTED_PLANET_IDS, hostedOrbit, hostedPlanetStateRelativeKm, hostedKeplerElements, starAstrometry, BODIES } = await import('@cssearth/astronomy');
   if (!(HOSTED_PLANET_IDS as readonly string[]).includes(id)) throw new TypeError(`Synchronous rotation needs a hosted orbit: ${id}.`);
   const planet = id as (typeof HOSTED_PLANET_IDS)[number], orbit = hostedOrbit(planet);
-  if (orbit.eccentricity !== 0) {
-    throw new TypeError(`Synchronous rotation needs a circular hosted orbit; ${id} has eccentricity ${orbit.eccentricity}. Supply an explicit authored rotation law.`);
+  if (orbit.eccentricity === 0) {
+    const { positionKm: r, velocityKmPerDay: v, hostId } = hostedPlanetStateRelativeKm(planet, epochJdTt);
+    if (source.host !== hostId) throw new TypeError(`Synchronous rotation host ${String(source.host)} is not the orbit's host ${hostId}.`);
+    return synchronousRotationElements(r, v, orbit.periodDays);
   }
-  const { positionKm: r, velocityKmPerDay: v, hostId } = hostedPlanetStateRelativeKm(planet, epochJdTt);
+  // The last periapsis at or before the epoch, from the same Kepler elements the orbit is propagated with.
+  const hostId = BODIES[planet].parent as keyof typeof BODIES;
+  const elements = hostedKeplerElements(orbit, starAstrometry(hostId as Parameters<typeof starAstrometry>[0]), BODIES[hostId].meanRadiusKm);
+  const meanAnomaly = elements.meanAnomalyAtEpochRad + elements.meanMotionRadPerDay * (epochJdTt - elements.epochJdTt);
+  const periapsisJdTt = epochJdTt - (((meanAnomaly % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI)) / elements.meanMotionRadPerDay;
+  const { positionKm: r, velocityKmPerDay: v } = hostedPlanetStateRelativeKm(planet, periapsisJdTt);
   if (source.host !== hostId) throw new TypeError(`Synchronous rotation host ${String(source.host)} is not the orbit's host ${hostId}.`);
-  return synchronousRotationElements(r, v, orbit.periodDays, orbit.eccentricity);
+  const atPeriapsis = synchronousRotationElements(r, v, orbit.periodDays);
+  return { ...atPeriapsis, primeMeridianRad: (atPeriapsis.primeMeridianRad + atPeriapsis.spinRateRadPerDay * (epochJdTt - periapsisJdTt)) % (2 * Math.PI) };
 }
 
 /** IAU-style elements for a circular orbit whose +X faces the centre it orbits and whose +Z is its orbit normal. W is measured

@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kepler-452b",
+  "entries": [
+    {
+      "id": "selected-published-values",
+      "subject": "Radius and orbit adopted from the published record",
+      "status": "included",
+      "finding": "Radius 1.63 (+0.23/-0.20) Earth radii from Jenkins et al. 2015 (AJ 150, 56 (2015); arXiv:1507.06723), at 6378.137 km per Earth radius. No mass is measured, so no gravitational parameter is adopted. A sphere: no oblateness is measured. Orbit: Jenkins et al. 2015 (AJ 150, 56 (2015); arXiv:1507.06723), Table 3: 384.843 d Inclination 89.806 degrees from Jenkins et al. 2015, Table 3. The scaled distance a/R* = 202.63 is DERIVED here from their semimajor axis 1.046 AU and stellar radius 1.11 solar radii, not quoted. Jenkins et al. 2015, Table 3, leave the eccentricity unconstrained (e cos omega = 0.03 +0.75/-0.39, e sin omega = -0.02 +/- 0.31; no radial-velocity detection), so the orbit is drawn circular. Jenkins et al. 2015, Table 3: epoch BJD 2454833 + 314.985.",
+      "evidence": [
+        "https://arxiv.org/abs/1507.06723"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ]
+    }
+  ]
+}

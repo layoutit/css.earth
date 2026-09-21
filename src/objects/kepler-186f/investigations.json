@@ -1,5 +1,21 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "kepler-186f",
-  "entries": []
+  "entries": [
+    {
+      "id": "selected-published-values",
+      "subject": "Radius and orbit adopted from the published record",
+      "status": "included",
+      "finding": "Radius 1.17 (+0.08) Earth radii from Torres et al. 2015 (ApJ 800, 99 (2015); arXiv:1501.01101), at 6378.137 km per Earth radius. No mass is measured, so no gravitational parameter is adopted. A sphere: no oblateness is measured. Orbit: Torres et al. 2015 (ApJ 800, 99 (2015); arXiv:1501.01101), Table 8, column KOI-0571.05: 129.9441 d Inclination 89.96 degrees and a/R* = 178 (+65/-21) from Torres et al. (2015), Table 8. Eccentricity is set to 0: a circular display approximation, not an orbital solution. Torres et al. 2015, Table 8, column KOI-0571.05: tau = BJD_UTC 2455789.4940 (the paper gives the time in UTC, not TDB; the difference of about a minute is not applied).",
+      "evidence": [
+        "https://arxiv.org/abs/1501.01101"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ]
+    }
+  ]
 }

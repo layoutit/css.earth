@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-452b",
+  "displayName": "Kepler-452 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.63 Earth radii",
+        "source": {
+          "catalogueId": "arxiv-1507-06723",
+          "url": "https://arxiv.org/abs/1507.06723",
+          "label": "J. M. Jenkins et al., \"Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star\", AJ 150, 56 (2015), arXiv:1507.06723",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "384.84 days",
+        "source": {
+          "catalogueId": "arxiv-1507-06723",
+          "url": "https://arxiv.org/abs/1507.06723",
+          "label": "J. M. Jenkins et al., \"Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star\", AJ 150, 56 (2015), arXiv:1507.06723",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-452; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "kepler-452b-lens-shape.webp",
+        "surface": "kepler-452b-surface-shape@2x.webp",
+        "poles": "kepler-452b-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-452b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1507.06723"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of this planet exists (it has never been resolved: only its transit depth and orbit are measured; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "J. M. Jenkins et al., \"Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star\", AJ 150, 56 (2015), arXiv:1507.06723",
+      "href": "https://arxiv.org/abs/1507.06723"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1507.06723",
+      "credit": "J. M. Jenkins et al., \"Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star\", AJ 150, 56 (2015), arXiv:1507.06723"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-452b.json",
+      "credit": "Published radius and transit-fitted orbit; J. M. Jenkins et al., \"Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star\", AJ 150, 56 (2015), arXiv:1507.06723"
+    }
+  }
+}

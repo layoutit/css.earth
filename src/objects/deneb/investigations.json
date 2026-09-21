@@ -1,5 +1,22 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "deneb",
-  "entries": []
+  "entries": [
+    {
+      "id": "selected-published-values",
+      "subject": "Radius adopted from the published record",
+      "status": "included",
+      "finding": "Radius: Limb-darkened angular diameter 2.76 ± 0.06 mas from Aufdenberg et al. (2002), ApJ 570, 344: the NPOI uniform-disc diameter 2.40 ± 0.06 mas times a model limb-darkening correction of 1.15 for a star with a wind. At the Hipparcos distance this is the record’s radius. Adopted 89,370,157 km, 128.4608 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted. Placement: SIMBAD basic record for * alf Cyg (HIP 102098), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Cyg; Inverse of the Hipparcos new-reduction parallax 2.31 ± 0.32 mas (van Leeuwen 2007) via SIMBAD.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Cyg",
+        "https://arxiv.org/abs/astro-ph/0201218"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ]
+    }
+  ]
 }

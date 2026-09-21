@@ -1,0 +1,84 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-452",
+  "displayName": "Kepler-452",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.11 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1507-06723",
+          "url": "https://arxiv.org/abs/1507.06723",
+          "label": "Jenkins et al. 2015",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "554 parsecs",
+        "source": {
+          "catalogueId": "simbad-kepler-452",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Kepler-452",
+          "label": "SIMBAD parallax",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+        "thumbnail": "kepler-452-lens-shape.webp",
+        "surface": "kepler-452-surface-shape@2x.webp",
+        "poles": "kepler-452-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-452-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1507.06723"
+        },
+        "falseColor": false,
+        "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "J. M. Jenkins et al., \"Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star\", AJ 150, 56 (2015), arXiv:1507.06723",
+      "href": "https://arxiv.org/abs/1507.06723"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1507.06723",
+      "credit": "J. M. Jenkins et al., \"Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star\", AJ 150, 56 (2015), arXiv:1507.06723"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-452.json",
+      "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

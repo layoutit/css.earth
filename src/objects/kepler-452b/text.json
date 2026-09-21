@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-452b",
+  "card": {
+    "text": "Planet 1.6 times Earth’s radius on a 385 day orbit around a Sun-like star.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1507-06723",
+        "url": "https://arxiv.org/abs/1507.06723",
+        "label": "Jenkins et al. 2015",
+        "checked": "2026-09-21",
+        "locator": "Table 3",
+        "quote": "Orbital period P (day) 384.843"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Kepler-452 b is 1.63 times as wide as Earth and circles a Sun-like star every 385 days. Only its size and orbit are measured; here it is a plain gray sphere.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1507-06723",
+        "url": "https://arxiv.org/abs/1507.06723",
+        "label": "Jenkins et al. 2015",
+        "checked": "2026-09-21",
+        "locator": "Table 3",
+        "quote": "Orbital period P (day) 384.843"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A gray sphere of the measured radius. No colour, surface or atmosphere of this planet is observed."
+    }
+  }
+}

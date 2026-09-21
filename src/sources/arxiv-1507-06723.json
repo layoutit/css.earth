@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-1507-06723",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1507.06723"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1507.06723",
+      "label": "Jenkins et al. 2015"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/kepler-452/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "97155cde2bdc2172c70d3a54140b9ec46e544dea00869231ec05a0cd01e01b41",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "J. M. Jenkins, J. D. Twicken, N. M. Batalha et al.",
+      "scope": "citation",
+      "evidence": "src/objects/kepler-452/text.json#/introduction/sources/0"
+    }
+  ]
+}
