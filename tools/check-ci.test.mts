@@ -57,6 +57,14 @@ test('the PR asset-origin check exercises the exact deploy build path',async()=>
  assert.equal(build?.env.ASSET_ORIGIN,'https://earth-assets.lowpoly.cc');
  assert.equal(build?.run.trim(),'pnpm build:deploy\npnpm check:deploy-assets');
 });
+test('trusted body publication prepares only the requested object',async()=>{
+ const workflow=requireRecord(parse(await readFile(new URL('../.github/workflows/publish-assets.yml',import.meta.url),'utf8')));
+ const bake=requireRecord(requireRecord(workflow.jobs).bake),steps=requireArray(bake.steps).map(requireRecord);
+ const command=requireString(steps.find(step=>step.name==='Bake')?.run);
+ assert.match(command,/node tools\/prepare-planets\.mts "--object=\$OBJECT"/);
+ assert.doesNotMatch(command,/^\s*pnpm prepare:planets(?:\s|$)/m,'pnpm forwards the object argument only to the compound script\'s last command');
+ assert.doesNotMatch(command,/prepare-feature-index/,'publishing one object must not require every feature catalogue');
+});
 test('--quick skips only the network and documentation steps, and refuses a job without them',async()=>{
  const lint=readCiSteps(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8'),'lint');
  const quick=quickSteps(lint);
